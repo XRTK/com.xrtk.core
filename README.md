@@ -1,4 +1,4 @@
-# core
+# Mixed Reality Framework Core
 
 This repository will contain the core interface contracts, services, and utilities for the Mixed Reality Framework for Unity
 

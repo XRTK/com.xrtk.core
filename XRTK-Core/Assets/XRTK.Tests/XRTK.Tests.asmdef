@@ -1,0 +1,21 @@
+{
+    "name": "XRTK.Tests",
+    "references": [
+        "XRTK",
+        "XRTK.Extensions.EditorClassExtensions",
+        "XRTK.SDK",
+        "XRTK.Utilities.Editor"
+    ],
+    "optionalUnityReferences": [
+        "TestAssemblies"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

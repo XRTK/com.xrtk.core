@@ -1,0 +1,30 @@
+fileFormatVersion: 2
+guid: 1c1a3333e3464886be03c86a6b02a314
+ScriptedImporter:
+  fileIDToRecycleName:
+    100000: main/glTF Scene Lantern
+    100002: main/glTF Scene Lantern/Lantern
+    100004: main/glTF Scene Lantern/Lantern/LanternPole_Body
+    100006: main/glTF Scene Lantern/Lantern/LanternPole_Chain
+    100008: main/glTF Scene Lantern/Lantern/LanternPole_Lantern
+    400000: main/glTF Scene Lantern/Transform
+    400002: main/glTF Scene Lantern/Lantern/Transform
+    400004: main/glTF Scene Lantern/Lantern/LanternPole_Body/Transform
+    400006: main/glTF Scene Lantern/Lantern/LanternPole_Chain/Transform
+    400008: main/glTF Scene Lantern/Lantern/LanternPole_Lantern/Transform
+    2300000: main/glTF Scene Lantern/Lantern/LanternPole_Body/MeshRenderer
+    2300002: main/glTF Scene Lantern/Lantern/LanternPole_Chain/MeshRenderer
+    2300004: main/glTF Scene Lantern/Lantern/LanternPole_Lantern/MeshRenderer
+    3300000: main/glTF Scene Lantern/Lantern/LanternPole_Body/MeshFilter
+    3300002: main/glTF Scene Lantern/Lantern/LanternPole_Chain/MeshFilter
+    3300004: main/glTF Scene Lantern/Lantern/LanternPole_Lantern/MeshFilter
+    4300000: LanternPole_Body
+    4300002: LanternPole_Chain
+    4300004: LanternPole_Lantern
+    11400000: glTF data
+    100100000: main
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 4701c82d0d5f4151950b6da01f9c3990, type: 3}

@@ -17,6 +17,8 @@ UnityPackageManager/
 project.json
 project.lock.json
 *.package
+TextMesh Pro.meta
+TextMesh Pro/
 
 # ============ #
 # Certificates #
@@ -59,8 +61,6 @@ obj/
 # Project Specific List #
 # ===================== #
 artifacts/
-Assets/ThirdParty/
-Assets/ThirdParty.meta
-Assets/TextMesh Pro.meta
-Assets/TextMesh Pro/
+ThirdParty/
+ThirdParty.meta
 --Version/

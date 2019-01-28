@@ -8,3 +8,5 @@ This repository will contain the core interface contracts, services, and utiliti
 - [ ] A simple package manager for submodules
     - [ ] Should interface and work with Unity's built in package manager
 - [ ] Unit tests for core features
+
+[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Mixed%20Reality%20Toolkit-CI)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=2)

@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Extensions;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -11,12 +10,13 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Extensions;
 using XRTK.Utilities.Editor;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Utilities.Build
 {
-    public class UwpAppxBuildTools
+    public static class UwpAppxBuildTools
     {
         private static readonly XNamespace UapNameSpace = "http://schemas.microsoft.com/appx/manifest/uap/windows10";
         private static readonly XNamespace Uap5NameSpace = "http://schemas.microsoft.com/appx/manifest/uap/windows10/5";

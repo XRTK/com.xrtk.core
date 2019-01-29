@@ -2,15 +2,12 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 #if UNITY_EDITOR || !UNITY_WSA
-using XRTK.Utilities.Async;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
-using UnityEngine;
 using XRTK.Definitions.Utilities;
-using Debug = System.Diagnostics.Debug;
 
 namespace XRTK.Extensions
 {

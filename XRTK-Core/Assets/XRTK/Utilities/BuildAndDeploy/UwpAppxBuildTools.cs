@@ -118,7 +118,21 @@ namespace XRTK.Utilities.Build
 
                             if (Application.isBatchMode)
                             {
-                                Debug.LogError(string.Join("\n", processResult.Errors));
+                                var buildOutput = "Appx Build Output:\n";
+
+                                foreach (var message in processResult.Output)
+                                {
+                                    buildOutput += $"{message}\n";
+                                }
+
+                                buildOutput += "Appx Build Errors:";
+
+                                foreach (var error in processResult.Errors)
+                                {
+                                    buildOutput += $"{error}\n";
+                                }
+
+                                Debug.LogError(buildOutput);
                             }
                         }
 

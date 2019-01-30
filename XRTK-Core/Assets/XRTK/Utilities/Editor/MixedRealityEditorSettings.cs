@@ -40,7 +40,13 @@ namespace XRTK.Utilities.Editor
         /// <summary>
         /// Constructor.
         /// </summary>
-        static MixedRealityEditorSettings() => CheckSettings();
+        static MixedRealityEditorSettings()
+        {
+            if (!Application.isBatchMode)
+            {
+                EditorApplication.delayCall += CheckSettings;
+            }
+        }
 
         /// <summary>
         /// Check the Mixed Reality Toolkit's settings.

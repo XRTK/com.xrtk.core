@@ -134,7 +134,7 @@ PlayerSettings:
       maximumSupportedHeadTracking: 1
     hololens:
       depthFormat: 1
-      depthBufferSharingEnabled: 0
+      depthBufferSharingEnabled: 1
     oculus:
       sharedDepthBuffer: 1
       dashSupport: 1
@@ -381,6 +381,10 @@ PlayerSettings:
     m_Devices:
     - Oculus
     - OpenVR
+  - m_BuildTarget: Metro
+    m_Enabled: 1
+    m_Devices:
+    - WindowsMR
   m_BuildTargetEnableVuforiaSettings: []
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
@@ -617,6 +621,7 @@ PlayerSettings:
   platformArchitecture: {}
   scriptingBackend:
     Android: 1
+    Metro: 1
     Standalone: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
@@ -629,11 +634,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: XRTK-Core
   metroPackageVersion: 2019.1.0.0
-  metroCertificatePath: 
+  metroCertificatePath: C:\Valorem Projects\XRTK-Core\XRTK-Core\Assets\WSATestCertificate.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: XRTK
+  metroCertificateIssuer: XRTK
+  metroCertificateNotAfter: 0050182c3fd7d501
   metroApplicationDescription: XRTK-Core
   wsaImages: {}
   metroTileShortName: XRTK-Core

@@ -13,12 +13,13 @@ using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Data;
 using XRTK.Services;
+using XRTK.Utilities.Editor;
 
 namespace XRTK.Inspectors
 {
     public class ControllerPopupWindow : EditorWindow
     {
-        private const string EditorWindowOptionsPath = "/XRTK/Inspectors/Data/EditorWindowOptions.json";
+        private const string EditorWindowOptionsPath = "/Inspectors/Data/EditorWindowOptions.json";
         private const float InputActionLabelWidth = 128f;
 
         /// <summary>
@@ -207,7 +208,7 @@ namespace XRTK.Inspectors
             window.currentInteractionList = interactionsList;
             isMouseInRects = new bool[interactionsList.arraySize];
 
-            if (!File.Exists($"{Application.dataPath}{EditorWindowOptionsPath}"))
+            if (!File.Exists($"{MixedRealityEditorSettings.MixedRealityToolkit_AbsoluteFolderPath}{EditorWindowOptionsPath}"))
             {
                 var empty = new ControllerInputActionOptions
                 {
@@ -223,12 +224,12 @@ namespace XRTK.Inspectors
                     }
                 };
 
-                File.WriteAllText($"{Application.dataPath}{EditorWindowOptionsPath}", JsonUtility.ToJson(empty));
+                File.WriteAllText($"{MixedRealityEditorSettings.MixedRealityToolkit_AbsoluteFolderPath}{EditorWindowOptionsPath}", JsonUtility.ToJson(empty));
                 AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
             }
             else
             {
-                controllerInputActionOptions = JsonUtility.FromJson<ControllerInputActionOptions>(File.ReadAllText($"{Application.dataPath}{EditorWindowOptionsPath}"));
+                controllerInputActionOptions = JsonUtility.FromJson<ControllerInputActionOptions>(File.ReadAllText($"{MixedRealityEditorSettings.MixedRealityToolkit_AbsoluteFolderPath}{EditorWindowOptionsPath}"));
 
                 if (controllerInputActionOptions.Controllers.Any(option => option.Controller == controllerType && option.Handedness == handedness))
                 {
@@ -339,7 +340,7 @@ namespace XRTK.Inspectors
                 {
                     if (!editInputActionPositions)
                     {
-                        File.WriteAllText($"{Application.dataPath}{EditorWindowOptionsPath}", JsonUtility.ToJson(controllerInputActionOptions));
+                        File.WriteAllText($"{MixedRealityEditorSettings.MixedRealityToolkit_AbsoluteFolderPath}{EditorWindowOptionsPath}", JsonUtility.ToJson(controllerInputActionOptions));
                     }
                     else
                     {
@@ -363,7 +364,7 @@ namespace XRTK.Inspectors
                                         option.Controller == SupportedControllerType.None));
                             }
 
-                            File.WriteAllText($"{Application.dataPath}{EditorWindowOptionsPath}", JsonUtility.ToJson(controllerInputActionOptions));
+                            File.WriteAllText($"{MixedRealityEditorSettings.MixedRealityToolkit_AbsoluteFolderPath}{EditorWindowOptionsPath}", JsonUtility.ToJson(controllerInputActionOptions));
                         }
                     }
                 }

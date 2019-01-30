@@ -20,31 +20,40 @@ namespace XRTK.Utilities.Physics
         private Vector3 startObjectScale;
         private float startHandDistanceMeters;
 
+        /// <summary>
+        /// Initialize system with source info from controllers/hands
+        /// </summary>
+        /// <param name="handsPressedMap">Dictionary that maps inputSources to states</param>
+        /// <param name="manipulationRoot">Transform of gameObject to be manipulated</param>
         public virtual void Setup(Dictionary<uint, Vector3> handsPressedMap, Transform manipulationRoot)
         {
             startHandDistanceMeters = GetMinDistanceBetweenHands(handsPressedMap);
             startObjectScale = manipulationRoot.transform.localScale;
         }
 
-        public virtual Vector3 Update(Dictionary<uint, Vector3> handsPressedMap)
+        /// <summary>
+        /// Update the current scale based on the distance between the hands.
+        /// </summary>
+        /// <param name="handsPressedMap"></param>
+        /// <returns>a <see cref="Vector3"/> describing the new Scale of the <see cref="GameObject"/> being manipulated</returns>
+        public virtual Vector3 UpdateMap(Dictionary<uint, Vector3> handsPressedMap)
         {
             return startObjectScale * (GetMinDistanceBetweenHands(handsPressedMap) / startHandDistanceMeters);
         }
 
-        /// <summary>
-        /// Finds the minimum distance between all pairs of hands
-        /// </summary>
-        /// <returns></returns>
         private static float GetMinDistanceBetweenHands(Dictionary<uint, Vector3> handsPressedMap)
         {
             var result = float.MaxValue;
+            // TODO cache the array and only update it if the count changes.
             var handLocations = new Vector3[handsPressedMap.Values.Count];
             handsPressedMap.Values.CopyTo(handLocations, 0);
+
             for (int i = 0; i < handLocations.Length; i++)
             {
                 for (int j = i + 1; j < handLocations.Length; j++)
                 {
                     var distance = Vector3.Distance(handLocations[i], handLocations[j]);
+
                     if (distance < result)
                     {
                         result = distance;

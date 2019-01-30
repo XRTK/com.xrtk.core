@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
-using XRTK.DataProviders.SpatialObservers;
+using XRTK.Providers.SpatialObservers;
 using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles.SpatialAwareness

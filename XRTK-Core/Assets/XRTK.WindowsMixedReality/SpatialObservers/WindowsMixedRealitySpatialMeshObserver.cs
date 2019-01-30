@@ -4,7 +4,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.XR.WSA;
-using XRTK.DataProviders.SpatialObservers;
+using XRTK.Providers.SpatialObservers;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Extensions;
 using XRTK.Services;

@@ -4,7 +4,7 @@
 using UnityEditor;
 using XRTK.Inspectors.Profiles;
 
-namespace XRTK.DataProviders.Controllers.OpenVR.Inspectors.Profiles
+namespace XRTK.Providers.Controllers.OpenVR.Inspectors.Profiles
 {
     [CustomEditor(typeof(ViveWandControllerMappingProfile))]
     public class ViveWandControllerMappingProfileInspector : BaseMixedRealityControllerMappingProfileInspector { }

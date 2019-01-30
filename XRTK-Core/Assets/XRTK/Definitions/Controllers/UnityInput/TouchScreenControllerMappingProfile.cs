@@ -5,7 +5,7 @@ using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.DataProviders.Controllers.UnityInput.Profiles
+namespace XRTK.Providers.Controllers.UnityInput.Profiles
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Controller Mappings/Touch Screen Mapping Profile", fileName = "TouchScreenMappingProfile")]
     public class TouchScreenControllerMappingProfile : BaseMixedRealityControllerMappingProfile

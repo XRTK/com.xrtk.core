@@ -5,7 +5,7 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Input;
-using XRTK.Interfaces.DataProviders.Controllers;
+using XRTK.Interfaces.Providers.Controllers;
 using UnityEngine;
 
 namespace XRTK.SDK.Input.Handlers

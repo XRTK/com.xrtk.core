@@ -3,9 +3,9 @@
 
 using UnityEngine;
 using XRTK.Attributes;
-using XRTK.DataProviders.Controllers;
+using XRTK.Providers.Controllers;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.DataProviders.Controllers;
+using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 

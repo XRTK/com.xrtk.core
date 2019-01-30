@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.SpatialAwarenessSystem;
-using XRTK.Interfaces.DataProviders.SpatialObservers;
+using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Interfaces.Events;
 using XRTK.Interfaces.SpatialAwarenessSystem.Handlers;
 

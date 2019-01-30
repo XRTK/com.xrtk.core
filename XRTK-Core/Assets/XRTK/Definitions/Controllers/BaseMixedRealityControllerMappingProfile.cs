@@ -5,7 +5,7 @@ using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.Devices;
 
-namespace XRTK.DataProviders.Controllers
+namespace XRTK.Providers.Controllers
 {
     /// <summary>
     /// Base Controller Mapping profile.

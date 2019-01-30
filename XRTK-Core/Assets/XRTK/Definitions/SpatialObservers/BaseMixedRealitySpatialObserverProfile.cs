@@ -6,7 +6,7 @@ using XRTK.Attributes;
 using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.DataProviders.SpatialObservers
+namespace XRTK.Providers.SpatialObservers
 {
     // No Scriptable Object Menu constructor attributes here, as this class is meant to be inherited.
 

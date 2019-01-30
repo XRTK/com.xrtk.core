@@ -5,7 +5,7 @@ using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.DataProviders.Controllers.OpenVR
+namespace XRTK.Providers.Controllers.OpenVR
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Controller Mappings/Vive Wand Controller Mapping Profile", fileName = "ViveWandControllerMappingProfile")]
     public class ViveWandControllerMappingProfile : BaseMixedRealityControllerMappingProfile

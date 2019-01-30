@@ -4,7 +4,7 @@
 using UnityEngine;
 using XRTK.Attributes;
 
-namespace XRTK.DataProviders.SpatialObservers
+namespace XRTK.Providers.SpatialObservers
 {
     // No Scriptable Object Menu constructor attributes here, as this class is meant to be inherited.
 

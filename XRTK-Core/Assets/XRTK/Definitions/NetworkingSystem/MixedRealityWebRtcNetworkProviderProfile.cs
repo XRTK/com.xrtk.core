@@ -2,10 +2,10 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.DataProviders.Networking.Profiles;
+using XRTK.Providers.Networking.Profiles;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.DataProviders.Networking.WebRTC
+namespace XRTK.Providers.Networking.WebRTC
 {
     /// <summary>
     /// The Web RTC Network provider profile configuration.

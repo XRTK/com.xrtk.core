@@ -2,8 +2,8 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.DataProviders.Controllers;
-using XRTK.DataProviders.Controllers.OpenVR;
+using XRTK.Providers.Controllers;
+using XRTK.Providers.Controllers.OpenVR;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.WindowsMixedReality.Controllers;

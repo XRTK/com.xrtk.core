@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine.EventSystems;
-using XRTK.Interfaces.DataProviders.SpatialObservers;
+using XRTK.Interfaces.Providers.SpatialObservers;
 
 namespace XRTK.EventDatum.SpatialAwarenessSystem
 {

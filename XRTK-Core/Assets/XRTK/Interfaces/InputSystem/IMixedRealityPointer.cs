@@ -4,7 +4,7 @@
 using System.Collections;
 using UnityEngine;
 using XRTK.Definitions.Physics;
-using XRTK.Interfaces.DataProviders.Controllers;
+using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Physics;
 using XRTK.Interfaces.TeleportSystem;

@@ -15,24 +15,23 @@ MonoBehaviour:
   isCustomProfile: 0
   registeredControllerDataProviders:
   - dataProviderType:
-      reference: XRTK.DataProviders.Controllers.UnityInput.MouseDataProvider, XRTK
+      reference: XRTK.Providers.Controllers.UnityInput.MouseDataProvider, XRTK
     dataProviderName: Mouse Controller Data Provider
     priority: 5
     runtimePlatform: -1
   - dataProviderType:
-      reference: XRTK.DataProviders.Controllers.UnityInput.UnityTouchDataProvider,
-        XRTK
+      reference: XRTK.Providers.Controllers.UnityInput.UnityTouchDataProvider, XRTK
     dataProviderName: Touch Screen Controller Data Provider
     priority: 5
     runtimePlatform: -1
   - dataProviderType:
-      reference: XRTK.DataProviders.Controllers.UnityInput.UnityJoystickDataProvider,
+      reference: XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider,
         XRTK
     dataProviderName: Unity Joystick Controller Data Provider
     priority: 5
     runtimePlatform: -1
   - dataProviderType:
-      reference: XRTK.DataProviders.Controllers.OpenVR.OpenVRDataProvider, XRTK
+      reference: XRTK.Providers.Controllers.OpenVR.OpenVRDataProvider, XRTK
     dataProviderName: Open VR Controller Data Provider
     priority: 5
     runtimePlatform: -1

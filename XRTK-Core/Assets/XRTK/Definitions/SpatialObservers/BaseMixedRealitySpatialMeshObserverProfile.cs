@@ -5,7 +5,7 @@ using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.SpatialAwarenessSystem;
 
-namespace XRTK.DataProviders.SpatialObservers
+namespace XRTK.Providers.SpatialObservers
 {
     public abstract class BaseMixedRealitySpatialMeshObserverProfile : BaseMixedRealitySpatialObserverProfile
     {
@@ -15,7 +15,7 @@ namespace XRTK.DataProviders.SpatialObservers
         private int meshPhysicsLayerOverride = -1;
 
         /// <summary>
-        /// The optional Physics layer override of the base <see cref="Interfaces.DataProviders.SpatialObservers.IMixedRealitySpatialObserverDataProvider.PhysicsLayer"/>
+        /// The optional Physics layer override of the base <see cref="Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.PhysicsLayer"/>
         /// </summary>
         public int MeshPhysicsLayerOverride => meshPhysicsLayerOverride;
 

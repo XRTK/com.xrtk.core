@@ -3,7 +3,7 @@
 
 using XRTK.Definitions.Devices;
 using XRTK.EventDatum.Input;
-using XRTK.Interfaces.DataProviders.Controllers;
+using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 using XRTK.Utilities;

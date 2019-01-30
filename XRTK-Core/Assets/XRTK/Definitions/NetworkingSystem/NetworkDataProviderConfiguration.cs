@@ -4,7 +4,7 @@
 using System;
 using UnityEngine;
 using XRTK.Attributes;
-using XRTK.DataProviders.Networking.Profiles;
+using XRTK.Providers.Networking.Profiles;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces;
 using XRTK.Interfaces.NetworkingSystem;

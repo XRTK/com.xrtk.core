@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 using XRTK.Definitions;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.EventDatum.SpatialAwarenessSystem;
-using XRTK.Interfaces.DataProviders.SpatialObservers;
+using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem.Handlers;
 

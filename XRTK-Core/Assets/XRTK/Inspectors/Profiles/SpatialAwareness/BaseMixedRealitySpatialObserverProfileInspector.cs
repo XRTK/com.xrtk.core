@@ -3,7 +3,7 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.DataProviders.SpatialObservers;
+using XRTK.Providers.SpatialObservers;
 using XRTK.Definitions;
 using XRTK.Inspectors.Utilities;
 using XRTK.Services;

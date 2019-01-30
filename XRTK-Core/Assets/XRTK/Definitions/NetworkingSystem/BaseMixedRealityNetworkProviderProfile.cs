@@ -6,7 +6,7 @@ using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.NetworkingSystem;
 
-namespace XRTK.DataProviders.Networking.Profiles
+namespace XRTK.Providers.Networking.Profiles
 {
     /// <summary>
     /// The base profile for <see cref="IMixedRealityNetworkDataProvider"/>s

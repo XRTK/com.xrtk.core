@@ -16,7 +16,7 @@ MonoBehaviour:
   controllerMappings:
   - description: Mouse Input
     controllerType:
-      reference: XRTK.DataProviders.Controllers.UnityInput.MouseController,
+      reference: XRTK.Providers.Controllers.UnityInput.MouseController,
         XRTK
     handedness: 7
     useCustomInteractionMappings: 0

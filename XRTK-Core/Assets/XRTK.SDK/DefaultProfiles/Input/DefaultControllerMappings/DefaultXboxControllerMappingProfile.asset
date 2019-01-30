@@ -16,7 +16,7 @@ MonoBehaviour:
   controllerMappings:
   - description: Xbox Controller
     controllerType:
-      reference: XRTK.DataProviders.Controllers.UnityInput.XboxController,
+      reference: XRTK.Providers.Controllers.UnityInput.XboxController,
         XRTK
     handedness: 0
     useCustomInteractionMappings: 0

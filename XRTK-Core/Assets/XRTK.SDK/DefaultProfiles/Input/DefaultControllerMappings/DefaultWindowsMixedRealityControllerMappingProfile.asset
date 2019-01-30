@@ -16,8 +16,8 @@ MonoBehaviour:
   controllerMappings:
   - description: Windows Mixed Reality HoloLens Hand Input
     controllerType:
-      reference: XRTK.DataProviders.Controllers.WindowsMixedReality.WindowsMixedRealityController,
-        XRTK.DataProviders.Controllers.WindowsMixedReality
+      reference: XRTK.Providers.Controllers.WindowsMixedReality.WindowsMixedRealityController,
+        XRTK.Providers.Controllers.WindowsMixedReality
     handedness: 0
     useCustomInteractionMappings: 0
     interactions:
@@ -179,8 +179,8 @@ MonoBehaviour:
       invertYAxis: 0
   - description: Windows Mixed Reality Motion Controller Left
     controllerType:
-      reference: XRTK.DataProviders.Controllers.WindowsMixedReality.WindowsMixedRealityController,
-        XRTK.DataProviders.Controllers.WindowsMixedReality
+      reference: XRTK.Providers.Controllers.WindowsMixedReality.WindowsMixedRealityController,
+        XRTK.Providers.Controllers.WindowsMixedReality
     handedness: 1
     useCustomInteractionMappings: 0
     interactions:
@@ -342,8 +342,8 @@ MonoBehaviour:
       invertYAxis: 0
   - description: Windows Mixed Reality Motion Controller Right
     controllerType:
-      reference: XRTK.DataProviders.Controllers.WindowsMixedReality.WindowsMixedRealityController,
-        XRTK.DataProviders.Controllers.WindowsMixedReality
+      reference: XRTK.Providers.Controllers.WindowsMixedReality.WindowsMixedRealityController,
+        XRTK.Providers.Controllers.WindowsMixedReality
     handedness: 2
     useCustomInteractionMappings: 0
     interactions:
@@ -505,7 +505,7 @@ MonoBehaviour:
       invertYAxis: 0
   - description: Open VR Motion Controller Left
     controllerType:
-      reference: XRTK.DataProviders.Controllers.OpenVR.WindowsMixedRealityOpenVRMotionController,
+      reference: XRTK.Providers.Controllers.OpenVR.WindowsMixedRealityOpenVRMotionController,
         XRTK
     handedness: 1
     useCustomInteractionMappings: 0
@@ -668,7 +668,7 @@ MonoBehaviour:
       invertYAxis: 0
   - description: Open VR Motion Controller Right
     controllerType:
-      reference: XRTK.DataProviders.Controllers.OpenVR.WindowsMixedRealityOpenVRMotionController,
+      reference: XRTK.Providers.Controllers.OpenVR.WindowsMixedRealityOpenVRMotionController,
         XRTK
     handedness: 2
     useCustomInteractionMappings: 0

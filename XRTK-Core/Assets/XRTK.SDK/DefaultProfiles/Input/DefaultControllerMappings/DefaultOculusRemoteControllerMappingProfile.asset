@@ -16,7 +16,7 @@ MonoBehaviour:
   controllerMappings:
   - description: Oculus Remote Controller
     controllerType:
-      reference: XRTK.DataProviders.Controllers.OpenVR.OculusRemoteController,
+      reference: XRTK.Providers.Controllers.OpenVR.OculusRemoteController,
         XRTK
     handedness: 0
     useCustomInteractionMappings: 0

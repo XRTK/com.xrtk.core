@@ -16,7 +16,7 @@ MonoBehaviour:
   controllerMappings:
   - description: Generic OpenVR Controller Left
     controllerType:
-      reference: XRTK.DataProviders.Controllers.OpenVR.GenericOpenVRController,
+      reference: XRTK.Providers.Controllers.OpenVR.GenericOpenVRController,
         XRTK
     handedness: 1
     useCustomInteractionMappings: 1
@@ -179,7 +179,7 @@ MonoBehaviour:
       invertYAxis: 0
   - description: Generic OpenVR Controller Right
     controllerType:
-      reference: XRTK.DataProviders.Controllers.OpenVR.GenericOpenVRController,
+      reference: XRTK.Providers.Controllers.OpenVR.GenericOpenVRController,
         XRTK
     handedness: 2
     useCustomInteractionMappings: 1

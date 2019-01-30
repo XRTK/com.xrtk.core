@@ -16,7 +16,7 @@ MonoBehaviour:
   controllerMappings:
   - description: Touch Screen Input
     controllerType:
-      reference: XRTK.DataProviders.Controllers.UnityInput.UnityTouchController,
+      reference: XRTK.Providers.Controllers.UnityInput.UnityTouchController,
         XRTK
     handedness: 7
     useCustomInteractionMappings: 0

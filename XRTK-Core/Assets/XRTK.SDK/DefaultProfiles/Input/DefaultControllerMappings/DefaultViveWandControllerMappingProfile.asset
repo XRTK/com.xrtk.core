@@ -16,7 +16,7 @@ MonoBehaviour:
   controllerMappings:
   - description: Vive Wand Controller Left
     controllerType:
-      reference: XRTK.DataProviders.Controllers.OpenVR.ViveWandController,
+      reference: XRTK.Providers.Controllers.OpenVR.ViveWandController,
         XRTK
     handedness: 1
     useCustomInteractionMappings: 0
@@ -140,7 +140,7 @@ MonoBehaviour:
       invertYAxis: 0
   - description: Vive Wand Controller Right
     controllerType:
-      reference: XRTK.DataProviders.Controllers.OpenVR.ViveWandController,
+      reference: XRTK.Providers.Controllers.OpenVR.ViveWandController,
         XRTK
     handedness: 2
     useCustomInteractionMappings: 0

@@ -16,7 +16,7 @@ MonoBehaviour:
   controllerMappings:
   - description: Generic Unity Controller
     controllerType:
-      reference: XRTK.DataProviders.Controllers.UnityInput.GenericJoystickController,
+      reference: XRTK.Providers.Controllers.UnityInput.GenericJoystickController,
         XRTK
     handedness: 0
     useCustomInteractionMappings: 1

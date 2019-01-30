@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
-using XRTK.Definitions.Utilities;
 using UnityEditor;
+using XRTK.Definitions.Utilities;
 using XRTK.SDK.Input.Handlers;
 
 namespace XRTK.SDK.Inspectors.Input.Handlers
@@ -10,7 +10,7 @@ namespace XRTK.SDK.Inspectors.Input.Handlers
     [CustomEditor(typeof(ControllerPoseSynchronizer))]
     public class ControllerPoseSynchronizerInspector : Editor
     {
-        private const string SynchronizationSettingsKey = "MRTK_Inspector_SynchronizationSettingsFoldout";
+        private const string SynchronizationSettingsKey = "XRTK_Inspector_SynchronizationSettingsFoldout";
         private static readonly string[] HandednessLabels = { "Left", "Right" };
 
         private static bool synchronizationSettingsFoldout = true;

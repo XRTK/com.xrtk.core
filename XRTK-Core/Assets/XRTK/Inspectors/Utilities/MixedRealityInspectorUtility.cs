@@ -93,7 +93,7 @@ namespace XRTK.Inspectors.Utilities
             throw new NotSupportedException("Can't find internal main window. Maybe something has changed inside Unity");
         }
 
-        private static Type[] GetAllDerivedTypes(this AppDomain appDomain, Type aType)
+        private static IEnumerable<Type> GetAllDerivedTypes(this AppDomain appDomain, Type aType)
         {
             var result = new List<Type>();
             var assemblies = appDomain.GetAssemblies();
@@ -103,7 +103,7 @@ namespace XRTK.Inspectors.Utilities
                 result.AddRange(assemblies[i].GetTypes().Where(type => type.IsSubclassOf(aType)));
             }
 
-            return result.ToArray();
+            return result;
         }
 
         /// <summary>
@@ -129,7 +129,7 @@ namespace XRTK.Inspectors.Utilities
             {
                 if (darkThemeLogo == null)
                 {
-                    darkThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/Resources/Textures/MRTK_Logo_Black.png", typeof(Texture2D));
+                    darkThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/Resources/Textures/XRTK_Logo_Black.png", typeof(Texture2D));
                 }
 
                 return darkThemeLogo;
@@ -144,7 +144,7 @@ namespace XRTK.Inspectors.Utilities
             {
                 if (lightThemeLogo == null)
                 {
-                    lightThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/Resources/Textures/MRTK_Logo_White.png", typeof(Texture2D));
+                    lightThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/Resources/Textures/XRTK_Logo_White.png", typeof(Texture2D));
                 }
 
                 return lightThemeLogo;

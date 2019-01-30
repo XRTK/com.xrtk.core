@@ -1,10 +1,10 @@
-﻿using XRTK.Definitions.InputSystem;
+﻿using UnityEngine;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Input;
 using XRTK.Interfaces.InputSystem.Handlers;
-using XRTK.Services;
-using UnityEngine;
 using XRTK.SDK.Input.Handlers;
+using XRTK.Services;
 
 namespace XRTK.Examples.Demos.Input
 {
@@ -43,7 +43,7 @@ namespace XRTK.Examples.Demos.Input
 
         private void Awake()
         {
-            Debug.Log($"[Awake] Is MRTK initialized? {MixedRealityToolkit.Instance != null}");
+            Debug.Log($"[Awake] Is XRTK initialized? {MixedRealityToolkit.Instance != null}");
             Debug.Log($"[Awake] Is Input System initialized? {MixedRealityToolkit.InputSystem != null}");
         }
 
@@ -51,7 +51,7 @@ namespace XRTK.Examples.Demos.Input
         {
             base.OnEnable();
 
-            Debug.Log($"[OnEnable] Is MRTK initialized? {MixedRealityToolkit.Instance != null}");
+            Debug.Log($"[OnEnable] Is XRTK initialized? {MixedRealityToolkit.Instance != null}");
             Debug.Log($"[OnEnable] Is Input System initialized? {MixedRealityToolkit.InputSystem != null}");
         }
 
@@ -59,7 +59,7 @@ namespace XRTK.Examples.Demos.Input
         {
             base.Start();
 
-            Debug.Log($"[Start] Is MRTK initialized? {MixedRealityToolkit.Instance != null}");
+            Debug.Log($"[Start] Is XRTK initialized? {MixedRealityToolkit.Instance != null}");
             Debug.Log($"[Start] Is Input System initialized? {MixedRealityToolkit.InputSystem != null}");
 
             if (MixedRealityToolkit.InputSystem != null)

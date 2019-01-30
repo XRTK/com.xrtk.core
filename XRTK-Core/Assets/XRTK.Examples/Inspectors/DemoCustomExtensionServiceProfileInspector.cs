@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using UnityEditor;
 using XRTK.Inspectors.Profiles;
 using XRTK.Inspectors.Utilities;
-using UnityEditor;
 
 namespace XRTK.Examples.Demos.CustomExtensionServices.Inspectors
 {
@@ -22,7 +22,7 @@ namespace XRTK.Examples.Demos.CustomExtensionServices.Inspectors
             // copy/paste functionality of the profile
             base.OnEnable();
 
-            // We check to make sure the MRTK is configured here.
+            // We check to make sure the XRTK is configured here.
             // Pass false so we don't get an error for showing the help box.
             if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
             {
@@ -34,7 +34,7 @@ namespace XRTK.Examples.Demos.CustomExtensionServices.Inspectors
 
         public override void OnInspectorGUI()
         {
-            // We check to make sure the MRTK is configured here.
+            // We check to make sure the XRTK is configured here.
             // This will show an error help box if it's not.
             if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
             {

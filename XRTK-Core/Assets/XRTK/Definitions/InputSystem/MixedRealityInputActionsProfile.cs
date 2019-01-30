@@ -61,7 +61,7 @@ namespace XRTK.Definitions.InputSystem
         /// Reset the current InputActions definitions to the Mixed Reality Toolkit defaults
         /// If existing mappings exist, they will be preserved and pushed to the end of the array
         /// </summary>
-        /// <returns>Default MRTK Actions plus any custom actions (if already configured)</returns>
+        /// <returns>Default XRTK Actions plus any custom actions (if already configured)</returns>
         public MixedRealityInputAction[] LoadMixedRealityToolKitDefaults()
         {
             var defaultActions = new List<MixedRealityInputAction>();

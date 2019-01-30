@@ -7,7 +7,7 @@ using XRTK.Services;
 namespace XRTK.Utilities
 {
     /// <summary>
-    /// Helper class for setting up canvases for use in the MRTK.
+    /// Helper class for setting up canvases for use in the XRTK.
     /// </summary>
     [DisallowMultipleComponent]
     [RequireComponent(typeof(Canvas))]

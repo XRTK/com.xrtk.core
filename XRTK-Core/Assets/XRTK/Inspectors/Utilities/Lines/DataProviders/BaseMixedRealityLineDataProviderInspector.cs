@@ -13,16 +13,16 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
     [CustomEditor(typeof(BaseMixedRealityLineDataProvider))]
     public class BaseMixedRealityLineDataProviderInspector : Editor
     {
-        private const string DrawLinePointsKey = "MRTK_Line_Inspector_DrawLinePoints";
-        private const string BasicSettingsFoldoutKey = "MRTK_Line_Inspector_BasicSettings";
-        private const string DrawLineRotationsKey = "MRTK_Line_Inspector_DrawLineRotations";
-        private const string EditorSettingsFoldoutKey = "MRTK_Line_Inspector_EditorSettings";
-        private const string RotationArrowLengthKey = "MRTK_Line_Inspector_RotationArrowLength";
-        private const string RotationSettingsFoldoutKey = "MRTK_Line_Inspector_RotationSettings";
-        private const string ManualUpVectorLengthKey = "MRTK_Line_Inspector_ManualUpVectorLength";
-        private const string LinePreviewResolutionKey = "MRTK_Line_Inspector_LinePreviewResolution";
-        private const string DistortionSettingsFoldoutKey = "MRTK_Line_Inspector_DistortionSettings";
-        private const string DrawLineManualUpVectorsKey = "MRTK_Line_Inspector_DrawLineManualUpVectors";
+        private const string DrawLinePointsKey = "XRTK_Line_Inspector_DrawLinePoints";
+        private const string BasicSettingsFoldoutKey = "XRTK_Line_Inspector_BasicSettings";
+        private const string DrawLineRotationsKey = "XRTK_Line_Inspector_DrawLineRotations";
+        private const string EditorSettingsFoldoutKey = "XRTK_Line_Inspector_EditorSettings";
+        private const string RotationArrowLengthKey = "XRTK_Line_Inspector_RotationArrowLength";
+        private const string RotationSettingsFoldoutKey = "XRTK_Line_Inspector_RotationSettings";
+        private const string ManualUpVectorLengthKey = "XRTK_Line_Inspector_ManualUpVectorLength";
+        private const string LinePreviewResolutionKey = "XRTK_Line_Inspector_LinePreviewResolution";
+        private const string DistortionSettingsFoldoutKey = "XRTK_Line_Inspector_DistortionSettings";
+        private const string DrawLineManualUpVectorsKey = "XRTK_Line_Inspector_DrawLineManualUpVectors";
 
         private const float ManualUpVectorHandleSizeModifier = 0.1f;
 

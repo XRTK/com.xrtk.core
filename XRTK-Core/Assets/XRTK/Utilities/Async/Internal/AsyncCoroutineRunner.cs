@@ -20,8 +20,6 @@
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 // SOFTWARE.
 
-using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace XRTK.Utilities.Async.Internal
@@ -35,8 +33,6 @@ namespace XRTK.Utilities.Async.Internal
     {
         private static AsyncCoroutineRunner instance;
 
-        private static readonly Queue<Action> Actions = new Queue<Action>();
-
         internal static AsyncCoroutineRunner Instance
         {
             get
@@ -49,13 +45,23 @@ namespace XRTK.Utilities.Async.Internal
                 if (instance == null)
                 {
                     var instanceGameObject = GameObject.Find("AsyncCoroutineRunner");
+
                     if (instanceGameObject != null)
                     {
                         instance = instanceGameObject.GetComponent<AsyncCoroutineRunner>();
+
                         if (instance == null)
                         {
                             Debug.Log("[AsyncCoroutineRunner] Found GameObject but didn't have component");
-                            Destroy(instanceGameObject);
+
+                            if (Application.isPlaying)
+                            {
+                                Destroy(instanceGameObject);
+                            }
+                            else
+                            {
+                                DestroyImmediate(instanceGameObject);
+                            }
                         }
                     }
 
@@ -70,36 +76,10 @@ namespace XRTK.Utilities.Async.Internal
             }
         }
 
-        internal static void Post(Action task)
-        {
-            lock (Actions)
-            {
-                Actions.Enqueue(task);
-            }
-        }
-
         private void Update()
         {
             Debug.Assert(Instance != null);
-
-            int actionCount;
-
-            lock (Actions)
-            {
-                actionCount = Actions.Count;
-            }
-
-            for (int i = 0; i < actionCount; i++)
-            {
-                Action next;
-
-                lock (Actions)
-                {
-                    next = Actions.Dequeue();
-                }
-
-                next();
-            }
+            Debug.Assert(Instance == this);
         }
     }
 }

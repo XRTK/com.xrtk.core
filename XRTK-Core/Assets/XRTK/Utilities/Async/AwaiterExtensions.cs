@@ -152,7 +152,7 @@ namespace XRTK.Utilities.Async
             }
             else
             {
-                AsyncCoroutineRunner.Post(action);
+                SyncContextUtility.UnitySynchronizationContext.Post(state => action(), null);
             }
         }
 

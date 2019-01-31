@@ -36,12 +36,12 @@ MonoBehaviour:
     pointerPrefab: {fileID: 1196247974088106, guid: 0c1e5f0d54ce46319152ece13a4b1eeb,
       type: 3}
   - controllerType:
-      reference: XRTK.DataProviders.Controllers.UnityInput.UnityTouchController, XRTK
+      reference: XRTK.Providers.Controllers.UnityInput.UnityTouchController, XRTK
     handedness: 7
     pointerPrefab: {fileID: 1247086986094436, guid: 11325a842d3c4ffc85c65a6991b8d70e,
       type: 3}
   - controllerType:
-      reference: XRTK.DataProviders.Controllers.UnityInput.MouseController, XRTK
+      reference: XRTK.Providers.Controllers.UnityInput.MouseController, XRTK
     handedness: 7
     pointerPrefab: {fileID: 1247086986094436, guid: 58ab5073b9b5477fbda6f619d37be0f0,
       type: 3}

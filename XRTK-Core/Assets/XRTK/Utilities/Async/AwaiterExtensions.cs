@@ -152,7 +152,8 @@ namespace XRTK.Utilities.Async
             }
             else
             {
-                SyncContextUtility.UnitySynchronizationContext.Post(state => action(), null);
+                void SendOrPostCallback(object state) => action();
+                SyncContextUtility.UnitySynchronizationContext.Post(SendOrPostCallback, null);
             }
         }
 

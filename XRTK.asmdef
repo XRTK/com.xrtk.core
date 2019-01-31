@@ -1,0 +1,16 @@
+{
+    "name": "XRTK",
+    "references": [
+        "XRTK.Utilities.Async",
+        "XRTK.Utilities.Editor",
+        "XRTK.Utilities.Gltf"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

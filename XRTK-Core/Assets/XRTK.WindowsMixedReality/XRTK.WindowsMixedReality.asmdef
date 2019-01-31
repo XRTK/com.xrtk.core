@@ -1,0 +1,21 @@
+{
+    "name": "XRTK.WindowsMixedReality",
+    "references": [
+        "XRTK",
+        "XRTK.Utilities.Async"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor",
+        "WSA",
+        "WindowsStandalone32",
+        "WindowsStandalone64",
+        "XboxOne"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

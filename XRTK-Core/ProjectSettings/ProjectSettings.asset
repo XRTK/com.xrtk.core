@@ -113,7 +113,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 0.1
+  bundleVersion: 2019.1.0.0
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -134,7 +134,7 @@ PlayerSettings:
       maximumSupportedHeadTracking: 1
     hololens:
       depthFormat: 1
-      depthBufferSharingEnabled: 0
+      depthBufferSharingEnabled: 1
     oculus:
       sharedDepthBuffer: 1
       dashSupport: 1
@@ -381,6 +381,10 @@ PlayerSettings:
     m_Devices:
     - Oculus
     - OpenVR
+  - m_BuildTarget: Metro
+    m_Enabled: 1
+    m_Devices:
+    - WindowsMR
   m_BuildTargetEnableVuforiaSettings: []
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
@@ -617,6 +621,7 @@ PlayerSettings:
   platformArchitecture: {}
   scriptingBackend:
     Android: 1
+    Metro: 1
     Standalone: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
@@ -627,14 +632,14 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Template3D
-  metroPackageVersion: 1.0.0.0
+  metroPackageName: XRTK-Core
+  metroPackageVersion: 2019.1.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
-  metroApplicationDescription: Template_3D
+  metroCertificateSubject: XRTK
+  metroCertificateIssuer: XRTK
+  metroCertificateNotAfter: 0050182c3fd7d501
+  metroApplicationDescription: XRTK-Core
   wsaImages: {}
   metroTileShortName: XRTK-Core
   metroTileShowName: 0
@@ -662,11 +667,11 @@ PlayerSettings:
       EnterpriseAuthentication: False
       HumanInterfaceDevice: False
       InputInjectionBrokered: False
-      InternetClient: False
-      InternetClientServer: False
+      InternetClient: True
+      InternetClientServer: True
       Location: False
       LowLevelDevices: False
-      Microphone: False
+      Microphone: True
       MusicLibrary: False
       Objects3D: False
       OfflineMapsManagement: False
@@ -674,13 +679,13 @@ PlayerSettings:
       PhoneCallHistoryPublic: False
       PicturesLibrary: False
       PointOfService: False
-      PrivateNetworkClientServer: False
+      PrivateNetworkClientServer: True
       Proximity: False
       RecordedCallsFolder: False
       RemoteSystem: False
       RemovableStorage: False
       SharedUserCertificates: False
-      SpatialPerception: False
+      SpatialPerception: True
       SystemManagement: False
       UserAccountInformation: False
       UserDataTasks: False
@@ -689,8 +694,8 @@ PlayerSettings:
       VoipCall: False
       WebCam: False
   metroTargetDeviceFamilies:
-    Desktop: False
-    Holographic: False
+    Desktop: True
+    Holographic: True
     IoT: False
     IoTHeadless: False
     Mobile: False

@@ -1,0 +1,14 @@
+{
+    "name": "XRTK.Utilities.Gltf",
+    "references": [
+        "XRTK.Utilities.Async"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

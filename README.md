@@ -27,7 +27,7 @@ Our philosophy is write it once, build it everywhere. We’d like to invite all 
     - [ ] Should interface and work with Unity's built in package manager
 - [x] Unit tests for core features
 - [ ] Finish setting up main repository docs
-    - [ ] Main Readme
+    - [x] Main Readme
     - [ ] Coding Guidelines
-    - [ ] Contributor List
+    - [x] [Contributor List](/CONTRIBUTORS.md)
 - [ ] Setup docfx website

@@ -28,6 +28,6 @@ Our philosophy is write it once, build it everywhere. We’d like to invite all 
 - [x] Unit tests for core features
 - [ ] Finish setting up main repository docs
     - [x] Main Readme
-    - [ ] Coding Guidelines
+    - [x] Coding Guidelines
     - [x] [Contributor List](/CONTRIBUTORS.md)
 - [ ] Setup docfx website

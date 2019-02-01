@@ -46,7 +46,7 @@ The project structure adheres to a strict namespace culture of mapping the names
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-namespace Microsoft.MixedReality.Toolkit.Core.Definitions
+namespace XRTK.Definitions
 {
     /// <summary>
     /// The ButtonAction defines the set of actions exposed by a controller.

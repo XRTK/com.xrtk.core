@@ -8,6 +8,7 @@ The following people have helped make this project as awesome as it is today (in
 - Andrew Hall
 - Cameron Micka
 - David Kline
+- Dong Yoon Park
 - Eric Carter
 - Kurtis Eveleigh
 - Lars Simpkins

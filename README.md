@@ -2,7 +2,7 @@
 
 Developing Mixed Reality Applications in Unity is hard, and today I’m proud to announce the formation of the XRTK (pronounced “Mixed Reality Toolkit”). This is a direct fork of the [Microsoft Mixed Reality Toolkit (MRTK)](https://github.com/Microsoft/MixedRealityToolkit-Unity). We didn’t reach this decision to fork lightly but felt it was an important step in making a true open source framework where all companies can contribute, collaborate, and empower the developers that write software on their various platforms.
 
-I know there are many developers who are frustrated with the current state of both game and general application development within the Mixed Reality ecosystem: a quickly developing market that encompasses the whole spectrum from Mobile Augmented Reality to high end Virtual Reality.
+I know there are many [developers](/CONTRIBUTORS.md) who are frustrated with the current state of both game and general application development within the Mixed Reality ecosystem: a quickly developing market that encompasses the whole spectrum from Mobile Augmented Reality to high end Virtual Reality.
 
 Compounded with the fact that developing for an emerging tech market can be time consuming, expensive, and fraught with peril, many developers are finding themselves forced into abandoning cross-platform development strategies and instead are writing their applications for a single niche platform. At the end the day, this isn’t a very good business model and can be very difficult to make a profit with it. Even worse, at a time when we need to be showing the world how Mixed Reality can make their lives better, we are getting tangled up in the minutiae of platform implementation.
 
@@ -27,7 +27,7 @@ Our philosophy is write it once, build it everywhere. We’d like to invite all 
     - [ ] Should interface and work with Unity's built in package manager
 - [x] Unit tests for core features
 - [ ] Finish setting up main repository docs
-    - [ ] Main Readme
+    - [x] Main Readme
     - [ ] Coding Guidelines
-    - [ ] Contributor List
+    - [x] [Contributor List](/CONTRIBUTORS.md)
 - [ ] Setup docfx website

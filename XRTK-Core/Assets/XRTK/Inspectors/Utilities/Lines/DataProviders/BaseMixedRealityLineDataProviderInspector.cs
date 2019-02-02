@@ -270,6 +270,7 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
             }
 
             serializedObject.ApplyModifiedProperties();
+            EditorUtility.SetDirty(LineData);
         }
 
         protected virtual void OnSceneGUI()
@@ -292,6 +293,7 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
 
             if (Application.isPlaying)
             {
+                Handles.EndGUI();
                 return;
             }
 

@@ -369,15 +369,7 @@ namespace XRTK.SDK.Input
                 return null;
             }
 
-            if (!TryGetFocusDetails(pointingSource, out FocusDetails focusDetails)) { return null; }
-
-            if (TryGetSpecificPointerGraphicEventData(pointingSource, out GraphicInputEventData graphicInputEventData))
-            {
-                Debug.Assert(graphicInputEventData != null);
-                graphicInputEventData.selectedObject = focusDetails.Object;
-            }
-
-            return focusDetails.Object;
+            return !TryGetFocusDetails(pointingSource, out FocusDetails focusDetails) ? null : focusDetails.Object;
         }
 
         /// <inheritdoc />
@@ -400,6 +392,7 @@ namespace XRTK.SDK.Input
             {
                 Debug.Assert(pointerData.GraphicEventData != null);
                 graphicInputEventData = pointerData.GraphicEventData;
+                graphicInputEventData.selectedObject = pointerData.GraphicEventData.pointerCurrentRaycast.gameObject;
                 return true;
             }
 
@@ -433,19 +426,17 @@ namespace XRTK.SDK.Input
         /// <returns>The UIRaycastCamera</returns>
         private void EnsureUiRaycastCameraSetup()
         {
-            GameObject cameraObject;
+            const string uiRayCastCameraName = "UIRaycastCamera";
+            var cameraTransform = CameraCache.Main.transform;
+            var cameraObject = cameraTransform.Find(uiRayCastCameraName).gameObject;
 
-            if (CameraCache.Main.transform.childCount == 0)
+            if (cameraObject == null)
             {
-                cameraObject = new GameObject { name = "UIRaycastCamera" };
-                cameraObject.transform.parent = CameraCache.Main.transform;
-            }
-            else
-            {
-                cameraObject = CameraCache.Main.transform.Find("UIRaycastCamera").gameObject;
-                Debug.Assert(cameraObject.transform.parent == CameraCache.Main.transform);
+                cameraObject = new GameObject { name = uiRayCastCameraName };
+                cameraObject.transform.parent = cameraTransform;
             }
 
+            Debug.Assert(cameraObject.transform.parent == cameraTransform);
             cameraObject.transform.localPosition = Vector3.zero;
             cameraObject.transform.localRotation = Quaternion.identity;
 
@@ -791,8 +782,9 @@ namespace XRTK.SDK.Input
             Debug.Assert(step.Direction != Vector3.zero, "RayStep Direction is Invalid.");
 
             // Move the uiRaycast camera to the current pointer's position.
-            UIRaycastCamera.transform.position = step.Origin;
-            UIRaycastCamera.transform.forward = step.Direction;
+            var cameraTransform = UIRaycastCamera.transform;
+            cameraTransform.position = step.Origin;
+            cameraTransform.forward = step.Direction;
 
             // We always raycast from the center of the camera.
             pointerData.GraphicEventData.position = new Vector2(UIRaycastCamera.pixelWidth * 0.5f, UIRaycastCamera.pixelHeight * 0.5f);
@@ -803,43 +795,47 @@ namespace XRTK.SDK.Input
 
             overridePhysicsRaycast = false;
 
-            // If we have a raycast result, check if we need to overwrite the physics raycast info
-            if (uiRaycastResult.gameObject != null)
-            {
-                if (pointerData.CurrentPointerTarget != null)
-                {
-                    // Check layer prioritization
-                    if (prioritizedLayerMasks.Length > 1)
-                    {
-                        // Get the index in the prioritized layer masks
-                        int uiLayerIndex = uiRaycastResult.gameObject.layer.FindLayerListIndex(prioritizedLayerMasks);
-                        int threeDLayerIndex = pointerData.Details.LastRaycastHit.collider.gameObject.layer.FindLayerListIndex(prioritizedLayerMasks);
+            if (uiRaycastResult.gameObject == null) { return false; }
 
-                        if (threeDLayerIndex > uiLayerIndex)
-                        {
-                            overridePhysicsRaycast = true;
-                        }
-                        else if (threeDLayerIndex == uiLayerIndex)
-                        {
-                            if (pointerData.Details.LastRaycastHit.distance > uiRaycastResult.distance)
-                            {
-                                overridePhysicsRaycast = true;
-                            }
-                        }
-                    }
-                    else
+            // If we have a raycast result, check if we need to overwrite the physics raycast info
+
+            if (pointerData.CurrentPointerTarget == null) { return true; }
+
+            var distance = 0f;
+
+            for (int i = 0; i < pointerData.RayStepIndex; i++)
+            {
+                distance += pointerData.Pointer.Rays[i].Length;
+            }
+
+            // Check layer prioritization
+            if (prioritizedLayerMasks.Length > 1)
+            {
+                // Get the index in the prioritized layer masks
+                int uiLayerIndex = uiRaycastResult.gameObject.layer.FindLayerListIndex(prioritizedLayerMasks);
+                int threeDLayerIndex = pointerData.Details.LastRaycastHit.collider.gameObject.layer.FindLayerListIndex(prioritizedLayerMasks);
+
+                if (threeDLayerIndex > uiLayerIndex)
+                {
+                    overridePhysicsRaycast = true;
+                }
+                else if (threeDLayerIndex == uiLayerIndex)
+                {
+                    if (distance > uiRaycastResult.distance)
                     {
-                        if (pointerData.Details.LastRaycastHit.distance > uiRaycastResult.distance)
-                        {
-                            overridePhysicsRaycast = true;
-                        }
+                        overridePhysicsRaycast = true;
                     }
                 }
-                // If we've hit something, no need to go further
-                return true;
             }
-            // If we haven't hit something, keep going
-            return false;
+            else
+            {
+                if (distance > uiRaycastResult.distance)
+                {
+                    overridePhysicsRaycast = true;
+                }
+            }
+
+            return true;
         }
 
         #endregion uGUI Graphics Raycasting

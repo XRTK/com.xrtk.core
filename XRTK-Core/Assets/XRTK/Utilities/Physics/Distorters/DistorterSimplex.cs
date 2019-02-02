@@ -14,8 +14,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public float ScaleMultiplier
         {
-            get { return scaleMultiplier; }
-            set { scaleMultiplier = value; }
+            get => scaleMultiplier;
+            set => scaleMultiplier = value;
         }
 
         [SerializeField]
@@ -23,8 +23,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public float StrengthMultiplier
         {
-            get { return strengthMultiplier; }
-            set { strengthMultiplier = value; }
+            get => strengthMultiplier;
+            set => strengthMultiplier = value;
         }
 
         [SerializeField]
@@ -32,8 +32,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public Vector3 AxisStrength
         {
-            get { return axisStrength; }
-            set { axisStrength = value; }
+            get => axisStrength;
+            set => axisStrength = value;
         }
 
         [SerializeField]
@@ -41,8 +41,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public Vector3 AxisSpeed
         {
-            get { return axisSpeed; }
-            set { axisSpeed = value; }
+            get => axisSpeed;
+            set => axisSpeed = value;
         }
 
         [SerializeField]
@@ -50,8 +50,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public Vector3 AxisOffset
         {
-            get { return axisOffset; }
-            set { axisOffset = value; }
+            get => axisOffset;
+            set => axisOffset = value;
         }
 
         [SerializeField]
@@ -59,8 +59,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public float ScaleDistort
         {
-            get { return scaleDistort; }
-            set { scaleDistort = value; }
+            get => scaleDistort;
+            set => scaleDistort = value;
         }
 
         [SerializeField]
@@ -68,8 +68,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public bool UniformScaleDistort
         {
-            get { return uniformScaleDistort; }
-            set { uniformScaleDistort = value; }
+            get => uniformScaleDistort;
+            set => uniformScaleDistort = value;
         }
 
         protected override Vector3 DistortPointInternal(Vector3 point, float strength)

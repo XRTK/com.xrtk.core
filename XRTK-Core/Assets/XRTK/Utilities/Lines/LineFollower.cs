@@ -30,10 +30,7 @@ namespace XRTK.Utilities.Lines
 
                 return follower;
             }
-            set
-            {
-                follower = value == null ? transform : value;
-            }
+            set => follower = value == null ? transform : value;
         }
 
         [Range(0f, 1f)]
@@ -46,7 +43,7 @@ namespace XRTK.Utilities.Lines
         /// </summary>
         public float NormalizedLength
         {
-            get { return normalizedLength; }
+            get => normalizedLength;
             set
             {
                 if (value < 0f)

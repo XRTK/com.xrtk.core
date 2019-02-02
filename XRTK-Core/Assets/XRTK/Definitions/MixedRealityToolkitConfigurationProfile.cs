@@ -35,8 +35,8 @@ namespace XRTK.Definitions
         /// </summary>
         public ExperienceScale TargetExperienceScale
         {
-            get { return targetExperienceScale; }
-            set { targetExperienceScale = value; }
+            get => targetExperienceScale;
+            set => targetExperienceScale = value;
         }
 
         [SerializeField]
@@ -48,8 +48,8 @@ namespace XRTK.Definitions
         /// </summary>
         public bool IsCameraProfileEnabled
         {
-            get { return CameraProfile != null && enableCameraProfile; }
-            internal set { enableCameraProfile = value; }
+            get => CameraProfile != null && enableCameraProfile;
+            internal set => enableCameraProfile = value;
         }
 
         [SerializeField]
@@ -62,8 +62,8 @@ namespace XRTK.Definitions
         /// </summary>
         public MixedRealityCameraProfile CameraProfile
         {
-            get { return cameraProfile; }
-            internal set { cameraProfile = value; }
+            get => cameraProfile;
+            internal set => cameraProfile = value;
         }
 
         [SerializeField]
@@ -75,8 +75,8 @@ namespace XRTK.Definitions
         /// </summary>
         public bool IsInputSystemEnabled
         {
-            get { return inputSystemProfile != null && inputSystemType != null && inputSystemType.Type != null && enableInputSystem; }
-            internal set { enableInputSystem = value; }
+            get => inputSystemProfile != null && inputSystemType != null && inputSystemType.Type != null && enableInputSystem;
+            internal set => enableInputSystem = value;
         }
 
         [SerializeField]
@@ -88,8 +88,8 @@ namespace XRTK.Definitions
         /// </summary>
         public MixedRealityInputSystemProfile InputSystemProfile
         {
-            get { return inputSystemProfile; }
-            internal set { inputSystemProfile = value; }
+            get => inputSystemProfile;
+            internal set => inputSystemProfile = value;
         }
 
         [SerializeField]
@@ -102,8 +102,8 @@ namespace XRTK.Definitions
         /// </summary>
         public SystemType InputSystemType
         {
-            get { return inputSystemType; }
-            internal set { inputSystemType = value; }
+            get => inputSystemType;
+            internal set => inputSystemType = value;
         }
 
         [SerializeField]
@@ -115,8 +115,8 @@ namespace XRTK.Definitions
         /// </summary>
         public bool IsBoundarySystemEnabled
         {
-            get { return boundarySystemType != null && boundarySystemType.Type != null && enableBoundarySystem && boundaryVisualizationProfile != null; }
-            internal set { enableInputSystem = value; }
+            get => boundarySystemType != null && boundarySystemType.Type != null && enableBoundarySystem && boundaryVisualizationProfile != null;
+            internal set => enableInputSystem = value;
         }
 
         [SerializeField]
@@ -129,8 +129,8 @@ namespace XRTK.Definitions
         /// </summary>
         public SystemType BoundarySystemSystemType
         {
-            get { return boundarySystemType; }
-            internal set { boundarySystemType = value; }
+            get => boundarySystemType;
+            internal set => boundarySystemType = value;
         }
 
         [SerializeField]
@@ -142,8 +142,8 @@ namespace XRTK.Definitions
         /// </summary>
         public MixedRealityBoundaryVisualizationProfile BoundaryVisualizationProfile
         {
-            get { return boundaryVisualizationProfile; }
-            internal set { boundaryVisualizationProfile = value; }
+            get => boundaryVisualizationProfile;
+            internal set => boundaryVisualizationProfile = value;
         }
 
         [SerializeField]
@@ -155,8 +155,8 @@ namespace XRTK.Definitions
         /// </summary>
         public bool IsTeleportSystemEnabled
         {
-            get { return teleportSystemType != null && teleportSystemType.Type != null && enableTeleportSystem; }
-            internal set { enableTeleportSystem = value; }
+            get => teleportSystemType != null && teleportSystemType.Type != null && enableTeleportSystem;
+            internal set => enableTeleportSystem = value;
         }
 
         [SerializeField]
@@ -169,8 +169,8 @@ namespace XRTK.Definitions
         /// </summary>
         public SystemType TeleportSystemSystemType
         {
-            get { return teleportSystemType; }
-            internal set { teleportSystemType = value; }
+            get => teleportSystemType;
+            internal set => teleportSystemType = value;
         }
 
         [SerializeField]
@@ -182,8 +182,8 @@ namespace XRTK.Definitions
         /// </summary>
         public bool IsSpatialAwarenessSystemEnabled
         {
-            get { return spatialAwarenessSystemType != null && spatialAwarenessSystemType.Type != null && enableSpatialAwarenessSystem && spatialAwarenessProfile != null; }
-            internal set { enableSpatialAwarenessSystem = value; }
+            get => spatialAwarenessSystemType != null && spatialAwarenessSystemType.Type != null && enableSpatialAwarenessSystem && spatialAwarenessProfile != null;
+            internal set => enableSpatialAwarenessSystem = value;
         }
 
         [SerializeField]
@@ -196,8 +196,8 @@ namespace XRTK.Definitions
         /// </summary>
         public SystemType SpatialAwarenessSystemSystemType
         {
-            get { return spatialAwarenessSystemType; }
-            internal set { spatialAwarenessSystemType = value; }
+            get => spatialAwarenessSystemType;
+            internal set => spatialAwarenessSystemType = value;
         }
 
         [SerializeField]
@@ -209,8 +209,8 @@ namespace XRTK.Definitions
         /// </summary>
         public MixedRealitySpatialAwarenessSystemProfile SpatialAwarenessProfile
         {
-            get { return spatialAwarenessProfile; }
-            internal set { spatialAwarenessProfile = value; }
+            get => spatialAwarenessProfile;
+            internal set => spatialAwarenessProfile = value;
         }
 
         [SerializeField]
@@ -222,8 +222,8 @@ namespace XRTK.Definitions
         /// </summary>
         public MixedRealityNetworkSystemProfile NetworkingSystemProfile
         {
-            get { return networkingSystemProfile; }
-            internal set { networkingSystemProfile = value; }
+            get => networkingSystemProfile;
+            internal set => networkingSystemProfile = value;
         }
 
         [SerializeField]
@@ -235,8 +235,8 @@ namespace XRTK.Definitions
         /// </summary>
         public bool IsNetworkingSystemEnabled
         {
-            get { return enableNetworkingSystem && NetworkingSystemSystemType?.Type != null && networkingSystemProfile != null; }
-            internal set { enableNetworkingSystem = value; }
+            get => enableNetworkingSystem && NetworkingSystemSystemType?.Type != null && networkingSystemProfile != null;
+            internal set => enableNetworkingSystem = value;
         }
 
         [SerializeField]
@@ -249,8 +249,8 @@ namespace XRTK.Definitions
         /// </summary>
         public SystemType NetworkingSystemSystemType
         {
-            get { return networkingSystemType; }
-            internal set { networkingSystemType = value; }
+            get => networkingSystemType;
+            internal set => networkingSystemType = value;
         }
 
         [SerializeField]
@@ -262,8 +262,8 @@ namespace XRTK.Definitions
         /// </summary>
         public MixedRealityDiagnosticsProfile DiagnosticsSystemProfile
         {
-            get { return diagnosticsSystemProfile; }
-            internal set { diagnosticsSystemProfile = value; }
+            get => diagnosticsSystemProfile;
+            internal set => diagnosticsSystemProfile = value;
         }
 
         [SerializeField]
@@ -275,8 +275,8 @@ namespace XRTK.Definitions
         /// </summary>
         public bool IsDiagnosticsSystemEnabled
         {
-            get { return enableDiagnosticsSystem && DiagnosticsSystemSystemType?.Type != null && diagnosticsSystemProfile != null; }
-            internal set { enableDiagnosticsSystem = value; }
+            get => enableDiagnosticsSystem && DiagnosticsSystemSystemType?.Type != null && diagnosticsSystemProfile != null;
+            internal set => enableDiagnosticsSystem = value;
         }
 
         [SerializeField]
@@ -289,8 +289,8 @@ namespace XRTK.Definitions
         /// </summary>
         public SystemType DiagnosticsSystemSystemType
         {
-            get { return diagnosticsSystemType; }
-            internal set { diagnosticsSystemType = value; }
+            get => diagnosticsSystemType;
+            internal set => diagnosticsSystemType = value;
         }
 
         [SerializeField]

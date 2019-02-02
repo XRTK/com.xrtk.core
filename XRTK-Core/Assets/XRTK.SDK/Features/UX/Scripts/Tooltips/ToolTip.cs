@@ -24,10 +24,7 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public bool ShowBackground
         {
-            get
-            {
-                return showBackground;
-            }
+            get => showBackground;
             set
             {
                 showBackground = value;
@@ -44,10 +41,7 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public bool ShowOutline
         {
-            get
-            {
-                return showOutline;
-            }
+            get => showOutline;
             set
             {
                 showOutline = value;
@@ -66,10 +60,7 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public bool ShowConnector
         {
-            get
-            {
-                return showConnector;
-            }
+            get => showConnector;
             set
             {
                 showConnector = value;
@@ -89,14 +80,8 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public DisplayModeType TipState
         {
-            get
-            {
-                return tipState;
-            }
-            set
-            {
-                tipState = value;
-            }
+            get => tipState;
+            set => tipState = value;
         }
 
         [SerializeField]
@@ -108,14 +93,8 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public DisplayModeType GroupTipState
         {
-            set
-            {
-                groupTipState = value;
-            }
-            get
-            {
-                return groupTipState;
-            }
+            set => groupTipState = value;
+            get => groupTipState;
         }
 
         [SerializeField]
@@ -127,14 +106,8 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public DisplayModeType MasterTipState
         {
-            set
-            {
-                masterTipState = value;
-            }
-            get
-            {
-                return masterTipState;
-            }
+            set => masterTipState = value;
+            get => masterTipState;
         }
 
         [SerializeField]
@@ -145,14 +118,8 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public GameObject Anchor
         {
-            get
-            {
-                return anchor;
-            }
-            set
-            {
-                anchor = value;
-            }
+            get => anchor;
+            set => anchor = value;
         }
 
         [Tooltip("Pivot point that text will rotate around as well as the point where the Line will be rendered to.")]
@@ -191,10 +158,7 @@ namespace XRTK.SDK.UX.ToolTips
                     ContentChange?.Invoke();
                 }
             }
-            get
-            {
-                return toolTipText;
-            }
+            get => toolTipText;
         }
 
         [SerializeField]
@@ -220,10 +184,7 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public float ContentScale
         {
-            get
-            {
-                return contentScale;
-            }
+            get => contentScale;
             set
             {
                 contentScale = value;
@@ -241,14 +202,8 @@ namespace XRTK.SDK.UX.ToolTips
 
         public ToolTipAttachPointType PivotType
         {
-            get
-            {
-                return attachPointType;
-            }
-            set
-            {
-                attachPointType = value;
-            }
+            get => attachPointType;
+            set => attachPointType = value;
         }
 
         [SerializeField]
@@ -273,14 +228,8 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public Vector3 PivotPosition
         {
-            get
-            {
-                return pivot.transform.position;
-            }
-            set
-            {
-                pivot.transform.position = value;
-            }
+            get => pivot.transform.position;
+            set => pivot.transform.position = value;
         }
 
         /// <summary>
@@ -288,15 +237,8 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public Vector3 AttachPointPosition
         {
-            get
-            {
-                return contentParent.transform.TransformPoint(localAttachPoint) + attachPointOffset;
-            }
-            set
-            {
-                // apply the difference to the offset
-                attachPointOffset = value - contentParent.transform.TransformPoint(localAttachPoint);
-            }
+            get => contentParent.transform.TransformPoint(localAttachPoint) + attachPointOffset;
+            set => attachPointOffset = value - contentParent.transform.TransformPoint(localAttachPoint);
         }
 
         /// <summary>
@@ -365,13 +307,7 @@ namespace XRTK.SDK.UX.ToolTips
         /// <summary>
         /// does the ToolTip have focus.
         /// </summary>
-        public bool HasFocus
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public bool HasFocus => false;
 
         /// <summary>
         /// Used for Content Change update in text

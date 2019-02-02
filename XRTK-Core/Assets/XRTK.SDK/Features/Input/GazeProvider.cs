@@ -325,7 +325,7 @@ namespace XRTK.SDK.Input
         #region IMixedRealityInputHandler Implementation
 
         /// <inheritdoc />
-        public void OnInputUp(InputEventData eventData)
+        void IMixedRealityInputHandler.OnInputUp(InputEventData eventData)
         {
             for (int i = 0; i < eventData.InputSource.Pointers.Length; i++)
             {
@@ -339,7 +339,7 @@ namespace XRTK.SDK.Input
         }
 
         /// <inheritdoc />
-        public void OnInputDown(InputEventData eventData)
+        void IMixedRealityInputHandler.OnInputDown(InputEventData eventData)
         {
             for (int i = 0; i < eventData.InputSource.Pointers.Length; i++)
             {

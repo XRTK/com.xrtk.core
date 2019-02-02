@@ -117,10 +117,7 @@ namespace XRTK.SDK.UX.Pointers
 
                 return base.PointerOrientation;
             }
-            set
-            {
-                base.PointerOrientation = value;
-            }
+            set => base.PointerOrientation = value;
         }
 
         public override void OnPreRaycast()

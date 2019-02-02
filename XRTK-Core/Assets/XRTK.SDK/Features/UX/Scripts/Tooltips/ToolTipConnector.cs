@@ -23,8 +23,8 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public GameObject Target
         {
-            get { return target; }
-            set { target = value; }
+            get => target;
+            set => target = value;
         }
 
         [SerializeField]
@@ -48,8 +48,8 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public ConnectorFollowType ConnectorFollowingType
         {
-            get { return connectorFollowType; }
-            set { connectorFollowType = value; }
+            get => connectorFollowType;
+            set => connectorFollowType = value;
         }
 
         [SerializeField]
@@ -61,8 +61,8 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public ConnectorPivotModeType PivotMode
         {
-            get { return pivotMode; }
-            set { pivotMode = value; }
+            get => pivotMode;
+            set => pivotMode = value;
         }
 
         [SerializeField]
@@ -74,8 +74,8 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public ConnectorPivotDirectionType PivotDirection
         {
-            get { return pivotDirection; }
-            set { pivotDirection = value; }
+            get => pivotDirection;
+            set => pivotDirection = value;
         }
 
         [SerializeField]
@@ -87,8 +87,8 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public ConnectorOrientType PivotDirectionOrient
         {
-            get { return pivotDirectionOrient; }
-            set { pivotDirectionOrient = value; }
+            get => pivotDirectionOrient;
+            set => pivotDirectionOrient = value;
         }
 
         [SerializeField]
@@ -100,8 +100,8 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public Vector3 ManualPivotDirection
         {
-            get { return manualPivotDirection; }
-            set { manualPivotDirection = value; }
+            get => manualPivotDirection;
+            set => manualPivotDirection = value;
         }
 
         [SerializeField]
@@ -112,8 +112,8 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public Vector3 ManualPivotLocalPosition
         {
-            get { return manualPivotLocalPosition; }
-            set { manualPivotLocalPosition = value; }
+            get => manualPivotLocalPosition;
+            set => manualPivotLocalPosition = value;
         }
 
         [SerializeField]
@@ -126,8 +126,8 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public float PivotDistance
         {
-            get { return pivotDistance; }
-            set { pivotDistance = Mathf.Min(2.0f, Mathf.Max(0, value)); }
+            get => pivotDistance;
+            set => pivotDistance = Mathf.Min(2.0f, Mathf.Max(0, value));
         }
 
         private void OnEnable()

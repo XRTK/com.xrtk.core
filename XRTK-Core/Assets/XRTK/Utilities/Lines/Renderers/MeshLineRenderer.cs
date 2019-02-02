@@ -21,7 +21,7 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public Mesh LineMesh
         {
-            get { return lineMesh; }
+            get => lineMesh;
             set
             {
                 enabled = false;
@@ -35,7 +35,7 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public Material LineMaterial
         {
-            get { return lineMaterial; }
+            get => lineMaterial;
             set
             {
                 enabled = false;
@@ -49,7 +49,7 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public string ColorProperty
         {
-            get { return colorProperty; }
+            get => colorProperty;
             set
             {
                 enabled = false;

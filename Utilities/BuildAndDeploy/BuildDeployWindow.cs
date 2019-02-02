@@ -502,7 +502,6 @@ namespace XRTK.Utilities.Build
                 buildConfigOption = WSABuildType.Debug;
             }
 
-            EditorUserBuildSettings.GetWSADotNetNative(buildConfigOption);
             buildConfigOption = (WSABuildType)EditorGUILayout.EnumPopup("Build Configuration", buildConfigOption, GUILayout.Width(HALF_WIDTH));
 
             string buildConfigString = buildConfigOption.ToString().ToLower();

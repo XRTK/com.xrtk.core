@@ -12,6 +12,7 @@ namespace XRTK.Interfaces.Providers.Controllers
     /// Basic interface for synchronizing to a controller pose.
     /// </summary>
     public interface IMixedRealityControllerPoseSynchronizer : IMixedRealitySourcePoseHandler,
+            IMixedRealityInputHandler,
             IMixedRealityInputHandler<float>,
             IMixedRealityInputHandler<Vector2>,
             IMixedRealityInputHandler<Vector3>,

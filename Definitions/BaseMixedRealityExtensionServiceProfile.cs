@@ -19,8 +19,8 @@ namespace XRTK.Definitions
         /// </summary>
         public DataModelConfiguration[] RegisteredDataProviders
         {
-            get { return registeredDataProviders; }
-            set { registeredDataProviders = value; }
+            get => registeredDataProviders;
+            set => registeredDataProviders = value;
         }
     }
 }

@@ -12,20 +12,14 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public Vector3 BulgeLocalCenter
         {
-            get { return bulgeLocalCenter; }
-            set { bulgeLocalCenter = value; }
+            get => bulgeLocalCenter;
+            set => bulgeLocalCenter = value;
         }
 
         public Vector3 BulgeWorldCenter
         {
-            get
-            {
-                return transform.TransformPoint(bulgeLocalCenter);
-            }
-            set
-            {
-                bulgeLocalCenter = transform.InverseTransformPoint(value);
-            }
+            get => transform.TransformPoint(bulgeLocalCenter);
+            set => bulgeLocalCenter = transform.InverseTransformPoint(value);
         }
 
         [SerializeField]
@@ -33,8 +27,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public AnimationCurve BulgeFalloff
         {
-            get { return bulgeFalloff; }
-            set { bulgeFalloff = value; }
+            get => bulgeFalloff;
+            set => bulgeFalloff = value;
         }
 
         [SerializeField]
@@ -42,8 +36,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public float BulgeRadius
         {
-            get { return bulgeRadius; }
-            set { bulgeRadius = value < 0f ? 0f : value; }
+            get => bulgeRadius;
+            set => bulgeRadius = value < 0f ? 0f : value;
         }
 
         [SerializeField]
@@ -51,8 +45,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public float ScaleDistort
         {
-            get { return scaleDistort; }
-            set { scaleDistort = value; }
+            get => scaleDistort;
+            set => scaleDistort = value;
         }
 
         [SerializeField]
@@ -60,8 +54,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public float BulgeStrength
         {
-            get { return bulgeStrength; }
-            set { bulgeStrength = value; }
+            get => bulgeStrength;
+            set => bulgeStrength = value;
         }
 
         protected override Vector3 DistortPointInternal(Vector3 point, float strength)

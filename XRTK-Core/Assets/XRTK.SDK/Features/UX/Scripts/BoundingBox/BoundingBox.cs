@@ -12,7 +12,10 @@ using XRTK.Services;
 
 namespace XRTK.SDK.UX
 {
-    public class BoundingBox : BaseFocusHandler, IMixedRealityInputHandler<MixedRealityPose>, IMixedRealitySourceStateHandler
+    public class BoundingBox : BaseFocusHandler,
+            IMixedRealitySourceStateHandler,
+            IMixedRealityInputHandler,
+            IMixedRealityInputHandler<MixedRealityPose>
     {
         #region Enums
 
@@ -1176,7 +1179,8 @@ namespace XRTK.SDK.UX
             return origin + (originToEnd * distance);
         }
 
-        public void OnInputDown(InputEventData eventData)
+        /// <inheritdoc />
+        void IMixedRealityInputHandler.OnInputDown(InputEventData eventData)
         {
             if (currentInputSource == null)
             {
@@ -1206,7 +1210,8 @@ namespace XRTK.SDK.UX
             }
         }
 
-        public void OnInputUp(InputEventData eventData)
+        /// <inheritdoc />
+        void IMixedRealityInputHandler.OnInputUp(InputEventData eventData)
         {
             if (currentInputSource != null && eventData.InputSource.SourceId == currentInputSource.SourceId)
             {
@@ -1218,7 +1223,8 @@ namespace XRTK.SDK.UX
             }
         }
 
-        public void OnInputChanged(InputEventData<MixedRealityPose> eventData)
+        /// <inheritdoc />
+        void IMixedRealityInputHandler<MixedRealityPose>.OnInputChanged(InputEventData<MixedRealityPose> eventData)
         {
             if (currentInputSource != null && eventData.InputSource.SourceId == currentInputSource.SourceId)
             {
@@ -1236,9 +1242,11 @@ namespace XRTK.SDK.UX
             }
         }
 
-        public void OnSourceDetected(SourceStateEventData eventData) { }
+        /// <inheritdoc />
+        void IMixedRealitySourceStateHandler.OnSourceDetected(SourceStateEventData eventData) { }
 
-        public void OnSourceLost(SourceStateEventData eventData)
+        /// <inheritdoc />
+        void IMixedRealitySourceStateHandler.OnSourceLost(SourceStateEventData eventData)
         {
             if (currentInputSource != null && eventData.InputSource.SourceId == currentInputSource.SourceId)
             {

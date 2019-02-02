@@ -14,7 +14,6 @@ namespace XRTK.Utilities
     public class CanvasUtility : MonoBehaviour
     {
         [SerializeField]
-        [HideInInspector]
         private Canvas canvas;
 
         /// <summary>

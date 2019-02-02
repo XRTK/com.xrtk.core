@@ -43,15 +43,9 @@ namespace XRTK.SDK.UX.ToolTips
         /// </summary>
         public Transform BackgroundTransform
         {
-            get
-            {
-                return backgroundTransform;
-            }
+            get => backgroundTransform;
 
-            set
-            {
-                backgroundTransform = value;
-            }
+            set => backgroundTransform = value;
         }
 
         protected override void ScaleToFitContent()

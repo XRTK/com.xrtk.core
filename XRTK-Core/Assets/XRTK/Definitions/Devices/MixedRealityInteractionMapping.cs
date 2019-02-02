@@ -180,8 +180,8 @@ namespace XRTK.Definitions.Devices
         /// </summary>
         public MixedRealityInputAction MixedRealityInputAction
         {
-            get { return inputAction; }
-            internal set { inputAction = value; }
+            get => inputAction;
+            internal set => inputAction = value;
         }
 
         [SerializeField]
@@ -223,7 +223,7 @@ namespace XRTK.Definitions.Devices
         /// </remarks>
         public bool InvertXAxis
         {
-            get { return invertXAxis; }
+            get => invertXAxis;
             set
             {
                 if (axisType != AxisType.SingleAxis && axisType != AxisType.DualAxis)
@@ -248,7 +248,7 @@ namespace XRTK.Definitions.Devices
         /// </remarks>
         public bool InvertYAxis
         {
-            get { return invertYAxis; }
+            get => invertYAxis;
             set
             {
                 if (axisType != AxisType.DualAxis)
@@ -279,10 +279,7 @@ namespace XRTK.Definitions.Devices
 
                 return returnValue;
             }
-            private set
-            {
-                changed = value;
-            }
+            private set => changed = value;
         }
 
         private bool updated;
@@ -303,10 +300,7 @@ namespace XRTK.Definitions.Devices
 
                 return returnValue;
             }
-            private set
-            {
-                updated = value;
-            }
+            private set => updated = value;
         }
 
         #endregion Interaction Properties
@@ -337,10 +331,7 @@ namespace XRTK.Definitions.Devices
         /// <remarks>Only supported for a Raw mapping axis type</remarks>
         public object RawData
         {
-            get
-            {
-                return rawData;
-            }
+            get => rawData;
 
             set
             {
@@ -362,10 +353,7 @@ namespace XRTK.Definitions.Devices
         /// <remarks>Only supported for a Digital mapping axis type</remarks>
         public bool BoolData
         {
-            get
-            {
-                return boolData;
-            }
+            get => boolData;
 
             set
             {
@@ -387,10 +375,7 @@ namespace XRTK.Definitions.Devices
         /// <remarks>Only supported for a SingleAxis mapping axis type</remarks>
         public float FloatData
         {
-            get
-            {
-                return floatData;
-            }
+            get => floatData;
 
             set
             {
@@ -420,10 +405,7 @@ namespace XRTK.Definitions.Devices
         /// <remarks>Only supported for a DualAxis mapping axis type</remarks>
         public Vector2 Vector2Data
         {
-            get
-            {
-                return vector2Data;
-            }
+            get => vector2Data;
 
             set
             {
@@ -460,10 +442,7 @@ namespace XRTK.Definitions.Devices
         /// <remarks>Only supported for a ThreeDof mapping axis type</remarks>
         public Vector3 PositionData
         {
-            get
-            {
-                return positionData;
-            }
+            get => positionData;
 
             set
             {
@@ -487,10 +466,7 @@ namespace XRTK.Definitions.Devices
         /// <remarks>Only supported for a ThreeDof mapping axis type</remarks>
         public Quaternion RotationData
         {
-            get
-            {
-                return rotationData;
-            }
+            get => rotationData;
 
             set
             {
@@ -512,10 +488,7 @@ namespace XRTK.Definitions.Devices
         /// <remarks>Only supported for a SixDof mapping axis type</remarks>
         public MixedRealityPose PoseData
         {
-            get
-            {
-                return poseData;
-            }
+            get => poseData;
             set
             {
                 if (AxisType != AxisType.SixDof)

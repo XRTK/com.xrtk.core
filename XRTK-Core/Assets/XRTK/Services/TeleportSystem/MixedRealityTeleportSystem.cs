@@ -111,7 +111,7 @@ namespace XRTK.Services.Teleportation
         /// <inheritdoc />
         public float TeleportDuration
         {
-            get { return teleportDuration; }
+            get => teleportDuration;
             set
             {
                 if (isProcessingTeleportRequest)

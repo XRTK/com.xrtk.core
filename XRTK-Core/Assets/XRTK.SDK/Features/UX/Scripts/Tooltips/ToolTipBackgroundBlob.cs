@@ -38,14 +38,8 @@ namespace XRTK.SDK.UX.ToolTips
 
         public float BlobInertia
         {
-            get
-            {
-                return blobInertia;
-            }
-            set
-            {
-                blobInertia = Mathf.Clamp(value, 0, maxInertia);
-            }
+            get => blobInertia;
+            set => blobInertia = Mathf.Clamp(value, 0, maxInertia);
         }
 
         [SerializeField]
@@ -54,14 +48,8 @@ namespace XRTK.SDK.UX.ToolTips
 
         public float BlobDistortion
         {
-            get
-            {
-                return blobDistortion;
-            }
-            set
-            {
-                blobDistortion = Mathf.Clamp(value, 0, maxDistortion);
-            }
+            get => blobDistortion;
+            set => blobDistortion = Mathf.Clamp(value, 0, maxDistortion);
         }
 
         [SerializeField]
@@ -70,14 +58,8 @@ namespace XRTK.SDK.UX.ToolTips
 
         public float BlobRotation
         {
-            get
-            {
-                return blobRotation;
-            }
-            set
-            {
-                blobRotation = Mathf.Clamp(value, 0, maxRotation);
-            }
+            get => blobRotation;
+            set => blobRotation = Mathf.Clamp(value, 0, maxRotation);
         }
 
         [SerializeField]
@@ -86,14 +68,8 @@ namespace XRTK.SDK.UX.ToolTips
 
         public float PositionCorrectionStrength
         {
-            get
-            {
-                return positionCorrectionStrength;
-            }
-            set
-            {
-                positionCorrectionStrength = Mathf.Clamp(value, minPositionCorrection, maxPositionCorrection);
-            }
+            get => positionCorrectionStrength;
+            set => positionCorrectionStrength = Mathf.Clamp(value, minPositionCorrection, maxPositionCorrection);
         }
 
         [SerializeField]
@@ -102,14 +78,8 @@ namespace XRTK.SDK.UX.ToolTips
 
         public float DistortionCorrectionStrength
         {
-            get
-            {
-                return distortionCorrectionStrength;
-            }
-            set
-            {
-                distortionCorrectionStrength = Mathf.Clamp(value, minDistortionCorrection, maxDistortionCorrection);
-            }
+            get => distortionCorrectionStrength;
+            set => distortionCorrectionStrength = Mathf.Clamp(value, minDistortionCorrection, maxDistortionCorrection);
         }
 
         [SerializeField]
@@ -118,14 +88,8 @@ namespace XRTK.SDK.UX.ToolTips
 
         public float RotationCorrectionStrength
         {
-            get
-            {
-                return rotationCorrectionStrength;
-            }
-            set
-            {
-                rotationCorrectionStrength = Mathf.Clamp(value, minRotationCorrection, maxRotationCorrection);
-            }
+            get => rotationCorrectionStrength;
+            set => rotationCorrectionStrength = Mathf.Clamp(value, minRotationCorrection, maxRotationCorrection);
         }
 
         [SerializeField]
@@ -133,14 +97,8 @@ namespace XRTK.SDK.UX.ToolTips
 
         public Vector3 BlobOffset
         {
-            get
-            {
-                return blobOffset;
-            }
-            set
-            {
-                blobOffset = value;
-            }
+            get => blobOffset;
+            set => blobOffset = value;
         }
 
         private const float maxInertia = 5f;

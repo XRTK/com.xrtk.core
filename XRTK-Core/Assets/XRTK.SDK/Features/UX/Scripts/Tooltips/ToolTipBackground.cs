@@ -20,14 +20,8 @@ namespace XRTK.SDK.UX.ToolTips
 
         public ToolTip ToolTipContent
         {
-            set
-            {
-                toolTipContent = value;
-            }
-            get
-            {
-                return toolTipContent;
-            }
+            set => toolTipContent = value;
+            get => toolTipContent;
         }
 
         protected virtual void OnEnable()

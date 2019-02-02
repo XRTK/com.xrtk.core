@@ -54,8 +54,8 @@ namespace XRTK.SDK.UX.Pointers
         /// </remarks>
         public BaseMixedRealityLineRenderer[] LineRenderers
         {
-            get { return lineRenderers; }
-            set { lineRenderers = value; }
+            get => lineRenderers;
+            set => lineRenderers = value;
         }
 
         [SerializeField]

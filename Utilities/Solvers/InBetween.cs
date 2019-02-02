@@ -21,8 +21,8 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public float PartwayOffset
         {
-            get { return partwayOffset; }
-            set { partwayOffset = Mathf.Clamp(value, 0.0f, 1.0f); }
+            get => partwayOffset;
+            set => partwayOffset = Mathf.Clamp(value, 0.0f, 1.0f);
         }
 
         [SerializeField]
@@ -35,7 +35,7 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public TrackedObjectType TrackedObjectForSecondTransform
         {
-            get { return trackedObjectForSecondTransform; }
+            get => trackedObjectForSecondTransform;
             set
             {
                 trackedObjectForSecondTransform = value;

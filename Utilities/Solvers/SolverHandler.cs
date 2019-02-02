@@ -22,7 +22,7 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public TrackedObjectType TrackedObjectToReference
         {
-            get { return trackedObjectToReference; }
+            get => trackedObjectToReference;
             set
             {
                 if (trackedObjectToReference != value)
@@ -42,7 +42,7 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public Vector3 AdditionalOffset
         {
-            get { return additionalOffset; }
+            get => additionalOffset;
             set
             {
                 additionalOffset = value;
@@ -59,7 +59,7 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public Vector3 AdditionalRotation
         {
-            get { return additionalRotation; }
+            get => additionalRotation;
             set
             {
                 additionalRotation = value;
@@ -76,8 +76,8 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public Transform TransformTarget
         {
-            get { return transformTarget; }
-            set { transformTarget = value; }
+            get => transformTarget;
+            set => transformTarget = value;
         }
 
         [SerializeField]
@@ -89,8 +89,8 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public bool UpdateSolvers
         {
-            get { return updateSolvers; }
-            set { updateSolvers = value; }
+            get => updateSolvers;
+            set => updateSolvers = value;
         }
 
         /// <summary>

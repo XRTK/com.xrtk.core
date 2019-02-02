@@ -24,8 +24,8 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </remarks>
         public SolverOrientationType OrientationType
         {
-            get { return orientationType; }
-            set { orientationType = value; }
+            get => orientationType;
+            set => orientationType = value;
         }
 
         [SerializeField]
@@ -40,8 +40,8 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </remarks>
         public Vector3 LocalOffset
         {
-            get { return localOffset; }
-            set { localOffset = value; }
+            get => localOffset;
+            set => localOffset = value;
         }
 
         [SerializeField]
@@ -56,8 +56,8 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </remarks>
         public Vector3 WorldOffset
         {
-            get { return worldOffset; }
-            set { worldOffset = value; }
+            get => worldOffset;
+            set => worldOffset = value;
         }
 
         [SerializeField]
@@ -69,8 +69,8 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public bool UseAngleSteppingForWorldOffset
         {
-            get { return useAngleSteppingForWorldOffset; }
-            set { useAngleSteppingForWorldOffset = value; }
+            get => useAngleSteppingForWorldOffset;
+            set => useAngleSteppingForWorldOffset = value;
         }
 
         [Range(2, 24)]
@@ -83,11 +83,8 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public int TetherAngleSteps
         {
-            get { return tetherAngleSteps; }
-            set
-            {
-                tetherAngleSteps =  Mathf.Clamp(value, 2, 24);
-            }
+            get => tetherAngleSteps;
+            set => tetherAngleSteps =  Mathf.Clamp(value, 2, 24);
         }
 
         public override void SolverUpdate()

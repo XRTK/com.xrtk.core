@@ -24,7 +24,7 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public Handedness Handedness
         {
-            get { return handedness; }
+            get => handedness;
             set
             {
                 // We need to refresh which controller we're attached to if we switch handedness.

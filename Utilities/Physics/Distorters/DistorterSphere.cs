@@ -9,14 +9,8 @@ namespace XRTK.Utilities.Physics.Distorters
     {
         public Vector3 SphereCenter
         {
-            get
-            {
-                return transform.TransformPoint(sphereCenter);
-            }
-            set
-            {
-                sphereCenter = transform.InverseTransformPoint(value);
-            }
+            get => transform.TransformPoint(sphereCenter);
+            set => sphereCenter = transform.InverseTransformPoint(value);
         }
 
         [SerializeField]

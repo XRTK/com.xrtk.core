@@ -52,12 +52,16 @@ namespace XRTK.Definitions.Utilities
         [SerializeField]
         private Vector3 position;
 
-        public Vector3 Position { get { return position; } set { position = value; } }
+        public Vector3 Position { get => position;
+            set => position = value;
+        }
 
         [SerializeField]
         private Quaternion rotation;
 
-        public Quaternion Rotation { get { return rotation; } set { rotation = value; } }
+        public Quaternion Rotation { get => rotation;
+            set => rotation = value;
+        }
 
         public static MixedRealityPose operator +(MixedRealityPose left, MixedRealityPose right)
         {

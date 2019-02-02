@@ -21,7 +21,7 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public float ScaleMultiplier
         {
-            get { return scaleMultiplier; }
+            get => scaleMultiplier;
             set
             {
                 if (value > MaxScaleMultiplier)
@@ -45,7 +45,7 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public float SpeedMultiplier
         {
-            get { return speedMultiplier; }
+            get => speedMultiplier;
             set
             {
                 if (value > MaxSpeedMultiplier)
@@ -69,7 +69,7 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public float StrengthMultiplier
         {
-            get { return strengthMultiplier; }
+            get => strengthMultiplier;
             set
             {
                 if (value > MaxStrengthMultiplier)
@@ -92,8 +92,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public Vector3 AxisStrength
         {
-            get { return axisStrength; }
-            set { axisStrength = value; }
+            get => axisStrength;
+            set => axisStrength = value;
         }
 
         [SerializeField]
@@ -101,8 +101,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public Vector3 AxisSpeed
         {
-            get { return axisSpeed; }
-            set { axisSpeed = value; }
+            get => axisSpeed;
+            set => axisSpeed = value;
         }
 
         [SerializeField]
@@ -110,8 +110,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public Vector3 AxisOffset
         {
-            get { return axisOffset; }
-            set { axisOffset = value; }
+            get => axisOffset;
+            set => axisOffset = value;
         }
 
         protected override Vector3 DistortPointInternal(Vector3 point, float strength)

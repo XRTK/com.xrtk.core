@@ -33,8 +33,8 @@ namespace XRTK.Providers.Controllers
         /// </summary>
         public MixedRealityControllerMapping[] ControllerMappings
         {
-            get { return controllerMappings; }
-            protected set { controllerMappings = value; }
+            get => controllerMappings;
+            protected set => controllerMappings = value;
         }
 
         protected virtual void Awake()

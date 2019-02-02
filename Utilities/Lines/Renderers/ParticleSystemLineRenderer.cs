@@ -21,8 +21,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public Material LineMaterial
         {
-            get { return lineMaterial; }
-            set { lineMaterial = value; }
+            get => lineMaterial;
+            set => lineMaterial = value;
         }
 
         [SerializeField]
@@ -31,8 +31,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public int MaxParticles
         {
-            get { return maxParticles; }
-            set { maxParticles = Mathf.Clamp(value, 128, GlobalMaxParticles); }
+            get => maxParticles;
+            set => maxParticles = Mathf.Clamp(value, 128, GlobalMaxParticles);
         }
 
         [Header("Noise settings")]
@@ -42,8 +42,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public bool ParticleNoiseOnDisabled
         {
-            get { return particleNoiseOnDisabled; }
-            set { particleNoiseOnDisabled = value; }
+            get => particleNoiseOnDisabled;
+            set => particleNoiseOnDisabled = value;
         }
 
         [SerializeField]
@@ -51,8 +51,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public Vector3 NoiseStrength
         {
-            get { return noiseStrength; }
-            set { noiseStrength = value; }
+            get => noiseStrength;
+            set => noiseStrength = value;
         }
 
         [SerializeField]
@@ -60,8 +60,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public float NoiseFrequency
         {
-            get { return noiseFrequency; }
-            set { noiseFrequency = value; }
+            get => noiseFrequency;
+            set => noiseFrequency = value;
         }
 
         [Range(1, 10)]
@@ -70,8 +70,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public int NoiseOcatives
         {
-            get { return noiseOcatives; }
-            set { noiseOcatives = Mathf.Clamp(value, 1, 10); }
+            get => noiseOcatives;
+            set => noiseOcatives = Mathf.Clamp(value, 1, 10);
         }
 
         [SerializeField]
@@ -80,8 +80,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public float NoiseSpeed
         {
-            get { return noiseSpeed; }
-            set { noiseSpeed = Mathf.Clamp(value, -10f, 10f); }
+            get => noiseSpeed;
+            set => noiseSpeed = Mathf.Clamp(value, -10f, 10f);
         }
 
         [SerializeField]
@@ -90,8 +90,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public float LifetimeAfterDisabled
         {
-            get { return lifetimeAfterDisabled; }
-            set { lifetimeAfterDisabled = Mathf.Clamp(value, 0.01f, 0.5f); }
+            get => lifetimeAfterDisabled;
+            set => lifetimeAfterDisabled = Mathf.Clamp(value, 0.01f, 0.5f);
         }
 
         [SerializeField]
@@ -99,8 +99,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public Gradient DecayGradient
         {
-            get { return decayGradient; }
-            set { decayGradient = value; }
+            get => decayGradient;
+            set => decayGradient = value;
         }
 
         [SerializeField]
@@ -127,7 +127,7 @@ namespace XRTK.Utilities.Lines.Renderers
 
                 return mainParticleRenderer;
             }
-            set { mainParticleRenderer = value; }
+            set => mainParticleRenderer = value;
         }
 
         private readonly ParticleSystem.Particle[] mainParticleArray = new ParticleSystem.Particle[GlobalMaxParticles];

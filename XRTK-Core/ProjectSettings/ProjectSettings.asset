@@ -634,11 +634,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: XRTK-Core
   metroPackageVersion: 2019.1.0.0
-  metroCertificatePath: D:\a\1\s\XRTK-Core\Assets\WSATestCertificate.pfx
+  metroCertificatePath: 
   metroCertificatePassword: 
-  metroCertificateSubject: XRTK
-  metroCertificateIssuer: XRTK
-  metroCertificateNotAfter: 003728c01fdad501
+  metroCertificateSubject: 
+  metroCertificateIssuer: 
+  metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: XRTK-Core
   wsaImages: {}
   metroTileShortName: XRTK-Core

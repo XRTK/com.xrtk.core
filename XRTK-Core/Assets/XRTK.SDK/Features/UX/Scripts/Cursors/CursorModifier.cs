@@ -34,7 +34,7 @@ namespace XRTK.SDK.UX.Cursors
 
                 return hostTransform;
             }
-            set { hostTransform = value; }
+            set => hostTransform = value;
         }
 
         [SerializeField]
@@ -44,14 +44,8 @@ namespace XRTK.SDK.UX.Cursors
         /// <inheritdoc />
         public Vector3 CursorPositionOffset
         {
-            get
-            {
-                return cursorPositionOffset;
-            }
-            set
-            {
-                cursorPositionOffset = value;
-            }
+            get => cursorPositionOffset;
+            set => cursorPositionOffset = value;
         }
 
         [SerializeField]
@@ -61,14 +55,8 @@ namespace XRTK.SDK.UX.Cursors
         /// <inheritdoc />
         public bool SnapCursorPosition
         {
-            get
-            {
-                return snapCursorPosition;
-            }
-            set
-            {
-                snapCursorPosition = value;
-            }
+            get => snapCursorPosition;
+            set => snapCursorPosition = value;
         }
 
         [Tooltip("Scale of the cursor when looking at this GameObject.")]
@@ -78,14 +66,8 @@ namespace XRTK.SDK.UX.Cursors
         /// <inheritdoc />
         public Vector3 CursorScaleOffset
         {
-            get
-            {
-                return cursorScaleOffset;
-            }
-            set
-            {
-                cursorScaleOffset = value;
-            }
+            get => cursorScaleOffset;
+            set => cursorScaleOffset = value;
         }
 
         [SerializeField]
@@ -95,14 +77,8 @@ namespace XRTK.SDK.UX.Cursors
         /// <inheritdoc />
         public Vector3 CursorNormalOffset
         {
-            get
-            {
-                return cursorNormalOffset;
-            }
-            set
-            {
-                cursorNormalOffset = value;
-            }
+            get => cursorNormalOffset;
+            set => cursorNormalOffset = value;
         }
 
         [SerializeField]
@@ -112,14 +88,8 @@ namespace XRTK.SDK.UX.Cursors
         /// <inheritdoc />
         public bool UseGazeBasedNormal
         {
-            get
-            {
-                return useGazeBasedNormal;
-            }
-            set
-            {
-                useGazeBasedNormal = value;
-            }
+            get => useGazeBasedNormal;
+            set => useGazeBasedNormal = value;
         }
 
         [SerializeField]
@@ -129,14 +99,8 @@ namespace XRTK.SDK.UX.Cursors
         /// <inheritdoc />
         public bool HideCursorOnFocus
         {
-            get
-            {
-                return hideCursorOnFocus;
-            }
-            set
-            {
-                hideCursorOnFocus = value;
-            }
+            get => hideCursorOnFocus;
+            set => hideCursorOnFocus = value;
         }
 
         [SerializeField]

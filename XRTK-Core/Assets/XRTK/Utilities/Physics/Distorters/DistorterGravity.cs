@@ -12,20 +12,14 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public Vector3 LocalCenterOfGravity
         {
-            get { return localCenterOfGravity; }
-            set { localCenterOfGravity = value; }
+            get => localCenterOfGravity;
+            set => localCenterOfGravity = value;
         }
 
         public Vector3 WorldCenterOfGravity
         {
-            get
-            {
-                return transform.TransformPoint(localCenterOfGravity);
-            }
-            set
-            {
-                localCenterOfGravity = transform.InverseTransformPoint(value);
-            }
+            get => transform.TransformPoint(localCenterOfGravity);
+            set => localCenterOfGravity = transform.InverseTransformPoint(value);
         }
 
         [SerializeField]
@@ -33,8 +27,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public Vector3 AxisStrength
         {
-            get { return axisStrength; }
-            set { axisStrength = value; }
+            get => axisStrength;
+            set => axisStrength = value;
         }
 
         [Range(0f, 10f)]
@@ -43,7 +37,7 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public float Radius
         {
-            get { return radius; }
+            get => radius;
             set
             {
                 if (value < 0f)
@@ -66,8 +60,8 @@ namespace XRTK.Utilities.Physics.Distorters
 
         public AnimationCurve GravityStrength
         {
-            get { return gravityStrength; }
-            set { gravityStrength = value; }
+            get => gravityStrength;
+            set => gravityStrength = value;
         }
 
         /// <inheritdoc />

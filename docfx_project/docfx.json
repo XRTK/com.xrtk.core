@@ -1,0 +1,88 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "../XRTK-Core",
+          "exclude": [
+            "**/Builds/**",
+            "**/Library/**",
+            "**/Logs/**",
+            "**/Packages/**",
+            "**/ProjectSettings/**",
+            "**/Temp/**",
+            "**/ThirdParty/**",
+            "**/.vs/**"
+          ],
+          "files": [
+            "**.sln",
+            "**.csproj"
+          ]
+        }
+      ],
+      "dest": "api",
+      "disableGitFeatures": false,
+      "disableDefaultFilter": false
+    }
+  ],
+  "build": {
+    "xref": [
+      "https://stephenhodgson.github.io/UnityCsReference/xrefmap.yml"
+    ],
+    "xrefservice": [
+      "https://xref.docs.microsoft.com/query?uid={uid}"
+    ],
+    "content": [
+      {
+        "files": [
+          "api/**.yml",
+          "api/index.md"
+        ]
+      },
+      {
+        "files": [
+          "toc.yml",
+          "*.md"
+        ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "overwrite": [
+      {
+        "files": [
+          "apidoc/**.md"
+        ],
+        "exclude": [
+          "obj/**",
+          "../docs/**"
+        ]
+      }
+    ],
+    "globalMetadata": {
+      "_appTitle": "XRTK-Core",
+      "_appFooter": "(c) 2019 XRTK",
+      "_gitContribute": {
+        "repo": "https://github.com/XRTK/XRTK-Core",
+        "branch": "development"
+      }
+    },
+    "dest": "../docs",
+    "globalMetadataFiles": [],
+    "fileMetadataFiles": [],
+    "template": [
+      "default"
+    ],
+    "postProcessors": [],
+    "markdownEngineName": "markdig",
+    "noLangKeyword": false,
+    "keepFileLink": false,
+    "cleanupCacheHistory": false,
+    "disableGitFeatures": false
+  }
+}

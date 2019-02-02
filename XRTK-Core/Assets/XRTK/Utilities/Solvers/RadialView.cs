@@ -65,13 +65,7 @@ namespace XRTK.SDK.Utilities.Solvers
         /// <summary>
         /// Position to the view direction, or the movement direction, or the direction of the view cone.
         /// </summary>
-        private Vector3 ReferenceDirection
-        {
-            get
-            {
-                return SolverHandler.TransformTarget != null ? SolverHandler.TransformTarget.forward : Vector3.forward;
-            }
-        }
+        private Vector3 ReferenceDirection => SolverHandler.TransformTarget != null ? SolverHandler.TransformTarget.forward : Vector3.forward;
 
         /// <summary>
         /// The up direction to use for orientation.

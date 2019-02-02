@@ -27,11 +27,15 @@ namespace XRTK.Utilities.Lines.Renderers
                 if (lineDataSource == null)
                 {
                     lineDataSource = GetComponent<BaseMixedRealityLineDataProvider>();
-                    var lineDataType = lineDataSource.GetType();
 
-                    if (lineDataType == typeof(RectangleLineDataProvider))
+                    if (lineDataSource != null)
                     {
-                        StepMode = StepMode.FromSource;
+                        var lineDataType = lineDataSource.GetType();
+
+                        if (lineDataType == typeof(RectangleLineDataProvider))
+                        {
+                            StepMode = StepMode.FromSource;
+                        }
                     }
                 }
 
@@ -61,8 +65,8 @@ namespace XRTK.Utilities.Lines.Renderers
         /// </summary>
         public Gradient LineColor
         {
-            get { return lineColor; }
-            set { lineColor = value; }
+            get => lineColor;
+            set => lineColor = value;
         }
 
         [SerializeField]
@@ -70,8 +74,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public AnimationCurve LineWidth
         {
-            get { return lineWidth; }
-            set { lineWidth = value; }
+            get => lineWidth;
+            set => lineWidth = value;
         }
 
         [Range(0.01f, 10f)]
@@ -80,8 +84,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public float WidthMultiplier
         {
-            get { return widthMultiplier; }
-            set { widthMultiplier = Mathf.Clamp(value, 0f, 10f); }
+            get => widthMultiplier;
+            set => widthMultiplier = Mathf.Clamp(value, 0f, 10f);
         }
 
         [Header("Offsets")]
@@ -96,8 +100,8 @@ namespace XRTK.Utilities.Lines.Renderers
         /// </summary>
         public float ColorOffset
         {
-            get { return colorOffset; }
-            set { colorOffset = Mathf.Clamp(value, 0f, 10f); }
+            get => colorOffset;
+            set => colorOffset = Mathf.Clamp(value, 0f, 10f);
         }
 
         [Range(0f, 10f)]
@@ -110,8 +114,8 @@ namespace XRTK.Utilities.Lines.Renderers
         /// </summary>
         public float WidthOffset
         {
-            get { return widthOffset; }
-            set { widthOffset = Mathf.Clamp(value, 0f, 10f); }
+            get => widthOffset;
+            set => widthOffset = Mathf.Clamp(value, 0f, 10f);
         }
 
         [Header("Point Placement")]
@@ -125,8 +129,8 @@ namespace XRTK.Utilities.Lines.Renderers
         /// </summary>
         public StepMode StepMode
         {
-            get { return stepMode; }
-            set { stepMode = value; }
+            get => stepMode;
+            set => stepMode = value;
         }
 
         [Range(2, 2048)]
@@ -139,8 +143,8 @@ namespace XRTK.Utilities.Lines.Renderers
         /// </summary>
         public int LineStepCount
         {
-            get { return lineStepCount; }
-            set { lineStepCount = Mathf.Clamp(value, 2, 2048); }
+            get => lineStepCount;
+            set => lineStepCount = Mathf.Clamp(value, 2, 2048);
         }
 
         /// <summary>
@@ -176,7 +180,7 @@ namespace XRTK.Utilities.Lines.Renderers
 #if UNITY_EDITOR
         protected virtual void OnDrawGizmos()
         {
-            if (Application.isPlaying) { return; }
+            if (UnityEditor.Selection.activeGameObject == gameObject || Application.isPlaying) { return; }
 
             if (lineDataSource == null)
             {
@@ -209,7 +213,7 @@ namespace XRTK.Utilities.Lines.Renderers
             Vector3 lastPos = firstPos;
 
             Color gColor = GetColor(0);
-            gColor.a = 0.5f;
+            gColor.a = 0.15f;
             Gizmos.color = gColor;
             Gizmos.DrawSphere(firstPos, GetWidth(0) * 0.5f);
 
@@ -222,7 +226,7 @@ namespace XRTK.Utilities.Lines.Renderers
                 Gizmos.color = gColor.Invert();
                 Gizmos.DrawLine(lastPos, currentPos);
 
-                gColor.a = 0.5f;
+                gColor.a = 0.15f;
                 Gizmos.color = gColor;
                 Gizmos.DrawSphere(currentPos, GetWidth(normalizedLength) * 0.5f);
 
@@ -242,7 +246,7 @@ namespace XRTK.Utilities.Lines.Renderers
             Vector3 lastPos = firstPos;
             Color gColor = GetColor(0f);
 
-            gColor.a = 0.5f;
+            gColor.a = 0.15f;
             Gizmos.color = gColor;
             Gizmos.DrawSphere(firstPos, GetWidth(0f) * 0.5f);
 
@@ -255,7 +259,7 @@ namespace XRTK.Utilities.Lines.Renderers
                 Gizmos.color = gColor.Invert();
                 Gizmos.DrawLine(lastPos, currentPos);
 
-                gColor.a = 0.5f;
+                gColor.a = 0.15f;
                 Gizmos.color = gColor;
                 Gizmos.DrawSphere(currentPos, GetWidth(normalizedLength) * 0.5f);
                 lastPos = currentPos;

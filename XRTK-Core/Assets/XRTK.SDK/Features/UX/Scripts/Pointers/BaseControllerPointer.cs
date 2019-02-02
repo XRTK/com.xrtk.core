@@ -168,7 +168,7 @@ namespace XRTK.SDK.UX.Pointers
         /// <inheritdoc cref="IMixedRealityController" />
         public override IMixedRealityController Controller
         {
-            get { return base.Controller; }
+            get => base.Controller;
             set
             {
                 base.Controller = value;
@@ -198,7 +198,7 @@ namespace XRTK.SDK.UX.Pointers
         /// <inheritdoc />
         public string PointerName
         {
-            get { return pointerName; }
+            get => pointerName;
             set
             {
                 pointerName = value;
@@ -266,7 +266,7 @@ namespace XRTK.SDK.UX.Pointers
 
                 return pointerExtent;
             }
-            set { pointerExtent = value; }
+            set => pointerExtent = value;
         }
 
         /// <inheritdoc />
@@ -298,16 +298,11 @@ namespace XRTK.SDK.UX.Pointers
         /// <inheritdoc />
         public virtual float PointerOrientation
         {
-            get
-            {
-                return pointerOrientation + (raycastOrigin != null ? raycastOrigin.eulerAngles.y : transform.eulerAngles.y);
-            }
-            set
-            {
-                pointerOrientation = value < 0
-                    ? Mathf.Clamp(value, -360f, 0f)
-                    : Mathf.Clamp(value, 0f, 360f);
-            }
+            get => pointerOrientation + (raycastOrigin != null ? raycastOrigin.eulerAngles.y : transform.eulerAngles.y);
+            set =>
+                    pointerOrientation = value < 0
+                            ? Mathf.Clamp(value, -360f, 0f)
+                            : Mathf.Clamp(value, 0f, 360f);
         }
 
         /// <inheritdoc />

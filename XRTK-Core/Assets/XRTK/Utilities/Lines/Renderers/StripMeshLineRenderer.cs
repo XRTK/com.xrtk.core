@@ -22,7 +22,13 @@ namespace XRTK.Utilities.Lines.Renderers
 
         private Mesh stripMesh;
         private Material lineMatInstance;
+
+        [SerializeField]
+        [HideInInspector]
         private MeshRenderer stripMeshRenderer;
+
+        [SerializeField]
+        [HideInInspector]
         private GameObject meshRendererGameObject;
 
         private readonly List<Vector3> positions = new List<Vector3>();
@@ -67,6 +73,38 @@ namespace XRTK.Utilities.Lines.Renderers
             stripMeshFilter.sharedMesh = stripMesh;
         }
 
+        public void Update()
+        {
+            if (stripMeshRenderer == null)
+            {
+                Debug.LogError("Strip mesh renderer has been destroyed - disabling");
+                enabled = false;
+            }
+
+            if (!LineDataSource.enabled)
+            {
+                stripMeshRenderer.enabled = false;
+                return;
+            }
+
+            stripMeshRenderer.enabled = true;
+            positions.Clear();
+            forwards.Clear();
+            colors.Clear();
+            widths.Clear();
+
+            for (int i = 0; i <= LineStepCount; i++)
+            {
+                float normalizedDistance = (1f / (LineStepCount - 1)) * i;
+                positions.Add(LineDataSource.GetPoint(normalizedDistance));
+                colors.Add(GetColor(normalizedDistance));
+                widths.Add(GetWidth(normalizedDistance));
+                forwards.Add(LineDataSource.GetVelocity(normalizedDistance));
+            }
+
+            GenerateStripMesh(positions, colors, widths, uvOffset, forwards, stripMesh, LineDataSource.LineTransform.up);
+        }
+
         private void OnDisable()
         {
             if (lineMatInstance != null)
@@ -95,33 +133,7 @@ namespace XRTK.Utilities.Lines.Renderers
             }
         }
 
-        public void Update()
-        {
-            if (!LineDataSource.enabled)
-            {
-                stripMeshRenderer.enabled = false;
-                return;
-            }
-
-            stripMeshRenderer.enabled = true;
-            positions.Clear();
-            forwards.Clear();
-            colors.Clear();
-            widths.Clear();
-
-            for (int i = 0; i <= LineStepCount; i++)
-            {
-                float normalizedDistance = (1f / (LineStepCount - 1)) * i;
-                positions.Add(LineDataSource.GetPoint(normalizedDistance));
-                colors.Add(GetColor(normalizedDistance));
-                widths.Add(GetWidth(normalizedDistance));
-                forwards.Add(LineDataSource.GetRotation(normalizedDistance) * Vector3.down);
-            }
-
-            GenerateStripMesh(positions, colors, widths, uvOffset, forwards, stripMesh);
-        }
-
-        public static void GenerateStripMesh(List<Vector3> positionList, List<Color> colorList, List<float> thicknessList, float uvOffsetLocal, List<Vector3> forwardList, Mesh mesh)
+        public static void GenerateStripMesh(List<Vector3> positionList, List<Color> colorList, List<float> thicknessList, float uvOffsetLocal, List<Vector3> forwardList, Mesh mesh, Vector3 up)
         {
             int vertexCount = positionList.Count * 2;
             int colorCount = colorList.Count * 2;
@@ -146,7 +158,7 @@ namespace XRTK.Utilities.Lines.Renderers
             {
                 int index = (int)(x * 0.5f);
                 Vector3 forward = forwardList[index];
-                Vector3 right = Vector3.Cross(forward, Vector3.up).normalized;
+                Vector3 right = Vector3.Cross(forward, up).normalized;
                 float thickness = thicknessList[index] * 0.5f;
                 stripMeshVertices[2 * x] = positionList[x] - right * thickness;
                 stripMeshVertices[2 * x + 1] = positionList[x] + right * thickness;

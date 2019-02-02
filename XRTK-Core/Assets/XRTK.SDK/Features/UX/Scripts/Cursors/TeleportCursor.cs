@@ -27,7 +27,7 @@ namespace XRTK.SDK.UX.Cursors
         /// <inheritdoc />
         public override IMixedRealityPointer Pointer
         {
-            get { return pointer; }
+            get => pointer;
             set
             {
                 Debug.Assert(value.GetType() == typeof(TeleportPointer) ||

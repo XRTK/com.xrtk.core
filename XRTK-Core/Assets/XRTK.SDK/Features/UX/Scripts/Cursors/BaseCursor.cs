@@ -70,7 +70,7 @@ namespace XRTK.SDK.UX.Cursors
         /// <inheritdoc />
         public virtual IMixedRealityPointer Pointer
         {
-            get { return pointer; }
+            get => pointer;
             set
             {
                 pointer = value;
@@ -84,8 +84,8 @@ namespace XRTK.SDK.UX.Cursors
         /// <inheritdoc />
         public float DefaultCursorDistance
         {
-            get { return defaultCursorDistance; }
-            set { defaultCursorDistance = value; }
+            get => defaultCursorDistance;
+            set => defaultCursorDistance = value;
         }
 
         [SerializeField]

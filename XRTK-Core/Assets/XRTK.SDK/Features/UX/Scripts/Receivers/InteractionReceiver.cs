@@ -34,8 +34,8 @@ namespace XRTK.SDK.UX.Receivers
         /// </summary>
         public List<GameObject> Interactables
         {
-            get { return interactables; }
-            private set { value = interactables; }
+            get => interactables;
+            private set => value = interactables;
         }
 
         [Tooltip("Targets for the receiver to affect")]
@@ -46,8 +46,8 @@ namespace XRTK.SDK.UX.Receivers
         /// </summary>
         public List<GameObject> Targets
         {
-            get { return targets; }
-            private set { value = targets; }
+            get => targets;
+            private set => value = targets;
         }
 
         #endregion Public Members

@@ -68,8 +68,8 @@ namespace XRTK.Definitions.InputSystem
         /// </summary>
         public SystemType GazeProviderType
         {
-            get { return gazeProviderType; }
-            internal set { gazeProviderType = value; }
+            get => gazeProviderType;
+            internal set => gazeProviderType = value;
         }
 
         [SerializeField]

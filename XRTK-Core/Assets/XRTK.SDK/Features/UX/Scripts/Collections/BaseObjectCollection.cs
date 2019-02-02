@@ -29,8 +29,8 @@ namespace XRTK.SDK.UX.Collections
         /// </summary>
         public bool IgnoreInactiveTransforms
         {
-            get { return ignoreInactiveTransforms; }
-            set { ignoreInactiveTransforms = value; }
+            get => ignoreInactiveTransforms;
+            set => ignoreInactiveTransforms = value;
         }
 
         [Tooltip("Type of sorting to use")]
@@ -42,8 +42,8 @@ namespace XRTK.SDK.UX.Collections
         /// </summary>
         public CollationOrderType SortType
         {
-            get { return sortType; }
-            set { sortType = value; }
+            get => sortType;
+            set => sortType = value;
         }
 
         /// <summary>

@@ -72,10 +72,7 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public Vector3 WorkingPosition
         {
-            get
-            {
-                return updateLinkedTransform ? SolverHandler.GoalPosition : transform.position;
-            }
+            get => updateLinkedTransform ? SolverHandler.GoalPosition : transform.position;
             protected set
             {
                 if (updateLinkedTransform)
@@ -94,10 +91,7 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public Quaternion WorkingRotation
         {
-            get
-            {
-                return updateLinkedTransform ? SolverHandler.GoalRotation : transform.rotation;
-            }
+            get => updateLinkedTransform ? SolverHandler.GoalRotation : transform.rotation;
             protected set
             {
                 if (updateLinkedTransform)
@@ -116,10 +110,7 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public Vector3 WorkingScale
         {
-            get
-            {
-                return updateLinkedTransform ? SolverHandler.GoalScale : transform.localScale;
-            }
+            get => updateLinkedTransform ? SolverHandler.GoalScale : transform.localScale;
             protected set
             {
                 if (updateLinkedTransform)

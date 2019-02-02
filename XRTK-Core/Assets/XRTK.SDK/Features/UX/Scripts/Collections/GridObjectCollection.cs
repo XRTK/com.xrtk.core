@@ -23,8 +23,8 @@ namespace XRTK.SDK.UX.Collections
         /// </summary>
         public ObjectOrientationSurfaceType SurfaceType
         {
-            get { return surfaceType; }
-            set { surfaceType = value; }
+            get => surfaceType;
+            set => surfaceType = value;
         }
 
         [Tooltip("Should the objects in the collection be rotated / how should they be rotated")]
@@ -36,8 +36,8 @@ namespace XRTK.SDK.UX.Collections
         /// </summary>
         public OrientationType OrientType
         {
-            get { return orientType; }
-            set { orientType = value; }
+            get => orientType;
+            set => orientType = value;
         }
 
         [Tooltip("Whether to sort objects by row first or by column first")]
@@ -49,8 +49,8 @@ namespace XRTK.SDK.UX.Collections
         /// </summary>
         public LayoutOrderType Layout
         {
-            get { return layout; }
-            set { layout = value; }
+            get => layout;
+            set => layout = value;
         }
 
         [Range(0.05f, 100.0f)]
@@ -63,8 +63,8 @@ namespace XRTK.SDK.UX.Collections
         /// </summary>
         public float Radius
         {
-            get { return radius; }
-            set { radius = value; }
+            get => radius;
+            set => radius = value;
         }
 
         [SerializeField]
@@ -77,8 +77,8 @@ namespace XRTK.SDK.UX.Collections
         /// </summary>
         public float RadialRange
         {
-            get { return radialRange; }
-            set { radialRange = value; }
+            get => radialRange;
+            set => radialRange = value;
         }
 
         [Tooltip("Number of rows per column")]
@@ -90,8 +90,8 @@ namespace XRTK.SDK.UX.Collections
         /// </summary>
         public int Rows
         {
-            get { return rows; }
-            set { rows = value; }
+            get => rows;
+            set => rows = value;
         }
 
         [Tooltip("Width of cell per object")]
@@ -103,8 +103,8 @@ namespace XRTK.SDK.UX.Collections
         /// </summary>
         public float CellWidth
         {
-            get { return cellWidth; }
-            set { cellWidth = value; }
+            get => cellWidth;
+            set => cellWidth = value;
         }
 
         [Tooltip("Height of cell per object")]
@@ -116,8 +116,8 @@ namespace XRTK.SDK.UX.Collections
         /// </summary>
         public float CellHeight
         {
-            get { return cellHeight; }
-            set { cellHeight = value; }
+            get => cellHeight;
+            set => cellHeight = value;
         }
 
         /// <summary>

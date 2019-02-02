@@ -24,8 +24,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public Material LineMaterial
         {
-            get { return lineMaterial; }
-            set { lineMaterial = value; }
+            get => lineMaterial;
+            set => lineMaterial = value;
         }
 
         [SerializeField]
@@ -33,8 +33,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public bool RoundedEdges
         {
-            get { return roundedEdges; }
-            set { roundedEdges = value; }
+            get => roundedEdges;
+            set => roundedEdges = value;
         }
 
         [SerializeField]
@@ -42,8 +42,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         public bool RoundedCaps
         {
-            get { return roundedCaps; }
-            set { roundedCaps = value; }
+            get => roundedCaps;
+            set => roundedCaps = value;
         }
 
         [SerializeField]
@@ -58,8 +58,13 @@ namespace XRTK.Utilities.Lines.Renderers
 
             if (lineMaterial == null)
             {
+                lineMaterial = lineRenderer.sharedMaterial;
+            }
+
+            if (lineMaterial == null)
+            {
                 Debug.LogError("MixedRealityLineRenderer needs a material.");
-                gameObject.SetActive(false);
+                enabled = false;
             }
         }
 
@@ -112,6 +117,11 @@ namespace XRTK.Utilities.Lines.Renderers
             // Set positions
             lineRenderer.positionCount = positions.Length;
             lineRenderer.SetPositions(positions);
+        }
+
+        private void OnDisable()
+        {
+            lineRenderer.enabled = false;
         }
     }
 }

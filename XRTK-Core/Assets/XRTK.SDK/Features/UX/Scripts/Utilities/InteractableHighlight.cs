@@ -35,10 +35,7 @@ namespace XRTK.SDK.UX.Utilities
 
         public bool Highlight
         {
-            get
-            {
-                return highlight;
-            }
+            get => highlight;
             set
             {
                 if (value != highlight)

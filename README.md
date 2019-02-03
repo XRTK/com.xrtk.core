@@ -43,8 +43,9 @@ Our philosophy is write it once, build it everywhere. We’d like to invite all 
 
 All the project GUIDs have been regenerated so there will not be conflicts between assets.
 
-To update any scrip references do a global find and replace for the following:
+To update any script references do a global find and replace for the following:
 - `Microsoft.MixedReality.Toolkit` -> `XRTK`
+- Check for any missing scripts in prefabs as e.g. `Pointer Click Handler, Canvas Utility, Mixed Reality Line Data Provider,...` has updated namespace
 
 # Roadmap
 

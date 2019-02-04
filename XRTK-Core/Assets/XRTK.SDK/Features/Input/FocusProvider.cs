@@ -428,7 +428,13 @@ namespace XRTK.SDK.Input
         {
             const string uiRayCastCameraName = "UIRaycastCamera";
             var cameraTransform = CameraCache.Main.transform;
-            var cameraObject = cameraTransform.Find(uiRayCastCameraName).gameObject;
+            var uiCameraTransform = cameraTransform.Find(uiRayCastCameraName);
+            GameObject cameraObject = null;
+
+            if (uiCameraTransform != null)
+            {
+                cameraObject = uiCameraTransform.gameObject;
+            }
 
             if (cameraObject == null)
             {

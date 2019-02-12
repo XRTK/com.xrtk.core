@@ -35,9 +35,9 @@ namespace XRTK.Inspectors.Profiles
         /// <param name="guiContent">The GUIContent for the field.</param>
         /// <param name="showAddButton">Optional flag to hide the create button.</param>
         /// <returns>True, if the profile changed.</returns>
-        protected static bool RenderProfile(SerializedProperty property, GUIContent guiContent, bool showAddButton = true)
+        protected static bool RenderProfile(SerializedProperty property, GUIContent guiContent, bool showAddButton = true, bool showCopyButton = true)
         {
-            return RenderProfileInternal(property, guiContent, showAddButton);
+            return RenderProfileInternal(property, guiContent, showAddButton,showCopyButton);
         }
 
         /// <summary>
@@ -46,12 +46,12 @@ namespace XRTK.Inspectors.Profiles
         /// <param name="property">the <see cref="BaseMixedRealityProfile"/> property.</param>
         /// <param name="showAddButton">Optional flag to hide the create button.</param>
         /// <returns>True, if the profile changed.</returns>
-        protected static bool RenderProfile(SerializedProperty property, bool showAddButton = true)
+        protected static bool RenderProfile(SerializedProperty property, bool showAddButton = true, bool showCopyButton = true)
         {
-            return RenderProfileInternal(property, null, showAddButton);
+            return RenderProfileInternal(property, null, showAddButton.showCopyButton);
         }
 
-        private static bool RenderProfileInternal(SerializedProperty property, GUIContent guiContent, bool showAddButton)
+        private static bool RenderProfileInternal(SerializedProperty property, GUIContent guiContent, bool showAddButton, bool showCopyButton = true)
         {
             bool changed = false;
             EditorGUILayout.BeginHorizontal();
@@ -67,43 +67,46 @@ namespace XRTK.Inspectors.Profiles
                 EditorGUILayout.PropertyField(property, guiContent);
             }
 
-            if (property.objectReferenceValue == null)
+            if (showCopyButton)
             {
-                if (showAddButton)
+                if (property.objectReferenceValue == null)
                 {
-                    if (GUILayout.Button(NewProfileContent, EditorStyles.miniButton, GUILayout.Width(20f)))
+                    if (showAddButton)
                     {
-                        var profileTypeName = property.type.Replace("PPtr<$", string.Empty).Replace(">", string.Empty);
-                        Debug.Assert(profileTypeName != null, "No Type Found");
+                        if (GUILayout.Button(NewProfileContent, EditorStyles.miniButton, GUILayout.Width(20f)))
+                        {
+                            var profileTypeName = property.type.Replace("PPtr<$", string.Empty).Replace(">", string.Empty);
+                            Debug.Assert(profileTypeName != null, "No Type Found");
 
-                        ScriptableObject instance = CreateInstance(profileTypeName);
-                        var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
-                        property.objectReferenceValue = newProfile;
-                        property.serializedObject.ApplyModifiedProperties();
-                        changed = true;
+                            ScriptableObject instance = CreateInstance(profileTypeName);
+                            var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
+                            property.objectReferenceValue = newProfile;
+                            property.serializedObject.ApplyModifiedProperties();
+                            changed = true;
+                        }
                     }
                 }
-            }
-            else
-            {
-                var renderedProfile = property.objectReferenceValue as BaseMixedRealityProfile;
-                Debug.Assert(renderedProfile != null);
-                Debug.Assert(profile != null, "No profile was set in OnEnable. Did you forget to call base.OnEnable in a derived profile class?");
-
-                if (!renderedProfile.IsCustomProfile && profile.IsCustomProfile)
+                else
                 {
-                    if (GUILayout.Button(new GUIContent("</>", "Replace with a copy of the default profile."), EditorStyles.miniButton, GUILayout.Width(32f)))
-                    {
-                        profileToCopy = renderedProfile;
-                        var typeName = renderedProfile.GetType().Name;
-                        Debug.Assert(typeName != null, "No Type Found");
+                    var renderedProfile = property.objectReferenceValue as BaseMixedRealityProfile;
+                    Debug.Assert(renderedProfile != null);
+                    Debug.Assert(profile != null, "No profile was set in OnEnable. Did you forget to call base.OnEnable in a derived profile class?");
 
-                        ScriptableObject instance = CreateInstance(typeName);
-                        var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
-                        property.objectReferenceValue = newProfile;
-                        property.serializedObject.ApplyModifiedProperties();
-                        PasteProfileValuesDelay(newProfile);
-                        changed = true;
+                    if (!renderedProfile.IsCustomProfile && profile.IsCustomProfile)
+                    {
+                        if (GUILayout.Button(new GUIContent("</>", "Replace with a copy of the default profile."), EditorStyles.miniButton, GUILayout.Width(32f)))
+                        {
+                            profileToCopy = renderedProfile;
+                            var typeName = renderedProfile.GetType().Name;
+                            Debug.Assert(typeName != null, "No Type Found");
+
+                            ScriptableObject instance = CreateInstance(typeName);
+                            var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
+                            property.objectReferenceValue = newProfile;
+                            property.serializedObject.ApplyModifiedProperties();
+                            PasteProfileValuesDelay(newProfile);
+                            changed = true;
+                        }
                     }
                 }
             }

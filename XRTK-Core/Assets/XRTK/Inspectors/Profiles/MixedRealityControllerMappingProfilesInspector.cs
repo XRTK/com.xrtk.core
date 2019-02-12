@@ -113,7 +113,7 @@ namespace XRTK.Inspectors.Profiles
                 }
 
                 EditorGUILayout.BeginHorizontal();
-                profileChanged |= RenderProfile(controllerProfile, new GUIContent(profileName), false);
+                profileChanged |= RenderProfile(controllerProfile, new GUIContent(profileName), false, false);
 
                 if (profileChanged && controllerProfile.objectReferenceValue != null)
                 {

@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
-using XRTK.Extensions.EditorClassExtensions;
-using XRTK.Utilities.Async;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Extensions.EditorClassExtensions;
 using XRTK.Services;
+using XRTK.Utilities.Async;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -16,10 +16,12 @@ namespace XRTK.Inspectors.Profiles
     public abstract class BaseMixedRealityProfileInspector : Editor
     {
         private const string IsCustomProfileProperty = "isCustomProfile";
-        private static readonly GUIContent NewProfileContent = new GUIContent("+", "Create New Profile");
 
-        private static BaseMixedRealityProfile profile;
+        private static readonly GUIContent NewProfileContent = new GUIContent("+", "Create New Profile");
+        private static readonly GUIContent CopyProfileContent = new GUIContent("</>", "Replace with a copy of the default profile.");
+
         private static SerializedObject targetProfile;
+        private static BaseMixedRealityProfile profile;
         private static BaseMixedRealityProfile profileToCopy;
 
         protected virtual void OnEnable()
@@ -69,19 +71,17 @@ namespace XRTK.Inspectors.Profiles
 
             if (property.objectReferenceValue == null)
             {
-                if (showAddButton)
+                if (showAddButton &&
+                    GUILayout.Button(NewProfileContent, EditorStyles.miniButton, GUILayout.Width(20f)))
                 {
-                    if (GUILayout.Button(NewProfileContent, EditorStyles.miniButton, GUILayout.Width(20f)))
-                    {
-                        var profileTypeName = property.type.Replace("PPtr<$", string.Empty).Replace(">", string.Empty);
-                        Debug.Assert(profileTypeName != null, "No Type Found");
+                    var profileTypeName = property.type.Replace("PPtr<$", string.Empty).Replace(">", string.Empty);
+                    Debug.Assert(profileTypeName != null, "No Type Found");
 
-                        ScriptableObject instance = CreateInstance(profileTypeName);
-                        var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
-                        property.objectReferenceValue = newProfile;
-                        property.serializedObject.ApplyModifiedProperties();
-                        changed = true;
-                    }
+                    ScriptableObject instance = CreateInstance(profileTypeName);
+                    var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
+                    property.objectReferenceValue = newProfile;
+                    property.serializedObject.ApplyModifiedProperties();
+                    changed = true;
                 }
             }
             else
@@ -90,21 +90,20 @@ namespace XRTK.Inspectors.Profiles
                 Debug.Assert(renderedProfile != null);
                 Debug.Assert(profile != null, "No profile was set in OnEnable. Did you forget to call base.OnEnable in a derived profile class?");
 
-                if (!renderedProfile.IsCustomProfile && profile.IsCustomProfile)
+                if (profile.IsCustomProfile &&
+                    !renderedProfile.IsCustomProfile &&
+                    GUILayout.Button(CopyProfileContent, EditorStyles.miniButton, GUILayout.Width(32f)))
                 {
-                    if (GUILayout.Button(new GUIContent("</>", "Replace with a copy of the default profile."), EditorStyles.miniButton, GUILayout.Width(32f)))
-                    {
-                        profileToCopy = renderedProfile;
-                        var typeName = renderedProfile.GetType().Name;
-                        Debug.Assert(typeName != null, "No Type Found");
+                    profileToCopy = renderedProfile;
+                    var typeName = renderedProfile.GetType().Name;
+                    Debug.Assert(typeName != null, "No Type Found");
 
-                        ScriptableObject instance = CreateInstance(typeName);
-                        var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
-                        property.objectReferenceValue = newProfile;
-                        property.serializedObject.ApplyModifiedProperties();
-                        PasteProfileValuesDelay(newProfile);
-                        changed = true;
-                    }
+                    ScriptableObject instance = CreateInstance(typeName);
+                    var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
+                    property.objectReferenceValue = newProfile;
+                    property.serializedObject.ApplyModifiedProperties();
+                    PasteProfileValuesDelay(newProfile);
+                    changed = true;
                 }
             }
 

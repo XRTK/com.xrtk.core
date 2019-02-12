@@ -95,10 +95,10 @@ namespace XRTK.Inspectors.Profiles
                     if (GUILayout.Button(new GUIContent("</>", "Replace with a copy of the default profile."), EditorStyles.miniButton, GUILayout.Width(32f)))
                     {
                         profileToCopy = renderedProfile;
-                        var profileTypeName = property.type.Replace("PPtr<$", string.Empty).Replace(">", string.Empty);
-                        Debug.Assert(profileTypeName != null, "No Type Found");
+                        var typeName = renderedProfile.GetType().Name;
+                        Debug.Assert(typeName != null, "No Type Found");
 
-                        ScriptableObject instance = CreateInstance(profileTypeName);
+                        ScriptableObject instance = CreateInstance(typeName);
                         var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
                         property.objectReferenceValue = newProfile;
                         property.serializedObject.ApplyModifiedProperties();

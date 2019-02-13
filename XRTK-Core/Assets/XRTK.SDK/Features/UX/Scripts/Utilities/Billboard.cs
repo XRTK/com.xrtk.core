@@ -44,7 +44,7 @@ namespace XRTK.SDK.UX.Utilities
         private void Update()
         {
             // Get a Vector that points from the target to the main camera.
-            Vector3 directionToTarget = targetTransform.position - transform.position;
+            Vector3 directionToTarget = TargetTransform.position - transform.position;
 
             bool useCameraAsUpVector = true;
 

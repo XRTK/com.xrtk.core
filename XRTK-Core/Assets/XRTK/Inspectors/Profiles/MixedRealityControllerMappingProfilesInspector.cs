@@ -1,15 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
-using XRTK.Extensions;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Providers.Controllers;
 using XRTK.Definitions;
+using XRTK.Extensions;
 using XRTK.Inspectors.Utilities;
+using XRTK.Providers.Controllers;
 using XRTK.Services;
-using Object = UnityEngine.Object;
 
 namespace XRTK.Inspectors.Profiles
 {

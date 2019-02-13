@@ -16,8 +16,8 @@ MonoBehaviour:
   controllerMappings:
   - description: Windows Mixed Reality HoloLens Hand Input
     controllerType:
-      reference: XRTK.Providers.Controllers.WindowsMixedReality.WindowsMixedRealityController,
-        XRTK.Providers.Controllers.WindowsMixedReality
+      reference: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityController,
+        XRTK.WindowsMixedReality
     handedness: 0
     useCustomInteractionMappings: 0
     interactions:
@@ -179,8 +179,8 @@ MonoBehaviour:
       invertYAxis: 0
   - description: Windows Mixed Reality Motion Controller Left
     controllerType:
-      reference: XRTK.Providers.Controllers.WindowsMixedReality.WindowsMixedRealityController,
-        XRTK.Providers.Controllers.WindowsMixedReality
+      reference: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityController,
+        XRTK.WindowsMixedReality
     handedness: 1
     useCustomInteractionMappings: 0
     interactions:
@@ -342,8 +342,8 @@ MonoBehaviour:
       invertYAxis: 0
   - description: Windows Mixed Reality Motion Controller Right
     controllerType:
-      reference: XRTK.Providers.Controllers.WindowsMixedReality.WindowsMixedRealityController,
-        XRTK.Providers.Controllers.WindowsMixedReality
+      reference: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityController,
+        XRTK.WindowsMixedReality
     handedness: 2
     useCustomInteractionMappings: 0
     interactions:

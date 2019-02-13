@@ -12,7 +12,7 @@ namespace XRTK.Providers.Controllers
     public class MixedRealityControllerDataProvidersProfile : BaseMixedRealityProfile
     {
         [SerializeField]
-        private ControllerDataProviderConfiguration[] registeredControllerDataProviders = null;
+        private ControllerDataProviderConfiguration[] registeredControllerDataProviders = new ControllerDataProviderConfiguration[0];
 
         /// <summary>
         /// The currently registered controller data providers for this input system.

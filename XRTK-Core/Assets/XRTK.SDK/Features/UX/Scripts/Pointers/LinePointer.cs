@@ -30,8 +30,9 @@ namespace XRTK.SDK.UX.Pointers
         [SerializeField]
         protected Gradient LineColorLockFocus = new Gradient();
 
-        [Range(2, 100)]
+        [Range(2, 50)]
         [SerializeField]
+        [Tooltip("This setting has a high performance cost. Values above 20 are not recommended.")]
         protected int LineCastResolution = 25;
 
         [SerializeField]

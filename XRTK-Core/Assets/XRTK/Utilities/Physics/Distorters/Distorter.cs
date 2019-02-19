@@ -16,6 +16,8 @@ namespace XRTK.Utilities.Physics.Distorters
         [SerializeField]
         private float distortStrength = 1f;
 
+        public bool DistortionEnabled { get; private set; } = false;
+
         public float DistortStrength
         {
             get => distortStrength;
@@ -56,11 +58,6 @@ namespace XRTK.Utilities.Physics.Distorters
         /// <returns></returns>
         public Vector3 DistortPoint(Vector3 point, float strength = 1f)
         {
-            if (!isActiveAndEnabled)
-            {
-                return point;
-            }
-
             strength = Mathf.Clamp01(strength * DistortStrength);
 
             return strength <= 0 ? point : DistortPointInternal(point, strength);
@@ -103,8 +100,15 @@ namespace XRTK.Utilities.Physics.Distorters
 
         #region MonoBehaviour Implementation
 
-        // Used implicitly for enable/disable functionality of the MonoBehaviour
-        protected virtual void Update() { }
+        protected virtual void OnEnable()
+        {
+            DistortionEnabled = true;
+        }
+
+        private void OnDisable()
+        {
+            DistortionEnabled = false;
+        }
 
         #endregion MonoBehaviour Implementation
     }

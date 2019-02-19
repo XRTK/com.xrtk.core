@@ -14,6 +14,10 @@ To improve this situation, our vision is to provide a complete cross-platform so
 
 Our philosophy is write it once, build it everywhere. We’d like to invite all the major hardware vendors to help guide their platform specific implementations, from Microsoft’s Windows Mixed Reality and Magic Leap’s Lumin OS to Google’s ARCore and Apple’s ARKit.
 
+# Community
+
+[Join us on Slack](https://holodevelopersslack.azurewebsites.net/)
+
 # Build Status
 
 | Branches | Windows Build Agent | Mac Build Agent | Linux Build Agent |

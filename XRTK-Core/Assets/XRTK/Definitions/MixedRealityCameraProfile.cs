@@ -8,7 +8,7 @@ using XRTK.Utilities;
 namespace XRTK.Definitions
 {
     /// <summary>
-    /// This Scriptable Object tells you if your head mounted display (HMD)
+    /// This <see cref="ScriptableObject"/> tells you if your head mounted display (HMD)
     /// is a transparent device or an occluded device.
     /// Based on those values, you can customize your camera and quality settings.
     /// </summary>

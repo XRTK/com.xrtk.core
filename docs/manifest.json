@@ -9,7 +9,7 @@
       "output": {
         ".html": {
           "relative_path": "api/index.html",
-          "hash": "xrI30LjWHZ0VnTHA/jsBlw=="
+          "hash": "vQDqehdcJXGEq3Xt6Wwzdw=="
         }
       },
       "is_incremental": false,
@@ -21,7 +21,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "cU+wU9bq8XrS7IGIxp1b5g=="
+          "hash": "LVmTNqDOotV+WNPEn6jsJg=="
         }
       },
       "is_incremental": false,
@@ -47,7 +47,8 @@
         "details": "Cannot build incrementally because last build info is missing.",
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0
+        "skipped_file_count": 0,
+        "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
         "TocDocumentProcessor": {

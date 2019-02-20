@@ -129,7 +129,7 @@ namespace XRTK.Inspectors.Utilities
             {
                 if (darkThemeLogo == null)
                 {
-                    darkThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/Resources/Textures/XRTK_Logo_Black.png", typeof(Texture2D));
+                    darkThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/StandardAssets/Textures/XRTK_Logo_Black.png", typeof(Texture2D));
                 }
 
                 return darkThemeLogo;
@@ -144,7 +144,7 @@ namespace XRTK.Inspectors.Utilities
             {
                 if (lightThemeLogo == null)
                 {
-                    lightThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/Resources/Textures/XRTK_Logo_White.png", typeof(Texture2D));
+                    lightThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/StandardAssets/Textures/XRTK_Logo_White.png", typeof(Texture2D));
                 }
 
                 return lightThemeLogo;

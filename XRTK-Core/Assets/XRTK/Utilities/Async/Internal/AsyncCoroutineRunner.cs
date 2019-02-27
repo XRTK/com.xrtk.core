@@ -50,18 +50,21 @@ namespace XRTK.Utilities.Async.Internal
                     {
                         instance = instanceGameObject.GetComponent<AsyncCoroutineRunner>();
 
-                        if (instance == null)
+                        if (instance != null)
                         {
-                            Debug.Log("[AsyncCoroutineRunner] Found GameObject but didn't have component");
+                            return instance;
 
-                            if (Application.isPlaying)
-                            {
-                                Destroy(instanceGameObject);
-                            }
-                            else
-                            {
-                                DestroyImmediate(instanceGameObject);
-                            }
+                        }
+
+                        Debug.Log("[AsyncCoroutineRunner] Found GameObject but didn't have component");
+
+                        if (Application.isPlaying)
+                        {
+                            Destroy(instanceGameObject);
+                        }
+                        else
+                        {
+                            DestroyImmediate(instanceGameObject);
                         }
                     }
 

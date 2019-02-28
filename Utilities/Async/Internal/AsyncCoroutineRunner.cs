@@ -50,30 +50,31 @@ namespace XRTK.Utilities.Async.Internal
                     {
                         instance = instanceGameObject.GetComponent<AsyncCoroutineRunner>();
 
-                        if (instance != null)
+                        if (instance == null)
                         {
-                            return instance;
+                            Debug.Log("[AsyncCoroutineRunner] Found GameObject but didn't have component");
 
-                        }
-
-                        Debug.Log("[AsyncCoroutineRunner] Found GameObject but didn't have component");
-
-                        if (Application.isPlaying)
-                        {
-                            Destroy(instanceGameObject);
-                        }
-                        else
-                        {
-                            DestroyImmediate(instanceGameObject);
+                            if (Application.isPlaying)
+                            {
+                                Destroy(instanceGameObject);
+                            }
+                            else
+                            {
+                                DestroyImmediate(instanceGameObject);
+                            }
                         }
                     }
-
-                    instance = new GameObject("AsyncCoroutineRunner").AddComponent<AsyncCoroutineRunner>();
-                    instance.gameObject.hideFlags = HideFlags.HideInHierarchy;
-#if !UNITY_EDITOR
-                    DontDestroyOnLoad(instance);
-#endif
                 }
+
+                if (instance == null)
+                {
+                    instance = new GameObject("AsyncCoroutineRunner").AddComponent<AsyncCoroutineRunner>();
+                }
+
+                instance.gameObject.hideFlags = HideFlags.HideInHierarchy;
+#if !UNITY_EDITOR
+                DontDestroyOnLoad(instance);
+#endif
 
                 return instance;
             }

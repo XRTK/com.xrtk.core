@@ -34,12 +34,12 @@ namespace XRTK.Extensions
         }
 
         /// <summary>
-        /// Get the 
+        /// Get the built in type value from bytes.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="input"></param>
-        /// <exception cref="ArgumentException">the <see cref="T"/> parameter is not a built in type.</exception>
-        /// <returns>The value of <see cref="T"/></returns>
+        /// <exception cref="ArgumentException">the type parameter is not a built in type.</exception>
+        /// <returns>The value</returns>
         public static T GetBuiltInTypeValueFromBytes<T>(this byte[] input)
         {
             if (typeof(T) == typeof(bool))

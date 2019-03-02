@@ -64,13 +64,17 @@ namespace XRTK.Utilities.Async.Internal
                             }
                         }
                     }
-
-                    instance = new GameObject("AsyncCoroutineRunner").AddComponent<AsyncCoroutineRunner>();
-                    instance.gameObject.hideFlags = HideFlags.HideInHierarchy;
-#if !UNITY_EDITOR
-                    DontDestroyOnLoad(instance);
-#endif
                 }
+
+                if (instance == null)
+                {
+                    instance = new GameObject("AsyncCoroutineRunner").AddComponent<AsyncCoroutineRunner>();
+                }
+
+                instance.gameObject.hideFlags = HideFlags.HideInHierarchy;
+#if !UNITY_EDITOR
+                DontDestroyOnLoad(instance);
+#endif
 
                 return instance;
             }

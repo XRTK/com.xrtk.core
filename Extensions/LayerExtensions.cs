@@ -74,7 +74,7 @@ namespace XRTK.Extensions
         /// Gets a valid layer layer id using the layer name.
         /// </summary>
         /// <param name="cache">The cached layer id.</param>
-        /// <param name="layerName">The name of the layer to look for if the <see cref="cache"/> is unset.</param>
+        /// <param name="layerName">The name of the layer to look for if the cache is unset.</param>
         /// <returns>The layer id.</returns>
         public static int GetLayerId(ref int cache, string layerName)
         {

@@ -139,14 +139,22 @@ namespace XRTK.SDK.UX.Pointers
         {
             base.Start();
 
-            if (lateRegisterTeleport)
+            if (lateRegisterTeleport && MixedRealityToolkit.Instance.ActiveProfile.IsTeleportSystemEnabled)
             {
                 await new WaitUntil(() => MixedRealityToolkit.TeleportSystem != null);
+
+                // We've been destroyed during the await.
+                if (this == null) { return; }
+
                 lateRegisterTeleport = false;
                 MixedRealityToolkit.TeleportSystem.Register(gameObject);
             }
 
             await WaitUntilInputSystemValid;
+
+            // We've been destroyed during the await.
+            if (this == null) { return; }
+
             SetCursor();
         }
 

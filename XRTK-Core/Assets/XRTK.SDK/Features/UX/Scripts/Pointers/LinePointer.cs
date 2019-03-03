@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using UnityEngine;
 using XRTK.Definitions.Physics;
 using XRTK.Utilities.Lines.DataProviders;
 using XRTK.Utilities.Lines.Renderers;
 using XRTK.Utilities.Physics.Distorters;
-using UnityEngine;
 
 namespace XRTK.SDK.UX.Pointers
 {
@@ -33,7 +33,7 @@ namespace XRTK.SDK.UX.Pointers
         [Range(2, 50)]
         [SerializeField]
         [Tooltip("This setting has a high performance cost. Values above 20 are not recommended.")]
-        protected int LineCastResolution = 25;
+        protected int LineCastResolution = 10;
 
         [SerializeField]
         private BaseMixedRealityLineDataProvider lineBase;
@@ -150,7 +150,7 @@ namespace XRTK.SDK.UX.Pointers
             for (int i = 0; i < Rays.Length; i++)
             {
                 Vector3 currentPoint = lineBase.GetUnClampedPoint(stepSize * (i + 1));
-                Rays[i] = new RayStep(lastPoint, currentPoint);
+                Rays[i].UpdateRayStep(ref lastPoint, ref currentPoint);
                 lastPoint = currentPoint;
             }
         }

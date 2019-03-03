@@ -105,20 +105,6 @@ namespace XRTK.SDK.UX
 
         #endregion Enums
 
-        #region Constraints
-
-        private const int LeftTopBack = 0;
-        private const int LeftTopFront = 1;
-        private const int LeftBottomFront = 2;
-        private const int LeftBottomBack = 3;
-        private const int RightTopBack = 4;
-        private const int RightTopFront = 5;
-        private const int RightBottomFront = 6;
-        private const int RightBottomBack = 7;
-        private const int CORNER_COUNT = 8;
-
-        #endregion Constraints
-
         #region Serialized Fields
 
         [Header("Bounds Calculation")]
@@ -269,7 +255,7 @@ namespace XRTK.SDK.UX
         private BoxCollider cachedTargetCollider;
         private Bounds cachedTargetColliderBounds;
         private Vector3[] boundsCorners;
-        private Vector3 currentBoundsSize;
+        private Vector3 currentBoundsExtents;
         private BoundsCalculationMethod boundsMethod;
         private HandleMoveType handleMoveType = HandleMoveType.Point;
         private List<Transform> links;
@@ -718,7 +704,6 @@ namespace XRTK.SDK.UX
             if (childRenderers.Length > 0)
             {
                 bounds = childRenderers[0].bounds;
-                var _corners = new Vector3[CORNER_COUNT];
 
                 for (int i = 0; i < childRenderers.Length; ++i)
                 {
@@ -727,7 +712,7 @@ namespace XRTK.SDK.UX
 
                 GetCornerPositionsFromBounds(bounds, ref boundsCorners);
 
-                for (int cornerIndex = 0; cornerIndex < _corners.Length; ++cornerIndex)
+                for (int cornerIndex = 0; cornerIndex < boundsCorners.Length; ++cornerIndex)
                 {
                     GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     cube.name = cornerIndex.ToString();
@@ -852,14 +837,14 @@ namespace XRTK.SDK.UX
             if (boundsCorners != null && edgeCenters != null)
             {
                 edgeCenters[0] = (boundsCorners[0] + boundsCorners[1]) * 0.5f;
-                edgeCenters[1] = (boundsCorners[1] + boundsCorners[2]) * 0.5f;
-                edgeCenters[2] = (boundsCorners[2] + boundsCorners[3]) * 0.5f;
-                edgeCenters[3] = (boundsCorners[3] + boundsCorners[0]) * 0.5f;
+                edgeCenters[1] = (boundsCorners[0] + boundsCorners[2]) * 0.5f;
+                edgeCenters[2] = (boundsCorners[3] + boundsCorners[2]) * 0.5f;
+                edgeCenters[3] = (boundsCorners[3] + boundsCorners[1]) * 0.5f;
 
                 edgeCenters[4] = (boundsCorners[4] + boundsCorners[5]) * 0.5f;
-                edgeCenters[5] = (boundsCorners[5] + boundsCorners[6]) * 0.5f;
-                edgeCenters[6] = (boundsCorners[6] + boundsCorners[7]) * 0.5f;
-                edgeCenters[7] = (boundsCorners[7] + boundsCorners[4]) * 0.5f;
+                edgeCenters[5] = (boundsCorners[4] + boundsCorners[6]) * 0.5f;
+                edgeCenters[6] = (boundsCorners[7] + boundsCorners[6]) * 0.5f;
+                edgeCenters[7] = (boundsCorners[7] + boundsCorners[5]) * 0.5f;
 
                 edgeCenters[8] = (boundsCorners[0] + boundsCorners[4]) * 0.5f;
                 edgeCenters[9] = (boundsCorners[1] + boundsCorners[5]) * 0.5f;
@@ -894,7 +879,7 @@ namespace XRTK.SDK.UX
         private Vector3 GetLinkDimensions()
         {
             float linkLengthAdjustor = wireframeShape == WireframeType.Cubic ? 2.0f : 1.0f - (6.0f * linkRadius);
-            return (currentBoundsSize * linkLengthAdjustor) + new Vector3(linkRadius, linkRadius, linkRadius);
+            return (currentBoundsExtents * linkLengthAdjustor) + new Vector3(linkRadius, linkRadius, linkRadius);
         }
 
         private void ResetHandleVisibility()
@@ -959,53 +944,37 @@ namespace XRTK.SDK.UX
 
         private void UpdateBounds()
         {
-            Vector3 boundsSize = Vector3.zero;
-            Vector3 centroid = Vector3.zero;
+            if (cachedTargetCollider == null) { return; }
 
-            //store current rotation then zero out the rotation so that the bounds
-            //are computed when the object is in its 'axis aligned orientation'.
+            // Store current rotation then zero out the rotation so that the bounds
+            // are computed when the object is in its 'axis aligned orientation'.
             Quaternion currentRotation = targetObject.transform.rotation;
             targetObject.transform.rotation = Quaternion.identity;
-
-            if (cachedTargetCollider != null)
-            {
-                if (cachedTargetCollider.transform.hasChanged)
-                {
-                    cachedTargetCollider.transform.hasChanged = false;
-                    cachedTargetColliderBounds = cachedTargetCollider.bounds;
-                }
-
-                boundsSize = cachedTargetColliderBounds.extents;
-                centroid = cachedTargetColliderBounds.center;
-            }
-
-            //after bounds are computed, restore rotation...
+            Physics.SyncTransforms(); // Update collider bounds
+            Vector3 boundsExtents = cachedTargetCollider.bounds.extents;
+            // After bounds are computed, restore rotation...
+            // ReSharper disable once Unity.InefficientPropertyAccess
             targetObject.transform.rotation = currentRotation;
+            Physics.SyncTransforms();
 
-            if (boundsSize != Vector3.zero)
+            if (boundsExtents != Vector3.zero)
             {
                 if (flattenAxis == FlattenModeType.FlattenAuto)
                 {
-                    float min = Mathf.Min(boundsSize.x, Mathf.Min(boundsSize.y, boundsSize.z));
-                    flattenAxis = min.Equals(boundsSize.x) ? FlattenModeType.FlattenX : (min.Equals(boundsSize.y) ? FlattenModeType.FlattenY : FlattenModeType.FlattenZ);
+                    float min = Mathf.Min(boundsExtents.x, Mathf.Min(boundsExtents.y, boundsExtents.z));
+                    flattenAxis = min.Equals(boundsExtents.x)
+                            ? FlattenModeType.FlattenX
+                            : (min.Equals(boundsExtents.y)
+                                    ? FlattenModeType.FlattenY
+                                    : FlattenModeType.FlattenZ);
                 }
 
-                boundsSize.x = flattenAxis == FlattenModeType.FlattenX ? 0.0f : boundsSize.x;
-                boundsSize.y = flattenAxis == FlattenModeType.FlattenY ? 0.0f : boundsSize.y;
-                boundsSize.z = flattenAxis == FlattenModeType.FlattenZ ? 0.0f : boundsSize.z;
+                boundsExtents.x = flattenAxis == FlattenModeType.FlattenX ? 0.0f : boundsExtents.x;
+                boundsExtents.y = flattenAxis == FlattenModeType.FlattenY ? 0.0f : boundsExtents.y;
+                boundsExtents.z = flattenAxis == FlattenModeType.FlattenZ ? 0.0f : boundsExtents.z;
+                currentBoundsExtents = boundsExtents;
 
-                currentBoundsSize = boundsSize;
-
-                boundsCorners[0] = centroid - new Vector3(centroid.x - currentBoundsSize.x, centroid.y - currentBoundsSize.y, centroid.z - currentBoundsSize.z);
-                boundsCorners[1] = centroid - new Vector3(centroid.x + currentBoundsSize.x, centroid.y - currentBoundsSize.y, centroid.z - currentBoundsSize.z);
-                boundsCorners[2] = centroid - new Vector3(centroid.x + currentBoundsSize.x, centroid.y + currentBoundsSize.y, centroid.z - currentBoundsSize.z);
-                boundsCorners[3] = centroid - new Vector3(centroid.x - currentBoundsSize.x, centroid.y + currentBoundsSize.y, centroid.z - currentBoundsSize.z);
-
-                boundsCorners[4] = centroid - new Vector3(centroid.x - currentBoundsSize.x, centroid.y - currentBoundsSize.y, centroid.z + currentBoundsSize.z);
-                boundsCorners[5] = centroid - new Vector3(centroid.x + currentBoundsSize.x, centroid.y - currentBoundsSize.y, centroid.z + currentBoundsSize.z);
-                boundsCorners[6] = centroid - new Vector3(centroid.x + currentBoundsSize.x, centroid.y + currentBoundsSize.y, centroid.z + currentBoundsSize.z);
-                boundsCorners[7] = centroid - new Vector3(centroid.x - currentBoundsSize.x, centroid.y + currentBoundsSize.y, centroid.z + currentBoundsSize.z);
-
+                GetCornerPositionsFromBounds(new Bounds(Vector3.zero, boundsExtents * 2.0f), ref boundsCorners);
                 CalculateEdgeCenters();
             }
         }
@@ -1152,28 +1121,22 @@ namespace XRTK.SDK.UX
 
         private static void GetCornerPositionsFromBounds(Bounds bounds, ref Vector3[] positions)
         {
-            Vector3 center = bounds.center;
-            Vector3 extents = bounds.extents;
-            float leftEdge = center.x - extents.x;
-            float rightEdge = center.x + extents.x;
-            float bottomEdge = center.y - extents.y;
-            float topEdge = center.y + extents.y;
-            float frontEdge = center.z - extents.z;
-            float backEdge = center.z + extents.z;
-
-            if (positions == null || positions.Length != CORNER_COUNT)
+            int numCorners = 1 << 3;
+            if (positions == null || positions.Length != numCorners)
             {
-                positions = new Vector3[CORNER_COUNT];
+                positions = new Vector3[numCorners];
             }
 
-            positions[LeftBottomFront] = new Vector3(leftEdge, bottomEdge, frontEdge);
-            positions[LeftBottomBack] = new Vector3(leftEdge, bottomEdge, backEdge);
-            positions[LeftTopFront] = new Vector3(leftEdge, topEdge, frontEdge);
-            positions[LeftTopBack] = new Vector3(leftEdge, topEdge, backEdge);
-            positions[RightBottomFront] = new Vector3(rightEdge, bottomEdge, frontEdge);
-            positions[RightBottomBack] = new Vector3(rightEdge, bottomEdge, backEdge);
-            positions[RightTopFront] = new Vector3(rightEdge, topEdge, frontEdge);
-            positions[RightTopBack] = new Vector3(rightEdge, topEdge, backEdge);
+            // Permutate all axes using minCorner and maxCorner.
+            Vector3 minCorner = bounds.center - bounds.extents;
+            Vector3 maxCorner = bounds.center + bounds.extents;
+            for (int c = 0; c < numCorners; c++)
+            {
+                positions[c] = new Vector3(
+                    (c & (1 << 0)) == 0 ? minCorner[0] : maxCorner[0],
+                    (c & (1 << 1)) == 0 ? minCorner[1] : maxCorner[1],
+                    (c & (1 << 2)) == 0 ? minCorner[2] : maxCorner[2]);
+            }
         }
 
         private static Vector3 PointToRay(Vector3 origin, Vector3 end, Vector3 closestPoint)

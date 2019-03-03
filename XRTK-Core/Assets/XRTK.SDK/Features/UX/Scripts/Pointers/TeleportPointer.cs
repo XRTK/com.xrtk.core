@@ -1,6 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
+using UnityEngine;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Physics;
 using XRTK.EventDatum.Input;
@@ -8,8 +10,6 @@ using XRTK.EventDatum.Teleport;
 using XRTK.Services;
 using XRTK.Utilities;
 using XRTK.Utilities.Physics;
-using System;
-using UnityEngine;
 
 namespace XRTK.SDK.UX.Pointers
 {
@@ -143,7 +143,7 @@ namespace XRTK.SDK.UX.Pointers
             for (int i = 0; i < Rays.Length; i++)
             {
                 Vector3 currentPoint = LineBase.GetUnClampedPoint(stepSize * (i + 1));
-                Rays[i] = new RayStep(lastPoint, currentPoint);
+                Rays[i].UpdateRayStep(ref lastPoint, ref currentPoint);
                 lastPoint = currentPoint;
             }
 

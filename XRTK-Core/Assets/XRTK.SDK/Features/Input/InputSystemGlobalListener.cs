@@ -29,6 +29,10 @@ namespace XRTK.SDK.Input
             if (lateInitialize)
             {
                 await WaitUntilInputSystemValid;
+
+                // We've been destroyed during the await.
+                if (this == null) { return; }
+
                 lateInitialize = false;
                 MixedRealityToolkit.InputSystem.Register(gameObject);
             }

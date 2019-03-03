@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
@@ -128,6 +129,16 @@ namespace XRTK.Utilities.Build
         }
 
         /// <summary>
+        /// Force Unity To Write Project Files
+        /// </summary>
+        public static void SyncSolution()
+        {
+            var syncVs = Type.GetType("UnityEditor.SyncVS,UnityEditor");
+            var syncSolution = syncVs.GetMethod("SyncSolution", BindingFlags.Public | BindingFlags.Static);
+            syncSolution.Invoke(null, null);
+        }
+
+        /// <summary>
         /// Start a build using Unity's command line.
         /// </summary>
         public static async void StartCommandLineBuild()
@@ -140,6 +151,7 @@ namespace XRTK.Utilities.Build
             bool success;
             try
             {
+                SyncSolution();
                 switch (EditorUserBuildSettings.activeBuildTarget)
                 {
                     case BuildTarget.WSAPlayer:

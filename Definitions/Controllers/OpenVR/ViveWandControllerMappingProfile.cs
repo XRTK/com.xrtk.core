@@ -13,6 +13,9 @@ namespace XRTK.Providers.Controllers.OpenVR
         /// <inheritdoc />
         public override SupportedControllerType ControllerType => SupportedControllerType.ViveWand;
 
+        /// <inheritdoc />
+        public override string TexturePath => $"{base.TexturePath}ViveWandController";
+
         protected override void Awake()
         {
             if (!HasSetupDefaults)

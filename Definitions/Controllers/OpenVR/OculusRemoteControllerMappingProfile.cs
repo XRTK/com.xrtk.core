@@ -12,6 +12,9 @@ namespace XRTK.Providers.Controllers.OpenVR
         /// <inheritdoc />
         public override SupportedControllerType ControllerType => SupportedControllerType.OculusRemote;
 
+        /// <inheritdoc />
+        public override string TexturePath => $"{base.TexturePath}OculusRemoteController";
+
         protected override void Awake()
         {
             if (!HasSetupDefaults)

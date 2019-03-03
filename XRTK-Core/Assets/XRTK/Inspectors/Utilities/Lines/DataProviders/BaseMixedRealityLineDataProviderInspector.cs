@@ -46,6 +46,7 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
         protected static float ManualUpVectorLength = 1f;
         protected static float RotationArrowLength = 0.5f;
 
+        private SerializedProperty transformMode;
         private SerializedProperty customLineTransform;
         private SerializedProperty lineStartClamp;
         private SerializedProperty lineEndClamp;
@@ -81,6 +82,7 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
             ManualUpVectorLength = SessionState.GetFloat(ManualUpVectorLengthKey, ManualUpVectorLength);
 
             LineData = (BaseMixedRealityLineDataProvider)target;
+            transformMode = serializedObject.FindProperty("transformMode");
             customLineTransform = serializedObject.FindProperty("customLineTransform");
             lineStartClamp = serializedObject.FindProperty("lineStartClamp");
             lineEndClamp = serializedObject.FindProperty("lineEndClamp");
@@ -197,6 +199,7 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
             {
                 EditorGUI.indentLevel++;
 
+                EditorGUILayout.PropertyField(transformMode);
                 EditorGUILayout.PropertyField(customLineTransform);
                 EditorGUILayout.PropertyField(lineStartClamp);
                 EditorGUILayout.PropertyField(lineEndClamp);

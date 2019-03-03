@@ -674,7 +674,7 @@ namespace XRTK.SDK.Input
             {
                 switch (pointerData.Pointer.RaycastMode)
                 {
-                    case RaycastModeType.Simple:
+                    case RaycastMode.Simple:
                         if (MixedRealityRaycaster.RaycastSimplePhysicsStep(pointerData.Pointer.Rays[i], prioritizedLayerMasks, out physicsHit))
                         {
                             // Set the pointer source's origin ray to this step
@@ -683,10 +683,10 @@ namespace XRTK.SDK.Input
                             rayStepIndex = i;
                         }
                         break;
-                    case RaycastModeType.Box:
+                    case RaycastMode.Box:
                         Debug.LogWarning("Box Raycasting Mode not supported for pointers.");
                         break;
-                    case RaycastModeType.Sphere:
+                    case RaycastMode.Sphere:
                         if (MixedRealityRaycaster.RaycastSpherePhysicsStep(pointerData.Pointer.Rays[i], pointerData.Pointer.SphereCastRadius, prioritizedLayerMasks, out physicsHit))
                         {
                             // Set the pointer source's origin ray to this step

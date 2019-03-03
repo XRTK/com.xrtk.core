@@ -10,7 +10,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 using UnityEditor;
-using UnityEditor.Build.Reporting;
 using UnityEngine;
 using XRTK.Utilities.Editor;
 using XRTK.Utilities.Editor.Usb;

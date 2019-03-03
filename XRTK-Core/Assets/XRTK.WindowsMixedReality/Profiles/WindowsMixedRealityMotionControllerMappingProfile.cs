@@ -16,6 +16,9 @@ namespace XRTK.WindowsMixedReality.Profiles
         /// <inheritdoc />
         public override SupportedControllerType ControllerType => SupportedControllerType.WindowsMixedReality;
 
+        /// <inheritdoc />
+        public override string TexturePath => $"{base.TexturePath}MotionController";
+
         protected override void Awake()
         {
             if (!HasSetupDefaults)

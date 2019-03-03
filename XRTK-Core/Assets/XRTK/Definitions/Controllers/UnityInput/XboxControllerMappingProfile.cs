@@ -12,6 +12,9 @@ namespace XRTK.Providers.Controllers.UnityInput.Profiles
         /// <inheritdoc />
         public override SupportedControllerType ControllerType => SupportedControllerType.Xbox;
 
+        /// <inheritdoc />
+        public override string TexturePath => $"{base.TexturePath}XboxController";
+
         protected override void Awake()
         {
             if (!HasSetupDefaults)

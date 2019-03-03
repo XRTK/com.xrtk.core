@@ -61,6 +61,6 @@ To update any script references do a global find and replace for the following:
     - [x] Main Readme
     - [x] Coding Guidelines
     - [x] [Contributor List](/CONTRIBUTORS.md)
-- [ ] Setup docfx website
+- [x] Setup docfx website
 - [ ] A simple package manager for submodules
     - [ ] Should interface and work with Unity's built in package manager

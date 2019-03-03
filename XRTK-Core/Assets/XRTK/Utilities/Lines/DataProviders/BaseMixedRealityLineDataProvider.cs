@@ -12,9 +12,12 @@ namespace XRTK.Utilities.Lines.DataProviders
     /// Base class that provides data about a line.
     /// </summary>
     /// <remarks>Data to be consumed by other classes like the <see cref="Renderers.BaseMixedRealityLineRenderer"/></remarks>
+    [ExecuteAlways]
     [DisallowMultipleComponent]
     public abstract class BaseMixedRealityLineDataProvider : MonoBehaviour
     {
+        private const float MaxLineEndClamp = 0.9999f;
+        private const float MinLineStartClamp = 0.0001f;
         private const float MinRotationMagnitude = 0.0001f;
 
         public float UnClampedWorldLength => GetUnClampedWorldLengthInternal();
@@ -72,6 +75,19 @@ namespace XRTK.Utilities.Lines.DataProviders
         {
             get => loops;
             set => loops = value;
+        }
+
+        [SerializeField]
+        [Tooltip("The transform mode used by the line. UseTransform will work when line is disabled, but at a performance cost. UseMatrix requires that the line be active and enabled to return accurate points.")]
+        private LinePointTransformMode transformMode = LinePointTransformMode.UseTransform;
+
+        /// <summary>
+        /// Defines how a base line data provider will transform its points
+        /// </summary>
+        public LinePointTransformMode TransformMode
+        {
+            get { return transformMode; }
+            set { transformMode = value; }
         }
 
         [SerializeField]
@@ -278,12 +294,19 @@ namespace XRTK.Utilities.Lines.DataProviders
 
         protected virtual void OnValidate()
         {
+            UpdateMatrix();
             distorters.Sort();
         }
 
         protected virtual void OnEnable()
         {
+            UpdateMatrix();
             distorters.Sort();
+        }
+
+        protected virtual void Update()
+        {
+            UpdateMatrix();
         }
 
         #endregion MonoBehaviour Implementation
@@ -370,7 +393,7 @@ namespace XRTK.Utilities.Lines.DataProviders
                     break;
                 case LineRotationMode.RelativeToOrigin:
                     Vector3 point = GetPoint(normalizedLength);
-                    Vector3 origin = LineTransform.TransformPoint(originOffset);
+                    Vector3 origin = TransformPoint(originOffset);
                     rotationVector = (point - origin).normalized;
                     break;
                 case LineRotationMode.None:
@@ -417,7 +440,7 @@ namespace XRTK.Utilities.Lines.DataProviders
         public Vector3 GetPoint(float normalizedLength)
         {
             normalizedLength = ClampedLength(normalizedLength);
-            return DistortPoint(LineTransform.TransformPoint(GetPointInternal(normalizedLength)), normalizedLength);
+            return DistortPoint(TransformPoint(GetPointInternal(normalizedLength)), normalizedLength);
         }
 
         /// <summary>
@@ -428,7 +451,7 @@ namespace XRTK.Utilities.Lines.DataProviders
         public Vector3 GetUnClampedPoint(float normalizedLength)
         {
             normalizedLength = Mathf.Clamp01(normalizedLength);
-            return DistortPoint(LineTransform.TransformPoint(GetPointInternal(normalizedLength)), normalizedLength);
+            return DistortPoint(TransformPoint(GetPointInternal(normalizedLength)), normalizedLength);
         }
 
         /// <summary>
@@ -444,7 +467,7 @@ namespace XRTK.Utilities.Lines.DataProviders
                 return Vector3.zero;
             }
 
-            return LineTransform.TransformPoint(GetPointInternal(pointIndex));
+            return TransformPoint(GetPointInternal(pointIndex));
         }
 
         /// <summary>
@@ -490,6 +513,53 @@ namespace XRTK.Utilities.Lines.DataProviders
             float length = GetNormalizedLengthFromWorldPosInternal(worldPosition, 0f, ref iteration, resolution, maxIterations, 0f, 1f);
             return length;
         }
+
+        private Vector3 InverseTransformPoint(Vector3 point)
+        {
+            switch (transformMode)
+            {
+                case LinePointTransformMode.UseTransform:
+                default:
+                    return LineTransform.InverseTransformPoint(point);
+                case LinePointTransformMode.UseMatrix:
+                    return worldToLocalMatrix.MultiplyPoint3x4(point);
+            }
+        }
+
+        private Vector3 TransformPoint(Vector3 point)
+        {
+            switch (transformMode)
+            {
+                case LinePointTransformMode.UseTransform:
+                default:
+                    return LineTransform.TransformPoint(point);
+                case LinePointTransformMode.UseMatrix:
+                    return localToWorldMatrix.MultiplyPoint3x4(point);
+            }
+        }
+
+        private void UpdateMatrix()
+        {
+            switch (transformMode)
+            {
+                case LinePointTransformMode.UseTransform:
+                default:
+                    return;
+                case LinePointTransformMode.UseMatrix:
+                    break;
+            }
+
+            Transform t = LineTransform;
+            if (t.hasChanged)
+            {
+                t.hasChanged = false;
+                localToWorldMatrix = LineTransform.localToWorldMatrix;
+                worldToLocalMatrix = LineTransform.worldToLocalMatrix;
+            }
+        }
+
+        private Matrix4x4 localToWorldMatrix;
+        private Matrix4x4 worldToLocalMatrix;
 
         private float GetNormalizedLengthFromWorldPosInternal(Vector3 worldPosition, float currentLength, ref int iteration, int resolution, int maxIterations, float start, float end)
         {
@@ -538,6 +608,11 @@ namespace XRTK.Utilities.Lines.DataProviders
 
         private Vector3 DistortPoint(Vector3 point, float normalizedLength)
         {
+            if (distorters.Count == 0)
+            {
+                return point;
+            }
+
             float strength = uniformDistortionStrength;
 
             if (distortionMode == DistortionMode.NormalizedLength)
@@ -547,11 +622,11 @@ namespace XRTK.Utilities.Lines.DataProviders
 
             for (int i = 0; i < distorters.Count; i++)
             {
-                // Components may be added or removed
-                if (distorters[i] != null)
-                {
-                    point = distorters[i].DistortPoint(point, strength);
-                }
+                Distorter distorter = distorters[i];
+
+                if (!distorter.DistortionEnabled) { continue; }
+
+                point = distorter.DistortPoint(point, strength);
             }
 
             return point;
@@ -559,7 +634,35 @@ namespace XRTK.Utilities.Lines.DataProviders
 
         private float ClampedLength(float normalizedLength)
         {
-            return Mathf.Lerp(Mathf.Max(lineStartClamp, 0.0001f), Mathf.Min(lineEndClamp, 0.9999f), Mathf.Clamp01(normalizedLength));
+            if (lineStartClamp < MinLineStartClamp)
+            {
+                lineStartClamp = MinLineStartClamp;
+            }
+            else if (lineStartClamp > MaxLineEndClamp)
+            {
+                lineStartClamp = MaxLineEndClamp;
+            }
+
+            if (lineEndClamp < MinLineStartClamp)
+            {
+                lineEndClamp = MinLineStartClamp;
+            }
+            else if (lineEndClamp > MaxLineEndClamp)
+            {
+                lineEndClamp = MaxLineEndClamp;
+            }
+
+            if (normalizedLength > 1)
+            {
+                return 1;
+            }
+
+            if (normalizedLength < 0)
+            {
+                return 0;
+            }
+
+            return Mathf.Lerp(lineStartClamp, lineEndClamp, normalizedLength);
         }
 
         private void OnDrawGizmos()

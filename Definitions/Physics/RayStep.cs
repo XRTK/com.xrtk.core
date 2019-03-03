@@ -67,7 +67,13 @@ namespace XRTK.Definitions.Physics
             return pos;
         }
 
-        public void UpdateRayStep(Vector3 origin, Vector3 terminus)
+        /// <summary>
+        /// Update current ray step with new origin and terminus points.
+        /// Pass by ref to avoid unnecessary struct copy into function since values will be copied anyways locally
+        /// </summary>
+        /// <param name="origin">beginning of ray step origin</param>
+        /// <param name="terminus">end of ray step</param>
+        public void UpdateRayStep(ref Vector3 origin, ref Vector3 terminus)
         {
             Origin = origin;
             Terminus = terminus;

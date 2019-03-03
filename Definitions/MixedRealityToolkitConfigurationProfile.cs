@@ -116,7 +116,7 @@ namespace XRTK.Definitions
         public bool IsBoundarySystemEnabled
         {
             get => boundarySystemType != null && boundarySystemType.Type != null && enableBoundarySystem && boundaryVisualizationProfile != null;
-            internal set => enableInputSystem = value;
+            internal set => enableBoundarySystem = value;
         }
 
         [SerializeField]

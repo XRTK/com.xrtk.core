@@ -14,6 +14,14 @@ namespace XRTK.Providers.Controllers
         [SerializeField]
         private List<BaseMixedRealityControllerMappingProfile> controllerMappingProfiles = new List<BaseMixedRealityControllerMappingProfile>();
 
+        /// <summary>
+        /// A list of all the Controller Mapping Profiles.
+        /// </summary>
+        public List<BaseMixedRealityControllerMappingProfile> ControllerMappingProfiles => controllerMappingProfiles;
+
+        /// <summary>
+        /// The list of controller mappings across all <see cref="ControllerMappingProfiles"/>.
+        /// </summary>
         public List<MixedRealityControllerMapping> MixedRealityControllerMappings
         {
             get

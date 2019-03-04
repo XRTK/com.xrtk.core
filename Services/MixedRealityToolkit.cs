@@ -917,8 +917,15 @@ namespace XRTK.Services
 
             if (!isInitializing)
             {
-                serviceInstance.Initialize();
-                serviceInstance.Enable();
+                try
+                {
+                    serviceInstance.Initialize();
+                    serviceInstance.Enable();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
 
             return true;
@@ -962,9 +969,16 @@ namespace XRTK.Services
 
             if (GetServiceByNameInternal(interfaceType, serviceName, out IMixedRealityService serviceInstance))
             {
-                serviceInstance.Disable();
-                serviceInstance.Destroy();
-                serviceInstance.Dispose();
+                try
+                {
+                    serviceInstance.Disable();
+                    serviceInstance.Destroy();
+                    serviceInstance.Dispose();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
 
                 if (IsCoreSystem(interfaceType))
                 {
@@ -1027,7 +1041,14 @@ namespace XRTK.Services
 
             for (int i = 0; i < services?.Count; i++)
             {
-                services[i].Enable();
+                try
+                {
+                    services[i].Enable();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
         }
 
@@ -1068,7 +1089,14 @@ namespace XRTK.Services
 
             for (int i = 0; i < services?.Count; i++)
             {
-                services[i].Disable();
+                try
+                {
+                    services[i].Disable();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
         }
 
@@ -1142,13 +1170,27 @@ namespace XRTK.Services
             // Initialize all systems
             foreach (var system in activeSystems)
             {
-                system.Value.Initialize();
+                try
+                {
+                    system.Value.Initialize();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
 
             // Initialize all registered runtime services
             foreach (var service in registeredMixedRealityServices)
             {
-                service.Item2.Initialize();
+                try
+                {
+                    service.Item2.Initialize();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
         }
 
@@ -1160,13 +1202,27 @@ namespace XRTK.Services
             // Reset all systems
             foreach (var system in activeSystems)
             {
-                system.Value.Reset();
+                try
+                {
+                    system.Value.Reset();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
 
             // Reset all registered runtime services
             foreach (var service in registeredMixedRealityServices)
             {
-                service.Item2.Reset();
+                try
+                {
+                    service.Item2.Reset();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
         }
 
@@ -1178,13 +1234,27 @@ namespace XRTK.Services
             // Enable all systems
             foreach (var system in activeSystems)
             {
-                system.Value.Enable();
+                try
+                {
+                    system.Value.Enable();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
 
             // Reset all registered runtime services
             foreach (var service in registeredMixedRealityServices)
             {
-                service.Item2.Enable();
+                try
+                {
+                    service.Item2.Enable();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
         }
 
@@ -1196,13 +1266,27 @@ namespace XRTK.Services
             // Update all systems
             foreach (var system in activeSystems)
             {
-                system.Value.Update();
+                try
+                {
+                    system.Value.Update();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
 
             // Update all registered runtime services
             foreach (var service in registeredMixedRealityServices)
             {
-                service.Item2.Update();
+                try
+                {
+                    service.Item2.Update();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
         }
 
@@ -1214,13 +1298,27 @@ namespace XRTK.Services
             // Disable all registered runtime services in reverse priority order
             for (var i = registeredMixedRealityServices.Count - 1; i >= 0; i--)
             {
-                registeredMixedRealityServices[i].Item2.Disable();
+                try
+                {
+                    registeredMixedRealityServices[i].Item2.Disable();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
 
             // Disable all systems
             foreach (var system in activeSystems)
             {
-                system.Value.Disable();
+                try
+                {
+                    system.Value.Disable();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
         }
 
@@ -1232,25 +1330,53 @@ namespace XRTK.Services
             // Destroy all registered runtime services in reverse priority order
             for (var i = registeredMixedRealityServices.Count - 1; i >= 0; i--)
             {
-                registeredMixedRealityServices[i].Item2.Destroy();
+                try
+                {
+                    registeredMixedRealityServices[i].Item2.Destroy();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
 
             // Destroy all systems
             foreach (var system in activeSystems)
             {
-                system.Value.Destroy();
+                try
+                {
+                    system.Value.Destroy();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
 
             // Dispose all registered runtime services in reverse priority order
             for (var i = registeredMixedRealityServices.Count - 1; i >= 0; i--)
             {
-                registeredMixedRealityServices[i].Item2.Dispose();
+                try
+                {
+                    registeredMixedRealityServices[i].Item2.Dispose();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
 
             // Dispose all systems
             foreach (var system in activeSystems)
             {
-                system.Value.Dispose();
+                try
+                {
+                    system.Value.Dispose();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
             }
 
             activeSystems.Clear();

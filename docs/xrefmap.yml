@@ -4651,12 +4651,15 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.Physics.RayStep.Terminus
   nameWithType: RayStep.Terminus
-- uid: XRTK.Definitions.Physics.RayStep.UpdateRayStep(UnityEngine.Vector3,UnityEngine.Vector3)
-  name: UpdateRayStep(Vector3, Vector3)
-  href: api/XRTK.Definitions.Physics.RayStep.html#XRTK_Definitions_Physics_RayStep_UpdateRayStep_UnityEngine_Vector3_UnityEngine_Vector3_
-  commentId: M:XRTK.Definitions.Physics.RayStep.UpdateRayStep(UnityEngine.Vector3,UnityEngine.Vector3)
-  fullName: XRTK.Definitions.Physics.RayStep.UpdateRayStep(UnityEngine.Vector3, UnityEngine.Vector3)
-  nameWithType: RayStep.UpdateRayStep(Vector3, Vector3)
+- uid: XRTK.Definitions.Physics.RayStep.UpdateRayStep(UnityEngine.Vector3@,UnityEngine.Vector3@)
+  name: UpdateRayStep(ref Vector3, ref Vector3)
+  href: api/XRTK.Definitions.Physics.RayStep.html#XRTK_Definitions_Physics_RayStep_UpdateRayStep_UnityEngine_Vector3__UnityEngine_Vector3__
+  commentId: M:XRTK.Definitions.Physics.RayStep.UpdateRayStep(UnityEngine.Vector3@,UnityEngine.Vector3@)
+  name.vb: UpdateRayStep(ByRef Vector3, ByRef Vector3)
+  fullName: XRTK.Definitions.Physics.RayStep.UpdateRayStep(ref UnityEngine.Vector3, ref UnityEngine.Vector3)
+  fullName.vb: XRTK.Definitions.Physics.RayStep.UpdateRayStep(ByRef UnityEngine.Vector3, ByRef UnityEngine.Vector3)
+  nameWithType: RayStep.UpdateRayStep(ref Vector3, ref Vector3)
+  nameWithType.vb: RayStep.UpdateRayStep(ByRef Vector3, ByRef Vector3)
 - uid: XRTK.Definitions.Physics.RayStep.UpdateRayStep*
   name: UpdateRayStep
   href: api/XRTK.Definitions.Physics.RayStep.html#XRTK_Definitions_Physics_RayStep_UpdateRayStep_
@@ -18597,6 +18600,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile.HasSetupDefaults
   nameWithType: BaseMixedRealityControllerMappingProfile.HasSetupDefaults
+- uid: XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile.TexturePath
+  name: TexturePath
+  href: api/XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile.html#XRTK_Providers_Controllers_BaseMixedRealityControllerMappingProfile_TexturePath
+  commentId: P:XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile.TexturePath
+  fullName: XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile.TexturePath
+  nameWithType: BaseMixedRealityControllerMappingProfile.TexturePath
+- uid: XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile.TexturePath*
+  name: TexturePath
+  href: api/XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile.html#XRTK_Providers_Controllers_BaseMixedRealityControllerMappingProfile_TexturePath_
+  commentId: Overload:XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile.TexturePath
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile.TexturePath
+  nameWithType: BaseMixedRealityControllerMappingProfile.TexturePath
 - uid: XRTK.Providers.Controllers.BaseSpeechDataProvider
   name: BaseSpeechDataProvider
   href: api/XRTK.Providers.Controllers.BaseSpeechDataProvider.html
@@ -18783,6 +18799,19 @@ references:
   commentId: T:XRTK.Providers.Controllers.MixedRealityControllerMappingProfiles
   fullName: XRTK.Providers.Controllers.MixedRealityControllerMappingProfiles
   nameWithType: MixedRealityControllerMappingProfiles
+- uid: XRTK.Providers.Controllers.MixedRealityControllerMappingProfiles.ControllerMappingProfiles
+  name: ControllerMappingProfiles
+  href: api/XRTK.Providers.Controllers.MixedRealityControllerMappingProfiles.html#XRTK_Providers_Controllers_MixedRealityControllerMappingProfiles_ControllerMappingProfiles
+  commentId: P:XRTK.Providers.Controllers.MixedRealityControllerMappingProfiles.ControllerMappingProfiles
+  fullName: XRTK.Providers.Controllers.MixedRealityControllerMappingProfiles.ControllerMappingProfiles
+  nameWithType: MixedRealityControllerMappingProfiles.ControllerMappingProfiles
+- uid: XRTK.Providers.Controllers.MixedRealityControllerMappingProfiles.ControllerMappingProfiles*
+  name: ControllerMappingProfiles
+  href: api/XRTK.Providers.Controllers.MixedRealityControllerMappingProfiles.html#XRTK_Providers_Controllers_MixedRealityControllerMappingProfiles_ControllerMappingProfiles_
+  commentId: Overload:XRTK.Providers.Controllers.MixedRealityControllerMappingProfiles.ControllerMappingProfiles
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.MixedRealityControllerMappingProfiles.ControllerMappingProfiles
+  nameWithType: MixedRealityControllerMappingProfiles.ControllerMappingProfiles
 - uid: XRTK.Providers.Controllers.MixedRealityControllerMappingProfiles.MixedRealityControllerMappings
   name: MixedRealityControllerMappings
   href: api/XRTK.Providers.Controllers.MixedRealityControllerMappingProfiles.html#XRTK_Providers_Controllers_MixedRealityControllerMappingProfiles_MixedRealityControllerMappings
@@ -19309,6 +19338,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteControllerMappingProfile.ControllerType
   nameWithType: OculusRemoteControllerMappingProfile.ControllerType
+- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteControllerMappingProfile.TexturePath
+  name: TexturePath
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteControllerMappingProfile.html#XRTK_Providers_Controllers_OpenVR_OculusRemoteControllerMappingProfile_TexturePath
+  commentId: P:XRTK.Providers.Controllers.OpenVR.OculusRemoteControllerMappingProfile.TexturePath
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteControllerMappingProfile.TexturePath
+  nameWithType: OculusRemoteControllerMappingProfile.TexturePath
+- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteControllerMappingProfile.TexturePath*
+  name: TexturePath
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteControllerMappingProfile.html#XRTK_Providers_Controllers_OpenVR_OculusRemoteControllerMappingProfile_TexturePath_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusRemoteControllerMappingProfile.TexturePath
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteControllerMappingProfile.TexturePath
+  nameWithType: OculusRemoteControllerMappingProfile.TexturePath
 - uid: XRTK.Providers.Controllers.OpenVR.OculusTouchController
   name: OculusTouchController
   href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchController.html
@@ -19402,6 +19444,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchControllerMappingProfile.ControllerType
   nameWithType: OculusTouchControllerMappingProfile.ControllerType
+- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchControllerMappingProfile.TexturePath
+  name: TexturePath
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchControllerMappingProfile.html#XRTK_Providers_Controllers_OpenVR_OculusTouchControllerMappingProfile_TexturePath
+  commentId: P:XRTK.Providers.Controllers.OpenVR.OculusTouchControllerMappingProfile.TexturePath
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchControllerMappingProfile.TexturePath
+  nameWithType: OculusTouchControllerMappingProfile.TexturePath
+- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchControllerMappingProfile.TexturePath*
+  name: TexturePath
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchControllerMappingProfile.html#XRTK_Providers_Controllers_OpenVR_OculusTouchControllerMappingProfile_TexturePath_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusTouchControllerMappingProfile.TexturePath
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchControllerMappingProfile.TexturePath
+  nameWithType: OculusTouchControllerMappingProfile.TexturePath
 - uid: XRTK.Providers.Controllers.OpenVR.OpenVRDataProvider
   name: OpenVRDataProvider
   href: api/XRTK.Providers.Controllers.OpenVR.OpenVRDataProvider.html
@@ -19601,6 +19656,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.OpenVR.ViveWandControllerMappingProfile.ControllerType
   nameWithType: ViveWandControllerMappingProfile.ControllerType
+- uid: XRTK.Providers.Controllers.OpenVR.ViveWandControllerMappingProfile.TexturePath
+  name: TexturePath
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandControllerMappingProfile.html#XRTK_Providers_Controllers_OpenVR_ViveWandControllerMappingProfile_TexturePath
+  commentId: P:XRTK.Providers.Controllers.OpenVR.ViveWandControllerMappingProfile.TexturePath
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandControllerMappingProfile.TexturePath
+  nameWithType: ViveWandControllerMappingProfile.TexturePath
+- uid: XRTK.Providers.Controllers.OpenVR.ViveWandControllerMappingProfile.TexturePath*
+  name: TexturePath
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandControllerMappingProfile.html#XRTK_Providers_Controllers_OpenVR_ViveWandControllerMappingProfile_TexturePath_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveWandControllerMappingProfile.TexturePath
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandControllerMappingProfile.TexturePath
+  nameWithType: ViveWandControllerMappingProfile.TexturePath
 - uid: XRTK.Providers.Controllers.OpenVR.WindowsMixedRealityOpenVRMotionController
   name: WindowsMixedRealityOpenVRMotionController
   href: api/XRTK.Providers.Controllers.OpenVR.WindowsMixedRealityOpenVRMotionController.html
@@ -20101,6 +20169,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.UnityInput.Profiles.XboxControllerMappingProfile.ControllerType
   nameWithType: XboxControllerMappingProfile.ControllerType
+- uid: XRTK.Providers.Controllers.UnityInput.Profiles.XboxControllerMappingProfile.TexturePath
+  name: TexturePath
+  href: api/XRTK.Providers.Controllers.UnityInput.Profiles.XboxControllerMappingProfile.html#XRTK_Providers_Controllers_UnityInput_Profiles_XboxControllerMappingProfile_TexturePath
+  commentId: P:XRTK.Providers.Controllers.UnityInput.Profiles.XboxControllerMappingProfile.TexturePath
+  fullName: XRTK.Providers.Controllers.UnityInput.Profiles.XboxControllerMappingProfile.TexturePath
+  nameWithType: XboxControllerMappingProfile.TexturePath
+- uid: XRTK.Providers.Controllers.UnityInput.Profiles.XboxControllerMappingProfile.TexturePath*
+  name: TexturePath
+  href: api/XRTK.Providers.Controllers.UnityInput.Profiles.XboxControllerMappingProfile.html#XRTK_Providers_Controllers_UnityInput_Profiles_XboxControllerMappingProfile_TexturePath_
+  commentId: Overload:XRTK.Providers.Controllers.UnityInput.Profiles.XboxControllerMappingProfile.TexturePath
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.UnityInput.Profiles.XboxControllerMappingProfile.TexturePath
+  nameWithType: XboxControllerMappingProfile.TexturePath
 - uid: XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider
   name: UnityJoystickDataProvider
   href: api/XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.html
@@ -43545,6 +43626,19 @@ references:
   isSpec: "True"
   fullName: XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityMotionControllerMappingProfile.ControllerType
   nameWithType: WindowsMixedRealityMotionControllerMappingProfile.ControllerType
+- uid: XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityMotionControllerMappingProfile.TexturePath
+  name: TexturePath
+  href: api/XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityMotionControllerMappingProfile.html#XRTK_WindowsMixedReality_Profiles_WindowsMixedRealityMotionControllerMappingProfile_TexturePath
+  commentId: P:XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityMotionControllerMappingProfile.TexturePath
+  fullName: XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityMotionControllerMappingProfile.TexturePath
+  nameWithType: WindowsMixedRealityMotionControllerMappingProfile.TexturePath
+- uid: XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityMotionControllerMappingProfile.TexturePath*
+  name: TexturePath
+  href: api/XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityMotionControllerMappingProfile.html#XRTK_WindowsMixedReality_Profiles_WindowsMixedRealityMotionControllerMappingProfile_TexturePath_
+  commentId: Overload:XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityMotionControllerMappingProfile.TexturePath
+  isSpec: "True"
+  fullName: XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityMotionControllerMappingProfile.TexturePath
+  nameWithType: WindowsMixedRealityMotionControllerMappingProfile.TexturePath
 - uid: XRTK.WindowsMixedReality.Profiles.WindowsMixedRealitySpatialMeshObserverProfile
   name: WindowsMixedRealitySpatialMeshObserverProfile
   href: api/XRTK.WindowsMixedReality.Profiles.WindowsMixedRealitySpatialMeshObserverProfile.html

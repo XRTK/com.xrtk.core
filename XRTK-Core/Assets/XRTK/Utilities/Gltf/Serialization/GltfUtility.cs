@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Utilities.Async;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -9,6 +8,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEngine;
+using XRTK.Utilities.Async;
 using XRTK.Utilities.Async.AwaitYieldInstructions;
 using XRTK.Utilities.Gltf.Schema;
 
@@ -16,7 +16,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 {
     public static class GltfUtility
     {
-        public const uint GltfMagicNumber = 0x46546C67;
+        private const uint GltfMagicNumber = 0x46546C67;
 
         private static readonly WaitForUpdate Update = new WaitForUpdate();
         private static readonly WaitForBackgroundThread BackgroundThread = new WaitForBackgroundThread();
@@ -39,8 +39,9 @@ namespace XRTK.Utilities.Gltf.Serialization
 
             GltfObject gltfObject;
             bool isGlb = false;
+            bool loadAsynchronously = Application.isPlaying;
 
-            if (Application.isPlaying) { await BackgroundThread; }
+            if (loadAsynchronously) { await BackgroundThread; }
 
             if (uri.Contains(".gltf"))
             {
@@ -63,7 +64,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                 {
                     glbData = new byte[stream.Length];
 
-                    if (Application.isPlaying)
+                    if (loadAsynchronously)
                     {
                         await stream.ReadAsync(glbData, 0, (int)stream.Length);
                     }
@@ -92,6 +93,7 @@ namespace XRTK.Utilities.Gltf.Serialization
             int nameLength = uri.Length - nameStart;
             gltfObject.Name = uri.Substring(nameStart, nameLength).Replace(isGlb ? ".glb" : ".gltf", string.Empty);
 
+            gltfObject.LoadAsynchronously = loadAsynchronously;
             await gltfObject.ConstructAsync();
 
             if (gltfObject.GameObjectReference == null)
@@ -99,7 +101,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                 Debug.LogError("Failed to construct Gltf Object.");
             }
 
-            if (Application.isPlaying) await Update;
+            if (loadAsynchronously) await Update;
 
             return gltfObject;
         }

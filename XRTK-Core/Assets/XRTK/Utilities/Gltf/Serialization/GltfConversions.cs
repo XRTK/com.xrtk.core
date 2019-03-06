@@ -2,27 +2,21 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.Threading.Tasks;
-using XRTK.Utilities.Async;
 using UnityEngine;
-using XRTK.Utilities.Async.AwaitYieldInstructions;
 using XRTK.Utilities.Gltf.Schema;
 
 namespace XRTK.Utilities.Gltf.Serialization
 {
-    public static class GltfConversions
+    internal static class GltfConversions
     {
-        private static readonly WaitForUpdate Update = new WaitForUpdate();
-        private static readonly WaitForBackgroundThread BackgroundThread = new WaitForBackgroundThread();
-
         // glTF matrix: column vectors, column-major storage, +Y up, +Z forward, -X right, right-handed
         // unity matrix: column vectors, column-major storage, +Y up, +Z forward, +X right, left-handed
         // multiply by a negative X scale to convert handedness
-        public static readonly Vector3 CoordinateSpaceConversionScale = new Vector3(-1, 1, 1);
+        internal static readonly Vector3 CoordinateSpaceConversionScale = new Vector3(-1, 1, 1);
 
-        public static readonly Vector4 TangentSpaceConversionScale = new Vector4(-1, 1, 1, -1);
+        internal static readonly Vector4 TangentSpaceConversionScale = new Vector4(-1, 1, 1, -1);
 
-        public static Matrix4x4 GetTrsProperties(this GltfNode node, out Vector3 position, out Quaternion rotation, out Vector3 scale)
+        internal static Matrix4x4 GetTrsProperties(this GltfNode node, out Vector3 position, out Quaternion rotation, out Vector3 scale)
         {
             Matrix4x4 matrix = node.matrix.GetMatrix4X4Value();
 
@@ -40,33 +34,33 @@ namespace XRTK.Utilities.Gltf.Serialization
             return matrix;
         }
 
-        public static Color GetColorValue(this float[] colorArray)
+        internal static Color GetColorValue(this float[] colorArray)
         {
             return new Color(colorArray[0], colorArray[1], colorArray[2], colorArray.Length < 4 ? 1f : colorArray[3]);
         }
 
-        public static float[] SetColorValue(this Color color)
+        internal static float[] SetColorValue(this Color color)
         {
             return new[] { color.r, color.g, color.b, color.a };
         }
 
-        public static Vector2 GetVector2Value(this float[] vector2Array)
+        internal static Vector2 GetVector2Value(this float[] vector2Array)
         {
             return new Vector2(vector2Array[0], vector2Array[1]);
         }
 
-        public static float[] SetVector2Value(this Vector2 vector)
+        internal static float[] SetVector2Value(this Vector2 vector)
         {
             return new[] { vector.x, vector.y };
         }
 
-        public static Vector3 GetVector3Value(this float[] vector3Array, bool convert = true)
+        internal static Vector3 GetVector3Value(this float[] vector3Array, bool convert = true)
         {
             var vector = new Vector3(vector3Array[0], vector3Array[1], vector3Array[2]);
             return convert ? Vector3.Scale(vector, CoordinateSpaceConversionScale) : vector;
         }
 
-        public static float[] SetVector3Value(this Vector3 vector, bool convert = true)
+        internal static float[] SetVector3Value(this Vector3 vector, bool convert = true)
         {
             if (convert)
             {
@@ -76,7 +70,7 @@ namespace XRTK.Utilities.Gltf.Serialization
             return new[] { vector.x, vector.y, vector.z };
         }
 
-        public static Quaternion GetQuaternionValue(this float[] quaternionArray, bool convert = true)
+        internal static Quaternion GetQuaternionValue(this float[] quaternionArray, bool convert = true)
         {
             var axes = new Vector3(quaternionArray[0], quaternionArray[1], quaternionArray[2]);
 
@@ -88,7 +82,7 @@ namespace XRTK.Utilities.Gltf.Serialization
             return new Quaternion(axes.x, axes.y, axes.z, quaternionArray[3]);
         }
 
-        public static float[] SetQuaternionValue(this Quaternion quaternion, bool convert = true)
+        internal static float[] SetQuaternionValue(this Quaternion quaternion, bool convert = true)
         {
             // get the original axis and apply conversion scale as well as potential rotation axis flip
             var axes = new Vector3(quaternion.x, quaternion.y, quaternion.z);
@@ -101,7 +95,7 @@ namespace XRTK.Utilities.Gltf.Serialization
             return new[] { axes.x, axes.y, axes.z, quaternion.w };
         }
 
-        public static Matrix4x4 GetMatrix4X4Value(this double[] matrixArray)
+        internal static Matrix4x4 GetMatrix4X4Value(this double[] matrixArray)
         {
             var matrix = new Matrix4x4(
                 new Vector4((float)matrixArray[0], (float)matrixArray[1], (float)matrixArray[2], (float)matrixArray[3]),
@@ -112,7 +106,7 @@ namespace XRTK.Utilities.Gltf.Serialization
             return convert * matrix * convert;
         }
 
-        public static float[] SetMatrix4X4Value(this Matrix4x4 matrix)
+        internal static float[] SetMatrix4X4Value(this Matrix4x4 matrix)
         {
             var convert = Matrix4x4.Scale(CoordinateSpaceConversionScale);
             matrix = convert * matrix * convert;
@@ -125,7 +119,7 @@ namespace XRTK.Utilities.Gltf.Serialization
             };
         }
 
-        public static void GetTrsProperties(this Matrix4x4 matrix, out Vector3 position, out Quaternion rotation, out Vector3 scale)
+        internal static void GetTrsProperties(this Matrix4x4 matrix, out Vector3 position, out Quaternion rotation, out Vector3 scale)
         {
             position = matrix.GetColumn(3);
 
@@ -143,17 +137,16 @@ namespace XRTK.Utilities.Gltf.Serialization
             rotation = Quaternion.LookRotation(matrix.GetColumn(2), matrix.GetColumn(1));
         }
 
-        public static async Task<int[]> GetIntArray(this GltfAccessor accessor, bool flipFaces = true)
+        internal static int[] GetIntArray(this GltfAccessor accessor, bool flipFaces = true)
         {
             if (accessor.type != "SCALAR")
             {
                 return null;
             }
 
-            if (Application.isPlaying) await BackgroundThread;
             var array = new int[accessor.count];
 
-            GetTypeDetails(accessor.componentType, out int componentSize, out float maxValue);
+            GetTypeDetails(accessor.componentType, out int componentSize, out float _);
             var stride = accessor.BufferView.byteStride > 0 ? accessor.BufferView.byteStride : componentSize;
             var byteOffset = accessor.BufferView.byteOffset;
             var bufferData = accessor.BufferView.Buffer.BufferData;
@@ -185,18 +178,16 @@ namespace XRTK.Utilities.Gltf.Serialization
                 }
             }
 
-            if (Application.isPlaying) { await Update; }
             return array;
         }
 
-        public static async Task<Vector2[]> GetVector2Array(this GltfAccessor accessor, bool flip = true)
+        internal static Vector2[] GetVector2Array(this GltfAccessor accessor, bool flip = true)
         {
             if (accessor.type != "VEC2" || accessor.componentType == GltfComponentType.UnsignedInt)
             {
                 return null;
             }
 
-            if (Application.isPlaying) await BackgroundThread;
             var array = new Vector2[accessor.count];
 
             GetTypeDetails(accessor.componentType, out int componentSize, out float maxValue);
@@ -230,18 +221,16 @@ namespace XRTK.Utilities.Gltf.Serialization
                 }
             }
 
-            if (Application.isPlaying) { await Update; }
             return array;
         }
 
-        public static async Task<Vector3[]> GetVector3Array(this GltfAccessor accessor, bool convert = true)
+        internal static Vector3[] GetVector3Array(this GltfAccessor accessor, bool convert = true)
         {
             if (accessor.type != "VEC3" || accessor.componentType == GltfComponentType.UnsignedInt)
             {
                 return null;
             }
 
-            if (Application.isPlaying) await BackgroundThread;
             var array = new Vector3[accessor.count];
 
             GetTypeDetails(accessor.componentType, out int componentSize, out float maxValue);
@@ -279,18 +268,16 @@ namespace XRTK.Utilities.Gltf.Serialization
                 }
             }
 
-            if (Application.isPlaying) { await Update; }
             return array;
         }
 
-        public static async Task<Vector4[]> GetVector4Array(this GltfAccessor accessor, bool convert = true)
+        internal static Vector4[] GetVector4Array(this GltfAccessor accessor, bool convert = true)
         {
             if (accessor.type != "VEC4" || accessor.componentType == GltfComponentType.UnsignedInt)
             {
                 return null;
             }
 
-            if (Application.isPlaying) await BackgroundThread;
             var array = new Vector4[accessor.count];
 
             GetTypeDetails(accessor.componentType, out int componentSize, out float maxValue);
@@ -331,18 +318,16 @@ namespace XRTK.Utilities.Gltf.Serialization
                 }
             }
 
-            if (Application.isPlaying) { await Update; }
             return array;
         }
 
-        public static async Task<Color[]> GetColorArray(this GltfAccessor accessor)
+        internal static Color[] GetColorArray(this GltfAccessor accessor)
         {
             if (accessor.type != "VEC3" && accessor.type != "VEC4" || accessor.componentType == GltfComponentType.UnsignedInt)
             {
                 return null;
             }
 
-            if (Application.isPlaying) await BackgroundThread;
             var array = new Color[accessor.count];
 
             GetTypeDetails(accessor.componentType, out int componentSize, out float maxValue);
@@ -375,7 +360,6 @@ namespace XRTK.Utilities.Gltf.Serialization
                 }
             }
 
-            if (Application.isPlaying) { await Update; }
             return array;
         }
 

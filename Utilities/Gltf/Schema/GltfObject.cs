@@ -117,5 +117,7 @@ namespace XRTK.Utilities.Gltf.Schema
         public GameObject GameObjectReference { get; internal set; }
 
         public List<GltfExtension> RegisteredExtensions { get; internal set; } = new List<GltfExtension>();
+
+        internal bool LoadAsynchronously { get; set; } = true;
     }
 }

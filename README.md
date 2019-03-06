@@ -35,7 +35,7 @@ Our philosophy is write it once, build it everywhere. We’d like to invite all 
 - [ ] Lumin
 - [ ] WebAssembly
     - [ ] WebVR
-    - [ ] WebAR
+    - [ ] WebXR
 - [x] Windows Standalone
     - [x] Open VR
     - [ ] Steam VR

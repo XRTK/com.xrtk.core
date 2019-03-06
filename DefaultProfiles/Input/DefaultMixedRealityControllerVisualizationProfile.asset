@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e889ee36d1db42b482979f81f550d3b0, type: 3}
+  m_Name: DefaultMixedRealityControllerVisualizationProfile
+  m_EditorClassIdentifier: 
+  isCustomProfile: 0
+  renderMotionControllers: 1
+  controllerVisualizationType:
+    reference: XRTK.SDK.UX.Controllers.DefaultMixedRealityControllerVisualizer, XRTK.SDK
+  useDefaultModels: 1
+  globalLeftHandModel: {fileID: 1370450866519632, guid: ee0e0dd1dc6d457794091bf89f804f8f,
+    type: 3}
+  globalRightHandModel: {fileID: 1760394390528354, guid: 3c945620dae24228acea8b9402529ce6,
+    type: 3}
+  controllerVisualizationSettings:
+  - description: Windows Mixed Reality Controller
+    controllerType:
+      reference: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityController,
+        XRTK.WindowsMixedReality
+    handedness: 1
+    useDefaultModel: 1
+    overrideModel: {fileID: 0}
+    controllerVisualizationType:
+      reference: XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer,
+        XRTK.SDK
+    poseAction:
+      id: 4
+      description: Pointer Pose
+      axisConstraint: 7
+    alternatePoseAction:
+      id: 3
+      description: Grip Pose
+      axisConstraint: 7
+  - description: Windows Mixed Reality Controller
+    controllerType:
+      reference: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityController,
+        XRTK.WindowsMixedReality
+    handedness: 2
+    useDefaultModel: 1
+    overrideModel: {fileID: 0}
+    controllerVisualizationType:
+      reference: XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer,
+        XRTK.SDK
+    poseAction:
+      id: 4
+      description: Pointer Pose
+      axisConstraint: 7
+    alternatePoseAction:
+      id: 3
+      description: Grip Pose
+      axisConstraint: 7

@@ -51,11 +51,11 @@ namespace XRTK.Utilities.Gltf.Serialization
                 return null;
             }
 
-            if (Application.isPlaying) await Update;
+            if (gltfObject.LoadAsynchronously) await Update;
             var rootObject = new GameObject($"glTF Scene {gltfObject.Name}");
             rootObject.SetActive(false);
 
-            if (Application.isPlaying) await BackgroundThread;
+            if (gltfObject.LoadAsynchronously) await BackgroundThread;
 
             for (int i = 0; i < gltfObject.bufferViews?.Length; i++)
             {
@@ -77,7 +77,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                 Debug.LogError($"No scenes found for {gltfObject.Name}");
             }
 
-            if (Application.isPlaying) await Update;
+            if (gltfObject.LoadAsynchronously) await Update;
 
             for (int i = 0; i < gltfObject.scenes?.Length; i++)
             {
@@ -103,7 +103,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 
         private static async Task ConstructTextureAsync(this GltfObject gltfObject, GltfTexture gltfTexture)
         {
-            if (Application.isPlaying) await BackgroundThread;
+            if (gltfObject.LoadAsynchronously) await BackgroundThread;
 
             if (gltfTexture.source >= 0)
             {
@@ -120,12 +120,12 @@ namespace XRTK.Utilities.Gltf.Serialization
                     var path = $"{parentDirectory}\\{gltfImage.uri}";
 
 #if UNITY_EDITOR
-                    if (Application.isPlaying) await Update;
+                    if (gltfObject.LoadAsynchronously) await Update;
                     var projectPath = path.Replace("\\", "/");
                     projectPath = projectPath.Replace(Application.dataPath, "Assets");
                     texture = UnityEditor.AssetDatabase.LoadAssetAtPath<Texture2D>(projectPath);
 
-                    if (Application.isPlaying) await BackgroundThread;
+                    if (gltfObject.LoadAsynchronously) await BackgroundThread;
 #endif
 
                     if (texture == null)
@@ -136,7 +136,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                         {
                             imageData = new byte[stream.Length];
 
-                            if (Application.isPlaying)
+                            if (gltfObject.LoadAsynchronously)
                             {
                                 await stream.ReadAsync(imageData, 0, (int)stream.Length);
                             }
@@ -156,7 +156,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 
                 if (texture == null)
                 {
-                    if (Application.isPlaying) await Update;
+                    if (gltfObject.LoadAsynchronously) await Update;
                     // TODO Load texture async
                     texture = new Texture2D(2, 2);
                     gltfImage.Texture = texture;
@@ -169,13 +169,13 @@ namespace XRTK.Utilities.Gltf.Serialization
 
                 gltfTexture.Texture = texture;
 
-                if (Application.isPlaying) await BackgroundThread;
+                if (gltfObject.LoadAsynchronously) await BackgroundThread;
             }
         }
 
         private static async Task ConstructMaterialAsync(this GltfObject gltfObject, GltfMaterial gltfMaterial, int materialId)
         {
-            if (Application.isPlaying) await Update;
+            if (gltfObject.LoadAsynchronously) await Update;
             Shader shader = Shader.Find("Standard");
 
             if (shader == null)
@@ -239,7 +239,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                 if (texture.isReadable)
                 {
                     var pixels = texture.GetPixels();
-                    if (Application.isPlaying) await BackgroundThread;
+                    if (gltfObject.LoadAsynchronously) await BackgroundThread;
 
                     var pixelCache = new Color[pixels.Length];
 
@@ -252,7 +252,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                         pixelCache[c].a = pixels[c].b;
                     }
 
-                    if (Application.isPlaying) await Update;
+                    if (gltfObject.LoadAsynchronously) await Update;
                     texture.SetPixels(pixelCache);
                     texture.Apply();
 
@@ -274,7 +274,7 @@ namespace XRTK.Utilities.Gltf.Serialization
             material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
             gltfMaterial.Material = material;
 
-            if (Application.isPlaying) await BackgroundThread;
+            if (gltfObject.LoadAsynchronously) await BackgroundThread;
         }
 
         private static async Task ConstructSceneAsync(this GltfObject gltfObject, GltfScene gltfScene, GameObject root)
@@ -288,14 +288,14 @@ namespace XRTK.Utilities.Gltf.Serialization
 
         private static async Task ConstructNodeAsync(GltfObject gltfObject, GltfNode node, int nodeId, Transform parent, bool isRoot = false)
         {
-            if (Application.isPlaying) await Update;
+            if (gltfObject.LoadAsynchronously) await Update;
 
             var nodeGameObject = !isRoot ? new GameObject(string.IsNullOrEmpty(node.name) ? $"glTF Node {nodeId}" : node.name) : parent.gameObject;
 
             // If we're creating a really large node, we need it to not be visible in partial stages. So we hide it while we create it
             nodeGameObject.SetActive(false);
 
-            if (Application.isPlaying) await BackgroundThread;
+            if (gltfObject.LoadAsynchronously) await BackgroundThread;
 
             node.Matrix = node.GetTrsProperties(out Vector3 position, out Quaternion rotation, out Vector3 scale);
 
@@ -317,7 +317,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                 }
             }
 
-            if (Application.isPlaying) await Update;
+            if (gltfObject.LoadAsynchronously) await Update;
 
             // TODO if isRoot do transform normalization (i.e. position == 0,0,0 && rotation == identify && scale == 1,1,1)
             nodeGameObject.transform.localPosition = position;
@@ -381,7 +381,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 
         private static async Task<Mesh> ConstructMeshPrimitiveAsync(GltfObject gltfObject, GltfMeshPrimitive meshPrimitive)
         {
-            if (Application.isPlaying) await BackgroundThread;
+            if (gltfObject.LoadAsynchronously) await BackgroundThread;
 
             GltfAccessor positionAccessor = null;
             GltfAccessor normalsAccessor = null;
@@ -474,7 +474,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                 joint0Accessor.BufferView.Buffer = gltfObject.buffers[joint0Accessor.BufferView.buffer];
             }
 
-            if (Application.isPlaying) await Update;
+            if (gltfObject.LoadAsynchronously) await Update;
 
             var mesh = new Mesh
             {
@@ -483,52 +483,52 @@ namespace XRTK.Utilities.Gltf.Serialization
 
             if (positionAccessor != null)
             {
-                mesh.vertices = await positionAccessor.GetVector3Array();
+                mesh.vertices = positionAccessor.GetVector3Array();
             }
 
             if (normalsAccessor != null)
             {
-                mesh.normals = await normalsAccessor.GetVector3Array();
+                mesh.normals = normalsAccessor.GetVector3Array();
             }
 
             if (textCoord0Accessor != null)
             {
-                mesh.uv = await textCoord0Accessor.GetVector2Array();
+                mesh.uv = textCoord0Accessor.GetVector2Array();
             }
 
             if (textCoord1Accessor != null)
             {
-                mesh.uv2 = await textCoord1Accessor.GetVector2Array();
+                mesh.uv2 = textCoord1Accessor.GetVector2Array();
             }
 
             if (textCoord2Accessor != null)
             {
-                mesh.uv3 = await textCoord2Accessor.GetVector2Array();
+                mesh.uv3 = textCoord2Accessor.GetVector2Array();
             }
 
             if (textCoord3Accessor != null)
             {
-                mesh.uv4 = await textCoord3Accessor.GetVector2Array();
+                mesh.uv4 = textCoord3Accessor.GetVector2Array();
             }
 
             if (colorAccessor != null)
             {
-                mesh.colors = await colorAccessor.GetColorArray();
+                mesh.colors = colorAccessor.GetColorArray();
             }
 
             if (indicesAccessor != null)
             {
-                mesh.triangles = await indicesAccessor.GetIntArray();
+                mesh.triangles = indicesAccessor.GetIntArray();
             }
 
             if (tangentAccessor != null)
             {
-                mesh.tangents = await tangentAccessor.GetVector4Array();
+                mesh.tangents = tangentAccessor.GetVector4Array();
             }
 
             if (weight0Accessor != null && joint0Accessor != null)
             {
-                mesh.boneWeights = CreateBoneWeightArray(await joint0Accessor.GetVector4Array(false), await weight0Accessor.GetVector4Array(false), vertexCount);
+                mesh.boneWeights = CreateBoneWeightArray(joint0Accessor.GetVector4Array(false), weight0Accessor.GetVector4Array(false), vertexCount);
             }
 
             mesh.RecalculateBounds();

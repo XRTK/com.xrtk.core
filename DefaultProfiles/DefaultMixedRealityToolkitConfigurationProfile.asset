@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8053d706eb6545b99330d640fbe7e7d2, type: 3}
+  m_Name: DefaultMixedRealityToolkitConfigurationProfile
+  m_EditorClassIdentifier: 
+  isCustomProfile: 0
+  targetExperienceScale: 3
+  enableCameraProfile: 1
+  cameraProfile: {fileID: 11400000, guid: 2b0ab6f5348646cebf8585d46c3a3edc, type: 2}
+  enableInputSystem: 1
+  inputSystemProfile: {fileID: 11400000, guid: a176466fbf4e44a087639abca7e5ba47, type: 2}
+  inputSystemType:
+    reference: XRTK.Services.InputSystem.MixedRealityInputSystem, XRTK
+  enableBoundarySystem: 1
+  boundarySystemType:
+    reference: XRTK.Services.BoundarySystem.MixedRealityBoundarySystem, XRTK
+  boundaryVisualizationProfile: {fileID: 11400000, guid: 66c6942c137e4200b9fa363d94982582,
+    type: 2}
+  enableTeleportSystem: 1
+  teleportSystemType:
+    reference: XRTK.Services.Teleportation.MixedRealityTeleportSystem, XRTK
+  enableSpatialAwarenessSystem: 1
+  spatialAwarenessSystemType:
+    reference: XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem,
+      XRTK
+  spatialAwarenessProfile: {fileID: 11400000, guid: 41ce31a4954544c58d16f6b3c4c88f4b,
+    type: 2}
+  networkingSystemProfile: {fileID: 11400000, guid: 72aa9c32198a4dce9219e6ab19d5dc6f,
+    type: 2}
+  enableNetworkingSystem: 1
+  networkingSystemType:
+    reference: XRTK.Services.NetworkingSystem.MixedRealityNetworkingSystem, XRTK
+  diagnosticsSystemProfile: {fileID: 11400000, guid: 9be0c5afc495463d8547a80997d46187,
+    type: 2}
+  enableDiagnosticsSystem: 1
+  diagnosticsSystemType:
+    reference: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem, XRTK
+  registeredServiceProvidersProfile: {fileID: 11400000, guid: acea2c25fd504369954fa833a8c4ea5b,
+    type: 2}

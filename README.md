@@ -28,7 +28,7 @@ There are many channels on Slack, covering the wide variety of Mixed Reality pla
 
 | Branches | Windows Build Agent | Mac Build Agent | Linux Build Agent |
 |---|---|---|---|
-|Master|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Mixed%20Reality%20Toolkit-CI)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=2)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Master%20Build%20Pipeline%20-%20Hosted%20macOS)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=4)| Not Setup |
+|Master|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Mixed%20Reality%20Toolkit-CI)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=2)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Master%20Build%20Pipeline%20-%20Hosted%20macOS)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=4)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Master%20Build%20Pipeline%20-%20Hosted%20Hosted%20Ubuntu)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=6)|
 
 # Supported Platforms
 
@@ -41,7 +41,7 @@ There are many channels on Slack, covering the wide variety of Mixed Reality pla
 - [ ] Lumin (aka Magic Leap)
 - [ ] WebAssembly
     - [ ] WebVR
-    - [ ] WebAR
+    - [ ] WebXR
 - [x] Windows Standalone
     - [x] Open VR
     - [ ] Steam VR

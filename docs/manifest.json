@@ -1689,7 +1689,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Examples.Demos.Gltf.TestGlbLoading.html",
-          "hash": "xa/Fd/9bM0rfbtcjkWQdHg=="
+          "hash": "Sq85s6PZwZcZyBPriB+fww=="
         }
       },
       "is_incremental": false,
@@ -1701,7 +1701,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Examples.Demos.Gltf.TestGltfLoading.html",
-          "hash": "7Js9U6O6T6W76rj1EOc9iQ=="
+          "hash": "Mz13OV9IQt56iCnfjidACw=="
         }
       },
       "is_incremental": false,
@@ -5961,7 +5961,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.MixedRealityToolkit.html",
-          "hash": "eTUECiN4MRxefanIbAFWLQ=="
+          "hash": "aP2tneArFNKF/bXS5Qkrag=="
         }
       },
       "is_incremental": false,
@@ -6657,7 +6657,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Gltf.Schema.GltfAccessor.html",
-          "hash": "EUR4sQyV/uDEiL0KXl8uBw=="
+          "hash": "74JhysxJ+ruGN8o6loNIqQ=="
         }
       },
       "is_incremental": false,
@@ -7029,7 +7029,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Gltf.Schema.GltfNode.html",
-          "hash": "T4Hzaa+xgC+HzQCKqx11tw=="
+          "hash": "O6odQU1+np7vrjoIhwfWKA=="
         }
       },
       "is_incremental": false,
@@ -7289,23 +7289,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "api/XRTK.Utilities.Gltf.Serialization.GltfConversions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.Utilities.Gltf.Serialization.GltfConversions.html",
-          "hash": "RJVRDC+9b6REOCwNf3Ontw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "api/XRTK.Utilities.Gltf.Serialization.GltfUtility.yml",
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Gltf.Serialization.GltfUtility.html",
-          "hash": "p24A4rbH+COFG+UiNdLCHA=="
+          "hash": "UV6NHq77Hl3Oew/ILlbiFw=="
         }
       },
       "is_incremental": false,
@@ -7317,7 +7305,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Gltf.Serialization.html",
-          "hash": "9pnrA0KYt4liI1S6St6GmA=="
+          "hash": "iCfZWTdfsdK7CexZbKyESQ=="
         }
       },
       "is_incremental": false,
@@ -8421,7 +8409,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "YGc/OU4ZAbgd9MLSSE5/eQ=="
+          "hash": "OsHNDjj9eMYH4I6NjZ38vg=="
         }
       },
       "is_incremental": false,
@@ -8433,7 +8421,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "fOIhCLg4Hl18zeWSyCj7kw=="
+          "hash": "YrcBDah6ZgEG8OmWFmHOpg=="
         }
       },
       "is_incremental": false,
@@ -8470,16 +8458,16 @@
           "total_file_count": 0,
           "skipped_file_count": 0
         },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build",
-          "total_file_count": 700,
-          "skipped_file_count": 0
-        },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
           "total_file_count": 2,
+          "skipped_file_count": 0
+        },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 699,
           "skipped_file_count": 0
         }
       }

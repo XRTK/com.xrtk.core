@@ -67,6 +67,8 @@
     "globalMetadata": {
       "_appTitle": "XRTK-Core",
       "_appFooter": "(c) 2019 XRTK",
+      "_appLogoPath": "logo.png",
+      "_appFaviconPath": "favicon.png",
       "_gitContribute": {
         "repo": "https://github.com/XRTK/XRTK-Core",
         "branch": "development"
@@ -76,7 +78,8 @@
     "globalMetadataFiles": [],
     "fileMetadataFiles": [],
     "template": [
-      "default"
+      "default",
+      "templates/material"
     ],
     "postProcessors": [],
     "markdownEngineName": "markdig",

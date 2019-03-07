@@ -1,3 +1,7 @@
-- name: Api Documentation
+- name: API Reference
   href: api/
   homepage: api/index.md
+- name: Source Code
+  href: https://github.com/XRTK/XRTK-Core
+- name: Releases
+  href: https://github.com/XRTK/XRTK-Core/releases

@@ -121,7 +121,7 @@ namespace XRTK.Inspectors.Profiles
         {
             profileToCopy = profile;
             ScriptableObject newProfile = CreateInstance(profile.GetType().ToString());
-            profile = newProfile.CreateAsset("Assets/XRTK-Generated/CustomProfiles") as BaseMixedRealityProfile;
+            profile = newProfile.CreateAsset("Assets/XRTK.Generated/CustomProfiles") as BaseMixedRealityProfile;
             Debug.Assert(profile != null);
 
             await new WaitUntil(() => profileToCopy != profile);

@@ -56,7 +56,7 @@ namespace XRTK.Inspectors
                                                                   "Would you like to create one now?", "OK", "Later"))
                     {
                         ScriptableObject profile = CreateInstance(nameof(MixedRealityToolkitConfigurationProfile));
-                        profile.CreateAsset("Assets/XRTK-Generated/CustomProfiles");
+                        profile.CreateAsset("Assets/XRTK.Generated/CustomProfiles");
                         activeProfile.objectReferenceValue = profile;
                         Selection.activeObject = profile;
                         EditorGUIUtility.PingObject(profile);

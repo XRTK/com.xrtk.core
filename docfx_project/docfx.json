@@ -71,7 +71,8 @@
       "_appFaviconPath": "favicon.png",
       "_gitContribute": {
         "repo": "https://github.com/XRTK/XRTK-Core",
-        "branch": "development"
+        "branch": "development",
+        "apiSpecFolder": "docs-ref-overwrite"
       }
     },
     "dest": "../docs",

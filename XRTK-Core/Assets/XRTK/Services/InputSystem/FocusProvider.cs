@@ -1,19 +1,18 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Definitions.Physics;
-using XRTK.EventDatum.Input;
-using XRTK.Extensions;
-using XRTK.Interfaces.InputSystem;
-using XRTK.Services;
-using XRTK.Utilities;
-using XRTK.Utilities.Physics;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using XRTK.Definitions.Physics;
+using XRTK.EventDatum.Input;
+using XRTK.Extensions;
+using XRTK.Interfaces.InputSystem;
+using XRTK.Utilities;
+using XRTK.Utilities.Physics;
 
-namespace XRTK.SDK.Input
+namespace XRTK.Services.InputSystem
 {
     /// <summary>
     /// The focus provider handles the focused objects per input source.

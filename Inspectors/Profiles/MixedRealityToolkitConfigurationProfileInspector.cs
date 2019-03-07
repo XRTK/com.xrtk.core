@@ -1,11 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
-using XRTK.Extensions.EditorClassExtensions;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions.EditorClassExtensions;
 using XRTK.Inspectors.Utilities;
 using XRTK.Services;
 
@@ -150,7 +150,7 @@ namespace XRTK.Inspectors.Profiles
                 if (GUILayout.Button("Create new profiles"))
                 {
                     ScriptableObject profile = CreateInstance(nameof(MixedRealityToolkitConfigurationProfile));
-                    var newProfile = profile.CreateAsset("Assets/XRTK-Generated/CustomProfiles") as MixedRealityToolkitConfigurationProfile;
+                    var newProfile = profile.CreateAsset("Assets/XRTK.Generated/CustomProfiles") as MixedRealityToolkitConfigurationProfile;
                     MixedRealityToolkit.Instance.ActiveProfile = newProfile;
                     Selection.activeObject = newProfile;
                 }

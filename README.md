@@ -18,8 +18,6 @@ Our philosophy is to enable developers to focus on building content and structur
 
 We’d like to invite all the major hardware vendors to help guide their platform specific implementations, from Microsoft’s Windows Mixed Reality and Magic Leap’s Lumin OS to Google’s ARCore and Apple’s ARKit.  Including any upcoming Mixed Reality capable devices that would like to be included for adoption.
 
-# Community
-
 ## [Join us on Slack](https://holodevelopersslack.azurewebsites.net/)
 
 There are many channels on Slack, covering the wide variety of Mixed Reality platforms out there, as well as a dedicated XRTK channel for discussing XRTK implementations.

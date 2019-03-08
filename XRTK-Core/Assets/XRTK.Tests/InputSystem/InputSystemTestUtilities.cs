@@ -1,10 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Providers.Controllers;
-using XRTK.Definitions.InputSystem;
 using UnityEngine;
+using XRTK.Definitions.InputSystem;
+using XRTK.Providers.Controllers;
 using XRTK.SDK.Input;
+using XRTK.Services.InputSystem;
 
 namespace XRTK.Tests.InputSystem
 {

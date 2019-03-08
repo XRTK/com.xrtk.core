@@ -372,21 +372,12 @@ namespace XRTK.SDK.UX.Pointers
             if (eventData.Pointer.PointerId == PointerId)
             {
                 IsTeleportRequestActive = false;
-                BaseCursor?.SetVisibility(true);
             }
             else
             {
                 IsTeleportRequestActive = true;
                 BaseCursor?.SetVisibility(false);
             }
-        }
-
-        /// <inheritdoc />
-        public override void OnTeleportStarted(TeleportEventData eventData)
-        {
-            // Turn off all pointers while we teleport.
-            IsTeleportRequestActive = true;
-            BaseCursor?.SetVisibility(false);
         }
 
         /// <inheritdoc />

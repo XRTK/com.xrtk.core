@@ -54,8 +54,8 @@ While we are still preparing XRTK specific documentation and guidance, all the c
 Most notably:
 
 * [Mixed Reality Toolkit Quickstart](https://www.youtube.com/watch?v=-ODnfcv5Rzg) Quickstart video session demonstrating getting started with the MRTK and building your project for multiple patforms.
-* [Getting Started With The MRTK]() (coming soon) Documented walk-through for creating your first project.
-* [Mixed Reality Configuration Guide]() (coming soon) Screen by screen walk through of the major MRTK configuration screens (some will vary from the XRTK, but similar enough to get the picture)
+* [Getting Started With The MRTK](README.md) (coming soon) Documented walk-through for creating your first project.
+* [Mixed Reality Configuration Guide](README.md) (coming soon) Screen by screen walk through of the major MRTK configuration screens (some will vary from the XRTK, but similar enough to get the picture)
 
 ## What is the relationship between the XRTK and Microsoft's MRTK SDK
 

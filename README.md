@@ -78,18 +78,5 @@ Currently there isn't a direct path from the HTK to the XRTK, also Microsoft are
 
 # Roadmap
 
-- [x] The core service locator
-- [x] The core interface service contracts
-- [x] The core definitions for enums, structs, and configuration profiles
-- [x] Unit tests for core features
-- [x] Finish setting up main repository docs
-    - [x] Main Readme
-    - [x] Coding Guidelines
-    - [x] [Contributor List](/CONTRIBUTORS.md)
-- [x] Setup docfx website, automated API documentation
-- [x] Setup Continuous Deployment
-- [ ] A set of video tutorials demonstrating XRTK use in each of the three primary categories of adopters
-- [ ] A comprehensive set of documented tutorials demonstrating XRTK use in each of the three primary categories of adopters
-- [ ] Practical example scenes showing the most common uses of the XRTK, demonstrated on each of the supported platforms
-- [ ] A simple package manager for submodules
-    - [ ] Should interface and work with Unity's built in package manager
+- [ ] [Project Setup](https://github.com/XRTK/XRTK-Core/projects/1)
+- [ ] [Docs, Demos, & Tutorials](https://github.com/XRTK/XRTK-Core/projects/2)

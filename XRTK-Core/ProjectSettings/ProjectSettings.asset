@@ -118,7 +118,7 @@ PlayerSettings:
     16:10: 1
     16:9: 1
     Others: 1
-  bundleVersion: 2019.2.2.0
+  bundleVersion: 2019.3.11.0
   preloadedAssets: []
   metroInputSource: 0
   wsaTransparentSwapchain: 0
@@ -643,7 +643,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: XRTK-Core
-  metroPackageVersion: 2019.2.2.0
+  metroPackageVersion: 2019.3.11.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 

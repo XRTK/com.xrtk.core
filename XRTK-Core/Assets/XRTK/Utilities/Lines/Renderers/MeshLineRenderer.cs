@@ -22,12 +22,7 @@ namespace XRTK.Utilities.Lines.Renderers
         public Mesh LineMesh
         {
             get => lineMesh;
-            set
-            {
-                enabled = false;
-                lineMesh = value;
-                enabled = true;
-            }
+            set => lineMesh = value;
         }
 
         [SerializeField]
@@ -36,12 +31,7 @@ namespace XRTK.Utilities.Lines.Renderers
         public Material LineMaterial
         {
             get => lineMaterial;
-            set
-            {
-                enabled = false;
-                lineMaterial = value;
-                enabled = true;
-            }
+            set => lineMaterial = value;
         }
 
         [SerializeField]
@@ -159,7 +149,7 @@ namespace XRTK.Utilities.Lines.Renderers
             }
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             executeCommandBuffer = false;
 
@@ -187,6 +177,13 @@ namespace XRTK.Utilities.Lines.Renderers
 
                 executeCommandBuffer = true;
             }
+
+            // Update our helper mesh so OnWillRenderObject will be called
+            meshVertices[0] = transform.InverseTransformPoint(LineDataSource.GetPoint(0.0f)); // - transform.position;
+            meshVertices[1] = transform.InverseTransformPoint(LineDataSource.GetPoint(0.5f)); // - transform.position;
+            meshVertices[2] = transform.InverseTransformPoint(LineDataSource.GetPoint(1.0f)); // - transform.position;
+            renderedMesh.vertices = meshVertices;
+            renderedMesh.RecalculateBounds();
         }
 
         private void OnDisable()
@@ -219,16 +216,6 @@ namespace XRTK.Utilities.Lines.Renderers
             {
                 buffer.DrawMeshInstanced(lineMesh, 0, lineMaterial, 0, meshTransforms, meshTransforms.Length, linePropertyBlock);
             }
-        }
-
-        private void LateUpdate()
-        {
-            // Update our helper mesh so OnWillRenderObject will be called
-            meshVertices[0] = transform.InverseTransformPoint(LineDataSource.GetPoint(0.0f)); // - transform.position;
-            meshVertices[1] = transform.InverseTransformPoint(LineDataSource.GetPoint(0.5f)); // - transform.position;
-            meshVertices[2] = transform.InverseTransformPoint(LineDataSource.GetPoint(1.0f)); // - transform.position;
-            renderedMesh.vertices = meshVertices;
-            renderedMesh.RecalculateBounds();
         }
     }
 }

@@ -71,7 +71,7 @@ namespace XRTK.Utilities.Lines
 
         private void Awake() => EnsureSetup();
 
-        private void Update()
+        private void LateUpdate()
         {
             if (source == null || follower == null) { return; }
 

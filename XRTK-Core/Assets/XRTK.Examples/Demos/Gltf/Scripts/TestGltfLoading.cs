@@ -37,7 +37,7 @@ namespace XRTK.Examples.Demos.Gltf
             }
             catch (Exception e)
             {
-                Debug.LogError(e.Message);
+                Debug.LogError($"{e.Message}\n{e.StackTrace}");
             }
 
             if (gltfObject != null)

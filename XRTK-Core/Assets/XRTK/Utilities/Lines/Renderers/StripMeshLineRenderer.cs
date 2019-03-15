@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Extensions;
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Extensions;
 
 namespace XRTK.Utilities.Lines.Renderers
 {
@@ -73,7 +73,7 @@ namespace XRTK.Utilities.Lines.Renderers
             stripMeshFilter.sharedMesh = stripMesh;
         }
 
-        public void Update()
+        public void LateUpdate()
         {
             if (stripMeshRenderer == null)
             {

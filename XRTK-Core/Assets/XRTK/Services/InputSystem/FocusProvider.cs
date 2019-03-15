@@ -206,6 +206,8 @@ namespace XRTK.Services.InputSystem
                 focusDetails.Point = hit.point;
                 focusDetails.Normal = hit.normal;
                 focusDetails.Object = hit.transform.gameObject;
+
+                pointerWasLocked = false;
             }
 
             /// <summary>
@@ -222,8 +224,6 @@ namespace XRTK.Services.InputSystem
                 focusDetails.Point = hit.point;
                 focusDetails.Normal = hit.normal;
                 focusDetails.Object = result.gameObject;
-
-                pointerWasLocked = false;
             }
 
             public void UpdateHit()
@@ -937,7 +937,7 @@ namespace XRTK.Services.InputSystem
 
             for (var i = 0; i < eventData.InputSource.Pointers.Length; i++)
             {
-                // Special un-registration for Gaze
+                // Special unregistration for Gaze
                 if (gazeProviderPointingData != null && eventData.InputSource.Pointers[i].PointerId == gazeProviderPointingData.Pointer.PointerId)
                 {
                     // If the source lost is the gaze input source, then reset it.

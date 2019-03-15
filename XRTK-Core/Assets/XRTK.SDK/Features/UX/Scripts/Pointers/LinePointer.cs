@@ -119,6 +119,8 @@ namespace XRTK.SDK.UX.Pointers
 
             TryGetPointerPosition(out Vector3 pointerPosition);
 
+            lineBase.UpdateMatrix();
+
             // Set our first and last points
             lineBase.FirstPoint = pointerPosition;
 

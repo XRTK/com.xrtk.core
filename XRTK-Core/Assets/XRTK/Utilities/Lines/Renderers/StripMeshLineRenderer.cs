@@ -73,7 +73,7 @@ namespace XRTK.Utilities.Lines.Renderers
             stripMeshFilter.sharedMesh = stripMesh;
         }
 
-        public void LateUpdate()
+        protected override void UpdateLine()
         {
             if (stripMeshRenderer == null)
             {

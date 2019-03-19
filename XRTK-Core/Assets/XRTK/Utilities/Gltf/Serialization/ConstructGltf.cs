@@ -17,16 +17,22 @@ namespace XRTK.Utilities.Gltf.Serialization
     {
         private static readonly WaitForUpdate Update = new WaitForUpdate();
         private static readonly WaitForBackgroundThread BackgroundThread = new WaitForBackgroundThread();
-        private static readonly int SrcBlend = Shader.PropertyToID("_SrcBlend");
-        private static readonly int DstBlend = Shader.PropertyToID("_DstBlend");
-        private static readonly int ZWrite = Shader.PropertyToID("_ZWrite");
-        private static readonly int Mode = Shader.PropertyToID("_Mode");
-        private static readonly int EmissionMap = Shader.PropertyToID("_EmissionMap");
-        private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
-        private static readonly int MetallicGlossMap = Shader.PropertyToID("_MetallicGlossMap");
-        private static readonly int Glossiness = Shader.PropertyToID("_Glossiness");
-        private static readonly int Metallic = Shader.PropertyToID("_Metallic");
-        private static readonly int BumpMap = Shader.PropertyToID("_BumpMap");
+        private static readonly int SrcBlendId = Shader.PropertyToID("_SrcBlend");
+        private static readonly int DstBlendId = Shader.PropertyToID("_DstBlend");
+        private static readonly int ZWriteId = Shader.PropertyToID("_ZWrite");
+        private static readonly int ModeId = Shader.PropertyToID("_Mode");
+        private static readonly int EmissionMapId = Shader.PropertyToID("_EmissionMap");
+        private static readonly int EmissionColorId = Shader.PropertyToID("_EmissionColor");
+        private static readonly int MetallicGlossMapId = Shader.PropertyToID("_MetallicGlossMap");
+        private static readonly int GlossinessId = Shader.PropertyToID("_Glossiness");
+        private static readonly int MetallicId = Shader.PropertyToID("_Metallic");
+        private static readonly int BumpMapId = Shader.PropertyToID("_BumpMap");
+        private static readonly int EmissiveColorId = Shader.PropertyToID("_EmissiveColor");
+        private static readonly int ChannelMapId = Shader.PropertyToID("_ChannelMap");
+        private static readonly int SmoothnessId = Shader.PropertyToID("_Smoothness");
+        private static readonly int NormalMapId = Shader.PropertyToID("_NormalMap");
+        private static readonly int NormalMapScaleId = Shader.PropertyToID("_NormalMapScale");
+        private static readonly int CullModeId = Shader.PropertyToID("_CullMode");
 
         /// <summary>
         /// Constructs the glTF Object.
@@ -129,8 +135,35 @@ namespace XRTK.Utilities.Gltf.Serialization
 
                     if (texture == null)
                     {
-                        Debug.LogWarning($"Attempting to load asset at {path}");
+#if WINDOWS_UWP
+                        if (gltfObject.LoadAsynchronously)
+                        {
+                            try
+                            {
+                                var storageFile = await Windows.Storage.StorageFile.GetFileFromPathAsync(path);
 
+                                if (storageFile != null)
+                                {
+
+                                    var buffer = await Windows.Storage.FileIO.ReadBufferAsync(storageFile);
+
+                                    using (Windows.Storage.Streams.DataReader dataReader = Windows.Storage.Streams.DataReader.FromBuffer(buffer))
+                                    {
+                                        imageData = new byte[buffer.Length];
+                                        dataReader.ReadBytes(imageData);
+                                    }
+                                }
+                            }
+                            catch (Exception e)
+                            {
+                                Debug.LogError(e.Message);
+                            }
+                        }
+                        else
+                        {
+                            imageData = UnityEngine.Windows.File.ReadAllBytes(path);
+                        }
+#else
                         using (FileStream stream = File.Open(path, FileMode.Open))
                         {
                             imageData = new byte[stream.Length];
@@ -144,6 +177,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                                 stream.Read(imageData, 0, (int)stream.Length);
                             }
                         }
+#endif
                     }
                 }
                 else
@@ -177,6 +211,7 @@ namespace XRTK.Utilities.Gltf.Serialization
             if (gltfObject.LoadAsynchronously) await Update;
 
             Material material = await CreateMRTKShaderMaterial(gltfObject, gltfMaterial, materialId);
+
             if (material == null)
             {
                 Debug.LogWarning("The Mixed Reality Toolkit/Standard Shader was not found. Falling back to Standard Shader");
@@ -198,12 +233,12 @@ namespace XRTK.Utilities.Gltf.Serialization
         private static async Task<Material> CreateMRTKShaderMaterial(GltfObject gltfObject, GltfMaterial gltfMaterial, int materialId)
         {
             var shader = Shader.Find("Mixed Reality Toolkit/Standard");
-            if (shader == null)
-                return null;
+
+            if (shader == null) { return null; }
 
             var material = new Material(shader)
             {
-                name = string.IsNullOrEmpty(gltfMaterial.name) ? $"Gltf Material {materialId}" : gltfMaterial.name
+                name = string.IsNullOrEmpty(gltfMaterial.name) ? $"glTF Material {materialId}" : gltfMaterial.name
             };
 
             if (gltfMaterial.pbrMetallicRoughness.baseColorTexture.index >= 0)
@@ -215,10 +250,10 @@ namespace XRTK.Utilities.Gltf.Serialization
 
             if (gltfMaterial.alphaMode == "MASK")
             {
-                material.SetInt(SrcBlend, (int)BlendMode.One);
-                material.SetInt(DstBlend, (int)BlendMode.Zero);
-                material.SetInt(ZWrite, 1);
-                material.SetInt(Mode, 3);
+                material.SetInt(SrcBlendId, (int)BlendMode.One);
+                material.SetInt(DstBlendId, (int)BlendMode.Zero);
+                material.SetInt(ZWriteId, 1);
+                material.SetInt(ModeId, 3);
                 material.SetOverrideTag("RenderType", "Cutout");
                 material.EnableKeyword("_ALPHATEST_ON");
                 material.DisableKeyword("_ALPHABLEND_ON");
@@ -227,10 +262,10 @@ namespace XRTK.Utilities.Gltf.Serialization
             }
             else if (gltfMaterial.alphaMode == "BLEND")
             {
-                material.SetInt(SrcBlend, (int)BlendMode.One);
-                material.SetInt(DstBlend, (int)BlendMode.OneMinusSrcAlpha);
-                material.SetInt(ZWrite, 0);
-                material.SetInt(Mode, 3);
+                material.SetInt(SrcBlendId, (int)BlendMode.One);
+                material.SetInt(DstBlendId, (int)BlendMode.OneMinusSrcAlpha);
+                material.SetInt(ZWriteId, 0);
+                material.SetInt(ModeId, 3);
                 material.SetOverrideTag("RenderType", "Transparency");
                 material.DisableKeyword("_ALPHATEST_ON");
                 material.DisableKeyword("_ALPHABLEND_ON");
@@ -241,52 +276,68 @@ namespace XRTK.Utilities.Gltf.Serialization
             if (gltfMaterial.emissiveTexture.index >= 0 && material.HasProperty("_EmissionMap"))
             {
                 material.EnableKeyword("_EMISSION");
-                material.SetColor("_EmissiveColor", gltfMaterial.emissiveFactor.GetColorValue());
+                material.SetColor(EmissiveColorId, gltfMaterial.emissiveFactor.GetColorValue());
             }
 
             if (gltfMaterial.pbrMetallicRoughness.metallicRoughnessTexture.index >= 0)
             {
                 var texture = gltfObject.images[gltfMaterial.pbrMetallicRoughness.metallicRoughnessTexture.index].Texture;
 
+                Texture2D occlusionTexture = null;
+                if (gltfMaterial.occlusionTexture.index >= 0)
+                {
+                    occlusionTexture = gltfObject.images[gltfMaterial.occlusionTexture.index].Texture;
+                }
+
                 if (texture.isReadable)
                 {
                     var pixels = texture.GetPixels();
+                    Color[] occlusionPixels = null;
+                    if (occlusionTexture != null &&
+                        occlusionTexture.isReadable)
+                    {
+                        occlusionPixels = occlusionTexture.GetPixels();
+                    }
+
                     if (gltfObject.LoadAsynchronously) await BackgroundThread;
 
                     var pixelCache = new Color[pixels.Length];
 
                     for (int c = 0; c < pixels.Length; c++)
                     {
-                        // Unity only looks for metal in R channel, and smoothness in A.
-                        pixelCache[c].r = pixels[c].g;
-                        pixelCache[c].g = 0f;
-                        pixelCache[c].b = 0f;
-                        pixelCache[c].a = pixels[c].b;
+                        pixelCache[c].r = pixels[c].b; // MRTK standard shader metallic value, glTF metallic value
+                        pixelCache[c].g = occlusionPixels?[c].r ?? 1.0f; // MRTK standard shader occlusion value, glTF occlusion value if available
+                        pixelCache[c].b = 0f; // MRTK standard shader emission value
+                        pixelCache[c].a = (1.0f - pixels[c].g); // MRTK standard shader smoothness value, invert of glTF roughness value
                     }
 
                     if (gltfObject.LoadAsynchronously) await Update;
                     texture.SetPixels(pixelCache);
                     texture.Apply();
 
-                    material.SetTexture("_ChannelMap", texture);
+                    material.SetTexture(ChannelMapId, texture);
                     material.EnableKeyword("_CHANNEL_MAP");
                 }
+                else
+                {
+                    material.DisableKeyword("_CHANNEL_MAP");
+                }
 
-                material.SetFloat("_Smoothness", Mathf.Abs((float)gltfMaterial.pbrMetallicRoughness.roughnessFactor - 1f));
-                material.SetFloat("_Metallic", (float)gltfMaterial.pbrMetallicRoughness.metallicFactor);
+                material.SetFloat(SmoothnessId, Mathf.Abs((float)gltfMaterial.pbrMetallicRoughness.roughnessFactor - 1f));
+                material.SetFloat(MetallicId, (float)gltfMaterial.pbrMetallicRoughness.metallicFactor);
             }
 
 
             if (gltfMaterial.normalTexture.index >= 0)
             {
-                material.SetTexture("_NormalMap", gltfObject.images[gltfMaterial.normalTexture.index].Texture);
-                material.SetFloat("_NormalMapScale", (float) gltfMaterial.normalTexture.scale);
+                material.SetTexture(NormalMapId, gltfObject.images[gltfMaterial.normalTexture.index].Texture);
+                material.SetFloat(NormalMapScaleId, (float)gltfMaterial.normalTexture.scale);
                 material.EnableKeyword("_NORMAL_MAP");
             }
 
             if (gltfMaterial.doubleSided)
             {
-                material.SetFloat("_CullMode", (float) CullMode.Off);
+                material.SetFloat(CullModeId, (float)UnityEngine.Rendering.CullMode.Off);
             }
 
             material.globalIlluminationFlags = MaterialGlobalIlluminationFlags.RealtimeEmissive;
@@ -296,12 +347,12 @@ namespace XRTK.Utilities.Gltf.Serialization
         private static async Task<Material> CreateStandardShaderMaterial(GltfObject gltfObject, GltfMaterial gltfMaterial, int materialId)
         {
             var shader = Shader.Find("Standard");
-            if (shader == null)
-                return null;
+
+            if (shader == null) { return null; }
 
             var material = new Material(shader)
             {
-                name = string.IsNullOrEmpty(gltfMaterial.name) ? $"Gltf Material {materialId}" : gltfMaterial.name
+                name = string.IsNullOrEmpty(gltfMaterial.name) ? $"glTF Material {materialId}" : gltfMaterial.name
             };
 
             if (gltfMaterial.pbrMetallicRoughness.baseColorTexture.index >= 0)
@@ -313,10 +364,10 @@ namespace XRTK.Utilities.Gltf.Serialization
 
             if (gltfMaterial.alphaMode == "MASK")
             {
-                material.SetInt(SrcBlend, (int)BlendMode.One);
-                material.SetInt(DstBlend, (int)BlendMode.Zero);
-                material.SetInt(ZWrite, 1);
-                material.SetInt(Mode, 3);
+                material.SetInt(SrcBlendId, (int)BlendMode.One);
+                material.SetInt(DstBlendId, (int)BlendMode.Zero);
+                material.SetInt(ZWriteId, 1);
+                material.SetInt(ModeId, 3);
                 material.SetOverrideTag("RenderType", "Cutout");
                 material.EnableKeyword("_ALPHATEST_ON");
                 material.DisableKeyword("_ALPHABLEND_ON");
@@ -325,10 +376,10 @@ namespace XRTK.Utilities.Gltf.Serialization
             }
             else if (gltfMaterial.alphaMode == "BLEND")
             {
-                material.SetInt(SrcBlend, (int)BlendMode.One);
-                material.SetInt(DstBlend, (int)BlendMode.OneMinusSrcAlpha);
-                material.SetInt(ZWrite, 0);
-                material.SetInt(Mode, 3);
+                material.SetInt(SrcBlendId, (int)BlendMode.One);
+                material.SetInt(DstBlendId, (int)BlendMode.OneMinusSrcAlpha);
+                material.SetInt(ZWriteId, 0);
+                material.SetInt(ModeId, 3);
                 material.SetOverrideTag("RenderType", "Transparency");
                 material.DisableKeyword("_ALPHATEST_ON");
                 material.DisableKeyword("_ALPHABLEND_ON");
@@ -340,8 +391,8 @@ namespace XRTK.Utilities.Gltf.Serialization
             {
                 material.EnableKeyword("_EmissionMap");
                 material.EnableKeyword("_EMISSION");
-                material.SetTexture(EmissionMap, gltfObject.images[gltfMaterial.emissiveTexture.index].Texture);
-                material.SetColor(EmissionColor, gltfMaterial.emissiveFactor.GetColorValue());
+                material.SetTexture(EmissionMapId, gltfObject.images[gltfMaterial.emissiveTexture.index].Texture);
+                material.SetColor(EmissionColorId, gltfMaterial.emissiveFactor.GetColorValue());
             }
 
             if (gltfMaterial.pbrMetallicRoughness.metallicRoughnessTexture.index >= 0)
@@ -368,18 +419,18 @@ namespace XRTK.Utilities.Gltf.Serialization
                     texture.SetPixels(pixelCache);
                     texture.Apply();
 
-                    material.SetTexture(MetallicGlossMap, texture);
+                    material.SetTexture(MetallicGlossMapId, texture);
                 }
 
-                material.SetFloat(Glossiness, Mathf.Abs((float)gltfMaterial.pbrMetallicRoughness.roughnessFactor - 1f));
-                material.SetFloat(Metallic, (float)gltfMaterial.pbrMetallicRoughness.metallicFactor);
+                material.SetFloat(GlossinessId, Mathf.Abs((float)gltfMaterial.pbrMetallicRoughness.roughnessFactor - 1f));
+                material.SetFloat(MetallicId, (float)gltfMaterial.pbrMetallicRoughness.metallicFactor);
                 material.EnableKeyword("_MetallicGlossMap");
                 material.EnableKeyword("_METALLICGLOSSMAP");
             }
 
             if (gltfMaterial.normalTexture.index >= 0)
             {
-                material.SetTexture(BumpMap, gltfObject.images[gltfMaterial.normalTexture.index].Texture);
+                material.SetTexture(BumpMapId, gltfObject.images[gltfMaterial.normalTexture.index].Texture);
                 material.EnableKeyword("_BumpMap");
             }
 

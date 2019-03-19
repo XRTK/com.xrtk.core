@@ -44,10 +44,11 @@ namespace XRTK.SDK.UX.ToolTips
                     for (int i = 0; i < localPivotPositions.Length; i++)
                     {
                         currentPivot = localPivotPositions[i];
-                        float dist = Vector3.Distance(anchorPosition, contentParent.TransformPoint(currentPivot));
-                        if (dist < nearDist)
+                        float sqrDist = (anchorPosition - contentParent.TransformPoint(currentPivot)).sqrMagnitude;
+
+                        if (sqrDist < nearDist)
                         {
-                            nearDist = dist;
+                            nearDist = sqrDist;
                             nearPivot = currentPivot;
                         }
                     }
@@ -58,10 +59,11 @@ namespace XRTK.SDK.UX.ToolTips
                     for (int i = (int)ToolTipAttachPointType.BottomRightCorner; i < (int)ToolTipAttachPointType.TopLeftCorner; i++)
                     {
                         currentPivot = localPivotPositions[i];
-                        float dist = Vector3.Distance(anchorPosition, contentParent.TransformPoint(currentPivot));
-                        if (dist < nearDist)
+                        float sqrDist = (anchorPosition - contentParent.TransformPoint(currentPivot)).sqrMagnitude;
+
+                        if (sqrDist < nearDist)
                         {
-                            nearDist = dist;
+                            nearDist = sqrDist;
                             nearPivot = currentPivot;
                         }
                     }
@@ -72,10 +74,11 @@ namespace XRTK.SDK.UX.ToolTips
                     for (int i = (int)ToolTipAttachPointType.BottomMiddle; i < (int)ToolTipAttachPointType.LeftMiddle; i++)
                     {
                         currentPivot = localPivotPositions[i];
-                        float dist = Vector3.Distance(anchorPosition, contentParent.TransformPoint(currentPivot));
-                        if (dist < nearDist)
+                        float sqrDist = (anchorPosition - contentParent.TransformPoint(currentPivot)).sqrMagnitude;
+
+                        if (sqrDist < nearDist)
                         {
-                            nearDist = dist;
+                            nearDist = sqrDist;
                             nearPivot = currentPivot;
                         }
                     }

@@ -13,6 +13,9 @@ namespace XRTK.Providers.Controllers.OpenVR
         /// <inheritdoc />
         public override SupportedControllerType ControllerType => SupportedControllerType.OculusTouch;
 
+        /// <inheritdoc />
+        public override string TexturePath => $"{base.TexturePath}OculusControllersTouch";
+
         protected override void Awake()
         {
             if (!HasSetupDefaults)

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCustomProfile: 0
   focusProviderType:
-    reference: XRTK.SDK.Input.FocusProvider, XRTK.SDK
+    reference: XRTK.Services.InputSystem.FocusProvider, XRTK
   inputActionsProfile: {fileID: 11400000, guid: 399335ccc89c4d12b79f3539ca7771db,
     type: 2}
   inputActionRulesProfile: {fileID: 11400000, guid: ef567c286b1542c8bc638fad1ccbe250,

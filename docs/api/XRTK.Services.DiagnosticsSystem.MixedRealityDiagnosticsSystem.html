@@ -1,0 +1,717 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class MixedRealityDiagnosticsSystem
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class MixedRealityDiagnosticsSystem
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.40.12.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem">
+  
+  
+  <h1 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem" class="text-break">Class MixedRealityDiagnosticsSystem
+  </h1>
+  <div class="markdown level0 summary"><p>The default implementation of the <a class="xref" href="XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html">IMixedRealityDiagnosticsSystem</a></p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="XRTK.Services.BaseService.html">BaseService</a></div>
+    <div class="level2"><a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html">BaseServiceWithConstructor</a></div>
+    <div class="level3"><a class="xref" href="XRTK.Services.BaseSystem.html">BaseSystem</a></div>
+    <div class="level4"><a class="xref" href="XRTK.Services.BaseEventSystem.html">BaseEventSystem</a></div>
+    <div class="level5"><span class="xref">MixedRealityDiagnosticsSystem</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html">IMixedRealityDiagnosticsSystem</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSystem.html">IMixedRealityEventSystem</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSource.html">IMixedRealityEventSource</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.iequalitycomparer">IEqualityComparer</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseEventSystem.html#XRTK_Services_BaseEventSystem_EventListeners">BaseEventSystem.EventListeners</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseEventSystem.html#XRTK_Services_BaseEventSystem_HandleEvent__1_UnityEngine_EventSystems_BaseEventData_UnityEngine_EventSystems_ExecuteEvents_EventFunction___0__">BaseEventSystem.HandleEvent&lt;T&gt;(BaseEventData, ExecuteEvents.EventFunction&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseEventSystem.html#XRTK_Services_BaseEventSystem_Register_UnityEngine_GameObject_">BaseEventSystem.Register(GameObject)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseEventSystem.html#XRTK_Services_BaseEventSystem_Unregister_UnityEngine_GameObject_">BaseEventSystem.Unregister(GameObject)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Priority">BaseServiceWithConstructor.Priority</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Reset">BaseService.Reset()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Enable">BaseService.Enable()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Update">BaseService.Update()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Disable">BaseService.Disable()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnApplicationFocus_System_Boolean_">BaseService.OnApplicationFocus(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnApplicationPause_System_Boolean_">BaseService.OnApplicationPause(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Dispose">BaseService.Dispose()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_OnDispose_System_Boolean_">BaseService.OnDispose(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.Services.DiagnosticsSystem.html">XRTK.Services.DiagnosticsSystem</a></h6>
+  <h6><strong>Assembly</strong>: XRTK.dll</h6>
+  <h5 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class MixedRealityDiagnosticsSystem : BaseEventSystem, IMixedRealityDiagnosticsSystem, IMixedRealityEventSystem, IMixedRealityService, IDisposable, IMixedRealityEventSource, IEqualityComparer</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem__ctor_XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.%23ctor(XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L19">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem__ctor_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.#ctor*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem__ctor_XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.#ctor(XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile)">MixedRealityDiagnosticsSystem(MixedRealityDiagnosticsProfile)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MixedRealityDiagnosticsSystem(MixedRealityDiagnosticsProfile profile)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html">MixedRealityDiagnosticsProfile</a></td>
+        <td><span class="parametername">profile</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_CpuUseTracker.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.CpuUseTracker%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L129">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_CpuUseTracker_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.CpuUseTracker*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_CpuUseTracker" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.CpuUseTracker">CpuUseTracker</h4>
+  <div class="markdown level1 summary"><p>The cpu use tracker.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CpuUseTracker CpuUseTracker { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Diagnostics.CpuUseTracker.html">CpuUseTracker</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_DiagnosticVisualization.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.DiagnosticVisualization%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L174">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_DiagnosticVisualization_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.DiagnosticVisualization*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_DiagnosticVisualization" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.DiagnosticVisualization">DiagnosticVisualization</h4>
+  <div class="markdown level1 summary"><p>Gets the <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a> that represents the diagnostic visualization</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameObject DiagnosticVisualization { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_FpsUseTracker.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FpsUseTracker%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L148">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_FpsUseTracker_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FpsUseTracker*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_FpsUseTracker" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FpsUseTracker">FpsUseTracker</h4>
+  <div class="markdown level1 summary"><p>The fps use tracker.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FpsUseTracker FpsUseTracker { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Diagnostics.FpsUseTracker.html">FpsUseTracker</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_MemoryUseTracker.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.MemoryUseTracker%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L167">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_MemoryUseTracker_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.MemoryUseTracker*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_MemoryUseTracker" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.MemoryUseTracker">MemoryUseTracker</h4>
+  <div class="markdown level1 summary"><p>The memory use tracker.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public MemoryUseTracker MemoryUseTracker { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Diagnostics.MemoryUseTracker.html">MemoryUseTracker</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowCpu.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowCpu%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L109">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowCpu_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowCpu*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowCpu" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowCpu">ShowCpu</h4>
+  <div class="markdown level1 summary"><p>Enable / disable cpu profiling when the diagnostic panel is visible.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShowCpu { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowFps.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowFps%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L134">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowFps_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowFps*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowFps" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowFps">ShowFps</h4>
+  <div class="markdown level1 summary"><p>Enable / disable fps profiling when the diagnostic panel is visible.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShowFps { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowMemory.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowMemory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L153">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowMemory_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowMemory*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowMemory" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowMemory">ShowMemory</h4>
+  <div class="markdown level1 summary"><p>Enable / disable memory profiling when the diagnostic panel is visible.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShowMemory { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_SourceId.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L220">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_SourceId_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceId*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_SourceId" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceId">SourceId</h4>
+  <div class="markdown level1 summary"><p>The Unique Source Id of this Event Source.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public uint SourceId { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uint32">UInt32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_SourceName.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L223">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_SourceName_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceName*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_SourceName" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceName">SourceName</h4>
+  <div class="markdown level1 summary"><p>The Name of this Event Source.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public string SourceName { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Visible.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Visible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L91">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Visible_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Visible*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Visible" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Visible">Visible</h4>
+  <div class="markdown level1 summary"><p>Enable / disable the diagnostic display</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Visible { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Destroy.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Destroy%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L53">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Destroy_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Destroy*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Destroy" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Destroy">Destroy()</h4>
+  <div class="markdown level1 summary"><p>Optional Destroy function to perform cleanup of the service before the Mixed Reality Toolkit is destroyed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Destroy()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Destroy">BaseService.Destroy()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Equals_System_Object_System_Object_.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Equals(System.Object%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L226">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Equals_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Equals*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Equals_System_Object_System_Object_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Equals(System.Object,System.Object)">Equals(Object, Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(object x, object y)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">x</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">y</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_GetHashCode_System_Object_.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.GetHashCode(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L229">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_GetHashCode_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.GetHashCode*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_GetHashCode_System_Object_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.GetHashCode(System.Object)">GetHashCode(Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GetHashCode(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">obj</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Initialize.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Initialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L31">View Source</a>
+  </span>
+  <a id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Initialize_" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Initialize*"></a>
+  <h4 id="XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Initialize" data-uid="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Initialize">Initialize()</h4>
+  <div class="markdown level1 summary"><p>The initialize function is used to setup the service once created.
+This method is called once all services have been registered in the Mixed Reality Toolkit.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void Initialize()</code></pre>
+  </div>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Initialize">BaseService.Initialize()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html">IMixedRealityDiagnosticsSystem</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSystem.html">IMixedRealityEventSystem</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSource.html">IMixedRealityEventSource</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.iequalitycomparer">System.Collections.IEqualityComparer</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem.md&amp;value=---%0Auid%3A%20XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Services/DiagnosticsSystem/MixedRealityDiagnosticsSystem.cs/#L17" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) 2019 XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

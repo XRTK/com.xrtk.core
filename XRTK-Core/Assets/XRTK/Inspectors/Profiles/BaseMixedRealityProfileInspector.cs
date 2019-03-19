@@ -18,7 +18,7 @@ namespace XRTK.Inspectors.Profiles
         private const string IsCustomProfileProperty = "isCustomProfile";
 
         private static readonly GUIContent NewProfileContent = new GUIContent("+", "Create New Profile");
-        private static readonly GUIContent CopyProfileContent = new GUIContent("</>", "Replace with a copy of the default profile.");
+        private static readonly GUIContent CopyProfileContent = new GUIContent("Clone", "Replace with a copy of the default profile.");
 
         private static SerializedObject targetProfile;
         private static BaseMixedRealityProfile profile;
@@ -92,7 +92,7 @@ namespace XRTK.Inspectors.Profiles
 
                 if (profile.IsCustomProfile &&
                     !renderedProfile.IsCustomProfile &&
-                    GUILayout.Button(CopyProfileContent, EditorStyles.miniButton, GUILayout.Width(32f)))
+                    GUILayout.Button(CopyProfileContent, EditorStyles.miniButton, GUILayout.Width(42f)))
                 {
                     profileToCopy = renderedProfile;
                     var typeName = renderedProfile.GetType().Name;
@@ -121,7 +121,7 @@ namespace XRTK.Inspectors.Profiles
         {
             profileToCopy = profile;
             ScriptableObject newProfile = CreateInstance(profile.GetType().ToString());
-            profile = newProfile.CreateAsset("Assets/XRTK-Generated/CustomProfiles") as BaseMixedRealityProfile;
+            profile = newProfile.CreateAsset("Assets/XRTK.Generated/CustomProfiles") as BaseMixedRealityProfile;
             Debug.Assert(profile != null);
 
             await new WaitUntil(() => profileToCopy != profile);

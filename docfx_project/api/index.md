@@ -1,2 +1,5 @@
-# PLACEHOLDER
-TODO: Add .NET projects to the *src* folder and run `docfx` to generate **REAL** *API Documentation*!
+# Mixed Reality Toolkit API Documentation
+
+## Quick Links
+
+- [MixedRealityToolkit](https://xrtk.github.io/XRTK-Core/api/XRTK.Services.MixedRealityToolkit.html): The service locator for the framework and coordinates all the applicaitons services and systems.

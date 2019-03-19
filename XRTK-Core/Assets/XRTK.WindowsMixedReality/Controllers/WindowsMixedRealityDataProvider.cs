@@ -410,8 +410,6 @@ namespace XRTK.WindowsMixedReality.Controllers
 
         private static async void TryRenderControllerModel(InteractionSource interactionSource, WindowsMixedRealityController controller)
         {
-            byte[] glbModelData = null;
-
 #if WINDOWS_UWP
             if (UnityEngine.XR.WSA.HolographicSettings.IsDisplayOpaque)
             {
@@ -419,44 +417,50 @@ namespace XRTK.WindowsMixedReality.Controllers
 
                 if (WindowsApiChecker.UniversalApiContractV5_IsAvailable)
                 {
-                    await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, () =>
+                    async void DispatchedHandler()
                     {
-                        var sources = SpatialInteractionManager.GetForCurrentView()
-                            .GetDetectedSourcesAtTimestamp(PerceptionTimestampHelper.FromHistoricalTargetTime(DateTimeOffset.Now));
+                        byte[] glbModelData = null;
+                        var sources = SpatialInteractionManager
+                            .GetForCurrentView()
+                            .GetDetectedSourcesAtTimestamp(
+                                PerceptionTimestampHelper.FromHistoricalTargetTime(DateTimeOffset.Now));
 
                         for (var i = 0; i < sources?.Count; i++)
                         {
                             if (sources[i].Source.Id.Equals(interactionSource.id))
                             {
-                                stream = sources[i].Source.Controller.TryGetRenderableModelAsync().GetResults();
+                                stream = await sources[i].Source.Controller.TryGetRenderableModelAsync();
                                 break;
                             }
                         }
-                    });
-                }
 
-                if (stream != null)
-                {
-                    glbModelData = new byte[stream.Size];
+                        if (stream != null)
+                        {
+                            glbModelData = new byte[stream.Size];
 
-                    using (var reader = new DataReader(stream))
-                    {
-                        await reader.LoadAsync((uint)stream.Size);
-                        reader.ReadBytes(glbModelData);
+                            using (var reader = new DataReader(stream))
+                            {
+                                await reader.LoadAsync((uint)stream.Size);
+                                reader.ReadBytes(glbModelData);
+                            }
+
+                            stream.Dispose();
+
+                        }
+                        else
+                        {
+                            Debug.LogError("Failed to load model data!");
+                        }
+
+                        await controller.TryRenderControllerModelAsync(typeof(WindowsMixedRealityController), glbModelData, interactionSource.kind == InteractionSourceKind.Hand);
                     }
 
-                    stream.Dispose();
-                }
-                else
-                {
-                    Debug.LogError("Failed to load model data!");
+                    await CoreApplication.MainView.CoreWindow.Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, DispatchedHandler);
                 }
             }
 #else
-            Debug.Log("Skipping gltf load...");
+            await controller.TryRenderControllerModelAsync(typeof(WindowsMixedRealityController), null, interactionSource.kind == InteractionSourceKind.Hand);
 #endif // WINDOWS_UWP
-
-            await controller.TryRenderControllerModelAsync(typeof(WindowsMixedRealityController), glbModelData, interactionSource.kind == InteractionSourceKind.Hand);
         }
 
         /// <summary>

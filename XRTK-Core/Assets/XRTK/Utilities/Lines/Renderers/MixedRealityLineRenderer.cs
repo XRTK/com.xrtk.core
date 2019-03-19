@@ -68,7 +68,7 @@ namespace XRTK.Utilities.Lines.Renderers
             }
         }
 
-        private void Update()
+        private void LateUpdate()
         {
             if (LineDataSource == null)
             {

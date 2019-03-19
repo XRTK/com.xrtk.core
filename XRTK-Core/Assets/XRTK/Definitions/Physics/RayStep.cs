@@ -16,14 +16,34 @@ namespace XRTK.Definitions.Physics
         /// <param name="terminus"></param>
         public RayStep(Vector3 origin, Vector3 terminus) : this()
         {
+            epsilon = 0.01f;
             Origin = origin;
             Terminus = terminus;
-            Length = Vector3.Distance(origin, terminus);
-            Direction = (Terminus - Origin).normalized;
-            epsilon = 0.01f;
+
+            dist.x = Terminus.x - Origin.x;
+            dist.y = Terminus.y - Origin.y;
+            dist.z = Terminus.z - Origin.z;
+            Length = Mathf.Sqrt((dist.x * dist.x) + (dist.y * dist.y) + (dist.z * dist.z));
+
+            if (Length > 0)
+            {
+                dir.x = dist.x / Length;
+                dir.y = dist.y / Length;
+                dir.z = dist.z / Length;
+            }
+            else
+            {
+                dir = dist;
+            }
+
+            Direction = dir;
         }
 
         private readonly float epsilon;
+
+        private static Vector3 dist;
+        private static Vector3 dir;
+        private static Vector3 pos;
 
         public Vector3 Origin { get; private set; }
 
@@ -35,15 +55,46 @@ namespace XRTK.Definitions.Physics
 
         public Vector3 GetPoint(float distance)
         {
-            return Vector3.MoveTowards(Origin, Terminus, distance);
+            if (Length <= distance || Length.Equals(0f))
+            {
+                return Origin;
+            }
+
+            pos.x = Origin.x + Direction.x * distance;
+            pos.y = Origin.y + Direction.y * distance;
+            pos.z = Origin.z + Direction.z * distance;
+
+            return pos;
         }
 
-        public void UpdateRayStep(Vector3 origin, Vector3 terminus)
+        /// <summary>
+        /// Update current ray step with new origin and terminus points.
+        /// Pass by ref to avoid unnecessary struct copy into function since values will be copied anyways locally
+        /// </summary>
+        /// <param name="origin">beginning of ray step origin</param>
+        /// <param name="terminus">end of ray step</param>
+        public void UpdateRayStep(ref Vector3 origin, ref Vector3 terminus)
         {
             Origin = origin;
             Terminus = terminus;
-            Length = Vector3.Distance(origin, terminus);
-            Direction = (Terminus - Origin).normalized;
+
+            dist.x = Terminus.x - Origin.x;
+            dist.y = Terminus.y - Origin.y;
+            dist.z = Terminus.z - Origin.z;
+            Length = Mathf.Sqrt((dist.x * dist.x) + (dist.y * dist.y) + (dist.z * dist.z));
+
+            if (Length > 0)
+            {
+                dir.x = dist.x / Length;
+                dir.y = dist.y / Length;
+                dir.z = dist.z / Length;
+            }
+            else
+            {
+                dir = dist;
+            }
+
+            Direction = dir;
         }
 
         public void CopyRay(Ray ray, float rayLength)
@@ -51,7 +102,12 @@ namespace XRTK.Definitions.Physics
             Length = rayLength;
             Origin = ray.origin;
             Direction = ray.direction;
-            Terminus = Origin + (Direction * Length);
+
+            pos.x = Origin.x + Direction.x * Length;
+            pos.y = Origin.y + Direction.y * Length;
+            pos.z = Origin.z + Direction.z * Length;
+
+            Terminus = pos;
         }
 
         /// <summary>
@@ -61,7 +117,20 @@ namespace XRTK.Definitions.Physics
         /// <returns>True if this ray step contains the point provided.</returns>
         public bool Contains(Vector3 point)
         {
-            return Vector3.Distance(Origin, point) + Vector3.Distance(point, Terminus) - Length < epsilon;
+            dist.x = Origin.x - point.x;
+            dist.y = Origin.y - point.y;
+            dist.z = Origin.z - point.z;
+            float sqrMagOriginPoint = (dist.x * dist.x) + (dist.y * dist.y) + (dist.z * dist.z);
+
+            dist.x = point.x - Terminus.x;
+            dist.y = point.y - Terminus.y;
+            dist.z = point.z - Terminus.z;
+            float sqrMagPointTerminus = (dist.x * dist.x) + (dist.y * dist.y) + (dist.z * dist.z);
+
+            float sqrLength = Length * Length;
+            float sqrEpsilon = epsilon * epsilon;
+
+            return (sqrMagOriginPoint + sqrMagPointTerminus) - sqrLength > sqrEpsilon;
         }
 
         public static implicit operator Ray(RayStep step)
@@ -79,17 +148,17 @@ namespace XRTK.Definitions.Physics
         /// <returns></returns>
         public static Vector3 GetPointByDistance(RayStep[] steps, float distance)
         {
-             Debug.Assert(steps != null);
-             Debug.Assert(steps.Length > 0);
-
             Vector3 point = Vector3.zero;
             float remainingDistance = distance;
+            Debug.Assert(steps != null);
+            int numSteps = steps.Length;
+            Debug.Assert(numSteps > 0);
 
-            for (int i = 0; i < steps.Length; i++)
+            for (int i = 0; i < numSteps; i++)
             {
-                if (remainingDistance > steps[i].Length)
+                if (remainingDistance > numSteps)
                 {
-                    remainingDistance -= steps[i].Length;
+                    remainingDistance -= numSteps;
                 }
                 else
                 {
@@ -102,7 +171,7 @@ namespace XRTK.Definitions.Physics
             if (remainingDistance > 0)
             {
                 // If we reach the end and still have distance left, set the point to the terminus of the last step
-                point = steps[steps.Length - 1].Terminus;
+                point = steps[numSteps - 1].Terminus;
             }
 
             return point;
@@ -116,13 +185,14 @@ namespace XRTK.Definitions.Physics
         /// <returns></returns>
         public static RayStep GetStepByDistance(RayStep[] steps, float distance)
         {
-             Debug.Assert(steps != null);
-             Debug.Assert(steps.Length > 0);
+            Debug.Assert(steps != null);
+            Debug.Assert(steps.Length > 0);
 
-            RayStep step = new RayStep();
+            var step = new RayStep();
             float remainingDistance = distance;
+            int numSteps = steps.Length;
 
-            for (int i = 0; i < steps.Length; i++)
+            for (int i = 0; i < numSteps; i++)
             {
                 if (remainingDistance > steps[i].Length)
                 {
@@ -153,8 +223,8 @@ namespace XRTK.Definitions.Physics
         /// <returns></returns>
         public static Vector3 GetDirectionByDistance(RayStep[] steps, float distance)
         {
-             Debug.Assert(steps != null);
-             Debug.Assert(steps.Length > 0);
+            Debug.Assert(steps != null);
+            Debug.Assert(steps.Length > 0);
 
             return GetStepByDistance(steps, distance).Direction;
         }

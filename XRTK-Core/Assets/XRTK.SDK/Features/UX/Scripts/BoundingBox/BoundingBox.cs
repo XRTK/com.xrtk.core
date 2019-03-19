@@ -105,20 +105,6 @@ namespace XRTK.SDK.UX
 
         #endregion Enums
 
-        #region Constraints
-
-        private const int LeftTopBack = 0;
-        private const int LeftTopFront = 1;
-        private const int LeftBottomFront = 2;
-        private const int LeftBottomBack = 3;
-        private const int RightTopBack = 4;
-        private const int RightTopFront = 5;
-        private const int RightBottomFront = 6;
-        private const int RightBottomBack = 7;
-        private const int CORNER_COUNT = 8;
-
-        #endregion Constraints
-
         #region Serialized Fields
 
         [Header("Bounds Calculation")]
@@ -249,7 +235,7 @@ namespace XRTK.SDK.UX
                     if (value)
                     {
                         CreateRig();
-                        rigRoot.SetActive(true);
+                        rigRoot.gameObject.SetActive(true);
                     }
                     else
                     {
@@ -265,15 +251,16 @@ namespace XRTK.SDK.UX
         private IMixedRealityInputSource currentInputSource;
         private Vector3 initialGazePoint = Vector3.zero;
         private GameObject targetObject;
-        private GameObject rigRoot;
+        private Transform rigRoot;
         private BoxCollider cachedTargetCollider;
+        private Bounds cachedTargetColliderBounds;
         private Vector3[] boundsCorners;
-        private Vector3 currentBoundsSize;
+        private Vector3 currentBoundsExtents;
         private BoundsCalculationMethod boundsMethod;
         private HandleMoveType handleMoveType = HandleMoveType.Point;
-        private List<GameObject> links;
-        private List<GameObject> corners;
-        private List<GameObject> balls;
+        private List<Transform> links;
+        private List<Transform> corners;
+        private List<Transform> balls;
         private List<Renderer> cornerRenderers;
         private List<Renderer> ballRenderers;
         private List<Renderer> linkRenderers;
@@ -345,7 +332,7 @@ namespace XRTK.SDK.UX
             UpdateRigHandles();
             Flatten();
             ResetHandleVisibility();
-            rigRoot.SetActive(false);
+            rigRoot.gameObject.SetActive(false);
         }
 
         private void DestroyRig()
@@ -500,7 +487,7 @@ namespace XRTK.SDK.UX
         {
             for (int i = 0; i < balls.Count; ++i)
             {
-                if (handle == balls[i])
+                if (handle == balls[i].gameObject)
                 {
                     switch (edgeAxes[i])
                     {
@@ -530,7 +517,7 @@ namespace XRTK.SDK.UX
                 var cubeRenderer = cube.GetComponent<Renderer>();
                 cornerRenderers.Add(cubeRenderer);
                 cornerColliders.Add(cube.GetComponent<Collider>());
-                corners.Add(cube);
+                corners.Add(cube.transform);
 
                 if (handleMaterial != null)
                 {
@@ -547,7 +534,7 @@ namespace XRTK.SDK.UX
 
             for (int i = 0; i < edgeCenters.Length; ++i)
             {
-                GameObject ball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+                var ball = GameObject.CreatePrimitive(PrimitiveType.Sphere);
                 ball.name = $"midpoint_{i}";
                 ball.transform.localScale = new Vector3(ballRadius, ballRadius, ballRadius);
                 ball.transform.position = edgeCenters[i];
@@ -556,7 +543,7 @@ namespace XRTK.SDK.UX
                 var ballRenderer = ball.GetComponent<Renderer>();
                 ballRenderers.Add(ballRenderer);
                 ballColliders.Add(ball.GetComponent<Collider>());
-                balls.Add(ball);
+                balls.Add(ball.transform);
 
                 if (handleMaterial != null)
                 {
@@ -615,7 +602,7 @@ namespace XRTK.SDK.UX
                     linkRenderer.material = wireframeMaterial;
                 }
 
-                links.Add(link);
+                links.Add(link.transform);
             }
         }
 
@@ -628,6 +615,7 @@ namespace XRTK.SDK.UX
             if (boxColliderToUse != null)
             {
                 cachedTargetCollider = boxColliderToUse;
+                cachedTargetCollider.transform.hasChanged = true;
             }
             else
             {
@@ -716,7 +704,6 @@ namespace XRTK.SDK.UX
             if (childRenderers.Length > 0)
             {
                 bounds = childRenderers[0].bounds;
-                var _corners = new Vector3[CORNER_COUNT];
 
                 for (int i = 0; i < childRenderers.Length; ++i)
                 {
@@ -725,7 +712,7 @@ namespace XRTK.SDK.UX
 
                 GetCornerPositionsFromBounds(bounds, ref boundsCorners);
 
-                for (int cornerIndex = 0; cornerIndex < _corners.Length; ++cornerIndex)
+                for (int cornerIndex = 0; cornerIndex < boundsCorners.Length; ++cornerIndex)
                 {
                     GameObject cube = GameObject.CreatePrimitive(PrimitiveType.Cube);
                     cube.name = cornerIndex.ToString();
@@ -831,17 +818,17 @@ namespace XRTK.SDK.UX
 
         private void InitializeDataStructures()
         {
-            rigRoot = new GameObject("rigRoot") { hideFlags = HideFlags.HideInHierarchy | HideFlags.HideInInspector };
-
+            var rigRootObject = new GameObject("rigRoot") { hideFlags = HideFlags.HideInHierarchy | HideFlags.HideInInspector };
+            rigRoot = rigRootObject.transform;
             boundsCorners = new Vector3[8];
 
-            corners = new List<GameObject>();
+            corners = new List<Transform>();
             cornerColliders = new List<Collider>();
             cornerRenderers = new List<Renderer>();
-            balls = new List<GameObject>();
+            balls = new List<Transform>();
             ballRenderers = new List<Renderer>();
             ballColliders = new List<Collider>();
-            links = new List<GameObject>();
+            links = new List<Transform>();
             linkRenderers = new List<Renderer>();
         }
 
@@ -850,14 +837,14 @@ namespace XRTK.SDK.UX
             if (boundsCorners != null && edgeCenters != null)
             {
                 edgeCenters[0] = (boundsCorners[0] + boundsCorners[1]) * 0.5f;
-                edgeCenters[1] = (boundsCorners[1] + boundsCorners[2]) * 0.5f;
-                edgeCenters[2] = (boundsCorners[2] + boundsCorners[3]) * 0.5f;
-                edgeCenters[3] = (boundsCorners[3] + boundsCorners[0]) * 0.5f;
+                edgeCenters[1] = (boundsCorners[0] + boundsCorners[2]) * 0.5f;
+                edgeCenters[2] = (boundsCorners[3] + boundsCorners[2]) * 0.5f;
+                edgeCenters[3] = (boundsCorners[3] + boundsCorners[1]) * 0.5f;
 
                 edgeCenters[4] = (boundsCorners[4] + boundsCorners[5]) * 0.5f;
-                edgeCenters[5] = (boundsCorners[5] + boundsCorners[6]) * 0.5f;
-                edgeCenters[6] = (boundsCorners[6] + boundsCorners[7]) * 0.5f;
-                edgeCenters[7] = (boundsCorners[7] + boundsCorners[4]) * 0.5f;
+                edgeCenters[5] = (boundsCorners[4] + boundsCorners[6]) * 0.5f;
+                edgeCenters[6] = (boundsCorners[7] + boundsCorners[6]) * 0.5f;
+                edgeCenters[7] = (boundsCorners[7] + boundsCorners[5]) * 0.5f;
 
                 edgeCenters[8] = (boundsCorners[0] + boundsCorners[4]) * 0.5f;
                 edgeCenters[9] = (boundsCorners[1] + boundsCorners[5]) * 0.5f;
@@ -892,7 +879,7 @@ namespace XRTK.SDK.UX
         private Vector3 GetLinkDimensions()
         {
             float linkLengthAdjustor = wireframeShape == WireframeType.Cubic ? 2.0f : 1.0f - (6.0f * linkRadius);
-            return (currentBoundsSize * linkLengthAdjustor) + new Vector3(linkRadius, linkRadius, linkRadius);
+            return (currentBoundsExtents * linkLengthAdjustor) + new Vector3(linkRadius, linkRadius, linkRadius);
         }
 
         private void ResetHandleVisibility()
@@ -957,48 +944,37 @@ namespace XRTK.SDK.UX
 
         private void UpdateBounds()
         {
-            Vector3 boundsSize = Vector3.zero;
-            Vector3 centroid = Vector3.zero;
+            if (cachedTargetCollider == null) { return; }
 
-            //store current rotation then zero out the rotation so that the bounds
-            //are computed when the object is in its 'axis aligned orientation'.
+            // Store current rotation then zero out the rotation so that the bounds
+            // are computed when the object is in its 'axis aligned orientation'.
             Quaternion currentRotation = targetObject.transform.rotation;
             targetObject.transform.rotation = Quaternion.identity;
-
-            if (cachedTargetCollider != null)
-            {
-                var bounds = cachedTargetCollider.bounds;
-                boundsSize = bounds.extents;
-                centroid = bounds.center;
-            }
-
-            //after bounds are computed, restore rotation...
+            Physics.SyncTransforms(); // Update collider bounds
+            Vector3 boundsExtents = cachedTargetCollider.bounds.extents;
+            // After bounds are computed, restore rotation...
+            // ReSharper disable once Unity.InefficientPropertyAccess
             targetObject.transform.rotation = currentRotation;
+            Physics.SyncTransforms();
 
-            if (boundsSize != Vector3.zero)
+            if (boundsExtents != Vector3.zero)
             {
                 if (flattenAxis == FlattenModeType.FlattenAuto)
                 {
-                    float min = Mathf.Min(boundsSize.x, Mathf.Min(boundsSize.y, boundsSize.z));
-                    flattenAxis = min.Equals(boundsSize.x) ? FlattenModeType.FlattenX : (min.Equals(boundsSize.y) ? FlattenModeType.FlattenY : FlattenModeType.FlattenZ);
+                    float min = Mathf.Min(boundsExtents.x, Mathf.Min(boundsExtents.y, boundsExtents.z));
+                    flattenAxis = min.Equals(boundsExtents.x)
+                            ? FlattenModeType.FlattenX
+                            : (min.Equals(boundsExtents.y)
+                                    ? FlattenModeType.FlattenY
+                                    : FlattenModeType.FlattenZ);
                 }
 
-                boundsSize.x = flattenAxis == FlattenModeType.FlattenX ? 0.0f : boundsSize.x;
-                boundsSize.y = flattenAxis == FlattenModeType.FlattenY ? 0.0f : boundsSize.y;
-                boundsSize.z = flattenAxis == FlattenModeType.FlattenZ ? 0.0f : boundsSize.z;
+                boundsExtents.x = flattenAxis == FlattenModeType.FlattenX ? 0.0f : boundsExtents.x;
+                boundsExtents.y = flattenAxis == FlattenModeType.FlattenY ? 0.0f : boundsExtents.y;
+                boundsExtents.z = flattenAxis == FlattenModeType.FlattenZ ? 0.0f : boundsExtents.z;
+                currentBoundsExtents = boundsExtents;
 
-                currentBoundsSize = boundsSize;
-
-                boundsCorners[0] = centroid - new Vector3(centroid.x - currentBoundsSize.x, centroid.y - currentBoundsSize.y, centroid.z - currentBoundsSize.z);
-                boundsCorners[1] = centroid - new Vector3(centroid.x + currentBoundsSize.x, centroid.y - currentBoundsSize.y, centroid.z - currentBoundsSize.z);
-                boundsCorners[2] = centroid - new Vector3(centroid.x + currentBoundsSize.x, centroid.y + currentBoundsSize.y, centroid.z - currentBoundsSize.z);
-                boundsCorners[3] = centroid - new Vector3(centroid.x - currentBoundsSize.x, centroid.y + currentBoundsSize.y, centroid.z - currentBoundsSize.z);
-
-                boundsCorners[4] = centroid - new Vector3(centroid.x - currentBoundsSize.x, centroid.y - currentBoundsSize.y, centroid.z + currentBoundsSize.z);
-                boundsCorners[5] = centroid - new Vector3(centroid.x + currentBoundsSize.x, centroid.y - currentBoundsSize.y, centroid.z + currentBoundsSize.z);
-                boundsCorners[6] = centroid - new Vector3(centroid.x + currentBoundsSize.x, centroid.y + currentBoundsSize.y, centroid.z + currentBoundsSize.z);
-                boundsCorners[7] = centroid - new Vector3(centroid.x - currentBoundsSize.x, centroid.y + currentBoundsSize.y, centroid.z + currentBoundsSize.z);
-
+                GetCornerPositionsFromBounds(new Bounds(Vector3.zero, boundsExtents * 2.0f), ref boundsCorners);
                 CalculateEdgeCenters();
             }
         }
@@ -1007,45 +983,45 @@ namespace XRTK.SDK.UX
         {
             if (rigRoot == null || targetObject == null) { return; }
 
-            rigRoot.transform.rotation = Quaternion.identity;
-            rigRoot.transform.position = Vector3.zero;
+            rigRoot.rotation = Quaternion.identity;
+            rigRoot.position = Vector3.zero;
 
             for (int i = 0; i < corners.Count; ++i)
             {
-                corners[i].transform.position = boundsCorners[i];
+                corners[i].position = boundsCorners[i];
             }
 
             Vector3 linkDimensions = GetLinkDimensions();
 
             for (int i = 0; i < edgeCenters.Length; ++i)
             {
-                balls[i].transform.position = edgeCenters[i];
-                links[i].transform.position = edgeCenters[i];
+                balls[i].position = edgeCenters[i];
+                links[i].position = edgeCenters[i];
 
                 switch (edgeAxes[i])
                 {
                     case CardinalAxisType.X:
-                        links[i].transform.localScale = new Vector3(linkRadius, linkDimensions.x, linkRadius);
+                        links[i].localScale = new Vector3(linkRadius, linkDimensions.x, linkRadius);
                         break;
                     case CardinalAxisType.Y:
-                        links[i].transform.localScale = new Vector3(linkRadius, linkDimensions.y, linkRadius);
+                        links[i].localScale = new Vector3(linkRadius, linkDimensions.y, linkRadius);
                         break;
                     case CardinalAxisType.Z:
-                        links[i].transform.localScale = new Vector3(linkRadius, linkDimensions.z, linkRadius);
+                        links[i].localScale = new Vector3(linkRadius, linkDimensions.z, linkRadius);
                         break;
                 }
             }
 
             //move rig into position and rotation
-            rigRoot.transform.position = cachedTargetCollider.bounds.center;
-            rigRoot.transform.rotation = targetObject.transform.rotation;
+            rigRoot.position = cachedTargetCollider.bounds.center;
+            rigRoot.rotation = targetObject.transform.rotation;
         }
 
         private HandleType GetHandleType(GameObject handle)
         {
             for (int i = 0; i < balls.Count; ++i)
             {
-                if (handle == balls[i])
+                if (handle == balls[i].gameObject)
                 {
                     return HandleType.Rotation;
                 }
@@ -1053,7 +1029,7 @@ namespace XRTK.SDK.UX
 
             for (int i = 0; i < corners.Count; ++i)
             {
-                if (handle == corners[i])
+                if (handle == corners[i].gameObject)
                 {
                     return HandleType.Scale;
                 }
@@ -1145,28 +1121,22 @@ namespace XRTK.SDK.UX
 
         private static void GetCornerPositionsFromBounds(Bounds bounds, ref Vector3[] positions)
         {
-            Vector3 center = bounds.center;
-            Vector3 extents = bounds.extents;
-            float leftEdge = center.x - extents.x;
-            float rightEdge = center.x + extents.x;
-            float bottomEdge = center.y - extents.y;
-            float topEdge = center.y + extents.y;
-            float frontEdge = center.z - extents.z;
-            float backEdge = center.z + extents.z;
-
-            if (positions == null || positions.Length != CORNER_COUNT)
+            int numCorners = 1 << 3;
+            if (positions == null || positions.Length != numCorners)
             {
-                positions = new Vector3[CORNER_COUNT];
+                positions = new Vector3[numCorners];
             }
 
-            positions[LeftBottomFront] = new Vector3(leftEdge, bottomEdge, frontEdge);
-            positions[LeftBottomBack] = new Vector3(leftEdge, bottomEdge, backEdge);
-            positions[LeftTopFront] = new Vector3(leftEdge, topEdge, frontEdge);
-            positions[LeftTopBack] = new Vector3(leftEdge, topEdge, backEdge);
-            positions[RightBottomFront] = new Vector3(rightEdge, bottomEdge, frontEdge);
-            positions[RightBottomBack] = new Vector3(rightEdge, bottomEdge, backEdge);
-            positions[RightTopFront] = new Vector3(rightEdge, topEdge, frontEdge);
-            positions[RightTopBack] = new Vector3(rightEdge, topEdge, backEdge);
+            // Permutate all axes using minCorner and maxCorner.
+            Vector3 minCorner = bounds.center - bounds.extents;
+            Vector3 maxCorner = bounds.center + bounds.extents;
+            for (int c = 0; c < numCorners; c++)
+            {
+                positions[c] = new Vector3(
+                    (c & (1 << 0)) == 0 ? minCorner[0] : maxCorner[0],
+                    (c & (1 << 1)) == 0 ? minCorner[1] : maxCorner[1],
+                    (c & (1 << 2)) == 0 ? minCorner[2] : maxCorner[2]);
+            }
         }
 
         private static Vector3 PointToRay(Vector3 origin, Vector3 end, Vector3 closestPoint)

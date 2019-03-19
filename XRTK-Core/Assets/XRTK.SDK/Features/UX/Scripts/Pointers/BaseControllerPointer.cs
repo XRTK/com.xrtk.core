@@ -139,14 +139,22 @@ namespace XRTK.SDK.UX.Pointers
         {
             base.Start();
 
-            if (lateRegisterTeleport)
+            if (lateRegisterTeleport && MixedRealityToolkit.Instance.ActiveProfile.IsTeleportSystemEnabled)
             {
                 await new WaitUntil(() => MixedRealityToolkit.TeleportSystem != null);
+
+                // We've been destroyed during the await.
+                if (this == null) { return; }
+
                 lateRegisterTeleport = false;
                 MixedRealityToolkit.TeleportSystem.Register(gameObject);
             }
 
             await WaitUntilInputSystemValid;
+
+            // We've been destroyed during the await.
+            if (this == null) { return; }
+
             SetCursor();
         }
 
@@ -285,7 +293,7 @@ namespace XRTK.SDK.UX.Pointers
         public IBaseRayStabilizer RayStabilizer { get; set; }
 
         /// <inheritdoc />
-        public RaycastModeType RaycastMode { get; set; } = RaycastModeType.Simple;
+        public RaycastMode RaycastMode { get; set; } = RaycastMode.Simple;
 
         /// <inheritdoc />
         public float SphereCastRadius { get; set; } = 0.1f;

@@ -4,11 +4,11 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Providers.Controllers;
 using XRTK.Definitions;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Utilities;
+using XRTK.Providers.Controllers;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles

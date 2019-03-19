@@ -34,7 +34,11 @@ namespace XRTK.SDK.UX.ToolTips
         {
             get
             {
-                toolTip = gameObject.EnsureComponent<ToolTip>();
+                if (toolTip == null)
+                {
+                    toolTip = gameObject.EnsureComponent<ToolTip>();
+                }
+
                 return toolTip != null;
             }
         }

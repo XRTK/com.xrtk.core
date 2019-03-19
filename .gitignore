@@ -64,3 +64,5 @@ artifacts/
 ThirdParty/
 ThirdParty.meta
 --Version/
+XRTK-Core/Assets/StreamingAssets/GltfModels/
+XRTK-Core/Assets/StreamingAssets/GltfModels.meta

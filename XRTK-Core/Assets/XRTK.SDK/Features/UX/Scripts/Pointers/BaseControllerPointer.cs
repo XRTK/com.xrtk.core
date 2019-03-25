@@ -1,20 +1,20 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections;
+using UnityEngine;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Physics;
 using XRTK.EventDatum.Input;
 using XRTK.EventDatum.Teleport;
-using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Physics;
+using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.TeleportSystem;
+using XRTK.SDK.Input.Handlers;
 using XRTK.Services;
 using XRTK.Utilities.Async;
-using System.Collections;
-using UnityEngine;
-using XRTK.SDK.Input.Handlers;
 
 namespace XRTK.SDK.UX.Pointers
 {
@@ -129,7 +129,9 @@ namespace XRTK.SDK.UX.Pointers
         {
             base.OnEnable();
 
-            if (MixedRealityToolkit.IsInitialized && MixedRealityToolkit.TeleportSystem != null && !lateRegisterTeleport)
+            if (!lateRegisterTeleport &&
+                MixedRealityToolkit.TeleportSystem != null &&
+                MixedRealityToolkit.Instance.ActiveProfile.IsTeleportSystemEnabled)
             {
                 MixedRealityToolkit.TeleportSystem.Register(gameObject);
             }

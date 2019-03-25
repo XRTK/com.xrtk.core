@@ -95,7 +95,6 @@ namespace XRTK.Services.BoundarySystem
             // and clean up the parent.
             if (boundaryVisualizationParent != null)
             {
-                boundaryVisualizationParent.transform.DetachChildren();
 
                 if (Application.isEditor)
                 {
@@ -103,6 +102,7 @@ namespace XRTK.Services.BoundarySystem
                 }
                 else
                 {
+                    boundaryVisualizationParent.transform.DetachChildren();
                     Object.Destroy(boundaryVisualizationParent);
                 }
 

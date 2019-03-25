@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using XRTK.Utilities.Async;
 using XRTK.Utilities.Async.AwaitYieldInstructions;
+using XRTK.Utilities.Async.Internal;
 using XRTK.Utilities.Gltf.Schema;
 
 namespace XRTK.Utilities.Gltf.Serialization
@@ -22,15 +23,22 @@ namespace XRTK.Utilities.Gltf.Serialization
         private static readonly WaitForBackgroundThread BackgroundThread = new WaitForBackgroundThread();
 
         /// <summary>
-        /// Imports a glTF object from the provided uri
+        /// Imports a glTF object from the provided uri.
         /// </summary>
         /// <param name="uri">the path to the file to load</param>
         /// <returns>New <see cref="GltfObject"/> imported from uri.</returns>
         /// <remarks>
+        /// Must be called from the main thread.
         /// If the <see cref="Application.isPlaying"/> is false, then this method will run synchronously.
         /// </remarks>
         public static async Task<GltfObject> ImportGltfObjectFromPathAsync(string uri)
         {
+            if (!SyncContextUtility.IsMainThread)
+            {
+                Debug.LogError("ImportGltfObjectFromPathAsync must be called from the main thread!");
+                return null;
+            }
+
             if (string.IsNullOrWhiteSpace(uri))
             {
                 Debug.LogError("Uri is not valid.");
@@ -43,7 +51,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 
             if (loadAsynchronously) { await BackgroundThread; }
 
-            if (uri.Contains(".gltf"))
+            if (uri.EndsWith(".gltf"))
             {
                 string gltfJson = File.ReadAllText(uri);
 
@@ -55,11 +63,44 @@ namespace XRTK.Utilities.Gltf.Serialization
                     return null;
                 }
             }
-            else if (uri.Contains(".glb"))
+            else if (uri.EndsWith(".glb"))
             {
                 isGlb = true;
                 byte[] glbData;
 
+#if WINDOWS_UWP
+
+                if (loadAsynchronously)
+                {
+                    try
+                    {
+                        var storageFile = await Windows.Storage.StorageFile.GetFileFromPathAsync(uri);
+
+                        if (storageFile == null)
+                        {
+                            Debug.LogError($"Failed to locate .glb file at {uri}");
+                            return null;
+                        }
+
+                        var buffer = await Windows.Storage.FileIO.ReadBufferAsync(storageFile);
+
+                        using (Windows.Storage.Streams.DataReader dataReader = Windows.Storage.Streams.DataReader.FromBuffer(buffer))
+                        {
+                            glbData = new byte[buffer.Length];
+                            dataReader.ReadBytes(glbData);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError(e.Message);
+                        return null;
+                    }
+                }
+                else
+                {
+                    glbData = UnityEngine.Windows.File.ReadAllBytes(uri);
+                }
+#else
                 using (FileStream stream = File.Open(uri, FileMode.Open))
                 {
                     glbData = new byte[stream.Length];
@@ -73,6 +114,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                         stream.Read(glbData, 0, (int)stream.Length);
                     }
                 }
+#endif
 
                 gltfObject = GetGltfObjectFromGlb(glbData);
 
@@ -101,7 +143,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                 Debug.LogError("Failed to construct Gltf Object.");
             }
 
-            if (loadAsynchronously) await Update;
+            if (loadAsynchronously) { await Update; }
 
             return gltfObject;
         }
@@ -116,71 +158,39 @@ namespace XRTK.Utilities.Gltf.Serialization
         {
             var gltfObject = JsonUtility.FromJson<GltfObject>(jsonString);
 
-            for (int i = 0; i < gltfObject.extensionsRequired?.Length; i++)
+            if (gltfObject.extensionsRequired?.Length > 0)
             {
-                var extensionsRequired = GetGltfExtensionObjects(jsonString, gltfObject.extensionsRequired[i]);
-
-                foreach (var extensionRequired in extensionsRequired)
-                {
-                    // TODO Update this after KHR_materials_pbrSpecularGlossiness extension is supported
-                    //if (gltfObject.extensionsUsed[i].Equals("KHR_materials_pbrSpecularGlossiness"))
-                    //{
-                    //    for (int j = 0; j < gltfObject.materials.Length; j++)
-                    //    {
-                    //        if (!string.IsNullOrEmpty(gltfObject.materials[i].name) &&
-                    //            gltfObject.materials[i].name == extensionRequired.Key)
-                    //        {
-                    //            gltfObject.materials[i].Extensions.Add(gltfObject.extensionsUsed[i], extensionRequired.Value);
-                    //            var extension = JsonUtility.FromJson<KHR_Materials_PbrSpecularGlossiness>(extensionRequired.Value);
-                    //            extension.ElementName = gltfObject.materials[i].name;
-                    //            gltfObject.RegisteredExtensions.Add(extension);
-                    //        }
-                    //    }
-                    //}
-                    //else
-                    {
-                        Debug.LogWarning($"Unsupported Extension: {gltfObject.extensionsRequired[i]}");
-                        return null;
-                    }
-                }
+                Debug.LogError($"Required Extension Unsupported: {gltfObject.extensionsRequired[0]}");
+                return null;
             }
 
             for (int i = 0; i < gltfObject.extensionsUsed?.Length; i++)
             {
-                var extensionsUsed = GetGltfExtensionObjects(jsonString, gltfObject.extensionsUsed[i]);
-
-                foreach (var extensionUsed in extensionsUsed)
-                {
-                    // TODO Update this after KHR_materials_pbrSpecularGlossiness extension is supported
-                    //if (gltfObject.extensionsUsed[i].Equals("KHR_materials_pbrSpecularGlossiness"))
-                    //{
-                    //    for (int j = 0; j < gltfObject.materials.Length; j++)
-                    //    {
-                    //        if (!string.IsNullOrEmpty(gltfObject.materials[i].name) &&
-                    //            gltfObject.materials[i].name == extensionUsed.Key)
-                    //        {
-                    //            gltfObject.materials[i].Extensions.Add(gltfObject.extensionsUsed[i], extensionUsed.Value);
-                    //            var extension = JsonUtility.FromJson<KHR_Materials_PbrSpecularGlossiness>(extensionUsed.Value);
-                    //            extension.ElementName = gltfObject.materials[i].name;
-                    //            gltfObject.RegisteredExtensions.Add(extension);
-                    //        }
-                    //    }
-                    //}
-                    //else
-                    {
-                        Debug.LogWarning($"Unsupported Extension: {gltfObject.extensionsUsed[i]}");
-                    }
-                }
+                Debug.LogWarning($"Unsupported Extension: {gltfObject.extensionsUsed[i]}");
             }
 
             var meshPrimitiveAttributes = GetGltfMeshPrimitiveAttributes(jsonString);
+            int numPrimitives = 0;
 
-            for (int i = 0; i < gltfObject.meshes.Length; i++)
+            for (var i = 0; i < gltfObject.meshes?.Length; i++)
+            {
+                numPrimitives += gltfObject.meshes[i]?.primitives?.Length ?? 0;
+            }
+
+            if (numPrimitives != meshPrimitiveAttributes.Count)
+            {
+                Debug.LogError("The number of mesh primitive attributes does not match the number of mesh primitives");
+                return null;
+            }
+
+            int primitiveIndex = 0;
+
+            for (int i = 0; i < gltfObject.meshes?.Length; i++)
             {
                 for (int j = 0; j < gltfObject.meshes[i].primitives.Length; j++)
                 {
-                    gltfObject.meshes[i].primitives[j].Attributes = JsonUtility.FromJson<GltfMeshPrimitiveAttributes>(meshPrimitiveAttributes[0]);
-                    meshPrimitiveAttributes.Remove(meshPrimitiveAttributes[0]);
+                    gltfObject.meshes[i].primitives[j].Attributes = JsonUtility.FromJson<GltfMeshPrimitiveAttributes>(meshPrimitiveAttributes[primitiveIndex]);
+                    primitiveIndex++;
                 }
             }
 
@@ -188,7 +198,7 @@ namespace XRTK.Utilities.Gltf.Serialization
         }
 
         /// <summary>
-        /// Gets a glTF object from the provided path
+        /// Gets a glTF object from the provided byte array
         /// </summary>
         /// <param name="glbData">Raw glb byte data.</param>
         /// <returns><see cref="GltfObject"/></returns>
@@ -199,7 +209,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 
             var magicNumber = BitConverter.ToUInt32(glbData, 0);
             var version = BitConverter.ToUInt32(glbData, stride);
-            //var length = BitConverter.ToUInt32(glbData, stride * 2);
+            var length = BitConverter.ToUInt32(glbData, stride * 2);
 
             if (magicNumber != GltfMagicNumber)
             {
@@ -213,7 +223,13 @@ namespace XRTK.Utilities.Gltf.Serialization
                 return null;
             }
 
-            var chunk0Length = BitConverter.ToUInt32(glbData, stride * 3);
+            if (length != glbData.Length)
+            {
+                Debug.LogError("Glb file size does not match the glb header defined size");
+                return null;
+            }
+
+            var chunk0Length = (int)BitConverter.ToUInt32(glbData, stride * 3);
             var chunk0Type = BitConverter.ToUInt32(glbData, stride * 4);
 
             if (chunk0Type != (ulong)GltfChunkType.Json)
@@ -222,12 +238,10 @@ namespace XRTK.Utilities.Gltf.Serialization
                 return null;
             }
 
-            string jsonChunk = Encoding.ASCII.GetString(glbData, stride * 5, (int)chunk0Length);
-
+            var jsonChunk = Encoding.ASCII.GetString(glbData, stride * 5, chunk0Length);
             var gltfObject = GetGltfObjectFromJson(jsonChunk);
-
-            var chunk1Length = BitConverter.ToUInt32(glbData, stride * 5 + (int)chunk0Length);
-            var chunk1Type = BitConverter.ToUInt32(glbData, stride * 6 + (int)chunk0Length);
+            var chunk1Length = (int)BitConverter.ToUInt32(glbData, stride * 5 + chunk0Length);
+            var chunk1Type = BitConverter.ToUInt32(glbData, stride * 6 + chunk0Length);
 
             if (chunk1Type != (ulong)GltfChunkType.BIN)
             {
@@ -237,8 +251,8 @@ namespace XRTK.Utilities.Gltf.Serialization
 
             Debug.Assert(gltfObject.buffers[0].byteLength == chunk1Length, "chunk 1 & buffer 0 length mismatch");
 
-            gltfObject.buffers[0].BufferData = new byte[(int)chunk1Length];
-            Array.Copy(glbData, stride * 7 + (int)chunk0Length, gltfObject.buffers[0].BufferData, 0, (int)chunk1Length);
+            gltfObject.buffers[0].BufferData = new byte[chunk1Length];
+            Array.Copy(glbData, stride * 7 + chunk0Length, gltfObject.buffers[0].BufferData, 0, chunk1Length);
 
             return gltfObject;
         }
@@ -289,7 +303,8 @@ namespace XRTK.Utilities.Gltf.Serialization
         /// <returns>A collection of snippets with the json string that defines the object.</returns>
         private static Dictionary<string, string> GetGltfExtensionObjects(string jsonString, string handle)
         {
-            // Bug: sometimes name isn't always before extension declaration
+            // Assumption: This code assumes that a name is declared before extensions in the glTF schema.
+            // This may not work for all exporters. Some exporters may fail to adhere to the standard glTF schema.
             var regex = new Regex($"(\"name\":\\s*\"\\w*\",\\s*\"extensions\":\\s*{{\\s*?)(\"{handle}\"\\s*:\\s*{{)");
             return GetGltfExtensions(jsonString, regex);
         }
@@ -300,9 +315,10 @@ namespace XRTK.Utilities.Gltf.Serialization
         /// <param name="jsonString">The json string to search.</param>
         /// <param name="handle">The handle to look for.</param>
         /// <returns>A collection of snippets with the json string that defines the object.</returns>
-        public static Dictionary<string, string> GetGltfExtraObjects(string jsonString, string handle)
+        private static Dictionary<string, string> GetGltfExtraObjects(string jsonString, string handle)
         {
-            // Bug: sometimes name isn't always before extra declaration
+            // Assumption: This code assumes that a name is declared before extensions in the glTF schema.
+            // This may not work for all exporters. Some exporters may fail to adhere to the standard glTF schema.
             var regex = new Regex($"(\"name\":\\s*\"\\w*\",\\s*\"extras\":\\s*{{\\s*?)(\"{handle}\"\\s*:\\s*{{)");
             return GetGltfExtensions(jsonString, regex);
         }

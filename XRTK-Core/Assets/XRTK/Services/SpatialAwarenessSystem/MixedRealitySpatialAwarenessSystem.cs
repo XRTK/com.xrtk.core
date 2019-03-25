@@ -139,7 +139,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
 
         #endregion IMixedRealitySpatialAwarenessSystem Implementation
 
-        #region IMixedRealityToolkit Implementation
+        #region IMixedRealityService Implementation
 
         private MixedRealitySpatialAwarenessEventData<SpatialMeshObject> meshEventData = null;
         private MixedRealitySpatialAwarenessEventData<GameObject> surfaceFindingEventData = null;
@@ -167,7 +167,6 @@ namespace XRTK.Services.SpatialAwarenessSystem
                 // Detach the child objects and clean up the parent.
                 if (spatialAwarenessParent != null)
                 {
-                    spatialAwarenessParent.transform.DetachChildren();
 
                     if (Application.isEditor)
                     {
@@ -175,6 +174,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
                     }
                     else
                     {
+                        spatialAwarenessParent.transform.DetachChildren();
                         Object.Destroy(spatialAwarenessParent);
                     }
 
@@ -184,7 +184,6 @@ namespace XRTK.Services.SpatialAwarenessSystem
                 // Detach the mesh objects (they are to be cleaned up by the observer) and cleanup the parent
                 if (meshParent != null)
                 {
-                    meshParent.transform.DetachChildren();
 
                     if (Application.isEditor)
                     {
@@ -192,6 +191,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
                     }
                     else
                     {
+                        meshParent.transform.DetachChildren();
                         Object.Destroy(meshParent);
                     }
 
@@ -201,7 +201,6 @@ namespace XRTK.Services.SpatialAwarenessSystem
                 // Detach the surface objects (they are to be cleaned up by the observer) and cleanup the parent
                 if (surfaceParent != null)
                 {
-                    surfaceParent.transform.DetachChildren();
 
                     if (Application.isEditor)
                     {
@@ -209,6 +208,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
                     }
                     else
                     {
+                        surfaceParent.transform.DetachChildren();
                         Object.Destroy(surfaceParent);
                     }
 
@@ -333,6 +333,6 @@ namespace XRTK.Services.SpatialAwarenessSystem
 
         #endregion Surface Finding Events
 
-        #endregion IMixedRealityToolkit Implementation
+        #endregion IMixedRealityService Implementation
     }
 }

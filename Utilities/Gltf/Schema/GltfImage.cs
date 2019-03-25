@@ -36,6 +36,9 @@ namespace XRTK.Utilities.Gltf.Schema
 
         #endregion Serialized Fields
 
+        /// <summary>
+        /// Unity Texture2D wrapper for the GltfImage
+        /// </summary>
         public Texture2D Texture { get; internal set; }
     }
 }

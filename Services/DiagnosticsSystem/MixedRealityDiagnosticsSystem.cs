@@ -25,7 +25,7 @@ namespace XRTK.Services.DiagnosticsSystem
             }
         }
 
-        #region IMixedRealityService
+        #region IMixedRealityService Implementation
 
         /// <inheritdoc />
         public override void Initialize()
@@ -81,7 +81,7 @@ namespace XRTK.Services.DiagnosticsSystem
             }
         }
 
-        #endregion IMixedRealityService
+        #endregion IMixedRealityService Implementation
 
         #region IMixedRealityDiagnosticsSystem
 

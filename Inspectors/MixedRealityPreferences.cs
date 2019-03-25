@@ -11,7 +11,7 @@ namespace XRTK.Inspectors
 {
     public static class MixedRealityPreferences
     {
-        private static readonly string[] XRTK_Keywords = new[] { "XRTK", "Mixed", "Reality" };
+        private static readonly string[] XRTK_Keywords = { "XRTK", "Mixed", "Reality" };
 
         #region Lock Profile Preferences
 
@@ -127,72 +127,74 @@ namespace XRTK.Inspectors
         [SettingsProvider]
         private static SettingsProvider Preferences()
         {
-            var provider = new SettingsProvider("Project/XRTK", SettingsScope.Project)
+            var provider = new SettingsProvider("Project/XRTK")
             {
                 label = "XRTK",
 
-                guiHandler = (searchContext) =>
-                {
-                    var prevLabelWidth = EditorGUIUtility.labelWidth;
-                    EditorGUIUtility.labelWidth = 200f;
-
-                    EditorGUI.BeginChangeCheck();
-                    lockProfiles = EditorGUILayout.Toggle(LockContent, LockProfiles);
-
-                    // Save the preference
-                    if (EditorGUI.EndChangeCheck())
-                    {
-                        LockProfiles = lockProfiles;
-                    }
-
-                    if (!LockProfiles)
-                    {
-                        EditorGUILayout.HelpBox("This is only to be used to update the default SDK profiles. If any edits are made, and not checked into the XRTK's Github, the changes may be lost next time you update your local copy.", MessageType.Warning);
-                    }
-
-                    EditorGUI.BeginChangeCheck();
-                    ignoreSettingsPrompt = EditorGUILayout.Toggle(IgnoreContent, IgnoreSettingsPrompt);
-
-                    // Save the preference
-                    if (EditorGUI.EndChangeCheck())
-                    {
-                        IgnoreSettingsPrompt = ignoreSettingsPrompt;
-                    }
-
-                    EditorGUI.BeginChangeCheck();
-                    showCanvasUtilityPrompt = EditorGUILayout.Toggle(CanvasUtilityContent, ShowCanvasUtilityPrompt);
-
-                    if (EditorGUI.EndChangeCheck())
-                    {
-                        ShowCanvasUtilityPrompt = showCanvasUtilityPrompt;
-                    }
-
-                    if (!ShowCanvasUtilityPrompt)
-                    {
-                        EditorGUILayout.HelpBox("Be aware that if a Canvas needs to receive input events it is required to have the CanvasUtility attached or the Focus Provider's UIRaycast Camera assigned to the canvas' camera reference.", MessageType.Warning);
-                    }
-
-                    EditorGUI.BeginChangeCheck();
-                    var startScene = (SceneAsset)EditorGUILayout.ObjectField(StartSceneContent, StartSceneAsset, typeof(SceneAsset), true);
-
-                    if (EditorGUI.EndChangeCheck())
-                    {
-                        StartSceneAsset = startScene;
-                    }
-
-                    EditorGUI.BeginChangeCheck();
-                    var scriptLock = EditorGUILayout.Toggle("Is Script Reloading locked?", EditorAssemblyReloadManager.LockReloadAssemblies);
-
-                    if (EditorGUI.EndChangeCheck())
-                    {
-                        EditorAssemblyReloadManager.LockReloadAssemblies = scriptLock;
-                    }
-
-                    EditorGUIUtility.labelWidth = prevLabelWidth;
-                },
+                guiHandler = GUIHandler,
 
                 keywords = new HashSet<string>(XRTK_Keywords)
             };
+
+            void GUIHandler(string searchContext)
+            {
+                var prevLabelWidth = EditorGUIUtility.labelWidth;
+                EditorGUIUtility.labelWidth = 200f;
+
+                EditorGUI.BeginChangeCheck();
+                lockProfiles = EditorGUILayout.Toggle(LockContent, LockProfiles);
+
+                // Save the preference
+                if (EditorGUI.EndChangeCheck())
+                {
+                    LockProfiles = lockProfiles;
+                }
+
+                if (!LockProfiles)
+                {
+                    EditorGUILayout.HelpBox("This is only to be used to update the default SDK profiles. If any edits are made, and not checked into the XRTK's Github, the changes may be lost next time you update your local copy.", MessageType.Warning);
+                }
+
+                EditorGUI.BeginChangeCheck();
+                ignoreSettingsPrompt = EditorGUILayout.Toggle(IgnoreContent, IgnoreSettingsPrompt);
+
+                // Save the preference
+                if (EditorGUI.EndChangeCheck())
+                {
+                    IgnoreSettingsPrompt = ignoreSettingsPrompt;
+                }
+
+                EditorGUI.BeginChangeCheck();
+                showCanvasUtilityPrompt = EditorGUILayout.Toggle(CanvasUtilityContent, ShowCanvasUtilityPrompt);
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    ShowCanvasUtilityPrompt = showCanvasUtilityPrompt;
+                }
+
+                if (!ShowCanvasUtilityPrompt)
+                {
+                    EditorGUILayout.HelpBox("Be aware that if a Canvas needs to receive input events it is required to have the CanvasUtility attached or the Focus Provider's UIRaycast Camera assigned to the canvas' camera reference.", MessageType.Warning);
+                }
+
+                EditorGUI.BeginChangeCheck();
+                var startScene = (SceneAsset)EditorGUILayout.ObjectField(StartSceneContent, StartSceneAsset, typeof(SceneAsset), true);
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    StartSceneAsset = startScene;
+                }
+
+                EditorGUI.BeginChangeCheck();
+                var scriptLock = EditorGUILayout.Toggle("Is Script Reloading locked?", EditorAssemblyReloadManager.LockReloadAssemblies);
+
+                if (EditorGUI.EndChangeCheck())
+                {
+                    EditorAssemblyReloadManager.LockReloadAssemblies = scriptLock;
+                }
+
+                EditorGUIUtility.labelWidth = prevLabelWidth;
+            }
 
             return provider;
         }

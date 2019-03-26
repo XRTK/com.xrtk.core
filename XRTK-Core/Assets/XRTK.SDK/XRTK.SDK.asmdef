@@ -1,8 +1,7 @@
 {
     "name": "XRTK.SDK",
     "references": [
-        "XRTK",
-        "XRTK.Utilities.Async"
+        "XRTK"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

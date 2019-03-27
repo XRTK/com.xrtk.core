@@ -1,12 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Utilities.Async;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using XRTK.Definitions;
 using XRTK.Interfaces.Events;
+using XRTK.Utilities.Async;
 
 namespace XRTK.Services
 {
@@ -26,8 +26,8 @@ namespace XRTK.Services
 
         #region IMixedRealityEventSystem Implementation
 
-        private static bool isExecutingEvents = false;
-        private readonly WaitUntil doneExecutingEvents = new WaitUntil(() => !isExecutingEvents);
+        private static int eventExecutionDepth = 0;
+        private readonly WaitUntil doneExecutingEvents = new WaitUntil(() => eventExecutionDepth == 0);
 
         /// <inheritdoc />
         public List<GameObject> EventListeners { get; } = new List<GameObject>();
@@ -36,14 +36,14 @@ namespace XRTK.Services
         public virtual void HandleEvent<T>(BaseEventData eventData, ExecuteEvents.EventFunction<T> eventHandler) where T : IEventSystemHandler
         {
             Debug.Assert(!eventData.used);
-            isExecutingEvents = true;
+            eventExecutionDepth++;
 
-            for (int i = 0; i < EventListeners.Count; i++)
+            for (int i = EventListeners.Count - 1; i >= 0; i--)
             {
                 ExecuteEvents.Execute(EventListeners[i], eventData, eventHandler);
             }
 
-            isExecutingEvents = false;
+            eventExecutionDepth--;
         }
 
         /// <inheritdoc />
@@ -51,7 +51,7 @@ namespace XRTK.Services
         {
             if (EventListeners.Contains(listener)) { return; }
 
-            if (isExecutingEvents)
+            if (eventExecutionDepth > 0)
             {
                 await doneExecutingEvents;
             }
@@ -64,7 +64,7 @@ namespace XRTK.Services
         {
             if (!EventListeners.Contains(listener)) { return; }
 
-            if (isExecutingEvents)
+            if (eventExecutionDepth > 0)
             {
                 await doneExecutingEvents;
             }

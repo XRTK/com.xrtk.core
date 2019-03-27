@@ -93,7 +93,7 @@ namespace XRTK.WindowsMixedReality.Controllers
             {
                 if (Input.GetKeyDown(Commands[i].KeyCode))
                 {
-                    OnPhraseRecognized((ConfidenceLevel)RecognitionConfidenceLevel, TimeSpan.Zero, DateTime.Now, Commands[i].Keyword);
+                    OnPhraseRecognized((ConfidenceLevel)RecognitionConfidenceLevel, TimeSpan.Zero, DateTime.UtcNow, Commands[i].Keyword);
                 }
             }
         }

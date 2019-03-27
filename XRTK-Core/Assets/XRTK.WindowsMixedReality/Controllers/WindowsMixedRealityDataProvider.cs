@@ -445,7 +445,6 @@ namespace XRTK.WindowsMixedReality.Controllers
                             }
 
                             stream.Dispose();
-
                         }
                         else
                         {

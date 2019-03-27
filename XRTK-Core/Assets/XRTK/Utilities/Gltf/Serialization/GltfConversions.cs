@@ -12,9 +12,9 @@ namespace XRTK.Utilities.Gltf.Serialization
         // glTF matrix: column vectors, column-major storage, +Y up, +Z forward, -X right, right-handed
         // unity matrix: column vectors, column-major storage, +Y up, +Z forward, +X right, left-handed
         // multiply by a negative X scale to convert handedness
-        internal static readonly Vector3 CoordinateSpaceConversionScale = new Vector3(-1, 1, 1);
+        private static readonly Vector3 CoordinateSpaceConversionScale = new Vector3(-1, 1, 1);
 
-        internal static readonly Vector4 TangentSpaceConversionScale = new Vector4(-1, 1, 1, -1);
+        private static readonly Vector4 TangentSpaceConversionScale = new Vector4(-1, 1, 1, -1);
 
         internal static Matrix4x4 GetTrsProperties(this GltfNode node, out Vector3 position, out Quaternion rotation, out Vector3 scale)
         {

@@ -2,42 +2,47 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.IO;
 using UnityEngine;
-using XRTK.Utilities.Async;
-using XRTK.Utilities.Gltf.Schema;
 using XRTK.Utilities.Gltf.Serialization;
+using XRTK.Utilities.WebRequestRest;
 
 namespace XRTK.Examples.Demos.Gltf
 {
     public class TestGlbLoading : MonoBehaviour
     {
         [SerializeField]
+        [Tooltip("This can be a local or external resource uri.")]
         private string uri = string.Empty;
-
-        private void OnValidate()
-        {
-            if (string.IsNullOrEmpty(uri))
-            {
-                uri = "\\XRTK.Examples\\Demos\\Gltf\\Models\\Lantern\\glTF-Binary\\Lantern.glb";
-                var path = $"{Application.dataPath}{uri}";
-                path = path.Replace("/", "\\");
-                Debug.Assert(File.Exists(path));
-            }
-        }
 
         private async void Start()
         {
-            await new WaitForSeconds(5f);
-            GltfObject gltfObject = null;
+            Response response = default;
 
             try
             {
-                gltfObject = await GltfUtility.ImportGltfObjectFromPathAsync($"{Application.dataPath}{uri}");
+                response = await Rest.GetAsync(uri);
             }
             catch (Exception e)
             {
-                Debug.LogError(e);
+                Debug.LogError(e.Message);
+            }
+
+            if (!response.Successful)
+            {
+                Debug.LogError($"Failed to get glb model from {uri}");
+                return;
+            }
+
+            var gltfObject = GltfUtility.GetGltfObjectFromGlb(response.ResponseData);
+
+            try
+            {
+                await gltfObject.ConstructAsync();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                return;
             }
 
             if (gltfObject != null)

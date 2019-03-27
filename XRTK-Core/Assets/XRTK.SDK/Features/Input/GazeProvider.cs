@@ -188,9 +188,10 @@ namespace XRTK.SDK.Input
                 // Update gaze info from stabilizer
                 if (stabilizer != null)
                 {
-                    stabilizer.UpdateStability(newGazeOrigin, gazeTransform.rotation);
-                    newGazeOrigin = stabilizer.StablePosition;
-                    newGazeNormal = stabilizer.StableRay.direction;
+                    stabilizer.UpdateStability(gazeTransform.localPosition, gazeTransform.localRotation * Vector3.forward);
+                    var transformParent = gazeTransform.parent;
+                    newGazeOrigin = transformParent.TransformPoint(stabilizer.StablePosition);
+                    newGazeNormal = transformParent.TransformDirection(stabilizer.StableRay.direction);
                 }
 
                 Vector3 endPoint = newGazeOrigin + (newGazeNormal * pointerExtent);

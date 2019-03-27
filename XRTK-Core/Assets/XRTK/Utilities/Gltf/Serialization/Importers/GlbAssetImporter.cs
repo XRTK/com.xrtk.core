@@ -10,9 +10,4 @@ namespace XRTK.Utilities.Gltf.Serialization.Editor
             GltfEditorImporter.OnImportGltfAsset(context);
         }
     }
-
-    public class GlbModelAssetImporterEditor : AssetImporterEditor
-    {
-
-    }
 }

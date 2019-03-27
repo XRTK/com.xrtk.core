@@ -76,6 +76,10 @@ namespace XRTK.SDK.UX.Pointers
 
         private bool canMove = false;
 
+        private bool isTeleportSystemEnabled => MixedRealityToolkit.IsInitialized &&
+                                                MixedRealityToolkit.HasActiveProfile &&
+                                                MixedRealityToolkit.Instance.ActiveProfile.IsTeleportSystemEnabled;
+
         /// <summary>
         /// The result from the last raycast.
         /// </summary>
@@ -101,7 +105,7 @@ namespace XRTK.SDK.UX.Pointers
         #region IMixedRealityPointer Implementation
 
         /// <inheritdoc />
-        public override bool IsInteractionEnabled => !IsTeleportRequestActive && teleportEnabled;
+        public override bool IsInteractionEnabled => !IsTeleportRequestActive && teleportEnabled && isTeleportSystemEnabled;
 
         /// <inheritdoc />
         public override float PointerOrientation
@@ -248,7 +252,7 @@ namespace XRTK.SDK.UX.Pointers
         public override void OnInputChanged(InputEventData<Vector2> eventData)
         {
             // Don't process input if we've got an active teleport request in progress.
-            if (IsTeleportRequestActive) { return; }
+            if (IsTeleportRequestActive || !isTeleportSystemEnabled) { return; }
 
             if (eventData.SourceId == InputSourceParent.SourceId &&
                 eventData.Handedness == Handedness &&

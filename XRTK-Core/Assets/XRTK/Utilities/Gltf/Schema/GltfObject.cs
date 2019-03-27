@@ -116,8 +116,15 @@ namespace XRTK.Utilities.Gltf.Schema
         /// </summary>
         public GameObject GameObjectReference { get; internal set; }
 
+        /// <summary>
+        /// The list of registered glTF extensions found for this object.
+        /// </summary>
         public List<GltfExtension> RegisteredExtensions { get; internal set; } = new List<GltfExtension>();
 
+        /// <summary>
+        /// Flag for setting object load behavior.
+        /// Importers require synchronous behavior; all other loading scenarios should likely use asynchronous behavior.
+        /// </summary>
         internal bool LoadAsynchronously { get; set; } = true;
     }
 }

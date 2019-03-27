@@ -15,18 +15,32 @@ namespace XRTK.Utilities
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         public static void CheckApiContracts()
         {
-#if !UNITY_EDITOR && UNITY_WSA
+#if WINDOWS_UWP
+            UniversalApiContractV6_IsAvailable = Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 8);
+            UniversalApiContractV6_IsAvailable = Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 7);
             UniversalApiContractV6_IsAvailable = Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 6);
             UniversalApiContractV5_IsAvailable = Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 5);
             UniversalApiContractV4_IsAvailable = Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 4);
             UniversalApiContractV3_IsAvailable = Windows.Foundation.Metadata.ApiInformation.IsApiContractPresent("Windows.Foundation.UniversalApiContract", 3);
 #else
+            UniversalApiContractV8_IsAvailable = false;
+            UniversalApiContractV7_IsAvailable = false;
             UniversalApiContractV6_IsAvailable = false;
             UniversalApiContractV5_IsAvailable = false;
             UniversalApiContractV4_IsAvailable = false;
             UniversalApiContractV3_IsAvailable = false;
 #endif
         }
+
+        /// <summary>
+        /// Is the Universal API Contract v8.0 Available?
+        /// </summary>
+        public static bool UniversalApiContractV8_IsAvailable { get; private set; }
+
+        /// <summary>
+        /// Is the Universal API Contract v7.0 Available?
+        /// </summary>
+        public static bool UniversalApiContractV7_IsAvailable { get; private set; }
 
         /// <summary>
         /// Is the Universal API Contract v6.0 Available?

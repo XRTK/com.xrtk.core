@@ -56,7 +56,7 @@ namespace XRTK.EventDatum.Input
         protected void BaseInitialize(IMixedRealityInputSource inputSource, MixedRealityInputAction inputAction)
         {
             Reset();
-            EventTime = DateTime.Now;
+            EventTime = DateTime.UtcNow;
             InputSource = inputSource;
             MixedRealityInputAction = inputAction;
             SourceId = InputSource.SourceId;

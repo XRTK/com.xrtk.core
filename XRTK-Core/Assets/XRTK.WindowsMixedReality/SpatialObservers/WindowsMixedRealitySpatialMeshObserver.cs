@@ -32,6 +32,13 @@ namespace XRTK.WindowsMixedReality.SpatialObservers
             }
 
 #if UNITY_WSA
+#if UNITY_EDITOR 
+            if (!UnityEditor.PlayerSettings.WSA.GetCapability(UnityEditor.PlayerSettings.WSACapability.SpatialPerception))
+            {
+                UnityEditor.PlayerSettings.WSA.SetCapability(UnityEditor.PlayerSettings.WSACapability.SpatialPerception, true);
+            }
+#endif // UNITY_EDITOR
+
             observer = new SurfaceObserver();
 
             // Apply the initial observer volume settings.

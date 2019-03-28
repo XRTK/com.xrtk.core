@@ -37,6 +37,13 @@ namespace XRTK.WindowsMixedReality.Controllers
                 throw new Exception("Null speech commands in the speech commands profile!");
             }
 
+#if UNITY_WSA && UNITY_EDITOR
+            if (!UnityEditor.PlayerSettings.WSA.GetCapability(UnityEditor.PlayerSettings.WSACapability.Microphone))
+            {
+                UnityEditor.PlayerSettings.WSA.SetCapability(UnityEditor.PlayerSettings.WSACapability.Microphone, true);
+            }
+#endif
+
 #if UNITY_STANDALONE_WIN || UNITY_WSA || UNITY_EDITOR_WIN
             var newKeywords = new string[Commands.Length];
 
@@ -86,7 +93,7 @@ namespace XRTK.WindowsMixedReality.Controllers
             {
                 if (Input.GetKeyDown(Commands[i].KeyCode))
                 {
-                    OnPhraseRecognized((ConfidenceLevel)RecognitionConfidenceLevel, TimeSpan.Zero, DateTime.Now, Commands[i].Keyword);
+                    OnPhraseRecognized((ConfidenceLevel)RecognitionConfidenceLevel, TimeSpan.Zero, DateTime.UtcNow, Commands[i].Keyword);
                 }
             }
         }

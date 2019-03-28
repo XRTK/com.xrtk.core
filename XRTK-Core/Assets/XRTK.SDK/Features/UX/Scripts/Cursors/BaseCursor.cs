@@ -17,38 +17,94 @@ namespace XRTK.SDK.UX.Cursors
     /// </summary>
     public class BaseCursor : InputSystemGlobalListener, IMixedRealityCursor
     {
+        /// <summary>
+        /// The current <see cref="CursorStateEnum"/> of the cursor.
+        /// </summary>
         public CursorStateEnum CursorState { get; private set; } = CursorStateEnum.None;
 
-        /// <summary>
-        /// Surface distance to place the cursor off of the surface at
-        /// </summary>
         [SerializeField]
         [Tooltip("The distance from the hit surface to place the cursor")]
         private float surfaceCursorDistance = 0.02f;
 
+        /// <summary>
+        /// The distance from the hit surface to place the cursor.
+        /// </summary>
+        public float SurfaceCursorDistance
+        {
+            get => surfaceCursorDistance;
+            set => surfaceCursorDistance = value;
+        }
+
         [Header("Motion")]
+
         [SerializeField]
         [Tooltip("When lerping, use unscaled time. This is useful for games that have a pause mechanism or otherwise adjust the game timescale.")]
         private bool useUnscaledTime = true;
+
+        /// <summary>
+        /// When lerping, use unscaled time. This is useful for games that have a pause mechanism or otherwise adjust the game timescale.
+        /// </summary>
+        public bool UseUnscaledTime
+        {
+            get => useUnscaledTime;
+            set => useUnscaledTime = value;
+        }
 
         [SerializeField]
         [Tooltip("Blend value for surface normal to user facing lerp")]
         private float positionLerpTime = 0.01f;
 
+        /// <summary>
+        /// Blend value for surface normal to user facing lerp.
+        /// </summary>
+        public float PositionLerpTime
+        {
+            get => positionLerpTime;
+            set => positionLerpTime = value;
+        }
+
         [SerializeField]
         [Tooltip("Blend value for surface normal to user facing lerp")]
         private float scaleLerpTime = 0.01f;
 
+        /// <summary>
+        /// Blend value for surface normal to user facing lerp.
+        /// </summary>
+        public float ScaleLerpTime
+        {
+            get => scaleLerpTime;
+            set => scaleLerpTime = value;
+        }
+
         [SerializeField]
         [Tooltip("Blend value for surface normal to user facing lerp")]
         private float rotationLerpTime = 0.01f;
+
+        /// <summary>
+        /// Blend value for surface normal to user facing lerp.
+        /// </summary>
+        public float RotationLerpTime
+        {
+            get => rotationLerpTime;
+            set => rotationLerpTime = value;
+        }
 
         [Range(0, 1)]
         [SerializeField]
         [Tooltip("Blend value for surface normal to user facing lerp")]
         private float lookRotationBlend = 0.5f;
 
+        /// <summary>
+        /// Blend value for surface normal to user facing lerp.
+        /// </summary>
+        public float LookRotationBlend
+        {
+            get => lookRotationBlend;
+            set => lookRotationBlend = value;
+        }
+
         [Header("Transform References")]
+
         [SerializeField]
         [Tooltip("Visual that is displayed when cursor is active normally")]
         protected Transform PrimaryCursorVisual = null;

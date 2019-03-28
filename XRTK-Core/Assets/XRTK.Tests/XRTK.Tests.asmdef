@@ -3,7 +3,6 @@
     "references": [
         "XRTK",
         "XRTK.Extensions.EditorClassExtensions",
-        "XRTK.SDK",
         "XRTK.Utilities.Editor"
     ],
     "optionalUnityReferences": [

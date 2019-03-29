@@ -44,7 +44,8 @@ namespace XRTK.Utilities.Editor
             get
             {
                 if (string.IsNullOrEmpty(mixedRealityToolkit_AbsoluteFolderPath) &&
-                    !FindDirectory(Project_AbsolutePath, "XRTK", out mixedRealityToolkit_AbsoluteFolderPath))
+                    !FindDirectory(Project_AbsolutePath, "XRTK", out mixedRealityToolkit_AbsoluteFolderPath) &&
+                    !FindDirectory(Project_AbsolutePath, "com.xtrk.xrtk-core", out mixedRealityToolkit_AbsoluteFolderPath))
                 {
                     Debug.LogError("Unable to find the Mixed Reality Toolkit's directory!");
                 }
@@ -195,7 +196,8 @@ namespace XRTK.Utilities.Editor
             {
                 var name = Path.GetFileName(directories[i]);
 
-                if (name != null && name.Equals(directoryName))
+                if (name != null &&
+                    name.Equals(directoryName))
                 {
                     path = directories[i];
                     return true;

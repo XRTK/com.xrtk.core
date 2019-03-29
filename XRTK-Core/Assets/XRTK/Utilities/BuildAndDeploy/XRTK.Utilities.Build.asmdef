@@ -2,8 +2,7 @@
     "name": "XRTK.Utilities.Build",
     "references": [
         "XRTK",
-        "XRTK.Utilities.Editor",
-        "XRTK.Utilities.Gltf"
+        "XRTK.Utilities.Editor"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [

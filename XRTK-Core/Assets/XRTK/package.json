@@ -12,5 +12,6 @@
     "src": "Assets/UpmGitExtension",
     "author": "XRTK Team (https://github.com/XRTK)",
     "dependencies": {
+        "com.xrtk.upm-git-extension": "https://github.com/XRTK/UpmGitExtension.git#1.0.0"
     }
 }

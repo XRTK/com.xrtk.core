@@ -3,7 +3,6 @@
     "references": [
         "XRTK",
         "XRTK.Extensions.EditorClassExtensions",
-        "XRTK.Utilities.Async",
         "XRTK.Utilities.Build",
         "XRTK.Utilities.Editor"
     ],

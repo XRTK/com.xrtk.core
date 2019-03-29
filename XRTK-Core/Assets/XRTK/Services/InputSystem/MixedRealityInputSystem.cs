@@ -543,10 +543,10 @@ namespace XRTK.Services.InputSystem
                 DetectedControllers.Remove(controller);
             }
 
-            FocusProvider?.OnSourceLost(sourceStateEventData);
-
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(sourceStateEventData, OnSourceLostEventHandler);
+
+            FocusProvider?.OnSourceLost(sourceStateEventData);
         }
 
         private static readonly ExecuteEvents.EventFunction<IMixedRealitySourceStateHandler> OnSourceLostEventHandler =

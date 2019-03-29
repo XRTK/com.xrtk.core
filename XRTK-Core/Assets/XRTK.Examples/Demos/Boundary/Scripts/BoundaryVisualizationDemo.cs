@@ -1,14 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.Experimental.XR;
 using XRTK.Definitions.BoundarySystem;
 using XRTK.EventDatum.Boundary;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Services;
-using System.Collections.Generic;
 using XRTK.Utilities.Async;
-using UnityEngine;
-using UnityEngine.Experimental.XR;
 
 namespace XRTK.Examples.Demos
 {
@@ -39,8 +39,7 @@ namespace XRTK.Examples.Demos
 
         private void Awake()
         {
-            markerParent = new GameObject();
-            markerParent.name = "Boundary Demo Markers";
+            markerParent = new GameObject { name = "Boundary Demo Markers" };
             markerParent.transform.parent = MixedRealityToolkit.Instance.MixedRealityPlayspace;
         }
 
@@ -106,6 +105,7 @@ namespace XRTK.Examples.Demos
             }
 
             MixedRealityBoundaryVisualizationProfile visualizationProfile = MixedRealityToolkit.Instance.ActiveProfile.BoundaryVisualizationProfile;
+
             if (visualizationProfile == null)
             {
                 // We do not have a visualization profile configured, therefore do not render the indicators.
@@ -127,8 +127,8 @@ namespace XRTK.Examples.Demos
                 {
                     Vector3 offset = new Vector3(xIndex * indicatorDistance, 0.0f, yIndex * indicatorDistance);
                     Vector3 position = corner + offset;
-
                     Material material = null;
+
                     // Check inscribed rectangle first
                     if (MixedRealityToolkit.BoundarySystem.Contains(position, Boundary.Type.PlayArea))
                     {

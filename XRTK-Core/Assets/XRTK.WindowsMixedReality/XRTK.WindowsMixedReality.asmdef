@@ -1,14 +1,15 @@
 {
-    "name": "XRTK.Inspectors",
+    "name": "XRTK.WindowsMixedReality",
     "references": [
-        "XRTK",
-        "XRTK.Extensions.EditorClassExtensions",
-        "XRTK.Utilities.Build",
-        "XRTK.Utilities.Editor"
+        "XRTK"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [
-        "Editor"
+        "Editor",
+        "WSA",
+        "WindowsStandalone32",
+        "WindowsStandalone64",
+        "XboxOne"
     ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

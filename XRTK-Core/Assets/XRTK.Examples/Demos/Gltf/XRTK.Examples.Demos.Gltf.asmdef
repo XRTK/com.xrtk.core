@@ -1,7 +1,7 @@
 {
-    "name": "XRTK.Utilities.Gltf",
+    "name": "XRTK.Examples.Demos.Gltf",
     "references": [
-        "XRTK.Utilities.Async"
+        "XRTK"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

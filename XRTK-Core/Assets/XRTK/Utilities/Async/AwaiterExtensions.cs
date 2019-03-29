@@ -30,6 +30,7 @@ using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading;
 using UnityEngine;
+using XRTK.Services;
 using XRTK.Utilities.Async.AwaitYieldInstructions;
 using XRTK.Utilities.Async.Internal;
 using Object = UnityEngine.Object;
@@ -141,7 +142,7 @@ namespace XRTK.Utilities.Async
 
         private static void RunCoroutine(IEnumerator enumerator)
         {
-            AsyncCoroutineRunner.Instance.StartCoroutine(enumerator);
+            MixedRealityToolkit.Instance.StartCoroutine(enumerator);
         }
 
         private static void RunOnUnityScheduler(Action action)

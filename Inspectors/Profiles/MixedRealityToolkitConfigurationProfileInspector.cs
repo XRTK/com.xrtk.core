@@ -4,7 +4,6 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
-using XRTK.Definitions.Utilities;
 using XRTK.Extensions.EditorClassExtensions;
 using XRTK.Inspectors.Utilities;
 using XRTK.Services;
@@ -14,10 +13,6 @@ namespace XRTK.Inspectors.Profiles
     [CustomEditor(typeof(MixedRealityToolkitConfigurationProfile))]
     public class MixedRealityToolkitConfigurationProfileInspector : BaseMixedRealityProfileInspector
     {
-        private static readonly GUIContent TargetScaleContent = new GUIContent("Target Scale:");
-
-        // Experience properties
-        private SerializedProperty targetExperienceScale;
         // Camera properties
         private SerializedProperty enableCameraProfile;
         private SerializedProperty cameraProfile;
@@ -92,8 +87,6 @@ namespace XRTK.Inspectors.Profiles
                 return;
             }
 
-            // Experience configuration
-            targetExperienceScale = serializedObject.FindProperty("targetExperienceScale");
             // Camera configuration
             enableCameraProfile = serializedObject.FindProperty("enableCameraProfile");
             cameraProfile = serializedObject.FindProperty("cameraProfile");
@@ -169,42 +162,6 @@ namespace XRTK.Inspectors.Profiles
             EditorGUI.BeginChangeCheck();
             bool changed = false;
 
-            // Experience configuration
-            EditorGUILayout.LabelField("Experience Settings", EditorStyles.boldLabel);
-
-            EditorGUILayout.PropertyField(targetExperienceScale, TargetScaleContent);
-            ExperienceScale scale = (ExperienceScale)targetExperienceScale.intValue;
-            string scaleDescription = string.Empty;
-
-            switch (scale)
-            {
-                case ExperienceScale.OrientationOnly:
-                    scaleDescription = "The user is stationary. Position data does not change.";
-                    break;
-
-                case ExperienceScale.Seated:
-                    scaleDescription = "The user is stationary and seated. The origin of the world is at a neutral head-level position.";
-                    break;
-
-                case ExperienceScale.Standing:
-                    scaleDescription = "The user is stationary and standing. The origin of the world is on the floor, facing forward.";
-                    break;
-
-                case ExperienceScale.Room:
-                    scaleDescription = "The user is free to move about the room. The origin of the world is on the floor, facing forward. Boundaries are available.";
-                    break;
-
-                case ExperienceScale.World:
-                    scaleDescription = "The user is free to move about the world. Relies upon knowledge of the environment (Spatial Anchors and Spatial Mapping).";
-                    break;
-            }
-
-            if (scaleDescription != string.Empty)
-            {
-                GUILayout.Space(6f);
-                EditorGUILayout.HelpBox(scaleDescription, MessageType.Info);
-            }
-
             // Camera Profile configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Camera Settings", EditorStyles.boldLabel);
@@ -222,13 +179,6 @@ namespace XRTK.Inspectors.Profiles
             // Boundary System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Boundary System Settings", EditorStyles.boldLabel);
-            if (scale != ExperienceScale.Room)
-            {
-                // Alert the user if the experience scale does not support boundary features.
-                GUILayout.Space(6f);
-                EditorGUILayout.HelpBox("Boundaries are only supported in Room scale experiences.", MessageType.Warning);
-                GUILayout.Space(6f);
-            }
             EditorGUILayout.PropertyField(enableBoundarySystem);
             EditorGUILayout.PropertyField(boundarySystemType);
             changed |= RenderProfile(boundaryVisualizationProfile);

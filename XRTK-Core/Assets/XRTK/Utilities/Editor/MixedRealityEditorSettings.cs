@@ -3,12 +3,9 @@
 
 using System;
 using System.IO;
-using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Build;
-using UnityEditor.PackageManager;
 using UnityEngine;
-using XRTK.Utilities.Async;
 using Object = UnityEngine.Object;
 
 namespace XRTK.Utilities.Editor
@@ -60,13 +57,10 @@ namespace XRTK.Utilities.Editor
         /// <summary>
         /// Check the Mixed Reality Toolkit's settings.
         /// </summary>
-        public static async void CheckSettings()
+        public static void CheckSettings()
         {
-            if (Application.isPlaying) { return; }
-
-            await CheckPackageManifest();
-
-            if (EditorPrefs.GetBool(IgnoreKey, false) ||
+            if (Application.isPlaying ||
+                EditorPrefs.GetBool(IgnoreKey, false) ||
                 !SessionState.GetBool(SessionKey, true))
             {
                 return;
@@ -165,19 +159,6 @@ namespace XRTK.Utilities.Editor
             if (restart)
             {
                 EditorApplication.OpenProject(Directory.GetParent(Application.dataPath).ToString());
-            }
-        }
-
-        private static async Task CheckPackageManifest()
-        {
-            // TODO read this data from a scriptable object so it can be configured in the editor.
-            var searchResult = Client.Search("XRTK UPM Git Extension");
-
-            await new WaitUntil(() => searchResult.Status != StatusCode.InProgress);
-
-            if (searchResult.Result == null)
-            {
-                Client.Add("com.xrtk.upm-git-extension@https://github.com/XRTK/UpmGitExtension.git#1.0.0");
             }
         }
 

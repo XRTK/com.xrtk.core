@@ -1,8 +1,6 @@
 {
     "name": "XRTK.Utilities.Editor",
-    "references": [
-        "XRTK.Utilities.Async"
-    ],
+    "references": [],
     "optionalUnityReferences": [],
     "includePlatforms": [
         "Editor"

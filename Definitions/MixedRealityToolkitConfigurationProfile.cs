@@ -27,19 +27,6 @@ namespace XRTK.Definitions
         #region Mixed Reality Toolkit configurable properties
 
         [SerializeField]
-        [Tooltip("The scale of the Mixed Reality experience.")]
-        private ExperienceScale targetExperienceScale = ExperienceScale.Room;
-
-        /// <summary>
-        /// The desired the scale of the experience.
-        /// </summary>
-        public ExperienceScale TargetExperienceScale
-        {
-            get => targetExperienceScale;
-            set => targetExperienceScale = value;
-        }
-
-        [SerializeField]
         [Tooltip("Enable the Camera Profile on Startup.")]
         private bool enableCameraProfile = false;
 

@@ -4,7 +4,6 @@
 using UnityEngine;
 using UnityEngine.Experimental.XR;
 using XRTK.Definitions.BoundarySystem;
-using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Events;
 
 namespace XRTK.Interfaces.BoundarySystem
@@ -15,11 +14,6 @@ namespace XRTK.Interfaces.BoundarySystem
     /// </summary>
     public interface IMixedRealityBoundarySystem : IMixedRealityEventSystem, IMixedRealityEventSource
     {
-        /// <summary>
-        /// The scale (ex: World Scale) of the experience.
-        /// </summary>
-        ExperienceScale Scale { get; set; }
-
         /// <summary>
         /// The height of the play space, in meters.
         /// </summary>

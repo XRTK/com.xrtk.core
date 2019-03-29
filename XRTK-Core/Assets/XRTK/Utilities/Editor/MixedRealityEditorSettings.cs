@@ -19,7 +19,22 @@ namespace XRTK.Utilities.Editor
         private const string IgnoreKey = "_MixedRealityToolkit_Editor_IgnoreSettingsPrompts";
         private const string SessionKey = "_MixedRealityToolkit_Editor_ShownSettingsPrompts";
 
-        private static string mixedRealityToolkit_RelativeFolderPath = string.Empty;
+        private static string mixedRealityToolkit_AbsoluteFolderPath = string.Empty;
+
+        private static string project_AbsolutePath = string.Empty;
+
+        private static string Project_AbsolutePath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(project_AbsolutePath))
+                {
+                    project_AbsolutePath = Directory.GetParent(Path.GetFullPath(Application.dataPath)).FullName;
+                }
+
+                return project_AbsolutePath;
+            }
+        }
 
         /// <summary>
         /// The absolute folder path to the Mixed Reality Toolkit in your project.
@@ -28,20 +43,20 @@ namespace XRTK.Utilities.Editor
         {
             get
             {
-                if (string.IsNullOrEmpty(mixedRealityToolkit_RelativeFolderPath) &&
-                    !FindDirectory(Application.dataPath, "XRTK", out mixedRealityToolkit_RelativeFolderPath))
+                if (string.IsNullOrEmpty(mixedRealityToolkit_AbsoluteFolderPath) &&
+                    !FindDirectory(Project_AbsolutePath, "XRTK", out mixedRealityToolkit_AbsoluteFolderPath))
                 {
                     Debug.LogError("Unable to find the Mixed Reality Toolkit's directory!");
                 }
 
-                return mixedRealityToolkit_RelativeFolderPath;
+                return mixedRealityToolkit_AbsoluteFolderPath;
             }
         }
 
         /// <summary>
-        /// The relative folder path to the Mixed Reality Toolkit in relation to the Assets folder.
+        /// The relative folder path to the Mixed Reality Toolkit in relation to the "Assets" or "Packages" folders.
         /// </summary>
-        public static string MixedRealityToolkit_RelativeFolderPath => MixedRealityToolkit_AbsoluteFolderPath.Replace($"{Application.dataPath}\\", "Assets/");
+        public static string MixedRealityToolkit_RelativeFolderPath => MixedRealityToolkit_AbsoluteFolderPath.Replace($"{Project_AbsolutePath}\\", "");
 
         /// <summary>
         /// Constructor.

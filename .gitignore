@@ -19,6 +19,7 @@ project.lock.json
 *.package
 TextMesh Pro.meta
 TextMesh Pro/
+UIElementsSchema/
 
 # ============ #
 # Certificates #

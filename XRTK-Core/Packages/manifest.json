@@ -8,6 +8,7 @@
     "com.unity.xr.windowsmr.metro": "1.0.8",
     "com.xrtk.upm-git-extension": "https://github.com/XRTK/UpmGitExtension.git#1.0.0",
     "com.xrtk.xrtk-sdk": "https://github.com/XRTK/SDK.git#0.1.0",
+    "com.xrtk.xrtk-wmr": "https://github.com/XRTK/WindowsMixedReality.git#0.1.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
     "com.unity.modules.assetbundle": "1.0.0",
@@ -46,6 +47,10 @@
     },
     "com.xrtk.xrtk-sdk": {
       "hash": "bd19848cd567660352133a33e921cb695f8f9ad3",
+      "revision": "0.1.0"
+    },
+    "com.xrtk.xrtk-wmr": {
+      "hash": "8d373e6d9de3703f789f31441f17eb35965c719f",
       "revision": "0.1.0"
     }
   }

@@ -2,8 +2,7 @@
     "name": "XRTK.Examples",
     "references": [
         "XRTK",
-        "XRTK.SDK",
-        "XRTK.Utilities.Async"
+        "XRTK.SDK"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

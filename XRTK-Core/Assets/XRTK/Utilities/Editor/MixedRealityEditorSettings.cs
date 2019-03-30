@@ -19,10 +19,6 @@ namespace XRTK.Utilities.Editor
         private const string IgnoreKey = "_MixedRealityToolkit_Editor_IgnoreSettingsPrompts";
         private const string SessionKey = "_MixedRealityToolkit_Editor_ShownSettingsPrompts";
 
-        private static string mixedRealityToolkit_AbsoluteFolderPath = string.Empty;
-
-        private static string project_AbsolutePath = string.Empty;
-
         private static string Project_AbsolutePath
         {
             get
@@ -36,6 +32,8 @@ namespace XRTK.Utilities.Editor
             }
         }
 
+        private static string project_AbsolutePath = string.Empty;
+
         /// <summary>
         /// The absolute folder path to the Mixed Reality Toolkit in your project.
         /// </summary>
@@ -43,21 +41,26 @@ namespace XRTK.Utilities.Editor
         {
             get
             {
-                if (string.IsNullOrEmpty(mixedRealityToolkit_AbsoluteFolderPath) &&
-                    !FindDirectory(Project_AbsolutePath, "XRTK", out mixedRealityToolkit_AbsoluteFolderPath) &&
-                    !FindDirectory(Project_AbsolutePath, "com.xtrk.xrtk-core", out mixedRealityToolkit_AbsoluteFolderPath))
+                if (!string.IsNullOrEmpty(mixedRealityToolkit_AbsoluteFolderPath))
                 {
-                    Debug.LogError("Unable to find the Mixed Reality Toolkit's directory!");
+                    return mixedRealityToolkit_AbsoluteFolderPath;
                 }
+
+                FindDirectory(Project_AbsolutePath, "XRTK", out mixedRealityToolkit_AbsoluteFolderPath);
 
                 return mixedRealityToolkit_AbsoluteFolderPath;
             }
         }
 
+        private static string mixedRealityToolkit_AbsoluteFolderPath = string.Empty;
+
         /// <summary>
         /// The relative folder path to the Mixed Reality Toolkit in relation to the "Assets" or "Packages" folders.
         /// </summary>
-        public static string MixedRealityToolkit_RelativeFolderPath => MixedRealityToolkit_AbsoluteFolderPath.Replace($"{Project_AbsolutePath}\\", "");
+        public static string MixedRealityToolkit_RelativeFolderPath =>
+            !string.IsNullOrEmpty(MixedRealityToolkit_AbsoluteFolderPath)
+                ? MixedRealityToolkit_AbsoluteFolderPath.Replace($"{Project_AbsolutePath}\\", "")
+                : "Packages/com.xrtk.xrtk-core";
 
         /// <summary>
         /// Constructor.

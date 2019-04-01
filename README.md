@@ -30,13 +30,12 @@ There are many channels on Slack, covering the wide variety of Mixed Reality pla
 
 # Supported Platforms
 
-- [ ] Android
-    - [ ] ARCore
-- [ ] OSX Standalone
+- [x] Linux
+- [x] OSX Standalone
 - [ ] iOS
     - [ ] ARKit
-- [x] Linux
-- [ ] [Lumin (aka Magic Leap)](https://github.com/XRTK/Lumin)
+- [ ] Android
+    - [ ] ARCore
 - [ ] WebAssembly
     - [ ] WebVR
     - [ ] WebXR
@@ -47,6 +46,7 @@ There are many channels on Slack, covering the wide variety of Mixed Reality pla
     - [x] HoloLens
     - [x] Windows Mixed Reality HMDs
     - [ ] HoloLens 2
+- [ ] [Lumin (aka Magic Leap)](https://github.com/XRTK/Lumin)
 
 # FAQ
 

@@ -26,24 +26,27 @@ There are many channels on Slack, covering the wide variety of Mixed Reality pla
 
 | Branches | Windows Build Agent | Mac Build Agent | Linux Build Agent |
 |---|---|---|---|
-|Master|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Mixed%20Reality%20Toolkit-CI)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=2)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Master%20Build%20Pipeline%20-%20Hosted%20macOS)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=4)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Master%20Build%20Pipeline%20-%20Hosted%20Hosted%20Ubuntu)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=6)|
+|Master|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Mixed%20Reality%20Toolkit-CI)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=2)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Master%20Build%20Pipeline%20-%20Hosted%20macOS)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=4)|
 
 # Supported Platforms
 
-- [ ] Android
-    - [ ] ARCore
-- [ ] OSX Standalone
+- [x] Linux
+- [x] OSX Standalone
 - [ ] iOS
     - [ ] ARKit
-- [ ] Linux
-- [ ] Lumin (aka Magic Leap)
+- [ ] Android
+    - [ ] ARCore
 - [ ] WebAssembly
     - [ ] WebVR
     - [ ] WebXR
 - [x] Windows Standalone
     - [x] Open VR
     - [ ] Steam VR
-- [x] Windows Mixed Reality
+- [x] [Windows Mixed Reality](https://github.com/XRTK/WindowsMixedReality)
+    - [x] HoloLens
+    - [x] Windows Mixed Reality HMDs
+    - [ ] HoloLens 2
+- [ ] [Lumin (aka Magic Leap)](https://github.com/XRTK/Lumin)
 
 # FAQ
 

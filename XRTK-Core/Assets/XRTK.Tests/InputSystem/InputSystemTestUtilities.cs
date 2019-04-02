@@ -5,6 +5,7 @@ using UnityEngine;
 using XRTK.Definitions.InputSystem;
 using XRTK.Providers.Controllers;
 using XRTK.Services.InputSystem;
+using XRTK.Tests.InputSystem.TestAssets;
 
 namespace XRTK.Tests.InputSystem
 {

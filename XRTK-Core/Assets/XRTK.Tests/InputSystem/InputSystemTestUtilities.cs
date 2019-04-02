@@ -4,7 +4,6 @@
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
 using XRTK.Providers.Controllers;
-using XRTK.SDK.Input;
 using XRTK.Services.InputSystem;
 
 namespace XRTK.Tests.InputSystem
@@ -19,7 +18,7 @@ namespace XRTK.Tests.InputSystem
             inputSystemProfile.InputActionsProfile = ScriptableObject.CreateInstance<MixedRealityInputActionsProfile>();
             inputSystemProfile.InputActionRulesProfile = ScriptableObject.CreateInstance<MixedRealityInputActionRulesProfile>();
             inputSystemProfile.PointerProfile = ScriptableObject.CreateInstance<MixedRealityPointerProfile>();
-            inputSystemProfile.PointerProfile.GazeProviderType = typeof(GazeProvider);
+            inputSystemProfile.PointerProfile.GazeProviderType = typeof(TestGazeProvider);
             inputSystemProfile.GesturesProfile = ScriptableObject.CreateInstance<MixedRealityGesturesProfile>();
             inputSystemProfile.SpeechCommandsProfile = ScriptableObject.CreateInstance<MixedRealitySpeechCommandsProfile>();
             inputSystemProfile.ControllerVisualizationProfile = ScriptableObject.CreateInstance<MixedRealityControllerVisualizationProfile>();

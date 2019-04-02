@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -93,14 +92,10 @@ namespace XRTK.Utilities.Build
         /// <param name="cancellationToken"></param>
         public static async Task<bool> BuildPlayer(UwpBuildInfo buildInfo, CancellationToken cancellationToken = default)
         {
-            #region Gather Build Data
-
             if (buildInfo.IsCommandLine)
             {
                 ParseBuildCommandLine(ref buildInfo);
             }
-
-            #endregion Gather Build Data
 
             BuildReport buildReport = UnityPlayerBuildTools.BuildUnityPlayer(buildInfo);
 

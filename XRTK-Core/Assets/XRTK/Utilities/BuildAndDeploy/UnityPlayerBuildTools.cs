@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -152,6 +153,7 @@ namespace XRTK.Utilities.Build
             try
             {
                 SyncSolution();
+
                 switch (EditorUserBuildSettings.activeBuildTarget)
                 {
                     case BuildTarget.WSAPlayer:
@@ -179,11 +181,13 @@ namespace XRTK.Utilities.Build
         {
             if (EditorBuildSettings.scenes.Length == 0)
             {
-                return EditorUtility.DisplayDialog("Attention!",
-                                                   "No scenes are present in the build settings.\n" +
-                                                   "The current scene will be the one built.\n\n" +
-                                                   "Do you want to cancel and add one?",
-                                                   "Continue Anyway", "Cancel Build");
+                return EditorUtility.DisplayDialog(
+                    "Attention!",
+                    "No scenes are present in the build settings.\n" +
+                    "The current scene will be the one built.\n\n" +
+                    "Do you want to cancel and add one?",
+                    "Continue Anyway",
+                    "Cancel Build");
             }
 
             return true;
@@ -209,8 +213,11 @@ namespace XRTK.Utilities.Build
                     case "-autoIncrement":
                         buildInfo.AutoIncrement = true;
                         break;
-                    case "-scenes":
-                        // TODO parse json scene list and set them.
+                    case "-sceneList":
+                        buildInfo.Scenes = buildInfo.Scenes.Union(SplitSceneList(arguments[++i]));
+                        break;
+                    case "-sceneListFile":
+                        buildInfo.Scenes = buildInfo.Scenes.Union(SplitSceneList(File.ReadAllText(arguments[++i])));
                         break;
                     case "-buildOutput":
                         buildInfo.OutputDirectory = arguments[++i];
@@ -229,6 +236,12 @@ namespace XRTK.Utilities.Build
                         break;
                 }
             }
+        }
+
+        private static IEnumerable<string> SplitSceneList(string sceneList)
+        {
+            return from scene in sceneList.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
+                   select scene.Trim();
         }
 
         /// <summary>

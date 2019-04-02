@@ -24,7 +24,7 @@ namespace XRTK.Definitions.Utilities
                 return string.Empty;
             }
 
-            string[] qualifiedNameComponents = type.AssemblyQualifiedName.Split(',');
+            var qualifiedNameComponents = type.AssemblyQualifiedName.Split(',');
             Debug.Assert(qualifiedNameComponents.Length >= 2);
             return $"{qualifiedNameComponents[0]}, {qualifiedNameComponents[1].Trim()}";
         }

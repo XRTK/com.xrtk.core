@@ -35,35 +35,35 @@ namespace XRTK.Inspectors
             string commandName = Event.current.commandName;
             var allConfigProfiles = ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitConfigurationProfile>();
 
-            if (activeProfile.objectReferenceValue == null && currentPickerWindow == -1 && checkChange)
+            if (activeProfile.objectReferenceValue == null)
             {
-                if (allConfigProfiles.Length > 1)
+                if (currentPickerWindow == -1 && checkChange)
                 {
-                    EditorUtility.DisplayDialog("Attention!", "You must choose a profile for the Mixed Reality Toolkit.", "OK");
-                    currentPickerWindow = GUIUtility.GetControlID(FocusType.Passive);
-                    EditorGUIUtility.ShowObjectPicker<MixedRealityToolkitConfigurationProfile>(null, false, string.Empty, currentPickerWindow);
-                }
-                else if (allConfigProfiles.Length == 1)
-                {
-                    activeProfile.objectReferenceValue = allConfigProfiles[0];
-                    changed = true;
-                    Selection.activeObject = allConfigProfiles[0];
-                    EditorGUIUtility.PingObject(allConfigProfiles[0]);
-                }
-                else
-                {
-                    if (EditorUtility.DisplayDialog("Attention!", "No profiles were found for the Mixed Reality Toolkit.\n\n" +
-                                                                  "Would you like to create one now?", "OK", "Later"))
+                    if (allConfigProfiles.Length > 1)
                     {
-                        ScriptableObject profile = CreateInstance(nameof(MixedRealityToolkitConfigurationProfile));
-                        profile.CreateAsset("Assets/XRTK.Generated/CustomProfiles");
-                        activeProfile.objectReferenceValue = profile;
-                        Selection.activeObject = profile;
-                        EditorGUIUtility.PingObject(profile);
+                        EditorUtility.DisplayDialog("Attention!", "You must choose a profile for the Mixed Reality Toolkit.", "OK");
+                        currentPickerWindow = GUIUtility.GetControlID(FocusType.Passive);
+                        EditorGUIUtility.ShowObjectPicker<MixedRealityToolkitConfigurationProfile>(null, false, string.Empty, currentPickerWindow);
                     }
+                    else if (allConfigProfiles.Length == 1)
+                    {
+                        activeProfile.objectReferenceValue = allConfigProfiles[0];
+                        changed = true;
+                        Selection.activeObject = allConfigProfiles[0];
+                        EditorGUIUtility.PingObject(allConfigProfiles[0]);
+                    }
+
+                    checkChange = false;
                 }
 
-                checkChange = false;
+                if (GUILayout.Button("Create new configuration"))
+                {
+                    ScriptableObject profile = CreateInstance(nameof(MixedRealityToolkitConfigurationProfile));
+                    profile.CreateAsset("Assets/XRTK.Generated/CustomProfiles");
+                    activeProfile.objectReferenceValue = profile;
+                    Selection.activeObject = profile;
+                    EditorGUIUtility.PingObject(profile);
+                }
             }
 
             if (EditorGUIUtility.GetObjectPickerControlID() == currentPickerWindow)
@@ -92,7 +92,7 @@ namespace XRTK.Inspectors
             }
         }
 
-        [MenuItem("Mixed Reality Toolkit/Configure...")]
+        [MenuItem("Mixed Reality Toolkit/Configure...", false, 0)]
         public static void CreateMixedRealityToolkitGameObject()
         {
             Selection.activeObject = MixedRealityToolkit.Instance;

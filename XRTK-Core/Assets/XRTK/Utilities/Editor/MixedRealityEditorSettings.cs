@@ -60,7 +60,7 @@ namespace XRTK.Utilities.Editor
         public static string MixedRealityToolkit_RelativeFolderPath =>
             !string.IsNullOrEmpty(MixedRealityToolkit_AbsoluteFolderPath)
                 ? MixedRealityToolkit_AbsoluteFolderPath.Replace($"{Project_AbsolutePath}\\", "")
-                : "Packages/com.xrtk.xrtk-core";
+                : "Packages/com.xrtk.core";
 
         /// <summary>
         /// Constructor.

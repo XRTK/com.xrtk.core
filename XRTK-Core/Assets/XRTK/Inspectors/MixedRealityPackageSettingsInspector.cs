@@ -8,7 +8,7 @@ namespace XRTK.Inspectors
     {
         private SerializedProperty mixedRealityPackages;
 
-        private void Awake()
+        private void OnEnable()
         {
             mixedRealityPackages = serializedObject.FindProperty("mixedRealityPackages");
         }

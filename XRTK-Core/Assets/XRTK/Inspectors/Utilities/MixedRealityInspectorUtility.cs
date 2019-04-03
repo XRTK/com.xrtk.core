@@ -161,7 +161,7 @@ namespace XRTK.Inspectors.Utilities
         {
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
-            GUILayout.Label(EditorGUIUtility.isProSkin ? MixedRealityInspectorUtility.LightThemeLogo : MixedRealityInspectorUtility.DarkThemeLogo, GUILayout.MaxHeight(128f));
+            GUILayout.Label(EditorGUIUtility.isProSkin ? LightThemeLogo : DarkThemeLogo, GUILayout.MaxHeight(128f));
             GUILayout.FlexibleSpace();
             GUILayout.EndHorizontal();
             GUILayout.Space(12f);

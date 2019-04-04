@@ -51,7 +51,7 @@ namespace XRTK.Inspectors.Utilities
         /// <summary>
         /// Debug the package utility.
         /// </summary>
-        public static bool DebugEnabled { get; set; } = true;
+        public static bool DebugEnabled { get; set; } = false;
 
         private static Tuple<MixedRealityPackageInfo, bool, bool>[] currentPackages;
 

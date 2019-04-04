@@ -51,7 +51,7 @@ namespace XRTK.Inspectors.Utilities
         /// <summary>
         /// Debug the package utility.
         /// </summary>
-        public static bool DebugEnabled { get; set; } = false;
+        public static bool DebugEnabled { get; set; } = true;
 
         private static Tuple<MixedRealityPackageInfo, bool, bool>[] currentPackages;
 
@@ -78,23 +78,27 @@ namespace XRTK.Inspectors.Utilities
 
             for (var i = 0; i < installedPackages.Length; i++)
             {
-                var packageInfo = installedPackages[i].Item1;
-                var packageDisabled = installedPackages[i].Item2;
+                (MixedRealityPackageInfo package, bool isEnabled, bool isInstalled) = installedPackages[i];
 
                 if (DebugEnabled)
                 {
-                    Debug.Log($"{packageInfo.Name}_disabled == {packageDisabled}");
+                    Debug.Log($"{package.Name}_enabled == {isEnabled}");
                 }
 
-                if (packageInfo.IsRequiredPackage ||
-                    (packageInfo.IsDefaultPackage && !packageDisabled))
+                if (package.IsRequiredPackage && !isInstalled ||
+                   (package.IsDefaultPackage && isEnabled && !isInstalled))
                 {
-                    await AddPackage(packageInfo);
+                    await AddPackage(package);
                 }
-                else if (packageDisabled)
+                else if (!isEnabled && isInstalled)
                 {
-                    await RemovePackage(packageInfo);
+                    await RemovePackage(package);
                 }
+            }
+
+            if (DebugEnabled)
+            {
+                Debug.Log("Check complete!");
             }
 
             IsRunningCheck = false;
@@ -126,14 +130,15 @@ namespace XRTK.Inspectors.Utilities
 
             for (var i = 0; i < PackageSettings.MixedRealityPackages.Length; i++)
             {
+                var package = PackageSettings.MixedRealityPackages[i];
                 currentPackages[i] = new Tuple<MixedRealityPackageInfo, bool, bool>(
-                    PackageSettings.MixedRealityPackages[i],
-                    EditorPreferences.Get($"{PackageSettings.MixedRealityPackages[i].Name}_disabled", false),
+                    package,
+                    EditorPreferences.Get($"{package.Name}_enabled", true) || package.IsRequiredPackage,
                     installedPackages.Any(Predicate));
 
                 bool Predicate(PackageInfo packageInfo)
                 {
-                    return packageInfo != null && packageInfo.name.Equals(PackageSettings.MixedRealityPackages[i].Name);
+                    return packageInfo != null && packageInfo.name.Equals(package.Name);
                 }
             }
 
@@ -151,7 +156,7 @@ namespace XRTK.Inspectors.Utilities
             }
             else
             {
-                Debug.LogError($"Package Error({addRequest.Error.errorCode}): {addRequest.Error.message}");
+                Debug.LogError($"Package Error({addRequest.Error?.errorCode}): {addRequest.Error?.message}");
             }
         }
 
@@ -164,9 +169,9 @@ namespace XRTK.Inspectors.Utilities
             {
                 Debug.Log($"successfully removed {packageInfo.Name}");
             }
-            else if (removeRequest.Error.errorCode != ErrorCode.NotFound)
+            else if (removeRequest.Error?.errorCode != ErrorCode.NotFound)
             {
-                Debug.LogError($"Package Error({removeRequest.Error.errorCode}): {removeRequest.Error.message}");
+                Debug.LogError($"Package Error({removeRequest.Error?.errorCode}): {removeRequest.Error?.message}");
             }
         }
     }

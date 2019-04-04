@@ -79,5 +79,18 @@ namespace XRTK.Definitions
             get => isRequiredPackage;
             internal set => isRequiredPackage = value;
         }
+
+        [SerializeField]
+        [Tooltip("The list of dependencies for this package.")]
+        private string[] dependencies;
+
+        /// <summary>
+        /// The list of dependencies for this package.
+        /// </summary>
+        public string[] Dependencies
+        {
+            get => dependencies;
+            internal set => dependencies = value;
+        }
     }
 }

@@ -66,5 +66,18 @@ namespace XRTK.Definitions
             get => isDefaultPackage;
             internal set => isDefaultPackage = value;
         }
+
+        [SerializeField]
+        [Tooltip("This package is required by the XRTK.")]
+        private bool isRequiredPackage;
+
+        /// <summary>
+        /// This package is required by the xrtk.
+        /// </summary>
+        public bool IsRequiredPackage
+        {
+            get => isRequiredPackage;
+            internal set => isRequiredPackage = value;
+        }
     }
 }

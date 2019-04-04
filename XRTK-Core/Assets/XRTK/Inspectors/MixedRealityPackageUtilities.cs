@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEditor;
@@ -14,23 +15,9 @@ namespace XRTK.Inspectors.Utilities
     [InitializeOnLoad]
     public static class MixedRealityPackageUtilities
     {
-        private const string SessionKey = "_XRTK_Editor_CheckedPackages";
-
         static MixedRealityPackageUtilities()
         {
             EditorApplication.delayCall += CheckPackageManifest;
-        }
-
-        private static async void CheckPackageManifest()
-        {
-            if (Application.isPlaying ||
-                !SessionState.GetBool(SessionKey, true))
-            {
-                return;
-            }
-
-            SessionState.SetBool(SessionKey, false);
-            await CheckPackageManifestAsync();
         }
 
         /// <summary>
@@ -56,32 +43,71 @@ namespace XRTK.Inspectors.Utilities
 
         private static MixedRealityPackageSettings packageSettings;
 
-        private static async Task CheckPackageManifestAsync()
+        /// <summary>
+        /// Is the package utility running a check?
+        /// </summary>
+        public static bool IsRunningCheck { get; private set; } = false;
+
+        /// <summary>
+        /// Debug the package utility.
+        /// </summary>
+        public static bool DebugEnabled { get; set; } = false;
+
+        private static Tuple<MixedRealityPackageInfo, bool, bool>[] currentPackages;
+
+        /// <summary>
+        /// Ensures the package manifest is up to date.
+        /// </summary>
+        public static async void CheckPackageManifest()
         {
-            foreach (var packageInfo in PackageSettings.MixedRealityPackages)
+            if (Application.isPlaying)
             {
-                if (packageInfo.IsDefaultPackage && !EditorPreferences.Get($"{packageInfo.Name}_disabled", false))
+                return;
+            }
+
+            if (IsRunningCheck) { return; }
+
+            IsRunningCheck = true;
+
+            if (DebugEnabled)
+            {
+                Debug.Log("Checking packages...");
+            }
+
+            var installedPackages = await GetCurrentMixedRealityPackagesAsync();
+
+            for (var i = 0; i < installedPackages.Length; i++)
+            {
+                var packageInfo = installedPackages[i].Item1;
+                var packageDisabled = installedPackages[i].Item2;
+
+                if (DebugEnabled)
                 {
-                    var searchResult = Client.Search(packageInfo.DisplayName);
+                    Debug.Log($"{packageInfo.Name}_disabled == {packageDisabled}");
+                }
 
-                    await new WaitUntil(() => searchResult.Status != StatusCode.InProgress);
-
-                    if (searchResult.Result == null)
-                    {
-                        Client.Add($"{packageInfo.Name}@{packageInfo.Uri}");
-                    }
+                if (packageInfo.IsRequiredPackage ||
+                    (packageInfo.IsDefaultPackage && !packageDisabled))
+                {
+                    await AddPackage(packageInfo);
+                }
+                else if (packageDisabled)
+                {
+                    await RemovePackage(packageInfo);
                 }
             }
+
+            IsRunningCheck = false;
         }
 
         /// <summary>
         /// Returns the currently installed upm xrtk packages.
         /// </summary>
-        public static async Task<List<PackageInfo>> GetCurrentMixedRealityPackagesAsync()
+        internal static async Task<Tuple<MixedRealityPackageInfo, bool, bool>[]> GetCurrentMixedRealityPackagesAsync()
         {
-            if (isUpdatingPackages) { return null; }
-
-            var packageList = new List<PackageInfo>();
+            var packageCount = PackageSettings.MixedRealityPackages.Length;
+            currentPackages = new Tuple<MixedRealityPackageInfo, bool, bool>[packageCount];
+            var installedPackages = new List<PackageInfo>();
             var upmPackageListRequest = Client.List(true);
 
             await new WaitUntil(() => upmPackageListRequest.Status != StatusCode.InProgress);
@@ -93,42 +119,55 @@ namespace XRTK.Inspectors.Utilities
 
             foreach (var mrtkPackageInfo in PackageSettings.MixedRealityPackages)
             {
-                packageList.Add(
+                installedPackages.Add(
                     upmPackageListRequest.Result.FirstOrDefault(
                         packageInfo => packageInfo.name.Equals(mrtkPackageInfo.Name)));
             }
 
-            return packageList.Count == 0 ? null : packageList;
-        }
-
-        private static bool isUpdatingPackages = false;
-
-        public static async void UpdatePackages(bool[] isPackageEnabled, bool[] isPackageInstalled)
-        {
-            if (isUpdatingPackages) { return; }
-            EditorAssemblyReloadManager.LockReloadAssemblies = true;
-            isUpdatingPackages = true;
-            var packages = PackageSettings.MixedRealityPackages;
-
-            for (var i = 0; i < packages.Length; i++)
+            for (var i = 0; i < PackageSettings.MixedRealityPackages.Length; i++)
             {
-                if (!isPackageEnabled[i] && isPackageInstalled[i])
-                {
-                    EditorPreferences.Set($"{packages[i].Name}_disabled", true);
-                    var removeRequest = Client.Remove($"{packages[i].Name}");
-                    await new WaitUntil(() => removeRequest.Status != StatusCode.InProgress);
-                }
+                currentPackages[i] = new Tuple<MixedRealityPackageInfo, bool, bool>(
+                    PackageSettings.MixedRealityPackages[i],
+                    EditorPreferences.Get($"{PackageSettings.MixedRealityPackages[i].Name}_disabled", false),
+                    installedPackages.Any(Predicate));
 
-                if (isPackageEnabled[i] && !isPackageInstalled[i])
+                bool Predicate(PackageInfo packageInfo)
                 {
-                    EditorPreferences.Set($"{packages[i].Name}_disabled", false);
-                    var addRequest = Client.Add($"{packages[i].Name}@{packages[i].Uri}");
-                    await new WaitUntil(() => addRequest.Status != StatusCode.InProgress);
+                    return packageInfo != null && packageInfo.name.Equals(PackageSettings.MixedRealityPackages[i].Name);
                 }
             }
 
-            isUpdatingPackages = false;
-            EditorAssemblyReloadManager.LockReloadAssemblies = false;
+            return currentPackages;
+        }
+
+        private static async Task AddPackage(MixedRealityPackageInfo packageInfo)
+        {
+            var addRequest = Client.Add($"{packageInfo.Name}@{packageInfo.Uri}");
+            await new WaitUntil(() => addRequest.Status != StatusCode.InProgress);
+
+            if (addRequest.Status == StatusCode.Success && DebugEnabled)
+            {
+                Debug.Log($"successfully added {packageInfo.Name}");
+            }
+            else
+            {
+                Debug.LogError($"Package Error({addRequest.Error.errorCode}): {addRequest.Error.message}");
+            }
+        }
+
+        private static async Task RemovePackage(MixedRealityPackageInfo packageInfo)
+        {
+            var removeRequest = Client.Remove($"{packageInfo.Name}");
+            await new WaitUntil(() => removeRequest.Status != StatusCode.InProgress);
+
+            if (removeRequest.Status == StatusCode.Success && DebugEnabled)
+            {
+                Debug.Log($"successfully removed {packageInfo.Name}");
+            }
+            else if (removeRequest.Error.errorCode != ErrorCode.NotFound)
+            {
+                Debug.LogError($"Package Error({removeRequest.Error.errorCode}): {removeRequest.Error.message}");
+            }
         }
     }
 }

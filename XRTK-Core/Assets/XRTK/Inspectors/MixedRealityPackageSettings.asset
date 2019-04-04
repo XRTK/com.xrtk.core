@@ -17,11 +17,14 @@ MonoBehaviour:
     displayName: XRTK.UpmGitExtension
     uri: https://github.com/XRTK/UpmGitExtension.git#0.9.1
     isDefaultPackage: 1
+    isRequiredPackage: 1
   - name: com.xrtk.wmr
     displayName: XRTK.WindowsMixedReality
     uri: https://github.com/XRTK/WindowsMixedReality.git#0.1.0
     isDefaultPackage: 1
+    isRequiredPackage: 0
   - name: com.xrtk.sdk
     displayName: XRTK.SDK
     uri: https://github.com/XRTK/SDK.git#0.1.0
     isDefaultPackage: 1
+    isRequiredPackage: 0

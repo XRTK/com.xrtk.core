@@ -140,7 +140,18 @@ namespace XRTK.Utilities.Build
         }
 
         /// <summary>
-        /// Start a build using Unity's command line.
+        /// Start a build using Unity's command line. Valid arguments:<para/>
+        /// -autoIncrement : Increments the build revision number.<para/>
+        /// -sceneList : A csv of a list of scenes to include in the build.<para/>
+        /// -sceneListFile : A json file with a list of scenes to include in the build.<para/>
+        /// -buildOutput : The target directory you'd like the build to go.<para/>
+        /// -colorSpace : The <see cref="ColorSpace"/> settings for the build.<para/>
+        /// -x86 / -x64 : The target build platform. (Default is x86)<para/>
+        /// -debug / -release / -master : The target build configuration. (Default is master)<para/>
+        ///
+        /// UWP Platform Specific arguments:<para/>
+        /// -buildAppx : Builds the appx bundle after the Unity Build step.<para/>
+        /// -rebuildAppx : Rebuild the appx bundle.<para/>
         /// </summary>
         public static async void StartCommandLineBuild()
         {
@@ -157,7 +168,7 @@ namespace XRTK.Utilities.Build
                 switch (EditorUserBuildSettings.activeBuildTarget)
                 {
                     case BuildTarget.WSAPlayer:
-                        success = await UwpPlayerBuildTools.BuildPlayer(new UwpBuildInfo(true) { BuildAppx = true });
+                        success = await UwpPlayerBuildTools.BuildPlayer(new UwpBuildInfo(true));
                         break;
                     default:
                         var buildInfo = new BuildInfo(true) as IBuildInfo;
@@ -202,6 +213,10 @@ namespace XRTK.Utilities.Build
             return Path.GetDirectoryName(Path.GetFullPath(Application.dataPath));
         }
 
+        /// <summary>
+        /// Parses the command like arguments.
+        /// </summary>
+        /// <param name="buildInfo"></param>
         public static void ParseBuildCommandLine(ref IBuildInfo buildInfo)
         {
             string[] arguments = Environment.GetCommandLineArgs();

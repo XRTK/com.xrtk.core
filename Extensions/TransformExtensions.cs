@@ -101,13 +101,16 @@ namespace XRTK.Extensions
         public static Bounds GetColliderBounds(this Transform transform)
         {
             Collider[] colliders = transform.GetComponentsInChildren<Collider>();
+
             if (colliders.Length == 0) { return new Bounds(); }
 
             Bounds bounds = colliders[0].bounds;
+
             for (int i = 1; i < colliders.Length; i++)
             {
                 bounds.Encapsulate(colliders[i].bounds);
             }
+
             return bounds;
         }
 
@@ -132,6 +135,7 @@ namespace XRTK.Extensions
             foreach (Transform transform in startTransform.EnumerateAncestors(includeSelf))
             {
                 T component = transform.GetComponent<T>();
+
                 if (component != null)
                 {
                     return component;
@@ -158,6 +162,98 @@ namespace XRTK.Extensions
             {
                 yield return transform;
             }
+        }
+
+        /// <summary>
+        /// Transforms the size from local to world.
+        /// </summary>
+        /// <param name="transform">The transform.</param>
+        /// <param name="localSize">The local size.</param>
+        /// <returns>World size.</returns>
+        public static Vector3 TransformSize(this Transform transform, Vector3 localSize)
+        {
+            var transformedSize = localSize;
+            var transformedCopy = transform;
+
+            do
+            {
+                var localScale = transformedCopy.localScale;
+                transformedSize.x *= localScale.x;
+                transformedSize.y *= localScale.y;
+                transformedSize.z *= localScale.z;
+                transformedCopy = transformedCopy.parent;
+            }
+            while (transformedCopy != null);
+
+            return transformedSize;
+        }
+
+        /// <summary>
+        /// Transforms the size from world to local.
+        /// </summary>
+        /// <param name="transform">The transform.</param>
+        /// <param name="worldSize">The world size</param>
+        /// <returns>World size.</returns>
+        public static Vector3 InverseTransformSize(this Transform transform, Vector3 worldSize)
+        {
+            var transformedSize = worldSize;
+            var transformedCopy = transform;
+
+            do
+            {
+                var localScale = transformedCopy.localScale;
+                transformedSize.x /= localScale.x;
+                transformedSize.y /= localScale.y;
+                transformedSize.z /= localScale.z;
+                transformedCopy = transformedCopy.parent;
+            }
+            while (transformedCopy != null);
+
+            return transformedSize;
+        }
+
+        /// <summary>
+        /// Gets the hierarchical depth of the Transform from its root. Returns -1 if the transform is the root.
+        /// </summary>
+        /// <param name="transform">The transform to get the depth for.</param>
+        /// <returns></returns>
+        public static int GetDepth(this Transform transform)
+        {
+            int depth = -1;
+
+            Transform root = transform.root;
+
+            if (root == transform)
+            {
+                return depth;
+            }
+
+            TryGetDepth(transform, root, ref depth);
+
+            return depth;
+        }
+
+        /// <summary>
+        /// Tries to get the hierarchical depth of the Transform from the specified parent. This method is recursive.
+        /// </summary>
+        /// <param name="target">The transform to get the depth for</param>
+        /// <param name="parent">The starting transform to look for the target transform in</param>
+        /// <param name="depth">The depth of the target transform</param>
+        /// <returns>'true' if the depth could be retrieved, or 'false' because the transform is a root transform.</returns>
+        public static bool TryGetDepth(Transform target, Transform parent, ref int depth)
+        {
+            for (int i = 0; i < parent.childCount; i++)
+            {
+                depth++;
+                var child = parent.GetChild(i);
+
+                if (child == target.transform || TryGetDepth(target, child, ref depth))
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }

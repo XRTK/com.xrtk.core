@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace XRTK.Definitions
 {
@@ -9,26 +8,16 @@ namespace XRTK.Definitions
     public class MixedRealityPackageSettings : ScriptableObject
     {
         [SerializeField]
-        private string[] packageNames = new string[0];
+        [Tooltip("Known xrtk packages in upm.")]
+        private MixedRealityPackageInfo[] mixedRealityPackages = new MixedRealityPackageInfo[0];
 
-        [SerializeField]
-        private string[] packageUrls = new string[0];
-
-        public Dictionary<string, string> PackageList
+        /// <summary>
+        /// Known XRTK packages in upm.
+        /// </summary>
+        public MixedRealityPackageInfo[] MixedRealityPackages
         {
-            get
-            {
-                packageList.Clear();
-
-                for (int i = 0; i < packageNames.Length; i++)
-                {
-                    packageList.Add(packageNames[i], packageUrls[i]);
-                }
-
-                return packageList;
-            }
+            get => mixedRealityPackages;
+            internal set => mixedRealityPackages = value;
         }
-
-        private Dictionary<string, string> packageList = new Dictionary<string, string>(0);
     }
 }

@@ -127,12 +127,10 @@ namespace XRTK.Inspectors
         [SettingsProvider]
         private static SettingsProvider Preferences()
         {
-            var provider = new SettingsProvider("Project/XRTK")
+            var provider = new SettingsProvider("Preferences/XRTK", SettingsScope.User, XRTK_Keywords)
             {
                 label = "XRTK",
-
                 guiHandler = GUIHandler,
-
                 keywords = new HashSet<string>(XRTK_Keywords)
             };
 

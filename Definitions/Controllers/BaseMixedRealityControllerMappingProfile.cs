@@ -42,8 +42,8 @@ namespace XRTK.Providers.Controllers
         /// </summary>
         /// <remarks>
         /// The path only needs to include the name of the controller.<para/>
-        /// The file name should be formatted as:<para/> XRTK/StandardAssets/Textures/{ControllerName}_{handedness}_{theme}_{scaled}.png <para/>
-        /// scaled suffix is optional. <para/>
+        /// The file name should be formatted as:<para/>XRTK/StandardAssets/Textures/{ControllerName}_{handedness}_{theme}_{scaled}.png<para/>
+        /// scaled suffix is optional.<para/>
         /// Custom file paths should never call the base property.
         /// </remarks>
         public virtual string TexturePath

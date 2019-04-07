@@ -3,6 +3,8 @@
 
 using System.Runtime.CompilerServices;
 
+// Note: these are the names of the assembly definitions themselves, not necessarily the actual namespace the class is in.
+
 [assembly: InternalsVisibleTo("XRTK.Inspectors")]
 [assembly: InternalsVisibleTo("XRTK.Tests")]
 [assembly: InternalsVisibleTo("XRTK.Utilities.Gltf.Importers")]

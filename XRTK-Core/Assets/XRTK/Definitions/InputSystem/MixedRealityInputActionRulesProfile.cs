@@ -6,7 +6,7 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.InputSystem
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Input Action Rules Profile", fileName = "MixedRealityInputActionRulesProfile", order = (int)CreateProfileMenuItemIndices.InputActionRules)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Input Action Rules Profile", fileName = "MixedRealityInputActionRulesProfile", order = (int)CreateProfileMenuItemIndices.InputActionRules)]
     public class MixedRealityInputActionRulesProfile : BaseMixedRealityProfile
     {
         [SerializeField]

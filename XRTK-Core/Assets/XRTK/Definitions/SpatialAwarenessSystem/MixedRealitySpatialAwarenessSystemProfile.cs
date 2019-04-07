@@ -10,7 +10,7 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
     /// <summary>
     /// Configuration profile settings for setting up the spatial awareness system.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Spatial Awareness System Profile", fileName = "MixedRealitySpatialAwarenessSystemProfile", order = (int)CreateProfileMenuItemIndices.SpatialAwareness)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Spatial Awareness System Profile", fileName = "MixedRealitySpatialAwarenessSystemProfile", order = (int)CreateProfileMenuItemIndices.SpatialAwareness)]
     public class MixedRealitySpatialAwarenessSystemProfile : BaseMixedRealityProfile
     {
         /// <summary>

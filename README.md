@@ -2,7 +2,7 @@
 
 Developing Mixed Reality Applications in Unity is hard, and today we're proud to announce the formation of the XRTK (pronounced “Mixed Reality Toolkit”). This is a direct fork of the [Microsoft Mixed Reality Toolkit (MRTK)](https://github.com/Microsoft/MixedRealityToolkit-Unity).
 
-I know there are many [developers](/CONTRIBUTORS.md) who are frustrated with the current state of both game and general application development within the Mixed Reality ecosystem: a quickly developing market that encompasses the whole spectrum from Mobile Augmented Reality to high end Virtual Reality.
+I know there are many [developers](./CONTRIBUTORS.md) who are frustrated with the current state of both game and general application development within the Mixed Reality ecosystem: a quickly developing market that encompasses the whole spectrum from Mobile Augmented Reality to high end Virtual Reality.
 
 Compounded with the fact that developing for an emerging tech markets can be time consuming, expensive, and fraught with peril. There are many complexities with targeting multiple platforms and no single framework currently available is able to fulfil this in a true Mixed Reality approach (covering AR / XR / VR completely). This results in developers and enterprises having to build a multitude of solutions on the many SDK's provided by suppliers to fulfil the needs of the business.
 
@@ -24,26 +24,32 @@ There are many channels on Slack, covering the wide variety of Mixed Reality pla
 
 # Build Status
 
-| Branches | Windows Build Agent | Mac Build Agent | Linux Build Agent |
-|---|---|---|---|
-|Master|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Mixed%20Reality%20Toolkit-CI)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=2)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Master%20Build%20Pipeline%20-%20Hosted%20macOS)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=4)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Master%20Build%20Pipeline%20-%20Hosted%20Hosted%20Ubuntu)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=6)|
+| Modules | Windows Build Agent |
+|---|---|
+|Core|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Mixed%20Reality%20Toolkit-CI)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=2)|
+|UPM|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.UpmGitExtension%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=19)|
+|WMR|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.WMR%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=21)|
+|SDK|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.SDK%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=23)|
 
 # Supported Platforms
 
-- [ ] Android
-    - [ ] ARCore
-- [ ] OSX Standalone
+- [x] Linux
+- [x] OSX Standalone
 - [ ] iOS
     - [ ] ARKit
-- [ ] Linux
-- [ ] Lumin (aka Magic Leap)
+- [ ] Android
+    - [ ] ARCore
 - [ ] WebAssembly
     - [ ] WebVR
     - [ ] WebXR
 - [x] Windows Standalone
     - [x] Open VR
     - [ ] Steam VR
-- [x] Windows Mixed Reality
+- [x] [Windows Mixed Reality](https://github.com/XRTK/WindowsMixedReality)
+    - [x] HoloLens
+    - [x] Windows Mixed Reality HMDs
+    - [ ] HoloLens 2
+- [ ] [Lumin (aka Magic Leap)](https://github.com/XRTK/Lumin)
 
 # FAQ
 
@@ -54,8 +60,8 @@ While we are still preparing XRTK specific documentation and guidance, all the c
 Most notably:
 
 * [Mixed Reality Toolkit Quickstart](https://www.youtube.com/watch?v=-ODnfcv5Rzg) Quickstart video session demonstrating getting started with the MRTK and building your project for multiple patforms.
-* [Getting Started With The MRTK](README.md) (coming soon) Documented walk-through for creating your first project.
-* [Mixed Reality Configuration Guide](README.md) (coming soon) Screen by screen walk through of the major MRTK configuration screens (some will vary from the XRTK, but similar enough to get the picture)
+* Getting Started With The XRTK (coming soon) Documented walk-through for creating your first project.
+* Mixed Reality Configuration Guide (coming soon) Screen by screen walk through of the major MRTK configuration screens (some will vary from the XRTK, but similar enough to get the picture)
 
 ## What is the relationship between the XRTK and Microsoft's MRTK SDK
 
@@ -78,5 +84,5 @@ Currently there isn't a direct path from the HTK to the XRTK, also Microsoft are
 
 # Roadmap
 
-- [ ] [Project Setup](https://github.com/XRTK/XRTK-Core/projects/1)
+- [x] [Project Setup](https://github.com/XRTK/XRTK-Core/projects/1)
 - [ ] [Docs, Demos, & Tutorials](https://github.com/XRTK/XRTK-Core/projects/2)

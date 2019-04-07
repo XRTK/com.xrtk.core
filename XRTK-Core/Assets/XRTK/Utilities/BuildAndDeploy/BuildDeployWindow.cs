@@ -186,7 +186,7 @@ namespace XRTK.Utilities.Build
 
         #region Methods
 
-        [MenuItem("Mixed Reality Toolkit/Build Window", false, 0)]
+        [MenuItem("Mixed Reality Toolkit/Build Window", false, 99)]
         public static void OpenWindow()
         {
             // Dock it next to the Scene View.

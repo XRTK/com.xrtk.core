@@ -15,11 +15,19 @@ namespace XRTK.Extensions
         /// </summary>
         /// <param name="array">The array to wrap the index around.</param>
         /// <param name="index">The index to look for.</param>
-        /// <returns></returns>
         public static int WrapIndex(this Array array, int index)
         {
             int length = array.Length;
             return ((index % length) + length) % length;
+        }
+
+        /// <summary>
+        /// Checks whether the given array is not null and has at least one entry
+        /// </summary>
+        /// <param name="array"></param>
+        public static bool IsValidArray(this Array array)
+        {
+            return array != null && array.Length > 0;
         }
     }
 }

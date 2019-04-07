@@ -54,7 +54,7 @@ namespace XRTK.Utilities.Build
         public string BuildSymbols { get; set; }
 
         /// <inheritdoc />
-        public string BuildPlatform { get; set; }
+        public string BuildPlatform { get; set; } = "x86";
 
         /// <inheritdoc />
         public string Configuration

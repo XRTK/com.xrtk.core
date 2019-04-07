@@ -43,7 +43,7 @@ namespace XRTK.Inspectors
         #region Ignore startup settings prompt
 
         private static readonly GUIContent IgnoreContent = new GUIContent("Ignore settings prompt on startup", "Prevents settings dialog popup from showing on startup.\n\nThis setting applies to all projects using XRTK.");
-        private const string IGNORE_KEY = "MixedRealityToolkit_Editor_IgnoreSettingsPrompts";
+        private const string IGNORE_KEY = "_MixedRealityToolkit_Editor_IgnoreSettingsPrompts";
         private static bool ignorePrefLoaded;
         private static bool ignoreSettingsPrompt;
 
@@ -127,12 +127,10 @@ namespace XRTK.Inspectors
         [SettingsProvider]
         private static SettingsProvider Preferences()
         {
-            var provider = new SettingsProvider("Project/XRTK")
+            var provider = new SettingsProvider("Preferences/XRTK", SettingsScope.User, XRTK_Keywords)
             {
                 label = "XRTK",
-
                 guiHandler = GUIHandler,
-
                 keywords = new HashSet<string>(XRTK_Keywords)
             };
 

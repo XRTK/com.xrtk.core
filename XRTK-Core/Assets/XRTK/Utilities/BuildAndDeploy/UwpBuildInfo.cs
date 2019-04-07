@@ -9,7 +9,6 @@ namespace XRTK.Utilities.Build
     {
         public UwpBuildInfo(bool isCommandLine = false) : base(isCommandLine)
         {
-            BuildPlatform = "x86";
         }
 
         /// <inheritdoc />

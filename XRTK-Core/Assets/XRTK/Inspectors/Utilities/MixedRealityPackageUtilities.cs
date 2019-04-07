@@ -76,9 +76,9 @@ namespace XRTK.Inspectors.Utilities
 
             var installedPackages = await GetCurrentMixedRealityPackagesAsync();
 
-            for (var i = 0; i < installedPackages.Length; i++)
+            foreach (var installedPackage in installedPackages)
             {
-                (MixedRealityPackageInfo package, bool isEnabled, bool isInstalled) = installedPackages[i];
+                (MixedRealityPackageInfo package, bool isEnabled, bool isInstalled) = installedPackage;
 
                 if (DebugEnabled)
                 {
@@ -86,7 +86,7 @@ namespace XRTK.Inspectors.Utilities
                 }
 
                 if (package.IsRequiredPackage && !isInstalled ||
-                   (package.IsDefaultPackage && isEnabled && !isInstalled))
+                    (package.IsDefaultPackage && isEnabled && !isInstalled))
                 {
                     await AddPackage(package);
                 }

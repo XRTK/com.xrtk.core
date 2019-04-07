@@ -22,7 +22,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// </summary>
         static SymbolicLinker()
         {
-            EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGUI;
+            EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGui;
             RunSync(MixedRealityPreferences.AutoLoadSymbolicLinks);
         }
 
@@ -97,13 +97,14 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 {
                     foreach (var link in Settings.SymbolicLinks)
                     {
-                        string targetAbsolutePath = $"{ProjectRoot}{link.TargetRelativePath}";
-                        string sourceAbsolutePath = $"{ProjectRoot}{link.SourceRelativePath}";
+                        var targetAbsolutePath = $"{ProjectRoot}{link.TargetRelativePath}";
+                        var sourceAbsolutePath = $"{ProjectRoot}{link.SourceRelativePath}";
 
                         if (link.IsActive)
                         {
                             await VerifySymbolicLink(targetAbsolutePath, sourceAbsolutePath);
                         }
+
                         if (Directory.Exists(targetAbsolutePath))
                         {
                             // If we already have the directory in our project, then skip.
@@ -239,7 +240,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         {
             DisableLink(targetRelativePath);
 
-            SymbolicLink symbolicLink = Settings.SymbolicLinks.Find(link => link.SourceRelativePath == sourceRelativePath);
+            var symbolicLink = Settings.SymbolicLinks.Find(link => link.SourceRelativePath == sourceRelativePath);
 
             if (symbolicLink != null)
             {
@@ -251,7 +252,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             }
         }
 
-        private static void OnProjectWindowItemGUI(string guid, Rect rect)
+        private static void OnProjectWindowItemGui(string guid, Rect rect)
         {
             try
             {
@@ -360,18 +361,19 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
         private static async Task VerifySymbolicLink(string targetAbsolutePath, string sourceAbsolutePath)
         {
-            var path = targetAbsolutePath.Substring(0, targetAbsolutePath.LastIndexOf("/", StringComparison.Ordinal));
-
-            var processResult = await new Process().RunAsync($"/C powershell.exe \"& dir '{path}' | select Target, LinkType | where {{ $_.LinkType -eq 'SymbolicLink' }} | Format-Table -HideTableHeaders -Wrap\"");
+            var pathToVerify = targetAbsolutePath.Substring(0, targetAbsolutePath.LastIndexOf("/", StringComparison.Ordinal));
+            var processResult = await new Process().RunAsync($"/C powershell.exe \"& dir '{pathToVerify}' | select Target, LinkType | where {{ $_.LinkType -eq 'SymbolicLink' }} | Format-Table -HideTableHeaders -Wrap\"");
 
             if (processResult.ExitCode != 0)
             {
+                Debug.LogError($"Failed to enumerate symbolic links associated to {pathToVerify}");
                 return;
             }
 
             var isValid = false;
+            var matches = BracketRegex.Matches(string.Join("\n", processResult.Output));
 
-            foreach (Match match in BracketRegex.Matches(string.Join("\n", processResult.Output)))
+            foreach (Match match in matches)
             {
                 var targetPath = match.Value.Replace("{", string.Empty).Replace("}", string.Empty);
 
@@ -381,7 +383,8 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 }
             }
 
-            if (!isValid)
+            if (!isValid &&
+                Directory.Exists(targetAbsolutePath))
             {
                 DeleteSymbolicLink(targetAbsolutePath);
             }

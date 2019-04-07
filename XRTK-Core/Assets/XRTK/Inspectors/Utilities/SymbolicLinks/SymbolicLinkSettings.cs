@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 namespace XRTK.Inspectors.Utilities.SymbolicLinks
@@ -19,17 +18,6 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// <summary>
         /// Returns a copy the the current symbolic links.
         /// </summary>
-        public List<SymbolicLink> SymbolicLinks => new List<SymbolicLink>(symbolicLinks);
-    }
-
-    [CustomEditor(typeof(SymbolicLinkSettings))]
-    public class SymbolicLinkSettingsInspector : Editor
-    {
-        public override void OnInspectorGUI()
-        {
-            GUI.enabled = false;
-            base.OnInspectorGUI();
-            GUI.enabled = true;
-        }
+        public List<SymbolicLink> SymbolicLinks => symbolicLinks;
     }
 }

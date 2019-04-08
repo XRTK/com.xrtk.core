@@ -19,8 +19,7 @@ namespace XRTK.Utilities.Gltf.Serialization
     {
         private const uint GltfMagicNumber = 0x46546C67;
 
-        private static readonly WaitForUpdate Update = new WaitForUpdate();
-        private static readonly WaitForBackgroundThread BackgroundThread = new WaitForBackgroundThread();
+        private static readonly Awaiters Awaiters = new Awaiters();
 
         /// <summary>
         /// Imports a glTF object from the provided uri.
@@ -49,7 +48,7 @@ namespace XRTK.Utilities.Gltf.Serialization
             bool isGlb = false;
             bool loadAsynchronously = Application.isPlaying;
 
-            if (loadAsynchronously) { await BackgroundThread; }
+            if (loadAsynchronously) { await Awaiters; }
 
             if (uri.EndsWith(".gltf"))
             {
@@ -143,7 +142,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                 Debug.LogError("Failed to construct Gltf Object.");
             }
 
-            if (loadAsynchronously) { await Update; }
+            if (loadAsynchronously) { await Awaiters.UnityMainThread; }
 
             return gltfObject;
         }

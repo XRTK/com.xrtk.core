@@ -11,7 +11,7 @@ namespace XRTK.Definitions.Diagnostics
     /// <summary>
     /// Configuration profile settings for setting up diagnostics.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Diagnostics Profile", fileName = "MixedRealityDiagnosticsProfile", order = (int)CreateProfileMenuItemIndices.Diagnostics)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Diagnostics System Profile", fileName = "MixedRealityDiagnosticsProfile", order = (int)CreateProfileMenuItemIndices.Diagnostics)]
     public class MixedRealityDiagnosticsProfile : BaseMixedRealityProfile
     {
         [SerializeField]

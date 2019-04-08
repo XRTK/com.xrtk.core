@@ -7,7 +7,7 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.Controllers.OpenVR
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Controller Mappings/Generic OpenVR Controller Mapping Profile", fileName = "GenericOpenVRControllerMappingProfile")]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Mappings/Generic OpenVR Controller Mapping Profile", fileName = "GenericOpenVRControllerMappingProfile")]
     public class GenericOpenVRControllerMappingProfile : BaseMixedRealityControllerMappingProfile
     {
         /// <inheritdoc />

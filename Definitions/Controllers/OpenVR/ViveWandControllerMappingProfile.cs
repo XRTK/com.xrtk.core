@@ -7,7 +7,7 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.Controllers.OpenVR
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Controller Mappings/Vive Wand Controller Mapping Profile", fileName = "ViveWandControllerMappingProfile")]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Mappings/Vive Wand Controller Mapping Profile", fileName = "ViveWandControllerMappingProfile")]
     public class ViveWandControllerMappingProfile : BaseMixedRealityControllerMappingProfile
     {
         /// <inheritdoc />

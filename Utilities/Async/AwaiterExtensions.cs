@@ -49,7 +49,12 @@ namespace XRTK.Utilities.Async
             return GetAwaiterReturnVoid(instruction);
         }
 
-        public static SimpleCoroutineAwaiter GetAwaiter(this WaitForUpdate instruction)
+        public static SimpleCoroutineAwaiter GetAwaiter(this UnityMainThread instruction)
+        {
+            return GetAwaiterReturnVoid(instruction);
+        }
+
+        public static SimpleCoroutineAwaiter GetAwaiter(this Awaiters instruction)
         {
             return GetAwaiterReturnVoid(instruction);
         }

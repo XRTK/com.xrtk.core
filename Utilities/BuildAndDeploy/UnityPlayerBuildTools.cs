@@ -270,7 +270,7 @@ namespace XRTK.Utilities.Build
             Debug.Assert(File.Exists(nugetPath));
             Debug.Assert(Directory.Exists(storePath));
 
-            await new Process().StartProcessAsync(nugetPath, $"restore \"{storePath}/project.json\"");
+            await new Process().RunAsync($"restore \"{storePath}/project.json\"", nugetPath);
 
             return File.Exists($"{storePath}\\project.lock.json");
         }

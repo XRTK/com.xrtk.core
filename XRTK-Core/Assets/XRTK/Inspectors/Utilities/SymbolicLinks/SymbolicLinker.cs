@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -95,7 +96,9 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
                 if (Settings.SymbolicLinks.Count != 1 || !string.IsNullOrEmpty(Settings.SymbolicLinks[0].SourceRelativePath))
                 {
-                    foreach (var link in Settings.SymbolicLinks)
+                    var symbolicLinks = new List<SymbolicLink>(Settings.SymbolicLinks);
+
+                    foreach (var link in symbolicLinks)
                     {
                         var targetAbsolutePath = $"{ProjectRoot}{link.TargetRelativePath}";
                         var sourceAbsolutePath = $"{ProjectRoot}{link.SourceRelativePath}";
@@ -244,6 +247,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
             if (symbolicLink != null)
             {
+                Debug.Log($"Removed symbolic link to \"{symbolicLink.SourceRelativePath}\" from project.");
                 Settings.SymbolicLinks.Remove(symbolicLink);
             }
             else

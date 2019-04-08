@@ -25,11 +25,25 @@ using System.Threading.Tasks;
 
 namespace XRTK.Utilities.Async.AwaitYieldInstructions
 {
-    public class WaitForBackgroundThread
+    /// <summary>
+    /// Utility class to provide custom awaiters.
+    /// </summary>
+    public class Awaiters
     {
-        public ConfiguredTaskAwaitable.ConfiguredTaskAwaiter GetAwaiter()
+        public static ConfiguredTaskAwaitable.ConfiguredTaskAwaiter GetAwaiter()
         {
             return Task.Run(() => { }).ConfigureAwait(false).GetAwaiter();
         }
+
+        /// <summary>
+        /// Use this awaiter to continue execution on the background thread.
+        /// </summary>
+        public static Awaiters BackgroundThread { get; } = new Awaiters();
+
+        /// <summary>
+        /// Use this static accessor to prevent allocations when awaiting for the main thread.
+        /// </summary>
+        /// <remarks>Brings the execution back to the main thead on the next engine update.</remarks>
+        public static UnityMainThread UnityMainThread { get; } = new UnityMainThread();
     }
 }

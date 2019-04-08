@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using UnityEditor;
-using XRTK.Definitions.Utilities.Editor;
 
 namespace XRTK.Utilities.Editor
 {

@@ -15,8 +15,6 @@ namespace XRTK.Utilities.Gltf.Serialization
 {
     public static class ConstructGltf
     {
-        private static readonly WaitForUpdate Update = new WaitForUpdate();
-        private static readonly WaitForBackgroundThread BackgroundThread = new WaitForBackgroundThread();
         private static readonly int SrcBlendId = Shader.PropertyToID("_SrcBlend");
         private static readonly int DstBlendId = Shader.PropertyToID("_DstBlend");
         private static readonly int ZWriteId = Shader.PropertyToID("_ZWrite");
@@ -57,12 +55,12 @@ namespace XRTK.Utilities.Gltf.Serialization
                 return null;
             }
 
-            if (gltfObject.LoadAsynchronously) { await Update; }
+            if (gltfObject.LoadAsynchronously) { await Awaiters.UnityMainThread; }
 
             var rootObject = new GameObject($"glTF Scene {gltfObject.Name}");
             rootObject.SetActive(false);
 
-            if (gltfObject.LoadAsynchronously) await BackgroundThread;
+            if (gltfObject.LoadAsynchronously) await Awaiters.BackgroundThread;
 
             for (int i = 0; i < gltfObject.bufferViews?.Length; i++)
             {
@@ -84,7 +82,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                 Debug.LogError($"No scenes found for {gltfObject.Name}");
             }
 
-            if (gltfObject.LoadAsynchronously) await Update;
+            if (gltfObject.LoadAsynchronously) { await Awaiters.UnityMainThread; }
 
             for (int i = 0; i < gltfObject.scenes?.Length; i++)
             {
@@ -110,7 +108,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 
         private static async Task ConstructTextureAsync(this GltfObject gltfObject, GltfTexture gltfTexture)
         {
-            if (gltfObject.LoadAsynchronously) await BackgroundThread;
+            if (gltfObject.LoadAsynchronously) await Awaiters.BackgroundThread;
 
             if (gltfTexture.source >= 0)
             {
@@ -125,12 +123,12 @@ namespace XRTK.Utilities.Gltf.Serialization
                     var path = $"{parentDirectory}\\{gltfImage.uri}";
 
 #if UNITY_EDITOR
-                    if (gltfObject.LoadAsynchronously) await Update;
+                    if (gltfObject.LoadAsynchronously) { await Awaiters.UnityMainThread; }
                     var projectPath = path.Replace("\\", "/");
                     projectPath = projectPath.Replace(Application.dataPath, "Assets");
                     texture = UnityEditor.AssetDatabase.LoadAssetAtPath<Texture2D>(projectPath);
 
-                    if (gltfObject.LoadAsynchronously) await BackgroundThread;
+                    if (gltfObject.LoadAsynchronously) { await Awaiters.BackgroundThread; }
 #endif
 
                     if (texture == null)
@@ -189,7 +187,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 
                 if (texture == null)
                 {
-                    if (gltfObject.LoadAsynchronously) await Update;
+                    if (gltfObject.LoadAsynchronously) { await Awaiters.UnityMainThread; }
                     // TODO Load texture async
                     texture = new Texture2D(2, 2);
                     gltfImage.Texture = texture;
@@ -202,13 +200,13 @@ namespace XRTK.Utilities.Gltf.Serialization
 
                 gltfTexture.Texture = texture;
 
-                if (gltfObject.LoadAsynchronously) await BackgroundThread;
+                if (gltfObject.LoadAsynchronously) { await Awaiters.BackgroundThread; }
             }
         }
 
         private static async Task ConstructMaterialAsync(this GltfObject gltfObject, GltfMaterial gltfMaterial, int materialId)
         {
-            if (gltfObject.LoadAsynchronously) await Update;
+            if (gltfObject.LoadAsynchronously) { await Awaiters.UnityMainThread; }
 
             Material material = await CreateMRTKShaderMaterial(gltfObject, gltfMaterial, materialId);
 
@@ -227,7 +225,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                 gltfMaterial.Material = material;
             }
 
-            if (gltfObject.LoadAsynchronously) await BackgroundThread;
+            if (gltfObject.LoadAsynchronously) { await Awaiters.BackgroundThread; }
         }
 
         private static async Task<Material> CreateMRTKShaderMaterial(GltfObject gltfObject, GltfMaterial gltfMaterial, int materialId)
@@ -299,7 +297,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                         occlusionPixels = occlusionTexture.GetPixels();
                     }
 
-                    if (gltfObject.LoadAsynchronously) await BackgroundThread;
+                    if (gltfObject.LoadAsynchronously) { await Awaiters.BackgroundThread; }
 
                     var pixelCache = new Color[pixels.Length];
 
@@ -311,7 +309,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                         pixelCache[c].a = (1.0f - pixels[c].g); // MRTK standard shader smoothness value, invert of glTF roughness value
                     }
 
-                    if (gltfObject.LoadAsynchronously) await Update;
+                    if (gltfObject.LoadAsynchronously) { await Awaiters.UnityMainThread; }
                     texture.SetPixels(pixelCache);
                     texture.Apply();
 
@@ -402,7 +400,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                 if (texture.isReadable)
                 {
                     var pixels = texture.GetPixels();
-                    if (gltfObject.LoadAsynchronously) await BackgroundThread;
+                    if (gltfObject.LoadAsynchronously) { await Awaiters.BackgroundThread; }
 
                     var pixelCache = new Color[pixels.Length];
 
@@ -415,7 +413,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                         pixelCache[c].a = pixels[c].b;
                     }
 
-                    if (gltfObject.LoadAsynchronously) await Update;
+                    if (gltfObject.LoadAsynchronously) { await Awaiters.UnityMainThread; }
                     texture.SetPixels(pixelCache);
                     texture.Apply();
 
@@ -450,7 +448,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 
         private static async Task ConstructNodeAsync(GltfObject gltfObject, GltfNode node, int nodeId, Transform parent)
         {
-            if (gltfObject.LoadAsynchronously) await Update;
+            if (gltfObject.LoadAsynchronously) { await Awaiters.UnityMainThread; }
 
             var nodeName = string.IsNullOrEmpty(node.name) ? $"glTF Node {nodeId}" : node.name;
             var nodeGameObject = new GameObject(nodeName);
@@ -458,7 +456,7 @@ namespace XRTK.Utilities.Gltf.Serialization
             // If we're creating a really large node, we need it to not be visible in partial stages. So we hide it while we create it
             nodeGameObject.SetActive(false);
 
-            if (gltfObject.LoadAsynchronously) await BackgroundThread;
+            if (gltfObject.LoadAsynchronously) { await Awaiters.BackgroundThread; }
 
             node.Matrix = node.GetTrsProperties(out Vector3 position, out Quaternion rotation, out Vector3 scale);
 
@@ -480,7 +478,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                 }
             }
 
-            if (gltfObject.LoadAsynchronously) await Update;
+            if (gltfObject.LoadAsynchronously) { await Awaiters.UnityMainThread; }
 
             nodeGameObject.transform.localPosition = position;
             nodeGameObject.transform.localRotation = rotation;
@@ -543,7 +541,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 
         private static async Task<Mesh> ConstructMeshPrimitiveAsync(GltfObject gltfObject, GltfMeshPrimitive meshPrimitive)
         {
-            if (gltfObject.LoadAsynchronously) await BackgroundThread;
+            if (gltfObject.LoadAsynchronously) { await Awaiters.BackgroundThread; }
 
             GltfAccessor positionAccessor = null;
             GltfAccessor normalsAccessor = null;
@@ -636,7 +634,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                 joint0Accessor.BufferView.Buffer = gltfObject.buffers[joint0Accessor.BufferView.buffer];
             }
 
-            if (gltfObject.LoadAsynchronously) await Update;
+            if (gltfObject.LoadAsynchronously) { await Awaiters.UnityMainThread; }
 
             var mesh = new Mesh
             {

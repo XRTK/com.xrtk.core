@@ -48,7 +48,7 @@ namespace XRTK.Extensions
         /// <param name="root">Start point of the traversion set</param>
         public static IEnumerable<Transform> EnumerateHierarchy(this Transform root)
         {
-            if (root == null) { throw new ArgumentNullException("root"); }
+            if (root == null) { throw new ArgumentNullException(nameof(root)); }
             return root.EnumerateHierarchyCore(new List<Transform>(0));
         }
 
@@ -59,10 +59,10 @@ namespace XRTK.Extensions
         /// <param name="ignore">Transforms and all its children to be ignored</param>
         public static IEnumerable<Transform> EnumerateHierarchy(this Transform root, ICollection<Transform> ignore)
         {
-            if (root == null) { throw new ArgumentNullException("root"); }
+            if (root == null) { throw new ArgumentNullException(nameof(root)); }
             if (ignore == null)
             {
-                throw new ArgumentNullException("ignore", "Ignore collection can't be null, use EnumerateHierarchy(root) instead.");
+                throw new ArgumentNullException(nameof(ignore), "Ignore collection can't be null, use EnumerateHierarchy(root) instead.");
             }
             return root.EnumerateHierarchyCore(ignore);
         }

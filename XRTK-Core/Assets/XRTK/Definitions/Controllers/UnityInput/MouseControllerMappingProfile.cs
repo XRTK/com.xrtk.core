@@ -7,7 +7,7 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.Controllers.UnityInput.Profiles
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Controller Mappings/Mouse Controller Mapping Profile", fileName = "MouseControllerMappingProfile")]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Mappings/Mouse Controller Mapping Profile", fileName = "MouseControllerMappingProfile")]
     public class MouseControllerMappingProfile : BaseMixedRealityControllerMappingProfile
     {
         /// <inheritdoc />

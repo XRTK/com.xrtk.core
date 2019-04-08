@@ -3,10 +3,10 @@
 
 using UnityEngine;
 using XRTK.Attributes;
-using XRTK.Providers.Controllers;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Providers.Controllers;
 using XRTK.Services;
 
 namespace XRTK.Definitions.InputSystem
@@ -14,7 +14,7 @@ namespace XRTK.Definitions.InputSystem
     /// <summary>
     /// Configuration profile settings for setting up controller pointers.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Input System Profile", fileName = "MixedRealityInputSystemProfile", order = (int)CreateProfileMenuItemIndices.Input)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System Profile", fileName = "MixedRealityInputSystemProfile", order = (int)CreateProfileMenuItemIndices.Input)]
     public class MixedRealityInputSystemProfile : BaseMixedRealityProfile
     {
         [SerializeField]

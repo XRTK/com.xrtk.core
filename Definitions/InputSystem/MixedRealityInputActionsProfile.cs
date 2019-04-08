@@ -10,7 +10,7 @@ namespace XRTK.Definitions.InputSystem
     /// <summary>
     /// Configuration profile settings for setting up and consuming Input Actions.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Input Actions Profile", fileName = "MixedRealityInputActionsProfile", order = (int)CreateProfileMenuItemIndices.InputActions)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Input Actions Profile", fileName = "MixedRealityInputActionsProfile", order = (int)CreateProfileMenuItemIndices.InputActions)]
     public class MixedRealityInputActionsProfile : BaseMixedRealityProfile
     {
         private readonly string[] defaultInputActions =

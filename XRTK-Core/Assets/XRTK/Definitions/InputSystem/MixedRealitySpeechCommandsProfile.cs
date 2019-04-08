@@ -9,7 +9,7 @@ namespace XRTK.Definitions.InputSystem
     /// <summary>
     /// Configuration profile settings for setting up and consuming Speech Commands.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Speech Commands Profile", fileName = "MixedRealitySpeechCommandsProfile", order = (int)CreateProfileMenuItemIndices.SpeechCommands)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Speech Commands Profile", fileName = "MixedRealitySpeechCommandsProfile", order = (int)CreateProfileMenuItemIndices.SpeechCommands)]
     public class MixedRealitySpeechCommandsProfile : BaseMixedRealityProfile
     {
         [SerializeField]

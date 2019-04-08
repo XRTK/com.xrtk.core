@@ -8,7 +8,7 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.Controllers
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Controller Data Providers Profiles", fileName = "MixedRealityControllerDataModelsProfile", order = (int)CreateProfileMenuItemIndices.ControllerDataProviders)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers Profiles", fileName = "MixedRealityControllerDataModelsProfile", order = (int)CreateProfileMenuItemIndices.ControllerDataProviders)]
     public class MixedRealityControllerDataProvidersProfile : BaseMixedRealityProfile
     {
         [SerializeField]

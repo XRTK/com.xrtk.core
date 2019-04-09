@@ -64,7 +64,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             internal set => settings = value;
         }
 
-        private static SymbolicLinkSettings settings = null;
+        private static SymbolicLinkSettings settings;
 
         /// <summary>
         /// Synchronizes the project with any symbolic links defined in the settings.
@@ -175,8 +175,8 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             targetAbsolutePath = AddSubfolderPathToTarget(sourceAbsolutePath, targetAbsolutePath);
 
             // Fix the directory character separator characters.
-            string sourceRelativePath = sourceAbsolutePath.ToBackSlashes();
-            string targetRelativePath = targetAbsolutePath.ToBackSlashes();
+            var sourceRelativePath = sourceAbsolutePath.ToBackSlashes();
+            var targetRelativePath = targetAbsolutePath.ToBackSlashes();
 
             // Strip URI for relative path.
             sourceRelativePath = sourceRelativePath.Replace(ProjectRoot, string.Empty);
@@ -218,13 +218,13 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// <param name="targetRelativePath"></param>
         public static void DisableLink(string targetRelativePath)
         {
-            SymbolicLink symbolicLink = Settings.SymbolicLinks.Find(link => link.TargetRelativePath == targetRelativePath);
+            var symbolicLink = Settings.SymbolicLinks.Find(link => link.TargetRelativePath == targetRelativePath);
 
             if (symbolicLink != null)
             {
                 if (DeleteSymbolicLink($"{ProjectRoot}{targetRelativePath}"))
                 {
-                    Debug.Log($"Removed \"{ProjectRoot}{symbolicLink.SourceRelativePath}\" from project.");
+                    Debug.Log($"Disabled symbolic link to \"{symbolicLink.SourceRelativePath}\" in project.");
                     symbolicLink.IsActive = false;
                 }
             }
@@ -260,11 +260,11 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         {
             try
             {
-                string path = AssetDatabase.GUIDToAssetPath(guid);
+                var path = AssetDatabase.GUIDToAssetPath(guid);
 
                 if (string.IsNullOrEmpty(path)) { return; }
 
-                FileAttributes attributes = File.GetAttributes(path);
+                var attributes = File.GetAttributes(path);
 
                 if ((attributes & FOLDER_SYMLINK_ATTRIBUTES) != FOLDER_SYMLINK_ATTRIBUTES) { return; }
 
@@ -310,7 +310,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                     Directory.CreateDirectory($"{Application.dataPath}/ThirdParty");
                 }
 
-                // Initialize gitignore if needed.
+                // Initialize gitIgnore if needed.
                 GitUtilities.WritePathToGitIgnore("Assets/ThirdParty");
                 GitUtilities.WritePathToGitIgnore("Assets/ThirdParty.meta");
             }
@@ -352,7 +352,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 return false;
             }
 
-            if (new Process().Run($"/C rmdir /q \"{path}\"", out string error))
+            if (new Process().Run($"/C rmdir /q \"{path}\"", out var error))
             {
                 File.Delete($"{path}.meta");
                 AssetDatabase.Refresh();
@@ -396,7 +396,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
         private static string AddSubfolderPathToTarget(string sourcePath, string targetPath)
         {
-            string subFolder = sourcePath.Substring(sourcePath.LastIndexOf("/", StringComparison.Ordinal) + 1);
+            var subFolder = sourcePath.Substring(sourcePath.LastIndexOf("/", StringComparison.Ordinal) + 1);
 
             // Check to see if our target path already has the sub folder reference.
             if (!targetPath.Substring(targetPath.LastIndexOf("/", StringComparison.Ordinal) + 1).Equals(subFolder))

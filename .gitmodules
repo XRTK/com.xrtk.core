@@ -1,8 +1,0 @@
-[submodule "Submodules/WindowsMixedReality"]
-	path = Submodules/WindowsMixedReality
-	url = https://github.com/XRTK/WindowsMixedReality.git
-	branch = development
-[submodule "Submodules/SDK"]
-	path = Submodules/SDK
-	url = https://github.com/XRTK/SDK.git
-	branch = development

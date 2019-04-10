@@ -12,7 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8a5d57a9af497db320551240c892c2, type: 3}
   m_Name: SymbolicLinkSettings
   m_EditorClassIdentifier: 
-  symbolicLinks:
-  - sourceRelativePath: /SymbolicLinkTest
-    targetRelativePath: /XRTK-Core/Assets/ThirdParty/SymbolicLinkTest
-    isActive: 1
+  symbolicLinks: []

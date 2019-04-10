@@ -72,87 +72,89 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// <param name="forceUpdate">Bypass the auto load check and force the packages to be updated, even if they're up to date.</param>
         public static async void RunSync(bool forceUpdate = false)
         {
-            if (isRunningSync)
+            if (isRunningSync ||
+                (!MixedRealityPreferences.AutoLoadSymbolicLinks && !forceUpdate))
             {
                 return;
             }
 
             if (Settings == null)
             {
-                Debug.LogWarning("Missing Symbolic Link Settings. Create one in the assets menu or context menu.");
+                MixedRealityPreferences.AutoLoadSymbolicLinks = false;
                 return;
             }
 
             isRunningSync = true;
-
             EditorApplication.LockReloadAssemblies();
 
-            if (MixedRealityPreferences.AutoLoadSymbolicLinks || forceUpdate)
+            if (Application.isBatchMode)
             {
-                if (Application.isBatchMode)
-                {
-                    Debug.Log("Verifying project's symbolic links...");
-                }
+                Debug.Log("Verifying project's symbolic links...");
+            }
 
-                if (Settings.SymbolicLinks.Count != 1 || !string.IsNullOrEmpty(Settings.SymbolicLinks[0].SourceRelativePath))
-                {
-                    var symbolicLinks = new List<SymbolicLink>(Settings.SymbolicLinks);
+            if (Settings.SymbolicLinks.Count != 1 ||
+                !string.IsNullOrEmpty(Settings.SymbolicLinks[0].SourceRelativePath))
+            {
+                var symbolicLinks = new List<SymbolicLink>(Settings.SymbolicLinks);
 
-                    foreach (var link in symbolicLinks)
+                foreach (var link in symbolicLinks)
+                {
+                    var targetAbsolutePath = $"{ProjectRoot}{link.TargetRelativePath}";
+                    var sourceAbsolutePath = $"{ProjectRoot}{link.SourceRelativePath}";
+
+                    if (link.IsActive)
                     {
-                        var targetAbsolutePath = $"{ProjectRoot}{link.TargetRelativePath}";
-                        var sourceAbsolutePath = $"{ProjectRoot}{link.SourceRelativePath}";
+                        await VerifySymbolicLink(targetAbsolutePath, sourceAbsolutePath);
+                    }
 
+                    if (Directory.Exists(targetAbsolutePath))
+                    {
+                        // If we already have the directory in our project, then skip.
+                        if (link.IsActive) { continue; }
+
+                        // Check to see if there are any directories that don't belong and remove them.
+                        DisableLink(link.TargetRelativePath);
+                        continue;
+                    }
+
+                    if (!link.IsActive) { continue; }
+
+                    if (Directory.Exists(sourceAbsolutePath))
+                    {
                         if (link.IsActive)
                         {
-                            await VerifySymbolicLink(targetAbsolutePath, sourceAbsolutePath);
+                            AddLink(sourceAbsolutePath, targetAbsolutePath);
                         }
 
-                        if (Directory.Exists(targetAbsolutePath))
-                        {
-                            // If we already have the directory in our project, then skip.
-                            if (link.IsActive) { continue; }
-
-                            // Check to see if there are any directories that don't belong and remove them.
-                            DisableLink(link.TargetRelativePath);
-                            continue;
-                        }
-
-                        if (!link.IsActive) { continue; }
-
-                        if (Directory.Exists(sourceAbsolutePath))
-                        {
-                            if (link.IsActive)
-                            {
-                                AddLink(sourceAbsolutePath, targetAbsolutePath);
-                            }
-
-                            continue;
-                        }
-
-                        // Make sure all of our Submodules are initialized and updated.
-                        // if they didn't get updated then we probably have some pending changes so we will skip.
-                        if (!GitUtilities.UpdateSubmodules()) { continue; }
-
-                        if (Directory.Exists(sourceAbsolutePath))
-                        {
-                            if (link.IsActive)
-                            {
-                                AddLink(sourceAbsolutePath, targetAbsolutePath);
-                            }
-
-                            continue;
-                        }
-
-                        Debug.LogError($"Unable to find symbolic link source path: {sourceAbsolutePath}");
-                        RemoveLink(link.SourceRelativePath, link.TargetRelativePath);
+                        continue;
                     }
+
+                    // Make sure all of our Submodules are initialized and updated.
+                    // if they didn't get updated then we probably have some pending changes so we will skip.
+                    if (!GitUtilities.UpdateSubmodules()) { continue; }
+
+                    if (Directory.Exists(sourceAbsolutePath))
+                    {
+                        if (link.IsActive)
+                        {
+                            AddLink(sourceAbsolutePath, targetAbsolutePath);
+                        }
+
+                        continue;
+                    }
+
+                    Debug.LogError($"Unable to find symbolic link source path: {sourceAbsolutePath}");
+                    RemoveLink(link.SourceRelativePath, link.TargetRelativePath);
                 }
 
                 if (Application.isBatchMode)
                 {
                     Debug.Log("Project symbolic links verified.");
                 }
+
+                EditorUtility.SetDirty(Settings);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
             }
 
             EditorApplication.UnlockReloadAssemblies();
@@ -300,7 +302,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             }
 
             targetAbsolutePath = AddSubfolderPathToTarget(sourceAbsolutePath, targetAbsolutePath);
-            string ignorePath = targetAbsolutePath;
+            var ignorePath = targetAbsolutePath;
 
             if (ignorePath.Contains("Assets/ThirdParty"))
             {
@@ -341,6 +343,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             }
 
             Debug.Log($"Successfully created symbolic link to {sourceAbsolutePath}");
+            MixedRealityPackageUtilities.ValidatePackages();
             AssetDatabase.Refresh();
         }
 

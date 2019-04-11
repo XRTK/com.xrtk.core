@@ -25,7 +25,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         static SymbolicLinker()
         {
             EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGui;
-            RunSync();
+            EditorApplication.delayCall += () => RunSync();
         }
 
         private const string LinkIconText = "<=link=>";
@@ -41,11 +41,11 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             alignment = TextAnchor.MiddleRight
         });
 
-        private static GUIStyle symbolicLinkMarkerStyle = null;
+        private static GUIStyle symbolicLinkMarkerStyle;
 
         internal static string ProjectRoot => GitUtilities.RepositoryRootDir;
 
-        private static bool isRunningSync = false;
+        private static bool isRunningSync;
 
         /// <summary>
         /// The current settings for the symbolic links.

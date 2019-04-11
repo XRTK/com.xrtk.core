@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace XRTK.Definitions
+namespace XRTK.Inspectors.Utilities.Packages
 {
     /// <summary>
     /// The container for a upm package.

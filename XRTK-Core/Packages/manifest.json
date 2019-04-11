@@ -40,5 +40,11 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
+  },
+  "lock": {
+    "com.xrtk.upm-git-extension": {
+      "hash": "9cdc5a92ad0d1f3606026765a29d458555e54251",
+      "revision": "0.9.1"
+    }
   }
 }

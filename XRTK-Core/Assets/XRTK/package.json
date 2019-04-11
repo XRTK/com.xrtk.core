@@ -2,7 +2,7 @@
     "name": "com.xrtk.core",
     "displayName": "XRTK.Core",
     "description": "The core framework of the Mixed Reality Toolkit",
-    "version": "0.1.0",
+    "version": "3.0.0",
     "unity": "2018.3",
     "license": "MIT",
     "repository": {

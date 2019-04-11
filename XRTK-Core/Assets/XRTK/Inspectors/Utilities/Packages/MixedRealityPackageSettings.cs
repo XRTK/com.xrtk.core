@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace XRTK.Definitions
+namespace XRTK.Inspectors.Utilities.Packages
 {
     /// <summary>
     /// Data container for holding the settings for the upm packages associated with the XRTK.

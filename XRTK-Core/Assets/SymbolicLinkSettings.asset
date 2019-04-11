@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff8a5d57a9af497db320551240c892c2, type: 3}
+  m_Name: SymbolicLinkSettings
+  m_EditorClassIdentifier: 
+  symbolicLinks:
+  - sourceRelativePath: /Submodules/WindowsMixedReality/XRTK.WindowsMixedReality/Assets/XRTK.WindowsMixedReality
+    targetRelativePath: /XRTK-Core/Assets/XRTK.WindowsMixedReality
+    isActive: 1
+  - sourceRelativePath: /Submodules/SDK/XRTK.SDK/Assets/XRTK.SDK
+    targetRelativePath: /XRTK-Core/Assets/XRTK.SDK
+    isActive: 1

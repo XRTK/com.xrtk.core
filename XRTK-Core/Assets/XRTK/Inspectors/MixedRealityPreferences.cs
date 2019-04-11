@@ -151,7 +151,10 @@ namespace XRTK.Inspectors
                         .FirstOrDefault();
                 }
 
-                Debug.Log(symbolicLinkSettingsPath);
+                if (Application.isBatchMode)
+                {
+                    Debug.Log(symbolicLinkSettingsPath);
+                }
 
                 return symbolicLinkSettingsPath;
             }

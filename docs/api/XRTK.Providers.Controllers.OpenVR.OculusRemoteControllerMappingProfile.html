@@ -211,7 +211,7 @@
   <h6><strong>Assembly</strong>: XRTK.dll</h6>
   <h5 id="XRTK_Providers_Controllers_OpenVR_OculusRemoteControllerMappingProfile_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[CreateAssetMenu(menuName = &quot;Mixed Reality Toolkit/Input System/Controller Mappings/Oculus Remote Controller Mapping Profile&quot;, fileName = &quot;OculusRemoteControllerMappingProfile&quot;)]
+    <pre><code class="lang-csharp hljs">[CreateAssetMenu(menuName = &quot;Mixed Reality Toolkit/Mixed Reality Controller Mappings/Oculus Remote Controller Mapping Profile&quot;, fileName = &quot;OculusRemoteControllerMappingProfile&quot;)]
 public class OculusRemoteControllerMappingProfile : BaseMixedRealityControllerMappingProfile</code></pre>
   </div>
   <h3 id="properties">Properties
@@ -284,8 +284,8 @@ public class OculusRemoteControllerMappingProfile : BaseMixedRealityControllerMa
   <div><a class="xref" href="XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile.html#XRTK_Providers_Controllers_BaseMixedRealityControllerMappingProfile_TexturePath">BaseMixedRealityControllerMappingProfile.TexturePath</a></div>
   <h5 id="XRTK_Providers_Controllers_OpenVR_OculusRemoteControllerMappingProfile_TexturePath_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The path only needs to include the name of the controller.<p>
-The file name should be formatted as:<p>XRTK/StandardAssets/Textures/{ControllerName}<em>{handedness}</em>{theme}_{scaled}.png<p>
-scaled suffix is optional.<p>
+The file name should be formatted as:<p> XRTK/StandardAssets/Textures/{ControllerName}<em>{handedness}</em>{theme}_{scaled}.png <p>
+scaled suffix is optional. <p>
 Custom file paths should never call the base property.</p>
 </div>
   <h3 id="methods">Methods
@@ -309,13 +309,19 @@ Custom file paths should never call the base property.</p>
   <div><a class="xref" href="XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile.html#XRTK_Providers_Controllers_BaseMixedRealityControllerMappingProfile_Awake">BaseMixedRealityControllerMappingProfile.Awake()</a></div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
+      <a class="xref" href="XRTK.Extensions.EditorClassExtensions.ScriptableObjectExtensions.html#XRTK_Extensions_EditorClassExtensions_ScriptableObjectExtensions_CreateAsset_UnityEngine_ScriptableObject_System_String_System_String_">ScriptableObjectExtensions.CreateAsset(ScriptableObject, String, String)</a>
+  </div>
+  <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
   </div>
   <div>
-      <a class="xref" href="XRTK.Extensions.EditorClassExtensions.ScriptableObjectExtensions.html#XRTK_Extensions_EditorClassExtensions_ScriptableObjectExtensions_CreateAsset_UnityEngine_ScriptableObject_System_String_System_String_">ScriptableObjectExtensions.CreateAsset(ScriptableObject, String, String)</a>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.html#XRTK_Inspectors_Utilities_MixedRealityInspectorUtility_CheckProfileLock_XRTK_Definitions_BaseMixedRealityProfile_System_Boolean_">MixedRealityInspectorUtility.CheckProfileLock(BaseMixedRealityProfile, Boolean)</a>

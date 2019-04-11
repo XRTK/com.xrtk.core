@@ -343,7 +343,6 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             }
 
             Debug.Log($"Successfully created symbolic link to {sourceAbsolutePath}");
-            MixedRealityPackageUtilities.ValidatePackages();
             AssetDatabase.Refresh();
         }
 

@@ -1,7 +1,6 @@
 ﻿using UnityEditor;
-using XRTK.Definitions;
 
-namespace XRTK.Inspectors
+namespace XRTK.Inspectors.Utilities.Packages
 {
     [CustomEditor(typeof(MixedRealityPackageSettings))]
     public class MixedRealityPackageSettingsInspector : Editor

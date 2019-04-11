@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Extensions.EditorClassExtensions;
 using XRTK.Inspectors.Utilities.SymbolicLinks;
 using XRTK.Utilities.Editor;
 
@@ -170,7 +171,16 @@ namespace XRTK.Inspectors
 
                 return autoLoadSymbolicLinks;
             }
-            set => EditorPreferences.Set("_AutoLoadSymbolicLinks", autoLoadSymbolicLinks = value);
+            set
+            {
+                EditorPreferences.Set("_AutoLoadSymbolicLinks", autoLoadSymbolicLinks = value);
+
+                if (autoLoadSymbolicLinks && SymbolicLinker.Settings == null)
+                {
+                    var profile = ScriptableObject.CreateInstance(nameof(SymbolicLinkSettings));
+                    profile.CreateAsset("Assets/XRTK.Generated/CustomProfiles");
+                }
+            }
         }
 
         #endregion Symbolic Link Preferences
@@ -263,7 +273,7 @@ namespace XRTK.Inspectors
             {
                 if (symbolicLinkSettings != null)
                 {
-                    bool shouldSync = string.IsNullOrEmpty(SymbolicLinkSettingsPath);
+                    var shouldSync = string.IsNullOrEmpty(SymbolicLinkSettingsPath);
                     SymbolicLinkSettingsPath = AssetDatabase.GetAssetPath(symbolicLinkSettings);
                     SymbolicLinker.Settings = AssetDatabase.LoadAssetAtPath<SymbolicLinkSettings>(SymbolicLinkSettingsPath);
 
@@ -289,7 +299,7 @@ namespace XRTK.Inspectors
                 return null;
             }
 
-            foreach (EditorBuildSettingsScene editorScene in EditorBuildSettings.scenes)
+            foreach (var editorScene in EditorBuildSettings.scenes)
             {
                 if (editorScene.path.IndexOf(sceneName, StringComparison.Ordinal) != -1)
                 {

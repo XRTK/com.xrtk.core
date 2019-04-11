@@ -151,6 +151,8 @@ namespace XRTK.Inspectors
                         .FirstOrDefault();
                 }
 
+                Debug.Log(symbolicLinkSettingsPath);
+
                 return symbolicLinkSettingsPath;
             }
             set => EditorPreferences.Set("_SymbolicLinkSettingsPath", symbolicLinkSettingsPath = value);

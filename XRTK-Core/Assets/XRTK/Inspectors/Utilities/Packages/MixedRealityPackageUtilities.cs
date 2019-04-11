@@ -65,6 +65,8 @@ namespace XRTK.Inspectors.Utilities.Packages
 
             IsRunningCheck = true;
 
+            DebugEnabled = Application.isBatchMode;
+
             if (DebugEnabled)
             {
                 Debug.Log("Checking packages...");

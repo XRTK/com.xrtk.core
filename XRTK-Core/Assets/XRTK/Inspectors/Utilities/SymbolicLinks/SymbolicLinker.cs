@@ -24,7 +24,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         static SymbolicLinker()
         {
             EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGui;
-            RunSync(MixedRealityPreferences.AutoLoadSymbolicLinks);
+            RunSync();
         }
 
         private const string LinkIconText = "<=link=>";

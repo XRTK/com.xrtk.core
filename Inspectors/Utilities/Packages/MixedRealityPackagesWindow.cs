@@ -2,11 +2,9 @@
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
-using XRTK.Inspectors.Utilities;
 using XRTK.Utilities.Editor;
 
-namespace XRTK.Inspectors
+namespace XRTK.Inspectors.Utilities.Packages
 {
     public class MixedRealityPackagesWindow : EditorWindow
     {

@@ -38,8 +38,6 @@ namespace XRTK.Providers.SpatialObservers
             spatialMeshObjectPool = new Stack<SpatialMeshObject>();
         }
 
-        private readonly WaitForUpdate NextUpdate = new WaitForUpdate();
-
         /// <summary>
         /// When a mesh is created we will need to create a game object with a minimum 
         /// set of components to contain the mesh.  These are the required component types.
@@ -293,7 +291,7 @@ namespace XRTK.Providers.SpatialObservers
                 }
             }
 
-            await NextUpdate;
+            await Awaiters.UnityMainThread;
             return await RequestSpatialMeshObject(meshId);
         }
 

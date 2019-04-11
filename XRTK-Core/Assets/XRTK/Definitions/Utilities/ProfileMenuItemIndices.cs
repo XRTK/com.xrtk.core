@@ -23,7 +23,9 @@ namespace XRTK.Definitions.Utilities
         SpatialAwareness,
         SpatialAwarenessDataProviders,
         Networking,
+        NetworkingDataProviders,
         Diagnostics,
         RegisteredServiceProviders,
+        Settings,
     }
 }

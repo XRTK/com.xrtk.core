@@ -12,24 +12,85 @@ using XRTK.Definitions.Utilities;
 namespace XRTK.Extensions
 {
     /// <summary>
-    /// Process Extension class.
+    /// <see cref="Process"/> Extension class.
     /// </summary>
     public static class ProcessExtensions
     {
         /// <summary>
+        /// Runs an external process.
+        /// </summary>
+        /// <param name="process"></param>
+        /// <param name="args">The passed arguments.</param>
+        /// <param name="output">The output of the process.</param>
+        /// <param name="application">The Application to run through the command line. Default application is "cmd.exe"</param>
+        /// <returns>Output string.</returns>
+        /// <remarks>This process will block the main thread of the editor if command takes too long to run. Use <see cref="RunAsync(Process,string,string,bool,CancellationToken)"/> for a background process.</remarks>
+        public static bool Run(this Process process, string args, out string output, string application = @"cmd.exe")
+        {
+            if (string.IsNullOrEmpty(args))
+            {
+                output = "You cannot pass null or empty parameter.";
+                UnityEngine.Debug.LogError(output);
+                return false;
+            }
+
+            process.StartInfo = new ProcessStartInfo
+            {
+                WindowStyle = ProcessWindowStyle.Normal,
+                CreateNoWindow = true,
+                UseShellExecute = false,
+                RedirectStandardOutput = true,
+                RedirectStandardError = true,
+                FileName = application,
+                Arguments = args
+            };
+
+            try
+            {
+                if (!process.Start())
+                {
+                    output = "Failed to start process!";
+                    UnityEngine.Debug.LogError(output);
+                    return false;
+                }
+
+                string error = process.StandardError.ReadToEnd();
+
+                if (!string.IsNullOrEmpty(error))
+                {
+                    output = error;
+                    return false;
+                }
+
+                output = process.StandardOutput.ReadToEnd();
+
+                process.WaitForExit();
+                process.Close();
+                process.Dispose();
+            }
+            catch (Exception e)
+            {
+                output = e.Message;
+                UnityEngine.Debug.LogException(e);
+            }
+
+            return true;
+        }
+
+        /// <summary>
         /// Starts a process asynchronously.
         /// </summary>
         /// <param name="process">This Process.</param>
-        /// <param name="fileName">The process executable to run.</param>
+        /// <param name="application">The process executable to run.</param>
         /// <param name="args">The Process arguments.</param>
         /// <param name="showDebug">Should output debug code to Editor Console?</param>
         /// <param name="cancellationToken"></param>
         /// <returns><see cref="ProcessResult"/></returns>
-        public static async Task<ProcessResult> StartProcessAsync(this Process process, string fileName, string args, bool showDebug = false, CancellationToken cancellationToken = default)
+        public static async Task<ProcessResult> RunAsync(this Process process, string args, string application = @"cmd.exe", bool showDebug = false, CancellationToken cancellationToken = default)
         {
-            return await StartProcessAsync(process, new ProcessStartInfo
+            return await RunAsync(process, new ProcessStartInfo
             {
-                FileName = fileName,
+                FileName = application,
                 CreateNoWindow = true,
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
@@ -47,7 +108,7 @@ namespace XRTK.Extensions
         /// <param name="showDebug">Should output debug code to Editor Console?</param>
         /// <param name="cancellationToken"></param>
         /// <returns><see cref="ProcessResult"/></returns>
-        public static async Task<ProcessResult> StartProcessAsync(this Process process, ProcessStartInfo startInfo, bool showDebug = false, CancellationToken cancellationToken = default)
+        public static async Task<ProcessResult> RunAsync(this Process process, ProcessStartInfo startInfo, bool showDebug = false, CancellationToken cancellationToken = default)
         {
             Debug.Assert(!startInfo.UseShellExecute, "Process Start Info must not use shell execution.");
             Debug.Assert(startInfo.RedirectStandardOutput, "Process Start Info must redirect standard output.");
@@ -127,17 +188,19 @@ namespace XRTK.Extensions
                 CancellationWatcher(process);
             }
 
-            async void CancellationWatcher(Process _process)
+            async void CancellationWatcher(Process runningProcess)
             {
+                // ReSharper disable once MethodSupportsCancellation
+                // We utilize the cancellation token in the loop
                 await Task.Run(() =>
                 {
                     try
                     {
-                        while (!_process.HasExited)
+                        while (!runningProcess.HasExited)
                         {
                             if (cancellationToken.IsCancellationRequested)
                             {
-                                _process.Kill();
+                                runningProcess.Kill();
                             }
                         }
                     }

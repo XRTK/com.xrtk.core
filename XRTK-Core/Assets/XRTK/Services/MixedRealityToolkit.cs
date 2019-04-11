@@ -388,7 +388,14 @@ namespace XRTK.Services
                             {
                                 var controllerDataProvider = ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders[i];
 
-                                CreateAndRegisterService<IMixedRealityControllerDataProvider>(controllerDataProvider.DataProviderType, controllerDataProvider.RuntimePlatform, controllerDataProvider.DataProviderName, controllerDataProvider.Priority);
+                                if (!CreateAndRegisterService<IMixedRealityControllerDataProvider>(
+                                        controllerDataProvider.DataProviderType,
+                                        controllerDataProvider.RuntimePlatform,
+                                        controllerDataProvider.DataProviderName,
+                                        controllerDataProvider.Priority))
+                                {
+                                    Debug.LogError($"Failed to start {controllerDataProvider.DataProviderName}!");
+                                }
                             }
                         }
                     }
@@ -441,7 +448,15 @@ namespace XRTK.Services
                                 continue;
                             }
 
-                            CreateAndRegisterService<IMixedRealitySpatialObserverDataProvider>(spatialObserver.SpatialObserverType, spatialObserver.RuntimePlatform, spatialObserver.SpatialObserverName, spatialObserver.Priority, spatialObserver.Profile);
+                            if (!CreateAndRegisterService<IMixedRealitySpatialObserverDataProvider>(
+                                    spatialObserver.SpatialObserverType,
+                                    spatialObserver.RuntimePlatform,
+                                    spatialObserver.SpatialObserverName,
+                                    spatialObserver.Priority,
+                                    spatialObserver.Profile))
+                            {
+                                Debug.LogError($"Failed to start {spatialObserver.SpatialObserverName}!");
+                            }
                         }
                     }
                 }
@@ -479,6 +494,7 @@ namespace XRTK.Services
                         for (int i = 0; i < ActiveProfile.NetworkingSystemProfile.RegisteredNetworkDataProviders.Length; i++)
                         {
                             var networkProvider = ActiveProfile.NetworkingSystemProfile.RegisteredNetworkDataProviders[i];
+
                             if (!CreateAndRegisterService<IMixedRealityNetworkDataProvider>(
                                 networkProvider.DataProviderType,
                                 networkProvider.RuntimePlatform,
@@ -831,7 +847,7 @@ namespace XRTK.Services
 
             if (concreteType == null)
             {
-                Debug.LogError("Unable to register a service with a null concrete type.");
+                Debug.LogError($"Unable to register a service with a null concrete {typeof(T).Name} type.");
                 return false;
             }
 
@@ -1647,7 +1663,10 @@ namespace XRTK.Services
         {
             get
             {
-                if (isApplicationQuitting)
+                if (!IsInitialized ||
+                    isApplicationQuitting ||
+                    instance.activeProfile == null ||
+                    (instance.activeProfile != null && !instance.activeProfile.IsInputSystemEnabled))
                 {
                     return null;
                 }
@@ -1676,7 +1695,10 @@ namespace XRTK.Services
         {
             get
             {
-                if (isApplicationQuitting)
+                if (!IsInitialized ||
+                    isApplicationQuitting ||
+                    instance.activeProfile == null ||
+                    (instance.activeProfile != null && !instance.activeProfile.IsBoundarySystemEnabled))
                 {
                     return null;
                 }
@@ -1705,7 +1727,10 @@ namespace XRTK.Services
         {
             get
             {
-                if (isApplicationQuitting)
+                if (!IsInitialized ||
+                    isApplicationQuitting ||
+                    instance.activeProfile == null ||
+                    (instance.activeProfile != null && !instance.activeProfile.IsSpatialAwarenessSystemEnabled))
                 {
                     return null;
                 }
@@ -1734,7 +1759,10 @@ namespace XRTK.Services
         {
             get
             {
-                if (isApplicationQuitting)
+                if (!IsInitialized ||
+                    isApplicationQuitting ||
+                    instance.activeProfile == null ||
+                    (instance.activeProfile != null && !instance.activeProfile.IsTeleportSystemEnabled))
                 {
                     return null;
                 }
@@ -1763,7 +1791,10 @@ namespace XRTK.Services
         {
             get
             {
-                if (isApplicationQuitting)
+                if (!IsInitialized ||
+                    isApplicationQuitting ||
+                    instance.activeProfile == null ||
+                    (instance.activeProfile != null && !instance.activeProfile.IsNetworkingSystemEnabled))
                 {
                     return null;
                 }
@@ -1792,7 +1823,10 @@ namespace XRTK.Services
         {
             get
             {
-                if (isApplicationQuitting)
+                if (!IsInitialized ||
+                    isApplicationQuitting ||
+                    instance.activeProfile == null ||
+                    (instance.activeProfile != null && !instance.activeProfile.IsDiagnosticsSystemEnabled))
                 {
                     return null;
                 }

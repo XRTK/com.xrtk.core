@@ -7,7 +7,7 @@ using System.Text;
 namespace XRTK.Extensions
 {
     /// <summary>
-    /// <see cref="String"/> Extensions.
+    /// <see cref="string"/> Extensions.
     /// </summary>
     public static class StringExtensions
     {
@@ -70,6 +70,25 @@ namespace XRTK.Extensions
             }
 
             return result;
+        }
+
+        /// <summary>
+        /// Replaces all back slashes in the string with forward slashes.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static string ToBackSlashes(this string value)
+        {
+            return value.Replace("\\", "/");
+        }
+
+        /// <summary>
+        /// Replaces all backslashes in the string with forward slashes.
+        /// </summary>
+        /// <param name="value"></param>
+        public static string ToForwardSlashes(this string value)
+        {
+            return value.Replace("/", "\\");
         }
     }
 }

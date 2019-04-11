@@ -4,14 +4,22 @@ using UnityEditor.Experimental.AssetImporters;
 using UnityEngine;
 using XRTK.Utilities.Gltf.Schema;
 
-namespace XRTK.Utilities.Gltf.Serialization.Editor
+namespace XRTK.Utilities.Gltf.Serialization.Importers
 {
     public static class GltfEditorImporter
     {
         public static async void OnImportGltfAsset(AssetImportContext context)
         {
-            var gltfAsset = (GltfAsset)ScriptableObject.CreateInstance(typeof(GltfAsset));
             var importedObject = await GltfUtility.ImportGltfObjectFromPathAsync(context.assetPath);
+
+            if (importedObject == null ||
+                importedObject.GameObjectReference == null)
+            {
+                Debug.LogError("Failed to import glTF object");
+                return;
+            }
+
+            var gltfAsset = (GltfAsset)ScriptableObject.CreateInstance(typeof(GltfAsset));
 
             gltfAsset.GltfObject = importedObject;
             gltfAsset.name = $"{gltfAsset.GltfObject.Name}{Path.GetExtension(context.assetPath)}";
@@ -22,9 +30,12 @@ namespace XRTK.Utilities.Gltf.Serialization.Editor
 
             bool reImport = false;
 
-            for (var i = 0; i < gltfAsset.GltfObject.textures.Length; i++)
+            for (var i = 0; i < gltfAsset.GltfObject.textures?.Length; i++)
             {
                 GltfTexture gltfTexture = gltfAsset.GltfObject.textures[i];
+
+                if (gltfTexture == null) { continue; }
+
                 var path = AssetDatabase.GetAssetPath(gltfTexture.Texture);
 
                 if (string.IsNullOrWhiteSpace(path))
@@ -59,7 +70,7 @@ namespace XRTK.Utilities.Gltf.Serialization.Editor
                 return;
             }
 
-            for (var i = 0; i < gltfAsset.GltfObject.meshes.Length; i++)
+            for (var i = 0; i < gltfAsset.GltfObject.meshes?.Length; i++)
             {
                 GltfMesh gltfMesh = gltfAsset.GltfObject.meshes[i];
 
@@ -69,19 +80,22 @@ namespace XRTK.Utilities.Gltf.Serialization.Editor
                 context.AddObjectToAsset($"{meshName}", gltfMesh.Mesh);
             }
 
-            foreach (GltfMaterial gltfMaterial in gltfAsset.GltfObject.materials)
+            if (gltfAsset.GltfObject.materials != null)
             {
-                if (context.assetPath.EndsWith(".glb"))
+                foreach (GltfMaterial gltfMaterial in gltfAsset.GltfObject.materials)
                 {
-                    context.AddObjectToAsset(gltfMaterial.name, gltfMaterial.Material);
-                }
-                else
-                {
-                    var path = Path.GetFullPath(Path.GetDirectoryName(context.assetPath));
-                    path = path.Replace("\\", "/").Replace(Application.dataPath, "Assets");
-                    path = $"{path}/{gltfMaterial.name}.mat";
-                    AssetDatabase.CreateAsset(gltfMaterial.Material, path);
-                    gltfMaterial.Material = AssetDatabase.LoadAssetAtPath<Material>(path);
+                    if (context.assetPath.EndsWith(".glb"))
+                    {
+                        context.AddObjectToAsset(gltfMaterial.name, gltfMaterial.Material);
+                    }
+                    else
+                    {
+                        var path = Path.GetFullPath(Path.GetDirectoryName(context.assetPath));
+                        path = path.Replace("\\", "/").Replace(Application.dataPath, "Assets");
+                        path = $"{path}/{gltfMaterial.name}.mat";
+                        AssetDatabase.CreateAsset(gltfMaterial.Material, path);
+                        gltfMaterial.Material = AssetDatabase.LoadAssetAtPath<Material>(path);
+                    }
                 }
             }
         }

@@ -44,7 +44,7 @@ namespace XRTK.EventDatum
         protected void BaseInitialize(IMixedRealityEventSource eventSource)
         {
             Reset();
-            EventTime = DateTime.Now;
+            EventTime = DateTime.UtcNow;
             EventSource = eventSource;
         }
     }

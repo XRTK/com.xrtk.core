@@ -50,16 +50,28 @@ namespace XRTK.Definitions.Utilities
         public static MixedRealityPose ZeroIdentity { get; } = new MixedRealityPose(Vector3.zero, Quaternion.identity);
 
         [SerializeField]
+        [Tooltip("The position of the pose")]
         private Vector3 position;
 
-        public Vector3 Position { get => position;
+        /// <summary>
+        /// The position of the pose.
+        /// </summary>
+        public Vector3 Position
+        {
+            get => position;
             set => position = value;
         }
 
         [SerializeField]
+        [Tooltip("The rotation of the pose.")]
         private Quaternion rotation;
 
-        public Quaternion Rotation { get => rotation;
+        /// <summary>
+        /// The rotation of the pose.
+        /// </summary>
+        public Quaternion Rotation
+        {
+            get => rotation;
             set => rotation = value;
         }
 
@@ -83,6 +95,21 @@ namespace XRTK.Definitions.Utilities
             return $"{position} | {rotation}";
         }
 
+        /// <summary>
+        /// The Z axis of the pose in world space
+        /// </summary>
+        public Vector3 Forward => rotation * Vector3.forward;
+
+        /// <summary>
+        /// The Y axis of the pose in world space
+        /// </summary>
+        public Vector3 Up => rotation * Vector3.up;
+
+        /// <summary>
+        /// The X axis of the pose in world space
+        /// </summary>
+        public Vector3 Right => rotation * Vector3.right;
+
         #region IEqualityComparer Implementation
 
         bool IEqualityComparer.Equals(object left, object right)
@@ -101,12 +128,12 @@ namespace XRTK.Definitions.Utilities
         public override bool Equals(object obj)
         {
             if (ReferenceEquals(null, obj)) { return false; }
-            return obj is MixedRealityPose && Equals((MixedRealityPose)obj);
+            return obj is MixedRealityPose pose && Equals(pose);
         }
 
         int IEqualityComparer.GetHashCode(object obj)
         {
-            return obj is MixedRealityPose ? ((MixedRealityPose)obj).GetHashCode() : 0;
+            return obj is MixedRealityPose pose ? pose.GetHashCode() : 0;
         }
 
         public override int GetHashCode()

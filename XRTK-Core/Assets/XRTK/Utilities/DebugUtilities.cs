@@ -8,49 +8,26 @@ namespace XRTK.Utilities
     public static class DebugUtilities
     {
         /// <summary>
-        /// Asserts a condition.
+        /// Draws a point in the Scene window.
         /// </summary>
-        /// <param name="condition">The condition that is expected to be true.</param>
-        /// <param name="message">The message to display if the condition evaluates to false.</param>
-        public static void DebugAssert(bool condition, string message)
+        public static void DrawPoint(Vector3 point, Color color, float size = 0.05f)
         {
-            Debug.Assert(condition, message);
+            DrawPoint(point, Quaternion.identity, color, size);
         }
 
         /// <summary>
-        /// Asserts a condition.
+        /// Draws a point with a rotation in the Scene window.
         /// </summary>
-        /// <param name="condition">The condition that is expected to be true.</param>
-        public static void DebugAssert(bool condition)
+        public static void DrawPoint(Vector3 point, Quaternion rotation, Color color, float size = 0.05f)
         {
-            DebugAssert(condition, string.Empty);
-        }
+            Vector3[] axes = { rotation * Vector3.up, rotation * Vector3.right, rotation * Vector3.forward };
 
-        /// <summary>
-        /// Logs an error message.
-        /// </summary>
-        /// <param name="message">The message to log.</param>
-        public static void DebugLogError(string message)
-        {
-            Debug.LogError(message);
-        }
-
-        /// <summary>
-        /// Logs a warning message.
-        /// </summary>
-        /// <param name="message">The message to log.</param>
-        public static void DebugLogWarning(string message)
-        {
-            Debug.LogWarning(message);
-        }
-
-        /// <summary>
-        /// Logs a message.
-        /// </summary>
-        /// <param name="message">The message to log.</param>
-        public static void DebugLog(string message)
-        {
-            Debug.Log(message);
+            for (int i = 0; i < axes.Length; ++i)
+            {
+                Vector3 a = point + size * axes[i];
+                Vector3 b = point - size * axes[i];
+                Debug.DrawLine(a, b, color);
+            }
         }
     }
 }

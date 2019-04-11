@@ -8,7 +8,6 @@ using UnityEngine.EventSystems;
 using UnityEngine.Experimental.XR;
 using UnityEngine.XR;
 using XRTK.Definitions.BoundarySystem;
-using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Boundary;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Utilities;
@@ -27,7 +26,6 @@ namespace XRTK.Services.BoundarySystem
         public MixedRealityBoundarySystem(MixedRealityBoundaryVisualizationProfile profile)
             : base(profile)
         {
-            Scale = MixedRealityToolkit.Instance.ActiveProfile.TargetExperienceScale;
             showFloor = profile.ShowFloor;
             floorPhysicsLayer = profile.FloorPhysicsLayer;
             FloorScale = profile.FloorScale;
@@ -60,7 +58,6 @@ namespace XRTK.Services.BoundarySystem
 
             boundaryEventData = new BoundaryEventData(EventSystem.current);
 
-            SetTrackingSpace();
             CalculateBoundaryBounds();
             Boundary.visible = true;
 
@@ -68,18 +65,22 @@ namespace XRTK.Services.BoundarySystem
             {
                 GetFloorVisualization();
             }
+
             if (ShowPlayArea)
             {
                 GetPlayAreaVisualization();
             }
+
             if (ShowTrackedArea)
             {
                 GetTrackedAreaVisualization();
             }
+
             if (ShowBoundaryWalls)
             {
                 GetBoundaryWallVisualization();
             }
+
             if (ShowBoundaryWalls)
             {
                 GetBoundaryCeilingVisualization();
@@ -95,7 +96,6 @@ namespace XRTK.Services.BoundarySystem
             // and clean up the parent.
             if (boundaryVisualizationParent != null)
             {
-                boundaryVisualizationParent.transform.DetachChildren();
 
                 if (Application.isEditor)
                 {
@@ -103,6 +103,7 @@ namespace XRTK.Services.BoundarySystem
                 }
                 else
                 {
+                    boundaryVisualizationParent.transform.DetachChildren();
                     Object.Destroy(boundaryVisualizationParent);
                 }
 
@@ -120,6 +121,7 @@ namespace XRTK.Services.BoundarySystem
                 {
                     Object.Destroy(currentFloorObject);
                 }
+
                 currentFloorObject = null;
             }
 
@@ -133,6 +135,7 @@ namespace XRTK.Services.BoundarySystem
                 {
                     Object.Destroy(currentPlayAreaObject);
                 }
+
                 currentPlayAreaObject = null;
             }
 
@@ -146,6 +149,7 @@ namespace XRTK.Services.BoundarySystem
                 {
                     Object.Destroy(currentTrackedAreaObject);
                 }
+
                 currentTrackedAreaObject = null;
             }
 
@@ -159,6 +163,7 @@ namespace XRTK.Services.BoundarySystem
                 {
                     Object.Destroy(currentBoundaryWallObject);
                 }
+
                 currentBoundaryWallObject = null;
             }
 
@@ -172,6 +177,7 @@ namespace XRTK.Services.BoundarySystem
                 {
                     Object.Destroy(currentCeilingObject);
                 }
+
                 currentCeilingObject = null;
             }
 
@@ -296,9 +302,6 @@ namespace XRTK.Services.BoundarySystem
                 return boundaryVisualizationParent = visualizationParent;
             }
         }
-
-        /// <inheritdoc/>
-        public ExperienceScale Scale { get; set; }
 
         /// <inheritdoc/>
         public float BoundaryHeight { get; set; }
@@ -841,7 +844,8 @@ namespace XRTK.Services.BoundarySystem
             }
 
             // Get the smallest rectangle that contains the entire boundary.
-            Bounds boundaryBoundingBox = new Bounds();
+            var boundaryBoundingBox = new Bounds();
+
             for (int i = 0; i < Bounds.Length; i++)
             {
                 // The boundary geometry is a closed loop. As such, we can encapsulate only PointA of each Edge.
@@ -931,42 +935,6 @@ namespace XRTK.Services.BoundarySystem
         {
             // We always use the same seed so that from run to run, the inscribed bounds are consistent.
             rectangularBounds = new InscribedRectangle(Bounds, Mathf.Abs("Mixed Reality Toolkit".GetHashCode()));
-        }
-
-        /// <summary>
-        /// Updates the <see cref="TrackingSpaceType"/> on the XR device.
-        /// </summary>
-        private void SetTrackingSpace()
-        {
-            TrackingSpaceType trackingSpace;
-
-            // In current versions of Unity, there are two types of tracking spaces. For boundaries, if the scale
-            // is not Room or Standing, it currently maps to TrackingSpaceType.Stationary.
-            switch (Scale)
-            {
-                case ExperienceScale.Standing:
-                case ExperienceScale.Room:
-                    trackingSpace = TrackingSpaceType.RoomScale;
-                    break;
-
-                case ExperienceScale.OrientationOnly:
-                case ExperienceScale.Seated:
-                case ExperienceScale.World:
-                    trackingSpace = TrackingSpaceType.Stationary;
-                    break;
-
-                default:
-                    trackingSpace = TrackingSpaceType.Stationary;
-                    Debug.LogWarning("Unknown / unsupported ExperienceScale. Defaulting to Stationary tracking space.");
-                    break;
-            }
-
-            bool trackingSpaceSet = XRDevice.SetTrackingSpaceType(trackingSpace);
-
-            if (!trackingSpaceSet)
-            {
-                // TODO: how best to handle this scenario?
-            }
         }
     }
 }

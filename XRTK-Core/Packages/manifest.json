@@ -1,11 +1,12 @@
 {
   "dependencies": {
     "com.unity.analytics": "3.2.2",
-    "com.unity.package-manager-ui": "2.0.3",
+    "com.unity.package-manager-ui": "2.0.7",
     "com.unity.textmeshpro": "1.3.0",
-    "com.unity.xr.oculus.standalone": "1.29.0",
+    "com.unity.xr.oculus.standalone": "1.29.1",
     "com.unity.xr.openvr.standalone": "1.0.3",
     "com.unity.xr.windowsmr.metro": "1.0.8",
+    "com.xrtk.upm-git-extension": "https://github.com/XRTK/UpmGitExtension.git#0.9.1",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
     "com.unity.modules.assetbundle": "1.0.0",
@@ -36,5 +37,11 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
+  },
+  "lock": {
+    "com.xrtk.upm-git-extension": {
+      "hash": "9cdc5a92ad0d1f3606026765a29d458555e54251",
+      "revision": "0.9.1"
+    }
   }
 }

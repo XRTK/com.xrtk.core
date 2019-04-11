@@ -1,6 +1,6 @@
 ﻿using UnityEditor.Experimental.AssetImporters;
 
-namespace XRTK.Utilities.Gltf.Serialization.Editor
+namespace XRTK.Utilities.Gltf.Serialization.Importers
 {
     [ScriptedImporter(1, "glb")]
     public class GlbAssetImporter : ScriptedImporter
@@ -9,10 +9,5 @@ namespace XRTK.Utilities.Gltf.Serialization.Editor
         {
             GltfEditorImporter.OnImportGltfAsset(context);
         }
-    }
-
-    public class GlbModelAssetImporterEditor : AssetImporterEditor
-    {
-
     }
 }

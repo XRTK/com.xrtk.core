@@ -11,14 +11,8 @@ using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 namespace XRTK.Inspectors.Utilities.Packages
 {
-    [InitializeOnLoad]
     public static class MixedRealityPackageUtilities
     {
-        static MixedRealityPackageUtilities()
-        {
-            EditorApplication.delayCall += CheckPackageManifest;
-        }
-
         /// <summary>
         /// The Mixed Reality Toolkit's upm package settings.
         /// </summary>
@@ -59,9 +53,7 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// </summary>
         public static async void CheckPackageManifest()
         {
-            if (Application.isPlaying) { return; }
-
-            if (IsRunningCheck) { return; }
+            if (Application.isPlaying || IsRunningCheck) { return; }
 
             IsRunningCheck = true;
 

@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Extensions;
+using XRTK.Inspectors.Utilities.Packages;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Inspectors.Utilities.SymbolicLinks
@@ -165,6 +166,8 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
             EditorApplication.UnlockReloadAssemblies();
             isRunningSync = false;
+
+            MixedRealityPackageUtilities.CheckPackageManifest();
         }
 
         /// <summary>

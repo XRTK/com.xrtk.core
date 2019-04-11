@@ -81,6 +81,12 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             if (Settings == null)
             {
                 MixedRealityPreferences.AutoLoadSymbolicLinks = false;
+
+                if (Application.isBatchMode)
+                {
+                    Debug.LogWarning("Symbolic link settings not found!");
+                }
+
                 return;
             }
 

@@ -14,7 +14,10 @@ namespace XRTK.Providers.Controllers
         /// </summary>
         /// <param name="name"></param>
         /// <param name="priority"></param>
-        protected BaseDictationDataProvider(string name, uint priority) : base(name, priority) { }
+        protected BaseDictationDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
+            : base(name, priority, profile)
+        {
+        }
 
         #region IMixedRealityDictationDataProvider Implementation
 

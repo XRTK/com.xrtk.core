@@ -406,6 +406,10 @@ PlayerSettings:
   - m_BuildTarget: Android
     m_Enabled: 1
     m_Devices: []
+  - m_BuildTarget: Lumin
+    m_Enabled: 1
+    m_Devices:
+    - Lumin
   m_BuildTargetEnableVuforiaSettings: []
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
@@ -646,6 +650,7 @@ PlayerSettings:
   platformArchitecture: {}
   scriptingBackend:
     Android: 1
+    Lumin: 1
     Standalone: 1
     Windows Store Apps: 1
   il2cppCompilerConfiguration: {}

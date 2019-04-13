@@ -4,3 +4,6 @@
 [submodule "Submodules/SDK"]
 	path = Submodules/SDK
 	url = https://github.com/XRTK/SDK.git
+[submodule "Submodules/Lumin"]
+	path = Submodules/Lumin
+	url = https://github.com/XRTK/Lumin.git

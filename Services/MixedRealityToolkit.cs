@@ -249,10 +249,21 @@ namespace XRTK.Services
                 };
 
 #if UNITY_EDITOR
-                UnityEditor.EditorApplication.playModeStateChanged += playModeState =>
+                UnityEditor.EditorApplication.hierarchyChanged += OnHierarchyChanged;
+                UnityEditor.EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+
+                void OnHierarchyChanged()
                 {
-                    if (playModeState == UnityEditor.PlayModeStateChange.ExitingEditMode ||
-                        playModeState == UnityEditor.PlayModeStateChange.EnteredEditMode)
+                    if (instance != null)
+                    {
+                        Debug.Assert(instance.transform.parent == null, "The MixedRealityToolkit should not be parented under any other GameObject!");
+                        Debug.Assert(instance.transform.childCount == 0, "The MixedRealityToolkit should not have GameObject children!");
+                    }
+                }
+
+                void OnPlayModeStateChanged(UnityEditor.PlayModeStateChange playModeState)
+                {
+                    if (playModeState == UnityEditor.PlayModeStateChange.ExitingEditMode || playModeState == UnityEditor.PlayModeStateChange.EnteredEditMode)
                     {
                         isApplicationQuitting = false;
                     }
@@ -263,16 +274,7 @@ namespace XRTK.Services
                         UnityEditor.Selection.activeObject = Instance;
                         UnityEditor.EditorGUIUtility.PingObject(Instance);
                     }
-                };
-
-                UnityEditor.EditorApplication.hierarchyChanged += () =>
-                {
-                    if (instance != null)
-                    {
-                        Debug.Assert(instance.transform.parent == null, "The MixedRealityToolkit should not be parented under any other GameObject!");
-                        Debug.Assert(instance.transform.childCount == 0, "The MixedRealityToolkit should not have GameObject children!");
-                    }
-                };
+                }
 #endif // UNITY_EDITOR
 
                 if (HasActiveProfile)
@@ -392,7 +394,8 @@ namespace XRTK.Services
                                         controllerDataProvider.DataProviderType,
                                         controllerDataProvider.RuntimePlatform,
                                         controllerDataProvider.DataProviderName,
-                                        controllerDataProvider.Priority))
+                                        controllerDataProvider.Priority,
+                                        controllerDataProvider.Profile))
                                 {
                                     Debug.LogError($"Failed to start {controllerDataProvider.DataProviderName}!");
                                 }

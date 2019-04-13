@@ -39,7 +39,7 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// <summary>
         /// Is the package utility running a check?
         /// </summary>
-        public static bool IsRunningCheck { get; private set; } = false;
+        public static bool IsRunningCheck { get; private set; }
 
         /// <summary>
         /// Debug the package utility.
@@ -185,9 +185,15 @@ namespace XRTK.Inspectors.Utilities.Packages
             var addRequest = Client.Add($"{packageInfo.Name}@{packageInfo.Uri}");
             await new WaitUntil(() => addRequest.Status != StatusCode.InProgress);
 
-            if (addRequest.Status == StatusCode.Success && DebugEnabled)
+            if (addRequest.Status == StatusCode.Success)
             {
-                Debug.Log($"successfully added {packageInfo.Name}");
+                if (DebugEnabled)
+                {
+                    Debug.Log($"successfully added {packageInfo.Name}@{addRequest.Result.packageId}");
+                }
+
+                // HACK to remove submodules
+                //File.Delete("Library\\PackageCache\\com.xrtk.core@f4a4a0ed7a42e52aa5ad3a3f5dc6b8780752f017");
             }
             else
             {
@@ -200,9 +206,12 @@ namespace XRTK.Inspectors.Utilities.Packages
             var removeRequest = Client.Remove($"{packageInfo.Name}");
             await new WaitUntil(() => removeRequest.Status != StatusCode.InProgress);
 
-            if (removeRequest.Status == StatusCode.Success && DebugEnabled)
+            if (removeRequest.Status == StatusCode.Success)
             {
-                Debug.Log($"successfully removed {packageInfo.Name}");
+                if (DebugEnabled)
+                {
+                    Debug.Log($"successfully removed {packageInfo.Name}");
+                }
             }
             else if (removeRequest.Error?.errorCode != ErrorCode.NotFound)
             {

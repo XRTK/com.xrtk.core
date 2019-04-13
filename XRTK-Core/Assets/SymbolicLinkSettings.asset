@@ -13,6 +13,9 @@ MonoBehaviour:
   m_Name: SymbolicLinkSettings
   m_EditorClassIdentifier: 
   symbolicLinks:
+  - sourceRelativePath: /Submodules/UpmGitExtension/XRTK.UpmGitExtension/Assets/XRTK.UpmGitExtension
+    targetRelativePath: /XRTK-Core/Assets/XRTK.UpmGitExtension
+    isActive: 1
   - sourceRelativePath: /Submodules/WindowsMixedReality/XRTK.WindowsMixedReality/Assets/XRTK.WindowsMixedReality
     targetRelativePath: /XRTK-Core/Assets/XRTK.WindowsMixedReality
     isActive: 1

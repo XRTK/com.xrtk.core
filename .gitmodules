@@ -1,3 +1,6 @@
+[submodule "Submodules/UpmGitExtension"]
+	path = Submodules/UpmGitExtension
+	url = https://github.com/XRTK/UpmGitExtension.git
 [submodule "Submodules/WindowsMixedReality"]
 	path = Submodules/WindowsMixedReality
 	url = https://github.com/XRTK/WindowsMixedReality

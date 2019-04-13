@@ -18,4 +18,6 @@ MonoBehaviour:
     isActive: 1
   - sourceRelativePath: /Submodules/SDK/XRTK.SDK/Assets/XRTK.SDK
     targetRelativePath: /XRTK-Core/Assets/XRTK.SDK
+  - sourceRelativePath: /Submodules/UpmGitExtension/XRTK.UpmGitExtension/Assets/XRTK.UpmGitExtension
+    targetRelativePath: /XRTK-Core/Assets/XRTK.UpmGitExtension
     isActive: 1

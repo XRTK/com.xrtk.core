@@ -28,7 +28,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             EditorApplication.delayCall += () => RunSync();
         }
 
-        private const string LinkIconText = "<=link=>";
+        private const string LINK_ICON_TEXT = "<=link=>";
         private const string REGEX_BRACKETS = @"\{(.*?)\}";
         private const FileAttributes FOLDER_SYMLINK_ATTRIBUTES = FileAttributes.ReparsePoint;
 
@@ -274,7 +274,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
                 if ((attributes & FOLDER_SYMLINK_ATTRIBUTES) != FOLDER_SYMLINK_ATTRIBUTES) { return; }
 
-                GUI.Label(rect, LinkIconText, SymlinkMarkerStyle);
+                GUI.Label(rect, LINK_ICON_TEXT, SymlinkMarkerStyle);
 
                 if (Settings.SymbolicLinks.Any(link => link.TargetRelativePath.Contains(path))) { return; }
 

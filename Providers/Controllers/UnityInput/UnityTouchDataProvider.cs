@@ -21,7 +21,10 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// </summary>
         /// <param name="name"></param>
         /// <param name="priority"></param>
-        public UnityTouchDataProvider(string name, uint priority) : base(name, priority) { }
+        public UnityTouchDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
+            : base(name, priority, profile)
+        {
+        }
 
         private static readonly Dictionary<int, UnityTouchController> ActiveTouches = new Dictionary<int, UnityTouchController>();
 

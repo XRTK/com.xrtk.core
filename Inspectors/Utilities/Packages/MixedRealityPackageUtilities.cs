@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.PackageManager;
@@ -44,7 +46,7 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// <summary>
         /// Debug the package utility.
         /// </summary>
-        public static bool DebugEnabled { get; set; } = false;
+        public static bool DebugEnabled { get; set; } = true;
 
         private static Tuple<MixedRealityPackageInfo, bool, bool>[] currentPackages;
 
@@ -57,7 +59,7 @@ namespace XRTK.Inspectors.Utilities.Packages
 
             IsRunningCheck = true;
 
-            DebugEnabled = Application.isBatchMode;
+            DebugEnabled |= Application.isBatchMode;
 
             if (DebugEnabled)
             {
@@ -116,14 +118,11 @@ namespace XRTK.Inspectors.Utilities.Packages
 
             await new WaitUntil(() => upmPackageListRequest.Status != StatusCode.InProgress);
 
-            if (DebugEnabled)
-            {
-                Debug.Log($"Validated packages: {validationFiles.Length}");
-            }
-
             foreach (var guid in validationFiles)
             {
                 var path = AssetDatabase.GUIDToAssetPath(guid);
+
+                if (!path.EndsWith(".asset")) { continue; }
 
                 if (DebugEnabled)
                 {
@@ -148,7 +147,6 @@ namespace XRTK.Inspectors.Utilities.Packages
                 {
                     Debug.Log($"{package.Name} | validation count: {validationCount} | is upm package? {upmPackage != null}");
                 }
-
 
                 if (validationCount > 0)
                 {
@@ -192,8 +190,21 @@ namespace XRTK.Inspectors.Utilities.Packages
                     Debug.Log($"successfully added {packageInfo.Name}@{addRequest.Result.packageId}");
                 }
 
+                packageInfo.PackageInfo = addRequest.Result;
+
                 // HACK to remove submodules
-                //File.Delete("Library\\PackageCache\\com.xrtk.core@f4a4a0ed7a42e52aa5ad3a3f5dc6b8780752f017");
+                var hash = GetRevisionHash(packageInfo);
+                var submodulesPath = $"{Directory.GetParent(Application.dataPath).FullName}\\Library\\PackageCache\\{packageInfo.Name}@{hash}\\Submodules";
+
+                if (File.Exists(submodulesPath))
+                {
+                    if (DebugEnabled)
+                    {
+                        Debug.Log($"Attempting to delete submodule: {submodulesPath}");
+                    }
+
+                    File.Delete(submodulesPath);
+                }
             }
             else
             {
@@ -217,6 +228,17 @@ namespace XRTK.Inspectors.Utilities.Packages
             {
                 Debug.LogError($"Package Error({removeRequest.Error?.errorCode}): {removeRequest.Error?.message}");
             }
+        }
+
+        public static string GetRevisionHash(MixedRealityPackageInfo packageInfo)
+        {
+            return GetRevisionHash(packageInfo.PackageInfo != null ? packageInfo.PackageInfo.resolvedPath : string.Empty);
+        }
+
+        private static string GetRevisionHash(string resolvedPath)
+        {
+            var match = Regex.Match(resolvedPath, "@([^@]+)$");
+            return match.Success ? match.Groups[1].Value : string.Empty;
         }
     }
 }

@@ -5,6 +5,7 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Extensions;
+using XRTK.Inspectors.Utilities.SymbolicLinks;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Inspectors.Utilities
@@ -23,7 +24,7 @@ namespace XRTK.Inspectors.Utilities
             {
                 if (!string.IsNullOrEmpty(projectRootDir)) { return projectRootDir; }
 
-                if (new Process().Run($@"/C cd {Application.dataPath} && git rev-parse --show-toplevel", out string rootDir))
+                if (new Process().Run($@"/C cd {Application.dataPath} && git rev-parse --show-toplevel", out var rootDir))
                 {
                     return projectRootDir = rootDir.ToBackSlashes().Replace("\n", string.Empty);
                 }
@@ -38,7 +39,7 @@ namespace XRTK.Inspectors.Utilities
         public static void ForceUpdateSubmodules()
         {
             UpdateSubmodules();
-            // SymbolicLinkUtilities.RunSync(true);
+            SymbolicLinker.RunSync(true);
         }
 
         /// <summary>

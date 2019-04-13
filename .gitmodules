@@ -3,7 +3,7 @@
 	url = https://github.com/XRTK/UpmGitExtension.git
 [submodule "Submodules/WindowsMixedReality"]
 	path = Submodules/WindowsMixedReality
-	url = https://github.com/XRTK/WindowsMixedReality
+	url = https://github.com/XRTK/WindowsMixedReality.git
 [submodule "Submodules/SDK"]
 	path = Submodules/SDK
 	url = https://github.com/XRTK/SDK.git

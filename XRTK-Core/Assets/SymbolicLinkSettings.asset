@@ -19,3 +19,6 @@ MonoBehaviour:
   - sourceRelativePath: /Submodules/SDK/XRTK.SDK/Assets/XRTK.SDK
     targetRelativePath: /XRTK-Core/Assets/XRTK.SDK
     isActive: 1
+  - sourceRelativePath: /Submodules/Lumin/XRTK.Lumin/Assets/XRTK.Lumin
+    targetRelativePath: /XRTK-Core/Assets/XRTK.Lumin
+    isActive: 1

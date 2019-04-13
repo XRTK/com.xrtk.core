@@ -22,7 +22,10 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// </summary>
         /// <param name="name"></param>
         /// <param name="priority"></param>
-        public UnityJoystickDataProvider(string name, uint priority) : base(name, priority) { }
+        public UnityJoystickDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
+            : base(name, priority, profile)
+        {
+        }
 
         private const float DeviceRefreshInterval = 3.0f;
 

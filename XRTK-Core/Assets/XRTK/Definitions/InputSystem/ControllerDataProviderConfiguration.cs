@@ -6,6 +6,7 @@ using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Providers.Controllers;
 
 namespace XRTK.Definitions.InputSystem
 {
@@ -19,12 +20,14 @@ namespace XRTK.Definitions.InputSystem
         /// <param name="dataProviderName"></param>
         /// <param name="priority"></param>
         /// <param name="runtimePlatform"></param>
-        public ControllerDataProviderConfiguration(SystemType dataProviderType, string dataProviderName, uint priority, SupportedPlatforms runtimePlatform)
+        /// <param name="profile"></param>
+        public ControllerDataProviderConfiguration(SystemType dataProviderType, string dataProviderName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityControllerDataProviderProfile profile)
         {
             this.dataProviderType = dataProviderType;
             this.dataProviderName = dataProviderName;
             this.priority = priority;
             this.runtimePlatform = runtimePlatform;
+            this.profile = profile;
         }
 
         [SerializeField]
@@ -61,5 +64,13 @@ namespace XRTK.Definitions.InputSystem
         /// The runtime platform(s) to run this system, feature, or manager on.
         /// </summary>
         public SupportedPlatforms RuntimePlatform => runtimePlatform;
+
+        [SerializeField]
+        private BaseMixedRealityControllerDataProviderProfile profile;
+
+        /// <summary>
+        /// The profile settings for the controller data provider.
+        /// </summary>
+        public BaseMixedRealityControllerDataProviderProfile Profile => profile;
     }
 }

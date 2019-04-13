@@ -21,7 +21,8 @@ namespace XRTK.Providers.Controllers
         /// </summary>
         /// <param name="name"></param>
         /// <param name="priority"></param>
-        public BaseControllerDataProvider(string name, uint priority) : base(name, priority) { }
+        /// <param name="profile"></param>
+        public BaseControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile) : base(name, priority) { }
 
         /// <inheritdoc />
         public virtual IMixedRealityController[] GetActiveControllers() => new IMixedRealityController[0];

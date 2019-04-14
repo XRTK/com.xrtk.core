@@ -24,12 +24,14 @@ namespace XRTK.Inspectors.Utilities.Packages
             {
                 if (packageSettings == null)
                 {
-                    packageSettings = AssetDatabase
-                        .FindAssets($"t:{typeof(MixedRealityPackageSettings).Name}")
-                        .Select(AssetDatabase.GUIDToAssetPath)
-                        .OrderBy(x => x)
-                        .Select(AssetDatabase.LoadAssetAtPath<MixedRealityPackageSettings>)
-                        .FirstOrDefault();
+                    var path = $"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}\\Inspectors\\Utilities\\Packages\\MixedRealityPackageSettings.asset";
+
+                    if (DebugEnabled)
+                    {
+                        Debug.Log(path);
+                    }
+
+                    packageSettings = AssetDatabase.LoadAssetAtPath<MixedRealityPackageSettings>(path);
                 }
 
                 return packageSettings;
@@ -46,7 +48,11 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// <summary>
         /// Debug the package utility.
         /// </summary>
-        public static bool DebugEnabled { get; set; } = true;
+        public static bool DebugEnabled
+        {
+            get => MixedRealityPreferences.DebugPackageInfo;
+            set => MixedRealityPreferences.DebugPackageInfo = value;
+        }
 
         private static Tuple<MixedRealityPackageInfo, bool, bool>[] currentPackages;
 
@@ -55,11 +61,14 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// </summary>
         public static async void CheckPackageManifest()
         {
-            if (Application.isPlaying || IsRunningCheck) { return; }
+            if (IsRunningCheck ||
+                Application.isPlaying ||
+                Application.isBatchMode)
+            {
+                return;
+            }
 
             IsRunningCheck = true;
-
-            DebugEnabled |= Application.isBatchMode;
 
             if (DebugEnabled)
             {

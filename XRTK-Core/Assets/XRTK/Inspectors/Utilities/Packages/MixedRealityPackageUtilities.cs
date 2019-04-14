@@ -59,21 +59,18 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// </summary>
         public static async void CheckPackageManifest()
         {
-            if (Application.isPlaying || IsRunningCheck) { return; }
+            if (IsRunningCheck ||
+                Application.isPlaying ||
+                Application.isBatchMode)
+            {
+                return;
+            }
 
             IsRunningCheck = true;
 
             if (DebugEnabled)
             {
                 Debug.Log("Checking packages...");
-            }
-
-            if (Application.isBatchMode)
-            {
-                while (EditorApplication.isUpdating)
-                {
-                    // Wait...
-                }
             }
 
             var installedPackages = await GetCurrentMixedRealityPackagesAsync();
@@ -137,17 +134,7 @@ namespace XRTK.Inspectors.Utilities.Packages
             var validatedPackages = new List<MixedRealityPackageValidation>(5);
             var upmPackageListRequest = Client.List(true);
 
-            if (Application.isBatchMode)
-            {
-                while (upmPackageListRequest.Status == StatusCode.InProgress)
-                {
-                    // Wait...
-                }
-            }
-            else
-            {
-                await new WaitUntil(() => upmPackageListRequest.Status != StatusCode.InProgress);
-            }
+            await new WaitUntil(() => upmPackageListRequest.Status != StatusCode.InProgress);
 
             foreach (var guid in validationFiles)
             {
@@ -212,18 +199,7 @@ namespace XRTK.Inspectors.Utilities.Packages
         private static async Task AddPackage(MixedRealityPackageInfo packageInfo)
         {
             var addRequest = Client.Add($"{packageInfo.Name}@{packageInfo.Uri}");
-
-            if (Application.isBatchMode)
-            {
-                while (addRequest.Status == StatusCode.InProgress)
-                {
-                    // Wait...
-                }
-            }
-            else
-            {
-                await new WaitUntil(() => addRequest.Status != StatusCode.InProgress);
-            }
+            await new WaitUntil(() => addRequest.Status != StatusCode.InProgress);
 
             if (addRequest.Status == StatusCode.Success)
             {
@@ -257,18 +233,7 @@ namespace XRTK.Inspectors.Utilities.Packages
         private static async Task RemovePackage(MixedRealityPackageInfo packageInfo)
         {
             var removeRequest = Client.Remove($"{packageInfo.Name}");
-
-            if (Application.isBatchMode)
-            {
-                while (removeRequest.Status == StatusCode.InProgress)
-                {
-                    // Wait...
-                }
-            }
-            else
-            {
-                await new WaitUntil(() => removeRequest.Status != StatusCode.InProgress);
-            }
+            await new WaitUntil(() => removeRequest.Status != StatusCode.InProgress);
 
             if (removeRequest.Status == StatusCode.Success)
             {

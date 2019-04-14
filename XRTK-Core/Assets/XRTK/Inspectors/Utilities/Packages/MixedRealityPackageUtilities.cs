@@ -24,12 +24,14 @@ namespace XRTK.Inspectors.Utilities.Packages
             {
                 if (packageSettings == null)
                 {
-                    packageSettings = AssetDatabase
-                        .FindAssets($"t:{typeof(MixedRealityPackageSettings).Name}")
-                        .Select(AssetDatabase.GUIDToAssetPath)
-                        .OrderBy(x => x)
-                        .Select(AssetDatabase.LoadAssetAtPath<MixedRealityPackageSettings>)
-                        .FirstOrDefault();
+                    var path = $"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}\\Inspectors\\Utilities\\Packages\\MixedRealityPackageSettings.asset";
+
+                    if (DebugEnabled)
+                    {
+                        Debug.Log(path);
+                    }
+
+                    packageSettings = AssetDatabase.LoadAssetAtPath<MixedRealityPackageSettings>(path);
                 }
 
                 return packageSettings;
@@ -116,17 +118,6 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// </summary>
         internal static async Task<Tuple<MixedRealityPackageInfo, bool, bool>[]> GetCurrentMixedRealityPackagesAsync()
         {
-            if (PackageSettings == null)
-            {
-                if (Application.isBatchMode)
-                {
-                    Debug.LogError("Failed to find PackageSettings!");
-                    EditorApplication.Exit(1);
-                }
-
-                return null;
-            }
-
             var packageCount = PackageSettings.MixedRealityPackages.Length;
             currentPackages = new Tuple<MixedRealityPackageInfo, bool, bool>[packageCount];
             var installedPackages = new List<PackageInfo>();

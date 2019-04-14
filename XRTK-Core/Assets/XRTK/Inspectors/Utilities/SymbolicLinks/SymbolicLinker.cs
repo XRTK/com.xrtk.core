@@ -25,15 +25,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         static SymbolicLinker()
         {
             EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGui;
-
-            if (Application.isBatchMode)
-            {
-                RunSync();
-            }
-            else
-            {
-                EditorApplication.delayCall += () => RunSync();
-            }
+            RunSync();
         }
 
         private const string LINK_ICON_TEXT = "<=link=>";

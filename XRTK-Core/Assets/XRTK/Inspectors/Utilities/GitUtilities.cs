@@ -110,7 +110,7 @@ namespace XRTK.Inspectors.Utilities
         internal static bool UpdateSubmodules()
         {
             EditorUtility.DisplayProgressBar("Updating Submodules...", "Please wait...", 0.5f);
-            var success = new Process().Run($"/C cd \"{RepositoryRootDir}\" && git submodule update --init --recursive", out _);
+            var success = new Process().Run($"/C cd \"{RepositoryRootDir}\" && git submodule update --init --all", out _);
             EditorUtility.ClearProgressBar();
             // TODO we need to ensure that we return true if git isn't installed.
             return success;

@@ -190,6 +190,33 @@ namespace XRTK.Inspectors
 
         #endregion Symbolic Link Preferences
 
+        #region Debug Uom Packages
+
+        private static readonly GUIContent DebugUpmContent = new GUIContent("Debug upm package info", "Enable or disable the debug information for upm package loading.\n\nThis setting only applies to the currently running project.");
+        private const string UPM_DEBUG_KEY = "EnableUpmDebug";
+        private static bool isUpmDebugPrefLoaded;
+        private static bool debugUpmPackageInfo;
+
+        /// <summary>
+        /// Enabled debugging info for the xrtk upm packages.
+        /// </summary>
+        public static bool DebugUpmPackageInfo
+        {
+            get
+            {
+                if (!isUpmDebugPrefLoaded)
+                {
+                    debugUpmPackageInfo = EditorPreferences.Get(UPM_DEBUG_KEY, false);
+                    isUpmDebugPrefLoaded = true;
+                }
+
+                return debugUpmPackageInfo;
+            }
+            set => EditorPreferences.Set(UPM_DEBUG_KEY, debugUpmPackageInfo = value);
+        }
+
+        #endregion Debug Uom Packages
+
         [SettingsProvider]
         private static SettingsProvider Preferences()
         {
@@ -292,6 +319,14 @@ namespace XRTK.Inspectors
                     SymbolicLinkSettingsPath = string.Empty;
                     SymbolicLinker.Settings = null;
                 }
+            }
+
+            EditorGUI.BeginChangeCheck();
+            debugUpmPackageInfo = EditorGUILayout.Toggle(DebugUpmContent, DebugUpmPackageInfo);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                DebugUpmPackageInfo = debugUpmPackageInfo;
             }
 
             EditorGUIUtility.labelWidth = prevLabelWidth;

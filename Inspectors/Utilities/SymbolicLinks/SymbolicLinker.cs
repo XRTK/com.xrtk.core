@@ -25,7 +25,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         static SymbolicLinker()
         {
             EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGui;
-            EditorApplication.delayCall += () => RunSync();
+            RunSync();
         }
 
         private const string LINK_ICON_TEXT = "<=link=>";
@@ -50,7 +50,11 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// <summary>
         /// Debug the symbolic linker utility.
         /// </summary>
-        public static bool DebugEnabled { get; set; } = false;
+        public static bool DebugEnabled
+        {
+            get => MixedRealityPreferences.DebugPackageInfo;
+            set => MixedRealityPreferences.DebugPackageInfo = value;
+        }
 
         /// <summary>
         /// The current settings for the symbolic links.
@@ -99,7 +103,6 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
             isRunningSync = true;
             EditorApplication.LockReloadAssemblies();
-            DebugEnabled |= Application.isBatchMode;
 
             if (DebugEnabled)
             {
@@ -382,16 +385,31 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         private static async Task VerifySymbolicLink(string targetAbsolutePath, string sourceAbsolutePath)
         {
             var pathToVerify = targetAbsolutePath.Substring(0, targetAbsolutePath.LastIndexOf("/", StringComparison.Ordinal));
-            var processResult = await new Process().RunAsync($"/C powershell.exe \"& dir '{pathToVerify}' | select Target, LinkType | where {{ $_.LinkType -eq 'SymbolicLink' }} | Format-Table -HideTableHeaders -Wrap\"");
+            var args = $"/C powershell.exe \"& dir '{pathToVerify}' | select Target, LinkType | where {{ $_.LinkType -eq 'SymbolicLink' }} | Format-Table -HideTableHeaders -Wrap\"";
 
-            if (processResult.ExitCode != 0)
+            bool success;
+            string[] processOutput;
+
+            if (Application.isBatchMode)
+            {
+                success = new Process().Run(args, out var output);
+                processOutput = new[] { output };
+            }
+            else
+            {
+                var result = await new Process().RunAsync(args);
+                success = result.ExitCode == 0;
+                processOutput = result.Output;
+            }
+
+            if (!success)
             {
                 Debug.LogError($"Failed to enumerate symbolic links associated to {pathToVerify}");
                 return;
             }
 
             var isValid = false;
-            var matches = BracketRegex.Matches(string.Join("\n", processResult.Output));
+            var matches = BracketRegex.Matches(string.Join("\n", processOutput));
 
             foreach (Match match in matches)
             {

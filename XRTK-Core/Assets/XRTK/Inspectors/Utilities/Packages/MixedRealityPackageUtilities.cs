@@ -48,8 +48,8 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// </summary>
         public static bool DebugEnabled
         {
-            get => MixedRealityPreferences.DebugUpmPackageInfo;
-            set => MixedRealityPreferences.DebugUpmPackageInfo = value;
+            get => MixedRealityPreferences.DebugPackageInfo;
+            set => MixedRealityPreferences.DebugPackageInfo = value;
         }
 
         private static Tuple<MixedRealityPackageInfo, bool, bool>[] currentPackages;
@@ -62,8 +62,6 @@ namespace XRTK.Inspectors.Utilities.Packages
             if (Application.isPlaying || IsRunningCheck) { return; }
 
             IsRunningCheck = true;
-
-            DebugEnabled |= Application.isBatchMode;
 
             if (DebugEnabled)
             {

@@ -190,32 +190,32 @@ namespace XRTK.Inspectors
 
         #endregion Symbolic Link Preferences
 
-        #region Debug Uom Packages
+        #region Debug Packages
 
-        private static readonly GUIContent DebugUpmContent = new GUIContent("Debug upm package info", "Enable or disable the debug information for upm package loading.\n\nThis setting only applies to the currently running project.");
-        private const string UPM_DEBUG_KEY = "EnableUpmDebug";
-        private static bool isUpmDebugPrefLoaded;
-        private static bool debugUpmPackageInfo;
+        private static readonly GUIContent DebugUpmContent = new GUIContent("Debug package loading", "Enable or disable the debug information for package loading.\n\nThis setting only applies to the currently running project.");
+        private const string PACKAGE_DEBUG_KEY = "EnablePackageDebug";
+        private static bool isPackageDebugPrefLoaded;
+        private static bool debugPackageInfo;
 
         /// <summary>
         /// Enabled debugging info for the xrtk upm packages.
         /// </summary>
-        public static bool DebugUpmPackageInfo
+        public static bool DebugPackageInfo
         {
             get
             {
-                if (!isUpmDebugPrefLoaded)
+                if (!isPackageDebugPrefLoaded)
                 {
-                    debugUpmPackageInfo = EditorPreferences.Get(UPM_DEBUG_KEY, false);
-                    isUpmDebugPrefLoaded = true;
+                    debugPackageInfo = EditorPreferences.Get(PACKAGE_DEBUG_KEY, Application.isBatchMode);
+                    isPackageDebugPrefLoaded = true;
                 }
 
-                return debugUpmPackageInfo;
+                return debugPackageInfo;
             }
-            set => EditorPreferences.Set(UPM_DEBUG_KEY, debugUpmPackageInfo = value);
+            set => EditorPreferences.Set(PACKAGE_DEBUG_KEY, debugPackageInfo = value);
         }
 
-        #endregion Debug Uom Packages
+        #endregion Debug Packages
 
         [SettingsProvider]
         private static SettingsProvider Preferences()
@@ -322,11 +322,11 @@ namespace XRTK.Inspectors
             }
 
             EditorGUI.BeginChangeCheck();
-            debugUpmPackageInfo = EditorGUILayout.Toggle(DebugUpmContent, DebugUpmPackageInfo);
+            debugPackageInfo = EditorGUILayout.Toggle(DebugUpmContent, DebugPackageInfo);
 
             if (EditorGUI.EndChangeCheck())
             {
-                DebugUpmPackageInfo = debugUpmPackageInfo;
+                DebugPackageInfo = debugPackageInfo;
             }
 
             EditorGUIUtility.labelWidth = prevLabelWidth;

@@ -201,7 +201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.BaseMixedRealityProfile.html",
-          "hash": "El9vweAS8/jTT9kloX6HaA=="
+          "hash": "tGgswm5VEvLl5Oo1nkSBhA=="
         }
       },
       "is_incremental": false,
@@ -465,7 +465,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.html",
-          "hash": "sRWu1qzo9TLPSH5UYAXcpg=="
+          "hash": "0KrtUVwSF3Q1YbsNGIVu6Q=="
         }
       },
       "is_incremental": false,
@@ -597,7 +597,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.InputSystem.MixedRealityGesturesProfile.html",
-          "hash": "c19py32JQIVkqRaYJemwaw=="
+          "hash": "YSIRu+MPqodxv20zjO5KOg=="
         }
       },
       "is_incremental": false,
@@ -717,7 +717,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.InputSystem.html",
-          "hash": "HJZMhmcBJn93hJsS3YUghQ=="
+          "hash": "xLTl2xEmZzmimGeXcXsGbA=="
         }
       },
       "is_incremental": false,
@@ -2109,7 +2109,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.MixedRealityPreferences.html",
-          "hash": "iuPv723kcq/sfYUWO6lBBw=="
+          "hash": "m3mpq9XWTkSMg4LTbFK/IA=="
         }
       },
       "is_incremental": false,
@@ -2205,7 +2205,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.html",
-          "hash": "cgO8h9j48tyhxIiJ15hcxA=="
+          "hash": "PaF2vEObONKLcnNQpX9iow=="
         }
       },
       "is_incremental": false,
@@ -2325,7 +2325,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.html",
-          "hash": "+685+O6dIRzNUUmYYH17uA=="
+          "hash": "O3OSAw2ylNcaNYvVkV5Unw=="
         }
       },
       "is_incremental": false,
@@ -2433,7 +2433,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.SpatialAwareness.BaseMixedRealitySpatialMeshObserverProfileInspector.html",
-          "hash": "Oo6iDR8sD5eomF5EY3PF7g=="
+          "hash": "9LpzpU+vzwbtVJd9mebvbQ=="
         }
       },
       "is_incremental": false,
@@ -2661,7 +2661,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.GitUtilities.html",
-          "hash": "0PvbUsC3QMncCaZUvWV53Q=="
+          "hash": "UwfRRbFSjCeTpX/IX9svFg=="
         }
       },
       "is_incremental": false,
@@ -2781,7 +2781,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html",
-          "hash": "Bq+KZ6X4aFR5XSXJXHpTSQ=="
+          "hash": "J3UmKqjSFY5Vr6ZIJtI8AQ=="
         }
       },
       "is_incremental": false,
@@ -2817,7 +2817,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html",
-          "hash": "9tUrYK0//OsNfxQYr3wB4Q=="
+          "hash": "m75+ZHEm+HN1DVTlEJGAgg=="
         }
       },
       "is_incremental": false,
@@ -3789,7 +3789,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.BaseController.html",
-          "hash": "5b6Ls58XHrjUKGOkDWYLlw=="
+          "hash": "dFd+lTdeCqFPhe9YQSWCKA=="
         }
       },
       "is_incremental": false,
@@ -3801,7 +3801,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.BaseControllerDataProvider.html",
-          "hash": "DJBXtpMu3sNY7xv79wsEqA=="
+          "hash": "KjyZKhK6ua3bEhLchVnT5Q=="
         }
       },
       "is_incremental": false,
@@ -3813,7 +3813,19 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.BaseDictationDataProvider.html",
-          "hash": "zrLPIqoLT3DCjPrc47EBnQ=="
+          "hash": "+RKT8gW1tqyEu2OtYHPhZA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Providers.Controllers.BaseMixedRealityControllerDataProviderProfile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Providers.Controllers.BaseMixedRealityControllerDataProviderProfile.html",
+          "hash": "MrvR0O9wpjkRDubOmXokzQ=="
         }
       },
       "is_incremental": false,
@@ -3825,7 +3837,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile.html",
-          "hash": "RJFV/ljVHXoWIqIlBxjjhg=="
+          "hash": "VoOzExp2aiG2M2z8T3WOYA=="
         }
       },
       "is_incremental": false,
@@ -3837,7 +3849,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.BaseSpeechDataProvider.html",
-          "hash": "9+VE9xzanee1SKw77tUy9Q=="
+          "hash": "Lr5N3DyLdOGm2whsXZ+Gvg=="
         }
       },
       "is_incremental": false,
@@ -4053,7 +4065,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.OpenVR.OpenVRDataProvider.html",
-          "hash": "mt2i3dV6Fk16QzyWbkT3KQ=="
+          "hash": "nl/wVW6zIJWZqJzxsZZbcg=="
         }
       },
       "is_incremental": false,
@@ -4149,7 +4161,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.UnityInput.MouseDataProvider.html",
-          "hash": "jjruObBHGIvN+/qtauVc7Q=="
+          "hash": "JnCQEAChbIFClIxjrc0xfw=="
         }
       },
       "is_incremental": false,
@@ -4281,7 +4293,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.html",
-          "hash": "3f1sMnCSt/ghDaYZ2ioBJg=="
+          "hash": "x8G+ldZRNhTk/rxEjLuq/A=="
         }
       },
       "is_incremental": false,
@@ -4305,7 +4317,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.UnityInput.UnityTouchDataProvider.html",
-          "hash": "qNL2KKTTEzIVx9f80OBPeQ=="
+          "hash": "xrKaHch1dNY6rzRh91JYsQ=="
         }
       },
       "is_incremental": false,
@@ -4341,7 +4353,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.html",
-          "hash": "Uj0UHEzGYb6ZjGeAehsJXA=="
+          "hash": "6JLxLPd99SpgQjhbPb1uAA=="
         }
       },
       "is_incremental": false,
@@ -4425,7 +4437,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserver.html",
-          "hash": "FtYcONwjYUt4p0VKl8z7fQ=="
+          "hash": "/ves1npWWZdvm43AkP8IiQ=="
         }
       },
       "is_incremental": false,
@@ -4437,7 +4449,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.html",
-          "hash": "SJO8E1pom19nPYT3/JNc1g=="
+          "hash": "M+S22ndGpBFXfFyPPgawXg=="
         }
       },
       "is_incremental": false,
@@ -4498,1098 +4510,6 @@
         ".html": {
           "relative_path": "api/XRTK.Providers.SpatialObservers.html",
           "hash": "xJDINzhh0Qg3mR/1k6+7xQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Audio.Influencers.AudioInfluencerController.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Audio.Influencers.AudioInfluencerController.html",
-          "hash": "iQJWg0kMqlawAeRuFoJ83Q=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Audio.Influencers.AudioLoFiEffect.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Audio.Influencers.AudioLoFiEffect.html",
-          "hash": "TjII9uPf912Q9gi6zrYEMg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Audio.Influencers.AudioLoFiSourceQualityType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Audio.Influencers.AudioLoFiSourceQualityType.html",
-          "hash": "QtNksnjNWeUUXcak00ZCWw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Audio.Influencers.AudioOccluder.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Audio.Influencers.AudioOccluder.html",
-          "hash": "mugwd/wnE2majTtBJtARgw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Audio.Influencers.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Audio.Influencers.html",
-          "hash": "COuyJ+siojRa2ljutdoQLw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.DiagnosticsSystem.DiagnosticsHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.DiagnosticsSystem.DiagnosticsHandler.html",
-          "hash": "aZ7+a+XSr/57lu+oAcXcog=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.DiagnosticsSystem.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.DiagnosticsSystem.html",
-          "hash": "Ln2z6enb3+hmFmI6hs1/8A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Input.GazeProvider.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Input.GazeProvider.html",
-          "hash": "IDrmY+NXMFxhxDdfjRVuMQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Input.Handlers.BaseDictationHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Input.Handlers.BaseDictationHandler.html",
-          "hash": "0WFmSSMDZZE0nc7+p0YIYA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Input.Handlers.BaseFocusHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Input.Handlers.BaseFocusHandler.html",
-          "hash": "DYCkk6No/8CnkwY/Un9tpQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Input.Handlers.BaseInputHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Input.Handlers.BaseInputHandler.html",
-          "hash": "Uru90f1JqPSSIJM/vbFHeg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html",
-          "hash": "ONYthpVW9i8tfVol+UeFXA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Input.Handlers.DragAndDropHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Input.Handlers.DragAndDropHandler.html",
-          "hash": "9Flj4BGuleZ5xZLFj6X9NA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Input.Handlers.PointerClickHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Input.Handlers.PointerClickHandler.html",
-          "hash": "7dSp0rcZCHT3uRcEHntVlw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Input.Handlers.SpeechInputHandler.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Input.Handlers.SpeechInputHandler.html",
-          "hash": "Z94iOWki1SRZBcoOEXKHYA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Input.Handlers.TeleportHotSpot.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Input.Handlers.TeleportHotSpot.html",
-          "hash": "Qv5yYUFZujSK0QNvFW4ymA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Input.Handlers.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Input.Handlers.html",
-          "hash": "CkUfqcLFEN5BhggroFrrdA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Input.InputSystemGlobalListener.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Input.InputSystemGlobalListener.html",
-          "hash": "+ApCkUt8bQUZAiLond3ARA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Input.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Input.html",
-          "hash": "3QPLvTu5nLcfQusDK4TnqQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.Input.Handlers.BaseInputHandlerInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.Input.Handlers.BaseInputHandlerInspector.html",
-          "hash": "/ydZGsIioyIcpwQdc8Yu6w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.Input.Handlers.ControllerPoseSynchronizerInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.Input.Handlers.ControllerPoseSynchronizerInspector.html",
-          "hash": "fbz1j4J/VFUgg6ss6GsdOQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.Input.Handlers.DefaultMixedRealityControllerVisualizerInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.Input.Handlers.DefaultMixedRealityControllerVisualizerInspector.html",
-          "hash": "abOKkHgajkXo90VWu5ePqg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.Input.Handlers.PointerClickHandlerInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.Input.Handlers.PointerClickHandlerInspector.html",
-          "hash": "+qlufIz355Desi+hR8mBqA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.Input.Handlers.SpeechInputHandlerInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.Input.Handlers.SpeechInputHandlerInspector.html",
-          "hash": "YRsR8Lk4CKT+jwiaGYiIIg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.Input.Handlers.WindowsMixedRealityControllerVisualizerInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.Input.Handlers.WindowsMixedRealityControllerVisualizerInspector.html",
-          "hash": "uyBNICCOwsbw0ARXv4lRsQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.Input.Handlers.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.Input.Handlers.html",
-          "hash": "7RNlrVCVqY1xbZfILGKncg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.UX.Collections.BaseCollectionInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.UX.Collections.BaseCollectionInspector.html",
-          "hash": "Kd1oBRNn1j17djReGdS62g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.UX.Collections.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.UX.Collections.html",
-          "hash": "tgL2UfO0rkcBjsaZ1txaxg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.UX.Pointers.BaseControllerPointerInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.UX.Pointers.BaseControllerPointerInspector.html",
-          "hash": "7G4U+oNJCBJpRdPN776YWw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.UX.Pointers.LinePointerInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.UX.Pointers.LinePointerInspector.html",
-          "hash": "+LDsqULxROy9UU7pwH7mRw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.UX.Pointers.MousePointerInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.UX.Pointers.MousePointerInspector.html",
-          "hash": "flth7cRZNu9clFUo0NmTHg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.UX.Pointers.ParabolicTeleportPointerInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.UX.Pointers.ParabolicTeleportPointerInspector.html",
-          "hash": "dwlh3u0QPiNwXlKAhxlCfw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.UX.Pointers.TeleportPointerInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.UX.Pointers.TeleportPointerInspector.html",
-          "hash": "h3BH0+taw4JcONm+8NDu/A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.UX.Pointers.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.UX.Pointers.html",
-          "hash": "zU2XnrqHiWhZ31j3n7Vdxg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.Utilities.Solvers.ControllerFinderInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.Utilities.Solvers.ControllerFinderInspector.html",
-          "hash": "GdbPmx2FWJTYpjEc1GjR/w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.Utilities.Solvers.InBetweenEditor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.Utilities.Solvers.InBetweenEditor.html",
-          "hash": "pFn9EEI+amHUCwK1u+WNZQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.Utilities.Solvers.SolverHandlerInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.Utilities.Solvers.SolverHandlerInspector.html",
-          "hash": "6uDHegiNtyWp7xhxrsfa5g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.Inspectors.Utilities.Solvers.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.Inspectors.Utilities.Solvers.html",
-          "hash": "yYjnCOYZGlI45MvSvOS6Ng=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.BoundingBox.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.BoundingBox.html",
-          "hash": "jkSHg3XH7TcY0xI2CYEC+A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Collections.BaseObjectCollection.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Collections.BaseObjectCollection.html",
-          "hash": "QRqoCLzYF/MEnc3bgpXeHg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Collections.GridObjectCollection.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Collections.GridObjectCollection.html",
-          "hash": "3iLhC8vQj5FPhxxWr5RHCA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Collections.LayoutOrderType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Collections.LayoutOrderType.html",
-          "hash": "ZXUUN+jhId50wNR3CqopNg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Collections.ObjectCollectionNode.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Collections.ObjectCollectionNode.html",
-          "hash": "jqk2IDDaNY5kHPfRLUSImw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Collections.ObjectOrientationSurfaceType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Collections.ObjectOrientationSurfaceType.html",
-          "hash": "MdstgzsdrWpVMZdXzuf3zQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Collections.ScatterObjectCollection.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Collections.ScatterObjectCollection.html",
-          "hash": "TEbxlCXcNzBnJW82QVinSA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Collections.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Collections.html",
-          "hash": "VedknIv3mgeme/Z4pQuA5g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Controllers.DefaultMixedRealityControllerVisualizer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Controllers.DefaultMixedRealityControllerVisualizer.html",
-          "hash": "YE46Rwtr6Ir3mWeuhvJEdg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.html",
-          "hash": "z+yxVU9x6geJKvevM8hGSg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Controllers.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Controllers.html",
-          "hash": "jt1TSnZbskL5LXUHyfOZrg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Cursors.AnimatedCursor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Cursors.AnimatedCursor.html",
-          "hash": "1H5Vkdpv6X3vU6NxdC3+2g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Cursors.BaseCursor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Cursors.BaseCursor.html",
-          "hash": "av+0KmGmrYchSlruMM5e9w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Cursors.CursorModifier.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Cursors.CursorModifier.html",
-          "hash": "mcyeGoM/LRgsxnWRyHMoPg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Cursors.InteractiveMeshCursor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Cursors.InteractiveMeshCursor.html",
-          "hash": "F9WCJSMp8d3oIShQo5n2JQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Cursors.MeshCursor.MeshCursorDatum.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Cursors.MeshCursor.MeshCursorDatum.html",
-          "hash": "MHs4WYs4WZCM17GDyPF1BQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Cursors.MeshCursor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Cursors.MeshCursor.html",
-          "hash": "evFAFFmLPwksZuHGfos+TA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Cursors.ObjectCursor.ObjectCursorDatum.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Cursors.ObjectCursor.ObjectCursorDatum.html",
-          "hash": "oupE19PFRc5zA6p2s9l+zQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Cursors.ObjectCursor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Cursors.ObjectCursor.html",
-          "hash": "4af8MaOKaDR+B2vTTAu+ZA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Cursors.SpriteCursor.SpriteCursorDatum.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Cursors.SpriteCursor.SpriteCursorDatum.html",
-          "hash": "Poo79jRRZZ7jT7iTih+4lQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Cursors.SpriteCursor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Cursors.SpriteCursor.html",
-          "hash": "YIq621gf/XEWF5HMvEEr4g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Cursors.TeleportCursor.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Cursors.TeleportCursor.html",
-          "hash": "tTR0vvQq4Jl1qCka1O/I0w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Cursors.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Cursors.html",
-          "hash": "osUB7QjLT0a8PiSw9vL7pQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Pointers.BaseControllerPointer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html",
-          "hash": "ioZXz5KiEJlMEqLz+baEgw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Pointers.LinePointer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Pointers.LinePointer.html",
-          "hash": "YJIoYO0tbS7RISF+fxEFUA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Pointers.MousePointer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Pointers.MousePointer.html",
-          "hash": "j35SjKeK5OIdhEukWaNYyQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Pointers.ParabolicTeleportPointer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Pointers.ParabolicTeleportPointer.html",
-          "hash": "D/HIk6wHiRVPaZna6KfORw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Pointers.TeleportPointer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Pointers.TeleportPointer.html",
-          "hash": "7T8X//0wPvFlGHuq+zFBjQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Pointers.TouchPointer.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Pointers.TouchPointer.html",
-          "hash": "KD4C8CkAAAEnuIAMdC2eFQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Pointers.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Pointers.html",
-          "hash": "8wVI6MoMZ0xUxYMCLFKjLw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Receivers.InteractionReceiver.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Receivers.InteractionReceiver.html",
-          "hash": "qdwF0Sabn1IG0lsPNKKbvA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Receivers.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Receivers.html",
-          "hash": "rWPwqoQqe5YH1aPx9rlllg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.ConnectorFollowType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.ConnectorFollowType.html",
-          "hash": "9tNe5PC7n5TFv4o1vBiTZQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.ConnectorOrientType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.ConnectorOrientType.html",
-          "hash": "iRg71LruYThoLlDXYFrC6w=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.ConnectorPivotDirectionType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.ConnectorPivotDirectionType.html",
-          "hash": "9YsUUNdVR772VSLUYsuYrA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.ConnectorPivotModeType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.ConnectorPivotModeType.html",
-          "hash": "Sd79IrQZZzHw0ogQP2WXLQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.DisplayModeType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.DisplayModeType.html",
-          "hash": "ER3IKEZe/ylgMurc3Oam/g=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.ToolTip.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.ToolTip.html",
-          "hash": "LAGtLtgaYo9CHk7r1Ib/NA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.ToolTipAttachPointType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.ToolTipAttachPointType.html",
-          "hash": "En1COdh2oblgWQede7ofeg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.ToolTipBackground.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.ToolTipBackground.html",
-          "hash": "h2LmaQWO5SDei7/DEIstuQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.ToolTipBackgroundBlob.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.ToolTipBackgroundBlob.html",
-          "hash": "mfqcgfCTHikMdklihLq3sg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.ToolTipBackgroundCorners.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.ToolTipBackgroundCorners.html",
-          "hash": "cZU/aFGMNAwnIs7iEVrrVA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.ToolTipBackgroundMesh.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.ToolTipBackgroundMesh.html",
-          "hash": "vskXkxfZ71TPHyB9uwe9Rg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.ToolTipConnector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.ToolTipConnector.html",
-          "hash": "Y+KEsFNUTq0oogM9CPQwmQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.ToolTipSpawner.RemainType.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.ToolTipSpawner.RemainType.html",
-          "hash": "mVQynEByZlT3uU7PSKkhGw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.ToolTipSpawner.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.ToolTipSpawner.html",
-          "hash": "xtiiEmPoHnC3tEQpb86qIA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.ToolTipUtility.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.ToolTipUtility.html",
-          "hash": "Lx7oeWUCWRIdcgrgvQ1o2A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.ToolTips.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.ToolTips.html",
-          "hash": "ZhUrHmJVU+ZNL6k56jnOhg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Utilities.Billboard.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Utilities.Billboard.html",
-          "hash": "Dx72+6QAOQ7ZjD2mx4hB5A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Utilities.InteractableHighlight.HighlightedMaterialStyle.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Utilities.InteractableHighlight.HighlightedMaterialStyle.html",
-          "hash": "Du7P6JkLSG9s58yBwDtHoQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Utilities.InteractableHighlight.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Utilities.InteractableHighlight.html",
-          "hash": "ViUNo3vyHFDQa0KYQ15n0A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.Utilities.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.Utilities.html",
-          "hash": "d1+pRkS57+RJue0bxEoAjA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.SDK.UX.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.SDK.UX.html",
-          "hash": "Ca5Hi4R9DnTGK0Zw/xXniA=="
         }
       },
       "is_incremental": false,
@@ -5937,7 +4857,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.MixedRealityToolkit.html",
-          "hash": "54W1MZGv8S77GKop/7OhMA=="
+          "hash": "f8ulEIMX5Z2AgPDw02paOw=="
         }
       },
       "is_incremental": false,
@@ -8236,162 +7156,6 @@
       "version": ""
     },
     {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider.html",
-          "hash": "VtItoMZl4L3hbPb7Dy4YBQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityController.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityController.html",
-          "hash": "xRuD9TX0CCbR314JOnfZVw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider.html",
-          "hash": "l2O05EqkfLt8u8/DozjzKw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.WindowsMixedReality.Controllers.WindowsSpeechDataProvider.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.WindowsMixedReality.Controllers.WindowsSpeechDataProvider.html",
-          "hash": "mi9SOgDgQSkWJ2Ph5EnWiw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.WindowsMixedReality.Controllers.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.WindowsMixedReality.Controllers.html",
-          "hash": "3ChstGsQFrw/9VYXnOnezw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.WindowsMixedReality.Profiles.Inspectors.WindowsMixedRealityMotionControllerMappingProfileInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.WindowsMixedReality.Profiles.Inspectors.WindowsMixedRealityMotionControllerMappingProfileInspector.html",
-          "hash": "ozbi7Hn47kdddd47RRDelw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.WindowsMixedReality.Profiles.Inspectors.WindowsMixedRealitySpatialMeshObserverProfileInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.WindowsMixedReality.Profiles.Inspectors.WindowsMixedRealitySpatialMeshObserverProfileInspector.html",
-          "hash": "Jkdqov2YEGoMs+oKYKnlIw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.WindowsMixedReality.Profiles.Inspectors.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.WindowsMixedReality.Profiles.Inspectors.html",
-          "hash": "3H5C7zDIaPnKAomIGi3HBA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityMotionControllerMappingProfile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityMotionControllerMappingProfile.html",
-          "hash": "Pm4jqayWDbKScBMiKbn47A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.WindowsMixedReality.Profiles.WindowsMixedRealitySpatialMeshObserverProfile.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.WindowsMixedReality.Profiles.WindowsMixedRealitySpatialMeshObserverProfile.html",
-          "hash": "D8Uetm+fWm5BjOAay/On9A=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.WindowsMixedReality.Profiles.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.WindowsMixedReality.Profiles.html",
-          "hash": "v+qSBYu6u0RSxFBxoONvCA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.WindowsMixedReality.SpatialObservers.WindowsMixedRealitySpatialMeshObserver.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.WindowsMixedReality.SpatialObservers.WindowsMixedRealitySpatialMeshObserver.html",
-          "hash": "v7j7PLh2BeqlzRgVMnxGuQ=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.WindowsMixedReality.SpatialObservers.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.WindowsMixedReality.SpatialObservers.html",
-          "hash": "OjBkAte5D2xfGcGWEGG4pA=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
       "type": "Conceptual",
       "source_relative_path": "../api/index.md",
       "output": {
@@ -8409,7 +7173,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "mcBqcQ11GYfhUlDEGw5a0A=="
+          "hash": "HdzqsOw6KhOV14nF+ShI4g=="
         }
       },
       "is_incremental": false,
@@ -8455,7 +7219,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 692,
+          "total_file_count": 589,
           "skipped_file_count": 0
         }
       }

@@ -25,10 +25,10 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         static SymbolicLinker()
         {
             EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGui;
-            EditorApplication.delayCall += () => RunSync();
+            RunSync();
         }
 
-        private const string LinkIconText = "<=link=>";
+        private const string LINK_ICON_TEXT = "<=link=>";
         private const string REGEX_BRACKETS = @"\{(.*?)\}";
         private const FileAttributes FOLDER_SYMLINK_ATTRIBUTES = FileAttributes.ReparsePoint;
 
@@ -46,6 +46,15 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         internal static string ProjectRoot => GitUtilities.RepositoryRootDir;
 
         private static bool isRunningSync;
+
+        /// <summary>
+        /// Debug the symbolic linker utility.
+        /// </summary>
+        public static bool DebugEnabled
+        {
+            get => MixedRealityPreferences.DebugPackageInfo;
+            set => MixedRealityPreferences.DebugPackageInfo = value;
+        }
 
         /// <summary>
         /// The current settings for the symbolic links.
@@ -73,9 +82,14 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// <param name="forceUpdate">Bypass the auto load check and force the packages to be updated, even if they're up to date.</param>
         public static async void RunSync(bool forceUpdate = false)
         {
-            if (isRunningSync ||
-                (!MixedRealityPreferences.AutoLoadSymbolicLinks && !forceUpdate))
+            if (isRunningSync)
             {
+                return;
+            }
+
+            if (!MixedRealityPreferences.AutoLoadSymbolicLinks && !forceUpdate)
+            {
+                MixedRealityPackageUtilities.CheckPackageManifest();
                 return;
             }
 
@@ -83,81 +97,80 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             {
                 MixedRealityPreferences.AutoLoadSymbolicLinks = false;
                 Debug.LogWarning("Symbolic link settings not found!");
+                MixedRealityPackageUtilities.CheckPackageManifest();
                 return;
             }
 
             isRunningSync = true;
             EditorApplication.LockReloadAssemblies();
 
-            if (Application.isBatchMode)
+            if (DebugEnabled)
             {
                 Debug.Log("Verifying project's symbolic links...");
             }
 
-            if (Settings.SymbolicLinks.Count != 1 ||
-                !string.IsNullOrEmpty(Settings.SymbolicLinks[0].SourceRelativePath))
+            var symbolicLinks = new List<SymbolicLink>(Settings.SymbolicLinks);
+
+            foreach (var link in symbolicLinks)
             {
-                var symbolicLinks = new List<SymbolicLink>(Settings.SymbolicLinks);
+                if (string.IsNullOrEmpty(link.SourceRelativePath)) { continue; }
 
-                foreach (var link in symbolicLinks)
+                var targetAbsolutePath = $"{ProjectRoot}{link.TargetRelativePath}";
+                var sourceAbsolutePath = $"{ProjectRoot}{link.SourceRelativePath}";
+
+                if (link.IsActive)
                 {
-                    var targetAbsolutePath = $"{ProjectRoot}{link.TargetRelativePath}";
-                    var sourceAbsolutePath = $"{ProjectRoot}{link.SourceRelativePath}";
+                    await VerifySymbolicLink(targetAbsolutePath, sourceAbsolutePath);
+                }
 
+                if (Directory.Exists(targetAbsolutePath))
+                {
+                    // If we already have the directory in our project, then skip.
+                    if (link.IsActive) { continue; }
+
+                    // Check to see if there are any directories that don't belong and remove them.
+                    DisableLink(link.TargetRelativePath);
+                    continue;
+                }
+
+                if (!link.IsActive) { continue; }
+
+                if (Directory.Exists(sourceAbsolutePath))
+                {
                     if (link.IsActive)
                     {
-                        await VerifySymbolicLink(targetAbsolutePath, sourceAbsolutePath);
+                        AddLink(sourceAbsolutePath, targetAbsolutePath);
                     }
 
-                    if (Directory.Exists(targetAbsolutePath))
-                    {
-                        // If we already have the directory in our project, then skip.
-                        if (link.IsActive) { continue; }
-
-                        // Check to see if there are any directories that don't belong and remove them.
-                        DisableLink(link.TargetRelativePath);
-                        continue;
-                    }
-
-                    if (!link.IsActive) { continue; }
-
-                    if (Directory.Exists(sourceAbsolutePath))
-                    {
-                        if (link.IsActive)
-                        {
-                            AddLink(sourceAbsolutePath, targetAbsolutePath);
-                        }
-
-                        continue;
-                    }
-
-                    // Make sure all of our Submodules are initialized and updated.
-                    // if they didn't get updated then we probably have some pending changes so we will skip.
-                    if (!GitUtilities.UpdateSubmodules()) { continue; }
-
-                    if (Directory.Exists(sourceAbsolutePath))
-                    {
-                        if (link.IsActive)
-                        {
-                            AddLink(sourceAbsolutePath, targetAbsolutePath);
-                        }
-
-                        continue;
-                    }
-
-                    Debug.LogError($"Unable to find symbolic link source path: {sourceAbsolutePath}");
-                    RemoveLink(link.SourceRelativePath, link.TargetRelativePath);
+                    continue;
                 }
 
-                if (Application.isBatchMode)
+                // Make sure all of our Submodules are initialized and updated.
+                // if they didn't get updated then we probably have some pending changes so we will skip.
+                if (!GitUtilities.UpdateSubmodules()) { continue; }
+
+                if (Directory.Exists(sourceAbsolutePath))
                 {
-                    Debug.Log("Project symbolic links verified.");
+                    if (link.IsActive)
+                    {
+                        AddLink(sourceAbsolutePath, targetAbsolutePath);
+                    }
+
+                    continue;
                 }
 
-                EditorUtility.SetDirty(Settings);
-                AssetDatabase.SaveAssets();
-                AssetDatabase.Refresh();
+                Debug.LogError($"Unable to find symbolic link source path: {sourceAbsolutePath}");
+                RemoveLink(link.SourceRelativePath, link.TargetRelativePath);
             }
+
+            if (DebugEnabled)
+            {
+                Debug.Log("Project symbolic links verified.");
+            }
+
+            EditorUtility.SetDirty(Settings);
+            AssetDatabase.SaveAssets();
+            AssetDatabase.Refresh();
 
             EditorApplication.UnlockReloadAssemblies();
             isRunningSync = false;
@@ -274,7 +287,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
                 if ((attributes & FOLDER_SYMLINK_ATTRIBUTES) != FOLDER_SYMLINK_ATTRIBUTES) { return; }
 
-                GUI.Label(rect, LinkIconText, SymlinkMarkerStyle);
+                GUI.Label(rect, LINK_ICON_TEXT, SymlinkMarkerStyle);
 
                 if (Settings.SymbolicLinks.Any(link => link.TargetRelativePath.Contains(path))) { return; }
 
@@ -372,16 +385,31 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         private static async Task VerifySymbolicLink(string targetAbsolutePath, string sourceAbsolutePath)
         {
             var pathToVerify = targetAbsolutePath.Substring(0, targetAbsolutePath.LastIndexOf("/", StringComparison.Ordinal));
-            var processResult = await new Process().RunAsync($"/C powershell.exe \"& dir '{pathToVerify}' | select Target, LinkType | where {{ $_.LinkType -eq 'SymbolicLink' }} | Format-Table -HideTableHeaders -Wrap\"");
+            var args = $"/C powershell.exe \"& dir '{pathToVerify}' | select Target, LinkType | where {{ $_.LinkType -eq 'SymbolicLink' }} | Format-Table -HideTableHeaders -Wrap\"";
 
-            if (processResult.ExitCode != 0)
+            bool success;
+            string[] processOutput;
+
+            if (Application.isBatchMode)
+            {
+                success = new Process().Run(args, out var output);
+                processOutput = new[] { output };
+            }
+            else
+            {
+                var result = await new Process().RunAsync(args);
+                success = result.ExitCode == 0;
+                processOutput = result.Output;
+            }
+
+            if (!success)
             {
                 Debug.LogError($"Failed to enumerate symbolic links associated to {pathToVerify}");
                 return;
             }
 
             var isValid = false;
-            var matches = BracketRegex.Matches(string.Join("\n", processResult.Output));
+            var matches = BracketRegex.Matches(string.Join("\n", processOutput));
 
             foreach (Match match in matches)
             {

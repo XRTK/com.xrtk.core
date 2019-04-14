@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace XRTK.Inspectors.Utilities.Packages
@@ -9,6 +10,11 @@ namespace XRTK.Inspectors.Utilities.Packages
     [Serializable]
     public struct MixedRealityPackageInfo
     {
+        /// <summary>
+        /// The Unity <see cref="PackageInfo"/>
+        /// </summary>
+        public PackageInfo PackageInfo { get; internal set; }
+
         [SerializeField]
         [Tooltip("The package name\n\"com.company.product\"")]
         private string name;

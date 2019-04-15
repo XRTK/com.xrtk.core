@@ -60,13 +60,13 @@ namespace XRTK.Definitions
         private Color backgroundColorTransparentDisplay = Color.clear;
 
         [SerializeField]
-        [Tooltip("Set the desired quality for your application for HoloLens.")]
-        private int holoLensQualityLevel = 0;
+        [Tooltip("Set the desired quality for your application for transparent display.")]
+        private int transparentQualityLevel = 0;
 
         private DisplayType currentDisplayType;
 
         /// <summary>
-        /// Is the current camera displaying on an Opaque (AR) device or a VR / immersive device
+        /// Is the current camera displaying on an AR device or VR device.
         /// </summary>
         public bool IsOpaque
         {
@@ -98,7 +98,7 @@ namespace XRTK.Definitions
             CameraCache.Main.clearFlags = cameraClearFlagsTransparentDisplay;
             CameraCache.Main.backgroundColor = backgroundColorTransparentDisplay;
             CameraCache.Main.nearClipPlane = nearClipPlaneTransparentDisplay;
-            SetQuality(holoLensQualityLevel);
+            SetQuality(transparentQualityLevel);
         }
 
         private static void SetQuality(int level)

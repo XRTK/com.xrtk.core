@@ -92,6 +92,9 @@ namespace XRTK.Utilities.Build
 
             switch (buildInfo.BuildTarget)
             {
+                case BuildTarget.Lumin:
+                    buildInfo.OutputDirectory = $"{buildInfo.OutputDirectory}/{PlayerSettings.productName}.mpk";
+                    break;
                 case BuildTarget.Android:
                     buildInfo.OutputDirectory = $"{buildInfo.OutputDirectory}/{PlayerSettings.productName}.apk";
                     break;

@@ -20,6 +20,7 @@ namespace XRTK.Providers.Controllers.OpenVR
         /// </summary>
         /// <param name="name"></param>
         /// <param name="priority"></param>
+        /// <param name="profile"></param>
         public OpenVRDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {

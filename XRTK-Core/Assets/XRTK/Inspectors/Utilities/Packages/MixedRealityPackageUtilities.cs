@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -18,7 +17,7 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// <summary>
         /// The Mixed Reality Toolkit's upm package settings.
         /// </summary>
-        public static MixedRealityPackageSettings PackageSettings
+        private static MixedRealityPackageSettings PackageSettings
         {
             get
             {
@@ -63,7 +62,8 @@ namespace XRTK.Inspectors.Utilities.Packages
         {
             if (IsRunningCheck ||
                 Application.isPlaying ||
-                Application.isBatchMode)
+                Application.isBatchMode ||
+                PackageSettings == null)
             {
                 return;
             }
@@ -75,26 +75,22 @@ namespace XRTK.Inspectors.Utilities.Packages
                 Debug.Log("Checking packages...");
             }
 
-            var installedPackages = await GetCurrentMixedRealityPackagesAsync();
+            Tuple<MixedRealityPackageInfo, bool, bool>[] installedPackages;
+
+            try
+            {
+                installedPackages = await GetCurrentMixedRealityPackagesAsync();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                IsRunningCheck = false;
+                return;
+            }
 
             foreach (var installedPackage in installedPackages)
             {
-                (MixedRealityPackageInfo package, bool isEnabled, bool isInstalled) = installedPackage;
-
-                if (DebugEnabled)
-                {
-                    Debug.Log($"{package.Name}_enabled == {isEnabled}");
-                }
-
-                if (package.IsRequiredPackage && !isInstalled ||
-                    (package.IsDefaultPackage && isEnabled && !isInstalled))
-                {
-                    await AddPackage(package);
-                }
-                else if (!isEnabled && isInstalled)
-                {
-                    await RemovePackage(package);
-                }
+                CheckPackage(installedPackage);
             }
 
             if (DebugEnabled)
@@ -105,17 +101,59 @@ namespace XRTK.Inspectors.Utilities.Packages
             IsRunningCheck = false;
         }
 
+        private static async void CheckPackage(Tuple<MixedRealityPackageInfo, bool, bool> installedPackage)
+        {
+            (MixedRealityPackageInfo package, bool isEnabled, bool isInstalled) = installedPackage;
+
+            if (DebugEnabled)
+            {
+                Debug.Log($"{package.Name}_enabled == {isEnabled}");
+            }
+
+            if (package.IsRequiredPackage && !isInstalled ||
+                (package.IsDefaultPackage && isEnabled && !isInstalled))
+            {
+                try
+                {
+                    await AddPackageAsync(package);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
+            }
+            else if (!isEnabled && isInstalled)
+            {
+                try
+                {
+                    await RemovePackageAsync(package);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
+            }
+        }
+
         /// <summary>
         /// Validates the currently installed upm xrtk packages.
         /// </summary>
         internal static async void ValidatePackages()
         {
-            await GetCurrentMixedRealityPackagesAsync();
+            try
+            {
+                await GetCurrentMixedRealityPackagesAsync();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"{e.Message}\n{e.StackTrace}");
+            }
         }
 
         /// <summary>
         /// Returns the currently installed upm xrtk packages.
         /// </summary>
+        /// <exception cref="TimeoutException">A <see cref="TimeoutException"/> can occur if the packages are not returned in 10 seconds.</exception>
         internal static async Task<Tuple<MixedRealityPackageInfo, bool, bool>[]> GetCurrentMixedRealityPackagesAsync()
         {
             var packageCount = PackageSettings.MixedRealityPackages.Length;
@@ -125,7 +163,7 @@ namespace XRTK.Inspectors.Utilities.Packages
             var validatedPackages = new List<MixedRealityPackageValidation>(5);
             var upmPackageListRequest = Client.List(true);
 
-            await new WaitUntil(() => upmPackageListRequest.Status != StatusCode.InProgress);
+            await upmPackageListRequest.WaitUntil(request => request.IsCompleted);
 
             foreach (var guid in validationFiles)
             {
@@ -149,8 +187,8 @@ namespace XRTK.Inspectors.Utilities.Packages
             foreach (var package in PackageSettings.MixedRealityPackages)
             {
                 var upmPackage = upmPackageListRequest.Result?.FirstOrDefault(packageInfo => packageInfo.name.Equals(package.Name));
-                var validPackages = validatedPackages.Where(validation => validation.PackageName.Equals(package.Name));
-                var validationCount = validPackages.Count();
+                var validPackages = validatedPackages.Where(validation => validation.PackageName.Equals(package.Name)).ToList();
+                var validationCount = validPackages.Count;
 
                 if (DebugEnabled)
                 {
@@ -160,7 +198,22 @@ namespace XRTK.Inspectors.Utilities.Packages
                 if (validationCount > 0)
                 {
                     EditorPreferences.Set($"{package.Name}_enabled", true);
-                    await RemovePackage(package);
+
+                    if (validPackages.Count == 1 &&
+                        !validPackages[0].IsMainProjectAsset)
+                    {
+                        continue;
+                    }
+
+                    try
+                    {
+                        await RemovePackageAsync(package);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                    }
+
                     continue;
                 }
 
@@ -187,10 +240,10 @@ namespace XRTK.Inspectors.Utilities.Packages
             return currentPackages;
         }
 
-        private static async Task AddPackage(MixedRealityPackageInfo packageInfo)
+        private static async Task AddPackageAsync(MixedRealityPackageInfo packageInfo)
         {
             var addRequest = Client.Add($"{packageInfo.Name}@{packageInfo.Uri}");
-            await new WaitUntil(() => addRequest.Status != StatusCode.InProgress);
+            await addRequest.WaitUntil(request => request.IsCompleted, timeout: 30);
 
             if (addRequest.Status == StatusCode.Success)
             {
@@ -200,20 +253,6 @@ namespace XRTK.Inspectors.Utilities.Packages
                 }
 
                 packageInfo.PackageInfo = addRequest.Result;
-
-                // HACK to remove submodules
-                var hash = GetRevisionHash(packageInfo);
-                var submodulesPath = $"{Directory.GetParent(Application.dataPath).FullName}\\Library\\PackageCache\\{packageInfo.Name}@{hash}\\Submodules";
-
-                if (File.Exists(submodulesPath))
-                {
-                    if (DebugEnabled)
-                    {
-                        Debug.Log($"Attempting to delete submodule: {submodulesPath}");
-                    }
-
-                    File.Delete(submodulesPath);
-                }
             }
             else
             {
@@ -221,10 +260,10 @@ namespace XRTK.Inspectors.Utilities.Packages
             }
         }
 
-        private static async Task RemovePackage(MixedRealityPackageInfo packageInfo)
+        private static async Task RemovePackageAsync(MixedRealityPackageInfo packageInfo)
         {
             var removeRequest = Client.Remove($"{packageInfo.Name}");
-            await new WaitUntil(() => removeRequest.Status != StatusCode.InProgress);
+            await removeRequest.WaitUntil(request => request.IsCompleted, timeout: 30);
 
             if (removeRequest.Status == StatusCode.Success)
             {
@@ -239,7 +278,7 @@ namespace XRTK.Inspectors.Utilities.Packages
             }
         }
 
-        public static string GetRevisionHash(MixedRealityPackageInfo packageInfo)
+        public static string GetRevisionHash(this MixedRealityPackageInfo packageInfo)
         {
             return GetRevisionHash(packageInfo.PackageInfo != null ? packageInfo.PackageInfo.resolvedPath : string.Empty);
         }

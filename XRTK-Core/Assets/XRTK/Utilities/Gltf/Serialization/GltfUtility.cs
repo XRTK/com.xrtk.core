@@ -19,8 +19,6 @@ namespace XRTK.Utilities.Gltf.Serialization
     {
         private const uint GltfMagicNumber = 0x46546C67;
 
-        private static readonly Awaiters Awaiters = new Awaiters();
-
         /// <summary>
         /// Imports a glTF object from the provided uri.
         /// </summary>
@@ -48,7 +46,7 @@ namespace XRTK.Utilities.Gltf.Serialization
             bool isGlb = false;
             bool loadAsynchronously = Application.isPlaying;
 
-            if (loadAsynchronously) { await Awaiters; }
+            if (loadAsynchronously) { await Awaiters.BackgroundThread; }
 
             if (uri.EndsWith(".gltf"))
             {
@@ -100,7 +98,7 @@ namespace XRTK.Utilities.Gltf.Serialization
                     glbData = UnityEngine.Windows.File.ReadAllBytes(uri);
                 }
 #else
-                using (FileStream stream = File.Open(uri, FileMode.Open))
+                using (var stream = File.Open(uri, FileMode.Open))
                 {
                     glbData = new byte[stream.Length];
 
@@ -139,7 +137,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 
             if (gltfObject.GameObjectReference == null)
             {
-                Debug.LogError("Failed to construct Gltf Object.");
+                Debug.LogError("Failed to construct glTF Object.");
             }
 
             if (loadAsynchronously) { await Awaiters.UnityMainThread; }

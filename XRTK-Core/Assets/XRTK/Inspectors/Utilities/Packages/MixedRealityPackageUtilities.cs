@@ -75,7 +75,18 @@ namespace XRTK.Inspectors.Utilities.Packages
                 Debug.Log("Checking packages...");
             }
 
-            var installedPackages = await GetCurrentMixedRealityPackagesAsync();
+            Tuple<MixedRealityPackageInfo, bool, bool>[] installedPackages;
+
+            try
+            {
+                installedPackages = await GetCurrentMixedRealityPackagesAsync();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                IsRunningCheck = false;
+                return;
+            }
 
             foreach (var installedPackage in installedPackages)
             {
@@ -116,6 +127,7 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// <summary>
         /// Returns the currently installed upm xrtk packages.
         /// </summary>
+        /// <exception cref="TimeoutException">A <see cref="TimeoutException"/> can occur if the packages are not returned in 10 seconds.</exception>
         internal static async Task<Tuple<MixedRealityPackageInfo, bool, bool>[]> GetCurrentMixedRealityPackagesAsync()
         {
             var packageCount = PackageSettings.MixedRealityPackages.Length;
@@ -125,7 +137,7 @@ namespace XRTK.Inspectors.Utilities.Packages
             var validatedPackages = new List<MixedRealityPackageValidation>(5);
             var upmPackageListRequest = Client.List(true);
 
-            await new WaitUntil(() => upmPackageListRequest.Status != StatusCode.InProgress);
+            await upmPackageListRequest.WaitUntil(request => request.IsCompleted);
 
             foreach (var guid in validationFiles)
             {

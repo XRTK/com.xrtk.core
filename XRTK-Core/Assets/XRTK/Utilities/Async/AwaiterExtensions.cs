@@ -54,7 +54,7 @@ namespace XRTK.Utilities.Async
             return GetAwaiterReturnVoid(instruction);
         }
 
-        public static SimpleCoroutineAwaiter GetAwaiter(this Awaiters instruction)
+        public static SimpleCoroutineAwaiter GetAwaiter(this BackgroundThread instruction)
         {
             return GetAwaiterReturnVoid(instruction);
         }

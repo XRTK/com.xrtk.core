@@ -78,6 +78,8 @@ namespace XRTK.Definitions
                 {
                     currentDisplayType = DisplayType.Transparent;
                 }
+#elif PLATFORM_LUMIN
+                currentDisplayType = DisplayType.Transparent;
 #endif
                 return currentDisplayType == DisplayType.Opaque;
             }

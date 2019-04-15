@@ -12953,19 +12953,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.IsRunningCheck
   nameWithType: MixedRealityPackageUtilities.IsRunningCheck
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
-  name: PackageSettings
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_PackageSettings
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
-  nameWithType: MixedRealityPackageUtilities.PackageSettings
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings*
-  name: PackageSettings
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_PackageSettings_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
-  nameWithType: MixedRealityPackageUtilities.PackageSettings
 - uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation
   name: MixedRealityPackageValidation
   href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.html
@@ -27377,12 +27364,12 @@ references:
   commentId: M:XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.WaitWhile)
   fullName: XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(UnityEngine.WaitWhile)
   nameWithType: AwaiterExtensions.GetAwaiter(WaitWhile)
-- uid: XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters)
-  name: GetAwaiter(Awaiters)
-  href: api/XRTK.Utilities.Async.AwaiterExtensions.html#XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_XRTK_Utilities_Async_AwaitYieldInstructions_Awaiters_
-  commentId: M:XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters)
-  fullName: XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters)
-  nameWithType: AwaiterExtensions.GetAwaiter(Awaiters)
+- uid: XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread)
+  name: GetAwaiter(BackgroundThread)
+  href: api/XRTK.Utilities.Async.AwaiterExtensions.html#XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_XRTK_Utilities_Async_AwaitYieldInstructions_BackgroundThread_
+  commentId: M:XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread)
+  fullName: XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread)
+  nameWithType: AwaiterExtensions.GetAwaiter(BackgroundThread)
 - uid: XRTK.Utilities.Async.AwaiterExtensions.GetAwaiter(XRTK.Utilities.Async.AwaitYieldInstructions.UnityMainThread)
   name: GetAwaiter(UnityMainThread)
   href: api/XRTK.Utilities.Async.AwaiterExtensions.html#XRTK_Utilities_Async_AwaiterExtensions_GetAwaiter_XRTK_Utilities_Async_AwaitYieldInstructions_UnityMainThread_
@@ -27546,57 +27533,79 @@ references:
   fullName.vb: XRTK.Utilities.Async.AwaiterExtensions.SimpleCoroutineAwaiter(Of T).System.Runtime.CompilerServices.INotifyCompletion.OnCompleted
   nameWithType: AwaiterExtensions.SimpleCoroutineAwaiter<T>.INotifyCompletion.OnCompleted
   nameWithType.vb: AwaiterExtensions.SimpleCoroutineAwaiter(Of T).System.Runtime.CompilerServices.INotifyCompletion.OnCompleted
+- uid: XRTK.Utilities.Async.Awaiters
+  name: Awaiters
+  href: api/XRTK.Utilities.Async.Awaiters.html
+  commentId: T:XRTK.Utilities.Async.Awaiters
+  fullName: XRTK.Utilities.Async.Awaiters
+  nameWithType: Awaiters
+- uid: XRTK.Utilities.Async.Awaiters.BackgroundThread
+  name: BackgroundThread
+  href: api/XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_BackgroundThread
+  commentId: P:XRTK.Utilities.Async.Awaiters.BackgroundThread
+  fullName: XRTK.Utilities.Async.Awaiters.BackgroundThread
+  nameWithType: Awaiters.BackgroundThread
+- uid: XRTK.Utilities.Async.Awaiters.BackgroundThread*
+  name: BackgroundThread
+  href: api/XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_BackgroundThread_
+  commentId: Overload:XRTK.Utilities.Async.Awaiters.BackgroundThread
+  isSpec: "True"
+  fullName: XRTK.Utilities.Async.Awaiters.BackgroundThread
+  nameWithType: Awaiters.BackgroundThread
+- uid: XRTK.Utilities.Async.Awaiters.UnityMainThread
+  name: UnityMainThread
+  href: api/XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_UnityMainThread
+  commentId: P:XRTK.Utilities.Async.Awaiters.UnityMainThread
+  fullName: XRTK.Utilities.Async.Awaiters.UnityMainThread
+  nameWithType: Awaiters.UnityMainThread
+- uid: XRTK.Utilities.Async.Awaiters.UnityMainThread*
+  name: UnityMainThread
+  href: api/XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_UnityMainThread_
+  commentId: Overload:XRTK.Utilities.Async.Awaiters.UnityMainThread
+  isSpec: "True"
+  fullName: XRTK.Utilities.Async.Awaiters.UnityMainThread
+  nameWithType: Awaiters.UnityMainThread
+- uid: XRTK.Utilities.Async.Awaiters.WaitUntil*
+  name: WaitUntil
+  href: api/XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil_
+  commentId: Overload:XRTK.Utilities.Async.Awaiters.WaitUntil
+  isSpec: "True"
+  fullName: XRTK.Utilities.Async.Awaiters.WaitUntil
+  nameWithType: Awaiters.WaitUntil
+- uid: XRTK.Utilities.Async.Awaiters.WaitUntil``1(``0,System.Func{``0,System.Boolean},System.Int32)
+  name: WaitUntil<T>(T, Func<T, Boolean>, Int32)
+  href: api/XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_
+  commentId: M:XRTK.Utilities.Async.Awaiters.WaitUntil``1(``0,System.Func{``0,System.Boolean},System.Int32)
+  name.vb: WaitUntil(Of T)(T, Func(Of T, Boolean), Int32)
+  fullName: XRTK.Utilities.Async.Awaiters.WaitUntil<T>(T, System.Func<T, System.Boolean>, System.Int32)
+  fullName.vb: XRTK.Utilities.Async.Awaiters.WaitUntil(Of T)(T, System.Func(Of T, System.Boolean), System.Int32)
+  nameWithType: Awaiters.WaitUntil<T>(T, Func<T, Boolean>, Int32)
+  nameWithType.vb: Awaiters.WaitUntil(Of T)(T, Func(Of T, Boolean), Int32)
 - uid: XRTK.Utilities.Async.AwaitYieldInstructions
   name: XRTK.Utilities.Async.AwaitYieldInstructions
   href: api/XRTK.Utilities.Async.AwaitYieldInstructions.html
   commentId: N:XRTK.Utilities.Async.AwaitYieldInstructions
   fullName: XRTK.Utilities.Async.AwaitYieldInstructions
   nameWithType: XRTK.Utilities.Async.AwaitYieldInstructions
-- uid: XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters
-  name: Awaiters
-  href: api/XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.html
-  commentId: T:XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters
-  fullName: XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters
-  nameWithType: Awaiters
-- uid: XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.BackgroundThread
+- uid: XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread
   name: BackgroundThread
-  href: api/XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.html#XRTK_Utilities_Async_AwaitYieldInstructions_Awaiters_BackgroundThread
-  commentId: P:XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.BackgroundThread
-  fullName: XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.BackgroundThread
-  nameWithType: Awaiters.BackgroundThread
-- uid: XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.BackgroundThread*
-  name: BackgroundThread
-  href: api/XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.html#XRTK_Utilities_Async_AwaitYieldInstructions_Awaiters_BackgroundThread_
-  commentId: Overload:XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.BackgroundThread
-  isSpec: "True"
-  fullName: XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.BackgroundThread
-  nameWithType: Awaiters.BackgroundThread
-- uid: XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.GetAwaiter
+  href: api/XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread.html
+  commentId: T:XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread
+  fullName: XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread
+  nameWithType: BackgroundThread
+- uid: XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread.GetAwaiter
   name: GetAwaiter()
-  href: api/XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.html#XRTK_Utilities_Async_AwaitYieldInstructions_Awaiters_GetAwaiter
-  commentId: M:XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.GetAwaiter
-  fullName: XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.GetAwaiter()
-  nameWithType: Awaiters.GetAwaiter()
-- uid: XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.GetAwaiter*
+  href: api/XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread.html#XRTK_Utilities_Async_AwaitYieldInstructions_BackgroundThread_GetAwaiter
+  commentId: M:XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread.GetAwaiter
+  fullName: XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread.GetAwaiter()
+  nameWithType: BackgroundThread.GetAwaiter()
+- uid: XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread.GetAwaiter*
   name: GetAwaiter
-  href: api/XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.html#XRTK_Utilities_Async_AwaitYieldInstructions_Awaiters_GetAwaiter_
-  commentId: Overload:XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.GetAwaiter
+  href: api/XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread.html#XRTK_Utilities_Async_AwaitYieldInstructions_BackgroundThread_GetAwaiter_
+  commentId: Overload:XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread.GetAwaiter
   isSpec: "True"
-  fullName: XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.GetAwaiter
-  nameWithType: Awaiters.GetAwaiter
-- uid: XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.UnityMainThread
-  name: UnityMainThread
-  href: api/XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.html#XRTK_Utilities_Async_AwaitYieldInstructions_Awaiters_UnityMainThread
-  commentId: P:XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.UnityMainThread
-  fullName: XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.UnityMainThread
-  nameWithType: Awaiters.UnityMainThread
-- uid: XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.UnityMainThread*
-  name: UnityMainThread
-  href: api/XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.html#XRTK_Utilities_Async_AwaitYieldInstructions_Awaiters_UnityMainThread_
-  commentId: Overload:XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.UnityMainThread
-  isSpec: "True"
-  fullName: XRTK.Utilities.Async.AwaitYieldInstructions.Awaiters.UnityMainThread
-  nameWithType: Awaiters.UnityMainThread
+  fullName: XRTK.Utilities.Async.AwaitYieldInstructions.BackgroundThread.GetAwaiter
+  nameWithType: BackgroundThread.GetAwaiter
 - uid: XRTK.Utilities.Async.AwaitYieldInstructions.UnityMainThread
   name: UnityMainThread
   href: api/XRTK.Utilities.Async.AwaitYieldInstructions.UnityMainThread.html

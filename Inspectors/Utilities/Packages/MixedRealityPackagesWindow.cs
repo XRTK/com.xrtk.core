@@ -12,6 +12,7 @@ namespace XRTK.Inspectors.Utilities.Packages
         private static Tuple<MixedRealityPackageInfo, bool, bool>[] packages;
         private static bool[] isPackageEnabled;
         private static bool[] isPackageInstalled;
+        private static bool isError;
 
         [MenuItem("Mixed Reality Toolkit/Packages...", true, 99)]
         static bool OpenPackagesWindowValidation()
@@ -28,9 +29,19 @@ namespace XRTK.Inspectors.Utilities.Packages
             Debug.Assert(window != null);
             window.titleContent = new GUIContent("XRTK UPM Packages");
             window.minSize = new Vector2(288, 320);
+            isError = false;
             window.ShowUtility();
 
-            packages = await MixedRealityPackageUtilities.GetCurrentMixedRealityPackagesAsync();
+            try
+            {
+                packages = await MixedRealityPackageUtilities.GetCurrentMixedRealityPackagesAsync();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                isError = true;
+                return;
+            }
 
             isPackageEnabled = new bool[packages.Length];
             isPackageInstalled = new bool[packages.Length];
@@ -52,7 +63,7 @@ namespace XRTK.Inspectors.Utilities.Packages
 
             if (packages == null)
             {
-                EditorGUILayout.LabelField("Gathering Package data...");
+                EditorGUILayout.LabelField(isError ? "Failed to find packages!" : "Gathering Package data...");
                 EditorGUILayout.EndVertical();
                 return;
             }

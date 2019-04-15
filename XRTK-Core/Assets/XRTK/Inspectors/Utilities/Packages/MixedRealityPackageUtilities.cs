@@ -17,7 +17,7 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// <summary>
         /// The Mixed Reality Toolkit's upm package settings.
         /// </summary>
-        public static MixedRealityPackageSettings PackageSettings
+        private static MixedRealityPackageSettings PackageSettings
         {
             get
             {
@@ -62,7 +62,8 @@ namespace XRTK.Inspectors.Utilities.Packages
         {
             if (IsRunningCheck ||
                 Application.isPlaying ||
-                Application.isBatchMode)
+                Application.isBatchMode ||
+                PackageSettings == null)
             {
                 return;
             }
@@ -186,8 +187,8 @@ namespace XRTK.Inspectors.Utilities.Packages
             foreach (var package in PackageSettings.MixedRealityPackages)
             {
                 var upmPackage = upmPackageListRequest.Result?.FirstOrDefault(packageInfo => packageInfo.name.Equals(package.Name));
-                var validPackages = validatedPackages.Where(validation => validation.PackageName.Equals(package.Name));
-                var validationCount = validPackages.Count();
+                var validPackages = validatedPackages.Where(validation => validation.PackageName.Equals(package.Name)).ToList();
+                var validationCount = validPackages.Count;
 
                 if (DebugEnabled)
                 {
@@ -198,9 +199,15 @@ namespace XRTK.Inspectors.Utilities.Packages
                 {
                     EditorPreferences.Set($"{package.Name}_enabled", true);
 
+                    if (validPackages.Count == 1 &&
+                        !validPackages[0].IsMainProjectAsset)
+                    {
+                        continue;
+                    }
+
                     try
                     {
-                        RemovePackage(package);
+                        await RemovePackageAsync(package);
                     }
                     catch (Exception e)
                     {
@@ -233,11 +240,6 @@ namespace XRTK.Inspectors.Utilities.Packages
             return currentPackages;
         }
 
-        private static async void AddPackage(MixedRealityPackageInfo packageInfo)
-        {
-            await AddPackageAsync(packageInfo);
-        }
-
         private static async Task AddPackageAsync(MixedRealityPackageInfo packageInfo)
         {
             var addRequest = Client.Add($"{packageInfo.Name}@{packageInfo.Uri}");
@@ -256,11 +258,6 @@ namespace XRTK.Inspectors.Utilities.Packages
             {
                 Debug.LogError($"Package Error({addRequest.Error?.errorCode}): {addRequest.Error?.message}");
             }
-        }
-
-        private static async void RemovePackage(MixedRealityPackageInfo packageInfo)
-        {
-            await RemovePackageAsync(packageInfo);
         }
 
         private static async Task RemovePackageAsync(MixedRealityPackageInfo packageInfo)

@@ -163,7 +163,7 @@ namespace XRTK.Inspectors.Utilities.Packages
             var validatedPackages = new List<MixedRealityPackageValidation>(5);
             var upmPackageListRequest = Client.List(true);
 
-            await upmPackageListRequest.WaitUntil(request => request.IsCompleted);
+            await upmPackageListRequest.WaitUntil(request => request.IsCompleted, timeout: 30);
 
             foreach (var guid in validationFiles)
             {

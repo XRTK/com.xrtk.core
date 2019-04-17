@@ -52,7 +52,7 @@ namespace XRTK.Utilities.Async
         /// <param name="element"></param>
         /// <param name="predicate">The predicate condition to meet.</param>
         /// <param name="timeout">The number of seconds before timing out and throwing an exception.</param>
-        /// <exception cref="TimeoutException">A <see cref="TimeoutException"/> can be thrown when the condition isn't satisfied after <see cref="timeout"/></exception>
+        /// <exception cref="TimeoutException">A <see cref="TimeoutException"/> can be thrown when the condition isn't satisfied after timeout.</exception>
         public static async Task WaitUntil<T>(this T element, Func<T, bool> predicate, int timeout = 10)
         {
             using (var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(timeout)))

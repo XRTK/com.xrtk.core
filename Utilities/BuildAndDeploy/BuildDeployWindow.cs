@@ -167,7 +167,7 @@ namespace XRTK.Utilities.Build
         private static float timeLastUpdatedBuilds;
 
         private string[] targetIps;
-        private string[] windowsSdkPaths;
+        private List<Version> windowsSdkVersions = new List<Version>();
 
         private Vector2 scrollPosition;
 
@@ -200,13 +200,7 @@ namespace XRTK.Utilities.Build
             titleContent = new GUIContent("Build Window");
             minSize = new Vector2(512, 256);
 
-            windowsSdkPaths = Directory.GetDirectories(@"C:\Program Files (x86)\Windows Kits\10\Lib");
-
-            for (int i = 0; i < windowsSdkPaths.Length; i++)
-            {
-                windowsSdkPaths[i] = windowsSdkPaths[i].Substring(windowsSdkPaths[i].LastIndexOf(@"\", StringComparison.Ordinal) + 1);
-            }
-
+            LoadWindowsSdkPaths();
             UpdateBuilds();
 
             currentConnectionInfoIndex = lastSessionConnectionInfoIndex;
@@ -411,30 +405,24 @@ namespace XRTK.Utilities.Build
         {
             GUILayout.BeginVertical();
 
-            // SDK and MS Build Version(and save setting, if it's changed)
+            // SDK and MS Build Version (and save setting, if it's changed)
             string currentSDKVersion = EditorUserBuildSettings.wsaMinUWPSDK;
 
-            int currentSDKVersionIndex = -1;
-
-            for (var i = 0; i < windowsSdkPaths.Length; i++)
+            Version chosenSDKVersion = null;
+            for (var i = 0; i < windowsSdkVersions.Count; i++)
             {
-                if (string.IsNullOrEmpty(currentSDKVersion))
+                // windowsSdkVersions is sorted in ascending order, so we always take
+                // the highest SDK version that is above our minimum.
+                if (windowsSdkVersions[i] >= UwpBuildDeployPreferences.MIN_SDK_VERSION)
                 {
-                    currentSDKVersionIndex = windowsSdkPaths.Length - 1;
-                }
-                else
-                {
-                    if (windowsSdkPaths[i].Equals(UwpBuildDeployPreferences.MIN_SDK_VERSION))
-                    {
-                        currentSDKVersionIndex = i;
-                    }
+                    chosenSDKVersion = windowsSdkVersions[i];
                 }
             }
 
             EditorGUILayout.HelpBox($"Minimum Required SDK Version: {currentSDKVersion}", MessageType.Info);
 
             // Throw exception if user has no Windows 10 SDK installed
-            if (currentSDKVersionIndex < 0)
+            if (chosenSDKVersion == null)
             {
                 if (IsValidSdkInstalled)
                 {
@@ -448,12 +436,11 @@ namespace XRTK.Utilities.Build
             }
 
             IsValidSdkInstalled = true;
+            var newSdkVersion = chosenSDKVersion.ToString();
 
-            string newSDKVersion = windowsSdkPaths[currentSDKVersionIndex];
-
-            if (!newSDKVersion.Equals(currentSDKVersion))
+            if (!newSdkVersion.Equals(currentSDKVersion))
             {
-                EditorUserBuildSettings.wsaMinUWPSDK = newSDKVersion;
+                EditorUserBuildSettings.wsaMinUWPSDK = newSdkVersion;
             }
 
             var curScriptingBackend = PlayerSettings.GetScriptingBackend(BuildTargetGroup.WSA);
@@ -1258,6 +1245,20 @@ namespace XRTK.Utilities.Build
 
             Debug.LogError($"Unable to find PackageFamilyName in manifest file ({manifest})");
             return string.Empty;
+        }
+
+        private void LoadWindowsSdkPaths()
+        {
+            var windowsSdkPaths = Directory.GetDirectories(@"C:\Program Files (x86)\Windows Kits\10\Lib");
+
+            foreach (var path in windowsSdkPaths)
+            {
+                windowsSdkVersions.Add(new Version(path.Substring(path.LastIndexOf(@"\", StringComparison.Ordinal) + 1)));
+            }
+
+            // There is no well-defined enumeration of Directory.GetDirectories, so the list
+            // is sorted prior to use later in this class.
+            windowsSdkVersions.Sort();
         }
 
         #endregion Utilities

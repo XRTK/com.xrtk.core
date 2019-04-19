@@ -77,12 +77,8 @@ namespace XRTK.Inspectors.Profiles
                 }
             }
 
-            if (!MixedRealityToolkit.ConfirmInitialized())
-            {
-                return;
-            }
-
-            if (!MixedRealityToolkit.HasActiveProfile)
+            if (!MixedRealityToolkit.ConfirmInitialized() ||
+                !MixedRealityToolkit.HasActiveProfile)
             {
                 return;
             }
@@ -135,9 +131,9 @@ namespace XRTK.Inspectors.Profiles
                                         "You can use the default profiles provided, copy and customize the default profiles, or create your own.", MessageType.Warning);
                 EditorGUILayout.BeginHorizontal();
 
-                if (GUILayout.Button("Copy & Customize"))
+                if (GUILayout.Button("Clone & Customize"))
                 {
-                    CreateCopyProfileValues();
+                    CreateCloneProfile();
                 }
 
                 if (GUILayout.Button("Create new profiles"))

@@ -91,9 +91,9 @@ namespace XRTK.Utilities.Build
             string solutionProjectPath = Path.GetFullPath(Path.Combine(storagePath, $@"{PlayerSettings.productName}.sln"));
 
             // Now do the actual appx build
-            var processResult = await new Process().StartProcessAsync(
-                msBuildPath,
+            var processResult = await new Process().RunAsync(
                 $"\"{solutionProjectPath}\" /t:{(buildInfo.RebuildAppx ? "Rebuild" : "Build")} /p:Configuration={buildInfo.Configuration} /p:Platform={buildInfo.BuildPlatform} /verbosity:m",
+                msBuildPath,
                 !Application.isBatchMode,
                 cancellationToken);
 
@@ -148,7 +148,7 @@ namespace XRTK.Utilities.Build
 
         private static async Task<string> FindMsBuildPathAsync()
         {
-            var result = await new Process().StartProcessAsync(
+            var result = await new Process().RunAsync(
                 new ProcessStartInfo
                 {
                     FileName = "cmd.exe",
@@ -330,11 +330,11 @@ namespace XRTK.Utilities.Build
                 EditorUserBuildSettings.wsaUWPSDK = windowsSdkPaths[windowsSdkPaths.Length - 1];
             }
 
-            string maxVersionTested = UwpBuildDeployPreferences.MIN_SDK_VERSION;
+            string maxVersionTested = EditorUserBuildSettings.wsaUWPSDK;
 
             if (string.IsNullOrWhiteSpace(EditorUserBuildSettings.wsaMinUWPSDK))
             {
-                EditorUserBuildSettings.wsaMinUWPSDK = UwpBuildDeployPreferences.MIN_SDK_VERSION;
+                EditorUserBuildSettings.wsaMinUWPSDK = UwpBuildDeployPreferences.MIN_SDK_VERSION.ToString();
             }
 
             string minVersion = EditorUserBuildSettings.wsaMinUWPSDK;

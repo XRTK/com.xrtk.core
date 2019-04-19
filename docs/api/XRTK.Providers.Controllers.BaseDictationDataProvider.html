@@ -84,7 +84,6 @@
     <div class="level3"><a class="xref" href="XRTK.Services.BaseDataProvider.html">BaseDataProvider</a></div>
     <div class="level4"><a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html">BaseControllerDataProvider</a></div>
     <div class="level5"><span class="xref">BaseDictationDataProvider</span></div>
-      <div class="level6"><a class="xref" href="XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider.html">WindowsDictationDataProvider</a></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
@@ -170,19 +169,19 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseDictationDataProvider__ctor_System_String_System_UInt32_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseDictationDataProvider.%23ctor(System.String%2CSystem.UInt32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseDictationDataProvider__ctor_System_String_System_UInt32_XRTK_Providers_Controllers_BaseMixedRealityControllerDataProviderProfile_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseDictationDataProvider.%23ctor(System.String%2CSystem.UInt32%2CXRTK.Providers.Controllers.BaseMixedRealityControllerDataProviderProfile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Providers/Controllers/BaseDictationDataProvider.cs/#L17">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Providers/Controllers/BaseDictationDataProvider.cs/#L18">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_BaseDictationDataProvider__ctor_" data-uid="XRTK.Providers.Controllers.BaseDictationDataProvider.#ctor*"></a>
-  <h4 id="XRTK_Providers_Controllers_BaseDictationDataProvider__ctor_System_String_System_UInt32_" data-uid="XRTK.Providers.Controllers.BaseDictationDataProvider.#ctor(System.String,System.UInt32)">BaseDictationDataProvider(String, UInt32)</h4>
+  <h4 id="XRTK_Providers_Controllers_BaseDictationDataProvider__ctor_System_String_System_UInt32_XRTK_Providers_Controllers_BaseMixedRealityControllerDataProviderProfile_" data-uid="XRTK.Providers.Controllers.BaseDictationDataProvider.#ctor(System.String,System.UInt32,XRTK.Providers.Controllers.BaseMixedRealityControllerDataProviderProfile)">BaseDictationDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)</h4>
   <div class="markdown level1 summary"><p>Constructor.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected BaseDictationDataProvider(string name, uint priority)</code></pre>
+    <pre><code class="lang-csharp hljs">protected BaseDictationDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -204,6 +203,11 @@
         <td><span class="parametername">priority</span></td>
         <td></td>
       </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Providers.Controllers.BaseMixedRealityControllerDataProviderProfile.html">BaseMixedRealityControllerDataProviderProfile</a></td>
+        <td><span class="parametername">profile</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <h3 id="properties">Properties
@@ -213,7 +217,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseDictationDataProvider_IsListening.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseDictationDataProvider.IsListening%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Providers/Controllers/BaseDictationDataProvider.cs/#L22">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Providers/Controllers/BaseDictationDataProvider.cs/#L26">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_BaseDictationDataProvider_IsListening_" data-uid="XRTK.Providers.Controllers.BaseDictationDataProvider.IsListening*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseDictationDataProvider_IsListening" data-uid="XRTK.Providers.Controllers.BaseDictationDataProvider.IsListening">IsListening</h4>
@@ -246,7 +250,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseDictationDataProvider_StartRecording_UnityEngine_GameObject_System_Single_System_Single_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecording(UnityEngine.GameObject%2CSystem.Single%2CSystem.Single%2CSystem.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Providers/Controllers/BaseDictationDataProvider.cs/#L25">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Providers/Controllers/BaseDictationDataProvider.cs/#L29">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_BaseDictationDataProvider_StartRecording_" data-uid="XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecording*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseDictationDataProvider_StartRecording_UnityEngine_GameObject_System_Single_System_Single_System_Int32_System_String_" data-uid="XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecording(UnityEngine.GameObject,System.Single,System.Single,System.Int32,System.String)">StartRecording(GameObject, Single, Single, Int32, String)</h4>
@@ -304,7 +308,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseDictationDataProvider_StartRecordingAsync_UnityEngine_GameObject_System_Single_System_Single_System_Int32_System_String_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecordingAsync(UnityEngine.GameObject%2CSystem.Single%2CSystem.Single%2CSystem.Int32%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Providers/Controllers/BaseDictationDataProvider.cs/#L30">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Providers/Controllers/BaseDictationDataProvider.cs/#L34">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_BaseDictationDataProvider_StartRecordingAsync_" data-uid="XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecordingAsync*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseDictationDataProvider_StartRecordingAsync_UnityEngine_GameObject_System_Single_System_Single_System_Int32_System_String_" data-uid="XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecordingAsync(UnityEngine.GameObject,System.Single,System.Single,System.Int32,System.String)">StartRecordingAsync(GameObject, Single, Single, Int32, String)</h4>
@@ -377,7 +381,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseDictationDataProvider_StopRecording.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecording%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Providers/Controllers/BaseDictationDataProvider.cs/#L36">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Providers/Controllers/BaseDictationDataProvider.cs/#L40">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_BaseDictationDataProvider_StopRecording_" data-uid="XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecording*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseDictationDataProvider_StopRecording" data-uid="XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecording">StopRecording()</h4>
@@ -393,7 +397,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_BaseDictationDataProvider_StopRecordingAsync.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecordingAsync%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Providers/Controllers/BaseDictationDataProvider.cs/#L41">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Providers/Controllers/BaseDictationDataProvider.cs/#L45">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_BaseDictationDataProvider_StopRecordingAsync_" data-uid="XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecordingAsync*"></a>
   <h4 id="XRTK_Providers_Controllers_BaseDictationDataProvider_StopRecordingAsync" data-uid="XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecordingAsync">StopRecordingAsync()</h4>
@@ -441,7 +445,7 @@
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
   <div>
-      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
   </div>
 </article>
           </div>

@@ -12,7 +12,11 @@ namespace XRTK.Providers.Controllers
         /// </summary>
         /// <param name="name"></param>
         /// <param name="priority"></param>
-        protected BaseSpeechDataProvider(string name, uint priority) : base(name, priority) { }
+        /// <param name="profile"></param>
+        protected BaseSpeechDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
+            : base(name, priority, profile)
+        {
+        }
 
         /// <inheritdoc />
         public virtual bool IsRecognitionActive { get; protected set; } = false;

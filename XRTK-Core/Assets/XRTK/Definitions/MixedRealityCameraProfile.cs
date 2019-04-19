@@ -12,7 +12,7 @@ namespace XRTK.Definitions
     /// is a transparent device or an occluded device.
     /// Based on those values, you can customize your camera and quality settings.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Camera Profile", fileName = "MixedRealityCameraProfile", order = (int)CreateProfileMenuItemIndices.Camera)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Camera Profile", fileName = "MixedRealityCameraProfile", order = (int)CreateProfileMenuItemIndices.Camera)]
     public class MixedRealityCameraProfile : BaseMixedRealityProfile
     {
         private enum DisplayType

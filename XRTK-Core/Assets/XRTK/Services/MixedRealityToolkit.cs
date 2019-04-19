@@ -445,12 +445,6 @@ namespace XRTK.Services
                         {
                             var spatialObserver = ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders[i];
 
-                            if (spatialObserver.Profile == null)
-                            {
-                                Debug.LogError($"Missing profile for {spatialObserver.SpatialObserverName}");
-                                continue;
-                            }
-
                             if (!CreateAndRegisterService<IMixedRealitySpatialObserverDataProvider>(
                                     spatialObserver.SpatialObserverType,
                                     spatialObserver.RuntimePlatform,
@@ -848,18 +842,6 @@ namespace XRTK.Services
                 return false;
             }
 
-            if (concreteType == null)
-            {
-                Debug.LogError($"Unable to register a service with a null concrete {typeof(T).Name} type.");
-                return false;
-            }
-
-            if (!typeof(IMixedRealityService).IsAssignableFrom(concreteType))
-            {
-                Debug.LogError($"Unable to register the {concreteType.Name} service. It does not implement {typeof(IMixedRealityService)}.");
-                return false;
-            }
-
 #if !UNITY_EDITOR
             if (!Application.platform.IsPlatformSupported(supportedPlatforms))
 #else
@@ -870,6 +852,18 @@ namespace XRTK.Services
                 // Even though we did not register the service,
                 // it's expected that this is the intended behavior.
                 return true;
+            }
+
+            if (concreteType == null)
+            {
+                Debug.LogError($"Unable to register a service with a null concrete {typeof(T).Name} type.");
+                return false;
+            }
+
+            if (!typeof(IMixedRealityService).IsAssignableFrom(concreteType))
+            {
+                Debug.LogError($"Unable to register the {concreteType.Name} service. It does not implement {typeof(IMixedRealityService)}.");
+                return false;
             }
 
             IMixedRealityService serviceInstance;

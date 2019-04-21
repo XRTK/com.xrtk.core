@@ -65,6 +65,10 @@ artifacts/
 ThirdParty/
 ThirdParty.meta
 --Version/
+
+# ====================== #
+# Project Symbolic Links #
+# ====================== #
 XRTK-Core/Assets/StreamingAssets/GltfModels/
 XRTK-Core/Assets/StreamingAssets/GltfModels.meta
 XRTK-Core/Assets/StreamingAssets.meta

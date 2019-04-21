@@ -15,7 +15,7 @@ namespace XRTK.Inspectors
     {
         private SerializedProperty activeProfile;
         private int currentPickerWindow = -1;
-        private bool checkChange = false;
+        private bool checkChange;
 
         private void OnEnable()
         {
@@ -31,8 +31,8 @@ namespace XRTK.Inspectors
             serializedObject.Update();
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.PropertyField(activeProfile);
-            bool changed = EditorGUI.EndChangeCheck();
-            string commandName = Event.current.commandName;
+            var changed = EditorGUI.EndChangeCheck();
+            var commandName = Event.current.commandName;
             var allConfigProfiles = ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitConfigurationProfile>();
 
             if (activeProfile.objectReferenceValue == null)
@@ -43,7 +43,7 @@ namespace XRTK.Inspectors
                     {
                         EditorUtility.DisplayDialog("Attention!", "You must choose a profile for the Mixed Reality Toolkit.", "OK");
                         currentPickerWindow = GUIUtility.GetControlID(FocusType.Passive);
-                        EditorGUIUtility.ShowObjectPicker<MixedRealityToolkitConfigurationProfile>(null, false, string.Empty, currentPickerWindow);
+                        EditorGUIUtility.ShowObjectPicker<MixedRealityToolkitConfigurationProfile>(GetDefaultProfile(allConfigProfiles), false, string.Empty, currentPickerWindow);
                     }
                     else if (allConfigProfiles.Length == 1)
                     {
@@ -58,7 +58,7 @@ namespace XRTK.Inspectors
 
                 if (GUILayout.Button("Create new configuration"))
                 {
-                    ScriptableObject profile = CreateInstance(nameof(MixedRealityToolkitConfigurationProfile));
+                    var profile = CreateInstance(nameof(MixedRealityToolkitConfigurationProfile));
                     profile.CreateAsset("Assets/XRTK.Generated/CustomProfiles");
                     activeProfile.objectReferenceValue = profile;
                     Selection.activeObject = profile;
@@ -100,6 +100,19 @@ namespace XRTK.Inspectors
             var playspace = MixedRealityToolkit.Instance.MixedRealityPlayspace;
             Debug.Assert(playspace != null);
             EditorGUIUtility.PingObject(MixedRealityToolkit.Instance);
+        }
+
+        private static MixedRealityToolkitConfigurationProfile GetDefaultProfile(MixedRealityToolkitConfigurationProfile[] allProfiles)
+        {
+            for (var i = 0; i < allProfiles.Length; i++)
+            {
+                if (allProfiles[i].name == "DefaultMixedRealityToolkitConfigurationProfile")
+                {
+                    return allProfiles[i];
+                }
+            }
+
+            return null;
         }
     }
 }

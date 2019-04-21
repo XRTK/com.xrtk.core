@@ -116,8 +116,8 @@ namespace XRTK.Inspectors.Profiles
             return changed;
         }
 
-        [MenuItem("CONTEXT/BaseMixedRealityProfile/Create Copy from Profile Values", false, 0)]
-        protected static async void CreateCopyProfileValues()
+        [MenuItem("CONTEXT/BaseMixedRealityProfile/Create Clone from Profile Values", false, 0)]
+        protected static async void CreateCloneProfile()
         {
             profileToCopy = profile;
             ScriptableObject newProfile = CreateInstance(profile.GetType().ToString());

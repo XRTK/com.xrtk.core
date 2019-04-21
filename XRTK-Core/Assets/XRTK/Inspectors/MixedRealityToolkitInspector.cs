@@ -1,8 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
+using UnityEditor.Experimental.SceneManagement;
+using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using XRTK.Definitions;
 using XRTK.Extensions.EditorClassExtensions;
 using XRTK.Inspectors.Profiles;
@@ -92,27 +97,56 @@ namespace XRTK.Inspectors
             }
         }
 
+        [MenuItem("Mixed Reality Toolkit/Configure...", true, 0)]
+        private static bool CreateMixedRealityToolkitGameObjectValidation()
+        {
+            return PrefabStageUtility.GetCurrentPrefabStage() == null;
+        }
+
         [MenuItem("Mixed Reality Toolkit/Configure...", false, 0)]
         public static void CreateMixedRealityToolkitGameObject()
         {
+            var startScene = MixedRealityPreferences.StartSceneAsset;
+
+            if (startScene != null)
+            {
+                if (!EditorUtility.DisplayDialog(
+                    title: "Attention!",
+                    message: $"It seems you've already set the projects Start Scene to {startScene.name}\n" +
+                             "You only need to configure the toolkit once in your Start Scene.\n" +
+                             "Would you like to replace your Start Scene with the current scene you're configuring?",
+                    ok: "Yes",
+                    cancel: "No"))
+                {
+                    return;
+                }
+            }
+
             Selection.activeObject = MixedRealityToolkit.Instance;
             Debug.Assert(MixedRealityToolkit.IsInitialized);
             var playspace = MixedRealityToolkit.Instance.MixedRealityPlayspace;
             Debug.Assert(playspace != null);
-            EditorGUIUtility.PingObject(MixedRealityToolkit.Instance);
+
+            EditorApplication.delayCall += () =>
+            {
+                if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
+                {
+                    Debug.LogWarning("You must save this scene and assign it to the Start Scene in the XRTK preferences for the Mixed Reality Toolkit to function correctly.");
+                }
+
+                EditorSceneManager.EnsureUntitledSceneHasBeenSaved("Mixed Reality Start Scene for the Mixed Reality Toolkit to function correctly.");
+
+                Debug.Assert(!string.IsNullOrEmpty(SceneManager.GetActiveScene().path),
+                    "Configured Scene must be saved in order to set it as the Start Scene!\n" +
+                    "Please save your scene and set it as the Start Scene in the XRTK preferences.");
+                MixedRealityPreferences.StartSceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(SceneManager.GetActiveScene().path);
+                EditorGUIUtility.PingObject(MixedRealityToolkit.Instance);
+            };
         }
 
-        private static MixedRealityToolkitConfigurationProfile GetDefaultProfile(MixedRealityToolkitConfigurationProfile[] allProfiles)
+        private static MixedRealityToolkitConfigurationProfile GetDefaultProfile(IEnumerable<MixedRealityToolkitConfigurationProfile> allProfiles)
         {
-            for (var i = 0; i < allProfiles.Length; i++)
-            {
-                if (allProfiles[i].name == "DefaultMixedRealityToolkitConfigurationProfile")
-                {
-                    return allProfiles[i];
-                }
-            }
-
-            return null;
+            return allProfiles.FirstOrDefault(profile => profile.name == "DefaultMixedRealityToolkitConfigurationProfile");
         }
     }
 }

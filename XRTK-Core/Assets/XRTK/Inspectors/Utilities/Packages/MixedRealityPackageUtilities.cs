@@ -61,7 +61,7 @@ namespace XRTK.Inspectors.Utilities.Packages
         public static async void CheckPackageManifest()
         {
             if (IsRunningCheck ||
-                Application.isPlaying ||
+                EditorApplication.isPlayingOrWillChangePlaymode ||
                 Application.isBatchMode ||
                 PackageSettings == null)
             {

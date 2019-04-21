@@ -6,6 +6,7 @@
     "com.unity.xr.oculus.standalone": "1.29.1",
     "com.unity.xr.openvr.standalone": "1.0.5",
     "com.unity.xr.windowsmr.metro": "1.0.8",
+    "com.xrtk.upm-git-extension": "https://github.com/XRTK/UpmGitExtension.git#0.9.4",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.animation": "1.0.0",
     "com.unity.modules.assetbundle": "1.0.0",
@@ -36,5 +37,11 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
+  },
+  "lock": {
+    "com.xrtk.upm-git-extension": {
+      "hash": "869a63adece6138e88881e85f89f7994983db696",
+      "revision": "0.9.4"
+    }
   }
 }

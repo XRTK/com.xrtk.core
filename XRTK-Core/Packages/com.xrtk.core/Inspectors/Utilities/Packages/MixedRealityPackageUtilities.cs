@@ -197,8 +197,6 @@ namespace XRTK.Inspectors.Utilities.Packages
 
                 if (validationCount > 0)
                 {
-                    EditorPreferences.Set($"{package.Name}_enabled", true);
-
                     if (validPackages.Count == 1 &&
                         !validPackages[0].IsMainProjectAsset)
                     {
@@ -213,6 +211,8 @@ namespace XRTK.Inspectors.Utilities.Packages
                     {
                         Debug.LogError($"{e.Message}\n{e.StackTrace}");
                     }
+
+                    EditorPreferences.Set($"{package.Name}_enabled", true);
 
                     continue;
                 }

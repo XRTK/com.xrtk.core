@@ -205,6 +205,11 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             sourceRelativePath = sourceRelativePath.Replace(ProjectRoot, string.Empty);
             targetRelativePath = targetRelativePath.Replace(ProjectRoot, string.Empty);
 
+            if (!CreateSymbolicLink(sourceAbsolutePath, targetAbsolutePath))
+            {
+                return;
+            }
+
             SymbolicLink symbolicLink;
 
             // Check if the symbolic link is already registered.
@@ -227,11 +232,6 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 {
                     symbolicLink.IsActive = true;
                 }
-            }
-
-            if (!Directory.Exists(targetAbsolutePath))
-            {
-                CreateSymbolicLink(sourceAbsolutePath, targetAbsolutePath);
             }
         }
 
@@ -308,18 +308,18 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             }
         }
 
-        private static void CreateSymbolicLink(string sourceAbsolutePath, string targetAbsolutePath)
+        private static bool CreateSymbolicLink(string sourceAbsolutePath, string targetAbsolutePath)
         {
             if (string.IsNullOrEmpty(targetAbsolutePath) || string.IsNullOrEmpty(sourceAbsolutePath))
             {
                 Debug.LogError("Unable to create symbolic link with null or empty args");
-                return;
+                return false;
             }
 
             if (!sourceAbsolutePath.Contains(ProjectRoot))
             {
                 Debug.LogError($"The symbolic link you're importing needs to be in your project's git repository.\n{sourceAbsolutePath}\n{ProjectRoot}");
-                return;
+                return false;
             }
 
             targetAbsolutePath = AddSubfolderPathToTarget(sourceAbsolutePath, targetAbsolutePath);
@@ -357,14 +357,15 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             }
 
             // --------------------> /C mklink /D "C:\Link To Folder" "C:\Users\Name\Original Folder"
-            if (!new Process().Run($"/C mklink /D \"{targetAbsolutePath}\" \"{sourceAbsolutePath}\"", out string error))
+            if (!new Process().Run($"/C mklink /D \"{targetAbsolutePath}\" \"{sourceAbsolutePath}\"", out var error))
             {
                 Debug.LogError($"{error}");
-                return;
+                return false;
             }
 
             Debug.Log($"Successfully created symbolic link to {sourceAbsolutePath}");
             AssetDatabase.Refresh();
+            return true;
         }
 
         private static bool DeleteSymbolicLink(string path)
@@ -377,12 +378,16 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
             if (new Process().Run($"/C rmdir /q \"{path}\"", out var error))
             {
-                File.Delete($"{path}.meta");
+                if (File.Exists($"{path}.meta"))
+                {
+                    File.Delete($"{path}.meta");
+                }
+
                 AssetDatabase.Refresh();
                 return true;
             }
 
-            Debug.LogError(error);
+            Debug.LogError($"{error}\n{path}");
             return false;
         }
 

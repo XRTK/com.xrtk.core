@@ -12,4 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ff8a5d57a9af497db320551240c892c2, type: 3}
   m_Name: SymbolicLinkSettings
   m_EditorClassIdentifier: 
-  symbolicLinks: []
+  symbolicLinks:
+  - sourceRelativePath: /Submodules/WindowsMixedReality/XRTK.WindowsMixedReality/Assets/XRTK.WindowsMixedReality
+    targetRelativePath: /XRTK-Core/Assets/XRTK.WindowsMixedReality
+    isActive: 1
+  - sourceRelativePath: /Submodules/SDK/XRTK.SDK/Assets/XRTK.SDK
+    targetRelativePath: /XRTK-Core/Assets/XRTK.SDK
+    isActive: 1
+  - sourceRelativePath: /Submodules/UpmGitExtension/XRTK.UpmGitExtension/Assets/XRTK.UpmGitExtension
+    targetRelativePath: /XRTK-Core/Assets/XRTK.UpmGitExtension
+    isActive: 1

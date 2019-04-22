@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
@@ -13,7 +14,7 @@ namespace XRTK.Utilities.Build
             IsCommandLine = isCommandLine;
             BuildSymbols = string.Empty;
             BuildTarget = EditorUserBuildSettings.activeBuildTarget;
-            Scenes = EditorBuildSettings.scenes;
+            Scenes = EditorBuildSettings.scenes.Where(scene => scene.enabled);
         }
 
         /// <inheritdoc />

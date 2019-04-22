@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEditor;
@@ -53,7 +54,7 @@ namespace XRTK.Utilities.Build
             var buildInfo = new UwpBuildInfo
             {
                 OutputDirectory = buildDirectory,
-                Scenes = EditorBuildSettings.scenes,
+                Scenes = EditorBuildSettings.scenes.Where(scene => scene.enabled),
                 BuildAppx = !showDialog,
 
                 // Configure a post build action that will compile the generated solution

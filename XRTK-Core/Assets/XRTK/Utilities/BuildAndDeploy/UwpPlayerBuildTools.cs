@@ -2,12 +2,10 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
-using UnityEngine;
 using XRTK.Utilities.Editor;
 
 namespace XRTK.Utilities.Build
@@ -55,7 +53,7 @@ namespace XRTK.Utilities.Build
             var buildInfo = new UwpBuildInfo
             {
                 OutputDirectory = buildDirectory,
-                Scenes = EditorBuildSettings.scenes.Where(scene => scene.enabled).Select(scene => scene.path),
+                Scenes = EditorBuildSettings.scenes,
                 BuildAppx = !showDialog,
 
                 // Configure a post build action that will compile the generated solution
@@ -73,10 +71,8 @@ namespace XRTK.Utilities.Build
                     if (showDialog &&
                         !EditorUtility.DisplayDialog(PlayerSettings.productName, "Build Complete", "OK", "Build AppX"))
                     {
-                        var _buildInfo = innerBuildInfo as UwpBuildInfo;
-                        Debug.Assert(_buildInfo != null);
                         EditorAssemblyReloadManager.LockReloadAssemblies = true;
-                        await UwpAppxBuildTools.BuildAppxAsync(_buildInfo, cancellationToken);
+                        await UwpAppxBuildTools.BuildAppxAsync(innerBuildInfo as UwpBuildInfo, cancellationToken);
                         EditorAssemblyReloadManager.LockReloadAssemblies = false;
                     }
                 }
@@ -97,9 +93,8 @@ namespace XRTK.Utilities.Build
                 ParseBuildCommandLine(ref buildInfo);
             }
 
-            BuildReport buildReport = UnityPlayerBuildTools.BuildUnityPlayer(buildInfo);
-
-            bool success = buildReport != null && buildReport.summary.result == BuildResult.Succeeded;
+            var buildReport = UnityPlayerBuildTools.BuildUnityPlayer(buildInfo);
+            var success = buildReport != null && buildReport.summary.result == BuildResult.Succeeded;
 
             if (success && buildInfo.BuildAppx)
             {

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
@@ -14,7 +13,7 @@ namespace XRTK.Utilities.Build
             IsCommandLine = isCommandLine;
             BuildSymbols = string.Empty;
             BuildTarget = EditorUserBuildSettings.activeBuildTarget;
-            Scenes = EditorBuildSettings.scenes.Where(scene => scene.enabled).Select(scene => scene.path);
+            Scenes = EditorBuildSettings.scenes;
         }
 
         /// <inheritdoc />
@@ -33,7 +32,7 @@ namespace XRTK.Utilities.Build
         }
 
         /// <inheritdoc />
-        public IEnumerable<string> Scenes { get; set; }
+        public IEnumerable<EditorBuildSettingsScene> Scenes { get; set; }
 
         /// <inheritdoc />
         public Action<IBuildInfo> PreBuildAction { get; set; }

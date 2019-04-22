@@ -14,7 +14,7 @@ namespace XRTK.Utilities.Build
             IsCommandLine = isCommandLine;
             BuildSymbols = string.Empty;
             BuildTarget = EditorUserBuildSettings.activeBuildTarget;
-            Scenes = EditorBuildSettings.scenes.Where(scene => scene.enabled);
+            Scenes = EditorBuildSettings.scenes.Where(scene => !string.IsNullOrWhiteSpace(scene.path)).Where(scene => scene.enabled);
         }
 
         /// <inheritdoc />

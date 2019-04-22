@@ -106,10 +106,9 @@ namespace XRTK.Utilities.Build
 
             if (Application.isBatchMode)
             {
-                Debug.Log($"Scenes:");
                 foreach (var scene in buildInfo.Scenes)
                 {
-                    Debug.Log($"{scene.path}");
+                    Debug.Log($"BuildScene->{scene.path}");
                 }
             }
 

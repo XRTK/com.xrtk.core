@@ -372,7 +372,6 @@ namespace XRTK.Services
 
             #region Services Registration
 
-            // If the Input system has been selected for initialization in the Active profile, enable it in the project
             if (ActiveProfile.IsInputSystemEnabled)
             {
 #if UNITY_EDITOR
@@ -418,7 +417,6 @@ namespace XRTK.Services
 #endif
             }
 
-            // If the Boundary system has been selected for initialization in the Active profile, enable it in the project
             if (ActiveProfile.IsBoundarySystemEnabled)
             {
                 if (!CreateAndRegisterService<IMixedRealityBoundarySystem>(ActiveProfile.BoundarySystemSystemType, ActiveProfile.BoundaryVisualizationProfile) || BoundarySystem == null)
@@ -427,7 +425,6 @@ namespace XRTK.Services
                 }
             }
 
-            // If the Spatial Awareness system has been selected for initialization in the Active profile, enable it in the project
             if (ActiveProfile.IsSpatialAwarenessSystemEnabled)
             {
 #if UNITY_EDITOR
@@ -472,7 +469,6 @@ namespace XRTK.Services
 #endif
             }
 
-            // If the Teleport system has been selected for initialization in the Active profile, enable it in the project
             if (ActiveProfile.IsTeleportSystemEnabled)
             {
                 // Note: The Teleport system doesn't have a profile, but might in the future.
@@ -520,10 +516,8 @@ namespace XRTK.Services
 
             if (ActiveProfile.RegisteredServiceProvidersProfile != null)
             {
-                for (int i = 0; i < ActiveProfile.RegisteredServiceProvidersProfile.Configurations?.Length; i++)
+                foreach (var configuration in ActiveProfile.RegisteredServiceProvidersProfile.Configurations)
                 {
-                    var configuration = ActiveProfile.RegisteredServiceProvidersProfile.Configurations[i];
-
                     if (CreateAndRegisterService<IMixedRealityExtensionService>(
                         configuration.ComponentType,
                         configuration.RuntimePlatform,
@@ -531,19 +525,18 @@ namespace XRTK.Services
                         configuration.Priority,
                         configuration.ConfigurationProfile))
                     {
-                        if (configuration.ConfigurationProfile != null)
+                        if (configuration.ConfigurationProfile == null) { continue; }
+
+                        foreach (var dataProvider in configuration.ConfigurationProfile.RegisteredDataProviders)
                         {
-                            foreach (var dataProvider in configuration.ConfigurationProfile.RegisteredDataProviders)
+                            if (!CreateAndRegisterService<IMixedRealityDataProvider>(
+                                dataProvider.DataModelType,
+                                dataProvider.RuntimePlatform,
+                                dataProvider.DataModelName,
+                                dataProvider.Priority,
+                                dataProvider.ConfigurationProfile))
                             {
-                                if (!CreateAndRegisterService<IMixedRealityDataProvider>(
-                                    dataProvider.DataModelType,
-                                    dataProvider.RuntimePlatform,
-                                    dataProvider.DataModelName,
-                                    dataProvider.Priority,
-                                    dataProvider.ConfigurationProfile))
-                                {
-                                    Debug.LogError($"Failed to register {dataProvider.DataModelName} data model for {configuration.ComponentName} extension service!");
-                                }
+                                Debug.LogError($"Failed to register {dataProvider.DataModelName} data model for {configuration.ComponentName} extension service!");
                             }
                         }
                     }

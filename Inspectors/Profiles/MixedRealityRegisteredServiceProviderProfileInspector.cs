@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Inspectors.Utilities;
@@ -12,11 +13,9 @@ namespace XRTK.Inspectors.Profiles
     [CustomEditor(typeof(MixedRealityRegisteredServiceProvidersProfile))]
     public class MixedRealityRegisteredServiceProviderProfileInspector : BaseMixedRealityProfileInspector
     {
-        private static readonly GUIContent MinusButtonContent = new GUIContent("-", "Unregister");
-        private static readonly GUIContent AddButtonContent = new GUIContent("+ Register a new Service Provider");
         private SerializedProperty configurations;
-
-        private static bool[] configFoldouts;
+        private ReorderableList configurationList;
+        private int currentlySelectedConfigurationOption;
 
         protected override void OnEnable()
         {
@@ -28,7 +27,15 @@ namespace XRTK.Inspectors.Profiles
             }
 
             configurations = serializedObject.FindProperty("configurations");
-            configFoldouts = new bool[configurations.arraySize];
+
+            configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true)
+            {
+                elementHeight = EditorGUIUtility.singleLineHeight * 5.5f
+            };
+
+            configurationList.drawElementCallback += DrawConfigurationOptionElement;
+            configurationList.onAddCallback += OnConfigurationOptionAdded;
+            configurationList.onRemoveCallback += OnConfigurationOptionRemoved;
         }
 
         public override void OnInspectorGUI()
@@ -47,111 +54,95 @@ namespace XRTK.Inspectors.Profiles
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Registered Service Providers Profile", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("This profile defines any additional Services like systems, features, and managers to register with the Mixed Reality Toolkit.", MessageType.Info);
+            EditorGUILayout.HelpBox("This profile defines any additional Services like systems, features, and managers to register with the Mixed Reality Toolkit.\n\n" +
+                                    "Note: The order of the list determines the order these services get created.", MessageType.Info);
 
             (target as BaseMixedRealityProfile).CheckProfileLock();
 
             serializedObject.Update();
-            RenderList(configurations);
+            EditorGUILayout.Space();
+            configurationList.DoLayoutList();
+            EditorGUILayout.Space();
+
+            if (configurations == null || configurations.arraySize == 0)
+            {
+                EditorGUILayout.HelpBox("Register a new Service Provider.", MessageType.Warning);
+            }
+
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void RenderList(SerializedProperty list)
+        private void DrawConfigurationOptionElement(Rect rect, int index, bool isActive, bool isFocused)
         {
-            EditorGUILayout.Space();
-            GUILayout.BeginVertical();
-
-            if (GUILayout.Button(AddButtonContent, EditorStyles.miniButton))
+            if (isFocused)
             {
-                list.InsertArrayElementAtIndex(list.arraySize);
-                SerializedProperty managerConfig = list.GetArrayElementAtIndex(list.arraySize - 1);
-                var componentName = managerConfig.FindPropertyRelative("componentName");
-                componentName.stringValue = $"New Configuration {list.arraySize - 1}";
-                var priority = managerConfig.FindPropertyRelative("priority");
-                priority.intValue = 10;
-                var runtimePlatform = managerConfig.FindPropertyRelative("runtimePlatform");
-                runtimePlatform.intValue = -1;
-                var configurationProfile = managerConfig.FindPropertyRelative("configurationProfile");
-                configurationProfile.objectReferenceValue = null;
+                currentlySelectedConfigurationOption = index;
+            }
+
+            var lastMode = EditorGUIUtility.wideMode;
+            EditorGUIUtility.wideMode = true;
+
+            var halfFieldHeight = EditorGUIUtility.singleLineHeight * 0.25f;
+            var nameRect = new Rect(rect.x, rect.y + halfFieldHeight, rect.width, EditorGUIUtility.singleLineHeight);
+            var typeRect = new Rect(rect.x, rect.y + halfFieldHeight * 6, rect.width, EditorGUIUtility.singleLineHeight);
+            var runtimeRect = new Rect(rect.x, rect.y + halfFieldHeight * 11, rect.width, EditorGUIUtility.singleLineHeight);
+            var profileRect = new Rect(rect.x, rect.y + halfFieldHeight * 16, rect.width, EditorGUIUtility.singleLineHeight);
+
+            var managerConfig = configurations.GetArrayElementAtIndex(index);
+            var componentName = managerConfig.FindPropertyRelative("componentName");
+            var componentType = managerConfig.FindPropertyRelative("componentType");
+            var priority = managerConfig.FindPropertyRelative("priority");
+            var runtimePlatform = managerConfig.FindPropertyRelative("runtimePlatform");
+            var configurationProfile = managerConfig.FindPropertyRelative("configurationProfile");
+
+            EditorGUI.BeginChangeCheck();
+
+            EditorGUI.PropertyField(nameRect, componentName);
+            EditorGUI.PropertyField(typeRect, componentType);
+            priority.intValue = index;
+            EditorGUI.PropertyField(runtimeRect, runtimePlatform);
+            EditorGUI.PropertyField(profileRect, configurationProfile);
+
+            if (EditorGUI.EndChangeCheck())
+            {
                 serializedObject.ApplyModifiedProperties();
-                var componentType = ((MixedRealityRegisteredServiceProvidersProfile)serializedObject.targetObject).Configurations[list.arraySize - 1].ComponentType;
-                componentType.Type = null;
-                configFoldouts = new bool[list.arraySize];
-                return;
-            }
 
-            GUILayout.Space(12f);
-
-            if (list == null || list.arraySize == 0)
-            {
-                EditorGUILayout.HelpBox("Register a new Service Provider.", MessageType.Warning);
-                GUILayout.EndVertical();
-                return;
-            }
-
-            GUILayout.BeginVertical();
-
-            GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Configurations", EditorStyles.boldLabel, GUILayout.ExpandWidth(true));
-            GUILayout.EndHorizontal();
-            EditorGUILayout.Space();
-
-            for (int i = 0; i < list.arraySize; i++)
-            {
-                SerializedProperty managerConfig = list.GetArrayElementAtIndex(i);
-                var componentName = managerConfig.FindPropertyRelative("componentName");
-                var componentType = managerConfig.FindPropertyRelative("componentType");
-                var priority = managerConfig.FindPropertyRelative("priority");
-                var runtimePlatform = managerConfig.FindPropertyRelative("runtimePlatform");
-                var configurationProfile = managerConfig.FindPropertyRelative("configurationProfile");
-
-                GUILayout.BeginVertical();
-                EditorGUILayout.BeginHorizontal();
-
-                configFoldouts[i] = EditorGUILayout.Foldout(configFoldouts[i], componentName.stringValue, true);
-
-                if (GUILayout.Button(MinusButtonContent, EditorStyles.miniButtonRight, GUILayout.Width(24f)))
+                if (!string.IsNullOrEmpty(componentType.FindPropertyRelative("reference").stringValue))
                 {
-                    list.DeleteArrayElementAtIndex(i);
-                    serializedObject.ApplyModifiedProperties();
-                    EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
-                    EditorGUILayout.EndHorizontal();
-                    GUILayout.EndVertical();
-                    break;
+                    MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
                 }
-
-                EditorGUILayout.EndHorizontal();
-
-                if (configFoldouts[i])
-                {
-                    EditorGUI.indentLevel++;
-                    EditorGUI.BeginChangeCheck();
-
-                    EditorGUILayout.PropertyField(componentName);
-                    EditorGUILayout.PropertyField(componentType);
-                    EditorGUILayout.PropertyField(priority);
-                    EditorGUILayout.PropertyField(runtimePlatform);
-                    EditorGUILayout.PropertyField(configurationProfile);
-
-                    if (EditorGUI.EndChangeCheck())
-                    {
-                        serializedObject.ApplyModifiedProperties();
-
-                        if (!string.IsNullOrEmpty(componentType.FindPropertyRelative("reference").stringValue))
-                        {
-                            MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
-                        }
-                    }
-
-                    EditorGUI.indentLevel--;
-                }
-
-                GUILayout.EndVertical();
-                GUILayout.Space(12f);
             }
 
-            GUILayout.EndVertical();
-            GUILayout.EndVertical();
+            EditorGUIUtility.wideMode = lastMode;
+        }
+
+        private void OnConfigurationOptionAdded(ReorderableList list)
+        {
+            configurations.arraySize += 1;
+            var index = configurations.arraySize - 1;
+            var managerConfig = configurations.GetArrayElementAtIndex(index);
+            var componentName = managerConfig.FindPropertyRelative("componentName");
+            componentName.stringValue = $"New Configuration {index}";
+            var priority = managerConfig.FindPropertyRelative("priority");
+            priority.intValue = index;
+            var runtimePlatform = managerConfig.FindPropertyRelative("runtimePlatform");
+            runtimePlatform.intValue = 0;
+            var configurationProfile = managerConfig.FindPropertyRelative("configurationProfile");
+            configurationProfile.objectReferenceValue = null;
+            serializedObject.ApplyModifiedProperties();
+            var componentType = ((MixedRealityRegisteredServiceProvidersProfile)serializedObject.targetObject).Configurations[index].ComponentType;
+            componentType.Type = null;
+        }
+
+        private void OnConfigurationOptionRemoved(ReorderableList list)
+        {
+            if (currentlySelectedConfigurationOption >= 0)
+            {
+                configurations.DeleteArrayElementAtIndex(currentlySelectedConfigurationOption);
+            }
+
+            serializedObject.ApplyModifiedProperties();
+            EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
         }
     }
 }

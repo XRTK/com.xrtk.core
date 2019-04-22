@@ -10,11 +10,15 @@ namespace XRTK.Definitions
     public class MixedRealityRegisteredServiceProvidersProfile : BaseMixedRealityProfile
     {
         [SerializeField]
-        private MixedRealityServiceConfiguration[] configurations = null;
+        private MixedRealityServiceConfiguration[] configurations = new MixedRealityServiceConfiguration[0];
 
         /// <summary>
         /// Currently registered system and manager configurations.
         /// </summary>
-        public MixedRealityServiceConfiguration[] Configurations => configurations;
+        public MixedRealityServiceConfiguration[] Configurations
+        {
+            get => configurations;
+            internal set => configurations = value;
+        }
     }
 }

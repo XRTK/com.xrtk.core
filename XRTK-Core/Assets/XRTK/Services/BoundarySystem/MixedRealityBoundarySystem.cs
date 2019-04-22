@@ -306,7 +306,7 @@ namespace XRTK.Services.BoundarySystem
         /// <inheritdoc/>
         public float BoundaryHeight { get; set; }
 
-        private bool showFloor = false;
+        private bool showFloor;
 
         /// <inheritdoc/>
         public bool ShowFloor
@@ -339,7 +339,7 @@ namespace XRTK.Services.BoundarySystem
         /// <inheritdoc/>
         public Material FloorMaterial { get; }
 
-        private bool showPlayArea = false;
+        private bool showPlayArea;
 
         private int floorPhysicsLayer;
 
@@ -390,9 +390,7 @@ namespace XRTK.Services.BoundarySystem
             }
         }
 
-        private bool showTrackedArea = false;
-
-        private int playAreaPhysicsLayer;
+        private bool showTrackedArea;
 
         /// <inheritdoc/>
         public int PlayAreaPhysicsLayer
@@ -416,6 +414,8 @@ namespace XRTK.Services.BoundarySystem
                 }
             }
         }
+
+        private int playAreaPhysicsLayer;
 
         /// <inheritdoc/>
         public Material PlayAreaMaterial { get; }
@@ -587,7 +587,7 @@ namespace XRTK.Services.BoundarySystem
         public Edge[] Bounds { get; private set; } = new Edge[0];
 
         /// <inheritdoc/>
-        public float? FloorHeight { get; private set; } = null;
+        public float? FloorHeight { get; private set; }
 
         /// <inheritdoc/>
         public bool Contains(Vector3 location, Boundary.Type boundaryType = Boundary.Type.TrackedArea)
@@ -615,24 +615,20 @@ namespace XRTK.Services.BoundarySystem
             }
 
             // Boundary coordinates are always "on the floor"
-            Vector2 point = new Vector2(location.x, location.z);
+            var point = new Vector2(location.x, location.z);
 
-            if (boundaryType == Boundary.Type.PlayArea)
+            switch (boundaryType)
             {
-                // Check the inscribed rectangle.
-                if (rectangularBounds != null)
-                {
+                case Boundary.Type.PlayArea when rectangularBounds != null:
+                    // Check the inscribed rectangle.
                     return rectangularBounds.IsInsideBoundary(point);
-                }
+                case Boundary.Type.TrackedArea:
+                    // Check the geometry
+                    return EdgeUtilities.IsInsideBoundary(Bounds, point);
+                default:
+                    // Not in either boundary type.
+                    return false;
             }
-            else if (boundaryType == Boundary.Type.TrackedArea)
-            {
-                // Check the geometry
-                return EdgeUtilities.IsInsideBoundary(Bounds, point);
-            }
-
-            // Not in either boundary type.
-            return false;
         }
 
         /// <inheritdoc/>
@@ -648,7 +644,7 @@ namespace XRTK.Services.BoundarySystem
             }
 
             // Handle the user teleporting (boundary moves with them).
-            Vector3 transformedCenter = MixedRealityToolkit.Instance.MixedRealityPlayspace.TransformPoint(
+            var transformedCenter = MixedRealityToolkit.Instance.MixedRealityPlayspace.TransformPoint(
                 new Vector3(rectangularBounds.Center.x, 0f, rectangularBounds.Center.y));
 
             center = new Vector2(transformedCenter.x, transformedCenter.z);
@@ -674,7 +670,7 @@ namespace XRTK.Services.BoundarySystem
                 return null;
             }
 
-            Vector2 floorScale = FloorScale;
+            var floorScale = FloorScale;
 
             // Render the floor.
             currentFloorObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -702,7 +698,7 @@ namespace XRTK.Services.BoundarySystem
 
             // Get the rectangular bounds.
 
-            if (!TryGetRectangularBoundsParams(out Vector2 center, out float angle, out float width, out float height))
+            if (!TryGetRectangularBoundsParams(out var center, out var angle, out var width, out var height))
             {
                 // No rectangular bounds, therefore cannot create the play area.
                 return null;
@@ -719,7 +715,7 @@ namespace XRTK.Services.BoundarySystem
             currentPlayAreaObject.name = "Play Area";
             currentPlayAreaObject.layer = PlayAreaPhysicsLayer;
             currentPlayAreaObject.transform.Translate(new Vector3(center.x, BoundaryObjectRenderOffset, center.y));
-            currentPlayAreaObject.transform.Rotate(new Vector3(90, -angle, 0));
+            currentPlayAreaObject.transform.Rotate(new Vector3(90f, -angle, 0.0f));
             currentPlayAreaObject.transform.localScale = new Vector3(width, height, 1.0f);
             currentPlayAreaObject.GetComponent<Renderer>().sharedMaterial = PlayAreaMaterial;
 
@@ -745,17 +741,21 @@ namespace XRTK.Services.BoundarySystem
             }
 
             // Get the line vertices
-            List<Vector3> lineVertices = new List<Vector3>();
+            var lineVertices = new List<Vector3>();
+
             for (int i = 0; i < Bounds.Length; i++)
             {
                 lineVertices.Add(new Vector3(Bounds[i].PointA.x, 0f, Bounds[i].PointA.y));
             }
+
             // Add the first vertex again to ensure the loop closes.
             lineVertices.Add(lineVertices[0]);
 
             // We use an empty object and attach a line renderer.
-            currentTrackedAreaObject = new GameObject("Tracked Area");
-            currentTrackedAreaObject.layer = DefaultIgnoreRaycastLayer;
+            currentTrackedAreaObject = new GameObject("Tracked Area")
+            {
+                layer = DefaultIgnoreRaycastLayer
+            };
             currentTrackedAreaObject.AddComponent<LineRenderer>();
             currentTrackedAreaObject.transform.Translate(new Vector3(
                 MixedRealityToolkit.Instance.MixedRealityPlayspace.position.x,
@@ -764,8 +764,8 @@ namespace XRTK.Services.BoundarySystem
             currentPlayAreaObject.layer = TrackedAreaPhysicsLayer;
 
             // Configure the renderer properties.
-            float lineWidth = 0.01f;
-            LineRenderer lineRenderer = currentTrackedAreaObject.GetComponent<LineRenderer>();
+            const float lineWidth = 0.01f;
+            var lineRenderer = currentTrackedAreaObject.GetComponent<LineRenderer>();
             lineRenderer.sharedMaterial = TrackedAreaMaterial;
             lineRenderer.useWorldSpace = false;
             lineRenderer.startWidth = lineWidth;
@@ -800,23 +800,26 @@ namespace XRTK.Services.BoundarySystem
                 return null;
             }
 
-            currentBoundaryWallObject = new GameObject("Tracked Area Walls");
-            currentBoundaryWallObject.layer = BoundaryWallsPhysicsLayer;
+            currentBoundaryWallObject = new GameObject("Tracked Area Walls")
+            {
+                layer = BoundaryWallsPhysicsLayer
+            };
 
             // Create and parent the child objects
-            float wallDepth = BoundaryObjectThickness;
+            const float wallDepth = BoundaryObjectThickness;
+
             for (int i = 0; i < Bounds.Length; i++)
             {
-                GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                wall.name = $"Wall {i}";
+                var wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                wall.name = $"Wall_{i}";
                 wall.GetComponent<Renderer>().sharedMaterial = BoundaryWallMaterial;
                 wall.transform.localScale = new Vector3((Bounds[i].PointB - Bounds[i].PointA).magnitude, BoundaryHeight, wallDepth);
                 wall.layer = DefaultIgnoreRaycastLayer;
 
                 // Position and rotate the wall.
-                Vector2 mid = Vector2.Lerp(Bounds[i].PointA, Bounds[i].PointB, 0.5f);
+                var mid = Vector2.Lerp(Bounds[i].PointA, Bounds[i].PointB, 0.5f);
                 wall.transform.position = new Vector3(mid.x, (BoundaryHeight * 0.5f), mid.y);
-                float rotationAngle = MathUtilities.GetAngleBetween(Bounds[i].PointB, Bounds[i].PointA);
+                var rotationAngle = MathUtilities.GetAngleBetween(Bounds[i].PointB, Bounds[i].PointA);
                 wall.transform.rotation = Quaternion.Euler(0.0f, -rotationAngle, 0.0f);
 
                 wall.transform.parent = currentBoundaryWallObject.transform;
@@ -853,7 +856,7 @@ namespace XRTK.Services.BoundarySystem
             }
 
             // Render the ceiling.
-            float ceilingDepth = BoundaryObjectThickness;
+            const float ceilingDepth = BoundaryObjectThickness;
             currentCeilingObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
             currentCeilingObject.name = "Ceiling";
             currentCeilingObject.layer = DefaultIgnoreRaycastLayer;
@@ -874,13 +877,13 @@ namespace XRTK.Services.BoundarySystem
         /// <summary>
         /// The largest rectangle that is contained withing the play space geometry.
         /// </summary>
-        private InscribedRectangle rectangularBounds = null;
+        private InscribedRectangle rectangularBounds;
 
-        private GameObject currentFloorObject = null;
-        private GameObject currentPlayAreaObject = null;
-        private GameObject currentTrackedAreaObject = null;
-        private GameObject currentBoundaryWallObject = null;
-        private GameObject currentCeilingObject = null;
+        private GameObject currentFloorObject;
+        private GameObject currentPlayAreaObject;
+        private GameObject currentTrackedAreaObject;
+        private GameObject currentBoundaryWallObject;
+        private GameObject currentCeilingObject;
 
         /// <summary>
         /// Retrieves the boundary geometry and creates the boundary and inscribed play space volumes.
@@ -906,12 +909,12 @@ namespace XRTK.Services.BoundarySystem
             {
                 // FloorHeight starts out as null. Use a suitably high value for the floor to ensure
                 // that we do not accidentally set it too low.
-                float floorHeight = float.MaxValue;
+                var floorHeight = float.MaxValue;
 
                 for (int i = 0; i < boundaryGeometry.Count; i++)
                 {
-                    Vector3 pointA = boundaryGeometry[i];
-                    Vector3 pointB = boundaryGeometry[(i + 1) % boundaryGeometry.Count];
+                    var pointA = boundaryGeometry[i];
+                    var pointB = boundaryGeometry[(i + 1) % boundaryGeometry.Count];
                     boundaryEdges.Add(new Edge(pointA, pointB));
 
                     floorHeight = Mathf.Min(floorHeight, boundaryGeometry[i].y);

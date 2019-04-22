@@ -2,11 +2,17 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
+using UnityEditor.Experimental.SceneManagement;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
+using XRTK.Inspectors.Utilities.SymbolicLinks;
 
 namespace XRTK.Inspectors.Utilities
 {
+    /// <summary>
+    /// Ensures that the <see cref="MixedRealityPreferences.StartSceneAsset"/> is always loaded
+    /// so that the <see cref="XRTK.Services.MixedRealityToolkit"/> runs correctly in the editor.
+    /// </summary>
     [InitializeOnLoad]
     public static class AutoSceneSwitcher
     {
@@ -17,38 +23,53 @@ namespace XRTK.Inspectors.Utilities
 
         private static void OnPlayModeStateChanged(PlayModeStateChange playModeState)
         {
-            OnPlayModeStateChanged();
-        }
+            if (SymbolicLinker.IsSyncing ||
+                EditorApplication.isPlaying ||
+                !EditorApplication.isPlayingOrWillChangePlaymode ||
+                PrefabStageUtility.GetCurrentPrefabStage() != null)
+            {
+                return;
+            }
 
-        private static void OnPlayModeStateChanged()
-        {
-            if (EditorApplication.isPlaying || !EditorApplication.isPlayingOrWillChangePlaymode) { return; }
+            var startSceneAsset = MixedRealityPreferences.StartSceneAsset;
+            var startSceneLoaded = false;
 
-            var startScene = MixedRealityPreferences.StartSceneAsset;
+            if (startSceneAsset != null)
+            {
+                for (int i = 0; i < SceneManager.sceneCount; i++)
+                {
+                    var scene = SceneManager.GetSceneAt(i);
 
-            if (startScene == null || SceneManager.GetActiveScene().name == startScene.name) { return; }
+                    if (scene.name == startSceneAsset.name &&
+                        SceneManager.GetActiveScene().name != startSceneAsset.name)
+                    {
+                        SceneManager.SetActiveScene(scene);
+                        startSceneLoaded = true;
+                        break;
+                    }
+                }
 
-            int dialogResult = EditorUtility.DisplayDialogComplex(
-                    "Wrong scene!",
-                    $"Would you like to open {startScene.name} scene before playing?\n" +
-                    $"You can update the starting scene in:\n" +
-                    $"Editor/Preferences... Tools",
+                if (!startSceneLoaded && startSceneAsset != null)
+                {
+                    var startScene = EditorSceneManager.OpenScene(AssetDatabase.GetAssetOrScenePath(startSceneAsset), OpenSceneMode.Additive);
+                    SceneManager.SetActiveScene(startScene);
+                }
+            }
+
+            if (startSceneAsset != null && SceneManager.GetActiveScene().name == startSceneAsset.name) { return; }
+
+            var dialogResult = EditorUtility.DisplayDialogComplex(
+                    title: "Missing the MixedRealityToolkit",
+                    message: "Would you like to configure the Mixed Reality Toolkit now?",
                     "No, play anyway",
-                    "Change scene, then play",
+                    "Configure, then play",
                     "Cancel");
 
             switch (dialogResult)
             {
-                case 0:
-                    //do nothing
-                    break;
                 case 1:
-                    EditorApplication.isPlaying = false;
-                    if (EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
-                    {
-                        EditorSceneManager.OpenScene(AssetDatabase.GetAssetOrScenePath(startScene));
-                        EditorApplication.isPlaying = true;
-                    }
+                    MixedRealityToolkitInspector.CreateMixedRealityToolkitGameObject();
+                    EditorApplication.isPlaying = true;
                     break;
                 case 2:
                     EditorApplication.isPlaying = false;

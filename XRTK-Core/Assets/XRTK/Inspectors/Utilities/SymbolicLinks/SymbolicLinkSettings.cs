@@ -3,13 +3,14 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Definitions.Utilities;
 
 namespace XRTK.Inspectors.Utilities.SymbolicLinks
 {
     /// <summary>
     /// Holds the current symbolic link references in the project
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Symbolic Link Settings", fileName = "SymbolicLinkSettings"/*, order = (int)CreateProfileMenuItemIndices.Settings*/)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Settings/Symbolic Link Settings", fileName = "SymbolicLinkSettings", order = (int)CreateProfileMenuItemIndices.Settings)]
     public class SymbolicLinkSettings : ScriptableObject
     {
         [SerializeField]

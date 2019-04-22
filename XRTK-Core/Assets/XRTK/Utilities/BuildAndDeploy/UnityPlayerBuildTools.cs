@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -82,8 +83,8 @@ namespace XRTK.Utilities.Build
                 PlayerSettings.colorSpace = buildInfo.ColorSpace.Value;
             }
 
-            BuildTarget oldBuildTarget = EditorUserBuildSettings.activeBuildTarget;
-            BuildTargetGroup oldBuildTargetGroup = oldBuildTarget.GetGroup();
+            var oldBuildTarget = EditorUserBuildSettings.activeBuildTarget;
+            var oldBuildTargetGroup = oldBuildTarget.GetGroup();
 
             if (EditorUserBuildSettings.activeBuildTarget != buildInfo.BuildTarget)
             {
@@ -156,6 +157,7 @@ namespace XRTK.Utilities.Build
         /// -buildAppx : Builds the appx bundle after the Unity Build step.<para/>
         /// -rebuildAppx : Rebuild the appx bundle.<para/>
         /// </summary>
+        [UsedImplicitly]
         public static async void StartCommandLineBuild()
         {
             // We don't need stack traces on all our logs. Makes things a lot easier to read.
@@ -222,7 +224,7 @@ namespace XRTK.Utilities.Build
         /// <param name="buildInfo"></param>
         public static void ParseBuildCommandLine(ref IBuildInfo buildInfo)
         {
-            string[] arguments = Environment.GetCommandLineArgs();
+            var arguments = Environment.GetCommandLineArgs();
 
             for (int i = 0; i < arguments.Length; ++i)
             {
@@ -256,10 +258,12 @@ namespace XRTK.Utilities.Build
             }
         }
 
-        private static IEnumerable<string> SplitSceneList(string sceneList)
+        private static IEnumerable<EditorBuildSettingsScene> SplitSceneList(string sceneList)
         {
-            return from scene in sceneList.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries)
-                   select scene.Trim();
+            var sceneListArray = sceneList.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            return sceneListArray
+                .Where(scenePath => !string.IsNullOrWhiteSpace(scenePath))
+                .Select(scene => new EditorBuildSettingsScene(scene.Trim(), true));
         }
 
         /// <summary>

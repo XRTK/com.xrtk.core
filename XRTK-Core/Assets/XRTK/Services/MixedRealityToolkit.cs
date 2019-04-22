@@ -372,7 +372,6 @@ namespace XRTK.Services
 
             #region Services Registration
 
-            // If the Input system has been selected for initialization in the Active profile, enable it in the project
             if (ActiveProfile.IsInputSystemEnabled)
             {
 #if UNITY_EDITOR
@@ -386,16 +385,14 @@ namespace XRTK.Services
                     {
                         if (ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile != null)
                         {
-                            for (int i = 0; i < ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders.Length; i++)
+                            foreach (var controllerDataProvider in ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders)
                             {
-                                var controllerDataProvider = ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders[i];
-
                                 if (!CreateAndRegisterService<IMixedRealityControllerDataProvider>(
-                                        controllerDataProvider.DataProviderType,
-                                        controllerDataProvider.RuntimePlatform,
-                                        controllerDataProvider.DataProviderName,
-                                        controllerDataProvider.Priority,
-                                        controllerDataProvider.Profile))
+                                    controllerDataProvider.DataProviderType,
+                                    controllerDataProvider.RuntimePlatform,
+                                    controllerDataProvider.DataProviderName,
+                                    controllerDataProvider.Priority,
+                                    controllerDataProvider.Profile))
                                 {
                                     Debug.LogError($"Failed to start {controllerDataProvider.DataProviderName}!");
                                 }
@@ -420,7 +417,6 @@ namespace XRTK.Services
 #endif
             }
 
-            // If the Boundary system has been selected for initialization in the Active profile, enable it in the project
             if (ActiveProfile.IsBoundarySystemEnabled)
             {
                 if (!CreateAndRegisterService<IMixedRealityBoundarySystem>(ActiveProfile.BoundarySystemSystemType, ActiveProfile.BoundaryVisualizationProfile) || BoundarySystem == null)
@@ -429,7 +425,6 @@ namespace XRTK.Services
                 }
             }
 
-            // If the Spatial Awareness system has been selected for initialization in the Active profile, enable it in the project
             if (ActiveProfile.IsSpatialAwarenessSystemEnabled)
             {
 #if UNITY_EDITOR
@@ -441,16 +436,20 @@ namespace XRTK.Services
                 {
                     if (ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders != null)
                     {
-                        for (int i = 0; i < ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders.Length; i++)
+                        foreach (var spatialObserver in ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders)
                         {
-                            var spatialObserver = ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders[i];
+                            if (spatialObserver.Profile == null)
+                            {
+                                Debug.LogError($"Missing profile for {spatialObserver.SpatialObserverName}");
+                                continue;
+                            }
 
                             if (!CreateAndRegisterService<IMixedRealitySpatialObserverDataProvider>(
-                                    spatialObserver.SpatialObserverType,
-                                    spatialObserver.RuntimePlatform,
-                                    spatialObserver.SpatialObserverName,
-                                    spatialObserver.Priority,
-                                    spatialObserver.Profile))
+                                spatialObserver.SpatialObserverType,
+                                spatialObserver.RuntimePlatform,
+                                spatialObserver.SpatialObserverName,
+                                spatialObserver.Priority,
+                                spatialObserver.Profile))
                             {
                                 Debug.LogError($"Failed to start {spatialObserver.SpatialObserverName}!");
                             }
@@ -470,7 +469,6 @@ namespace XRTK.Services
 #endif
             }
 
-            // If the Teleport system has been selected for initialization in the Active profile, enable it in the project
             if (ActiveProfile.IsTeleportSystemEnabled)
             {
                 // Note: The Teleport system doesn't have a profile, but might in the future.
@@ -488,10 +486,8 @@ namespace XRTK.Services
                 {
                     if (ActiveProfile.NetworkingSystemProfile.RegisteredNetworkDataProviders != null)
                     {
-                        for (int i = 0; i < ActiveProfile.NetworkingSystemProfile.RegisteredNetworkDataProviders.Length; i++)
+                        foreach (var networkProvider in ActiveProfile.NetworkingSystemProfile.RegisteredNetworkDataProviders)
                         {
-                            var networkProvider = ActiveProfile.NetworkingSystemProfile.RegisteredNetworkDataProviders[i];
-
                             if (!CreateAndRegisterService<IMixedRealityNetworkDataProvider>(
                                 networkProvider.DataProviderType,
                                 networkProvider.RuntimePlatform,
@@ -520,10 +516,8 @@ namespace XRTK.Services
 
             if (ActiveProfile.RegisteredServiceProvidersProfile != null)
             {
-                for (int i = 0; i < ActiveProfile.RegisteredServiceProvidersProfile.Configurations?.Length; i++)
+                foreach (var configuration in ActiveProfile.RegisteredServiceProvidersProfile.Configurations)
                 {
-                    var configuration = ActiveProfile.RegisteredServiceProvidersProfile.Configurations[i];
-
                     if (CreateAndRegisterService<IMixedRealityExtensionService>(
                         configuration.ComponentType,
                         configuration.RuntimePlatform,
@@ -531,21 +525,18 @@ namespace XRTK.Services
                         configuration.Priority,
                         configuration.ConfigurationProfile))
                     {
-                        if (configuration.ConfigurationProfile != null)
-                        {
-                            for (int j = 0; j < configuration.ConfigurationProfile.RegisteredDataProviders.Length; j++)
-                            {
-                                var dataProvider = configuration.ConfigurationProfile.RegisteredDataProviders[j];
+                        if (configuration.ConfigurationProfile == null) { continue; }
 
-                                if (!CreateAndRegisterService<IMixedRealityDataProvider>(
-                                    dataProvider.DataModelType,
-                                    dataProvider.RuntimePlatform,
-                                    dataProvider.DataModelName,
-                                    dataProvider.Priority,
-                                    dataProvider.ConfigurationProfile))
-                                {
-                                    Debug.LogError($"Failed to register {dataProvider.DataModelName} data model for {configuration.ComponentName} extension service!");
-                                }
+                        foreach (var dataProvider in configuration.ConfigurationProfile.RegisteredDataProviders)
+                        {
+                            if (!CreateAndRegisterService<IMixedRealityDataProvider>(
+                                dataProvider.DataModelType,
+                                dataProvider.RuntimePlatform,
+                                dataProvider.DataModelName,
+                                dataProvider.Priority,
+                                dataProvider.ConfigurationProfile))
+                            {
+                                Debug.LogError($"Failed to register {dataProvider.DataModelName} data model for {configuration.ComponentName} extension service!");
                             }
                         }
                     }
@@ -608,7 +599,7 @@ namespace XRTK.Services
                     {
                         // Since the scene is set up with a different camera parent, its likely
                         // that there's an expectation that that parent is going to be used for
-                        // something else. We print a warning to call out the fact that we're 
+                        // something else. We print a warning to call out the fact that we're
                         // co-opting this object for use with teleporting and such, since that
                         // might cause conflicts with the parent's intended purpose.
                         Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {MixedRealityPlayspaceName}. The existing parent will be renamed and used instead.");
@@ -623,7 +614,7 @@ namespace XRTK.Services
                 // otherwise world-locked things like playspace boundaries won't be aligned properly.
                 // For now, we'll just assume that when the playspace is first initialized, the
                 // tracked space origin overlaps with the world space origin. If a platform ever does
-                // something else (i.e, placing the lower left hand corner of the tracked space at world 
+                // something else (i.e, placing the lower left hand corner of the tracked space at world
                 // space 0,0,0), we should compensate for that here.
                 return mixedRealityPlayspace;
             }
@@ -703,11 +694,11 @@ namespace XRTK.Services
             {
                 if (Application.isEditor)
                 {
-                    DestroyImmediate(this);
+                    DestroyImmediate(gameObject);
                 }
                 else
                 {
-                    Destroy(this);
+                    Destroy(gameObject);
                 }
 
                 Debug.LogWarning("Trying to instantiate a second instance of the Mixed Reality Toolkit. Additional Instance was destroyed");
@@ -751,39 +742,37 @@ namespace XRTK.Services
 
         private void OnApplicationFocus(bool focus)
         {
-            if (Application.isPlaying)
+            if (!Application.isPlaying) { return; }
+
+            // If the Mixed Reality Toolkit is not configured, stop.
+            if (activeProfile == null) { return; }
+
+            foreach (var system in activeSystems)
             {
-                // If the Mixed Reality Toolkit is not configured, stop.
-                if (activeProfile == null) { return; }
+                system.Value.OnApplicationFocus(focus);
+            }
 
-                foreach (var system in activeSystems)
-                {
-                    system.Value.OnApplicationFocus(focus);
-                }
-
-                foreach (var service in registeredMixedRealityServices)
-                {
-                    service.Item2.OnApplicationFocus(focus);
-                }
+            foreach (var service in registeredMixedRealityServices)
+            {
+                service.Item2.OnApplicationFocus(focus);
             }
         }
 
         private void OnApplicationPause(bool pause)
         {
-            if (Application.isPlaying)
+            if (!Application.isPlaying) { return; }
+
+            // If the Mixed Reality Toolkit is not configured, stop.
+            if (activeProfile == null) { return; }
+
+            foreach (var system in activeSystems)
             {
-                // If the Mixed Reality Toolkit is not configured, stop.
-                if (activeProfile == null) { return; }
+                system.Value.OnApplicationPause(pause);
+            }
 
-                foreach (var system in activeSystems)
-                {
-                    system.Value.OnApplicationPause(pause);
-                }
-
-                foreach (var service in registeredMixedRealityServices)
-                {
-                    service.Item2.OnApplicationPause(pause);
-                }
+            foreach (var service in registeredMixedRealityServices)
+            {
+                service.Item2.OnApplicationPause(pause);
             }
         }
 
@@ -871,11 +860,6 @@ namespace XRTK.Services
             try
             {
                 serviceInstance = Activator.CreateInstance(concreteType, args) as IMixedRealityService;
-
-                if (serviceInstance == null)
-                {
-                    throw new Exception("Failed to create service!");
-                }
             }
             catch (System.Reflection.TargetInvocationException e)
             {
@@ -885,6 +869,12 @@ namespace XRTK.Services
             catch (Exception e)
             {
                 Debug.LogError($"Failed to register the {concreteType.Name} service: {e.GetType()} - {e.Message}\n{e.StackTrace}");
+                return false;
+            }
+
+            if (serviceInstance == null)
+            {
+                Debug.LogError($"Failed to create a valid instance of {concreteType.Name}!");
                 return false;
             }
 
@@ -1495,7 +1485,7 @@ namespace XRTK.Services
         /// <returns>The Mixed Reality Toolkit of the specified type</returns>
         private static IMixedRealityService GetService(Type interfaceType, string serviceName, bool showLogs = true)
         {
-            if (!GetServiceByNameInternal(interfaceType, serviceName, out IMixedRealityService serviceInstance) && showLogs)
+            if (!GetServiceByNameInternal(interfaceType, serviceName, out var serviceInstance) && showLogs)
             {
                 Debug.LogError($"Unable to find {(string.IsNullOrWhiteSpace(serviceName) ? interfaceType.Name : serviceName)} service.");
             }

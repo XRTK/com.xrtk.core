@@ -14,7 +14,7 @@ namespace XRTK.Utilities.Build
             IsCommandLine = isCommandLine;
             BuildSymbols = string.Empty;
             BuildTarget = EditorUserBuildSettings.activeBuildTarget;
-            Scenes = EditorBuildSettings.scenes.Where(scene => scene.enabled).Select(scene => scene.path);
+            Scenes = EditorBuildSettings.scenes.Where(scene => scene.enabled);
         }
 
         /// <inheritdoc />
@@ -33,7 +33,7 @@ namespace XRTK.Utilities.Build
         }
 
         /// <inheritdoc />
-        public IEnumerable<string> Scenes { get; set; }
+        public IEnumerable<EditorBuildSettingsScene> Scenes { get; set; }
 
         /// <inheritdoc />
         public Action<IBuildInfo> PreBuildAction { get; set; }

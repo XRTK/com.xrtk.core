@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
+using UnityEditor.Experimental.SceneManagement;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Extensions.EditorClassExtensions;
@@ -51,10 +52,12 @@ namespace XRTK.Inspectors.Profiles
 
             configurationProfile = target as MixedRealityToolkitConfigurationProfile;
 
+            var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
+
             // Create The MR Manager if none exists.
-            if (!MixedRealityToolkit.IsInitialized)
+            if (!MixedRealityToolkit.IsInitialized && prefabStage == null)
             {
-                // Search the scene for one, in case we've just hot reloaded the assembly.
+                // Search for all instances, in case we've just hot reloaded the assembly.
                 var managerSearch = FindObjectsOfType<MixedRealityToolkit>();
 
                 if (managerSearch.Length == 0)

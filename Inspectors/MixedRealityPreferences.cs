@@ -119,7 +119,7 @@ namespace XRTK.Inspectors
             }
             set
             {
-                sceneAsset = value != null ? GetSceneObject(value.name) : null;
+                sceneAsset = value != null ? GetSceneObject(value) : null;
                 var scenePath = value != null ? AssetDatabase.GetAssetOrScenePath(value) : string.Empty;
                 EditorPreferences.Set(START_SCENE_KEY, scenePath);
             }
@@ -223,12 +223,12 @@ namespace XRTK.Inspectors
             return new SettingsProvider("Preferences/XRTK", SettingsScope.User, XRTK_Keywords)
             {
                 label = "XRTK",
-                guiHandler = OnGui,
+                guiHandler = OnPreferencesGui,
                 keywords = new HashSet<string>(XRTK_Keywords)
             };
         }
 
-        private static void OnGui(string searchContext)
+        private static void OnPreferencesGui(string searchContext)
         {
             var prevLabelWidth = EditorGUIUtility.labelWidth;
             EditorGUIUtility.labelWidth = 200f;
@@ -332,23 +332,62 @@ namespace XRTK.Inspectors
             EditorGUIUtility.labelWidth = prevLabelWidth;
         }
 
-        private static SceneAsset GetSceneObject(string sceneName)
+        private static SceneAsset GetSceneObject(SceneAsset asset)
+        {
+            return GetSceneObject(asset.name, asset);
+        }
+
+        private static SceneAsset GetSceneObject(string sceneName, SceneAsset asset = null)
         {
             if (string.IsNullOrEmpty(sceneName))
             {
                 return null;
             }
 
-            foreach (var editorScene in EditorBuildSettings.scenes)
+            EditorBuildSettingsScene editorScene = null;
+
+            try
             {
-                if (editorScene.path.IndexOf(sceneName, StringComparison.Ordinal) != -1)
-                {
-                    return AssetDatabase.LoadAssetAtPath(editorScene.path, typeof(SceneAsset)) as SceneAsset;
-                }
+                editorScene = EditorBuildSettings.scenes.First(scene => scene.path.IndexOf(sceneName, StringComparison.Ordinal) != -1);
+            }
+            catch
+            {
+                // ignored
             }
 
-            Debug.LogWarning($"Scene [{sceneName}] cannot be used.  To use this scene add it to the build settings for the project.");
-            return null;
+            if (editorScene != null)
+            {
+                asset = AssetDatabase.LoadAssetAtPath(editorScene.path, typeof(SceneAsset)) as SceneAsset;
+            }
+
+            if (asset == null)
+            {
+                return null;
+            }
+
+            AssetDatabase.TryGetGUIDAndLocalFileIdentifier(asset, out var guid, out long _);
+            var sceneGuid = new GUID(guid);
+
+            if (EditorBuildSettings.scenes.Length == 0 ||
+                EditorBuildSettings.scenes[0].guid != sceneGuid)
+            {
+                editorScene = new EditorBuildSettingsScene(sceneGuid, true);
+                var scenes = EditorBuildSettings.scenes
+                    .Where(scene => scene.guid != sceneGuid)
+                    .Prepend(editorScene)
+                    .ToArray();
+                EditorBuildSettings.scenes = scenes;
+                Debug.Assert(EditorBuildSettings.scenes[0].guid == sceneGuid);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+            }
+
+            if (!EditorBuildSettings.scenes[0].enabled)
+            {
+                EditorBuildSettings.scenes[0].enabled = true;
+            }
+
+            return asset;
         }
     }
 }

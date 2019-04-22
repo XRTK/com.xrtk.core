@@ -20,27 +20,35 @@ namespace XRTK.Utilities
         {
             get
             {
-                var mainCamera = cachedCamera == null ? Refresh(Camera.main) : cachedCamera;
+                var mainCamera = Camera.main;
+
+                if (mainCamera == null)
+                {
+                    mainCamera = new GameObject("Main Camera", typeof(Camera)) { tag = "MainCamera" }.GetComponent<Camera>();
+                }
+
+                mainCamera = cachedCamera == null ? Refresh(mainCamera) : cachedCamera;
 
                 if (mainCamera == null)
                 {
                     // No camera in the scene tagged as main. Let's search the scene for a GameObject named Main Camera
-                    var cameras = Object.FindObjectsOfType<Camera>();
+                    var cameras = UnityEngine.Object.FindObjectsOfType<Camera>();
 
                     switch (cameras.Length)
                     {
                         case 0:
-                            return null;
+                            Debug.LogError("No Cameras found in the scene!");
+                            break;
                         case 1:
                             mainCamera = Refresh(cameras[0]);
                             break;
                         default:
                             // Search for main camera by name.
-                            for (int i = 0; i < cameras.Length; i++)
+                            foreach (var camera in cameras)
                             {
-                                if (cameras[i].name == "Main Camera")
+                                if (camera.name == "Main Camera")
                                 {
-                                    mainCamera = Refresh(cameras[i]);
+                                    mainCamera = Refresh(camera);
                                     break;
                                 }
                             }

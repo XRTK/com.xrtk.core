@@ -47,6 +47,8 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
         private static bool isRunningSync;
 
+        public static bool IsSyncing => isRunningSync || MixedRealityPackageUtilities.IsRunningCheck;
+
         /// <summary>
         /// Debug the symbolic linker utility.
         /// </summary>
@@ -82,7 +84,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// <param name="forceUpdate">Bypass the auto load check and force the packages to be updated, even if they're up to date.</param>
         public static async void RunSync(bool forceUpdate = false)
         {
-            if (isRunningSync)
+            if (isRunningSync || EditorApplication.isPlayingOrWillChangePlaymode)
             {
                 return;
             }
@@ -177,9 +179,8 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             AssetDatabase.Refresh();
 
             EditorApplication.UnlockReloadAssemblies();
-            isRunningSync = false;
-
             MixedRealityPackageUtilities.CheckPackageManifest();
+            isRunningSync = false;
         }
 
         /// <summary>

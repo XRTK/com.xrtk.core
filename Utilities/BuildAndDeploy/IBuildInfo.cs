@@ -27,7 +27,7 @@ namespace XRTK.Utilities.Build
         /// <summary>
         /// The list of scenes to include in the build.
         /// </summary>
-        IEnumerable<string> Scenes { get; set; }
+        IEnumerable<EditorBuildSettingsScene> Scenes { get; set; }
 
         /// <summary>
         /// A pre-build action to raise before building the Unity player.

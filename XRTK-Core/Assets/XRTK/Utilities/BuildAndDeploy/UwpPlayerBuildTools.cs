@@ -54,7 +54,7 @@ namespace XRTK.Utilities.Build
             var buildInfo = new UwpBuildInfo
             {
                 OutputDirectory = buildDirectory,
-                Scenes = EditorBuildSettings.scenes.Where(scene => scene.enabled),
+                Scenes = EditorBuildSettings.scenes.Where(scene => !string.IsNullOrWhiteSpace(scene.path)).Where(scene => scene.enabled),
                 BuildAppx = !showDialog,
 
                 // Configure a post build action that will compile the generated solution

@@ -24,8 +24,8 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// </summary>
         static SymbolicLinker()
         {
+            RunSync(Application.isBatchMode);
             EditorApplication.projectWindowItemOnGUI += OnProjectWindowItemGui;
-            RunSync();
         }
 
         private const string LINK_ICON_TEXT = "<=link=>";

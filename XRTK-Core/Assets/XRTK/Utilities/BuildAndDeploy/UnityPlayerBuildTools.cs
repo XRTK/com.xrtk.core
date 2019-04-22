@@ -37,8 +37,8 @@ namespace XRTK.Utilities.Build
             // Call the pre-build action, if any
             buildInfo.PreBuildAction?.Invoke(buildInfo);
 
-            BuildTargetGroup buildTargetGroup = buildInfo.BuildTarget.GetGroup();
-            string playerBuildSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
+            var buildTargetGroup = buildInfo.BuildTarget.GetGroup();
+            var playerBuildSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
 
             if (!string.IsNullOrEmpty(playerBuildSymbols))
             {
@@ -103,6 +103,14 @@ namespace XRTK.Utilities.Build
             }
 
             BuildReport buildReport = default;
+
+            if (Application.isBatchMode)
+            {
+                foreach (var scene in buildInfo.Scenes)
+                {
+                    Debug.Log($"BuildScene->{scene.path}");
+                }
+            }
 
             try
             {

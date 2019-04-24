@@ -36,8 +36,7 @@ namespace XRTK.Services.CameraSystem
                 }
 #elif PLATFORM_LUMIN
                 currentDisplayType = DisplayType.Transparent;
-#endif // PLATFORM_LUMIN
-#endif // UNITY_WSA
+#endif
                 return currentDisplayType == DisplayType.Opaque;
             }
         }

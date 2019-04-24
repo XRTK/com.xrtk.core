@@ -21,7 +21,7 @@ namespace XRTK.Inspectors.Profiles
         private SerializedProperty transparentNearClip;
         private SerializedProperty transparentClearFlags;
         private SerializedProperty transparentBackgroundColor;
-        private SerializedProperty holoLensQualityLevel;
+        private SerializedProperty transparentQualityLevel;
 
         private readonly GUIContent nearClipTitle = new GUIContent("Near Clip");
         private readonly GUIContent clearFlagsTitle = new GUIContent("Clear Flags");
@@ -44,7 +44,7 @@ namespace XRTK.Inspectors.Profiles
             transparentNearClip = serializedObject.FindProperty("nearClipPlaneTransparentDisplay");
             transparentClearFlags = serializedObject.FindProperty("cameraClearFlagsTransparentDisplay");
             transparentBackgroundColor = serializedObject.FindProperty("backgroundColorTransparentDisplay");
-            holoLensQualityLevel = serializedObject.FindProperty("holoLensQualityLevel");
+            transparentQualityLevel = serializedObject.FindProperty("transparentQualityLevel");
         }
 
         public override void OnInspectorGUI()
@@ -94,7 +94,7 @@ namespace XRTK.Inspectors.Profiles
                 transparentBackgroundColor.colorValue = EditorGUILayout.ColorField("Background Color", transparentBackgroundColor.colorValue);
             }
 
-            holoLensQualityLevel.intValue = EditorGUILayout.Popup("Quality Setting", holoLensQualityLevel.intValue, QualitySettings.names);
+            transparentQualityLevel.intValue = EditorGUILayout.Popup("Quality Setting", transparentQualityLevel.intValue, QualitySettings.names);
 
             serializedObject.ApplyModifiedProperties();
         }

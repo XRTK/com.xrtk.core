@@ -11,6 +11,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Interfaces.BoundarySystem;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Diagnostics;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
@@ -353,24 +354,15 @@ namespace XRTK.Services
             ClearCoreSystemCache();
             EnsureMixedRealityRequirements();
 
-            if (ActiveProfile.IsCameraProfileEnabled)
-            {
-                if (ActiveProfile.CameraProfile.IsCameraPersistent)
-                {
-                    CameraCache.Main.transform.root.DontDestroyOnLoad();
-                }
+            #region Services Registration
 
-                if (ActiveProfile.CameraProfile.IsOpaque)
+            if (ActiveProfile.IsCameraSystemEnabled)
+            {
+                if (!CreateAndRegisterService<IMixedRealityCameraSystem>(ActiveProfile.CameraSystemType, ActiveProfile.CameraProfile) || CameraSystem == null)
                 {
-                    ActiveProfile.CameraProfile.ApplySettingsForOpaqueDisplay();
-                }
-                else
-                {
-                    ActiveProfile.CameraProfile.ApplySettingsForTransparentDisplay();
+                    Debug.LogError("Failed to start the Camera System!");
                 }
             }
-
-            #region Services Registration
 
             if (ActiveProfile.IsInputSystemEnabled)
             {
@@ -897,7 +889,7 @@ namespace XRTK.Services
 
             if (!CanGetService(interfaceType, serviceInstance.Name)) { return false; }
 
-            if (GetServiceByNameInternal(interfaceType, serviceInstance.Name, out IMixedRealityService preExistingService))
+            if (GetServiceByNameInternal(interfaceType, serviceInstance.Name, out var preExistingService))
             {
                 Debug.LogError($"There's already a {interfaceType.Name}.{preExistingService.Name} registered!");
                 return false;
@@ -970,7 +962,7 @@ namespace XRTK.Services
                 return GetActiveServices(interfaceType).Aggregate(true, (current, service) => current & UnregisterServiceInternal(interfaceType, service.Name));
             }
 
-            if (GetServiceByNameInternal(interfaceType, serviceName, out IMixedRealityService serviceInstance))
+            if (GetServiceByNameInternal(interfaceType, serviceName, out var serviceInstance))
             {
                 try
                 {
@@ -1411,9 +1403,10 @@ namespace XRTK.Services
         /// Note: type should be the Interface of the system to be retrieved and not the concrete class itself.
         /// </remarks>
         /// <returns>True, there is a system registered with the selected interface, False, no system found for that interface</returns>
+        /// <exception cref="T:System.ArgumentNullException">Type is <see langword="null" />.</exception>
         public static bool IsSystemRegistered<T>() where T : IMixedRealityService
         {
-            return activeSystems.TryGetValue(typeof(T), out IMixedRealityService _);
+            return activeSystems.TryGetValue(typeof(T), out _);
         }
 
         private static bool IsCoreSystem(Type concreteType)
@@ -1424,7 +1417,8 @@ namespace XRTK.Services
                 return false;
             }
 
-            return typeof(IMixedRealityInputSystem).IsAssignableFrom(concreteType) ||
+            return typeof(IMixedRealityCameraSystem).IsAssignableFrom(concreteType) ||
+                   typeof(IMixedRealityInputSystem).IsAssignableFrom(concreteType) ||
                    typeof(IMixedRealityFocusProvider).IsAssignableFrom(concreteType) ||
                    typeof(IMixedRealityTeleportSystem).IsAssignableFrom(concreteType) ||
                    typeof(IMixedRealityBoundarySystem).IsAssignableFrom(concreteType) ||
@@ -1435,6 +1429,7 @@ namespace XRTK.Services
 
         private static void ClearCoreSystemCache()
         {
+            cameraSystem = null;
             inputSystem = null;
             teleportSystem = null;
             boundarySystem = null;
@@ -1559,7 +1554,7 @@ namespace XRTK.Services
 
             if (IsCoreSystem(interfaceType))
             {
-                if (GetServiceByNameInternal(interfaceType, serviceName, out IMixedRealityService serviceInstance) &&
+                if (GetServiceByNameInternal(interfaceType, serviceName, out var serviceInstance) &&
                     CheckServiceMatch(interfaceType, serviceName, interfaceType, serviceInstance))
                 {
                     services.Add(serviceInstance);
@@ -1641,6 +1636,35 @@ namespace XRTK.Services
 
         #region Core System Accessors
 
+        private static IMixedRealityCameraSystem cameraSystem = null;
+
+        /// <summary>
+        /// The current Camera System registered with the Mixed Reality Toolkit.
+        /// </summary>
+        public static IMixedRealityCameraSystem CameraSystem
+        {
+            get
+            {
+                if (isApplicationQuitting)
+                {
+                    return null;
+                }
+
+                if (cameraSystem != null)
+                {
+                    return cameraSystem;
+                }
+
+                cameraSystem = GetService<IMixedRealityCameraSystem>(showLogs: logCameraSystem);
+                // If we found a valid system, then we turn logging back on for the next time we need to search.
+                // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
+                logCameraSystem = cameraSystem != null;
+                return cameraSystem;
+            }
+        }
+
+        private static bool logCameraSystem = true;
+
         private static IMixedRealityInputSystem inputSystem = null;
 
         /// <summary>
@@ -1663,7 +1687,7 @@ namespace XRTK.Services
                     return inputSystem;
                 }
 
-                inputSystem = GetService<IMixedRealityInputSystem>(logInputSystem);
+                inputSystem = GetService<IMixedRealityInputSystem>(showLogs: logInputSystem);
                 // If we found a valid system, then we turn logging back on for the next time we need to search.
                 // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
                 logInputSystem = inputSystem != null;
@@ -1695,7 +1719,7 @@ namespace XRTK.Services
                     return boundarySystem;
                 }
 
-                boundarySystem = GetService<IMixedRealityBoundarySystem>(logBoundarySystem);
+                boundarySystem = GetService<IMixedRealityBoundarySystem>(showLogs: logBoundarySystem);
                 // If we found a valid system, then we turn logging back on for the next time we need to search.
                 // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
                 logBoundarySystem = boundarySystem != null;
@@ -1727,7 +1751,7 @@ namespace XRTK.Services
                     return spatialAwarenessSystem;
                 }
 
-                spatialAwarenessSystem = GetService<IMixedRealitySpatialAwarenessSystem>(logSpatialAwarenessSystem);
+                spatialAwarenessSystem = GetService<IMixedRealitySpatialAwarenessSystem>(showLogs: logSpatialAwarenessSystem);
                 // If we found a valid system, then we turn logging back on for the next time we need to search.
                 // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
                 logSpatialAwarenessSystem = spatialAwarenessSystem != null;
@@ -1759,7 +1783,7 @@ namespace XRTK.Services
                     return teleportSystem;
                 }
 
-                teleportSystem = GetService<IMixedRealityTeleportSystem>(logTeleportSystem);
+                teleportSystem = GetService<IMixedRealityTeleportSystem>(showLogs: logTeleportSystem);
                 // If we found a valid system, then we turn logging back on for the next time we need to search.
                 // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
                 logTeleportSystem = teleportSystem != null;
@@ -1791,7 +1815,7 @@ namespace XRTK.Services
                     return networkingSystem;
                 }
 
-                networkingSystem = GetService<IMixedRealityNetworkingSystem>(logNetworkingSystem);
+                networkingSystem = GetService<IMixedRealityNetworkingSystem>(showLogs: logNetworkingSystem);
                 // If we found a valid system, then we turn logging back on for the next time we need to search.
                 // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
                 logNetworkingSystem = networkingSystem != null;
@@ -1823,7 +1847,7 @@ namespace XRTK.Services
                     return diagnosticsSystem;
                 }
 
-                diagnosticsSystem = GetService<IMixedRealityDiagnosticsSystem>(logDiagnosticsSystem);
+                diagnosticsSystem = GetService<IMixedRealityDiagnosticsSystem>(showLogs: logDiagnosticsSystem);
                 // If we found a valid system, then we turn logging back on for the next time we need to search.
                 // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
                 logDiagnosticsSystem = diagnosticsSystem != null;

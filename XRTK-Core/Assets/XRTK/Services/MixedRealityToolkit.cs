@@ -430,12 +430,6 @@ namespace XRTK.Services
                     {
                         foreach (var spatialObserver in ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders)
                         {
-                            if (spatialObserver.Profile == null)
-                            {
-                                Debug.LogError($"Missing profile for {spatialObserver.SpatialObserverName}");
-                                continue;
-                            }
-
                             if (!CreateAndRegisterService<IMixedRealitySpatialObserverDataProvider>(
                                 spatialObserver.SpatialObserverType,
                                 spatialObserver.RuntimePlatform,

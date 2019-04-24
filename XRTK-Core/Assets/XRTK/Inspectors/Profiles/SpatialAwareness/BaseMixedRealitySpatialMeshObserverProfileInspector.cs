@@ -43,7 +43,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
+            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
             {
                 return;
             }

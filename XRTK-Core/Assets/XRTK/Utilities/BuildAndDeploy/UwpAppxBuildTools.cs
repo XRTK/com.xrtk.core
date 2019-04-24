@@ -330,11 +330,11 @@ namespace XRTK.Utilities.Build
                 EditorUserBuildSettings.wsaUWPSDK = windowsSdkPaths[windowsSdkPaths.Length - 1];
             }
 
-            string maxVersionTested = UwpBuildDeployPreferences.MIN_SDK_VERSION;
+            string maxVersionTested = EditorUserBuildSettings.wsaUWPSDK;
 
             if (string.IsNullOrWhiteSpace(EditorUserBuildSettings.wsaMinUWPSDK))
             {
-                EditorUserBuildSettings.wsaMinUWPSDK = UwpBuildDeployPreferences.MIN_SDK_VERSION;
+                EditorUserBuildSettings.wsaMinUWPSDK = UwpBuildDeployPreferences.MIN_SDK_VERSION.ToString();
             }
 
             string minVersion = EditorUserBuildSettings.wsaMinUWPSDK;

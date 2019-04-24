@@ -269,7 +269,7 @@ namespace XRTK.Providers.Controllers
 
             void SetupController(IMixedRealityControllerVisualizer visualizer)
             {
-                if (!useAlternatePoseAction && 
+                if (!useAlternatePoseAction &&
                     visualizationProfile.TryGetControllerPose(controllerType, ControllerHandedness, out MixedRealityInputAction poseAction))
                 {
                     visualizer.UseSourcePoseData = false;

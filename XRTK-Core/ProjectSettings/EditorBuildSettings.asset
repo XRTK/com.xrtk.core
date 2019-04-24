@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/XRTK.SDK/StandardAssets/Scenes/BaseScene.unity
+    guid: c71bfba9e4cd8644486e0622ec4da627
   m_configObjects: {}

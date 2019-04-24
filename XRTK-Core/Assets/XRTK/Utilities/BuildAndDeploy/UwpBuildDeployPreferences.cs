@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using UnityEngine;
 using XRTK.Utilities.Editor;
 using XRTK.Utilities.WindowsDevicePortal.DataStructures;
@@ -7,7 +8,7 @@ namespace XRTK.Utilities.Build
 {
     public static class UwpBuildDeployPreferences
     {
-        public const string MIN_SDK_VERSION = "10.0.17134.0";
+        public static Version MIN_SDK_VERSION = new Version("10.0.17763.0");
         private const string EDITOR_PREF_BUILD_CONFIG = "BuildDeployWindow_BuildConfig";
         private const string EDITOR_PREF_FORCE_REBUILD = "BuildDeployWindow_ForceRebuild";
         private const string EDITOR_PREF_CONNECT_INFOS = "BuildDeployWindow_DeviceConnections";

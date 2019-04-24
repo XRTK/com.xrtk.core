@@ -10,6 +10,7 @@ using XRTK.Definitions.NetworkingSystem;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.BoundarySystem;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Diagnostics;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
@@ -27,17 +28,32 @@ namespace XRTK.Definitions
         #region Mixed Reality Toolkit configurable properties
 
         [SerializeField]
-        [Tooltip("Enable the Camera Profile on Startup.")]
-        private bool enableCameraProfile = false;
+        [Tooltip("Enable the Camera System on Startup.")]
+        private bool enableCameraSystem = false;
 
         /// <summary>
         /// Enable and configure the Camera Profile for the Mixed Reality Toolkit
         /// </summary>
-        public bool IsCameraProfileEnabled
+        public bool IsCameraSystemEnabled
         {
-            get => CameraProfile != null && enableCameraProfile;
-            internal set => enableCameraProfile = value;
+            get => CameraProfile != null && cameraSystemType != null && cameraSystemType.Type != null && enableCameraSystem;
+            internal set => enableCameraSystem = value;
         }
+
+        [SerializeField]
+        [Tooltip("Camera System Class to instantiate at runtime.")]
+        [Implements(typeof(IMixedRealityCameraSystem), TypeGrouping.ByNamespaceFlat)]
+        private SystemType cameraSystemType;
+
+        /// <summary>
+        /// Camera System class to instantiate at runtime.
+        /// </summary>
+        public SystemType CameraSystemType
+        {
+            get => cameraSystemType;
+            internal set => cameraSystemType = value;
+        }
+
 
         [SerializeField]
         [Tooltip("Camera profile.")]

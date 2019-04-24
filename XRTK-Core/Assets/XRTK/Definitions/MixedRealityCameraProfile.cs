@@ -3,7 +3,6 @@
 
 using UnityEngine;
 using XRTK.Definitions.Utilities;
-using XRTK.Utilities;
 
 namespace XRTK.Definitions
 {
@@ -15,14 +14,7 @@ namespace XRTK.Definitions
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Camera Profile", fileName = "MixedRealityCameraProfile", order = (int)CreateProfileMenuItemIndices.Camera)]
     public class MixedRealityCameraProfile : BaseMixedRealityProfile
     {
-        private enum DisplayType
-        {
-            Opaque = 0,
-            Transparent
-        }
-
         [SerializeField]
-        [Tooltip("Should the camera be reused in each scene?\nIf so, then the camera's root will be flagged so it is not destroyed when the scene is unloaded.")]
         private bool isCameraPersistent = false;
 
         /// <summary>
@@ -35,73 +27,76 @@ namespace XRTK.Definitions
         [Tooltip("The near clipping plane distance for an opaque display.")]
         private float nearClipPlaneOpaqueDisplay = 0.1f;
 
+        /// <summary>
+        /// The near clipping plane distance for an opaque display.
+        /// </summary>
+        public float NearClipPlaneOpaqueDisplay
+        {
+            get => nearClipPlaneOpaqueDisplay;
+            internal set => nearClipPlaneOpaqueDisplay = value;
+        }
+
         [SerializeField]
         [Tooltip("Values for Camera.clearFlags, determining what to clear when rendering a Camera for an opaque display.")]
         private CameraClearFlags cameraClearFlagsOpaqueDisplay = CameraClearFlags.Skybox;
+
+        /// <summary>
+        /// Values for Camera.clearFlags, determining what to clear when rendering a Camera for an opaque display.
+        /// </summary>
+        public CameraClearFlags CameraClearFlagsOpaqueDisplay => cameraClearFlagsOpaqueDisplay;
 
         [SerializeField]
         [Tooltip("Background color for a transparent display.")]
         private Color backgroundColorOpaqueDisplay = Color.black;
 
+        /// <summary>
+        /// Background color for a transparent display.
+        /// </summary>
+        public Color BackgroundColorOpaqueDisplay => backgroundColorOpaqueDisplay;
+
         [SerializeField]
         [Tooltip("Set the desired quality for your application for opaque display.")]
         private int opaqueQualityLevel = 0;
+
+        /// <summary>
+        /// Set the desired quality for your application for opaque display.
+        /// </summary>
+        public int OpaqueQualityLevel => opaqueQualityLevel;
 
         [SerializeField]
         [Tooltip("The near clipping plane distance for a transparent display.")]
         private float nearClipPlaneTransparentDisplay = 0.85f;
 
+        /// <summary>
+        /// The near clipping plane distance for a transparent display.
+        /// </summary>
+        public float NearClipPlaneTransparentDisplay => nearClipPlaneTransparentDisplay;
+
         [SerializeField]
         [Tooltip("Values for Camera.clearFlags, determining what to clear when rendering a Camera for an opaque display.")]
         private CameraClearFlags cameraClearFlagsTransparentDisplay = CameraClearFlags.SolidColor;
+
+        /// <summary>
+        /// Values for Camera.clearFlags, determining what to clear when rendering a Camera for an opaque display.
+        /// </summary>
+        public CameraClearFlags CameraClearFlagsTransparentDisplay => cameraClearFlagsTransparentDisplay;
 
         [SerializeField]
         [Tooltip("Background color for a transparent display.")]
         private Color backgroundColorTransparentDisplay = Color.clear;
 
-        [SerializeField]
-        [Tooltip("Set the desired quality for your application for HoloLens.")]
-        private int holoLensQualityLevel = 0;
+        /// <summary>
+        /// Background color for a transparent display.
+        /// </summary>
+        public Color BackgroundColorTransparentDisplay => backgroundColorTransparentDisplay;
 
-        private DisplayType currentDisplayType;
+        [SerializeField]
+        [Tooltip("Set the desired quality for your application for transparent display.")]
+        private int transparentQualityLevel = 0;
 
         /// <summary>
-        /// Is the current camera displaying on an Opaque (AR) device or a VR / immersive device
+        /// Set the desired quality for your application for transparent display.
         /// </summary>
-        public bool IsOpaque
-        {
-            get
-            {
-                currentDisplayType = DisplayType.Opaque;
-#if UNITY_WSA
-                if (!UnityEngine.XR.WSA.HolographicSettings.IsDisplayOpaque)
-                {
-                    currentDisplayType = DisplayType.Transparent;
-                }
-#endif
-                return currentDisplayType == DisplayType.Opaque;
-            }
-        }
-
-        public void ApplySettingsForOpaqueDisplay()
-        {
-            CameraCache.Main.clearFlags = cameraClearFlagsOpaqueDisplay;
-            CameraCache.Main.nearClipPlane = nearClipPlaneOpaqueDisplay;
-            CameraCache.Main.backgroundColor = backgroundColorOpaqueDisplay;
-            SetQuality(opaqueQualityLevel);
-        }
-
-        public void ApplySettingsForTransparentDisplay()
-        {
-            CameraCache.Main.clearFlags = cameraClearFlagsTransparentDisplay;
-            CameraCache.Main.backgroundColor = backgroundColorTransparentDisplay;
-            CameraCache.Main.nearClipPlane = nearClipPlaneTransparentDisplay;
-            SetQuality(holoLensQualityLevel);
-        }
-
-        private static void SetQuality(int level)
-        {
-            QualitySettings.SetQualityLevel(level, false);
-        }
+        public int TransparentQualityLevel => transparentQualityLevel;
     }
 }

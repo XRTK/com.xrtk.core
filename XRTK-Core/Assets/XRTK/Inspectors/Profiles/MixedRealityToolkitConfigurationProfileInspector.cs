@@ -15,7 +15,8 @@ namespace XRTK.Inspectors.Profiles
     public class MixedRealityToolkitConfigurationProfileInspector : BaseMixedRealityProfileInspector
     {
         // Camera properties
-        private SerializedProperty enableCameraProfile;
+        private SerializedProperty enableCameraSystem;
+        private SerializedProperty cameraSystemType;
         private SerializedProperty cameraProfile;
         // Input system properties
         private SerializedProperty enableInputSystem;
@@ -87,7 +88,8 @@ namespace XRTK.Inspectors.Profiles
             }
 
             // Camera configuration
-            enableCameraProfile = serializedObject.FindProperty("enableCameraProfile");
+            enableCameraSystem = serializedObject.FindProperty("enableCameraSystem");
+            cameraSystemType = serializedObject.FindProperty("cameraSystemType");
             cameraProfile = serializedObject.FindProperty("cameraProfile");
             // Input system configuration
             enableInputSystem = serializedObject.FindProperty("enableInputSystem");
@@ -141,7 +143,7 @@ namespace XRTK.Inspectors.Profiles
 
                 if (GUILayout.Button("Create new profiles"))
                 {
-                    ScriptableObject profile = CreateInstance(nameof(MixedRealityToolkitConfigurationProfile));
+                    var profile = CreateInstance(nameof(MixedRealityToolkitConfigurationProfile));
                     var newProfile = profile.CreateAsset("Assets/XRTK.Generated/CustomProfiles") as MixedRealityToolkitConfigurationProfile;
                     MixedRealityToolkit.Instance.ActiveProfile = newProfile;
                     Selection.activeObject = newProfile;
@@ -161,11 +163,11 @@ namespace XRTK.Inspectors.Profiles
             EditorGUI.BeginChangeCheck();
             bool changed = false;
 
-            // Camera Profile configuration
+            // Camera System configuration
             GUILayout.Space(12f);
-            EditorGUILayout.LabelField("Camera Settings", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(enableCameraProfile);
-
+            EditorGUILayout.LabelField("Camera System Settings", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(enableCameraSystem);
+            EditorGUILayout.PropertyField(cameraSystemType);
             changed |= RenderProfile(cameraProfile);
 
             // Input System configuration

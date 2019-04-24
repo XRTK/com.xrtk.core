@@ -273,7 +273,6 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
             }
 
             serializedObject.ApplyModifiedProperties();
-            EditorUtility.SetDirty(LineData);
         }
 
         protected virtual void OnSceneGUI()

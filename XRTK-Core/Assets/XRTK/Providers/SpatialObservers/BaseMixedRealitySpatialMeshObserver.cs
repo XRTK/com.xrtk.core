@@ -1,14 +1,15 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Utilities.Async;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using XRTK.Definitions.SpatialAwarenessSystem;
+using XRTK.Extensions;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Services;
-using XRTK.Utilities.Async.AwaitYieldInstructions;
+using XRTK.Utilities.Async;
 
 namespace XRTK.Providers.SpatialObservers
 {
@@ -35,19 +36,43 @@ namespace XRTK.Providers.SpatialObservers
             MeshOcclusionMaterial = profile.MeshOcclusionMaterial;
             ObservationExtents = profile.ObservationExtents;
             IsStationaryObserver = profile.IsStationaryObserver;
+            var additionalComponents = profile.AdditionalComponents;
+            meshObjectPrefab = profile.MeshObjectPrefab;
             spatialMeshObjectPool = new Stack<SpatialMeshObject>();
+
+
+            if (additionalComponents != null)
+            {
+                requiredMeshComponents = new Type[additionalComponents.Length + 3];
+                requiredMeshComponents[0] = typeof(MeshFilter);
+                requiredMeshComponents[1] = typeof(MeshRenderer);
+                requiredMeshComponents[2] = typeof(MeshCollider);
+
+                for (int i = 3; i < additionalComponents.Length; i++)
+                {
+                    var component = additionalComponents[i - 3].Type;
+                    Debug.Assert(component != null);
+                    requiredMeshComponents[i] = component;
+                }
+            }
+            else
+            {
+                requiredMeshComponents = new[]
+                {
+                    typeof(MeshFilter),
+                    typeof(MeshRenderer),
+                    typeof(MeshCollider)
+                };
+            }
         }
+
+        private readonly GameObject meshObjectPrefab;
 
         /// <summary>
         /// When a mesh is created we will need to create a game object with a minimum 
         /// set of components to contain the mesh.  These are the required component types.
         /// </summary>
-        private readonly System.Type[] requiredMeshComponents =
-        {
-            typeof(MeshFilter),
-            typeof(MeshRenderer),
-            typeof(MeshCollider)
-        };
+        private readonly Type[] requiredMeshComponents;
 
         #region IMixedRealityService Implementation
 
@@ -73,7 +98,7 @@ namespace XRTK.Providers.SpatialObservers
             if (!Application.isPlaying) { return; }
 
             // If we've got some spatial meshes and were disabled previously, turn them back on.
-            foreach (SpatialMeshObject meshObject in spatialMeshObjects.Values)
+            foreach (var meshObject in spatialMeshObjects.Values)
             {
                 meshObject.GameObject.SetActive(true);
             }
@@ -123,15 +148,15 @@ namespace XRTK.Providers.SpatialObservers
             if (!Application.isPlaying) { return; }
 
             // Cleanup the spatial meshes that are being managed by this observer.
-            foreach (SpatialMeshObject meshObject in spatialMeshObjects.Values)
+            foreach (var meshObject in spatialMeshObjects.Values)
             {
                 if (Application.isEditor)
                 {
-                    Object.DestroyImmediate(meshObject.GameObject);
+                    UnityEngine.Object.DestroyImmediate(meshObject.GameObject);
                 }
                 else
                 {
-                    Object.Destroy(meshObject.GameObject);
+                    UnityEngine.Object.Destroy(meshObject.GameObject);
                 }
             }
 
@@ -139,15 +164,15 @@ namespace XRTK.Providers.SpatialObservers
 
             lock (spatialMeshObjectPool)
             {
-                foreach (SpatialMeshObject meshObject in spatialMeshObjectPool)
+                foreach (var meshObject in spatialMeshObjectPool)
                 {
                     if (Application.isEditor)
                     {
-                        Object.DestroyImmediate(meshObject.GameObject);
+                        UnityEngine.Object.DestroyImmediate(meshObject.GameObject);
                     }
                     else
                     {
-                        Object.Destroy(meshObject.GameObject);
+                        UnityEngine.Object.Destroy(meshObject.GameObject);
                     }
                 }
 
@@ -297,10 +322,28 @@ namespace XRTK.Providers.SpatialObservers
 
         private GameObject CreateBlankSpatialMeshGameObject()
         {
-            var newGameObject = new GameObject($"Blank Spatial Mesh GameObject", requiredMeshComponents)
+            GameObject newGameObject;
+
+            var layer = MeshPhysicsLayerOverride == -1 ? base.PhysicsLayer : MeshPhysicsLayerOverride;
+
+            if (meshObjectPrefab == null)
             {
-                layer = MeshPhysicsLayerOverride == -1 ? base.PhysicsLayer : MeshPhysicsLayerOverride
-            };
+                newGameObject = new GameObject($"Blank Spatial Mesh GameObject", requiredMeshComponents)
+                {
+                    layer = layer
+                };
+            }
+            else
+            {
+                newGameObject = UnityEngine.Object.Instantiate(meshObjectPrefab);
+
+                foreach (var requiredComponent in requiredMeshComponents)
+                {
+                    newGameObject.EnsureComponent(requiredComponent);
+                }
+
+                newGameObject.layer = layer;
+            }
 
             newGameObject.transform.parent = MixedRealityToolkit.SpatialAwarenessSystem.SpatialMeshesParent.transform;
             newGameObject.SetActive(false);

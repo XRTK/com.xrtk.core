@@ -4,6 +4,7 @@
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.SpatialAwarenessSystem;
+using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.SpatialObservers
 {
@@ -74,5 +75,24 @@ namespace XRTK.Providers.SpatialObservers
         /// The material to be used when spatial meshes should occlude other objects.
         /// </summary>
         public Material MeshOcclusionMaterial => meshOcclusionMaterial;
+
+        [SerializeField]
+        [Tooltip("Additional components to add to the generated spatial mesh GameObject")]
+        [SystemType(typeof(Component), TypeGrouping.ByAddComponentMenu)]
+        private SystemType[] additionalComponents = new SystemType[0];
+
+        /// <summary>
+        /// Additional <see cref="Component"/>s to add to the generated spatial mesh <see cref="GameObject"/>s
+        /// </summary>
+        public SystemType[] AdditionalComponents => additionalComponents;
+
+        [SerializeField]
+        [Tooltip("Prefab to use for Object Pool instead of generated object.")]
+        private GameObject meshObjectPrefab = null;
+
+        /// <summary>
+        /// Prefab to use for Object Pool instead of generated mesh object.
+        /// </summary>
+        public GameObject MeshObjectPrefab => meshObjectPrefab;
     }
 }

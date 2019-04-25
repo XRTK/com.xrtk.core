@@ -19,6 +19,13 @@ namespace XRTK.Inspectors.Utilities
         static AutoSceneSwitcher()
         {
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
+
+            if (MixedRealityPreferences.StartSceneAsset == null &&
+                EditorBuildSettings.scenes.Length > 0 &&
+                !EditorBuildSettings.scenes[0].path.Contains("SampleScene"))
+            {
+                MixedRealityPreferences.StartSceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(EditorBuildSettings.scenes[0].path);
+            }
         }
 
         private static void OnPlayModeStateChanged(PlayModeStateChange playModeState)

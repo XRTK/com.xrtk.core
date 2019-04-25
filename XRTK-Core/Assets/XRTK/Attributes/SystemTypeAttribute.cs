@@ -11,7 +11,7 @@ namespace XRTK.Attributes
     /// Base class for class selection constraints that can be applied when selecting
     /// a <see cref="SystemType"/> with the Unity inspector.
     /// </summary>
-    public abstract class SystemTypeAttribute : PropertyAttribute
+    public class SystemTypeAttribute : PropertyAttribute
     {
         /// <summary>
         /// Gets or sets grouping of selectable classes. Defaults to <see cref="TypeGrouping.ByNamespaceFlat"/> unless explicitly specified.

@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
@@ -248,7 +247,6 @@ namespace XRTK.Inspectors.PropertyDrawers
                         if (!reference.Contains(" {missing}"))
                         {
                             reference += " {missing}";
-                            Debug.LogError($"Failed to resolve class reference for property '{property.name}' on {property.serializedObject.targetObject.name}");
                         }
                     }
                 }
@@ -330,11 +328,11 @@ namespace XRTK.Inspectors.PropertyDrawers
             var types = new List<Type>();
             var filteredTypes = GetFilteredTypes(filter);
 
-            for (var i = 0; i < filteredTypes.Count; i++)
+            foreach (var type in filteredTypes)
             {
-                if (filteredTypes[i].Name.Equals(typeName))
+                if (type.Name.Equals(typeName))
                 {
-                    types.Add(filteredTypes[i]);
+                    types.Add(type);
                 }
             }
 
@@ -347,14 +345,14 @@ namespace XRTK.Inspectors.PropertyDrawers
             menu.AddItem(new GUIContent("(None)"), selectedType == null, OnSelectedTypeName, null);
             menu.AddSeparator(string.Empty);
 
-            for (int i = 0; i < types.Count; ++i)
+            foreach (var type in types)
             {
-                string menuLabel = FormatGroupedTypeName(types[i], grouping);
+                var menuLabel = FormatGroupedTypeName(type, grouping);
 
                 if (string.IsNullOrEmpty(menuLabel)) { continue; }
 
                 var content = new GUIContent(menuLabel);
-                menu.AddItem(content, types[i] == selectedType, OnSelectedTypeName, types[i]);
+                menu.AddItem(content, type == selectedType, OnSelectedTypeName, type);
             }
 
             menu.DropDown(position);
@@ -362,7 +360,7 @@ namespace XRTK.Inspectors.PropertyDrawers
 
         private static string FormatGroupedTypeName(Type type, TypeGrouping grouping)
         {
-            string name = type.FullName;
+            var name = type.FullName;
 
             switch (grouping)
             {

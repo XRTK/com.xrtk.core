@@ -280,7 +280,8 @@ namespace XRTK.Definitions.Devices
             {
                 foreach (var profile in profiles.ControllerMappingProfiles)
                 {
-                    if (profile.ControllerType == controllerType)
+                    if (profile != null &&
+                        profile.ControllerType == controllerType)
                     {
                         var texture = GetControllerTextureInternal(profile.TexturePath, handedness, scaled);
 
@@ -297,7 +298,7 @@ namespace XRTK.Definitions.Devices
 
         private static Texture2D GetControllerTextureInternal(string fullTexturePath, Handedness handedness, bool scaled)
         {
-            string handednessSuffix = string.Empty;
+            var handednessSuffix = string.Empty;
 
             switch (handedness)
             {
@@ -309,7 +310,7 @@ namespace XRTK.Definitions.Devices
                     break;
             }
 
-            string themeSuffix = EditorGUIUtility.isProSkin ? "_white" : "_black";
+            var themeSuffix = EditorGUIUtility.isProSkin ? "_white" : "_black";
 
             return (Texture2D)AssetDatabase.LoadAssetAtPath($"{fullTexturePath}{handednessSuffix}{themeSuffix}{(scaled ? "_scaled" : string.Empty)}.png", typeof(Texture2D));
         }

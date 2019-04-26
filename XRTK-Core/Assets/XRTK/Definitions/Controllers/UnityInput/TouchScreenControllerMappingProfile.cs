@@ -7,7 +7,7 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.Controllers.UnityInput.Profiles
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Controller Mappings/Touch Screen Mapping Profile", fileName = "TouchScreenMappingProfile")]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Mappings/Touch Screen Mapping Profile", fileName = "TouchScreenMappingProfile")]
     public class TouchScreenControllerMappingProfile : BaseMixedRealityControllerMappingProfile
     {
         /// <inheritdoc />

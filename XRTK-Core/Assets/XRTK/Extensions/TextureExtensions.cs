@@ -22,7 +22,7 @@ namespace XRTK.Extensions
         public static async Task<Texture2D> LoadTextureAsync(this Texture2D texture, byte[] rawImageData)
         {
             texture.GetNativeTexturePtr();
-            await new WaitForUpdate();
+            await Awaiters.UnityMainThread;
             // TODO Call into native graphic plugin.
             return texture;
         }

@@ -10,7 +10,7 @@ namespace XRTK.Providers.Networking.WebRTC
     /// <summary>
     /// The Web RTC Network provider profile configuration.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Networking/WebRTC Profile", fileName = "MixedRealityWebRtcNetworkProviderProfile", order = (int)CreateProfileMenuItemIndices.Networking)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Networking System/WebRTC Profile", fileName = "MixedRealityWebRtcNetworkProviderProfile", order = (int)CreateProfileMenuItemIndices.NetworkingDataProviders)]
 
     public class MixedRealityWebRtcNetworkProviderProfile : BaseMixedRealityNetworkProviderProfile
     {

@@ -21,7 +21,11 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// </summary>
         /// <param name="name"></param>
         /// <param name="priority"></param>
-        public UnityTouchDataProvider(string name, uint priority) : base(name, priority) { }
+        /// <param name="profile"></param>
+        public UnityTouchDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
+            : base(name, priority, profile)
+        {
+        }
 
         private static readonly Dictionary<int, UnityTouchController> ActiveTouches = new Dictionary<int, UnityTouchController>();
 
@@ -30,12 +34,14 @@ namespace XRTK.Providers.Controllers.UnityInput
         {
             base.Update();
 
-            for (var i = 0; i < Input.touches.Length; i++)
+            var touchCount = Input.touchCount;
+
+            for (var i = 0; i < touchCount; i++)
             {
-                Touch touch = Input.touches[i];
+                var touch = Input.touches[i];
 
                 // Construct a ray from the current touch coordinates
-                Ray ray = CameraCache.Main.ScreenPointToRay(touch.position);
+                var ray = CameraCache.Main.ScreenPointToRay(touch.position);
 
                 switch (touch.phase)
                 {

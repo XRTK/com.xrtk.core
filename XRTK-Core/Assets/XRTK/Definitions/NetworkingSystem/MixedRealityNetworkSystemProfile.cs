@@ -9,7 +9,7 @@ namespace XRTK.Definitions.NetworkingSystem
     /// <summary>
     /// Configuration profile settings for setting up networking.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Network System Profile", fileName = "MixedRealityNetworkSystemProfile", order = (int)CreateProfileMenuItemIndices.Networking)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Network System Profile", fileName = "MixedRealityNetworkSystemProfile", order = (int)CreateProfileMenuItemIndices.Networking)]
     public class MixedRealityNetworkSystemProfile : BaseMixedRealityProfile
     {
         [SerializeField]

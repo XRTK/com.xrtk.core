@@ -3,8 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Extensions.EditorClassExtensions;
+using XRTK.Inspectors.Utilities.SymbolicLinks;
 using XRTK.Utilities.Editor;
 
 namespace XRTK.Inspectors
@@ -116,7 +119,7 @@ namespace XRTK.Inspectors
             }
             set
             {
-                sceneAsset = value != null ? GetSceneObject(value.name) : null;
+                sceneAsset = value != null ? GetSceneObject(value) : null;
                 var scenePath = value != null ? AssetDatabase.GetAssetOrScenePath(value) : string.Empty;
                 EditorPreferences.Set(START_SCENE_KEY, scenePath);
             }
@@ -124,98 +127,267 @@ namespace XRTK.Inspectors
 
         #endregion  Start Scene Preference
 
+        #region Symbolic Link Preferences
+
+        private static bool isSymbolicLinkSettingsPathLoaded;
+        private static string symbolicLinkSettingsPath = string.Empty;
+
+        public static string SymbolicLinkSettingsPath
+        {
+            get
+            {
+                if (!isSymbolicLinkSettingsPathLoaded)
+                {
+                    symbolicLinkSettingsPath = EditorPreferences.Get("_SymbolicLinkSettingsPath", string.Empty);
+                    isSymbolicLinkSettingsPathLoaded = true;
+                }
+
+                if (string.IsNullOrEmpty(symbolicLinkSettingsPath))
+                {
+                    symbolicLinkSettingsPath = AssetDatabase
+                        .FindAssets($"t:{typeof(SymbolicLinkSettings).Name}")
+                        .Select(AssetDatabase.GUIDToAssetPath)
+                        .OrderBy(x => x)
+                        .FirstOrDefault();
+                }
+
+                if (Application.isBatchMode)
+                {
+                    Debug.Log(symbolicLinkSettingsPath);
+                }
+
+                return symbolicLinkSettingsPath;
+            }
+            set => EditorPreferences.Set("_SymbolicLinkSettingsPath", symbolicLinkSettingsPath = value);
+        }
+
+        private static bool isAutoLoadSymbolicLinksLoaded;
+        private static bool autoLoadSymbolicLinks = true;
+
+        public static bool AutoLoadSymbolicLinks
+        {
+            get
+            {
+                if (!isAutoLoadSymbolicLinksLoaded)
+                {
+                    autoLoadSymbolicLinks = EditorPreferences.Get("_AutoLoadSymbolicLinks", true);
+                    isAutoLoadSymbolicLinksLoaded = true;
+                }
+
+                return autoLoadSymbolicLinks;
+            }
+            set
+            {
+                EditorPreferences.Set("_AutoLoadSymbolicLinks", autoLoadSymbolicLinks = value);
+
+                if (autoLoadSymbolicLinks && SymbolicLinker.Settings == null)
+                {
+                    var profile = ScriptableObject.CreateInstance(nameof(SymbolicLinkSettings));
+                    profile.CreateAsset("Assets/XRTK.Generated/CustomProfiles");
+                }
+            }
+        }
+
+        #endregion Symbolic Link Preferences
+
+        #region Debug Packages
+
+        private static readonly GUIContent DebugUpmContent = new GUIContent("Debug package loading", "Enable or disable the debug information for package loading.\n\nThis setting only applies to the currently running project.");
+        private const string PACKAGE_DEBUG_KEY = "EnablePackageDebug";
+        private static bool isPackageDebugPrefLoaded;
+        private static bool debugPackageInfo;
+
+        /// <summary>
+        /// Enabled debugging info for the xrtk upm packages.
+        /// </summary>
+        public static bool DebugPackageInfo
+        {
+            get
+            {
+                if (!isPackageDebugPrefLoaded)
+                {
+                    debugPackageInfo = EditorPreferences.Get(PACKAGE_DEBUG_KEY, Application.isBatchMode);
+                    isPackageDebugPrefLoaded = true;
+                }
+
+                return debugPackageInfo;
+            }
+            set => EditorPreferences.Set(PACKAGE_DEBUG_KEY, debugPackageInfo = value);
+        }
+
+        #endregion Debug Packages
+
         [SettingsProvider]
         private static SettingsProvider Preferences()
         {
-            var provider = new SettingsProvider("Project/XRTK")
+            return new SettingsProvider("Preferences/XRTK", SettingsScope.User, XRTK_Keywords)
             {
                 label = "XRTK",
-
-                guiHandler = GUIHandler,
-
+                guiHandler = OnPreferencesGui,
                 keywords = new HashSet<string>(XRTK_Keywords)
             };
-
-            void GUIHandler(string searchContext)
-            {
-                var prevLabelWidth = EditorGUIUtility.labelWidth;
-                EditorGUIUtility.labelWidth = 200f;
-
-                EditorGUI.BeginChangeCheck();
-                lockProfiles = EditorGUILayout.Toggle(LockContent, LockProfiles);
-
-                // Save the preference
-                if (EditorGUI.EndChangeCheck())
-                {
-                    LockProfiles = lockProfiles;
-                }
-
-                if (!LockProfiles)
-                {
-                    EditorGUILayout.HelpBox("This is only to be used to update the default SDK profiles. If any edits are made, and not checked into the XRTK's Github, the changes may be lost next time you update your local copy.", MessageType.Warning);
-                }
-
-                EditorGUI.BeginChangeCheck();
-                ignoreSettingsPrompt = EditorGUILayout.Toggle(IgnoreContent, IgnoreSettingsPrompt);
-
-                // Save the preference
-                if (EditorGUI.EndChangeCheck())
-                {
-                    IgnoreSettingsPrompt = ignoreSettingsPrompt;
-                }
-
-                EditorGUI.BeginChangeCheck();
-                showCanvasUtilityPrompt = EditorGUILayout.Toggle(CanvasUtilityContent, ShowCanvasUtilityPrompt);
-
-                if (EditorGUI.EndChangeCheck())
-                {
-                    ShowCanvasUtilityPrompt = showCanvasUtilityPrompt;
-                }
-
-                if (!ShowCanvasUtilityPrompt)
-                {
-                    EditorGUILayout.HelpBox("Be aware that if a Canvas needs to receive input events it is required to have the CanvasUtility attached or the Focus Provider's UIRaycast Camera assigned to the canvas' camera reference.", MessageType.Warning);
-                }
-
-                EditorGUI.BeginChangeCheck();
-                var startScene = (SceneAsset)EditorGUILayout.ObjectField(StartSceneContent, StartSceneAsset, typeof(SceneAsset), true);
-
-                if (EditorGUI.EndChangeCheck())
-                {
-                    StartSceneAsset = startScene;
-                }
-
-                EditorGUI.BeginChangeCheck();
-                var scriptLock = EditorGUILayout.Toggle("Is Script Reloading locked?", EditorAssemblyReloadManager.LockReloadAssemblies);
-
-                if (EditorGUI.EndChangeCheck())
-                {
-                    EditorAssemblyReloadManager.LockReloadAssemblies = scriptLock;
-                }
-
-                EditorGUIUtility.labelWidth = prevLabelWidth;
-            }
-
-            return provider;
         }
 
-        private static SceneAsset GetSceneObject(string sceneName)
+        private static void OnPreferencesGui(string searchContext)
+        {
+            var prevLabelWidth = EditorGUIUtility.labelWidth;
+            EditorGUIUtility.labelWidth = 200f;
+
+            EditorGUI.BeginChangeCheck();
+            lockProfiles = EditorGUILayout.Toggle(LockContent, LockProfiles);
+
+            // Save the preference
+            if (EditorGUI.EndChangeCheck())
+            {
+                LockProfiles = lockProfiles;
+            }
+
+            if (!LockProfiles)
+            {
+                EditorGUILayout.HelpBox("This is only to be used to update the default SDK profiles. If any edits are made, and not checked into the XRTK's Github, the changes may be lost next time you update your local copy.", MessageType.Warning);
+            }
+
+            EditorGUI.BeginChangeCheck();
+            ignoreSettingsPrompt = EditorGUILayout.Toggle(IgnoreContent, IgnoreSettingsPrompt);
+
+            // Save the preference
+            if (EditorGUI.EndChangeCheck())
+            {
+                IgnoreSettingsPrompt = ignoreSettingsPrompt;
+            }
+
+            EditorGUI.BeginChangeCheck();
+            showCanvasUtilityPrompt = EditorGUILayout.Toggle(CanvasUtilityContent, ShowCanvasUtilityPrompt);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                ShowCanvasUtilityPrompt = showCanvasUtilityPrompt;
+            }
+
+            if (!ShowCanvasUtilityPrompt)
+            {
+                EditorGUILayout.HelpBox("Be aware that if a Canvas needs to receive input events it is required to have the CanvasUtility attached or the Focus Provider's UIRaycast Camera assigned to the canvas' camera reference.", MessageType.Warning);
+            }
+
+            EditorGUI.BeginChangeCheck();
+            var startScene = (SceneAsset)EditorGUILayout.ObjectField(StartSceneContent, StartSceneAsset, typeof(SceneAsset), true);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                StartSceneAsset = startScene;
+            }
+
+            EditorGUI.BeginChangeCheck();
+            var scriptLock = EditorGUILayout.Toggle("Is Script Reloading locked?", EditorAssemblyReloadManager.LockReloadAssemblies);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                EditorAssemblyReloadManager.LockReloadAssemblies = scriptLock;
+            }
+
+            EditorGUI.BeginChangeCheck();
+            autoLoadSymbolicLinks = EditorGUILayout.Toggle("Auto Load Symbolic Links", AutoLoadSymbolicLinks);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                AutoLoadSymbolicLinks = autoLoadSymbolicLinks;
+
+                if (AutoLoadSymbolicLinks)
+                {
+                    EditorApplication.delayCall += () => SymbolicLinker.RunSync();
+                }
+            }
+
+            EditorGUI.BeginChangeCheck();
+            var symbolicLinkSettings = EditorGUILayout.ObjectField("Symbolic Link Settings", SymbolicLinker.Settings, typeof(SymbolicLinkSettings), false) as SymbolicLinkSettings;
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                if (symbolicLinkSettings != null)
+                {
+                    var shouldSync = string.IsNullOrEmpty(SymbolicLinkSettingsPath);
+                    SymbolicLinkSettingsPath = AssetDatabase.GetAssetPath(symbolicLinkSettings);
+                    SymbolicLinker.Settings = AssetDatabase.LoadAssetAtPath<SymbolicLinkSettings>(SymbolicLinkSettingsPath);
+
+                    if (shouldSync)
+                    {
+                        EditorApplication.delayCall += () => SymbolicLinker.RunSync();
+                    }
+                }
+                else
+                {
+                    SymbolicLinkSettingsPath = string.Empty;
+                    SymbolicLinker.Settings = null;
+                }
+            }
+
+            EditorGUI.BeginChangeCheck();
+            debugPackageInfo = EditorGUILayout.Toggle(DebugUpmContent, DebugPackageInfo);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                DebugPackageInfo = debugPackageInfo;
+            }
+
+            EditorGUIUtility.labelWidth = prevLabelWidth;
+        }
+
+        private static SceneAsset GetSceneObject(SceneAsset asset)
+        {
+            return GetSceneObject(asset.name, asset);
+        }
+
+        private static SceneAsset GetSceneObject(string sceneName, SceneAsset asset = null)
         {
             if (string.IsNullOrEmpty(sceneName))
             {
                 return null;
             }
 
-            foreach (EditorBuildSettingsScene editorScene in EditorBuildSettings.scenes)
+            EditorBuildSettingsScene editorScene = null;
+
+            try
             {
-                if (editorScene.path.IndexOf(sceneName, StringComparison.Ordinal) != -1)
-                {
-                    return AssetDatabase.LoadAssetAtPath(editorScene.path, typeof(SceneAsset)) as SceneAsset;
-                }
+                editorScene = EditorBuildSettings.scenes.First(scene => scene.path.IndexOf(sceneName, StringComparison.Ordinal) != -1);
+            }
+            catch
+            {
+                // ignored
             }
 
-            Debug.LogWarning($"Scene [{sceneName}] cannot be used.  To use this scene add it to the build settings for the project.");
-            return null;
+            if (editorScene != null)
+            {
+                asset = AssetDatabase.LoadAssetAtPath(editorScene.path, typeof(SceneAsset)) as SceneAsset;
+            }
+
+            if (asset == null)
+            {
+                return null;
+            }
+
+            AssetDatabase.TryGetGUIDAndLocalFileIdentifier(asset, out var guid, out long _);
+            var sceneGuid = new GUID(guid);
+
+            if (EditorBuildSettings.scenes.Length == 0 ||
+                EditorBuildSettings.scenes[0].guid != sceneGuid)
+            {
+                editorScene = new EditorBuildSettingsScene(sceneGuid, true);
+                var scenes = EditorBuildSettings.scenes
+                    .Where(scene => scene.guid != sceneGuid)
+                    .Prepend(editorScene)
+                    .ToArray();
+                EditorBuildSettings.scenes = scenes;
+                Debug.Assert(EditorBuildSettings.scenes[0].guid == sceneGuid);
+                AssetDatabase.SaveAssets();
+                AssetDatabase.Refresh();
+            }
+
+            if (!EditorBuildSettings.scenes[0].enabled)
+            {
+                EditorBuildSettings.scenes[0].enabled = true;
+            }
+
+            return asset;
         }
     }
 }

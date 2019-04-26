@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ProcessExtensions
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.41.0.0">
+    <meta name="generator" content="docfx 2.42.1.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -73,7 +73,7 @@
   
   <h1 id="XRTK_Extensions_ProcessExtensions" data-uid="XRTK.Extensions.ProcessExtensions" class="text-break">Class ProcessExtensions
   </h1>
-  <div class="markdown level0 summary"><p>Process Extension class.</p>
+  <div class="markdown level0 summary"><p><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.diagnostics.process">Process</a> Extension class.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -115,20 +115,90 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_ProcessExtensions_StartProcessAsync_System_Diagnostics_Process_System_Diagnostics_ProcessStartInfo_System_Boolean_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20XRTK.Extensions.ProcessExtensions.StartProcessAsync(System.Diagnostics.Process%2CSystem.Diagnostics.ProcessStartInfo%2CSystem.Boolean%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_ProcessExtensions_Run_System_Diagnostics_Process_System_String_System_String__System_String_.md&amp;value=---%0Auid%3A%20XRTK.Extensions.ProcessExtensions.Run(System.Diagnostics.Process%2CSystem.String%2CSystem.String%40%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Extensions/ProcessExtensions.cs/#L50">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Extensions/ProcessExtensions.cs/#L28">View Source</a>
   </span>
-  <a id="XRTK_Extensions_ProcessExtensions_StartProcessAsync_" data-uid="XRTK.Extensions.ProcessExtensions.StartProcessAsync*"></a>
-  <h4 id="XRTK_Extensions_ProcessExtensions_StartProcessAsync_System_Diagnostics_Process_System_Diagnostics_ProcessStartInfo_System_Boolean_System_Threading_CancellationToken_" data-uid="XRTK.Extensions.ProcessExtensions.StartProcessAsync(System.Diagnostics.Process,System.Diagnostics.ProcessStartInfo,System.Boolean,System.Threading.CancellationToken)">StartProcessAsync(Process, ProcessStartInfo, Boolean, CancellationToken)</h4>
+  <a id="XRTK_Extensions_ProcessExtensions_Run_" data-uid="XRTK.Extensions.ProcessExtensions.Run*"></a>
+  <h4 id="XRTK_Extensions_ProcessExtensions_Run_System_Diagnostics_Process_System_String_System_String__System_String_" data-uid="XRTK.Extensions.ProcessExtensions.Run(System.Diagnostics.Process,System.String,System.String@,System.String)">Run(Process, String, out String, String)</h4>
+  <div class="markdown level1 summary"><p>Runs an external process.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool Run(this Process process, string args, out string output, string application = &quot;cmd.exe&quot;)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.diagnostics.process">Process</a></td>
+        <td><span class="parametername">process</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">args</span></td>
+        <td><p>The passed arguments.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">output</span></td>
+        <td><p>The output of the process.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">application</span></td>
+        <td><p>The Application to run through the command line. Default application is &quot;cmd.exe&quot;</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>Output string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="XRTK_Extensions_ProcessExtensions_Run_System_Diagnostics_Process_System_String_System_String__System_String__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This process will block the main thread of the editor if command takes too long to run. Use <a class="xref" href="XRTK.Extensions.ProcessExtensions.html#XRTK_Extensions_ProcessExtensions_RunAsync_System_Diagnostics_Process_System_String_System_String_System_Boolean_System_Threading_CancellationToken_">RunAsync(Process, String, String, Boolean, CancellationToken)</a> for a background process.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_ProcessExtensions_RunAsync_System_Diagnostics_Process_System_Diagnostics_ProcessStartInfo_System_Boolean_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20XRTK.Extensions.ProcessExtensions.RunAsync(System.Diagnostics.Process%2CSystem.Diagnostics.ProcessStartInfo%2CSystem.Boolean%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Extensions/ProcessExtensions.cs/#L111">View Source</a>
+  </span>
+  <a id="XRTK_Extensions_ProcessExtensions_RunAsync_" data-uid="XRTK.Extensions.ProcessExtensions.RunAsync*"></a>
+  <h4 id="XRTK_Extensions_ProcessExtensions_RunAsync_System_Diagnostics_Process_System_Diagnostics_ProcessStartInfo_System_Boolean_System_Threading_CancellationToken_" data-uid="XRTK.Extensions.ProcessExtensions.RunAsync(System.Diagnostics.Process,System.Diagnostics.ProcessStartInfo,System.Boolean,System.Threading.CancellationToken)">RunAsync(Process, ProcessStartInfo, Boolean, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Starts a process asynchronously.<p>
 <remarks>The provided Process Start Info must not use shell execution, and should redirect the standard output and errors.</remarks></p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task&lt;ProcessResult&gt; StartProcessAsync(this Process process, ProcessStartInfo startInfo, bool showDebug = false, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task&lt;ProcessResult&gt; RunAsync(this Process process, ProcessStartInfo startInfo, bool showDebug = false, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -183,19 +253,19 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_ProcessExtensions_StartProcessAsync_System_Diagnostics_Process_System_String_System_String_System_Boolean_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20XRTK.Extensions.ProcessExtensions.StartProcessAsync(System.Diagnostics.Process%2CSystem.String%2CSystem.String%2CSystem.Boolean%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_ProcessExtensions_RunAsync_System_Diagnostics_Process_System_String_System_String_System_Boolean_System_Threading_CancellationToken_.md&amp;value=---%0Auid%3A%20XRTK.Extensions.ProcessExtensions.RunAsync(System.Diagnostics.Process%2CSystem.String%2CSystem.String%2CSystem.Boolean%2CSystem.Threading.CancellationToken)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Extensions/ProcessExtensions.cs/#L28">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Assets/XRTK/Extensions/ProcessExtensions.cs/#L89">View Source</a>
   </span>
-  <a id="XRTK_Extensions_ProcessExtensions_StartProcessAsync_" data-uid="XRTK.Extensions.ProcessExtensions.StartProcessAsync*"></a>
-  <h4 id="XRTK_Extensions_ProcessExtensions_StartProcessAsync_System_Diagnostics_Process_System_String_System_String_System_Boolean_System_Threading_CancellationToken_" data-uid="XRTK.Extensions.ProcessExtensions.StartProcessAsync(System.Diagnostics.Process,System.String,System.String,System.Boolean,System.Threading.CancellationToken)">StartProcessAsync(Process, String, String, Boolean, CancellationToken)</h4>
+  <a id="XRTK_Extensions_ProcessExtensions_RunAsync_" data-uid="XRTK.Extensions.ProcessExtensions.RunAsync*"></a>
+  <h4 id="XRTK_Extensions_ProcessExtensions_RunAsync_System_Diagnostics_Process_System_String_System_String_System_Boolean_System_Threading_CancellationToken_" data-uid="XRTK.Extensions.ProcessExtensions.RunAsync(System.Diagnostics.Process,System.String,System.String,System.Boolean,System.Threading.CancellationToken)">RunAsync(Process, String, String, Boolean, CancellationToken)</h4>
   <div class="markdown level1 summary"><p>Starts a process asynchronously.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Task&lt;ProcessResult&gt; StartProcessAsync(this Process process, string fileName, string args, bool showDebug = false, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
+    <pre><code class="lang-csharp hljs">public static Task&lt;ProcessResult&gt; RunAsync(this Process process, string args, string application = &quot;cmd.exe&quot;, bool showDebug = false, CancellationToken cancellationToken = default(CancellationToken))</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -215,14 +285,14 @@
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">fileName</span></td>
-        <td><p>The process executable to run.</p>
+        <td><span class="parametername">args</span></td>
+        <td><p>The Process arguments.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">args</span></td>
-        <td><p>The Process arguments.</p>
+        <td><span class="parametername">application</span></td>
+        <td><p>The process executable to run.</p>
 </td>
       </tr>
       <tr>

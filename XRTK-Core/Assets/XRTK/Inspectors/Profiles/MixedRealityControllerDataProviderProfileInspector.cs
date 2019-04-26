@@ -85,12 +85,14 @@ namespace XRTK.Inspectors.Profiles
                 var dataProviderName = newConfiguration.FindPropertyRelative("dataProviderName");
                 var priority = newConfiguration.FindPropertyRelative("priority");
                 var runtimePlatform = newConfiguration.FindPropertyRelative("runtimePlatform");
+                var profile = newConfiguration.FindPropertyRelative("profile");
 
                 serializedObject.ApplyModifiedProperties();
                 dataProviderType.FindPropertyRelative("reference").stringValue = string.Empty;
                 dataProviderName.stringValue = "New Controller Data Provider";
                 priority.intValue = 5;
                 runtimePlatform.intValue = 0;
+                profile.objectReferenceValue = null;
                 serializedObject.ApplyModifiedProperties();
                 foldouts = new bool[controllerDataProviders.arraySize];
                 changed = true;
@@ -106,6 +108,7 @@ namespace XRTK.Inspectors.Profiles
                 var dataProviderType = controllerConfiguration.FindPropertyRelative("dataProviderType");
                 var priority = controllerConfiguration.FindPropertyRelative("priority");
                 var runtimePlatform = controllerConfiguration.FindPropertyRelative("runtimePlatform");
+                var profile = controllerConfiguration.FindPropertyRelative("profile");
 
                 EditorGUILayout.BeginHorizontal();
                 foldouts[i] = EditorGUILayout.Foldout(foldouts[i], dataProviderName.stringValue, true);
@@ -131,6 +134,7 @@ namespace XRTK.Inspectors.Profiles
                     EditorGUILayout.PropertyField(dataProviderName);
                     EditorGUILayout.PropertyField(priority);
                     EditorGUILayout.PropertyField(runtimePlatform);
+                    RenderProfile(profile, new GUIContent("Profile"), false);
 
                     if (EditorGUI.EndChangeCheck())
                     {

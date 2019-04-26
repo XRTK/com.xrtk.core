@@ -1,4 +1,6 @@
+using JetBrains.Annotations;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -35,8 +37,8 @@ namespace XRTK.Utilities.Build
             // Call the pre-build action, if any
             buildInfo.PreBuildAction?.Invoke(buildInfo);
 
-            BuildTargetGroup buildTargetGroup = buildInfo.BuildTarget.GetGroup();
-            string playerBuildSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
+            var buildTargetGroup = buildInfo.BuildTarget.GetGroup();
+            var playerBuildSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
 
             if (!string.IsNullOrEmpty(playerBuildSymbols))
             {
@@ -81,8 +83,8 @@ namespace XRTK.Utilities.Build
                 PlayerSettings.colorSpace = buildInfo.ColorSpace.Value;
             }
 
-            BuildTarget oldBuildTarget = EditorUserBuildSettings.activeBuildTarget;
-            BuildTargetGroup oldBuildTargetGroup = oldBuildTarget.GetGroup();
+            var oldBuildTarget = EditorUserBuildSettings.activeBuildTarget;
+            var oldBuildTargetGroup = oldBuildTarget.GetGroup();
 
             if (EditorUserBuildSettings.activeBuildTarget != buildInfo.BuildTarget)
             {
@@ -101,6 +103,14 @@ namespace XRTK.Utilities.Build
             }
 
             BuildReport buildReport = default;
+
+            if (Application.isBatchMode)
+            {
+                foreach (var scene in buildInfo.Scenes)
+                {
+                    Debug.Log($"BuildScene->{scene.path}");
+                }
+            }
 
             try
             {
@@ -139,8 +149,20 @@ namespace XRTK.Utilities.Build
         }
 
         /// <summary>
-        /// Start a build using Unity's command line.
+        /// Start a build using Unity's command line. Valid arguments:<para/>
+        /// -autoIncrement : Increments the build revision number.<para/>
+        /// -sceneList : A csv of a list of scenes to include in the build.<para/>
+        /// -sceneListFile : A json file with a list of scenes to include in the build.<para/>
+        /// -buildOutput : The target directory you'd like the build to go.<para/>
+        /// -colorSpace : The <see cref="ColorSpace"/> settings for the build.<para/>
+        /// -x86 / -x64 : The target build platform. (Default is x86)<para/>
+        /// -debug / -release / -master : The target build configuration. (Default is master)<para/>
+        ///
+        /// UWP Platform Specific arguments:<para/>
+        /// -buildAppx : Builds the appx bundle after the Unity Build step.<para/>
+        /// -rebuildAppx : Rebuild the appx bundle.<para/>
         /// </summary>
+        [UsedImplicitly]
         public static async void StartCommandLineBuild()
         {
             // We don't need stack traces on all our logs. Makes things a lot easier to read.
@@ -152,10 +174,11 @@ namespace XRTK.Utilities.Build
             try
             {
                 SyncSolution();
+
                 switch (EditorUserBuildSettings.activeBuildTarget)
                 {
                     case BuildTarget.WSAPlayer:
-                        success = await UwpPlayerBuildTools.BuildPlayer(new UwpBuildInfo(true) { BuildAppx = true });
+                        success = await UwpPlayerBuildTools.BuildPlayer(new UwpBuildInfo(true));
                         break;
                     default:
                         var buildInfo = new BuildInfo(true) as IBuildInfo;
@@ -179,11 +202,13 @@ namespace XRTK.Utilities.Build
         {
             if (EditorBuildSettings.scenes.Length == 0)
             {
-                return EditorUtility.DisplayDialog("Attention!",
-                                                   "No scenes are present in the build settings.\n" +
-                                                   "The current scene will be the one built.\n\n" +
-                                                   "Do you want to cancel and add one?",
-                                                   "Continue Anyway", "Cancel Build");
+                return EditorUtility.DisplayDialog(
+                    "Attention!",
+                    "No scenes are present in the build settings.\n" +
+                    "The current scene will be the one built.\n\n" +
+                    "Do you want to cancel and add one?",
+                    "Continue Anyway",
+                    "Cancel Build");
             }
 
             return true;
@@ -198,9 +223,13 @@ namespace XRTK.Utilities.Build
             return Path.GetDirectoryName(Path.GetFullPath(Application.dataPath));
         }
 
+        /// <summary>
+        /// Parses the command like arguments.
+        /// </summary>
+        /// <param name="buildInfo"></param>
         public static void ParseBuildCommandLine(ref IBuildInfo buildInfo)
         {
-            string[] arguments = Environment.GetCommandLineArgs();
+            var arguments = Environment.GetCommandLineArgs();
 
             for (int i = 0; i < arguments.Length; ++i)
             {
@@ -209,8 +238,11 @@ namespace XRTK.Utilities.Build
                     case "-autoIncrement":
                         buildInfo.AutoIncrement = true;
                         break;
-                    case "-scenes":
-                        // TODO parse json scene list and set them.
+                    case "-sceneList":
+                        buildInfo.Scenes = buildInfo.Scenes.Union(SplitSceneList(arguments[++i]));
+                        break;
+                    case "-sceneListFile":
+                        buildInfo.Scenes = buildInfo.Scenes.Union(SplitSceneList(File.ReadAllText(arguments[++i])));
                         break;
                     case "-buildOutput":
                         buildInfo.OutputDirectory = arguments[++i];
@@ -231,6 +263,14 @@ namespace XRTK.Utilities.Build
             }
         }
 
+        private static IEnumerable<EditorBuildSettingsScene> SplitSceneList(string sceneList)
+        {
+            var sceneListArray = sceneList.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
+            return sceneListArray
+                .Where(scenePath => !string.IsNullOrWhiteSpace(scenePath))
+                .Select(scene => new EditorBuildSettingsScene(scene.Trim(), true));
+        }
+
         /// <summary>
         /// Restores any nuget packages at the path specified.
         /// </summary>
@@ -242,7 +282,7 @@ namespace XRTK.Utilities.Build
             Debug.Assert(File.Exists(nugetPath));
             Debug.Assert(Directory.Exists(storePath));
 
-            await new Process().StartProcessAsync(nugetPath, $"restore \"{storePath}/project.json\"");
+            await new Process().RunAsync($"restore \"{storePath}/project.json\"", nugetPath);
 
             return File.Exists($"{storePath}\\project.lock.json");
         }

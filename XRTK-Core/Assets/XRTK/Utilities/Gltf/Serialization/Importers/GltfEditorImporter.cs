@@ -4,7 +4,7 @@ using UnityEditor.Experimental.AssetImporters;
 using UnityEngine;
 using XRTK.Utilities.Gltf.Schema;
 
-namespace XRTK.Utilities.Gltf.Serialization.Editor
+namespace XRTK.Utilities.Gltf.Serialization.Importers
 {
     public static class GltfEditorImporter
     {

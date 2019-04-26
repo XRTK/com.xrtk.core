@@ -3,7 +3,7 @@
     {
       "src": [
         {
-          "src": "../XRTK-Core",
+          "src": "../",
           "exclude": [
             "**/Builds/**",
             "**/Library/**",
@@ -12,7 +12,10 @@
             "**/ProjectSettings/**",
             "**/Temp/**",
             "**/ThirdParty/**",
-            "**/.vs/**"
+            "**/.vs/**",
+            "**/.github/**",
+            "**/docs/**",
+            "**/docfx_project/**"
           ],
           "files": [
             "**.sln",
@@ -20,7 +23,7 @@
           ]
         }
       ],
-      "dest": "api",
+      "dest": "../api",
       "disableGitFeatures": false,
       "disableDefaultFilter": false
     }
@@ -34,12 +37,14 @@
     ],
     "content": [
       {
+        "src":"../",
         "files": [
           "api/**.yml",
           "api/index.md"
         ]
       },
       {
+        "src":"../",
         "files": [
           "toc.yml",
           "*.md"
@@ -59,8 +64,8 @@
           "apidoc/**.md"
         ],
         "exclude": [
-          "obj/**",
-          "../docs/**"
+          "**/obj/**",
+          "**/docs/**"
         ]
       }
     ],

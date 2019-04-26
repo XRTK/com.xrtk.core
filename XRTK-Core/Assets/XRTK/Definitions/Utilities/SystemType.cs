@@ -24,7 +24,7 @@ namespace XRTK.Definitions.Utilities
                 return string.Empty;
             }
 
-            string[] qualifiedNameComponents = type.AssemblyQualifiedName.Split(',');
+            var qualifiedNameComponents = type.AssemblyQualifiedName.Split(',');
             Debug.Assert(qualifiedNameComponents.Length >= 2);
             return $"{qualifiedNameComponents[0]}, {qualifiedNameComponents[1].Trim()}";
         }
@@ -54,9 +54,6 @@ namespace XRTK.Definitions.Utilities
         /// Initializes a new instance of the <see cref="SystemType"/> class.
         /// </summary>
         /// <param name="type">Class type.</param>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="type"/> is not a class type.
-        /// </exception>
         public SystemType(Type type)
         {
             Type = type;
@@ -76,9 +73,6 @@ namespace XRTK.Definitions.Utilities
         /// <summary>
         /// Gets or sets type of class reference.
         /// </summary>
-        /// <exception cref="ArgumentException">
-        /// If <paramref name="value"/> is not a class type.
-        /// </exception>
         public Type Type
         {
             get => type;

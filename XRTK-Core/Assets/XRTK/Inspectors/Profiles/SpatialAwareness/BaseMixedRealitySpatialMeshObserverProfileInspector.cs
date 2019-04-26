@@ -17,6 +17,8 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         private SerializedProperty meshDisplayOption;
         private SerializedProperty meshVisibleMaterial;
         private SerializedProperty meshOcclusionMaterial;
+        private SerializedProperty additionalComponents;
+        private SerializedProperty meshObjectPrefab;
 
         private static bool foldout = true;
 
@@ -37,13 +39,15 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             meshDisplayOption = serializedObject.FindProperty("meshDisplayOption");
             meshVisibleMaterial = serializedObject.FindProperty("meshVisibleMaterial");
             meshOcclusionMaterial = serializedObject.FindProperty("meshOcclusionMaterial");
+            additionalComponents = serializedObject.FindProperty("additionalComponents");
+            meshObjectPrefab = serializedObject.FindProperty("meshObjectPrefab");
         }
 
         /// <inheritdoc />
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
+            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
             {
                 return;
             }
@@ -62,6 +66,10 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
                 EditorGUILayout.PropertyField(meshDisplayOption);
                 EditorGUILayout.PropertyField(meshVisibleMaterial);
                 EditorGUILayout.PropertyField(meshOcclusionMaterial);
+                EditorGUILayout.PropertyField(additionalComponents, true);
+                EditorGUILayout.HelpBox("Note: MeshFilter, MeshRenderer, and MeshCollider are already added automatically as they're required components for a mesh object.", MessageType.Info);
+                EditorGUILayout.PropertyField(meshObjectPrefab);
+                EditorGUILayout.HelpBox("The mesh object is procedurally generated, but you can also use an empty prefab object as well with predefined components and data.", MessageType.Info);
                 EditorGUI.indentLevel--;
             }
 

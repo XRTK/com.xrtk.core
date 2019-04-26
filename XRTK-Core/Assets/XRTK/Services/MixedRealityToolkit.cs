@@ -229,11 +229,11 @@ namespace XRTK.Services
         /// <summary>
         /// Lock property for the Mixed Reality Toolkit to prevent reinitialization
         /// </summary>
-        private static readonly object initializedLock = new object();
+        private static readonly object InitializedLock = new object();
 
         private void InitializeInstance()
         {
-            lock (initializedLock)
+            lock (InitializedLock)
             {
                 if (IsInitialized) { return; }
 
@@ -430,12 +430,6 @@ namespace XRTK.Services
                     {
                         foreach (var spatialObserver in ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders)
                         {
-                            if (spatialObserver.Profile == null)
-                            {
-                                Debug.LogError($"Missing profile for {spatialObserver.SpatialObserverName}");
-                                continue;
-                            }
-
                             if (!CreateAndRegisterService<IMixedRealitySpatialObserverDataProvider>(
                                 spatialObserver.SpatialObserverType,
                                 spatialObserver.RuntimePlatform,
@@ -591,7 +585,7 @@ namespace XRTK.Services
                     {
                         // Since the scene is set up with a different camera parent, its likely
                         // that there's an expectation that that parent is going to be used for
-                        // something else. We print a warning to call out the fact that we're 
+                        // something else. We print a warning to call out the fact that we're
                         // co-opting this object for use with teleporting and such, since that
                         // might cause conflicts with the parent's intended purpose.
                         Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {MixedRealityPlayspaceName}. The existing parent will be renamed and used instead.");
@@ -606,7 +600,7 @@ namespace XRTK.Services
                 // otherwise world-locked things like playspace boundaries won't be aligned properly.
                 // For now, we'll just assume that when the playspace is first initialized, the
                 // tracked space origin overlaps with the world space origin. If a platform ever does
-                // something else (i.e, placing the lower left hand corner of the tracked space at world 
+                // something else (i.e, placing the lower left hand corner of the tracked space at world
                 // space 0,0,0), we should compensate for that here.
                 return mixedRealityPlayspace;
             }
@@ -823,18 +817,6 @@ namespace XRTK.Services
                 return false;
             }
 
-            if (concreteType == null)
-            {
-                Debug.LogError($"Unable to register a service with a null concrete {typeof(T).Name} type.");
-                return false;
-            }
-
-            if (!typeof(IMixedRealityService).IsAssignableFrom(concreteType))
-            {
-                Debug.LogError($"Unable to register the {concreteType.Name} service. It does not implement {typeof(IMixedRealityService)}.");
-                return false;
-            }
-
 #if !UNITY_EDITOR
             if (!Application.platform.IsPlatformSupported(supportedPlatforms))
 #else
@@ -845,6 +827,18 @@ namespace XRTK.Services
                 // Even though we did not register the service,
                 // it's expected that this is the intended behavior.
                 return true;
+            }
+
+            if (concreteType == null)
+            {
+                Debug.LogError($"Unable to register a service with a null concrete {typeof(T).Name} type.");
+                return false;
+            }
+
+            if (!typeof(IMixedRealityService).IsAssignableFrom(concreteType))
+            {
+                Debug.LogError($"Unable to register the {concreteType.Name} service. It does not implement {typeof(IMixedRealityService)}.");
+                return false;
             }
 
             IMixedRealityService serviceInstance;

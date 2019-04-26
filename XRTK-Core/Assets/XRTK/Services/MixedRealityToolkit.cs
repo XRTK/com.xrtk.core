@@ -229,11 +229,11 @@ namespace XRTK.Services
         /// <summary>
         /// Lock property for the Mixed Reality Toolkit to prevent reinitialization
         /// </summary>
-        private static readonly object initializedLock = new object();
+        private static readonly object InitializedLock = new object();
 
         private void InitializeInstance()
         {
-            lock (initializedLock)
+            lock (InitializedLock)
             {
                 if (IsInitialized) { return; }
 

@@ -360,7 +360,7 @@ namespace XRTK.Inspectors.PropertyDrawers
 
         private static string FormatGroupedTypeName(Type type, TypeGrouping grouping)
         {
-            string name = type.FullName;
+            var name = type.FullName;
 
             switch (grouping)
             {

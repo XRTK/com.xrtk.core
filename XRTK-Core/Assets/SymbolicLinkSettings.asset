@@ -11,7 +11,7 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff8a5d57a9af497db320551240c892c2, type: 3}
   m_Name: SymbolicLinkSettings
-  m_EditorClassIdentifier:
+  m_EditorClassIdentifier: 
   symbolicLinks:
   - sourceRelativePath: /Submodules/WindowsMixedReality/XRTK.WindowsMixedReality/Assets/XRTK.WindowsMixedReality
     targetRelativePath: /XRTK-Core/Assets/XRTK.WindowsMixedReality

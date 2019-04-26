@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEditor;
+using UnityEditor.Callbacks;
 using UnityEngine;
 using XRTK.Extensions;
 using XRTK.Inspectors.Utilities.Packages;
@@ -77,6 +78,12 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         }
 
         private static SymbolicLinkSettings settings;
+
+        [DidReloadScripts]
+        public static void RunSync()
+        {
+            RunSync(false);
+        }
 
         /// <summary>
         /// Synchronizes the project with any symbolic links defined in the settings.

@@ -22,3 +22,6 @@ MonoBehaviour:
   - sourceRelativePath: /Submodules/UpmGitExtension/XRTK.UpmGitExtension/Assets/XRTK.UpmGitExtension
     targetRelativePath: /XRTK-Core/Assets/XRTK.UpmGitExtension
     isActive: 1
+  - sourceRelativePath: /Submodules/Lumin/XRTK.Lumin/Assets/XRTK.Lumin
+    targetRelativePath: /XRTK-Core/Assets/XRTK.Lumin
+    isActive: 1

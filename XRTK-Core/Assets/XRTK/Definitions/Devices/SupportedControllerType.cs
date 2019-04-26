@@ -20,5 +20,6 @@ namespace XRTK.Definitions.Devices
         Xbox,
         TouchScreen,
         Mouse,
+        Lumin
     }
 }

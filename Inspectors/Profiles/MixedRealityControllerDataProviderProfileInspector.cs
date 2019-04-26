@@ -15,6 +15,7 @@ namespace XRTK.Inspectors.Profiles
     {
         private static readonly GUIContent AddControllerDataProviderContent = new GUIContent("+ Add a New Controller Data Provider");
         private static readonly GUIContent RemoveControllerDataProviderContent = new GUIContent("-", "Remove Controller Data Provider");
+        private static readonly GUIContent ProfileContent = new GUIContent("Profile");
 
         private SerializedProperty controllerDataProviders;
 
@@ -134,7 +135,7 @@ namespace XRTK.Inspectors.Profiles
                     EditorGUILayout.PropertyField(dataProviderName);
                     EditorGUILayout.PropertyField(priority);
                     EditorGUILayout.PropertyField(runtimePlatform);
-                    RenderProfile(profile, new GUIContent("Profile"), false);
+                    RenderProfile(profile, ProfileContent, false);
 
                     if (EditorGUI.EndChangeCheck())
                     {

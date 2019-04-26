@@ -138,7 +138,7 @@ namespace XRTK.Definitions.Physics
             return new Ray(step.Origin, step.Direction);
         }
 
-        #region static utility functions
+        #region Static utility functions
 
         /// <summary>
         /// Returns a point along an array of RaySteps by distance
@@ -168,27 +168,25 @@ namespace XRTK.Definitions.Physics
         /// <returns></returns>
         public static (RayStep rayStep, float traveledDistance) GetStepByDistance(RayStep[] steps, float distance)
         {
-            Debug.Assert(steps != null);
-            Debug.Assert(steps.Length > 0);
+            Debug.Assert(steps != null && steps.Length > 0);
 
-            float remainingDistance = distance;
-            int numSteps = steps.Length;
+            var traveledDistance = 0f;
 
-            for (int i = 0; i < numSteps; i++)
+            foreach (var step in steps)
             {
-                var stepLength = steps[i].Length;
+                var stepLength = step.Length;
 
-                if (remainingDistance > stepLength)
+                if (distance > traveledDistance + stepLength)
                 {
-                    remainingDistance -= stepLength;
+                    traveledDistance += stepLength;
                 }
                 else
                 {
-                    return (steps[i], remainingDistance);
+                    return (step, Mathf.Clamp(distance - traveledDistance, 0f, stepLength));
                 }
             }
 
-            return (steps[steps.Length - 1], remainingDistance); ;
+            return (steps[steps.Length - 1], 0f);
         }
 
         /// <summary>
@@ -205,6 +203,6 @@ namespace XRTK.Definitions.Physics
             return GetStepByDistance(steps, distance).rayStep.Direction;
         }
 
-        #endregion
+        #endregion Static utility functions
     }
 }

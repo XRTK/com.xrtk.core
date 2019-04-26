@@ -27,8 +27,15 @@ MonoBehaviour:
     dependencies: []
   - name: com.xrtk.sdk
     displayName: XRTK.SDK
-    uri: https://github.com/XRTK/SDK.git#0.1.2
+    uri: https://github.com/XRTK/SDK.git#0.1.3
     isDefaultPackage: 1
     isRequiredPackage: 0
     dependencies:
     - com.xrtk.wmr
+  - name: com.xrtk.lumin
+    displayName: XRTK.Lumin
+    uri: https://github.com/XRTK/Lumin.git#0.1.0
+    isDefaultPackage: 1
+    isRequiredPackage: 0
+    dependencies:
+    - com.xrtk.core

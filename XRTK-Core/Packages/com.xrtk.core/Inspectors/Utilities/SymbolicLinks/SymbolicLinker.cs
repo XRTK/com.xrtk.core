@@ -48,6 +48,9 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
         private static bool isRunningSync;
 
+        /// <summary>
+        /// Is the sync task running?
+        /// </summary>
         public static bool IsSyncing => isRunningSync || MixedRealityPackageUtilities.IsRunningCheck;
 
         /// <summary>
@@ -88,7 +91,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// <param name="forceUpdate">Bypass the auto load check and force the packages to be updated, even if they're up to date.</param>
         public static async void RunSync(bool forceUpdate = false)
         {
-            if (isRunningSync || EditorApplication.isPlayingOrWillChangePlaymode)
+            if (IsSyncing || EditorApplication.isPlayingOrWillChangePlaymode)
             {
                 return;
             }

@@ -37,8 +37,8 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
 
         /// <summary>
         /// Generates a new unique observer id.<para/>
-        /// <remarks>All <see cref="IMixedRealitySpatialObserverDataProvider"/>s are required to call this method in their initialization.</remarks>
         /// </summary>
+        /// <remarks>All <see cref="IMixedRealitySpatialObserverDataProvider"/>s are required to call this method in their initialization.</remarks>
         /// <returns>a new unique Id for the observer.</returns>
         uint GenerateNewObserverId();
 

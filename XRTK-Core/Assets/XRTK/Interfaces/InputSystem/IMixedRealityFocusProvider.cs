@@ -25,8 +25,8 @@ namespace XRTK.Interfaces.InputSystem
 
         /// <summary>
         /// The Camera the <see cref="UnityEngine.EventSystems.EventSystem"/> uses to raycast against.
-        /// <para><remarks>Every uGUI canvas in your scene should use this camera as its event camera.</remarks></para>
         /// </summary>
+        /// <remarks>Every uGUI <see cref="Canvas"/> in your scene should use this camera as its event camera.</remarks>
         Camera UIRaycastCamera { get; }
 
         /// <summary>
@@ -38,8 +38,8 @@ namespace XRTK.Interfaces.InputSystem
 
         /// <summary>
         /// Gets the currently focused object for the pointing source.
-        /// <para><remarks>If the pointing source is not registered, then the Gaze's Focused <see cref="GameObject"/> is returned.</remarks></para>
         /// </summary>
+        /// <remarks>If the pointing source is not registered, then the Gaze's Focused <see cref="GameObject"/> is returned.</remarks>
         /// <param name="pointingSource"></param>
         /// <returns>Currently Focused Object.</returns>
         GameObject GetFocusedObject(IMixedRealityPointer pointingSource);

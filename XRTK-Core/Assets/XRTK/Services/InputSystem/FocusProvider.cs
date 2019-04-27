@@ -16,8 +16,8 @@ namespace XRTK.Services.InputSystem
 {
     /// <summary>
     /// The focus provider handles the focused objects per input source.
-    /// <remarks>There are convenience properties for getting only Gaze Pointer if needed.</remarks>
     /// </summary>
+    /// <remarks>There are convenience properties for getting only Gaze Pointer if needed.</remarks>
     public class FocusProvider : BaseService, IMixedRealityFocusProvider
     {
         private readonly HashSet<PointerData> pointers = new HashSet<PointerData>();
@@ -96,7 +96,6 @@ namespace XRTK.Services.InputSystem
         /// <summary>
         /// Checks if the <see cref="MixedRealityToolkit"/> is setup correctly to start this service.
         /// </summary>
-        /// <returns></returns>
         private bool IsSetupValid
         {
             get
@@ -134,8 +133,8 @@ namespace XRTK.Services.InputSystem
 
         /// <summary>
         /// Cached <see cref="Vector3"/> reference to the new raycast position.
-        /// <remarks>Only used to update UI raycast results.</remarks>
         /// </summary>
+        /// <remarks>Only used to update UI raycast results.</remarks>
         private Vector3 newUiRaycastPosition = Vector3.zero;
 
         [Serializable]

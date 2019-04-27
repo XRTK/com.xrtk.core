@@ -28,9 +28,6 @@ namespace XRTK.Interfaces.InputSystem.Handlers
     /// Interface to implement for more complex generic input.
     /// </summary>
     /// <typeparam name="T">The type of input to listen for.</typeparam>
-    /// <remarks>
-    /// Valid input types:
-    /// </remarks>
     public interface IMixedRealityInputHandler<T> : IEventSystemHandler
     {
         /// <summary>

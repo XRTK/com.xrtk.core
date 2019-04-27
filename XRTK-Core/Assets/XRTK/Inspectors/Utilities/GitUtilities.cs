@@ -1,7 +1,14 @@
-﻿using System;
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Extensions;
@@ -114,6 +121,27 @@ namespace XRTK.Inspectors.Utilities
             EditorUtility.ClearProgressBar();
             // TODO we need to ensure that we return true if git isn't installed.
             return success;
+        }
+
+        /// <summary>
+        /// Gets all the tags from a remote repository.
+        /// </summary>
+        /// <param name="url">The address of the remote repository.</param>
+        /// <returns>A list of tags from the remote repository.</returns>
+        public static async Task<IEnumerable<string>> GetAllTagsFromRemoteAsync(string url)
+        {
+            var result = await new Process().RunAsync($"/C git ls-remote --tags {url}", "cmd.exe", true);
+
+            if (result.ExitCode != 0)
+            {
+                throw new Exception("Failed to get remote tags");
+            }
+
+            return from tag in result.Output
+                   select Regex.Match(tag, "(\\d*\\.\\d*\\.\\d*)")
+                   into match
+                   where match.Success
+                   select match.Value;
         }
     }
 }

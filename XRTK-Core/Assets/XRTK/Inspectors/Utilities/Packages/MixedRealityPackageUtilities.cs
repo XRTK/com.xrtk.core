@@ -1,7 +1,9 @@
-﻿using System;
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.PackageManager;
@@ -25,12 +27,12 @@ namespace XRTK.Inspectors.Utilities.Packages
                 {
                     var path = $"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}\\Inspectors\\Utilities\\Packages\\MixedRealityPackageSettings.asset";
 
+                    packageSettings = AssetDatabase.LoadAssetAtPath<MixedRealityPackageSettings>(path);
+
                     if (DebugEnabled)
                     {
-                        Debug.Log(path);
+                        Debug.Log($"Package Settings loaded? {packageSettings != null} | {path}");
                     }
-
-                    packageSettings = AssetDatabase.LoadAssetAtPath<MixedRealityPackageSettings>(path);
                 }
 
                 return packageSettings;
@@ -43,6 +45,8 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// Is the package utility running a check?
         /// </summary>
         public static bool IsRunningCheck { get; private set; }
+
+        private static bool hasCheckedPackages = false;
 
         /// <summary>
         /// Debug the package utility.
@@ -62,9 +66,19 @@ namespace XRTK.Inspectors.Utilities.Packages
         {
             if (IsRunningCheck ||
                 EditorApplication.isPlayingOrWillChangePlaymode ||
-                Application.isBatchMode ||
-                PackageSettings == null)
+                Application.isBatchMode)
             {
+                return;
+            }
+
+            if (PackageSettings == null)
+            {
+                if (!hasCheckedPackages)
+                {
+                    hasCheckedPackages = true;
+                    EditorApplication.delayCall += CheckPackageManifest;
+                }
+
                 return;
             }
 
@@ -75,22 +89,29 @@ namespace XRTK.Inspectors.Utilities.Packages
                 Debug.Log("Checking packages...");
             }
 
-            Tuple<MixedRealityPackageInfo, bool, bool>[] installedPackages;
+            if (PackageSettings != null)
+            {
+                Tuple<MixedRealityPackageInfo, bool, bool>[] installedPackages;
 
-            try
-            {
-                installedPackages = await GetCurrentMixedRealityPackagesAsync();
-            }
-            catch (Exception e)
-            {
-                Debug.LogError($"{e.Message}\n{e.StackTrace}");
-                IsRunningCheck = false;
-                return;
-            }
+                try
+                {
+                    installedPackages = await GetCurrentMixedRealityPackagesAsync();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                    IsRunningCheck = false;
+                    return;
+                }
 
-            foreach (var installedPackage in installedPackages)
+                foreach (var installedPackage in installedPackages)
+                {
+                    CheckPackage(installedPackage);
+                }
+            }
+            else
             {
-                CheckPackage(installedPackage);
+                Debug.LogWarning("Failed to find package settings.");
             }
 
             if (DebugEnabled)
@@ -107,7 +128,7 @@ namespace XRTK.Inspectors.Utilities.Packages
 
             if (DebugEnabled)
             {
-                Debug.Log($"{package.Name}_enabled == {isEnabled}");
+                Debug.Log($"{package.Name}_enabled == {isEnabled} | Installed? {isInstalled} | Enabled? {isEnabled}");
             }
 
             if (package.IsRequiredPackage && !isInstalled ||
@@ -242,7 +263,9 @@ namespace XRTK.Inspectors.Utilities.Packages
 
         private static async Task AddPackageAsync(MixedRealityPackageInfo packageInfo)
         {
-            var addRequest = Client.Add($"{packageInfo.Name}@{packageInfo.Uri}");
+            var tag = (await GitUtilities.GetAllTagsFromRemoteAsync(packageInfo.Uri)).LastOrDefault();
+            var addRequest = Client.Add($"{packageInfo.Name}@{packageInfo.Uri}#{tag}");
+
             await addRequest.WaitUntil(request => request.IsCompleted, timeout: 30);
 
             if (addRequest.Status == StatusCode.Success)
@@ -276,17 +299,6 @@ namespace XRTK.Inspectors.Utilities.Packages
             {
                 Debug.LogError($"Package Error({removeRequest.Error?.errorCode}): {removeRequest.Error?.message}");
             }
-        }
-
-        public static string GetRevisionHash(this MixedRealityPackageInfo packageInfo)
-        {
-            return GetRevisionHash(packageInfo.PackageInfo != null ? packageInfo.PackageInfo.resolvedPath : string.Empty);
-        }
-
-        private static string GetRevisionHash(string resolvedPath)
-        {
-            var match = Regex.Match(resolvedPath, "@([^@]+)$");
-            return match.Success ? match.Groups[1].Value : string.Empty;
         }
     }
 }

@@ -1723,6 +1723,12 @@ references:
   commentId: F:XRTK.Definitions.Devices.SupportedControllerType.GenericUnity
   fullName: XRTK.Definitions.Devices.SupportedControllerType.GenericUnity
   nameWithType: SupportedControllerType.GenericUnity
+- uid: XRTK.Definitions.Devices.SupportedControllerType.Lumin
+  name: Lumin
+  href: api/XRTK.Definitions.Devices.SupportedControllerType.html#XRTK_Definitions_Devices_SupportedControllerType_Lumin
+  commentId: F:XRTK.Definitions.Devices.SupportedControllerType.Lumin
+  fullName: XRTK.Definitions.Devices.SupportedControllerType.Lumin
+  nameWithType: SupportedControllerType.Lumin
 - uid: XRTK.Definitions.Devices.SupportedControllerType.Mouse
   name: Mouse
   href: api/XRTK.Definitions.Devices.SupportedControllerType.html#XRTK_Definitions_Devices_SupportedControllerType_Mouse
@@ -6003,6 +6009,12 @@ references:
   commentId: F:XRTK.Definitions.Utilities.SupportedPlatforms.LinuxStandalone
   fullName: XRTK.Definitions.Utilities.SupportedPlatforms.LinuxStandalone
   nameWithType: SupportedPlatforms.LinuxStandalone
+- uid: XRTK.Definitions.Utilities.SupportedPlatforms.Lumin
+  name: Lumin
+  href: api/XRTK.Definitions.Utilities.SupportedPlatforms.html#XRTK_Definitions_Utilities_SupportedPlatforms_Lumin
+  commentId: F:XRTK.Definitions.Utilities.SupportedPlatforms.Lumin
+  fullName: XRTK.Definitions.Utilities.SupportedPlatforms.Lumin
+  nameWithType: SupportedPlatforms.Lumin
 - uid: XRTK.Definitions.Utilities.SupportedPlatforms.MacStandalone
   name: MacStandalone
   href: api/XRTK.Definitions.Utilities.SupportedPlatforms.html#XRTK_Definitions_Utilities_SupportedPlatforms_MacStandalone
@@ -18020,6 +18032,168 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.TeleportSystem.IMixedRealityTeleportSystem.TeleportDuration
   nameWithType: IMixedRealityTeleportSystem.TeleportDuration
+- uid: XRTK.Lumin.Controllers
+  name: XRTK.Lumin.Controllers
+  href: api/XRTK.Lumin.Controllers.html
+  commentId: N:XRTK.Lumin.Controllers
+  fullName: XRTK.Lumin.Controllers
+  nameWithType: XRTK.Lumin.Controllers
+- uid: XRTK.Lumin.Controllers.LuminController
+  name: LuminController
+  href: api/XRTK.Lumin.Controllers.LuminController.html
+  commentId: T:XRTK.Lumin.Controllers.LuminController
+  fullName: XRTK.Lumin.Controllers.LuminController
+  nameWithType: LuminController
+- uid: XRTK.Lumin.Controllers.LuminController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name: LuminController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___
+  commentId: M:XRTK.Lumin.Controllers.LuminController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name.vb: LuminController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+  fullName: XRTK.Lumin.Controllers.LuminController.LuminController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  fullName.vb: XRTK.Lumin.Controllers.LuminController.LuminController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping())
+  nameWithType: LuminController.LuminController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  nameWithType.vb: LuminController.LuminController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+- uid: XRTK.Lumin.Controllers.LuminController.#ctor*
+  name: LuminController
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController__ctor_
+  commentId: Overload:XRTK.Lumin.Controllers.LuminController.#ctor
+  isSpec: "True"
+  fullName: XRTK.Lumin.Controllers.LuminController.LuminController
+  nameWithType: LuminController.LuminController
+- uid: XRTK.Lumin.Controllers.LuminController.DefaultInteractions
+  name: DefaultInteractions
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_DefaultInteractions
+  commentId: P:XRTK.Lumin.Controllers.LuminController.DefaultInteractions
+  fullName: XRTK.Lumin.Controllers.LuminController.DefaultInteractions
+  nameWithType: LuminController.DefaultInteractions
+- uid: XRTK.Lumin.Controllers.LuminController.DefaultInteractions*
+  name: DefaultInteractions
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_DefaultInteractions_
+  commentId: Overload:XRTK.Lumin.Controllers.LuminController.DefaultInteractions
+  isSpec: "True"
+  fullName: XRTK.Lumin.Controllers.LuminController.DefaultInteractions
+  nameWithType: LuminController.DefaultInteractions
+- uid: XRTK.Lumin.Controllers.LuminController.DefaultLeftHandedInteractions
+  name: DefaultLeftHandedInteractions
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_DefaultLeftHandedInteractions
+  commentId: P:XRTK.Lumin.Controllers.LuminController.DefaultLeftHandedInteractions
+  fullName: XRTK.Lumin.Controllers.LuminController.DefaultLeftHandedInteractions
+  nameWithType: LuminController.DefaultLeftHandedInteractions
+- uid: XRTK.Lumin.Controllers.LuminController.DefaultLeftHandedInteractions*
+  name: DefaultLeftHandedInteractions
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_DefaultLeftHandedInteractions_
+  commentId: Overload:XRTK.Lumin.Controllers.LuminController.DefaultLeftHandedInteractions
+  isSpec: "True"
+  fullName: XRTK.Lumin.Controllers.LuminController.DefaultLeftHandedInteractions
+  nameWithType: LuminController.DefaultLeftHandedInteractions
+- uid: XRTK.Lumin.Controllers.LuminController.DefaultRightHandedInteractions
+  name: DefaultRightHandedInteractions
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_DefaultRightHandedInteractions
+  commentId: P:XRTK.Lumin.Controllers.LuminController.DefaultRightHandedInteractions
+  fullName: XRTK.Lumin.Controllers.LuminController.DefaultRightHandedInteractions
+  nameWithType: LuminController.DefaultRightHandedInteractions
+- uid: XRTK.Lumin.Controllers.LuminController.DefaultRightHandedInteractions*
+  name: DefaultRightHandedInteractions
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_DefaultRightHandedInteractions_
+  commentId: Overload:XRTK.Lumin.Controllers.LuminController.DefaultRightHandedInteractions
+  isSpec: "True"
+  fullName: XRTK.Lumin.Controllers.LuminController.DefaultRightHandedInteractions
+  nameWithType: LuminController.DefaultRightHandedInteractions
+- uid: XRTK.Lumin.Controllers.LuminController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  name: SetupDefaultInteractions(Handedness)
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Lumin.Controllers.LuminController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Lumin.Controllers.LuminController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  nameWithType: LuminController.SetupDefaultInteractions(Handedness)
+- uid: XRTK.Lumin.Controllers.LuminController.SetupDefaultInteractions*
+  name: SetupDefaultInteractions
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_SetupDefaultInteractions_
+  commentId: Overload:XRTK.Lumin.Controllers.LuminController.SetupDefaultInteractions
+  isSpec: "True"
+  fullName: XRTK.Lumin.Controllers.LuminController.SetupDefaultInteractions
+  nameWithType: LuminController.SetupDefaultInteractions
+- uid: XRTK.Lumin.Controllers.LuminControllerDataProvider
+  name: LuminControllerDataProvider
+  href: api/XRTK.Lumin.Controllers.LuminControllerDataProvider.html
+  commentId: T:XRTK.Lumin.Controllers.LuminControllerDataProvider
+  fullName: XRTK.Lumin.Controllers.LuminControllerDataProvider
+  nameWithType: LuminControllerDataProvider
+- uid: XRTK.Lumin.Controllers.LuminControllerDataProvider.#ctor(System.String,System.UInt32,XRTK.Providers.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  name: LuminControllerDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
+  href: api/XRTK.Lumin.Controllers.LuminControllerDataProvider.html#XRTK_Lumin_Controllers_LuminControllerDataProvider__ctor_System_String_System_UInt32_XRTK_Providers_Controllers_BaseMixedRealityControllerDataProviderProfile_
+  commentId: M:XRTK.Lumin.Controllers.LuminControllerDataProvider.#ctor(System.String,System.UInt32,XRTK.Providers.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  fullName: XRTK.Lumin.Controllers.LuminControllerDataProvider.LuminControllerDataProvider(System.String, System.UInt32, XRTK.Providers.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  nameWithType: LuminControllerDataProvider.LuminControllerDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
+- uid: XRTK.Lumin.Controllers.LuminControllerDataProvider.#ctor*
+  name: LuminControllerDataProvider
+  href: api/XRTK.Lumin.Controllers.LuminControllerDataProvider.html#XRTK_Lumin_Controllers_LuminControllerDataProvider__ctor_
+  commentId: Overload:XRTK.Lumin.Controllers.LuminControllerDataProvider.#ctor
+  isSpec: "True"
+  fullName: XRTK.Lumin.Controllers.LuminControllerDataProvider.LuminControllerDataProvider
+  nameWithType: LuminControllerDataProvider.LuminControllerDataProvider
+- uid: XRTK.Lumin.Inspectors
+  name: XRTK.Lumin.Inspectors
+  href: api/XRTK.Lumin.Inspectors.html
+  commentId: N:XRTK.Lumin.Inspectors
+  fullName: XRTK.Lumin.Inspectors
+  nameWithType: XRTK.Lumin.Inspectors
+- uid: XRTK.Lumin.Inspectors.LuminMotionControllerMappingProfileInspector
+  name: LuminMotionControllerMappingProfileInspector
+  href: api/XRTK.Lumin.Inspectors.LuminMotionControllerMappingProfileInspector.html
+  commentId: T:XRTK.Lumin.Inspectors.LuminMotionControllerMappingProfileInspector
+  fullName: XRTK.Lumin.Inspectors.LuminMotionControllerMappingProfileInspector
+  nameWithType: LuminMotionControllerMappingProfileInspector
+- uid: XRTK.Lumin.Profiles
+  name: XRTK.Lumin.Profiles
+  href: api/XRTK.Lumin.Profiles.html
+  commentId: N:XRTK.Lumin.Profiles
+  fullName: XRTK.Lumin.Profiles
+  nameWithType: XRTK.Lumin.Profiles
+- uid: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile
+  name: LuminMotionControllerMappingProfile
+  href: api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html
+  commentId: T:XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile
+  fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile
+  nameWithType: LuminMotionControllerMappingProfile
+- uid: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.Awake
+  name: Awake()
+  href: api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html#XRTK_Lumin_Profiles_LuminMotionControllerMappingProfile_Awake
+  commentId: M:XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.Awake
+  fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.Awake()
+  nameWithType: LuminMotionControllerMappingProfile.Awake()
+- uid: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.Awake*
+  name: Awake
+  href: api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html#XRTK_Lumin_Profiles_LuminMotionControllerMappingProfile_Awake_
+  commentId: Overload:XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.Awake
+  isSpec: "True"
+  fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.Awake
+  nameWithType: LuminMotionControllerMappingProfile.Awake
+- uid: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.ControllerType
+  name: ControllerType
+  href: api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html#XRTK_Lumin_Profiles_LuminMotionControllerMappingProfile_ControllerType
+  commentId: P:XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.ControllerType
+  fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.ControllerType
+  nameWithType: LuminMotionControllerMappingProfile.ControllerType
+- uid: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.ControllerType*
+  name: ControllerType
+  href: api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html#XRTK_Lumin_Profiles_LuminMotionControllerMappingProfile_ControllerType_
+  commentId: Overload:XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.ControllerType
+  isSpec: "True"
+  fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.ControllerType
+  nameWithType: LuminMotionControllerMappingProfile.ControllerType
+- uid: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.TexturePath
+  name: TexturePath
+  href: api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html#XRTK_Lumin_Profiles_LuminMotionControllerMappingProfile_TexturePath
+  commentId: P:XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.TexturePath
+  fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.TexturePath
+  nameWithType: LuminMotionControllerMappingProfile.TexturePath
+- uid: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.TexturePath*
+  name: TexturePath
+  href: api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html#XRTK_Lumin_Profiles_LuminMotionControllerMappingProfile_TexturePath_
+  commentId: Overload:XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.TexturePath
+  isSpec: "True"
+  fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.TexturePath
+  nameWithType: LuminMotionControllerMappingProfile.TexturePath
 - uid: XRTK.PackageManager
   name: XRTK.PackageManager
   href: api/XRTK.PackageManager.html
@@ -20910,6 +21084,19 @@ references:
   commentId: T:XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile
   fullName: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile
   nameWithType: BaseMixedRealitySpatialMeshObserverProfile
+- uid: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents
+  name: AdditionalComponents
+  href: api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.html#XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialMeshObserverProfile_AdditionalComponents
+  commentId: P:XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents
+  fullName: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents
+  nameWithType: BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents
+- uid: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents*
+  name: AdditionalComponents
+  href: api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.html#XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialMeshObserverProfile_AdditionalComponents_
+  commentId: Overload:XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents
+  isSpec: "True"
+  fullName: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents
+  nameWithType: BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents
 - uid: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshDisplayOption
   name: MeshDisplayOption
   href: api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.html#XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialMeshObserverProfile_MeshDisplayOption
@@ -20936,6 +21123,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshLevelOfDetail
   nameWithType: BaseMixedRealitySpatialMeshObserverProfile.MeshLevelOfDetail
+- uid: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab
+  name: MeshObjectPrefab
+  href: api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.html#XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialMeshObserverProfile_MeshObjectPrefab
+  commentId: P:XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab
+  fullName: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab
+  nameWithType: BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab
+- uid: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab*
+  name: MeshObjectPrefab
+  href: api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.html#XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialMeshObserverProfile_MeshObjectPrefab_
+  commentId: Overload:XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab
+  isSpec: "True"
+  fullName: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab
+  nameWithType: BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab
 - uid: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshOcclusionMaterial
   name: MeshOcclusionMaterial
   href: api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.html#XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialMeshObserverProfile_MeshOcclusionMaterial

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using System;
 using UnityEditor.PackageManager;
 using UnityEngine;
 
@@ -45,14 +48,14 @@ namespace XRTK.Inspectors.Utilities.Packages
         }
 
         [SerializeField]
-        [Tooltip("The package url\n\"https://githubcom/username/project.git#0.1.0\"")]
+        [Tooltip("The package url\n\"https://githubcom/username/project.git\"")]
         private string uri;
 
         /// <summary>
         /// The package url.
         /// </summary>
         /// <example>
-        /// https://githubcom/username/project.git#0.1.0
+        /// https://githubcom/username/project.git
         /// </example>
         public string Uri
         {

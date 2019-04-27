@@ -126,8 +126,8 @@ namespace XRTK.Interfaces.InputSystem
 
         /// <summary>
         /// Generates a new unique input source id.<para/>
-        /// <remarks>All Input Sources are required to call this method in their constructor or initialization.</remarks>
         /// </summary>
+        /// <remarks>All Input Sources are required to call this method in their constructor or initialization.</remarks>
         /// <returns>a new unique Id for the input source.</returns>
         uint GenerateNewSourceId();
 
@@ -199,8 +199,8 @@ namespace XRTK.Interfaces.InputSystem
 
         /// <summary>
         /// Raise the pre-focus changed event.
-        /// <remarks>This event is useful for doing logic before the focus changed event.</remarks>
         /// </summary>
+        /// <remarks>This event is useful for doing logic before the focus changed event.</remarks>
         /// <param name="pointer">The pointer that the focus change event is raised on.</param>
         /// <param name="oldFocusedObject">The old focused object.</param>
         /// <param name="newFocusedObject">The new focused object.</param>

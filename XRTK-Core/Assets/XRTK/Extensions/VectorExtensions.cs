@@ -213,21 +213,19 @@ namespace XRTK.Extensions
         /// <param name="totalRows">The total rows as a <see cref="int"/> for the radial calculation</param>
         /// <param name="column">The current column as a <see cref="int"/> for the radial calculation</param>
         /// <param name="totalColumns">The total columns as a <see cref="int"/> for the radial calculation</param>
-        /// <returns></returns>
-        public static Vector3 RadialMapping(Vector3 source, float radialRange, float radius, int row, int totalRows, int column, int totalColumns)
+        /// <param name="offset">The offset to use to adjust the start position of the items in the radial.</param>
+        /// <returns>The new position for the row/column.</returns>
+        public static Vector3 RadialMapping(Vector3 source, float radialRange, float radius, int row, int totalRows, int column, int totalColumns, float offset = 0.0f)
         {
-            float radialCellAngle = radialRange / totalColumns;
+            var radialCellAngle = radialRange / totalColumns;
 
             source.x = 0f;
             source.y = 0f;
             source.z = (radius / totalRows) * row;
+            var yAngle = radialCellAngle * (column - (totalColumns * offset)) + (radialCellAngle * offset);
+            var rot = Quaternion.Euler(0.0f, yAngle, 0.0f);
 
-            float yAngle = radialCellAngle * (column - (totalColumns * 0.5f)) + (radialCellAngle * .5f);
-
-            Quaternion rot = Quaternion.Euler(0.0f, yAngle, 0.0f);
-            source = rot * source;
-
-            return source;
+            return rot * source;
         }
 
         /// <summary>

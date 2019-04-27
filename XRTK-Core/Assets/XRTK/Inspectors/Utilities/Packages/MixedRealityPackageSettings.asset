@@ -15,26 +15,25 @@ MonoBehaviour:
   mixedRealityPackages:
   - name: com.xrtk.upm-git-extension
     displayName: XRTK.UpmGitExtension
-    uri: https://github.com/XRTK/UpmGitExtension.git#0.9.4
+    uri: https://github.com/XRTK/UpmGitExtension.git
     isDefaultPackage: 1
     isRequiredPackage: 1
     dependencies: []
   - name: com.xrtk.wmr
     displayName: XRTK.WindowsMixedReality
-    uri: https://github.com/XRTK/WindowsMixedReality.git#0.1.1
+    uri: https://github.com/XRTK/WindowsMixedReality.git
     isDefaultPackage: 1
     isRequiredPackage: 0
     dependencies: []
   - name: com.xrtk.sdk
     displayName: XRTK.SDK
-    uri: https://github.com/XRTK/SDK.git#0.1.3
+    uri: https://github.com/XRTK/SDK.git
     isDefaultPackage: 1
     isRequiredPackage: 0
     dependencies: []
   - name: com.xrtk.lumin
     displayName: XRTK.Lumin
-    uri: https://github.com/XRTK/Lumin.git#0.1.0
+    uri: https://github.com/XRTK/Lumin.git
     isDefaultPackage: 1
     isRequiredPackage: 0
-    dependencies:
-    - com.xrtk.core
+    dependencies: []

@@ -9,8 +9,8 @@ namespace XRTK.EventDatum.Input
 {
     /// <summary>
     /// Describes an source state event that has a source id.
-    /// <remarks>Source State events do not have an associated <see cref="Definitions.InputSystem.MixedRealityInputAction"/>.</remarks>
     /// </summary>
+    /// <remarks>Source State events do not have an associated <see cref="Definitions.InputSystem.MixedRealityInputAction"/>.</remarks>
     public class SourceStateEventData : BaseInputEventData
     {
         public IMixedRealityController Controller { get; private set; }

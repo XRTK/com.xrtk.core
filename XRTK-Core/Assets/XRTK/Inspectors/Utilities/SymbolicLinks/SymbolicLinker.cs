@@ -80,10 +80,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         private static SymbolicLinkSettings settings;
 
         [DidReloadScripts]
-        public static void RunSync()
-        {
-            RunSync(false);
-        }
+        private static void OnScriptsReloaded() => RunSync();
 
         /// <summary>
         /// Synchronizes the project with any symbolic links defined in the settings.

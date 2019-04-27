@@ -50,7 +50,7 @@ There are many channels on Slack, covering the wide variety of Mixed Reality pla
     - [x] HoloLens
     - [x] Windows Mixed Reality HMDs
     - [ ] HoloLens 2
-- [ ] [Lumin (aka Magic Leap)](https://github.com/XRTK/Lumin)
+- [x] [Lumin (aka Magic Leap)](https://github.com/XRTK/Lumin)
 
 # FAQ
 

@@ -76,7 +76,6 @@ XRTK-Core/Assets/StreamingAssets.meta
 # ====================== #
 XRTK-Core/Assets/XRTK.SDK
 XRTK-Core/Assets/XRTK.SDK.meta
-XRTK-Core/Assets/XRTK.Lumin
-XRTK-Core/Assets/XRTK.Lumin.meta
 XRTK-Core/Packages/com.xrtk.upm-git-extension
 XRTK-Core/Packages/com.xrtk.wmr
+XRTK-Core/Packages/com.xrtk.lumin

@@ -130,7 +130,7 @@ namespace XRTK.Inspectors.Utilities
         /// <returns>A list of tags from the remote repository.</returns>
         public static async Task<IEnumerable<string>> GetAllTagsFromRemoteAsync(string url)
         {
-            var result = await new Process().RunAsync($"/C git ls-remote --tags {url}", "cmd.exe", true);
+            var result = await new Process().RunAsync($"/C git ls-remote --tags {url}");
 
             if (result.ExitCode != 0)
             {

@@ -30,8 +30,7 @@ MonoBehaviour:
     uri: https://github.com/XRTK/SDK.git#0.1.3
     isDefaultPackage: 1
     isRequiredPackage: 0
-    dependencies:
-    - com.xrtk.wmr
+    dependencies: []
   - name: com.xrtk.lumin
     displayName: XRTK.Lumin
     uri: https://github.com/XRTK/Lumin.git#0.1.0

@@ -13,8 +13,8 @@ namespace XRTK.Interfaces.InputSystem.Handlers
     {
         /// <summary>
         /// Focus event that is raised before the focus is actually changed.
-        /// <remarks>Useful for logic that needs to take place before focus changes.</remarks>
         /// </summary>
+        /// <remarks>Useful for logic that needs to take place before focus changes.</remarks>
         /// <param name="eventData"></param>
         void OnBeforeFocusChange(FocusEventData eventData);
 

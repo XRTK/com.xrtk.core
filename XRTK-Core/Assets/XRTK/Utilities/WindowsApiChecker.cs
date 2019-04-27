@@ -7,9 +7,9 @@ namespace XRTK.Utilities
 {
     /// <summary>
     /// Helper class for determining if a Windows API contract is available.
+    /// </summary>
     /// <remarks> See https://docs.microsoft.com/en-us/uwp/extension-sdks/windows-universal-sdk
     /// for a full list of contracts.</remarks>
-    /// </summary>
     public static class WindowsApiChecker
     {
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]

@@ -97,7 +97,7 @@ namespace XRTK.Extensions
         /// <param name="positions"></param>
         /// <param name="bounds"></param>
         /// <remarks>
-        /// Use BoxColliderExtensions.{Left|Right}{Bottom|Top}{Front|Back} consts to index into the output
+        /// Use BoxColliderExtensions.{Left|Right}{Bottom|Top}{Front|Back} constants to index into the output
         /// corners array.
         /// </remarks>
         public static void GetCornerPositions(this Bounds bounds, Transform transform, ref Vector3[] positions)

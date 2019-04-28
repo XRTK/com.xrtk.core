@@ -1,0 +1,14 @@
+{
+  "name": "com.xrtk.core",
+  "displayName": "XRTK.Core",
+  "description": "The core framework of the Mixed Reality Toolkit",
+  "version": "0.1.5",
+  "unity": "2019.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XRTK/XRTK-Core.git"
+  },
+  "src": "Assets/XRTK",
+  "author": "XRTK Team (https://github.com/XRTK)"
+}

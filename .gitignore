@@ -65,20 +65,16 @@ artifacts/
 ThirdParty/
 ThirdParty.meta
 --Version/
+XRTK-Core/Assets/MagicLeap/
+XRTK-Core/Assets/MagicLeap.meta
+XRTK-Core/Assets/StreamingAssets/GltfModels/
+XRTK-Core/Assets/StreamingAssets/GltfModels.meta
+XRTK-Core/Assets/StreamingAssets.meta
 
 # ====================== #
 # Project Symbolic Links #
 # ====================== #
-XRTK-Core/Assets/StreamingAssets/GltfModels/
-XRTK-Core/Assets/StreamingAssets/GltfModels.meta
-XRTK-Core/Assets/StreamingAssets.meta
-XRTK-Core/Assets/XRTK.UpmGitExtension
-XRTK-Core/Assets/XRTK.UpmGitExtension.meta
-XRTK-Core/Assets/XRTK.WindowsMixedReality
-XRTK-Core/Assets/XRTK.WindowsMixedReality.meta
-XRTK-Core/Assets/XRTK.SDK
-XRTK-Core/Assets/XRTK.SDK.meta
-XRTK-Core/Assets/XRTK.Lumin
-XRTK-Core/Assets/XRTK.Lumin.meta
-XRTK-Core/Assets/MagicLeap/
-XRTK-Core/Assets/MagicLeap.meta
+XRTK-Core/Packages/com.xrtk.upm-git-extension
+XRTK-Core/Packages/com.xrtk.wmr
+XRTK-Core/Packages/com.xrtk.lumin
+XRTK-Core/Packages/com.xrtk.sdk

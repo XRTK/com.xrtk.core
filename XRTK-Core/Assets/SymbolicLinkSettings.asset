@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: SymbolicLinkSettings
   m_EditorClassIdentifier: 
   symbolicLinks:
-  - sourceRelativePath: /Submodules/WindowsMixedReality/XRTK.WindowsMixedReality/Assets/XRTK.WindowsMixedReality
-    targetRelativePath: /XRTK-Core/Assets/XRTK.WindowsMixedReality
+  - sourceRelativePath: /Submodules/WindowsMixedReality/XRTK.WindowsMixedReality/Packages/com.xrtk.wmr
+    targetRelativePath: /XRTK-Core/Packages/com.xrtk.wmr
     isActive: 1
-  - sourceRelativePath: /Submodules/SDK/XRTK.SDK/Assets/XRTK.SDK
-    targetRelativePath: /XRTK-Core/Assets/XRTK.SDK
+  - sourceRelativePath: /Submodules/UpmGitExtension/XRTK.UpmGitExtension/Packages/com.xrtk.upm-git-extension
+    targetRelativePath: /XRTK-Core/Packages/com.xrtk.upm-git-extension
     isActive: 1
-  - sourceRelativePath: /Submodules/UpmGitExtension/XRTK.UpmGitExtension/Assets/XRTK.UpmGitExtension
-    targetRelativePath: /XRTK-Core/Assets/XRTK.UpmGitExtension
+  - sourceRelativePath: /Submodules/Lumin/XRTK.Lumin/Packages/com.xrtk.lumin
+    targetRelativePath: /XRTK-Core/Packages/com.xrtk.lumin
     isActive: 1
-  - sourceRelativePath: /Submodules/Lumin/XRTK.Lumin/Assets/XRTK.Lumin
-    targetRelativePath: /XRTK-Core/Assets/XRTK.Lumin
+  - sourceRelativePath: /Submodules/SDK/XRTK.SDK/Packages/com.xrtk.sdk
+    targetRelativePath: /XRTK-Core/Packages/com.xrtk.sdk
     isActive: 1

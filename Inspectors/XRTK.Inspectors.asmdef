@@ -1,0 +1,19 @@
+{
+    "name": "XRTK.Inspectors",
+    "references": [
+        "XRTK",
+        "XRTK.Extensions.EditorClassExtensions",
+        "XRTK.Utilities.Build",
+        "XRTK.Utilities.Editor"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

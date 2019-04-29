@@ -2,7 +2,8 @@
 using UnityEngine;
 using XRTK.Inspectors.Utilities;
 
-namespace XRTK.Inspectors.Profiles {
+namespace XRTK.Inspectors.Profiles
+{
     /// <summary>
     /// Base class for all editor inspectors of the Mixed Reality Toolkit to inherit from.
     /// </summary>

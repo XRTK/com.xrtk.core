@@ -77,7 +77,7 @@ namespace XRTK.Inspectors.Profiles
                     var profileTypeName = property.type.Replace("PPtr<$", string.Empty).Replace(">", string.Empty);
                     Debug.Assert(profileTypeName != null, "No Type Found");
 
-                    ScriptableObject instance = CreateInstance(profileTypeName);
+                    var instance = CreateInstance(profileTypeName);
                     var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
                     property.objectReferenceValue = newProfile;
                     property.serializedObject.ApplyModifiedProperties();
@@ -98,7 +98,7 @@ namespace XRTK.Inspectors.Profiles
                     var typeName = renderedProfile.GetType().Name;
                     Debug.Assert(typeName != null, "No Type Found");
 
-                    ScriptableObject instance = CreateInstance(typeName);
+                    var instance = CreateInstance(typeName);
                     var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
                     property.objectReferenceValue = newProfile;
                     property.serializedObject.ApplyModifiedProperties();
@@ -120,7 +120,7 @@ namespace XRTK.Inspectors.Profiles
         protected static async void CreateCloneProfile()
         {
             profileToCopy = profile;
-            ScriptableObject newProfile = CreateInstance(profile.GetType().ToString());
+            var newProfile = CreateInstance(profile.GetType().ToString());
             profile = newProfile.CreateAsset("Assets/XRTK.Generated/CustomProfiles") as BaseMixedRealityProfile;
             Debug.Assert(profile != null);
 
@@ -161,8 +161,8 @@ namespace XRTK.Inspectors.Profiles
         private static void PasteProfileValues()
         {
             Undo.RecordObject(profile, "Paste Profile Values");
-            bool targetIsCustom = targetProfile.FindProperty(IsCustomProfileProperty).boolValue;
-            string originalName = targetProfile.targetObject.name;
+            var targetIsCustom = targetProfile.FindProperty(IsCustomProfileProperty).boolValue;
+            var originalName = targetProfile.targetObject.name;
             EditorUtility.CopySerialized(profileToCopy, targetProfile.targetObject);
             targetProfile.Update();
             targetProfile.FindProperty(IsCustomProfileProperty).boolValue = targetIsCustom;

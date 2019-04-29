@@ -104,6 +104,15 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
             if (Settings == null)
             {
+                if (EditorApplication.isUpdating)
+                {
+                    EditorApplication.delayCall += () => RunSync(forceUpdate);
+                    return;
+                }
+            }
+
+            if (Settings == null)
+            {
                 if (!string.IsNullOrEmpty(MixedRealityPreferences.SymbolicLinkSettingsPath))
                 {
                     Debug.LogWarning("Symbolic link settings not found!");

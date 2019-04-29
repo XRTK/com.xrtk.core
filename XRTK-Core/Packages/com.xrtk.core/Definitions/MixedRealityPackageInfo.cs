@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
 namespace XRTK.Definitions
@@ -26,15 +25,9 @@ namespace XRTK.Definitions
             this.displayName = displayName;
             this.uri = uri;
             this.isRequiredPackage = isRequiredPackage;
-            PackageInfo = null;
             isDefaultPackage = true;
             isEnabled = true;
         }
-
-        /// <summary>
-        /// The Unity <see cref="PackageInfo"/>
-        /// </summary>
-        public PackageInfo PackageInfo { get; internal set; }
 
         [SerializeField]
         [Tooltip("The package name\n\"com.company.product\"")]

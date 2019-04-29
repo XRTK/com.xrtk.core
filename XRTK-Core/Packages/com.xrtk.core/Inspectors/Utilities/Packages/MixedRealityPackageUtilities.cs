@@ -221,8 +221,6 @@ namespace XRTK.Inspectors.Utilities.Packages
                 {
                     Debug.Log($"successfully added {packageInfo.Name}@{addRequest.Result.packageId}");
                 }
-
-                packageInfo.PackageInfo = addRequest.Result;
             }
             else
             {

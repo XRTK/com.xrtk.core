@@ -46,7 +46,7 @@ namespace XRTK.Utilities.Editor
                     return mixedRealityToolkit_AbsoluteFolderPath;
                 }
 
-                FindDirectory(Project_AbsolutePath, "XRTK", out mixedRealityToolkit_AbsoluteFolderPath);
+                FindDirectory(Project_AbsolutePath, "com.xrtk.core", out mixedRealityToolkit_AbsoluteFolderPath);
 
                 return mixedRealityToolkit_AbsoluteFolderPath;
             }
@@ -59,7 +59,7 @@ namespace XRTK.Utilities.Editor
         /// </summary>
         public static string MixedRealityToolkit_RelativeFolderPath =>
             !string.IsNullOrEmpty(MixedRealityToolkit_AbsoluteFolderPath)
-                ? MixedRealityToolkit_AbsoluteFolderPath.Replace($"{Project_AbsolutePath}\\", "")
+                ? MixedRealityToolkit_AbsoluteFolderPath.Replace($"{Project_AbsolutePath}\\", string.Empty)
                 : "Packages/com.xrtk.core";
 
         /// <summary>
@@ -200,7 +200,7 @@ namespace XRTK.Utilities.Editor
                 var name = Path.GetFileName(directories[i]);
 
                 if (name != null &&
-                    name.Equals(directoryName))
+                    name.Contains(directoryName))
                 {
                     path = directories[i];
                     return true;

@@ -440,12 +440,14 @@ namespace XRTK.Tests.InputSystem
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// </summary>
         [Test]
-        public void Test_04_02_Vector2ChangedAndUpdated()
+        public void Test_04_02_01_Vector2ChangedAndUpdated()
         {
             var interaction = InitializeVector2InteractionMapping();
             var initialValue = interaction.Vector2Data;
-            var testValue1 = Vector2.one;
-            var testValue2 = Vector2.one * 0.5f;
+            var testValue1 = Vector2.up;
+            var testValue2 = Vector2.down;
+            var testValue3 = new Vector2(0.25f, 1f);
+            var testValue4 = new Vector2(0.75f, 1f);
 
             interaction.Vector2Data = testValue1;
 
@@ -459,7 +461,7 @@ namespace XRTK.Tests.InputSystem
             Assert.True(setValue1 == testValue1);
             // Make sure the second time we query it's false
             Assert.IsFalse(interaction.Changed);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
 
             interaction.Vector2Data = testValue2;
 
@@ -473,9 +475,9 @@ namespace XRTK.Tests.InputSystem
             Assert.True(setValue2 == testValue2);
             // Make sure the second time we query it's false
             Assert.IsFalse(interaction.Changed);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
 
-            interaction.Vector2Data = initialValue;
+            interaction.Vector2Data = testValue3;
 
             // Make sure the first query after value assignment is true
             Assert.IsTrue(interaction.Changed);
@@ -484,10 +486,124 @@ namespace XRTK.Tests.InputSystem
             var setValue3 = interaction.Vector2Data;
 
             // Check the values
-            Assert.True(setValue3 == initialValue);
+            Assert.True(setValue3 == testValue3);
             // Make sure the second time we query it's false
             Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
+
+            interaction.Vector2Data = testValue4;
+
+            // Make sure the first query after value assignment is true
+            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.Updated);
+
+            var setValue4 = interaction.Vector2Data;
+
+            // Check the values
+            Assert.True(setValue4 == testValue4);
+            // Make sure the second time we query it's false
             Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
+
+            interaction.Vector2Data = initialValue;
+
+            // Make sure the first query after value assignment is true
+            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.Updated);
+
+            var setValue5 = interaction.Vector2Data;
+
+            // Check the values
+            Assert.True(setValue5 == initialValue);
+            // Make sure the second time we query it's false
+            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
+        }
+
+        /// <summary>
+        /// We test by setting the inverted interaction data to two different values.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == true, then false after each subsequent check before assigning a new value.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
+        /// </summary>
+        [Test]
+        public void Test_04_02_02_Vector2ChangedAndUpdated_Inverted()
+        {
+            var interaction = new MixedRealityInteractionMapping(1, string.Empty, AxisType.DualAxis, DeviceInputType.None, MixedRealityInputAction.None, KeyCode.None, string.Empty, string.Empty, true, true);
+            var initialValue = interaction.Vector2Data;
+            var testValue1 = Vector2.up;
+            var testValue2 = Vector2.down;
+            var testValue3 = new Vector2(0.25f, 1f);
+            var testValue4 = new Vector2(0.75f, 1f);
+
+            interaction.Vector2Data = testValue1;
+
+            // Make sure the first query after value assignment is true
+            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.Updated);
+
+            var setValue1 = interaction.Vector2Data;
+
+            // Check the values
+            Assert.True(setValue1 == testValue1 * -1f);
+            // Make sure the second time we query it's false
+            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
+
+            interaction.Vector2Data = testValue2;
+
+            // Make sure the first query after value assignment is true
+            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.Updated);
+
+            var setValue2 = interaction.Vector2Data;
+
+            // Check the values
+            Assert.True(setValue2 == testValue2 * -1f);
+            // Make sure the second time we query it's false
+            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
+
+            interaction.Vector2Data = testValue3;
+
+            // Make sure the first query after value assignment is true
+            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.Updated);
+
+            var setValue3 = interaction.Vector2Data;
+
+            // Check the values
+            Assert.True(setValue3 == testValue3 * -1f);
+            // Make sure the second time we query it's false
+            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
+
+            interaction.Vector2Data = testValue4;
+
+            // Make sure the first query after value assignment is true
+            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.Updated);
+
+            var setValue4 = interaction.Vector2Data;
+
+            // Check the values
+            Assert.True(setValue4 == testValue4 * -1f);
+            // Make sure the second time we query it's false
+            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
+
+            interaction.Vector2Data = initialValue;
+
+            // Make sure the first query after value assignment is true
+            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.Updated);
+
+            var setValue5 = interaction.Vector2Data;
+
+            // Check the values
+            Assert.True(setValue5 == initialValue);
+            // Make sure the second time we query it's false
+            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
         }
 
         /// <summary>

@@ -416,10 +416,10 @@ namespace XRTK.Definitions.Devices
 
                 if (invertXAxis || invertYAxis)
                 {
-                    float invertXAxisFactor = invertXAxis ? -1f : 1f;
-                    float invertYAxisFactor = invertYAxis ? -1f : 1f;
+                    var invertXAxisFactor = invertXAxis ? -1f : 1f;
+                    var invertYAxisFactor = invertYAxis ? -1f : 1f;
 
-                    Changed = !vector2Data.x.Equals(value.x * invertXAxisFactor) &&
+                    Changed = !vector2Data.x.Equals(value.x * invertXAxisFactor) ||
                               !vector2Data.y.Equals(value.y * invertYAxisFactor);
                     // use the internal reading for changed so we don't reset it.
                     Updated = changed || !vector2Data.Equals(Vector2.zero);

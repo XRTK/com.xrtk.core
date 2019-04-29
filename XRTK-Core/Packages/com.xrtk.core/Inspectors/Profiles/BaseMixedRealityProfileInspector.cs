@@ -124,7 +124,7 @@ namespace XRTK.Inspectors.Profiles
             profile = newProfile.CreateAsset("Assets/XRTK.Generated/CustomProfiles") as BaseMixedRealityProfile;
             Debug.Assert(profile != null);
 
-            await profileToCopy.WaitUntil(thisProfile => thisProfile != profile);
+            await new WaitUntil(() => profileToCopy != profile);
 
             Selection.activeObject = null;
             PasteProfileValues();
@@ -174,7 +174,7 @@ namespace XRTK.Inspectors.Profiles
 
         private static async void PasteProfileValuesDelay(BaseMixedRealityProfile newProfile)
         {
-            await newProfile.WaitUntil(thisProfile => profile == thisProfile);
+            await new WaitUntil(() => newProfile != profile);
             Selection.activeObject = null;
             PasteProfileValues();
             Selection.activeObject = newProfile;

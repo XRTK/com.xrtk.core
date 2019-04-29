@@ -115,7 +115,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             {
                 if (!string.IsNullOrEmpty(MixedRealityPreferences.SymbolicLinkSettingsPath))
                 {
-                    Debug.LogWarning("Symbolic link settings not found!");
+                    Debug.LogWarning("Symbolic link settings not found! Auto load links has been turned off.\nYou can enable this again in the xrtk preferences.");
                 }
 
                 MixedRealityPreferences.AutoLoadSymbolicLinks = false;

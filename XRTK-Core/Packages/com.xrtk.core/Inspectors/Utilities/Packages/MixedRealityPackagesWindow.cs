@@ -5,6 +5,7 @@ using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Definitions;
 using XRTK.Utilities.Editor;
 
 namespace XRTK.Inspectors.Utilities.Packages
@@ -12,9 +13,8 @@ namespace XRTK.Inspectors.Utilities.Packages
     public class MixedRealityPackagesWindow : EditorWindow
     {
         private static MixedRealityPackagesWindow window;
-        private static Tuple<MixedRealityPackageInfo, bool, bool>[] packages;
+        private static Tuple<MixedRealityPackageInfo, bool>[] packages;
         private static bool[] isPackageEnabled;
-        private static bool[] isPackageInstalled;
         private static bool isError;
 
         [MenuItem("Mixed Reality Toolkit/Packages...", true, 99)]
@@ -47,12 +47,10 @@ namespace XRTK.Inspectors.Utilities.Packages
             }
 
             isPackageEnabled = new bool[packages.Length];
-            isPackageInstalled = new bool[packages.Length];
 
             for (var i = 0; i < packages.Length; i++)
             {
-                isPackageEnabled[i] = packages[i].Item2;
-                isPackageInstalled[i] = packages[i].Item3;
+                isPackageEnabled[i] = packages[i].Item1.IsEnabled;
             }
         }
 
@@ -76,22 +74,13 @@ namespace XRTK.Inspectors.Utilities.Packages
 
             for (var i = 0; i < packages.Length; i++)
             {
-                (MixedRealityPackageInfo package, bool packageEnabled, bool packageInstalled) = packages[i];
+                (MixedRealityPackageInfo package, bool _) = packages[i];
 
-                bool CheckDependency(Tuple<MixedRealityPackageInfo, bool, bool> packageSetting)
-                {
-                    (MixedRealityPackageInfo packageInfo, bool isEnabled, bool isInstalled) = packageSetting;
-                    return packageEnabled && packageInstalled && isEnabled && isInstalled && packageInfo.Dependencies.Contains(package.Name);
-                }
-
-                var hasDependency = packages.Any(CheckDependency);
-                GUI.enabled = !package.IsRequiredPackage && !hasDependency;
+                GUI.enabled = !package.IsRequiredPackage;
                 EditorGUILayout.BeginHorizontal();
                 GUILayout.Space(16);
                 isPackageEnabled[i] = EditorGUILayout.Toggle(isPackageEnabled[i], GUILayout.Width(12));
-                var packageName = package.DisplayName.Replace("XRTK.", package.IsRequiredPackage
-                    ? " (Required) " : hasDependency
-                        ? " (Dependency) " : "");
+                var packageName = package.DisplayName.Replace("XRTK.", package.IsRequiredPackage ? " (Required) " : string.Empty);
                 EditorGUILayout.LabelField(new GUIContent(packageName));
                 GUILayout.FlexibleSpace();
                 EditorGUILayout.EndHorizontal();
@@ -104,29 +93,53 @@ namespace XRTK.Inspectors.Utilities.Packages
             {
                 for (var i = 0; i < packages.Length; i++)
                 {
-                    (MixedRealityPackageInfo package, bool _, bool _) = packages[i];
+                    (MixedRealityPackageInfo package, bool isInstalled) = packages[i];
 
-                    if (!isPackageEnabled[i] && isPackageInstalled[i])
+                    if (!isPackageEnabled[i] && isInstalled)
                     {
-                        EditorPreferences.Set($"{package.Name}_enabled", false);
+                        package.IsEnabled = false;
 
                         if (MixedRealityPackageUtilities.DebugEnabled)
                         {
-                            Debug.LogWarning($"{package.Name}_enabled == false");
+                            Debug.LogWarning($"{package.Name} isEnabled == false");
                         }
                     }
 
-                    if (isPackageEnabled[i] && !isPackageInstalled[i])
+                    if (isPackageEnabled[i] && !isInstalled)
                     {
-                        EditorPreferences.Set($"{package.Name}_enabled", true);
+                        package.IsEnabled = true;
 
                         if (MixedRealityPackageUtilities.DebugEnabled)
                         {
-                            Debug.LogWarning($"{package.Name}_enabled == true");
+                            Debug.LogWarning($"{package.Name} isEnabled == true");
                         }
                     }
+
+                    packages[i] = new Tuple<MixedRealityPackageInfo, bool>(package, isInstalled);
                 }
 
+                var newPackages = packages.Select(tuple => tuple.Item1).ToArray();
+                MixedRealityPackageUtilities.PackageSettings.MixedRealityPackages = newPackages;
+                MixedRealityPackageUtilities.CheckPackageManifest();
+                Close();
+            }
+
+            if (GUILayout.Button("Restore Default Packages"))
+            {
+                for (int i = 0; i < packages.Length; i++)
+                {
+                    (MixedRealityPackageInfo package, bool isInstalled) = packages[i];
+
+                    if (package.IsDefaultPackage)
+                    {
+                        package.IsEnabled = true;
+                    }
+
+                    packages[i] = new Tuple<MixedRealityPackageInfo, bool>(package, isInstalled);
+                }
+
+                var newPackages = packages.Select(tuple => tuple.Item1).ToArray();
+                MixedRealityPackageUtilities.PackageSettings.MixedRealityPackages = newPackages;
                 MixedRealityPackageUtilities.CheckPackageManifest();
                 Close();
             }

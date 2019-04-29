@@ -2,21 +2,32 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using UnityEditor.PackageManager;
 using UnityEngine;
 
-namespace XRTK.Inspectors.Utilities.Packages
+namespace XRTK.Definitions
 {
     /// <summary>
-    /// The container for a upm package.
+    /// The container for defining a xrtk upm package.
     /// </summary>
     [Serializable]
     public struct MixedRealityPackageInfo
     {
         /// <summary>
-        /// The Unity <see cref="PackageInfo"/>
+        /// Constructor.
         /// </summary>
-        public PackageInfo PackageInfo { get; internal set; }
+        /// <param name="name">Name of the package: com.company.package</param>
+        /// <param name="displayName">Friendly display name of the package.</param>
+        /// <param name="uri">Remote repository uri.</param>
+        /// <param name="isRequiredPackage">Is this package required?</param>
+        internal MixedRealityPackageInfo(string name, string displayName, string uri, bool isRequiredPackage = false)
+        {
+            this.name = name;
+            this.displayName = displayName;
+            this.uri = uri;
+            this.isRequiredPackage = isRequiredPackage;
+            isDefaultPackage = true;
+            isEnabled = true;
+        }
 
         [SerializeField]
         [Tooltip("The package name\n\"com.company.product\"")]
@@ -90,16 +101,16 @@ namespace XRTK.Inspectors.Utilities.Packages
         }
 
         [SerializeField]
-        [Tooltip("The list of dependencies for this package.")]
-        private string[] dependencies;
+        [Tooltip("Is this package currently enabled in the project?")]
+        private bool isEnabled;
 
         /// <summary>
-        /// The list of dependencies for this package.
+        /// Is this package currently enabled in the project?
         /// </summary>
-        public string[] Dependencies
+        public bool IsEnabled
         {
-            get => dependencies;
-            internal set => dependencies = value;
+            get => isEnabled;
+            internal set => isEnabled = value;
         }
     }
 }

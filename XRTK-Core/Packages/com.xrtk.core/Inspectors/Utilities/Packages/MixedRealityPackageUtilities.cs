@@ -2,14 +2,14 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using XRTK.Definitions;
+using XRTK.Extensions.EditorClassExtensions;
 using XRTK.Utilities.Async;
-using XRTK.Utilities.Editor;
 using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 namespace XRTK.Inspectors.Utilities.Packages
@@ -19,24 +19,30 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// <summary>
         /// The Mixed Reality Toolkit's upm package settings.
         /// </summary>
-        private static MixedRealityPackageSettings PackageSettings
+        public static MixedRealityPackageSettings PackageSettings
         {
             get
             {
+                if (EditorApplication.isUpdating)
+                {
+                    return packageSettings;
+                }
+
+                if (packageSettings == null &&
+                    !string.IsNullOrEmpty(MixedRealityPreferences.PackageSettingsPath))
+                {
+                    packageSettings = AssetDatabase.LoadAssetAtPath<MixedRealityPackageSettings>(MixedRealityPreferences.PackageSettingsPath);
+                }
+
                 if (packageSettings == null)
                 {
-                    var path = $"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}\\Inspectors\\Utilities\\Packages\\MixedRealityPackageSettings.asset";
-
-                    packageSettings = AssetDatabase.LoadAssetAtPath<MixedRealityPackageSettings>(path);
-
-                    if (DebugEnabled)
-                    {
-                        Debug.Log($"Package Settings loaded? {packageSettings != null} | {path}");
-                    }
+                    var profile = ScriptableObject.CreateInstance(nameof(MixedRealityPackageSettings));
+                    profile.CreateAsset("Assets/XRTK.Generated/CustomProfiles");
                 }
 
                 return packageSettings;
             }
+            internal set => packageSettings = value;
         }
 
         private static MixedRealityPackageSettings packageSettings;
@@ -45,8 +51,6 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// Is the package utility running a check?
         /// </summary>
         public static bool IsRunningCheck { get; private set; }
-
-        private static bool hasCheckedPackages = false;
 
         /// <summary>
         /// Debug the package utility.
@@ -57,7 +61,7 @@ namespace XRTK.Inspectors.Utilities.Packages
             set => MixedRealityPreferences.DebugPackageInfo = value;
         }
 
-        private static Tuple<MixedRealityPackageInfo, bool, bool>[] currentPackages;
+        private static Tuple<MixedRealityPackageInfo, bool>[] currentPackages;
 
         /// <summary>
         /// Ensures the package manifest is up to date.
@@ -73,12 +77,13 @@ namespace XRTK.Inspectors.Utilities.Packages
 
             if (PackageSettings == null)
             {
-                if (!hasCheckedPackages)
+                if (EditorApplication.isUpdating)
                 {
-                    hasCheckedPackages = true;
                     EditorApplication.delayCall += CheckPackageManifest;
+                    return;
                 }
 
+                Debug.LogError("Failed to find Package Settings!");
                 return;
             }
 
@@ -91,7 +96,7 @@ namespace XRTK.Inspectors.Utilities.Packages
 
             if (PackageSettings != null)
             {
-                Tuple<MixedRealityPackageInfo, bool, bool>[] installedPackages;
+                Tuple<MixedRealityPackageInfo, bool>[] installedPackages;
 
                 try
                 {
@@ -122,17 +127,17 @@ namespace XRTK.Inspectors.Utilities.Packages
             IsRunningCheck = false;
         }
 
-        private static async void CheckPackage(Tuple<MixedRealityPackageInfo, bool, bool> installedPackage)
+        private static async void CheckPackage(Tuple<MixedRealityPackageInfo, bool> installedPackage)
         {
-            (MixedRealityPackageInfo package, bool isEnabled, bool isInstalled) = installedPackage;
+            (MixedRealityPackageInfo package, bool isInstalled) = installedPackage;
 
             if (DebugEnabled)
             {
-                Debug.Log($"{package.Name}_enabled == {isEnabled} | Installed? {isInstalled} | Enabled? {isEnabled}");
+                Debug.Log($"{package.Name} | Enabled? {package.IsEnabled} | Installed? {isInstalled}");
             }
 
             if (package.IsRequiredPackage && !isInstalled ||
-                (package.IsDefaultPackage && isEnabled && !isInstalled))
+                (package.IsDefaultPackage && package.IsEnabled && !isInstalled))
             {
                 try
                 {
@@ -143,7 +148,7 @@ namespace XRTK.Inspectors.Utilities.Packages
                     Debug.LogError($"{e.Message}\n{e.StackTrace}");
                 }
             }
-            else if (!isEnabled && isInstalled)
+            else if (!package.IsEnabled && isInstalled)
             {
                 try
                 {
@@ -175,86 +180,27 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// Returns the currently installed upm xrtk packages.
         /// </summary>
         /// <exception cref="TimeoutException">A <see cref="TimeoutException"/> can occur if the packages are not returned in 10 seconds.</exception>
-        internal static async Task<Tuple<MixedRealityPackageInfo, bool, bool>[]> GetCurrentMixedRealityPackagesAsync()
+        internal static async Task<Tuple<MixedRealityPackageInfo, bool>[]> GetCurrentMixedRealityPackagesAsync()
         {
             var packageCount = PackageSettings.MixedRealityPackages.Length;
-            currentPackages = new Tuple<MixedRealityPackageInfo, bool, bool>[packageCount];
-            var installedPackages = new List<PackageInfo>();
-            var validationFiles = AssetDatabase.FindAssets("PackageValidation");
-            var validatedPackages = new List<MixedRealityPackageValidation>(5);
+            currentPackages = new Tuple<MixedRealityPackageInfo, bool>[packageCount];
             var upmPackageListRequest = Client.List(true);
 
             await upmPackageListRequest.WaitUntil(request => request.IsCompleted, timeout: 30);
 
-            foreach (var guid in validationFiles)
-            {
-                var path = AssetDatabase.GUIDToAssetPath(guid);
-
-                if (!path.EndsWith(".asset")) { continue; }
-
-                if (DebugEnabled)
-                {
-                    Debug.Log($"Attempting to load validation at {path}");
-                }
-
-                var validation = AssetDatabase.LoadAssetAtPath<MixedRealityPackageValidation>(path);
-
-                if (validation != null)
-                {
-                    validatedPackages.Add(validation);
-                }
-            }
-
-            foreach (var package in PackageSettings.MixedRealityPackages)
-            {
-                var upmPackage = upmPackageListRequest.Result?.FirstOrDefault(packageInfo => packageInfo.name.Equals(package.Name));
-                var validPackages = validatedPackages.Where(validation => validation.PackageName.Equals(package.Name)).ToList();
-                var validationCount = validPackages.Count;
-
-                if (DebugEnabled)
-                {
-                    Debug.Log($"{package.Name} | validation count: {validationCount} | is upm package? {upmPackage != null}");
-                }
-
-                if (validationCount > 0)
-                {
-                    if (validPackages.Count == 1 &&
-                        !validPackages[0].IsMainProjectAsset)
-                    {
-                        continue;
-                    }
-
-                    try
-                    {
-                        await RemovePackageAsync(package);
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogError($"{e.Message}\n{e.StackTrace}");
-                    }
-
-                    EditorPreferences.Set($"{package.Name}_enabled", true);
-
-                    continue;
-                }
-
-                if (upmPackage != null)
-                {
-                    installedPackages.Add(upmPackage);
-                }
-            }
+            var installedPackages = PackageSettings.MixedRealityPackages
+                .Select(package => upmPackageListRequest.Result?
+                    .FirstOrDefault(packageInfo => packageInfo.name.Equals(package.Name)))
+                .Where(upmPackage => upmPackage != null)
+                .ToList();
 
             for (var i = 0; i < PackageSettings.MixedRealityPackages.Length; i++)
             {
                 var package = PackageSettings.MixedRealityPackages[i];
-                var isInstalled = installedPackages.Any(UpmCheck) || validatedPackages.Any(ValidationCheck);
+                var isInstalled = installedPackages.Any(UpmCheck);
 
-                currentPackages[i] = new Tuple<MixedRealityPackageInfo, bool, bool>(
-                    package,
-                    EditorPreferences.Get($"{package.Name}_enabled", true) || package.IsRequiredPackage,
-                    isInstalled);
+                currentPackages[i] = new Tuple<MixedRealityPackageInfo, bool>(package, isInstalled);
 
-                bool ValidationCheck(MixedRealityPackageValidation validation) => validation.PackageName.Equals(package.Name);
                 bool UpmCheck(PackageInfo packageInfo) => packageInfo != null && packageInfo.name.Equals(package.Name);
             }
 
@@ -274,8 +220,6 @@ namespace XRTK.Inspectors.Utilities.Packages
                 {
                     Debug.Log($"successfully added {packageInfo.Name}@{addRequest.Result.packageId}");
                 }
-
-                packageInfo.PackageInfo = addRequest.Result;
             }
             else
             {

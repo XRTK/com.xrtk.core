@@ -36,8 +36,8 @@ namespace XRTK.Inspectors.Utilities.Packages
 
                 if (packageSettings == null)
                 {
-                    var profile = ScriptableObject.CreateInstance(nameof(MixedRealityPackageSettings));
-                    profile.CreateAsset("Assets/XRTK.Generated/CustomProfiles");
+                    packageSettings = ScriptableObject.CreateInstance(nameof(MixedRealityPackageSettings)) as MixedRealityPackageSettings;
+                    packageSettings.CreateAsset("Assets/XRTK.Generated/CustomProfiles");
                 }
 
                 return packageSettings;

@@ -127,21 +127,18 @@ namespace XRTK.Inspectors
             var playspace = MixedRealityToolkit.Instance.MixedRealityPlayspace;
             Debug.Assert(playspace != null);
 
-            EditorApplication.delayCall += () =>
+            if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
             {
-                if (!EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo())
-                {
-                    Debug.LogWarning("You must save this scene and assign it to the Start Scene in the XRTK preferences for the Mixed Reality Toolkit to function correctly.");
-                }
+                Debug.LogWarning("You must save this scene and assign it to the Start Scene in the XRTK preferences for the Mixed Reality Toolkit to function correctly.");
+            }
 
-                EditorSceneManager.EnsureUntitledSceneHasBeenSaved("Mixed Reality Start Scene for the Mixed Reality Toolkit to function correctly.");
+            EditorSceneManager.EnsureUntitledSceneHasBeenSaved("Mixed Reality Start Scene for the Mixed Reality Toolkit to function correctly.");
 
-                Debug.Assert(!string.IsNullOrEmpty(SceneManager.GetActiveScene().path),
-                    "Configured Scene must be saved in order to set it as the Start Scene!\n" +
-                    "Please save your scene and set it as the Start Scene in the XRTK preferences.");
-                MixedRealityPreferences.StartSceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(SceneManager.GetActiveScene().path);
-                EditorGUIUtility.PingObject(MixedRealityToolkit.Instance);
-            };
+            Debug.Assert(!string.IsNullOrEmpty(SceneManager.GetActiveScene().path),
+                "Configured Scene must be saved in order to set it as the Start Scene!\n" +
+                "Please save your scene and set it as the Start Scene in the XRTK preferences.");
+            MixedRealityPreferences.StartSceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(SceneManager.GetActiveScene().path);
+            EditorGUIUtility.PingObject(MixedRealityToolkit.Instance);
         }
 
         private static MixedRealityToolkitConfigurationProfile GetDefaultProfile(IEnumerable<MixedRealityToolkitConfigurationProfile> allProfiles)

@@ -3883,6 +3883,109 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.MixedRealityCameraProfile.TransparentQualityLevel
   nameWithType: MixedRealityCameraProfile.TransparentQualityLevel
+- uid: XRTK.Definitions.MixedRealityPackageInfo
+  name: MixedRealityPackageInfo
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html
+  commentId: T:XRTK.Definitions.MixedRealityPackageInfo
+  fullName: XRTK.Definitions.MixedRealityPackageInfo
+  nameWithType: MixedRealityPackageInfo
+- uid: XRTK.Definitions.MixedRealityPackageInfo.DisplayName
+  name: DisplayName
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_DisplayName
+  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.DisplayName
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.DisplayName
+  nameWithType: MixedRealityPackageInfo.DisplayName
+- uid: XRTK.Definitions.MixedRealityPackageInfo.DisplayName*
+  name: DisplayName
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_DisplayName_
+  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.DisplayName
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.DisplayName
+  nameWithType: MixedRealityPackageInfo.DisplayName
+- uid: XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
+  name: IsDefaultPackage
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsDefaultPackage
+  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
+  nameWithType: MixedRealityPackageInfo.IsDefaultPackage
+- uid: XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage*
+  name: IsDefaultPackage
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsDefaultPackage_
+  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
+  nameWithType: MixedRealityPackageInfo.IsDefaultPackage
+- uid: XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
+  name: IsEnabled
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsEnabled
+  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
+  nameWithType: MixedRealityPackageInfo.IsEnabled
+- uid: XRTK.Definitions.MixedRealityPackageInfo.IsEnabled*
+  name: IsEnabled
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsEnabled_
+  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
+  nameWithType: MixedRealityPackageInfo.IsEnabled
+- uid: XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
+  name: IsRequiredPackage
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsRequiredPackage
+  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
+  nameWithType: MixedRealityPackageInfo.IsRequiredPackage
+- uid: XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage*
+  name: IsRequiredPackage
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsRequiredPackage_
+  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
+  nameWithType: MixedRealityPackageInfo.IsRequiredPackage
+- uid: XRTK.Definitions.MixedRealityPackageInfo.Name
+  name: Name
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_Name
+  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.Name
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.Name
+  nameWithType: MixedRealityPackageInfo.Name
+- uid: XRTK.Definitions.MixedRealityPackageInfo.Name*
+  name: Name
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_Name_
+  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.Name
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.Name
+  nameWithType: MixedRealityPackageInfo.Name
+- uid: XRTK.Definitions.MixedRealityPackageInfo.Uri
+  name: Uri
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_Uri
+  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.Uri
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.Uri
+  nameWithType: MixedRealityPackageInfo.Uri
+- uid: XRTK.Definitions.MixedRealityPackageInfo.Uri*
+  name: Uri
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_Uri_
+  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.Uri
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.Uri
+  nameWithType: MixedRealityPackageInfo.Uri
+- uid: XRTK.Definitions.MixedRealityPackageSettings
+  name: MixedRealityPackageSettings
+  href: api/XRTK.Definitions.MixedRealityPackageSettings.html
+  commentId: T:XRTK.Definitions.MixedRealityPackageSettings
+  fullName: XRTK.Definitions.MixedRealityPackageSettings
+  nameWithType: MixedRealityPackageSettings
+- uid: XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
+  name: MixedRealityPackages
+  href: api/XRTK.Definitions.MixedRealityPackageSettings.html#XRTK_Definitions_MixedRealityPackageSettings_MixedRealityPackages
+  commentId: P:XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
+  fullName: XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
+  nameWithType: MixedRealityPackageSettings.MixedRealityPackages
+- uid: XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages*
+  name: MixedRealityPackages
+  href: api/XRTK.Definitions.MixedRealityPackageSettings.html#XRTK_Definitions_MixedRealityPackageSettings_MixedRealityPackages_
+  commentId: Overload:XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
+  nameWithType: MixedRealityPackageSettings.MixedRealityPackages
 - uid: XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile
   name: MixedRealityRegisteredServiceProvidersProfile
   href: api/XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile.html
@@ -9377,12 +9480,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.VectorExtensions.Mul
   nameWithType: VectorExtensions.Mul
-- uid: XRTK.Extensions.VectorExtensions.RadialMapping(UnityEngine.Vector3,System.Single,System.Single,System.Int32,System.Int32,System.Int32,System.Int32)
-  name: RadialMapping(Vector3, Single, Single, Int32, Int32, Int32, Int32)
-  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RadialMapping_UnityEngine_Vector3_System_Single_System_Single_System_Int32_System_Int32_System_Int32_System_Int32_
-  commentId: M:XRTK.Extensions.VectorExtensions.RadialMapping(UnityEngine.Vector3,System.Single,System.Single,System.Int32,System.Int32,System.Int32,System.Int32)
-  fullName: XRTK.Extensions.VectorExtensions.RadialMapping(UnityEngine.Vector3, System.Single, System.Single, System.Int32, System.Int32, System.Int32, System.Int32)
-  nameWithType: VectorExtensions.RadialMapping(Vector3, Single, Single, Int32, Int32, Int32, Int32)
+- uid: XRTK.Extensions.VectorExtensions.RadialMapping(UnityEngine.Vector3,System.Single,System.Single,System.Int32,System.Int32,System.Int32,System.Int32,System.Single)
+  name: RadialMapping(Vector3, Single, Single, Int32, Int32, Int32, Int32, Single)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RadialMapping_UnityEngine_Vector3_System_Single_System_Single_System_Int32_System_Int32_System_Int32_System_Int32_System_Single_
+  commentId: M:XRTK.Extensions.VectorExtensions.RadialMapping(UnityEngine.Vector3,System.Single,System.Single,System.Int32,System.Int32,System.Int32,System.Int32,System.Single)
+  fullName: XRTK.Extensions.VectorExtensions.RadialMapping(UnityEngine.Vector3, System.Single, System.Single, System.Int32, System.Int32, System.Int32, System.Int32, System.Single)
+  nameWithType: VectorExtensions.RadialMapping(Vector3, Single, Single, Int32, Int32, Int32, Int32, Single)
 - uid: XRTK.Extensions.VectorExtensions.RadialMapping*
   name: RadialMapping
   href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RadialMapping_
@@ -9631,6 +9734,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.MixedRealityPreferences.LockProfiles
   nameWithType: MixedRealityPreferences.LockProfiles
+- uid: XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
+  name: PackageSettingsPath
+  href: api/XRTK.Inspectors.MixedRealityPreferences.html#XRTK_Inspectors_MixedRealityPreferences_PackageSettingsPath
+  commentId: P:XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
+  fullName: XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
+  nameWithType: MixedRealityPreferences.PackageSettingsPath
+- uid: XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath*
+  name: PackageSettingsPath
+  href: api/XRTK.Inspectors.MixedRealityPreferences.html#XRTK_Inspectors_MixedRealityPreferences_PackageSettingsPath_
+  commentId: Overload:XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
+  isSpec: "True"
+  fullName: XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
+  nameWithType: MixedRealityPreferences.PackageSettingsPath
 - uid: XRTK.Inspectors.MixedRealityPreferences.ShowCanvasUtilityPrompt
   name: ShowCanvasUtilityPrompt
   href: api/XRTK.Inspectors.MixedRealityPreferences.html#XRTK_Inspectors_MixedRealityPreferences_ShowCanvasUtilityPrompt
@@ -12197,6 +12313,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Utilities.GitUtilities.ForceUpdateSubmodules
   nameWithType: GitUtilities.ForceUpdateSubmodules
+- uid: XRTK.Inspectors.Utilities.GitUtilities.GetAllTagsFromRemoteAsync(System.String)
+  name: GetAllTagsFromRemoteAsync(String)
+  href: api/XRTK.Inspectors.Utilities.GitUtilities.html#XRTK_Inspectors_Utilities_GitUtilities_GetAllTagsFromRemoteAsync_System_String_
+  commentId: M:XRTK.Inspectors.Utilities.GitUtilities.GetAllTagsFromRemoteAsync(System.String)
+  fullName: XRTK.Inspectors.Utilities.GitUtilities.GetAllTagsFromRemoteAsync(System.String)
+  nameWithType: GitUtilities.GetAllTagsFromRemoteAsync(String)
+- uid: XRTK.Inspectors.Utilities.GitUtilities.GetAllTagsFromRemoteAsync*
+  name: GetAllTagsFromRemoteAsync
+  href: api/XRTK.Inspectors.Utilities.GitUtilities.html#XRTK_Inspectors_Utilities_GitUtilities_GetAllTagsFromRemoteAsync_
+  commentId: Overload:XRTK.Inspectors.Utilities.GitUtilities.GetAllTagsFromRemoteAsync
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Utilities.GitUtilities.GetAllTagsFromRemoteAsync
+  nameWithType: GitUtilities.GetAllTagsFromRemoteAsync
 - uid: XRTK.Inspectors.Utilities.GitUtilities.RepositoryRootDir
   name: RepositoryRootDir
   href: api/XRTK.Inspectors.Utilities.GitUtilities.html#XRTK_Inspectors_Utilities_GitUtilities_RepositoryRootDir
@@ -12831,122 +12960,6 @@ references:
   commentId: N:XRTK.Inspectors.Utilities.Packages
   fullName: XRTK.Inspectors.Utilities.Packages
   nameWithType: XRTK.Inspectors.Utilities.Packages
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo
-  name: MixedRealityPackageInfo
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html
-  commentId: T:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo
-  nameWithType: MixedRealityPackageInfo
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Dependencies
-  name: Dependencies
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_Dependencies
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Dependencies
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Dependencies
-  nameWithType: MixedRealityPackageInfo.Dependencies
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Dependencies*
-  name: Dependencies
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_Dependencies_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Dependencies
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Dependencies
-  nameWithType: MixedRealityPackageInfo.Dependencies
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.DisplayName
-  name: DisplayName
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_DisplayName
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.DisplayName
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.DisplayName
-  nameWithType: MixedRealityPackageInfo.DisplayName
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.DisplayName*
-  name: DisplayName
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_DisplayName_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.DisplayName
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.DisplayName
-  nameWithType: MixedRealityPackageInfo.DisplayName
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsDefaultPackage
-  name: IsDefaultPackage
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_IsDefaultPackage
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsDefaultPackage
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsDefaultPackage
-  nameWithType: MixedRealityPackageInfo.IsDefaultPackage
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsDefaultPackage*
-  name: IsDefaultPackage
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_IsDefaultPackage_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsDefaultPackage
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsDefaultPackage
-  nameWithType: MixedRealityPackageInfo.IsDefaultPackage
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsRequiredPackage
-  name: IsRequiredPackage
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_IsRequiredPackage
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsRequiredPackage
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsRequiredPackage
-  nameWithType: MixedRealityPackageInfo.IsRequiredPackage
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsRequiredPackage*
-  name: IsRequiredPackage
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_IsRequiredPackage_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsRequiredPackage
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsRequiredPackage
-  nameWithType: MixedRealityPackageInfo.IsRequiredPackage
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Name
-  name: Name
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_Name
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Name
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Name
-  nameWithType: MixedRealityPackageInfo.Name
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Name*
-  name: Name
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_Name_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Name
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Name
-  nameWithType: MixedRealityPackageInfo.Name
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.PackageInfo
-  name: PackageInfo
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_PackageInfo
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.PackageInfo
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.PackageInfo
-  nameWithType: MixedRealityPackageInfo.PackageInfo
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.PackageInfo*
-  name: PackageInfo
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_PackageInfo_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.PackageInfo
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.PackageInfo
-  nameWithType: MixedRealityPackageInfo.PackageInfo
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Uri
-  name: Uri
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_Uri
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Uri
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Uri
-  nameWithType: MixedRealityPackageInfo.Uri
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Uri*
-  name: Uri
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_Uri_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Uri
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Uri
-  nameWithType: MixedRealityPackageInfo.Uri
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings
-  name: MixedRealityPackageSettings
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.html
-  commentId: T:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings
-  nameWithType: MixedRealityPackageSettings
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.MixedRealityPackages
-  name: MixedRealityPackages
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageSettings_MixedRealityPackages
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.MixedRealityPackages
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.MixedRealityPackages
-  nameWithType: MixedRealityPackageSettings.MixedRealityPackages
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.MixedRealityPackages*
-  name: MixedRealityPackages
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageSettings_MixedRealityPackages_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.MixedRealityPackages
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.MixedRealityPackages
-  nameWithType: MixedRealityPackageSettings.MixedRealityPackages
 - uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector
   name: MixedRealityPackageSettingsInspector
   href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector.html
@@ -13017,19 +13030,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.DebugEnabled
   nameWithType: MixedRealityPackageUtilities.DebugEnabled
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.GetRevisionHash(XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo)
-  name: GetRevisionHash(MixedRealityPackageInfo)
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_GetRevisionHash_XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_
-  commentId: M:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.GetRevisionHash(XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo)
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.GetRevisionHash(XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo)
-  nameWithType: MixedRealityPackageUtilities.GetRevisionHash(MixedRealityPackageInfo)
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.GetRevisionHash*
-  name: GetRevisionHash
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_GetRevisionHash_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.GetRevisionHash
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.GetRevisionHash
-  nameWithType: MixedRealityPackageUtilities.GetRevisionHash
 - uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.IsRunningCheck
   name: IsRunningCheck
   href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_IsRunningCheck
@@ -13043,38 +13043,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.IsRunningCheck
   nameWithType: MixedRealityPackageUtilities.IsRunningCheck
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation
-  name: MixedRealityPackageValidation
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.html
-  commentId: T:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation
-  nameWithType: MixedRealityPackageValidation
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.IsMainProjectAsset
-  name: IsMainProjectAsset
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageValidation_IsMainProjectAsset
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.IsMainProjectAsset
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.IsMainProjectAsset
-  nameWithType: MixedRealityPackageValidation.IsMainProjectAsset
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.IsMainProjectAsset*
-  name: IsMainProjectAsset
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageValidation_IsMainProjectAsset_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.IsMainProjectAsset
+- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
+  name: PackageSettings
+  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_PackageSettings
+  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
+  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
+  nameWithType: MixedRealityPackageUtilities.PackageSettings
+- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings*
+  name: PackageSettings
+  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_PackageSettings_
+  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
   isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.IsMainProjectAsset
-  nameWithType: MixedRealityPackageValidation.IsMainProjectAsset
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.PackageName
-  name: PackageName
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageValidation_PackageName
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.PackageName
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.PackageName
-  nameWithType: MixedRealityPackageValidation.PackageName
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.PackageName*
-  name: PackageName
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageValidation_PackageName_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.PackageName
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.PackageName
-  nameWithType: MixedRealityPackageValidation.PackageName
+  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
+  nameWithType: MixedRealityPackageUtilities.PackageSettings
 - uid: XRTK.Inspectors.Utilities.SymbolicLinks
   name: XRTK.Inspectors.Utilities.SymbolicLinks
   href: api/XRTK.Inspectors.Utilities.SymbolicLinks.html
@@ -29569,6 +29550,18 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.UX.Utilities.InteractableHighlight.TargetRenderers
   nameWithType: InteractableHighlight.TargetRenderers
+- uid: XRTK.Seed
+  name: XRTK.Seed
+  href: api/XRTK.Seed.html
+  commentId: N:XRTK.Seed
+  fullName: XRTK.Seed
+  nameWithType: XRTK.Seed
+- uid: XRTK.Seed.MixedRealityPackageSeed
+  name: MixedRealityPackageSeed
+  href: api/XRTK.Seed.MixedRealityPackageSeed.html
+  commentId: T:XRTK.Seed.MixedRealityPackageSeed
+  fullName: XRTK.Seed.MixedRealityPackageSeed
+  nameWithType: MixedRealityPackageSeed
 - uid: XRTK.Services
   name: XRTK.Services
   href: api/XRTK.Services.html

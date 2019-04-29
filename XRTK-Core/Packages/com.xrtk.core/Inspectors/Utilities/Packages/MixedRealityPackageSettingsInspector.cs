@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
+using UnityEngine;
+using XRTK.Definitions;
 
 namespace XRTK.Inspectors.Utilities.Packages
 {
@@ -17,10 +19,10 @@ namespace XRTK.Inspectors.Utilities.Packages
 
         public override void OnInspectorGUI()
         {
+            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            GUI.enabled = !MixedRealityPreferences.LockProfiles;
             serializedObject.Update();
-
             EditorGUILayout.PropertyField(mixedRealityPackages, true);
-
             serializedObject.ApplyModifiedProperties();
         }
     }

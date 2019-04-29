@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Definitions;
 using XRTK.Extensions.EditorClassExtensions;
+using XRTK.Inspectors.Utilities.Packages;
 using XRTK.Inspectors.Utilities.SymbolicLinks;
 using XRTK.Utilities.Editor;
 
@@ -132,6 +134,9 @@ namespace XRTK.Inspectors
         private static bool isSymbolicLinkSettingsPathLoaded;
         private static string symbolicLinkSettingsPath = string.Empty;
 
+        /// <summary>
+        /// The path to the symbolic link settings found for this project.
+        /// </summary>
         public static string SymbolicLinkSettingsPath
         {
             get
@@ -142,18 +147,14 @@ namespace XRTK.Inspectors
                     isSymbolicLinkSettingsPathLoaded = true;
                 }
 
-                if (string.IsNullOrEmpty(symbolicLinkSettingsPath))
+                if (!EditorApplication.isUpdating &&
+                    string.IsNullOrEmpty(symbolicLinkSettingsPath))
                 {
                     symbolicLinkSettingsPath = AssetDatabase
                         .FindAssets($"t:{typeof(SymbolicLinkSettings).Name}")
                         .Select(AssetDatabase.GUIDToAssetPath)
                         .OrderBy(x => x)
                         .FirstOrDefault();
-                }
-
-                if (Application.isBatchMode)
-                {
-                    Debug.Log(symbolicLinkSettingsPath);
                 }
 
                 return symbolicLinkSettingsPath;
@@ -189,6 +190,41 @@ namespace XRTK.Inspectors
         }
 
         #endregion Symbolic Link Preferences
+
+        #region Package Preferences
+
+        private static bool isPackageSettingsPathLoaded;
+        private static string packageSettingsPath = string.Empty;
+
+        /// <summary>
+        /// The path to the package settings found for this project.
+        /// </summary>
+        public static string PackageSettingsPath
+        {
+            get
+            {
+                if (!isPackageSettingsPathLoaded)
+                {
+                    symbolicLinkSettingsPath = EditorPreferences.Get("_PackageSettingsPath", string.Empty);
+                    isPackageSettingsPathLoaded = true;
+                }
+
+                if (!EditorApplication.isUpdating &&
+                     string.IsNullOrEmpty(packageSettingsPath))
+                {
+                    packageSettingsPath = AssetDatabase
+                        .FindAssets($"t:{typeof(MixedRealityPackageSettings).Name}")
+                        .Select(AssetDatabase.GUIDToAssetPath)
+                        .OrderBy(x => x)
+                        .FirstOrDefault();
+                }
+
+                return packageSettingsPath;
+            }
+            set => EditorPreferences.Set("_PackageSettingsPath", packageSettingsPath = value);
+        }
+
+        #endregion Package Prefernces
 
         #region Debug Packages
 
@@ -327,6 +363,29 @@ namespace XRTK.Inspectors
             if (EditorGUI.EndChangeCheck())
             {
                 DebugPackageInfo = debugPackageInfo;
+            }
+
+            EditorGUI.BeginChangeCheck();
+            var packageSettings = EditorGUILayout.ObjectField("Package Settings", MixedRealityPackageUtilities.PackageSettings, typeof(MixedRealityPackageSettings), false) as MixedRealityPackageSettings;
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                if (packageSettings != null)
+                {
+                    var shouldSync = string.IsNullOrEmpty(PackageSettingsPath);
+                    PackageSettingsPath = AssetDatabase.GetAssetPath(packageSettings);
+                    MixedRealityPackageUtilities.PackageSettings = AssetDatabase.LoadAssetAtPath<MixedRealityPackageSettings>(PackageSettingsPath);
+
+                    if (shouldSync)
+                    {
+                        EditorApplication.delayCall += MixedRealityPackageUtilities.CheckPackageManifest;
+                    }
+                }
+                else
+                {
+                    PackageSettingsPath = string.Empty;
+                    MixedRealityPackageUtilities.PackageSettings = null;
+                }
             }
 
             EditorGUIUtility.labelWidth = prevLabelWidth;

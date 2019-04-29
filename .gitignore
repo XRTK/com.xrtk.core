@@ -67,6 +67,8 @@ ThirdParty.meta
 --Version/
 XRTK-Core/Assets/MagicLeap/
 XRTK-Core/Assets/MagicLeap.meta
+XRTK-Core/Assets/Plugins/Lumin/Editor/
+XRTK-Core/Assets/Plugins/Lumin/Editor.meta
 XRTK-Core/Assets/StreamingAssets/GltfModels/
 XRTK-Core/Assets/StreamingAssets/GltfModels.meta
 XRTK-Core/Assets/StreamingAssets.meta

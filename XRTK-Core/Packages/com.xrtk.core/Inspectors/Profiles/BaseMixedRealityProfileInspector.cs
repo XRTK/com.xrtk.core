@@ -174,7 +174,7 @@ namespace XRTK.Inspectors.Profiles
 
         private static async void PasteProfileValuesDelay(BaseMixedRealityProfile newProfile)
         {
-            await new WaitUntil(() => newProfile != profile);
+            await new WaitUntil(() => profile == newProfile);
             Selection.activeObject = null;
             PasteProfileValues();
             Selection.activeObject = newProfile;

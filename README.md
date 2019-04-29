@@ -29,6 +29,7 @@ There are many channels on Slack, covering the wide variety of Mixed Reality pla
 |Core|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Mixed%20Reality%20Toolkit-CI)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=2)|
 |[UPM](https://github.com/XRTK/UpmGitExtension)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.UpmGitExtension%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=19)|
 |[WMR](https://github.com/XRTK/WindowsMixedReality)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.WMR%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=21)|
+|[Lumin](https://github.com/XRTK/Lumin)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.Lumin%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=29)|
 |[SDK](https://github.com/XRTK/SDK)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.SDK%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=23)|
 
 # Supported Platforms
@@ -49,7 +50,7 @@ There are many channels on Slack, covering the wide variety of Mixed Reality pla
     - [x] HoloLens
     - [x] Windows Mixed Reality HMDs
     - [ ] HoloLens 2
-- [ ] [Lumin (aka Magic Leap)](https://github.com/XRTK/Lumin)
+- [x] [Lumin (aka Magic Leap)](https://github.com/XRTK/Lumin)
 
 # FAQ
 

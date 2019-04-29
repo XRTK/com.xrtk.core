@@ -137,15 +137,16 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             {
                 if (string.IsNullOrEmpty(link.SourceRelativePath)) { continue; }
 
+                bool isValid = false;
                 var targetAbsolutePath = $"{ProjectRoot}{link.TargetRelativePath}";
                 var sourceAbsolutePath = $"{ProjectRoot}{link.SourceRelativePath}";
 
                 if (link.IsActive)
                 {
-                    await VerifySymbolicLink(targetAbsolutePath, sourceAbsolutePath);
+                    isValid = await VerifySymbolicLink(targetAbsolutePath, sourceAbsolutePath);
                 }
 
-                if (Directory.Exists(targetAbsolutePath))
+                if (isValid)
                 {
                     // If we already have the directory in our project, then skip.
                     if (link.IsActive) { continue; }
@@ -393,7 +394,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 return false;
             }
 
-            if (new Process().Run($"/C rmdir /q \"{path}\"", out var error))
+            if (new Process().Run($"/C rmdir /q \"{path}\"", out _))
             {
                 if (File.Exists($"{path}.meta"))
                 {
@@ -401,16 +402,20 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 }
 
                 AssetDatabase.Refresh();
-                return true;
             }
 
-            Debug.LogError($"{error}\n{path}");
-            return false;
+            return true;
         }
 
-        private static async Task VerifySymbolicLink(string targetAbsolutePath, string sourceAbsolutePath)
+        private static async Task<bool> VerifySymbolicLink(string targetAbsolutePath, string sourceAbsolutePath)
         {
             var pathToVerify = targetAbsolutePath.Substring(0, targetAbsolutePath.LastIndexOf("/", StringComparison.Ordinal));
+
+            if (DebugEnabled)
+            {
+                Debug.Log($"Attempting to validate {targetAbsolutePath}");
+            }
+
             var args = $"/C powershell.exe \"& dir '{pathToVerify}' | select Target, LinkType | where {{ $_.LinkType -eq 'SymbolicLink' }} | Format-Table -HideTableHeaders -Wrap\"";
 
             bool success;
@@ -430,8 +435,8 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
             if (!success)
             {
-                Debug.LogError($"Failed to enumerate symbolic links associated to {pathToVerify}");
-                return;
+                Debug.LogError($"Failed to enumerate symbolic links associated to {targetAbsolutePath}");
+                return false;
             }
 
             var isValid = false;
@@ -452,6 +457,8 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             {
                 DeleteSymbolicLink(targetAbsolutePath);
             }
+
+            return isValid && Directory.Exists(targetAbsolutePath);
         }
 
         private static string AddSubfolderPathToTarget(string sourcePath, string targetPath)

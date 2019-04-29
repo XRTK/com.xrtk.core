@@ -19,7 +19,6 @@ namespace XRTK.Inspectors
 {
     public class ControllerPopupWindow : EditorWindow
     {
-        private const string EditorWindowOptionsPath = "/Inspectors/Data/EditorWindowOptions.json";
         private const float InputActionLabelWidth = 128f;
 
         /// <summary>
@@ -97,6 +96,7 @@ namespace XRTK.Inspectors
 
         private bool IsCustomController => currentControllerType == SupportedControllerType.GenericOpenVR ||
                                            currentControllerType == SupportedControllerType.GenericUnity;
+        private static string EditorWindowOptionsPath => $"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/Inspectors/Data/EditorWindowOptions.json";
 
         private void OnFocus()
         {
@@ -208,7 +208,9 @@ namespace XRTK.Inspectors
             window.currentInteractionList = interactionsList;
             isMouseInRects = new bool[interactionsList.arraySize];
 
-            if (!File.Exists($"{MixedRealityEditorSettings.MixedRealityToolkit_AbsoluteFolderPath}{EditorWindowOptionsPath}"))
+            var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(EditorWindowOptionsPath);
+
+            if (asset == null)
             {
                 var empty = new ControllerInputActionOptions
                 {
@@ -224,12 +226,12 @@ namespace XRTK.Inspectors
                     }
                 };
 
-                File.WriteAllText($"{MixedRealityEditorSettings.MixedRealityToolkit_AbsoluteFolderPath}{EditorWindowOptionsPath}", JsonUtility.ToJson(empty));
+                AssetDatabase.CreateAsset(new TextAsset(string.Empty), EditorWindowOptionsPath);
                 AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
             }
             else
             {
-                controllerInputActionOptions = JsonUtility.FromJson<ControllerInputActionOptions>(File.ReadAllText($"{MixedRealityEditorSettings.MixedRealityToolkit_AbsoluteFolderPath}{EditorWindowOptionsPath}"));
+                controllerInputActionOptions = JsonUtility.FromJson<ControllerInputActionOptions>(asset.text);
 
                 if (controllerInputActionOptions.Controllers.Any(option => option.Controller == controllerType && option.Handedness == handedness))
                 {
@@ -340,7 +342,9 @@ namespace XRTK.Inspectors
                 {
                     if (!editInputActionPositions)
                     {
-                        File.WriteAllText($"{MixedRealityEditorSettings.MixedRealityToolkit_AbsoluteFolderPath}{EditorWindowOptionsPath}", JsonUtility.ToJson(controllerInputActionOptions));
+                        AssetDatabase.DeleteAsset(EditorWindowOptionsPath);
+                        AssetDatabase.CreateAsset(new TextAsset(JsonUtility.ToJson(controllerInputActionOptions)), EditorWindowOptionsPath);
+                        AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                     }
                     else
                     {
@@ -364,7 +368,9 @@ namespace XRTK.Inspectors
                                         option.Controller == SupportedControllerType.None));
                             }
 
-                            File.WriteAllText($"{MixedRealityEditorSettings.MixedRealityToolkit_AbsoluteFolderPath}{EditorWindowOptionsPath}", JsonUtility.ToJson(controllerInputActionOptions));
+                            AssetDatabase.DeleteAsset(EditorWindowOptionsPath);
+                            AssetDatabase.CreateAsset(new TextAsset(JsonUtility.ToJson(controllerInputActionOptions)), EditorWindowOptionsPath);
+                            AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                         }
                     }
                 }

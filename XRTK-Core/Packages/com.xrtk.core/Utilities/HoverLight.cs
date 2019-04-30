@@ -14,12 +14,12 @@ namespace XRTK.Utilities
     public class HoverLight : MonoBehaviour
     {
         // Three hover lights are supported at this time.
-        private const int hoverLightCount = 3;
-        private const int hoverLightDataSize = 2;
-        private const string multiHoverLightKeyword = "_MULTI_HOVER_LIGHT";
-        private static List<HoverLight> activeHoverLights = new List<HoverLight>(hoverLightCount);
-        private static Vector4[] hoverLightData = new Vector4[hoverLightCount * hoverLightDataSize];
-        private static int _HoverLightDataID;
+        private const int HOVER_LIGHT_COUNT = 3;
+        private const int HOVER_LIGHT_DATA_SIZE = 2;
+        private const string MULTI_HOVER_LIGHT_KEYWORD = "_MULTI_HOVER_LIGHT";
+        private static readonly List<HoverLight> ActiveHoverLights = new List<HoverLight>(HOVER_LIGHT_COUNT);
+        private static readonly Vector4[] HoverLightData = new Vector4[HOVER_LIGHT_COUNT * HOVER_LIGHT_DATA_SIZE];
+        private static int hoverLightDataId;
         private static int lastHoverLightUpdate = -1;
 
         /// <summary>
@@ -77,34 +77,36 @@ namespace XRTK.Utilities
                 return;
             }
 
+            var position = transform.position;
+
             Gizmos.color = Color;
-            Gizmos.DrawWireSphere(transform.position, Radius);
-            Gizmos.DrawIcon(transform.position + Vector3.right * Radius, string.Empty, false);
-            Gizmos.DrawIcon(transform.position + Vector3.left * Radius, string.Empty, false);
-            Gizmos.DrawIcon(transform.position + Vector3.up * Radius, string.Empty, false);
-            Gizmos.DrawIcon(transform.position + Vector3.down * Radius, string.Empty, false);
-            Gizmos.DrawIcon(transform.position + Vector3.forward * Radius, string.Empty, false);
-            Gizmos.DrawIcon(transform.position + Vector3.back * Radius, string.Empty, false);
+            Gizmos.DrawWireSphere(position, Radius);
+            Gizmos.DrawIcon(position + Vector3.right * Radius, string.Empty, false);
+            Gizmos.DrawIcon(position + Vector3.left * Radius, string.Empty, false);
+            Gizmos.DrawIcon(position + Vector3.up * Radius, string.Empty, false);
+            Gizmos.DrawIcon(position + Vector3.down * Radius, string.Empty, false);
+            Gizmos.DrawIcon(position + Vector3.forward * Radius, string.Empty, false);
+            Gizmos.DrawIcon(position + Vector3.back * Radius, string.Empty, false);
         }
 
         private void AddHoverLight(HoverLight hoverLight)
         {
-            if (activeHoverLights.Count >= hoverLightCount)
+            if (ActiveHoverLights.Count >= HOVER_LIGHT_COUNT)
             {
-                Debug.LogWarning($"Max hover light count ({hoverLightCount}) exceeded.");
+                Debug.LogWarning($"Max hover hoverLight count ({HOVER_LIGHT_COUNT}) exceeded.");
             }
 
-            activeHoverLights.Add(hoverLight);
+            ActiveHoverLights.Add(hoverLight);
         }
 
         private void RemoveHoverLight(HoverLight hoverLight)
         {
-            activeHoverLights.Remove(hoverLight);
+            ActiveHoverLights.Remove(hoverLight);
         }
 
         private void Initialize()
         {
-            _HoverLightDataID = Shader.PropertyToID("_HoverLightData");
+            hoverLightDataId = Shader.PropertyToID("_HoverLightData");
         }
 
         private void UpdateHoverLights(bool forceUpdate = false)
@@ -119,39 +121,39 @@ namespace XRTK.Utilities
                 return;
             }
 
-            if (activeHoverLights.Count > 1)
+            if (ActiveHoverLights.Count > 1)
             {
-                Shader.EnableKeyword(multiHoverLightKeyword);
+                Shader.EnableKeyword(MULTI_HOVER_LIGHT_KEYWORD);
             }
             else
             {
-                Shader.DisableKeyword(multiHoverLightKeyword);
+                Shader.DisableKeyword(MULTI_HOVER_LIGHT_KEYWORD);
             }
 
-            for (int i = 0; i < hoverLightCount; ++i)
+            for (int i = 0; i < HOVER_LIGHT_COUNT; ++i)
             {
-                HoverLight activeLight = (i >= activeHoverLights.Count) ? null : activeHoverLights[i];
-                int dataIndex = i * hoverLightDataSize;
+                var hoverLight = (i >= ActiveHoverLights.Count) ? null : ActiveHoverLights[i];
+                int dataIndex = i * HOVER_LIGHT_DATA_SIZE;
 
-                if (activeLight)
+                if (hoverLight)
                 {
-                    hoverLightData[dataIndex] = new Vector4(activeLight.transform.position.x,
-                                                            activeLight.transform.position.y,
-                                                            activeLight.transform.position.z,
-                                                            activeLight.Radius);
-                    hoverLightData[dataIndex + 1] = new Vector4(activeLight.Color.r,
-                                                                activeLight.Color.g,
-                                                                activeLight.Color.b,
-                                                                1.0f);
+                    var lightPosition = hoverLight.transform.position;
+                    HoverLightData[dataIndex] = new Vector4(lightPosition.x,
+                                                            lightPosition.y,
+                                                            lightPosition.z,
+                                                            1.0f);
+                    HoverLightData[dataIndex + 1] = new Vector4(hoverLight.Color.r,
+                                                                hoverLight.Color.g,
+                                                                hoverLight.Color.b,
+                                                                1.0f / Mathf.Clamp(hoverLight.Radius, 0.001f, 1.0f));
                 }
                 else
                 {
-                    hoverLightData[dataIndex] = Vector4.zero;
-                    hoverLightData[dataIndex + 1] = Vector4.zero;
+                    HoverLightData[dataIndex] = Vector4.zero;
                 }
             }
 
-            Shader.SetGlobalVectorArray(_HoverLightDataID, hoverLightData);
+            Shader.SetGlobalVectorArray(hoverLightDataId, HoverLightData);
 
             lastHoverLightUpdate = Time.frameCount;
         }

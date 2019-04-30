@@ -16,6 +16,7 @@ namespace XRTK.Utilities.Lines.DataProviders
     [DisallowMultipleComponent]
     public abstract class BaseMixedRealityLineDataProvider : MonoBehaviour
     {
+        protected const int UnclampedWorldLengthSearchSteps = 10;
         private const float MaxLineEndClamp = 0.9999f;
         private const float MinLineStartClamp = 0.0001f;
         private const float MinRotationMagnitude = 0.0001f;
@@ -86,8 +87,8 @@ namespace XRTK.Utilities.Lines.DataProviders
         /// </summary>
         public LinePointTransformMode TransformMode
         {
-            get { return transformMode; }
-            set { transformMode = value; }
+            get => transformMode;
+            set => transformMode = value;
         }
 
         [SerializeField]

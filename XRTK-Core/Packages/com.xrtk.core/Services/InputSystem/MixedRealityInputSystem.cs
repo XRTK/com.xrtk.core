@@ -115,8 +115,9 @@ namespace XRTK.Services.InputSystem
             {
                 var standaloneInputModules = UnityEngine.Object.FindObjectsOfType<StandaloneInputModule>();
 
-                CameraCache.Main.transform.position = Vector3.zero;
-                CameraCache.Main.transform.rotation = Quaternion.identity;
+                var cameraTransform = CameraCache.Main.transform;
+                cameraTransform.position = Vector3.zero;
+                cameraTransform.rotation = Quaternion.identity;
 
                 if (standaloneInputModules.Length == 0)
                 {
@@ -144,27 +145,28 @@ namespace XRTK.Services.InputSystem
             }
             else
             {
-                sourceStateEventData = new SourceStateEventData(EventSystem.current);
+                var eventSystem = EventSystem.current;
+                sourceStateEventData = new SourceStateEventData(eventSystem);
 
-                sourceTrackingEventData = new SourcePoseEventData<TrackingState>(EventSystem.current);
-                sourceVector2EventData = new SourcePoseEventData<Vector2>(EventSystem.current);
-                sourcePositionEventData = new SourcePoseEventData<Vector3>(EventSystem.current);
-                sourceRotationEventData = new SourcePoseEventData<Quaternion>(EventSystem.current);
-                sourcePoseEventData = new SourcePoseEventData<MixedRealityPose>(EventSystem.current);
+                sourceTrackingEventData = new SourcePoseEventData<TrackingState>(eventSystem);
+                sourceVector2EventData = new SourcePoseEventData<Vector2>(eventSystem);
+                sourcePositionEventData = new SourcePoseEventData<Vector3>(eventSystem);
+                sourceRotationEventData = new SourcePoseEventData<Quaternion>(eventSystem);
+                sourcePoseEventData = new SourcePoseEventData<MixedRealityPose>(eventSystem);
 
-                focusEventData = new FocusEventData(EventSystem.current);
+                focusEventData = new FocusEventData(eventSystem);
 
-                inputEventData = new InputEventData(EventSystem.current);
-                pointerEventData = new MixedRealityPointerEventData(EventSystem.current);
+                inputEventData = new InputEventData(eventSystem);
+                pointerEventData = new MixedRealityPointerEventData(eventSystem);
 
-                floatInputEventData = new InputEventData<float>(EventSystem.current);
-                vector2InputEventData = new InputEventData<Vector2>(EventSystem.current);
-                positionInputEventData = new InputEventData<Vector3>(EventSystem.current);
-                rotationInputEventData = new InputEventData<Quaternion>(EventSystem.current);
-                poseInputEventData = new InputEventData<MixedRealityPose>(EventSystem.current);
+                floatInputEventData = new InputEventData<float>(eventSystem);
+                vector2InputEventData = new InputEventData<Vector2>(eventSystem);
+                positionInputEventData = new InputEventData<Vector3>(eventSystem);
+                rotationInputEventData = new InputEventData<Quaternion>(eventSystem);
+                poseInputEventData = new InputEventData<MixedRealityPose>(eventSystem);
 
-                speechEventData = new SpeechEventData(EventSystem.current);
-                dictationEventData = new DictationEventData(EventSystem.current);
+                speechEventData = new SpeechEventData(eventSystem);
+                dictationEventData = new DictationEventData(eventSystem);
             }
 
             if (!addedComponents)

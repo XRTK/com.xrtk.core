@@ -122,10 +122,11 @@ namespace XRTK.Utilities.Physics
 
         private void Awake()
         {
-            targetPosition = transform.position;
-            targetRotation = transform.rotation;
-            targetLocalRotation = transform.localRotation;
-            targetLocalScale = transform.localScale;
+            var targetTransform = transform;
+            targetPosition = targetTransform.position;
+            targetRotation = targetTransform.rotation;
+            targetLocalRotation = targetTransform.localRotation;
+            targetLocalScale = targetTransform.localScale;
 
             enabled = false;
         }
@@ -254,10 +255,11 @@ namespace XRTK.Utilities.Physics
         /// <remarks>Reset() is usually reserved as a MonoBehaviour API call in editor, but is used in this case as a convenience method.</remarks>
         public void Reset()
         {
-            targetPosition = transform.position;
-            targetRotation = transform.rotation;
-            targetLocalRotation = transform.localRotation;
-            targetLocalScale = transform.localScale;
+            var targetTransform = transform;
+            targetPosition = targetTransform.position;
+            targetRotation = targetTransform.rotation;
+            targetLocalRotation = targetTransform.localRotation;
+            targetLocalScale = targetTransform.localScale;
 
             AnimatingPosition = false;
             AnimatingRotation = false;
@@ -424,10 +426,11 @@ namespace XRTK.Utilities.Physics
         {
             if (enabled)
             {
-                transform.position = TargetPosition;
-                transform.rotation = TargetRotation;
-                transform.localRotation = TargetLocalRotation;
-                transform.localScale = TargetLocalScale;
+                var targetTransform = transform;
+                targetTransform.position = TargetPosition;
+                targetTransform.rotation = TargetRotation;
+                targetTransform.localRotation = TargetLocalRotation;
+                targetTransform.localScale = TargetLocalScale;
 
                 AnimatingPosition = false;
                 AnimatingLocalScale = false;

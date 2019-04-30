@@ -4,7 +4,7 @@ using XRTK.Utilities.Lines;
 
 namespace XRTK.Inspectors.Utilities.Lines.DataProviders
 {
-    [CustomEditor(typeof(BezierDataProvider))]
+    [CustomEditor(typeof(BezierLineDataProvider))]
     public class BezierDataProviderInspector : BaseMixedRealityLineDataProviderInspector
     {
         private const float HANDLE_SIZE_MODIFIER = 0.04f;

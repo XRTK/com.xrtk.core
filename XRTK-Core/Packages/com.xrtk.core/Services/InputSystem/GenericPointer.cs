@@ -96,7 +96,11 @@ namespace XRTK.Services.InputSystem.Pointers
         /// <inheritdoc />
         public float SphereCastRadius { get; set; }
 
+        /// <inheritdoc />
         public float PointerOrientation { get; } = 0f;
+
+        /// <inheritdoc />
+        public bool IsTargetPositionLockedOnFocusLock { get; set; }
 
         /// <inheritdoc />
         public virtual void OnPreRaycast()

@@ -236,12 +236,13 @@ namespace XRTK.Services.Teleportation
                 }
             }
 
-            float height = targetPosition.y;
-            targetPosition -= CameraCache.Main.transform.position - cameraParent.position;
+            var height = targetPosition.y;
+            var cameraTransform = CameraCache.Main.transform;
+            var cameraPosition = cameraTransform.position;
+            targetPosition -= cameraPosition - cameraParent.position;
             targetPosition.y = height;
             cameraParent.position = targetPosition;
-
-            cameraParent.RotateAround(CameraCache.Main.transform.position, Vector3.up, targetRotation.y - CameraCache.Main.transform.eulerAngles.y);
+            cameraParent.RotateAround(cameraPosition, Vector3.up, targetRotation.y - cameraTransform.eulerAngles.y);
 
             isProcessingTeleportRequest = false;
 

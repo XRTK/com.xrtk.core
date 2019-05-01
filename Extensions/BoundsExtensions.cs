@@ -343,12 +343,14 @@ namespace XRTK.Extensions
                 }
                 else if (colliders[i] is CapsuleCollider)
                 {
-                    CapsuleCollider cc = colliders[i] as CapsuleCollider;
-                    Bounds capsuleBounds = new Bounds(cc.center, Vector3.zero);
+                    var cc = (CapsuleCollider)colliders[i];
+                    var capsuleBounds = new Bounds(cc.center, Vector3.zero);
+                    var radius = cc.radius;
+
                     switch (cc.direction)
                     {
                         case 0:
-                            capsuleBounds.size = new Vector3(cc.height, cc.radius * 2, cc.radius * 2);
+                            capsuleBounds.size = new Vector3(cc.height, cc.radius * 2, radius * 2);
                             break;
 
                         case 1:
@@ -356,7 +358,7 @@ namespace XRTK.Extensions
                             break;
 
                         case 2:
-                            capsuleBounds.size = new Vector3(cc.radius * 2, cc.radius * 2, cc.height);
+                            capsuleBounds.size = new Vector3(cc.radius * 2, radius * 2, cc.height);
                             break;
                     }
                     capsuleBounds.GetFacePositions(cc.transform, ref corners);

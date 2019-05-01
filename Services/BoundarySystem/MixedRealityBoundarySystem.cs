@@ -671,15 +671,16 @@ namespace XRTK.Services.BoundarySystem
             }
 
             var floorScale = FloorScale;
+            var position = MixedRealityToolkit.Instance.MixedRealityPlayspace.position;
 
             // Render the floor.
             currentFloorObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
             currentFloorObject.name = "Boundary System Floor";
             currentFloorObject.transform.localScale = new Vector3(floorScale.x, BoundaryObjectThickness, floorScale.y);
             currentFloorObject.transform.Translate(new Vector3(
-                MixedRealityToolkit.Instance.MixedRealityPlayspace.position.x,
+                position.x,
                 FloorHeight.Value - (currentFloorObject.transform.localScale.y * 0.5f),
-                MixedRealityToolkit.Instance.MixedRealityPlayspace.position.z));
+                position.z));
             currentFloorObject.layer = FloorPhysicsLayer;
             currentFloorObject.GetComponent<Renderer>().sharedMaterial = FloorMaterial;
 
@@ -756,11 +757,12 @@ namespace XRTK.Services.BoundarySystem
             {
                 layer = DefaultIgnoreRaycastLayer
             };
+
+            var position = MixedRealityToolkit.Instance.MixedRealityPlayspace.position;
+
             currentTrackedAreaObject.AddComponent<LineRenderer>();
-            currentTrackedAreaObject.transform.Translate(new Vector3(
-                MixedRealityToolkit.Instance.MixedRealityPlayspace.position.x,
-                BoundaryObjectRenderOffset,
-                MixedRealityToolkit.Instance.MixedRealityPlayspace.position.z));
+            currentTrackedAreaObject.transform.Translate(
+                new Vector3(position.x, BoundaryObjectRenderOffset, position.z));
             currentPlayAreaObject.layer = TrackedAreaPhysicsLayer;
 
             // Configure the renderer properties.

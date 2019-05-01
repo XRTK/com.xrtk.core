@@ -151,8 +151,9 @@ namespace XRTK.Services.SpatialAwarenessSystem
 
             if (Application.isPlaying)
             {
-                meshEventData = new MixedRealitySpatialAwarenessEventData<SpatialMeshObject>(EventSystem.current);
-                surfaceFindingEventData = new MixedRealitySpatialAwarenessEventData<GameObject>(EventSystem.current);
+                var eventSystem = EventSystem.current;
+                meshEventData = new MixedRealitySpatialAwarenessEventData<SpatialMeshObject>(eventSystem);
+                surfaceFindingEventData = new MixedRealitySpatialAwarenessEventData<GameObject>(eventSystem);
             }
         }
 

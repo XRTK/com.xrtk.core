@@ -251,25 +251,27 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         protected void UpdateTransformToGoal()
         {
+            var cachedTransform = transform;
+
             if (smoothing)
             {
-                Vector3 pos = transform.position;
-                Quaternion rot = transform.rotation;
-                Vector3 scale = transform.localScale;
+                var pos = cachedTransform.position;
+                var rot = cachedTransform.rotation;
+                var scale = cachedTransform.localScale;
 
                 pos = SmoothTo(pos, GoalPosition, SolverHandler.DeltaTime, moveLerpTime);
                 rot = SmoothTo(rot, GoalRotation, SolverHandler.DeltaTime, rotateLerpTime);
                 scale = SmoothTo(scale, GoalScale, SolverHandler.DeltaTime, scaleLerpTime);
 
-                transform.position = pos;
-                transform.rotation = rot;
-                transform.localScale = scale;
+                cachedTransform.position = pos;
+                cachedTransform.rotation = rot;
+                cachedTransform.localScale = scale;
             }
             else
             {
-                transform.position = GoalPosition;
-                transform.rotation = GoalRotation;
-                transform.localScale = GoalScale;
+                cachedTransform.position = GoalPosition;
+                cachedTransform.rotation = GoalRotation;
+                cachedTransform.localScale = GoalScale;
             }
         }
 

@@ -101,7 +101,7 @@ namespace XRTK.Services.InputSystem.Pointers
         /// <inheritdoc />
         public virtual void OnPreRaycast()
         {
-            if (TryGetPointingRay(out Ray pointingRay))
+            if (TryGetPointingRay(out var pointingRay))
             {
                 Rays[0].CopyRay(pointingRay, PointerExtent);
             }

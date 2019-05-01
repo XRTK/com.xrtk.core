@@ -5,10 +5,10 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Class TwoHandMoveLogic
+    <title>Class Text3DShaderGUI
    | XRTK-Core </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Class TwoHandMoveLogic
+    <meta name="title" content="Class Text3DShaderGUI
    | XRTK-Core ">
     <meta name="generator" content="docfx 2.42.1.0">
     
@@ -68,26 +68,43 @@
         </div>
         <div class="article row grid-right">
           <div class="col-md-10">
-            <article class="content wrap" id="_content" data-uid="XRTK.Utilities.Physics.TwoHandMoveLogic">
+            <article class="content wrap" id="_content" data-uid="XRTK.Inspectors.Text3DShaderGUI">
   
   
-  <h1 id="XRTK_Utilities_Physics_TwoHandMoveLogic" data-uid="XRTK.Utilities.Physics.TwoHandMoveLogic" class="text-break">Class TwoHandMoveLogic
+  <h1 id="XRTK_Inspectors_Text3DShaderGUI" data-uid="XRTK.Inspectors.Text3DShaderGUI" class="text-break">Class Text3DShaderGUI
   </h1>
-  <div class="markdown level0 summary"><p>Implements a movement logic that uses the model of angular rotations along a sphere whose
-radius varies. The angle to move by is computed by looking at how much the hand changes
-relative to a pivot point (slightly below and in front of the head).</p>
-<p>Usage:
-When a manipulation starts, call Setup.
-Call Update any time to update the move logic and get a new rotation for the object.</p>
+  <div class="markdown level0 summary"><p>A custom shader inspector for the &quot;Mixed Reality Toolkit/TextShader3D&quot;.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
-    <div class="level1"><span class="xref">TwoHandMoveLogic</span></div>
+    <div class="level1"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.ShaderGUI.html">ShaderGUI</a></div>
+    <div class="level2"><span class="xref">Text3DShaderGUI</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.ShaderGUI.html#UnityEditor_ShaderGUI_OnMaterialPreviewGUI_UnityEditor_MaterialEditor_UnityEngine_Rect_UnityEngine_GUIStyle_">ShaderGUI.OnMaterialPreviewGUI(MaterialEditor, Rect, GUIStyle)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.ShaderGUI.html#UnityEditor_ShaderGUI_OnMaterialInteractivePreviewGUI_UnityEditor_MaterialEditor_UnityEngine_Rect_UnityEngine_GUIStyle_">ShaderGUI.OnMaterialInteractivePreviewGUI(MaterialEditor, Rect, GUIStyle)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.ShaderGUI.html#UnityEditor_ShaderGUI_OnMaterialPreviewSettingsGUI_UnityEditor_MaterialEditor_">ShaderGUI.OnMaterialPreviewSettingsGUI(MaterialEditor)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.ShaderGUI.html#UnityEditor_ShaderGUI_OnClosed_UnityEngine_Material_">ShaderGUI.OnClosed(Material)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.ShaderGUI.html#UnityEditor_ShaderGUI_AssignNewShaderToMaterial_UnityEngine_Material_UnityEngine_Shader_UnityEngine_Shader_">ShaderGUI.AssignNewShaderToMaterial(Material, Shader, Shader)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.ShaderGUI.html#UnityEditor_ShaderGUI_FindProperty_System_String_UnityEditor_MaterialProperty___">ShaderGUI.FindProperty(String, MaterialProperty[])</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.ShaderGUI.html#UnityEditor_ShaderGUI_FindProperty_System_String_UnityEditor_MaterialProperty___System_Boolean_">ShaderGUI.FindProperty(String, MaterialProperty[], Boolean)</a>
+    </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
     </div>
@@ -110,60 +127,88 @@ Call Update any time to update the move logic and get a new rotation for the obj
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
     </div>
   </div>
-  <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.Utilities.Physics.html">XRTK.Utilities.Physics</a></h6>
-  <h6><strong>Assembly</strong>: XRTK.dll</h6>
-  <h5 id="XRTK_Utilities_Physics_TwoHandMoveLogic_syntax">Syntax</h5>
+  <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.Inspectors.html">XRTK.Inspectors</a></h6>
+  <h6><strong>Assembly</strong>: XRTK.Inspectors.dll</h6>
+  <h5 id="XRTK_Inspectors_Text3DShaderGUI_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class TwoHandMoveLogic</code></pre>
+    <pre><code class="lang-csharp hljs">public class Text3DShaderGUI : ShaderGUI</code></pre>
   </div>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Inspectors_Text3DShaderGUI_cullMode.md&amp;value=---%0Auid%3A%20XRTK.Inspectors.Text3DShaderGUI.cullMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Inspectors/Text3DShaderGUI.cs/#L15">View Source</a>
+  </span>
+  <h4 id="XRTK_Inspectors_Text3DShaderGUI_cullMode" data-uid="XRTK.Inspectors.Text3DShaderGUI.cullMode">cullMode</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected MaterialProperty cullMode</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.MaterialProperty.html">MaterialProperty</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Inspectors_Text3DShaderGUI_firstTimeApply.md&amp;value=---%0Auid%3A%20XRTK.Inspectors.Text3DShaderGUI.firstTimeApply%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Inspectors/Text3DShaderGUI.cs/#L14">View Source</a>
+  </span>
+  <h4 id="XRTK_Inspectors_Text3DShaderGUI_firstTimeApply" data-uid="XRTK.Inspectors.Text3DShaderGUI.firstTimeApply">firstTimeApply</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected bool firstTimeApply</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Physics_TwoHandMoveLogic_GetHandPivotPosition.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Physics.TwoHandMoveLogic.GetHandPivotPosition%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Inspectors_Text3DShaderGUI_OnGUI_UnityEditor_MaterialEditor_UnityEditor_MaterialProperty___.md&amp;value=---%0Auid%3A%20XRTK.Inspectors.Text3DShaderGUI.OnGUI(UnityEditor.MaterialEditor%2CUnityEditor.MaterialProperty%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Physics/TwoHandMoveLogic.cs/#L87">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Inspectors/Text3DShaderGUI.cs/#L18">View Source</a>
   </span>
-  <a id="XRTK_Utilities_Physics_TwoHandMoveLogic_GetHandPivotPosition_" data-uid="XRTK.Utilities.Physics.TwoHandMoveLogic.GetHandPivotPosition*"></a>
-  <h4 id="XRTK_Utilities_Physics_TwoHandMoveLogic_GetHandPivotPosition" data-uid="XRTK.Utilities.Physics.TwoHandMoveLogic.GetHandPivotPosition">GetHandPivotPosition()</h4>
-  <div class="markdown level1 summary"><p>Get the hand pivot position located a bit lower and behind the camera.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Vector3 GetHandPivotPosition()</code></pre>
-  </div>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
-        <td><p>A point that is below and just in front of the head.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Physics_TwoHandMoveLogic_Setup_UnityEngine_Vector3_UnityEngine_Transform_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Physics.TwoHandMoveLogic.Setup(UnityEngine.Vector3%2CUnityEngine.Transform)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Physics/TwoHandMoveLogic.cs/#L30">View Source</a>
-  </span>
-  <a id="XRTK_Utilities_Physics_TwoHandMoveLogic_Setup_" data-uid="XRTK.Utilities.Physics.TwoHandMoveLogic.Setup*"></a>
-  <h4 id="XRTK_Utilities_Physics_TwoHandMoveLogic_Setup_UnityEngine_Vector3_UnityEngine_Transform_" data-uid="XRTK.Utilities.Physics.TwoHandMoveLogic.Setup(UnityEngine.Vector3,UnityEngine.Transform)">Setup(Vector3, Transform)</h4>
+  <a id="XRTK_Inspectors_Text3DShaderGUI_OnGUI_" data-uid="XRTK.Inspectors.Text3DShaderGUI.OnGUI*"></a>
+  <h4 id="XRTK_Inspectors_Text3DShaderGUI_OnGUI_UnityEditor_MaterialEditor_UnityEditor_MaterialProperty___" data-uid="XRTK.Inspectors.Text3DShaderGUI.OnGUI(UnityEditor.MaterialEditor,UnityEditor.MaterialProperty[])">OnGUI(MaterialEditor, MaterialProperty[])</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Setup(Vector3 startHandPositionMeters, Transform manipulationRoot)</code></pre>
+    <pre><code class="lang-csharp hljs">public override void OnGUI(MaterialEditor matEditor, MaterialProperty[] props)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -176,69 +221,19 @@ Call Update any time to update the move logic and get a new rotation for the obj
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
-        <td><span class="parametername">startHandPositionMeters</span></td>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.MaterialEditor.html">MaterialEditor</a></td>
+        <td><span class="parametername">matEditor</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Transform.html">Transform</a></td>
-        <td><span class="parametername">manipulationRoot</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Physics_TwoHandMoveLogic_Update_UnityEngine_Vector3_UnityEngine_Vector3_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Physics.TwoHandMoveLogic.Update(UnityEngine.Vector3%2CUnityEngine.Vector3)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Physics/TwoHandMoveLogic.cs/#L54">View Source</a>
-  </span>
-  <a id="XRTK_Utilities_Physics_TwoHandMoveLogic_Update_" data-uid="XRTK.Utilities.Physics.TwoHandMoveLogic.Update*"></a>
-  <h4 id="XRTK_Utilities_Physics_TwoHandMoveLogic_Update_UnityEngine_Vector3_UnityEngine_Vector3_" data-uid="XRTK.Utilities.Physics.TwoHandMoveLogic.Update(UnityEngine.Vector3,UnityEngine.Vector3)">Update(Vector3, Vector3)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Vector3 Update(Vector3 centroid, Vector3 manipulationObjectPosition)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
-        <td><span class="parametername">centroid</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
-        <td><span class="parametername">manipulationObjectPosition</span></td>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.MaterialProperty.html">MaterialProperty</a>[]</td>
+        <td><span class="parametername">props</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEditor.ShaderGUI.html#UnityEditor_ShaderGUI_OnGUI_UnityEditor_MaterialEditor_UnityEditor_MaterialProperty___">ShaderGUI.OnGUI(MaterialEditor, MaterialProperty[])</a></div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
@@ -254,10 +249,10 @@ Call Update any time to update the move logic and get a new rotation for the obj
               <div class="contribution">
                 <ul class="nav">
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Physics_TwoHandMoveLogic.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Physics.TwoHandMoveLogic%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Inspectors_Text3DShaderGUI.md&amp;value=---%0Auid%3A%20XRTK.Inspectors.Text3DShaderGUI%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Physics/TwoHandMoveLogic.cs/#L17" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Inspectors/Text3DShaderGUI.cs/#L12" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

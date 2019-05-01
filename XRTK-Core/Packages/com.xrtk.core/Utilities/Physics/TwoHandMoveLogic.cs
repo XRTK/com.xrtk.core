@@ -34,10 +34,12 @@ namespace XRTK.Utilities.Physics
             // The pivot is just below and in front of the head.
             var pivotPosition = GetHandPivotPosition();
 
-            objRefDistance = Vector3.Distance(manipulationRoot.position, pivotPosition);
+            var manipulationPosition = manipulationRoot.position;
+
+            objRefDistance = Vector3.Distance(manipulationPosition, pivotPosition);
             handRefDistance = Vector3.Distance(newHandPosition, pivotPosition);
 
-            var objDirection = Vector3.Normalize(manipulationRoot.position - pivotPosition);
+            var objDirection = Vector3.Normalize(manipulationPosition - pivotPosition);
             var handDirection = Vector3.Normalize(newHandPosition - pivotPosition);
 
             // We transform the forward vector of the object, the direction of the object, and the direction of the hand
@@ -84,8 +86,8 @@ namespace XRTK.Utilities.Physics
         /// <returns>A point that is below and just in front of the head.</returns>
         public static Vector3 GetHandPivotPosition()
         {
-            Vector3 pivot = CameraCache.Main.transform.position + offsetPosition - CameraCache.Main.transform.forward * 0.2f; // a bit lower and behind
-            return pivot;
+            var cameraTransform = CameraCache.Main.transform;
+            return cameraTransform.position + offsetPosition - cameraTransform.forward * 0.2f; // a bit lower and behind
         }
     }
 }

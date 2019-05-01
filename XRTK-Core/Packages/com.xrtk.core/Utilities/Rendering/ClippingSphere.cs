@@ -46,13 +46,14 @@ namespace XRTK.Utilities.Rendering
             clipSphereId = Shader.PropertyToID("_ClipSphere");
         }
 
-        protected override void UpdateShaderProperties(MaterialPropertyBlock _materialPropertyBlock)
+        protected override void UpdateShaderProperties(MaterialPropertyBlock materialPropertyBlock)
         {
-            sphereSize.x = transform.position.x;
-            sphereSize.y = transform.position.y;
-            sphereSize.z = transform.position.z;
+            var clipTransformPosition = transform.position;
+            sphereSize.x = clipTransformPosition.x;
+            sphereSize.y = clipTransformPosition.y;
+            sphereSize.z = clipTransformPosition.z;
             sphereSize.w = radius;
-            _materialPropertyBlock.SetVector(clipSphereId, sphereSize);
+            materialPropertyBlock.SetVector(clipSphereId, sphereSize);
         }
     }
 }

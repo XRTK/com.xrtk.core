@@ -83,8 +83,9 @@ namespace XRTK.SDK.Utilities.Solvers
         {
             if (targetTransform != null && secondTransform != null)
             {
-                Vector3 centerline = targetTransform.position - secondTransform.position;
-                GoalPosition = secondTransform.position + (centerline * partwayOffset);
+                var secondTransformPosition = secondTransform.position;
+                var centerLine = targetTransform.position - secondTransformPosition;
+                GoalPosition = secondTransformPosition + (centerLine * partwayOffset);
                 UpdateWorkingPositionToGoal();
             }
         }

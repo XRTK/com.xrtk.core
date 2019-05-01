@@ -41,13 +41,15 @@ namespace XRTK.Utilities.Rendering
             clipPlaneId = Shader.PropertyToID("_ClipPlane");
         }
 
-        protected override void UpdateShaderProperties(MaterialPropertyBlock _materialPropertyBlock)
+        protected override void UpdateShaderProperties(MaterialPropertyBlock materialPropertyBlock)
         {
-            planeSize.x = transform.up.x;
-            planeSize.y = transform.up.y;
-            planeSize.z = transform.up.z;
-            planeSize.w = Vector3.Dot(transform.up, transform.position);
-            _materialPropertyBlock.SetVector(clipPlaneId, planeSize);
+            var clipTransform = transform;
+            var clipTransformUp = clipTransform.up;
+            planeSize.x = clipTransformUp.x;
+            planeSize.y = clipTransformUp.y;
+            planeSize.z = clipTransformUp.z;
+            planeSize.w = Vector3.Dot(clipTransformUp, clipTransform.position);
+            materialPropertyBlock.SetVector(clipPlaneId, planeSize);
         }
     }
 }

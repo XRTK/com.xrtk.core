@@ -88,10 +88,12 @@ namespace XRTK.SDK.Utilities.Solvers
             }
             else
             {
-                Vector3 cachedScale = transform.root.localScale;
-                transform.root.localScale = Vector3.one;
+                var cachedTransform = transform;
+                var cachedRoot = cachedTransform.root;
+                var cachedScale = cachedRoot.localScale;
+                cachedRoot.localScale = Vector3.one;
 
-                var combinedBounds = new Bounds(transform.position, Vector3.zero);
+                var combinedBounds = new Bounds(cachedTransform.position, Vector3.zero);
                 var renderers = GetComponentsInChildren<Renderer>();
 
                 for (var i = 0; i < renderers.Length; i++)

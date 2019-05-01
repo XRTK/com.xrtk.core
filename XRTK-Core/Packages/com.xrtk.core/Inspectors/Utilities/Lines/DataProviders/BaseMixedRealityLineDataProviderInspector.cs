@@ -253,23 +253,15 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
 
             if (distortionSettingsFoldout)
             {
-                if (distorters.arraySize > 0)
-                {
-                    EditorGUI.indentLevel++;
+                EditorGUILayout.HelpBox("No distorters attached to this line.\nTry adding a distortion component.", MessageType.Info);
 
-                    if (distorters.arraySize > 0)
-                    {
-                        EditorGUILayout.PropertyField(distortionMode);
-                        EditorGUILayout.PropertyField(distortionStrength);
-                        EditorGUILayout.PropertyField(uniformDistortionStrength);
-                    }
+                EditorGUI.indentLevel++;
 
-                    EditorGUI.indentLevel--;
-                }
-                else
-                {
-                    EditorGUILayout.HelpBox("No distorters attached to this line.\nTry adding a distortion component.", MessageType.Info);
-                }
+                EditorGUILayout.PropertyField(distortionMode);
+                EditorGUILayout.PropertyField(distortionStrength);
+                EditorGUILayout.PropertyField(uniformDistortionStrength);
+
+                EditorGUI.indentLevel--;
             }
 
             serializedObject.ApplyModifiedProperties();

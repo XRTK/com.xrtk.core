@@ -43,11 +43,11 @@ namespace XRTK.Utilities.Editor
 
             if (axisMappings != null)
             {
-                for (var i = 0; i < axisMappings.Length; i++)
+                foreach (var axis in axisMappings)
                 {
-                    if (!DoesAxisNameExist(axisMappings[i].Name))
+                    if (!DoesAxisNameExist(axis.Name))
                     {
-                        AddAxis(axisMappings[i]);
+                        AddAxis(axis);
                     }
                 }
 

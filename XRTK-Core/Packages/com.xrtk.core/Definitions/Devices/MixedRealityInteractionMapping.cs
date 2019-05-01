@@ -133,6 +133,8 @@ namespace XRTK.Definitions.Devices
             changed = false;
         }
 
+        private readonly Vector2 vector2One = new Vector2(1f, 1f);
+
         #region Interaction Properties
 
         [SerializeField]
@@ -381,21 +383,21 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.SingleAxis)
                 {
-                    Debug.LogError($"SetFloatValue is only valid for AxisType.SingleAxis InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError(
+                        $"SetFloatValue is only valid for AxisType.SingleAxis InteractionMappings\nPlease check the {inputType} mapping for the current controller");
                 }
+
+                var newValue = value;
 
                 if (invertXAxis)
                 {
-                    Changed = !floatData.Equals(value * -1f);
-                    floatData = value * -1f;
+                    newValue *= -1f;
                 }
-                else
-                {
-                    Changed = !floatData.Equals(value);
-                    // use the internal reading for changed so we don't reset it.
-                    Updated = changed || !floatData.Equals(0f);
-                    floatData = value;
-                }
+
+                Changed = !floatData.Equals(newValue);
+                // use the internal reading for changed so we don't reset it.
+                Updated = changed || !floatData.Equals(0f);
+                floatData = value;
             }
         }
 
@@ -414,25 +416,23 @@ namespace XRTK.Definitions.Devices
                     Debug.LogError($"SetVector2Value is only valid for AxisType.DualAxis InteractionMappings\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                if (invertXAxis || invertYAxis)
-                {
-                    var invertXAxisFactor = invertXAxis ? -1f : 1f;
-                    var invertYAxisFactor = invertYAxis ? -1f : 1f;
+                var invertMultiplier = vector2One;
 
-                    Changed = !vector2Data.x.Equals(value.x * invertXAxisFactor) ||
-                              !vector2Data.y.Equals(value.y * invertYAxisFactor);
-                    // use the internal reading for changed so we don't reset it.
-                    Updated = changed || !vector2Data.Equals(Vector2.zero);
-                    vector2Data.x = value.x * invertXAxisFactor;
-                    vector2Data.y = value.y * invertYAxisFactor;
-                }
-                else
+                if (invertXAxis)
                 {
-                    Changed = vector2Data != value;
-                    // use the internal reading for changed so we don't reset it.
-                    Updated = changed || !vector2Data.Equals(Vector2.zero);
-                    vector2Data = value;
+                    invertMultiplier.x = -1f;
                 }
+
+                if (invertYAxis)
+                {
+                    invertMultiplier.y = -1f;
+                }
+
+                var newValue = value * invertMultiplier;
+                Changed = vector2Data != newValue;
+                // use the internal reading for changed so we don't reset it.
+                Updated = changed || !newValue.Equals(Vector2.zero);
+                vector2Data = newValue;
             }
         }
 

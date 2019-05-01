@@ -44,6 +44,7 @@ namespace XRTK.Extensions
         /// <param name="root">Start point of the traverse</param>
         /// <param name="layer">The layer to apply</param>
         /// <param name="cache">The previously set layer for each object</param>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="root"/> is <see langword="null"/></exception>
         public static void SetLayerRecursively(this GameObject root, int layer, out Dictionary<GameObject, int> cache)
         {
             if (root == null) { throw new ArgumentNullException(nameof(root)); }
@@ -52,8 +53,9 @@ namespace XRTK.Extensions
 
             foreach (var child in root.transform.EnumerateHierarchy())
             {
-                cache[child.gameObject] = child.gameObject.layer;
-                child.gameObject.layer = layer;
+                var childGameObject = child.gameObject;
+                cache[childGameObject] = childGameObject.layer;
+                childGameObject.layer = layer;
             }
         }
 
@@ -62,6 +64,8 @@ namespace XRTK.Extensions
         /// </summary>
         /// <param name="root">Start point of the traverse</param>
         /// <param name="cache">The previously set layer for each object</param>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="root"/> is <see langword="null"/></exception>
+        /// <exception cref="T:System.ArgumentNullException"><paramref name="cache"/> is <see langword="null"/></exception>
         public static void ApplyLayerCacheRecursively(this GameObject root, Dictionary<GameObject, int> cache)
         {
             if (root == null) { throw new ArgumentNullException(nameof(root)); }
@@ -69,9 +73,10 @@ namespace XRTK.Extensions
 
             foreach (var child in root.transform.EnumerateHierarchy())
             {
-                if (!cache.TryGetValue(child.gameObject, out int layer)) { continue; }
-                child.gameObject.layer = layer;
-                cache.Remove(child.gameObject);
+                var childGameObject = child.gameObject;
+                if (!cache.TryGetValue(childGameObject, out var layer)) { continue; }
+                childGameObject.layer = layer;
+                cache.Remove(childGameObject);
             }
         }
 
@@ -95,7 +100,7 @@ namespace XRTK.Extensions
         public static void ApplyToHierarchy(this GameObject root, Action<GameObject> action)
         {
             action(root);
-            Transform[] items = root.GetComponentsInChildren<Transform>();
+            var items = root.GetComponentsInChildren<Transform>();
 
             for (var i = 0; i < items.Length; i++)
             {

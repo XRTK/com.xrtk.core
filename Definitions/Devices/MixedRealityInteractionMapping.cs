@@ -133,8 +133,6 @@ namespace XRTK.Definitions.Devices
             changed = false;
         }
 
-        private readonly Vector2 vector2One = new Vector2(1f, 1f);
-
         #region Interaction Properties
 
         [SerializeField]
@@ -416,19 +414,18 @@ namespace XRTK.Definitions.Devices
                     Debug.LogError($"SetVector2Value is only valid for AxisType.DualAxis InteractionMappings\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                var invertMultiplier = vector2One;
+                var newValue = value;
 
                 if (invertXAxis)
                 {
-                    invertMultiplier.x = -1f;
+                    newValue.x *= -1f;
                 }
 
                 if (invertYAxis)
                 {
-                    invertMultiplier.y = -1f;
+                    newValue.y *= -1f;
                 }
 
-                var newValue = value * invertMultiplier;
                 Changed = vector2Data != newValue;
                 // use the internal reading for changed so we don't reset it.
                 Updated = changed || !newValue.Equals(Vector2.zero);

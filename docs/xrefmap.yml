@@ -4520,6 +4520,19 @@ references:
   commentId: T:XRTK.Definitions.Physics.FocusDetails
   fullName: XRTK.Definitions.Physics.FocusDetails
   nameWithType: FocusDetails
+- uid: XRTK.Definitions.Physics.FocusDetails.LastGraphicsRaycastResult
+  name: LastGraphicsRaycastResult
+  href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_LastGraphicsRaycastResult
+  commentId: P:XRTK.Definitions.Physics.FocusDetails.LastGraphicsRaycastResult
+  fullName: XRTK.Definitions.Physics.FocusDetails.LastGraphicsRaycastResult
+  nameWithType: FocusDetails.LastGraphicsRaycastResult
+- uid: XRTK.Definitions.Physics.FocusDetails.LastGraphicsRaycastResult*
+  name: LastGraphicsRaycastResult
+  href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_LastGraphicsRaycastResult_
+  commentId: Overload:XRTK.Definitions.Physics.FocusDetails.LastGraphicsRaycastResult
+  isSpec: "True"
+  fullName: XRTK.Definitions.Physics.FocusDetails.LastGraphicsRaycastResult
+  nameWithType: FocusDetails.LastGraphicsRaycastResult
 - uid: XRTK.Definitions.Physics.FocusDetails.LastRaycastHit
   name: LastRaycastHit
   href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_LastRaycastHit
@@ -4546,6 +4559,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.Physics.FocusDetails.Normal
   nameWithType: FocusDetails.Normal
+- uid: XRTK.Definitions.Physics.FocusDetails.NormalLocalSpace
+  name: NormalLocalSpace
+  href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_NormalLocalSpace
+  commentId: P:XRTK.Definitions.Physics.FocusDetails.NormalLocalSpace
+  fullName: XRTK.Definitions.Physics.FocusDetails.NormalLocalSpace
+  nameWithType: FocusDetails.NormalLocalSpace
+- uid: XRTK.Definitions.Physics.FocusDetails.NormalLocalSpace*
+  name: NormalLocalSpace
+  href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_NormalLocalSpace_
+  commentId: Overload:XRTK.Definitions.Physics.FocusDetails.NormalLocalSpace
+  isSpec: "True"
+  fullName: XRTK.Definitions.Physics.FocusDetails.NormalLocalSpace
+  nameWithType: FocusDetails.NormalLocalSpace
 - uid: XRTK.Definitions.Physics.FocusDetails.Object
   name: Object
   href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_Object
@@ -4572,6 +4598,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.Physics.FocusDetails.Point
   nameWithType: FocusDetails.Point
+- uid: XRTK.Definitions.Physics.FocusDetails.PointLocalSpace
+  name: PointLocalSpace
+  href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_PointLocalSpace
+  commentId: P:XRTK.Definitions.Physics.FocusDetails.PointLocalSpace
+  fullName: XRTK.Definitions.Physics.FocusDetails.PointLocalSpace
+  nameWithType: FocusDetails.PointLocalSpace
+- uid: XRTK.Definitions.Physics.FocusDetails.PointLocalSpace*
+  name: PointLocalSpace
+  href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_PointLocalSpace_
+  commentId: Overload:XRTK.Definitions.Physics.FocusDetails.PointLocalSpace
+  isSpec: "True"
+  fullName: XRTK.Definitions.Physics.FocusDetails.PointLocalSpace
+  nameWithType: FocusDetails.PointLocalSpace
+- uid: XRTK.Definitions.Physics.FocusDetails.RayDistance
+  name: RayDistance
+  href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_RayDistance
+  commentId: P:XRTK.Definitions.Physics.FocusDetails.RayDistance
+  fullName: XRTK.Definitions.Physics.FocusDetails.RayDistance
+  nameWithType: FocusDetails.RayDistance
+- uid: XRTK.Definitions.Physics.FocusDetails.RayDistance*
+  name: RayDistance
+  href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_RayDistance_
+  commentId: Overload:XRTK.Definitions.Physics.FocusDetails.RayDistance
+  isSpec: "True"
+  fullName: XRTK.Definitions.Physics.FocusDetails.RayDistance
+  nameWithType: FocusDetails.RayDistance
 - uid: XRTK.Definitions.Physics.RaycastMode
   name: RaycastMode
   href: api/XRTK.Definitions.Physics.RaycastMode.html
@@ -15029,6 +15081,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.InputSystem.IMixedRealityCursor.SetVisibilityOnSourceDetected
   nameWithType: IMixedRealityCursor.SetVisibilityOnSourceDetected
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityCursor.SurfaceCursorDistance
+  name: SurfaceCursorDistance
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityCursor.html#XRTK_Interfaces_InputSystem_IMixedRealityCursor_SurfaceCursorDistance
+  commentId: P:XRTK.Interfaces.InputSystem.IMixedRealityCursor.SurfaceCursorDistance
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityCursor.SurfaceCursorDistance
+  nameWithType: IMixedRealityCursor.SurfaceCursorDistance
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityCursor.SurfaceCursorDistance*
+  name: SurfaceCursorDistance
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityCursor.html#XRTK_Interfaces_InputSystem_IMixedRealityCursor_SurfaceCursorDistance_
+  commentId: Overload:XRTK.Interfaces.InputSystem.IMixedRealityCursor.SurfaceCursorDistance
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityCursor.SurfaceCursorDistance
+  nameWithType: IMixedRealityCursor.SurfaceCursorDistance
 - uid: XRTK.Interfaces.InputSystem.IMixedRealityFocusProvider
   name: IMixedRealityFocusProvider
   href: api/XRTK.Interfaces.InputSystem.IMixedRealityFocusProvider.html
@@ -16268,6 +16333,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.InputSystem.IMixedRealityPointer.IsInteractionEnabled
   nameWithType: IMixedRealityPointer.IsInteractionEnabled
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityPointer.IsTargetPositionLockedOnFocusLock
+  name: IsTargetPositionLockedOnFocusLock
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityPointer.html#XRTK_Interfaces_InputSystem_IMixedRealityPointer_IsTargetPositionLockedOnFocusLock
+  commentId: P:XRTK.Interfaces.InputSystem.IMixedRealityPointer.IsTargetPositionLockedOnFocusLock
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityPointer.IsTargetPositionLockedOnFocusLock
+  nameWithType: IMixedRealityPointer.IsTargetPositionLockedOnFocusLock
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityPointer.IsTargetPositionLockedOnFocusLock*
+  name: IsTargetPositionLockedOnFocusLock
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityPointer.html#XRTK_Interfaces_InputSystem_IMixedRealityPointer_IsTargetPositionLockedOnFocusLock_
+  commentId: Overload:XRTK.Interfaces.InputSystem.IMixedRealityPointer.IsTargetPositionLockedOnFocusLock
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityPointer.IsTargetPositionLockedOnFocusLock
+  nameWithType: IMixedRealityPointer.IsTargetPositionLockedOnFocusLock
 - uid: XRTK.Interfaces.InputSystem.IMixedRealityPointer.OnPostRaycast
   name: OnPostRaycast()
   href: api/XRTK.Interfaces.InputSystem.IMixedRealityPointer.html#XRTK_Interfaces_InputSystem_IMixedRealityPointer_OnPostRaycast
@@ -25167,6 +25245,19 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.UX.Collections.GridObjectCollection.OrientType
   nameWithType: GridObjectCollection.OrientType
+- uid: XRTK.SDK.UX.Collections.GridObjectCollection.RadialOffset
+  name: RadialOffset
+  href: api/XRTK.SDK.UX.Collections.GridObjectCollection.html#XRTK_SDK_UX_Collections_GridObjectCollection_RadialOffset
+  commentId: P:XRTK.SDK.UX.Collections.GridObjectCollection.RadialOffset
+  fullName: XRTK.SDK.UX.Collections.GridObjectCollection.RadialOffset
+  nameWithType: GridObjectCollection.RadialOffset
+- uid: XRTK.SDK.UX.Collections.GridObjectCollection.RadialOffset*
+  name: RadialOffset
+  href: api/XRTK.SDK.UX.Collections.GridObjectCollection.html#XRTK_SDK_UX_Collections_GridObjectCollection_RadialOffset_
+  commentId: Overload:XRTK.SDK.UX.Collections.GridObjectCollection.RadialOffset
+  isSpec: "True"
+  fullName: XRTK.SDK.UX.Collections.GridObjectCollection.RadialOffset
+  nameWithType: GridObjectCollection.RadialOffset
 - uid: XRTK.SDK.UX.Collections.GridObjectCollection.RadialRange
   name: RadialRange
   href: api/XRTK.SDK.UX.Collections.GridObjectCollection.html#XRTK_SDK_UX_Collections_GridObjectCollection_RadialRange
@@ -26810,6 +26901,19 @@ references:
   commentId: F:XRTK.SDK.UX.Pointers.BaseControllerPointer.IsSelectPressed
   fullName: XRTK.SDK.UX.Pointers.BaseControllerPointer.IsSelectPressed
   nameWithType: BaseControllerPointer.IsSelectPressed
+- uid: XRTK.SDK.UX.Pointers.BaseControllerPointer.IsTargetPositionLockedOnFocusLock
+  name: IsTargetPositionLockedOnFocusLock
+  href: api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsTargetPositionLockedOnFocusLock
+  commentId: P:XRTK.SDK.UX.Pointers.BaseControllerPointer.IsTargetPositionLockedOnFocusLock
+  fullName: XRTK.SDK.UX.Pointers.BaseControllerPointer.IsTargetPositionLockedOnFocusLock
+  nameWithType: BaseControllerPointer.IsTargetPositionLockedOnFocusLock
+- uid: XRTK.SDK.UX.Pointers.BaseControllerPointer.IsTargetPositionLockedOnFocusLock*
+  name: IsTargetPositionLockedOnFocusLock
+  href: api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsTargetPositionLockedOnFocusLock_
+  commentId: Overload:XRTK.SDK.UX.Pointers.BaseControllerPointer.IsTargetPositionLockedOnFocusLock
+  isSpec: "True"
+  fullName: XRTK.SDK.UX.Pointers.BaseControllerPointer.IsTargetPositionLockedOnFocusLock
+  nameWithType: BaseControllerPointer.IsTargetPositionLockedOnFocusLock
 - uid: XRTK.SDK.UX.Pointers.BaseControllerPointer.IsTeleportRequestActive
   name: IsTeleportRequestActive
   href: api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsTeleportRequestActive
@@ -26894,6 +26998,19 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.UX.Pointers.BaseControllerPointer.OnPreRaycast
   nameWithType: BaseControllerPointer.OnPreRaycast
+- uid: XRTK.SDK.UX.Pointers.BaseControllerPointer.OnSourceLost(XRTK.EventDatum.Input.SourceStateEventData)
+  name: OnSourceLost(SourceStateEventData)
+  href: api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnSourceLost_XRTK_EventDatum_Input_SourceStateEventData_
+  commentId: M:XRTK.SDK.UX.Pointers.BaseControllerPointer.OnSourceLost(XRTK.EventDatum.Input.SourceStateEventData)
+  fullName: XRTK.SDK.UX.Pointers.BaseControllerPointer.OnSourceLost(XRTK.EventDatum.Input.SourceStateEventData)
+  nameWithType: BaseControllerPointer.OnSourceLost(SourceStateEventData)
+- uid: XRTK.SDK.UX.Pointers.BaseControllerPointer.OnSourceLost*
+  name: OnSourceLost
+  href: api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnSourceLost_
+  commentId: Overload:XRTK.SDK.UX.Pointers.BaseControllerPointer.OnSourceLost
+  isSpec: "True"
+  fullName: XRTK.SDK.UX.Pointers.BaseControllerPointer.OnSourceLost
+  nameWithType: BaseControllerPointer.OnSourceLost
 - uid: XRTK.SDK.UX.Pointers.BaseControllerPointer.OnTeleportCanceled(XRTK.EventDatum.Teleport.TeleportEventData)
   name: OnTeleportCanceled(TeleportEventData)
   href: api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTeleportCanceled_XRTK_EventDatum_Teleport_TeleportEventData_
@@ -27216,19 +27333,6 @@ references:
   commentId: T:XRTK.SDK.UX.Pointers.LinePointer
   fullName: XRTK.SDK.UX.Pointers.LinePointer
   nameWithType: LinePointer
-- uid: XRTK.SDK.UX.Pointers.LinePointer.GravityDistorter
-  name: GravityDistorter
-  href: api/XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_GravityDistorter
-  commentId: P:XRTK.SDK.UX.Pointers.LinePointer.GravityDistorter
-  fullName: XRTK.SDK.UX.Pointers.LinePointer.GravityDistorter
-  nameWithType: LinePointer.GravityDistorter
-- uid: XRTK.SDK.UX.Pointers.LinePointer.GravityDistorter*
-  name: GravityDistorter
-  href: api/XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_GravityDistorter_
-  commentId: Overload:XRTK.SDK.UX.Pointers.LinePointer.GravityDistorter
-  isSpec: "True"
-  fullName: XRTK.SDK.UX.Pointers.LinePointer.GravityDistorter
-  nameWithType: LinePointer.GravityDistorter
 - uid: XRTK.SDK.UX.Pointers.LinePointer.LineBase
   name: LineBase
   href: api/XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_LineBase
@@ -32139,6 +32243,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.InputSystem.Pointers.GenericPointer.IsInteractionEnabled
   nameWithType: GenericPointer.IsInteractionEnabled
+- uid: XRTK.Services.InputSystem.Pointers.GenericPointer.IsTargetPositionLockedOnFocusLock
+  name: IsTargetPositionLockedOnFocusLock
+  href: api/XRTK.Services.InputSystem.Pointers.GenericPointer.html#XRTK_Services_InputSystem_Pointers_GenericPointer_IsTargetPositionLockedOnFocusLock
+  commentId: P:XRTK.Services.InputSystem.Pointers.GenericPointer.IsTargetPositionLockedOnFocusLock
+  fullName: XRTK.Services.InputSystem.Pointers.GenericPointer.IsTargetPositionLockedOnFocusLock
+  nameWithType: GenericPointer.IsTargetPositionLockedOnFocusLock
+- uid: XRTK.Services.InputSystem.Pointers.GenericPointer.IsTargetPositionLockedOnFocusLock*
+  name: IsTargetPositionLockedOnFocusLock
+  href: api/XRTK.Services.InputSystem.Pointers.GenericPointer.html#XRTK_Services_InputSystem_Pointers_GenericPointer_IsTargetPositionLockedOnFocusLock_
+  commentId: Overload:XRTK.Services.InputSystem.Pointers.GenericPointer.IsTargetPositionLockedOnFocusLock
+  isSpec: "True"
+  fullName: XRTK.Services.InputSystem.Pointers.GenericPointer.IsTargetPositionLockedOnFocusLock
+  nameWithType: GenericPointer.IsTargetPositionLockedOnFocusLock
 - uid: XRTK.Services.InputSystem.Pointers.GenericPointer.OnPostRaycast
   name: OnPostRaycast()
   href: api/XRTK.Services.InputSystem.Pointers.GenericPointer.html#XRTK_Services_InputSystem_Pointers_GenericPointer_OnPostRaycast
@@ -41593,90 +41710,90 @@ references:
   isSpec: "True"
   fullName: XRTK.Utilities.Physics.Distorters.DistorterWiggly.StrengthMultiplier
   nameWithType: DistorterWiggly.StrengthMultiplier
-- uid: XRTK.Utilities.Physics.GazeStabilizer
-  name: GazeStabilizer
-  href: api/XRTK.Utilities.Physics.GazeStabilizer.html
-  commentId: T:XRTK.Utilities.Physics.GazeStabilizer
-  fullName: XRTK.Utilities.Physics.GazeStabilizer
-  nameWithType: GazeStabilizer
-- uid: XRTK.Utilities.Physics.GazeStabilizer.#ctor
-  name: GazeStabilizer()
-  href: api/XRTK.Utilities.Physics.GazeStabilizer.html#XRTK_Utilities_Physics_GazeStabilizer__ctor
-  commentId: M:XRTK.Utilities.Physics.GazeStabilizer.#ctor
-  fullName: XRTK.Utilities.Physics.GazeStabilizer.GazeStabilizer()
-  nameWithType: GazeStabilizer.GazeStabilizer()
-- uid: XRTK.Utilities.Physics.GazeStabilizer.#ctor*
-  name: GazeStabilizer
-  href: api/XRTK.Utilities.Physics.GazeStabilizer.html#XRTK_Utilities_Physics_GazeStabilizer__ctor_
-  commentId: Overload:XRTK.Utilities.Physics.GazeStabilizer.#ctor
+- uid: XRTK.Utilities.Physics.GenericStabilizer
+  name: GenericStabilizer
+  href: api/XRTK.Utilities.Physics.GenericStabilizer.html
+  commentId: T:XRTK.Utilities.Physics.GenericStabilizer
+  fullName: XRTK.Utilities.Physics.GenericStabilizer
+  nameWithType: GenericStabilizer
+- uid: XRTK.Utilities.Physics.GenericStabilizer.#ctor
+  name: GenericStabilizer()
+  href: api/XRTK.Utilities.Physics.GenericStabilizer.html#XRTK_Utilities_Physics_GenericStabilizer__ctor
+  commentId: M:XRTK.Utilities.Physics.GenericStabilizer.#ctor
+  fullName: XRTK.Utilities.Physics.GenericStabilizer.GenericStabilizer()
+  nameWithType: GenericStabilizer.GenericStabilizer()
+- uid: XRTK.Utilities.Physics.GenericStabilizer.#ctor*
+  name: GenericStabilizer
+  href: api/XRTK.Utilities.Physics.GenericStabilizer.html#XRTK_Utilities_Physics_GenericStabilizer__ctor_
+  commentId: Overload:XRTK.Utilities.Physics.GenericStabilizer.#ctor
   isSpec: "True"
-  fullName: XRTK.Utilities.Physics.GazeStabilizer.GazeStabilizer
-  nameWithType: GazeStabilizer.GazeStabilizer
-- uid: XRTK.Utilities.Physics.GazeStabilizer.StablePosition
+  fullName: XRTK.Utilities.Physics.GenericStabilizer.GenericStabilizer
+  nameWithType: GenericStabilizer.GenericStabilizer
+- uid: XRTK.Utilities.Physics.GenericStabilizer.StablePosition
   name: StablePosition
-  href: api/XRTK.Utilities.Physics.GazeStabilizer.html#XRTK_Utilities_Physics_GazeStabilizer_StablePosition
-  commentId: P:XRTK.Utilities.Physics.GazeStabilizer.StablePosition
-  fullName: XRTK.Utilities.Physics.GazeStabilizer.StablePosition
-  nameWithType: GazeStabilizer.StablePosition
-- uid: XRTK.Utilities.Physics.GazeStabilizer.StablePosition*
+  href: api/XRTK.Utilities.Physics.GenericStabilizer.html#XRTK_Utilities_Physics_GenericStabilizer_StablePosition
+  commentId: P:XRTK.Utilities.Physics.GenericStabilizer.StablePosition
+  fullName: XRTK.Utilities.Physics.GenericStabilizer.StablePosition
+  nameWithType: GenericStabilizer.StablePosition
+- uid: XRTK.Utilities.Physics.GenericStabilizer.StablePosition*
   name: StablePosition
-  href: api/XRTK.Utilities.Physics.GazeStabilizer.html#XRTK_Utilities_Physics_GazeStabilizer_StablePosition_
-  commentId: Overload:XRTK.Utilities.Physics.GazeStabilizer.StablePosition
+  href: api/XRTK.Utilities.Physics.GenericStabilizer.html#XRTK_Utilities_Physics_GenericStabilizer_StablePosition_
+  commentId: Overload:XRTK.Utilities.Physics.GenericStabilizer.StablePosition
   isSpec: "True"
-  fullName: XRTK.Utilities.Physics.GazeStabilizer.StablePosition
-  nameWithType: GazeStabilizer.StablePosition
-- uid: XRTK.Utilities.Physics.GazeStabilizer.StableRay
+  fullName: XRTK.Utilities.Physics.GenericStabilizer.StablePosition
+  nameWithType: GenericStabilizer.StablePosition
+- uid: XRTK.Utilities.Physics.GenericStabilizer.StableRay
   name: StableRay
-  href: api/XRTK.Utilities.Physics.GazeStabilizer.html#XRTK_Utilities_Physics_GazeStabilizer_StableRay
-  commentId: P:XRTK.Utilities.Physics.GazeStabilizer.StableRay
-  fullName: XRTK.Utilities.Physics.GazeStabilizer.StableRay
-  nameWithType: GazeStabilizer.StableRay
-- uid: XRTK.Utilities.Physics.GazeStabilizer.StableRay*
+  href: api/XRTK.Utilities.Physics.GenericStabilizer.html#XRTK_Utilities_Physics_GenericStabilizer_StableRay
+  commentId: P:XRTK.Utilities.Physics.GenericStabilizer.StableRay
+  fullName: XRTK.Utilities.Physics.GenericStabilizer.StableRay
+  nameWithType: GenericStabilizer.StableRay
+- uid: XRTK.Utilities.Physics.GenericStabilizer.StableRay*
   name: StableRay
-  href: api/XRTK.Utilities.Physics.GazeStabilizer.html#XRTK_Utilities_Physics_GazeStabilizer_StableRay_
-  commentId: Overload:XRTK.Utilities.Physics.GazeStabilizer.StableRay
+  href: api/XRTK.Utilities.Physics.GenericStabilizer.html#XRTK_Utilities_Physics_GenericStabilizer_StableRay_
+  commentId: Overload:XRTK.Utilities.Physics.GenericStabilizer.StableRay
   isSpec: "True"
-  fullName: XRTK.Utilities.Physics.GazeStabilizer.StableRay
-  nameWithType: GazeStabilizer.StableRay
-- uid: XRTK.Utilities.Physics.GazeStabilizer.StableRotation
+  fullName: XRTK.Utilities.Physics.GenericStabilizer.StableRay
+  nameWithType: GenericStabilizer.StableRay
+- uid: XRTK.Utilities.Physics.GenericStabilizer.StableRotation
   name: StableRotation
-  href: api/XRTK.Utilities.Physics.GazeStabilizer.html#XRTK_Utilities_Physics_GazeStabilizer_StableRotation
-  commentId: P:XRTK.Utilities.Physics.GazeStabilizer.StableRotation
-  fullName: XRTK.Utilities.Physics.GazeStabilizer.StableRotation
-  nameWithType: GazeStabilizer.StableRotation
-- uid: XRTK.Utilities.Physics.GazeStabilizer.StableRotation*
+  href: api/XRTK.Utilities.Physics.GenericStabilizer.html#XRTK_Utilities_Physics_GenericStabilizer_StableRotation
+  commentId: P:XRTK.Utilities.Physics.GenericStabilizer.StableRotation
+  fullName: XRTK.Utilities.Physics.GenericStabilizer.StableRotation
+  nameWithType: GenericStabilizer.StableRotation
+- uid: XRTK.Utilities.Physics.GenericStabilizer.StableRotation*
   name: StableRotation
-  href: api/XRTK.Utilities.Physics.GazeStabilizer.html#XRTK_Utilities_Physics_GazeStabilizer_StableRotation_
-  commentId: Overload:XRTK.Utilities.Physics.GazeStabilizer.StableRotation
+  href: api/XRTK.Utilities.Physics.GenericStabilizer.html#XRTK_Utilities_Physics_GenericStabilizer_StableRotation_
+  commentId: Overload:XRTK.Utilities.Physics.GenericStabilizer.StableRotation
   isSpec: "True"
-  fullName: XRTK.Utilities.Physics.GazeStabilizer.StableRotation
-  nameWithType: GazeStabilizer.StableRotation
-- uid: XRTK.Utilities.Physics.GazeStabilizer.StoredStabilitySamples
+  fullName: XRTK.Utilities.Physics.GenericStabilizer.StableRotation
+  nameWithType: GenericStabilizer.StableRotation
+- uid: XRTK.Utilities.Physics.GenericStabilizer.StoredStabilitySamples
   name: StoredStabilitySamples
-  href: api/XRTK.Utilities.Physics.GazeStabilizer.html#XRTK_Utilities_Physics_GazeStabilizer_StoredStabilitySamples
-  commentId: P:XRTK.Utilities.Physics.GazeStabilizer.StoredStabilitySamples
-  fullName: XRTK.Utilities.Physics.GazeStabilizer.StoredStabilitySamples
-  nameWithType: GazeStabilizer.StoredStabilitySamples
-- uid: XRTK.Utilities.Physics.GazeStabilizer.StoredStabilitySamples*
+  href: api/XRTK.Utilities.Physics.GenericStabilizer.html#XRTK_Utilities_Physics_GenericStabilizer_StoredStabilitySamples
+  commentId: P:XRTK.Utilities.Physics.GenericStabilizer.StoredStabilitySamples
+  fullName: XRTK.Utilities.Physics.GenericStabilizer.StoredStabilitySamples
+  nameWithType: GenericStabilizer.StoredStabilitySamples
+- uid: XRTK.Utilities.Physics.GenericStabilizer.StoredStabilitySamples*
   name: StoredStabilitySamples
-  href: api/XRTK.Utilities.Physics.GazeStabilizer.html#XRTK_Utilities_Physics_GazeStabilizer_StoredStabilitySamples_
-  commentId: Overload:XRTK.Utilities.Physics.GazeStabilizer.StoredStabilitySamples
+  href: api/XRTK.Utilities.Physics.GenericStabilizer.html#XRTK_Utilities_Physics_GenericStabilizer_StoredStabilitySamples_
+  commentId: Overload:XRTK.Utilities.Physics.GenericStabilizer.StoredStabilitySamples
   isSpec: "True"
-  fullName: XRTK.Utilities.Physics.GazeStabilizer.StoredStabilitySamples
-  nameWithType: GazeStabilizer.StoredStabilitySamples
-- uid: XRTK.Utilities.Physics.GazeStabilizer.UpdateStability(UnityEngine.Vector3,UnityEngine.Vector3)
+  fullName: XRTK.Utilities.Physics.GenericStabilizer.StoredStabilitySamples
+  nameWithType: GenericStabilizer.StoredStabilitySamples
+- uid: XRTK.Utilities.Physics.GenericStabilizer.UpdateStability(UnityEngine.Vector3,UnityEngine.Vector3)
   name: UpdateStability(Vector3, Vector3)
-  href: api/XRTK.Utilities.Physics.GazeStabilizer.html#XRTK_Utilities_Physics_GazeStabilizer_UpdateStability_UnityEngine_Vector3_UnityEngine_Vector3_
-  commentId: M:XRTK.Utilities.Physics.GazeStabilizer.UpdateStability(UnityEngine.Vector3,UnityEngine.Vector3)
-  fullName: XRTK.Utilities.Physics.GazeStabilizer.UpdateStability(UnityEngine.Vector3, UnityEngine.Vector3)
-  nameWithType: GazeStabilizer.UpdateStability(Vector3, Vector3)
-- uid: XRTK.Utilities.Physics.GazeStabilizer.UpdateStability*
+  href: api/XRTK.Utilities.Physics.GenericStabilizer.html#XRTK_Utilities_Physics_GenericStabilizer_UpdateStability_UnityEngine_Vector3_UnityEngine_Vector3_
+  commentId: M:XRTK.Utilities.Physics.GenericStabilizer.UpdateStability(UnityEngine.Vector3,UnityEngine.Vector3)
+  fullName: XRTK.Utilities.Physics.GenericStabilizer.UpdateStability(UnityEngine.Vector3, UnityEngine.Vector3)
+  nameWithType: GenericStabilizer.UpdateStability(Vector3, Vector3)
+- uid: XRTK.Utilities.Physics.GenericStabilizer.UpdateStability*
   name: UpdateStability
-  href: api/XRTK.Utilities.Physics.GazeStabilizer.html#XRTK_Utilities_Physics_GazeStabilizer_UpdateStability_
-  commentId: Overload:XRTK.Utilities.Physics.GazeStabilizer.UpdateStability
+  href: api/XRTK.Utilities.Physics.GenericStabilizer.html#XRTK_Utilities_Physics_GenericStabilizer_UpdateStability_
+  commentId: Overload:XRTK.Utilities.Physics.GenericStabilizer.UpdateStability
   isSpec: "True"
-  fullName: XRTK.Utilities.Physics.GazeStabilizer.UpdateStability
-  nameWithType: GazeStabilizer.UpdateStability
+  fullName: XRTK.Utilities.Physics.GenericStabilizer.UpdateStability
+  nameWithType: GenericStabilizer.UpdateStability
 - uid: XRTK.Utilities.Physics.InterpolationUtilities
   name: InterpolationUtilities
   href: api/XRTK.Utilities.Physics.InterpolationUtilities.html

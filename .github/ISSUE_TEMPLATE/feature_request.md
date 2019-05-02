@@ -2,13 +2,11 @@
 name: Feature request
 about: Suggest an idea for the XRTK
 title: ''
-labels: enhancement
+labels: Feature Request
 assignees: ''
 
 ---
 # XRTK - Mixed Reality Toolkit Feature Request
-
-![](/docs/Logo.png)
 
 ## Is your feature request related to a problem? Please describe
 

@@ -24,6 +24,8 @@ namespace XRTK.Services.InputSystem
         private readonly HashSet<GameObject> pendingOverallFocusEnterSet = new HashSet<GameObject>();
         private readonly HashSet<GameObject> pendingOverallFocusExitSet = new HashSet<GameObject>();
         private readonly List<PointerData> pendingPointerSpecificFocusChange = new List<PointerData>();
+        private readonly PointerHitResult physicsHitResult = new PointerHitResult();
+        private readonly PointerHitResult graphicsHitResult = new PointerHitResult();
 
         #region IFocusProvider Properties
 
@@ -179,9 +181,6 @@ namespace XRTK.Services.InputSystem
             }
 
             private GraphicInputEventData graphicData;
-            private Vector3 pointLocalSpace;
-            private Vector3 normalLocalSpace;
-            private bool pointerWasLocked;
 
             /// <summary>
             /// Constructor.
@@ -192,54 +191,62 @@ namespace XRTK.Services.InputSystem
                 Pointer = pointer;
             }
 
-            /// <summary>
-            /// Update focus information from a physics raycast
-            /// </summary>
-            public void UpdateHit(RaycastHit hit, RayStep sourceRay, int rayStepIndex)
+            public void UpdateHit(PointerHitResult hitResult)
             {
-                PreviousPointerTarget = Details.Object;
-                RayStepIndex = rayStepIndex;
-                StartPoint = sourceRay.Origin;
+                if (hitResult.HitObject != CurrentPointerTarget)
+                {
+                    // Pointer.OnPreCurrentPointerTargetChange();
 
-                focusDetails.LastRaycastHit = hit;
-                focusDetails.Point = hit.point;
-                focusDetails.Normal = hit.normal;
-                focusDetails.Object = hit.transform.gameObject;
+                    // Set to default:
+                    Pointer.IsTargetPositionLockedOnFocusLock = true;
+                }
 
-                pointerWasLocked = false;
-            }
+                PreviousPointerTarget = CurrentPointerTarget;
 
-            /// <summary>
-            /// Update focus information from a Canvas raycast 
-            /// </summary>
-            public void UpdateHit(RaycastResult result, RaycastHit hit, RayStep sourceRay, int rayStepIndex)
-            {
-                // We do not update the PreviousPointerTarget here because
-                // it's already been updated in the first physics raycast.
+                focusDetails.Object = hitResult.HitObject;
+                focusDetails.LastRaycastHit = hitResult.RaycastHit;
+                focusDetails.LastGraphicsRaycastResult = hitResult.GraphicsRaycastResult;
 
-                RayStepIndex = rayStepIndex;
-                StartPoint = sourceRay.Origin;
+                if (hitResult.RayStepIndex >= 0)
+                {
+                    RayStepIndex = hitResult.RayStepIndex;
+                    StartPoint = hitResult.Ray.Origin;
 
-                focusDetails.Point = hit.point;
-                focusDetails.Normal = hit.normal;
-                focusDetails.Object = result.gameObject;
-            }
+                    focusDetails.RayDistance = hitResult.RayDistance;
+                    focusDetails.Point = hitResult.HitPointOnObject;
+                    focusDetails.Normal = hitResult.HitNormalOnObject;
+                }
+                else
+                {
+                    // If we don't have a valid ray cast, use the whole pointer ray.
+                    var firstStep = Pointer.Rays[0];
+                    var finalStep = Pointer.Rays[Pointer.Rays.Length - 1];
+                    RayStepIndex = 0;
 
-            public void UpdateHit()
-            {
-                PreviousPointerTarget = Details.Object;
+                    StartPoint = firstStep.Origin;
 
-                RayStep firstStep = Pointer.Rays[0];
-                RayStep finalStep = Pointer.Rays[Pointer.Rays.Length - 1];
-                RayStepIndex = 0;
+                    var rayDistance = 0.0f;
 
-                StartPoint = firstStep.Origin;
+                    for (int i = 0; i < Pointer.Rays.Length; i++)
+                    {
+                        rayDistance += Pointer.Rays[i].Length;
+                    }
 
-                focusDetails.Point = finalStep.Terminus;
-                focusDetails.Normal = -finalStep.Direction;
-                focusDetails.Object = null;
+                    focusDetails.RayDistance = rayDistance;
+                    focusDetails.Point = finalStep.Terminus;
+                    focusDetails.Normal = -finalStep.Direction;
+                }
 
-                pointerWasLocked = false;
+                if (hitResult.HitObject != null)
+                {
+                    focusDetails.PointLocalSpace = hitResult.HitObject.transform.InverseTransformPoint(focusDetails.Point);
+                    focusDetails.NormalLocalSpace = hitResult.HitObject.transform.InverseTransformDirection(focusDetails.Normal);
+                }
+                else
+                {
+                    focusDetails.PointLocalSpace = Vector3.zero;
+                    focusDetails.NormalLocalSpace = Vector3.zero;
+                }
             }
 
             /// <summary>
@@ -248,28 +255,22 @@ namespace XRTK.Services.InputSystem
             /// </summary>
             public void UpdateFocusLockedHit()
             {
-                if (!pointerWasLocked)
-                {
-                    PreviousPointerTarget = focusDetails.Object;
-                    pointLocalSpace = focusDetails.Object.transform.InverseTransformPoint(focusDetails.Point);
-                    normalLocalSpace = focusDetails.Object.transform.InverseTransformDirection(focusDetails.Normal);
-                    pointerWasLocked = true;
-                }
+                PreviousPointerTarget = focusDetails.Object;
 
                 if (focusDetails.Object != null && focusDetails.Object.transform != null)
                 {
                     // In case the focused object is moving, we need to update the focus point based on the object's new transform.
-                    focusDetails.Point = focusDetails.Object.transform.TransformPoint(pointLocalSpace);
-                    focusDetails.Normal = focusDetails.Object.transform.TransformDirection(normalLocalSpace);
+                    focusDetails.Point = focusDetails.Object.transform.TransformPoint(focusDetails.PointLocalSpace);
+                    focusDetails.Normal = focusDetails.Object.transform.TransformDirection(focusDetails.NormalLocalSpace);
+                    focusDetails.PointLocalSpace = focusDetails.Object.transform.InverseTransformPoint(focusDetails.Point);
+                    focusDetails.NormalLocalSpace = focusDetails.Object.transform.InverseTransformDirection(focusDetails.Normal);
                 }
 
                 StartPoint = Pointer.Rays[0].Origin;
 
-                // In order to provide a correct RayStepIndex, we
-                // need to check to see which RayStep now contains the hit point.
-                // This is needed if the object moved closer or further away.
                 for (int i = 0; i < Pointer.Rays.Length; i++)
                 {
+                    // TODO: figure out how reliable this is. Should focusDetails.RayDistance be updated?
                     if (Pointer.Rays[i].Contains(focusDetails.Point))
                     {
                         RayStepIndex = i;
@@ -282,7 +283,9 @@ namespace XRTK.Services.InputSystem
             {
                 PreviousPointerTarget = clearPreviousObject ? null : CurrentPointerTarget;
                 focusDetails.Point = Details.Point;
+                focusDetails.PointLocalSpace = Details.PointLocalSpace;
                 focusDetails.Normal = Details.Normal;
+                focusDetails.NormalLocalSpace = Details.NormalLocalSpace;
                 focusDetails.Object = null;
             }
 
@@ -305,6 +308,92 @@ namespace XRTK.Services.InputSystem
 
             /// <inheritdoc />
             public override int GetHashCode() => Pointer != null ? Pointer.GetHashCode() : 0;
+        }
+
+        /// <summary>
+        /// Helper class for storing intermediate hit results. Should be applied to the PointerData once all
+        /// possible hits of a pointer have been processed.
+        /// </summary>
+        private class PointerHitResult
+        {
+            public RaycastHit RaycastHit;
+            public RaycastResult GraphicsRaycastResult;
+
+            public GameObject HitObject;
+            public Vector3 HitPointOnObject;
+            public Vector3 HitNormalOnObject;
+
+            public RayStep Ray;
+            public int RayStepIndex = -1;
+            public float RayDistance;
+
+            /// <summary>
+            /// Clears the pointer result.
+            /// </summary>
+            public void Clear()
+            {
+                RaycastHit = default;
+                GraphicsRaycastResult = default;
+
+                HitObject = null;
+                HitPointOnObject = Vector3.zero;
+                HitNormalOnObject = Vector3.zero;
+
+                Ray = default;
+                RayStepIndex = -1;
+                RayDistance = 0.0f;
+            }
+
+            /// <summary>
+            /// Set hit focus information from a closest-collider-to pointer check.
+            /// </summary>
+            public void Set(GameObject hitObject, Vector3 hitPointOnObject, Vector4 hitNormalOnObject, RayStep ray, int rayStepIndex, float rayDistance)
+            {
+                RaycastHit = default;
+                GraphicsRaycastResult = default;
+
+                HitObject = hitObject;
+                HitPointOnObject = hitPointOnObject;
+                HitNormalOnObject = hitNormalOnObject;
+
+                Ray = ray;
+                RayStepIndex = rayStepIndex;
+                RayDistance = rayDistance;
+            }
+
+            /// <summary>
+            /// Set hit focus information from a physics raycast.
+            /// </summary>
+            public void Set(RaycastHit hit, RayStep ray, int rayStepIndex, float rayDistance)
+            {
+                RaycastHit = hit;
+                GraphicsRaycastResult = default;
+
+                HitObject = hit.transform.gameObject;
+                HitPointOnObject = hit.point;
+                HitNormalOnObject = hit.normal;
+
+                Ray = ray;
+                RayStepIndex = rayStepIndex;
+                RayDistance = rayDistance;
+            }
+
+            /// <summary>
+            /// Set hit information from a canvas raycast.
+            /// </summary>
+            public void Set(RaycastResult result, Vector3 hitPointOnObject, Vector4 hitNormalOnObject, RayStep ray, int rayStepIndex, float rayDistance)
+            {
+                RaycastHit = default;
+                GraphicsRaycastResult = result;
+
+                HitObject = result.gameObject;
+                HitPointOnObject = hitPointOnObject;
+                HitNormalOnObject = hitNormalOnObject;
+
+                Ray = ray;
+                RayStepIndex = rayStepIndex;
+                RayDistance = rayDistance;
+            }
         }
 
         #region IMixedRealityService Implementation
@@ -479,7 +568,7 @@ namespace XRTK.Services.InputSystem
         public bool IsPointerRegistered(IMixedRealityPointer pointer)
         {
             Debug.Assert(pointer.PointerId != 0, $"{pointer} does not have a valid pointer id!");
-            return TryGetPointerData(pointer, out PointerData _);
+            return TryGetPointerData(pointer, out _);
         }
 
         /// <inheritdoc />
@@ -515,13 +604,13 @@ namespace XRTK.Services.InputSystem
         {
             Debug.Assert(pointer.PointerId != 0, $"{pointer} does not have a valid pointer id!");
 
-            if (!TryGetPointerData(pointer, out PointerData pointerData)) { return false; }
+            if (!TryGetPointerData(pointer, out var pointerData)) { return false; }
 
             // Raise focus events if needed.
             if (pointerData.CurrentPointerTarget != null)
             {
-                GameObject unfocusedObject = pointerData.CurrentPointerTarget;
-                bool objectIsStillFocusedByOtherPointer = false;
+                var unfocusedObject = pointerData.CurrentPointerTarget;
+                var objectIsStillFocusedByOtherPointer = false;
 
                 foreach (var otherPointer in pointers)
                 {
@@ -611,31 +700,45 @@ namespace XRTK.Services.InputSystem
             }
             else
             {
-                // If the pointer is locked
-                // Keep the focus objects the same
+                // If the pointer is locked, keep the focused object the same.
                 // This will ensure that we execute events on those objects
-                // even if the pointer isn't pointing at them
-                if (!pointer.Pointer.IsFocusLocked)
+                // even if the pointer isn't pointing at them.
+                if (pointer.Pointer.IsFocusLocked && pointer.Pointer.IsTargetPositionLockedOnFocusLock)
+                {
+                    pointer.UpdateFocusLockedHit();
+                }
+                else
                 {
                     // Otherwise, continue
-                    LayerMask[] prioritizedLayerMasks = (pointer.Pointer.PrioritizedLayerMasksOverride ?? FocusLayerMasks);
+                    var prioritizedLayerMasks = (pointer.Pointer.PrioritizedLayerMasksOverride ?? FocusLayerMasks);
+
+                    physicsHitResult.Clear();
 
                     // Perform raycast to determine focused object
-                    RaycastPhysics(pointer, prioritizedLayerMasks);
+                    RaycastPhysics(pointer.Pointer, prioritizedLayerMasks, physicsHitResult);
+                    var currentHitResult = physicsHitResult;
 
                     // If we have a unity event system, perform graphics raycasts as well to support Unity UI interactions
                     if (EventSystem.current != null)
                     {
+                        graphicsHitResult.Clear();
                         // NOTE: We need to do this AFTER RaycastPhysics so we use the current hit point to perform the correct 2D UI Raycast.
-                        RaycastGraphics(pointer, prioritizedLayerMasks);
+                        RaycastGraphics(pointer.Pointer, pointer.GraphicEventData, prioritizedLayerMasks, graphicsHitResult);
+
+                        currentHitResult = GetPrioritizedHitResult(currentHitResult, graphicsHitResult, prioritizedLayerMasks);
                     }
+
+                    // Make sure to keep focus on the previous object if focus is locked (no target position lock here).
+                    if (pointer.Pointer.IsFocusLocked && pointer.Pointer.Result?.CurrentPointerTarget != null)
+                    {
+                        currentHitResult.HitObject = pointer.Pointer.Result.CurrentPointerTarget;
+                    }
+
+                    // Apply the hit result only now so changes in the current target are detected only once per frame.
+                    pointer.UpdateHit(currentHitResult);
 
                     // Set the pointer's result last
                     pointer.Pointer.Result = pointer;
-                }
-                else
-                {
-                    pointer.UpdateFocusLockedHit();
                 }
             }
 
@@ -647,38 +750,63 @@ namespace XRTK.Services.InputSystem
 
         #region Physics Raycasting
 
+        private PointerHitResult GetPrioritizedHitResult(PointerHitResult hit1, PointerHitResult hit2, LayerMask[] prioritizedLayerMasks)
+        {
+            if (hit1.HitObject != null && hit2.HitObject != null)
+            {
+                // Check layer prioritization.
+                if (prioritizedLayerMasks.Length > 1)
+                {
+                    // Get the index in the prioritized layer masks
+                    int layerIndex1 = hit1.HitObject.layer.FindLayerListIndex(prioritizedLayerMasks);
+                    int layerIndex2 = hit2.HitObject.layer.FindLayerListIndex(prioritizedLayerMasks);
+
+                    if (layerIndex1 != layerIndex2)
+                    {
+                        return (layerIndex1 < layerIndex2) ? hit1 : hit2;
+                    }
+                }
+
+                // Check which hit is closer.
+                return hit1.RayDistance < hit2.RayDistance ? hit1 : hit2;
+            }
+
+            return hit1.HitObject != null ? hit1 : hit2;
+        }
+
         /// <summary>
         /// Perform a Unity physics Raycast to determine which scene objects with a collider is currently being gazed at, if any.
         /// </summary>
-        /// <param name="pointerData"></param>
+        /// <param name="pointer"></param>
         /// <param name="prioritizedLayerMasks"></param>
-        private static void RaycastPhysics(PointerData pointerData, LayerMask[] prioritizedLayerMasks)
+        /// <param name="hitResult"></param>
+        private static void RaycastPhysics(IMixedRealityPointer pointer, LayerMask[] prioritizedLayerMasks, PointerHitResult hitResult)
         {
-            RayStep[] pointerRays = pointerData.Pointer.Rays;
+            float rayStartDistance = 0;
+            var pointerRays = pointer.Rays;
 
             if (pointerRays == null)
             {
-                Debug.LogError($"No valid rays for {pointerData.Pointer.PointerName} pointer.");
+                Debug.LogError($"No valid rays for {pointer.PointerName} pointer.");
                 return;
             }
 
             if (pointerRays.Length <= 0)
             {
-                Debug.LogError($"No valid rays for {pointerData.Pointer.PointerName} pointer");
+                Debug.LogError($"No valid rays for {pointer.PointerName} pointer");
                 return;
             }
 
             // Check raycast for each step in the pointing source
             for (int i = 0; i < pointerRays.Length; i++)
             {
-                RaycastHit physicsHit;
-                switch (pointerData.Pointer.RaycastMode)
+                switch (pointer.RaycastMode)
                 {
                     case RaycastMode.Simple:
-                        if (MixedRealityRaycaster.RaycastSimplePhysicsStep(pointerRays[i], prioritizedLayerMasks, out physicsHit))
+                        if (MixedRealityRaycaster.RaycastSimplePhysicsStep(pointerRays[i], prioritizedLayerMasks, out var simplePhysicsHit))
                         {
                             // Set the pointer source's origin ray to this step
-                            UpdatePointerRayOnHit(pointerData, pointerRays, in physicsHit, i);
+                            UpdatePointerRayOnHit(pointerRays, simplePhysicsHit, i, rayStartDistance, hitResult);
                             return;
                         }
                         break;
@@ -686,28 +814,29 @@ namespace XRTK.Services.InputSystem
                         Debug.LogWarning("Box Raycasting Mode not supported for pointers.");
                         break;
                     case RaycastMode.Sphere:
-                        if (MixedRealityRaycaster.RaycastSpherePhysicsStep(pointerRays[i], pointerData.Pointer.SphereCastRadius, prioritizedLayerMasks, out physicsHit))
+                        if (MixedRealityRaycaster.RaycastSpherePhysicsStep(pointerRays[i], pointer.SphereCastRadius, prioritizedLayerMasks, out var spherePhysicsHit))
                         {
                             // Set the pointer source's origin ray to this step
-                            UpdatePointerRayOnHit(pointerData, pointerRays, in physicsHit, i);
+                            UpdatePointerRayOnHit(pointerRays, spherePhysicsHit, i, rayStartDistance, hitResult);
                             return;
                         }
                         break;
+                    // TODO SphereOverlap
                     default:
-                        Debug.LogError($"Invalid raycast mode {pointerData.Pointer.RaycastMode} for {pointerData.Pointer.PointerName} pointer.");
+                        Debug.LogError($"Invalid raycast mode {pointer.RaycastMode} for {pointer.PointerName} pointer.");
                         break;
                 }
-            }
 
-            pointerData.UpdateHit();
+                rayStartDistance += pointer.Rays[i].Length;
+            }
         }
 
-        private static void UpdatePointerRayOnHit(PointerData pointerData, RayStep[] raySteps, in RaycastHit physicsHit, int hitRayIndex)
+        private static void UpdatePointerRayOnHit(RayStep[] raySteps, RaycastHit physicsHit, int hitRayIndex, float rayStartDistance, PointerHitResult hitResult)
         {
-            Vector3 origin = raySteps[hitRayIndex].Origin;
-            Vector3 terminus = physicsHit.point;
+            var origin = raySteps[hitRayIndex].Origin;
+            var terminus = physicsHit.point;
             raySteps[hitRayIndex].UpdateRayStep(ref origin, ref terminus);
-            pointerData.UpdateHit(physicsHit, raySteps[hitRayIndex], hitRayIndex);
+            hitResult.Set(physicsHit, raySteps[hitRayIndex], hitRayIndex, rayStartDistance + physicsHit.distance);
         }
 
         #endregion Physics Raycasting
@@ -717,131 +846,85 @@ namespace XRTK.Services.InputSystem
         /// <summary>
         /// Perform a Unity Graphics Raycast to determine which uGUI element is currently being gazed at, if any.
         /// </summary>
-        /// <param name="pointerData"></param>
+        /// <param name="pointer"></param>
+        /// <param name="graphicEventData"></param>
         /// <param name="prioritizedLayerMasks"></param>
-        private void RaycastGraphics(PointerData pointerData, LayerMask[] prioritizedLayerMasks)
+        /// <param name="hitResult"></param>
+        private void RaycastGraphics(IMixedRealityPointer pointer, PointerEventData graphicEventData, LayerMask[] prioritizedLayerMasks, PointerHitResult hitResult)
         {
             Debug.Assert(UIRaycastCamera != null, "Missing UIRaycastCamera!");
+            Debug.Assert(UIRaycastCamera.nearClipPlane.Equals(0f), "Near plane must be zero for raycast distances to be correct");
 
-            RaycastResult raycastResult = default;
-            bool overridePhysicsRaycast = false;
-            RayStep rayStep = default;
-            int rayStepIndex = 0;
-
-            if (pointerData.Pointer.Rays == null)
+            if (pointer.Rays == null)
             {
-                Debug.LogError($"No valid rays for {pointerData.Pointer.PointerName} pointer.");
+                Debug.LogError($"No valid rays for {pointer.PointerName} pointer.");
                 return;
             }
 
-            if (pointerData.Pointer.Rays.Length <= 0)
+            if (pointer.Rays.Length <= 0)
             {
-                Debug.LogError($"No valid rays for {pointerData.Pointer.PointerName} pointer");
+                Debug.LogError($"No valid rays for {pointer.PointerName} pointer");
                 return;
             }
 
             // Cast rays for every step until we score a hit
-            for (int i = 0; i < pointerData.Pointer.Rays.Length; i++)
+            float totalDistance = 0.0f;
+
+            for (int i = 0; i < pointer.Rays.Length; i++)
             {
-                if (RaycastGraphicsStep(pointerData, pointerData.Pointer.Rays[i], prioritizedLayerMasks, out overridePhysicsRaycast, out raycastResult))
+                if (RaycastGraphicsStep(graphicEventData, pointer.Rays[i], prioritizedLayerMasks, out var raycastResult))
                 {
-                    rayStepIndex = i;
-                    rayStep = pointerData.Pointer.Rays[i];
-                    break;
+                    if (raycastResult.isValid &&
+                        raycastResult.distance < pointer.Rays[i].Length &&
+                        raycastResult.module != null &&
+                        raycastResult.module.eventCamera == UIRaycastCamera)
+                    {
+                        totalDistance += raycastResult.distance;
+
+                        newUiRaycastPosition.x = raycastResult.screenPosition.x;
+                        newUiRaycastPosition.y = raycastResult.screenPosition.y;
+                        newUiRaycastPosition.z = raycastResult.distance;
+
+                        var worldPos = UIRaycastCamera.ScreenToWorldPoint(newUiRaycastPosition);
+                        var normal = -raycastResult.gameObject.transform.forward;
+
+                        hitResult.Set(raycastResult, worldPos, normal, pointer.Rays[i], i, totalDistance);
+                        return;
+                    }
                 }
-            }
 
-            // Check if we need to overwrite the physics raycast info
-            if ((pointerData.CurrentPointerTarget == null || overridePhysicsRaycast) &&
-                raycastResult.isValid &&
-                raycastResult.module != null &&
-                raycastResult.module.eventCamera == UIRaycastCamera)
-            {
-                newUiRaycastPosition.x = raycastResult.screenPosition.x;
-                newUiRaycastPosition.y = raycastResult.screenPosition.y;
-                newUiRaycastPosition.z = raycastResult.distance;
-
-                Vector3 worldPos = UIRaycastCamera.ScreenToWorldPoint(newUiRaycastPosition);
-
-                var hitInfo = new RaycastHit
-                {
-                    point = worldPos,
-                    normal = -raycastResult.gameObject.transform.forward
-                };
-
-                pointerData.UpdateHit(raycastResult, hitInfo, rayStep, rayStepIndex);
+                totalDistance += pointer.Rays[i].Length;
             }
         }
 
-        /// <summary>
         /// Raycasts each graphic <see cref="RayStep"/>
-        /// </summary>
-        /// <param name="pointerData"></param>
+        /// <param name="graphicEventData"></param>
         /// <param name="step"></param>
         /// <param name="prioritizedLayerMasks"></param>
-        /// <param name="overridePhysicsRaycast"></param>
         /// <param name="uiRaycastResult"></param>
         /// <returns></returns>
-        private bool RaycastGraphicsStep(PointerData pointerData, RayStep step, LayerMask[] prioritizedLayerMasks, out bool overridePhysicsRaycast, out RaycastResult uiRaycastResult)
+        private bool RaycastGraphicsStep(PointerEventData graphicEventData, RayStep step, LayerMask[] prioritizedLayerMasks, out RaycastResult uiRaycastResult)
         {
             Debug.Assert(step.Direction != Vector3.zero, "RayStep Direction is Invalid.");
 
             // Move the uiRaycast camera to the current pointer's position.
-            var cameraTransform = UIRaycastCamera.transform;
-            cameraTransform.position = step.Origin;
-            cameraTransform.forward = step.Direction;
+            UIRaycastCamera.transform.position = step.Origin;
+            UIRaycastCamera.transform.rotation = Quaternion.LookRotation(step.Direction, Vector3.up);
 
             // We always raycast from the center of the camera.
-            pointerData.GraphicEventData.position = new Vector2(UIRaycastCamera.pixelWidth * 0.5f, UIRaycastCamera.pixelHeight * 0.5f);
+            var newPosition = graphicRaycastMultiplier;
+            newPosition.x *= UIRaycastCamera.pixelWidth;
+            newPosition.y *= UIRaycastCamera.pixelHeight;
+            graphicEventData.position = newPosition;
 
             // Graphics raycast
-            uiRaycastResult = EventSystem.current.Raycast(pointerData.GraphicEventData, prioritizedLayerMasks);
-            pointerData.GraphicEventData.pointerCurrentRaycast = uiRaycastResult;
+            uiRaycastResult = EventSystem.current.Raycast(graphicEventData, prioritizedLayerMasks);
+            graphicEventData.pointerCurrentRaycast = uiRaycastResult;
 
-            overridePhysicsRaycast = false;
-
-            if (uiRaycastResult.gameObject == null) { return false; }
-
-            // If we have a raycast result, check if we need to overwrite the physics raycast info
-
-            if (pointerData.CurrentPointerTarget == null) { return true; }
-
-            var distance = 0f;
-
-            for (int i = 0; i < pointerData.RayStepIndex; i++)
-            {
-                distance += pointerData.Pointer.Rays[i].Length;
-            }
-
-            // Check layer prioritization
-            if (prioritizedLayerMasks.Length > 1)
-            {
-                // Get the index in the prioritized layer masks
-                int uiLayerIndex = uiRaycastResult.gameObject.layer.FindLayerListIndex(prioritizedLayerMasks);
-                int threeDLayerIndex = pointerData.Details.LastRaycastHit.collider.gameObject.layer.FindLayerListIndex(prioritizedLayerMasks);
-
-                if (threeDLayerIndex > uiLayerIndex)
-                {
-                    overridePhysicsRaycast = true;
-                }
-                else if (threeDLayerIndex == uiLayerIndex)
-                {
-                    if (distance > uiRaycastResult.distance)
-                    {
-                        overridePhysicsRaycast = true;
-                    }
-                }
-            }
-            else
-            {
-                if (distance > uiRaycastResult.distance)
-                {
-                    overridePhysicsRaycast = true;
-                }
-            }
-
-            return true;
+            return uiRaycastCamera.gameObject != null;
         }
+
+        private readonly Vector2 graphicRaycastMultiplier = new Vector2(0.5f, 0.5f);
 
         #endregion uGUI Graphics Raycasting
 
@@ -890,16 +973,16 @@ namespace XRTK.Services.InputSystem
             // Now we raise the events:
             for (int iChange = 0; iChange < pendingPointerSpecificFocusChange.Count; iChange++)
             {
-                PointerData change = pendingPointerSpecificFocusChange[iChange];
-                GameObject pendingUnfocusObject = change.PreviousPointerTarget;
-                GameObject pendingFocusObject = change.CurrentPointerTarget;
+                var change = pendingPointerSpecificFocusChange[iChange];
+                var pendingUnfocusedObject = change.PreviousPointerTarget;
+                var pendingFocusObject = change.CurrentPointerTarget;
 
-                MixedRealityToolkit.InputSystem.RaisePreFocusChanged(change.Pointer, pendingUnfocusObject, pendingFocusObject);
+                MixedRealityToolkit.InputSystem.RaisePreFocusChanged(change.Pointer, pendingUnfocusedObject, pendingFocusObject);
 
-                if (pendingOverallFocusExitSet.Contains(pendingUnfocusObject))
+                if (pendingOverallFocusExitSet.Contains(pendingUnfocusedObject))
                 {
-                    MixedRealityToolkit.InputSystem.RaiseFocusExit(change.Pointer, pendingUnfocusObject);
-                    pendingOverallFocusExitSet.Remove(pendingUnfocusObject);
+                    MixedRealityToolkit.InputSystem.RaiseFocusExit(change.Pointer, pendingUnfocusedObject);
+                    pendingOverallFocusExitSet.Remove(pendingUnfocusedObject);
                 }
 
                 if (pendingOverallFocusEnterSet.Contains(pendingFocusObject))
@@ -908,7 +991,7 @@ namespace XRTK.Services.InputSystem
                     pendingOverallFocusEnterSet.Remove(pendingFocusObject);
                 }
 
-                MixedRealityToolkit.InputSystem.RaiseFocusChanged(change.Pointer, pendingUnfocusObject, pendingFocusObject);
+                MixedRealityToolkit.InputSystem.RaiseFocusChanged(change.Pointer, pendingUnfocusedObject, pendingFocusObject);
             }
 
             Debug.Assert(pendingOverallFocusExitSet.Count == 0);

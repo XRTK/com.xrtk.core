@@ -7,11 +7,11 @@ using UnityEngine;
 namespace XRTK.Utilities.Physics
 {
     /// <summary>
-    /// GazeStabilizer iterates over samples of Raycast data and
-    /// helps stabilize the user's gaze for precision targeting.
+    /// GenericStabilizer iterates over samples of Raycast data and
+    /// helps stabilize the user's raycasting from pointers for precision targeting.
     /// </summary>
     [Serializable]
-    public class GazeStabilizer : BaseRayStabilizer
+    public class GenericStabilizer : BaseRayStabilizer
     {
         /// <summary>
         ///Number of samples that you want to iterate on.
@@ -69,7 +69,7 @@ namespace XRTK.Utilities.Physics
         private const int MinimumSamplesRequiredToStabilize = 30;
 
         /// <summary>
-        /// When not stabilizing this is the 'lerp' applied to the position and direction of the gaze to smooth it over time.
+        /// When not stabilizing this is the 'lerp' applied to the position and direction of the raycast to smooth it over time.
         /// </summary>
         private const float UnstabilizedLerpFactor = 0.3f;
 
@@ -79,22 +79,22 @@ namespace XRTK.Utilities.Physics
         /// </summary>
         private const float StabalizedLerpBoost = 10.0f;
 
-        public GazeStabilizer()
+        public GenericStabilizer()
         {
             directionRollingStats.Init(storedStabilitySamples);
             positionRollingStats.Init(storedStabilitySamples);
         }
 
         /// <summary>
-        /// Updates the StablePosition and StableRotation based on GazeSample values.
+        /// Updates the StablePosition and StableRotation based on sample values.
         /// Call this method with RaycastHit parameters to get stable values.
         /// </summary>
-        /// <param name="gazePosition">Position value from a RaycastHit point.</param>
-        /// <param name="gazeDirection">Direction value from a RaycastHit rotation.</param>
-        public override void UpdateStability(Vector3 gazePosition, Vector3 gazeDirection)
+        /// <param name="position">Position value from a RaycastHit point.</param>
+        /// <param name="direction">Direction value from a RaycastHit rotation.</param>
+        public override void UpdateStability(Vector3 position, Vector3 direction)
         {
-            positionRollingStats.AddSample(gazePosition);
-            directionRollingStats.AddSample(gazeDirection);
+            positionRollingStats.AddSample(position);
+            directionRollingStats.AddSample(direction);
 
             float lerpPower = UnstabilizedLerpFactor;
 
@@ -102,19 +102,19 @@ namespace XRTK.Utilities.Physics
                (positionRollingStats.CurrentStandardDeviation > PositionStandardDeviationReset ||  // the standard deviation of positions is high or...
                 directionRollingStats.CurrentStandardDeviation > DirectionStandardDeviationReset)) // the standard deviation of directions is high
             {
-                // We've detected that the user's gaze is no longer fixed, so stop stabilizing so that gaze is responsive.
+                // We've detected that the user's raycast is no longer fixed, so stop stabilizing so that raycast is responsive.
                 // Debug.Log($"Reset {positionRollingStats.CurrentStandardDeviation} {positionRollingStats.StandardDeviationsAwayOfLatestSample} {directionRollingStats.CurrentStandardDeviation} {directionRollingStats.StandardDeviationsAwayOfLatestSample}");
                 positionRollingStats.Reset();
                 directionRollingStats.Reset();
             }
             else if (positionRollingStats.ActualSampleCount > MinimumSamplesRequiredToStabilize)
             {
-                // We've detected that the user's gaze is fairly fixed, so start stabilizing.  The more fixed the gaze the less the cursor will move.
+                // We've detected that the user's raycast is fairly fixed, so start stabilizing.  The more fixed the raycast the less the cursor will move.
                 lerpPower = StabalizedLerpBoost * (positionRollingStats.CurrentStandardDeviation + directionRollingStats.CurrentStandardDeviation);
             }
 
-            stablePosition = Vector3.Lerp(stablePosition, gazePosition, lerpPower);
-            stableRotation = Quaternion.LookRotation(Vector3.Lerp(stableRotation * Vector3.forward, gazeDirection, lerpPower));
+            stablePosition = Vector3.Lerp(stablePosition, position, lerpPower);
+            stableRotation = Quaternion.LookRotation(Vector3.Lerp(stableRotation * Vector3.forward, direction, lerpPower));
             stableRay = new Ray(stablePosition, stableRotation * Vector3.forward);
         }
     }

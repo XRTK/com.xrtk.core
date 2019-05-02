@@ -2,13 +2,11 @@
 name: Bug report
 about: Create a report to identify a potential issue
 title: ''
-labels: bug
+labels: Bug
 assignees: ''
 
 ---
 # XRTK - Mixed Reality Toolkit Bug Report
-
-![](/docs/Logo.png)
 
 ## Describe the bug
 A clear and concise description of what the bug is.
@@ -31,8 +29,8 @@ If applicable, add screenshots to help explain your problem.
 
 ## Your Setup (please complete the following information)
 
-- Unity Version [e.g. 2018.3.13f1]
-- XRTK Version [e.g. v0.3.1]
+- Unity Version [e.g. 2019.1.0f2]
+- XRTK Version [e.g. 0.1.8]
 
 ## Target Platform (please complete the following information)
 
@@ -40,7 +38,6 @@ If applicable, add screenshots to help explain your problem.
 - OpenVR
 - HoloLens
 - Lumin
-
 
 ## Additional context
 Add any other context about the problem here.

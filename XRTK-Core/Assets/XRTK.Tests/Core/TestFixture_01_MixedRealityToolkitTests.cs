@@ -7,6 +7,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 using XRTK.Tests.Services;
+using XRTK.Utilities.Editor;
 
 namespace XRTK.Tests.Core
 {
@@ -19,6 +20,9 @@ namespace XRTK.Tests.Core
         {
             TestUtilities.CleanupScene();
             MixedRealityToolkit.ConfirmInitialized();
+
+            Debug.Log(MixedRealityEditorSettings.MixedRealityToolkit_AbsoluteFolderPath);
+            Debug.Log(MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath);
 
             // Tests
             GameObject gameObject = GameObject.Find(nameof(MixedRealityToolkit));

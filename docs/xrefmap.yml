@@ -1723,6 +1723,12 @@ references:
   commentId: F:XRTK.Definitions.Devices.SupportedControllerType.GenericUnity
   fullName: XRTK.Definitions.Devices.SupportedControllerType.GenericUnity
   nameWithType: SupportedControllerType.GenericUnity
+- uid: XRTK.Definitions.Devices.SupportedControllerType.Lumin
+  name: Lumin
+  href: api/XRTK.Definitions.Devices.SupportedControllerType.html#XRTK_Definitions_Devices_SupportedControllerType_Lumin
+  commentId: F:XRTK.Definitions.Devices.SupportedControllerType.Lumin
+  fullName: XRTK.Definitions.Devices.SupportedControllerType.Lumin
+  nameWithType: SupportedControllerType.Lumin
 - uid: XRTK.Definitions.Devices.SupportedControllerType.Mouse
   name: Mouse
   href: api/XRTK.Definitions.Devices.SupportedControllerType.html#XRTK_Definitions_Devices_SupportedControllerType_Mouse
@@ -3877,6 +3883,109 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.MixedRealityCameraProfile.TransparentQualityLevel
   nameWithType: MixedRealityCameraProfile.TransparentQualityLevel
+- uid: XRTK.Definitions.MixedRealityPackageInfo
+  name: MixedRealityPackageInfo
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html
+  commentId: T:XRTK.Definitions.MixedRealityPackageInfo
+  fullName: XRTK.Definitions.MixedRealityPackageInfo
+  nameWithType: MixedRealityPackageInfo
+- uid: XRTK.Definitions.MixedRealityPackageInfo.DisplayName
+  name: DisplayName
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_DisplayName
+  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.DisplayName
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.DisplayName
+  nameWithType: MixedRealityPackageInfo.DisplayName
+- uid: XRTK.Definitions.MixedRealityPackageInfo.DisplayName*
+  name: DisplayName
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_DisplayName_
+  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.DisplayName
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.DisplayName
+  nameWithType: MixedRealityPackageInfo.DisplayName
+- uid: XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
+  name: IsDefaultPackage
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsDefaultPackage
+  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
+  nameWithType: MixedRealityPackageInfo.IsDefaultPackage
+- uid: XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage*
+  name: IsDefaultPackage
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsDefaultPackage_
+  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
+  nameWithType: MixedRealityPackageInfo.IsDefaultPackage
+- uid: XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
+  name: IsEnabled
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsEnabled
+  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
+  nameWithType: MixedRealityPackageInfo.IsEnabled
+- uid: XRTK.Definitions.MixedRealityPackageInfo.IsEnabled*
+  name: IsEnabled
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsEnabled_
+  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
+  nameWithType: MixedRealityPackageInfo.IsEnabled
+- uid: XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
+  name: IsRequiredPackage
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsRequiredPackage
+  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
+  nameWithType: MixedRealityPackageInfo.IsRequiredPackage
+- uid: XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage*
+  name: IsRequiredPackage
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsRequiredPackage_
+  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
+  nameWithType: MixedRealityPackageInfo.IsRequiredPackage
+- uid: XRTK.Definitions.MixedRealityPackageInfo.Name
+  name: Name
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_Name
+  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.Name
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.Name
+  nameWithType: MixedRealityPackageInfo.Name
+- uid: XRTK.Definitions.MixedRealityPackageInfo.Name*
+  name: Name
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_Name_
+  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.Name
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.Name
+  nameWithType: MixedRealityPackageInfo.Name
+- uid: XRTK.Definitions.MixedRealityPackageInfo.Uri
+  name: Uri
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_Uri
+  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.Uri
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.Uri
+  nameWithType: MixedRealityPackageInfo.Uri
+- uid: XRTK.Definitions.MixedRealityPackageInfo.Uri*
+  name: Uri
+  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_Uri_
+  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.Uri
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityPackageInfo.Uri
+  nameWithType: MixedRealityPackageInfo.Uri
+- uid: XRTK.Definitions.MixedRealityPackageSettings
+  name: MixedRealityPackageSettings
+  href: api/XRTK.Definitions.MixedRealityPackageSettings.html
+  commentId: T:XRTK.Definitions.MixedRealityPackageSettings
+  fullName: XRTK.Definitions.MixedRealityPackageSettings
+  nameWithType: MixedRealityPackageSettings
+- uid: XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
+  name: MixedRealityPackages
+  href: api/XRTK.Definitions.MixedRealityPackageSettings.html#XRTK_Definitions_MixedRealityPackageSettings_MixedRealityPackages
+  commentId: P:XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
+  fullName: XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
+  nameWithType: MixedRealityPackageSettings.MixedRealityPackages
+- uid: XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages*
+  name: MixedRealityPackages
+  href: api/XRTK.Definitions.MixedRealityPackageSettings.html#XRTK_Definitions_MixedRealityPackageSettings_MixedRealityPackages_
+  commentId: Overload:XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
+  nameWithType: MixedRealityPackageSettings.MixedRealityPackages
 - uid: XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile
   name: MixedRealityRegisteredServiceProvidersProfile
   href: api/XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile.html
@@ -6003,6 +6112,12 @@ references:
   commentId: F:XRTK.Definitions.Utilities.SupportedPlatforms.LinuxStandalone
   fullName: XRTK.Definitions.Utilities.SupportedPlatforms.LinuxStandalone
   nameWithType: SupportedPlatforms.LinuxStandalone
+- uid: XRTK.Definitions.Utilities.SupportedPlatforms.Lumin
+  name: Lumin
+  href: api/XRTK.Definitions.Utilities.SupportedPlatforms.html#XRTK_Definitions_Utilities_SupportedPlatforms_Lumin
+  commentId: F:XRTK.Definitions.Utilities.SupportedPlatforms.Lumin
+  fullName: XRTK.Definitions.Utilities.SupportedPlatforms.Lumin
+  nameWithType: SupportedPlatforms.Lumin
 - uid: XRTK.Definitions.Utilities.SupportedPlatforms.MacStandalone
   name: MacStandalone
   href: api/XRTK.Definitions.Utilities.SupportedPlatforms.html#XRTK_Definitions_Utilities_SupportedPlatforms_MacStandalone
@@ -9365,12 +9480,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.VectorExtensions.Mul
   nameWithType: VectorExtensions.Mul
-- uid: XRTK.Extensions.VectorExtensions.RadialMapping(UnityEngine.Vector3,System.Single,System.Single,System.Int32,System.Int32,System.Int32,System.Int32)
-  name: RadialMapping(Vector3, Single, Single, Int32, Int32, Int32, Int32)
-  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RadialMapping_UnityEngine_Vector3_System_Single_System_Single_System_Int32_System_Int32_System_Int32_System_Int32_
-  commentId: M:XRTK.Extensions.VectorExtensions.RadialMapping(UnityEngine.Vector3,System.Single,System.Single,System.Int32,System.Int32,System.Int32,System.Int32)
-  fullName: XRTK.Extensions.VectorExtensions.RadialMapping(UnityEngine.Vector3, System.Single, System.Single, System.Int32, System.Int32, System.Int32, System.Int32)
-  nameWithType: VectorExtensions.RadialMapping(Vector3, Single, Single, Int32, Int32, Int32, Int32)
+- uid: XRTK.Extensions.VectorExtensions.RadialMapping(UnityEngine.Vector3,System.Single,System.Single,System.Int32,System.Int32,System.Int32,System.Int32,System.Single)
+  name: RadialMapping(Vector3, Single, Single, Int32, Int32, Int32, Int32, Single)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RadialMapping_UnityEngine_Vector3_System_Single_System_Single_System_Int32_System_Int32_System_Int32_System_Int32_System_Single_
+  commentId: M:XRTK.Extensions.VectorExtensions.RadialMapping(UnityEngine.Vector3,System.Single,System.Single,System.Int32,System.Int32,System.Int32,System.Int32,System.Single)
+  fullName: XRTK.Extensions.VectorExtensions.RadialMapping(UnityEngine.Vector3, System.Single, System.Single, System.Int32, System.Int32, System.Int32, System.Int32, System.Single)
+  nameWithType: VectorExtensions.RadialMapping(Vector3, Single, Single, Int32, Int32, Int32, Int32, Single)
 - uid: XRTK.Extensions.VectorExtensions.RadialMapping*
   name: RadialMapping
   href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RadialMapping_
@@ -9619,6 +9734,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.MixedRealityPreferences.LockProfiles
   nameWithType: MixedRealityPreferences.LockProfiles
+- uid: XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
+  name: PackageSettingsPath
+  href: api/XRTK.Inspectors.MixedRealityPreferences.html#XRTK_Inspectors_MixedRealityPreferences_PackageSettingsPath
+  commentId: P:XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
+  fullName: XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
+  nameWithType: MixedRealityPreferences.PackageSettingsPath
+- uid: XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath*
+  name: PackageSettingsPath
+  href: api/XRTK.Inspectors.MixedRealityPreferences.html#XRTK_Inspectors_MixedRealityPreferences_PackageSettingsPath_
+  commentId: Overload:XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
+  isSpec: "True"
+  fullName: XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
+  nameWithType: MixedRealityPreferences.PackageSettingsPath
 - uid: XRTK.Inspectors.MixedRealityPreferences.ShowCanvasUtilityPrompt
   name: ShowCanvasUtilityPrompt
   href: api/XRTK.Inspectors.MixedRealityPreferences.html#XRTK_Inspectors_MixedRealityPreferences_ShowCanvasUtilityPrompt
@@ -9762,6 +9890,18 @@ references:
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.borderLightOpaque
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.borderLightOpaque
   nameWithType: MixedRealityStandardShaderGUI.borderLightOpaque
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.borderLightOpaqueAlpha
+  name: borderLightOpaqueAlpha
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_borderLightOpaqueAlpha
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.borderLightOpaqueAlpha
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.borderLightOpaqueAlpha
+  nameWithType: MixedRealityStandardShaderGUI.borderLightOpaqueAlpha
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.borderLightReplacesAlbedo
+  name: borderLightReplacesAlbedo
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_borderLightReplacesAlbedo
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.borderLightReplacesAlbedo
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.borderLightReplacesAlbedo
+  nameWithType: MixedRealityStandardShaderGUI.borderLightReplacesAlbedo
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.borderLightUsesHoverColor
   name: borderLightUsesHoverColor
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_borderLightUsesHoverColor
@@ -9930,12 +10070,6 @@ references:
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.enableEmission
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.enableEmission
   nameWithType: MixedRealityStandardShaderGUI.enableEmission
-- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.enableHoverColorOpaqueOverride
-  name: enableHoverColorOpaqueOverride
-  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_enableHoverColorOpaqueOverride
-  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.enableHoverColorOpaqueOverride
-  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.enableHoverColorOpaqueOverride
-  nameWithType: MixedRealityStandardShaderGUI.enableHoverColorOpaqueOverride
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.enableHoverColorOverride
   name: enableHoverColorOverride
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_enableHoverColorOverride
@@ -10082,24 +10216,12 @@ references:
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.hoverColorOverride
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.hoverColorOverride
   nameWithType: MixedRealityStandardShaderGUI.hoverColorOverride
-- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.hoverColorOverrideOpaque
-  name: hoverColorOverrideOpaque
-  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_hoverColorOverrideOpaque
-  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.hoverColorOverrideOpaque
-  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.hoverColorOverrideOpaque
-  nameWithType: MixedRealityStandardShaderGUI.hoverColorOverrideOpaque
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.hoverLight
   name: hoverLight
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_hoverLight
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.hoverLight
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.hoverLight
   nameWithType: MixedRealityStandardShaderGUI.hoverLight
-- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.hoverLightOpaque
-  name: hoverLightOpaque
-  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_hoverLightOpaque
-  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.hoverLightOpaque
-  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.hoverLightOpaque
-  nameWithType: MixedRealityStandardShaderGUI.hoverLightOpaque
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Initialize(UnityEngine.Material)
   name: Initialize(Material)
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Initialize_UnityEngine_Material_
@@ -10131,12 +10253,48 @@ references:
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.innerGlowColor
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.innerGlowColor
   nameWithType: MixedRealityStandardShaderGUI.innerGlowColor
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.innerGlowPower
+  name: innerGlowPower
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_innerGlowPower
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.innerGlowPower
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.innerGlowPower
+  nameWithType: MixedRealityStandardShaderGUI.innerGlowPower
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.instancedColor
   name: instancedColor
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_instancedColor
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.instancedColor
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.instancedColor
   nameWithType: MixedRealityStandardShaderGUI.instancedColor
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescence
+  name: iridescence
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_iridescence
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescence
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescence
+  nameWithType: MixedRealityStandardShaderGUI.iridescence
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescenceAngle
+  name: iridescenceAngle
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_iridescenceAngle
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescenceAngle
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescenceAngle
+  nameWithType: MixedRealityStandardShaderGUI.iridescenceAngle
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescenceIntensity
+  name: iridescenceIntensity
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_iridescenceIntensity
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescenceIntensity
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescenceIntensity
+  nameWithType: MixedRealityStandardShaderGUI.iridescenceIntensity
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescenceThreshold
+  name: iridescenceThreshold
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_iridescenceThreshold
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescenceThreshold
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescenceThreshold
+  nameWithType: MixedRealityStandardShaderGUI.iridescenceThreshold
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescentSpectrumMap
+  name: iridescentSpectrumMap
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_iridescentSpectrumMap
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescentSpectrumMap
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.iridescentSpectrumMap
+  nameWithType: MixedRealityStandardShaderGUI.iridescentSpectrumMap
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.MainMapOptions(UnityEditor.MaterialEditor,UnityEngine.Material)
   name: MainMapOptions(MaterialEditor, Material)
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_MainMapOptions_UnityEditor_MaterialEditor_UnityEngine_Material_
@@ -10169,6 +10327,12 @@ references:
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.metallic
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.metallic
   nameWithType: MixedRealityStandardShaderGUI.metallic
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.nearLightFade
+  name: nearLightFade
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_nearLightFade
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.nearLightFade
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.nearLightFade
+  nameWithType: MixedRealityStandardShaderGUI.nearLightFade
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.nearPlaneFade
   name: nearPlaneFade
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_nearPlaneFade
@@ -10216,6 +10380,18 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.PropertyEnabled
   nameWithType: MixedRealityStandardShaderGUI.PropertyEnabled
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.proximityLight
+  name: proximityLight
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_proximityLight
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.proximityLight
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.proximityLight
+  nameWithType: MixedRealityStandardShaderGUI.proximityLight
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.proximityLightTwoSided
+  name: proximityLightTwoSided
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_proximityLightTwoSided
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.proximityLightTwoSided
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.proximityLightTwoSided
+  nameWithType: MixedRealityStandardShaderGUI.proximityLightTwoSided
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.reflections
   name: reflections
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_reflections
@@ -10556,6 +10732,18 @@ references:
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.borderLightOpaque
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.borderLightOpaque
   nameWithType: MixedRealityStandardShaderGUI.Styles.borderLightOpaque
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.borderLightOpaqueAlpha
+  name: borderLightOpaqueAlpha
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_borderLightOpaqueAlpha
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.borderLightOpaqueAlpha
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.borderLightOpaqueAlpha
+  nameWithType: MixedRealityStandardShaderGUI.Styles.borderLightOpaqueAlpha
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.borderLightReplacesAlbedo
+  name: borderLightReplacesAlbedo
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_borderLightReplacesAlbedo
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.borderLightReplacesAlbedo
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.borderLightReplacesAlbedo
+  nameWithType: MixedRealityStandardShaderGUI.Styles.borderLightReplacesAlbedo
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.borderLightUsesHoverColor
   name: borderLightUsesHoverColor
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_borderLightUsesHoverColor
@@ -10724,12 +10912,6 @@ references:
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.enableEmission
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.enableEmission
   nameWithType: MixedRealityStandardShaderGUI.Styles.enableEmission
-- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.enableHoverColorOpaqueOverride
-  name: enableHoverColorOpaqueOverride
-  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_enableHoverColorOpaqueOverride
-  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.enableHoverColorOpaqueOverride
-  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.enableHoverColorOpaqueOverride
-  nameWithType: MixedRealityStandardShaderGUI.Styles.enableHoverColorOpaqueOverride
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.enableHoverColorOverride
   name: enableHoverColorOverride
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_enableHoverColorOverride
@@ -10808,12 +10990,6 @@ references:
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.fluentOptionsTitle
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.fluentOptionsTitle
   nameWithType: MixedRealityStandardShaderGUI.Styles.fluentOptionsTitle
-- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.hoverColorOpaqueOverride
-  name: hoverColorOpaqueOverride
-  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_hoverColorOpaqueOverride
-  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.hoverColorOpaqueOverride
-  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.hoverColorOpaqueOverride
-  nameWithType: MixedRealityStandardShaderGUI.Styles.hoverColorOpaqueOverride
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.hoverColorOverride
   name: hoverColorOverride
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_hoverColorOverride
@@ -10826,12 +11002,6 @@ references:
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.hoverLight
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.hoverLight
   nameWithType: MixedRealityStandardShaderGUI.Styles.hoverLight
-- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.hoverLightOpaque
-  name: hoverLightOpaque
-  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_hoverLightOpaque
-  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.hoverLightOpaque
-  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.hoverLightOpaque
-  nameWithType: MixedRealityStandardShaderGUI.Styles.hoverLightOpaque
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.innerGlow
   name: innerGlow
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_innerGlow
@@ -10844,6 +11014,12 @@ references:
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.innerGlowColor
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.innerGlowColor
   nameWithType: MixedRealityStandardShaderGUI.Styles.innerGlowColor
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.innerGlowPower
+  name: innerGlowPower
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_innerGlowPower
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.innerGlowPower
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.innerGlowPower
+  nameWithType: MixedRealityStandardShaderGUI.Styles.innerGlowPower
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.instancedColor
   name: instancedColor
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_instancedColor
@@ -10862,12 +11038,48 @@ references:
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.instancedColorName
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.instancedColorName
   nameWithType: MixedRealityStandardShaderGUI.Styles.instancedColorName
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescence
+  name: iridescence
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_iridescence
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescence
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescence
+  nameWithType: MixedRealityStandardShaderGUI.Styles.iridescence
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescenceAngle
+  name: iridescenceAngle
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_iridescenceAngle
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescenceAngle
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescenceAngle
+  nameWithType: MixedRealityStandardShaderGUI.Styles.iridescenceAngle
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescenceIntensity
+  name: iridescenceIntensity
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_iridescenceIntensity
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescenceIntensity
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescenceIntensity
+  nameWithType: MixedRealityStandardShaderGUI.Styles.iridescenceIntensity
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescenceThreshold
+  name: iridescenceThreshold
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_iridescenceThreshold
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescenceThreshold
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescenceThreshold
+  nameWithType: MixedRealityStandardShaderGUI.Styles.iridescenceThreshold
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescentSpectrumMap
+  name: iridescentSpectrumMap
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_iridescentSpectrumMap
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescentSpectrumMap
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.iridescentSpectrumMap
+  nameWithType: MixedRealityStandardShaderGUI.Styles.iridescentSpectrumMap
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.metallic
   name: metallic
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_metallic
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.metallic
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.metallic
   nameWithType: MixedRealityStandardShaderGUI.Styles.metallic
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.nearLightFade
+  name: nearLightFade
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_nearLightFade
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.nearLightFade
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.nearLightFade
+  nameWithType: MixedRealityStandardShaderGUI.Styles.nearLightFade
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.nearPlaneFade
   name: nearPlaneFade
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_nearPlaneFade
@@ -10898,6 +11110,18 @@ references:
   commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.propertiesComponentHelp
   fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.propertiesComponentHelp
   nameWithType: MixedRealityStandardShaderGUI.Styles.propertiesComponentHelp
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.proximityLight
+  name: proximityLight
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_proximityLight
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.proximityLight
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.proximityLight
+  nameWithType: MixedRealityStandardShaderGUI.Styles.proximityLight
+- uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.proximityLightTwoSided
+  name: proximityLightTwoSided
+  href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_proximityLightTwoSided
+  commentId: F:XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.proximityLightTwoSided
+  fullName: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.proximityLightTwoSided
+  nameWithType: MixedRealityStandardShaderGUI.Styles.proximityLightTwoSided
 - uid: XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.reflections
   name: reflections
   href: api/XRTK.Inspectors.MixedRealityStandardShaderGUI.Styles.html#XRTK_Inspectors_MixedRealityStandardShaderGUI_Styles_reflections
@@ -12077,6 +12301,52 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.SystemTypeRepairWindow.WindowOpen
   nameWithType: SystemTypeRepairWindow.WindowOpen
+- uid: XRTK.Inspectors.Text3DShaderGUI
+  name: Text3DShaderGUI
+  href: api/XRTK.Inspectors.Text3DShaderGUI.html
+  commentId: T:XRTK.Inspectors.Text3DShaderGUI
+  fullName: XRTK.Inspectors.Text3DShaderGUI
+  nameWithType: Text3DShaderGUI
+- uid: XRTK.Inspectors.Text3DShaderGUI.cullMode
+  name: cullMode
+  href: api/XRTK.Inspectors.Text3DShaderGUI.html#XRTK_Inspectors_Text3DShaderGUI_cullMode
+  commentId: F:XRTK.Inspectors.Text3DShaderGUI.cullMode
+  fullName: XRTK.Inspectors.Text3DShaderGUI.cullMode
+  nameWithType: Text3DShaderGUI.cullMode
+- uid: XRTK.Inspectors.Text3DShaderGUI.firstTimeApply
+  name: firstTimeApply
+  href: api/XRTK.Inspectors.Text3DShaderGUI.html#XRTK_Inspectors_Text3DShaderGUI_firstTimeApply
+  commentId: F:XRTK.Inspectors.Text3DShaderGUI.firstTimeApply
+  fullName: XRTK.Inspectors.Text3DShaderGUI.firstTimeApply
+  nameWithType: Text3DShaderGUI.firstTimeApply
+- uid: XRTK.Inspectors.Text3DShaderGUI.OnGUI(UnityEditor.MaterialEditor,UnityEditor.MaterialProperty[])
+  name: OnGUI(MaterialEditor, MaterialProperty[])
+  href: api/XRTK.Inspectors.Text3DShaderGUI.html#XRTK_Inspectors_Text3DShaderGUI_OnGUI_UnityEditor_MaterialEditor_UnityEditor_MaterialProperty___
+  commentId: M:XRTK.Inspectors.Text3DShaderGUI.OnGUI(UnityEditor.MaterialEditor,UnityEditor.MaterialProperty[])
+  name.vb: OnGUI(MaterialEditor, MaterialProperty())
+  fullName: XRTK.Inspectors.Text3DShaderGUI.OnGUI(UnityEditor.MaterialEditor, UnityEditor.MaterialProperty[])
+  fullName.vb: XRTK.Inspectors.Text3DShaderGUI.OnGUI(UnityEditor.MaterialEditor, UnityEditor.MaterialProperty())
+  nameWithType: Text3DShaderGUI.OnGUI(MaterialEditor, MaterialProperty[])
+  nameWithType.vb: Text3DShaderGUI.OnGUI(MaterialEditor, MaterialProperty())
+- uid: XRTK.Inspectors.Text3DShaderGUI.OnGUI*
+  name: OnGUI
+  href: api/XRTK.Inspectors.Text3DShaderGUI.html#XRTK_Inspectors_Text3DShaderGUI_OnGUI_
+  commentId: Overload:XRTK.Inspectors.Text3DShaderGUI.OnGUI
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Text3DShaderGUI.OnGUI
+  nameWithType: Text3DShaderGUI.OnGUI
+- uid: XRTK.Inspectors.Text3DShaderGUI.Styles
+  name: Text3DShaderGUI.Styles
+  href: api/XRTK.Inspectors.Text3DShaderGUI.Styles.html
+  commentId: T:XRTK.Inspectors.Text3DShaderGUI.Styles
+  fullName: XRTK.Inspectors.Text3DShaderGUI.Styles
+  nameWithType: Text3DShaderGUI.Styles
+- uid: XRTK.Inspectors.Text3DShaderGUI.Styles.cullMode
+  name: cullMode
+  href: api/XRTK.Inspectors.Text3DShaderGUI.Styles.html#XRTK_Inspectors_Text3DShaderGUI_Styles_cullMode
+  commentId: F:XRTK.Inspectors.Text3DShaderGUI.Styles.cullMode
+  fullName: XRTK.Inspectors.Text3DShaderGUI.Styles.cullMode
+  nameWithType: Text3DShaderGUI.Styles.cullMode
 - uid: XRTK.Inspectors.Utilities
   name: XRTK.Inspectors.Utilities
   href: api/XRTK.Inspectors.Utilities.html
@@ -12185,6 +12455,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Utilities.GitUtilities.ForceUpdateSubmodules
   nameWithType: GitUtilities.ForceUpdateSubmodules
+- uid: XRTK.Inspectors.Utilities.GitUtilities.GetAllTagsFromRemoteAsync(System.String)
+  name: GetAllTagsFromRemoteAsync(String)
+  href: api/XRTK.Inspectors.Utilities.GitUtilities.html#XRTK_Inspectors_Utilities_GitUtilities_GetAllTagsFromRemoteAsync_System_String_
+  commentId: M:XRTK.Inspectors.Utilities.GitUtilities.GetAllTagsFromRemoteAsync(System.String)
+  fullName: XRTK.Inspectors.Utilities.GitUtilities.GetAllTagsFromRemoteAsync(System.String)
+  nameWithType: GitUtilities.GetAllTagsFromRemoteAsync(String)
+- uid: XRTK.Inspectors.Utilities.GitUtilities.GetAllTagsFromRemoteAsync*
+  name: GetAllTagsFromRemoteAsync
+  href: api/XRTK.Inspectors.Utilities.GitUtilities.html#XRTK_Inspectors_Utilities_GitUtilities_GetAllTagsFromRemoteAsync_
+  commentId: Overload:XRTK.Inspectors.Utilities.GitUtilities.GetAllTagsFromRemoteAsync
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Utilities.GitUtilities.GetAllTagsFromRemoteAsync
+  nameWithType: GitUtilities.GetAllTagsFromRemoteAsync
 - uid: XRTK.Inspectors.Utilities.GitUtilities.RepositoryRootDir
   name: RepositoryRootDir
   href: api/XRTK.Inspectors.Utilities.GitUtilities.html#XRTK_Inspectors_Utilities_GitUtilities_RepositoryRootDir
@@ -12310,6 +12593,51 @@ references:
   commentId: F:XRTK.Inspectors.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProviderInspector.RotationArrowLength
   fullName: XRTK.Inspectors.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProviderInspector.RotationArrowLength
   nameWithType: BaseMixedRealityLineDataProviderInspector.RotationArrowLength
+- uid: XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector
+  name: BezierDataProviderInspector
+  href: api/XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.html
+  commentId: T:XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector
+  fullName: XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector
+  nameWithType: BezierDataProviderInspector
+- uid: XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnEnable
+  name: OnEnable()
+  href: api/XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.html#XRTK_Inspectors_Utilities_Lines_DataProviders_BezierDataProviderInspector_OnEnable
+  commentId: M:XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnEnable
+  fullName: XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnEnable()
+  nameWithType: BezierDataProviderInspector.OnEnable()
+- uid: XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnEnable*
+  name: OnEnable
+  href: api/XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.html#XRTK_Inspectors_Utilities_Lines_DataProviders_BezierDataProviderInspector_OnEnable_
+  commentId: Overload:XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnEnable
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnEnable
+  nameWithType: BezierDataProviderInspector.OnEnable
+- uid: XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnInspectorGUI
+  name: OnInspectorGUI()
+  href: api/XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.html#XRTK_Inspectors_Utilities_Lines_DataProviders_BezierDataProviderInspector_OnInspectorGUI
+  commentId: M:XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnInspectorGUI()
+  nameWithType: BezierDataProviderInspector.OnInspectorGUI()
+- uid: XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnInspectorGUI*
+  name: OnInspectorGUI
+  href: api/XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.html#XRTK_Inspectors_Utilities_Lines_DataProviders_BezierDataProviderInspector_OnInspectorGUI_
+  commentId: Overload:XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnInspectorGUI
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnInspectorGUI
+  nameWithType: BezierDataProviderInspector.OnInspectorGUI
+- uid: XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnSceneGUI
+  name: OnSceneGUI()
+  href: api/XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.html#XRTK_Inspectors_Utilities_Lines_DataProviders_BezierDataProviderInspector_OnSceneGUI
+  commentId: M:XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnSceneGUI
+  fullName: XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnSceneGUI()
+  nameWithType: BezierDataProviderInspector.OnSceneGUI()
+- uid: XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnSceneGUI*
+  name: OnSceneGUI
+  href: api/XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.html#XRTK_Inspectors_Utilities_Lines_DataProviders_BezierDataProviderInspector_OnSceneGUI_
+  commentId: Overload:XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnSceneGUI
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.OnSceneGUI
+  nameWithType: BezierDataProviderInspector.OnSceneGUI
 - uid: XRTK.Inspectors.Utilities.Lines.DataProviders.EllipseLineDataProviderInspector
   name: EllipseLineDataProviderInspector
   href: api/XRTK.Inspectors.Utilities.Lines.DataProviders.EllipseLineDataProviderInspector.html
@@ -12819,122 +13147,6 @@ references:
   commentId: N:XRTK.Inspectors.Utilities.Packages
   fullName: XRTK.Inspectors.Utilities.Packages
   nameWithType: XRTK.Inspectors.Utilities.Packages
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo
-  name: MixedRealityPackageInfo
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html
-  commentId: T:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo
-  nameWithType: MixedRealityPackageInfo
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Dependencies
-  name: Dependencies
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_Dependencies
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Dependencies
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Dependencies
-  nameWithType: MixedRealityPackageInfo.Dependencies
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Dependencies*
-  name: Dependencies
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_Dependencies_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Dependencies
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Dependencies
-  nameWithType: MixedRealityPackageInfo.Dependencies
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.DisplayName
-  name: DisplayName
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_DisplayName
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.DisplayName
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.DisplayName
-  nameWithType: MixedRealityPackageInfo.DisplayName
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.DisplayName*
-  name: DisplayName
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_DisplayName_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.DisplayName
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.DisplayName
-  nameWithType: MixedRealityPackageInfo.DisplayName
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsDefaultPackage
-  name: IsDefaultPackage
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_IsDefaultPackage
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsDefaultPackage
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsDefaultPackage
-  nameWithType: MixedRealityPackageInfo.IsDefaultPackage
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsDefaultPackage*
-  name: IsDefaultPackage
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_IsDefaultPackage_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsDefaultPackage
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsDefaultPackage
-  nameWithType: MixedRealityPackageInfo.IsDefaultPackage
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsRequiredPackage
-  name: IsRequiredPackage
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_IsRequiredPackage
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsRequiredPackage
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsRequiredPackage
-  nameWithType: MixedRealityPackageInfo.IsRequiredPackage
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsRequiredPackage*
-  name: IsRequiredPackage
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_IsRequiredPackage_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsRequiredPackage
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.IsRequiredPackage
-  nameWithType: MixedRealityPackageInfo.IsRequiredPackage
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Name
-  name: Name
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_Name
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Name
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Name
-  nameWithType: MixedRealityPackageInfo.Name
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Name*
-  name: Name
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_Name_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Name
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Name
-  nameWithType: MixedRealityPackageInfo.Name
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.PackageInfo
-  name: PackageInfo
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_PackageInfo
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.PackageInfo
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.PackageInfo
-  nameWithType: MixedRealityPackageInfo.PackageInfo
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.PackageInfo*
-  name: PackageInfo
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_PackageInfo_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.PackageInfo
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.PackageInfo
-  nameWithType: MixedRealityPackageInfo.PackageInfo
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Uri
-  name: Uri
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_Uri
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Uri
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Uri
-  nameWithType: MixedRealityPackageInfo.Uri
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Uri*
-  name: Uri
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_Uri_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Uri
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo.Uri
-  nameWithType: MixedRealityPackageInfo.Uri
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings
-  name: MixedRealityPackageSettings
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.html
-  commentId: T:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings
-  nameWithType: MixedRealityPackageSettings
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.MixedRealityPackages
-  name: MixedRealityPackages
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageSettings_MixedRealityPackages
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.MixedRealityPackages
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.MixedRealityPackages
-  nameWithType: MixedRealityPackageSettings.MixedRealityPackages
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.MixedRealityPackages*
-  name: MixedRealityPackages
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageSettings_MixedRealityPackages_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.MixedRealityPackages
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettings.MixedRealityPackages
-  nameWithType: MixedRealityPackageSettings.MixedRealityPackages
 - uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector
   name: MixedRealityPackageSettingsInspector
   href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector.html
@@ -13005,19 +13217,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.DebugEnabled
   nameWithType: MixedRealityPackageUtilities.DebugEnabled
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.GetRevisionHash(XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo)
-  name: GetRevisionHash(MixedRealityPackageInfo)
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_GetRevisionHash_XRTK_Inspectors_Utilities_Packages_MixedRealityPackageInfo_
-  commentId: M:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.GetRevisionHash(XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo)
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.GetRevisionHash(XRTK.Inspectors.Utilities.Packages.MixedRealityPackageInfo)
-  nameWithType: MixedRealityPackageUtilities.GetRevisionHash(MixedRealityPackageInfo)
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.GetRevisionHash*
-  name: GetRevisionHash
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_GetRevisionHash_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.GetRevisionHash
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.GetRevisionHash
-  nameWithType: MixedRealityPackageUtilities.GetRevisionHash
 - uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.IsRunningCheck
   name: IsRunningCheck
   href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_IsRunningCheck
@@ -13031,38 +13230,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.IsRunningCheck
   nameWithType: MixedRealityPackageUtilities.IsRunningCheck
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation
-  name: MixedRealityPackageValidation
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.html
-  commentId: T:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation
-  nameWithType: MixedRealityPackageValidation
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.IsMainProjectAsset
-  name: IsMainProjectAsset
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageValidation_IsMainProjectAsset
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.IsMainProjectAsset
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.IsMainProjectAsset
-  nameWithType: MixedRealityPackageValidation.IsMainProjectAsset
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.IsMainProjectAsset*
-  name: IsMainProjectAsset
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageValidation_IsMainProjectAsset_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.IsMainProjectAsset
+- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
+  name: PackageSettings
+  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_PackageSettings
+  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
+  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
+  nameWithType: MixedRealityPackageUtilities.PackageSettings
+- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings*
+  name: PackageSettings
+  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_PackageSettings_
+  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
   isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.IsMainProjectAsset
-  nameWithType: MixedRealityPackageValidation.IsMainProjectAsset
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.PackageName
-  name: PackageName
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageValidation_PackageName
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.PackageName
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.PackageName
-  nameWithType: MixedRealityPackageValidation.PackageName
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.PackageName*
-  name: PackageName
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageValidation_PackageName_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.PackageName
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageValidation.PackageName
-  nameWithType: MixedRealityPackageValidation.PackageName
+  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
+  nameWithType: MixedRealityPackageUtilities.PackageSettings
 - uid: XRTK.Inspectors.Utilities.SymbolicLinks
   name: XRTK.Inspectors.Utilities.SymbolicLinks
   href: api/XRTK.Inspectors.Utilities.SymbolicLinks.html
@@ -18020,6 +18200,168 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.TeleportSystem.IMixedRealityTeleportSystem.TeleportDuration
   nameWithType: IMixedRealityTeleportSystem.TeleportDuration
+- uid: XRTK.Lumin.Controllers
+  name: XRTK.Lumin.Controllers
+  href: api/XRTK.Lumin.Controllers.html
+  commentId: N:XRTK.Lumin.Controllers
+  fullName: XRTK.Lumin.Controllers
+  nameWithType: XRTK.Lumin.Controllers
+- uid: XRTK.Lumin.Controllers.LuminController
+  name: LuminController
+  href: api/XRTK.Lumin.Controllers.LuminController.html
+  commentId: T:XRTK.Lumin.Controllers.LuminController
+  fullName: XRTK.Lumin.Controllers.LuminController
+  nameWithType: LuminController
+- uid: XRTK.Lumin.Controllers.LuminController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name: LuminController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___
+  commentId: M:XRTK.Lumin.Controllers.LuminController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name.vb: LuminController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+  fullName: XRTK.Lumin.Controllers.LuminController.LuminController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  fullName.vb: XRTK.Lumin.Controllers.LuminController.LuminController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping())
+  nameWithType: LuminController.LuminController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  nameWithType.vb: LuminController.LuminController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+- uid: XRTK.Lumin.Controllers.LuminController.#ctor*
+  name: LuminController
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController__ctor_
+  commentId: Overload:XRTK.Lumin.Controllers.LuminController.#ctor
+  isSpec: "True"
+  fullName: XRTK.Lumin.Controllers.LuminController.LuminController
+  nameWithType: LuminController.LuminController
+- uid: XRTK.Lumin.Controllers.LuminController.DefaultInteractions
+  name: DefaultInteractions
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_DefaultInteractions
+  commentId: P:XRTK.Lumin.Controllers.LuminController.DefaultInteractions
+  fullName: XRTK.Lumin.Controllers.LuminController.DefaultInteractions
+  nameWithType: LuminController.DefaultInteractions
+- uid: XRTK.Lumin.Controllers.LuminController.DefaultInteractions*
+  name: DefaultInteractions
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_DefaultInteractions_
+  commentId: Overload:XRTK.Lumin.Controllers.LuminController.DefaultInteractions
+  isSpec: "True"
+  fullName: XRTK.Lumin.Controllers.LuminController.DefaultInteractions
+  nameWithType: LuminController.DefaultInteractions
+- uid: XRTK.Lumin.Controllers.LuminController.DefaultLeftHandedInteractions
+  name: DefaultLeftHandedInteractions
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_DefaultLeftHandedInteractions
+  commentId: P:XRTK.Lumin.Controllers.LuminController.DefaultLeftHandedInteractions
+  fullName: XRTK.Lumin.Controllers.LuminController.DefaultLeftHandedInteractions
+  nameWithType: LuminController.DefaultLeftHandedInteractions
+- uid: XRTK.Lumin.Controllers.LuminController.DefaultLeftHandedInteractions*
+  name: DefaultLeftHandedInteractions
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_DefaultLeftHandedInteractions_
+  commentId: Overload:XRTK.Lumin.Controllers.LuminController.DefaultLeftHandedInteractions
+  isSpec: "True"
+  fullName: XRTK.Lumin.Controllers.LuminController.DefaultLeftHandedInteractions
+  nameWithType: LuminController.DefaultLeftHandedInteractions
+- uid: XRTK.Lumin.Controllers.LuminController.DefaultRightHandedInteractions
+  name: DefaultRightHandedInteractions
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_DefaultRightHandedInteractions
+  commentId: P:XRTK.Lumin.Controllers.LuminController.DefaultRightHandedInteractions
+  fullName: XRTK.Lumin.Controllers.LuminController.DefaultRightHandedInteractions
+  nameWithType: LuminController.DefaultRightHandedInteractions
+- uid: XRTK.Lumin.Controllers.LuminController.DefaultRightHandedInteractions*
+  name: DefaultRightHandedInteractions
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_DefaultRightHandedInteractions_
+  commentId: Overload:XRTK.Lumin.Controllers.LuminController.DefaultRightHandedInteractions
+  isSpec: "True"
+  fullName: XRTK.Lumin.Controllers.LuminController.DefaultRightHandedInteractions
+  nameWithType: LuminController.DefaultRightHandedInteractions
+- uid: XRTK.Lumin.Controllers.LuminController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  name: SetupDefaultInteractions(Handedness)
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Lumin.Controllers.LuminController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Lumin.Controllers.LuminController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  nameWithType: LuminController.SetupDefaultInteractions(Handedness)
+- uid: XRTK.Lumin.Controllers.LuminController.SetupDefaultInteractions*
+  name: SetupDefaultInteractions
+  href: api/XRTK.Lumin.Controllers.LuminController.html#XRTK_Lumin_Controllers_LuminController_SetupDefaultInteractions_
+  commentId: Overload:XRTK.Lumin.Controllers.LuminController.SetupDefaultInteractions
+  isSpec: "True"
+  fullName: XRTK.Lumin.Controllers.LuminController.SetupDefaultInteractions
+  nameWithType: LuminController.SetupDefaultInteractions
+- uid: XRTK.Lumin.Controllers.LuminControllerDataProvider
+  name: LuminControllerDataProvider
+  href: api/XRTK.Lumin.Controllers.LuminControllerDataProvider.html
+  commentId: T:XRTK.Lumin.Controllers.LuminControllerDataProvider
+  fullName: XRTK.Lumin.Controllers.LuminControllerDataProvider
+  nameWithType: LuminControllerDataProvider
+- uid: XRTK.Lumin.Controllers.LuminControllerDataProvider.#ctor(System.String,System.UInt32,XRTK.Providers.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  name: LuminControllerDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
+  href: api/XRTK.Lumin.Controllers.LuminControllerDataProvider.html#XRTK_Lumin_Controllers_LuminControllerDataProvider__ctor_System_String_System_UInt32_XRTK_Providers_Controllers_BaseMixedRealityControllerDataProviderProfile_
+  commentId: M:XRTK.Lumin.Controllers.LuminControllerDataProvider.#ctor(System.String,System.UInt32,XRTK.Providers.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  fullName: XRTK.Lumin.Controllers.LuminControllerDataProvider.LuminControllerDataProvider(System.String, System.UInt32, XRTK.Providers.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  nameWithType: LuminControllerDataProvider.LuminControllerDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
+- uid: XRTK.Lumin.Controllers.LuminControllerDataProvider.#ctor*
+  name: LuminControllerDataProvider
+  href: api/XRTK.Lumin.Controllers.LuminControllerDataProvider.html#XRTK_Lumin_Controllers_LuminControllerDataProvider__ctor_
+  commentId: Overload:XRTK.Lumin.Controllers.LuminControllerDataProvider.#ctor
+  isSpec: "True"
+  fullName: XRTK.Lumin.Controllers.LuminControllerDataProvider.LuminControllerDataProvider
+  nameWithType: LuminControllerDataProvider.LuminControllerDataProvider
+- uid: XRTK.Lumin.Inspectors
+  name: XRTK.Lumin.Inspectors
+  href: api/XRTK.Lumin.Inspectors.html
+  commentId: N:XRTK.Lumin.Inspectors
+  fullName: XRTK.Lumin.Inspectors
+  nameWithType: XRTK.Lumin.Inspectors
+- uid: XRTK.Lumin.Inspectors.LuminMotionControllerMappingProfileInspector
+  name: LuminMotionControllerMappingProfileInspector
+  href: api/XRTK.Lumin.Inspectors.LuminMotionControllerMappingProfileInspector.html
+  commentId: T:XRTK.Lumin.Inspectors.LuminMotionControllerMappingProfileInspector
+  fullName: XRTK.Lumin.Inspectors.LuminMotionControllerMappingProfileInspector
+  nameWithType: LuminMotionControllerMappingProfileInspector
+- uid: XRTK.Lumin.Profiles
+  name: XRTK.Lumin.Profiles
+  href: api/XRTK.Lumin.Profiles.html
+  commentId: N:XRTK.Lumin.Profiles
+  fullName: XRTK.Lumin.Profiles
+  nameWithType: XRTK.Lumin.Profiles
+- uid: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile
+  name: LuminMotionControllerMappingProfile
+  href: api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html
+  commentId: T:XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile
+  fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile
+  nameWithType: LuminMotionControllerMappingProfile
+- uid: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.Awake
+  name: Awake()
+  href: api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html#XRTK_Lumin_Profiles_LuminMotionControllerMappingProfile_Awake
+  commentId: M:XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.Awake
+  fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.Awake()
+  nameWithType: LuminMotionControllerMappingProfile.Awake()
+- uid: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.Awake*
+  name: Awake
+  href: api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html#XRTK_Lumin_Profiles_LuminMotionControllerMappingProfile_Awake_
+  commentId: Overload:XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.Awake
+  isSpec: "True"
+  fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.Awake
+  nameWithType: LuminMotionControllerMappingProfile.Awake
+- uid: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.ControllerType
+  name: ControllerType
+  href: api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html#XRTK_Lumin_Profiles_LuminMotionControllerMappingProfile_ControllerType
+  commentId: P:XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.ControllerType
+  fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.ControllerType
+  nameWithType: LuminMotionControllerMappingProfile.ControllerType
+- uid: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.ControllerType*
+  name: ControllerType
+  href: api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html#XRTK_Lumin_Profiles_LuminMotionControllerMappingProfile_ControllerType_
+  commentId: Overload:XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.ControllerType
+  isSpec: "True"
+  fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.ControllerType
+  nameWithType: LuminMotionControllerMappingProfile.ControllerType
+- uid: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.TexturePath
+  name: TexturePath
+  href: api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html#XRTK_Lumin_Profiles_LuminMotionControllerMappingProfile_TexturePath
+  commentId: P:XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.TexturePath
+  fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.TexturePath
+  nameWithType: LuminMotionControllerMappingProfile.TexturePath
+- uid: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.TexturePath*
+  name: TexturePath
+  href: api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html#XRTK_Lumin_Profiles_LuminMotionControllerMappingProfile_TexturePath_
+  commentId: Overload:XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.TexturePath
+  isSpec: "True"
+  fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.TexturePath
+  nameWithType: LuminMotionControllerMappingProfile.TexturePath
 - uid: XRTK.PackageManager
   name: XRTK.PackageManager
   href: api/XRTK.PackageManager.html
@@ -20910,6 +21252,19 @@ references:
   commentId: T:XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile
   fullName: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile
   nameWithType: BaseMixedRealitySpatialMeshObserverProfile
+- uid: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents
+  name: AdditionalComponents
+  href: api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.html#XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialMeshObserverProfile_AdditionalComponents
+  commentId: P:XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents
+  fullName: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents
+  nameWithType: BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents
+- uid: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents*
+  name: AdditionalComponents
+  href: api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.html#XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialMeshObserverProfile_AdditionalComponents_
+  commentId: Overload:XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents
+  isSpec: "True"
+  fullName: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents
+  nameWithType: BaseMixedRealitySpatialMeshObserverProfile.AdditionalComponents
 - uid: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshDisplayOption
   name: MeshDisplayOption
   href: api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.html#XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialMeshObserverProfile_MeshDisplayOption
@@ -20936,6 +21291,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshLevelOfDetail
   nameWithType: BaseMixedRealitySpatialMeshObserverProfile.MeshLevelOfDetail
+- uid: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab
+  name: MeshObjectPrefab
+  href: api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.html#XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialMeshObserverProfile_MeshObjectPrefab
+  commentId: P:XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab
+  fullName: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab
+  nameWithType: BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab
+- uid: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab*
+  name: MeshObjectPrefab
+  href: api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.html#XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialMeshObserverProfile_MeshObjectPrefab_
+  commentId: Overload:XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab
+  isSpec: "True"
+  fullName: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab
+  nameWithType: BaseMixedRealitySpatialMeshObserverProfile.MeshObjectPrefab
 - uid: XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.MeshOcclusionMaterial
   name: MeshOcclusionMaterial
   href: api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.html#XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialMeshObserverProfile_MeshOcclusionMaterial
@@ -29369,6 +29737,18 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.UX.Utilities.InteractableHighlight.TargetRenderers
   nameWithType: InteractableHighlight.TargetRenderers
+- uid: XRTK.Seed
+  name: XRTK.Seed
+  href: api/XRTK.Seed.html
+  commentId: N:XRTK.Seed
+  fullName: XRTK.Seed
+  nameWithType: XRTK.Seed
+- uid: XRTK.Seed.MixedRealityPackageSeed
+  name: MixedRealityPackageSeed
+  href: api/XRTK.Seed.MixedRealityPackageSeed.html
+  commentId: T:XRTK.Seed.MixedRealityPackageSeed
+  fullName: XRTK.Seed.MixedRealityPackageSeed
+  nameWithType: MixedRealityPackageSeed
 - uid: XRTK.Services
   name: XRTK.Services
   href: api/XRTK.Services.html
@@ -33940,6 +34320,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_FloatNoChangeAndUpdated
   nameWithType: TestFixture_02_InteractionDefinitionTests.Test_03_03_FloatNoChangeAndUpdated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_01_Vector2_One
+  name: Test_04_01_01_Vector2_One()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_01_Vector2_One
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_01_Vector2_One
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_01_Vector2_One()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_01_Vector2_One()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_01_Vector2_One*
+  name: Test_04_01_01_Vector2_One
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_01_Vector2_One_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_01_Vector2_One
+  isSpec: "True"
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_01_Vector2_One
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_01_Vector2_One
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
+  name: Test_04_01_02_Checks()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_02_Checks
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks*
+  name: Test_04_01_02_Checks
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_02_Checks_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
+  isSpec: "True"
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
 - uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_InitializedVector2
   name: Test_04_01_InitializedVector2()
   href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_InitializedVector2
@@ -33953,19 +34359,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_InitializedVector2
   nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_InitializedVector2
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_Vector2ChangedAndUpdated
-  name: Test_04_02_Vector2ChangedAndUpdated()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_02_Vector2ChangedAndUpdated
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_Vector2ChangedAndUpdated
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_Vector2ChangedAndUpdated()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_02_Vector2ChangedAndUpdated()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_Vector2ChangedAndUpdated*
-  name: Test_04_02_Vector2ChangedAndUpdated
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_02_Vector2ChangedAndUpdated_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_Vector2ChangedAndUpdated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated
+  name: Test_04_02_01_Vector2ChangedAndUpdated()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_02_01_Vector2ChangedAndUpdated
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated*
+  name: Test_04_02_01_Vector2ChangedAndUpdated
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_02_01_Vector2ChangedAndUpdated_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_Vector2ChangedAndUpdated
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_02_Vector2ChangedAndUpdated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted
+  name: Test_04_02_02_Vector2ChangedAndUpdated_Inverted()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_02_02_Vector2ChangedAndUpdated_Inverted
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted*
+  name: Test_04_02_02_Vector2ChangedAndUpdated_Inverted
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_02_02_Vector2ChangedAndUpdated_Inverted_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted
+  isSpec: "True"
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted
 - uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2NoChangeAndUpdated
   name: Test_04_03_Vector2NoChangeAndUpdated()
   href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_03_Vector2NoChangeAndUpdated
@@ -38103,6 +38522,109 @@ references:
   commentId: N:XRTK.Utilities.Lines
   fullName: XRTK.Utilities.Lines
   nameWithType: XRTK.Utilities.Lines
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider
+  name: BezierLineDataProvider
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html
+  commentId: T:XRTK.Utilities.Lines.BezierLineDataProvider
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider
+  nameWithType: BezierLineDataProvider
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.GetPointInternal(System.Int32)
+  name: GetPointInternal(Int32)
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_GetPointInternal_System_Int32_
+  commentId: M:XRTK.Utilities.Lines.BezierLineDataProvider.GetPointInternal(System.Int32)
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.GetPointInternal(System.Int32)
+  nameWithType: BezierLineDataProvider.GetPointInternal(Int32)
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.GetPointInternal(System.Single)
+  name: GetPointInternal(Single)
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_GetPointInternal_System_Single_
+  commentId: M:XRTK.Utilities.Lines.BezierLineDataProvider.GetPointInternal(System.Single)
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.GetPointInternal(System.Single)
+  nameWithType: BezierLineDataProvider.GetPointInternal(Single)
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.GetPointInternal*
+  name: GetPointInternal
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_GetPointInternal_
+  commentId: Overload:XRTK.Utilities.Lines.BezierLineDataProvider.GetPointInternal
+  isSpec: "True"
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.GetPointInternal
+  nameWithType: BezierLineDataProvider.GetPointInternal
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.GetUnClampedWorldLengthInternal
+  name: GetUnClampedWorldLengthInternal()
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_GetUnClampedWorldLengthInternal
+  commentId: M:XRTK.Utilities.Lines.BezierLineDataProvider.GetUnClampedWorldLengthInternal
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.GetUnClampedWorldLengthInternal()
+  nameWithType: BezierLineDataProvider.GetUnClampedWorldLengthInternal()
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.GetUnClampedWorldLengthInternal*
+  name: GetUnClampedWorldLengthInternal
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_GetUnClampedWorldLengthInternal_
+  commentId: Overload:XRTK.Utilities.Lines.BezierLineDataProvider.GetUnClampedWorldLengthInternal
+  isSpec: "True"
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.GetUnClampedWorldLengthInternal
+  nameWithType: BezierLineDataProvider.GetUnClampedWorldLengthInternal
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.GetUpVectorInternal(System.Single)
+  name: GetUpVectorInternal(Single)
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_GetUpVectorInternal_System_Single_
+  commentId: M:XRTK.Utilities.Lines.BezierLineDataProvider.GetUpVectorInternal(System.Single)
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.GetUpVectorInternal(System.Single)
+  nameWithType: BezierLineDataProvider.GetUpVectorInternal(Single)
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.GetUpVectorInternal*
+  name: GetUpVectorInternal
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_GetUpVectorInternal_
+  commentId: Overload:XRTK.Utilities.Lines.BezierLineDataProvider.GetUpVectorInternal
+  isSpec: "True"
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.GetUpVectorInternal
+  nameWithType: BezierLineDataProvider.GetUpVectorInternal
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.OnValidate
+  name: OnValidate()
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_OnValidate
+  commentId: M:XRTK.Utilities.Lines.BezierLineDataProvider.OnValidate
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.OnValidate()
+  nameWithType: BezierLineDataProvider.OnValidate()
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.OnValidate*
+  name: OnValidate
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_OnValidate_
+  commentId: Overload:XRTK.Utilities.Lines.BezierLineDataProvider.OnValidate
+  isSpec: "True"
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.OnValidate
+  nameWithType: BezierLineDataProvider.OnValidate
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.PointCount
+  name: PointCount
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_PointCount
+  commentId: P:XRTK.Utilities.Lines.BezierLineDataProvider.PointCount
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.PointCount
+  nameWithType: BezierLineDataProvider.PointCount
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.PointCount*
+  name: PointCount
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_PointCount_
+  commentId: Overload:XRTK.Utilities.Lines.BezierLineDataProvider.PointCount
+  isSpec: "True"
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.PointCount
+  nameWithType: BezierLineDataProvider.PointCount
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.SetPointInternal(System.Int32,UnityEngine.Vector3)
+  name: SetPointInternal(Int32, Vector3)
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_SetPointInternal_System_Int32_UnityEngine_Vector3_
+  commentId: M:XRTK.Utilities.Lines.BezierLineDataProvider.SetPointInternal(System.Int32,UnityEngine.Vector3)
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.SetPointInternal(System.Int32, UnityEngine.Vector3)
+  nameWithType: BezierLineDataProvider.SetPointInternal(Int32, Vector3)
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.SetPointInternal*
+  name: SetPointInternal
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_SetPointInternal_
+  commentId: Overload:XRTK.Utilities.Lines.BezierLineDataProvider.SetPointInternal
+  isSpec: "True"
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.SetPointInternal
+  nameWithType: BezierLineDataProvider.SetPointInternal
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.Update
+  name: Update()
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_Update
+  commentId: M:XRTK.Utilities.Lines.BezierLineDataProvider.Update
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.Update()
+  nameWithType: BezierLineDataProvider.Update()
+- uid: XRTK.Utilities.Lines.BezierLineDataProvider.Update*
+  name: Update
+  href: api/XRTK.Utilities.Lines.BezierLineDataProvider.html#XRTK_Utilities_Lines_BezierLineDataProvider_Update_
+  commentId: Overload:XRTK.Utilities.Lines.BezierLineDataProvider.Update
+  isSpec: "True"
+  fullName: XRTK.Utilities.Lines.BezierLineDataProvider.Update
+  nameWithType: BezierLineDataProvider.Update
 - uid: XRTK.Utilities.Lines.DataProviders
   name: XRTK.Utilities.Lines.DataProviders
   href: api/XRTK.Utilities.Lines.DataProviders.html
@@ -38549,6 +39071,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UnClampedWorldLength
   nameWithType: BaseMixedRealityLineDataProvider.UnClampedWorldLength
+- uid: XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UnclampedWorldLengthSearchSteps
+  name: UnclampedWorldLengthSearchSteps
+  href: api/XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.html#XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_UnclampedWorldLengthSearchSteps
+  commentId: F:XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UnclampedWorldLengthSearchSteps
+  fullName: XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UnclampedWorldLengthSearchSteps
+  nameWithType: BaseMixedRealityLineDataProvider.UnclampedWorldLengthSearchSteps
 - uid: XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.UniformDistortionStrength
   name: UniformDistortionStrength
   href: api/XRTK.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProvider.html#XRTK_Utilities_Lines_DataProviders_BaseMixedRealityLineDataProvider_UniformDistortionStrength
@@ -41898,6 +42426,135 @@ references:
   isSpec: "True"
   fullName: XRTK.Utilities.PlatformUtility.IsPlatformSupported
   nameWithType: PlatformUtility.IsPlatformSupported
+- uid: XRTK.Utilities.ProximityLight
+  name: ProximityLight
+  href: api/XRTK.Utilities.ProximityLight.html
+  commentId: T:XRTK.Utilities.ProximityLight
+  fullName: XRTK.Utilities.ProximityLight
+  nameWithType: ProximityLight
+- uid: XRTK.Utilities.ProximityLight.LightSettings
+  name: ProximityLight.LightSettings
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html
+  commentId: T:XRTK.Utilities.ProximityLight.LightSettings
+  fullName: XRTK.Utilities.ProximityLight.LightSettings
+  nameWithType: ProximityLight.LightSettings
+- uid: XRTK.Utilities.ProximityLight.LightSettings.CenterColor
+  name: CenterColor
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html#XRTK_Utilities_ProximityLight_LightSettings_CenterColor
+  commentId: P:XRTK.Utilities.ProximityLight.LightSettings.CenterColor
+  fullName: XRTK.Utilities.ProximityLight.LightSettings.CenterColor
+  nameWithType: ProximityLight.LightSettings.CenterColor
+- uid: XRTK.Utilities.ProximityLight.LightSettings.CenterColor*
+  name: CenterColor
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html#XRTK_Utilities_ProximityLight_LightSettings_CenterColor_
+  commentId: Overload:XRTK.Utilities.ProximityLight.LightSettings.CenterColor
+  isSpec: "True"
+  fullName: XRTK.Utilities.ProximityLight.LightSettings.CenterColor
+  nameWithType: ProximityLight.LightSettings.CenterColor
+- uid: XRTK.Utilities.ProximityLight.LightSettings.FarRadius
+  name: FarRadius
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html#XRTK_Utilities_ProximityLight_LightSettings_FarRadius
+  commentId: P:XRTK.Utilities.ProximityLight.LightSettings.FarRadius
+  fullName: XRTK.Utilities.ProximityLight.LightSettings.FarRadius
+  nameWithType: ProximityLight.LightSettings.FarRadius
+- uid: XRTK.Utilities.ProximityLight.LightSettings.FarRadius*
+  name: FarRadius
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html#XRTK_Utilities_ProximityLight_LightSettings_FarRadius_
+  commentId: Overload:XRTK.Utilities.ProximityLight.LightSettings.FarRadius
+  isSpec: "True"
+  fullName: XRTK.Utilities.ProximityLight.LightSettings.FarRadius
+  nameWithType: ProximityLight.LightSettings.FarRadius
+- uid: XRTK.Utilities.ProximityLight.LightSettings.MiddleColor
+  name: MiddleColor
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html#XRTK_Utilities_ProximityLight_LightSettings_MiddleColor
+  commentId: P:XRTK.Utilities.ProximityLight.LightSettings.MiddleColor
+  fullName: XRTK.Utilities.ProximityLight.LightSettings.MiddleColor
+  nameWithType: ProximityLight.LightSettings.MiddleColor
+- uid: XRTK.Utilities.ProximityLight.LightSettings.MiddleColor*
+  name: MiddleColor
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html#XRTK_Utilities_ProximityLight_LightSettings_MiddleColor_
+  commentId: Overload:XRTK.Utilities.ProximityLight.LightSettings.MiddleColor
+  isSpec: "True"
+  fullName: XRTK.Utilities.ProximityLight.LightSettings.MiddleColor
+  nameWithType: ProximityLight.LightSettings.MiddleColor
+- uid: XRTK.Utilities.ProximityLight.LightSettings.MinNearSizePercentage
+  name: MinNearSizePercentage
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html#XRTK_Utilities_ProximityLight_LightSettings_MinNearSizePercentage
+  commentId: P:XRTK.Utilities.ProximityLight.LightSettings.MinNearSizePercentage
+  fullName: XRTK.Utilities.ProximityLight.LightSettings.MinNearSizePercentage
+  nameWithType: ProximityLight.LightSettings.MinNearSizePercentage
+- uid: XRTK.Utilities.ProximityLight.LightSettings.MinNearSizePercentage*
+  name: MinNearSizePercentage
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html#XRTK_Utilities_ProximityLight_LightSettings_MinNearSizePercentage_
+  commentId: Overload:XRTK.Utilities.ProximityLight.LightSettings.MinNearSizePercentage
+  isSpec: "True"
+  fullName: XRTK.Utilities.ProximityLight.LightSettings.MinNearSizePercentage
+  nameWithType: ProximityLight.LightSettings.MinNearSizePercentage
+- uid: XRTK.Utilities.ProximityLight.LightSettings.NearDistance
+  name: NearDistance
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html#XRTK_Utilities_ProximityLight_LightSettings_NearDistance
+  commentId: P:XRTK.Utilities.ProximityLight.LightSettings.NearDistance
+  fullName: XRTK.Utilities.ProximityLight.LightSettings.NearDistance
+  nameWithType: ProximityLight.LightSettings.NearDistance
+- uid: XRTK.Utilities.ProximityLight.LightSettings.NearDistance*
+  name: NearDistance
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html#XRTK_Utilities_ProximityLight_LightSettings_NearDistance_
+  commentId: Overload:XRTK.Utilities.ProximityLight.LightSettings.NearDistance
+  isSpec: "True"
+  fullName: XRTK.Utilities.ProximityLight.LightSettings.NearDistance
+  nameWithType: ProximityLight.LightSettings.NearDistance
+- uid: XRTK.Utilities.ProximityLight.LightSettings.NearRadius
+  name: NearRadius
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html#XRTK_Utilities_ProximityLight_LightSettings_NearRadius
+  commentId: P:XRTK.Utilities.ProximityLight.LightSettings.NearRadius
+  fullName: XRTK.Utilities.ProximityLight.LightSettings.NearRadius
+  nameWithType: ProximityLight.LightSettings.NearRadius
+- uid: XRTK.Utilities.ProximityLight.LightSettings.NearRadius*
+  name: NearRadius
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html#XRTK_Utilities_ProximityLight_LightSettings_NearRadius_
+  commentId: Overload:XRTK.Utilities.ProximityLight.LightSettings.NearRadius
+  isSpec: "True"
+  fullName: XRTK.Utilities.ProximityLight.LightSettings.NearRadius
+  nameWithType: ProximityLight.LightSettings.NearRadius
+- uid: XRTK.Utilities.ProximityLight.LightSettings.OuterColor
+  name: OuterColor
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html#XRTK_Utilities_ProximityLight_LightSettings_OuterColor
+  commentId: P:XRTK.Utilities.ProximityLight.LightSettings.OuterColor
+  fullName: XRTK.Utilities.ProximityLight.LightSettings.OuterColor
+  nameWithType: ProximityLight.LightSettings.OuterColor
+- uid: XRTK.Utilities.ProximityLight.LightSettings.OuterColor*
+  name: OuterColor
+  href: api/XRTK.Utilities.ProximityLight.LightSettings.html#XRTK_Utilities_ProximityLight_LightSettings_OuterColor_
+  commentId: Overload:XRTK.Utilities.ProximityLight.LightSettings.OuterColor
+  isSpec: "True"
+  fullName: XRTK.Utilities.ProximityLight.LightSettings.OuterColor
+  nameWithType: ProximityLight.LightSettings.OuterColor
+- uid: XRTK.Utilities.ProximityLight.Pulse(System.Single,System.Single,System.Single)
+  name: Pulse(Single, Single, Single)
+  href: api/XRTK.Utilities.ProximityLight.html#XRTK_Utilities_ProximityLight_Pulse_System_Single_System_Single_System_Single_
+  commentId: M:XRTK.Utilities.ProximityLight.Pulse(System.Single,System.Single,System.Single)
+  fullName: XRTK.Utilities.ProximityLight.Pulse(System.Single, System.Single, System.Single)
+  nameWithType: ProximityLight.Pulse(Single, Single, Single)
+- uid: XRTK.Utilities.ProximityLight.Pulse*
+  name: Pulse
+  href: api/XRTK.Utilities.ProximityLight.html#XRTK_Utilities_ProximityLight_Pulse_
+  commentId: Overload:XRTK.Utilities.ProximityLight.Pulse
+  isSpec: "True"
+  fullName: XRTK.Utilities.ProximityLight.Pulse
+  nameWithType: ProximityLight.Pulse
+- uid: XRTK.Utilities.ProximityLight.Settings
+  name: Settings
+  href: api/XRTK.Utilities.ProximityLight.html#XRTK_Utilities_ProximityLight_Settings
+  commentId: P:XRTK.Utilities.ProximityLight.Settings
+  fullName: XRTK.Utilities.ProximityLight.Settings
+  nameWithType: ProximityLight.Settings
+- uid: XRTK.Utilities.ProximityLight.Settings*
+  name: Settings
+  href: api/XRTK.Utilities.ProximityLight.html#XRTK_Utilities_ProximityLight_Settings_
+  commentId: Overload:XRTK.Utilities.ProximityLight.Settings
+  isSpec: "True"
+  fullName: XRTK.Utilities.ProximityLight.Settings
+  nameWithType: ProximityLight.Settings
 - uid: XRTK.Utilities.Rendering
   name: XRTK.Utilities.Rendering
   href: api/XRTK.Utilities.Rendering.html

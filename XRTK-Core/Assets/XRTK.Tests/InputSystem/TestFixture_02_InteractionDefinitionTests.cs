@@ -1,11 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Diagnostics;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using NUnit.Framework;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace XRTK.Tests.InputSystem
 {
@@ -434,18 +436,144 @@ namespace XRTK.Tests.InputSystem
             Assert.IsFalse(interaction.Updated);
         }
 
+        [Test]
+        public void Test_04_01_01_Vector2_One()
+        {
+            var iterations = 10000000;
+            var watch = Stopwatch.StartNew();
+
+            for (int i = 0; i < iterations; i++)
+            {
+                var test = Vector2.one;
+            }
+
+            watch.Stop();
+            Debug.Log($"Test Vector2.one execution Time: {watch.Elapsed.TotalMilliseconds} ms");
+
+            watch = Stopwatch.StartNew();
+            var vector2One = new Vector2(1f, 1f);
+
+            for (int i = 0; i < iterations; i++)
+            {
+                var test = vector2One;
+            }
+
+            watch.Stop();
+            Debug.Log($"Test cached Vector2 execution Time: {watch.Elapsed.TotalMilliseconds} ms");
+
+            watch = Stopwatch.StartNew();
+
+            for (int i = 0; i < iterations; i++)
+            {
+                var test = new Vector2(1f, 1f);
+            }
+
+            watch.Stop();
+            Debug.Log($"Test new Vector2 execution Time: {watch.Elapsed.TotalMilliseconds} ms");
+        }
+
+        [Test]
+        public void Test_04_01_02_Checks()
+        {
+            var iterations = 10000000;
+            var value = new Vector2(1, 1);
+            var vector2Data = new Vector2(2, 2);
+            var changed = false;
+            var updated = false;
+            var invertAxis = true;
+
+            var cachedVector2 = new Vector2(1f, 1f);
+
+            var watch = Stopwatch.StartNew();
+
+            for (int i = 0; i < iterations; i++)
+            {
+                var invertMultiplier = Vector2.one;
+
+                if (invertAxis)
+                {
+                    invertMultiplier.x = -1f;
+                }
+
+                if (!invertAxis)
+                {
+                    invertMultiplier.y = -1f;
+                }
+
+                invertAxis = !invertAxis;
+                var newValue = value * invertMultiplier;
+                changed = vector2Data != newValue;
+                updated = changed || !newValue.Equals(Vector2.zero);
+                // use the internal reading for changed so we don't reset it.
+                vector2Data = newValue;
+            }
+
+            watch.Stop();
+            Debug.Log($"Test Vector2.one execution Time: {watch.Elapsed.TotalMilliseconds} ms");
+
+            watch = Stopwatch.StartNew();
+
+            for (int i = 0; i < iterations; i++)
+            {
+                var invertMultiplier = cachedVector2;
+
+                if (invertAxis)
+                {
+                    invertMultiplier.x = -1f;
+                }
+                else
+                {
+                    invertMultiplier.x = 1f;
+                }
+
+                if (!invertAxis)
+                {
+                    invertMultiplier.y = -1f;
+                }
+                else
+                {
+                    invertMultiplier.y = 1f;
+                }
+
+                invertAxis = !invertAxis;
+                var newValue = value * invertMultiplier;
+                changed = vector2Data != newValue;
+                updated = changed || !newValue.Equals(Vector2.zero);
+                vector2Data = newValue;
+            }
+
+            watch.Stop();
+            Debug.Log($"Test Vector2 execution Time: {watch.Elapsed.TotalMilliseconds} ms");
+
+            watch = Stopwatch.StartNew();
+
+            for (int i = 0; i < iterations; i++)
+            {
+                var newValue = value * new Vector2(invertAxis ? -1f : 1f, !invertAxis ? -1f : 1f);
+                invertAxis = !invertAxis;
+                changed = vector2Data != newValue;
+                updated = changed || !newValue.Equals(Vector2.zero);
+                vector2Data = newValue;
+            }
+
+            watch.Stop();
+            Debug.Log($"Test new Vector2 execution Time: {watch.Elapsed.TotalMilliseconds} ms");
+        }
+
         /// <summary>
         /// We test by setting the interaction data to two different values.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// </summary>
         [Test]
-        public void Test_04_02_Vector2ChangedAndUpdated()
+        public void Test_04_02_01_Vector2ChangedAndUpdated()
         {
             var interaction = InitializeVector2InteractionMapping();
             var initialValue = interaction.Vector2Data;
-            var testValue1 = Vector2.one;
-            var testValue2 = Vector2.one * 0.5f;
+            var testValue1 = Vector2.up;
+            var testValue2 = Vector2.down;
+            var testValue3 = new Vector2(0.25f, 1f);
+            var testValue4 = new Vector2(0.75f, 1f);
 
             interaction.Vector2Data = testValue1;
 
@@ -459,7 +587,7 @@ namespace XRTK.Tests.InputSystem
             Assert.True(setValue1 == testValue1);
             // Make sure the second time we query it's false
             Assert.IsFalse(interaction.Changed);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
 
             interaction.Vector2Data = testValue2;
 
@@ -473,9 +601,9 @@ namespace XRTK.Tests.InputSystem
             Assert.True(setValue2 == testValue2);
             // Make sure the second time we query it's false
             Assert.IsFalse(interaction.Changed);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
 
-            interaction.Vector2Data = initialValue;
+            interaction.Vector2Data = testValue3;
 
             // Make sure the first query after value assignment is true
             Assert.IsTrue(interaction.Changed);
@@ -484,10 +612,124 @@ namespace XRTK.Tests.InputSystem
             var setValue3 = interaction.Vector2Data;
 
             // Check the values
-            Assert.True(setValue3 == initialValue);
+            Assert.True(setValue3 == testValue3);
             // Make sure the second time we query it's false
             Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
+
+            interaction.Vector2Data = testValue4;
+
+            // Make sure the first query after value assignment is true
+            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.Updated);
+
+            var setValue4 = interaction.Vector2Data;
+
+            // Check the values
+            Assert.True(setValue4 == testValue4);
+            // Make sure the second time we query it's false
             Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
+
+            interaction.Vector2Data = initialValue;
+
+            // Make sure the first query after value assignment is true
+            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.Updated);
+
+            var setValue5 = interaction.Vector2Data;
+
+            // Check the values
+            Assert.True(setValue5 == initialValue);
+            // Make sure the second time we query it's false
+            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
+        }
+
+        /// <summary>
+        /// We test by setting the inverted interaction data to two different values.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == true, then false after each subsequent check before assigning a new value.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
+        /// </summary>
+        [Test]
+        public void Test_04_02_02_Vector2ChangedAndUpdated_Inverted()
+        {
+            var interaction = new MixedRealityInteractionMapping(1, string.Empty, AxisType.DualAxis, DeviceInputType.None, MixedRealityInputAction.None, KeyCode.None, string.Empty, string.Empty, true, true);
+            var initialValue = interaction.Vector2Data;
+            var testValue1 = Vector2.up;
+            var testValue2 = Vector2.down;
+            var testValue3 = new Vector2(0.25f, 1f);
+            var testValue4 = new Vector2(0.75f, 1f);
+
+            interaction.Vector2Data = testValue1;
+
+            // Make sure the first query after value assignment is true
+            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.Updated);
+
+            var setValue1 = interaction.Vector2Data;
+
+            // Check the values
+            Assert.True(setValue1 == testValue1 * -1f);
+            // Make sure the second time we query it's false
+            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
+
+            interaction.Vector2Data = testValue2;
+
+            // Make sure the first query after value assignment is true
+            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.Updated);
+
+            var setValue2 = interaction.Vector2Data;
+
+            // Check the values
+            Assert.True(setValue2 == testValue2 * -1f);
+            // Make sure the second time we query it's false
+            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
+
+            interaction.Vector2Data = testValue3;
+
+            // Make sure the first query after value assignment is true
+            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.Updated);
+
+            var setValue3 = interaction.Vector2Data;
+
+            // Check the values
+            Assert.True(setValue3 == testValue3 * -1f);
+            // Make sure the second time we query it's false
+            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
+
+            interaction.Vector2Data = testValue4;
+
+            // Make sure the first query after value assignment is true
+            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.Updated);
+
+            var setValue4 = interaction.Vector2Data;
+
+            // Check the values
+            Assert.True(setValue4 == testValue4 * -1f);
+            // Make sure the second time we query it's false
+            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
+
+            interaction.Vector2Data = initialValue;
+
+            // Make sure the first query after value assignment is true
+            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.Updated);
+
+            var setValue5 = interaction.Vector2Data;
+
+            // Check the values
+            Assert.True(setValue5 == initialValue);
+            // Make sure the second time we query it's false
+            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.Updated);
         }
 
         /// <summary>
@@ -1178,7 +1420,7 @@ namespace XRTK.Tests.InputSystem
             var initialValue = interactions[0];
 
             Assert.IsNotNull(initialValue);
-            MixedRealityPose initialSixDofValue = initialValue.PoseData;
+            var initialSixDofValue = initialValue.PoseData;
 
             Assert.IsTrue(initialSixDofValue.Position == Vector3.zero);
             Assert.IsTrue(initialSixDofValue == MixedRealityPose.ZeroIdentity);

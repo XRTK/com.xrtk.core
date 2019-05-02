@@ -289,7 +289,7 @@ namespace XRTK.Inspectors
             }
             catch (Exception e)
             {
-                Debug.Log($"{e.Message}\n{e.StackTrace}");
+                Debug.LogError($"{e.Message}\n{e.StackTrace}");
             }
         }
 

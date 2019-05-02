@@ -5,11 +5,13 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using XRTK.Inspectors.Data;
 using XRTK.Inspectors.Utilities;
 using XRTK.Services;
@@ -24,7 +26,7 @@ namespace XRTK.Inspectors
         /// <summary>
         /// Used to enable editing the input axis label positions on controllers
         /// </summary>
-        private static readonly bool EnableWysiwyg = false;
+        private static readonly bool EnableWysiwyg = true;
 
         private static readonly GUIContent InteractionAddButtonContent = new GUIContent("+ Add a New Interaction Mapping");
         private static readonly GUIContent InteractionMinusButtonContent = new GUIContent("-", "Remove Interaction Mapping");
@@ -83,8 +85,6 @@ namespace XRTK.Inspectors
 
         private bool isLocked = false;
         private SerializedProperty currentInteractionList;
-
-        private ControllerPopupWindow thisWindow;
 
         private Handedness currentHandedness;
         private SupportedControllerType currentControllerType;
@@ -199,7 +199,6 @@ namespace XRTK.Inspectors
             window = (ControllerPopupWindow)GetWindow(typeof(ControllerPopupWindow));
             window.Close();
             window = (ControllerPopupWindow)CreateInstance(typeof(ControllerPopupWindow));
-            window.thisWindow = window;
             var handednessTitleText = handedness != Handedness.None ? $"{handedness} Hand " : string.Empty;
             window.titleContent = new GUIContent($"{controllerType} {handednessTitleText}Input Action Assignment");
             window.currentControllerType = controllerType;
@@ -226,7 +225,7 @@ namespace XRTK.Inspectors
                     }
                 };
 
-                AssetDatabase.CreateAsset(new TextAsset(string.Empty), EditorWindowOptionsPath);
+                File.WriteAllText(Path.GetFullPath(EditorWindowOptionsPath), JsonUtility.ToJson(empty, true));
                 AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
             }
             else
@@ -237,9 +236,16 @@ namespace XRTK.Inspectors
                 {
                     window.currentControllerOption = controllerInputActionOptions.Controllers.FirstOrDefault(option => option.Controller == controllerType && option.Handedness == handedness);
 
-                    if (window.currentControllerOption != null && window.currentControllerOption.IsLabelFlipped == null)
+                    if (window.currentControllerOption != null &&
+                        window.currentControllerOption.IsLabelFlipped == null)
                     {
                         window.currentControllerOption.IsLabelFlipped = new bool[interactionsList.arraySize];
+                    }
+
+                    if (window.currentControllerOption != null &&
+                        window.currentControllerOption.InputLabelPositions == null)
+                    {
+                        window.currentControllerOption.InputLabelPositions = new Vector2[interactionsList.arraySize];
                     }
                 }
             }
@@ -283,22 +289,47 @@ namespace XRTK.Inspectors
             {
                 RenderInteractionList(currentInteractionList, IsCustomController);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                thisWindow.Close();
+                Debug.Log($"{e.Message}\n{e.StackTrace}");
             }
         }
 
         private void RenderInteractionList(SerializedProperty interactionList, bool useCustomInteractionMapping)
         {
             GUI.enabled = !isLocked;
-            if (interactionList == null) { throw new Exception(); }
+            if (interactionList == null) { throw new Exception("No interaction list found!"); }
+
 
             bool noInteractions = interactionList.arraySize == 0;
 
-            if (currentControllerOption != null && (currentControllerOption.IsLabelFlipped == null || currentControllerOption.IsLabelFlipped.Length != interactionList.arraySize))
+            if (currentControllerOption != null)
             {
-                currentControllerOption.IsLabelFlipped = new bool[interactionList.arraySize];
+                if (currentControllerOption.IsLabelFlipped == null ||
+                    currentControllerOption.IsLabelFlipped.Length != interactionList.arraySize)
+                {
+                    var newArray = new bool[interactionList.arraySize];
+
+                    for (int i = 0; i < currentControllerOption.IsLabelFlipped.Length; i++)
+                    {
+                        newArray[i] = currentControllerOption.IsLabelFlipped[i];
+                    }
+
+                    currentControllerOption.IsLabelFlipped = newArray;
+                }
+
+                if (currentControllerOption.InputLabelPositions == null ||
+                    currentControllerOption.InputLabelPositions.Length != interactionList.arraySize)
+                {
+                    var newArray = new Vector2[interactionList.arraySize];
+
+                    for (int i = 0; i < currentControllerOption.InputLabelPositions.Length; i++)
+                    {
+                        newArray[i] = currentControllerOption.InputLabelPositions[i];
+                    }
+
+                    currentControllerOption.InputLabelPositions = newArray;
+                }
             }
 
             GUILayout.BeginVertical();
@@ -342,8 +373,7 @@ namespace XRTK.Inspectors
                 {
                     if (!editInputActionPositions)
                     {
-                        AssetDatabase.DeleteAsset(EditorWindowOptionsPath);
-                        AssetDatabase.CreateAsset(new TextAsset(JsonUtility.ToJson(controllerInputActionOptions)), EditorWindowOptionsPath);
+                        File.WriteAllText(Path.GetFullPath(EditorWindowOptionsPath), JsonUtility.ToJson(controllerInputActionOptions, true));
                         AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                     }
                     else
@@ -369,7 +399,7 @@ namespace XRTK.Inspectors
                             }
 
                             AssetDatabase.DeleteAsset(EditorWindowOptionsPath);
-                            AssetDatabase.CreateAsset(new TextAsset(JsonUtility.ToJson(controllerInputActionOptions)), EditorWindowOptionsPath);
+                            File.WriteAllText(Path.GetFullPath(EditorWindowOptionsPath), JsonUtility.ToJson(controllerInputActionOptions, true));
                             AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                         }
                     }

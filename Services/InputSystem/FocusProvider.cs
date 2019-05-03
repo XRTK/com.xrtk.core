@@ -853,7 +853,11 @@ namespace XRTK.Services.InputSystem
         private void RaycastGraphics(IMixedRealityPointer pointer, PointerEventData graphicEventData, LayerMask[] prioritizedLayerMasks, PointerHitResult hitResult)
         {
             Debug.Assert(UIRaycastCamera != null, "Missing UIRaycastCamera!");
-            Debug.Assert(UIRaycastCamera.nearClipPlane.Equals(0f), "Near plane must be zero for raycast distances to be correct");
+
+            if (!UIRaycastCamera.nearClipPlane.Equals(0.01f))
+            {
+                UIRaycastCamera.nearClipPlane = 0.01f;
+            }
 
             if (pointer.Rays == null)
             {

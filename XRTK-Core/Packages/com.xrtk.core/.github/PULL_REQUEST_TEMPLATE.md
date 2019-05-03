@@ -1,7 +1,5 @@
 # XRTK - Mixed Reality Toolkit Change Request
 
-![](/docs/Logo.png)
-
 ## Overview
 
 High level overview of this pull request.

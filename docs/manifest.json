@@ -321,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html",
-          "hash": "sdmwIUa552Wl9Uh6Xe3+Pg=="
+          "hash": "BsMjdthzFMm8QYClojN+dw=="
         }
       },
       "is_incremental": false,
@@ -945,7 +945,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Physics.FocusDetails.html",
-          "hash": "99Ce8ERnWuiaG94gm0UanA=="
+          "hash": "TvGodfzn30IFb0a1FwDS7A=="
         }
       },
       "is_incremental": false,
@@ -2061,7 +2061,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.ControllerPopupWindow.html",
-          "hash": "+d5DNrePyrhFbvMAXD8eyg=="
+          "hash": "ibaaaRQV0G89boTuOmkrVQ=="
         }
       },
       "is_incremental": false,
@@ -3369,7 +3369,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.InputSystem.IMixedRealityCursor.html",
-          "hash": "BJLsf5K4lvXNWldEASJ7MQ=="
+          "hash": "jiyQ1EXQrQ1Po5wDZgpDcg=="
         }
       },
       "is_incremental": false,
@@ -3429,7 +3429,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.InputSystem.IMixedRealityMousePointer.html",
-          "hash": "FIxedG4bwNsgVh8IUsYJ4Q=="
+          "hash": "oTbF2Pk9KSKSg4IelXd7yA=="
         }
       },
       "is_incremental": false,
@@ -3441,7 +3441,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.InputSystem.IMixedRealityPointer.html",
-          "hash": "c618XtrtdLKnOjH4WQSe4Q=="
+          "hash": "cotNGQ5g7VoXj0Lv1xNQ4Q=="
         }
       },
       "is_incremental": false,
@@ -3453,7 +3453,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.InputSystem.IMixedRealityTouchPointer.html",
-          "hash": "UCEBNkVMytn0RJxZ/EaNvw=="
+          "hash": "3ankJE+9c0LMhf1G5kIG9g=="
         }
       },
       "is_incremental": false,
@@ -5181,7 +5181,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Collections.GridObjectCollection.html",
-          "hash": "VPJE6cJuf8rlyBsK2W3+2A=="
+          "hash": "/ITOeiRmmS7ppB8fkEbccg=="
         }
       },
       "is_incremental": false,
@@ -5229,7 +5229,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Collections.ScatterObjectCollection.html",
-          "hash": "7xXRRagBOpYpoRWzNFJwbw=="
+          "hash": "ZvtKOIkhfALWkjx3sWH/KA=="
         }
       },
       "is_incremental": false,
@@ -5301,7 +5301,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Cursors.BaseCursor.html",
-          "hash": "xOVKL1iLkgM10kWnEiPSgw=="
+          "hash": "Tf6ggKxAL4XpfE+NiHfPzA=="
         }
       },
       "is_incremental": false,
@@ -5433,7 +5433,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html",
-          "hash": "gRtXyPBuyXKdVoT+3FM8FA=="
+          "hash": "5NtYf9fV7Lfjf+j2SQOD2A=="
         }
       },
       "is_incremental": false,
@@ -5445,7 +5445,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Pointers.LinePointer.html",
-          "hash": "zgT4Y2ZjwEJrXZyFLOrGUg=="
+          "hash": "iBckb77OSai9IgZ0y5lheA=="
         }
       },
       "is_incremental": false,
@@ -5457,7 +5457,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Pointers.MousePointer.html",
-          "hash": "oROv8Pz3KbBDdIdAVV0KbA=="
+          "hash": "eIcfBsf06xlojKDIFK7gnw=="
         }
       },
       "is_incremental": false,
@@ -5469,7 +5469,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Pointers.ParabolicTeleportPointer.html",
-          "hash": "Uq1lJucqcyLEO4v+1bUIwg=="
+          "hash": "Ei5mWFQmOEd+R/oHJfKJDw=="
         }
       },
       "is_incremental": false,
@@ -5481,7 +5481,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Pointers.TeleportPointer.html",
-          "hash": "eHX8G+l0FOivJ/38UyUD4A=="
+          "hash": "pzKtzNINQL5hAaY3sKLj1w=="
         }
       },
       "is_incremental": false,
@@ -5493,7 +5493,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Pointers.TouchPointer.html",
-          "hash": "x0LMoFE9H9+rmmTEwmDI1g=="
+          "hash": "Ydd60q1/oR4na0wJQAWUgg=="
         }
       },
       "is_incremental": false,
@@ -6093,7 +6093,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.InputSystem.FocusProvider.html",
-          "hash": "oXuzDjjowAdmSKSRz4i2dw=="
+          "hash": "WmLwTL34SWlRTk/akmqocA=="
         }
       },
       "is_incremental": false,
@@ -6117,7 +6117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.InputSystem.Pointers.GenericPointer.html",
-          "hash": "RYqBVwiQqbJUxLpspEIYeA=="
+          "hash": "s3GmOAahmxjUYpINXR53pw=="
         }
       },
       "is_incremental": false,
@@ -7833,7 +7833,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Physics.BaseRayStabilizer.html",
-          "hash": "CZIzULUnx5/vdSgpT2TMRA=="
+          "hash": "4JkFPHrHGflLRl2XUFf+qw=="
         }
       },
       "is_incremental": false,
@@ -7925,11 +7925,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Utilities.Physics.GazeStabilizer.yml",
+      "source_relative_path": "../api/XRTK.Utilities.Physics.GenericStabilizer.yml",
       "output": {
         ".html": {
-          "relative_path": "api/XRTK.Utilities.Physics.GazeStabilizer.html",
-          "hash": "3XsHTnoq/4UxlbpKQyGqjg=="
+          "relative_path": "api/XRTK.Utilities.Physics.GenericStabilizer.html",
+          "hash": "sc6OkWL/uZESlqdg+FgOEg=="
         }
       },
       "is_incremental": false,
@@ -8037,7 +8037,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Physics.html",
-          "hash": "y7XIy/CWSOlDXhmkkmwwhg=="
+          "hash": "A2iP+bkCMq4YVm9HRzQlHA=="
         }
       },
       "is_incremental": false,
@@ -8733,7 +8733,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "gsrfFEGvi/wtVCRiVWZ59Q=="
+          "hash": "fp9O78/OtyUYPowCK8JRwg=="
         }
       },
       "is_incremental": false,

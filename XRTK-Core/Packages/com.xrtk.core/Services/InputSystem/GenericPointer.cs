@@ -96,12 +96,16 @@ namespace XRTK.Services.InputSystem.Pointers
         /// <inheritdoc />
         public float SphereCastRadius { get; set; }
 
+        /// <inheritdoc />
         public float PointerOrientation { get; } = 0f;
+
+        /// <inheritdoc />
+        public bool IsTargetPositionLockedOnFocusLock { get; set; }
 
         /// <inheritdoc />
         public virtual void OnPreRaycast()
         {
-            if (TryGetPointingRay(out Ray pointingRay))
+            if (TryGetPointingRay(out var pointingRay))
             {
                 Rays[0].CopyRay(pointingRay, PointerExtent);
             }

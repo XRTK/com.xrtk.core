@@ -116,6 +116,11 @@ namespace XRTK.Interfaces.InputSystem
         float PointerOrientation { get; }
 
         /// <summary>
+        /// Specifies whether the pointer's target position (cursor) is locked to the target object when focus is locked.
+        /// </summary>
+        bool IsTargetPositionLockedOnFocusLock { get; set; }
+
+        /// <summary>
         /// Called before all rays have casted.
         /// </summary>
         void OnPreRaycast();

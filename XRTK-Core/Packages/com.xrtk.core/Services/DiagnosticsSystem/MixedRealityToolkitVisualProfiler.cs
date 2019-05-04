@@ -4,6 +4,8 @@
 using System.Text;
 using UnityEngine;
 using UnityEngine.Profiling;
+using XRTK.EventDatum.Diagnostics;
+using XRTK.Interfaces.Diagnostics;
 
 #if WINDOWS_UWP
 using Windows.System;
@@ -23,7 +25,7 @@ namespace XRTK.Services.DiagnosticsSystem
     /// property), but can be toggled via the enabled/disable voice commands keywords.
     /// 
     /// </summary>
-    public class MixedRealityToolkitVisualProfiler : MonoBehaviour
+    public class MixedRealityToolkitVisualProfiler : MonoBehaviour, IMixedRealityDiagnosticsHandler
     {
         private static readonly int maxStringLength = 32;
         private static readonly int maxTargetFrameRate = 120;
@@ -678,5 +680,14 @@ namespace XRTK.Services.DiagnosticsSystem
         {
             return (bytes / 1024.0f) / 1024.0f;
         }
+
+        #region IMixedRealityDiagnosticsHandler
+
+        public void OnDiagnosticSettingsChanged(DiagnosticsEventData eventData)
+        {
+            
+        }
+
+        #endregion
     }
 }

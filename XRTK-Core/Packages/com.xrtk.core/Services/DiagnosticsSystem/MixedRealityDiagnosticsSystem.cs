@@ -16,6 +16,10 @@ namespace XRTK.Services.DiagnosticsSystem
     {
         private readonly MixedRealityDiagnosticsProfile profile;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="profile">Diagnostics service configuration profile.</param>
         public MixedRealityDiagnosticsSystem(MixedRealityDiagnosticsProfile profile, Transform playspace)
             : base(profile)
         {
@@ -190,6 +194,7 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <inheritdoc />
         public int GetHashCode(object obj) => SourceName.GetHashCode();
 
+        // TODO: This will currently never execute. Where do we need to raise this event?
         private void RaiseDiagnosticsChanged()
         {
             eventData.Initialize(this);

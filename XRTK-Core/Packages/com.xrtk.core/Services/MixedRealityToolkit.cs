@@ -494,7 +494,7 @@ namespace XRTK.Services
 
             if (ActiveProfile.IsDiagnosticsSystemEnabled)
             {
-                if (!CreateAndRegisterService<IMixedRealityDiagnosticsSystem>(ActiveProfile.DiagnosticsSystemSystemType, ActiveProfile.DiagnosticsSystemProfile) || DiagnosticsSystem == null)
+                if (!CreateAndRegisterService<IMixedRealityDiagnosticsSystem>(ActiveProfile.DiagnosticsSystemSystemType, ActiveProfile.DiagnosticsSystemProfile, Instance.MixedRealityPlayspace) || DiagnosticsSystem == null)
                 {
                     Debug.LogError("Failed to start the Diagnostics System!");
                 }

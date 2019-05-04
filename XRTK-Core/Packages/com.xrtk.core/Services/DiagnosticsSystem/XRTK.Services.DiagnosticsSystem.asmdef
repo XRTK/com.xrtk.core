@@ -1,0 +1,14 @@
+{
+    "name": "XRTK.Services.DiagnosticsSystem",
+    "references": [
+        "XRTK"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": []
+}

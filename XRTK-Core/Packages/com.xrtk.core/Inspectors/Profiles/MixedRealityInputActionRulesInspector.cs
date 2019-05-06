@@ -1,16 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information. 
 
-using XRTK.Definitions;
-using XRTK.Definitions.InputSystem;
-using XRTK.Definitions.Utilities;
-using XRTK.Inspectors;
-using XRTK.Inspectors.Profiles;
-using XRTK.Inspectors.Utilities;
-using XRTK.Services;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Definitions.InputSystem;
+using XRTK.Definitions.Utilities;
+using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -55,15 +51,20 @@ namespace XRTK.Inspectors.Profiles
         private bool[] quaternionFoldouts;
         private bool[] poseFoldouts;
 
-        private MixedRealityInputActionRulesProfile thisProfile;
+        private MixedRealityInputActionRulesProfile inputActionRulesProfile;
+        private MixedRealityInputSystemProfile inputSystemProfile;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false) ||
-                !MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled ||
-                 MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile == null)
+            inputActionRulesProfile = target as MixedRealityInputActionRulesProfile;
+            Debug.Assert(inputActionRulesProfile != null);
+
+            inputSystemProfile = inputActionRulesProfile.ParentProfile as MixedRealityInputSystemProfile;
+            Debug.Assert(inputSystemProfile != null);
+
+            if (inputSystemProfile.InputActionsProfile == null)
             {
                 return;
             }
@@ -75,17 +76,16 @@ namespace XRTK.Inspectors.Profiles
             inputActionRulesQuaternionAxis = serializedObject.FindProperty("inputActionRulesQuaternionAxis");
             inputActionRulesPoseAxis = serializedObject.FindProperty("inputActionRulesPoseAxis");
 
-            baseActionLabels = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions
+            baseActionLabels = inputSystemProfile.InputActionsProfile.InputActions
                 .Where(action => action.AxisConstraint != AxisType.None && action.AxisConstraint != AxisType.Raw)
                 .Select(action => action.Description)
                 .ToArray();
 
-            baseActionIds = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions
+            baseActionIds = inputSystemProfile.InputActionsProfile.InputActions
                 .Where(action => action.AxisConstraint != AxisType.None && action.AxisConstraint != AxisType.Raw)
                 .Select(action => (int)action.Id)
                 .ToArray();
 
-            thisProfile = target as MixedRealityInputActionRulesProfile;
 
             ResetCriteria();
         }
@@ -94,38 +94,12 @@ namespace XRTK.Inspectors.Profiles
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
+            Debug.Assert(inputActionRulesProfile != null);
+
+            if (inputSystemProfile != null &&
+                GUILayout.Button("Back to Input Profile"))
             {
-                return;
-            }
-
-            if (!MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
-            {
-                EditorGUILayout.HelpBox("No input system is enabled, or you need to specify the type in the main configuration profile.", MessageType.Error);
-
-                if (GUILayout.Button("Back to Configuration Profile"))
-                {
-                    Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile;
-                }
-
-                return;
-            }
-
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile == null)
-            {
-                EditorGUILayout.HelpBox("No Input Actions profile was specified.", MessageType.Error);
-
-                if (GUILayout.Button("Back to Input Profile"))
-                {
-                    Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
-                }
-
-                return;
-            }
-
-            if (GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
+                Selection.activeObject = inputSystemProfile;
             }
 
             EditorGUILayout.Space();
@@ -133,12 +107,17 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.HelpBox("Input Action Rules help define alternative Actions that will be raised based on specific criteria.\n\n" +
                                     "You can create new rules by assigning a base Input Action below, then assigning the criteria you'd like to meet. When the criteria is met, the Rule's Action will be raised with the criteria value.\n\n" +
                                     "Note: Rules can only be created for the same axis constraints.", MessageType.Info);
-
             EditorGUILayout.Space();
 
-            (target as BaseMixedRealityProfile).CheckProfileLock();
+            if (inputSystemProfile == null)
+            {
+                EditorGUILayout.HelpBox("No input system profile found, please specify an input system profile in the main configuration profile.", MessageType.Error);
+                return;
+            }
 
-            var isGuiLocked = !(MixedRealityPreferences.LockProfiles && !((BaseMixedRealityProfile)target).IsCustomProfile);
+            inputActionRulesProfile.CheckProfileLock();
+
+            var isGuiLocked = !(MixedRealityPreferences.LockProfiles && !inputActionRulesProfile.IsCustomProfile);
             GUI.enabled = isGuiLocked;
 
             serializedObject.Update();
@@ -194,17 +173,35 @@ namespace XRTK.Inspectors.Profiles
                 default:
                     return false;
                 case AxisType.Digital:
-                    return thisProfile.InputActionRulesDigital.Any(digitalRule => digitalRule.BaseAction == currentBaseAction && digitalRule.RuleAction == currentRuleAction && digitalRule.Criteria == currentBoolCriteria);
+                    return inputActionRulesProfile.InputActionRulesDigital.Any(digitalRule =>
+                        digitalRule.BaseAction == currentBaseAction &&
+                        digitalRule.RuleAction == currentRuleAction &&
+                        digitalRule.Criteria == currentBoolCriteria);
                 case AxisType.SingleAxis:
-                    return thisProfile.InputActionRulesSingleAxis.Any(singleAxisRule => singleAxisRule.BaseAction == currentBaseAction && singleAxisRule.RuleAction == currentRuleAction && singleAxisRule.Criteria.Equals(currentSingleAxisCriteria));
+                    return inputActionRulesProfile.InputActionRulesSingleAxis.Any(singleAxisRule =>
+                        singleAxisRule.BaseAction == currentBaseAction &&
+                        singleAxisRule.RuleAction == currentRuleAction &&
+                        singleAxisRule.Criteria.Equals(currentSingleAxisCriteria));
                 case AxisType.DualAxis:
-                    return thisProfile.InputActionRulesDualAxis.Any(dualAxisRule => dualAxisRule.BaseAction == currentBaseAction && dualAxisRule.RuleAction == currentRuleAction && dualAxisRule.Criteria == currentDualAxisCriteria);
+                    return inputActionRulesProfile.InputActionRulesDualAxis.Any(dualAxisRule =>
+                        dualAxisRule.BaseAction == currentBaseAction &&
+                        dualAxisRule.RuleAction == currentRuleAction &&
+                        dualAxisRule.Criteria == currentDualAxisCriteria);
                 case AxisType.ThreeDofPosition:
-                    return thisProfile.InputActionRulesVectorAxis.Any(vectorAxisRule => vectorAxisRule.BaseAction == currentBaseAction && vectorAxisRule.RuleAction == currentRuleAction && vectorAxisRule.Criteria == currentVectorCriteria);
+                    return inputActionRulesProfile.InputActionRulesVectorAxis.Any(vectorAxisRule =>
+                        vectorAxisRule.BaseAction == currentBaseAction &&
+                        vectorAxisRule.RuleAction == currentRuleAction &&
+                        vectorAxisRule.Criteria == currentVectorCriteria);
                 case AxisType.ThreeDofRotation:
-                    return thisProfile.InputActionRulesQuaternionAxis.Any(quaternionRule => quaternionRule.BaseAction == currentBaseAction && quaternionRule.RuleAction == currentRuleAction && quaternionRule.Criteria == currentQuaternionCriteria);
+                    return inputActionRulesProfile.InputActionRulesQuaternionAxis.Any(quaternionRule =>
+                        quaternionRule.BaseAction == currentBaseAction &&
+                        quaternionRule.RuleAction == currentRuleAction &&
+                        quaternionRule.Criteria == currentQuaternionCriteria);
                 case AxisType.SixDof:
-                    return thisProfile.InputActionRulesPoseAxis.Any(poseRule => poseRule.BaseAction == currentBaseAction && poseRule.RuleAction == currentRuleAction && poseRule.Criteria == currentPoseCriteria);
+                    return inputActionRulesProfile.InputActionRulesPoseAxis.Any(poseRule =>
+                        poseRule.BaseAction == currentBaseAction &&
+                        poseRule.RuleAction == currentRuleAction &&
+                        poseRule.Criteria == currentPoseCriteria);
             }
         }
 
@@ -229,14 +226,14 @@ namespace XRTK.Inspectors.Profiles
             poseFoldouts = new bool[inputActionRulesPoseAxis.arraySize];
         }
 
-        private static void GetCompatibleActions(MixedRealityInputAction baseAction)
+        private void GetCompatibleActions(MixedRealityInputAction baseAction)
         {
-            ruleActionLabels = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions
+            ruleActionLabels = inputSystemProfile.InputActionsProfile.InputActions
                 .Where(inputAction => inputAction.AxisConstraint == baseAction.AxisConstraint && inputAction.Id != baseAction.Id)
                 .Select(action => action.Description)
                 .ToArray();
 
-            ruleActionIds = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions
+            ruleActionIds = inputSystemProfile.InputActionsProfile.InputActions
                 .Where(inputAction => inputAction.AxisConstraint == baseAction.AxisConstraint && inputAction.Id != baseAction.Id)
                 .Select(action => (int)action.Id)
                 .ToArray();
@@ -466,11 +463,11 @@ namespace XRTK.Inspectors.Profiles
                 baseActionId = EditorGUILayout.IntPopup(baseActionId, baseActionLabels, baseActionIds, GUILayout.ExpandWidth(true));
             }
 
-            for (int i = 0; i < MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions.Length; i++)
+            for (int i = 0; i < inputSystemProfile.InputActionsProfile.InputActions.Length; i++)
             {
-                if (baseActionId == (int)MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions[i].Id)
+                if (baseActionId == (int)inputSystemProfile.InputActionsProfile.InputActions[i].Id)
                 {
-                    action = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions[i];
+                    action = inputSystemProfile.InputActionsProfile.InputActions[i];
                 }
             }
 
@@ -496,11 +493,11 @@ namespace XRTK.Inspectors.Profiles
             EditorGUI.BeginChangeCheck();
             ruleActionId = EditorGUILayout.IntPopup(ruleActionId, ruleActionLabels, ruleActionIds, GUILayout.ExpandWidth(true));
 
-            for (int i = 0; i < MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions.Length; i++)
+            for (int i = 0; i < inputSystemProfile.InputActionsProfile.InputActions.Length; i++)
             {
-                if (ruleActionId == (int)MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions[i].Id)
+                if (ruleActionId == (int)inputSystemProfile.InputActionsProfile.InputActions[i].Id)
                 {
-                    action = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions[i];
+                    action = inputSystemProfile.InputActionsProfile.InputActions[i];
                 }
             }
 

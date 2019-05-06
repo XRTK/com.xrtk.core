@@ -3,10 +3,8 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Definitions.Diagnostics;
 using XRTK.Inspectors.Utilities;
-using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -26,11 +24,6 @@ namespace XRTK.Inspectors.Profiles
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
-
             visible = serializedObject.FindProperty("visible");
             handlerType = serializedObject.FindProperty("handlerType");
             showCpu = serializedObject.FindProperty("showCpu");
@@ -45,17 +38,13 @@ namespace XRTK.Inspectors.Profiles
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
+            if (thisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to Configuration Profile"))
             {
-                return;
+                Selection.activeObject = thisProfile.ParentProfile;
             }
 
-            if (GUILayout.Button("Back to Configuration Profile"))
-            {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile;
-            }
-
-            (target as BaseMixedRealityProfile).CheckProfileLock();
+            thisProfile.CheckProfileLock();
 
             serializedObject.Update();
 

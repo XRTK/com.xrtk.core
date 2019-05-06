@@ -11,5 +11,17 @@ namespace XRTK.Definitions
         private bool isCustomProfile = true;
 
         internal bool IsCustomProfile => isCustomProfile;
+
+        [SerializeField]
+        private BaseMixedRealityProfile parentProfile = null;
+
+        /// <summary>
+        /// The profile's parent.
+        /// </summary>
+        public BaseMixedRealityProfile ParentProfile
+        {
+            get => parentProfile;
+            internal set => parentProfile = value;
+        }
     }
 }

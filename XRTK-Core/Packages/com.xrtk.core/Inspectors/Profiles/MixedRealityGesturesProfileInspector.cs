@@ -6,11 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Inspectors.Utilities;
-using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -25,7 +23,9 @@ namespace XRTK.Inspectors.Profiles
 
         private SerializedProperty gestures;
 
-        private MixedRealityGesturesProfile thisProfile;
+        private MixedRealityGesturesProfile gesturesProfile;
+        private MixedRealityInputSystemProfile inputSystemProfile;
+
         private static GUIContent[] allGestureLabels;
         private static int[] allGestureIds;
         private static GUIContent[] actionLabels;
@@ -35,19 +35,20 @@ namespace XRTK.Inspectors.Profiles
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false)) { return; }
-
             gestures = serializedObject.FindProperty("gestures");
-            thisProfile = target as MixedRealityGesturesProfile;
-            Debug.Assert(thisProfile != null);
 
-            if (MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
-                MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile != null)
+            gesturesProfile = target as MixedRealityGesturesProfile;
+            Debug.Assert(gesturesProfile != null);
+
+            inputSystemProfile = gesturesProfile.ParentProfile as MixedRealityInputSystemProfile;
+            Debug.Assert(inputSystemProfile != null);
+
+            if (inputSystemProfile.InputActionsProfile != null)
             {
-                actionLabels = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions
+                actionLabels = inputSystemProfile.InputActionsProfile.InputActions
                     .Select(action => new GUIContent(action.Description))
                     .Prepend(new GUIContent("None")).ToArray();
-                actionIds = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions
+                actionIds = inputSystemProfile.InputActionsProfile.InputActions
                     .Select(action => (int)action.Id)
                     .Prepend(0).ToArray();
             }
@@ -65,7 +66,7 @@ namespace XRTK.Inspectors.Profiles
             for (int i = 0; i < allGestureTypeNames.Length; i++)
             {
                 if (allGestureTypeNames[i].Equals("None") ||
-                    thisProfile.Gestures.All(mapping => !allGestureTypeNames[i].Equals(mapping.GestureType.ToString())))
+                    gesturesProfile.Gestures.All(mapping => !allGestureTypeNames[i].Equals(mapping.GestureType.ToString())))
                 {
                     tempContent.Add(new GUIContent(allGestureTypeNames[i]));
                     tempIds.Add(i);
@@ -80,36 +81,29 @@ namespace XRTK.Inspectors.Profiles
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured()) { return; }
-
-            if (!MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
+            if (inputSystemProfile != null &&
+                GUILayout.Button("Back to Input Profile"))
             {
-                EditorGUILayout.HelpBox("No input system is enabled, or you need to specify the type in the main configuration profile.", MessageType.Error);
-
-                if (GUILayout.Button("Back to Configuration Profile"))
-                {
-                    Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile;
-                }
-
-                return;
-            }
-
-            if (GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
+                Selection.activeObject = inputSystemProfile;
             }
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Gesture Input", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("This gesture map is any and all movements of part the user's body, especially a hand or the head, that raise actions through the input system.\n\nNote: Defined controllers can look up the list of gestures and raise the events based on specific criteria.", MessageType.Info);
 
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile == null)
+            if (inputSystemProfile == null)
+            {
+                EditorGUILayout.HelpBox("No input system profile found, please specify a input system profile in the main configuration.", MessageType.Error);
+                return;
+            }
+
+            if (inputSystemProfile.InputActionsProfile == null)
             {
                 EditorGUILayout.HelpBox("No input actions found, please specify a input action profile in the main configuration.", MessageType.Error);
                 return;
             }
 
-            (target as BaseMixedRealityProfile).CheckProfileLock();
+            gesturesProfile.CheckProfileLock();
 
             serializedObject.Update();
             EditorGUILayout.Space();
@@ -165,7 +159,7 @@ namespace XRTK.Inspectors.Profiles
             for (int i = 0; i < list.arraySize; i++)
             {
                 EditorGUILayout.BeginHorizontal();
-                SerializedProperty gesture = list.GetArrayElementAtIndex(i);
+                var gesture = list.GetArrayElementAtIndex(i);
                 var keyword = gesture.FindPropertyRelative("description");
                 var gestureType = gesture.FindPropertyRelative("gestureType");
                 var action = gesture.FindPropertyRelative("action");
@@ -203,7 +197,7 @@ namespace XRTK.Inspectors.Profiles
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    MixedRealityInputAction inputAction = actionId.intValue == 0 ? MixedRealityInputAction.None : MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions[actionId.intValue - 1];
+                    MixedRealityInputAction inputAction = actionId.intValue == 0 ? MixedRealityInputAction.None : inputSystemProfile.InputActionsProfile.InputActions[actionId.intValue - 1];
                     actionDescription.stringValue = inputAction.Description;
                     actionConstraint.enumValueIndex = (int)inputAction.AxisConstraint;
                     serializedObject.ApplyModifiedProperties();

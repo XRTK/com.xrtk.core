@@ -24,36 +24,42 @@ namespace XRTK.Inspectors.Profiles
         private static BaseMixedRealityProfile profile;
         private static BaseMixedRealityProfile profileToCopy;
 
+        protected BaseMixedRealityProfile thisProfile;
+
         protected virtual void OnEnable()
         {
             targetProfile = serializedObject;
             profile = target as BaseMixedRealityProfile;
+            Debug.Assert(profile != null);
+            thisProfile = profile;
         }
 
         /// <summary>
         /// Renders a <see cref="BaseMixedRealityProfile"/>.
         /// </summary>
+        /// <param name="parentProfile">The <see cref="BaseMixedRealityProfile"/> parent of the profile being rendered.</param>
         /// <param name="property">the <see cref="BaseMixedRealityProfile"/> property.</param>
         /// <param name="guiContent">The GUIContent for the field.</param>
         /// <param name="showAddButton">Optional flag to hide the create button.</param>
         /// <returns>True, if the profile changed.</returns>
-        protected static bool RenderProfile(SerializedProperty property, GUIContent guiContent, bool showAddButton = true)
+        protected static bool RenderProfile(BaseMixedRealityProfile parentProfile, SerializedProperty property, GUIContent guiContent, bool showAddButton = true)
         {
-            return RenderProfileInternal(property, guiContent, showAddButton);
+            return RenderProfileInternal(parentProfile, property, guiContent, showAddButton);
         }
 
         /// <summary>
         /// Renders a <see cref="BaseMixedRealityProfile"/>.
         /// </summary>
+        /// <param name="parentProfile">The <see cref="BaseMixedRealityProfile"/> parent of the profile being rendered.</param>
         /// <param name="property">the <see cref="BaseMixedRealityProfile"/> property.</param>
         /// <param name="showAddButton">Optional flag to hide the create button.</param>
         /// <returns>True, if the profile changed.</returns>
-        protected static bool RenderProfile(SerializedProperty property, bool showAddButton = true)
+        protected static bool RenderProfile(BaseMixedRealityProfile parentProfile, SerializedProperty property, bool showAddButton = true)
         {
-            return RenderProfileInternal(property, null, showAddButton);
+            return RenderProfileInternal(parentProfile, property, null, showAddButton);
         }
 
-        private static bool RenderProfileInternal(SerializedProperty property, GUIContent guiContent, bool showAddButton)
+        private static bool RenderProfileInternal(BaseMixedRealityProfile parentProfile, SerializedProperty property, GUIContent guiContent, bool showAddButton)
         {
             bool changed = false;
             EditorGUILayout.BeginHorizontal();
@@ -104,6 +110,20 @@ namespace XRTK.Inspectors.Profiles
                     property.serializedObject.ApplyModifiedProperties();
                     PasteProfileValuesDelay(newProfile);
                     changed = true;
+                }
+            }
+
+            if (property.objectReferenceValue != null)
+            {
+                var renderedProfile = property.objectReferenceValue as BaseMixedRealityProfile;
+                Debug.Assert(renderedProfile != null);
+
+                if (renderedProfile.ParentProfile == null)
+                {
+                    renderedProfile.ParentProfile = parentProfile;
+                    EditorUtility.SetDirty(renderedProfile);
+                    property.objectReferenceValue = renderedProfile;
+                    property.serializedObject.ApplyModifiedProperties();
                 }
             }
 

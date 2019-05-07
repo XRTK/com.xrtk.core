@@ -293,6 +293,19 @@ references:
   commentId: T:XRTK.Definitions.BaseMixedRealityProfile
   fullName: XRTK.Definitions.BaseMixedRealityProfile
   nameWithType: BaseMixedRealityProfile
+- uid: XRTK.Definitions.BaseMixedRealityProfile.ParentProfile
+  name: ParentProfile
+  href: api/XRTK.Definitions.BaseMixedRealityProfile.html#XRTK_Definitions_BaseMixedRealityProfile_ParentProfile
+  commentId: P:XRTK.Definitions.BaseMixedRealityProfile.ParentProfile
+  fullName: XRTK.Definitions.BaseMixedRealityProfile.ParentProfile
+  nameWithType: BaseMixedRealityProfile.ParentProfile
+- uid: XRTK.Definitions.BaseMixedRealityProfile.ParentProfile*
+  name: ParentProfile
+  href: api/XRTK.Definitions.BaseMixedRealityProfile.html#XRTK_Definitions_BaseMixedRealityProfile_ParentProfile_
+  commentId: Overload:XRTK.Definitions.BaseMixedRealityProfile.ParentProfile
+  isSpec: "True"
+  fullName: XRTK.Definitions.BaseMixedRealityProfile.ParentProfile
+  nameWithType: BaseMixedRealityProfile.ParentProfile
 - uid: XRTK.Definitions.BoundarySystem
   name: XRTK.Definitions.BoundarySystem
   href: api/XRTK.Definitions.BoundarySystem.html
@@ -9639,12 +9652,12 @@ references:
   commentId: T:XRTK.Inspectors.ControllerPopupWindow
   fullName: XRTK.Inspectors.ControllerPopupWindow
   nameWithType: ControllerPopupWindow
-- uid: XRTK.Inspectors.ControllerPopupWindow.Show(XRTK.Definitions.Devices.SupportedControllerType,UnityEditor.SerializedProperty,XRTK.Definitions.Utilities.Handedness,System.Boolean)
-  name: Show(SupportedControllerType, SerializedProperty, Handedness, Boolean)
-  href: api/XRTK.Inspectors.ControllerPopupWindow.html#XRTK_Inspectors_ControllerPopupWindow_Show_XRTK_Definitions_Devices_SupportedControllerType_UnityEditor_SerializedProperty_XRTK_Definitions_Utilities_Handedness_System_Boolean_
-  commentId: M:XRTK.Inspectors.ControllerPopupWindow.Show(XRTK.Definitions.Devices.SupportedControllerType,UnityEditor.SerializedProperty,XRTK.Definitions.Utilities.Handedness,System.Boolean)
-  fullName: XRTK.Inspectors.ControllerPopupWindow.Show(XRTK.Definitions.Devices.SupportedControllerType, UnityEditor.SerializedProperty, XRTK.Definitions.Utilities.Handedness, System.Boolean)
-  nameWithType: ControllerPopupWindow.Show(SupportedControllerType, SerializedProperty, Handedness, Boolean)
+- uid: XRTK.Inspectors.ControllerPopupWindow.Show(XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile,XRTK.Definitions.Devices.SupportedControllerType,UnityEditor.SerializedProperty,XRTK.Definitions.Utilities.Handedness,System.Boolean)
+  name: Show(BaseMixedRealityControllerMappingProfile, SupportedControllerType, SerializedProperty, Handedness, Boolean)
+  href: api/XRTK.Inspectors.ControllerPopupWindow.html#XRTK_Inspectors_ControllerPopupWindow_Show_XRTK_Providers_Controllers_BaseMixedRealityControllerMappingProfile_XRTK_Definitions_Devices_SupportedControllerType_UnityEditor_SerializedProperty_XRTK_Definitions_Utilities_Handedness_System_Boolean_
+  commentId: M:XRTK.Inspectors.ControllerPopupWindow.Show(XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile,XRTK.Definitions.Devices.SupportedControllerType,UnityEditor.SerializedProperty,XRTK.Definitions.Utilities.Handedness,System.Boolean)
+  fullName: XRTK.Inspectors.ControllerPopupWindow.Show(XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile, XRTK.Definitions.Devices.SupportedControllerType, UnityEditor.SerializedProperty, XRTK.Definitions.Utilities.Handedness, System.Boolean)
+  nameWithType: ControllerPopupWindow.Show(BaseMixedRealityControllerMappingProfile, SupportedControllerType, SerializedProperty, Handedness, Boolean)
 - uid: XRTK.Inspectors.ControllerPopupWindow.Show*
   name: Show
   href: api/XRTK.Inspectors.ControllerPopupWindow.html#XRTK_Inspectors_ControllerPopupWindow_Show_
@@ -11450,18 +11463,18 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.OnEnable
   nameWithType: BaseMixedRealityProfileInspector.OnEnable
-- uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(UnityEditor.SerializedProperty,System.Boolean)
-  name: RenderProfile(SerializedProperty, Boolean)
-  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_RenderProfile_UnityEditor_SerializedProperty_System_Boolean_
-  commentId: M:XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(UnityEditor.SerializedProperty,System.Boolean)
-  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(UnityEditor.SerializedProperty, System.Boolean)
-  nameWithType: BaseMixedRealityProfileInspector.RenderProfile(SerializedProperty, Boolean)
-- uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(UnityEditor.SerializedProperty,UnityEngine.GUIContent,System.Boolean)
-  name: RenderProfile(SerializedProperty, GUIContent, Boolean)
-  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_RenderProfile_UnityEditor_SerializedProperty_UnityEngine_GUIContent_System_Boolean_
-  commentId: M:XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(UnityEditor.SerializedProperty,UnityEngine.GUIContent,System.Boolean)
-  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(UnityEditor.SerializedProperty, UnityEngine.GUIContent, System.Boolean)
-  nameWithType: BaseMixedRealityProfileInspector.RenderProfile(SerializedProperty, GUIContent, Boolean)
+- uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(XRTK.Definitions.BaseMixedRealityProfile,UnityEditor.SerializedProperty,System.Boolean)
+  name: RenderProfile(BaseMixedRealityProfile, SerializedProperty, Boolean)
+  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_RenderProfile_XRTK_Definitions_BaseMixedRealityProfile_UnityEditor_SerializedProperty_System_Boolean_
+  commentId: M:XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(XRTK.Definitions.BaseMixedRealityProfile,UnityEditor.SerializedProperty,System.Boolean)
+  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(XRTK.Definitions.BaseMixedRealityProfile, UnityEditor.SerializedProperty, System.Boolean)
+  nameWithType: BaseMixedRealityProfileInspector.RenderProfile(BaseMixedRealityProfile, SerializedProperty, Boolean)
+- uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(XRTK.Definitions.BaseMixedRealityProfile,UnityEditor.SerializedProperty,UnityEngine.GUIContent,System.Boolean)
+  name: RenderProfile(BaseMixedRealityProfile, SerializedProperty, GUIContent, Boolean)
+  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_RenderProfile_XRTK_Definitions_BaseMixedRealityProfile_UnityEditor_SerializedProperty_UnityEngine_GUIContent_System_Boolean_
+  commentId: M:XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(XRTK.Definitions.BaseMixedRealityProfile,UnityEditor.SerializedProperty,UnityEngine.GUIContent,System.Boolean)
+  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(XRTK.Definitions.BaseMixedRealityProfile, UnityEditor.SerializedProperty, UnityEngine.GUIContent, System.Boolean)
+  nameWithType: BaseMixedRealityProfileInspector.RenderProfile(BaseMixedRealityProfile, SerializedProperty, GUIContent, Boolean)
 - uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile*
   name: RenderProfile
   href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_RenderProfile_
@@ -11469,6 +11482,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile
   nameWithType: BaseMixedRealityProfileInspector.RenderProfile
+- uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.thisProfile
+  name: thisProfile
+  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_thisProfile
+  commentId: F:XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.thisProfile
+  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.thisProfile
+  nameWithType: BaseMixedRealityProfileInspector.thisProfile
 - uid: XRTK.Inspectors.Profiles.BaseMixedRealityToolkitInspector
   name: BaseMixedRealityToolkitInspector
   href: api/XRTK.Inspectors.Profiles.BaseMixedRealityToolkitInspector.html
@@ -34450,19 +34469,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_01_Vector2_One
   nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_01_Vector2_One
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
-  name: Test_04_01_02_Checks()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_02_Checks
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks*
-  name: Test_04_01_02_Checks
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_02_Checks_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks
+  name: Test_04_01_02_SpeedChecks()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_02_SpeedChecks
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks*
+  name: Test_04_01_02_SpeedChecks
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_02_SpeedChecks_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks
 - uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_InitializedVector2
   name: Test_04_01_InitializedVector2()
   href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_InitializedVector2

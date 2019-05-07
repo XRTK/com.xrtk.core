@@ -3,7 +3,6 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Definitions.InputSystem;
 using XRTK.Inspectors.Utilities;
 using XRTK.Services;
@@ -27,11 +26,6 @@ namespace XRTK.Inspectors.Profiles
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
-
             focusProviderType = serializedObject.FindProperty("focusProviderType");
             inputActionsProfile = serializedObject.FindProperty("inputActionsProfile");
             inputActionRulesProfile = serializedObject.FindProperty("inputActionRulesProfile");
@@ -47,21 +41,17 @@ namespace XRTK.Inspectors.Profiles
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
+            if (thisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to Configuration Profile"))
             {
-                return;
-            }
-
-            if (GUILayout.Button("Back to Configuration Profile"))
-            {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile;
+                Selection.activeObject = thisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Input System Profile", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("The Input System Profile helps developers configure input no matter what platform you're building for.", MessageType.Info);
 
-            (target as BaseMixedRealityProfile).CheckProfileLock();
+            thisProfile.CheckProfileLock();
 
             serializedObject.Update();
             bool changed = false;
@@ -74,18 +64,18 @@ namespace XRTK.Inspectors.Profiles
                 changed = true;
             }
 
-            changed |= RenderProfile(inputActionsProfile);
-            changed |= RenderProfile(inputActionRulesProfile);
-            changed |= RenderProfile(pointerProfile);
-            changed |= RenderProfile(gesturesProfile);
-            changed |= RenderProfile(speechCommandsProfile);
-            changed |= RenderProfile(controllerVisualizationProfile);
-            changed |= RenderProfile(controllerDataProvidersProfile);
-            changed |= RenderProfile(controllerMappingProfiles);
+            changed |= RenderProfile(thisProfile, inputActionsProfile);
+            changed |= RenderProfile(thisProfile, inputActionRulesProfile);
+            changed |= RenderProfile(thisProfile, pointerProfile);
+            changed |= RenderProfile(thisProfile, gesturesProfile);
+            changed |= RenderProfile(thisProfile, speechCommandsProfile);
+            changed |= RenderProfile(thisProfile, controllerVisualizationProfile);
+            changed |= RenderProfile(thisProfile, controllerDataProvidersProfile);
+            changed |= RenderProfile(thisProfile, controllerMappingProfiles);
 
             serializedObject.ApplyModifiedProperties();
 
-            if (changed)
+            if (changed && MixedRealityToolkit.IsInitialized)
             {
                 EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
             }

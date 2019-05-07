@@ -67,12 +67,10 @@ namespace XRTK.Services.CameraSystem
 
         public override void Enable()
         {
-            if (Application.isPlaying)
+            if (Application.isPlaying && 
+                profile.IsCameraPersistent)
             {
-                if (profile.IsCameraPersistent)
-                {
-                    CameraCache.Main.transform.root.DontDestroyOnLoad();
-                }
+                CameraCache.Main.transform.root.DontDestroyOnLoad();
             }
         }
 

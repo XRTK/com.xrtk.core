@@ -6,6 +6,8 @@
     <uses-privilege ml:name="GesturesSubscribe" />
     <uses-privilege ml:name="GesturesConfig" />
     <uses-privilege ml:name="HandMesh" />
+    <uses-privilege ml:name="WorldReconstruction" />
+    <uses-privilege ml:name="Occlusion" />
     <component ml:name=".fullscreen" ml:visible_name="XRTK-Core" ml:binary_name="bin/Player.elf" ml:type="Fullscreen">
       <icon ml:model_folder="Icon/Model" ml:portal_folder="Icon/Portal" />
     </component>

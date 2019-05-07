@@ -3,10 +3,8 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Definitions.InputSystem;
 using XRTK.Inspectors.Utilities;
-using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -26,11 +24,6 @@ namespace XRTK.Inspectors.Profiles
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
-
             inputActionList = serializedObject.FindProperty("inputActions");
         }
 
@@ -38,27 +31,13 @@ namespace XRTK.Inspectors.Profiles
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
+            if (thisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to Input Profile"))
             {
-                return;
+                Selection.activeObject = thisProfile.ParentProfile;
             }
 
-            if (!MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
-            {
-                EditorGUILayout.HelpBox("No input system is enabled, or you need to specify the type in the main configuration profile.", MessageType.Error);
-
-                if (GUILayout.Button("Back to Configuration Profile"))
-                {
-                    Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile;
-                }
-
-                return;
-            }
-
-            if (GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
-            }
+            thisProfile.CheckProfileLock();
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Input Actions", EditorStyles.boldLabel);
@@ -66,7 +45,7 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.HelpBox("Input Actions are any/all actions your users will be able to make when interacting with your application.\n\n" +
                                     "After defining all your actions, you can then wire up these actions to hardware sensors, controllers, and other input devices.", MessageType.Info);
 
-            (target as BaseMixedRealityProfile).CheckProfileLock();
+            thisProfile.CheckProfileLock();
 
             serializedObject.Update();
             RenderList(inputActionList);
@@ -77,6 +56,7 @@ namespace XRTK.Inspectors.Profiles
         {
             EditorGUILayout.Space();
             GUILayout.BeginVertical();
+
             if (GUILayout.Button(AddButtonContent, EditorStyles.miniButton))
             {
                 list.arraySize += 1;
@@ -89,7 +69,6 @@ namespace XRTK.Inspectors.Profiles
             }
 
             GUILayout.Space(12f);
-
             GUILayout.BeginVertical();
 
             GUILayout.BeginHorizontal();
@@ -108,8 +87,8 @@ namespace XRTK.Inspectors.Profiles
                 EditorGUILayout.BeginHorizontal();
                 var previousLabelWidth = EditorGUIUtility.labelWidth;
                 EditorGUIUtility.labelWidth = 64f;
-                SerializedProperty inputAction = list.GetArrayElementAtIndex(i);
-                SerializedProperty inputActionDescription = inputAction.FindPropertyRelative("description");
+                var inputAction = list.GetArrayElementAtIndex(i);
+                var inputActionDescription = inputAction.FindPropertyRelative("description");
                 var inputActionConstraint = inputAction.FindPropertyRelative("axisConstraint");
                 EditorGUILayout.PropertyField(inputActionDescription, GUIContent.none);
                 EditorGUILayout.PropertyField(inputActionConstraint, GUIContent.none, GUILayout.Width(96f));

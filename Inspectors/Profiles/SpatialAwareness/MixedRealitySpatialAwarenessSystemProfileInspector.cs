@@ -3,10 +3,8 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Inspectors.Utilities;
-using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.SpatialAwareness
 {
@@ -25,11 +23,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
-
             registeredSpatialObserverDataProviders = serializedObject.FindProperty("registeredSpatialObserverDataProviders");
             foldouts = new bool[registeredSpatialObserverDataProviders.arraySize];
         }
@@ -39,14 +32,10 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
+            if (thisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to Configuration Profile"))
             {
-                return;
-            }
-
-            if (GUILayout.Button("Back to Configuration Profile"))
-            {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile;
+                Selection.activeObject = thisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
@@ -55,10 +44,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             EditorGUILayout.Space();
             serializedObject.Update();
 
-            if (MixedRealityPreferences.LockProfiles && !((BaseMixedRealityProfile)target).IsCustomProfile)
-            {
-                GUI.enabled = false;
-            }
+            thisProfile.CheckProfileLock();
 
             EditorGUILayout.Space();
 
@@ -116,7 +102,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
                     EditorGUILayout.PropertyField(spatialObserverName);
                     EditorGUILayout.PropertyField(priority);
                     EditorGUILayout.PropertyField(runtimePlatform);
-                    RenderProfile(profile, false);
+                    RenderProfile(thisProfile, profile, false);
                     EditorGUI.indentLevel--;
                 }
 

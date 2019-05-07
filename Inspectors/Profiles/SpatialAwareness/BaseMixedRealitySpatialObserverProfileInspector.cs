@@ -3,10 +3,8 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Providers.SpatialObservers;
-using XRTK.Definitions;
 using XRTK.Inspectors.Utilities;
-using XRTK.Services;
+using XRTK.Providers.SpatialObservers;
 
 namespace XRTK.Inspectors.Profiles.SpatialAwareness
 {
@@ -25,10 +23,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         protected override void OnEnable()
         {
             base.OnEnable();
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
 
             startupBehavior = serializedObject.FindProperty("startupBehavior");
             observationExtents = serializedObject.FindProperty("observationExtents");
@@ -42,38 +36,18 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
+            if (thisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to Spatial Awareness Profile"))
             {
-                return;
+                Selection.activeObject = thisProfile.ParentProfile;
             }
-
-            if (!MixedRealityToolkit.Instance.ActiveProfile.IsSpatialAwarenessSystemEnabled)
-            {
-                EditorGUILayout.HelpBox("The Spatial Awareness Observer Data Provider requires that the spatial awareness system be enabled.", MessageType.Error);
-
-                if (GUILayout.Button("Back to Configuration Profile"))
-                {
-                    Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile;
-                }
-
-                return;
-            }
-
-            if (GUILayout.Button("Back to Spatial Awareness Profile"))
-            {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile.SpatialAwarenessProfile;
-            }
-
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Spatial Observer Options", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("The Spatial Awareness Observer Data Provider supplies the Spatial Awareness system with all the data it needs to understand the world around you.", MessageType.Info);
             EditorGUILayout.Space();
 
-            if (MixedRealityPreferences.LockProfiles && !((BaseMixedRealityProfile)target).IsCustomProfile)
-            {
-                GUI.enabled = false;
-            }
+            thisProfile.CheckProfileLock();
 
             serializedObject.Update();
 

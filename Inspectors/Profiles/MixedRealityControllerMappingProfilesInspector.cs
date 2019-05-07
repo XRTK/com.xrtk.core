@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Extensions;
 using XRTK.Inspectors.Utilities;
 using XRTK.Providers.Controllers;
@@ -24,17 +23,6 @@ namespace XRTK.Inspectors.Profiles
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
-
-            if (!MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled ||
-                 MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile == null)
-            {
-                return;
-            }
-
             controllerMappingProfiles = serializedObject.FindProperty("controllerMappingProfiles");
         }
 
@@ -42,26 +30,10 @@ namespace XRTK.Inspectors.Profiles
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
+            if (thisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to Input Profile"))
             {
-                return;
-            }
-
-            if (!MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
-            {
-                EditorGUILayout.HelpBox("No input system is enabled, or you need to specify the type in the main configuration profile.", MessageType.Error);
-
-                if (GUILayout.Button("Back to Configuration Profile"))
-                {
-                    Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile;
-                }
-
-                return;
-            }
-
-            if (GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
+                Selection.activeObject = thisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
@@ -69,19 +41,7 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.HelpBox("Use this profile to define all the controllers and their inputs your users will be able to use in your application.\n\n" +
                                     "You'll want to define all your Input Actions and Controller Data Providers first so you can wire up actions to hardware sensors, controllers, gestures, and other input devices.", MessageType.Info);
 
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile == null)
-            {
-                EditorGUILayout.HelpBox("No input actions found, please specify a input action profile in the input system profile.", MessageType.Error);
-                return;
-            }
-
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile == null)
-            {
-                EditorGUILayout.HelpBox("No input actions found, please specify a controller data providers profile in the input system profile.", MessageType.Error);
-                return;
-            }
-
-            (target as BaseMixedRealityProfile).CheckProfileLock();
+            thisProfile.CheckProfileLock();
 
             serializedObject.Update();
 
@@ -112,7 +72,7 @@ namespace XRTK.Inspectors.Profiles
                 }
 
                 EditorGUILayout.BeginHorizontal();
-                profileChanged |= RenderProfile(controllerProfile, new GUIContent(profileName), false);
+                profileChanged |= RenderProfile(thisProfile, controllerProfile, new GUIContent(profileName), false);
 
                 if (profileChanged && controllerProfile.objectReferenceValue != null)
                 {
@@ -160,7 +120,7 @@ namespace XRTK.Inspectors.Profiles
 
             serializedObject.ApplyModifiedProperties();
 
-            if (changed)
+            if (changed && MixedRealityToolkit.IsInitialized)
             {
                 EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
             }

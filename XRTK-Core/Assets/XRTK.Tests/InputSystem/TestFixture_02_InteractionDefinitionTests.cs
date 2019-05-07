@@ -473,7 +473,7 @@ namespace XRTK.Tests.InputSystem
         }
 
         [Test]
-        public void Test_04_01_02_Checks()
+        public void Test_04_01_02_SpeedChecks()
         {
             var iterations = 10000000;
             var value = new Vector2(1, 1);
@@ -558,6 +558,31 @@ namespace XRTK.Tests.InputSystem
 
             watch.Stop();
             Debug.Log($"Test new Vector2 execution Time: {watch.Elapsed.TotalMilliseconds} ms");
+
+            watch = Stopwatch.StartNew();
+
+            for (int i = 0; i < iterations; i++)
+            {
+                var newValue = value;
+
+                if (invertAxis)
+                {
+                    newValue.x *= -1f;
+                }
+
+                if (!invertAxis)
+                {
+                    newValue.y *= -1f;
+                }
+
+                invertAxis = !invertAxis;
+                changed = vector2Data != newValue;
+                updated = changed || !newValue.Equals(Vector2.zero);
+                vector2Data = newValue;
+            }
+
+            watch.Stop();
+            Debug.Log($"Test Modify Vector2 execution Time: {watch.Elapsed.TotalMilliseconds} ms");
         }
 
         /// <summary>

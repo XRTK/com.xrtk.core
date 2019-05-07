@@ -26,7 +26,7 @@ namespace XRTK.Services
     /// <summary>
     /// This class is responsible for coordinating the operation of the Mixed Reality Toolkit. It is the only Singleton in the entire project.
     /// It provides a service registry for all active services that are used within a project as well as providing the active configuration profile for the project.
-    /// The Profile can be swapped out at any time to meet the needs of your project.
+    /// The <see cref="ActiveProfile"/> can be swapped out at any time to meet the needs of your project.
     /// </summary>
     [ExecuteInEditMode]
     [DisallowMultipleComponent]
@@ -164,12 +164,8 @@ namespace XRTK.Services
                     return instance;
                 }
 
-                if (isGettingInstance)
-                {
-                    return null;
-                }
-
-                if (Application.isPlaying && !searchForInstance)
+                if (isGettingInstance ||
+                   (Application.isPlaying && !searchForInstance))
                 {
                     return null;
                 }
@@ -244,10 +240,7 @@ namespace XRTK.Services
                     DontDestroyOnLoad(instance.transform.root);
                 }
 
-                Application.quitting += () =>
-                {
-                    isApplicationQuitting = true;
-                };
+                Application.quitting += () => isApplicationQuitting = true;
 
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.hierarchyChanged += OnHierarchyChanged;
@@ -264,12 +257,14 @@ namespace XRTK.Services
 
                 void OnPlayModeStateChanged(UnityEditor.PlayModeStateChange playModeState)
                 {
-                    if (playModeState == UnityEditor.PlayModeStateChange.ExitingEditMode || playModeState == UnityEditor.PlayModeStateChange.EnteredEditMode)
+                    if (playModeState == UnityEditor.PlayModeStateChange.ExitingEditMode ||
+                        playModeState == UnityEditor.PlayModeStateChange.EnteredEditMode)
                     {
                         isApplicationQuitting = false;
                     }
 
-                    if (playModeState == UnityEditor.PlayModeStateChange.ExitingEditMode && activeProfile == null)
+                    if (activeProfile == null &&
+                        playModeState == UnityEditor.PlayModeStateChange.ExitingEditMode)
                     {
                         UnityEditor.EditorApplication.isPlaying = false;
                         UnityEditor.Selection.activeObject = Instance;
@@ -289,7 +284,6 @@ namespace XRTK.Services
         /// Flag to search for instance the first time Instance property is called.
         /// Subsequent attempts will generally switch this flag false, unless the instance was destroyed.
         /// </summary>
-        // ReSharper disable once StaticMemberInGenericType
         private static bool searchForInstance = true;
 
         private static bool isInitializing = false;
@@ -660,7 +654,8 @@ namespace XRTK.Services
 #if UNITY_EDITOR
         private void OnValidate()
         {
-            if (!IsInitialized && !UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
+            if (!IsInitialized &&
+                !UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode)
             {
                 ConfirmInitialized();
             }

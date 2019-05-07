@@ -3,9 +3,8 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Providers.Controllers;
-using XRTK.Definitions;
 using XRTK.Inspectors.Utilities;
+using XRTK.Providers.Controllers;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
@@ -25,17 +24,6 @@ namespace XRTK.Inspectors.Profiles
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
-
-            if (!MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled ||
-                 MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile == null)
-            {
-                return;
-            }
-
             controllerDataProviders = serializedObject.FindProperty("registeredControllerDataProviders");
             foldouts = new bool[controllerDataProviders.arraySize];
         }
@@ -44,33 +32,17 @@ namespace XRTK.Inspectors.Profiles
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
+            if (thisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to Input Profile"))
             {
-                return;
-            }
-
-            if (!MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
-            {
-                EditorGUILayout.HelpBox("No input system is enabled, or you need to specify the type in the main configuration profile.", MessageType.Error);
-
-                if (GUILayout.Button("Back to Configuration Profile"))
-                {
-                    Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile;
-                }
-
-                return;
-            }
-
-            if (GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
+                Selection.activeObject = thisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Controller Data Providers", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Use this profile to define all the input sources your application can get input data from.", MessageType.Info);
 
-            (target as BaseMixedRealityProfile).CheckProfileLock();
+            thisProfile.CheckProfileLock();
 
             serializedObject.Update();
 
@@ -135,7 +107,7 @@ namespace XRTK.Inspectors.Profiles
                     EditorGUILayout.PropertyField(dataProviderName);
                     EditorGUILayout.PropertyField(priority);
                     EditorGUILayout.PropertyField(runtimePlatform);
-                    RenderProfile(profile, ProfileContent, false);
+                    RenderProfile(thisProfile, profile, ProfileContent, false);
 
                     if (EditorGUI.EndChangeCheck())
                     {
@@ -152,7 +124,7 @@ namespace XRTK.Inspectors.Profiles
 
             serializedObject.ApplyModifiedProperties();
 
-            if (changed)
+            if (changed && MixedRealityToolkit.IsInitialized)
             {
                 EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
             }

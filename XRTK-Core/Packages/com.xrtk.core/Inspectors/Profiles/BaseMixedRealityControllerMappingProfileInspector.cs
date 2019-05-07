@@ -4,12 +4,10 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Utilities;
 using XRTK.Providers.Controllers;
-using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -18,9 +16,9 @@ namespace XRTK.Inspectors.Profiles
     {
         private struct ControllerItem
         {
-            public SupportedControllerType ControllerType;
-            public Handedness Handedness;
-            public MixedRealityInteractionMapping[] Interactions;
+            public readonly SupportedControllerType ControllerType;
+            public readonly Handedness Handedness;
+            public readonly MixedRealityInteractionMapping[] Interactions;
 
             public ControllerItem(SupportedControllerType controllerType, Handedness handedness, MixedRealityInteractionMapping[] interactions)
             {
@@ -34,7 +32,7 @@ namespace XRTK.Inspectors.Profiles
 
         private SerializedProperty controllerMappings;
 
-        private BaseMixedRealityControllerMappingProfile profile;
+        private BaseMixedRealityControllerMappingProfile controllerMappingProfile;
 
         private GUIStyle controllerButtonStyle;
 
@@ -42,58 +40,25 @@ namespace XRTK.Inspectors.Profiles
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
-
-            if (!MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled ||
-                MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile == null)
-            {
-                return;
-            }
-
             controllerMappings = serializedObject.FindProperty("controllerMappings");
-            profile = target as BaseMixedRealityControllerMappingProfile;
+            controllerMappingProfile = target as BaseMixedRealityControllerMappingProfile;
         }
 
         public override void OnInspectorGUI()
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
+            if (thisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to controller mapping list"))
             {
-                return;
-            }
-
-            if (!MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
-            {
-                EditorGUILayout.HelpBox("No input system is enabled, or you need to specify the type in the main configuration profile.", MessageType.Error);
-
-                if (GUILayout.Button("Back to Configuration Profile"))
-                {
-                    Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile;
-                }
-
-                return;
-            }
-
-            if (GUILayout.Button("Back to controller mapping list"))
-            {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles;
+                Selection.activeObject = thisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
-            var deviceName = profile.ControllerType == SupportedControllerType.None ? "Custom Device" : profile.ControllerType.ToString();
+            var deviceName = controllerMappingProfile.ControllerType == SupportedControllerType.None ? "Custom Device" : controllerMappingProfile.ControllerType.ToString();
             EditorGUILayout.LabelField($"{deviceName} Mappings", EditorStyles.boldLabel);
 
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile == null)
-            {
-                EditorGUILayout.HelpBox("No input actions found, please specify a input action profile in the main configuration.", MessageType.Error);
-                return;
-            }
-
-            (target as BaseMixedRealityProfile).CheckProfileLock(false);
+            controllerMappingProfile.CheckProfileLock(false);
 
             if (controllerButtonStyle == null)
             {
@@ -120,7 +85,7 @@ namespace XRTK.Inspectors.Profiles
 
             for (int i = 0; i < controllerMappings?.arraySize; i++)
             {
-                var supportedControllerType = profile.ControllerType;
+                var supportedControllerType = controllerMappingProfile.ControllerType;
                 var controllerMapping = controllerMappings.GetArrayElementAtIndex(i);
                 var handednessValue = controllerMapping.FindPropertyRelative("handedness");
                 var handedness = (Handedness)handednessValue.intValue;
@@ -134,7 +99,7 @@ namespace XRTK.Inspectors.Profiles
                     if (controllerItems[j].ControllerType == supportedControllerType &&
                         controllerItems[j].Handedness == handedness)
                     {
-                        profile.ControllerMappings[i].SynchronizeInputActions(controllerItems[j].Interactions);
+                        controllerMappingProfile.ControllerMappings[i].SynchronizeInputActions(controllerItems[j].Interactions);
                         serializedObject.ApplyModifiedProperties();
                         skip = true;
                     }
@@ -142,7 +107,7 @@ namespace XRTK.Inspectors.Profiles
 
                 if (skip) { continue; }
 
-                controllerItems.Add(new ControllerItem(supportedControllerType, handedness, profile.ControllerMappings[i].Interactions));
+                controllerItems.Add(new ControllerItem(supportedControllerType, handedness, controllerMappingProfile.ControllerMappings[i].Interactions));
 
                 string handednessContent = string.Empty;
 
@@ -163,12 +128,12 @@ namespace XRTK.Inspectors.Profiles
                     GUILayout.BeginHorizontal();
                 }
 
-                var buttonContent = new GUIContent($"Edit {description.stringValue}{handednessContent}", ControllerMappingLibrary.GetControllerTextureScaled(supportedControllerType, handedness));
+                var buttonContent = new GUIContent($"Edit {description.stringValue}{handednessContent}", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile, supportedControllerType, handedness));
 
                 if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
                 {
                     serializedObject.ApplyModifiedProperties();
-                    ControllerPopupWindow.Show(profile.ControllerType, interactions, handedness, MixedRealityPreferences.LockProfiles && !((BaseMixedRealityProfile)target).IsCustomProfile);
+                    EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, controllerMappingProfile.ControllerType, interactions, handedness, MixedRealityPreferences.LockProfiles && !thisProfile.IsCustomProfile);
                 }
 
                 if (handedness != Handedness.Left)

@@ -4,7 +4,6 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Providers.SpatialObservers;
-using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles.SpatialAwareness
 {
@@ -35,11 +34,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
-
             surfacePhysicsLayerOverride = serializedObject.FindProperty("surfacePhysicsLayerOverride");
             surfaceFindingMinimumArea = serializedObject.FindProperty("surfaceFindingMinimumArea");
             displayFloorSurfaces = serializedObject.FindProperty("displayFloorSurfaces");
@@ -56,11 +50,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
-            {
-                return;
-            }
 
             serializedObject.Update();
 

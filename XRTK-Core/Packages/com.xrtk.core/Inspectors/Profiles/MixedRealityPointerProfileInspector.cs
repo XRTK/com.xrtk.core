@@ -4,10 +4,8 @@
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Definitions.InputSystem;
 using XRTK.Inspectors.Utilities;
-using XRTK.Services;
 using XRTK.Utilities;
 
 namespace XRTK.Inspectors.Profiles
@@ -32,11 +30,6 @@ namespace XRTK.Inspectors.Profiles
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
-
             pointingExtent = serializedObject.FindProperty("pointingExtent");
             pointingRaycastLayerMasks = serializedObject.FindProperty("pointingRaycastLayerMasks");
             debugDrawPointingRays = serializedObject.FindProperty("debugDrawPointingRays");
@@ -58,14 +51,11 @@ namespace XRTK.Inspectors.Profiles
         public override void OnInspectorGUI()
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
-            {
-                return;
-            }
 
-            if (GUILayout.Button("Back to Input Profile"))
+            if (thisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to Input Profile"))
             {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
+                Selection.activeObject = thisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
@@ -73,7 +63,7 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.HelpBox("Pointers attach themselves onto controllers as they are initialized.", MessageType.Info);
             EditorGUILayout.Space();
 
-            (target as BaseMixedRealityProfile).CheckProfileLock();
+            thisProfile.CheckProfileLock();
             serializedObject.Update();
             currentlySelectedPointerOption = -1;
 
@@ -90,6 +80,7 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.PropertyField(gazeProviderType);
 
             EditorGUILayout.Space();
+
             if (GUILayout.Button("Customize Gaze Provider Settings"))
             {
                 Selection.activeObject = CameraCache.Main.gameObject;

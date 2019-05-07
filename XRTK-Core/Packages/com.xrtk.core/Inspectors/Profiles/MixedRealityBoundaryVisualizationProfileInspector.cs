@@ -5,9 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.BoundarySystem;
-using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Utilities;
-using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -44,11 +42,6 @@ namespace XRTK.Inspectors.Profiles
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
-
             boundaryHeight = serializedObject.FindProperty("boundaryHeight");
 
             showFloor = serializedObject.FindProperty("showFloor");
@@ -77,14 +70,10 @@ namespace XRTK.Inspectors.Profiles
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
+            if (thisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to Configuration Profile"))
             {
-                return;
-            }
-
-            if (GUILayout.Button("Back to Configuration Profile"))
-            {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile;
+                Selection.activeObject = thisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();

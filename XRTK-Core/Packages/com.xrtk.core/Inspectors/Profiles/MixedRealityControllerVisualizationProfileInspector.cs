@@ -1,16 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
-using XRTK.Extensions;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Providers.Controllers;
-using XRTK.Providers.Controllers.UnityInput;
-using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using XRTK.Inspectors.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Services;
+using XRTK.Providers.Controllers;
+using XRTK.Providers.Controllers.UnityInput;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -33,7 +31,7 @@ namespace XRTK.Inspectors.Profiles
         private SerializedProperty globalRightHandModel;
         private SerializedProperty controllerVisualizationSettings;
 
-        private MixedRealityControllerVisualizationProfile thisProfile;
+        private MixedRealityControllerVisualizationProfile controllerVisualizationProfile;
 
         private float defaultLabelWidth;
         private float defaultFieldWidth;
@@ -45,12 +43,7 @@ namespace XRTK.Inspectors.Profiles
             defaultLabelWidth = EditorGUIUtility.labelWidth;
             defaultFieldWidth = EditorGUIUtility.fieldWidth;
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
-
-            thisProfile = target as MixedRealityControllerVisualizationProfile;
+            controllerVisualizationProfile = target as MixedRealityControllerVisualizationProfile;
 
             renderMotionControllers = serializedObject.FindProperty("renderMotionControllers");
             controllerVisualizationType = serializedObject.FindProperty("controllerVisualizationType");
@@ -64,35 +57,20 @@ namespace XRTK.Inspectors.Profiles
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
+            if (thisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to Input Profile"))
             {
-                return;
-            }
-
-            if (!MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
-            {
-                EditorGUILayout.HelpBox("No input system is enabled, or you need to specify the type in the main configuration profile.", MessageType.Error);
-
-                if (GUILayout.Button("Back to Configuration Profile"))
-                {
-                    Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile;
-                }
-
-                return;
-            }
-
-            if (GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
+                Selection.activeObject = controllerVisualizationProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Controller Visualizations", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Define all the custom controller visualizations you'd like to use for each controller type when they're rendered in the scene.\n\n" +
                                     "Global settings are the default fallback, and any specific controller definitions take precedence.", MessageType.Info);
+
             serializedObject.Update();
 
-            (target as BaseMixedRealityProfile).CheckProfileLock();
+            controllerVisualizationProfile.CheckProfileLock();
 
             EditorGUIUtility.labelWidth = 168f;
             EditorGUILayout.PropertyField(renderMotionControllers);
@@ -104,8 +82,8 @@ namespace XRTK.Inspectors.Profiles
 
                 EditorGUILayout.PropertyField(controllerVisualizationType);
 
-                if (thisProfile.ControllerVisualizationType == null ||
-                    thisProfile.ControllerVisualizationType.Type == null)
+                if (controllerVisualizationProfile.ControllerVisualizationType == null ||
+                    controllerVisualizationProfile.ControllerVisualizationType.Type == null)
                 {
                     EditorGUILayout.HelpBox("A controller visualization type must be defined!", MessageType.Error);
                 }
@@ -143,7 +121,7 @@ namespace XRTK.Inspectors.Profiles
 
         private void RenderControllerList(SerializedProperty controllerList)
         {
-            if (thisProfile.ControllerVisualizationSettings.Length != controllerList.arraySize) { return; }
+            if (controllerVisualizationProfile.ControllerVisualizationSettings.Length != controllerList.arraySize) { return; }
 
             EditorGUILayout.Space();
 
@@ -157,7 +135,7 @@ namespace XRTK.Inspectors.Profiles
                 var mixedRealityControllerHandedness = controllerSetting.FindPropertyRelative("handedness");
                 mixedRealityControllerHandedness.intValue = 1;
                 serializedObject.ApplyModifiedProperties();
-                thisProfile.ControllerVisualizationSettings[index].ControllerType.Type = typeof(GenericJoystickController);
+                controllerVisualizationProfile.ControllerVisualizationSettings[index].ControllerType.Type = typeof(GenericJoystickController);
                 return;
             }
 
@@ -170,11 +148,11 @@ namespace XRTK.Inspectors.Profiles
                 EditorGUIUtility.fieldWidth = 64f;
                 var controllerSetting = controllerList.GetArrayElementAtIndex(i);
                 var mixedRealityControllerMappingDescription = controllerSetting.FindPropertyRelative("description");
-                bool hasValidType = thisProfile.ControllerVisualizationSettings[i].ControllerType != null &&
-                                    thisProfile.ControllerVisualizationSettings[i].ControllerType.Type != null;
+                bool hasValidType = controllerVisualizationProfile.ControllerVisualizationSettings[i].ControllerType != null &&
+                                    controllerVisualizationProfile.ControllerVisualizationSettings[i].ControllerType.Type != null;
 
                 mixedRealityControllerMappingDescription.stringValue = hasValidType
-                    ? thisProfile.ControllerVisualizationSettings[i].ControllerType.Type.Name.ToProperCase()
+                    ? controllerVisualizationProfile.ControllerVisualizationSettings[i].ControllerType.Type.Name.ToProperCase()
                     : "Undefined Controller";
 
                 serializedObject.ApplyModifiedProperties();
@@ -257,10 +235,10 @@ namespace XRTK.Inspectors.Profiles
 
             if (componentList == null || componentList.Length == 0)
             {
-                if (thisProfile.ControllerVisualizationType != null &&
-                    thisProfile.ControllerVisualizationType.Type != null)
+                if (controllerVisualizationProfile.ControllerVisualizationType != null &&
+                    controllerVisualizationProfile.ControllerVisualizationType.Type != null)
                 {
-                    modelPrefab.AddComponent(thisProfile.ControllerVisualizationType.Type);
+                    modelPrefab.AddComponent(controllerVisualizationProfile.ControllerVisualizationType.Type);
                     return true;
                 }
 

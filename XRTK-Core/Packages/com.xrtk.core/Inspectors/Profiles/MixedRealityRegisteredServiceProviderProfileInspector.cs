@@ -21,11 +21,6 @@ namespace XRTK.Inspectors.Profiles
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
-
             configurations = serializedObject.FindProperty("configurations");
 
             configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true)
@@ -42,14 +37,10 @@ namespace XRTK.Inspectors.Profiles
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
+            if (thisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to Configuration Profile"))
             {
-                return;
-            }
-
-            if (GUILayout.Button("Back to Configuration Profile"))
-            {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile;
+                Selection.activeObject = thisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
@@ -57,7 +48,7 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.HelpBox("This profile defines any additional Services like systems, features, and managers to register with the Mixed Reality Toolkit.\n\n" +
                                     "Note: The order of the list determines the order these services get created.", MessageType.Info);
 
-            (target as BaseMixedRealityProfile).CheckProfileLock();
+            thisProfile.CheckProfileLock();
 
             serializedObject.Update();
             EditorGUILayout.Space();
@@ -107,7 +98,8 @@ namespace XRTK.Inspectors.Profiles
             {
                 serializedObject.ApplyModifiedProperties();
 
-                if (!string.IsNullOrEmpty(componentType.FindPropertyRelative("reference").stringValue))
+                if (MixedRealityToolkit.IsInitialized &&
+                    !string.IsNullOrEmpty(componentType.FindPropertyRelative("reference").stringValue))
                 {
                     MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
                 }
@@ -142,7 +134,11 @@ namespace XRTK.Inspectors.Profiles
             }
 
             serializedObject.ApplyModifiedProperties();
-            EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
+
+            if (MixedRealityToolkit.IsInitialized)
+            {
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
+            }
         }
     }
 }

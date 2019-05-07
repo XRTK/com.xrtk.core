@@ -5,7 +5,6 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Inspectors.Utilities;
-using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -30,11 +29,6 @@ namespace XRTK.Inspectors.Profiles
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
-
             isCameraPersistent = serializedObject.FindProperty("isCameraPersistent");
             opaqueNearClip = serializedObject.FindProperty("nearClipPlaneOpaqueDisplay");
             opaqueClearFlags = serializedObject.FindProperty("cameraClearFlagsOpaqueDisplay");
@@ -50,21 +44,18 @@ namespace XRTK.Inspectors.Profiles
         public override void OnInspectorGUI()
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured())
-            {
-                return;
-            }
 
-            if (GUILayout.Button("Back to Configuration Profile"))
+            if (thisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to Configuration Profile"))
             {
-                Selection.activeObject = MixedRealityToolkit.Instance.ActiveProfile;
+                Selection.activeObject = thisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Camera Profile", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("The Camera Profile helps tweak camera settings no matter what platform you're building for.", MessageType.Info);
 
-            (target as BaseMixedRealityProfile).CheckProfileLock();
+            thisProfile.CheckProfileLock();
 
             serializedObject.Update();
 

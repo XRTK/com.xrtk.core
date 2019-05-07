@@ -3,7 +3,6 @@
 
 using UnityEditor;
 using XRTK.Providers.SpatialObservers;
-using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles.SpatialAwareness
 {
@@ -27,11 +26,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         {
             base.OnEnable();
 
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
-
             meshPhysicsLayerOverride = serializedObject.FindProperty("meshPhysicsLayerOverride");
             meshLevelOfDetail = serializedObject.FindProperty("meshLevelOfDetail");
             meshTrianglesPerCubicMeter = serializedObject.FindProperty("meshTrianglesPerCubicMeter");
@@ -47,10 +41,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            if (!MixedRealityInspectorUtility.CheckMixedRealityConfigured(false))
-            {
-                return;
-            }
 
             serializedObject.Update();
 

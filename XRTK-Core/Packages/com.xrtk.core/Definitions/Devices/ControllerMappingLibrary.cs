@@ -238,12 +238,13 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// Gets a texture for the <see cref="SupportedControllerType"/> based on a list of the active <see cref="MixedRealityControllerMappingProfiles"/>.
         /// </summary>
+        /// <param name="mappingProfile"></param>
         /// <param name="controllerType"></param>
         /// <param name="handedness"></param>
         /// <returns>The texture for the controller type, if none found then a generic texture is returned.</returns>
-        public static Texture2D GetControllerTexture(SupportedControllerType controllerType, Handedness handedness)
+        public static Texture2D GetControllerTexture(BaseMixedRealityControllerMappingProfile mappingProfile, SupportedControllerType controllerType, Handedness handedness)
         {
-            return GetControllerTextureCached(controllerType, handedness);
+            return GetControllerTextureCached(mappingProfile, controllerType, handedness);
         }
 
         /// <summary>
@@ -252,44 +253,35 @@ namespace XRTK.Definitions.Devices
         /// <param name="controllerType"></param>
         /// <param name="handedness"></param>
         /// <returns>The scaled texture for the controller type, if none found then a generic texture is returned.</returns>
-        public static Texture2D GetControllerTextureScaled(SupportedControllerType controllerType, Handedness handedness)
+        public static Texture2D GetControllerTextureScaled(BaseMixedRealityControllerMappingProfile mappingProfile, SupportedControllerType controllerType, Handedness handedness)
         {
-            return GetControllerTextureCached(controllerType, handedness, true);
+            return GetControllerTextureCached(mappingProfile, controllerType, handedness, true);
         }
 
-        private static Texture2D GetControllerTextureCached(SupportedControllerType controllerType, Handedness handedness, bool scaled = false)
+        private static Texture2D GetControllerTextureCached(BaseMixedRealityControllerMappingProfile mappingProfile, SupportedControllerType controllerType, Handedness handedness, bool scaled = false)
         {
             var key = new Tuple<SupportedControllerType, Handedness, bool>(controllerType, handedness, scaled);
 
-            if (CachedTextures.TryGetValue(key, out Texture2D texture))
+            if (CachedTextures.TryGetValue(key, out var texture))
             {
                 return texture;
             }
 
-            texture = GetControllerTextureInternal(controllerType, handedness, scaled);
+            texture = GetControllerTextureInternal(mappingProfile, controllerType, handedness, scaled);
             CachedTextures.Add(key, texture);
             return texture;
         }
 
-        private static Texture2D GetControllerTextureInternal(SupportedControllerType controllerType, Handedness handedness, bool scaled)
+        private static Texture2D GetControllerTextureInternal(BaseMixedRealityControllerMappingProfile mappingProfile, SupportedControllerType controllerType, Handedness handedness, bool scaled)
         {
-            var profiles = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles;
-
-            if (MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
-                profiles != null)
+            if (mappingProfile != null &&
+                mappingProfile.ControllerType == controllerType)
             {
-                foreach (var profile in profiles.ControllerMappingProfiles)
-                {
-                    if (profile != null &&
-                        profile.ControllerType == controllerType)
-                    {
-                        var texture = GetControllerTextureInternal(profile.TexturePath, handedness, scaled);
+                var texture = GetControllerTextureInternal(mappingProfile.TexturePath, handedness, scaled);
 
-                        if (texture != null)
-                        {
-                            return texture;
-                        }
-                    }
+                if (texture != null)
+                {
+                    return texture;
                 }
             }
 

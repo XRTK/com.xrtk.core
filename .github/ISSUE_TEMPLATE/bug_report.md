@@ -8,15 +8,13 @@ assignees: ''
 ---
 # XRTK - Mixed Reality Toolkit Bug Report
 
-![](https://github.com/XRTK/XRTK-Core/raw/development/docs/logo.png)
-
 ## Describe the bug
 
-<!-- A clear and concise description of what the bug is. -->
+Please provide a clear and concise description of what the bug is.
 
 ## To Reproduce
 
-<!-- Steps to reproduce the behavior:
+Include Steps to reproduce the behavior:
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
@@ -24,32 +22,28 @@ assignees: ''
 
 ## Expected behavior
 
-<!-- A clear and concise description of what you expected to happen. -->
+A clear and concise description of what you expected to happen.
 
 ## Actual behavior
 
-<!-- What is actually happening -->
+What is actually happening
 
 ## Screenshots
 
-<!-- If applicable, add screenshots to help explain your problem. -->
+If applicable, add screenshots to help explain your problem.
 
 ## Your Setup (please complete the following information)
 
-<!-- 
 - Unity Version [e.g. 2019.1.0f2]
 - XRTK Version [e.g. 0.1.8]
--->
 
 ## Target Platform (please complete the following information)
 
-<!-- 
 - WMR immersive
 - OpenVR
 - HoloLens
-- Lumin
--->
+- Lumin (Magic Leap)
 
 ## Additional context
 
-<!-- Add any other context about the problem here. -->
+Add any other context about the problem here.

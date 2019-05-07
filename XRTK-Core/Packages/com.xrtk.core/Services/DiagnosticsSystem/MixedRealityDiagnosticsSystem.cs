@@ -10,7 +10,7 @@ using XRTK.Interfaces.Diagnostics;
 namespace XRTK.Services.DiagnosticsSystem
 {
     /// <summary>
-    /// The default implementation of the <see cref="Microsoft.MixedReality.Toolkit.Diagnostics.IMixedRealityDiagnosticsSystem"/>
+    /// The default implementation of the <see cref="IMixedRealityDiagnosticsSystem"/>
     /// </summary>
     public class MixedRealityDiagnosticsSystem : BaseEventSystem, IMixedRealityDiagnosticsSystem
     {
@@ -20,16 +20,16 @@ namespace XRTK.Services.DiagnosticsSystem
         /// Constructor.
         /// </summary>
         /// <param name="profile">Diagnostics service configuration profile.</param>
-        public MixedRealityDiagnosticsSystem(MixedRealityDiagnosticsProfile profile, Transform playspace)
+        public MixedRealityDiagnosticsSystem(MixedRealityDiagnosticsProfile profile)
             : base(profile)
         {
-            if (playspace == null)
+            Playspace = MixedRealityToolkit.Instance?.MixedRealityPlayspace;
+            if (Playspace == null)
             {
                 Debug.LogError("The MixedRealityDiagnosticSystem object requires a valid playspace Transform.");
             }
 
             this.profile = profile;
-            Playspace = playspace;
         }
 
         /// <summary>
@@ -83,6 +83,8 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <inheritdoc />
         public override void Destroy()
         {
+            base.Destroy();
+
             if (diagnosticVisualizationParent != null)
             {
                 if (Application.isEditor)
@@ -99,7 +101,7 @@ namespace XRTK.Services.DiagnosticsSystem
             }
         }
 
-        #endregion IMixedRealityService
+        #endregion IMixedRealityService Implementation
 
         #region IMixedRealityDiagnosticsSystem
         /// <summary>
@@ -176,7 +178,7 @@ namespace XRTK.Services.DiagnosticsSystem
             }
         }
 
-        #endregion IMixedRealityDiagnosticsSystem
+        #endregion IMixedRealityDiagnosticsSystem Implementation
 
         #region IMixedRealityEventSource
 
@@ -211,7 +213,7 @@ namespace XRTK.Services.DiagnosticsSystem
                 handler.OnDiagnosticSettingsChanged(diagnosticsEventsData);
             };
 
-        #endregion IMixedRealityEventSource
+        #endregion IMixedRealityEventSource Implementation
 
         private TextAnchor windowAnchor = TextAnchor.LowerCenter;
 

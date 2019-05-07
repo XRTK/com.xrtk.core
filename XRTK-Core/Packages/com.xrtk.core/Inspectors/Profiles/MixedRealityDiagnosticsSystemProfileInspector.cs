@@ -22,10 +22,6 @@ namespace XRTK.Inspectors.Profiles
         private SerializedProperty windowScale;
         private SerializedProperty windowFollowSpeed;
 
-        // todo: coming soon
-        // private static bool showDebugPanelSettings = true;
-        // private SerializedProperty isDebugPanelVisible;
-
         protected override void OnEnable()
         {
             base.OnEnable();

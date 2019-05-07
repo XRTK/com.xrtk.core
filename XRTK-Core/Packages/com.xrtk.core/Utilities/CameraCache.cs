@@ -24,45 +24,10 @@ namespace XRTK.Utilities
 
                 if (mainCamera == null)
                 {
-                    mainCamera = new GameObject("Main Camera", typeof(Camera)) { tag = "MainCamera" }.GetComponent<Camera>();
+                    mainCamera = new GameObject("Main Camera", typeof(Camera), typeof(AudioListener)) { tag = "MainCamera" }.GetComponent<Camera>();
                 }
 
                 mainCamera = cachedCamera == null ? Refresh(mainCamera) : cachedCamera;
-
-                if (mainCamera == null)
-                {
-                    // No camera in the scene tagged as main. Let's search the scene for a GameObject named Main Camera
-                    var cameras = UnityEngine.Object.FindObjectsOfType<Camera>();
-
-                    switch (cameras.Length)
-                    {
-                        case 0:
-                            Debug.LogError("No Cameras found in the scene!");
-                            break;
-                        case 1:
-                            mainCamera = Refresh(cameras[0]);
-                            break;
-                        default:
-                            // Search for main camera by name.
-                            foreach (var camera in cameras)
-                            {
-                                if (camera.name == "Main Camera")
-                                {
-                                    mainCamera = Refresh(camera);
-                                    break;
-                                }
-                            }
-
-                            // If we still didn't find it, just set the first camera.
-                            if (mainCamera == null)
-                            {
-                                Debug.LogWarning($"No main camera found. The Mixed Reality Toolkit used {cameras[0].name} as your main.");
-                                mainCamera = Refresh(cameras[0]);
-                            }
-
-                            break;
-                    }
-                }
 
                 return mainCamera;
             }

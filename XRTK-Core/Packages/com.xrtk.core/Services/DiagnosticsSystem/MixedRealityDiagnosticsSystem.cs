@@ -2,9 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using UnityEngine.EventSystems;
 using XRTK.Definitions.Diagnostics;
-using XRTK.EventDatum.Diagnostics;
 using XRTK.Interfaces.Diagnostics;
 
 namespace XRTK.Services.DiagnosticsSystem
@@ -12,10 +10,8 @@ namespace XRTK.Services.DiagnosticsSystem
     /// <summary>
     /// The default implementation of the <see cref="IMixedRealityDiagnosticsSystem"/>
     /// </summary>
-    public class MixedRealityDiagnosticsSystem : BaseEventSystem, IMixedRealityDiagnosticsSystem
+    public class MixedRealityDiagnosticsSystem : BaseSystem, IMixedRealityDiagnosticsSystem
     {
-        private readonly MixedRealityDiagnosticsProfile profile;
-
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -23,41 +19,10 @@ namespace XRTK.Services.DiagnosticsSystem
         public MixedRealityDiagnosticsSystem(MixedRealityDiagnosticsProfile profile)
             : base(profile)
         {
-            Playspace = MixedRealityToolkit.Instance?.MixedRealityPlayspace;
-            if (Playspace == null)
-            {
-                Debug.LogError("The MixedRealityDiagnosticSystem object requires a valid playspace Transform.");
-            }
-
             this.profile = profile;
         }
 
-        /// <summary>
-        /// The parent object under which all visualization game objects will be placed.
-        /// </summary>
-        private GameObject diagnosticVisualizationParent = null;
-
-        /// <summary>
-        /// Creates the diagnostic visualizations and parents them so that the scene hierarchy does not get overly cluttered.
-        /// </summary>
-        private void CreateVisualizations()
-        {
-            diagnosticVisualizationParent = new GameObject("Diagnostics");
-            diagnosticVisualizationParent.transform.parent = Playspace.transform;
-            diagnosticVisualizationParent.SetActive(ShowDiagnostics);
-
-            // visual profiler settings
-            visualProfiler = diagnosticVisualizationParent.AddComponent<MixedRealityToolkitVisualProfiler>();
-            visualProfiler.WindowParent = diagnosticVisualizationParent.transform;
-            visualProfiler.IsVisible = ShowProfiler;
-            visualProfiler.FrameSampleRate = FrameSampleRate;
-            visualProfiler.WindowAnchor = WindowAnchor;
-            visualProfiler.WindowOffset = WindowOffset;
-            visualProfiler.WindowScale = WindowScale;
-            visualProfiler.WindowFollowSpeed = WindowFollowSpeed;
-        }
-
-        private MixedRealityToolkitVisualProfiler visualProfiler = null;
+        private readonly MixedRealityDiagnosticsProfile profile;
 
         #region IMixedRealityService
 
@@ -65,8 +30,6 @@ namespace XRTK.Services.DiagnosticsSystem
         public override void Initialize()
         {
             if (!Application.isPlaying) { return; }
-
-            eventData = new DiagnosticsEventData(EventSystem.current);
 
             // Apply profile settings
             ShowDiagnostics = profile.ShowDiagnostics;
@@ -104,19 +67,13 @@ namespace XRTK.Services.DiagnosticsSystem
         #endregion IMixedRealityService Implementation
 
         #region IMixedRealityDiagnosticsSystem
-        /// <summary>
-        /// The transform of the playspace scene object. We use this transform to parent
-        /// diagnostic visualizations that teleport with the user and to perform calculations
-        /// to ensure proper alignment with the world.
-        /// </summary>
-        private Transform Playspace = null;
 
         private bool showDiagnostics;
 
+        /// <inheritdoc />
         public bool ShowDiagnostics
         {
-            get { return showDiagnostics; }
-
+            get => showDiagnostics;
             set
             {
                 if (value != showDiagnostics)
@@ -136,11 +93,7 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <inheritdoc />
         public bool ShowProfiler
         {
-            get
-            {
-                return showProfiler;
-            }
-
+            get => showProfiler;
             set
             {
                 if (value != showProfiler)
@@ -159,11 +112,7 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <inheritdoc />
         public float FrameSampleRate
         {
-            get
-            {
-                return frameSampleRate;
-            }
-
+            get => frameSampleRate;
             set
             {
                 if (!Mathf.Approximately(frameSampleRate, value))
@@ -180,41 +129,6 @@ namespace XRTK.Services.DiagnosticsSystem
 
         #endregion IMixedRealityDiagnosticsSystem Implementation
 
-        #region IMixedRealityEventSource
-
-        private DiagnosticsEventData eventData;
-
-        /// <inheritdoc />
-        public uint SourceId => (uint)SourceName.GetHashCode();
-
-        /// <inheritdoc />
-        public string SourceName => "Mixed Reality Diagnostics System";
-
-        /// <inheritdoc />
-        public new bool Equals(object x, object y) => false;
-
-        /// <inheritdoc />
-        public int GetHashCode(object obj) => SourceName.GetHashCode();
-
-        // TODO: This will currently never execute. Where do we need to raise this event?
-        private void RaiseDiagnosticsChanged()
-        {
-            eventData.Initialize(this);
-            HandleEvent(eventData, OnDiagnosticsChanged);
-        }
-
-        /// <summary>
-        /// Event sent whenever the diagnostics visualization changes.
-        /// </summary>
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityDiagnosticsHandler> OnDiagnosticsChanged =
-            delegate (IMixedRealityDiagnosticsHandler handler, BaseEventData eventData)
-            {
-                var diagnosticsEventsData = ExecuteEvents.ValidateEventData<DiagnosticsEventData>(eventData);
-                handler.OnDiagnosticSettingsChanged(diagnosticsEventsData);
-            };
-
-        #endregion IMixedRealityEventSource Implementation
-
         private TextAnchor windowAnchor = TextAnchor.LowerCenter;
 
         /// <summary>
@@ -222,7 +136,7 @@ namespace XRTK.Services.DiagnosticsSystem
         /// </summary>
         public TextAnchor WindowAnchor
         {
-            get { return windowAnchor; }
+            get => windowAnchor;
 
             set
             {
@@ -245,7 +159,7 @@ namespace XRTK.Services.DiagnosticsSystem
         /// </summary>
         public Vector2 WindowOffset
         {
-            get { return windowOffset; }
+            get => windowOffset;
 
             set
             {
@@ -268,11 +182,11 @@ namespace XRTK.Services.DiagnosticsSystem
         /// </summary>
         public float WindowScale
         {
-            get { return windowScale; }
+            get => windowScale;
 
             set
             {
-                if (value != windowScale)
+                if (!value.Equals(windowScale))
                 {
                     windowScale = value;
 
@@ -291,11 +205,11 @@ namespace XRTK.Services.DiagnosticsSystem
         /// </summary>
         public float WindowFollowSpeed
         {
-            get { return windowFollowSpeed; }
+            get => windowFollowSpeed;
 
             set
             {
-                if (value != windowFollowSpeed)
+                if (!value.Equals(windowFollowSpeed))
                 {
                     windowFollowSpeed = value;
 
@@ -305,6 +219,33 @@ namespace XRTK.Services.DiagnosticsSystem
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// The parent object under which all visualization game objects will be placed.
+        /// </summary>
+        private GameObject diagnosticVisualizationParent = null;
+
+        private MixedRealityToolkitVisualProfiler visualProfiler = null;
+
+        /// <summary>
+        /// Creates the diagnostic visualizations and parents them so that the scene hierarchy does not get overly cluttered.
+        /// </summary>
+        private void CreateVisualizations()
+        {
+            diagnosticVisualizationParent = new GameObject("Diagnostics");
+            diagnosticVisualizationParent.transform.parent = MixedRealityToolkit.Instance.MixedRealityPlayspace;
+            diagnosticVisualizationParent.SetActive(ShowDiagnostics);
+
+            // visual profiler settings
+            visualProfiler = diagnosticVisualizationParent.AddComponent<MixedRealityToolkitVisualProfiler>();
+            visualProfiler.WindowParent = diagnosticVisualizationParent.transform;
+            visualProfiler.IsVisible = ShowProfiler;
+            visualProfiler.FrameSampleRate = FrameSampleRate;
+            visualProfiler.WindowAnchor = WindowAnchor;
+            visualProfiler.WindowOffset = WindowOffset;
+            visualProfiler.WindowScale = WindowScale;
+            visualProfiler.WindowFollowSpeed = WindowFollowSpeed;
         }
     }
 }

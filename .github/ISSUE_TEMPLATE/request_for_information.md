@@ -2,9 +2,8 @@
 name: Request for Information
 about: Not sure how to do something, just ask.
 title: ''
-labels: question
+labels: Question
 assignees: ''
-
 ---
 
 # XRTK - Mixed Reality Toolkit Request for Information

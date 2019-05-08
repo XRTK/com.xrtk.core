@@ -4,8 +4,8 @@ about: Suggest an idea for the XRTK
 title: ''
 labels: Feature Request
 assignees: ''
-
 ---
+
 # XRTK - Mixed Reality Toolkit Feature Request
 
 ## Is your feature request related to a problem? Please describe

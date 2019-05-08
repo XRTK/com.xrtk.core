@@ -1,3 +1,11 @@
+---
+name: Bug report
+about: Create a report to identify a potential issue
+title: ''
+labels: Bug
+assignees: ''
+---
+
 # XRTK - Mixed Reality Toolkit Bug Report
 
 ## Describe the bug

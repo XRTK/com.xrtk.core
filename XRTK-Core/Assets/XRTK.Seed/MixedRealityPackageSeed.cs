@@ -70,12 +70,13 @@ namespace XRTK.Seed
                             {
                                 var output = process.StandardOutput.ReadToEnd();
 
-                                tag = (from t in output.Split('\n')
-                                       select Regex.Match(t, "(\\d*\\.\\d*\\.\\d*)")
-                                        into match
-                                       where match.Success
-                                       select match.Value)
-                                    .LastOrDefault();
+                                var tags = output.Split('\n')
+                                    .Select(t => Regex.Match(t, "(\\d*\\.\\d*\\.\\d*)"))
+                                    .Where(match => match.Success)
+                                    .Select(match => new Version(match.Value))
+                                    .OrderBy(version => version);
+
+                                tag = tags.LastOrDefault()?.ToString();
                             }
                             else
                             {

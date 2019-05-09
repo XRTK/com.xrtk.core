@@ -46,7 +46,7 @@ namespace XRTK.Utilities.Build
         /// <returns>True, if build was successful.</returns>
         public static async Task<bool> BuildPlayer(string buildDirectory, bool showDialog = true, CancellationToken cancellationToken = default)
         {
-            if (UnityPlayerBuildTools.CheckBuildScenes() == false)
+            if (EditorBuildSettings.scenes == null || EditorBuildSettings.scenes.Length < 1 || UnityPlayerBuildTools.CheckBuildScenes() == false)
             {
                 return false;
             }

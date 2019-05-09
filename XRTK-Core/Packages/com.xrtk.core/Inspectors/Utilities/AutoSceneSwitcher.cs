@@ -21,6 +21,7 @@ namespace XRTK.Inspectors.Utilities
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
 
             if (MixedRealityPreferences.StartSceneAsset == null &&
+                EditorBuildSettings.scenes != null &&
                 EditorBuildSettings.scenes.Length > 0 &&
                 !EditorBuildSettings.scenes[0].path.Contains("SampleScene"))
             {

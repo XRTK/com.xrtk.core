@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Extensions;
 using UnityEngine;
 
 namespace XRTK.Definitions.SpatialAwarenessSystem
@@ -50,7 +49,7 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
             get => Filter.sharedMesh;
             internal set
             {
-                // Reset the surface mesh collider to fit the updated mesh. 
+                // Reset the surface mesh collider to fit the updated mesh.
                 // Unity tribal knowledge indicates that to change the mesh assigned to a
                 // mesh collider and mesh filter, the mesh must first be set to null.  Presumably there
                 // is a side effect in the setter when setting the shared mesh to null.

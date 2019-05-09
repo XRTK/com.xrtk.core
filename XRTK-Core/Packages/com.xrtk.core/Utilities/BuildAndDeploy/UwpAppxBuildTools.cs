@@ -170,11 +170,13 @@ namespace XRTK.Utilities.Build
                     {
                         // if there are multiple visual studio installs,
                         // prefer enterprise, then pro, then community
-                        string bestPath = paths.OrderBy(p => p.ToLower().Contains("enterprise"))
+                        var bestPath = paths.OrderBy(p => p.ToLower().Contains("enterprise"))
                             .ThenBy(p => p.ToLower().Contains("professional"))
                             .ThenBy(p => p.ToLower().Contains("community")).First();
 
-                        return $@"{bestPath}\MSBuild\15.0\Bin\MSBuild.exe";
+                        return bestPath.Contains("2019")
+                            ? $@"{bestPath}\MSBuild\Current\Bin\MSBuild.exe"
+                            : $@"{bestPath}\MSBuild\15.0\Bin\MSBuild.exe";
                     }
                 }
             }

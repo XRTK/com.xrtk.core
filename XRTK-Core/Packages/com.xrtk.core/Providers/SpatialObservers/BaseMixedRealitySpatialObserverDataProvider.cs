@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections;
+using UnityEngine;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Services;
@@ -20,16 +21,12 @@ namespace XRTK.Providers.SpatialObservers
         /// <param name="name"></param>
         /// <param name="priority"></param>
         /// <param name="profile"></param>
-        protected BaseMixedRealitySpatialObserverDataProvider(string name, uint priority, BaseMixedRealitySpatialObserverProfile profile) : base(name, priority)
+        protected BaseMixedRealitySpatialObserverDataProvider(string name, uint priority, BaseMixedRealitySpatialObserverProfile profile)
+            : base(name, priority)
         {
             if (profile == null)
             {
                 throw new ArgumentNullException($"Missing profile for {name}");
-            }
-
-            if (MixedRealityToolkit.SpatialAwarenessSystem == null)
-            {
-                throw new Exception("Missing Spatial Awareness System!");
             }
 
             SourceId = MixedRealityToolkit.SpatialAwarenessSystem.GenerateNewObserverId();
@@ -82,12 +79,14 @@ namespace XRTK.Providers.SpatialObservers
         /// <inheritdoc />
         public virtual void StartObserving()
         {
+            if (!Application.isPlaying) { return; }
             IsRunning = true;
         }
 
         /// <inheritdoc />
         public virtual void StopObserving()
         {
+            if (!Application.isPlaying) { return; }
             IsRunning = false;
         }
 

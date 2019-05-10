@@ -40,7 +40,6 @@ namespace XRTK.Providers.SpatialObservers
             meshObjectPrefab = profile.MeshObjectPrefab;
             spatialMeshObjectPool = new Stack<SpatialMeshObject>();
 
-
             if (additionalComponents != null)
             {
                 requiredMeshComponents = new Type[additionalComponents.Length + 3];
@@ -80,7 +79,6 @@ namespace XRTK.Providers.SpatialObservers
         {
             base.Initialize();
 
-            // Only update the observer if it is running.
             if (!Application.isPlaying) { return; }
 
             for (int i = 0; i < 10; i++)
@@ -94,7 +92,6 @@ namespace XRTK.Providers.SpatialObservers
         {
             base.Enable();
 
-            // Only update the observer if it is running.
             if (!Application.isPlaying) { return; }
 
             // If we've got some spatial meshes and were disabled previously, turn them back on.
@@ -109,7 +106,6 @@ namespace XRTK.Providers.SpatialObservers
         {
             base.Update();
 
-            // Only update the observer if it is running.
             if (!Application.isPlaying || !IsRunning) { return; }
 
             lock (spatialMeshObjectPool)
@@ -127,11 +123,10 @@ namespace XRTK.Providers.SpatialObservers
         {
             base.Disable();
 
-            // Only update the observer if it is running.
             if (!Application.isPlaying) { return; }
 
             // Disable any spatial meshes we might have.
-            foreach (SpatialMeshObject meshObject in spatialMeshObjects.Values)
+            foreach (var meshObject in spatialMeshObjects.Values)
             {
                 if (meshObject.GameObject != null)
                 {
@@ -233,7 +228,7 @@ namespace XRTK.Providers.SpatialObservers
         public bool IsStationaryObserver { get; }
 
         /// <inheritdoc />
-        public Vector3 ObserverOrigin { get; protected set; }
+        public Vector3 ObserverOrigin { get; protected set; } = Vector3.zero;
 
         /// <inheritdoc />
         public Quaternion ObserverOrientation { get; protected set; } = Quaternion.identity;
@@ -264,7 +259,7 @@ namespace XRTK.Providers.SpatialObservers
         /// <inheritdoc />
         public virtual void RaiseMeshRemoved(SpatialMeshObject spatialMeshObject)
         {
-            if (spatialMeshObjects.TryGetValue(spatialMeshObject.Id, out SpatialMeshObject spatialMesh))
+            if (spatialMeshObjects.TryGetValue(spatialMeshObject.Id, out var spatialMesh))
             {
                 spatialMeshObjects.Remove(spatialMesh.Id);
 
@@ -300,7 +295,7 @@ namespace XRTK.Providers.SpatialObservers
         /// <returns>A <see cref="SpatialMeshObject"/></returns>
         protected async Task<SpatialMeshObject> RequestSpatialMeshObject(int meshId)
         {
-            if (spatialMeshObjects.TryGetValue(meshId, out SpatialMeshObject spatialMesh))
+            if (spatialMeshObjects.TryGetValue(meshId, out var spatialMesh))
             {
                 return spatialMesh;
             }
@@ -328,7 +323,7 @@ namespace XRTK.Providers.SpatialObservers
 
             if (meshObjectPrefab == null)
             {
-                newGameObject = new GameObject($"Blank Spatial Mesh GameObject", requiredMeshComponents)
+                newGameObject = new GameObject("Blank Spatial Mesh GameObject", requiredMeshComponents)
                 {
                     layer = layer
                 };
@@ -337,9 +332,9 @@ namespace XRTK.Providers.SpatialObservers
             {
                 newGameObject = UnityEngine.Object.Instantiate(meshObjectPrefab);
 
-                foreach (var requiredComponent in requiredMeshComponents)
+                for (var i = 0; i < requiredMeshComponents.Length; i++)
                 {
-                    newGameObject.EnsureComponent(requiredComponent);
+                    newGameObject.EnsureComponent(requiredMeshComponents[i]);
                 }
 
                 newGameObject.layer = layer;

@@ -31,7 +31,7 @@ namespace XRTK.Providers.SpatialObservers
             MeshLevelOfDetail = profile.MeshLevelOfDetail;
             MeshTrianglesPerCubicMeter = profile.MeshTrianglesPerCubicMeter;
             MeshRecalculateNormals = profile.MeshRecalculateNormals;
-            MeshDisplayOption = profile.MeshDisplayOption;
+            meshDisplayOption = profile.MeshDisplayOption;
             MeshVisibleMaterial = profile.MeshVisibleMaterial;
             MeshOcclusionMaterial = profile.MeshOcclusionMaterial;
             ObservationExtents = profile.ObservationExtents;
@@ -212,8 +212,38 @@ namespace XRTK.Providers.SpatialObservers
         /// <inheritdoc />
         public bool MeshRecalculateNormals { get; }
 
+        private SpatialMeshDisplayOptions meshDisplayOption;
+
         /// <inheritdoc />
-        public SpatialMeshDisplayOptions MeshDisplayOption { get; }
+        public SpatialMeshDisplayOptions MeshDisplayOption
+        {
+            get => meshDisplayOption;
+            set
+            {
+                meshDisplayOption = value;
+
+                if (meshDisplayOption != SpatialMeshDisplayOptions.None)
+                {
+                    foreach (var spatialMeshObject in SpatialMeshObjects)
+                    {
+                        spatialMeshObject.Value.Collider.enabled = true;
+                        spatialMeshObject.Value.Renderer.enabled = meshDisplayOption == SpatialMeshDisplayOptions.Visible ||
+                                                                   meshDisplayOption == SpatialMeshDisplayOptions.Occlusion;
+                        spatialMeshObject.Value.Renderer.sharedMaterial = meshDisplayOption == SpatialMeshDisplayOptions.Visible
+                            ? MeshVisibleMaterial
+                            : MeshOcclusionMaterial;
+                    }
+                }
+                else
+                {
+                    foreach (var spatialMeshObject in SpatialMeshObjects)
+                    {
+                        spatialMeshObject.Value.Renderer.enabled = false;
+                        spatialMeshObject.Value.Collider.enabled = false;
+                    }
+                }
+            }
+        }
 
         /// <inheritdoc />
         public Material MeshVisibleMaterial { get; }

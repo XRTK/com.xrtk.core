@@ -85,6 +85,8 @@ namespace XRTK.Inspectors.Profiles
 
                     var instance = CreateInstance(profileTypeName);
                     var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
+                    Debug.Assert(newProfile != null);
+                    newProfile.ParentProfile = parentProfile;
                     property.objectReferenceValue = newProfile;
                     property.serializedObject.ApplyModifiedProperties();
                     changed = true;
@@ -106,6 +108,8 @@ namespace XRTK.Inspectors.Profiles
 
                     var instance = CreateInstance(typeName);
                     var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
+                    Debug.Assert(newProfile != null);
+                    newProfile.ParentProfile = parentProfile;
                     property.objectReferenceValue = newProfile;
                     property.serializedObject.ApplyModifiedProperties();
                     PasteProfileValuesDelay(newProfile);
@@ -118,12 +122,11 @@ namespace XRTK.Inspectors.Profiles
                 var renderedProfile = property.objectReferenceValue as BaseMixedRealityProfile;
                 Debug.Assert(renderedProfile != null);
 
-                if (renderedProfile.ParentProfile == null)
+                if (!(renderedProfile is MixedRealityToolkitConfigurationProfile) &&
+                     (renderedProfile.ParentProfile == null ||
+                      renderedProfile.ParentProfile != parentProfile))
                 {
                     renderedProfile.ParentProfile = parentProfile;
-                    EditorUtility.SetDirty(renderedProfile);
-                    property.objectReferenceValue = renderedProfile;
-                    property.serializedObject.ApplyModifiedProperties();
                 }
             }
 

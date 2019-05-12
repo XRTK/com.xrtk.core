@@ -455,6 +455,11 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             if (!isValid &&
                 Directory.Exists(targetAbsolutePath))
             {
+                if (DebugEnabled)
+                {
+                    Debug.Log($"Removing invalid link for {targetAbsolutePath}");
+                }
+
                 DeleteSymbolicLink(targetAbsolutePath);
             }
 

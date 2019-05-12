@@ -67,8 +67,8 @@ To this you simply need to add the extra entry for the XRTK as follows:
 ```json
 {
   "dependencies": {
-      .....,
-    "com.xrtk.core": "https://github.com/XRTK/XRTK-Core.git"
+    "com.xrtk.core": "https://github.com/XRTK/XRTK-Core.git",
+    ...
   },
 }
 ```

@@ -27,7 +27,6 @@ namespace XRTK.Services
         #region IMixedRealityEventSystem Implementation
 
         private static int eventExecutionDepth = 0;
-        private readonly WaitUntil doneExecutingEvents = new WaitUntil(() => eventExecutionDepth == 0);
 
         /// <inheritdoc />
         public List<GameObject> EventListeners { get; } = new List<GameObject>();
@@ -53,7 +52,7 @@ namespace XRTK.Services
 
             if (eventExecutionDepth > 0)
             {
-                await doneExecutingEvents;
+                await eventExecutionDepth.WaitUntil(depth => depth == 0);
             }
 
             EventListeners.Add(listener);
@@ -66,7 +65,7 @@ namespace XRTK.Services
 
             if (eventExecutionDepth > 0)
             {
-                await doneExecutingEvents;
+                await eventExecutionDepth.WaitUntil(depth => depth == 0);
             }
 
             EventListeners.Remove(listener);

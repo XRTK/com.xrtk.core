@@ -9,18 +9,23 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
     public enum SpatialMeshDisplayOptions
     {
         /// <summary>
-        /// Do not display the spatial mesh
+        /// Disable the spatial mesh renderer and collider.
         /// </summary>
         None = 0,
 
         /// <summary>
-        /// Display the spatial mesh using the configured material
+        /// Display the spatial mesh using the configured material.
         /// </summary>
         Visible,
 
         /// <summary>
-        /// Display the spatial mesh using the configured occlusion material
+        /// Display the spatial mesh using the configured occlusion material.
         /// </summary>
-        Occlusion
+        Occlusion,
+
+        /// <summary>
+        /// Only enable the collider for the spatial mesh object.
+        /// </summary>
+        Collision,
     }
 }

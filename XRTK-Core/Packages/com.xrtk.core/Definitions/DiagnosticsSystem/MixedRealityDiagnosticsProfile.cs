@@ -2,9 +2,8 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Attributes;
+using UnityEngine.Serialization;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.Diagnostics;
 
 namespace XRTK.Definitions.Diagnostics
 {
@@ -15,76 +14,69 @@ namespace XRTK.Definitions.Diagnostics
     public class MixedRealityDiagnosticsProfile : BaseMixedRealityProfile
     {
         [SerializeField]
-        [Tooltip("Show diagnostics?")]
-        private bool visible = false;
+        [FormerlySerializedAs("visible")]
+        [Tooltip("Display all enabled diagnostics")]
+        private bool showDiagnostics = true;
 
         /// <summary>
-        /// Should the diagnostics be visible?
+        /// Show or hide diagnostic visualizations.
         /// </summary>
-        public bool Visible => visible;
+        public bool ShowDiagnostics => showDiagnostics;
 
         [SerializeField]
-        [Tooltip("Should show cpu?")]
-        private bool showCpu = true;
+        [Tooltip("Display profiler")]
+        private bool showProfiler = true;
+
+        /// <summary>
+        /// Show or hide the profiler UI.
+        /// </summary>
+        public bool ShowProfiler => showProfiler;
 
         [SerializeField]
-        [Tooltip("The type of IMixedRealityDiagnosticsHandler to use for visualization.")]
-        [Implements(typeof(IMixedRealityDiagnosticsHandler), TypeGrouping.ByNamespaceFlat)]
-        private SystemType handlerType = null;
+        [FormerlySerializedAs("frameRateDuration")]
+        [Tooltip("The amount of time, in seconds, to collect frames for frame rate calculation.")]
+        [Range(0, 5)]
+        private float frameSampleRate = 0.1f;
 
         /// <summary>
-        /// The type of <see cref="IMixedRealityDiagnosticsHandler"/> to use for visualization.
+        /// The amount of time, in seconds, to collect frames for frame rate calculation.
         /// </summary>
-        public SystemType HandlerType => handlerType;
-
-        /// <summary>
-        /// Should the Cpu diagnostic be visible? 
-        /// </summary>
-        public bool ShowCpu => showCpu;
+        public float FrameSampleRate => frameSampleRate;
 
         [SerializeField]
-        [Tooltip("How many samples should the cpu use tracker use?")]
-        private int cpuBuffer = 20;
+        [Tooltip("What part of the view port to anchor the window to.")]
+        private TextAnchor windowAnchor = TextAnchor.LowerCenter;
 
         /// <summary>
-        /// The number of samples the cpu use tracker should use.
+        /// What part of the view port to anchor the window to.
         /// </summary>
-        public int CpuBuffer => cpuBuffer;
+        public TextAnchor WindowAnchor => windowAnchor;
 
         [SerializeField]
-        [Tooltip("Should show fps?")]
-        private bool showFps = true;
+        [Tooltip("The offset from the view port center applied based on the window anchor selection.")]
+        private Vector2 windowOffset = new Vector2(0.1f, 0.1f);
 
         /// <summary>
-        /// Should the fps diagnostic be visible?
+        /// The offset from the view port center applied based on the window anchor selection.
         /// </summary>
-        public bool ShowFps => showFps;
+        public Vector2 WindowOffset => windowOffset;
 
         [SerializeField]
-        [Tooltip("How many samples should the fps use tracker use?")]
-        private int fpsBuffer = 10;
+        [Tooltip("Use to scale the window size up or down, can simulate a zooming effect.")]
+        private float windowScale = 1.0f;
 
         /// <summary>
-        /// The number of samples the Fps use tracker should use.
+        /// Use to scale the window size up or down, can simulate a zooming effect.
         /// </summary>
-        public int FpsBuffer => fpsBuffer;
+        public float WindowScale => windowScale;
 
         [SerializeField]
-        [Tooltip("Should show memory?")]
-        private bool showMemory = true;
+        [Tooltip("How quickly to interpolate the window towards its target position and rotation.")]
+        private float windowFollowSpeed = 5.0f;
 
         /// <summary>
-        /// How to show the memory diagnostic
+        /// How quickly to interpolate the window towards its target position and rotation.
         /// </summary>
-        public bool ShowMemory => showMemory;
-
-        [SerializeField]
-        [Tooltip("How many samples should the memory use tracker use?")]
-        private int memoryBuffer = 10;
-
-        /// <summary>
-        /// The number of samples the memory use tracker should use.
-        /// </summary>
-        public int MemoryBuffer => memoryBuffer;
+        public float WindowFollowSpeed => windowFollowSpeed;
     }
 }

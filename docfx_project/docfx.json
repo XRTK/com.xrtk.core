@@ -46,6 +46,13 @@
       {
         "src":"../",
         "files": [
+          "articles/**.yml",
+          "articles/**.md"
+        ]
+      },
+      {
+        "src":"../",
+        "files": [
           "toc.yml",
           "*.md"
         ]
@@ -53,6 +60,7 @@
     ],
     "resource": [
       {
+        "src":"../",
         "files": [
           "images/**"
         ]

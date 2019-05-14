@@ -100,11 +100,11 @@ namespace XRTK.Extensions
         /// If no colliders attached, returns a bounds of center and extents 0</returns>
         public static Bounds GetColliderBounds(this Transform transform)
         {
-            Collider[] colliders = transform.GetComponentsInChildren<Collider>();
+            var colliders = transform.GetComponentsInChildren<Collider>();
 
             if (colliders.Length == 0) { return new Bounds(); }
 
-            Bounds bounds = colliders[0].bounds;
+            var bounds = colliders[0].bounds;
 
             for (int i = 1; i < colliders.Length; i++)
             {
@@ -132,7 +132,7 @@ namespace XRTK.Extensions
         /// <returns>The component of type <typeparamref name="T"/>. Null if it none was found.</returns>
         public static T FindAncestorComponent<T>(this Transform startTransform, bool includeSelf = true) where T : Component
         {
-            foreach (Transform transform in startTransform.EnumerateAncestors(includeSelf))
+            foreach (var transform in startTransform.EnumerateAncestors(includeSelf))
             {
                 T component = transform.GetComponent<T>();
 
@@ -158,7 +158,7 @@ namespace XRTK.Extensions
                 startTransform = startTransform.parent;
             }
 
-            for (Transform transform = startTransform; transform != null; transform = transform.parent)
+            for (var transform = startTransform; transform != null; transform = transform.parent)
             {
                 yield return transform;
             }
@@ -254,6 +254,24 @@ namespace XRTK.Extensions
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Get a point on the <see cref="Bounds"/> edge in the specified direction
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="direction"></param>
+        /// <returns></returns>
+        public static Vector3 GetPointOnBoundsEdge(this Transform transform, Vector3 direction)
+        {
+            if (direction != Vector3.zero)
+            {
+                direction /= Mathf.Max(Mathf.Max(Mathf.Abs(direction.x), Mathf.Abs(direction.y), Mathf.Abs(direction.y)));
+            }
+
+            var bounds = transform.GetColliderBounds();
+            direction = bounds.center + Vector3.Scale(bounds.size, direction * 0.5f);
+            return direction;
         }
     }
 }

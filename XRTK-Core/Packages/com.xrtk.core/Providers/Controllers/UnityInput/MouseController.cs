@@ -78,7 +78,6 @@ namespace XRTK.Providers.Controllers.UnityInput
             mouseDelta.y = Input.GetAxis("Mouse X");
             MixedRealityToolkit.InputSystem?.RaiseSourcePositionChanged(InputSource, this, mouseDelta);
             MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, controllerPose);
-            MixedRealityToolkit.InputSystem?.RaiseSourcePositionChanged(InputSource, this, Input.mouseScrollDelta);
 
             for (int i = 0; i < Interactions?.Length; i++)
             {
@@ -106,6 +105,8 @@ namespace XRTK.Providers.Controllers.UnityInput
 
                 if (Interactions[i].InputType == DeviceInputType.Scroll)
                 {
+                    Interactions[i].InvertXAxis = true;
+                    Interactions[i].InvertYAxis = true;
                     Interactions[i].Vector2Data = Input.mouseScrollDelta;
 
                     // If our value was updated, raise it.

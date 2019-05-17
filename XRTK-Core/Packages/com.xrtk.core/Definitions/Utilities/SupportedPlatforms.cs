@@ -16,5 +16,7 @@ namespace XRTK.Definitions.Utilities
         LinuxStandalone = 1 << 2,
         WindowsUniversal = 1 << 3,
         Lumin = 1 << 4,
+        Android = 1 << 5,
+        iOS = 1 << 6
     }
 }

@@ -20,6 +20,12 @@ namespace XRTK.Utilities
 
             switch (runtimePlatform)
             {
+                case RuntimePlatform.Android:
+                    supportedPlatforms |= SupportedPlatforms.Android;
+                    break;
+                case RuntimePlatform.IPhonePlayer:
+                    supportedPlatforms |= SupportedPlatforms.iOS;
+                    break;
                 case RuntimePlatform.WindowsPlayer:
                 case RuntimePlatform.WindowsEditor:
                     supportedPlatforms |= SupportedPlatforms.WindowsStandalone;
@@ -48,7 +54,7 @@ namespace XRTK.Utilities
 
         private static bool IsPlatformSupported(SupportedPlatforms target, SupportedPlatforms supported)
         {
-            return ((target & supported) == target);
+            return (target & supported) == target;
         }
 
 #if UNITY_EDITOR
@@ -64,6 +70,12 @@ namespace XRTK.Utilities
 
             switch (editorBuildTarget)
             {
+                case UnityEditor.BuildTarget.Android:
+                    supportedPlatforms |= SupportedPlatforms.Android;
+                    break;
+                case UnityEditor.BuildTarget.iOS:
+                    supportedPlatforms |= SupportedPlatforms.iOS;
+                    break;
                 case UnityEditor.BuildTarget.StandaloneWindows:
                 case UnityEditor.BuildTarget.StandaloneWindows64:
                     supportedPlatforms |= SupportedPlatforms.WindowsStandalone;

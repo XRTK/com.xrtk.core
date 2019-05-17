@@ -48,46 +48,74 @@ namespace XRTK.Utilities.Async
         /// Author: Oguzhan Soykan<para/>
         /// Source: https://stackoverflow.com/questions/29089417/c-sharp-wait-until-condition-is-true
         /// </summary>
+        /// <remarks>Passing in -1 will make this wait indefinitely for the condition to be met.</remarks>
         /// <typeparam name="T"></typeparam>
         /// <param name="element"></param>
         /// <param name="predicate">The predicate condition to meet.</param>
-        /// <param name="timeout">The number of seconds before timing out and throwing an exception.</param>
+        /// <param name="timeout">The number of seconds before timing out and throwing an exception. (-1 is indefinite)</param>
+        /// ReSharper disable once ExceptionNotThrown
         /// <exception cref="TimeoutException">A <see cref="TimeoutException"/> can be thrown when the condition isn't satisfied after timeout.</exception>
         public static async Task WaitUntil<T>(this T element, Func<T, bool> predicate, int timeout = 10)
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(timeout)))
+            if (timeout == -1)
             {
-                var tcs = new TaskCompletionSource<object>();
-
-                void Exception()
-                {
-                    tcs.TrySetException(new TimeoutException());
-                    tcs.TrySetCanceled();
-                }
-
-                cancellationTokenSource.Token.Register(Exception);
-
-                while (!cancellationTokenSource.IsCancellationRequested)
-                {
-                    try
-                    {
-                        if (!predicate(element))
-                        {
-                            await Task.Delay(1, cancellationTokenSource.Token);
-                            continue;
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        tcs.TrySetException(e);
-                    }
-
-                    tcs.TrySetResult(Task.CompletedTask);
-                    break;
-                }
-
-                await tcs.Task;
+                await WaitUntil_Indefinite(element, predicate);
             }
+            else
+            {
+                using (var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(timeout)))
+                {
+                    var tcs = new TaskCompletionSource<object>();
+
+                    void Exception()
+                    {
+                        tcs.TrySetException(new TimeoutException());
+                        tcs.TrySetCanceled();
+                    }
+
+                    cancellationTokenSource.Token.Register(Exception);
+
+                    while (!cancellationTokenSource.IsCancellationRequested)
+                    {
+                        try
+                        {
+                            if (!predicate(element))
+                            {
+                                await Task.Delay(1, cancellationTokenSource.Token);
+                                continue;
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            tcs.TrySetException(e);
+                        }
+
+                        tcs.TrySetResult(Task.CompletedTask);
+                        break;
+                    }
+
+                    await tcs.Task;
+                }
+            }
+        }
+
+        private static async Task WaitUntil_Indefinite<T>(T element, Func<T, bool> predicate)
+        {
+            var tcs = new TaskCompletionSource<object>();
+
+            while (true)
+            {
+                if (!predicate(element))
+                {
+                    await Task.Delay(1);
+                    continue;
+                }
+
+                tcs.TrySetResult(Task.CompletedTask);
+                break;
+            }
+
+            await tcs.Task;
         }
     }
 }

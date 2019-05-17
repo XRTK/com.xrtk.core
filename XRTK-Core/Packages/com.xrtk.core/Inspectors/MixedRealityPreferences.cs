@@ -398,7 +398,7 @@ namespace XRTK.Inspectors
 
         private static SceneAsset GetSceneObject(string sceneName, SceneAsset asset = null)
         {
-            if (string.IsNullOrEmpty(sceneName))
+            if (string.IsNullOrEmpty(sceneName) || EditorBuildSettings.scenes == null || EditorBuildSettings.scenes.Length < 1)
             {
                 return null;
             }
@@ -427,8 +427,7 @@ namespace XRTK.Inspectors
             AssetDatabase.TryGetGUIDAndLocalFileIdentifier(asset, out var guid, out long _);
             var sceneGuid = new GUID(guid);
 
-            if (EditorBuildSettings.scenes.Length == 0 ||
-                EditorBuildSettings.scenes[0].guid != sceneGuid)
+            if (EditorBuildSettings.scenes[0].guid != sceneGuid)
             {
                 editorScene = new EditorBuildSettingsScene(sceneGuid, true);
                 var scenes = EditorBuildSettings.scenes

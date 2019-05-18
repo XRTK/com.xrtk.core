@@ -186,7 +186,7 @@ namespace XRTK.Extensions
 
                     if (recursive)
                     {
-                        RectTransform childRect = GetChildRectTransformAtPoint(rectTransform, worldPoint, recursive, shouldReturnActive, shouldReturnRaycastable);
+                        RectTransform childRect = GetChildRectTransformAtPoint(rectTransform, worldPoint, true, shouldReturnActive, shouldReturnRaycastable);
 
                         if (childRect != null)
                         {

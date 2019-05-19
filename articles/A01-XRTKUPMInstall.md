@@ -1,4 +1,4 @@
-# How to download the Mixed Reality Toolkit
+# How to download the Mixed Reality Toolkit UPM package
 
 ![](https://github.com/XRTK/XRTK-Core/raw/master/docs/logo.png)
 

@@ -37,11 +37,9 @@ namespace XRTK.Utilities.Physics
             return Color.Lerp(from, to, ExpCoefficient(hLife, dTime));
         }
 
-
         public static float ExpCoefficient(float hLife, float dTime)
         {
-            if (hLife == 0)
-                return 1;
+            if (hLife.Equals(0)) { return 1; }
 
             return 1.0f - Mathf.Pow(0.5f, dTime / hLife);
         }

@@ -68,7 +68,7 @@ namespace XRTK.Extensions
 
         private static Vector3[] corners = null;
 
-        private static Vector3[] rectTransformCorners = new Vector3[4];
+        private static readonly Vector3[] rectTransformCorners = new Vector3[4];
 
         #region Public Static Functions
         /// <summary>
@@ -103,17 +103,18 @@ namespace XRTK.Extensions
         public static void GetCornerPositions(this Bounds bounds, Transform transform, ref Vector3[] positions)
         {
             // Calculate the local points to transform.
-            Vector3 center = bounds.center;
-            Vector3 extents = bounds.extents;
-            float leftEdge = center.x - extents.x;
-            float rightEdge = center.x + extents.x;
-            float bottomEdge = center.y - extents.y;
-            float topEdge = center.y + extents.y;
-            float frontEdge = center.z - extents.z;
-            float backEdge = center.z + extents.z;
+            var center = bounds.center;
+            var extents = bounds.extents;
+            var leftEdge = center.x - extents.x;
+            var rightEdge = center.x + extents.x;
+            var bottomEdge = center.y - extents.y;
+            var topEdge = center.y + extents.y;
+            var frontEdge = center.z - extents.z;
+            var backEdge = center.z + extents.z;
 
             // Allocate the array if needed.
             const int numPoints = 8;
+
             if (positions == null || positions.Length != numPoints)
             {
                 positions = new Vector3[numPoints];
@@ -137,16 +138,17 @@ namespace XRTK.Extensions
         /// <param name="positions"></param>
         public static void GetCornerPositionsFromRendererBounds(this Bounds bounds, ref Vector3[] positions)
         {
-            Vector3 center = bounds.center;
-            Vector3 extents = bounds.extents;
-            float leftEdge = center.x - extents.x;
-            float rightEdge = center.x + extents.x;
-            float bottomEdge = center.y - extents.y;
-            float topEdge = center.y + extents.y;
-            float frontEdge = center.z - extents.z;
-            float backEdge = center.z + extents.z;
+            var center = bounds.center;
+            var extents = bounds.extents;
+            var leftEdge = center.x - extents.x;
+            var rightEdge = center.x + extents.x;
+            var bottomEdge = center.y - extents.y;
+            var topEdge = center.y + extents.y;
+            var frontEdge = center.z - extents.z;
+            var backEdge = center.z + extents.z;
 
             const int numPoints = 8;
+
             if (positions == null || positions.Length != numPoints)
             {
                 positions = new Vector3[numPoints];
@@ -164,10 +166,11 @@ namespace XRTK.Extensions
 
         public static void GetFacePositions(this Bounds bounds, Transform transform, ref Vector3[] positions)
         {
-            Vector3 center = bounds.center;
-            Vector3 extents = bounds.extents;
-
             const int numPoints = 6;
+
+            var center = bounds.center;
+            var extents = bounds.extents;
+
             if (positions == null || positions.Length != numPoints)
             {
                 positions = new Vector3[numPoints];
@@ -190,14 +193,14 @@ namespace XRTK.Extensions
         public static void GetCornerAndMidPointPositions(this Bounds bounds, Transform transform, ref Vector3[] positions)
         {
             // Calculate the local points to transform.
-            Vector3 center = bounds.center;
-            Vector3 extents = bounds.extents;
-            float leftEdge = center.x - extents.x;
-            float rightEdge = center.x + extents.x;
-            float bottomEdge = center.y - extents.y;
-            float topEdge = center.y + extents.y;
-            float frontEdge = center.z - extents.z;
-            float backEdge = center.z + extents.z;
+            var center = bounds.center;
+            var extents = bounds.extents;
+            var leftEdge = center.x - extents.x;
+            var rightEdge = center.x + extents.x;
+            var bottomEdge = center.y - extents.y;
+            var topEdge = center.y + extents.y;
+            var frontEdge = center.z - extents.z;
+            var backEdge = center.z + extents.z;
 
             // Allocate the array if needed.
             const int numPoints = LTF_LTB + 1;
@@ -242,13 +245,13 @@ namespace XRTK.Extensions
         public static void GetCornerAndMidPointPositions2D(this Bounds bounds, Transform transform, ref Vector3[] positions, Axis flattenAxis)
         {
             // Calculate the local points to transform.
-            Vector3 center = bounds.center;
-            Vector3 extents = bounds.extents;
+            var center = bounds.center;
+            var extents = bounds.extents;
 
-            float leftEdge = 0;
-            float rightEdge = 0;
-            float bottomEdge = 0;
-            float topEdge = 0;
+            float leftEdge;
+            float rightEdge;
+            float bottomEdge;
+            float topEdge;
 
             // Allocate the array if needed.
             const int numPoints = LB_LT + 1;
@@ -259,7 +262,7 @@ namespace XRTK.Extensions
 
             switch (flattenAxis)
             {
-                case Axis.X:
+                // case Axis.X:
                 default:
                     leftEdge = center.z - extents.z;
                     rightEdge = center.z + extents.z;
@@ -309,9 +312,14 @@ namespace XRTK.Extensions
         /// <param name="target">gameObject that boundingBox bounds.</param>
         /// <param name="boundsPoints">array reference that gets filled with points</param>
         /// <param name="ignoreLayers">layerMask to simplify search</param>
-        public static void GetColliderBoundsPoints(GameObject target, List<Vector3> boundsPoints, LayerMask ignoreLayers)
+        /// <param name="colliders">The colliders for this gameObject and it's children</param>
+        public static void GetColliderBoundsPoints(GameObject target, ref List<Vector3> boundsPoints, LayerMask ignoreLayers, Collider[] colliders = null)
         {
-            Collider[] colliders = target.GetComponentsInChildren<Collider>();
+            if (colliders == null)
+            {
+                colliders = target.GetComponentsInChildren<Collider>();
+            }
+
             for (int i = 0; i < colliders.Length; i++)
             {
                 if (ignoreLayers == (1 << colliders[i].gameObject.layer | ignoreLayers))
@@ -319,50 +327,48 @@ namespace XRTK.Extensions
                     continue;
                 }
 
-                if (colliders[i] is SphereCollider)
+                switch (colliders[i])
                 {
-                    SphereCollider sc = colliders[i] as SphereCollider;
-                    Bounds sphereBounds = new Bounds(sc.center, Vector3.one * sc.radius * 2);
-                    sphereBounds.GetFacePositions(sc.transform, ref corners);
-                    boundsPoints.AddRange(corners);
-                }
-                else if (colliders[i] is BoxCollider)
-                {
-                    BoxCollider bc = colliders[i] as BoxCollider;
-                    Bounds boxBounds = new Bounds(bc.center, bc.size);
-                    boxBounds.GetCornerPositions(bc.transform, ref corners);
-                    boundsPoints.AddRange(corners);
+                    case SphereCollider sphereCollider:
+                        var sphereBounds = new Bounds(sphereCollider.center, Vector3.one * sphereCollider.radius * 2);
+                        sphereBounds.GetFacePositions(sphereCollider.transform, ref corners);
+                        boundsPoints.AddRange(corners);
+                        break;
 
-                }
-                else if (colliders[i] is MeshCollider)
-                {
-                    MeshCollider mc = colliders[i] as MeshCollider;
-                    Bounds meshBounds = mc.sharedMesh.bounds;
-                    meshBounds.GetCornerPositions(mc.transform, ref corners);
-                    boundsPoints.AddRange(corners);
-                }
-                else if (colliders[i] is CapsuleCollider)
-                {
-                    var cc = (CapsuleCollider)colliders[i];
-                    var capsuleBounds = new Bounds(cc.center, Vector3.zero);
-                    var radius = cc.radius;
+                    case BoxCollider boxCollider:
+                        var boxBounds = new Bounds(boxCollider.center, boxCollider.size);
+                        boxBounds.GetCornerPositions(boxCollider.transform, ref corners);
+                        boundsPoints.AddRange(corners);
+                        break;
 
-                    switch (cc.direction)
-                    {
-                        case 0:
-                            capsuleBounds.size = new Vector3(cc.height, cc.radius * 2, radius * 2);
-                            break;
+                    case MeshCollider meshCollider:
+                        var meshBounds = meshCollider.sharedMesh.bounds;
+                        meshBounds.GetCornerPositions(meshCollider.transform, ref corners);
+                        boundsPoints.AddRange(corners);
+                        break;
 
-                        case 1:
-                            capsuleBounds.size = new Vector3(cc.radius * 2, cc.height, cc.radius * 2);
-                            break;
+                    case CapsuleCollider capsuleCollider:
+                        var capsuleBounds = new Bounds(capsuleCollider.center, Vector3.zero);
+                        var radius = capsuleCollider.radius;
 
-                        case 2:
-                            capsuleBounds.size = new Vector3(cc.radius * 2, radius * 2, cc.height);
-                            break;
-                    }
-                    capsuleBounds.GetFacePositions(cc.transform, ref corners);
-                    boundsPoints.AddRange(corners);
+                        switch (capsuleCollider.direction)
+                        {
+                            case 0:
+                                capsuleBounds.size = new Vector3(capsuleCollider.height, capsuleCollider.radius * 2, radius * 2);
+                                break;
+
+                            case 1:
+                                capsuleBounds.size = new Vector3(capsuleCollider.radius * 2, capsuleCollider.height, capsuleCollider.radius * 2);
+                                break;
+
+                            case 2:
+                                capsuleBounds.size = new Vector3(capsuleCollider.radius * 2, radius * 2, capsuleCollider.height);
+                                break;
+                        }
+
+                        capsuleBounds.GetFacePositions(capsuleCollider.transform, ref corners);
+                        boundsPoints.AddRange(corners);
+                        break;
                 }
             }
         }
@@ -373,12 +379,18 @@ namespace XRTK.Extensions
         /// <param name="target">gameObject that bounding box bounds</param>
         /// <param name="boundsPoints">array reference that gets filled with points</param>
         /// <param name="ignoreLayers">layerMask to simplify search</param>
-        public static void GetRenderBoundsPoints(GameObject target, List<Vector3> boundsPoints, LayerMask ignoreLayers)
+        /// <param name="renderers">The renderers for this gameObject and it's children</param>
+        public static void GetRenderBoundsPoints(GameObject target, ref List<Vector3> boundsPoints, LayerMask ignoreLayers, Renderer[] renderers = null)
         {
-            Renderer[] renderers = target.GetComponentsInChildren<Renderer>();
+            if (renderers == null)
+            {
+                renderers = target.GetComponentsInChildren<Renderer>();
+            }
+
             for (int i = 0; i < renderers.Length; ++i)
             {
-                Renderer rendererObj = renderers[i];
+                var rendererObj = renderers[i];
+
                 if (ignoreLayers == (1 << rendererObj.gameObject.layer | ignoreLayers))
                 {
                     continue;
@@ -392,25 +404,29 @@ namespace XRTK.Extensions
         /// <summary>
         /// GetMeshFilterBoundsPoints - gets bounding box points using MeshFilter method.
         /// </summary>
-        /// <param name="target">gameObject that boundingbox bounds</param>
+        /// <param name="target">gameObject that bounding box bounds</param>
         /// <param name="boundsPoints">array reference that gets filled with points</param>
         /// <param name="ignoreLayers">layerMask to simplify search</param>
-        public static void GetMeshFilterBoundsPoints(GameObject target, List<Vector3> boundsPoints, LayerMask ignoreLayers)
+        public static void GetMeshFilterBoundsPoints(GameObject target, ref List<Vector3> boundsPoints, LayerMask ignoreLayers)
         {
-            MeshFilter[] meshFilters = target.GetComponentsInChildren<MeshFilter>();
+            var meshFilters = target.GetComponentsInChildren<MeshFilter>();
+
             for (int i = 0; i < meshFilters.Length; i++)
             {
-                MeshFilter meshFilterObj = meshFilters[i];
+                var meshFilterObj = meshFilters[i];
+
                 if (ignoreLayers == (1 << meshFilterObj.gameObject.layer | ignoreLayers))
                 {
                     continue;
                 }
 
-                Bounds meshBounds = meshFilterObj.sharedMesh.bounds;
+                var meshBounds = meshFilterObj.sharedMesh.bounds;
                 meshBounds.GetCornerPositions(meshFilterObj.transform, ref corners);
                 boundsPoints.AddRange(corners);
             }
-            RectTransform[] rectTransforms = target.GetComponentsInChildren<RectTransform>();
+
+            var rectTransforms = target.GetComponentsInChildren<RectTransform>();
+
             for (int i = 0; i < rectTransforms.Length; i++)
             {
                 rectTransforms[i].GetWorldCorners(rectTransformCorners);
@@ -448,16 +464,16 @@ namespace XRTK.Extensions
             // We will 'imagine' that we want to rotate the bounds' extents vector using the rotation information
             // stored inside the specified transform matrix. We will need these when calculating the new size if
             // the transformed bounds.
-            Vector3 rotatedExtentsRight = rightAxis * bounds.extents.x;
-            Vector3 rotatedExtentsUp = upAxis * bounds.extents.y;
-            Vector3 rotatedExtentsLook = lookAxis * bounds.extents.z;
+            var rotatedExtentsRight = rightAxis * bounds.extents.x;
+            var rotatedExtentsUp = upAxis * bounds.extents.y;
+            var rotatedExtentsLook = lookAxis * bounds.extents.z;
 
             // Calculate the new bounds size along each axis. The size on each axis is calculated by summing up the 
             // corresponding vector component values of the rotated extents vectors. We multiply by 2 because we want
             // to get a size and currently we are working with extents which represent half the size.
-            float newSizeX = (Mathf.Abs(rotatedExtentsRight.x) + Mathf.Abs(rotatedExtentsUp.x) + Mathf.Abs(rotatedExtentsLook.x)) * 2.0f;
-            float newSizeY = (Mathf.Abs(rotatedExtentsRight.y) + Mathf.Abs(rotatedExtentsUp.y) + Mathf.Abs(rotatedExtentsLook.y)) * 2.0f;
-            float newSizeZ = (Mathf.Abs(rotatedExtentsRight.z) + Mathf.Abs(rotatedExtentsUp.z) + Mathf.Abs(rotatedExtentsLook.z)) * 2.0f;
+            var newSizeX = (Mathf.Abs(rotatedExtentsRight.x) + Mathf.Abs(rotatedExtentsUp.x) + Mathf.Abs(rotatedExtentsLook.x)) * 2.0f;
+            var newSizeY = (Mathf.Abs(rotatedExtentsRight.y) + Mathf.Abs(rotatedExtentsUp.y) + Mathf.Abs(rotatedExtentsLook.y)) * 2.0f;
+            var newSizeZ = (Mathf.Abs(rotatedExtentsRight.z) + Mathf.Abs(rotatedExtentsUp.z) + Mathf.Abs(rotatedExtentsLook.z)) * 2.0f;
 
             // Construct the transformed 'Bounds' instance
             var transformedBounds = new Bounds();
@@ -478,21 +494,21 @@ namespace XRTK.Extensions
         /// </param>
         public static Vector2[] GetScreenSpaceCornerPoints(this Bounds bounds, Camera camera)
         {
-            Vector3 aabbCenter = bounds.center;
-            Vector3 aabbExtents = bounds.extents;
+            var aabbCenter = bounds.center;
+            var aabbExtents = bounds.extents;
 
             //  Return the screen space point array
             return new Vector2[]
             {
-            camera.WorldToScreenPoint(new Vector3(aabbCenter.x - aabbExtents.x, aabbCenter.y - aabbExtents.y, aabbCenter.z - aabbExtents.z)),
-            camera.WorldToScreenPoint(new Vector3(aabbCenter.x + aabbExtents.x, aabbCenter.y - aabbExtents.y, aabbCenter.z - aabbExtents.z)),
-            camera.WorldToScreenPoint(new Vector3(aabbCenter.x + aabbExtents.x, aabbCenter.y + aabbExtents.y, aabbCenter.z - aabbExtents.z)),
-            camera.WorldToScreenPoint(new Vector3(aabbCenter.x - aabbExtents.x, aabbCenter.y + aabbExtents.y, aabbCenter.z - aabbExtents.z)),
+                camera.WorldToScreenPoint(new Vector3(aabbCenter.x - aabbExtents.x, aabbCenter.y - aabbExtents.y, aabbCenter.z - aabbExtents.z)),
+                camera.WorldToScreenPoint(new Vector3(aabbCenter.x + aabbExtents.x, aabbCenter.y - aabbExtents.y, aabbCenter.z - aabbExtents.z)),
+                camera.WorldToScreenPoint(new Vector3(aabbCenter.x + aabbExtents.x, aabbCenter.y + aabbExtents.y, aabbCenter.z - aabbExtents.z)),
+                camera.WorldToScreenPoint(new Vector3(aabbCenter.x - aabbExtents.x, aabbCenter.y + aabbExtents.y, aabbCenter.z - aabbExtents.z)),
 
-            camera.WorldToScreenPoint(new Vector3(aabbCenter.x - aabbExtents.x, aabbCenter.y - aabbExtents.y, aabbCenter.z + aabbExtents.z)),
-            camera.WorldToScreenPoint(new Vector3(aabbCenter.x + aabbExtents.x, aabbCenter.y - aabbExtents.y, aabbCenter.z + aabbExtents.z)),
-            camera.WorldToScreenPoint(new Vector3(aabbCenter.x + aabbExtents.x, aabbCenter.y + aabbExtents.y, aabbCenter.z + aabbExtents.z)),
-            camera.WorldToScreenPoint(new Vector3(aabbCenter.x - aabbExtents.x, aabbCenter.y + aabbExtents.y, aabbCenter.z + aabbExtents.z))
+                camera.WorldToScreenPoint(new Vector3(aabbCenter.x - aabbExtents.x, aabbCenter.y - aabbExtents.y, aabbCenter.z + aabbExtents.z)),
+                camera.WorldToScreenPoint(new Vector3(aabbCenter.x + aabbExtents.x, aabbCenter.y - aabbExtents.y, aabbCenter.z + aabbExtents.z)),
+                camera.WorldToScreenPoint(new Vector3(aabbCenter.x + aabbExtents.x, aabbCenter.y + aabbExtents.y, aabbCenter.z + aabbExtents.z)),
+                camera.WorldToScreenPoint(new Vector3(aabbCenter.x - aabbExtents.x, aabbCenter.y + aabbExtents.y, aabbCenter.z + aabbExtents.z))
             };
         }
 
@@ -502,10 +518,11 @@ namespace XRTK.Extensions
         public static Rect GetScreenRectangle(this Bounds bounds, Camera camera)
         {
             // Retrieve the bounds' corner points in screen space
-            Vector2[] screenSpaceCornerPoints = bounds.GetScreenSpaceCornerPoints(camera);
+            var screenSpaceCornerPoints = bounds.GetScreenSpaceCornerPoints(camera);
 
             // Identify the minimum and maximum points in the array
             Vector3 minScreenPoint = screenSpaceCornerPoints[0], maxScreenPoint = screenSpaceCornerPoints[0];
+
             for (int screenPointIndex = 1; screenPointIndex < screenSpaceCornerPoints.Length; ++screenPointIndex)
             {
                 minScreenPoint = Vector3.Min(minScreenPoint, screenSpaceCornerPoints[screenPointIndex]);
@@ -534,10 +551,8 @@ namespace XRTK.Extensions
         /// <returns></returns>
         public static Bounds ExpandToContain(this Bounds originalBounds, Bounds otherBounds)
         {
-            Bounds tmpBounds = originalBounds;
-
+            var tmpBounds = originalBounds;
             tmpBounds.Encapsulate(otherBounds);
-
             return tmpBounds;
         }
 
@@ -561,13 +576,13 @@ namespace XRTK.Extensions
         /// <returns></returns>
         public static bool CloserToPoint(this Bounds bounds, Vector3 point, Bounds otherBounds)
         {
-            Vector3 distToClosestPoint1 = bounds.ClosestPoint(point) - point;
-            Vector3 distToClosestPoint2 = otherBounds.ClosestPoint(point) - point;
+            var distToClosestPoint1 = bounds.ClosestPoint(point) - point;
+            var distToClosestPoint2 = otherBounds.ClosestPoint(point) - point;
 
-            if (distToClosestPoint1.magnitude == distToClosestPoint2.magnitude)
+            if (distToClosestPoint1.magnitude.Equals(distToClosestPoint2.magnitude))
             {
-                Vector3 toCenter1 = point - bounds.center;
-                Vector3 toCenter2 = point - otherBounds.center;
+                var toCenter1 = point - bounds.center;
+                var toCenter2 = point - otherBounds.center;
                 return (toCenter1.magnitude <= toCenter2.magnitude);
 
             }
@@ -578,6 +593,7 @@ namespace XRTK.Extensions
         #endregion
 
         #region Private Static Functions
+
         /// <summary>
         /// Returns the vector which is used to represent and invalid bounds size.
         /// </summary>
@@ -585,6 +601,7 @@ namespace XRTK.Extensions
         {
             return new Vector3(float.MaxValue, float.MaxValue, float.MaxValue);
         }
+
         #endregion
     }
 }

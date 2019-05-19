@@ -21,7 +21,7 @@ This is the best / quickest and safest way to get XRTK in your solution and auto
 
 Just download the [XRTK-Core.unitypackage](https://github.com/XRTK/XRTK-Core/releases) asset and import it into your project to start building solutions straight away.  This adds a XRTK seed, which automatically registers the XRTK with the Unity package manager and starts its download and installation.
 
-For more instructions for how to get started, [click here](/docs/XRTKUPMInstall.md)
+For more instructions for how to get started, [click here](/docs/A01-XRTKUPMInstall.md)
 
 ## Manual UPM Install
 
@@ -58,7 +58,7 @@ You can either:
 * Clone the development XRTK repository into a folder and start building your project from there, pulling down the configured submodules in that project.
 * Clone the UPM branch in to a live project as a Submodule in your source, adding the additional submodules as required
 
-For more information, you can follow [this guide here]()
+For more information, you can follow [this guide here](https://www.rageagainstthepixel.com/expert-import-mrtk/)
 
 ---
 If there is anything not mentioned in this document or you simply want to know more, raise an [RFI (Request for Information) request here](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=).

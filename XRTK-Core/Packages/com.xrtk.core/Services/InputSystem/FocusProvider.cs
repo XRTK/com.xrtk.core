@@ -658,25 +658,27 @@ namespace XRTK.Services.InputSystem
             {
                 UpdatePointer(pointer);
 
+                // TODO remove profile call here and use a value set on the pointer itself.
                 var pointerProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile;
 
-                if (pointerProfile != null && pointerProfile.DebugDrawPointingRays)
+                if (pointerProfile == null || !pointerProfile.DebugDrawPointingRays) { continue; }
+
+                // TODO Let's only set this once on start.This will overwrite the property each update.
+                MixedRealityRaycaster.DebugEnabled = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.DebugDrawPointingRays;
+
+                Color rayColor;
+
+                if (pointerProfile.DebugDrawPointingRayColors != null &&
+                    pointerProfile.DebugDrawPointingRayColors.Length > 0)
                 {
-                    MixedRealityRaycaster.DebugEnabled = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.DebugDrawPointingRays;
-
-                    Color rayColor;
-
-                    if ((pointerProfile.DebugDrawPointingRayColors != null) && (pointerProfile.DebugDrawPointingRayColors.Length > 0))
-                    {
-                        rayColor = pointerProfile.DebugDrawPointingRayColors[pointerCount++ % pointerProfile.DebugDrawPointingRayColors.Length];
-                    }
-                    else
-                    {
-                        rayColor = Color.green;
-                    }
-
-                    Debug.DrawRay(pointer.StartPoint, (pointer.Details.Point - pointer.StartPoint), rayColor);
+                    rayColor = pointerProfile.DebugDrawPointingRayColors[pointerCount++ % pointerProfile.DebugDrawPointingRayColors.Length];
                 }
+                else
+                {
+                    rayColor = Color.green;
+                }
+
+                Debug.DrawRay(pointer.StartPoint, (pointer.Details.Point - pointer.StartPoint), rayColor);
             }
         }
 
@@ -871,25 +873,23 @@ namespace XRTK.Services.InputSystem
 
             for (int i = 0; i < pointer.Rays.Length; i++)
             {
-                if (RaycastGraphicsStep(graphicEventData, pointer.Rays[i], prioritizedLayerMasks, out var raycastResult))
+                if (RaycastGraphicsStep(graphicEventData, pointer.Rays[i], prioritizedLayerMasks, out var raycastResult) &&
+                    raycastResult.isValid &&
+                    raycastResult.distance < pointer.Rays[i].Length &&
+                    raycastResult.module != null &&
+                    raycastResult.module.eventCamera == UIRaycastCamera)
                 {
-                    if (raycastResult.isValid &&
-                        raycastResult.distance < pointer.Rays[i].Length &&
-                        raycastResult.module != null &&
-                        raycastResult.module.eventCamera == UIRaycastCamera)
-                    {
-                        totalDistance += raycastResult.distance;
+                    totalDistance += raycastResult.distance;
 
-                        newUiRaycastPosition.x = raycastResult.screenPosition.x;
-                        newUiRaycastPosition.y = raycastResult.screenPosition.y;
-                        newUiRaycastPosition.z = raycastResult.distance;
+                    newUiRaycastPosition.x = raycastResult.screenPosition.x;
+                    newUiRaycastPosition.y = raycastResult.screenPosition.y;
+                    newUiRaycastPosition.z = raycastResult.distance;
 
-                        var worldPos = uiRaycastCamera.ScreenToWorldPoint(newUiRaycastPosition);
-                        var normal = -raycastResult.gameObject.transform.forward;
+                    var worldPos = uiRaycastCamera.ScreenToWorldPoint(newUiRaycastPosition);
+                    var normal = -raycastResult.gameObject.transform.forward;
 
-                        hitResult.Set(raycastResult, worldPos, normal, pointer.Rays[i], i, totalDistance);
-                        return;
-                    }
+                    hitResult.Set(raycastResult, worldPos, normal, pointer.Rays[i], i, totalDistance);
+                    return;
                 }
 
                 totalDistance += pointer.Rays[i].Length;
@@ -943,22 +943,21 @@ namespace XRTK.Services.InputSystem
 
             foreach (var pointer in pointers)
             {
-                if (pointer.PreviousPointerTarget != pointer.CurrentPointerTarget)
+                if (pointer.PreviousPointerTarget == pointer.CurrentPointerTarget) { continue; }
+
+                pendingPointerSpecificFocusChange.Add(pointer);
+
+                // Initially, we assume all pointer-specific focus changes will
+                // also result in an overall focus change...
+
+                if (pointer.PreviousPointerTarget != null)
                 {
-                    pendingPointerSpecificFocusChange.Add(pointer);
+                    pendingOverallFocusExitSet.Add(pointer.PreviousPointerTarget);
+                }
 
-                    // Initially, we assume all pointer-specific focus changes will
-                    // also result in an overall focus change...
-
-                    if (pointer.PreviousPointerTarget != null)
-                    {
-                        pendingOverallFocusExitSet.Add(pointer.PreviousPointerTarget);
-                    }
-
-                    if (pointer.CurrentPointerTarget != null)
-                    {
-                        pendingOverallFocusEnterSet.Add(pointer.CurrentPointerTarget);
-                    }
+                if (pointer.CurrentPointerTarget != null)
+                {
+                    pendingOverallFocusEnterSet.Add(pointer.CurrentPointerTarget);
                 }
             }
 

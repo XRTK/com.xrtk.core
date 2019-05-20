@@ -55,6 +55,7 @@ namespace XRTK.Utilities.Gltf.Serialization.Importers
                     if (!gltfTexture.Texture.isReadable)
                     {
                         var textureImporter = AssetImporter.GetAtPath(path) as TextureImporter;
+                        Debug.Assert(textureImporter != null);
                         textureImporter.isReadable = true;
                         textureImporter.SetPlatformTextureSettings(new TextureImporterPlatformSettings { format = TextureImporterFormat.RGBA32 });
                         textureImporter.SaveAndReimport();

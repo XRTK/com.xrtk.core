@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using UnityEngine;
 
 namespace XRTK.Utilities
 {
@@ -127,6 +128,7 @@ namespace XRTK.Utilities
                     previous = current;
                 }
 
+                Debug.Assert(current != null);
                 current.Next = new Contribution2(P2D[i + 1], P2D[i + 2], P2D[i + 3]);
             }
 
@@ -161,6 +163,7 @@ namespace XRTK.Utilities
                     previous = current;
                 }
 
+                Debug.Assert(current != null);
                 current.Next = new Contribution3(P3D[i + 1], P3D[i + 2], P3D[i + 3], P3D[i + 4])
                 {
                     Next = new Contribution3(P3D[i + 5], P3D[i + 6], P3D[i + 7], P3D[i + 8])
@@ -196,6 +199,7 @@ namespace XRTK.Utilities
                     previous = current;
                 }
 
+                Debug.Assert(current != null);
                 current.Next = new Contribution4(P4D[i + 1], P4D[i + 2], P4D[i + 3], P4D[i + 4], P4D[i + 5])
                 {
                     Next = new Contribution4(P4D[i + 6], P4D[i + 7], P4D[i + 8], P4D[i + 9], P4D[i + 10])

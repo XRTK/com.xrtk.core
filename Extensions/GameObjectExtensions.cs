@@ -13,11 +13,16 @@ namespace XRTK.Extensions
     /// </summary>
     public static class GameObjectExtensions
     {
+        /// <summary>
+        /// Sets the child <see cref="GameObject"/> states.
+        /// </summary>
+        /// <param name="root">The root <see cref="GameObject"/>.</param>
+        /// <param name="isActive">The active value to set.</param>
         public static void SetChildrenActive(this GameObject root, bool isActive)
         {
             for (int i = 0; i < root.transform.childCount; i++)
             {
-                root.transform.GetChild(i).gameObject.SetActive(false);
+                root.transform.GetChild(i).gameObject.SetActive(isActive);
             }
         }
 

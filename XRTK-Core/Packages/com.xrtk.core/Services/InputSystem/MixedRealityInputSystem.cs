@@ -811,12 +811,10 @@ namespace XRTK.Services.InputSystem
 
             var focusedObject = pointer.Result?.CurrentPointerTarget;
 
-            if (focusedObject != null)
+            if (focusedObject != null &&
+                FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
             {
-                if (FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
-                {
-                    ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.pointerDownHandler);
-                }
+                ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.pointerDownHandler);
             }
         }
 
@@ -865,20 +863,34 @@ namespace XRTK.Services.InputSystem
 
             var focusedObject = pointer.Result?.CurrentPointerTarget;
 
-            if (focusedObject != null)
+            if (focusedObject != null &&
+                FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
             {
+                ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.pointerUpHandler);
+                ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.pointerClickHandler);
 
-                if (FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
-                {
-                    ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.pointerUpHandler);
-                    ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.pointerClickHandler);
-
-                    graphicInputEventData.Clear();
-                }
+                graphicInputEventData.Clear();
             }
         }
 
         #endregion Pointer Up
+
+        /// <inheritdoc />
+        public void RaisePointerScroll(IMixedRealityPointer pointer, MixedRealityInputAction scrollAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null)
+        {
+            vector2InputEventData.Initialize(inputSource ?? pointer.InputSourceParent, Handedness.None, scrollAction, scrollDelta);
+
+            HandleEvent(vector2InputEventData, OnTwoDoFInputChanged);
+
+            var focusedObject = pointer.Result?.CurrentPointerTarget;
+
+            if (focusedObject != null &&
+                FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
+            {
+                graphicInputEventData.scrollDelta = scrollDelta;
+                ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.scrollHandler);
+            }
+        }
 
         #endregion Pointers
 

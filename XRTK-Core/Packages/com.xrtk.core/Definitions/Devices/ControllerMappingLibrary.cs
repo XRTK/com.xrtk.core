@@ -8,7 +8,6 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 using XRTK.Providers.Controllers;
-using XRTK.Services;
 using XRTK.Utilities.Editor;
 #endif
 
@@ -20,6 +19,31 @@ namespace XRTK.Definitions.Devices
     public static class ControllerMappingLibrary
     {
         #region Constants
+
+        /// <summary>
+        /// Built in mouse x input axis
+        /// </summary>
+        public const string MouseY = "Mouse Y";
+
+        /// <summary>
+        /// Built in mouse y input axis
+        /// </summary>
+        public const string MouseX = "Mouse X";
+
+        /// <summary>
+        /// Built in mouse scroll input axis
+        /// </summary>
+        public const string MouseScroll = "Mouse ScrollWheel";
+
+        /// <summary>
+        /// Built in horizontal input axis
+        /// </summary>
+        public const string Horizontal = "Horizontal";
+
+        /// <summary>
+        /// Built in vertical input axis
+        /// </summary>
+        public const string Vertical = "Vertical";
 
         /// <summary>
         /// Mouse: Position Horizontal Movement<para/>

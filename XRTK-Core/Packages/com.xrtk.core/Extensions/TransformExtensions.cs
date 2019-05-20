@@ -96,7 +96,7 @@ namespace XRTK.Extensions
         /// Calculates the bounds of all the colliders attached to this GameObject and all it's children
         /// </summary>
         /// <param name="transform">Transform of root GameObject the colliders are attached to </param>
-        /// <returns>The total bounds of all colliders attached to this GameObject. 
+        /// <returns>The total bounds of all colliders attached to this GameObject.
         /// If no colliders attached, returns a bounds of center and extents 0</returns>
         public static Bounds GetColliderBounds(this Transform transform)
         {
@@ -254,6 +254,36 @@ namespace XRTK.Extensions
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Given 2 Transforms, return a common root Transform (or null).
+        /// </summary>
+        /// <param name="t1">Transform to compare</param>
+        /// <param name="t2">Transform to compare</param>
+        public static Transform FindCommonRoot(this Transform t1, Transform t2)
+        {
+            if (t1 == null || t2 == null)
+            {
+                return null;
+            }
+
+            while (t1 != null)
+            {
+                while (t2 != null)
+                {
+                    if (t1 == t2)
+                    {
+                        return t1;
+                    }
+
+                    t2 = t2.parent;
+                }
+
+                t1 = t1.parent;
+            }
+
+            return null;
         }
     }
 }

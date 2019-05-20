@@ -174,6 +174,7 @@ namespace XRTK.Services.InputSystem
                 CameraCache.Main.gameObject.EnsureComponent<StandaloneInputModule>();
             }
 
+            // ReSharper disable once SuspiciousTypeConversion.Global
             GazeProvider = CameraCache.Main.gameObject.EnsureComponent(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.GazeProviderType.Type) as IMixedRealityGazeProvider;
         }
 
@@ -190,6 +191,7 @@ namespace XRTK.Services.InputSystem
 
             if (!Application.isPlaying)
             {
+                // ReSharper disable once SuspiciousTypeConversion.Global
                 var component = CameraCache.Main.GetComponent<IMixedRealityGazeProvider>() as Component;
 
                 if (component != null)

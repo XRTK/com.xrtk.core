@@ -75,7 +75,7 @@ namespace XRTK.SDK.Utilities.Solvers
         {
             get
             {
-                Vector3 upReference = Vector3.up;
+                var upReference = Vector3.up;
 
                 if (referenceDirection == ReferenceDirectionEnum.ObjectOriented)
                 {
@@ -91,7 +91,7 @@ namespace XRTK.SDK.Utilities.Solvers
         /// <inheritdoc />
         public override void SolverUpdate()
         {
-            Vector3 goalPosition = WorkingPosition;
+            var goalPosition = WorkingPosition;
 
             if (ignoreAngleClamp)
             {
@@ -110,17 +110,11 @@ namespace XRTK.SDK.Utilities.Solvers
             }
 
             // Element orientation
-            Vector3 refDirUp = UpReference;
-            Quaternion goalRotation;
+            var refDirUp = UpReference;
 
-            if (orientToReferenceDirection)
-            {
-                goalRotation = Quaternion.LookRotation(ReferenceDirection, refDirUp);
-            }
-            else
-            {
-                goalRotation = Quaternion.LookRotation(goalPosition - ReferencePoint, refDirUp);
-            }
+            var goalRotation = orientToReferenceDirection
+                ? Quaternion.LookRotation(ReferenceDirection, refDirUp)
+                : Quaternion.LookRotation(goalPosition - ReferencePoint, refDirUp);
 
             // If gravity aligned then zero out the x and z axes on the rotation
             if (referenceDirection == ReferenceDirectionEnum.GravityAligned)
@@ -143,14 +137,14 @@ namespace XRTK.SDK.Utilities.Solvers
         {
             // TODO: There should be a different solver for distance constraint.
             // Determine reference locations and directions
-            Vector3 refPoint = ReferencePoint;
-            Vector3 elementPoint = transform.position;
-            Vector3 elementDelta = elementPoint - refPoint;
-            float elementDist = elementDelta.magnitude;
-            Vector3 elementDir = elementDist > 0 ? elementDelta / elementDist : Vector3.one;
+            var refPoint = ReferencePoint;
+            var elementPoint = transform.position;
+            var elementDelta = elementPoint - refPoint;
+            var elementDist = elementDelta.magnitude;
+            var elementDir = elementDist > 0 ? elementDelta / elementDist : Vector3.one;
 
             // Clamp distance too
-            float clampedDistance = Mathf.Clamp(elementDist, minDistance, maxDistance);
+            var clampedDistance = Mathf.Clamp(elementDist, minDistance, maxDistance);
 
             if (!clampedDistance.Equals(elementDist))
             {
@@ -161,16 +155,16 @@ namespace XRTK.SDK.Utilities.Solvers
         private void GetDesiredOrientation(ref Vector3 desiredPos)
         {
             // Determine reference locations and directions
-            Vector3 direction = ReferenceDirection;
-            Vector3 upDirection = UpReference;
-            Vector3 referencePoint = ReferencePoint;
-            Vector3 elementPoint = transform.position;
-            Vector3 elementDelta = elementPoint - referencePoint;
-            float elementDist = elementDelta.magnitude;
-            Vector3 elementDir = elementDist > 0 ? elementDelta / elementDist : Vector3.one;
+            var direction = ReferenceDirection;
+            var upDirection = UpReference;
+            var referencePoint = ReferencePoint;
+            var elementPoint = transform.position;
+            var elementDelta = elementPoint - referencePoint;
+            var elementDist = elementDelta.magnitude;
+            var elementDir = elementDist > 0 ? elementDelta / elementDist : Vector3.one;
 
             // Generate basis: First get axis perpendicular to reference direction pointing toward element
-            Vector3 perpendicularDirection = (elementDir - direction);
+            var perpendicularDirection = (elementDir - direction);
             perpendicularDirection -= direction * Vector3.Dot(perpendicularDirection, direction);
             perpendicularDirection.Normalize();
 
@@ -186,7 +180,7 @@ namespace XRTK.SDK.Utilities.Solvers
             float clampedDistance = ignoreDistanceClamp ? elementDist : Mathf.Clamp(elementDist, minDistance, maxDistance);
 
             // If the angle was clamped, do some special update stuff
-            if (currentAngle != currentAngleClamped)
+            if (!currentAngle.Equals(currentAngleClamped))
             {
                 float angRad = currentAngleClamped * Mathf.Deg2Rad;
 

@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using UnityEngine.UI;
+using XRTK.Utilities;
 
 namespace XRTK.Extensions
 {
@@ -66,7 +67,7 @@ namespace XRTK.Extensions
 
             for (int i = 0; i < 4; i++)
             {
-                viewportCorners[i] = Camera.main.WorldToViewportPoint(worldCorners[i]);
+                viewportCorners[i] = CameraCache.Main.WorldToViewportPoint(worldCorners[i]);
             }
 
             return viewportCorners;
@@ -87,7 +88,7 @@ namespace XRTK.Extensions
 
             for (int i = 0; i < 4; i++)
             {
-                screenCorners[i] = Camera.main.WorldToScreenPoint(worldCorners[i]);
+                screenCorners[i] = CameraCache.Main.WorldToScreenPoint(worldCorners[i]);
             }
 
             return screenCorners;

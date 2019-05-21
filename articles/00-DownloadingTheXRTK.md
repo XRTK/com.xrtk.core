@@ -19,7 +19,7 @@ In this article, we will walk through each approach to get you up and running, s
 Out preferred deployment approach is to fully utilize Unity's native package management solution to incorporate the XRTK in your solution, akin to the other modules Unity provides out of the box.
 This is the best / quickest and safest way to get XRTK in your solution and automatically updated.
 
-Just download the [XRTK-Core.unitypackage](https://github.com/XRTK/XRTK-Core/releases) asset and import it into your project to start building solutions straight away.  This adds a XRTK seed, which automatically registers the XRTK with the Unity package manager and starts its download and installation.
+Just download the [XRTK-Core.unitypackage](https://github.com/XRTK/XRTK-Core/releases) asset and import it into your project to start building solutions straight away.  This adds an XRTK seed, which automatically registers the XRTK with the Unity package manager and starts its download and installation.
 
 For more instructions for how to get started, [click here](/docs/A01-XRTKUPMInstall.md)
 
@@ -55,10 +55,13 @@ Advanced developers and those wishing to contribute to the XRTK also have the op
 
 You can either:
 
-* Clone the development XRTK repository into a folder and start building your project from there, pulling down the configured submodules in that project.
-* Clone the UPM branch in to a live project as a Submodule in your source, adding the additional submodules as required
+* Clone the **default** (UPM) branch in to a live project as a Submodule in your source, adding the additional extension submodules as required.
 
-For more information, you can follow [this guide here](https://www.rageagainstthepixel.com/expert-import-mrtk/)
+* Clone the **development** XRTK repository into a folder and start building your project from there. The submodules are already linked to this branch (in the Submodules folder) and you can download them by simply "Initializing Submodules" in the main XRTK-Core folder.
+
+> ***FYI***
+> ---
+> When building against development, the XRTK project and it's submodules will appear as "Packages" in Unity, not in the Assets folder.  Just expand the "Packages" tree in the Unity project window to see / debug and edit them.  These are read-only to normal users.
 
 ---
 If there is anything not mentioned in this document or you simply want to know more, raise an [RFI (Request for Information) request here](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=).

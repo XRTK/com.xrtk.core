@@ -13,6 +13,7 @@ namespace XRTK.Inspectors.PropertyDrawers
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             var prefabAttribute = attribute as PrefabAttribute;
+            Debug.Assert(prefabAttribute != null);
 
             if (property.propertyType == SerializedPropertyType.ObjectReference &&
                (property.objectReferenceValue is GameObject || property.objectReferenceValue == null))
@@ -33,7 +34,9 @@ namespace XRTK.Inspectors.PropertyDrawers
 
                 if (prefabAttribute.Constraint != null)
                 {
-                    var constraint = (property.objectReferenceValue as GameObject).GetComponent(prefabAttribute.Constraint);
+                    var prefabObject = property.objectReferenceValue as GameObject;
+                    Debug.Assert(prefabObject != null);
+                    var constraint = prefabObject.GetComponent(prefabAttribute.Constraint);
 
                     if (constraint == null)
                     {

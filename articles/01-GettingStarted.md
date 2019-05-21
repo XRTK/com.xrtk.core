@@ -50,6 +50,12 @@ Note that some prefabs and assets require TextMesh Pro, meaning you have to have
 
 The toolkit has been designed so that there is just one object that is mandatory in your scene.  This is there to provide the core configuration and runtime for the Mixed Reality Toolkit (one of the key advantages in the new framework).
 
+> **Important!**
+> ---
+> Before configuring your Mixed Reality Scene, ensure your scene is saved and included in the project *Build Settings* ***(File > Build Settings… )*** 
+> 
+> There is a Unity bug which will crash Unity if you run **Configure** with an empty Build Settings list in your project.  We've logged this with Unity and will keep this page up to date.
+
 Configuring your scene is extremely simple by simply selecting the following from the Editor menu:
 > Mixed Reality Toolkit -> Configure
 

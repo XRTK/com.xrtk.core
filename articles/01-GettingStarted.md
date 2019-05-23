@@ -52,9 +52,11 @@ The toolkit has been designed so that there is just one object that is mandatory
 
 > **Important!**
 > ---
-> Before configuring your Mixed Reality Scene, ensure your scene is saved and included in the project *Build Settings* ***(File > Build Settings… )*** 
+> Before configuring your Mixed Reality Scene, ensure your scene is saved and included in the project *Build Settings* ***(File > Build Settings… )*** . Best to also restart Unity to be sure. 
 > 
-> There is a Unity bug which will crash Unity if you run **Configure** with an empty Build Settings list in your project.  We've logged this with Unity and will keep this page up to date.
+> There is a Unity bug which will crash Unity if you run **Configure** with an empty Build Settings list in your project.  We've logged this with Unity and will keep this page up to date.  After the crash, everything works perfectly without issue.
+> 
+> This does not affect projects built from source, or via submodules, so it's very confusing.  Basically, it's not us.
 
 Configuring your scene is extremely simple by simply selecting the following from the Editor menu:
 > Mixed Reality Toolkit -> Configure

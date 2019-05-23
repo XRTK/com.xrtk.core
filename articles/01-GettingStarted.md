@@ -9,7 +9,7 @@ The XRTK primary focus is to both make it extremely easy to get going from a new
 To get started with the Mixed Reality Toolkit you will need:
 
 * [Visual Studio 2017+ (Community or full)](https://visualstudio.microsoft.com/downloads/)
-* [Unity 2019.3+](https://unity3d.com/get-unity/download/archive)
+* [Unity 2019.1+](https://unity3d.com/get-unity/download/archive)
 * [Latest XRTK release](https://github.com/XRTK/XRTK-Core/releases)
 
 > For Windows UWP projects, e.g. HL / HL2 / Windows 10

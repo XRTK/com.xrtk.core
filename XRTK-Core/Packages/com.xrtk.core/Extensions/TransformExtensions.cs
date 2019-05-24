@@ -102,7 +102,7 @@ namespace XRTK.Extensions
         {
             var colliders = transform.GetComponentsInChildren<Collider>();
 
-            if (colliders.Length == 0) { return new Bounds(); }
+            if (colliders.Length == 0) { return default; }
 
             var bounds = colliders[0].bounds;
 

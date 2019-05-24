@@ -74,6 +74,9 @@ namespace XRTK.Providers.Controllers.OpenVR
                 case SupportedControllerType.OculusRemote:
                     controllerType = typeof(OculusRemoteController);
                     break;
+                case SupportedControllerType.OculusGo:
+                    controllerType = typeof(OculusGoController);
+                    break;
                 case SupportedControllerType.WindowsMixedReality:
                     controllerType = typeof(WindowsMixedRealityOpenVRMotionController);
                     break;
@@ -128,6 +131,11 @@ namespace XRTK.Providers.Controllers.OpenVR
                 return SupportedControllerType.OculusRemote;
             }
 
+            if (joystickName.Contains("Oculus go"))
+            {
+                return SupportedControllerType.OculusGo;
+            }
+
             if (joystickName.Contains("Vive Wand"))
             {
                 return SupportedControllerType.ViveWand;
@@ -143,7 +151,7 @@ namespace XRTK.Providers.Controllers.OpenVR
                 return SupportedControllerType.WindowsMixedReality;
             }
 
-            Debug.Log($"{joystickName} does not have a defined controller type, falling back to generic controller type");
+            Debug.LogWarning($"{joystickName} does not have a defined controller type, falling back to generic controller type");
 
             return SupportedControllerType.GenericOpenVR;
         }

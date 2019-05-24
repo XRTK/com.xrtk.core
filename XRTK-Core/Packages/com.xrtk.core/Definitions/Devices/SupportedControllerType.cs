@@ -15,6 +15,7 @@ namespace XRTK.Definitions.Devices
         ViveKnuckles,
         OculusTouch,
         OculusRemote,
+        OculusGo,
         WindowsMixedReality,
         GenericUnity,
         Xbox,

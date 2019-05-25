@@ -849,7 +849,11 @@ namespace XRTK.Services.InputSystem
         /// <param name="hitResult"></param>
         private void RaycastGraphics(IMixedRealityPointer pointer, PointerEventData graphicEventData, LayerMask[] prioritizedLayerMasks, PointerHitResult hitResult)
         {
-            Debug.Assert(UIRaycastCamera != null, "Missing UIRaycastCamera!");
+            if (UIRaycastCamera == null)
+            {
+                Debug.LogError("Missing UIRaycastCamera!");
+                return;
+            }
 
             if (!uiRaycastCamera.nearClipPlane.Equals(0.01f))
             {
@@ -905,7 +909,20 @@ namespace XRTK.Services.InputSystem
         /// <param name="uiRaycastResult"></param>
         private bool RaycastGraphicsStep(PointerEventData graphicEventData, RayStep step, LayerMask[] prioritizedLayerMasks, out RaycastResult uiRaycastResult)
         {
-            Debug.Assert(step.Direction != Vector3.zero, "RayStep Direction is Invalid.");
+            uiRaycastResult = default;
+            var currentEventSystem = EventSystem.current;
+
+            if (currentEventSystem == null)
+            {
+                Debug.LogError("Current Event System is Invalid!");
+                return false;
+            }
+
+            if (step.Direction == Vector3.zero)
+            {
+                Debug.LogError("RayStep Direction is Invalid!");
+                return false;
+            }
 
             // Move the uiRaycast camera to the current pointer's position.
             uiRaycastCamera.transform.position = step.Origin;
@@ -918,7 +935,7 @@ namespace XRTK.Services.InputSystem
             graphicEventData.position = newPosition;
 
             // Graphics raycast
-            uiRaycastResult = EventSystem.current.Raycast(graphicEventData, prioritizedLayerMasks);
+            uiRaycastResult = currentEventSystem.Raycast(graphicEventData, prioritizedLayerMasks);
             graphicEventData.pointerCurrentRaycast = uiRaycastResult;
 
             return uiRaycastCamera.gameObject != null;

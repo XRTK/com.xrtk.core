@@ -116,7 +116,7 @@ namespace XRTK.Providers.Controllers.OpenVR
         /// <inheritdoc />
         protected override SupportedControllerType GetCurrentControllerType(string joystickName)
         {
-            if (string.IsNullOrEmpty(joystickName) || !joystickName.Contains("OpenVR"))
+            if (string.IsNullOrEmpty(joystickName))
             {
                 return SupportedControllerType.None;
             }
@@ -126,14 +126,14 @@ namespace XRTK.Providers.Controllers.OpenVR
                 return SupportedControllerType.OculusTouch;
             }
 
+            if (joystickName.Contains("Oculus Tracked Remote"))
+            {
+                return SupportedControllerType.OculusGo;
+            }
+
             if (joystickName.Contains("Oculus remote"))
             {
                 return SupportedControllerType.OculusRemote;
-            }
-
-            if (joystickName.Contains("Oculus go"))
-            {
-                return SupportedControllerType.OculusGo;
             }
 
             if (joystickName.Contains("Vive Wand"))

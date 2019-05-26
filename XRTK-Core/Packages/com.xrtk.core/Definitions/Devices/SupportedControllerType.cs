@@ -15,12 +15,13 @@ namespace XRTK.Definitions.Devices
         ViveKnuckles,
         OculusTouch,
         OculusRemote,
-        OculusGo,
         WindowsMixedReality,
         GenericUnity,
         Xbox,
         TouchScreen,
         Mouse,
-        Lumin
+        Lumin,
+        OculusGo,
+        OculusQuest
     }
 }

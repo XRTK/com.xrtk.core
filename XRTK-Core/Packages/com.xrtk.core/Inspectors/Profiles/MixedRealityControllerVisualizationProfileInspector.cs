@@ -22,6 +22,8 @@ namespace XRTK.Inspectors.Profiles
         {
             new GUIContent("Left Hand"),
             new GUIContent("Right Hand"),
+            new GUIContent("Any Hand"),
+
         };
 
         private SerializedProperty renderMotionControllers;
@@ -183,16 +185,29 @@ namespace XRTK.Inspectors.Profiles
                 }
 
                 var handednessValue = mixedRealityControllerHandedness.intValue - 1;
+                if (handednessValue > 2)
+                {
+                    handednessValue = 2;
+                }
+                else if(handednessValue < 0)
+                {
+                    handednessValue = 0;
+                }
 
-                // Reset in case it was set to something other than left or right.
-                if (handednessValue < 0 || handednessValue > 1) { handednessValue = 0; }
 
                 EditorGUI.BeginChangeCheck();
                 handednessValue = EditorGUILayout.IntPopup(new GUIContent(mixedRealityControllerHandedness.displayName, mixedRealityControllerHandedness.tooltip), handednessValue, HandednessSelections, null);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    mixedRealityControllerHandedness.intValue = handednessValue + 1;
+                    if (handednessValue == 2)
+                    {
+                        mixedRealityControllerHandedness.intValue = 7;
+                    }
+                    else
+                    {
+                        mixedRealityControllerHandedness.intValue = handednessValue + 1;
+                    }
                 }
 
                 EditorGUILayout.PropertyField(controllerSetting.FindPropertyRelative("poseAction"));

@@ -109,7 +109,7 @@ namespace XRTK.Providers.Controllers
             {
                 // Assign any known interaction mappings.
                 if (controllerMappings[i].ControllerType?.Type == controllerType &&
-                    controllerMappings[i].Handedness == ControllerHandedness &&
+                    (controllerMappings[i].Handedness == ControllerHandedness || controllerMappings[i].Handedness == Handedness.Any) &&
                     controllerMappings[i].Interactions.Length > 0)
                 {
                     var profileInteractions = controllerMappings[i].Interactions;

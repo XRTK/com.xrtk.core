@@ -130,7 +130,7 @@ namespace XRTK.Providers.Controllers
             {
                 if (controllerVisualizationSettings[i].ControllerType != null &&
                     controllerVisualizationSettings[i].ControllerType.Type == controllerType &&
-                    (controllerVisualizationSettings[i].Handedness == hand || controllerVisualizationSettings[i].Handedness == Handedness.Both) &&
+                    (controllerVisualizationSettings[i].Handedness == hand || controllerVisualizationSettings[i].Handedness == Handedness.Any) &&
                     controllerVisualizationSettings[i].PoseAction != MixedRealityInputAction.None)
                 {
                     poseAction = controllerVisualizationSettings[i].PoseAction;

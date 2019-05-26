@@ -24,8 +24,8 @@ namespace XRTK.Utilities.Rendering
         private List<Renderer> renderers = new List<Renderer>();
 
 
-        [Tooltip("Which side of the primitive to clip pixels against.")]
         [SerializeField]
+        [Tooltip("Which side of the primitive to clip pixels against.")]
         private Side clippingSide = Side.Inside;
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace XRTK.Utilities.Rendering
             {
                 renderers.Add(_renderer);
 
-                Material material = GetMaterial(_renderer, false);
+                var material = GetMaterial(_renderer, false);
 
                 if (material != null)
                 {
@@ -58,11 +58,19 @@ namespace XRTK.Utilities.Rendering
             }
         }
 
+        public void AddRenderers(Renderer[] _renderers)
+        {
+            for (int i = 0; i < _renderers.Length; i++)
+            {
+                AddRenderer(_renderers[i]);
+            }
+        }
+
         public void RemoveRenderer(Renderer _renderer)
         {
             if (renderers.Contains(_renderer))
             {
-                Material material = GetMaterial(_renderer, false);
+                var material = GetMaterial(_renderer, false);
 
                 if (material != null)
                 {
@@ -71,6 +79,21 @@ namespace XRTK.Utilities.Rendering
 
                 renderers.Remove(_renderer);
             }
+        }
+
+        public void ClearRenderers()
+        {
+            for (int i = 0; i < renderers.Count; i++)
+            {
+                var material = GetMaterial(renderers[i], false);
+
+                if (material != null)
+                {
+                    ToggleClippingFeature(material, false);
+                }
+            }
+
+            renderers.Clear();
         }
 
         protected void OnValidate()

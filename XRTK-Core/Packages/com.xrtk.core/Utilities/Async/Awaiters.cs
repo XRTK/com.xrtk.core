@@ -82,10 +82,12 @@ namespace XRTK.Utilities.Async
 
                     while (!cancellationTokenSource.IsCancellationRequested)
                     {
+#if UNITY_EDITOR
                         if (editorCancelled)
                         {
                             tcs.TrySetCanceled(CancellationToken.None);
                         }
+#endif
 
                         try
                         {
@@ -120,10 +122,12 @@ namespace XRTK.Utilities.Async
 
             while (true)
             {
+#if UNITY_EDITOR
                 if (editorCancelled)
                 {
                     tcs.TrySetCanceled(CancellationToken.None);
                 }
+#endif
 
                 try
                 {

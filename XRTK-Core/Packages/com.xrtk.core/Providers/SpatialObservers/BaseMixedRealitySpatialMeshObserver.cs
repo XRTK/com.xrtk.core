@@ -68,13 +68,14 @@ namespace XRTK.Providers.SpatialObservers
         private readonly GameObject meshObjectPrefab;
 
         /// <summary>
-        /// When a mesh is created we will need to create a game object with a minimum 
+        /// When a mesh is created we will need to create a game object with a minimum
         /// set of components to contain the mesh.  These are the required component types.
         /// </summary>
         private readonly Type[] requiredMeshComponents;
 
         #region IMixedRealityService Implementation
 
+        /// <inheritdoc />
         public override void Initialize()
         {
             base.Initialize();
@@ -304,6 +305,7 @@ namespace XRTK.Providers.SpatialObservers
                 spatialMesh.GameObject.SetActive(false);
                 // Recycle this spatial mesh object and add it back to the pool.
                 spatialMesh.GameObject.name = "Reclaimed Spatial Mesh Object";
+                spatialMesh.Anchor.name = "Reclaimed Spatial Mesh Anchor";
                 spatialMesh.Mesh = null;
                 spatialMesh.Id = -1;
 
@@ -325,24 +327,26 @@ namespace XRTK.Providers.SpatialObservers
         /// <returns>A <see cref="SpatialMeshObject"/></returns>
         protected async Task<SpatialMeshObject> RequestSpatialMeshObject(int meshId)
         {
-            if (spatialMeshObjects.TryGetValue(meshId, out var spatialMesh))
+            while (true)
             {
-                return spatialMesh;
-            }
-
-            lock (spatialMeshObjectPool)
-            {
-                if (spatialMeshObjectPool.Count > 0)
+                if (spatialMeshObjects.TryGetValue(meshId, out var spatialMesh))
                 {
-                    spatialMesh = spatialMeshObjectPool.Pop();
-                    spatialMesh.Id = meshId;
-                    spatialMeshObjects.Add(spatialMesh.Id, spatialMesh);
                     return spatialMesh;
                 }
-            }
 
-            await Awaiters.UnityMainThread;
-            return await RequestSpatialMeshObject(meshId);
+                lock (spatialMeshObjectPool)
+                {
+                    if (spatialMeshObjectPool.Count > 0)
+                    {
+                        spatialMesh = spatialMeshObjectPool.Pop();
+                        spatialMesh.Id = meshId;
+                        spatialMeshObjects.Add(spatialMesh.Id, spatialMesh);
+                        return spatialMesh;
+                    }
+                }
+
+                await Awaiters.UnityMainThread;
+            }
         }
 
         private GameObject CreateBlankSpatialMeshGameObject()

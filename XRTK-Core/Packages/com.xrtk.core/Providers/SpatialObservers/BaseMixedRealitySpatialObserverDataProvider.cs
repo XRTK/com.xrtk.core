@@ -155,5 +155,27 @@ namespace XRTK.Providers.SpatialObservers
         }
 
         #endregion IEquality Implementation
+
+        /// <summary>
+        /// Internal component to monitor the spatial observer's anchored transform, apply the MixedRealityPlayspace transform, and apply it to its parent.
+        /// </summary>
+        protected class PlayspaceAnchorAdapter : MonoBehaviour
+        {
+            /// <summary>
+            /// Compute and set the parent's transform.
+            /// </summary>
+            private void Update()
+            {
+                var playspacePosition = MixedRealityToolkit.Instance.MixedRealityPlayspace.position;
+                var playspaceRotation = MixedRealityToolkit.Instance.MixedRealityPlayspace.rotation;
+                var anchorTransform = transform;
+                var anchorPosition = anchorTransform.position;
+                var anchorRotation = anchorTransform.rotation;
+                var anchorParent = anchorTransform.parent;
+
+                anchorParent.position = playspacePosition + playspaceRotation * anchorPosition;
+                anchorParent.rotation = playspaceRotation * anchorRotation;
+            }
+        }
     }
 }

@@ -18,7 +18,10 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         public SpatialMeshObject(int id, GameObject gameObject) : this()
         {
             Id = id;
+            Debug.Assert(gameObject != null);
             GameObject = gameObject;
+            Anchor = new GameObject("Anchor");
+            Anchor.transform.SetParent(gameObject.transform);
         }
 
         /// <summary>
@@ -29,7 +32,7 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         private GameObject gameObject;
 
         /// <summary>
-        /// The <see cref="GameObject"/> reference of the Spatial Mesh Object.
+        /// The <see cref="UnityEngine.GameObject"/> reference of the Spatial Mesh Object.
         /// </summary>
         public GameObject GameObject
         {
@@ -44,6 +47,17 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
             }
         }
 
+        /// <summary>
+        /// The spatial anchor of the <see cref="UnityEngine.GameObject"/> reference for the Spatial Mesh Object.
+        /// </summary>
+        /// <remarks>
+        /// The anchor is used to correctly offset the spatial mesh if the user ever teleports or moves their playspace.
+        /// </remarks>
+        public GameObject Anchor { get; internal set; }
+
+        /// <summary>
+        /// The <see cref="UnityEngine.Mesh"/> reference for the Spatial Mesh Object.
+        /// </summary>
         public Mesh Mesh
         {
             get => Filter.sharedMesh;

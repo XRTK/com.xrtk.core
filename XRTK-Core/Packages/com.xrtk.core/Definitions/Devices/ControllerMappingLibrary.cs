@@ -277,6 +277,7 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// Gets a scaled texture for the <see cref="SupportedControllerType"/> based on a list of the active <see cref="MixedRealityControllerMappingProfiles"/>.
         /// </summary>
+        /// <param name="mappingProfile"></param>
         /// <param name="controllerType"></param>
         /// <param name="handedness"></param>
         /// <returns>The scaled texture for the controller type, if none found then a generic texture is returned.</returns>

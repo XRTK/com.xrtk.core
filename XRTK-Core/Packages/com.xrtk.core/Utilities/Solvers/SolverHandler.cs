@@ -161,7 +161,7 @@ namespace XRTK.SDK.Utilities.Solvers
 
                     if (solver.enabled)
                     {
-                        solver.SolverUpdate();
+                        solver.SolverUpdateEntry();
                     }
                 }
             }
@@ -240,7 +240,7 @@ namespace XRTK.SDK.Utilities.Solvers
 
             transformWithOffset.transform.localPosition = Vector3.Scale(AdditionalOffset, transformWithOffset.transform.localScale);
             transformWithOffset.transform.localRotation = Quaternion.Euler(AdditionalRotation);
-            transformWithOffset.name = string.Format("{0} on {1} with offset {2}, {3}", gameObject.name, TrackedObjectToReference.ToString(), AdditionalOffset, AdditionalRotation);
+            transformWithOffset.name = $"{gameObject.name} on {TrackedObjectToReference.ToString()} with offset {AdditionalOffset}, {AdditionalRotation}";
             return transformWithOffset.transform;
         }
     }

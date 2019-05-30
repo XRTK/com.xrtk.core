@@ -65,7 +65,7 @@ Configuring your scene is extremely simple by simply selecting the following fro
 
 Once this completes, you will see the following in your Scene hierarchy:
 
-![](/docs/images/01_02_MixedRealityScene.png.png)
+![](/docs/images/01_02_MixedRealityScene.png)
 
 Which contains the following:
 

@@ -32,7 +32,7 @@ Simply add the following dependency into your manifest file, save and return to 
 ```json
 {
   "dependencies": {
-    "com.xrtk.core": "https://github.com/XRTK/XRTK-Core.git",
+    "com.xrtk.core": "https://github.com/XRTK/XRTK-Core.git#upm",
     ...
   },
 }
@@ -55,9 +55,12 @@ Advanced developers and those wishing to contribute to the XRTK also have the op
 
 You can either:
 
-* Clone the **default** (UPM) branch in to a live project as a Submodule in your source, adding the additional extension submodules as required.
-
 * Clone the **development** XRTK repository into a folder and start building your project from there. The submodules are already linked to this branch (in the Submodules folder) and you can download them by simply "Initializing Submodules" in the main XRTK-Core folder.
+
+* Clone the **default** (UPM) branch in to a live project as a Submodule in your source, adding the additional extension submodules as required.
+**However**, we recommend you use the **development** branch to avoid breaking the symbolic links when switching between branches.
+
+
 
 > ***FYI***
 > ---

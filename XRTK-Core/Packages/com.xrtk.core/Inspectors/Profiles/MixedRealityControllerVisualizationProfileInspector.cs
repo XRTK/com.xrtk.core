@@ -22,7 +22,7 @@ namespace XRTK.Inspectors.Profiles
         {
             new GUIContent("Left Hand"),
             new GUIContent("Right Hand"),
-            new GUIContent("Any Hand"),
+            new GUIContent("Either Hand (Both)"),
         };
 
         private SerializedProperty renderMotionControllers;
@@ -183,29 +183,36 @@ namespace XRTK.Inspectors.Profiles
                     EditorGUILayout.HelpBox("A controller type must be defined!", MessageType.Error);
                 }
 
-                var handednessValue = mixedRealityControllerHandedness.intValue - 1;
-                if (handednessValue > 2)
+                var handednessValue = 0;
+                switch (mixedRealityControllerHandedness.intValue)
                 {
-                    handednessValue = 2;
+                    case 1:
+                        handednessValue = 0;
+                        break;
+                    case 2:
+                        handednessValue = 1;
+                        break;
+                    default:
+                        handednessValue = 2;
+                        break;
                 }
-                else if(handednessValue < 0)
-                {
-                    handednessValue = 0;
-                }
-
 
                 EditorGUI.BeginChangeCheck();
                 handednessValue = EditorGUILayout.IntPopup(new GUIContent(mixedRealityControllerHandedness.displayName, mixedRealityControllerHandedness.tooltip), handednessValue, HandednessSelections, null);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    if (handednessValue == 2)
+                    switch (handednessValue)
                     {
-                        mixedRealityControllerHandedness.intValue = 7;
-                    }
-                    else
-                    {
-                        mixedRealityControllerHandedness.intValue = handednessValue + 1;
+                        case 0:
+                            mixedRealityControllerHandedness.intValue = (int)Handedness.Left;
+                            break;
+                        case 1:
+                            mixedRealityControllerHandedness.intValue = (int)Handedness.Right;
+                            break;
+                        default:
+                            mixedRealityControllerHandedness.intValue = (int)Handedness.Both;
+                            break;
                     }
                 }
 

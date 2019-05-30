@@ -4,7 +4,8 @@
         "XRTK",
         "XRTK.Extensions.EditorClassExtensions",
         "XRTK.Utilities.Build",
-        "XRTK.Utilities.Editor"
+        "XRTK.Utilities.Editor",
+        "Unity.ugui"        
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [

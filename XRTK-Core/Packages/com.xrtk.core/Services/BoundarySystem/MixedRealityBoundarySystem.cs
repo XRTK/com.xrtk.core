@@ -314,22 +314,21 @@ namespace XRTK.Services.BoundarySystem
             get => showFloor;
             set
             {
-                if (showFloor != value)
+                if (showFloor == value) { return; }
+
+                showFloor = value;
+
+                if (value && (currentFloorObject == null))
                 {
-                    showFloor = value;
-
-                    if (value && (currentFloorObject == null))
-                    {
-                        GetFloorVisualization();
-                    }
-
-                    if (currentFloorObject != null)
-                    {
-                        currentFloorObject.SetActive(value);
-                    }
-
-                    RaiseBoundaryVisualizationChanged();
+                    GetFloorVisualization();
                 }
+
+                if (currentFloorObject != null)
+                {
+                    currentFloorObject.SetActive(value);
+                }
+
+                RaiseBoundaryVisualizationChanged();
             }
         }
 
@@ -371,22 +370,21 @@ namespace XRTK.Services.BoundarySystem
             get => showPlayArea;
             set
             {
-                if (showPlayArea != value)
+                if (showPlayArea == value) { return; }
+
+                showPlayArea = value;
+
+                if (value && (currentPlayAreaObject == null))
                 {
-                    showPlayArea = value;
-
-                    if (value && (currentPlayAreaObject == null))
-                    {
-                        GetPlayAreaVisualization();
-                    }
-
-                    if (currentPlayAreaObject != null)
-                    {
-                        currentPlayAreaObject.SetActive(value);
-                    }
-
-                    RaiseBoundaryVisualizationChanged();
+                    GetPlayAreaVisualization();
                 }
+
+                if (currentPlayAreaObject != null)
+                {
+                    currentPlayAreaObject.SetActive(value);
+                }
+
+                RaiseBoundaryVisualizationChanged();
             }
         }
 
@@ -426,22 +424,20 @@ namespace XRTK.Services.BoundarySystem
             get => showTrackedArea;
             set
             {
-                if (showTrackedArea != value)
+                if (showTrackedArea == value) { return; }
+                showTrackedArea = value;
+
+                if (value && (currentTrackedAreaObject == null))
                 {
-                    showTrackedArea = value;
-
-                    if (value && (currentTrackedAreaObject == null))
-                    {
-                        GetTrackedAreaVisualization();
-                    }
-
-                    if (currentTrackedAreaObject != null)
-                    {
-                        currentTrackedAreaObject.SetActive(value);
-                    }
-
-                    RaiseBoundaryVisualizationChanged();
+                    GetTrackedAreaVisualization();
                 }
+
+                if (currentTrackedAreaObject != null)
+                {
+                    currentTrackedAreaObject.SetActive(value);
+                }
+
+                RaiseBoundaryVisualizationChanged();
             }
         }
 
@@ -481,22 +477,21 @@ namespace XRTK.Services.BoundarySystem
             get => showBoundaryWalls;
             set
             {
-                if (showBoundaryWalls != value)
+                if (showBoundaryWalls == value) { return; }
+
+                showBoundaryWalls = value;
+
+                if (value && (currentBoundaryWallObject == null))
                 {
-                    showBoundaryWalls = value;
-
-                    if (value && (currentBoundaryWallObject == null))
-                    {
-                        GetBoundaryWallVisualization();
-                    }
-
-                    if (currentBoundaryWallObject != null)
-                    {
-                        currentBoundaryWallObject.SetActive(value);
-                    }
-
-                    RaiseBoundaryVisualizationChanged();
+                    GetBoundaryWallVisualization();
                 }
+
+                if (currentBoundaryWallObject != null)
+                {
+                    currentBoundaryWallObject.SetActive(value);
+                }
+
+                RaiseBoundaryVisualizationChanged();
             }
         }
 
@@ -536,22 +531,21 @@ namespace XRTK.Services.BoundarySystem
             get => showCeiling;
             set
             {
-                if (showCeiling != value)
+                if (showCeiling == value) { return; }
+
+                showCeiling = value;
+
+                if (value && (currentCeilingObject == null))
                 {
-                    showCeiling = value;
-
-                    if (value && (currentCeilingObject == null))
-                    {
-                        GetBoundaryCeilingVisualization();
-                    }
-
-                    if (currentCeilingObject != null)
-                    {
-                        currentCeilingObject.SetActive(value);
-                    }
-
-                    RaiseBoundaryVisualizationChanged();
+                    GetBoundaryCeilingVisualization();
                 }
+
+                if (currentCeilingObject != null)
+                {
+                    currentCeilingObject.SetActive(value);
+                }
+
+                RaiseBoundaryVisualizationChanged();
             }
         }
 
@@ -907,7 +901,7 @@ namespace XRTK.Services.BoundarySystem
             var boundaryGeometry = new List<Vector3>(0);
             var boundaryEdges = new List<Edge>(0);
 
-            if (Boundary.TryGetGeometry(boundaryGeometry, Boundary.Type.TrackedArea))
+            if (Boundary.TryGetGeometry(boundaryGeometry, Boundary.Type.TrackedArea) && boundaryGeometry.Count > 0)
             {
                 // FloorHeight starts out as null. Use a suitably high value for the floor to ensure
                 // that we do not accidentally set it too low.

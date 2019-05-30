@@ -4,6 +4,7 @@
 using System;
 using UnityEngine;
 using XRTK.Utilities;
+using Random = System.Random;
 
 namespace XRTK.Definitions.BoundarySystem
 {
@@ -32,11 +33,13 @@ namespace XRTK.Definitions.BoundarySystem
         /// <summary>
         /// Aspect ratios used when fitting rectangles within the boundary.
         /// </summary>
-        private static float[] aspectRatios = {
-                1.0f, 1.5f, 2.0f, 2.5f, 3.0f, 3.5f, 4.0f, 4.5f,
-                5.0f, 5.5f, 6, 6.5f, 7, 7.5f, 8.0f, 8.5f, 9.0f,
-                9.5f, 10.0f, 10.5f, 11.0f, 11.5f, 12.0f, 12.5f,
-                13.0f, 13.5f, 14.0f, 14.5f, 15.0f};
+        private static readonly float[] aspectRatios =
+        {
+            1.0f, 1.5f, 2.0f, 2.5f, 3.0f, 3.5f, 4.0f, 4.5f,
+            5.0f, 5.5f, 6, 6.5f, 7, 7.5f, 8.0f, 8.5f, 9.0f,
+            9.5f, 10.0f, 10.5f, 11.0f, 11.5f, 12.0f, 12.5f,
+            13.0f, 13.5f, 14.0f, 14.5f, 15.0f
+        };
 
         /// <summary>
         /// The center point of the inscribed rectangle.
@@ -85,6 +88,12 @@ namespace XRTK.Definitions.BoundarySystem
         /// </remarks>
         public InscribedRectangle(Edge[] geometryEdges, int randomSeed)
         {
+            if (geometryEdges == null || geometryEdges.Length == 0)
+            {
+                Debug.LogError("InscribedRectangle requires an array of Edges. You passed in a null or empty array.");
+                return;
+            }
+
             // Clear previous rectangle
             Center = EdgeUtilities.InvalidPoint;
             Width = 0;
@@ -99,7 +108,7 @@ namespace XRTK.Definitions.BoundarySystem
             // Find min x, min y, max x, max y 
             for (int i = 0; i < geometryEdges.Length; i++)
             {
-                Edge edge = geometryEdges[i];
+                var edge = geometryEdges[i];
 
                 if ((edge.PointA.x < minX) || (edge.PointB.x < minX))
                 {
@@ -124,22 +133,21 @@ namespace XRTK.Definitions.BoundarySystem
             }
 
             // Generate random points until we have randomPointCount starting points
-            Vector2[] startingPoints = new Vector2[randomPointCount];
+            var startingPoints = new Vector2[randomPointCount];
+            var random = new Random(randomSeed);
+
+            for (int i = 0; i < startingPoints.Length; i++)
             {
-                System.Random random = new System.Random(randomSeed);
-                for (int i = 0; i < startingPoints.Length; i++)
+                Vector2 candidatePoint;
+
+                do
                 {
-                    Vector2 candidatePoint;
-
-                    do
-                    {
-                        candidatePoint.x = ((float)random.NextDouble() * (maxX - minX)) + minX;
-                        candidatePoint.y = ((float)random.NextDouble() * (maxY - minY)) + minY;
-                    }
-                    while (!EdgeUtilities.IsInsideBoundary(geometryEdges, candidatePoint));
-
-                    startingPoints[i] = candidatePoint;
+                    candidatePoint.x = ((float)random.NextDouble() * (maxX - minX)) + minX;
+                    candidatePoint.y = ((float)random.NextDouble() * (maxY - minY)) + minY;
                 }
+                while (!EdgeUtilities.IsInsideBoundary(geometryEdges, candidatePoint));
+
+                startingPoints[i] = candidatePoint;
             }
 
             for (int angleIndex = 0; angleIndex < fitAngles.Length; angleIndex++)
@@ -152,13 +160,13 @@ namespace XRTK.Definitions.BoundarySystem
                     // Note, we are ignoring the return value as we are checking each point's validity
                     // individually.
                     FindSurroundingCollisionPoints(
-                        geometryEdges, 
-                        startingPoints[pointIndex], 
+                        geometryEdges,
+                        startingPoints[pointIndex],
                         angleRadians,
-                        out Vector2 topCollisionPoint, 
-                        out Vector2 bottomCollisionPoint, 
-                        out Vector2 leftCollisionPoint, 
-                        out Vector2 rightCollisionPoint);
+                        out var topCollisionPoint,
+                        out var bottomCollisionPoint,
+                        out var leftCollisionPoint,
+                        out var rightCollisionPoint);
 
                     float newWidth;
                     float newHeight;
@@ -195,7 +203,8 @@ namespace XRTK.Definitions.BoundarySystem
                         float bY = rightCollisionPoint.y;
 
                         // Calculate the midpoint between the left and right collision points.
-                        Vector2 horizontalMidpoint = new Vector2((aX + bX) * 0.5f, (aY + bY) * 0.5f);
+                        var horizontalMidpoint = new Vector2((aX + bX) * 0.5f, (aY + bY) * 0.5f);
+
                         if (TryFixMaximumRectangle(
                             geometryEdges,
                             horizontalMidpoint,
@@ -254,23 +263,24 @@ namespace XRTK.Definitions.BoundarySystem
             float smallValue = -largeValue;
 
             // Find the top and bottom collision points by creating a large line segment that goes through the point to MAX and MIN values on Y
-            Vector2 topEndpoint = new Vector2(point.x, largeValue);
-            Vector2 bottomEndpoint = new Vector2(point.x, smallValue);
+            var topEndpoint = new Vector2(point.x, largeValue);
+            var bottomEndpoint = new Vector2(point.x, smallValue);
             topEndpoint = RotatePoint(topEndpoint, point, angleRadians);
             bottomEndpoint = RotatePoint(bottomEndpoint, point, angleRadians);
-            Edge verticalLine = new Edge(topEndpoint, bottomEndpoint);
+            var verticalLine = new Edge(topEndpoint, bottomEndpoint);
 
             // Find the left and right collision points by creating a large line segment that goes through the point to MAX and Min values on X
-            Vector2 rightEndpoint = new Vector2(largeValue, point.y);
-            Vector2 leftEndpoint = new Vector2(smallValue, point.y);
+            var rightEndpoint = new Vector2(largeValue, point.y);
+            var leftEndpoint = new Vector2(smallValue, point.y);
             rightEndpoint = RotatePoint(rightEndpoint, point, angleRadians);
             leftEndpoint = RotatePoint(leftEndpoint, point, angleRadians);
-            Edge horizontalLine = new Edge(rightEndpoint, leftEndpoint);
+            var horizontalLine = new Edge(rightEndpoint, leftEndpoint);
 
             for (int i = 0; i < geometryEdges.Length; i++)
             {
                 // Look for a vertical collision
-                Vector2 verticalIntersectionPoint = EdgeUtilities.GetIntersectionPoint(geometryEdges[i], verticalLine);
+                var verticalIntersectionPoint = EdgeUtilities.GetIntersectionPoint(geometryEdges[i], verticalLine);
+
                 if (EdgeUtilities.IsValidPoint(verticalIntersectionPoint))
                 {
                     // Is the intersection above or below the point?
@@ -287,7 +297,7 @@ namespace XRTK.Definitions.BoundarySystem
                     {
                         // Update the bottom collision point
                         if (!EdgeUtilities.IsValidPoint(bottomCollisionPoint) ||
-                            (Vector2.SqrMagnitude(point - verticalIntersectionPoint) < Vector2.SqrMagnitude(point - bottomCollisionPoint)))
+                            Vector2.SqrMagnitude(point - verticalIntersectionPoint) < Vector2.SqrMagnitude(point - bottomCollisionPoint))
                         {
                             bottomCollisionPoint = verticalIntersectionPoint;
                         }
@@ -295,41 +305,36 @@ namespace XRTK.Definitions.BoundarySystem
                 }
 
                 // Look for a horizontal collision
-                Vector2 horizontalIntersection = EdgeUtilities.GetIntersectionPoint(geometryEdges[i], horizontalLine);
-                if (EdgeUtilities.IsValidPoint(horizontalIntersection))
+                var horizontalIntersection = EdgeUtilities.GetIntersectionPoint(geometryEdges[i], horizontalLine);
+
+                if (!EdgeUtilities.IsValidPoint(horizontalIntersection)) { continue; }
+
+                // Is this intersection to the left or the right of the point?
+                if (RotatePoint(horizontalIntersection, point, -angleRadians).x < point.x)
                 {
-                    // Is this intersection to the left or the right of the point?
-                    if (RotatePoint(horizontalIntersection, point, -angleRadians).x < point.x)
+                    // Update the left collision point
+                    if (!EdgeUtilities.IsValidPoint(leftCollisionPoint) ||
+                        (Vector2.SqrMagnitude(point - horizontalIntersection) < Vector2.SqrMagnitude(point - leftCollisionPoint)))
                     {
-                        // Update the left collision point
-                        if (!EdgeUtilities.IsValidPoint(leftCollisionPoint) ||
-                            (Vector2.SqrMagnitude(point - horizontalIntersection) < Vector2.SqrMagnitude(point - leftCollisionPoint)))
-                        {
-                            leftCollisionPoint = horizontalIntersection;
-                        }
+                        leftCollisionPoint = horizontalIntersection;
                     }
-                    else
+                }
+                else
+                {
+                    // Update the right collision point
+                    if (!EdgeUtilities.IsValidPoint(rightCollisionPoint) ||
+                        (Vector2.SqrMagnitude(point - horizontalIntersection) < Vector2.SqrMagnitude(point - rightCollisionPoint)))
                     {
-                        // Update the right collision point
-                        if (!EdgeUtilities.IsValidPoint(rightCollisionPoint) ||
-                            (Vector2.SqrMagnitude(point - horizontalIntersection) < Vector2.SqrMagnitude(point - rightCollisionPoint)))
-                        {
-                            rightCollisionPoint = horizontalIntersection;
-                        }
+                        rightCollisionPoint = horizontalIntersection;
                     }
                 }
             }
 
             // Each corner of the rectangle must intersect with the geometry.
-            if (!EdgeUtilities.IsValidPoint(topCollisionPoint) || 
-                !EdgeUtilities.IsValidPoint(bottomCollisionPoint) ||
-                !EdgeUtilities.IsValidPoint(leftCollisionPoint) || 
-                !EdgeUtilities.IsValidPoint(rightCollisionPoint))
-            {
-                return false;
-            }
-
-            return true;
+            return EdgeUtilities.IsValidPoint(topCollisionPoint) &&
+                   EdgeUtilities.IsValidPoint(leftCollisionPoint) &&
+                   EdgeUtilities.IsValidPoint(rightCollisionPoint) &&
+                   EdgeUtilities.IsValidPoint(bottomCollisionPoint);
         }
 
         /// <summary>
@@ -401,21 +406,16 @@ namespace XRTK.Definitions.BoundarySystem
         /// <param name="width">The width of the rectangle.</param>
         /// <param name="height">The height of the rectangle.</param>
         /// <returns></returns>
-        private bool CheckRectangleFit(
-            Edge[] geometryEdges,
-            Vector2 centerPoint,
-            float angleRadians,
-            float width,
-            float height)
+        private bool CheckRectangleFit(Edge[] geometryEdges, Vector2 centerPoint, float angleRadians, float width, float height)
         {
             float halfWidth = width * 0.5f;
             float halfHeight = height * 0.5f;
 
             // Calculate the rectangle corners.
-            Vector2 topLeft = new Vector2(centerPoint.x - halfWidth, centerPoint.y + halfHeight);
-            Vector2 topRight = new Vector2(centerPoint.x + halfWidth, centerPoint.y + halfHeight);
-            Vector2 bottomLeft = new Vector2(centerPoint.x - halfWidth, centerPoint.y - halfHeight);
-            Vector2 bottomRight = new Vector2(centerPoint.x + halfWidth, centerPoint.y - halfHeight);
+            var topLeft = new Vector2(centerPoint.x - halfWidth, centerPoint.y + halfHeight);
+            var topRight = new Vector2(centerPoint.x + halfWidth, centerPoint.y + halfHeight);
+            var bottomLeft = new Vector2(centerPoint.x - halfWidth, centerPoint.y - halfHeight);
+            var bottomRight = new Vector2(centerPoint.x + halfWidth, centerPoint.y - halfHeight);
 
             // Rotate the rectangle.
             topLeft = RotatePoint(topLeft, centerPoint, angleRadians);
@@ -424,10 +424,10 @@ namespace XRTK.Definitions.BoundarySystem
             bottomRight = RotatePoint(bottomRight, centerPoint, angleRadians);
 
             // Get the rectangle edges.
-            Edge topEdge = new Edge(topLeft, topRight);
-            Edge rightEdge = new Edge(topRight, bottomRight);
-            Edge bottomEdge = new Edge(bottomLeft, bottomRight);
-            Edge leftEdge = new Edge(topLeft, bottomLeft);
+            var topEdge = new Edge(topLeft, topRight);
+            var rightEdge = new Edge(topRight, bottomRight);
+            var bottomEdge = new Edge(bottomLeft, bottomRight);
+            var leftEdge = new Edge(topLeft, bottomLeft);
 
             // Check for collisions with the boundary geometry. If any of our edges collide, 
             // the rectangle will not fit within the playspace.
@@ -471,8 +471,14 @@ namespace XRTK.Definitions.BoundarySystem
             height = 0.0f;
 
             // Find the collision points with the geometry
-            if (!FindSurroundingCollisionPoints(geometryEdges, centerPoint, angleRadians,
-                out Vector2 topCollisionPoint, out Vector2 bottomCollisionPoint, out Vector2 leftCollisionPoint, out Vector2 rightCollisionPoint))
+            if (!FindSurroundingCollisionPoints(
+                geometryEdges,
+                centerPoint,
+                angleRadians,
+                out var topCollisionPoint,
+                out var bottomCollisionPoint,
+                out var leftCollisionPoint,
+                out var rightCollisionPoint))
             {
                 return false;
             }
@@ -506,22 +512,21 @@ namespace XRTK.Definitions.BoundarySystem
 
                 // If the lowest value needed to outperform the previous best is greater than our max, 
                 // this aspect ratio can't outperform what we've already calculated.
-                if ((searchHeightLowerBound > searchHeightUpperBound) || 
-                    (searchHeightLowerBound * aspectRatios[i] > maxWidth))
+                if (searchHeightLowerBound > searchHeightUpperBound ||
+                    searchHeightLowerBound * aspectRatios[i] > maxWidth)
                 {
                     continue;
                 }
 
                 float currentTestingHeight = Mathf.Max(searchHeightLowerBound, maxHeight * 0.5f);
 
-
                 // Perform the binary search until continuing to search will not give us a significant win.
                 do
                 {
-                    if (CheckRectangleFit(geometryEdges, 
-                        centerPoint, 
-                        angleRadians, 
-                        aspectRatios[i] * currentTestingHeight, 
+                    if (CheckRectangleFit(geometryEdges,
+                        centerPoint,
+                        angleRadians,
+                        aspectRatios[i] * currentTestingHeight,
                         currentTestingHeight))
                     {
                         // Binary search up-ward

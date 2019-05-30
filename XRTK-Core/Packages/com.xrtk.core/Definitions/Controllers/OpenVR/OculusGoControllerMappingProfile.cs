@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
@@ -21,7 +21,7 @@ namespace XRTK.Providers.Controllers.OpenVR
             {
                 ControllerMappings = new[]
                 {
-                    new MixedRealityControllerMapping("Oculus Remote Controller", typeof(OculusGoController)),
+                    new MixedRealityControllerMapping("Oculus Go Controller", typeof(OculusGoController)),
                 };
             }
 

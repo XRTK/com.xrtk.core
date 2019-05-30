@@ -23,7 +23,6 @@ namespace XRTK.Inspectors.Profiles
             new GUIContent("Left Hand"),
             new GUIContent("Right Hand"),
             new GUIContent("Any Hand"),
-
         };
 
         private SerializedProperty renderMotionControllers;

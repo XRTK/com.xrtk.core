@@ -286,6 +286,8 @@ namespace XRTK.Extensions
                 return null;
             }
 
+            var t2root = t2;
+
             while (t1 != null)
             {
                 while (t2 != null)
@@ -296,9 +298,13 @@ namespace XRTK.Extensions
                     }
 
                     t2 = t2.parent;
-                }
 
-                t1 = t1.parent;
+                    if (t2 == null)
+                    {
+                        t1 = t1.parent;
+                        t2 = t2root;
+                    }
+                }
             }
 
             return null;

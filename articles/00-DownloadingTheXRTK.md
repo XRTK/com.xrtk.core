@@ -25,20 +25,9 @@ For more instructions for how to get started, [click here](/docs/A01-XRTKUPMInst
 
 ## Manual UPM Install
 
-If you prefer to do things yourself, you can simply edit the ***manifest.json*** file in your Unity project to register the XRTK and begin the download and installation into your project.
+If you prefer to do things yourself, you can simply edit the ***manifest.json*** file in your Unity project and add an entry to register the XRTK and begin the download and installation into your project.
 
-Simply add the following dependency into your manifest file, save and return to Unity to begin:
-
-```json
-{
-  "dependencies": {
-    "com.xrtk.core": "https://github.com/XRTK/XRTK-Core.git#upm",
-    ...
-  },
-}
-```
-
-For more details, check the XRTK [UPM instructions here]()
+For more details, check the XRTK [UPM instructions here](/docs/A01-XRTKUPMInstall.md#manual-download)
 
 ## Offline Asset
 > **(Coming Soon)**

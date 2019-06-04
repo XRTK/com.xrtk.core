@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Definitions.Devices;
+using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.Controllers.OpenVR
 {
@@ -21,7 +22,7 @@ namespace XRTK.Providers.Controllers.OpenVR
             {
                 ControllerMappings = new[]
                 {
-                    new MixedRealityControllerMapping("Oculus Go Controller", typeof(OculusGoController)),
+                    new MixedRealityControllerMapping("Oculus Go Controller", typeof(OculusGoController), Handedness.Both),
                 };
             }
 

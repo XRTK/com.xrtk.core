@@ -116,7 +116,7 @@ namespace XRTK.Providers.Controllers.OpenVR
         /// <inheritdoc />
         protected override SupportedControllerType GetCurrentControllerType(string joystickName)
         {
-            if (string.IsNullOrEmpty(joystickName))
+            if (string.IsNullOrEmpty(joystickName) || joystickName.Contains("<0"))
             {
                 return SupportedControllerType.None;
             }

@@ -36,7 +36,7 @@ namespace XRTK.Providers.Controllers.OpenVR
             new MixedRealityInteractionMapping(7, "PrimaryTouchpad Axis", AxisType.DualAxis, DeviceInputType.DirectionalPad, ControllerMappingLibrary.AXIS_4, ControllerMappingLibrary.AXIS_5)
         };
 
-        /// <inheritdoc />But 
+        /// <inheritdoc />
         public override void SetupDefaultInteractions(Handedness controllerHandedness)
         {
             AssignControllerMappings(DefaultInteractions);

@@ -20,6 +20,8 @@ namespace XRTK.Definitions.Devices
         Xbox,
         TouchScreen,
         Mouse,
-        Lumin
+        Lumin,
+        OculusGo,
+        OculusQuest
     }
 }

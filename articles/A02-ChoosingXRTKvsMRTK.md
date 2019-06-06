@@ -37,9 +37,8 @@ The MRTK focuses on delivery to new and pre-existing partner solutions and as su
 
 ## Supported Platforms
 
-
 Platform | Description | XRTK Support | MRTK Support
----|---|---|---|---|
+---|---|---|---|
 OpenVR (Windows) | Running OpenVR projects on Windows / Windows 10 | WMR / Vive / Rift | WMR / Vive / Rift
 OpenVR (Android) | Running OpenVR projects on Android | Oculus GO / (Oculus Quest coming soon) | Not Supported
 UWP | Universal Windows Platform (Windows 10) | Windows 10 WMR / HoloLens 1 | Windows 10 WMR / HoloLens 1 / HoloLens 2

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MixedRealityDiagnosticsProfile
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.42.1.0">
+    <meta name="generator" content="docfx 2.42.2.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -86,6 +86,9 @@
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="XRTK.Definitions.BaseMixedRealityProfile.html#XRTK_Definitions_BaseMixedRealityProfile_ParentProfile">BaseMixedRealityProfile.ParentProfile</a>
+    </div>
     <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.ScriptableObject.html#UnityEngine_ScriptableObject_SetDirty">ScriptableObject.SetDirty()</a>
     </div>
@@ -212,19 +215,19 @@ public class MixedRealityDiagnosticsProfile : BaseMixedRealityProfile</code></pr
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_CpuBuffer.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.CpuBuffer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_FrameSampleRate.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FrameSampleRate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L52">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L44">View Source</a>
   </span>
-  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_CpuBuffer_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.CpuBuffer*"></a>
-  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_CpuBuffer" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.CpuBuffer">CpuBuffer</h4>
-  <div class="markdown level1 summary"><p>The number of samples the cpu use tracker should use.</p>
+  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_FrameSampleRate_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FrameSampleRate*"></a>
+  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_FrameSampleRate" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FrameSampleRate">FrameSampleRate</h4>
+  <div class="markdown level1 summary"><p>The amount of time, in seconds, to collect frames for frame rate calculation.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int CpuBuffer { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public float FrameSampleRate { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -236,212 +239,26 @@ public class MixedRealityDiagnosticsProfile : BaseMixedRealityProfile</code></pr
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_FpsBuffer.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FpsBuffer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L70">View Source</a>
-  </span>
-  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_FpsBuffer_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FpsBuffer*"></a>
-  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_FpsBuffer" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FpsBuffer">FpsBuffer</h4>
-  <div class="markdown level1 summary"><p>The number of samples the Fps use tracker should use.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int FpsBuffer { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_HandlerType.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.HandlerType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L38">View Source</a>
-  </span>
-  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_HandlerType_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.HandlerType*"></a>
-  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_HandlerType" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.HandlerType">HandlerType</h4>
-  <div class="markdown level1 summary"><p>The type of <a class="xref" href="XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsHandler.html">IMixedRealityDiagnosticsHandler</a> to use for visualization.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SystemType HandlerType { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="XRTK.Definitions.Utilities.SystemType.html">SystemType</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_MemoryBuffer.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.MemoryBuffer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L88">View Source</a>
-  </span>
-  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_MemoryBuffer_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.MemoryBuffer*"></a>
-  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_MemoryBuffer" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.MemoryBuffer">MemoryBuffer</h4>
-  <div class="markdown level1 summary"><p>The number of samples the memory use tracker should use.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public int MemoryBuffer { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowCpu.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowCpu%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L43">View Source</a>
-  </span>
-  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowCpu_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowCpu*"></a>
-  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowCpu" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowCpu">ShowCpu</h4>
-  <div class="markdown level1 summary"><p>Should the Cpu diagnostic be visible?</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ShowCpu { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowFps.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowFps%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L61">View Source</a>
-  </span>
-  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowFps_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowFps*"></a>
-  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowFps" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowFps">ShowFps</h4>
-  <div class="markdown level1 summary"><p>Should the fps diagnostic be visible?</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ShowFps { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowMemory.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowMemory%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L79">View Source</a>
-  </span>
-  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowMemory_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowMemory*"></a>
-  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowMemory" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowMemory">ShowMemory</h4>
-  <div class="markdown level1 summary"><p>How to show the memory diagnostic</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool ShowMemory { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_Visible.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.Visible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowDiagnostics.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowDiagnostics%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L24">View Source</a>
   </span>
-  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_Visible_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.Visible*"></a>
-  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_Visible" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.Visible">Visible</h4>
-  <div class="markdown level1 summary"><p>Should the diagnostics be visible?</p>
+  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowDiagnostics_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowDiagnostics*"></a>
+  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowDiagnostics" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowDiagnostics">ShowDiagnostics</h4>
+  <div class="markdown level1 summary"><p>Show or hide diagnostic visualizations.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool Visible { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public bool ShowDiagnostics { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -454,6 +271,161 @@ public class MixedRealityDiagnosticsProfile : BaseMixedRealityProfile</code></pr
     <tbody>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowProfiler.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowProfiler%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L33">View Source</a>
+  </span>
+  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowProfiler_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowProfiler*"></a>
+  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowProfiler" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowProfiler">ShowProfiler</h4>
+  <div class="markdown level1 summary"><p>Show or hide the profiler UI.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool ShowProfiler { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowAnchor.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowAnchor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L53">View Source</a>
+  </span>
+  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowAnchor_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowAnchor*"></a>
+  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowAnchor" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowAnchor">WindowAnchor</h4>
+  <div class="markdown level1 summary"><p>What part of the view port to anchor the window to.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public TextAnchor WindowAnchor { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.TextAnchor.html">TextAnchor</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowFollowSpeed.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowFollowSpeed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L80">View Source</a>
+  </span>
+  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowFollowSpeed_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowFollowSpeed*"></a>
+  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowFollowSpeed" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowFollowSpeed">WindowFollowSpeed</h4>
+  <div class="markdown level1 summary"><p>How quickly to interpolate the window towards its target position and rotation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float WindowFollowSpeed { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowOffset.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowOffset%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L62">View Source</a>
+  </span>
+  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowOffset_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowOffset*"></a>
+  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowOffset" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowOffset">WindowOffset</h4>
+  <div class="markdown level1 summary"><p>The offset from the view port center applied based on the window anchor selection.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector2 WindowOffset { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector2.html">Vector2</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowScale.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowScale%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L71">View Source</a>
+  </span>
+  <a id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowScale_" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowScale*"></a>
+  <h4 id="XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowScale" data-uid="XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowScale">WindowScale</h4>
+  <div class="markdown level1 summary"><p>Use to scale the window size up or down, can simulate a zooming effect.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float WindowScale { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -485,7 +457,7 @@ public class MixedRealityDiagnosticsProfile : BaseMixedRealityProfile</code></pr
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L14" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsProfile.cs/#L13" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

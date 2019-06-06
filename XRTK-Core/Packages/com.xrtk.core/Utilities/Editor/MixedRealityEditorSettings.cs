@@ -46,7 +46,7 @@ namespace XRTK.Utilities.Editor
                     return mixedRealityToolkit_AbsoluteFolderPath;
                 }
 
-                FindDirectory(Project_AbsolutePath, "com.xrtk.core", out mixedRealityToolkit_AbsoluteFolderPath);
+                FindDirectory(Project_AbsolutePath, "Packages/com.xrtk.core", out mixedRealityToolkit_AbsoluteFolderPath);
 
                 return mixedRealityToolkit_AbsoluteFolderPath;
             }
@@ -195,18 +195,18 @@ namespace XRTK.Utilities.Editor
                 return false;
             }
 
-            for (int i = 0; i < directories.Length; i++)
+            foreach (var directory in directories)
             {
-                var name = Path.GetFileName(directories[i]);
+                var name = Path.GetFileName(directory);
 
                 if (name != null &&
                     name.Contains(directoryName))
                 {
-                    path = directories[i];
+                    path = directory;
                     return true;
                 }
 
-                if (FindDirectory(directories[i], directoryName, out path))
+                if (FindDirectory(directory, directoryName, out path))
                 {
                     return true;
                 }

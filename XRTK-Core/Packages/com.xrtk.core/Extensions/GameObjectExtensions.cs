@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace XRTK.Extensions
 {
@@ -12,11 +13,16 @@ namespace XRTK.Extensions
     /// </summary>
     public static class GameObjectExtensions
     {
+        /// <summary>
+        /// Sets the child <see cref="GameObject"/> states.
+        /// </summary>
+        /// <param name="root">The root <see cref="GameObject"/>.</param>
+        /// <param name="isActive">The active value to set.</param>
         public static void SetChildrenActive(this GameObject root, bool isActive)
         {
             for (int i = 0; i < root.transform.childCount; i++)
             {
-                root.transform.GetChild(i).gameObject.SetActive(false);
+                root.transform.GetChild(i).gameObject.SetActive(isActive);
             }
         }
 
@@ -132,6 +138,73 @@ namespace XRTK.Extensions
             {
                 action(i);
             }
+        }
+
+        /// <summary>
+        /// Sets the <see cref="Renderer"/>s and optionally <see cref="Collider"/>s in this <see cref="GameObject"/> to the provided <see cref="bool"/> state.
+        /// </summary>
+        /// <remarks>If the GameObject or it's children are inactive, they will be set active, but the GameObjects will not be set inactive.</remarks>
+        /// <param name="gameObject"></param>
+        /// <param name="isActive"></param>
+        /// <param name="includeColliders"></param>
+        public static void SetRenderingActive(this GameObject gameObject, bool isActive, bool includeColliders = true)
+        {
+            if (isActive)
+            {
+                gameObject.SetActive(true);
+            }
+
+            foreach (var renderer in gameObject.GetComponentsInChildren<Renderer>())
+            {
+                renderer.enabled = isActive;
+            }
+
+            foreach (var graphic in gameObject.GetComponentsInChildren<Graphic>())
+            {
+                graphic.enabled = isActive;
+            }
+
+            if (includeColliders)
+            {
+                foreach (var collider in gameObject.GetComponentsInChildren<Collider>())
+                {
+                    collider.enabled = isActive;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Given 2 GameObjects, return a common root GameObject (or null).
+        /// </summary>
+        /// <param name="g1">GameObject to compare</param>
+        /// <param name="g2">GameObject to compare</param>
+        public static GameObject FindCommonRoot(this GameObject g1, GameObject g2)
+        {
+            if (g1 == null || g2 == null)
+            {
+                return null;
+            }
+
+            var t1 = g1.transform;
+
+            while (t1 != null)
+            {
+                var t2 = g2.transform;
+
+                while (t2 != null)
+                {
+                    if (t1 == t2)
+                    {
+                        return t1.gameObject;
+                    }
+
+                    t2 = t2.parent;
+                }
+
+                t1 = t1.parent;
+            }
+
+            return null;
         }
     }
 }

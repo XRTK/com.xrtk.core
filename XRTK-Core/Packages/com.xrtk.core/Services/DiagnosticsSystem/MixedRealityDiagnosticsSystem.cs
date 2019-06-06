@@ -1,52 +1,46 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using XRTK.Definitions.Diagnostics;
-using XRTK.EventDatum.Diagnostics;
 using XRTK.Interfaces.Diagnostics;
-using Object = UnityEngine.Object;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
     /// <summary>
     /// The default implementation of the <see cref="IMixedRealityDiagnosticsSystem"/>
     /// </summary>
-    public class MixedRealityDiagnosticsSystem : BaseEventSystem, IMixedRealityDiagnosticsSystem
+    public class MixedRealityDiagnosticsSystem : BaseSystem, IMixedRealityDiagnosticsSystem
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="profile">Diagnostics service configuration profile.</param>
         public MixedRealityDiagnosticsSystem(MixedRealityDiagnosticsProfile profile)
             : base(profile)
         {
-            if (MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile == null)
-            {
-                throw new Exception("Missing Diagnostics system profile!");
-            }
+            this.profile = profile;
         }
 
-        #region IMixedRealityService Implementation
+        private readonly MixedRealityDiagnosticsProfile profile;
+
+        #region IMixedRealityService
 
         /// <inheritdoc />
         public override void Initialize()
         {
-            base.Initialize();
-
             if (!Application.isPlaying) { return; }
 
-            eventData = new DiagnosticsEventData(EventSystem.current);
+            // Apply profile settings
+            ShowDiagnostics = profile.ShowDiagnostics;
+            ShowProfiler = profile.ShowProfiler;
+            FrameSampleRate = profile.FrameSampleRate;
+            WindowAnchor = profile.WindowAnchor;
+            WindowOffset = profile.WindowOffset;
+            WindowScale = profile.WindowScale;
+            WindowFollowSpeed = profile.WindowFollowSpeed;
 
-            ShowCpu = MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.ShowCpu;
-            CpuUseTracker = new CpuUseTracker(MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.CpuBuffer);
-            ShowFps = MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.ShowFps;
-            FpsUseTracker = new FpsUseTracker(MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.FpsBuffer);
-            ShowMemory = MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.ShowMemory;
-            MemoryUseTracker = new MemoryUseTracker(MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.MemoryBuffer);
-
-            // Setting the visibility creates our GameObject reference, so set it last after we've configured our settings.
-            Visible = MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.Visible;
-
-            RaiseDiagnosticsChanged();
+            CreateVisualizations();
         }
 
         /// <inheritdoc />
@@ -54,30 +48,19 @@ namespace XRTK.Services.DiagnosticsSystem
         {
             base.Destroy();
 
-            diagnosticsHandler = null;
-
-            if (diagnosticVisualization != null)
+            if (diagnosticVisualizationParent != null)
             {
                 if (Application.isEditor)
                 {
-                    Object.DestroyImmediate(diagnosticVisualization);
+                    Object.DestroyImmediate(diagnosticVisualizationParent);
                 }
                 else
                 {
-                    Object.Destroy(diagnosticVisualization);
+                    diagnosticVisualizationParent.transform.DetachChildren();
+                    Object.Destroy(diagnosticVisualizationParent);
                 }
 
-                diagnosticVisualization = null;
-            }
-
-            visible = false;
-            showCpu = false;
-            showFps = false;
-            showMemory = false;
-
-            if (Application.isPlaying)
-            {
-                RaiseDiagnosticsChanged();
+                diagnosticVisualizationParent = null;
             }
         }
 
@@ -85,169 +68,184 @@ namespace XRTK.Services.DiagnosticsSystem
 
         #region IMixedRealityDiagnosticsSystem
 
-        private bool visible;
+        private bool showDiagnostics;
 
         /// <inheritdoc />
-        public bool Visible
+        public bool ShowDiagnostics
         {
-            get => visible;
+            get => showDiagnostics;
             set
             {
-                if (value != visible)
+                if (value != showDiagnostics)
                 {
-                    visible = value;
-                    DiagnosticVisualization.SetActive(value);
+                    showDiagnostics = value;
 
-                    RaiseDiagnosticsChanged();
-                }
-            }
-        }
-
-        private bool showCpu;
-
-        /// <inheritdoc />
-        public bool ShowCpu
-        {
-            get => showCpu;
-            set
-            {
-                if (value != showCpu)
-                {
-                    showCpu = value;
-
-                    if (!value)
+                    if (diagnosticVisualizationParent != null)
                     {
-                        CpuUseTracker.Reset();
+                        diagnosticVisualizationParent.SetActive(value);
                     }
-
-                    RaiseDiagnosticsChanged();
                 }
             }
         }
 
-        /// <inheritdoc />
-        public CpuUseTracker CpuUseTracker { get; private set; }
-
-        private bool showFps;
+        private bool showProfiler;
 
         /// <inheritdoc />
-        public bool ShowFps
+        public bool ShowProfiler
         {
-            get => showFps;
+            get => showProfiler;
             set
             {
-                if (value != showFps)
+                if (value != showProfiler)
                 {
-                    showFps = value;
-                    RaiseDiagnosticsChanged();
+                    showProfiler = value;
+                    if (visualProfiler != null)
+                    {
+                        visualProfiler.IsVisible = value;
+                    }
                 }
             }
         }
 
-        /// <inheritdoc />
-        public FpsUseTracker FpsUseTracker { get; private set; }
-
-        private bool showMemory;
+        private float frameSampleRate = 0.1f;
 
         /// <inheritdoc />
-        public bool ShowMemory
+        public float FrameSampleRate
         {
-            get => showMemory;
+            get => frameSampleRate;
             set
             {
-                if (value != showMemory)
+                if (!Mathf.Approximately(frameSampleRate, value))
                 {
-                    showMemory = value;
-                    RaiseDiagnosticsChanged();
+                    frameSampleRate = value;
+
+                    if (visualProfiler != null)
+                    {
+                        visualProfiler.FrameSampleRate = frameSampleRate;
+                    }
                 }
             }
         }
 
-        /// <inheritdoc />
-        public MemoryUseTracker MemoryUseTracker { get; private set; }
+        #endregion IMixedRealityDiagnosticsSystem Implementation
 
-        private IMixedRealityDiagnosticsHandler diagnosticsHandler;
+        private TextAnchor windowAnchor = TextAnchor.LowerCenter;
 
-        private GameObject diagnosticVisualization;
-
-        /// <inheritdoc />
-        public GameObject DiagnosticVisualization
+        /// <summary>
+        /// What part of the view port to anchor the window to.
+        /// </summary>
+        public TextAnchor WindowAnchor
         {
-            get
+            get => windowAnchor;
+
+            set
             {
-                if (diagnosticVisualization != null)
+                if (value != windowAnchor)
                 {
-                    return diagnosticVisualization;
+                    windowAnchor = value;
+
+                    if (visualProfiler != null)
+                    {
+                        visualProfiler.WindowAnchor = windowAnchor;
+                    }
                 }
-
-                if (!Visible)
-                {
-                    // Don't create a GameObject if it's not needed
-                    return null;
-                }
-
-                diagnosticVisualization = GameObject.CreatePrimitive(PrimitiveType.Quad);
-                diagnosticVisualization.name = "Diagnostics";
-                diagnosticVisualization.layer = Physics.IgnoreRaycastLayer;
-
-                // Place it 2 meters in front of the user.
-                //diagnosticVisualization.transform.position = CameraCache.Main.transform.forward * 2f;
-
-                var handlerType = MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.HandlerType;
-
-                // TODO: Possibly add a collider and a solver to keep it in front of the users face?
-
-                if (handlerType.Type != null)
-                {
-                    diagnosticVisualization.AddComponent(handlerType.Type);
-                    diagnosticsHandler = diagnosticVisualization.GetComponent<IMixedRealityDiagnosticsHandler>();
-                    Debug.Assert(diagnosticsHandler != null);
-                    return diagnosticVisualization;
-                }
-
-                Debug.LogError("A handler type must be assigned to the diagnostics profile.");
-                return null;
             }
         }
 
-        #endregion IMixedRealityDiagnosticsSystem
+        private Vector2 windowOffset = new Vector2(0.1f, 0.1f);
 
-        #region IMixedRealityEventSource
-
-        private DiagnosticsEventData eventData;
-
-        /// <inheritdoc />
-        public uint SourceId => (uint)SourceName.GetHashCode();
-
-        /// <inheritdoc />
-        public string SourceName => "Mixed Reality Diagnostics System";
-
-        /// <inheritdoc />
-        public new bool Equals(object x, object y) => false;
-
-        /// <inheritdoc />
-        public int GetHashCode(object obj) => SourceName.GetHashCode();
-
-        private void RaiseDiagnosticsChanged()
+        /// <summary>
+        /// The offset from the view port center applied based on the window anchor selection.
+        /// </summary>
+        public Vector2 WindowOffset
         {
-            eventData.Initialize(this, Visible, ShowCpu, ShowFps, ShowMemory);
+            get => windowOffset;
 
-            // Manually send it to our diagnostics handler, no matter who's listening.
-            diagnosticsHandler?.OnDiagnosticSettingsChanged(eventData);
+            set
+            {
+                if (value != windowOffset)
+                {
+                    windowOffset = value;
 
-            HandleEvent(eventData, OnDiagnosticsChanged);
+                    if (visualProfiler != null)
+                    {
+                        visualProfiler.WindowOffset = windowOffset;
+                    }
+                }
+            }
+        }
+
+        private float windowScale = 1.0f;
+
+        /// <summary>
+        /// Use to scale the window size up or down, can simulate a zooming effect.
+        /// </summary>
+        public float WindowScale
+        {
+            get => windowScale;
+
+            set
+            {
+                if (!value.Equals(windowScale))
+                {
+                    windowScale = value;
+
+                    if (visualProfiler != null)
+                    {
+                        visualProfiler.WindowScale = windowScale;
+                    }
+                }
+            }
+        }
+
+        private float windowFollowSpeed = 5.0f;
+
+        /// <summary>
+        /// How quickly to interpolate the window towards its target position and rotation.
+        /// </summary>
+        public float WindowFollowSpeed
+        {
+            get => windowFollowSpeed;
+
+            set
+            {
+                if (!value.Equals(windowFollowSpeed))
+                {
+                    windowFollowSpeed = value;
+
+                    if (visualProfiler != null)
+                    {
+                        visualProfiler.WindowFollowSpeed = windowFollowSpeed;
+                    }
+                }
+            }
         }
 
         /// <summary>
-        /// Event sent whenever the diagnostics visualization changes.
+        /// The parent object under which all visualization game objects will be placed.
         /// </summary>
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityDiagnosticsHandler> OnDiagnosticsChanged =
-            delegate (IMixedRealityDiagnosticsHandler handler, BaseEventData eventData)
-            {
-                var diagnosticsEventsData = ExecuteEvents.ValidateEventData<DiagnosticsEventData>(eventData);
-                handler.OnDiagnosticSettingsChanged(diagnosticsEventsData);
-            };
+        private GameObject diagnosticVisualizationParent = null;
 
-        #endregion IMixedRealityEventSource
+        private MixedRealityToolkitVisualProfiler visualProfiler = null;
+
+        /// <summary>
+        /// Creates the diagnostic visualizations and parents them so that the scene hierarchy does not get overly cluttered.
+        /// </summary>
+        private void CreateVisualizations()
+        {
+            diagnosticVisualizationParent = new GameObject("Diagnostics");
+            diagnosticVisualizationParent.transform.parent = MixedRealityToolkit.Instance.MixedRealityPlayspace;
+            diagnosticVisualizationParent.SetActive(ShowDiagnostics);
+
+            // visual profiler settings
+            visualProfiler = diagnosticVisualizationParent.AddComponent<MixedRealityToolkitVisualProfiler>();
+            visualProfiler.WindowParent = diagnosticVisualizationParent.transform;
+            visualProfiler.IsVisible = ShowProfiler;
+            visualProfiler.FrameSampleRate = FrameSampleRate;
+            visualProfiler.WindowAnchor = WindowAnchor;
+            visualProfiler.WindowOffset = WindowOffset;
+            visualProfiler.WindowScale = WindowScale;
+            visualProfiler.WindowFollowSpeed = WindowFollowSpeed;
+        }
     }
 }

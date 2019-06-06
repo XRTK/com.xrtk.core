@@ -147,7 +147,9 @@ namespace XRTK.Utilities.Build
         public static void SyncSolution()
         {
             var syncVs = Type.GetType("UnityEditor.SyncVS,UnityEditor");
+            Debug.Assert(syncVs != null);
             var syncSolution = syncVs.GetMethod("SyncSolution", BindingFlags.Public | BindingFlags.Static);
+            Debug.Assert(syncSolution != null);
             syncSolution.Invoke(null, null);
         }
 

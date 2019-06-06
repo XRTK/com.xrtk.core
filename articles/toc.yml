@@ -1,0 +1,10 @@
+- name: Getting Started
+  items:
+    - name: Downloading the XRTK
+      href: 00-DownloadingTheXRTK.md
+    - name: Getting started with the XRTK
+      href: 01-GettingStarted.md      
+- name: Appendices
+  items:
+    - name: XRTK UPM detailed installation instructions
+      href: A01-XRTKUPMInstall.md

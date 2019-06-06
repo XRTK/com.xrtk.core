@@ -293,6 +293,19 @@ references:
   commentId: T:XRTK.Definitions.BaseMixedRealityProfile
   fullName: XRTK.Definitions.BaseMixedRealityProfile
   nameWithType: BaseMixedRealityProfile
+- uid: XRTK.Definitions.BaseMixedRealityProfile.ParentProfile
+  name: ParentProfile
+  href: api/XRTK.Definitions.BaseMixedRealityProfile.html#XRTK_Definitions_BaseMixedRealityProfile_ParentProfile
+  commentId: P:XRTK.Definitions.BaseMixedRealityProfile.ParentProfile
+  fullName: XRTK.Definitions.BaseMixedRealityProfile.ParentProfile
+  nameWithType: BaseMixedRealityProfile.ParentProfile
+- uid: XRTK.Definitions.BaseMixedRealityProfile.ParentProfile*
+  name: ParentProfile
+  href: api/XRTK.Definitions.BaseMixedRealityProfile.html#XRTK_Definitions_BaseMixedRealityProfile_ParentProfile_
+  commentId: Overload:XRTK.Definitions.BaseMixedRealityProfile.ParentProfile
+  isSpec: "True"
+  fullName: XRTK.Definitions.BaseMixedRealityProfile.ParentProfile
+  nameWithType: BaseMixedRealityProfile.ParentProfile
 - uid: XRTK.Definitions.BoundarySystem
   name: XRTK.Definitions.BoundarySystem
   href: api/XRTK.Definitions.BoundarySystem.html
@@ -1813,283 +1826,103 @@ references:
   commentId: N:XRTK.Definitions.Diagnostics
   fullName: XRTK.Definitions.Diagnostics
   nameWithType: XRTK.Definitions.Diagnostics
-- uid: XRTK.Definitions.Diagnostics.CpuUseTracker
-  name: CpuUseTracker
-  href: api/XRTK.Definitions.Diagnostics.CpuUseTracker.html
-  commentId: T:XRTK.Definitions.Diagnostics.CpuUseTracker
-  fullName: XRTK.Definitions.Diagnostics.CpuUseTracker
-  nameWithType: CpuUseTracker
-- uid: XRTK.Definitions.Diagnostics.CpuUseTracker.#ctor(System.Int32)
-  name: CpuUseTracker(Int32)
-  href: api/XRTK.Definitions.Diagnostics.CpuUseTracker.html#XRTK_Definitions_Diagnostics_CpuUseTracker__ctor_System_Int32_
-  commentId: M:XRTK.Definitions.Diagnostics.CpuUseTracker.#ctor(System.Int32)
-  fullName: XRTK.Definitions.Diagnostics.CpuUseTracker.CpuUseTracker(System.Int32)
-  nameWithType: CpuUseTracker.CpuUseTracker(Int32)
-- uid: XRTK.Definitions.Diagnostics.CpuUseTracker.#ctor*
-  name: CpuUseTracker
-  href: api/XRTK.Definitions.Diagnostics.CpuUseTracker.html#XRTK_Definitions_Diagnostics_CpuUseTracker__ctor_
-  commentId: Overload:XRTK.Definitions.Diagnostics.CpuUseTracker.#ctor
-  isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.CpuUseTracker.CpuUseTracker
-  nameWithType: CpuUseTracker.CpuUseTracker
-- uid: XRTK.Definitions.Diagnostics.CpuUseTracker.CurrentReadingInMs
-  name: CurrentReadingInMs
-  href: api/XRTK.Definitions.Diagnostics.CpuUseTracker.html#XRTK_Definitions_Diagnostics_CpuUseTracker_CurrentReadingInMs
-  commentId: P:XRTK.Definitions.Diagnostics.CpuUseTracker.CurrentReadingInMs
-  fullName: XRTK.Definitions.Diagnostics.CpuUseTracker.CurrentReadingInMs
-  nameWithType: CpuUseTracker.CurrentReadingInMs
-- uid: XRTK.Definitions.Diagnostics.CpuUseTracker.CurrentReadingInMs*
-  name: CurrentReadingInMs
-  href: api/XRTK.Definitions.Diagnostics.CpuUseTracker.html#XRTK_Definitions_Diagnostics_CpuUseTracker_CurrentReadingInMs_
-  commentId: Overload:XRTK.Definitions.Diagnostics.CpuUseTracker.CurrentReadingInMs
-  isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.CpuUseTracker.CurrentReadingInMs
-  nameWithType: CpuUseTracker.CurrentReadingInMs
-- uid: XRTK.Definitions.Diagnostics.CpuUseTracker.Reset
-  name: Reset()
-  href: api/XRTK.Definitions.Diagnostics.CpuUseTracker.html#XRTK_Definitions_Diagnostics_CpuUseTracker_Reset
-  commentId: M:XRTK.Definitions.Diagnostics.CpuUseTracker.Reset
-  fullName: XRTK.Definitions.Diagnostics.CpuUseTracker.Reset()
-  nameWithType: CpuUseTracker.Reset()
-- uid: XRTK.Definitions.Diagnostics.CpuUseTracker.Reset*
-  name: Reset
-  href: api/XRTK.Definitions.Diagnostics.CpuUseTracker.html#XRTK_Definitions_Diagnostics_CpuUseTracker_Reset_
-  commentId: Overload:XRTK.Definitions.Diagnostics.CpuUseTracker.Reset
-  isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.CpuUseTracker.Reset
-  nameWithType: CpuUseTracker.Reset
-- uid: XRTK.Definitions.Diagnostics.FpsUseTracker
-  name: FpsUseTracker
-  href: api/XRTK.Definitions.Diagnostics.FpsUseTracker.html
-  commentId: T:XRTK.Definitions.Diagnostics.FpsUseTracker
-  fullName: XRTK.Definitions.Diagnostics.FpsUseTracker
-  nameWithType: FpsUseTracker
-- uid: XRTK.Definitions.Diagnostics.FpsUseTracker.#ctor(System.Int32)
-  name: FpsUseTracker(Int32)
-  href: api/XRTK.Definitions.Diagnostics.FpsUseTracker.html#XRTK_Definitions_Diagnostics_FpsUseTracker__ctor_System_Int32_
-  commentId: M:XRTK.Definitions.Diagnostics.FpsUseTracker.#ctor(System.Int32)
-  fullName: XRTK.Definitions.Diagnostics.FpsUseTracker.FpsUseTracker(System.Int32)
-  nameWithType: FpsUseTracker.FpsUseTracker(Int32)
-- uid: XRTK.Definitions.Diagnostics.FpsUseTracker.#ctor*
-  name: FpsUseTracker
-  href: api/XRTK.Definitions.Diagnostics.FpsUseTracker.html#XRTK_Definitions_Diagnostics_FpsUseTracker__ctor_
-  commentId: Overload:XRTK.Definitions.Diagnostics.FpsUseTracker.#ctor
-  isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.FpsUseTracker.FpsUseTracker
-  nameWithType: FpsUseTracker.FpsUseTracker
-- uid: XRTK.Definitions.Diagnostics.FpsUseTracker.CurrentReadingInSeconds
-  name: CurrentReadingInSeconds
-  href: api/XRTK.Definitions.Diagnostics.FpsUseTracker.html#XRTK_Definitions_Diagnostics_FpsUseTracker_CurrentReadingInSeconds
-  commentId: P:XRTK.Definitions.Diagnostics.FpsUseTracker.CurrentReadingInSeconds
-  fullName: XRTK.Definitions.Diagnostics.FpsUseTracker.CurrentReadingInSeconds
-  nameWithType: FpsUseTracker.CurrentReadingInSeconds
-- uid: XRTK.Definitions.Diagnostics.FpsUseTracker.CurrentReadingInSeconds*
-  name: CurrentReadingInSeconds
-  href: api/XRTK.Definitions.Diagnostics.FpsUseTracker.html#XRTK_Definitions_Diagnostics_FpsUseTracker_CurrentReadingInSeconds_
-  commentId: Overload:XRTK.Definitions.Diagnostics.FpsUseTracker.CurrentReadingInSeconds
-  isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.FpsUseTracker.CurrentReadingInSeconds
-  nameWithType: FpsUseTracker.CurrentReadingInSeconds
-- uid: XRTK.Definitions.Diagnostics.MemoryReading
-  name: MemoryReading
-  href: api/XRTK.Definitions.Diagnostics.MemoryReading.html
-  commentId: T:XRTK.Definitions.Diagnostics.MemoryReading
-  fullName: XRTK.Definitions.Diagnostics.MemoryReading
-  nameWithType: MemoryReading
-- uid: XRTK.Definitions.Diagnostics.MemoryReading.GcMemoryInBytes
-  name: GcMemoryInBytes
-  href: api/XRTK.Definitions.Diagnostics.MemoryReading.html#XRTK_Definitions_Diagnostics_MemoryReading_GcMemoryInBytes
-  commentId: P:XRTK.Definitions.Diagnostics.MemoryReading.GcMemoryInBytes
-  fullName: XRTK.Definitions.Diagnostics.MemoryReading.GcMemoryInBytes
-  nameWithType: MemoryReading.GcMemoryInBytes
-- uid: XRTK.Definitions.Diagnostics.MemoryReading.GcMemoryInBytes*
-  name: GcMemoryInBytes
-  href: api/XRTK.Definitions.Diagnostics.MemoryReading.html#XRTK_Definitions_Diagnostics_MemoryReading_GcMemoryInBytes_
-  commentId: Overload:XRTK.Definitions.Diagnostics.MemoryReading.GcMemoryInBytes
-  isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.MemoryReading.GcMemoryInBytes
-  nameWithType: MemoryReading.GcMemoryInBytes
-- uid: XRTK.Definitions.Diagnostics.MemoryReading.op_Addition(XRTK.Definitions.Diagnostics.MemoryReading,XRTK.Definitions.Diagnostics.MemoryReading)
-  name: Addition(MemoryReading, MemoryReading)
-  href: api/XRTK.Definitions.Diagnostics.MemoryReading.html#XRTK_Definitions_Diagnostics_MemoryReading_op_Addition_XRTK_Definitions_Diagnostics_MemoryReading_XRTK_Definitions_Diagnostics_MemoryReading_
-  commentId: M:XRTK.Definitions.Diagnostics.MemoryReading.op_Addition(XRTK.Definitions.Diagnostics.MemoryReading,XRTK.Definitions.Diagnostics.MemoryReading)
-  fullName: XRTK.Definitions.Diagnostics.MemoryReading.Addition(XRTK.Definitions.Diagnostics.MemoryReading, XRTK.Definitions.Diagnostics.MemoryReading)
-  nameWithType: MemoryReading.Addition(MemoryReading, MemoryReading)
-- uid: XRTK.Definitions.Diagnostics.MemoryReading.op_Addition*
-  name: Addition
-  href: api/XRTK.Definitions.Diagnostics.MemoryReading.html#XRTK_Definitions_Diagnostics_MemoryReading_op_Addition_
-  commentId: Overload:XRTK.Definitions.Diagnostics.MemoryReading.op_Addition
-  isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.MemoryReading.Addition
-  nameWithType: MemoryReading.Addition
-- uid: XRTK.Definitions.Diagnostics.MemoryReading.op_Division(XRTK.Definitions.Diagnostics.MemoryReading,System.Int32)
-  name: Division(MemoryReading, Int32)
-  href: api/XRTK.Definitions.Diagnostics.MemoryReading.html#XRTK_Definitions_Diagnostics_MemoryReading_op_Division_XRTK_Definitions_Diagnostics_MemoryReading_System_Int32_
-  commentId: M:XRTK.Definitions.Diagnostics.MemoryReading.op_Division(XRTK.Definitions.Diagnostics.MemoryReading,System.Int32)
-  fullName: XRTK.Definitions.Diagnostics.MemoryReading.Division(XRTK.Definitions.Diagnostics.MemoryReading, System.Int32)
-  nameWithType: MemoryReading.Division(MemoryReading, Int32)
-- uid: XRTK.Definitions.Diagnostics.MemoryReading.op_Division*
-  name: Division
-  href: api/XRTK.Definitions.Diagnostics.MemoryReading.html#XRTK_Definitions_Diagnostics_MemoryReading_op_Division_
-  commentId: Overload:XRTK.Definitions.Diagnostics.MemoryReading.op_Division
-  isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.MemoryReading.Division
-  nameWithType: MemoryReading.Division
-- uid: XRTK.Definitions.Diagnostics.MemoryReading.Reset
-  name: Reset()
-  href: api/XRTK.Definitions.Diagnostics.MemoryReading.html#XRTK_Definitions_Diagnostics_MemoryReading_Reset
-  commentId: M:XRTK.Definitions.Diagnostics.MemoryReading.Reset
-  fullName: XRTK.Definitions.Diagnostics.MemoryReading.Reset()
-  nameWithType: MemoryReading.Reset()
-- uid: XRTK.Definitions.Diagnostics.MemoryReading.Reset*
-  name: Reset
-  href: api/XRTK.Definitions.Diagnostics.MemoryReading.html#XRTK_Definitions_Diagnostics_MemoryReading_Reset_
-  commentId: Overload:XRTK.Definitions.Diagnostics.MemoryReading.Reset
-  isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.MemoryReading.Reset
-  nameWithType: MemoryReading.Reset
-- uid: XRTK.Definitions.Diagnostics.MemoryUseTracker
-  name: MemoryUseTracker
-  href: api/XRTK.Definitions.Diagnostics.MemoryUseTracker.html
-  commentId: T:XRTK.Definitions.Diagnostics.MemoryUseTracker
-  fullName: XRTK.Definitions.Diagnostics.MemoryUseTracker
-  nameWithType: MemoryUseTracker
-- uid: XRTK.Definitions.Diagnostics.MemoryUseTracker.#ctor(System.Int32)
-  name: MemoryUseTracker(Int32)
-  href: api/XRTK.Definitions.Diagnostics.MemoryUseTracker.html#XRTK_Definitions_Diagnostics_MemoryUseTracker__ctor_System_Int32_
-  commentId: M:XRTK.Definitions.Diagnostics.MemoryUseTracker.#ctor(System.Int32)
-  fullName: XRTK.Definitions.Diagnostics.MemoryUseTracker.MemoryUseTracker(System.Int32)
-  nameWithType: MemoryUseTracker.MemoryUseTracker(Int32)
-- uid: XRTK.Definitions.Diagnostics.MemoryUseTracker.#ctor*
-  name: MemoryUseTracker
-  href: api/XRTK.Definitions.Diagnostics.MemoryUseTracker.html#XRTK_Definitions_Diagnostics_MemoryUseTracker__ctor_
-  commentId: Overload:XRTK.Definitions.Diagnostics.MemoryUseTracker.#ctor
-  isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.MemoryUseTracker.MemoryUseTracker
-  nameWithType: MemoryUseTracker.MemoryUseTracker
-- uid: XRTK.Definitions.Diagnostics.MemoryUseTracker.CurrentReading
-  name: CurrentReading
-  href: api/XRTK.Definitions.Diagnostics.MemoryUseTracker.html#XRTK_Definitions_Diagnostics_MemoryUseTracker_CurrentReading
-  commentId: P:XRTK.Definitions.Diagnostics.MemoryUseTracker.CurrentReading
-  fullName: XRTK.Definitions.Diagnostics.MemoryUseTracker.CurrentReading
-  nameWithType: MemoryUseTracker.CurrentReading
-- uid: XRTK.Definitions.Diagnostics.MemoryUseTracker.CurrentReading*
-  name: CurrentReading
-  href: api/XRTK.Definitions.Diagnostics.MemoryUseTracker.html#XRTK_Definitions_Diagnostics_MemoryUseTracker_CurrentReading_
-  commentId: Overload:XRTK.Definitions.Diagnostics.MemoryUseTracker.CurrentReading
-  isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.MemoryUseTracker.CurrentReading
-  nameWithType: MemoryUseTracker.CurrentReading
 - uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile
   name: MixedRealityDiagnosticsProfile
   href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html
   commentId: T:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile
   fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile
   nameWithType: MixedRealityDiagnosticsProfile
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.CpuBuffer
-  name: CpuBuffer
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_CpuBuffer
-  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.CpuBuffer
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.CpuBuffer
-  nameWithType: MixedRealityDiagnosticsProfile.CpuBuffer
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.CpuBuffer*
-  name: CpuBuffer
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_CpuBuffer_
-  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.CpuBuffer
+- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FrameSampleRate
+  name: FrameSampleRate
+  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_FrameSampleRate
+  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FrameSampleRate
+  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FrameSampleRate
+  nameWithType: MixedRealityDiagnosticsProfile.FrameSampleRate
+- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FrameSampleRate*
+  name: FrameSampleRate
+  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_FrameSampleRate_
+  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FrameSampleRate
   isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.CpuBuffer
-  nameWithType: MixedRealityDiagnosticsProfile.CpuBuffer
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FpsBuffer
-  name: FpsBuffer
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_FpsBuffer
-  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FpsBuffer
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FpsBuffer
-  nameWithType: MixedRealityDiagnosticsProfile.FpsBuffer
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FpsBuffer*
-  name: FpsBuffer
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_FpsBuffer_
-  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FpsBuffer
+  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FrameSampleRate
+  nameWithType: MixedRealityDiagnosticsProfile.FrameSampleRate
+- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowDiagnostics
+  name: ShowDiagnostics
+  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowDiagnostics
+  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowDiagnostics
+  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowDiagnostics
+  nameWithType: MixedRealityDiagnosticsProfile.ShowDiagnostics
+- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowDiagnostics*
+  name: ShowDiagnostics
+  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowDiagnostics_
+  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowDiagnostics
   isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.FpsBuffer
-  nameWithType: MixedRealityDiagnosticsProfile.FpsBuffer
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.HandlerType
-  name: HandlerType
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_HandlerType
-  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.HandlerType
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.HandlerType
-  nameWithType: MixedRealityDiagnosticsProfile.HandlerType
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.HandlerType*
-  name: HandlerType
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_HandlerType_
-  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.HandlerType
+  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowDiagnostics
+  nameWithType: MixedRealityDiagnosticsProfile.ShowDiagnostics
+- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowProfiler
+  name: ShowProfiler
+  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowProfiler
+  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowProfiler
+  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowProfiler
+  nameWithType: MixedRealityDiagnosticsProfile.ShowProfiler
+- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowProfiler*
+  name: ShowProfiler
+  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowProfiler_
+  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowProfiler
   isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.HandlerType
-  nameWithType: MixedRealityDiagnosticsProfile.HandlerType
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.MemoryBuffer
-  name: MemoryBuffer
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_MemoryBuffer
-  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.MemoryBuffer
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.MemoryBuffer
-  nameWithType: MixedRealityDiagnosticsProfile.MemoryBuffer
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.MemoryBuffer*
-  name: MemoryBuffer
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_MemoryBuffer_
-  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.MemoryBuffer
+  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowProfiler
+  nameWithType: MixedRealityDiagnosticsProfile.ShowProfiler
+- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowAnchor
+  name: WindowAnchor
+  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowAnchor
+  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowAnchor
+  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowAnchor
+  nameWithType: MixedRealityDiagnosticsProfile.WindowAnchor
+- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowAnchor*
+  name: WindowAnchor
+  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowAnchor_
+  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowAnchor
   isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.MemoryBuffer
-  nameWithType: MixedRealityDiagnosticsProfile.MemoryBuffer
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowCpu
-  name: ShowCpu
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowCpu
-  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowCpu
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowCpu
-  nameWithType: MixedRealityDiagnosticsProfile.ShowCpu
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowCpu*
-  name: ShowCpu
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowCpu_
-  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowCpu
+  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowAnchor
+  nameWithType: MixedRealityDiagnosticsProfile.WindowAnchor
+- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowFollowSpeed
+  name: WindowFollowSpeed
+  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowFollowSpeed
+  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowFollowSpeed
+  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowFollowSpeed
+  nameWithType: MixedRealityDiagnosticsProfile.WindowFollowSpeed
+- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowFollowSpeed*
+  name: WindowFollowSpeed
+  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowFollowSpeed_
+  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowFollowSpeed
   isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowCpu
-  nameWithType: MixedRealityDiagnosticsProfile.ShowCpu
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowFps
-  name: ShowFps
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowFps
-  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowFps
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowFps
-  nameWithType: MixedRealityDiagnosticsProfile.ShowFps
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowFps*
-  name: ShowFps
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowFps_
-  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowFps
+  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowFollowSpeed
+  nameWithType: MixedRealityDiagnosticsProfile.WindowFollowSpeed
+- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowOffset
+  name: WindowOffset
+  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowOffset
+  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowOffset
+  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowOffset
+  nameWithType: MixedRealityDiagnosticsProfile.WindowOffset
+- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowOffset*
+  name: WindowOffset
+  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowOffset_
+  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowOffset
   isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowFps
-  nameWithType: MixedRealityDiagnosticsProfile.ShowFps
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowMemory
-  name: ShowMemory
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowMemory
-  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowMemory
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowMemory
-  nameWithType: MixedRealityDiagnosticsProfile.ShowMemory
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowMemory*
-  name: ShowMemory
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_ShowMemory_
-  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowMemory
+  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowOffset
+  nameWithType: MixedRealityDiagnosticsProfile.WindowOffset
+- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowScale
+  name: WindowScale
+  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowScale
+  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowScale
+  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowScale
+  nameWithType: MixedRealityDiagnosticsProfile.WindowScale
+- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowScale*
+  name: WindowScale
+  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_WindowScale_
+  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowScale
   isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.ShowMemory
-  nameWithType: MixedRealityDiagnosticsProfile.ShowMemory
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.Visible
-  name: Visible
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_Visible
-  commentId: P:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.Visible
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.Visible
-  nameWithType: MixedRealityDiagnosticsProfile.Visible
-- uid: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.Visible*
-  name: Visible
-  href: api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html#XRTK_Definitions_Diagnostics_MixedRealityDiagnosticsProfile_Visible_
-  commentId: Overload:XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.Visible
-  isSpec: "True"
-  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.Visible
-  nameWithType: MixedRealityDiagnosticsProfile.Visible
+  fullName: XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.WindowScale
+  nameWithType: MixedRealityDiagnosticsProfile.WindowScale
 - uid: XRTK.Definitions.InputSystem
   name: XRTK.Definitions.InputSystem
   href: api/XRTK.Definitions.InputSystem.html
@@ -4974,6 +4807,12 @@ references:
   commentId: T:XRTK.Definitions.SpatialAwarenessSystem.SpatialMeshDisplayOptions
   fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialMeshDisplayOptions
   nameWithType: SpatialMeshDisplayOptions
+- uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialMeshDisplayOptions.Collision
+  name: Collision
+  href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialMeshDisplayOptions.html#XRTK_Definitions_SpatialAwarenessSystem_SpatialMeshDisplayOptions_Collision
+  commentId: F:XRTK.Definitions.SpatialAwarenessSystem.SpatialMeshDisplayOptions.Collision
+  fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialMeshDisplayOptions.Collision
+  nameWithType: SpatialMeshDisplayOptions.Collision
 - uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialMeshDisplayOptions.None
   name: None
   href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialMeshDisplayOptions.html#XRTK_Definitions_SpatialAwarenessSystem_SpatialMeshDisplayOptions_None
@@ -6570,96 +6409,6 @@ references:
   isSpec: "True"
   fullName: XRTK.EventDatum.Boundary.BoundaryEventData.IsTrackedAreaVisualized
   nameWithType: BoundaryEventData.IsTrackedAreaVisualized
-- uid: XRTK.EventDatum.Diagnostics
-  name: XRTK.EventDatum.Diagnostics
-  href: api/XRTK.EventDatum.Diagnostics.html
-  commentId: N:XRTK.EventDatum.Diagnostics
-  fullName: XRTK.EventDatum.Diagnostics
-  nameWithType: XRTK.EventDatum.Diagnostics
-- uid: XRTK.EventDatum.Diagnostics.DiagnosticsEventData
-  name: DiagnosticsEventData
-  href: api/XRTK.EventDatum.Diagnostics.DiagnosticsEventData.html
-  commentId: T:XRTK.EventDatum.Diagnostics.DiagnosticsEventData
-  fullName: XRTK.EventDatum.Diagnostics.DiagnosticsEventData
-  nameWithType: DiagnosticsEventData
-- uid: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.#ctor(UnityEngine.EventSystems.EventSystem)
-  name: DiagnosticsEventData(EventSystem)
-  href: api/XRTK.EventDatum.Diagnostics.DiagnosticsEventData.html#XRTK_EventDatum_Diagnostics_DiagnosticsEventData__ctor_UnityEngine_EventSystems_EventSystem_
-  commentId: M:XRTK.EventDatum.Diagnostics.DiagnosticsEventData.#ctor(UnityEngine.EventSystems.EventSystem)
-  fullName: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.DiagnosticsEventData(UnityEngine.EventSystems.EventSystem)
-  nameWithType: DiagnosticsEventData.DiagnosticsEventData(EventSystem)
-- uid: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.#ctor*
-  name: DiagnosticsEventData
-  href: api/XRTK.EventDatum.Diagnostics.DiagnosticsEventData.html#XRTK_EventDatum_Diagnostics_DiagnosticsEventData__ctor_
-  commentId: Overload:XRTK.EventDatum.Diagnostics.DiagnosticsEventData.#ctor
-  isSpec: "True"
-  fullName: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.DiagnosticsEventData
-  nameWithType: DiagnosticsEventData.DiagnosticsEventData
-- uid: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.Initialize(XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  name: Initialize(IMixedRealityDiagnosticsSystem, Boolean, Boolean, Boolean, Boolean)
-  href: api/XRTK.EventDatum.Diagnostics.DiagnosticsEventData.html#XRTK_EventDatum_Diagnostics_DiagnosticsEventData_Initialize_XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_System_Boolean_System_Boolean_System_Boolean_System_Boolean_
-  commentId: M:XRTK.EventDatum.Diagnostics.DiagnosticsEventData.Initialize(XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem,System.Boolean,System.Boolean,System.Boolean,System.Boolean)
-  fullName: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.Initialize(XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem, System.Boolean, System.Boolean, System.Boolean, System.Boolean)
-  nameWithType: DiagnosticsEventData.Initialize(IMixedRealityDiagnosticsSystem, Boolean, Boolean, Boolean, Boolean)
-- uid: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.Initialize*
-  name: Initialize
-  href: api/XRTK.EventDatum.Diagnostics.DiagnosticsEventData.html#XRTK_EventDatum_Diagnostics_DiagnosticsEventData_Initialize_
-  commentId: Overload:XRTK.EventDatum.Diagnostics.DiagnosticsEventData.Initialize
-  isSpec: "True"
-  fullName: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.Initialize
-  nameWithType: DiagnosticsEventData.Initialize
-- uid: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowCpu
-  name: ShowCpu
-  href: api/XRTK.EventDatum.Diagnostics.DiagnosticsEventData.html#XRTK_EventDatum_Diagnostics_DiagnosticsEventData_ShowCpu
-  commentId: P:XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowCpu
-  fullName: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowCpu
-  nameWithType: DiagnosticsEventData.ShowCpu
-- uid: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowCpu*
-  name: ShowCpu
-  href: api/XRTK.EventDatum.Diagnostics.DiagnosticsEventData.html#XRTK_EventDatum_Diagnostics_DiagnosticsEventData_ShowCpu_
-  commentId: Overload:XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowCpu
-  isSpec: "True"
-  fullName: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowCpu
-  nameWithType: DiagnosticsEventData.ShowCpu
-- uid: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowFps
-  name: ShowFps
-  href: api/XRTK.EventDatum.Diagnostics.DiagnosticsEventData.html#XRTK_EventDatum_Diagnostics_DiagnosticsEventData_ShowFps
-  commentId: P:XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowFps
-  fullName: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowFps
-  nameWithType: DiagnosticsEventData.ShowFps
-- uid: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowFps*
-  name: ShowFps
-  href: api/XRTK.EventDatum.Diagnostics.DiagnosticsEventData.html#XRTK_EventDatum_Diagnostics_DiagnosticsEventData_ShowFps_
-  commentId: Overload:XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowFps
-  isSpec: "True"
-  fullName: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowFps
-  nameWithType: DiagnosticsEventData.ShowFps
-- uid: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowMemory
-  name: ShowMemory
-  href: api/XRTK.EventDatum.Diagnostics.DiagnosticsEventData.html#XRTK_EventDatum_Diagnostics_DiagnosticsEventData_ShowMemory
-  commentId: P:XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowMemory
-  fullName: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowMemory
-  nameWithType: DiagnosticsEventData.ShowMemory
-- uid: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowMemory*
-  name: ShowMemory
-  href: api/XRTK.EventDatum.Diagnostics.DiagnosticsEventData.html#XRTK_EventDatum_Diagnostics_DiagnosticsEventData_ShowMemory_
-  commentId: Overload:XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowMemory
-  isSpec: "True"
-  fullName: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.ShowMemory
-  nameWithType: DiagnosticsEventData.ShowMemory
-- uid: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.Visible
-  name: Visible
-  href: api/XRTK.EventDatum.Diagnostics.DiagnosticsEventData.html#XRTK_EventDatum_Diagnostics_DiagnosticsEventData_Visible
-  commentId: P:XRTK.EventDatum.Diagnostics.DiagnosticsEventData.Visible
-  fullName: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.Visible
-  nameWithType: DiagnosticsEventData.Visible
-- uid: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.Visible*
-  name: Visible
-  href: api/XRTK.EventDatum.Diagnostics.DiagnosticsEventData.html#XRTK_EventDatum_Diagnostics_DiagnosticsEventData_Visible_
-  commentId: Overload:XRTK.EventDatum.Diagnostics.DiagnosticsEventData.Visible
-  isSpec: "True"
-  fullName: XRTK.EventDatum.Diagnostics.DiagnosticsEventData.Visible
-  nameWithType: DiagnosticsEventData.Visible
 - uid: XRTK.EventDatum.GenericBaseEventData
   name: GenericBaseEventData
   href: api/XRTK.EventDatum.GenericBaseEventData.html
@@ -8833,6 +8582,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.GameObjectExtensions.SetLayerRecursively
   nameWithType: GameObjectExtensions.SetLayerRecursively
+- uid: XRTK.Extensions.GameObjectExtensions.SetRenderingActive(UnityEngine.GameObject,System.Boolean,System.Boolean)
+  name: SetRenderingActive(GameObject, Boolean, Boolean)
+  href: api/XRTK.Extensions.GameObjectExtensions.html#XRTK_Extensions_GameObjectExtensions_SetRenderingActive_UnityEngine_GameObject_System_Boolean_System_Boolean_
+  commentId: M:XRTK.Extensions.GameObjectExtensions.SetRenderingActive(UnityEngine.GameObject,System.Boolean,System.Boolean)
+  fullName: XRTK.Extensions.GameObjectExtensions.SetRenderingActive(UnityEngine.GameObject, System.Boolean, System.Boolean)
+  nameWithType: GameObjectExtensions.SetRenderingActive(GameObject, Boolean, Boolean)
+- uid: XRTK.Extensions.GameObjectExtensions.SetRenderingActive*
+  name: SetRenderingActive
+  href: api/XRTK.Extensions.GameObjectExtensions.html#XRTK_Extensions_GameObjectExtensions_SetRenderingActive_
+  commentId: Overload:XRTK.Extensions.GameObjectExtensions.SetRenderingActive
+  isSpec: "True"
+  fullName: XRTK.Extensions.GameObjectExtensions.SetRenderingActive
+  nameWithType: GameObjectExtensions.SetRenderingActive
 - uid: XRTK.Extensions.InteractionSourceExtensions
   name: InteractionSourceExtensions
   href: api/XRTK.Extensions.InteractionSourceExtensions.html
@@ -9639,12 +9401,12 @@ references:
   commentId: T:XRTK.Inspectors.ControllerPopupWindow
   fullName: XRTK.Inspectors.ControllerPopupWindow
   nameWithType: ControllerPopupWindow
-- uid: XRTK.Inspectors.ControllerPopupWindow.Show(XRTK.Definitions.Devices.SupportedControllerType,UnityEditor.SerializedProperty,XRTK.Definitions.Utilities.Handedness,System.Boolean)
-  name: Show(SupportedControllerType, SerializedProperty, Handedness, Boolean)
-  href: api/XRTK.Inspectors.ControllerPopupWindow.html#XRTK_Inspectors_ControllerPopupWindow_Show_XRTK_Definitions_Devices_SupportedControllerType_UnityEditor_SerializedProperty_XRTK_Definitions_Utilities_Handedness_System_Boolean_
-  commentId: M:XRTK.Inspectors.ControllerPopupWindow.Show(XRTK.Definitions.Devices.SupportedControllerType,UnityEditor.SerializedProperty,XRTK.Definitions.Utilities.Handedness,System.Boolean)
-  fullName: XRTK.Inspectors.ControllerPopupWindow.Show(XRTK.Definitions.Devices.SupportedControllerType, UnityEditor.SerializedProperty, XRTK.Definitions.Utilities.Handedness, System.Boolean)
-  nameWithType: ControllerPopupWindow.Show(SupportedControllerType, SerializedProperty, Handedness, Boolean)
+- uid: XRTK.Inspectors.ControllerPopupWindow.Show(XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile,XRTK.Definitions.Devices.SupportedControllerType,UnityEditor.SerializedProperty,XRTK.Definitions.Utilities.Handedness,System.Boolean)
+  name: Show(BaseMixedRealityControllerMappingProfile, SupportedControllerType, SerializedProperty, Handedness, Boolean)
+  href: api/XRTK.Inspectors.ControllerPopupWindow.html#XRTK_Inspectors_ControllerPopupWindow_Show_XRTK_Providers_Controllers_BaseMixedRealityControllerMappingProfile_XRTK_Definitions_Devices_SupportedControllerType_UnityEditor_SerializedProperty_XRTK_Definitions_Utilities_Handedness_System_Boolean_
+  commentId: M:XRTK.Inspectors.ControllerPopupWindow.Show(XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile,XRTK.Definitions.Devices.SupportedControllerType,UnityEditor.SerializedProperty,XRTK.Definitions.Utilities.Handedness,System.Boolean)
+  fullName: XRTK.Inspectors.ControllerPopupWindow.Show(XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile, XRTK.Definitions.Devices.SupportedControllerType, UnityEditor.SerializedProperty, XRTK.Definitions.Utilities.Handedness, System.Boolean)
+  nameWithType: ControllerPopupWindow.Show(BaseMixedRealityControllerMappingProfile, SupportedControllerType, SerializedProperty, Handedness, Boolean)
 - uid: XRTK.Inspectors.ControllerPopupWindow.Show*
   name: Show
   href: api/XRTK.Inspectors.ControllerPopupWindow.html#XRTK_Inspectors_ControllerPopupWindow_Show_
@@ -11450,18 +11212,18 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.OnEnable
   nameWithType: BaseMixedRealityProfileInspector.OnEnable
-- uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(UnityEditor.SerializedProperty,System.Boolean)
-  name: RenderProfile(SerializedProperty, Boolean)
-  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_RenderProfile_UnityEditor_SerializedProperty_System_Boolean_
-  commentId: M:XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(UnityEditor.SerializedProperty,System.Boolean)
-  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(UnityEditor.SerializedProperty, System.Boolean)
-  nameWithType: BaseMixedRealityProfileInspector.RenderProfile(SerializedProperty, Boolean)
-- uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(UnityEditor.SerializedProperty,UnityEngine.GUIContent,System.Boolean)
-  name: RenderProfile(SerializedProperty, GUIContent, Boolean)
-  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_RenderProfile_UnityEditor_SerializedProperty_UnityEngine_GUIContent_System_Boolean_
-  commentId: M:XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(UnityEditor.SerializedProperty,UnityEngine.GUIContent,System.Boolean)
-  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(UnityEditor.SerializedProperty, UnityEngine.GUIContent, System.Boolean)
-  nameWithType: BaseMixedRealityProfileInspector.RenderProfile(SerializedProperty, GUIContent, Boolean)
+- uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(XRTK.Definitions.BaseMixedRealityProfile,UnityEditor.SerializedProperty,System.Boolean)
+  name: RenderProfile(BaseMixedRealityProfile, SerializedProperty, Boolean)
+  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_RenderProfile_XRTK_Definitions_BaseMixedRealityProfile_UnityEditor_SerializedProperty_System_Boolean_
+  commentId: M:XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(XRTK.Definitions.BaseMixedRealityProfile,UnityEditor.SerializedProperty,System.Boolean)
+  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(XRTK.Definitions.BaseMixedRealityProfile, UnityEditor.SerializedProperty, System.Boolean)
+  nameWithType: BaseMixedRealityProfileInspector.RenderProfile(BaseMixedRealityProfile, SerializedProperty, Boolean)
+- uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(XRTK.Definitions.BaseMixedRealityProfile,UnityEditor.SerializedProperty,UnityEngine.GUIContent,System.Boolean)
+  name: RenderProfile(BaseMixedRealityProfile, SerializedProperty, GUIContent, Boolean)
+  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_RenderProfile_XRTK_Definitions_BaseMixedRealityProfile_UnityEditor_SerializedProperty_UnityEngine_GUIContent_System_Boolean_
+  commentId: M:XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(XRTK.Definitions.BaseMixedRealityProfile,UnityEditor.SerializedProperty,UnityEngine.GUIContent,System.Boolean)
+  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile(XRTK.Definitions.BaseMixedRealityProfile, UnityEditor.SerializedProperty, UnityEngine.GUIContent, System.Boolean)
+  nameWithType: BaseMixedRealityProfileInspector.RenderProfile(BaseMixedRealityProfile, SerializedProperty, GUIContent, Boolean)
 - uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile*
   name: RenderProfile
   href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_RenderProfile_
@@ -11469,6 +11231,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile
   nameWithType: BaseMixedRealityProfileInspector.RenderProfile
+- uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.thisProfile
+  name: thisProfile
+  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_thisProfile
+  commentId: F:XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.thisProfile
+  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.thisProfile
+  nameWithType: BaseMixedRealityProfileInspector.thisProfile
 - uid: XRTK.Inspectors.Profiles.BaseMixedRealityToolkitInspector
   name: BaseMixedRealityToolkitInspector
   href: api/XRTK.Inspectors.Profiles.BaseMixedRealityToolkitInspector.html
@@ -13837,135 +13605,51 @@ references:
   commentId: N:XRTK.Interfaces.Diagnostics
   fullName: XRTK.Interfaces.Diagnostics
   nameWithType: XRTK.Interfaces.Diagnostics
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsHandler
-  name: IMixedRealityDiagnosticsHandler
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsHandler.html
-  commentId: T:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsHandler
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsHandler
-  nameWithType: IMixedRealityDiagnosticsHandler
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsHandler.OnDiagnosticSettingsChanged(XRTK.EventDatum.Diagnostics.DiagnosticsEventData)
-  name: OnDiagnosticSettingsChanged(DiagnosticsEventData)
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsHandler.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsHandler_OnDiagnosticSettingsChanged_XRTK_EventDatum_Diagnostics_DiagnosticsEventData_
-  commentId: M:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsHandler.OnDiagnosticSettingsChanged(XRTK.EventDatum.Diagnostics.DiagnosticsEventData)
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsHandler.OnDiagnosticSettingsChanged(XRTK.EventDatum.Diagnostics.DiagnosticsEventData)
-  nameWithType: IMixedRealityDiagnosticsHandler.OnDiagnosticSettingsChanged(DiagnosticsEventData)
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsHandler.OnDiagnosticSettingsChanged*
-  name: OnDiagnosticSettingsChanged
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsHandler.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsHandler_OnDiagnosticSettingsChanged_
-  commentId: Overload:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsHandler.OnDiagnosticSettingsChanged
-  isSpec: "True"
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsHandler.OnDiagnosticSettingsChanged
-  nameWithType: IMixedRealityDiagnosticsHandler.OnDiagnosticSettingsChanged
 - uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem
   name: IMixedRealityDiagnosticsSystem
   href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html
   commentId: T:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem
   fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem
   nameWithType: IMixedRealityDiagnosticsSystem
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.CpuUseTracker
-  name: CpuUseTracker
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_CpuUseTracker
-  commentId: P:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.CpuUseTracker
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.CpuUseTracker
-  nameWithType: IMixedRealityDiagnosticsSystem.CpuUseTracker
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.CpuUseTracker*
-  name: CpuUseTracker
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_CpuUseTracker_
-  commentId: Overload:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.CpuUseTracker
+- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.FrameSampleRate
+  name: FrameSampleRate
+  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_FrameSampleRate
+  commentId: P:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.FrameSampleRate
+  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.FrameSampleRate
+  nameWithType: IMixedRealityDiagnosticsSystem.FrameSampleRate
+- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.FrameSampleRate*
+  name: FrameSampleRate
+  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_FrameSampleRate_
+  commentId: Overload:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.FrameSampleRate
   isSpec: "True"
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.CpuUseTracker
-  nameWithType: IMixedRealityDiagnosticsSystem.CpuUseTracker
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.DiagnosticVisualization
-  name: DiagnosticVisualization
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_DiagnosticVisualization
-  commentId: P:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.DiagnosticVisualization
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.DiagnosticVisualization
-  nameWithType: IMixedRealityDiagnosticsSystem.DiagnosticVisualization
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.DiagnosticVisualization*
-  name: DiagnosticVisualization
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_DiagnosticVisualization_
-  commentId: Overload:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.DiagnosticVisualization
+  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.FrameSampleRate
+  nameWithType: IMixedRealityDiagnosticsSystem.FrameSampleRate
+- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowDiagnostics
+  name: ShowDiagnostics
+  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_ShowDiagnostics
+  commentId: P:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowDiagnostics
+  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowDiagnostics
+  nameWithType: IMixedRealityDiagnosticsSystem.ShowDiagnostics
+- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowDiagnostics*
+  name: ShowDiagnostics
+  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_ShowDiagnostics_
+  commentId: Overload:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowDiagnostics
   isSpec: "True"
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.DiagnosticVisualization
-  nameWithType: IMixedRealityDiagnosticsSystem.DiagnosticVisualization
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.FpsUseTracker
-  name: FpsUseTracker
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_FpsUseTracker
-  commentId: P:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.FpsUseTracker
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.FpsUseTracker
-  nameWithType: IMixedRealityDiagnosticsSystem.FpsUseTracker
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.FpsUseTracker*
-  name: FpsUseTracker
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_FpsUseTracker_
-  commentId: Overload:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.FpsUseTracker
+  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowDiagnostics
+  nameWithType: IMixedRealityDiagnosticsSystem.ShowDiagnostics
+- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowProfiler
+  name: ShowProfiler
+  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_ShowProfiler
+  commentId: P:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowProfiler
+  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowProfiler
+  nameWithType: IMixedRealityDiagnosticsSystem.ShowProfiler
+- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowProfiler*
+  name: ShowProfiler
+  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_ShowProfiler_
+  commentId: Overload:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowProfiler
   isSpec: "True"
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.FpsUseTracker
-  nameWithType: IMixedRealityDiagnosticsSystem.FpsUseTracker
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.MemoryUseTracker
-  name: MemoryUseTracker
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_MemoryUseTracker
-  commentId: P:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.MemoryUseTracker
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.MemoryUseTracker
-  nameWithType: IMixedRealityDiagnosticsSystem.MemoryUseTracker
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.MemoryUseTracker*
-  name: MemoryUseTracker
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_MemoryUseTracker_
-  commentId: Overload:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.MemoryUseTracker
-  isSpec: "True"
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.MemoryUseTracker
-  nameWithType: IMixedRealityDiagnosticsSystem.MemoryUseTracker
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowCpu
-  name: ShowCpu
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_ShowCpu
-  commentId: P:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowCpu
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowCpu
-  nameWithType: IMixedRealityDiagnosticsSystem.ShowCpu
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowCpu*
-  name: ShowCpu
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_ShowCpu_
-  commentId: Overload:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowCpu
-  isSpec: "True"
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowCpu
-  nameWithType: IMixedRealityDiagnosticsSystem.ShowCpu
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowFps
-  name: ShowFps
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_ShowFps
-  commentId: P:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowFps
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowFps
-  nameWithType: IMixedRealityDiagnosticsSystem.ShowFps
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowFps*
-  name: ShowFps
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_ShowFps_
-  commentId: Overload:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowFps
-  isSpec: "True"
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowFps
-  nameWithType: IMixedRealityDiagnosticsSystem.ShowFps
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowMemory
-  name: ShowMemory
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_ShowMemory
-  commentId: P:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowMemory
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowMemory
-  nameWithType: IMixedRealityDiagnosticsSystem.ShowMemory
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowMemory*
-  name: ShowMemory
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_ShowMemory_
-  commentId: Overload:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowMemory
-  isSpec: "True"
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowMemory
-  nameWithType: IMixedRealityDiagnosticsSystem.ShowMemory
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.Visible
-  name: Visible
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_Visible
-  commentId: P:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.Visible
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.Visible
-  nameWithType: IMixedRealityDiagnosticsSystem.Visible
-- uid: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.Visible*
-  name: Visible
-  href: api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html#XRTK_Interfaces_Diagnostics_IMixedRealityDiagnosticsSystem_Visible_
-  commentId: Overload:XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.Visible
-  isSpec: "True"
-  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.Visible
-  nameWithType: IMixedRealityDiagnosticsSystem.Visible
+  fullName: XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.ShowProfiler
+  nameWithType: IMixedRealityDiagnosticsSystem.ShowProfiler
 - uid: XRTK.Interfaces.Events
   name: XRTK.Interfaces.Events
   href: api/XRTK.Interfaces.Events.html
@@ -18389,6 +18073,12 @@ references:
   commentId: T:XRTK.Lumin.Inspectors.LuminMotionControllerMappingProfileInspector
   fullName: XRTK.Lumin.Inspectors.LuminMotionControllerMappingProfileInspector
   nameWithType: LuminMotionControllerMappingProfileInspector
+- uid: XRTK.Lumin.Inspectors.LuminSpatialMeshObserverProfileInspector
+  name: LuminSpatialMeshObserverProfileInspector
+  href: api/XRTK.Lumin.Inspectors.LuminSpatialMeshObserverProfileInspector.html
+  commentId: T:XRTK.Lumin.Inspectors.LuminSpatialMeshObserverProfileInspector
+  fullName: XRTK.Lumin.Inspectors.LuminSpatialMeshObserverProfileInspector
+  nameWithType: LuminSpatialMeshObserverProfileInspector
 - uid: XRTK.Lumin.Profiles
   name: XRTK.Lumin.Profiles
   href: api/XRTK.Lumin.Profiles.html
@@ -18440,6 +18130,37 @@ references:
   isSpec: "True"
   fullName: XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.TexturePath
   nameWithType: LuminMotionControllerMappingProfile.TexturePath
+- uid: XRTK.Lumin.Profiles.LuminSpatialMeshObserverProfile
+  name: LuminSpatialMeshObserverProfile
+  href: api/XRTK.Lumin.Profiles.LuminSpatialMeshObserverProfile.html
+  commentId: T:XRTK.Lumin.Profiles.LuminSpatialMeshObserverProfile
+  fullName: XRTK.Lumin.Profiles.LuminSpatialMeshObserverProfile
+  nameWithType: LuminSpatialMeshObserverProfile
+- uid: XRTK.Lumin.SpatialObservers
+  name: XRTK.Lumin.SpatialObservers
+  href: api/XRTK.Lumin.SpatialObservers.html
+  commentId: N:XRTK.Lumin.SpatialObservers
+  fullName: XRTK.Lumin.SpatialObservers
+  nameWithType: XRTK.Lumin.SpatialObservers
+- uid: XRTK.Lumin.SpatialObservers.LuminSpatialMeshObserver
+  name: LuminSpatialMeshObserver
+  href: api/XRTK.Lumin.SpatialObservers.LuminSpatialMeshObserver.html
+  commentId: T:XRTK.Lumin.SpatialObservers.LuminSpatialMeshObserver
+  fullName: XRTK.Lumin.SpatialObservers.LuminSpatialMeshObserver
+  nameWithType: LuminSpatialMeshObserver
+- uid: XRTK.Lumin.SpatialObservers.LuminSpatialMeshObserver.#ctor(System.String,System.UInt32,XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile)
+  name: LuminSpatialMeshObserver(String, UInt32, BaseMixedRealitySpatialMeshObserverProfile)
+  href: api/XRTK.Lumin.SpatialObservers.LuminSpatialMeshObserver.html#XRTK_Lumin_SpatialObservers_LuminSpatialMeshObserver__ctor_System_String_System_UInt32_XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialMeshObserverProfile_
+  commentId: M:XRTK.Lumin.SpatialObservers.LuminSpatialMeshObserver.#ctor(System.String,System.UInt32,XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile)
+  fullName: XRTK.Lumin.SpatialObservers.LuminSpatialMeshObserver.LuminSpatialMeshObserver(System.String, System.UInt32, XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile)
+  nameWithType: LuminSpatialMeshObserver.LuminSpatialMeshObserver(String, UInt32, BaseMixedRealitySpatialMeshObserverProfile)
+- uid: XRTK.Lumin.SpatialObservers.LuminSpatialMeshObserver.#ctor*
+  name: LuminSpatialMeshObserver
+  href: api/XRTK.Lumin.SpatialObservers.LuminSpatialMeshObserver.html#XRTK_Lumin_SpatialObservers_LuminSpatialMeshObserver__ctor_
+  commentId: Overload:XRTK.Lumin.SpatialObservers.LuminSpatialMeshObserver.#ctor
+  isSpec: "True"
+  fullName: XRTK.Lumin.SpatialObservers.LuminSpatialMeshObserver.LuminSpatialMeshObserver
+  nameWithType: LuminSpatialMeshObserver.LuminSpatialMeshObserver
 - uid: XRTK.PackageManager
   name: XRTK.PackageManager
   href: api/XRTK.PackageManager.html
@@ -22233,31 +21954,6 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Audio.Influencers.AudioOccluder.VolumePassThrough
   nameWithType: AudioOccluder.VolumePassThrough
-- uid: XRTK.SDK.DiagnosticsSystem
-  name: XRTK.SDK.DiagnosticsSystem
-  href: api/XRTK.SDK.DiagnosticsSystem.html
-  commentId: N:XRTK.SDK.DiagnosticsSystem
-  fullName: XRTK.SDK.DiagnosticsSystem
-  nameWithType: XRTK.SDK.DiagnosticsSystem
-- uid: XRTK.SDK.DiagnosticsSystem.DiagnosticsHandler
-  name: DiagnosticsHandler
-  href: api/XRTK.SDK.DiagnosticsSystem.DiagnosticsHandler.html
-  commentId: T:XRTK.SDK.DiagnosticsSystem.DiagnosticsHandler
-  fullName: XRTK.SDK.DiagnosticsSystem.DiagnosticsHandler
-  nameWithType: DiagnosticsHandler
-- uid: XRTK.SDK.DiagnosticsSystem.DiagnosticsHandler.OnDiagnosticSettingsChanged(XRTK.EventDatum.Diagnostics.DiagnosticsEventData)
-  name: OnDiagnosticSettingsChanged(DiagnosticsEventData)
-  href: api/XRTK.SDK.DiagnosticsSystem.DiagnosticsHandler.html#XRTK_SDK_DiagnosticsSystem_DiagnosticsHandler_OnDiagnosticSettingsChanged_XRTK_EventDatum_Diagnostics_DiagnosticsEventData_
-  commentId: M:XRTK.SDK.DiagnosticsSystem.DiagnosticsHandler.OnDiagnosticSettingsChanged(XRTK.EventDatum.Diagnostics.DiagnosticsEventData)
-  fullName: XRTK.SDK.DiagnosticsSystem.DiagnosticsHandler.OnDiagnosticSettingsChanged(XRTK.EventDatum.Diagnostics.DiagnosticsEventData)
-  nameWithType: DiagnosticsHandler.OnDiagnosticSettingsChanged(DiagnosticsEventData)
-- uid: XRTK.SDK.DiagnosticsSystem.DiagnosticsHandler.OnDiagnosticSettingsChanged*
-  name: OnDiagnosticSettingsChanged
-  href: api/XRTK.SDK.DiagnosticsSystem.DiagnosticsHandler.html#XRTK_SDK_DiagnosticsSystem_DiagnosticsHandler_OnDiagnosticSettingsChanged_
-  commentId: Overload:XRTK.SDK.DiagnosticsSystem.DiagnosticsHandler.OnDiagnosticSettingsChanged
-  isSpec: "True"
-  fullName: XRTK.SDK.DiagnosticsSystem.DiagnosticsHandler.OnDiagnosticSettingsChanged
-  nameWithType: DiagnosticsHandler.OnDiagnosticSettingsChanged
 - uid: XRTK.SDK.Input
   name: XRTK.SDK.Input
   href: api/XRTK.SDK.Input.html
@@ -30802,19 +30498,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.MixedRealityDiagnosticsSystem
   nameWithType: MixedRealityDiagnosticsSystem.MixedRealityDiagnosticsSystem
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.CpuUseTracker
-  name: CpuUseTracker
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_CpuUseTracker
-  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.CpuUseTracker
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.CpuUseTracker
-  nameWithType: MixedRealityDiagnosticsSystem.CpuUseTracker
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.CpuUseTracker*
-  name: CpuUseTracker
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_CpuUseTracker_
-  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.CpuUseTracker
-  isSpec: "True"
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.CpuUseTracker
-  nameWithType: MixedRealityDiagnosticsSystem.CpuUseTracker
 - uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Destroy
   name: Destroy()
   href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Destroy
@@ -30828,58 +30511,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Destroy
   nameWithType: MixedRealityDiagnosticsSystem.Destroy
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.DiagnosticVisualization
-  name: DiagnosticVisualization
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_DiagnosticVisualization
-  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.DiagnosticVisualization
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.DiagnosticVisualization
-  nameWithType: MixedRealityDiagnosticsSystem.DiagnosticVisualization
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.DiagnosticVisualization*
-  name: DiagnosticVisualization
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_DiagnosticVisualization_
-  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.DiagnosticVisualization
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FrameSampleRate
+  name: FrameSampleRate
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_FrameSampleRate
+  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FrameSampleRate
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FrameSampleRate
+  nameWithType: MixedRealityDiagnosticsSystem.FrameSampleRate
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FrameSampleRate*
+  name: FrameSampleRate
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_FrameSampleRate_
+  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FrameSampleRate
   isSpec: "True"
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.DiagnosticVisualization
-  nameWithType: MixedRealityDiagnosticsSystem.DiagnosticVisualization
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Equals(System.Object,System.Object)
-  name: Equals(Object, Object)
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Equals_System_Object_System_Object_
-  commentId: M:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Equals(System.Object,System.Object)
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Equals(System.Object, System.Object)
-  nameWithType: MixedRealityDiagnosticsSystem.Equals(Object, Object)
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Equals*
-  name: Equals
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Equals_
-  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Equals
-  isSpec: "True"
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Equals
-  nameWithType: MixedRealityDiagnosticsSystem.Equals
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FpsUseTracker
-  name: FpsUseTracker
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_FpsUseTracker
-  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FpsUseTracker
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FpsUseTracker
-  nameWithType: MixedRealityDiagnosticsSystem.FpsUseTracker
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FpsUseTracker*
-  name: FpsUseTracker
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_FpsUseTracker_
-  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FpsUseTracker
-  isSpec: "True"
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FpsUseTracker
-  nameWithType: MixedRealityDiagnosticsSystem.FpsUseTracker
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.GetHashCode(System.Object)
-  name: GetHashCode(Object)
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_GetHashCode_System_Object_
-  commentId: M:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.GetHashCode(System.Object)
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.GetHashCode(System.Object)
-  nameWithType: MixedRealityDiagnosticsSystem.GetHashCode(Object)
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.GetHashCode*
-  name: GetHashCode
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_GetHashCode_
-  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.GetHashCode
-  isSpec: "True"
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.GetHashCode
-  nameWithType: MixedRealityDiagnosticsSystem.GetHashCode
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.FrameSampleRate
+  nameWithType: MixedRealityDiagnosticsSystem.FrameSampleRate
 - uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Initialize
   name: Initialize()
   href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Initialize
@@ -30893,97 +30537,181 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Initialize
   nameWithType: MixedRealityDiagnosticsSystem.Initialize
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.MemoryUseTracker
-  name: MemoryUseTracker
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_MemoryUseTracker
-  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.MemoryUseTracker
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.MemoryUseTracker
-  nameWithType: MixedRealityDiagnosticsSystem.MemoryUseTracker
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.MemoryUseTracker*
-  name: MemoryUseTracker
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_MemoryUseTracker_
-  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.MemoryUseTracker
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowDiagnostics
+  name: ShowDiagnostics
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowDiagnostics
+  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowDiagnostics
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowDiagnostics
+  nameWithType: MixedRealityDiagnosticsSystem.ShowDiagnostics
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowDiagnostics*
+  name: ShowDiagnostics
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowDiagnostics_
+  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowDiagnostics
   isSpec: "True"
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.MemoryUseTracker
-  nameWithType: MixedRealityDiagnosticsSystem.MemoryUseTracker
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowCpu
-  name: ShowCpu
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowCpu
-  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowCpu
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowCpu
-  nameWithType: MixedRealityDiagnosticsSystem.ShowCpu
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowCpu*
-  name: ShowCpu
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowCpu_
-  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowCpu
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowDiagnostics
+  nameWithType: MixedRealityDiagnosticsSystem.ShowDiagnostics
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowProfiler
+  name: ShowProfiler
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowProfiler
+  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowProfiler
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowProfiler
+  nameWithType: MixedRealityDiagnosticsSystem.ShowProfiler
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowProfiler*
+  name: ShowProfiler
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowProfiler_
+  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowProfiler
   isSpec: "True"
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowCpu
-  nameWithType: MixedRealityDiagnosticsSystem.ShowCpu
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowFps
-  name: ShowFps
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowFps
-  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowFps
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowFps
-  nameWithType: MixedRealityDiagnosticsSystem.ShowFps
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowFps*
-  name: ShowFps
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowFps_
-  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowFps
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowProfiler
+  nameWithType: MixedRealityDiagnosticsSystem.ShowProfiler
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowAnchor
+  name: WindowAnchor
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_WindowAnchor
+  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowAnchor
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowAnchor
+  nameWithType: MixedRealityDiagnosticsSystem.WindowAnchor
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowAnchor*
+  name: WindowAnchor
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_WindowAnchor_
+  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowAnchor
   isSpec: "True"
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowFps
-  nameWithType: MixedRealityDiagnosticsSystem.ShowFps
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowMemory
-  name: ShowMemory
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowMemory
-  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowMemory
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowMemory
-  nameWithType: MixedRealityDiagnosticsSystem.ShowMemory
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowMemory*
-  name: ShowMemory
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_ShowMemory_
-  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowMemory
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowAnchor
+  nameWithType: MixedRealityDiagnosticsSystem.WindowAnchor
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowFollowSpeed
+  name: WindowFollowSpeed
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_WindowFollowSpeed
+  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowFollowSpeed
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowFollowSpeed
+  nameWithType: MixedRealityDiagnosticsSystem.WindowFollowSpeed
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowFollowSpeed*
+  name: WindowFollowSpeed
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_WindowFollowSpeed_
+  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowFollowSpeed
   isSpec: "True"
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.ShowMemory
-  nameWithType: MixedRealityDiagnosticsSystem.ShowMemory
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceId
-  name: SourceId
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_SourceId
-  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceId
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceId
-  nameWithType: MixedRealityDiagnosticsSystem.SourceId
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceId*
-  name: SourceId
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_SourceId_
-  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceId
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowFollowSpeed
+  nameWithType: MixedRealityDiagnosticsSystem.WindowFollowSpeed
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowOffset
+  name: WindowOffset
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_WindowOffset
+  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowOffset
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowOffset
+  nameWithType: MixedRealityDiagnosticsSystem.WindowOffset
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowOffset*
+  name: WindowOffset
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_WindowOffset_
+  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowOffset
   isSpec: "True"
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceId
-  nameWithType: MixedRealityDiagnosticsSystem.SourceId
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceName
-  name: SourceName
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_SourceName
-  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceName
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceName
-  nameWithType: MixedRealityDiagnosticsSystem.SourceName
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceName*
-  name: SourceName
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_SourceName_
-  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceName
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowOffset
+  nameWithType: MixedRealityDiagnosticsSystem.WindowOffset
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowScale
+  name: WindowScale
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_WindowScale
+  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowScale
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowScale
+  nameWithType: MixedRealityDiagnosticsSystem.WindowScale
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowScale*
+  name: WindowScale
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_WindowScale_
+  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowScale
   isSpec: "True"
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.SourceName
-  nameWithType: MixedRealityDiagnosticsSystem.SourceName
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Visible
-  name: Visible
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Visible
-  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Visible
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Visible
-  nameWithType: MixedRealityDiagnosticsSystem.Visible
-- uid: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Visible*
-  name: Visible
-  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html#XRTK_Services_DiagnosticsSystem_MixedRealityDiagnosticsSystem_Visible_
-  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Visible
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.WindowScale
+  nameWithType: MixedRealityDiagnosticsSystem.WindowScale
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler
+  name: MixedRealityToolkitVisualProfiler
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html
+  commentId: T:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler
+  nameWithType: MixedRealityToolkitVisualProfiler
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.FrameSampleRate
+  name: FrameSampleRate
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html#XRTK_Services_DiagnosticsSystem_MixedRealityToolkitVisualProfiler_FrameSampleRate
+  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.FrameSampleRate
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.FrameSampleRate
+  nameWithType: MixedRealityToolkitVisualProfiler.FrameSampleRate
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.FrameSampleRate*
+  name: FrameSampleRate
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html#XRTK_Services_DiagnosticsSystem_MixedRealityToolkitVisualProfiler_FrameSampleRate_
+  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.FrameSampleRate
   isSpec: "True"
-  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.Visible
-  nameWithType: MixedRealityDiagnosticsSystem.Visible
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.FrameSampleRate
+  nameWithType: MixedRealityToolkitVisualProfiler.FrameSampleRate
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.IsVisible
+  name: IsVisible
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html#XRTK_Services_DiagnosticsSystem_MixedRealityToolkitVisualProfiler_IsVisible
+  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.IsVisible
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.IsVisible
+  nameWithType: MixedRealityToolkitVisualProfiler.IsVisible
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.IsVisible*
+  name: IsVisible
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html#XRTK_Services_DiagnosticsSystem_MixedRealityToolkitVisualProfiler_IsVisible_
+  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.IsVisible
+  isSpec: "True"
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.IsVisible
+  nameWithType: MixedRealityToolkitVisualProfiler.IsVisible
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowAnchor
+  name: WindowAnchor
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html#XRTK_Services_DiagnosticsSystem_MixedRealityToolkitVisualProfiler_WindowAnchor
+  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowAnchor
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowAnchor
+  nameWithType: MixedRealityToolkitVisualProfiler.WindowAnchor
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowAnchor*
+  name: WindowAnchor
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html#XRTK_Services_DiagnosticsSystem_MixedRealityToolkitVisualProfiler_WindowAnchor_
+  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowAnchor
+  isSpec: "True"
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowAnchor
+  nameWithType: MixedRealityToolkitVisualProfiler.WindowAnchor
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowFollowSpeed
+  name: WindowFollowSpeed
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html#XRTK_Services_DiagnosticsSystem_MixedRealityToolkitVisualProfiler_WindowFollowSpeed
+  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowFollowSpeed
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowFollowSpeed
+  nameWithType: MixedRealityToolkitVisualProfiler.WindowFollowSpeed
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowFollowSpeed*
+  name: WindowFollowSpeed
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html#XRTK_Services_DiagnosticsSystem_MixedRealityToolkitVisualProfiler_WindowFollowSpeed_
+  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowFollowSpeed
+  isSpec: "True"
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowFollowSpeed
+  nameWithType: MixedRealityToolkitVisualProfiler.WindowFollowSpeed
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowOffset
+  name: WindowOffset
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html#XRTK_Services_DiagnosticsSystem_MixedRealityToolkitVisualProfiler_WindowOffset
+  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowOffset
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowOffset
+  nameWithType: MixedRealityToolkitVisualProfiler.WindowOffset
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowOffset*
+  name: WindowOffset
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html#XRTK_Services_DiagnosticsSystem_MixedRealityToolkitVisualProfiler_WindowOffset_
+  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowOffset
+  isSpec: "True"
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowOffset
+  nameWithType: MixedRealityToolkitVisualProfiler.WindowOffset
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowParent
+  name: WindowParent
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html#XRTK_Services_DiagnosticsSystem_MixedRealityToolkitVisualProfiler_WindowParent
+  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowParent
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowParent
+  nameWithType: MixedRealityToolkitVisualProfiler.WindowParent
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowParent*
+  name: WindowParent
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html#XRTK_Services_DiagnosticsSystem_MixedRealityToolkitVisualProfiler_WindowParent_
+  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowParent
+  isSpec: "True"
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowParent
+  nameWithType: MixedRealityToolkitVisualProfiler.WindowParent
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowScale
+  name: WindowScale
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html#XRTK_Services_DiagnosticsSystem_MixedRealityToolkitVisualProfiler_WindowScale
+  commentId: P:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowScale
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowScale
+  nameWithType: MixedRealityToolkitVisualProfiler.WindowScale
+- uid: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowScale*
+  name: WindowScale
+  href: api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html#XRTK_Services_DiagnosticsSystem_MixedRealityToolkitVisualProfiler_WindowScale_
+  commentId: Overload:XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowScale
+  isSpec: "True"
+  fullName: XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.WindowScale
+  nameWithType: MixedRealityToolkitVisualProfiler.WindowScale
 - uid: XRTK.Services.InputSystem
   name: XRTK.Services.InputSystem
   href: api/XRTK.Services.InputSystem.html
@@ -34450,19 +34178,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_01_Vector2_One
   nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_01_Vector2_One
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
-  name: Test_04_01_02_Checks()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_02_Checks
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks*
-  name: Test_04_01_02_Checks
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_02_Checks_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks
+  name: Test_04_01_02_SpeedChecks()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_02_SpeedChecks
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks*
+  name: Test_04_01_02_SpeedChecks
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_02_SpeedChecks_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_02_Checks
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_02_SpeedChecks
 - uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_InitializedVector2
   name: Test_04_01_InitializedVector2()
   href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_InitializedVector2

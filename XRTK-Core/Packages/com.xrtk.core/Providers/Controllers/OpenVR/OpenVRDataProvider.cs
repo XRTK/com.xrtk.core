@@ -74,6 +74,9 @@ namespace XRTK.Providers.Controllers.OpenVR
                 case SupportedControllerType.OculusRemote:
                     controllerType = typeof(OculusRemoteController);
                     break;
+                case SupportedControllerType.OculusGo:
+                    controllerType = typeof(OculusGoController);
+                    break;
                 case SupportedControllerType.WindowsMixedReality:
                     controllerType = typeof(WindowsMixedRealityOpenVRMotionController);
                     break;
@@ -113,7 +116,7 @@ namespace XRTK.Providers.Controllers.OpenVR
         /// <inheritdoc />
         protected override SupportedControllerType GetCurrentControllerType(string joystickName)
         {
-            if (string.IsNullOrEmpty(joystickName) || !joystickName.Contains("OpenVR"))
+            if (string.IsNullOrEmpty(joystickName) || joystickName.Contains("<0"))
             {
                 return SupportedControllerType.None;
             }
@@ -121,6 +124,11 @@ namespace XRTK.Providers.Controllers.OpenVR
             if (joystickName.Contains("Oculus Rift CV1"))
             {
                 return SupportedControllerType.OculusTouch;
+            }
+
+            if (joystickName.Contains("Oculus Tracked Remote"))
+            {
+                return SupportedControllerType.OculusGo;
             }
 
             if (joystickName.Contains("Oculus remote"))
@@ -143,7 +151,7 @@ namespace XRTK.Providers.Controllers.OpenVR
                 return SupportedControllerType.WindowsMixedReality;
             }
 
-            Debug.Log($"{joystickName} does not have a defined controller type, falling back to generic controller type");
+            Debug.LogWarning($"{joystickName} does not have a defined controller type, falling back to generic controller type");
 
             return SupportedControllerType.GenericOpenVR;
         }

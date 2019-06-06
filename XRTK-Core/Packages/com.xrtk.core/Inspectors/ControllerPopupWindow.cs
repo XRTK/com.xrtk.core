@@ -23,7 +23,7 @@ namespace XRTK.Inspectors
         /// <summary>
         /// Used to enable editing the input axis label positions on controllers
         /// </summary>
-        private static readonly bool EnableWysiwyg = true;
+        private static readonly bool EnableWysiwyg = false;
 
         private static readonly GUIContent InteractionAddButtonContent = new GUIContent("+ Add a New Interaction Mapping");
         private static readonly GUIContent InteractionMinusButtonContent = new GUIContent("-", "Remove Interaction Mapping");

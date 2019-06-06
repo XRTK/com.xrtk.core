@@ -35,6 +35,24 @@ Where the two frameworks truly diverge, is an adherence to the core architecture
 
 The MRTK focuses on delivery to new and pre-existing partner solutions and as such, can be limited in the paths it can take.  XRTK is more open and can easily adapt and educate the community to build almost any solution without compromise.
 
+## Supported Platforms
+
+
+Platform | Description | XRTK Support | MRTK Support
+---|---|---|---|---|
+OpenVR (Windows) | Running OpenVR projects on Windows / Windows 10 | WMR / Vive / Rift | WMR / Vive / Rift
+OpenVR (Android) | Running OpenVR projects on Android | Oculus GO / (Oculus Quest coming soon) | Not Supported
+UWP | Universal Windows Platform (Windows 10) | Windows 10 WMR / HoloLens 1 | Windows 10 WMR / HoloLens 1 / HoloLens 2
+Oculus (Windows) | Running native Oculus API on Windows | Rift / Rift S coming very soon | Not Supported
+Oculus (Android) | Running native Oculus API on Android | Go / Quest coming soon | Not Supported
+Steam (Windows) | Running native Steam API on Windows | Vive / Vive Pro | Not Supported
+Steam (Android) | Running native Steam API on Android | Vive index tbc | Not Supported
+ARCore (Android) | ARCore support / integration on Android | tbc | tbc
+ARKit (iOS) | ARKit support / integration | tbc | tbc
+|||||
+
+> MRTK status based off Microsoft's currently published road-map
+
 ## MRTK / XRTK parity
 
 As a sustained fork, the XRTK team still works closely with Microsoft to ensure that we maintain a level of parity between the two implementation patterns, ensuring that new Microsoft developments (such as HL2, hand tracking, etc.) are incorporated into the XRTK, in a fashion that complements the XRTK. Most features as they are ported will require some enhancement to comply to the XRTK architecture, but the Developer Product adoption will remain as close as we can to aid porting between frameworks. (in other words, we preserve the runtime whilst finely tuning the backend)

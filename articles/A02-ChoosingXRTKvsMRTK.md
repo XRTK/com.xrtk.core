@@ -50,7 +50,11 @@ ARCore (Android) | ARCore support / integration on Android | tbc | tbc
 ARKit (iOS) | ARKit support / integration | tbc | tbc
 |||||
 
-> MRTK status based off Microsoft's currently published road-map
+> *TBC* - To Be Considered
+
+```
+ MRTK status based off Microsoft's currently published road-map
+```
 
 ## MRTK / XRTK parity
 

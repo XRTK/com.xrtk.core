@@ -42,12 +42,12 @@ Platform | Description | XRTK Support | MRTK Support
 OpenVR (Windows) | Running OpenVR projects on Windows / Windows 10 | <ul><li>WMR</li><li>Vive</li><li>Rift</li></ul>| <ul><li>WMR</li><li>Vive</li><li>Rift</li></ul>|
 OpenVR (Android) | Running OpenVR projects on Android | <ul><li>Oculus GO</li><li>Oculus Quest<br/> (coming very soon)</li></ul> | **Not Supported**
 UWP | Universal Windows Platform (Windows 10) | <ul><li>Windows 10 WMR</li><li>HoloLens 1</li></ul> | <ul><li>Windows 10 WMR</li><li>HoloLens 1</li><li>HoloLens 2</li></ul>
-Oculus (Windows) | Running native Oculus API on Windows | <ul><li>Rift</li><li>Rift S<br/> (coming soon)</li></ul> | **Not Supported**
-Oculus (Android) | Running native Oculus API on Android | <ul><li>Oculus Go</li><li>Oculus Quest<br/>  (coming very soon)</li></ul> | **Not Supported**
+Oculus (Windows) | Running native Oculus API on Windows | <ul><li>Rift</li><li>Rift S<br/> (planned)</li></ul> | **Not Supported**
+Oculus (Android) | Running native Oculus API on Android | <ul><li>Oculus Go</li><li>Oculus Quest<br/> (coming very soon)</li></ul> | **Not Supported**
 Steam (Windows) | Running native Steam API on Windows | <ul><li>Vive</li><li>Vive Pro</li></ul> | **Not Supported**
-Steam (Android) | Running native Steam API on Android | <ul><li>Vive index tbc</li></ul> | **Not Supported**
-ARCore (Android) | ARCore support / integration on Android | tbc | tbc
-ARKit (iOS) | ARKit support / integration | tbc | tbc
+Steam (Android) | Running native Steam API on Android | <ul><li>Vive index <br/> (planned)</li></ul> | **Not Supported**
+ARCore (Android) | ARCore support / integration on Android | planned | tbc
+ARKit (iOS) | ARKit support / integration | planned | tbc
 |||||
 
 > *TBC* - To Be Considered

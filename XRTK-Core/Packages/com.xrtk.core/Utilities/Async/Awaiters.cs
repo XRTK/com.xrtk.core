@@ -79,11 +79,6 @@ namespace XRTK.Utilities.Async
                     UnityEditor.EditorApplication.playModeStateChanged += playModeStateChanged => editorCancelled = true;
 #endif
 
-#if UNITY_EDITOR
-                    var editorCancelled = false;
-                    UnityEditor.EditorApplication.playModeStateChanged += playModeStateChanged => editorCancelled = true;
-#endif
-
                     while (!cancellationTokenSource.IsCancellationRequested)
                     {
 #if UNITY_EDITOR
@@ -92,7 +87,6 @@ namespace XRTK.Utilities.Async
                             tcs.TrySetCanceled(CancellationToken.None);
                         }
 #endif
-
                         try
                         {
                             if (!predicate(element))
@@ -123,7 +117,6 @@ namespace XRTK.Utilities.Async
             var editorCancelled = false;
             UnityEditor.EditorApplication.playModeStateChanged += playModeStateChanged => editorCancelled = true;
 #endif
-
             while (true)
             {
 #if UNITY_EDITOR
@@ -132,7 +125,6 @@ namespace XRTK.Utilities.Async
                     tcs.TrySetCanceled(CancellationToken.None);
                 }
 #endif
-
                 try
                 {
                     if (!predicate(element))

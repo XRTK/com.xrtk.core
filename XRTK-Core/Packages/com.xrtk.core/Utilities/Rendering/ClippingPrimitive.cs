@@ -7,7 +7,7 @@ using UnityEngine;
 namespace XRTK.Utilities.Rendering
 {
     /// <summary>
-    /// An abstract primitive component to animate and visualize a clipping primitive that can be 
+    /// An abstract primitive component to animate and visualize a clipping primitive that can be
     /// used to drive per pixel based clipping.
     /// </summary>
     [ExecuteInEditMode]
@@ -34,7 +34,9 @@ namespace XRTK.Utilities.Rendering
         public Side ClippingSide => clippingSide;
 
         protected abstract string Keyword { get; }
+
         protected abstract string KeywordProperty { get; }
+
         protected abstract string ClippingSideProperty { get; }
 
         private MaterialPropertyBlock materialPropertyBlock;
@@ -43,13 +45,17 @@ namespace XRTK.Utilities.Rendering
 
         private int clippingSideId;
 
-        public void AddRenderer(Renderer _renderer)
+        /// <summary>
+        /// Add the specified renderer to the clipping component.
+        /// </summary>
+        /// <param name="renderer_"></param>
+        public void AddRenderer(Renderer renderer_)
         {
-            if (_renderer != null && !renderers.Contains(_renderer))
+            if (renderer_ != null && !renderers.Contains(renderer_))
             {
-                renderers.Add(_renderer);
+                renderers.Add(renderer_);
 
-                var material = GetMaterial(_renderer, false);
+                var material = GetMaterial(renderer_, false);
 
                 if (material != null)
                 {
@@ -58,29 +64,40 @@ namespace XRTK.Utilities.Rendering
             }
         }
 
-        public void AddRenderers(Renderer[] _renderers)
+        /// <summary>
+        /// Add the specified renderers to the clipping component.
+        /// </summary>
+        /// <param name="renderers_"></param>
+        public void AddRenderers(Renderer[] renderers_)
         {
-            for (int i = 0; i < _renderers.Length; i++)
+            for (int i = 0; i < renderers_.Length; i++)
             {
-                AddRenderer(_renderers[i]);
+                AddRenderer(renderers_[i]);
             }
         }
 
-        public void RemoveRenderer(Renderer _renderer)
+        /// <summary>
+        /// Remove the specified renderer from the clipping component.
+        /// </summary>
+        /// <param name="renderer_"></param>
+        public void RemoveRenderer(Renderer renderer_)
         {
-            if (renderers.Contains(_renderer))
+            if (renderers.Contains(renderer_))
             {
-                var material = GetMaterial(_renderer, false);
+                var material = GetMaterial(renderer_, false);
 
                 if (material != null)
                 {
                     ToggleClippingFeature(material, false);
                 }
 
-                renderers.Remove(_renderer);
+                renderers.Remove(renderer_);
             }
         }
 
+        /// <summary>
+        /// clear all the renderers from this clipping component.
+        /// </summary>
         public void ClearRenderers()
         {
             for (int i = 0; i < renderers.Count; i++)
@@ -95,6 +112,8 @@ namespace XRTK.Utilities.Rendering
 
             renderers.Clear();
         }
+
+        #region Monobehaviour Implementation
 
         protected void OnValidate()
         {
@@ -116,9 +135,9 @@ namespace XRTK.Utilities.Rendering
         }
 
 #if UNITY_EDITOR
-        // We need this class to be updated once per frame even when in edit mode. Ideally this would 
-        // occur after all other objects are updated in LateUpdate(), but because the ExecuteInEditMode 
-        // attribute only invokes Update() we handle edit mode updating in Update() and runtime updating 
+        // We need this class to be updated once per frame even when in edit mode. Ideally this would
+        // occur after all other objects are updated in LateUpdate(), but because the ExecuteInEditMode
+        // attribute only invokes Update() we handle edit mode updating in Update() and runtime updating
         // in LateUpdate().
         protected void Update()
         {
@@ -146,7 +165,7 @@ namespace XRTK.Utilities.Rendering
 
             for (int i = 0; i < renderers.Count; ++i)
             {
-                Material material = GetMaterial(renderers[i]);
+                var material = GetMaterial(renderers[i]);
 
                 if (material != null &&
                     modifiedMaterials.TryGetValue(material, out bool clippingPlaneOn))
@@ -164,6 +183,8 @@ namespace XRTK.Utilities.Rendering
             }
         }
 
+        #endregion  Monobehaviour Implementation
+
         protected virtual void Initialize()
         {
             materialPropertyBlock = new MaterialPropertyBlock();
@@ -179,7 +200,7 @@ namespace XRTK.Utilities.Rendering
 
             for (int i = 0; i < renderers.Count; ++i)
             {
-                Renderer _renderer = renderers[i];
+                var _renderer = renderers[i];
 
                 if (_renderer == null)
                 {
@@ -204,7 +225,7 @@ namespace XRTK.Utilities.Rendering
 
             for (int i = 0; i < renderers.Count; ++i)
             {
-                Material material = GetMaterial(renderers[i]);
+                var material = GetMaterial(renderers[i]);
 
                 if (material != null)
                 {
@@ -245,7 +266,7 @@ namespace XRTK.Utilities.Rendering
                 return _renderer.sharedMaterial;
             }
 
-            Material material = _renderer.material;
+            var material = _renderer.material;
 
             if (trackAllocations && !allocatedMaterials.Contains(material))
             {

@@ -74,6 +74,10 @@ namespace XRTK.Utilities.Async
                     }
 
                     cancellationTokenSource.Token.Register(Exception);
+#if UNITY_EDITOR
+                    var editorCancelled = false;
+                    UnityEditor.EditorApplication.playModeStateChanged += playModeStateChanged => editorCancelled = true;
+#endif
 
 #if UNITY_EDITOR
                     var editorCancelled = false;

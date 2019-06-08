@@ -74,9 +74,21 @@ namespace XRTK.Utilities.Async
                     }
 
                     cancellationTokenSource.Token.Register(Exception);
+#if UNITY_EDITOR
+                    var editorCancelled = false;
+                    UnityEditor.EditorApplication.playModeStateChanged += playModeStateChanged => editorCancelled = true;
+#endif
 
                     while (!cancellationTokenSource.IsCancellationRequested)
                     {
+
+#if UNITY_EDITOR
+                        if (editorCancelled)
+                        {
+                            tcs.TrySetCanceled(CancellationToken.None);
+                        }
+#endif
+
                         try
                         {
                             if (!predicate(element))
@@ -103,12 +115,31 @@ namespace XRTK.Utilities.Async
         {
             var tcs = new TaskCompletionSource<object>();
 
+#if UNITY_EDITOR
+            var editorCancelled = false;
+            UnityEditor.EditorApplication.playModeStateChanged += playModeStateChanged => editorCancelled = true;
+#endif
+
             while (true)
             {
-                if (!predicate(element))
+#if UNITY_EDITOR
+                if (editorCancelled)
                 {
-                    await Task.Delay(1);
-                    continue;
+                    tcs.TrySetCanceled(CancellationToken.None);
+                }
+#endif
+
+                try
+                {
+                    if (!predicate(element))
+                    {
+                        await Task.Delay(1);
+                        continue;
+                    }
+                }
+                catch (Exception e)
+                {
+                    tcs.TrySetException(e);
                 }
 
                 tcs.TrySetResult(Task.CompletedTask);

@@ -206,5 +206,29 @@ namespace XRTK.Extensions
 
             return null;
         }
+
+        /// <summary>
+        /// Checks if the provided GameObjects are child/parent related.
+        /// </summary>
+        /// <param name="g1"></param>
+        /// <param name="g2"></param>
+        /// <returns>True if either GameObject is the parent of the other or if they are the same</returns>
+        public static bool IsParentOrChildOf(this GameObject g1, GameObject g2)
+        {
+            if (g1 == null || g2 == null)
+            {
+                return false;
+            }
+
+            var t1 = g1.transform;
+            var t2 = g2.transform;
+
+            if (t1 == null || t2 == null)
+            {
+                return false;
+            }
+
+            return t1.IsParentOrChildOf(t2);
+        }
     }
 }

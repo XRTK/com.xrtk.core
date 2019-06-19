@@ -30,13 +30,6 @@ namespace XRTK.Interfaces.InputSystem
         Camera UIRaycastCamera { get; }
 
         /// <summary>
-        /// To tap on a hologram even when not focused on,
-        /// set OverrideFocusedObject to desired game object.
-        /// If it's null, then focused object will be used.
-        /// </summary>
-        GameObject OverrideFocusedObject { get; set; }
-
-        /// <summary>
         /// Gets the currently focused object for the pointing source.
         /// </summary>
         /// <remarks>If the pointing source is not registered, then the Gaze's Focused <see cref="GameObject"/> is returned.</remarks>

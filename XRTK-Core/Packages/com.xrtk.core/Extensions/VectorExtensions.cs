@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace XRTK.Extensions
 {
@@ -234,12 +235,32 @@ namespace XRTK.Extensions
         /// <param name="source">The source <see cref="Vector3"/> to be mapped to cylinder</param>
         /// <param name="radius">This is a <see cref="float"/> for the radius of the cylinder</param>
         /// <returns></returns>
-        public static Vector3 ScatterMapping(Vector3 source, float radius)
+        public static Vector3 ScatterMapping(this Vector3 source, float radius)
         {
             source.x = UnityEngine.Random.Range(-radius, radius);
             source.y = UnityEngine.Random.Range(-radius, radius);
             return source;
         }
 
+        /// <summary>
+        /// Determine the move direction based off of the direction provided
+        /// </summary>
+        /// <param name="direction"></param>
+        /// <param name="deadZone"></param>
+        /// <returns></returns>
+        public static MoveDirection DetermineMoveDirection(this Vector2 direction, float deadZone = 0.6f)
+        {
+            if (direction.sqrMagnitude < deadZone * deadZone)
+            {
+                return MoveDirection.None;
+            }
+
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            {
+                return direction.x > 0 ? MoveDirection.Right : MoveDirection.Left;
+            }
+
+            return direction.y > 0 ? MoveDirection.Up : MoveDirection.Down;
+        }
     }
 }

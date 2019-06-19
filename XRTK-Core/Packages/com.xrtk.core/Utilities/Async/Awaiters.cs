@@ -81,14 +81,12 @@ namespace XRTK.Utilities.Async
 
                     while (!cancellationTokenSource.IsCancellationRequested)
                     {
-
 #if UNITY_EDITOR
                         if (editorCancelled)
                         {
                             tcs.TrySetCanceled(CancellationToken.None);
                         }
 #endif
-
                         try
                         {
                             if (!predicate(element))
@@ -119,7 +117,6 @@ namespace XRTK.Utilities.Async
             var editorCancelled = false;
             UnityEditor.EditorApplication.playModeStateChanged += playModeStateChanged => editorCancelled = true;
 #endif
-
             while (true)
             {
 #if UNITY_EDITOR
@@ -128,7 +125,6 @@ namespace XRTK.Utilities.Async
                     tcs.TrySetCanceled(CancellationToken.None);
                 }
 #endif
-
                 try
                 {
                     if (!predicate(element))

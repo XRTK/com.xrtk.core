@@ -4,9 +4,9 @@
 using System.Collections;
 using UnityEngine;
 using XRTK.Definitions.Physics;
-using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Physics;
+using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.TeleportSystem;
 
 namespace XRTK.Interfaces.InputSystem
@@ -17,11 +17,6 @@ namespace XRTK.Interfaces.InputSystem
     public interface IMixedRealityPointer : IEqualityComparer
     {
         /// <summary>
-        /// The pointer's current controller reference.
-        /// </summary>
-        IMixedRealityController Controller { get; set; }
-
-        /// <summary>
         /// This pointer's id.
         /// </summary>
         uint PointerId { get; }
@@ -30,6 +25,11 @@ namespace XRTK.Interfaces.InputSystem
         /// This pointer's name.
         /// </summary>
         string PointerName { get; set; }
+
+        /// <summary>
+        /// The pointer's current controller reference.
+        /// </summary>
+        IMixedRealityController Controller { get; set; }
 
         /// <summary>
         /// This pointer's input source parent.
@@ -60,6 +60,11 @@ namespace XRTK.Interfaces.InputSystem
         /// Is the focus for this pointer currently locked?
         /// </summary>
         bool IsFocusLocked { get; set; }
+
+        /// <summary>
+        /// Specifies whether the pointer's target position (cursor) is locked to the target object when focus is locked.
+        /// </summary>
+        bool IsTargetPositionLockedOnFocusLock { get; set; }
 
         /// <summary>
         /// The pointer's maximum extent when raycasting.
@@ -114,11 +119,6 @@ namespace XRTK.Interfaces.InputSystem
         /// The Y orientation of the pointer - used for touchpad rotation and navigation
         /// </summary>
         float PointerOrientation { get; }
-
-        /// <summary>
-        /// Specifies whether the pointer's target position (cursor) is locked to the target object when focus is locked.
-        /// </summary>
-        bool IsTargetPositionLockedOnFocusLock { get; set; }
 
         /// <summary>
         /// Called before all rays have casted.

@@ -90,9 +90,6 @@ namespace XRTK.Services.InputSystem
             }
         }
 
-        /// <inheritdoc />
-        public GameObject OverrideFocusedObject { get; set; }
-
         #endregion IFocusProvider Properties
 
         /// <summary>
@@ -451,21 +448,19 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public GameObject GetFocusedObject(IMixedRealityPointer pointingSource)
         {
-            if (OverrideFocusedObject != null) { return OverrideFocusedObject; }
-
             if (pointingSource == null)
             {
                 Debug.LogError("No Pointer passed to get focused object");
                 return null;
             }
 
-            return !TryGetFocusDetails(pointingSource, out FocusDetails focusDetails) ? null : focusDetails.Object;
+            return !TryGetFocusDetails(pointingSource, out var focusDetails) ? null : focusDetails.Object;
         }
 
         /// <inheritdoc />
         public bool TryGetFocusDetails(IMixedRealityPointer pointer, out FocusDetails focusDetails)
         {
-            if (TryGetPointerData(pointer, out PointerData pointerData))
+            if (TryGetPointerData(pointer, out var pointerData))
             {
                 focusDetails = pointerData.Details;
                 return true;
@@ -478,7 +473,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public bool TryGetSpecificPointerGraphicEventData(IMixedRealityPointer pointer, out GraphicInputEventData graphicInputEventData)
         {
-            if (TryGetPointerData(pointer, out PointerData pointerData))
+            if (TryGetPointerData(pointer, out var pointerData))
             {
                 Debug.Assert(pointerData.GraphicEventData != null);
                 graphicInputEventData = pointerData.GraphicEventData;
@@ -489,7 +484,6 @@ namespace XRTK.Services.InputSystem
             graphicInputEventData = null;
             return false;
         }
-
         #endregion Focus Details by IMixedRealityPointer
 
         #region Utilities
@@ -559,7 +553,7 @@ namespace XRTK.Services.InputSystem
             {
                 if (sceneCanvases[i].isRootCanvas && sceneCanvases[i].renderMode == RenderMode.WorldSpace)
                 {
-                    sceneCanvases[i].worldCamera = UIRaycastCamera;
+                    sceneCanvases[i].worldCamera = uiRaycastCamera;
                 }
             }
         }
@@ -614,7 +608,8 @@ namespace XRTK.Services.InputSystem
 
                 foreach (var otherPointer in pointers)
                 {
-                    if (otherPointer.Pointer.PointerId != pointer.PointerId && otherPointer.CurrentPointerTarget == unfocusedObject)
+                    if (otherPointer.Pointer.PointerId != pointer.PointerId &&
+                        otherPointer.CurrentPointerTarget == unfocusedObject)
                     {
                         objectIsStillFocusedByOtherPointer = true;
                         break;
@@ -663,25 +658,27 @@ namespace XRTK.Services.InputSystem
             {
                 UpdatePointer(pointer);
 
+                // TODO remove profile call here and use a value set on the pointer itself.
                 var pointerProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile;
 
-                if (pointerProfile != null && pointerProfile.DebugDrawPointingRays)
+                if (pointerProfile == null || !pointerProfile.DebugDrawPointingRays) { continue; }
+
+                // TODO Let's only set this once on start.This will overwrite the property each update.
+                MixedRealityRaycaster.DebugEnabled = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.DebugDrawPointingRays;
+
+                Color rayColor;
+
+                if (pointerProfile.DebugDrawPointingRayColors != null &&
+                    pointerProfile.DebugDrawPointingRayColors.Length > 0)
                 {
-                    MixedRealityRaycaster.DebugEnabled = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.DebugDrawPointingRays;
-
-                    Color rayColor;
-
-                    if ((pointerProfile.DebugDrawPointingRayColors != null) && (pointerProfile.DebugDrawPointingRayColors.Length > 0))
-                    {
-                        rayColor = pointerProfile.DebugDrawPointingRayColors[pointerCount++ % pointerProfile.DebugDrawPointingRayColors.Length];
-                    }
-                    else
-                    {
-                        rayColor = Color.green;
-                    }
-
-                    Debug.DrawRay(pointer.StartPoint, (pointer.Details.Point - pointer.StartPoint), rayColor);
+                    rayColor = pointerProfile.DebugDrawPointingRayColors[pointerCount++ % pointerProfile.DebugDrawPointingRayColors.Length];
                 }
+                else
+                {
+                    rayColor = Color.green;
+                }
+
+                Debug.DrawRay(pointer.StartPoint, (pointer.Details.Point - pointer.StartPoint), rayColor);
             }
         }
 
@@ -852,11 +849,15 @@ namespace XRTK.Services.InputSystem
         /// <param name="hitResult"></param>
         private void RaycastGraphics(IMixedRealityPointer pointer, PointerEventData graphicEventData, LayerMask[] prioritizedLayerMasks, PointerHitResult hitResult)
         {
-            Debug.Assert(UIRaycastCamera != null, "Missing UIRaycastCamera!");
-
-            if (!UIRaycastCamera.nearClipPlane.Equals(0.01f))
+            if (UIRaycastCamera == null)
             {
-                UIRaycastCamera.nearClipPlane = 0.01f;
+                Debug.LogError("Missing UIRaycastCamera!");
+                return;
+            }
+
+            if (!uiRaycastCamera.nearClipPlane.Equals(0.01f))
+            {
+                uiRaycastCamera.nearClipPlane = 0.01f;
             }
 
             if (pointer.Rays == null)
@@ -876,53 +877,65 @@ namespace XRTK.Services.InputSystem
 
             for (int i = 0; i < pointer.Rays.Length; i++)
             {
-                if (RaycastGraphicsStep(graphicEventData, pointer.Rays[i], prioritizedLayerMasks, out var raycastResult))
+                if (RaycastGraphicsStep(graphicEventData, pointer.Rays[i], prioritizedLayerMasks, out var raycastResult) &&
+                    raycastResult.isValid &&
+                    raycastResult.distance < pointer.Rays[i].Length &&
+                    raycastResult.module != null &&
+                    raycastResult.module.eventCamera == UIRaycastCamera)
                 {
-                    if (raycastResult.isValid &&
-                        raycastResult.distance < pointer.Rays[i].Length &&
-                        raycastResult.module != null &&
-                        raycastResult.module.eventCamera == UIRaycastCamera)
-                    {
-                        totalDistance += raycastResult.distance;
+                    totalDistance += raycastResult.distance;
 
-                        newUiRaycastPosition.x = raycastResult.screenPosition.x;
-                        newUiRaycastPosition.y = raycastResult.screenPosition.y;
-                        newUiRaycastPosition.z = raycastResult.distance;
+                    newUiRaycastPosition.x = raycastResult.screenPosition.x;
+                    newUiRaycastPosition.y = raycastResult.screenPosition.y;
+                    newUiRaycastPosition.z = raycastResult.distance;
 
-                        var worldPos = UIRaycastCamera.ScreenToWorldPoint(newUiRaycastPosition);
-                        var normal = -raycastResult.gameObject.transform.forward;
+                    var worldPos = uiRaycastCamera.ScreenToWorldPoint(newUiRaycastPosition);
+                    var normal = -raycastResult.gameObject.transform.forward;
 
-                        hitResult.Set(raycastResult, worldPos, normal, pointer.Rays[i], i, totalDistance);
-                        return;
-                    }
+                    hitResult.Set(raycastResult, worldPos, normal, pointer.Rays[i], i, totalDistance);
+                    return;
                 }
 
                 totalDistance += pointer.Rays[i].Length;
             }
         }
 
+        /// <summary>
         /// Raycasts each graphic <see cref="RayStep"/>
+        /// </summary>
         /// <param name="graphicEventData"></param>
         /// <param name="step"></param>
         /// <param name="prioritizedLayerMasks"></param>
         /// <param name="uiRaycastResult"></param>
-        /// <returns></returns>
         private bool RaycastGraphicsStep(PointerEventData graphicEventData, RayStep step, LayerMask[] prioritizedLayerMasks, out RaycastResult uiRaycastResult)
         {
-            Debug.Assert(step.Direction != Vector3.zero, "RayStep Direction is Invalid.");
+            uiRaycastResult = default;
+            var currentEventSystem = EventSystem.current;
+
+            if (currentEventSystem == null)
+            {
+                Debug.LogError("Current Event System is Invalid!");
+                return false;
+            }
+
+            if (step.Direction == Vector3.zero)
+            {
+                Debug.LogError("RayStep Direction is Invalid!");
+                return false;
+            }
 
             // Move the uiRaycast camera to the current pointer's position.
-            UIRaycastCamera.transform.position = step.Origin;
-            UIRaycastCamera.transform.rotation = Quaternion.LookRotation(step.Direction, Vector3.up);
+            uiRaycastCamera.transform.position = step.Origin;
+            uiRaycastCamera.transform.rotation = Quaternion.LookRotation(step.Direction, Vector3.up);
 
             // We always raycast from the center of the camera.
             var newPosition = graphicRaycastMultiplier;
-            newPosition.x *= UIRaycastCamera.pixelWidth;
-            newPosition.y *= UIRaycastCamera.pixelHeight;
+            newPosition.x *= uiRaycastCamera.pixelWidth;
+            newPosition.y *= uiRaycastCamera.pixelHeight;
             graphicEventData.position = newPosition;
 
             // Graphics raycast
-            uiRaycastResult = EventSystem.current.Raycast(graphicEventData, prioritizedLayerMasks);
+            uiRaycastResult = currentEventSystem.Raycast(graphicEventData, prioritizedLayerMasks);
             graphicEventData.pointerCurrentRaycast = uiRaycastResult;
 
             return uiRaycastCamera.gameObject != null;
@@ -947,22 +960,21 @@ namespace XRTK.Services.InputSystem
 
             foreach (var pointer in pointers)
             {
-                if (pointer.PreviousPointerTarget != pointer.CurrentPointerTarget)
+                if (pointer.PreviousPointerTarget == pointer.CurrentPointerTarget) { continue; }
+
+                pendingPointerSpecificFocusChange.Add(pointer);
+
+                // Initially, we assume all pointer-specific focus changes will
+                // also result in an overall focus change...
+
+                if (pointer.PreviousPointerTarget != null)
                 {
-                    pendingPointerSpecificFocusChange.Add(pointer);
+                    pendingOverallFocusExitSet.Add(pointer.PreviousPointerTarget);
+                }
 
-                    // Initially, we assume all pointer-specific focus changes will
-                    // also result in an overall focus change...
-
-                    if (pointer.PreviousPointerTarget != null)
-                    {
-                        pendingOverallFocusExitSet.Add(pointer.PreviousPointerTarget);
-                    }
-
-                    if (pointer.CurrentPointerTarget != null)
-                    {
-                        pendingOverallFocusEnterSet.Add(pointer.CurrentPointerTarget);
-                    }
+                if (pointer.CurrentPointerTarget != null)
+                {
+                    pendingOverallFocusEnterSet.Add(pointer.CurrentPointerTarget);
                 }
             }
 

@@ -40,7 +40,8 @@ namespace XRTK.Providers.Controllers.OpenVR
             new MixedRealityInteractionMapping(10, "Button.Three Press", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.JoystickButton12),
             new MixedRealityInteractionMapping(11, "Button.Four Press", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.JoystickButton13),
             new MixedRealityInteractionMapping(12, "Button.Start Press", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.JoystickButton7),
-            new MixedRealityInteractionMapping(13, "Thumb Touch", AxisType.SingleAxis, DeviceInputType.Trigger, ControllerMappingLibrary.AXIS_15)
+            new MixedRealityInteractionMapping(13, "Thumb Touch", AxisType.SingleAxis, DeviceInputType.Trigger, ControllerMappingLibrary.AXIS_15),
+            new MixedRealityInteractionMapping(14, "Menu Button", AxisType.Digital, DeviceInputType.ButtonPress,  KeyCode.JoystickButton6)
         };
 
         /// <inheritdoc />

@@ -43,7 +43,6 @@ namespace XRTK.EventDatum.Input
             pressPosition = Vector2.zero;
             rawPointerPress = null;
             scrollDelta = Vector2.zero;
-            selectedObject = null;
             useDragThreshold = false;
         }
     }

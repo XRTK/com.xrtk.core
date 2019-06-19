@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -52,7 +53,15 @@ namespace XRTK.Services
 
             if (eventExecutionDepth > 0)
             {
-                await eventExecutionDepth.WaitUntil(depth => depth == 0);
+                try
+                {
+                    await eventExecutionDepth.WaitUntil(depth => eventExecutionDepth == 0);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                    return;
+                }
             }
 
             EventListeners.Add(listener);
@@ -65,7 +74,15 @@ namespace XRTK.Services
 
             if (eventExecutionDepth > 0)
             {
-                await eventExecutionDepth.WaitUntil(depth => depth == 0);
+                try
+                {
+                    await eventExecutionDepth.WaitUntil(depth => eventExecutionDepth == 0);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                    return;
+                }
             }
 
             EventListeners.Remove(listener);

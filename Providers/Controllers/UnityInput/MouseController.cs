@@ -31,8 +31,8 @@ namespace XRTK.Providers.Controllers.UnityInput
         public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
         {
             new MixedRealityInteractionMapping(0, "Spatial Mouse Position", AxisType.SixDof, DeviceInputType.SpatialPointer, MixedRealityInputAction.None),
-            new MixedRealityInteractionMapping(1, "Mouse Delta Position", AxisType.DualAxis, DeviceInputType.PointerPosition, MixedRealityInputAction.None),
-            new MixedRealityInteractionMapping(2, "Mouse Scroll Position", AxisType.DualAxis, DeviceInputType.Scroll, ControllerMappingLibrary.AXIS_3),
+            new MixedRealityInteractionMapping(1, "Mouse Delta Position", AxisType.DualAxis, DeviceInputType.PointerPosition, ControllerMappingLibrary.MouseX, ControllerMappingLibrary.MouseY),
+            new MixedRealityInteractionMapping(2, "Mouse Scroll Position", AxisType.DualAxis, DeviceInputType.Scroll, ControllerMappingLibrary.MouseScroll, ControllerMappingLibrary.MouseScroll, true, true),
             new MixedRealityInteractionMapping(3, "Left Mouse Button", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Mouse0),
             new MixedRealityInteractionMapping(4, "Right Mouse Button", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Mouse1),
             new MixedRealityInteractionMapping(5, "Mouse Button 2", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Mouse2),
@@ -74,11 +74,11 @@ namespace XRTK.Providers.Controllers.UnityInput
             }
 
             // Don't ask me why it's mapped weird. Bc Unity...
-            mouseDelta.x = -Input.GetAxis("Mouse Y");
-            mouseDelta.y = Input.GetAxis("Mouse X");
+            mouseDelta.x = Input.GetAxis(Interactions[1].AxisCodeX);
+            mouseDelta.y = Input.GetAxis(Interactions[1].AxisCodeY);
+
             MixedRealityToolkit.InputSystem?.RaiseSourcePositionChanged(InputSource, this, mouseDelta);
             MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, controllerPose);
-            MixedRealityToolkit.InputSystem?.RaiseSourcePositionChanged(InputSource, this, Input.mouseScrollDelta);
 
             for (int i = 0; i < Interactions?.Length; i++)
             {

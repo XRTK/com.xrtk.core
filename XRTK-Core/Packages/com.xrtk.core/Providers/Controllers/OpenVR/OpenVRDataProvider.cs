@@ -77,6 +77,9 @@ namespace XRTK.Providers.Controllers.OpenVR
                 case SupportedControllerType.OculusGo:
                     controllerType = typeof(OculusGoController);
                     break;
+                case SupportedControllerType.OculusQuest:
+                    controllerType = typeof(OculusQuestController);
+                    break;
                 case SupportedControllerType.WindowsMixedReality:
                     controllerType = typeof(WindowsMixedRealityOpenVRMotionController);
                     break;
@@ -129,6 +132,11 @@ namespace XRTK.Providers.Controllers.OpenVR
             if (joystickName.Contains("Oculus Tracked Remote"))
             {
                 return SupportedControllerType.OculusGo;
+            }
+
+            if (joystickName.Contains("Oculus Quest"))
+            {
+                return SupportedControllerType.OculusQuest;
             }
 
             if (joystickName.Contains("Oculus remote"))

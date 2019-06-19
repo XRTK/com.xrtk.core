@@ -269,6 +269,15 @@ namespace XRTK.Interfaces.InputSystem
 
         #endregion Pointer Up
 
+        /// <summary>
+        /// Raise teh pointer scroll event.
+        /// </summary>
+        /// <param name="pointer"></param>
+        /// <param name="scrollAction"></param>
+        /// <param name="scrollDelta"></param>
+        /// <param name="inputSource"></param>
+        void RaisePointerScroll(IMixedRealityPointer pointer, MixedRealityInputAction scrollAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null);
+
         #endregion Pointers
 
         #region Generic Input Events

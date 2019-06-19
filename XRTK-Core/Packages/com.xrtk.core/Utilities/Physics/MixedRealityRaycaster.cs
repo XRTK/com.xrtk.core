@@ -70,7 +70,6 @@ namespace XRTK.Utilities.Physics
                 for (int y = -halfRaysPerEdge; y <= halfRaysPerEdge; y += 1)
                 {
                     Vector3 offset = matrix.MultiplyVector(new Vector3(x * extents.x, y * extents.y, 0));
-
                     Vector3 origin = step.Origin;
                     Vector3 direction = (targetPosition + offset) - step.Origin;
 
@@ -80,7 +79,7 @@ namespace XRTK.Utilities.Physics
                         direction = step.Direction;
                     }
 
-                    hits[index] = RaycastSimplePhysicsStep(new RayStep(origin, direction.normalized * maxDistance), prioritizedLayerMasks, out RaycastHit rayHit);
+                    hits[index] = RaycastSimplePhysicsStep(new RayStep(origin, direction.normalized * maxDistance), prioritizedLayerMasks, out var rayHit);
 
                     if (hits[index])
                     {
@@ -163,7 +162,8 @@ namespace XRTK.Utilities.Physics
 
                 for (int hitIdx = 0; hitIdx < hits.Length; hitIdx++)
                 {
-                    RaycastHit hit = hits[hitIdx];
+                    var hit = hits[hitIdx];
+
                     if (hit.transform.gameObject.layer.IsInLayerMask(priorityLayers[layerMaskIdx]) &&
                         (minHit == null || hit.distance < minHit.Value.distance))
                     {

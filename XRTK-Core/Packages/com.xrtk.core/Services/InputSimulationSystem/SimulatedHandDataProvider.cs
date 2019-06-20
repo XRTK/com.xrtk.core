@@ -3,6 +3,9 @@
 
 using System;
 using UnityEngine;
+using XRTK.Definitions.InputSimulationSystem;
+using XRTK.Definitions.Utilities;
+using XRTK.Utilities;
 
 /// <summary>
 /// Provides per-frame data access to simulated hand data
@@ -141,7 +144,7 @@ namespace XRTK.Services.InputSimulationSystem
     {
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
-        protected MixedRealityInputSimulationProfile profile;
+        protected MixedRealityInputSimulationSystemProfile profile;
 
         /// <summary>
         /// If true then the hand is always visible, regardless of simulating.
@@ -167,7 +170,7 @@ namespace XRTK.Services.InputSimulationSystem
         private SimulatedHandData.HandJointDataGenerator generatorLeft;
         private SimulatedHandData.HandJointDataGenerator generatorRight;
 
-        public SimulatedHandDataProvider(MixedRealityInputSimulationProfile _profile)
+        public SimulatedHandDataProvider(MixedRealityInputSimulationSystemProfile _profile)
         {
             profile = _profile;
 
@@ -215,58 +218,58 @@ namespace XRTK.Services.InputSimulationSystem
         /// </summary>
         private void SimulateUserInput()
         {
-            if (UnityEngine.Input.GetKeyDown(profile.ToggleLeftHandKey))
+            if (Input.GetKeyDown(profile.ToggleLeftHandKey))
             {
                 IsAlwaysVisibleLeft = !IsAlwaysVisibleLeft;
             }
-            if (UnityEngine.Input.GetKeyDown(profile.ToggleRightHandKey))
+            if (Input.GetKeyDown(profile.ToggleRightHandKey))
             {
                 IsAlwaysVisibleRight = !IsAlwaysVisibleRight;
             }
 
-            if (UnityEngine.Input.GetKeyDown(profile.LeftHandManipulationKey))
+            if (Input.GetKeyDown(profile.LeftHandManipulationKey))
             {
                 isSimulatingLeft = true;
             }
-            if (UnityEngine.Input.GetKeyUp(profile.LeftHandManipulationKey))
+            if (Input.GetKeyUp(profile.LeftHandManipulationKey))
             {
                 isSimulatingLeft = false;
             }
 
-            if (UnityEngine.Input.GetKeyDown(profile.RightHandManipulationKey))
+            if (Input.GetKeyDown(profile.RightHandManipulationKey))
             {
                 isSimulatingRight = true;
             }
-            if (UnityEngine.Input.GetKeyUp(profile.RightHandManipulationKey))
+            if (Input.GetKeyUp(profile.RightHandManipulationKey))
             {
                 isSimulatingRight = false;
             }
        
-            Vector3 mouseDelta = (lastMousePosition.HasValue ? UnityEngine.Input.mousePosition - lastMousePosition.Value : Vector3.zero);
-            mouseDelta.z += UnityEngine.Input.GetAxis("Mouse ScrollWheel") * profile.HandDepthMultiplier;
+            Vector3 mouseDelta = (lastMousePosition.HasValue ? Input.mousePosition - lastMousePosition.Value : Vector3.zero);
+            mouseDelta.z += Input.GetAxis("Mouse ScrollWheel") * profile.HandDepthMultiplier;
             float rotationDelta = profile.HandRotationSpeed * Time.deltaTime;
             Vector3 rotationDeltaEulerAngles = Vector3.zero;
-            if (UnityEngine.Input.GetKey(profile.YawHandCCWKey))
+            if (Input.GetKey(profile.YawHandCCWKey))
             {
                 rotationDeltaEulerAngles.y = -rotationDelta;
             }
-            if (UnityEngine.Input.GetKey(profile.YawHandCWKey))
+            if (Input.GetKey(profile.YawHandCWKey))
             {
                 rotationDeltaEulerAngles.y = rotationDelta;
             }
-            if (UnityEngine.Input.GetKey(profile.PitchHandCCWKey))
+            if (Input.GetKey(profile.PitchHandCCWKey))
             {
                 rotationDeltaEulerAngles.x = rotationDelta;
             }
-            if (UnityEngine.Input.GetKey(profile.PitchHandCWKey))
+            if (Input.GetKey(profile.PitchHandCWKey))
             {
                 rotationDeltaEulerAngles.x = -rotationDelta;
             }
-            if (UnityEngine.Input.GetKey(profile.RollHandCCWKey))
+            if (Input.GetKey(profile.RollHandCCWKey))
             {
                 rotationDeltaEulerAngles.z = rotationDelta;
             }
-            if (UnityEngine.Input.GetKey(profile.RollHandCWKey))
+            if (Input.GetKey(profile.RollHandCWKey))
             {
                 rotationDeltaEulerAngles.z = -rotationDelta;
             }
@@ -278,7 +281,7 @@ namespace XRTK.Services.InputSimulationSystem
             HandStateLeft.GestureBlending += gestureAnimDelta;
             HandStateRight.GestureBlending += gestureAnimDelta;
 
-            lastMousePosition = UnityEngine.Input.mousePosition;
+            lastMousePosition = Input.mousePosition;
         }
 
         /// Apply changes to one hand and update tracking
@@ -294,7 +297,7 @@ namespace XRTK.Services.InputSimulationSystem
             if (!state.IsTracked && enableTracking)
             {
                 // Start at current mouse position
-                Vector3 mousePos = UnityEngine.Input.mousePosition;
+                Vector3 mousePos = Input.mousePosition;
                 state.ScreenPosition = new Vector3(mousePos.x, mousePos.y, profile.DefaultHandDistance);
             }
 
@@ -336,15 +339,15 @@ namespace XRTK.Services.InputSimulationSystem
 
         private ArticulatedHandPose.GestureId SelectGesture()
         {
-            if (UnityEngine.Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0))
             {
                 return profile.LeftMouseHandGesture;
             }
-            else if (UnityEngine.Input.GetMouseButton(1))
+            else if (Input.GetMouseButton(1))
             {
                 return profile.RightMouseHandGesture;
             }
-            else if (UnityEngine.Input.GetMouseButton(2))
+            else if (Input.GetMouseButton(2))
             {
                 return profile.MiddleMouseHandGesture;
             }
@@ -356,15 +359,15 @@ namespace XRTK.Services.InputSimulationSystem
 
         private ArticulatedHandPose.GestureId ToggleGesture(ArticulatedHandPose.GestureId gesture)
         {
-            if (UnityEngine.Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0))
             {
                 return (gesture != profile.LeftMouseHandGesture ? profile.LeftMouseHandGesture : profile.DefaultHandGesture);
             }
-            else if (UnityEngine.Input.GetMouseButtonDown(1))
+            else if (Input.GetMouseButtonDown(1))
             {
                 return (gesture != profile.RightMouseHandGesture ? profile.RightMouseHandGesture : profile.DefaultHandGesture);
             }
-            else if (UnityEngine.Input.GetMouseButtonDown(2))
+            else if (Input.GetMouseButtonDown(2))
             {
                 return (gesture != profile.MiddleMouseHandGesture ? profile.MiddleMouseHandGesture : profile.DefaultHandGesture);
             }

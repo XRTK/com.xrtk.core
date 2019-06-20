@@ -4,6 +4,7 @@
 using System;
 using System.Linq;
 using UnityEngine;
+using XRTK.Definitions.Utilities;
 
 namespace XRTK.Services.InputSimulationSystem
 {

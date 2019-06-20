@@ -4,13 +4,16 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Definitions.Devices;
+using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.InputSystem;
 
 namespace XRTK.Services.InputSimulationSystem
 {
     /// <summary>
     /// Snapshot of simulated hand data.
     /// </summary>
-    [System.Serializable]
+    [Serializable]
     public class SimulatedHandData
     {
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
@@ -42,7 +45,7 @@ namespace XRTK.Services.InputSimulationSystem
             {
                 if (inputSystem == null)
                 {
-                    MixedRealityServiceRegistry.TryGetService<IMixedRealityInputSystem>(out inputSystem);
+                    inputSystem = MixedRealityToolkit.GetService<IMixedRealityInputSystem>();
                 }
                 return inputSystem;
             }
@@ -52,7 +55,7 @@ namespace XRTK.Services.InputSimulationSystem
         {
             timestamp = other.timestamp;
             isTracked = other.isTracked;
-            isPinching = other.isPinching; 
+            isPinching = other.isPinching;
             for (int i = 0; i < jointCount; ++i)
             {
                 joints[i] = other.joints[i];
@@ -108,7 +111,7 @@ namespace XRTK.Services.InputSimulationSystem
         /// <param name="interactions"></param>
         protected SimulatedHand(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
                 : base(trackingState, controllerHandedness, inputSource, interactions)
-        {}
+        { }
 
         public override bool TryGetJoint(TrackedHandJoint joint, out MixedRealityPose pose)
         {

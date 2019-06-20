@@ -5,6 +5,7 @@ using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.BoundarySystem;
 using XRTK.Definitions.Diagnostics;
+using XRTK.Definitions.InputSimulationSystem;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.NetworkingSystem;
 using XRTK.Definitions.SpatialAwarenessSystem;
@@ -12,6 +13,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Diagnostics;
+using XRTK.Interfaces.InputSimulationSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem;
@@ -26,6 +28,8 @@ namespace XRTK.Definitions
     public class MixedRealityToolkitConfigurationProfile : BaseMixedRealityProfile
     {
         #region Mixed Reality Toolkit configurable properties
+
+        #region Camera System
 
         [SerializeField]
         [Tooltip("Enable the Camera System on Startup.")]
@@ -69,6 +73,10 @@ namespace XRTK.Definitions
             internal set => cameraProfile = value;
         }
 
+        #endregion
+
+        #region Input System
+
         [SerializeField]
         [Tooltip("Enable the Input System on Startup.")]
         private bool enableInputSystem = false;
@@ -108,6 +116,54 @@ namespace XRTK.Definitions
             get => inputSystemType;
             internal set => inputSystemType = value;
         }
+
+        #endregion
+
+        #region Input Simulation System
+
+        [SerializeField]
+        [Tooltip("Enable the Input Simulation System on Startup, if in Unity Editor.")]
+        private bool enableInputSimulationSystem = false;
+
+        /// <summary>
+        /// Enable and configure the Input Simulation System component for the Mixed Reality Toolkit
+        /// </summary>
+        public bool IsInputSystemSimulationEnabled
+        {
+            get => inputSimulationSystemProfile != null && inputSimulationSystemType != null && inputSimulationSystemType.Type != null && enableInputSimulationSystem;
+            internal set => enableInputSimulationSystem = value;
+        }
+
+        [SerializeField]
+        [Tooltip("Input Simulation System profile for simulating input in the Unity Editor.")]
+        private MixedRealityInputSimulationSystemProfile inputSimulationSystemProfile;
+
+        /// <summary>
+        /// Input Simulation System profile for simulating input in the Unity Editor.
+        /// </summary>
+        public MixedRealityInputSimulationSystemProfile InputSimulationSystemProfile
+        {
+            get => inputSimulationSystemProfile;
+            internal set => inputSimulationSystemProfile = value;
+        }
+
+        [SerializeField]
+        [Tooltip("Input Simulation System Class to instantiate at runtime.")]
+        [Implements(typeof(IMixedRealityInputSimulationSystem), TypeGrouping.ByNamespaceFlat)]
+        private SystemType inputSimulationSystemType;
+
+        /// <summary>
+        /// Input Simulation System Script File to instantiate at runtime.
+        /// </summary>
+        public SystemType InputSimulationSystemType
+        {
+            get => inputSimulationSystemType;
+            internal set => inputSimulationSystemType = value;
+        }
+
+        #endregion
+
+        #region Boundary System
 
         [SerializeField]
         [Tooltip("Enable the Boundary on Startup")]
@@ -149,6 +205,10 @@ namespace XRTK.Definitions
             internal set => boundaryVisualizationProfile = value;
         }
 
+        #endregion
+
+        #region Teleport System
+
         [SerializeField]
         [Tooltip("Enable the Teleport System on Startup")]
         private bool enableTeleportSystem = false;
@@ -175,6 +235,10 @@ namespace XRTK.Definitions
             get => teleportSystemType;
             internal set => teleportSystemType = value;
         }
+
+        #endregion
+
+        #region Spatial Awareness System
 
         [SerializeField]
         [Tooltip("Enable the Spatial Awareness system on Startup")]
@@ -216,6 +280,10 @@ namespace XRTK.Definitions
             internal set => spatialAwarenessProfile = value;
         }
 
+        #endregion
+
+        #region Networking System
+
         [SerializeField]
         [Tooltip("Profile for wiring up networking assets.")]
         private MixedRealityNetworkSystemProfile networkingSystemProfile;
@@ -256,6 +324,10 @@ namespace XRTK.Definitions
             internal set => networkingSystemType = value;
         }
 
+        #endregion
+
+        #region Diagnostics System
+
         [SerializeField]
         [Tooltip("Profile for wiring up diagnostic assets.")]
         private MixedRealityDiagnosticsProfile diagnosticsSystemProfile;
@@ -295,6 +367,8 @@ namespace XRTK.Definitions
             get => diagnosticsSystemType;
             internal set => diagnosticsSystemType = value;
         }
+
+        #endregion
 
         [SerializeField]
         [Tooltip("All the additional non-required services registered with the Mixed Reality Toolkit.")]

@@ -22,6 +22,8 @@ namespace XRTK.Definitions.Devices
         Mouse,
         Lumin,
         OculusGo,
-        OculusQuest
+        OculusQuest,
+        ArticulatedHand,
+        GGVHand
     }
 }

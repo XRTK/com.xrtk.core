@@ -6,9 +6,12 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using XRTK.Definitions.Devices;
+using XRTK.Definitions.InputSimulationSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSimulationSystem;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Utilities;
 
 namespace XRTK.Services.InputSimulationSystem
 {
@@ -48,12 +51,13 @@ namespace XRTK.Services.InputSimulationSystem
 
         #region BaseInputDeviceManager Implementation
 
-        public InputSimulationService(
+        public MixedRealityInputSimulationSystem(
             IMixedRealityServiceRegistrar registrar,
             IMixedRealityInputSystem inputSystem,
             string name,
             uint priority,
-            BaseMixedRealityProfile profile) : base(registrar, inputSystem, name, priority, profile) { }
+            MixedRealityInputSimulationSystemProfile profile)
+            : base(registrar, inputSystem, name, priority, profile) { }
 
         /// <inheritdoc />
         public override IMixedRealityController[] GetActiveControllers()

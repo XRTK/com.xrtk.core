@@ -3,8 +3,10 @@
 
 using UnityEngine;
 using XRTK.Definitions.Devices;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Utilities;
 
 namespace XRTK.Services.InputSimulationSystem
 {

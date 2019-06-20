@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using System.Linq;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
@@ -10,8 +9,6 @@ namespace XRTK.Services.InputSimulationSystem
 {
     public class SimulatedHandUtils
     {
-        private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
-
         /// <summary>
         /// Compute the rotation of each joint, with the forward vector of the rotation pointing along the joint bone, 
         /// and the up vector pointing up.

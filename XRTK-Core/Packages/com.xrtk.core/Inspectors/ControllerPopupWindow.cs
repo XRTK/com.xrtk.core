@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -11,10 +10,8 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Data;
-using XRTK.Inspectors.Profiles;
 using XRTK.Inspectors.Utilities;
 using XRTK.Providers.Controllers;
-using XRTK.Services;
 using XRTK.Utilities.Editor;
 
 namespace XRTK.Inspectors
@@ -47,10 +44,10 @@ namespace XRTK.Inspectors
 
         private static readonly int[] InvertAxisValues = { 0, 1, 2, 3 };
 
+        private static readonly Vector2 HorizontalSpace = new Vector2(8f, 0f);
         private static readonly Vector2 InputActionLabelPosition = new Vector2(256f, 0f);
         private static readonly Vector2 InputActionDropdownPosition = new Vector2(88f, 0f);
         private static readonly Vector2 InputActionFlipTogglePosition = new Vector2(-24f, 0f);
-        private static readonly Vector2 HorizontalSpace = new Vector2(8f, 0f);
 
         private static readonly Rect ControllerRectPosition = new Rect(new Vector2(128f, 0f), new Vector2(512f, 512f));
 
@@ -95,7 +92,7 @@ namespace XRTK.Inspectors
         private ControllerInputActionOption currentControllerOption;
 
         private MixedRealityInputSystemProfile inputSystemProfile;
-        private static BaseMixedRealityControllerMappingProfile mappingProfile;
+        private BaseMixedRealityControllerMappingProfile mappingProfile;
 
         private bool IsCustomController => currentControllerType == SupportedControllerType.GenericOpenVR ||
                                            currentControllerType == SupportedControllerType.GenericUnity;
@@ -103,11 +100,21 @@ namespace XRTK.Inspectors
 
         private void OnFocus()
         {
+            if (window == null)
+            {
+                Close();
+            }
+
             currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(mappingProfile, currentControllerType, currentHandedness);
             inputSystemProfile = mappingProfile.ParentProfile.ParentProfile as MixedRealityInputSystemProfile;
 
-            #region Interaction Constraint Setup
+            if (inputSystemProfile == null)
+            {
+                Debug.LogWarning("No Input System Profile found. Be sure to assign this mapping profile to an input system.");
+                return;
+            }
 
+            #region Interaction Constraint Setup
 
             actionIds = inputSystemProfile.InputActionsProfile.InputActions
                 .Select(action => (int)action.Id)
@@ -115,6 +122,11 @@ namespace XRTK.Inspectors
 
             axisLabels = ControllerMappingLibrary.UnityInputManagerAxes
                 .Select(axis => new GUIContent(axis.Name))
+                .Prepend(new GUIContent(ControllerMappingLibrary.MouseScroll))
+                .Prepend(new GUIContent(ControllerMappingLibrary.MouseY))
+                .Prepend(new GUIContent(ControllerMappingLibrary.MouseX))
+                .Prepend(new GUIContent(ControllerMappingLibrary.Vertical))
+                .Prepend(new GUIContent(ControllerMappingLibrary.Horizontal))
                 .Prepend(new GUIContent("None")).ToArray();
 
             actionIds = inputSystemProfile.InputActionsProfile.InputActions
@@ -201,15 +213,24 @@ namespace XRTK.Inspectors
 
         public static void Show(BaseMixedRealityControllerMappingProfile profile, SupportedControllerType controllerType, SerializedProperty interactionsList, Handedness handedness = Handedness.None, bool isLocked = false)
         {
-            window = (ControllerPopupWindow)CreateInstance(typeof(ControllerPopupWindow));
             var handednessTitleText = handedness != Handedness.None ? $"{handedness} Hand " : string.Empty;
+
+            if (window != null)
+            {
+                window.Close();
+            }
+
+            window = (ControllerPopupWindow)CreateInstance(typeof(ControllerPopupWindow));
             window.titleContent = new GUIContent($"{controllerType} {handednessTitleText}Input Action Assignment");
-            window.currentControllerType = controllerType;
-            window.currentHandedness = handedness;
             window.isLocked = isLocked;
+            window.mappingProfile = profile;
+            window.currentHandedness = handedness;
+            window.currentControllerType = controllerType;
             window.currentInteractionList = interactionsList;
+            window.currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(profile, controllerType, handedness);
+
             isMouseInRects = new bool[interactionsList.arraySize];
-            mappingProfile = profile;
+
             var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(EditorWindowOptionsPath);
 
             if (asset == null)
@@ -253,8 +274,9 @@ namespace XRTK.Inspectors
                 }
             }
 
+            var windowSize = new Vector2(window.IsCustomController || window.currentControllerTexture == null ? 896f : 768f, 512f);
+
             window.ShowUtility();
-            var windowSize = new Vector2(controllerType == SupportedControllerType.GenericOpenVR || controllerType == SupportedControllerType.GenericUnity ? 896f : 768f, 512f);
             window.maxSize = windowSize;
             window.minSize = windowSize;
             window.CenterOnMainWin();
@@ -290,26 +312,30 @@ namespace XRTK.Inspectors
 
             try
             {
-                RenderInteractionList(currentInteractionList, IsCustomController);
+                RenderInteractionList(currentInteractionList, IsCustomController || currentControllerTexture == null);
             }
-            catch (Exception e)
+            catch
             {
-                Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                Close();
             }
         }
 
         private void RenderInteractionList(SerializedProperty interactionList, bool useCustomInteractionMapping)
         {
             GUI.enabled = !isLocked;
-            if (interactionList == null) { throw new Exception("No interaction list found!"); }
 
+            if (interactionList == null)
+            {
+                Debug.LogError("No interaction list found!");
+                Close();
+                return;
+            }
 
             bool noInteractions = interactionList.arraySize == 0;
 
             if (currentControllerOption != null)
             {
-                if (currentControllerOption.IsLabelFlipped == null ||
-                    currentControllerOption.IsLabelFlipped.Length != interactionList.arraySize)
+                if (currentControllerOption.IsLabelFlipped.Length != interactionList.arraySize)
                 {
                     var newArray = new bool[interactionList.arraySize];
 
@@ -321,8 +347,7 @@ namespace XRTK.Inspectors
                     currentControllerOption.IsLabelFlipped = newArray;
                 }
 
-                if (currentControllerOption.InputLabelPositions == null ||
-                    currentControllerOption.InputLabelPositions.Length != interactionList.arraySize)
+                if (currentControllerOption.InputLabelPositions.Length != interactionList.arraySize)
                 {
                     var newArray = new Vector2[interactionList.arraySize];
 
@@ -336,6 +361,11 @@ namespace XRTK.Inspectors
             }
 
             GUILayout.BeginVertical();
+
+            if (useCustomInteractionMapping)
+            {
+                useCustomInteractionMapping = !(currentControllerType == SupportedControllerType.WindowsMixedReality && currentHandedness == Handedness.None);
+            }
 
             if (useCustomInteractionMapping)
             {
@@ -434,7 +464,7 @@ namespace XRTK.Inspectors
             for (int i = 0; i < interactionList.arraySize; i++)
             {
                 EditorGUILayout.BeginHorizontal();
-                SerializedProperty interaction = interactionList.GetArrayElementAtIndex(i);
+                var interaction = interactionList.GetArrayElementAtIndex(i);
 
                 if (useCustomInteractionMapping)
                 {
@@ -457,8 +487,8 @@ namespace XRTK.Inspectors
 
                     switch ((AxisType)interactionAxisConstraint.intValue)
                     {
+                        // case AxisType.None:
                         default:
-                        case AxisType.None:
                             labels = actionLabels;
                             ids = actionIds;
                             break;
@@ -600,14 +630,17 @@ namespace XRTK.Inspectors
                     var actionId = action.FindPropertyRelative("id");
                     var actionDescription = action.FindPropertyRelative("description");
                     var actionConstraint = action.FindPropertyRelative("axisConstraint");
+                    var invertXAxis = interaction.FindPropertyRelative("invertXAxis");
+                    var invertYAxis = interaction.FindPropertyRelative("invertYAxis");
 
-                    GUIContent[] labels;
                     int[] ids;
+                    GUIContent[] labels;
+                    var axisConstraint = (AxisType)interactionAxisConstraint.intValue;
 
-                    switch ((AxisType)interactionAxisConstraint.intValue)
+                    switch (axisConstraint)
                     {
+                        // case AxisType.None:
                         default:
-                        case AxisType.None:
                             labels = actionLabels;
                             ids = actionIds;
                             break;
@@ -647,54 +680,120 @@ namespace XRTK.Inspectors
                     {
                         bool skip = false;
                         var description = interactionDescription.stringValue;
+
                         if (currentControllerType == SupportedControllerType.WindowsMixedReality && currentHandedness == Handedness.None)
                         {
-                            if (description == "Grip Press" ||
-                                description == "Trigger Position" ||
-                                description == "Trigger Touched" ||
-                                description == "Touchpad Position" ||
-                                description == "Touchpad Touch" ||
-                                description == "Touchpad Press" ||
-                                description == "Menu Press" ||
-                                description == "Thumbstick Position" ||
-                                description == "Thumbstick Press"
-                                )
+                            switch (description)
                             {
-                                skip = true;
-                            }
-
-                            if (description == "Trigger Press (Select)")
-                            {
-                                description = "Air Tap (Select)";
+                                case "Grip Press":
+                                case "Trigger Position":
+                                case "Trigger Touched":
+                                case "Touchpad Position":
+                                case "Touchpad Touch":
+                                case "Touchpad Press":
+                                case "Menu Press":
+                                case "Thumbstick Position":
+                                case "Thumbstick Press":
+                                    skip = true;
+                                    break;
+                                case "Trigger Press (Select)":
+                                    description = "Air Tap (Select)";
+                                    break;
                             }
                         }
 
                         if (!skip)
                         {
+                            var currentLabelWidth = EditorGUIUtility.labelWidth;
+
+                            if (axisConstraint == AxisType.SingleAxis ||
+                                axisConstraint == AxisType.DualAxis)
+                            {
+                                EditorGUIUtility.labelWidth = 12f;
+                                EditorGUILayout.LabelField("Invert:");
+                                invertXAxis.boolValue = EditorGUILayout.Toggle("X", invertXAxis.boolValue);
+                            }
+
+                            if (axisConstraint == AxisType.DualAxis)
+                            {
+                                invertYAxis.boolValue = EditorGUILayout.Toggle("Y", invertYAxis.boolValue);
+                            }
+
+                            EditorGUIUtility.labelWidth = currentLabelWidth;
                             actionId.intValue = EditorGUILayout.IntPopup(GUIContent.none, actionId.intValue, labels, ids, GUILayout.Width(80f));
                             EditorGUILayout.LabelField(description, GUILayout.ExpandWidth(true));
+                            GUILayout.FlexibleSpace();
                         }
                     }
                     else
                     {
+                        var flipped = currentControllerOption.IsLabelFlipped[i];
                         var rectPosition = currentControllerOption.InputLabelPositions[i];
-                        var rectSize = InputActionLabelPosition + InputActionDropdownPosition + new Vector2(currentControllerOption.IsLabelFlipped[i] ? 0f : 8f, EditorGUIUtility.singleLineHeight);
+                        var rectSize = InputActionLabelPosition + InputActionDropdownPosition + new Vector2(flipped ? 0f : 8f, EditorGUIUtility.singleLineHeight);
+
                         GUI.Box(new Rect(rectPosition, rectSize), GUIContent.none, EditorGUIUtility.isProSkin ? "ObjectPickerBackground" : "ObjectPickerResultsEven");
-                        var offset = currentControllerOption.IsLabelFlipped[i] ? InputActionLabelPosition : Vector2.zero;
+
+                        var offset = flipped ? InputActionLabelPosition : Vector2.zero;
                         var popupRect = new Rect(rectPosition + offset, new Vector2(InputActionDropdownPosition.x, EditorGUIUtility.singleLineHeight));
 
                         actionId.intValue = EditorGUI.IntPopup(popupRect, actionId.intValue, labels, ids);
-                        offset = currentControllerOption.IsLabelFlipped[i] ? Vector2.zero : InputActionDropdownPosition;
+                        offset = flipped ? Vector2.zero : InputActionDropdownPosition;
                         var labelRect = new Rect(rectPosition + offset, new Vector2(InputActionLabelPosition.x, EditorGUIUtility.singleLineHeight));
-                        EditorGUI.LabelField(labelRect, interactionDescription.stringValue, currentControllerOption.IsLabelFlipped[i] ? flippedLabelStyle : EditorStyles.label);
+                        EditorGUI.LabelField(labelRect, interactionDescription.stringValue, flipped ? flippedLabelStyle : EditorStyles.label);
 
-                        if (editInputActionPositions)
+                        if (!editInputActionPositions)
                         {
-                            offset = currentControllerOption.IsLabelFlipped[i] ? InputActionLabelPosition + InputActionDropdownPosition + HorizontalSpace : InputActionFlipTogglePosition;
+                            offset = flipped
+                                ? InputActionLabelPosition + InputActionDropdownPosition + HorizontalSpace
+                                : Vector2.zero;
+
+                            if (axisConstraint == AxisType.SingleAxis ||
+                                axisConstraint == AxisType.DualAxis)
+                            {
+                                if (!flipped)
+                                {
+                                    if (axisConstraint == AxisType.DualAxis)
+                                    {
+                                        offset += new Vector2(-112f, 0f);
+                                    }
+                                    else
+                                    {
+                                        offset += new Vector2(-76f, 0f);
+                                    }
+                                }
+
+                                var boxSize = axisConstraint == AxisType.DualAxis ? new Vector2(112f, EditorGUIUtility.singleLineHeight) : new Vector2(76f, EditorGUIUtility.singleLineHeight);
+
+                                GUI.Box(new Rect(rectPosition + offset, boxSize), GUIContent.none, EditorGUIUtility.isProSkin ? "ObjectPickerBackground" : "ObjectPickerResultsEven");
+
+                                labelRect = new Rect(rectPosition + offset, new Vector2(48f, EditorGUIUtility.singleLineHeight));
+                                EditorGUI.LabelField(labelRect, "Invert X", flipped ? flippedLabelStyle : EditorStyles.label);
+                                offset += new Vector2(52f, 0f);
+                                var toggleXAxisRect = new Rect(rectPosition + offset, new Vector2(12f, EditorGUIUtility.singleLineHeight));
+                                invertXAxis.boolValue = EditorGUI.Toggle(toggleXAxisRect, invertXAxis.boolValue);
+                            }
+
+                            if (axisConstraint == AxisType.DualAxis)
+                            {
+                                offset += new Vector2(24f, 0f);
+                                labelRect = new Rect(rectPosition + offset, new Vector2(8f, EditorGUIUtility.singleLineHeight));
+                                EditorGUI.LabelField(labelRect, "Y", flipped ? flippedLabelStyle : EditorStyles.label);
+                                offset += new Vector2(12f, 0f);
+                                var toggleYAxisRect = new Rect(rectPosition + offset, new Vector2(12f, EditorGUIUtility.singleLineHeight));
+                                invertYAxis.boolValue = EditorGUI.Toggle(toggleYAxisRect, invertYAxis.boolValue);
+                            }
+                        }
+                        else
+                        {
+                            offset = flipped
+                                ? InputActionLabelPosition + InputActionDropdownPosition + HorizontalSpace
+                                : InputActionFlipTogglePosition;
+
                             var toggleRect = new Rect(rectPosition + offset, new Vector2(-InputActionFlipTogglePosition.x, EditorGUIUtility.singleLineHeight));
 
                             EditorGUI.BeginChangeCheck();
-                            currentControllerOption.IsLabelFlipped[i] = EditorGUI.Toggle(toggleRect, currentControllerOption.IsLabelFlipped[i]);
+
+                            currentControllerOption.IsLabelFlipped[i] = EditorGUI.Toggle(toggleRect, flipped);
 
                             if (EditorGUI.EndChangeCheck())
                             {
@@ -710,24 +809,21 @@ namespace XRTK.Inspectors
 
                             if (!isMouseInRects.Any(value => value) || isMouseInRects[i])
                             {
-                                if (Event.current.type == EventType.MouseDrag && labelRect.Contains(Event.current.mousePosition) && !isMouseInRects[i])
+                                switch (Event.current.type)
                                 {
-                                    isMouseInRects[i] = true;
-                                    mouseDragOffset = Event.current.mousePosition - currentControllerOption.InputLabelPositions[i];
-                                }
-                                else if (Event.current.type == EventType.Repaint && isMouseInRects[i])
-                                {
-                                    currentControllerOption.InputLabelPositions[i] = Event.current.mousePosition - mouseDragOffset;
-                                }
-                                else if (Event.current.type == EventType.DragUpdated && isMouseInRects[i])
-                                {
-                                    currentControllerOption.InputLabelPositions[i] = Event.current.mousePosition - mouseDragOffset;
-                                }
-                                else if (Event.current.type == EventType.MouseUp && isMouseInRects[i])
-                                {
-                                    currentControllerOption.InputLabelPositions[i] = Event.current.mousePosition - mouseDragOffset;
-                                    mouseDragOffset = Vector2.zero;
-                                    isMouseInRects[i] = false;
+                                    case EventType.MouseDrag when labelRect.Contains(Event.current.mousePosition) && !isMouseInRects[i]:
+                                        isMouseInRects[i] = true;
+                                        mouseDragOffset = Event.current.mousePosition - currentControllerOption.InputLabelPositions[i];
+                                        break;
+                                    case EventType.Repaint when isMouseInRects[i]:
+                                    case EventType.DragUpdated when isMouseInRects[i]:
+                                        currentControllerOption.InputLabelPositions[i] = Event.current.mousePosition - mouseDragOffset;
+                                        break;
+                                    case EventType.MouseUp when isMouseInRects[i]:
+                                        currentControllerOption.InputLabelPositions[i] = Event.current.mousePosition - mouseDragOffset;
+                                        mouseDragOffset = Vector2.zero;
+                                        isMouseInRects[i] = false;
+                                        break;
                                 }
                             }
                         }
@@ -735,9 +831,9 @@ namespace XRTK.Inspectors
 
                     if (EditorGUI.EndChangeCheck())
                     {
-                        MixedRealityInputAction inputAction = actionId.intValue == 0 ?
-                            MixedRealityInputAction.None :
-                           inputSystemProfile.InputActionsProfile.InputActions[actionId.intValue - 1];
+                        var inputAction = actionId.intValue == 0
+                            ? MixedRealityInputAction.None
+                            : inputSystemProfile.InputActionsProfile.InputActions[actionId.intValue - 1];
                         actionId.intValue = (int)inputAction.Id;
                         actionDescription.stringValue = inputAction.Description;
                         actionConstraint.enumValueIndex = (int)inputAction.AxisConstraint;
@@ -759,13 +855,13 @@ namespace XRTK.Inspectors
 
         private static void RenderAxisPopup(SerializedProperty axisCode, float customLabelWidth)
         {
-            var axisId = -1;
+            int axisId = -1;
 
-            for (int j = 0; j < ControllerMappingLibrary.UnityInputManagerAxes.Length; j++)
+            for (int i = 0; i < axisLabels.Length; i++)
             {
-                if (ControllerMappingLibrary.UnityInputManagerAxes[j].Name == axisCode.stringValue)
+                if (axisLabels[i].text.Equals(axisCode.stringValue))
                 {
-                    axisId = j + 1;
+                    axisId = i;
                     break;
                 }
             }
@@ -775,23 +871,10 @@ namespace XRTK.Inspectors
 
             if (EditorGUI.EndChangeCheck())
             {
-                if (axisId == 0)
-                {
-                    axisCode.stringValue = string.Empty;
-                    axisCode.serializedObject.ApplyModifiedProperties();
-                }
-                else
-                {
-                    for (int j = 0; j < ControllerMappingLibrary.UnityInputManagerAxes.Length; j++)
-                    {
-                        if (axisId - 1 == j)
-                        {
-                            axisCode.stringValue = ControllerMappingLibrary.UnityInputManagerAxes[j].Name;
-                            axisCode.serializedObject.ApplyModifiedProperties();
-                            break;
-                        }
-                    }
-                }
+                axisCode.stringValue = axisId == 0
+                    ? string.Empty
+                    : axisLabels[axisId].text;
+                axisCode.serializedObject.ApplyModifiedProperties();
             }
         }
     }

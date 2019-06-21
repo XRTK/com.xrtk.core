@@ -4,7 +4,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
+using XRTK.EventDatum.Input;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.InputSystem.Handlers;
+using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Hands
@@ -80,13 +83,13 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public void OnSourceDetected(SourceStateEventData eventData)
         {
+
         }
 
         /// <inheritdoc />
         public void OnSourceLost(SourceStateEventData eventData)
         {
             var hand = eventData.Controller as IMixedRealityHand;
-
             if (hand != null)
             {
                 Bounds.Remove(hand.ControllerHandedness);

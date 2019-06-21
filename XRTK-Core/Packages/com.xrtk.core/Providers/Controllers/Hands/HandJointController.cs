@@ -3,15 +3,15 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Definitions;
+using XRTK.Definitions.Devices;
+using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Providers.Controllers.Hands
 {
-    [MixedRealityDataProvider(
-        typeof(IMixedRealityInputSystem),
-        (SupportedPlatforms)(-1), // All platforms supported by Unity
-        "Hand Joint Service")]
-    [DocLink("https://microsoft.github.io/MixedRealityToolkit-Unity/Documentation/InputSystem/HandTracking.html")]
-    public class HandJointService : BaseInputDeviceManager, IMixedRealityHandJointService
+    public class HandJointController : BaseControllerDataProvider, IMixedRealityHandJointService
     {
         private IMixedRealityHand leftHand;
         private IMixedRealityHand rightHand;
@@ -21,12 +21,12 @@ namespace XRTK.Providers.Controllers.Hands
 
         #region BaseInputDeviceManager Implementation
 
-        public HandJointService(
+        public HandJointController(
             IMixedRealityServiceRegistrar registrar,
             IMixedRealityInputSystem inputSystem,
             string name,
             uint priority,
-            BaseMixedRealityProfile profile) : base(registrar, inputSystem, name, priority, profile) { }
+            BaseMixedRealityProfile profile) : base(name, priority, profile) { }
 
         /// <inheritdoc />
         public override void LateUpdate()

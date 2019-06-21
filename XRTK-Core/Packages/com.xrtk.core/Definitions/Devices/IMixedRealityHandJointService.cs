@@ -3,13 +3,14 @@
 
 using UnityEngine;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Definitions.Devices
 {
     /// <summary>
     /// Mixed Reality Toolkit device definition, used to instantiate and manage a specific device / SDK
     /// </summary>
-    public interface IMixedRealityHandJointService : IMixedRealityInputDeviceManager
+    public interface IMixedRealityHandJointService : IMixedRealityControllerDataProvider
     {
         /// <summary>
         /// Get a game object following the hand joint.

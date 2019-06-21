@@ -3,9 +3,9 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Definitions.HandTracking;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Input;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
@@ -23,31 +23,14 @@ namespace XRTK.Providers.Controllers.Hands
         protected readonly Dictionary<TrackedHandJoint, Transform> joints = new Dictionary<TrackedHandJoint, Transform>();
         protected MeshFilter handMeshFilter;
 
-        private IMixedRealityInputSystem inputSystem = null;
-
-        /// <summary>
-        /// The active instance of the input system.
-        /// </summary>
-        protected IMixedRealityInputSystem InputSystem
-        {
-            get
-            {
-                if (inputSystem == null)
-                {
-                    inputSystem = MixedRealityToolkit.GetService<IMixedRealityInputSystem>();
-                }
-                return inputSystem;
-            }
-        }
-
         private void OnEnable()
         {
-            InputSystem?.Register(gameObject);
+            MixedRealityToolkit.InputSystem?.Register(gameObject);
         }
 
         private void OnDisable()
         {
-            InputSystem?.Unregister(gameObject);
+            MixedRealityToolkit.InputSystem?.Unregister(gameObject);
         }
 
         private void OnDestroy()
@@ -97,7 +80,7 @@ namespace XRTK.Providers.Controllers.Hands
                 return;
             }
 
-            MixedRealityHandTrackingProfile handTrackingProfile = InputSystem?.InputSystemProfile.HandTrackingProfile;
+            MixedRealityHandTrackingProfile handTrackingProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.HandTrackingProfile;
             if (handTrackingProfile != null && !handTrackingProfile.EnableHandJointVisualization)
             {
                 // clear existing joint GameObjects / meshes
@@ -120,14 +103,14 @@ namespace XRTK.Providers.Controllers.Hands
                 }
                 else
                 {
-                    GameObject prefab = InputSystem.InputSystemProfile.HandTrackingProfile.JointPrefab;
+                    GameObject prefab = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.HandTrackingProfile.JointPrefab;
                     if (handJoint == TrackedHandJoint.Palm)
                     {
-                        prefab = InputSystem.InputSystemProfile.HandTrackingProfile.PalmJointPrefab;
+                        prefab = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.HandTrackingProfile.PalmJointPrefab;
                     }
                     else if (handJoint == TrackedHandJoint.IndexTip)
                     {
-                        prefab = InputSystem.InputSystemProfile.HandTrackingProfile.FingerTipPrefab;
+                        prefab = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.HandTrackingProfile.FingerTipPrefab;
                     }
 
                     GameObject jointObject;
@@ -158,9 +141,9 @@ namespace XRTK.Providers.Controllers.Hands
             }
 
             if (handMeshFilter == null &&
-                InputSystem?.InputSystemProfile?.HandTrackingProfile?.HandMeshPrefab != null)
+                MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.HandTrackingProfile?.HandMeshPrefab != null)
             {
-                handMeshFilter = Instantiate(InputSystem.InputSystemProfile.HandTrackingProfile.HandMeshPrefab).GetComponent<MeshFilter>();
+                handMeshFilter = Instantiate(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.HandTrackingProfile.HandMeshPrefab).GetComponent<MeshFilter>();
             }
 
             if (handMeshFilter != null)

@@ -8,6 +8,7 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Hands
 {
@@ -34,7 +35,7 @@ namespace XRTK.Providers.Controllers.Hands
             leftHand = null;
             rightHand = null;
 
-            foreach (var detectedController in InputSystem.DetectedControllers)
+            foreach (var detectedController in MixedRealityToolkit.InputSystem.DetectedControllers)
             {
                 var hand = detectedController as IMixedRealityHand;
                 if (hand != null)

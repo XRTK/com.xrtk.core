@@ -45,29 +45,17 @@ namespace XRTK.Inspectors.Profiles
 
             thisProfile.CheckProfileLock();
 
-            using (new GUIEnabledWrapper(!IsProfileLock((BaseMixedRealityProfile)target)))
-            {
-                serializedObject.Update();
+            serializedObject.Update();
 
-                EditorGUILayout.LabelField("General settings", EditorStyles.boldLabel);
-                EditorGUILayout.PropertyField(jointPrefab);
-                EditorGUILayout.PropertyField(palmPrefab);
-                EditorGUILayout.PropertyField(fingertipPrefab);
-                EditorGUILayout.PropertyField(handMeshPrefab);
-                EditorGUILayout.PropertyField(enableHandMeshVisualization);
-                EditorGUILayout.PropertyField(enableHandJointVisualization);
+            EditorGUILayout.LabelField("General settings", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(jointPrefab);
+            EditorGUILayout.PropertyField(palmPrefab);
+            EditorGUILayout.PropertyField(fingertipPrefab);
+            EditorGUILayout.PropertyField(handMeshPrefab);
+            EditorGUILayout.PropertyField(enableHandMeshVisualization);
+            EditorGUILayout.PropertyField(enableHandJointVisualization);
 
-                serializedObject.ApplyModifiedProperties();
-            }
+            serializedObject.ApplyModifiedProperties();
         }
-
-        //protected override bool IsProfileInActiveInstance()
-        //{
-        //    var profile = target as BaseMixedRealityProfile;
-        //    return MixedRealityToolkit.IsInitialized &&
-        //           MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile != null &&
-        //           profile != null &&
-        //           profile == MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.HandTrackingProfile;
-        //}
     }
 }

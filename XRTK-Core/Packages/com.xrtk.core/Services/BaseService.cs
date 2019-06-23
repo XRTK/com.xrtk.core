@@ -31,6 +31,9 @@ namespace XRTK.Services
         public virtual void Update() { }
 
         /// <inheritdoc />
+        public virtual void LateUpdate() { }
+
+        /// <inheritdoc />
         public virtual void Disable() { }
 
         /// <inheritdoc />
@@ -38,7 +41,7 @@ namespace XRTK.Services
 
         /// <inheritdoc />
         public virtual void OnApplicationFocus(bool isFocused) { }
-        
+
         /// <inheritdoc />
         public void OnApplicationPause(bool isPaused) { }
 

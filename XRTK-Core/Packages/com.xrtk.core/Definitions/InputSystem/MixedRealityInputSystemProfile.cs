@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Attributes;
+using XRTK.Definitions.HandTracking;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
@@ -142,6 +143,19 @@ namespace XRTK.Definitions.InputSystem
         {
             get => controllerVisualizationProfile;
             internal set => controllerVisualizationProfile = value;
+        }
+
+        [SerializeField]
+        [Tooltip("Profile for configuring Hands tracking.")]
+        private MixedRealityHandTrackingProfile handTrackingProfile;
+
+        /// <summary>
+        /// Active profile for hands tracking
+        /// </summary>
+        public MixedRealityHandTrackingProfile HandTrackingProfile
+        {
+            get { return handTrackingProfile; }
+            private set { handTrackingProfile = value; }
         }
 
         private IMixedRealityFocusProvider focusProvider;

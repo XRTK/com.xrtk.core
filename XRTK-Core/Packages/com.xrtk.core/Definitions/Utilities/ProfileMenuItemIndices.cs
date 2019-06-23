@@ -28,5 +28,6 @@ namespace XRTK.Definitions.Utilities
         Diagnostics,
         RegisteredServiceProviders,
         Settings,
+        HandTracking
     }
 }

@@ -38,6 +38,18 @@ namespace XRTK.Interfaces.Providers.Controllers
         IMixedRealityControllerVisualizer Visualizer { get; }
 
         /// <summary>
+        /// The controller's angular velocity, if any.
+        /// Angular velocity refers to how fast an object rotates or revolves relative
+        /// to another point.
+        /// </summary>
+        UnityEngine.Vector3 AngularVelocity { get; }
+
+        /// <summary>
+        /// The controller's velocity, if any.
+        /// </summary>
+        UnityEngine.Vector3 Velocity { get; }
+
+        /// <summary>
         /// Indicates that this controller is currently providing position data.
         /// </summary>
         /// <remarks>

@@ -9,6 +9,7 @@ using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Events;
+using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Interfaces.InputSystem
 {
@@ -601,6 +602,26 @@ namespace XRTK.Interfaces.InputSystem
         void RaiseDictationError(IMixedRealityInputSource source, string dictationResult, AudioClip dictationAudioClip = null);
 
         #endregion Dictation Events
+
+        #region Hand Events
+
+        /// <summary>
+        /// Notify system that articulated hand joint info has been updated
+        /// </summary>
+        void RaiseHandJointsUpdated(IMixedRealityInputSource source, Handedness handedness, IDictionary<TrackedHandJoint, MixedRealityPose> jointPoses);
+
+        /// <summary>
+        /// Notify system that articulated hand mesh has been updated
+        /// </summary>
+        void RaiseHandMeshUpdated(IMixedRealityInputSource source, Handedness handedness, HandMeshUpdatedEventData handMeshInfo);
+
+        void RaiseOnTouchStarted(IMixedRealityInputSource source, IMixedRealityController controller, Handedness handedness, Vector3 touchPoint);
+
+        void RaiseOnTouchUpdated(IMixedRealityInputSource source, IMixedRealityController controller, Handedness handedness, Vector3 touchPoint);
+
+        void RaiseOnTouchCompleted(IMixedRealityInputSource source, IMixedRealityController controller, Handedness handedness, Vector3 touchPoint);
+
+        #endregion Hand Events
 
         #endregion Input Events
     }

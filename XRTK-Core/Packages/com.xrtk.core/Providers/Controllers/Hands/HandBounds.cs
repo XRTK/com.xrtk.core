@@ -101,7 +101,7 @@ namespace XRTK.Providers.Controllers.Hands
         #region IMixedRealityHandJointHandler Implementation
 
         /// <inheritdoc />
-        public void OnHandJointsUpdated(InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> eventData)
+        public void OnJointUpdated(InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> eventData)
         {
             MixedRealityPose palmPose;
 

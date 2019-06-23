@@ -22,8 +22,8 @@ namespace XRTK.Providers.Controllers.OpenVR
             {
                 ControllerMappings = new[]
                 {
-                    new MixedRealityControllerMapping("Oculus Touch Controller Left", typeof(OculusTouchController), Handedness.Left),
-                    new MixedRealityControllerMapping("Oculus Touch Controller Right", typeof(OculusTouchController), Handedness.Right),
+                    new MixedRealityControllerMapping("Oculus Touch Controller Left", typeof(OculusTouchOpenVRController), Handedness.Left),
+                    new MixedRealityControllerMapping("Oculus Touch Controller Right", typeof(OculusTouchOpenVRController), Handedness.Right),
                 };
             }
 

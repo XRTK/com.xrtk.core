@@ -13,6 +13,10 @@ namespace XRTK.Interfaces.InputSystem.Handlers
     /// </summary>
     public interface IMixedRealityHandJointHandler : IEventSystemHandler
     {
-        void OnHandJointsUpdated(InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> eventData);
+        /// <summary>
+        /// When a join is updated, this handler receives the event.
+        /// </summary>
+        /// <param name="eventData">Contains information about the HandTrackingInputSource.</param>
+        void OnJointUpdated(InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> eventData);
     }
 }

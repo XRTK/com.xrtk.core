@@ -42,10 +42,14 @@ namespace XRTK.Interfaces
         void Update();
 
         /// <summary>
-        /// Optional Update function to perform per-frame updates of the service.
-        /// LateUpdate is called after all Update functions have been called.
+        /// Optional LateUpdate function to perform updates after the end of the last Update cycle.
         /// </summary>
         void LateUpdate();
+
+        /// <summary>
+        /// Optional FixedUpdate function to perform updates that are fixed to the Physics timestep.
+        /// </summary>
+        void FixedUpdate();
 
         /// <summary>
         /// Optional Disable function to pause the service.

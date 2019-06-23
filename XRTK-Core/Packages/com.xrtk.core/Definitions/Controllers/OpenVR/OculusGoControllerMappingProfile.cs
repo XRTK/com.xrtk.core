@@ -22,7 +22,7 @@ namespace XRTK.Providers.Controllers.OpenVR
             {
                 ControllerMappings = new[]
                 {
-                    new MixedRealityControllerMapping("Oculus Go Controller", typeof(OculusGoController), Handedness.Both),
+                    new MixedRealityControllerMapping("Oculus Go Controller", typeof(OculusGoOpenVRController), Handedness.Both),
                 };
             }
 

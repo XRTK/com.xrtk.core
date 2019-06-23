@@ -21,7 +21,7 @@ namespace XRTK.Providers.Controllers.OpenVR
             {
                 ControllerMappings = new[]
                 {
-                    new MixedRealityControllerMapping("Oculus Remote Controller", typeof(OculusRemoteController)),
+                    new MixedRealityControllerMapping("Oculus Remote Controller", typeof(OculusRemoteOpenVRController)),
                 };
             }
 

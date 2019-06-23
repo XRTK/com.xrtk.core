@@ -9,9 +9,6 @@ using XRTK.Interfaces.InputSystem;
 
 namespace XRTK.Services.InputSimulationSystem
 {
-    [MixedRealityController(
-        SupportedControllerType.GGVHand,
-        new[] { Handedness.Left, Handedness.Right })]
     public class SimulatedGestureHand : SimulatedHand
     {
         public override HandSimulationMode SimulationMode => HandSimulationMode.Gestures;
@@ -83,7 +80,8 @@ namespace XRTK.Services.InputSimulationSystem
                     }
                 }
 
-                useRailsNavigation = gestureProfile.UseRailsNavigation;
+                // TODO: ?
+                //useRailsNavigation = gestureProfile.UseRailsNavigation;
             }
 
             var inputSimProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSimulationSystemProfile;

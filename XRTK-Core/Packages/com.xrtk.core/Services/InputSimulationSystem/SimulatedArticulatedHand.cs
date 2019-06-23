@@ -10,9 +10,6 @@ using XRTK.Utilities;
 
 namespace XRTK.Services.InputSimulationSystem
 {
-    [MixedRealityController(
-        SupportedControllerType.ArticulatedHand,
-        new[] { Handedness.Left, Handedness.Right })]
     public class SimulatedArticulatedHand : SimulatedHand
     {
         public override HandSimulationMode SimulationMode => HandSimulationMode.Articulated;
@@ -83,15 +80,15 @@ namespace XRTK.Services.InputSimulationSystem
             {
                 if (IsPositionAvailable && IsRotationAvailable)
                 {
-                    InputSystem?.RaiseSourcePoseChanged(InputSource, this, currentGripPose);
+                    MixedRealityToolkit.InputSystem.RaiseSourcePoseChanged(InputSource, this, currentGripPose);
                 }
                 else if (IsPositionAvailable && !IsRotationAvailable)
                 {
-                    InputSystem?.RaiseSourcePositionChanged(InputSource, this, currentPointerPosition);
+                    MixedRealityToolkit.InputSystem.RaiseSourcePositionChanged(InputSource, this, currentPointerPosition);
                 }
                 else if (!IsPositionAvailable && IsRotationAvailable)
                 {
-                    InputSystem?.RaiseSourceRotationChanged(InputSource, this, currentPointerRotation);
+                    MixedRealityToolkit.InputSystem.RaiseSourceRotationChanged(InputSource, this, currentPointerRotation);
                 }
             }
 
@@ -103,14 +100,14 @@ namespace XRTK.Services.InputSimulationSystem
                         Interactions[i].PoseData = currentPointerPose;
                         if (Interactions[i].Changed)
                         {
-                            InputSystem?.RaisePoseInputChanged(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction, currentPointerPose);
+                            MixedRealityToolkit.InputSystem.RaisePoseInputChanged(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction, currentPointerPose);
                         }
                         break;
                     case DeviceInputType.SpatialGrip:
                         Interactions[i].PoseData = currentGripPose;
                         if (Interactions[i].Changed)
                         {
-                            InputSystem?.RaisePoseInputChanged(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction, currentGripPose);
+                            MixedRealityToolkit.InputSystem.RaisePoseInputChanged(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction, currentGripPose);
                         }
                         break;
                     case DeviceInputType.Select:
@@ -120,11 +117,11 @@ namespace XRTK.Services.InputSimulationSystem
                         {
                             if (Interactions[i].BoolData)
                             {
-                                InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+                                MixedRealityToolkit.InputSystem.RaiseOnInputDown(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
                             }
                             else
                             {
-                                InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+                                MixedRealityToolkit.InputSystem.RaiseOnInputUp(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
                             }
                         }
                         break;
@@ -135,11 +132,11 @@ namespace XRTK.Services.InputSimulationSystem
                         {
                             if (Interactions[i].BoolData)
                             {
-                                InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+                                MixedRealityToolkit.InputSystem.RaiseOnInputDown(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
                             }
                             else
                             {
-                                InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+                                MixedRealityToolkit.InputSystem.RaiseOnInputUp(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
                             }
                         }
                         break;
@@ -147,7 +144,7 @@ namespace XRTK.Services.InputSimulationSystem
                         Interactions[i].PoseData = currentIndexPose;
                         if (Interactions[i].Changed)
                         {
-                            InputSystem?.RaisePoseInputChanged(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction, currentIndexPose);
+                            MixedRealityToolkit.InputSystem.RaisePoseInputChanged(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction, currentIndexPose);
                         }
                         break;
                 }

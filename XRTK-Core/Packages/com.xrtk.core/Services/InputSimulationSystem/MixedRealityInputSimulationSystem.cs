@@ -11,20 +11,16 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSimulationSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Providers.Controllers;
 using XRTK.Utilities;
 
 namespace XRTK.Services.InputSimulationSystem
 {
-    [MixedRealityDataProvider(
-        typeof(IMixedRealityInputSystem),
-        SupportedPlatforms.WindowsEditor,
-        "Input Simulation Service",
-        "Profiles/DefaultMixedRealityInputSimulationProfile.asset",
-        "MixedRealityToolkit.SDK")]
-    public class MixedRealityInputSimulationSystem : BaseInputDeviceManager, IMixedRealityInputSimulationSystem, IMixedRealityEyeGazeDataProvider
+    public class MixedRealityInputSimulationSystem : BaseControllerDataProvider, IMixedRealityInputSimulationSystem //, IMixedRealityEyeGazeDataProvider
     {
         private ManualCameraControl cameraControl = null;
         private SimulatedHandDataProvider handDataProvider = null;
+        private MixedRealityInputSimulationSystemProfile profile;
 
         public readonly SimulatedHandData HandDataLeft = new SimulatedHandData();
         public readonly SimulatedHandData HandDataRight = new SimulatedHandData();
@@ -52,12 +48,13 @@ namespace XRTK.Services.InputSimulationSystem
         #region BaseInputDeviceManager Implementation
 
         public MixedRealityInputSimulationSystem(
-            IMixedRealityServiceRegistrar registrar,
-            IMixedRealityInputSystem inputSystem,
             string name,
             uint priority,
             MixedRealityInputSimulationSystemProfile profile)
-            : base(registrar, inputSystem, name, priority, profile) { }
+            : base(name, priority, null)
+        {
+            this.profile = profile;
+        }
 
         /// <inheritdoc />
         public override IMixedRealityController[] GetActiveControllers()
@@ -86,8 +83,6 @@ namespace XRTK.Services.InputSimulationSystem
         /// <inheritdoc />
         public override void Update()
         {
-            var profile = InputSimulationProfile;
-
             if (profile.IsCameraControlEnabled)
             {
                 EnableCameraControl();
@@ -101,10 +96,10 @@ namespace XRTK.Services.InputSimulationSystem
                 DisableCameraControl();
             }
 
-            if (profile.SimulateEyePosition)
-            {
-                InputSystem?.EyeGazeProvider?.UpdateEyeGaze(this, new Ray(CameraCache.Main.transform.position, CameraCache.Main.transform.forward), DateTime.UtcNow);
-            }
+            //if (profile.SimulateEyePosition)
+            //{
+            //    MixedRealityToolkit.InputSystem.EyeGazeProvider?.UpdateEyeGaze(this, new Ray(CameraCache.Main.transform.position, CameraCache.Main.transform.forward), DateTime.UtcNow);
+            //}
 
             switch (profile.HandSimulationMode)
             {
@@ -127,8 +122,6 @@ namespace XRTK.Services.InputSimulationSystem
         /// <inheritdoc />
         public override void LateUpdate()
         {
-            var profile = InputSimulationProfile;
-
             // Apply hand data in LateUpdate to ensure external changes are applied.
             // HandDataLeft/Right can be modified after the services Update() call.
             if (profile.HandSimulationMode != HandSimulationMode.Disabled)
@@ -154,32 +147,17 @@ namespace XRTK.Services.InputSimulationSystem
 
         #endregion BaseInputDeviceManager Implementation
 
-        private MixedRealityInputSimulationProfile inputSimulationProfile = null;
+        ///// <inheritdoc/>
+        //IMixedRealityEyeSaccadeProvider IMixedRealityEyeGazeDataProvider.SaccadeProvider => null;
 
-        /// <inheritdoc/>
-        public MixedRealityInputSimulationProfile InputSimulationProfile
-        {
-            get
-            {
-                if (inputSimulationProfile == null)
-                {
-                    inputSimulationProfile = ConfigurationProfile as MixedRealityInputSimulationProfile;
-                }
-                return inputSimulationProfile;
-            }
-        }
-
-        /// <inheritdoc/>
-        IMixedRealityEyeSaccadeProvider IMixedRealityEyeGazeDataProvider.SaccadeProvider => null;
-
-        /// <inheritdoc/>
-        bool IMixedRealityEyeGazeDataProvider.SmoothEyeTracking { get; set; }
+        ///// <inheritdoc/>
+        //bool IMixedRealityEyeGazeDataProvider.SmoothEyeTracking { get; set; }
 
         private void EnableCameraControl()
         {
             if (cameraControl == null)
             {
-                cameraControl = new ManualCameraControl(InputSimulationProfile);
+                cameraControl = new ManualCameraControl(MixedRealityToolkit.Instance.ActiveProfile.InputSimulationSystemProfile);
             }
         }
 
@@ -195,7 +173,7 @@ namespace XRTK.Services.InputSimulationSystem
         {
             if (handDataProvider == null)
             {
-                handDataProvider = new SimulatedHandDataProvider(InputSimulationProfile);
+                handDataProvider = new SimulatedHandDataProvider(MixedRealityToolkit.Instance.ActiveProfile.InputSimulationSystemProfile);
             }
         }
 
@@ -212,8 +190,6 @@ namespace XRTK.Services.InputSimulationSystem
         // Register input sources for hands based on changes of the data provider
         private void UpdateHandInputSource(Handedness handedness, SimulatedHandData handData)
         {
-            var profile = InputSimulationProfile;
-
             if (profile.HandSimulationMode == HandSimulationMode.Disabled)
             {
                 RemoveAllHandDevices();
@@ -257,10 +233,9 @@ namespace XRTK.Services.InputSimulationSystem
                 }
             }
 
-            SupportedControllerType st = simulationMode == HandSimulationMode.Gestures ? SupportedControllerType.GGVHand : SupportedControllerType.ArticulatedHand;
-            IMixedRealityPointer[] pointers = RequestPointers(st, handedness);
+            IMixedRealityPointer[] pointers = RequestPointers(simulationMode == HandSimulationMode.Gestures ? typeof(SimulatedGestureHand) : typeof(SimulatedArticulatedHand), handedness);
 
-            var inputSource = InputSystem?.RequestNewGenericInputSource($"{handedness} Hand", pointers, InputSourceType.Hand);
+            var inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{handedness} Hand", pointers);
             switch (simulationMode)
             {
                 case HandSimulationMode.Articulated:
@@ -281,7 +256,7 @@ namespace XRTK.Services.InputSimulationSystem
                 return null;
             }
 
-            if (!controller.SetupConfiguration(controllerType, InputSourceType.Hand))
+            if (!controller.SetupConfiguration(controllerType))
             {
                 // Controller failed to be setup correctly.
                 Debug.LogError($"Failed to Setup {controllerType} controller");
@@ -294,7 +269,7 @@ namespace XRTK.Services.InputSimulationSystem
                 controller.InputSource.Pointers[i].Controller = controller;
             }
 
-            InputSystem?.RaiseSourceDetected(controller.InputSource, controller);
+            MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);
 
             trackedHands.Add(handedness, controller);
             UpdateActiveControllers();
@@ -307,7 +282,7 @@ namespace XRTK.Services.InputSimulationSystem
             var controller = GetHandDevice(handedness);
             if (controller != null)
             {
-                InputSystem?.RaiseSourceLost(controller.InputSource, controller);
+                MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
 
                 trackedHands.Remove(handedness);
                 UpdateActiveControllers();
@@ -318,8 +293,9 @@ namespace XRTK.Services.InputSimulationSystem
         {
             foreach (var controller in trackedHands.Values)
             {
-                InputSystem?.RaiseSourceLost(controller.InputSource, controller);
+                MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
             }
+
             trackedHands.Clear();
             UpdateActiveControllers();
         }

@@ -17,7 +17,7 @@ namespace XRTK.Providers.Controllers.Hands
         // Hand ray
         protected HandRay HandRay { get; } = new HandRay();
 
-        public override bool IsInPointingPose
+        public bool IsInPointingPose
         {
             get
             {

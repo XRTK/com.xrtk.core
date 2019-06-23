@@ -8,7 +8,7 @@ namespace XRTK.Interfaces.Providers.Controllers
     /// <summary>
     /// Hand definition, used to provide access to hand joints and other data.
     /// </summary>
-    public interface IMixedRealityHand : IMixedRealityController
+    public interface IMixedRealityHandController : IMixedRealityController
     {
         /// <summary>
         /// Get the current pose of a hand joint.

@@ -18,13 +18,13 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="pose">The output pose data</param>
         public static bool TryGetJointPose(TrackedHandJoint joint, Handedness handedness, out MixedRealityPose pose)
         {
-            return TryGetJointPose<IMixedRealityHand>(joint, handedness, out pose);
+            return TryGetJointPose<IMixedRealityHandController>(joint, handedness, out pose);
         }
 
         /// <summary>
         /// Try to find the first matching hand controller of the given type and return the pose of the requested joint for that hand.
         /// </summary>
-        public static bool TryGetJointPose<T>(TrackedHandJoint joint, Handedness handedness, out MixedRealityPose pose) where T : class, IMixedRealityHand
+        public static bool TryGetJointPose<T>(TrackedHandJoint joint, Handedness handedness, out MixedRealityPose pose) where T : class, IMixedRealityHandController
         {
             T hand = FindHand<T>(handedness);
             if (hand != null)
@@ -42,15 +42,15 @@ namespace XRTK.Providers.Controllers.Hands
         /// <remarks>
         /// The given handedness should be either Handedness.Left or Handedness.Right.
         /// </remarks>
-        public static IMixedRealityHand FindHand(Handedness handedness)
+        public static IMixedRealityHandController FindHand(Handedness handedness)
         {
-            return FindHand<IMixedRealityHand>(handedness);
+            return FindHand<IMixedRealityHandController>(handedness);
         }
 
         /// <summary>
         /// Find the first detected hand controller of the given type with matching handedness.
         /// </summary>
-        public static T FindHand<T>(Handedness handedness) where T : class, IMixedRealityHand
+        public static T FindHand<T>(Handedness handedness) where T : class, IMixedRealityHandController
         {
             IMixedRealityInputSystem inputSystem = MixedRealityToolkit.GetService<IMixedRealityInputSystem>();
             if (inputSystem == null)

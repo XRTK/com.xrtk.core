@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.HandTracking;
@@ -12,7 +13,7 @@ using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Hands
 {
-    public class BaseHandVisualizer : MonoBehaviour, IMixedRealityHandVisualizer, IMixedRealitySourceStateHandler, IMixedRealityHandJointHandler, IMixedRealityHandMeshHandler
+    public class BaseHandVisualizer : MonoBehaviour, IMixedRealityControllerVisualizer, IMixedRealitySourceStateHandler, IMixedRealityHandJointHandler, IMixedRealityHandMeshHandler
     {
         public virtual Handedness Handedness { get; set; }
 
@@ -46,6 +47,7 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
+        [Obsolete("Use HandJointUtils.TryGetJointPose instead of this")]
         public bool TryGetJointTransform(TrackedHandJoint joint, out Transform jointTransform)
         {
             if (joints == null)
@@ -133,7 +135,7 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        public void OnHandMeshUpdated(InputEventData<HandMeshInfo> eventData)
+        public void OnHandMeshUpdated(InputEventData<HandMeshUpdatedEventData> eventData)
         {
             if (eventData.Handedness != Controller?.ControllerHandedness)
             {
@@ -150,17 +152,17 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 Mesh mesh = handMeshFilter.mesh;
 
-                mesh.vertices = eventData.InputData.vertices;
-                mesh.normals = eventData.InputData.normals;
-                mesh.triangles = eventData.InputData.triangles;
+                mesh.vertices = eventData.InputData.Vertices;
+                mesh.normals = eventData.InputData.Normals;
+                mesh.triangles = eventData.InputData.Triangles;
 
-                if (eventData.InputData.uvs != null && eventData.InputData.uvs.Length > 0)
+                if (eventData.InputData.Uvs != null && eventData.InputData.Uvs.Length > 0)
                 {
-                    mesh.uv = eventData.InputData.uvs;
+                    mesh.uv = eventData.InputData.Uvs;
                 }
 
-                handMeshFilter.transform.position = eventData.InputData.position;
-                handMeshFilter.transform.rotation = eventData.InputData.rotation;
+                handMeshFilter.transform.position = eventData.InputData.Position;
+                handMeshFilter.transform.rotation = eventData.InputData.Rotation;
             }
         }
     }

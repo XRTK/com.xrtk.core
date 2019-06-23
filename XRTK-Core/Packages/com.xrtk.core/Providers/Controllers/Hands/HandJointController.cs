@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -14,8 +13,8 @@ namespace XRTK.Providers.Controllers.Hands
 {
     public class HandJointController : BaseControllerDataProvider, IMixedRealityHandJointService
     {
-        private IMixedRealityHand leftHand;
-        private IMixedRealityHand rightHand;
+        private IMixedRealityHandController leftHand;
+        private IMixedRealityHandController rightHand;
 
         private Dictionary<TrackedHandJoint, Transform> leftHandFauxJoints = new Dictionary<TrackedHandJoint, Transform>();
         private Dictionary<TrackedHandJoint, Transform> rightHandFauxJoints = new Dictionary<TrackedHandJoint, Transform>();
@@ -23,11 +22,10 @@ namespace XRTK.Providers.Controllers.Hands
         #region BaseInputDeviceManager Implementation
 
         public HandJointController(
-            IMixedRealityServiceRegistrar registrar,
             IMixedRealityInputSystem inputSystem,
             string name,
             uint priority,
-            BaseMixedRealityProfile profile) : base(name, priority, profile) { }
+            BaseMixedRealityControllerDataProviderProfile profile) : base(name, priority, profile) { }
 
         /// <inheritdoc />
         public override void LateUpdate()
@@ -37,7 +35,7 @@ namespace XRTK.Providers.Controllers.Hands
 
             foreach (var detectedController in MixedRealityToolkit.InputSystem.DetectedControllers)
             {
-                var hand = detectedController as IMixedRealityHand;
+                var hand = detectedController as IMixedRealityHandController;
                 if (hand != null)
                 {
                     if (detectedController.ControllerHandedness == Handedness.Left)
@@ -117,7 +115,7 @@ namespace XRTK.Providers.Controllers.Hands
 
         public Transform RequestJointTransform(TrackedHandJoint joint, Handedness handedness)
         {
-            IMixedRealityHand hand = null;
+            IMixedRealityHandController hand = null;
             Dictionary<TrackedHandJoint, Transform> fauxJoints = null;
             if (handedness == Handedness.Left)
             {

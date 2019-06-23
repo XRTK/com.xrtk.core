@@ -9,8 +9,11 @@ using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Providers.Controllers.Hands
 {
-    public abstract class BaseHand : BaseController, IMixedRealityHand
+    public abstract class BaseHand : BaseController, IMixedRealityHandController
     {
+        private const float CurrentVelocityWeight = .8f;
+        private const float NewVelocityWeight = .2f;
+
         // Hand ray
         protected HandRay HandRay { get; } = new HandRay();
 
@@ -63,14 +66,13 @@ namespace XRTK.Providers.Controllers.Hands
                 deltaTimeStart = Time.unscaledTime;
                 lastPosition = GetJointPosition(TrackedHandJoint.Palm);
                 lastPalmNormal = GetPalmNormal();
-                //lastPalmNormal = new Vector3(1, 0, 0);
             }
             else if (frameOn == velocityUpdateInterval)
             {
                 //update linear velocity
                 float deltaTime = Time.unscaledTime - deltaTimeStart;
                 Vector3 newVelocity = (GetJointPosition(TrackedHandJoint.Palm) - lastPosition) / deltaTime;
-                Velocity = (Velocity * 0.8f) + (newVelocity * 0.2f);
+                Velocity = (Velocity * CurrentVelocityWeight) + (newVelocity * NewVelocityWeight);
 
                 //update angular velocity
                 Vector3 currentPalmNormal = GetPalmNormal();

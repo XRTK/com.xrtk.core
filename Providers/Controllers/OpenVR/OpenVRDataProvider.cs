@@ -63,19 +63,19 @@ namespace XRTK.Providers.Controllers.OpenVR
                     controllerType = typeof(GenericOpenVRController);
                     break;
                 case SupportedControllerType.ViveWand:
-                    controllerType = typeof(ViveWandController);
+                    controllerType = typeof(ViveWandOpenVRController);
                     break;
                 case SupportedControllerType.ViveKnuckles:
-                    controllerType = typeof(ViveKnucklesController);
+                    controllerType = typeof(ViveKnucklesOpenVRController);
                     break;
                 case SupportedControllerType.OculusTouch:
-                    controllerType = typeof(OculusTouchController);
+                    controllerType = typeof(OculusTouchOpenVRController);
                     break;
                 case SupportedControllerType.OculusRemote:
-                    controllerType = typeof(OculusRemoteController);
+                    controllerType = typeof(OculusRemoteOpenVRController);
                     break;
                 case SupportedControllerType.OculusGo:
-                    controllerType = typeof(OculusGoController);
+                    controllerType = typeof(OculusGoOpenVRController);
                     break;
                 case SupportedControllerType.WindowsMixedReality:
                     controllerType = typeof(WindowsMixedRealityOpenVRMotionController);

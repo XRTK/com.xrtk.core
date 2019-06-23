@@ -31,6 +31,12 @@ namespace XRTK.Services
         public virtual void Update() { }
 
         /// <inheritdoc />
+        public virtual void LateUpdate() { }
+
+        /// <inheritdoc />
+        public virtual void FixedUpdate() { }
+
+        /// <inheritdoc />
         public virtual void Disable() { }
 
         /// <inheritdoc />

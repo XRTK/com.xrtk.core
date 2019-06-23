@@ -75,7 +75,7 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        void IMixedRealityHandJointHandler.OnHandJointsUpdated(InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> eventData)
+        void IMixedRealityHandJointHandler.OnJointUpdated(InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> eventData)
         {
             if (eventData.Handedness != Controller?.ControllerHandedness)
             {
@@ -135,7 +135,7 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        public void OnHandMeshUpdated(InputEventData<HandMeshUpdatedEventData> eventData)
+        public void OnMeshUpdated(InputEventData<HandMeshUpdatedEventData> eventData)
         {
             if (eventData.Handedness != Controller?.ControllerHandedness)
             {

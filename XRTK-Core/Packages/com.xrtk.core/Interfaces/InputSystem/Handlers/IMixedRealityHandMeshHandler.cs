@@ -12,6 +12,10 @@ namespace XRTK.Interfaces.InputSystem.Handlers
     /// </summary>
     public interface IMixedRealityHandMeshHandler : IEventSystemHandler
     {
-        void OnHandMeshUpdated(InputEventData<HandMeshUpdatedEventData> eventData);
+        /// <summary>
+        /// When a hand mesh is updated, this handler receives the event.
+        /// </summary>
+        /// <param name="eventData">Contains information about the HandTrackingInputSource.</param>
+        void OnMeshUpdated(InputEventData<HandMeshUpdatedEventData> eventData);
     }
 }

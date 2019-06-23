@@ -4,6 +4,7 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using XRTK.Definitions.Utilities;
+using XRTK.Definitions.InputSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 

@@ -63,7 +63,7 @@ namespace XRTK.Services.InputSimulationSystem
             }
             initializedFromProfile = true;
 
-            var gestureProfile = InputSystem?.InputSystemProfile?.GesturesProfile;
+            var gestureProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile?.GesturesProfile;
             if (gestureProfile != null)
             {
                 for (int i = 0; i < gestureProfile.Gestures.Length; i++)
@@ -86,7 +86,7 @@ namespace XRTK.Services.InputSimulationSystem
                 useRailsNavigation = gestureProfile.UseRailsNavigation;
             }
 
-            var inputSimProfile = MixedRealityToolkit.Instance?.GetService<IInputSimulationService>()?.InputSimulationProfile;
+            var inputSimProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSimulationSystemProfile;
             if (inputSimProfile != null)
             {
                 holdStartDuration = inputSimProfile.HoldStartDuration;
@@ -120,7 +120,7 @@ namespace XRTK.Services.InputSimulationSystem
 
             if (lastPosition != currentPosition)
             {
-                InputSystem?.RaiseSourcePositionChanged(InputSource, this, currentPosition);
+                MixedRealityToolkit.InputSystem.RaiseSourcePositionChanged(InputSource, this, currentPosition);
             }
 
             for (int i = 0; i < Interactions?.Length; i++)
@@ -132,7 +132,7 @@ namespace XRTK.Services.InputSimulationSystem
                         Interactions[i].PoseData = currentGripPose;
                         if (Interactions[i].Changed)
                         {
-                            InputSystem?.RaisePoseInputChanged(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction, currentGripPose);
+                            MixedRealityToolkit.InputSystem.RaisePoseInputChanged(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction, currentGripPose);
                         }
                         break;
                     case DeviceInputType.Select:
@@ -142,14 +142,14 @@ namespace XRTK.Services.InputSimulationSystem
                         {
                             if (Interactions[i].BoolData)
                             {
-                                InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+                                MixedRealityToolkit.InputSystem.RaiseOnInputDown(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
 
                                 SelectDownStartTime = Time.time;
                                 cumulativeDelta = Vector3.zero;
                             }
                             else
                             {
-                                InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+                                MixedRealityToolkit.InputSystem.RaiseOnInputUp(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
 
                                 // Stop gestures
                                 CompleteHoldGesture();
@@ -188,7 +188,7 @@ namespace XRTK.Services.InputSimulationSystem
         {
             if (!holdInProgress)
             {
-                InputSystem?.RaiseGestureStarted(this, holdAction);
+                MixedRealityToolkit.InputSystem.RaiseGestureStarted(this, holdAction);
                 holdInProgress = true;
             }
         }
@@ -197,7 +197,7 @@ namespace XRTK.Services.InputSimulationSystem
         {
             if (holdInProgress)
             {
-                InputSystem?.RaiseGestureCompleted(this, holdAction);
+                MixedRealityToolkit.InputSystem.RaiseGestureCompleted(this, holdAction);
                 holdInProgress = false;
             }
         }
@@ -206,7 +206,7 @@ namespace XRTK.Services.InputSimulationSystem
         {
             if (holdInProgress)
             {
-                InputSystem?.RaiseGestureCanceled(this, holdAction);
+                MixedRealityToolkit.InputSystem.RaiseGestureCanceled(this, holdAction);
                 holdInProgress = false;
             }
         }
@@ -215,8 +215,8 @@ namespace XRTK.Services.InputSimulationSystem
         {
             if (!manipulationInProgress)
             {
-                InputSystem?.RaiseGestureStarted(this, manipulationAction);
-                InputSystem?.RaiseGestureStarted(this, navigationAction);
+                MixedRealityToolkit.InputSystem.RaiseGestureStarted(this, manipulationAction);
+                MixedRealityToolkit.InputSystem.RaiseGestureStarted(this, navigationAction);
                 manipulationInProgress = true;
 
                 currentRailsUsed = Vector3.one;
@@ -226,18 +226,18 @@ namespace XRTK.Services.InputSimulationSystem
 
         private void UpdateManipulationNavigationGesture()
         {
-            InputSystem?.RaiseGestureUpdated(this, manipulationAction, cumulativeDelta);
+            MixedRealityToolkit.InputSystem.RaiseGestureUpdated(this, manipulationAction, cumulativeDelta);
 
             UpdateNavigationRails();
-            InputSystem?.RaiseGestureUpdated(this, navigationAction, navigationDelta);
+            MixedRealityToolkit.InputSystem.RaiseGestureUpdated(this, navigationAction, navigationDelta);
         }
 
         private void CompleteManipulationNavigationGesture()
         {
             if (manipulationInProgress)
             {
-                InputSystem?.RaiseGestureCompleted(this, manipulationAction, cumulativeDelta);
-                InputSystem?.RaiseGestureCompleted(this, navigationAction, navigationDelta);
+                MixedRealityToolkit.InputSystem.RaiseGestureCompleted(this, manipulationAction, cumulativeDelta);
+                MixedRealityToolkit.InputSystem.RaiseGestureCompleted(this, navigationAction, navigationDelta);
                 manipulationInProgress = false;
             }
         }
@@ -246,8 +246,8 @@ namespace XRTK.Services.InputSimulationSystem
         {
             if (manipulationInProgress)
             {
-                InputSystem?.RaiseGestureCanceled(this, manipulationAction);
-                InputSystem?.RaiseGestureCanceled(this, navigationAction);
+                MixedRealityToolkit.InputSystem.RaiseGestureCanceled(this, manipulationAction);
+                MixedRealityToolkit.InputSystem.RaiseGestureCanceled(this, navigationAction);
                 manipulationInProgress = false;
             }
         }

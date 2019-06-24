@@ -9,7 +9,7 @@ using XRTK.Interfaces.InputSystem;
 
 namespace XRTK.Providers.Controllers.OpenVR
 {
-    public class OculusTouchController : GenericOpenVRController
+    public class OculusTouchOpenVRController : GenericOpenVRController
     {
         /// <summary>
         /// Constructor.
@@ -18,7 +18,7 @@ namespace XRTK.Providers.Controllers.OpenVR
         /// <param name="controllerHandedness"></param>
         /// <param name="inputSource"></param>
         /// <param name="interactions"></param>
-        public OculusTouchController(TrackingState trackingState, Handedness controllerHandedness,
+        public OculusTouchOpenVRController(TrackingState trackingState, Handedness controllerHandedness,
             IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
             : base(trackingState, controllerHandedness, inputSource, interactions)
         {

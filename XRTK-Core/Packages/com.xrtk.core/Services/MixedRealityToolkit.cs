@@ -706,6 +706,22 @@ namespace XRTK.Services
             }
         }
 
+        private void LateUpdate()
+        {
+            if (Application.isPlaying)
+            {
+                LateUpdateAllServices();
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            if (Application.isPlaying)
+            {
+                FixedUpdateAllServices();
+            }
+        }
+
         private void OnDisable()
         {
             if (Application.isPlaying)
@@ -1266,6 +1282,70 @@ namespace XRTK.Services
                 try
                 {
                     service.Item2.Update();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
+            }
+        }
+
+        private void LateUpdateAllServices()
+        {
+            // If the Mixed Reality Toolkit is not configured, stop.
+            if (activeProfile == null) { return; }
+
+            // Update all systems
+            foreach (var system in activeSystems)
+            {
+                try
+                {
+                    system.Value.LateUpdate();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
+            }
+
+            // Update all registered runtime services
+            foreach (var service in registeredMixedRealityServices)
+            {
+                try
+                {
+                    service.Item2.LateUpdate();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
+            }
+        }
+
+        private void FixedUpdateAllServices()
+        {
+            // If the Mixed Reality Toolkit is not configured, stop.
+            if (activeProfile == null) { return; }
+
+            // Update all systems
+            foreach (var system in activeSystems)
+            {
+                try
+                {
+                    system.Value.FixedUpdate();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e.Message}\n{e.StackTrace}");
+                }
+            }
+
+            // Update all registered runtime services
+            foreach (var service in registeredMixedRealityServices)
+            {
+                try
+                {
+                    service.Item2.FixedUpdate();
                 }
                 catch (Exception e)
                 {

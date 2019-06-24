@@ -7,7 +7,7 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.HandTracking
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Hand Tracking Profile", fileName = "MixedRealityHandTrackingProfile", order = (int)CreateProfileMenuItemIndices.HandTracking)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Hand Tracking Profile", fileName = "MixedRealityHandTrackingProfile", order = (int)CreateProfileMenuItemIndices.HandTracking)]
     public class MixedRealityHandTrackingProfile : BaseMixedRealityProfile
     {
         [SerializeField]

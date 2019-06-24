@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using XRTK.Definitions.Devices;
-using XRTK.Definitions.InputSimulationSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSimulationSystem;
 using XRTK.Interfaces.InputSystem;
@@ -14,7 +13,7 @@ using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Providers.Controllers;
 using XRTK.Utilities;
 
-namespace XRTK.Services.InputSimulationSystem
+namespace XRTK.Services.InputSystem.Simulation
 {
     public class MixedRealityInputSimulationSystem : BaseControllerDataProvider, IMixedRealityInputSimulationSystem //, IMixedRealityEyeGazeDataProvider
     {

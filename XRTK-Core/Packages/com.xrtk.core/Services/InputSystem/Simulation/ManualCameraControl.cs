@@ -2,16 +2,16 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.InputSimulationSystem;
+using XRTK.Definitions.InputSystem.Simulation;
 
-namespace XRTK.Services.InputSimulationSystem
+namespace XRTK.Services.InputSystem.Simulation
 {
     /// <summary>
     /// Class for manually controlling the camera in the Unity editor. Attach to the MainCamera object.
     /// </summary>
     public class ManualCameraControl
     {
-        private MixedRealityInputSimulationSystemProfile profile;
+        private MixedRealityInputSimulationProfile profile;
 
         private bool isMouseJumping = false;
         private bool isGamepadLookEnabled = true;
@@ -22,7 +22,7 @@ namespace XRTK.Services.InputSimulationSystem
         private bool wasLooking = false;
         private bool wasCursorVisible = true;
 
-        public ManualCameraControl(MixedRealityInputSimulationSystemProfile profile)
+        public ManualCameraControl(MixedRealityInputSimulationProfile profile)
         {
             this.profile = profile;
         }

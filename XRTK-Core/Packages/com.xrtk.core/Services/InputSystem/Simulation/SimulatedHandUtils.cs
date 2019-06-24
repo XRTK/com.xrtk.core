@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Services.InputSimulationSystem
+namespace XRTK.Services.InputSystem.Simulation
 {
     public class SimulatedHandUtils
     {

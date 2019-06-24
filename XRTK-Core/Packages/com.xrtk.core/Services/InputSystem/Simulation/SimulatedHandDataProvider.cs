@@ -3,7 +3,6 @@
 
 using System;
 using UnityEngine;
-using XRTK.Definitions.InputSimulationSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Utilities;
 
@@ -15,7 +14,7 @@ using XRTK.Utilities;
 /// - Left mouse button brings index and thumb together
 /// - Mouse moves left and right hand.
 /// </summary>
-namespace XRTK.Services.InputSimulationSystem
+namespace XRTK.Services.InputSystem.Simulation
 {
     /// <summary>
     /// Internal class to define current gesture and smoothly animate hand data points.

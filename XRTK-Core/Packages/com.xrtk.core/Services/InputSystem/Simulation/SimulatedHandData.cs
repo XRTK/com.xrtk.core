@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Services.InputSimulationSystem
+namespace XRTK.Services.InputSystem.Simulation
 {
     /// <summary>
     /// Snapshot of simulated hand data.

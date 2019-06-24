@@ -8,7 +8,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Utilities;
 
-namespace XRTK.Services.InputSimulationSystem
+namespace XRTK.Services.InputSystem.Simulation
 {
     public class SimulatedArticulatedHand : SimulatedHand
     {

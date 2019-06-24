@@ -84,7 +84,7 @@ namespace XRTK.Services.InputSystem.Simulation
                 //useRailsNavigation = gestureProfile.UseRailsNavigation;
             }
 
-            var inputSimProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSimulationSystemProfile;
+            var inputSimProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputSimulationProfile;
             if (inputSimProfile != null)
             {
                 holdStartDuration = inputSimProfile.HoldStartDuration;

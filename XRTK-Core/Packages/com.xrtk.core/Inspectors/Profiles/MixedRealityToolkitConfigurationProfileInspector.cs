@@ -22,10 +22,6 @@ namespace XRTK.Inspectors.Profiles
         private SerializedProperty enableInputSystem;
         private SerializedProperty inputSystemType;
         private SerializedProperty inputSystemProfile;
-        // Input simulation system properties
-        private SerializedProperty enableInputSimulationSystem;
-        private SerializedProperty inputSimulationSystemType;
-        private SerializedProperty inputSimulationSystemProfile;
         // Boundary system properties
         private SerializedProperty enableBoundarySystem;
         private SerializedProperty boundarySystemType;
@@ -94,10 +90,6 @@ namespace XRTK.Inspectors.Profiles
             enableInputSystem = serializedObject.FindProperty("enableInputSystem");
             inputSystemType = serializedObject.FindProperty("inputSystemType");
             inputSystemProfile = serializedObject.FindProperty("inputSystemProfile");
-            // Input simulation system configuration
-            enableInputSimulationSystem = serializedObject.FindProperty("enableInputSimulationSystem");
-            inputSimulationSystemType = serializedObject.FindProperty("inputSimulationSystemType");
-            inputSimulationSystemProfile = serializedObject.FindProperty("inputSimulationSystemProfile");
             // Boundary system configuration
             enableBoundarySystem = serializedObject.FindProperty("enableBoundarySystem");
             boundarySystemType = serializedObject.FindProperty("boundarySystemType");
@@ -173,13 +165,6 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.PropertyField(enableInputSystem);
             EditorGUILayout.PropertyField(inputSystemType);
             changed |= RenderProfile(thisProfile, inputSystemProfile);
-
-            // Input Simulation System configuration
-            GUILayout.Space(12f);
-            EditorGUILayout.LabelField("Input Simulation System Settings", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(enableInputSimulationSystem);
-            EditorGUILayout.PropertyField(inputSimulationSystemType);
-            changed |= RenderProfile(thisProfile, inputSimulationSystemProfile);
 
             // Boundary System configuration
             GUILayout.Space(12f);

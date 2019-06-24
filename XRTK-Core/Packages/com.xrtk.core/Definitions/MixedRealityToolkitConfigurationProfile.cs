@@ -6,14 +6,12 @@ using XRTK.Attributes;
 using XRTK.Definitions.BoundarySystem;
 using XRTK.Definitions.Diagnostics;
 using XRTK.Definitions.InputSystem;
-using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.NetworkingSystem;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Diagnostics;
-using XRTK.Interfaces.InputSimulationSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem;
@@ -115,50 +113,6 @@ namespace XRTK.Definitions
         {
             get => inputSystemType;
             internal set => inputSystemType = value;
-        }
-
-        #endregion
-
-        #region Input Simulation System
-
-        [SerializeField]
-        [Tooltip("Enable the Input Simulation System on Startup, if in Unity Editor.")]
-        private bool enableInputSimulationSystem = false;
-
-        /// <summary>
-        /// Enable and configure the Input Simulation System component for the Mixed Reality Toolkit
-        /// </summary>
-        public bool IsInputSystemSimulationEnabled
-        {
-            get => inputSimulationSystemProfile != null && inputSimulationSystemType != null && inputSimulationSystemType.Type != null && enableInputSimulationSystem;
-            internal set => enableInputSimulationSystem = value;
-        }
-
-        [SerializeField]
-        [Tooltip("Input Simulation System profile for simulating input in the Unity Editor.")]
-        private MixedRealityInputSimulationProfile inputSimulationSystemProfile;
-
-        /// <summary>
-        /// Input Simulation System profile for simulating input in the Unity Editor.
-        /// </summary>
-        public MixedRealityInputSimulationProfile InputSimulationSystemProfile
-        {
-            get => inputSimulationSystemProfile;
-            internal set => inputSimulationSystemProfile = value;
-        }
-
-        [SerializeField]
-        [Tooltip("Input Simulation System Class to instantiate at runtime.")]
-        [Implements(typeof(IMixedRealityInputSimulationSystem), TypeGrouping.ByNamespaceFlat)]
-        private SystemType inputSimulationSystemType;
-
-        /// <summary>
-        /// Input Simulation System Script File to instantiate at runtime.
-        /// </summary>
-        public SystemType InputSimulationSystemType
-        {
-            get => inputSimulationSystemType;
-            internal set => inputSimulationSystemType = value;
         }
 
         #endregion

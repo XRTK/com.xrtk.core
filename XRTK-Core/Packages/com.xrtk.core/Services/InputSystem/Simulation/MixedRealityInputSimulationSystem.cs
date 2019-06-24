@@ -8,8 +8,8 @@ using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSimulationSystem;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.InputSystem.Simulation;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Providers.Controllers;
 using XRTK.Utilities;
@@ -157,7 +157,7 @@ namespace XRTK.Services.InputSystem.Simulation
         {
             if (cameraControl == null)
             {
-                cameraControl = new ManualCameraControl(MixedRealityToolkit.Instance.ActiveProfile.InputSimulationSystemProfile);
+                cameraControl = new ManualCameraControl(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputSimulationProfile);
             }
         }
 
@@ -173,7 +173,7 @@ namespace XRTK.Services.InputSystem.Simulation
         {
             if (handDataProvider == null)
             {
-                handDataProvider = new SimulatedHandDataProvider(MixedRealityToolkit.Instance.ActiveProfile.InputSimulationSystemProfile);
+                handDataProvider = new SimulatedHandDataProvider(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputSimulationProfile);
             }
         }
 

@@ -4,6 +4,7 @@
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.HandTracking;
+using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
@@ -156,6 +157,19 @@ namespace XRTK.Definitions.InputSystem
         {
             get { return handTrackingProfile; }
             private set { handTrackingProfile = value; }
+        }
+
+        [SerializeField]
+        [Tooltip("Profile for configuring input simulation in the editor.")]
+        private MixedRealityInputSimulationProfile inputSimulationProfile;
+
+        /// <summary>
+        /// Profile for configuring input simulation in the editor.
+        /// </summary>
+        public MixedRealityInputSimulationProfile InputSimulationProfile
+        {
+            get => inputSimulationProfile;
+            internal set => inputSimulationProfile = value;
         }
 
         private IMixedRealityFocusProvider focusProvider;

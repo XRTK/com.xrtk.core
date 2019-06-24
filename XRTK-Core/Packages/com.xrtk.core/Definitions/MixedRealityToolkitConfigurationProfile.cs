@@ -5,8 +5,8 @@ using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.BoundarySystem;
 using XRTK.Definitions.Diagnostics;
-using XRTK.Definitions.InputSimulationSystem;
 using XRTK.Definitions.InputSystem;
+using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.NetworkingSystem;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Definitions.Utilities;
@@ -136,12 +136,12 @@ namespace XRTK.Definitions
 
         [SerializeField]
         [Tooltip("Input Simulation System profile for simulating input in the Unity Editor.")]
-        private MixedRealityInputSimulationSystemProfile inputSimulationSystemProfile;
+        private MixedRealityInputSimulationProfile inputSimulationSystemProfile;
 
         /// <summary>
         /// Input Simulation System profile for simulating input in the Unity Editor.
         /// </summary>
-        public MixedRealityInputSimulationSystemProfile InputSimulationSystemProfile
+        public MixedRealityInputSimulationProfile InputSimulationSystemProfile
         {
             get => inputSimulationSystemProfile;
             internal set => inputSimulationSystemProfile = value;

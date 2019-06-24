@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using XRTK.Definitions.Devices;
+using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSimulationSystem;
 using XRTK.Interfaces.InputSystem;
@@ -19,7 +20,7 @@ namespace XRTK.Services.InputSystem.Simulation
     {
         private ManualCameraControl cameraControl = null;
         private SimulatedHandDataProvider handDataProvider = null;
-        private MixedRealityInputSimulationSystemProfile profile;
+        private MixedRealityInputSimulationProfile profile;
 
         public readonly SimulatedHandData HandDataLeft = new SimulatedHandData();
         public readonly SimulatedHandData HandDataRight = new SimulatedHandData();
@@ -49,7 +50,7 @@ namespace XRTK.Services.InputSystem.Simulation
         public MixedRealityInputSimulationSystem(
             string name,
             uint priority,
-            MixedRealityInputSimulationSystemProfile profile)
+            MixedRealityInputSimulationProfile profile)
             : base(name, priority, null)
         {
             this.profile = profile;

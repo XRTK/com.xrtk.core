@@ -3,6 +3,7 @@
 
 using System;
 using UnityEngine;
+using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
 using XRTK.Utilities;
 
@@ -143,7 +144,7 @@ namespace XRTK.Services.InputSystem.Simulation
     {
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
-        protected MixedRealityInputSimulationSystemProfile profile;
+        protected MixedRealityInputSimulationProfile profile;
 
         /// <summary>
         /// If true then the hand is always visible, regardless of simulating.
@@ -169,15 +170,15 @@ namespace XRTK.Services.InputSystem.Simulation
         private SimulatedHandData.HandJointDataGenerator generatorLeft;
         private SimulatedHandData.HandJointDataGenerator generatorRight;
 
-        public SimulatedHandDataProvider(MixedRealityInputSimulationSystemProfile _profile)
+        public SimulatedHandDataProvider(MixedRealityInputSimulationProfile profile)
         {
-            profile = _profile;
+            this.profile = profile;
 
             HandStateLeft = new SimulatedHandState(Handedness.Left);
             HandStateRight = new SimulatedHandState(Handedness.Right);
 
-            HandStateLeft.Gesture = profile.DefaultHandGesture;
-            HandStateRight.Gesture = profile.DefaultHandGesture;
+            HandStateLeft.Gesture = this.profile.DefaultHandGesture;
+            HandStateRight.Gesture = this.profile.DefaultHandGesture;
 
             HandStateLeft.Reset();
             HandStateRight.Reset();

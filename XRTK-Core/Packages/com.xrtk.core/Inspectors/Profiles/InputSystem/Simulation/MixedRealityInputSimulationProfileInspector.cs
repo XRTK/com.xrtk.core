@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Inspectors.Utilities;
-using XRTK.Services.InputSimulationSystem;
+using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Simulation
 {

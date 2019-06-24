@@ -4,7 +4,7 @@
 using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Services.InputSimulationSystem;
+using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Definitions.InputSystem.Simulation
 {

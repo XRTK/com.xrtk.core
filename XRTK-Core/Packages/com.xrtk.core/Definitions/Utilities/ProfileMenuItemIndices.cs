@@ -19,7 +19,7 @@ namespace XRTK.Definitions.Utilities
         ControllerDataProviders,
         ControllerMappings,
         ControllerVisualization,
-        HandTracking
+        HandTracking,
         BoundaryVisualization,
         SpatialAwareness,
         SpatialAwarenessDataProviders,
@@ -27,6 +27,6 @@ namespace XRTK.Definitions.Utilities
         NetworkingDataProviders,
         Diagnostics,
         RegisteredServiceProviders,
-        Settings,
+        Settings
     }
 }

@@ -1,17 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions.InputSimulationSystem;
+using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Inspectors.Utilities;
 using XRTK.Services.InputSimulationSystem;
 
-namespace XRTK.Inspectors.Profiles.InputSimulationSystem
+namespace XRTK.Inspectors.Profiles.InputSystem.Simulation
 {
-    [CustomEditor(typeof(MixedRealityInputSimulationSystemProfile))]
-    public class MixedRealityInputSimulationSystemProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(MixedRealityInputSimulationProfile))]
+    public class MixedRealityInputSimulationProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty isCameraControlEnabled;
 

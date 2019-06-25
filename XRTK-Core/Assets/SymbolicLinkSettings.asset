@@ -25,3 +25,6 @@ MonoBehaviour:
   - sourceRelativePath: /Submodules/SDK/XRTK.SDK/Packages/com.xrtk.sdk
     targetRelativePath: /XRTK-Core/Packages/com.xrtk.sdk
     isActive: 1
+  - sourceRelativePath: /Submodules/SDK/XRTK.Oculus/Packages/com.xrtk.oculus
+    targetRelativePath: /XRTK-Core/Packages/com.xrtk.oculus
+    isActive: 1

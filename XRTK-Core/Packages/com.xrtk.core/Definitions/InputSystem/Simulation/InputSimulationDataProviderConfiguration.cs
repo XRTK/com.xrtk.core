@@ -10,7 +10,7 @@ using XRTK.Interfaces.Providers.InputSystem.Simulation;
 namespace XRTK.Definitions.InputSystem.Simulation
 {
     [Serializable]
-    public struct InputSystemDataProviderConfiguration
+    public struct InputSimulationDataProviderConfiguration
     {
         /// <summary>
         /// Constructor.
@@ -20,7 +20,7 @@ namespace XRTK.Definitions.InputSystem.Simulation
         /// <param name="priority"></param>
         /// <param name="runtimePlatform"></param>
         /// <param name="profile"></param>
-        public InputSystemDataProviderConfiguration(SystemType dataProviderType, string dataProviderName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityInputSimulationDataProviderProfile profile)
+        public InputSimulationDataProviderConfiguration(SystemType dataProviderType, string dataProviderName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityInputSimulationDataProviderProfile profile)
         {
             this.dataProviderType = dataProviderType;
             this.dataProviderName = dataProviderName;

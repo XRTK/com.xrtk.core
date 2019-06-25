@@ -6,15 +6,15 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.InputSystem.Simulation
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Input Simulation Data Providers Profile", fileName = "MixedRealityInputSimulationDataProvidersProfile", order = (int)CreateProfileMenuItemIndices.InputSimulation)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Simulation/Input Simulation Data Providers Profile", fileName = "MixedRealityInputSimulationDataProvidersProfile", order = (int)CreateProfileMenuItemIndices.InputSimulation)]
     public class MixedRealityInputSimulationDataProvidersProfile : BaseMixedRealityProfile
     {
         [SerializeField]
-        private InputSystemDataProviderConfiguration[] registeredInputSimulationDataProviders = new InputSystemDataProviderConfiguration[0];
+        private InputSimulationDataProviderConfiguration[] registeredInputSimulationDataProviders = new InputSimulationDataProviderConfiguration[0];
 
         /// <summary>
         /// The currently registered input simulation data providers for this input system.
         /// </summary>
-        public InputSystemDataProviderConfiguration[] RegisteredInputSimulationDataProviders => registeredInputSimulationDataProviders;
+        public InputSimulationDataProviderConfiguration[] RegisteredInputSimulationDataProviders => registeredInputSimulationDataProviders;
     }
 }

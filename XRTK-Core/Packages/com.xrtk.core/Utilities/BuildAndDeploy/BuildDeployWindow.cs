@@ -54,8 +54,6 @@ namespace XRTK.Utilities.Build
 
         private const string EMPTY_IP_ADDRESS = "0.0.0.0";
 
-        private const float UPDATE_BUILDS_PERIOD = 1.0f;
-
         private readonly string[] tabNames = { "Unity Build Options", "Appx Build Options", "Deploy Options" };
 
         private readonly string[] scriptingBackendNames = { "IL2CPP", ".NET" };
@@ -172,6 +170,7 @@ namespace XRTK.Utilities.Build
         private Vector2 scrollPosition;
 
         private BuildDeployTab currentTab = BuildDeployTab.UnityBuildOptions;
+        private BuildDeployTab lastTab = BuildDeployTab.UnityBuildOptions;
 
         private static bool isBuilding;
         private static bool isAppRunning;
@@ -316,16 +315,8 @@ namespace XRTK.Utilities.Build
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-        }
 
-        private void Update()
-        {
-            if (Time.realtimeSinceStartup - timeLastUpdatedBuilds > UPDATE_BUILDS_PERIOD)
-            {
-                UpdateBuilds();
-            }
-
-            Repaint();
+            lastTab = currentTab;
         }
 
         private static void OpenPlayerSettingsGUI()
@@ -792,6 +783,13 @@ namespace XRTK.Utilities.Build
 
             GUILayout.EndHorizontal();
 
+            GUILayout.Space(10f);
+
+            if (GUILayout.Button("Refresh Builds", GUILayout.Width(128f)))
+            {
+                UpdateBuilds();
+            }
+
             // Build list
             if (Builds.Count == 0)
             {
@@ -812,7 +810,6 @@ namespace XRTK.Utilities.Build
 
                     GUILayout.Space(2);
                     EditorGUILayout.BeginHorizontal();
-                    GUILayout.Space(12);
 
                     GUI.enabled = CanInstall;
                     if (GUILayout.Button("Install", GUILayout.Width(96)))

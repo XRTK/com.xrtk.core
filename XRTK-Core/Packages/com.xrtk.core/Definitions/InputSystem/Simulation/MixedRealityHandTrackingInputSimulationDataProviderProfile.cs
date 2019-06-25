@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
@@ -7,18 +7,16 @@ using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Definitions.InputSystem.Simulation
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Simulation/Input Simulation Profile", fileName = "MixedRealityInputSimulationProfile", order = (int)CreateProfileMenuItemIndices.InputSimulation)]
-    public class MixedRealityInputSimulationProfile : BaseMixedRealityProfile
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Simulation/Hand Tracking Input Simulation Profile", fileName = "MixedRealityHandTrackingInputSimulationProfile", order = (int)CreateProfileMenuItemIndices.InputSimulation)]
+    public class MixedRealityHandTrackingInputSimulationDataProviderProfile : BaseMixedRealityInputSimulationDataProviderProfile
     {
-        [Header("Eye Simulation")]
-        [SerializeField]
-        [Tooltip("Enable eye simulation")]
-        private bool simulateEyePosition = false;
-        public bool SimulateEyePosition => simulateEyePosition;
-
         [Header("Hand Simulation")]
         [SerializeField]
         [Tooltip("Enable hand simulation")]
+        private bool simulateHandTracking = false;
+        public bool SimulateHandTracking => simulateHandTracking;
+
+        [SerializeField]
         private HandSimulationMode handSimulationMode = HandSimulationMode.Articulated;
         public HandSimulationMode HandSimulationMode => handSimulationMode;
 

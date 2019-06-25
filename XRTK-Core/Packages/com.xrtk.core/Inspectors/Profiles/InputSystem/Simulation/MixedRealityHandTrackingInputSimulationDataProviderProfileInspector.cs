@@ -1,5 +1,5 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.﻿
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
 using UnityEngine;
@@ -9,12 +9,11 @@ using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Simulation
 {
-    [CustomEditor(typeof(MixedRealityInputSimulationProfile))]
-    public class MixedRealityInputSimulationProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(MixedRealityHandTrackingInputSimulationDataProviderProfile))]
+    public class MixedRealityHandTrackingInputSimulationDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
+        private SerializedProperty simulateHandTracking;
         private SerializedProperty handSimulationMode;
-
-        private SerializedProperty simulateEyePosition;
 
         private SerializedProperty toggleLeftHandKey;
         private SerializedProperty toggleRightHandKey;
@@ -43,16 +42,12 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Simulation
         private SerializedProperty holdStartDuration;
         private SerializedProperty manipulationStartThreshold;
 
-        private const string ProfileTitle = "Input Simulation Settings";
-        private const string ProfileDescription = "Settings for simulating input devices in the editor.";
-
         protected override void OnEnable()
         {
             base.OnEnable();
 
+            simulateHandTracking = serializedObject.FindProperty("simulateHandTracking");
             handSimulationMode = serializedObject.FindProperty("handSimulationMode");
-
-            simulateEyePosition = serializedObject.FindProperty("simulateEyePosition");
 
             toggleLeftHandKey = serializedObject.FindProperty("toggleLeftHandKey");
             toggleRightHandKey = serializedObject.FindProperty("toggleRightHandKey");
@@ -96,13 +91,11 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Simulation
 
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(simulateEyePosition);
-
+            EditorGUILayout.PropertyField(simulateHandTracking);
             EditorGUILayout.Space();
             EditorGUILayout.PropertyField(handSimulationMode);
             {
                 EditorGUILayout.BeginVertical("Label");
-                bool isHandSimEnabled = (handSimulationMode.enumValueIndex != (int)HandSimulationMode.Disabled);
 
                 EditorGUILayout.PropertyField(toggleLeftHandKey);
                 EditorGUILayout.PropertyField(toggleRightHandKey);

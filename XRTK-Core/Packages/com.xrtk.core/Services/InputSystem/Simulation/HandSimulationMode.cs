@@ -5,8 +5,6 @@ namespace XRTK.Services.InputSystem.Simulation
 {
     public enum HandSimulationMode
     {
-        // Disable hand simulation
-        Disabled,
         // Raises gesture events only
         Gestures,
         // Provide a fully articulated hand controller

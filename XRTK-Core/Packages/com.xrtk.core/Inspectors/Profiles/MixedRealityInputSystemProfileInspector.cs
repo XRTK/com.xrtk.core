@@ -21,6 +21,7 @@ namespace XRTK.Inspectors.Profiles
         private SerializedProperty controllerVisualizationProfile;
         private SerializedProperty controllerDataProvidersProfile;
         private SerializedProperty controllerMappingProfiles;
+        private SerializedProperty inputSimulationDataProvidersProfile;
 
         protected override void OnEnable()
         {
@@ -35,6 +36,7 @@ namespace XRTK.Inspectors.Profiles
             controllerVisualizationProfile = serializedObject.FindProperty("controllerVisualizationProfile");
             controllerDataProvidersProfile = serializedObject.FindProperty("controllerDataProvidersProfile");
             controllerMappingProfiles = serializedObject.FindProperty("controllerMappingProfiles");
+            inputSimulationDataProvidersProfile = serializedObject.FindProperty("inputSimulationDataProvidersProfile");
         }
 
         public override void OnInspectorGUI()
@@ -72,6 +74,7 @@ namespace XRTK.Inspectors.Profiles
             changed |= RenderProfile(thisProfile, controllerVisualizationProfile);
             changed |= RenderProfile(thisProfile, controllerDataProvidersProfile);
             changed |= RenderProfile(thisProfile, controllerMappingProfiles);
+            changed |= RenderProfile(thisProfile, inputSimulationDataProvidersProfile);
 
             serializedObject.ApplyModifiedProperties();
 

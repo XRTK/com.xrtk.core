@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Attributes;
+using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
@@ -142,6 +143,19 @@ namespace XRTK.Definitions.InputSystem
         {
             get => controllerVisualizationProfile;
             internal set => controllerVisualizationProfile = value;
+        }
+
+        [SerializeField]
+        [Tooltip("Profile for configuring input simulation in the editor.")]
+        private MixedRealityInputSimulationDataProvidersProfile inputSimulationDataProvidersProfile;
+
+        /// <summary>
+        /// Profile for configuring input simulation in the editor.
+        /// </summary>
+        public MixedRealityInputSimulationDataProvidersProfile InputSimulationDataProvidersProfile
+        {
+            get => inputSimulationDataProvidersProfile;
+            internal set => inputSimulationDataProvidersProfile = value;
         }
 
         private IMixedRealityFocusProvider focusProvider;

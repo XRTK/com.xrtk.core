@@ -3,12 +3,14 @@
 
 using UnityEngine;
 using XRTK.Definitions.InputSystem.Simulation;
+using XRTK.Interfaces.Providers.InputSystem.Simulation;
+using XRTK.Services;
 using XRTK.Services.InputSystem.Simulation;
 using XRTK.Utilities;
 
 namespace XRTK.Providers.InputSystem.Simulation
 {
-    public class CameraSimulationDataProvider : BaseSimulationDataProvider
+    public class CameraSimulationDataProvider : BaseDataProvider, IMixedRealityInputSimulationDataProvider
     {
         private MixedRealityCameraInputSimulationDataProviderProfile profile;
         private bool isMouseJumping = false;

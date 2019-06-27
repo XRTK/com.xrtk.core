@@ -72,6 +72,11 @@ namespace XRTK.Interfaces.InputSystem
         float PointerExtent { get; set; }
 
         /// <summary>
+        /// The default pointer extent.
+        /// </summary>
+        float DefaultPointerExtent { get; }
+
+        /// <summary>
         /// The raycast rays.
         /// </summary>
         RayStep[] Rays { get; }

@@ -147,12 +147,12 @@ namespace XRTK.Definitions.InputSystem
 
         [SerializeField]
         [Tooltip("Profile for configuring input simulation in the editor.")]
-        private MixedRealityInputSimulationDataProvidersProfile inputSimulationDataProvidersProfile;
+        private MixedRealitySimulationDataProvidersProfile inputSimulationDataProvidersProfile;
 
         /// <summary>
         /// Profile for configuring input simulation in the editor.
         /// </summary>
-        public MixedRealityInputSimulationDataProvidersProfile InputSimulationDataProvidersProfile
+        public MixedRealitySimulationDataProvidersProfile InputSimulationDataProvidersProfile
         {
             get => inputSimulationDataProvidersProfile;
             internal set => inputSimulationDataProvidersProfile = value;

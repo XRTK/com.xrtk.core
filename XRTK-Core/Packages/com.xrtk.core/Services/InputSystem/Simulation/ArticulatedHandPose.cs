@@ -201,7 +201,7 @@ namespace XRTK.Services.InputSystem.Simulation
         public static void LoadGesturePoses()
         {
             string[] gestureNames = Enum.GetNames(typeof(GestureId));
-            string basePath = $"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/Services/InputSystem/Simulation/";
+            string basePath = $"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/Services/InputSystem/Simulation/ArticulatedHandPoses/";
             for (int i = 0; i < gestureNames.Length; ++i)
             {
                 string relPath = Path.Combine(basePath, string.Format("ArticulatedHandPose_{0}.json", gestureNames[i]));

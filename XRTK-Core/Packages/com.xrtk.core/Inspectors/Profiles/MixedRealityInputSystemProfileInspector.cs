@@ -76,8 +76,8 @@ namespace XRTK.Inspectors.Profiles
             changed |= RenderProfile(thisProfile, controllerVisualizationProfile);
             changed |= RenderProfile(thisProfile, controllerDataProvidersProfile);
             changed |= RenderProfile(thisProfile, controllerMappingProfiles);
-            changed |= RenderProfile(thisProfile, inputSimulationDataProvidersProfile);
             changed |= RenderProfile(thisProfile, handTrackingProfile);
+            changed |= RenderProfile(thisProfile, inputSimulationDataProvidersProfile);
 
             serializedObject.ApplyModifiedProperties();
 

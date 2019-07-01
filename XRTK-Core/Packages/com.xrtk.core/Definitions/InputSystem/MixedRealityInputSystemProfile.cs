@@ -147,18 +147,6 @@ namespace XRTK.Definitions.InputSystem
         }
 
         [SerializeField]
-        [Tooltip("Profile for configuring input simulation in the editor.")]
-        private MixedRealityInputSimulationDataProvidersProfile inputSimulationDataProvidersProfile;
-
-        /// <summary>
-        /// Profile for configuring input simulation in the editor.
-        /// </summary>
-        public MixedRealityInputSimulationDataProvidersProfile InputSimulationDataProvidersProfile
-        {
-            get => inputSimulationDataProvidersProfile;
-            internal set => inputSimulationDataProvidersProfile = value;
-        }
-
         [Tooltip("Profile for configuring Hands tracking.")]
         private MixedRealityHandTrackingProfile handTrackingProfile;
 
@@ -169,6 +157,19 @@ namespace XRTK.Definitions.InputSystem
         {
             get { return handTrackingProfile; }
             private set { handTrackingProfile = value; }
+        }
+
+        [SerializeField]
+        [Tooltip("Profile for configuring input simulation in the editor.")]
+        private MixedRealityInputSimulationDataProvidersProfile inputSimulationDataProvidersProfile;
+
+        /// <summary>
+        /// Profile for configuring input simulation in the editor.
+        /// </summary>
+        public MixedRealityInputSimulationDataProvidersProfile InputSimulationDataProvidersProfile
+        {
+            get => inputSimulationDataProvidersProfile;
+            internal set => inputSimulationDataProvidersProfile = value;
         }
 
         private IMixedRealityFocusProvider focusProvider;

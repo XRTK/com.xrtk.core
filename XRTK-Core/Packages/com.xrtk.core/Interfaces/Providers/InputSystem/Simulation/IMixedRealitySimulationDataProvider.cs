@@ -3,7 +3,7 @@
 
 namespace XRTK.Interfaces.Providers.InputSystem.Simulation
 {
-    public interface IMixedRealityInputSimulationDataProvider : IMixedRealityDataProvider
+    public interface IMixedRealitySimulationDataProvider : IMixedRealityDataProvider
     {
 
     }

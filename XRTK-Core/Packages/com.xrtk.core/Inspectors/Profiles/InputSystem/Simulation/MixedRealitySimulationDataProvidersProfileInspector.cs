@@ -9,8 +9,8 @@ using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Simulation
 {
-    [CustomEditor(typeof(MixedRealityInputSimulationDataProvidersProfile))]
-    public class MixedRealityInputSimulationDataProvidersProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(MixedRealitySimulationDataProvidersProfile))]
+    public class MixedRealitySimulationDataProvidersProfileInspector : BaseMixedRealityProfileInspector
     {
         private static readonly GUIContent AddInputSimulationDataProviderContent = new GUIContent("+ Add a New Input Simulation Data Provider");
         private static readonly GUIContent RemoveInputSimulationDataProviderContent = new GUIContent("-", "Remove Input Simulation Data Provider");

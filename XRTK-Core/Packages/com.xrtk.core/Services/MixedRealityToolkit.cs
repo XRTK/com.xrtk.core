@@ -390,7 +390,7 @@ namespace XRTK.Services
                         {
                             foreach (var inputSimulationDataProvider in ActiveProfile.InputSystemProfile.InputSimulationDataProvidersProfile.RegisteredInputSimulationDataProviders)
                             {
-                                if (!CreateAndRegisterService<IMixedRealityInputSimulationDataProvider>(
+                                if (!CreateAndRegisterService<IMixedRealitySimulationDataProvider>(
                                     inputSimulationDataProvider.DataProviderType,
                                     inputSimulationDataProvider.RuntimePlatform,
                                     inputSimulationDataProvider.DataProviderName,

@@ -3,7 +3,7 @@
 
 namespace XRTK.Definitions.InputSystem.Simulation
 {
-    public class BaseMixedRealityInputSimulationDataProviderProfile : BaseMixedRealityProfile
+    public class BaseMixedRealitySimulationDataProviderProfile : BaseMixedRealityProfile
     {
     }
 }

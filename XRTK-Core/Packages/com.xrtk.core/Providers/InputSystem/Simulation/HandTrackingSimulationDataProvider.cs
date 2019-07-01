@@ -4,10 +4,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 using XRTK.Services.InputSystem.Simulation;
 

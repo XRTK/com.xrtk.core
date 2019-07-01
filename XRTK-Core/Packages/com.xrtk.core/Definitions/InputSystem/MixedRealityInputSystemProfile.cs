@@ -157,6 +157,7 @@ namespace XRTK.Definitions.InputSystem
         {
             get => inputSimulationDataProvidersProfile;
             internal set => inputSimulationDataProvidersProfile = value;
+        }
 
         [Tooltip("Profile for configuring Hands tracking.")]
         private MixedRealityHandTrackingProfile handTrackingProfile;

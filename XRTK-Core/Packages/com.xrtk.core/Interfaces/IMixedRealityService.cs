@@ -11,7 +11,7 @@ namespace XRTK.Interfaces
     public interface IMixedRealityService : IDisposable
     {
         /// <summary>
-        /// Optional Priority attribute if multiple services of the same type are required, enables targeting a service for action.
+        /// The service display name.
         /// </summary>
         string Name { get; }
 

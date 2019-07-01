@@ -8,8 +8,8 @@ using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Definitions.InputSystem.Simulation
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Simulation/Camera Input Simulation Profile", fileName = "MixedRealityCameraInputSimulationProfile", order = (int)CreateProfileMenuItemIndices.InputSimulation)]
-    public class MixedRealityCameraInputSimulationDataProviderProfile : BaseMixedRealityInputSimulationDataProviderProfile
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Simulation/Camera Simulation Profile", fileName = "MixedRealityCameraSimulationProfile", order = (int)CreateProfileMenuItemIndices.Simulation)]
+    public class CameraSimulationDataProviderProfile : BaseMixedRealitySimulationDataProviderProfile
     {
         [Header("Camera Control")]
         [SerializeField]

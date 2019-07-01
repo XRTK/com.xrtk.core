@@ -3,14 +3,16 @@
 
 using UnityEngine;
 using XRTK.Definitions.InputSystem.Simulation;
+using XRTK.Interfaces.Providers.InputSystem.Simulation;
+using XRTK.Services;
 using XRTK.Services.InputSystem.Simulation;
 using XRTK.Utilities;
 
 namespace XRTK.Providers.InputSystem.Simulation
 {
-    public class CameraSimulationDataProvider : BaseSimulationDataProvider
+    public class CameraSimulationDataProvider : BaseDataProvider, IMixedRealitySimulationDataProvider
     {
-        private MixedRealityCameraInputSimulationDataProviderProfile profile;
+        private CameraSimulationDataProviderProfile profile;
         private bool isMouseJumping = false;
         private bool isGamepadLookEnabled = true;
         private bool isFlyKeypressEnabled = true;
@@ -20,7 +22,7 @@ namespace XRTK.Providers.InputSystem.Simulation
         private bool wasLooking = false;
         private bool wasCursorVisible = true;
 
-        public CameraSimulationDataProvider(string name, uint priority, MixedRealityCameraInputSimulationDataProviderProfile profile) : base(name, priority)
+        public CameraSimulationDataProvider(string name, uint priority, CameraSimulationDataProviderProfile profile) : base(name, priority)
         {
             this.profile = profile;
         }

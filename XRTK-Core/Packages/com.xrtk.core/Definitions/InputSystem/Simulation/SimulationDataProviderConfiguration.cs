@@ -10,7 +10,7 @@ using XRTK.Interfaces.Providers.InputSystem.Simulation;
 namespace XRTK.Definitions.InputSystem.Simulation
 {
     [Serializable]
-    public struct InputSimulationDataProviderConfiguration
+    public struct SimulationDataProviderConfiguration
     {
         /// <summary>
         /// Constructor.
@@ -20,7 +20,7 @@ namespace XRTK.Definitions.InputSystem.Simulation
         /// <param name="priority"></param>
         /// <param name="runtimePlatform"></param>
         /// <param name="profile"></param>
-        public InputSimulationDataProviderConfiguration(SystemType dataProviderType, string dataProviderName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityInputSimulationDataProviderProfile profile)
+        public SimulationDataProviderConfiguration(SystemType dataProviderType, string dataProviderName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealitySimulationDataProviderProfile profile)
         {
             this.dataProviderType = dataProviderType;
             this.dataProviderName = dataProviderName;
@@ -30,12 +30,12 @@ namespace XRTK.Definitions.InputSystem.Simulation
         }
 
         [SerializeField]
-        [Tooltip("The concrete type of input simulation data provider to register.")]
-        [Implements(typeof(IMixedRealityInputSimulationDataProvider), TypeGrouping.ByNamespaceFlat)]
+        [Tooltip("The concrete type of simulation data provider to register.")]
+        [Implements(typeof(IMixedRealitySimulationDataProvider), TypeGrouping.ByNamespaceFlat)]
         private SystemType dataProviderType;
 
         /// <summary>
-        /// The concrete type to use for this input simulation data provider.
+        /// The concrete type to use for this simulation data provider.
         /// </summary>
         public SystemType DataProviderType => dataProviderType;
 
@@ -65,11 +65,11 @@ namespace XRTK.Definitions.InputSystem.Simulation
         public SupportedPlatforms RuntimePlatform => runtimePlatform;
 
         [SerializeField]
-        private BaseMixedRealityInputSimulationDataProviderProfile profile;
+        private BaseMixedRealitySimulationDataProviderProfile profile;
 
         /// <summary>
-        /// The profile settings for the input simulation data provider.
+        /// The profile settings for the simulation data provider.
         /// </summary>
-        public BaseMixedRealityInputSimulationDataProviderProfile Profile => profile;
+        public BaseMixedRealitySimulationDataProviderProfile Profile => profile;
     }
 }

@@ -8,8 +8,8 @@ using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Simulation
 {
-    [CustomEditor(typeof(MixedRealityCameraInputSimulationDataProviderProfile))]
-    public class MixedRealityCameraInputSimulationDataProviderProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(CameraSimulationDataProviderProfile))]
+    public class MixedRealityCameraSimulationDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty isCameraControlEnabled;
 

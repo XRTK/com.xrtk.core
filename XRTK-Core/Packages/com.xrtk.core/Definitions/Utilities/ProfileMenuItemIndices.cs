@@ -11,7 +11,7 @@ namespace XRTK.Definitions.Utilities
         Configuration = 0,
         Camera,
         Input,
-        InputSimulation,
+        Simulation,
         Pointer,
         InputActions,
         InputActionRules,

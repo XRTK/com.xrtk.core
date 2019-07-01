@@ -10,9 +10,9 @@ using XRTK.Utilities;
 
 namespace XRTK.Providers.InputSystem.Simulation
 {
-    public class CameraSimulationDataProvider : BaseDataProvider, IMixedRealityInputSimulationDataProvider
+    public class CameraSimulationDataProvider : BaseDataProvider, IMixedRealitySimulationDataProvider
     {
-        private MixedRealityCameraInputSimulationDataProviderProfile profile;
+        private CameraSimulationDataProviderProfile profile;
         private bool isMouseJumping = false;
         private bool isGamepadLookEnabled = true;
         private bool isFlyKeypressEnabled = true;
@@ -22,7 +22,7 @@ namespace XRTK.Providers.InputSystem.Simulation
         private bool wasLooking = false;
         private bool wasCursorVisible = true;
 
-        public CameraSimulationDataProvider(string name, uint priority, MixedRealityCameraInputSimulationDataProviderProfile profile) : base(name, priority)
+        public CameraSimulationDataProvider(string name, uint priority, CameraSimulationDataProviderProfile profile) : base(name, priority)
         {
             this.profile = profile;
         }

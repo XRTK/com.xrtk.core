@@ -25,7 +25,7 @@ namespace XRTK.Providers.Controllers.Hands
             IMixedRealityInputSystem inputSystem,
             string name,
             uint priority,
-            BaseMixedRealityControllerDataProviderProfile profile) : base(name, priority, profile) { }
+            BaseMixedRealityControllerDataProviderProfile profile) : base(name, priority) { }
 
         /// <inheritdoc />
         public override void LateUpdate()

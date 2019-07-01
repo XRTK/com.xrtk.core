@@ -6,14 +6,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.Providers.InputSystem.Simulation;
+using XRTK.Providers.Controllers;
 using XRTK.Services;
 using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Providers.InputSystem.Simulation
 {
-    public class HandTrackingSimulationDataProvider : BaseSimulationDataProvider
+    public class HandTrackingSimulationDataProvider : BaseControllerDataProvider, IMixedRealitySimulationDataProvider
     {
-        private MixedRealityHandTrackingInputSimulationDataProviderProfile profile;
+        private HandTrackingSimulationDataProviderProfile profile;
         private SimulatedHandDataProvider handDataProvider = null;
         public readonly SimulatedHandData HandDataLeft = new SimulatedHandData();
         public readonly SimulatedHandData HandDataRight = new SimulatedHandData();
@@ -33,7 +35,7 @@ namespace XRTK.Providers.InputSystem.Simulation
         /// </summary>
         private long lastHandUpdateTimestamp = 0;
 
-        public HandTrackingSimulationDataProvider(string name, uint priority, MixedRealityHandTrackingInputSimulationDataProviderProfile profile) : base(name, priority)
+        public HandTrackingSimulationDataProvider(string name, uint priority, HandTrackingSimulationDataProviderProfile profile) : base(name, priority)
         {
             this.profile = profile;
         }

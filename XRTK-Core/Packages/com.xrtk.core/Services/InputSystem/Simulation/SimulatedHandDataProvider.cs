@@ -144,7 +144,7 @@ namespace XRTK.Services.InputSystem.Simulation
     {
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
-        protected MixedRealityHandTrackingInputSimulationDataProviderProfile profile;
+        protected HandTrackingSimulationDataProviderProfile profile;
 
         /// <summary>
         /// If true then the hand is always visible, regardless of simulating.
@@ -170,7 +170,7 @@ namespace XRTK.Services.InputSystem.Simulation
         private SimulatedHandData.HandJointDataGenerator generatorLeft;
         private SimulatedHandData.HandJointDataGenerator generatorRight;
 
-        public SimulatedHandDataProvider(MixedRealityHandTrackingInputSimulationDataProviderProfile profile)
+        public SimulatedHandDataProvider(HandTrackingSimulationDataProviderProfile profile)
         {
             this.profile = profile;
 

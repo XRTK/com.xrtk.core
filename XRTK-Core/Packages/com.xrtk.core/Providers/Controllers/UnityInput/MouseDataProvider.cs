@@ -22,7 +22,7 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// <param name="priority"></param>
         /// <param name="profile"></param>
         public MouseDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
-            : base(name, priority, profile)
+            : base(name, priority)
         {
         }
 

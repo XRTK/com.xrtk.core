@@ -4,8 +4,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.InputSystem.Simulation;
 using XRTK.Providers.Controllers;
 using XRTK.Services;
@@ -160,21 +162,21 @@ namespace XRTK.Providers.InputSystem.Simulation
                 }
             }
 
-            //IMixedRealityPointer[] pointers = RequestPointers(simulationMode == HandSimulationMode.Gestures ? typeof(SimulatedGestureHand) : typeof(SimulatedArticulatedHand), handedness);
+            IMixedRealityPointer[] pointers = RequestPointers(simulationMode == HandSimulationMode.Gestures ? typeof(SimulatedGestureHand) : typeof(SimulatedArticulatedHand), handedness);
 
-            //var inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{handedness} Hand", pointers);
-            //switch (simulationMode)
-            //{
-            //    case HandSimulationMode.Articulated:
-            //        controller = new SimulatedArticulatedHand(TrackingState.Tracked, handedness, inputSource);
-            //        break;
-            //    case HandSimulationMode.Gestures:
-            //        controller = new SimulatedGestureHand(TrackingState.Tracked, handedness, inputSource);
-            //        break;
-            //    default:
-            //        controller = null;
-            //        break;
-            //}
+            var inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{handedness} Hand", pointers);
+            switch (simulationMode)
+            {
+                case HandSimulationMode.Articulated:
+                    controller = new SimulatedArticulatedHand(TrackingState.Tracked, handedness, inputSource);
+                    break;
+                case HandSimulationMode.Gestures:
+                    controller = new SimulatedGestureHand(TrackingState.Tracked, handedness, inputSource);
+                    break;
+                default:
+                    controller = null;
+                    break;
+            }
 
             Type controllerType = simulationMode == HandSimulationMode.Gestures ? typeof(SimulatedGestureHand) : typeof(SimulatedArticulatedHand);
             if (controller == null)

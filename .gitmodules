@@ -10,9 +10,4 @@
 [submodule "Submodules/Lumin"]
 	path = Submodules/Lumin
 	url = https://github.com/XRTK/Lumin.git
-[submodule "Oculus"]
-	path = Oculus
-	url = https://github.com/XRTK/Oculus.git
-[submodule "Submodules/Oculus"]
-	path = Submodules/Oculus
-	url = https://github.com/XRTK/Oculus.git
+

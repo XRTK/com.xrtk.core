@@ -14,7 +14,7 @@ namespace XRTK.Providers.Controllers
         /// <param name="priority"></param>
         /// <param name="profile"></param>
         protected BaseSpeechDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
-            : base(name, priority, profile)
+            : base(name, priority)
         {
         }
 

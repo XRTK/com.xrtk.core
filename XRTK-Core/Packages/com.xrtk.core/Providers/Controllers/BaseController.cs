@@ -281,6 +281,11 @@ namespace XRTK.Providers.Controllers
                     visualizer.UseSourcePoseData = false;
                     visualizer.PoseAction = altPoseAction;
                 }
+                else if(visualizationProfile.GlobalPointerPose != MixedRealityInputAction.None)
+                {
+                    visualizer.UseSourcePoseData = false;
+                    visualizer.PoseAction = visualizationProfile.GlobalPointerPose;
+                }
                 else
                 {
                     Debug.LogError("Failed to get pose actions for controller visual.");

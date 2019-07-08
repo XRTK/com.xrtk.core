@@ -30,6 +30,7 @@ namespace XRTK.Inspectors.Profiles
         private SerializedProperty useDefaultModels;
         private SerializedProperty globalLeftHandModel;
         private SerializedProperty globalRightHandModel;
+        private SerializedProperty globalPointerPose;
         private SerializedProperty controllerVisualizationSettings;
 
         private MixedRealityControllerVisualizationProfile controllerVisualizationProfile;
@@ -51,6 +52,7 @@ namespace XRTK.Inspectors.Profiles
             useDefaultModels = serializedObject.FindProperty("useDefaultModels");
             globalLeftHandModel = serializedObject.FindProperty("globalLeftHandModel");
             globalRightHandModel = serializedObject.FindProperty("globalRightHandModel");
+            globalPointerPose = serializedObject.FindProperty("globalPointerPose");
             controllerVisualizationSettings = serializedObject.FindProperty("controllerVisualizationSettings");
         }
 
@@ -111,6 +113,8 @@ namespace XRTK.Inspectors.Profiles
                 {
                     globalRightHandModel.objectReferenceValue = rightHandModelPrefab;
                 }
+
+                EditorGUILayout.PropertyField(globalPointerPose);
 
                 EditorGUIUtility.labelWidth = defaultLabelWidth;
 

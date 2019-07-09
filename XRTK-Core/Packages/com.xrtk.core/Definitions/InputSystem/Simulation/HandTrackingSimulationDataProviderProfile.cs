@@ -8,7 +8,7 @@ using XRTK.Services.InputSystem.Simulation;
 namespace XRTK.Definitions.InputSystem.Simulation
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Simulation/Hand Tracking Simulation Profile", fileName = "MixedRealityHandTrackingSimulationProfile", order = (int)CreateProfileMenuItemIndices.Simulation)]
-    public class HandTrackingSimulationDataProviderProfile : BaseMixedRealitySimulationDataProviderProfile
+    public class HandTrackingSimulationDataProviderProfile : BaseMixedRealityProfile
     {
         [Header("Hand Simulation")]
         [SerializeField]

@@ -20,7 +20,7 @@ namespace XRTK.Definitions.InputSystem.Simulation
         /// <param name="priority"></param>
         /// <param name="runtimePlatform"></param>
         /// <param name="profile"></param>
-        public SimulationDataProviderConfiguration(SystemType dataProviderType, string dataProviderName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealitySimulationDataProviderProfile profile)
+        public SimulationDataProviderConfiguration(SystemType dataProviderType, string dataProviderName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityProfile profile)
         {
             this.dataProviderType = dataProviderType;
             this.dataProviderName = dataProviderName;
@@ -65,11 +65,11 @@ namespace XRTK.Definitions.InputSystem.Simulation
         public SupportedPlatforms RuntimePlatform => runtimePlatform;
 
         [SerializeField]
-        private BaseMixedRealitySimulationDataProviderProfile profile;
+        private BaseMixedRealityProfile profile;
 
         /// <summary>
         /// The profile settings for the simulation data provider.
         /// </summary>
-        public BaseMixedRealitySimulationDataProviderProfile Profile => profile;
+        public BaseMixedRealityProfile Profile => profile;
     }
 }

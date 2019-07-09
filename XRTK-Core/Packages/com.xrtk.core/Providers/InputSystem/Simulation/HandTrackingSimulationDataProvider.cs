@@ -37,7 +37,8 @@ namespace XRTK.Providers.InputSystem.Simulation
         /// </summary>
         private long lastHandUpdateTimestamp = 0;
 
-        public HandTrackingSimulationDataProvider(string name, uint priority, HandTrackingSimulationDataProviderProfile profile) : base(name, priority)
+        public HandTrackingSimulationDataProvider(string name, uint priority, HandTrackingSimulationDataProviderProfile profile)
+            : base(name, priority, profile)
         {
             this.profile = profile;
         }

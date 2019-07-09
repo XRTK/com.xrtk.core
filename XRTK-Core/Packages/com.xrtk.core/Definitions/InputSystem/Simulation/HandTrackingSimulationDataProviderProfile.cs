@@ -3,12 +3,13 @@
 
 using UnityEngine;
 using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers;
 using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Definitions.InputSystem.Simulation
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Simulation/Hand Tracking Simulation Profile", fileName = "MixedRealityHandTrackingSimulationProfile", order = (int)CreateProfileMenuItemIndices.Simulation)]
-    public class HandTrackingSimulationDataProviderProfile : BaseMixedRealityProfile
+    public class HandTrackingSimulationDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
     {
         [Header("Hand Simulation")]
         [SerializeField]

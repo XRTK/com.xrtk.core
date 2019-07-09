@@ -23,7 +23,7 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// <param name="priority"></param>
         /// <param name="profile"></param>
         public UnityTouchDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
-            : base(name, priority)
+            : base(name, priority, profile)
         {
         }
 

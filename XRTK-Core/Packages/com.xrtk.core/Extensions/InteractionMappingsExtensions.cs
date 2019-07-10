@@ -9,7 +9,7 @@ using XRTK.Services;
 namespace XRTK.Extensions
 {
     /// <summary>
-    /// Extensions for the InteractionSource class to add haptics and expose the renderable model.
+    /// Extensions for the InteractionMapping class to refactor the generic methods used for raising events in InteractionMappings.
     /// </summary>
     public static class InteractionMappingsExtensions
     {

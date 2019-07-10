@@ -37,3 +37,9 @@ MonoBehaviour:
     isDefaultPackage: 1
     isRequiredPackage: 0
     isEnabled: 1
+  - name: com.xrtk.oculus
+    displayName: XRTK.Oculus
+    uri: https://github.com/XRTK/Oculus.git
+    isDefaultPackage: 1
+    isRequiredPackage: 0
+    isEnabled: 1    

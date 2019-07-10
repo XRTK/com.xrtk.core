@@ -71,12 +71,31 @@ namespace XRTK.Providers.Controllers
         }
 
         [SerializeField]
-        [Tooltip("Defaul Right Controller Model.\nNote: If an override profile model is not found for a specific controller, the fallback is the global model for the specific hand.")]
+        [Tooltip("Default Right Controller Model.\nNote: If an override profile model is not found for a specific controller, the fallback is the global model for the specific hand.")]
         private GameObject globalRightHandModel;
+
+        /// <summary>
+        /// The Default controller pose action, for when there is no specific pose for specific controller / hand combination.
+        /// </summary>
+        /// <remarks>
+        /// If the default model for the right hand controller can not be found, the controller will fall back and use this setting for visualization.
+        /// </remarks>
+        public GameObject GlobalRightHandModel
+        {
+            get => globalRightHandModel;
+            private set => globalRightHandModel = value;
+        }
+        
+        [SerializeField]
+        [Tooltip("Default Pose Action.\nNote: If an override profile is not found for a specific controller, the default pose action is used.")]
+        private MixedRealityInputAction globalPointerPose;
 
         /// <summary>
         /// The Default controller model, for when there is no specific controller model for the Left hand or when no hand is specified (Handedness = none)
         /// </summary>
+        /// <remarks>
+        /// If the pointer pose action for the specific controller can not be found, the controller will fall back and use this setting for visualization.
+        /// </remarks>        
         /// <remarks>
         /// If the default model for the right hand controller can not be found, the controller will fall back and use this setting for visualization.
         /// </remarks>
@@ -84,22 +103,6 @@ namespace XRTK.Providers.Controllers
         {
             get => globalPointerPose;
             private set => globalPointerPose = value;
-        }
-
-        [SerializeField]
-        [Tooltip("Default Pose Action.\nNote: If an override profile is not found for a specific controller, the default pose action is used.")]
-        private MixedRealityInputAction globalPointerPose;
-
-        /// <summary>
-        /// The Default controller pose action, for when there is no specific pose for specific controller / hand combination.
-        /// </summary>
-        /// <remarks>
-        /// If the pointer pose action for the specific controller can not be found, the controller will fall back and use this setting for visualization.
-        /// </remarks>
-        public GameObject GlobalRightHandModel
-        {
-            get => globalRightHandModel;
-            private set => globalRightHandModel = value;
         }
 
         [SerializeField]

@@ -118,6 +118,8 @@ namespace XRTK.Providers.Controllers
         /// </summary>
         /// <param name="controllerType">The type of controller to query for</param>
         /// <param name="hand">The specific hand assigned to the controller</param>
+        /// <param name="overrideModel">Outputs the supplied model for an overridden visualization (if available), can return null </param>
+        /// <returns>Returns whether the override visualization should use the System model (if available) or not</returns>
         public bool GetControllerModelOverride(Type controllerType, Handedness hand, out GameObject overrideModel)
         {
             overrideModel = null;

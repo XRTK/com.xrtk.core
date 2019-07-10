@@ -195,6 +195,12 @@ namespace XRTK.Providers.Controllers
         /// </remarks>
         internal async Task TryRenderControllerModelAsync(Type controllerType, byte[] glbData = null, bool useAlternatePoseAction = false)
         {
+            if (controllerType == null)
+            {
+                Debug.LogError("Unknown type of controller, cannot render");
+                return;
+            }
+
             var visualizationProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile;
 
             if (visualizationProfile == null)

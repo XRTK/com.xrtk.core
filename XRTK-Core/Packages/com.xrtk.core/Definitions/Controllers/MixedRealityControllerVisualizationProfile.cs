@@ -115,20 +115,21 @@ namespace XRTK.Providers.Controllers
         /// </summary>
         /// <param name="controllerType">The type of controller to query for</param>
         /// <param name="hand">The specific hand assigned to the controller</param>
-        public GameObject GetControllerModelOverride(Type controllerType, Handedness hand)
+        public bool GetControllerModelOverride(Type controllerType, Handedness hand, out GameObject overrideModel)
         {
+            overrideModel = null;
+
             for (int i = 0; i < controllerVisualizationSettings.Length; i++)
             {
-                if (!controllerVisualizationSettings[i].UseDefaultModel &&
-                    controllerVisualizationSettings[i].ControllerType != null &&
+                if (controllerVisualizationSettings[i].ControllerType != null &&
                     controllerVisualizationSettings[i].ControllerType.Type == controllerType &&
                     (controllerVisualizationSettings[i].Handedness == hand || controllerVisualizationSettings[i].Handedness == Handedness.Both))
                 {
-                    return controllerVisualizationSettings[i].OverrideControllerModel;
+                    overrideModel = controllerVisualizationSettings[i].OverrideControllerModel;
+                    return controllerVisualizationSettings[i].UseDefaultModel;
                 }
             }
-
-            return null;
+            return false;
         }
 
         /// <summary>

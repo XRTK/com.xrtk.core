@@ -250,7 +250,7 @@ namespace XRTK.Inspectors.Profiles
         {
             if (modelPrefab == null) { return true; }
 
-            if (PrefabUtility.GetPrefabInstanceStatus(modelPrefab) == PrefabInstanceStatus.NotAPrefab)
+            if (PrefabUtility.GetPrefabAssetType(modelPrefab) == PrefabAssetType.NotAPrefab)
             {
                 Debug.LogWarning("Assigned GameObject must be a prefab");
                 return false;

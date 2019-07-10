@@ -186,6 +186,13 @@ namespace XRTK.Providers.Controllers
         /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
         /// <param name="useAlternatePoseAction">Should the visualizer be assigned the alternate pose actions?</param>
         /// <returns>True, if controller model is being properly rendered.</returns>
+        /// <remarks>
+        /// (Given a user can, have no system default and override specific controller types with a system default, OR, enable a system system default but override that default for specific controllers)
+        /// Flow is as follows:
+        /// 1. Check if either there is a global setting for an system override and if there is a specific customization for that controller type
+        /// 2. If either the there is a system data and either the 
+        /// 
+        /// </remarks>
         internal async Task TryRenderControllerModelAsync(Type controllerType, byte[] glbData = null, bool useAlternatePoseAction = false)
         {
             var visualizationProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile;
@@ -199,34 +206,23 @@ namespace XRTK.Providers.Controllers
             if (!visualizationProfile.RenderMotionControllers) { return; }
 
             GameObject controllerModel = null;
+            Utilities.Gltf.Schema.GltfObject gltfObject = null;
 
-            // If a specific controller template wants to override the global model, assign that instead.
-            if (!visualizationProfile.UseDefaultModels)
+            // If a specific controller template exists, check if it wants to override the global model, or use the system default specifically (in case global default is not used)
+            bool useSystemDefaultModels = visualizationProfile.GetControllerModelOverride(controllerType, ControllerHandedness, out controllerModel);
+
+            // If an override is not configured for defaults and has no model, then use the system default check
+            if (!useSystemDefaultModels && controllerModel == null)
             {
-                controllerModel = visualizationProfile.GetControllerModelOverride(controllerType, ControllerHandedness);
+                useSystemDefaultModels = visualizationProfile.UseDefaultModels;
             }
 
-            // Attempt to load the controller model from glbData.
-            if (controllerModel == null && glbData != null)
+            // if we have model data from the platform and the controller has been configured to use the default model, attempt to load the controller model from glbData.
+            if (glbData != null && useSystemDefaultModels)
             {
-                var gltfObject = GltfUtility.GetGltfObjectFromGlb(glbData);
+                gltfObject = GltfUtility.GetGltfObjectFromGlb(glbData);
                 await gltfObject.ConstructAsync();
                 controllerModel = gltfObject.GameObjectReference;
-                controllerModel.name = $"{controllerType.Name}_Visualization";
-                controllerModel.transform.SetParent(MixedRealityToolkit.Instance.MixedRealityPlayspace.transform);
-                var visualizationType = visualizationProfile.GetControllerVisualizationTypeOverride(controllerType, ControllerHandedness) ??
-                                        visualizationProfile.ControllerVisualizationType;
-                controllerModel.AddComponent(visualizationType.Type);
-                Visualizer = controllerModel.GetComponent<IMixedRealityControllerVisualizer>();
-
-                if (Visualizer != null)
-                {
-                    Visualizer.Controller = this;
-                    SetupController(Visualizer);
-                    return; // Nothing left to do;
-                }
-
-                Debug.LogWarning($"Failed to attach a valid IMixedRealityControllerVisualizer to {controllerModel.name}");
             }
 
             // If we didn't get an override model, and we didn't load the driver model,
@@ -244,13 +240,28 @@ namespace XRTK.Providers.Controllers
                 }
             }
 
-            // If we've got a controller model prefab, then place it in the scene.
+            // If we've got a controller model, then place it in the scene and get/attach the visualizer.
             if (controllerModel != null)
             {
-                var controllerObject = UnityEngine.Object.Instantiate(controllerModel, MixedRealityToolkit.Instance.MixedRealityPlayspace);
-                controllerObject.name = $"{controllerType.Name}_{controllerObject.name}";
-                Visualizer = controllerObject.GetComponent<IMixedRealityControllerVisualizer>();
+                //If the model was loaded from a system template
+                if (useSystemDefaultModels && gltfObject != null)
+                {
+                    controllerModel.name = $"{controllerType.Name}_Visualization";
+                    controllerModel.transform.SetParent(MixedRealityToolkit.Instance.MixedRealityPlayspace.transform);
+                    var visualizationType = visualizationProfile.GetControllerVisualizationTypeOverride(controllerType, ControllerHandedness) ??
+                                            visualizationProfile.ControllerVisualizationType;
+                    controllerModel.AddComponent(visualizationType.Type);
+                    Visualizer = controllerModel.GetComponent<IMixedRealityControllerVisualizer>();
+                }
+                //If the model was a prefab
+                else
+                {
+                    var controllerObject = UnityEngine.Object.Instantiate(controllerModel, MixedRealityToolkit.Instance.MixedRealityPlayspace);
+                    controllerObject.name = $"{controllerType.Name}_Visualization";
+                    Visualizer = controllerObject.GetComponent<IMixedRealityControllerVisualizer>();
+                }
 
+                //If a visualizer exists, set it up and bind it to the controller
                 if (Visualizer != null)
                 {
                     Visualizer.Controller = this;
@@ -258,7 +269,7 @@ namespace XRTK.Providers.Controllers
                 }
                 else
                 {
-                    Debug.LogError($"{controllerObject.name} is missing a IMixedRealityControllerVisualizer component!");
+                    Debug.LogWarning($"Failed to attach a valid IMixedRealityControllerVisualizer to {controllerType.Name}");
                 }
             }
 

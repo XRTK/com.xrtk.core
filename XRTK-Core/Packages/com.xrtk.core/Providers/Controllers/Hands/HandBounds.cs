@@ -89,7 +89,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public void OnSourceLost(SourceStateEventData eventData)
         {
-            var hand = eventData.Controller as IMixedRealityHandController;
+            var hand = eventData.Controller as IMixedRealityHand;
             if (hand != null)
             {
                 Bounds.Remove(hand.ControllerHandedness);

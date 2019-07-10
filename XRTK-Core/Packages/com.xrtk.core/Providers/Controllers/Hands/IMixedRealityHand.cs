@@ -2,8 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.Providers.Controllers;
 
-namespace XRTK.Interfaces.Providers.Controllers
+namespace XRTK.Providers.Controllers.Hands
 {
     /// <summary>
     /// Hand definition, used to provide access to hand joints and other data.

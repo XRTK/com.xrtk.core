@@ -11,10 +11,10 @@ using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Hands
 {
-    public class HandJointController : BaseControllerDataProvider, IMixedRealityHandJointService
+    public class HandJointController : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider
     {
-        private IMixedRealityHandController leftHand;
-        private IMixedRealityHandController rightHand;
+        private IMixedRealityHand leftHand;
+        private IMixedRealityHand rightHand;
 
         private Dictionary<TrackedHandJoint, Transform> leftHandFauxJoints = new Dictionary<TrackedHandJoint, Transform>();
         private Dictionary<TrackedHandJoint, Transform> rightHandFauxJoints = new Dictionary<TrackedHandJoint, Transform>();
@@ -35,7 +35,7 @@ namespace XRTK.Providers.Controllers.Hands
 
             foreach (var detectedController in MixedRealityToolkit.InputSystem.DetectedControllers)
             {
-                var hand = detectedController as IMixedRealityHandController;
+                var hand = detectedController as IMixedRealityHand;
                 if (hand != null)
                 {
                     if (detectedController.ControllerHandedness == Handedness.Left)
@@ -115,7 +115,7 @@ namespace XRTK.Providers.Controllers.Hands
 
         public Transform RequestJointTransform(TrackedHandJoint joint, Handedness handedness)
         {
-            IMixedRealityHandController hand = null;
+            IMixedRealityHand hand = null;
             Dictionary<TrackedHandJoint, Transform> fauxJoints = null;
             if (handedness == Handedness.Left)
             {

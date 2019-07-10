@@ -9,7 +9,7 @@ using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Providers.Controllers.Hands
 {
-    public abstract class BaseHand : BaseController, IMixedRealityHandController
+    public abstract class BaseHand : BaseController, IMixedRealityHand
     {
         private const float CurrentVelocityWeight = .8f;
         private const float NewVelocityWeight = .2f;

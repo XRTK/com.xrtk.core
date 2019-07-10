@@ -150,7 +150,6 @@ namespace XRTK.Providers.Controllers.UnityInput
                     // If our value was updated, raise it.
                     if (interactionMapping.Updated)
                     {
-                        Debug.LogError($"Interaction updated {interactionMapping.Description} - Value [{interactionMapping.FloatData}]");
                         // Raise input system Event if it enabled
                         MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, interactionMapping.MixedRealityInputAction, interactionMapping.FloatData);
                     }

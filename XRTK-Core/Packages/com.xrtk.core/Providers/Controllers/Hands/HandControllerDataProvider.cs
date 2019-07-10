@@ -3,15 +3,13 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Hands
 {
-    public class HandJointController : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider
+    public class HandControllerDataProvider : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider
     {
         private IMixedRealityHand leftHand;
         private IMixedRealityHand rightHand;
@@ -19,13 +17,14 @@ namespace XRTK.Providers.Controllers.Hands
         private Dictionary<TrackedHandJoint, Transform> leftHandFauxJoints = new Dictionary<TrackedHandJoint, Transform>();
         private Dictionary<TrackedHandJoint, Transform> rightHandFauxJoints = new Dictionary<TrackedHandJoint, Transform>();
 
-        #region BaseInputDeviceManager Implementation
-
-        public HandJointController(
-            IMixedRealityInputSystem inputSystem,
-            string name,
-            uint priority,
-            BaseMixedRealityControllerDataProviderProfile profile) : base(name, priority, profile) { }
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="priority"></param>
+        /// <param name="profile"></param>
+        public HandControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
+            : base(name, priority, profile) { }
 
         /// <inheritdoc />
         public override void LateUpdate()
@@ -109,14 +108,13 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        #endregion BaseInputDeviceManager Implementation
+        #region IMixedRealityHandControllerDataProvider Implementation
 
-        #region IMixedRealityHandJointService Implementation
-
+        /// <inheritdoc />
         public Transform RequestJointTransform(TrackedHandJoint joint, Handedness handedness)
         {
             IMixedRealityHand hand = null;
-            Dictionary<TrackedHandJoint, Transform> fauxJoints = null;
+            Dictionary<TrackedHandJoint, Transform> fauxJoints;
             if (handedness == Handedness.Left)
             {
                 hand = leftHand;
@@ -136,6 +134,7 @@ namespace XRTK.Providers.Controllers.Hands
             if (fauxJoints != null && !fauxJoints.TryGetValue(joint, out jointTransform))
             {
                 jointTransform = new GameObject().transform;
+
                 // Since this service survives scene loading and unloading, the fauxJoints it manages need to as well.
                 Object.DontDestroyOnLoad(jointTransform.gameObject);
                 jointTransform.name = string.Format("Joint Tracker: {1} {0}", joint, handedness);
@@ -151,11 +150,27 @@ namespace XRTK.Providers.Controllers.Hands
             return jointTransform;
         }
 
+        /// <inheritdoc />
         public bool IsHandTracked(Handedness handedness)
         {
-            return handedness == Handedness.Left ? leftHand != null : handedness == Handedness.Right ? rightHand != null : false;
+            switch (handedness)
+            {
+                case Handedness.None:
+                    return leftHand == null && rightHand == null;
+                case Handedness.Left:
+                    return leftHand != null;
+                case Handedness.Right:
+                    return rightHand != null;
+                case Handedness.Both:
+                    return leftHand != null && rightHand != null;
+                case Handedness.Any:
+                    return leftHand != null || rightHand != null;
+                case Handedness.Other:
+                default:
+                    return false;
+            }
         }
 
-        #endregion IMixedRealityHandJointService Implementation
+        #endregion IMixedRealityHandControllerDataProvider Implementation
     }
 }

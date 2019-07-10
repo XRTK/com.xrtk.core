@@ -16,6 +16,11 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// </summary>
         Transform RequestJointTransform(TrackedHandJoint joint, Handedness handedness);
 
+        /// <summary>
+        /// Gets whether the specified hand is currently being tracked.
+        /// </summary>
+        /// <param name="handedness">Hand to get tracked state for.</param>
+        /// <returns>True if specified hand is tracked.</returns>
         bool IsHandTracked(Handedness handedness);
     }
 }

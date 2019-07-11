@@ -121,7 +121,7 @@ namespace XRTK.Providers.Controllers.OpenVR
                 return SupportedControllerType.None;
             }
 
-            if (joystickName.Contains("Oculus Rift CV1"))
+            if (joystickName.Contains("Oculus Rift CV1") || joystickName.Contains("Oculus Touch"))
             {
                 return SupportedControllerType.OculusTouch;
             }

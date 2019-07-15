@@ -67,7 +67,7 @@ namespace XRTK.Interfaces.InputSystem
         bool IsTargetPositionLockedOnFocusLock { get; set; }
 
         /// <summary>
-        /// The pointer's maximum extent when raycasting.
+        /// The pointer's extent when raycasting.
         /// </summary>
         float PointerExtent { get; set; }
 

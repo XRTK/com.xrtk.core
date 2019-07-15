@@ -8,6 +8,12 @@ namespace XRTK.Utilities
 {
     public static class PlatformUtility
     {
+        /// <summary>
+        /// Checks to see if the <see cref="RuntimePlatform"/> is part of the <see cref="SupportedPlatforms"/>
+        /// </summary>
+        /// <param name="runtimePlatform"></param>
+        /// <param name="platforms"></param>
+        /// <returns>True, if the runtime platform is included in the list of supported platforms, otherwise false.</returns>
         public static bool IsPlatformSupported(this RuntimePlatform runtimePlatform, SupportedPlatforms platforms)
         {
             var target = GetSupportedPlatformMask(runtimePlatform);
@@ -58,6 +64,12 @@ namespace XRTK.Utilities
         }
 
 #if UNITY_EDITOR
+        /// <summary>
+        /// Checks to see if the <see cref="RuntimePlatform"/> is part of the <see cref="SupportedPlatforms"/>
+        /// </summary>
+        /// <param name="editorBuildTarget"></param>
+        /// <param name="platforms"></param>
+        /// <returns>True, if the runtime platform is included in the list of supported platforms, otherwise false.</returns>
         public static bool IsPlatformSupported(this UnityEditor.BuildTarget editorBuildTarget, SupportedPlatforms platforms)
         {
             var target = GetSupportedPlatformMask(editorBuildTarget);

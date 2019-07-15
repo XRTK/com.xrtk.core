@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class ClippingPrimitive
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.42.2.0">
+    <meta name="generator" content="docfx 2.43.3.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -416,7 +416,7 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_ClippingSideProperty.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.ClippingSideProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L38">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L40">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_ClippingSideProperty_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.ClippingSideProperty*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_ClippingSideProperty" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.ClippingSideProperty">ClippingSideProperty</h4>
@@ -476,7 +476,7 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_KeywordProperty.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.KeywordProperty%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L37">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L38">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_KeywordProperty_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.KeywordProperty*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_KeywordProperty" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.KeywordProperty">KeywordProperty</h4>
@@ -508,15 +508,16 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_AddRenderer_UnityEngine_Renderer_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.AddRenderer(UnityEngine.Renderer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L46">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L52">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_AddRenderer_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.AddRenderer*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_AddRenderer_UnityEngine_Renderer_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.AddRenderer(UnityEngine.Renderer)">AddRenderer(Renderer)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Add the specified renderer to the clipping component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void AddRenderer(Renderer _renderer)</code></pre>
+    <pre><code class="lang-csharp hljs">public void AddRenderer(Renderer renderer_)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -530,17 +531,66 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <tbody>
       <tr>
         <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Renderer.html">Renderer</a></td>
-        <td><span class="parametername">_renderer</span></td>
+        <td><span class="parametername">renderer_</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_AddRenderers_UnityEngine_Renderer___.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.AddRenderers(UnityEngine.Renderer%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L71">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Rendering_ClippingPrimitive_AddRenderers_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.AddRenderers*"></a>
+  <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_AddRenderers_UnityEngine_Renderer___" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.AddRenderers(UnityEngine.Renderer[])">AddRenderers(Renderer[])</h4>
+  <div class="markdown level1 summary"><p>Add the specified renderers to the clipping component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void AddRenderers(Renderer[] renderers_)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Renderer.html">Renderer</a>[]</td>
+        <td><span class="parametername">renderers_</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_ClearRenderers.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.ClearRenderers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L101">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Rendering_ClippingPrimitive_ClearRenderers_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.ClearRenderers*"></a>
+  <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_ClearRenderers" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.ClearRenderers">ClearRenderers()</h4>
+  <div class="markdown level1 summary"><p>clear all the renderers from this clipping component.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearRenderers()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_GetMaterial_UnityEngine_Renderer_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.GetMaterial(UnityEngine.Renderer%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L213">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L257">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_GetMaterial_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.GetMaterial*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_GetMaterial_UnityEngine_Renderer_System_Boolean_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.GetMaterial(UnityEngine.Renderer,System.Boolean)">GetMaterial(Renderer, Boolean)</h4>
@@ -592,7 +642,7 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_Initialize.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.Initialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L144">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L188">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_Initialize_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.Initialize*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_Initialize" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.Initialize">Initialize()</h4>
@@ -607,7 +657,7 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_LateUpdate.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.LateUpdate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L112">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L154">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_LateUpdate_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.LateUpdate*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_LateUpdate" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.LateUpdate">LateUpdate()</h4>
@@ -622,7 +672,7 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_OnDestroy.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.OnDestroy%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L117">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L159">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_OnDestroy_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.OnDestroy*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_OnDestroy" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.OnDestroy">OnDestroy()</h4>
@@ -637,7 +687,7 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_OnDisable.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.OnDisable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L89">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L131">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_OnDisable_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.OnDisable*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_OnDisable" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.OnDisable">OnDisable()</h4>
@@ -652,7 +702,7 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_OnEnable.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.OnEnable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L82">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L124">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_OnEnable_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.OnEnable*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_OnEnable" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.OnEnable">OnEnable()</h4>
@@ -667,7 +717,7 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_OnValidate.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.OnValidate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L76">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L118">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_OnValidate_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.OnValidate*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_OnValidate" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.OnValidate">OnValidate()</h4>
@@ -682,15 +732,16 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_RemoveRenderer_UnityEngine_Renderer_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.RemoveRenderer(UnityEngine.Renderer)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L61">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L83">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_RemoveRenderer_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.RemoveRenderer*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_RemoveRenderer_UnityEngine_Renderer_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.RemoveRenderer(UnityEngine.Renderer)">RemoveRenderer(Renderer)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Remove the specified renderer from the clipping component.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RemoveRenderer(Renderer _renderer)</code></pre>
+    <pre><code class="lang-csharp hljs">public void RemoveRenderer(Renderer renderer_)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -704,7 +755,7 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <tbody>
       <tr>
         <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Renderer.html">Renderer</a></td>
-        <td><span class="parametername">_renderer</span></td>
+        <td><span class="parametername">renderer_</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -714,7 +765,7 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_RestoreUnassignedMaterials.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.RestoreUnassignedMaterials%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L235">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L279">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_RestoreUnassignedMaterials_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.RestoreUnassignedMaterials*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_RestoreUnassignedMaterials" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.RestoreUnassignedMaterials">RestoreUnassignedMaterials()</h4>
@@ -729,7 +780,7 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_ToggleClippingFeature_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.ToggleClippingFeature(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L175">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L219">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_ToggleClippingFeature_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.ToggleClippingFeature*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_ToggleClippingFeature_System_Boolean_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.ToggleClippingFeature(System.Boolean)">ToggleClippingFeature(Boolean)</h4>
@@ -761,7 +812,7 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_ToggleClippingFeature_UnityEngine_Material_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.ToggleClippingFeature(UnityEngine.Material%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L199">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L243">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_ToggleClippingFeature_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.ToggleClippingFeature*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_ToggleClippingFeature_UnityEngine_Material_System_Boolean_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.ToggleClippingFeature(UnityEngine.Material,System.Boolean)">ToggleClippingFeature(Material, Boolean)</h4>
@@ -798,7 +849,7 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_UpdateRenderers.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.UpdateRenderers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L150">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L194">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_UpdateRenderers_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.UpdateRenderers*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_UpdateRenderers" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.UpdateRenderers">UpdateRenderers()</h4>
@@ -813,7 +864,7 @@ public abstract class ClippingPrimitive : MonoBehaviour</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Rendering_ClippingPrimitive_UpdateShaderProperties_UnityEngine_MaterialPropertyBlock_.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Rendering.ClippingPrimitive.UpdateShaderProperties(UnityEngine.MaterialPropertyBlock)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L173">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Rendering/ClippingPrimitive.cs/#L217">View Source</a>
   </span>
   <a id="XRTK_Utilities_Rendering_ClippingPrimitive_UpdateShaderProperties_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.UpdateShaderProperties*"></a>
   <h4 id="XRTK_Utilities_Rendering_ClippingPrimitive_UpdateShaderProperties_UnityEngine_MaterialPropertyBlock_" data-uid="XRTK.Utilities.Rendering.ClippingPrimitive.UpdateShaderProperties(UnityEngine.MaterialPropertyBlock)">UpdateShaderProperties(MaterialPropertyBlock)</h4>

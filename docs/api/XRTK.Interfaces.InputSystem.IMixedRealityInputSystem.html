@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface IMixedRealityInputSystem
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.42.2.0">
+    <meta name="generator" content="docfx 2.43.3.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -108,6 +108,12 @@ All replacement systems for providing Input System functionality should derive f
     </div>
     <div>
       <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html#XRTK_Interfaces_IMixedRealityService_Update">IMixedRealityService.Update()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html#XRTK_Interfaces_IMixedRealityService_LateUpdate">IMixedRealityService.LateUpdate()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html#XRTK_Interfaces_IMixedRealityService_FixedUpdate">IMixedRealityService.FixedUpdate()</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html#XRTK_Interfaces_IMixedRealityService_Disable">IMixedRealityService.Disable()</a>
@@ -518,7 +524,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseDictationComplete_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_System_String_UnityEngine_AudioClip_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseDictationComplete(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CSystem.String%2CUnityEngine.AudioClip)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L584">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L593">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseDictationComplete_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseDictationComplete*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseDictationComplete_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_System_String_UnityEngine_AudioClip_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseDictationComplete(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,System.String,UnityEngine.AudioClip)">RaiseDictationComplete(IMixedRealityInputSource, String, AudioClip)</h4>
@@ -560,7 +566,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseDictationError_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_System_String_UnityEngine_AudioClip_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseDictationError(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CSystem.String%2CUnityEngine.AudioClip)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L592">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L601">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseDictationError_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseDictationError*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseDictationError_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_System_String_UnityEngine_AudioClip_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseDictationError(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,System.String,UnityEngine.AudioClip)">RaiseDictationError(IMixedRealityInputSource, String, AudioClip)</h4>
@@ -602,7 +608,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseDictationHypothesis_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_System_String_UnityEngine_AudioClip_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseDictationHypothesis(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CSystem.String%2CUnityEngine.AudioClip)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L568">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L577">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseDictationHypothesis_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseDictationHypothesis*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseDictationHypothesis_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_System_String_UnityEngine_AudioClip_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseDictationHypothesis(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,System.String,UnityEngine.AudioClip)">RaiseDictationHypothesis(IMixedRealityInputSource, String, AudioClip)</h4>
@@ -644,7 +650,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseDictationResult_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_System_String_UnityEngine_AudioClip_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseDictationResult(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CSystem.String%2CUnityEngine.AudioClip)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L576">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L585">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseDictationResult_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseDictationResult*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseDictationResult_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_System_String_UnityEngine_AudioClip_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseDictationResult(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,System.String,UnityEngine.AudioClip)">RaiseDictationResult(IMixedRealityInputSource, String, AudioClip)</h4>
@@ -812,7 +818,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCanceled_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCanceled(XRTK.Interfaces.Providers.Controllers.IMixedRealityController%2CXRTK.Definitions.InputSystem.MixedRealityInputAction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L541">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L550">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCanceled_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCanceled*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCanceled_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCanceled(XRTK.Interfaces.Providers.Controllers.IMixedRealityController,XRTK.Definitions.InputSystem.MixedRealityInputAction)">RaiseGestureCanceled(IMixedRealityController, MixedRealityInputAction)</h4>
@@ -850,7 +856,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted(XRTK.Interfaces.Providers.Controllers.IMixedRealityController%2CXRTK.Definitions.InputSystem.MixedRealityInputAction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L502">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L511">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted(XRTK.Interfaces.Providers.Controllers.IMixedRealityController,XRTK.Definitions.InputSystem.MixedRealityInputAction)">RaiseGestureCompleted(IMixedRealityController, MixedRealityInputAction)</h4>
@@ -888,7 +894,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Quaternion_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted(XRTK.Interfaces.Providers.Controllers.IMixedRealityController%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CUnityEngine.Quaternion)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L526">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L535">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Quaternion_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted(XRTK.Interfaces.Providers.Controllers.IMixedRealityController,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Quaternion)">RaiseGestureCompleted(IMixedRealityController, MixedRealityInputAction, Quaternion)</h4>
@@ -931,7 +937,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted(XRTK.Interfaces.Providers.Controllers.IMixedRealityController%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CUnityEngine.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L510">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L519">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted(XRTK.Interfaces.Providers.Controllers.IMixedRealityController,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector2)">RaiseGestureCompleted(IMixedRealityController, MixedRealityInputAction, Vector2)</h4>
@@ -974,7 +980,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted(XRTK.Interfaces.Providers.Controllers.IMixedRealityController%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CUnityEngine.Vector3)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L518">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L527">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted(XRTK.Interfaces.Providers.Controllers.IMixedRealityController,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3)">RaiseGestureCompleted(IMixedRealityController, MixedRealityInputAction, Vector3)</h4>
@@ -1017,7 +1023,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Definitions_Utilities_MixedRealityPose_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted(XRTK.Interfaces.Providers.Controllers.IMixedRealityController%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CXRTK.Definitions.Utilities.MixedRealityPose)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L534">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L543">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureCompleted_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Definitions_Utilities_MixedRealityPose_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureCompleted(XRTK.Interfaces.Providers.Controllers.IMixedRealityController,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Definitions.Utilities.MixedRealityPose)">RaiseGestureCompleted(IMixedRealityController, MixedRealityInputAction, MixedRealityPose)</h4>
@@ -1060,7 +1066,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureStarted_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureStarted(XRTK.Interfaces.Providers.Controllers.IMixedRealityController%2CXRTK.Definitions.InputSystem.MixedRealityInputAction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L456">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L465">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureStarted_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureStarted*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureStarted_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureStarted(XRTK.Interfaces.Providers.Controllers.IMixedRealityController,XRTK.Definitions.InputSystem.MixedRealityInputAction)">RaiseGestureStarted(IMixedRealityController, MixedRealityInputAction)</h4>
@@ -1098,7 +1104,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated(XRTK.Interfaces.Providers.Controllers.IMixedRealityController%2CXRTK.Definitions.InputSystem.MixedRealityInputAction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L463">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L472">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated(XRTK.Interfaces.Providers.Controllers.IMixedRealityController,XRTK.Definitions.InputSystem.MixedRealityInputAction)">RaiseGestureUpdated(IMixedRealityController, MixedRealityInputAction)</h4>
@@ -1136,7 +1142,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Quaternion_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated(XRTK.Interfaces.Providers.Controllers.IMixedRealityController%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CUnityEngine.Quaternion)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L487">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L496">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Quaternion_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated(XRTK.Interfaces.Providers.Controllers.IMixedRealityController,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Quaternion)">RaiseGestureUpdated(IMixedRealityController, MixedRealityInputAction, Quaternion)</h4>
@@ -1179,7 +1185,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated(XRTK.Interfaces.Providers.Controllers.IMixedRealityController%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CUnityEngine.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L471">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L480">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated(XRTK.Interfaces.Providers.Controllers.IMixedRealityController,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector2)">RaiseGestureUpdated(IMixedRealityController, MixedRealityInputAction, Vector2)</h4>
@@ -1222,7 +1228,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated(XRTK.Interfaces.Providers.Controllers.IMixedRealityController%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CUnityEngine.Vector3)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L479">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L488">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated(XRTK.Interfaces.Providers.Controllers.IMixedRealityController,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3)">RaiseGestureUpdated(IMixedRealityController, MixedRealityInputAction, Vector3)</h4>
@@ -1265,7 +1271,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Definitions_Utilities_MixedRealityPose_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated(XRTK.Interfaces.Providers.Controllers.IMixedRealityController%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CXRTK.Definitions.Utilities.MixedRealityPose)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L495">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L504">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseGestureUpdated_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Definitions_Utilities_MixedRealityPose_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseGestureUpdated(XRTK.Interfaces.Providers.Controllers.IMixedRealityController,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Definitions.Utilities.MixedRealityPose)">RaiseGestureUpdated(IMixedRealityController, MixedRealityInputAction, MixedRealityPose)</h4>
@@ -1308,7 +1314,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputDown_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputDown(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.InputSystem.MixedRealityInputAction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L283">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L292">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputDown_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputDown*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputDown_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputDown(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.InputSystem.MixedRealityInputAction)">RaiseOnInputDown(IMixedRealityInputSource, MixedRealityInputAction)</h4>
@@ -1346,7 +1352,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputDown_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputDown(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.Utilities.Handedness%2CXRTK.Definitions.InputSystem.MixedRealityInputAction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L291">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L300">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputDown_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputDown*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputDown_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputDown(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness,XRTK.Definitions.InputSystem.MixedRealityInputAction)">RaiseOnInputDown(IMixedRealityInputSource, Handedness, MixedRealityInputAction)</h4>
@@ -1389,7 +1395,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputPressed_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputPressed(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.InputSystem.MixedRealityInputAction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L302">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L311">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputPressed_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputPressed*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputPressed_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputPressed(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.InputSystem.MixedRealityInputAction)">RaiseOnInputPressed(IMixedRealityInputSource, MixedRealityInputAction)</h4>
@@ -1427,7 +1433,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputPressed_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Single_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputPressed(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L318">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L327">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputPressed_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputPressed*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputPressed_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Single_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputPressed(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.Single)">RaiseOnInputPressed(IMixedRealityInputSource, MixedRealityInputAction, Single)</h4>
@@ -1470,7 +1476,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputPressed_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputPressed(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.Utilities.Handedness%2CXRTK.Definitions.InputSystem.MixedRealityInputAction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L310">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L319">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputPressed_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputPressed*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputPressed_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputPressed(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness,XRTK.Definitions.InputSystem.MixedRealityInputAction)">RaiseOnInputPressed(IMixedRealityInputSource, Handedness, MixedRealityInputAction)</h4>
@@ -1513,7 +1519,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputPressed_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Single_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputPressed(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.Utilities.Handedness%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L327">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L336">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputPressed_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputPressed*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputPressed_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Single_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputPressed(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.Single)">RaiseOnInputPressed(IMixedRealityInputSource, Handedness, MixedRealityInputAction, Single)</h4>
@@ -1561,7 +1567,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputUp_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputUp(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.InputSystem.MixedRealityInputAction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L338">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L347">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputUp_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputUp*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputUp_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputUp(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.InputSystem.MixedRealityInputAction)">RaiseOnInputUp(IMixedRealityInputSource, MixedRealityInputAction)</h4>
@@ -1599,7 +1605,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputUp_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputUp(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.Utilities.Handedness%2CXRTK.Definitions.InputSystem.MixedRealityInputAction)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L346">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L355">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputUp_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputUp*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseOnInputUp_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputUp(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness,XRTK.Definitions.InputSystem.MixedRealityInputAction)">RaiseOnInputUp(IMixedRealityInputSource, Handedness, MixedRealityInputAction)</h4>
@@ -1731,6 +1737,54 @@ on the game object are given priority to input events before any focused objects
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerScroll_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerScroll(XRTK.Interfaces.InputSystem.IMixedRealityPointer%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CUnityEngine.Vector2%2CXRTK.Interfaces.InputSystem.IMixedRealityInputSource)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L279">View Source</a>
+  </span>
+  <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerScroll_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerScroll*"></a>
+  <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerScroll_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerScroll(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector2,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)">RaisePointerScroll(IMixedRealityPointer, MixedRealityInputAction, Vector2, IMixedRealityInputSource)</h4>
+  <div class="markdown level1 summary"><p>Raise teh pointer scroll event.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void RaisePointerScroll(IMixedRealityPointer pointer, MixedRealityInputAction scrollAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityPointer.html">IMixedRealityPointer</a></td>
+        <td><span class="parametername">pointer</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.InputSystem.MixedRealityInputAction.html">MixedRealityInputAction</a></td>
+        <td><span class="parametername">scrollAction</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector2.html">Vector2</a></td>
+        <td><span class="parametername">scrollDelta</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityInputSource.html">IMixedRealityInputSource</a></td>
+        <td><span class="parametername">inputSource</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerUp_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerUp(XRTK.Interfaces.InputSystem.IMixedRealityPointer%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CXRTK.Interfaces.InputSystem.IMixedRealityInputSource)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
@@ -1777,7 +1831,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePoseInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Definitions_Utilities_MixedRealityPose_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePoseInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CXRTK.Definitions.Utilities.MixedRealityPose)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L434">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L443">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePoseInputChanged_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePoseInputChanged*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePoseInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Definitions_Utilities_MixedRealityPose_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePoseInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Definitions.Utilities.MixedRealityPose)">RaisePoseInputChanged(IMixedRealityInputSource, MixedRealityInputAction, MixedRealityPose)</h4>
@@ -1820,7 +1874,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePoseInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Definitions_Utilities_MixedRealityPose_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePoseInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.Utilities.Handedness%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CXRTK.Definitions.Utilities.MixedRealityPose)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L443">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L452">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePoseInputChanged_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePoseInputChanged*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePoseInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Definitions_Utilities_MixedRealityPose_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePoseInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Definitions.Utilities.MixedRealityPose)">RaisePoseInputChanged(IMixedRealityInputSource, Handedness, MixedRealityInputAction, MixedRealityPose)</h4>
@@ -1868,7 +1922,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Single_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L358">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L367">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Single_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.Single)">RaisePositionInputChanged(IMixedRealityInputSource, MixedRealityInputAction, Single)</h4>
@@ -1911,7 +1965,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CUnityEngine.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L375">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L384">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector2)">RaisePositionInputChanged(IMixedRealityInputSource, MixedRealityInputAction, Vector2)</h4>
@@ -1954,7 +2008,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CUnityEngine.Vector3)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L392">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L401">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3)">RaisePositionInputChanged(IMixedRealityInputSource, MixedRealityInputAction, Vector3)</h4>
@@ -1997,7 +2051,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Single_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.Utilities.Handedness%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L367">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L376">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Single_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.Single)">RaisePositionInputChanged(IMixedRealityInputSource, Handedness, MixedRealityInputAction, Single)</h4>
@@ -2045,7 +2099,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.Utilities.Handedness%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CUnityEngine.Vector2)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L384">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L393">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector2)">RaisePositionInputChanged(IMixedRealityInputSource, Handedness, MixedRealityInputAction, Vector2)</h4>
@@ -2093,7 +2147,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.Utilities.Handedness%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CUnityEngine.Vector3)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L401">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L410">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePositionInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePositionInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3)">RaisePositionInputChanged(IMixedRealityInputSource, Handedness, MixedRealityInputAction, Vector3)</h4>
@@ -2190,7 +2244,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseRotationInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Quaternion_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseRotationInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CUnityEngine.Quaternion)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L413">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L422">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseRotationInputChanged_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseRotationInputChanged*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseRotationInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Quaternion_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseRotationInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Quaternion)">RaiseRotationInputChanged(IMixedRealityInputSource, MixedRealityInputAction, Quaternion)</h4>
@@ -2233,7 +2287,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseRotationInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Quaternion_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseRotationInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.Utilities.Handedness%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CUnityEngine.Quaternion)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L422">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L431">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseRotationInputChanged_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseRotationInputChanged*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseRotationInputChanged_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Quaternion_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseRotationInputChanged(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Quaternion)">RaiseRotationInputChanged(IMixedRealityInputSource, Handedness, MixedRealityInputAction, Quaternion)</h4>
@@ -2574,7 +2628,7 @@ on the game object are given priority to input events before any focused objects
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseSpeechCommandRecognized_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Definitions_Utilities_RecognitionConfidenceLevel_System_TimeSpan_System_DateTime_System_String_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseSpeechCommandRecognized(XRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.InputSystem.MixedRealityInputAction%2CXRTK.Definitions.Utilities.RecognitionConfidenceLevel%2CSystem.TimeSpan%2CSystem.DateTime%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L556">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/InputSystem/IMixedRealityInputSystem.cs/#L565">View Source</a>
   </span>
   <a id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseSpeechCommandRecognized_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseSpeechCommandRecognized*"></a>
   <h4 id="XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaiseSpeechCommandRecognized_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Definitions_Utilities_RecognitionConfidenceLevel_System_TimeSpan_System_DateTime_System_String_" data-uid="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseSpeechCommandRecognized(XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Definitions.Utilities.RecognitionConfidenceLevel,System.TimeSpan,System.DateTime,System.String)">RaiseSpeechCommandRecognized(IMixedRealityInputSource, MixedRealityInputAction, RecognitionConfidenceLevel, TimeSpan, DateTime, String)</h4>

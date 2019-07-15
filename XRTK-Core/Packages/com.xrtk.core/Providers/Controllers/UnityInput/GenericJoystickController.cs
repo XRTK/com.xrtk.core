@@ -62,6 +62,8 @@ namespace XRTK.Providers.Controllers.UnityInput
                     case AxisType.DualAxis:
                         UpdateDualAxisData(Interactions[i]);
                         break;
+                    case AxisType.ThreeDofRotation:
+                    case AxisType.ThreeDofPosition:
                     case AxisType.SixDof:
                         UpdatePoseData(Interactions[i]);
                         break;

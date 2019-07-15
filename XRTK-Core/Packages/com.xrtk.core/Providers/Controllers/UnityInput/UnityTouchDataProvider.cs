@@ -88,7 +88,7 @@ namespace XRTK.Providers.Controllers.UnityInput
 
         private void AddTouchController(Touch touch, Ray ray)
         {
-            if (!ActiveTouches.TryGetValue(touch.fingerId, out UnityTouchController controller))
+            if (!ActiveTouches.TryGetValue(touch.fingerId, out var controller))
             {
                 IMixedRealityInputSource inputSource = null;
 
@@ -127,7 +127,7 @@ namespace XRTK.Providers.Controllers.UnityInput
 
         private static void UpdateTouchData(Touch touch, Ray ray)
         {
-            if (!ActiveTouches.TryGetValue(touch.fingerId, out UnityTouchController controller))
+            if (!ActiveTouches.TryGetValue(touch.fingerId, out var controller))
             {
                 return;
             }
@@ -140,7 +140,7 @@ namespace XRTK.Providers.Controllers.UnityInput
 
         private static void RemoveTouchController(Touch touch)
         {
-            if (!ActiveTouches.TryGetValue(touch.fingerId, out UnityTouchController controller))
+            if (!ActiveTouches.TryGetValue(touch.fingerId, out var controller))
             {
                 return;
             }

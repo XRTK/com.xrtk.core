@@ -22,8 +22,8 @@ namespace XRTK.Providers.Controllers.OpenVR
             {
                 ControllerMappings = new[]
                 {
-                    new MixedRealityControllerMapping("Vive Wand Controller Left", typeof(ViveWandController), Handedness.Left),
-                    new MixedRealityControllerMapping("Vive Wand Controller Right", typeof(ViveWandController), Handedness.Right),
+                    new MixedRealityControllerMapping("Vive Wand Controller Left", typeof(ViveWandOpenVRController), Handedness.Left),
+                    new MixedRealityControllerMapping("Vive Wand Controller Right", typeof(ViveWandOpenVRController), Handedness.Right),
                 };
             }
 

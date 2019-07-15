@@ -174,6 +174,7 @@ namespace XRTK.Services.InputSystem
                 CameraCache.Main.gameObject.EnsureComponent<StandaloneInputModule>();
             }
 
+            // ReSharper disable once SuspiciousTypeConversion.Global
             GazeProvider = CameraCache.Main.gameObject.EnsureComponent(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.GazeProviderType.Type) as IMixedRealityGazeProvider;
         }
 
@@ -190,6 +191,7 @@ namespace XRTK.Services.InputSystem
 
             if (!Application.isPlaying)
             {
+                // ReSharper disable once SuspiciousTypeConversion.Global
                 var component = CameraCache.Main.GetComponent<IMixedRealityGazeProvider>() as Component;
 
                 if (component != null)
@@ -253,12 +255,12 @@ namespace XRTK.Services.InputSystem
             // Get the focused object for each pointer of the event source
             for (int i = 0; i < baseInputEventData.InputSource.Pointers.Length; i++)
             {
-                GameObject focusedObject = FocusProvider?.GetFocusedObject(baseInputEventData.InputSource.Pointers[i]);
+                var focusedObject = FocusProvider?.GetFocusedObject(baseInputEventData.InputSource.Pointers[i]);
 
                 // Handle modal input if one exists
                 if (modalInputStack.Count > 0 && !modalEventHandled)
                 {
-                    GameObject modalInput = modalInputStack.Peek();
+                    var modalInput = modalInputStack.Peek();
 
                     if (modalInput != null)
                     {
@@ -267,7 +269,9 @@ namespace XRTK.Services.InputSystem
                         // If there is a focused object in the hierarchy of the modal handler, start the event bubble there
                         if (focusedObject != null && focusedObject.transform.IsChildOf(modalInput.transform))
                         {
-                            if (ExecuteEvents.ExecuteHierarchy(focusedObject, baseInputEventData, eventHandler) && baseInputEventData.used)
+                            ExecuteEvents.ExecuteHierarchy(focusedObject, baseInputEventData, eventHandler);
+
+                            if (baseInputEventData.used)
                             {
                                 return;
                             }
@@ -275,7 +279,9 @@ namespace XRTK.Services.InputSystem
                         // Otherwise, just invoke the event on the modal handler itself
                         else
                         {
-                            if (ExecuteEvents.ExecuteHierarchy(modalInput, baseInputEventData, eventHandler) && baseInputEventData.used)
+                            ExecuteEvents.ExecuteHierarchy(modalInput, baseInputEventData, eventHandler);
+
+                            if (baseInputEventData.used)
                             {
                                 return;
                             }
@@ -290,7 +296,9 @@ namespace XRTK.Services.InputSystem
                 // If event was not handled by modal, pass it on to the current focused object
                 if (focusedObject != null)
                 {
-                    if (ExecuteEvents.ExecuteHierarchy(focusedObject, baseInputEventData, eventHandler) && baseInputEventData.used)
+                    ExecuteEvents.ExecuteHierarchy(focusedObject, baseInputEventData, eventHandler);
+
+                    if (baseInputEventData.used)
                     {
                         return;
                     }
@@ -300,10 +308,16 @@ namespace XRTK.Services.InputSystem
             // If event was not handled by the focused object, pass it on to any fallback handlers
             if (fallbackInputStack.Count > 0)
             {
-                GameObject fallbackInput = fallbackInputStack.Peek();
-                if (ExecuteEvents.ExecuteHierarchy(fallbackInput, baseInputEventData, eventHandler) && baseInputEventData.used)
+                var fallbackInput = fallbackInputStack.Peek();
+
+                if (fallbackInput != null)
                 {
-                    // return;
+                    ExecuteEvents.ExecuteHierarchy(fallbackInput, baseInputEventData, eventHandler);
+
+                    if (baseInputEventData.used)
+                    {
+                        // return;
+                    }
                 }
             }
         }
@@ -686,11 +700,11 @@ namespace XRTK.Services.InputSystem
         }
 
         private static readonly ExecuteEvents.EventFunction<IMixedRealityFocusChangedHandler> OnPreFocusChangedHandler =
-                delegate (IMixedRealityFocusChangedHandler handler, BaseEventData eventData)
-                {
-                    var casted = ExecuteEvents.ValidateEventData<FocusEventData>(eventData);
-                    handler.OnBeforeFocusChange(casted);
-                };
+            delegate (IMixedRealityFocusChangedHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<FocusEventData>(eventData);
+                handler.OnBeforeFocusChange(casted);
+            };
 
         /// <inheritdoc />
         public void RaiseFocusChanged(IMixedRealityPointer pointer, GameObject oldFocusedObject, GameObject newFocusedObject)
@@ -737,19 +751,20 @@ namespace XRTK.Services.InputSystem
             focusEventData.Initialize(pointer);
 
             ExecuteEvents.ExecuteHierarchy(focusedObject, focusEventData, OnFocusEnterEventHandler);
+            ExecuteEvents.ExecuteHierarchy(focusedObject, focusEventData, ExecuteEvents.selectHandler);
 
-            if (FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out GraphicInputEventData graphicEventData))
+            if (FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicEventData))
             {
                 ExecuteEvents.ExecuteHierarchy(focusedObject, graphicEventData, ExecuteEvents.pointerEnterHandler);
             }
         }
 
         private static readonly ExecuteEvents.EventFunction<IMixedRealityFocusHandler> OnFocusEnterEventHandler =
-                delegate (IMixedRealityFocusHandler handler, BaseEventData eventData)
-                {
-                    var casted = ExecuteEvents.ValidateEventData<FocusEventData>(eventData);
-                    handler.OnFocusEnter(casted);
-                };
+            delegate (IMixedRealityFocusHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<FocusEventData>(eventData);
+                handler.OnFocusEnter(casted);
+            };
 
         /// <inheritdoc />
         public void RaiseFocusExit(IMixedRealityPointer pointer, GameObject unfocusedObject)
@@ -757,19 +772,20 @@ namespace XRTK.Services.InputSystem
             focusEventData.Initialize(pointer);
 
             ExecuteEvents.ExecuteHierarchy(unfocusedObject, focusEventData, OnFocusExitEventHandler);
+            ExecuteEvents.ExecuteHierarchy(unfocusedObject, focusEventData, ExecuteEvents.deselectHandler);
 
-            if (FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out GraphicInputEventData graphicEventData))
+            if (FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicEventData))
             {
                 ExecuteEvents.ExecuteHierarchy(unfocusedObject, graphicEventData, ExecuteEvents.pointerExitHandler);
             }
         }
 
         private static readonly ExecuteEvents.EventFunction<IMixedRealityFocusHandler> OnFocusExitEventHandler =
-                delegate (IMixedRealityFocusHandler handler, BaseEventData eventData)
-                {
-                    var casted = ExecuteEvents.ValidateEventData<FocusEventData>(eventData);
-                    handler.OnFocusExit(casted);
-                };
+            delegate (IMixedRealityFocusHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<FocusEventData>(eventData);
+                handler.OnFocusExit(casted);
+            };
 
         #endregion Focus Events
 
@@ -792,11 +808,13 @@ namespace XRTK.Services.InputSystem
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(pointerEventData, OnPointerDownEventHandler);
-            FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out GraphicInputEventData graphicInputEventData);
 
-            if (graphicInputEventData != null && graphicInputEventData.selectedObject != null)
+            var focusedObject = pointer.Result?.CurrentPointerTarget;
+
+            if (focusedObject != null &&
+                FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
             {
-                ExecuteEvents.ExecuteHierarchy(graphicInputEventData.selectedObject, graphicInputEventData, ExecuteEvents.pointerDownHandler);
+                ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.pointerDownHandler);
             }
         }
 
@@ -843,21 +861,36 @@ namespace XRTK.Services.InputSystem
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(pointerEventData, OnPointerUpEventHandler);
 
-            FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out GraphicInputEventData graphicInputEventData);
+            var focusedObject = pointer.Result?.CurrentPointerTarget;
 
-            if (graphicInputEventData != null)
+            if (focusedObject != null &&
+                FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
             {
-                if (graphicInputEventData.selectedObject != null)
-                {
-                    ExecuteEvents.ExecuteHierarchy(graphicInputEventData.selectedObject, graphicInputEventData, ExecuteEvents.pointerUpHandler);
-                    ExecuteEvents.ExecuteHierarchy(graphicInputEventData.selectedObject, graphicInputEventData, ExecuteEvents.pointerClickHandler);
-                }
+                ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.pointerUpHandler);
+                ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.pointerClickHandler);
 
                 graphicInputEventData.Clear();
             }
         }
 
         #endregion Pointer Up
+
+        /// <inheritdoc />
+        public void RaisePointerScroll(IMixedRealityPointer pointer, MixedRealityInputAction scrollAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null)
+        {
+            vector2InputEventData.Initialize(inputSource ?? pointer.InputSourceParent, Handedness.None, scrollAction, scrollDelta);
+
+            HandleEvent(vector2InputEventData, OnTwoDoFInputChanged);
+
+            var focusedObject = pointer.Result?.CurrentPointerTarget;
+
+            if (focusedObject != null &&
+                FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
+            {
+                graphicInputEventData.scrollDelta = scrollDelta;
+                ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.scrollHandler);
+            }
+        }
 
         #endregion Pointers
 

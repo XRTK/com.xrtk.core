@@ -220,8 +220,8 @@ namespace XRTK.Providers.Controllers.UnityInput
 
             Lifetime = 0.0f;
             isTouched = false;
-            Interactions[1].PoseData = MixedRealityPose.ZeroIdentity;
             Interactions[0].Vector2Data = Vector2.zero;
+            Interactions[1].PoseData = MixedRealityPose.ZeroIdentity;
         }
     }
 }

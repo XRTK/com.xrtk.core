@@ -13,11 +13,16 @@ namespace XRTK.Extensions
     /// </summary>
     public static class GameObjectExtensions
     {
+        /// <summary>
+        /// Sets the child <see cref="GameObject"/> states.
+        /// </summary>
+        /// <param name="root">The root <see cref="GameObject"/>.</param>
+        /// <param name="isActive">The active value to set.</param>
         public static void SetChildrenActive(this GameObject root, bool isActive)
         {
             for (int i = 0; i < root.transform.childCount; i++)
             {
-                root.transform.GetChild(i).gameObject.SetActive(false);
+                root.transform.GetChild(i).gameObject.SetActive(isActive);
             }
         }
 
@@ -166,6 +171,64 @@ namespace XRTK.Extensions
                     collider.enabled = isActive;
                 }
             }
+        }
+
+        /// <summary>
+        /// Given 2 GameObjects, return a common root GameObject (or null).
+        /// </summary>
+        /// <param name="g1">GameObject to compare</param>
+        /// <param name="g2">GameObject to compare</param>
+        public static GameObject FindCommonRoot(this GameObject g1, GameObject g2)
+        {
+            if (g1 == null || g2 == null)
+            {
+                return null;
+            }
+
+            var t1 = g1.transform;
+
+            while (t1 != null)
+            {
+                var t2 = g2.transform;
+
+                while (t2 != null)
+                {
+                    if (t1 == t2)
+                    {
+                        return t1.gameObject;
+                    }
+
+                    t2 = t2.parent;
+                }
+
+                t1 = t1.parent;
+            }
+
+            return null;
+        }
+
+        /// <summary>
+        /// Checks if the provided GameObjects are child/parent related.
+        /// </summary>
+        /// <param name="g1"></param>
+        /// <param name="g2"></param>
+        /// <returns>True if either GameObject is the parent of the other or if they are the same</returns>
+        public static bool IsParentOrChildOf(this GameObject g1, GameObject g2)
+        {
+            if (g1 == null || g2 == null)
+            {
+                return false;
+            }
+
+            var t1 = g1.transform;
+            var t2 = g2.transform;
+
+            if (t1 == null || t2 == null)
+            {
+                return false;
+            }
+
+            return t1.IsParentOrChildOf(t2);
         }
     }
 }

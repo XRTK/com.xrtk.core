@@ -11,7 +11,7 @@ namespace XRTK.Interfaces
     public interface IMixedRealityService : IDisposable
     {
         /// <summary>
-        /// Optional Priority attribute if multiple services of the same type are required, enables targeting a service for action.
+        /// The service display name.
         /// </summary>
         string Name { get; }
 
@@ -40,6 +40,16 @@ namespace XRTK.Interfaces
         /// Optional Update function to perform per-frame updates of the service.
         /// </summary>
         void Update();
+
+        /// <summary>
+        /// Optional LateUpdate function to perform updates after the end of the last Update cycle.
+        /// </summary>
+        void LateUpdate();
+
+        /// <summary>
+        /// Optional FixedUpdate function to perform updates that are fixed to the Physics timestep.
+        /// </summary>
+        void FixedUpdate();
 
         /// <summary>
         /// Optional Disable function to pause the service.

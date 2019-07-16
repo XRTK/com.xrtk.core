@@ -89,7 +89,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// Synchronizes the project with any symbolic links defined in the settings.
         /// </summary>
         /// <param name="forceUpdate">Bypass the auto load check and force the packages to be updated, even if they're up to date.</param>
-        public static async void RunSync(bool forceUpdate = false)
+        public static void RunSync(bool forceUpdate = false)
         {
             if (IsSyncing || EditorApplication.isPlayingOrWillChangePlaymode)
             {
@@ -143,7 +143,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
                 if (link.IsActive)
                 {
-                    isValid = await VerifySymbolicLink(targetAbsolutePath, sourceAbsolutePath);
+                    isValid = VerifySymbolicLink(targetAbsolutePath);
                 }
 
                 if (isValid)
@@ -407,7 +407,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             return true;
         }
 
-        private static async Task<bool> VerifySymbolicLink(string targetAbsolutePath, string sourceAbsolutePath)
+        private static bool VerifySymbolicLink(string targetAbsolutePath)
         {
             var pathToVerify = targetAbsolutePath.Substring(0, targetAbsolutePath.LastIndexOf("/", StringComparison.Ordinal));
 
@@ -416,41 +416,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 Debug.Log($"Attempting to validate {targetAbsolutePath}");
             }
 
-            var args = $"/C powershell.exe \"& dir '{pathToVerify}' | select Target, LinkType | where {{ $_.LinkType -eq 'SymbolicLink' }} | Format-Table -HideTableHeaders -Wrap\"";
-
-            bool success;
-            string[] processOutput;
-
-            if (Application.isBatchMode)
-            {
-                success = new Process().Run(args, out var output);
-                processOutput = new[] { output };
-            }
-            else
-            {
-                var result = await new Process().RunAsync(args);
-                success = result.ExitCode == 0;
-                processOutput = result.Output;
-            }
-
-            if (!success)
-            {
-                Debug.LogError($"Failed to enumerate symbolic links associated to {targetAbsolutePath}");
-                return false;
-            }
-
-            var isValid = false;
-            var matches = BracketRegex.Matches(string.Join("\n", processOutput));
-
-            foreach (Match match in matches)
-            {
-                var targetPath = match.Value.Replace("{", string.Empty).Replace("}", string.Empty);
-
-                if (!string.IsNullOrEmpty(targetPath) && sourceAbsolutePath.ToForwardSlashes().Equals(targetPath))
-                {
-                    isValid = true;
-                }
-            }
+            var isValid = IsSymbolicPath(pathToVerify);
 
             if (!isValid &&
                 Directory.Exists(targetAbsolutePath))
@@ -464,6 +430,12 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             }
 
             return isValid && Directory.Exists(targetAbsolutePath);
+        }
+
+        private static bool IsSymbolicPath(string path)
+        {
+            var pathInfo = new FileInfo(path);
+            return pathInfo.Attributes.HasFlag(FileAttributes.ReparsePoint);
         }
 
         private static string AddSubfolderPathToTarget(string sourcePath, string targetPath)

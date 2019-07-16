@@ -409,21 +409,19 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
         private static bool VerifySymbolicLink(string targetAbsolutePath)
         {
-            var pathToVerify = targetAbsolutePath.Substring(0, targetAbsolutePath.LastIndexOf("/", StringComparison.Ordinal));
-
             if (DebugEnabled)
             {
                 Debug.Log($"Attempting to validate {targetAbsolutePath}");
             }
 
-            var isValid = IsSymbolicPath(pathToVerify);
+            var isValid = IsSymbolicPath(targetAbsolutePath);
 
             if (!isValid &&
                 Directory.Exists(targetAbsolutePath))
             {
                 if (DebugEnabled)
                 {
-                    Debug.Log($"Removing invalid link for {targetAbsolutePath}");
+                    Debug.LogWarning($"Removing invalid link for {targetAbsolutePath}");
                 }
 
                 DeleteSymbolicLink(targetAbsolutePath);

@@ -7,12 +7,22 @@ using XRTK.Interfaces.Providers.Controllers;
 namespace XRTK.Providers.Controllers.Hands
 {
     /// <summary>
-    /// Hand definition, used to provide access to hand joints and other data.
+    /// Controller definition, used to manage a hand controller.
     /// </summary>
-    public interface IMixedRealityHand : IMixedRealityController
+    public interface IMixedRealityHandController : IMixedRealityController
     {
         /// <summary>
-        /// Get the current pose of a hand joint.
+        /// Gets whether this hand controller is currently tracked.
+        /// </summary>
+        bool IsTracked { get; }
+
+        /// <summary>
+        /// Gets whether the hand is in pointing pose for raycasting.
+        /// </summary>
+        bool IsInPointingPose { get; }
+
+        /// <summary>
+        /// Get the current pose of a joint of the hand.
         /// </summary>
         /// <remarks>
         /// Hand bones should be oriented along the Z-axis, with the Y-axis indicating the "up" direction,

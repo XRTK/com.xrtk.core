@@ -8,21 +8,10 @@ using XRTK.Interfaces.InputSystem;
 
 namespace XRTK.Providers.Controllers.Hands
 {
-    public abstract class BaseHand : BaseController, IMixedRealityHand
+    public abstract class BaseHandController : BaseController, IMixedRealityHandController
     {
-        private const float CurrentVelocityWeight = .8f;
-        private const float NewVelocityWeight = .2f;
-
-        // Hand ray
-        protected HandRay HandRay { get; } = new HandRay();
-
-        public bool IsInPointingPose
-        {
-            get
-            {
-                return HandRay.ShouldShowRay;
-            }
-        }
+        private const float currentVelocityWeight = .8f;
+        private const float newVelocityWeight = .2f;
 
         // Velocity internal states
         private float deltaTimeStart;
@@ -31,6 +20,27 @@ namespace XRTK.Providers.Controllers.Hands
         private readonly int velocityUpdateInterval = 9;
         private int frameOn = 0;
 
+        // Hand ray
+        protected HandRay HandRay { get; } = new HandRay();
+
+        /// <inheritdoc />
+        public bool IsTracked => TrackingState == TrackingState.Tracked;
+
+        /// <inheritdoc />
+        public bool IsInPointingPose => HandRay.ShouldShowRay;
+
+        protected Vector3 PalmNormal
+        {
+            get
+            {
+                if (TryGetJoint(TrackedHandJoint.Palm, out MixedRealityPose pose))
+                {
+                    return -pose.Up;
+                }
+                return Vector3.zero;
+            }
+        }
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -38,10 +48,8 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="controllerHandedness"></param>
         /// <param name="inputSource"></param>
         /// <param name="interactions"></param>
-        public BaseHand(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-                : base(trackingState, controllerHandedness, inputSource, interactions)
-        {
-        }
+        public BaseHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+                : base(trackingState, controllerHandedness, inputSource, interactions) { }
 
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultLeftHandedInteractions => DefaultInteractions;
@@ -64,17 +72,17 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 deltaTimeStart = Time.unscaledTime;
                 lastPosition = GetJointPosition(TrackedHandJoint.Palm);
-                lastPalmNormal = GetPalmNormal();
+                lastPalmNormal = PalmNormal;
             }
             else if (frameOn == velocityUpdateInterval)
             {
                 //update linear velocity
                 float deltaTime = Time.unscaledTime - deltaTimeStart;
                 Vector3 newVelocity = (GetJointPosition(TrackedHandJoint.Palm) - lastPosition) / deltaTime;
-                Velocity = (Velocity * CurrentVelocityWeight) + (newVelocity * NewVelocityWeight);
+                Velocity = (Velocity * currentVelocityWeight) + (newVelocity * newVelocityWeight);
 
                 //update angular velocity
-                Vector3 currentPalmNormal = GetPalmNormal();
+                Vector3 currentPalmNormal = PalmNormal;
                 //currentPalmNormal = new Vector3(0, 1, 0);
                 Quaternion rotation = Quaternion.FromToRotation(lastPalmNormal, currentPalmNormal);
                 Vector3 rotationRate = rotation.eulerAngles * Mathf.Deg2Rad;
@@ -94,15 +102,6 @@ namespace XRTK.Providers.Controllers.Hands
             if (TryGetJoint(jointToGet, out MixedRealityPose pose))
             {
                 return pose.Position;
-            }
-            return Vector3.zero;
-        }
-
-        protected Vector3 GetPalmNormal()
-        {
-            if (TryGetJoint(TrackedHandJoint.Palm, out MixedRealityPose pose))
-            {
-                return -pose.Up;
             }
             return Vector3.zero;
         }

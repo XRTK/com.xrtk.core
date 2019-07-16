@@ -5,7 +5,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Input;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Services;
 
@@ -16,10 +15,12 @@ namespace XRTK.Providers.Controllers.Hands
     /// </summary>
     public class HandBounds : MonoBehaviour, IMixedRealitySourceStateHandler, IMixedRealityHandJointHandler
     {
+        private Dictionary<Handedness, Bounds> bounds = new Dictionary<Handedness, Bounds>();
+
         /// <summary>
-        /// Accessor for the bounds associated with a handedness.
+        /// Gets the bounds associated with a handedness.
         /// </summary>
-        public Dictionary<Handedness, Bounds> Bounds { get; private set; } = new Dictionary<Handedness, Bounds>();
+        public IReadOnlyDictionary<Handedness, Bounds> Bounds => bounds;
 
         [SerializeField]
         [Tooltip("Should a gizmo be drawn to represent the hand bounds.")]
@@ -34,41 +35,23 @@ namespace XRTK.Providers.Controllers.Hands
             set { drawBoundsGizmo = value; }
         }
 
-        private IMixedRealityInputSystem inputSystem = null;
-
-        /// <summary>
-        /// The active instance of the input system.
-        /// </summary>
-        protected IMixedRealityInputSystem InputSystem
-        {
-            get
-            {
-                if (inputSystem == null)
-                {
-                    inputSystem = MixedRealityToolkit.GetService<IMixedRealityInputSystem>();
-                }
-
-                return inputSystem;
-            }
-        }
-
         #region MonoBehaviour Implementation
 
         private void OnEnable()
         {
-            InputSystem?.Register(gameObject);
+            MixedRealityToolkit.InputSystem?.Register(gameObject);
         }
 
         private void OnDisable()
         {
-            InputSystem?.Unregister(gameObject);
+            MixedRealityToolkit.InputSystem?.Unregister(gameObject);
         }
 
         private void OnDrawGizmos()
         {
             if (drawBoundsGizmo)
             {
-                foreach (var kvp in Bounds)
+                foreach (var kvp in bounds)
                 {
                     Gizmos.DrawWireCube(kvp.Value.center, kvp.Value.size);
                 }
@@ -88,10 +71,10 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public void OnSourceLost(SourceStateEventData eventData)
         {
-            var hand = eventData.Controller as IMixedRealityHand;
+            var hand = eventData.Controller as IMixedRealityHandController;
             if (hand != null)
             {
-                Bounds.Remove(hand.ControllerHandedness);
+                bounds.Remove(hand.ControllerHandedness);
             }
         }
 
@@ -119,7 +102,7 @@ namespace XRTK.Providers.Controllers.Hands
                     newBounds.Encapsulate(kvp.Value.Position);
                 }
 
-                Bounds[eventData.Handedness] = newBounds;
+                bounds[eventData.Handedness] = newBounds;
             }
         }
 

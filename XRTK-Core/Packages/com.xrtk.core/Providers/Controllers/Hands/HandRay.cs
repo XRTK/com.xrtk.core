@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Definitions.Utilities;
+using XRTK.Utilities.Physics;
 
 namespace XRTK.Providers.Controllers.Hands
 {
@@ -15,10 +16,7 @@ namespace XRTK.Providers.Controllers.Hands
         private readonly float CursorBeamBackwardTolerance = 0.5f;
         private readonly float CursorBeamUpTolerance = 0.8f;
 
-        // Smoothing factor for ray stabilization
-        private const float StabilizedRayHalfLife = 0.01f;
-
-        private StabilizedRay stabilizedRay = new StabilizedRay(StabilizedRayHalfLife);
+        private GenericStabilizer stabilizer = new GenericStabilizer();
         private Vector3 palmNormal;
         private Vector3 headForward;
 
@@ -27,8 +25,8 @@ namespace XRTK.Providers.Controllers.Hands
         {
             get
             {
-                ray.origin = stabilizedRay.StabilizedPosition;
-                ray.direction = stabilizedRay.StabilizedDirection;
+                ray.origin = stabilizer.StablePosition;
+                ray.direction = stabilizer.StableRay.direction;
                 return ray;
             }
         }
@@ -41,6 +39,7 @@ namespace XRTK.Providers.Controllers.Hands
                 {
                     return false;
                 }
+
                 bool valid = true;
                 if (CursorBeamBackwardTolerance >= 0)
                 {
@@ -50,6 +49,7 @@ namespace XRTK.Providers.Controllers.Hands
                         valid = false;
                     }
                 }
+
                 if (valid && CursorBeamUpTolerance >= 0)
                 {
                     if (Vector3.Dot(palmNormal, Vector3.up) > CursorBeamUpTolerance)
@@ -68,9 +68,9 @@ namespace XRTK.Providers.Controllers.Hands
             Vector3 measuredRayPosition = handPosition;
             Vector3 measuredDirection = measuredRayPosition - rayPivotPoint;
             this.palmNormal = palmNormal;
-            this.headForward = headTransform.forward;
+            headForward = headTransform.forward;
 
-            stabilizedRay.AddSample(new Ray(measuredRayPosition, measuredDirection));
+            stabilizer.UpdateStability(measuredRayPosition, measuredDirection);
         }
 
         private Vector3 ComputeRayPivotPosition(Vector3 handPosition, Transform headTransform, Handedness sourceHandedness)

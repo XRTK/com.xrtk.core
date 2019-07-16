@@ -14,23 +14,23 @@ namespace XRTK.Definitions.HandTracking
         [Tooltip("The joint prefab to use.")]
         private GameObject jointPrefab = null;
 
-        [SerializeField]
-        [Tooltip("The joint prefab to use for palm.")]
-        private GameObject palmPrefab = null;
-
-        [SerializeField]
-        [Tooltip("The joint prefab to use for the index tip (point of interaction.")]
-        private GameObject fingertipPrefab = null;
-
         /// <summary>
         /// The joint prefab to use.
         /// </summary>
         public GameObject JointPrefab => jointPrefab;
 
+        [SerializeField]
+        [Tooltip("The joint prefab to use for palm.")]
+        private GameObject palmPrefab = null;
+
         /// <summary>
         /// The joint prefab to use for palm
         /// </summary>
         public GameObject PalmJointPrefab => palmPrefab;
+
+        [SerializeField]
+        [Tooltip("The joint prefab to use for the index tip (point of interaction.")]
+        private GameObject fingertipPrefab = null;
 
         /// <summary>
         /// The joint prefab to use for finger tip
@@ -52,11 +52,7 @@ namespace XRTK.Definitions.HandTracking
         private bool enableHandMeshVisualization = false;
         public bool EnableHandMeshVisualization
         {
-            get
-            {
-                return enableHandMeshVisualization;
-            }
-
+            get => enableHandMeshVisualization;
             set
             {
                 enableHandMeshVisualization = value;
@@ -68,11 +64,7 @@ namespace XRTK.Definitions.HandTracking
         private bool enableHandJointVisualization = false;
         public bool EnableHandJointVisualization
         {
-            get
-            {
-                return enableHandJointVisualization;
-            }
-
+            get => enableHandJointVisualization;
             set
             {
                 enableHandJointVisualization = value;

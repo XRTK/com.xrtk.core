@@ -321,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html",
-          "hash": "LzUA/L6eiTfrg4w0YYFmKQ=="
+          "hash": "mYAciy2UGgE/1go5V8rUZw=="
         }
       },
       "is_incremental": false,
@@ -1793,6 +1793,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Extensions.InteractionMappingsExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Extensions.InteractionMappingsExtensions.html",
+          "hash": "pHSOJg/ij1H8f0Lh98nOPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "../api/XRTK.Extensions.InteractionSourceExtensions.yml",
       "output": {
         ".html": {
@@ -1929,7 +1941,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Extensions.html",
-          "hash": "CSMKgDP7zpAkegP1jxdDnA=="
+          "hash": "wDX53MuH5vptErrJZ32SWg=="
         }
       },
       "is_incremental": false,
@@ -8721,7 +8733,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "qRTQiVVlCweHi2KWMSRefA=="
+          "hash": "XJgrt/UNumsWJ05iKzunnQ=="
         }
       },
       "is_incremental": false,
@@ -8849,17 +8861,17 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "ConceptualDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build",
-          "total_file_count": 14,
-          "skipped_file_count": 0
-        },
         "TocDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
+          "skipped_file_count": 0
+        },
+        "ConceptualDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 14,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {
@@ -8872,7 +8884,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 718,
+          "total_file_count": 719,
           "skipped_file_count": 0
         }
       }

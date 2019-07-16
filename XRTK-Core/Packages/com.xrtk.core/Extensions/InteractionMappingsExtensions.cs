@@ -57,7 +57,6 @@ namespace XRTK.Extensions
 
         public static void UpdateInteractionMappingPose(this MixedRealityInteractionMapping interactionMapping, IMixedRealityInputSource inputSource, Handedness controllerHandedness)
         {
-
             // If our value changed raise it.
             if (interactionMapping.Updated)
             {

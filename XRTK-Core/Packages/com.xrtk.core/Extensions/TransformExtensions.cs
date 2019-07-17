@@ -309,5 +309,20 @@ namespace XRTK.Extensions
 
             return null;
         }
+
+        /// <summary>
+        /// Sets the collider and all child colliders active with the provided value.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="isActive"></param>
+        public static void SetCollidersActive(this Transform transform, bool isActive)
+        {
+            var colliders = transform.GetComponentsInChildren<Collider>();
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                colliders[i].enabled = isActive;
+            }
+        }
     }
 }

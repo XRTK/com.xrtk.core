@@ -106,7 +106,7 @@ namespace XRTK.Definitions.Physics
             newDistance.z = Terminus.z - Origin.z;
             Length = Mathf.Sqrt((newDistance.x * newDistance.x) + (newDistance.y * newDistance.y) + (newDistance.z * newDistance.z));
 
-            if (Length > 0)
+            if (Length > 0f)
             {
                 newDirection.x = newDistance.x / Length;
                 newDirection.y = newDistance.y / Length;
@@ -181,10 +181,13 @@ namespace XRTK.Definitions.Physics
         public static Vector3 GetPointByDistance(RayStep[] steps, float distance)
         {
             Debug.Assert(steps != null);
-            Debug.Assert(steps.Length > 0);
+            Debug.Assert(steps.Length > 0f);
 
             var (rayStep, remainingDistance) = GetStepByDistance(steps, distance);
-            return remainingDistance > 0 ? Vector3.Lerp(rayStep.Origin, rayStep.Terminus, remainingDistance / rayStep.Length) : rayStep.Terminus;
+
+            return remainingDistance > 0f
+                ? Vector3.Lerp(rayStep.Origin, rayStep.Terminus, remainingDistance / rayStep.Length)
+                : rayStep.Terminus;
         }
 
         /// <summary>

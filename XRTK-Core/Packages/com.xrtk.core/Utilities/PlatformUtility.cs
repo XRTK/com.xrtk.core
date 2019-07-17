@@ -64,6 +64,7 @@ namespace XRTK.Utilities
         }
 
 #if UNITY_EDITOR
+
         /// <summary>
         /// Checks to see if the <see cref="RuntimePlatform"/> is part of the <see cref="SupportedPlatforms"/>
         /// </summary>

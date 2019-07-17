@@ -934,6 +934,36 @@ references:
   commentId: F:XRTK.Definitions.Devices.ControllerMappingLibrary.AXIS_9
   fullName: XRTK.Definitions.Devices.ControllerMappingLibrary.AXIS_9
   nameWithType: ControllerMappingLibrary.AXIS_9
+- uid: XRTK.Definitions.Devices.ControllerMappingLibrary.Horizontal
+  name: Horizontal
+  href: api/XRTK.Definitions.Devices.ControllerMappingLibrary.html#XRTK_Definitions_Devices_ControllerMappingLibrary_Horizontal
+  commentId: F:XRTK.Definitions.Devices.ControllerMappingLibrary.Horizontal
+  fullName: XRTK.Definitions.Devices.ControllerMappingLibrary.Horizontal
+  nameWithType: ControllerMappingLibrary.Horizontal
+- uid: XRTK.Definitions.Devices.ControllerMappingLibrary.MouseScroll
+  name: MouseScroll
+  href: api/XRTK.Definitions.Devices.ControllerMappingLibrary.html#XRTK_Definitions_Devices_ControllerMappingLibrary_MouseScroll
+  commentId: F:XRTK.Definitions.Devices.ControllerMappingLibrary.MouseScroll
+  fullName: XRTK.Definitions.Devices.ControllerMappingLibrary.MouseScroll
+  nameWithType: ControllerMappingLibrary.MouseScroll
+- uid: XRTK.Definitions.Devices.ControllerMappingLibrary.MouseX
+  name: MouseX
+  href: api/XRTK.Definitions.Devices.ControllerMappingLibrary.html#XRTK_Definitions_Devices_ControllerMappingLibrary_MouseX
+  commentId: F:XRTK.Definitions.Devices.ControllerMappingLibrary.MouseX
+  fullName: XRTK.Definitions.Devices.ControllerMappingLibrary.MouseX
+  nameWithType: ControllerMappingLibrary.MouseX
+- uid: XRTK.Definitions.Devices.ControllerMappingLibrary.MouseY
+  name: MouseY
+  href: api/XRTK.Definitions.Devices.ControllerMappingLibrary.html#XRTK_Definitions_Devices_ControllerMappingLibrary_MouseY
+  commentId: F:XRTK.Definitions.Devices.ControllerMappingLibrary.MouseY
+  fullName: XRTK.Definitions.Devices.ControllerMappingLibrary.MouseY
+  nameWithType: ControllerMappingLibrary.MouseY
+- uid: XRTK.Definitions.Devices.ControllerMappingLibrary.Vertical
+  name: Vertical
+  href: api/XRTK.Definitions.Devices.ControllerMappingLibrary.html#XRTK_Definitions_Devices_ControllerMappingLibrary_Vertical
+  commentId: F:XRTK.Definitions.Devices.ControllerMappingLibrary.Vertical
+  fullName: XRTK.Definitions.Devices.ControllerMappingLibrary.Vertical
+  nameWithType: ControllerMappingLibrary.Vertical
 - uid: XRTK.Definitions.Devices.DeviceInputType
   name: DeviceInputType
   href: api/XRTK.Definitions.Devices.DeviceInputType.html
@@ -1404,6 +1434,12 @@ references:
   commentId: T:XRTK.Definitions.Devices.MixedRealityInteractionMapping
   fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping
   nameWithType: MixedRealityInteractionMapping
+- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,System.String)
+  name: MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, String)
+  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_System_String_
+  commentId: M:XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,System.String)
+  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.MixedRealityInteractionMapping(System.UInt32, System.String, XRTK.Definitions.Utilities.AxisType, XRTK.Definitions.Devices.DeviceInputType, System.String)
+  nameWithType: MixedRealityInteractionMapping.MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, String)
 - uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,System.String,System.String,System.Boolean,System.Boolean)
   name: MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, String, String, Boolean, Boolean)
   href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_System_String_System_String_System_Boolean_System_Boolean_
@@ -1416,6 +1452,12 @@ references:
   commentId: M:XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,UnityEngine.KeyCode)
   fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.MixedRealityInteractionMapping(System.UInt32, System.String, XRTK.Definitions.Utilities.AxisType, XRTK.Definitions.Devices.DeviceInputType, UnityEngine.KeyCode)
   nameWithType: MixedRealityInteractionMapping.MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, KeyCode)
+- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.String,System.String,System.String,System.Boolean,System.Boolean)
+  name: MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, MixedRealityInputAction, String, String, String, Boolean, Boolean)
+  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_String_System_String_System_String_System_Boolean_System_Boolean_
+  commentId: M:XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.String,System.String,System.String,System.Boolean,System.Boolean)
+  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.MixedRealityInteractionMapping(System.UInt32, System.String, XRTK.Definitions.Utilities.AxisType, XRTK.Definitions.Devices.DeviceInputType, XRTK.Definitions.InputSystem.MixedRealityInputAction, System.String, System.String, System.String, System.Boolean, System.Boolean)
+  nameWithType: MixedRealityInteractionMapping.MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, MixedRealityInputAction, String, String, String, Boolean, Boolean)
 - uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.KeyCode,System.String,System.String,System.Boolean,System.Boolean)
   name: MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, MixedRealityInputAction, KeyCode, String, String, Boolean, Boolean)
   href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_KeyCode_System_String_System_String_System_Boolean_System_Boolean_
@@ -1539,6 +1581,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.Id
   nameWithType: MixedRealityInteractionMapping.Id
+- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.InputName
+  name: InputName
+  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping_InputName
+  commentId: P:XRTK.Definitions.Devices.MixedRealityInteractionMapping.InputName
+  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.InputName
+  nameWithType: MixedRealityInteractionMapping.InputName
+- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.InputName*
+  name: InputName
+  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping_InputName_
+  commentId: Overload:XRTK.Definitions.Devices.MixedRealityInteractionMapping.InputName
+  isSpec: "True"
+  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.InputName
+  nameWithType: MixedRealityInteractionMapping.InputName
 - uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.InputType
   name: InputType
   href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping_InputType
@@ -1754,6 +1809,18 @@ references:
   commentId: F:XRTK.Definitions.Devices.SupportedControllerType.None
   fullName: XRTK.Definitions.Devices.SupportedControllerType.None
   nameWithType: SupportedControllerType.None
+- uid: XRTK.Definitions.Devices.SupportedControllerType.OculusGo
+  name: OculusGo
+  href: api/XRTK.Definitions.Devices.SupportedControllerType.html#XRTK_Definitions_Devices_SupportedControllerType_OculusGo
+  commentId: F:XRTK.Definitions.Devices.SupportedControllerType.OculusGo
+  fullName: XRTK.Definitions.Devices.SupportedControllerType.OculusGo
+  nameWithType: SupportedControllerType.OculusGo
+- uid: XRTK.Definitions.Devices.SupportedControllerType.OculusQuest
+  name: OculusQuest
+  href: api/XRTK.Definitions.Devices.SupportedControllerType.html#XRTK_Definitions_Devices_SupportedControllerType_OculusQuest
+  commentId: F:XRTK.Definitions.Devices.SupportedControllerType.OculusQuest
+  fullName: XRTK.Definitions.Devices.SupportedControllerType.OculusQuest
+  nameWithType: SupportedControllerType.OculusQuest
 - uid: XRTK.Definitions.Devices.SupportedControllerType.OculusRemote
   name: OculusRemote
   href: api/XRTK.Definitions.Devices.SupportedControllerType.html#XRTK_Definitions_Devices_SupportedControllerType_OculusRemote
@@ -5997,6 +6064,18 @@ references:
   commentId: T:XRTK.Definitions.Utilities.SupportedPlatforms
   fullName: XRTK.Definitions.Utilities.SupportedPlatforms
   nameWithType: SupportedPlatforms
+- uid: XRTK.Definitions.Utilities.SupportedPlatforms.Android
+  name: Android
+  href: api/XRTK.Definitions.Utilities.SupportedPlatforms.html#XRTK_Definitions_Utilities_SupportedPlatforms_Android
+  commentId: F:XRTK.Definitions.Utilities.SupportedPlatforms.Android
+  fullName: XRTK.Definitions.Utilities.SupportedPlatforms.Android
+  nameWithType: SupportedPlatforms.Android
+- uid: XRTK.Definitions.Utilities.SupportedPlatforms.iOS
+  name: iOS
+  href: api/XRTK.Definitions.Utilities.SupportedPlatforms.html#XRTK_Definitions_Utilities_SupportedPlatforms_iOS
+  commentId: F:XRTK.Definitions.Utilities.SupportedPlatforms.iOS
+  fullName: XRTK.Definitions.Utilities.SupportedPlatforms.iOS
+  nameWithType: SupportedPlatforms.iOS
 - uid: XRTK.Definitions.Utilities.SupportedPlatforms.LinuxStandalone
   name: LinuxStandalone
   href: api/XRTK.Definitions.Utilities.SupportedPlatforms.html#XRTK_Definitions_Utilities_SupportedPlatforms_LinuxStandalone
@@ -7478,15 +7557,15 @@ references:
   commentId: F:XRTK.Extensions.BoundsExtensions.FWD
   fullName: XRTK.Extensions.BoundsExtensions.FWD
   nameWithType: BoundsExtensions.FWD
-- uid: XRTK.Extensions.BoundsExtensions.GetColliderBoundsPoints(UnityEngine.GameObject,System.Collections.Generic.List{UnityEngine.Vector3},UnityEngine.LayerMask)
-  name: GetColliderBoundsPoints(GameObject, List<Vector3>, LayerMask)
-  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetColliderBoundsPoints_UnityEngine_GameObject_System_Collections_Generic_List_UnityEngine_Vector3__UnityEngine_LayerMask_
-  commentId: M:XRTK.Extensions.BoundsExtensions.GetColliderBoundsPoints(UnityEngine.GameObject,System.Collections.Generic.List{UnityEngine.Vector3},UnityEngine.LayerMask)
-  name.vb: GetColliderBoundsPoints(GameObject, List(Of Vector3), LayerMask)
-  fullName: XRTK.Extensions.BoundsExtensions.GetColliderBoundsPoints(UnityEngine.GameObject, System.Collections.Generic.List<UnityEngine.Vector3>, UnityEngine.LayerMask)
-  fullName.vb: XRTK.Extensions.BoundsExtensions.GetColliderBoundsPoints(UnityEngine.GameObject, System.Collections.Generic.List(Of UnityEngine.Vector3), UnityEngine.LayerMask)
-  nameWithType: BoundsExtensions.GetColliderBoundsPoints(GameObject, List<Vector3>, LayerMask)
-  nameWithType.vb: BoundsExtensions.GetColliderBoundsPoints(GameObject, List(Of Vector3), LayerMask)
+- uid: XRTK.Extensions.BoundsExtensions.GetColliderBoundsPoints(UnityEngine.GameObject,System.Collections.Generic.List{UnityEngine.Vector3}@,UnityEngine.LayerMask,UnityEngine.Collider[])
+  name: GetColliderBoundsPoints(GameObject, ref List<Vector3>, LayerMask, Collider[])
+  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetColliderBoundsPoints_UnityEngine_GameObject_System_Collections_Generic_List_UnityEngine_Vector3___UnityEngine_LayerMask_UnityEngine_Collider___
+  commentId: M:XRTK.Extensions.BoundsExtensions.GetColliderBoundsPoints(UnityEngine.GameObject,System.Collections.Generic.List{UnityEngine.Vector3}@,UnityEngine.LayerMask,UnityEngine.Collider[])
+  name.vb: GetColliderBoundsPoints(GameObject, ByRef List(Of Vector3), LayerMask, Collider())
+  fullName: XRTK.Extensions.BoundsExtensions.GetColliderBoundsPoints(UnityEngine.GameObject, ref System.Collections.Generic.List<UnityEngine.Vector3>, UnityEngine.LayerMask, UnityEngine.Collider[])
+  fullName.vb: XRTK.Extensions.BoundsExtensions.GetColliderBoundsPoints(UnityEngine.GameObject, ByRef System.Collections.Generic.List(Of UnityEngine.Vector3), UnityEngine.LayerMask, UnityEngine.Collider())
+  nameWithType: BoundsExtensions.GetColliderBoundsPoints(GameObject, ref List<Vector3>, LayerMask, Collider[])
+  nameWithType.vb: BoundsExtensions.GetColliderBoundsPoints(GameObject, ByRef List(Of Vector3), LayerMask, Collider())
 - uid: XRTK.Extensions.BoundsExtensions.GetColliderBoundsPoints*
   name: GetColliderBoundsPoints
   href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetColliderBoundsPoints_
@@ -7587,15 +7666,15 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.BoundsExtensions.GetInvalidBoundsInstance
   nameWithType: BoundsExtensions.GetInvalidBoundsInstance
-- uid: XRTK.Extensions.BoundsExtensions.GetMeshFilterBoundsPoints(UnityEngine.GameObject,System.Collections.Generic.List{UnityEngine.Vector3},UnityEngine.LayerMask)
-  name: GetMeshFilterBoundsPoints(GameObject, List<Vector3>, LayerMask)
-  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetMeshFilterBoundsPoints_UnityEngine_GameObject_System_Collections_Generic_List_UnityEngine_Vector3__UnityEngine_LayerMask_
-  commentId: M:XRTK.Extensions.BoundsExtensions.GetMeshFilterBoundsPoints(UnityEngine.GameObject,System.Collections.Generic.List{UnityEngine.Vector3},UnityEngine.LayerMask)
-  name.vb: GetMeshFilterBoundsPoints(GameObject, List(Of Vector3), LayerMask)
-  fullName: XRTK.Extensions.BoundsExtensions.GetMeshFilterBoundsPoints(UnityEngine.GameObject, System.Collections.Generic.List<UnityEngine.Vector3>, UnityEngine.LayerMask)
-  fullName.vb: XRTK.Extensions.BoundsExtensions.GetMeshFilterBoundsPoints(UnityEngine.GameObject, System.Collections.Generic.List(Of UnityEngine.Vector3), UnityEngine.LayerMask)
-  nameWithType: BoundsExtensions.GetMeshFilterBoundsPoints(GameObject, List<Vector3>, LayerMask)
-  nameWithType.vb: BoundsExtensions.GetMeshFilterBoundsPoints(GameObject, List(Of Vector3), LayerMask)
+- uid: XRTK.Extensions.BoundsExtensions.GetMeshFilterBoundsPoints(UnityEngine.GameObject,System.Collections.Generic.List{UnityEngine.Vector3}@,UnityEngine.LayerMask)
+  name: GetMeshFilterBoundsPoints(GameObject, ref List<Vector3>, LayerMask)
+  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetMeshFilterBoundsPoints_UnityEngine_GameObject_System_Collections_Generic_List_UnityEngine_Vector3___UnityEngine_LayerMask_
+  commentId: M:XRTK.Extensions.BoundsExtensions.GetMeshFilterBoundsPoints(UnityEngine.GameObject,System.Collections.Generic.List{UnityEngine.Vector3}@,UnityEngine.LayerMask)
+  name.vb: GetMeshFilterBoundsPoints(GameObject, ByRef List(Of Vector3), LayerMask)
+  fullName: XRTK.Extensions.BoundsExtensions.GetMeshFilterBoundsPoints(UnityEngine.GameObject, ref System.Collections.Generic.List<UnityEngine.Vector3>, UnityEngine.LayerMask)
+  fullName.vb: XRTK.Extensions.BoundsExtensions.GetMeshFilterBoundsPoints(UnityEngine.GameObject, ByRef System.Collections.Generic.List(Of UnityEngine.Vector3), UnityEngine.LayerMask)
+  nameWithType: BoundsExtensions.GetMeshFilterBoundsPoints(GameObject, ref List<Vector3>, LayerMask)
+  nameWithType.vb: BoundsExtensions.GetMeshFilterBoundsPoints(GameObject, ByRef List(Of Vector3), LayerMask)
 - uid: XRTK.Extensions.BoundsExtensions.GetMeshFilterBoundsPoints*
   name: GetMeshFilterBoundsPoints
   href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetMeshFilterBoundsPoints_
@@ -7603,15 +7682,15 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.BoundsExtensions.GetMeshFilterBoundsPoints
   nameWithType: BoundsExtensions.GetMeshFilterBoundsPoints
-- uid: XRTK.Extensions.BoundsExtensions.GetRenderBoundsPoints(UnityEngine.GameObject,System.Collections.Generic.List{UnityEngine.Vector3},UnityEngine.LayerMask)
-  name: GetRenderBoundsPoints(GameObject, List<Vector3>, LayerMask)
-  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetRenderBoundsPoints_UnityEngine_GameObject_System_Collections_Generic_List_UnityEngine_Vector3__UnityEngine_LayerMask_
-  commentId: M:XRTK.Extensions.BoundsExtensions.GetRenderBoundsPoints(UnityEngine.GameObject,System.Collections.Generic.List{UnityEngine.Vector3},UnityEngine.LayerMask)
-  name.vb: GetRenderBoundsPoints(GameObject, List(Of Vector3), LayerMask)
-  fullName: XRTK.Extensions.BoundsExtensions.GetRenderBoundsPoints(UnityEngine.GameObject, System.Collections.Generic.List<UnityEngine.Vector3>, UnityEngine.LayerMask)
-  fullName.vb: XRTK.Extensions.BoundsExtensions.GetRenderBoundsPoints(UnityEngine.GameObject, System.Collections.Generic.List(Of UnityEngine.Vector3), UnityEngine.LayerMask)
-  nameWithType: BoundsExtensions.GetRenderBoundsPoints(GameObject, List<Vector3>, LayerMask)
-  nameWithType.vb: BoundsExtensions.GetRenderBoundsPoints(GameObject, List(Of Vector3), LayerMask)
+- uid: XRTK.Extensions.BoundsExtensions.GetRenderBoundsPoints(UnityEngine.GameObject,System.Collections.Generic.List{UnityEngine.Vector3}@,UnityEngine.LayerMask,UnityEngine.Renderer[])
+  name: GetRenderBoundsPoints(GameObject, ref List<Vector3>, LayerMask, Renderer[])
+  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetRenderBoundsPoints_UnityEngine_GameObject_System_Collections_Generic_List_UnityEngine_Vector3___UnityEngine_LayerMask_UnityEngine_Renderer___
+  commentId: M:XRTK.Extensions.BoundsExtensions.GetRenderBoundsPoints(UnityEngine.GameObject,System.Collections.Generic.List{UnityEngine.Vector3}@,UnityEngine.LayerMask,UnityEngine.Renderer[])
+  name.vb: GetRenderBoundsPoints(GameObject, ByRef List(Of Vector3), LayerMask, Renderer())
+  fullName: XRTK.Extensions.BoundsExtensions.GetRenderBoundsPoints(UnityEngine.GameObject, ref System.Collections.Generic.List<UnityEngine.Vector3>, UnityEngine.LayerMask, UnityEngine.Renderer[])
+  fullName.vb: XRTK.Extensions.BoundsExtensions.GetRenderBoundsPoints(UnityEngine.GameObject, ByRef System.Collections.Generic.List(Of UnityEngine.Vector3), UnityEngine.LayerMask, UnityEngine.Renderer())
+  nameWithType: BoundsExtensions.GetRenderBoundsPoints(GameObject, ref List<Vector3>, LayerMask, Renderer[])
+  nameWithType.vb: BoundsExtensions.GetRenderBoundsPoints(GameObject, ByRef List(Of Vector3), LayerMask, Renderer())
 - uid: XRTK.Extensions.BoundsExtensions.GetRenderBoundsPoints*
   name: GetRenderBoundsPoints
   href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetRenderBoundsPoints_
@@ -8518,6 +8597,19 @@ references:
   fullName.vb: XRTK.Extensions.GameObjectExtensions.FindAncestorComponent(Of T)(UnityEngine.GameObject, System.Boolean)
   nameWithType: GameObjectExtensions.FindAncestorComponent<T>(GameObject, Boolean)
   nameWithType.vb: GameObjectExtensions.FindAncestorComponent(Of T)(GameObject, Boolean)
+- uid: XRTK.Extensions.GameObjectExtensions.FindCommonRoot(UnityEngine.GameObject,UnityEngine.GameObject)
+  name: FindCommonRoot(GameObject, GameObject)
+  href: api/XRTK.Extensions.GameObjectExtensions.html#XRTK_Extensions_GameObjectExtensions_FindCommonRoot_UnityEngine_GameObject_UnityEngine_GameObject_
+  commentId: M:XRTK.Extensions.GameObjectExtensions.FindCommonRoot(UnityEngine.GameObject,UnityEngine.GameObject)
+  fullName: XRTK.Extensions.GameObjectExtensions.FindCommonRoot(UnityEngine.GameObject, UnityEngine.GameObject)
+  nameWithType: GameObjectExtensions.FindCommonRoot(GameObject, GameObject)
+- uid: XRTK.Extensions.GameObjectExtensions.FindCommonRoot*
+  name: FindCommonRoot
+  href: api/XRTK.Extensions.GameObjectExtensions.html#XRTK_Extensions_GameObjectExtensions_FindCommonRoot_
+  commentId: Overload:XRTK.Extensions.GameObjectExtensions.FindCommonRoot
+  isSpec: "True"
+  fullName: XRTK.Extensions.GameObjectExtensions.FindCommonRoot
+  nameWithType: GameObjectExtensions.FindCommonRoot
 - uid: XRTK.Extensions.GameObjectExtensions.ForEachComponent*
   name: ForEachComponent
   href: api/XRTK.Extensions.GameObjectExtensions.html#XRTK_Extensions_GameObjectExtensions_ForEachComponent_
@@ -8547,6 +8639,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.GameObjectExtensions.IsInLayerMask
   nameWithType: GameObjectExtensions.IsInLayerMask
+- uid: XRTK.Extensions.GameObjectExtensions.IsParentOrChildOf(UnityEngine.GameObject,UnityEngine.GameObject)
+  name: IsParentOrChildOf(GameObject, GameObject)
+  href: api/XRTK.Extensions.GameObjectExtensions.html#XRTK_Extensions_GameObjectExtensions_IsParentOrChildOf_UnityEngine_GameObject_UnityEngine_GameObject_
+  commentId: M:XRTK.Extensions.GameObjectExtensions.IsParentOrChildOf(UnityEngine.GameObject,UnityEngine.GameObject)
+  fullName: XRTK.Extensions.GameObjectExtensions.IsParentOrChildOf(UnityEngine.GameObject, UnityEngine.GameObject)
+  nameWithType: GameObjectExtensions.IsParentOrChildOf(GameObject, GameObject)
+- uid: XRTK.Extensions.GameObjectExtensions.IsParentOrChildOf*
+  name: IsParentOrChildOf
+  href: api/XRTK.Extensions.GameObjectExtensions.html#XRTK_Extensions_GameObjectExtensions_IsParentOrChildOf_
+  commentId: Overload:XRTK.Extensions.GameObjectExtensions.IsParentOrChildOf
+  isSpec: "True"
+  fullName: XRTK.Extensions.GameObjectExtensions.IsParentOrChildOf
+  nameWithType: GameObjectExtensions.IsParentOrChildOf
 - uid: XRTK.Extensions.GameObjectExtensions.SetChildrenActive(UnityEngine.GameObject,System.Boolean)
   name: SetChildrenActive(GameObject, Boolean)
   href: api/XRTK.Extensions.GameObjectExtensions.html#XRTK_Extensions_GameObjectExtensions_SetChildrenActive_UnityEngine_GameObject_System_Boolean_
@@ -8595,6 +8700,64 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.GameObjectExtensions.SetRenderingActive
   nameWithType: GameObjectExtensions.SetRenderingActive
+- uid: XRTK.Extensions.InteractionMappingsExtensions
+  name: InteractionMappingsExtensions
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html
+  commentId: T:XRTK.Extensions.InteractionMappingsExtensions
+  fullName: XRTK.Extensions.InteractionMappingsExtensions
+  nameWithType: InteractionMappingsExtensions
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingBool(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  name: UpdateInteractionMappingBool(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingBool_XRTK_Definitions_Devices_MixedRealityInteractionMapping_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingBool(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingBool(XRTK.Definitions.Devices.MixedRealityInteractionMapping, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Utilities.Handedness)
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingBool(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingBool*
+  name: UpdateInteractionMappingBool
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingBool_
+  commentId: Overload:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingBool
+  isSpec: "True"
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingBool
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingBool
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingFloat(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  name: UpdateInteractionMappingFloat(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingFloat_XRTK_Definitions_Devices_MixedRealityInteractionMapping_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingFloat(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingFloat(XRTK.Definitions.Devices.MixedRealityInteractionMapping, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Utilities.Handedness)
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingFloat(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingFloat*
+  name: UpdateInteractionMappingFloat
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingFloat_
+  commentId: Overload:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingFloat
+  isSpec: "True"
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingFloat
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingFloat
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingPose(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  name: UpdateInteractionMappingPose(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingPose_XRTK_Definitions_Devices_MixedRealityInteractionMapping_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingPose(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingPose(XRTK.Definitions.Devices.MixedRealityInteractionMapping, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Utilities.Handedness)
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingPose(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingPose*
+  name: UpdateInteractionMappingPose
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingPose_
+  commentId: Overload:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingPose
+  isSpec: "True"
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingPose
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingPose
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingVector2(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  name: UpdateInteractionMappingVector2(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingVector2_XRTK_Definitions_Devices_MixedRealityInteractionMapping_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingVector2(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingVector2(XRTK.Definitions.Devices.MixedRealityInteractionMapping, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Utilities.Handedness)
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingVector2(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingVector2*
+  name: UpdateInteractionMappingVector2
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingVector2_
+  commentId: Overload:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingVector2
+  isSpec: "True"
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingVector2
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingVector2
 - uid: XRTK.Extensions.InteractionSourceExtensions
   name: InteractionSourceExtensions
   href: api/XRTK.Extensions.InteractionSourceExtensions.html
@@ -9012,6 +9175,19 @@ references:
   fullName.vb: XRTK.Extensions.TransformExtensions.FindAncestorComponent(Of T)(UnityEngine.Transform, System.Boolean)
   nameWithType: TransformExtensions.FindAncestorComponent<T>(Transform, Boolean)
   nameWithType.vb: TransformExtensions.FindAncestorComponent(Of T)(Transform, Boolean)
+- uid: XRTK.Extensions.TransformExtensions.FindCommonRoot(UnityEngine.Transform,UnityEngine.Transform)
+  name: FindCommonRoot(Transform, Transform)
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_FindCommonRoot_UnityEngine_Transform_UnityEngine_Transform_
+  commentId: M:XRTK.Extensions.TransformExtensions.FindCommonRoot(UnityEngine.Transform,UnityEngine.Transform)
+  fullName: XRTK.Extensions.TransformExtensions.FindCommonRoot(UnityEngine.Transform, UnityEngine.Transform)
+  nameWithType: TransformExtensions.FindCommonRoot(Transform, Transform)
+- uid: XRTK.Extensions.TransformExtensions.FindCommonRoot*
+  name: FindCommonRoot
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_FindCommonRoot_
+  commentId: Overload:XRTK.Extensions.TransformExtensions.FindCommonRoot
+  isSpec: "True"
+  fullName: XRTK.Extensions.TransformExtensions.FindCommonRoot
+  nameWithType: TransformExtensions.FindCommonRoot
 - uid: XRTK.Extensions.TransformExtensions.GetColliderBounds(UnityEngine.Transform)
   name: GetColliderBounds(Transform)
   href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetColliderBounds_UnityEngine_Transform_
@@ -9051,6 +9227,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.TransformExtensions.GetFullPath
   nameWithType: TransformExtensions.GetFullPath
+- uid: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform,UnityEngine.Vector3)
+  name: GetPointOnBoundsEdge(Transform, Vector3)
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetPointOnBoundsEdge_UnityEngine_Transform_UnityEngine_Vector3_
+  commentId: M:XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform,UnityEngine.Vector3)
+  fullName: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform, UnityEngine.Vector3)
+  nameWithType: TransformExtensions.GetPointOnBoundsEdge(Transform, Vector3)
+- uid: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge*
+  name: GetPointOnBoundsEdge
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetPointOnBoundsEdge_
+  commentId: Overload:XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge
+  isSpec: "True"
+  fullName: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge
+  nameWithType: TransformExtensions.GetPointOnBoundsEdge
 - uid: XRTK.Extensions.TransformExtensions.InverseTransformSize(UnityEngine.Transform,UnityEngine.Vector3)
   name: InverseTransformSize(Transform, Vector3)
   href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_InverseTransformSize_UnityEngine_Transform_UnityEngine_Vector3_
@@ -9187,6 +9376,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.VectorExtensions.CylindricalMapping
   nameWithType: VectorExtensions.CylindricalMapping
+- uid: XRTK.Extensions.VectorExtensions.DetermineMoveDirection(UnityEngine.Vector2,System.Single)
+  name: DetermineMoveDirection(Vector2, Single)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_DetermineMoveDirection_UnityEngine_Vector2_System_Single_
+  commentId: M:XRTK.Extensions.VectorExtensions.DetermineMoveDirection(UnityEngine.Vector2,System.Single)
+  fullName: XRTK.Extensions.VectorExtensions.DetermineMoveDirection(UnityEngine.Vector2, System.Single)
+  nameWithType: VectorExtensions.DetermineMoveDirection(Vector2, Single)
+- uid: XRTK.Extensions.VectorExtensions.DetermineMoveDirection*
+  name: DetermineMoveDirection
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_DetermineMoveDirection_
+  commentId: Overload:XRTK.Extensions.VectorExtensions.DetermineMoveDirection
+  isSpec: "True"
+  fullName: XRTK.Extensions.VectorExtensions.DetermineMoveDirection
+  nameWithType: VectorExtensions.DetermineMoveDirection
 - uid: XRTK.Extensions.VectorExtensions.Div(UnityEngine.Vector2,UnityEngine.Vector2)
   name: Div(Vector2, Vector2)
   href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_Div_UnityEngine_Vector2_UnityEngine_Vector2_
@@ -13863,6 +14065,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.IMixedRealityService.Enable
   nameWithType: IMixedRealityService.Enable
+- uid: XRTK.Interfaces.IMixedRealityService.FixedUpdate
+  name: FixedUpdate()
+  href: api/XRTK.Interfaces.IMixedRealityService.html#XRTK_Interfaces_IMixedRealityService_FixedUpdate
+  commentId: M:XRTK.Interfaces.IMixedRealityService.FixedUpdate
+  fullName: XRTK.Interfaces.IMixedRealityService.FixedUpdate()
+  nameWithType: IMixedRealityService.FixedUpdate()
+- uid: XRTK.Interfaces.IMixedRealityService.FixedUpdate*
+  name: FixedUpdate
+  href: api/XRTK.Interfaces.IMixedRealityService.html#XRTK_Interfaces_IMixedRealityService_FixedUpdate_
+  commentId: Overload:XRTK.Interfaces.IMixedRealityService.FixedUpdate
+  isSpec: "True"
+  fullName: XRTK.Interfaces.IMixedRealityService.FixedUpdate
+  nameWithType: IMixedRealityService.FixedUpdate
 - uid: XRTK.Interfaces.IMixedRealityService.Initialize
   name: Initialize()
   href: api/XRTK.Interfaces.IMixedRealityService.html#XRTK_Interfaces_IMixedRealityService_Initialize
@@ -13876,6 +14091,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.IMixedRealityService.Initialize
   nameWithType: IMixedRealityService.Initialize
+- uid: XRTK.Interfaces.IMixedRealityService.LateUpdate
+  name: LateUpdate()
+  href: api/XRTK.Interfaces.IMixedRealityService.html#XRTK_Interfaces_IMixedRealityService_LateUpdate
+  commentId: M:XRTK.Interfaces.IMixedRealityService.LateUpdate
+  fullName: XRTK.Interfaces.IMixedRealityService.LateUpdate()
+  nameWithType: IMixedRealityService.LateUpdate()
+- uid: XRTK.Interfaces.IMixedRealityService.LateUpdate*
+  name: LateUpdate
+  href: api/XRTK.Interfaces.IMixedRealityService.html#XRTK_Interfaces_IMixedRealityService_LateUpdate_
+  commentId: Overload:XRTK.Interfaces.IMixedRealityService.LateUpdate
+  isSpec: "True"
+  fullName: XRTK.Interfaces.IMixedRealityService.LateUpdate
+  nameWithType: IMixedRealityService.LateUpdate
 - uid: XRTK.Interfaces.IMixedRealityService.Name
   name: Name
   href: api/XRTK.Interfaces.IMixedRealityService.html#XRTK_Interfaces_IMixedRealityService_Name
@@ -14849,19 +15077,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.InputSystem.IMixedRealityFocusProvider.IsPointerRegistered
   nameWithType: IMixedRealityFocusProvider.IsPointerRegistered
-- uid: XRTK.Interfaces.InputSystem.IMixedRealityFocusProvider.OverrideFocusedObject
-  name: OverrideFocusedObject
-  href: api/XRTK.Interfaces.InputSystem.IMixedRealityFocusProvider.html#XRTK_Interfaces_InputSystem_IMixedRealityFocusProvider_OverrideFocusedObject
-  commentId: P:XRTK.Interfaces.InputSystem.IMixedRealityFocusProvider.OverrideFocusedObject
-  fullName: XRTK.Interfaces.InputSystem.IMixedRealityFocusProvider.OverrideFocusedObject
-  nameWithType: IMixedRealityFocusProvider.OverrideFocusedObject
-- uid: XRTK.Interfaces.InputSystem.IMixedRealityFocusProvider.OverrideFocusedObject*
-  name: OverrideFocusedObject
-  href: api/XRTK.Interfaces.InputSystem.IMixedRealityFocusProvider.html#XRTK_Interfaces_InputSystem_IMixedRealityFocusProvider_OverrideFocusedObject_
-  commentId: Overload:XRTK.Interfaces.InputSystem.IMixedRealityFocusProvider.OverrideFocusedObject
-  isSpec: "True"
-  fullName: XRTK.Interfaces.InputSystem.IMixedRealityFocusProvider.OverrideFocusedObject
-  nameWithType: IMixedRealityFocusProvider.OverrideFocusedObject
 - uid: XRTK.Interfaces.InputSystem.IMixedRealityFocusProvider.RegisterPointer(XRTK.Interfaces.InputSystem.IMixedRealityPointer)
   name: RegisterPointer(IMixedRealityPointer)
   href: api/XRTK.Interfaces.InputSystem.IMixedRealityFocusProvider.html#XRTK_Interfaces_InputSystem_IMixedRealityFocusProvider_RegisterPointer_XRTK_Interfaces_InputSystem_IMixedRealityPointer_
@@ -15626,6 +15841,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDown
   nameWithType: IMixedRealityInputSystem.RaisePointerDown
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerScroll(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector2,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  name: RaisePointerScroll(IMixedRealityPointer, MixedRealityInputAction, Vector2, IMixedRealityInputSource)
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerScroll_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
+  commentId: M:XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerScroll(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector2,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerScroll(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, UnityEngine.Vector2, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  nameWithType: IMixedRealityInputSystem.RaisePointerScroll(IMixedRealityPointer, MixedRealityInputAction, Vector2, IMixedRealityInputSource)
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerScroll*
+  name: RaisePointerScroll
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerScroll_
+  commentId: Overload:XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerScroll
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerScroll
+  nameWithType: IMixedRealityInputSystem.RaisePointerScroll
 - uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerUp(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
   name: RaisePointerUp(IMixedRealityPointer, MixedRealityInputAction, IMixedRealityInputSource)
   href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerUp_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
@@ -18904,12 +19132,15 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.ControllerVisualizationType
   nameWithType: MixedRealityControllerVisualizationProfile.ControllerVisualizationType
-- uid: XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GetControllerModelOverride(System.Type,XRTK.Definitions.Utilities.Handedness)
-  name: GetControllerModelOverride(Type, Handedness)
-  href: api/XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.html#XRTK_Providers_Controllers_MixedRealityControllerVisualizationProfile_GetControllerModelOverride_System_Type_XRTK_Definitions_Utilities_Handedness_
-  commentId: M:XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GetControllerModelOverride(System.Type,XRTK.Definitions.Utilities.Handedness)
-  fullName: XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GetControllerModelOverride(System.Type, XRTK.Definitions.Utilities.Handedness)
-  nameWithType: MixedRealityControllerVisualizationProfile.GetControllerModelOverride(Type, Handedness)
+- uid: XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GetControllerModelOverride(System.Type,XRTK.Definitions.Utilities.Handedness,UnityEngine.GameObject@)
+  name: GetControllerModelOverride(Type, Handedness, out GameObject)
+  href: api/XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.html#XRTK_Providers_Controllers_MixedRealityControllerVisualizationProfile_GetControllerModelOverride_System_Type_XRTK_Definitions_Utilities_Handedness_UnityEngine_GameObject__
+  commentId: M:XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GetControllerModelOverride(System.Type,XRTK.Definitions.Utilities.Handedness,UnityEngine.GameObject@)
+  name.vb: GetControllerModelOverride(Type, Handedness, ByRef GameObject)
+  fullName: XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GetControllerModelOverride(System.Type, XRTK.Definitions.Utilities.Handedness, out UnityEngine.GameObject)
+  fullName.vb: XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GetControllerModelOverride(System.Type, XRTK.Definitions.Utilities.Handedness, ByRef UnityEngine.GameObject)
+  nameWithType: MixedRealityControllerVisualizationProfile.GetControllerModelOverride(Type, Handedness, out GameObject)
+  nameWithType.vb: MixedRealityControllerVisualizationProfile.GetControllerModelOverride(Type, Handedness, ByRef GameObject)
 - uid: XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GetControllerModelOverride*
   name: GetControllerModelOverride
   href: api/XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.html#XRTK_Providers_Controllers_MixedRealityControllerVisualizationProfile_GetControllerModelOverride_
@@ -18943,6 +19174,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GlobalLeftHandModel
   nameWithType: MixedRealityControllerVisualizationProfile.GlobalLeftHandModel
+- uid: XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GlobalPointerPose
+  name: GlobalPointerPose
+  href: api/XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.html#XRTK_Providers_Controllers_MixedRealityControllerVisualizationProfile_GlobalPointerPose
+  commentId: P:XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GlobalPointerPose
+  fullName: XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GlobalPointerPose
+  nameWithType: MixedRealityControllerVisualizationProfile.GlobalPointerPose
+- uid: XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GlobalPointerPose*
+  name: GlobalPointerPose
+  href: api/XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.html#XRTK_Providers_Controllers_MixedRealityControllerVisualizationProfile_GlobalPointerPose_
+  commentId: Overload:XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GlobalPointerPose
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GlobalPointerPose
+  nameWithType: MixedRealityControllerVisualizationProfile.GlobalPointerPose
 - uid: XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.GlobalRightHandModel
   name: GlobalRightHandModel
   href: api/XRTK.Providers.Controllers.MixedRealityControllerVisualizationProfile.html#XRTK_Providers_Controllers_MixedRealityControllerVisualizationProfile_GlobalRightHandModel
@@ -19287,6 +19531,12 @@ references:
   commentId: T:XRTK.Providers.Controllers.OpenVR.Inspectors.Profiles.GenericOpenVRControllerMappingProfileInspector
   fullName: XRTK.Providers.Controllers.OpenVR.Inspectors.Profiles.GenericOpenVRControllerMappingProfileInspector
   nameWithType: GenericOpenVRControllerMappingProfileInspector
+- uid: XRTK.Providers.Controllers.OpenVR.Inspectors.Profiles.OculusGoControllerMappingProfileInspector
+  name: OculusGoControllerMappingProfileInspector
+  href: api/XRTK.Providers.Controllers.OpenVR.Inspectors.Profiles.OculusGoControllerMappingProfileInspector.html
+  commentId: T:XRTK.Providers.Controllers.OpenVR.Inspectors.Profiles.OculusGoControllerMappingProfileInspector
+  fullName: XRTK.Providers.Controllers.OpenVR.Inspectors.Profiles.OculusGoControllerMappingProfileInspector
+  nameWithType: OculusGoControllerMappingProfileInspector
 - uid: XRTK.Providers.Controllers.OpenVR.Inspectors.Profiles.OculusRemoteControllerMappingProfileInspector
   name: OculusRemoteControllerMappingProfileInspector
   href: api/XRTK.Providers.Controllers.OpenVR.Inspectors.Profiles.OculusRemoteControllerMappingProfileInspector.html
@@ -19305,54 +19555,99 @@ references:
   commentId: T:XRTK.Providers.Controllers.OpenVR.Inspectors.Profiles.ViveWandControllerMappingProfileInspector
   fullName: XRTK.Providers.Controllers.OpenVR.Inspectors.Profiles.ViveWandControllerMappingProfileInspector
   nameWithType: ViveWandControllerMappingProfileInspector
-- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteController
-  name: OculusRemoteController
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteController.html
-  commentId: T:XRTK.Providers.Controllers.OpenVR.OculusRemoteController
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteController
-  nameWithType: OculusRemoteController
-- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  name: OculusRemoteController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteController.html#XRTK_Providers_Controllers_OpenVR_OculusRemoteController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___
-  commentId: M:XRTK.Providers.Controllers.OpenVR.OculusRemoteController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  name.vb: OculusRemoteController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteController.OculusRemoteController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  fullName.vb: XRTK.Providers.Controllers.OpenVR.OculusRemoteController.OculusRemoteController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping())
-  nameWithType: OculusRemoteController.OculusRemoteController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
-  nameWithType.vb: OculusRemoteController.OculusRemoteController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
-- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteController.#ctor*
-  name: OculusRemoteController
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteController.html#XRTK_Providers_Controllers_OpenVR_OculusRemoteController__ctor_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusRemoteController.#ctor
+- uid: XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile
+  name: OculusGoControllerMappingProfile
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.html
+  commentId: T:XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile
+  nameWithType: OculusGoControllerMappingProfile
+- uid: XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.Awake
+  name: Awake()
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.html#XRTK_Providers_Controllers_OpenVR_OculusGoControllerMappingProfile_Awake
+  commentId: M:XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.Awake
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.Awake()
+  nameWithType: OculusGoControllerMappingProfile.Awake()
+- uid: XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.Awake*
+  name: Awake
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.html#XRTK_Providers_Controllers_OpenVR_OculusGoControllerMappingProfile_Awake_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.Awake
   isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteController.OculusRemoteController
-  nameWithType: OculusRemoteController.OculusRemoteController
-- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteController.DefaultInteractions
-  name: DefaultInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteController.html#XRTK_Providers_Controllers_OpenVR_OculusRemoteController_DefaultInteractions
-  commentId: P:XRTK.Providers.Controllers.OpenVR.OculusRemoteController.DefaultInteractions
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteController.DefaultInteractions
-  nameWithType: OculusRemoteController.DefaultInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteController.DefaultInteractions*
-  name: DefaultInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteController.html#XRTK_Providers_Controllers_OpenVR_OculusRemoteController_DefaultInteractions_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusRemoteController.DefaultInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.Awake
+  nameWithType: OculusGoControllerMappingProfile.Awake
+- uid: XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.ControllerType
+  name: ControllerType
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.html#XRTK_Providers_Controllers_OpenVR_OculusGoControllerMappingProfile_ControllerType
+  commentId: P:XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.ControllerType
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.ControllerType
+  nameWithType: OculusGoControllerMappingProfile.ControllerType
+- uid: XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.ControllerType*
+  name: ControllerType
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.html#XRTK_Providers_Controllers_OpenVR_OculusGoControllerMappingProfile_ControllerType_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.ControllerType
   isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteController.DefaultInteractions
-  nameWithType: OculusRemoteController.DefaultInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.ControllerType
+  nameWithType: OculusGoControllerMappingProfile.ControllerType
+- uid: XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.TexturePath
+  name: TexturePath
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.html#XRTK_Providers_Controllers_OpenVR_OculusGoControllerMappingProfile_TexturePath
+  commentId: P:XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.TexturePath
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.TexturePath
+  nameWithType: OculusGoControllerMappingProfile.TexturePath
+- uid: XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.TexturePath*
+  name: TexturePath
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.html#XRTK_Providers_Controllers_OpenVR_OculusGoControllerMappingProfile_TexturePath_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.TexturePath
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusGoControllerMappingProfile.TexturePath
+  nameWithType: OculusGoControllerMappingProfile.TexturePath
+- uid: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController
+  name: OculusGoOpenVRController
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.html
+  commentId: T:XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController
+  nameWithType: OculusGoOpenVRController
+- uid: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name: OculusGoOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusGoOpenVRController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___
+  commentId: M:XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name.vb: OculusGoOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.OculusGoOpenVRController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  fullName.vb: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.OculusGoOpenVRController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping())
+  nameWithType: OculusGoOpenVRController.OculusGoOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  nameWithType.vb: OculusGoOpenVRController.OculusGoOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+- uid: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.#ctor*
+  name: OculusGoOpenVRController
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusGoOpenVRController__ctor_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.#ctor
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.OculusGoOpenVRController
+  nameWithType: OculusGoOpenVRController.OculusGoOpenVRController
+- uid: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.DefaultInteractions
+  name: DefaultInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusGoOpenVRController_DefaultInteractions
+  commentId: P:XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.DefaultInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.DefaultInteractions
+  nameWithType: OculusGoOpenVRController.DefaultInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.DefaultInteractions*
+  name: DefaultInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusGoOpenVRController_DefaultInteractions_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.DefaultInteractions
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.DefaultInteractions
+  nameWithType: OculusGoOpenVRController.DefaultInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
   name: SetupDefaultInteractions(Handedness)
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteController.html#XRTK_Providers_Controllers_OpenVR_OculusRemoteController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_
-  commentId: M:XRTK.Providers.Controllers.OpenVR.OculusRemoteController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
-  nameWithType: OculusRemoteController.SetupDefaultInteractions(Handedness)
-- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteController.SetupDefaultInteractions*
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusGoOpenVRController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  nameWithType: OculusGoOpenVRController.SetupDefaultInteractions(Handedness)
+- uid: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.SetupDefaultInteractions*
   name: SetupDefaultInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteController.html#XRTK_Providers_Controllers_OpenVR_OculusRemoteController_SetupDefaultInteractions_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusRemoteController.SetupDefaultInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusGoOpenVRController_SetupDefaultInteractions_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.SetupDefaultInteractions
   isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteController.SetupDefaultInteractions
-  nameWithType: OculusRemoteController.SetupDefaultInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusGoOpenVRController.SetupDefaultInteractions
+  nameWithType: OculusGoOpenVRController.SetupDefaultInteractions
 - uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteControllerMappingProfile
   name: OculusRemoteControllerMappingProfile
   href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteControllerMappingProfile.html
@@ -19398,67 +19693,54 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteControllerMappingProfile.TexturePath
   nameWithType: OculusRemoteControllerMappingProfile.TexturePath
-- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchController
-  name: OculusTouchController
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchController.html
-  commentId: T:XRTK.Providers.Controllers.OpenVR.OculusTouchController
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchController
-  nameWithType: OculusTouchController
-- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  name: OculusTouchController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___
-  commentId: M:XRTK.Providers.Controllers.OpenVR.OculusTouchController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  name.vb: OculusTouchController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchController.OculusTouchController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  fullName.vb: XRTK.Providers.Controllers.OpenVR.OculusTouchController.OculusTouchController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping())
-  nameWithType: OculusTouchController.OculusTouchController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
-  nameWithType.vb: OculusTouchController.OculusTouchController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
-- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchController.#ctor*
-  name: OculusTouchController
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchController__ctor_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusTouchController.#ctor
+- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController
+  name: OculusRemoteOpenVRController
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.html
+  commentId: T:XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController
+  nameWithType: OculusRemoteOpenVRController
+- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name: OculusRemoteOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusRemoteOpenVRController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___
+  commentId: M:XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name.vb: OculusRemoteOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.OculusRemoteOpenVRController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  fullName.vb: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.OculusRemoteOpenVRController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping())
+  nameWithType: OculusRemoteOpenVRController.OculusRemoteOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  nameWithType.vb: OculusRemoteOpenVRController.OculusRemoteOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.#ctor*
+  name: OculusRemoteOpenVRController
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusRemoteOpenVRController__ctor_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.#ctor
   isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchController.OculusTouchController
-  nameWithType: OculusTouchController.OculusTouchController
-- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchController.DefaultLeftHandedInteractions
-  name: DefaultLeftHandedInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchController_DefaultLeftHandedInteractions
-  commentId: P:XRTK.Providers.Controllers.OpenVR.OculusTouchController.DefaultLeftHandedInteractions
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchController.DefaultLeftHandedInteractions
-  nameWithType: OculusTouchController.DefaultLeftHandedInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchController.DefaultLeftHandedInteractions*
-  name: DefaultLeftHandedInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchController_DefaultLeftHandedInteractions_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusTouchController.DefaultLeftHandedInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.OculusRemoteOpenVRController
+  nameWithType: OculusRemoteOpenVRController.OculusRemoteOpenVRController
+- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.DefaultInteractions
+  name: DefaultInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusRemoteOpenVRController_DefaultInteractions
+  commentId: P:XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.DefaultInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.DefaultInteractions
+  nameWithType: OculusRemoteOpenVRController.DefaultInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.DefaultInteractions*
+  name: DefaultInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusRemoteOpenVRController_DefaultInteractions_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.DefaultInteractions
   isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchController.DefaultLeftHandedInteractions
-  nameWithType: OculusTouchController.DefaultLeftHandedInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchController.DefaultRightHandedInteractions
-  name: DefaultRightHandedInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchController_DefaultRightHandedInteractions
-  commentId: P:XRTK.Providers.Controllers.OpenVR.OculusTouchController.DefaultRightHandedInteractions
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchController.DefaultRightHandedInteractions
-  nameWithType: OculusTouchController.DefaultRightHandedInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchController.DefaultRightHandedInteractions*
-  name: DefaultRightHandedInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchController_DefaultRightHandedInteractions_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusTouchController.DefaultRightHandedInteractions
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchController.DefaultRightHandedInteractions
-  nameWithType: OculusTouchController.DefaultRightHandedInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.DefaultInteractions
+  nameWithType: OculusRemoteOpenVRController.DefaultInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
   name: SetupDefaultInteractions(Handedness)
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_
-  commentId: M:XRTK.Providers.Controllers.OpenVR.OculusTouchController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
-  nameWithType: OculusTouchController.SetupDefaultInteractions(Handedness)
-- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchController.SetupDefaultInteractions*
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusRemoteOpenVRController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  nameWithType: OculusRemoteOpenVRController.SetupDefaultInteractions(Handedness)
+- uid: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.SetupDefaultInteractions*
   name: SetupDefaultInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchController_SetupDefaultInteractions_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusTouchController.SetupDefaultInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusRemoteOpenVRController_SetupDefaultInteractions_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.SetupDefaultInteractions
   isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchController.SetupDefaultInteractions
-  nameWithType: OculusTouchController.SetupDefaultInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusRemoteOpenVRController.SetupDefaultInteractions
+  nameWithType: OculusRemoteOpenVRController.SetupDefaultInteractions
 - uid: XRTK.Providers.Controllers.OpenVR.OculusTouchControllerMappingProfile
   name: OculusTouchControllerMappingProfile
   href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchControllerMappingProfile.html
@@ -19504,6 +19786,67 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchControllerMappingProfile.TexturePath
   nameWithType: OculusTouchControllerMappingProfile.TexturePath
+- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController
+  name: OculusTouchOpenVRController
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.html
+  commentId: T:XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController
+  nameWithType: OculusTouchOpenVRController
+- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name: OculusTouchOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchOpenVRController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___
+  commentId: M:XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name.vb: OculusTouchOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.OculusTouchOpenVRController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  fullName.vb: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.OculusTouchOpenVRController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping())
+  nameWithType: OculusTouchOpenVRController.OculusTouchOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  nameWithType.vb: OculusTouchOpenVRController.OculusTouchOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.#ctor*
+  name: OculusTouchOpenVRController
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchOpenVRController__ctor_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.#ctor
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.OculusTouchOpenVRController
+  nameWithType: OculusTouchOpenVRController.OculusTouchOpenVRController
+- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.DefaultLeftHandedInteractions
+  name: DefaultLeftHandedInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchOpenVRController_DefaultLeftHandedInteractions
+  commentId: P:XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.DefaultLeftHandedInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.DefaultLeftHandedInteractions
+  nameWithType: OculusTouchOpenVRController.DefaultLeftHandedInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.DefaultLeftHandedInteractions*
+  name: DefaultLeftHandedInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchOpenVRController_DefaultLeftHandedInteractions_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.DefaultLeftHandedInteractions
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.DefaultLeftHandedInteractions
+  nameWithType: OculusTouchOpenVRController.DefaultLeftHandedInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.DefaultRightHandedInteractions
+  name: DefaultRightHandedInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchOpenVRController_DefaultRightHandedInteractions
+  commentId: P:XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.DefaultRightHandedInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.DefaultRightHandedInteractions
+  nameWithType: OculusTouchOpenVRController.DefaultRightHandedInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.DefaultRightHandedInteractions*
+  name: DefaultRightHandedInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchOpenVRController_DefaultRightHandedInteractions_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.DefaultRightHandedInteractions
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.DefaultRightHandedInteractions
+  nameWithType: OculusTouchOpenVRController.DefaultRightHandedInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  name: SetupDefaultInteractions(Handedness)
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchOpenVRController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  nameWithType: OculusTouchOpenVRController.SetupDefaultInteractions(Handedness)
+- uid: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.SetupDefaultInteractions*
+  name: SetupDefaultInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.html#XRTK_Providers_Controllers_OpenVR_OculusTouchOpenVRController_SetupDefaultInteractions_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.SetupDefaultInteractions
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.OpenVR.OculusTouchOpenVRController.SetupDefaultInteractions
+  nameWithType: OculusTouchOpenVRController.SetupDefaultInteractions
 - uid: XRTK.Providers.Controllers.OpenVR.OpenVRDataProvider
   name: OpenVRDataProvider
   href: api/XRTK.Providers.Controllers.OpenVR.OpenVRDataProvider.html
@@ -19549,128 +19892,67 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.OpenVR.OpenVRDataProvider.GetOrAddController
   nameWithType: OpenVRDataProvider.GetOrAddController
-- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController
-  name: ViveKnucklesController
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.html
-  commentId: T:XRTK.Providers.Controllers.OpenVR.ViveKnucklesController
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController
-  nameWithType: ViveKnucklesController
-- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  name: ViveKnucklesController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___
-  commentId: M:XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  name.vb: ViveKnucklesController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.ViveKnucklesController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  fullName.vb: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.ViveKnucklesController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping())
-  nameWithType: ViveKnucklesController.ViveKnucklesController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
-  nameWithType.vb: ViveKnucklesController.ViveKnucklesController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
-- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.#ctor*
-  name: ViveKnucklesController
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesController__ctor_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.#ctor
+- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController
+  name: ViveKnucklesOpenVRController
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.html
+  commentId: T:XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController
+  nameWithType: ViveKnucklesOpenVRController
+- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name: ViveKnucklesOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesOpenVRController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___
+  commentId: M:XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name.vb: ViveKnucklesOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.ViveKnucklesOpenVRController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  fullName.vb: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.ViveKnucklesOpenVRController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping())
+  nameWithType: ViveKnucklesOpenVRController.ViveKnucklesOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  nameWithType.vb: ViveKnucklesOpenVRController.ViveKnucklesOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.#ctor*
+  name: ViveKnucklesOpenVRController
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesOpenVRController__ctor_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.#ctor
   isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.ViveKnucklesController
-  nameWithType: ViveKnucklesController.ViveKnucklesController
-- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.DefaultLeftHandedInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.ViveKnucklesOpenVRController
+  nameWithType: ViveKnucklesOpenVRController.ViveKnucklesOpenVRController
+- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.DefaultLeftHandedInteractions
   name: DefaultLeftHandedInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesController_DefaultLeftHandedInteractions
-  commentId: P:XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.DefaultLeftHandedInteractions
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.DefaultLeftHandedInteractions
-  nameWithType: ViveKnucklesController.DefaultLeftHandedInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.DefaultLeftHandedInteractions*
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesOpenVRController_DefaultLeftHandedInteractions
+  commentId: P:XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.DefaultLeftHandedInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.DefaultLeftHandedInteractions
+  nameWithType: ViveKnucklesOpenVRController.DefaultLeftHandedInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.DefaultLeftHandedInteractions*
   name: DefaultLeftHandedInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesController_DefaultLeftHandedInteractions_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.DefaultLeftHandedInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesOpenVRController_DefaultLeftHandedInteractions_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.DefaultLeftHandedInteractions
   isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.DefaultLeftHandedInteractions
-  nameWithType: ViveKnucklesController.DefaultLeftHandedInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.DefaultRightHandedInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.DefaultLeftHandedInteractions
+  nameWithType: ViveKnucklesOpenVRController.DefaultLeftHandedInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.DefaultRightHandedInteractions
   name: DefaultRightHandedInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesController_DefaultRightHandedInteractions
-  commentId: P:XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.DefaultRightHandedInteractions
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.DefaultRightHandedInteractions
-  nameWithType: ViveKnucklesController.DefaultRightHandedInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.DefaultRightHandedInteractions*
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesOpenVRController_DefaultRightHandedInteractions
+  commentId: P:XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.DefaultRightHandedInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.DefaultRightHandedInteractions
+  nameWithType: ViveKnucklesOpenVRController.DefaultRightHandedInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.DefaultRightHandedInteractions*
   name: DefaultRightHandedInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesController_DefaultRightHandedInteractions_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.DefaultRightHandedInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesOpenVRController_DefaultRightHandedInteractions_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.DefaultRightHandedInteractions
   isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.DefaultRightHandedInteractions
-  nameWithType: ViveKnucklesController.DefaultRightHandedInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.DefaultRightHandedInteractions
+  nameWithType: ViveKnucklesOpenVRController.DefaultRightHandedInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
   name: SetupDefaultInteractions(Handedness)
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_
-  commentId: M:XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
-  nameWithType: ViveKnucklesController.SetupDefaultInteractions(Handedness)
-- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.SetupDefaultInteractions*
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesOpenVRController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  nameWithType: ViveKnucklesOpenVRController.SetupDefaultInteractions(Handedness)
+- uid: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.SetupDefaultInteractions*
   name: SetupDefaultInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesController_SetupDefaultInteractions_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.SetupDefaultInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveKnucklesOpenVRController_SetupDefaultInteractions_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.SetupDefaultInteractions
   isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesController.SetupDefaultInteractions
-  nameWithType: ViveKnucklesController.SetupDefaultInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.ViveWandController
-  name: ViveWandController
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandController.html
-  commentId: T:XRTK.Providers.Controllers.OpenVR.ViveWandController
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandController
-  nameWithType: ViveWandController
-- uid: XRTK.Providers.Controllers.OpenVR.ViveWandController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  name: ViveWandController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandController.html#XRTK_Providers_Controllers_OpenVR_ViveWandController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___
-  commentId: M:XRTK.Providers.Controllers.OpenVR.ViveWandController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  name.vb: ViveWandController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandController.ViveWandController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  fullName.vb: XRTK.Providers.Controllers.OpenVR.ViveWandController.ViveWandController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping())
-  nameWithType: ViveWandController.ViveWandController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
-  nameWithType.vb: ViveWandController.ViveWandController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
-- uid: XRTK.Providers.Controllers.OpenVR.ViveWandController.#ctor*
-  name: ViveWandController
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandController.html#XRTK_Providers_Controllers_OpenVR_ViveWandController__ctor_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveWandController.#ctor
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandController.ViveWandController
-  nameWithType: ViveWandController.ViveWandController
-- uid: XRTK.Providers.Controllers.OpenVR.ViveWandController.DefaultLeftHandedInteractions
-  name: DefaultLeftHandedInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandController.html#XRTK_Providers_Controllers_OpenVR_ViveWandController_DefaultLeftHandedInteractions
-  commentId: P:XRTK.Providers.Controllers.OpenVR.ViveWandController.DefaultLeftHandedInteractions
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandController.DefaultLeftHandedInteractions
-  nameWithType: ViveWandController.DefaultLeftHandedInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.ViveWandController.DefaultLeftHandedInteractions*
-  name: DefaultLeftHandedInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandController.html#XRTK_Providers_Controllers_OpenVR_ViveWandController_DefaultLeftHandedInteractions_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveWandController.DefaultLeftHandedInteractions
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandController.DefaultLeftHandedInteractions
-  nameWithType: ViveWandController.DefaultLeftHandedInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.ViveWandController.DefaultRightHandedInteractions
-  name: DefaultRightHandedInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandController.html#XRTK_Providers_Controllers_OpenVR_ViveWandController_DefaultRightHandedInteractions
-  commentId: P:XRTK.Providers.Controllers.OpenVR.ViveWandController.DefaultRightHandedInteractions
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandController.DefaultRightHandedInteractions
-  nameWithType: ViveWandController.DefaultRightHandedInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.ViveWandController.DefaultRightHandedInteractions*
-  name: DefaultRightHandedInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandController.html#XRTK_Providers_Controllers_OpenVR_ViveWandController_DefaultRightHandedInteractions_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveWandController.DefaultRightHandedInteractions
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandController.DefaultRightHandedInteractions
-  nameWithType: ViveWandController.DefaultRightHandedInteractions
-- uid: XRTK.Providers.Controllers.OpenVR.ViveWandController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
-  name: SetupDefaultInteractions(Handedness)
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandController.html#XRTK_Providers_Controllers_OpenVR_ViveWandController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_
-  commentId: M:XRTK.Providers.Controllers.OpenVR.ViveWandController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
-  nameWithType: ViveWandController.SetupDefaultInteractions(Handedness)
-- uid: XRTK.Providers.Controllers.OpenVR.ViveWandController.SetupDefaultInteractions*
-  name: SetupDefaultInteractions
-  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandController.html#XRTK_Providers_Controllers_OpenVR_ViveWandController_SetupDefaultInteractions_
-  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveWandController.SetupDefaultInteractions
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandController.SetupDefaultInteractions
-  nameWithType: ViveWandController.SetupDefaultInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveKnucklesOpenVRController.SetupDefaultInteractions
+  nameWithType: ViveKnucklesOpenVRController.SetupDefaultInteractions
 - uid: XRTK.Providers.Controllers.OpenVR.ViveWandControllerMappingProfile
   name: ViveWandControllerMappingProfile
   href: api/XRTK.Providers.Controllers.OpenVR.ViveWandControllerMappingProfile.html
@@ -19716,6 +19998,67 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.OpenVR.ViveWandControllerMappingProfile.TexturePath
   nameWithType: ViveWandControllerMappingProfile.TexturePath
+- uid: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController
+  name: ViveWandOpenVRController
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.html
+  commentId: T:XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController
+  nameWithType: ViveWandOpenVRController
+- uid: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name: ViveWandOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveWandOpenVRController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___
+  commentId: M:XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name.vb: ViveWandOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.ViveWandOpenVRController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  fullName.vb: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.ViveWandOpenVRController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping())
+  nameWithType: ViveWandOpenVRController.ViveWandOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  nameWithType.vb: ViveWandOpenVRController.ViveWandOpenVRController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+- uid: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.#ctor*
+  name: ViveWandOpenVRController
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveWandOpenVRController__ctor_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.#ctor
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.ViveWandOpenVRController
+  nameWithType: ViveWandOpenVRController.ViveWandOpenVRController
+- uid: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.DefaultLeftHandedInteractions
+  name: DefaultLeftHandedInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveWandOpenVRController_DefaultLeftHandedInteractions
+  commentId: P:XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.DefaultLeftHandedInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.DefaultLeftHandedInteractions
+  nameWithType: ViveWandOpenVRController.DefaultLeftHandedInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.DefaultLeftHandedInteractions*
+  name: DefaultLeftHandedInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveWandOpenVRController_DefaultLeftHandedInteractions_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.DefaultLeftHandedInteractions
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.DefaultLeftHandedInteractions
+  nameWithType: ViveWandOpenVRController.DefaultLeftHandedInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.DefaultRightHandedInteractions
+  name: DefaultRightHandedInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveWandOpenVRController_DefaultRightHandedInteractions
+  commentId: P:XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.DefaultRightHandedInteractions
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.DefaultRightHandedInteractions
+  nameWithType: ViveWandOpenVRController.DefaultRightHandedInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.DefaultRightHandedInteractions*
+  name: DefaultRightHandedInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveWandOpenVRController_DefaultRightHandedInteractions_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.DefaultRightHandedInteractions
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.DefaultRightHandedInteractions
+  nameWithType: ViveWandOpenVRController.DefaultRightHandedInteractions
+- uid: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  name: SetupDefaultInteractions(Handedness)
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveWandOpenVRController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
+  nameWithType: ViveWandOpenVRController.SetupDefaultInteractions(Handedness)
+- uid: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.SetupDefaultInteractions*
+  name: SetupDefaultInteractions
+  href: api/XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.html#XRTK_Providers_Controllers_OpenVR_ViveWandOpenVRController_SetupDefaultInteractions_
+  commentId: Overload:XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.SetupDefaultInteractions
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.OpenVR.ViveWandOpenVRController.SetupDefaultInteractions
+  nameWithType: ViveWandOpenVRController.SetupDefaultInteractions
 - uid: XRTK.Providers.Controllers.OpenVR.WindowsMixedRealityOpenVRMotionController
   name: WindowsMixedRealityOpenVRMotionController
   href: api/XRTK.Providers.Controllers.OpenVR.WindowsMixedRealityOpenVRMotionController.html
@@ -22343,6 +22686,19 @@ references:
   commentId: T:XRTK.SDK.Input.Handlers.BaseFocusHandler
   fullName: XRTK.SDK.Input.Handlers.BaseFocusHandler
   nameWithType: BaseFocusHandler
+- uid: XRTK.SDK.Input.Handlers.BaseFocusHandler.ActivePointers
+  name: ActivePointers
+  href: api/XRTK.SDK.Input.Handlers.BaseFocusHandler.html#XRTK_SDK_Input_Handlers_BaseFocusHandler_ActivePointers
+  commentId: P:XRTK.SDK.Input.Handlers.BaseFocusHandler.ActivePointers
+  fullName: XRTK.SDK.Input.Handlers.BaseFocusHandler.ActivePointers
+  nameWithType: BaseFocusHandler.ActivePointers
+- uid: XRTK.SDK.Input.Handlers.BaseFocusHandler.ActivePointers*
+  name: ActivePointers
+  href: api/XRTK.SDK.Input.Handlers.BaseFocusHandler.html#XRTK_SDK_Input_Handlers_BaseFocusHandler_ActivePointers_
+  commentId: Overload:XRTK.SDK.Input.Handlers.BaseFocusHandler.ActivePointers
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.BaseFocusHandler.ActivePointers
+  nameWithType: BaseFocusHandler.ActivePointers
 - uid: XRTK.SDK.Input.Handlers.BaseFocusHandler.FocusEnabled
   name: FocusEnabled
   href: api/XRTK.SDK.Input.Handlers.BaseFocusHandler.html#XRTK_SDK_Input_Handlers_BaseFocusHandler_FocusEnabled
@@ -22356,19 +22712,6 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.BaseFocusHandler.FocusEnabled
   nameWithType: BaseFocusHandler.FocusEnabled
-- uid: XRTK.SDK.Input.Handlers.BaseFocusHandler.Focusers
-  name: Focusers
-  href: api/XRTK.SDK.Input.Handlers.BaseFocusHandler.html#XRTK_SDK_Input_Handlers_BaseFocusHandler_Focusers
-  commentId: P:XRTK.SDK.Input.Handlers.BaseFocusHandler.Focusers
-  fullName: XRTK.SDK.Input.Handlers.BaseFocusHandler.Focusers
-  nameWithType: BaseFocusHandler.Focusers
-- uid: XRTK.SDK.Input.Handlers.BaseFocusHandler.Focusers*
-  name: Focusers
-  href: api/XRTK.SDK.Input.Handlers.BaseFocusHandler.html#XRTK_SDK_Input_Handlers_BaseFocusHandler_Focusers_
-  commentId: Overload:XRTK.SDK.Input.Handlers.BaseFocusHandler.Focusers
-  isSpec: "True"
-  fullName: XRTK.SDK.Input.Handlers.BaseFocusHandler.Focusers
-  nameWithType: BaseFocusHandler.Focusers
 - uid: XRTK.SDK.Input.Handlers.BaseFocusHandler.HasFocus
   name: HasFocus
   href: api/XRTK.SDK.Input.Handlers.BaseFocusHandler.html#XRTK_SDK_Input_Handlers_BaseFocusHandler_HasFocus
@@ -23376,19 +23719,6 @@ references:
   commentId: T:XRTK.SDK.Inspectors.UX.Collections.BaseCollectionInspector
   fullName: XRTK.SDK.Inspectors.UX.Collections.BaseCollectionInspector
   nameWithType: BaseCollectionInspector
-- uid: XRTK.SDK.Inspectors.UX.Collections.BaseCollectionInspector.OnInspectorGUI
-  name: OnInspectorGUI()
-  href: api/XRTK.SDK.Inspectors.UX.Collections.BaseCollectionInspector.html#XRTK_SDK_Inspectors_UX_Collections_BaseCollectionInspector_OnInspectorGUI
-  commentId: M:XRTK.SDK.Inspectors.UX.Collections.BaseCollectionInspector.OnInspectorGUI
-  fullName: XRTK.SDK.Inspectors.UX.Collections.BaseCollectionInspector.OnInspectorGUI()
-  nameWithType: BaseCollectionInspector.OnInspectorGUI()
-- uid: XRTK.SDK.Inspectors.UX.Collections.BaseCollectionInspector.OnInspectorGUI*
-  name: OnInspectorGUI
-  href: api/XRTK.SDK.Inspectors.UX.Collections.BaseCollectionInspector.html#XRTK_SDK_Inspectors_UX_Collections_BaseCollectionInspector_OnInspectorGUI_
-  commentId: Overload:XRTK.SDK.Inspectors.UX.Collections.BaseCollectionInspector.OnInspectorGUI
-  isSpec: "True"
-  fullName: XRTK.SDK.Inspectors.UX.Collections.BaseCollectionInspector.OnInspectorGUI
-  nameWithType: BaseCollectionInspector.OnInspectorGUI
 - uid: XRTK.SDK.Inspectors.UX.Pointers
   name: XRTK.SDK.Inspectors.UX.Pointers
   href: api/XRTK.SDK.Inspectors.UX.Pointers.html
@@ -24741,6 +25071,19 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.UX.Collections.BaseObjectCollection.ContainsNode
   nameWithType: BaseObjectCollection.ContainsNode
+- uid: XRTK.SDK.UX.Collections.BaseObjectCollection.GetCollection
+  name: GetCollection()
+  href: api/XRTK.SDK.UX.Collections.BaseObjectCollection.html#XRTK_SDK_UX_Collections_BaseObjectCollection_GetCollection
+  commentId: M:XRTK.SDK.UX.Collections.BaseObjectCollection.GetCollection
+  fullName: XRTK.SDK.UX.Collections.BaseObjectCollection.GetCollection()
+  nameWithType: BaseObjectCollection.GetCollection()
+- uid: XRTK.SDK.UX.Collections.BaseObjectCollection.GetCollection*
+  name: GetCollection
+  href: api/XRTK.SDK.UX.Collections.BaseObjectCollection.html#XRTK_SDK_UX_Collections_BaseObjectCollection_GetCollection_
+  commentId: Overload:XRTK.SDK.UX.Collections.BaseObjectCollection.GetCollection
+  isSpec: "True"
+  fullName: XRTK.SDK.UX.Collections.BaseObjectCollection.GetCollection
+  nameWithType: BaseObjectCollection.GetCollection
 - uid: XRTK.SDK.UX.Collections.BaseObjectCollection.IgnoreInactiveTransforms
   name: IgnoreInactiveTransforms
   href: api/XRTK.SDK.UX.Collections.BaseObjectCollection.html#XRTK_SDK_UX_Collections_BaseObjectCollection_IgnoreInactiveTransforms
@@ -24767,19 +25110,12 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.UX.Collections.BaseObjectCollection.LayoutChildren
   nameWithType: BaseObjectCollection.LayoutChildren
-- uid: XRTK.SDK.UX.Collections.BaseObjectCollection.NodeList
-  name: NodeList
-  href: api/XRTK.SDK.UX.Collections.BaseObjectCollection.html#XRTK_SDK_UX_Collections_BaseObjectCollection_NodeList
-  commentId: P:XRTK.SDK.UX.Collections.BaseObjectCollection.NodeList
-  fullName: XRTK.SDK.UX.Collections.BaseObjectCollection.NodeList
-  nameWithType: BaseObjectCollection.NodeList
-- uid: XRTK.SDK.UX.Collections.BaseObjectCollection.NodeList*
-  name: NodeList
-  href: api/XRTK.SDK.UX.Collections.BaseObjectCollection.html#XRTK_SDK_UX_Collections_BaseObjectCollection_NodeList_
-  commentId: Overload:XRTK.SDK.UX.Collections.BaseObjectCollection.NodeList
-  isSpec: "True"
-  fullName: XRTK.SDK.UX.Collections.BaseObjectCollection.NodeList
-  nameWithType: BaseObjectCollection.NodeList
+- uid: XRTK.SDK.UX.Collections.BaseObjectCollection.nodeList
+  name: nodeList
+  href: api/XRTK.SDK.UX.Collections.BaseObjectCollection.html#XRTK_SDK_UX_Collections_BaseObjectCollection_nodeList
+  commentId: F:XRTK.SDK.UX.Collections.BaseObjectCollection.nodeList
+  fullName: XRTK.SDK.UX.Collections.BaseObjectCollection.nodeList
+  nameWithType: BaseObjectCollection.nodeList
 - uid: XRTK.SDK.UX.Collections.BaseObjectCollection.OnCollectionUpdated
   name: OnCollectionUpdated
   href: api/XRTK.SDK.UX.Collections.BaseObjectCollection.html#XRTK_SDK_UX_Collections_BaseObjectCollection_OnCollectionUpdated
@@ -29738,6 +30074,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.BaseService.Finalize
   nameWithType: BaseService.Finalize
+- uid: XRTK.Services.BaseService.FixedUpdate
+  name: FixedUpdate()
+  href: api/XRTK.Services.BaseService.html#XRTK_Services_BaseService_FixedUpdate
+  commentId: M:XRTK.Services.BaseService.FixedUpdate
+  fullName: XRTK.Services.BaseService.FixedUpdate()
+  nameWithType: BaseService.FixedUpdate()
+- uid: XRTK.Services.BaseService.FixedUpdate*
+  name: FixedUpdate
+  href: api/XRTK.Services.BaseService.html#XRTK_Services_BaseService_FixedUpdate_
+  commentId: Overload:XRTK.Services.BaseService.FixedUpdate
+  isSpec: "True"
+  fullName: XRTK.Services.BaseService.FixedUpdate
+  nameWithType: BaseService.FixedUpdate
 - uid: XRTK.Services.BaseService.Initialize
   name: Initialize()
   href: api/XRTK.Services.BaseService.html#XRTK_Services_BaseService_Initialize
@@ -29751,6 +30100,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.BaseService.Initialize
   nameWithType: BaseService.Initialize
+- uid: XRTK.Services.BaseService.LateUpdate
+  name: LateUpdate()
+  href: api/XRTK.Services.BaseService.html#XRTK_Services_BaseService_LateUpdate
+  commentId: M:XRTK.Services.BaseService.LateUpdate
+  fullName: XRTK.Services.BaseService.LateUpdate()
+  nameWithType: BaseService.LateUpdate()
+- uid: XRTK.Services.BaseService.LateUpdate*
+  name: LateUpdate
+  href: api/XRTK.Services.BaseService.html#XRTK_Services_BaseService_LateUpdate_
+  commentId: Overload:XRTK.Services.BaseService.LateUpdate
+  isSpec: "True"
+  fullName: XRTK.Services.BaseService.LateUpdate
+  nameWithType: BaseService.LateUpdate
 - uid: XRTK.Services.BaseService.Name
   name: Name
   href: api/XRTK.Services.BaseService.html#XRTK_Services_BaseService_Name
@@ -30841,19 +31203,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.InputSystem.FocusProvider.OnSourceLost
   nameWithType: FocusProvider.OnSourceLost
-- uid: XRTK.Services.InputSystem.FocusProvider.OverrideFocusedObject
-  name: OverrideFocusedObject
-  href: api/XRTK.Services.InputSystem.FocusProvider.html#XRTK_Services_InputSystem_FocusProvider_OverrideFocusedObject
-  commentId: P:XRTK.Services.InputSystem.FocusProvider.OverrideFocusedObject
-  fullName: XRTK.Services.InputSystem.FocusProvider.OverrideFocusedObject
-  nameWithType: FocusProvider.OverrideFocusedObject
-- uid: XRTK.Services.InputSystem.FocusProvider.OverrideFocusedObject*
-  name: OverrideFocusedObject
-  href: api/XRTK.Services.InputSystem.FocusProvider.html#XRTK_Services_InputSystem_FocusProvider_OverrideFocusedObject_
-  commentId: Overload:XRTK.Services.InputSystem.FocusProvider.OverrideFocusedObject
-  isSpec: "True"
-  fullName: XRTK.Services.InputSystem.FocusProvider.OverrideFocusedObject
-  nameWithType: FocusProvider.OverrideFocusedObject
 - uid: XRTK.Services.InputSystem.FocusProvider.Priority
   name: Priority
   href: api/XRTK.Services.InputSystem.FocusProvider.html#XRTK_Services_InputSystem_FocusProvider_Priority
@@ -31561,6 +31910,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDown
   nameWithType: MixedRealityInputSystem.RaisePointerDown
+- uid: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerScroll(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector2,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  name: RaisePointerScroll(IMixedRealityPointer, MixedRealityInputAction, Vector2, IMixedRealityInputSource)
+  href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_RaisePointerScroll_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
+  commentId: M:XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerScroll(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector2,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerScroll(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, UnityEngine.Vector2, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  nameWithType: MixedRealityInputSystem.RaisePointerScroll(IMixedRealityPointer, MixedRealityInputAction, Vector2, IMixedRealityInputSource)
+- uid: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerScroll*
+  name: RaisePointerScroll
+  href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_RaisePointerScroll_
+  commentId: Overload:XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerScroll
+  isSpec: "True"
+  fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerScroll
+  nameWithType: MixedRealityInputSystem.RaisePointerScroll
 - uid: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerUp(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
   name: RaisePointerUp(IMixedRealityPointer, MixedRealityInputAction, IMixedRealityInputSource)
   href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_RaisePointerUp_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
@@ -42567,6 +42929,35 @@ references:
   isSpec: "True"
   fullName: XRTK.Utilities.Rendering.ClippingPrimitive.AddRenderer
   nameWithType: ClippingPrimitive.AddRenderer
+- uid: XRTK.Utilities.Rendering.ClippingPrimitive.AddRenderers(UnityEngine.Renderer[])
+  name: AddRenderers(Renderer[])
+  href: api/XRTK.Utilities.Rendering.ClippingPrimitive.html#XRTK_Utilities_Rendering_ClippingPrimitive_AddRenderers_UnityEngine_Renderer___
+  commentId: M:XRTK.Utilities.Rendering.ClippingPrimitive.AddRenderers(UnityEngine.Renderer[])
+  name.vb: AddRenderers(Renderer())
+  fullName: XRTK.Utilities.Rendering.ClippingPrimitive.AddRenderers(UnityEngine.Renderer[])
+  fullName.vb: XRTK.Utilities.Rendering.ClippingPrimitive.AddRenderers(UnityEngine.Renderer())
+  nameWithType: ClippingPrimitive.AddRenderers(Renderer[])
+  nameWithType.vb: ClippingPrimitive.AddRenderers(Renderer())
+- uid: XRTK.Utilities.Rendering.ClippingPrimitive.AddRenderers*
+  name: AddRenderers
+  href: api/XRTK.Utilities.Rendering.ClippingPrimitive.html#XRTK_Utilities_Rendering_ClippingPrimitive_AddRenderers_
+  commentId: Overload:XRTK.Utilities.Rendering.ClippingPrimitive.AddRenderers
+  isSpec: "True"
+  fullName: XRTK.Utilities.Rendering.ClippingPrimitive.AddRenderers
+  nameWithType: ClippingPrimitive.AddRenderers
+- uid: XRTK.Utilities.Rendering.ClippingPrimitive.ClearRenderers
+  name: ClearRenderers()
+  href: api/XRTK.Utilities.Rendering.ClippingPrimitive.html#XRTK_Utilities_Rendering_ClippingPrimitive_ClearRenderers
+  commentId: M:XRTK.Utilities.Rendering.ClippingPrimitive.ClearRenderers
+  fullName: XRTK.Utilities.Rendering.ClippingPrimitive.ClearRenderers()
+  nameWithType: ClippingPrimitive.ClearRenderers()
+- uid: XRTK.Utilities.Rendering.ClippingPrimitive.ClearRenderers*
+  name: ClearRenderers
+  href: api/XRTK.Utilities.Rendering.ClippingPrimitive.html#XRTK_Utilities_Rendering_ClippingPrimitive_ClearRenderers_
+  commentId: Overload:XRTK.Utilities.Rendering.ClippingPrimitive.ClearRenderers
+  isSpec: "True"
+  fullName: XRTK.Utilities.Rendering.ClippingPrimitive.ClearRenderers
+  nameWithType: ClippingPrimitive.ClearRenderers
 - uid: XRTK.Utilities.Rendering.ClippingPrimitive.ClippingSide
   name: ClippingSide
   href: api/XRTK.Utilities.Rendering.ClippingPrimitive.html#XRTK_Utilities_Rendering_ClippingPrimitive_ClippingSide

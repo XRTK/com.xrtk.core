@@ -4,6 +4,7 @@
     "com.unity.textmeshpro": "2.0.1",
     "com.unity.xr.legacyinputhelpers": "2.0.2",
     "com.unity.xr.magicleap": "2.0.0-preview.18",
+    "com.unity.xr.oculus.android": "1.36.0",
     "com.unity.xr.oculus.standalone": "1.36.0",
     "com.unity.xr.openvr.standalone": "1.0.5",
     "com.unity.xr.windowsmr.metro": "1.0.11",

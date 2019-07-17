@@ -30,6 +30,8 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         /// </summary>
         GameObject SurfacesParent { get; }
 
+        #region Observers Utilities
+
         /// <summary>
         /// Indicates the current running state of the spatial awareness observer.
         /// </summary>
@@ -59,6 +61,10 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         /// </summary>
         HashSet<IMixedRealitySpatialObserverDataProvider> DetectedSpatialObservers { get; }
 
+        #endregion Observer Utilities
+
+        #region Observer Events
+
         /// <summary>
         /// Raise the event that a <see cref="IMixedRealitySpatialObserverDataProvider"/> has been detected.
         /// </summary>
@@ -68,6 +74,14 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         /// Raise the event that a <see cref="IMixedRealitySpatialObserverDataProvider"/> has been lost.
         /// </summary>
         void RaiseSpatialAwarenessObserverLost(IMixedRealitySpatialObserverDataProvider observer);
+
+        #endregion Observer Events
+
+        /// <summary>
+        /// Sets the provided mesh <see cref="SpatialMeshDisplayOptions"/> on all the <see cref="DetectedSpatialObservers"/>
+        /// </summary>
+        /// <param name="displayOptions"></param>
+        void SetMeshVisibility(SpatialMeshDisplayOptions displayOptions);
 
         #region Mesh Events
 

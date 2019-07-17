@@ -20,6 +20,7 @@ namespace XRTK.Utilities.Physics
         /// <returns>Whether or not the raycast hit something.</returns>
         public static bool RaycastSimplePhysicsStep(RayStep step, LayerMask[] prioritizedLayerMasks, out RaycastHit physicsHit)
         {
+            Debug.Assert(step.Length > 0, "step length must be greater than zero!");
             return RaycastSimplePhysicsStep(step, step.Length, prioritizedLayerMasks, out physicsHit);
         }
 

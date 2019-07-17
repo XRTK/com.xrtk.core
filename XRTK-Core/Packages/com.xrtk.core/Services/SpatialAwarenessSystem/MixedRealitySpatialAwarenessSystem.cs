@@ -10,6 +10,7 @@ using XRTK.EventDatum.SpatialAwarenessSystem;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem.Handlers;
+using XRTK.Providers.SpatialObservers;
 
 namespace XRTK.Services.SpatialAwarenessSystem
 {
@@ -135,6 +136,18 @@ namespace XRTK.Services.SpatialAwarenessSystem
         public void RaiseSpatialAwarenessObserverLost(IMixedRealitySpatialObserverDataProvider observer)
         {
             DetectedSpatialObservers.Remove(observer);
+        }
+
+        /// <inheritdoc />
+        public void SetMeshVisibility(SpatialMeshDisplayOptions displayOptions)
+        {
+            foreach (var observer in DetectedSpatialObservers)
+            {
+                if (observer is BaseMixedRealitySpatialMeshObserver meshObserver)
+                {
+                    meshObserver.MeshDisplayOption = displayOptions;
+                }
+            }
         }
 
         #endregion IMixedRealitySpatialAwarenessSystem Implementation

@@ -26,7 +26,15 @@ namespace XRTK.Definitions
         public MixedRealityPackageInfo[] MixedRealityPackages
         {
             get => mixedRealityPackages;
-            internal set => mixedRealityPackages = value;
+            internal set
+            {
+                mixedRealityPackages = value;
+#if UNITY_EDITOR
+                UnityEditor.EditorUtility.SetDirty(this);
+                UnityEditor.AssetDatabase.SaveAssets();
+                UnityEditor.AssetDatabase.Refresh(UnityEditor.ImportAssetOptions.ForceUpdate);
+#endif
+            }
         }
     }
 }

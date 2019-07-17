@@ -1434,6 +1434,12 @@ references:
   commentId: T:XRTK.Definitions.Devices.MixedRealityInteractionMapping
   fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping
   nameWithType: MixedRealityInteractionMapping
+- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,System.String)
+  name: MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, String)
+  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_System_String_
+  commentId: M:XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,System.String)
+  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.MixedRealityInteractionMapping(System.UInt32, System.String, XRTK.Definitions.Utilities.AxisType, XRTK.Definitions.Devices.DeviceInputType, System.String)
+  nameWithType: MixedRealityInteractionMapping.MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, String)
 - uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,System.String,System.String,System.Boolean,System.Boolean)
   name: MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, String, String, Boolean, Boolean)
   href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_System_String_System_String_System_Boolean_System_Boolean_
@@ -1446,6 +1452,12 @@ references:
   commentId: M:XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,UnityEngine.KeyCode)
   fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.MixedRealityInteractionMapping(System.UInt32, System.String, XRTK.Definitions.Utilities.AxisType, XRTK.Definitions.Devices.DeviceInputType, UnityEngine.KeyCode)
   nameWithType: MixedRealityInteractionMapping.MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, KeyCode)
+- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.String,System.String,System.String,System.Boolean,System.Boolean)
+  name: MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, MixedRealityInputAction, String, String, String, Boolean, Boolean)
+  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_String_System_String_System_String_System_Boolean_System_Boolean_
+  commentId: M:XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.String,System.String,System.String,System.Boolean,System.Boolean)
+  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.MixedRealityInteractionMapping(System.UInt32, System.String, XRTK.Definitions.Utilities.AxisType, XRTK.Definitions.Devices.DeviceInputType, XRTK.Definitions.InputSystem.MixedRealityInputAction, System.String, System.String, System.String, System.Boolean, System.Boolean)
+  nameWithType: MixedRealityInteractionMapping.MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, MixedRealityInputAction, String, String, String, Boolean, Boolean)
 - uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.KeyCode,System.String,System.String,System.Boolean,System.Boolean)
   name: MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, MixedRealityInputAction, KeyCode, String, String, Boolean, Boolean)
   href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_KeyCode_System_String_System_String_System_Boolean_System_Boolean_
@@ -1569,6 +1581,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.Id
   nameWithType: MixedRealityInteractionMapping.Id
+- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.InputName
+  name: InputName
+  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping_InputName
+  commentId: P:XRTK.Definitions.Devices.MixedRealityInteractionMapping.InputName
+  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.InputName
+  nameWithType: MixedRealityInteractionMapping.InputName
+- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.InputName*
+  name: InputName
+  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping_InputName_
+  commentId: Overload:XRTK.Definitions.Devices.MixedRealityInteractionMapping.InputName
+  isSpec: "True"
+  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.InputName
+  nameWithType: MixedRealityInteractionMapping.InputName
 - uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.InputType
   name: InputType
   href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping_InputType
@@ -8675,6 +8700,64 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.GameObjectExtensions.SetRenderingActive
   nameWithType: GameObjectExtensions.SetRenderingActive
+- uid: XRTK.Extensions.InteractionMappingsExtensions
+  name: InteractionMappingsExtensions
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html
+  commentId: T:XRTK.Extensions.InteractionMappingsExtensions
+  fullName: XRTK.Extensions.InteractionMappingsExtensions
+  nameWithType: InteractionMappingsExtensions
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingBool(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  name: UpdateInteractionMappingBool(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingBool_XRTK_Definitions_Devices_MixedRealityInteractionMapping_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingBool(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingBool(XRTK.Definitions.Devices.MixedRealityInteractionMapping, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Utilities.Handedness)
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingBool(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingBool*
+  name: UpdateInteractionMappingBool
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingBool_
+  commentId: Overload:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingBool
+  isSpec: "True"
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingBool
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingBool
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingFloat(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  name: UpdateInteractionMappingFloat(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingFloat_XRTK_Definitions_Devices_MixedRealityInteractionMapping_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingFloat(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingFloat(XRTK.Definitions.Devices.MixedRealityInteractionMapping, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Utilities.Handedness)
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingFloat(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingFloat*
+  name: UpdateInteractionMappingFloat
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingFloat_
+  commentId: Overload:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingFloat
+  isSpec: "True"
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingFloat
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingFloat
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingPose(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  name: UpdateInteractionMappingPose(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingPose_XRTK_Definitions_Devices_MixedRealityInteractionMapping_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingPose(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingPose(XRTK.Definitions.Devices.MixedRealityInteractionMapping, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Utilities.Handedness)
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingPose(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingPose*
+  name: UpdateInteractionMappingPose
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingPose_
+  commentId: Overload:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingPose
+  isSpec: "True"
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingPose
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingPose
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingVector2(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  name: UpdateInteractionMappingVector2(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingVector2_XRTK_Definitions_Devices_MixedRealityInteractionMapping_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingVector2(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingVector2(XRTK.Definitions.Devices.MixedRealityInteractionMapping, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Utilities.Handedness)
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingVector2(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
+- uid: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingVector2*
+  name: UpdateInteractionMappingVector2
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_UpdateInteractionMappingVector2_
+  commentId: Overload:XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingVector2
+  isSpec: "True"
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.UpdateInteractionMappingVector2
+  nameWithType: InteractionMappingsExtensions.UpdateInteractionMappingVector2
 - uid: XRTK.Extensions.InteractionSourceExtensions
   name: InteractionSourceExtensions
   href: api/XRTK.Extensions.InteractionSourceExtensions.html

@@ -8,7 +8,7 @@ namespace XRTK.Utilities.Gltf.Schema
     [Serializable]
     public class GltfMaterialCommonConstant : GltfProperty
     {
-        // Note: GltfMaterialCommonConstants aren't currently used but exist for deserializing jsons.
+        // Note: GltfMaterialCommonConstants aren't currently used but exists for deserializing the json.
         // These values would influence properties in Unity -> Window -> Rendering -> Light Settings if used.
 
         /// <summary>

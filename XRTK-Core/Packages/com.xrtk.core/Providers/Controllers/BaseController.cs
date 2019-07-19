@@ -4,6 +4,7 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using XRTK.Definitions;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
@@ -83,6 +84,24 @@ namespace XRTK.Providers.Controllers
 
         /// <inheritdoc />
         public MixedRealityInteractionMapping[] Interactions { get; private set; } = null;
+
+        /// <inheritdoc />
+        public virtual void StartHaptics(float intensity, float duration)
+        {
+            Debug.LogWarning("Haptics not supported for this controller. Please override this method on the platform level and implement.");
+        }
+
+        /// <inheritdoc />
+        public virtual void SendHapticFeedback(HapticFeedbackType feedback, float intensity)
+        {
+            Debug.LogWarning("Haptics not supported for this controller. Please override this method on the platform level and implement.");
+        }
+
+        /// <inheritdoc />
+        public virtual void StopHaptics()
+        {
+            Debug.LogWarning("Haptics not supported for this controller. Please override this method on the platform level and implement.");
+        }
 
         #endregion IMixedRealityController Implementation
 
@@ -298,7 +317,7 @@ namespace XRTK.Providers.Controllers
                     visualizer.UseSourcePoseData = false;
                     visualizer.PoseAction = altPoseAction;
                 }
-                else if(visualizationProfile.GlobalPointerPose != MixedRealityInputAction.None)
+                else if (visualizationProfile.GlobalPointerPose != MixedRealityInputAction.None)
                 {
                     visualizer.UseSourcePoseData = false;
                     visualizer.PoseAction = visualizationProfile.GlobalPointerPose;

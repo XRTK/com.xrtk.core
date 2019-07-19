@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using XRTK.Definitions;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -64,5 +65,24 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// Mapping definition for this controller, linking the Physical inputs to logical Input System Actions
         /// </summary>
         MixedRealityInteractionMapping[] Interactions { get; }
+
+        /// <summary>
+        /// Start the controllers haptics feedback based on the intensity and duration provided.
+        /// </summary>
+        /// <param name="intensity">The intensity of the waveform.</param>
+        /// <param name="duration">The time in seconds.</param>
+        void StartHaptics(float intensity, float duration);
+
+        /// <summary>
+        /// Sends the controller a pre-defined haptic feedback based on the pattern and intensity.
+        /// </summary>
+        /// <param name="feedback"></param>
+        /// <param name="intensity"></param>
+        void SendHapticFeedback(HapticFeedbackType feedback, float intensity);
+
+        /// <summary>
+        /// Immediately stops any haptic feedback that's currently being executed.
+        /// </summary>
+        void StopHaptics();
     }
 }

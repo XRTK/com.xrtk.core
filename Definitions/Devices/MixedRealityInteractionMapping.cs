@@ -148,7 +148,7 @@ namespace XRTK.Definitions.Devices
         /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
         /// <param name="inputType">The physical input device / control</param>
         /// <param name="inputAction">The logical MixedRealityInputAction that this input performs</param>
-        /// <param name="inputName">Optional inputName value to get input for a coded input identity from a provider</param></param>
+        /// <param name="inputName">Optional inputName value to get input for a coded input identity from a provider</param>
         /// <param name="axisCodeX">Optional horizontal or single axis value to get axis data from Unity's old input system.</param>
         /// <param name="axisCodeY">Optional vertical axis value to get axis data from Unity's old input system.</param>
         /// <param name="invertXAxis">Optional horizontal axis invert option.</param>

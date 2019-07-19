@@ -130,7 +130,7 @@ namespace XRTK.SDK.Utilities.Solvers
                 // Set the linked alt scale ahead of our work. This is an attempt to minimize jittering by having solvers work with an interpolated scale.
                 SolverHandler.AltScale.SetGoal(transform.localScale);
 
-                // Calculate scale based on distance from view.  Do not interpolate so we can appear at a constant size if possible.  Borrowed from greybox.
+                // Calculate scale based on distance from view.  Do not interpolate so we can appear at a constant size if possible.  Borrowed from grey box.
                 Vector3 targetPosition = SolverHandler.TransformTarget.position;
                 float distance = Mathf.Clamp(Vector3.Distance(transform.position, targetPosition), minDistance, maxDistance);
                 float scale = Mathf.Clamp(fovScalar * Mathf.Pow(distance, ScalePower), minScale, maxScale);

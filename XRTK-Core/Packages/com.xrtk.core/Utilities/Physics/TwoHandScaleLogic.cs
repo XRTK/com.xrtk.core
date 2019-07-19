@@ -9,7 +9,10 @@ namespace XRTK.Utilities.Physics
     /// <summary>
     /// Implements a scale logic that will scale an object based on the 
     /// ratio of the distance between hands.
+    /// 
+    /// <code>
     /// object_scale = start_object_scale * curr_hand_dist / start_hand_dist
+    /// </code>
     /// 
     /// Usage:
     /// When a manipulation starts, call Setup.

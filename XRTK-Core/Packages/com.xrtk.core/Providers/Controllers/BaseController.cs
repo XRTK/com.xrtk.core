@@ -26,9 +26,10 @@ namespace XRTK.Providers.Controllers
         /// <param name="controllerHandedness"></param>
         /// <param name="inputSource"></param>
         /// <param name="interactions"></param>
-        protected BaseController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+        protected BaseController(TrackingState trackingState, SupportedControllerType controllerType, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
         {
             TrackingState = trackingState;
+            ControllerType = controllerType;
             ControllerHandedness = controllerHandedness;
             InputSource = inputSource;
             Interactions = interactions;
@@ -64,6 +65,9 @@ namespace XRTK.Providers.Controllers
         public TrackingState TrackingState { get; protected set; }
 
         /// <inheritdoc />
+        public SupportedControllerType ControllerType { get; }
+
+        /// <inheritdoc />
         public Handedness ControllerHandedness { get; }
 
         /// <inheritdoc />
@@ -83,6 +87,9 @@ namespace XRTK.Providers.Controllers
 
         /// <inheritdoc />
         public MixedRealityInteractionMapping[] Interactions { get; private set; } = null;
+
+        /// <inheritdoc />
+        public virtual void UpdateController() { }
 
         #endregion IMixedRealityController Implementation
 

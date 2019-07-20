@@ -61,7 +61,7 @@ namespace XRTK.Providers.Controllers.UnityInput
 
             foreach (var controller in ActiveTouches)
             {
-                controller.Value?.Update();
+                controller.Value?.UpdateController();
             }
         }
 
@@ -98,7 +98,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                     inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"Touch {touch.fingerId}", pointers);
                 }
 
-                controller = new UnityTouchController(TrackingState.NotApplicable, Handedness.Any, inputSource);
+                controller = new UnityTouchController(TrackingState.NotApplicable, SupportedControllerType.TouchScreen, Handedness.Any, inputSource);
 
                 if (inputSource != null)
                 {
@@ -135,7 +135,7 @@ namespace XRTK.Providers.Controllers.UnityInput
             controller.TouchData = touch;
             var pointer = (IMixedRealityTouchPointer)controller.InputSource.Pointers[0];
             controller.ScreenPointRay = pointer.TouchRay = ray;
-            controller.Update();
+            controller.UpdateController();
         }
 
         private static void RemoveTouchController(Touch touch)

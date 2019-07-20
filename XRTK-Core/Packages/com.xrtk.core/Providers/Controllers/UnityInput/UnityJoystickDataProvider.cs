@@ -61,9 +61,11 @@ namespace XRTK.Providers.Controllers.UnityInput
 
             foreach (var genericOpenVRController in ActiveControllers)
             {
-                if (genericOpenVRController.Value != null)
+                var controller = GetOrAddController(genericOpenVRController.Key, false);
+
+                if (controller != null)
                 {
-                    MixedRealityToolkit.InputSystem?.RaiseSourceLost(genericOpenVRController.Value.InputSource, genericOpenVRController.Value);
+                    MixedRealityToolkit.InputSystem?.RaiseSourceLost(controller.InputSource, controller);
                 }
             }
 
@@ -85,16 +87,19 @@ namespace XRTK.Providers.Controllers.UnityInput
                 {
                     if (joystickNames[i].Equals(lastDeviceList[i])) { continue; }
 
-                    if (ActiveControllers.ContainsKey(lastDeviceList[i]))
+                    for (int j = 0; j < joystickNames.Length; j++)
                     {
-                        var controller = GetOrAddController(lastDeviceList[i]);
+                        if (lastDeviceList[i].Equals(joystickNames[j])) { continue; }
+ 
+                        // if a controller was availble previously, but not present in the latest refresh, remove it.
+                        var controller = GetOrAddController(joystickNames[j], false);
 
                         if (controller != null)
                         {
                             MixedRealityToolkit.InputSystem?.RaiseSourceLost(controller.InputSource, controller);
                         }
 
-                        ActiveControllers.Remove(lastDeviceList[i]);
+                        ActiveControllers.Remove(joystickNames[j]);
                     }
                 }
             }
@@ -110,7 +115,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                 {
                     var controller = GetOrAddController(joystickNames[i]);
 
-                    if (controller != null)
+                    if (controller != null && controller.InputSource != null && !MixedRealityToolkit.InputSystem.DetectedInputSources.Contains(controller.InputSource))
                     {
                         MixedRealityToolkit.InputSystem?.RaiseSourceDetected(controller.InputSource, controller);
                     }
@@ -125,18 +130,22 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// </summary>
         /// <param name="joystickName">The name of they joystick from Unity's <see cref="Input.GetJoystickNames"/></param>
         /// <returns>A new controller reference.</returns>
-        protected virtual GenericJoystickController GetOrAddController(string joystickName)
+        protected virtual GenericJoystickController GetOrAddController(string joystickName, bool addController = true)
         {
-            if (ActiveControllers.ContainsKey(joystickName))
+            var supportedControllerType = GetCurrentControllerType(joystickName);
+
+            IMixedRealityController controller = null;
+            if (MixedRealityToolkit.InputSystem.TryGetController(supportedControllerType, Handedness.None, out controller))
             {
-                var controller = ActiveControllers[joystickName];
                 Debug.Assert(controller != null);
-                return controller;
+                return controller as GenericJoystickController;
             }
+
+            if (!addController) { return null; }
 
             Type controllerType;
 
-            switch (GetCurrentControllerType(joystickName))
+            switch (supportedControllerType)
             {
                 default:
                     return null;
@@ -149,7 +158,7 @@ namespace XRTK.Providers.Controllers.UnityInput
             }
 
             var inputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource($"{controllerType.Name} Controller");
-            var detectedController = Activator.CreateInstance(controllerType, TrackingState.NotTracked, Handedness.None, inputSource, null) as GenericJoystickController;
+            var detectedController = Activator.CreateInstance(controllerType, TrackingState.NotTracked, supportedControllerType, Handedness.None, inputSource, null) as GenericJoystickController;
 
             if (detectedController == null)
             {

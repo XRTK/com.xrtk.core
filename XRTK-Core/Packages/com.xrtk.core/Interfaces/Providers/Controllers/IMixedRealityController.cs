@@ -23,6 +23,11 @@ namespace XRTK.Interfaces.Providers.Controllers
         TrackingState TrackingState { get; }
 
         /// <summary>
+        /// The known type of the controller that the Input Source is managing, as defined by the XRTK.
+        /// </summary>
+        SupportedControllerType ControllerType { get; }
+
+        /// <summary>
         /// The designated hand that the Input Source is managing, as defined by the SDK / Unity.
         /// </summary>
         Handedness ControllerHandedness { get; }
@@ -64,5 +69,10 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// Mapping definition for this controller, linking the Physical inputs to logical Input System Actions
         /// </summary>
         MixedRealityInteractionMapping[] Interactions { get; }
+
+        /// <summary>
+        /// The Controller update method
+        /// </summary>
+        void UpdateController();
     }
 }

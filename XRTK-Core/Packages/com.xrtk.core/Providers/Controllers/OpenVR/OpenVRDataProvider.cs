@@ -7,6 +7,7 @@ using XRTK.Providers.Controllers.UnityInput;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Services;
+using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Providers.Controllers.OpenVR
 {
@@ -29,16 +30,8 @@ namespace XRTK.Providers.Controllers.OpenVR
         #region Controller Utilities
 
         /// <inheritdoc />
-        protected override GenericJoystickController GetOrAddController(string joystickName)
+        protected override GenericJoystickController GetOrAddController(string joystickName, bool addController = true)
         {
-            // If a device is already registered with the ID provided, just return it.
-            if (ActiveControllers.ContainsKey(joystickName))
-            {
-                var controller = ActiveControllers[joystickName];
-                Debug.Assert(controller != null);
-                return controller;
-            }
-
             Handedness controllingHand;
 
             if (joystickName.Contains("Left"))
@@ -54,10 +47,21 @@ namespace XRTK.Providers.Controllers.OpenVR
                 controllingHand = Handedness.None;
             }
 
-            var currentControllerType = GetCurrentControllerType(joystickName);
+            // If a device is already registered with the ID provided, just return it.
+            var supportedControllerType = GetCurrentControllerType(joystickName);
+
+            IMixedRealityController controller = null;
+            if (MixedRealityToolkit.InputSystem.TryGetController(supportedControllerType, controllingHand, out controller))
+            {
+                Debug.Assert(controller != null);
+                return controller as GenericJoystickController;
+            }
+
+            if (!addController) { return null; }
+
             Type controllerType;
 
-            switch (currentControllerType)
+            switch (supportedControllerType)
             {
                 case SupportedControllerType.GenericOpenVR:
                     controllerType = typeof(GenericOpenVRController);
@@ -85,8 +89,8 @@ namespace XRTK.Providers.Controllers.OpenVR
             }
 
             var pointers = RequestPointers(controllerType, controllingHand);
-            var inputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource($"{currentControllerType} Controller {controllingHand}", pointers);
-            var detectedController = Activator.CreateInstance(controllerType, TrackingState.NotTracked, controllingHand, inputSource, null) as GenericOpenVRController;
+            var inputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource($"{supportedControllerType} Controller {controllingHand}", pointers);
+            var detectedController = Activator.CreateInstance(controllerType, TrackingState.NotTracked, supportedControllerType, controllingHand, inputSource, null) as GenericOpenVRController;
 
             if (detectedController == null)
             {

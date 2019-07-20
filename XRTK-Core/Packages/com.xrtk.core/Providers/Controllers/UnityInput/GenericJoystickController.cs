@@ -11,8 +11,8 @@ namespace XRTK.Providers.Controllers.UnityInput
 {
     public class GenericJoystickController : BaseController
     {
-        public GenericJoystickController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-                : base(trackingState, controllerHandedness, inputSource, interactions)
+        public GenericJoystickController(TrackingState trackingState, SupportedControllerType controllerType, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+                : base(trackingState, controllerType, controllerHandedness, inputSource, interactions)
         {
         }
 
@@ -34,10 +34,8 @@ namespace XRTK.Providers.Controllers.UnityInput
             // Generic unity controller's will not have default interactions
         }
 
-        /// <summary>
-        /// Update the controller data from Unity's Input Manager
-        /// </summary>
-        public virtual void UpdateController()
+        /// <inheritdoc />
+        public override void UpdateController()
         {
             if (!Enabled) { return; }
 

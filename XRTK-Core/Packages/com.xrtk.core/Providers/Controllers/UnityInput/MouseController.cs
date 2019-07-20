@@ -22,8 +22,8 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// <param name="controllerHandedness"></param>
         /// <param name="inputSource"></param>
         /// <param name="interactions"></param>
-        public MouseController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-            : base(trackingState, controllerHandedness, inputSource, interactions)
+        public MouseController(TrackingState trackingState, SupportedControllerType controllerType, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+            : base(trackingState, controllerType, controllerHandedness, inputSource, interactions)
         {
         }
 
@@ -54,7 +54,7 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// <summary>
         /// Update controller.
         /// </summary>
-        public void Update()
+        public override void UpdateController()
         {
             if (!Input.mousePresent) { return; }
 

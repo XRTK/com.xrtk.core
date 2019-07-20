@@ -489,6 +489,22 @@ namespace XRTK.Services.InputSystem
             return false;
         }
 
+        /// <inheritdoc />
+        public bool TryGetController(SupportedControllerType controllerType, Handedness hand, out IMixedRealityController controller)
+        {
+            foreach (IMixedRealityController mixedRealityController in DetectedControllers)
+            {
+                if (controllerType == mixedRealityController.ControllerType && hand == mixedRealityController.ControllerHandedness)
+                {
+                    controller = mixedRealityController;
+                    return true;
+                }
+            }
+
+            controller = null;
+            return false;
+        }
+
         #endregion IMixedRealityController Utilities
 
         #region Input Events

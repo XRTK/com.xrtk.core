@@ -118,6 +118,15 @@ namespace XRTK.Interfaces.InputSystem
         /// <returns>True, if an <see cref="IMixedRealityController"/> is found.</returns>
         bool TryGetController(IMixedRealityInputSource inputSource, out IMixedRealityController controller);
 
+        /// <summary>
+        /// Tried to get a <see cref="IMixedRealityController"/> from the <see cref="DetectedControllers"/> list.
+        /// </summary>
+        /// <param name="controllerType">The <see cref="SupportedControllerType"/> of the controller you want to get a reference for.</param>
+        /// <param name="hand">The <see cref="Handedness"/>of the controller you want to get a reference for.</param>
+        /// <param name="controller">The <see cref="IMixedRealityController"/> that was found in the list of <see cref="DetectedControllers"/></param>
+        /// <returns>True, if an <see cref="IMixedRealityController"/> is found.</returns>
+        bool TryGetController(SupportedControllerType controllerType, Handedness hand, out IMixedRealityController controller);
+
         #endregion IMixedRealityController Utilities
 
         #region Input Events

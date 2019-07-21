@@ -561,7 +561,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.InputSystem.MixedRealityInputAction.html",
-          "hash": "/qhdnZvzrT5jV4YUllAN5w=="
+          "hash": "xNBvnKkoc0J3i4KXEssUaw=="
         }
       },
       "is_incremental": false,
@@ -909,7 +909,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Physics.RayStep.html",
-          "hash": "bs8QnmFIdeyHcdnT9bEc8A=="
+          "hash": "ghVUZFw2p1em9D4UP8gFyg=="
         }
       },
       "is_incremental": false,
@@ -945,7 +945,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Physics.html",
-          "hash": "tCQZ+XguLhmSxzO5vrxFhg=="
+          "hash": "RZVu8ZqPVBZm2tkiHf1UKQ=="
         }
       },
       "is_incremental": false,
@@ -1905,7 +1905,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Extensions.TransformExtensions.html",
-          "hash": "MPgCAS9lV2P1o70WKvNJGw=="
+          "hash": "hU1CbUgnAD8/6CSdqzZipQ=="
         }
       },
       "is_incremental": false,
@@ -2169,7 +2169,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.html",
-          "hash": "Usdup+vIyj72VbUtHduwoQ=="
+          "hash": "rlj6el4eG51jQ90m6+Pytw=="
         }
       },
       "is_incremental": false,
@@ -3357,7 +3357,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.InputSystem.IMixedRealityMousePointer.html",
-          "hash": "CdbiMD2IzTGmWcMOTKL2zw=="
+          "hash": "2Oowyt4d8D2DDu9F3CUuUA=="
         }
       },
       "is_incremental": false,
@@ -3369,7 +3369,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.InputSystem.IMixedRealityPointer.html",
-          "hash": "p7fv+zXOKQ/JWF4KpXGomw=="
+          "hash": "g9XEjfLqqaUOpZjd+cv/hg=="
         }
       },
       "is_incremental": false,
@@ -3381,7 +3381,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.InputSystem.IMixedRealityTouchPointer.html",
-          "hash": "Mym6saxU7mF4iehRO3ozpQ=="
+          "hash": "/D6OgCTX8L5aM9Drk2PMqg=="
         }
       },
       "is_incremental": false,
@@ -3681,7 +3681,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.SpatialAwarenessSystem.IMixedRealitySpatialAwarenessSystem.html",
-          "hash": "OlDtsbMvBKVZRTW6XFd6FA=="
+          "hash": "a4iu0Zsi6Gg6jMn8V5rIiA=="
         }
       },
       "is_incremental": false,
@@ -3893,6 +3893,522 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Controllers.BaseOculusController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Controllers.BaseOculusController.html",
+          "hash": "o/TGabTCiu4D9ziRCoT77w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Controllers.OculusControllerDataProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Controllers.OculusControllerDataProvider.html",
+          "hash": "MUlDTV4X8Fv3zzGbWo8MDg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Controllers.OculusGoController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Controllers.OculusGoController.html",
+          "hash": "/XtJ9HkePWRSJQlhTN5iuw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Controllers.OculusRemoteController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Controllers.OculusRemoteController.html",
+          "hash": "IfXz55L5Bz4txOZYPaMeEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Controllers.OculusTouchController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Controllers.OculusTouchController.html",
+          "hash": "Xtyul556elwqKQMjdoauWA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Controllers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Controllers.html",
+          "hash": "8g/yIKiQ+er6KzKelmj42w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Inspectors.OculusGoControllerMappingProfileInspector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Inspectors.OculusGoControllerMappingProfileInspector.html",
+          "hash": "tQxvVD4PI32ZNttowZfLfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Inspectors.OculusRemoteControllerMappingProfileInspector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Inspectors.OculusRemoteControllerMappingProfileInspector.html",
+          "hash": "3DK9NGzkOckKsKtt0OmNhQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Inspectors.OculusTouchControllerMappingProfileInspector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Inspectors.OculusTouchControllerMappingProfileInspector.html",
+          "hash": "62zt+fvog031PmXIgaxatw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Inspectors.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Inspectors.html",
+          "hash": "1imkgSL3OPqgg8C4xUmQXw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.BatteryStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.BatteryStatus.html",
+          "hash": "noZq4dWFWWtXQV19CPiPYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Bool.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Bool.html",
+          "hash": "lYr9fE84YdMzNqRbSYVwtg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.BoundaryGeometry.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.BoundaryGeometry.html",
+          "hash": "cjm18TWRaFng5sj/vfQPPw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.BoundaryTestResult.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.BoundaryTestResult.html",
+          "hash": "DhO1hPehIWsJLD77GyuMCA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.BoundaryType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.BoundaryType.html",
+          "hash": "9qiTbDpmoM3S8zrYdiMJ/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Controller.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Controller.html",
+          "hash": "9MuNAhiG4uNfoz8hv+kLMw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.ControllerState4.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.ControllerState4.html",
+          "hash": "7Sx14wDdQKCD1sAAyYl+qw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Handedness.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Handedness.html",
+          "hash": "+6FFML39t5Zc/LTFuVXtOQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.HapticsBuffer.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.HapticsBuffer.html",
+          "hash": "5UKa2n/iOCy9S2eEfFrplQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.HapticsDesc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.HapticsDesc.html",
+          "hash": "7X/WxCkQNboaGF1zsPUPhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.HapticsState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.HapticsState.html",
+          "hash": "91xwIBqoDPI9d5V25N6GMg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Node.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Node.html",
+          "hash": "EiEoPci2mBkKEwcbsW5D2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.PoseStatef.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.PoseStatef.html",
+          "hash": "1aJbK8JjA7meO+Xd7ixOfw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Posef.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Posef.html",
+          "hash": "q0/MyOPj/N++cLbj+qV7BQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Quatf.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Quatf.html",
+          "hash": "KmKS0kXRSGl+LO8Rbx4qRw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.RawAxis1D.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.RawAxis1D.html",
+          "hash": "1uQMCcegE9tquVohhr2rZQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.RawAxis2D.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.RawAxis2D.html",
+          "hash": "23vyzJ6aB2bZn4fPxCp8yw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.RawButton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.RawButton.html",
+          "hash": "xgFCpnFUbtrpupt9fdaRTg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.RawNearTouch.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.RawNearTouch.html",
+          "hash": "yquXRrww5Jk15Mxx6bBQ8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.RawTouch.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.RawTouch.html",
+          "hash": "0cy8dYLpOD8p08LHxC7XBA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.RecenterFlags.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.RecenterFlags.html",
+          "hash": "lplBsoNILVI6q4Jcj/XCiw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Result.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Result.html",
+          "hash": "w5+3TfmcCjEGZlDjv+G0gg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Step.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Step.html",
+          "hash": "KdgxWQrOw6cauMVdNphG+A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.SystemHeadset.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.SystemHeadset.html",
+          "hash": "c5FQ2eEXP7kBPwvOEd2GsQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.TrackingOrigin.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.TrackingOrigin.html",
+          "hash": "4WXsfLNvmLpRyxe88LkzTQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Vector2f.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Vector2f.html",
+          "hash": "U5Q7NxJw08zCheXTAQJLLA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Vector3f.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Vector3f.html",
+          "hash": "EuikIsBZSzW8C86Fx0175g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.html",
+          "hash": "XyGUpCYJ6kMOsO65hwd8uA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Profiles.OculusGoControllerMappingProfile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Profiles.OculusGoControllerMappingProfile.html",
+          "hash": "ZaOQxGSrPrtWv776MKg6bA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Profiles.OculusRemoteControllerMappingProfile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Profiles.OculusRemoteControllerMappingProfile.html",
+          "hash": "Vn65i0pMfx1iNqWDZT0hPA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Profiles.OculusTouchControllerMappingProfile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Profiles.OculusTouchControllerMappingProfile.html",
+          "hash": "/gsRoD7oAkROaRZNyFpikQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.Profiles.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.Profiles.html",
+          "hash": "RSl/Pw0jXVyd9WiOvYTLhQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.html",
+          "hash": "AZG5AGjd5KIsWaIHcqKGJw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "../api/XRTK.PackageManager.HostData.yml",
       "output": {
         ".html": {
@@ -3945,7 +4461,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.BaseController.html",
-          "hash": "TbyDxin2gQdY6Er8sQcnGw=="
+          "hash": "SQY2VQzySetQknd/z4NV/Q=="
         }
       },
       "is_incremental": false,
@@ -3957,7 +4473,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.BaseControllerDataProvider.html",
-          "hash": "ZzSLidKEKG9Pk+eLei9+Eg=="
+          "hash": "zqaiM9QT6DHa0sHPf8Ui+A=="
         }
       },
       "is_incremental": false,
@@ -3993,7 +4509,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.BaseMixedRealityControllerMappingProfile.html",
-          "hash": "ZM7w6+h9CsU5H8BSVQqgog=="
+          "hash": "yXVGzchw++IU5ZjX2m4H8Q=="
         }
       },
       "is_incremental": false,
@@ -4809,7 +5325,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Input.Handlers.BaseInputHandler.html",
-          "hash": "PYxG32u06Gmgr6RpTfQrlQ=="
+          "hash": "8bLdH20HAeIzRj9Z+r4Yrg=="
         }
       },
       "is_incremental": false,
@@ -4834,6 +5350,18 @@
         ".html": {
           "relative_path": "api/XRTK.SDK.Input.Handlers.DragAndDropHandler.html",
           "hash": "/WmMumDiVmd6IpebMCNO5A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.SDK.Input.Handlers.ManipulationHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.SDK.Input.Handlers.ManipulationHandler.html",
+          "hash": "hIke3Qro4iyM+4XiMw+Zqg=="
         }
       },
       "is_incremental": false,
@@ -4881,7 +5409,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Input.Handlers.html",
-          "hash": "4Q2gKnu1SAupZmNKGdKSUQ=="
+          "hash": "tG8W8SgNRgGTJIW6ic57Lw=="
         }
       },
       "is_incremental": false,
@@ -5025,7 +5553,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.UX.Pointers.BaseControllerPointerInspector.html",
-          "hash": "9CSJN/2PuEYWP7HxySIMfQ=="
+          "hash": "VfXbRn+IKfg/+AHDIl+pnA=="
         }
       },
       "is_incremental": false,
@@ -5037,7 +5565,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.UX.Pointers.LinePointerInspector.html",
-          "hash": "C8wbqCRcSFR3B2qAdgSRyg=="
+          "hash": "ywHCtzFpeWiQIoKWuXIejA=="
         }
       },
       "is_incremental": false,
@@ -5421,7 +5949,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html",
-          "hash": "CLm7NYNEAcz3cv4H28swoA=="
+          "hash": "CIRiqEQ4njTNf+TtZwP7eg=="
         }
       },
       "is_incremental": false,
@@ -5433,7 +5961,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Pointers.LinePointer.html",
-          "hash": "MfXOqjw+ybEjFD5Ar6D5PQ=="
+          "hash": "rH7Ap+iW0Vfcr2KxEjoWOQ=="
         }
       },
       "is_incremental": false,
@@ -5445,7 +5973,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Pointers.MousePointer.html",
-          "hash": "lXhSbXIJ5KFqpKKI8aqJUA=="
+          "hash": "jhxFCD41moUYp90ebaUIMA=="
         }
       },
       "is_incremental": false,
@@ -5457,7 +5985,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Pointers.ParabolicTeleportPointer.html",
-          "hash": "hSANZq2m0Ux1GOIfmQKwTg=="
+          "hash": "SbkIxFSPp4xv9Z5ypWmE7Q=="
         }
       },
       "is_incremental": false,
@@ -5469,7 +5997,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Pointers.TeleportPointer.html",
-          "hash": "+wRZUdHcTb3ct73o6sftUA=="
+          "hash": "QSRKIivzNCEbb+35pnCrhQ=="
         }
       },
       "is_incremental": false,
@@ -5481,7 +6009,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.Pointers.TouchPointer.html",
-          "hash": "PiCHlIqcaO9L2GouV5B3sg=="
+          "hash": "Wl7Wu+TCx9IB6avDN8a0vQ=="
         }
       },
       "is_incremental": false,
@@ -6117,7 +6645,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.InputSystem.Pointers.GenericPointer.html",
-          "hash": "jeQLeDSbEJFfxAysYh0XPQ=="
+          "hash": "XKbTuKu2AxV63QUqOObAsQ=="
         }
       },
       "is_incremental": false,
@@ -6213,7 +6741,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.html",
-          "hash": "Z2fCz34OqOt8gHl86KfXjA=="
+          "hash": "AE+QGUe381we56/RK1kwIA=="
         }
       },
       "is_incremental": false,
@@ -7965,7 +8493,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Physics.MixedRealityRaycaster.html",
-          "hash": "cxuaxoAC6kVgoYT7ajhDew=="
+          "hash": "mJZaalmcSCnhkXCZShRQVg=="
         }
       },
       "is_incremental": false,
@@ -8049,7 +8577,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.PlatformUtility.html",
-          "hash": "f8YFA434S8eG62JhIHhP3w=="
+          "hash": "bbAKaIA4FueFhpAYDla1vQ=="
         }
       },
       "is_incremental": false,
@@ -8733,7 +9261,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "XJgrt/UNumsWJ05iKzunnQ=="
+          "hash": "Spw4xL8+8j91eEqZWf4Aow=="
         }
       },
       "is_incremental": false,
@@ -8861,13 +9389,6 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "TocDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
-          "skipped_file_count": 0
-        },
         "ConceptualDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
@@ -8884,7 +9405,14 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 719,
+          "total_file_count": 763,
+          "skipped_file_count": 0
+        },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
           "skipped_file_count": 0
         }
       }

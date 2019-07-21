@@ -61,7 +61,7 @@ Shader "Mixed Reality Toolkit/Wireframe"
 
             struct v2g
             {
-                float4 viewPos : SV_POSITION;
+                float4 projectionSpaceVertex : SV_POSITION;
                 UNITY_VERTEX_OUTPUT_STEREO
             };
 
@@ -69,17 +69,17 @@ Shader "Mixed Reality Toolkit/Wireframe"
             {
                 UNITY_SETUP_INSTANCE_ID(v);
                 v2g o;
-                o.viewPos = UnityObjectToClipPos(v.vertex);
+                o.projectionSpaceVertex  = UnityObjectToClipPos(v.vertex);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
                 return o;
             }
 
-            // inverseW is to counteract the effect of perspective-correct interpolation so that the lines
+            // worldSpacePosition  is to counteract the effect of perspective-correct interpolation so that the lines
             // look the same thickness regardless of their depth in the scene.
             struct g2f
             {
-                float4 viewPos : SV_POSITION;
-                float inverseW : TEXCOORD0;
+                float4 projectionSpaceVertex : SV_POSITION;
+                float worldSpacePosition : TEXCOORD0;
                 float3 dist : TEXCOORD1;
                 UNITY_VERTEX_OUTPUT_STEREO
             };
@@ -88,9 +88,9 @@ Shader "Mixed Reality Toolkit/Wireframe"
             void geom(triangle v2g i[3], inout TriangleStream<g2f> triStream)
             {
                 // Calculate the vectors that define the triangle from the input points.
-                float2 point0 = i[0].viewPos.xy / i[0].viewPos.w;
-                float2 point1 = i[1].viewPos.xy / i[1].viewPos.w;
-                float2 point2 = i[2].viewPos.xy / i[2].viewPos.w;
+                float2 point0 = i[0].projectionSpaceVertex.xy / i[0].projectionSpaceVertex.w;
+                float2 point1 = i[1].projectionSpaceVertex.xy / i[1].projectionSpaceVertex.w;
+                float2 point2 = i[2].projectionSpaceVertex.xy / i[2].projectionSpaceVertex.w;
 
                 // Calculate the area of the triangle.
                 float2 vector0 = point2 - point1;
@@ -112,9 +112,9 @@ Shader "Mixed Reality Toolkit/Wireframe"
                 [unroll]
                 for (uint idx = 0; idx < 3; ++idx)
                 {
-                   o.viewPos = i[idx].viewPos;
-                   o.inverseW = 1.0 / o.viewPos.w;
-                   o.dist = distScale[idx] * o.viewPos.w * wireScale;
+                   o.projectionSpaceVertex  = i[idx].projectionSpaceVertex ;
+                   o.worldSpacePosition  = 1.0 / o.projectionSpaceVertex.w;
+                   o.dist = distScale[idx] * o.projectionSpaceVertex.w * wireScale;
                    UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(i[idx], o);
                    triStream.Append(o);
                 }
@@ -124,7 +124,7 @@ Shader "Mixed Reality Toolkit/Wireframe"
             {
                 // Calculate  minimum distance to one of the triangle lines, making sure to correct
                 // for perspective-correct interpolation.
-                float dist = min(i.dist[0], min(i.dist[1], i.dist[2])) * i.inverseW;
+                float dist = min(i.dist[0], min(i.dist[1], i.dist[2])) * i.worldSpacePosition ;
 
                 // Make the intensity of the line very bright along the triangle edges but fall-off very
                 // quickly.

@@ -406,7 +406,7 @@ namespace XRTK.Inspectors
 
             EditorBuildSettingsScene editorScene = null;
 
-            if (EditorBuildSettings.scenes.Length < 1f)
+            if (EditorBuildSettings.scenes.Length < 1)
             {
                 if (asset == null)
                 {

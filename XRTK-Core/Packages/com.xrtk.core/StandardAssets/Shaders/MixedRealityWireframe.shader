@@ -69,12 +69,12 @@ Shader "Mixed Reality Toolkit/Wireframe"
             {
                 UNITY_SETUP_INSTANCE_ID(v);
                 v2g o;
-                o.projectionSpaceVertex  = UnityObjectToClipPos(v.vertex);
+                o.projectionSpaceVertex = UnityObjectToClipPos(v.vertex);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
                 return o;
             }
 
-            // worldSpacePosition  is to counteract the effect of perspective-correct interpolation so that the lines
+            // worldSpacePosition is to counteract the effect of perspective-correct interpolation so that the lines
             // look the same thickness regardless of their depth in the scene.
             struct g2f
             {
@@ -112,8 +112,8 @@ Shader "Mixed Reality Toolkit/Wireframe"
                 [unroll]
                 for (uint idx = 0; idx < 3; ++idx)
                 {
-                   o.projectionSpaceVertex  = i[idx].projectionSpaceVertex ;
-                   o.worldSpacePosition  = 1.0 / o.projectionSpaceVertex.w;
+                   o.projectionSpaceVertex = i[idx].projectionSpaceVertex ;
+                   o.worldSpacePosition = 1.0 / o.projectionSpaceVertex.w;
                    o.dist = distScale[idx] * o.projectionSpaceVertex.w * wireScale;
                    UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(i[idx], o);
                    triStream.Append(o);
@@ -122,9 +122,9 @@ Shader "Mixed Reality Toolkit/Wireframe"
 
             float4 frag(g2f i) : COLOR
             {
-                // Calculate  minimum distance to one of the triangle lines, making sure to correct
+                // Calculate minimum distance to one of the triangle lines, making sure to correct
                 // for perspective-correct interpolation.
-                float dist = min(i.dist[0], min(i.dist[1], i.dist[2])) * i.worldSpacePosition ;
+                float dist = min(i.dist[0], min(i.dist[1], i.dist[2])) * i.worldSpacePosition;
 
                 // Make the intensity of the line very bright along the triangle edges but fall-off very
                 // quickly.

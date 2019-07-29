@@ -398,20 +398,42 @@ namespace XRTK.Inspectors
 
         private static SceneAsset GetSceneObject(string sceneName, SceneAsset asset = null)
         {
-            if (string.IsNullOrEmpty(sceneName) || EditorBuildSettings.scenes == null || EditorBuildSettings.scenes.Length < 1)
+            if (string.IsNullOrEmpty(sceneName) ||
+                EditorBuildSettings.scenes == null)
             {
                 return null;
             }
 
             EditorBuildSettingsScene editorScene = null;
 
-            try
+            if (EditorBuildSettings.scenes.Length < 1)
             {
-                editorScene = EditorBuildSettings.scenes.First(scene => scene.path.IndexOf(sceneName, StringComparison.Ordinal) != -1);
+                if (asset == null)
+                {
+                    Debug.Log($"{sceneName} scene not found in build settings!");
+                    return null;
+                }
+
+                editorScene = new EditorBuildSettingsScene
+                {
+                    path = AssetDatabase.GetAssetOrScenePath(asset),
+                };
+
+                editorScene.guid = new GUID(AssetDatabase.AssetPathToGUID(editorScene.path));
+
+                EditorBuildSettings.scenes = new[] { editorScene };
             }
-            catch
+            else
             {
-                // ignored
+
+                try
+                {
+                    editorScene = EditorBuildSettings.scenes.First(scene => scene.path.IndexOf(sceneName, StringComparison.Ordinal) != -1);
+                }
+                catch
+                {
+                    // ignored
+                }
             }
 
             if (editorScene != null)

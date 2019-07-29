@@ -13,7 +13,6 @@ using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Providers.Controllers.Hands;
 using XRTK.Services.InputSystem.Sources;
 using XRTK.Utilities;
 
@@ -91,13 +90,9 @@ namespace XRTK.Services.InputSystem
         private InputEventData<Vector3> positionInputEventData;
         private InputEventData<Quaternion> rotationInputEventData;
         private InputEventData<MixedRealityPose> poseInputEventData;
-        private InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> handJointPoseInputEventData;
 
         private SpeechEventData speechEventData;
         private DictationEventData dictationEventData;
-
-        private InputEventData<HandMeshUpdatedEventData> handMeshUpdatedEventData;
-        private HandTrackingInputEventData handTrackingInputEventData;
 
         private MixedRealityInputActionRulesProfile CurrentInputActionRulesProfile { get; } = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionRulesProfile;
 
@@ -172,10 +167,6 @@ namespace XRTK.Services.InputSystem
 
                 speechEventData = new SpeechEventData(eventSystem);
                 dictationEventData = new DictationEventData(eventSystem);
-
-                handJointPoseInputEventData = new InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>>(EventSystem.current);
-                handMeshUpdatedEventData = new InputEventData<HandMeshUpdatedEventData>(EventSystem.current);
-                handTrackingInputEventData = new HandTrackingInputEventData(EventSystem.current);
             }
 
             if (!addedComponents)
@@ -1459,97 +1450,6 @@ namespace XRTK.Services.InputSystem
         }
 
         #endregion Dictation Events
-
-        #region Hand Events
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityHandJointHandler> OnHandJointsUpdatedEventHandler =
-            delegate (IMixedRealityHandJointHandler handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>>>(eventData);
-
-                handler.OnJointUpdated(casted);
-            };
-
-        public void RaiseHandJointsUpdated(IMixedRealityInputSource source, Handedness handedness, IDictionary<TrackedHandJoint, MixedRealityPose> jointPoses)
-        {
-            // Create input event
-            handJointPoseInputEventData.Initialize(source, handedness, MixedRealityInputAction.None, jointPoses);
-
-            // Pass handler through HandleEvent to perform modal/fallback logic
-            HandleEvent(handJointPoseInputEventData, OnHandJointsUpdatedEventHandler);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityHandMeshHandler> OnHandMeshUpdatedEventHandler =
-            delegate (IMixedRealityHandMeshHandler handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData<HandMeshUpdatedEventData>>(eventData);
-
-                handler.OnMeshUpdated(casted);
-            };
-
-        public void RaiseHandMeshUpdated(IMixedRealityInputSource source, Handedness handedness, HandMeshUpdatedEventData handMeshInfo)
-        {
-            // Create input event
-            handMeshUpdatedEventData.Initialize(source, handedness, MixedRealityInputAction.None, handMeshInfo);
-
-            // Pass handler through HandleEvent to perform modal/fallback logic
-            HandleEvent(handMeshUpdatedEventData, OnHandMeshUpdatedEventHandler);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityHandTouchHandler> OnTouchStartedEventHandler =
-            delegate (IMixedRealityHandTouchHandler handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<HandTrackingInputEventData>(eventData);
-                handler.OnTouchStarted(casted);
-            };
-
-        /// <inheritdoc />
-        public void RaiseOnTouchStarted(IMixedRealityInputSource source, IMixedRealityController controller, Handedness handedness, Vector3 touchPoint)
-        {
-            // Create input event
-            handTrackingInputEventData.Initialize(source, controller, handedness, touchPoint);
-
-            // Pass handler through HandleEvent to perform modal/fallback logic
-            HandleEvent(handTrackingInputEventData, OnTouchStartedEventHandler);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityHandTouchHandler> OnTouchCompletedEventHandler =
-            delegate (IMixedRealityHandTouchHandler handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<HandTrackingInputEventData>(eventData);
-                handler.OnTouchCompleted(casted);
-            };
-
-
-        /// <inheritdoc />
-        public void RaiseOnTouchCompleted(IMixedRealityInputSource source, IMixedRealityController controller, Handedness handedness, Vector3 touchPoint)
-        {
-            // Create input event
-            handTrackingInputEventData.Initialize(source, controller, handedness, touchPoint);
-
-            // Pass handler through HandleEvent to perform modal/fallback logic
-            HandleEvent(handTrackingInputEventData, OnTouchCompletedEventHandler);
-        }
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityHandTouchHandler> OnTouchUpdatedEventHandler =
-            delegate (IMixedRealityHandTouchHandler handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<HandTrackingInputEventData>(eventData);
-                handler.OnTouchUpdated(casted);
-            };
-
-
-        /// <inheritdoc />
-        public void RaiseOnTouchUpdated(IMixedRealityInputSource source, IMixedRealityController controller, Handedness handedness, Vector3 touchPoint)
-        {
-            // Create input event
-            handTrackingInputEventData.Initialize(source, controller, handedness, touchPoint);
-
-            // Pass handler through HandleEvent to perform modal/fallback logic
-            HandleEvent(handTrackingInputEventData, OnTouchUpdatedEventHandler);
-        }
-
-        #endregion Hand Events
 
         #endregion Input Events
 

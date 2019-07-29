@@ -27,6 +27,9 @@ namespace XRTK.Definitions.InputSystem
             this.axisConstraint = axisConstraint;
         }
 
+        /// <summary>
+        /// Default input action that doesn't represent any defined action.
+        /// </summary>
         public static MixedRealityInputAction None { get; } = new MixedRealityInputAction(0, "None");
 
         /// <summary>
@@ -80,13 +83,13 @@ namespace XRTK.Definitions.InputSystem
 
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) { return false; }
-            return obj is MixedRealityInputAction && Equals((MixedRealityInputAction)obj);
+            return !ReferenceEquals(null, obj) &&
+                   obj is MixedRealityInputAction action && Equals(action);
         }
 
         int IEqualityComparer.GetHashCode(object obj)
         {
-            return obj is MixedRealityInputAction ? ((MixedRealityInputAction)obj).GetHashCode() : 0;
+            return obj is MixedRealityInputAction action ? action.GetHashCode() : 0;
         }
 
         public override int GetHashCode()

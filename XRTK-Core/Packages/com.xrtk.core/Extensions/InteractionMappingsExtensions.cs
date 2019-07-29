@@ -9,7 +9,7 @@ using XRTK.Services;
 namespace XRTK.Extensions
 {
     /// <summary>
-    /// Extensions for the InteractionSource class to add haptics and expose the renderable model.
+    /// Extensions for the InteractionMapping class to refactor the generic methods used for raising events in InteractionMappings.
     /// </summary>
     public static class InteractionMappingsExtensions
     {
@@ -57,7 +57,6 @@ namespace XRTK.Extensions
 
         public static void UpdateInteractionMappingPose(this MixedRealityInteractionMapping interactionMapping, IMixedRealityInputSource inputSource, Handedness controllerHandedness)
         {
-
             // If our value changed raise it.
             if (interactionMapping.Updated)
             {

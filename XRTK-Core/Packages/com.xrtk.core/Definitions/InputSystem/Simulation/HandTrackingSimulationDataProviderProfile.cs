@@ -17,10 +17,6 @@ namespace XRTK.Definitions.InputSystem.Simulation
         private bool simulateHandTracking = false;
         public bool SimulateHandTracking => simulateHandTracking;
 
-        [SerializeField]
-        private HandSimulationMode handSimulationMode = HandSimulationMode.Articulated;
-        public HandSimulationMode HandSimulationMode => handSimulationMode;
-
         [Header("Hand Control Settings")]
         [SerializeField]
         [Tooltip("Key to toggle persistent mode for the left hand")]

@@ -66,18 +66,9 @@ namespace XRTK.Providers.InputSystem.Simulation
         /// <inheritdoc />
         public override void Update()
         {
-            if (profile.SimulateHandTracking)
+            if (profile.SimulateHandTracking && UserInputEnabled)
             {
-                switch (profile.HandSimulationMode)
-                {
-                    case HandSimulationMode.Articulated:
-                    case HandSimulationMode.Gestures:
-                        if (UserInputEnabled)
-                        {
-                            handDataProvider.UpdateHandData(HandDataLeft, HandDataRight);
-                        }
-                        break;
-                }
+                handDataProvider.UpdateHandData(HandDataLeft, HandDataRight);
             }
         }
 
@@ -128,7 +119,7 @@ namespace XRTK.Providers.InputSystem.Simulation
             {
                 if (handData != null && handData.IsTracked)
                 {
-                    SimulatedHand controller = GetOrAddHandDevice(handedness, profile.HandSimulationMode);
+                    SimulatedHand controller = GetOrAddHandDevice(handedness);
                     controller.UpdateState(handData);
                 }
                 else
@@ -147,39 +138,20 @@ namespace XRTK.Providers.InputSystem.Simulation
             return null;
         }
 
-        private SimulatedHand GetOrAddHandDevice(Handedness handedness, HandSimulationMode simulationMode)
+        private SimulatedHand GetOrAddHandDevice(Handedness handedness)
         {
             var controller = GetHandDevice(handedness);
             if (controller != null)
             {
-                if (controller.SimulationMode == simulationMode)
-                {
-                    return controller;
-                }
-                else
-                {
-                    // Remove and recreate hand device if simulation mode doesn't match
-                    RemoveHandDevice(handedness);
-                }
+                return controller;
             }
 
-            IMixedRealityPointer[] pointers = RequestPointers(simulationMode == HandSimulationMode.Gestures ? typeof(SimulatedGestureHand) : typeof(SimulatedArticulatedHand), handedness);
+            IMixedRealityPointer[] pointers = RequestPointers(typeof(SimulatedArticulatedHand), handedness);
 
             var inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{handedness} Hand", pointers);
-            switch (simulationMode)
-            {
-                case HandSimulationMode.Articulated:
-                    controller = new SimulatedArticulatedHand(TrackingState.Tracked, handedness, inputSource);
-                    break;
-                case HandSimulationMode.Gestures:
-                    controller = new SimulatedGestureHand(TrackingState.Tracked, handedness, inputSource);
-                    break;
-                default:
-                    controller = null;
-                    break;
-            }
+            controller = new SimulatedArticulatedHand(TrackingState.Tracked, handedness, inputSource);
 
-            Type controllerType = simulationMode == HandSimulationMode.Gestures ? typeof(SimulatedGestureHand) : typeof(SimulatedArticulatedHand);
+            Type controllerType = typeof(SimulatedArticulatedHand);
             if (controller == null)
             {
                 Debug.LogError($"Failed to create {controllerType} controller");

@@ -12,8 +12,6 @@ namespace XRTK.Services.InputSystem.Simulation
 {
     public class SimulatedArticulatedHand : SimulatedHand
     {
-        public override HandSimulationMode SimulationMode => HandSimulationMode.Articulated;
-
         private Vector3 currentPointerPosition = Vector3.zero;
         private Quaternion currentPointerRotation = Quaternion.identity;
         private MixedRealityPose lastPointerPose = MixedRealityPose.ZeroIdentity;

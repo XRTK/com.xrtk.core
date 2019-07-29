@@ -10,10 +10,8 @@ using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Services.InputSystem.Simulation
 {
-    public abstract class SimulatedHand : BaseHand
+    public abstract class SimulatedHand : BaseHandController
     {
-        public abstract HandSimulationMode SimulationMode { get; }
-
         protected static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
         protected readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();

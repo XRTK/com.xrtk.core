@@ -828,10 +828,10 @@ namespace XRTK.Services
                 return false;
             }
 
-#if !UNITY_EDITOR
-            if (!Application.platform.IsPlatformSupported(supportedPlatforms))
-#else
+#if UNITY_EDITOR
             if (!UnityEditor.EditorUserBuildSettings.activeBuildTarget.IsPlatformSupported(supportedPlatforms))
+#else
+            if (!Application.platform.IsPlatformSupported(supportedPlatforms))
 #endif
             {
                 // We return true so we don't raise en error.

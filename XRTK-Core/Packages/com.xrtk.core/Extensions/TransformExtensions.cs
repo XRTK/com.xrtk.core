@@ -301,6 +301,11 @@ namespace XRTK.Extensions
 
                     if (t2 == null)
                     {
+                        if (t1 == null)
+                        {
+                            break;
+                        }
+
                         t1 = t1.parent;
                         t2 = t2root;
                     }

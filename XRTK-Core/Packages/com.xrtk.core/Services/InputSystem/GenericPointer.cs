@@ -76,6 +76,9 @@ namespace XRTK.Services.InputSystem.Pointers
         public virtual float PointerExtent { get; set; } = 10f;
 
         /// <inheritdoc />
+        public virtual float DefaultPointerExtent { get; } = 10f;
+
+        /// <inheritdoc />
         public RayStep[] Rays { get; protected set; } = { new RayStep(Vector3.zero, Vector3.forward) };
 
         /// <inheritdoc />

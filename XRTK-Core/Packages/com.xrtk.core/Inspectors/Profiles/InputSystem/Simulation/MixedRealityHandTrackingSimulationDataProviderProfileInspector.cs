@@ -19,10 +19,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Simulation
         private SerializedProperty leftHandManipulationKey;
         private SerializedProperty rightHandManipulationKey;
 
-        private SerializedProperty defaultHandGesture;
-        private SerializedProperty leftMouseHandGesture;
-        private SerializedProperty middleMouseHandGesture;
-        private SerializedProperty rightMouseHandGesture;
+        private SerializedProperty gestureDefinitions;
         private SerializedProperty handGestureAnimationSpeed;
 
         private SerializedProperty defaultHandDistance;
@@ -52,10 +49,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Simulation
             leftHandManipulationKey = serializedObject.FindProperty("leftHandManipulationKey");
             rightHandManipulationKey = serializedObject.FindProperty("rightHandManipulationKey");
 
-            defaultHandGesture = serializedObject.FindProperty("defaultHandGesture");
-            leftMouseHandGesture = serializedObject.FindProperty("leftMouseHandGesture");
-            middleMouseHandGesture = serializedObject.FindProperty("middleMouseHandGesture");
-            rightMouseHandGesture = serializedObject.FindProperty("rightMouseHandGesture");
+            gestureDefinitions = serializedObject.FindProperty("gestureDefinitions");
             handGestureAnimationSpeed = serializedObject.FindProperty("handGestureAnimationSpeed");
 
             holdStartDuration = serializedObject.FindProperty("holdStartDuration");
@@ -100,10 +94,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Simulation
             EditorGUILayout.PropertyField(rightHandManipulationKey);
             EditorGUILayout.Space();
 
-            EditorGUILayout.PropertyField(defaultHandGesture);
-            EditorGUILayout.PropertyField(leftMouseHandGesture);
-            EditorGUILayout.PropertyField(middleMouseHandGesture);
-            EditorGUILayout.PropertyField(rightMouseHandGesture);
+            EditorGUILayout.PropertyField(gestureDefinitions, true);
             EditorGUILayout.PropertyField(handGestureAnimationSpeed);
             EditorGUILayout.Space();
 

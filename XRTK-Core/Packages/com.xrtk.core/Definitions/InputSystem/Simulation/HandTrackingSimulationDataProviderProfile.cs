@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 using XRTK.Providers.Controllers;
@@ -41,17 +42,9 @@ namespace XRTK.Definitions.InputSystem.Simulation
 
         [Header("Hand Gesture Settings")]
         [SerializeField]
-        private ArticulatedHandPose.GestureId defaultHandGesture = ArticulatedHandPose.GestureId.Open;
-        public ArticulatedHandPose.GestureId DefaultHandGesture => defaultHandGesture;
-        [SerializeField]
-        private ArticulatedHandPose.GestureId leftMouseHandGesture = ArticulatedHandPose.GestureId.Pinch;
-        public ArticulatedHandPose.GestureId LeftMouseHandGesture => leftMouseHandGesture;
-        [SerializeField]
-        private ArticulatedHandPose.GestureId middleMouseHandGesture = ArticulatedHandPose.GestureId.None;
-        public ArticulatedHandPose.GestureId MiddleMouseHandGesture => middleMouseHandGesture;
-        [SerializeField]
-        private ArticulatedHandPose.GestureId rightMouseHandGesture = ArticulatedHandPose.GestureId.None;
-        public ArticulatedHandPose.GestureId RightMouseHandGesture => rightMouseHandGesture;
+        [Tooltip("Simulated hand gesture definitions.")]
+        private List<SimulatedHandGesture> gestureDefinitions;
+        public List<SimulatedHandGesture> GestureDefinitions => gestureDefinitions;
         [SerializeField]
         [Tooltip("Gesture interpolation per second")]
         private float handGestureAnimationSpeed = 8.0f;

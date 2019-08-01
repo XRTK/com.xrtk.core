@@ -46,7 +46,7 @@ namespace XRTK.Providers.InputSystem.Simulation
         /// <inheritdoc />
         public override void Initialize()
         {
-            ArticulatedHandPose.LoadGesturePoses();
+            ArticulatedHandPose.LoadGesturePoses(profile.GestureDefinitions);
         }
 
         public override void Enable()

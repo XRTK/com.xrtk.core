@@ -5,7 +5,6 @@ using System;
 using UnityEngine;
 using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
-using XRTK.Utilities;
 
 /// <summary>
 /// Provides per-frame data access to simulated hand data
@@ -18,132 +17,13 @@ using XRTK.Utilities;
 namespace XRTK.Services.InputSystem.Simulation
 {
     /// <summary>
-    /// Internal class to define current gesture and smoothly animate hand data points.
-    /// </summary>
-    [Serializable]
-    internal class SimulatedHandState
-    {
-        [SerializeField]
-        private Handedness handedness = Handedness.None;
-        public Handedness Handedness => handedness;
-
-        // Show a tracked hand device
-        public bool IsTracked = false;
-        // Activate the pinch gesture
-        public bool IsPinching { get; private set; }
-
-        public Vector3 ScreenPosition;
-        // Rotation of the hand
-        public Vector3 HandRotateEulerAngles = Vector3.zero;
-        // Random offset to simulate tracking inaccuracy
-        public Vector3 JitterOffset = Vector3.zero;
-
-        [SerializeField]
-        private ArticulatedHandPose.GestureId gesture = ArticulatedHandPose.GestureId.None;
-        public ArticulatedHandPose.GestureId Gesture
-        {
-            get { return gesture; }
-            set
-            {
-                if (value != ArticulatedHandPose.GestureId.None && value != gesture)
-                {
-                    gesture = value;
-                    gestureBlending = 0.0f;
-                }
-            }
-        }
-
-        // Interpolation between current pose and target gesture
-        private float gestureBlending = 0.0f;
-        public float GestureBlending
-        {
-            get { return gestureBlending; }
-            set
-            {
-                gestureBlending = Mathf.Clamp(value, gestureBlending, 1.0f);
-
-                // Pinch is a special gesture that triggers the Select and TriggerPress input actions
-                IsPinching = (gesture == ArticulatedHandPose.GestureId.Pinch && gestureBlending > 0.9f);
-            }
-        }
-
-        private float poseBlending = 0.0f;
-        private ArticulatedHandPose pose = new ArticulatedHandPose();
-
-        public SimulatedHandState(Handedness _handedness)
-        {
-            handedness = _handedness;
-        }
-
-        public void Reset()
-        {
-            ScreenPosition = Vector3.zero;
-            HandRotateEulerAngles = Vector3.zero;
-            JitterOffset = Vector3.zero;
-
-            ResetGesture();
-        }
-
-        /// <summary>
-        /// Set the position in viewport space rather than screen space (pixels).
-        /// </summary>
-        public void SetViewportPosition(Vector3 point)
-        {
-            ScreenPosition = CameraCache.Main.ViewportToScreenPoint(point);
-        }
-
-        public void SimulateInput(Vector3 mouseDelta, float noiseAmount, Vector3 rotationDeltaEulerAngles)
-        {
-            // Apply mouse delta x/y in screen space, but depth offset in world space
-            ScreenPosition.x += mouseDelta.x;
-            ScreenPosition.y += mouseDelta.y;
-            Vector3 newWorldPoint = CameraCache.Main.ScreenToWorldPoint(ScreenPosition);
-            newWorldPoint += CameraCache.Main.transform.forward * mouseDelta.z;
-            ScreenPosition = CameraCache.Main.WorldToScreenPoint(newWorldPoint);
-
-            HandRotateEulerAngles += rotationDeltaEulerAngles;
-
-            JitterOffset = UnityEngine.Random.insideUnitSphere * noiseAmount;
-        }
-
-        public void ResetGesture()
-        {
-            gestureBlending = 1.0f;
-
-            ArticulatedHandPose gesturePose = ArticulatedHandPose.GetGesturePose(gesture);
-            if (gesturePose != null)
-            {
-                pose.Copy(gesturePose);
-            }
-        }
-
-        internal void FillCurrentFrame(MixedRealityPose[] jointsOut)
-        {
-            ArticulatedHandPose gesturePose = ArticulatedHandPose.GetGesturePose(gesture);
-            if (gesturePose != null)
-            {
-                if (gestureBlending > poseBlending)
-                {
-                    float range = Mathf.Clamp01(1.0f - poseBlending);
-                    float lerpFactor = range > 0.0f ? (gestureBlending - poseBlending) / range : 1.0f;
-                    pose.InterpolateOffsets(pose, gesturePose, lerpFactor);
-                }
-            }
-            poseBlending = gestureBlending;
-
-            Quaternion rotation = Quaternion.Euler(HandRotateEulerAngles);
-            Vector3 position = CameraCache.Main.ScreenToWorldPoint(ScreenPosition + JitterOffset);
-            pose.ComputeJointPoses(handedness, rotation, position, jointsOut);
-        }
-    }
-
-    /// <summary>
     /// Produces simulated data every frame that defines joint positions.
     /// </summary>
     public class SimulatedHandDataProvider
     {
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
+        private SimulatedHandGesture defaultGesture;
         protected HandTrackingSimulationDataProviderProfile profile;
 
         /// <summary>
@@ -177,8 +57,22 @@ namespace XRTK.Services.InputSystem.Simulation
             HandStateLeft = new SimulatedHandState(Handedness.Left);
             HandStateRight = new SimulatedHandState(Handedness.Right);
 
-            HandStateLeft.Gesture = this.profile.DefaultHandGesture;
-            HandStateRight.Gesture = this.profile.DefaultHandGesture;
+            for (int i = 0; i < this.profile.GestureDefinitions.Count; i++)
+            {
+                SimulatedHandGesture gesture = this.profile.GestureDefinitions[i];
+                if (gesture.IsDefault)
+                {
+                    defaultGesture = gesture;
+                    HandStateLeft.GestureName = defaultGesture.GestureName;
+                    HandStateRight.GestureName = defaultGesture.GestureName;
+                    break;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(HandStateLeft.GestureName))
+            {
+                Debug.LogError("There is no default simulated hand gesture defined.");
+            }
 
             HandStateLeft.Reset();
             HandStateRight.Reset();
@@ -244,7 +138,7 @@ namespace XRTK.Services.InputSystem.Simulation
             {
                 isSimulatingRight = false;
             }
-       
+
             Vector3 mouseDelta = (lastMousePosition.HasValue ? Input.mousePosition - lastMousePosition.Value : Vector3.zero);
             mouseDelta.z += Input.GetAxis("Mouse ScrollWheel") * profile.HandDepthMultiplier;
             float rotationDelta = profile.HandRotationSpeed * Time.deltaTime;
@@ -308,12 +202,12 @@ namespace XRTK.Services.InputSystem.Simulation
                 if (isAlwaysVisible)
                 {
                     // Toggle gestures on/off
-                    state.Gesture = ToggleGesture(state.Gesture);
+                    state.GestureName = ToggleGesture(state.GestureName);
                 }
                 else
                 {
                     // Enable gesture while mouse button is pressed
-                    state.Gesture = SelectGesture();
+                    state.GestureName = SelectGesture();
                 }
             }
 
@@ -337,45 +231,38 @@ namespace XRTK.Services.InputSystem.Simulation
             }
         }
 
-        private ArticulatedHandPose.GestureId SelectGesture()
+        private string SelectGesture()
         {
-            if (Input.GetMouseButton(0))
+            for (int i = 0; i < profile.GestureDefinitions.Count; i++)
             {
-                return profile.LeftMouseHandGesture;
+                SimulatedHandGesture gesture = profile.GestureDefinitions[i];
+                if (Input.GetKeyDown(gesture.KeyCode))
+                {
+                    return gesture.GestureName;
+                }
             }
-            else if (Input.GetMouseButton(1))
-            {
-                return profile.RightMouseHandGesture;
-            }
-            else if (Input.GetMouseButton(2))
-            {
-                return profile.MiddleMouseHandGesture;
-            }
-            else
-            {
-                return profile.DefaultHandGesture;
-            }
+
+            return defaultGesture.GestureName;
         }
 
-        private ArticulatedHandPose.GestureId ToggleGesture(ArticulatedHandPose.GestureId gesture)
+        private string ToggleGesture(string gestureName)
         {
-            if (Input.GetMouseButtonDown(0))
-            {
-                return (gesture != profile.LeftMouseHandGesture ? profile.LeftMouseHandGesture : profile.DefaultHandGesture);
-            }
-            else if (Input.GetMouseButtonDown(1))
-            {
-                return (gesture != profile.RightMouseHandGesture ? profile.RightMouseHandGesture : profile.DefaultHandGesture);
-            }
-            else if (Input.GetMouseButtonDown(2))
-            {
-                return (gesture != profile.MiddleMouseHandGesture ? profile.MiddleMouseHandGesture : profile.DefaultHandGesture);
-            }
-            else
-            {
-                // 'None' will not change the gesture
-                return ArticulatedHandPose.GestureId.None;
-            }
+            // TODO:
+            //if (Input.GetMouseButtonDown(0))
+            //{
+            //    return gestureName != profile.LeftMouseHandGesture ? profile.LeftMouseHandGesture : profile.DefaultHandGesture;
+            //}
+            //else if (Input.GetMouseButtonDown(1))
+            //{
+            //    return gestureName != profile.RightMouseHandGesture ? profile.RightMouseHandGesture : profile.DefaultHandGesture;
+            //}
+            //else if (Input.GetMouseButtonDown(2))
+            //{
+            //    return gestureName != profile.MiddleMouseHandGesture ? profile.MiddleMouseHandGesture : profile.DefaultHandGesture;
+            //}
+
+            // 'Default' will not change the gesture
+            return defaultGesture.GestureName;
         }
     }
 }

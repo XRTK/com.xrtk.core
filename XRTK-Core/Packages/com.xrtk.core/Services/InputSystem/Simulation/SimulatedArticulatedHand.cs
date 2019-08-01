@@ -6,7 +6,6 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Utilities;
 
 namespace XRTK.Services.InputSystem.Simulation
 {
@@ -62,7 +61,7 @@ namespace XRTK.Services.InputSystem.Simulation
 
             if (IsPositionAvailable)
             {
-                HandRay.Update(pointerPosition, GetPalmNormal(), CameraCache.Main.transform, ControllerHandedness);
+                //HandRay.Update(pointerPosition, GetPalmNormal(), CameraCache.Main.transform, ControllerHandedness);
 
                 Ray ray = HandRay.Ray;
 

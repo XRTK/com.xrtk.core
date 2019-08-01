@@ -49,7 +49,7 @@ namespace XRTK.Services.InputSystem.Simulation
             }
 
 
-            MixedRealityToolkit.InputSystem.RaiseHandJointsUpdated(InputSource, ControllerHandedness, jointPoses);
+            //MixedRealityToolkit.InputSystem.RaiseHandJointsUpdated(InputSource, ControllerHandedness, jointPoses);
 
             UpdateVelocity();
 

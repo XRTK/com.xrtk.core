@@ -4,13 +4,8 @@
 using UnityEngine;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using XRTK.Definitions.Utilities;
 using XRTK.Utilities;
-
-#if UNITY_EDITOR
-using XRTK.Utilities.Editor;
-#endif
 
 namespace XRTK.Services.InputSystem.Simulation
 {
@@ -137,57 +132,14 @@ namespace XRTK.Services.InputSystem.Simulation
             }
         }
 
-        /// <summary>
-        /// Supported hand gestures.
-        /// </summary>
-        public enum GestureId
-        {
-            /// <summary>
-            /// Unspecified hand shape
-            /// </summary>
-            None = 0,
-            /// <summary>
-            /// Flat hand with fingers spread out
-            /// </summary>
-            Flat,
-            /// <summary>
-            /// Relaxed hand pose
-            /// </summary>
-            Open,
-            /// <summary>
-            /// Index finger and Thumb touching, index tip does not move
-            /// </summary>
-            Pinch,
-            /// <summary>
-            /// Index finger and Thumb touching, wrist does not move
-            /// </summary>
-            PinchSteadyWrist,
-            /// <summary>
-            /// Index finger stretched out
-            /// </summary>
-            Poke,
-            /// <summary>
-            /// Grab with whole hand, fist shape
-            /// </summary>
-            Grab,
-            /// <summary>
-            /// OK sign
-            /// </summary>
-            ThumbsUp,
-            /// <summary>
-            /// Victory sign
-            /// </summary>
-            Victory,
-        }
-
-        private static readonly Dictionary<GestureId, ArticulatedHandPose> handPoses = new Dictionary<GestureId, ArticulatedHandPose>();
+        private static readonly Dictionary<string, ArticulatedHandPose> handPoses = new Dictionary<string, ArticulatedHandPose>();
 
         /// <summary>
         /// Get pose data for a supported gesture.
         /// </summary>
-        public static ArticulatedHandPose GetGesturePose(GestureId gesture)
+        public static ArticulatedHandPose GetGesturePose(string name)
         {
-            if (handPoses.TryGetValue(gesture, out ArticulatedHandPose pose))
+            if (handPoses.TryGetValue(name, out ArticulatedHandPose pose))
             {
                 return pose;
             }
@@ -195,32 +147,32 @@ namespace XRTK.Services.InputSystem.Simulation
         }
 
 #if UNITY_EDITOR
+
         /// <summary>
         /// Load pose data from files.
         /// </summary>
-        public static void LoadGesturePoses()
+        public static void LoadGesturePoses(List<SimulatedHandGesture> definitions)
         {
-            string[] gestureNames = Enum.GetNames(typeof(GestureId));
-            string basePath = $"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/Services/InputSystem/Simulation/ArticulatedHandPoses/";
-            for (int i = 0; i < gestureNames.Length; ++i)
+            for (int i = 0; i < definitions.Count; i++)
             {
-                string relPath = Path.Combine(basePath, string.Format("ArticulatedHandPose_{0}.json", gestureNames[i]));
-                string absPath = Path.Combine(MixedRealityEditorSettings.MixedRealityToolkit_AbsoluteFolderPath, relPath);
-                LoadGesturePose((GestureId)i, absPath);
+                LoadGesturePose(definitions[i]);
             }
         }
 
-        private static ArticulatedHandPose LoadGesturePose(GestureId gesture, string filePath)
+        private static ArticulatedHandPose LoadGesturePose(SimulatedHandGesture definition)
         {
-            if (!string.IsNullOrEmpty(filePath))
+            if (definition.Data != null)
             {
-                var pose = new ArticulatedHandPose();
-                pose.FromJson(File.ReadAllText(filePath));
-                handPoses.Add(gesture, pose);
+                ArticulatedHandPose pose = new ArticulatedHandPose();
+                pose.FromJson(definition.Data.text);
+                handPoses.Add(definition.GestureName, pose);
+
                 return pose;
             }
+
             return null;
         }
+
 #endif
 
         /// Utility class to serialize hand pose as a dictionary with full joint names

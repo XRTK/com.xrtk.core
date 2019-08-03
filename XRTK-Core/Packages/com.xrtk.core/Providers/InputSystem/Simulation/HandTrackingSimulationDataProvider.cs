@@ -3,11 +3,13 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Providers.InputSystem.Simulation;
 using XRTK.Providers.Controllers;
 using XRTK.Services;
@@ -175,7 +177,6 @@ namespace XRTK.Providers.InputSystem.Simulation
             MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);
 
             trackedHands.Add(handedness, controller);
-            UpdateActiveControllers();
 
             return controller;
         }
@@ -188,7 +189,6 @@ namespace XRTK.Providers.InputSystem.Simulation
                 MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
 
                 trackedHands.Remove(handedness);
-                UpdateActiveControllers();
             }
         }
 
@@ -200,12 +200,6 @@ namespace XRTK.Providers.InputSystem.Simulation
             }
 
             trackedHands.Clear();
-            UpdateActiveControllers();
-        }
-
-        private void UpdateActiveControllers()
-        {
-            //activeControllers = trackedHands.Values.ToArray<IMixedRealityController>();
         }
     }
 }

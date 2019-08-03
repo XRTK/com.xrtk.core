@@ -19,23 +19,28 @@ namespace XRTK.Providers.InputSystem.Simulation
     {
         private HandTrackingSimulationDataProviderProfile profile;
         private SimulatedHandDataProvider handDataProvider = null;
-        public readonly SimulatedHandData HandDataLeft = new SimulatedHandData();
-        public readonly SimulatedHandData HandDataRight = new SimulatedHandData();
+        private long lastHandDeviceUpdateTimeStamp = 0;
+        private readonly Dictionary<Handedness, SimulatedHand> trackedHands = new Dictionary<Handedness, SimulatedHand>();
+
+        /// <summary>
+        /// Gets left hand simulated data.
+        /// </summary>
+        public SimulatedHandData HandDataLeft { get; } = new SimulatedHandData();
+
+        /// <summary>
+        /// Gets right hand simulated data.
+        /// </summary>
+        public SimulatedHandData HandDataRight { get; } = new SimulatedHandData();
 
         /// <summary>
         /// If true then keyboard and mouse input are used to simulate hands.
         /// </summary>
-        public bool UserInputEnabled = true;
+        public bool UserInputEnabled { get; private set; } = true;
 
         /// <summary>
-        /// Dictionary to capture all active hands detected
+        /// Dictionary to capture all active hands detected.
         /// </summary>
-        private readonly Dictionary<Handedness, SimulatedHand> trackedHands = new Dictionary<Handedness, SimulatedHand>();
-
-        /// <summary>
-        /// Timestamp of the last hand device update
-        /// </summary>
-        private long lastHandUpdateTimestamp = 0;
+        public IReadOnlyDictionary<Handedness, SimulatedHand> TrackedHands => trackedHands;
 
         public HandTrackingSimulationDataProvider(string name, uint priority, HandTrackingSimulationDataProviderProfile profile)
             : base(name, priority, profile)
@@ -49,6 +54,7 @@ namespace XRTK.Providers.InputSystem.Simulation
             ArticulatedHandPose.LoadGesturePoses(profile.GestureDefinitions);
         }
 
+        /// <inheritdoc />
         public override void Enable()
         {
             if (handDataProvider == null)
@@ -60,7 +66,12 @@ namespace XRTK.Providers.InputSystem.Simulation
         /// <inheritdoc />
         public override void Disable()
         {
-            DisableHandSimulation();
+            RemoveAllHandDevices();
+
+            if (handDataProvider != null)
+            {
+                handDataProvider = null;
+            }
         }
 
         /// <inheritdoc />
@@ -80,31 +91,21 @@ namespace XRTK.Providers.InputSystem.Simulation
             if (profile.SimulateHandTracking)
             {
                 DateTime currentTime = DateTime.UtcNow;
-                double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandUpdateTimestamp)).TotalMilliseconds;
+                double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandDeviceUpdateTimeStamp)).TotalMilliseconds;
                 // TODO implement custom hand device update frequency here, use 1000/fps instead of 0
                 if (msSinceLastHandUpdate > 0)
                 {
-                    if (HandDataLeft.Timestamp > lastHandUpdateTimestamp)
+                    if (HandDataLeft.Timestamp > lastHandDeviceUpdateTimeStamp)
                     {
                         UpdateHandInputSource(Handedness.Left, HandDataLeft);
                     }
-                    if (HandDataRight.Timestamp > lastHandUpdateTimestamp)
+                    if (HandDataRight.Timestamp > lastHandDeviceUpdateTimeStamp)
                     {
                         UpdateHandInputSource(Handedness.Right, HandDataRight);
                     }
 
-                    lastHandUpdateTimestamp = currentTime.Ticks;
+                    lastHandDeviceUpdateTimeStamp = currentTime.Ticks;
                 }
-            }
-        }
-
-        private void DisableHandSimulation()
-        {
-            RemoveAllHandDevices();
-
-            if (handDataProvider != null)
-            {
-                handDataProvider = null;
             }
         }
 

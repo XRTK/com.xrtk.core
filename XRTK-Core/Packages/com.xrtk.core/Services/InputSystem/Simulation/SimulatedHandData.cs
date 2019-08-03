@@ -15,16 +15,19 @@ namespace XRTK.Services.InputSystem.Simulation
     {
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
-        // Timestamp of hand data, as FileTime, e.g. DateTime.UtcNow.ToFileTime()
-        private long timestamp = 0;
-        public long Timestamp => timestamp;
+        /// <summary>
+        /// Timestamp of hand data, as FileTime, e.g. DateTime.UtcNow.ToFileTime().
+        /// </summary>
+        public long Timestamp { get; private set; } = 0;
 
         [SerializeField]
         private bool isTracked = false;
         public bool IsTracked => isTracked;
+
         [SerializeField]
         private MixedRealityPose[] joints = new MixedRealityPose[jointCount];
         public MixedRealityPose[] Joints => joints;
+
         [SerializeField]
         private bool isPinching = false;
         public bool IsPinching => isPinching;
@@ -33,7 +36,7 @@ namespace XRTK.Services.InputSystem.Simulation
 
         public void Copy(SimulatedHandData other)
         {
-            timestamp = other.timestamp;
+            Timestamp = other.Timestamp;
             isTracked = other.isTracked;
             isPinching = other.isPinching;
             for (int i = 0; i < jointCount; ++i)
@@ -60,9 +63,9 @@ namespace XRTK.Services.InputSystem.Simulation
                 handDataChanged = true;
             }
 
-            if (timestamp != timestampNew)
+            if (Timestamp != timestampNew)
             {
-                timestamp = timestampNew;
+                Timestamp = timestampNew;
                 if (isTracked)
                 {
                     generator(Joints);

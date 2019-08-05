@@ -4,7 +4,7 @@
 namespace XRTK.Definitions.Utilities
 {
     /// <summary>
-    /// Enum which describes how an object's bounding box is to be flattened.
+    /// Enum which describes how an object is to be flattened.
     /// </summary>
     public enum FlattenMode
     {

@@ -324,5 +324,21 @@ namespace XRTK.Extensions
                 colliders[i].enabled = isActive;
             }
         }
+
+        /// <summary>
+        /// Sets the physics layer on this and all child <see cref="Transform"/>s with the provided value.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="layer"></param>
+        public static void SetLayerRecursively(this Transform transform, int layer)
+        {
+            transform.gameObject.layer = layer;
+
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                var child = transform.GetChild(i);
+                child.gameObject.layer = layer;
+            }
+        }
     }
 }

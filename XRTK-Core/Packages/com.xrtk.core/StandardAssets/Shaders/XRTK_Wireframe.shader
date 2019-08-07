@@ -45,7 +45,7 @@ Shader "Mixed Reality Toolkit/Wireframe"
                 float4 projectionSpaceVertex : SV_POSITION;
                 float4 worldSpacePosition : TEXCOORD1;
 #if SHADER_API_GLES3
-				UNITY_VERTEX_OUTPUT_STEREO
+                UNITY_VERTEX_OUTPUT_STEREO
 #else
                 UNITY_VERTEX_OUTPUT_STEREO_EYE_INDEX
 #endif
@@ -66,9 +66,9 @@ Shader "Mixed Reality Toolkit/Wireframe"
                 v2g o;
                 UNITY_SETUP_INSTANCE_ID(v);
 #if SHADER_API_GLES3
-				UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
 #else
-				UNITY_INITIALIZE_OUTPUT_STEREO_EYE_INDEX(o);
+                UNITY_INITIALIZE_OUTPUT_STEREO_EYE_INDEX(o);
 #endif
                 
                 o.projectionSpaceVertex = UnityObjectToClipPos(v.vertex);
@@ -111,7 +111,7 @@ Shader "Mixed Reality Toolkit/Wireframe"
                    o.worldSpacePosition = 1.0 / o.projectionSpaceVertex.w;
                    o.dist = distScale[idx] * o.projectionSpaceVertex.w * wireScale;
 #if SHADER_API_GLES3
-				   UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(i[idx], o);
+                   UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(i[idx], o);
 #endif
                    triStream.Append(o);
                 }

@@ -12,7 +12,7 @@ Shader "Mixed Reality Toolkit/Wireframe"
         _WireColor("Wire color", Color) = (1.0, 1.0, 1.0, 1.0)
         _WireThickness("Wire thickness", Range(0, 800)) = 100
     }
-        SubShader
+    SubShader
     {
         Tags { "RenderType" = "Opaque" }
 
@@ -70,7 +70,7 @@ Shader "Mixed Reality Toolkit/Wireframe"
 #else
                 UNITY_INITIALIZE_OUTPUT_STEREO_EYE_INDEX(o);
 #endif
-                
+
                 o.projectionSpaceVertex = UnityObjectToClipPos(v.vertex);
                 o.worldSpacePosition = mul(unity_ObjectToWorld, v.vertex);
                 return o;
@@ -123,18 +123,19 @@ Shader "Mixed Reality Toolkit/Wireframe"
                 // for perspective-correct interpolation.
                 float dist = min(i.dist[0], min(i.dist[1], i.dist[2])) * i.worldSpacePosition;
 
-            // Make the intensity of the line very bright along the triangle edges but fall-off very
-            // quickly.
-            float I = exp2(-2 * dist * dist);
+                // Make the intensity of the line very bright along the triangle edges but fall-off very
+                // quickly.
+                float I = exp2(-2 * dist * dist);
 
-            // Fade out the alpha but not the color so we don't get any weird halo effects from
-            // a fade to a different color.
-            float4 color = I * _WireColor + (1 - I) * _BaseColor;
-            color.a = I;
-            return color;
-        }
+                // Fade out the alpha but not the color so we don't get any weird halo effects from
+                // a fade to a different color.
+                float4 color = I * _WireColor + (1 - I) * _BaseColor;
+                color.a = I;
+                return color;
+            }
+
         ENDCG
-    }
+        }
     }
         FallBack "Diffuse"
 }

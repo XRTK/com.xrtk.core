@@ -9,6 +9,7 @@ using XRTK.Inspectors.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Providers.Controllers;
 using XRTK.Providers.Controllers.UnityInput;
+using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -26,6 +27,7 @@ namespace XRTK.Inspectors.Profiles
         };
 
         private SerializedProperty renderMotionControllers;
+        private SerializedProperty handVisualizationProfile;
         private SerializedProperty controllerVisualizationType;
         private SerializedProperty useDefaultModels;
         private SerializedProperty globalLeftHandModel;
@@ -48,6 +50,7 @@ namespace XRTK.Inspectors.Profiles
             controllerVisualizationProfile = target as MixedRealityControllerVisualizationProfile;
 
             renderMotionControllers = serializedObject.FindProperty("renderMotionControllers");
+            handVisualizationProfile = serializedObject.FindProperty("handVisualizationProfile");
             controllerVisualizationType = serializedObject.FindProperty("controllerVisualizationType");
             useDefaultModels = serializedObject.FindProperty("useDefaultModels");
             globalLeftHandModel = serializedObject.FindProperty("globalLeftHandModel");
@@ -71,9 +74,12 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.HelpBox("Define all the custom controller visualizations you'd like to use for each controller type when they're rendered in the scene.\n\n" +
                                     "Global settings are the default fallback, and any specific controller definitions take precedence.", MessageType.Info);
 
+            controllerVisualizationProfile.CheckProfileLock();
+
             serializedObject.Update();
 
-            controllerVisualizationProfile.CheckProfileLock();
+            bool changed = false;
+            changed |= RenderProfile(thisProfile, handVisualizationProfile);
 
             EditorGUIUtility.labelWidth = 168f;
             EditorGUILayout.PropertyField(renderMotionControllers);
@@ -122,6 +128,11 @@ namespace XRTK.Inspectors.Profiles
             }
 
             serializedObject.ApplyModifiedProperties();
+
+            if (changed && MixedRealityToolkit.IsInitialized)
+            {
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
+            }
         }
 
         private void RenderControllerList(SerializedProperty controllerList)

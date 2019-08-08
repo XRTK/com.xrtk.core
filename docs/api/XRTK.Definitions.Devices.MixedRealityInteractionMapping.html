@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MixedRealityInteractionMapping
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.43.3.0">
+    <meta name="generator" content="docfx 2.44.0.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -318,7 +318,8 @@ public class MixedRealityInteractionMapping</code></pre>
   </span>
   <a id="XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_" data-uid="XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor*"></a>
   <h4 id="XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_String_System_String_System_String_System_Boolean_System_Boolean_" data-uid="XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.String,System.String,System.String,System.Boolean,System.Boolean)">MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, MixedRealityInputAction, String, String, String, Boolean, Boolean)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The constructor for a new Interaction Mapping definition</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -337,52 +338,62 @@ public class MixedRealityInteractionMapping</code></pre>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uint32">UInt32</a></td>
         <td><span class="parametername">id</span></td>
-        <td></td>
+        <td><p>Identity for mapping</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">description</span></td>
-        <td></td>
+        <td><p>The description of the interaction mapping.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="XRTK.Definitions.Utilities.AxisType.html">AxisType</a></td>
         <td><span class="parametername">axisType</span></td>
-        <td></td>
+        <td><p>The axis that the mapping operates on, also denotes the data type for the mapping</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="XRTK.Definitions.Devices.DeviceInputType.html">DeviceInputType</a></td>
         <td><span class="parametername">inputType</span></td>
-        <td></td>
+        <td><p>The physical input device / control</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="XRTK.Definitions.InputSystem.MixedRealityInputAction.html">MixedRealityInputAction</a></td>
         <td><span class="parametername">inputAction</span></td>
-        <td></td>
+        <td><p>The logical MixedRealityInputAction that this input performs</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">inputName</span></td>
-        <td></td>
+        <td><p>Optional inputName value to get input for a coded input identity from a provider</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">axisCodeX</span></td>
-        <td></td>
+        <td><p>Optional horizontal or single axis value to get axis data from Unity's old input system.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">axisCodeY</span></td>
-        <td></td>
+        <td><p>Optional vertical axis value to get axis data from Unity's old input system.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><span class="parametername">invertXAxis</span></td>
-        <td></td>
+        <td><p>Optional horizontal axis invert option.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><span class="parametername">invertYAxis</span></td>
-        <td></td>
+        <td><p>Optional vertical axis invert option.</p>
+</td>
       </tr>
     </tbody>
   </table>

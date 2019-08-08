@@ -26,7 +26,7 @@ We recently moved our main converastions regarding XRTK over to Discord, which a
 
 |[Discord](https://t.co/UeUSVjnoIZ?amp=1) | [Slack](https://holodevelopersslack.azurewebsites.net/)|
 |---|---|
-|[![Discord](https://cdn0.iconfinder.com/data/icons/free-social-media-set/24/discord-256.png)](https://t.co/UeUSVjnoIZ?amp=1) |[![Slack](https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-08-256.png)](https://holodevelopersslack.azurewebsites.net/) |
+|[![Discord](https://cdn0.iconfinder.com/data/icons/free-social-media-set/24/discord-128.png)](https://t.co/UeUSVjnoIZ?amp=1) |[![Slack](https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-08-128.png)](https://holodevelopersslack.azurewebsites.net/) |
 
 # Build Status
 

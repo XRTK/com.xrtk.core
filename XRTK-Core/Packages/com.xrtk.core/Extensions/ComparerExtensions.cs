@@ -7,7 +7,7 @@ using UnityEngine;
 namespace XRTK.Extensions
 {
     /// <summary>
-    /// Extension methods for .Net Comparer's
+    /// Extension methods for .Net Comparer
     /// </summary>
     public static class ComparerExtensions
     {
@@ -28,7 +28,7 @@ namespace XRTK.Extensions
 
             public ReverseComparer(IComparer<TElement> originalComparer)
             {
-                 Debug.Assert(originalComparer != null, "originalComparer cannot be null.");
+                Debug.Assert(originalComparer != null, "originalComparer cannot be null.");
 
                 this.originalComparer = originalComparer;
             }

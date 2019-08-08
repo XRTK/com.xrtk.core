@@ -28,8 +28,8 @@ namespace XRTK.Utilities.Gltf.Schema
 
         /// <summary>
         /// The floating-point distance to the far clipping plane. When defined,
-        /// `zfar` must be greater than `znear`.
-        /// If `zfar` is undefined, runtime must use infinite projection matrix.
+        /// <see cref="zFar"/> must be greater than <see cref="zNear"/>.
+        /// If <see cref="zFar"/> is undefined, runtime must use infinite projection matrix.
         /// <minimum>0.0</minimum>
         /// </summary>
         public double zFar;

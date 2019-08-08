@@ -41,6 +41,8 @@ We recently moved our main converastions regarding XRTK over to Discord, which a
 
 # Supported Platforms
 
+By default, we support OpenVR on all platforms that support the standard, as well as Native SDK implementations for various vendors.
+
 - [x] Linux
 - [x] OSX Standalone
 - [ ] iOS
@@ -50,9 +52,8 @@ We recently moved our main converastions regarding XRTK over to Discord, which a
 - [ ] WebAssembly
     - [ ] WebVR
     - [ ] WebXR
-- [x] Windows Standalone
-    - [x] Open VR
-    - [ ] Steam VR
+- [x] Open VR
+- [ ] Open XR
 - [x] [Windows Mixed Reality](https://github.com/XRTK/WindowsMixedReality)
     - [x] HoloLens
     - [x] Windows Mixed Reality HMDs
@@ -61,6 +62,9 @@ We recently moved our main converastions regarding XRTK over to Discord, which a
 - [x] [Native Oculus API](https://github.com/XRTK/Oculus)
     - [x] Windows Standalone (aka Rift)
     - [x] Android (aka Quest)
+- [ ] Native Steam VR
+    - [ ] HTC Vive
+    - [ ] Vive Index
 
 # FAQ
 

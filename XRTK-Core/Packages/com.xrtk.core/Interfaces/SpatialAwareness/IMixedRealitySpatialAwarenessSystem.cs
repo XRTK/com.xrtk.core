@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.SpatialAwarenessSystem;
@@ -29,6 +30,14 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         /// Parent <see cref="GameObject"/> which will encapsulate all of the system created mesh objects.
         /// </summary>
         GameObject SurfacesParent { get; }
+
+        /// <summary>
+        /// Gets or sets the provided mesh <see cref="SpatialMeshDisplayOptions"/> on all the <see cref="DetectedSpatialObservers"/>
+        /// </summary>
+        /// <remarks>
+        /// Is is possible to override any previously set display options on any specific observers.
+        /// </remarks>
+        SpatialMeshDisplayOptions SpatialMeshVisibility { get; set; }
 
         #region Observers Utilities
 
@@ -81,6 +90,7 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         /// Sets the provided mesh <see cref="SpatialMeshDisplayOptions"/> on all the <see cref="DetectedSpatialObservers"/>
         /// </summary>
         /// <param name="displayOptions"></param>
+        [Obsolete("Use SpatialMeshVisibility instead")]
         void SetMeshVisibility(SpatialMeshDisplayOptions displayOptions);
 
         #region Mesh Events

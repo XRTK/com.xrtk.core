@@ -1,10 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.Services;
 
 namespace XRTK.Providers.SpatialObservers
 {
@@ -49,14 +51,11 @@ namespace XRTK.Providers.SpatialObservers
         /// </summary>
         public bool MeshRecalculateNormals => meshRecalculateNormals;
 
-        [SerializeField]
-        [Tooltip("How should spatial meshes be displayed?")]
-        private SpatialMeshDisplayOptions meshDisplayOption = SpatialMeshDisplayOptions.None;
-
         /// <summary>
         /// Indicates how the mesh subsystem is to display surface meshes within the application.
         /// </summary>
-        public SpatialMeshDisplayOptions MeshDisplayOption => meshDisplayOption;
+        [Obsolete("Use SpatialAwarenessSystemProfile.MeshDisplayOption instead.")]
+        public SpatialMeshDisplayOptions MeshDisplayOption => MixedRealityToolkit.SpatialAwarenessSystem.SpatialMeshVisibility;
 
         [SerializeField]
         [Tooltip("Material to use when displaying meshes")]

@@ -31,5 +31,14 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         /// The list of registered <see cref="IMixedRealitySpatialObserverDataProvider"/>s.
         /// </summary>
         public SpatialObserverDataProviderConfiguration[] RegisteredSpatialObserverDataProviders => registeredSpatialObserverDataProviders;
+
+        [SerializeField]
+        [Tooltip("How should spatial meshes be displayed?")]
+        private SpatialMeshDisplayOptions meshDisplayOption = SpatialMeshDisplayOptions.None;
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public SpatialMeshDisplayOptions MeshDisplayOption => meshDisplayOption;
     }
 }

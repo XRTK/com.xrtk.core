@@ -18,6 +18,7 @@ namespace XRTK.Definitions
             new MixedRealityPackageInfo("com.xrtk.wmr", "XRTK.WindowsMixedReality", "https://github.com/XRTK/WindowsMixedReality.git"),
             new MixedRealityPackageInfo("com.xrtk.lumin", "XRTK.Lumin", "https://github.com/XRTK/Lumin.git"),
             new MixedRealityPackageInfo("com.xrtk.sdk", "XRTK.SDK", "https://github.com/XRTK/SDK.git"),
+            new MixedRealityPackageInfo("com.xrtk.oculus", "XRTK.Oculus", "https://github.com/XRTK/Oculus.git"),
         };
 
         /// <summary>

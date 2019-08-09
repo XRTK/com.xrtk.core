@@ -5254,6 +5254,30 @@ references:
   commentId: F:XRTK.Definitions.Utilities.AxisType.ThreeDofRotation
   fullName: XRTK.Definitions.Utilities.AxisType.ThreeDofRotation
   nameWithType: AxisType.ThreeDofRotation
+- uid: XRTK.Definitions.Utilities.CardinalAxis
+  name: CardinalAxis
+  href: api/XRTK.Definitions.Utilities.CardinalAxis.html
+  commentId: T:XRTK.Definitions.Utilities.CardinalAxis
+  fullName: XRTK.Definitions.Utilities.CardinalAxis
+  nameWithType: CardinalAxis
+- uid: XRTK.Definitions.Utilities.CardinalAxis.X
+  name: X
+  href: api/XRTK.Definitions.Utilities.CardinalAxis.html#XRTK_Definitions_Utilities_CardinalAxis_X
+  commentId: F:XRTK.Definitions.Utilities.CardinalAxis.X
+  fullName: XRTK.Definitions.Utilities.CardinalAxis.X
+  nameWithType: CardinalAxis.X
+- uid: XRTK.Definitions.Utilities.CardinalAxis.Y
+  name: Y
+  href: api/XRTK.Definitions.Utilities.CardinalAxis.html#XRTK_Definitions_Utilities_CardinalAxis_Y
+  commentId: F:XRTK.Definitions.Utilities.CardinalAxis.Y
+  fullName: XRTK.Definitions.Utilities.CardinalAxis.Y
+  nameWithType: CardinalAxis.Y
+- uid: XRTK.Definitions.Utilities.CardinalAxis.Z
+  name: Z
+  href: api/XRTK.Definitions.Utilities.CardinalAxis.html#XRTK_Definitions_Utilities_CardinalAxis_Z
+  commentId: F:XRTK.Definitions.Utilities.CardinalAxis.Z
+  fullName: XRTK.Definitions.Utilities.CardinalAxis.Z
+  nameWithType: CardinalAxis.Z
 - uid: XRTK.Definitions.Utilities.CollationOrderType
   name: CollationOrderType
   href: api/XRTK.Definitions.Utilities.CollationOrderType.html
@@ -5410,6 +5434,42 @@ references:
   commentId: F:XRTK.Definitions.Utilities.CreateProfileMenuItemIndices.SpeechCommands
   fullName: XRTK.Definitions.Utilities.CreateProfileMenuItemIndices.SpeechCommands
   nameWithType: CreateProfileMenuItemIndices.SpeechCommands
+- uid: XRTK.Definitions.Utilities.FlattenMode
+  name: FlattenMode
+  href: api/XRTK.Definitions.Utilities.FlattenMode.html
+  commentId: T:XRTK.Definitions.Utilities.FlattenMode
+  fullName: XRTK.Definitions.Utilities.FlattenMode
+  nameWithType: FlattenMode
+- uid: XRTK.Definitions.Utilities.FlattenMode.DoNotFlatten
+  name: DoNotFlatten
+  href: api/XRTK.Definitions.Utilities.FlattenMode.html#XRTK_Definitions_Utilities_FlattenMode_DoNotFlatten
+  commentId: F:XRTK.Definitions.Utilities.FlattenMode.DoNotFlatten
+  fullName: XRTK.Definitions.Utilities.FlattenMode.DoNotFlatten
+  nameWithType: FlattenMode.DoNotFlatten
+- uid: XRTK.Definitions.Utilities.FlattenMode.FlattenAuto
+  name: FlattenAuto
+  href: api/XRTK.Definitions.Utilities.FlattenMode.html#XRTK_Definitions_Utilities_FlattenMode_FlattenAuto
+  commentId: F:XRTK.Definitions.Utilities.FlattenMode.FlattenAuto
+  fullName: XRTK.Definitions.Utilities.FlattenMode.FlattenAuto
+  nameWithType: FlattenMode.FlattenAuto
+- uid: XRTK.Definitions.Utilities.FlattenMode.FlattenX
+  name: FlattenX
+  href: api/XRTK.Definitions.Utilities.FlattenMode.html#XRTK_Definitions_Utilities_FlattenMode_FlattenX
+  commentId: F:XRTK.Definitions.Utilities.FlattenMode.FlattenX
+  fullName: XRTK.Definitions.Utilities.FlattenMode.FlattenX
+  nameWithType: FlattenMode.FlattenX
+- uid: XRTK.Definitions.Utilities.FlattenMode.FlattenY
+  name: FlattenY
+  href: api/XRTK.Definitions.Utilities.FlattenMode.html#XRTK_Definitions_Utilities_FlattenMode_FlattenY
+  commentId: F:XRTK.Definitions.Utilities.FlattenMode.FlattenY
+  fullName: XRTK.Definitions.Utilities.FlattenMode.FlattenY
+  nameWithType: FlattenMode.FlattenY
+- uid: XRTK.Definitions.Utilities.FlattenMode.FlattenZ
+  name: FlattenZ
+  href: api/XRTK.Definitions.Utilities.FlattenMode.html#XRTK_Definitions_Utilities_FlattenMode_FlattenZ
+  commentId: F:XRTK.Definitions.Utilities.FlattenMode.FlattenZ
+  fullName: XRTK.Definitions.Utilities.FlattenMode.FlattenZ
+  nameWithType: FlattenMode.FlattenZ
 - uid: XRTK.Definitions.Utilities.Handedness
   name: Handedness
   href: api/XRTK.Definitions.Utilities.Handedness.html
@@ -9266,6 +9326,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.TransformExtensions.IsParentOrChildOf
   nameWithType: TransformExtensions.IsParentOrChildOf
+- uid: XRTK.Extensions.TransformExtensions.ScaleAround(UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Vector3)
+  name: ScaleAround(Transform, Vector3, Vector3)
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_ScaleAround_UnityEngine_Transform_UnityEngine_Vector3_UnityEngine_Vector3_
+  commentId: M:XRTK.Extensions.TransformExtensions.ScaleAround(UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Vector3)
+  fullName: XRTK.Extensions.TransformExtensions.ScaleAround(UnityEngine.Transform, UnityEngine.Vector3, UnityEngine.Vector3)
+  nameWithType: TransformExtensions.ScaleAround(Transform, Vector3, Vector3)
+- uid: XRTK.Extensions.TransformExtensions.ScaleAround*
+  name: ScaleAround
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_ScaleAround_
+  commentId: Overload:XRTK.Extensions.TransformExtensions.ScaleAround
+  isSpec: "True"
+  fullName: XRTK.Extensions.TransformExtensions.ScaleAround
+  nameWithType: TransformExtensions.ScaleAround
 - uid: XRTK.Extensions.TransformExtensions.SetCollidersActive(UnityEngine.Transform,System.Boolean)
   name: SetCollidersActive(Transform, Boolean)
   href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_SetCollidersActive_UnityEngine_Transform_System_Boolean_
@@ -9279,6 +9352,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.TransformExtensions.SetCollidersActive
   nameWithType: TransformExtensions.SetCollidersActive
+- uid: XRTK.Extensions.TransformExtensions.SetLayerRecursively(UnityEngine.Transform,System.Int32)
+  name: SetLayerRecursively(Transform, Int32)
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_SetLayerRecursively_UnityEngine_Transform_System_Int32_
+  commentId: M:XRTK.Extensions.TransformExtensions.SetLayerRecursively(UnityEngine.Transform,System.Int32)
+  fullName: XRTK.Extensions.TransformExtensions.SetLayerRecursively(UnityEngine.Transform, System.Int32)
+  nameWithType: TransformExtensions.SetLayerRecursively(Transform, Int32)
+- uid: XRTK.Extensions.TransformExtensions.SetLayerRecursively*
+  name: SetLayerRecursively
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_SetLayerRecursively_
+  commentId: Overload:XRTK.Extensions.TransformExtensions.SetLayerRecursively
+  isSpec: "True"
+  fullName: XRTK.Extensions.TransformExtensions.SetLayerRecursively
+  nameWithType: TransformExtensions.SetLayerRecursively
 - uid: XRTK.Extensions.TransformExtensions.TransformSize(UnityEngine.Transform,UnityEngine.Vector3)
   name: TransformSize(Transform, Vector3)
   href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_TransformSize_UnityEngine_Transform_UnityEngine_Vector3_

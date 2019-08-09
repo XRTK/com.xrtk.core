@@ -18,9 +18,15 @@ Our philosophy is to enable developers to focus on building content and structur
 
 We’d like to invite all the major hardware vendors to help guide their platform specific implementations, from Microsoft’s Windows Mixed Reality and Magic Leap’s Lumin OS to Google’s ARCore and Apple’s ARKit.  Including any upcoming Mixed Reality capable devices that would like to be included for adoption.
 
-## [Join us on Slack](https://holodevelopersslack.azurewebsites.net/)
+## Chat with the community
 
-There are many channels on Slack, covering the wide variety of Mixed Reality platforms out there, as well as a dedicated XRTK channel for discussing XRTK implementations.
+We recently moved our main converastions regarding XRTK over to Discord, which allows us to do a lot more (and the chat / streaming there is awesome), but we keep an XRTK presence on Slack too, in order to retain links to our friends on there
+
+### Come join us!
+
+|[Discord](https://t.co/UeUSVjnoIZ?amp=1) | [Slack](https://holodevelopersslack.azurewebsites.net/)|
+|---|---|
+|[![Discord](https://cdn0.iconfinder.com/data/icons/free-social-media-set/24/discord-128.png)](https://t.co/UeUSVjnoIZ?amp=1) |[![Slack](https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-08-128.png)](https://holodevelopersslack.azurewebsites.net/) |
 
 # Build Status
 
@@ -30,9 +36,12 @@ There are many channels on Slack, covering the wide variety of Mixed Reality pla
 |[UPM](https://github.com/XRTK/UpmGitExtension)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.UpmGitExtension%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=19)|
 |[WMR](https://github.com/XRTK/WindowsMixedReality)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.WMR%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=21)|
 |[Lumin](https://github.com/XRTK/Lumin)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.Lumin%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=29)|
+|[Oculus](https://github.com/XRTK/Oculus)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.Oculus%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=30)|
 |[SDK](https://github.com/XRTK/SDK)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.SDK%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=23)|
 
 # Supported Platforms
+
+By default, we support OpenVR on all platforms that support the standard, as well as Native SDK implementations for various vendors.
 
 - [x] Linux
 - [x] OSX Standalone
@@ -43,14 +52,19 @@ There are many channels on Slack, covering the wide variety of Mixed Reality pla
 - [ ] WebAssembly
     - [ ] WebVR
     - [ ] WebXR
-- [x] Windows Standalone
-    - [x] Open VR
-    - [ ] Steam VR
+- [x] Open VR
+- [ ] Open XR
 - [x] [Windows Mixed Reality](https://github.com/XRTK/WindowsMixedReality)
     - [x] HoloLens
     - [x] Windows Mixed Reality HMDs
     - [ ] HoloLens 2
 - [x] [Lumin (aka Magic Leap)](https://github.com/XRTK/Lumin)
+- [x] [Native Oculus API](https://github.com/XRTK/Oculus)
+    - [x] Windows Standalone (aka Rift)
+    - [x] Android (aka Quest)
+- [ ] Native Steam VR
+    - [ ] HTC Vive
+    - [ ] Vive Index
 
 # FAQ
 

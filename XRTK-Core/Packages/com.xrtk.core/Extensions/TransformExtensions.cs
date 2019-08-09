@@ -301,6 +301,11 @@ namespace XRTK.Extensions
 
                     if (t2 == null)
                     {
+                        if (t1 == null)
+                        {
+                            break;
+                        }
+
                         t1 = t1.parent;
                         t2 = t2root;
                     }
@@ -323,6 +328,47 @@ namespace XRTK.Extensions
             {
                 colliders[i].enabled = isActive;
             }
+        }
+
+        /// <summary>
+        /// Sets the physics layer on this and all child <see cref="Transform"/>s with the provided value.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="layer"></param>
+        public static void SetLayerRecursively(this Transform transform, int layer)
+        {
+            transform.gameObject.layer = layer;
+
+            for (int i = 0; i < transform.childCount; i++)
+            {
+                var child = transform.GetChild(i);
+                child.gameObject.layer = layer;
+            }
+        }
+
+        /// <summary>
+        /// Scales the target <see cref="Transform"/> by the provided <see cref="pivot"/> position using the
+        /// provided <see cref="scale"/>.
+        /// <para/>
+        /// Similar to how <seealso cref="Transform.Rotate(Vector3,Space)"/> works.
+        /// </summary>
+        /// <remarks>
+        /// https://answers.unity.com/questions/14170/scaling-an-object-from-a-different-center.html
+        /// </remarks>
+        /// <param name="target"></param>
+        /// <param name="pivot"></param>
+        /// <param name="scale"></param>
+        public static void ScaleAround(this Transform target, Vector3 pivot, Vector3 scale)
+        {
+            var A = target.localPosition;
+            var B = pivot;
+            var C = A - B; // diff from object pivot to desired pivot/origin
+            var RS = scale.x / target.localScale.x; // relative scale factor
+            var FP = B + C * RS; // calc final position post-scale
+
+            // finally, actually perform the scale / translation
+            target.localScale = scale;
+            target.localPosition = FP;
         }
     }
 }

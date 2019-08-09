@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class TransformExtensions
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.43.3.0">
+    <meta name="generator" content="docfx 2.44.0.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -728,10 +728,59 @@ If no colliders attached, returns a bounds of center and extents 0</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_TransformExtensions_ScaleAround_UnityEngine_Transform_UnityEngine_Vector3_UnityEngine_Vector3_.md&amp;value=---%0Auid%3A%20XRTK.Extensions.TransformExtensions.ScaleAround(UnityEngine.Transform%2CUnityEngine.Vector3%2CUnityEngine.Vector3)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Extensions/TransformExtensions.cs/#L361">View Source</a>
+  </span>
+  <a id="XRTK_Extensions_TransformExtensions_ScaleAround_" data-uid="XRTK.Extensions.TransformExtensions.ScaleAround*"></a>
+  <h4 id="XRTK_Extensions_TransformExtensions_ScaleAround_UnityEngine_Transform_UnityEngine_Vector3_UnityEngine_Vector3_" data-uid="XRTK.Extensions.TransformExtensions.ScaleAround(UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Vector3)">ScaleAround(Transform, Vector3, Vector3)</h4>
+  <div class="markdown level1 summary"><p>Scales the target <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Transform.html">Transform</a> by the provided <see cref="!:pivot"></see> position using the
+provided <see cref="!:scale"></see>.</p>
+<p>
+Similar to how <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Transform.html#UnityEngine_Transform_Rotate_UnityEngine_Vector3_UnityEngine_Space_">Rotate(Vector3, Space)</a> works.
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void ScaleAround(this Transform target, Vector3 pivot, Vector3 scale)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Transform.html">Transform</a></td>
+        <td><span class="parametername">target</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">pivot</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td><span class="parametername">scale</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="XRTK_Extensions_TransformExtensions_ScaleAround_UnityEngine_Transform_UnityEngine_Vector3_UnityEngine_Vector3__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p><a href="https://answers.unity.com/questions/14170/scaling-an-object-from-a-different-center.html">https://answers.unity.com/questions/14170/scaling-an-object-from-a-different-center.html</a></p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_TransformExtensions_SetCollidersActive_UnityEngine_Transform_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Extensions.TransformExtensions.SetCollidersActive(UnityEngine.Transform%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Extensions/TransformExtensions.cs/#L318">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Extensions/TransformExtensions.cs/#L323">View Source</a>
   </span>
   <a id="XRTK_Extensions_TransformExtensions_SetCollidersActive_" data-uid="XRTK.Extensions.TransformExtensions.SetCollidersActive*"></a>
   <h4 id="XRTK_Extensions_TransformExtensions_SetCollidersActive_UnityEngine_Transform_System_Boolean_" data-uid="XRTK.Extensions.TransformExtensions.SetCollidersActive(UnityEngine.Transform,System.Boolean)">SetCollidersActive(Transform, Boolean)</h4>
@@ -760,6 +809,44 @@ If no colliders attached, returns a bounds of center and extents 0</p>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
         <td><span class="parametername">isActive</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_TransformExtensions_SetLayerRecursively_UnityEngine_Transform_System_Int32_.md&amp;value=---%0Auid%3A%20XRTK.Extensions.TransformExtensions.SetLayerRecursively(UnityEngine.Transform%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Extensions/TransformExtensions.cs/#L338">View Source</a>
+  </span>
+  <a id="XRTK_Extensions_TransformExtensions_SetLayerRecursively_" data-uid="XRTK.Extensions.TransformExtensions.SetLayerRecursively*"></a>
+  <h4 id="XRTK_Extensions_TransformExtensions_SetLayerRecursively_UnityEngine_Transform_System_Int32_" data-uid="XRTK.Extensions.TransformExtensions.SetLayerRecursively(UnityEngine.Transform,System.Int32)">SetLayerRecursively(Transform, Int32)</h4>
+  <div class="markdown level1 summary"><p>Sets the physics layer on this and all child <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Transform.html">Transform</a>s with the provided value.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void SetLayerRecursively(this Transform transform, int layer)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Transform.html">Transform</a></td>
+        <td><span class="parametername">transform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">layer</span></td>
         <td></td>
       </tr>
     </tbody>

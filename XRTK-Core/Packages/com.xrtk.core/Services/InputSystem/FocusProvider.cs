@@ -190,14 +190,6 @@ namespace XRTK.Services.InputSystem
 
             public void UpdateHit(PointerHitResult hitResult)
             {
-                if (hitResult.HitObject != CurrentPointerTarget)
-                {
-                    // Pointer.OnPreCurrentPointerTargetChange();
-
-                    // Set to default:
-                    Pointer.IsTargetPositionLockedOnFocusLock = true;
-                }
-
                 PreviousPointerTarget = CurrentPointerTarget;
 
                 focusDetails.Object = hitResult.HitObject;
@@ -254,7 +246,8 @@ namespace XRTK.Services.InputSystem
             {
                 PreviousPointerTarget = focusDetails.Object;
 
-                if (focusDetails.Object != null && focusDetails.Object.transform != null)
+                if (focusDetails.Object != null &&
+                    focusDetails.Object.transform != null)
                 {
                     // In case the focused object is moving, we need to update the focus point based on the object's new transform.
                     focusDetails.Point = focusDetails.Object.transform.TransformPoint(focusDetails.PointLocalSpace);
@@ -700,7 +693,8 @@ namespace XRTK.Services.InputSystem
                 // If the pointer is locked, keep the focused object the same.
                 // This will ensure that we execute events on those objects
                 // even if the pointer isn't pointing at them.
-                if (pointer.Pointer.IsFocusLocked && pointer.Pointer.IsTargetPositionLockedOnFocusLock)
+                if (pointer.Pointer.IsFocusLocked &&
+                    pointer.Pointer.IsTargetPositionLockedOnFocusLock)
                 {
                     pointer.UpdateFocusLockedHit();
                 }
@@ -726,7 +720,8 @@ namespace XRTK.Services.InputSystem
                     }
 
                     // Make sure to keep focus on the previous object if focus is locked (no target position lock here).
-                    if (pointer.Pointer.IsFocusLocked && pointer.Pointer.Result?.CurrentPointerTarget != null)
+                    if (pointer.Pointer.IsFocusLocked &&
+                        pointer.Pointer.Result.CurrentPointerTarget != null)
                     {
                         currentHitResult.HitObject = pointer.Pointer.Result.CurrentPointerTarget;
                     }
@@ -747,28 +742,28 @@ namespace XRTK.Services.InputSystem
 
         #region Physics Raycasting
 
-        private PointerHitResult GetPrioritizedHitResult(PointerHitResult hit1, PointerHitResult hit2, LayerMask[] prioritizedLayerMasks)
+        private static PointerHitResult GetPrioritizedHitResult(PointerHitResult hit1, PointerHitResult hit2, LayerMask[] prioritizedLayerMasks)
         {
-            if (hit1.HitObject != null && hit2.HitObject != null)
+            if (hit1.HitObject == null || hit2.HitObject == null)
             {
-                // Check layer prioritization.
-                if (prioritizedLayerMasks.Length > 1)
-                {
-                    // Get the index in the prioritized layer masks
-                    int layerIndex1 = hit1.HitObject.layer.FindLayerListIndex(prioritizedLayerMasks);
-                    int layerIndex2 = hit2.HitObject.layer.FindLayerListIndex(prioritizedLayerMasks);
-
-                    if (layerIndex1 != layerIndex2)
-                    {
-                        return (layerIndex1 < layerIndex2) ? hit1 : hit2;
-                    }
-                }
-
-                // Check which hit is closer.
-                return hit1.RayDistance < hit2.RayDistance ? hit1 : hit2;
+                return hit1.HitObject != null ? hit1 : hit2;
             }
 
-            return hit1.HitObject != null ? hit1 : hit2;
+            // Check layer prioritization.
+            if (prioritizedLayerMasks.Length > 1)
+            {
+                // Get the index in the prioritized layer masks
+                int layerIndex1 = hit1.HitObject.layer.FindLayerListIndex(prioritizedLayerMasks);
+                int layerIndex2 = hit2.HitObject.layer.FindLayerListIndex(prioritizedLayerMasks);
+
+                if (layerIndex1 != layerIndex2)
+                {
+                    return (layerIndex1 < layerIndex2) ? hit1 : hit2;
+                }
+            }
+
+            // Check which hit is closer.
+            return hit1.RayDistance < hit2.RayDistance ? hit1 : hit2;
         }
 
         /// <summary>

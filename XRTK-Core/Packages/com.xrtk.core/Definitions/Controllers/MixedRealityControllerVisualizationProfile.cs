@@ -5,6 +5,7 @@ using System;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
@@ -14,6 +15,19 @@ namespace XRTK.Providers.Controllers
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Visualization Profile", fileName = "MixedRealityControllerVisualizationProfile", order = (int)CreateProfileMenuItemIndices.ControllerVisualization)]
     public class MixedRealityControllerVisualizationProfile : BaseMixedRealityProfile
     {
+        [SerializeField]
+        [Tooltip("Profile for configuring hands visualization.")]
+        private MixedRealityHandControllerVisualizationProfile handVisualizationProfile;
+
+        /// <summary>
+        /// Profile for configuring hands visualization.
+        /// </summary>
+        public MixedRealityHandControllerVisualizationProfile HandVisualizationProfile
+        {
+            get { return handVisualizationProfile; }
+            private set { handVisualizationProfile = value; }
+        }
+
         [SerializeField]
         [Tooltip("Enable and configure the controller rendering of the Motion Controllers on Startup.")]
         private bool renderMotionControllers = false;

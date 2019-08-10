@@ -4,8 +4,7 @@
 namespace XRTK.Definitions.Devices
 {
     /// <summary>
-    /// The SDKType lists the XR SDKs that are supported by the Mixed Reality Toolkit.
-    /// Initially, this lists proposed SDKs, not all may be implemented at this time (please see ReleaseNotes for more details)
+    /// The SupportedControllerType lists the XR controller types that are supported by the Mixed Reality Toolkit.
     /// </summary>
     public enum SupportedControllerType
     {
@@ -22,6 +21,7 @@ namespace XRTK.Definitions.Devices
         Mouse,
         Lumin,
         OculusGo,
-        OculusQuest
+        OculusQuest,
+        Hand
     }
 }

@@ -5,10 +5,10 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Definitions.HandTracking
+namespace XRTK.Definitions.Controllers
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Hand Tracking Profile", fileName = "MixedRealityHandTrackingProfile", order = (int)CreateProfileMenuItemIndices.HandTracking)]
-    public class MixedRealityHandTrackingProfile : BaseMixedRealityProfile
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Hand Controller Visualization Profile", fileName = "MixedRealityHandControllerVisualizationProfile", order = (int)CreateProfileMenuItemIndices.ControllerVisualization)]
+    public class MixedRealityHandControllerVisualizationProfile : BaseMixedRealityProfile
     {
         [SerializeField]
         [Tooltip("The joint prefab to use.")]

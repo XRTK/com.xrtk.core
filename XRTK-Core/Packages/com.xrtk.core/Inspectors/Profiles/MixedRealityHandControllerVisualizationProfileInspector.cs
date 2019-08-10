@@ -3,13 +3,13 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions.HandTracking;
+using XRTK.Definitions.Controllers;
 using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles
 {
-    [CustomEditor(typeof(MixedRealityHandTrackingProfile))]
-    public class MixedRealityHandTrackingProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(MixedRealityHandControllerVisualizationProfile))]
+    public class MixedRealityHandControllerVisualizationProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty jointPrefab;
         private SerializedProperty palmPrefab;
@@ -17,9 +17,6 @@ namespace XRTK.Inspectors.Profiles
         private SerializedProperty handMeshPrefab;
         private SerializedProperty enableHandMeshVisualization;
         private SerializedProperty enableHandJointVisualization;
-
-        private const string ProfileTitle = "Hand Tracking Settings";
-        private const string ProfileDescription = "Use this for platform-specific hand tracking settings.";
 
         protected override void OnEnable()
         {
@@ -38,7 +35,7 @@ namespace XRTK.Inspectors.Profiles
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
             if (thisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Configuration Profile"))
+                GUILayout.Button("Back to Visualization Profile"))
             {
                 Selection.activeObject = thisProfile.ParentProfile;
             }
@@ -47,13 +44,18 @@ namespace XRTK.Inspectors.Profiles
 
             serializedObject.Update();
 
-            EditorGUILayout.LabelField("General settings", EditorStyles.boldLabel);
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Tracked Hand Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(jointPrefab);
             EditorGUILayout.PropertyField(palmPrefab);
             EditorGUILayout.PropertyField(fingertipPrefab);
             EditorGUILayout.PropertyField(handMeshPrefab);
             EditorGUILayout.PropertyField(enableHandMeshVisualization);
             EditorGUILayout.PropertyField(enableHandJointVisualization);
+
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Virtual Hand Settings", EditorStyles.boldLabel);
+            EditorGUILayout.HelpBox("Not available yet. Here you will find settings for VR hands once available.", MessageType.Info);
 
             serializedObject.ApplyModifiedProperties();
         }

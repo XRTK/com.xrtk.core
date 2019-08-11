@@ -1,6 +1,6 @@
 ﻿using XRTK.Interfaces.Providers.Controllers;
 
-namespace XRTK.Providers.Controllers
+namespace XRTK.Definitions.Controllers
 {
     /// <summary>
     /// Base speech data provider to inherit from when implementing <see cref="IMixedRealitySpeechDataProvider"/>s

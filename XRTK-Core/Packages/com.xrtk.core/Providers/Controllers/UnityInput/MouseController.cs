@@ -8,7 +8,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 
-namespace XRTK.Providers.Controllers.UnityInput
+namespace XRTK.Definitions.Controllers.UnityInput
 {
     /// <summary>
     /// Manages the mouse using unity input system.

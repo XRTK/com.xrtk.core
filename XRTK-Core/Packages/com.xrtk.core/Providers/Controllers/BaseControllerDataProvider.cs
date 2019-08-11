@@ -9,7 +9,7 @@ using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 using Object = UnityEngine.Object;
 
-namespace XRTK.Providers.Controllers
+namespace XRTK.Definitions.Controllers
 {
     /// <summary>
     /// Base controller data provider to inherit from when implementing <see cref="IMixedRealityControllerDataProvider"/>s

@@ -3,10 +3,9 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Providers.Controllers
+namespace XRTK.Definitions.Controllers
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Mapping Profiles", fileName = "MixedRealityControllerMappingProfiles", order = (int)CreateProfileMenuItemIndices.ControllerMappings)]
     public class MixedRealityControllerMappingProfiles : BaseMixedRealityProfile

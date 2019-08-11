@@ -11,7 +11,7 @@ using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Data;
 using XRTK.Inspectors.Utilities;
-using XRTK.Providers.Controllers;
+using XRTK.Definitions.Controllers;
 using XRTK.Utilities.Editor;
 
 namespace XRTK.Inspectors

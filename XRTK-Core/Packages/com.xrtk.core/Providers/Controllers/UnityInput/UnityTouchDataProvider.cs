@@ -9,7 +9,7 @@ using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 using XRTK.Utilities;
 
-namespace XRTK.Providers.Controllers.UnityInput
+namespace XRTK.Definitions.Controllers.UnityInput
 {
     /// <summary>
     /// Manages Touch devices using unity input system.

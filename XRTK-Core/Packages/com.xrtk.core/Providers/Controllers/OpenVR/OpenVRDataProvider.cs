@@ -3,12 +3,12 @@
 
 using System;
 using UnityEngine;
-using XRTK.Providers.Controllers.UnityInput;
+using XRTK.Definitions.Controllers.UnityInput;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Services;
 
-namespace XRTK.Providers.Controllers.OpenVR
+namespace XRTK.Definitions.Controllers.OpenVR
 {
     /// <summary>
     /// Manages Open VR Devices using unity's input system.

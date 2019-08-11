@@ -8,7 +8,7 @@ using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 using XRTK.Utilities.Physics;
 
-namespace XRTK.Providers.Controllers.UnityInput
+namespace XRTK.Definitions.Controllers.UnityInput
 {
     /// <summary>
     /// The mouse data provider.

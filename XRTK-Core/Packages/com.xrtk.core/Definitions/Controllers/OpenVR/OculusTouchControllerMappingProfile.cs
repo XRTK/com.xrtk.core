@@ -5,7 +5,7 @@ using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Providers.Controllers.OpenVR
+namespace XRTK.Definitions.Controllers.OpenVR
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Mappings/Oculus Touch Controller Mapping Profile", fileName = "OculusTouchControllerMappingProfile")]
     public class OculusTouchControllerMappingProfile : BaseMixedRealityControllerMappingProfile

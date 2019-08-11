@@ -10,7 +10,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 
-namespace XRTK.Providers.Controllers.UnityInput
+namespace XRTK.Definitions.Controllers.UnityInput
 {
     /// <summary>
     /// Manages joysticks using unity input system.

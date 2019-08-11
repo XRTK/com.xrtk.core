@@ -3,8 +3,9 @@
 
 namespace XRTK.Interfaces.Providers.InputSystem.Simulation
 {
-    public interface IMixedRealitySimulationDataProvider : IMixedRealityDataProvider
-    {
-
-    }
+    /// <summary>
+    /// Data providers implementing this interface will be selectable in the <see cref="Definitions.InputSystem.Simulation.MixedRealitySimulationDataProvidersProfile"/>
+    /// <see cref="Definitions.InputSystem.Simulation.SimulationDataProviderConfiguration"/> dropdown.
+    /// </summary>
+    public interface IMixedRealitySimulationDataProvider : IMixedRealityDataProvider { }
 }

@@ -21,8 +21,8 @@ namespace XRTK.Providers.InputSystem.Simulation
     {
         private HandTrackingSimulationDataProviderProfile profile;
         private SimulatedHandDataProvider handDataProvider = null;
-        private long lastHandDeviceUpdateTimeStamp = 0;
-        private readonly Dictionary<Handedness, SimulatedHand> trackedHands = new Dictionary<Handedness, SimulatedHand>();
+        private long lastHandControllerUpdateTimeStamp = 0;
+        private readonly Dictionary<Handedness, SimulatedHand> trackedHandControllers = new Dictionary<Handedness, SimulatedHand>();
 
         /// <summary>
         /// Gets left hand simulated data.
@@ -39,10 +39,13 @@ namespace XRTK.Providers.InputSystem.Simulation
         /// </summary>
         public bool UserInputEnabled { get; private set; } = true;
 
+        /// <inheritdoc />
+        public override IMixedRealityController[] GetActiveControllers() => trackedHandControllers.Values.ToArray();
+
         /// <summary>
         /// Dictionary to capture all active hands detected.
         /// </summary>
-        public IReadOnlyDictionary<Handedness, SimulatedHand> TrackedHands => trackedHands;
+        public IReadOnlyDictionary<Handedness, SimulatedHand> TrackedHands => trackedHandControllers;
 
         public HandTrackingSimulationDataProvider(string name, uint priority, HandTrackingSimulationDataProviderProfile profile)
             : base(name, priority, profile)
@@ -68,7 +71,7 @@ namespace XRTK.Providers.InputSystem.Simulation
         /// <inheritdoc />
         public override void Disable()
         {
-            RemoveAllHandDevices();
+            RemoveAllHandControllers();
 
             if (handDataProvider != null)
             {
@@ -93,20 +96,20 @@ namespace XRTK.Providers.InputSystem.Simulation
             if (profile.SimulateHandTracking)
             {
                 DateTime currentTime = DateTime.UtcNow;
-                double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandDeviceUpdateTimeStamp)).TotalMilliseconds;
+                double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandControllerUpdateTimeStamp)).TotalMilliseconds;
                 // TODO implement custom hand device update frequency here, use 1000/fps instead of 0
                 if (msSinceLastHandUpdate > 0)
                 {
-                    if (HandDataLeft.Timestamp > lastHandDeviceUpdateTimeStamp)
+                    if (HandDataLeft.Timestamp > lastHandControllerUpdateTimeStamp)
                     {
                         UpdateHandInputSource(Handedness.Left, HandDataLeft);
                     }
-                    if (HandDataRight.Timestamp > lastHandDeviceUpdateTimeStamp)
+                    if (HandDataRight.Timestamp > lastHandControllerUpdateTimeStamp)
                     {
                         UpdateHandInputSource(Handedness.Right, HandDataRight);
                     }
 
-                    lastHandDeviceUpdateTimeStamp = currentTime.Ticks;
+                    lastHandControllerUpdateTimeStamp = currentTime.Ticks;
                 }
             }
         }
@@ -116,55 +119,43 @@ namespace XRTK.Providers.InputSystem.Simulation
         {
             if (!profile.SimulateHandTracking)
             {
-                RemoveAllHandDevices();
+                RemoveAllHandControllers();
             }
             else
             {
                 if (handData != null && handData.IsTracked)
                 {
-                    SimulatedHand controller = GetOrAddHandDevice(handedness);
-                    controller.UpdateState(handData);
+                    SimulatedHand controller = GetOrAddHandController(handedness);
+                    if (controller != null)
+                    {
+                        controller.UpdateState(handData);
+                    }
+                    else
+                    {
+                        Debug.LogError($"Failed to create {typeof(SimulatedArticulatedHand)} controller");
+                    }
                 }
                 else
                 {
-                    RemoveHandDevice(handedness);
+                    RemoveHandController(handedness);
                 }
             }
         }
 
-        private SimulatedHand GetHandDevice(Handedness handedness)
+        private SimulatedHand GetOrAddHandController(Handedness handedness)
         {
-            if (trackedHands.TryGetValue(handedness, out SimulatedHand controller))
-            {
-                return controller;
-            }
-            return null;
-        }
-
-        private SimulatedHand GetOrAddHandDevice(Handedness handedness)
-        {
-            var controller = GetHandDevice(handedness);
-            if (controller != null)
+            if (trackedHandControllers.TryGetValue(handedness, out SimulatedHand controller))
             {
                 return controller;
             }
 
             IMixedRealityPointer[] pointers = RequestPointers(typeof(SimulatedArticulatedHand), handedness);
-
-            var inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{handedness} Hand", pointers);
+            IMixedRealityInputSource inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{handedness} Hand", pointers);
             controller = new SimulatedArticulatedHand(TrackingState.Tracked, handedness, inputSource);
 
-            Type controllerType = typeof(SimulatedArticulatedHand);
-            if (controller == null)
-            {
-                Debug.LogError($"Failed to create {controllerType} controller");
-                return null;
-            }
-
-            if (!controller.SetupConfiguration(controllerType))
+            if (controller == null || !controller.SetupConfiguration(typeof(SimulatedArticulatedHand)))
             {
                 // Controller failed to be setup correctly.
-                Debug.LogError($"Failed to Setup {controllerType} controller");
                 // Return null so we don't raise the source detected.
                 return null;
             }
@@ -176,30 +167,32 @@ namespace XRTK.Providers.InputSystem.Simulation
 
             MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);
 
-            trackedHands.Add(handedness, controller);
+            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile.RenderMotionControllers)
+            {
+                controller.TryRenderControllerModel(typeof(SimulatedArticulatedHand));
+            }
 
+            trackedHandControllers.Add(handedness, controller);
             return controller;
         }
 
-        private void RemoveHandDevice(Handedness handedness)
+        private void RemoveHandController(Handedness handedness)
         {
-            var controller = GetHandDevice(handedness);
-            if (controller != null)
+            if (trackedHandControllers.TryGetValue(handedness, out SimulatedHand controller))
             {
                 MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
-
-                trackedHands.Remove(handedness);
+                trackedHandControllers.Remove(handedness);
             }
         }
 
-        private void RemoveAllHandDevices()
+        private void RemoveAllHandControllers()
         {
-            foreach (var controller in trackedHands.Values)
+            foreach (var controller in trackedHandControllers.Values)
             {
                 MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
             }
 
-            trackedHands.Clear();
+            trackedHandControllers.Clear();
         }
     }
 }

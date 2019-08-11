@@ -13,7 +13,6 @@ namespace XRTK.Services.InputSystem.Simulation
     public abstract class SimulatedHand : BaseHandController
     {
         protected static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
-
         protected readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
 
         /// <summary>
@@ -48,11 +47,9 @@ namespace XRTK.Services.InputSystem.Simulation
                 }
             }
 
-
             //MixedRealityToolkit.InputSystem.RaiseHandJointsUpdated(InputSource, ControllerHandedness, jointPoses);
 
             UpdateVelocity();
-
             UpdateInteractions(handData);
         }
 

@@ -13,7 +13,7 @@ namespace XRTK.Definitions.Devices
     /// </summary>
     /// <remarks>One definition should exist for each physical device input, such as buttons, triggers, joysticks, dpads, and more.</remarks>
     [Serializable]
-    public class MixedRealityInteractionMapping
+    public struct MixedRealityInteractionMapping
     {
         /// <summary>
         /// The constructor for a new Interaction Mapping definition
@@ -47,6 +47,8 @@ namespace XRTK.Definitions.Devices
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
             changed = false;
+            updated = false;
+            inputName = string.Empty;
         }
 
         /// <summary>
@@ -75,6 +77,10 @@ namespace XRTK.Definitions.Devices
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
             changed = false;
+            updated = false;
+            inputName = string.Empty;
+            invertXAxis = false;
+            invertYAxis = false;
         }
 
         /// <summary>
@@ -103,6 +109,10 @@ namespace XRTK.Definitions.Devices
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
             changed = false;
+            updated = false;
+            keyCode = KeyCode.None;
+            invertXAxis = false;
+            invertYAxis = false;
         }
 
         /// <summary>
@@ -138,6 +148,8 @@ namespace XRTK.Definitions.Devices
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
             changed = false;
+            updated = false;
+            inputName = string.Empty;
         }
 
         /// <summary>
@@ -173,6 +185,8 @@ namespace XRTK.Definitions.Devices
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
             changed = false;
+            updated = false;
+            keyCode = KeyCode.None;
         }
 
         public MixedRealityInteractionMapping(MixedRealityInteractionMapping mixedRealityInteractionMapping)
@@ -196,6 +210,7 @@ namespace XRTK.Definitions.Devices
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
             changed = false;
+            updated = false;
         }
 
         #region Interaction Properties
@@ -287,7 +302,7 @@ namespace XRTK.Definitions.Devices
 
         [SerializeField]
         [Tooltip("Should the X axis be inverted?")]
-        private bool invertXAxis = false;
+        private bool invertXAxis;
 
         /// <summary>
         /// Should the X axis be inverted?
@@ -312,7 +327,7 @@ namespace XRTK.Definitions.Devices
 
         [SerializeField]
         [Tooltip("Should the Y axis be inverted?")]
-        private bool invertYAxis = false;
+        private bool invertYAxis;
 
         /// <summary>
         /// Should the Y axis be inverted?

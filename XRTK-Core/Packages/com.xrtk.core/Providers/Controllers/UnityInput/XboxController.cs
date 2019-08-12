@@ -6,7 +6,7 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 
-namespace XRTK.Definitions.Controllers.UnityInput
+namespace XRTK.Providers.Controllers.UnityInput
 {
     /// <summary>
     /// Xbox Controller using Unity Input System

@@ -8,7 +8,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 
-namespace XRTK.Definitions.Controllers.UnityInput
+namespace XRTK.Providers.Controllers.UnityInput
 {
     public class UnityTouchController : BaseController
     {

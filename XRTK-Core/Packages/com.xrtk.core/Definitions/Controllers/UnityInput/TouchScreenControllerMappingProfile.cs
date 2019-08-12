@@ -4,6 +4,7 @@
 using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers.UnityInput;
 
 namespace XRTK.Definitions.Controllers.UnityInput.Profiles
 {

@@ -3,12 +3,12 @@
 
 using UnityEditor;
 using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Inspectors.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Definitions.Controllers;
-using XRTK.Definitions.Controllers.UnityInput;
+using XRTK.Providers.Controllers.UnityInput;
 
 namespace XRTK.Inspectors.Profiles
 {

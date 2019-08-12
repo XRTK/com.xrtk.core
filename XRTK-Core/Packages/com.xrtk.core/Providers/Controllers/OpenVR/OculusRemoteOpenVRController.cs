@@ -6,7 +6,7 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 
-namespace XRTK.Definitions.Controllers.OpenVR
+namespace XRTK.Providers.Controllers.OpenVR
 {
     public class OculusRemoteOpenVRController : GenericOpenVRController
     {

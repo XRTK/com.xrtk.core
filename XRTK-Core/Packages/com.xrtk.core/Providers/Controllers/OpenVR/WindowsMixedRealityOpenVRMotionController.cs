@@ -7,7 +7,7 @@ using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 
-namespace XRTK.Definitions.Controllers.OpenVR
+namespace XRTK.Providers.Controllers.OpenVR
 {
     /// <summary>
     /// Open VR Implementation of the Windows Mixed Reality Motion Controllers.

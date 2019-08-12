@@ -3,13 +3,14 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 using Object = UnityEngine.Object;
 
-namespace XRTK.Definitions.Controllers
+namespace XRTK.Providers.Controllers
 {
     /// <summary>
     /// Base controller data provider to inherit from when implementing <see cref="IMixedRealityControllerDataProvider"/>s

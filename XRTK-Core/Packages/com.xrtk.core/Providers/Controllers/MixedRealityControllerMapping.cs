@@ -9,7 +9,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Providers.Controllers;
 
-namespace XRTK.Definitions.Controllers
+namespace XRTK.Providers.Controllers
 {
     /// <summary>
     /// Used to define a controller or other input device's physical buttons, and other attributes.

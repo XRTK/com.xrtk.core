@@ -10,7 +10,7 @@ namespace XRTK.Inspectors.Data
     /// Used to aid in layout of Controller Input Actions.
     /// </summary>
     [Serializable]
-    public class ControllerInputActionOptions
+    public struct ControllerInputActionOptions
     {
         public List<ControllerInputActionOption> Controllers;
     }

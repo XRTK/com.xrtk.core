@@ -11,7 +11,7 @@ using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Data;
 using XRTK.Inspectors.Utilities;
-using XRTK.Providers.Controllers;
+using XRTK.Definitions.Controllers;
 using XRTK.Utilities.Editor;
 
 namespace XRTK.Inspectors
@@ -260,14 +260,12 @@ namespace XRTK.Inspectors
                 {
                     window.currentControllerOption = controllerInputActionOptions.Controllers.FirstOrDefault(option => option.Controller == controllerType && option.Handedness == handedness);
 
-                    if (window.currentControllerOption != null &&
-                        window.currentControllerOption.IsLabelFlipped == null)
+                    if (window.currentControllerOption.IsLabelFlipped == null)
                     {
                         window.currentControllerOption.IsLabelFlipped = new bool[interactionsList.arraySize];
                     }
 
-                    if (window.currentControllerOption != null &&
-                        window.currentControllerOption.InputLabelPositions == null)
+                    if (window.currentControllerOption.InputLabelPositions == null)
                     {
                         window.currentControllerOption.InputLabelPositions = new Vector2[interactionsList.arraySize];
                     }
@@ -333,7 +331,7 @@ namespace XRTK.Inspectors
 
             bool noInteractions = interactionList.arraySize == 0;
 
-            if (currentControllerOption != null)
+            if (!useCustomInteractionMapping)
             {
                 if (currentControllerOption.IsLabelFlipped.Length != interactionList.arraySize)
                 {
@@ -676,7 +674,7 @@ namespace XRTK.Inspectors
 
                     EditorGUI.BeginChangeCheck();
 
-                    if (currentControllerOption == null || currentControllerTexture == null)
+                    if (currentControllerTexture == null)
                     {
                         bool skip = false;
                         var description = interactionDescription.stringValue;

@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.Physics;
 using XRTK.EventDatum.Input;
 using XRTK.Interfaces.InputSystem.Handlers;
 
@@ -38,11 +37,11 @@ namespace XRTK.Interfaces.InputSystem
         GameObject GetFocusedObject(IMixedRealityPointer pointingSource);
 
         /// <summary>
-        /// Gets the currently focused object for the pointing source.
+        /// Gets the current pointer result for the pointing source.
         /// </summary>
         /// <param name="pointer"></param>
-        /// <param name="focusDetails"></param>
-        bool TryGetFocusDetails(IMixedRealityPointer pointer, out FocusDetails focusDetails);
+        /// <param name="pointerResult"></param>
+        bool TryGetFocusDetails(IMixedRealityPointer pointer, out IPointerResult pointerResult);
 
         /// <summary>
         /// Get the Graphic Event Data for the specified pointing source.

@@ -33,11 +33,6 @@ namespace XRTK.Services.Teleportation
         private Vector3 targetPosition = Vector3.zero;
         private Vector3 targetRotation = Vector3.zero;
 
-        /// <summary>
-        /// only used to clean up event system when shutting down if this system created one.
-        /// </summary>
-        private GameObject eventSystemReference = null;
-
         #region IMixedRealityService Implementation
 
         /// <inheritdoc />
@@ -48,24 +43,6 @@ namespace XRTK.Services.Teleportation
             if (!Application.isPlaying) { return; }
 
             teleportEventData = new TeleportEventData(EventSystem.current);
-        }
-
-        /// <inheritdoc />
-        public override void Destroy()
-        {
-            base.Destroy();
-
-            if (eventSystemReference != null)
-            {
-                if (Application.isEditor)
-                {
-                    Object.DestroyImmediate(eventSystemReference);
-                }
-                else
-                {
-                    Object.Destroy(eventSystemReference);
-                }
-            }
         }
 
         #endregion IMixedRealityService Implementation
@@ -224,7 +201,7 @@ namespace XRTK.Services.Teleportation
 
             targetRotation = Vector3.zero;
             targetRotation.y = eventData.Pointer.PointerOrientation;
-            targetPosition = eventData.Pointer.Result.Details.Point;
+            targetPosition = eventData.Pointer.Result.EndPoint;
 
             if (eventData.HotSpot != null)
             {

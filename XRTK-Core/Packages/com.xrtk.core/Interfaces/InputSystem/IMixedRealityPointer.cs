@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections;
+using JetBrains.Annotations;
 using UnityEngine;
 using XRTK.Definitions.Physics;
 using XRTK.Interfaces.InputSystem.Handlers;
@@ -57,16 +58,6 @@ namespace XRTK.Interfaces.InputSystem
         bool IsInteractionEnabled { get; }
 
         /// <summary>
-        /// Is the focus for this pointer currently locked?
-        /// </summary>
-        bool IsFocusLocked { get; set; }
-
-        /// <summary>
-        /// Specifies whether the pointer's target position (cursor) is locked to the target object when focus is locked.
-        /// </summary>
-        bool IsTargetPositionLockedOnFocusLock { get; set; }
-
-        /// <summary>
         /// The pointer's extent when raycasting.
         /// </summary>
         float PointerExtent { get; set; }
@@ -96,14 +87,38 @@ namespace XRTK.Interfaces.InputSystem
         LayerMask[] PrioritizedLayerMasksOverride { get; set; }
 
         /// <summary>
-        /// The currently focused target.
+        /// The currently targeted focus handler.
         /// </summary>
-        IMixedRealityFocusHandler FocusTarget { get; set; }
+        IMixedRealityFocusHandler FocusHandler { get; set; }
+
+        /// <summary>
+        /// The currently targeted input handler.
+        /// </summary>
+        IMixedRealityInputHandler InputHandler { get; set; }
 
         /// <summary>
         /// The physics raycast pointer result.
         /// </summary>
+        [NotNull]
         IPointerResult Result { get; set; }
+
+        /// <summary>
+        /// Is the focus currently locked to the current <see cref="IPointerResult.CurrentPointerTarget"/>?
+        /// </summary>
+        /// <remarks>
+        /// This effectively means that the focused <see cref="IPointerResult.CurrentPointerTarget"/> result cannot be changed,
+        /// even though the focus data may return hit information that is not the <see cref="IPointerResult.CurrentPointerTarget"/>.
+        /// </remarks>
+        bool IsFocusLocked { get; set; }
+
+        /// <summary>
+        /// Is the <see cref="IPointerResult.CurrentPointerTarget"/>'s position is locked in sync with the <see cref="Result"/> position?
+        /// </summary>
+        /// <remarks>
+        /// When true, the <see cref="IPointerResult.CurrentPointerTarget"/>s position will also be updated to move in sync with the <see cref="Result"/> position.
+        /// This position is calculated using the offset of the offset between the <see cref="IPointerResult.CurrentPointerTarget"/> position and the <see cref="Result"/> position.
+        /// </remarks>
+        bool SyncPointerTargetPosition { get; set; }
 
         /// <summary>
         /// Ray stabilizer used when calculating position of pointer end point.

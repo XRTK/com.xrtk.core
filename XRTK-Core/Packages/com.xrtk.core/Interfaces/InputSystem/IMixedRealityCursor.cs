@@ -17,14 +17,9 @@ namespace XRTK.Interfaces.InputSystem
         IMixedRealityPointer Pointer { get; set; }
 
         /// <summary>
-        /// Surface distance to place the cursor off of the surface at
+        /// Surface distance to place the cursor off of the surface at the pointers raycast hit position.
         /// </summary>
         float SurfaceCursorDistance { get; }
-
-        /// <summary>
-        /// The maximum distance the cursor can be with nothing hit
-        /// </summary>
-        float DefaultCursorDistance { get; set; }
 
         /// <summary>
         /// Position of the <see cref="IMixedRealityCursor"/>.

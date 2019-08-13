@@ -3,8 +3,10 @@
 
 using UnityEngine;
 using XRTK.Definitions.Devices;
+using XRTK.Providers.Controllers;
+using XRTK.Providers.Controllers.OpenVR;
 
-namespace XRTK.Providers.Controllers.OpenVR
+namespace XRTK.Definitions.Controllers.OpenVR
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Mappings/Oculus Remote Controller Mapping Profile", fileName = "OculusRemoteControllerMappingProfile")]
     public class OculusRemoteControllerMappingProfile : BaseMixedRealityControllerMappingProfile

@@ -4,7 +4,7 @@
 using UnityEditor;
 using XRTK.Inspectors.Profiles;
 
-namespace XRTK.Providers.Controllers.OpenVR.Inspectors.Profiles
+namespace XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles
 {
     [CustomEditor(typeof(OculusRemoteControllerMappingProfile))]
     public class OculusRemoteControllerMappingProfileInspector : BaseMixedRealityControllerMappingProfileInspector { }

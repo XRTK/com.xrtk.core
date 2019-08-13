@@ -6,7 +6,7 @@ using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Providers.Controllers;
+using XRTK.Definitions.Controllers;
 using XRTK.Services;
 
 namespace XRTK.Definitions.InputSystem

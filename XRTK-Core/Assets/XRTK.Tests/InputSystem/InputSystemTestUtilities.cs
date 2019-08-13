@@ -3,7 +3,7 @@
 
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
-using XRTK.Providers.Controllers;
+using XRTK.Definitions.Controllers;
 using XRTK.Services.InputSystem;
 using XRTK.Tests.InputSystem.TestAssets;
 

@@ -13,7 +13,7 @@ namespace XRTK.Definitions.Devices
     /// </summary>
     /// <remarks>One definition should exist for each physical device input, such as buttons, triggers, joysticks, dpads, and more.</remarks>
     [Serializable]
-    public struct MixedRealityInteractionMapping
+    public class MixedRealityInteractionMapping
     {
         /// <summary>
         /// The constructor for a new Interaction Mapping definition
@@ -421,7 +421,6 @@ namespace XRTK.Definitions.Devices
         public object RawData
         {
             get => rawData;
-
             set
             {
                 if (AxisType != AxisType.Raw)

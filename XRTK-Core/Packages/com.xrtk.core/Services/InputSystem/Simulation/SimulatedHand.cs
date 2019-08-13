@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.Providers.InputSystem.Simulation;
 using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Services.InputSystem.Simulation
@@ -14,6 +15,9 @@ namespace XRTK.Services.InputSystem.Simulation
     {
         protected static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
         protected readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
+
+        private IHandTrackingSimulationDataProvider dataProvider;
+        private IHandTrackingSimulationDataProvider DataProvider => dataProvider ?? (dataProvider = MixedRealityToolkit.GetService<IHandTrackingSimulationDataProvider>());
 
         /// <summary>
         /// Constructor.
@@ -47,7 +51,7 @@ namespace XRTK.Services.InputSystem.Simulation
                 }
             }
 
-            //MixedRealityToolkit.InputSystem.RaiseHandJointsUpdated(InputSource, ControllerHandedness, jointPoses);
+            DataProvider.RaiseHandJointsUpdated(InputSource, ControllerHandedness, jointPoses);
 
             UpdateVelocity();
             UpdateInteractions(handData);

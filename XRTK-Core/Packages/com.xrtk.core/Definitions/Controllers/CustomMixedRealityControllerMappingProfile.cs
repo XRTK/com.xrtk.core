@@ -3,7 +3,7 @@
 
 using XRTK.Definitions.Devices;
 
-namespace XRTK.Providers.Controllers
+namespace XRTK.Definitions.Controllers
 {
     // No Scriptable Object Menu constructor attributes here, as this class is meant to be overwritten.
 

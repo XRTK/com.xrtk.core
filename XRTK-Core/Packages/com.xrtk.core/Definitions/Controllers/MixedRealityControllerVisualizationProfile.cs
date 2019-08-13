@@ -4,13 +4,11 @@
 using System;
 using UnityEngine;
 using XRTK.Attributes;
-using XRTK.Definitions;
-using XRTK.Definitions.Controllers;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 
-namespace XRTK.Providers.Controllers
+namespace XRTK.Definitions.Controllers
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Visualization Profile", fileName = "MixedRealityControllerVisualizationProfile", order = (int)CreateProfileMenuItemIndices.ControllerVisualization)]
     public class MixedRealityControllerVisualizationProfile : BaseMixedRealityProfile

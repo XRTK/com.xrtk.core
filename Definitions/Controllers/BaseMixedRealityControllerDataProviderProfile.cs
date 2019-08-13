@@ -1,6 +1,7 @@
-﻿using XRTK.Definitions;
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
 
-namespace XRTK.Providers.Controllers
+namespace XRTK.Definitions.Controllers
 {
     /// <summary>
     /// Provides additional information about the controller data provider other than the input mapping.

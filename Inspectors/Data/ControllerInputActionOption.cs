@@ -12,7 +12,7 @@ namespace XRTK.Inspectors.Data
     /// Used to aid in layout of Controller Input Actions.
     /// </summary>
     [Serializable]
-    public class ControllerInputActionOption
+    public struct ControllerInputActionOption
     {
         public SupportedControllerType Controller;
         public Handedness Handedness;

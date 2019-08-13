@@ -2,10 +2,10 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Definitions.Devices;
+using XRTK.Providers.Controllers;
 
-namespace XRTK.Providers.Controllers
+namespace XRTK.Definitions.Controllers
 {
     /// <summary>
     /// Base Controller Mapping profile.
@@ -52,7 +52,7 @@ namespace XRTK.Providers.Controllers
             {
                 // this path is meaningless outside of the editor.
 #if UNITY_EDITOR
-                return $"{Utilities.Editor.MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/StandardAssets/Textures/";
+                return $"{XRTK.Utilities.Editor.MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/StandardAssets/Textures/";
 #else
                 return string.Empty;
 #endif

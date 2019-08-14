@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using XRTK.Definitions;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.EventDatum.SpatialAwarenessSystem;
 using XRTK.Interfaces.Providers.SpatialObservers;
@@ -157,12 +156,6 @@ namespace XRTK.Services.SpatialAwarenessSystem
         public void RaiseSpatialAwarenessObserverLost(IMixedRealitySpatialObserverDataProvider observer)
         {
             DetectedSpatialObservers.Remove(observer);
-        }
-
-        /// <inheritdoc />
-        public void SetMeshVisibility(SpatialMeshDisplayOptions displayOptions)
-        {
-            SpatialMeshVisibility = displayOptions;
         }
 
         #endregion IMixedRealitySpatialAwarenessSystem Implementation

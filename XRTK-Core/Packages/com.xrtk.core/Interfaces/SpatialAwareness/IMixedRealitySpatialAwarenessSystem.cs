@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.SpatialAwarenessSystem;
@@ -85,13 +84,6 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         void RaiseSpatialAwarenessObserverLost(IMixedRealitySpatialObserverDataProvider observer);
 
         #endregion Observer Events
-
-        /// <summary>
-        /// Sets the provided mesh <see cref="SpatialMeshDisplayOptions"/> on all the <see cref="DetectedSpatialObservers"/>
-        /// </summary>
-        /// <param name="displayOptions"></param>
-        [Obsolete("Use SpatialMeshVisibility instead")]
-        void SetMeshVisibility(SpatialMeshDisplayOptions displayOptions);
 
         #region Mesh Events
 

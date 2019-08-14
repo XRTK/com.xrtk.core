@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections;
-using JetBrains.Annotations;
 using UnityEngine;
 using XRTK.Definitions.Physics;
 using XRTK.Interfaces.InputSystem.Handlers;
@@ -97,9 +96,8 @@ namespace XRTK.Interfaces.InputSystem
         IMixedRealityInputHandler InputHandler { get; set; }
 
         /// <summary>
-        /// The physics raycast pointer result.
+        /// The combined physics and graphics raycast pointer result.
         /// </summary>
-        [NotNull]
         IPointerResult Result { get; set; }
 
         /// <summary>

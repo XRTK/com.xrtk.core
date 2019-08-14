@@ -350,13 +350,9 @@ namespace XRTK.Inspectors.Utilities
                     buildTarget = BuildTarget.iOS;
                     return true;
                 case "LinuxStandalone32":
-                    buildTarget = BuildTarget.StandaloneLinux;
-                    return true;
                 case "LinuxStandalone64":
-                    buildTarget = BuildTarget.StandaloneLinux64;
-                    return true;
                 case "LinuxStandaloneUniversal":
-                    buildTarget = BuildTarget.StandaloneLinuxUniversal;
+                    buildTarget = BuildTarget.StandaloneLinux64;
                     return true;
                 case "macOSStandalone":
                     buildTarget = BuildTarget.StandaloneOSX;

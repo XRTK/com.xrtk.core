@@ -1,4 +1,5 @@
-﻿using XRTK.Interfaces.Providers.Controllers;
+﻿using XRTK.Definitions.Controllers;
+using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Providers.Controllers
 {

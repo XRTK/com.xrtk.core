@@ -4,7 +4,7 @@
 using UnityEditor;
 using XRTK.Inspectors.Profiles;
 
-namespace XRTK.Providers.Controllers.UnityInput.Profiles.Inspectors
+namespace XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors
 {
     [CustomEditor(typeof(TouchScreenControllerMappingProfile))]
     public class TouchScreenControllerMappingProfileInspector : BaseMixedRealityControllerMappingProfileInspector { }

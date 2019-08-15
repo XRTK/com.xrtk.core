@@ -11,6 +11,8 @@ namespace XRTK.Services.CameraSystem
 {
     public class MixedRealityCameraSystem : BaseSystem, IMixedRealityCameraSystem
     {
+        private CameraEditorControls editorControls;
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -53,6 +55,11 @@ namespace XRTK.Services.CameraSystem
         /// <inheritdoc />
         public override void Initialize()
         {
+            if (Application.isEditor && profile.IsCameraControlEnabled)
+            {
+                editorControls = new CameraEditorControls(profile);
+            }
+
             cameraOpaqueLastFrame = IsOpaque;
 
             if (IsOpaque)
@@ -67,7 +74,7 @@ namespace XRTK.Services.CameraSystem
 
         public override void Enable()
         {
-            if (Application.isPlaying && 
+            if (Application.isPlaying &&
                 profile.IsCameraPersistent)
             {
                 CameraCache.Main.transform.root.DontDestroyOnLoad();
@@ -77,6 +84,11 @@ namespace XRTK.Services.CameraSystem
         /// <inheritdoc />
         public override void Update()
         {
+            if (Application.isEditor && profile.IsCameraControlEnabled)
+            {
+                editorControls.Update();
+            }
+
             if (IsOpaque != cameraOpaqueLastFrame)
             {
                 cameraOpaqueLastFrame = IsOpaque;

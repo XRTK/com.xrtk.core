@@ -3,7 +3,11 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
+using XRTK.EventDatum.Input;
+using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 
@@ -11,11 +15,18 @@ namespace XRTK.Providers.Controllers.Hands
 {
     public class HandControllerDataProvider : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider
     {
+        private InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> jointPoseInputEventData;
+        private InputEventData<HandMeshUpdatedEventData> handMeshInputEventData;
+
         private IMixedRealityHandController leftHand;
         private IMixedRealityHandController rightHand;
 
         private Dictionary<TrackedHandJoint, Transform> leftHandFauxJoints = new Dictionary<TrackedHandJoint, Transform>();
         private Dictionary<TrackedHandJoint, Transform> rightHandFauxJoints = new Dictionary<TrackedHandJoint, Transform>();
+
+        public List<IMixedRealityHandJointHandler> HandJointUpdatedEventListeners { get; } = new List<IMixedRealityHandJointHandler>();
+
+        public List<IMixedRealityHandMeshHandler> HandMeshUpdatedEventListeners { get; } = new List<IMixedRealityHandMeshHandler>();
 
         /// <summary>
         /// Constructor.
@@ -25,6 +36,15 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="profile"></param>
         public HandControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
             : base(name, priority, profile) { }
+
+        /// <inheritdoc />
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            jointPoseInputEventData = new InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>>(EventSystem.current);
+            handMeshInputEventData = new InputEventData<HandMeshUpdatedEventData>(EventSystem.current);
+        }
 
         /// <inheritdoc />
         public override void LateUpdate()
@@ -109,6 +129,54 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         #region IMixedRealityHandControllerDataProvider Implementation
+
+        public void Register(GameObject listener)
+        {
+            IMixedRealityHandJointHandler handJointHandler = listener.GetComponent<IMixedRealityHandJointHandler>();
+            if (handJointHandler != null)
+            {
+                HandJointUpdatedEventListeners.Add(handJointHandler);
+            }
+
+            IMixedRealityHandMeshHandler handMeshHandler = listener.GetComponent<IMixedRealityHandMeshHandler>();
+            if (handMeshHandler != null)
+            {
+                HandMeshUpdatedEventListeners.Add(handMeshHandler);
+            }
+        }
+
+        public void Unregister(GameObject listener)
+        {
+            IMixedRealityHandJointHandler handJointHandler = listener.GetComponent<IMixedRealityHandJointHandler>();
+            if (handJointHandler != null && HandJointUpdatedEventListeners.Contains(handJointHandler))
+            {
+                HandJointUpdatedEventListeners.Remove(handJointHandler);
+            }
+
+            IMixedRealityHandMeshHandler handMeshHandler = listener.GetComponent<IMixedRealityHandMeshHandler>();
+            if (handMeshHandler != null && HandMeshUpdatedEventListeners.Contains(handMeshHandler))
+            {
+                HandMeshUpdatedEventListeners.Remove(handMeshHandler);
+            }
+        }
+
+        public void RaiseHandJointsUpdated(IMixedRealityInputSource source, Handedness handedness, IDictionary<TrackedHandJoint, MixedRealityPose> jointPoses)
+        {
+            jointPoseInputEventData.Initialize(source, handedness, MixedRealityInputAction.None, jointPoses);
+            for (int i = 0; i < HandJointUpdatedEventListeners.Count; i++)
+            {
+                HandJointUpdatedEventListeners[i].OnJointUpdated(jointPoseInputEventData);
+            }
+        }
+
+        public void RaiseHandMeshUpdated(IMixedRealityInputSource source, Handedness handedness, HandMeshUpdatedEventData handMeshInfo)
+        {
+            handMeshInputEventData.Initialize(source, handedness, MixedRealityInputAction.None, handMeshInfo);
+            for (int i = 0; i < HandMeshUpdatedEventListeners.Count; i++)
+            {
+                HandMeshUpdatedEventListeners[i].OnMeshUpdated(handMeshInputEventData);
+            }
+        }
 
         /// <inheritdoc />
         public Transform RequestJointTransform(TrackedHandJoint joint, Handedness handedness)

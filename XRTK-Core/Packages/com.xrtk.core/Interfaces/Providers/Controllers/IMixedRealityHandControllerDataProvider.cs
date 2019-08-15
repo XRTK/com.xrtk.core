@@ -22,5 +22,13 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// <param name="handedness">Hand to get tracked state for.</param>
         /// <returns>True if specified hand is tracked.</returns>
         bool IsHandTracked(Handedness handedness);
+
+        void RaiseHandJointsUpdated(Interfaces.InputSystem.IMixedRealityInputSource source, Handedness handedness, System.Collections.Generic.IDictionary<TrackedHandJoint, MixedRealityPose> jointPoses);
+
+        void RaiseHandMeshUpdated(Interfaces.InputSystem.IMixedRealityInputSource source, Handedness handedness, XRTK.Providers.Controllers.Hands.HandMeshUpdatedEventData handMeshInfo);
+
+        void Register(GameObject listener);
+
+        void Unregister(GameObject listener);
     }
 }

@@ -1,17 +1,16 @@
-﻿// Copyright (c) XRTK. All rights reserved.
+﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
-using XRTK.Services;
 using XRTK.Utilities;
 
-namespace XRTK.Providers.Camera
+namespace XRTK.Services.CameraSystem
 {
-    public class CameraEditorControlsDataProvider : BaseDataProvider
+    public class CameraEditorControls
     {
-        private MixedRealityCameraEditorControlsProfile profile;
+        private MixedRealityCameraProfile profile;
         private bool isMouseJumping = false;
         private bool isGamepadLookEnabled = true;
         private bool isFlyKeypressEnabled = true;
@@ -21,12 +20,12 @@ namespace XRTK.Providers.Camera
         private bool wasLooking = false;
         private bool wasCursorVisible = true;
 
-        public CameraEditorControlsDataProvider(string name, uint priority, MixedRealityCameraEditorControlsProfile profile) : base(name, priority)
+        public CameraEditorControls(MixedRealityCameraProfile profile)
         {
             this.profile = profile;
         }
 
-        public override void Update()
+        public void Update()
         {
             if (profile.IsCameraControlEnabled && CameraCache.Main)
             {

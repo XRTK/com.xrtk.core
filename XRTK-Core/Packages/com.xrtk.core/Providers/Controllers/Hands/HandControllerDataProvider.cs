@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using XRTK.Definitions.Controllers;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Input;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
@@ -17,6 +19,8 @@ namespace XRTK.Providers.Controllers.Hands
     {
         private InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> jointPoseInputEventData;
         private InputEventData<HandMeshUpdatedEventData> handMeshInputEventData;
+        private List<IMixedRealityHandJointHandler> handJointUpdatedEventListeners = new List<IMixedRealityHandJointHandler>();
+        private List<IMixedRealityHandMeshHandler> handMeshUpdatedEventListeners = new List<IMixedRealityHandMeshHandler>();
 
         private IMixedRealityHandController leftHand;
         private IMixedRealityHandController rightHand;
@@ -24,9 +28,9 @@ namespace XRTK.Providers.Controllers.Hands
         private Dictionary<TrackedHandJoint, Transform> leftHandFauxJoints = new Dictionary<TrackedHandJoint, Transform>();
         private Dictionary<TrackedHandJoint, Transform> rightHandFauxJoints = new Dictionary<TrackedHandJoint, Transform>();
 
-        public List<IMixedRealityHandJointHandler> HandJointUpdatedEventListeners { get; } = new List<IMixedRealityHandJointHandler>();
+        public IReadOnlyList<IMixedRealityHandJointHandler> HandJointUpdatedEventListeners => handJointUpdatedEventListeners;
 
-        public List<IMixedRealityHandMeshHandler> HandMeshUpdatedEventListeners { get; } = new List<IMixedRealityHandMeshHandler>();
+        public IReadOnlyList<IMixedRealityHandMeshHandler> HandMeshUpdatedEventListeners => handMeshUpdatedEventListeners;
 
         /// <summary>
         /// Constructor.
@@ -135,28 +139,28 @@ namespace XRTK.Providers.Controllers.Hands
             IMixedRealityHandJointHandler handJointHandler = listener.GetComponent<IMixedRealityHandJointHandler>();
             if (handJointHandler != null)
             {
-                HandJointUpdatedEventListeners.Add(handJointHandler);
+                handJointUpdatedEventListeners.Add(handJointHandler);
             }
 
             IMixedRealityHandMeshHandler handMeshHandler = listener.GetComponent<IMixedRealityHandMeshHandler>();
             if (handMeshHandler != null)
             {
-                HandMeshUpdatedEventListeners.Add(handMeshHandler);
+                handMeshUpdatedEventListeners.Add(handMeshHandler);
             }
         }
 
         public void Unregister(GameObject listener)
         {
             IMixedRealityHandJointHandler handJointHandler = listener.GetComponent<IMixedRealityHandJointHandler>();
-            if (handJointHandler != null && HandJointUpdatedEventListeners.Contains(handJointHandler))
+            if (handJointHandler != null && handJointUpdatedEventListeners.Contains(handJointHandler))
             {
-                HandJointUpdatedEventListeners.Remove(handJointHandler);
+                handJointUpdatedEventListeners.Remove(handJointHandler);
             }
 
             IMixedRealityHandMeshHandler handMeshHandler = listener.GetComponent<IMixedRealityHandMeshHandler>();
-            if (handMeshHandler != null && HandMeshUpdatedEventListeners.Contains(handMeshHandler))
+            if (handMeshHandler != null && handMeshUpdatedEventListeners.Contains(handMeshHandler))
             {
-                HandMeshUpdatedEventListeners.Remove(handMeshHandler);
+                handMeshUpdatedEventListeners.Remove(handMeshHandler);
             }
         }
 

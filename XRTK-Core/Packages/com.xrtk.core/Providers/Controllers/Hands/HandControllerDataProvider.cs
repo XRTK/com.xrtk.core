@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Input;
@@ -17,6 +17,9 @@ namespace XRTK.Providers.Controllers.Hands
 {
     public class HandControllerDataProvider : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider
     {
+        private HandControllerDataProviderProfile profile;
+
+        // Joint / Mesh update events
         private InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> jointPoseInputEventData;
         private InputEventData<HandMeshUpdatedEventData> handMeshInputEventData;
         private List<IMixedRealityHandJointHandler> handJointUpdatedEventListeners = new List<IMixedRealityHandJointHandler>();
@@ -38,8 +41,11 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="name"></param>
         /// <param name="priority"></param>
         /// <param name="profile"></param>
-        public HandControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
-            : base(name, priority, profile) { }
+        public HandControllerDataProvider(string name, uint priority, HandControllerDataProviderProfile profile)
+            : base(name, priority, profile)
+        {
+            this.profile = profile;
+        }
 
         /// <inheritdoc />
         public override void Initialize()
@@ -48,6 +54,58 @@ namespace XRTK.Providers.Controllers.Hands
 
             jointPoseInputEventData = new InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>>(EventSystem.current);
             handMeshInputEventData = new InputEventData<HandMeshUpdatedEventData>(EventSystem.current);
+        }
+
+
+        /// <inheritdoc />
+        public override void Enable()
+        {
+            for (int i = 0; i < profile.RegisteredControllerDataProviders.Length; i++)
+            {
+                HandControllerDataProviderConfiguration controllerDataProvider = profile.RegisteredControllerDataProviders[i];
+                if (!MixedRealityToolkit.CreateAndRegisterService<IMixedRealityPlatformHandControllerDataProvider>(
+                                    controllerDataProvider.DataProviderType,
+                                    controllerDataProvider.RuntimePlatform,
+                                    controllerDataProvider.DataProviderName,
+                                    controllerDataProvider.Priority,
+                                    controllerDataProvider.Profile))
+                {
+                    Debug.LogError($"Failed to start {controllerDataProvider.DataProviderName}!");
+                }
+            }
+        }
+
+        /// <inheritdoc />
+        public override void Disable()
+        {
+            MixedRealityToolkit.UnregisterServicesOfType<IMixedRealityPlatformHandControllerDataProvider>();
+
+            // Check existence of fauxJoints before destroying. This avoids a (harmless) race
+            // condition when the service is getting destroyed at the same time that the gameObjects
+            // are being destroyed at shutdown.
+            if (leftHandFauxJoints != null)
+            {
+                foreach (var fauxJoint in leftHandFauxJoints.Values)
+                {
+                    if (fauxJoint != null)
+                    {
+                        Object.Destroy(fauxJoint.gameObject);
+                    }
+                }
+                leftHandFauxJoints.Clear();
+            }
+
+            if (rightHandFauxJoints != null)
+            {
+                foreach (var fauxJoint in rightHandFauxJoints.Values)
+                {
+                    if (fauxJoint != null)
+                    {
+                        Object.Destroy(fauxJoint.gameObject);
+                    }
+                }
+                rightHandFauxJoints.Clear();
+            }
         }
 
         /// <inheritdoc />
@@ -98,37 +156,6 @@ namespace XRTK.Providers.Controllers.Hands
                         fauxJoint.Value.SetPositionAndRotation(pose.Position, pose.Rotation);
                     }
                 }
-            }
-        }
-
-        /// <inheritdoc />
-        public override void Disable()
-        {
-            // Check existence of fauxJoints before destroying. This avoids a (harmless) race
-            // condition when the service is getting destroyed at the same time that the gameObjects
-            // are being destroyed at shutdown.
-            if (leftHandFauxJoints != null)
-            {
-                foreach (var fauxJoint in leftHandFauxJoints.Values)
-                {
-                    if (fauxJoint != null)
-                    {
-                        Object.Destroy(fauxJoint.gameObject);
-                    }
-                }
-                leftHandFauxJoints.Clear();
-            }
-
-            if (rightHandFauxJoints != null)
-            {
-                foreach (var fauxJoint in rightHandFauxJoints.Values)
-                {
-                    if (fauxJoint != null)
-                    {
-                        Object.Destroy(fauxJoint.gameObject);
-                    }
-                }
-                rightHandFauxJoints.Clear();
             }
         }
 

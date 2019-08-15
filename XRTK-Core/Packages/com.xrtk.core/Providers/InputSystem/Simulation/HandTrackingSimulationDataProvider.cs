@@ -21,7 +21,7 @@ namespace XRTK.Providers.InputSystem.Simulation
     {
         private HandTrackingSimulationDataProviderProfile profile;
         private long lastHandControllerUpdateTimeStamp = 0;
-        private readonly Dictionary<Handedness, SimulatedHand> trackedHandControllers = new Dictionary<Handedness, SimulatedHand>();
+        private readonly Dictionary<Handedness, SimulatedArticulatedHand> trackedHandControllers = new Dictionary<Handedness, SimulatedArticulatedHand>();
         
         /// <summary>
         /// Gets left hand simulated data.
@@ -74,7 +74,7 @@ namespace XRTK.Providers.InputSystem.Simulation
         /// <summary>
         /// Dictionary to capture all active hands detected.
         /// </summary>
-        public IReadOnlyDictionary<Handedness, SimulatedHand> TrackedHands => trackedHandControllers;
+        public IReadOnlyDictionary<Handedness, SimulatedArticulatedHand> TrackedHands => trackedHandControllers;
 
         public HandTrackingSimulationDataProvider(string name, uint priority, HandTrackingSimulationDataProviderProfile profile)
             : base(name, priority, profile)
@@ -350,7 +350,7 @@ namespace XRTK.Providers.InputSystem.Simulation
             {
                 if (handData != null && handData.IsTracked)
                 {
-                    SimulatedHand controller = GetOrAddHandController(handedness);
+                    SimulatedArticulatedHand controller = GetOrAddHandController(handedness);
                     if (controller != null)
                     {
                         controller.UpdateState(handData);
@@ -367,9 +367,9 @@ namespace XRTK.Providers.InputSystem.Simulation
             }
         }
 
-        private SimulatedHand GetOrAddHandController(Handedness handedness)
+        private SimulatedArticulatedHand GetOrAddHandController(Handedness handedness)
         {
-            if (trackedHandControllers.TryGetValue(handedness, out SimulatedHand controller))
+            if (trackedHandControllers.TryGetValue(handedness, out SimulatedArticulatedHand controller))
             {
                 return controller;
             }
@@ -403,7 +403,7 @@ namespace XRTK.Providers.InputSystem.Simulation
 
         private void RemoveHandController(Handedness handedness)
         {
-            if (trackedHandControllers.TryGetValue(handedness, out SimulatedHand controller))
+            if (trackedHandControllers.TryGetValue(handedness, out SimulatedArticulatedHand controller))
             {
                 MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
                 trackedHandControllers.Remove(handedness);

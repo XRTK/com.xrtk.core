@@ -1,15 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.Providers.InputSystem.Simulation;
+using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Services.InputSystem.Simulation
 {
-    public class SimulatedArticulatedHand : SimulatedHand
+    public class SimulatedArticulatedHand : BaseHandController
     {
         private Vector3 currentPointerPosition = Vector3.zero;
         private Quaternion currentPointerRotation = Quaternion.identity;
@@ -18,6 +22,12 @@ namespace XRTK.Services.InputSystem.Simulation
         private MixedRealityPose currentIndexPose = MixedRealityPose.ZeroIdentity;
         private MixedRealityPose currentGripPose = MixedRealityPose.ZeroIdentity;
         private MixedRealityPose lastGripPose = MixedRealityPose.ZeroIdentity;
+
+        protected static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
+        protected readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
+
+        private IHandTrackingSimulationDataProvider dataProvider;
+        private IHandTrackingSimulationDataProvider DataProvider => dataProvider ?? (dataProvider = MixedRealityToolkit.GetService<IHandTrackingSimulationDataProvider>());
 
         /// <summary>
         /// Constructor.
@@ -44,12 +54,39 @@ namespace XRTK.Services.InputSystem.Simulation
             new MixedRealityInteractionMapping(4, "Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger, MixedRealityInputAction.None),
         };
 
+        public override bool TryGetJoint(TrackedHandJoint joint, out MixedRealityPose pose)
+        {
+            return jointPoses.TryGetValue(joint, out pose);
+        }
+
+        public void UpdateState(SimulatedHandData handData)
+        {
+            for (int i = 0; i < jointCount; i++)
+            {
+                TrackedHandJoint handJoint = (TrackedHandJoint)i;
+
+                if (!jointPoses.ContainsKey(handJoint))
+                {
+                    jointPoses.Add(handJoint, handData.Joints[i]);
+                }
+                else
+                {
+                    jointPoses[handJoint] = handData.Joints[i];
+                }
+            }
+
+            //DataProvider.RaiseHandJointsUpdated(InputSource, ControllerHandedness, jointPoses);
+
+            UpdateVelocity();
+            UpdateInteractions(handData);
+        }
+
         public override void SetupDefaultInteractions(Handedness controllerHandedness)
         {
             AssignControllerMappings(DefaultInteractions);
         }
 
-        protected override void UpdateInteractions(SimulatedHandData handData)
+        private void UpdateInteractions(SimulatedHandData handData)
         {
             lastPointerPose = currentPointerPose;
             lastGripPose = currentGripPose;

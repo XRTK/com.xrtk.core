@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Providers.Controllers.Hands;
 

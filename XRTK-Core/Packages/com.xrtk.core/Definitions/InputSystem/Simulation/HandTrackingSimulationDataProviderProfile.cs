@@ -3,8 +3,8 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
-using XRTK.Providers.Controllers;
 using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Definitions.InputSystem.Simulation

@@ -141,22 +141,46 @@ namespace XRTK.Services.InputSystem
         {
             public readonly IMixedRealityPointer Pointer;
 
+            private FocusDetails focusDetails;
+
             /// <inheritdoc />
             public Vector3 StartPoint { get; private set; }
 
             /// <inheritdoc />
-            public FocusDetails Details => focusDetails;
-
-            private FocusDetails focusDetails = new FocusDetails();
+            public Vector3 EndPoint => focusDetails.EndPoint;
 
             /// <inheritdoc />
-            public GameObject CurrentPointerTarget => Details.Object;
+            public GameObject CurrentPointerTarget => focusDetails.Object;
 
             /// <inheritdoc />
             public GameObject PreviousPointerTarget { get; private set; }
 
             /// <inheritdoc />
             public int RayStepIndex { get; private set; }
+
+            /// <inheritdoc />
+            public float RayDistance => focusDetails.RayDistance;
+
+            /// <inheritdoc />
+            public Vector3 EndPointLocalSpace => focusDetails.EndPointLocalSpace;
+
+            /// <inheritdoc />
+            public Vector3 Normal => focusDetails.Normal;
+
+            /// <inheritdoc />
+            public Vector3 NormalLocalSpace => focusDetails.NormalLocalSpace;
+
+            /// <inheritdoc />
+            public Vector3 Offset { get; private set; }
+
+            /// <inheritdoc />
+            public Vector3 OffsetLocalSpace { get; private set; }
+
+            /// <inheritdoc />
+            public RaycastHit LastRaycastHit => focusDetails.LastRaycastHit;
+
+            /// <inheritdoc />
+            public RaycastResult LastGraphicsRaycastResult => focusDetails.LastGraphicsRaycastResult;
 
             /// <summary>
             /// The graphic input event data used for raycasting uGUI elements.
@@ -185,6 +209,7 @@ namespace XRTK.Services.InputSystem
             /// <param name="pointer"></param>
             public PointerData(IMixedRealityPointer pointer)
             {
+                focusDetails = new FocusDetails();
                 Pointer = pointer;
             }
 
@@ -210,7 +235,7 @@ namespace XRTK.Services.InputSystem
                     StartPoint = hitResult.Ray.Origin;
 
                     focusDetails.RayDistance = hitResult.RayDistance;
-                    focusDetails.Point = hitResult.HitPointOnObject;
+                    focusDetails.EndPoint = hitResult.HitPointOnObject;
                     focusDetails.Normal = hitResult.HitNormalOnObject;
                 }
                 else
@@ -230,18 +255,18 @@ namespace XRTK.Services.InputSystem
                     }
 
                     focusDetails.RayDistance = rayDistance;
-                    focusDetails.Point = finalStep.Terminus;
+                    focusDetails.EndPoint = finalStep.Terminus;
                     focusDetails.Normal = -finalStep.Direction;
                 }
 
                 if (hitResult.HitObject != null)
                 {
-                    focusDetails.PointLocalSpace = hitResult.HitObject.transform.InverseTransformPoint(focusDetails.Point);
+                    focusDetails.EndPointLocalSpace = hitResult.HitObject.transform.InverseTransformPoint(focusDetails.EndPoint);
                     focusDetails.NormalLocalSpace = hitResult.HitObject.transform.InverseTransformDirection(focusDetails.Normal);
                 }
                 else
                 {
-                    focusDetails.PointLocalSpace = Vector3.zero;
+                    focusDetails.EndPointLocalSpace = Vector3.zero;
                     focusDetails.NormalLocalSpace = Vector3.zero;
                 }
             }
@@ -257,9 +282,9 @@ namespace XRTK.Services.InputSystem
                 if (focusDetails.Object != null && focusDetails.Object.transform != null)
                 {
                     // In case the focused object is moving, we need to update the focus point based on the object's new transform.
-                    focusDetails.Point = focusDetails.Object.transform.TransformPoint(focusDetails.PointLocalSpace);
+                    focusDetails.EndPoint = focusDetails.Object.transform.TransformPoint(focusDetails.EndPointLocalSpace);
                     focusDetails.Normal = focusDetails.Object.transform.TransformDirection(focusDetails.NormalLocalSpace);
-                    focusDetails.PointLocalSpace = focusDetails.Object.transform.InverseTransformPoint(focusDetails.Point);
+                    focusDetails.EndPointLocalSpace = focusDetails.Object.transform.InverseTransformPoint(focusDetails.EndPoint);
                     focusDetails.NormalLocalSpace = focusDetails.Object.transform.InverseTransformDirection(focusDetails.Normal);
                 }
 
@@ -268,7 +293,7 @@ namespace XRTK.Services.InputSystem
                 for (int i = 0; i < Pointer.Rays.Length; i++)
                 {
                     // TODO: figure out how reliable this is. Should focusDetails.RayDistance be updated?
-                    if (Pointer.Rays[i].Contains(focusDetails.Point))
+                    if (Pointer.Rays[i].Contains(focusDetails.EndPoint))
                     {
                         RayStepIndex = i;
                         break;
@@ -279,10 +304,10 @@ namespace XRTK.Services.InputSystem
             public void ResetFocusedObjects(bool clearPreviousObject = true)
             {
                 PreviousPointerTarget = clearPreviousObject ? null : CurrentPointerTarget;
-                focusDetails.Point = Details.Point;
-                focusDetails.PointLocalSpace = Details.PointLocalSpace;
-                focusDetails.Normal = Details.Normal;
-                focusDetails.NormalLocalSpace = Details.NormalLocalSpace;
+                focusDetails.EndPoint = focusDetails.EndPoint;
+                focusDetails.EndPointLocalSpace = focusDetails.EndPointLocalSpace;
+                focusDetails.Normal = focusDetails.Normal;
+                focusDetails.NormalLocalSpace = focusDetails.NormalLocalSpace;
                 focusDetails.Object = null;
             }
 
@@ -454,15 +479,15 @@ namespace XRTK.Services.InputSystem
                 return null;
             }
 
-            return !TryGetFocusDetails(pointingSource, out var focusDetails) ? null : focusDetails.Object;
+            return !TryGetFocusDetails(pointingSource, out var focusDetails) ? null : focusDetails.CurrentPointerTarget;
         }
 
         /// <inheritdoc />
-        public bool TryGetFocusDetails(IMixedRealityPointer pointer, out FocusDetails focusDetails)
+        public bool TryGetFocusDetails(IMixedRealityPointer pointer, out IPointerResult focusDetails)
         {
             if (TryGetPointerData(pointer, out var pointerData))
             {
-                focusDetails = pointerData.Details;
+                focusDetails = pointerData;
                 return true;
             }
 
@@ -678,7 +703,7 @@ namespace XRTK.Services.InputSystem
                     rayColor = Color.green;
                 }
 
-                Debug.DrawRay(pointer.StartPoint, (pointer.Details.Point - pointer.StartPoint), rayColor);
+                Debug.DrawRay(pointer.StartPoint, (pointer.EndPoint - pointer.StartPoint), rayColor);
             }
         }
 

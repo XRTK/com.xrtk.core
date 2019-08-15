@@ -404,7 +404,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_CancelAction.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.CancelAction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L112">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L115">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_CancelAction_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.CancelAction*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_CancelAction" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.CancelAction">CancelAction</h4>
@@ -432,10 +432,199 @@ nudge, rotate, and scale the object.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_IsBeingHeld.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.IsBeingHeld%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L286">View Source</a>
+  </span>
+  <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_IsBeingHeld_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.IsBeingHeld*"></a>
+  <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_IsBeingHeld" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.IsBeingHeld">IsBeingHeld</h4>
+  <div class="markdown level1 summary"><p>The current status of the hold.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsBeingHeld { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="XRTK_SDK_Input_Handlers_ManipulationHandler_IsBeingHeld_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Used to determine if the <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a> is currently being manipulated by the user.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_IsNudgePossible.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.IsNudgePossible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L326">View Source</a>
+  </span>
+  <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_IsNudgePossible_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.IsNudgePossible*"></a>
+  <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_IsNudgePossible" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.IsNudgePossible">IsNudgePossible</h4>
+  <div class="markdown level1 summary"><p>Is nudge possible?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsNudgePossible { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_IsPressed.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.IsPressed%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L311">View Source</a>
+  </span>
+  <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_IsPressed_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.IsPressed*"></a>
+  <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_IsPressed" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.IsPressed">IsPressed</h4>
+  <div class="markdown level1 summary"><p>Is the <span class="xref">XRTK.SDK.Input.Handlers.ManipulationHandler.primaryInputSource</span> currently pressed?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsPressed { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_IsRotating.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotating%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L316">View Source</a>
+  </span>
+  <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_IsRotating_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotating*"></a>
+  <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_IsRotating" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotating">IsRotating</h4>
+  <div class="markdown level1 summary"><p>Is there currently a manipulation processing a rotation?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsRotating { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_IsRotationPossible.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotationPossible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L331">View Source</a>
+  </span>
+  <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_IsRotationPossible_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotationPossible*"></a>
+  <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_IsRotationPossible" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotationPossible">IsRotationPossible</h4>
+  <div class="markdown level1 summary"><p>Is rotation possible?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsRotationPossible { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_IsScalingPossible.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.IsScalingPossible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L321">View Source</a>
+  </span>
+  <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_IsScalingPossible_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.IsScalingPossible*"></a>
+  <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_IsScalingPossible" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.IsScalingPossible">IsScalingPossible</h4>
+  <div class="markdown level1 summary"><p>Is scaling possible?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsScalingPossible { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_NudgeAction.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeAction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L99">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L102">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_NudgeAction_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeAction*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_NudgeAction" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeAction">NudgeAction</h4>
@@ -466,7 +655,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_NudgeAmount.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeAmount%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L241">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L257">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_NudgeAmount_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeAmount*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_NudgeAmount" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeAmount">NudgeAmount</h4>
@@ -497,7 +686,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_NudgeConstraints.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeConstraints%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L254">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L270">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_NudgeConstraints_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeConstraints*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_NudgeConstraints" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeConstraints">NudgeConstraints</h4>
@@ -528,7 +717,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_NudgeZone.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeZone%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L227">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L243">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_NudgeZone_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeZone*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_NudgeZone" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeZone">NudgeZone</h4>
@@ -562,7 +751,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_PressThreshold.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.PressThreshold%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L60">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L63">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_PressThreshold_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.PressThreshold*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_PressThreshold" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.PressThreshold">PressThreshold</h4>
@@ -592,7 +781,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_RotateAction.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.RotateAction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L73">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L76">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_RotateAction_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.RotateAction*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_RotateAction" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.RotateAction">RotateAction</h4>
@@ -623,7 +812,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_RotationAngleActivation.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.RotationAngleActivation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L209">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L225">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_RotationAngleActivation_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.RotationAngleActivation*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_RotationAngleActivation" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.RotationAngleActivation">RotationAngleActivation</h4>
@@ -654,7 +843,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_RotationZone.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.RotationZone%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L195">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L211">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_RotationZone_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.RotationZone*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_RotationZone" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.RotationZone">RotationZone</h4>
@@ -688,7 +877,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_ScaleAction.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.ScaleAction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L86">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L89">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_ScaleAction_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.ScaleAction*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_ScaleAction" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.ScaleAction">ScaleAction</h4>
@@ -719,7 +908,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_ScaleAmount.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.ScaleAmount%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L164">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L180">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_ScaleAmount_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.ScaleAmount*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_ScaleAmount" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.ScaleAmount">ScaleAmount</h4>
@@ -750,7 +939,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_ScaleConstraints.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.ScaleConstraints%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L177">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L193">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_ScaleConstraints_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.ScaleConstraints*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_ScaleConstraints" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.ScaleConstraints">ScaleConstraints</h4>
@@ -781,7 +970,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_ScaleZone.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.ScaleZone%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L151">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L167">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_ScaleZone_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.ScaleZone*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_ScaleZone" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.ScaleZone">ScaleZone</h4>
@@ -815,7 +1004,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_SelectAction.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.SelectAction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L37">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L40">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_SelectAction_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.SelectAction*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_SelectAction" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.SelectAction">SelectAction</h4>
@@ -843,10 +1032,41 @@ nudge, rotate, and scale the object.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_SpatialMeshVisibility.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.SpatialMeshVisibility%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L138">View Source</a>
+  </span>
+  <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_SpatialMeshVisibility_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.SpatialMeshVisibility*"></a>
+  <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_SpatialMeshVisibility" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.SpatialMeshVisibility">SpatialMeshVisibility</h4>
+  <div class="markdown level1 summary"><p>The spatial mesh visibility while manipulating an object.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SpatialMeshDisplayOptions SpatialMeshVisibility { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.SpatialAwarenessSystem.SpatialMeshDisplayOptions.html">SpatialMeshDisplayOptions</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_TouchpadPressAction.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.TouchpadPressAction%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L50">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L53">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_TouchpadPressAction_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.TouchpadPressAction*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_TouchpadPressAction" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.TouchpadPressAction">TouchpadPressAction</h4>
@@ -877,7 +1097,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_UseHold.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.UseHold%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L135">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L151">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_UseHold_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.UseHold*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_UseHold" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.UseHold">UseHold</h4>
@@ -907,14 +1127,30 @@ nudge, rotate, and scale the object.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_Awake.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.Awake%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L347">View Source</a>
+  </span>
+  <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_Awake_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.Awake*"></a>
+  <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_Awake" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.Awake">Awake()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Awake()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_BeginHold_XRTK_EventDatum_Input_MixedRealityPointerEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.BeginHold(XRTK.EventDatum.Input.MixedRealityPointerEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L600">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L688">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_BeginHold_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.BeginHold*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_BeginHold_XRTK_EventDatum_Input_MixedRealityPointerEventData_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.BeginHold(XRTK.EventDatum.Input.MixedRealityPointerEventData)">BeginHold(MixedRealityPointerEventData)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Begin a new hold on the manipulation target.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -939,10 +1175,66 @@ nudge, rotate, and scale the object.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_CalculateNudgeDistance_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__System_Single_.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateNudgeDistance(XRTK.EventDatum.Input.InputEventData%7BUnityEngine.Vector2%7D%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L625">View Source</a>
+  </span>
+  <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_CalculateNudgeDistance_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateNudgeDistance*"></a>
+  <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_CalculateNudgeDistance_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__System_Single_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateNudgeDistance(XRTK.EventDatum.Input.InputEventData{UnityEngine.Vector2},System.Single)">CalculateNudgeDistance(InputEventData&lt;Vector2&gt;, Single)</h4>
+  <div class="markdown level1 summary"><p>Calculates the extent of the nudge.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual float CalculateNudgeDistance(InputEventData&lt;Vector2&gt; eventData, float prevExtent)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.EventDatum.Input.InputEventData-1.html">InputEventData</a>&lt;<a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector2.html">Vector2</a>&gt;</td>
+        <td><span class="parametername">eventData</span></td>
+        <td><p>The event data.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">prevExtent</span></td>
+        <td><p>The previous extent distance of the pointer and raycast.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><p>The new pointer extent.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_EndHold_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.EndHold(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L634">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L741">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_EndHold_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.EndHold*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_EndHold_System_Boolean_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.EndHold(System.Boolean)">EndHold(Boolean)</h4>
@@ -976,7 +1268,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_OnDisable.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.OnDisable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L315">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L373">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnDisable_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnDisable*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnDisable" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnDisable">OnDisable()</h4>
@@ -993,7 +1285,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_OnInputChanged_XRTK_EventDatum_Input_InputEventData_System_Single__.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.OnInputChanged(XRTK.EventDatum.Input.InputEventData%7BSystem.Single%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L354">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L412">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnInputChanged_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnInputChanged*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnInputChanged_XRTK_EventDatum_Input_InputEventData_System_Single__" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnInputChanged(XRTK.EventDatum.Input.InputEventData{System.Single})">OnInputChanged(InputEventData&lt;Single&gt;)</h4>
@@ -1025,7 +1317,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.OnInputChanged(XRTK.EventDatum.Input.InputEventData%7BUnityEngine.Vector2%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L392">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L452">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnInputChanged_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnInputChanged*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnInputChanged(XRTK.EventDatum.Input.InputEventData{UnityEngine.Vector2})">OnInputChanged(InputEventData&lt;Vector2&gt;)</h4>
@@ -1057,7 +1349,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_OnInputDown_XRTK_EventDatum_Input_InputEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.OnInputDown(XRTK.EventDatum.Input.InputEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L330">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L388">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnInputDown_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnInputDown*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnInputDown_XRTK_EventDatum_Input_InputEventData_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnInputDown(XRTK.EventDatum.Input.InputEventData)">OnInputDown(InputEventData)</h4>
@@ -1090,7 +1382,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_OnInputUp_XRTK_EventDatum_Input_InputEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.OnInputUp(XRTK.EventDatum.Input.InputEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L342">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L400">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnInputUp_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnInputUp*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnInputUp_XRTK_EventDatum_Input_InputEventData_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnInputUp(XRTK.EventDatum.Input.InputEventData)">OnInputUp(InputEventData)</h4>
@@ -1123,7 +1415,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_OnPointerClicked_XRTK_EventDatum_Input_MixedRealityPointerEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.OnPointerClicked(XRTK.EventDatum.Input.MixedRealityPointerEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L594">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L678">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnPointerClicked_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnPointerClicked*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnPointerClicked_XRTK_EventDatum_Input_MixedRealityPointerEventData_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnPointerClicked(XRTK.EventDatum.Input.MixedRealityPointerEventData)">OnPointerClicked(MixedRealityPointerEventData)</h4>
@@ -1156,7 +1448,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_OnPointerDown_XRTK_EventDatum_Input_MixedRealityPointerEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.OnPointerDown(XRTK.EventDatum.Input.MixedRealityPointerEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L551">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L635">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnPointerDown_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnPointerDown*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnPointerDown_XRTK_EventDatum_Input_MixedRealityPointerEventData_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnPointerDown(XRTK.EventDatum.Input.MixedRealityPointerEventData)">OnPointerDown(MixedRealityPointerEventData)</h4>
@@ -1189,7 +1481,7 @@ nudge, rotate, and scale the object.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_OnPointerUp_XRTK_EventDatum_Input_MixedRealityPointerEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.OnPointerUp(XRTK.EventDatum.Input.MixedRealityPointerEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L565">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L649">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnPointerUp_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnPointerUp*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_OnPointerUp_XRTK_EventDatum_Input_MixedRealityPointerEventData_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.OnPointerUp(XRTK.EventDatum.Input.MixedRealityPointerEventData)">OnPointerUp(MixedRealityPointerEventData)</h4>
@@ -1217,6 +1509,21 @@ nudge, rotate, and scale the object.</p>
       </tr>
     </tbody>
   </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler_Update.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L357">View Source</a>
+  </span>
+  <a id="XRTK_SDK_Input_Handlers_ManipulationHandler_Update_" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.Update*"></a>
+  <h4 id="XRTK_SDK_Input_Handlers_ManipulationHandler_Update" data-uid="XRTK.SDK.Input.Handlers.ManipulationHandler.Update">Update()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Update()</code></pre>
+  </div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerHandler.html">IMixedRealityPointerHandler</a>
@@ -1260,7 +1567,7 @@ nudge, rotate, and scale the object.</p>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_ManipulationHandler.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.ManipulationHandler%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L20" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/ManipulationHandler.cs/#L21" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

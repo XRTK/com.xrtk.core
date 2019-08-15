@@ -215,14 +215,6 @@ namespace XRTK.Services.InputSystem
 
             public void UpdateHit(PointerHitResult hitResult)
             {
-                if (hitResult.HitObject != CurrentPointerTarget)
-                {
-                    // Pointer.OnPreCurrentPointerTargetChange();
-
-                    // Set to default:
-                    Pointer.IsTargetPositionLockedOnFocusLock = true;
-                }
-
                 PreviousPointerTarget = CurrentPointerTarget;
 
                 focusDetails.Object = hitResult.HitObject;
@@ -725,7 +717,7 @@ namespace XRTK.Services.InputSystem
                 // If the pointer is locked, keep the focused object the same.
                 // This will ensure that we execute events on those objects
                 // even if the pointer isn't pointing at them.
-                if (pointer.Pointer.IsFocusLocked && pointer.Pointer.IsTargetPositionLockedOnFocusLock)
+                if (pointer.Pointer.IsFocusLocked && pointer.Pointer.SyncPointerTargetPosition)
                 {
                     pointer.UpdateFocusLockedHit();
                 }

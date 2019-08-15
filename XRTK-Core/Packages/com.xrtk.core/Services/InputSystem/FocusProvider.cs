@@ -743,17 +743,17 @@ namespace XRTK.Services.InputSystem
                     }
 
                     // Make sure to keep focus on the previous object if focus is locked (no target position lock here).
-                    if (pointer.Pointer.IsFocusLocked && pointer.Pointer.Result?.CurrentPointerTarget != null)
+                    if (pointer.Pointer.IsFocusLocked && pointer.Pointer.Result.CurrentPointerTarget != null)
                     {
                         currentHitResult.HitObject = pointer.Pointer.Result.CurrentPointerTarget;
                     }
 
                     // Apply the hit result only now so changes in the current target are detected only once per frame.
                     pointer.UpdateHit(currentHitResult);
-
-                    // Set the pointer's result last
-                    pointer.Pointer.Result = pointer;
                 }
+
+                // Set the pointer's result last
+                pointer.Pointer.Result = pointer;
             }
 
             // Call the pointer's OnPostRaycast function

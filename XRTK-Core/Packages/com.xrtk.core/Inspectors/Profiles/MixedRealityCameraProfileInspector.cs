@@ -25,22 +25,6 @@ namespace XRTK.Inspectors.Profiles
         private readonly GUIContent nearClipTitle = new GUIContent("Near Clip");
         private readonly GUIContent clearFlagsTitle = new GUIContent("Clear Flags");
 
-        private SerializedProperty isCameraControlEnabled;
-        private SerializedProperty extraMouseSensitivityScale;
-        private SerializedProperty defaultMouseSensitivity;
-        private SerializedProperty mouseLookButton;
-        private SerializedProperty isControllerLookInverted;
-        private SerializedProperty currentControlMode;
-        private SerializedProperty fastControlKey;
-        private SerializedProperty controlSlowSpeed;
-        private SerializedProperty controlFastSpeed;
-        private SerializedProperty moveHorizontal;
-        private SerializedProperty moveVertical;
-        private SerializedProperty mouseX;
-        private SerializedProperty mouseY;
-        private SerializedProperty lookHorizontal;
-        private SerializedProperty lookVertical;
-
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -55,22 +39,6 @@ namespace XRTK.Inspectors.Profiles
             transparentClearFlags = serializedObject.FindProperty("cameraClearFlagsTransparentDisplay");
             transparentBackgroundColor = serializedObject.FindProperty("backgroundColorTransparentDisplay");
             transparentQualityLevel = serializedObject.FindProperty("transparentQualityLevel");
-
-            isCameraControlEnabled = serializedObject.FindProperty("isCameraControlEnabled");
-            extraMouseSensitivityScale = serializedObject.FindProperty("extraMouseSensitivityScale");
-            defaultMouseSensitivity = serializedObject.FindProperty("defaultMouseSensitivity");
-            mouseLookButton = serializedObject.FindProperty("mouseLookButton");
-            isControllerLookInverted = serializedObject.FindProperty("isControllerLookInverted");
-            currentControlMode = serializedObject.FindProperty("currentControlMode");
-            fastControlKey = serializedObject.FindProperty("fastControlKey");
-            controlSlowSpeed = serializedObject.FindProperty("controlSlowSpeed");
-            controlFastSpeed = serializedObject.FindProperty("controlFastSpeed");
-            moveHorizontal = serializedObject.FindProperty("moveHorizontal");
-            moveVertical = serializedObject.FindProperty("moveVertical");
-            mouseX = serializedObject.FindProperty("mouseX");
-            mouseY = serializedObject.FindProperty("mouseY");
-            lookHorizontal = serializedObject.FindProperty("lookHorizontal");
-            lookVertical = serializedObject.FindProperty("lookVertical");
         }
 
         public override void OnInspectorGUI()
@@ -118,31 +86,6 @@ namespace XRTK.Inspectors.Profiles
             }
 
             transparentQualityLevel.intValue = EditorGUILayout.Popup("Quality Setting", transparentQualityLevel.intValue, QualitySettings.names);
-
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Editor Controls Settings:", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(isCameraControlEnabled);
-            {
-                EditorGUILayout.BeginVertical("Label");
-
-                EditorGUILayout.PropertyField(extraMouseSensitivityScale);
-                EditorGUILayout.PropertyField(defaultMouseSensitivity);
-                EditorGUILayout.PropertyField(mouseLookButton);
-                EditorGUILayout.PropertyField(isControllerLookInverted);
-                EditorGUILayout.PropertyField(currentControlMode);
-                EditorGUILayout.PropertyField(fastControlKey);
-                EditorGUILayout.PropertyField(controlSlowSpeed);
-                EditorGUILayout.PropertyField(controlFastSpeed);
-                EditorGUILayout.PropertyField(moveHorizontal);
-                EditorGUILayout.PropertyField(moveVertical);
-                EditorGUILayout.PropertyField(mouseX);
-                EditorGUILayout.PropertyField(mouseY);
-                EditorGUILayout.PropertyField(lookHorizontal);
-                EditorGUILayout.PropertyField(lookVertical);
-
-                EditorGUILayout.EndVertical();
-
-            }
 
             serializedObject.ApplyModifiedProperties();
         }

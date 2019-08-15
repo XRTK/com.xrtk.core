@@ -145,19 +145,6 @@ namespace XRTK.Definitions.InputSystem
             internal set => controllerVisualizationProfile = value;
         }
 
-        [SerializeField]
-        [Tooltip("Profile for configuring input simulation in the editor.")]
-        private MixedRealitySimulationDataProvidersProfile inputSimulationDataProvidersProfile;
-
-        /// <summary>
-        /// Profile for configuring input simulation in the editor.
-        /// </summary>
-        public MixedRealitySimulationDataProvidersProfile InputSimulationDataProvidersProfile
-        {
-            get => inputSimulationDataProvidersProfile;
-            internal set => inputSimulationDataProvidersProfile = value;
-        }
-
         private IMixedRealityFocusProvider focusProvider;
 
         /// <summary>

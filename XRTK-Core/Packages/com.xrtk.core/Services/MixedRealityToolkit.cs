@@ -16,7 +16,6 @@ using XRTK.Interfaces.Diagnostics;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Interfaces.Providers.InputSystem.Simulation;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.TeleportSystem;
@@ -382,22 +381,6 @@ namespace XRTK.Services
                                     controllerDataProvider.Profile))
                                 {
                                     Debug.LogError($"Failed to start {controllerDataProvider.DataProviderName}!");
-                                }
-                            }
-                        }
-
-                        if (ActiveProfile.InputSystemProfile.InputSimulationDataProvidersProfile != null)
-                        {
-                            foreach (var inputSimulationDataProvider in ActiveProfile.InputSystemProfile.InputSimulationDataProvidersProfile.RegisteredInputSimulationDataProviders)
-                            {
-                                if (!CreateAndRegisterService<IMixedRealitySimulationDataProvider>(
-                                    inputSimulationDataProvider.DataProviderType,
-                                    inputSimulationDataProvider.RuntimePlatform,
-                                    inputSimulationDataProvider.DataProviderName,
-                                    inputSimulationDataProvider.Priority,
-                                    inputSimulationDataProvider.Profile))
-                                {
-                                    Debug.LogError($"Failed to start {inputSimulationDataProvider.DataProviderName}!");
                                 }
                             }
                         }

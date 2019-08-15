@@ -7,7 +7,7 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Services.InputSystem.Simulation
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Simulation/Simulated Hand Gesture", fileName = "MixedRealitySimulatedHandGesture", order = (int)CreateProfileMenuItemIndices.Simulation)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Simulation/Simulated Hand Gesture", fileName = "MixedRealitySimulatedHandGesture", order = (int)CreateProfileMenuItemIndices.Input)]
     public class SimulatedHandGesture : BaseMixedRealityProfile
     {
         [SerializeField]

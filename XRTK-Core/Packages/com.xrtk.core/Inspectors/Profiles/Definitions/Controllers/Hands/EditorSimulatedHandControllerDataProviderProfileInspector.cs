@@ -4,12 +4,13 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.InputSystem.Simulation;
+using XRTK.Inspectors.Profiles;
 using XRTK.Inspectors.Utilities;
 
-namespace XRTK.Inspectors.Profiles.InputSystem.Simulation
+namespace XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles
 {
-    [CustomEditor(typeof(HandTrackingSimulationDataProviderProfile))]
-    public class MixedRealityHandTrackingSimulationDataProviderProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(EditorSimulatedHandControllerDataProviderProfile))]
+    public class EditorSimulatedHandControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty simulateHandTracking;
 

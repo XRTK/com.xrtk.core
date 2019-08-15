@@ -10,16 +10,14 @@ using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Interfaces.Providers.InputSystem.Simulation;
-using XRTK.Providers.Controllers;
 using XRTK.Services;
 using XRTK.Services.InputSystem.Simulation;
 
-namespace XRTK.Providers.InputSystem.Simulation
+namespace XRTK.Providers.Controllers.Hands
 {
-    public class HandTrackingSimulationDataProvider : BaseControllerDataProvider, IHandTrackingSimulationDataProvider
+    public class EditorSimulatedHandControllerDataProvider : BaseControllerDataProvider, IMixedRealityPlatformHandControllerDataProvider
     {
-        private HandTrackingSimulationDataProviderProfile profile;
+        private EditorSimulatedHandControllerDataProviderProfile profile;
         private long lastHandControllerUpdateTimeStamp = 0;
         private readonly Dictionary<Handedness, SimulatedArticulatedHand> trackedHandControllers = new Dictionary<Handedness, SimulatedArticulatedHand>();
         
@@ -76,7 +74,7 @@ namespace XRTK.Providers.InputSystem.Simulation
         /// </summary>
         public IReadOnlyDictionary<Handedness, SimulatedArticulatedHand> TrackedHands => trackedHandControllers;
 
-        public HandTrackingSimulationDataProvider(string name, uint priority, HandTrackingSimulationDataProviderProfile profile)
+        public EditorSimulatedHandControllerDataProvider(string name, uint priority, EditorSimulatedHandControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
             this.profile = profile;

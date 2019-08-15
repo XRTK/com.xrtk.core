@@ -2,15 +2,14 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.InputSystem.Simulation;
-using XRTK.Interfaces.Providers.InputSystem.Simulation;
+using XRTK.Definitions;
 using XRTK.Services;
 using XRTK.Services.InputSystem.Simulation;
 using XRTK.Utilities;
 
 namespace XRTK.Providers.InputSystem.Simulation
 {
-    public class CameraSimulationDataProvider : BaseDataProvider, IMixedRealitySimulationDataProvider
+    public class CameraSimulationDataProvider : BaseDataProvider
     {
         private CameraSimulationDataProviderProfile profile;
         private bool isMouseJumping = false;

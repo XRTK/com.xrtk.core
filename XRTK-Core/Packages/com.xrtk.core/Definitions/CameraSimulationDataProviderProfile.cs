@@ -6,9 +6,9 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Services.InputSystem.Simulation;
 
-namespace XRTK.Definitions.InputSystem.Simulation
+namespace XRTK.Definitions
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Simulation/Camera Simulation Profile", fileName = "MixedRealityCameraSimulationProfile", order = (int)CreateProfileMenuItemIndices.Simulation)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Camera Simulation Profile", fileName = "MixedRealityCameraSimulationProfile", order = (int)CreateProfileMenuItemIndices.Camera)]
     public class CameraSimulationDataProviderProfile : BaseMixedRealityProfile
     {
         [Header("Camera Control")]

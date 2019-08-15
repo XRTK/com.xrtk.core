@@ -3,7 +3,7 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions.InputSystem.Simulation;
+using XRTK.Definitions;
 using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Simulation

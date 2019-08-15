@@ -5,10 +5,10 @@ using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Services.InputSystem.Simulation
+namespace XRTK.Providers.Controllers.Hands
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Simulation/Simulated Hand Gesture", fileName = "MixedRealitySimulatedHandGesture", order = (int)CreateProfileMenuItemIndices.Input)]
-    public class SimulatedHandGesture : BaseMixedRealityProfile
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Hand Pose", fileName = "MixedRealityHandPose", order = (int)CreateProfileMenuItemIndices.Input)]
+    public class HandPose : BaseMixedRealityProfile
     {
         [SerializeField]
         [Tooltip("Name the hand gesture.")]

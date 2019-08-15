@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using XRTK.Definitions.Utilities;
 using XRTK.Utilities;
+using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Services.InputSystem.Simulation
 {
@@ -151,7 +152,7 @@ namespace XRTK.Services.InputSystem.Simulation
         /// <summary>
         /// Load pose data from files.
         /// </summary>
-        public static void LoadGesturePoses(List<SimulatedHandGesture> definitions)
+        public static void LoadGesturePoses(List<HandPose> definitions)
         {
             for (int i = 0; i < definitions.Count; i++)
             {
@@ -159,7 +160,7 @@ namespace XRTK.Services.InputSystem.Simulation
             }
         }
 
-        private static ArticulatedHandPose LoadGesturePose(SimulatedHandGesture definition)
+        private static ArticulatedHandPose LoadGesturePose(HandPose definition)
         {
             if (definition.Data != null)
             {

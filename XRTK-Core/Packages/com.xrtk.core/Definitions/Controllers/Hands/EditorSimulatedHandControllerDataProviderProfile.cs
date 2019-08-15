@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
-using XRTK.Services.InputSystem.Simulation;
+using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Definitions.InputSystem.Simulation
 {
@@ -43,8 +43,8 @@ namespace XRTK.Definitions.InputSystem.Simulation
         [Header("Hand Gesture Settings")]
         [SerializeField]
         [Tooltip("Simulated hand gesture definitions.")]
-        private List<SimulatedHandGesture> gestureDefinitions;
-        public List<SimulatedHandGesture> GestureDefinitions => gestureDefinitions;
+        private List<HandPose> gestureDefinitions;
+        public List<HandPose> GestureDefinitions => gestureDefinitions;
         [SerializeField]
         [Tooltip("Gesture interpolation per second")]
         private float handGestureAnimationSpeed = 8.0f;

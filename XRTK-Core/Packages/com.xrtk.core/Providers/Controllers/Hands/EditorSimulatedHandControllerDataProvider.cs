@@ -42,7 +42,7 @@ namespace XRTK.Providers.Controllers.Hands
         /////////////////////
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
-        private SimulatedHandGesture defaultGesture;
+        private HandPose defaultGesture;
 
         /// <summary>
         /// If true then the hand is always visible, regardless of simulating.
@@ -84,7 +84,7 @@ namespace XRTK.Providers.Controllers.Hands
 
             for (int i = 0; i < this.profile.GestureDefinitions.Count; i++)
             {
-                SimulatedHandGesture gesture = this.profile.GestureDefinitions[i];
+                HandPose gesture = this.profile.GestureDefinitions[i];
                 if (gesture.IsDefault)
                 {
                     defaultGesture = gesture;
@@ -307,7 +307,7 @@ namespace XRTK.Providers.Controllers.Hands
         {
             for (int i = 0; i < profile.GestureDefinitions.Count; i++)
             {
-                SimulatedHandGesture gesture = profile.GestureDefinitions[i];
+                HandPose gesture = profile.GestureDefinitions[i];
                 if (Input.GetKeyDown(gesture.KeyCode))
                 {
                     return gesture.GestureName;

@@ -8,8 +8,8 @@ using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Definitions
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Camera Simulation Profile", fileName = "MixedRealityCameraSimulationProfile", order = (int)CreateProfileMenuItemIndices.Camera)]
-    public class CameraSimulationDataProviderProfile : BaseMixedRealityProfile
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Camera Editor Controls Profile", fileName = "MixedRealityCameraEditorControlsProfile", order = (int)CreateProfileMenuItemIndices.Camera)]
+    public class MixedRealityCameraEditorControlsProfile : BaseMixedRealityProfile
     {
         [Header("Camera Control")]
         [SerializeField]
@@ -25,15 +25,15 @@ namespace XRTK.Definitions
         public float DefaultMouseSensitivity => defaultMouseSensitivity;
         [SerializeField]
         [Tooltip("Controls how mouse look control is activated.")]
-        private InputSimulationMouseButton mouseLookButton = InputSimulationMouseButton.Right;
-        public InputSimulationMouseButton MouseLookButton => mouseLookButton;
+        private EditorCameraControlMouseButton mouseLookButton = EditorCameraControlMouseButton.Right;
+        public EditorCameraControlMouseButton MouseLookButton => mouseLookButton;
         [SerializeField]
         private bool isControllerLookInverted = true;
         public bool IsControllerLookInverted => isControllerLookInverted;
 
         [SerializeField]
-        private InputSimulationControlMode currentControlMode = InputSimulationControlMode.Fly;
-        public InputSimulationControlMode CurrentControlMode => currentControlMode;
+        private EditorCameraControlMode currentControlMode = EditorCameraControlMode.Fly;
+        public EditorCameraControlMode CurrentControlMode => currentControlMode;
         [SerializeField]
         private KeyCode fastControlKey = KeyCode.RightControl;
         public KeyCode FastControlKey => fastControlKey;

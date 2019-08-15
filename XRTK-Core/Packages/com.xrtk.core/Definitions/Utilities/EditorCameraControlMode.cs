@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-namespace XRTK.Services.InputSystem.Simulation
+namespace XRTK.Definitions.Utilities
 {
-    public enum InputSimulationControlMode
+    public enum EditorCameraControlMode
     {
         // Move in the main camera forward direction
         Fly,

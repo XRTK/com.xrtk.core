@@ -6,10 +6,10 @@ using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Inspectors.Utilities;
 
-namespace XRTK.Inspectors.Profiles.InputSystem.Simulation
+namespace XRTK.Inspectors.Profiles
 {
-    [CustomEditor(typeof(CameraSimulationDataProviderProfile))]
-    public class MixedRealityCameraSimulationDataProviderProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(MixedRealityCameraEditorControlsProfile))]
+    public class MixedRealityCameraEditorControlsProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty isCameraControlEnabled;
 

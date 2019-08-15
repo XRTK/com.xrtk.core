@@ -1,13 +1,13 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-namespace XRTK.Services.InputSystem.Simulation
+namespace XRTK.Definitions.Utilities
 {
     /// <summary>
     /// This enum is used to customize how/when users will look around in the Unity player
     /// using the mouse.
     /// </summary>
-    public enum InputSimulationMouseButton
+    public enum EditorCameraControlMouseButton
     {
         Left,       // Left mouse button
         Right,      // Right mouse button

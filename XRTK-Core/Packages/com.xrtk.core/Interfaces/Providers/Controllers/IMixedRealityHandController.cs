@@ -2,9 +2,8 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.Providers.Controllers;
 
-namespace XRTK.Providers.Controllers.Hands
+namespace XRTK.Interfaces.Providers.Controllers
 {
     /// <summary>
     /// Controller definition, used to manage a hand controller.

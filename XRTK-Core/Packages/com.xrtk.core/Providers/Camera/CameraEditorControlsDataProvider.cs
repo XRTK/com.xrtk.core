@@ -3,13 +3,13 @@
 
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Definitions.Utilities;
 using XRTK.Services;
-using XRTK.Services.InputSystem.Simulation;
 using XRTK.Utilities;
 
-namespace XRTK.Providers.InputSystem.Simulation
+namespace XRTK.Providers.Camera
 {
-    public class CameraSimulationDataProvider : BaseDataProvider
+    public class CameraEditorControlsDataProvider : BaseDataProvider
     {
         private MixedRealityCameraEditorControlsProfile profile;
         private bool isMouseJumping = false;
@@ -21,7 +21,7 @@ namespace XRTK.Providers.InputSystem.Simulation
         private bool wasLooking = false;
         private bool wasCursorVisible = true;
 
-        public CameraSimulationDataProvider(string name, uint priority, MixedRealityCameraEditorControlsProfile profile) : base(name, priority)
+        public CameraEditorControlsDataProvider(string name, uint priority, MixedRealityCameraEditorControlsProfile profile) : base(name, priority)
         {
             this.profile = profile;
         }
@@ -88,7 +88,7 @@ namespace XRTK.Providers.InputSystem.Simulation
 
             deltaPosition += InputCurve(Input.GetAxis(profile.MoveHorizontal)) * transform.right;
 
-            if (profile.CurrentControlMode == InputSimulationControlMode.Walk)
+            if (profile.CurrentControlMode == EditorCameraControlMode.Walk)
             {
                 deltaPosition += InputCurve(Input.GetAxis(profile.MoveVertical)) * new Vector3(transform.forward.x, 0, transform.forward.z).normalized;
             }
@@ -149,12 +149,12 @@ namespace XRTK.Providers.InputSystem.Simulation
 
         private void OnStartMouseLook()
         {
-            if (profile.MouseLookButton <= InputSimulationMouseButton.Middle)
+            if (profile.MouseLookButton <= EditorCameraControlMouseButton.Middle)
             {
                 // if mousebutton is either left, right or middle
                 SetWantsMouseJumping(true);
             }
-            else if (profile.MouseLookButton <= InputSimulationMouseButton.Focused)
+            else if (profile.MouseLookButton <= EditorCameraControlMouseButton.Focused)
             {
                 // if mousebutton is either control, shift or focused
                 Cursor.lockState = CursorLockMode.Locked;
@@ -168,12 +168,12 @@ namespace XRTK.Providers.InputSystem.Simulation
 
         private void OnEndMouseLook()
         {
-            if (profile.MouseLookButton <= InputSimulationMouseButton.Middle)
+            if (profile.MouseLookButton <= EditorCameraControlMouseButton.Middle)
             {
                 // if mousebutton is either left, right or middle
                 SetWantsMouseJumping(false);
             }
-            else if (profile.MouseLookButton <= InputSimulationMouseButton.Focused)
+            else if (profile.MouseLookButton <= EditorCameraControlMouseButton.Focused)
             {
                 // if mousebutton is either control, shift or focused
                 Cursor.lockState = CursorLockMode.None;
@@ -216,28 +216,28 @@ namespace XRTK.Providers.InputSystem.Simulation
                 {
                     return false;
                 }
-                else if (profile.MouseLookButton == InputSimulationMouseButton.None)
+                else if (profile.MouseLookButton == EditorCameraControlMouseButton.None)
                 {
                     return true;
                 }
-                else if (profile.MouseLookButton <= InputSimulationMouseButton.Middle)
+                else if (profile.MouseLookButton <= EditorCameraControlMouseButton.Middle)
                 {
                     return Input.GetMouseButton((int)profile.MouseLookButton);
                 }
-                else if (profile.MouseLookButton == InputSimulationMouseButton.Control)
+                else if (profile.MouseLookButton == EditorCameraControlMouseButton.Control)
                 {
                     return Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl);
                 }
-                else if (profile.MouseLookButton == InputSimulationMouseButton.Shift)
+                else if (profile.MouseLookButton == EditorCameraControlMouseButton.Shift)
                 {
                     return Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
                 }
-                else if (profile.MouseLookButton == InputSimulationMouseButton.Focused)
+                else if (profile.MouseLookButton == EditorCameraControlMouseButton.Focused)
                 {
                     if (!wasLooking)
                     {
                         // any kind of click will capture focus
-                        return Input.GetMouseButtonDown((int)InputSimulationMouseButton.Left) || Input.GetMouseButtonDown((int)InputSimulationMouseButton.Right) || Input.GetMouseButtonDown((int)InputSimulationMouseButton.Middle);
+                        return Input.GetMouseButtonDown((int)EditorCameraControlMouseButton.Left) || Input.GetMouseButtonDown((int)EditorCameraControlMouseButton.Right) || Input.GetMouseButtonDown((int)EditorCameraControlMouseButton.Middle);
                     }
                     else
                     {

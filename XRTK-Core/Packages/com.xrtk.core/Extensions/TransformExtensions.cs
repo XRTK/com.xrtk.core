@@ -100,6 +100,12 @@ namespace XRTK.Extensions
         /// If no colliders attached, returns a bounds of center and extents 0</returns>
         public static Bounds GetColliderBounds(this Transform transform)
         {
+            // Store current rotation then zero out the rotation so that the bounds
+            // are computed when the object is in its 'axis aligned orientation'.
+            var currentRotation = transform.rotation;
+            transform.rotation = Quaternion.identity;
+            Physics.SyncTransforms(); // Update collider bounds
+
             var colliders = transform.GetComponentsInChildren<Collider>();
 
             if (colliders.Length == 0) { return default; }
@@ -110,6 +116,11 @@ namespace XRTK.Extensions
             {
                 bounds.Encapsulate(colliders[i].bounds);
             }
+
+            // After bounds are computed, restore rotation...
+            // ReSharper disable once Unity.InefficientPropertyAccess
+            transform.rotation = currentRotation;
+            Physics.SyncTransforms();
 
             return bounds;
         }

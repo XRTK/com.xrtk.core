@@ -95,16 +95,25 @@ namespace XRTK.Extensions
         /// <summary>
         /// Calculates the bounds of all the colliders attached to this GameObject and all it's children
         /// </summary>
-        /// <param name="transform">Transform of root GameObject the colliders are attached to </param>
+        /// <param name="transform">
+        /// Transform of root GameObject the colliders are attached to.
+        /// </param>
+        /// <param name="syncTransform">
+        /// True, by default, this will sync the <see cref="transform"/> rotation to calculate the axis aligned orientation.
+        /// </param>
         /// <returns>The total bounds of all colliders attached to this GameObject.
         /// If no colliders attached, returns a bounds of center and extents 0</returns>
-        public static Bounds GetColliderBounds(this Transform transform)
+        public static Bounds GetColliderBounds(this Transform transform, bool syncTransform = true)
         {
             // Store current rotation then zero out the rotation so that the bounds
             // are computed when the object is in its 'axis aligned orientation'.
             var currentRotation = transform.rotation;
-            transform.rotation = Quaternion.identity;
-            Physics.SyncTransforms(); // Update collider bounds
+
+            if (syncTransform)
+            {
+                transform.rotation = Quaternion.identity;
+                Physics.SyncTransforms(); // Update collider bounds
+            }
 
             var colliders = transform.GetComponentsInChildren<Collider>();
 
@@ -117,10 +126,13 @@ namespace XRTK.Extensions
                 bounds.Encapsulate(colliders[i].bounds);
             }
 
-            // After bounds are computed, restore rotation...
-            // ReSharper disable once Unity.InefficientPropertyAccess
-            transform.rotation = currentRotation;
-            Physics.SyncTransforms();
+            if (syncTransform)
+            {
+                // After bounds are computed, restore rotation...
+                // ReSharper disable once Unity.InefficientPropertyAccess
+                transform.rotation = currentRotation;
+                Physics.SyncTransforms();
+            }
 
             return bounds;
         }

@@ -50,15 +50,6 @@ namespace XRTK.Providers.SpatialObservers
         public bool MeshRecalculateNormals => meshRecalculateNormals;
 
         [SerializeField]
-        [Tooltip("How should spatial meshes be displayed?")]
-        private SpatialMeshDisplayOptions meshDisplayOption = SpatialMeshDisplayOptions.None;
-
-        /// <summary>
-        /// Indicates how the mesh subsystem is to display surface meshes within the application.
-        /// </summary>
-        public SpatialMeshDisplayOptions MeshDisplayOption => meshDisplayOption;
-
-        [SerializeField]
         [Tooltip("Material to use when displaying meshes")]
         private Material meshVisibleMaterial = null;
 

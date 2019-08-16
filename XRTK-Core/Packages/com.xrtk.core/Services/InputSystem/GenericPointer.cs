@@ -72,8 +72,8 @@ namespace XRTK.Services.InputSystem.Pointers
         /// <inheritdoc />
         public bool IsFocusLocked { get; set; }
 
-        /// <inheritdoc />
-        public bool SyncPointerTargetPosition { get; set; }
+        ///// <inheritdoc />
+        //public bool SyncPointerTargetPosition { get; set; }
 
         /// <inheritdoc />
         public virtual float PointerExtent { get; set; } = 10f;
@@ -92,7 +92,7 @@ namespace XRTK.Services.InputSystem.Pointers
 
         /// <inheritdoc />
         public IMixedRealityInputHandler InputHandler { get; set; }
-        
+
         /// <inheritdoc />
         public IPointerResult Result { get; set; }
 

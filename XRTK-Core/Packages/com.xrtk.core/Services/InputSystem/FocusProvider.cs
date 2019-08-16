@@ -717,7 +717,7 @@ namespace XRTK.Services.InputSystem
                 // If the pointer is locked, keep the focused object the same.
                 // This will ensure that we execute events on those objects
                 // even if the pointer isn't pointing at them.
-                if (pointer.Pointer.IsFocusLocked && pointer.Pointer.SyncPointerTargetPosition)
+                if (pointer.Pointer.IsFocusLocked)
                 {
                     pointer.UpdateFocusLockedHit();
                 }

@@ -165,6 +165,7 @@ namespace XRTK.Services.DiagnosticsSystem
         private Color memoryLimitColor = new Color(150 / 256.0f, 150 / 256.0f, 150 / 256.0f, 1.0f);
 
         private GameObject window;
+        private TextMesh applicationDetailsText;
         private TextMesh cpuFrameRateText;
         private TextMesh gpuFrameRateText;
         private TextMesh usedMemoryText;
@@ -472,6 +473,12 @@ namespace XRTK.Services.DiagnosticsSystem
                 windowHorizontalRotationInverse = Quaternion.Inverse(windowHorizontalRotation);
                 windowVerticalRotation = Quaternion.AngleAxis(DefaultWindowRotation.x, Vector3.up);
                 windowVerticalRotationInverse = Quaternion.Inverse(windowVerticalRotation);
+            }
+
+            // Add Application details text
+            {
+                applicationDetailsText = CreateText("ApplicationDetails", new Vector3(0.495f, 0.75f, 0.0f), window.transform, TextAnchor.UpperRight, textMaterial, Color.white, string.Empty);
+                applicationDetailsText.text = $"{Application.productName} v{Application.version}";
             }
 
             // Add frame rate text and frame indicators.

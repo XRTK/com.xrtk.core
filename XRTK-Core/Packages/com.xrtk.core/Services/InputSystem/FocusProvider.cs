@@ -173,7 +173,7 @@ namespace XRTK.Services.InputSystem
             /// <inheritdoc />
             public Vector3 Offset => focusDetails.Object == null && StartPoint != Vector3.zero
                 ? StartPoint
-                : CurrentPointerTarget.transform.position - StartPoint;
+                : focusDetails.Object.transform.position - StartPoint;
 
             /// <inheritdoc />
             public Vector3 OffsetLocalSpace => focusDetails.Object.transform.InverseTransformPoint(Offset);

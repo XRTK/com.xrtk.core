@@ -171,10 +171,12 @@ namespace XRTK.Services.InputSystem
             public Vector3 NormalLocalSpace => focusDetails.NormalLocalSpace;
 
             /// <inheritdoc />
-            public Vector3 Offset { get; private set; }
+            public Vector3 Offset => focusDetails.Object == null && StartPoint != Vector3.zero
+                ? StartPoint
+                : CurrentPointerTarget.transform.position - StartPoint;
 
             /// <inheritdoc />
-            public Vector3 OffsetLocalSpace { get; private set; }
+            public Vector3 OffsetLocalSpace => focusDetails.Object.transform.InverseTransformPoint(Offset);
 
             /// <inheritdoc />
             public RaycastHit LastRaycastHit => focusDetails.LastRaycastHit;

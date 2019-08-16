@@ -809,7 +809,7 @@ namespace XRTK.Services.InputSystem
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(pointerEventData, OnPointerDownEventHandler);
 
-            var focusedObject = pointer.Result?.CurrentPointerTarget;
+            var focusedObject = pointer.Result.CurrentPointerTarget;
 
             if (focusedObject != null &&
                 FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
@@ -861,7 +861,7 @@ namespace XRTK.Services.InputSystem
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(pointerEventData, OnPointerUpEventHandler);
 
-            var focusedObject = pointer.Result?.CurrentPointerTarget;
+            var focusedObject = pointer.Result.CurrentPointerTarget;
 
             if (focusedObject != null &&
                 FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
@@ -882,7 +882,7 @@ namespace XRTK.Services.InputSystem
 
             HandleEvent(vector2InputEventData, OnTwoDoFInputChanged);
 
-            var focusedObject = pointer.Result?.CurrentPointerTarget;
+            var focusedObject = pointer.Result.CurrentPointerTarget;
 
             if (focusedObject != null &&
                 FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))

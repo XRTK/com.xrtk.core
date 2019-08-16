@@ -15,6 +15,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         private static readonly GUIContent SpatialObserverMinusButtonContent = new GUIContent("-", "Remove Spatial Observer");
 
         private SerializedProperty registeredSpatialObserverDataProviders;
+        private SerializedProperty meshDisplayOption;
 
         private bool[] foldouts = null;
 
@@ -24,6 +25,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             base.OnEnable();
 
             registeredSpatialObserverDataProviders = serializedObject.FindProperty("registeredSpatialObserverDataProviders");
+            meshDisplayOption = serializedObject.FindProperty("meshDisplayOption");
             foldouts = new bool[registeredSpatialObserverDataProviders.arraySize];
         }
 
@@ -46,6 +48,8 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
 
             thisProfile.CheckProfileLock();
 
+            EditorGUILayout.Space();
+            EditorGUILayout.PropertyField(meshDisplayOption);
             EditorGUILayout.Space();
 
             if (GUILayout.Button(SpatialObserverAddButtonContent, EditorStyles.miniButton))

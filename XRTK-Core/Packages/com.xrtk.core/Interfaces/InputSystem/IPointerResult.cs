@@ -60,7 +60,7 @@ namespace XRTK.Interfaces.InputSystem
         /// The offset distance of the <see cref="CurrentPointerTarget"/>'s position minus the <see cref="EndPoint"/>.
         /// </summary>
         /// <remarks>
-        /// If there's isn't an active <see cref="CurrentPointerTarget"/>, then the <see cref="EndPoint"/> position is returned.
+        /// If there's isn't an active <see cref="CurrentPointerTarget"/>, then the Vector3.zero is returned.
         /// </remarks>
         Vector3 Offset { get; }
 

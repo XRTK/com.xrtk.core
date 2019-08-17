@@ -72,8 +72,14 @@ namespace XRTK.Services.InputSystem.Pointers
         /// <inheritdoc />
         public bool IsFocusLocked { get; set; }
 
-        ///// <inheritdoc />
-        //public bool SyncPointerTargetPosition { get; set; }
+        /// <inheritdoc />
+        public bool SyncPointerTargetPosition
+        {
+            get => IsFocusLocked && syncPointerTargetPosition;
+            set => syncPointerTargetPosition = value;
+        }
+
+        private bool syncPointerTargetPosition = false;
 
         /// <inheritdoc />
         public virtual float PointerExtent { get; set; } = 10f;

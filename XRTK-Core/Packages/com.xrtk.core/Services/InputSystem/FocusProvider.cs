@@ -264,6 +264,11 @@ namespace XRTK.Services.InputSystem
                         OffsetLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(focusDetails.EndPoint);
                         Offset = CurrentPointerTarget.transform.TransformPoint(OffsetLocalSpace);
                     }
+                    else
+                    {
+                        Offset = Vector3.zero;
+                        OffsetLocalSpace = Vector3.zero;
+                    }
                 }
                 else
                 {

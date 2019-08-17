@@ -781,7 +781,7 @@ namespace XRTK.Services.InputSystem
 
         #region Physics Raycasting
 
-        private PointerHitResult GetPrioritizedHitResult(PointerHitResult hit1, PointerHitResult hit2, LayerMask[] prioritizedLayerMasks)
+        private static PointerHitResult GetPrioritizedHitResult(PointerHitResult hit1, PointerHitResult hit2, LayerMask[] prioritizedLayerMasks)
         {
             if (hit1.HitObject != null && hit2.HitObject != null)
             {

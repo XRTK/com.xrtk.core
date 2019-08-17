@@ -224,7 +224,7 @@ namespace XRTK.Services.Teleportation
 
             targetRotation = Vector3.zero;
             targetRotation.y = eventData.Pointer.PointerOrientation;
-            targetPosition = eventData.Pointer.Result.Details.Point;
+            targetPosition = eventData.Pointer.Result.EndPoint;
 
             if (eventData.HotSpot != null)
             {

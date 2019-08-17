@@ -4,6 +4,7 @@
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.SpatialObservers;
+using XRTK.Providers.SpatialObservers;
 
 namespace XRTK.Definitions.SpatialAwarenessSystem
 {
@@ -31,5 +32,14 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         /// The list of registered <see cref="IMixedRealitySpatialObserverDataProvider"/>s.
         /// </summary>
         public SpatialObserverDataProviderConfiguration[] RegisteredSpatialObserverDataProviders => registeredSpatialObserverDataProviders;
+
+        [SerializeField]
+        [Tooltip("Indicates how the BaseMixedRealitySpatialMeshObserver is to display surface meshes within the application.")]
+        private SpatialMeshDisplayOptions meshDisplayOption = SpatialMeshDisplayOptions.None;
+
+        /// <summary>
+        /// Indicates how the <see cref="BaseMixedRealitySpatialMeshObserver"/> is to display surface meshes within the application.
+        /// </summary>
+        public SpatialMeshDisplayOptions MeshDisplayOption => meshDisplayOption;
     }
 }

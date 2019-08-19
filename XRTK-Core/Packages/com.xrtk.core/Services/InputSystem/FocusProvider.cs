@@ -809,7 +809,7 @@ namespace XRTK.Services.InputSystem
                 // This will ensure that we execute events on those objects
                 // even if the pointer isn't pointing at them.
                 // We don't want to update focused locked hits if we're syncing the pointer's target position.
-                if (pointer.Pointer.IsFocusLocked && !pointer.Pointer.SyncedTarget)
+                if (pointer.Pointer.IsFocusLocked && pointer.Pointer.SyncedTarget == null)
                 {
                     pointer.UpdateFocusLockedHit();
                 }

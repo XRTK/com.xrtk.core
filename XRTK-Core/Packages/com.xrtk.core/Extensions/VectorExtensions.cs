@@ -416,5 +416,28 @@ namespace XRTK.Extensions
 
             return direction.y > 0 ? MoveDirection.Up : MoveDirection.Down;
         }
+
+        /// <summary>
+        /// Checks if a normal is nearly vertical
+        /// </summary>
+        /// <param name="normal"></param>
+        /// <returns>Returns true, if normal is vertical.</returns>
+        public static bool IsNormalVertical(this Vector3 normal) => 1f - Mathf.Abs(normal.y) < 0.01f;
+
+        /// <summary>
+        /// Lerps Vector3 source to goal.
+        /// </summary>
+        /// <remarks>
+        /// Handles lerpTime of 0.
+        /// </remarks>
+        /// <param name="source"></param>
+        /// <param name="goal"></param>
+        /// <param name="deltaTime"></param>
+        /// <param name="lerpTime"></param>
+        /// <returns></returns>
+        public static Vector3 SmoothTo(this Vector3 source, Vector3 goal, float deltaTime, float lerpTime)
+        {
+            return Vector3.Lerp(source, goal, lerpTime.Equals(0.0f) ? 1f : deltaTime / lerpTime);
+        }
     }
 }

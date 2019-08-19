@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Definitions.Physics;
+using XRTK.Extensions;
 using XRTK.Utilities.Physics;
 
 namespace XRTK.SDK.Utilities.Solvers
@@ -16,6 +17,7 @@ namespace XRTK.SDK.Utilities.Solvers
 
         private enum RaycastDirectionEnum
         {
+            None = 0,
             CameraFacing,
             ToObject,
             ToLinkedPosition
@@ -23,7 +25,7 @@ namespace XRTK.SDK.Utilities.Solvers
 
         private enum OrientModeEnum
         {
-            None,
+            None = 0,
             Vertical,
             Full,
             Blended
@@ -204,39 +206,28 @@ namespace XRTK.SDK.Utilities.Solvers
             // Calculate the surface rotation
             var newDirection = -surfaceNormal;
 
-            if (IsNormalVertical(newDirection))
+            if (newDirection.IsNormalVertical())
             {
                 newDirection = direction;
             }
 
             newDirection.y = 0;
 
-            var surfaceRot = Quaternion.LookRotation(newDirection, Vector3.up);
+            var surfaceOrientation = Quaternion.LookRotation(newDirection, Vector3.up);
 
             switch (orientationMode)
             {
-                case OrientModeEnum.None:
-                    return SolverHandler.GoalRotation;
-
                 case OrientModeEnum.Vertical:
-                    return surfaceRot;
-
+                    return surfaceOrientation;
                 case OrientModeEnum.Full:
                     return Quaternion.LookRotation(-surfaceNormal, Vector3.up);
-
                 case OrientModeEnum.Blended:
-                    return Quaternion.Slerp(SolverHandler.GoalRotation, surfaceRot, orientationBlend);
+                    return Quaternion.Slerp(SolverHandler.GoalRotation, surfaceOrientation, orientationBlend);
                 default:
-                    return Quaternion.identity;
+                case OrientModeEnum.None:
+                    return SolverHandler.GoalRotation;
             }
         }
-
-        /// <summary>
-        /// Checks if a normal is nearly vertical
-        /// </summary>
-        /// <param name="normal"></param>
-        /// <returns>Returns true, if normal is vertical.</returns>
-        private static bool IsNormalVertical(Vector3 normal) => 1f - Mathf.Abs(normal.y) < 0.01f;
 
         public override void SolverUpdate()
         {
@@ -358,7 +349,7 @@ namespace XRTK.SDK.Utilities.Solvers
                 // If placing on a horizontal surface, need to adjust the calculated distance by half the app height
                 var verticalCorrectionOffset = 0f;
 
-                if (IsNormalVertical(plane.normal) && !Mathf.Approximately(rayStep.Direction.y, 0))
+                if (plane.normal.IsNormalVertical() && !Mathf.Approximately(rayStep.Direction.y, 0))
                 {
                     var boxSurfaceVerticalOffset = targetMatrix.MultiplyVector(new Vector3(0, extents.y * 0.5f, 0)).magnitude;
                     var correctionVector = boxSurfaceVerticalOffset * (rayStep.Direction / rayStep.Direction.y);

@@ -371,7 +371,7 @@ namespace XRTK.Extensions
 
         /// <summary>
         /// Scales the target <see cref="Transform"/> by the provided <see cref="pivot"/> position using the
-        /// provided <see cref="scale"/>.
+        /// provided <see cref="newScale"/>.
         /// <para/>
         /// Similar to how <seealso cref="Transform.Rotate(Vector3,Space)"/> works.
         /// </summary>
@@ -380,18 +380,17 @@ namespace XRTK.Extensions
         /// </remarks>
         /// <param name="target"></param>
         /// <param name="pivot"></param>
-        /// <param name="scale"></param>
-        public static void ScaleAround(this Transform target, Vector3 pivot, Vector3 scale)
+        /// <param name="newScale"></param>
+        public static void ScaleAround(this Transform target, Vector3 pivot, Vector3 newScale)
         {
-            var A = target.localPosition;
-            var B = pivot;
-            var C = A - B; // diff from object pivot to desired pivot/origin
-            var RS = scale.x / target.localScale.x; // relative scale factor
-            var FP = B + C * RS; // calc final position post-scale
+            var point = target.localPosition;
+            var distance = point - pivot; // diff from object pivot to desired pivot/origin
+            var relativeScale = newScale.x / target.localScale.x; // relative scale factor
+            var finalPosition = pivot + distance * relativeScale; // calc final position post-scale
 
             // finally, actually perform the scale / translation
-            target.localScale = scale;
-            target.localPosition = FP;
+            target.localScale = newScale;
+            target.localPosition = finalPosition;
         }
     }
 }

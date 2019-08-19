@@ -73,13 +73,17 @@ namespace XRTK.Services.InputSystem.Pointers
         public bool IsFocusLocked { get; set; }
 
         /// <inheritdoc />
-        public bool SyncPointerTargetPosition
+        public GameObject SyncedTarget
         {
-            get => IsFocusLocked && syncPointerTargetPosition;
-            set => syncPointerTargetPosition = value;
+            get => syncedTarget = IsFocusLocked ? syncedTarget : null;
+            set
+            {
+                IsFocusLocked = value != null;
+                syncedTarget = value;
+            }
         }
 
-        private bool syncPointerTargetPosition = false;
+        private GameObject syncedTarget = null;
 
         /// <inheritdoc />
         public virtual float PointerExtent { get; set; } = 10f;

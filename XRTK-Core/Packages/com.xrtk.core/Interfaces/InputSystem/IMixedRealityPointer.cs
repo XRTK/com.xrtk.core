@@ -116,7 +116,7 @@ namespace XRTK.Interfaces.InputSystem
         /// When true, the <see cref="IPointerResult.CurrentPointerTarget"/>s position will also be updated to move in sync with the <see cref="Result"/> position.
         /// This position is calculated using the offset of the offset between the <see cref="IPointerResult.CurrentPointerTarget"/> position and the <see cref="Result"/> position.
         /// </remarks>
-        bool SyncPointerTargetPosition { get; set; }
+        GameObject SyncedTarget { get; set; }
 
         /// <summary>
         /// Ray stabilizer used when calculating position of pointer end point.

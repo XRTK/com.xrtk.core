@@ -139,6 +139,8 @@ namespace XRTK.Services.InputSystem
         [Serializable]
         private class PointerData : IPointerResult, IEquatable<PointerData>
         {
+            private const int IgnoreRaycastLayer = 2;
+
             public readonly IMixedRealityPointer Pointer;
 
             private FocusDetails focusDetails;
@@ -155,8 +157,13 @@ namespace XRTK.Services.InputSystem
             /// <inheritdoc />
             public GameObject CurrentPointerTarget { get; private set; }
 
+            private GameObject syncedPointerTarget;
+
             /// <inheritdoc />
             public GameObject PreviousPointerTarget { get; private set; }
+
+            /// <inheritdoc />
+            public GameObject LastHitObject => focusDetails.HitObject;
 
             /// <inheritdoc />
             public int RayStepIndex { get; private set; }
@@ -171,7 +178,7 @@ namespace XRTK.Services.InputSystem
             public Vector3 NormalLocalSpace => focusDetails.NormalLocalSpace;
 
             /// <inheritdoc />
-            public Vector3 Offset { get; private set; } = Vector3.zero;
+            public Vector3 Offset { get; private set; }
 
             /// <inheritdoc />
             public Vector3 OffsetLocalSpace { get; private set; } = Vector3.zero;
@@ -181,6 +188,18 @@ namespace XRTK.Services.InputSystem
 
             /// <inheritdoc />
             public RaycastResult LastGraphicsRaycastResult => focusDetails.LastGraphicsRaycastResult;
+
+            /// <inheritdoc />
+            public Vector3 GrabPointLocalSpace { get; private set; }
+
+            /// <inheritdoc />
+            public Vector3 GrabPoint => CurrentPointerTarget.transform.TransformPoint(GrabPointLocalSpace);
+
+            /// <inheritdoc />
+            public Vector3 GrabPointOffsetLocalSpace { get; private set; }
+
+            /// <inheritdoc />
+            public Vector3 GrabPointOffset { get; private set; }
 
             /// <summary>
             /// The graphic input event data used for raycasting uGUI elements.
@@ -202,6 +221,7 @@ namespace XRTK.Services.InputSystem
             }
 
             private GraphicInputEventData graphicData;
+            private int prevPhysicsLayer;
 
             /// <summary>
             /// Constructor.
@@ -213,10 +233,8 @@ namespace XRTK.Services.InputSystem
                 Pointer = pointer;
             }
 
-            public void UpdateHit(PointerHitResult hitResult, bool isSynced)
+            public void UpdateHit(PointerHitResult hitResult, GameObject syncTarget)
             {
-                PreviousPointerTarget = focusDetails.Object;
-
                 focusDetails.LastRaycastHit = hitResult.RaycastHit;
                 focusDetails.LastGraphicsRaycastResult = hitResult.GraphicsRaycastResult;
 
@@ -250,31 +268,74 @@ namespace XRTK.Services.InputSystem
                     focusDetails.Normal = -finalStep.Direction;
                 }
 
-                focusDetails.Object = hitResult.HitObject;
+                focusDetails.HitObject = hitResult.HitObject;
 
-                if (isSynced)
+                if (syncTarget != null)
                 {
-                    if (CurrentPointerTarget == null && focusDetails.Object != null)
+                    if (syncedPointerTarget == null && CurrentPointerTarget != null && CurrentPointerTarget == syncTarget)
                     {
-                        CurrentPointerTarget = focusDetails.Object;
+                        Debug.Assert(CurrentPointerTarget != null, "No Sync Target Set!");
+
+                        syncedPointerTarget = CurrentPointerTarget;
+
+                        prevPhysicsLayer = CurrentPointerTarget.layer;
+                        CurrentPointerTarget.SetLayerRecursively(IgnoreRaycastLayer);
+
+                        if (CurrentPointerTarget.transform.position != Vector3.zero && focusDetails.EndPoint != Vector3.zero)
+                        {
+                            GrabPointOffsetLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(CurrentPointerTarget.transform.position - focusDetails.EndPoint);
+                            GrabPointOffset = CurrentPointerTarget.transform.TransformPoint(GrabPointOffsetLocalSpace);
+                        }
+                        else
+                        {
+                            GrabPointOffset = Vector3.zero;
+                            GrabPointOffsetLocalSpace = Vector3.zero;
+                        }
+
+                        GrabPointLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(focusDetails.EndPoint);
+                    }
+                    else if (syncTarget != CurrentPointerTarget)
+                    {
+                        GetCurrentTarget();
                     }
 
-                    if (CurrentPointerTarget.transform.position != Vector3.zero)
+                    if (syncedPointerTarget != null)
                     {
-                        OffsetLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(focusDetails.EndPoint);
-                        Offset = CurrentPointerTarget.transform.TransformPoint(OffsetLocalSpace);
-                    }
-                    else
-                    {
-                        Offset = Vector3.zero;
-                        OffsetLocalSpace = Vector3.zero;
+                        Offset = CurrentPointerTarget.transform.position - GrabPointOffset;
+                        OffsetLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(Offset);
+
+                        DebugUtilities.DrawPoint(EndPoint, Color.yellow);
+                        Debug.DrawLine(EndPoint, GrabPoint, Color.yellow);
+
+                        DebugUtilities.DrawPoint(Offset, Color.magenta);
+
+                        DebugUtilities.DrawPoint(GrabPoint, Color.green);
+                        DebugUtilities.DrawPoint(GrabPointOffset, Color.green);
+                        Debug.DrawLine(GrabPoint, GrabPointOffset, Color.green);
+
+
+                        DebugUtilities.DrawPoint(CurrentPointerTarget.transform.position, Color.cyan);
                     }
                 }
                 else
                 {
-                    CurrentPointerTarget = focusDetails.Object;
-                    Offset = Vector3.zero;
-                    OffsetLocalSpace = Vector3.zero;
+                    GetCurrentTarget();
+                }
+
+                void GetCurrentTarget()
+                {
+                    if (syncedPointerTarget != null)
+                    {
+                        GrabPointLocalSpace = Vector3.zero;
+                        syncedPointerTarget.SetLayerRecursively(prevPhysicsLayer);
+                        syncedPointerTarget = null;
+                    }
+
+                    PreviousPointerTarget = CurrentPointerTarget;
+                    CurrentPointerTarget = focusDetails.HitObject;
+
+                    GrabPointOffset = Vector3.zero;
+                    GrabPointOffsetLocalSpace = Vector3.zero;
                 }
 
                 if (CurrentPointerTarget != null)
@@ -295,16 +356,14 @@ namespace XRTK.Services.InputSystem
             /// </summary>
             public void UpdateFocusLockedHit()
             {
-                PreviousPointerTarget = focusDetails.Object;
-
-                if (focusDetails.Object != null)
+                if (focusDetails.HitObject != null)
                 {
                     // In case the focused object is moving, we need to update the focus point based on the object's new transform.
-                    focusDetails.EndPoint = focusDetails.Object.transform.TransformPoint(focusDetails.EndPointLocalSpace);
-                    focusDetails.Normal = focusDetails.Object.transform.TransformDirection(focusDetails.NormalLocalSpace);
+                    focusDetails.EndPoint = focusDetails.HitObject.transform.TransformPoint(focusDetails.EndPointLocalSpace);
+                    focusDetails.Normal = focusDetails.HitObject.transform.TransformDirection(focusDetails.NormalLocalSpace);
 
-                    focusDetails.EndPointLocalSpace = focusDetails.Object.transform.InverseTransformPoint(focusDetails.EndPoint);
-                    focusDetails.NormalLocalSpace = focusDetails.Object.transform.InverseTransformDirection(focusDetails.Normal);
+                    focusDetails.EndPointLocalSpace = focusDetails.HitObject.transform.InverseTransformPoint(focusDetails.EndPoint);
+                    focusDetails.NormalLocalSpace = focusDetails.HitObject.transform.InverseTransformDirection(focusDetails.Normal);
                 }
 
                 StartPoint = Pointer.Rays[0].Origin;
@@ -320,14 +379,19 @@ namespace XRTK.Services.InputSystem
                 }
             }
 
+            /// <summary>
+            /// Rest the currently focused object data.
+            /// </summary>
+            /// <param name="clearPreviousObject">Optional flag to choose not to clear the previous object.</param>
             public void ResetFocusedObjects(bool clearPreviousObject = true)
             {
                 PreviousPointerTarget = clearPreviousObject ? null : CurrentPointerTarget;
+
                 focusDetails.EndPoint = focusDetails.EndPoint;
                 focusDetails.EndPointLocalSpace = focusDetails.EndPointLocalSpace;
                 focusDetails.Normal = focusDetails.Normal;
                 focusDetails.NormalLocalSpace = focusDetails.NormalLocalSpace;
-                focusDetails.Object = null;
+                focusDetails.HitObject = null;
             }
 
             /// <inheritdoc />
@@ -745,7 +809,7 @@ namespace XRTK.Services.InputSystem
                 // This will ensure that we execute events on those objects
                 // even if the pointer isn't pointing at them.
                 // We don't want to update focused locked hits if we're syncing the pointer's target position.
-                if (pointer.Pointer.IsFocusLocked && !pointer.Pointer.SyncPointerTargetPosition)
+                if (pointer.Pointer.IsFocusLocked && !pointer.Pointer.SyncedTarget)
                 {
                     pointer.UpdateFocusLockedHit();
                 }
@@ -771,7 +835,7 @@ namespace XRTK.Services.InputSystem
                     }
 
                     // Apply the hit result only now so changes in the current target are detected only once per frame.
-                    pointer.UpdateHit(currentHitResult, pointer.Pointer.SyncPointerTargetPosition);
+                    pointer.UpdateHit(currentHitResult, pointer.Pointer.SyncedTarget);
                 }
 
                 // Set the pointer's result last

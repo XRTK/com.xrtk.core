@@ -37,6 +37,14 @@ namespace XRTK.Interfaces.InputSystem
         GameObject PreviousPointerTarget { get; }
 
         /// <summary>
+        /// The last <see cref="GameObject"/> hit by the raycast.
+        /// </summary>
+        /// <remarks>
+        /// This may be different from the <see cref="CurrentPointerTarget"/> if the pointer is locked or synced.
+        /// </remarks>
+        GameObject LastHitObject { get; }
+
+        /// <summary>
         /// The index of the step that produced the last raycast hit, 0 when no raycast hit.
         /// </summary>
         int RayStepIndex { get; }
@@ -79,5 +87,13 @@ namespace XRTK.Interfaces.InputSystem
         /// The last raycast hit info for graphic raycast.
         /// </summary>
         RaycastResult LastGraphicsRaycastResult { get; }
+
+        Vector3 GrabPointLocalSpace { get; }
+
+        Vector3 GrabPoint { get; }
+
+        Vector3 GrabPointOffsetLocalSpace { get; }
+
+        Vector3 GrabPointOffset { get; }
     }
 }

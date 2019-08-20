@@ -178,6 +178,9 @@ namespace XRTK.Services.InputSystem
             public Vector3 NormalLocalSpace => focusDetails.NormalLocalSpace;
 
             /// <inheritdoc />
+            public Vector3 Direction { get; private set; }
+
+            /// <inheritdoc />
             public Vector3 Offset { get; private set; }
 
             /// <inheritdoc />
@@ -222,6 +225,7 @@ namespace XRTK.Services.InputSystem
 
             private GraphicInputEventData graphicData;
             private int prevPhysicsLayer;
+            private Vector3 lastPosition;
 
             /// <summary>
             /// Constructor.
@@ -267,6 +271,9 @@ namespace XRTK.Services.InputSystem
                     focusDetails.EndPoint = finalStep.Terminus;
                     focusDetails.Normal = -finalStep.Direction;
                 }
+
+                Direction = EndPoint - lastPosition;
+                lastPosition = EndPoint;
 
                 focusDetails.HitObject = hitResult.HitObject;
 

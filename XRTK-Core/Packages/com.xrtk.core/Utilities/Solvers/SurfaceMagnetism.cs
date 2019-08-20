@@ -267,7 +267,7 @@ namespace XRTK.SDK.Utilities.Solvers
             bool isHit;
 
             // Do the cast!
-            isHit = MixedRealityRaycaster.RaycastSimplePhysicsStep(rayStep, maxDistance, magneticSurfaces, out RaycastHit result);
+            isHit = MixedRealityRaycaster.RaycastSimplePhysicsStep(rayStep, maxDistance, magneticSurfaces, out var result);
 
             OnSurface = isHit;
 

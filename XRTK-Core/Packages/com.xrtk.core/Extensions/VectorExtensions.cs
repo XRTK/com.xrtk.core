@@ -439,5 +439,25 @@ namespace XRTK.Extensions
         {
             return Vector3.Lerp(source, goal, lerpTime.Equals(0.0f) ? 1f : deltaTime / lerpTime);
         }
+
+        /// <summary>
+        /// Returns the midpoint between two vectors.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="point"></param>
+        public static Vector2 MidPoint(this Vector2 source, Vector2 point)
+        {
+            return (source + point) / 2f;
+        }
+
+        /// <summary>
+        /// Returns the midpoint between two vectors.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="point"></param>
+        public static Vector3 MidPoint(this Vector3 source, Vector3 point)
+        {
+            return (source + point) / 2f;
+        }
     }
 }

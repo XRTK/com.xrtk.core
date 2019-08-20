@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
+using XRTK.Definitions.Physics;
 
 namespace XRTK.Interfaces.InputSystem
 {
@@ -63,6 +64,11 @@ namespace XRTK.Interfaces.InputSystem
         /// The normal of the raycast in local space in relation to the focused object.
         /// </summary>
         Vector3 NormalLocalSpace { get; }
+
+        /// <summary>
+        /// The direction this pointer is traveling, calculated from the last known position.
+        /// </summary>
+        Vector3 Direction { get; }
 
         /// <summary>
         /// The offset distance of the <see cref="CurrentPointerTarget"/>'s position minus the <see cref="EndPoint"/>.

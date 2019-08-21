@@ -311,14 +311,14 @@ namespace XRTK.Services.InputSystem
                         Offset = CurrentPointerTarget.transform.position - GrabPointOffset;
                         OffsetLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(Offset);
 
-                        DebugUtilities.DrawPoint(EndPoint, Color.yellow);
-                        Debug.DrawLine(EndPoint, GrabPoint, Color.yellow);
+                        //DebugUtilities.DrawPoint(EndPoint, Color.yellow);
+                        //Debug.DrawLine(EndPoint, GrabPoint, Color.yellow);
 
-                        DebugUtilities.DrawPoint(Offset, Color.magenta);
+                        //DebugUtilities.DrawPoint(Offset, Color.magenta);
 
-                        DebugUtilities.DrawPoint(GrabPoint, Color.green);
-                        DebugUtilities.DrawPoint(GrabPointOffset, Color.green);
-                        Debug.DrawLine(GrabPoint, GrabPointOffset, Color.green);
+                        //DebugUtilities.DrawPoint(GrabPoint, Color.green);
+                        //DebugUtilities.DrawPoint(GrabPointOffset, Color.green);
+                        //Debug.DrawLine(GrabPoint, GrabPointOffset, Color.green);
 
 
                         DebugUtilities.DrawPoint(CurrentPointerTarget.transform.position, Color.cyan);

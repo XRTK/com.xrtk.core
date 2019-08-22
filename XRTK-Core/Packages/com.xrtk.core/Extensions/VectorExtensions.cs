@@ -153,7 +153,7 @@ namespace XRTK.Extensions
         /// </remarks>
         public static Vector3 TransformPoint(this Vector3 point, Transform transform)
         {
-            return point.TransformPoint(transform.position, transform.rotation, transform.lossyScale);
+            return point.TransformPoint(transform.position, transform.rotation, transform.localScale);
         }
 
         /// <summary>
@@ -162,16 +162,16 @@ namespace XRTK.Extensions
         /// <param name="point"></param>
         /// <param name="position"></param>
         /// <param name="rotation"></param>
-        /// <param name="lossyScale"></param>
+        /// <param name="localScale"></param>
         /// <returns>
         /// The coordinates of the updated point.
         /// </returns>
         /// <remarks>
         /// This IS NOT the same as <see cref="Transform.TransformPoint(Vector3)"/> which translates a point from local space to world space.
         /// </remarks>
-        public static Vector3 TransformPoint(this Vector3 point, Vector3 position, Quaternion rotation, Vector3 lossyScale)
+        public static Vector3 TransformPoint(this Vector3 point, Vector3 position, Quaternion rotation, Vector3 localScale)
         {
-            return rotation * Vector3.Scale(lossyScale, point) + position;
+            return rotation * Vector3.Scale(localScale, point) + position;
         }
 
         /// <summary>
@@ -187,7 +187,7 @@ namespace XRTK.Extensions
         /// </remarks>
         public static Vector3 InverseTransformPoint(this Vector3 point, Transform transform)
         {
-            return point.InverseTransformPoint(transform.position, transform.rotation, transform.lossyScale);
+            return point.InverseTransformPoint(transform.position, transform.rotation, transform.localScale);
         }
 
         /// <summary>
@@ -196,16 +196,16 @@ namespace XRTK.Extensions
         /// <param name="point"></param>
         /// <param name="position"></param>
         /// <param name="rotation"></param>
-        /// <param name="lossyScale"></param>
+        /// <param name="localScale"></param>
         /// <returns>
         /// The coordinates of the updated point.
         /// </returns>
         /// <remarks>
         /// This IS NOT the same as <see cref="Transform.InverseTransformPoint(Vector3)"/> which translates a point from local space to world space.
         /// </remarks>
-        public static Vector3 InverseTransformPoint(this Vector3 point, Vector3 position, Quaternion rotation, Vector3 lossyScale)
+        public static Vector3 InverseTransformPoint(this Vector3 point, Vector3 position, Quaternion rotation, Vector3 localScale)
         {
-            var scaleInv = new Vector3(1 / lossyScale.x, 1 / lossyScale.y, 1 / lossyScale.z);
+            var scaleInv = new Vector3(1 / localScale.x, 1 / localScale.y, 1 / localScale.z);
             return Vector3.Scale(scaleInv, (Quaternion.Inverse(rotation) * (point - position)));
         }
 
@@ -447,7 +447,7 @@ namespace XRTK.Extensions
         /// <param name="point"></param>
         public static Vector2 MidPoint(this Vector2 source, Vector2 point)
         {
-            return (source + point) / 2f;
+            return (source + point) * 0.5f;
         }
 
         /// <summary>
@@ -457,7 +457,7 @@ namespace XRTK.Extensions
         /// <param name="point"></param>
         public static Vector3 MidPoint(this Vector3 source, Vector3 point)
         {
-            return (source + point) / 2f;
+            return (source + point) * 0.5f;
         }
     }
 }

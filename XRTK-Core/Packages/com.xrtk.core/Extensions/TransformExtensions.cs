@@ -138,6 +138,51 @@ namespace XRTK.Extensions
         }
 
         /// <summary>
+        /// Calculates the bounds of all the renderers attached to this GameObject and all it's children
+        /// </summary>
+        /// <param name="transform">
+        /// Transform of root GameObject the renderers are attached to.
+        /// </param>
+        /// <param name="syncTransform">
+        /// True, by default, this will sync the <see cref="transform"/> rotation to calculate the axis aligned orientation.
+        /// </param>
+        /// <returns>The total bounds of all renderers attached to this GameObject.
+        /// If no renderers attached, returns a bounds of center and extents 0</returns>
+        public static Bounds GetRenderBounds(this Transform transform, bool syncTransform = true)
+        {
+            // Store current rotation then zero out the rotation so that the bounds
+            // are computed when the object is in its 'axis aligned orientation'.
+            var currentRotation = transform.rotation;
+
+            if (syncTransform)
+            {
+                transform.rotation = Quaternion.identity;
+                Physics.SyncTransforms(); // Update collider bounds
+            }
+
+            var renderers = transform.GetComponentsInChildren<Renderer>();
+
+            if (renderers.Length == 0) { return default; }
+
+            var bounds = renderers[0].bounds;
+
+            for (int i = 1; i < renderers.Length; i++)
+            {
+                bounds.Encapsulate(renderers[i].bounds);
+            }
+
+            if (syncTransform)
+            {
+                // After bounds are computed, restore rotation...
+                // ReSharper disable once Unity.InefficientPropertyAccess
+                transform.rotation = currentRotation;
+                Physics.SyncTransforms();
+            }
+
+            return bounds;
+        }
+
+        /// <summary>
         /// Checks if the provided transforms are child/parent related.
         /// </summary>
         /// <returns>True if either transform is the parent of the other or if they are the same</returns>
@@ -284,17 +329,21 @@ namespace XRTK.Extensions
         /// </summary>
         /// <param name="transform"></param>
         /// <param name="direction"></param>
+        /// <param name="bounds"></param>
         /// <returns></returns>
-        public static Vector3 GetPointOnBoundsEdge(this Transform transform, Vector3 direction)
+        public static Vector3 GetPointOnBoundsEdge(this Transform transform, Vector3 direction, Bounds bounds = default)
         {
             if (direction != Vector3.zero)
             {
                 direction /= Mathf.Max(Mathf.Max(Mathf.Abs(direction.x), Mathf.Abs(direction.y), Mathf.Abs(direction.y)));
             }
 
-            var bounds = transform.GetColliderBounds();
-            direction = bounds.center + Vector3.Scale(bounds.size, direction * 0.5f);
-            return direction;
+            if (bounds == default)
+            {
+                bounds = transform.GetColliderBounds();
+            }
+
+            return bounds.center + Vector3.Scale(bounds.size, direction * 0.5f);
         }
 
         /// <summary>

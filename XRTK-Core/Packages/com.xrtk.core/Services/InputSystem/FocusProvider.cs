@@ -181,12 +181,6 @@ namespace XRTK.Services.InputSystem
             public Vector3 Direction { get; private set; }
 
             /// <inheritdoc />
-            public Vector3 Offset { get; private set; }
-
-            /// <inheritdoc />
-            public Vector3 OffsetLocalSpace { get; private set; } = Vector3.zero;
-
-            /// <inheritdoc />
             public RaycastHit LastRaycastHit => focusDetails.LastRaycastHit;
 
             /// <inheritdoc />
@@ -196,13 +190,7 @@ namespace XRTK.Services.InputSystem
             public Vector3 GrabPointLocalSpace { get; private set; }
 
             /// <inheritdoc />
-            public Vector3 GrabPoint => CurrentPointerTarget.transform.TransformPoint(GrabPointLocalSpace);
-
-            /// <inheritdoc />
-            public Vector3 GrabPointOffsetLocalSpace { get; private set; }
-
-            /// <inheritdoc />
-            public Vector3 GrabPointOffset { get; private set; }
+            public Vector3 GrabPoint { get; private set; }
 
             /// <summary>
             /// The graphic input event data used for raycasting uGUI elements.
@@ -253,7 +241,7 @@ namespace XRTK.Services.InputSystem
                 }
                 else
                 {
-                    // If we don't have a valid ray cast, use the whole pointer ray.
+                    // If we don't have a valid ray cast, use the whole pointer ray.focusDetails.EndPoint
                     var firstStep = Pointer.Rays[0];
                     var finalStep = Pointer.Rays[Pointer.Rays.Length - 1];
                     RayStepIndex = 0;
@@ -272,8 +260,8 @@ namespace XRTK.Services.InputSystem
                     focusDetails.Normal = -finalStep.Direction;
                 }
 
-                Direction = EndPoint - lastPosition;
-                lastPosition = EndPoint;
+                Direction = focusDetails.EndPoint - lastPosition;
+                lastPosition = focusDetails.EndPoint;
 
                 focusDetails.HitObject = hitResult.HitObject;
 
@@ -288,18 +276,8 @@ namespace XRTK.Services.InputSystem
                         prevPhysicsLayer = CurrentPointerTarget.layer;
                         CurrentPointerTarget.SetLayerRecursively(IgnoreRaycastLayer);
 
-                        if (CurrentPointerTarget.transform.position != Vector3.zero && focusDetails.EndPoint != Vector3.zero)
-                        {
-                            GrabPointOffsetLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(CurrentPointerTarget.transform.position - focusDetails.EndPoint);
-                            GrabPointOffset = CurrentPointerTarget.transform.TransformPoint(GrabPointOffsetLocalSpace);
-                        }
-                        else
-                        {
-                            GrabPointOffset = Vector3.zero;
-                            GrabPointOffsetLocalSpace = Vector3.zero;
-                        }
-
-                        GrabPointLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(focusDetails.EndPoint);
+                        GrabPoint = focusDetails.EndPoint;
+                        GrabPointLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(GrabPoint);
                     }
                     else if (syncTarget != CurrentPointerTarget)
                     {
@@ -308,20 +286,23 @@ namespace XRTK.Services.InputSystem
 
                     if (syncedPointerTarget != null)
                     {
-                        Offset = CurrentPointerTarget.transform.position - GrabPointOffset;
-                        OffsetLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(Offset);
+                        GrabPoint = CurrentPointerTarget.transform.TransformPoint(GrabPointLocalSpace);
+                        GrabPointLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(GrabPoint);
 
-                        //DebugUtilities.DrawPoint(EndPoint, Color.yellow);
-                        //Debug.DrawLine(EndPoint, GrabPoint, Color.yellow);
+                        //DebugUtilities.DrawPoint(GrabPoint, Color.red);
+                        //DebugUtilities.DrawPoint(focusDetails.EndPoint, Color.yellow);
 
-                        //DebugUtilities.DrawPoint(Offset, Color.magenta);
+                        //Debug.DrawLine(focusDetails.EndPoint, GrabPoint, Color.magenta);
+                        //Debug.DrawLine(GrabPoint, currentPosition, Color.magenta);
+                        //Debug.DrawLine(currentPosition, GrabPoint, Color.magenta);
 
-                        //DebugUtilities.DrawPoint(GrabPoint, Color.green);
-                        //DebugUtilities.DrawPoint(GrabPointOffset, Color.green);
-                        //Debug.DrawLine(GrabPoint, GrabPointOffset, Color.green);
+                        //var currentPosition = CurrentPointerTarget.transform.position;
+                        //var targetPosition = (focusDetails.EndPoint + currentPosition) - GrabPoint;
 
+                        //DebugUtilities.DrawPoint(currentPosition, Color.cyan);
+                        //DebugUtilities.DrawPoint(targetPosition, Color.blue);
 
-                        DebugUtilities.DrawPoint(CurrentPointerTarget.transform.position, Color.cyan);
+                        //Debug.DrawLine(targetPosition, currentPosition, Color.blue);
                     }
                 }
                 else
@@ -333,16 +314,14 @@ namespace XRTK.Services.InputSystem
                 {
                     if (syncedPointerTarget != null)
                     {
-                        GrabPointLocalSpace = Vector3.zero;
                         syncedPointerTarget.SetLayerRecursively(prevPhysicsLayer);
                         syncedPointerTarget = null;
                     }
 
                     PreviousPointerTarget = CurrentPointerTarget;
                     CurrentPointerTarget = focusDetails.HitObject;
-
-                    GrabPointOffset = Vector3.zero;
-                    GrabPointOffsetLocalSpace = Vector3.zero;
+                    GrabPoint = Vector3.zero;
+                    GrabPointLocalSpace = Vector3.zero;
                 }
 
                 if (CurrentPointerTarget != null)

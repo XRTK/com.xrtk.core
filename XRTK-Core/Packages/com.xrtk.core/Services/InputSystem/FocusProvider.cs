@@ -274,6 +274,7 @@ namespace XRTK.Services.InputSystem
                         syncedPointerTarget = CurrentPointerTarget;
 
                         prevPhysicsLayer = CurrentPointerTarget.layer;
+                        Debug.Assert(prevPhysicsLayer != IgnoreRaycastLayer, $"Failed to get a valid raycast layer for {syncedPointerTarget.name}: {LayerMask.LayerToName(prevPhysicsLayer)}");
                         CurrentPointerTarget.SetLayerRecursively(IgnoreRaycastLayer);
 
                         GrabPoint = focusDetails.EndPoint;
@@ -293,12 +294,12 @@ namespace XRTK.Services.InputSystem
                         //DebugUtilities.DrawPoint(focusDetails.EndPoint, Color.yellow);
 
                         //Debug.DrawLine(focusDetails.EndPoint, GrabPoint, Color.magenta);
-                        //Debug.DrawLine(GrabPoint, currentPosition, Color.magenta);
-                        //Debug.DrawLine(currentPosition, GrabPoint, Color.magenta);
 
                         //var currentPosition = CurrentPointerTarget.transform.position;
                         //var targetPosition = (focusDetails.EndPoint + currentPosition) - GrabPoint;
 
+                        //Debug.DrawLine(GrabPoint, currentPosition, Color.magenta);
+                        //Debug.DrawLine(currentPosition, GrabPoint, Color.magenta);
                         //DebugUtilities.DrawPoint(currentPosition, Color.cyan);
                         //DebugUtilities.DrawPoint(targetPosition, Color.blue);
 

@@ -119,6 +119,11 @@ namespace XRTK.Interfaces.InputSystem
         GameObject SyncedTarget { get; set; }
 
         /// <summary>
+        /// Overrides the <see cref="SyncedTarget"/>'s grab point.
+        /// </summary>
+        Vector3? OverrideGrabPoint { get; set; }
+
+        /// <summary>
         /// Ray stabilizer used when calculating position of pointer end point.
         /// </summary>
         IBaseRayStabilizer RayStabilizer { get; set; }

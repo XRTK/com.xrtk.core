@@ -277,8 +277,18 @@ namespace XRTK.Services.InputSystem
                         Debug.Assert(prevPhysicsLayer != IgnoreRaycastLayer, $"Failed to get a valid raycast layer for {syncedPointerTarget.name}: {LayerMask.LayerToName(prevPhysicsLayer)}");
                         CurrentPointerTarget.SetLayerRecursively(IgnoreRaycastLayer);
 
-                        GrabPoint = focusDetails.EndPoint;
-                        GrabPointLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(GrabPoint);
+                        var grabPoint = Pointer.OverrideGrabPoint ?? focusDetails.EndPoint;
+
+                        if (grabPoint == Vector3.zero)
+                        {
+                            GrabPoint = CurrentPointerTarget.transform.TransformPoint(grabPoint);
+                            GrabPointLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(GrabPoint);
+                        }
+                        else
+                        {
+                            GrabPoint = grabPoint;
+                            GrabPointLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(GrabPoint);
+                        }
                     }
                     else if (syncTarget != CurrentPointerTarget)
                     {
@@ -321,6 +331,7 @@ namespace XRTK.Services.InputSystem
 
                     PreviousPointerTarget = CurrentPointerTarget;
                     CurrentPointerTarget = focusDetails.HitObject;
+                    Pointer.OverrideGrabPoint = null;
                     GrabPoint = Vector3.zero;
                     GrabPointLocalSpace = Vector3.zero;
                 }

@@ -86,6 +86,9 @@ namespace XRTK.Services.InputSystem.Pointers
         private GameObject syncedTarget = null;
 
         /// <inheritdoc />
+        public Vector3? OverrideGrabPoint { get; set; } = null;
+
+        /// <inheritdoc />
         public virtual float PointerExtent { get; set; } = 10f;
 
         /// <inheritdoc />

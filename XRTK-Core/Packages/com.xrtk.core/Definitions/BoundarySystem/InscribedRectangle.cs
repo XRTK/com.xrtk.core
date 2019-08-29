@@ -266,15 +266,15 @@ namespace XRTK.Definitions.BoundarySystem
             // Find the top and bottom collision points by creating a large line segment that goes through the point to MAX and MIN values on Y
             var topEndpoint = new Vector2(point.x, largeValue);
             var bottomEndpoint = new Vector2(point.x, smallValue);
-            topEndpoint.RotateAroundPoint(point, angleRadians);
-            bottomEndpoint.RotateAroundPoint(point, angleRadians);
+            topEndpoint = topEndpoint.RotateAroundPoint(point, angleRadians);
+            bottomEndpoint = bottomEndpoint.RotateAroundPoint(point, angleRadians);
             var verticalLine = new Edge(topEndpoint, bottomEndpoint);
 
             // Find the left and right collision points by creating a large line segment that goes through the point to MAX and Min values on X
             var rightEndpoint = new Vector2(largeValue, point.y);
             var leftEndpoint = new Vector2(smallValue, point.y);
-            rightEndpoint.RotateAroundPoint(point, angleRadians);
-            leftEndpoint.RotateAroundPoint(point, angleRadians);
+            rightEndpoint = rightEndpoint.RotateAroundPoint(point, angleRadians);
+            leftEndpoint = leftEndpoint.RotateAroundPoint(point, angleRadians);
             var horizontalLine = new Edge(rightEndpoint, leftEndpoint);
 
             for (int i = 0; i < geometryEdges.Length; i++)
@@ -354,10 +354,10 @@ namespace XRTK.Definitions.BoundarySystem
             }
 
             point -= Center;
-            point.RotatePoint(MathUtilities.DegreesToRadians(-Angle));
+            point = point.RotatePoint(MathUtilities.DegreesToRadians(-Angle));
 
-            bool inWidth = Mathf.Abs(point.x) <= (Width * 0.5f);
-            bool inHeight = Mathf.Abs(point.y) <= (Height * 0.5f);
+            var inWidth = Mathf.Abs(point.x) <= (Width * 0.5f);
+            var inHeight = Mathf.Abs(point.y) <= (Height * 0.5f);
 
             return (inWidth && inHeight);
         }
@@ -384,10 +384,10 @@ namespace XRTK.Definitions.BoundarySystem
             var bottomRight = new Vector2(centerPoint.x + halfWidth, centerPoint.y - halfHeight);
 
             // Rotate the rectangle.
-            topLeft.RotateAroundPoint(centerPoint, angleRadians);
-            topRight.RotateAroundPoint(centerPoint, angleRadians);
-            bottomLeft.RotateAroundPoint(centerPoint, angleRadians);
-            bottomRight.RotateAroundPoint(centerPoint, angleRadians);
+            topLeft = topLeft.RotateAroundPoint(centerPoint, angleRadians);
+            topRight = topRight.RotateAroundPoint(centerPoint, angleRadians);
+            bottomLeft = bottomLeft.RotateAroundPoint(centerPoint, angleRadians);
+            bottomRight = bottomRight.RotateAroundPoint(centerPoint, angleRadians);
 
             // Get the rectangle edges.
             var topEdge = new Edge(topLeft, topRight);

@@ -231,9 +231,9 @@ namespace XRTK.SDK.Utilities.Solvers
                 var rot = cachedTransform.rotation;
                 var scale = cachedTransform.localScale;
 
-                pos.SmoothTo(GoalPosition, SolverHandler.DeltaTime, moveLerpTime);
-                rot.SmoothTo(GoalRotation, SolverHandler.DeltaTime, rotateLerpTime);
-                scale.SmoothTo(GoalScale, SolverHandler.DeltaTime, scaleLerpTime);
+                pos = pos.SmoothTo(GoalPosition, SolverHandler.DeltaTime, moveLerpTime);
+                rot = rot.SmoothTo(GoalRotation, SolverHandler.DeltaTime, rotateLerpTime);
+                scale = scale.SmoothTo(GoalScale, SolverHandler.DeltaTime, scaleLerpTime);
 
                 cachedTransform.position = pos;
                 cachedTransform.rotation = rot;
@@ -254,9 +254,9 @@ namespace XRTK.SDK.Utilities.Solvers
         {
             if (smoothing)
             {
-                WorkingPosition.SmoothTo(GoalPosition, SolverHandler.DeltaTime, moveLerpTime);
-                WorkingRotation.SmoothTo(GoalRotation, SolverHandler.DeltaTime, rotateLerpTime);
-                WorkingScale.SmoothTo(GoalScale, SolverHandler.DeltaTime, scaleLerpTime);
+                WorkingPosition = WorkingPosition.SmoothTo(GoalPosition, SolverHandler.DeltaTime, moveLerpTime);
+                WorkingRotation = WorkingRotation.SmoothTo(GoalRotation, SolverHandler.DeltaTime, rotateLerpTime);
+                WorkingScale = WorkingScale.SmoothTo(GoalScale, SolverHandler.DeltaTime, scaleLerpTime);
             }
             else
             {

@@ -28,7 +28,7 @@ All public classes, structs, enums, functions, properties, fields posted to the 
         /// <summary>
         /// The ID assigned to the Controller
         /// </summary>
-        public string ID;
+        public string ID { get; set; }
     }
 ```
 

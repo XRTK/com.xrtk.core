@@ -11,6 +11,12 @@ namespace XRTK.Extensions
     /// </summary>
     public static class StringExtensions
     {
+        public const string WhiteSpace = " ";
+
+        public const string Backslash = "\\";
+
+        public const string ForwardSlash = "/";
+
         /// <summary>
         /// Encodes the string to base 64 ASCII.
         /// </summary>
@@ -18,8 +24,7 @@ namespace XRTK.Extensions
         /// <returns>Encoded string.</returns>
         public static string EncodeTo64(this string toEncode)
         {
-            byte[] toEncodeAsBytes = Encoding.ASCII.GetBytes(toEncode);
-            return Convert.ToBase64String(toEncodeAsBytes);
+            return Convert.ToBase64String(Encoding.ASCII.GetBytes(toEncode));
         }
 
         /// <summary>
@@ -29,8 +34,7 @@ namespace XRTK.Extensions
         /// <returns>Decoded string.</returns>
         public static string DecodeFrom64(this string encodedData)
         {
-            byte[] encodedDataAsBytes = Convert.FromBase64String(encodedData);
-            return Encoding.ASCII.GetString(encodedDataAsBytes);
+            return Encoding.ASCII.GetString(Convert.FromBase64String(encodedData));
         }
 
         /// <summary>
@@ -41,13 +45,13 @@ namespace XRTK.Extensions
         public static string ToProperCase(this string value)
         {
             // If there are 0 or 1 characters, just return the string.
-            if (value == null) { return value; }
+            if (value == null) { return string.Empty; }
             if (value.Length < 2) { return value.ToUpper(); }
             // If there's already spaces in the string, return.
-            if (value.Contains(" ")) { return value; }
+            if (value.Contains(WhiteSpace)) { return value; }
 
             // Start with the first character.
-            string result = value.Substring(0, 1).ToUpper();
+            var result = new StringBuilder(value.Substring(0, 1).ToUpper());
 
             // Add the remaining characters.
             for (int i = 1; i < value.Length; i++)
@@ -58,18 +62,18 @@ namespace XRTK.Extensions
 
                 if (isUpper && !wasLastCharUpper && nextIsLower)
                 {
-                    result += " ";
+                    result.Append(WhiteSpace);
                 }
 
-                result += value[i];
+                result.Append(value[i]);
 
                 if (isUpper && wasLastCharUpper && !nextIsLower)
                 {
-                    result += " ";
+                    result.Append(WhiteSpace);
                 }
             }
 
-            return result;
+            return result.ToString();
         }
 
         /// <summary>
@@ -79,7 +83,7 @@ namespace XRTK.Extensions
         /// <returns></returns>
         public static string ToBackSlashes(this string value)
         {
-            return value.Replace("\\", "/");
+            return value.Replace(Backslash, ForwardSlash);
         }
 
         /// <summary>
@@ -88,7 +92,7 @@ namespace XRTK.Extensions
         /// <param name="value"></param>
         public static string ToForwardSlashes(this string value)
         {
-            return value.Replace("/", "\\");
+            return value.Replace(ForwardSlash, Backslash);
         }
     }
 }

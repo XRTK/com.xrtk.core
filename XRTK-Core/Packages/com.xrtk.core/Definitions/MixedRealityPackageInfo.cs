@@ -26,7 +26,7 @@ namespace XRTK.Definitions
             this.uri = uri;
             this.isRequiredPackage = isRequiredPackage;
             isDefaultPackage = true;
-            isEnabled = true;
+            isEnabled = false;
         }
 
         [SerializeField]

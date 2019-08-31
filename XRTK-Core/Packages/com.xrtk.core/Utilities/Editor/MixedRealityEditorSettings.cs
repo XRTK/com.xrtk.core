@@ -17,7 +17,7 @@ namespace XRTK.Utilities.Editor
     public class MixedRealityEditorSettings : IActiveBuildTargetChanged
     {
         private const string IgnoreKey = "_MixedRealityToolkit_Editor_IgnoreSettingsPrompts";
-        private const string SessionKey = "_MixedRealityToolkit_Editor_ShownSettingsPrompts";
+        public const string SessionKey = "_MixedRealityToolkit_Editor_ShownSettingsPrompts";
 
         private static string Project_AbsolutePath
         {

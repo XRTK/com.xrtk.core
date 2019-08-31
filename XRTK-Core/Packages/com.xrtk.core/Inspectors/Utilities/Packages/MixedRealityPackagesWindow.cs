@@ -10,12 +10,24 @@ using XRTK.Utilities.Editor;
 
 namespace XRTK.Inspectors.Utilities.Packages
 {
+    [InitializeOnLoad]
     public class MixedRealityPackagesWindow : EditorWindow
     {
         private static MixedRealityPackagesWindow window;
         private static Tuple<MixedRealityPackageInfo, bool>[] packages;
         private static bool[] isPackageEnabled;
         private static bool isError;
+
+        /// <summary>
+        /// <see cref="InitializeOnLoadAttribute"/>
+        /// </summary>
+        static MixedRealityPackagesWindow()
+        {
+            if (!SessionState.GetBool(MixedRealityEditorSettings.SessionKey, true))
+            {
+                OpenPackagesWindow();
+            }
+        }
 
         [MenuItem("Mixed Reality Toolkit/Packages...", true, 99)]
         static bool OpenPackagesWindowValidation()

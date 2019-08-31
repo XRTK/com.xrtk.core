@@ -23,7 +23,7 @@ namespace XRTK.Inspectors.Utilities.Packages
         /// </summary>
         static MixedRealityPackagesWindow()
         {
-            if (!SessionState.GetBool(MixedRealityEditorSettings.SessionKey, true))
+            if (!MixedRealityEditorSettings.IsFirstSession)
             {
                 OpenPackagesWindow();
             }

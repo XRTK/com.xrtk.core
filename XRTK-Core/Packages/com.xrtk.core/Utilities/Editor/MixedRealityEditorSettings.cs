@@ -17,7 +17,12 @@ namespace XRTK.Utilities.Editor
     public class MixedRealityEditorSettings : IActiveBuildTargetChanged
     {
         private const string IgnoreKey = "_MixedRealityToolkit_Editor_IgnoreSettingsPrompts";
-        public const string SessionKey = "_MixedRealityToolkit_Editor_ShownSettingsPrompts";
+        private const string SessionKey = "_MixedRealityToolkit_Editor_ShownSettingsPrompts";
+
+        /// <summary>
+        /// Is this the first session of the xrtk?
+        /// </summary>
+        public static bool IsFirstSession => SessionState.GetBool(SessionKey, true);
 
         private static string Project_AbsolutePath
         {
@@ -80,7 +85,7 @@ namespace XRTK.Utilities.Editor
         {
             if (Application.isPlaying ||
                 EditorPrefs.GetBool(IgnoreKey, false) ||
-                !SessionState.GetBool(SessionKey, true))
+                !IsFirstSession)
             {
                 return;
             }

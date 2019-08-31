@@ -117,6 +117,7 @@ namespace XRTK.Inspectors.Utilities
         internal static bool UpdateSubmodules()
         {
             EditorUtility.DisplayProgressBar("Updating Submodules...", "Please wait...", 0.5f);
+            // TODO This may also not work for Mac Editors.
             var success = new Process().Run($"/C cd \"{RepositoryRootDir}\" && git submodule update --init --all", out _);
             EditorUtility.ClearProgressBar();
             // TODO we need to ensure that we return true if git isn't installed.

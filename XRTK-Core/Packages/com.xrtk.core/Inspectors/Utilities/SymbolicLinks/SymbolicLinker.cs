@@ -374,11 +374,33 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 Directory.Delete(targetAbsolutePath);
             }
 
-            // --------------------> /C mklink /D "C:\Link To Folder" "C:\Users\Name\Original Folder"
-            if (!new Process().Run($"/C mklink /D \"{targetAbsolutePath}\" \"{sourceAbsolutePath}\"", out var error))
+            switch (Environment.OSVersion.Platform)
             {
-                Debug.LogError($"{error}");
-                return false;
+                case PlatformID.MacOSX:
+                    // --------------------> ln -s /path/to/original /path/to/symlink
+                    if (!new Process().Run($"ln -s \"{sourceAbsolutePath.ToForwardSlashes()}\" \"{targetAbsolutePath.ToForwardSlashes()}\"", out var error))
+                    {
+                        Debug.LogError($"{error}");
+                        return false;
+                    }
+
+                    break;
+                case PlatformID.Xbox:
+                case PlatformID.WinCE:
+                case PlatformID.Win32S:
+                case PlatformID.Win32NT:
+                case PlatformID.Win32Windows:
+                    // --------------------> /C mklink /D "C:\Link To Folder" "C:\Users\Name\Original Folder"
+                    if (!new Process().Run($"/C mklink /D \"{targetAbsolutePath}\" \"{sourceAbsolutePath}\"", out error))
+                    {
+                        Debug.LogError($"{error}");
+                        return false;
+                    }
+
+                    break;
+                default:
+                    Debug.LogError($"Unsupported OS {Environment.OSVersion.Platform}");
+                    return false;
             }
 
             Debug.Log($"Successfully created symbolic link to {sourceAbsolutePath}");

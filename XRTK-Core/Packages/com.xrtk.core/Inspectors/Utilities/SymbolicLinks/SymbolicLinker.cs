@@ -378,7 +378,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             {
                 case PlatformID.MacOSX:
                     // --------------------> ln -s /path/to/original /path/to/symlink
-                    if (!new Process().Run($"ln -s \"{sourceAbsolutePath.ToForwardSlashes()}\" \"{targetAbsolutePath.ToForwardSlashes()}\"", out var error))
+                    if (!new Process().Run($"ln -s \"{sourceAbsolutePath.ToForwardSlashes()}\" \"{targetAbsolutePath.ToForwardSlashes()}\"", out var error, @"/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"))
                     {
                         Debug.LogError($"{error}");
                         return false;
@@ -391,7 +391,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 case PlatformID.Win32NT:
                 case PlatformID.Win32Windows:
                     // --------------------> /C mklink /D "C:\Link To Folder" "C:\Users\Name\Original Folder"
-                    if (!new Process().Run($"/C mklink /D \"{targetAbsolutePath}\" \"{sourceAbsolutePath}\"", out error))
+                    if (!new Process().Run($"/C mklink /D \"{targetAbsolutePath}\" \"{sourceAbsolutePath}\"", out error, @"cmd.exe"))
                     {
                         Debug.LogError($"{error}");
                         return false;
@@ -416,7 +416,9 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 return false;
             }
 
-            if (new Process().Run($"/C rmdir /q \"{path}\"", out _))
+            var success = new Process().Run($"/C rmdir /q \"{path}\"", out _, @"cmd.exe");
+
+            if (success)
             {
                 if (File.Exists($"{path}.meta"))
                 {

@@ -209,7 +209,8 @@ namespace XRTK.Inspectors.Utilities.Packages
 
         private static async Task AddPackageAsync(MixedRealityPackageInfo packageInfo)
         {
-            var tag = (await GitUtilities.GetAllTagsFromRemoteAsync(packageInfo.Uri)).LastOrDefault();
+            var versionSeperator = new char[] { '.' };
+            var tag = (await GitUtilities.GetAllTagsFromRemoteAsync(packageInfo.Uri)).OrderBy(value => int.Parse(value.Split(versionSeperator)[0])).ThenBy(value => int.Parse(value.Split(versionSeperator)[1])).ThenBy(value => int.Parse(value.Split(versionSeperator)[2])).LastOrDefault();
             var addRequest = Client.Add($"{packageInfo.Name}@{packageInfo.Uri}#{tag}");
 
             await addRequest.WaitUntil(request => request.IsCompleted, timeout: 30);

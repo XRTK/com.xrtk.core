@@ -33,7 +33,11 @@ namespace XRTK.Definitions
 #if UNITY_EDITOR
                 UnityEditor.EditorUtility.SetDirty(this);
                 UnityEditor.AssetDatabase.SaveAssets();
-                UnityEditor.AssetDatabase.Refresh(UnityEditor.ImportAssetOptions.ForceUpdate);
+
+                if (!UnityEditor.EditorApplication.isUpdating)
+                {
+                    UnityEditor.AssetDatabase.Refresh(UnityEditor.ImportAssetOptions.ForceUpdate);
+                }
 #endif
             }
         }

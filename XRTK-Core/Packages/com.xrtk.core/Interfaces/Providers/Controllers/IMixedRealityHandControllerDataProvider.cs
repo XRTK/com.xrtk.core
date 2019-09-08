@@ -15,14 +15,24 @@ namespace XRTK.Interfaces.Providers.Controllers
     /// </summary>
     public interface IMixedRealityHandControllerDataProvider : IMixedRealityControllerDataProvider
     {
-        IReadOnlyList<IMixedRealityHandMeshHandler> HandMeshUpdatedEventListeners { get; }
-
-        IReadOnlyList<IMixedRealityHandJointHandler> HandJointUpdatedEventListeners { get; }
+        /// <summary>
+        /// Gets a read only list of all currently registered hand mesh update handlers.
+        /// </summary>
+        IReadOnlyList<IMixedRealityHandMeshHandler> HandMeshUpdatedEventHandlers { get; }
 
         /// <summary>
-        /// Get a game object following the hand joint.
+        /// Gets a read only list of all currently registered hand joint update handlers.
         /// </summary>
-        Transform RequestJointTransform(TrackedHandJoint joint, Handedness handedness);
+        IReadOnlyList<IMixedRealityHandJointHandler> HandJointUpdatedEventHandlers { get; }
+
+        /// <summary>
+        /// Gets a transform following the hand joint.
+        /// </summary>
+        /// <param name="joint">The joint to find the transform for.</param>
+        /// <param name="handedness">Handedness of the hand the joint belongs to.</param>
+        /// <param name="jointTransform">If found, the transform following the hand joint.</param>
+        /// <returns>True, if the joint transform was found.</returns>
+        bool TryGetJointTransform(TrackedHandJoint joint, Handedness handedness, out Transform jointTransform);
 
         /// <summary>
         /// Gets whether the specified hand is currently being tracked.
@@ -31,12 +41,48 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// <returns>True if specified hand is tracked.</returns>
         bool IsHandTracked(Handedness handedness);
 
-        void RaiseHandJointsUpdated(IMixedRealityInputSource source, Handedness handedness, IDictionary<TrackedHandJoint, MixedRealityPose> jointPoses);
+        /// <summary>
+        /// Update the hand joint data. Use with <see cref="IMixedRealityPlatformHandControllerDataProvider"/> to
+        /// provide hand joint platform data to the hand data provider.
+        /// </summary>
+        /// <param name="source">Input source of the update.</param>
+        /// <param name="handedness">The handedness of the updated hand mesh.</param>
+        /// <param name="jointPoses">Updated hand joint poses provided by the platform.</param>
+        void UpdateHandJoints(IMixedRealityInputSource source, Handedness handedness, IDictionary<TrackedHandJoint, MixedRealityPose> jointPoses);
 
-        void RaiseHandMeshUpdated(IMixedRealityInputSource source, Handedness handedness, HandMeshUpdatedEventData handMeshInfo);
+        /// <summary>
+        /// Update the hand mesh data. Use with <see cref="IMixedRealityPlatformHandControllerDataProvider"/> to
+        /// provide hand mesh platform data to the hand data provider.
+        /// </summary>
+        /// <param name="source">Input source of the update.</param>
+        /// <param name="handedness">The handedness of the updated hand mesh.</param>
+        /// <param name="handMeshInfo">Updated hand mesh inforamtion provided by the platform.</param>
+        void UpdateHandMesh(IMixedRealityInputSource source, Handedness handedness, HandMeshUpdatedEventData handMeshInfo);
 
-        void Register(GameObject listener);
+        /// <summary>
+        /// Registers a hand joint update handler. The handler will then
+        /// receive updates.
+        /// </summary>
+        /// <param name="handler">The handler to register.</param>
+        void Register(IMixedRealityHandJointHandler handler);
 
-        void Unregister(GameObject listener);
+        /// <summary>
+        /// Unregisters a previosuly registered hand joint update handler.
+        /// </summary>
+        /// <param name="handler">The handler to unregister.</param>
+        void Unregister(IMixedRealityHandJointHandler handler);
+
+        /// <summary>
+        /// Registers a hand mesh update handler. The handler will then
+        /// receive updates.
+        /// </summary>
+        /// <param name="handler">The handler to register.</param>
+        void Register(IMixedRealityHandMeshHandler handler);
+
+        /// <summary>
+        /// Unregisters a previosuly registered hand mesh update handler.
+        /// </summary>
+        /// <param name="handler">The handler to unregister.</param>
+        void Unregister(IMixedRealityHandMeshHandler handler);
     }
 }

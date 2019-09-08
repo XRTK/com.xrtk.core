@@ -118,7 +118,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public override void Update()
         {
-            if (profile.SimulateHandTracking && UserInputEnabled)
+            if (Application.isEditor && profile.SimulateHandTracking && UserInputEnabled)
             {
                 UpdateHandData(HandDataLeft, HandDataRight);
             }
@@ -129,7 +129,7 @@ namespace XRTK.Providers.Controllers.Hands
         {
             // Apply hand data in LateUpdate to ensure external changes are applied.
             // HandDataLeft/Right can be modified after the services Update() call.
-            if (profile.SimulateHandTracking)
+            if (Application.isEditor && profile.SimulateHandTracking)
             {
                 DateTime currentTime = DateTime.UtcNow;
                 double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandControllerUpdateTimeStamp)).TotalMilliseconds;

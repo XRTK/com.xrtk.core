@@ -32,26 +32,9 @@ namespace XRTK.Inspectors.Utilities
             {
                 if (!string.IsNullOrEmpty(projectRootDir)) { return projectRootDir; }
 
-                switch (Environment.OSVersion.Platform)
+                if (new Process().Run($@"cd ""{Application.dataPath}"" && git rev-parse --show-toplevel", out var rootDir))
                 {
-                    case PlatformID.MacOSX:
-                        if (new Process().Run($@"cd {Application.dataPath} && git rev-parse --show-toplevel", out var rootDir, @"/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"))
-                        {
-                            return projectRootDir = rootDir.ToBackSlashes().Replace("\n", string.Empty);
-                        }
-                        break;
-                    case PlatformID.Win32NT:
-                    case PlatformID.Win32S:
-                    case PlatformID.Win32Windows:
-                    case PlatformID.WinCE:
-                    case PlatformID.Xbox:
-                        if (new Process().Run($@"/C cd {Application.dataPath} && git rev-parse --show-toplevel", out rootDir, @"cmd.exe"))
-                        {
-                            return projectRootDir = rootDir.ToBackSlashes().Replace("\n", string.Empty);
-                        }
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException($"Unsupported OS {Environment.OSVersion.Platform}");
+                    return projectRootDir = rootDir.ToBackSlashes().Replace("\n", string.Empty);
                 }
 
                 return projectRootDir = Directory.GetParent(Application.dataPath).FullName;
@@ -136,27 +119,19 @@ namespace XRTK.Inspectors.Utilities
         {
             EditorUtility.DisplayProgressBar("Updating Submodules...", "Please wait...", 0.5f);
 
-            var success = true;
+            var isGitInstalled = new Process().Run("git --version", out var message) && !message.Contains("'git' is not recognized");
 
-            switch (Environment.OSVersion.Platform)
+            if (isGitInstalled)
             {
-                case PlatformID.MacOSX:
-                    success = new Process().Run($"cd \"{RepositoryRootDir}\" && git submodule update --init --all", out _, @"/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal");
-                    break;
-                case PlatformID.Win32NT:
-                case PlatformID.Win32S:
-                case PlatformID.Win32Windows:
-                case PlatformID.WinCE:
-                case PlatformID.Xbox:
-                    success = new Process().Run($"/C cd \"{RepositoryRootDir}\" && git submodule update --init --all", out _, @"cmd.exe");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
+                var success = new Process().Run($"cd \"{RepositoryRootDir}\" && git submodule update --init --all", out _);
+
+                EditorUtility.ClearProgressBar();
+                return success;
             }
 
             EditorUtility.ClearProgressBar();
-            // TODO we need to ensure that we return true if git isn't installed.
-            return success;
+            Debug.LogError(message);
+            return true;
         }
 
         /// <summary>
@@ -166,28 +141,11 @@ namespace XRTK.Inspectors.Utilities
         /// <returns>A list of tags from the remote repository.</returns>
         public static async Task<IEnumerable<string>> GetAllTagsFromRemoteAsync(string url)
         {
-            ProcessResult result;
-
-            switch (Environment.OSVersion.Platform)
-            {
-                case PlatformID.MacOSX:
-                    result = await new Process().RunAsync($"git ls-remote --tags {url}", @"/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal");
-                    break;
-                case PlatformID.Win32NT:
-                case PlatformID.Win32S:
-                case PlatformID.Win32Windows:
-                case PlatformID.WinCE:
-                case PlatformID.Xbox:
-                    result = await new Process().RunAsync($"/C git ls-remote --tags {url}", @"cmd.exe");
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
+            var result = await new Process().RunAsync($"git ls-remote --tags {url}");
 
             if (result.ExitCode != 0)
             {
-                throw new Exception("Failed to get remote tags");
+                throw new Exception($"Failed to get remote tags:\n{result.Errors}");
             }
 
             return from tag in result.Output

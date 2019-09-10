@@ -115,7 +115,11 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
             EditorUtility.SetDirty(SymbolicLinker.Settings);
             AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
+
+            if (!EditorApplication.isUpdating)
+            {
+                AssetDatabase.Refresh();
+            }
         }
 
         private void OnGUI()
@@ -167,7 +171,11 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
                     EditorUtility.SetDirty(SymbolicLinker.Settings);
                     AssetDatabase.SaveAssets();
-                    AssetDatabase.Refresh();
+
+                    if (!EditorApplication.isUpdating)
+                    {
+                        AssetDatabase.Refresh();
+                    }
                 }
             }
         }

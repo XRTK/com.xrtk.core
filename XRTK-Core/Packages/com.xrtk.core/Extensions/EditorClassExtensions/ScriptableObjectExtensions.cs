@@ -43,7 +43,12 @@ namespace XRTK.Extensions.EditorClassExtensions
 
             AssetDatabase.CreateAsset(scriptableObject, assetPathAndName);
             AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
+
+            if (!EditorApplication.isUpdating)
+            {
+                AssetDatabase.Refresh();
+            }
+
             EditorUtility.FocusProjectWindow();
             Selection.activeObject = scriptableObject;
             EditorGUIUtility.PingObject(scriptableObject);

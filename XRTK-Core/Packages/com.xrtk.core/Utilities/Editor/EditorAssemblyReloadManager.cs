@@ -35,7 +35,13 @@ namespace XRTK.Utilities.Editor
                 else
                 {
                     EditorApplication.UnlockReloadAssemblies();
-                    EditorApplication.delayCall += () => AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+                    EditorApplication.delayCall += () =>
+                    {
+                        if (!EditorApplication.isUpdating)
+                        {
+                            AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+                        }
+                    };
 
                     if (!Application.isBatchMode)
                     {

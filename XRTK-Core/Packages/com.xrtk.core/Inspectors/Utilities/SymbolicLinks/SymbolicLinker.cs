@@ -193,7 +193,11 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
             EditorUtility.SetDirty(Settings);
             AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
+
+            if (!EditorApplication.isUpdating)
+            {
+                AssetDatabase.Refresh();
+            }
 
             EditorApplication.UnlockReloadAssemblies();
             MixedRealityPackageUtilities.CheckPackageManifest();
@@ -382,7 +386,12 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             }
 
             Debug.Log($"Successfully created symbolic link to {sourceAbsolutePath}");
-            AssetDatabase.Refresh();
+
+            if (!EditorApplication.isUpdating)
+            {
+                AssetDatabase.Refresh();
+            }
+
             return true;
         }
 

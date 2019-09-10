@@ -9963,6 +9963,12 @@ references:
   commentId: T:XRTK.Extensions.StringExtensions
   fullName: XRTK.Extensions.StringExtensions
   nameWithType: StringExtensions
+- uid: XRTK.Extensions.StringExtensions.Backslash
+  name: Backslash
+  href: api/XRTK.Extensions.StringExtensions.html#XRTK_Extensions_StringExtensions_Backslash
+  commentId: F:XRTK.Extensions.StringExtensions.Backslash
+  fullName: XRTK.Extensions.StringExtensions.Backslash
+  nameWithType: StringExtensions.Backslash
 - uid: XRTK.Extensions.StringExtensions.DecodeFrom64(System.String)
   name: DecodeFrom64(String)
   href: api/XRTK.Extensions.StringExtensions.html#XRTK_Extensions_StringExtensions_DecodeFrom64_System_String_
@@ -9989,6 +9995,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.StringExtensions.EncodeTo64
   nameWithType: StringExtensions.EncodeTo64
+- uid: XRTK.Extensions.StringExtensions.ForwardSlash
+  name: ForwardSlash
+  href: api/XRTK.Extensions.StringExtensions.html#XRTK_Extensions_StringExtensions_ForwardSlash
+  commentId: F:XRTK.Extensions.StringExtensions.ForwardSlash
+  fullName: XRTK.Extensions.StringExtensions.ForwardSlash
+  nameWithType: StringExtensions.ForwardSlash
 - uid: XRTK.Extensions.StringExtensions.ToBackSlashes(System.String)
   name: ToBackSlashes(String)
   href: api/XRTK.Extensions.StringExtensions.html#XRTK_Extensions_StringExtensions_ToBackSlashes_System_String_
@@ -10028,6 +10040,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.StringExtensions.ToProperCase
   nameWithType: StringExtensions.ToProperCase
+- uid: XRTK.Extensions.StringExtensions.WhiteSpace
+  name: WhiteSpace
+  href: api/XRTK.Extensions.StringExtensions.html#XRTK_Extensions_StringExtensions_WhiteSpace
+  commentId: F:XRTK.Extensions.StringExtensions.WhiteSpace
+  fullName: XRTK.Extensions.StringExtensions.WhiteSpace
+  nameWithType: StringExtensions.WhiteSpace
 - uid: XRTK.Extensions.TextureExtensions
   name: TextureExtensions
   href: api/XRTK.Extensions.TextureExtensions.html
@@ -10126,12 +10144,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.TransformExtensions.FindCommonRoot
   nameWithType: TransformExtensions.FindCommonRoot
-- uid: XRTK.Extensions.TransformExtensions.GetColliderBounds(UnityEngine.Transform)
-  name: GetColliderBounds(Transform)
-  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetColliderBounds_UnityEngine_Transform_
-  commentId: M:XRTK.Extensions.TransformExtensions.GetColliderBounds(UnityEngine.Transform)
-  fullName: XRTK.Extensions.TransformExtensions.GetColliderBounds(UnityEngine.Transform)
-  nameWithType: TransformExtensions.GetColliderBounds(Transform)
+- uid: XRTK.Extensions.TransformExtensions.GetColliderBounds(UnityEngine.Transform,System.Boolean)
+  name: GetColliderBounds(Transform, Boolean)
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetColliderBounds_UnityEngine_Transform_System_Boolean_
+  commentId: M:XRTK.Extensions.TransformExtensions.GetColliderBounds(UnityEngine.Transform,System.Boolean)
+  fullName: XRTK.Extensions.TransformExtensions.GetColliderBounds(UnityEngine.Transform, System.Boolean)
+  nameWithType: TransformExtensions.GetColliderBounds(Transform, Boolean)
 - uid: XRTK.Extensions.TransformExtensions.GetColliderBounds*
   name: GetColliderBounds
   href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetColliderBounds_

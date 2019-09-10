@@ -18,7 +18,7 @@ namespace XRTK.Inspectors.Utilities.Packages
         private static bool isError;
 
         [MenuItem("Mixed Reality Toolkit/Packages...", true, 99)]
-        static bool OpenPackagesWindowValidation()
+        public static bool OpenPackagesWindowValidation()
         {
             return !MixedRealityPackageUtilities.IsRunningCheck;
         }

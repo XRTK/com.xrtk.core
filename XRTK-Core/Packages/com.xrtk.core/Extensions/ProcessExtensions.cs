@@ -25,7 +25,7 @@ namespace XRTK.Extensions
         /// <param name="application">The Application to run through the command line. Default application is "cmd.exe"</param>
         /// <returns>Output string.</returns>
         /// <remarks>This process will block the main thread of the editor if command takes too long to run. Use <see cref="RunAsync(Process,string,string,bool,CancellationToken)"/> for a background process.</remarks>
-        public static bool Run(this Process process, string args, out string output, string application)
+        public static bool Run(this Process process, string args, out string output, string application = "")
         {
             if (string.IsNullOrEmpty(args))
             {
@@ -33,6 +33,8 @@ namespace XRTK.Extensions
                 UnityEngine.Debug.LogError(output);
                 return false;
             }
+
+            SetupPlatformArgs(ref args, ref application);
 
             process.StartInfo = new ProcessStartInfo
             {
@@ -86,8 +88,10 @@ namespace XRTK.Extensions
         /// <param name="showDebug">Should output debug code to Editor Console?</param>
         /// <param name="cancellationToken"></param>
         /// <returns><see cref="ProcessResult"/></returns>
-        public static async Task<ProcessResult> RunAsync(this Process process, string args, string application, bool showDebug = false, CancellationToken cancellationToken = default)
+        public static async Task<ProcessResult> RunAsync(this Process process, string args, string application = "", bool showDebug = false, CancellationToken cancellationToken = default)
         {
+            SetupPlatformArgs(ref args, ref application);
+
             return await RunAsync(process, new ProcessStartInfo
             {
                 FileName = application,
@@ -212,6 +216,54 @@ namespace XRTK.Extensions
             }
 
             return await processResult.Task;
+        }
+
+        private static void SetupPlatformArgs(ref string args, ref string application)
+        {
+            var updateApplication = string.IsNullOrWhiteSpace(application);
+
+            switch (Environment.OSVersion.Platform)
+            {
+                case PlatformID.MacOSX:
+                    if (updateApplication)
+                    {
+                        application = @"/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal";
+                    }
+
+                    if (!args.ToLower().StartsWith("-c "))
+                    {
+                        args = $"-c {args}";
+                    }
+                    break;
+                case PlatformID.Unix:
+                    if (updateApplication)
+                    {
+                        application = "/bin/bash";
+                    }
+
+                    if (!args.ToLower().StartsWith("-c "))
+                    {
+                        args = $"-c {args}";
+                    }
+                    break;
+                case PlatformID.Win32NT:
+                case PlatformID.Win32S:
+                case PlatformID.Win32Windows:
+                case PlatformID.WinCE:
+                case PlatformID.Xbox:
+                    if (updateApplication)
+                    {
+                        application = "cmd.exe";
+                    }
+
+                    if (!args.ToLower().StartsWith("/c "))
+                    {
+                        args = $"/c {args}";
+                    }
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException($"Unsupported OS {Environment.OSVersion.Platform}");
+            }
         }
     }
 }

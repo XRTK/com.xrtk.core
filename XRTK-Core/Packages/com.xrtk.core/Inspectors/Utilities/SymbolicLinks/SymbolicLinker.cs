@@ -377,8 +377,9 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             switch (Environment.OSVersion.Platform)
             {
                 case PlatformID.MacOSX:
+                case PlatformID.Unix:
                     // --------------------> ln -s /path/to/original /path/to/symlink
-                    if (!new Process().Run($"ln -s \"{sourceAbsolutePath.ToForwardSlashes()}\" \"{targetAbsolutePath.ToForwardSlashes()}\"", out var error, @"/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal"))
+                    if (!new Process().Run($"ln -s \"{sourceAbsolutePath.ToForwardSlashes()}\" \"{targetAbsolutePath.ToForwardSlashes()}\"", out var error))
                     {
                         Debug.LogError($"{error}");
                         return false;
@@ -390,8 +391,8 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 case PlatformID.Win32S:
                 case PlatformID.Win32NT:
                 case PlatformID.Win32Windows:
-                    // --------------------> /C mklink /D "C:\Link To Folder" "C:\Users\Name\Original Folder"
-                    if (!new Process().Run($"/C mklink /D \"{targetAbsolutePath}\" \"{sourceAbsolutePath}\"", out error, @"cmd.exe"))
+                    // --------------------> mklink /D "C:\Link To Folder" "C:\Users\Name\Original Folder"
+                    if (!new Process().Run($"mklink /D \"{targetAbsolutePath}\" \"{sourceAbsolutePath}\"", out error))
                     {
                         Debug.LogError($"{error}");
                         return false;
@@ -416,7 +417,24 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 return false;
             }
 
-            var success = new Process().Run($"/C rmdir /q \"{path}\"", out _, @"cmd.exe");
+            bool success;
+
+            switch (Environment.OSVersion.Platform)
+            {
+                case PlatformID.MacOSX:
+                case PlatformID.Unix:
+                    success = new Process().Run($"rm \"{path}\"", out _);
+                    break;
+                case PlatformID.Win32NT:
+                case PlatformID.Win32S:
+                case PlatformID.Win32Windows:
+                case PlatformID.WinCE:
+                case PlatformID.Xbox:
+                    success = new Process().Run($"rmdir /q \"{path}\"", out _);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException($"Unsupported OS {Environment.OSVersion.Platform}");
+            }
 
             if (success)
             {

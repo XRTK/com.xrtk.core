@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -381,7 +380,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                     // --------------------> ln -s /path/to/original /path/to/symlink
                     if (!new Process().Run($"ln -s \"{sourceAbsolutePath.ToForwardSlashes()}\" \"{targetAbsolutePath.ToForwardSlashes()}\"", out var error))
                     {
-                        Debug.LogError($"{error}");
+                        Debug.LogError(error);
                         return false;
                     }
 
@@ -394,7 +393,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                     // --------------------> mklink /D "C:\Link To Folder" "C:\Users\Name\Original Folder"
                     if (!new Process().Run($"mklink /D \"{targetAbsolutePath}\" \"{sourceAbsolutePath}\"", out error))
                     {
-                        Debug.LogError($"{error}");
+                        Debug.LogError(error);
                         return false;
                     }
 
@@ -443,7 +442,10 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                     File.Delete($"{path}.meta");
                 }
 
-                AssetDatabase.Refresh();
+                if (!EditorApplication.isUpdating)
+                {
+                    AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+                }
             }
 
             return true;

@@ -416,7 +416,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 return false;
             }
 
-            bool success;
+            bool success = false;
 
             switch (Environment.OSVersion.Platform)
             {
@@ -432,7 +432,8 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                     success = new Process().Run($"rmdir /q \"{path}\"", out _);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException($"Unsupported OS {Environment.OSVersion.Platform}");
+                    Debug.LogError($"Unsupported OS {Environment.OSVersion.Platform}");
+                    break;
             }
 
             if (success)

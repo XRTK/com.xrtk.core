@@ -227,17 +227,17 @@ namespace XRTK.Extensions
         {
             var updateApplication = string.IsNullOrWhiteSpace(application);
 
-#if UNITY_EDITOR_WIN
+#if UNITY_EDITOR_OSX
             if (updateApplication)
             {
-                application = "cmd.exe";
+                application = "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal";
             }
 
-            if (!args.ToLower().StartsWith("/c "))
+            if (!args.ToLower().StartsWith("-c "))
             {
-                args = $"/c {args}";
+                args = $"-c {args}";
             }
-#else
+#elif UNITY_EDITOR_LINUX
             if (updateApplication)
             {
                 application = "/bin/bash";
@@ -246,6 +246,16 @@ namespace XRTK.Extensions
             if (!args.ToLower().StartsWith("-c "))
             {
                 args = $"-c {args}";
+            }
+#else
+            if (updateApplication)
+            {
+                application = "cmd.exe";
+            }
+
+            if (!args.ToLower().StartsWith("/c "))
+            {
+                args = $"/c {args}";
             }
 #endif
         }

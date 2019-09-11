@@ -27,6 +27,6 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// Hand bones should be oriented along the Z-axis, with the Y-axis indicating the "up" direction,
         /// i.e. joints rotate primarily around the X-axis.
         /// </remarks>
-        bool TryGetJoint(TrackedHandJoint joint, out MixedRealityPose pose);
+        bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose);
     }
 }

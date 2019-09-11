@@ -76,5 +76,20 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// Mapping definition for this controller, linking the Physical inputs to logical Input System Actions
         /// </summary>
         MixedRealityInteractionMapping[] Interactions { get; }
+
+        /// <summary>
+        /// Setups up the configuration based on the Mixed Reality Controller Mapping Profile.
+        /// </summary>
+        /// <param name="controllerType">The type of the controller.</param>
+        bool SetupConfiguration(System.Type controllerType);
+
+        /// <summary>
+        /// Attempts to load the controller model render settings from the <see cref="MixedRealityControllerVisualizationProfile"/>
+        /// to render the controllers in the scene.
+        /// </summary>
+        /// <param name="controllerType">The controller type.</param>
+        /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
+        /// <returns>True, if controller model is being properly rendered.</returns>
+        void TryRenderControllerModel(System.Type controllerType, byte[] glbData = null);
     }
 }

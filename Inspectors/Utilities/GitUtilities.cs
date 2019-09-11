@@ -145,7 +145,14 @@ namespace XRTK.Inspectors.Utilities
 
             if (result.ExitCode != 0)
             {
-                throw new Exception($"Failed to get remote tags:\n{result.Errors}");
+                var messageBuilder = new StringBuilder("Failed to get remote tags:");
+
+                for (int i = 0; i < result.Errors.Length; i++)
+                {
+                    messageBuilder.Append($"\n{result.Errors[i]}");
+                }
+
+                throw new Exception(messageBuilder.ToString());
             }
 
             return from tag in result.Output

@@ -373,35 +373,21 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 Directory.Delete(targetAbsolutePath);
             }
 
-            switch (Environment.OSVersion.Platform)
+#if UNITY_EDITOR_WIN
+            // --------------------> mklink /D "C:\Link To Folder" "C:\Users\Name\Original Folder"
+            if (!new Process().Run($"mklink /D \"{targetAbsolutePath}\" \"{sourceAbsolutePath}\"", out var error))
             {
-                case PlatformID.MacOSX:
-                case PlatformID.Unix:
-                    // --------------------> ln -s /path/to/original /path/to/symlink
-                    if (!new Process().Run($"ln -s \"{sourceAbsolutePath.ToForwardSlashes()}\" \"{targetAbsolutePath.ToForwardSlashes()}\"", out var error))
-                    {
-                        Debug.LogError(error);
-                        return false;
-                    }
-
-                    break;
-                case PlatformID.Xbox:
-                case PlatformID.WinCE:
-                case PlatformID.Win32S:
-                case PlatformID.Win32NT:
-                case PlatformID.Win32Windows:
-                    // --------------------> mklink /D "C:\Link To Folder" "C:\Users\Name\Original Folder"
-                    if (!new Process().Run($"mklink /D \"{targetAbsolutePath}\" \"{sourceAbsolutePath}\"", out error))
-                    {
-                        Debug.LogError(error);
-                        return false;
-                    }
-
-                    break;
-                default:
-                    Debug.LogError($"Unsupported OS {Environment.OSVersion.Platform}");
-                    return false;
+                Debug.LogError(error);
+                return false;
             }
+#else
+            // --------------------> ln -s /path/to/original /path/to/symlink
+            if (!new Process().Run($"ln -s \"{sourceAbsolutePath.ToForwardSlashes()}\" \"{targetAbsolutePath.ToForwardSlashes()}\"", out var error))
+            {
+                Debug.LogError(error);
+                return false;
+            }
+#endif
 
             Debug.Log($"Successfully created symbolic link to {sourceAbsolutePath}");
             AssetDatabase.Refresh();
@@ -418,23 +404,11 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
             bool success = false;
 
-            switch (Environment.OSVersion.Platform)
-            {
-                case PlatformID.MacOSX:
-                case PlatformID.Unix:
-                    success = new Process().Run($"rm \"{path}\"", out _);
-                    break;
-                case PlatformID.Win32NT:
-                case PlatformID.Win32S:
-                case PlatformID.Win32Windows:
-                case PlatformID.WinCE:
-                case PlatformID.Xbox:
-                    success = new Process().Run($"rmdir /q \"{path}\"", out _);
-                    break;
-                default:
-                    Debug.LogError($"Unsupported OS {Environment.OSVersion.Platform}");
-                    break;
-            }
+#if UNITY_EDITOR_WIN
+            success = new Process().Run($"rmdir /q \"{path}\"", out _);
+#else
+            success = new Process().Run($"rm \"{path}\"", out _);
+#endif
 
             if (success)
             {

@@ -147,6 +147,11 @@ namespace XRTK.Inspectors.Utilities
             {
                 var messageBuilder = new StringBuilder("Failed to get remote tags:");
 
+                for (int i = 0; i < result.Output.Length; i++)
+                {
+                    messageBuilder.Append($"\n{result.Output[i]}");
+                }
+
                 for (int i = 0; i < result.Errors.Length; i++)
                 {
                     messageBuilder.Append($"\n{result.Errors[i]}");

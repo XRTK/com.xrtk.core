@@ -11,6 +11,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Inspectors.Utilities.SymbolicLinks;
 using Debug = UnityEngine.Debug;
@@ -31,7 +32,7 @@ namespace XRTK.Inspectors.Utilities
             {
                 if (!string.IsNullOrEmpty(projectRootDir)) { return projectRootDir; }
 
-                if (new Process().Run($@"/C cd {Application.dataPath} && git rev-parse --show-toplevel", out var rootDir))
+                if (new Process().Run($@"cd ""{Application.dataPath}"" && git rev-parse --show-toplevel", out var rootDir))
                 {
                     return projectRootDir = rootDir.ToBackSlashes().Replace("\n", string.Empty);
                 }
@@ -117,10 +118,20 @@ namespace XRTK.Inspectors.Utilities
         internal static bool UpdateSubmodules()
         {
             EditorUtility.DisplayProgressBar("Updating Submodules...", "Please wait...", 0.5f);
-            var success = new Process().Run($"/C cd \"{RepositoryRootDir}\" && git submodule update --init --all", out _);
+
+            var isGitInstalled = new Process().Run("git --version", out var message) && !message.Contains("'git' is not recognized");
+
+            if (isGitInstalled)
+            {
+                var success = new Process().Run($@"cd ""{RepositoryRootDir}"" && git submodule update --init --all", out _);
+
+                EditorUtility.ClearProgressBar();
+                return success;
+            }
+
             EditorUtility.ClearProgressBar();
-            // TODO we need to ensure that we return true if git isn't installed.
-            return success;
+            Debug.LogError(message);
+            return true;
         }
 
         /// <summary>
@@ -130,11 +141,23 @@ namespace XRTK.Inspectors.Utilities
         /// <returns>A list of tags from the remote repository.</returns>
         public static async Task<IEnumerable<string>> GetAllTagsFromRemoteAsync(string url)
         {
-            var result = await new Process().RunAsync($"/C git ls-remote --tags {url}");
+            var result = await new Process().RunAsync($"git ls-remote --tags {url}");
 
-            if (result.ExitCode != 0)
+            if (result.ExitCode !=0 || !(result.Output.Length > 0))
             {
-                throw new Exception("Failed to get remote tags");
+                var messageBuilder = new StringBuilder("Failed to get remote tags:");
+
+                for (int i = 0; i < result.Output.Length; i++)
+                {
+                    messageBuilder.Append($"\n{result.Output[i]}");
+                }
+
+                for (int i = 0; i < result.Errors.Length; i++)
+                {
+                    messageBuilder.Append($"\n{result.Errors[i]}");
+                }
+
+                throw new Exception(messageBuilder.ToString());
             }
 
             return from tag in result.Output

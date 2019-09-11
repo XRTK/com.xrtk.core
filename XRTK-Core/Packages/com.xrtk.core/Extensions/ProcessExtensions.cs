@@ -222,48 +222,37 @@ namespace XRTK.Extensions
         {
             var updateApplication = string.IsNullOrWhiteSpace(application);
 
-            switch (Environment.OSVersion.Platform)
+#if UNITY_EDITOR_OSX
+            if (updateApplication)
             {
-                case PlatformID.MacOSX:
-                    if (updateApplication)
-                    {
-                        application = @"/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal";
-                    }
-
-                    if (!args.ToLower().StartsWith("-c "))
-                    {
-                        args = $"-c {args}";
-                    }
-                    break;
-                case PlatformID.Unix:
-                    if (updateApplication)
-                    {
-                        application = "/bin/bash";
-                    }
-
-                    if (!args.ToLower().StartsWith("-c "))
-                    {
-                        args = $"-c {args}";
-                    }
-                    break;
-                case PlatformID.Win32NT:
-                case PlatformID.Win32S:
-                case PlatformID.Win32Windows:
-                case PlatformID.WinCE:
-                case PlatformID.Xbox:
-                    if (updateApplication)
-                    {
-                        application = "cmd.exe";
-                    }
-
-                    if (!args.ToLower().StartsWith("/c "))
-                    {
-                        args = $"/c {args}";
-                    }
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException($"Unsupported OS {Environment.OSVersion.Platform}");
+                application = "/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal";
             }
+
+            if (!args.ToLower().StartsWith("-c "))
+            {
+                args = $"-c {args}";
+            }
+#elif UNITY_EDITOR_LINUX
+            if (updateApplication)
+            {
+                application = "/bin/bash";
+            }
+
+            if (!args.ToLower().StartsWith("-c "))
+            {
+                args = $"-c {args}";
+            }
+#else
+            if (updateApplication)
+            {
+                application = "cmd.exe";
+            }
+
+            if (!args.ToLower().StartsWith("/c "))
+            {
+                args = $"/c {args}";
+            }
+#endif
         }
     }
 }

@@ -208,6 +208,8 @@ namespace XRTK.Extensions
                             if (cancellationToken.IsCancellationRequested)
                             {
                                 runningProcess.Kill();
+                                runningProcess.Close();
+                                runningProcess.Dispose();
                             }
                         }
                     }

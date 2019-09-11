@@ -9,11 +9,15 @@ using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Providers.Controllers.Hands;
+using XRTK.Services;
+using XRTK.Services.InputSystem.Simulation;
 
-namespace XRTK.Services.InputSystem.Simulation
+namespace XRTK.Providers.Controllers.Hands
 {
-    public class SimulatedArticulatedHand : BaseHandController
+    /// <summary>
+    /// The default hand controller is a human hand.
+    /// </summary>
+    public class DefaultHandController : BaseHandController
     {
         private Vector3 currentPointerPosition = Vector3.zero;
         private Quaternion currentPointerRotation = Quaternion.identity;
@@ -29,14 +33,7 @@ namespace XRTK.Services.InputSystem.Simulation
         private IMixedRealityPlatformHandControllerDataProvider dataProvider;
         private IMixedRealityPlatformHandControllerDataProvider DataProvider => dataProvider ?? (dataProvider = MixedRealityToolkit.GetService<IMixedRealityPlatformHandControllerDataProvider>());
 
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="trackingState"></param>
-        /// <param name="controllerHandedness"></param>
-        /// <param name="inputSource"></param>
-        /// <param name="interactions"></param>
-        public SimulatedArticulatedHand(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+        public DefaultHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
                 : base(trackingState, controllerHandedness, inputSource, interactions)
         {
         }
@@ -54,7 +51,7 @@ namespace XRTK.Services.InputSystem.Simulation
             new MixedRealityInteractionMapping(4, "Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger, MixedRealityInputAction.None),
         };
 
-        public override bool TryGetJoint(TrackedHandJoint joint, out MixedRealityPose pose)
+        public override bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose)
         {
             return jointPoses.TryGetValue(joint, out pose);
         }

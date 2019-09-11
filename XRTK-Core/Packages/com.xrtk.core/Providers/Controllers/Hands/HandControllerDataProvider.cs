@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using XRTK.Definitions.Controllers.Hands;
+using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Input;
@@ -18,6 +19,7 @@ namespace XRTK.Providers.Controllers.Hands
     public class HandControllerDataProvider : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider
     {
         private HandControllerDataProviderProfile profile;
+        private readonly Dictionary<Handedness, IMixedRealityHandController> trackedHandControllers = new Dictionary<Handedness, IMixedRealityHandController>();
 
         // Joint / Mesh update events
         private InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> jointPoseInputEventData;
@@ -36,6 +38,14 @@ namespace XRTK.Providers.Controllers.Hands
 
         /// <inheritdoc />
         public IReadOnlyList<IMixedRealityHandMeshHandler> HandMeshUpdatedEventHandlers => handMeshUpdatedEventListeners;
+
+        /// <inheritdoc />
+        public override IMixedRealityController[] GetActiveControllers()
+        {
+            IMixedRealityHandController[] controllers = new IMixedRealityHandController[trackedHandControllers.Values.Count];
+            trackedHandControllers.Values.CopyTo(controllers, 0);
+            return controllers;
+        }
 
         /// <summary>
         /// Constructor.
@@ -110,6 +120,8 @@ namespace XRTK.Providers.Controllers.Hands
 
                 rightHandFauxJoints.Clear();
             }
+
+            RemoveAllHandControllers();
         }
 
         /// <inheritdoc />
@@ -144,7 +156,7 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 foreach (var fauxJoint in leftHandFauxJoints)
                 {
-                    if (leftHand.TryGetJoint(fauxJoint.Key, out MixedRealityPose pose))
+                    if (leftHand.TryGetJointPose(fauxJoint.Key, out MixedRealityPose pose))
                     {
                         fauxJoint.Value.SetPositionAndRotation(pose.Position, pose.Rotation);
                     }
@@ -155,13 +167,133 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 foreach (var fauxJoint in rightHandFauxJoints)
                 {
-                    if (rightHand.TryGetJoint(fauxJoint.Key, out MixedRealityPose pose))
+                    if (rightHand.TryGetJointPose(fauxJoint.Key, out MixedRealityPose pose))
                     {
                         fauxJoint.Value.SetPositionAndRotation(pose.Position, pose.Rotation);
                     }
                 }
             }
         }
+
+        private IMixedRealityHandController GetOrAddHandController(Handedness handedness)
+        {
+            if (trackedHandControllers.TryGetValue(handedness, out IMixedRealityHandController controller))
+            {
+                return controller;
+            }
+
+            IMixedRealityPointer[] pointers = RequestPointers(profile.HandControllerType.Type, handedness);
+            IMixedRealityInputSource inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{handedness} Hand", pointers);
+            controller = System.Activator.CreateInstance(profile.HandControllerType.Type, TrackingState.Tracked, handedness, inputSource) as IMixedRealityHandController;
+
+            if (controller == null || !controller.SetupConfiguration(profile.HandControllerType.Type))
+            {
+                // Controller failed to be setup correctly.
+                // Return null so we don't raise the source detected.
+                return null;
+            }
+
+            for (int i = 0; i < controller.InputSource?.Pointers?.Length; i++)
+            {
+                controller.InputSource.Pointers[i].Controller = controller;
+            }
+
+            MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);
+
+            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile.RenderMotionControllers)
+            {
+                controller.TryRenderControllerModel(profile.HandControllerType.Type);
+            }
+
+            trackedHandControllers.Add(handedness, controller);
+            return controller;
+        }
+
+        private void RemoveHandController(Handedness handedness)
+        {
+            if (trackedHandControllers.TryGetValue(handedness, out IMixedRealityHandController controller))
+            {
+                MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
+                trackedHandControllers.Remove(handedness);
+            }
+        }
+
+        private void RemoveAllHandControllers()
+        {
+            foreach (var controller in trackedHandControllers.Values)
+            {
+                MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
+            }
+
+            trackedHandControllers.Clear();
+        }
+
+        /// <inheritdoc />
+        public bool TryGetJointTransform(TrackedHandJoint joint, Handedness handedness, out Transform jointTransform)
+        {
+            Dictionary<TrackedHandJoint, Transform> fauxJoints;
+            IMixedRealityHandController hand;
+
+            if (handedness == Handedness.Left)
+            {
+                hand = leftHand;
+                fauxJoints = leftHandFauxJoints;
+            }
+            else if (handedness == Handedness.Right)
+            {
+                hand = rightHand;
+                fauxJoints = rightHandFauxJoints;
+            }
+            else
+            {
+                jointTransform = null;
+                return false;
+            }
+
+            if (fauxJoints != null && fauxJoints.TryGetValue(joint, out Transform existingJointTransform))
+            {
+                jointTransform = existingJointTransform;
+                return true;
+            }
+
+            Transform newJointTransform = new GameObject().transform;
+            newJointTransform.name = $"Joint Tracker: {joint} {handedness}";
+
+            // Since this service survives scene loading and unloading, the fauxJoints it manages need to as well.
+            Object.DontDestroyOnLoad(newJointTransform.gameObject);
+
+            if (hand != null && hand.TryGetJointPose(joint, out MixedRealityPose pose))
+            {
+                newJointTransform.SetPositionAndRotation(pose.Position, pose.Rotation);
+            }
+
+            fauxJoints.Add(joint, newJointTransform);
+            jointTransform = newJointTransform;
+            return true;
+        }
+
+        /// <inheritdoc />
+        public bool IsHandTracked(Handedness handedness)
+        {
+            switch (handedness)
+            {
+                case Handedness.None:
+                    return leftHand == null && rightHand == null;
+                case Handedness.Left:
+                    return leftHand != null;
+                case Handedness.Right:
+                    return rightHand != null;
+                case Handedness.Both:
+                    return leftHand != null && rightHand != null;
+                case Handedness.Any:
+                    return leftHand != null || rightHand != null;
+                case Handedness.Other:
+                default:
+                    return false;
+            }
+        }
+
+        #region Handler registration and data updates
 
         /// <inheritdoc />
         public void Register(IMixedRealityHandJointHandler handler)
@@ -219,69 +351,6 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        /// <inheritdoc />
-        public bool TryGetJointTransform(TrackedHandJoint joint, Handedness handedness, out Transform jointTransform)
-        {
-            Dictionary<TrackedHandJoint, Transform> fauxJoints;
-            IMixedRealityHandController hand;
-
-            if (handedness == Handedness.Left)
-            {
-                hand = leftHand;
-                fauxJoints = leftHandFauxJoints;
-            }
-            else if (handedness == Handedness.Right)
-            {
-                hand = rightHand;
-                fauxJoints = rightHandFauxJoints;
-            }
-            else
-            {
-                jointTransform = null;
-                return false;
-            }
-
-            if (fauxJoints != null && fauxJoints.TryGetValue(joint, out Transform existingJointTransform))
-            {
-                jointTransform = existingJointTransform;
-                return true;
-            }
-
-            Transform newJointTransform = new GameObject().transform;
-            newJointTransform.name = $"Joint Tracker: {joint} {handedness}";
-
-            // Since this service survives scene loading and unloading, the fauxJoints it manages need to as well.
-            Object.DontDestroyOnLoad(newJointTransform.gameObject);
-
-            if (hand != null && hand.TryGetJoint(joint, out MixedRealityPose pose))
-            {
-                newJointTransform.SetPositionAndRotation(pose.Position, pose.Rotation);
-            }
-
-            fauxJoints.Add(joint, newJointTransform);
-            jointTransform = newJointTransform;
-            return true;
-        }
-
-        /// <inheritdoc />
-        public bool IsHandTracked(Handedness handedness)
-        {
-            switch (handedness)
-            {
-                case Handedness.None:
-                    return leftHand == null && rightHand == null;
-                case Handedness.Left:
-                    return leftHand != null;
-                case Handedness.Right:
-                    return rightHand != null;
-                case Handedness.Both:
-                    return leftHand != null && rightHand != null;
-                case Handedness.Any:
-                    return leftHand != null || rightHand != null;
-                case Handedness.Other:
-                default:
-                    return false;
-            }
-        }
+        #endregion
     }
 }

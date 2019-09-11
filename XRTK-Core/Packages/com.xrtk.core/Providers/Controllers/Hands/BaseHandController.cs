@@ -9,6 +9,9 @@ using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Providers.Controllers.Hands
 {
+    /// <summary>
+    /// Base implementation with shared / common elements between all supported hand controllers.
+    /// </summary>
     public abstract class BaseHandController : BaseController, IMixedRealityHandController
     {
         private const float currentVelocityWeight = .8f;
@@ -34,7 +37,7 @@ namespace XRTK.Providers.Controllers.Hands
         {
             get
             {
-                if (TryGetJoint(TrackedHandJoint.Palm, out MixedRealityPose pose))
+                if (TryGetJointPose(TrackedHandJoint.Palm, out MixedRealityPose pose))
                 {
                     return -pose.Up;
                 }
@@ -96,11 +99,11 @@ namespace XRTK.Providers.Controllers.Hands
 
         #endregion Gesture Definitions
 
-        public abstract bool TryGetJoint(TrackedHandJoint joint, out MixedRealityPose pose);
+        public abstract bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose);
 
         private Vector3 GetJointPosition(TrackedHandJoint jointToGet)
         {
-            if (TryGetJoint(jointToGet, out MixedRealityPose pose))
+            if (TryGetJointPose(jointToGet, out MixedRealityPose pose))
             {
                 return pose.Position;
             }

@@ -2,15 +2,10 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Services;
 using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Providers.Controllers.Hands
@@ -19,7 +14,6 @@ namespace XRTK.Providers.Controllers.Hands
     {
         private EditorSimulatedHandControllerDataProviderProfile profile;
         private long lastHandControllerUpdateTimeStamp = 0;
-        private readonly Dictionary<Handedness, SimulatedArticulatedHand> trackedHandControllers = new Dictionary<Handedness, SimulatedArticulatedHand>();
         
         /// <summary>
         /// Gets left hand simulated data.
@@ -35,9 +29,6 @@ namespace XRTK.Providers.Controllers.Hands
         /// If true then keyboard and mouse input are used to simulate hands.
         /// </summary>
         public bool UserInputEnabled { get; private set; } = true;
-
-        /// <inheritdoc />
-        public override IMixedRealityController[] GetActiveControllers() => trackedHandControllers.Values.ToArray();
 
         /////////////////////
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
@@ -68,11 +59,6 @@ namespace XRTK.Providers.Controllers.Hands
         private SimulatedHandData.HandJointDataGenerator generatorLeft;
         private SimulatedHandData.HandJointDataGenerator generatorRight;
         ///////////////////
-
-        /// <summary>
-        /// Dictionary to capture all active hands detected.
-        /// </summary>
-        public IReadOnlyDictionary<Handedness, SimulatedArticulatedHand> TrackedHands => trackedHandControllers;
 
         public EditorSimulatedHandControllerDataProvider(string name, uint priority, EditorSimulatedHandControllerDataProviderProfile profile)
             : base(name, priority, profile)
@@ -107,12 +93,6 @@ namespace XRTK.Providers.Controllers.Hands
         public override void Initialize()
         {
             ArticulatedHandPose.LoadGesturePoses(profile.GestureDefinitions);
-        }
-
-        /// <inheritdoc />
-        public override void Disable()
-        {
-            RemoveAllHandControllers();
         }
 
         /// <inheritdoc />
@@ -340,82 +320,29 @@ namespace XRTK.Providers.Controllers.Hands
         // Register input sources for hands based on changes of the data provider
         private void UpdateHandInputSource(Handedness handedness, SimulatedHandData handData)
         {
-            if (!profile.SimulateHandTracking)
-            {
-                RemoveAllHandControllers();
-            }
-            else
-            {
-                if (handData != null && handData.IsTracked)
-                {
-                    SimulatedArticulatedHand controller = GetOrAddHandController(handedness);
-                    if (controller != null)
-                    {
-                        controller.UpdateState(handData);
-                    }
-                    else
-                    {
-                        Debug.LogError($"Failed to create {typeof(SimulatedArticulatedHand)} controller");
-                    }
-                }
-                else
-                {
-                    RemoveHandController(handedness);
-                }
-            }
-        }
-
-        private SimulatedArticulatedHand GetOrAddHandController(Handedness handedness)
-        {
-            if (trackedHandControllers.TryGetValue(handedness, out SimulatedArticulatedHand controller))
-            {
-                return controller;
-            }
-
-            IMixedRealityPointer[] pointers = RequestPointers(typeof(SimulatedArticulatedHand), handedness);
-            IMixedRealityInputSource inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{handedness} Hand", pointers);
-            controller = new SimulatedArticulatedHand(TrackingState.Tracked, handedness, inputSource);
-
-            if (controller == null || !controller.SetupConfiguration(typeof(SimulatedArticulatedHand)))
-            {
-                // Controller failed to be setup correctly.
-                // Return null so we don't raise the source detected.
-                return null;
-            }
-
-            for (int i = 0; i < controller.InputSource?.Pointers?.Length; i++)
-            {
-                controller.InputSource.Pointers[i].Controller = controller;
-            }
-
-            MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);
-
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile.RenderMotionControllers)
-            {
-                controller.TryRenderControllerModel(typeof(SimulatedArticulatedHand));
-            }
-
-            trackedHandControllers.Add(handedness, controller);
-            return controller;
-        }
-
-        private void RemoveHandController(Handedness handedness)
-        {
-            if (trackedHandControllers.TryGetValue(handedness, out SimulatedArticulatedHand controller))
-            {
-                MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
-                trackedHandControllers.Remove(handedness);
-            }
-        }
-
-        private void RemoveAllHandControllers()
-        {
-            foreach (var controller in trackedHandControllers.Values)
-            {
-                MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
-            }
-
-            trackedHandControllers.Clear();
+            //if (!profile.SimulateHandTracking)
+            //{
+            //    RemoveAllHandControllers();
+            //}
+            //else
+            //{
+            //    if (handData != null && handData.IsTracked)
+            //    {
+            //        DefaultHandController controller = GetOrAddHandController(handedness);
+            //        if (controller != null)
+            //        {
+            //            controller.UpdateState(handData);
+            //        }
+            //        else
+            //        {
+            //            Debug.LogError($"Failed to create {typeof(DefaultHandController)} controller");
+            //        }
+            //    }
+            //    else
+            //    {
+            //        RemoveHandController(handedness);
+            //    }
+            //}
         }
     }
 }

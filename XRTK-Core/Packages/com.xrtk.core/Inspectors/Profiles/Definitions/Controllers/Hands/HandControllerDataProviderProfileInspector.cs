@@ -17,6 +17,7 @@ namespace XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles
         private static readonly GUIContent RemoveControllerDataProviderContent = new GUIContent("-", "Remove Controller Data Provider");
         private static readonly GUIContent ProfileContent = new GUIContent("Profile");
 
+        private SerializedProperty handControllerType;
         private SerializedProperty controllerDataProviders;
         private bool[] foldouts = null;
 
@@ -24,6 +25,7 @@ namespace XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles
         {
             base.OnEnable();
 
+            handControllerType = serializedObject.FindProperty("handControllerType");
             controllerDataProviders = serializedObject.FindProperty("registeredControllerDataProviders");
             foldouts = new bool[controllerDataProviders.arraySize];
         }
@@ -45,6 +47,10 @@ namespace XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles
             thisProfile.CheckProfileLock();
 
             serializedObject.Update();
+
+            EditorGUILayout.Space();
+
+            EditorGUILayout.PropertyField(handControllerType);
 
             EditorGUILayout.Space();
 

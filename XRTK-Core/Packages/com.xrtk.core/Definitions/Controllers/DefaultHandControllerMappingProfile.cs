@@ -4,12 +4,13 @@
 using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
+using XRTK.Definitions.Utilities;
 using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Providers.Controllers
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Mappings/Hand Controller Mapping Profile", fileName = "MixedRealityHandControllerMappingProfile")]
-    public class MixedRealityHandControllerMappingProfile : BaseMixedRealityControllerMappingProfile
+    public class DefaultHandControllerMappingProfile : BaseMixedRealityControllerMappingProfile
     {
         /// <inheritdoc />
         public override SupportedControllerType ControllerType => SupportedControllerType.Hand;
@@ -23,8 +24,8 @@ namespace XRTK.Providers.Controllers
             {
                 ControllerMappings = new[]
                 {
-                    new MixedRealityControllerMapping("Articulated", typeof(BaseHandController), Definitions.Utilities.Handedness.Left),
-                    new MixedRealityControllerMapping("Articulated", typeof(BaseHandController), Definitions.Utilities.Handedness.Right)
+                    new MixedRealityControllerMapping("Generic", typeof(DefaultHandController), Handedness.Left),
+                    new MixedRealityControllerMapping("Generic", typeof(DefaultHandController), Handedness.Right)
                 };
             }
 

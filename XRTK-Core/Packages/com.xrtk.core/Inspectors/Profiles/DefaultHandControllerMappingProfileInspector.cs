@@ -6,8 +6,8 @@ using XRTK.Providers.Controllers;
 
 namespace XRTK.Inspectors.Profiles
 {
-    [CustomEditor(typeof(MixedRealityHandControllerMappingProfile))]
-    public class MixedRealityHandControllerMappingProfileInspector : BaseMixedRealityControllerMappingProfileInspector
+    [CustomEditor(typeof(DefaultHandControllerMappingProfile))]
+    public class DefaultHandControllerMappingProfileInspector : BaseMixedRealityControllerMappingProfileInspector
     {
         
     }

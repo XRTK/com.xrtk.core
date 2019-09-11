@@ -38,13 +38,13 @@ namespace XRTK.Extensions
 
             process.StartInfo = new ProcessStartInfo
             {
-                WindowStyle = ProcessWindowStyle.Hidden,
+                Arguments = args,
                 CreateNoWindow = true,
-                UseShellExecute = false,
-                RedirectStandardOutput = true,
-                RedirectStandardError = true,
                 FileName = application,
-                Arguments = args
+                UseShellExecute = false,
+                RedirectStandardError = true,
+                RedirectStandardOutput = true,
+                WindowStyle = ProcessWindowStyle.Hidden
             };
 
             try
@@ -94,13 +94,13 @@ namespace XRTK.Extensions
 
             return await RunAsync(process, new ProcessStartInfo
             {
-                FileName = application,
-                WindowStyle = ProcessWindowStyle.Hidden,
+                Arguments = args,
                 CreateNoWindow = true,
+                FileName = application,
                 UseShellExecute = false,
-                RedirectStandardOutput = true,
                 RedirectStandardError = true,
-                Arguments = args
+                RedirectStandardOutput = true,
+                WindowStyle = ProcessWindowStyle.Hidden
             }, showDebug, cancellationToken);
         }
 
@@ -197,7 +197,9 @@ namespace XRTK.Extensions
             {
                 // ReSharper disable once MethodSupportsCancellation
                 // We utilize the cancellation token in the loop
-                await Task.Run(() =>
+                await Task.Run(ProcessWatcher);
+
+                void ProcessWatcher()
                 {
                     try
                     {
@@ -213,7 +215,7 @@ namespace XRTK.Extensions
                     {
                         // ignored
                     }
-                });
+                }
             }
 
             return await processResult.Task;

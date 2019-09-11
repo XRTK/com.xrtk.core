@@ -382,7 +382,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             }
 #else
             // --------------------> ln -s /path/to/original /path/to/symlink
-            if (!new Process().Run($"ln -s \"{sourceAbsolutePath.ToForwardSlashes()}\" \"{targetAbsolutePath.ToForwardSlashes()}\"", out var error))
+            if (!new Process().Run($"ln -s \"{sourceAbsolutePath}\" \"{targetAbsolutePath}\"", out var error))
             {
                 Debug.LogError(error);
                 return false;

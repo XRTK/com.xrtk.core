@@ -142,10 +142,11 @@ namespace XRTK.Inspectors.Utilities
         public static async Task<IEnumerable<string>> GetAllTagsFromRemoteAsync(string url)
         {
             var result = await new Process().RunAsync($"git ls-remote --tags {url}");
+            var messageBuilder = new StringBuilder();
 
             if (result.ExitCode != 0)
             {
-                var messageBuilder = new StringBuilder("Failed to get remote tags:");
+                messageBuilder.Append("Failed to get remote tags:");
 
                 for (int i = 0; i < result.Output.Length; i++)
                 {
@@ -159,6 +160,13 @@ namespace XRTK.Inspectors.Utilities
 
                 throw new Exception(messageBuilder.ToString());
             }
+            for (int i = 0; i < result.Output.Length; i++)
+            {
+                messageBuilder.Append($"\n{result.Output[i]}");
+            }
+
+            Debug.Assert(result.Output?.Length > 0);
+            Debug.Log($"Tags: {messageBuilder}");
 
             return from tag in result.Output
                    select Regex.Match(tag, "(\\d*\\.\\d*\\.\\d*)")

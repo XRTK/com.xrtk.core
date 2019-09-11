@@ -38,7 +38,7 @@ namespace XRTK.Extensions
 
             process.StartInfo = new ProcessStartInfo
             {
-                WindowStyle = ProcessWindowStyle.Normal,
+                WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
                 UseShellExecute = false,
                 RedirectStandardOutput = true,
@@ -95,6 +95,7 @@ namespace XRTK.Extensions
             return await RunAsync(process, new ProcessStartInfo
             {
                 FileName = application,
+                WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
                 UseShellExecute = false,
                 RedirectStandardOutput = true,

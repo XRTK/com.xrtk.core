@@ -172,7 +172,11 @@ namespace XRTK.Utilities.Editor
             if (refresh || restart)
             {
                 AssetDatabase.SaveAssets();
-                AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+
+                if (!EditorApplication.isUpdating)
+                {
+                    AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+                }
             }
 
             if (restart)

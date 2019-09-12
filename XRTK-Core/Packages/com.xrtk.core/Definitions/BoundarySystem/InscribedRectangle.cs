@@ -3,6 +3,7 @@
 
 using System;
 using UnityEngine;
+using XRTK.Extensions;
 using XRTK.Utilities;
 using Random = System.Random;
 
@@ -265,15 +266,15 @@ namespace XRTK.Definitions.BoundarySystem
             // Find the top and bottom collision points by creating a large line segment that goes through the point to MAX and MIN values on Y
             var topEndpoint = new Vector2(point.x, largeValue);
             var bottomEndpoint = new Vector2(point.x, smallValue);
-            topEndpoint = RotatePoint(topEndpoint, point, angleRadians);
-            bottomEndpoint = RotatePoint(bottomEndpoint, point, angleRadians);
+            topEndpoint = topEndpoint.RotateAroundPoint(point, angleRadians);
+            bottomEndpoint = bottomEndpoint.RotateAroundPoint(point, angleRadians);
             var verticalLine = new Edge(topEndpoint, bottomEndpoint);
 
             // Find the left and right collision points by creating a large line segment that goes through the point to MAX and Min values on X
             var rightEndpoint = new Vector2(largeValue, point.y);
             var leftEndpoint = new Vector2(smallValue, point.y);
-            rightEndpoint = RotatePoint(rightEndpoint, point, angleRadians);
-            leftEndpoint = RotatePoint(leftEndpoint, point, angleRadians);
+            rightEndpoint = rightEndpoint.RotateAroundPoint(point, angleRadians);
+            leftEndpoint = leftEndpoint.RotateAroundPoint(point, angleRadians);
             var horizontalLine = new Edge(rightEndpoint, leftEndpoint);
 
             for (int i = 0; i < geometryEdges.Length; i++)
@@ -284,7 +285,7 @@ namespace XRTK.Definitions.BoundarySystem
                 if (EdgeUtilities.IsValidPoint(verticalIntersectionPoint))
                 {
                     // Is the intersection above or below the point?
-                    if (RotatePoint(verticalIntersectionPoint, point, -angleRadians).y > point.y)
+                    if (verticalIntersectionPoint.RotateAroundPoint(point, -angleRadians).y > point.y)
                     {
                         // Update the top collision point
                         if (!EdgeUtilities.IsValidPoint(topCollisionPoint) ||
@@ -310,7 +311,7 @@ namespace XRTK.Definitions.BoundarySystem
                 if (!EdgeUtilities.IsValidPoint(horizontalIntersection)) { continue; }
 
                 // Is this intersection to the left or the right of the point?
-                if (RotatePoint(horizontalIntersection, point, -angleRadians).x < point.x)
+                if (horizontalIntersection.RotateAroundPoint(point, -angleRadians).x < point.x)
                 {
                     // Update the left collision point
                     if (!EdgeUtilities.IsValidPoint(leftCollisionPoint) ||
@@ -353,47 +354,12 @@ namespace XRTK.Definitions.BoundarySystem
             }
 
             point -= Center;
-            point = RotatePoint(point, Vector2.zero, MathUtilities.DegreesToRadians(-Angle));
+            point = point.RotatePoint(MathUtilities.DegreesToRadians(-Angle));
 
-            bool inWidth = Mathf.Abs(point.x) <= (Width * 0.5f);
-            bool inHeight = Mathf.Abs(point.y) <= (Height * 0.5f);
+            var inWidth = Mathf.Abs(point.x) <= (Width * 0.5f);
+            var inHeight = Mathf.Abs(point.y) <= (Height * 0.5f);
 
             return (inWidth && inHeight);
-        }
-
-        /// <summary>
-        /// Rotate a two dimensional point about another point by the specified angle.
-        /// </summary>
-        /// <param name="point">The point to be rotated.</param>
-        /// <param name="origin">The point about which the rotation is to occur.</param>
-        /// <param name="angleRadians">The angle for the rotation, in radians</param>
-        /// <returns>
-        /// The coordinates of the rotated point.
-        /// </returns>
-        private Vector2 RotatePoint(Vector2 point, Vector2 origin, float angleRadians)
-        {
-            if (angleRadians.Equals(0f))
-            {
-                return point;
-            }
-
-            Vector2 rotated = point;
-
-            // Translate to origin of rotation
-            rotated.x -= origin.x;
-            rotated.y -= origin.y;
-
-            // Rotate the point
-            float sin = Mathf.Sin(angleRadians);
-            float cos = Mathf.Cos(angleRadians);
-            float x = rotated.x * cos - rotated.y * sin;
-            float y = rotated.x * sin + rotated.y * cos;
-
-            // Translate back and return
-            rotated.x = x + origin.x;
-            rotated.y = y + origin.y;
-
-            return rotated;
         }
 
         /// <summary>
@@ -418,10 +384,10 @@ namespace XRTK.Definitions.BoundarySystem
             var bottomRight = new Vector2(centerPoint.x + halfWidth, centerPoint.y - halfHeight);
 
             // Rotate the rectangle.
-            topLeft = RotatePoint(topLeft, centerPoint, angleRadians);
-            topRight = RotatePoint(topRight, centerPoint, angleRadians);
-            bottomLeft = RotatePoint(bottomLeft, centerPoint, angleRadians);
-            bottomRight = RotatePoint(bottomRight, centerPoint, angleRadians);
+            topLeft = topLeft.RotateAroundPoint(centerPoint, angleRadians);
+            topRight = topRight.RotateAroundPoint(centerPoint, angleRadians);
+            bottomLeft = bottomLeft.RotateAroundPoint(centerPoint, angleRadians);
+            bottomRight = bottomRight.RotateAroundPoint(centerPoint, angleRadians);
 
             // Get the rectangle edges.
             var topEdge = new Edge(topLeft, topRight);

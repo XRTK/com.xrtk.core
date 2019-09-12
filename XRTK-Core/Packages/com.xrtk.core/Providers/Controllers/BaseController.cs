@@ -4,12 +4,14 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
+using XRTK.Utilities.Gltf.Schema;
 using XRTK.Utilities.Gltf.Serialization;
 
 namespace XRTK.Providers.Controllers
@@ -219,7 +221,7 @@ namespace XRTK.Providers.Controllers
             if (!visualizationProfile.RenderMotionControllers) { return; }
 
             GameObject controllerModel = null;
-            Utilities.Gltf.Schema.GltfObject gltfObject = null;
+            GltfObject gltfObject = null;
 
             // If a specific controller template exists, check if it wants to override the global model, or use the system default specifically (in case global default is not used)
             bool useSystemDefaultModels = visualizationProfile.GetControllerModelOverride(controllerType, ControllerHandedness, out controllerModel);

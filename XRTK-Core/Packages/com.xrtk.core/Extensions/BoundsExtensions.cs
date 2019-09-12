@@ -3,11 +3,13 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Definitions.Utilities;
+using XRTK.Utilities;
 
 namespace XRTK.Extensions
 {
     /// <summary>
-    /// Extension methods for Unity's Bounds struct
+    /// Extension methods for Unity's <see cref="Bounds"/>
     /// </summary>
     public static class BoundsExtensions
     {
@@ -59,13 +61,6 @@ namespace XRTK.Extensions
         public const int FWD = 4;
         public const int BCK = 5;
 
-        public enum Axis
-        {
-            X,
-            Y,
-            Z
-        }
-
         private static Vector3[] corners = null;
 
         private static readonly Vector3[] rectTransformCorners = new Vector3[4];
@@ -91,16 +86,12 @@ namespace XRTK.Extensions
         }
 
         /// <summary>
-        /// Gets all the corner points of the bounds in world space
+        /// Gets all the corner points of the bounds in world space.
         /// </summary>
         /// <param name="transform"></param>
         /// <param name="positions"></param>
         /// <param name="bounds"></param>
-        /// <remarks>
-        /// Use BoxColliderExtensions.{Left|Right}{Bottom|Top}{Front|Back} constants to index into the output
-        /// corners array.
-        /// </remarks>
-        public static void GetCornerPositions(this Bounds bounds, Transform transform, ref Vector3[] positions)
+        public static void GetCornerPositionsWorldSpace(this Bounds bounds, Transform transform, ref Vector3[] positions)
         {
             // Calculate the local points to transform.
             var center = bounds.center;
@@ -132,11 +123,44 @@ namespace XRTK.Extensions
         }
 
         /// <summary>
-        /// Gets all the corner points from Renderer's Bounds
+        /// Gets all the corner points of the bounds in local space.
+        /// </summary>
+        /// <param name="positions"></param>
+        /// <param name="bounds"></param>
+        public static void GetCornerPositionsLocalSpace(this Bounds bounds, ref Vector3[] positions)
+        {
+            // Allocate the array if needed.
+            const int numCorners = 8;
+
+            if (positions == null || positions.Length != numCorners)
+            {
+                positions = new Vector3[numCorners];
+            }
+
+            // Permutate all axes using minCorner and maxCorner.
+            var minCorner = bounds.center - bounds.extents;
+            var maxCorner = bounds.center + bounds.extents;
+
+            for (int cornerIndex = 0; cornerIndex < numCorners; cornerIndex++)
+            {
+                positions[cornerIndex] = new Vector3(
+                    (cornerIndex & (1 << 0)) == 0 ? minCorner[0] : maxCorner[0],
+                    (cornerIndex & (1 << 1)) == 0 ? minCorner[1] : maxCorner[1],
+                    (cornerIndex & (1 << 2)) == 0 ? minCorner[2] : maxCorner[2]);
+            }
+        }
+
+        /// <summary>
+        /// Gets all the corner points of the bounds.
         /// </summary>
         /// <param name="bounds"></param>
         /// <param name="positions"></param>
-        public static void GetCornerPositionsFromRendererBounds(this Bounds bounds, ref Vector3[] positions)
+        /// <remarks>
+        /// <see cref="Collider.bounds"/> is world space bounding volume.
+        /// <see cref="Mesh.bounds"/> is local space bounding volume.
+        /// <see cref="Renderer.bounds"/>  is the same as <see cref="Mesh.bounds"/> but in world space coords.
+        /// </remarks>
+        public static void GetCornerPositions(this Bounds bounds, ref Vector3[] positions)
         {
             var center = bounds.center;
             var extents = bounds.extents;
@@ -242,7 +266,7 @@ namespace XRTK.Extensions
         /// <param name="transform"></param>
         /// <param name="positions"></param>
         /// <param name="flattenAxis"></param>
-        public static void GetCornerAndMidPointPositions2D(this Bounds bounds, Transform transform, ref Vector3[] positions, Axis flattenAxis)
+        public static void GetCornerAndMidPointPositions2D(this Bounds bounds, Transform transform, ref Vector3[] positions, CardinalAxis flattenAxis)
         {
             // Calculate the local points to transform.
             var center = bounds.center;
@@ -262,8 +286,8 @@ namespace XRTK.Extensions
 
             switch (flattenAxis)
             {
-                // case Axis.X:
                 default:
+                case CardinalAxis.X:
                     leftEdge = center.z - extents.z;
                     rightEdge = center.z + extents.z;
                     bottomEdge = center.y - extents.y;
@@ -275,7 +299,7 @@ namespace XRTK.Extensions
                     positions[RB] = transform.TransformPoint(0, bottomEdge, rightEdge);
                     break;
 
-                case Axis.Y:
+                case CardinalAxis.Y:
                     leftEdge = center.z - extents.z;
                     rightEdge = center.z + extents.z;
                     bottomEdge = center.x - extents.x;
@@ -287,7 +311,7 @@ namespace XRTK.Extensions
                     positions[RB] = transform.TransformPoint(bottomEdge, 0, rightEdge);
                     break;
 
-                case Axis.Z:
+                case CardinalAxis.Z:
                     leftEdge = center.x - extents.x;
                     rightEdge = center.x + extents.x;
                     bottomEdge = center.y - extents.y;
@@ -337,13 +361,13 @@ namespace XRTK.Extensions
 
                     case BoxCollider boxCollider:
                         var boxBounds = new Bounds(boxCollider.center, boxCollider.size);
-                        boxBounds.GetCornerPositions(boxCollider.transform, ref corners);
+                        boxBounds.GetCornerPositionsWorldSpace(boxCollider.transform, ref corners);
                         boundsPoints.AddRange(corners);
                         break;
 
                     case MeshCollider meshCollider:
                         var meshBounds = meshCollider.sharedMesh.bounds;
-                        meshBounds.GetCornerPositions(meshCollider.transform, ref corners);
+                        meshBounds.GetCornerPositionsWorldSpace(meshCollider.transform, ref corners);
                         boundsPoints.AddRange(corners);
                         break;
 
@@ -396,7 +420,9 @@ namespace XRTK.Extensions
                     continue;
                 }
 
-                rendererObj.bounds.GetCornerPositionsFromRendererBounds(ref corners);
+                var bounds = rendererObj.transform.GetRenderBounds();
+
+                bounds.GetCornerPositions(ref corners);
                 boundsPoints.AddRange(corners);
             }
         }
@@ -421,7 +447,7 @@ namespace XRTK.Extensions
                 }
 
                 var meshBounds = meshFilterObj.sharedMesh.bounds;
-                meshBounds.GetCornerPositions(meshFilterObj.transform, ref corners);
+                meshBounds.GetCornerPositionsWorldSpace(meshFilterObj.transform, ref corners);
                 boundsPoints.AddRange(corners);
             }
 

@@ -7,7 +7,7 @@ using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Utilities;
-using XRTK.Providers.Controllers;
+using XRTK.Definitions.Controllers;
 
 namespace XRTK.Inspectors.Profiles
 {

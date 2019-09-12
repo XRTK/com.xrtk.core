@@ -31,7 +31,7 @@ namespace XRTK.Providers.SpatialObservers
             MeshLevelOfDetail = profile.MeshLevelOfDetail;
             MeshTrianglesPerCubicMeter = profile.MeshTrianglesPerCubicMeter;
             MeshRecalculateNormals = profile.MeshRecalculateNormals;
-            meshDisplayOption = profile.MeshDisplayOption;
+            meshDisplayOption = MixedRealityToolkit.SpatialAwarenessSystem.SpatialMeshVisibility;
             MeshVisibleMaterial = profile.MeshVisibleMaterial;
             MeshOcclusionMaterial = profile.MeshOcclusionMaterial;
             ObservationExtents = profile.ObservationExtents;

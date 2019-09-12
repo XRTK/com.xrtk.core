@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Extensions;
 
 namespace XRTK.SDK.Utilities.Solvers
 {
@@ -218,35 +219,6 @@ namespace XRTK.SDK.Utilities.Solvers
         }
 
         /// <summary>
-        /// Lerps Vector3 source to goal.
-        /// </summary>
-        /// <remarks>
-        /// Handles lerpTime of 0.
-        /// </remarks>
-        /// <param name="source"></param>
-        /// <param name="goal"></param>
-        /// <param name="deltaTime"></param>
-        /// <param name="lerpTime"></param>
-        /// <returns></returns>
-        public static Vector3 SmoothTo(Vector3 source, Vector3 goal, float deltaTime, float lerpTime)
-        {
-            return Vector3.Lerp(source, goal, lerpTime.Equals(0.0f) ? 1f : deltaTime / lerpTime);
-        }
-
-        /// <summary>
-        /// Slerps Quaternion source to goal, handles lerpTime of 0
-        /// </summary>
-        /// <param name="source"></param>
-        /// <param name="goal"></param>
-        /// <param name="deltaTime"></param>
-        /// <param name="lerpTime"></param>
-        /// <returns></returns>
-        public static Quaternion SmoothTo(Quaternion source, Quaternion goal, float deltaTime, float lerpTime)
-        {
-            return Quaternion.Slerp(source, goal, lerpTime.Equals(0.0f) ? 1f : deltaTime / lerpTime);
-        }
-
-        /// <summary>
         /// Updates all object orientations to the goal orientation for this solver, with smoothing accounted for (smoothing may be off)
         /// </summary>
         protected void UpdateTransformToGoal()
@@ -259,9 +231,9 @@ namespace XRTK.SDK.Utilities.Solvers
                 var rot = cachedTransform.rotation;
                 var scale = cachedTransform.localScale;
 
-                pos = SmoothTo(pos, GoalPosition, SolverHandler.DeltaTime, moveLerpTime);
-                rot = SmoothTo(rot, GoalRotation, SolverHandler.DeltaTime, rotateLerpTime);
-                scale = SmoothTo(scale, GoalScale, SolverHandler.DeltaTime, scaleLerpTime);
+                pos = pos.SmoothTo(GoalPosition, SolverHandler.DeltaTime, moveLerpTime);
+                rot = rot.SmoothTo(GoalRotation, SolverHandler.DeltaTime, rotateLerpTime);
+                scale = scale.SmoothTo(GoalScale, SolverHandler.DeltaTime, scaleLerpTime);
 
                 cachedTransform.position = pos;
                 cachedTransform.rotation = rot;
@@ -282,9 +254,9 @@ namespace XRTK.SDK.Utilities.Solvers
         {
             if (smoothing)
             {
-                WorkingPosition = SmoothTo(WorkingPosition, GoalPosition, SolverHandler.DeltaTime, moveLerpTime);
-                WorkingRotation = SmoothTo(WorkingRotation, GoalRotation, SolverHandler.DeltaTime, rotateLerpTime);
-                WorkingScale = SmoothTo(WorkingScale, GoalScale, SolverHandler.DeltaTime, scaleLerpTime);
+                WorkingPosition = WorkingPosition.SmoothTo(GoalPosition, SolverHandler.DeltaTime, moveLerpTime);
+                WorkingRotation = WorkingRotation.SmoothTo(GoalRotation, SolverHandler.DeltaTime, rotateLerpTime);
+                WorkingScale = WorkingScale.SmoothTo(GoalScale, SolverHandler.DeltaTime, scaleLerpTime);
             }
             else
             {
@@ -299,7 +271,7 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public void UpdateWorkingPositionToGoal()
         {
-            WorkingPosition = smoothing ? SmoothTo(WorkingPosition, GoalPosition, SolverHandler.DeltaTime, moveLerpTime) : GoalPosition;
+            WorkingPosition = smoothing ? WorkingPosition.SmoothTo(GoalPosition, SolverHandler.DeltaTime, moveLerpTime) : GoalPosition;
         }
 
         /// <summary>
@@ -307,7 +279,7 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public void UpdateWorkingRotationToGoal()
         {
-            WorkingRotation = smoothing ? SmoothTo(WorkingRotation, GoalRotation, SolverHandler.DeltaTime, rotateLerpTime) : GoalRotation;
+            WorkingRotation = smoothing ? WorkingRotation.SmoothTo(GoalRotation, SolverHandler.DeltaTime, rotateLerpTime) : GoalRotation;
         }
 
         /// <summary>
@@ -315,7 +287,7 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         public void UpdateWorkingScaleToGoal()
         {
-            WorkingScale = smoothing ? SmoothTo(WorkingScale, GoalScale, SolverHandler.DeltaTime, scaleLerpTime) : GoalScale;
+            WorkingScale = smoothing ? WorkingScale.SmoothTo(GoalScale, SolverHandler.DeltaTime, scaleLerpTime) : GoalScale;
         }
     }
 }

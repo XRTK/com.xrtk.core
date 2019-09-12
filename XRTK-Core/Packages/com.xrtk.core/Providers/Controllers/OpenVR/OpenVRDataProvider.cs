@@ -3,9 +3,11 @@
 
 using System;
 using UnityEngine;
-using XRTK.Providers.Controllers.UnityInput;
+using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Controllers.OpenVR;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers.UnityInput;
 using XRTK.Services;
 using XRTK.Interfaces.Providers.Controllers;
 

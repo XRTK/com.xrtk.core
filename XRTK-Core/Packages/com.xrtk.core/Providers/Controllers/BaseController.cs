@@ -94,7 +94,10 @@ namespace XRTK.Providers.Controllers
 
         #endregion IMixedRealityController Implementation
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Setups up the configuration based on the Mixed Reality Controller Mapping Profile.
+        /// </summary>
+        /// <param name="controllerType">The type of the controller.</param>
         public bool SetupConfiguration(Type controllerType)
         {
             if (controllerType == null)
@@ -165,8 +168,14 @@ namespace XRTK.Providers.Controllers
         /// <param name="mappings">Configured mappings from a controller mapping profile</param>
         public void AssignControllerMappings(MixedRealityInteractionMapping[] mappings) => Interactions = mappings;
 
-        /// <inheritdoc />
-        public async void TryRenderControllerModel(Type controllerType, byte[] glbData = null) => await TryRenderControllerModelAsync(controllerType, glbData);
+        /// <summary>
+        /// Attempts to load the controller model render settings from the <see cref="MixedRealityControllerVisualizationProfile"/>
+        /// to render the controllers in the scene.
+        /// </summary>
+        /// <param name="controllerType">The controller type.</param>
+        /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
+        /// <returns>True, if controller model is being properly rendered.</returns>
+        internal async void TryRenderControllerModel(Type controllerType, byte[] glbData = null) => await TryRenderControllerModelAsync(controllerType, glbData);
 
         /// <summary>
         /// Attempts to load the controller model render settings from the <see cref="MixedRealityControllerVisualizationProfile"/>

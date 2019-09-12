@@ -4,7 +4,7 @@
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Definitions.Controllers.Hands
 {
@@ -13,7 +13,7 @@ namespace XRTK.Definitions.Controllers.Hands
     {
         [SerializeField]
         [Tooltip("The concrete type to use for created hand controllers.")]
-        [Implements(typeof(IMixedRealityHandController), TypeGrouping.ByNamespaceFlat)]
+        [Extends(typeof(BaseHandController), TypeGrouping.ByNamespaceFlat)]
         private SystemType handControllerType;
 
         /// <summary>

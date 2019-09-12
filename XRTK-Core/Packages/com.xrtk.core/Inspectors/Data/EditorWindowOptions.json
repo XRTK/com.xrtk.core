@@ -765,6 +765,72 @@
                 true,
                 true
             ]
+        },
+        {
+            "Controller": 14,
+            "Handedness": 1,
+            "InputLabelPositions": [
+                {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                {
+                    "x": 0.0,
+                    "y": 0.0
+                },
+                {
+                    "x": 0.0,
+                    "y": 0.0
+                }
+            ],
+            "IsLabelFlipped": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ]
+        },
+        {
+            "Controller": 14,
+            "Handedness": 2,
+            "InputLabelPositions": [
+                {
+                    "x": 52.0,
+                    "y": 65.0
+                },
+                {
+                    "x": 123.0,
+                    "y": 258.0
+                },
+                {
+                    "x": 174.0,
+                    "y": 193.0
+                },
+                {
+                    "x": 380.0,
+                    "y": 390.0
+                },
+                {
+                    "x": 474.0,
+                    "y": 320.0
+                }
+            ],
+            "IsLabelFlipped": [
+                false,
+                false,
+                false,
+                false,
+                false
+            ]
         }
     ]
 }

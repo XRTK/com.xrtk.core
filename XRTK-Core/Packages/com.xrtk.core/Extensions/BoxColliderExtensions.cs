@@ -3,7 +3,7 @@
 
 using UnityEngine;
 
-namespace XRTK.Extensions
+namespace XRTK.Extensions.XRTK.Extensions
 {
     /// <summary>
     /// Extension methods for Unity's <see cref="BoxCollider"/>

@@ -95,7 +95,11 @@ namespace XRTK.Inspectors.Utilities
                 Debug.LogError("Failed to replace source code with assembly!");
             }
 
-            AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+            if (!EditorApplication.isUpdating)
+            {
+                AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+            }
+
             EditorUtility.ClearProgressBar();
         }
 
@@ -270,7 +274,11 @@ namespace XRTK.Inspectors.Utilities
             File.Delete(builtAssemblyPath);
             File.Delete($"{builtAssemblyPath}{META}");
 
-            AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+            if (!EditorApplication.isUpdating)
+            {
+                AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+            }
+
             EditorUtility.ClearProgressBar();
         }
 

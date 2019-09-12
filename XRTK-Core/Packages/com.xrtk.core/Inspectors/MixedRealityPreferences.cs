@@ -459,7 +459,11 @@ namespace XRTK.Inspectors
                 EditorBuildSettings.scenes = scenes;
                 Debug.Assert(EditorBuildSettings.scenes[0].guid == sceneGuid);
                 AssetDatabase.SaveAssets();
-                AssetDatabase.Refresh();
+
+                if (!EditorApplication.isUpdating)
+                {
+                    AssetDatabase.Refresh();
+                }
             }
 
             if (!EditorBuildSettings.scenes[0].enabled)

@@ -1,9 +1,10 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Definitions.Physics;
-using XRTK.Utilities.Physics;
 using UnityEngine;
+using XRTK.Definitions.Physics;
+using XRTK.Extensions;
+using XRTK.Utilities.Physics;
 
 namespace XRTK.SDK.Utilities.Solvers
 {
@@ -16,6 +17,7 @@ namespace XRTK.SDK.Utilities.Solvers
 
         private enum RaycastDirectionEnum
         {
+            None = 0,
             CameraFacing,
             ToObject,
             ToLinkedPosition
@@ -23,7 +25,7 @@ namespace XRTK.SDK.Utilities.Solvers
 
         private enum OrientModeEnum
         {
-            None,
+            None = 0,
             Vertical,
             Full,
             Blended
@@ -31,7 +33,7 @@ namespace XRTK.SDK.Utilities.Solvers
 
         [SerializeField]
         [Tooltip("LayerMask to apply Surface Magnetism to")]
-        private LayerMask[] magneticSurfaces = { UnityEngine.Physics.DefaultRaycastLayers };
+        private LayerMask[] magneticSurfaces = { Physics.DefaultRaycastLayers };
 
         [SerializeField]
         [Tooltip("Max distance to check for surfaces")]
@@ -111,8 +113,7 @@ namespace XRTK.SDK.Utilities.Solvers
         {
             get
             {
-                Vector3 origin = RaycastOrigin;
-                Vector3 endPoint = Vector3.forward;
+                var endPoint = Vector3.forward;
 
                 switch (raycastDirection)
                 {
@@ -140,7 +141,7 @@ namespace XRTK.SDK.Utilities.Solvers
         {
             get
             {
-                Vector3 direction = Vector3.forward;
+                var direction = Vector3.forward;
 
                 if (raycastDirection == RaycastDirectionEnum.CameraFacing)
                 {
@@ -203,41 +204,30 @@ namespace XRTK.SDK.Utilities.Solvers
         private Quaternion CalculateMagnetismOrientation(Vector3 direction, Vector3 surfaceNormal)
         {
             // Calculate the surface rotation
-            Vector3 newDirection = -surfaceNormal;
+            var newDirection = -surfaceNormal;
 
-            if (IsNormalVertical(newDirection))
+            if (newDirection.IsNormalVertical())
             {
                 newDirection = direction;
             }
 
             newDirection.y = 0;
 
-            var surfaceRot = Quaternion.LookRotation(newDirection, Vector3.up);
+            var surfaceOrientation = Quaternion.LookRotation(newDirection, Vector3.up);
 
             switch (orientationMode)
             {
-                case OrientModeEnum.None:
-                    return SolverHandler.GoalRotation;
-
                 case OrientModeEnum.Vertical:
-                    return surfaceRot;
-
+                    return surfaceOrientation;
                 case OrientModeEnum.Full:
                     return Quaternion.LookRotation(-surfaceNormal, Vector3.up);
-
                 case OrientModeEnum.Blended:
-                    return Quaternion.Slerp(SolverHandler.GoalRotation, surfaceRot, orientationBlend);
+                    return Quaternion.Slerp(SolverHandler.GoalRotation, surfaceOrientation, orientationBlend);
                 default:
-                    return Quaternion.identity;
+                case OrientModeEnum.None:
+                    return SolverHandler.GoalRotation;
             }
         }
-
-        /// <summary>
-        /// Checks if a normal is nearly vertical
-        /// </summary>
-        /// <param name="normal"></param>
-        /// <returns>Returns true, if normal is vertical.</returns>
-        private static bool IsNormalVertical(Vector3 normal) => 1f - Mathf.Abs(normal.y) < 0.01f;
 
         public override void SolverUpdate()
         {
@@ -277,13 +267,13 @@ namespace XRTK.SDK.Utilities.Solvers
             bool isHit;
 
             // Do the cast!
-            isHit = MixedRealityRaycaster.RaycastSimplePhysicsStep(rayStep, maxDistance, magneticSurfaces, out RaycastHit result);
+            isHit = MixedRealityRaycaster.RaycastSimplePhysicsStep(rayStep, maxDistance, magneticSurfaces, out var result);
 
             OnSurface = isHit;
 
             // Enforce CloseDistance
-            Vector3 hitDelta = result.point - rayStep.Origin;
-            float length = hitDelta.magnitude;
+            var hitDelta = result.point - rayStep.Origin;
+            var length = hitDelta.magnitude;
 
             if (length < closeDistance)
             {
@@ -301,17 +291,17 @@ namespace XRTK.SDK.Utilities.Solvers
         private void SphereRaycastStepUpdate(RayStep rayStep)
         {
             bool isHit;
-            float scaleOverride = ScaleOverride;
+            var scaleOverride = ScaleOverride;
 
             // Do the cast!
-            float size = scaleOverride > 0 ? scaleOverride : transform.lossyScale.x * sphereSize;
-            isHit = MixedRealityRaycaster.RaycastSpherePhysicsStep(rayStep, size, maxDistance, magneticSurfaces, out RaycastHit result);
+            var size = scaleOverride > 0 ? scaleOverride : transform.lossyScale.x * sphereSize;
+            isHit = MixedRealityRaycaster.RaycastSpherePhysicsStep(rayStep, size, maxDistance, magneticSurfaces, out var result);
 
             OnSurface = isHit;
 
             // Enforce CloseDistance
-            Vector3 hitDelta = result.point - rayStep.Origin;
-            float length = hitDelta.magnitude;
+            var hitDelta = result.point - rayStep.Origin;
+            var length = hitDelta.magnitude;
 
             if (length < closeDistance)
             {
@@ -328,19 +318,19 @@ namespace XRTK.SDK.Utilities.Solvers
 
         private void BoxRaycastStepUpdate(RayStep rayStep)
         {
-            Vector3 scale = transform.lossyScale;
-            float scaleOverride = ScaleOverride;
+            var scale = transform.lossyScale;
+            var scaleOverride = ScaleOverride;
 
             if (scaleOverride > 0)
             {
                 scale = scale.normalized * scaleOverride;
             }
 
-            Quaternion orientation = orientationMode == OrientModeEnum.None ?
-                Quaternion.LookRotation(rayStep.Direction, Vector3.up) :
-                CalculateMagnetismOrientation(rayStep.Direction, Vector3.up);
+            var orientation = orientationMode == OrientModeEnum.None
+                ? Quaternion.LookRotation(rayStep.Direction, Vector3.up)
+                : CalculateMagnetismOrientation(rayStep.Direction, Vector3.up);
 
-            Matrix4x4 targetMatrix = Matrix4x4.TRS(Vector3.zero, orientation, scale);
+            var targetMatrix = Matrix4x4.TRS(Vector3.zero, orientation, scale);
 
             if (boxCollider == null)
             {
@@ -349,23 +339,24 @@ namespace XRTK.SDK.Utilities.Solvers
 
             Debug.Assert(boxCollider != null, $"Missing a box collider for Surface Magnetism on {gameObject}");
 
-            Vector3 extents = boxCollider.size;
+            var extents = boxCollider.size;
 
-            if (MixedRealityRaycaster.RaycastBoxPhysicsStep(rayStep, extents, transform.position, targetMatrix, maxDistance, magneticSurfaces, boxRaysPerEdge, orthographicBoxCast, out Vector3[] positions, out Vector3[] normals, out bool[] hits))
+            if (MixedRealityRaycaster.RaycastBoxPhysicsStep(rayStep, extents, transform.position, targetMatrix, maxDistance, magneticSurfaces, boxRaysPerEdge, orthographicBoxCast, out var positions, out var normals, out var hits))
             {
-                // Place an unconstrained plane down the ray. Don't use vertical constrain.
-                FindPlacementPlane(rayStep.Origin, rayStep.Direction, positions, normals, hits, boxCollider.size.x, maximumNormalVariance, false, orientationMode == OrientModeEnum.None, out Plane plane, out float distance);
+                // Place an unconstrained plane down the ray. Don't use vertical constraint.
+                FindPlacementPlane(rayStep.Origin, rayStep.Direction, positions, normals, hits, boxCollider.size.x, maximumNormalVariance, false, orientationMode == OrientModeEnum.None, out var plane, out var distance);
 
                 // If placing on a horizontal surface, need to adjust the calculated distance by half the app height
-                float verticalCorrectionOffset = 0;
-                if (IsNormalVertical(plane.normal) && !Mathf.Approximately(rayStep.Direction.y, 0))
+                var verticalCorrectionOffset = 0f;
+
+                if (plane.normal.IsNormalVertical() && !Mathf.Approximately(rayStep.Direction.y, 0))
                 {
-                    float boxSurfaceVerticalOffset = targetMatrix.MultiplyVector(new Vector3(0, extents.y * 0.5f, 0)).magnitude;
-                    Vector3 correctionVector = boxSurfaceVerticalOffset * (rayStep.Direction / rayStep.Direction.y);
+                    var boxSurfaceVerticalOffset = targetMatrix.MultiplyVector(new Vector3(0, extents.y * 0.5f, 0)).magnitude;
+                    var correctionVector = boxSurfaceVerticalOffset * (rayStep.Direction / rayStep.Direction.y);
                     verticalCorrectionOffset = -correctionVector.magnitude;
                 }
 
-                float boxSurfaceOffset = targetMatrix.MultiplyVector(new Vector3(0, 0, extents.z * 0.5f)).magnitude;
+                var boxSurfaceOffset = targetMatrix.MultiplyVector(new Vector3(0, 0, extents.z * 0.5f)).magnitude;
 
                 // Apply boxSurfaceOffset to ray direction and not surface normal direction to reduce sliding
                 GoalPosition = rayStep.Origin + rayStep.Direction * Mathf.Max(closeDistance, distance + surfaceRayOffset + boxSurfaceOffset + verticalCorrectionOffset) + plane.normal * (0 * boxSurfaceOffset + surfaceNormalOffset);
@@ -394,9 +385,8 @@ namespace XRTK.SDK.Utilities.Solvers
         /// <param name="closestDistance"></param>
         private void FindPlacementPlane(Vector3 origin, Vector3 direction, Vector3[] positions, Vector3[] normals, bool[] hits, float assetWidth, float maxNormalVariance, bool constrainVertical, bool useClosestDistance, out Plane plane, out float closestDistance)
         {
-            int rayCount = positions.Length;
-
-            Vector3 originalDirection = direction;
+            var rayCount = positions.Length;
+            var originalDirection = direction;
 
             if (constrainVertical)
             {
@@ -407,16 +397,16 @@ namespace XRTK.SDK.Utilities.Solvers
             // Go through all the points and find the closest distance
             closestDistance = float.PositiveInfinity;
 
-            int numHits = 0;
-            int closestPoint = -1;
-            float farthestDistance = 0f;
+            var numHits = 0;
+            var closestPoint = -1;
+            var farthestDistance = 0f;
             var averageNormal = Vector3.zero;
 
             for (int hitIndex = 0; hitIndex < rayCount; hitIndex++)
             {
                 if (hits[hitIndex])
                 {
-                    float distance = Vector3.Dot(direction, positions[hitIndex] - origin);
+                    var distance = Vector3.Dot(direction, positions[hitIndex] - origin);
 
                     if (distance < closestDistance)
                     {
@@ -460,8 +450,8 @@ namespace XRTK.SDK.Utilities.Solvers
             // go through all the points and find the most orthogonal plane
             var lowAngle = float.PositiveInfinity;
             var highAngle = float.NegativeInfinity;
-            int lowIndex = -1;
-            int highIndex = -1;
+            var lowIndex = -1;
+            var highIndex = -1;
 
             for (int hitIndex = 0; hitIndex < rayCount; hitIndex++)
             {
@@ -470,7 +460,7 @@ namespace XRTK.SDK.Utilities.Solvers
                     continue;
                 }
 
-                Vector3 difference = positions[hitIndex] - positions[closestPoint];
+                var difference = positions[hitIndex] - positions[closestPoint];
 
                 if (constrainVertical)
                 {
@@ -485,7 +475,7 @@ namespace XRTK.SDK.Utilities.Solvers
 
                 difference.Normalize();
 
-                float angle = Vector3.Dot(direction, difference);
+                var angle = Vector3.Dot(direction, difference);
 
                 if (angle < lowAngle)
                 {
@@ -503,14 +493,14 @@ namespace XRTK.SDK.Utilities.Solvers
                         continue;
                     }
 
-                    float dot = Mathf.Abs(Vector3.Dot((positions[hitIndex] - positions[closestPoint]).normalized, (positions[lowIndex] - positions[closestPoint]).normalized));
+                    var dot = Mathf.Abs(Vector3.Dot((positions[hitIndex] - positions[closestPoint]).normalized, (positions[lowIndex] - positions[closestPoint]).normalized));
 
                     if (dot > MaxDot)
                     {
                         continue;
                     }
 
-                    float nextAngle = Mathf.Abs(Vector3.Dot(direction, Vector3.Cross(positions[lowIndex] - positions[closestPoint], positions[hitIndex] - positions[closestPoint]).normalized));
+                    var nextAngle = Mathf.Abs(Vector3.Dot(direction, Vector3.Cross(positions[lowIndex] - positions[closestPoint], positions[hitIndex] - positions[closestPoint]).normalized));
 
                     if (nextAngle > highAngle)
                     {
@@ -540,7 +530,7 @@ namespace XRTK.SDK.Utilities.Solvers
                 }
                 else
                 {
-                    Vector3 planeUp = Vector3.Cross(positions[lowIndex] - positions[closestPoint], direction);
+                    var planeUp = Vector3.Cross(positions[lowIndex] - positions[closestPoint], direction);
                     placementNormal = Vector3.Cross(positions[lowIndex] - positions[closestPoint], constrainVertical ? Vector3.up : planeUp).normalized;
                 }
 
@@ -569,7 +559,7 @@ namespace XRTK.SDK.Utilities.Solvers
             // Figure out how far the plane should be.
             if (!useClosestDistance && closestPoint >= 0)
             {
-                if (plane.Raycast(new Ray(origin, originalDirection), out float centerPlaneDistance) || !centerPlaneDistance.Equals(0.0f))
+                if (plane.Raycast(new Ray(origin, originalDirection), out var centerPlaneDistance) || !centerPlaneDistance.Equals(0.0f))
                 {
                     // When the plane is nearly parallel to the user, we need to clamp the distance to where the raycasts hit.
                     closestDistance = Mathf.Clamp(centerPlaneDistance, closestDistance, farthestDistance + assetWidth * 0.5f);

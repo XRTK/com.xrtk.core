@@ -47,11 +47,11 @@ namespace XRTK.Providers.Controllers.OpenVR
             // Oculus Touch Controller - Axis1D.PrimaryIndexTrigger
             // Valve Knuckles Controller - Left Controller Trigger
             // Windows Mixed Reality Controller - Left Trigger Press (Select)
-            new MixedRealityInteractionMapping(3, "Trigger Press (Select)", AxisType.Digital, DeviceInputType.TriggerPress, KeyCode.JoystickButton14),
+            new MixedRealityInteractionMapping(3, "Trigger Press (Select)", AxisType.Digital, DeviceInputType.TriggerPress, ControllerMappingLibrary.AXIS_9),
             // HTC Vive Controller - Left Controller Trigger (7)
             // Oculus Touch Controller - Axis1D.PrimaryIndexTrigger
             // Valve Knuckles Controller - Left Controller Trigger
-            new MixedRealityInteractionMapping(4, "Trigger Touch", AxisType.Digital, DeviceInputType.TriggerTouch, ControllerMappingLibrary.AXIS_9),
+            new MixedRealityInteractionMapping(4, "Trigger Touch", AxisType.Digital, DeviceInputType.TriggerTouch, KeyCode.JoystickButton14),
             // HTC Vive Controller - Left Controller Grip Button (8)
             // Oculus Touch Controller - Axis1D.PrimaryHandTrigger
             // Valve Knuckles Controller - Left Controller Grip Average
@@ -98,11 +98,11 @@ namespace XRTK.Providers.Controllers.OpenVR
             // Oculus Touch Controller - Axis1D.SecondaryIndexTrigger
             // Valve Knuckles Controller - Right Controller Trigger
             // Windows Mixed Reality Controller - Right Trigger Press (Select)
-            new MixedRealityInteractionMapping(3, "Trigger Press (Select)", AxisType.Digital, DeviceInputType.TriggerPress, KeyCode.JoystickButton15),
+            new MixedRealityInteractionMapping(3, "Trigger Press (Select)", AxisType.Digital, DeviceInputType.TriggerPress, ControllerMappingLibrary.AXIS_10),
             // HTC Vive Controller - Right Controller Trigger (7)
             // Oculus Touch Controller - Axis1D.SecondaryIndexTrigger
             // Valve Knuckles Controller - Right Controller Trigger
-            new MixedRealityInteractionMapping(4, "Trigger Touch", AxisType.Digital, DeviceInputType.TriggerTouch, ControllerMappingLibrary.AXIS_10),
+            new MixedRealityInteractionMapping(4, "Trigger Touch", AxisType.Digital, DeviceInputType.TriggerTouch, KeyCode.JoystickButton15),
             // HTC Vive Controller - Right Controller Grip Button (8)
             // Oculus Touch Controller - Axis1D.SecondaryHandTrigger
             // Valve Knuckles Controller - Right Controller Grip Average

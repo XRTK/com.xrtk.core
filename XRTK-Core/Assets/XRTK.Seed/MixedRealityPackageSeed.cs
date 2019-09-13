@@ -2,13 +2,11 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.Diagnostics;
-using System.Linq;
+using System.IO;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditor.PackageManager;
-using Debug = UnityEngine.Debug;
+using UnityEngine;
 
 namespace XRTK.Seed
 {
@@ -21,7 +19,17 @@ namespace XRTK.Seed
     [InitializeOnLoad]
     public class MixedRealityPackageSeed
     {
-        private const string Repository = "https://github.com/XRTK/XRTK-Core.git";
+        private const string ScopedRegistryEntry = @"{
+  ""scopedRegistries"": [
+    {
+      ""name"": ""XRTK"",
+      ""url"": ""http://35.224.131.252:4873/"",
+      ""scopes"": [
+        ""com.xrtk""
+      ]
+    }
+  ],
+";
 
         static MixedRealityPackageSeed()
         {
@@ -44,64 +52,26 @@ namespace XRTK.Seed
             {
                 if (assembly == null)
                 {
-                    var process = new Process
-                    {
-                        StartInfo = new ProcessStartInfo
-                        {
-                            WindowStyle = ProcessWindowStyle.Normal,
-                            CreateNoWindow = true,
-                            UseShellExecute = false,
-                            RedirectStandardOutput = true,
-                            RedirectStandardError = true,
-                            FileName = "cmd.exe",
-                            Arguments = $"/C git ls-remote --tags {Repository}"
-                        }
-                    };
-
-                    var tag = "0.1.3";
-
-                    try
-                    {
-                        if (process.Start())
-                        {
-                            var error = process.StandardError.ReadToEnd();
-
-                            if (string.IsNullOrEmpty(error))
-                            {
-                                var output = process.StandardOutput.ReadToEnd();
-
-                                var tags = output.Split('\n')
-                                    .Select(t => Regex.Match(t, "(\\d*\\.\\d*\\.\\d*)"))
-                                    .Where(match => match.Success)
-                                    .Select(match => new Version(match.Value))
-                                    .OrderBy(version => version);
-
-                                tag = tags.LastOrDefault()?.ToString();
-                            }
-                            else
-                            {
-                                Debug.LogError(error);
-                            }
-
-                            process.WaitForExit();
-                            process.Close();
-                            process.Dispose();
-                        }
-                        else
-                        {
-                            Debug.LogError("Failed to get remote tags for the XRTK package!");
-                        }
-                    }
-                    catch (Exception e)
-                    {
-                        Debug.LogError(e.Message);
-                    }
-
-                    Client.Add($"com.xrtk.core@{Repository}#{tag}");
-                    EditorUtility.DisplayProgressBar("Installing the Mixed Reality Toolkit", "Resolving packages...", 0.1f);
-                    AssetDatabase.DeleteAsset("Assets/XRTK.Seed");
+                    InstallXRTK();
                 }
             }
+        }
+
+        private static void InstallXRTK()
+        {
+            var manifestFilePath = $"{Directory.GetParent(Application.dataPath)}\\Packages\\manifest.json";
+            var text = File.ReadAllText(manifestFilePath);
+
+            if (!text.Contains("XRTK"))
+            {
+                text = text.TrimStart('{');
+                text = $"{ScopedRegistryEntry}{text}";
+            }
+
+            File.WriteAllText(manifestFilePath, text);
+
+            Client.Add("com.xrtk.core");
+            AssetDatabase.DeleteAsset("Assets/XRTK.Seed");
         }
     }
 }

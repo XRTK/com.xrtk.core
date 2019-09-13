@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Extensions.EditorClassExtensions;
 using XRTK.Inspectors.Utilities.SymbolicLinks;
 using XRTK.Utilities.Editor;

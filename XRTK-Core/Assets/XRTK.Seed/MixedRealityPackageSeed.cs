@@ -52,26 +52,29 @@ namespace XRTK.Seed
             {
                 if (assembly == null)
                 {
-                    InstallXRTK();
+                    var manifestFilePath = $"{Directory.GetParent(Application.dataPath)}\\Packages\\manifest.json";
+
+                    if (File.Exists(manifestFilePath))
+                    {
+                        var text = File.ReadAllText(manifestFilePath);
+
+                        if (!text.Contains("XRTK"))
+                        {
+                            text = text.TrimStart('{');
+                            text = $"{ScopedRegistryEntry}{text}";
+                        }
+
+                        File.WriteAllText(manifestFilePath, text);
+
+                        Client.Add("com.xrtk.core");
+                        AssetDatabase.DeleteAsset("Assets/XRTK.Seed");
+                    }
+                    else
+                    {
+                        Debug.LogError("Failed to install XRTK, couldn't find the project manifest!");
+                    }
                 }
             }
-        }
-
-        private static void InstallXRTK()
-        {
-            var manifestFilePath = $"{Directory.GetParent(Application.dataPath)}\\Packages\\manifest.json";
-            var text = File.ReadAllText(manifestFilePath);
-
-            if (!text.Contains("XRTK"))
-            {
-                text = text.TrimStart('{');
-                text = $"{ScopedRegistryEntry}{text}";
-            }
-
-            File.WriteAllText(manifestFilePath, text);
-
-            Client.Add("com.xrtk.core");
-            AssetDatabase.DeleteAsset("Assets/XRTK.Seed");
         }
     }
 }

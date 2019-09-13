@@ -16,9 +16,6 @@ MonoBehaviour:
   - sourceRelativePath: /Submodules/WindowsMixedReality/XRTK.WindowsMixedReality/Packages/com.xrtk.wmr
     targetRelativePath: /XRTK-Core/Packages/com.xrtk.wmr
     isActive: 1
-  - sourceRelativePath: /Submodules/UpmGitExtension/XRTK.UpmGitExtension/Packages/com.xrtk.upm-git-extension
-    targetRelativePath: /XRTK-Core/Packages/com.xrtk.upm-git-extension
-    isActive: 1
   - sourceRelativePath: /Submodules/Lumin/XRTK.Lumin/Packages/com.xrtk.lumin
     targetRelativePath: /XRTK-Core/Packages/com.xrtk.lumin
     isActive: 1

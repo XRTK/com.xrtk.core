@@ -5,7 +5,6 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Extensions;
-using XRTK.Inspectors.Utilities.Packages;
 
 namespace XRTK.Inspectors.Utilities.SymbolicLinks
 {
@@ -167,8 +166,6 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
                     MixedRealityPreferences.AutoLoadSymbolicLinks = true;
                     SymbolicLinker.AddLink(sourcePath, targetPath);
-                    MixedRealityPackageUtilities.ValidatePackages();
-
                     EditorUtility.SetDirty(SymbolicLinker.Settings);
                     AssetDatabase.SaveAssets();
 

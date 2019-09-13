@@ -6,7 +6,9 @@
     "XRTK",
     "VR",
     "AR",
-    "Mixed Reality"
+    "XR",
+    "Mixed Reality",
+    "DI"
   ],
   "version": "0.1.19",
   "unity": "2019.1",

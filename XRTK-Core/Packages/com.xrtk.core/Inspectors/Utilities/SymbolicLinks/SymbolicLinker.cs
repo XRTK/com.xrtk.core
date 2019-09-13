@@ -7,12 +7,10 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using XRTK.Extensions;
-using XRTK.Inspectors.Utilities.Packages;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Inspectors.Utilities.SymbolicLinks
@@ -51,7 +49,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// <summary>
         /// Is the sync task running?
         /// </summary>
-        public static bool IsSyncing => isRunningSync || MixedRealityPackageUtilities.IsRunningCheck;
+        public static bool IsSyncing => isRunningSync;
 
         /// <summary>
         /// Debug the symbolic linker utility.
@@ -98,7 +96,6 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
             if (!MixedRealityPreferences.AutoLoadSymbolicLinks && !forceUpdate)
             {
-                MixedRealityPackageUtilities.CheckPackageManifest();
                 return;
             }
 
@@ -119,7 +116,6 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 }
 
                 MixedRealityPreferences.AutoLoadSymbolicLinks = false;
-                MixedRealityPackageUtilities.CheckPackageManifest();
                 return;
             }
 
@@ -193,10 +189,13 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
             EditorUtility.SetDirty(Settings);
             AssetDatabase.SaveAssets();
-            AssetDatabase.Refresh();
+
+            if (!EditorApplication.isUpdating)
+            {
+                AssetDatabase.Refresh();
+            }
 
             EditorApplication.UnlockReloadAssemblies();
-            MixedRealityPackageUtilities.CheckPackageManifest();
             isRunningSync = false;
         }
 
@@ -374,15 +373,29 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 Directory.Delete(targetAbsolutePath);
             }
 
-            // --------------------> /C mklink /D "C:\Link To Folder" "C:\Users\Name\Original Folder"
-            if (!new Process().Run($"/C mklink /D \"{targetAbsolutePath}\" \"{sourceAbsolutePath}\"", out var error))
+#if UNITY_EDITOR_WIN
+            // --------------------> mklink /D "C:\Link To Folder" "C:\Users\Name\Original Folder"
+            if (!new Process().Run($"mklink /D \"{targetAbsolutePath}\" \"{sourceAbsolutePath}\"", out var error))
             {
-                Debug.LogError($"{error}");
+                Debug.LogError(error);
                 return false;
             }
+#else
+            // --------------------> ln -s /path/to/original /path/to/symlink
+            if (!new Process().Run($"ln -s \"{sourceAbsolutePath}\" \"{targetAbsolutePath}\"", out var error))
+            {
+                Debug.LogError(error);
+                return false;
+            }
+#endif
 
             Debug.Log($"Successfully created symbolic link to {sourceAbsolutePath}");
-            AssetDatabase.Refresh();
+
+            if (!EditorApplication.isUpdating)
+            {
+                AssetDatabase.Refresh();
+            }
+
             return true;
         }
 
@@ -394,14 +407,25 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 return false;
             }
 
-            if (new Process().Run($"/C rmdir /q \"{path}\"", out _))
+            bool success = false;
+
+#if UNITY_EDITOR_WIN
+            success = new Process().Run($"rmdir /q \"{path}\"", out _);
+#else
+            success = new Process().Run($"rm \"{path}\"", out _);
+#endif
+
+            if (success)
             {
                 if (File.Exists($"{path}.meta"))
                 {
                     File.Delete($"{path}.meta");
                 }
 
-                AssetDatabase.Refresh();
+                if (!EditorApplication.isUpdating)
+                {
+                    AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+                }
             }
 
             return true;

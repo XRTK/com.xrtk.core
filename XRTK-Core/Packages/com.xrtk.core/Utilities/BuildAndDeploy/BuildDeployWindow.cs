@@ -199,7 +199,10 @@ namespace XRTK.Utilities.Build
             titleContent = new GUIContent("Build Window");
             minSize = new Vector2(512, 256);
 
+#if UNITY_EDITOR_WIN
             LoadWindowsSdkPaths();
+#endif
+
             UpdateBuilds();
 
             currentConnectionInfoIndex = lastSessionConnectionInfoIndex;

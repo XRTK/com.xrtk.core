@@ -5,6 +5,7 @@ using System;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -118,18 +119,25 @@ namespace XRTK.Utilities.Build
 
                             if (Application.isBatchMode)
                             {
-                                var buildOutput = "Appx Build Output:\n";
-
-                                foreach (var message in processResult.Output)
+                                var buildOutput = new StringBuilder();
+                                if (processResult.Output?.Length > 0)
                                 {
-                                    buildOutput += $"{message}\n";
+                                    buildOutput.Append("Appx Build Output:");
+
+                                    foreach (var message in processResult.Output)
+                                    {
+                                        buildOutput.Append($"\n{message}");
+                                    }
                                 }
 
-                                buildOutput += "Appx Build Errors:";
-
-                                foreach (var error in processResult.Errors)
+                                if (processResult.Errors?.Length > 0)
                                 {
-                                    buildOutput += $"{error}\n";
+                                    buildOutput.Append("Appx Build Errors:");
+
+                                    foreach (var error in processResult.Errors)
+                                    {
+                                        buildOutput.Append($"\n{error}");
+                                    }
                                 }
 
                                 Debug.LogError(buildOutput);

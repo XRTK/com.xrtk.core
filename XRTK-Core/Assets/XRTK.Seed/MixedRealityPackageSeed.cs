@@ -23,7 +23,7 @@ namespace XRTK.Seed
   ""scopedRegistries"": [
     {
       ""name"": ""XRTK"",
-      ""url"": ""http://35.224.131.252:4873/"",
+      ""url"": ""http://upm.xrtk.io:4873/"",
       ""scopes"": [
         ""com.xrtk""
       ]

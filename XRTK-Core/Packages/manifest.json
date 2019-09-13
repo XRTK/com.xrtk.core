@@ -1,4 +1,13 @@
 {
+  "scopedRegistries": [
+    {
+      "name": "XRTK",
+      "url": "http://35.224.131.252:4873/",
+      "scopes": [
+        "com.xrtk"
+      ]
+    }
+  ],
   "dependencies": {
     "com.unity.package-manager-ui": "2.1.2",
     "com.unity.textmeshpro": "2.0.1",

@@ -11,7 +11,6 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using XRTK.Extensions;
-using XRTK.Inspectors.Utilities.Packages;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Inspectors.Utilities.SymbolicLinks
@@ -50,7 +49,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// <summary>
         /// Is the sync task running?
         /// </summary>
-        public static bool IsSyncing => isRunningSync || MixedRealityPackageUtilities.IsRunningCheck;
+        public static bool IsSyncing => isRunningSync;
 
         /// <summary>
         /// Debug the symbolic linker utility.
@@ -97,7 +96,6 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
             if (!MixedRealityPreferences.AutoLoadSymbolicLinks && !forceUpdate)
             {
-                MixedRealityPackageUtilities.CheckPackageManifest();
                 return;
             }
 
@@ -118,7 +116,6 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 }
 
                 MixedRealityPreferences.AutoLoadSymbolicLinks = false;
-                MixedRealityPackageUtilities.CheckPackageManifest();
                 return;
             }
 
@@ -199,7 +196,6 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             }
 
             EditorApplication.UnlockReloadAssemblies();
-            MixedRealityPackageUtilities.CheckPackageManifest();
             isRunningSync = false;
         }
 

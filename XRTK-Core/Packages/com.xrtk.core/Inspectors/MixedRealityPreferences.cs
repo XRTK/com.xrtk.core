@@ -8,7 +8,6 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Extensions.EditorClassExtensions;
-using XRTK.Inspectors.Utilities.Packages;
 using XRTK.Inspectors.Utilities.SymbolicLinks;
 using XRTK.Utilities.Editor;
 
@@ -191,41 +190,6 @@ namespace XRTK.Inspectors
 
         #endregion Symbolic Link Preferences
 
-        #region Package Preferences
-
-        private static bool isPackageSettingsPathLoaded;
-        private static string packageSettingsPath = string.Empty;
-
-        /// <summary>
-        /// The path to the package settings found for this project.
-        /// </summary>
-        public static string PackageSettingsPath
-        {
-            get
-            {
-                if (!isPackageSettingsPathLoaded)
-                {
-                    symbolicLinkSettingsPath = EditorPreferences.Get("_PackageSettingsPath", string.Empty);
-                    isPackageSettingsPathLoaded = true;
-                }
-
-                if (!EditorApplication.isUpdating &&
-                     string.IsNullOrEmpty(packageSettingsPath))
-                {
-                    packageSettingsPath = AssetDatabase
-                        .FindAssets($"t:{typeof(MixedRealityPackageSettings).Name}")
-                        .Select(AssetDatabase.GUIDToAssetPath)
-                        .OrderBy(x => x)
-                        .FirstOrDefault();
-                }
-
-                return packageSettingsPath;
-            }
-            set => EditorPreferences.Set("_PackageSettingsPath", packageSettingsPath = value);
-        }
-
-        #endregion Package Prefernces
-
         #region Debug Packages
 
         private static readonly GUIContent DebugUpmContent = new GUIContent("Debug package loading", "Enable or disable the debug information for package loading.\n\nThis setting only applies to the currently running project.");
@@ -363,29 +327,6 @@ namespace XRTK.Inspectors
             if (EditorGUI.EndChangeCheck())
             {
                 DebugPackageInfo = debugPackageInfo;
-            }
-
-            EditorGUI.BeginChangeCheck();
-            var packageSettings = EditorGUILayout.ObjectField("Package Settings", MixedRealityPackageUtilities.PackageSettings, typeof(MixedRealityPackageSettings), false) as MixedRealityPackageSettings;
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                if (packageSettings != null)
-                {
-                    var shouldSync = string.IsNullOrEmpty(PackageSettingsPath);
-                    PackageSettingsPath = AssetDatabase.GetAssetPath(packageSettings);
-                    MixedRealityPackageUtilities.PackageSettings = AssetDatabase.LoadAssetAtPath<MixedRealityPackageSettings>(PackageSettingsPath);
-
-                    if (shouldSync)
-                    {
-                        EditorApplication.delayCall += MixedRealityPackageUtilities.CheckPackageManifest;
-                    }
-                }
-                else
-                {
-                    PackageSettingsPath = string.Empty;
-                    MixedRealityPackageUtilities.PackageSettings = null;
-                }
             }
 
             EditorGUIUtility.labelWidth = prevLabelWidth;

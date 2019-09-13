@@ -1,8 +1,7 @@
 {
     "name": "XRTK",
     "references": [
-        "XRTK.Utilities.Editor",
-        "Unity.ugui"        
+        "XRTK.Utilities.Editor"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],
@@ -11,5 +10,6 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": []
+    "defineConstraints": [],
+    "versionDefines": []
 }

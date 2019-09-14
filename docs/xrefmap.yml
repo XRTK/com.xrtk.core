@@ -4648,109 +4648,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.MixedRealityCameraProfile.TransparentQualityLevel
   nameWithType: MixedRealityCameraProfile.TransparentQualityLevel
-- uid: XRTK.Definitions.MixedRealityPackageInfo
-  name: MixedRealityPackageInfo
-  href: api/XRTK.Definitions.MixedRealityPackageInfo.html
-  commentId: T:XRTK.Definitions.MixedRealityPackageInfo
-  fullName: XRTK.Definitions.MixedRealityPackageInfo
-  nameWithType: MixedRealityPackageInfo
-- uid: XRTK.Definitions.MixedRealityPackageInfo.DisplayName
-  name: DisplayName
-  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_DisplayName
-  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.DisplayName
-  fullName: XRTK.Definitions.MixedRealityPackageInfo.DisplayName
-  nameWithType: MixedRealityPackageInfo.DisplayName
-- uid: XRTK.Definitions.MixedRealityPackageInfo.DisplayName*
-  name: DisplayName
-  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_DisplayName_
-  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.DisplayName
-  isSpec: "True"
-  fullName: XRTK.Definitions.MixedRealityPackageInfo.DisplayName
-  nameWithType: MixedRealityPackageInfo.DisplayName
-- uid: XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
-  name: IsDefaultPackage
-  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsDefaultPackage
-  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
-  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
-  nameWithType: MixedRealityPackageInfo.IsDefaultPackage
-- uid: XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage*
-  name: IsDefaultPackage
-  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsDefaultPackage_
-  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
-  isSpec: "True"
-  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsDefaultPackage
-  nameWithType: MixedRealityPackageInfo.IsDefaultPackage
-- uid: XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
-  name: IsEnabled
-  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsEnabled
-  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
-  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
-  nameWithType: MixedRealityPackageInfo.IsEnabled
-- uid: XRTK.Definitions.MixedRealityPackageInfo.IsEnabled*
-  name: IsEnabled
-  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsEnabled_
-  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
-  isSpec: "True"
-  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsEnabled
-  nameWithType: MixedRealityPackageInfo.IsEnabled
-- uid: XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
-  name: IsRequiredPackage
-  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsRequiredPackage
-  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
-  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
-  nameWithType: MixedRealityPackageInfo.IsRequiredPackage
-- uid: XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage*
-  name: IsRequiredPackage
-  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_IsRequiredPackage_
-  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
-  isSpec: "True"
-  fullName: XRTK.Definitions.MixedRealityPackageInfo.IsRequiredPackage
-  nameWithType: MixedRealityPackageInfo.IsRequiredPackage
-- uid: XRTK.Definitions.MixedRealityPackageInfo.Name
-  name: Name
-  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_Name
-  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.Name
-  fullName: XRTK.Definitions.MixedRealityPackageInfo.Name
-  nameWithType: MixedRealityPackageInfo.Name
-- uid: XRTK.Definitions.MixedRealityPackageInfo.Name*
-  name: Name
-  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_Name_
-  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.Name
-  isSpec: "True"
-  fullName: XRTK.Definitions.MixedRealityPackageInfo.Name
-  nameWithType: MixedRealityPackageInfo.Name
-- uid: XRTK.Definitions.MixedRealityPackageInfo.Uri
-  name: Uri
-  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_Uri
-  commentId: P:XRTK.Definitions.MixedRealityPackageInfo.Uri
-  fullName: XRTK.Definitions.MixedRealityPackageInfo.Uri
-  nameWithType: MixedRealityPackageInfo.Uri
-- uid: XRTK.Definitions.MixedRealityPackageInfo.Uri*
-  name: Uri
-  href: api/XRTK.Definitions.MixedRealityPackageInfo.html#XRTK_Definitions_MixedRealityPackageInfo_Uri_
-  commentId: Overload:XRTK.Definitions.MixedRealityPackageInfo.Uri
-  isSpec: "True"
-  fullName: XRTK.Definitions.MixedRealityPackageInfo.Uri
-  nameWithType: MixedRealityPackageInfo.Uri
-- uid: XRTK.Definitions.MixedRealityPackageSettings
-  name: MixedRealityPackageSettings
-  href: api/XRTK.Definitions.MixedRealityPackageSettings.html
-  commentId: T:XRTK.Definitions.MixedRealityPackageSettings
-  fullName: XRTK.Definitions.MixedRealityPackageSettings
-  nameWithType: MixedRealityPackageSettings
-- uid: XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
-  name: MixedRealityPackages
-  href: api/XRTK.Definitions.MixedRealityPackageSettings.html#XRTK_Definitions_MixedRealityPackageSettings_MixedRealityPackages
-  commentId: P:XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
-  fullName: XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
-  nameWithType: MixedRealityPackageSettings.MixedRealityPackages
-- uid: XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages*
-  name: MixedRealityPackages
-  href: api/XRTK.Definitions.MixedRealityPackageSettings.html#XRTK_Definitions_MixedRealityPackageSettings_MixedRealityPackages_
-  commentId: Overload:XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
-  isSpec: "True"
-  fullName: XRTK.Definitions.MixedRealityPackageSettings.MixedRealityPackages
-  nameWithType: MixedRealityPackageSettings.MixedRealityPackages
 - uid: XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile
   name: MixedRealityRegisteredServiceProvidersProfile
   href: api/XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile.html
@@ -8414,30 +8311,6 @@ references:
   commentId: T:XRTK.Extensions.BoundsExtensions
   fullName: XRTK.Extensions.BoundsExtensions
   nameWithType: BoundsExtensions
-- uid: XRTK.Extensions.BoundsExtensions.Axis
-  name: BoundsExtensions.Axis
-  href: api/XRTK.Extensions.BoundsExtensions.Axis.html
-  commentId: T:XRTK.Extensions.BoundsExtensions.Axis
-  fullName: XRTK.Extensions.BoundsExtensions.Axis
-  nameWithType: BoundsExtensions.Axis
-- uid: XRTK.Extensions.BoundsExtensions.Axis.X
-  name: X
-  href: api/XRTK.Extensions.BoundsExtensions.Axis.html#XRTK_Extensions_BoundsExtensions_Axis_X
-  commentId: F:XRTK.Extensions.BoundsExtensions.Axis.X
-  fullName: XRTK.Extensions.BoundsExtensions.Axis.X
-  nameWithType: BoundsExtensions.Axis.X
-- uid: XRTK.Extensions.BoundsExtensions.Axis.Y
-  name: Y
-  href: api/XRTK.Extensions.BoundsExtensions.Axis.html#XRTK_Extensions_BoundsExtensions_Axis_Y
-  commentId: F:XRTK.Extensions.BoundsExtensions.Axis.Y
-  fullName: XRTK.Extensions.BoundsExtensions.Axis.Y
-  nameWithType: BoundsExtensions.Axis.Y
-- uid: XRTK.Extensions.BoundsExtensions.Axis.Z
-  name: Z
-  href: api/XRTK.Extensions.BoundsExtensions.Axis.html#XRTK_Extensions_BoundsExtensions_Axis_Z
-  commentId: F:XRTK.Extensions.BoundsExtensions.Axis.Z
-  fullName: XRTK.Extensions.BoundsExtensions.Axis.Z
-  nameWithType: BoundsExtensions.Axis.Z
 - uid: XRTK.Extensions.BoundsExtensions.BCK
   name: BCK
   href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_BCK
@@ -8527,15 +8400,15 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.BoundsExtensions.GetCornerAndMidPointPositions
   nameWithType: BoundsExtensions.GetCornerAndMidPointPositions
-- uid: XRTK.Extensions.BoundsExtensions.GetCornerAndMidPointPositions2D(UnityEngine.Bounds,UnityEngine.Transform,UnityEngine.Vector3[]@,XRTK.Extensions.BoundsExtensions.Axis)
-  name: GetCornerAndMidPointPositions2D(Bounds, Transform, ref Vector3[], BoundsExtensions.Axis)
-  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetCornerAndMidPointPositions2D_UnityEngine_Bounds_UnityEngine_Transform_UnityEngine_Vector3____XRTK_Extensions_BoundsExtensions_Axis_
-  commentId: M:XRTK.Extensions.BoundsExtensions.GetCornerAndMidPointPositions2D(UnityEngine.Bounds,UnityEngine.Transform,UnityEngine.Vector3[]@,XRTK.Extensions.BoundsExtensions.Axis)
-  name.vb: GetCornerAndMidPointPositions2D(Bounds, Transform, ByRef Vector3(), BoundsExtensions.Axis)
-  fullName: XRTK.Extensions.BoundsExtensions.GetCornerAndMidPointPositions2D(UnityEngine.Bounds, UnityEngine.Transform, ref UnityEngine.Vector3[], XRTK.Extensions.BoundsExtensions.Axis)
-  fullName.vb: XRTK.Extensions.BoundsExtensions.GetCornerAndMidPointPositions2D(UnityEngine.Bounds, UnityEngine.Transform, ByRef UnityEngine.Vector3(), XRTK.Extensions.BoundsExtensions.Axis)
-  nameWithType: BoundsExtensions.GetCornerAndMidPointPositions2D(Bounds, Transform, ref Vector3[], BoundsExtensions.Axis)
-  nameWithType.vb: BoundsExtensions.GetCornerAndMidPointPositions2D(Bounds, Transform, ByRef Vector3(), BoundsExtensions.Axis)
+- uid: XRTK.Extensions.BoundsExtensions.GetCornerAndMidPointPositions2D(UnityEngine.Bounds,UnityEngine.Transform,UnityEngine.Vector3[]@,XRTK.Definitions.Utilities.CardinalAxis)
+  name: GetCornerAndMidPointPositions2D(Bounds, Transform, ref Vector3[], CardinalAxis)
+  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetCornerAndMidPointPositions2D_UnityEngine_Bounds_UnityEngine_Transform_UnityEngine_Vector3____XRTK_Definitions_Utilities_CardinalAxis_
+  commentId: M:XRTK.Extensions.BoundsExtensions.GetCornerAndMidPointPositions2D(UnityEngine.Bounds,UnityEngine.Transform,UnityEngine.Vector3[]@,XRTK.Definitions.Utilities.CardinalAxis)
+  name.vb: GetCornerAndMidPointPositions2D(Bounds, Transform, ByRef Vector3(), CardinalAxis)
+  fullName: XRTK.Extensions.BoundsExtensions.GetCornerAndMidPointPositions2D(UnityEngine.Bounds, UnityEngine.Transform, ref UnityEngine.Vector3[], XRTK.Definitions.Utilities.CardinalAxis)
+  fullName.vb: XRTK.Extensions.BoundsExtensions.GetCornerAndMidPointPositions2D(UnityEngine.Bounds, UnityEngine.Transform, ByRef UnityEngine.Vector3(), XRTK.Definitions.Utilities.CardinalAxis)
+  nameWithType: BoundsExtensions.GetCornerAndMidPointPositions2D(Bounds, Transform, ref Vector3[], CardinalAxis)
+  nameWithType.vb: BoundsExtensions.GetCornerAndMidPointPositions2D(Bounds, Transform, ByRef Vector3(), CardinalAxis)
 - uid: XRTK.Extensions.BoundsExtensions.GetCornerAndMidPointPositions2D*
   name: GetCornerAndMidPointPositions2D
   href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetCornerAndMidPointPositions2D_
@@ -8543,15 +8416,15 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.BoundsExtensions.GetCornerAndMidPointPositions2D
   nameWithType: BoundsExtensions.GetCornerAndMidPointPositions2D
-- uid: XRTK.Extensions.BoundsExtensions.GetCornerPositions(UnityEngine.Bounds,UnityEngine.Transform,UnityEngine.Vector3[]@)
-  name: GetCornerPositions(Bounds, Transform, ref Vector3[])
-  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetCornerPositions_UnityEngine_Bounds_UnityEngine_Transform_UnityEngine_Vector3____
-  commentId: M:XRTK.Extensions.BoundsExtensions.GetCornerPositions(UnityEngine.Bounds,UnityEngine.Transform,UnityEngine.Vector3[]@)
-  name.vb: GetCornerPositions(Bounds, Transform, ByRef Vector3())
-  fullName: XRTK.Extensions.BoundsExtensions.GetCornerPositions(UnityEngine.Bounds, UnityEngine.Transform, ref UnityEngine.Vector3[])
-  fullName.vb: XRTK.Extensions.BoundsExtensions.GetCornerPositions(UnityEngine.Bounds, UnityEngine.Transform, ByRef UnityEngine.Vector3())
-  nameWithType: BoundsExtensions.GetCornerPositions(Bounds, Transform, ref Vector3[])
-  nameWithType.vb: BoundsExtensions.GetCornerPositions(Bounds, Transform, ByRef Vector3())
+- uid: XRTK.Extensions.BoundsExtensions.GetCornerPositions(UnityEngine.Bounds,UnityEngine.Vector3[]@)
+  name: GetCornerPositions(Bounds, ref Vector3[])
+  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetCornerPositions_UnityEngine_Bounds_UnityEngine_Vector3____
+  commentId: M:XRTK.Extensions.BoundsExtensions.GetCornerPositions(UnityEngine.Bounds,UnityEngine.Vector3[]@)
+  name.vb: GetCornerPositions(Bounds, ByRef Vector3())
+  fullName: XRTK.Extensions.BoundsExtensions.GetCornerPositions(UnityEngine.Bounds, ref UnityEngine.Vector3[])
+  fullName.vb: XRTK.Extensions.BoundsExtensions.GetCornerPositions(UnityEngine.Bounds, ByRef UnityEngine.Vector3())
+  nameWithType: BoundsExtensions.GetCornerPositions(Bounds, ref Vector3[])
+  nameWithType.vb: BoundsExtensions.GetCornerPositions(Bounds, ByRef Vector3())
 - uid: XRTK.Extensions.BoundsExtensions.GetCornerPositions*
   name: GetCornerPositions
   href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetCornerPositions_
@@ -8559,22 +8432,38 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.BoundsExtensions.GetCornerPositions
   nameWithType: BoundsExtensions.GetCornerPositions
-- uid: XRTK.Extensions.BoundsExtensions.GetCornerPositionsFromRendererBounds(UnityEngine.Bounds,UnityEngine.Vector3[]@)
-  name: GetCornerPositionsFromRendererBounds(Bounds, ref Vector3[])
-  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetCornerPositionsFromRendererBounds_UnityEngine_Bounds_UnityEngine_Vector3____
-  commentId: M:XRTK.Extensions.BoundsExtensions.GetCornerPositionsFromRendererBounds(UnityEngine.Bounds,UnityEngine.Vector3[]@)
-  name.vb: GetCornerPositionsFromRendererBounds(Bounds, ByRef Vector3())
-  fullName: XRTK.Extensions.BoundsExtensions.GetCornerPositionsFromRendererBounds(UnityEngine.Bounds, ref UnityEngine.Vector3[])
-  fullName.vb: XRTK.Extensions.BoundsExtensions.GetCornerPositionsFromRendererBounds(UnityEngine.Bounds, ByRef UnityEngine.Vector3())
-  nameWithType: BoundsExtensions.GetCornerPositionsFromRendererBounds(Bounds, ref Vector3[])
-  nameWithType.vb: BoundsExtensions.GetCornerPositionsFromRendererBounds(Bounds, ByRef Vector3())
-- uid: XRTK.Extensions.BoundsExtensions.GetCornerPositionsFromRendererBounds*
-  name: GetCornerPositionsFromRendererBounds
-  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetCornerPositionsFromRendererBounds_
-  commentId: Overload:XRTK.Extensions.BoundsExtensions.GetCornerPositionsFromRendererBounds
+- uid: XRTK.Extensions.BoundsExtensions.GetCornerPositionsLocalSpace(UnityEngine.Bounds,UnityEngine.Vector3[]@)
+  name: GetCornerPositionsLocalSpace(Bounds, ref Vector3[])
+  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetCornerPositionsLocalSpace_UnityEngine_Bounds_UnityEngine_Vector3____
+  commentId: M:XRTK.Extensions.BoundsExtensions.GetCornerPositionsLocalSpace(UnityEngine.Bounds,UnityEngine.Vector3[]@)
+  name.vb: GetCornerPositionsLocalSpace(Bounds, ByRef Vector3())
+  fullName: XRTK.Extensions.BoundsExtensions.GetCornerPositionsLocalSpace(UnityEngine.Bounds, ref UnityEngine.Vector3[])
+  fullName.vb: XRTK.Extensions.BoundsExtensions.GetCornerPositionsLocalSpace(UnityEngine.Bounds, ByRef UnityEngine.Vector3())
+  nameWithType: BoundsExtensions.GetCornerPositionsLocalSpace(Bounds, ref Vector3[])
+  nameWithType.vb: BoundsExtensions.GetCornerPositionsLocalSpace(Bounds, ByRef Vector3())
+- uid: XRTK.Extensions.BoundsExtensions.GetCornerPositionsLocalSpace*
+  name: GetCornerPositionsLocalSpace
+  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetCornerPositionsLocalSpace_
+  commentId: Overload:XRTK.Extensions.BoundsExtensions.GetCornerPositionsLocalSpace
   isSpec: "True"
-  fullName: XRTK.Extensions.BoundsExtensions.GetCornerPositionsFromRendererBounds
-  nameWithType: BoundsExtensions.GetCornerPositionsFromRendererBounds
+  fullName: XRTK.Extensions.BoundsExtensions.GetCornerPositionsLocalSpace
+  nameWithType: BoundsExtensions.GetCornerPositionsLocalSpace
+- uid: XRTK.Extensions.BoundsExtensions.GetCornerPositionsWorldSpace(UnityEngine.Bounds,UnityEngine.Transform,UnityEngine.Vector3[]@)
+  name: GetCornerPositionsWorldSpace(Bounds, Transform, ref Vector3[])
+  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetCornerPositionsWorldSpace_UnityEngine_Bounds_UnityEngine_Transform_UnityEngine_Vector3____
+  commentId: M:XRTK.Extensions.BoundsExtensions.GetCornerPositionsWorldSpace(UnityEngine.Bounds,UnityEngine.Transform,UnityEngine.Vector3[]@)
+  name.vb: GetCornerPositionsWorldSpace(Bounds, Transform, ByRef Vector3())
+  fullName: XRTK.Extensions.BoundsExtensions.GetCornerPositionsWorldSpace(UnityEngine.Bounds, UnityEngine.Transform, ref UnityEngine.Vector3[])
+  fullName.vb: XRTK.Extensions.BoundsExtensions.GetCornerPositionsWorldSpace(UnityEngine.Bounds, UnityEngine.Transform, ByRef UnityEngine.Vector3())
+  nameWithType: BoundsExtensions.GetCornerPositionsWorldSpace(Bounds, Transform, ref Vector3[])
+  nameWithType.vb: BoundsExtensions.GetCornerPositionsWorldSpace(Bounds, Transform, ByRef Vector3())
+- uid: XRTK.Extensions.BoundsExtensions.GetCornerPositionsWorldSpace*
+  name: GetCornerPositionsWorldSpace
+  href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetCornerPositionsWorldSpace_
+  commentId: Overload:XRTK.Extensions.BoundsExtensions.GetCornerPositionsWorldSpace
+  isSpec: "True"
+  fullName: XRTK.Extensions.BoundsExtensions.GetCornerPositionsWorldSpace
+  nameWithType: BoundsExtensions.GetCornerPositionsWorldSpace
 - uid: XRTK.Extensions.BoundsExtensions.GetFacePositions(UnityEngine.Bounds,UnityEngine.Transform,UnityEngine.Vector3[]@)
   name: GetFacePositions(Bounds, Transform, ref Vector3[])
   href: api/XRTK.Extensions.BoundsExtensions.html#XRTK_Extensions_BoundsExtensions_GetFacePositions_UnityEngine_Bounds_UnityEngine_Transform_UnityEngine_Vector3____
@@ -9938,6 +9827,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.QuaternionExtensions.IsValidRotation
   nameWithType: QuaternionExtensions.IsValidRotation
+- uid: XRTK.Extensions.QuaternionExtensions.SmoothTo(UnityEngine.Quaternion,UnityEngine.Quaternion,System.Single,System.Single)
+  name: SmoothTo(Quaternion, Quaternion, Single, Single)
+  href: api/XRTK.Extensions.QuaternionExtensions.html#XRTK_Extensions_QuaternionExtensions_SmoothTo_UnityEngine_Quaternion_UnityEngine_Quaternion_System_Single_System_Single_
+  commentId: M:XRTK.Extensions.QuaternionExtensions.SmoothTo(UnityEngine.Quaternion,UnityEngine.Quaternion,System.Single,System.Single)
+  fullName: XRTK.Extensions.QuaternionExtensions.SmoothTo(UnityEngine.Quaternion, UnityEngine.Quaternion, System.Single, System.Single)
+  nameWithType: QuaternionExtensions.SmoothTo(Quaternion, Quaternion, Single, Single)
+- uid: XRTK.Extensions.QuaternionExtensions.SmoothTo*
+  name: SmoothTo
+  href: api/XRTK.Extensions.QuaternionExtensions.html#XRTK_Extensions_QuaternionExtensions_SmoothTo_
+  commentId: Overload:XRTK.Extensions.QuaternionExtensions.SmoothTo
+  isSpec: "True"
+  fullName: XRTK.Extensions.QuaternionExtensions.SmoothTo
+  nameWithType: QuaternionExtensions.SmoothTo
 - uid: XRTK.Extensions.RayExtensions
   name: RayExtensions
   href: api/XRTK.Extensions.RayExtensions.html
@@ -10183,12 +10085,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.TransformExtensions.GetFullPath
   nameWithType: TransformExtensions.GetFullPath
-- uid: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform,UnityEngine.Vector3)
-  name: GetPointOnBoundsEdge(Transform, Vector3)
-  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetPointOnBoundsEdge_UnityEngine_Transform_UnityEngine_Vector3_
-  commentId: M:XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform,UnityEngine.Vector3)
-  fullName: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform, UnityEngine.Vector3)
-  nameWithType: TransformExtensions.GetPointOnBoundsEdge(Transform, Vector3)
+- uid: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Bounds)
+  name: GetPointOnBoundsEdge(Transform, Vector3, Bounds)
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetPointOnBoundsEdge_UnityEngine_Transform_UnityEngine_Vector3_UnityEngine_Bounds_
+  commentId: M:XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Bounds)
+  fullName: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform, UnityEngine.Vector3, UnityEngine.Bounds)
+  nameWithType: TransformExtensions.GetPointOnBoundsEdge(Transform, Vector3, Bounds)
 - uid: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge*
   name: GetPointOnBoundsEdge
   href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetPointOnBoundsEdge_
@@ -10196,6 +10098,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge
   nameWithType: TransformExtensions.GetPointOnBoundsEdge
+- uid: XRTK.Extensions.TransformExtensions.GetRenderBounds(UnityEngine.Transform,System.Boolean)
+  name: GetRenderBounds(Transform, Boolean)
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetRenderBounds_UnityEngine_Transform_System_Boolean_
+  commentId: M:XRTK.Extensions.TransformExtensions.GetRenderBounds(UnityEngine.Transform,System.Boolean)
+  fullName: XRTK.Extensions.TransformExtensions.GetRenderBounds(UnityEngine.Transform, System.Boolean)
+  nameWithType: TransformExtensions.GetRenderBounds(Transform, Boolean)
+- uid: XRTK.Extensions.TransformExtensions.GetRenderBounds*
+  name: GetRenderBounds
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetRenderBounds_
+  commentId: Overload:XRTK.Extensions.TransformExtensions.GetRenderBounds
+  isSpec: "True"
+  fullName: XRTK.Extensions.TransformExtensions.GetRenderBounds
+  nameWithType: TransformExtensions.GetRenderBounds
 - uid: XRTK.Extensions.TransformExtensions.InverseTransformSize(UnityEngine.Transform,UnityEngine.Vector3)
   name: InverseTransformSize(Transform, Vector3)
   href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_InverseTransformSize_UnityEngine_Transform_UnityEngine_Vector3_
@@ -10315,6 +10230,19 @@ references:
   commentId: T:XRTK.Extensions.VectorExtensions
   fullName: XRTK.Extensions.VectorExtensions
   nameWithType: VectorExtensions
+- uid: XRTK.Extensions.VectorExtensions.AngleAroundAxis(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3)
+  name: AngleAroundAxis(Vector3, Vector3, Vector3)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_AngleAroundAxis_UnityEngine_Vector3_UnityEngine_Vector3_UnityEngine_Vector3_
+  commentId: M:XRTK.Extensions.VectorExtensions.AngleAroundAxis(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3)
+  fullName: XRTK.Extensions.VectorExtensions.AngleAroundAxis(UnityEngine.Vector3, UnityEngine.Vector3, UnityEngine.Vector3)
+  nameWithType: VectorExtensions.AngleAroundAxis(Vector3, Vector3, Vector3)
+- uid: XRTK.Extensions.VectorExtensions.AngleAroundAxis*
+  name: AngleAroundAxis
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_AngleAroundAxis_
+  commentId: Overload:XRTK.Extensions.VectorExtensions.AngleAroundAxis
+  isSpec: "True"
+  fullName: XRTK.Extensions.VectorExtensions.AngleAroundAxis
+  nameWithType: VectorExtensions.AngleAroundAxis
 - uid: XRTK.Extensions.VectorExtensions.Average(System.Collections.Generic.ICollection{UnityEngine.Vector2})
   name: Average(ICollection<Vector2>)
   href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_Average_System_Collections_Generic_ICollection_UnityEngine_Vector2__
@@ -10403,6 +10331,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.VectorExtensions.Div
   nameWithType: VectorExtensions.Div
+- uid: XRTK.Extensions.VectorExtensions.InverseTransformPoint(UnityEngine.Vector3,UnityEngine.Transform)
+  name: InverseTransformPoint(Vector3, Transform)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_InverseTransformPoint_UnityEngine_Vector3_UnityEngine_Transform_
+  commentId: M:XRTK.Extensions.VectorExtensions.InverseTransformPoint(UnityEngine.Vector3,UnityEngine.Transform)
+  fullName: XRTK.Extensions.VectorExtensions.InverseTransformPoint(UnityEngine.Vector3, UnityEngine.Transform)
+  nameWithType: VectorExtensions.InverseTransformPoint(Vector3, Transform)
 - uid: XRTK.Extensions.VectorExtensions.InverseTransformPoint(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Vector3)
   name: InverseTransformPoint(Vector3, Vector3, Quaternion, Vector3)
   href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_InverseTransformPoint_UnityEngine_Vector3_UnityEngine_Vector3_UnityEngine_Quaternion_UnityEngine_Vector3_
@@ -10416,6 +10350,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.VectorExtensions.InverseTransformPoint
   nameWithType: VectorExtensions.InverseTransformPoint
+- uid: XRTK.Extensions.VectorExtensions.IsNormalVertical(UnityEngine.Vector3)
+  name: IsNormalVertical(Vector3)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_IsNormalVertical_UnityEngine_Vector3_
+  commentId: M:XRTK.Extensions.VectorExtensions.IsNormalVertical(UnityEngine.Vector3)
+  fullName: XRTK.Extensions.VectorExtensions.IsNormalVertical(UnityEngine.Vector3)
+  nameWithType: VectorExtensions.IsNormalVertical(Vector3)
+- uid: XRTK.Extensions.VectorExtensions.IsNormalVertical*
+  name: IsNormalVertical
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_IsNormalVertical_
+  commentId: Overload:XRTK.Extensions.VectorExtensions.IsNormalVertical
+  isSpec: "True"
+  fullName: XRTK.Extensions.VectorExtensions.IsNormalVertical
+  nameWithType: VectorExtensions.IsNormalVertical
 - uid: XRTK.Extensions.VectorExtensions.IsValidVector(UnityEngine.Vector3)
   name: IsValidVector(Vector3)
   href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_IsValidVector_UnityEngine_Vector3_
@@ -10472,6 +10419,25 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.VectorExtensions.Median
   nameWithType: VectorExtensions.Median
+- uid: XRTK.Extensions.VectorExtensions.MidPoint(UnityEngine.Vector2,UnityEngine.Vector2)
+  name: MidPoint(Vector2, Vector2)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_MidPoint_UnityEngine_Vector2_UnityEngine_Vector2_
+  commentId: M:XRTK.Extensions.VectorExtensions.MidPoint(UnityEngine.Vector2,UnityEngine.Vector2)
+  fullName: XRTK.Extensions.VectorExtensions.MidPoint(UnityEngine.Vector2, UnityEngine.Vector2)
+  nameWithType: VectorExtensions.MidPoint(Vector2, Vector2)
+- uid: XRTK.Extensions.VectorExtensions.MidPoint(UnityEngine.Vector3,UnityEngine.Vector3)
+  name: MidPoint(Vector3, Vector3)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_MidPoint_UnityEngine_Vector3_UnityEngine_Vector3_
+  commentId: M:XRTK.Extensions.VectorExtensions.MidPoint(UnityEngine.Vector3,UnityEngine.Vector3)
+  fullName: XRTK.Extensions.VectorExtensions.MidPoint(UnityEngine.Vector3, UnityEngine.Vector3)
+  nameWithType: VectorExtensions.MidPoint(Vector3, Vector3)
+- uid: XRTK.Extensions.VectorExtensions.MidPoint*
+  name: MidPoint
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_MidPoint_
+  commentId: Overload:XRTK.Extensions.VectorExtensions.MidPoint
+  isSpec: "True"
+  fullName: XRTK.Extensions.VectorExtensions.MidPoint
+  nameWithType: VectorExtensions.MidPoint
 - uid: XRTK.Extensions.VectorExtensions.Mul(UnityEngine.Vector2,UnityEngine.Vector2)
   name: Mul(Vector2, Vector2)
   href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_Mul_UnityEngine_Vector2_UnityEngine_Vector2_
@@ -10504,25 +10470,50 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.VectorExtensions.RadialMapping
   nameWithType: VectorExtensions.RadialMapping
-- uid: XRTK.Extensions.VectorExtensions.RotateAround(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Quaternion)
-  name: RotateAround(Vector3, Vector3, Quaternion)
-  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RotateAround_UnityEngine_Vector3_UnityEngine_Vector3_UnityEngine_Quaternion_
-  commentId: M:XRTK.Extensions.VectorExtensions.RotateAround(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Quaternion)
-  fullName: XRTK.Extensions.VectorExtensions.RotateAround(UnityEngine.Vector3, UnityEngine.Vector3, UnityEngine.Quaternion)
-  nameWithType: VectorExtensions.RotateAround(Vector3, Vector3, Quaternion)
-- uid: XRTK.Extensions.VectorExtensions.RotateAround(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3)
-  name: RotateAround(Vector3, Vector3, Vector3)
-  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RotateAround_UnityEngine_Vector3_UnityEngine_Vector3_UnityEngine_Vector3_
-  commentId: M:XRTK.Extensions.VectorExtensions.RotateAround(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3)
-  fullName: XRTK.Extensions.VectorExtensions.RotateAround(UnityEngine.Vector3, UnityEngine.Vector3, UnityEngine.Vector3)
-  nameWithType: VectorExtensions.RotateAround(Vector3, Vector3, Vector3)
-- uid: XRTK.Extensions.VectorExtensions.RotateAround*
-  name: RotateAround
-  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RotateAround_
-  commentId: Overload:XRTK.Extensions.VectorExtensions.RotateAround
+- uid: XRTK.Extensions.VectorExtensions.RotateAroundPoint(UnityEngine.Vector2,UnityEngine.Vector2,System.Single)
+  name: RotateAroundPoint(Vector2, Vector2, Single)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RotateAroundPoint_UnityEngine_Vector2_UnityEngine_Vector2_System_Single_
+  commentId: M:XRTK.Extensions.VectorExtensions.RotateAroundPoint(UnityEngine.Vector2,UnityEngine.Vector2,System.Single)
+  fullName: XRTK.Extensions.VectorExtensions.RotateAroundPoint(UnityEngine.Vector2, UnityEngine.Vector2, System.Single)
+  nameWithType: VectorExtensions.RotateAroundPoint(Vector2, Vector2, Single)
+- uid: XRTK.Extensions.VectorExtensions.RotateAroundPoint(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,UnityEngine.Vector3)
+  name: RotateAroundPoint(Vector3, Vector3, Single, Vector3)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RotateAroundPoint_UnityEngine_Vector3_UnityEngine_Vector3_System_Single_UnityEngine_Vector3_
+  commentId: M:XRTK.Extensions.VectorExtensions.RotateAroundPoint(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,UnityEngine.Vector3)
+  fullName: XRTK.Extensions.VectorExtensions.RotateAroundPoint(UnityEngine.Vector3, UnityEngine.Vector3, System.Single, UnityEngine.Vector3)
+  nameWithType: VectorExtensions.RotateAroundPoint(Vector3, Vector3, Single, Vector3)
+- uid: XRTK.Extensions.VectorExtensions.RotateAroundPoint(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Quaternion)
+  name: RotateAroundPoint(Vector3, Vector3, Quaternion)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RotateAroundPoint_UnityEngine_Vector3_UnityEngine_Vector3_UnityEngine_Quaternion_
+  commentId: M:XRTK.Extensions.VectorExtensions.RotateAroundPoint(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Quaternion)
+  fullName: XRTK.Extensions.VectorExtensions.RotateAroundPoint(UnityEngine.Vector3, UnityEngine.Vector3, UnityEngine.Quaternion)
+  nameWithType: VectorExtensions.RotateAroundPoint(Vector3, Vector3, Quaternion)
+- uid: XRTK.Extensions.VectorExtensions.RotateAroundPoint(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3)
+  name: RotateAroundPoint(Vector3, Vector3, Vector3)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RotateAroundPoint_UnityEngine_Vector3_UnityEngine_Vector3_UnityEngine_Vector3_
+  commentId: M:XRTK.Extensions.VectorExtensions.RotateAroundPoint(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Vector3)
+  fullName: XRTK.Extensions.VectorExtensions.RotateAroundPoint(UnityEngine.Vector3, UnityEngine.Vector3, UnityEngine.Vector3)
+  nameWithType: VectorExtensions.RotateAroundPoint(Vector3, Vector3, Vector3)
+- uid: XRTK.Extensions.VectorExtensions.RotateAroundPoint*
+  name: RotateAroundPoint
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RotateAroundPoint_
+  commentId: Overload:XRTK.Extensions.VectorExtensions.RotateAroundPoint
   isSpec: "True"
-  fullName: XRTK.Extensions.VectorExtensions.RotateAround
-  nameWithType: VectorExtensions.RotateAround
+  fullName: XRTK.Extensions.VectorExtensions.RotateAroundPoint
+  nameWithType: VectorExtensions.RotateAroundPoint
+- uid: XRTK.Extensions.VectorExtensions.RotatePoint(UnityEngine.Vector2,System.Single)
+  name: RotatePoint(Vector2, Single)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RotatePoint_UnityEngine_Vector2_System_Single_
+  commentId: M:XRTK.Extensions.VectorExtensions.RotatePoint(UnityEngine.Vector2,System.Single)
+  fullName: XRTK.Extensions.VectorExtensions.RotatePoint(UnityEngine.Vector2, System.Single)
+  nameWithType: VectorExtensions.RotatePoint(Vector2, Single)
+- uid: XRTK.Extensions.VectorExtensions.RotatePoint*
+  name: RotatePoint
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_RotatePoint_
+  commentId: Overload:XRTK.Extensions.VectorExtensions.RotatePoint
+  isSpec: "True"
+  fullName: XRTK.Extensions.VectorExtensions.RotatePoint
+  nameWithType: VectorExtensions.RotatePoint
 - uid: XRTK.Extensions.VectorExtensions.ScatterMapping(UnityEngine.Vector3,System.Single)
   name: ScatterMapping(Vector3, Single)
   href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_ScatterMapping_UnityEngine_Vector3_System_Single_
@@ -10536,6 +10527,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.VectorExtensions.ScatterMapping
   nameWithType: VectorExtensions.ScatterMapping
+- uid: XRTK.Extensions.VectorExtensions.SmoothTo(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single)
+  name: SmoothTo(Vector3, Vector3, Single, Single)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_SmoothTo_UnityEngine_Vector3_UnityEngine_Vector3_System_Single_System_Single_
+  commentId: M:XRTK.Extensions.VectorExtensions.SmoothTo(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single)
+  fullName: XRTK.Extensions.VectorExtensions.SmoothTo(UnityEngine.Vector3, UnityEngine.Vector3, System.Single, System.Single)
+  nameWithType: VectorExtensions.SmoothTo(Vector3, Vector3, Single, Single)
+- uid: XRTK.Extensions.VectorExtensions.SmoothTo*
+  name: SmoothTo
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_SmoothTo_
+  commentId: Overload:XRTK.Extensions.VectorExtensions.SmoothTo
+  isSpec: "True"
+  fullName: XRTK.Extensions.VectorExtensions.SmoothTo
+  nameWithType: VectorExtensions.SmoothTo
 - uid: XRTK.Extensions.VectorExtensions.SphericalMapping(UnityEngine.Vector3,System.Single)
   name: SphericalMapping(Vector3, Single)
   href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_SphericalMapping_UnityEngine_Vector3_System_Single_
@@ -10549,6 +10553,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.VectorExtensions.SphericalMapping
   nameWithType: VectorExtensions.SphericalMapping
+- uid: XRTK.Extensions.VectorExtensions.TransformPoint(UnityEngine.Vector3,UnityEngine.Transform)
+  name: TransformPoint(Vector3, Transform)
+  href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_TransformPoint_UnityEngine_Vector3_UnityEngine_Transform_
+  commentId: M:XRTK.Extensions.VectorExtensions.TransformPoint(UnityEngine.Vector3,UnityEngine.Transform)
+  fullName: XRTK.Extensions.VectorExtensions.TransformPoint(UnityEngine.Vector3, UnityEngine.Transform)
+  nameWithType: VectorExtensions.TransformPoint(Vector3, Transform)
 - uid: XRTK.Extensions.VectorExtensions.TransformPoint(UnityEngine.Vector3,UnityEngine.Vector3,UnityEngine.Quaternion,UnityEngine.Vector3)
   name: TransformPoint(Vector3, Vector3, Quaternion, Vector3)
   href: api/XRTK.Extensions.VectorExtensions.html#XRTK_Extensions_VectorExtensions_TransformPoint_UnityEngine_Vector3_UnityEngine_Vector3_UnityEngine_Quaternion_UnityEngine_Vector3_
@@ -10562,6 +10572,34 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.VectorExtensions.TransformPoint
   nameWithType: VectorExtensions.TransformPoint
+- uid: XRTK.Extensions.XRTK.Extensions
+  name: XRTK.Extensions.XRTK.Extensions
+  href: api/XRTK.Extensions.XRTK.Extensions.html
+  commentId: N:XRTK.Extensions.XRTK.Extensions
+  fullName: XRTK.Extensions.XRTK.Extensions
+  nameWithType: XRTK.Extensions.XRTK.Extensions
+- uid: XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions
+  name: BoxColliderExtensions
+  href: api/XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions.html
+  commentId: T:XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions
+  fullName: XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions
+  nameWithType: BoxColliderExtensions
+- uid: XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions.GetCornerPositionsWorldSpace(UnityEngine.BoxCollider,UnityEngine.Transform,UnityEngine.Vector3[]@)
+  name: GetCornerPositionsWorldSpace(BoxCollider, Transform, ref Vector3[])
+  href: api/XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions.html#XRTK_Extensions_XRTK_Extensions_BoxColliderExtensions_GetCornerPositionsWorldSpace_UnityEngine_BoxCollider_UnityEngine_Transform_UnityEngine_Vector3____
+  commentId: M:XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions.GetCornerPositionsWorldSpace(UnityEngine.BoxCollider,UnityEngine.Transform,UnityEngine.Vector3[]@)
+  name.vb: GetCornerPositionsWorldSpace(BoxCollider, Transform, ByRef Vector3())
+  fullName: XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions.GetCornerPositionsWorldSpace(UnityEngine.BoxCollider, UnityEngine.Transform, ref UnityEngine.Vector3[])
+  fullName.vb: XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions.GetCornerPositionsWorldSpace(UnityEngine.BoxCollider, UnityEngine.Transform, ByRef UnityEngine.Vector3())
+  nameWithType: BoxColliderExtensions.GetCornerPositionsWorldSpace(BoxCollider, Transform, ref Vector3[])
+  nameWithType.vb: BoxColliderExtensions.GetCornerPositionsWorldSpace(BoxCollider, Transform, ByRef Vector3())
+- uid: XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions.GetCornerPositionsWorldSpace*
+  name: GetCornerPositionsWorldSpace
+  href: api/XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions.html#XRTK_Extensions_XRTK_Extensions_BoxColliderExtensions_GetCornerPositionsWorldSpace_
+  commentId: Overload:XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions.GetCornerPositionsWorldSpace
+  isSpec: "True"
+  fullName: XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions.GetCornerPositionsWorldSpace
+  nameWithType: BoxColliderExtensions.GetCornerPositionsWorldSpace
 - uid: XRTK.Inspectors
   name: XRTK.Inspectors
   href: api/XRTK.Inspectors.html
@@ -10745,19 +10783,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.MixedRealityPreferences.LockProfiles
   nameWithType: MixedRealityPreferences.LockProfiles
-- uid: XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
-  name: PackageSettingsPath
-  href: api/XRTK.Inspectors.MixedRealityPreferences.html#XRTK_Inspectors_MixedRealityPreferences_PackageSettingsPath
-  commentId: P:XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
-  fullName: XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
-  nameWithType: MixedRealityPreferences.PackageSettingsPath
-- uid: XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath*
-  name: PackageSettingsPath
-  href: api/XRTK.Inspectors.MixedRealityPreferences.html#XRTK_Inspectors_MixedRealityPreferences_PackageSettingsPath_
-  commentId: Overload:XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
-  isSpec: "True"
-  fullName: XRTK.Inspectors.MixedRealityPreferences.PackageSettingsPath
-  nameWithType: MixedRealityPreferences.PackageSettingsPath
 - uid: XRTK.Inspectors.MixedRealityPreferences.ShowCanvasUtilityPrompt
   name: ShowCanvasUtilityPrompt
   href: api/XRTK.Inspectors.MixedRealityPreferences.html#XRTK_Inspectors_MixedRealityPreferences_ShowCanvasUtilityPrompt
@@ -14158,108 +14183,6 @@ references:
   commentId: F:XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.WarningColor
   fullName: XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.WarningColor
   nameWithType: MixedRealityInspectorUtility.WarningColor
-- uid: XRTK.Inspectors.Utilities.Packages
-  name: XRTK.Inspectors.Utilities.Packages
-  href: api/XRTK.Inspectors.Utilities.Packages.html
-  commentId: N:XRTK.Inspectors.Utilities.Packages
-  fullName: XRTK.Inspectors.Utilities.Packages
-  nameWithType: XRTK.Inspectors.Utilities.Packages
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector
-  name: MixedRealityPackageSettingsInspector
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector.html
-  commentId: T:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector
-  nameWithType: MixedRealityPackageSettingsInspector
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector.OnInspectorGUI
-  name: OnInspectorGUI()
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageSettingsInspector_OnInspectorGUI
-  commentId: M:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector.OnInspectorGUI
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector.OnInspectorGUI()
-  nameWithType: MixedRealityPackageSettingsInspector.OnInspectorGUI()
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector.OnInspectorGUI*
-  name: OnInspectorGUI
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageSettingsInspector_OnInspectorGUI_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector.OnInspectorGUI
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageSettingsInspector.OnInspectorGUI
-  nameWithType: MixedRealityPackageSettingsInspector.OnInspectorGUI
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackagesWindow
-  name: MixedRealityPackagesWindow
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackagesWindow.html
-  commentId: T:XRTK.Inspectors.Utilities.Packages.MixedRealityPackagesWindow
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackagesWindow
-  nameWithType: MixedRealityPackagesWindow
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackagesWindow.OpenPackagesWindow
-  name: OpenPackagesWindow()
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackagesWindow.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackagesWindow_OpenPackagesWindow
-  commentId: M:XRTK.Inspectors.Utilities.Packages.MixedRealityPackagesWindow.OpenPackagesWindow
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackagesWindow.OpenPackagesWindow()
-  nameWithType: MixedRealityPackagesWindow.OpenPackagesWindow()
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackagesWindow.OpenPackagesWindow*
-  name: OpenPackagesWindow
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackagesWindow.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackagesWindow_OpenPackagesWindow_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackagesWindow.OpenPackagesWindow
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackagesWindow.OpenPackagesWindow
-  nameWithType: MixedRealityPackagesWindow.OpenPackagesWindow
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities
-  name: MixedRealityPackageUtilities
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html
-  commentId: T:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities
-  nameWithType: MixedRealityPackageUtilities
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.CheckPackageManifest
-  name: CheckPackageManifest()
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_CheckPackageManifest
-  commentId: M:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.CheckPackageManifest
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.CheckPackageManifest()
-  nameWithType: MixedRealityPackageUtilities.CheckPackageManifest()
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.CheckPackageManifest*
-  name: CheckPackageManifest
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_CheckPackageManifest_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.CheckPackageManifest
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.CheckPackageManifest
-  nameWithType: MixedRealityPackageUtilities.CheckPackageManifest
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.DebugEnabled
-  name: DebugEnabled
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_DebugEnabled
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.DebugEnabled
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.DebugEnabled
-  nameWithType: MixedRealityPackageUtilities.DebugEnabled
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.DebugEnabled*
-  name: DebugEnabled
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_DebugEnabled_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.DebugEnabled
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.DebugEnabled
-  nameWithType: MixedRealityPackageUtilities.DebugEnabled
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.IsRunningCheck
-  name: IsRunningCheck
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_IsRunningCheck
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.IsRunningCheck
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.IsRunningCheck
-  nameWithType: MixedRealityPackageUtilities.IsRunningCheck
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.IsRunningCheck*
-  name: IsRunningCheck
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_IsRunningCheck_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.IsRunningCheck
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.IsRunningCheck
-  nameWithType: MixedRealityPackageUtilities.IsRunningCheck
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
-  name: PackageSettings
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_PackageSettings
-  commentId: P:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
-  nameWithType: MixedRealityPackageUtilities.PackageSettings
-- uid: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings*
-  name: PackageSettings
-  href: api/XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.html#XRTK_Inspectors_Utilities_Packages_MixedRealityPackageUtilities_PackageSettings_
-  commentId: Overload:XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Utilities.Packages.MixedRealityPackageUtilities.PackageSettings
-  nameWithType: MixedRealityPackageUtilities.PackageSettings
 - uid: XRTK.Inspectors.Utilities.SymbolicLinks
   name: XRTK.Inspectors.Utilities.SymbolicLinks
   href: api/XRTK.Inspectors.Utilities.SymbolicLinks.html
@@ -22155,73 +22078,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.Profiles.OculusTouchControllerMappingProfile.TexturePath
   nameWithType: OculusTouchControllerMappingProfile.TexturePath
-- uid: XRTK.PackageManager
-  name: XRTK.PackageManager
-  href: api/XRTK.PackageManager.html
-  commentId: N:XRTK.PackageManager
-  fullName: XRTK.PackageManager
-  nameWithType: XRTK.PackageManager
-- uid: XRTK.PackageManager.HostData
-  name: HostData
-  href: api/XRTK.PackageManager.HostData.html
-  commentId: T:XRTK.PackageManager.HostData
-  fullName: XRTK.PackageManager.HostData
-  nameWithType: HostData
-- uid: XRTK.PackageManager.HostData.Blob
-  name: Blob
-  href: api/XRTK.PackageManager.HostData.html#XRTK_PackageManager_HostData_Blob
-  commentId: F:XRTK.PackageManager.HostData.Blob
-  fullName: XRTK.PackageManager.HostData.Blob
-  nameWithType: HostData.Blob
-- uid: XRTK.PackageManager.HostData.Domain
-  name: Domain
-  href: api/XRTK.PackageManager.HostData.html#XRTK_PackageManager_HostData_Domain
-  commentId: F:XRTK.PackageManager.HostData.Domain
-  fullName: XRTK.PackageManager.HostData.Domain
-  nameWithType: HostData.Domain
-- uid: XRTK.PackageManager.HostData.LogoDark
-  name: LogoDark
-  href: api/XRTK.PackageManager.HostData.html#XRTK_PackageManager_HostData_LogoDark
-  commentId: F:XRTK.PackageManager.HostData.LogoDark
-  fullName: XRTK.PackageManager.HostData.LogoDark
-  nameWithType: HostData.LogoDark
-- uid: XRTK.PackageManager.HostData.LogoLight
-  name: LogoLight
-  href: api/XRTK.PackageManager.HostData.html#XRTK_PackageManager_HostData_LogoLight
-  commentId: F:XRTK.PackageManager.HostData.LogoLight
-  fullName: XRTK.PackageManager.HostData.LogoLight
-  nameWithType: HostData.LogoLight
-- uid: XRTK.PackageManager.HostData.Name
-  name: Name
-  href: api/XRTK.PackageManager.HostData.html#XRTK_PackageManager_HostData_Name
-  commentId: F:XRTK.PackageManager.HostData.Name
-  fullName: XRTK.PackageManager.HostData.Name
-  nameWithType: HostData.Name
-- uid: XRTK.PackageManager.PackageManagerSettings
-  name: PackageManagerSettings
-  href: api/XRTK.PackageManager.PackageManagerSettings.html
-  commentId: T:XRTK.PackageManager.PackageManagerSettings
-  fullName: XRTK.PackageManager.PackageManagerSettings
-  nameWithType: PackageManagerSettings
-- uid: XRTK.PackageManager.PackageManagerSettings.GetHostData(System.String)
-  name: GetHostData(String)
-  href: api/XRTK.PackageManager.PackageManagerSettings.html#XRTK_PackageManager_PackageManagerSettings_GetHostData_System_String_
-  commentId: M:XRTK.PackageManager.PackageManagerSettings.GetHostData(System.String)
-  fullName: XRTK.PackageManager.PackageManagerSettings.GetHostData(System.String)
-  nameWithType: PackageManagerSettings.GetHostData(String)
-- uid: XRTK.PackageManager.PackageManagerSettings.GetHostData*
-  name: GetHostData
-  href: api/XRTK.PackageManager.PackageManagerSettings.html#XRTK_PackageManager_PackageManagerSettings_GetHostData_
-  commentId: Overload:XRTK.PackageManager.PackageManagerSettings.GetHostData
-  isSpec: "True"
-  fullName: XRTK.PackageManager.PackageManagerSettings.GetHostData
-  nameWithType: PackageManagerSettings.GetHostData
-- uid: XRTK.PackageManager.UpmGitAddWindow
-  name: UpmGitAddWindow
-  href: api/XRTK.PackageManager.UpmGitAddWindow.html
-  commentId: T:XRTK.PackageManager.UpmGitAddWindow
-  fullName: XRTK.PackageManager.UpmGitAddWindow
-  nameWithType: UpmGitAddWindow
 - uid: XRTK.Providers.Controllers
   name: XRTK.Providers.Controllers
   href: api/XRTK.Providers.Controllers.html
@@ -27842,25 +27698,6 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Utilities.Solvers.Solver.OnValidate
   nameWithType: Solver.OnValidate
-- uid: XRTK.SDK.Utilities.Solvers.Solver.SmoothTo(UnityEngine.Quaternion,UnityEngine.Quaternion,System.Single,System.Single)
-  name: SmoothTo(Quaternion, Quaternion, Single, Single)
-  href: api/XRTK.SDK.Utilities.Solvers.Solver.html#XRTK_SDK_Utilities_Solvers_Solver_SmoothTo_UnityEngine_Quaternion_UnityEngine_Quaternion_System_Single_System_Single_
-  commentId: M:XRTK.SDK.Utilities.Solvers.Solver.SmoothTo(UnityEngine.Quaternion,UnityEngine.Quaternion,System.Single,System.Single)
-  fullName: XRTK.SDK.Utilities.Solvers.Solver.SmoothTo(UnityEngine.Quaternion, UnityEngine.Quaternion, System.Single, System.Single)
-  nameWithType: Solver.SmoothTo(Quaternion, Quaternion, Single, Single)
-- uid: XRTK.SDK.Utilities.Solvers.Solver.SmoothTo(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single)
-  name: SmoothTo(Vector3, Vector3, Single, Single)
-  href: api/XRTK.SDK.Utilities.Solvers.Solver.html#XRTK_SDK_Utilities_Solvers_Solver_SmoothTo_UnityEngine_Vector3_UnityEngine_Vector3_System_Single_System_Single_
-  commentId: M:XRTK.SDK.Utilities.Solvers.Solver.SmoothTo(UnityEngine.Vector3,UnityEngine.Vector3,System.Single,System.Single)
-  fullName: XRTK.SDK.Utilities.Solvers.Solver.SmoothTo(UnityEngine.Vector3, UnityEngine.Vector3, System.Single, System.Single)
-  nameWithType: Solver.SmoothTo(Vector3, Vector3, Single, Single)
-- uid: XRTK.SDK.Utilities.Solvers.Solver.SmoothTo*
-  name: SmoothTo
-  href: api/XRTK.SDK.Utilities.Solvers.Solver.html#XRTK_SDK_Utilities_Solvers_Solver_SmoothTo_
-  commentId: Overload:XRTK.SDK.Utilities.Solvers.Solver.SmoothTo
-  isSpec: "True"
-  fullName: XRTK.SDK.Utilities.Solvers.Solver.SmoothTo
-  nameWithType: Solver.SmoothTo
 - uid: XRTK.SDK.Utilities.Solvers.Solver.SnapGoalTo(UnityEngine.Vector3,UnityEngine.Quaternion)
   name: SnapGoalTo(Vector3, Quaternion)
   href: api/XRTK.SDK.Utilities.Solvers.Solver.html#XRTK_SDK_Utilities_Solvers_Solver_SnapGoalTo_UnityEngine_Vector3_UnityEngine_Quaternion_

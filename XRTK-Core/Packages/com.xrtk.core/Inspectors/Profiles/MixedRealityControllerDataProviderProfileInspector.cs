@@ -4,7 +4,7 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Inspectors.Utilities;
-using XRTK.Providers.Controllers;
+using XRTK.Definitions.Controllers;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles

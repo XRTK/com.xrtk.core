@@ -95,7 +95,11 @@ namespace XRTK.Inspectors.Utilities
                 Debug.LogError("Failed to replace source code with assembly!");
             }
 
-            AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+            if (!EditorApplication.isUpdating)
+            {
+                AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+            }
+
             EditorUtility.ClearProgressBar();
         }
 
@@ -270,7 +274,11 @@ namespace XRTK.Inspectors.Utilities
             File.Delete(builtAssemblyPath);
             File.Delete($"{builtAssemblyPath}{META}");
 
-            AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+            if (!EditorApplication.isUpdating)
+            {
+                AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+            }
+
             EditorUtility.ClearProgressBar();
         }
 
@@ -350,13 +358,9 @@ namespace XRTK.Inspectors.Utilities
                     buildTarget = BuildTarget.iOS;
                     return true;
                 case "LinuxStandalone32":
-                    buildTarget = BuildTarget.StandaloneLinux;
-                    return true;
                 case "LinuxStandalone64":
-                    buildTarget = BuildTarget.StandaloneLinux64;
-                    return true;
                 case "LinuxStandaloneUniversal":
-                    buildTarget = BuildTarget.StandaloneLinuxUniversal;
+                    buildTarget = BuildTarget.StandaloneLinux64;
                     return true;
                 case "macOSStandalone":
                     buildTarget = BuildTarget.StandaloneOSX;

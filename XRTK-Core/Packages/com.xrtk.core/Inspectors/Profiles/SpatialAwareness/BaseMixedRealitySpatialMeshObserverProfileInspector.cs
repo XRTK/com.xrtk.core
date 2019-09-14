@@ -13,7 +13,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         private SerializedProperty meshLevelOfDetail;
         private SerializedProperty meshTrianglesPerCubicMeter;
         private SerializedProperty meshRecalculateNormals;
-        private SerializedProperty meshDisplayOption;
         private SerializedProperty meshVisibleMaterial;
         private SerializedProperty meshOcclusionMaterial;
         private SerializedProperty additionalComponents;
@@ -30,7 +29,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             meshLevelOfDetail = serializedObject.FindProperty("meshLevelOfDetail");
             meshTrianglesPerCubicMeter = serializedObject.FindProperty("meshTrianglesPerCubicMeter");
             meshRecalculateNormals = serializedObject.FindProperty("meshRecalculateNormals");
-            meshDisplayOption = serializedObject.FindProperty("meshDisplayOption");
             meshVisibleMaterial = serializedObject.FindProperty("meshVisibleMaterial");
             meshOcclusionMaterial = serializedObject.FindProperty("meshOcclusionMaterial");
             additionalComponents = serializedObject.FindProperty("additionalComponents");
@@ -53,7 +51,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
                 EditorGUILayout.PropertyField(meshLevelOfDetail);
                 EditorGUILayout.PropertyField(meshTrianglesPerCubicMeter);
                 EditorGUILayout.PropertyField(meshRecalculateNormals);
-                EditorGUILayout.PropertyField(meshDisplayOption);
                 EditorGUILayout.PropertyField(meshVisibleMaterial);
                 EditorGUILayout.PropertyField(meshOcclusionMaterial);
                 EditorGUILayout.PropertyField(additionalComponents, true);

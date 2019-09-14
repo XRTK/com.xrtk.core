@@ -5,12 +5,14 @@ using System;
 using System.Threading.Tasks;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
+using XRTK.Utilities.Gltf.Schema;
 using XRTK.Utilities.Gltf.Serialization;
 
 namespace XRTK.Providers.Controllers
@@ -147,7 +149,7 @@ namespace XRTK.Providers.Controllers
                     {
                         SetupDefaultInteractions(ControllerHandedness);
 
-                        // We still don't have controller mappings, so this may be a custom controller. 
+                        // We still don't have controller mappings, so this may be a custom controller.
                         if (Interactions == null || Interactions.Length < 1)
                         {
                             Debug.LogWarning($"No Controller interaction mappings found for {controllerMappings[i].Description}!\nThe default interactions were assigned.");
@@ -168,7 +170,7 @@ namespace XRTK.Providers.Controllers
         }
 
         /// <summary>
-        /// Assign the default interactions based on controller handedness if necessary. 
+        /// Assign the default interactions based on controller handedness if necessary.
         /// </summary>
         /// <param name="controllerHandedness"></param>
         public abstract void SetupDefaultInteractions(Handedness controllerHandedness);
@@ -209,8 +211,8 @@ namespace XRTK.Providers.Controllers
         /// (Given a user can, have no system default and override specific controller types with a system default, OR, enable a system system default but override that default for specific controllers)
         /// Flow is as follows:
         /// 1. Check if either there is a global setting for an system override and if there is a specific customization for that controller type
-        /// 2. If either the there is a system data and either the 
-        /// 
+        /// 2. If either the there is a system data and either the
+        ///
         /// </remarks>
         internal async Task TryRenderControllerModelAsync(Type controllerType, byte[] glbData = null, bool useAlternatePoseAction = false)
         {
@@ -231,7 +233,7 @@ namespace XRTK.Providers.Controllers
             if (!visualizationProfile.RenderMotionControllers) { return; }
 
             GameObject controllerModel = null;
-            Utilities.Gltf.Schema.GltfObject gltfObject = null;
+            GltfObject gltfObject = null;
 
             // If a specific controller template exists, check if it wants to override the global model, or use the system default specifically (in case global default is not used)
             bool useSystemDefaultModels = visualizationProfile.GetControllerModelOverride(controllerType, ControllerHandedness, out controllerModel);

@@ -33,31 +33,186 @@ namespace XRTK.Extensions
             return new Vector3(value.x / scale.x, value.y / scale.y, value.z / scale.z);
         }
 
-        public static Vector3 RotateAround(this Vector3 point, Vector3 pivot, Quaternion rotation)
+        /// <summary>
+        /// Rotate a two dimensional point by the specified angle.
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="angleRadians"></param>
+        /// <returns>
+        /// The coordinates of the rotated point.
+        /// </returns>
+        public static Vector2 RotatePoint(this Vector2 point, float angleRadians)
+        {
+            return point.RotateAroundPoint(Vector2.zero, angleRadians);
+        }
+
+        /// <summary>
+        /// Rotate a two dimensional point about another point by the specified angle.
+        /// </summary>
+        /// <param name="point">The point to be rotated.</param>
+        /// <param name="pivot">The point about which the rotation is to occur.</param>
+        /// <param name="angleRadians">The angle for the rotation, in radians</param>
+        /// <returns>
+        /// The coordinates of the rotated point.
+        /// </returns>
+        public static Vector2 RotateAroundPoint(this Vector2 point, Vector2 pivot, float angleRadians)
+        {
+            if (angleRadians.Equals(0f))
+            {
+                return point;
+            }
+
+            var rotated = point;
+
+            // Translate to origin of rotation
+            rotated.x -= pivot.x;
+            rotated.y -= pivot.y;
+
+            // Rotate the point
+            var sin = Mathf.Sin(angleRadians);
+            var cos = Mathf.Cos(angleRadians);
+            var x = rotated.x * cos - rotated.y * sin;
+            var y = rotated.x * sin + rotated.y * cos;
+
+            // Translate back and return
+            rotated.x = x + pivot.x;
+            rotated.y = y + pivot.y;
+
+            return rotated;
+        }
+
+        /// <summary>
+        /// Rotate a three dimensional point about another point by the specified rotation.
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="pivot"></param>
+        /// <param name="angle"></param>
+        /// <param name="axis"></param>
+        /// <returns>
+        /// The coordinates of the rotated point.
+        /// </returns>
+        public static Vector3 RotateAroundPoint(this Vector3 point, Vector3 pivot, float angle, Vector3 axis)
+        {
+            return point.RotateAroundPoint(pivot, Quaternion.AngleAxis(angle, axis));
+        }
+
+        /// <summary>
+        /// Rotate a three dimensional point about another point by the specified rotation.
+        /// </summary>
+        /// <param name="point">The point to be rotated.</param>
+        /// <param name="pivot">The point about which the rotation is to occur.</param>
+        /// <param name="rotation">The specified rotation.</param>
+        /// <returns>
+        /// The coordinates of the rotated point.
+        /// </returns>
+        public static Vector3 RotateAroundPoint(this Vector3 point, Vector3 pivot, Quaternion rotation)
         {
             return rotation * (point - pivot) + pivot;
         }
 
-        public static Vector3 RotateAround(this Vector3 point, Vector3 pivot, Vector3 eulerAngles)
+        /// <summary>
+        /// Rotate a three dimensional point about another point by the specified rotation.
+        /// </summary>
+        /// <param name="point">The point to be rotated.</param>
+        /// <param name="pivot">The point about which the rotation is to occur.</param>
+        /// <param name="eulerAngles">The specified rotation.</param>
+        /// <returns>
+        /// The coordinates of the rotated point.
+        /// </returns>
+        public static Vector3 RotateAroundPoint(this Vector3 point, Vector3 pivot, Vector3 eulerAngles)
         {
-            return RotateAround(point, pivot, Quaternion.Euler(eulerAngles));
+            return RotateAroundPoint(point, pivot, Quaternion.Euler(eulerAngles));
         }
 
-        public static Vector3 TransformPoint(this Vector3 point, Vector3 translation, Quaternion rotation, Vector3 lossyScale)
+        /// <summary>
+        /// Gets the angle of rotation between two directions around the specified axis.
+        /// </summary>
+        /// <param name="directionA">The first direction.</param>
+        /// <param name="directionB">The second direction.</param>
+        /// <param name="axis">The axis of rotation.</param>
+        /// <returns>
+        /// The rotation angle.
+        /// </returns>
+        public static float AngleAroundAxis(this Vector3 directionA, Vector3 directionB, Vector3 axis)
         {
-            return rotation * Vector3.Scale(lossyScale, point) + translation;
+            directionA -= Vector3.Project(directionA, axis);
+            directionB -= Vector3.Project(directionB, axis);
+            return Vector3.Angle(directionA, directionB) * (Vector3.Dot(axis, Vector3.Cross(directionA, directionB)) < 0 ? -1 : 1);
         }
 
-        public static Vector3 InverseTransformPoint(this Vector3 point, Vector3 translation, Quaternion rotation, Vector3 lossyScale)
+        /// <summary>
+        /// Transforms a three dimensional point by the specified transform.
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="transform"></param>
+        /// <returns>
+        /// The coordinates of the updated point.
+        /// </returns>
+        /// <remarks>
+        /// This IS NOT the same as <see cref="Transform.TransformPoint(Vector3)"/> which translates a point from local space to world space.
+        /// </remarks>
+        public static Vector3 TransformPoint(this Vector3 point, Transform transform)
         {
-            var scaleInv = new Vector3(1 / lossyScale.x, 1 / lossyScale.y, 1 / lossyScale.z);
-            return Vector3.Scale(scaleInv, (Quaternion.Inverse(rotation) * (point - translation)));
+            return point.TransformPoint(transform.position, transform.rotation, transform.localScale);
+        }
+
+        /// <summary>
+        /// Transforms a three dimensional point by the specified position, rotation, and scale.
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="position"></param>
+        /// <param name="rotation"></param>
+        /// <param name="localScale"></param>
+        /// <returns>
+        /// The coordinates of the updated point.
+        /// </returns>
+        /// <remarks>
+        /// This IS NOT the same as <see cref="Transform.TransformPoint(Vector3)"/> which translates a point from local space to world space.
+        /// </remarks>
+        public static Vector3 TransformPoint(this Vector3 point, Vector3 position, Quaternion rotation, Vector3 localScale)
+        {
+            return rotation * Vector3.Scale(localScale, point) + position;
+        }
+
+        /// <summary>
+        /// Inversely Transforms a three dimensional point by the specified transform.
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="transform"></param>
+        /// <returns>
+        /// The coordinates of the updated point.
+        /// </returns>
+        /// <remarks>
+        /// This IS NOT the same as <see cref="Transform.InverseTransformPoint(Vector3)"/> which translates a point from local space to world space.
+        /// </remarks>
+        public static Vector3 InverseTransformPoint(this Vector3 point, Transform transform)
+        {
+            return point.InverseTransformPoint(transform.position, transform.rotation, transform.localScale);
+        }
+
+        /// <summary>
+        /// Transforms a three dimensional point by the specified position, rotation, and scale.
+        /// </summary>
+        /// <param name="point"></param>
+        /// <param name="position"></param>
+        /// <param name="rotation"></param>
+        /// <param name="localScale"></param>
+        /// <returns>
+        /// The coordinates of the updated point.
+        /// </returns>
+        /// <remarks>
+        /// This IS NOT the same as <see cref="Transform.InverseTransformPoint(Vector3)"/> which translates a point from local space to world space.
+        /// </remarks>
+        public static Vector3 InverseTransformPoint(this Vector3 point, Vector3 position, Quaternion rotation, Vector3 localScale)
+        {
+            var scaleInv = new Vector3(1 / localScale.x, 1 / localScale.y, 1 / localScale.z);
+            return Vector3.Scale(scaleInv, (Quaternion.Inverse(rotation) * (point - position)));
         }
 
         public static Vector2 Average(this IEnumerable<Vector2> vectors)
         {
-            float x = 0f;
-            float y = 0f;
+            var x = 0f;
+            var y = 0f;
             int count = 0;
 
             foreach (var pos in vectors)
@@ -72,9 +227,9 @@ namespace XRTK.Extensions
 
         public static Vector3 Average(this IEnumerable<Vector3> vectors)
         {
-            float x = 0f;
-            float y = 0f;
-            float z = 0f;
+            var x = 0f;
+            var y = 0f;
+            var z = 0f;
             int count = 0;
 
             foreach (var pos in vectors)
@@ -91,13 +246,14 @@ namespace XRTK.Extensions
         public static Vector2 Average(this ICollection<Vector2> vectors)
         {
             int count = vectors.Count;
+
             if (count == 0)
             {
                 return Vector2.zero;
             }
 
-            float x = 0f;
-            float y = 0f;
+            var x = 0f;
+            var y = 0f;
 
             foreach (var pos in vectors)
             {
@@ -117,9 +273,9 @@ namespace XRTK.Extensions
                 return Vector3.zero;
             }
 
-            float x = 0f;
-            float y = 0f;
-            float z = 0f;
+            var x = 0f;
+            var y = 0f;
+            var z = 0f;
 
             foreach (var pos in vectors)
             {
@@ -157,6 +313,12 @@ namespace XRTK.Extensions
             return count == 0 ? Vector3.zero : vectors.OrderBy(v => v.sqrMagnitude).ElementAt(count / 2);
         }
 
+        /// <summary>
+        /// Validates the vector data to ensure that none of the values are <see cref="float.NaN"/>,
+        /// <see cref="float.PositiveInfinity"/>, or <see cref="float.NegativeInfinity"/>.
+        /// </summary>
+        /// <param name="vector">The vector data to verify.</param>
+        /// <returns>True, if the vector values are valid.</returns>
         public static bool IsValidVector(this Vector3 vector)
         {
             return !float.IsNaN(vector.x) && !float.IsNaN(vector.y) && !float.IsNaN(vector.z) &&
@@ -171,17 +333,13 @@ namespace XRTK.Extensions
         /// <returns></returns>
         public static Vector3 SphericalMapping(Vector3 source, float radius)
         {
-            float circ = 2f * Mathf.PI * radius;
-
-            float xAngle = (source.x / circ) * 360f;
-            float yAngle = -(source.y / circ) * 360f;
+            var circumference = 2f * Mathf.PI * radius;
+            var xAngle = (source.x / circumference) * 360f;
+            var yAngle = -(source.y / circumference) * 360f;
+            var rotation = Quaternion.Euler(yAngle, xAngle, 0.0f);
 
             source.Set(0.0f, 0.0f, radius);
-
-            Quaternion rot = Quaternion.Euler(yAngle, xAngle, 0.0f);
-            source = rot * source;
-
-            return source;
+            return rotation * source;
         }
 
         /// <summary>
@@ -192,16 +350,13 @@ namespace XRTK.Extensions
         /// <returns></returns>
         public static Vector3 CylindricalMapping(Vector3 source, float radius)
         {
-            float circ = 2f * Mathf.PI * radius;
-
-            float xAngle = (source.x / circ) * 360f;
+            var circumference = 2f * Mathf.PI * radius;
+            var xAngle = (source.x / circumference) * 360f;
+            var rotation = Quaternion.Euler(0.0f, xAngle, 0.0f);
 
             source.Set(0.0f, source.y, radius);
 
-            Quaternion rot = Quaternion.Euler(0.0f, xAngle, 0.0f);
-            source = rot * source;
-
-            return source;
+            return rotation * source;
         }
 
         /// <summary>
@@ -224,21 +379,20 @@ namespace XRTK.Extensions
             source.y = 0f;
             source.z = (radius / totalRows) * row;
             var yAngle = radialCellAngle * (column - (totalColumns * offset)) + (radialCellAngle * offset);
-            var rot = Quaternion.Euler(0.0f, yAngle, 0.0f);
-
-            return rot * source;
+            var rotation = Quaternion.Euler(0.0f, yAngle, 0.0f);
+            return rotation * source;
         }
 
         /// <summary>
-        /// Randomized mapping based on a source Vec3 and a radius for randomization distance.
+        /// Randomized mapping based on a source position and a radius for randomization distance.
         /// </summary>
         /// <param name="source">The source <see cref="Vector3"/> to be mapped to cylinder</param>
         /// <param name="radius">This is a <see cref="float"/> for the radius of the cylinder</param>
         /// <returns></returns>
         public static Vector3 ScatterMapping(this Vector3 source, float radius)
         {
-            source.x = UnityEngine.Random.Range(-radius, radius);
-            source.y = UnityEngine.Random.Range(-radius, radius);
+            source.x = Random.Range(-radius, radius);
+            source.y = Random.Range(-radius, radius);
             return source;
         }
 
@@ -261,6 +415,49 @@ namespace XRTK.Extensions
             }
 
             return direction.y > 0 ? MoveDirection.Up : MoveDirection.Down;
+        }
+
+        /// <summary>
+        /// Checks if a normal is nearly vertical
+        /// </summary>
+        /// <param name="normal"></param>
+        /// <returns>Returns true, if normal is vertical.</returns>
+        public static bool IsNormalVertical(this Vector3 normal) => 1f - Mathf.Abs(normal.y) < 0.01f;
+
+        /// <summary>
+        /// Lerps Vector3 source to goal.
+        /// </summary>
+        /// <remarks>
+        /// Handles lerpTime of 0.
+        /// </remarks>
+        /// <param name="source"></param>
+        /// <param name="goal"></param>
+        /// <param name="deltaTime"></param>
+        /// <param name="lerpTime"></param>
+        /// <returns></returns>
+        public static Vector3 SmoothTo(this Vector3 source, Vector3 goal, float deltaTime, float lerpTime)
+        {
+            return Vector3.Lerp(source, goal, lerpTime.Equals(0.0f) ? 1f : deltaTime / lerpTime);
+        }
+
+        /// <summary>
+        /// Returns the midpoint between two vectors.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="point"></param>
+        public static Vector2 MidPoint(this Vector2 source, Vector2 point)
+        {
+            return (source + point) * 0.5f;
+        }
+
+        /// <summary>
+        /// Returns the midpoint between two vectors.
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="point"></param>
+        public static Vector3 MidPoint(this Vector3 source, Vector3 point)
+        {
+            return (source + point) * 0.5f;
         }
     }
 }

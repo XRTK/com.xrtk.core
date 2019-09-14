@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class BoundingBox
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.42.2.0">
+    <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -73,7 +73,8 @@
   
   <h1 id="XRTK_SDK_UX_BoundingBox" data-uid="XRTK.SDK.UX.BoundingBox" class="text-break">Class BoundingBox
   </h1>
-  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 summary"><p>The bounding box is a component for easily manipulating an object using a visual wireframe and handles.</p>
+</div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
     <h5>Inheritance</h5>
@@ -82,41 +83,10 @@
     <div class="level2"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html">Component</a></div>
     <div class="level3"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Behaviour.html">Behaviour</a></div>
     <div class="level4"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html">MonoBehaviour</a></div>
-    <div class="level5"><a class="xref" href="XRTK.SDK.Input.Handlers.BaseFocusHandler.html">BaseFocusHandler</a></div>
-    <div class="level6"><span class="xref">BoundingBox</span></div>
-  </div>
-  <div classs="implements">
-    <h5>Implements</h5>
-    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityFocusHandler.html">IMixedRealityFocusHandler</a></div>
-    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityFocusChangedHandler.html">IMixedRealityFocusChangedHandler</a></div>
-    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourceStateHandler.html">IMixedRealitySourceStateHandler</a></div>
-    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler.html">IMixedRealityInputHandler</a></div>
-    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler</a>&lt;<a class="xref" href="XRTK.Definitions.Utilities.MixedRealityPose.html">MixedRealityPose</a>&gt;</div>
-    <div><span class="xref">UnityEngine.EventSystems.IEventSystemHandler</span></div>
+    <div class="level5"><span class="xref">BoundingBox</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
-    <div>
-      <a class="xref" href="XRTK.SDK.Input.Handlers.BaseFocusHandler.html#XRTK_SDK_Input_Handlers_BaseFocusHandler_FocusEnabled">BaseFocusHandler.FocusEnabled</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.Input.Handlers.BaseFocusHandler.html#XRTK_SDK_Input_Handlers_BaseFocusHandler_HasFocus">BaseFocusHandler.HasFocus</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.Input.Handlers.BaseFocusHandler.html#XRTK_SDK_Input_Handlers_BaseFocusHandler_Focusers">BaseFocusHandler.Focusers</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.Input.Handlers.BaseFocusHandler.html#XRTK_SDK_Input_Handlers_BaseFocusHandler_OnFocusEnter_XRTK_EventDatum_Input_FocusEventData_">BaseFocusHandler.OnFocusEnter(FocusEventData)</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.Input.Handlers.BaseFocusHandler.html#XRTK_SDK_Input_Handlers_BaseFocusHandler_OnFocusExit_XRTK_EventDatum_Input_FocusEventData_">BaseFocusHandler.OnFocusExit(FocusEventData)</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.Input.Handlers.BaseFocusHandler.html#XRTK_SDK_Input_Handlers_BaseFocusHandler_OnBeforeFocusChange_XRTK_EventDatum_Input_FocusEventData_">BaseFocusHandler.OnBeforeFocusChange(FocusEventData)</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.Input.Handlers.BaseFocusHandler.html#XRTK_SDK_Input_Handlers_BaseFocusHandler_OnFocusChanged_XRTK_EventDatum_Input_FocusEventData_">BaseFocusHandler.OnFocusChanged(FocusEventData)</a>
-    </div>
     <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_IsInvoking">MonoBehaviour.IsInvoking()</a>
     </div>
@@ -401,25 +371,191 @@
   <h6><strong>Assembly</strong>: XRTK.SDK.dll</h6>
   <h5 id="XRTK_SDK_UX_BoundingBox_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class BoundingBox : BaseFocusHandler, IMixedRealityFocusHandler, IMixedRealityFocusChangedHandler, IMixedRealitySourceStateHandler, IMixedRealityInputHandler, IMixedRealityInputHandler&lt;MixedRealityPose&gt;, IEventSystemHandler</code></pre>
+    <pre><code class="lang-csharp hljs">[RequireComponent(typeof(ManipulationHandler))]
+public class BoundingBox : MonoBehaviour</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_IsActive.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.IsActive%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_BoxColliderToUse.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.BoxColliderToUse%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L228">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L215">View Source</a>
   </span>
-  <a id="XRTK_SDK_UX_BoundingBox_IsActive_" data-uid="XRTK.SDK.UX.BoundingBox.IsActive*"></a>
-  <h4 id="XRTK_SDK_UX_BoundingBox_IsActive" data-uid="XRTK.SDK.UX.BoundingBox.IsActive">IsActive</h4>
-  <div class="markdown level1 summary"><p>This Public property sets whether the BoundingBox is active (visible)</p>
+  <a id="XRTK_SDK_UX_BoundingBox_BoxColliderToUse_" data-uid="XRTK.SDK.UX.BoundingBox.BoxColliderToUse*"></a>
+  <h4 id="XRTK_SDK_UX_BoundingBox_BoxColliderToUse" data-uid="XRTK.SDK.UX.BoundingBox.BoxColliderToUse">BoxColliderToUse</h4>
+  <div class="markdown level1 summary"><p>For complex objects, automatic bounds calculation may not behave as expected.
+Use an existing Box Collider (even on a child object) to manually determine bounds of Bounding Box.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsActive { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public BoxCollider BoxColliderToUse { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.BoxCollider.html">BoxCollider</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_DisplayHandles.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.DisplayHandles%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L247">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_BoundingBox_DisplayHandles_" data-uid="XRTK.SDK.UX.BoundingBox.DisplayHandles*"></a>
+  <h4 id="XRTK_SDK_UX_BoundingBox_DisplayHandles" data-uid="XRTK.SDK.UX.BoundingBox.DisplayHandles">DisplayHandles</h4>
+  <div class="markdown level1 summary"><p>Public Property that displays simple wireframe around an object with no scale or rotate handles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool DisplayHandles { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="XRTK_SDK_UX_BoundingBox_DisplayHandles_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>this is useful when outlining an object without being able to edit it is desired.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_FlattenAxis.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.FlattenAxis%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L283">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_BoundingBox_FlattenAxis_" data-uid="XRTK.SDK.UX.BoundingBox.FlattenAxis*"></a>
+  <h4 id="XRTK_SDK_UX_BoundingBox_FlattenAxis" data-uid="XRTK.SDK.UX.BoundingBox.FlattenAxis">FlattenAxis</h4>
+  <div class="markdown level1 summary"><p>Describes how the bounding box should be flattened</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FlattenMode FlattenAxis { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Utilities.FlattenMode.html">FlattenMode</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_HandleGrabbedMaterial.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.HandleGrabbedMaterial%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L352">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_BoundingBox_HandleGrabbedMaterial_" data-uid="XRTK.SDK.UX.BoundingBox.HandleGrabbedMaterial*"></a>
+  <h4 id="XRTK_SDK_UX_BoundingBox_HandleGrabbedMaterial" data-uid="XRTK.SDK.UX.BoundingBox.HandleGrabbedMaterial">HandleGrabbedMaterial</h4>
+  <div class="markdown level1 summary"><p>The material to use when the handles are interacted with.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Material HandleGrabbedMaterial { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Material.html">Material</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="XRTK_SDK_UX_BoundingBox_HandleGrabbedMaterial_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Default materials will be created for Handles and Wireframe if none is specified.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_HandleMaterial.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.HandleMaterial%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L330">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_BoundingBox_HandleMaterial_" data-uid="XRTK.SDK.UX.BoundingBox.HandleMaterial*"></a>
+  <h4 id="XRTK_SDK_UX_BoundingBox_HandleMaterial" data-uid="XRTK.SDK.UX.BoundingBox.HandleMaterial">HandleMaterial</h4>
+  <div class="markdown level1 summary"><p>The material for all the handles to use.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Material HandleMaterial { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Material.html">Material</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="XRTK_SDK_UX_BoundingBox_HandleMaterial_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Default materials will be created for Handles and Wireframe if none is specified.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_IsVisible.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.IsVisible%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L515">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_BoundingBox_IsVisible_" data-uid="XRTK.SDK.UX.BoundingBox.IsVisible*"></a>
+  <h4 id="XRTK_SDK_UX_BoundingBox_IsVisible" data-uid="XRTK.SDK.UX.BoundingBox.IsVisible">IsVisible</h4>
+  <div class="markdown level1 summary"><p>Is the Bounding Box Rig visible?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsVisible { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -438,10 +574,103 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_LinkRadius.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.LinkRadius%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L448">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_BoundingBox_LinkRadius_" data-uid="XRTK.SDK.UX.BoundingBox.LinkRadius*"></a>
+  <h4 id="XRTK_SDK_UX_BoundingBox_LinkRadius" data-uid="XRTK.SDK.UX.BoundingBox.LinkRadius">LinkRadius</h4>
+  <div class="markdown level1 summary"><p>The thickness of the links connecting each of the bounding boxes handles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float LinkRadius { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_RotationHandleRadius.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.RotationHandleRadius%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L468">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_BoundingBox_RotationHandleRadius_" data-uid="XRTK.SDK.UX.BoundingBox.RotationHandleRadius*"></a>
+  <h4 id="XRTK_SDK_UX_BoundingBox_RotationHandleRadius" data-uid="XRTK.SDK.UX.BoundingBox.RotationHandleRadius">RotationHandleRadius</h4>
+  <div class="markdown level1 summary"><p>The size of the rotation handles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float RotationHandleRadius { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_ScaleHandleRadius.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.ScaleHandleRadius%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L488">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_BoundingBox_ScaleHandleRadius_" data-uid="XRTK.SDK.UX.BoundingBox.ScaleHandleRadius*"></a>
+  <h4 id="XRTK_SDK_UX_BoundingBox_ScaleHandleRadius" data-uid="XRTK.SDK.UX.BoundingBox.ScaleHandleRadius">ScaleHandleRadius</h4>
+  <div class="markdown level1 summary"><p>The size of the scale handles.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ScaleHandleRadius { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_ShowRotateHandles.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.ShowRotateHandles%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L199">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L398">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_BoundingBox_ShowRotateHandles_" data-uid="XRTK.SDK.UX.BoundingBox.ShowRotateHandles*"></a>
   <h4 id="XRTK_SDK_UX_BoundingBox_ShowRotateHandles" data-uid="XRTK.SDK.UX.BoundingBox.ShowRotateHandles">ShowRotateHandles</h4>
@@ -470,10 +699,41 @@ This property can be set independent of the Scaling handles.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_ShowRotationHandlesPerAxis.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.ShowRotationHandlesPerAxis%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L427">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_BoundingBox_ShowRotationHandlesPerAxis_" data-uid="XRTK.SDK.UX.BoundingBox.ShowRotationHandlesPerAxis*"></a>
+  <h4 id="XRTK_SDK_UX_BoundingBox_ShowRotationHandlesPerAxis" data-uid="XRTK.SDK.UX.BoundingBox.ShowRotationHandlesPerAxis">ShowRotationHandlesPerAxis</h4>
+  <div class="markdown level1 summary"><p>Show the rotation handles based on the <a class="xref" href="XRTK.Definitions.Utilities.CardinalAxis.html">CardinalAxis</a> bit mask.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public CardinalAxis ShowRotationHandlesPerAxis { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.Utilities.CardinalAxis.html">CardinalAxis</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_ShowScaleHandles.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.ShowScaleHandles%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L179">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L372">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_BoundingBox_ShowScaleHandles_" data-uid="XRTK.SDK.UX.BoundingBox.ShowScaleHandles*"></a>
   <h4 id="XRTK_SDK_UX_BoundingBox_ShowScaleHandles" data-uid="XRTK.SDK.UX.BoundingBox.ShowScaleHandles">ShowScaleHandles</h4>
@@ -502,19 +762,19 @@ This property can be set independent of the Rotate handles.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_WireframeOnly.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.WireframeOnly%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_WireframeMaterial.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.WireframeMaterial%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L138">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L305">View Source</a>
   </span>
-  <a id="XRTK_SDK_UX_BoundingBox_WireframeOnly_" data-uid="XRTK.SDK.UX.BoundingBox.WireframeOnly*"></a>
-  <h4 id="XRTK_SDK_UX_BoundingBox_WireframeOnly" data-uid="XRTK.SDK.UX.BoundingBox.WireframeOnly">WireframeOnly</h4>
-  <div class="markdown level1 summary"><p>Public Property that displays simple wireframe around an object with no scale or rotate handles.</p>
+  <a id="XRTK_SDK_UX_BoundingBox_WireframeMaterial_" data-uid="XRTK.SDK.UX.BoundingBox.WireframeMaterial*"></a>
+  <h4 id="XRTK_SDK_UX_BoundingBox_WireframeMaterial" data-uid="XRTK.SDK.UX.BoundingBox.WireframeMaterial">WireframeMaterial</h4>
+  <div class="markdown level1 summary"><p>The material to use for the wireframe.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool WireframeOnly { get; set; }</code></pre>
+    <pre><code class="lang-csharp hljs">public Material WireframeMaterial { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -526,198 +786,60 @@ This property can be set independent of the Rotate handles.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Material.html">Material</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 id="XRTK_SDK_UX_BoundingBox_WireframeOnly_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>this is useful when outlining an object without being able to edit it is desired.</p>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_WireFramePadding.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.WireFramePadding%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L267">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_BoundingBox_WireFramePadding_" data-uid="XRTK.SDK.UX.BoundingBox.WireFramePadding*"></a>
+  <h4 id="XRTK_SDK_UX_BoundingBox_WireFramePadding" data-uid="XRTK.SDK.UX.BoundingBox.WireFramePadding">WireFramePadding</h4>
+  <div class="markdown level1 summary"><p>The distance to pad the wireframe around the bounds of the encapsulated object(s).</p>
 </div>
-  <h3 id="eii">Explicit Interface Implementations
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector3 WireFramePadding { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealityInputHandler_OnInputDown_XRTK_EventDatum_Input_InputEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.XRTK%23Interfaces%23InputSystem%23Handlers%23IMixedRealityInputHandler%23OnInputDown(XRTK.EventDatum.Input.InputEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_ResetBoundingBoxBounds.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.ResetBoundingBoxBounds%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L1153">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L977">View Source</a>
   </span>
-  <a id="XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealityInputHandler_OnInputDown_" data-uid="XRTK.SDK.UX.BoundingBox.XRTK#Interfaces#InputSystem#Handlers#IMixedRealityInputHandler#OnInputDown*"></a>
-  <h4 id="XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealityInputHandler_OnInputDown_XRTK_EventDatum_Input_InputEventData_" data-uid="XRTK.SDK.UX.BoundingBox.XRTK#Interfaces#InputSystem#Handlers#IMixedRealityInputHandler#OnInputDown(XRTK.EventDatum.Input.InputEventData)">IMixedRealityInputHandler.OnInputDown(InputEventData)</h4>
-  <div class="markdown level1 summary"><p>Input Down updates from Interactions, Keys, or any other simple input.</p>
+  <a id="XRTK_SDK_UX_BoundingBox_ResetBoundingBoxBounds_" data-uid="XRTK.SDK.UX.BoundingBox.ResetBoundingBoxBounds*"></a>
+  <h4 id="XRTK_SDK_UX_BoundingBox_ResetBoundingBoxBounds" data-uid="XRTK.SDK.UX.BoundingBox.ResetBoundingBoxBounds">ResetBoundingBoxBounds()</h4>
+  <div class="markdown level1 summary"><p>Resets the bounds of the bounding box based on the <span class="xref">XRTK.SDK.UX.BoundingBox.boxColliderToUse</span> if provided,
+otherwise calculate it based on the colliders on each child object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void IMixedRealityInputHandler.OnInputDown(InputEventData eventData)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="XRTK.EventDatum.Input.InputEventData.html">InputEventData</a></td>
-        <td><span class="parametername">eventData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealityInputHandler_OnInputUp_XRTK_EventDatum_Input_InputEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.XRTK%23Interfaces%23InputSystem%23Handlers%23IMixedRealityInputHandler%23OnInputUp(XRTK.EventDatum.Input.InputEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L1184">View Source</a>
-  </span>
-  <a id="XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealityInputHandler_OnInputUp_" data-uid="XRTK.SDK.UX.BoundingBox.XRTK#Interfaces#InputSystem#Handlers#IMixedRealityInputHandler#OnInputUp*"></a>
-  <h4 id="XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealityInputHandler_OnInputUp_XRTK_EventDatum_Input_InputEventData_" data-uid="XRTK.SDK.UX.BoundingBox.XRTK#Interfaces#InputSystem#Handlers#IMixedRealityInputHandler#OnInputUp(XRTK.EventDatum.Input.InputEventData)">IMixedRealityInputHandler.OnInputUp(InputEventData)</h4>
-  <div class="markdown level1 summary"><p>Input Up updates from Interactions, Keys, or any other simple input.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void IMixedRealityInputHandler.OnInputUp(InputEventData eventData)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="XRTK.EventDatum.Input.InputEventData.html">InputEventData</a></td>
-        <td><span class="parametername">eventData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealityInputHandler_XRTK_Definitions_Utilities_MixedRealityPose__OnInputChanged_XRTK_EventDatum_Input_InputEventData_XRTK_Definitions_Utilities_MixedRealityPose__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.XRTK%23Interfaces%23InputSystem%23Handlers%23IMixedRealityInputHandler%7BXRTK%23Definitions%23Utilities%23MixedRealityPose%7D%23OnInputChanged(XRTK.EventDatum.Input.InputEventData%7BXRTK.Definitions.Utilities.MixedRealityPose%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L1197">View Source</a>
-  </span>
-  <a id="XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealityInputHandler_XRTK_Definitions_Utilities_MixedRealityPose__OnInputChanged_" data-uid="XRTK.SDK.UX.BoundingBox.XRTK#Interfaces#InputSystem#Handlers#IMixedRealityInputHandler{XRTK#Definitions#Utilities#MixedRealityPose}#OnInputChanged*"></a>
-  <h4 id="XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealityInputHandler_XRTK_Definitions_Utilities_MixedRealityPose__OnInputChanged_XRTK_EventDatum_Input_InputEventData_XRTK_Definitions_Utilities_MixedRealityPose__" data-uid="XRTK.SDK.UX.BoundingBox.XRTK#Interfaces#InputSystem#Handlers#IMixedRealityInputHandler{XRTK#Definitions#Utilities#MixedRealityPose}#OnInputChanged(XRTK.EventDatum.Input.InputEventData{XRTK.Definitions.Utilities.MixedRealityPose})">IMixedRealityInputHandler&lt;MixedRealityPose&gt;.OnInputChanged(InputEventData&lt;MixedRealityPose&gt;)</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void IMixedRealityInputHandler&lt;MixedRealityPose&gt;.OnInputChanged(InputEventData&lt;MixedRealityPose&gt; eventData)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="XRTK.EventDatum.Input.InputEventData-1.html">InputEventData</a>&lt;<a class="xref" href="XRTK.Definitions.Utilities.MixedRealityPose.html">MixedRealityPose</a>&gt;</td>
-        <td><span class="parametername">eventData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealitySourceStateHandler_OnSourceDetected_XRTK_EventDatum_Input_SourceStateEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.XRTK%23Interfaces%23InputSystem%23Handlers%23IMixedRealitySourceStateHandler%23OnSourceDetected(XRTK.EventDatum.Input.SourceStateEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L1216">View Source</a>
-  </span>
-  <a id="XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealitySourceStateHandler_OnSourceDetected_" data-uid="XRTK.SDK.UX.BoundingBox.XRTK#Interfaces#InputSystem#Handlers#IMixedRealitySourceStateHandler#OnSourceDetected*"></a>
-  <h4 id="XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealitySourceStateHandler_OnSourceDetected_XRTK_EventDatum_Input_SourceStateEventData_" data-uid="XRTK.SDK.UX.BoundingBox.XRTK#Interfaces#InputSystem#Handlers#IMixedRealitySourceStateHandler#OnSourceDetected(XRTK.EventDatum.Input.SourceStateEventData)">IMixedRealitySourceStateHandler.OnSourceDetected(SourceStateEventData)</h4>
-  <div class="markdown level1 summary"><p>Raised when a source is detected.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void IMixedRealitySourceStateHandler.OnSourceDetected(SourceStateEventData eventData)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="XRTK.EventDatum.Input.SourceStateEventData.html">SourceStateEventData</a></td>
-        <td><span class="parametername">eventData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealitySourceStateHandler_OnSourceLost_XRTK_EventDatum_Input_SourceStateEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox.XRTK%23Interfaces%23InputSystem%23Handlers%23IMixedRealitySourceStateHandler%23OnSourceLost(XRTK.EventDatum.Input.SourceStateEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L1219">View Source</a>
-  </span>
-  <a id="XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealitySourceStateHandler_OnSourceLost_" data-uid="XRTK.SDK.UX.BoundingBox.XRTK#Interfaces#InputSystem#Handlers#IMixedRealitySourceStateHandler#OnSourceLost*"></a>
-  <h4 id="XRTK_SDK_UX_BoundingBox_XRTK_Interfaces_InputSystem_Handlers_IMixedRealitySourceStateHandler_OnSourceLost_XRTK_EventDatum_Input_SourceStateEventData_" data-uid="XRTK.SDK.UX.BoundingBox.XRTK#Interfaces#InputSystem#Handlers#IMixedRealitySourceStateHandler#OnSourceLost(XRTK.EventDatum.Input.SourceStateEventData)">IMixedRealitySourceStateHandler.OnSourceLost(SourceStateEventData)</h4>
-  <div class="markdown level1 summary"><p>Raised when a source is lost.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void IMixedRealitySourceStateHandler.OnSourceLost(SourceStateEventData eventData)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="XRTK.EventDatum.Input.SourceStateEventData.html">SourceStateEventData</a></td>
-        <td><span class="parametername">eventData</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h3 id="implements">Implements</h3>
-  <div>
-      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityFocusHandler.html">IMixedRealityFocusHandler</a>
-  </div>
-  <div>
-      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityFocusChangedHandler.html">IMixedRealityFocusChangedHandler</a>
-  </div>
-  <div>
-      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourceStateHandler.html">IMixedRealitySourceStateHandler</a>
-  </div>
-  <div>
-      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler.html">IMixedRealityInputHandler</a>
-  </div>
-  <div>
-      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler&lt;T&gt;</a>
-  </div>
-  <div>
-      <span class="xref">UnityEngine.EventSystems.IEventSystemHandler</span>
+    <pre><code class="lang-csharp hljs">public void ResetBoundingBoxBounds()</code></pre>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
@@ -746,7 +868,7 @@ This property can be set independent of the Rotate handles.</p>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_BoundingBox.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.BoundingBox%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L15" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/BoundingBox/BoundingBox.cs/#L23" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

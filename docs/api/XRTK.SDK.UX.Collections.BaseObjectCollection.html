@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class BaseObjectCollection
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.42.2.0">
+    <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -371,8 +371,40 @@
   <h6><strong>Assembly</strong>: XRTK.SDK.dll</h6>
   <h5 id="XRTK_SDK_UX_Collections_BaseObjectCollection_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class BaseObjectCollection : MonoBehaviour</code></pre>
+    <pre><code class="lang-csharp hljs">[DisallowMultipleComponent]
+public abstract class BaseObjectCollection : MonoBehaviour</code></pre>
   </div>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Collections_BaseObjectCollection_nodeList.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Collections.BaseObjectCollection.nodeList%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L19">View Source</a>
+  </span>
+  <h4 id="XRTK_SDK_UX_Collections_BaseObjectCollection_nodeList" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.nodeList">nodeList</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected readonly List&lt;ObjectCollectionNode&gt; nodeList</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="XRTK.SDK.UX.Collections.ObjectCollectionNode.html">ObjectCollectionNode</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
@@ -380,7 +412,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Collections_BaseObjectCollection_IgnoreInactiveTransforms.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Collections.BaseObjectCollection.IgnoreInactiveTransforms%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L30">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L28">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Collections_BaseObjectCollection_IgnoreInactiveTransforms_" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.IgnoreInactiveTransforms*"></a>
   <h4 id="XRTK_SDK_UX_Collections_BaseObjectCollection_IgnoreInactiveTransforms" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.IgnoreInactiveTransforms">IgnoreInactiveTransforms</h4>
@@ -408,41 +440,10 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Collections_BaseObjectCollection_NodeList.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Collections.BaseObjectCollection.NodeList%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L21">View Source</a>
-  </span>
-  <a id="XRTK_SDK_UX_Collections_BaseObjectCollection_NodeList_" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.NodeList*"></a>
-  <h4 id="XRTK_SDK_UX_Collections_BaseObjectCollection_NodeList" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.NodeList">NodeList</h4>
-  <div class="markdown level1 summary"><p>List of objects with generated data on the object.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected List&lt;ObjectCollectionNode&gt; NodeList { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="XRTK.SDK.UX.Collections.ObjectCollectionNode.html">ObjectCollectionNode</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Collections_BaseObjectCollection_OnCollectionUpdated.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Collections.BaseObjectCollection.OnCollectionUpdated%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L16">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L17">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Collections_BaseObjectCollection_OnCollectionUpdated_" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.OnCollectionUpdated*"></a>
   <h4 id="XRTK_SDK_UX_Collections_BaseObjectCollection_OnCollectionUpdated" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.OnCollectionUpdated">OnCollectionUpdated</h4>
@@ -473,7 +474,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Collections_BaseObjectCollection_SortType.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Collections.BaseObjectCollection.SortType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L43">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L41">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Collections_BaseObjectCollection_SortType_" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.SortType*"></a>
   <h4 id="XRTK_SDK_UX_Collections_BaseObjectCollection_SortType" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.SortType">SortType</h4>
@@ -506,7 +507,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Collections_BaseObjectCollection_ContainsNode_UnityEngine_Transform_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Collections.BaseObjectCollection.ContainsNode(UnityEngine.Transform)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L114">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L145">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Collections_BaseObjectCollection_ContainsNode_" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.ContainsNode*"></a>
   <h4 id="XRTK_SDK_UX_Collections_BaseObjectCollection_ContainsNode_UnityEngine_Transform_" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.ContainsNode(UnityEngine.Transform)">ContainsNode(Transform)</h4>
@@ -551,10 +552,41 @@
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Collections_BaseObjectCollection_GetCollection.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Collections.BaseObjectCollection.GetCollection%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L66">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Collections_BaseObjectCollection_GetCollection_" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.GetCollection*"></a>
+  <h4 id="XRTK_SDK_UX_Collections_BaseObjectCollection_GetCollection" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.GetCollection">GetCollection()</h4>
+  <div class="markdown level1 summary"><p>Gets the current list of <a class="xref" href="XRTK.SDK.UX.Collections.ObjectCollectionNode.html">ObjectCollectionNode</a>s</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public virtual List&lt;ObjectCollectionNode&gt; GetCollection()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="XRTK.SDK.UX.Collections.ObjectCollectionNode.html">ObjectCollectionNode</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Collections_BaseObjectCollection_LayoutChildren.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Collections.BaseObjectCollection.LayoutChildren%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L130">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L161">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Collections_BaseObjectCollection_LayoutChildren_" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.LayoutChildren*"></a>
   <h4 id="XRTK_SDK_UX_Collections_BaseObjectCollection_LayoutChildren" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.LayoutChildren">LayoutChildren()</h4>
@@ -570,7 +602,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Collections_BaseObjectCollection_UpdateCollection.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Collections.BaseObjectCollection.UpdateCollection%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L53">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Collections/BaseObjectCollection.cs/#L112">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Collections_BaseObjectCollection_UpdateCollection_" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.UpdateCollection*"></a>
   <h4 id="XRTK_SDK_UX_Collections_BaseObjectCollection_UpdateCollection" data-uid="XRTK.SDK.UX.Collections.BaseObjectCollection.UpdateCollection">UpdateCollection()</h4>

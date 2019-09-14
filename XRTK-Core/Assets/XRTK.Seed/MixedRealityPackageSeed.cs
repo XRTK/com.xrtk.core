@@ -2,13 +2,11 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.Diagnostics;
-using System.Linq;
+using System.IO;
 using System.Reflection;
-using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditor.PackageManager;
-using Debug = UnityEngine.Debug;
+using UnityEngine;
 
 namespace XRTK.Seed
 {
@@ -21,7 +19,17 @@ namespace XRTK.Seed
     [InitializeOnLoad]
     public class MixedRealityPackageSeed
     {
-        private const string Repository = "https://github.com/XRTK/XRTK-Core.git";
+        private const string ScopedRegistryEntry = @"{
+  ""scopedRegistries"": [
+    {
+      ""name"": ""XRTK"",
+      ""url"": ""http://upm.xrtk.io:4873/"",
+      ""scopes"": [
+        ""com.xrtk""
+      ]
+    }
+  ],
+";
 
         static MixedRealityPackageSeed()
         {
@@ -44,62 +52,27 @@ namespace XRTK.Seed
             {
                 if (assembly == null)
                 {
-                    var process = new Process
+                    var manifestFilePath = $"{Directory.GetParent(Application.dataPath)}\\Packages\\manifest.json";
+
+                    if (File.Exists(manifestFilePath))
                     {
-                        StartInfo = new ProcessStartInfo
+                        var text = File.ReadAllText(manifestFilePath);
+
+                        if (!text.Contains("XRTK"))
                         {
-                            WindowStyle = ProcessWindowStyle.Normal,
-                            CreateNoWindow = true,
-                            UseShellExecute = false,
-                            RedirectStandardOutput = true,
-                            RedirectStandardError = true,
-                            FileName = "cmd.exe",
-                            Arguments = $"/C git ls-remote --tags {Repository}"
+                            text = text.TrimStart('{');
+                            text = $"{ScopedRegistryEntry}{text}";
                         }
-                    };
 
-                    var tag = "0.1.3";
+                        File.WriteAllText(manifestFilePath, text);
 
-                    try
-                    {
-                        if (process.Start())
-                        {
-                            var error = process.StandardError.ReadToEnd();
-
-                            if (string.IsNullOrEmpty(error))
-                            {
-                                var output = process.StandardOutput.ReadToEnd();
-
-                                var tags = output.Split('\n')
-                                    .Select(t => Regex.Match(t, "(\\d*\\.\\d*\\.\\d*)"))
-                                    .Where(match => match.Success)
-                                    .Select(match => new Version(match.Value))
-                                    .OrderBy(version => version);
-
-                                tag = tags.LastOrDefault()?.ToString();
-                            }
-                            else
-                            {
-                                Debug.LogError(error);
-                            }
-
-                            process.WaitForExit();
-                            process.Close();
-                            process.Dispose();
-                        }
-                        else
-                        {
-                            Debug.LogError("Failed to get remote tags for the XRTK package!");
-                        }
+                        Client.Add("com.xrtk.core");
+                        AssetDatabase.DeleteAsset("Assets/XRTK.Seed");
                     }
-                    catch (Exception e)
+                    else
                     {
-                        Debug.LogError(e.Message);
+                        Debug.LogError("Failed to install XRTK, couldn't find the project manifest!");
                     }
-
-                    Client.Add($"com.xrtk.core@{Repository}#{tag}");
-                    EditorUtility.DisplayProgressBar("Installing the Mixed Reality Toolkit", "Resolving packages...", 0.1f);
-                    AssetDatabase.DeleteAsset("Assets/XRTK.Seed");
                 }
             }
         }

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class TouchPointer
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.42.2.0">
+    <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -162,7 +162,13 @@
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsFocusLocked">BaseControllerPointer.IsFocusLocked</a>
     </div>
     <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_SyncPointerTargetPosition">BaseControllerPointer.SyncPointerTargetPosition</a>
+    </div>
+    <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerExtent">BaseControllerPointer.PointerExtent</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_DefaultPointerExtent">BaseControllerPointer.DefaultPointerExtent</a>
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_Rays">BaseControllerPointer.Rays</a>
@@ -171,7 +177,10 @@
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PrioritizedLayerMasksOverride">BaseControllerPointer.PrioritizedLayerMasksOverride</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_FocusTarget">BaseControllerPointer.FocusTarget</a>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_FocusHandler">BaseControllerPointer.FocusHandler</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_InputHandler">BaseControllerPointer.InputHandler</a>
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_Result">BaseControllerPointer.Result</a>
@@ -187,9 +196,6 @@
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerOrientation">BaseControllerPointer.PointerOrientation</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsTargetPositionLockedOnFocusLock">BaseControllerPointer.IsTargetPositionLockedOnFocusLock</a>
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnPostRaycast">BaseControllerPointer.OnPostRaycast()</a>
@@ -680,7 +686,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TouchPointer_OnSourceDetected_XRTK_EventDatum_Input_SourceStateEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TouchPointer.OnSourceDetected(XRTK.EventDatum.Input.SourceStateEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TouchPointer.cs/#L88">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TouchPointer.cs/#L90">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_TouchPointer_OnSourceDetected_" data-uid="XRTK.SDK.UX.Pointers.TouchPointer.OnSourceDetected*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_TouchPointer_OnSourceDetected_XRTK_EventDatum_Input_SourceStateEventData_" data-uid="XRTK.SDK.UX.Pointers.TouchPointer.OnSourceDetected(XRTK.EventDatum.Input.SourceStateEventData)">OnSourceDetected(SourceStateEventData)</h4>
@@ -715,7 +721,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TouchPointer_OnSourceLost_XRTK_EventDatum_Input_SourceStateEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TouchPointer.OnSourceLost(XRTK.EventDatum.Input.SourceStateEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TouchPointer.cs/#L99">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TouchPointer.cs/#L101">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_TouchPointer_OnSourceLost_" data-uid="XRTK.SDK.UX.Pointers.TouchPointer.OnSourceLost*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_TouchPointer_OnSourceLost_XRTK_EventDatum_Input_SourceStateEventData_" data-uid="XRTK.SDK.UX.Pointers.TouchPointer.OnSourceLost(XRTK.EventDatum.Input.SourceStateEventData)">OnSourceLost(SourceStateEventData)</h4>
@@ -803,7 +809,7 @@ Not all input sources support positional information, and those that do may not 
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TouchPointer_TryGetPointerRotation_UnityEngine_Quaternion__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TouchPointer.TryGetPointerRotation(UnityEngine.Quaternion%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TouchPointer.cs/#L81">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TouchPointer.cs/#L83">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_TouchPointer_TryGetPointerRotation_" data-uid="XRTK.SDK.UX.Pointers.TouchPointer.TryGetPointerRotation*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_TouchPointer_TryGetPointerRotation_UnityEngine_Quaternion__" data-uid="XRTK.SDK.UX.Pointers.TouchPointer.TryGetPointerRotation(UnityEngine.Quaternion@)">TryGetPointerRotation(out Quaternion)</h4>
@@ -856,7 +862,7 @@ Not all input sources support rotation information, and those that do may not al
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TouchPointer_TryGetPointingRay_UnityEngine_Ray__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TouchPointer.TryGetPointingRay(UnityEngine.Ray%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TouchPointer.cs/#L74">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TouchPointer.cs/#L76">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_TouchPointer_TryGetPointingRay_" data-uid="XRTK.SDK.UX.Pointers.TouchPointer.TryGetPointingRay*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_TouchPointer_TryGetPointingRay_UnityEngine_Ray__" data-uid="XRTK.SDK.UX.Pointers.TouchPointer.TryGetPointingRay(UnityEngine.Ray@)">TryGetPointingRay(out Ray)</h4>

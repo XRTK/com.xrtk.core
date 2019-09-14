@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
-using XRTK.Providers.Controllers;
+using XRTK.Definitions.Controllers;
 
 namespace XRTK.Inspectors.Profiles
 {

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class BaseFocusHandler
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.42.2.0">
+    <meta name="generator" content="docfx 2.45.1.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -86,7 +86,6 @@
     <div class="level5"><span class="xref">BaseFocusHandler</span></div>
       <div class="level6"><a class="xref" href="XRTK.SDK.Input.Handlers.DragAndDropHandler.html">DragAndDropHandler</a></div>
       <div class="level6"><a class="xref" href="XRTK.SDK.Input.Handlers.TeleportHotSpot.html">TeleportHotSpot</a></div>
-      <div class="level6"><a class="xref" href="XRTK.SDK.UX.BoundingBox.html">BoundingBox</a></div>
       <div class="level6"><a class="xref" href="XRTK.SDK.UX.ToolTips.ToolTipSpawner.html">ToolTipSpawner</a></div>
       <div class="level6"><a class="xref" href="XRTK.SDK.UX.Utilities.InteractableHighlight.html">InteractableHighlight</a></div>
   </div>
@@ -382,21 +381,53 @@
   <h6><strong>Assembly</strong>: XRTK.SDK.dll</h6>
   <h5 id="XRTK_SDK_Input_Handlers_BaseFocusHandler_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[RequireComponent(typeof(Collider))]
+    <pre><code class="lang-csharp hljs">[DisallowMultipleComponent]
+[RequireComponent(typeof(Collider))]
 public abstract class BaseFocusHandler : MonoBehaviour, IMixedRealityFocusHandler, IMixedRealityFocusChangedHandler, IEventSystemHandler</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_BaseFocusHandler_ActivePointers.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.BaseFocusHandler.ActivePointers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/BaseFocusHandler.cs/#L42">View Source</a>
+  </span>
+  <a id="XRTK_SDK_Input_Handlers_BaseFocusHandler_ActivePointers_" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.ActivePointers*"></a>
+  <h4 id="XRTK_SDK_Input_Handlers_BaseFocusHandler_ActivePointers" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.ActivePointers">ActivePointers</h4>
+  <div class="markdown level1 summary"><p>The list of <a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityPointer.html">IMixedRealityPointer</a>s that are currently focused on this <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public IReadOnlyList&lt;IMixedRealityPointer&gt; ActivePointers { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.ireadonlylist-1">IReadOnlyList</a>&lt;<a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityPointer.html">IMixedRealityPointer</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_BaseFocusHandler_FocusEnabled.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.BaseFocusHandler.FocusEnabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/BaseFocusHandler.cs/#L27">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/BaseFocusHandler.cs/#L28">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_BaseFocusHandler_FocusEnabled_" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.FocusEnabled*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_BaseFocusHandler_FocusEnabled" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.FocusEnabled">FocusEnabled</h4>
-  <div class="markdown level1 summary"><p>Is focus enabled for this <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html">Component</a>?</p>
+  <div class="markdown level1 summary"><p>Is focus enabled for this <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a>?</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -420,41 +451,10 @@ public abstract class BaseFocusHandler : MonoBehaviour, IMixedRealityFocusHandle
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_BaseFocusHandler_Focusers.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.BaseFocusHandler.Focusers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/BaseFocusHandler.cs/#L41">View Source</a>
-  </span>
-  <a id="XRTK_SDK_Input_Handlers_BaseFocusHandler_Focusers_" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.Focusers*"></a>
-  <h4 id="XRTK_SDK_Input_Handlers_BaseFocusHandler_Focusers" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.Focusers">Focusers</h4>
-  <div class="markdown level1 summary"><p>The list of <a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityPointer.html">IMixedRealityPointer</a>s that are currently focused on this <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public List&lt;IMixedRealityPointer&gt; Focusers { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.list-1">List</a>&lt;<a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityPointer.html">IMixedRealityPointer</a>&gt;</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_BaseFocusHandler_HasFocus.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.BaseFocusHandler.HasFocus%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/BaseFocusHandler.cs/#L36">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/BaseFocusHandler.cs/#L37">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_BaseFocusHandler_HasFocus_" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.HasFocus*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_BaseFocusHandler_HasFocus" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.HasFocus">HasFocus</h4>
@@ -487,7 +487,7 @@ public abstract class BaseFocusHandler : MonoBehaviour, IMixedRealityFocusHandle
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_BaseFocusHandler_OnBeforeFocusChange_XRTK_EventDatum_Input_FocusEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.BaseFocusHandler.OnBeforeFocusChange(XRTK.EventDatum.Input.FocusEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/BaseFocusHandler.cs/#L50">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/BaseFocusHandler.cs/#L53">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_BaseFocusHandler_OnBeforeFocusChange_" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.OnBeforeFocusChange*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_BaseFocusHandler_OnBeforeFocusChange_XRTK_EventDatum_Input_FocusEventData_" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.OnBeforeFocusChange(XRTK.EventDatum.Input.FocusEventData)">OnBeforeFocusChange(FocusEventData)</h4>
@@ -523,7 +523,7 @@ public abstract class BaseFocusHandler : MonoBehaviour, IMixedRealityFocusHandle
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_BaseFocusHandler_OnFocusChanged_XRTK_EventDatum_Input_FocusEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.BaseFocusHandler.OnFocusChanged(XRTK.EventDatum.Input.FocusEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/BaseFocusHandler.cs/#L75">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/BaseFocusHandler.cs/#L78">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_BaseFocusHandler_OnFocusChanged_" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.OnFocusChanged*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_BaseFocusHandler_OnFocusChanged_XRTK_EventDatum_Input_FocusEventData_" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.OnFocusChanged(XRTK.EventDatum.Input.FocusEventData)">OnFocusChanged(FocusEventData)</h4>
@@ -556,7 +556,7 @@ public abstract class BaseFocusHandler : MonoBehaviour, IMixedRealityFocusHandle
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_BaseFocusHandler_OnFocusEnter_XRTK_EventDatum_Input_FocusEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.BaseFocusHandler.OnFocusEnter(XRTK.EventDatum.Input.FocusEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/BaseFocusHandler.cs/#L44">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/BaseFocusHandler.cs/#L47">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_BaseFocusHandler_OnFocusEnter_" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.OnFocusEnter*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_BaseFocusHandler_OnFocusEnter_XRTK_EventDatum_Input_FocusEventData_" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.OnFocusEnter(XRTK.EventDatum.Input.FocusEventData)">OnFocusEnter(FocusEventData)</h4>
@@ -589,7 +589,7 @@ public abstract class BaseFocusHandler : MonoBehaviour, IMixedRealityFocusHandle
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_Input_Handlers_BaseFocusHandler_OnFocusExit_XRTK_EventDatum_Input_FocusEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.Input.Handlers.BaseFocusHandler.OnFocusExit(XRTK.EventDatum.Input.FocusEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/BaseFocusHandler.cs/#L47">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/Input/Handlers/BaseFocusHandler.cs/#L50">View Source</a>
   </span>
   <a id="XRTK_SDK_Input_Handlers_BaseFocusHandler_OnFocusExit_" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.OnFocusExit*"></a>
   <h4 id="XRTK_SDK_Input_Handlers_BaseFocusHandler_OnFocusExit_XRTK_EventDatum_Input_FocusEventData_" data-uid="XRTK.SDK.Input.Handlers.BaseFocusHandler.OnFocusExit(XRTK.EventDatum.Input.FocusEventData)">OnFocusExit(FocusEventData)</h4>

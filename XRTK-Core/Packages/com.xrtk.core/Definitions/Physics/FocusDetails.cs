@@ -20,12 +20,12 @@ namespace XRTK.Definitions.Physics
         /// <summary>
         /// The hit point of the raycast.
         /// </summary>
-        public Vector3 Point { get; set; }
+        public Vector3 EndPoint { get; set; }
 
         /// <summary>
         /// The hit point of the raycast in local space in relation to the focused object.
         /// </summary>
-        public Vector3 PointLocalSpace { get; set; }
+        public Vector3 EndPointLocalSpace { get; set; }
 
         /// <summary>
         /// The normal of the raycast.

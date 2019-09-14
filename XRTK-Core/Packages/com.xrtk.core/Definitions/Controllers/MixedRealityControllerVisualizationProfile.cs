@@ -4,12 +4,11 @@
 using System;
 using UnityEngine;
 using XRTK.Attributes;
-using XRTK.Definitions;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 
-namespace XRTK.Providers.Controllers
+namespace XRTK.Definitions.Controllers
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Visualization Profile", fileName = "MixedRealityControllerVisualizationProfile", order = (int)CreateProfileMenuItemIndices.ControllerVisualization)]
     public class MixedRealityControllerVisualizationProfile : BaseMixedRealityProfile
@@ -55,14 +54,14 @@ namespace XRTK.Providers.Controllers
         }
 
         [SerializeField]
-        [Tooltip("Override Left Controller Model.")]
+        [Tooltip("Default Left Controller Model.\nNote: If an override profile model is not found for a specific controller, the fallback is the global model for the specific hand.")]
         private GameObject globalLeftHandModel;
 
         /// <summary>
-        /// The Default controller model when there is no specific controller model for the Left hand or when no hand is specified (Handedness = none)
+        /// The Default controller model, for when there is no specific controller model for the Left hand or when no hand is specified (Handedness = none)
         /// </summary>
         /// <remarks>
-        /// If the default model for the left hand controller can not be found, the controller will fall back and use this for visualization.
+        /// If the default model for the left hand controller can not be found, the controller will fall back and use this setting for visualization.
         /// </remarks>
         public GameObject GlobalLeftHandModel
         {
@@ -71,19 +70,38 @@ namespace XRTK.Providers.Controllers
         }
 
         [SerializeField]
-        [Tooltip("Override Right Controller Model.\nNote: If the default model is not found, the fallback is the global right hand model.")]
+        [Tooltip("Default Right Controller Model.\nNote: If an override profile model is not found for a specific controller, the fallback is the global model for the specific hand.")]
         private GameObject globalRightHandModel;
 
         /// <summary>
-        /// The Default controller model when there is no specific controller model for the Right hand.
+        /// The Default controller pose action, for when there is no specific pose for specific controller / hand combination.
         /// </summary>
         /// <remarks>
-        /// If the default model for the right hand controller can not be found, the controller will fall back and use this for visualization.
+        /// If the default model for the right hand controller can not be found, the controller will fall back and use this setting for visualization.
         /// </remarks>
         public GameObject GlobalRightHandModel
         {
             get => globalRightHandModel;
             private set => globalRightHandModel = value;
+        }
+        
+        [SerializeField]
+        [Tooltip("Default Pose Action.\nNote: If an override profile is not found for a specific controller, the default pose action is used.")]
+        private MixedRealityInputAction globalPointerPose;
+
+        /// <summary>
+        /// The Default controller model, for when there is no specific controller model for the Left hand or when no hand is specified (Handedness = none)
+        /// </summary>
+        /// <remarks>
+        /// If the pointer pose action for the specific controller can not be found, the controller will fall back and use this setting for visualization.
+        /// </remarks>        
+        /// <remarks>
+        /// If the default model for the right hand controller can not be found, the controller will fall back and use this setting for visualization.
+        /// </remarks>
+        public MixedRealityInputAction GlobalPointerPose
+        {
+            get => globalPointerPose;
+            private set => globalPointerPose = value;
         }
 
         [SerializeField]
@@ -99,20 +117,23 @@ namespace XRTK.Providers.Controllers
         /// </summary>
         /// <param name="controllerType">The type of controller to query for</param>
         /// <param name="hand">The specific hand assigned to the controller</param>
-        public GameObject GetControllerModelOverride(Type controllerType, Handedness hand)
+        /// <param name="overrideModel">Outputs the supplied model for an overridden visualization (if available), can return null </param>
+        /// <returns>Returns whether the override visualization should use the System model (if available) or not</returns>
+        public bool GetControllerModelOverride(Type controllerType, Handedness hand, out GameObject overrideModel)
         {
+            overrideModel = null;
+
             for (int i = 0; i < controllerVisualizationSettings.Length; i++)
             {
-                if (!controllerVisualizationSettings[i].UseDefaultModel &&
-                    controllerVisualizationSettings[i].ControllerType != null &&
+                if (controllerVisualizationSettings[i].ControllerType != null &&
                     controllerVisualizationSettings[i].ControllerType.Type == controllerType &&
                     (controllerVisualizationSettings[i].Handedness == hand || controllerVisualizationSettings[i].Handedness == Handedness.Both))
                 {
-                    return controllerVisualizationSettings[i].OverrideControllerModel;
+                    overrideModel = controllerVisualizationSettings[i].OverrideControllerModel;
+                    return controllerVisualizationSettings[i].UseDefaultModel;
                 }
             }
-
-            return null;
+            return false;
         }
 
         /// <summary>

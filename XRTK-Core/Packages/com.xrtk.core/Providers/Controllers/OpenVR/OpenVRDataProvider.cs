@@ -3,9 +3,11 @@
 
 using System;
 using UnityEngine;
-using XRTK.Providers.Controllers.UnityInput;
+using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Controllers.OpenVR;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers.UnityInput;
 using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.OpenVR
@@ -121,7 +123,7 @@ namespace XRTK.Providers.Controllers.OpenVR
                 return SupportedControllerType.None;
             }
 
-            if (joystickName.Contains("Oculus Rift CV1"))
+            if (joystickName.Contains("Oculus Rift CV1") || joystickName.Contains("Oculus Touch"))
             {
                 return SupportedControllerType.OculusTouch;
             }

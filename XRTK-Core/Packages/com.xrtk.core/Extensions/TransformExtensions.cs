@@ -95,11 +95,26 @@ namespace XRTK.Extensions
         /// <summary>
         /// Calculates the bounds of all the colliders attached to this GameObject and all it's children
         /// </summary>
-        /// <param name="transform">Transform of root GameObject the colliders are attached to </param>
+        /// <param name="transform">
+        /// Transform of root GameObject the colliders are attached to.
+        /// </param>
+        /// <param name="syncTransform">
+        /// True, by default, this will sync the <see cref="transform"/> rotation to calculate the axis aligned orientation.
+        /// </param>
         /// <returns>The total bounds of all colliders attached to this GameObject.
         /// If no colliders attached, returns a bounds of center and extents 0</returns>
-        public static Bounds GetColliderBounds(this Transform transform)
+        public static Bounds GetColliderBounds(this Transform transform, bool syncTransform = true)
         {
+            // Store current rotation then zero out the rotation so that the bounds
+            // are computed when the object is in its 'axis aligned orientation'.
+            var currentRotation = transform.rotation;
+
+            if (syncTransform)
+            {
+                transform.rotation = Quaternion.identity;
+                Physics.SyncTransforms(); // Update collider bounds
+            }
+
             var colliders = transform.GetComponentsInChildren<Collider>();
 
             if (colliders.Length == 0) { return default; }
@@ -109,6 +124,59 @@ namespace XRTK.Extensions
             for (int i = 1; i < colliders.Length; i++)
             {
                 bounds.Encapsulate(colliders[i].bounds);
+            }
+
+            if (syncTransform)
+            {
+                // After bounds are computed, restore rotation...
+                // ReSharper disable once Unity.InefficientPropertyAccess
+                transform.rotation = currentRotation;
+                Physics.SyncTransforms();
+            }
+
+            return bounds;
+        }
+
+        /// <summary>
+        /// Calculates the bounds of all the renderers attached to this GameObject and all it's children
+        /// </summary>
+        /// <param name="transform">
+        /// Transform of root GameObject the renderers are attached to.
+        /// </param>
+        /// <param name="syncTransform">
+        /// True, by default, this will sync the <see cref="transform"/> rotation to calculate the axis aligned orientation.
+        /// </param>
+        /// <returns>The total bounds of all renderers attached to this GameObject.
+        /// If no renderers attached, returns a bounds of center and extents 0</returns>
+        public static Bounds GetRenderBounds(this Transform transform, bool syncTransform = true)
+        {
+            // Store current rotation then zero out the rotation so that the bounds
+            // are computed when the object is in its 'axis aligned orientation'.
+            var currentRotation = transform.rotation;
+
+            if (syncTransform)
+            {
+                transform.rotation = Quaternion.identity;
+                Physics.SyncTransforms(); // Update collider bounds
+            }
+
+            var renderers = transform.GetComponentsInChildren<Renderer>();
+
+            if (renderers.Length == 0) { return default; }
+
+            var bounds = renderers[0].bounds;
+
+            for (int i = 1; i < renderers.Length; i++)
+            {
+                bounds.Encapsulate(renderers[i].bounds);
+            }
+
+            if (syncTransform)
+            {
+                // After bounds are computed, restore rotation...
+                // ReSharper disable once Unity.InefficientPropertyAccess
+                transform.rotation = currentRotation;
+                Physics.SyncTransforms();
             }
 
             return bounds;
@@ -261,17 +329,21 @@ namespace XRTK.Extensions
         /// </summary>
         /// <param name="transform"></param>
         /// <param name="direction"></param>
+        /// <param name="bounds"></param>
         /// <returns></returns>
-        public static Vector3 GetPointOnBoundsEdge(this Transform transform, Vector3 direction)
+        public static Vector3 GetPointOnBoundsEdge(this Transform transform, Vector3 direction, Bounds bounds = default)
         {
             if (direction != Vector3.zero)
             {
                 direction /= Mathf.Max(Mathf.Max(Mathf.Abs(direction.x), Mathf.Abs(direction.y), Mathf.Abs(direction.y)));
             }
 
-            var bounds = transform.GetColliderBounds();
-            direction = bounds.center + Vector3.Scale(bounds.size, direction * 0.5f);
-            return direction;
+            if (bounds == default)
+            {
+                bounds = transform.GetColliderBounds();
+            }
+
+            return bounds.center + Vector3.Scale(bounds.size, direction * 0.5f);
         }
 
         /// <summary>
@@ -301,6 +373,11 @@ namespace XRTK.Extensions
 
                     if (t2 == null)
                     {
+                        if (t1 == null)
+                        {
+                            break;
+                        }
+
                         t1 = t1.parent;
                         t2 = t2root;
                     }
@@ -308,6 +385,55 @@ namespace XRTK.Extensions
             }
 
             return null;
+        }
+
+        /// <summary>
+        /// Sets the collider and all child colliders active with the provided value.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="isActive"></param>
+        public static void SetCollidersActive(this Transform transform, bool isActive)
+        {
+            var colliders = transform.GetComponentsInChildren<Collider>();
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                colliders[i].enabled = isActive;
+            }
+        }
+
+        /// <summary>
+        /// Sets the physics layer on this and all child <see cref="Transform"/>s with the provided value.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="layer"></param>
+        public static void SetLayerRecursively(this Transform transform, int layer)
+        {
+            transform.gameObject.SetLayerRecursively(layer);
+        }
+
+        /// <summary>
+        /// Scales the target <see cref="Transform"/> by the provided <see cref="pivot"/> position using the
+        /// provided <see cref="newScale"/>.
+        /// <para/>
+        /// Similar to how <seealso cref="Transform.Rotate(Vector3,Space)"/> works.
+        /// </summary>
+        /// <remarks>
+        /// https://answers.unity.com/questions/14170/scaling-an-object-from-a-different-center.html
+        /// </remarks>
+        /// <param name="target"></param>
+        /// <param name="pivot"></param>
+        /// <param name="newScale"></param>
+        public static void ScaleAround(this Transform target, Vector3 pivot, Vector3 newScale)
+        {
+            var point = target.localPosition;
+            var distance = point - pivot; // diff from object pivot to desired pivot/origin
+            var relativeScale = newScale.x / target.localScale.x; // relative scale factor
+            var finalPosition = pivot + distance * relativeScale; // calc final position post-scale
+
+            // finally, actually perform the scale / translation
+            target.localScale = newScale;
+            target.localPosition = finalPosition;
         }
     }
 }

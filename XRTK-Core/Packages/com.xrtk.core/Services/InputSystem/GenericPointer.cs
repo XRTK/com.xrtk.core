@@ -73,7 +73,13 @@ namespace XRTK.Services.InputSystem.Pointers
         public bool IsFocusLocked { get; set; }
 
         /// <inheritdoc />
+        public bool SyncPointerTargetPosition { get; set; }
+
+        /// <inheritdoc />
         public virtual float PointerExtent { get; set; } = 10f;
+
+        /// <inheritdoc />
+        public virtual float DefaultPointerExtent { get; } = 10f;
 
         /// <inheritdoc />
         public RayStep[] Rays { get; protected set; } = { new RayStep(Vector3.zero, Vector3.forward) };
@@ -82,8 +88,11 @@ namespace XRTK.Services.InputSystem.Pointers
         public LayerMask[] PrioritizedLayerMasksOverride { get; set; }
 
         /// <inheritdoc />
-        public IMixedRealityFocusHandler FocusTarget { get; set; }
+        public IMixedRealityFocusHandler FocusHandler { get; set; }
 
+        /// <inheritdoc />
+        public IMixedRealityInputHandler InputHandler { get; set; }
+        
         /// <inheritdoc />
         public IPointerResult Result { get; set; }
 
@@ -98,9 +107,6 @@ namespace XRTK.Services.InputSystem.Pointers
 
         /// <inheritdoc />
         public float PointerOrientation { get; } = 0f;
-
-        /// <inheritdoc />
-        public bool IsTargetPositionLockedOnFocusLock { get; set; }
 
         /// <inheritdoc />
         public virtual void OnPreRaycast()

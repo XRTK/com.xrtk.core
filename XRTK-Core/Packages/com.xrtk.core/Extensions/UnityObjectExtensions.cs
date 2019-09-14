@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace XRTK.Extensions
@@ -11,7 +12,7 @@ namespace XRTK.Extensions
     public static class UnityObjectExtensions
     {
         /// <summary>
-        /// Enable Unity objects to skip "DontDestroyOnLoad" when editor isn't playing so test runner passes.
+        /// Enable Unity objects to skip <see cref="Object.DontDestroyOnLoad"/> when editor isn't playing so test runner passes.
         /// </summary>
         /// <param name="target"></param>
         public static void DontDestroyOnLoad(this Object target)

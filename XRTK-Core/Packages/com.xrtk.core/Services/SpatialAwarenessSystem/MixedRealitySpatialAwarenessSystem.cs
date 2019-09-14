@@ -4,12 +4,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using XRTK.Definitions;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.EventDatum.SpatialAwarenessSystem;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem.Handlers;
+using XRTK.Providers.SpatialObservers;
 
 namespace XRTK.Services.SpatialAwarenessSystem
 {
@@ -22,8 +22,9 @@ namespace XRTK.Services.SpatialAwarenessSystem
         /// Constructor.
         /// </summary>
         /// <param name="profile"></param>
-        public MixedRealitySpatialAwarenessSystem(BaseMixedRealityProfile profile) : base(profile)
+        public MixedRealitySpatialAwarenessSystem(MixedRealitySpatialAwarenessSystemProfile profile) : base(profile)
         {
+            spatialMeshVisibility = profile.MeshDisplayOption;
         }
 
         private GameObject spatialAwarenessParent = null;
@@ -50,6 +51,26 @@ namespace XRTK.Services.SpatialAwarenessSystem
 
         /// <inheritdoc />
         public GameObject SurfacesParent => surfaceParent != null ? surfaceParent : (surfaceParent = CreateSecondGenerationParent("Surfaces"));
+
+        /// <inheritdoc />
+        public SpatialMeshDisplayOptions SpatialMeshVisibility
+        {
+            get => spatialMeshVisibility;
+            set
+            {
+                spatialMeshVisibility = value;
+
+                foreach (var observer in DetectedSpatialObservers)
+                {
+                    if (observer is BaseMixedRealitySpatialMeshObserver meshObserver)
+                    {
+                        meshObserver.MeshDisplayOption = spatialMeshVisibility;
+                    }
+                }
+            }
+        }
+
+        private SpatialMeshDisplayOptions spatialMeshVisibility;
 
         /// <summary>
         /// Creates a parent that is a child of the Spatial Awareness System parent so that the scene hierarchy does not get overly cluttered.

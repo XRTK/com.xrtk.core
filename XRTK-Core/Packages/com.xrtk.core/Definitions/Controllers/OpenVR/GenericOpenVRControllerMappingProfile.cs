@@ -4,8 +4,10 @@
 using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers;
+using XRTK.Providers.Controllers.OpenVR;
 
-namespace XRTK.Providers.Controllers.OpenVR
+namespace XRTK.Definitions.Controllers.OpenVR
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Mappings/Generic OpenVR Controller Mapping Profile", fileName = "GenericOpenVRControllerMappingProfile")]
     public class GenericOpenVRControllerMappingProfile : BaseMixedRealityControllerMappingProfile

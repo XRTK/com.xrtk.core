@@ -42,7 +42,7 @@ namespace XRTK.Interfaces.InputSystem
         /// </summary>
         /// <param name="pointer"></param>
         /// <param name="focusDetails"></param>
-        bool TryGetFocusDetails(IMixedRealityPointer pointer, out FocusDetails focusDetails);
+        bool TryGetFocusDetails(IMixedRealityPointer pointer, out IPointerResult focusDetails);
 
         /// <summary>
         /// Get the Graphic Event Data for the specified pointing source.

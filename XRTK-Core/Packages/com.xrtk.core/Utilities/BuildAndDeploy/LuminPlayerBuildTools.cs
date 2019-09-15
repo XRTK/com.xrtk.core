@@ -29,7 +29,7 @@ namespace XRTK.Utilities.Build
 
         private static async void PostBuildAction(IBuildInfo buildInfo, BuildReport buildReport)
         {
-            await new Process().RunAsync($@"/C mldb install -u ""{buildInfo.OutputDirectory}""", "cmd.exe", true);
+            await new Process().RunAsync($@"mldb install -u ""{buildInfo.OutputDirectory}""", true);
         }
     }
 }

@@ -8,6 +8,9 @@ namespace XRTK.Providers.Controllers.Hands
 {
     public class LeapMotionHandControllerDataProvider : BaseControllerDataProvider, IMixedRealityPlatformHandControllerDataProvider
     {
+        /// <inheritdoc />
+        public event HandDataUpdate OnHandDataUpdate;
+
         public LeapMotionHandControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {

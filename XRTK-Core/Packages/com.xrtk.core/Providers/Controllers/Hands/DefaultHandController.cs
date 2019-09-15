@@ -15,7 +15,7 @@ using XRTK.Services.InputSystem.Simulation;
 namespace XRTK.Providers.Controllers.Hands
 {
     /// <summary>
-    /// The default hand controller is a human hand.
+    /// The default hand controller implementation.
     /// </summary>
     public class DefaultHandController : BaseHandController
     {
@@ -33,11 +33,6 @@ namespace XRTK.Providers.Controllers.Hands
         private IMixedRealityPlatformHandControllerDataProvider dataProvider;
         private IMixedRealityPlatformHandControllerDataProvider DataProvider => dataProvider ?? (dataProvider = MixedRealityToolkit.GetService<IMixedRealityPlatformHandControllerDataProvider>());
 
-        public DefaultHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-                : base(trackingState, controllerHandedness, inputSource, interactions)
-        {
-        }
-
         /// <summary>
         /// The Windows Mixed Reality Controller default interactions.
         /// </summary>
@@ -51,12 +46,17 @@ namespace XRTK.Providers.Controllers.Hands
             new MixedRealityInteractionMapping(4, "Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger, MixedRealityInputAction.None),
         };
 
+        public DefaultHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+                : base(trackingState, controllerHandedness, inputSource, interactions)
+        {
+        }
+
         public override bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose)
         {
             return jointPoses.TryGetValue(joint, out pose);
         }
 
-        public void UpdateState(SimulatedHandData handData)
+        public override void UpdateState(HandData handData)
         {
             for (int i = 0; i < jointCount; i++)
             {
@@ -75,7 +75,7 @@ namespace XRTK.Providers.Controllers.Hands
             //DataProvider.RaiseHandJointsUpdated(InputSource, ControllerHandedness, jointPoses);
 
             UpdateVelocity();
-            UpdateInteractions(handData);
+            //UpdateInteractions(handData);
         }
 
         public override void SetupDefaultInteractions(Handedness controllerHandedness)

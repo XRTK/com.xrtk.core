@@ -14,7 +14,7 @@ namespace XRTK.Providers.Controllers.Hands
     {
         private EditorSimulatedHandControllerDataProviderProfile profile;
         private long lastHandControllerUpdateTimeStamp = 0;
-        
+
         /// <summary>
         /// Gets left hand simulated data.
         /// </summary>
@@ -29,6 +29,9 @@ namespace XRTK.Providers.Controllers.Hands
         /// If true then keyboard and mouse input are used to simulate hands.
         /// </summary>
         public bool UserInputEnabled { get; private set; } = true;
+
+        /// <inheritdoc />
+        public event HandDataUpdate OnHandDataUpdate;
 
         /////////////////////
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
@@ -90,12 +93,6 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <inheritdoc />
-        public override void Initialize()
-        {
-            ArticulatedHandPose.LoadGesturePoses(profile.GestureDefinitions);
-        }
-
-        /// <inheritdoc />
         public override void Update()
         {
             if (Application.isEditor && profile.SimulateHandTracking && UserInputEnabled)
@@ -118,11 +115,11 @@ namespace XRTK.Providers.Controllers.Hands
                 {
                     if (HandDataLeft.Timestamp > lastHandControllerUpdateTimeStamp)
                     {
-                        UpdateHandInputSource(Handedness.Left, HandDataLeft);
+                        OnHandDataUpdate?.Invoke(Handedness.Left, HandDataLeft);
                     }
                     if (HandDataRight.Timestamp > lastHandControllerUpdateTimeStamp)
                     {
-                        UpdateHandInputSource(Handedness.Right, HandDataRight);
+                        OnHandDataUpdate?.Invoke(Handedness.Right, HandDataRight);
                     }
 
                     lastHandControllerUpdateTimeStamp = currentTime.Ticks;
@@ -168,6 +165,7 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 IsAlwaysVisibleLeft = !IsAlwaysVisibleLeft;
             }
+
             if (Input.GetKeyDown(profile.ToggleRightHandKey))
             {
                 IsAlwaysVisibleRight = !IsAlwaysVisibleRight;
@@ -315,34 +313,6 @@ namespace XRTK.Providers.Controllers.Hands
 
             // 'Default' will not change the gesture
             return defaultGesture.GestureName;
-        }
-
-        // Register input sources for hands based on changes of the data provider
-        private void UpdateHandInputSource(Handedness handedness, SimulatedHandData handData)
-        {
-            //if (!profile.SimulateHandTracking)
-            //{
-            //    RemoveAllHandControllers();
-            //}
-            //else
-            //{
-            //    if (handData != null && handData.IsTracked)
-            //    {
-            //        DefaultHandController controller = GetOrAddHandController(handedness);
-            //        if (controller != null)
-            //        {
-            //            controller.UpdateState(handData);
-            //        }
-            //        else
-            //        {
-            //            Debug.LogError($"Failed to create {typeof(DefaultHandController)} controller");
-            //        }
-            //    }
-            //    else
-            //    {
-            //        RemoveHandController(handedness);
-            //    }
-            //}
         }
     }
 }

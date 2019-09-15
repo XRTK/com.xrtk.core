@@ -4,6 +4,7 @@
 using System;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Services.InputSystem.Simulation
 {
@@ -11,39 +12,13 @@ namespace XRTK.Services.InputSystem.Simulation
     /// Snapshot of simulated hand data.
     /// </summary>
     [Serializable]
-    public class SimulatedHandData
+    public class SimulatedHandData : HandData
     {
-        private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
-
-        /// <summary>
-        /// Timestamp of hand data, as FileTime, e.g. DateTime.UtcNow.ToFileTime().
-        /// </summary>
-        public long Timestamp { get; private set; } = 0;
-
-        [SerializeField]
-        private bool isTracked = false;
-        public bool IsTracked => isTracked;
-
-        [SerializeField]
-        private MixedRealityPose[] joints = new MixedRealityPose[jointCount];
-        public MixedRealityPose[] Joints => joints;
-
         [SerializeField]
         private bool isPinching = false;
         public bool IsPinching => isPinching;
 
         public delegate void HandJointDataGenerator(MixedRealityPose[] jointPositions);
-
-        public void Copy(SimulatedHandData other)
-        {
-            Timestamp = other.Timestamp;
-            isTracked = other.isTracked;
-            isPinching = other.isPinching;
-            for (int i = 0; i < jointCount; ++i)
-            {
-                joints[i] = other.joints[i];
-            }
-        }
 
         public bool Update(bool isTrackedNew, bool isPinchingNew, HandJointDataGenerator generator)
         {
@@ -56,9 +31,9 @@ namespace XRTK.Services.InputSystem.Simulation
         {
             bool handDataChanged = false;
 
-            if (isTracked != isTrackedNew || isPinching != isPinchingNew)
+            if (IsTracked != isTrackedNew || isPinching != isPinchingNew)
             {
-                isTracked = isTrackedNew;
+                IsTracked = isTrackedNew;
                 isPinching = isPinchingNew;
                 handDataChanged = true;
             }
@@ -66,7 +41,7 @@ namespace XRTK.Services.InputSystem.Simulation
             if (Timestamp != timestampNew)
             {
                 Timestamp = timestampNew;
-                if (isTracked)
+                if (IsTracked)
                 {
                     generator(Joints);
                     handDataChanged = true;

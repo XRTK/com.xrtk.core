@@ -147,8 +147,6 @@ namespace XRTK.Services.InputSystem.Simulation
             return null;
         }
 
-#if UNITY_EDITOR
-
         /// <summary>
         /// Load pose data from files.
         /// </summary>
@@ -173,8 +171,6 @@ namespace XRTK.Services.InputSystem.Simulation
 
             return null;
         }
-
-#endif
 
         /// Utility class to serialize hand pose as a dictionary with full joint names
         [Serializable]

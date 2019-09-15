@@ -3,7 +3,6 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
-using XRTK.Definitions.Physics;
 
 namespace XRTK.Interfaces.InputSystem
 {
@@ -80,8 +79,14 @@ namespace XRTK.Interfaces.InputSystem
         /// </summary>
         RaycastResult LastGraphicsRaycastResult { get; }
 
-        Vector3 GrabPointLocalSpace { get; }
-
+        /// <summary>
+        /// The current grab position of the <see cref="CurrentPointerTarget"/> in world space.
+        /// </summary>
         Vector3 GrabPoint { get; }
+
+        /// <summary>
+        /// The current grab position of the <see cref="CurrentPointerTarget"/> in local space.
+        /// </summary>
+        Vector3 GrabPointLocalSpace { get; }
     }
 }

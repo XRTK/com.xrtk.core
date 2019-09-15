@@ -300,20 +300,24 @@ namespace XRTK.Services.InputSystem
                         GrabPoint = CurrentPointerTarget.transform.TransformPoint(GrabPointLocalSpace);
                         GrabPointLocalSpace = CurrentPointerTarget.transform.InverseTransformPoint(GrabPoint);
 
-                        //DebugUtilities.DrawPoint(GrabPoint, Color.red);
-                        //DebugUtilities.DrawPoint(focusDetails.EndPoint, Color.yellow);
+                        // Visualize the relevant points and their relation
+                        if (Application.isEditor && MixedRealityRaycaster.DebugEnabled)
+                        {
+                            DebugUtilities.DrawPoint(GrabPoint, Color.red);
+                            DebugUtilities.DrawPoint(focusDetails.EndPoint, Color.yellow);
 
-                        //Debug.DrawLine(focusDetails.EndPoint, GrabPoint, Color.magenta);
+                            Debug.DrawLine(focusDetails.EndPoint, GrabPoint, Color.magenta);
 
-                        //var currentPosition = CurrentPointerTarget.transform.position;
-                        //var targetPosition = (focusDetails.EndPoint + currentPosition) - GrabPoint;
+                            var currentPosition = CurrentPointerTarget.transform.position;
+                            var targetPosition = (focusDetails.EndPoint + currentPosition) - GrabPoint;
 
-                        //Debug.DrawLine(GrabPoint, currentPosition, Color.magenta);
-                        //Debug.DrawLine(currentPosition, GrabPoint, Color.magenta);
-                        //DebugUtilities.DrawPoint(currentPosition, Color.cyan);
-                        //DebugUtilities.DrawPoint(targetPosition, Color.blue);
+                            Debug.DrawLine(GrabPoint, currentPosition, Color.magenta);
+                            Debug.DrawLine(currentPosition, GrabPoint, Color.magenta);
+                            DebugUtilities.DrawPoint(currentPosition, Color.cyan);
+                            DebugUtilities.DrawPoint(targetPosition, Color.blue);
 
-                        //Debug.DrawLine(targetPosition, currentPosition, Color.blue);
+                            Debug.DrawLine(targetPosition, currentPosition, Color.blue);
+                        }
                     }
                 }
                 else
@@ -395,18 +399,17 @@ namespace XRTK.Services.InputSystem
             /// <inheritdoc />
             public bool Equals(PointerData other)
             {
-                if (ReferenceEquals(null, other)) return false;
-                if (ReferenceEquals(this, other)) return true;
+                if (other is null) { return false; }
+                if (ReferenceEquals(this, other)) { return true; }
                 return Pointer.PointerId == other.Pointer.PointerId;
             }
 
             /// <inheritdoc />
             public override bool Equals(object obj)
             {
-                if (ReferenceEquals(null, obj)) return false;
-                if (ReferenceEquals(this, obj)) return true;
-                if (obj.GetType() != GetType()) return false;
-                return Equals((PointerData)obj);
+                if (obj is null) { return false; }
+                if (ReferenceEquals(this, obj)) { return true; }
+                return obj is PointerData pointer && Equals(pointer);
             }
 
             /// <inheritdoc />
@@ -530,6 +533,7 @@ namespace XRTK.Services.InputSystem
             UpdateFocusedObjects();
         }
 
+        /// <inheritdoc />
         public override void Destroy()
         {
             base.Destroy();

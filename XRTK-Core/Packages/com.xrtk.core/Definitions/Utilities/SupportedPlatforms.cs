@@ -11,12 +11,37 @@ namespace XRTK.Definitions.Utilities
     [Flags]
     public enum SupportedPlatforms
     {
-        WindowsStandalone = 1 << 0,
-        MacStandalone = 1 << 1,
-        LinuxStandalone = 1 << 2,
-        WindowsUniversal = 1 << 3,
-        Lumin = 1 << 4,
-        Android = 1 << 5,
-        iOS = 1 << 6
+        /// <summary>
+        /// Editor.
+        /// </summary>
+        Editor = 1 << 0,
+        /// <summary>
+        /// Windows Standalone platforms.
+        /// </summary>
+        WindowsStandalone = 1 << 1,
+        /// <summary>
+        /// Mac OSX standalone platforms.
+        /// </summary>
+        MacStandalone = 1 << 2,
+        /// <summary>
+        /// Linux standalone platforms.
+        /// </summary>
+        LinuxStandalone = 1 << 3,
+        /// <summary>
+        /// Windows UWP platforms.
+        /// </summary>
+        WindowsUniversal = 1 << 4,
+        /// <summary>
+        /// Magic Leap platform.
+        /// </summary>
+        Lumin = 1 << 5,
+        /// <summary>
+        /// Android mobile platforms
+        /// </summary>
+        Android = 1 << 6,
+        /// <summary>
+        /// Mac iOS mobile platforms.
+        /// </summary>
+        iOS = 1 << 7
     }
 }

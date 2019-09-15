@@ -4,9 +4,6 @@
 [submodule "Submodules/SDK"]
 	path = Submodules/SDK
 	url = https://github.com/XRTK/SDK.git
-[submodule "Submodules/UpmGitExtension"]
-	path = Submodules/UpmGitExtension
-	url = https://github.com/XRTK/UpmGitExtension.git
 [submodule "Submodules/Lumin"]
 	path = Submodules/Lumin
 	url = https://github.com/XRTK/Lumin.git

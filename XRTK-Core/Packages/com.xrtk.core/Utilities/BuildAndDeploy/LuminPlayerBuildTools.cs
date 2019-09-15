@@ -11,7 +11,7 @@ namespace XRTK.Utilities.Build
     /// <summary>
     /// Class containing various utility methods to build a lumin mpk installer from a Unity project.
     /// </summary>
-    public class LuminPlayerBuildTools
+    public static class LuminPlayerBuildTools
     {
         /// <summary>
         /// Build the Lumin Player.
@@ -29,7 +29,7 @@ namespace XRTK.Utilities.Build
 
         private static async void PostBuildAction(IBuildInfo buildInfo, BuildReport buildReport)
         {
-            await new Process().RunAsync($@"mldb install -u ""{buildInfo.OutputDirectory}""", true);
+            await new Process().RunAsync($"mldb install -u \"{buildInfo.OutputDirectory}\"", true);
         }
     }
 }

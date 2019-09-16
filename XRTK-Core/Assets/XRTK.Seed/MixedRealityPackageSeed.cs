@@ -66,7 +66,7 @@ namespace XRTK.Seed
 
                         File.WriteAllText(manifestFilePath, text);
 
-                        Client.Add("com.xrtk.core");
+                        Client.Add("com.xrtk.sdk");
                         AssetDatabase.DeleteAsset("Assets/XRTK.Seed");
                     }
                     else

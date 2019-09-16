@@ -37,6 +37,14 @@ namespace XRTK.Interfaces.InputSystem
         GameObject PreviousPointerTarget { get; }
 
         /// <summary>
+        /// The last <see cref="GameObject"/> hit by the raycast.
+        /// </summary>
+        /// <remarks>
+        /// This may be different from the <see cref="CurrentPointerTarget"/> if the pointer is locked or synced.
+        /// </remarks>
+        GameObject LastHitObject { get; }
+
+        /// <summary>
         /// The index of the step that produced the last raycast hit, 0 when no raycast hit.
         /// </summary>
         int RayStepIndex { get; }
@@ -57,17 +65,9 @@ namespace XRTK.Interfaces.InputSystem
         Vector3 NormalLocalSpace { get; }
 
         /// <summary>
-        /// The offset distance of the <see cref="CurrentPointerTarget"/>'s position minus the <see cref="EndPoint"/>.
+        /// The direction this pointer is traveling, calculated from the last known position.
         /// </summary>
-        /// <remarks>
-        /// If there's isn't an active <see cref="CurrentPointerTarget"/>, then the <see cref="EndPoint"/> position is returned.
-        /// </remarks>
-        Vector3 Offset { get; }
-
-        /// <summary>
-        /// The offset distance of the <see cref="CurrentPointerTarget"/>'s position minus the <see cref="EndPoint"/> in local space.
-        /// </summary>
-        Vector3 OffsetLocalSpace { get; }
+        Vector3 Direction { get; }
 
         /// <summary>
         /// The last physics raycast hit info.
@@ -78,5 +78,15 @@ namespace XRTK.Interfaces.InputSystem
         /// The last raycast hit info for graphic raycast.
         /// </summary>
         RaycastResult LastGraphicsRaycastResult { get; }
+
+        /// <summary>
+        /// The current grab position of the <see cref="CurrentPointerTarget"/> in world space.
+        /// </summary>
+        Vector3 GrabPoint { get; }
+
+        /// <summary>
+        /// The current grab position of the <see cref="CurrentPointerTarget"/> in local space.
+        /// </summary>
+        Vector3 GrabPointLocalSpace { get; }
     }
 }

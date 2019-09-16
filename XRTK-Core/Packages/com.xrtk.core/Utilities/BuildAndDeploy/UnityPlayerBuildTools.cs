@@ -1,3 +1,6 @@
+// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
@@ -91,17 +94,19 @@ namespace XRTK.Utilities.Build
                 EditorUserBuildSettings.SwitchActiveBuildTarget(buildTargetGroup, buildInfo.BuildTarget);
             }
 
+            buildInfo.OutputDirectory = $"{buildInfo.OutputDirectory}/{PlayerSettings.productName}";
+
             switch (buildInfo.BuildTarget)
             {
                 case BuildTarget.Lumin:
-                    buildInfo.OutputDirectory = $"{buildInfo.OutputDirectory}/{PlayerSettings.productName}.mpk";
+                    buildInfo.OutputDirectory += ".mpk";
                     break;
                 case BuildTarget.Android:
-                    buildInfo.OutputDirectory = $"{buildInfo.OutputDirectory}/{PlayerSettings.productName}.apk";
+                    buildInfo.OutputDirectory += ".apk";
                     break;
                 case BuildTarget.StandaloneWindows:
                 case BuildTarget.StandaloneWindows64:
-                    buildInfo.OutputDirectory = $"{buildInfo.OutputDirectory}/{PlayerSettings.productName}.exe";
+                    buildInfo.OutputDirectory += ".exe";
                     break;
             }
 

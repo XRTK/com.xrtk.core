@@ -376,7 +376,7 @@ namespace XRTK.Services
                                 //If the DataProvider cannot be resolved, this is likely just a configuration / package missmatch.  User simply needs to be warned, not errored.
                                 if (controllerDataProvider.DataProviderType.Type == null)
                                 {
-                                    Debug.LogWarning($"Could not load the configured provider ({controllerDataProvider.DataProviderName})\n\ This is most likely because the XRTK UPM package for that provider is currently not registered\nCheck the installed packages in the Unity Package Manager\n\n");
+                                    Debug.LogWarning($"Could not load the configured provider ({controllerDataProvider.DataProviderName})\n\nThis is most likely because the XRTK UPM package for that provider is currently not registered\nCheck the installed packages in the Unity Package Manager\n\n");
                                     continue;
                                 }
 

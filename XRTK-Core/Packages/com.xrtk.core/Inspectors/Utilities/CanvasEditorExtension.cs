@@ -1,9 +1,9 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Extensions;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 using XRTK.Utilities;
@@ -24,30 +24,36 @@ namespace XRTK.Inspectors.Utilities
 
         private bool hasUtility = false;
 
-        private static bool IsUtilityValid
+        private static bool IsUtilityValid =>
+            MixedRealityToolkit.Instance != null &&
+            MixedRealityToolkit.HasActiveProfile &&
+            MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
+            MixedRealityToolkit.GetService<IMixedRealityInputSystem>(false) != null;
+
+        private bool CanUpdateSettings
         {
             get
             {
-                var isInputSystemValid = MixedRealityToolkit.GetService<IMixedRealityInputSystem>(false) != null;
-                return MixedRealityToolkit.Instance != null && 
-                       MixedRealityToolkit.HasActiveProfile && 
-                       MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled && 
-                       isInputSystemValid;
+                if (!MixedRealityToolkit.IsInitialized ||
+                    !MixedRealityPreferences.ShowCanvasUtilityPrompt)
+                {
+                    return false;
+                }
+
+                var utility = canvas.GetComponent<CanvasUtility>();
+
+                hasUtility = utility != null;
+
+                return hasUtility && !IsUtilityValid ||
+                       !hasUtility && IsUtilityValid;
             }
         }
 
         private void OnEnable()
         {
-            if (!MixedRealityToolkit.IsInitialized || !MixedRealityPreferences.ShowCanvasUtilityPrompt) { return; }
-
             canvas = (Canvas)target;
 
-            var utility = canvas.GetComponent<CanvasUtility>();
-
-            hasUtility = utility != null;
-
-            if (hasUtility && !IsUtilityValid ||
-                !hasUtility && IsUtilityValid)
+            if (CanUpdateSettings)
             {
                 UpdateCanvasSettings();
             }
@@ -58,9 +64,7 @@ namespace XRTK.Inspectors.Utilities
             EditorGUI.BeginChangeCheck();
             base.OnInspectorGUI();
 
-            if (EditorGUI.EndChangeCheck() &&
-                MixedRealityToolkit.IsInitialized &&
-                MixedRealityPreferences.ShowCanvasUtilityPrompt)
+            if (EditorGUI.EndChangeCheck() && CanUpdateSettings)
             {
                 UpdateCanvasSettings();
             }
@@ -110,7 +114,6 @@ namespace XRTK.Inspectors.Utilities
             {
                 // Sets it back to MainCamera default.
                 canvas.worldCamera = null;
-                removeUtility = true;
             }
 
             var utility = canvas.GetComponent<CanvasUtility>();

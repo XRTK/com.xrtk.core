@@ -539,6 +539,82 @@ namespace XRTK.Tests.Core
 
         #endregion IMixedRealityExtensionService Tests
 
+        #region TryServiceRetrieval Tests
+
+        [Test]
+        public void Test_06_01_TryRegisterMixedRealityDataProvider()
+        {
+            TestUtilities.InitializeMixedRealityToolkitScene();
+
+            // Register
+            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
+
+            // Retrieve
+            ITestDataProvider1 extensionService1 = null;
+            bool result = MixedRealityToolkit.TryGetService<ITestDataProvider1>(out extensionService1);
+
+            // Tests
+            Assert.IsEmpty(MixedRealityToolkit.ActiveSystems);
+            Assert.AreEqual(1, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+
+            // Tests
+            Assert.IsTrue(result);
+            Assert.IsNotNull(extensionService1);
+        }
+
+        [Test]
+        public void Test_06_02_TryRegisterMixedRealityDataProviderFail()
+        {
+            TestUtilities.InitializeMixedRealityToolkitScene();
+
+            LogAssert.Expect(LogType.Error, "Unable to find ITestDataProvider1 service.");
+
+            // Retrieve
+            ITestDataProvider1 extensionService1 = null;
+            bool result = MixedRealityToolkit.TryGetService<ITestDataProvider1>(out extensionService1);
+
+            // Tests
+            Assert.IsEmpty(MixedRealityToolkit.ActiveSystems);
+            Assert.IsEmpty(MixedRealityToolkit.RegisteredMixedRealityServices);
+
+            // Tests
+            Assert.IsFalse(result);
+            Assert.IsNull(extensionService1);
+        }
+
+        [Test]
+        public void Test_06_03_TryRegisterMixedRealityDataProviderByName()
+        {
+            TestUtilities.InitializeMixedRealityToolkitScene();
+
+            LogAssert.Expect(LogType.Error, "Unable to find Test Data Provider 2 service.");
+
+
+            // Register
+            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
+
+            // Retrieve
+            ITestDataProvider1 extensionService1 = null;
+            ITestDataProvider1 extensionService2 = null;
+
+            bool resultTrue = MixedRealityToolkit.TryGetService<ITestDataProvider1>("Test Data Provider 1", out extensionService1);
+            bool resultFalse = MixedRealityToolkit.TryGetService<ITestDataProvider1>("Test Data Provider 2", out extensionService2);
+
+            // Tests
+            Assert.IsEmpty(MixedRealityToolkit.ActiveSystems);
+            Assert.AreEqual(1, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+
+            // Tests
+            Assert.IsTrue(resultTrue, "Test Data Provider 1 found");
+            Assert.IsFalse(resultFalse, "Test Data Provider 2 not found");
+            Assert.IsNotNull(extensionService1, "Test Data Provider 1 service found");
+            Assert.IsNull(extensionService2, "Test Data Provider 2 service not found");
+        }
+
+        #endregion TryServiceRetrieval Tests
+
+        #region Service Enable/Disable Tests
+
         [Test]
         public void Test_07_01_EnableServicesByType()
         {
@@ -600,10 +676,16 @@ namespace XRTK.Tests.Core
             }
         }
 
+        #endregion Service Enable/Disable Tests
+
+        #region TearDown
+
         [TearDown]
         public void CleanupMixedRealityToolkitTests()
         {
             TestUtilities.CleanupScene();
         }
+
+        #endregion TearDown
     }
 }

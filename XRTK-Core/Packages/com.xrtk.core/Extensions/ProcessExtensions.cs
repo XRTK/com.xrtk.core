@@ -83,6 +83,19 @@ namespace XRTK.Extensions
         /// Starts a process asynchronously.
         /// </summary>
         /// <param name="process">This Process.</param>
+        /// <param name="args">The Process arguments.</param>
+        /// <param name="showDebug">Should output debug code to Editor Console?</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns><see cref="ProcessResult"/></returns>
+        public static async Task<ProcessResult> RunAsync(this Process process, string args, bool showDebug, CancellationToken cancellationToken = default)
+        {
+            return await RunAsync(process, args, string.Empty, showDebug, cancellationToken);
+        }
+
+        /// <summary>
+        /// Starts a process asynchronously.
+        /// </summary>
+        /// <param name="process">This Process.</param>
         /// <param name="application">The process executable to run.</param>
         /// <param name="args">The Process arguments.</param>
         /// <param name="showDebug">Should output debug code to Editor Console?</param>

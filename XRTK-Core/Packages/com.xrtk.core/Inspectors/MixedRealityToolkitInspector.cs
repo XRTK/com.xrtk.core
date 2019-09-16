@@ -132,7 +132,7 @@ namespace XRTK.Inspectors
                 Debug.LogWarning("You must save this scene and assign it to the Start Scene in the XRTK preferences for the Mixed Reality Toolkit to function correctly.");
             }
 
-            EditorSceneManager.EnsureUntitledSceneHasBeenSaved("Mixed Reality Start Scene for the Mixed Reality Toolkit to function correctly.");
+            EditorSceneManager.EnsureUntitledSceneHasBeenSaved("Please ensure the open scene has been saved for the Mixed Reality Toolkit to function correctly.");
 
             Debug.Assert(!string.IsNullOrEmpty(SceneManager.GetActiveScene().path),
                 "Configured Scene must be saved in order to set it as the Start Scene!\n" +

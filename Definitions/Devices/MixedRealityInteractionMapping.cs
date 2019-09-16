@@ -591,6 +591,5 @@ namespace XRTK.Definitions.Devices
         }
 
         #endregion Data Properties
-
     }
 }

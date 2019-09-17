@@ -1526,14 +1526,43 @@ namespace XRTK.Services
         }
 
         /// <summary>
+        /// Generic function used to retrieve a service from the Mixed Reality Toolkit active service registry
+        /// </summary>
+        /// <typeparam name="T">The interface type for the system to be retrieved.  E.G. InputSystem, BoundarySystem.
+        /// *Note type should be the Interface of the system to be retrieved and not the class itself</typeparam>
+        /// <param name="service">The instance of the service class that is registered with the selected Interface</param>
+        /// <param name="showLogs">Should the logs show when services cannot be found?</param>
+        /// <returns>Returns true if the service was found</returns>
+        public static bool TryGetService<T>(out T service, bool showLogs = true) where T : IMixedRealityService
+        {
+            service = GetService<T>(showLogs);
+            return service == null ? false : true;
+        }
+
+        /// <summary>
         /// Retrieve a service from the Mixed Reality Toolkit active service registry
         /// </summary>
-        /// <param name="serviceName">Name of the specific service</param>
+        /// <param name="serviceName">Name of the specific service to search for</param>
         /// <param name="showLogs">Should the logs show when services cannot be found?</param>
         /// <returns>The Mixed Reality Toolkit of the specified type</returns>
         public static T GetService<T>(string serviceName, bool showLogs = true) where T : IMixedRealityService
         {
             return (T)GetService(typeof(T), serviceName, showLogs);
+        }
+
+        /// <summary>
+        /// Generic function used to retrieve a service from the Mixed Reality Toolkit active service registry
+        /// </summary>
+        /// <typeparam name="T">The interface type for the system to be retrieved.  E.G. InputSystem, BoundarySystem.
+        /// *Note type should be the Interface of the system to be retrieved and not the class itself</typeparam>
+        /// <param name="serviceName">Name of the specific service to search for</param>
+        /// <param name="service">The instance of the service class that is registered with the selected Interface</param>
+        /// <param name="showLogs">Should the logs show when services cannot be found?</param>
+        /// <returns>Returns true if the service was found</returns>
+        public static bool TryGetService<T>(string serviceName, out T service, bool showLogs = true) where T : IMixedRealityService
+        {
+            service = (T)GetService(typeof(T), serviceName, showLogs);
+            return service == null ? false : true;
         }
 
         /// <summary>

@@ -142,7 +142,7 @@ namespace XRTK.Extensions
                     return layerId;
                 }
 
-                if (layer.stringValue != string.Empty)
+                if (!string.IsNullOrWhiteSpace(layer.stringValue))
                 {
                     layerId--;
                     // Target layer in use and may be being used for something else already

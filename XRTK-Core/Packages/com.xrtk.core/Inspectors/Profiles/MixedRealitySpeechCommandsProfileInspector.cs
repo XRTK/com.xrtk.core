@@ -4,7 +4,6 @@
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Definitions.InputSystem;
 using XRTK.Inspectors.Utilities;
 

@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Rendering;
 using XRTK.Utilities.Async;
-using XRTK.Utilities.Async.AwaitYieldInstructions;
 using XRTK.Utilities.Gltf.Schema;
 
 namespace XRTK.Utilities.Gltf.Serialization

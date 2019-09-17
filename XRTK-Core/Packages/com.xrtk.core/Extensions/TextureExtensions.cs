@@ -4,7 +4,6 @@
 using XRTK.Utilities.Async;
 using System.Threading.Tasks;
 using UnityEngine;
-using XRTK.Utilities.Async.AwaitYieldInstructions;
 
 namespace XRTK.Extensions
 {

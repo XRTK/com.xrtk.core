@@ -74,7 +74,8 @@ namespace XRTK.Services
                 if (!Application.isPlaying && activeProfile == null)
                 {
                     UnityEditor.Selection.activeObject = Instance;
-                    UnityEditor.EditorGUIUtility.PingObject(Instance);
+                    UnityEditor.EditorApplication.delayCall += () =>
+                        UnityEditor.EditorGUIUtility.PingObject(Instance);
                 }
 #endif // UNITY_EDITOR
                 return activeProfile;
@@ -268,7 +269,8 @@ namespace XRTK.Services
                     {
                         UnityEditor.EditorApplication.isPlaying = false;
                         UnityEditor.Selection.activeObject = Instance;
-                        UnityEditor.EditorGUIUtility.PingObject(Instance);
+                        UnityEditor.EditorApplication.delayCall += () =>
+                            UnityEditor.EditorGUIUtility.PingObject(Instance);
                     }
                 }
 #endif // UNITY_EDITOR
@@ -306,12 +308,10 @@ namespace XRTK.Services
         /// <summary>
         /// Static function to determine if the MixedRealityToolkit class has been initialized or not.
         /// </summary>
-        /// <returns></returns>
         public static bool ConfirmInitialized()
         {
-            // ReSharper disable once UnusedVariable
-            // Assigning the Instance to access is used Implicitly.
-            MixedRealityToolkit access = Instance;
+            var access = Instance;
+            Debug.Assert(IsInitialized.Equals(access != null));
             return IsInitialized;
         }
 

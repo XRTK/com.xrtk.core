@@ -190,7 +190,7 @@ namespace XRTK.Definitions.Devices
         }
 
         /// <summary>
-        /// Creates a copy of a <see cref="MixedRealityGestureMapping"/>
+        /// Creates a copy of a <see cref="MixedRealityInteractionMapping"/>
         /// </summary>
         /// <param name="mixedRealityInteractionMapping"></param>
         public MixedRealityInteractionMapping(MixedRealityInteractionMapping mixedRealityInteractionMapping)

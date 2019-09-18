@@ -181,6 +181,8 @@ namespace XRTK.Providers.Controllers.UnityInput
         protected void UpdateDualAxisData(MixedRealityInteractionMapping interactionMapping)
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.DualAxis);
+            Debug.Assert(!string.IsNullOrEmpty(interactionMapping.AxisCodeX), $"[{interactionMapping.Description}] Dual Axis mapping does not have an Axis defined for X Axis");
+            Debug.Assert(!string.IsNullOrEmpty(interactionMapping.AxisCodeY), $"[{interactionMapping.Description}] Dual Axis mapping does not have an Axis defined for Y Axis");
 
             dualAxisPosition.x = Input.GetAxis(interactionMapping.AxisCodeX);
             dualAxisPosition.y = Input.GetAxis(interactionMapping.AxisCodeY);

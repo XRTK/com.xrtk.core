@@ -22,11 +22,6 @@ namespace XRTK.Interfaces.InputSystem
         float SurfaceCursorDistance { get; }
 
         /// <summary>
-        /// The maximum distance the cursor can be with nothing hit
-        /// </summary>
-        float DefaultCursorDistance { get; set; }
-
-        /// <summary>
         /// Position of the <see cref="IMixedRealityCursor"/>.
         /// </summary>
         Vector3 Position { get; }

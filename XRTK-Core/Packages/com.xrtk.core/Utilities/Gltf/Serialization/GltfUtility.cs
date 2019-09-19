@@ -9,7 +9,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEngine;
 using XRTK.Utilities.Async;
-using XRTK.Utilities.Async.AwaitYieldInstructions;
 using XRTK.Utilities.Async.Internal;
 using XRTK.Utilities.Gltf.Schema;
 

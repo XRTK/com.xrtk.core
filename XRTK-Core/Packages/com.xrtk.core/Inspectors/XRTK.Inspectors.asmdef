@@ -4,8 +4,7 @@
         "XRTK",
         "XRTK.Extensions.EditorClassExtensions",
         "XRTK.Utilities.Build",
-        "XRTK.Utilities.Editor",
-        "Unity.ugui"        
+        "XRTK.Utilities.Editor"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [
@@ -16,5 +15,6 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": []
+    "defineConstraints": [],
+    "versionDefines": []
 }

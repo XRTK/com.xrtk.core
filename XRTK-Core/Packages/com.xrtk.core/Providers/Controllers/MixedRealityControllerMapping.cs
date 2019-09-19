@@ -7,7 +7,6 @@ using XRTK.Attributes;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Providers.Controllers;
 
 namespace XRTK.Providers.Controllers
 {

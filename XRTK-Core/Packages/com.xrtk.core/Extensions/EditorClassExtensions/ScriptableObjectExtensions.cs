@@ -51,7 +51,7 @@ namespace XRTK.Extensions.EditorClassExtensions
 
             EditorUtility.FocusProjectWindow();
             Selection.activeObject = scriptableObject;
-            EditorGUIUtility.PingObject(scriptableObject);
+            EditorApplication.delayCall += () => EditorGUIUtility.PingObject(scriptableObject);
             return scriptableObject;
         }
 
@@ -63,13 +63,12 @@ namespace XRTK.Extensions.EditorClassExtensions
         public static T[] GetAllInstances<T>() where T : ScriptableObject
         {
             // FindAssets uses tags check documentation for more info
-            string[] guids = AssetDatabase.FindAssets($"t:{typeof(T).Name}");
+            var guids = AssetDatabase.FindAssets($"t:{typeof(T).Name}");
             var instances = new T[guids.Length];
 
             for (int i = 0; i < guids.Length; i++)
             {
-                string path = AssetDatabase.GUIDToAssetPath(guids[i]);
-                instances[i] = AssetDatabase.LoadAssetAtPath<T>(path);
+                instances[i] = AssetDatabase.LoadAssetAtPath<T>(AssetDatabase.GUIDToAssetPath(guids[i]));
             }
 
             return instances;

@@ -6,7 +6,7 @@ using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Interfaces.Providers.Controllers;
 
-namespace XRTK.Providers.Controllers
+namespace XRTK.Providers.Controllers.Speech
 {
     /// <summary>
     /// Base dictation data provider to use when implementing <see cref="IMixedRealityDictationDataProvider"/>s

@@ -11,7 +11,6 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Inspectors.Utilities.SymbolicLinks;
 using Debug = UnityEngine.Debug;

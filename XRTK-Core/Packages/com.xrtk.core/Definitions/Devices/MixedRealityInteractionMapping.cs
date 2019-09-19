@@ -91,7 +91,7 @@ namespace XRTK.Definitions.Devices
         /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
         /// <param name="inputType">The physical input device / control</param>
         /// <param name="inputName">Optional inputName value to get input for a coded input identity from a provider</param>
-        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, DeviceInputType inputType, string inputName)
+        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, string inputName, DeviceInputType inputType)
         {
             this.id = id;
             this.description = description;
@@ -165,7 +165,7 @@ namespace XRTK.Definitions.Devices
         /// <param name="axisCodeY">Optional vertical axis value to get axis data from Unity's old input system.</param>
         /// <param name="invertXAxis">Optional horizontal axis invert option.</param>
         /// <param name="invertYAxis">Optional vertical axis invert option.</param> 
-        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, DeviceInputType inputType, MixedRealityInputAction inputAction, string inputName, string axisCodeX = "", string axisCodeY = "", bool invertXAxis = false, bool invertYAxis = false)
+        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, DeviceInputType inputType, string inputName, MixedRealityInputAction inputAction, string axisCodeX = "", string axisCodeY = "", bool invertXAxis = false, bool invertYAxis = false)
         {
             this.id = id;
             this.description = description;
@@ -189,6 +189,10 @@ namespace XRTK.Definitions.Devices
             keyCode = KeyCode.None;
         }
 
+        /// <summary>
+        /// Creates a copy of a <see cref="MixedRealityInteractionMapping"/>
+        /// </summary>
+        /// <param name="mixedRealityInteractionMapping"></param>
         public MixedRealityInteractionMapping(MixedRealityInteractionMapping mixedRealityInteractionMapping)
         {
             id = mixedRealityInteractionMapping.id;
@@ -591,6 +595,5 @@ namespace XRTK.Definitions.Devices
         }
 
         #endregion Data Properties
-
     }
 }

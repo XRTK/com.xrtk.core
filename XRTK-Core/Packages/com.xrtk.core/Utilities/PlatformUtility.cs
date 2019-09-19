@@ -74,7 +74,7 @@ namespace XRTK.Utilities
         public static bool IsPlatformSupported(this UnityEditor.BuildTarget editorBuildTarget, SupportedPlatforms platforms)
         {
             var target = GetSupportedPlatformMask(editorBuildTarget);
-            return IsPlatformSupported(target, platforms);
+            return platforms != 0 && IsPlatformSupported(target, platforms);
         }
 
         private static SupportedPlatforms GetSupportedPlatformMask(UnityEditor.BuildTarget editorBuildTarget)
@@ -108,7 +108,7 @@ namespace XRTK.Utilities
                     break;
             }
 
-            return supportedPlatforms;
+            return supportedPlatforms & SupportedPlatforms.Editor;
         }
 #endif
     }

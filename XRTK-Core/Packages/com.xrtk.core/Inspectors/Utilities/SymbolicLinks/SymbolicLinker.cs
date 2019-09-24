@@ -56,8 +56,8 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// </summary>
         public static bool DebugEnabled
         {
-            get => MixedRealityPreferences.DebugPackageInfo;
-            set => MixedRealityPreferences.DebugPackageInfo = value;
+            get => MixedRealityPreferences.DebugSymbolicInfo;
+            set => MixedRealityPreferences.DebugSymbolicInfo = value;
         }
 
         /// <summary>

@@ -10,7 +10,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using XRTK.Definitions;
-using XRTK.Extensions.EditorClassExtensions;
+using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.Profiles;
 using XRTK.Services;
 
@@ -57,8 +57,11 @@ namespace XRTK.Inspectors
                         var profile = allConfigProfiles[0];
                         activeProfile.objectReferenceValue = profile;
                         changed = true;
-                        Selection.activeObject = profile;
-                        EditorApplication.delayCall += () => EditorGUIUtility.PingObject(profile);
+                        EditorApplication.delayCall += () =>
+                        {
+                            EditorGUIUtility.PingObject(profile);
+                            Selection.activeObject = profile;
+                        };
                     }
 
                     checkChange = false;
@@ -67,10 +70,8 @@ namespace XRTK.Inspectors
                 if (GUILayout.Button("Create new configuration"))
                 {
                     var profile = CreateInstance(nameof(MixedRealityToolkitConfigurationProfile));
-                    profile.CreateAsset("Assets/XRTK.Generated/CustomProfiles");
+                    profile.CreateAsset();
                     activeProfile.objectReferenceValue = profile;
-                    Selection.activeObject = profile;
-                    EditorApplication.delayCall += () => EditorGUIUtility.PingObject(profile);
                 }
             }
 
@@ -86,8 +87,11 @@ namespace XRTK.Inspectors
                         activeProfile.objectReferenceValue = EditorGUIUtility.GetObjectPickerObject();
                         currentPickerWindow = -1;
                         changed = true;
-                        Selection.activeObject = activeProfile.objectReferenceValue;
-                        EditorApplication.delayCall += () => EditorGUIUtility.PingObject(activeProfile.objectReferenceValue);
+                        EditorApplication.delayCall += () =>
+                        {
+                            EditorGUIUtility.PingObject(activeProfile.objectReferenceValue);
+                            Selection.activeObject = activeProfile.objectReferenceValue;
+                        };
                         break;
                 }
             }

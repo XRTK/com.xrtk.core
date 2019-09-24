@@ -188,7 +188,7 @@ namespace XRTK.Utilities.Editor
         public int callbackOrder => 0;
 
         /// <inheritdoc />
-        public void OnActiveBuildTargetChanged(BuildTarget previousTarget, BuildTarget newTarget)
+        void IActiveBuildTargetChanged.OnActiveBuildTargetChanged(BuildTarget previousTarget, BuildTarget newTarget)
         {
             SessionState.SetBool(SessionKey, true);
             CheckSettings();

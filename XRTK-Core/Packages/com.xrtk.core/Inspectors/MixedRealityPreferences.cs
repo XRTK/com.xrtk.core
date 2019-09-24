@@ -100,7 +100,7 @@ namespace XRTK.Inspectors
 
         #region Custom Profile Generation Path
 
-        private static readonly GUIContent GeneratedProfilePathContent = new GUIContent("Generated Profiles Path", "When generating new profiles, their files are saved in this location.");
+        private static readonly GUIContent GeneratedProfilePathContent = new GUIContent("New Generated Profiles Default Path:", "When generating new profiles, their files are saved in this location.");
         private const string PROFILE_GENERATION_PATH_KEY = "_MixedRealityToolkit_Editor_Profile_Generation_Path";
         private const string defaultGenerationPath = "Assets/XRTK.Generated/CustomProfiles";
         private static string profileGenerationPath;
@@ -324,6 +324,7 @@ namespace XRTK.Inspectors
 
             #region Generated Profile path Preference
 
+            EditorGUILayout.LabelField(GeneratedProfilePathContent);
             EditorGUILayout.LabelField(ProfileGenerationPath);
 
             if (GUILayout.Button("Choose a new default path"))

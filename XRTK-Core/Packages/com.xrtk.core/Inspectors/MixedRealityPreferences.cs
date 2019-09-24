@@ -102,7 +102,7 @@ namespace XRTK.Inspectors
 
         private static readonly GUIContent GeneratedProfilePathContent = new GUIContent("New Generated Profiles Default Path:", "When generating new profiles, their files are saved in this location.");
         private const string PROFILE_GENERATION_PATH_KEY = "_MixedRealityToolkit_Editor_Profile_Generation_Path";
-        private const string defaultGenerationPath = "Assets/XRTK.Generated/CustomProfiles";
+        private const string DefaultGenerationPath = "Assets/XRTK.Generated/CustomProfiles";
         private static string profileGenerationPath;
         private static bool isProfilePathPrefLoaded;
 
@@ -116,7 +116,7 @@ namespace XRTK.Inspectors
                 if (!isProfilePathPrefLoaded ||
                     string.IsNullOrWhiteSpace(profileGenerationPath))
                 {
-                    profileGenerationPath = EditorPreferences.Get(PROFILE_GENERATION_PATH_KEY, defaultGenerationPath);
+                    profileGenerationPath = EditorPreferences.Get(PROFILE_GENERATION_PATH_KEY, DefaultGenerationPath);
                     isProfilePathPrefLoaded = true;
                 }
 
@@ -130,7 +130,7 @@ namespace XRTK.Inspectors
                 if (!newPath.Contains(root))
                 {
                     Debug.LogWarning("Path must be in the Assets folder");
-                    newPath = defaultGenerationPath;
+                    newPath = DefaultGenerationPath;
                 }
 
                 newPath = newPath.Replace(root, "Assets");

@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditor.Experimental.SceneManagement;
 using UnityEngine;
 using XRTK.Definitions;
-using XRTK.Extensions.EditorClassExtensions;
+using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.Utilities;
 using XRTK.Services;
 
@@ -133,9 +133,8 @@ namespace XRTK.Inspectors.Profiles
                 if (GUILayout.Button("Create new profiles"))
                 {
                     var profile = CreateInstance(nameof(MixedRealityToolkitConfigurationProfile));
-                    var newProfile = profile.CreateAsset("Assets/XRTK.Generated/CustomProfiles") as MixedRealityToolkitConfigurationProfile;
+                    var newProfile = profile.CreateAsset() as MixedRealityToolkitConfigurationProfile;
                     MixedRealityToolkit.Instance.ActiveProfile = newProfile;
-                    Selection.activeObject = newProfile;
                 }
 
                 EditorGUILayout.EndHorizontal();

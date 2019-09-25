@@ -3,10 +3,11 @@
 
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Extensions.EditorClassExtensions;
+using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.Utilities.SymbolicLinks;
 using XRTK.Utilities.Editor;
 
@@ -97,6 +98,49 @@ namespace XRTK.Inspectors
 
         #endregion Show Canvas Utility Prompt
 
+        #region Custom Profile Generation Path
+
+        private static readonly GUIContent GeneratedProfilePathContent = new GUIContent("New Generated Profiles Default Path:", "When generating new profiles, their files are saved in this location.");
+        private const string PROFILE_GENERATION_PATH_KEY = "_MixedRealityToolkit_Editor_Profile_Generation_Path";
+        private const string DefaultGenerationPath = "Assets/XRTK.Generated/CustomProfiles";
+        private static string profileGenerationPath;
+        private static bool isProfilePathPrefLoaded;
+
+        /// <summary>
+        /// The path where all profile files are created by default.
+        /// </summary>
+        public static string ProfileGenerationPath
+        {
+            get
+            {
+                if (!isProfilePathPrefLoaded ||
+                    string.IsNullOrWhiteSpace(profileGenerationPath))
+                {
+                    profileGenerationPath = EditorPreferences.Get(PROFILE_GENERATION_PATH_KEY, DefaultGenerationPath);
+                    isProfilePathPrefLoaded = true;
+                }
+
+                return profileGenerationPath;
+            }
+            set
+            {
+                var newPath = value;
+                var root = Path.GetFullPath(Application.dataPath).Replace("\\", "/");
+
+                if (!newPath.Contains(root))
+                {
+                    Debug.LogWarning("Path must be in the Assets folder");
+                    newPath = DefaultGenerationPath;
+                }
+
+                newPath = newPath.Replace(root, "Assets");
+
+                EditorPreferences.Set(PROFILE_GENERATION_PATH_KEY, profileGenerationPath = newPath);
+            }
+        }
+
+        #endregion Custom Profile Generation Path
+
         #region Start Scene Preference
 
         private static readonly GUIContent StartSceneContent = new GUIContent("Start Scene", "When pressing play in the editor, a prompt will ask you if you want to switch to this start scene.\n\nThis setting only applies to the currently running project.");
@@ -104,6 +148,9 @@ namespace XRTK.Inspectors
         private static SceneAsset sceneAsset;
         private static bool isStartScenePrefLoaded;
 
+        /// <summary>
+        /// The <see cref="StartSceneAsset"/> for the global start scene.
+        /// </summary>
         public static SceneAsset StartSceneAsset
         {
             get
@@ -163,6 +210,9 @@ namespace XRTK.Inspectors
         private static bool isAutoLoadSymbolicLinksLoaded;
         private static bool autoLoadSymbolicLinks = true;
 
+        /// <summary>
+        /// Should the project automatically load symbolic links?
+        /// </summary>
         public static bool AutoLoadSymbolicLinks
         {
             get
@@ -181,40 +231,39 @@ namespace XRTK.Inspectors
 
                 if (autoLoadSymbolicLinks && SymbolicLinker.Settings == null)
                 {
-                    var profile = ScriptableObject.CreateInstance(nameof(SymbolicLinkSettings));
-                    profile.CreateAsset("Assets/XRTK.Generated/CustomProfiles");
+                    ScriptableObject.CreateInstance(nameof(SymbolicLinkSettings)).CreateAsset();
                 }
             }
         }
 
         #endregion Symbolic Link Preferences
 
-        #region Debug Packages
+        #region Debug Symbolic Links
 
-        private static readonly GUIContent DebugUpmContent = new GUIContent("Debug package loading", "Enable or disable the debug information for package loading.\n\nThis setting only applies to the currently running project.");
-        private const string PACKAGE_DEBUG_KEY = "EnablePackageDebug";
-        private static bool isPackageDebugPrefLoaded;
-        private static bool debugPackageInfo;
+        private static readonly GUIContent DebugSymbolicContent = new GUIContent("Debug symbolic linking", "Enable or disable the debug information for symbolic linking.\n\nThis setting only applies to the currently running project.");
+        private const string SYMBOLIC_DEBUG_KEY = "EnablePackageDebug";
+        private static bool isSymbolicDebugPrefLoaded;
+        private static bool debugSymbolicInfo;
 
         /// <summary>
-        /// Enabled debugging info for the xrtk upm packages.
+        /// Enabled debugging info for the xrtk symbolic linking.
         /// </summary>
-        public static bool DebugPackageInfo
+        public static bool DebugSymbolicInfo
         {
             get
             {
-                if (!isPackageDebugPrefLoaded)
+                if (!isSymbolicDebugPrefLoaded)
                 {
-                    debugPackageInfo = EditorPreferences.Get(PACKAGE_DEBUG_KEY, Application.isBatchMode);
-                    isPackageDebugPrefLoaded = true;
+                    debugSymbolicInfo = EditorPreferences.Get(SYMBOLIC_DEBUG_KEY, Application.isBatchMode);
+                    isSymbolicDebugPrefLoaded = true;
                 }
 
-                return debugPackageInfo;
+                return debugSymbolicInfo;
             }
-            set => EditorPreferences.Set(PACKAGE_DEBUG_KEY, debugPackageInfo = value);
+            set => EditorPreferences.Set(SYMBOLIC_DEBUG_KEY, debugSymbolicInfo = value);
         }
 
-        #endregion Debug Packages
+        #endregion Debug Symbolic Links
 
         [SettingsProvider]
         private static SettingsProvider Preferences()
@@ -232,28 +281,19 @@ namespace XRTK.Inspectors
             var prevLabelWidth = EditorGUIUtility.labelWidth;
             EditorGUIUtility.labelWidth = 200f;
 
-            EditorGUI.BeginChangeCheck();
-            lockProfiles = EditorGUILayout.Toggle(LockContent, LockProfiles);
-
-            // Save the preference
-            if (EditorGUI.EndChangeCheck())
-            {
-                LockProfiles = lockProfiles;
-            }
-
-            if (!LockProfiles)
-            {
-                EditorGUILayout.HelpBox("This is only to be used to update the default SDK profiles. If any edits are made, and not checked into the XRTK's Github, the changes may be lost next time you update your local copy.", MessageType.Warning);
-            }
+            #region Ignore Settings Preference
 
             EditorGUI.BeginChangeCheck();
             ignoreSettingsPrompt = EditorGUILayout.Toggle(IgnoreContent, IgnoreSettingsPrompt);
 
-            // Save the preference
             if (EditorGUI.EndChangeCheck())
             {
                 IgnoreSettingsPrompt = ignoreSettingsPrompt;
             }
+
+            #endregion Ignore Settings Preference
+
+            #region Show Canvas Prompt Preference
 
             EditorGUI.BeginChangeCheck();
             showCanvasUtilityPrompt = EditorGUILayout.Toggle(CanvasUtilityContent, ShowCanvasUtilityPrompt);
@@ -268,6 +308,10 @@ namespace XRTK.Inspectors
                 EditorGUILayout.HelpBox("Be aware that if a Canvas needs to receive input events it is required to have the CanvasUtility attached or the Focus Provider's UIRaycast Camera assigned to the canvas' camera reference.", MessageType.Warning);
             }
 
+            #endregion Show Canvas Prompt Preference
+
+            #region Start Scene Preference
+
             EditorGUI.BeginChangeCheck();
             var startScene = (SceneAsset)EditorGUILayout.ObjectField(StartSceneContent, StartSceneAsset, typeof(SceneAsset), true);
 
@@ -276,6 +320,22 @@ namespace XRTK.Inspectors
                 StartSceneAsset = startScene;
             }
 
+            #endregion Start Scene Preference
+
+            #region Generated Profile path Preference
+
+            EditorGUILayout.LabelField(GeneratedProfilePathContent);
+            EditorGUILayout.LabelField(ProfileGenerationPath);
+
+            if (GUILayout.Button("Choose a new default path"))
+            {
+                ProfileGenerationPath = EditorUtility.OpenFolderPanel("Default Profile Generation Location", profileGenerationPath, string.Empty);
+            }
+
+            #endregion Generated Profile path Preference
+
+            #region Script Reloading Preference
+
             EditorGUI.BeginChangeCheck();
             var scriptLock = EditorGUILayout.Toggle("Is Script Reloading locked?", EditorAssemblyReloadManager.LockReloadAssemblies);
 
@@ -283,6 +343,10 @@ namespace XRTK.Inspectors
             {
                 EditorAssemblyReloadManager.LockReloadAssemblies = scriptLock;
             }
+
+            #endregion Script Reloading Preference
+
+            #region Symbolic Links Preferences
 
             EditorGUI.BeginChangeCheck();
             autoLoadSymbolicLinks = EditorGUILayout.Toggle("Auto Load Symbolic Links", AutoLoadSymbolicLinks);
@@ -321,12 +385,31 @@ namespace XRTK.Inspectors
             }
 
             EditorGUI.BeginChangeCheck();
-            debugPackageInfo = EditorGUILayout.Toggle(DebugUpmContent, DebugPackageInfo);
+            debugSymbolicInfo = EditorGUILayout.Toggle(DebugSymbolicContent, DebugSymbolicInfo);
 
             if (EditorGUI.EndChangeCheck())
             {
-                DebugPackageInfo = debugPackageInfo;
+                DebugSymbolicInfo = debugSymbolicInfo;
             }
+
+            #endregion Symbolic Links Preferences
+
+            #region Lock Profile Preference
+
+            EditorGUI.BeginChangeCheck();
+            lockProfiles = EditorGUILayout.Toggle(LockContent, LockProfiles);
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                LockProfiles = lockProfiles;
+            }
+
+            if (!LockProfiles)
+            {
+                EditorGUILayout.HelpBox("This is only to be used to update the default SDK profiles. If any edits are made, and not checked into the XRTK's Github, the changes may be lost next time you update your local copy.", MessageType.Warning);
+            }
+
+            #endregion Lock Profile Preference
 
             EditorGUIUtility.labelWidth = prevLabelWidth;
         }

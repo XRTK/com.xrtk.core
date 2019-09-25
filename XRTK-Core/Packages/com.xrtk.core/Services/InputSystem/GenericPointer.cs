@@ -73,7 +73,20 @@ namespace XRTK.Services.InputSystem.Pointers
         public bool IsFocusLocked { get; set; }
 
         /// <inheritdoc />
-        public bool SyncPointerTargetPosition { get; set; }
+        public GameObject SyncedTarget
+        {
+            get => syncedTarget = IsFocusLocked ? syncedTarget : null;
+            set
+            {
+                IsFocusLocked = value != null;
+                syncedTarget = value;
+            }
+        }
+
+        private GameObject syncedTarget = null;
+
+        /// <inheritdoc />
+        public Vector3? OverrideGrabPoint { get; set; } = null;
 
         /// <inheritdoc />
         public virtual float PointerExtent { get; set; } = 10f;
@@ -92,7 +105,7 @@ namespace XRTK.Services.InputSystem.Pointers
 
         /// <inheritdoc />
         public IMixedRealityInputHandler InputHandler { get; set; }
-        
+
         /// <inheritdoc />
         public IPointerResult Result { get; set; }
 

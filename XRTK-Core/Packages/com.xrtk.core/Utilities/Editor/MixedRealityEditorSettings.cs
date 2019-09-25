@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using System.IO;
 using UnityEditor;
 using UnityEditor.Build;
@@ -18,21 +17,7 @@ namespace XRTK.Utilities.Editor
     {
         private const string IgnoreKey = "_MixedRealityToolkit_Editor_IgnoreSettingsPrompts";
         private const string SessionKey = "_MixedRealityToolkit_Editor_ShownSettingsPrompts";
-
-        private static string Project_AbsolutePath
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(project_AbsolutePath))
-                {
-                    project_AbsolutePath = Directory.GetParent(Path.GetFullPath(Application.dataPath)).FullName;
-                }
-
-                return project_AbsolutePath;
-            }
-        }
-
-        private static string project_AbsolutePath = string.Empty;
+        private const string PathFinder = "/Utilities/Editor/PathFinder.cs";
 
         /// <summary>
         /// The absolute folder path to the Mixed Reality Toolkit in your project.
@@ -41,12 +26,10 @@ namespace XRTK.Utilities.Editor
         {
             get
             {
-                if (!string.IsNullOrEmpty(mixedRealityToolkit_AbsoluteFolderPath))
+                if (string.IsNullOrWhiteSpace(mixedRealityToolkit_AbsoluteFolderPath))
                 {
-                    return mixedRealityToolkit_AbsoluteFolderPath;
+                    mixedRealityToolkit_AbsoluteFolderPath = Path.GetFullPath(MixedRealityToolkit_RelativeFolderPath).Replace('\\', '/');
                 }
-
-                FindDirectory(Project_AbsolutePath, "Packages/com.xrtk.core", out mixedRealityToolkit_AbsoluteFolderPath);
 
                 return mixedRealityToolkit_AbsoluteFolderPath;
             }
@@ -57,10 +40,24 @@ namespace XRTK.Utilities.Editor
         /// <summary>
         /// The relative folder path to the Mixed Reality Toolkit in relation to the "Assets" or "Packages" folders.
         /// </summary>
-        public static string MixedRealityToolkit_RelativeFolderPath =>
-            !string.IsNullOrEmpty(MixedRealityToolkit_AbsoluteFolderPath)
-                ? MixedRealityToolkit_AbsoluteFolderPath.Replace($"{Project_AbsolutePath}\\", string.Empty)
-                : "Packages/com.xrtk.core";
+        public static string MixedRealityToolkit_RelativeFolderPath
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(mixedRealityToolkit_RelativeFolderPath))
+                {
+                    mixedRealityToolkit_RelativeFolderPath =
+                        AssetDatabase.GetAssetPath(
+                            MonoScript.FromScriptableObject(
+                                ScriptableObject.CreateInstance<PathFinder>()))
+                                    .Replace(PathFinder, string.Empty);
+                }
+
+                return mixedRealityToolkit_RelativeFolderPath;
+            }
+        }
+
+        private static string mixedRealityToolkit_RelativeFolderPath = string.Empty;
 
         /// <summary>
         /// Constructor.
@@ -185,47 +182,13 @@ namespace XRTK.Utilities.Editor
             }
         }
 
-        private static bool FindDirectory(string directoryPathToSearch, string directoryName, out string path)
-        {
-            path = string.Empty;
-            string[] directories;
-
-            try
-            {
-                directories = Directory.GetDirectories(directoryPathToSearch);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-
-            foreach (var directory in directories)
-            {
-                var name = Path.GetFileName(directory);
-
-                if (name != null &&
-                    name.Contains(directoryName))
-                {
-                    path = directory;
-                    return true;
-                }
-
-                if (FindDirectory(directory, directoryName, out path))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
         #region IActiveBuildTargetChanged Implementation
 
         /// <inheritdoc />
         public int callbackOrder => 0;
 
         /// <inheritdoc />
-        public void OnActiveBuildTargetChanged(BuildTarget previousTarget, BuildTarget newTarget)
+        void IActiveBuildTargetChanged.OnActiveBuildTargetChanged(BuildTarget previousTarget, BuildTarget newTarget)
         {
             SessionState.SetBool(SessionKey, true);
             CheckSettings();

@@ -4,7 +4,7 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
-using XRTK.Extensions.EditorClassExtensions;
+using XRTK.Inspectors.Extensions;
 using XRTK.Services;
 using XRTK.Utilities.Async;
 
@@ -144,7 +144,7 @@ namespace XRTK.Inspectors.Profiles
         {
             profileToCopy = profile;
             var newProfile = CreateInstance(profile.GetType().ToString());
-            profile = newProfile.CreateAsset("Assets/XRTK.Generated/CustomProfiles") as BaseMixedRealityProfile;
+            profile = newProfile.CreateAsset(false) as BaseMixedRealityProfile;
             Debug.Assert(profile != null);
 
             await new WaitUntil(() => profileToCopy != profile);
@@ -152,6 +152,7 @@ namespace XRTK.Inspectors.Profiles
             Selection.activeObject = null;
             PasteProfileValues();
             Selection.activeObject = profile;
+            EditorGUIUtility.PingObject(profile);
 
             if (!profileToCopy.IsCustomProfile)
             {

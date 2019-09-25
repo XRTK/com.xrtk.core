@@ -21,6 +21,6 @@ namespace XRTK.Definitions.InputSystem
     {
         // TODO Add conditions to raise action
 
-        public Action Action { get; set; }
+        public MixedRealityInputAction Action { get; set; }
     }
 }

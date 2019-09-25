@@ -7,7 +7,6 @@ using UnityEngine;
 using UnityEngine.Rendering;
 using XRTK.Utilities;
 using XRTK.Utilities.Rendering;
-using Object = UnityEngine.Object;
 
 namespace XRTK.Inspectors
 {

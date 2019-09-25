@@ -2299,30 +2299,30 @@ references:
   commentId: T:XRTK.Definitions.Devices.MixedRealityInteractionMapping
   fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping
   nameWithType: MixedRealityInteractionMapping
-- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,System.String)
-  name: MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, String)
-  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_System_String_
-  commentId: M:XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,System.String)
-  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.MixedRealityInteractionMapping(System.UInt32, System.String, XRTK.Definitions.Utilities.AxisType, XRTK.Definitions.Devices.DeviceInputType, System.String)
-  nameWithType: MixedRealityInteractionMapping.MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, String)
+- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,System.String,XRTK.Definitions.Devices.DeviceInputType)
+  name: MixedRealityInteractionMapping(UInt32, String, AxisType, String, DeviceInputType)
+  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_System_String_XRTK_Definitions_Devices_DeviceInputType_
+  commentId: M:XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,System.String,XRTK.Definitions.Devices.DeviceInputType)
+  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.MixedRealityInteractionMapping(System.UInt32, System.String, XRTK.Definitions.Utilities.AxisType, System.String, XRTK.Definitions.Devices.DeviceInputType)
+  nameWithType: MixedRealityInteractionMapping.MixedRealityInteractionMapping(UInt32, String, AxisType, String, DeviceInputType)
 - uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,System.String,System.String,System.Boolean,System.Boolean)
   name: MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, String, String, Boolean, Boolean)
   href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_System_String_System_String_System_Boolean_System_Boolean_
   commentId: M:XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,System.String,System.String,System.Boolean,System.Boolean)
   fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.MixedRealityInteractionMapping(System.UInt32, System.String, XRTK.Definitions.Utilities.AxisType, XRTK.Definitions.Devices.DeviceInputType, System.String, System.String, System.Boolean, System.Boolean)
   nameWithType: MixedRealityInteractionMapping.MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, String, String, Boolean, Boolean)
+- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,System.String,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.String,System.String,System.Boolean,System.Boolean)
+  name: MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, String, MixedRealityInputAction, String, String, Boolean, Boolean)
+  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_System_String_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_String_System_String_System_Boolean_System_Boolean_
+  commentId: M:XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,System.String,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.String,System.String,System.Boolean,System.Boolean)
+  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.MixedRealityInteractionMapping(System.UInt32, System.String, XRTK.Definitions.Utilities.AxisType, XRTK.Definitions.Devices.DeviceInputType, System.String, XRTK.Definitions.InputSystem.MixedRealityInputAction, System.String, System.String, System.Boolean, System.Boolean)
+  nameWithType: MixedRealityInteractionMapping.MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, String, MixedRealityInputAction, String, String, Boolean, Boolean)
 - uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,UnityEngine.KeyCode)
   name: MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, KeyCode)
   href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_UnityEngine_KeyCode_
   commentId: M:XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,UnityEngine.KeyCode)
   fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.MixedRealityInteractionMapping(System.UInt32, System.String, XRTK.Definitions.Utilities.AxisType, XRTK.Definitions.Devices.DeviceInputType, UnityEngine.KeyCode)
   nameWithType: MixedRealityInteractionMapping.MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, KeyCode)
-- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.String,System.String,System.String,System.Boolean,System.Boolean)
-  name: MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, MixedRealityInputAction, String, String, String, Boolean, Boolean)
-  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_String_System_String_System_String_System_Boolean_System_Boolean_
-  commentId: M:XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.String,System.String,System.String,System.Boolean,System.Boolean)
-  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.MixedRealityInteractionMapping(System.UInt32, System.String, XRTK.Definitions.Utilities.AxisType, XRTK.Definitions.Devices.DeviceInputType, XRTK.Definitions.InputSystem.MixedRealityInputAction, System.String, System.String, System.String, System.Boolean, System.Boolean)
-  nameWithType: MixedRealityInteractionMapping.MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, MixedRealityInputAction, String, String, String, Boolean, Boolean)
 - uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.#ctor(System.UInt32,System.String,XRTK.Definitions.Utilities.AxisType,XRTK.Definitions.Devices.DeviceInputType,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.KeyCode,System.String,System.String,System.Boolean,System.Boolean)
   name: MixedRealityInteractionMapping(UInt32, String, AxisType, DeviceInputType, MixedRealityInputAction, KeyCode, String, String, Boolean, Boolean)
   href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping__ctor_System_UInt32_System_String_XRTK_Definitions_Utilities_AxisType_XRTK_Definitions_Devices_DeviceInputType_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_KeyCode_System_String_System_String_System_Boolean_System_Boolean_
@@ -5208,6 +5208,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.Physics.FocusDetails.EndPointLocalSpace
   nameWithType: FocusDetails.EndPointLocalSpace
+- uid: XRTK.Definitions.Physics.FocusDetails.HitObject
+  name: HitObject
+  href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_HitObject
+  commentId: P:XRTK.Definitions.Physics.FocusDetails.HitObject
+  fullName: XRTK.Definitions.Physics.FocusDetails.HitObject
+  nameWithType: FocusDetails.HitObject
+- uid: XRTK.Definitions.Physics.FocusDetails.HitObject*
+  name: HitObject
+  href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_HitObject_
+  commentId: Overload:XRTK.Definitions.Physics.FocusDetails.HitObject
+  isSpec: "True"
+  fullName: XRTK.Definitions.Physics.FocusDetails.HitObject
+  nameWithType: FocusDetails.HitObject
 - uid: XRTK.Definitions.Physics.FocusDetails.LastGraphicsRaycastResult
   name: LastGraphicsRaycastResult
   href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_LastGraphicsRaycastResult
@@ -5260,19 +5273,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.Physics.FocusDetails.NormalLocalSpace
   nameWithType: FocusDetails.NormalLocalSpace
-- uid: XRTK.Definitions.Physics.FocusDetails.Object
-  name: Object
-  href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_Object
-  commentId: P:XRTK.Definitions.Physics.FocusDetails.Object
-  fullName: XRTK.Definitions.Physics.FocusDetails.Object
-  nameWithType: FocusDetails.Object
-- uid: XRTK.Definitions.Physics.FocusDetails.Object*
-  name: Object
-  href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_Object_
-  commentId: Overload:XRTK.Definitions.Physics.FocusDetails.Object
-  isSpec: "True"
-  fullName: XRTK.Definitions.Physics.FocusDetails.Object
-  nameWithType: FocusDetails.Object
 - uid: XRTK.Definitions.Physics.FocusDetails.RayDistance
   name: RayDistance
   href: api/XRTK.Definitions.Physics.FocusDetails.html#XRTK_Definitions_Physics_FocusDetails_RayDistance
@@ -5316,6 +5316,12 @@ references:
   commentId: T:XRTK.Definitions.Physics.RayStep
   fullName: XRTK.Definitions.Physics.RayStep
   nameWithType: RayStep
+- uid: XRTK.Definitions.Physics.RayStep.#ctor(UnityEngine.Ray,System.Single)
+  name: RayStep(Ray, Single)
+  href: api/XRTK.Definitions.Physics.RayStep.html#XRTK_Definitions_Physics_RayStep__ctor_UnityEngine_Ray_System_Single_
+  commentId: M:XRTK.Definitions.Physics.RayStep.#ctor(UnityEngine.Ray,System.Single)
+  fullName: XRTK.Definitions.Physics.RayStep.RayStep(UnityEngine.Ray, System.Single)
+  nameWithType: RayStep.RayStep(Ray, Single)
 - uid: XRTK.Definitions.Physics.RayStep.#ctor(UnityEngine.Vector3,UnityEngine.Vector3)
   name: RayStep(Vector3, Vector3)
   href: api/XRTK.Definitions.Physics.RayStep.html#XRTK_Definitions_Physics_RayStep__ctor_UnityEngine_Vector3_UnityEngine_Vector3_
@@ -6905,6 +6911,12 @@ references:
   commentId: F:XRTK.Definitions.Utilities.SupportedPlatforms.Android
   fullName: XRTK.Definitions.Utilities.SupportedPlatforms.Android
   nameWithType: SupportedPlatforms.Android
+- uid: XRTK.Definitions.Utilities.SupportedPlatforms.Editor
+  name: Editor
+  href: api/XRTK.Definitions.Utilities.SupportedPlatforms.html#XRTK_Definitions_Utilities_SupportedPlatforms_Editor
+  commentId: F:XRTK.Definitions.Utilities.SupportedPlatforms.Editor
+  fullName: XRTK.Definitions.Utilities.SupportedPlatforms.Editor
+  nameWithType: SupportedPlatforms.Editor
 - uid: XRTK.Definitions.Utilities.SupportedPlatforms.iOS
   name: iOS
   href: api/XRTK.Definitions.Utilities.SupportedPlatforms.html#XRTK_Definitions_Utilities_SupportedPlatforms_iOS
@@ -9795,6 +9807,12 @@ references:
   commentId: M:XRTK.Extensions.ProcessExtensions.RunAsync(System.Diagnostics.Process,System.Diagnostics.ProcessStartInfo,System.Boolean,System.Threading.CancellationToken)
   fullName: XRTK.Extensions.ProcessExtensions.RunAsync(System.Diagnostics.Process, System.Diagnostics.ProcessStartInfo, System.Boolean, System.Threading.CancellationToken)
   nameWithType: ProcessExtensions.RunAsync(Process, ProcessStartInfo, Boolean, CancellationToken)
+- uid: XRTK.Extensions.ProcessExtensions.RunAsync(System.Diagnostics.Process,System.String,System.Boolean,System.Threading.CancellationToken)
+  name: RunAsync(Process, String, Boolean, CancellationToken)
+  href: api/XRTK.Extensions.ProcessExtensions.html#XRTK_Extensions_ProcessExtensions_RunAsync_System_Diagnostics_Process_System_String_System_Boolean_System_Threading_CancellationToken_
+  commentId: M:XRTK.Extensions.ProcessExtensions.RunAsync(System.Diagnostics.Process,System.String,System.Boolean,System.Threading.CancellationToken)
+  fullName: XRTK.Extensions.ProcessExtensions.RunAsync(System.Diagnostics.Process, System.String, System.Boolean, System.Threading.CancellationToken)
+  nameWithType: ProcessExtensions.RunAsync(Process, String, Boolean, CancellationToken)
 - uid: XRTK.Extensions.ProcessExtensions.RunAsync(System.Diagnostics.Process,System.String,System.String,System.Boolean,System.Threading.CancellationToken)
   name: RunAsync(Process, String, String, Boolean, CancellationToken)
   href: api/XRTK.Extensions.ProcessExtensions.html#XRTK_Extensions_ProcessExtensions_RunAsync_System_Diagnostics_Process_System_String_System_String_System_Boolean_System_Threading_CancellationToken_
@@ -15794,19 +15812,6 @@ references:
   commentId: T:XRTK.Interfaces.InputSystem.IMixedRealityCursor
   fullName: XRTK.Interfaces.InputSystem.IMixedRealityCursor
   nameWithType: IMixedRealityCursor
-- uid: XRTK.Interfaces.InputSystem.IMixedRealityCursor.DefaultCursorDistance
-  name: DefaultCursorDistance
-  href: api/XRTK.Interfaces.InputSystem.IMixedRealityCursor.html#XRTK_Interfaces_InputSystem_IMixedRealityCursor_DefaultCursorDistance
-  commentId: P:XRTK.Interfaces.InputSystem.IMixedRealityCursor.DefaultCursorDistance
-  fullName: XRTK.Interfaces.InputSystem.IMixedRealityCursor.DefaultCursorDistance
-  nameWithType: IMixedRealityCursor.DefaultCursorDistance
-- uid: XRTK.Interfaces.InputSystem.IMixedRealityCursor.DefaultCursorDistance*
-  name: DefaultCursorDistance
-  href: api/XRTK.Interfaces.InputSystem.IMixedRealityCursor.html#XRTK_Interfaces_InputSystem_IMixedRealityCursor_DefaultCursorDistance_
-  commentId: Overload:XRTK.Interfaces.InputSystem.IMixedRealityCursor.DefaultCursorDistance
-  isSpec: "True"
-  fullName: XRTK.Interfaces.InputSystem.IMixedRealityCursor.DefaultCursorDistance
-  nameWithType: IMixedRealityCursor.DefaultCursorDistance
 - uid: XRTK.Interfaces.InputSystem.IMixedRealityCursor.GameObjectReference
   name: GameObjectReference
   href: api/XRTK.Interfaces.InputSystem.IMixedRealityCursor.html#XRTK_Interfaces_InputSystem_IMixedRealityCursor_GameObjectReference
@@ -17215,6 +17220,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.InputSystem.IMixedRealityPointer.OnPreRaycast
   nameWithType: IMixedRealityPointer.OnPreRaycast
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityPointer.OverrideGrabPoint
+  name: OverrideGrabPoint
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityPointer.html#XRTK_Interfaces_InputSystem_IMixedRealityPointer_OverrideGrabPoint
+  commentId: P:XRTK.Interfaces.InputSystem.IMixedRealityPointer.OverrideGrabPoint
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityPointer.OverrideGrabPoint
+  nameWithType: IMixedRealityPointer.OverrideGrabPoint
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityPointer.OverrideGrabPoint*
+  name: OverrideGrabPoint
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityPointer.html#XRTK_Interfaces_InputSystem_IMixedRealityPointer_OverrideGrabPoint_
+  commentId: Overload:XRTK.Interfaces.InputSystem.IMixedRealityPointer.OverrideGrabPoint
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityPointer.OverrideGrabPoint
+  nameWithType: IMixedRealityPointer.OverrideGrabPoint
 - uid: XRTK.Interfaces.InputSystem.IMixedRealityPointer.PointerExtent
   name: PointerExtent
   href: api/XRTK.Interfaces.InputSystem.IMixedRealityPointer.html#XRTK_Interfaces_InputSystem_IMixedRealityPointer_PointerExtent
@@ -17345,19 +17363,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.InputSystem.IMixedRealityPointer.SphereCastRadius
   nameWithType: IMixedRealityPointer.SphereCastRadius
-- uid: XRTK.Interfaces.InputSystem.IMixedRealityPointer.SyncPointerTargetPosition
-  name: SyncPointerTargetPosition
-  href: api/XRTK.Interfaces.InputSystem.IMixedRealityPointer.html#XRTK_Interfaces_InputSystem_IMixedRealityPointer_SyncPointerTargetPosition
-  commentId: P:XRTK.Interfaces.InputSystem.IMixedRealityPointer.SyncPointerTargetPosition
-  fullName: XRTK.Interfaces.InputSystem.IMixedRealityPointer.SyncPointerTargetPosition
-  nameWithType: IMixedRealityPointer.SyncPointerTargetPosition
-- uid: XRTK.Interfaces.InputSystem.IMixedRealityPointer.SyncPointerTargetPosition*
-  name: SyncPointerTargetPosition
-  href: api/XRTK.Interfaces.InputSystem.IMixedRealityPointer.html#XRTK_Interfaces_InputSystem_IMixedRealityPointer_SyncPointerTargetPosition_
-  commentId: Overload:XRTK.Interfaces.InputSystem.IMixedRealityPointer.SyncPointerTargetPosition
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityPointer.SyncedTarget
+  name: SyncedTarget
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityPointer.html#XRTK_Interfaces_InputSystem_IMixedRealityPointer_SyncedTarget
+  commentId: P:XRTK.Interfaces.InputSystem.IMixedRealityPointer.SyncedTarget
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityPointer.SyncedTarget
+  nameWithType: IMixedRealityPointer.SyncedTarget
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityPointer.SyncedTarget*
+  name: SyncedTarget
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityPointer.html#XRTK_Interfaces_InputSystem_IMixedRealityPointer_SyncedTarget_
+  commentId: Overload:XRTK.Interfaces.InputSystem.IMixedRealityPointer.SyncedTarget
   isSpec: "True"
-  fullName: XRTK.Interfaces.InputSystem.IMixedRealityPointer.SyncPointerTargetPosition
-  nameWithType: IMixedRealityPointer.SyncPointerTargetPosition
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityPointer.SyncedTarget
+  nameWithType: IMixedRealityPointer.SyncedTarget
 - uid: XRTK.Interfaces.InputSystem.IMixedRealityPointer.TeleportHotSpot
   name: TeleportHotSpot
   href: api/XRTK.Interfaces.InputSystem.IMixedRealityPointer.html#XRTK_Interfaces_InputSystem_IMixedRealityPointer_TeleportHotSpot
@@ -17470,6 +17488,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.InputSystem.IPointerResult.CurrentPointerTarget
   nameWithType: IPointerResult.CurrentPointerTarget
+- uid: XRTK.Interfaces.InputSystem.IPointerResult.Direction
+  name: Direction
+  href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_Direction
+  commentId: P:XRTK.Interfaces.InputSystem.IPointerResult.Direction
+  fullName: XRTK.Interfaces.InputSystem.IPointerResult.Direction
+  nameWithType: IPointerResult.Direction
+- uid: XRTK.Interfaces.InputSystem.IPointerResult.Direction*
+  name: Direction
+  href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_Direction_
+  commentId: Overload:XRTK.Interfaces.InputSystem.IPointerResult.Direction
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.IPointerResult.Direction
+  nameWithType: IPointerResult.Direction
 - uid: XRTK.Interfaces.InputSystem.IPointerResult.EndPoint
   name: EndPoint
   href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_EndPoint
@@ -17496,6 +17527,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.InputSystem.IPointerResult.EndPointLocalSpace
   nameWithType: IPointerResult.EndPointLocalSpace
+- uid: XRTK.Interfaces.InputSystem.IPointerResult.GrabPoint
+  name: GrabPoint
+  href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_GrabPoint
+  commentId: P:XRTK.Interfaces.InputSystem.IPointerResult.GrabPoint
+  fullName: XRTK.Interfaces.InputSystem.IPointerResult.GrabPoint
+  nameWithType: IPointerResult.GrabPoint
+- uid: XRTK.Interfaces.InputSystem.IPointerResult.GrabPoint*
+  name: GrabPoint
+  href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_GrabPoint_
+  commentId: Overload:XRTK.Interfaces.InputSystem.IPointerResult.GrabPoint
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.IPointerResult.GrabPoint
+  nameWithType: IPointerResult.GrabPoint
+- uid: XRTK.Interfaces.InputSystem.IPointerResult.GrabPointLocalSpace
+  name: GrabPointLocalSpace
+  href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_GrabPointLocalSpace
+  commentId: P:XRTK.Interfaces.InputSystem.IPointerResult.GrabPointLocalSpace
+  fullName: XRTK.Interfaces.InputSystem.IPointerResult.GrabPointLocalSpace
+  nameWithType: IPointerResult.GrabPointLocalSpace
+- uid: XRTK.Interfaces.InputSystem.IPointerResult.GrabPointLocalSpace*
+  name: GrabPointLocalSpace
+  href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_GrabPointLocalSpace_
+  commentId: Overload:XRTK.Interfaces.InputSystem.IPointerResult.GrabPointLocalSpace
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.IPointerResult.GrabPointLocalSpace
+  nameWithType: IPointerResult.GrabPointLocalSpace
 - uid: XRTK.Interfaces.InputSystem.IPointerResult.LastGraphicsRaycastResult
   name: LastGraphicsRaycastResult
   href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_LastGraphicsRaycastResult
@@ -17509,6 +17566,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.InputSystem.IPointerResult.LastGraphicsRaycastResult
   nameWithType: IPointerResult.LastGraphicsRaycastResult
+- uid: XRTK.Interfaces.InputSystem.IPointerResult.LastHitObject
+  name: LastHitObject
+  href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_LastHitObject
+  commentId: P:XRTK.Interfaces.InputSystem.IPointerResult.LastHitObject
+  fullName: XRTK.Interfaces.InputSystem.IPointerResult.LastHitObject
+  nameWithType: IPointerResult.LastHitObject
+- uid: XRTK.Interfaces.InputSystem.IPointerResult.LastHitObject*
+  name: LastHitObject
+  href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_LastHitObject_
+  commentId: Overload:XRTK.Interfaces.InputSystem.IPointerResult.LastHitObject
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.IPointerResult.LastHitObject
+  nameWithType: IPointerResult.LastHitObject
 - uid: XRTK.Interfaces.InputSystem.IPointerResult.LastRaycastHit
   name: LastRaycastHit
   href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_LastRaycastHit
@@ -17548,32 +17618,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.InputSystem.IPointerResult.NormalLocalSpace
   nameWithType: IPointerResult.NormalLocalSpace
-- uid: XRTK.Interfaces.InputSystem.IPointerResult.Offset
-  name: Offset
-  href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_Offset
-  commentId: P:XRTK.Interfaces.InputSystem.IPointerResult.Offset
-  fullName: XRTK.Interfaces.InputSystem.IPointerResult.Offset
-  nameWithType: IPointerResult.Offset
-- uid: XRTK.Interfaces.InputSystem.IPointerResult.Offset*
-  name: Offset
-  href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_Offset_
-  commentId: Overload:XRTK.Interfaces.InputSystem.IPointerResult.Offset
-  isSpec: "True"
-  fullName: XRTK.Interfaces.InputSystem.IPointerResult.Offset
-  nameWithType: IPointerResult.Offset
-- uid: XRTK.Interfaces.InputSystem.IPointerResult.OffsetLocalSpace
-  name: OffsetLocalSpace
-  href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_OffsetLocalSpace
-  commentId: P:XRTK.Interfaces.InputSystem.IPointerResult.OffsetLocalSpace
-  fullName: XRTK.Interfaces.InputSystem.IPointerResult.OffsetLocalSpace
-  nameWithType: IPointerResult.OffsetLocalSpace
-- uid: XRTK.Interfaces.InputSystem.IPointerResult.OffsetLocalSpace*
-  name: OffsetLocalSpace
-  href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_OffsetLocalSpace_
-  commentId: Overload:XRTK.Interfaces.InputSystem.IPointerResult.OffsetLocalSpace
-  isSpec: "True"
-  fullName: XRTK.Interfaces.InputSystem.IPointerResult.OffsetLocalSpace
-  nameWithType: IPointerResult.OffsetLocalSpace
 - uid: XRTK.Interfaces.InputSystem.IPointerResult.PreviousPointerTarget
   name: PreviousPointerTarget
   href: api/XRTK.Interfaces.InputSystem.IPointerResult.html#XRTK_Interfaces_InputSystem_IPointerResult_PreviousPointerTarget
@@ -19468,15 +19512,15 @@ references:
   commentId: T:XRTK.Oculus.Controllers.BaseOculusController
   fullName: XRTK.Oculus.Controllers.BaseOculusController
   nameWithType: BaseOculusController
-- uid: XRTK.Oculus.Controllers.BaseOculusController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  name: BaseOculusController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
-  href: api/XRTK.Oculus.Controllers.BaseOculusController.html#XRTK_Oculus_Controllers_BaseOculusController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___
-  commentId: M:XRTK.Oculus.Controllers.BaseOculusController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  name.vb: BaseOculusController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
-  fullName: XRTK.Oculus.Controllers.BaseOculusController.BaseOculusController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
-  fullName.vb: XRTK.Oculus.Controllers.BaseOculusController.BaseOculusController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping())
-  nameWithType: BaseOculusController.BaseOculusController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])
-  nameWithType.vb: BaseOculusController.BaseOculusController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping())
+- uid: XRTK.Oculus.Controllers.BaseOculusController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Oculus.OculusApi.Controller,XRTK.Oculus.OculusApi.Node,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name: BaseOculusController(TrackingState, Handedness, OculusApi.Controller, OculusApi.Node, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  href: api/XRTK.Oculus.Controllers.BaseOculusController.html#XRTK_Oculus_Controllers_BaseOculusController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Oculus_OculusApi_Controller_XRTK_Oculus_OculusApi_Node_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___
+  commentId: M:XRTK.Oculus.Controllers.BaseOculusController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Oculus.OculusApi.Controller,XRTK.Oculus.OculusApi.Node,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  name.vb: BaseOculusController(TrackingState, Handedness, OculusApi.Controller, OculusApi.Node, IMixedRealityInputSource, MixedRealityInteractionMapping())
+  fullName: XRTK.Oculus.Controllers.BaseOculusController.BaseOculusController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Oculus.OculusApi.Controller, XRTK.Oculus.OculusApi.Node, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping[])
+  fullName.vb: XRTK.Oculus.Controllers.BaseOculusController.BaseOculusController(XRTK.Definitions.Devices.TrackingState, XRTK.Definitions.Utilities.Handedness, XRTK.Oculus.OculusApi.Controller, XRTK.Oculus.OculusApi.Node, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, XRTK.Definitions.Devices.MixedRealityInteractionMapping())
+  nameWithType: BaseOculusController.BaseOculusController(TrackingState, Handedness, OculusApi.Controller, OculusApi.Node, IMixedRealityInputSource, MixedRealityInteractionMapping[])
+  nameWithType.vb: BaseOculusController.BaseOculusController(TrackingState, Handedness, OculusApi.Controller, OculusApi.Node, IMixedRealityInputSource, MixedRealityInteractionMapping())
 - uid: XRTK.Oculus.Controllers.BaseOculusController.#ctor*
   name: BaseOculusController
   href: api/XRTK.Oculus.Controllers.BaseOculusController.html#XRTK_Oculus_Controllers_BaseOculusController__ctor_
@@ -19484,18 +19528,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.Controllers.BaseOculusController.BaseOculusController
   nameWithType: BaseOculusController.BaseOculusController
-- uid: XRTK.Oculus.Controllers.BaseOculusController.controllerType
-  name: controllerType
-  href: api/XRTK.Oculus.Controllers.BaseOculusController.html#XRTK_Oculus_Controllers_BaseOculusController_controllerType
-  commentId: F:XRTK.Oculus.Controllers.BaseOculusController.controllerType
-  fullName: XRTK.Oculus.Controllers.BaseOculusController.controllerType
-  nameWithType: BaseOculusController.controllerType
-- uid: XRTK.Oculus.Controllers.BaseOculusController.currentState
-  name: currentState
-  href: api/XRTK.Oculus.Controllers.BaseOculusController.html#XRTK_Oculus_Controllers_BaseOculusController_currentState
-  commentId: F:XRTK.Oculus.Controllers.BaseOculusController.currentState
-  fullName: XRTK.Oculus.Controllers.BaseOculusController.currentState
-  nameWithType: BaseOculusController.currentState
+- uid: XRTK.Oculus.Controllers.BaseOculusController.ControllerType
+  name: ControllerType
+  href: api/XRTK.Oculus.Controllers.BaseOculusController.html#XRTK_Oculus_Controllers_BaseOculusController_ControllerType
+  commentId: P:XRTK.Oculus.Controllers.BaseOculusController.ControllerType
+  fullName: XRTK.Oculus.Controllers.BaseOculusController.ControllerType
+  nameWithType: BaseOculusController.ControllerType
+- uid: XRTK.Oculus.Controllers.BaseOculusController.ControllerType*
+  name: ControllerType
+  href: api/XRTK.Oculus.Controllers.BaseOculusController.html#XRTK_Oculus_Controllers_BaseOculusController_ControllerType_
+  commentId: Overload:XRTK.Oculus.Controllers.BaseOculusController.ControllerType
+  isSpec: "True"
+  fullName: XRTK.Oculus.Controllers.BaseOculusController.ControllerType
+  nameWithType: BaseOculusController.ControllerType
 - uid: XRTK.Oculus.Controllers.BaseOculusController.DefaultInteractions
   name: DefaultInteractions
   href: api/XRTK.Oculus.Controllers.BaseOculusController.html#XRTK_Oculus_Controllers_BaseOculusController_DefaultInteractions
@@ -19538,15 +19583,16 @@ references:
 - uid: XRTK.Oculus.Controllers.BaseOculusController.NodeType
   name: NodeType
   href: api/XRTK.Oculus.Controllers.BaseOculusController.html#XRTK_Oculus_Controllers_BaseOculusController_NodeType
-  commentId: F:XRTK.Oculus.Controllers.BaseOculusController.NodeType
+  commentId: P:XRTK.Oculus.Controllers.BaseOculusController.NodeType
   fullName: XRTK.Oculus.Controllers.BaseOculusController.NodeType
   nameWithType: BaseOculusController.NodeType
-- uid: XRTK.Oculus.Controllers.BaseOculusController.previousState
-  name: previousState
-  href: api/XRTK.Oculus.Controllers.BaseOculusController.html#XRTK_Oculus_Controllers_BaseOculusController_previousState
-  commentId: F:XRTK.Oculus.Controllers.BaseOculusController.previousState
-  fullName: XRTK.Oculus.Controllers.BaseOculusController.previousState
-  nameWithType: BaseOculusController.previousState
+- uid: XRTK.Oculus.Controllers.BaseOculusController.NodeType*
+  name: NodeType
+  href: api/XRTK.Oculus.Controllers.BaseOculusController.html#XRTK_Oculus_Controllers_BaseOculusController_NodeType_
+  commentId: Overload:XRTK.Oculus.Controllers.BaseOculusController.NodeType
+  isSpec: "True"
+  fullName: XRTK.Oculus.Controllers.BaseOculusController.NodeType
+  nameWithType: BaseOculusController.NodeType
 - uid: XRTK.Oculus.Controllers.BaseOculusController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)
   name: SetupDefaultInteractions(Handedness)
   href: api/XRTK.Oculus.Controllers.BaseOculusController.html#XRTK_Oculus_Controllers_BaseOculusController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_
@@ -19592,12 +19638,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.Controllers.OculusControllerDataProvider.OculusControllerDataProvider
   nameWithType: OculusControllerDataProvider.OculusControllerDataProvider
-- uid: XRTK.Oculus.Controllers.OculusControllerDataProvider.ActiveControllers
-  name: ActiveControllers
-  href: api/XRTK.Oculus.Controllers.OculusControllerDataProvider.html#XRTK_Oculus_Controllers_OculusControllerDataProvider_ActiveControllers
-  commentId: F:XRTK.Oculus.Controllers.OculusControllerDataProvider.ActiveControllers
-  fullName: XRTK.Oculus.Controllers.OculusControllerDataProvider.ActiveControllers
-  nameWithType: OculusControllerDataProvider.ActiveControllers
 - uid: XRTK.Oculus.Controllers.OculusControllerDataProvider.Disable
   name: Disable()
   href: api/XRTK.Oculus.Controllers.OculusControllerDataProvider.html#XRTK_Oculus_Controllers_OculusControllerDataProvider_Disable
@@ -20555,6 +20595,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.OculusApi.GetSystemHeadsetType
   nameWithType: OculusApi.GetSystemHeadsetType
+- uid: XRTK.Oculus.OculusApi.GetTrackingCalibratedOrigin
+  name: GetTrackingCalibratedOrigin()
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetTrackingCalibratedOrigin
+  commentId: M:XRTK.Oculus.OculusApi.GetTrackingCalibratedOrigin
+  fullName: XRTK.Oculus.OculusApi.GetTrackingCalibratedOrigin()
+  nameWithType: OculusApi.GetTrackingCalibratedOrigin()
+- uid: XRTK.Oculus.OculusApi.GetTrackingCalibratedOrigin*
+  name: GetTrackingCalibratedOrigin
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetTrackingCalibratedOrigin_
+  commentId: Overload:XRTK.Oculus.OculusApi.GetTrackingCalibratedOrigin
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.GetTrackingCalibratedOrigin
+  nameWithType: OculusApi.GetTrackingCalibratedOrigin
+- uid: XRTK.Oculus.OculusApi.GetTrackingOriginType
+  name: GetTrackingOriginType()
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetTrackingOriginType
+  commentId: M:XRTK.Oculus.OculusApi.GetTrackingOriginType
+  fullName: XRTK.Oculus.OculusApi.GetTrackingOriginType()
+  nameWithType: OculusApi.GetTrackingOriginType()
+- uid: XRTK.Oculus.OculusApi.GetTrackingOriginType*
+  name: GetTrackingOriginType
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetTrackingOriginType_
+  commentId: Overload:XRTK.Oculus.OculusApi.GetTrackingOriginType
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.GetTrackingOriginType
+  nameWithType: OculusApi.GetTrackingOriginType
 - uid: XRTK.Oculus.OculusApi.Handedness
   name: OculusApi.Handedness
   href: api/XRTK.Oculus.OculusApi.Handedness.html
@@ -20948,6 +21014,30 @@ references:
   commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetSystemHeadsetType
   fullName: XRTK.Oculus.OculusApi.ovrp_GetSystemHeadsetType
   nameWithType: OculusApi.ovrp_GetSystemHeadsetType
+- uid: XRTK.Oculus.OculusApi.ovrp_GetTrackingCalibratedOrigin
+  name: ovrp_GetTrackingCalibratedOrigin()
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetTrackingCalibratedOrigin
+  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetTrackingCalibratedOrigin
+  fullName: XRTK.Oculus.OculusApi.ovrp_GetTrackingCalibratedOrigin()
+  nameWithType: OculusApi.ovrp_GetTrackingCalibratedOrigin()
+- uid: XRTK.Oculus.OculusApi.ovrp_GetTrackingCalibratedOrigin*
+  name: ovrp_GetTrackingCalibratedOrigin
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetTrackingCalibratedOrigin_
+  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetTrackingCalibratedOrigin
+  fullName: XRTK.Oculus.OculusApi.ovrp_GetTrackingCalibratedOrigin
+  nameWithType: OculusApi.ovrp_GetTrackingCalibratedOrigin
+- uid: XRTK.Oculus.OculusApi.ovrp_GetTrackingOriginType
+  name: ovrp_GetTrackingOriginType()
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetTrackingOriginType
+  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetTrackingOriginType
+  fullName: XRTK.Oculus.OculusApi.ovrp_GetTrackingOriginType()
+  nameWithType: OculusApi.ovrp_GetTrackingOriginType()
+- uid: XRTK.Oculus.OculusApi.ovrp_GetTrackingOriginType*
+  name: ovrp_GetTrackingOriginType
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetTrackingOriginType_
+  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetTrackingOriginType
+  fullName: XRTK.Oculus.OculusApi.ovrp_GetTrackingOriginType
+  nameWithType: OculusApi.ovrp_GetTrackingOriginType
 - uid: XRTK.Oculus.OculusApi.ovrp_GetVersion
   name: ovrp_GetVersion()
   href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetVersion
@@ -21009,6 +21099,18 @@ references:
   commentId: Overload:XRTK.Oculus.OculusApi.ovrp_SetControllerVibration
   fullName: XRTK.Oculus.OculusApi.ovrp_SetControllerVibration
   nameWithType: OculusApi.ovrp_SetControllerVibration
+- uid: XRTK.Oculus.OculusApi.ovrp_SetTrackingOriginType(XRTK.Oculus.OculusApi.TrackingOrigin)
+  name: ovrp_SetTrackingOriginType(OculusApi.TrackingOrigin)
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_SetTrackingOriginType_XRTK_Oculus_OculusApi_TrackingOrigin_
+  commentId: M:XRTK.Oculus.OculusApi.ovrp_SetTrackingOriginType(XRTK.Oculus.OculusApi.TrackingOrigin)
+  fullName: XRTK.Oculus.OculusApi.ovrp_SetTrackingOriginType(XRTK.Oculus.OculusApi.TrackingOrigin)
+  nameWithType: OculusApi.ovrp_SetTrackingOriginType(OculusApi.TrackingOrigin)
+- uid: XRTK.Oculus.OculusApi.ovrp_SetTrackingOriginType*
+  name: ovrp_SetTrackingOriginType
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_SetTrackingOriginType_
+  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_SetTrackingOriginType
+  fullName: XRTK.Oculus.OculusApi.ovrp_SetTrackingOriginType
+  nameWithType: OculusApi.ovrp_SetTrackingOriginType
 - uid: XRTK.Oculus.OculusApi.ovrp_Update2(System.Int32,System.Int32,System.Double)
   name: ovrp_Update2(Int32, Int32, Double)
   href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_Update2_System_Int32_System_Int32_System_Double_
@@ -21021,6 +21123,18 @@ references:
   commentId: Overload:XRTK.Oculus.OculusApi.ovrp_Update2
   fullName: XRTK.Oculus.OculusApi.ovrp_Update2
   nameWithType: OculusApi.ovrp_Update2
+- uid: XRTK.Oculus.OculusApi.ovrpi_SetTrackingCalibratedOrigin
+  name: ovrpi_SetTrackingCalibratedOrigin()
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrpi_SetTrackingCalibratedOrigin
+  commentId: M:XRTK.Oculus.OculusApi.ovrpi_SetTrackingCalibratedOrigin
+  fullName: XRTK.Oculus.OculusApi.ovrpi_SetTrackingCalibratedOrigin()
+  nameWithType: OculusApi.ovrpi_SetTrackingCalibratedOrigin()
+- uid: XRTK.Oculus.OculusApi.ovrpi_SetTrackingCalibratedOrigin*
+  name: ovrpi_SetTrackingCalibratedOrigin
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrpi_SetTrackingCalibratedOrigin_
+  commentId: Overload:XRTK.Oculus.OculusApi.ovrpi_SetTrackingCalibratedOrigin
+  fullName: XRTK.Oculus.OculusApi.ovrpi_SetTrackingCalibratedOrigin
+  nameWithType: OculusApi.ovrpi_SetTrackingCalibratedOrigin
 - uid: XRTK.Oculus.OculusApi.Posef
   name: OculusApi.Posef
   href: api/XRTK.Oculus.OculusApi.Posef.html
@@ -21699,6 +21813,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.OculusApi.SetControllerVibration
   nameWithType: OculusApi.SetControllerVibration
+- uid: XRTK.Oculus.OculusApi.SetTrackingCalibratedOrigin
+  name: SetTrackingCalibratedOrigin()
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_SetTrackingCalibratedOrigin
+  commentId: M:XRTK.Oculus.OculusApi.SetTrackingCalibratedOrigin
+  fullName: XRTK.Oculus.OculusApi.SetTrackingCalibratedOrigin()
+  nameWithType: OculusApi.SetTrackingCalibratedOrigin()
+- uid: XRTK.Oculus.OculusApi.SetTrackingCalibratedOrigin*
+  name: SetTrackingCalibratedOrigin
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_SetTrackingCalibratedOrigin_
+  commentId: Overload:XRTK.Oculus.OculusApi.SetTrackingCalibratedOrigin
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.SetTrackingCalibratedOrigin
+  nameWithType: OculusApi.SetTrackingCalibratedOrigin
+- uid: XRTK.Oculus.OculusApi.SetTrackingOriginType(XRTK.Oculus.OculusApi.TrackingOrigin)
+  name: SetTrackingOriginType(OculusApi.TrackingOrigin)
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_SetTrackingOriginType_XRTK_Oculus_OculusApi_TrackingOrigin_
+  commentId: M:XRTK.Oculus.OculusApi.SetTrackingOriginType(XRTK.Oculus.OculusApi.TrackingOrigin)
+  fullName: XRTK.Oculus.OculusApi.SetTrackingOriginType(XRTK.Oculus.OculusApi.TrackingOrigin)
+  nameWithType: OculusApi.SetTrackingOriginType(OculusApi.TrackingOrigin)
+- uid: XRTK.Oculus.OculusApi.SetTrackingOriginType*
+  name: SetTrackingOriginType
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_SetTrackingOriginType_
+  commentId: Overload:XRTK.Oculus.OculusApi.SetTrackingOriginType
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.SetTrackingOriginType
+  nameWithType: OculusApi.SetTrackingOriginType
 - uid: XRTK.Oculus.OculusApi.Step
   name: OculusApi.Step
   href: api/XRTK.Oculus.OculusApi.Step.html
@@ -22349,148 +22489,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.BaseControllerDataProvider.RequestPointers
   nameWithType: BaseControllerDataProvider.RequestPointers
-- uid: XRTK.Providers.Controllers.BaseDictationDataProvider
-  name: BaseDictationDataProvider
-  href: api/XRTK.Providers.Controllers.BaseDictationDataProvider.html
-  commentId: T:XRTK.Providers.Controllers.BaseDictationDataProvider
-  fullName: XRTK.Providers.Controllers.BaseDictationDataProvider
-  nameWithType: BaseDictationDataProvider
-- uid: XRTK.Providers.Controllers.BaseDictationDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  name: BaseDictationDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
-  href: api/XRTK.Providers.Controllers.BaseDictationDataProvider.html#XRTK_Providers_Controllers_BaseDictationDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_
-  commentId: M:XRTK.Providers.Controllers.BaseDictationDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  fullName: XRTK.Providers.Controllers.BaseDictationDataProvider.BaseDictationDataProvider(System.String, System.UInt32, XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  nameWithType: BaseDictationDataProvider.BaseDictationDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
-- uid: XRTK.Providers.Controllers.BaseDictationDataProvider.#ctor*
-  name: BaseDictationDataProvider
-  href: api/XRTK.Providers.Controllers.BaseDictationDataProvider.html#XRTK_Providers_Controllers_BaseDictationDataProvider__ctor_
-  commentId: Overload:XRTK.Providers.Controllers.BaseDictationDataProvider.#ctor
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.BaseDictationDataProvider.BaseDictationDataProvider
-  nameWithType: BaseDictationDataProvider.BaseDictationDataProvider
-- uid: XRTK.Providers.Controllers.BaseDictationDataProvider.IsListening
-  name: IsListening
-  href: api/XRTK.Providers.Controllers.BaseDictationDataProvider.html#XRTK_Providers_Controllers_BaseDictationDataProvider_IsListening
-  commentId: P:XRTK.Providers.Controllers.BaseDictationDataProvider.IsListening
-  fullName: XRTK.Providers.Controllers.BaseDictationDataProvider.IsListening
-  nameWithType: BaseDictationDataProvider.IsListening
-- uid: XRTK.Providers.Controllers.BaseDictationDataProvider.IsListening*
-  name: IsListening
-  href: api/XRTK.Providers.Controllers.BaseDictationDataProvider.html#XRTK_Providers_Controllers_BaseDictationDataProvider_IsListening_
-  commentId: Overload:XRTK.Providers.Controllers.BaseDictationDataProvider.IsListening
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.BaseDictationDataProvider.IsListening
-  nameWithType: BaseDictationDataProvider.IsListening
-- uid: XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecording(UnityEngine.GameObject,System.Single,System.Single,System.Int32,System.String)
-  name: StartRecording(GameObject, Single, Single, Int32, String)
-  href: api/XRTK.Providers.Controllers.BaseDictationDataProvider.html#XRTK_Providers_Controllers_BaseDictationDataProvider_StartRecording_UnityEngine_GameObject_System_Single_System_Single_System_Int32_System_String_
-  commentId: M:XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecording(UnityEngine.GameObject,System.Single,System.Single,System.Int32,System.String)
-  fullName: XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecording(UnityEngine.GameObject, System.Single, System.Single, System.Int32, System.String)
-  nameWithType: BaseDictationDataProvider.StartRecording(GameObject, Single, Single, Int32, String)
-- uid: XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecording*
-  name: StartRecording
-  href: api/XRTK.Providers.Controllers.BaseDictationDataProvider.html#XRTK_Providers_Controllers_BaseDictationDataProvider_StartRecording_
-  commentId: Overload:XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecording
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecording
-  nameWithType: BaseDictationDataProvider.StartRecording
-- uid: XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecordingAsync(UnityEngine.GameObject,System.Single,System.Single,System.Int32,System.String)
-  name: StartRecordingAsync(GameObject, Single, Single, Int32, String)
-  href: api/XRTK.Providers.Controllers.BaseDictationDataProvider.html#XRTK_Providers_Controllers_BaseDictationDataProvider_StartRecordingAsync_UnityEngine_GameObject_System_Single_System_Single_System_Int32_System_String_
-  commentId: M:XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecordingAsync(UnityEngine.GameObject,System.Single,System.Single,System.Int32,System.String)
-  fullName: XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecordingAsync(UnityEngine.GameObject, System.Single, System.Single, System.Int32, System.String)
-  nameWithType: BaseDictationDataProvider.StartRecordingAsync(GameObject, Single, Single, Int32, String)
-- uid: XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecordingAsync*
-  name: StartRecordingAsync
-  href: api/XRTK.Providers.Controllers.BaseDictationDataProvider.html#XRTK_Providers_Controllers_BaseDictationDataProvider_StartRecordingAsync_
-  commentId: Overload:XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecordingAsync
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.BaseDictationDataProvider.StartRecordingAsync
-  nameWithType: BaseDictationDataProvider.StartRecordingAsync
-- uid: XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecording
-  name: StopRecording()
-  href: api/XRTK.Providers.Controllers.BaseDictationDataProvider.html#XRTK_Providers_Controllers_BaseDictationDataProvider_StopRecording
-  commentId: M:XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecording
-  fullName: XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecording()
-  nameWithType: BaseDictationDataProvider.StopRecording()
-- uid: XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecording*
-  name: StopRecording
-  href: api/XRTK.Providers.Controllers.BaseDictationDataProvider.html#XRTK_Providers_Controllers_BaseDictationDataProvider_StopRecording_
-  commentId: Overload:XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecording
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecording
-  nameWithType: BaseDictationDataProvider.StopRecording
-- uid: XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecordingAsync
-  name: StopRecordingAsync()
-  href: api/XRTK.Providers.Controllers.BaseDictationDataProvider.html#XRTK_Providers_Controllers_BaseDictationDataProvider_StopRecordingAsync
-  commentId: M:XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecordingAsync
-  fullName: XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecordingAsync()
-  nameWithType: BaseDictationDataProvider.StopRecordingAsync()
-- uid: XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecordingAsync*
-  name: StopRecordingAsync
-  href: api/XRTK.Providers.Controllers.BaseDictationDataProvider.html#XRTK_Providers_Controllers_BaseDictationDataProvider_StopRecordingAsync_
-  commentId: Overload:XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecordingAsync
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.BaseDictationDataProvider.StopRecordingAsync
-  nameWithType: BaseDictationDataProvider.StopRecordingAsync
-- uid: XRTK.Providers.Controllers.BaseSpeechDataProvider
-  name: BaseSpeechDataProvider
-  href: api/XRTK.Providers.Controllers.BaseSpeechDataProvider.html
-  commentId: T:XRTK.Providers.Controllers.BaseSpeechDataProvider
-  fullName: XRTK.Providers.Controllers.BaseSpeechDataProvider
-  nameWithType: BaseSpeechDataProvider
-- uid: XRTK.Providers.Controllers.BaseSpeechDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  name: BaseSpeechDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
-  href: api/XRTK.Providers.Controllers.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_BaseSpeechDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_
-  commentId: M:XRTK.Providers.Controllers.BaseSpeechDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  fullName: XRTK.Providers.Controllers.BaseSpeechDataProvider.BaseSpeechDataProvider(System.String, System.UInt32, XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  nameWithType: BaseSpeechDataProvider.BaseSpeechDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
-- uid: XRTK.Providers.Controllers.BaseSpeechDataProvider.#ctor*
-  name: BaseSpeechDataProvider
-  href: api/XRTK.Providers.Controllers.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_BaseSpeechDataProvider__ctor_
-  commentId: Overload:XRTK.Providers.Controllers.BaseSpeechDataProvider.#ctor
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.BaseSpeechDataProvider.BaseSpeechDataProvider
-  nameWithType: BaseSpeechDataProvider.BaseSpeechDataProvider
-- uid: XRTK.Providers.Controllers.BaseSpeechDataProvider.IsRecognitionActive
-  name: IsRecognitionActive
-  href: api/XRTK.Providers.Controllers.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_BaseSpeechDataProvider_IsRecognitionActive
-  commentId: P:XRTK.Providers.Controllers.BaseSpeechDataProvider.IsRecognitionActive
-  fullName: XRTK.Providers.Controllers.BaseSpeechDataProvider.IsRecognitionActive
-  nameWithType: BaseSpeechDataProvider.IsRecognitionActive
-- uid: XRTK.Providers.Controllers.BaseSpeechDataProvider.IsRecognitionActive*
-  name: IsRecognitionActive
-  href: api/XRTK.Providers.Controllers.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_BaseSpeechDataProvider_IsRecognitionActive_
-  commentId: Overload:XRTK.Providers.Controllers.BaseSpeechDataProvider.IsRecognitionActive
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.BaseSpeechDataProvider.IsRecognitionActive
-  nameWithType: BaseSpeechDataProvider.IsRecognitionActive
-- uid: XRTK.Providers.Controllers.BaseSpeechDataProvider.StartRecognition
-  name: StartRecognition()
-  href: api/XRTK.Providers.Controllers.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_BaseSpeechDataProvider_StartRecognition
-  commentId: M:XRTK.Providers.Controllers.BaseSpeechDataProvider.StartRecognition
-  fullName: XRTK.Providers.Controllers.BaseSpeechDataProvider.StartRecognition()
-  nameWithType: BaseSpeechDataProvider.StartRecognition()
-- uid: XRTK.Providers.Controllers.BaseSpeechDataProvider.StartRecognition*
-  name: StartRecognition
-  href: api/XRTK.Providers.Controllers.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_BaseSpeechDataProvider_StartRecognition_
-  commentId: Overload:XRTK.Providers.Controllers.BaseSpeechDataProvider.StartRecognition
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.BaseSpeechDataProvider.StartRecognition
-  nameWithType: BaseSpeechDataProvider.StartRecognition
-- uid: XRTK.Providers.Controllers.BaseSpeechDataProvider.StopRecognition
-  name: StopRecognition()
-  href: api/XRTK.Providers.Controllers.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_BaseSpeechDataProvider_StopRecognition
-  commentId: M:XRTK.Providers.Controllers.BaseSpeechDataProvider.StopRecognition
-  fullName: XRTK.Providers.Controllers.BaseSpeechDataProvider.StopRecognition()
-  nameWithType: BaseSpeechDataProvider.StopRecognition()
-- uid: XRTK.Providers.Controllers.BaseSpeechDataProvider.StopRecognition*
-  name: StopRecognition
-  href: api/XRTK.Providers.Controllers.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_BaseSpeechDataProvider_StopRecognition_
-  commentId: Overload:XRTK.Providers.Controllers.BaseSpeechDataProvider.StopRecognition
-  isSpec: "True"
-  fullName: XRTK.Providers.Controllers.BaseSpeechDataProvider.StopRecognition
-  nameWithType: BaseSpeechDataProvider.StopRecognition
 - uid: XRTK.Providers.Controllers.MixedRealityControllerMapping
   name: MixedRealityControllerMapping
   href: api/XRTK.Providers.Controllers.MixedRealityControllerMapping.html
@@ -23066,6 +23064,192 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.OpenVR.WindowsMixedRealityOpenVRMotionController.SetupDefaultInteractions
   nameWithType: WindowsMixedRealityOpenVRMotionController.SetupDefaultInteractions
+- uid: XRTK.Providers.Controllers.Speech
+  name: XRTK.Providers.Controllers.Speech
+  href: api/XRTK.Providers.Controllers.Speech.html
+  commentId: N:XRTK.Providers.Controllers.Speech
+  fullName: XRTK.Providers.Controllers.Speech
+  nameWithType: XRTK.Providers.Controllers.Speech
+- uid: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider
+  name: BaseDictationDataProvider
+  href: api/XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html
+  commentId: T:XRTK.Providers.Controllers.Speech.BaseDictationDataProvider
+  fullName: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider
+  nameWithType: BaseDictationDataProvider
+- uid: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  name: BaseDictationDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
+  href: api/XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html#XRTK_Providers_Controllers_Speech_BaseDictationDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_
+  commentId: M:XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  fullName: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.BaseDictationDataProvider(System.String, System.UInt32, XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  nameWithType: BaseDictationDataProvider.BaseDictationDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
+- uid: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.#ctor*
+  name: BaseDictationDataProvider
+  href: api/XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html#XRTK_Providers_Controllers_Speech_BaseDictationDataProvider__ctor_
+  commentId: Overload:XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.#ctor
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.BaseDictationDataProvider
+  nameWithType: BaseDictationDataProvider.BaseDictationDataProvider
+- uid: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.IsListening
+  name: IsListening
+  href: api/XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html#XRTK_Providers_Controllers_Speech_BaseDictationDataProvider_IsListening
+  commentId: P:XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.IsListening
+  fullName: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.IsListening
+  nameWithType: BaseDictationDataProvider.IsListening
+- uid: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.IsListening*
+  name: IsListening
+  href: api/XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html#XRTK_Providers_Controllers_Speech_BaseDictationDataProvider_IsListening_
+  commentId: Overload:XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.IsListening
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.IsListening
+  nameWithType: BaseDictationDataProvider.IsListening
+- uid: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StartRecording(UnityEngine.GameObject,System.Single,System.Single,System.Int32,System.String)
+  name: StartRecording(GameObject, Single, Single, Int32, String)
+  href: api/XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html#XRTK_Providers_Controllers_Speech_BaseDictationDataProvider_StartRecording_UnityEngine_GameObject_System_Single_System_Single_System_Int32_System_String_
+  commentId: M:XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StartRecording(UnityEngine.GameObject,System.Single,System.Single,System.Int32,System.String)
+  fullName: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StartRecording(UnityEngine.GameObject, System.Single, System.Single, System.Int32, System.String)
+  nameWithType: BaseDictationDataProvider.StartRecording(GameObject, Single, Single, Int32, String)
+- uid: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StartRecording*
+  name: StartRecording
+  href: api/XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html#XRTK_Providers_Controllers_Speech_BaseDictationDataProvider_StartRecording_
+  commentId: Overload:XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StartRecording
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StartRecording
+  nameWithType: BaseDictationDataProvider.StartRecording
+- uid: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StartRecordingAsync(UnityEngine.GameObject,System.Single,System.Single,System.Int32,System.String)
+  name: StartRecordingAsync(GameObject, Single, Single, Int32, String)
+  href: api/XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html#XRTK_Providers_Controllers_Speech_BaseDictationDataProvider_StartRecordingAsync_UnityEngine_GameObject_System_Single_System_Single_System_Int32_System_String_
+  commentId: M:XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StartRecordingAsync(UnityEngine.GameObject,System.Single,System.Single,System.Int32,System.String)
+  fullName: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StartRecordingAsync(UnityEngine.GameObject, System.Single, System.Single, System.Int32, System.String)
+  nameWithType: BaseDictationDataProvider.StartRecordingAsync(GameObject, Single, Single, Int32, String)
+- uid: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StartRecordingAsync*
+  name: StartRecordingAsync
+  href: api/XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html#XRTK_Providers_Controllers_Speech_BaseDictationDataProvider_StartRecordingAsync_
+  commentId: Overload:XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StartRecordingAsync
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StartRecordingAsync
+  nameWithType: BaseDictationDataProvider.StartRecordingAsync
+- uid: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StopRecording
+  name: StopRecording()
+  href: api/XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html#XRTK_Providers_Controllers_Speech_BaseDictationDataProvider_StopRecording
+  commentId: M:XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StopRecording
+  fullName: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StopRecording()
+  nameWithType: BaseDictationDataProvider.StopRecording()
+- uid: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StopRecording*
+  name: StopRecording
+  href: api/XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html#XRTK_Providers_Controllers_Speech_BaseDictationDataProvider_StopRecording_
+  commentId: Overload:XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StopRecording
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StopRecording
+  nameWithType: BaseDictationDataProvider.StopRecording
+- uid: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StopRecordingAsync
+  name: StopRecordingAsync()
+  href: api/XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html#XRTK_Providers_Controllers_Speech_BaseDictationDataProvider_StopRecordingAsync
+  commentId: M:XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StopRecordingAsync
+  fullName: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StopRecordingAsync()
+  nameWithType: BaseDictationDataProvider.StopRecordingAsync()
+- uid: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StopRecordingAsync*
+  name: StopRecordingAsync
+  href: api/XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html#XRTK_Providers_Controllers_Speech_BaseDictationDataProvider_StopRecordingAsync_
+  commentId: Overload:XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StopRecordingAsync
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.StopRecordingAsync
+  nameWithType: BaseDictationDataProvider.StopRecordingAsync
+- uid: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider
+  name: BaseSpeechDataProvider
+  href: api/XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.html
+  commentId: T:XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider
+  fullName: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider
+  nameWithType: BaseSpeechDataProvider
+- uid: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  name: BaseSpeechDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
+  href: api/XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_Speech_BaseSpeechDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_
+  commentId: M:XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  fullName: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.BaseSpeechDataProvider(System.String, System.UInt32, XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  nameWithType: BaseSpeechDataProvider.BaseSpeechDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
+- uid: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.#ctor*
+  name: BaseSpeechDataProvider
+  href: api/XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_Speech_BaseSpeechDataProvider__ctor_
+  commentId: Overload:XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.#ctor
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.BaseSpeechDataProvider
+  nameWithType: BaseSpeechDataProvider.BaseSpeechDataProvider
+- uid: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.IsRecognitionActive
+  name: IsRecognitionActive
+  href: api/XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_Speech_BaseSpeechDataProvider_IsRecognitionActive
+  commentId: P:XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.IsRecognitionActive
+  fullName: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.IsRecognitionActive
+  nameWithType: BaseSpeechDataProvider.IsRecognitionActive
+- uid: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.IsRecognitionActive*
+  name: IsRecognitionActive
+  href: api/XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_Speech_BaseSpeechDataProvider_IsRecognitionActive_
+  commentId: Overload:XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.IsRecognitionActive
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.IsRecognitionActive
+  nameWithType: BaseSpeechDataProvider.IsRecognitionActive
+- uid: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.StartRecognition
+  name: StartRecognition()
+  href: api/XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_Speech_BaseSpeechDataProvider_StartRecognition
+  commentId: M:XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.StartRecognition
+  fullName: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.StartRecognition()
+  nameWithType: BaseSpeechDataProvider.StartRecognition()
+- uid: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.StartRecognition*
+  name: StartRecognition
+  href: api/XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_Speech_BaseSpeechDataProvider_StartRecognition_
+  commentId: Overload:XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.StartRecognition
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.StartRecognition
+  nameWithType: BaseSpeechDataProvider.StartRecognition
+- uid: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.StopRecognition
+  name: StopRecognition()
+  href: api/XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_Speech_BaseSpeechDataProvider_StopRecognition
+  commentId: M:XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.StopRecognition
+  fullName: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.StopRecognition()
+  nameWithType: BaseSpeechDataProvider.StopRecognition()
+- uid: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.StopRecognition*
+  name: StopRecognition
+  href: api/XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.html#XRTK_Providers_Controllers_Speech_BaseSpeechDataProvider_StopRecognition_
+  commentId: Overload:XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.StopRecognition
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.StopRecognition
+  nameWithType: BaseSpeechDataProvider.StopRecognition
+- uid: XRTK.Providers.Controllers.Speech.WindowsDictationDataProvider
+  name: WindowsDictationDataProvider
+  href: api/XRTK.Providers.Controllers.Speech.WindowsDictationDataProvider.html
+  commentId: T:XRTK.Providers.Controllers.Speech.WindowsDictationDataProvider
+  fullName: XRTK.Providers.Controllers.Speech.WindowsDictationDataProvider
+  nameWithType: WindowsDictationDataProvider
+- uid: XRTK.Providers.Controllers.Speech.WindowsDictationDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  name: WindowsDictationDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
+  href: api/XRTK.Providers.Controllers.Speech.WindowsDictationDataProvider.html#XRTK_Providers_Controllers_Speech_WindowsDictationDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_
+  commentId: M:XRTK.Providers.Controllers.Speech.WindowsDictationDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  fullName: XRTK.Providers.Controllers.Speech.WindowsDictationDataProvider.WindowsDictationDataProvider(System.String, System.UInt32, XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  nameWithType: WindowsDictationDataProvider.WindowsDictationDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
+- uid: XRTK.Providers.Controllers.Speech.WindowsDictationDataProvider.#ctor*
+  name: WindowsDictationDataProvider
+  href: api/XRTK.Providers.Controllers.Speech.WindowsDictationDataProvider.html#XRTK_Providers_Controllers_Speech_WindowsDictationDataProvider__ctor_
+  commentId: Overload:XRTK.Providers.Controllers.Speech.WindowsDictationDataProvider.#ctor
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.Speech.WindowsDictationDataProvider.WindowsDictationDataProvider
+  nameWithType: WindowsDictationDataProvider.WindowsDictationDataProvider
+- uid: XRTK.Providers.Controllers.Speech.WindowsSpeechDataProvider
+  name: WindowsSpeechDataProvider
+  href: api/XRTK.Providers.Controllers.Speech.WindowsSpeechDataProvider.html
+  commentId: T:XRTK.Providers.Controllers.Speech.WindowsSpeechDataProvider
+  fullName: XRTK.Providers.Controllers.Speech.WindowsSpeechDataProvider
+  nameWithType: WindowsSpeechDataProvider
+- uid: XRTK.Providers.Controllers.Speech.WindowsSpeechDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  name: WindowsSpeechDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
+  href: api/XRTK.Providers.Controllers.Speech.WindowsSpeechDataProvider.html#XRTK_Providers_Controllers_Speech_WindowsSpeechDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_
+  commentId: M:XRTK.Providers.Controllers.Speech.WindowsSpeechDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  fullName: XRTK.Providers.Controllers.Speech.WindowsSpeechDataProvider.WindowsSpeechDataProvider(System.String, System.UInt32, XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
+  nameWithType: WindowsSpeechDataProvider.WindowsSpeechDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
+- uid: XRTK.Providers.Controllers.Speech.WindowsSpeechDataProvider.#ctor*
+  name: WindowsSpeechDataProvider
+  href: api/XRTK.Providers.Controllers.Speech.WindowsSpeechDataProvider.html#XRTK_Providers_Controllers_Speech_WindowsSpeechDataProvider__ctor_
+  commentId: Overload:XRTK.Providers.Controllers.Speech.WindowsSpeechDataProvider.#ctor
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.Speech.WindowsSpeechDataProvider.WindowsSpeechDataProvider
+  nameWithType: WindowsSpeechDataProvider.WindowsSpeechDataProvider
 - uid: XRTK.Providers.Controllers.UnityInput
   name: XRTK.Providers.Controllers.UnityInput
   href: api/XRTK.Providers.Controllers.UnityInput.html
@@ -25973,12 +26157,15 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.Awake
   nameWithType: ManipulationHandler.Awake
-- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.BeginHold(XRTK.EventDatum.Input.MixedRealityPointerEventData)
-  name: BeginHold(MixedRealityPointerEventData)
-  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_BeginHold_XRTK_EventDatum_Input_MixedRealityPointerEventData_
-  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.BeginHold(XRTK.EventDatum.Input.MixedRealityPointerEventData)
-  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.BeginHold(XRTK.EventDatum.Input.MixedRealityPointerEventData)
-  nameWithType: ManipulationHandler.BeginHold(MixedRealityPointerEventData)
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.BeginHold(XRTK.EventDatum.Input.MixedRealityPointerEventData,System.Nullable{UnityEngine.Vector3})
+  name: BeginHold(MixedRealityPointerEventData, Nullable<Vector3>)
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_BeginHold_XRTK_EventDatum_Input_MixedRealityPointerEventData_System_Nullable_UnityEngine_Vector3__
+  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.BeginHold(XRTK.EventDatum.Input.MixedRealityPointerEventData,System.Nullable{UnityEngine.Vector3})
+  name.vb: BeginHold(MixedRealityPointerEventData, Nullable(Of Vector3))
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.BeginHold(XRTK.EventDatum.Input.MixedRealityPointerEventData, System.Nullable<UnityEngine.Vector3>)
+  fullName.vb: XRTK.SDK.Input.Handlers.ManipulationHandler.BeginHold(XRTK.EventDatum.Input.MixedRealityPointerEventData, System.Nullable(Of UnityEngine.Vector3))
+  nameWithType: ManipulationHandler.BeginHold(MixedRealityPointerEventData, Nullable<Vector3>)
+  nameWithType.vb: ManipulationHandler.BeginHold(MixedRealityPointerEventData, Nullable(Of Vector3))
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.BeginHold*
   name: BeginHold
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_BeginHold_
@@ -25986,15 +26173,38 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.BeginHold
   nameWithType: ManipulationHandler.BeginHold
-- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateNudgeDistance(XRTK.EventDatum.Input.InputEventData{UnityEngine.Vector2},System.Single)
-  name: CalculateNudgeDistance(InputEventData<Vector2>, Single)
-  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_CalculateNudgeDistance_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__System_Single_
-  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateNudgeDistance(XRTK.EventDatum.Input.InputEventData{UnityEngine.Vector2},System.Single)
-  name.vb: CalculateNudgeDistance(InputEventData(Of Vector2), Single)
-  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateNudgeDistance(XRTK.EventDatum.Input.InputEventData<UnityEngine.Vector2>, System.Single)
-  fullName.vb: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateNudgeDistance(XRTK.EventDatum.Input.InputEventData(Of UnityEngine.Vector2), System.Single)
-  nameWithType: ManipulationHandler.CalculateNudgeDistance(InputEventData<Vector2>, Single)
-  nameWithType.vb: ManipulationHandler.CalculateNudgeDistance(InputEventData(Of Vector2), Single)
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.BoundingBox
+  name: BoundingBox
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_BoundingBox
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.BoundingBox
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.BoundingBox
+  nameWithType: ManipulationHandler.BoundingBox
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.BoundingBox*
+  name: BoundingBox
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_BoundingBox_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.BoundingBox
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.BoundingBox
+  nameWithType: ManipulationHandler.BoundingBox
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.BoxCollider
+  name: BoxCollider
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_BoxCollider
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.BoxCollider
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.BoxCollider
+  nameWithType: ManipulationHandler.BoxCollider
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.BoxCollider*
+  name: BoxCollider
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_BoxCollider_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.BoxCollider
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.BoxCollider
+  nameWithType: ManipulationHandler.BoxCollider
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateNudgeDistance(System.Single,System.Single)
+  name: CalculateNudgeDistance(Single, Single)
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_CalculateNudgeDistance_System_Single_System_Single_
+  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateNudgeDistance(System.Single,System.Single)
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateNudgeDistance(System.Single, System.Single)
+  nameWithType: ManipulationHandler.CalculateNudgeDistance(Single, Single)
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateNudgeDistance*
   name: CalculateNudgeDistance
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_CalculateNudgeDistance_
@@ -26002,15 +26212,25 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateNudgeDistance
   nameWithType: ManipulationHandler.CalculateNudgeDistance
-- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateScaleAmount(XRTK.EventDatum.Input.InputEventData{UnityEngine.Vector2},UnityEngine.Vector3)
-  name: CalculateScaleAmount(InputEventData<Vector2>, Vector3)
-  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_CalculateScaleAmount_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__UnityEngine_Vector3_
-  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateScaleAmount(XRTK.EventDatum.Input.InputEventData{UnityEngine.Vector2},UnityEngine.Vector3)
-  name.vb: CalculateScaleAmount(InputEventData(Of Vector2), Vector3)
-  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateScaleAmount(XRTK.EventDatum.Input.InputEventData<UnityEngine.Vector2>, UnityEngine.Vector3)
-  fullName.vb: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateScaleAmount(XRTK.EventDatum.Input.InputEventData(Of UnityEngine.Vector2), UnityEngine.Vector3)
-  nameWithType: ManipulationHandler.CalculateScaleAmount(InputEventData<Vector2>, Vector3)
-  nameWithType.vb: ManipulationHandler.CalculateScaleAmount(InputEventData(Of Vector2), Vector3)
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateRotationAngle(UnityEngine.Vector2,UnityEngine.Vector2)
+  name: CalculateRotationAngle(Vector2, Vector2)
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_CalculateRotationAngle_UnityEngine_Vector2_UnityEngine_Vector2_
+  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateRotationAngle(UnityEngine.Vector2,UnityEngine.Vector2)
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateRotationAngle(UnityEngine.Vector2, UnityEngine.Vector2)
+  nameWithType: ManipulationHandler.CalculateRotationAngle(Vector2, Vector2)
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateRotationAngle*
+  name: CalculateRotationAngle
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_CalculateRotationAngle_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateRotationAngle
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateRotationAngle
+  nameWithType: ManipulationHandler.CalculateRotationAngle
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateScaleAmount(System.Single,UnityEngine.Vector3)
+  name: CalculateScaleAmount(Single, Vector3)
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_CalculateScaleAmount_System_Single_UnityEngine_Vector3_
+  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateScaleAmount(System.Single,UnityEngine.Vector3)
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateScaleAmount(System.Single, UnityEngine.Vector3)
+  nameWithType: ManipulationHandler.CalculateScaleAmount(Single, Vector3)
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.CalculateScaleAmount*
   name: CalculateScaleAmount
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_CalculateScaleAmount_
@@ -26122,6 +26342,45 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsScalingPossible
   nameWithType: ManipulationHandler.IsScalingPossible
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.IsSnappedToSurface
+  name: IsSnappedToSurface
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_IsSnappedToSurface
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.IsSnappedToSurface
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsSnappedToSurface
+  nameWithType: ManipulationHandler.IsSnappedToSurface
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.IsSnappedToSurface*
+  name: IsSnappedToSurface
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_IsSnappedToSurface_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.IsSnappedToSurface
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsSnappedToSurface
+  nameWithType: ManipulationHandler.IsSnappedToSurface
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.LateUpdate
+  name: LateUpdate()
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_LateUpdate
+  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.LateUpdate
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.LateUpdate()
+  nameWithType: ManipulationHandler.LateUpdate()
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.LateUpdate*
+  name: LateUpdate
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_LateUpdate_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.LateUpdate
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.LateUpdate
+  nameWithType: ManipulationHandler.LateUpdate
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.LayerMasks
+  name: LayerMasks
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_LayerMasks
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.LayerMasks
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.LayerMasks
+  nameWithType: ManipulationHandler.LayerMasks
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.LayerMasks*
+  name: LayerMasks
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_LayerMasks_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.LayerMasks
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.LayerMasks
+  nameWithType: ManipulationHandler.LayerMasks
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeAction
   name: NudgeAction
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_NudgeAction
@@ -26174,6 +26433,45 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeZone
   nameWithType: ManipulationHandler.NudgeZone
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionEnter(UnityEngine.Collision)
+  name: OnCollisionEnter(Collision)
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_OnCollisionEnter_UnityEngine_Collision_
+  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionEnter(UnityEngine.Collision)
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionEnter(UnityEngine.Collision)
+  nameWithType: ManipulationHandler.OnCollisionEnter(Collision)
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionEnter*
+  name: OnCollisionEnter
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_OnCollisionEnter_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionEnter
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionEnter
+  nameWithType: ManipulationHandler.OnCollisionEnter
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionExit(UnityEngine.Collision)
+  name: OnCollisionExit(Collision)
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_OnCollisionExit_UnityEngine_Collision_
+  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionExit(UnityEngine.Collision)
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionExit(UnityEngine.Collision)
+  nameWithType: ManipulationHandler.OnCollisionExit(Collision)
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionExit*
+  name: OnCollisionExit
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_OnCollisionExit_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionExit
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionExit
+  nameWithType: ManipulationHandler.OnCollisionExit
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionStay(UnityEngine.Collision)
+  name: OnCollisionStay(Collision)
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_OnCollisionStay_UnityEngine_Collision_
+  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionStay(UnityEngine.Collision)
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionStay(UnityEngine.Collision)
+  nameWithType: ManipulationHandler.OnCollisionStay(Collision)
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionStay*
+  name: OnCollisionStay
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_OnCollisionStay_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionStay
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.OnCollisionStay
+  nameWithType: ManipulationHandler.OnCollisionStay
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.OnDisable
   name: OnDisable()
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_OnDisable
@@ -26187,6 +26485,18 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.OnDisable
   nameWithType: ManipulationHandler.OnDisable
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.OnHoldBegin
+  name: OnHoldBegin
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_OnHoldBegin
+  commentId: E:XRTK.SDK.Input.Handlers.ManipulationHandler.OnHoldBegin
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.OnHoldBegin
+  nameWithType: ManipulationHandler.OnHoldBegin
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.OnHoldEnd
+  name: OnHoldEnd
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_OnHoldEnd
+  commentId: E:XRTK.SDK.Input.Handlers.ManipulationHandler.OnHoldEnd
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.OnHoldEnd
+  nameWithType: ManipulationHandler.OnHoldEnd
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.OnInputChanged(XRTK.EventDatum.Input.InputEventData{System.Single})
   name: OnInputChanged(InputEventData<Single>)
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_OnInputChanged_XRTK_EventDatum_Input_InputEventData_System_Single__
@@ -26277,6 +26587,32 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.OnPointerUp
   nameWithType: ManipulationHandler.OnPointerUp
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.OnSnap
+  name: OnSnap()
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_OnSnap
+  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.OnSnap
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.OnSnap()
+  nameWithType: ManipulationHandler.OnSnap()
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.OnSnap*
+  name: OnSnap
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_OnSnap_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.OnSnap
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.OnSnap
+  nameWithType: ManipulationHandler.OnSnap
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.OnUnsnap
+  name: OnUnsnap()
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_OnUnsnap
+  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.OnUnsnap
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.OnUnsnap()
+  nameWithType: ManipulationHandler.OnUnsnap()
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.OnUnsnap*
+  name: OnUnsnap
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_OnUnsnap_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.OnUnsnap
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.OnUnsnap
+  nameWithType: ManipulationHandler.OnUnsnap
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.PressThreshold
   name: PressThreshold
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_PressThreshold
@@ -26290,6 +26626,32 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.PressThreshold
   nameWithType: ManipulationHandler.PressThreshold
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.PrimaryPointer
+  name: PrimaryPointer
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_PrimaryPointer
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.PrimaryPointer
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.PrimaryPointer
+  nameWithType: ManipulationHandler.PrimaryPointer
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.PrimaryPointer*
+  name: PrimaryPointer
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_PrimaryPointer_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.PrimaryPointer
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.PrimaryPointer
+  nameWithType: ManipulationHandler.PrimaryPointer
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.ProcessTransformData
+  name: ProcessTransformData()
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_ProcessTransformData
+  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.ProcessTransformData
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.ProcessTransformData()
+  nameWithType: ManipulationHandler.ProcessTransformData()
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.ProcessTransformData*
+  name: ProcessTransformData
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_ProcessTransformData_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.ProcessTransformData
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.ProcessTransformData
+  nameWithType: ManipulationHandler.ProcessTransformData
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.RotateAction
   name: RotateAction
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_RotateAction
@@ -26394,6 +26756,58 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.SelectAction
   nameWithType: ManipulationHandler.SelectAction
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.SmoothingFactor
+  name: SmoothingFactor
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_SmoothingFactor
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.SmoothingFactor
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.SmoothingFactor
+  nameWithType: ManipulationHandler.SmoothingFactor
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.SmoothingFactor*
+  name: SmoothingFactor
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_SmoothingFactor_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.SmoothingFactor
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.SmoothingFactor
+  nameWithType: ManipulationHandler.SmoothingFactor
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.SmoothMotion
+  name: SmoothMotion
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_SmoothMotion
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.SmoothMotion
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.SmoothMotion
+  nameWithType: ManipulationHandler.SmoothMotion
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.SmoothMotion*
+  name: SmoothMotion
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_SmoothMotion_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.SmoothMotion
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.SmoothMotion
+  nameWithType: ManipulationHandler.SmoothMotion
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.SnapDistance
+  name: SnapDistance
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_SnapDistance
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.SnapDistance
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.SnapDistance
+  nameWithType: ManipulationHandler.SnapDistance
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.SnapDistance*
+  name: SnapDistance
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_SnapDistance_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.SnapDistance
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.SnapDistance
+  nameWithType: ManipulationHandler.SnapDistance
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.SnapToValidSurfaces
+  name: SnapToValidSurfaces
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_SnapToValidSurfaces
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.SnapToValidSurfaces
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.SnapToValidSurfaces
+  nameWithType: ManipulationHandler.SnapToValidSurfaces
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.SnapToValidSurfaces*
+  name: SnapToValidSurfaces
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_SnapToValidSurfaces_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.SnapToValidSurfaces
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.SnapToValidSurfaces
+  nameWithType: ManipulationHandler.SnapToValidSurfaces
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.SpatialMeshVisibility
   name: SpatialMeshVisibility
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_SpatialMeshVisibility
@@ -26407,6 +26821,19 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.SpatialMeshVisibility
   nameWithType: ManipulationHandler.SpatialMeshVisibility
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.Start
+  name: Start()
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_Start
+  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.Start
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.Start()
+  nameWithType: ManipulationHandler.Start()
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.Start*
+  name: Start
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_Start_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.Start
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.Start
+  nameWithType: ManipulationHandler.Start
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.TouchpadPressAction
   name: TouchpadPressAction
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_TouchpadPressAction
@@ -26420,19 +26847,35 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.TouchpadPressAction
   nameWithType: ManipulationHandler.TouchpadPressAction
-- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.Update
-  name: Update()
-  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_Update
-  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.Update
-  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.Update()
-  nameWithType: ManipulationHandler.Update()
-- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.Update*
-  name: Update
-  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_Update_
-  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.Update
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.TryGetRaycastBoundsCorners(System.Single,UnityEngine.Vector3,System.Boolean@,UnityEngine.RaycastHit@,UnityEngine.RaycastHit@)
+  name: TryGetRaycastBoundsCorners(Single, Vector3, out Boolean, out RaycastHit, out RaycastHit)
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_TryGetRaycastBoundsCorners_System_Single_UnityEngine_Vector3_System_Boolean__UnityEngine_RaycastHit__UnityEngine_RaycastHit__
+  commentId: M:XRTK.SDK.Input.Handlers.ManipulationHandler.TryGetRaycastBoundsCorners(System.Single,UnityEngine.Vector3,System.Boolean@,UnityEngine.RaycastHit@,UnityEngine.RaycastHit@)
+  name.vb: TryGetRaycastBoundsCorners(Single, Vector3, ByRef Boolean, ByRef RaycastHit, ByRef RaycastHit)
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.TryGetRaycastBoundsCorners(System.Single, UnityEngine.Vector3, out System.Boolean, out UnityEngine.RaycastHit, out UnityEngine.RaycastHit)
+  fullName.vb: XRTK.SDK.Input.Handlers.ManipulationHandler.TryGetRaycastBoundsCorners(System.Single, UnityEngine.Vector3, ByRef System.Boolean, ByRef UnityEngine.RaycastHit, ByRef UnityEngine.RaycastHit)
+  nameWithType: ManipulationHandler.TryGetRaycastBoundsCorners(Single, Vector3, out Boolean, out RaycastHit, out RaycastHit)
+  nameWithType.vb: ManipulationHandler.TryGetRaycastBoundsCorners(Single, Vector3, ByRef Boolean, ByRef RaycastHit, ByRef RaycastHit)
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.TryGetRaycastBoundsCorners*
+  name: TryGetRaycastBoundsCorners
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_TryGetRaycastBoundsCorners_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.TryGetRaycastBoundsCorners
   isSpec: "True"
-  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.Update
-  nameWithType: ManipulationHandler.Update
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.TryGetRaycastBoundsCorners
+  nameWithType: ManipulationHandler.TryGetRaycastBoundsCorners
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.UnsnapDistance
+  name: UnsnapDistance
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_UnsnapDistance
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.UnsnapDistance
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.UnsnapDistance
+  nameWithType: ManipulationHandler.UnsnapDistance
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.UnsnapDistance*
+  name: UnsnapDistance
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_UnsnapDistance_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.UnsnapDistance
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.UnsnapDistance
+  nameWithType: ManipulationHandler.UnsnapDistance
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.UseHold
   name: UseHold
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_UseHold
@@ -28137,6 +28580,32 @@ references:
   commentId: T:XRTK.SDK.UX.BoundingBox
   fullName: XRTK.SDK.UX.BoundingBox
   nameWithType: BoundingBox
+- uid: XRTK.SDK.UX.BoundingBox.BoundingBoxCollider
+  name: BoundingBoxCollider
+  href: api/XRTK.SDK.UX.BoundingBox.html#XRTK_SDK_UX_BoundingBox_BoundingBoxCollider
+  commentId: P:XRTK.SDK.UX.BoundingBox.BoundingBoxCollider
+  fullName: XRTK.SDK.UX.BoundingBox.BoundingBoxCollider
+  nameWithType: BoundingBox.BoundingBoxCollider
+- uid: XRTK.SDK.UX.BoundingBox.BoundingBoxCollider*
+  name: BoundingBoxCollider
+  href: api/XRTK.SDK.UX.BoundingBox.html#XRTK_SDK_UX_BoundingBox_BoundingBoxCollider_
+  commentId: Overload:XRTK.SDK.UX.BoundingBox.BoundingBoxCollider
+  isSpec: "True"
+  fullName: XRTK.SDK.UX.BoundingBox.BoundingBoxCollider
+  nameWithType: BoundingBox.BoundingBoxCollider
+- uid: XRTK.SDK.UX.BoundingBox.BoundsCorners
+  name: BoundsCorners
+  href: api/XRTK.SDK.UX.BoundingBox.html#XRTK_SDK_UX_BoundingBox_BoundsCorners
+  commentId: P:XRTK.SDK.UX.BoundingBox.BoundsCorners
+  fullName: XRTK.SDK.UX.BoundingBox.BoundsCorners
+  nameWithType: BoundingBox.BoundsCorners
+- uid: XRTK.SDK.UX.BoundingBox.BoundsCorners*
+  name: BoundsCorners
+  href: api/XRTK.SDK.UX.BoundingBox.html#XRTK_SDK_UX_BoundingBox_BoundsCorners_
+  commentId: Overload:XRTK.SDK.UX.BoundingBox.BoundsCorners
+  isSpec: "True"
+  fullName: XRTK.SDK.UX.BoundingBox.BoundsCorners
+  nameWithType: BoundingBox.BoundsCorners
 - uid: XRTK.SDK.UX.BoundingBox.BoxColliderToUse
   name: BoxColliderToUse
   href: api/XRTK.SDK.UX.BoundingBox.html#XRTK_SDK_UX_BoundingBox_BoxColliderToUse
@@ -28306,6 +28775,32 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.UX.BoundingBox.ShowScaleHandles
   nameWithType: BoundingBox.ShowScaleHandles
+- uid: XRTK.SDK.UX.BoundingBox.UpdateBounds(System.Boolean)
+  name: UpdateBounds(Boolean)
+  href: api/XRTK.SDK.UX.BoundingBox.html#XRTK_SDK_UX_BoundingBox_UpdateBounds_System_Boolean_
+  commentId: M:XRTK.SDK.UX.BoundingBox.UpdateBounds(System.Boolean)
+  fullName: XRTK.SDK.UX.BoundingBox.UpdateBounds(System.Boolean)
+  nameWithType: BoundingBox.UpdateBounds(Boolean)
+- uid: XRTK.SDK.UX.BoundingBox.UpdateBounds*
+  name: UpdateBounds
+  href: api/XRTK.SDK.UX.BoundingBox.html#XRTK_SDK_UX_BoundingBox_UpdateBounds_
+  commentId: Overload:XRTK.SDK.UX.BoundingBox.UpdateBounds
+  isSpec: "True"
+  fullName: XRTK.SDK.UX.BoundingBox.UpdateBounds
+  nameWithType: BoundingBox.UpdateBounds
+- uid: XRTK.SDK.UX.BoundingBox.UpdateRigTransform
+  name: UpdateRigTransform()
+  href: api/XRTK.SDK.UX.BoundingBox.html#XRTK_SDK_UX_BoundingBox_UpdateRigTransform
+  commentId: M:XRTK.SDK.UX.BoundingBox.UpdateRigTransform
+  fullName: XRTK.SDK.UX.BoundingBox.UpdateRigTransform()
+  nameWithType: BoundingBox.UpdateRigTransform()
+- uid: XRTK.SDK.UX.BoundingBox.UpdateRigTransform*
+  name: UpdateRigTransform
+  href: api/XRTK.SDK.UX.BoundingBox.html#XRTK_SDK_UX_BoundingBox_UpdateRigTransform_
+  commentId: Overload:XRTK.SDK.UX.BoundingBox.UpdateRigTransform
+  isSpec: "True"
+  fullName: XRTK.SDK.UX.BoundingBox.UpdateRigTransform
+  nameWithType: BoundingBox.UpdateRigTransform
 - uid: XRTK.SDK.UX.BoundingBox.WireframeMaterial
   name: WireframeMaterial
   href: api/XRTK.SDK.UX.BoundingBox.html#XRTK_SDK_UX_BoundingBox_WireframeMaterial
@@ -29023,19 +29518,6 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.UX.Cursors.BaseCursor.CursorState
   nameWithType: BaseCursor.CursorState
-- uid: XRTK.SDK.UX.Cursors.BaseCursor.DefaultCursorDistance
-  name: DefaultCursorDistance
-  href: api/XRTK.SDK.UX.Cursors.BaseCursor.html#XRTK_SDK_UX_Cursors_BaseCursor_DefaultCursorDistance
-  commentId: P:XRTK.SDK.UX.Cursors.BaseCursor.DefaultCursorDistance
-  fullName: XRTK.SDK.UX.Cursors.BaseCursor.DefaultCursorDistance
-  nameWithType: BaseCursor.DefaultCursorDistance
-- uid: XRTK.SDK.UX.Cursors.BaseCursor.DefaultCursorDistance*
-  name: DefaultCursorDistance
-  href: api/XRTK.SDK.UX.Cursors.BaseCursor.html#XRTK_SDK_UX_Cursors_BaseCursor_DefaultCursorDistance_
-  commentId: Overload:XRTK.SDK.UX.Cursors.BaseCursor.DefaultCursorDistance
-  isSpec: "True"
-  fullName: XRTK.SDK.UX.Cursors.BaseCursor.DefaultCursorDistance
-  nameWithType: BaseCursor.DefaultCursorDistance
 - uid: XRTK.SDK.UX.Cursors.BaseCursor.GameObjectReference
   name: GameObjectReference
   href: api/XRTK.SDK.UX.Cursors.BaseCursor.html#XRTK_SDK_UX_Cursors_BaseCursor_GameObjectReference
@@ -30394,6 +30876,19 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.UX.Pointers.BaseControllerPointer.OnTeleportStarted
   nameWithType: BaseControllerPointer.OnTeleportStarted
+- uid: XRTK.SDK.UX.Pointers.BaseControllerPointer.OverrideGrabPoint
+  name: OverrideGrabPoint
+  href: api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OverrideGrabPoint
+  commentId: P:XRTK.SDK.UX.Pointers.BaseControllerPointer.OverrideGrabPoint
+  fullName: XRTK.SDK.UX.Pointers.BaseControllerPointer.OverrideGrabPoint
+  nameWithType: BaseControllerPointer.OverrideGrabPoint
+- uid: XRTK.SDK.UX.Pointers.BaseControllerPointer.OverrideGrabPoint*
+  name: OverrideGrabPoint
+  href: api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OverrideGrabPoint_
+  commentId: Overload:XRTK.SDK.UX.Pointers.BaseControllerPointer.OverrideGrabPoint
+  isSpec: "True"
+  fullName: XRTK.SDK.UX.Pointers.BaseControllerPointer.OverrideGrabPoint
+  nameWithType: BaseControllerPointer.OverrideGrabPoint
 - uid: XRTK.SDK.UX.Pointers.BaseControllerPointer.PointerDirection
   name: PointerDirection
   href: api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerDirection
@@ -30563,19 +31058,19 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.UX.Pointers.BaseControllerPointer.Start
   nameWithType: BaseControllerPointer.Start
-- uid: XRTK.SDK.UX.Pointers.BaseControllerPointer.SyncPointerTargetPosition
-  name: SyncPointerTargetPosition
-  href: api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_SyncPointerTargetPosition
-  commentId: P:XRTK.SDK.UX.Pointers.BaseControllerPointer.SyncPointerTargetPosition
-  fullName: XRTK.SDK.UX.Pointers.BaseControllerPointer.SyncPointerTargetPosition
-  nameWithType: BaseControllerPointer.SyncPointerTargetPosition
-- uid: XRTK.SDK.UX.Pointers.BaseControllerPointer.SyncPointerTargetPosition*
-  name: SyncPointerTargetPosition
-  href: api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_SyncPointerTargetPosition_
-  commentId: Overload:XRTK.SDK.UX.Pointers.BaseControllerPointer.SyncPointerTargetPosition
+- uid: XRTK.SDK.UX.Pointers.BaseControllerPointer.SyncedTarget
+  name: SyncedTarget
+  href: api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_SyncedTarget
+  commentId: P:XRTK.SDK.UX.Pointers.BaseControllerPointer.SyncedTarget
+  fullName: XRTK.SDK.UX.Pointers.BaseControllerPointer.SyncedTarget
+  nameWithType: BaseControllerPointer.SyncedTarget
+- uid: XRTK.SDK.UX.Pointers.BaseControllerPointer.SyncedTarget*
+  name: SyncedTarget
+  href: api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_SyncedTarget_
+  commentId: Overload:XRTK.SDK.UX.Pointers.BaseControllerPointer.SyncedTarget
   isSpec: "True"
-  fullName: XRTK.SDK.UX.Pointers.BaseControllerPointer.SyncPointerTargetPosition
-  nameWithType: BaseControllerPointer.SyncPointerTargetPosition
+  fullName: XRTK.SDK.UX.Pointers.BaseControllerPointer.SyncedTarget
+  nameWithType: BaseControllerPointer.SyncedTarget
 - uid: XRTK.SDK.UX.Pointers.BaseControllerPointer.System#Collections#IEqualityComparer#Equals(System.Object,System.Object)
   name: IEqualityComparer.Equals(Object, Object)
   href: api/XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_System_Collections_IEqualityComparer_Equals_System_Object_System_Object_
@@ -35697,6 +36192,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.InputSystem.Pointers.GenericPointer.OnPreRaycast
   nameWithType: GenericPointer.OnPreRaycast
+- uid: XRTK.Services.InputSystem.Pointers.GenericPointer.OverrideGrabPoint
+  name: OverrideGrabPoint
+  href: api/XRTK.Services.InputSystem.Pointers.GenericPointer.html#XRTK_Services_InputSystem_Pointers_GenericPointer_OverrideGrabPoint
+  commentId: P:XRTK.Services.InputSystem.Pointers.GenericPointer.OverrideGrabPoint
+  fullName: XRTK.Services.InputSystem.Pointers.GenericPointer.OverrideGrabPoint
+  nameWithType: GenericPointer.OverrideGrabPoint
+- uid: XRTK.Services.InputSystem.Pointers.GenericPointer.OverrideGrabPoint*
+  name: OverrideGrabPoint
+  href: api/XRTK.Services.InputSystem.Pointers.GenericPointer.html#XRTK_Services_InputSystem_Pointers_GenericPointer_OverrideGrabPoint_
+  commentId: Overload:XRTK.Services.InputSystem.Pointers.GenericPointer.OverrideGrabPoint
+  isSpec: "True"
+  fullName: XRTK.Services.InputSystem.Pointers.GenericPointer.OverrideGrabPoint
+  nameWithType: GenericPointer.OverrideGrabPoint
 - uid: XRTK.Services.InputSystem.Pointers.GenericPointer.PointerExtent
   name: PointerExtent
   href: api/XRTK.Services.InputSystem.Pointers.GenericPointer.html#XRTK_Services_InputSystem_Pointers_GenericPointer_PointerExtent
@@ -35827,19 +36335,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.InputSystem.Pointers.GenericPointer.SphereCastRadius
   nameWithType: GenericPointer.SphereCastRadius
-- uid: XRTK.Services.InputSystem.Pointers.GenericPointer.SyncPointerTargetPosition
-  name: SyncPointerTargetPosition
-  href: api/XRTK.Services.InputSystem.Pointers.GenericPointer.html#XRTK_Services_InputSystem_Pointers_GenericPointer_SyncPointerTargetPosition
-  commentId: P:XRTK.Services.InputSystem.Pointers.GenericPointer.SyncPointerTargetPosition
-  fullName: XRTK.Services.InputSystem.Pointers.GenericPointer.SyncPointerTargetPosition
-  nameWithType: GenericPointer.SyncPointerTargetPosition
-- uid: XRTK.Services.InputSystem.Pointers.GenericPointer.SyncPointerTargetPosition*
-  name: SyncPointerTargetPosition
-  href: api/XRTK.Services.InputSystem.Pointers.GenericPointer.html#XRTK_Services_InputSystem_Pointers_GenericPointer_SyncPointerTargetPosition_
-  commentId: Overload:XRTK.Services.InputSystem.Pointers.GenericPointer.SyncPointerTargetPosition
+- uid: XRTK.Services.InputSystem.Pointers.GenericPointer.SyncedTarget
+  name: SyncedTarget
+  href: api/XRTK.Services.InputSystem.Pointers.GenericPointer.html#XRTK_Services_InputSystem_Pointers_GenericPointer_SyncedTarget
+  commentId: P:XRTK.Services.InputSystem.Pointers.GenericPointer.SyncedTarget
+  fullName: XRTK.Services.InputSystem.Pointers.GenericPointer.SyncedTarget
+  nameWithType: GenericPointer.SyncedTarget
+- uid: XRTK.Services.InputSystem.Pointers.GenericPointer.SyncedTarget*
+  name: SyncedTarget
+  href: api/XRTK.Services.InputSystem.Pointers.GenericPointer.html#XRTK_Services_InputSystem_Pointers_GenericPointer_SyncedTarget_
+  commentId: Overload:XRTK.Services.InputSystem.Pointers.GenericPointer.SyncedTarget
   isSpec: "True"
-  fullName: XRTK.Services.InputSystem.Pointers.GenericPointer.SyncPointerTargetPosition
-  nameWithType: GenericPointer.SyncPointerTargetPosition
+  fullName: XRTK.Services.InputSystem.Pointers.GenericPointer.SyncedTarget
+  nameWithType: GenericPointer.SyncedTarget
 - uid: XRTK.Services.InputSystem.Pointers.GenericPointer.System#Collections#IEqualityComparer#Equals(System.Object,System.Object)
   name: IEqualityComparer.Equals(Object, Object)
   href: api/XRTK.Services.InputSystem.Pointers.GenericPointer.html#XRTK_Services_InputSystem_Pointers_GenericPointer_System_Collections_IEqualityComparer_Equals_System_Object_System_Object_
@@ -36499,6 +37007,31 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.MixedRealityToolkit.TeleportSystem
   nameWithType: MixedRealityToolkit.TeleportSystem
+- uid: XRTK.Services.MixedRealityToolkit.TryGetService*
+  name: TryGetService
+  href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_TryGetService_
+  commentId: Overload:XRTK.Services.MixedRealityToolkit.TryGetService
+  isSpec: "True"
+  fullName: XRTK.Services.MixedRealityToolkit.TryGetService
+  nameWithType: MixedRealityToolkit.TryGetService
+- uid: XRTK.Services.MixedRealityToolkit.TryGetService``1(``0@,System.Boolean)
+  name: TryGetService<T>(out T, Boolean)
+  href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_TryGetService__1___0__System_Boolean_
+  commentId: M:XRTK.Services.MixedRealityToolkit.TryGetService``1(``0@,System.Boolean)
+  name.vb: TryGetService(Of T)(ByRef T, Boolean)
+  fullName: XRTK.Services.MixedRealityToolkit.TryGetService<T>(out T, System.Boolean)
+  fullName.vb: XRTK.Services.MixedRealityToolkit.TryGetService(Of T)(ByRef T, System.Boolean)
+  nameWithType: MixedRealityToolkit.TryGetService<T>(out T, Boolean)
+  nameWithType.vb: MixedRealityToolkit.TryGetService(Of T)(ByRef T, Boolean)
+- uid: XRTK.Services.MixedRealityToolkit.TryGetService``1(System.String,``0@,System.Boolean)
+  name: TryGetService<T>(String, out T, Boolean)
+  href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_TryGetService__1_System_String___0__System_Boolean_
+  commentId: M:XRTK.Services.MixedRealityToolkit.TryGetService``1(System.String,``0@,System.Boolean)
+  name.vb: TryGetService(Of T)(String, ByRef T, Boolean)
+  fullName: XRTK.Services.MixedRealityToolkit.TryGetService<T>(System.String, out T, System.Boolean)
+  fullName.vb: XRTK.Services.MixedRealityToolkit.TryGetService(Of T)(System.String, ByRef T, System.Boolean)
+  nameWithType: MixedRealityToolkit.TryGetService<T>(String, out T, Boolean)
+  nameWithType.vb: MixedRealityToolkit.TryGetService(Of T)(String, ByRef T, Boolean)
 - uid: XRTK.Services.MixedRealityToolkit.UnregisterService*
   name: UnregisterService
   href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_UnregisterService_
@@ -37387,6 +37920,45 @@ references:
   isSpec: "True"
   fullName: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_05_09_GetAllMixedRealityExtensionServices
   nameWithType: TestFixture_01_MixedRealityToolkitTests.Test_05_09_GetAllMixedRealityExtensionServices
+- uid: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_01_TryRegisterMixedRealityDataProvider
+  name: Test_06_01_TryRegisterMixedRealityDataProvider()
+  href: api/XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.html#XRTK_Tests_Core_TestFixture_01_MixedRealityToolkitTests_Test_06_01_TryRegisterMixedRealityDataProvider
+  commentId: M:XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_01_TryRegisterMixedRealityDataProvider
+  fullName: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_01_TryRegisterMixedRealityDataProvider()
+  nameWithType: TestFixture_01_MixedRealityToolkitTests.Test_06_01_TryRegisterMixedRealityDataProvider()
+- uid: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_01_TryRegisterMixedRealityDataProvider*
+  name: Test_06_01_TryRegisterMixedRealityDataProvider
+  href: api/XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.html#XRTK_Tests_Core_TestFixture_01_MixedRealityToolkitTests_Test_06_01_TryRegisterMixedRealityDataProvider_
+  commentId: Overload:XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_01_TryRegisterMixedRealityDataProvider
+  isSpec: "True"
+  fullName: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_01_TryRegisterMixedRealityDataProvider
+  nameWithType: TestFixture_01_MixedRealityToolkitTests.Test_06_01_TryRegisterMixedRealityDataProvider
+- uid: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_02_TryRegisterMixedRealityDataProviderFail
+  name: Test_06_02_TryRegisterMixedRealityDataProviderFail()
+  href: api/XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.html#XRTK_Tests_Core_TestFixture_01_MixedRealityToolkitTests_Test_06_02_TryRegisterMixedRealityDataProviderFail
+  commentId: M:XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_02_TryRegisterMixedRealityDataProviderFail
+  fullName: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_02_TryRegisterMixedRealityDataProviderFail()
+  nameWithType: TestFixture_01_MixedRealityToolkitTests.Test_06_02_TryRegisterMixedRealityDataProviderFail()
+- uid: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_02_TryRegisterMixedRealityDataProviderFail*
+  name: Test_06_02_TryRegisterMixedRealityDataProviderFail
+  href: api/XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.html#XRTK_Tests_Core_TestFixture_01_MixedRealityToolkitTests_Test_06_02_TryRegisterMixedRealityDataProviderFail_
+  commentId: Overload:XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_02_TryRegisterMixedRealityDataProviderFail
+  isSpec: "True"
+  fullName: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_02_TryRegisterMixedRealityDataProviderFail
+  nameWithType: TestFixture_01_MixedRealityToolkitTests.Test_06_02_TryRegisterMixedRealityDataProviderFail
+- uid: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_03_TryRegisterMixedRealityDataProviderByName
+  name: Test_06_03_TryRegisterMixedRealityDataProviderByName()
+  href: api/XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.html#XRTK_Tests_Core_TestFixture_01_MixedRealityToolkitTests_Test_06_03_TryRegisterMixedRealityDataProviderByName
+  commentId: M:XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_03_TryRegisterMixedRealityDataProviderByName
+  fullName: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_03_TryRegisterMixedRealityDataProviderByName()
+  nameWithType: TestFixture_01_MixedRealityToolkitTests.Test_06_03_TryRegisterMixedRealityDataProviderByName()
+- uid: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_03_TryRegisterMixedRealityDataProviderByName*
+  name: Test_06_03_TryRegisterMixedRealityDataProviderByName
+  href: api/XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.html#XRTK_Tests_Core_TestFixture_01_MixedRealityToolkitTests_Test_06_03_TryRegisterMixedRealityDataProviderByName_
+  commentId: Overload:XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_03_TryRegisterMixedRealityDataProviderByName
+  isSpec: "True"
+  fullName: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_06_03_TryRegisterMixedRealityDataProviderByName
+  nameWithType: TestFixture_01_MixedRealityToolkitTests.Test_06_03_TryRegisterMixedRealityDataProviderByName
 - uid: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_07_01_EnableServicesByType
   name: Test_07_01_EnableServicesByType()
   href: api/XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.html#XRTK_Tests_Core_TestFixture_01_MixedRealityToolkitTests_Test_07_01_EnableServicesByType
@@ -39249,6 +39821,25 @@ references:
   isSpec: "True"
   fullName: XRTK.Utilities.Build.IBuildInfo.Scenes
   nameWithType: IBuildInfo.Scenes
+- uid: XRTK.Utilities.Build.LuminPlayerBuildTools
+  name: LuminPlayerBuildTools
+  href: api/XRTK.Utilities.Build.LuminPlayerBuildTools.html
+  commentId: T:XRTK.Utilities.Build.LuminPlayerBuildTools
+  fullName: XRTK.Utilities.Build.LuminPlayerBuildTools
+  nameWithType: LuminPlayerBuildTools
+- uid: XRTK.Utilities.Build.LuminPlayerBuildTools.BuildPlayer(XRTK.Utilities.Build.BuildInfo)
+  name: BuildPlayer(BuildInfo)
+  href: api/XRTK.Utilities.Build.LuminPlayerBuildTools.html#XRTK_Utilities_Build_LuminPlayerBuildTools_BuildPlayer_XRTK_Utilities_Build_BuildInfo_
+  commentId: M:XRTK.Utilities.Build.LuminPlayerBuildTools.BuildPlayer(XRTK.Utilities.Build.BuildInfo)
+  fullName: XRTK.Utilities.Build.LuminPlayerBuildTools.BuildPlayer(XRTK.Utilities.Build.BuildInfo)
+  nameWithType: LuminPlayerBuildTools.BuildPlayer(BuildInfo)
+- uid: XRTK.Utilities.Build.LuminPlayerBuildTools.BuildPlayer*
+  name: BuildPlayer
+  href: api/XRTK.Utilities.Build.LuminPlayerBuildTools.html#XRTK_Utilities_Build_LuminPlayerBuildTools_BuildPlayer_
+  commentId: Overload:XRTK.Utilities.Build.LuminPlayerBuildTools.BuildPlayer
+  isSpec: "True"
+  fullName: XRTK.Utilities.Build.LuminPlayerBuildTools.BuildPlayer
+  nameWithType: LuminPlayerBuildTools.BuildPlayer
 - uid: XRTK.Utilities.Build.UnityPlayerBuildTools
   name: UnityPlayerBuildTools
   href: api/XRTK.Utilities.Build.UnityPlayerBuildTools.html
@@ -48020,25 +48611,6 @@ references:
   commentId: N:XRTK.WindowsMixedReality.Controllers
   fullName: XRTK.WindowsMixedReality.Controllers
   nameWithType: XRTK.WindowsMixedReality.Controllers
-- uid: XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider
-  name: WindowsDictationDataProvider
-  href: api/XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider.html
-  commentId: T:XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider
-  fullName: XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider
-  nameWithType: WindowsDictationDataProvider
-- uid: XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  name: WindowsDictationDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
-  href: api/XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider.html#XRTK_WindowsMixedReality_Controllers_WindowsDictationDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_
-  commentId: M:XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  fullName: XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider.WindowsDictationDataProvider(System.String, System.UInt32, XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  nameWithType: WindowsDictationDataProvider.WindowsDictationDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
-- uid: XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider.#ctor*
-  name: WindowsDictationDataProvider
-  href: api/XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider.html#XRTK_WindowsMixedReality_Controllers_WindowsDictationDataProvider__ctor_
-  commentId: Overload:XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider.#ctor
-  isSpec: "True"
-  fullName: XRTK.WindowsMixedReality.Controllers.WindowsDictationDataProvider.WindowsDictationDataProvider
-  nameWithType: WindowsDictationDataProvider.WindowsDictationDataProvider
 - uid: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityController
   name: WindowsMixedRealityController
   href: api/XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityController.html
@@ -48132,25 +48704,6 @@ references:
   isSpec: "True"
   fullName: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider.WindowsMixedRealityDataProvider
   nameWithType: WindowsMixedRealityDataProvider.WindowsMixedRealityDataProvider
-- uid: XRTK.WindowsMixedReality.Controllers.WindowsSpeechDataProvider
-  name: WindowsSpeechDataProvider
-  href: api/XRTK.WindowsMixedReality.Controllers.WindowsSpeechDataProvider.html
-  commentId: T:XRTK.WindowsMixedReality.Controllers.WindowsSpeechDataProvider
-  fullName: XRTK.WindowsMixedReality.Controllers.WindowsSpeechDataProvider
-  nameWithType: WindowsSpeechDataProvider
-- uid: XRTK.WindowsMixedReality.Controllers.WindowsSpeechDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  name: WindowsSpeechDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
-  href: api/XRTK.WindowsMixedReality.Controllers.WindowsSpeechDataProvider.html#XRTK_WindowsMixedReality_Controllers_WindowsSpeechDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_
-  commentId: M:XRTK.WindowsMixedReality.Controllers.WindowsSpeechDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  fullName: XRTK.WindowsMixedReality.Controllers.WindowsSpeechDataProvider.WindowsSpeechDataProvider(System.String, System.UInt32, XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  nameWithType: WindowsSpeechDataProvider.WindowsSpeechDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)
-- uid: XRTK.WindowsMixedReality.Controllers.WindowsSpeechDataProvider.#ctor*
-  name: WindowsSpeechDataProvider
-  href: api/XRTK.WindowsMixedReality.Controllers.WindowsSpeechDataProvider.html#XRTK_WindowsMixedReality_Controllers_WindowsSpeechDataProvider__ctor_
-  commentId: Overload:XRTK.WindowsMixedReality.Controllers.WindowsSpeechDataProvider.#ctor
-  isSpec: "True"
-  fullName: XRTK.WindowsMixedReality.Controllers.WindowsSpeechDataProvider.WindowsSpeechDataProvider
-  nameWithType: WindowsSpeechDataProvider.WindowsSpeechDataProvider
 - uid: XRTK.WindowsMixedReality.Inspectors
   name: XRTK.WindowsMixedReality.Inspectors
   href: api/XRTK.WindowsMixedReality.Inspectors.html

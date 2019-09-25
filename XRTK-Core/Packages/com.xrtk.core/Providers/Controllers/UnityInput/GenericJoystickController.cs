@@ -89,6 +89,7 @@ namespace XRTK.Providers.Controllers.UnityInput
             switch (interactionMapping.InputType)
             {
                 case DeviceInputType.TriggerPress:
+                    Debug.Assert(!string.IsNullOrEmpty(interactionMapping.AxisCodeX), $"[{interactionMapping.Description}] Axis mapping does not have an Axis defined");
                     interactionMapping.BoolData = Input.GetAxisRaw(interactionMapping.AxisCodeX).Equals(1);
                     break;
                 case DeviceInputType.TriggerNearTouch:
@@ -97,6 +98,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                 case DeviceInputType.MiddleFingerNearTouch:
                 case DeviceInputType.RingFingerNearTouch:
                 case DeviceInputType.PinkyFingerNearTouch:
+                    Debug.Assert(!string.IsNullOrEmpty(interactionMapping.AxisCodeX), $"[{interactionMapping.Description}] Axis mapping does not have an Axis defined");
                     interactionMapping.BoolData = !Input.GetAxisRaw(interactionMapping.AxisCodeX).Equals(0);
                     break;
                 default:
@@ -135,6 +137,7 @@ namespace XRTK.Providers.Controllers.UnityInput
         protected void UpdateSingleAxisData(MixedRealityInteractionMapping interactionMapping)
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.SingleAxis);
+            Debug.Assert(!string.IsNullOrEmpty(interactionMapping.AxisCodeX), $"[{interactionMapping.Description}] Single Axis mapping does not have an Axis defined");
 
             var singleAxisValue = Input.GetAxisRaw(interactionMapping.AxisCodeX);
 
@@ -178,6 +181,8 @@ namespace XRTK.Providers.Controllers.UnityInput
         protected void UpdateDualAxisData(MixedRealityInteractionMapping interactionMapping)
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.DualAxis);
+            Debug.Assert(!string.IsNullOrEmpty(interactionMapping.AxisCodeX), $"[{interactionMapping.Description}] Dual Axis mapping does not have an Axis defined for X Axis");
+            Debug.Assert(!string.IsNullOrEmpty(interactionMapping.AxisCodeY), $"[{interactionMapping.Description}] Dual Axis mapping does not have an Axis defined for Y Axis");
 
             dualAxisPosition.x = Input.GetAxis(interactionMapping.AxisCodeX);
             dualAxisPosition.y = Input.GetAxis(interactionMapping.AxisCodeY);

@@ -1,13 +1,14 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
+
 using UnityEngine;
 
 namespace XRTK.Extensions.XRTK.Extensions
 {
     /// <summary>
-    /// Extension methods for Unity's <see cref="BoxCollider"/>
+    /// Extension methods for Unity's <see cref="Collider"/>
     /// </summary>
-    public static class BoxColliderExtensions
+    public static class ColliderExtensions
     {
         /// <summary>
         /// Gets all the corner points of the collider's bounds in world space.
@@ -15,7 +16,7 @@ namespace XRTK.Extensions.XRTK.Extensions
         /// <param name="collider"></param>
         /// <param name="transform"></param>
         /// <param name="positions"></param>
-        public static void GetCornerPositionsWorldSpace(this BoxCollider collider, Transform transform, ref Vector3[] positions)
+        public static void GetCornerPositionsWorldSpace(this Collider collider, Transform transform, ref Vector3[] positions)
         {
             // Store current rotation then zero out the rotation so that the bounds
             // are computed when the object is in its 'axis aligned orientation'.

@@ -179,7 +179,7 @@ namespace XRTK.Utilities.Build
         private int lastSessionConnectionInfoIndex;
         private static int currentConnectionInfoIndex = 0;
         private static DevicePortalConnections portalConnections = null;
-        private static CancellationTokenSource appxCancellationTokenSource = null;
+        private static CancellationTokenSource buildCancellationTokenSource = null;
 
         #endregion Fields
 
@@ -247,14 +247,12 @@ namespace XRTK.Utilities.Build
                 OpenPlayerSettingsGUI();
 
                 EditorGUILayout.EndHorizontal();
-
                 EditorGUILayout.Space();
-
                 EditorGUILayout.BeginHorizontal();
 
                 if (GUILayout.Button("Build Unity Project", GUILayout.Width(192), GUILayout.ExpandWidth(true)))
                 {
-                    EditorApplication.delayCall += () => UnityPlayerBuildTools.BuildUnityPlayer(new BuildInfo());
+                    EditorApplication.delayCall += BuildUnityProject;
                 }
 
                 if (GUILayout.Button("Open Unity Build Window", GUILayout.Width(192), GUILayout.ExpandWidth(true)))
@@ -403,6 +401,7 @@ namespace XRTK.Utilities.Build
             string currentSDKVersion = EditorUserBuildSettings.wsaMinUWPSDK;
 
             Version chosenSDKVersion = null;
+
             for (var i = 0; i < windowsSdkVersions.Count; i++)
             {
                 // windowsSdkVersions is sorted in ascending order, so we always take
@@ -604,7 +603,7 @@ namespace XRTK.Utilities.Build
             // Restore previous label width
             EditorGUIUtility.labelWidth = previousLabelWidth;
 
-            if (appxCancellationTokenSource == null)
+            if (buildCancellationTokenSource == null)
             {
                 // Build APPX
                 GUI.enabled = ShouldBuildAppxBeEnabled;
@@ -630,7 +629,7 @@ namespace XRTK.Utilities.Build
             {
                 if (GUILayout.Button("Cancel Build", GUILayout.Width(HALF_WIDTH)))
                 {
-                    appxCancellationTokenSource.Cancel();
+                    buildCancellationTokenSource.Cancel();
                 }
             }
 
@@ -1010,25 +1009,49 @@ namespace XRTK.Utilities.Build
             }
         }
 
+        /// <summary>
+        /// Builds the Unity Project for the <see cref="EditorUserBuildSettings.activeBuildTarget"/>
+        /// </summary>
         public static async void BuildUnityProject()
         {
             Debug.Assert(!isBuilding);
             isBuilding = true;
 
-            appxCancellationTokenSource = new CancellationTokenSource();
-            await UwpPlayerBuildTools.BuildPlayer(BuildDeployPreferences.BuildDirectory, cancellationToken: appxCancellationTokenSource.Token);
-            appxCancellationTokenSource.Dispose();
-            appxCancellationTokenSource = null;
+            buildCancellationTokenSource = new CancellationTokenSource();
+
+            switch (EditorUserBuildSettings.activeBuildTarget)
+            {
+                case BuildTarget.WSAPlayer:
+                    await UwpPlayerBuildTools.BuildPlayer(BuildDeployPreferences.BuildDirectory, cancellationToken: buildCancellationTokenSource.Token);
+                    break;
+                case BuildTarget.Lumin:
+                    LuminPlayerBuildTools.BuildPlayer(new BuildInfo());
+                    break;
+                default:
+                    UnityPlayerBuildTools.BuildUnityPlayer(new BuildInfo());
+                    break;
+            }
+
+            buildCancellationTokenSource.Dispose();
+            buildCancellationTokenSource = null;
 
             isBuilding = false;
         }
 
+        /// <summary>
+        /// Builds the appx for the <see cref="BuildTarget.WSAPlayer"/> build target
+        /// </summary>
         public static async void BuildAppx()
         {
+            if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.WSAPlayer)
+            {
+                return;
+            }
+
             Debug.Assert(!isBuilding);
             isBuilding = true;
 
-            appxCancellationTokenSource = new CancellationTokenSource();
+            buildCancellationTokenSource = new CancellationTokenSource();
 
             var buildInfo = new UwpBuildInfo
             {
@@ -1040,42 +1063,58 @@ namespace XRTK.Utilities.Build
             };
 
             EditorAssemblyReloadManager.LockReloadAssemblies = true;
-            await UwpAppxBuildTools.BuildAppxAsync(buildInfo, appxCancellationTokenSource.Token);
+            await UwpAppxBuildTools.BuildAppxAsync(buildInfo, buildCancellationTokenSource.Token);
             EditorAssemblyReloadManager.LockReloadAssemblies = false;
-            appxCancellationTokenSource.Dispose();
-            appxCancellationTokenSource = null;
+            buildCancellationTokenSource.Dispose();
+            buildCancellationTokenSource = null;
 
             isBuilding = false;
         }
 
+        /// <summary>
+        /// Builds all dependencies for the project
+        /// </summary>
+        /// <param name="install">Should this build also be installed on any detected devices?</param>
         public static async void BuildAll(bool install = true)
         {
             Debug.Assert(!isBuilding);
             isBuilding = true;
             EditorAssemblyReloadManager.LockReloadAssemblies = true;
 
-            appxCancellationTokenSource = new CancellationTokenSource();
+            buildCancellationTokenSource = new CancellationTokenSource();
 
-            // First build SLN
-            if (await UwpPlayerBuildTools.BuildPlayer(BuildDeployPreferences.BuildDirectory, false, appxCancellationTokenSource.Token))
+            switch (EditorUserBuildSettings.activeBuildTarget)
             {
-                if (install)
-                {
-                    string fullBuildLocation = CalcMostRecentBuild();
+                default:
+                    UnityPlayerBuildTools.BuildUnityPlayer(new BuildInfo());
+                    break;
+                case BuildTarget.Lumin:
+                    LuminPlayerBuildTools.BuildPlayer(new BuildInfo());
+                    break;
+                case BuildTarget.WSAPlayer:
+                    // First build SLN
+                    if (await UwpPlayerBuildTools.BuildPlayer(BuildDeployPreferences.BuildDirectory, false, buildCancellationTokenSource.Token))
+                    {
+                        if (install)
+                        {
+                            string fullBuildLocation = CalcMostRecentBuild();
 
-                    if (UwpBuildDeployPreferences.TargetAllConnections)
-                    {
-                        await InstallAppOnDevicesListAsync(fullBuildLocation, portalConnections);
+                            if (UwpBuildDeployPreferences.TargetAllConnections)
+                            {
+                                await InstallAppOnDevicesListAsync(fullBuildLocation, portalConnections);
+                            }
+                            else
+                            {
+                                await InstallOnTargetDeviceAsync(fullBuildLocation, portalConnections.Connections[currentConnectionInfoIndex]);
+                            }
+                        }
                     }
-                    else
-                    {
-                        await InstallOnTargetDeviceAsync(fullBuildLocation, portalConnections.Connections[currentConnectionInfoIndex]);
-                    }
-                }
+
+                    break;
             }
 
-            appxCancellationTokenSource.Dispose();
-            appxCancellationTokenSource = null;
+            buildCancellationTokenSource.Dispose();
+            buildCancellationTokenSource = null;
             EditorAssemblyReloadManager.LockReloadAssemblies = false;
             isBuilding = false;
         }

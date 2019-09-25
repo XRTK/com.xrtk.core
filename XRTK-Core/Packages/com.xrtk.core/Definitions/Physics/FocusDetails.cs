@@ -40,7 +40,7 @@ namespace XRTK.Definitions.Physics
         /// <summary>
         /// The object hit by the last raycast.
         /// </summary>
-        public GameObject Object { get; set; }
+        public GameObject HitObject { get; set; }
 
         /// <summary>
         /// The last raycast hit info.

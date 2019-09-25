@@ -37,10 +37,11 @@ namespace XRTK.Utilities
         {
             Debug.Assert(Canvas != null);
 
-            if (MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
+            if (MixedRealityToolkit.IsInitialized &&
+                MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
                 Canvas.isRootCanvas && Canvas.renderMode == RenderMode.WorldSpace)
             {
-                Canvas.worldCamera = MixedRealityToolkit.InputSystem?.FocusProvider?.UIRaycastCamera;
+                Canvas.worldCamera = MixedRealityToolkit.InputSystem.FocusProvider.UIRaycastCamera;
             }
         }
     }

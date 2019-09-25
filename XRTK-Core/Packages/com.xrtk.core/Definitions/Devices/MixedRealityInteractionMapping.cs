@@ -5,6 +5,7 @@ using System;
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 
 namespace XRTK.Definitions.Devices
 {
@@ -15,42 +16,6 @@ namespace XRTK.Definitions.Devices
     [Serializable]
     public class MixedRealityInteractionMapping
     {
-        /// <summary>
-        /// The constructor for a new Interaction Mapping definition
-        /// </summary>
-        /// <param name="id">Identity for mapping</param>
-        /// <param name="description">The description of the interaction mapping.</param> 
-        /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
-        /// <param name="inputType">The physical input device / control</param>
-        /// <param name="axisCodeX">Optional horizontal or single axis value to get axis data from Unity's old input system.</param>
-        /// <param name="axisCodeY">Optional vertical axis value to get axis data from Unity's old input system.</param>
-        /// <param name="invertXAxis">Optional horizontal axis invert option.</param>
-        /// <param name="invertYAxis">Optional vertical axis invert option.</param> 
-        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, DeviceInputType inputType, string axisCodeX, string axisCodeY = "", bool invertXAxis = false, bool invertYAxis = false)
-        {
-            this.id = id;
-            this.description = description;
-            this.axisType = axisType;
-            this.inputType = inputType;
-            inputAction = MixedRealityInputAction.None;
-            keyCode = KeyCode.None;
-            this.inputName = string.Empty;
-            this.axisCodeX = axisCodeX;
-            this.axisCodeY = axisCodeY;
-            this.invertXAxis = invertXAxis;
-            this.invertYAxis = invertYAxis;
-            rawData = null;
-            boolData = false;
-            floatData = 0f;
-            vector2Data = Vector2.zero;
-            positionData = Vector3.zero;
-            rotationData = Quaternion.identity;
-            poseData = MixedRealityPose.ZeroIdentity;
-            changed = false;
-            updated = false;
-            inputName = string.Empty;
-        }
-
         /// <summary>
         /// The constructor for a new Interaction Mapping definition
         /// </summary>
@@ -122,6 +87,42 @@ namespace XRTK.Definitions.Devices
         /// <param name="description">The description of the interaction mapping.</param> 
         /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
         /// <param name="inputType">The physical input device / control</param>
+        /// <param name="axisCodeX">Optional horizontal or single axis value to get axis data from Unity's old input system.</param>
+        /// <param name="axisCodeY">Optional vertical axis value to get axis data from Unity's old input system.</param>
+        /// <param name="invertXAxis">Optional horizontal axis invert option.</param>
+        /// <param name="invertYAxis">Optional vertical axis invert option.</param> 
+        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, DeviceInputType inputType, string axisCodeX, string axisCodeY = "", bool invertXAxis = false, bool invertYAxis = false)
+        {
+            this.id = id;
+            this.description = description;
+            this.axisType = axisType;
+            this.inputType = inputType;
+            inputAction = MixedRealityInputAction.None;
+            keyCode = KeyCode.None;
+            this.inputName = string.Empty;
+            this.axisCodeX = axisCodeX;
+            this.axisCodeY = axisCodeY;
+            this.invertXAxis = invertXAxis;
+            this.invertYAxis = invertYAxis;
+            rawData = null;
+            boolData = false;
+            floatData = 0f;
+            vector2Data = Vector2.zero;
+            positionData = Vector3.zero;
+            rotationData = Quaternion.identity;
+            poseData = MixedRealityPose.ZeroIdentity;
+            changed = false;
+            updated = false;
+            inputName = string.Empty;
+        }
+
+        /// <summary>
+        /// The constructor for a new Interaction Mapping definition
+        /// </summary>
+        /// <param name="id">Identity for mapping</param>
+        /// <param name="description">The description of the interaction mapping.</param> 
+        /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
+        /// <param name="inputType">The physical input device / control</param>
         /// <param name="inputAction">The logical MixedRealityInputAction that this input performs</param>
         /// <param name="keyCode">Optional KeyCode value to get input from Unity's old input system</param>
         /// <param name="axisCodeX">Optional horizontal or single axis value to get axis data from Unity's old input system.</param>
@@ -150,43 +151,6 @@ namespace XRTK.Definitions.Devices
             changed = false;
             updated = false;
             inputName = string.Empty;
-        }
-
-        /// <summary>
-        /// The constructor for a new Interaction Mapping definition
-        /// </summary>
-        /// <param name="id">Identity for mapping</param>
-        /// <param name="description">The description of the interaction mapping.</param> 
-        /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
-        /// <param name="inputType">The physical input device / control</param>
-        /// <param name="inputAction">The logical MixedRealityInputAction that this input performs</param>
-        /// <param name="inputName">Optional inputName value to get input for a coded input identity from a provider</param>
-        /// <param name="axisCodeX">Optional horizontal or single axis value to get axis data from Unity's old input system.</param>
-        /// <param name="axisCodeY">Optional vertical axis value to get axis data from Unity's old input system.</param>
-        /// <param name="invertXAxis">Optional horizontal axis invert option.</param>
-        /// <param name="invertYAxis">Optional vertical axis invert option.</param> 
-        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, DeviceInputType inputType, string inputName, MixedRealityInputAction inputAction, string axisCodeX = "", string axisCodeY = "", bool invertXAxis = false, bool invertYAxis = false)
-        {
-            this.id = id;
-            this.description = description;
-            this.axisType = axisType;
-            this.inputType = inputType;
-            this.inputAction = inputAction;
-            this.inputName = inputName;
-            this.axisCodeX = axisCodeX;
-            this.axisCodeY = axisCodeY;
-            this.invertXAxis = invertXAxis;
-            this.invertYAxis = invertYAxis;
-            rawData = null;
-            boolData = false;
-            floatData = 0f;
-            vector2Data = Vector2.zero;
-            positionData = Vector3.zero;
-            rotationData = Quaternion.identity;
-            poseData = MixedRealityPose.ZeroIdentity;
-            changed = false;
-            updated = false;
-            keyCode = KeyCode.None;
         }
 
         /// <summary>
@@ -229,7 +193,6 @@ namespace XRTK.Definitions.Devices
         public uint Id => id;
 
         [SerializeField]
-        [Tooltip("The description of the interaction mapping.")]
         private string description;
 
         /// <summary>
@@ -238,7 +201,6 @@ namespace XRTK.Definitions.Devices
         public string Description => description;
 
         [SerializeField]
-        [Tooltip("The axis type of the button, e.g. Analogue, Digital, etc.")]
         private AxisType axisType;
 
         /// <summary>
@@ -396,6 +358,29 @@ namespace XRTK.Definitions.Devices
             private set => updated = value;
         }
 
+        /// <summary>
+        /// The timestamp when this data was last updated.
+        /// </summary>
+        public float LastUpdatedTime { get; private set; } = 0f;
+
+        /// <summary>
+        /// The current count of changes since the <see cref="LastUpdatedTime"/>.
+        /// </summary>
+        public int Count { get; private set; } = 0;
+
+        [SerializeField]
+        [Tooltip("The rate at which the Count is reset")]
+        private float countResetTimer = 0.25f;
+
+        /// <summary>
+        /// The rate at which the <see cref="Count"/> is reset.
+        /// </summary>
+        public float CountResetTimer
+        {
+            get => countResetTimer;
+            set => countResetTimer = value;
+        }
+
         #endregion Interaction Properties
 
         #region Definition Data Items
@@ -436,6 +421,7 @@ namespace XRTK.Definitions.Devices
                 // use the internal reading for changed so we don't reset it.
                 Updated = changed || value != null;
                 rawData = value;
+                Update();
             }
         }
 
@@ -458,6 +444,7 @@ namespace XRTK.Definitions.Devices
                 // use the internal reading for changed so we don't reset it.
                 Updated = changed || value;
                 boolData = value;
+                Update();
             }
         }
 
@@ -473,8 +460,7 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.SingleAxis)
                 {
-                    Debug.LogError(
-                        $"SetFloatValue is only valid for AxisType.SingleAxis InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"SetFloatValue is only valid for AxisType.SingleAxis InteractionMappings\nPlease check the {inputType} mapping for the current controller");
                 }
 
                 var newValue = value;
@@ -488,6 +474,7 @@ namespace XRTK.Definitions.Devices
                 // use the internal reading for changed so we don't reset it.
                 Updated = changed || !floatData.Equals(0f);
                 floatData = value;
+                Update();
             }
         }
 
@@ -522,6 +509,7 @@ namespace XRTK.Definitions.Devices
                 // use the internal reading for changed so we don't reset it.
                 Updated = changed || !newValue.Equals(Vector2.zero);
                 vector2Data = newValue;
+                Update();
             }
         }
 
@@ -546,6 +534,7 @@ namespace XRTK.Definitions.Devices
                 // use the internal reading for changed so we don't reset it.
                 Updated = changed || !value.Equals(Vector3.zero);
                 positionData = value;
+                Update();
             }
         }
 
@@ -568,6 +557,7 @@ namespace XRTK.Definitions.Devices
                 // use the internal reading for changed so we don't reset it.
                 Updated = changed || !value.Equals(Quaternion.identity);
                 rotationData = value;
+                Update();
             }
         }
 
@@ -591,9 +581,24 @@ namespace XRTK.Definitions.Devices
                 poseData = value;
                 positionData = poseData.Position;
                 rotationData = poseData.Rotation;
+                Update();
             }
         }
 
         #endregion Data Properties
+
+        private void Update()
+        {
+            LastUpdatedTime = Time.time;
+            Count++;
+        }
+
+        internal void Tick()
+        {
+            if (Time.time - LastUpdatedTime > CountResetTimer && Count > 0)
+            {
+                // TODO Check input action profile triggers then raise events based on them.
+            }
+        }
     }
 }

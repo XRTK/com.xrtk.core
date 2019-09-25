@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
@@ -42,19 +43,6 @@ namespace XRTK.Definitions.InputSystem
         {
             get => inputActionsProfile;
             internal set => inputActionsProfile = value;
-        }
-
-        [SerializeField]
-        [Tooltip("Input Action Rules Profile for raising actions based on specific criteria.")]
-        private MixedRealityInputActionRulesProfile inputActionRulesProfile;
-
-        /// <summary>
-        /// Input Action Rules Profile for raising actions based on specific criteria.
-        /// </summary>
-        public MixedRealityInputActionRulesProfile InputActionRulesProfile
-        {
-            get => inputActionRulesProfile;
-            internal set => inputActionRulesProfile = value;
         }
 
         [SerializeField]

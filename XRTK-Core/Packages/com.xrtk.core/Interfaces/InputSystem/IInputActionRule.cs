@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using XRTK.Definitions.InputSystem;
 
 namespace XRTK.Interfaces.InputSystem
@@ -9,6 +10,7 @@ namespace XRTK.Interfaces.InputSystem
     /// Interface for defining Input Action Rules
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    [Obsolete]
     public interface IInputActionRule<T>
     {
         /// <summary>

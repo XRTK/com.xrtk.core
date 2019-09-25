@@ -19,12 +19,14 @@ namespace XRTK.Inspectors.Profiles
         private static Vector2 scrollPosition = Vector2.zero;
 
         private SerializedProperty inputActionList;
+        private SerializedProperty inputActionProfileList;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
             inputActionList = serializedObject.FindProperty("inputActions");
+            inputActionProfileList = serializedObject.FindProperty("inputActionProfiles");
         }
 
         public override void OnInspectorGUI()
@@ -49,6 +51,11 @@ namespace XRTK.Inspectors.Profiles
 
             serializedObject.Update();
             RenderList(inputActionList);
+
+            EditorGUILayout.Space();
+
+            EditorGUILayout.PropertyField(inputActionProfileList, true);
+
             serializedObject.ApplyModifiedProperties();
         }
 

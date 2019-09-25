@@ -17,7 +17,6 @@ namespace XRTK.Tests.InputSystem
             var inputSystemProfile = ScriptableObject.CreateInstance<MixedRealityInputSystemProfile>();
             inputSystemProfile.FocusProviderType = typeof(FocusProvider);
             inputSystemProfile.InputActionsProfile = ScriptableObject.CreateInstance<MixedRealityInputActionsProfile>();
-            inputSystemProfile.InputActionRulesProfile = ScriptableObject.CreateInstance<MixedRealityInputActionRulesProfile>();
             inputSystemProfile.PointerProfile = ScriptableObject.CreateInstance<MixedRealityPointerProfile>();
             inputSystemProfile.PointerProfile.GazeProviderType = typeof(TestGazeProvider);
             inputSystemProfile.GesturesProfile = ScriptableObject.CreateInstance<MixedRealityGesturesProfile>();

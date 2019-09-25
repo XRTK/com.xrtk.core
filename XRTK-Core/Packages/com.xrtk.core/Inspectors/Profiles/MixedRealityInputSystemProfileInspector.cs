@@ -14,7 +14,6 @@ namespace XRTK.Inspectors.Profiles
     {
         private SerializedProperty focusProviderType;
         private SerializedProperty inputActionsProfile;
-        private SerializedProperty inputActionRulesProfile;
         private SerializedProperty pointerProfile;
         private SerializedProperty gesturesProfile;
         private SerializedProperty speechCommandsProfile;
@@ -28,7 +27,6 @@ namespace XRTK.Inspectors.Profiles
 
             focusProviderType = serializedObject.FindProperty("focusProviderType");
             inputActionsProfile = serializedObject.FindProperty("inputActionsProfile");
-            inputActionRulesProfile = serializedObject.FindProperty("inputActionRulesProfile");
             pointerProfile = serializedObject.FindProperty("pointerProfile");
             gesturesProfile = serializedObject.FindProperty("gesturesProfile");
             speechCommandsProfile = serializedObject.FindProperty("speechCommandsProfile");
@@ -65,7 +63,6 @@ namespace XRTK.Inspectors.Profiles
             }
 
             changed |= RenderProfile(thisProfile, inputActionsProfile);
-            changed |= RenderProfile(thisProfile, inputActionRulesProfile);
             changed |= RenderProfile(thisProfile, pointerProfile);
             changed |= RenderProfile(thisProfile, gesturesProfile);
             changed |= RenderProfile(thisProfile, speechCommandsProfile);

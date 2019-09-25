@@ -58,6 +58,8 @@ namespace XRTK.Providers.Controllers.UnityInput
         {
             if (!Input.mousePresent) { return; }
 
+            base.UpdateController();
+
             // Bail early if our mouse isn't in our game window.
             if (Input.mousePosition.x < 0 ||
                 Input.mousePosition.y < 0 ||

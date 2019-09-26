@@ -17,10 +17,25 @@ namespace XRTK.Definitions.InputSystem
     }
 
     [Serializable]
-    public struct InputActionTrigger
+    public class InputActionTrigger
     {
-        // TODO Add conditions to raise action
+        [SerializeField]
+        private EqualityOperator eqOperator = EqualityOperator.None;
 
-        public MixedRealityInputAction Action { get; set; }
+        public EqualityOperator Operator => eqOperator;
+
+        [SerializeField]
+        private MixedRealityInputAction action = MixedRealityInputAction.None;
+
+        public MixedRealityInputAction Action => action;
+    }
+
+    public enum EqualityOperator
+    {
+        None = 0,
+        Equals,
+        NotEquals,
+        GreaterThan,
+        LessThan,
     }
 }

@@ -5,7 +5,6 @@ using System;
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
-using XRTK.Extensions;
 
 namespace XRTK.Definitions.Devices
 {

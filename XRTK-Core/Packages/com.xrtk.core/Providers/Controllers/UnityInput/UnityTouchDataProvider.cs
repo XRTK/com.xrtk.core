@@ -9,8 +9,6 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 using XRTK.Utilities;
-using XRTK.Utilities.Async;
-using XRTK.Utilities.Async.AwaitYieldInstructions;
 
 namespace XRTK.Providers.Controllers.UnityInput
 {

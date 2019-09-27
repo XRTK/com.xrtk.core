@@ -1,7 +1,7 @@
 {
     "name": "XRTK",
     "references": [
-        "XRTK.Utilities.Editor"
+        "GUID:395bd8dd25074437ba735310022f8f0a"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [],

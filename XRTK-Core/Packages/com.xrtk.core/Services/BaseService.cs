@@ -2,13 +2,14 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using XRTK.Interfaces;
 
 namespace XRTK.Services
 {
     /// <summary>
-    /// The base service implements <see cref="Interfaces.IMixedRealityService"/> and provides default properties for all services.
+    /// The base service implements <see cref="IMixedRealityService"/> and provides default properties for all services.
     /// </summary>
-    public abstract class BaseService : Interfaces.IMixedRealityService
+    public abstract class BaseService : IMixedRealityService
     {
         #region IMixedRealityService Implementation
 
@@ -44,7 +45,7 @@ namespace XRTK.Services
 
         /// <inheritdoc />
         public virtual void OnApplicationFocus(bool isFocused) { }
-        
+
         /// <inheritdoc />
         public void OnApplicationPause(bool isPaused) { }
 
@@ -59,7 +60,8 @@ namespace XRTK.Services
             OnDispose(true);
         }
 
-        public void Dispose()
+        /// <inheritdoc />
+        void IDisposable.Dispose()
         {
             if (disposed) { return; }
             disposed = true;

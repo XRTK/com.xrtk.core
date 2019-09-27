@@ -327,19 +327,6 @@ namespace XRTK.Definitions
         #region Native Library System
 
         [SerializeField]
-        [Tooltip("Profile for setting up native libraries as data providers.")]
-        private NativeLibrarySystemConfigurationProfile nativeLibrarySystemConfigurationProfile = null;
-
-        /// <summary>
-        /// Profile for setting up native libraries as data providers.
-        /// </summary>
-        public NativeLibrarySystemConfigurationProfile NativeLibrarySystemConfigurationProfile
-        {
-            get => nativeLibrarySystemConfigurationProfile;
-            internal set => nativeLibrarySystemConfigurationProfile = value;
-        }
-
-        [SerializeField]
         [Tooltip("Enable the native library system.")]
         private bool enableNativeLibrarySystem = false;
 
@@ -348,7 +335,7 @@ namespace XRTK.Definitions
         /// </summary>
         public bool IsNativeLibrarySystemEnabled
         {
-            get => enableNativeLibrarySystem && NativeLibrarySystemType?.Type != null && nativeLibrarySystemConfigurationProfile != null;
+            get => enableNativeLibrarySystem && NativeLibrarySystemType?.Type != null && nativeLibrarySystemProfile != null;
             internal set => enableNativeLibrarySystem = value;
         }
 
@@ -364,6 +351,19 @@ namespace XRTK.Definitions
         {
             get => nativeLibrarySystemType;
             internal set => nativeLibrarySystemType = value;
+        }
+
+        [SerializeField]
+        [Tooltip("Profile for setting up native libraries as data providers.")]
+        private NativeLibrarySystemProfile nativeLibrarySystemProfile = null;
+
+        /// <summary>
+        /// Profile for setting up native libraries as data providers.
+        /// </summary>
+        public NativeLibrarySystemProfile NativeLibrarySystemProfile
+        {
+            get => nativeLibrarySystemProfile;
+            internal set => nativeLibrarySystemProfile = value;
         }
 
         #endregion Native Library System

@@ -503,9 +503,9 @@ namespace XRTK.Services
 
             if (ActiveProfile.IsNativeLibrarySystemEnabled)
             {
-                if (CreateAndRegisterService<IMixedRealityNativeLibrarySystem>(ActiveProfile.NativeLibrarySystemType, ActiveProfile.NativeLibrarySystemConfigurationProfile) && NativeLibrarySystem != null)
+                if (CreateAndRegisterService<IMixedRealityNativeLibrarySystem>(ActiveProfile.NativeLibrarySystemType, ActiveProfile.NativeLibrarySystemProfile) && NativeLibrarySystem != null)
                 {
-                    var nativeConfigurations = ActiveProfile.NativeLibrarySystemConfigurationProfile.NativeDataModelConfigurations;
+                    var nativeConfigurations = ActiveProfile.NativeLibrarySystemProfile.NativeDataModelConfigurations;
                     if (nativeConfigurations != null)
                     {
                         foreach (var nativeDataModelConfiguration in nativeConfigurations)
@@ -515,7 +515,7 @@ namespace XRTK.Services
                                 nativeDataModelConfiguration.RuntimePlatform,
                                 nativeDataModelConfiguration.DataModelName,
                                 nativeDataModelConfiguration.Priority,
-                                nativeDataModelConfiguration.ConfigurationProfile))
+                                nativeDataModelConfiguration.Profile))
                             {
                                 Debug.LogError($"Failed to start {nativeDataModelConfiguration.DataModelName}!");
                             }

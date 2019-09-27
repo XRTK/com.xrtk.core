@@ -41,6 +41,10 @@ namespace XRTK.Inspectors.Profiles
         private SerializedProperty enableDiagnosticsSystem;
         private SerializedProperty diagnosticsSystemType;
         private SerializedProperty diagnosticsSystemProfile;
+        // Native Library system properties
+        private SerializedProperty enableNativeLibrarySystem;
+        private SerializedProperty nativeLibrarySystemType;
+        private SerializedProperty nativeLibrarySystemProfile;
 
         // Additional registered components profile
         private SerializedProperty registeredServiceProvidersProfile;
@@ -109,6 +113,10 @@ namespace XRTK.Inspectors.Profiles
             enableDiagnosticsSystem = serializedObject.FindProperty("enableDiagnosticsSystem");
             diagnosticsSystemType = serializedObject.FindProperty("diagnosticsSystemType");
             diagnosticsSystemProfile = serializedObject.FindProperty("diagnosticsSystemProfile");
+            // Native library system configuration
+            enableNativeLibrarySystem = serializedObject.FindProperty("enableNativeLibrarySystem");
+            nativeLibrarySystemType = serializedObject.FindProperty("nativeLibrarySystemType");
+            nativeLibrarySystemProfile = serializedObject.FindProperty("nativeLibrarySystemProfile");
 
             // Additional registered components configuration
             registeredServiceProvidersProfile = serializedObject.FindProperty("registeredServiceProvidersProfile");
@@ -198,6 +206,13 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.PropertyField(enableDiagnosticsSystem);
             EditorGUILayout.PropertyField(diagnosticsSystemType);
             changed |= RenderProfile(thisProfile, diagnosticsSystemProfile);
+
+            // Native Library System configuration
+            GUILayout.Space(12f);
+            EditorGUILayout.LabelField("Native Library System Settings", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(enableNativeLibrarySystem);
+            EditorGUILayout.PropertyField(nativeLibrarySystemType);
+            changed |= RenderProfile(thisProfile, nativeLibrarySystemProfile);
 
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Additional Service Providers", EditorStyles.boldLabel);

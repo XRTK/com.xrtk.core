@@ -17,7 +17,7 @@ namespace XRTK.Services
         /// Constructor.
         /// </summary>
         /// <param name="profile"></param>
-        public NativeLibrarySystem(NativeLibrarySystemConfigurationProfile profile) : base(profile)
+        public NativeLibrarySystem(NativeLibrarySystemProfile profile) : base(profile)
         {
         }
 

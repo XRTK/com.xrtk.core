@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
-using XRTK.Utilities;
 
 namespace XRTK.Extensions
 {

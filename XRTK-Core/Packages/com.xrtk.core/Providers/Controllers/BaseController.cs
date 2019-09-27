@@ -220,11 +220,10 @@ namespace XRTK.Providers.Controllers
 
             if (!visualizationProfile.RenderMotionControllers) { return; }
 
-            GameObject controllerModel = null;
             GltfObject gltfObject = null;
 
             // If a specific controller template exists, check if it wants to override the global model, or use the system default specifically (in case global default is not used)
-            bool useSystemDefaultModels = visualizationProfile.GetControllerModelOverride(controllerType, ControllerHandedness, out controllerModel);
+            bool useSystemDefaultModels = visualizationProfile.GetControllerModelOverride(controllerType, ControllerHandedness, out var controllerModel);
 
             // If an override is not configured for defaults and has no model, then use the system default check
             if (!useSystemDefaultModels && controllerModel == null)

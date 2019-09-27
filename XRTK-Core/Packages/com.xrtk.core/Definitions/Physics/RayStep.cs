@@ -16,6 +16,16 @@ namespace XRTK.Definitions.Physics
         /// <summary>
         /// Constructor.
         /// </summary>
+        /// <param name="ray"></param>
+        /// <param name="distance"></param>
+        public RayStep(Ray ray, float distance) : this()
+        {
+            CopyRay(ray, distance);
+        }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         /// <param name="origin"></param>
         /// <param name="terminus"></param>
         public RayStep(Vector3 origin, Vector3 terminus) : this()

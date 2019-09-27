@@ -16,6 +16,16 @@ namespace XRTK.Utilities
         /// <returns>True, if the runtime platform is included in the list of supported platforms, otherwise false.</returns>
         public static bool IsPlatformSupported(this RuntimePlatform runtimePlatform, SupportedPlatforms platforms)
         {
+            if ((int)platforms == -1)
+            {
+                return true;
+            }
+
+            if (platforms == 0)
+            {
+                return false;
+            }
+
             var target = GetSupportedPlatformMask(runtimePlatform);
             return IsPlatformSupported(target, platforms);
         }
@@ -60,7 +70,7 @@ namespace XRTK.Utilities
 
         private static bool IsPlatformSupported(SupportedPlatforms target, SupportedPlatforms supported)
         {
-            return (target & supported) == target;
+            return (target & supported) != 0;
         }
 
 #if UNITY_EDITOR
@@ -73,8 +83,25 @@ namespace XRTK.Utilities
         /// <returns>True, if the runtime platform is included in the list of supported platforms, otherwise false.</returns>
         public static bool IsPlatformSupported(this UnityEditor.BuildTarget editorBuildTarget, SupportedPlatforms platforms)
         {
+            var isEditorSupported = IsEditorSupported(platforms);
+
+            if ((int)platforms == -1)
+            {
+                return true;
+            }
+
+            if (!isEditorSupported || platforms == 0)
+            {
+                return false;
+            }
+
             var target = GetSupportedPlatformMask(editorBuildTarget);
             return IsPlatformSupported(target, platforms);
+        }
+
+        private static bool IsEditorSupported(SupportedPlatforms platforms)
+        {
+            return (platforms & SupportedPlatforms.Editor) != 0;
         }
 
         private static SupportedPlatforms GetSupportedPlatformMask(UnityEditor.BuildTarget editorBuildTarget)

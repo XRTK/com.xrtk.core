@@ -74,7 +74,8 @@ namespace XRTK.Services
                 if (!Application.isPlaying && activeProfile == null)
                 {
                     UnityEditor.Selection.activeObject = Instance;
-                    UnityEditor.EditorGUIUtility.PingObject(Instance);
+                    UnityEditor.EditorApplication.delayCall += () =>
+                        UnityEditor.EditorGUIUtility.PingObject(Instance);
                 }
 #endif // UNITY_EDITOR
                 return activeProfile;
@@ -268,7 +269,8 @@ namespace XRTK.Services
                     {
                         UnityEditor.EditorApplication.isPlaying = false;
                         UnityEditor.Selection.activeObject = Instance;
-                        UnityEditor.EditorGUIUtility.PingObject(Instance);
+                        UnityEditor.EditorApplication.delayCall += () =>
+                            UnityEditor.EditorGUIUtility.PingObject(Instance);
                     }
                 }
 #endif // UNITY_EDITOR
@@ -306,12 +308,10 @@ namespace XRTK.Services
         /// <summary>
         /// Static function to determine if the MixedRealityToolkit class has been initialized or not.
         /// </summary>
-        /// <returns></returns>
         public static bool ConfirmInitialized()
         {
-            // ReSharper disable once UnusedVariable
-            // Assigning the Instance to access is used Implicitly.
-            MixedRealityToolkit access = Instance;
+            var access = Instance;
+            Debug.Assert(IsInitialized.Equals(access != null));
             return IsInitialized;
         }
 
@@ -373,6 +373,13 @@ namespace XRTK.Services
                         {
                             foreach (var controllerDataProvider in ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders)
                             {
+                                //If the DataProvider cannot be resolved, this is likely just a configuration / package missmatch.  User simply needs to be warned, not errored.
+                                if (controllerDataProvider.DataProviderType.Type == null)
+                                {
+                                    Debug.LogWarning($"Could not load the configured provider ({controllerDataProvider.DataProviderName})\n\nThis is most likely because the XRTK UPM package for that provider is currently not registered\nCheck the installed packages in the Unity Package Manager\n\n");
+                                    continue;
+                                }
+
                                 if (!CreateAndRegisterService<IMixedRealityControllerDataProvider>(
                                     controllerDataProvider.DataProviderType,
                                     controllerDataProvider.RuntimePlatform,
@@ -1519,14 +1526,43 @@ namespace XRTK.Services
         }
 
         /// <summary>
+        /// Generic function used to retrieve a service from the Mixed Reality Toolkit active service registry
+        /// </summary>
+        /// <typeparam name="T">The interface type for the system to be retrieved.  E.G. InputSystem, BoundarySystem.
+        /// *Note type should be the Interface of the system to be retrieved and not the class itself</typeparam>
+        /// <param name="service">The instance of the service class that is registered with the selected Interface</param>
+        /// <param name="showLogs">Should the logs show when services cannot be found?</param>
+        /// <returns>Returns true if the service was found</returns>
+        public static bool TryGetService<T>(out T service, bool showLogs = true) where T : IMixedRealityService
+        {
+            service = GetService<T>(showLogs);
+            return service == null ? false : true;
+        }
+
+        /// <summary>
         /// Retrieve a service from the Mixed Reality Toolkit active service registry
         /// </summary>
-        /// <param name="serviceName">Name of the specific service</param>
+        /// <param name="serviceName">Name of the specific service to search for</param>
         /// <param name="showLogs">Should the logs show when services cannot be found?</param>
         /// <returns>The Mixed Reality Toolkit of the specified type</returns>
         public static T GetService<T>(string serviceName, bool showLogs = true) where T : IMixedRealityService
         {
             return (T)GetService(typeof(T), serviceName, showLogs);
+        }
+
+        /// <summary>
+        /// Generic function used to retrieve a service from the Mixed Reality Toolkit active service registry
+        /// </summary>
+        /// <typeparam name="T">The interface type for the system to be retrieved.  E.G. InputSystem, BoundarySystem.
+        /// *Note type should be the Interface of the system to be retrieved and not the class itself</typeparam>
+        /// <param name="serviceName">Name of the specific service to search for</param>
+        /// <param name="service">The instance of the service class that is registered with the selected Interface</param>
+        /// <param name="showLogs">Should the logs show when services cannot be found?</param>
+        /// <returns>Returns true if the service was found</returns>
+        public static bool TryGetService<T>(string serviceName, out T service, bool showLogs = true) where T : IMixedRealityService
+        {
+            service = (T)GetService(typeof(T), serviceName, showLogs);
+            return service == null ? false : true;
         }
 
         /// <summary>

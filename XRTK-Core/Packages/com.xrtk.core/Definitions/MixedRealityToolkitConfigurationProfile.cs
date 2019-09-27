@@ -9,6 +9,7 @@ using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.NetworkingSystem;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Diagnostics;
@@ -16,6 +17,7 @@ using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.TeleportSystem;
+using XRTK.Services;
 
 namespace XRTK.Definitions
 {
@@ -25,7 +27,7 @@ namespace XRTK.Definitions
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Toolkit Configuration Profile", fileName = "MixedRealityToolkitConfigurationProfile", order = (int)CreateProfileMenuItemIndices.Configuration)]
     public class MixedRealityToolkitConfigurationProfile : BaseMixedRealityProfile
     {
-        #region Mixed Reality Toolkit configurable properties
+        #region Camera System
 
         [SerializeField]
         [Tooltip("Enable the Camera System on Startup.")]
@@ -69,6 +71,10 @@ namespace XRTK.Definitions
             internal set => cameraProfile = value;
         }
 
+        #endregion Camera System
+
+        #region Input System
+
         [SerializeField]
         [Tooltip("Enable the Input System on Startup.")]
         private bool enableInputSystem = false;
@@ -108,6 +114,10 @@ namespace XRTK.Definitions
             get => inputSystemType;
             internal set => inputSystemType = value;
         }
+
+        #endregion Input System
+
+        #region Boundary System
 
         [SerializeField]
         [Tooltip("Enable the Boundary on Startup")]
@@ -149,6 +159,10 @@ namespace XRTK.Definitions
             internal set => boundaryVisualizationProfile = value;
         }
 
+        #endregion Boundary System
+
+        #region Teleport System
+
         [SerializeField]
         [Tooltip("Enable the Teleport System on Startup")]
         private bool enableTeleportSystem = false;
@@ -175,6 +189,10 @@ namespace XRTK.Definitions
             get => teleportSystemType;
             internal set => teleportSystemType = value;
         }
+
+        #endregion Teleport System
+
+        #region Spatial Awareness System
 
         [SerializeField]
         [Tooltip("Enable the Spatial Awareness system on Startup")]
@@ -216,6 +234,10 @@ namespace XRTK.Definitions
             internal set => spatialAwarenessProfile = value;
         }
 
+        #endregion Spatial Awareness System
+
+        #region Networking System
+
         [SerializeField]
         [Tooltip("Profile for wiring up networking assets.")]
         private MixedRealityNetworkSystemProfile networkingSystemProfile;
@@ -255,6 +277,10 @@ namespace XRTK.Definitions
             get => networkingSystemType;
             internal set => networkingSystemType = value;
         }
+
+        #endregion Networking System
+
+        #region Diagnostics System
 
         [SerializeField]
         [Tooltip("Profile for wiring up diagnostic assets.")]
@@ -296,6 +322,52 @@ namespace XRTK.Definitions
             internal set => diagnosticsSystemType = value;
         }
 
+        #endregion Diagnostics System
+
+        #region Native Library System
+
+        [SerializeField]
+        [Tooltip("Profile for setting up native libraries as data providers.")]
+        private NativeLibrarySystemConfigurationProfile nativeLibrarySystemConfigurationProfile = null;
+
+        /// <summary>
+        /// Profile for setting up native libraries as data providers.
+        /// </summary>
+        public NativeLibrarySystemConfigurationProfile NativeLibrarySystemConfigurationProfile
+        {
+            get => nativeLibrarySystemConfigurationProfile;
+            internal set => nativeLibrarySystemConfigurationProfile = value;
+        }
+
+        [SerializeField]
+        [Tooltip("Enable the native library system.")]
+        private bool enableNativeLibrarySystem = false;
+
+        /// <summary>
+        /// Is the native library system properly configured and enabled?
+        /// </summary>
+        public bool IsNativeLibrarySystemEnabled
+        {
+            get => enableNativeLibrarySystem && NativeLibrarySystemType?.Type != null && nativeLibrarySystemConfigurationProfile != null;
+            internal set => enableNativeLibrarySystem = value;
+        }
+
+        [SerializeField]
+        [Tooltip("Native Library class to instantiate at runtime.")]
+        [Implements(typeof(IMixedRealityNativeLibrarySystem), TypeGrouping.ByNamespaceFlat)]
+        private SystemType nativeLibrarySystemType;
+
+        /// <summary>
+        /// Native Library class to instantiate at runtime.
+        /// </summary>
+        public SystemType NativeLibrarySystemType
+        {
+            get => nativeLibrarySystemType;
+            internal set => nativeLibrarySystemType = value;
+        }
+
+        #endregion Native Library System
+
         [SerializeField]
         [Tooltip("All the additional non-required services registered with the Mixed Reality Toolkit.")]
         private MixedRealityRegisteredServiceProvidersProfile registeredServiceProvidersProfile = null;
@@ -304,7 +376,5 @@ namespace XRTK.Definitions
         /// All the additional non-required systems, features, and managers registered with the Mixed Reality Toolkit.
         /// </summary>
         public MixedRealityRegisteredServiceProvidersProfile RegisteredServiceProvidersProfile => registeredServiceProvidersProfile;
-
-        #endregion Mixed Reality Toolkit configurable properties
     }
 }

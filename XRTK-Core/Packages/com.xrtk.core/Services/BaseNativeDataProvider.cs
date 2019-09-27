@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using XRTK.Interfaces;
 
 namespace XRTK.Services
@@ -15,8 +16,26 @@ namespace XRTK.Services
         /// </summary>
         /// <param name="name"></param>
         /// <param name="priority"></param>
-        protected BaseNativeDataProvider(string name, uint priority)
-            : base(name, priority) { }
+        /// <param name="profile"></param>
+        protected BaseNativeDataProvider(string name, uint priority, NativeDataProviderProfile profile)
+            : base(name, priority)
+        {
+            if (profile == null)
+            {
+                throw new ArgumentException($"Missing the native data provider profile for {base.Name}!");
+            }
+
+#if UNITY_EDITOR
+            LibraryPath = profile.DllPath;
+#endif
+        }
+
+#if UNITY_EDITOR
+
+        /// <inheritdoc />
+        public string LibraryPath { get; }
+
+#endif
 
         /// <inheritdoc />
         public virtual string LibraryName { get; } = "__Internal";

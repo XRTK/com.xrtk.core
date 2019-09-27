@@ -11,13 +11,13 @@ namespace XRTK.Services
     /// <summary>
     /// The <see cref="IMixedRealityService"/> in charge of managing native library data providers.
     /// </summary>
-    public class NativeLibrarySystem : BaseSystem
+    public class NativeLibrarySystem : BaseSystem, IMixedRealityNativeLibrarySystem
     {
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="profile"></param>
-        public NativeLibrarySystem(NativeLibrariesConfigurationProfile profile) : base(profile)
+        public NativeLibrarySystem(NativeLibrarySystemConfigurationProfile profile) : base(profile)
         {
         }
 
@@ -53,7 +53,7 @@ namespace XRTK.Services
 
 #endif
 
-        private IntPtr OpenLibrary(string path)
+        public IntPtr OpenLibrary(string path)
         {
 #if UNITY_EDITOR_WIN
             var handle = LoadLibrary(path);
@@ -70,7 +70,7 @@ namespace XRTK.Services
             return handle;
         }
 
-        private void CloseLibrary(IntPtr libraryHandle)
+        public void CloseLibrary(IntPtr libraryHandle)
         {
             nativeLibraries.Remove(libraryHandle);
 
@@ -80,8 +80,6 @@ namespace XRTK.Services
             dlclose(libraryHandle);
 #endif
         }
-
-#endif
 
         private T GetDelegate<T>(IntPtr libraryHandle, string functionName) where T : class
         {
@@ -94,5 +92,7 @@ namespace XRTK.Services
                 ? throw new Exception($"Couldn't get function: {functionName}")
                 : Marshal.GetDelegateForFunctionPointer(symbol, typeof(T)) as T;
         }
+
+#endif
     }
 }

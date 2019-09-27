@@ -21,7 +21,7 @@ namespace XRTK.Definitions
         /// <param name="priority">The priority this system, feature, or manager will be initialized in.</param>
         /// <param name="runtimePlatform">The runtime platform(s) to run this system, feature, or manager on.</param>
         /// <param name="configurationProfile">The configuration profile for the system, feature, or manager.</param>
-        public NativeDataModelConfiguration(SystemType dataModelType, string dataModelName, uint priority, SupportedPlatforms runtimePlatform, NativeLibrariesConfigurationProfile configurationProfile)
+        public NativeDataModelConfiguration(SystemType dataModelType, string dataModelName, uint priority, SupportedPlatforms runtimePlatform, NativeLibrarySystemConfigurationProfile configurationProfile)
         {
             this.dataModelType = dataModelType;
             this.dataModelName = dataModelName;
@@ -65,11 +65,11 @@ namespace XRTK.Definitions
         public SupportedPlatforms RuntimePlatform => runtimePlatform;
 
         [SerializeField]
-        private NativeLibrariesConfigurationProfile configurationProfile;
+        private NativeLibrarySystemConfigurationProfile configurationProfile;
 
         /// <summary>
         /// The configuration profile for the system, feature, or manager.
         /// </summary>
-        public NativeLibrariesConfigurationProfile ConfigurationProfile => configurationProfile;
+        public NativeLibrarySystemConfigurationProfile ConfigurationProfile => configurationProfile;
     }
 }

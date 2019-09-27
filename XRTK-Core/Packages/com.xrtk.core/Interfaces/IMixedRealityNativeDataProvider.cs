@@ -8,6 +8,15 @@ namespace XRTK.Interfaces
     /// </summary>
     public interface IMixedRealityNativeDataProvider : IMixedRealityDataProvider
     {
+#if UNITY_EDITOR
+
+        /// <summary>
+        /// The relative path to the library.
+        /// </summary>
+        string LibraryPath { get; }
+
+#endif
+
         /// <summary>
         /// The name of the native library to load.
         /// </summary>

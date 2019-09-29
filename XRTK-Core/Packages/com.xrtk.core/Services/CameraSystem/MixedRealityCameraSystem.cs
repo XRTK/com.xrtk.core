@@ -67,7 +67,7 @@ namespace XRTK.Services.CameraSystem
 
         public override void Enable()
         {
-            if (Application.isPlaying && 
+            if (Application.isPlaying &&
                 profile.IsCameraPersistent)
             {
                 CameraCache.Main.transform.root.DontDestroyOnLoad();
@@ -77,6 +77,8 @@ namespace XRTK.Services.CameraSystem
         /// <inheritdoc />
         public override void Update()
         {
+            base.Update();
+
             if (IsOpaque != cameraOpaqueLastFrame)
             {
                 cameraOpaqueLastFrame = IsOpaque;

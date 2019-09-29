@@ -78,6 +78,7 @@ namespace XRTK.Providers.Controllers.UnityInput
             }
 
             MixedRealityToolkit.InputSystem?.RaiseSourceDetected(Controller.InputSource, Controller);
+            AddController(Controller);
         }
 
         /// <inheritdoc />

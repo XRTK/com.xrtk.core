@@ -4,6 +4,7 @@
 using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 
@@ -37,9 +38,11 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// <summary>
         /// Update the controller data from Unity's Input Manager
         /// </summary>
-        public virtual void UpdateController()
+        public override void UpdateController()
         {
             if (!Enabled) { return; }
+
+            base.UpdateController();
 
             if (Interactions == null)
             {
@@ -49,28 +52,32 @@ namespace XRTK.Providers.Controllers.UnityInput
 
             for (int i = 0; i < Interactions?.Length; i++)
             {
-                switch (Interactions[i].AxisType)
+                var interactionMapping = Interactions[i];
+
+                switch (interactionMapping.AxisType)
                 {
                     case AxisType.None:
                         break;
                     case AxisType.Digital:
-                        UpdateButtonData(Interactions[i]);
+                        UpdateButtonData(interactionMapping);
                         break;
                     case AxisType.SingleAxis:
-                        UpdateSingleAxisData(Interactions[i]);
+                        UpdateSingleAxisData(interactionMapping);
                         break;
                     case AxisType.DualAxis:
-                        UpdateDualAxisData(Interactions[i]);
+                        UpdateDualAxisData(interactionMapping);
                         break;
                     case AxisType.ThreeDofRotation:
                     case AxisType.ThreeDofPosition:
                     case AxisType.SixDof:
-                        UpdatePoseData(Interactions[i]);
+                        UpdatePoseData(interactionMapping);
                         break;
                     default:
                         Debug.LogError($"Input [{Interactions[i].InputType}] is not handled for this controller [{GetType().Name}]");
                         break;
                 }
+
+                interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
             }
         }
 
@@ -145,32 +152,11 @@ namespace XRTK.Providers.Controllers.UnityInput
             {
                 // Update the interaction data source
                 interactionMapping.BoolData = singleAxisValue.Equals(1);
-
-                // If our value changed raise it.
-                if (interactionMapping.Changed)
-                {
-                    // Raise input system Event if it is enabled
-                    if (interactionMapping.BoolData)
-                    {
-                        MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, interactionMapping.MixedRealityInputAction);
-                    }
-                    else
-                    {
-                        MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, interactionMapping.MixedRealityInputAction);
-                    }
-                }
             }
             else
             {
                 // Update the interaction data source
                 interactionMapping.FloatData = singleAxisValue;
-
-                // If our value was updated, raise it.
-                if (interactionMapping.Updated)
-                {
-                    // Raise input system Event if it is enabled
-                    MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, interactionMapping.MixedRealityInputAction, interactionMapping.FloatData);
-                }
             }
         }
 
@@ -189,13 +175,6 @@ namespace XRTK.Providers.Controllers.UnityInput
 
             // Update the interaction data source
             interactionMapping.Vector2Data = dualAxisPosition;
-
-            // If our value was updated, raise it.
-            if (interactionMapping.Updated)
-            {
-                // Raise input system Event if it is enabled
-                MixedRealityToolkit.InputSystem?.RaisePositionInputChanged(InputSource, ControllerHandedness, interactionMapping.MixedRealityInputAction, interactionMapping.Vector2Data);
-            }
         }
 
         /// <summary>
@@ -206,30 +185,22 @@ namespace XRTK.Providers.Controllers.UnityInput
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
 
-            if (interactionMapping.InputType == DeviceInputType.SpatialPointer)
+            switch (interactionMapping.InputType)
             {
-                pointerOffsetPose.Position = CurrentControllerPose.Position;
-                pointerOffsetPose.Rotation = CurrentControllerPose.Rotation * Quaternion.AngleAxis(PointerOffsetAngle, Vector3.left);
+                case DeviceInputType.SpatialPointer:
+                    pointerOffsetPose.Position = CurrentControllerPose.Position;
+                    pointerOffsetPose.Rotation = CurrentControllerPose.Rotation * Quaternion.AngleAxis(PointerOffsetAngle, Vector3.left);
 
-                // Update the interaction data source
-                interactionMapping.PoseData = pointerOffsetPose;
-            }
-            else if (interactionMapping.InputType == DeviceInputType.SpatialGrip)
-            {
-                // Update the interaction data source
-                interactionMapping.PoseData = CurrentControllerPose;
-            }
-            else
-            {
-                Debug.LogWarning($"Unhandled Interaction {interactionMapping.Description}");
-                return;
-            }
-
-            // If our value was updated, raise it.
-            if (interactionMapping.Updated)
-            {
-                // Raise input system Event if it is enabled
-                MixedRealityToolkit.InputSystem?.RaisePoseInputChanged(InputSource, ControllerHandedness, interactionMapping.MixedRealityInputAction, interactionMapping.PoseData);
+                    // Update the interaction data source
+                    interactionMapping.PoseData = pointerOffsetPose;
+                    break;
+                case DeviceInputType.SpatialGrip:
+                    // Update the interaction data source
+                    interactionMapping.PoseData = CurrentControllerPose;
+                    break;
+                default:
+                    Debug.LogWarning($"Unhandled Interaction {interactionMapping.Description}");
+                    break;
             }
         }
     }

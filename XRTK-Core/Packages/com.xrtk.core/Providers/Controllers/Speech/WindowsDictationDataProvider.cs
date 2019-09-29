@@ -59,7 +59,7 @@ namespace XRTK.Providers.Controllers.Speech
         public override void Update()
         {
             base.Update();
-
+            
             if (!Application.isPlaying) { return; }
 
             if (!isTransitioning && IsListening && !Microphone.IsRecording(deviceName) && dictationRecognizer.Status == SpeechSystemStatus.Running)

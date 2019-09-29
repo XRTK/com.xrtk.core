@@ -60,7 +60,7 @@ namespace XRTK.Providers.Controllers.UnityInput
 
             foreach (var genericOpenVRController in ActiveGenericControllers)
             {
-                RemoveController(genericOpenVRController.Key);
+                RemoveController(genericOpenVRController.Key, false);
             }
 
             ActiveGenericControllers.Clear();
@@ -157,7 +157,7 @@ namespace XRTK.Providers.Controllers.UnityInput
             return detectedController;
         }
 
-        protected virtual void RemoveController(string joystickName)
+        protected virtual void RemoveController(string joystickName, bool clearFromRegistry = true)
         {
             var controller = GetOrAddController(joystickName);
 
@@ -167,7 +167,10 @@ namespace XRTK.Providers.Controllers.UnityInput
                 RemoveController(controller);
             }
 
-            ActiveGenericControllers.Remove(joystickName);
+            if (clearFromRegistry)
+            {
+                ActiveGenericControllers.Remove(joystickName);
+            }
         }
 
         /// <summary>

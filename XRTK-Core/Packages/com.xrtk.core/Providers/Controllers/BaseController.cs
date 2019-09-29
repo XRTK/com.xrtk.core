@@ -91,13 +91,7 @@ namespace XRTK.Providers.Controllers
         /// <summary>
         /// Updates the current readings for the controller.
         /// </summary>
-        public virtual void UpdateController()
-        {
-            for (int i = 0; i < Interactions.Length; i++)
-            {
-                Interactions[i].Tick();
-            }
-        }
+        public virtual void UpdateController() { }
 
         /// <summary>
         /// Setups up the configuration based on the Mixed Reality Controller Mapping Profile.

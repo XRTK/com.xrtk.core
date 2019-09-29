@@ -682,7 +682,10 @@ namespace XRTK.Services.InputSystem
 
             if (IsPointerRegistered(pointer)) { return false; }
 
-            pointers.Add(new PointerData(pointer));
+            var pointerData = new PointerData(pointer);
+            pointers.Add(pointerData);
+            // Initialize the pointer result
+            UpdatePointer(pointerData);
             return true;
         }
 
@@ -804,6 +807,13 @@ namespace XRTK.Services.InputSystem
             {
                 // Don't clear the previous focused object since we still want to trigger FocusExit events
                 pointer.ResetFocusedObjects(false);
+
+                // Only set the result if it's null
+                // Otherwise we'd get incorrect data.
+                if (pointer.Pointer.Result == null)
+                {
+                    pointer.Pointer.Result = pointer;
+                }
             }
             else
             {
@@ -843,6 +853,8 @@ namespace XRTK.Services.InputSystem
                 // Set the pointer's result last
                 pointer.Pointer.Result = pointer;
             }
+
+            Debug.Assert(pointer.Pointer.Result != null);
 
             // Call the pointer's OnPostRaycast function
             // This will give it a chance to respond to raycast results

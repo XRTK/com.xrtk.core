@@ -83,6 +83,8 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// <inheritdoc />
         public override void Update()
         {
+            base.Update();
+
             if (Input.mousePresent && Controller == null) { Enable(); }
 
             Controller?.Update();
@@ -94,6 +96,7 @@ namespace XRTK.Providers.Controllers.UnityInput
             if (Controller != null)
             {
                 MixedRealityToolkit.InputSystem?.RaiseSourceLost(Controller.InputSource, Controller);
+                RemoveController(Controller);
             }
         }
     }

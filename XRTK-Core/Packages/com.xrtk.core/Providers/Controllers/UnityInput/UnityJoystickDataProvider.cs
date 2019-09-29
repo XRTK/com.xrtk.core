@@ -3,12 +3,10 @@
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.UnityInput
@@ -31,7 +29,7 @@ namespace XRTK.Providers.Controllers.UnityInput
 
         private const float DeviceRefreshInterval = 3.0f;
 
-        protected static readonly Dictionary<string, GenericJoystickController> ActiveControllers = new Dictionary<string, GenericJoystickController>();
+        protected static readonly Dictionary<string, GenericJoystickController> ActiveGenericControllers = new Dictionary<string, GenericJoystickController>();
 
         private float deviceRefreshTimer;
         private string[] lastDeviceList;
@@ -49,7 +47,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                 RefreshDevices();
             }
 
-            foreach (var controller in ActiveControllers)
+            foreach (var controller in ActiveGenericControllers)
             {
                 controller.Value?.UpdateController();
             }
@@ -60,19 +58,13 @@ namespace XRTK.Providers.Controllers.UnityInput
         {
             base.Disable();
 
-            foreach (var genericOpenVRController in ActiveControllers)
+            foreach (var genericOpenVRController in ActiveGenericControllers)
             {
-                if (genericOpenVRController.Value != null)
-                {
-                    MixedRealityToolkit.InputSystem?.RaiseSourceLost(genericOpenVRController.Value.InputSource, genericOpenVRController.Value);
-                }
+                RemoveController(genericOpenVRController.Key, false);
             }
 
-            ActiveControllers.Clear();
+            ActiveGenericControllers.Clear();
         }
-
-        /// <inheritdoc/>
-        public override IMixedRealityController[] GetActiveControllers() => ActiveControllers.Values.ToArray<IMixedRealityController>();
 
         private void RefreshDevices()
         {
@@ -84,32 +76,26 @@ namespace XRTK.Providers.Controllers.UnityInput
             {
                 for (int i = 0; i < lastDeviceList.Length; i++)
                 {
-                    if (joystickNames[i].Equals(lastDeviceList[i])) { continue; }
+                    var joystickName = lastDeviceList[i];
 
-                    if (ActiveControllers.ContainsKey(lastDeviceList[i]))
-                    {
-                        var controller = GetOrAddController(lastDeviceList[i]);
+                    if (joystickNames[i].Equals(joystickName)) { continue; }
 
-                        if (controller != null)
-                        {
-                            MixedRealityToolkit.InputSystem?.RaiseSourceLost(controller.InputSource, controller);
-                        }
-
-                        ActiveControllers.Remove(lastDeviceList[i]);
-                    }
+                    RemoveController(joystickName);
                 }
             }
 
             for (var i = 0; i < joystickNames.Length; i++)
             {
-                if (string.IsNullOrEmpty(joystickNames[i]))
+                var name = joystickNames[i];
+
+                if (string.IsNullOrEmpty(name))
                 {
                     continue;
                 }
 
-                if (!ActiveControllers.ContainsKey(joystickNames[i]))
+                if (!ActiveGenericControllers.ContainsKey(name))
                 {
-                    var controller = GetOrAddController(joystickNames[i]);
+                    var controller = GetOrAddController(name);
 
                     if (controller != null)
                     {
@@ -128,9 +114,9 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// <returns>A new controller reference.</returns>
         protected virtual GenericJoystickController GetOrAddController(string joystickName)
         {
-            if (ActiveControllers.ContainsKey(joystickName))
+            if (ActiveGenericControllers.ContainsKey(joystickName))
             {
-                var controller = ActiveControllers[joystickName];
+                var controller = ActiveGenericControllers[joystickName];
                 Debug.Assert(controller != null);
                 return controller;
             }
@@ -166,8 +152,25 @@ namespace XRTK.Providers.Controllers.UnityInput
                 return null;
             }
 
-            ActiveControllers.Add(joystickName, detectedController);
+            ActiveGenericControllers.Add(joystickName, detectedController);
+            AddController(detectedController);
             return detectedController;
+        }
+
+        protected virtual void RemoveController(string joystickName, bool clearFromRegistry = true)
+        {
+            var controller = GetOrAddController(joystickName);
+
+            if (controller != null)
+            {
+                MixedRealityToolkit.InputSystem?.RaiseSourceLost(controller.InputSource, controller);
+                RemoveController(controller);
+            }
+
+            if (clearFromRegistry)
+            {
+                ActiveGenericControllers.Remove(joystickName);
+            }
         }
 
         /// <summary>

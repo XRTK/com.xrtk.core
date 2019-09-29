@@ -55,7 +55,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                         break;
                     case TouchPhase.Ended:
                     case TouchPhase.Canceled:
-                        RemoveTouchController(touch);
+                        RemoveTouchController(touch.fingerId);
                         break;
                 }
             }
@@ -73,15 +73,7 @@ namespace XRTK.Providers.Controllers.UnityInput
 
             foreach (var controller in ActiveTouches)
             {
-                if (controller.Value == null || MixedRealityToolkit.InputSystem == null) { continue; }
-
-                foreach (var inputSource in MixedRealityToolkit.InputSystem.DetectedInputSources)
-                {
-                    if (inputSource.SourceId == controller.Value.InputSource.SourceId)
-                    {
-                        MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.Value.InputSource, controller.Value);
-                    }
-                }
+                RemoveTouchController(controller.Key);
             }
 
             ActiveTouches.Clear();
@@ -119,14 +111,16 @@ namespace XRTK.Providers.Controllers.UnityInput
                 }
 
                 ActiveTouches.Add(touch.fingerId, controller);
+                AddController(controller);
             }
 
             MixedRealityToolkit.InputSystem?.RaiseSourceDetected(controller.InputSource, controller);
+
             controller.StartTouch();
             UpdateTouchData(touch, ray);
         }
 
-        private static void UpdateTouchData(Touch touch, Ray ray)
+        private void UpdateTouchData(Touch touch, Ray ray)
         {
             if (!ActiveTouches.TryGetValue(touch.fingerId, out var controller))
             {
@@ -139,15 +133,16 @@ namespace XRTK.Providers.Controllers.UnityInput
             controller.Update();
         }
 
-        private static void RemoveTouchController(Touch touch)
+        private void RemoveTouchController(int touchId)
         {
-            if (!ActiveTouches.TryGetValue(touch.fingerId, out var controller))
+            if (!ActiveTouches.TryGetValue(touchId, out var controller))
             {
                 return;
             }
 
             controller.EndTouch();
             MixedRealityToolkit.InputSystem?.RaiseSourceLost(controller.InputSource, controller);
+            RemoveController(controller);
         }
     }
 }

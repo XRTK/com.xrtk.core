@@ -20,6 +20,7 @@ namespace XRTK.Services
         /// <param name="name"></param>
         /// <param name="priority"></param>
         /// <param name="profile"></param>
-        public BaseExtensionService(string name, uint priority, BaseMixedRealityExtensionServiceProfile profile) : base(name, priority) { }
+        public BaseExtensionService(string name, uint priority, BaseMixedRealityExtensionServiceProfile profile)
+            : base(name, priority) { }
     }
 }

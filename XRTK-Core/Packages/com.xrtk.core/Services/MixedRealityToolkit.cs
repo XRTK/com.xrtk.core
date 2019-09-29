@@ -501,6 +501,33 @@ namespace XRTK.Services
                 }
             }
 
+            if (ActiveProfile.IsNativeLibrarySystemEnabled)
+            {
+                if (CreateAndRegisterService<IMixedRealityNativeLibrarySystem>(ActiveProfile.NativeLibrarySystemType, ActiveProfile.NativeLibrarySystemProfile) && NativeLibrarySystem != null)
+                {
+                    var nativeConfigurations = ActiveProfile.NativeLibrarySystemProfile.NativeDataModelConfigurations;
+                    if (nativeConfigurations != null)
+                    {
+                        foreach (var nativeDataModelConfiguration in nativeConfigurations)
+                        {
+                            if (!CreateAndRegisterService<IMixedRealityNativeDataProvider>(
+                                nativeDataModelConfiguration.DataModelType,
+                                nativeDataModelConfiguration.RuntimePlatform,
+                                nativeDataModelConfiguration.DataModelName,
+                                nativeDataModelConfiguration.Priority,
+                                nativeDataModelConfiguration.Profile))
+                            {
+                                Debug.LogError($"Failed to start {nativeDataModelConfiguration.DataModelName}!");
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Failed to start the Native Library System!");
+                }
+            }
+
             if (ActiveProfile.RegisteredServiceProvidersProfile != null)
             {
                 foreach (var configuration in ActiveProfile.RegisteredServiceProvidersProfile.Configurations)
@@ -1500,7 +1527,8 @@ namespace XRTK.Services
                    typeof(IMixedRealityBoundarySystem).IsAssignableFrom(concreteType) ||
                    typeof(IMixedRealitySpatialAwarenessSystem).IsAssignableFrom(concreteType) ||
                    typeof(IMixedRealityNetworkingSystem).IsAssignableFrom(concreteType) ||
-                   typeof(IMixedRealityDiagnosticsSystem).IsAssignableFrom(concreteType);
+                   typeof(IMixedRealityDiagnosticsSystem).IsAssignableFrom(concreteType) ||
+                   typeof(IMixedRealityNativeLibrarySystem).IsAssignableFrom(concreteType);
         }
 
         private static void ClearCoreSystemCache()
@@ -1511,6 +1539,7 @@ namespace XRTK.Services
             boundarySystem = null;
             spatialAwarenessSystem = null;
             diagnosticsSystem = null;
+            nativeLibrarySystem = null;
         }
 
         /// <summary>
@@ -1929,6 +1958,38 @@ namespace XRTK.Services
         }
 
         private static bool logNetworkingSystem = true;
+
+        private static IMixedRealityNativeLibrarySystem nativeLibrarySystem = null;
+
+        /// <summary>
+        /// The current Native Library System registered with the Mixed Reality Toolkit.
+        /// </summary>
+        public static IMixedRealityNativeLibrarySystem NativeLibrarySystem
+        {
+            get
+            {
+                if (!IsInitialized ||
+                    isApplicationQuitting ||
+                    instance.activeProfile == null ||
+                    (instance.activeProfile != null && !instance.activeProfile.IsNativeLibrarySystemEnabled))
+                {
+                    return null;
+                }
+
+                if (nativeLibrarySystem != null)
+                {
+                    return nativeLibrarySystem;
+                }
+
+                nativeLibrarySystem = GetService<IMixedRealityNativeLibrarySystem>(showLogs: logNativeLibrarySystem);
+                // If we found a valid system, then we turn logging back on for the next time we need to search.
+                // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
+                logNativeLibrarySystem = nativeLibrarySystem != null;
+                return nativeLibrarySystem;
+            }
+        }
+
+        private static bool logNativeLibrarySystem = true;
 
         private static IMixedRealityDiagnosticsSystem diagnosticsSystem = null;
 

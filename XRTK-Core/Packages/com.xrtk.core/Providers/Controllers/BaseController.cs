@@ -306,7 +306,7 @@ namespace XRTK.Providers.Controllers
                     visualizer.UseSourcePoseData = false;
                     visualizer.PoseAction = altPoseAction;
                 }
-                else if(visualizationProfile.GlobalPointerPose != MixedRealityInputAction.None)
+                else if (visualizationProfile.GlobalPointerPose != MixedRealityInputAction.None)
                 {
                     visualizer.UseSourcePoseData = false;
                     visualizer.PoseAction = visualizationProfile.GlobalPointerPose;

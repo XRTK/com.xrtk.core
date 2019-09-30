@@ -5,8 +5,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 using Object = UnityEngine.Object;
 
@@ -23,10 +23,10 @@ namespace XRTK.Providers.Controllers
         /// <param name="name"></param>
         /// <param name="priority"></param>
         /// <param name="profile"></param>
-        public BaseControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile) : base(name, priority) { }
-
-        /// <inheritdoc />
-        public virtual IMixedRealityController[] GetActiveControllers() => new IMixedRealityController[0];
+        public BaseControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
+            : base(name, priority)
+        {
+        }
 
         /// <summary>
         /// Request an array of pointers for the controller type.
@@ -66,6 +66,21 @@ namespace XRTK.Providers.Controllers
             }
 
             return pointers.Count == 0 ? null : pointers.ToArray();
+        }
+
+        private readonly List<IMixedRealityController> activeControllers = new List<IMixedRealityController>();
+
+        /// <inheritdoc />
+        public IReadOnlyList<IMixedRealityController> ActiveControllers => activeControllers;
+
+        protected void AddController(IMixedRealityController controller)
+        {
+            activeControllers.Add(controller);
+        }
+
+        protected void RemoveController(IMixedRealityController controller)
+        {
+            activeControllers.Remove(controller);
         }
     }
 }

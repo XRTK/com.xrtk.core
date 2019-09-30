@@ -1,8 +1,8 @@
 {
     "name": "XRTK.Utilities.Gltf.Importers",
     "references": [
-        "XRTK",
-        "XRTK.Utilities.Editor"
+        "GUID:f3241d040533491e8a1e2714b27c3111",
+        "GUID:395bd8dd25074437ba735310022f8f0a"
     ],
     "optionalUnityReferences": [],
     "includePlatforms": [
@@ -13,5 +13,6 @@
     "overrideReferences": false,
     "precompiledReferences": [],
     "autoReferenced": true,
-    "defineConstraints": []
+    "defineConstraints": [],
+    "versionDefines": []
 }

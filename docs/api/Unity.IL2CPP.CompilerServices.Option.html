@@ -1,0 +1,179 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Enum Option
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Enum Option
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.45.1.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Unity.IL2CPP.CompilerServices.Option">
+  
+  
+  <h1 id="Unity_IL2CPP_CompilerServices_Option" data-uid="Unity.IL2CPP.CompilerServices.Option" class="text-break">Enum Option
+  </h1>
+  <div class="markdown level0 summary"><p>The code generation options available for IL to C++ conversion.
+Enable or disabled these with caution.</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Unity.IL2CPP.CompilerServices.html">Unity.IL2CPP.CompilerServices</a></h6>
+  <h6><strong>Assembly</strong>: XRTK.dll</h6>
+  <h5 id="Unity_IL2CPP_CompilerServices_Option_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public enum Option</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    <thead>
+    <tbody>
+      <tr>
+        <td id="Unity_IL2CPP_CompilerServices_Option_ArrayBoundsChecks">ArrayBoundsChecks</td>
+        <td><p>Enable or disable code generation for array bounds checks.</p>
+<p>Global array bounds check support is enabled by default when il2cpp.exe
+is launched from the Unity editor.</p>
+<p>Disabling this will prevent IndexOutOfRangeException exceptions from
+being thrown in generated code. This will allow reading and writing to
+memory outside of the bounds of an array without any runtime checks.
+Disable this check with extreme caution.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="Unity_IL2CPP_CompilerServices_Option_DivideByZeroChecks">DivideByZeroChecks</td>
+        <td><p>Enable or disable code generation for divide by zero checks.</p>
+<p>Global divide by zero check support is disabled by default when il2cpp.exe
+is launched from the Unity editor.</p>
+<p>Enabling this will cause DivideByZeroException exceptions to be
+thrown in generated code. Most code doesn't need to handle this
+exception, so it is probably safe to leave it disabled.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="Unity_IL2CPP_CompilerServices_Option_NullChecks">NullChecks</td>
+        <td><p>Enable or disable code generation for null checks.</p>
+<p>Global null check support is enabled by default when il2cpp.exe
+is launched from the Unity editor.</p>
+<p>Disabling this will prevent NullReferenceException exceptions from
+being thrown in generated code. In <em>most</em> cases, code that dereferences
+a null pointer will crash then. Sometimes the point where the crash
+happens is later than the location where the null reference check would
+have been emitted though.</p>
+</td>
+      </tr>
+    </tbody>
+  </thead></thead></table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;Option&gt;()</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;Option&gt;(Func&lt;Option, Boolean&gt;, Int32)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Unity_IL2CPP_CompilerServices_Option.md&amp;value=---%0Auid%3A%20Unity.IL2CPP.CompilerServices.Option%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Attributes/Il2CppSetOptionAttribute.cs/#L9" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) 2019 XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

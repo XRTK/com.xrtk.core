@@ -60,6 +60,6 @@ namespace XRTK.Extensions
                 default:
                     break;
             }
-        }        
+        }
     }
 }

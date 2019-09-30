@@ -89,6 +89,42 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "../api/Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Unity.IL2CPP.CompilerServices.Il2CppSetOptionAttribute.html",
+          "hash": "CXvV0u7D9CF81/ssYJG+9A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/Unity.IL2CPP.CompilerServices.Option.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Unity.IL2CPP.CompilerServices.Option.html",
+          "hash": "WcxnE8oMQBWNplUDIQwXMQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/Unity.IL2CPP.CompilerServices.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/Unity.IL2CPP.CompilerServices.html",
+          "hash": "cO+Fkot7DhGdwyLGPW59Fg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "../api/XRTK.Attributes.EnumFlagsAttribute.yml",
       "output": {
         ".html": {
@@ -189,7 +225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.BaseMixedRealityExtensionServiceProfile.html",
-          "hash": "HY0N1tnsEdOoLz7dhHbPcA=="
+          "hash": "+LZsaWX741zHy8BMXPQcWg=="
         }
       },
       "is_incremental": false,
@@ -201,7 +237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.BaseMixedRealityProfile.html",
-          "hash": "siSOT3DpqYLLnPWD9rc7gw=="
+          "hash": "1aUce7LkQdqDOh2Zdmh7Wg=="
         }
       },
       "is_incremental": false,
@@ -237,7 +273,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.BoundarySystem.MixedRealityBoundaryVisualizationProfile.html",
-          "hash": "rB1QvDpUA/nuYi28h8o9eA=="
+          "hash": "LVjB0fg2WuPTPAigz9Us9w=="
         }
       },
       "is_incremental": false,
@@ -261,7 +297,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile.html",
-          "hash": "IYF/gatk0a3iVDeI33am9w=="
+          "hash": "tDw0Rp4q7d34q1esKWpWeQ=="
         }
       },
       "is_incremental": false,
@@ -273,7 +309,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.BaseMixedRealityControllerMappingProfile.html",
-          "hash": "icLFKcpAu4OgEZcTr9fyPw=="
+          "hash": "caNraG5+j+sviUAIgCBjZQ=="
         }
       },
       "is_incremental": false,
@@ -285,7 +321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.CustomMixedRealityControllerMappingProfile.html",
-          "hash": "tuklM4Len2JaBOXuXTVEsw=="
+          "hash": "y1A36Ef5otUS2Jq7r0XHPA=="
         }
       },
       "is_incremental": false,
@@ -297,7 +333,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.MixedRealityControllerDataProvidersProfile.html",
-          "hash": "jRhPA3BRQi+uMi5kF4eTaw=="
+          "hash": "d0qjaJ1di1TXyUvt5szjfw=="
         }
       },
       "is_incremental": false,
@@ -309,7 +345,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.MixedRealityControllerMappingProfiles.html",
-          "hash": "z751Zhymv8zywd7tB/qZYw=="
+          "hash": "fZF221uiuwHl3RSng93xQw=="
         }
       },
       "is_incremental": false,
@@ -321,7 +357,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.MixedRealityControllerVisualizationProfile.html",
-          "hash": "RPyeZCaPcICS5oB/GD3rVA=="
+          "hash": "oGNcmw3V4hXyFaS0ve9iMw=="
         }
       },
       "is_incremental": false,
@@ -345,7 +381,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.OpenVR.GenericOpenVRControllerMappingProfile.html",
-          "hash": "s/yMZGsQKG8Jikdl+T0MNA=="
+          "hash": "o2m9ahw7WqPdYun5HnOUJw=="
         }
       },
       "is_incremental": false,
@@ -357,7 +393,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.GenericOpenVRControllerMappingProfileInspector.html",
-          "hash": "05Q9LBuXw91KHgOyKpPjmw=="
+          "hash": "apZ316Y+gOma4RKk0UYm7A=="
         }
       },
       "is_incremental": false,
@@ -369,7 +405,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusGoControllerMappingProfileInspector.html",
-          "hash": "h8BL9WWeZ8k147BmmUmFUg=="
+          "hash": "m+e/AuDWbJ/dpA1xPEPTFw=="
         }
       },
       "is_incremental": false,
@@ -381,7 +417,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusRemoteControllerMappingProfileInspector.html",
-          "hash": "cdMZ3ZNPVM0SgrBrtgFDsg=="
+          "hash": "oFlFA/ACc90GBM6GSX9D6A=="
         }
       },
       "is_incremental": false,
@@ -393,7 +429,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusTouchControllerMappingProfileInspector.html",
-          "hash": "SjoN21EBzUZ6ur94v+Y2rA=="
+          "hash": "71dSr92yr2nXMpeBR3qNhQ=="
         }
       },
       "is_incremental": false,
@@ -405,7 +441,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.ViveWandControllerMappingProfileInspector.html",
-          "hash": "cNJCZahbQHU8pIpUcrjo2g=="
+          "hash": "1QXQX4n1sqo0nfbHQGf88Q=="
         }
       },
       "is_incremental": false,
@@ -429,7 +465,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.OpenVR.OculusGoControllerMappingProfile.html",
-          "hash": "7m/00MZsOa4NwvE2SHHl6Q=="
+          "hash": "VrJlHjcUV/hgY+pH7kEj0Q=="
         }
       },
       "is_incremental": false,
@@ -441,7 +477,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.OpenVR.OculusRemoteControllerMappingProfile.html",
-          "hash": "nmYX2YKIag0tpk4Al4YmSg=="
+          "hash": "yLi0b/cDlVH2MaJ1wY44zg=="
         }
       },
       "is_incremental": false,
@@ -453,7 +489,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.OpenVR.OculusTouchControllerMappingProfile.html",
-          "hash": "oOtej+hor+0uTnSoLJApkg=="
+          "hash": "Y0NAUw/+V7h5FxxnPFJRGA=="
         }
       },
       "is_incremental": false,
@@ -465,7 +501,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.OpenVR.ViveWandControllerMappingProfile.html",
-          "hash": "V2Kcx/JkhZTTuB7r1H8oyg=="
+          "hash": "hSna/7sgzjtgws4Zsy5ilw=="
         }
       },
       "is_incremental": false,
@@ -489,7 +525,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.UnityInput.Profiles.GenericUnityControllerMappingProfile.html",
-          "hash": "MzgIP3uO5uFwU9NhRoBbxg=="
+          "hash": "JST5G5s0tXS159+6MBrxMA=="
         }
       },
       "is_incremental": false,
@@ -501,7 +537,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.GenericUnityControllerMappingProfileInspector.html",
-          "hash": "wm21i95IMp05nDuaoGEVMA=="
+          "hash": "rqR/TsejxjegxW8sjyYQzg=="
         }
       },
       "is_incremental": false,
@@ -513,7 +549,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.MouseControllerMappingProfileInspector.html",
-          "hash": "IVh59bH9mrJSppyxEBbWKg=="
+          "hash": "rolHqo240Oe8lFY1aBAecg=="
         }
       },
       "is_incremental": false,
@@ -525,7 +561,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.TouchScreenControllerMappingProfileInspector.html",
-          "hash": "IHALHkVuseitgiu4LKLFGw=="
+          "hash": "f/EY82MtMbiXdGiduEW2eg=="
         }
       },
       "is_incremental": false,
@@ -537,7 +573,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.XboxControllerMappingProfileInspector.html",
-          "hash": "BU3KRRV9cDRhN1QQoCg0Cg=="
+          "hash": "1RZ/of6WYgAfz7LyoDQ4Fg=="
         }
       },
       "is_incremental": false,
@@ -561,7 +597,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.UnityInput.Profiles.MouseControllerMappingProfile.html",
-          "hash": "x8dA7+cW26VAHNPs+iv7YQ=="
+          "hash": "dJIrg2PQArTLLFks1vUvhw=="
         }
       },
       "is_incremental": false,
@@ -573,7 +609,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.UnityInput.Profiles.TouchScreenControllerMappingProfile.html",
-          "hash": "2q9MPZGmMG2nClHSl6Hdnw=="
+          "hash": "eW5CEP08qVUzvdv24kjzsQ=="
         }
       },
       "is_incremental": false,
@@ -585,7 +621,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.UnityInput.Profiles.XboxControllerMappingProfile.html",
-          "hash": "jKLHg0aZTCRMna/E2wQf2A=="
+          "hash": "UewkG7QGamXY/c7h1/SrPg=="
         }
       },
       "is_incremental": false,
@@ -681,7 +717,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html",
-          "hash": "d/H+T0A7UKB48bBk/aQroQ=="
+          "hash": "SF2FmKPM/u09nEmegRJvQA=="
         }
       },
       "is_incremental": false,
@@ -741,7 +777,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html",
-          "hash": "9a+nL0SrkQ3Y9vB1ugAZgQ=="
+          "hash": "t7j5pJHErayBnPJJr+K1KA=="
         }
       },
       "is_incremental": false,
@@ -909,7 +945,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.InputSystem.MixedRealityGesturesProfile.html",
-          "hash": "UL9hFr46dBvgVLbLDx1jww=="
+          "hash": "85ZMq47CzOqDsPtackkQGw=="
         }
       },
       "is_incremental": false,
@@ -933,7 +969,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.InputSystem.MixedRealityInputActionRulesProfile.html",
-          "hash": "dtqlstw8TZoSveJow/calQ=="
+          "hash": "x9kz05A0RQ1AgyuaKYnIIg=="
         }
       },
       "is_incremental": false,
@@ -945,7 +981,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.InputSystem.MixedRealityInputActionsProfile.html",
-          "hash": "QgeItd+YKikgfInojkJvvg=="
+          "hash": "IZKoPiUxmhDmSDdtpudALg=="
         }
       },
       "is_incremental": false,
@@ -957,7 +993,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.InputSystem.MixedRealityInputSystemProfile.html",
-          "hash": "hHzLvi7uHNOHLPh0NRli8Q=="
+          "hash": "eMZfXCmYEwRqRXI8CUp+OA=="
         }
       },
       "is_incremental": false,
@@ -969,7 +1005,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.InputSystem.MixedRealityPointerProfile.html",
-          "hash": "0yFlHtFmjxKmP1j8Jk5JXg=="
+          "hash": "reef6iSLRDodVSVUF8w/og=="
         }
       },
       "is_incremental": false,
@@ -981,7 +1017,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.InputSystem.MixedRealitySpeechCommandsProfile.html",
-          "hash": "tvXOaDTPTSU8d3V6LbDwKw=="
+          "hash": "m0YXmiP//v3bJopFgLSQcA=="
         }
       },
       "is_incremental": false,
@@ -1137,7 +1173,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.MixedRealityCameraProfile.html",
-          "hash": "SQAjoQJKJP6TgM0hIXKbnw=="
+          "hash": "xeVimEam8+778Ml2500YSw=="
         }
       },
       "is_incremental": false,
@@ -1149,7 +1185,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile.html",
-          "hash": "B5HWF2R2BVc/jo1X3KF49A=="
+          "hash": "omeg4s1zlF1MxMOzWpr5Dw=="
         }
       },
       "is_incremental": false,
@@ -1173,7 +1209,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.MixedRealityToolkitConfigurationProfile.html",
-          "hash": "LSGvEomyLAGE6PVJS88zSA=="
+          "hash": "UWzs3a8+vOoAIdF1StVK/Q=="
         }
       },
       "is_incremental": false,
@@ -1185,7 +1221,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.NetworkingSystem.MixedRealityNetworkSystemProfile.html",
-          "hash": "7oWQYzNo666CFNFALamRAw=="
+          "hash": "5jkeBaxes+aLcDLApGZU7A=="
         }
       },
       "is_incremental": false,
@@ -1293,7 +1329,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.html",
-          "hash": "ywSK8TyvG9o9/eNSoJSamQ=="
+          "hash": "mCPfNc2kMSHmGtOz94RUZQ=="
         }
       },
       "is_incremental": false,
@@ -2069,30 +2105,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Extensions.EditorClassExtensions.ScriptableObjectExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.Extensions.EditorClassExtensions.ScriptableObjectExtensions.html",
-          "hash": "PRmZgKyaZQ8nZiBFGMOvxw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Extensions.EditorClassExtensions.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.Extensions.EditorClassExtensions.html",
-          "hash": "n5s0KCxreZ4c7UsFuEVcHw=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "../api/XRTK.Extensions.EnumerableExtensions.yml",
       "output": {
         ".html": {
@@ -2145,7 +2157,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Extensions.InteractionMappingsExtensions.html",
-          "hash": "ZUpRwFbil1yl+RvPwi4jXQ=="
+          "hash": "hAbISsD5c0gEDBfzZcP4Cw=="
         }
       },
       "is_incremental": false,
@@ -2285,11 +2297,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions.yml",
+      "source_relative_path": "../api/XRTK.Extensions.XRTK.Extensions.ColliderExtensions.yml",
       "output": {
         ".html": {
-          "relative_path": "api/XRTK.Extensions.XRTK.Extensions.BoxColliderExtensions.html",
-          "hash": "T9iIGkmaE3B6F0/7mQHI8A=="
+          "relative_path": "api/XRTK.Extensions.XRTK.Extensions.ColliderExtensions.html",
+          "hash": "CArJdQBO2VTcL4tS0PybtA=="
         }
       },
       "is_incremental": false,
@@ -2301,7 +2313,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Extensions.XRTK.Extensions.html",
-          "hash": "YS1c+WPLppGbxeCVAz0z7Q=="
+          "hash": "j7OiW0GLKPUzi0Tivjynuw=="
         }
       },
       "is_incremental": false,
@@ -2325,7 +2337,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.ChannelPackerWindow.html",
-          "hash": "Z09oIvLdB1v5yp3qVUaxEg=="
+          "hash": "lnmEqUQTcM/RVQXutPMO+w=="
         }
       },
       "is_incremental": false,
@@ -2337,7 +2349,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.ClippingBoxEditor.html",
-          "hash": "3gigPsjvhX0dauOvov7EOg=="
+          "hash": "izLLew+v5OFOokvvSEjPxA=="
         }
       },
       "is_incremental": false,
@@ -2349,7 +2361,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.ClippingPlaneEditor.html",
-          "hash": "FJqwLBLb4m2ieQndH8KzZA=="
+          "hash": "kRNbf58NAnYZ9Opz3WJVew=="
         }
       },
       "is_incremental": false,
@@ -2361,7 +2373,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.ClippingSphereEditor.html",
-          "hash": "/1wRmBcGdlFWeYeLGNHPpg=="
+          "hash": "ZReMnjEYMmTx7sVkxIUcEg=="
         }
       },
       "is_incremental": false,
@@ -2373,7 +2385,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.ControllerPopupWindow.html",
-          "hash": "Gn3pB1SDGp1lMTN3mcnWmA=="
+          "hash": "FBb3up3G2CveYuzcCicLXg=="
         }
       },
       "is_incremental": false,
@@ -2429,11 +2441,35 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Inspectors.Extensions.ScriptableObjectExtensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Inspectors.Extensions.ScriptableObjectExtensions.html",
+          "hash": "JjNMWQskwVglELbZSccIKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Inspectors.Extensions.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Inspectors.Extensions.html",
+          "hash": "fdrr7BH7qTpoLhJQNTxIaA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "../api/XRTK.Inspectors.HoverLightInspector.yml",
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.HoverLightInspector.html",
-          "hash": "vn2v+I8qA2NgabfNtdXshQ=="
+          "hash": "WMgxm7H3krdlgxxctwrEzA=="
         }
       },
       "is_incremental": false,
@@ -2445,7 +2481,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.MixedRealityPreferences.html",
-          "hash": "yO5kQ3x7vmdxeIDYM2ridA=="
+          "hash": "opVlPvc2hCSUS/U8Vk9U3w=="
         }
       },
       "is_incremental": false,
@@ -2529,7 +2565,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.MixedRealityToolkitInspector.html",
-          "hash": "NFZ6VbUGw6RiiA1aJcrfQQ=="
+          "hash": "hwHfaowgziMXv+yN2TPmCQ=="
         }
       },
       "is_incremental": false,
@@ -2541,7 +2577,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.html",
-          "hash": "jlU09fJkSx3KQljhEr01sg=="
+          "hash": "DoQzUm8PhOr5VMskLtiYgg=="
         }
       },
       "is_incremental": false,
@@ -2553,7 +2589,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html",
-          "hash": "X7EfHkMkvfzVyYCQjOqhHQ=="
+          "hash": "Iu0C0P4utiikBJZtUEMdUQ=="
         }
       },
       "is_incremental": false,
@@ -2565,7 +2601,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.BaseMixedRealityToolkitInspector.html",
-          "hash": "r/7T+R5eZFA3mTgfWRsmwg=="
+          "hash": "zm75oHmfw5Q7nGsmzkWKQg=="
         }
       },
       "is_incremental": false,
@@ -2577,7 +2613,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.CustomControllerMappingProfileInspector.html",
-          "hash": "bmfzRDpNPjRE54g8IOtsHw=="
+          "hash": "TbnunlfWqVk/KabKqf2gNw=="
         }
       },
       "is_incremental": false,
@@ -2589,7 +2625,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityBoundaryVisualizationProfileInspector.html",
-          "hash": "xge37rejBG8Up35xkkfHOA=="
+          "hash": "ncxNtCMrxPcexMITiNov9g=="
         }
       },
       "is_incremental": false,
@@ -2601,7 +2637,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityCameraProfileInspector.html",
-          "hash": "1lLdwGqos9DTcyc5ybUKZQ=="
+          "hash": "3zg1lWhKuoYkAU9T5r2a5g=="
         }
       },
       "is_incremental": false,
@@ -2613,7 +2649,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.html",
-          "hash": "KOGoCrG6yxCNNlkeQrUi0w=="
+          "hash": "TzahZxAVl721DGHyccaMVQ=="
         }
       },
       "is_incremental": false,
@@ -2625,7 +2661,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.html",
-          "hash": "A4N6Q9Gi5j4a1vx93FR/4A=="
+          "hash": "NfldmBLvb3vodvm+Jy25PA=="
         }
       },
       "is_incremental": false,
@@ -2637,7 +2673,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.html",
-          "hash": "2wdGKFLLt8PS8CHRuSlGAQ=="
+          "hash": "eSbu5FchrPAk6BDHPLWygw=="
         }
       },
       "is_incremental": false,
@@ -2649,7 +2685,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityDiagnosticsSystemProfileInspector.html",
-          "hash": "IdR1OTfMpZTj6KoZ3HRuuA=="
+          "hash": "mnNdsJ2OGCEZfhNszkeC+Q=="
         }
       },
       "is_incremental": false,
@@ -2661,7 +2697,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.html",
-          "hash": "28OXP2/bGp7HPpfedmk36w=="
+          "hash": "b5eZXdKxPgKHge+WWIsM+g=="
         }
       },
       "is_incremental": false,
@@ -2673,7 +2709,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.html",
-          "hash": "CrEVzkerQijbqq3jZv9kFQ=="
+          "hash": "8+563DTg4YL901uGB8wGSQ=="
         }
       },
       "is_incremental": false,
@@ -2685,7 +2721,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.html",
-          "hash": "1fHicD9hk6G75++McFcP4g=="
+          "hash": "F+qD29eLemhLweV4IKe5GQ=="
         }
       },
       "is_incremental": false,
@@ -2697,7 +2733,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.html",
-          "hash": "WnHbQ/FMjZvrKgYCjEvLfA=="
+          "hash": "br2Mj39RvoddifEzRCkXbA=="
         }
       },
       "is_incremental": false,
@@ -2709,7 +2745,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.html",
-          "hash": "YFw8QC7AY6asQhc8wZ5BaQ=="
+          "hash": "oYwXvSOyLxFz149KyIMTGw=="
         }
       },
       "is_incremental": false,
@@ -2721,7 +2757,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.html",
-          "hash": "es3k7xylCSqLYgrVKxEN6g=="
+          "hash": "s7uu2UUPhAWUs0bWgyf22Q=="
         }
       },
       "is_incremental": false,
@@ -2733,7 +2769,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.html",
-          "hash": "qZC3Nruaw9NeNiPqD54dvA=="
+          "hash": "o1Fjvmx4dGSivRx5HlCr8w=="
         }
       },
       "is_incremental": false,
@@ -2745,7 +2781,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.html",
-          "hash": "eNcRdl+2gWtOUGkSGn7o1g=="
+          "hash": "FpqoS/PEhJ8a966SK1C+PA=="
         }
       },
       "is_incremental": false,
@@ -2757,7 +2793,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityToolkitConfigurationProfileInspector.html",
-          "hash": "KJomYvjg/l7/w07u4MUxzA=="
+          "hash": "I+2+jjUHvX2sy0PgIOoJtQ=="
         }
       },
       "is_incremental": false,
@@ -2769,7 +2805,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.SpatialAwareness.BaseMixedRealitySpatialMeshObserverProfileInspector.html",
-          "hash": "lpHqOezpl7Na35y115cVOw=="
+          "hash": "BQVoR7cztEyuTG80w6dgbw=="
         }
       },
       "is_incremental": false,
@@ -2781,7 +2817,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.SpatialAwareness.BaseMixedRealitySpatialObserverProfileInspector.html",
-          "hash": "tpRGiAFNLj7tSh9h8Gyjng=="
+          "hash": "fJMAvyWij7BXy7JZlS7Bww=="
         }
       },
       "is_incremental": false,
@@ -2793,7 +2829,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.SpatialAwareness.BaseMixedRealitySurfaceObserverProfileInspector.html",
-          "hash": "WooLHFc71njZPMe/eYgb9w=="
+          "hash": "VJ4YZIaCRJ7OiO79CEJDNg=="
         }
       },
       "is_incremental": false,
@@ -2805,7 +2841,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.SpatialAwareness.MixedRealitySpatialAwarenessSystemProfileInspector.html",
-          "hash": "Ybmul32jNhFjR9VM/yMD/w=="
+          "hash": "4wPOAY/CxFSjn3uBQCTsgQ=="
         }
       },
       "is_incremental": false,
@@ -2949,7 +2985,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.SystemTypeRepairWindow.html",
-          "hash": "y3zx9UW7WwJ1C9RSPzFVCw=="
+          "hash": "lbBJivagD+fUkMeikm9MYA=="
         }
       },
       "is_incremental": false,
@@ -3009,7 +3045,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.CanvasEditorExtension.html",
-          "hash": "CiVl4Q2TafZ4deX0U1Mzlw=="
+          "hash": "5NUXP32sTJGAkSWoTx49xw=="
         }
       },
       "is_incremental": false,
@@ -3033,7 +3069,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.Lines.DataProviders.BaseMixedRealityLineDataProviderInspector.html",
-          "hash": "PH7tKBx6sunDZzRwDmNx8g=="
+          "hash": "uAZsP6mtseX9cVBAEYwiDg=="
         }
       },
       "is_incremental": false,
@@ -3045,7 +3081,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.Lines.DataProviders.BezierDataProviderInspector.html",
-          "hash": "XuNIuv9jXQ7tIrR63ODbSw=="
+          "hash": "9rkmK/PjVyn6y4f64zeUuQ=="
         }
       },
       "is_incremental": false,
@@ -3057,7 +3093,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.Lines.DataProviders.EllipseLineDataProviderInspector.html",
-          "hash": "p7MLTkfBU2GrRbuXyxAaqg=="
+          "hash": "YZeJ4NLEkhtAHwqYj4UMtA=="
         }
       },
       "is_incremental": false,
@@ -3069,7 +3105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.Lines.DataProviders.ParabolaPhysicalLineDataProviderInspector.html",
-          "hash": "eRmGJEA42AGpk5s5EFxOSg=="
+          "hash": "nK/4NyUHcoFGtNxndw1kxA=="
         }
       },
       "is_incremental": false,
@@ -3081,7 +3117,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.Lines.DataProviders.ParabolicConstrainedLineDataProviderInspector.html",
-          "hash": "3Ifi0r0OjpLev24HxrJgRA=="
+          "hash": "y1uQ+SlABwd/ifY9ZWS4Tg=="
         }
       },
       "is_incremental": false,
@@ -3093,7 +3129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.Lines.DataProviders.RectangleLineDataProviderInspector.html",
-          "hash": "lrP28aA6ooJBhKmijaH0Lw=="
+          "hash": "JVMVjzKoK2aOHGGmvgWc5g=="
         }
       },
       "is_incremental": false,
@@ -3105,7 +3141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.Lines.DataProviders.SimpleLineDataProviderInspector.html",
-          "hash": "F1Lzr3nX5AGS4PhAMfX4+w=="
+          "hash": "3ZOZgPQt5ZlVtWYmNVH1QA=="
         }
       },
       "is_incremental": false,
@@ -3117,7 +3153,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.Lines.DataProviders.SplineDataProviderInspector.html",
-          "hash": "tr8aFq1+fUrEdRDoQR2Jbw=="
+          "hash": "wtfEykxaXL/wVEux9nNB9Q=="
         }
       },
       "is_incremental": false,
@@ -3165,7 +3201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.SymbolicLinks.SymbolicLinkSettings.html",
-          "hash": "na6YLbA9TNe/jF2tf96Tzw=="
+          "hash": "17zK+2JBHQ6PhzRNSXiUPg=="
         }
       },
       "is_incremental": false,
@@ -3177,7 +3213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.SymbolicLinks.SymbolicLinkSettingsInspector.html",
-          "hash": "bpr8j32n1/i+MBSnWwaXUA=="
+          "hash": "jP1h+oR6PR/C2L4cTeWhmQ=="
         }
       },
       "is_incremental": false,
@@ -3189,7 +3225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Utilities.SymbolicLinks.SymbolicLinkerWindow.html",
-          "hash": "9gHSONnBLoQPHT4E8UXFSg=="
+          "hash": "dtO0J2zv7dH/BfzSk+ByPQ=="
         }
       },
       "is_incremental": false,
@@ -3849,7 +3885,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerDataProvider.html",
-          "hash": "N92YqYVOPCFr3FH8dQNbrQ=="
+          "hash": "O9YzqMYL3ucmOt8R9REduw=="
         }
       },
       "is_incremental": false,
@@ -3885,7 +3921,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.Providers.Controllers.IMixedRealityDictationDataProvider.html",
-          "hash": "KK/LW0Pd+qVW9eg4LjHosA=="
+          "hash": "LzFuXfT/qc+7yXDMwibMEA=="
         }
       },
       "is_incremental": false,
@@ -3897,7 +3933,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.Providers.Controllers.IMixedRealitySpeechDataProvider.html",
-          "hash": "GtsFcQ1PDbAAJI5CkwY/iw=="
+          "hash": "0d0UaTSaYC05D2axItuI2A=="
         }
       },
       "is_incremental": false,
@@ -4089,7 +4125,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Lumin.Controllers.LuminController.html",
-          "hash": "PG0dM6dp8F+3M8HhBHq8pw=="
+          "hash": "WyXjNuigCRf2zr5g4Mm0Gg=="
         }
       },
       "is_incremental": false,
@@ -4101,7 +4137,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Lumin.Controllers.LuminControllerDataProvider.html",
-          "hash": "O3iK2E57DySx2qGxsNEJkw=="
+          "hash": "o71a3coRvJdDtbpX7ls1bg=="
         }
       },
       "is_incremental": false,
@@ -4125,7 +4161,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Lumin.Inspectors.LuminMotionControllerMappingProfileInspector.html",
-          "hash": "8+oWDUPgD7+zMamBb4ekOw=="
+          "hash": "EnKmUzIQPn50hWNMqXXeDw=="
         }
       },
       "is_incremental": false,
@@ -4137,7 +4173,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Lumin.Inspectors.LuminSpatialMeshObserverProfileInspector.html",
-          "hash": "VfjmWM19pU60yfZ8VtINjA=="
+          "hash": "tpG4GgjkxdWoXvTdQft0yw=="
         }
       },
       "is_incremental": false,
@@ -4161,7 +4197,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Lumin.Profiles.LuminMotionControllerMappingProfile.html",
-          "hash": "O5LnS3IPcumDARPFtqIgRA=="
+          "hash": "ANWsoJZYXNset9LExS6ncA=="
         }
       },
       "is_incremental": false,
@@ -4173,7 +4209,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Lumin.Profiles.LuminSpatialMeshObserverProfile.html",
-          "hash": "Xa6bjKZd9nhzjgWcR3zyRA=="
+          "hash": "nDL+0aAVPXYo9I46Az8X+g=="
         }
       },
       "is_incremental": false,
@@ -4221,7 +4257,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Controllers.BaseOculusController.html",
-          "hash": "NHMMnYWmVMOqfuwe9csAaw=="
+          "hash": "pY/UaswQh0GftCcDOM7WqQ=="
         }
       },
       "is_incremental": false,
@@ -4233,7 +4269,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Controllers.OculusControllerDataProvider.html",
-          "hash": "H29HFaXBU09P7Jg9uz2h2Q=="
+          "hash": "inbAth0JGjrzJeoSVPMEiw=="
         }
       },
       "is_incremental": false,
@@ -4293,7 +4329,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Inspectors.OculusGoControllerMappingProfileInspector.html",
-          "hash": "jZNCycEzDlW6W4yne2mnkg=="
+          "hash": "p9aXqN8H/YHb9WM41K5c3w=="
         }
       },
       "is_incremental": false,
@@ -4305,7 +4341,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Inspectors.OculusRemoteControllerMappingProfileInspector.html",
-          "hash": "6rig6/ZuuJgtdnXymt90cQ=="
+          "hash": "D4jvonJeyVdu5wok+MaYTA=="
         }
       },
       "is_incremental": false,
@@ -4317,7 +4353,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Inspectors.OculusTouchControllerMappingProfileInspector.html",
-          "hash": "+Sc7/kFQJkY9OU+g/X4m5g=="
+          "hash": "hKwKd8GqMIKoGj4qlTWZPw=="
         }
       },
       "is_incremental": false,
@@ -4673,11 +4709,23 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusManifestPreprocessor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusManifestPreprocessor.html",
+          "hash": "mvpP21FNH4TMrqfNhyEvUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "../api/XRTK.Oculus.Profiles.OculusGoControllerMappingProfile.yml",
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Profiles.OculusGoControllerMappingProfile.html",
-          "hash": "Y1zf1nJjvwCM3cEk5DsfBg=="
+          "hash": "OoSP8GUHStauymgUD/2tvA=="
         }
       },
       "is_incremental": false,
@@ -4689,7 +4737,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Profiles.OculusRemoteControllerMappingProfile.html",
-          "hash": "xaNVSJ+0VhyzaEw6by/INQ=="
+          "hash": "iUJekXxaKrV+YPQwHc6XgA=="
         }
       },
       "is_incremental": false,
@@ -4701,7 +4749,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.Profiles.OculusTouchControllerMappingProfile.html",
-          "hash": "xLyid1UNFgAotZ9LInKR/w=="
+          "hash": "kVHTxSaJChYOfqvr8SoYcw=="
         }
       },
       "is_incremental": false,
@@ -4725,7 +4773,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.html",
-          "hash": "p73j8JYT2GZgm3b7CKPsZQ=="
+          "hash": "Iy3B4GTQE0Q/tEecFur21Q=="
         }
       },
       "is_incremental": false,
@@ -4737,7 +4785,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.BaseController.html",
-          "hash": "P1H0iDBVS+9FqP7+wZXbjQ=="
+          "hash": "CgcWC9jTTajh911GW+6wbA=="
         }
       },
       "is_incremental": false,
@@ -4749,7 +4797,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.BaseControllerDataProvider.html",
-          "hash": "+yeh9XRIVQjbFMsuTGyF5A=="
+          "hash": "jNaoqsq4dgGiRIws6ee5gA=="
         }
       },
       "is_incremental": false,
@@ -4821,7 +4869,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.OpenVR.OpenVRDataProvider.html",
-          "hash": "TRA4ImvLR2tvSCgwSPSqxQ=="
+          "hash": "2ou9PdxRIwM7/2qo8mz7bQ=="
         }
       },
       "is_incremental": false,
@@ -4881,7 +4929,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.Speech.BaseDictationDataProvider.html",
-          "hash": "8/a/TDNKQt2A7YcHbdIPUw=="
+          "hash": "ywKJe+oxTiJRDwtpevP+fA=="
         }
       },
       "is_incremental": false,
@@ -4893,7 +4941,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.Speech.BaseSpeechDataProvider.html",
-          "hash": "oXjJ3e1BfYh2MXy10cCB9Q=="
+          "hash": "oblMOHNrbXOU4St7bb1BQA=="
         }
       },
       "is_incremental": false,
@@ -4905,7 +4953,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.Speech.WindowsDictationDataProvider.html",
-          "hash": "G6S2JRElx9JB6nW0QGvTIA=="
+          "hash": "wVvo0OLX1anmiH9c2iY6Gw=="
         }
       },
       "is_incremental": false,
@@ -4917,7 +4965,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.Speech.WindowsSpeechDataProvider.html",
-          "hash": "CGHCeU47HifCt/mdVDFh3Q=="
+          "hash": "dZyzQbDDy5N2+YxANP+8Nw=="
         }
       },
       "is_incremental": false,
@@ -4941,7 +4989,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.UnityInput.GenericJoystickController.html",
-          "hash": "0PxJNoVkz0pOzTIO6adCLQ=="
+          "hash": "73TmNYttQq7XVj8wg5NiCA=="
         }
       },
       "is_incremental": false,
@@ -4953,7 +5001,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.UnityInput.MouseController.html",
-          "hash": "8Zab6Wz+w4dC4j3J3HjcBw=="
+          "hash": "B5HgttnxgJmnZIo3G6nr+A=="
         }
       },
       "is_incremental": false,
@@ -4965,7 +5013,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.UnityInput.MouseDataProvider.html",
-          "hash": "eMTh2xSJqd1UTNCMpROrGg=="
+          "hash": "dTN5hq22yewBghq5gxOpOg=="
         }
       },
       "is_incremental": false,
@@ -4977,7 +5025,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.html",
-          "hash": "aVN4m8w9zdSDPXiydjZNew=="
+          "hash": "i+bl5Dq/ckUZGPfxt38uGA=="
         }
       },
       "is_incremental": false,
@@ -4989,7 +5037,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.UnityInput.UnityTouchController.html",
-          "hash": "ZS7shlnl1mxQJ9X1WFcaDw=="
+          "hash": "0tijpv1efmxe6h5IYHceeA=="
         }
       },
       "is_incremental": false,
@@ -5001,7 +5049,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.UnityInput.UnityTouchDataProvider.html",
-          "hash": "QWWBQy/vuXSpZlBxY/Y0Mw=="
+          "hash": "apf2rczLrUMxnLf2EKX3Mg=="
         }
       },
       "is_incremental": false,
@@ -5049,7 +5097,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Networking.Profiles.BaseMixedRealityNetworkProviderProfile.html",
-          "hash": "MjqJbxC8OAZP3aZtuYCACw=="
+          "hash": "4/f3bkdzqg7+9ABGhJpe5Q=="
         }
       },
       "is_incremental": false,
@@ -5085,7 +5133,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcNetworkProviderProfile.html",
-          "hash": "KCe/DRy+WN7ViCYS4MTmWA=="
+          "hash": "yvAa9RuDKH9kyJyv/8d6Jw=="
         }
       },
       "is_incremental": false,
@@ -5133,7 +5181,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserverProfile.html",
-          "hash": "Ic1YR6g8R49RzJavbqh+hg=="
+          "hash": "3rXJ4gSPBp5nXkcMicEXLA=="
         }
       },
       "is_incremental": false,
@@ -5157,7 +5205,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverProfile.html",
-          "hash": "AmI+RUqunv3IecNe2EiWIA=="
+          "hash": "qkk8dswP7k4zTj3KfDjgvQ=="
         }
       },
       "is_incremental": false,
@@ -5181,7 +5229,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.SpatialObservers.BaseMixedRealitySurfaceObserverProfile.html",
-          "hash": "vhgCFrBXMluppVgb5vtNrQ=="
+          "hash": "F1AmTqKSNtVduy1XclH+Fg=="
         }
       },
       "is_incremental": false,
@@ -5325,7 +5373,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Input.Handlers.DragAndDropHandler.html",
-          "hash": "OkLPXcQ/xtAu/pM8BJP++g=="
+          "hash": "TQJKhQAYwDw0LuYxj7zGIw=="
         }
       },
       "is_incremental": false,
@@ -5337,7 +5385,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Input.Handlers.ManipulationHandler.html",
-          "hash": "Q0PRF7Z+IgHoGzUeGFlRxQ=="
+          "hash": "2CN34zYNgmzzlqlzkNHVfg=="
         }
       },
       "is_incremental": false,
@@ -5421,7 +5469,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.Input.Handlers.BaseInputHandlerInspector.html",
-          "hash": "B9imSyKqthX4NUWyTU60hw=="
+          "hash": "RxKP+FHhecYY11mHmQIruw=="
         }
       },
       "is_incremental": false,
@@ -5433,7 +5481,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.Input.Handlers.ControllerPoseSynchronizerInspector.html",
-          "hash": "Id5PJBMKckxwdlCm0KTb9w=="
+          "hash": "UgkXToeht15RrN0k/89gzg=="
         }
       },
       "is_incremental": false,
@@ -5445,7 +5493,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.Input.Handlers.DefaultMixedRealityControllerVisualizerInspector.html",
-          "hash": "n8L8r0qvK2Pm2lrmoTixtA=="
+          "hash": "3iP3bCH37uEMSD1HLG9gIg=="
         }
       },
       "is_incremental": false,
@@ -5457,7 +5505,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.Input.Handlers.PointerClickHandlerInspector.html",
-          "hash": "eaGKbo1zMIvgdFoJJEZzVw=="
+          "hash": "yn7gGTEtWRnUVnGE361dFw=="
         }
       },
       "is_incremental": false,
@@ -5469,7 +5517,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.Input.Handlers.SpeechInputHandlerInspector.html",
-          "hash": "FeT2wKxUKTrmpb+NIcOaSQ=="
+          "hash": "jAdjgaKfwJ6cX1asI3NUbA=="
         }
       },
       "is_incremental": false,
@@ -5481,7 +5529,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.Input.Handlers.WindowsMixedRealityControllerVisualizerInspector.html",
-          "hash": "rKZEySVg/zmMwRCR1E8lMg=="
+          "hash": "EddIQBd6siA4Yw7Qcvw7dw=="
         }
       },
       "is_incremental": false,
@@ -5505,7 +5553,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.UX.Collections.BaseCollectionInspector.html",
-          "hash": "XfWorQGfAoML8e8txDbYqA=="
+          "hash": "ApQUYbLRgXZk2hJAzploUw=="
         }
       },
       "is_incremental": false,
@@ -5529,7 +5577,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.UX.Pointers.BaseControllerPointerInspector.html",
-          "hash": "9FvCYu+yF0w6UqKNJ3lQBA=="
+          "hash": "vEI3z6ytflNnZPNVpHMVQA=="
         }
       },
       "is_incremental": false,
@@ -5541,7 +5589,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.UX.Pointers.LinePointerInspector.html",
-          "hash": "rX19ySIBA3NHE0qxYuwo+g=="
+          "hash": "nqsO1noPLCtQ6KWwSGNdmw=="
         }
       },
       "is_incremental": false,
@@ -5553,7 +5601,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.UX.Pointers.MousePointerInspector.html",
-          "hash": "/ixSfEhlATfbkIOEmn7WJA=="
+          "hash": "qXRWVzIFQa/4DMolUDUIMA=="
         }
       },
       "is_incremental": false,
@@ -5565,7 +5613,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.UX.Pointers.ParabolicTeleportPointerInspector.html",
-          "hash": "aaTnBPOX2CCt6eZOC0usCw=="
+          "hash": "2+oUgAlCUr5l0JgLHYN+Pw=="
         }
       },
       "is_incremental": false,
@@ -5577,7 +5625,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.UX.Pointers.TeleportPointerInspector.html",
-          "hash": "rshr4DwGXm2wd5W2ZYhnYg=="
+          "hash": "Uf+TdFSz0fIQbCNlH9k8uw=="
         }
       },
       "is_incremental": false,
@@ -5601,7 +5649,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.Utilities.Solvers.ControllerFinderInspector.html",
-          "hash": "GHdMIhmgA5Ce6IWs9SA3JQ=="
+          "hash": "S/pbX9lRR2ifggh/7JENCA=="
         }
       },
       "is_incremental": false,
@@ -5613,7 +5661,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.Utilities.Solvers.InBetweenEditor.html",
-          "hash": "UHUy408qxmWc37SiOgCYUw=="
+          "hash": "bCrEg8A4KsOwOnUpIWERCQ=="
         }
       },
       "is_incremental": false,
@@ -5625,7 +5673,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Inspectors.Utilities.Solvers.SolverHandlerInspector.html",
-          "hash": "fwXClU+k0qUjHbQZxM9mwg=="
+          "hash": "eDZeDp+Sjv/P5CkEDY3dZQ=="
         }
       },
       "is_incremental": false,
@@ -5649,7 +5697,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.BoundingBox.html",
-          "hash": "HrtpWYJ5KVvOqUN8mxOM7w=="
+          "hash": "7dtKsManLtpSEWIXbD5ang=="
         }
       },
       "is_incremental": false,
@@ -6177,7 +6225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.ToolTips.ToolTipSpawner.RemainType.html",
-          "hash": "g1KA8YvH/IElnMdov11CYQ=="
+          "hash": "PFwVJy7MPu1mFIthLjaBvg=="
         }
       },
       "is_incremental": false,
@@ -6189,7 +6237,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.UX.ToolTips.ToolTipSpawner.html",
-          "hash": "gy1GaOhyV3jfZcqj5BcwQg=="
+          "hash": "I9PwDsKyKR9Bs9Uj99IOzw=="
         }
       },
       "is_incremental": false,
@@ -6597,7 +6645,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.InputSystem.FocusProvider.html",
-          "hash": "9na00UKYsUi+w/gA8bghow=="
+          "hash": "habIstF1zKM1eUJIkj51sA=="
         }
       },
       "is_incremental": false,
@@ -7041,7 +7089,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Build.BuildDeployWindow.html",
-          "hash": "2UhQG/YCCRwJNk+SaziXhg=="
+          "hash": "3VDKl1KCilvaYchIL+Vd+A=="
         }
       },
       "is_incremental": false,
@@ -7257,7 +7305,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Editor.IconEditor.html",
-          "hash": "Knm1PQw6q5lTI5gz0MlTDA=="
+          "hash": "5QKT1ZcjlBGPEGOMrkhqSA=="
         }
       },
       "is_incremental": false,
@@ -7305,7 +7353,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Editor.MixedRealityEditorSettings.html",
-          "hash": "Y5flHhPhjv5hFqCGMcBclA=="
+          "hash": "qAzaa5DxKb3nsJEtbO6Uqg=="
         }
       },
       "is_incremental": false,
@@ -7389,7 +7437,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Gltf.GltfAsset.html",
-          "hash": "NOnZYw92SmL/M2rc5DWGXw=="
+          "hash": "0tb3Jts8z6YhD5acOlPXOA=="
         }
       },
       "is_incremental": false,
@@ -9045,7 +9093,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityController.html",
-          "hash": "IXviw2fNv7v/y8zxrEWxgQ=="
+          "hash": "i/ZOzqhI55SJAajPaT5vlQ=="
         }
       },
       "is_incremental": false,
@@ -9057,7 +9105,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider.html",
-          "hash": "zu16njK1O+OX5fs3Kitvew=="
+          "hash": "QVQ29/oJKo/SV+QvmPgFMg=="
         }
       },
       "is_incremental": false,
@@ -9081,7 +9129,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.WindowsMixedReality.Inspectors.WindowsMixedRealityDataProviderProfileInspector.html",
-          "hash": "RAC7RNiw4Mi5e+v1Kf5/YQ=="
+          "hash": "V7OCkl95qUMfORGLHzCAhg=="
         }
       },
       "is_incremental": false,
@@ -9093,7 +9141,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.WindowsMixedReality.Inspectors.WindowsMixedRealityMotionControllerMappingProfileInspector.html",
-          "hash": "V54/wD2n/O92cqAPAkPYaA=="
+          "hash": "pELpez/CnhOO4cLEhQhNOQ=="
         }
       },
       "is_incremental": false,
@@ -9117,7 +9165,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.WindowsMixedReality.Profiles.Inspectors.WindowsMixedRealitySpatialMeshObserverProfileInspector.html",
-          "hash": "/HmmRig/0/53yybztVRNyw=="
+          "hash": "aFHq0F3PyGQMpPN4yh6Tmg=="
         }
       },
       "is_incremental": false,
@@ -9141,7 +9189,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityControllerDataProviderProfile.html",
-          "hash": "lz5VoZBFn5UwqdlHIrk/Rw=="
+          "hash": "pkk4VZFAoYTGwn5gxt7g2w=="
         }
       },
       "is_incremental": false,
@@ -9153,7 +9201,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityMotionControllerMappingProfile.html",
-          "hash": "7LW07M3MSZn0hIFPby8akQ=="
+          "hash": "yBM5ZIXJvS+e6w72V6+BTA=="
         }
       },
       "is_incremental": false,
@@ -9165,7 +9213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.WindowsMixedReality.Profiles.WindowsMixedRealitySpatialMeshObserverProfile.html",
-          "hash": "7tk6mRl1saMbjtQxqBIAvQ=="
+          "hash": "kQ+MpYe617A1WZrsGoT3Kg=="
         }
       },
       "is_incremental": false,
@@ -9225,7 +9273,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "cXKn16l2LrEh7oIxDnR3yw=="
+          "hash": "t4+tVOBeUHTp4FnUXHVuaw=="
         }
       },
       "is_incremental": false,
@@ -9369,7 +9417,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 760,
+          "total_file_count": 764,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

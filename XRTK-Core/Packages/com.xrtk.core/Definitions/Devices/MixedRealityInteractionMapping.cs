@@ -471,10 +471,10 @@ namespace XRTK.Definitions.Devices
 
             set
             {
-                if (AxisType != AxisType.SingleAxis)
+                if (AxisType != AxisType.Digital &&
+                    AxisType != AxisType.SingleAxis)
                 {
-                    Debug.LogError(
-                        $"SetFloatValue is only valid for AxisType.SingleAxis InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"SetFloatValue is only valid for AxisType.SingleAxis & AxisType.Digital InteractionMappings\nPlease check the {inputType} mapping for the current controller");
                 }
 
                 var newValue = value;

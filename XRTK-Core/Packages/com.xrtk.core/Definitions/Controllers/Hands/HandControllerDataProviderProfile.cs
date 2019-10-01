@@ -20,13 +20,5 @@ namespace XRTK.Definitions.Controllers.Hands
         /// The concrete type to use for created hand controllers.
         /// </summary>
         public SystemType HandControllerType => handControllerType;
-
-        [SerializeField]
-        private HandControllerDataProviderConfiguration[] registeredControllerDataProviders = new HandControllerDataProviderConfiguration[0];
-
-        /// <summary>
-        /// The currently registered controller data providers for this input system.
-        /// </summary>
-        public HandControllerDataProviderConfiguration[] RegisteredControllerDataProviders => registeredControllerDataProviders;
     }
 }

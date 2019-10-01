@@ -30,9 +30,6 @@ namespace XRTK.Providers.Controllers.Hands
         protected static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
         protected readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
 
-        private IMixedRealityPlatformHandControllerDataProvider dataProvider;
-        private IMixedRealityPlatformHandControllerDataProvider DataProvider => dataProvider ?? (dataProvider = MixedRealityToolkit.GetService<IMixedRealityPlatformHandControllerDataProvider>());
-
         /// <summary>
         /// The Windows Mixed Reality Controller default interactions.
         /// </summary>

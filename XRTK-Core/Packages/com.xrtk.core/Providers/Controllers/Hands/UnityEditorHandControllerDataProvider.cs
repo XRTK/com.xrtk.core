@@ -5,12 +5,11 @@ using System;
 using UnityEngine;
 using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Providers.Controllers.Hands
 {
-    public class EditorSimulatedHandControllerDataProvider : BaseControllerDataProvider, IMixedRealityPlatformHandControllerDataProvider
+    public class UnityEditorHandControllerDataProvider : BaseControllerDataProvider
     {
         private EditorSimulatedHandControllerDataProviderProfile profile;
         private long lastHandControllerUpdateTimeStamp = 0;
@@ -29,9 +28,6 @@ namespace XRTK.Providers.Controllers.Hands
         /// If true then keyboard and mouse input are used to simulate hands.
         /// </summary>
         public bool UserInputEnabled { get; private set; } = true;
-
-        /// <inheritdoc />
-        public event HandDataUpdate OnHandDataUpdate;
 
         /////////////////////
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
@@ -63,7 +59,7 @@ namespace XRTK.Providers.Controllers.Hands
         private SimulatedHandData.HandJointDataGenerator generatorRight;
         ///////////////////
 
-        public EditorSimulatedHandControllerDataProvider(string name, uint priority, EditorSimulatedHandControllerDataProviderProfile profile)
+        public UnityEditorHandControllerDataProvider(string name, uint priority, EditorSimulatedHandControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
             this.profile = profile;
@@ -115,11 +111,11 @@ namespace XRTK.Providers.Controllers.Hands
                 {
                     if (HandDataLeft.Timestamp > lastHandControllerUpdateTimeStamp)
                     {
-                        OnHandDataUpdate?.Invoke(Handedness.Left, HandDataLeft);
+                        //OnHandDataUpdate?.Invoke(Handedness.Left, HandDataLeft);
                     }
                     if (HandDataRight.Timestamp > lastHandControllerUpdateTimeStamp)
                     {
-                        OnHandDataUpdate?.Invoke(Handedness.Right, HandDataRight);
+                        //OnHandDataUpdate?.Invoke(Handedness.Right, HandDataRight);
                     }
 
                     lastHandControllerUpdateTimeStamp = currentTime.Ticks;

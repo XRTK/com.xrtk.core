@@ -12,11 +12,10 @@ using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
-using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Providers.Controllers.Hands
 {
-    public class HandControllerDataProvider : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider
+    public abstract class BaseHandControllerDataProvider : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider
     {
         private HandControllerDataProviderProfile profile;
         private readonly Dictionary<Handedness, BaseHandController> trackedHandControllers = new Dictionary<Handedness, BaseHandController>();
@@ -31,21 +30,13 @@ namespace XRTK.Providers.Controllers.Hands
         private BaseHandController rightHand;
         private Dictionary<TrackedHandJoint, Transform> rightHandJointTransforms = new Dictionary<TrackedHandJoint, Transform>();
 
-        /// <inheritdoc />
-        public override IMixedRealityController[] GetActiveControllers()
-        {
-            BaseHandController[] controllers = new BaseHandController[trackedHandControllers.Values.Count];
-            trackedHandControllers.Values.CopyTo(controllers, 0);
-            return controllers;
-        }
-
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="priority"></param>
         /// <param name="profile"></param>
-        public HandControllerDataProvider(string name, uint priority, HandControllerDataProviderProfile profile)
+        public BaseHandControllerDataProvider(string name, uint priority, HandControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
             this.profile = profile;
@@ -63,40 +54,8 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <inheritdoc />
-        public override void Enable()
-        {
-            for (int i = 0; i < profile.RegisteredControllerDataProviders.Length; i++)
-            {
-                HandControllerDataProviderConfiguration controllerDataProvider = profile.RegisteredControllerDataProviders[i];
-                if (!MixedRealityToolkit.CreateAndRegisterService<IMixedRealityPlatformHandControllerDataProvider>(
-                                    controllerDataProvider.DataProviderType,
-                                    controllerDataProvider.RuntimePlatform,
-                                    controllerDataProvider.DataProviderName,
-                                    controllerDataProvider.Priority,
-                                    controllerDataProvider.Profile))
-                {
-                    Debug.LogError($"Failed to start {controllerDataProvider.DataProviderName}!");
-                }
-            }
-
-            IMixedRealityPlatformHandControllerDataProvider handControllerDataProvider = MixedRealityToolkit.GetService<IMixedRealityPlatformHandControllerDataProvider>();
-            if (handControllerDataProvider != null)
-            {
-                handControllerDataProvider.OnHandDataUpdate += HandControllerDataProvider_OnHandDataUpdate;
-            }
-        }
-
-        /// <inheritdoc />
         public override void Disable()
         {
-            IMixedRealityPlatformHandControllerDataProvider handControllerDataProvider = MixedRealityToolkit.GetService<IMixedRealityPlatformHandControllerDataProvider>();
-            if (handControllerDataProvider != null)
-            {
-                handControllerDataProvider.OnHandDataUpdate -= HandControllerDataProvider_OnHandDataUpdate;
-            }
-
-            MixedRealityToolkit.UnregisterServicesOfType<IMixedRealityPlatformHandControllerDataProvider>();
-
             // Check existence of fauxJoints before destroying. This avoids a (harmless) race
             // condition when the service is getting destroyed at the same time that the gameObjects
             // are being destroyed at shutdown.

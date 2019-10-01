@@ -95,6 +95,11 @@ namespace XRTK.Providers.Controllers
         #endregion IMixedRealityController Implementation
 
         /// <summary>
+        /// Updates the current readings for the controller.
+        /// </summary>
+        public virtual void UpdateController() { }
+
+        /// <summary>
         /// Setups up the configuration based on the Mixed Reality Controller Mapping Profile.
         /// </summary>
         /// <param name="controllerType">The type of the controller.</param>
@@ -305,7 +310,7 @@ namespace XRTK.Providers.Controllers
                     visualizer.UseSourcePoseData = false;
                     visualizer.PoseAction = altPoseAction;
                 }
-                else if(visualizationProfile.GlobalPointerPose != MixedRealityInputAction.None)
+                else if (visualizationProfile.GlobalPointerPose != MixedRealityInputAction.None)
                 {
                     visualizer.UseSourcePoseData = false;
                     visualizer.PoseAction = visualizationProfile.GlobalPointerPose;

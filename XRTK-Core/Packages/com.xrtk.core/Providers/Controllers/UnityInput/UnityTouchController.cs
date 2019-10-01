@@ -100,6 +100,8 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// </summary>
         public void Update()
         {
+            UpdateController();
+            
             if (!isTouched) { return; }
 
             Lifetime += Time.deltaTime;

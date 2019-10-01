@@ -77,6 +77,8 @@ namespace XRTK.Services.CameraSystem
         /// <inheritdoc />
         public override void Update()
         {
+            base.Update();
+
             if (IsOpaque != cameraOpaqueLastFrame)
             {
                 cameraOpaqueLastFrame = IsOpaque;

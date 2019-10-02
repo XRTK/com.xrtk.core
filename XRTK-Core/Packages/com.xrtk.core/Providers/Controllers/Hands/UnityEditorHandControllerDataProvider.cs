@@ -11,7 +11,7 @@ namespace XRTK.Providers.Controllers.Hands
 {
     public class UnityEditorHandControllerDataProvider : BaseControllerDataProvider
     {
-        private EditorSimulatedHandControllerDataProviderProfile profile;
+        private UnityEditorHandControllerDataProviderProfile profile;
         private long lastHandControllerUpdateTimeStamp = 0;
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace XRTK.Providers.Controllers.Hands
         private SimulatedHandData.HandJointDataGenerator generatorRight;
         ///////////////////
 
-        public UnityEditorHandControllerDataProvider(string name, uint priority, EditorSimulatedHandControllerDataProviderProfile profile)
+        public UnityEditorHandControllerDataProvider(string name, uint priority, UnityEditorHandControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
             this.profile = profile;

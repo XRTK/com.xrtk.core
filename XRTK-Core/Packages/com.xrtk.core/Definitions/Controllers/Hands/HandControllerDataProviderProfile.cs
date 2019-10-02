@@ -8,7 +8,7 @@ using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Definitions.Controllers.Hands
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hands", fileName = "MixedRealityHandControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hand Controller", fileName = "MixedRealityHandControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
     public class HandControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
     {
         [SerializeField]

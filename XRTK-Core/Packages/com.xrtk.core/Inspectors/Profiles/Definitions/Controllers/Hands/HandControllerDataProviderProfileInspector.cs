@@ -3,11 +3,10 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions.Controllers.Hands;
 using XRTK.Inspectors.Profiles;
 using XRTK.Inspectors.Utilities;
 
-namespace XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles
+namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
 {
     [CustomEditor(typeof(HandControllerDataProviderProfile))]
     public class HandControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector

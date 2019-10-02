@@ -2,15 +2,12 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
-using UnityEngine;
 using XRTK.Definitions.InputSystem.Simulation;
-using XRTK.Inspectors.Profiles;
-using XRTK.Inspectors.Utilities;
 
-namespace XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles
+namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
 {
-    [CustomEditor(typeof(EditorSimulatedHandControllerDataProviderProfile))]
-    public class EditorSimulatedHandControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(UnityEditorHandControllerDataProviderProfile))]
+    public class UnityEditorHandControllerDataProviderProfileInspector : HandControllerDataProviderProfileInspector
     {
         private SerializedProperty simulateHandTracking;
 
@@ -71,15 +68,7 @@ namespace XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
-
-            if (thisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Configuration Profile"))
-            {
-                Selection.activeObject = thisProfile.ParentProfile;
-            }
-
-            thisProfile.CheckProfileLock();
+            base.OnInspectorGUI();
 
             serializedObject.Update();
 

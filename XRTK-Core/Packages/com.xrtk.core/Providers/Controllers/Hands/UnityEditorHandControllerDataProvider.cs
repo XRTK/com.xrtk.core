@@ -9,7 +9,7 @@ using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Providers.Controllers.Hands
 {
-    public class UnityEditorHandControllerDataProvider : BaseControllerDataProvider
+    public class UnityEditorHandControllerDataProvider : BaseHandControllerDataProvider
     {
         private UnityEditorHandControllerDataProviderProfile profile;
         private long lastHandControllerUpdateTimeStamp = 0;

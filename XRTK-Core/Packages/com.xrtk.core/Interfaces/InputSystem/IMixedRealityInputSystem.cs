@@ -7,6 +7,7 @@ using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.EventDatum.Input;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Events;
 
@@ -121,6 +122,15 @@ namespace XRTK.Interfaces.InputSystem
         #endregion IMixedRealityController Utilities
 
         #region Input Events
+
+        /// <summary>
+        /// Raised when an input event is triggered.
+        /// </summary>
+        /// <remarks>
+        /// WARNING: This event should not be subscribed to by MonoBehaviours!
+        /// Use the InputHandler interfaces instead.
+        /// </remarks>
+        event Action<BaseInputEventData> OnInputEvent;
 
         #region Input Source Events
 

@@ -29,11 +29,6 @@ namespace XRTK.Services.InputSystem
         /// <param name="profile"></param>
         public MixedRealityInputSystem(MixedRealityInputSystemProfile profile) : base(profile)
         {
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionRulesProfile == null)
-            {
-                throw new Exception("The Input system is missing the required Input Action Rules Profile!");
-            }
-
             if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile == null)
             {
                 throw new Exception("The Input system is missing the required Pointer Profile!");
@@ -93,8 +88,6 @@ namespace XRTK.Services.InputSystem
 
         private SpeechEventData speechEventData;
         private DictationEventData dictationEventData;
-
-        private MixedRealityInputActionRulesProfile CurrentInputActionRulesProfile { get; } = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionRulesProfile;
 
         #region IMixedRealityManager Implementation
 
@@ -916,8 +909,6 @@ namespace XRTK.Services.InputSystem
         {
             Debug.Assert(DetectedInputSources.Contains(source));
 
-            inputAction = ProcessRules(inputAction, true);
-
             // Create input event
             inputEventData.Initialize(source, handedness, inputAction);
 
@@ -940,8 +931,6 @@ namespace XRTK.Services.InputSystem
         {
             Debug.Assert(DetectedInputSources.Contains(source));
 
-            inputAction = ProcessRules(inputAction, true);
-
             // Create input event
             floatInputEventData.Initialize(source, handedness, inputAction);
 
@@ -959,8 +948,6 @@ namespace XRTK.Services.InputSystem
         public void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction, float pressAmount)
         {
             Debug.Assert(DetectedInputSources.Contains(source));
-
-            inputAction = ProcessRules(inputAction, pressAmount);
 
             // Create input event
             floatInputEventData.Initialize(source, handedness, inputAction, pressAmount);
@@ -991,8 +978,6 @@ namespace XRTK.Services.InputSystem
         {
             Debug.Assert(DetectedInputSources.Contains(source));
 
-            inputAction = ProcessRules(inputAction, false);
-
             // Create input event
             inputEventData.Initialize(source, handedness, inputAction);
 
@@ -1022,8 +1007,6 @@ namespace XRTK.Services.InputSystem
         {
             Debug.Assert(DetectedInputSources.Contains(source));
 
-            inputAction = ProcessRules(inputAction, inputPosition);
-
             // Create input event
             floatInputEventData.Initialize(source, handedness, inputAction, inputPosition);
 
@@ -1049,8 +1032,6 @@ namespace XRTK.Services.InputSystem
         {
             Debug.Assert(DetectedInputSources.Contains(source));
 
-            inputAction = ProcessRules(inputAction, inputPosition);
-
             // Create input event
             vector2InputEventData.Initialize(source, handedness, inputAction, inputPosition);
 
@@ -1075,8 +1056,6 @@ namespace XRTK.Services.InputSystem
         public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction, Vector3 position)
         {
             Debug.Assert(DetectedInputSources.Contains(source));
-
-            inputAction = ProcessRules(inputAction, position);
 
             // Create input event
             positionInputEventData.Initialize(source, handedness, inputAction, position);
@@ -1107,8 +1086,6 @@ namespace XRTK.Services.InputSystem
         {
             Debug.Assert(DetectedInputSources.Contains(source));
 
-            inputAction = ProcessRules(inputAction, rotation);
-
             // Create input event
             rotationInputEventData.Initialize(source, handedness, inputAction, rotation);
 
@@ -1138,8 +1115,6 @@ namespace XRTK.Services.InputSystem
         {
             Debug.Assert(DetectedInputSources.Contains(source));
 
-            inputAction = ProcessRules(inputAction, inputData);
-
             // Create input event
             poseInputEventData.Initialize(source, handedness, inputAction, inputData);
 
@@ -1165,7 +1140,6 @@ namespace XRTK.Services.InputSystem
         {
             Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
 
-            action = ProcessRules(action, true);
             inputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action);
             HandleEvent(inputEventData, OnGestureStarted);
         }
@@ -1181,7 +1155,6 @@ namespace XRTK.Services.InputSystem
         public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action)
         {
             Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
-            action = ProcessRules(action, true);
             inputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action);
             HandleEvent(inputEventData, OnGestureUpdated);
         }
@@ -1197,7 +1170,6 @@ namespace XRTK.Services.InputSystem
         public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action, Vector2 inputData)
         {
             Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
-            action = ProcessRules(action, inputData);
             vector2InputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(vector2InputEventData, OnGestureVector2PositionUpdated);
         }
@@ -1213,7 +1185,6 @@ namespace XRTK.Services.InputSystem
         public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action, Vector3 inputData)
         {
             Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
-            action = ProcessRules(action, inputData);
             positionInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(positionInputEventData, OnGesturePositionUpdated);
         }
@@ -1229,7 +1200,6 @@ namespace XRTK.Services.InputSystem
         public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action, Quaternion inputData)
         {
             Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
-            action = ProcessRules(action, inputData);
             rotationInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(rotationInputEventData, OnGestureRotationUpdated);
         }
@@ -1245,7 +1215,6 @@ namespace XRTK.Services.InputSystem
         public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action, MixedRealityPose inputData)
         {
             Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
-            action = ProcessRules(action, inputData);
             poseInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(poseInputEventData, OnGesturePoseUpdated);
         }
@@ -1261,7 +1230,6 @@ namespace XRTK.Services.InputSystem
         public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action)
         {
             Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
-            action = ProcessRules(action, false);
             inputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action);
             HandleEvent(inputEventData, OnGestureCompleted);
         }
@@ -1277,7 +1245,6 @@ namespace XRTK.Services.InputSystem
         public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action, Vector2 inputData)
         {
             Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
-            action = ProcessRules(action, inputData);
             vector2InputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(vector2InputEventData, OnGestureVector2PositionCompleted);
         }
@@ -1293,7 +1260,6 @@ namespace XRTK.Services.InputSystem
         public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action, Vector3 inputData)
         {
             Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
-            action = ProcessRules(action, inputData);
             positionInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(positionInputEventData, OnGesturePositionCompleted);
         }
@@ -1309,7 +1275,6 @@ namespace XRTK.Services.InputSystem
         public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action, Quaternion inputData)
         {
             Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
-            action = ProcessRules(action, inputData);
             rotationInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(rotationInputEventData, OnGestureRotationCompleted);
         }
@@ -1325,7 +1290,6 @@ namespace XRTK.Services.InputSystem
         public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action, MixedRealityPose inputData)
         {
             Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
-            action = ProcessRules(action, inputData);
             poseInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(poseInputEventData, OnGesturePoseCompleted);
         }
@@ -1341,7 +1305,6 @@ namespace XRTK.Services.InputSystem
         public void RaiseGestureCanceled(IMixedRealityController controller, MixedRealityInputAction action)
         {
             Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
-            action = ProcessRules(action, false);
             inputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action);
             HandleEvent(inputEventData, OnGestureCanceled);
         }
@@ -1452,94 +1415,5 @@ namespace XRTK.Services.InputSystem
         #endregion Dictation Events
 
         #endregion Input Events
-
-        #region Rules
-
-        private static MixedRealityInputAction ProcessRules_Internal<T1, T2>(MixedRealityInputAction inputAction, T1[] inputActionRules, T2 criteria) where T1 : struct, IInputActionRule<T2>
-        {
-            for (int i = 0; i < inputActionRules.Length; i++)
-            {
-                if (inputActionRules[i].BaseAction == inputAction && inputActionRules[i].Criteria.Equals(criteria))
-                {
-                    if (inputActionRules[i].RuleAction == inputAction)
-                    {
-                        Debug.LogError("Input Action Rule cannot be the same as the rule's Base Action!");
-                        return inputAction;
-                    }
-
-                    if (inputActionRules[i].BaseAction.AxisConstraint != inputActionRules[i].RuleAction.AxisConstraint)
-                    {
-                        Debug.LogError("Input Action Rule doesn't have the same Axis Constraint as the Base Action!");
-                        return inputAction;
-                    }
-
-                    return inputActionRules[i].RuleAction;
-                }
-            }
-
-            return inputAction;
-        }
-
-        private MixedRealityInputAction ProcessRules(MixedRealityInputAction inputAction, bool criteria)
-        {
-            if (CurrentInputActionRulesProfile != null && CurrentInputActionRulesProfile.InputActionRulesDigital?.Length > 0)
-            {
-                return ProcessRules_Internal(inputAction, CurrentInputActionRulesProfile.InputActionRulesDigital, criteria);
-            }
-
-            return inputAction;
-        }
-
-        private MixedRealityInputAction ProcessRules(MixedRealityInputAction inputAction, float criteria)
-        {
-            if (CurrentInputActionRulesProfile != null && CurrentInputActionRulesProfile.InputActionRulesSingleAxis?.Length > 0)
-            {
-                return ProcessRules_Internal(inputAction, CurrentInputActionRulesProfile.InputActionRulesSingleAxis, criteria);
-            }
-
-            return inputAction;
-        }
-
-        private MixedRealityInputAction ProcessRules(MixedRealityInputAction inputAction, Vector2 criteria)
-        {
-            if (CurrentInputActionRulesProfile != null && CurrentInputActionRulesProfile.InputActionRulesDualAxis?.Length > 0)
-            {
-                return ProcessRules_Internal(inputAction, CurrentInputActionRulesProfile.InputActionRulesDualAxis, criteria);
-            }
-
-            return inputAction;
-        }
-
-        private MixedRealityInputAction ProcessRules(MixedRealityInputAction inputAction, Vector3 criteria)
-        {
-            if (CurrentInputActionRulesProfile != null && CurrentInputActionRulesProfile.InputActionRulesVectorAxis?.Length > 0)
-            {
-                return ProcessRules_Internal(inputAction, CurrentInputActionRulesProfile.InputActionRulesVectorAxis, criteria);
-            }
-
-            return inputAction;
-        }
-
-        private MixedRealityInputAction ProcessRules(MixedRealityInputAction inputAction, Quaternion criteria)
-        {
-            if (CurrentInputActionRulesProfile != null && CurrentInputActionRulesProfile.InputActionRulesQuaternionAxis?.Length > 0)
-            {
-                return ProcessRules_Internal(inputAction, CurrentInputActionRulesProfile.InputActionRulesQuaternionAxis, criteria);
-            }
-
-            return inputAction;
-        }
-
-        private MixedRealityInputAction ProcessRules(MixedRealityInputAction inputAction, MixedRealityPose criteria)
-        {
-            if (CurrentInputActionRulesProfile != null && CurrentInputActionRulesProfile.InputActionRulesPoseAxis?.Length > 0)
-            {
-                return ProcessRules_Internal(inputAction, CurrentInputActionRulesProfile.InputActionRulesPoseAxis, criteria);
-            }
-
-            return inputAction;
-        }
-
-        #endregion Rules
     }
 }

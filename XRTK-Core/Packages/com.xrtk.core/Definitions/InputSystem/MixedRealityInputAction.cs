@@ -32,13 +32,16 @@ namespace XRTK.Definitions.InputSystem
         /// </summary>
         public static MixedRealityInputAction None { get; } = new MixedRealityInputAction(0, "None");
 
+        [SerializeField]
+        private uint id;
+
         /// <summary>
         /// The Unique Id of this Input Action.
         /// </summary>
         public uint Id => id;
 
         [SerializeField]
-        private uint id;
+        private string description;
 
         /// <summary>
         /// A short description of the Input Action.
@@ -46,15 +49,12 @@ namespace XRTK.Definitions.InputSystem
         public string Description => description;
 
         [SerializeField]
-        private string description;
+        private AxisType axisConstraint;
 
         /// <summary>
         /// The Axis constraint for the Input Action
         /// </summary>
         public AxisType AxisConstraint => axisConstraint;
-
-        [SerializeField]
-        private AxisType axisConstraint;
 
         public static bool operator ==(MixedRealityInputAction left, MixedRealityInputAction right)
         {

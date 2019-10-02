@@ -1,7 +1,6 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 
@@ -43,13 +42,7 @@ namespace XRTK.Definitions.InputSystem
 
         [SerializeField]
         [Tooltip("The list of actions users can do in your application.")]
-        private MixedRealityInputAction[] inputActions =
-        {
-            // 0 is reserved for "None"
-            new MixedRealityInputAction(1, "Select"),
-            new MixedRealityInputAction(2, "Menu"),
-            new MixedRealityInputAction(3, "Grip")
-        }; // Examples only, to be refined later
+        private MixedRealityInputAction[] inputActions = { };
 
         /// <summary>
         /// The list of actions users can do in your application.
@@ -57,37 +50,7 @@ namespace XRTK.Definitions.InputSystem
         /// <remarks>Input Actions are device agnostic and can be paired with any number of device inputs across all platforms.</remarks>
         public MixedRealityInputAction[] InputActions => inputActions;
 
-        /// <summary>
-        /// Reset the current InputActions definitions to the Mixed Reality Toolkit defaults
-        /// If existing mappings exist, they will be preserved and pushed to the end of the array
-        /// </summary>
-        /// <returns>Default XRTK Actions plus any custom actions (if already configured)</returns>
-        public MixedRealityInputAction[] LoadMixedRealityToolKitDefaults()
-        {
-            var defaultActions = new List<MixedRealityInputAction>();
-            bool exists = false;
-
-            for (uint i = 0; i < defaultInputActions.Length; i++)
-            {
-                defaultActions.Add(new MixedRealityInputAction(i, defaultInputActions[i], defaultInputActionsAxis[i]));
-            }
-
-            for (int i = 0; i < inputActions.Length; i++)
-            {
-                if (defaultActions.Contains(inputActions[i]))
-                {
-                    exists = true;
-                }
-
-                if (!exists)
-                {
-                    defaultActions.Add(inputActions[i]);
-                }
-
-                exists = false;
-            }
-
-            return inputActions = defaultActions.ToArray();
-        }
+        [SerializeField]
+        private InputActionProfile[] inputActionProfiles = { };
     }
 }

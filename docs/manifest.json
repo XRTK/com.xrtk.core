@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "d:/a/1/s/docfx_project",
+  "source_base_path": "D:/a/1/s/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -4533,7 +4533,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Posef.html",
-          "hash": "IpRcXW6/Q7xmLxvkF15Jew=="
+          "hash": "juRfH6TpcPiIexnp+cmaPw=="
         }
       },
       "is_incremental": false,
@@ -6765,7 +6765,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.html",
-          "hash": "4vCp4TUOdGz9YCy9jDWCxA=="
+          "hash": "wBOlr7q/Sx5YudZiSmCvhQ=="
         }
       },
       "is_incremental": false,
@@ -7101,7 +7101,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Build.BuildInfo.html",
-          "hash": "bFxMGbeFW3+Xi4uvO2Wwmw=="
+          "hash": "AT8GV5t+PLFbXn4AEqfFEQ=="
         }
       },
       "is_incremental": false,
@@ -7125,7 +7125,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Build.IBuildInfo.html",
-          "hash": "9h8UtIuJl+fWHAuomSnm0g=="
+          "hash": "P3/Zl160MTkWNd8xIGK0bg=="
         }
       },
       "is_incremental": false,
@@ -7185,7 +7185,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Build.UwpBuildInfo.html",
-          "hash": "6RttZL/A1oVj4lxWBEUH4w=="
+          "hash": "7Skr0x9bZdgkKIph03bsQw=="
         }
       },
       "is_incremental": false,

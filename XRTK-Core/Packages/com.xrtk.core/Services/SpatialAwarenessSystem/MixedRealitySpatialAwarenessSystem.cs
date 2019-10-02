@@ -40,7 +40,15 @@ namespace XRTK.Services.SpatialAwarenessSystem
         /// <returns>
         /// The <see cref="GameObject"/> to which spatial awareness created objects will be parented.
         /// </returns>
-        private GameObject CreateSpatialAwarenessParent => new GameObject("Spatial Awareness System");
+        private GameObject CreateSpatialAwarenessParent
+        {
+            get
+            {
+                var spatialAwarenessSystemObject = new GameObject("Spatial Awareness System");
+                spatialAwarenessSystemObject.transform.parent = MixedRealityToolkit.Instance.MixedRealityPlayspace;
+                return spatialAwarenessSystemObject;
+            }
+        }
 
         private GameObject meshParent = null;
 

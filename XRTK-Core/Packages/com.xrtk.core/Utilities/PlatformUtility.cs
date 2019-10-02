@@ -85,16 +85,19 @@ namespace XRTK.Utilities
         {
             var isEditorSupported = IsEditorSupported(platforms);
 
-            if ((int)platforms == -1)
+            // If any platform set or if only the editor flag is set
+            if ((int)platforms == -1 || platforms == SupportedPlatforms.Editor)
             {
                 return true;
             }
 
-            if (!isEditorSupported || platforms == 0)
+            // If no platform set or if the editor is not supported
+            if (platforms == 0 || !isEditorSupported)
             {
                 return false;
             }
 
+            // If editor is supported and the current build target is enabled
             var target = GetSupportedPlatformMask(editorBuildTarget);
             return IsPlatformSupported(target, platforms);
         }

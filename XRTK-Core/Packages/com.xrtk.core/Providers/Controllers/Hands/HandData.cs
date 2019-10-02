@@ -16,7 +16,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Timestamp of hand data, as FileTime, e.g. DateTime.UtcNow.ToFileTime().
         /// </summary>
-        public long Timestamp { get; set; } = 0;
+        public long TimeStamp { get; set; } = 0;
 
         /// <summary>
         /// Is the hand currently being tracked by the system?
@@ -29,18 +29,8 @@ namespace XRTK.Providers.Controllers.Hands
         public MixedRealityPose[] Joints { get; } = new MixedRealityPose[jointCount];
 
         /// <summary>
-        /// Copies another hand's data into this one.
+        /// Mesh information of the hand.
         /// </summary>
-        /// <param name="other">The other hand.</param>
-        public void Copy(HandData other)
-        {
-            Timestamp = other.Timestamp;
-            IsTracked = other.IsTracked;
-
-            for (int i = 0; i < jointCount; ++i)
-            {
-                Joints[i] = other.Joints[i];
-            }
-        }
+        public HandMeshData Mesh { get; } = new HandMeshData();
     }
 }

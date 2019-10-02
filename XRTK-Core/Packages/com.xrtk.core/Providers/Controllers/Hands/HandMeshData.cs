@@ -4,10 +4,9 @@ using XRTK.Definitions.Utilities;
 namespace XRTK.Providers.Controllers.Hands
 {
     /// <summary>
-    /// See BaseHandVisualizer.OnHandMeshUpdated for an example of how to use the
-    /// hand mesh info to render a mesh.
+    /// Snapshot of hand mesh information.
     /// </summary>
-    public class HandMeshUpdatedEventData
+    public class HandMeshData
     {
         /// <summary>
         /// The vertices of the hand mesh in the initial coordinate system.

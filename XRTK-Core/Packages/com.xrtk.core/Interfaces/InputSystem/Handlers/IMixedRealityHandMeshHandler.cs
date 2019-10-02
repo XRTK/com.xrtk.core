@@ -16,6 +16,6 @@ namespace XRTK.Interfaces.InputSystem.Handlers
         /// When a hand mesh is updated, this handler receives the event.
         /// </summary>
         /// <param name="eventData">Contains information about the HandTrackingInputSource.</param>
-        void OnMeshUpdated(InputEventData<HandMeshUpdatedEventData> eventData);
+        void OnMeshUpdated(InputEventData<HandMeshData> eventData);
     }
 }

@@ -34,9 +34,9 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
                 handDataChanged = true;
             }
 
-            if (Timestamp != timestampNew)
+            if (TimeStamp != timestampNew)
             {
-                Timestamp = timestampNew;
+                TimeStamp = timestampNew;
                 if (IsTracked)
                 {
                     generator(Joints);

@@ -103,12 +103,13 @@ namespace XRTK.Providers.Controllers.Hands
 
         public abstract bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose);
 
-        private Vector3 GetJointPosition(TrackedHandJoint jointToGet)
+        private Vector3 GetJointPosition(TrackedHandJoint joint)
         {
-            if (TryGetJointPose(jointToGet, out MixedRealityPose pose))
+            if (TryGetJointPose(joint, out MixedRealityPose pose))
             {
                 return pose.Position;
             }
+
             return Vector3.zero;
         }
 

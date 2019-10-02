@@ -17,7 +17,7 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
         private SerializedProperty leftHandManipulationKey;
         private SerializedProperty rightHandManipulationKey;
 
-        private SerializedProperty gestureDefinitions;
+        private SerializedProperty poseDefinitions;
         private SerializedProperty handGestureAnimationSpeed;
 
         private SerializedProperty defaultHandDistance;
@@ -47,7 +47,7 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
             leftHandManipulationKey = serializedObject.FindProperty("leftHandManipulationKey");
             rightHandManipulationKey = serializedObject.FindProperty("rightHandManipulationKey");
 
-            gestureDefinitions = serializedObject.FindProperty("gestureDefinitions");
+            poseDefinitions = serializedObject.FindProperty("poseDefinitions");
             handGestureAnimationSpeed = serializedObject.FindProperty("handGestureAnimationSpeed");
 
             holdStartDuration = serializedObject.FindProperty("holdStartDuration");
@@ -84,7 +84,7 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
             EditorGUILayout.PropertyField(rightHandManipulationKey);
             EditorGUILayout.Space();
 
-            EditorGUILayout.PropertyField(gestureDefinitions, true);
+            EditorGUILayout.PropertyField(poseDefinitions, true);
             EditorGUILayout.PropertyField(handGestureAnimationSpeed);
             EditorGUILayout.Space();
 

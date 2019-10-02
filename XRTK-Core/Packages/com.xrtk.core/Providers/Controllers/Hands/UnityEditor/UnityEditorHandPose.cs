@@ -6,16 +6,17 @@ using System;
 using System.Collections.Generic;
 using XRTK.Definitions.Utilities;
 using XRTK.Utilities;
-using XRTK.Providers.Controllers.Hands;
 
-namespace XRTK.Services.InputSystem.Simulation
+namespace XRTK.Providers.Controllers.Hands.UnityEditor
 {
     /// <summary>
-    /// Shape of an articulated hand defined by joint poses.
+    /// Pose of an hand defined by joint poses for use when simulating hands in editor.
+    /// Used by <see cref="UnityEditorHandControllerDataProvider"/> to fake hand tracking.
     /// </summary>
-    public class ArticulatedHandPose
+    public class UnityEditorHandPose
     {
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
+        private static readonly Dictionary<string, UnityEditorHandPose> handPoses = new Dictionary<string, UnityEditorHandPose>();
 
         /// <summary>
         /// Joint poses are stored as right-hand poses in camera space.
@@ -23,20 +24,28 @@ namespace XRTK.Services.InputSystem.Simulation
         /// </summary>
         private MixedRealityPose[] localJointPoses;
 
-        public ArticulatedHandPose()
+        /// <summary>
+        /// Creates a new hand pose with all joints in their
+        /// local space origin.
+        /// </summary>
+        public UnityEditorHandPose()
         {
             localJointPoses = new MixedRealityPose[jointCount];
             SetZero();
         }
 
-        public ArticulatedHandPose(MixedRealityPose[] _localJointPoses)
+        /// <summary>
+        /// Creates a new hand pose using local pose data for the hand's joints.
+        /// </summary>
+        /// <param name="localJointPoses">Jont poses in local space.</param>
+        public UnityEditorHandPose(MixedRealityPose[] localJointPoses)
         {
-            localJointPoses = new MixedRealityPose[jointCount];
-            Array.Copy(_localJointPoses, localJointPoses, jointCount);
+            this.localJointPoses = new MixedRealityPose[jointCount];
+            Array.Copy(localJointPoses, this.localJointPoses, jointCount);
         }
 
         /// <summary>
-        /// Compute world space poses from camera-space joint data.
+        /// Computes world space poses from camera-space joint data.
         /// </summary>
         public void ComputeJointPoses(Handedness handedness, Quaternion rotation, Vector3 position, MixedRealityPose[] jointsOut)
         {
@@ -69,7 +78,7 @@ namespace XRTK.Services.InputSystem.Simulation
         }
 
         /// <summary>
-        /// Take world space joint poses from any hand and convert into right-hand, camera-space poses.
+        /// Takes world space joint poses from any hand and convert into right-hand, camera-space poses.
         /// </summary>
         public void ParseFromJointPoses(MixedRealityPose[] joints, Handedness handedness, Quaternion rotation, Vector3 position)
         {
@@ -113,17 +122,17 @@ namespace XRTK.Services.InputSystem.Simulation
         }
 
         /// <summary>
-        /// Copy data from another articulated hand pose.
+        /// Copy data from another unity editor hand pose.
         /// </summary>
-        public void Copy(ArticulatedHandPose other)
+        public void Copy(UnityEditorHandPose other)
         {
             Array.Copy(other.localJointPoses, localJointPoses, jointCount);
         }
 
         /// <summary>
-        /// Blend between two hand poses.
+        /// Blends between two hand poses.
         /// </summary>
-        public void InterpolateOffsets(ArticulatedHandPose poseA, ArticulatedHandPose poseB, float value)
+        public void Lerp(UnityEditorHandPose poseA, UnityEditorHandPose poseB, float value)
         {
             for (int i = 0; i < jointCount; i++)
             {
@@ -133,110 +142,48 @@ namespace XRTK.Services.InputSystem.Simulation
             }
         }
 
-        private static readonly Dictionary<string, ArticulatedHandPose> handPoses = new Dictionary<string, ArticulatedHandPose>();
+        /// <summary>
+        /// Gets the pose data for a given pose name, if it's registered.
+        /// </summary>
+        /// <param name="name">The name of the pose.</param>
+        /// <param name="pose">Hand pose reference.</param>
+        /// <returns>True, if found.</returns>
+        public static bool TryGetPoseByName(string name, out UnityEditorHandPose pose)
+        {
+            if (handPoses.TryGetValue(name, out UnityEditorHandPose p))
+            {
+                pose = p;
+                return true;
+            }
+
+            pose = null;
+            return false;
+        }
 
         /// <summary>
-        /// Get pose data for a supported gesture.
+        /// Initialize pose data for use in editor from files.
         /// </summary>
-        public static ArticulatedHandPose GetGesturePose(string name)
+        /// <param name="poses">List of pose data assets with pose information.</param>
+        public static void Initialize(List<UnityEditorHandPoseData> poses)
         {
-            if (handPoses.TryGetValue(name, out ArticulatedHandPose pose))
+            for (int i = 0; i < poses.Count; i++)
             {
-                return pose;
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// Load pose data from files.
-        /// </summary>
-        public static void LoadGesturePoses(List<HandPose> definitions)
-        {
-            for (int i = 0; i < definitions.Count; i++)
-            {
-                LoadGesturePose(definitions[i]);
+                InitializePose(poses[i]);
             }
         }
 
-        private static ArticulatedHandPose LoadGesturePose(HandPose definition)
+        private static UnityEditorHandPose InitializePose(UnityEditorHandPoseData poseData)
         {
-            if (definition.Data != null)
+            if (poseData.Data != null)
             {
-                ArticulatedHandPose pose = new ArticulatedHandPose();
-                pose.FromJson(definition.Data.text);
-                handPoses.Add(definition.GestureName, pose);
+                UnityEditorHandPose pose = new UnityEditorHandPose();
+                pose.FromJson(poseData.Data.text);
+                handPoses.Add(poseData.GestureName, pose);
 
                 return pose;
             }
 
             return null;
-        }
-
-        /// Utility class to serialize hand pose as a dictionary with full joint names
-        [Serializable]
-        internal struct ArticulatedHandPoseItem
-        {
-            private static readonly string[] jointNames = Enum.GetNames(typeof(TrackedHandJoint));
-
-            public string joint;
-            public MixedRealityPose pose;
-
-            public TrackedHandJoint JointIndex
-            {
-                get
-                {
-                    int nameIndex = Array.FindIndex(jointNames, IsJointName);
-                    if (nameIndex < 0)
-                    {
-                        Debug.LogError($"Joint name {joint} not in TrackedHandJoint enum");
-                        return TrackedHandJoint.None;
-                    }
-                    return (TrackedHandJoint)nameIndex;
-                }
-                set { joint = jointNames[(int)value]; }
-            }
-
-            private bool IsJointName(string s)
-            {
-                return s == joint;
-            }
-
-            public ArticulatedHandPoseItem(TrackedHandJoint joint, MixedRealityPose pose)
-            {
-                this.joint = jointNames[(int)joint];
-                this.pose = pose;
-            }
-        }
-
-        /// Utility class to serialize hand pose as a dictionary with full joint names
-        [Serializable]
-        internal class ArticulatedHandPoseDictionary
-        {
-            private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
-
-            public ArticulatedHandPoseItem[] items = null;
-
-            public void FromJointPoses(MixedRealityPose[] jointPoses)
-            {
-                items = new ArticulatedHandPoseItem[jointCount];
-                for (int i = 0; i < jointCount; ++i)
-                {
-                    items[i].JointIndex = (TrackedHandJoint)i;
-                    items[i].pose = jointPoses[i];
-                }
-            }
-
-            public void ToJointPoses(MixedRealityPose[] jointPoses)
-            {
-                for (int i = 0; i < jointCount; ++i)
-                {
-                    jointPoses[i] = MixedRealityPose.ZeroIdentity;
-                }
-                foreach (var item in items)
-                {
-                    jointPoses[(int)item.JointIndex] = item.pose;
-                }
-            }
         }
 
         /// <summary>
@@ -244,7 +191,7 @@ namespace XRTK.Services.InputSystem.Simulation
         /// </summary>
         public string ToJson()
         {
-            var dict = new ArticulatedHandPoseDictionary();
+            var dict = new HandJointPoseDictionary();
             dict.FromJointPoses(localJointPoses);
             return JsonUtility.ToJson(dict);
         }
@@ -254,7 +201,7 @@ namespace XRTK.Services.InputSystem.Simulation
         /// </summary>
         public void FromJson(string json)
         {
-            var dict = JsonUtility.FromJson<ArticulatedHandPoseDictionary>(json);
+            HandJointPoseDictionary dict = JsonUtility.FromJson<HandJointPoseDictionary>(json);
             dict.ToJointPoses(localJointPoses);
         }
     }

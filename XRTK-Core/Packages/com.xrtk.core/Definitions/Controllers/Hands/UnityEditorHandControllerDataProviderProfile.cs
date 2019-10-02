@@ -3,13 +3,14 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
-using XRTK.Providers.Controllers.Hands;
+using XRTK.Providers.Controllers.Hands.UnityEditor;
 
 namespace XRTK.Definitions.InputSystem.Simulation
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Unity Editor Hand Controller", fileName = "UnityEditorHandControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hands/Unity Editor Hand Controller Data Provider Profile", fileName = "UnityEditorHandControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
     public class UnityEditorHandControllerDataProviderProfile : HandControllerDataProviderProfile
     {
         [Header("Hand Simulation")]
@@ -40,11 +41,11 @@ namespace XRTK.Definitions.InputSystem.Simulation
         private KeyCode rightHandManipulationKey = KeyCode.Space;
         public KeyCode RightHandManipulationKey => rightHandManipulationKey;
 
-        [Header("Hand Gesture Settings")]
+        [Header("Hand Pose Settings")]
         [SerializeField]
-        [Tooltip("Simulated hand gesture definitions.")]
-        private List<HandPose> gestureDefinitions;
-        public List<HandPose> GestureDefinitions => gestureDefinitions;
+        [Tooltip("Hand pose definitions.")]
+        private List<UnityEditorHandPoseData> poseDefinitions;
+        public List<UnityEditorHandPoseData> PoseDefinitions => poseDefinitions;
         [SerializeField]
         [Tooltip("Gesture interpolation per second")]
         private float handGestureAnimationSpeed = 8.0f;

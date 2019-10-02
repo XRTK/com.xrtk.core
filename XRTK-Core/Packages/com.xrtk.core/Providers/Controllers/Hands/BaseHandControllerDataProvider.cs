@@ -15,6 +15,10 @@ using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Hands
 {
+    /// <summary>
+    /// Base implementation for all hand controller data providers. Takes care of all the platform agnostic
+    /// hand tracking logic.
+    /// </summary>
     public abstract class BaseHandControllerDataProvider : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider
     {
         private HandControllerDataProviderProfile profile;
@@ -31,11 +35,11 @@ namespace XRTK.Providers.Controllers.Hands
         private Dictionary<TrackedHandJoint, Transform> rightHandJointTransforms = new Dictionary<TrackedHandJoint, Transform>();
 
         /// <summary>
-        /// Constructor.
+        /// Base constructor.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        /// <param name="profile"></param>
+        /// <param name="name">Name of the data provider as assigned in the configuration profile.</param>
+        /// <param name="priority">Data provider priority controls the order in the service registry.</param>
+        /// <param name="profile">Hand controller data provider profile assigned to the provider instance in the configuration inspector.</param>
         public BaseHandControllerDataProvider(string name, uint priority, HandControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
@@ -49,8 +53,6 @@ namespace XRTK.Providers.Controllers.Hands
 
             jointPoseInputEventData = new InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>>(EventSystem.current);
             handMeshInputEventData = new InputEventData<HandMeshUpdatedEventData>(EventSystem.current);
-
-            //ArticulatedHandPose.LoadGesturePoses(profile.GestureDefinitions);
         }
 
         /// <inheritdoc />

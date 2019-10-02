@@ -5,6 +5,7 @@ using System;
 using UnityEngine;
 using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers.Hands.UnityEditor;
 using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Providers.Controllers.Hands
@@ -32,7 +33,7 @@ namespace XRTK.Providers.Controllers.Hands
         /////////////////////
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
-        private HandPose defaultGesture;
+        private UnityEditorHandPoseData defaultGesture;
 
         /// <summary>
         /// If true then the hand is always visible, regardless of simulating.
@@ -67,9 +68,9 @@ namespace XRTK.Providers.Controllers.Hands
             HandStateLeft = new SimulatedHandState(Handedness.Left);
             HandStateRight = new SimulatedHandState(Handedness.Right);
 
-            for (int i = 0; i < this.profile.GestureDefinitions.Count; i++)
+            for (int i = 0; i < this.profile.PoseDefinitions.Count; i++)
             {
-                HandPose gesture = this.profile.GestureDefinitions[i];
+                UnityEditorHandPoseData gesture = this.profile.PoseDefinitions[i];
                 if (gesture.IsDefault)
                 {
                     defaultGesture = gesture;
@@ -89,9 +90,16 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <inheritdoc />
+        public override void Initialize()
+        {
+            base.Initialize();
+            UnityEditorHandPose.Initialize(profile.PoseDefinitions);
+        }
+
+        /// <inheritdoc />
         public override void Update()
         {
-            if (Application.isEditor && profile.SimulateHandTracking && UserInputEnabled)
+            if (profile.SimulateHandTracking && UserInputEnabled)
             {
                 UpdateHandData(HandDataLeft, HandDataRight);
             }
@@ -102,7 +110,7 @@ namespace XRTK.Providers.Controllers.Hands
         {
             // Apply hand data in LateUpdate to ensure external changes are applied.
             // HandDataLeft/Right can be modified after the services Update() call.
-            if (Application.isEditor && profile.SimulateHandTracking)
+            if (profile.SimulateHandTracking)
             {
                 DateTime currentTime = DateTime.UtcNow;
                 double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandControllerUpdateTimeStamp)).TotalMilliseconds;
@@ -279,9 +287,9 @@ namespace XRTK.Providers.Controllers.Hands
 
         private string SelectGesture()
         {
-            for (int i = 0; i < profile.GestureDefinitions.Count; i++)
+            for (int i = 0; i < profile.PoseDefinitions.Count; i++)
             {
-                HandPose gesture = profile.GestureDefinitions[i];
+                UnityEditorHandPoseData gesture = profile.PoseDefinitions[i];
                 if (Input.GetKeyDown(gesture.KeyCode))
                 {
                     return gesture.GestureName;

@@ -4,6 +4,7 @@
 using System;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers.Hands.UnityEditor;
 using XRTK.Utilities;
 
 namespace XRTK.Services.InputSystem.Simulation
@@ -60,7 +61,7 @@ namespace XRTK.Services.InputSystem.Simulation
         }
 
         private float poseBlending = 0.0f;
-        private ArticulatedHandPose pose = new ArticulatedHandPose();
+        private UnityEditorHandPose pose = new UnityEditorHandPose();
 
         public SimulatedHandState(Handedness _handedness)
         {
@@ -102,8 +103,7 @@ namespace XRTK.Services.InputSystem.Simulation
         {
             gestureBlending = 1.0f;
 
-            ArticulatedHandPose gesturePose = ArticulatedHandPose.GetGesturePose(gestureName);
-            if (gesturePose != null)
+            if (UnityEditorHandPose.TryGetPoseByName(gestureName, out UnityEditorHandPose gesturePose))
             {
                 pose.Copy(gesturePose);
             }
@@ -111,18 +111,17 @@ namespace XRTK.Services.InputSystem.Simulation
 
         internal void FillCurrentFrame(MixedRealityPose[] jointsOut)
         {
-            ArticulatedHandPose gesturePose = ArticulatedHandPose.GetGesturePose(gestureName);
-            if (gesturePose != null)
+            if (UnityEditorHandPose.TryGetPoseByName(gestureName, out UnityEditorHandPose targetPose))
             {
                 if (gestureBlending > poseBlending)
                 {
                     float range = Mathf.Clamp01(1.0f - poseBlending);
                     float lerpFactor = range > 0.0f ? (gestureBlending - poseBlending) / range : 1.0f;
-                    pose.InterpolateOffsets(pose, gesturePose, lerpFactor);
+                    pose.Lerp(pose, targetPose, lerpFactor);
                 }
             }
-            poseBlending = gestureBlending;
 
+            poseBlending = gestureBlending;
             Quaternion rotation = Quaternion.Euler(HandRotateEulerAngles);
             Vector3 position = CameraCache.Main.ScreenToWorldPoint(ScreenPosition + JitterOffset);
             pose.ComputeJointPoses(handedness, rotation, position, jointsOut);

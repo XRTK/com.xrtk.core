@@ -5,10 +5,8 @@ using System;
 using UnityEngine;
 using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
-using XRTK.Providers.Controllers.Hands.UnityEditor;
-using XRTK.Services.InputSystem.Simulation;
 
-namespace XRTK.Providers.Controllers.Hands
+namespace XRTK.Providers.Controllers.Hands.UnityEditor
 {
     public class UnityEditorHandControllerDataProvider : BaseHandControllerDataProvider
     {
@@ -18,22 +16,19 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Gets left hand simulated data.
         /// </summary>
-        public SimulatedHandData HandDataLeft { get; } = new SimulatedHandData();
+        public UnityEditorHandData HandDataLeft { get; } = new UnityEditorHandData();
 
         /// <summary>
         /// Gets right hand simulated data.
         /// </summary>
-        public SimulatedHandData HandDataRight { get; } = new SimulatedHandData();
+        public UnityEditorHandData HandDataRight { get; } = new UnityEditorHandData();
 
         /// <summary>
         /// If true then keyboard and mouse input are used to simulate hands.
         /// </summary>
         public bool UserInputEnabled { get; private set; } = true;
 
-        /////////////////////
-        private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
-
-        private UnityEditorHandPoseData defaultGesture;
+        private UnityEditorHandPoseData defaultPose;
 
         /// <summary>
         /// If true then the hand is always visible, regardless of simulating.
@@ -44,8 +39,8 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         public bool IsAlwaysVisibleRight = false;
 
-        private SimulatedHandState HandStateLeft;
-        private SimulatedHandState HandStateRight;
+        private UnityEditorHandState LeftHandState;
+        private UnityEditorHandState RightHandState;
 
         // If true then hands are controlled by user input
         private bool isSimulatingLeft = false;
@@ -56,44 +51,44 @@ namespace XRTK.Providers.Controllers.Hands
         private long lastSimulatedTimestampLeft = 0;
         private long lastSimulatedTimestampRight = 0;
         // Cached delegates for hand joint generation
-        private SimulatedHandData.HandJointDataGenerator generatorLeft;
-        private SimulatedHandData.HandJointDataGenerator generatorRight;
+        private UnityEditorHandData.HandJointDataGenerator generatorLeft;
+        private UnityEditorHandData.HandJointDataGenerator generatorRight;
         ///////////////////
 
         public UnityEditorHandControllerDataProvider(string name, uint priority, UnityEditorHandControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
             this.profile = profile;
-
-            HandStateLeft = new SimulatedHandState(Handedness.Left);
-            HandStateRight = new SimulatedHandState(Handedness.Right);
-
-            for (int i = 0; i < this.profile.PoseDefinitions.Count; i++)
-            {
-                UnityEditorHandPoseData gesture = this.profile.PoseDefinitions[i];
-                if (gesture.IsDefault)
-                {
-                    defaultGesture = gesture;
-                    HandStateLeft.GestureName = defaultGesture.GestureName;
-                    HandStateRight.GestureName = defaultGesture.GestureName;
-                    break;
-                }
-            }
-
-            if (string.IsNullOrWhiteSpace(HandStateLeft.GestureName))
-            {
-                Debug.LogError("There is no default simulated hand gesture defined.");
-            }
-
-            HandStateLeft.Reset();
-            HandStateRight.Reset();
         }
 
         /// <inheritdoc />
         public override void Initialize()
         {
             base.Initialize();
+
+            LeftHandState = new UnityEditorHandState(Handedness.Left);
+            RightHandState = new UnityEditorHandState(Handedness.Right);
+
             UnityEditorHandPose.Initialize(profile.PoseDefinitions);
+            for (int i = 0; i < profile.PoseDefinitions.Count; i++)
+            {
+                UnityEditorHandPoseData pose = profile.PoseDefinitions[i];
+                if (pose.IsDefault)
+                {
+                    defaultPose = pose;
+                    LeftHandState.GestureName = defaultPose.GestureName;
+                    RightHandState.GestureName = defaultPose.GestureName;
+                    break;
+                }
+            }
+
+            if (string.IsNullOrWhiteSpace(LeftHandState.GestureName))
+            {
+                Debug.LogError("There is no default editor hand pose defined.");
+            }
+
+            LeftHandState.Reset();
+            RightHandState.Reset();
         }
 
         /// <inheritdoc />
@@ -134,7 +129,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Capture a snapshot of simulated hand data based on current state.
         /// </summary>
-        public bool UpdateHandData(SimulatedHandData handDataLeft, SimulatedHandData handDataRight)
+        public bool UpdateHandData(UnityEditorHandData handDataLeft, UnityEditorHandData handDataRight)
         {
             SimulateUserInput();
 
@@ -146,16 +141,16 @@ namespace XRTK.Providers.Controllers.Hands
             // Cache the generator delegates so we don't gc alloc every frame
             if (generatorLeft == null)
             {
-                generatorLeft = HandStateLeft.FillCurrentFrame;
+                generatorLeft = LeftHandState.FillCurrentFrame;
             }
 
             if (generatorRight == null)
             {
-                generatorRight = HandStateRight.FillCurrentFrame;
+                generatorRight = RightHandState.FillCurrentFrame;
             }
 
-            handDataChanged |= handDataLeft.UpdateWithTimestamp(timestamp, HandStateLeft.IsTracked, HandStateLeft.IsPinching, generatorLeft);
-            handDataChanged |= handDataRight.UpdateWithTimestamp(timestamp, HandStateRight.IsTracked, HandStateRight.IsPinching, generatorRight);
+            handDataChanged |= handDataLeft.UpdateWithTimestamp(timestamp, LeftHandState.IsTracked, LeftHandState.IsPinching, generatorLeft);
+            handDataChanged |= handDataRight.UpdateWithTimestamp(timestamp, RightHandState.IsTracked, RightHandState.IsPinching, generatorRight);
 
             return handDataChanged;
         }
@@ -222,12 +217,12 @@ namespace XRTK.Providers.Controllers.Hands
                 rotationDeltaEulerAngles.z = -rotationDelta;
             }
 
-            SimulateHandInput(ref lastSimulatedTimestampLeft, HandStateLeft, isSimulatingLeft, IsAlwaysVisibleLeft, mouseDelta, rotationDeltaEulerAngles);
-            SimulateHandInput(ref lastSimulatedTimestampRight, HandStateRight, isSimulatingRight, IsAlwaysVisibleRight, mouseDelta, rotationDeltaEulerAngles);
+            SimulateHandInput(ref lastSimulatedTimestampLeft, LeftHandState, isSimulatingLeft, IsAlwaysVisibleLeft, mouseDelta, rotationDeltaEulerAngles);
+            SimulateHandInput(ref lastSimulatedTimestampRight, RightHandState, isSimulatingRight, IsAlwaysVisibleRight, mouseDelta, rotationDeltaEulerAngles);
 
             float gestureAnimDelta = profile.HandGestureAnimationSpeed * Time.deltaTime;
-            HandStateLeft.GestureBlending += gestureAnimDelta;
-            HandStateRight.GestureBlending += gestureAnimDelta;
+            LeftHandState.GestureBlending += gestureAnimDelta;
+            RightHandState.GestureBlending += gestureAnimDelta;
 
             lastMousePosition = Input.mousePosition;
         }
@@ -235,7 +230,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// Apply changes to one hand and update tracking
         private void SimulateHandInput(
             ref long lastSimulatedTimestamp,
-            SimulatedHandState state,
+            UnityEditorHandState state,
             bool isSimulating,
             bool isAlwaysVisible,
             Vector3 mouseDelta,
@@ -296,7 +291,7 @@ namespace XRTK.Providers.Controllers.Hands
                 }
             }
 
-            return defaultGesture.GestureName;
+            return defaultPose.GestureName;
         }
 
         private string ToggleGesture(string gestureName)
@@ -316,7 +311,7 @@ namespace XRTK.Providers.Controllers.Hands
             //}
 
             // 'Default' will not change the gesture
-            return defaultGesture.GestureName;
+            return defaultPose.GestureName;
         }
     }
 }

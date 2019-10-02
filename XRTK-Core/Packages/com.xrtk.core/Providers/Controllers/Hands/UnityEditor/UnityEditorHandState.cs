@@ -4,16 +4,15 @@
 using System;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
-using XRTK.Providers.Controllers.Hands.UnityEditor;
 using XRTK.Utilities;
 
-namespace XRTK.Services.InputSystem.Simulation
+namespace XRTK.Providers.Controllers.Hands.UnityEditor
 {
     /// <summary>
     /// Internal class to define current gesture and smoothly animate hand data points.
     /// </summary>
     [Serializable]
-    internal class SimulatedHandState
+    internal class UnityEditorHandState
     {
         [SerializeField]
         private Handedness handedness = Handedness.None;
@@ -63,9 +62,9 @@ namespace XRTK.Services.InputSystem.Simulation
         private float poseBlending = 0.0f;
         private UnityEditorHandPose pose = new UnityEditorHandPose();
 
-        public SimulatedHandState(Handedness _handedness)
+        public UnityEditorHandState(Handedness handedness)
         {
-            handedness = _handedness;
+            this.handedness = handedness;
         }
 
         public void Reset()

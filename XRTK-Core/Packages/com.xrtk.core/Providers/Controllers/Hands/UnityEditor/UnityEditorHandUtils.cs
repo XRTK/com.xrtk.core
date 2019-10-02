@@ -5,9 +5,9 @@ using System.Linq;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Services.InputSystem.Simulation
+namespace XRTK.Providers.Controllers.Hands.UnityEditor
 {
-    public class SimulatedHandUtils
+    public class UnityEditorHandUtils
     {
         /// <summary>
         /// Compute the rotation of each joint, with the forward vector of the rotation pointing along the joint bone, 
@@ -57,6 +57,7 @@ namespace XRTK.Services.InputSystem.Simulation
                     }
                 }
             }
+
             jointOrientationsOut[(int)TrackedHandJoint.Palm] = Quaternion.LookRotation(GetPalmForwardVector(jointPositions), GetPalmUpVector(handedness, jointPositions));
         }
 
@@ -94,7 +95,6 @@ namespace XRTK.Services.InputSystem.Simulation
                 return Vector3.Cross(ThumbMetaCarpalToIndex, ThumbMetaCarpalToPinky).normalized;
             }
         }
-
 
         public static Vector3 GetPalmRightVector(Handedness handedness, Vector3[] jointPositions)
         {

@@ -8,9 +8,6 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Services;
-using XRTK.Services.InputSystem.Simulation;
 
 namespace XRTK.Providers.Controllers.Hands
 {
@@ -80,103 +77,103 @@ namespace XRTK.Providers.Controllers.Hands
             AssignControllerMappings(DefaultInteractions);
         }
 
-        private void UpdateInteractions(SimulatedHandData handData)
-        {
-            lastPointerPose = currentPointerPose;
-            lastGripPose = currentGripPose;
+        //private void UpdateInteractions(HandData handData)
+        //{
+        //    lastPointerPose = currentPointerPose;
+        //    lastGripPose = currentGripPose;
 
-            // For convenience of simulating in Unity Editor, make the ray use the index
-            // finger position instead of knuckle, since the index finger doesn't move when we press.
-            Vector3 pointerPosition = jointPoses[TrackedHandJoint.IndexTip].Position;
-            IsPositionAvailable = IsRotationAvailable = pointerPosition != Vector3.zero;
+        //    // For convenience of simulating in Unity Editor, make the ray use the index
+        //    // finger position instead of knuckle, since the index finger doesn't move when we press.
+        //    Vector3 pointerPosition = jointPoses[TrackedHandJoint.IndexTip].Position;
+        //    IsPositionAvailable = IsRotationAvailable = pointerPosition != Vector3.zero;
 
-            if (IsPositionAvailable)
-            {
-                //HandRay.Update(pointerPosition, GetPalmNormal(), CameraCache.Main.transform, ControllerHandedness);
+        //    if (IsPositionAvailable)
+        //    {
+        //        //HandRay.Update(pointerPosition, GetPalmNormal(), CameraCache.Main.transform, ControllerHandedness);
 
-                Ray ray = HandRay.Ray;
+        //        Ray ray = HandRay.Ray;
 
-                currentPointerPose.Position = ray.origin;
-                currentPointerPose.Rotation = Quaternion.LookRotation(ray.direction);
+        //        currentPointerPose.Position = ray.origin;
+        //        currentPointerPose.Rotation = Quaternion.LookRotation(ray.direction);
 
-                currentGripPose = jointPoses[TrackedHandJoint.Palm];
+        //        currentGripPose = jointPoses[TrackedHandJoint.Palm];
 
-                currentIndexPose = jointPoses[TrackedHandJoint.IndexTip];
-            }
+        //        currentIndexPose = jointPoses[TrackedHandJoint.IndexTip];
+        //    }
 
-            if (lastGripPose != currentGripPose)
-            {
-                if (IsPositionAvailable && IsRotationAvailable)
-                {
-                    MixedRealityToolkit.InputSystem.RaiseSourcePoseChanged(InputSource, this, currentGripPose);
-                }
-                else if (IsPositionAvailable && !IsRotationAvailable)
-                {
-                    MixedRealityToolkit.InputSystem.RaiseSourcePositionChanged(InputSource, this, currentPointerPosition);
-                }
-                else if (!IsPositionAvailable && IsRotationAvailable)
-                {
-                    MixedRealityToolkit.InputSystem.RaiseSourceRotationChanged(InputSource, this, currentPointerRotation);
-                }
-            }
+        //    if (lastGripPose != currentGripPose)
+        //    {
+        //        if (IsPositionAvailable && IsRotationAvailable)
+        //        {
+        //            MixedRealityToolkit.InputSystem.RaiseSourcePoseChanged(InputSource, this, currentGripPose);
+        //        }
+        //        else if (IsPositionAvailable && !IsRotationAvailable)
+        //        {
+        //            MixedRealityToolkit.InputSystem.RaiseSourcePositionChanged(InputSource, this, currentPointerPosition);
+        //        }
+        //        else if (!IsPositionAvailable && IsRotationAvailable)
+        //        {
+        //            MixedRealityToolkit.InputSystem.RaiseSourceRotationChanged(InputSource, this, currentPointerRotation);
+        //        }
+        //    }
 
-            for (int i = 0; i < Interactions?.Length; i++)
-            {
-                switch (Interactions[i].InputType)
-                {
-                    case DeviceInputType.SpatialPointer:
-                        Interactions[i].PoseData = currentPointerPose;
-                        if (Interactions[i].Changed)
-                        {
-                            MixedRealityToolkit.InputSystem.RaisePoseInputChanged(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction, currentPointerPose);
-                        }
-                        break;
-                    case DeviceInputType.SpatialGrip:
-                        Interactions[i].PoseData = currentGripPose;
-                        if (Interactions[i].Changed)
-                        {
-                            MixedRealityToolkit.InputSystem.RaisePoseInputChanged(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction, currentGripPose);
-                        }
-                        break;
-                    case DeviceInputType.Select:
-                        Interactions[i].BoolData = handData.IsPinching;
+        //    for (int i = 0; i < Interactions?.Length; i++)
+        //    {
+        //        switch (Interactions[i].InputType)
+        //        {
+        //            case DeviceInputType.SpatialPointer:
+        //                Interactions[i].PoseData = currentPointerPose;
+        //                if (Interactions[i].Changed)
+        //                {
+        //                    MixedRealityToolkit.InputSystem.RaisePoseInputChanged(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction, currentPointerPose);
+        //                }
+        //                break;
+        //            case DeviceInputType.SpatialGrip:
+        //                Interactions[i].PoseData = currentGripPose;
+        //                if (Interactions[i].Changed)
+        //                {
+        //                    MixedRealityToolkit.InputSystem.RaisePoseInputChanged(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction, currentGripPose);
+        //                }
+        //                break;
+        //            case DeviceInputType.Select:
+        //                Interactions[i].BoolData = handData.IsPinching;
 
-                        if (Interactions[i].Changed)
-                        {
-                            if (Interactions[i].BoolData)
-                            {
-                                MixedRealityToolkit.InputSystem.RaiseOnInputDown(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
-                            }
-                            else
-                            {
-                                MixedRealityToolkit.InputSystem.RaiseOnInputUp(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
-                            }
-                        }
-                        break;
-                    case DeviceInputType.TriggerPress:
-                        Interactions[i].BoolData = handData.IsPinching;
+        //                if (Interactions[i].Changed)
+        //                {
+        //                    if (Interactions[i].BoolData)
+        //                    {
+        //                        MixedRealityToolkit.InputSystem.RaiseOnInputDown(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+        //                    }
+        //                    else
+        //                    {
+        //                        MixedRealityToolkit.InputSystem.RaiseOnInputUp(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+        //                    }
+        //                }
+        //                break;
+        //            case DeviceInputType.TriggerPress:
+        //                Interactions[i].BoolData = handData.IsPinching;
 
-                        if (Interactions[i].Changed)
-                        {
-                            if (Interactions[i].BoolData)
-                            {
-                                MixedRealityToolkit.InputSystem.RaiseOnInputDown(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
-                            }
-                            else
-                            {
-                                MixedRealityToolkit.InputSystem.RaiseOnInputUp(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
-                            }
-                        }
-                        break;
-                    case DeviceInputType.IndexFinger:
-                        Interactions[i].PoseData = currentIndexPose;
-                        if (Interactions[i].Changed)
-                        {
-                            MixedRealityToolkit.InputSystem.RaisePoseInputChanged(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction, currentIndexPose);
-                        }
-                        break;
-                }
-            }
-        }
+        //                if (Interactions[i].Changed)
+        //                {
+        //                    if (Interactions[i].BoolData)
+        //                    {
+        //                        MixedRealityToolkit.InputSystem.RaiseOnInputDown(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+        //                    }
+        //                    else
+        //                    {
+        //                        MixedRealityToolkit.InputSystem.RaiseOnInputUp(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+        //                    }
+        //                }
+        //                break;
+        //            case DeviceInputType.IndexFinger:
+        //                Interactions[i].PoseData = currentIndexPose;
+        //                if (Interactions[i].Changed)
+        //                {
+        //                    MixedRealityToolkit.InputSystem.RaisePoseInputChanged(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction, currentIndexPose);
+        //                }
+        //                break;
+        //        }
+        //    }
+        //}
     }
 }

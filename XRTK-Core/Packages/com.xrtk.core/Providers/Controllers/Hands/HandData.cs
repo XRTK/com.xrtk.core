@@ -28,6 +28,10 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         public MixedRealityPose[] Joints { get; } = new MixedRealityPose[jointCount];
 
+        /// <summary>
+        /// Copies another hand's data into this one.
+        /// </summary>
+        /// <param name="other">The other hand.</param>
         public void Copy(HandData other)
         {
             Timestamp = other.Timestamp;

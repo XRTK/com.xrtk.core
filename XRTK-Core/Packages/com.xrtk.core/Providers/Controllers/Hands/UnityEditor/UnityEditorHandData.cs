@@ -2,21 +2,17 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using UnityEngine;
 using XRTK.Definitions.Utilities;
-using XRTK.Providers.Controllers.Hands;
 
-namespace XRTK.Services.InputSystem.Simulation
+namespace XRTK.Providers.Controllers.Hands.UnityEditor
 {
     /// <summary>
     /// Snapshot of simulated hand data.
     /// </summary>
     [Serializable]
-    public class SimulatedHandData : HandData
+    public class UnityEditorHandData : HandData
     {
-        [SerializeField]
-        private bool isPinching = false;
-        public bool IsPinching => isPinching;
+        public bool IsPinching { get; private set; } = false;
 
         public delegate void HandJointDataGenerator(MixedRealityPose[] jointPositions);
 
@@ -31,10 +27,10 @@ namespace XRTK.Services.InputSystem.Simulation
         {
             bool handDataChanged = false;
 
-            if (IsTracked != isTrackedNew || isPinching != isPinchingNew)
+            if (IsTracked != isTrackedNew || IsPinching != isPinchingNew)
             {
                 IsTracked = isTrackedNew;
-                isPinching = isPinchingNew;
+                IsPinching = isPinchingNew;
                 handDataChanged = true;
             }
 

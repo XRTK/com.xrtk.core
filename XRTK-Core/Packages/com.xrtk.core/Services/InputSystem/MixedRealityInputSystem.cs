@@ -233,6 +233,11 @@ namespace XRTK.Services.InputSystem
                 return;
             }
 
+            // Sent the event to any POCO classes that have subscribed for events.
+            // WARNING: This event should not be subscribed to by MonoBehaviours!
+            // Use the InputHandler interfaces instead.
+            OnInputEvent?.Invoke(baseInputEventData);
+
             // Send the event to global listeners
             base.HandleEvent(eventData, eventHandler);
 
@@ -476,7 +481,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public bool TryGetController(IMixedRealityInputSource inputSource, out IMixedRealityController controller)
         {
-            foreach (IMixedRealityController mixedRealityController in DetectedControllers)
+            foreach (var mixedRealityController in DetectedControllers)
             {
                 if (inputSource.SourceId == mixedRealityController.InputSource.SourceId)
                 {
@@ -492,6 +497,9 @@ namespace XRTK.Services.InputSystem
         #endregion IMixedRealityController Utilities
 
         #region Input Events
+
+        /// <inheritdoc />
+        public event Action<BaseInputEventData> OnInputEvent;
 
         #region Input Source Events
 

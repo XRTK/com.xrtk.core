@@ -8,14 +8,14 @@ using XRTK.Providers.Controllers.Hands;
 namespace XRTK.Interfaces.InputSystem.Handlers
 {
     /// <summary>
-    /// Interface to implement for hand mesh information.
+    /// Interface to implement to get hand data updates.
     /// </summary>
-    public interface IMixedRealityHandMeshHandler : IEventSystemHandler
+    public interface IMixedRealityHandDataHandler : IEventSystemHandler
     {
         /// <summary>
-        /// When a hand mesh is updated, this handler receives the event.
+        /// When a hand is updated, the handler receives this notification.
         /// </summary>
-        /// <param name="eventData">Contains information about the HandTrackingInputSource.</param>
-        void OnMeshUpdated(InputEventData<HandMeshData> eventData);
+        /// <param name="eventData">Contains information about the updated hand data.</param>
+        void OnHandDataUpdated(InputEventData<HandData> eventData);
     }
 }

@@ -42,5 +42,10 @@ namespace XRTK.Providers.Controllers.Hands
         /// Handedness of the updated hand.
         /// </summary>
         public Handedness Handedness { get; set; }
+
+        /// <summary>
+        /// Returns true, if the mesh data is empty.
+        /// </summary>
+        public bool Empty => Vertices == null || Vertices.Length == 0;
     }
 }

@@ -14,7 +14,7 @@ namespace XRTK.Providers.Controllers.Hands
     /// <summary>
     /// Utility behavior to access the axis aligned bounds of IMixedRealityHands.
     /// </summary>
-    public class HandBounds : MonoBehaviour, IMixedRealitySourceStateHandler, IMixedRealityHandJointHandler
+    public class HandBounds : MonoBehaviour, IMixedRealitySourceStateHandler, IMixedRealityHandDataHandler
     {
         private Dictionary<Handedness, Bounds> bounds = new Dictionary<Handedness, Bounds>();
 
@@ -35,8 +35,6 @@ namespace XRTK.Providers.Controllers.Hands
             get { return drawBoundsGizmo; }
             set { drawBoundsGizmo = value; }
         }
-
-        #region MonoBehaviour Implementation
 
         private void OnEnable()
         {
@@ -59,10 +57,6 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        #endregion MonoBehaviour Implementation
-
-        #region IMixedRealitySourceStateHandler Implementation
-
         /// <inheritdoc />
         public void OnSourceDetected(SourceStateEventData eventData)
         {
@@ -79,20 +73,18 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        #endregion IMixedRealitySourceStateHandler Implementation
-
-        #region IMixedRealityHandJointHandler Implementation
-
         /// <inheritdoc />
-        public void OnJointUpdated(InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> eventData)
+        public void OnHandDataUpdated(InputEventData<HandData> eventData)
         {
             MixedRealityPose palmPose;
+            HandData handData = eventData.InputData;
+            Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = HandUtils.ToJointPoseDictionary(handData.Joints);
 
-            if (eventData.InputData.TryGetValue(TrackedHandJoint.Palm, out palmPose))
+            if (jointPoses.TryGetValue(TrackedHandJoint.Palm, out palmPose))
             {
                 var newBounds = new Bounds(palmPose.Position, Vector3.zero);
 
-                foreach (var kvp in eventData.InputData)
+                foreach (var kvp in jointPoses)
                 {
                     if (kvp.Key == TrackedHandJoint.None ||
                         kvp.Key == TrackedHandJoint.Palm)
@@ -106,7 +98,5 @@ namespace XRTK.Providers.Controllers.Hands
                 bounds[eventData.Handedness] = newBounds;
             }
         }
-
-        #endregion IMixedRealityHandJointHandler Implementation
     }
 }

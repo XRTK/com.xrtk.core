@@ -29,29 +29,16 @@ namespace XRTK.Interfaces.Providers.Controllers
         bool IsHandTracked(Handedness handedness);
 
         /// <summary>
-        /// Registers a hand joint update handler. The handler will then
+        /// Registers a hand data update handler. The handler will then
         /// receive updates.
         /// </summary>
         /// <param name="handler">The handler to register.</param>
-        void Register(IMixedRealityHandJointHandler handler);
+        void Register(IMixedRealityHandDataHandler handler);
 
         /// <summary>
-        /// Unregisters a previosuly registered hand joint update handler.
+        /// Unregisters a previosuly registered hand data update handler.
         /// </summary>
         /// <param name="handler">The handler to unregister.</param>
-        void Unregister(IMixedRealityHandJointHandler handler);
-
-        /// <summary>
-        /// Registers a hand mesh update handler. The handler will then
-        /// receive updates.
-        /// </summary>
-        /// <param name="handler">The handler to register.</param>
-        void Register(IMixedRealityHandMeshHandler handler);
-
-        /// <summary>
-        /// Unregisters a previosuly registered hand mesh update handler.
-        /// </summary>
-        /// <param name="handler">The handler to unregister.</param>
-        void Unregister(IMixedRealityHandMeshHandler handler);
+        void Unregister(IMixedRealityHandDataHandler handler);
     }
 }

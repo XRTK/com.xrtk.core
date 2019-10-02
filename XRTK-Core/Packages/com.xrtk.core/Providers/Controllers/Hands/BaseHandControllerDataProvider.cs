@@ -25,10 +25,8 @@ namespace XRTK.Providers.Controllers.Hands
         private HandControllerDataProviderProfile profile;
         private readonly Dictionary<Handedness, BaseHandController> trackedHandControllers = new Dictionary<Handedness, BaseHandController>();
 
-        private InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>> jointPoseInputEventData;
-        private InputEventData<HandMeshData> handMeshInputEventData;
-        private List<IMixedRealityHandJointHandler> handJointUpdatedEventHandlers = new List<IMixedRealityHandJointHandler>();
-        private List<IMixedRealityHandMeshHandler> handMeshUpdatedEventHandlers = new List<IMixedRealityHandMeshHandler>();
+        private InputEventData<HandData> handDataUpdateEventData;
+        private List<IMixedRealityHandDataHandler> handDataUpdateEventHandlers = new List<IMixedRealityHandDataHandler>();
 
         private BaseHandController leftHand;
         private Dictionary<TrackedHandJoint, Transform> leftHandJointTransforms = new Dictionary<TrackedHandJoint, Transform>();
@@ -51,9 +49,7 @@ namespace XRTK.Providers.Controllers.Hands
         public override void Initialize()
         {
             base.Initialize();
-
-            jointPoseInputEventData = new InputEventData<IDictionary<TrackedHandJoint, MixedRealityPose>>(EventSystem.current);
-            handMeshInputEventData = new InputEventData<HandMeshData>(EventSystem.current);
+            handDataUpdateEventData = new InputEventData<HandData>(EventSystem.current);
         }
 
         /// <inheritdoc />
@@ -254,38 +250,20 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <inheritdoc />
-        public void Register(IMixedRealityHandJointHandler handler)
+        public void Register(IMixedRealityHandDataHandler handler)
         {
             if (handler != null)
             {
-                handJointUpdatedEventHandlers.Add(handler);
+                handDataUpdateEventHandlers.Add(handler);
             }
         }
 
         /// <inheritdoc />
-        public void Unregister(IMixedRealityHandJointHandler handler)
+        public void Unregister(IMixedRealityHandDataHandler handler)
         {
-            if (handJointUpdatedEventHandlers.Contains(handler))
+            if (handDataUpdateEventHandlers.Contains(handler))
             {
-                handJointUpdatedEventHandlers.Remove(handler);
-            }
-        }
-
-        /// <inheritdoc />
-        public void Register(IMixedRealityHandMeshHandler handler)
-        {
-            if (handler != null)
-            {
-                handMeshUpdatedEventHandlers.Add(handler);
-            }
-        }
-
-        /// <inheritdoc />
-        public void Unregister(IMixedRealityHandMeshHandler handler)
-        {
-            if (handMeshUpdatedEventHandlers.Contains(handler))
-            {
-                handMeshUpdatedEventHandlers.Remove(handler);
+                handDataUpdateEventHandlers.Remove(handler);
             }
         }
 
@@ -298,16 +276,11 @@ namespace XRTK.Providers.Controllers.Hands
                 {
                     controller.UpdateState(handData);
 
-                    jointPoseInputEventData.Initialize(controller.InputSource, handedness, MixedRealityInputAction.None, HandUtils.ToJointPoseDictionary(handData.Joints));
-                    for (int i = 0; i < handJointUpdatedEventHandlers.Count; i++)
+                    handDataUpdateEventData.Initialize(controller.InputSource, handedness, MixedRealityInputAction.None, handData);
+                    for (int i = 0; i < handDataUpdateEventHandlers.Count; i++)
                     {
-                        handJointUpdatedEventHandlers[i].OnJointUpdated(jointPoseInputEventData);
-                    }
-
-                    handMeshInputEventData.Initialize(controller.InputSource, handedness, MixedRealityInputAction.None, handData.Mesh);
-                    for (int i = 0; i < handMeshUpdatedEventHandlers.Count; i++)
-                    {
-                        handMeshUpdatedEventHandlers[i].OnMeshUpdated(handMeshInputEventData);
+                        IMixedRealityHandDataHandler handler = handDataUpdateEventHandlers[i];
+                        handler.OnHandDataUpdated(handDataUpdateEventData);
                     }
                 }
                 else

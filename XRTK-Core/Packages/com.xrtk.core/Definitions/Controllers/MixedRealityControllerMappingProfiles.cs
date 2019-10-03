@@ -30,11 +30,11 @@ namespace XRTK.Definitions.Controllers
 
                 if (controllerMappingProfiles != null)
                 {
-                    for (int i = 0; i < controllerMappingProfiles.Count; i++)
+                    for (var i = 0; i < controllerMappingProfiles.Count; i++)
                     {
                         if (controllerMappingProfiles[i] != null)
                         {
-                            for (int j = 0; j < controllerMappingProfiles[i].ControllerMappings?.Length; j++)
+                            for (var j = 0; j < controllerMappingProfiles[i].ControllerMappings?.Length; j++)
                             {
 
                                 mappings.Add(controllerMappingProfiles[i].ControllerMappings[j]);

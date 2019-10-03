@@ -63,7 +63,7 @@ namespace XRTK.Definitions.Controllers
         {
             if (!hasSetupDefaults)
             {
-                for (int i = 0; i < controllerMappings?.Length; i++)
+                for (var i = 0; i < controllerMappings?.Length; i++)
                 {
                     controllerMappings[i].SetDefaultInteractionMapping();
                 }

@@ -59,6 +59,8 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         {
             base.Initialize();
 
+            if (!Application.isPlaying) { return; }
+
             leftHandData = new UnityEditorHandData();
             leftHandState = new UnityEditorHandState(Handedness.Left);
             rightHandData = new UnityEditorHandData();
@@ -91,7 +93,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         {
             base.Update();
 
-            if (profile.SimulateHandTracking && UserInputEnabled)
+            if (profile.IsSimulateHandTrackingEnabled && UserInputEnabled)
             {
                 UpdateUnityEditorHandData(leftHandData, rightHandData);
             }
@@ -104,7 +106,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
 
             // Apply hand data in LateUpdate to ensure external changes are applied.
             // HandDataLeft / Right can be modified after the services Update() call.
-            if (profile.SimulateHandTracking)
+            if (profile.IsSimulateHandTrackingEnabled)
             {
                 DateTime currentTime = DateTime.UtcNow;
                 double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandControllerUpdateTimeStamp)).TotalMilliseconds;

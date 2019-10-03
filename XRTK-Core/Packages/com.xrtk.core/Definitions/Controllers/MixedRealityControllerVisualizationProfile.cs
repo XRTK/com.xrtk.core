@@ -136,7 +136,7 @@ namespace XRTK.Definitions.Controllers
         {
             overrideModel = null;
 
-            for (int i = 0; i < controllerVisualizationSettings.Length; i++)
+            for (var i = 0; i < controllerVisualizationSettings.Length; i++)
             {
                 if (controllerVisualizationSettings[i].ControllerType != null &&
                     controllerVisualizationSettings[i].ControllerType.Type == controllerType &&
@@ -160,7 +160,7 @@ namespace XRTK.Definitions.Controllers
         {
             poseAction = MixedRealityInputAction.None;
 
-            for (int i = 0; i < controllerVisualizationSettings.Length; i++)
+            for (var i = 0; i < controllerVisualizationSettings.Length; i++)
             {
                 if (controllerVisualizationSettings[i].ControllerType != null &&
                     controllerVisualizationSettings[i].ControllerType.Type == controllerType &&
@@ -186,7 +186,7 @@ namespace XRTK.Definitions.Controllers
         {
             alternatePoseAction = MixedRealityInputAction.None;
 
-            for (int i = 0; i < controllerVisualizationSettings.Length; i++)
+            for (var i = 0; i < controllerVisualizationSettings.Length; i++)
             {
                 if (controllerVisualizationSettings[i].ControllerType != null &&
                     controllerVisualizationSettings[i].ControllerType.Type == controllerType &&
@@ -208,7 +208,7 @@ namespace XRTK.Definitions.Controllers
         /// <param name="hand">The specific hand assigned to the controller</param>
         public SystemType GetControllerVisualizationTypeOverride(Type controllerType, Handedness hand)
         {
-            for (int i = 0; i < controllerVisualizationSettings.Length; i++)
+            for (var i = 0; i < controllerVisualizationSettings.Length; i++)
             {
                 if (controllerVisualizationSettings[i].ControllerType != null &&
                     controllerVisualizationSettings[i].ControllerType.Type == controllerType &&

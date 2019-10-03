@@ -22,16 +22,16 @@ namespace XRTK.Providers.Controllers.Hands
     /// </summary>
     public abstract class BaseHandControllerDataProvider : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider
     {
-        private HandControllerDataProviderProfile profile;
+        private readonly HandControllerDataProviderProfile profile;
         private readonly Dictionary<Handedness, BaseHandController> trackedHandControllers = new Dictionary<Handedness, BaseHandController>();
 
         private InputEventData<HandData> handDataUpdateEventData;
-        private List<IMixedRealityHandDataHandler> handDataUpdateEventHandlers = new List<IMixedRealityHandDataHandler>();
+        private readonly List<IMixedRealityHandDataHandler> handDataUpdateEventHandlers = new List<IMixedRealityHandDataHandler>();
 
         private BaseHandController leftHand;
-        private Dictionary<TrackedHandJoint, Transform> leftHandJointTransforms = new Dictionary<TrackedHandJoint, Transform>();
+        private readonly Dictionary<TrackedHandJoint, Transform> leftHandJointTransforms = new Dictionary<TrackedHandJoint, Transform>();
         private BaseHandController rightHand;
-        private Dictionary<TrackedHandJoint, Transform> rightHandJointTransforms = new Dictionary<TrackedHandJoint, Transform>();
+        private readonly Dictionary<TrackedHandJoint, Transform> rightHandJointTransforms = new Dictionary<TrackedHandJoint, Transform>();
 
         /// <summary>
         /// Base constructor.
@@ -49,7 +49,11 @@ namespace XRTK.Providers.Controllers.Hands
         public override void Initialize()
         {
             base.Initialize();
-            handDataUpdateEventData = new InputEventData<HandData>(EventSystem.current);
+
+            if (Application.isPlaying)
+            {
+                handDataUpdateEventData = new InputEventData<HandData>(EventSystem.current);
+            }
         }
 
         /// <inheritdoc />

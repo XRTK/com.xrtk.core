@@ -164,11 +164,11 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         /// Initialize pose data for use in editor from files.
         /// </summary>
         /// <param name="poses">List of pose data assets with pose information.</param>
-        public static void Initialize(List<UnityEditorHandPoseData> poses)
+        public static void Initialize(IEnumerable<UnityEditorHandPoseData> poses)
         {
-            for (int i = 0; i < poses.Count; i++)
+            foreach (var pose in poses)
             {
-                InitializePose(poses[i]);
+                InitializePose(pose);
             }
         }
 
@@ -176,7 +176,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         {
             if (poseData.Data != null)
             {
-                UnityEditorHandPose pose = new UnityEditorHandPose();
+                var pose = new UnityEditorHandPose();
                 pose.FromJson(poseData.Data.text);
                 handPoses.Add(poseData.GestureName, pose);
 

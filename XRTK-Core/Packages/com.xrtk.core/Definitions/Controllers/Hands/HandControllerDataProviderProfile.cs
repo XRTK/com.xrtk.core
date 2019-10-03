@@ -14,7 +14,7 @@ namespace XRTK.Definitions.Controllers.Hands
         [SerializeField]
         [Tooltip("The concrete type to use for created hand controllers.")]
         [Extends(typeof(BaseHandController), TypeGrouping.ByNamespaceFlat)]
-        private SystemType handControllerType;
+        private SystemType handControllerType = null;
 
         /// <summary>
         /// The concrete type to use for created hand controllers.

@@ -9,14 +9,14 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
 {
     /// <summary>
     /// A hand pose definition with recorded hand joint data for use with <see cref="UnityEditorHandControllerDataProvider"/>.
-    /// Asssign a collection of these poses to the data provider's profile to simulate the pose when working in Editor.
+    /// Assign a collection of these poses to the data provider's profile to simulate the pose when working in Editor.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hands/Unity Editor Hand Pose", fileName = "UnityEditorHandPoseData", order = (int)CreateProfileMenuItemIndices.Input)]
     public class UnityEditorHandPoseData : BaseMixedRealityProfile
     {
         [SerializeField]
         [Tooltip("Name the hand gesture.")]
-        private string gestureName;
+        private string gestureName = string.Empty;
 
         /// <summary>
         /// Gets the gesture's name.
@@ -25,7 +25,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
 
         [SerializeField]
         [Tooltip("Describe the hand gesture.")]
-        private string gestureDescription;
+        private string gestureDescription = string.Empty;
 
         /// <summary>
         /// Gets the gesture's description.
@@ -34,7 +34,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
 
         [SerializeField]
         [Tooltip("Is this the default (idle) hand gesture?")]
-        private bool isDefault;
+        private bool isDefault = false;
 
         /// <summary>
         /// Gets whether this hand gesture is the hand's idle gesture.
@@ -43,7 +43,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
 
         [SerializeField]
         [Tooltip("Key used to trigger the gesture simulation.")]
-        private KeyCode keyCode;
+        private KeyCode keyCode = KeyCode.None;
 
         /// <summary>
         /// Gets the key code used to trigger this gesture simulation.
@@ -51,8 +51,8 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         public KeyCode KeyCode => keyCode;
 
         [SerializeField]
-        [Tooltip("Assign JSON defintion file containing simulated gesture information.")]
-        private TextAsset data;
+        [Tooltip("Assign JSON definition file containing simulated gesture information.")]
+        private TextAsset data = null;
 
         /// <summary>
         /// Gets the gesture definition's joint information used to simulate the gesture.

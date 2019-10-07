@@ -15,7 +15,7 @@ namespace XRTK.Interfaces
         /// </summary>
         string LibraryPath { get; }
 
-#endif
+#endif // UNITY_EDITOR
 
         /// <summary>
         /// The name of the native library to load.

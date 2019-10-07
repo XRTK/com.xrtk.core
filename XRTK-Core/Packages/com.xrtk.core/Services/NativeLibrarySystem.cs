@@ -21,6 +21,8 @@ namespace XRTK.Services
         {
         }
 
+        #region IMixedRealityNativeLibrarySystem Implementation
+
 #if UNITY_EDITOR
 
         private readonly Dictionary<IntPtr, BaseNativeDataProvider> nativeLibraries = new Dictionary<IntPtr, BaseNativeDataProvider>();
@@ -38,7 +40,7 @@ namespace XRTK.Services
         [DllImport(Kernel32)]
         private static extern bool FreeLibrary(IntPtr libraryHandle);
 
-#else
+#else // linux based
 
         private const string Internal = "__Internal";
 
@@ -53,11 +55,12 @@ namespace XRTK.Services
 
 #endif
 
+        /// <inheritdoc />
         public IntPtr OpenLibrary(string path)
         {
 #if UNITY_EDITOR_WIN
             var handle = LoadLibrary(path);
-#else
+#else // linux based
             IntPtr handle = dlopen(path, 0);
 #endif
 
@@ -70,29 +73,20 @@ namespace XRTK.Services
             return handle;
         }
 
+        /// <inheritdoc />
         public void CloseLibrary(IntPtr libraryHandle)
         {
             nativeLibraries.Remove(libraryHandle);
 
 #if UNITY_EDITOR_WIN
             FreeLibrary(libraryHandle);
-#else
+#else // linux based
             dlclose(libraryHandle);
 #endif
         }
 
-        private T GetDelegate<T>(IntPtr libraryHandle, string functionName) where T : class
-        {
-#if UNITY_EDITOR_WIN
-            var symbol = GetProcAddress(libraryHandle, functionName);
-#else
-            var symbol = dlsym(libraryHandle, functionName);
-#endif
-            return symbol == IntPtr.Zero
-                ? throw new Exception($"Couldn't get function: {functionName}")
-                : Marshal.GetDelegateForFunctionPointer(symbol, typeof(T)) as T;
-        }
-
-#endif
+#endif // UNITY_EDITOR
     }
+
+    #endregion IMixedRealityNativeLibrarySystem Implementation
 }

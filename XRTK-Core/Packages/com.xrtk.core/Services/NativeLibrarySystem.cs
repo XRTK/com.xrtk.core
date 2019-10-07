@@ -35,9 +35,6 @@ namespace XRTK.Services
         private static extern IntPtr LoadLibrary(string path);
 
         [DllImport(Kernel32)]
-        private static extern IntPtr GetProcAddress(IntPtr libraryHandle, string symbolName);
-
-        [DllImport(Kernel32)]
         private static extern bool FreeLibrary(IntPtr libraryHandle);
 
 #else // linux based
@@ -46,9 +43,6 @@ namespace XRTK.Services
 
         [DllImport(Internal)]
         private static extern IntPtr dlopen(string path, int flag);
-     
-        [DllImport(Internal)]
-        private static extern IntPtr dlsym(IntPtr handle, string symbolName);
      
         [DllImport(Internal)]
         private static extern int dlclose(IntPtr handle);

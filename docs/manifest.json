@@ -1805,11 +1805,35 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.EventDatum.Input.MixedRealityPointerDragEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.EventDatum.Input.MixedRealityPointerDragEventData.html",
+          "hash": "a1/nxU+C3U39YZTOjNdcIg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "../api/XRTK.EventDatum.Input.MixedRealityPointerEventData.yml",
       "output": {
         ".html": {
           "relative_path": "api/XRTK.EventDatum.Input.MixedRealityPointerEventData.html",
-          "hash": "IRFQ9I/jRNjaBVL5ngGTVw=="
+          "hash": "gnqHooJ1GV6ADn2blKwjSA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.html",
+          "hash": "qNn9bvYDp2cHkwPgYIsdww=="
         }
       },
       "is_incremental": false,
@@ -1857,7 +1881,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.EventDatum.Input.html",
-          "hash": "w3MpcOPkuAoum2G66llxIg=="
+          "hash": "X6TdwzYd4NkChfklTeZsbg=="
         }
       },
       "is_incremental": false,
@@ -3569,11 +3593,35 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.html",
+          "hash": "FhFiSYp7zbJbOq3ZTd/6XA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "../api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerHandler.yml",
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerHandler.html",
           "hash": "ct7ftlkxZaXY0izi8OCoGA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerScrollHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerScrollHandler.html",
+          "hash": "frMvN/3w+pX1LqNwsytJfA=="
         }
       },
       "is_incremental": false,
@@ -3621,7 +3669,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.InputSystem.Handlers.html",
-          "hash": "AdYrDk/OmqrhWk6T+gxDvw=="
+          "hash": "NDRMxi6ZdDvtD//ddGDf6Q=="
         }
       },
       "is_incremental": false,
@@ -3705,7 +3753,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html",
-          "hash": "NCQAed7dxHlPyqc3l6ST8w=="
+          "hash": "6+yDH7wCy/AcBhef+6nVNw=="
         }
       },
       "is_incremental": false,
@@ -5385,7 +5433,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.SDK.Input.Handlers.ManipulationHandler.html",
-          "hash": "2CN34zYNgmzzlqlzkNHVfg=="
+          "hash": "3XJh5IRQ47fnYUG8JglKqw=="
         }
       },
       "is_incremental": false,
@@ -6657,7 +6705,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.InputSystem.MixedRealityInputSystem.html",
-          "hash": "3mdSoPKeklT+nw3xpNQLrw=="
+          "hash": "gAnDTGA1J6mxYx3mu27PXg=="
         }
       },
       "is_incremental": false,
@@ -9273,7 +9321,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "t4+tVOBeUHTp4FnUXHVuaw=="
+          "hash": "pgPa8GNjWhfl7UuqNKr3mw=="
         }
       },
       "is_incremental": false,
@@ -9401,9 +9449,9 @@
         "full_build_reason_code": "NoAvailableBuildCache"
       },
       "processors": {
-        "TocDocumentProcessor": {
+        "ResourceDocumentProcessor": {
           "can_incremental": false,
-          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
           "skipped_file_count": 0
@@ -9414,17 +9462,17 @@
           "total_file_count": 14,
           "skipped_file_count": 0
         },
+        "TocDocumentProcessor": {
+          "can_incremental": false,
+          "details": "Processor TocDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
+          "incrementalPhase": "build",
+          "total_file_count": 0,
+          "skipped_file_count": 0
+        },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 764,
-          "skipped_file_count": 0
-        },
-        "ResourceDocumentProcessor": {
-          "can_incremental": false,
-          "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
-          "incrementalPhase": "build",
-          "total_file_count": 0,
+          "total_file_count": 768,
           "skipped_file_count": 0
         }
       }

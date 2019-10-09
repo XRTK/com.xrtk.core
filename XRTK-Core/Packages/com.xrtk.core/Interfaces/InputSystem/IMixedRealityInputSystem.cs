@@ -7,6 +7,7 @@ using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.EventDatum.Input;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Events;
 
@@ -121,6 +122,15 @@ namespace XRTK.Interfaces.InputSystem
         #endregion IMixedRealityController Utilities
 
         #region Input Events
+
+        /// <summary>
+        /// Raised when an input event is triggered.
+        /// </summary>
+        /// <remarks>
+        /// WARNING: This event should not be subscribed to by MonoBehaviours!
+        /// Use the InputHandler interfaces instead.
+        /// </remarks>
+        event Action<BaseInputEventData> OnInputEvent;
 
         #region Input Source Events
 
@@ -238,8 +248,8 @@ namespace XRTK.Interfaces.InputSystem
         /// Raise the pointer down event.
         /// </summary>
         /// <param name="pointer">The pointer where the event originates.</param>
-        /// <param name="inputAction"></param>
-        /// <param name="inputSource"></param>
+        /// <param name="inputAction">The action associated with this event.</param>
+        /// <param name="inputSource">The input source this event is associated to, if null, the pointer's parent input source is used.</param>
         void RaisePointerDown(IMixedRealityPointer pointer, MixedRealityInputAction inputAction, IMixedRealityInputSource inputSource = null);
 
         #endregion Pointer Down
@@ -249,11 +259,10 @@ namespace XRTK.Interfaces.InputSystem
         /// <summary>
         /// Raise the pointer clicked event.
         /// </summary>
-        /// <param name="pointer"></param>
-        /// <param name="inputAction"></param>
-        /// <param name="count"></param>
-        /// <param name="inputSource"></param>
-        void RaisePointerClicked(IMixedRealityPointer pointer, MixedRealityInputAction inputAction, int count, IMixedRealityInputSource inputSource = null);
+        /// <param name="pointer">The pointer where the event originates.</param>
+        /// <param name="inputAction">The action associated with this event.</param>
+        /// <param name="inputSource">The input source this event is associated to, if null, the pointer's parent input source is used.</param>
+        void RaisePointerClicked(IMixedRealityPointer pointer, MixedRealityInputAction inputAction, IMixedRealityInputSource inputSource = null);
 
         #endregion Pointer Click
 
@@ -262,21 +271,52 @@ namespace XRTK.Interfaces.InputSystem
         /// <summary>
         /// Raise the pointer up event.
         /// </summary>
-        /// <param name="pointer"></param>
-        /// <param name="inputAction"></param>
-        /// <param name="inputSource"></param>
+        /// <param name="pointer">The pointer where the event originates.</param>
+        /// <param name="inputAction">The action associated with this event.</param>
+        /// <param name="inputSource">The input source this event is associated to, if null, the pointer's parent input source is used.</param>
         void RaisePointerUp(IMixedRealityPointer pointer, MixedRealityInputAction inputAction, IMixedRealityInputSource inputSource = null);
 
         #endregion Pointer Up
 
         /// <summary>
-        /// Raise teh pointer scroll event.
+        /// Raise the pointer scroll event.
         /// </summary>
-        /// <param name="pointer"></param>
-        /// <param name="scrollAction"></param>
-        /// <param name="scrollDelta"></param>
-        /// <param name="inputSource"></param>
+        /// <param name="pointer">The pointer where the event originates.</param>
+        /// <param name="scrollAction">The action associated with this event.</param>
+        /// <param name="scrollDelta">The distance this pointer has scrolled since the scroll event was last raised.</param>
+        /// <param name="inputSource">The input source this event is associated to, if null, the pointer's parent input source is used.</param>
         void RaisePointerScroll(IMixedRealityPointer pointer, MixedRealityInputAction scrollAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null);
+
+        #region Pointer Dragging
+
+        /// <summary>
+        /// Raise the pointer drag begin event.
+        /// </summary>
+        /// <param name="pointer">The pointer where the event originates.</param>
+        /// <param name="draggedAction">The action associated with this event.</param>
+        /// <param name="dragDelta">The distance this pointer has been moved since the last time the dragged event was last raised.</param>
+        /// <param name="inputSource">The input source this event is associated to, if null, the pointer's parent input source is used.</param>
+        void RaisePointerDragBegin(IMixedRealityPointer pointer, MixedRealityInputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null);
+
+        /// <summary>
+        /// Raise the pointer drag event.
+        /// </summary>
+        /// <param name="pointer">The pointer where the event originates.</param>
+        /// <param name="draggedAction">The action associated with this event.</param>
+        /// <param name="dragDelta">The distance this pointer has been moved since the last time the dragged event was last raised.</param>
+        /// <param name="inputSource">The input source this event is associated to, if null, the pointer's parent input source is used.</param>
+        void RaisePointerDrag(IMixedRealityPointer pointer, MixedRealityInputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null);
+
+        /// <summary>
+        /// Raise the pointer drag end event.
+        /// </summary>
+        /// <param name="pointer">The pointer where the event originates.</param>
+        /// <param name="draggedAction">The action associated with this event.</param>
+        /// <param name="dragDelta">The distance this pointer has been moved since the last time the dragged event was last raised.</param>
+        /// <param name="inputSource">The input source this event is associated to, if null, the pointer's parent input source is used.</param>
+        void RaisePointerDragEnd(IMixedRealityPointer pointer, MixedRealityInputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null);
+
+        #endregion Pointer Dragging
 
         #endregion Pointers
 

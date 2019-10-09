@@ -85,6 +85,7 @@ namespace XRTK.Services.InputSystem
         private InputEventData inputEventData;
         private MixedRealityPointerEventData pointerEventData;
         private MixedRealityPointerDragEventData pointerDragEventData;
+        private MixedRealityPointerScrollEventData pointerScrollEventData;
 
         private InputEventData<float> floatInputEventData;
         private InputEventData<Vector2> vector2InputEventData;
@@ -160,6 +161,7 @@ namespace XRTK.Services.InputSystem
                 inputEventData = new InputEventData(eventSystem);
                 pointerEventData = new MixedRealityPointerEventData(eventSystem);
                 pointerDragEventData = new MixedRealityPointerDragEventData(eventSystem);
+                pointerScrollEventData = new MixedRealityPointerScrollEventData(eventSystem);
 
                 floatInputEventData = new InputEventData<float>(eventSystem);
                 vector2InputEventData = new InputEventData<Vector2>(eventSystem);
@@ -886,12 +888,19 @@ namespace XRTK.Services.InputSystem
 
         #endregion Pointer Up
 
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityPointerScrollHandler> OnPointerScroll =
+            delegate (IMixedRealityPointerScrollHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<MixedRealityPointerScrollEventData>(eventData);
+                handler.OnPointerScroll(casted);
+            };
+
         /// <inheritdoc />
         public void RaisePointerScroll(IMixedRealityPointer pointer, MixedRealityInputAction scrollAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null)
         {
-            vector2InputEventData.Initialize(inputSource ?? pointer.InputSourceParent, pointer.Controller?.ControllerHandedness ?? Handedness.None, scrollAction, scrollDelta);
+            pointerScrollEventData.Initialize(pointer, scrollAction, scrollDelta);
 
-            HandleEvent(vector2InputEventData, OnTwoDoFInputChanged);
+            HandleEvent(pointerScrollEventData, OnPointerScroll);
 
             var focusedObject = pointer.Result.CurrentPointerTarget;
 

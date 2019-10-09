@@ -823,6 +823,7 @@ namespace XRTK.Services.InputSystem
                 FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
             {
                 ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.pointerDownHandler);
+                ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.initializePotentialDrag);
             }
         }
 
@@ -838,10 +839,10 @@ namespace XRTK.Services.InputSystem
             };
 
         /// <inheritdoc />
-        public void RaisePointerClicked(IMixedRealityPointer pointer, MixedRealityInputAction inputAction, int count, IMixedRealityInputSource inputSource = null)
+        public void RaisePointerClicked(IMixedRealityPointer pointer, MixedRealityInputAction inputAction, IMixedRealityInputSource inputSource = null)
         {
             // Create input event
-            pointerEventData.Initialize(pointer, inputAction, inputSource, count);
+            pointerEventData.Initialize(pointer, inputAction, inputSource);
 
             // Pass handler through HandleEvent to perform modal/fallback logic
             HandleEvent(pointerEventData, OnInputClickedEventHandler);
@@ -886,7 +887,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaisePointerScroll(IMixedRealityPointer pointer, MixedRealityInputAction scrollAction, Vector2 scrollDelta, IMixedRealityInputSource inputSource = null)
         {
-            vector2InputEventData.Initialize(inputSource ?? pointer.InputSourceParent, Handedness.None, scrollAction, scrollDelta);
+            vector2InputEventData.Initialize(inputSource ?? pointer.InputSourceParent, pointer.Controller?.ControllerHandedness ?? Handedness.None, scrollAction, scrollDelta);
 
             HandleEvent(vector2InputEventData, OnTwoDoFInputChanged);
 
@@ -899,6 +900,58 @@ namespace XRTK.Services.InputSystem
                 ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.scrollHandler);
             }
         }
+
+        #region Pointer Dragging
+
+        /// <inheritdoc />
+        public void RaisePointerDragBegin(IMixedRealityPointer pointer, MixedRealityInputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
+        {
+            positionInputEventData.Initialize(inputSource ?? pointer.InputSourceParent, pointer.Controller?.ControllerHandedness ?? Handedness.None, draggedAction, dragDelta);
+
+            HandleEvent(positionInputEventData, OnPositionInputChanged);
+
+            var focusedObject = pointer.Result.CurrentPointerTarget;
+
+            if (focusedObject != null &&
+                FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
+            {
+                ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.beginDragHandler);
+            }
+        }
+
+        /// <inheritdoc />
+        public void RaisePointerDrag(IMixedRealityPointer pointer, MixedRealityInputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
+        {
+            positionInputEventData.Initialize(inputSource ?? pointer.InputSourceParent, pointer.Controller?.ControllerHandedness ?? Handedness.None, draggedAction, dragDelta);
+
+            HandleEvent(positionInputEventData, OnPositionInputChanged);
+
+            var focusedObject = pointer.Result.CurrentPointerTarget;
+
+            if (focusedObject != null &&
+                FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
+            {
+                ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.dragHandler);
+            }
+        }
+
+        /// <inheritdoc />
+        public void RaisePointerDragEnd(IMixedRealityPointer pointer, MixedRealityInputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
+        {
+            positionInputEventData.Initialize(inputSource ?? pointer.InputSourceParent, pointer.Controller?.ControllerHandedness ?? Handedness.None, draggedAction, dragDelta);
+
+            HandleEvent(positionInputEventData, OnPositionInputChanged);
+
+            var focusedObject = pointer.Result.CurrentPointerTarget;
+
+            if (focusedObject != null &&
+                FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
+            {
+                ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.endDragHandler);
+            }
+        }
+
+        #endregion Pointer Dragging
 
         #endregion Pointers
 

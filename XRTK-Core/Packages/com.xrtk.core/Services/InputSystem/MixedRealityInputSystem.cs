@@ -915,6 +915,9 @@ namespace XRTK.Services.InputSystem
             if (focusedObject != null &&
                 FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
             {
+                graphicInputEventData.pointerDrag = focusedObject;
+                graphicInputEventData.useDragThreshold = false;
+                graphicInputEventData.dragging = true;
                 ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.beginDragHandler);
             }
         }
@@ -947,6 +950,7 @@ namespace XRTK.Services.InputSystem
             if (focusedObject != null &&
                 FocusProvider.TryGetSpecificPointerGraphicEventData(pointer, out var graphicInputEventData))
             {
+                graphicInputEventData.dragging = false;
                 ExecuteEvents.ExecuteHierarchy(focusedObject, graphicInputEventData, ExecuteEvents.endDragHandler);
             }
         }

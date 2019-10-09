@@ -84,6 +84,7 @@ namespace XRTK.Services.InputSystem
 
         private InputEventData inputEventData;
         private MixedRealityPointerEventData pointerEventData;
+        private MixedRealityPointerDragEventData pointerDragEventData;
 
         private InputEventData<float> floatInputEventData;
         private InputEventData<Vector2> vector2InputEventData;
@@ -158,6 +159,7 @@ namespace XRTK.Services.InputSystem
 
                 inputEventData = new InputEventData(eventSystem);
                 pointerEventData = new MixedRealityPointerEventData(eventSystem);
+                pointerDragEventData = new MixedRealityPointerDragEventData(eventSystem);
 
                 floatInputEventData = new InputEventData<float>(eventSystem);
                 vector2InputEventData = new InputEventData<Vector2>(eventSystem);
@@ -903,12 +905,19 @@ namespace XRTK.Services.InputSystem
 
         #region Pointer Dragging
 
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityPointerDragHandler> OnPointerDragBegin =
+            delegate (IMixedRealityPointerDragHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<MixedRealityPointerDragEventData>(eventData);
+                handler.OnPointerDragBegin(casted);
+            };
+
         /// <inheritdoc />
         public void RaisePointerDragBegin(IMixedRealityPointer pointer, MixedRealityInputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
         {
-            positionInputEventData.Initialize(inputSource ?? pointer.InputSourceParent, pointer.Controller?.ControllerHandedness ?? Handedness.None, draggedAction, dragDelta);
+            pointerDragEventData.Initialize(pointer, draggedAction, dragDelta);
 
-            HandleEvent(positionInputEventData, OnPositionInputChanged);
+            HandleEvent(pointerDragEventData, OnPointerDragBegin);
 
             var focusedObject = pointer.Result.CurrentPointerTarget;
 
@@ -922,12 +931,19 @@ namespace XRTK.Services.InputSystem
             }
         }
 
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityPointerDragHandler> OnPointerDrag =
+            delegate (IMixedRealityPointerDragHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<MixedRealityPointerDragEventData>(eventData);
+                handler.OnPointerDrag(casted);
+            };
+
         /// <inheritdoc />
         public void RaisePointerDrag(IMixedRealityPointer pointer, MixedRealityInputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
         {
-            positionInputEventData.Initialize(inputSource ?? pointer.InputSourceParent, pointer.Controller?.ControllerHandedness ?? Handedness.None, draggedAction, dragDelta);
+            pointerDragEventData.Initialize(pointer, draggedAction, dragDelta);
 
-            HandleEvent(positionInputEventData, OnPositionInputChanged);
+            HandleEvent(pointerDragEventData, OnPointerDrag);
 
             var focusedObject = pointer.Result.CurrentPointerTarget;
 
@@ -938,12 +954,19 @@ namespace XRTK.Services.InputSystem
             }
         }
 
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityPointerDragHandler> OnPointerDragEnd =
+            delegate (IMixedRealityPointerDragHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<MixedRealityPointerDragEventData>(eventData);
+                handler.OnPointerDragEnd(casted);
+            };
+
         /// <inheritdoc />
         public void RaisePointerDragEnd(IMixedRealityPointer pointer, MixedRealityInputAction draggedAction, Vector3 dragDelta, IMixedRealityInputSource inputSource = null)
         {
-            positionInputEventData.Initialize(inputSource ?? pointer.InputSourceParent, pointer.Controller?.ControllerHandedness ?? Handedness.None, draggedAction, dragDelta);
+            pointerDragEventData.Initialize(pointer, draggedAction, dragDelta);
 
-            HandleEvent(positionInputEventData, OnPositionInputChanged);
+            HandleEvent(pointerDragEventData, OnPointerDragEnd);
 
             var focusedObject = pointer.Result.CurrentPointerTarget;
 

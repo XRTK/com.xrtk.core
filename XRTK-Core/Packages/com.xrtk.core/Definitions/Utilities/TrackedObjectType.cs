@@ -16,6 +16,10 @@ namespace XRTK.Definitions.Utilities
         /// <summary>
         /// Calculates position and orientation from the right motion-tracked controller.
         /// </summary>
-        MotionControllerRight
+        MotionControllerRight,
+        /// <summary>
+        /// Calculates position and orientation from the playspace.
+        /// </summary>
+        Body
     }
 }

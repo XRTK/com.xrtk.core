@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
+using XRTK.Services;
 using XRTK.Utilities;
 
 namespace XRTK.SDK.Utilities.Solvers
@@ -221,6 +222,10 @@ namespace XRTK.SDK.Utilities.Solvers
                     break;
                 case TrackedObjectType.MotionControllerRight:
                     Handedness = Handedness.Right;
+                    break;
+                case TrackedObjectType.Body:
+                    Handedness = Handedness.None;
+                    TrackTransform(MixedRealityToolkit.Instance.MixedRealityPlayspace);
                     break;
             }
         }

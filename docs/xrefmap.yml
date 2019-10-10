@@ -7830,6 +7830,51 @@ references:
   fullName.vb: XRTK.EventDatum.Input.InputEventData(Of T).InputData
   nameWithType: InputEventData<T>.InputData
   nameWithType.vb: InputEventData(Of T).InputData
+- uid: XRTK.EventDatum.Input.MixedRealityPointerDragEventData
+  name: MixedRealityPointerDragEventData
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerDragEventData.html
+  commentId: T:XRTK.EventDatum.Input.MixedRealityPointerDragEventData
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerDragEventData
+  nameWithType: MixedRealityPointerDragEventData
+- uid: XRTK.EventDatum.Input.MixedRealityPointerDragEventData.#ctor(UnityEngine.EventSystems.EventSystem)
+  name: MixedRealityPointerDragEventData(EventSystem)
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerDragEventData.html#XRTK_EventDatum_Input_MixedRealityPointerDragEventData__ctor_UnityEngine_EventSystems_EventSystem_
+  commentId: M:XRTK.EventDatum.Input.MixedRealityPointerDragEventData.#ctor(UnityEngine.EventSystems.EventSystem)
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerDragEventData.MixedRealityPointerDragEventData(UnityEngine.EventSystems.EventSystem)
+  nameWithType: MixedRealityPointerDragEventData.MixedRealityPointerDragEventData(EventSystem)
+- uid: XRTK.EventDatum.Input.MixedRealityPointerDragEventData.#ctor*
+  name: MixedRealityPointerDragEventData
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerDragEventData.html#XRTK_EventDatum_Input_MixedRealityPointerDragEventData__ctor_
+  commentId: Overload:XRTK.EventDatum.Input.MixedRealityPointerDragEventData.#ctor
+  isSpec: "True"
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerDragEventData.MixedRealityPointerDragEventData
+  nameWithType: MixedRealityPointerDragEventData.MixedRealityPointerDragEventData
+- uid: XRTK.EventDatum.Input.MixedRealityPointerDragEventData.DragDelta
+  name: DragDelta
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerDragEventData.html#XRTK_EventDatum_Input_MixedRealityPointerDragEventData_DragDelta
+  commentId: P:XRTK.EventDatum.Input.MixedRealityPointerDragEventData.DragDelta
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerDragEventData.DragDelta
+  nameWithType: MixedRealityPointerDragEventData.DragDelta
+- uid: XRTK.EventDatum.Input.MixedRealityPointerDragEventData.DragDelta*
+  name: DragDelta
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerDragEventData.html#XRTK_EventDatum_Input_MixedRealityPointerDragEventData_DragDelta_
+  commentId: Overload:XRTK.EventDatum.Input.MixedRealityPointerDragEventData.DragDelta
+  isSpec: "True"
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerDragEventData.DragDelta
+  nameWithType: MixedRealityPointerDragEventData.DragDelta
+- uid: XRTK.EventDatum.Input.MixedRealityPointerDragEventData.Initialize(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  name: Initialize(IMixedRealityPointer, MixedRealityInputAction, Vector3, IMixedRealityInputSource)
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerDragEventData.html#XRTK_EventDatum_Input_MixedRealityPointerDragEventData_Initialize_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
+  commentId: M:XRTK.EventDatum.Input.MixedRealityPointerDragEventData.Initialize(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerDragEventData.Initialize(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, UnityEngine.Vector3, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  nameWithType: MixedRealityPointerDragEventData.Initialize(IMixedRealityPointer, MixedRealityInputAction, Vector3, IMixedRealityInputSource)
+- uid: XRTK.EventDatum.Input.MixedRealityPointerDragEventData.Initialize*
+  name: Initialize
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerDragEventData.html#XRTK_EventDatum_Input_MixedRealityPointerDragEventData_Initialize_
+  commentId: Overload:XRTK.EventDatum.Input.MixedRealityPointerDragEventData.Initialize
+  isSpec: "True"
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerDragEventData.Initialize
+  nameWithType: MixedRealityPointerDragEventData.Initialize
 - uid: XRTK.EventDatum.Input.MixedRealityPointerEventData
   name: MixedRealityPointerEventData
   href: api/XRTK.EventDatum.Input.MixedRealityPointerEventData.html
@@ -7849,25 +7894,12 @@ references:
   isSpec: "True"
   fullName: XRTK.EventDatum.Input.MixedRealityPointerEventData.MixedRealityPointerEventData
   nameWithType: MixedRealityPointerEventData.MixedRealityPointerEventData
-- uid: XRTK.EventDatum.Input.MixedRealityPointerEventData.Count
-  name: Count
-  href: api/XRTK.EventDatum.Input.MixedRealityPointerEventData.html#XRTK_EventDatum_Input_MixedRealityPointerEventData_Count
-  commentId: P:XRTK.EventDatum.Input.MixedRealityPointerEventData.Count
-  fullName: XRTK.EventDatum.Input.MixedRealityPointerEventData.Count
-  nameWithType: MixedRealityPointerEventData.Count
-- uid: XRTK.EventDatum.Input.MixedRealityPointerEventData.Count*
-  name: Count
-  href: api/XRTK.EventDatum.Input.MixedRealityPointerEventData.html#XRTK_EventDatum_Input_MixedRealityPointerEventData_Count_
-  commentId: Overload:XRTK.EventDatum.Input.MixedRealityPointerEventData.Count
-  isSpec: "True"
-  fullName: XRTK.EventDatum.Input.MixedRealityPointerEventData.Count
-  nameWithType: MixedRealityPointerEventData.Count
-- uid: XRTK.EventDatum.Input.MixedRealityPointerEventData.Initialize(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,System.Int32)
-  name: Initialize(IMixedRealityPointer, MixedRealityInputAction, IMixedRealityInputSource, Int32)
-  href: api/XRTK.EventDatum.Input.MixedRealityPointerEventData.html#XRTK_EventDatum_Input_MixedRealityPointerEventData_Initialize_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_System_Int32_
-  commentId: M:XRTK.EventDatum.Input.MixedRealityPointerEventData.Initialize(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,System.Int32)
-  fullName: XRTK.EventDatum.Input.MixedRealityPointerEventData.Initialize(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, XRTK.Interfaces.InputSystem.IMixedRealityInputSource, System.Int32)
-  nameWithType: MixedRealityPointerEventData.Initialize(IMixedRealityPointer, MixedRealityInputAction, IMixedRealityInputSource, Int32)
+- uid: XRTK.EventDatum.Input.MixedRealityPointerEventData.Initialize(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  name: Initialize(IMixedRealityPointer, MixedRealityInputAction, IMixedRealityInputSource)
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerEventData.html#XRTK_EventDatum_Input_MixedRealityPointerEventData_Initialize_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
+  commentId: M:XRTK.EventDatum.Input.MixedRealityPointerEventData.Initialize(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerEventData.Initialize(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  nameWithType: MixedRealityPointerEventData.Initialize(IMixedRealityPointer, MixedRealityInputAction, IMixedRealityInputSource)
 - uid: XRTK.EventDatum.Input.MixedRealityPointerEventData.Initialize*
   name: Initialize
   href: api/XRTK.EventDatum.Input.MixedRealityPointerEventData.html#XRTK_EventDatum_Input_MixedRealityPointerEventData_Initialize_
@@ -7888,6 +7920,51 @@ references:
   isSpec: "True"
   fullName: XRTK.EventDatum.Input.MixedRealityPointerEventData.Pointer
   nameWithType: MixedRealityPointerEventData.Pointer
+- uid: XRTK.EventDatum.Input.MixedRealityPointerScrollEventData
+  name: MixedRealityPointerScrollEventData
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.html
+  commentId: T:XRTK.EventDatum.Input.MixedRealityPointerScrollEventData
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerScrollEventData
+  nameWithType: MixedRealityPointerScrollEventData
+- uid: XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.#ctor(UnityEngine.EventSystems.EventSystem)
+  name: MixedRealityPointerScrollEventData(EventSystem)
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.html#XRTK_EventDatum_Input_MixedRealityPointerScrollEventData__ctor_UnityEngine_EventSystems_EventSystem_
+  commentId: M:XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.#ctor(UnityEngine.EventSystems.EventSystem)
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.MixedRealityPointerScrollEventData(UnityEngine.EventSystems.EventSystem)
+  nameWithType: MixedRealityPointerScrollEventData.MixedRealityPointerScrollEventData(EventSystem)
+- uid: XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.#ctor*
+  name: MixedRealityPointerScrollEventData
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.html#XRTK_EventDatum_Input_MixedRealityPointerScrollEventData__ctor_
+  commentId: Overload:XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.#ctor
+  isSpec: "True"
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.MixedRealityPointerScrollEventData
+  nameWithType: MixedRealityPointerScrollEventData.MixedRealityPointerScrollEventData
+- uid: XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.Initialize(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector2,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  name: Initialize(IMixedRealityPointer, MixedRealityInputAction, Vector2, IMixedRealityInputSource)
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.html#XRTK_EventDatum_Input_MixedRealityPointerScrollEventData_Initialize_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
+  commentId: M:XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.Initialize(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector2,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.Initialize(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, UnityEngine.Vector2, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  nameWithType: MixedRealityPointerScrollEventData.Initialize(IMixedRealityPointer, MixedRealityInputAction, Vector2, IMixedRealityInputSource)
+- uid: XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.Initialize*
+  name: Initialize
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.html#XRTK_EventDatum_Input_MixedRealityPointerScrollEventData_Initialize_
+  commentId: Overload:XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.Initialize
+  isSpec: "True"
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.Initialize
+  nameWithType: MixedRealityPointerScrollEventData.Initialize
+- uid: XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.ScrollDelta
+  name: ScrollDelta
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.html#XRTK_EventDatum_Input_MixedRealityPointerScrollEventData_ScrollDelta
+  commentId: P:XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.ScrollDelta
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.ScrollDelta
+  nameWithType: MixedRealityPointerScrollEventData.ScrollDelta
+- uid: XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.ScrollDelta*
+  name: ScrollDelta
+  href: api/XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.html#XRTK_EventDatum_Input_MixedRealityPointerScrollEventData_ScrollDelta_
+  commentId: Overload:XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.ScrollDelta
+  isSpec: "True"
+  fullName: XRTK.EventDatum.Input.MixedRealityPointerScrollEventData.ScrollDelta
+  nameWithType: MixedRealityPointerScrollEventData.ScrollDelta
 - uid: XRTK.EventDatum.Input.SourcePoseEventData`1
   name: SourcePoseEventData<T>
   href: api/XRTK.EventDatum.Input.SourcePoseEventData-1.html
@@ -15475,6 +15552,51 @@ references:
   fullName.vb: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler(Of T).OnInputChanged
   nameWithType: IMixedRealityInputHandler<T>.OnInputChanged
   nameWithType.vb: IMixedRealityInputHandler(Of T).OnInputChanged
+- uid: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler
+  name: IMixedRealityPointerDragHandler
+  href: api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.html
+  commentId: T:XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler
+  fullName: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler
+  nameWithType: IMixedRealityPointerDragHandler
+- uid: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDrag(XRTK.EventDatum.Input.MixedRealityPointerDragEventData)
+  name: OnPointerDrag(MixedRealityPointerDragEventData)
+  href: api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.html#XRTK_Interfaces_InputSystem_Handlers_IMixedRealityPointerDragHandler_OnPointerDrag_XRTK_EventDatum_Input_MixedRealityPointerDragEventData_
+  commentId: M:XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDrag(XRTK.EventDatum.Input.MixedRealityPointerDragEventData)
+  fullName: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDrag(XRTK.EventDatum.Input.MixedRealityPointerDragEventData)
+  nameWithType: IMixedRealityPointerDragHandler.OnPointerDrag(MixedRealityPointerDragEventData)
+- uid: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDrag*
+  name: OnPointerDrag
+  href: api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.html#XRTK_Interfaces_InputSystem_Handlers_IMixedRealityPointerDragHandler_OnPointerDrag_
+  commentId: Overload:XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDrag
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDrag
+  nameWithType: IMixedRealityPointerDragHandler.OnPointerDrag
+- uid: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDragBegin(XRTK.EventDatum.Input.MixedRealityPointerDragEventData)
+  name: OnPointerDragBegin(MixedRealityPointerDragEventData)
+  href: api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.html#XRTK_Interfaces_InputSystem_Handlers_IMixedRealityPointerDragHandler_OnPointerDragBegin_XRTK_EventDatum_Input_MixedRealityPointerDragEventData_
+  commentId: M:XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDragBegin(XRTK.EventDatum.Input.MixedRealityPointerDragEventData)
+  fullName: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDragBegin(XRTK.EventDatum.Input.MixedRealityPointerDragEventData)
+  nameWithType: IMixedRealityPointerDragHandler.OnPointerDragBegin(MixedRealityPointerDragEventData)
+- uid: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDragBegin*
+  name: OnPointerDragBegin
+  href: api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.html#XRTK_Interfaces_InputSystem_Handlers_IMixedRealityPointerDragHandler_OnPointerDragBegin_
+  commentId: Overload:XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDragBegin
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDragBegin
+  nameWithType: IMixedRealityPointerDragHandler.OnPointerDragBegin
+- uid: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDragEnd(XRTK.EventDatum.Input.MixedRealityPointerDragEventData)
+  name: OnPointerDragEnd(MixedRealityPointerDragEventData)
+  href: api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.html#XRTK_Interfaces_InputSystem_Handlers_IMixedRealityPointerDragHandler_OnPointerDragEnd_XRTK_EventDatum_Input_MixedRealityPointerDragEventData_
+  commentId: M:XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDragEnd(XRTK.EventDatum.Input.MixedRealityPointerDragEventData)
+  fullName: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDragEnd(XRTK.EventDatum.Input.MixedRealityPointerDragEventData)
+  nameWithType: IMixedRealityPointerDragHandler.OnPointerDragEnd(MixedRealityPointerDragEventData)
+- uid: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDragEnd*
+  name: OnPointerDragEnd
+  href: api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.html#XRTK_Interfaces_InputSystem_Handlers_IMixedRealityPointerDragHandler_OnPointerDragEnd_
+  commentId: Overload:XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDragEnd
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerDragHandler.OnPointerDragEnd
+  nameWithType: IMixedRealityPointerDragHandler.OnPointerDragEnd
 - uid: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerHandler
   name: IMixedRealityPointerHandler
   href: api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerHandler.html
@@ -15520,6 +15642,25 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerHandler.OnPointerUp
   nameWithType: IMixedRealityPointerHandler.OnPointerUp
+- uid: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerScrollHandler
+  name: IMixedRealityPointerScrollHandler
+  href: api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerScrollHandler.html
+  commentId: T:XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerScrollHandler
+  fullName: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerScrollHandler
+  nameWithType: IMixedRealityPointerScrollHandler
+- uid: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerScrollHandler.OnPointerScroll(XRTK.EventDatum.Input.MixedRealityPointerScrollEventData)
+  name: OnPointerScroll(MixedRealityPointerScrollEventData)
+  href: api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerScrollHandler.html#XRTK_Interfaces_InputSystem_Handlers_IMixedRealityPointerScrollHandler_OnPointerScroll_XRTK_EventDatum_Input_MixedRealityPointerScrollEventData_
+  commentId: M:XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerScrollHandler.OnPointerScroll(XRTK.EventDatum.Input.MixedRealityPointerScrollEventData)
+  fullName: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerScrollHandler.OnPointerScroll(XRTK.EventDatum.Input.MixedRealityPointerScrollEventData)
+  nameWithType: IMixedRealityPointerScrollHandler.OnPointerScroll(MixedRealityPointerScrollEventData)
+- uid: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerScrollHandler.OnPointerScroll*
+  name: OnPointerScroll
+  href: api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerScrollHandler.html#XRTK_Interfaces_InputSystem_Handlers_IMixedRealityPointerScrollHandler_OnPointerScroll_
+  commentId: Overload:XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerScrollHandler.OnPointerScroll
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.Handlers.IMixedRealityPointerScrollHandler.OnPointerScroll
+  nameWithType: IMixedRealityPointerScrollHandler.OnPointerScroll
 - uid: XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourcePoseHandler
   name: IMixedRealitySourcePoseHandler
   href: api/XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourcePoseHandler.html
@@ -16461,6 +16602,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.IsInputEnabled
   nameWithType: IMixedRealityInputSystem.IsInputEnabled
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.OnInputEvent
+  name: OnInputEvent
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_OnInputEvent
+  commentId: E:XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.OnInputEvent
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.OnInputEvent
+  nameWithType: IMixedRealityInputSystem.OnInputEvent
 - uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.PopFallbackInputHandler
   name: PopFallbackInputHandler()
   href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_PopFallbackInputHandler
@@ -16799,12 +16946,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaiseOnInputUp
   nameWithType: IMixedRealityInputSystem.RaiseOnInputUp
-- uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerClicked(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.Int32,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
-  name: RaisePointerClicked(IMixedRealityPointer, MixedRealityInputAction, Int32, IMixedRealityInputSource)
-  href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerClicked_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Int32_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
-  commentId: M:XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerClicked(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.Int32,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
-  fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerClicked(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, System.Int32, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
-  nameWithType: IMixedRealityInputSystem.RaisePointerClicked(IMixedRealityPointer, MixedRealityInputAction, Int32, IMixedRealityInputSource)
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerClicked(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  name: RaisePointerClicked(IMixedRealityPointer, MixedRealityInputAction, IMixedRealityInputSource)
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerClicked_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
+  commentId: M:XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerClicked(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerClicked(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  nameWithType: IMixedRealityInputSystem.RaisePointerClicked(IMixedRealityPointer, MixedRealityInputAction, IMixedRealityInputSource)
 - uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerClicked*
   name: RaisePointerClicked
   href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerClicked_
@@ -16825,6 +16972,45 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDown
   nameWithType: IMixedRealityInputSystem.RaisePointerDown
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDrag(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  name: RaisePointerDrag(IMixedRealityPointer, MixedRealityInputAction, Vector3, IMixedRealityInputSource)
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerDrag_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
+  commentId: M:XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDrag(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDrag(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, UnityEngine.Vector3, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  nameWithType: IMixedRealityInputSystem.RaisePointerDrag(IMixedRealityPointer, MixedRealityInputAction, Vector3, IMixedRealityInputSource)
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDrag*
+  name: RaisePointerDrag
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerDrag_
+  commentId: Overload:XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDrag
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDrag
+  nameWithType: IMixedRealityInputSystem.RaisePointerDrag
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDragBegin(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  name: RaisePointerDragBegin(IMixedRealityPointer, MixedRealityInputAction, Vector3, IMixedRealityInputSource)
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerDragBegin_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
+  commentId: M:XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDragBegin(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDragBegin(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, UnityEngine.Vector3, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  nameWithType: IMixedRealityInputSystem.RaisePointerDragBegin(IMixedRealityPointer, MixedRealityInputAction, Vector3, IMixedRealityInputSource)
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDragBegin*
+  name: RaisePointerDragBegin
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerDragBegin_
+  commentId: Overload:XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDragBegin
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDragBegin
+  nameWithType: IMixedRealityInputSystem.RaisePointerDragBegin
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDragEnd(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  name: RaisePointerDragEnd(IMixedRealityPointer, MixedRealityInputAction, Vector3, IMixedRealityInputSource)
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerDragEnd_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
+  commentId: M:XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDragEnd(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDragEnd(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, UnityEngine.Vector3, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  nameWithType: IMixedRealityInputSystem.RaisePointerDragEnd(IMixedRealityPointer, MixedRealityInputAction, Vector3, IMixedRealityInputSource)
+- uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDragEnd*
+  name: RaisePointerDragEnd
+  href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerDragEnd_
+  commentId: Overload:XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDragEnd
+  isSpec: "True"
+  fullName: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerDragEnd
+  nameWithType: IMixedRealityInputSystem.RaisePointerDragEnd
 - uid: XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.RaisePointerScroll(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector2,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
   name: RaisePointerScroll(IMixedRealityPointer, MixedRealityInputAction, Vector2, IMixedRealityInputSource)
   href: api/XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html#XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_RaisePointerScroll_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
@@ -26956,6 +27142,19 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.UnsnapDistance
   nameWithType: ManipulationHandler.UnsnapDistance
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.UseGrabOffset
+  name: UseGrabOffset
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_UseGrabOffset
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.UseGrabOffset
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.UseGrabOffset
+  nameWithType: ManipulationHandler.UseGrabOffset
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.UseGrabOffset*
+  name: UseGrabOffset
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_UseGrabOffset_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.UseGrabOffset
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.UseGrabOffset
+  nameWithType: ManipulationHandler.UseGrabOffset
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.UseHold
   name: UseHold
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_UseHold
@@ -35420,6 +35619,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.IsInputEnabled
   nameWithType: MixedRealityInputSystem.IsInputEnabled
+- uid: XRTK.Services.InputSystem.MixedRealityInputSystem.OnInputEvent
+  name: OnInputEvent
+  href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_OnInputEvent
+  commentId: E:XRTK.Services.InputSystem.MixedRealityInputSystem.OnInputEvent
+  fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.OnInputEvent
+  nameWithType: MixedRealityInputSystem.OnInputEvent
 - uid: XRTK.Services.InputSystem.MixedRealityInputSystem.PopFallbackInputHandler
   name: PopFallbackInputHandler()
   href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_PopFallbackInputHandler
@@ -35771,12 +35976,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.RaiseOnInputUp
   nameWithType: MixedRealityInputSystem.RaiseOnInputUp
-- uid: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerClicked(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.Int32,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
-  name: RaisePointerClicked(IMixedRealityPointer, MixedRealityInputAction, Int32, IMixedRealityInputSource)
-  href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_RaisePointerClicked_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_System_Int32_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
-  commentId: M:XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerClicked(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,System.Int32,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
-  fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerClicked(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, System.Int32, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
-  nameWithType: MixedRealityInputSystem.RaisePointerClicked(IMixedRealityPointer, MixedRealityInputAction, Int32, IMixedRealityInputSource)
+- uid: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerClicked(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  name: RaisePointerClicked(IMixedRealityPointer, MixedRealityInputAction, IMixedRealityInputSource)
+  href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_RaisePointerClicked_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
+  commentId: M:XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerClicked(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerClicked(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  nameWithType: MixedRealityInputSystem.RaisePointerClicked(IMixedRealityPointer, MixedRealityInputAction, IMixedRealityInputSource)
 - uid: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerClicked*
   name: RaisePointerClicked
   href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_RaisePointerClicked_
@@ -35797,6 +36002,45 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDown
   nameWithType: MixedRealityInputSystem.RaisePointerDown
+- uid: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDrag(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  name: RaisePointerDrag(IMixedRealityPointer, MixedRealityInputAction, Vector3, IMixedRealityInputSource)
+  href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_RaisePointerDrag_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
+  commentId: M:XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDrag(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDrag(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, UnityEngine.Vector3, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  nameWithType: MixedRealityInputSystem.RaisePointerDrag(IMixedRealityPointer, MixedRealityInputAction, Vector3, IMixedRealityInputSource)
+- uid: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDrag*
+  name: RaisePointerDrag
+  href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_RaisePointerDrag_
+  commentId: Overload:XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDrag
+  isSpec: "True"
+  fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDrag
+  nameWithType: MixedRealityInputSystem.RaisePointerDrag
+- uid: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDragBegin(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  name: RaisePointerDragBegin(IMixedRealityPointer, MixedRealityInputAction, Vector3, IMixedRealityInputSource)
+  href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_RaisePointerDragBegin_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
+  commentId: M:XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDragBegin(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDragBegin(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, UnityEngine.Vector3, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  nameWithType: MixedRealityInputSystem.RaisePointerDragBegin(IMixedRealityPointer, MixedRealityInputAction, Vector3, IMixedRealityInputSource)
+- uid: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDragBegin*
+  name: RaisePointerDragBegin
+  href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_RaisePointerDragBegin_
+  commentId: Overload:XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDragBegin
+  isSpec: "True"
+  fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDragBegin
+  nameWithType: MixedRealityInputSystem.RaisePointerDragBegin
+- uid: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDragEnd(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  name: RaisePointerDragEnd(IMixedRealityPointer, MixedRealityInputAction, Vector3, IMixedRealityInputSource)
+  href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_RaisePointerDragEnd_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector3_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_
+  commentId: M:XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDragEnd(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector3,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDragEnd(XRTK.Interfaces.InputSystem.IMixedRealityPointer, XRTK.Definitions.InputSystem.MixedRealityInputAction, UnityEngine.Vector3, XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
+  nameWithType: MixedRealityInputSystem.RaisePointerDragEnd(IMixedRealityPointer, MixedRealityInputAction, Vector3, IMixedRealityInputSource)
+- uid: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDragEnd*
+  name: RaisePointerDragEnd
+  href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_RaisePointerDragEnd_
+  commentId: Overload:XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDragEnd
+  isSpec: "True"
+  fullName: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerDragEnd
+  nameWithType: MixedRealityInputSystem.RaisePointerDragEnd
 - uid: XRTK.Services.InputSystem.MixedRealityInputSystem.RaisePointerScroll(XRTK.Interfaces.InputSystem.IMixedRealityPointer,XRTK.Definitions.InputSystem.MixedRealityInputAction,UnityEngine.Vector2,XRTK.Interfaces.InputSystem.IMixedRealityInputSource)
   name: RaisePointerScroll(IMixedRealityPointer, MixedRealityInputAction, Vector2, IMixedRealityInputSource)
   href: api/XRTK.Services.InputSystem.MixedRealityInputSystem.html#XRTK_Services_InputSystem_MixedRealityInputSystem_RaisePointerScroll_XRTK_Interfaces_InputSystem_IMixedRealityPointer_XRTK_Definitions_InputSystem_MixedRealityInputAction_UnityEngine_Vector2_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_

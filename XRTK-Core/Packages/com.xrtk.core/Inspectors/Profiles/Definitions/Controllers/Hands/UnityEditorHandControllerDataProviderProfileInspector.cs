@@ -9,7 +9,7 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
     [CustomEditor(typeof(UnityEditorHandControllerDataProviderProfile))]
     public class UnityEditorHandControllerDataProviderProfileInspector : HandControllerDataProviderProfileInspector
     {
-        private SerializedProperty simulateHandTracking;
+        private SerializedProperty isSimulateHandTrackingEnabled;
 
         private SerializedProperty toggleLeftHandKey;
         private SerializedProperty toggleRightHandKey;
@@ -39,7 +39,7 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
         {
             base.OnEnable();
 
-            simulateHandTracking = serializedObject.FindProperty("simulateHandTracking");
+            isSimulateHandTrackingEnabled = serializedObject.FindProperty("isSimulateHandTrackingEnabled");
 
             toggleLeftHandKey = serializedObject.FindProperty("toggleLeftHandKey");
             toggleRightHandKey = serializedObject.FindProperty("toggleRightHandKey");
@@ -72,7 +72,7 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
 
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(simulateHandTracking);
+            EditorGUILayout.PropertyField(isSimulateHandTrackingEnabled);
             EditorGUILayout.Space();
 
             EditorGUILayout.BeginVertical("Label");

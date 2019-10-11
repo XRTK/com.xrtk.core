@@ -8,7 +8,7 @@ using XRTK.Interfaces.InputSystem;
 namespace XRTK.EventDatum.Input
 {
     /// <summary>
-    /// Describes an Input Event that involves a tap, click, or touch.
+    /// Describes a pointer event that involves a tap, click, or touch.
     /// </summary>
     public class MixedRealityPointerEventData : BaseInputEventData
     {
@@ -16,11 +16,6 @@ namespace XRTK.EventDatum.Input
         /// Pointer for the Input Event
         /// </summary>
         public IMixedRealityPointer Pointer { get; private set; }
-
-        /// <summary>
-        /// Number of Clicks, Taps, or Presses that triggered the event.
-        /// </summary>
-        public int Count { get; private set; }
 
         /// <inheritdoc />
         public MixedRealityPointerEventData(EventSystem eventSystem) : base(eventSystem) { }
@@ -31,12 +26,10 @@ namespace XRTK.EventDatum.Input
         /// <param name="pointer"></param>
         /// <param name="inputAction"></param>
         /// <param name="inputSource"></param>
-        /// <param name="count"></param>
-        public void Initialize(IMixedRealityPointer pointer, MixedRealityInputAction inputAction, IMixedRealityInputSource inputSource = null, int count = 0)
+        public void Initialize(IMixedRealityPointer pointer, MixedRealityInputAction inputAction, IMixedRealityInputSource inputSource = null)
         {
             BaseInitialize(inputSource ?? pointer.InputSourceParent, inputAction);
             Pointer = pointer;
-            Count = count;
         }
     }
 }

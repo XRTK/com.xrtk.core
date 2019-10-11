@@ -53,22 +53,22 @@ namespace XRTK.Definitions.InputSystem.Simulation
         public float HandHideTimeout => handHideTimeout;
 
         [SerializeField]
-        [Tooltip("Key to manipulate the left hand")]
-        private KeyCode leftHandManipulationKey = KeyCode.LeftShift;
+        [Tooltip("Key to simulate tracking of the left hand")]
+        private KeyCode leftHandTrackedKey = KeyCode.LeftShift;
 
         /// <summary>
-        /// Key to manipulate the left hand
+        /// Key to simulate tracking of the left hand.
         /// </summary>
-        public KeyCode LeftHandManipulationKey => leftHandManipulationKey;
+        public KeyCode LeftHandTrackedKey => leftHandTrackedKey;
 
         [SerializeField]
-        [Tooltip("Key to manipulate the right hand")]
-        private KeyCode rightHandManipulationKey = KeyCode.Space;
+        [Tooltip("Key to simulate tracking of the right hand")]
+        private KeyCode rightHandTrackedKey = KeyCode.Space;
 
         /// <summary>
-        /// Key to manipulate the right hand
+        /// Key to simulate tracking of the right hand.
         /// </summary>
-        public KeyCode RightHandManipulationKey => rightHandManipulationKey;
+        public KeyCode RightHandTrackedKey => rightHandTrackedKey;
 
         [Header("Hand Pose Settings")]
 

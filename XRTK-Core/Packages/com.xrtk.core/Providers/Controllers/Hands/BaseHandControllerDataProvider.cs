@@ -97,7 +97,7 @@ namespace XRTK.Providers.Controllers.Hands
             leftHand = null;
             rightHand = null;
 
-            foreach (var detectedController in MixedRealityToolkit.InputSystem.DetectedControllers)
+            foreach (IMixedRealityController detectedController in MixedRealityToolkit.InputSystem.DetectedControllers)
             {
                 if (detectedController is BaseHandController hand)
                 {

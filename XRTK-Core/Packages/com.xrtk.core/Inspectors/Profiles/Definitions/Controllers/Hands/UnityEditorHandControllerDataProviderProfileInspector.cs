@@ -14,8 +14,8 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
         private SerializedProperty toggleLeftHandKey;
         private SerializedProperty toggleRightHandKey;
         private SerializedProperty handHideTimeout;
-        private SerializedProperty leftHandManipulationKey;
-        private SerializedProperty rightHandManipulationKey;
+        private SerializedProperty leftHandTrackedKey;
+        private SerializedProperty rightHandTrackedKey;
 
         private SerializedProperty poseDefinitions;
         private SerializedProperty handGestureAnimationSpeed;
@@ -44,8 +44,8 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
             toggleLeftHandKey = serializedObject.FindProperty("toggleLeftHandKey");
             toggleRightHandKey = serializedObject.FindProperty("toggleRightHandKey");
             handHideTimeout = serializedObject.FindProperty("handHideTimeout");
-            leftHandManipulationKey = serializedObject.FindProperty("leftHandManipulationKey");
-            rightHandManipulationKey = serializedObject.FindProperty("rightHandManipulationKey");
+            leftHandTrackedKey = serializedObject.FindProperty("leftHandTrackedKey");
+            rightHandTrackedKey = serializedObject.FindProperty("rightHandTrackedKey");
 
             poseDefinitions = serializedObject.FindProperty("poseDefinitions");
             handGestureAnimationSpeed = serializedObject.FindProperty("handGestureAnimationSpeed");
@@ -80,8 +80,8 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
             EditorGUILayout.PropertyField(toggleLeftHandKey);
             EditorGUILayout.PropertyField(toggleRightHandKey);
             EditorGUILayout.PropertyField(handHideTimeout);
-            EditorGUILayout.PropertyField(leftHandManipulationKey);
-            EditorGUILayout.PropertyField(rightHandManipulationKey);
+            EditorGUILayout.PropertyField(leftHandTrackedKey);
+            EditorGUILayout.PropertyField(rightHandTrackedKey);
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(poseDefinitions, true);

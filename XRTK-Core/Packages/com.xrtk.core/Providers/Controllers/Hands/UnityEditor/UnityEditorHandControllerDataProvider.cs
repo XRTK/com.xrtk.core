@@ -12,41 +12,31 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
     {
         private UnityEditorHandControllerDataProviderProfile profile;
         private long lastHandControllerUpdateTimeStamp = 0;
-
-        /// <summary>
-        /// If true then keyboard and mouse input are used to simulate hands.
-        /// </summary>
-        public bool UserInputEnabled { get; private set; } = true;
-
-        private UnityEditorHandPoseData defaultPose;
-
-        /// <summary>
-        /// If true then the hand is always visible, regardless of simulating.
-        /// </summary>
-        public bool IsAlwaysVisibleLeft = false;
-
-        /// <summary>
-        /// If true then the hand is always visible, regardless of simulating.
-        /// </summary>
-        public bool IsAlwaysVisibleRight = false;
+        private Vector3? lastMousePosition = null;
+        private UnityEditorHandPoseData defaultHandPose;
+        private long lastSimulatedTimeStampLeftHand = 0;
+        private bool isTrackingLeftHand = false;
+        private long lastSimulatedTimeStampRightHand = 0;
+        private bool isTrackingRightHand = false;
 
         private UnityEditorHandState leftHandState;
         private UnityEditorHandData leftHandData;
         private UnityEditorHandState rightHandState;
         private UnityEditorHandData rightHandData;
 
-        // If true then hands are controlled by user input
-        private bool isSimulatingLeft = false;
-        private bool isSimulatingRight = false;
-        // Last frame's mouse position for computing delta
-        private Vector3? lastMousePosition = null;
-        // Last timestamp when hands were tracked
-        private long lastSimulatedTimestampLeft = 0;
-        private long lastSimulatedTimestampRight = 0;
+        /// <summary>
+        /// If true then the hand is always visible, regardless of simulating.
+        /// </summary>
+        private bool IsAlwaysVisibleLeft { get; set; } = false;
+
+        /// <summary>
+        /// If true then the hand is always visible, regardless of simulating.
+        /// </summary>
+        private bool IsAlwaysVisibleRight { get; set; } = false;
+
         // Cached delegates for hand joint generation
         private UnityEditorHandData.HandJointDataGenerator generatorLeft;
         private UnityEditorHandData.HandJointDataGenerator generatorRight;
-        ///////////////////
 
         public UnityEditorHandControllerDataProvider(string name, uint priority, UnityEditorHandControllerDataProviderProfile profile)
             : base(name, priority, profile)
@@ -72,9 +62,9 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
                 UnityEditorHandPoseData pose = profile.PoseDefinitions[i];
                 if (pose.IsDefault)
                 {
-                    defaultPose = pose;
-                    leftHandState.GestureName = defaultPose.GestureName;
-                    rightHandState.GestureName = defaultPose.GestureName;
+                    defaultHandPose = pose;
+                    leftHandState.GestureName = defaultHandPose.GestureName;
+                    rightHandState.GestureName = defaultHandPose.GestureName;
                     break;
                 }
             }
@@ -93,7 +83,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         {
             base.Update();
 
-            if (profile.IsSimulateHandTrackingEnabled && UserInputEnabled)
+            if (profile.IsSimulateHandTrackingEnabled)
             {
                 UpdateUnityEditorHandData(leftHandData, rightHandData);
             }
@@ -150,8 +140,8 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
                 generatorRight = rightHandState.FillCurrentFrame;
             }
 
-            handDataChanged |= handDataLeft.UpdateWithTimestamp(timestamp, leftHandState.IsTracked, leftHandState.IsPinching, generatorLeft);
-            handDataChanged |= handDataRight.UpdateWithTimestamp(timestamp, rightHandState.IsTracked, rightHandState.IsPinching, generatorRight);
+            handDataChanged |= handDataLeft.UpdateWithTimeStamp(timestamp, leftHandState.IsTracked, leftHandState.IsPinching, generatorLeft);
+            handDataChanged |= handDataRight.UpdateWithTimeStamp(timestamp, rightHandState.IsTracked, rightHandState.IsPinching, generatorRight);
 
             return handDataChanged;
         }
@@ -171,55 +161,26 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
                 IsAlwaysVisibleRight = !IsAlwaysVisibleRight;
             }
 
-            if (Input.GetKeyDown(profile.LeftHandManipulationKey))
+            if (Input.GetKeyDown(profile.LeftHandTrackedKey))
             {
-                isSimulatingLeft = true;
+                isTrackingLeftHand = true;
             }
-            if (Input.GetKeyUp(profile.LeftHandManipulationKey))
+            if (Input.GetKeyUp(profile.LeftHandTrackedKey))
             {
-                isSimulatingLeft = false;
-            }
-
-            if (Input.GetKeyDown(profile.RightHandManipulationKey))
-            {
-                isSimulatingRight = true;
-            }
-            if (Input.GetKeyUp(profile.RightHandManipulationKey))
-            {
-                isSimulatingRight = false;
+                isTrackingLeftHand = false;
             }
 
-            Vector3 mouseDelta = (lastMousePosition.HasValue ? Input.mousePosition - lastMousePosition.Value : Vector3.zero);
-            mouseDelta.z += Input.GetAxis("Mouse ScrollWheel") * profile.HandDepthMultiplier;
-            float rotationDelta = profile.HandRotationSpeed * Time.deltaTime;
-            Vector3 rotationDeltaEulerAngles = Vector3.zero;
-            if (Input.GetKey(profile.YawHandCCWKey))
+            if (Input.GetKeyDown(profile.RightHandTrackedKey))
             {
-                rotationDeltaEulerAngles.y = -rotationDelta;
+                isTrackingRightHand = true;
             }
-            if (Input.GetKey(profile.YawHandCWKey))
+            if (Input.GetKeyUp(profile.RightHandTrackedKey))
             {
-                rotationDeltaEulerAngles.y = rotationDelta;
-            }
-            if (Input.GetKey(profile.PitchHandCCWKey))
-            {
-                rotationDeltaEulerAngles.x = rotationDelta;
-            }
-            if (Input.GetKey(profile.PitchHandCWKey))
-            {
-                rotationDeltaEulerAngles.x = -rotationDelta;
-            }
-            if (Input.GetKey(profile.RollHandCCWKey))
-            {
-                rotationDeltaEulerAngles.z = rotationDelta;
-            }
-            if (Input.GetKey(profile.RollHandCWKey))
-            {
-                rotationDeltaEulerAngles.z = -rotationDelta;
+                isTrackingRightHand = false;
             }
 
-            SimulateHandInput(ref lastSimulatedTimestampLeft, leftHandState, isSimulatingLeft, IsAlwaysVisibleLeft, mouseDelta, rotationDeltaEulerAngles);
-            SimulateHandInput(ref lastSimulatedTimestampRight, rightHandState, isSimulatingRight, IsAlwaysVisibleRight, mouseDelta, rotationDeltaEulerAngles);
+            SimulateHand(ref lastSimulatedTimeStampLeftHand, leftHandState, isTrackingLeftHand, IsAlwaysVisibleLeft, GetHandDepthDelta(), GetHandRotationDelta());
+            SimulateHand(ref lastSimulatedTimeStampRightHand, rightHandState, isTrackingRightHand, IsAlwaysVisibleRight, GetHandDepthDelta(), GetHandRotationDelta());
 
             float gestureAnimDelta = profile.HandGestureAnimationSpeed * Time.deltaTime;
             leftHandState.GestureBlending += gestureAnimDelta;
@@ -228,8 +189,8 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
             lastMousePosition = Input.mousePosition;
         }
 
-        private void SimulateHandInput(
-            ref long lastSimulatedTimestamp,
+        private void SimulateHand(
+            ref long lastSimulatedTimeStamp,
             UnityEditorHandState state,
             bool isSimulating,
             bool isAlwaysVisible,
@@ -256,7 +217,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
                 else
                 {
                     // Enable gesture while mouse button is pressed
-                    state.GestureName = SelectGesture();
+                    state.GestureName = SelectHandPose();
                 }
             }
 
@@ -268,11 +229,11 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
             if (enableTracking)
             {
                 state.IsTracked = true;
-                lastSimulatedTimestamp = currentTime.Ticks;
+                lastSimulatedTimeStamp = currentTime.Ticks;
             }
             else
             {
-                float timeSinceTracking = (float)currentTime.Subtract(new DateTime(lastSimulatedTimestamp)).TotalSeconds;
+                float timeSinceTracking = (float)currentTime.Subtract(new DateTime(lastSimulatedTimeStamp)).TotalSeconds;
                 if (timeSinceTracking > profile.HandHideTimeout)
                 {
                     state.IsTracked = false;
@@ -280,7 +241,59 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
             }
         }
 
-        private string SelectGesture()
+        /// <summary>
+        /// Gets a simulated Yaw, Pitch and Roll delta for the current frame.
+        /// </summary>
+        /// <returns>Updated hand rotation angles.</returns>
+        private Vector3 GetHandRotationDelta()
+        {
+            float rotationDelta = profile.HandRotationSpeed * Time.deltaTime;
+            Vector3 rotationDeltaEulerAngles = Vector3.zero;
+
+            if (Input.GetKey(profile.YawHandCCWKey))
+            {
+                rotationDeltaEulerAngles.y = -rotationDelta;
+            }
+            if (Input.GetKey(profile.YawHandCWKey))
+            {
+                rotationDeltaEulerAngles.y = rotationDelta;
+            }
+            if (Input.GetKey(profile.PitchHandCCWKey))
+            {
+                rotationDeltaEulerAngles.x = rotationDelta;
+            }
+            if (Input.GetKey(profile.PitchHandCWKey))
+            {
+                rotationDeltaEulerAngles.x = -rotationDelta;
+            }
+            if (Input.GetKey(profile.RollHandCCWKey))
+            {
+                rotationDeltaEulerAngles.z = rotationDelta;
+            }
+            if (Input.GetKey(profile.RollHandCWKey))
+            {
+                rotationDeltaEulerAngles.z = -rotationDelta;
+            }
+
+            return rotationDeltaEulerAngles;
+        }
+
+        /// <summary>
+        /// Gets a simulated depth tracking (hands closer / further from tracking device) update.
+        /// </summary>
+        /// <returns>Depth position delta.</returns>
+        private Vector3 GetHandDepthDelta()
+        {
+            Vector3 mouseDelta = (lastMousePosition.HasValue ? Input.mousePosition - lastMousePosition.Value : Vector3.zero);
+            mouseDelta.z += Input.GetAxis("Mouse ScrollWheel") * profile.HandDepthMultiplier;
+            return mouseDelta;
+        }
+
+        /// <summary>
+        /// Selects a hand pose to simulate.
+        /// </summary>
+        /// <returns>Default hand pose if no other requested by user input.</returns>
+        private string SelectHandPose()
         {
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
             {
@@ -291,7 +304,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
                 }
             }
 
-            return defaultPose.GestureName;
+            return defaultHandPose.GestureName;
         }
 
         private string ToggleGesture(string gestureName)
@@ -311,7 +324,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
             //}
 
             // 'Default' will not change the gesture
-            return defaultPose.GestureName;
+            return defaultHandPose.GestureName;
         }
     }
 }

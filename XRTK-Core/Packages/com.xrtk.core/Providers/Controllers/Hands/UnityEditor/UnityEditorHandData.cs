@@ -20,10 +20,10 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         {
             // TODO: DateTime.UtcNow can be quite imprecise, better use Stopwatch.GetTimestamp
             // https://stackoverflow.com/questions/2143140/c-sharp-datetime-now-precision
-            return UpdateWithTimestamp(DateTime.UtcNow.Ticks, isTrackedNew, isPinchingNew, generator);
+            return UpdateWithTimeStamp(DateTime.UtcNow.Ticks, isTrackedNew, isPinchingNew, generator);
         }
 
-        public bool UpdateWithTimestamp(long timestampNew, bool isTrackedNew, bool isPinchingNew, HandJointDataGenerator generator)
+        public bool UpdateWithTimeStamp(long timestampNew, bool isTrackedNew, bool isPinchingNew, HandJointDataGenerator generator)
         {
             bool handDataChanged = false;
 

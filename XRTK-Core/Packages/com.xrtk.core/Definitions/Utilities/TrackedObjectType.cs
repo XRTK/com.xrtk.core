@@ -10,13 +10,13 @@ namespace XRTK.Definitions.Utilities
         /// </summary>
         Head = 0,
         /// <summary>
-        /// Calculates position and orientation from the left motion-tracked controller.
+        /// Calculates position and orientation from the left hand or tracked controller.
         /// </summary>
-        MotionControllerLeft,
+        LeftHandOrController,
         /// <summary>
-        /// Calculates position and orientation from the right motion-tracked controller.
+        /// Calculates position and orientation from the right hand or tracked controller.
         /// </summary>
-        MotionControllerRight,
+        RightHandOrController,
         /// <summary>
         /// Calculates position and orientation from the playspace.
         /// </summary>

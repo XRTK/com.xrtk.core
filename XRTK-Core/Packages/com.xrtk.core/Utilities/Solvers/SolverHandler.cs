@@ -217,10 +217,10 @@ namespace XRTK.SDK.Utilities.Solvers
                     Handedness = Handedness.None;
                     TrackTransform(CameraCache.Main.transform);
                     break;
-                case TrackedObjectType.MotionControllerLeft:
+                case TrackedObjectType.LeftHandOrController:
                     Handedness = Handedness.Left;
                     break;
-                case TrackedObjectType.MotionControllerRight:
+                case TrackedObjectType.RightHandOrController:
                     Handedness = Handedness.Right;
                     break;
                 case TrackedObjectType.Body:

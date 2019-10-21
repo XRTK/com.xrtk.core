@@ -220,7 +220,7 @@ namespace XRTK.Services.Teleportation
         {
             isProcessingTeleportRequest = true;
 
-            var cameraParent = MixedRealityToolkit.Instance.MixedRealityPlayspace;
+            var cameraParent = MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform;
 
             targetRotation = Vector3.zero;
             targetRotation.y = eventData.Pointer.PointerOrientation;

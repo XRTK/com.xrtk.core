@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Inspectors.Utilities;
+using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -21,6 +22,9 @@ namespace XRTK.Inspectors.Profiles
         private SerializedProperty transparentClearFlags;
         private SerializedProperty transparentBackgroundColor;
         private SerializedProperty transparentQualityLevel;
+
+        private SerializedProperty cameraRigType;
+        private SerializedProperty bodyAdjustmentAngle;
 
         private readonly GUIContent nearClipTitle = new GUIContent("Near Clip");
         private readonly GUIContent clearFlagsTitle = new GUIContent("Clear Flags");
@@ -39,6 +43,9 @@ namespace XRTK.Inspectors.Profiles
             transparentClearFlags = serializedObject.FindProperty("cameraClearFlagsTransparentDisplay");
             transparentBackgroundColor = serializedObject.FindProperty("backgroundColorTransparentDisplay");
             transparentQualityLevel = serializedObject.FindProperty("transparentQualityLevel");
+
+            cameraRigType = serializedObject.FindProperty("cameraRigType");
+            bodyAdjustmentAngle = serializedObject.FindProperty("bodyAdjustmentAngle");
         }
 
         public override void OnInspectorGUI()
@@ -59,9 +66,13 @@ namespace XRTK.Inspectors.Profiles
 
             serializedObject.Update();
 
+            EditorGUI.BeginChangeCheck();
+
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Global Settings:", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(isCameraPersistent);
+            EditorGUILayout.PropertyField(cameraRigType);
+            EditorGUILayout.PropertyField(bodyAdjustmentAngle);
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Opaque Display Settings:", EditorStyles.boldLabel);
@@ -88,6 +99,11 @@ namespace XRTK.Inspectors.Profiles
             transparentQualityLevel.intValue = EditorGUILayout.Popup("Quality Setting", transparentQualityLevel.intValue, QualitySettings.names);
 
             serializedObject.ApplyModifiedProperties();
+
+            if (MixedRealityToolkit.IsInitialized && EditorGUI.EndChangeCheck())
+            {
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
+            }
         }
     }
 }

@@ -225,7 +225,7 @@ namespace XRTK.SDK.Utilities.Solvers
                     break;
                 case TrackedObjectType.Body:
                     Handedness = Handedness.None;
-                    TrackTransform(MixedRealityToolkit.Instance.MixedRealityPlayspace);
+                    TrackTransform(MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform);
                     break;
             }
         }

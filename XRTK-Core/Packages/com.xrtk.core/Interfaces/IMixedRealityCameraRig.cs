@@ -26,7 +26,7 @@ namespace XRTK.Interfaces
         Camera PlayerCamera { get; }
 
         /// <summary>
-        /// The player's body transform. This <see cref="Transform"/> is synced to the player's head X & Z values
+        /// The player's body transform. This <see cref="Transform"/> is synced to the player's head X &amp; Z values
         /// and the <see cref="CameraTransform"/>'s Y value.
         /// </summary>
         Transform BodyTransform { get; }

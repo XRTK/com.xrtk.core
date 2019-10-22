@@ -283,10 +283,7 @@ namespace XRTK.Services
 
                 if (HasActiveProfile)
                 {
-#if UNITY_EDITOR
-                    UnityEditor.EditorApplication.delayCall += () =>
-#endif // UNITY_EDITOR
-                        InitializeServiceLocator();
+                    InitializeServiceLocator();
                 }
             }
         }
@@ -300,6 +297,11 @@ namespace XRTK.Services
         private static bool isInitializing = false;
 
         private static bool isApplicationQuitting = false;
+
+        /// <summary>
+        /// Flag stating if the application is currently attempting to quit.
+        /// </summary>
+        public static bool IsApplicationQuitting => isApplicationQuitting;
 
         /// <summary>
         /// Expose an assertion whether the MixedRealityToolkit class is initialized.
@@ -1499,7 +1501,7 @@ namespace XRTK.Services
         public static bool TryGetService<T>(out T service, bool showLogs = true) where T : IMixedRealityService
         {
             service = GetService<T>(showLogs);
-            return service == null ? false : true;
+            return service != null;
         }
 
         /// <summary>
@@ -1525,7 +1527,7 @@ namespace XRTK.Services
         public static bool TryGetService<T>(string serviceName, out T service, bool showLogs = true) where T : IMixedRealityService
         {
             service = (T)GetService(typeof(T), serviceName, showLogs);
-            return service == null ? false : true;
+            return service != null;
         }
 
         /// <summary>

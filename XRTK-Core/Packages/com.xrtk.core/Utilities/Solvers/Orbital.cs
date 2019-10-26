@@ -4,6 +4,7 @@
 using XRTK.Definitions.Utilities;
 using XRTK.Utilities;
 using UnityEngine;
+using XRTK.Services;
 
 namespace XRTK.SDK.Utilities.Solvers
 {
@@ -87,16 +88,20 @@ namespace XRTK.SDK.Utilities.Solvers
             set => tetherAngleSteps = Mathf.Clamp(value, 2, 24);
         }
 
+        /// <inheritdoc />
         public override void SolverUpdate()
         {
-            Vector3 desiredPos = SolverHandler.TransformTarget != null ? SolverHandler.TransformTarget.position : Vector3.zero;
+            var desiredPos = SolverHandler.TransformTarget != null
+                ? SolverHandler.TransformTarget.position
+                : Vector3.zero;
+            var targetRot = SolverHandler.TransformTarget != null
+                ? SolverHandler.TransformTarget.rotation
+                : Quaternion.Euler(0, 1, 0);
+            var yawOnlyRot = Quaternion.Euler(0, targetRot.eulerAngles.y, 0);
+            desiredPos += (SnapToTetherAngleSteps(targetRot) * LocalOffset);
+            desiredPos += (SnapToTetherAngleSteps(yawOnlyRot) * WorldOffset);
 
-            Quaternion targetRot = SolverHandler.TransformTarget != null ? SolverHandler.TransformTarget.rotation : Quaternion.Euler(0, 1, 0);
-            Quaternion yawOnlyRot = Quaternion.Euler(0, targetRot.eulerAngles.y, 0);
-            desiredPos = desiredPos + (SnapToTetherAngleSteps(targetRot) * LocalOffset);
-            desiredPos = desiredPos + (SnapToTetherAngleSteps(yawOnlyRot) * WorldOffset);
-
-            Quaternion desiredRot = CalculateDesiredRotation(desiredPos);
+            var desiredRot = CalculateDesiredRotation(desiredPos);
 
             GoalPosition = desiredPos;
             GoalRotation = desiredRot;
@@ -113,38 +118,46 @@ namespace XRTK.SDK.Utilities.Solvers
                 return rotationToSnap;
             }
 
-            float stepAngle = 360f / tetherAngleSteps;
-            int numberOfSteps = Mathf.RoundToInt(SolverHandler.TransformTarget.transform.eulerAngles.y / stepAngle);
+            var stepAngle = 360f / tetherAngleSteps;
+            var numberOfSteps = Mathf.RoundToInt(SolverHandler.TransformTarget.transform.eulerAngles.y / stepAngle);
 
-            float newAngle = stepAngle * numberOfSteps;
+            var newAngle = stepAngle * numberOfSteps;
 
             return Quaternion.Euler(rotationToSnap.eulerAngles.x, newAngle, rotationToSnap.eulerAngles.z);
         }
 
         private Quaternion CalculateDesiredRotation(Vector3 desiredPos)
         {
-            Quaternion desiredRot = Quaternion.identity;
+            var desiredRot = Quaternion.identity;
 
             switch (orientationType)
             {
                 case SolverOrientationType.YawOnly:
-                    float targetYRotation = SolverHandler.TransformTarget != null ? SolverHandler.TransformTarget.eulerAngles.y : 0.0f;
+                    var targetYRotation = SolverHandler.TransformTarget != null
+                        ? SolverHandler.TransformTarget.eulerAngles.y
+                        : 0.0f;
                     desiredRot = Quaternion.Euler(0f, targetYRotation, 0f);
                     break;
                 case SolverOrientationType.Unmodified:
                     desiredRot = transform.rotation;
                     break;
                 case SolverOrientationType.CameraAligned:
-                    desiredRot = CameraCache.Main.transform.rotation;
+                    desiredRot = MixedRealityToolkit.CameraSystem.CameraRig.CameraTransform.rotation;
                     break;
                 case SolverOrientationType.FaceTrackedObject:
-                    desiredRot = SolverHandler.TransformTarget != null ? Quaternion.LookRotation(SolverHandler.TransformTarget.position - desiredPos) : Quaternion.identity;
+                    desiredRot = SolverHandler.TransformTarget != null
+                        ? Quaternion.LookRotation(SolverHandler.TransformTarget.position - desiredPos)
+                        : Quaternion.identity;
                     break;
                 case SolverOrientationType.CameraFacing:
-                    desiredRot = SolverHandler.TransformTarget != null ? Quaternion.LookRotation(CameraCache.Main.transform.position - desiredPos) : Quaternion.identity;
+                    desiredRot = SolverHandler.TransformTarget != null
+                        ? Quaternion.LookRotation(MixedRealityToolkit.CameraSystem.CameraRig.CameraTransform.position - desiredPos)
+                        : Quaternion.identity;
                     break;
                 case SolverOrientationType.FollowTrackedObject:
-                    desiredRot = SolverHandler.TransformTarget != null ? SolverHandler.TransformTarget.rotation : Quaternion.identity;
+                    desiredRot = SolverHandler.TransformTarget != null
+                        ? SolverHandler.TransformTarget.rotation
+                        : Quaternion.identity;
                     break;
                 default:
                     Debug.LogError($"Invalid OrientationType for Orbital Solver on {gameObject.name}");

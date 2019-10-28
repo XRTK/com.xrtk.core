@@ -2,7 +2,10 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces;
+using XRTK.Services.CameraSystem;
 
 namespace XRTK.Definitions
 {
@@ -98,5 +101,29 @@ namespace XRTK.Definitions
         /// Set the desired quality for your application for transparent display.
         /// </summary>
         public int TransparentQualityLevel => transparentQualityLevel;
+
+        [SerializeField]
+        [Tooltip("The concrete type to use for the camera rig.")]
+        [Implements(typeof(IMixedRealityCameraRig), TypeGrouping.ByNamespaceFlat)]
+        private SystemType cameraRigType = new SystemType(typeof(DefaultCameraRig));
+
+        /// <summary>
+        /// The concrete type to use for the camera rig.
+        /// </summary>
+        public SystemType CameraRigType
+        {
+            get => cameraRigType;
+            internal set => cameraRigType = value;
+        }
+
+        [SerializeField]
+        [Range(0f, 180f)]
+        [Tooltip("This is the angle that will be used to adjust the player's body rotation in relation to their head position.")]
+        private float bodyAdjustmentAngle = 45f;
+
+        /// <summary>
+        /// This is the angle that will be used to adjust the player's body rotation in relation to their head position.
+        /// </summary>
+        public float BodyAdjustmentAngle => bodyAdjustmentAngle;
     }
 }

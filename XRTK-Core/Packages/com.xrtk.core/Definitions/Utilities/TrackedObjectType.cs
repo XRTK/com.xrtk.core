@@ -1,12 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using XRTK.Interfaces;
+
 namespace XRTK.Definitions.Utilities
 {
     public enum TrackedObjectType
     {
         /// <summary>
-        /// Calculates position and orientation from the main camera.
+        /// Calculates position and orientation based on the <see cref="IMixedRealityCameraRig.CameraTransform"/>.
         /// </summary>
         Head = 0,
         /// <summary>
@@ -18,8 +20,12 @@ namespace XRTK.Definitions.Utilities
         /// </summary>
         RightHandOrController,
         /// <summary>
-        /// Calculates position and orientation from the playspace.
+        /// Calculates position and orientation based on the <see cref="IMixedRealityCameraRig.BodyTransform"/>.
         /// </summary>
-        Body
+        Body,
+        /// <summary>
+        /// Calculates position and orientation based on the <see cref="IMixedRealityCameraRig.PlayspaceTransform"/>
+        /// </summary>
+        Playspace,
     }
 }

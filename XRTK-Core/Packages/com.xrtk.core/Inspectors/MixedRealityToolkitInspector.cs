@@ -100,7 +100,7 @@ namespace XRTK.Inspectors
 
             if (changed)
             {
-                MixedRealityToolkit.Instance.ResetConfiguration((MixedRealityToolkitConfigurationProfile)activeProfile.objectReferenceValue);
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration((MixedRealityToolkitConfigurationProfile)activeProfile.objectReferenceValue);
             }
         }
 
@@ -133,8 +133,6 @@ namespace XRTK.Inspectors
 
                 Selection.activeObject = MixedRealityToolkit.Instance;
                 Debug.Assert(MixedRealityToolkit.IsInitialized);
-                var playspace = MixedRealityToolkit.Instance.MixedRealityPlayspace;
-                Debug.Assert(playspace != null);
 
                 var currentScene = SceneManager.GetActiveScene();
 

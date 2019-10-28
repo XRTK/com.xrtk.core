@@ -1,14 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Utilities;
 using XRTK.Extensions;
+using XRTK.Interfaces;
 
 namespace XRTK.Services.CameraSystem
 {
+    /// <summary>
+    /// The Mixed Reality Toolkit's default implementation of the <see cref="IMixedRealityCameraSystem"/>.
+    /// </summary>
     public class MixedRealityCameraSystem : BaseSystem, IMixedRealityCameraSystem
     {
         /// <summary>
@@ -19,6 +24,11 @@ namespace XRTK.Services.CameraSystem
             : base(profile)
         {
             this.profile = profile;
+
+            if (profile.CameraRigType.Type == null)
+            {
+                throw new Exception("Camera rig type cannot be null!");
+            }
         }
 
         private readonly MixedRealityCameraProfile profile;
@@ -41,6 +51,12 @@ namespace XRTK.Services.CameraSystem
             }
         }
 
+        /// <inheritdoc />
+        public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled;
+
+        /// <inheritdoc />
+        public IMixedRealityCameraRig CameraRig { get; private set; }
+
         private DisplayType currentDisplayType;
         private bool cameraOpaqueLastFrame = false;
 
@@ -53,6 +69,8 @@ namespace XRTK.Services.CameraSystem
         /// <inheritdoc />
         public override void Initialize()
         {
+            base.Initialize();
+
             cameraOpaqueLastFrame = IsOpaque;
 
             if (IsOpaque)
@@ -63,10 +81,25 @@ namespace XRTK.Services.CameraSystem
             {
                 ApplySettingsForTransparentDisplay();
             }
+
+            if (CameraRig == null)
+            {
+                CameraRig = CameraCache.Main.gameObject.EnsureComponent(profile.CameraRigType.Type) as IMixedRealityCameraRig;
+                Debug.Assert(CameraRig != null);
+                CameraRig.BodyTransform.position = CameraRig.CameraTransform.position;
+                CameraRig.BodyTransform.rotation = CameraRig.CameraTransform.rotation;
+            }
         }
 
+        /// <inheritdoc />
         public override void Enable()
         {
+            base.Enable();
+
+            // Reset the body rig transform position
+            CameraRig.BodyTransform.position = CameraRig.CameraTransform.position;
+            CameraRig.BodyTransform.rotation = CameraRig.CameraTransform.rotation;
+
             if (Application.isPlaying &&
                 profile.IsCameraPersistent)
             {
@@ -90,6 +123,44 @@ namespace XRTK.Services.CameraSystem
                 else
                 {
                     ApplySettingsForTransparentDisplay();
+                }
+            }
+        }
+
+        /// <inheritdoc />
+        public override void LateUpdate()
+        {
+            base.LateUpdate();
+
+            CameraRig.BodyTransform.position = CameraRig.CameraTransform.position;
+
+            var bodyRotation = CameraRig.BodyTransform.rotation;
+            var headRotation = CameraRig.CameraTransform.rotation;
+
+            var currentAngle = Mathf.Abs(Quaternion.Angle(bodyRotation, headRotation));
+
+            if (currentAngle > profile.BodyAdjustmentAngle)
+            {
+                CameraRig.BodyTransform.rotation = Quaternion.Slerp(bodyRotation, headRotation, Time.deltaTime);
+            }
+        }
+
+        /// <inheritdoc />
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            if (CameraRig != null)
+            {
+                var component = CameraRig as Component;
+
+                if (Application.isPlaying)
+                {
+                    UnityEngine.Object.Destroy(component);
+                }
+                else
+                {
+                    UnityEngine.Object.DestroyImmediate(component);
                 }
             }
         }

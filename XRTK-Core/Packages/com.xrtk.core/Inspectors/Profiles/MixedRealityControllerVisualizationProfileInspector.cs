@@ -197,7 +197,7 @@ namespace XRTK.Inspectors.Profiles
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    mixedRealityControllerHandedness.intValue = handednessValue + 1
+                    mixedRealityControllerHandedness.intValue = handednessValue + 1;
                 }
 
                 EditorGUILayout.PropertyField(controllerSetting.FindPropertyRelative("poseAction"));

@@ -98,6 +98,12 @@ namespace XRTK.Services
                 return;
             }
 
+            if (isInitializing)
+            {
+                Debug.LogWarning("Already attempting to initialize the configurations!");
+                return;
+            }
+
             isResetting = true;
 
             if (activeProfile != null)
@@ -293,6 +299,11 @@ namespace XRTK.Services
         private static bool isApplicationQuitting = false;
 
         /// <summary>
+        /// Flag stating if the application is currently attempting to quit.
+        /// </summary>
+        public static bool IsApplicationQuitting => isApplicationQuitting;
+
+        /// <summary>
         /// Expose an assertion whether the MixedRealityToolkit class is initialized.
         /// </summary>
         public static void AssertIsInitialized()
@@ -321,7 +332,11 @@ namespace XRTK.Services
         /// </summary>
         private void InitializeServiceLocator()
         {
-            if (isInitializing) { return; }
+            if (isInitializing)
+            {
+                Debug.LogWarning("Already attempting to initialize the configurations!");
+                return;
+            }
 
             isInitializing = true;
 
@@ -350,12 +365,12 @@ namespace XRTK.Services
 
             #region Services Registration
 
-            if (ActiveProfile.IsCameraSystemEnabled)
+            if (ActiveProfile.IsCameraSystemEnabled &&
+                (!CreateAndRegisterService<IMixedRealityCameraSystem>(ActiveProfile.CameraSystemType, ActiveProfile.CameraProfile) || CameraSystem == null))
             {
-                if (!CreateAndRegisterService<IMixedRealityCameraSystem>(ActiveProfile.CameraSystemType, ActiveProfile.CameraProfile) || CameraSystem == null)
-                {
-                    Debug.LogError("Failed to start the Camera System!");
-                }
+                Debug.LogError("Failed to start the Camera System!");
+                isInitializing = false;
+                return;
             }
 
             if (ActiveProfile.IsInputSystemEnabled)
@@ -549,9 +564,9 @@ namespace XRTK.Services
             var orderedServices = registeredMixedRealityServices.OrderBy(service => service.Item2.Priority).ToArray();
             registeredMixedRealityServices.Clear();
 
-            foreach (var service in orderedServices)
+            foreach (var (interfaceType, mixedRealityService) in orderedServices)
             {
-                RegisterService(service.Item1, service.Item2);
+                RegisterService(interfaceType, mixedRealityService);
             }
 
             InitializeAllServices();
@@ -560,56 +575,6 @@ namespace XRTK.Services
 
             isInitializing = false;
         }
-
-        /// <summary>
-        /// Returns the MixedRealityPlayspace for the local player
-        /// </summary>
-        public Transform MixedRealityPlayspace
-        {
-            get
-            {
-                AssertIsInitialized();
-
-                if (mixedRealityPlayspace)
-                {
-                    return mixedRealityPlayspace;
-                }
-
-                if (CameraCache.Main.transform.parent == null)
-                {
-                    mixedRealityPlayspace = new GameObject(MixedRealityPlayspaceName).transform;
-                    CameraCache.Main.transform.SetParent(mixedRealityPlayspace);
-                }
-                else
-                {
-                    if (CameraCache.Main.transform.parent.name != MixedRealityPlayspaceName)
-                    {
-                        // Since the scene is set up with a different camera parent, its likely
-                        // that there's an expectation that that parent is going to be used for
-                        // something else. We print a warning to call out the fact that we're
-                        // co-opting this object for use with teleporting and such, since that
-                        // might cause conflicts with the parent's intended purpose.
-                        Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {MixedRealityPlayspaceName}. The existing parent will be renamed and used instead.");
-                        // If we rename it, we make it clearer that why it's being teleported around at runtime.
-                        CameraCache.Main.transform.parent.name = MixedRealityPlayspaceName;
-                    }
-
-                    mixedRealityPlayspace = CameraCache.Main.transform.parent;
-                }
-
-                // It's very important that the MixedRealityPlayspace align with the tracked space,
-                // otherwise world-locked things like playspace boundaries won't be aligned properly.
-                // For now, we'll just assume that when the playspace is first initialized, the
-                // tracked space origin overlaps with the world space origin. If a platform ever does
-                // something else (i.e, placing the lower left hand corner of the tracked space at world
-                // space 0,0,0), we should compensate for that here.
-                return mixedRealityPlayspace;
-            }
-        }
-
-        private Transform mixedRealityPlayspace;
-
-        private const string MixedRealityPlayspaceName = "MixedRealityPlayspace";
 
         private static void EnsureMixedRealityRequirements()
         {
@@ -1536,7 +1501,7 @@ namespace XRTK.Services
         public static bool TryGetService<T>(out T service, bool showLogs = true) where T : IMixedRealityService
         {
             service = GetService<T>(showLogs);
-            return service == null ? false : true;
+            return service != null;
         }
 
         /// <summary>
@@ -1562,7 +1527,7 @@ namespace XRTK.Services
         public static bool TryGetService<T>(string serviceName, out T service, bool showLogs = true) where T : IMixedRealityService
         {
             service = (T)GetService(typeof(T), serviceName, showLogs);
-            return service == null ? false : true;
+            return service != null;
         }
 
         /// <summary>

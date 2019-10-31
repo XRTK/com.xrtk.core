@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using XRTK.Definitions.Controllers.Hands;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
@@ -20,9 +20,8 @@ namespace XRTK.Providers.Controllers.Hands
     /// Base implementation for all hand controller data providers. Takes care of all the platform agnostic
     /// hand tracking logic.
     /// </summary>
-    public abstract class BaseHandControllerDataProvider : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider
+    public abstract class BaseHandControllerDataProvider<T> : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider where T : DefaultHandController
     {
-        private readonly HandControllerDataProviderProfile profile;
         private readonly Dictionary<Handedness, BaseHandController> trackedHandControllers = new Dictionary<Handedness, BaseHandController>();
 
         private InputEventData<HandData> handDataUpdateEventData;
@@ -39,11 +38,8 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="name">Name of the data provider as assigned in the configuration profile.</param>
         /// <param name="priority">Data provider priority controls the order in the service registry.</param>
         /// <param name="profile">Hand controller data provider profile assigned to the provider instance in the configuration inspector.</param>
-        public BaseHandControllerDataProvider(string name, uint priority, HandControllerDataProviderProfile profile)
-            : base(name, priority, profile)
-        {
-            this.profile = profile;
-        }
+        public BaseHandControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
+            : base(name, priority, profile) { }
 
         /// <inheritdoc />
         public override void Initialize()
@@ -207,11 +203,11 @@ namespace XRTK.Providers.Controllers.Hands
                 return controller;
             }
 
-            IMixedRealityPointer[] pointers = RequestPointers(profile.HandControllerType.Type, handedness);
+            IMixedRealityPointer[] pointers = RequestPointers(typeof(T), handedness);
             IMixedRealityInputSource inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{handedness} Hand", pointers);
-            controller = System.Activator.CreateInstance(profile.HandControllerType.Type, TrackingState.Tracked, handedness, inputSource, null) as BaseHandController;
+            controller = System.Activator.CreateInstance(typeof(T), TrackingState.Tracked, handedness, inputSource, null) as BaseHandController;
 
-            if (controller == null || !controller.SetupConfiguration(profile.HandControllerType.Type))
+            if (controller == null || !controller.SetupConfiguration(typeof(T)))
             {
                 // Controller failed to be setup correctly.
                 // Return null so we don't raise the source detected.
@@ -227,7 +223,7 @@ namespace XRTK.Providers.Controllers.Hands
 
             if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile.RenderMotionControllers)
             {
-                controller.TryRenderControllerModel(profile.HandControllerType.Type);
+                controller.TryRenderControllerModel(typeof(T));
             }
 
             trackedHandControllers.Add(handedness, controller);
@@ -289,7 +285,7 @@ namespace XRTK.Providers.Controllers.Hands
                 }
                 else
                 {
-                    Debug.LogError($"Failed to create {profile.HandControllerType} controller");
+                    Debug.LogError($"Failed to create {typeof(T).Name} controller");
                 }
             }
             else

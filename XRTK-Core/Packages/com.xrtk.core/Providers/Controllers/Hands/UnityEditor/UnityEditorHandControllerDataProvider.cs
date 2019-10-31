@@ -8,7 +8,7 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.Controllers.Hands.UnityEditor
 {
-    public class UnityEditorHandControllerDataProvider : BaseHandControllerDataProvider
+    public class UnityEditorHandControllerDataProvider : BaseHandControllerDataProvider<UnityEditorHandController>
     {
         private UnityEditorHandControllerDataProviderProfile profile;
         private long lastHandControllerUpdateTimeStamp = 0;

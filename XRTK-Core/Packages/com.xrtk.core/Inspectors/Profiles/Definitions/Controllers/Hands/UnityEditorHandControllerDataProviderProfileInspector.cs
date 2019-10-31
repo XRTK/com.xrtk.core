@@ -3,11 +3,12 @@
 
 using UnityEditor;
 using XRTK.Definitions.InputSystem.Simulation;
+using XRTK.Inspectors.Profiles;
 
 namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
 {
     [CustomEditor(typeof(UnityEditorHandControllerDataProviderProfile))]
-    public class UnityEditorHandControllerDataProviderProfileInspector : HandControllerDataProviderProfileInspector
+    public class UnityEditorHandControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty isSimulateHandTrackingEnabled;
 

@@ -3,7 +3,7 @@
 
 using XRTK.Definitions.Controllers.Hands;
 
-namespace XRTK.Providers.Controllers.Hands
+namespace XRTK.Providers.Controllers.Hands.LeapMotion
 {
     public class LeapMotionHandControllerDataProvider : BaseHandControllerDataProvider
     {

@@ -52,7 +52,7 @@ namespace XRTK.Services.CameraSystem
         }
 
         /// <inheritdoc />
-        public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled;
+        public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled && UnityEngine.XR.XRDevice.isPresent;
 
         /// <inheritdoc />
         public IMixedRealityCameraRig CameraRig { get; private set; }

@@ -187,37 +187,17 @@ namespace XRTK.Inspectors.Profiles
                     EditorGUILayout.HelpBox("A controller type must be defined!", MessageType.Error);
                 }
 
-                var handednessValue = 0;
-                switch (mixedRealityControllerHandedness.intValue)
-                {
-                    case 1:
-                        handednessValue = 0;
-                        break;
-                    case 2:
-                        handednessValue = 1;
-                        break;
-                    default:
-                        handednessValue = 2;
-                        break;
-                }
+                var handednessValue = mixedRealityControllerHandedness.intValue - 1;
+                
+                // Reset in case it was set to something other than left, right or both.
+                if (handednessValue < 0 || handednessValue > 2) { handednessValue = 0; }
 
                 EditorGUI.BeginChangeCheck();
                 handednessValue = EditorGUILayout.IntPopup(new GUIContent(mixedRealityControllerHandedness.displayName, mixedRealityControllerHandedness.tooltip), handednessValue, HandednessSelections, null);
 
                 if (EditorGUI.EndChangeCheck())
                 {
-                    switch (handednessValue)
-                    {
-                        case 0:
-                            mixedRealityControllerHandedness.intValue = (int)Handedness.Left;
-                            break;
-                        case 1:
-                            mixedRealityControllerHandedness.intValue = (int)Handedness.Right;
-                            break;
-                        default:
-                            mixedRealityControllerHandedness.intValue = (int)Handedness.Both;
-                            break;
-                    }
+                    mixedRealityControllerHandedness.intValue = handednessValue + 1;
                 }
 
                 EditorGUILayout.PropertyField(controllerSetting.FindPropertyRelative("poseAction"));

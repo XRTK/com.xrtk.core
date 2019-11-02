@@ -26,11 +26,6 @@ namespace XRTK.Interfaces
         Camera PlayerCamera { get; }
 
         /// <summary>
-        /// Initial head position as reported by the Vendor API, for use when Unity does not manage the players head height
-        /// </summary>
-        Vector3 InitialHeadPosition { get; set; }
-
-        /// <summary>
         /// The player's head transform. This <see cref="Transform"/> is to provide a head height offset should Unity not manage it
         /// </summary>
         Transform HeadTransform { get; }

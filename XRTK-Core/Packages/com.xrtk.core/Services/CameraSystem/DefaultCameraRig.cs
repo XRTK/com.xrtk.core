@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Definitions.Utilities;
 using XRTK.Interfaces;
 using XRTK.Utilities;
 
@@ -37,6 +38,7 @@ namespace XRTK.Services.CameraSystem
                     headTransform = new GameObject(playerHeadName).transform;
                     headTransform.SetParent(playspaceTransform);
                     PlayerCamera.transform.SetParent(headTransform);
+                    PlayerCamera.gameObject.AddComponent<MixedRealityPoseDriver>();
                 }
                 else if (PlayerCamera.transform.parent.name == playspaceName)
                 {
@@ -44,6 +46,7 @@ namespace XRTK.Services.CameraSystem
                     headTransform = new GameObject(playerHeadName).transform;
                     headTransform.SetParent(playspaceTransform);
                     PlayerCamera.transform.SetParent(headTransform);
+                    PlayerCamera.gameObject.AddComponent<MixedRealityPoseDriver>();
                 }
                 else
                 {
@@ -91,22 +94,6 @@ namespace XRTK.Services.CameraSystem
                 }
 
                 return playerCamera;
-            }
-        }
-
-        private Vector3 initialHeadPosition = Vector3.zero;
-
-        /// <inheritdoc />
-        public Vector3 InitialHeadPosition
-        {
-            get
-            {
-                return initialHeadPosition;
-            }
-            set
-            {
-                initialHeadPosition = value;
-                HeadTransform.position = initialHeadPosition;
             }
         }
 

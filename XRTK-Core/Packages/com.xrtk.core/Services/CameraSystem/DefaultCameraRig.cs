@@ -1,4 +1,4 @@
-﻿// Copyright (c) XRTK. All rights reserved.
+﻿Lol// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
@@ -26,7 +26,7 @@ namespace XRTK.Services.CameraSystem
         {
             get
             {
-                if (playspaceTransform)
+                if (playspaceTransform && headTransform)
                 {
                     return playspaceTransform;
                 }
@@ -34,11 +34,20 @@ namespace XRTK.Services.CameraSystem
                 if (PlayerCamera.transform.parent == null)
                 {
                     playspaceTransform = new GameObject(playspaceName).transform;
-                    PlayerCamera.transform.SetParent(playspaceTransform);
+                    headTransform = new GameObject(playerHeadName).transform;
+                    headTransform.SetParent(playspaceTransform);
+                    PlayerCamera.transform.SetParent(headTransform);
+                }
+                else if (PlayerCamera.transform.parent.name == playspaceName)
+                {
+                    //Upgrading from existing rig to a new rig including PlayerHead
+                    headTransform = new GameObject(playerHeadName).transform;
+                    headTransform.SetParent(playspaceTransform);
+                    PlayerCamera.transform.SetParent(headTransform);
                 }
                 else
                 {
-                    if (PlayerCamera.transform.parent.name != playspaceName)
+                    if (PlayerCamera.transform.parent.name != playerHeadName)
                     {
                         // Since the scene is set up with a different camera parent, its likely
                         // that there's an expectation that that parent is going to be used for
@@ -47,7 +56,7 @@ namespace XRTK.Services.CameraSystem
                         // might cause conflicts with the parent's intended purpose.
                         Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {playspaceName}. The existing parent will be renamed and used instead.");
                         // If we rename it, we make it clearer that why it's being teleported around at runtime.
-                        PlayerCamera.transform.parent.name = playspaceName;
+                        PlayerCamera.transform.parent.name = playerHeadName;
                     }
 
                     playspaceTransform = PlayerCamera.transform.parent;
@@ -82,6 +91,52 @@ namespace XRTK.Services.CameraSystem
                 }
 
                 return playerCamera;
+            }
+        }
+
+        private Vector3 initialHeadPosition = Vector3.zero;
+
+        /// <inheritdoc />
+        public Vector3 InitialHeadPosition
+        {
+            get
+            {
+                return initialHeadPosition;
+            }
+            set
+            {
+                initialHeadPosition = value;
+                HeadTransform.position = initialHeadPosition;
+            }
+        }
+
+        [SerializeField]
+        private string playerHeadName = "PlayerHead";
+
+        [SerializeField]
+        private Transform headTransform = null;
+
+        /// <inheritdoc />
+        public Transform HeadTransform
+        {
+            get
+            {
+                if (headTransform == null)
+                {
+                    headTransform = PlayspaceTransform.Find(playerHeadName);
+                }
+
+                if (headTransform == null)
+                {
+                    headTransform = new GameObject(playerHeadName).transform;
+                    headTransform.transform.SetParent(PlayspaceTransform);
+                    if (PlayerCamera.transform.parent.name == playspaceName)
+                    {
+                        PlayerCamera.transform.SetParent(headTransform);
+                    }
+                }
+
+                return headTransform;
             }
         }
 
@@ -121,6 +176,12 @@ namespace XRTK.Services.CameraSystem
                 !playspaceTransform.name.Equals(playspaceName))
             {
                 playspaceTransform.name = playspaceName;
+            }
+
+            if (headTransform != null &&
+                !headTransform.name.Equals(playerHeadName))
+            {
+                headTransform.name = playerHeadName;
             }
 
             if (bodyTransform != null &&

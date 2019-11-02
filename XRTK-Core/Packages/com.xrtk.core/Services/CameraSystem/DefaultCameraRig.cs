@@ -1,9 +1,9 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using UnityEngine.SpatialTracking;
-using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Utilities;
@@ -214,29 +214,6 @@ namespace XRTK.Services.CameraSystem
                 !bodyTransform.name.Equals(playerBodyName))
             {
                 bodyTransform.name = playerBodyName;
-            }
-        }
-
-        private void OnDestroy()
-        {
-            if (playerCamera != null)
-            {
-                if (playerCamera.transform != null)
-                {
-                    playerCamera.transform.SetParent(null);
-                }
-            }
-
-            if (playspaceTransform != null)
-            {
-                if (Application.isPlaying)
-                {
-                    Destroy(playspaceTransform.gameObject);
-                }
-                else
-                {
-                    DestroyImmediate(playspaceTransform.gameObject);
-                }
             }
         }
 

@@ -151,12 +151,29 @@ namespace XRTK.Services.CameraSystem
         }
 
         /// <inheritdoc />
-        public override void Destroy()
+        public override void Disable()
         {
-            base.Destroy();
+            base.Disable();
 
             if (CameraRig != null)
             {
+                if (CameraRig.CameraTransform != null)
+                {
+                    CameraRig.CameraTransform.SetParent(null);
+                }
+
+                if (CameraRig.PlayspaceTransform != null)
+                {
+                    if (Application.isPlaying)
+                    {
+                        UnityEngine.Object.Destroy(CameraRig.PlayspaceTransform.gameObject);
+                    }
+                    else
+                    {
+                        UnityEngine.Object.DestroyImmediate(CameraRig.PlayspaceTransform.gameObject);
+                    }
+                }
+
                 var component = CameraRig as Component;
 
                 if (Application.isPlaying)

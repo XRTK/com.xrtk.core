@@ -24,6 +24,7 @@ namespace XRTK.Services.CameraSystem
             : base(profile)
         {
             this.profile = profile;
+            DefaultHeadHeight = profile.DefaultHeadHeight;
 
             if (profile.CameraRigType.Type == null)
             {
@@ -50,6 +51,9 @@ namespace XRTK.Services.CameraSystem
                 return currentDisplayType == DisplayType.Opaque;
             }
         }
+
+        /// <inheritdoc />
+        public float DefaultHeadHeight { get; }
 
         /// <inheritdoc />
         public float HeadHeight => CameraRig.PlayspaceTransform.InverseTransformPoint(CameraRig.CameraTransform.position).y;

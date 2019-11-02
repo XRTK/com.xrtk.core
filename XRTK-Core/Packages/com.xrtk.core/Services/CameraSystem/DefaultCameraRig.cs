@@ -38,15 +38,16 @@ namespace XRTK.Services.CameraSystem
                     headTransform.SetParent(playspaceTransform);
                     PlayerCamera.transform.SetParent(headTransform);
                 }
-                else if (PlayerCamera.transform.parent.name == playspaceName)
-                {
-                    //Upgrading from existing rig to a new rig including PlayerHead
-                    headTransform = new GameObject(playerHeadName).transform;
-                    headTransform.SetParent(playspaceTransform);
-                    PlayerCamera.transform.SetParent(headTransform);
-                }
                 else
                 {
+                    if (PlayerCamera.transform.parent.name == playspaceName)
+                    {
+                        // Upgrading from existing rig to a new rig including PlayerHead
+                        headTransform = new GameObject(playerHeadName).transform;
+                        headTransform.SetParent(playspaceTransform);
+                        PlayerCamera.transform.SetParent(headTransform);
+                    }
+
                     if (PlayerCamera.transform.parent.name != playerHeadName)
                     {
                         // Since the scene is set up with a different camera parent, its likely
@@ -54,7 +55,7 @@ namespace XRTK.Services.CameraSystem
                         // something else. We print a warning to call out the fact that we're
                         // co-opting this object for use with teleporting and such, since that
                         // might cause conflicts with the parent's intended purpose.
-                        Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {playspaceName}. The existing parent will be renamed and used instead.");
+                        Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {playerHeadName}. The existing parent will be renamed and used instead.");
                         // If we rename it, we make it clearer that why it's being teleported around at runtime.
                         PlayerCamera.transform.parent.name = playerHeadName;
                     }

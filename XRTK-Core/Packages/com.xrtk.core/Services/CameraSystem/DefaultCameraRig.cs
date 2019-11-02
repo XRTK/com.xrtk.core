@@ -48,7 +48,7 @@ namespace XRTK.Services.CameraSystem
                         headTransform = new GameObject(playerHeadName).transform;
                         headTransform.SetParent(playspaceTransform);
                         PlayerCamera.transform.SetParent(headTransform);
-                    PlayerCamera.gameObject.AddComponent<MixedRealityPoseDriver>();
+                        PlayerCamera.gameObject.AddComponent<MixedRealityPoseDriver>();
                     }
 
                     if (PlayerCamera.transform.parent.name != playerHeadName)

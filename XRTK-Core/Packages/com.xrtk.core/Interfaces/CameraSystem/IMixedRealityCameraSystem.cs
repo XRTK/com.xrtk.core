@@ -23,5 +23,7 @@ namespace XRTK.Interfaces.CameraSystem
         /// The <see cref="IMixedRealityCameraRig"/> component used in the current configuration.
         /// </summary>
         IMixedRealityCameraRig CameraRig { get; }
+
+        float InitialHeadHeight { get; set; }
     }
 }

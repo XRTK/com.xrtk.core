@@ -127,7 +127,7 @@ namespace XRTK.Definitions
         public float BodyAdjustmentAngle => bodyAdjustmentAngle;
 
         [SerializeField]
-        [Tooltip("This is the angle that will be used to adjust the player's body rotation in relation to their head position.")]
+        [Tooltip("This is the height that will be used to adjust the player's height in relation to their floor position.")]
         private float initialHeadHeight = 1.6f;
 
         /// <summary>

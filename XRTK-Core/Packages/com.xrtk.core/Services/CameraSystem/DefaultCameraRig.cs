@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Utilities;
 
@@ -27,43 +28,28 @@ namespace XRTK.Services.CameraSystem
         {
             get
             {
-                if (playspaceTransform && headTransform)
+                if (playspaceTransform != null)
                 {
                     return playspaceTransform;
                 }
 
-                if (PlayerCamera.transform.parent == null)
+                if (playspaceTransform == null)
                 {
-                    playspaceTransform = new GameObject(playspaceName).transform;
-                    headTransform = new GameObject(playerHeadName).transform;
-                    headTransform.SetParent(playspaceTransform);
-                    PlayerCamera.transform.SetParent(headTransform);
-                    PlayerCamera.gameObject.AddComponent<MixedRealityPoseDriver>();
+                    var playspaceTransformLookup = GameObject.Find(playspaceName);
+
+                    if (playspaceTransformLookup == null)
+                    {
+                        playspaceTransform = new GameObject(playspaceName).transform;
+                    }
+                    else
+                    {
+                        playspaceTransform = playspaceTransformLookup.transform;
+                    }
                 }
-                else
+
+                if (HeadTransform.parent != playspaceTransform)
                 {
-                    if (PlayerCamera.transform.parent.name == playspaceName)
-                    {
-                        // Upgrading from existing rig to a new rig including PlayerHead
-                        headTransform = new GameObject(playerHeadName).transform;
-                        headTransform.SetParent(playspaceTransform);
-                        PlayerCamera.transform.SetParent(headTransform);
-                        PlayerCamera.gameObject.AddComponent<MixedRealityPoseDriver>();
-                    }
-
-                    if (PlayerCamera.transform.parent.name != playerHeadName)
-                    {
-                        // Since the scene is set up with a different camera parent, its likely
-                        // that there's an expectation that that parent is going to be used for
-                        // something else. We print a warning to call out the fact that we're
-                        // co-opting this object for use with teleporting and such, since that
-                        // might cause conflicts with the parent's intended purpose.
-                        Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {playerHeadName}. The existing parent will be renamed and used instead.");
-                        // If we rename it, we make it clearer that why it's being teleported around at runtime.
-                        PlayerCamera.transform.parent.name = playerHeadName;
-                    }
-
-                    playspaceTransform = PlayerCamera.transform.parent;
+                    HeadTransform.SetParent(playspaceTransform);
                 }
 
                 // It's very important that the MixedRealityPlayspace align with the tracked space,
@@ -94,6 +80,8 @@ namespace XRTK.Services.CameraSystem
                     playerCamera = CameraCache.Main;
                 }
 
+                playerCamera.gameObject.EnsureComponent<MixedRealityPoseDriver>();
+
                 return playerCamera;
             }
         }
@@ -109,18 +97,37 @@ namespace XRTK.Services.CameraSystem
         {
             get
             {
-                if (headTransform == null)
+                if (headTransform != null)
                 {
-                    headTransform = PlayspaceTransform.Find(playerHeadName);
+                    return headTransform;
                 }
 
-                if (headTransform == null)
+                if (PlayerCamera.transform.parent == null || 
+                    PlayerCamera.transform.parent.name == playspaceName)
                 {
                     headTransform = new GameObject(playerHeadName).transform;
-                    headTransform.transform.SetParent(PlayspaceTransform);
-                    if (PlayerCamera.transform.parent.name == playspaceName)
+                    headTransform.SetParent(playspaceTransform);
+                    PlayerCamera.transform.SetParent(headTransform);
+                }
+                else
+                {
+                    if (PlayerCamera.transform.parent.name != playerHeadName)
                     {
-                        PlayerCamera.transform.SetParent(headTransform);
+                        // Since the scene is set up with a different camera parent, its likely
+                        // that there's an expectation that that parent is going to be used for
+                        // something else. We print a warning to call out the fact that we're
+                        // co-opting this object for use with teleporting and such, since that
+                        // might cause conflicts with the parent's intended purpose.
+                        Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {playspaceName}. The existing parent will be renamed and used instead.");
+                        // If we rename it, we make it clearer that why it's being teleported around at runtime.
+                        PlayerCamera.transform.parent.name = playerHeadName;
+                    }
+
+                    headTransform = PlayerCamera.transform.parent;
+
+                    if (headTransform.parent != playspaceTransform)
+                    {
+                        headTransform.SetParent(playspaceTransform);
                     }
                 }
 

@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using UnityEngine.SpatialTracking;
 
 namespace XRTK.Interfaces
 {
@@ -24,6 +25,11 @@ namespace XRTK.Interfaces
         /// The player's <see cref="Camera"/> reference.
         /// </summary>
         Camera PlayerCamera { get; }
+
+        /// <summary>
+        /// The <see cref="TrackedPoseDriver"/> attached to the <see cref="CameraTransform"/>.
+        /// </summary>
+        TrackedPoseDriver CameraPoseDriver { get; }
 
         /// <summary>
         /// The player's head transform. This <see cref="Transform"/> is to provide a head height offset should Unity not manage it

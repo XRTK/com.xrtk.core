@@ -57,7 +57,7 @@ namespace XRTK.Services.CameraSystem
         public float InitialHeadHeight { get => initialHeadHeight; set => initialHeadHeight = value; }
         
         /// <inheritdoc />
-        public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled;
+        public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled && UnityEngine.XR.XRDevice.isPresent;
 
         /// <inheritdoc />
         public IMixedRealityCameraRig CameraRig { get; private set; }

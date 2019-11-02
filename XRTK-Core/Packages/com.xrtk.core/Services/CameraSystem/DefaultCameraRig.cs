@@ -128,7 +128,9 @@ namespace XRTK.Services.CameraSystem
                     return cameraPoseDriver;
                 }
 
-                return cameraPoseDriver = PlayerCamera.gameObject.EnsureComponent<TrackedPoseDriver>();
+                cameraPoseDriver = PlayerCamera.gameObject.EnsureComponent<TrackedPoseDriver>();
+                cameraPoseDriver.UseRelativeTransform = true;
+                return cameraPoseDriver;
             }
         }
 

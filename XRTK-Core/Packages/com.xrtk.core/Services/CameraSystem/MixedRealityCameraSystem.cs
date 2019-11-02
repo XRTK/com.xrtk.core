@@ -184,13 +184,16 @@ namespace XRTK.Services.CameraSystem
 
                 var component = CameraRig as Component;
 
-                if (Application.isPlaying)
+                if (component is IMixedRealityCameraRig)
                 {
-                    UnityEngine.Object.Destroy(component);
-                }
-                else
-                {
-                    UnityEngine.Object.DestroyImmediate(component);
+                    if (Application.isPlaying)
+                    {
+                        UnityEngine.Object.Destroy(component);
+                    }
+                    else
+                    {
+                        UnityEngine.Object.DestroyImmediate(component);
+                    }
                 }
             }
         }

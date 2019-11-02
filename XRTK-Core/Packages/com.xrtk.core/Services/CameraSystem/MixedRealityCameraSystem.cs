@@ -56,7 +56,11 @@ namespace XRTK.Services.CameraSystem
         public float DefaultHeadHeight { get; }
 
         /// <inheritdoc />
-        public float HeadHeight => CameraRig.PlayspaceTransform.InverseTransformPoint(CameraRig.CameraTransform.position).y;
+        public float HeadHeight
+        {
+            get => CameraRig.PlayspaceTransform.InverseTransformPoint(CameraRig.CameraTransform.position).y;
+            set => CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, value, 0f), Quaternion.identity);
+        }
 
         /// <inheritdoc />
         public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled && UnityEngine.XR.XRDevice.isPresent;

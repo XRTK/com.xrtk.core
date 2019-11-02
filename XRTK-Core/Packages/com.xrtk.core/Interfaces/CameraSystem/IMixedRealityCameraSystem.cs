@@ -32,6 +32,6 @@ namespace XRTK.Interfaces.CameraSystem
         /// <summary>
         /// The current head height of the player
         /// </summary>
-        float HeadHeight { get; }
+        float HeadHeight { get; set; }
     }
 }

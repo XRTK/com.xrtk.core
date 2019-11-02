@@ -154,7 +154,10 @@ namespace XRTK.Services.CameraSystem
                     ? new GameObject(playerHeadName).transform
                     : headTransformLookup.transform;
 
-                headTransform.SetParent(playspaceTransform);
+                if (headTransform.parent != PlayspaceTransform)
+                {
+                    headTransform.SetParent(playspaceTransform);
+                }
 
                 if (CameraTransform.parent != headTransform)
                 {

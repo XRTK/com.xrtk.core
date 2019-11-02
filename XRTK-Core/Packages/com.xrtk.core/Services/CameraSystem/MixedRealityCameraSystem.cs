@@ -24,7 +24,6 @@ namespace XRTK.Services.CameraSystem
             : base(profile)
         {
             this.profile = profile;
-            this.initialHeadHeight = profile.InitialHeadHeight;
 
             if (profile.CameraRigType.Type == null)
             {
@@ -52,9 +51,8 @@ namespace XRTK.Services.CameraSystem
             }
         }
 
-        private float initialHeadHeight = 1.6f;
-
-        public float InitialHeadHeight { get => initialHeadHeight; set => initialHeadHeight = value; }
+        /// <inheritdoc />
+        public float HeadHeight => CameraRig.PlayspaceTransform.InverseTransformPoint(CameraRig.CameraTransform.position).y;
 
         /// <inheritdoc />
         public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled && UnityEngine.XR.XRDevice.isPresent;
@@ -148,6 +146,8 @@ namespace XRTK.Services.CameraSystem
             {
                 CameraRig.BodyTransform.rotation = Quaternion.Slerp(bodyRotation, headRotation, Time.deltaTime);
             }
+
+            // TODO: Check if player is moving forward and slowly rotate the body back into the forward direction.
         }
 
         /// <inheritdoc />

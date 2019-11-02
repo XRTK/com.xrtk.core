@@ -128,11 +128,11 @@ namespace XRTK.Definitions
 
         [SerializeField]
         [Tooltip("This is the height that will be used to adjust the player's height in relation to their floor position.")]
-        private float initialHeadHeight = 1.6f;
+        private float defaultHeadHeight = 1.6f;
 
         /// <summary>
-        /// This is the height that will be used to adjust the player's height in relation to their floor position.
+        /// This is the default height that will be used to adjust the player's height in relation to their floor position.
         /// </summary>
-        public float InitialHeadHeight => initialHeadHeight;
+        public float DefaultHeadHeight => defaultHeadHeight;
     }
 }

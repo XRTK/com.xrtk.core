@@ -25,7 +25,7 @@ namespace XRTK.Inspectors.Profiles
 
         private SerializedProperty cameraRigType;
         private SerializedProperty bodyAdjustmentAngle;
-        private SerializedProperty initialHeadHeight;
+        private SerializedProperty defaultHeadHeight;
 
         private readonly GUIContent nearClipTitle = new GUIContent("Near Clip");
         private readonly GUIContent clearFlagsTitle = new GUIContent("Clear Flags");
@@ -47,7 +47,7 @@ namespace XRTK.Inspectors.Profiles
 
             cameraRigType = serializedObject.FindProperty("cameraRigType");
             bodyAdjustmentAngle = serializedObject.FindProperty("bodyAdjustmentAngle");
-            initialHeadHeight = serializedObject.FindProperty("initialHeadHeight");
+            defaultHeadHeight = serializedObject.FindProperty("defaultHeadHeight");
         }
 
         public override void OnInspectorGUI()
@@ -75,7 +75,7 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.PropertyField(isCameraPersistent);
             EditorGUILayout.PropertyField(cameraRigType);
             EditorGUILayout.PropertyField(bodyAdjustmentAngle);
-            EditorGUILayout.PropertyField(initialHeadHeight);
+            EditorGUILayout.PropertyField(defaultHeadHeight);
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Opaque Display Settings:", EditorStyles.boldLabel);

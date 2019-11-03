@@ -9,6 +9,7 @@
     }
   ],
   "dependencies": {
+    "com.unity.formats.usd": "1.0.1-preview.1",
     "com.unity.package-manager-ui": "2.1.2",
     "com.unity.textmeshpro": "2.0.1",
     "com.unity.xr.legacyinputhelpers": "2.0.6",

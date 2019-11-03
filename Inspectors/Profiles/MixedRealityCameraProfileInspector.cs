@@ -24,7 +24,6 @@ namespace XRTK.Inspectors.Profiles
         private SerializedProperty transparentQualityLevel;
 
         private SerializedProperty cameraRigType;
-        private SerializedProperty bodyAdjustmentAngle;
         private SerializedProperty defaultHeadHeight;
 
         private readonly GUIContent nearClipTitle = new GUIContent("Near Clip");
@@ -46,7 +45,6 @@ namespace XRTK.Inspectors.Profiles
             transparentQualityLevel = serializedObject.FindProperty("transparentQualityLevel");
 
             cameraRigType = serializedObject.FindProperty("cameraRigType");
-            bodyAdjustmentAngle = serializedObject.FindProperty("bodyAdjustmentAngle");
             defaultHeadHeight = serializedObject.FindProperty("defaultHeadHeight");
         }
 
@@ -74,7 +72,6 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.LabelField("Global Settings:", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(isCameraPersistent);
             EditorGUILayout.PropertyField(cameraRigType);
-            EditorGUILayout.PropertyField(bodyAdjustmentAngle);
             EditorGUILayout.PropertyField(defaultHeadHeight);
 
             EditorGUILayout.Space();

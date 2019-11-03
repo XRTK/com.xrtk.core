@@ -197,11 +197,9 @@ namespace XRTK.Services.Teleportation
         {
             isProcessingTeleportRequest = true;
 
-            var cameraParent = MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform;
-
             targetRotation = Vector3.zero;
-            targetRotation.y = eventData.Pointer.PointerOrientation;
             targetPosition = eventData.Pointer.Result.EndPoint;
+            targetRotation.y = eventData.Pointer.PointerOrientation;
 
             if (eventData.HotSpot != null)
             {
@@ -213,9 +211,11 @@ namespace XRTK.Services.Teleportation
                 }
             }
 
-            var height = targetPosition.y;
             var cameraTransform = MixedRealityToolkit.CameraSystem.CameraRig.CameraTransform;
             var cameraPosition = cameraTransform.position;
+            var cameraParent = cameraTransform.parent;
+            var height = targetPosition.y;
+
             targetPosition -= cameraPosition - cameraParent.position;
             targetPosition.y = height;
             cameraParent.position = targetPosition;

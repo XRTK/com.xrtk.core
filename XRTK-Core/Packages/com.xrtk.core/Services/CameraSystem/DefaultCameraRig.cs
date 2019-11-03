@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using UnityEngine.SpatialTracking;
+using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Utilities;
 
@@ -26,31 +28,25 @@ namespace XRTK.Services.CameraSystem
         {
             get
             {
-                if (playspaceTransform)
+                if (playspaceTransform != null)
                 {
                     return playspaceTransform;
                 }
 
-                if (PlayerCamera.transform.parent == null)
-                {
-                    playspaceTransform = new GameObject(playspaceName).transform;
-                    PlayerCamera.transform.SetParent(playspaceTransform);
-                }
-                else
-                {
-                    if (PlayerCamera.transform.parent.name != playspaceName)
-                    {
-                        // Since the scene is set up with a different camera parent, its likely
-                        // that there's an expectation that that parent is going to be used for
-                        // something else. We print a warning to call out the fact that we're
-                        // co-opting this object for use with teleporting and such, since that
-                        // might cause conflicts with the parent's intended purpose.
-                        Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {playspaceName}. The existing parent will be renamed and used instead.");
-                        // If we rename it, we make it clearer that why it's being teleported around at runtime.
-                        PlayerCamera.transform.parent.name = playspaceName;
-                    }
+                var playspaceTransformLookup = GameObject.Find(playspaceName);
 
-                    playspaceTransform = PlayerCamera.transform.parent;
+                playspaceTransform = playspaceTransformLookup == null
+                    ? new GameObject(playspaceName).transform
+                    : playspaceTransformLookup.transform;
+
+                if (CameraTransform.parent != playspaceTransform)
+                {
+                    CameraTransform.SetParent(playspaceTransform);
+                }
+
+                if (BodyTransform.parent != playspaceTransform)
+                {
+                    BodyTransform.SetParent(playspaceTransform);
                 }
 
                 // It's very important that the MixedRealityPlayspace align with the tracked space,
@@ -74,6 +70,11 @@ namespace XRTK.Services.CameraSystem
         {
             get
             {
+                if (playerCamera != null)
+                {
+                    return playerCamera;
+                }
+
                 // Currently the XRTK only supports a single player/user
                 // So for now we will always reference the tagged MainCamera.
                 if (playerCamera == null)
@@ -81,7 +82,49 @@ namespace XRTK.Services.CameraSystem
                     playerCamera = CameraCache.Main;
                 }
 
+                if (playerCamera.transform.parent == null)
+                {
+                    playerCamera.transform.SetParent(PlayspaceTransform);
+                }
+                else
+                {
+                    if (playerCamera.transform.parent.name != playspaceName)
+                    {
+                        // Since the scene is set up with a different camera parent, its likely
+                        // that there's an expectation that that parent is going to be used for
+                        // something else. We print a warning to call out the fact that we're
+                        // co-opting this object for use with teleporting and such, since that
+                        // might cause conflicts with the parent's intended purpose.
+                        Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {playspaceName}. The existing parent will be renamed and used instead.");
+                        // If we rename it, we make it clearer that why it's being teleported around at runtime.
+                        playerCamera.transform.parent.name = playspaceName;
+                    }
+
+                    playspaceTransform = playerCamera.transform.parent;
+                }
+
+                Debug.Assert(CameraPoseDriver != null);
+
                 return playerCamera;
+            }
+        }
+
+        [SerializeField]
+        private TrackedPoseDriver cameraPoseDriver = null;
+
+        /// <inheritdoc />
+        public TrackedPoseDriver CameraPoseDriver
+        {
+            get
+            {
+                if (cameraPoseDriver != null)
+                {
+                    return cameraPoseDriver;
+                }
+
+                cameraPoseDriver = PlayerCamera.gameObject.EnsureComponent<TrackedPoseDriver>();
+                cameraPoseDriver.UseRelativeTransform = true;
+                return cameraPoseDriver;
             }
         }
 
@@ -127,21 +170,6 @@ namespace XRTK.Services.CameraSystem
                 !bodyTransform.name.Equals(playerBodyName))
             {
                 bodyTransform.name = playerBodyName;
-            }
-        }
-
-        private void OnDestroy()
-        {
-            if (bodyTransform != null)
-            {
-                if (Application.isPlaying)
-                {
-                    Destroy(bodyTransform.gameObject);
-                }
-                else
-                {
-                    DestroyImmediate(bodyTransform.gameObject);
-                }
             }
         }
 

@@ -70,6 +70,9 @@ namespace XRTK.Services.CameraSystem
 
                 headHeight = value;
                 CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, headHeight, 0f), Quaternion.identity);
+                var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
+                bodyLocalPosition.y = headHeight;
+                CameraRig.BodyTransform.localPosition = bodyLocalPosition;
             }
         }
 

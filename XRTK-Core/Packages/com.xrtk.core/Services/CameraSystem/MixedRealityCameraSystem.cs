@@ -157,9 +157,11 @@ namespace XRTK.Services.CameraSystem
         {
             base.LateUpdate();
 
-            if (CameraRig.BodyTransform.position.y != headHeight)
+            if (!CameraRig.BodyTransform.localPosition.y.Equals(headHeight))
             {
-                CameraRig.BodyTransform.position = new Vector3(CameraRig.BodyTransform.position.x, CameraRig.CameraPoseDriver.originPose.position.y, CameraRig.BodyTransform.position.z);
+                var cameraPosition = CameraRig.BodyTransform.localPosition;
+                cameraPosition.y = headHeight;
+                CameraRig.BodyTransform.localPosition = cameraPosition;
             }
         }
 
@@ -168,37 +170,34 @@ namespace XRTK.Services.CameraSystem
         {
             base.Disable();
 
-            if (CameraRig != null)
+            if (CameraRig == null) { return; }
+
+            if (CameraRig.CameraTransform != null)
             {
-                if (CameraRig.CameraTransform != null)
+                CameraRig.CameraTransform.SetParent(null);
+            }
+
+            if (CameraRig.PlayspaceTransform != null)
+            {
+                if (Application.isPlaying)
                 {
-                    CameraRig.CameraTransform.SetParent(null);
+                    UnityEngine.Object.Destroy(CameraRig.PlayspaceTransform.gameObject);
                 }
-
-                if (CameraRig.PlayspaceTransform != null)
+                else
                 {
-                    if (Application.isPlaying)
-                    {
-                        UnityEngine.Object.Destroy(CameraRig.PlayspaceTransform.gameObject);
-                    }
-                    else
-                    {
-                        UnityEngine.Object.DestroyImmediate(CameraRig.PlayspaceTransform.gameObject);
-                    }
+                    UnityEngine.Object.DestroyImmediate(CameraRig.PlayspaceTransform.gameObject);
                 }
+            }
 
-                var component = CameraRig as Component;
-
-                if (component is IMixedRealityCameraRig)
+            if (CameraRig is Component component)
+            {
+                if (Application.isPlaying)
                 {
-                    if (Application.isPlaying)
-                    {
-                        UnityEngine.Object.Destroy(component);
-                    }
-                    else
-                    {
-                        UnityEngine.Object.DestroyImmediate(component);
-                    }
+                    UnityEngine.Object.Destroy(component);
+                }
+                else
+                {
+                    UnityEngine.Object.DestroyImmediate(component);
                 }
             }
         }

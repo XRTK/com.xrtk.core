@@ -1,6 +1,6 @@
 # These are supported funding model platforms
 
-github: # [XRTK, SimonDarksideJ, StephenHodgson]
+github: [StephenHodgson,SimonDarksideJ] # [XRTK, SimonDarksideJ, StephenHodgson]
 ko_fi: xrtk_team
 issuehunt: # simondarksidej
 custom: http://paypal.me/XRTK

@@ -1715,7 +1715,10 @@ namespace XRTK.Services
         {
             get
             {
-                if (isApplicationQuitting)
+                if !IsInitialized ||
+                    isApplicationQuitting ||
+                    instance.activeProfile == null ||
+                    (instance.activeProfile != null && !instance.activeProfile.IsCameraSystemEnabled))
                 {
                     return null;
                 }

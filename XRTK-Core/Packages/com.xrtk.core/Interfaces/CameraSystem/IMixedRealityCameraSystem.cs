@@ -24,6 +24,14 @@ namespace XRTK.Interfaces.CameraSystem
         /// </summary>
         IMixedRealityCameraRig CameraRig { get; }
 
-        float InitialHeadHeight { get; set; }
+        /// <summary>
+        /// The default head height when a platform doesn't automatically set it.
+        /// </summary>
+        float DefaultHeadHeight { get; }
+
+        /// <summary>
+        /// The current head height of the player
+        /// </summary>
+        float HeadHeight { get; set; }
     }
 }

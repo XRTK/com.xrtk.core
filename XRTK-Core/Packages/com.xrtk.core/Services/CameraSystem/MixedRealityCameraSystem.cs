@@ -24,7 +24,7 @@ namespace XRTK.Services.CameraSystem
             : base(profile)
         {
             this.profile = profile;
-            this.initialHeadHeight = profile.InitialHeadHeight;
+            DefaultHeadHeight = profile.DefaultHeadHeight;
 
             if (profile.CameraRigType.Type == null)
             {
@@ -52,10 +52,16 @@ namespace XRTK.Services.CameraSystem
             }
         }
 
-        private float initialHeadHeight = 1.6f;
+        /// <inheritdoc />
+        public float DefaultHeadHeight { get; }
 
-        public float InitialHeadHeight { get => initialHeadHeight; set => initialHeadHeight = value; }
-        
+        /// <inheritdoc />
+        public float HeadHeight
+        {
+            get => CameraRig.PlayspaceTransform.InverseTransformPoint(CameraRig.CameraTransform.position).y;
+            set => CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, value, 0f), Quaternion.identity);
+        }
+
         /// <inheritdoc />
         public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled && UnityEngine.XR.XRDevice.isPresent;
 
@@ -148,24 +154,46 @@ namespace XRTK.Services.CameraSystem
             {
                 CameraRig.BodyTransform.rotation = Quaternion.Slerp(bodyRotation, headRotation, Time.deltaTime);
             }
+
+            // TODO: Check if player is moving forward and slowly rotate the body back into the forward direction.
         }
 
         /// <inheritdoc />
-        public override void Destroy()
+        public override void Disable()
         {
-            base.Destroy();
+            base.Disable();
 
             if (CameraRig != null)
             {
+                if (CameraRig.CameraTransform != null)
+                {
+                    CameraRig.CameraTransform.SetParent(null);
+                }
+
+                if (CameraRig.PlayspaceTransform != null)
+                {
+                    if (Application.isPlaying)
+                    {
+                        UnityEngine.Object.Destroy(CameraRig.PlayspaceTransform.gameObject);
+                    }
+                    else
+                    {
+                        UnityEngine.Object.DestroyImmediate(CameraRig.PlayspaceTransform.gameObject);
+                    }
+                }
+
                 var component = CameraRig as Component;
 
-                if (Application.isPlaying)
+                if (component is IMixedRealityCameraRig)
                 {
-                    UnityEngine.Object.Destroy(component);
-                }
-                else
-                {
-                    UnityEngine.Object.DestroyImmediate(component);
+                    if (Application.isPlaying)
+                    {
+                        UnityEngine.Object.Destroy(component);
+                    }
+                    else
+                    {
+                        UnityEngine.Object.DestroyImmediate(component);
+                    }
                 }
             }
         }

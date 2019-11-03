@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.Utilities;
+using UnityEngine.SpatialTracking;
 using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Utilities;
@@ -33,23 +33,20 @@ namespace XRTK.Services.CameraSystem
                     return playspaceTransform;
                 }
 
-                if (playspaceTransform == null)
-                {
-                    var playspaceTransformLookup = GameObject.Find(playspaceName);
+                var playspaceTransformLookup = GameObject.Find(playspaceName);
 
-                    if (playspaceTransformLookup == null)
-                    {
-                        playspaceTransform = new GameObject(playspaceName).transform;
-                    }
-                    else
-                    {
-                        playspaceTransform = playspaceTransformLookup.transform;
-                    }
+                playspaceTransform = playspaceTransformLookup == null
+                    ? new GameObject(playspaceName).transform
+                    : playspaceTransformLookup.transform;
+
+                if (CameraTransform.parent != playspaceTransform)
+                {
+                    CameraTransform.SetParent(playspaceTransform);
                 }
 
-                if (HeadTransform.parent != playspaceTransform)
+                if (BodyTransform.parent != playspaceTransform)
                 {
-                    HeadTransform.SetParent(playspaceTransform);
+                    BodyTransform.SetParent(playspaceTransform);
                 }
 
                 // It's very important that the MixedRealityPlayspace align with the tracked space,
@@ -73,6 +70,11 @@ namespace XRTK.Services.CameraSystem
         {
             get
             {
+                if (playerCamera != null)
+                {
+                    return playerCamera;
+                }
+
                 // Currently the XRTK only supports a single player/user
                 // So for now we will always reference the tagged MainCamera.
                 if (playerCamera == null)
@@ -80,38 +82,13 @@ namespace XRTK.Services.CameraSystem
                     playerCamera = CameraCache.Main;
                 }
 
-                playerCamera.gameObject.EnsureComponent<MixedRealityPoseDriver>();
-
-                return playerCamera;
-            }
-        }
-
-        [SerializeField]
-        private string playerHeadName = "PlayerHead";
-
-        [SerializeField]
-        private Transform headTransform = null;
-
-        /// <inheritdoc />
-        public Transform HeadTransform
-        {
-            get
-            {
-                if (headTransform != null)
+                if (playerCamera.transform.parent == null)
                 {
-                    return headTransform;
-                }
-
-                if (PlayerCamera.transform.parent == null || 
-                    PlayerCamera.transform.parent.name == playspaceName)
-                {
-                    headTransform = new GameObject(playerHeadName).transform;
-                    headTransform.SetParent(playspaceTransform);
-                    PlayerCamera.transform.SetParent(headTransform);
+                    playerCamera.transform.SetParent(PlayspaceTransform);
                 }
                 else
                 {
-                    if (PlayerCamera.transform.parent.name != playerHeadName)
+                    if (playerCamera.transform.parent.name != playspaceName)
                     {
                         // Since the scene is set up with a different camera parent, its likely
                         // that there's an expectation that that parent is going to be used for
@@ -120,18 +97,34 @@ namespace XRTK.Services.CameraSystem
                         // might cause conflicts with the parent's intended purpose.
                         Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {playspaceName}. The existing parent will be renamed and used instead.");
                         // If we rename it, we make it clearer that why it's being teleported around at runtime.
-                        PlayerCamera.transform.parent.name = playerHeadName;
+                        playerCamera.transform.parent.name = playspaceName;
                     }
 
-                    headTransform = PlayerCamera.transform.parent;
-
-                    if (headTransform.parent != playspaceTransform)
-                    {
-                        headTransform.SetParent(playspaceTransform);
-                    }
+                    playspaceTransform = playerCamera.transform.parent;
                 }
 
-                return headTransform;
+                Debug.Assert(CameraPoseDriver != null);
+
+                return playerCamera;
+            }
+        }
+
+        [SerializeField]
+        private TrackedPoseDriver cameraPoseDriver = null;
+
+        /// <inheritdoc />
+        public TrackedPoseDriver CameraPoseDriver
+        {
+            get
+            {
+                if (cameraPoseDriver != null)
+                {
+                    return cameraPoseDriver;
+                }
+
+                cameraPoseDriver = PlayerCamera.gameObject.EnsureComponent<TrackedPoseDriver>();
+                cameraPoseDriver.UseRelativeTransform = true;
+                return cameraPoseDriver;
             }
         }
 
@@ -173,31 +166,10 @@ namespace XRTK.Services.CameraSystem
                 playspaceTransform.name = playspaceName;
             }
 
-            if (headTransform != null &&
-                !headTransform.name.Equals(playerHeadName))
-            {
-                headTransform.name = playerHeadName;
-            }
-
             if (bodyTransform != null &&
                 !bodyTransform.name.Equals(playerBodyName))
             {
                 bodyTransform.name = playerBodyName;
-            }
-        }
-
-        private void OnDestroy()
-        {
-            if (bodyTransform != null)
-            {
-                if (Application.isPlaying)
-                {
-                    Destroy(bodyTransform.gameObject);
-                }
-                else
-                {
-                    DestroyImmediate(bodyTransform.gameObject);
-                }
             }
         }
 

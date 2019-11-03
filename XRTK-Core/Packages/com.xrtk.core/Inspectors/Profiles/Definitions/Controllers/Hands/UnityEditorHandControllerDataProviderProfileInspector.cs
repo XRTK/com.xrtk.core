@@ -2,8 +2,10 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
-using XRTK.Definitions.InputSystem.Simulation;
+using UnityEngine;
+using XRTK.Definitions.Controllers.Hands.UnityEditor;
 using XRTK.Inspectors.Profiles;
+using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
 {
@@ -69,7 +71,16 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
 
         public override void OnInspectorGUI()
         {
-            base.OnInspectorGUI();
+            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+
+            if (thisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to Configuration Profile"))
+            {
+                Selection.activeObject = thisProfile.ParentProfile;
+            }
+
+            EditorGUILayout.Space();
+            thisProfile.CheckProfileLock();
 
             serializedObject.Update();
 

@@ -3,7 +3,6 @@
 
 using UnityEngine;
 using XRTK.Attributes;
-using XRTK.Definitions.InputSystem.Simulation;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;

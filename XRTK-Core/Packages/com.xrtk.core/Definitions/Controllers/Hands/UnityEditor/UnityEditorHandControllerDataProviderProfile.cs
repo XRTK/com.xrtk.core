@@ -3,11 +3,10 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
 using XRTK.Providers.Controllers.Hands.UnityEditor;
 
-namespace XRTK.Definitions.InputSystem.Simulation
+namespace XRTK.Definitions.Controllers.Hands.UnityEditor
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hands/Unity Editor Hand Controller Data Provider Profile", fileName = "UnityEditorHandControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
     public class UnityEditorHandControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile

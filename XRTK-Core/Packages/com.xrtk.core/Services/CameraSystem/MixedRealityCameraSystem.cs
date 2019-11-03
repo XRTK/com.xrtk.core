@@ -153,6 +153,17 @@ namespace XRTK.Services.CameraSystem
         }
 
         /// <inheritdoc />
+        public override void LateUpdate()
+        {
+            base.LateUpdate();
+
+            if (CameraRig.BodyTransform.position.y != headHeight)
+            {
+                CameraRig.BodyTransform.position = new Vector3(CameraRig.BodyTransform.position.x, CameraRig.CameraPoseDriver.originPose.position.y, CameraRig.BodyTransform.position.z);
+            }
+        }
+
+        /// <inheritdoc />
         public override void Disable()
         {
             base.Disable();

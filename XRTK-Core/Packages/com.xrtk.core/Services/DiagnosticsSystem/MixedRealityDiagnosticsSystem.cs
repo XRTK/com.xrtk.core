@@ -234,7 +234,7 @@ namespace XRTK.Services.DiagnosticsSystem
         private void CreateVisualizations()
         {
             diagnosticVisualizationParent = new GameObject("Diagnostics");
-            diagnosticVisualizationParent.transform.parent = MixedRealityToolkit.CameraSystem.CameraRig.HeadTransform;
+            diagnosticVisualizationParent.transform.parent = MixedRealityToolkit.CameraSystem.CameraRig.CameraTransform;
             diagnosticVisualizationParent.SetActive(ShowDiagnostics);
 
             // visual profiler settings

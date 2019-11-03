@@ -39,9 +39,9 @@ namespace XRTK.Services.CameraSystem
                     ? new GameObject(playspaceName).transform
                     : playspaceTransformLookup.transform;
 
-                if (HeadTransform.parent != playspaceTransform)
+                if (CameraTransform.parent != playspaceTransform)
                 {
-                    HeadTransform.SetParent(playspaceTransform);
+                    CameraTransform.SetParent(playspaceTransform);
                 }
 
                 if (BodyTransform.parent != playspaceTransform)
@@ -82,14 +82,13 @@ namespace XRTK.Services.CameraSystem
                     playerCamera = CameraCache.Main;
                 }
 
-                if (playerCamera.transform.parent == null ||
-                    playerCamera.transform.parent.name == playspaceName)
+                if (playerCamera.transform.parent == null)
                 {
-                    playerCamera.transform.SetParent(HeadTransform);
+                    playerCamera.transform.SetParent(PlayspaceTransform);
                 }
                 else
                 {
-                    if (playerCamera.transform.parent.name != playerHeadName)
+                    if (playerCamera.transform.parent.name != playspaceName)
                     {
                         // Since the scene is set up with a different camera parent, its likely
                         // that there's an expectation that that parent is going to be used for
@@ -98,15 +97,10 @@ namespace XRTK.Services.CameraSystem
                         // might cause conflicts with the parent's intended purpose.
                         Debug.LogWarning($"The Mixed Reality Toolkit expected the camera\'s parent to be named {playspaceName}. The existing parent will be renamed and used instead.");
                         // If we rename it, we make it clearer that why it's being teleported around at runtime.
-                        playerCamera.transform.parent.name = playerHeadName;
+                        playerCamera.transform.parent.name = playspaceName;
                     }
 
-                    headTransform = playerCamera.transform.parent;
-
-                    if (headTransform.parent != playspaceTransform)
-                    {
-                        headTransform.SetParent(playspaceTransform);
-                    }
+                    playspaceTransform = playerCamera.transform.parent;
                 }
 
                 Debug.Assert(CameraPoseDriver != null);
@@ -131,42 +125,6 @@ namespace XRTK.Services.CameraSystem
                 cameraPoseDriver = PlayerCamera.gameObject.EnsureComponent<TrackedPoseDriver>();
                 cameraPoseDriver.UseRelativeTransform = true;
                 return cameraPoseDriver;
-            }
-        }
-
-        [SerializeField]
-        private string playerHeadName = "PlayerHead";
-
-        [SerializeField]
-        private Transform headTransform = null;
-
-        /// <inheritdoc />
-        public Transform HeadTransform
-        {
-            get
-            {
-                if (headTransform != null)
-                {
-                    return headTransform;
-                }
-
-                var headTransformLookup = GameObject.Find(playerHeadName);
-
-                headTransform = headTransformLookup == null
-                    ? new GameObject(playerHeadName).transform
-                    : headTransformLookup.transform;
-
-                if (headTransform.parent != PlayspaceTransform)
-                {
-                    headTransform.SetParent(playspaceTransform);
-                }
-
-                if (CameraTransform.parent != headTransform)
-                {
-                    CameraTransform.SetParent(headTransform);
-                }
-
-                return headTransform;
             }
         }
 
@@ -206,12 +164,6 @@ namespace XRTK.Services.CameraSystem
                 !playspaceTransform.name.Equals(playspaceName))
             {
                 playspaceTransform.name = playspaceName;
-            }
-
-            if (headTransform != null &&
-                !headTransform.name.Equals(playerHeadName))
-            {
-                headTransform.name = playerHeadName;
             }
 
             if (bodyTransform != null &&

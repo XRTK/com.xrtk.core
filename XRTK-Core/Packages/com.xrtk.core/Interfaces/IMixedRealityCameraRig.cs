@@ -32,11 +32,6 @@ namespace XRTK.Interfaces
         TrackedPoseDriver CameraPoseDriver { get; }
 
         /// <summary>
-        /// The player's head transform. This <see cref="Transform"/> is to provide a head height offset should Unity not manage it
-        /// </summary>
-        Transform HeadTransform { get; }
-
-        /// <summary>
         /// The player's body transform. This <see cref="Transform"/> is synced to the player's head camera X &amp; Z values
         /// and the <see cref="CameraTransform"/>'s Y value.
         /// </summary>

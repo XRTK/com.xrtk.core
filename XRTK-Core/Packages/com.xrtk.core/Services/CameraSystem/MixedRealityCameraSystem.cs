@@ -24,6 +24,7 @@ namespace XRTK.Services.CameraSystem
             : base(profile)
         {
             this.profile = profile;
+            DefaultHeadHeight = profile.DefaultHeadHeight;
 
             if (profile.CameraRigType.Type == null)
             {
@@ -52,7 +53,31 @@ namespace XRTK.Services.CameraSystem
         }
 
         /// <inheritdoc />
-        public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled;
+        public float DefaultHeadHeight { get; }
+
+        private float headHeight;
+
+        /// <inheritdoc />
+        public float HeadHeight
+        {
+            get => headHeight;
+            set
+            {
+                if (value.Equals(headHeight))
+                {
+                    return;
+                }
+
+                headHeight = value;
+                CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, headHeight, 0f), Quaternion.identity);
+                var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
+                bodyLocalPosition.y = headHeight;
+                CameraRig.BodyTransform.localPosition = bodyLocalPosition;
+            }
+        }
+
+        /// <inheritdoc />
+        public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled && UnityEngine.XR.XRDevice.isPresent;
 
         /// <inheritdoc />
         public IMixedRealityCameraRig CameraRig { get; private set; }
@@ -132,28 +157,40 @@ namespace XRTK.Services.CameraSystem
         {
             base.LateUpdate();
 
-            CameraRig.BodyTransform.position = CameraRig.CameraTransform.position;
-
-            var bodyRotation = CameraRig.BodyTransform.rotation;
-            var headRotation = CameraRig.CameraTransform.rotation;
-
-            var currentAngle = Mathf.Abs(Quaternion.Angle(bodyRotation, headRotation));
-
-            if (currentAngle > profile.BodyAdjustmentAngle)
+            if (!CameraRig.BodyTransform.localPosition.y.Equals(headHeight))
             {
-                CameraRig.BodyTransform.rotation = Quaternion.Slerp(bodyRotation, headRotation, Time.deltaTime);
+                var cameraPosition = CameraRig.BodyTransform.localPosition;
+                cameraPosition.y = headHeight;
+                CameraRig.BodyTransform.localPosition = cameraPosition;
             }
         }
 
         /// <inheritdoc />
-        public override void Destroy()
+        public override void Disable()
         {
-            base.Destroy();
+            base.Disable();
 
-            if (CameraRig != null)
+            if (CameraRig == null) { return; }
+
+            if (CameraRig.CameraTransform != null)
             {
-                var component = CameraRig as Component;
+                CameraRig.CameraTransform.SetParent(null);
+            }
 
+            if (CameraRig.PlayspaceTransform != null)
+            {
+                if (Application.isPlaying)
+                {
+                    UnityEngine.Object.Destroy(CameraRig.PlayspaceTransform.gameObject);
+                }
+                else
+                {
+                    UnityEngine.Object.DestroyImmediate(CameraRig.PlayspaceTransform.gameObject);
+                }
+            }
+
+            if (CameraRig is Component component)
+            {
                 if (Application.isPlaying)
                 {
                     UnityEngine.Object.Destroy(component);

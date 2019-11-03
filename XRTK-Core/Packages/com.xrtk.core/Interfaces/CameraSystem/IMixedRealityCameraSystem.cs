@@ -23,5 +23,15 @@ namespace XRTK.Interfaces.CameraSystem
         /// The <see cref="IMixedRealityCameraRig"/> component used in the current configuration.
         /// </summary>
         IMixedRealityCameraRig CameraRig { get; }
+
+        /// <summary>
+        /// The default head height when a platform doesn't automatically set it.
+        /// </summary>
+        float DefaultHeadHeight { get; }
+
+        /// <summary>
+        /// The current head height of the player
+        /// </summary>
+        float HeadHeight { get; set; }
     }
 }

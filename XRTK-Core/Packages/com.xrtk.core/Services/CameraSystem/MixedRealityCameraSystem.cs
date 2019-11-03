@@ -55,11 +55,22 @@ namespace XRTK.Services.CameraSystem
         /// <inheritdoc />
         public float DefaultHeadHeight { get; }
 
+        private float headHeight;
+
         /// <inheritdoc />
         public float HeadHeight
         {
-            get => CameraRig.PlayspaceTransform.InverseTransformPoint(CameraRig.CameraTransform.position).y;
-            set => CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, value, 0f), Quaternion.identity);
+            get => headHeight;
+            set
+            {
+                if (value.Equals(headHeight))
+                {
+                    return;
+                }
+
+                headHeight = value;
+                CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, headHeight, 0f), Quaternion.identity);
+            }
         }
 
         /// <inheritdoc />
@@ -143,19 +154,10 @@ namespace XRTK.Services.CameraSystem
         {
             base.LateUpdate();
 
-            CameraRig.BodyTransform.position = CameraRig.CameraTransform.position;
-
-            var bodyRotation = CameraRig.BodyTransform.rotation;
-            var headRotation = CameraRig.CameraTransform.rotation;
-
-            var currentAngle = Mathf.Abs(Quaternion.Angle(bodyRotation, headRotation));
-
-            if (currentAngle > profile.BodyAdjustmentAngle)
+            if (CameraRig.BodyTransform.position.y != headHeight)
             {
-                CameraRig.BodyTransform.rotation = Quaternion.Slerp(bodyRotation, headRotation, Time.deltaTime);
+                CameraRig.BodyTransform.position = new Vector3(CameraRig.BodyTransform.position.x, CameraRig.CameraPoseDriver.originPose.position.y, CameraRig.BodyTransform.position.z);
             }
-
-            // TODO: Check if player is moving forward and slowly rotate the body back into the forward direction.
         }
 
         /// <inheritdoc />

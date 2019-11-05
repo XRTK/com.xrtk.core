@@ -189,7 +189,8 @@ namespace XRTK.Services.CameraSystem
                 }
             }
 
-            if (CameraRig is Component component)
+            if (CameraRig is Component component &&
+                component is IMixedRealityCameraRig)
             {
                 if (Application.isPlaying)
                 {

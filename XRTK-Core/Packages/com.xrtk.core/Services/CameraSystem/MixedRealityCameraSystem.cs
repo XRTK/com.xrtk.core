@@ -170,12 +170,14 @@ namespace XRTK.Services.CameraSystem
         {
             base.Disable();
 
-            if (CameraRig == null) { return; }
+            var camera = CameraCache.Main;
 
-            if (CameraRig.CameraTransform != null)
+            if (camera != null)
             {
-                CameraRig.CameraTransform.SetParent(null);
+                camera.transform.SetParent(null);
             }
+
+            if (CameraRig == null) { return; }
 
             if (CameraRig.PlayspaceTransform != null)
             {

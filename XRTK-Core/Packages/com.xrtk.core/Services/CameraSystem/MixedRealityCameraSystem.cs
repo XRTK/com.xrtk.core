@@ -160,6 +160,14 @@ namespace XRTK.Services.CameraSystem
             {
                 SyncRigTransforms();
             }
+            else
+            {
+                var cameraPosition = CameraRig.CameraTransform.position;
+                var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
+                bodyLocalPosition.x = cameraPosition.x;
+                bodyLocalPosition.z = cameraPosition.z;
+                CameraRig.BodyTransform.localPosition = bodyLocalPosition;
+            }
         }
 
         /// <inheritdoc />
@@ -226,9 +234,13 @@ namespace XRTK.Services.CameraSystem
 
         private void SyncRigTransforms()
         {
+            var cameraPosition = CameraRig.CameraTransform.position;
+
             // Sync the body position to be the correct height offset.
             var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
+            bodyLocalPosition.x = cameraPosition.x;
             bodyLocalPosition.y = headHeight;
+            bodyLocalPosition.z = cameraPosition.z;
             CameraRig.BodyTransform.localPosition = bodyLocalPosition;
 
             // Offset the playspace by the amount we've applied to the head height.

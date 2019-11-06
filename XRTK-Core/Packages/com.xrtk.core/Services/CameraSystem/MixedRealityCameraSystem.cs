@@ -235,6 +235,8 @@ namespace XRTK.Services.CameraSystem
             var playspacePosition = CameraRig.PlayspaceTransform.position;
             playspacePosition.y -= headHeight;
             CameraRig.PlayspaceTransform.position = playspacePosition;
+
+            Debug.Assert(playspacePosition.y.Equals(CameraRig.BodyTransform.position.y));
         }
     }
 }

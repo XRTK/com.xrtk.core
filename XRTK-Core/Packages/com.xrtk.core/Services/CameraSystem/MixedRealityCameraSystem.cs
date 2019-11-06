@@ -70,9 +70,8 @@ namespace XRTK.Services.CameraSystem
 
                 headHeight = value;
                 CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, headHeight, 0f), Quaternion.identity);
-                var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
-                bodyLocalPosition.y = headHeight;
-                CameraRig.BodyTransform.localPosition = bodyLocalPosition;
+
+                SyncRigTransforms();
             }
         }
 
@@ -159,9 +158,7 @@ namespace XRTK.Services.CameraSystem
 
             if (!CameraRig.BodyTransform.localPosition.y.Equals(headHeight))
             {
-                var cameraPosition = CameraRig.BodyTransform.localPosition;
-                cameraPosition.y = headHeight;
-                CameraRig.BodyTransform.localPosition = cameraPosition;
+                SyncRigTransforms();
             }
         }
 
@@ -225,6 +222,19 @@ namespace XRTK.Services.CameraSystem
             CameraCache.Main.backgroundColor = profile.BackgroundColorTransparentDisplay;
             CameraCache.Main.nearClipPlane = profile.NearClipPlaneTransparentDisplay;
             QualitySettings.SetQualityLevel(profile.TransparentQualityLevel, false);
+        }
+
+        private void SyncRigTransforms()
+        {
+            // Sync the body position to be the correct height offset.
+            var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
+            bodyLocalPosition.y = headHeight;
+            CameraRig.BodyTransform.localPosition = bodyLocalPosition;
+
+            // Offset the playspace by the amount we've applied to the head height.
+            var playspacePosition = CameraRig.PlayspaceTransform.position;
+            playspacePosition.y -= headHeight;
+            CameraRig.PlayspaceTransform.position = playspacePosition;
         }
     }
 }

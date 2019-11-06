@@ -45,7 +45,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
             get
             {
                 var spatialAwarenessSystemObject = new GameObject("Spatial Awareness System");
-                spatialAwarenessSystemObject.transform.parent = MixedRealityToolkit.CameraSystem.CameraRig.BodyTransform;
+                spatialAwarenessSystemObject.transform.parent = MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform;
                 return spatialAwarenessSystemObject;
             }
         }

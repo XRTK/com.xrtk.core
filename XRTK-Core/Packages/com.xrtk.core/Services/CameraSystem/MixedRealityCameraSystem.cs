@@ -170,6 +170,15 @@ namespace XRTK.Services.CameraSystem
                 bodyLocalPosition.z = cameraPosition.z;
                 CameraRig.BodyTransform.localPosition = bodyLocalPosition;
             }
+
+            var bodyRotation = CameraRig.BodyTransform.rotation;
+            var headRotation = CameraRig.CameraTransform.rotation;
+            var currentAngle = Mathf.Abs(Quaternion.Angle(bodyRotation, headRotation));
+
+            if (currentAngle > profile.BodyAdjustmentAngle)
+            {
+                CameraRig.BodyTransform.rotation = Quaternion.Slerp(bodyRotation, headRotation, Time.deltaTime * profile.BodyAdjustmentSpeed);
+            }
         }
 
         /// <inheritdoc />

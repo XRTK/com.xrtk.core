@@ -110,6 +110,8 @@ namespace XRTK.Services.CameraSystem
             {
                 CameraRig = CameraCache.Main.gameObject.EnsureComponent(profile.CameraRigType.Type) as IMixedRealityCameraRig;
                 Debug.Assert(CameraRig != null);
+
+                // Reset the body rig transform position
                 CameraRig.BodyTransform.position = CameraRig.CameraTransform.position;
                 CameraRig.BodyTransform.rotation = CameraRig.CameraTransform.rotation;
             }

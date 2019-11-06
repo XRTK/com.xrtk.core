@@ -125,6 +125,7 @@ namespace XRTK.Definitions
         /// </summary>
         public float DefaultHeadHeight => defaultHeadHeight;
 
+        [SerializeField]
         [Range(0f, 180f)]
         [Tooltip("This is the angle that will be used to adjust the player's body rotation in relation to their head position.")]
         private float bodyAdjustmentAngle = 60f;

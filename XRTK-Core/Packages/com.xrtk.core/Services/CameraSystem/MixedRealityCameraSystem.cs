@@ -70,8 +70,6 @@ namespace XRTK.Services.CameraSystem
 
                 headHeight = value;
                 CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, headHeight, 0f), Quaternion.identity);
-
-                SyncRigTransforms();
             }
         }
 
@@ -110,10 +108,7 @@ namespace XRTK.Services.CameraSystem
             {
                 CameraRig = CameraCache.Main.gameObject.EnsureComponent(profile.CameraRigType.Type) as IMixedRealityCameraRig;
                 Debug.Assert(CameraRig != null);
-
-                // Reset the body rig transform position
-                CameraRig.BodyTransform.position = CameraRig.CameraTransform.position;
-                CameraRig.BodyTransform.rotation = CameraRig.CameraTransform.rotation;
+                ResetRigTransforms();
             }
         }
 
@@ -122,9 +117,7 @@ namespace XRTK.Services.CameraSystem
         {
             base.Enable();
 
-            // Reset the body rig transform position
-            CameraRig.BodyTransform.position = CameraRig.CameraTransform.position;
-            CameraRig.BodyTransform.rotation = CameraRig.CameraTransform.rotation;
+            ResetRigTransforms();
 
             if (Application.isPlaying &&
                 profile.IsCameraPersistent)
@@ -158,27 +151,7 @@ namespace XRTK.Services.CameraSystem
         {
             base.LateUpdate();
 
-            if (!CameraRig.BodyTransform.localPosition.y.Equals(headHeight))
-            {
-                SyncRigTransforms();
-            }
-            else
-            {
-                var cameraPosition = CameraRig.CameraTransform.position;
-                var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
-                bodyLocalPosition.x = cameraPosition.x;
-                bodyLocalPosition.z = cameraPosition.z;
-                CameraRig.BodyTransform.localPosition = bodyLocalPosition;
-            }
-
-            var bodyRotation = CameraRig.BodyTransform.rotation;
-            var headRotation = CameraRig.CameraTransform.rotation;
-            var currentAngle = Mathf.Abs(Quaternion.Angle(bodyRotation, headRotation));
-
-            if (currentAngle > profile.BodyAdjustmentAngle)
-            {
-                CameraRig.BodyTransform.rotation = Quaternion.Slerp(bodyRotation, headRotation, Time.deltaTime * profile.BodyAdjustmentSpeed);
-            }
+            SyncRigTransforms();
         }
 
         /// <inheritdoc />
@@ -243,23 +216,35 @@ namespace XRTK.Services.CameraSystem
             QualitySettings.SetQualityLevel(profile.TransparentQualityLevel, false);
         }
 
+        private void ResetRigTransforms()
+        {
+            CameraRig.PlayspaceTransform.position = Vector3.zero;
+            CameraRig.PlayspaceTransform.rotation = Quaternion.identity;
+            CameraRig.CameraTransform.position = Vector3.zero;
+            CameraRig.CameraTransform.rotation = Quaternion.identity;
+            CameraRig.BodyTransform.position = Vector3.zero;
+            CameraRig.BodyTransform.rotation = Quaternion.identity;
+        }
+
         private void SyncRigTransforms()
         {
             var cameraPosition = CameraRig.CameraTransform.position;
-
-            // Sync the body position to be the correct height offset.
             var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
+
             bodyLocalPosition.x = cameraPosition.x;
-            bodyLocalPosition.y = headHeight;
+            bodyLocalPosition.y = 0f;
             bodyLocalPosition.z = cameraPosition.z;
+
             CameraRig.BodyTransform.localPosition = bodyLocalPosition;
 
-            // Offset the playspace by the amount we've applied to the head height.
-            var playspacePosition = CameraRig.PlayspaceTransform.position;
-            playspacePosition.y -= headHeight;
-            CameraRig.PlayspaceTransform.position = playspacePosition;
+            var bodyRotation = CameraRig.BodyTransform.rotation;
+            var headRotation = CameraRig.CameraTransform.rotation;
+            var currentAngle = Mathf.Abs(Quaternion.Angle(bodyRotation, headRotation));
 
-            Debug.Assert(playspacePosition.y.Equals(CameraRig.BodyTransform.position.y));
+            if (currentAngle > profile.BodyAdjustmentAngle)
+            {
+                CameraRig.BodyTransform.rotation = Quaternion.Slerp(bodyRotation, headRotation, Time.deltaTime * profile.BodyAdjustmentSpeed);
+            }
         }
     }
 }

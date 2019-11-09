@@ -70,9 +70,6 @@ namespace XRTK.Services.CameraSystem
 
                 headHeight = value;
                 CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, headHeight, 0f), Quaternion.identity);
-                var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
-                bodyLocalPosition.y = headHeight;
-                CameraRig.BodyTransform.localPosition = bodyLocalPosition;
             }
         }
 
@@ -111,8 +108,7 @@ namespace XRTK.Services.CameraSystem
             {
                 CameraRig = CameraCache.Main.gameObject.EnsureComponent(profile.CameraRigType.Type) as IMixedRealityCameraRig;
                 Debug.Assert(CameraRig != null);
-                CameraRig.BodyTransform.position = CameraRig.CameraTransform.position;
-                CameraRig.BodyTransform.rotation = CameraRig.CameraTransform.rotation;
+                ResetRigTransforms();
             }
         }
 
@@ -121,9 +117,7 @@ namespace XRTK.Services.CameraSystem
         {
             base.Enable();
 
-            // Reset the body rig transform position
-            CameraRig.BodyTransform.position = CameraRig.CameraTransform.position;
-            CameraRig.BodyTransform.rotation = CameraRig.CameraTransform.rotation;
+            ResetRigTransforms();
 
             if (Application.isPlaying &&
                 profile.IsCameraPersistent)
@@ -157,12 +151,7 @@ namespace XRTK.Services.CameraSystem
         {
             base.LateUpdate();
 
-            if (!CameraRig.BodyTransform.localPosition.y.Equals(headHeight))
-            {
-                var cameraPosition = CameraRig.BodyTransform.localPosition;
-                cameraPosition.y = headHeight;
-                CameraRig.BodyTransform.localPosition = cameraPosition;
-            }
+            SyncRigTransforms();
         }
 
         /// <inheritdoc />
@@ -170,12 +159,14 @@ namespace XRTK.Services.CameraSystem
         {
             base.Disable();
 
-            if (CameraRig == null) { return; }
+            var camera = CameraCache.Main;
 
-            if (CameraRig.CameraTransform != null)
+            if (camera != null)
             {
-                CameraRig.CameraTransform.SetParent(null);
+                camera.transform.SetParent(null);
             }
+
+            if (CameraRig == null) { return; }
 
             if (CameraRig.PlayspaceTransform != null)
             {
@@ -189,7 +180,8 @@ namespace XRTK.Services.CameraSystem
                 }
             }
 
-            if (CameraRig is Component component)
+            if (CameraRig is Component component &&
+                component is IMixedRealityCameraRig)
             {
                 if (Application.isPlaying)
                 {
@@ -222,6 +214,37 @@ namespace XRTK.Services.CameraSystem
             CameraCache.Main.backgroundColor = profile.BackgroundColorTransparentDisplay;
             CameraCache.Main.nearClipPlane = profile.NearClipPlaneTransparentDisplay;
             QualitySettings.SetQualityLevel(profile.TransparentQualityLevel, false);
+        }
+
+        private void ResetRigTransforms()
+        {
+            CameraRig.PlayspaceTransform.position = Vector3.zero;
+            CameraRig.PlayspaceTransform.rotation = Quaternion.identity;
+            CameraRig.CameraTransform.position = Vector3.zero;
+            CameraRig.CameraTransform.rotation = Quaternion.identity;
+            CameraRig.BodyTransform.position = Vector3.zero;
+            CameraRig.BodyTransform.rotation = Quaternion.identity;
+        }
+
+        private void SyncRigTransforms()
+        {
+            var cameraPosition = CameraRig.CameraTransform.position;
+            var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
+
+            bodyLocalPosition.x = cameraPosition.x;
+            bodyLocalPosition.y = 0f;
+            bodyLocalPosition.z = cameraPosition.z;
+
+            CameraRig.BodyTransform.localPosition = bodyLocalPosition;
+
+            var bodyRotation = CameraRig.BodyTransform.rotation;
+            var headRotation = CameraRig.CameraTransform.rotation;
+            var currentAngle = Mathf.Abs(Quaternion.Angle(bodyRotation, headRotation));
+
+            if (currentAngle > profile.BodyAdjustmentAngle)
+            {
+                CameraRig.BodyTransform.rotation = Quaternion.Slerp(bodyRotation, headRotation, Time.deltaTime * profile.BodyAdjustmentSpeed);
+            }
         }
     }
 }

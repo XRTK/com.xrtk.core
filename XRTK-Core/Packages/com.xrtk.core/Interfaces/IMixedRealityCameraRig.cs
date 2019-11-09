@@ -14,6 +14,10 @@ namespace XRTK.Interfaces
         /// <summary>
         /// The root playspace transform that serves as the root of the camera rig.
         /// </summary>
+        /// <remarks>
+        /// This transform serves as a virtual representation of the physical space.
+        /// All physical objects that have digital twins will use this frame of reference to synchronize their transform data.
+        /// </remarks>
         Transform PlayspaceTransform { get; }
 
         /// <summary>
@@ -32,9 +36,12 @@ namespace XRTK.Interfaces
         TrackedPoseDriver CameraPoseDriver { get; }
 
         /// <summary>
-        /// The player's body transform. This <see cref="Transform"/> is synced to the player's head camera X &amp; Z values
-        /// and the <see cref="CameraTransform"/>'s Y value.
+        /// The player's body transform.
         /// </summary>
+        /// <remarks>
+        /// This <see cref="Transform"/> is synced to the player's head camera X &amp; Z values
+        /// and the <see cref="PlayspaceTransform"/>'s Y value.
+        /// </remarks>
         Transform BodyTransform { get; }
     }
 }

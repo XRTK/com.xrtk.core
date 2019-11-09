@@ -298,7 +298,7 @@ namespace XRTK.Services.BoundarySystem
                 }
 
                 var visualizationParent = new GameObject("Boundary System Visualizations");
-                visualizationParent.transform.parent = MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform;
+                visualizationParent.transform.parent = MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform;
                 return boundaryVisualizationParent = visualizationParent;
             }
         }

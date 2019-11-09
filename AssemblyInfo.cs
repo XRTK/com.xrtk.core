@@ -11,3 +11,4 @@ using System.Runtime.CompilerServices;
 [assembly: InternalsVisibleTo("XRTK.WindowsMixedReality")]
 [assembly: InternalsVisibleTo("XRTK.WindowsMixedReality.Player")]
 [assembly: InternalsVisibleTo("XRTK.Oculus")]
+[assembly: InternalsVisibleTo("XRTK.Oculus.Player")]

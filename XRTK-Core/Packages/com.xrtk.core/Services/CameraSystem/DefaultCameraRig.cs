@@ -33,6 +33,11 @@ namespace XRTK.Services.CameraSystem
                     return playspaceTransform;
                 }
 
+                if (MixedRealityToolkit.IsApplicationQuitting)
+                {
+                    return null;
+                }
+
                 var playspaceTransformLookup = GameObject.Find(playspaceName);
 
                 playspaceTransform = playspaceTransformLookup == null
@@ -60,7 +65,7 @@ namespace XRTK.Services.CameraSystem
         }
 
         /// <inheritdoc />
-        public Transform CameraTransform => PlayerCamera.transform;
+        public Transform CameraTransform => PlayerCamera == null ? null : playerCamera.transform;
 
         [SerializeField]
         private Camera playerCamera = null;
@@ -73,6 +78,11 @@ namespace XRTK.Services.CameraSystem
                 if (playerCamera != null)
                 {
                     return playerCamera;
+                }
+
+                if (MixedRealityToolkit.IsApplicationQuitting)
+                {
+                    return null;
                 }
 
                 // Currently the XRTK only supports a single player/user
@@ -122,6 +132,11 @@ namespace XRTK.Services.CameraSystem
                     return cameraPoseDriver;
                 }
 
+                if (MixedRealityToolkit.IsApplicationQuitting)
+                {
+                    return null;
+                }
+
                 cameraPoseDriver = PlayerCamera.gameObject.EnsureComponent<TrackedPoseDriver>();
                 cameraPoseDriver.UseRelativeTransform = true;
                 return cameraPoseDriver;
@@ -139,6 +154,16 @@ namespace XRTK.Services.CameraSystem
         {
             get
             {
+                if (bodyTransform != null)
+                {
+                    return bodyTransform;
+                }
+
+                if (MixedRealityToolkit.IsApplicationQuitting)
+                {
+                    return null;
+                }
+
                 if (bodyTransform == null)
                 {
                     bodyTransform = PlayspaceTransform.Find(playerBodyName);

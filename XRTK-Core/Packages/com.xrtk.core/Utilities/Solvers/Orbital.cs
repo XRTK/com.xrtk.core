@@ -110,7 +110,6 @@ namespace XRTK.SDK.Utilities.Solvers
             UpdateWorkingRotationToGoal();
         }
 
-
         private Quaternion SnapToTetherAngleSteps(Quaternion rotationToSnap)
         {
             if (!UseAngleSteppingForWorldOffset || SolverHandler.TransformTarget == null)
@@ -120,7 +119,6 @@ namespace XRTK.SDK.Utilities.Solvers
 
             var stepAngle = 360f / tetherAngleSteps;
             var numberOfSteps = Mathf.RoundToInt(SolverHandler.TransformTarget.transform.eulerAngles.y / stepAngle);
-
             var newAngle = stepAngle * numberOfSteps;
 
             return Quaternion.Euler(rotationToSnap.eulerAngles.x, newAngle, rotationToSnap.eulerAngles.z);
@@ -129,6 +127,9 @@ namespace XRTK.SDK.Utilities.Solvers
         private Quaternion CalculateDesiredRotation(Vector3 desiredPos)
         {
             var desiredRot = Quaternion.identity;
+            var cameraTransform = MixedRealityToolkit.CameraSystem == null
+                ? CameraCache.Main.transform
+                : MixedRealityToolkit.CameraSystem.CameraRig.CameraTransform;
 
             switch (orientationType)
             {
@@ -142,7 +143,7 @@ namespace XRTK.SDK.Utilities.Solvers
                     desiredRot = transform.rotation;
                     break;
                 case SolverOrientationType.CameraAligned:
-                    desiredRot = MixedRealityToolkit.CameraSystem.CameraRig.CameraTransform.rotation;
+                    desiredRot = cameraTransform.rotation;
                     break;
                 case SolverOrientationType.FaceTrackedObject:
                     desiredRot = SolverHandler.TransformTarget != null
@@ -151,7 +152,7 @@ namespace XRTK.SDK.Utilities.Solvers
                     break;
                 case SolverOrientationType.CameraFacing:
                     desiredRot = SolverHandler.TransformTarget != null
-                        ? Quaternion.LookRotation(MixedRealityToolkit.CameraSystem.CameraRig.CameraTransform.position - desiredPos)
+                        ? Quaternion.LookRotation(cameraTransform.position - desiredPos)
                         : Quaternion.identity;
                     break;
                 case SolverOrientationType.FollowTrackedObject:

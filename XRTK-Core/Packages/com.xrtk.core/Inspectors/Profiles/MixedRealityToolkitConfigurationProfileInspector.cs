@@ -71,8 +71,12 @@ namespace XRTK.Inspectors.Profiles
                         "Yes",
                         "Later"))
                     {
-                        var playspace = MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform;
-                        Debug.Assert(playspace != null);
+                        if (MixedRealityToolkit.CameraSystem != null)
+                        {
+                            var playspace = MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform;
+                            Debug.Assert(playspace != null);
+                        }
+
                         MixedRealityToolkit.Instance.ActiveProfile = configurationProfile;
                     }
                     else

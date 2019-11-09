@@ -124,5 +124,24 @@ namespace XRTK.Definitions
         /// The default head height the rig will start at if a platform doesn't automatically adjust the height for you.
         /// </summary>
         public float DefaultHeadHeight => defaultHeadHeight;
+
+        [SerializeField]
+        [Range(0f, 180f)]
+        [Tooltip("This is the angle that will be used to adjust the player's body rotation in relation to their head position.")]
+        private float bodyAdjustmentAngle = 60f;
+
+        /// <summary>
+        /// /// This is the angle that will be used to adjust the player's body rotation in relation to their head position.
+        /// </summary>
+        public float BodyAdjustmentAngle => bodyAdjustmentAngle;
+
+        [SerializeField]
+        [Tooltip("The speed at which the body transform will sync it's rotation with the head transform.")]
+        private float bodyAdjustmentSpeed = 1f;
+
+        /// <summary>
+        /// The speed at which the body transform will sync it's rotation with the head transform.
+        /// </summary>
+        public float BodyAdjustmentSpeed => bodyAdjustmentSpeed;
     }
 }

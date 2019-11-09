@@ -4632,6 +4632,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.MixedRealityCameraProfile.BackgroundColorTransparentDisplay
   nameWithType: MixedRealityCameraProfile.BackgroundColorTransparentDisplay
+- uid: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentAngle
+  name: BodyAdjustmentAngle
+  href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_BodyAdjustmentAngle
+  commentId: P:XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentAngle
+  fullName: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentAngle
+  nameWithType: MixedRealityCameraProfile.BodyAdjustmentAngle
+- uid: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentAngle*
+  name: BodyAdjustmentAngle
+  href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_BodyAdjustmentAngle_
+  commentId: Overload:XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentAngle
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentAngle
+  nameWithType: MixedRealityCameraProfile.BodyAdjustmentAngle
+- uid: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentSpeed
+  name: BodyAdjustmentSpeed
+  href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_BodyAdjustmentSpeed
+  commentId: P:XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentSpeed
+  fullName: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentSpeed
+  nameWithType: MixedRealityCameraProfile.BodyAdjustmentSpeed
+- uid: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentSpeed*
+  name: BodyAdjustmentSpeed
+  href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_BodyAdjustmentSpeed_
+  commentId: Overload:XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentSpeed
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentSpeed
+  nameWithType: MixedRealityCameraProfile.BodyAdjustmentSpeed
 - uid: XRTK.Definitions.MixedRealityCameraProfile.CameraClearFlagsOpaqueDisplay
   name: CameraClearFlagsOpaqueDisplay
   href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_CameraClearFlagsOpaqueDisplay
@@ -21029,6 +21055,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.OculusApi.GetNodeVelocity
   nameWithType: OculusApi.GetNodeVelocity
+- uid: XRTK.Oculus.OculusApi.GetPosePosition(XRTK.Oculus.OculusApi.Posef)
+  name: GetPosePosition(OculusApi.Posef)
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetPosePosition_XRTK_Oculus_OculusApi_Posef_
+  commentId: M:XRTK.Oculus.OculusApi.GetPosePosition(XRTK.Oculus.OculusApi.Posef)
+  fullName: XRTK.Oculus.OculusApi.GetPosePosition(XRTK.Oculus.OculusApi.Posef)
+  nameWithType: OculusApi.GetPosePosition(OculusApi.Posef)
+- uid: XRTK.Oculus.OculusApi.GetPosePosition*
+  name: GetPosePosition
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetPosePosition_
+  commentId: Overload:XRTK.Oculus.OculusApi.GetPosePosition
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.GetPosePosition
+  nameWithType: OculusApi.GetPosePosition
 - uid: XRTK.Oculus.OculusApi.GetSystemHeadsetType
   name: GetSystemHeadsetType()
   href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetSystemHeadsetType
@@ -22105,12 +22144,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.OculusApi.TestBoundaryPoint
   nameWithType: OculusApi.TestBoundaryPoint
-- uid: XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef)
-  name: ToMixedRealityPose(OculusApi.Posef)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ToMixedRealityPose_XRTK_Oculus_OculusApi_Posef_
-  commentId: M:XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef)
-  fullName: XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef)
-  nameWithType: OculusApi.ToMixedRealityPose(OculusApi.Posef)
+- uid: XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Definitions.Utilities.MixedRealityPose,XRTK.Oculus.OculusApi.Posef,System.Boolean)
+  name: ToMixedRealityPose(MixedRealityPose, OculusApi.Posef, Boolean)
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ToMixedRealityPose_XRTK_Definitions_Utilities_MixedRealityPose_XRTK_Oculus_OculusApi_Posef_System_Boolean_
+  commentId: M:XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Definitions.Utilities.MixedRealityPose,XRTK.Oculus.OculusApi.Posef,System.Boolean)
+  fullName: XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Definitions.Utilities.MixedRealityPose, XRTK.Oculus.OculusApi.Posef, System.Boolean)
+  nameWithType: OculusApi.ToMixedRealityPose(MixedRealityPose, OculusApi.Posef, Boolean)
 - uid: XRTK.Oculus.OculusApi.ToMixedRealityPose*
   name: ToMixedRealityPose
   href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ToMixedRealityPose_
@@ -26597,6 +26636,19 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsSnappedToSurface
   nameWithType: ManipulationHandler.IsSnappedToSurface
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.IsTranslateLocked
+  name: IsTranslateLocked
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_IsTranslateLocked
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.IsTranslateLocked
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsTranslateLocked
+  nameWithType: ManipulationHandler.IsTranslateLocked
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.IsTranslateLocked*
+  name: IsTranslateLocked
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_IsTranslateLocked_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.IsTranslateLocked
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsTranslateLocked
+  nameWithType: ManipulationHandler.IsTranslateLocked
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.LateUpdate
   name: LateUpdate()
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_LateUpdate

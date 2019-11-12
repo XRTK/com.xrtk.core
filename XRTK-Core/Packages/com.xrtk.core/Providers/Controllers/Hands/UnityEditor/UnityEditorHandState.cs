@@ -94,7 +94,6 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
             ScreenPosition = CameraCache.Main.WorldToScreenPoint(newWorldPoint);
 
             HandRotateEulerAngles += rotationDeltaEulerAngles;
-
             JitterOffset = UnityEngine.Random.insideUnitSphere * noiseAmount;
         }
 

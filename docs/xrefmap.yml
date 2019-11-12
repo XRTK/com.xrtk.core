@@ -4632,6 +4632,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.MixedRealityCameraProfile.BackgroundColorTransparentDisplay
   nameWithType: MixedRealityCameraProfile.BackgroundColorTransparentDisplay
+- uid: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentAngle
+  name: BodyAdjustmentAngle
+  href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_BodyAdjustmentAngle
+  commentId: P:XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentAngle
+  fullName: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentAngle
+  nameWithType: MixedRealityCameraProfile.BodyAdjustmentAngle
+- uid: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentAngle*
+  name: BodyAdjustmentAngle
+  href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_BodyAdjustmentAngle_
+  commentId: Overload:XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentAngle
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentAngle
+  nameWithType: MixedRealityCameraProfile.BodyAdjustmentAngle
+- uid: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentSpeed
+  name: BodyAdjustmentSpeed
+  href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_BodyAdjustmentSpeed
+  commentId: P:XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentSpeed
+  fullName: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentSpeed
+  nameWithType: MixedRealityCameraProfile.BodyAdjustmentSpeed
+- uid: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentSpeed*
+  name: BodyAdjustmentSpeed
+  href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_BodyAdjustmentSpeed_
+  commentId: Overload:XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentSpeed
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityCameraProfile.BodyAdjustmentSpeed
+  nameWithType: MixedRealityCameraProfile.BodyAdjustmentSpeed
 - uid: XRTK.Definitions.MixedRealityCameraProfile.CameraClearFlagsOpaqueDisplay
   name: CameraClearFlagsOpaqueDisplay
   href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_CameraClearFlagsOpaqueDisplay
@@ -4658,6 +4684,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.MixedRealityCameraProfile.CameraClearFlagsTransparentDisplay
   nameWithType: MixedRealityCameraProfile.CameraClearFlagsTransparentDisplay
+- uid: XRTK.Definitions.MixedRealityCameraProfile.CameraRigType
+  name: CameraRigType
+  href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_CameraRigType
+  commentId: P:XRTK.Definitions.MixedRealityCameraProfile.CameraRigType
+  fullName: XRTK.Definitions.MixedRealityCameraProfile.CameraRigType
+  nameWithType: MixedRealityCameraProfile.CameraRigType
+- uid: XRTK.Definitions.MixedRealityCameraProfile.CameraRigType*
+  name: CameraRigType
+  href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_CameraRigType_
+  commentId: Overload:XRTK.Definitions.MixedRealityCameraProfile.CameraRigType
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityCameraProfile.CameraRigType
+  nameWithType: MixedRealityCameraProfile.CameraRigType
+- uid: XRTK.Definitions.MixedRealityCameraProfile.DefaultHeadHeight
+  name: DefaultHeadHeight
+  href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_DefaultHeadHeight
+  commentId: P:XRTK.Definitions.MixedRealityCameraProfile.DefaultHeadHeight
+  fullName: XRTK.Definitions.MixedRealityCameraProfile.DefaultHeadHeight
+  nameWithType: MixedRealityCameraProfile.DefaultHeadHeight
+- uid: XRTK.Definitions.MixedRealityCameraProfile.DefaultHeadHeight*
+  name: DefaultHeadHeight
+  href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_DefaultHeadHeight_
+  commentId: Overload:XRTK.Definitions.MixedRealityCameraProfile.DefaultHeadHeight
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityCameraProfile.DefaultHeadHeight
+  nameWithType: MixedRealityCameraProfile.DefaultHeadHeight
 - uid: XRTK.Definitions.MixedRealityCameraProfile.IsCameraPersistent
   name: IsCameraPersistent
   href: api/XRTK.Definitions.MixedRealityCameraProfile.html#XRTK_Definitions_MixedRealityCameraProfile_IsCameraPersistent
@@ -7169,24 +7221,36 @@ references:
   commentId: T:XRTK.Definitions.Utilities.TrackedObjectType
   fullName: XRTK.Definitions.Utilities.TrackedObjectType
   nameWithType: TrackedObjectType
+- uid: XRTK.Definitions.Utilities.TrackedObjectType.Body
+  name: Body
+  href: api/XRTK.Definitions.Utilities.TrackedObjectType.html#XRTK_Definitions_Utilities_TrackedObjectType_Body
+  commentId: F:XRTK.Definitions.Utilities.TrackedObjectType.Body
+  fullName: XRTK.Definitions.Utilities.TrackedObjectType.Body
+  nameWithType: TrackedObjectType.Body
 - uid: XRTK.Definitions.Utilities.TrackedObjectType.Head
   name: Head
   href: api/XRTK.Definitions.Utilities.TrackedObjectType.html#XRTK_Definitions_Utilities_TrackedObjectType_Head
   commentId: F:XRTK.Definitions.Utilities.TrackedObjectType.Head
   fullName: XRTK.Definitions.Utilities.TrackedObjectType.Head
   nameWithType: TrackedObjectType.Head
-- uid: XRTK.Definitions.Utilities.TrackedObjectType.MotionControllerLeft
-  name: MotionControllerLeft
-  href: api/XRTK.Definitions.Utilities.TrackedObjectType.html#XRTK_Definitions_Utilities_TrackedObjectType_MotionControllerLeft
-  commentId: F:XRTK.Definitions.Utilities.TrackedObjectType.MotionControllerLeft
-  fullName: XRTK.Definitions.Utilities.TrackedObjectType.MotionControllerLeft
-  nameWithType: TrackedObjectType.MotionControllerLeft
-- uid: XRTK.Definitions.Utilities.TrackedObjectType.MotionControllerRight
-  name: MotionControllerRight
-  href: api/XRTK.Definitions.Utilities.TrackedObjectType.html#XRTK_Definitions_Utilities_TrackedObjectType_MotionControllerRight
-  commentId: F:XRTK.Definitions.Utilities.TrackedObjectType.MotionControllerRight
-  fullName: XRTK.Definitions.Utilities.TrackedObjectType.MotionControllerRight
-  nameWithType: TrackedObjectType.MotionControllerRight
+- uid: XRTK.Definitions.Utilities.TrackedObjectType.LeftHandOrController
+  name: LeftHandOrController
+  href: api/XRTK.Definitions.Utilities.TrackedObjectType.html#XRTK_Definitions_Utilities_TrackedObjectType_LeftHandOrController
+  commentId: F:XRTK.Definitions.Utilities.TrackedObjectType.LeftHandOrController
+  fullName: XRTK.Definitions.Utilities.TrackedObjectType.LeftHandOrController
+  nameWithType: TrackedObjectType.LeftHandOrController
+- uid: XRTK.Definitions.Utilities.TrackedObjectType.Playspace
+  name: Playspace
+  href: api/XRTK.Definitions.Utilities.TrackedObjectType.html#XRTK_Definitions_Utilities_TrackedObjectType_Playspace
+  commentId: F:XRTK.Definitions.Utilities.TrackedObjectType.Playspace
+  fullName: XRTK.Definitions.Utilities.TrackedObjectType.Playspace
+  nameWithType: TrackedObjectType.Playspace
+- uid: XRTK.Definitions.Utilities.TrackedObjectType.RightHandOrController
+  name: RightHandOrController
+  href: api/XRTK.Definitions.Utilities.TrackedObjectType.html#XRTK_Definitions_Utilities_TrackedObjectType_RightHandOrController
+  commentId: F:XRTK.Definitions.Utilities.TrackedObjectType.RightHandOrController
+  fullName: XRTK.Definitions.Utilities.TrackedObjectType.RightHandOrController
+  nameWithType: TrackedObjectType.RightHandOrController
 - uid: XRTK.Definitions.Utilities.TypeGrouping
   name: TypeGrouping
   href: api/XRTK.Definitions.Utilities.TypeGrouping.html
@@ -14862,6 +14926,45 @@ references:
   commentId: T:XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem
   fullName: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem
   nameWithType: IMixedRealityCameraSystem
+- uid: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.CameraRig
+  name: CameraRig
+  href: api/XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_CameraRig
+  commentId: P:XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.CameraRig
+  fullName: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.CameraRig
+  nameWithType: IMixedRealityCameraSystem.CameraRig
+- uid: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.CameraRig*
+  name: CameraRig
+  href: api/XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_CameraRig_
+  commentId: Overload:XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.CameraRig
+  isSpec: "True"
+  fullName: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.CameraRig
+  nameWithType: IMixedRealityCameraSystem.CameraRig
+- uid: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.DefaultHeadHeight
+  name: DefaultHeadHeight
+  href: api/XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_DefaultHeadHeight
+  commentId: P:XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.DefaultHeadHeight
+  fullName: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.DefaultHeadHeight
+  nameWithType: IMixedRealityCameraSystem.DefaultHeadHeight
+- uid: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.DefaultHeadHeight*
+  name: DefaultHeadHeight
+  href: api/XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_DefaultHeadHeight_
+  commentId: Overload:XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.DefaultHeadHeight
+  isSpec: "True"
+  fullName: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.DefaultHeadHeight
+  nameWithType: IMixedRealityCameraSystem.DefaultHeadHeight
+- uid: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.HeadHeight
+  name: HeadHeight
+  href: api/XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_HeadHeight
+  commentId: P:XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.HeadHeight
+  fullName: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.HeadHeight
+  nameWithType: IMixedRealityCameraSystem.HeadHeight
+- uid: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.HeadHeight*
+  name: HeadHeight
+  href: api/XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_HeadHeight_
+  commentId: Overload:XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.HeadHeight
+  isSpec: "True"
+  fullName: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.HeadHeight
+  nameWithType: IMixedRealityCameraSystem.HeadHeight
 - uid: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.IsOpaque
   name: IsOpaque
   href: api/XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_IsOpaque
@@ -14875,6 +14978,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.IsOpaque
   nameWithType: IMixedRealityCameraSystem.IsOpaque
+- uid: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.IsStereoscopic
+  name: IsStereoscopic
+  href: api/XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_IsStereoscopic
+  commentId: P:XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.IsStereoscopic
+  fullName: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.IsStereoscopic
+  nameWithType: IMixedRealityCameraSystem.IsStereoscopic
+- uid: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.IsStereoscopic*
+  name: IsStereoscopic
+  href: api/XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraSystem_IsStereoscopic_
+  commentId: Overload:XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.IsStereoscopic
+  isSpec: "True"
+  fullName: XRTK.Interfaces.CameraSystem.IMixedRealityCameraSystem.IsStereoscopic
+  nameWithType: IMixedRealityCameraSystem.IsStereoscopic
 - uid: XRTK.Interfaces.Diagnostics
   name: XRTK.Interfaces.Diagnostics
   href: api/XRTK.Interfaces.Diagnostics.html
@@ -15082,6 +15198,77 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.Events.IMixedRealityEventSystem.Unregister
   nameWithType: IMixedRealityEventSystem.Unregister
+- uid: XRTK.Interfaces.IMixedRealityCameraRig
+  name: IMixedRealityCameraRig
+  href: api/XRTK.Interfaces.IMixedRealityCameraRig.html
+  commentId: T:XRTK.Interfaces.IMixedRealityCameraRig
+  fullName: XRTK.Interfaces.IMixedRealityCameraRig
+  nameWithType: IMixedRealityCameraRig
+- uid: XRTK.Interfaces.IMixedRealityCameraRig.BodyTransform
+  name: BodyTransform
+  href: api/XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_Interfaces_IMixedRealityCameraRig_BodyTransform
+  commentId: P:XRTK.Interfaces.IMixedRealityCameraRig.BodyTransform
+  fullName: XRTK.Interfaces.IMixedRealityCameraRig.BodyTransform
+  nameWithType: IMixedRealityCameraRig.BodyTransform
+- uid: XRTK.Interfaces.IMixedRealityCameraRig.BodyTransform*
+  name: BodyTransform
+  href: api/XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_Interfaces_IMixedRealityCameraRig_BodyTransform_
+  commentId: Overload:XRTK.Interfaces.IMixedRealityCameraRig.BodyTransform
+  isSpec: "True"
+  fullName: XRTK.Interfaces.IMixedRealityCameraRig.BodyTransform
+  nameWithType: IMixedRealityCameraRig.BodyTransform
+- uid: XRTK.Interfaces.IMixedRealityCameraRig.CameraPoseDriver
+  name: CameraPoseDriver
+  href: api/XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_Interfaces_IMixedRealityCameraRig_CameraPoseDriver
+  commentId: P:XRTK.Interfaces.IMixedRealityCameraRig.CameraPoseDriver
+  fullName: XRTK.Interfaces.IMixedRealityCameraRig.CameraPoseDriver
+  nameWithType: IMixedRealityCameraRig.CameraPoseDriver
+- uid: XRTK.Interfaces.IMixedRealityCameraRig.CameraPoseDriver*
+  name: CameraPoseDriver
+  href: api/XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_Interfaces_IMixedRealityCameraRig_CameraPoseDriver_
+  commentId: Overload:XRTK.Interfaces.IMixedRealityCameraRig.CameraPoseDriver
+  isSpec: "True"
+  fullName: XRTK.Interfaces.IMixedRealityCameraRig.CameraPoseDriver
+  nameWithType: IMixedRealityCameraRig.CameraPoseDriver
+- uid: XRTK.Interfaces.IMixedRealityCameraRig.CameraTransform
+  name: CameraTransform
+  href: api/XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_Interfaces_IMixedRealityCameraRig_CameraTransform
+  commentId: P:XRTK.Interfaces.IMixedRealityCameraRig.CameraTransform
+  fullName: XRTK.Interfaces.IMixedRealityCameraRig.CameraTransform
+  nameWithType: IMixedRealityCameraRig.CameraTransform
+- uid: XRTK.Interfaces.IMixedRealityCameraRig.CameraTransform*
+  name: CameraTransform
+  href: api/XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_Interfaces_IMixedRealityCameraRig_CameraTransform_
+  commentId: Overload:XRTK.Interfaces.IMixedRealityCameraRig.CameraTransform
+  isSpec: "True"
+  fullName: XRTK.Interfaces.IMixedRealityCameraRig.CameraTransform
+  nameWithType: IMixedRealityCameraRig.CameraTransform
+- uid: XRTK.Interfaces.IMixedRealityCameraRig.PlayerCamera
+  name: PlayerCamera
+  href: api/XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_Interfaces_IMixedRealityCameraRig_PlayerCamera
+  commentId: P:XRTK.Interfaces.IMixedRealityCameraRig.PlayerCamera
+  fullName: XRTK.Interfaces.IMixedRealityCameraRig.PlayerCamera
+  nameWithType: IMixedRealityCameraRig.PlayerCamera
+- uid: XRTK.Interfaces.IMixedRealityCameraRig.PlayerCamera*
+  name: PlayerCamera
+  href: api/XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_Interfaces_IMixedRealityCameraRig_PlayerCamera_
+  commentId: Overload:XRTK.Interfaces.IMixedRealityCameraRig.PlayerCamera
+  isSpec: "True"
+  fullName: XRTK.Interfaces.IMixedRealityCameraRig.PlayerCamera
+  nameWithType: IMixedRealityCameraRig.PlayerCamera
+- uid: XRTK.Interfaces.IMixedRealityCameraRig.PlayspaceTransform
+  name: PlayspaceTransform
+  href: api/XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_Interfaces_IMixedRealityCameraRig_PlayspaceTransform
+  commentId: P:XRTK.Interfaces.IMixedRealityCameraRig.PlayspaceTransform
+  fullName: XRTK.Interfaces.IMixedRealityCameraRig.PlayspaceTransform
+  nameWithType: IMixedRealityCameraRig.PlayspaceTransform
+- uid: XRTK.Interfaces.IMixedRealityCameraRig.PlayspaceTransform*
+  name: PlayspaceTransform
+  href: api/XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_Interfaces_IMixedRealityCameraRig_PlayspaceTransform_
+  commentId: Overload:XRTK.Interfaces.IMixedRealityCameraRig.PlayspaceTransform
+  isSpec: "True"
+  fullName: XRTK.Interfaces.IMixedRealityCameraRig.PlayspaceTransform
+  nameWithType: IMixedRealityCameraRig.PlayspaceTransform
 - uid: XRTK.Interfaces.IMixedRealityDataProvider
   name: IMixedRealityDataProvider
   href: api/XRTK.Interfaces.IMixedRealityDataProvider.html
@@ -19911,6 +20098,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.Controllers.OculusControllerDataProvider.FixedUpdate
   nameWithType: OculusControllerDataProvider.FixedUpdate
+- uid: XRTK.Oculus.Controllers.OculusControllerDataProvider.Initialize
+  name: Initialize()
+  href: api/XRTK.Oculus.Controllers.OculusControllerDataProvider.html#XRTK_Oculus_Controllers_OculusControllerDataProvider_Initialize
+  commentId: M:XRTK.Oculus.Controllers.OculusControllerDataProvider.Initialize
+  fullName: XRTK.Oculus.Controllers.OculusControllerDataProvider.Initialize()
+  nameWithType: OculusControllerDataProvider.Initialize()
+- uid: XRTK.Oculus.Controllers.OculusControllerDataProvider.Initialize*
+  name: Initialize
+  href: api/XRTK.Oculus.Controllers.OculusControllerDataProvider.html#XRTK_Oculus_Controllers_OculusControllerDataProvider_Initialize_
+  commentId: Overload:XRTK.Oculus.Controllers.OculusControllerDataProvider.Initialize
+  isSpec: "True"
+  fullName: XRTK.Oculus.Controllers.OculusControllerDataProvider.Initialize
+  nameWithType: OculusControllerDataProvider.Initialize
 - uid: XRTK.Oculus.Controllers.OculusControllerDataProvider.Update
   name: Update()
   href: api/XRTK.Oculus.Controllers.OculusControllerDataProvider.html#XRTK_Oculus_Controllers_OculusControllerDataProvider_Update
@@ -20592,6 +20792,32 @@ references:
   commentId: F:XRTK.Oculus.OculusApi.ControllerState4.Touches
   fullName: XRTK.Oculus.OculusApi.ControllerState4.Touches
   nameWithType: OculusApi.ControllerState4.Touches
+- uid: XRTK.Oculus.OculusApi.EyeDepth
+  name: EyeDepth
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_EyeDepth
+  commentId: P:XRTK.Oculus.OculusApi.EyeDepth
+  fullName: XRTK.Oculus.OculusApi.EyeDepth
+  nameWithType: OculusApi.EyeDepth
+- uid: XRTK.Oculus.OculusApi.EyeDepth*
+  name: EyeDepth
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_EyeDepth_
+  commentId: Overload:XRTK.Oculus.OculusApi.EyeDepth
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.EyeDepth
+  nameWithType: OculusApi.EyeDepth
+- uid: XRTK.Oculus.OculusApi.EyeHeight
+  name: EyeHeight
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_EyeHeight
+  commentId: P:XRTK.Oculus.OculusApi.EyeHeight
+  fullName: XRTK.Oculus.OculusApi.EyeHeight
+  nameWithType: OculusApi.EyeHeight
+- uid: XRTK.Oculus.OculusApi.EyeHeight*
+  name: EyeHeight
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_EyeHeight_
+  commentId: Overload:XRTK.Oculus.OculusApi.EyeHeight
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.EyeHeight
+  nameWithType: OculusApi.EyeHeight
 - uid: XRTK.Oculus.OculusApi.GetActiveController
   name: GetActiveController()
   href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetActiveController
@@ -20605,6 +20831,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.OculusApi.GetActiveController
   nameWithType: OculusApi.GetActiveController
+- uid: XRTK.Oculus.OculusApi.GetBoundaryConfigured
+  name: GetBoundaryConfigured()
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetBoundaryConfigured
+  commentId: M:XRTK.Oculus.OculusApi.GetBoundaryConfigured
+  fullName: XRTK.Oculus.OculusApi.GetBoundaryConfigured()
+  nameWithType: OculusApi.GetBoundaryConfigured()
+- uid: XRTK.Oculus.OculusApi.GetBoundaryConfigured*
+  name: GetBoundaryConfigured
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetBoundaryConfigured_
+  commentId: Overload:XRTK.Oculus.OculusApi.GetBoundaryConfigured
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.GetBoundaryConfigured
+  nameWithType: OculusApi.GetBoundaryConfigured
 - uid: XRTK.Oculus.OculusApi.GetBoundaryDimensions(XRTK.Oculus.OculusApi.BoundaryType)
   name: GetBoundaryDimensions(OculusApi.BoundaryType)
   href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetBoundaryDimensions_XRTK_Oculus_OculusApi_BoundaryType_
@@ -20816,6 +21055,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.OculusApi.GetNodeVelocity
   nameWithType: OculusApi.GetNodeVelocity
+- uid: XRTK.Oculus.OculusApi.GetPosePosition(XRTK.Oculus.OculusApi.Posef)
+  name: GetPosePosition(OculusApi.Posef)
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetPosePosition_XRTK_Oculus_OculusApi_Posef_
+  commentId: M:XRTK.Oculus.OculusApi.GetPosePosition(XRTK.Oculus.OculusApi.Posef)
+  fullName: XRTK.Oculus.OculusApi.GetPosePosition(XRTK.Oculus.OculusApi.Posef)
+  nameWithType: OculusApi.GetPosePosition(OculusApi.Posef)
+- uid: XRTK.Oculus.OculusApi.GetPosePosition*
+  name: GetPosePosition
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetPosePosition_
+  commentId: Overload:XRTK.Oculus.OculusApi.GetPosePosition
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.GetPosePosition
+  nameWithType: OculusApi.GetPosePosition
 - uid: XRTK.Oculus.OculusApi.GetSystemHeadsetType
   name: GetSystemHeadsetType()
   href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetSystemHeadsetType
@@ -20957,6 +21209,19 @@ references:
   commentId: F:XRTK.Oculus.OculusApi.HapticsState.SamplesQueued
   fullName: XRTK.Oculus.OculusApi.HapticsState.SamplesQueued
   nameWithType: OculusApi.HapticsState.SamplesQueued
+- uid: XRTK.Oculus.OculusApi.Initialized
+  name: Initialized
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_Initialized
+  commentId: P:XRTK.Oculus.OculusApi.Initialized
+  fullName: XRTK.Oculus.OculusApi.Initialized
+  nameWithType: OculusApi.Initialized
+- uid: XRTK.Oculus.OculusApi.Initialized*
+  name: Initialized
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_Initialized_
+  commentId: Overload:XRTK.Oculus.OculusApi.Initialized
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.Initialized
+  nameWithType: OculusApi.Initialized
 - uid: XRTK.Oculus.OculusApi.Node
   name: OculusApi.Node
   href: api/XRTK.Oculus.OculusApi.Node.html
@@ -21041,334 +21306,6 @@ references:
   commentId: F:XRTK.Oculus.OculusApi.Node.TrackerZero
   fullName: XRTK.Oculus.OculusApi.Node.TrackerZero
   nameWithType: OculusApi.Node.TrackerZero
-- uid: XRTK.Oculus.OculusApi.ovrp_GetActiveController
-  name: ovrp_GetActiveController()
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetActiveController
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetActiveController
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetActiveController()
-  nameWithType: OculusApi.ovrp_GetActiveController()
-- uid: XRTK.Oculus.OculusApi.ovrp_GetActiveController*
-  name: ovrp_GetActiveController
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetActiveController_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetActiveController
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetActiveController
-  nameWithType: OculusApi.ovrp_GetActiveController
-- uid: XRTK.Oculus.OculusApi.ovrp_GetBoundaryDimensions(XRTK.Oculus.OculusApi.BoundaryType)
-  name: ovrp_GetBoundaryDimensions(OculusApi.BoundaryType)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetBoundaryDimensions_XRTK_Oculus_OculusApi_BoundaryType_
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetBoundaryDimensions(XRTK.Oculus.OculusApi.BoundaryType)
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetBoundaryDimensions(XRTK.Oculus.OculusApi.BoundaryType)
-  nameWithType: OculusApi.ovrp_GetBoundaryDimensions(OculusApi.BoundaryType)
-- uid: XRTK.Oculus.OculusApi.ovrp_GetBoundaryDimensions*
-  name: ovrp_GetBoundaryDimensions
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetBoundaryDimensions_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetBoundaryDimensions
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetBoundaryDimensions
-  nameWithType: OculusApi.ovrp_GetBoundaryDimensions
-- uid: XRTK.Oculus.OculusApi.ovrp_GetBoundaryGeometry2(XRTK.Oculus.OculusApi.BoundaryType,System.IntPtr,System.Int32@)
-  name: ovrp_GetBoundaryGeometry2(OculusApi.BoundaryType, IntPtr, ref Int32)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetBoundaryGeometry2_XRTK_Oculus_OculusApi_BoundaryType_System_IntPtr_System_Int32__
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetBoundaryGeometry2(XRTK.Oculus.OculusApi.BoundaryType,System.IntPtr,System.Int32@)
-  name.vb: ovrp_GetBoundaryGeometry2(OculusApi.BoundaryType, IntPtr, ByRef Int32)
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetBoundaryGeometry2(XRTK.Oculus.OculusApi.BoundaryType, System.IntPtr, ref System.Int32)
-  fullName.vb: XRTK.Oculus.OculusApi.ovrp_GetBoundaryGeometry2(XRTK.Oculus.OculusApi.BoundaryType, System.IntPtr, ByRef System.Int32)
-  nameWithType: OculusApi.ovrp_GetBoundaryGeometry2(OculusApi.BoundaryType, IntPtr, ref Int32)
-  nameWithType.vb: OculusApi.ovrp_GetBoundaryGeometry2(OculusApi.BoundaryType, IntPtr, ByRef Int32)
-- uid: XRTK.Oculus.OculusApi.ovrp_GetBoundaryGeometry2*
-  name: ovrp_GetBoundaryGeometry2
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetBoundaryGeometry2_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetBoundaryGeometry2
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetBoundaryGeometry2
-  nameWithType: OculusApi.ovrp_GetBoundaryGeometry2
-- uid: XRTK.Oculus.OculusApi.ovrp_GetBoundaryVisible
-  name: ovrp_GetBoundaryVisible()
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetBoundaryVisible
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetBoundaryVisible
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetBoundaryVisible()
-  nameWithType: OculusApi.ovrp_GetBoundaryVisible()
-- uid: XRTK.Oculus.OculusApi.ovrp_GetBoundaryVisible*
-  name: ovrp_GetBoundaryVisible
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetBoundaryVisible_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetBoundaryVisible
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetBoundaryVisible
-  nameWithType: OculusApi.ovrp_GetBoundaryVisible
-- uid: XRTK.Oculus.OculusApi.ovrp_GetConnectedControllers
-  name: ovrp_GetConnectedControllers()
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetConnectedControllers
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetConnectedControllers
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetConnectedControllers()
-  nameWithType: OculusApi.ovrp_GetConnectedControllers()
-- uid: XRTK.Oculus.OculusApi.ovrp_GetConnectedControllers*
-  name: ovrp_GetConnectedControllers
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetConnectedControllers_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetConnectedControllers
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetConnectedControllers
-  nameWithType: OculusApi.ovrp_GetConnectedControllers
-- uid: XRTK.Oculus.OculusApi.ovrp_GetControllerHapticsDesc(System.UInt32)
-  name: ovrp_GetControllerHapticsDesc(UInt32)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetControllerHapticsDesc_System_UInt32_
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetControllerHapticsDesc(System.UInt32)
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetControllerHapticsDesc(System.UInt32)
-  nameWithType: OculusApi.ovrp_GetControllerHapticsDesc(UInt32)
-- uid: XRTK.Oculus.OculusApi.ovrp_GetControllerHapticsDesc*
-  name: ovrp_GetControllerHapticsDesc
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetControllerHapticsDesc_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetControllerHapticsDesc
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetControllerHapticsDesc
-  nameWithType: OculusApi.ovrp_GetControllerHapticsDesc
-- uid: XRTK.Oculus.OculusApi.ovrp_GetControllerHapticsState(System.UInt32)
-  name: ovrp_GetControllerHapticsState(UInt32)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetControllerHapticsState_System_UInt32_
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetControllerHapticsState(System.UInt32)
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetControllerHapticsState(System.UInt32)
-  nameWithType: OculusApi.ovrp_GetControllerHapticsState(UInt32)
-- uid: XRTK.Oculus.OculusApi.ovrp_GetControllerHapticsState*
-  name: ovrp_GetControllerHapticsState
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetControllerHapticsState_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetControllerHapticsState
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetControllerHapticsState
-  nameWithType: OculusApi.ovrp_GetControllerHapticsState
-- uid: XRTK.Oculus.OculusApi.ovrp_GetControllerState4(System.UInt32,XRTK.Oculus.OculusApi.ControllerState4@)
-  name: ovrp_GetControllerState4(UInt32, ref OculusApi.ControllerState4)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetControllerState4_System_UInt32_XRTK_Oculus_OculusApi_ControllerState4__
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetControllerState4(System.UInt32,XRTK.Oculus.OculusApi.ControllerState4@)
-  name.vb: ovrp_GetControllerState4(UInt32, ByRef OculusApi.ControllerState4)
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetControllerState4(System.UInt32, ref XRTK.Oculus.OculusApi.ControllerState4)
-  fullName.vb: XRTK.Oculus.OculusApi.ovrp_GetControllerState4(System.UInt32, ByRef XRTK.Oculus.OculusApi.ControllerState4)
-  nameWithType: OculusApi.ovrp_GetControllerState4(UInt32, ref OculusApi.ControllerState4)
-  nameWithType.vb: OculusApi.ovrp_GetControllerState4(UInt32, ByRef OculusApi.ControllerState4)
-- uid: XRTK.Oculus.OculusApi.ovrp_GetControllerState4*
-  name: ovrp_GetControllerState4
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetControllerState4_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetControllerState4
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetControllerState4
-  nameWithType: OculusApi.ovrp_GetControllerState4
-- uid: XRTK.Oculus.OculusApi.ovrp_GetDominantHand(XRTK.Oculus.OculusApi.Handedness@)
-  name: ovrp_GetDominantHand(out OculusApi.Handedness)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetDominantHand_XRTK_Oculus_OculusApi_Handedness__
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetDominantHand(XRTK.Oculus.OculusApi.Handedness@)
-  name.vb: ovrp_GetDominantHand(ByRef OculusApi.Handedness)
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetDominantHand(out XRTK.Oculus.OculusApi.Handedness)
-  fullName.vb: XRTK.Oculus.OculusApi.ovrp_GetDominantHand(ByRef XRTK.Oculus.OculusApi.Handedness)
-  nameWithType: OculusApi.ovrp_GetDominantHand(out OculusApi.Handedness)
-  nameWithType.vb: OculusApi.ovrp_GetDominantHand(ByRef OculusApi.Handedness)
-- uid: XRTK.Oculus.OculusApi.ovrp_GetDominantHand*
-  name: ovrp_GetDominantHand
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetDominantHand_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetDominantHand
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetDominantHand
-  nameWithType: OculusApi.ovrp_GetDominantHand
-- uid: XRTK.Oculus.OculusApi.ovrp_GetNodeOrientationTracked(XRTK.Oculus.OculusApi.Node)
-  name: ovrp_GetNodeOrientationTracked(OculusApi.Node)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetNodeOrientationTracked_XRTK_Oculus_OculusApi_Node_
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetNodeOrientationTracked(XRTK.Oculus.OculusApi.Node)
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetNodeOrientationTracked(XRTK.Oculus.OculusApi.Node)
-  nameWithType: OculusApi.ovrp_GetNodeOrientationTracked(OculusApi.Node)
-- uid: XRTK.Oculus.OculusApi.ovrp_GetNodeOrientationTracked*
-  name: ovrp_GetNodeOrientationTracked
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetNodeOrientationTracked_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetNodeOrientationTracked
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetNodeOrientationTracked
-  nameWithType: OculusApi.ovrp_GetNodeOrientationTracked
-- uid: XRTK.Oculus.OculusApi.ovrp_GetNodeOrientationValid(XRTK.Oculus.OculusApi.Node,XRTK.Oculus.OculusApi.Bool@)
-  name: ovrp_GetNodeOrientationValid(OculusApi.Node, ref OculusApi.Bool)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetNodeOrientationValid_XRTK_Oculus_OculusApi_Node_XRTK_Oculus_OculusApi_Bool__
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetNodeOrientationValid(XRTK.Oculus.OculusApi.Node,XRTK.Oculus.OculusApi.Bool@)
-  name.vb: ovrp_GetNodeOrientationValid(OculusApi.Node, ByRef OculusApi.Bool)
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetNodeOrientationValid(XRTK.Oculus.OculusApi.Node, ref XRTK.Oculus.OculusApi.Bool)
-  fullName.vb: XRTK.Oculus.OculusApi.ovrp_GetNodeOrientationValid(XRTK.Oculus.OculusApi.Node, ByRef XRTK.Oculus.OculusApi.Bool)
-  nameWithType: OculusApi.ovrp_GetNodeOrientationValid(OculusApi.Node, ref OculusApi.Bool)
-  nameWithType.vb: OculusApi.ovrp_GetNodeOrientationValid(OculusApi.Node, ByRef OculusApi.Bool)
-- uid: XRTK.Oculus.OculusApi.ovrp_GetNodeOrientationValid*
-  name: ovrp_GetNodeOrientationValid
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetNodeOrientationValid_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetNodeOrientationValid
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetNodeOrientationValid
-  nameWithType: OculusApi.ovrp_GetNodeOrientationValid
-- uid: XRTK.Oculus.OculusApi.ovrp_GetNodePoseState(XRTK.Oculus.OculusApi.Step,XRTK.Oculus.OculusApi.Node)
-  name: ovrp_GetNodePoseState(OculusApi.Step, OculusApi.Node)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetNodePoseState_XRTK_Oculus_OculusApi_Step_XRTK_Oculus_OculusApi_Node_
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetNodePoseState(XRTK.Oculus.OculusApi.Step,XRTK.Oculus.OculusApi.Node)
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetNodePoseState(XRTK.Oculus.OculusApi.Step, XRTK.Oculus.OculusApi.Node)
-  nameWithType: OculusApi.ovrp_GetNodePoseState(OculusApi.Step, OculusApi.Node)
-- uid: XRTK.Oculus.OculusApi.ovrp_GetNodePoseState*
-  name: ovrp_GetNodePoseState
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetNodePoseState_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetNodePoseState
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetNodePoseState
-  nameWithType: OculusApi.ovrp_GetNodePoseState
-- uid: XRTK.Oculus.OculusApi.ovrp_GetNodePositionTracked(XRTK.Oculus.OculusApi.Node)
-  name: ovrp_GetNodePositionTracked(OculusApi.Node)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetNodePositionTracked_XRTK_Oculus_OculusApi_Node_
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetNodePositionTracked(XRTK.Oculus.OculusApi.Node)
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetNodePositionTracked(XRTK.Oculus.OculusApi.Node)
-  nameWithType: OculusApi.ovrp_GetNodePositionTracked(OculusApi.Node)
-- uid: XRTK.Oculus.OculusApi.ovrp_GetNodePositionTracked*
-  name: ovrp_GetNodePositionTracked
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetNodePositionTracked_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetNodePositionTracked
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetNodePositionTracked
-  nameWithType: OculusApi.ovrp_GetNodePositionTracked
-- uid: XRTK.Oculus.OculusApi.ovrp_GetNodePositionValid(XRTK.Oculus.OculusApi.Node,XRTK.Oculus.OculusApi.Bool@)
-  name: ovrp_GetNodePositionValid(OculusApi.Node, ref OculusApi.Bool)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetNodePositionValid_XRTK_Oculus_OculusApi_Node_XRTK_Oculus_OculusApi_Bool__
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetNodePositionValid(XRTK.Oculus.OculusApi.Node,XRTK.Oculus.OculusApi.Bool@)
-  name.vb: ovrp_GetNodePositionValid(OculusApi.Node, ByRef OculusApi.Bool)
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetNodePositionValid(XRTK.Oculus.OculusApi.Node, ref XRTK.Oculus.OculusApi.Bool)
-  fullName.vb: XRTK.Oculus.OculusApi.ovrp_GetNodePositionValid(XRTK.Oculus.OculusApi.Node, ByRef XRTK.Oculus.OculusApi.Bool)
-  nameWithType: OculusApi.ovrp_GetNodePositionValid(OculusApi.Node, ref OculusApi.Bool)
-  nameWithType.vb: OculusApi.ovrp_GetNodePositionValid(OculusApi.Node, ByRef OculusApi.Bool)
-- uid: XRTK.Oculus.OculusApi.ovrp_GetNodePositionValid*
-  name: ovrp_GetNodePositionValid
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetNodePositionValid_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetNodePositionValid
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetNodePositionValid
-  nameWithType: OculusApi.ovrp_GetNodePositionValid
-- uid: XRTK.Oculus.OculusApi.ovrp_GetNodePresent(XRTK.Oculus.OculusApi.Node)
-  name: ovrp_GetNodePresent(OculusApi.Node)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetNodePresent_XRTK_Oculus_OculusApi_Node_
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetNodePresent(XRTK.Oculus.OculusApi.Node)
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetNodePresent(XRTK.Oculus.OculusApi.Node)
-  nameWithType: OculusApi.ovrp_GetNodePresent(OculusApi.Node)
-- uid: XRTK.Oculus.OculusApi.ovrp_GetNodePresent*
-  name: ovrp_GetNodePresent
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetNodePresent_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetNodePresent
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetNodePresent
-  nameWithType: OculusApi.ovrp_GetNodePresent
-- uid: XRTK.Oculus.OculusApi.ovrp_GetSystemHeadsetType
-  name: ovrp_GetSystemHeadsetType()
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetSystemHeadsetType
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetSystemHeadsetType
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetSystemHeadsetType()
-  nameWithType: OculusApi.ovrp_GetSystemHeadsetType()
-- uid: XRTK.Oculus.OculusApi.ovrp_GetSystemHeadsetType*
-  name: ovrp_GetSystemHeadsetType
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetSystemHeadsetType_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetSystemHeadsetType
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetSystemHeadsetType
-  nameWithType: OculusApi.ovrp_GetSystemHeadsetType
-- uid: XRTK.Oculus.OculusApi.ovrp_GetTrackingCalibratedOrigin
-  name: ovrp_GetTrackingCalibratedOrigin()
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetTrackingCalibratedOrigin
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetTrackingCalibratedOrigin
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetTrackingCalibratedOrigin()
-  nameWithType: OculusApi.ovrp_GetTrackingCalibratedOrigin()
-- uid: XRTK.Oculus.OculusApi.ovrp_GetTrackingCalibratedOrigin*
-  name: ovrp_GetTrackingCalibratedOrigin
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetTrackingCalibratedOrigin_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetTrackingCalibratedOrigin
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetTrackingCalibratedOrigin
-  nameWithType: OculusApi.ovrp_GetTrackingCalibratedOrigin
-- uid: XRTK.Oculus.OculusApi.ovrp_GetTrackingOriginType
-  name: ovrp_GetTrackingOriginType()
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetTrackingOriginType
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetTrackingOriginType
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetTrackingOriginType()
-  nameWithType: OculusApi.ovrp_GetTrackingOriginType()
-- uid: XRTK.Oculus.OculusApi.ovrp_GetTrackingOriginType*
-  name: ovrp_GetTrackingOriginType
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetTrackingOriginType_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetTrackingOriginType
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetTrackingOriginType
-  nameWithType: OculusApi.ovrp_GetTrackingOriginType
-- uid: XRTK.Oculus.OculusApi.ovrp_GetVersion
-  name: ovrp_GetVersion()
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetVersion
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_GetVersion
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetVersion()
-  nameWithType: OculusApi.ovrp_GetVersion()
-- uid: XRTK.Oculus.OculusApi.ovrp_GetVersion*
-  name: ovrp_GetVersion
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_GetVersion_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_GetVersion
-  isSpec: "True"
-  fullName: XRTK.Oculus.OculusApi.ovrp_GetVersion
-  nameWithType: OculusApi.ovrp_GetVersion
-- uid: XRTK.Oculus.OculusApi.ovrp_RecenterTrackingOrigin(System.UInt32)
-  name: ovrp_RecenterTrackingOrigin(UInt32)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_RecenterTrackingOrigin_System_UInt32_
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_RecenterTrackingOrigin(System.UInt32)
-  fullName: XRTK.Oculus.OculusApi.ovrp_RecenterTrackingOrigin(System.UInt32)
-  nameWithType: OculusApi.ovrp_RecenterTrackingOrigin(UInt32)
-- uid: XRTK.Oculus.OculusApi.ovrp_RecenterTrackingOrigin*
-  name: ovrp_RecenterTrackingOrigin
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_RecenterTrackingOrigin_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_RecenterTrackingOrigin
-  fullName: XRTK.Oculus.OculusApi.ovrp_RecenterTrackingOrigin
-  nameWithType: OculusApi.ovrp_RecenterTrackingOrigin
-- uid: XRTK.Oculus.OculusApi.ovrp_SetBoundaryVisible(System.Boolean)
-  name: ovrp_SetBoundaryVisible(Boolean)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_SetBoundaryVisible_System_Boolean_
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_SetBoundaryVisible(System.Boolean)
-  fullName: XRTK.Oculus.OculusApi.ovrp_SetBoundaryVisible(System.Boolean)
-  nameWithType: OculusApi.ovrp_SetBoundaryVisible(Boolean)
-- uid: XRTK.Oculus.OculusApi.ovrp_SetBoundaryVisible*
-  name: ovrp_SetBoundaryVisible
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_SetBoundaryVisible_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_SetBoundaryVisible
-  fullName: XRTK.Oculus.OculusApi.ovrp_SetBoundaryVisible
-  nameWithType: OculusApi.ovrp_SetBoundaryVisible
-- uid: XRTK.Oculus.OculusApi.ovrp_SetControllerHaptics(System.UInt32,XRTK.Oculus.OculusApi.HapticsBuffer)
-  name: ovrp_SetControllerHaptics(UInt32, OculusApi.HapticsBuffer)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_SetControllerHaptics_System_UInt32_XRTK_Oculus_OculusApi_HapticsBuffer_
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_SetControllerHaptics(System.UInt32,XRTK.Oculus.OculusApi.HapticsBuffer)
-  fullName: XRTK.Oculus.OculusApi.ovrp_SetControllerHaptics(System.UInt32, XRTK.Oculus.OculusApi.HapticsBuffer)
-  nameWithType: OculusApi.ovrp_SetControllerHaptics(UInt32, OculusApi.HapticsBuffer)
-- uid: XRTK.Oculus.OculusApi.ovrp_SetControllerHaptics*
-  name: ovrp_SetControllerHaptics
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_SetControllerHaptics_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_SetControllerHaptics
-  fullName: XRTK.Oculus.OculusApi.ovrp_SetControllerHaptics
-  nameWithType: OculusApi.ovrp_SetControllerHaptics
-- uid: XRTK.Oculus.OculusApi.ovrp_SetControllerVibration(System.UInt32,System.Single,System.Single)
-  name: ovrp_SetControllerVibration(UInt32, Single, Single)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_SetControllerVibration_System_UInt32_System_Single_System_Single_
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_SetControllerVibration(System.UInt32,System.Single,System.Single)
-  fullName: XRTK.Oculus.OculusApi.ovrp_SetControllerVibration(System.UInt32, System.Single, System.Single)
-  nameWithType: OculusApi.ovrp_SetControllerVibration(UInt32, Single, Single)
-- uid: XRTK.Oculus.OculusApi.ovrp_SetControllerVibration*
-  name: ovrp_SetControllerVibration
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_SetControllerVibration_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_SetControllerVibration
-  fullName: XRTK.Oculus.OculusApi.ovrp_SetControllerVibration
-  nameWithType: OculusApi.ovrp_SetControllerVibration
-- uid: XRTK.Oculus.OculusApi.ovrp_SetTrackingOriginType(XRTK.Oculus.OculusApi.TrackingOrigin)
-  name: ovrp_SetTrackingOriginType(OculusApi.TrackingOrigin)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_SetTrackingOriginType_XRTK_Oculus_OculusApi_TrackingOrigin_
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_SetTrackingOriginType(XRTK.Oculus.OculusApi.TrackingOrigin)
-  fullName: XRTK.Oculus.OculusApi.ovrp_SetTrackingOriginType(XRTK.Oculus.OculusApi.TrackingOrigin)
-  nameWithType: OculusApi.ovrp_SetTrackingOriginType(OculusApi.TrackingOrigin)
-- uid: XRTK.Oculus.OculusApi.ovrp_SetTrackingOriginType*
-  name: ovrp_SetTrackingOriginType
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_SetTrackingOriginType_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_SetTrackingOriginType
-  fullName: XRTK.Oculus.OculusApi.ovrp_SetTrackingOriginType
-  nameWithType: OculusApi.ovrp_SetTrackingOriginType
-- uid: XRTK.Oculus.OculusApi.ovrp_Update2(System.Int32,System.Int32,System.Double)
-  name: ovrp_Update2(Int32, Int32, Double)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_Update2_System_Int32_System_Int32_System_Double_
-  commentId: M:XRTK.Oculus.OculusApi.ovrp_Update2(System.Int32,System.Int32,System.Double)
-  fullName: XRTK.Oculus.OculusApi.ovrp_Update2(System.Int32, System.Int32, System.Double)
-  nameWithType: OculusApi.ovrp_Update2(Int32, Int32, Double)
-- uid: XRTK.Oculus.OculusApi.ovrp_Update2*
-  name: ovrp_Update2
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrp_Update2_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrp_Update2
-  fullName: XRTK.Oculus.OculusApi.ovrp_Update2
-  nameWithType: OculusApi.ovrp_Update2
-- uid: XRTK.Oculus.OculusApi.ovrpi_SetTrackingCalibratedOrigin
-  name: ovrpi_SetTrackingCalibratedOrigin()
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrpi_SetTrackingCalibratedOrigin
-  commentId: M:XRTK.Oculus.OculusApi.ovrpi_SetTrackingCalibratedOrigin
-  fullName: XRTK.Oculus.OculusApi.ovrpi_SetTrackingCalibratedOrigin()
-  nameWithType: OculusApi.ovrpi_SetTrackingCalibratedOrigin()
-- uid: XRTK.Oculus.OculusApi.ovrpi_SetTrackingCalibratedOrigin*
-  name: ovrpi_SetTrackingCalibratedOrigin
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ovrpi_SetTrackingCalibratedOrigin_
-  commentId: Overload:XRTK.Oculus.OculusApi.ovrpi_SetTrackingCalibratedOrigin
-  fullName: XRTK.Oculus.OculusApi.ovrpi_SetTrackingCalibratedOrigin
-  nameWithType: OculusApi.ovrpi_SetTrackingCalibratedOrigin
 - uid: XRTK.Oculus.OculusApi.Posef
   name: OculusApi.Posef
   href: api/XRTK.Oculus.OculusApi.Posef.html
@@ -22181,12 +22118,38 @@ references:
   commentId: F:XRTK.Oculus.OculusApi.SystemHeadset.Rift_S
   fullName: XRTK.Oculus.OculusApi.SystemHeadset.Rift_S
   nameWithType: OculusApi.SystemHeadset.Rift_S
-- uid: XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef)
-  name: ToMixedRealityPose(OculusApi.Posef)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ToMixedRealityPose_XRTK_Oculus_OculusApi_Posef_
-  commentId: M:XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef)
-  fullName: XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef)
-  nameWithType: OculusApi.ToMixedRealityPose(OculusApi.Posef)
+- uid: XRTK.Oculus.OculusApi.TestBoundaryNode(XRTK.Oculus.OculusApi.Node,XRTK.Oculus.OculusApi.BoundaryType)
+  name: TestBoundaryNode(OculusApi.Node, OculusApi.BoundaryType)
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_TestBoundaryNode_XRTK_Oculus_OculusApi_Node_XRTK_Oculus_OculusApi_BoundaryType_
+  commentId: M:XRTK.Oculus.OculusApi.TestBoundaryNode(XRTK.Oculus.OculusApi.Node,XRTK.Oculus.OculusApi.BoundaryType)
+  fullName: XRTK.Oculus.OculusApi.TestBoundaryNode(XRTK.Oculus.OculusApi.Node, XRTK.Oculus.OculusApi.BoundaryType)
+  nameWithType: OculusApi.TestBoundaryNode(OculusApi.Node, OculusApi.BoundaryType)
+- uid: XRTK.Oculus.OculusApi.TestBoundaryNode*
+  name: TestBoundaryNode
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_TestBoundaryNode_
+  commentId: Overload:XRTK.Oculus.OculusApi.TestBoundaryNode
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.TestBoundaryNode
+  nameWithType: OculusApi.TestBoundaryNode
+- uid: XRTK.Oculus.OculusApi.TestBoundaryPoint(XRTK.Oculus.OculusApi.Vector3f,XRTK.Oculus.OculusApi.BoundaryType)
+  name: TestBoundaryPoint(OculusApi.Vector3f, OculusApi.BoundaryType)
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_TestBoundaryPoint_XRTK_Oculus_OculusApi_Vector3f_XRTK_Oculus_OculusApi_BoundaryType_
+  commentId: M:XRTK.Oculus.OculusApi.TestBoundaryPoint(XRTK.Oculus.OculusApi.Vector3f,XRTK.Oculus.OculusApi.BoundaryType)
+  fullName: XRTK.Oculus.OculusApi.TestBoundaryPoint(XRTK.Oculus.OculusApi.Vector3f, XRTK.Oculus.OculusApi.BoundaryType)
+  nameWithType: OculusApi.TestBoundaryPoint(OculusApi.Vector3f, OculusApi.BoundaryType)
+- uid: XRTK.Oculus.OculusApi.TestBoundaryPoint*
+  name: TestBoundaryPoint
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_TestBoundaryPoint_
+  commentId: Overload:XRTK.Oculus.OculusApi.TestBoundaryPoint
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.TestBoundaryPoint
+  nameWithType: OculusApi.TestBoundaryPoint
+- uid: XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Definitions.Utilities.MixedRealityPose,XRTK.Oculus.OculusApi.Posef,System.Boolean)
+  name: ToMixedRealityPose(MixedRealityPose, OculusApi.Posef, Boolean)
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ToMixedRealityPose_XRTK_Definitions_Utilities_MixedRealityPose_XRTK_Oculus_OculusApi_Posef_System_Boolean_
+  commentId: M:XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Definitions.Utilities.MixedRealityPose,XRTK.Oculus.OculusApi.Posef,System.Boolean)
+  fullName: XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Definitions.Utilities.MixedRealityPose, XRTK.Oculus.OculusApi.Posef, System.Boolean)
+  nameWithType: OculusApi.ToMixedRealityPose(MixedRealityPose, OculusApi.Posef, Boolean)
 - uid: XRTK.Oculus.OculusApi.ToMixedRealityPose*
   name: ToMixedRealityPose
   href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ToMixedRealityPose_
@@ -22237,6 +22200,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.OculusApi.UpdateNodePhysicsPoses
   nameWithType: OculusApi.UpdateNodePhysicsPoses
+- uid: XRTK.Oculus.OculusApi.UserPresent
+  name: UserPresent
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_UserPresent
+  commentId: P:XRTK.Oculus.OculusApi.UserPresent
+  fullName: XRTK.Oculus.OculusApi.UserPresent
+  nameWithType: OculusApi.UserPresent
+- uid: XRTK.Oculus.OculusApi.UserPresent*
+  name: UserPresent
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_UserPresent_
+  commentId: Overload:XRTK.Oculus.OculusApi.UserPresent
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.UserPresent
+  nameWithType: OculusApi.UserPresent
 - uid: XRTK.Oculus.OculusApi.Vector2f
   name: OculusApi.Vector2f
   href: api/XRTK.Oculus.OculusApi.Vector2f.html
@@ -26660,6 +26636,19 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsSnappedToSurface
   nameWithType: ManipulationHandler.IsSnappedToSurface
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.IsTranslateLocked
+  name: IsTranslateLocked
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_IsTranslateLocked
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.IsTranslateLocked
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsTranslateLocked
+  nameWithType: ManipulationHandler.IsTranslateLocked
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.IsTranslateLocked*
+  name: IsTranslateLocked
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_IsTranslateLocked_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.IsTranslateLocked
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsTranslateLocked
+  nameWithType: ManipulationHandler.IsTranslateLocked
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.LateUpdate
   name: LateUpdate()
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_LateUpdate
@@ -26686,6 +26675,19 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.LayerMasks
   nameWithType: ManipulationHandler.LayerMasks
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.ManipulationTarget
+  name: ManipulationTarget
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_ManipulationTarget
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.ManipulationTarget
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.ManipulationTarget
+  nameWithType: ManipulationHandler.ManipulationTarget
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.ManipulationTarget*
+  name: ManipulationTarget
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_ManipulationTarget_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.ManipulationTarget
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.ManipulationTarget
+  nameWithType: ManipulationHandler.ManipulationTarget
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.NudgeAction
   name: NudgeAction
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_NudgeAction
@@ -27404,12 +27406,19 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.InputSystemGlobalListener.Start
   nameWithType: InputSystemGlobalListener.Start
-- uid: XRTK.SDK.Input.InputSystemGlobalListener.WaitUntilInputSystemValid
-  name: WaitUntilInputSystemValid
-  href: api/XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_WaitUntilInputSystemValid
-  commentId: F:XRTK.SDK.Input.InputSystemGlobalListener.WaitUntilInputSystemValid
-  fullName: XRTK.SDK.Input.InputSystemGlobalListener.WaitUntilInputSystemValid
-  nameWithType: InputSystemGlobalListener.WaitUntilInputSystemValid
+- uid: XRTK.SDK.Input.InputSystemGlobalListener.ValidateInputSystemAsync
+  name: ValidateInputSystemAsync()
+  href: api/XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_ValidateInputSystemAsync
+  commentId: M:XRTK.SDK.Input.InputSystemGlobalListener.ValidateInputSystemAsync
+  fullName: XRTK.SDK.Input.InputSystemGlobalListener.ValidateInputSystemAsync()
+  nameWithType: InputSystemGlobalListener.ValidateInputSystemAsync()
+- uid: XRTK.SDK.Input.InputSystemGlobalListener.ValidateInputSystemAsync*
+  name: ValidateInputSystemAsync
+  href: api/XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_ValidateInputSystemAsync_
+  commentId: Overload:XRTK.SDK.Input.InputSystemGlobalListener.ValidateInputSystemAsync
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.InputSystemGlobalListener.ValidateInputSystemAsync
+  nameWithType: InputSystemGlobalListener.ValidateInputSystemAsync
 - uid: XRTK.SDK.Inspectors.Input.Handlers
   name: XRTK.SDK.Inspectors.Input.Handlers
   href: api/XRTK.SDK.Inspectors.Input.Handlers.html
@@ -28757,12 +28766,6 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Utilities.Solvers.SolverHandler.RefreshTrackedObject
   nameWithType: SolverHandler.RefreshTrackedObject
-- uid: XRTK.SDK.Utilities.Solvers.SolverHandler.solvers
-  name: solvers
-  href: api/XRTK.SDK.Utilities.Solvers.SolverHandler.html#XRTK_SDK_Utilities_Solvers_SolverHandler_solvers
-  commentId: F:XRTK.SDK.Utilities.Solvers.SolverHandler.solvers
-  fullName: XRTK.SDK.Utilities.Solvers.SolverHandler.solvers
-  nameWithType: SolverHandler.solvers
 - uid: XRTK.SDK.Utilities.Solvers.SolverHandler.TrackedObjectToReference
   name: TrackedObjectToReference
   href: api/XRTK.SDK.Utilities.Solvers.SolverHandler.html#XRTK_SDK_Utilities_Solvers_SolverHandler_TrackedObjectToReference
@@ -34850,6 +34853,77 @@ references:
   commentId: N:XRTK.Services.CameraSystem
   fullName: XRTK.Services.CameraSystem
   nameWithType: XRTK.Services.CameraSystem
+- uid: XRTK.Services.CameraSystem.DefaultCameraRig
+  name: DefaultCameraRig
+  href: api/XRTK.Services.CameraSystem.DefaultCameraRig.html
+  commentId: T:XRTK.Services.CameraSystem.DefaultCameraRig
+  fullName: XRTK.Services.CameraSystem.DefaultCameraRig
+  nameWithType: DefaultCameraRig
+- uid: XRTK.Services.CameraSystem.DefaultCameraRig.BodyTransform
+  name: BodyTransform
+  href: api/XRTK.Services.CameraSystem.DefaultCameraRig.html#XRTK_Services_CameraSystem_DefaultCameraRig_BodyTransform
+  commentId: P:XRTK.Services.CameraSystem.DefaultCameraRig.BodyTransform
+  fullName: XRTK.Services.CameraSystem.DefaultCameraRig.BodyTransform
+  nameWithType: DefaultCameraRig.BodyTransform
+- uid: XRTK.Services.CameraSystem.DefaultCameraRig.BodyTransform*
+  name: BodyTransform
+  href: api/XRTK.Services.CameraSystem.DefaultCameraRig.html#XRTK_Services_CameraSystem_DefaultCameraRig_BodyTransform_
+  commentId: Overload:XRTK.Services.CameraSystem.DefaultCameraRig.BodyTransform
+  isSpec: "True"
+  fullName: XRTK.Services.CameraSystem.DefaultCameraRig.BodyTransform
+  nameWithType: DefaultCameraRig.BodyTransform
+- uid: XRTK.Services.CameraSystem.DefaultCameraRig.CameraPoseDriver
+  name: CameraPoseDriver
+  href: api/XRTK.Services.CameraSystem.DefaultCameraRig.html#XRTK_Services_CameraSystem_DefaultCameraRig_CameraPoseDriver
+  commentId: P:XRTK.Services.CameraSystem.DefaultCameraRig.CameraPoseDriver
+  fullName: XRTK.Services.CameraSystem.DefaultCameraRig.CameraPoseDriver
+  nameWithType: DefaultCameraRig.CameraPoseDriver
+- uid: XRTK.Services.CameraSystem.DefaultCameraRig.CameraPoseDriver*
+  name: CameraPoseDriver
+  href: api/XRTK.Services.CameraSystem.DefaultCameraRig.html#XRTK_Services_CameraSystem_DefaultCameraRig_CameraPoseDriver_
+  commentId: Overload:XRTK.Services.CameraSystem.DefaultCameraRig.CameraPoseDriver
+  isSpec: "True"
+  fullName: XRTK.Services.CameraSystem.DefaultCameraRig.CameraPoseDriver
+  nameWithType: DefaultCameraRig.CameraPoseDriver
+- uid: XRTK.Services.CameraSystem.DefaultCameraRig.CameraTransform
+  name: CameraTransform
+  href: api/XRTK.Services.CameraSystem.DefaultCameraRig.html#XRTK_Services_CameraSystem_DefaultCameraRig_CameraTransform
+  commentId: P:XRTK.Services.CameraSystem.DefaultCameraRig.CameraTransform
+  fullName: XRTK.Services.CameraSystem.DefaultCameraRig.CameraTransform
+  nameWithType: DefaultCameraRig.CameraTransform
+- uid: XRTK.Services.CameraSystem.DefaultCameraRig.CameraTransform*
+  name: CameraTransform
+  href: api/XRTK.Services.CameraSystem.DefaultCameraRig.html#XRTK_Services_CameraSystem_DefaultCameraRig_CameraTransform_
+  commentId: Overload:XRTK.Services.CameraSystem.DefaultCameraRig.CameraTransform
+  isSpec: "True"
+  fullName: XRTK.Services.CameraSystem.DefaultCameraRig.CameraTransform
+  nameWithType: DefaultCameraRig.CameraTransform
+- uid: XRTK.Services.CameraSystem.DefaultCameraRig.PlayerCamera
+  name: PlayerCamera
+  href: api/XRTK.Services.CameraSystem.DefaultCameraRig.html#XRTK_Services_CameraSystem_DefaultCameraRig_PlayerCamera
+  commentId: P:XRTK.Services.CameraSystem.DefaultCameraRig.PlayerCamera
+  fullName: XRTK.Services.CameraSystem.DefaultCameraRig.PlayerCamera
+  nameWithType: DefaultCameraRig.PlayerCamera
+- uid: XRTK.Services.CameraSystem.DefaultCameraRig.PlayerCamera*
+  name: PlayerCamera
+  href: api/XRTK.Services.CameraSystem.DefaultCameraRig.html#XRTK_Services_CameraSystem_DefaultCameraRig_PlayerCamera_
+  commentId: Overload:XRTK.Services.CameraSystem.DefaultCameraRig.PlayerCamera
+  isSpec: "True"
+  fullName: XRTK.Services.CameraSystem.DefaultCameraRig.PlayerCamera
+  nameWithType: DefaultCameraRig.PlayerCamera
+- uid: XRTK.Services.CameraSystem.DefaultCameraRig.PlayspaceTransform
+  name: PlayspaceTransform
+  href: api/XRTK.Services.CameraSystem.DefaultCameraRig.html#XRTK_Services_CameraSystem_DefaultCameraRig_PlayspaceTransform
+  commentId: P:XRTK.Services.CameraSystem.DefaultCameraRig.PlayspaceTransform
+  fullName: XRTK.Services.CameraSystem.DefaultCameraRig.PlayspaceTransform
+  nameWithType: DefaultCameraRig.PlayspaceTransform
+- uid: XRTK.Services.CameraSystem.DefaultCameraRig.PlayspaceTransform*
+  name: PlayspaceTransform
+  href: api/XRTK.Services.CameraSystem.DefaultCameraRig.html#XRTK_Services_CameraSystem_DefaultCameraRig_PlayspaceTransform_
+  commentId: Overload:XRTK.Services.CameraSystem.DefaultCameraRig.PlayspaceTransform
+  isSpec: "True"
+  fullName: XRTK.Services.CameraSystem.DefaultCameraRig.PlayspaceTransform
+  nameWithType: DefaultCameraRig.PlayspaceTransform
 - uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem
   name: MixedRealityCameraSystem
   href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html
@@ -34869,6 +34943,45 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.MixedRealityCameraSystem
   nameWithType: MixedRealityCameraSystem.MixedRealityCameraSystem
+- uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.CameraRig
+  name: CameraRig
+  href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_CameraRig
+  commentId: P:XRTK.Services.CameraSystem.MixedRealityCameraSystem.CameraRig
+  fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.CameraRig
+  nameWithType: MixedRealityCameraSystem.CameraRig
+- uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.CameraRig*
+  name: CameraRig
+  href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_CameraRig_
+  commentId: Overload:XRTK.Services.CameraSystem.MixedRealityCameraSystem.CameraRig
+  isSpec: "True"
+  fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.CameraRig
+  nameWithType: MixedRealityCameraSystem.CameraRig
+- uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.DefaultHeadHeight
+  name: DefaultHeadHeight
+  href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_DefaultHeadHeight
+  commentId: P:XRTK.Services.CameraSystem.MixedRealityCameraSystem.DefaultHeadHeight
+  fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.DefaultHeadHeight
+  nameWithType: MixedRealityCameraSystem.DefaultHeadHeight
+- uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.DefaultHeadHeight*
+  name: DefaultHeadHeight
+  href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_DefaultHeadHeight_
+  commentId: Overload:XRTK.Services.CameraSystem.MixedRealityCameraSystem.DefaultHeadHeight
+  isSpec: "True"
+  fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.DefaultHeadHeight
+  nameWithType: MixedRealityCameraSystem.DefaultHeadHeight
+- uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.Disable
+  name: Disable()
+  href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_Disable
+  commentId: M:XRTK.Services.CameraSystem.MixedRealityCameraSystem.Disable
+  fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.Disable()
+  nameWithType: MixedRealityCameraSystem.Disable()
+- uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.Disable*
+  name: Disable
+  href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_Disable_
+  commentId: Overload:XRTK.Services.CameraSystem.MixedRealityCameraSystem.Disable
+  isSpec: "True"
+  fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.Disable
+  nameWithType: MixedRealityCameraSystem.Disable
 - uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.Enable
   name: Enable()
   href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_Enable
@@ -34882,6 +34995,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.Enable
   nameWithType: MixedRealityCameraSystem.Enable
+- uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.HeadHeight
+  name: HeadHeight
+  href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_HeadHeight
+  commentId: P:XRTK.Services.CameraSystem.MixedRealityCameraSystem.HeadHeight
+  fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.HeadHeight
+  nameWithType: MixedRealityCameraSystem.HeadHeight
+- uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.HeadHeight*
+  name: HeadHeight
+  href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_HeadHeight_
+  commentId: Overload:XRTK.Services.CameraSystem.MixedRealityCameraSystem.HeadHeight
+  isSpec: "True"
+  fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.HeadHeight
+  nameWithType: MixedRealityCameraSystem.HeadHeight
 - uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.Initialize
   name: Initialize()
   href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_Initialize
@@ -34908,6 +35034,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.IsOpaque
   nameWithType: MixedRealityCameraSystem.IsOpaque
+- uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.IsStereoscopic
+  name: IsStereoscopic
+  href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_IsStereoscopic
+  commentId: P:XRTK.Services.CameraSystem.MixedRealityCameraSystem.IsStereoscopic
+  fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.IsStereoscopic
+  nameWithType: MixedRealityCameraSystem.IsStereoscopic
+- uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.IsStereoscopic*
+  name: IsStereoscopic
+  href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_IsStereoscopic_
+  commentId: Overload:XRTK.Services.CameraSystem.MixedRealityCameraSystem.IsStereoscopic
+  isSpec: "True"
+  fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.IsStereoscopic
+  nameWithType: MixedRealityCameraSystem.IsStereoscopic
+- uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.LateUpdate
+  name: LateUpdate()
+  href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_LateUpdate
+  commentId: M:XRTK.Services.CameraSystem.MixedRealityCameraSystem.LateUpdate
+  fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.LateUpdate()
+  nameWithType: MixedRealityCameraSystem.LateUpdate()
+- uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.LateUpdate*
+  name: LateUpdate
+  href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_LateUpdate_
+  commentId: Overload:XRTK.Services.CameraSystem.MixedRealityCameraSystem.LateUpdate
+  isSpec: "True"
+  fullName: XRTK.Services.CameraSystem.MixedRealityCameraSystem.LateUpdate
+  nameWithType: MixedRealityCameraSystem.LateUpdate
 - uid: XRTK.Services.CameraSystem.MixedRealityCameraSystem.Update
   name: Update()
   href: api/XRTK.Services.CameraSystem.MixedRealityCameraSystem.html#XRTK_Services_CameraSystem_MixedRealityCameraSystem_Update
@@ -37192,6 +37344,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.MixedRealityToolkit.Instance
   nameWithType: MixedRealityToolkit.Instance
+- uid: XRTK.Services.MixedRealityToolkit.IsApplicationQuitting
+  name: IsApplicationQuitting
+  href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_IsApplicationQuitting
+  commentId: P:XRTK.Services.MixedRealityToolkit.IsApplicationQuitting
+  fullName: XRTK.Services.MixedRealityToolkit.IsApplicationQuitting
+  nameWithType: MixedRealityToolkit.IsApplicationQuitting
+- uid: XRTK.Services.MixedRealityToolkit.IsApplicationQuitting*
+  name: IsApplicationQuitting
+  href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_IsApplicationQuitting_
+  commentId: Overload:XRTK.Services.MixedRealityToolkit.IsApplicationQuitting
+  isSpec: "True"
+  fullName: XRTK.Services.MixedRealityToolkit.IsApplicationQuitting
+  nameWithType: MixedRealityToolkit.IsApplicationQuitting
 - uid: XRTK.Services.MixedRealityToolkit.IsInitialized
   name: IsInitialized
   href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_IsInitialized
@@ -37237,19 +37402,6 @@ references:
   fullName.vb: XRTK.Services.MixedRealityToolkit.IsSystemRegistered(Of T)()
   nameWithType: MixedRealityToolkit.IsSystemRegistered<T>()
   nameWithType.vb: MixedRealityToolkit.IsSystemRegistered(Of T)()
-- uid: XRTK.Services.MixedRealityToolkit.MixedRealityPlayspace
-  name: MixedRealityPlayspace
-  href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_MixedRealityPlayspace
-  commentId: P:XRTK.Services.MixedRealityToolkit.MixedRealityPlayspace
-  fullName: XRTK.Services.MixedRealityToolkit.MixedRealityPlayspace
-  nameWithType: MixedRealityToolkit.MixedRealityPlayspace
-- uid: XRTK.Services.MixedRealityToolkit.MixedRealityPlayspace*
-  name: MixedRealityPlayspace
-  href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_MixedRealityPlayspace_
-  commentId: Overload:XRTK.Services.MixedRealityToolkit.MixedRealityPlayspace
-  isSpec: "True"
-  fullName: XRTK.Services.MixedRealityToolkit.MixedRealityPlayspace
-  nameWithType: MixedRealityToolkit.MixedRealityPlayspace
 - uid: XRTK.Services.MixedRealityToolkit.NetworkingSystem
   name: NetworkingSystem
   href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_NetworkingSystem
@@ -37794,19 +37946,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Services.Teleportation.MixedRealityTeleportSystem.MixedRealityTeleportSystem
   nameWithType: MixedRealityTeleportSystem.MixedRealityTeleportSystem
-- uid: XRTK.Services.Teleportation.MixedRealityTeleportSystem.Destroy
-  name: Destroy()
-  href: api/XRTK.Services.Teleportation.MixedRealityTeleportSystem.html#XRTK_Services_Teleportation_MixedRealityTeleportSystem_Destroy
-  commentId: M:XRTK.Services.Teleportation.MixedRealityTeleportSystem.Destroy
-  fullName: XRTK.Services.Teleportation.MixedRealityTeleportSystem.Destroy()
-  nameWithType: MixedRealityTeleportSystem.Destroy()
-- uid: XRTK.Services.Teleportation.MixedRealityTeleportSystem.Destroy*
-  name: Destroy
-  href: api/XRTK.Services.Teleportation.MixedRealityTeleportSystem.html#XRTK_Services_Teleportation_MixedRealityTeleportSystem_Destroy_
-  commentId: Overload:XRTK.Services.Teleportation.MixedRealityTeleportSystem.Destroy
-  isSpec: "True"
-  fullName: XRTK.Services.Teleportation.MixedRealityTeleportSystem.Destroy
-  nameWithType: MixedRealityTeleportSystem.Destroy
 - uid: XRTK.Services.Teleportation.MixedRealityTeleportSystem.HandleEvent*
   name: HandleEvent
   href: api/XRTK.Services.Teleportation.MixedRealityTeleportSystem.html#XRTK_Services_Teleportation_MixedRealityTeleportSystem_HandleEvent_

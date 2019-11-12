@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 using XRTK.Definitions.Utilities;
-using XRTK.Utilities;
+using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Hands.UnityEditor
 {
@@ -49,7 +49,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         /// </summary>
         public void ComputeJointPoses(Handedness handedness, Quaternion rotation, Vector3 position, MixedRealityPose[] jointsOut)
         {
-            var cameraRotation = CameraCache.Main.transform.rotation;
+            Quaternion cameraRotation = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.transform.rotation;
 
             for (int i = 0; i < jointCount; i++)
             {
@@ -83,7 +83,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         public void ParseFromJointPoses(MixedRealityPose[] joints, Handedness handedness, Quaternion rotation, Vector3 position)
         {
             var invRotation = Quaternion.Inverse(rotation);
-            var invCameraRotation = Quaternion.Inverse(CameraCache.Main.transform.rotation);
+            var invCameraRotation = Quaternion.Inverse(MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.transform.rotation);
 
             for (int i = 0; i < jointCount; i++)
             {

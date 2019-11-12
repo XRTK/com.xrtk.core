@@ -19,18 +19,21 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         private long lastSimulatedTimeStampRightHand = 0;
         private bool isTrackingRightHand = false;
 
-        private UnityEditorHandState leftHandState;
-        private UnityEditorHandData leftHandData;
-        private UnityEditorHandState rightHandState;
-        private UnityEditorHandData rightHandData;
+        private UnityEditorHandState LeftHandState { get; set; }
+
+        private UnityEditorHandData LeftHandData { get; set; }
+
+        private UnityEditorHandState RightHandState { get; set; }
+
+        private UnityEditorHandData RightHandData { get; set; }
 
         /// <summary>
-        /// If true then the hand is always visible, regardless of simulating.
+        /// If true then the hand is always visible, regardless of its simulated tracking state.
         /// </summary>
         private bool IsAlwaysVisibleLeft { get; set; } = false;
 
         /// <summary>
-        /// If true then the hand is always visible, regardless of simulating.
+        /// If true then the hand is always visible, regardless of its simulated tracking state.
         /// </summary>
         private bool IsAlwaysVisibleRight { get; set; } = false;
 
@@ -51,10 +54,10 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
 
             if (!Application.isPlaying) { return; }
 
-            leftHandData = new UnityEditorHandData();
-            leftHandState = new UnityEditorHandState(Handedness.Left);
-            rightHandData = new UnityEditorHandData();
-            rightHandState = new UnityEditorHandState(Handedness.Right);
+            LeftHandData = new UnityEditorHandData();
+            LeftHandState = new UnityEditorHandState(Handedness.Left);
+            RightHandData = new UnityEditorHandData();
+            RightHandState = new UnityEditorHandState(Handedness.Right);
 
             UnityEditorHandPose.Initialize(profile.PoseDefinitions);
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
@@ -63,19 +66,19 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
                 if (pose.IsDefault)
                 {
                     defaultHandPose = pose;
-                    leftHandState.GestureName = defaultHandPose.GestureName;
-                    rightHandState.GestureName = defaultHandPose.GestureName;
+                    LeftHandState.GestureName = defaultHandPose.GestureName;
+                    RightHandState.GestureName = defaultHandPose.GestureName;
                     break;
                 }
             }
 
-            if (string.IsNullOrWhiteSpace(leftHandState.GestureName))
+            if (string.IsNullOrWhiteSpace(LeftHandState.GestureName))
             {
                 Debug.LogError("There is no default editor hand pose defined.");
             }
 
-            leftHandState.Reset();
-            rightHandState.Reset();
+            LeftHandState.Reset();
+            RightHandState.Reset();
         }
 
         /// <inheritdoc />
@@ -85,7 +88,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
 
             if (profile.IsSimulateHandTrackingEnabled)
             {
-                UpdateUnityEditorHandData(leftHandData, rightHandData);
+                UpdateUnityEditorHandData(LeftHandData, RightHandData);
             }
         }
 
@@ -103,13 +106,13 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
                 // TODO implement custom hand device update frequency here, use 1000/fps instead of 0
                 if (msSinceLastHandUpdate > 0)
                 {
-                    if (leftHandData.TimeStamp > lastHandControllerUpdateTimeStamp)
+                    if (LeftHandData.TimeStamp > lastHandControllerUpdateTimeStamp)
                     {
-                        UpdateHandData(Handedness.Left, leftHandData);
+                        UpdateHandData(Handedness.Left, LeftHandData);
                     }
-                    if (rightHandData.TimeStamp > lastHandControllerUpdateTimeStamp)
+                    if (RightHandData.TimeStamp > lastHandControllerUpdateTimeStamp)
                     {
-                        UpdateHandData(Handedness.Right, rightHandData);
+                        UpdateHandData(Handedness.Right, RightHandData);
                     }
 
                     lastHandControllerUpdateTimeStamp = currentTime.Ticks;
@@ -132,16 +135,16 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
             // Cache the generator delegates so we don't gc alloc every frame
             if (generatorLeft == null)
             {
-                generatorLeft = leftHandState.FillCurrentFrame;
+                generatorLeft = LeftHandState.FillCurrentFrame;
             }
 
             if (generatorRight == null)
             {
-                generatorRight = rightHandState.FillCurrentFrame;
+                generatorRight = RightHandState.FillCurrentFrame;
             }
 
-            handDataChanged |= handDataLeft.UpdateWithTimeStamp(timestamp, leftHandState.IsTracked, leftHandState.IsPinching, generatorLeft);
-            handDataChanged |= handDataRight.UpdateWithTimeStamp(timestamp, rightHandState.IsTracked, rightHandState.IsPinching, generatorRight);
+            handDataChanged |= handDataLeft.UpdateWithTimeStamp(timestamp, LeftHandState.IsTracked, LeftHandState.IsPinching, generatorLeft);
+            handDataChanged |= handDataRight.UpdateWithTimeStamp(timestamp, RightHandState.IsTracked, RightHandState.IsPinching, generatorRight);
 
             return handDataChanged;
         }
@@ -179,12 +182,12 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
                 isTrackingRightHand = false;
             }
 
-            SimulateHand(ref lastSimulatedTimeStampLeftHand, leftHandState, isTrackingLeftHand, IsAlwaysVisibleLeft, GetHandDepthDelta(), GetHandRotationDelta());
-            SimulateHand(ref lastSimulatedTimeStampRightHand, rightHandState, isTrackingRightHand, IsAlwaysVisibleRight, GetHandDepthDelta(), GetHandRotationDelta());
+            SimulateHand(ref lastSimulatedTimeStampLeftHand, LeftHandState, isTrackingLeftHand, IsAlwaysVisibleLeft, GetHandDepthDelta(), GetHandRotationDelta());
+            SimulateHand(ref lastSimulatedTimeStampRightHand, RightHandState, isTrackingRightHand, IsAlwaysVisibleRight, GetHandDepthDelta(), GetHandRotationDelta());
 
             float gestureAnimDelta = profile.HandGestureAnimationSpeed * Time.deltaTime;
-            leftHandState.GestureBlending += gestureAnimDelta;
-            rightHandState.GestureBlending += gestureAnimDelta;
+            LeftHandState.GestureBlending += gestureAnimDelta;
+            RightHandState.GestureBlending += gestureAnimDelta;
 
             lastMousePosition = Input.mousePosition;
         }

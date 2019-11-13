@@ -15,9 +15,11 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         private Vector3? lastMousePosition = null;
         private UnityEditorHandPoseData defaultHandPose;
         private long lastSimulatedTimeStampLeftHand = 0;
-        private bool isTrackingLeftHand = false;
         private long lastSimulatedTimeStampRightHand = 0;
-        private bool isTrackingRightHand = false;
+
+        // Cached delegates for hand joint generation
+        private UnityEditorHandData.HandJointDataGenerator generatorLeft;
+        private UnityEditorHandData.HandJointDataGenerator generatorRight;
 
         private UnityEditorHandState LeftHandState { get; set; }
 
@@ -28,18 +30,26 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         private UnityEditorHandData RightHandData { get; set; }
 
         /// <summary>
-        /// If true then the hand is always visible, regardless of its simulated tracking state.
+        /// If true then the left hand is always visible,, even if it's currently
+        /// not being tracked.
         /// </summary>
         private bool IsAlwaysVisibleLeft { get; set; } = false;
 
         /// <summary>
-        /// If true then the hand is always visible, regardless of its simulated tracking state.
+        /// If true then the right hand is always visible, even if it's currently
+        /// not being tracked.
         /// </summary>
         private bool IsAlwaysVisibleRight { get; set; } = false;
 
-        // Cached delegates for hand joint generation
-        private UnityEditorHandData.HandJointDataGenerator generatorLeft;
-        private UnityEditorHandData.HandJointDataGenerator generatorRight;
+        /// <summary>
+        /// If true, the left hand is currently being tracked.
+        /// </summary>
+        private bool IsTrackingLeftHand { get; set; } = false;
+
+        /// <summary>
+        /// If true, the right hand is currently being tracked.
+        /// </summary>
+        private bool IsTrackingRightHand { get; set; } = false;
 
         public UnityEditorHandControllerDataProvider(string name, uint priority, UnityEditorHandControllerDataProviderProfile profile)
             : base(name, priority, profile)
@@ -127,7 +137,6 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         {
             SimulateUserInput();
 
-            bool handDataChanged = false;
             // TODO: DateTime.UtcNow can be quite imprecise, better use Stopwatch.GetTimestamp
             // https://stackoverflow.com/questions/2143140/c-sharp-datetime-now-precision
             long timestamp = DateTime.UtcNow.Ticks;
@@ -143,6 +152,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
                 generatorRight = RightHandState.FillCurrentFrame;
             }
 
+            bool handDataChanged = false;
             handDataChanged |= handDataLeft.UpdateWithTimeStamp(timestamp, LeftHandState.IsTracked, LeftHandState.IsPinching, generatorLeft);
             handDataChanged |= handDataRight.UpdateWithTimeStamp(timestamp, RightHandState.IsTracked, RightHandState.IsPinching, generatorRight);
 
@@ -154,36 +164,9 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         /// </summary>
         private void SimulateUserInput()
         {
-            if (Input.GetKeyDown(profile.ToggleLeftHandKey))
-            {
-                IsAlwaysVisibleLeft = !IsAlwaysVisibleLeft;
-            }
-
-            if (Input.GetKeyDown(profile.ToggleRightHandKey))
-            {
-                IsAlwaysVisibleRight = !IsAlwaysVisibleRight;
-            }
-
-            if (Input.GetKeyDown(profile.LeftHandTrackedKey))
-            {
-                isTrackingLeftHand = true;
-            }
-            if (Input.GetKeyUp(profile.LeftHandTrackedKey))
-            {
-                isTrackingLeftHand = false;
-            }
-
-            if (Input.GetKeyDown(profile.RightHandTrackedKey))
-            {
-                isTrackingRightHand = true;
-            }
-            if (Input.GetKeyUp(profile.RightHandTrackedKey))
-            {
-                isTrackingRightHand = false;
-            }
-
-            SimulateHand(ref lastSimulatedTimeStampLeftHand, LeftHandState, isTrackingLeftHand, IsAlwaysVisibleLeft, GetHandDepthDelta(), GetHandRotationDelta());
-            SimulateHand(ref lastSimulatedTimeStampRightHand, RightHandState, isTrackingRightHand, IsAlwaysVisibleRight, GetHandDepthDelta(), GetHandRotationDelta());
+            UpdateSimulationState();
+            SimulateHand(ref lastSimulatedTimeStampLeftHand, LeftHandState, IsTrackingLeftHand, IsAlwaysVisibleLeft);
+            SimulateHand(ref lastSimulatedTimeStampRightHand, RightHandState, IsTrackingRightHand, IsAlwaysVisibleRight);
 
             float gestureAnimDelta = profile.HandGestureAnimationSpeed * Time.deltaTime;
             LeftHandState.GestureBlending += gestureAnimDelta;
@@ -192,30 +175,29 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
             lastMousePosition = Input.mousePosition;
         }
 
-        private void SimulateHand(
-            ref long lastSimulatedTimeStamp,
-            UnityEditorHandState state,
-            bool isSimulating,
-            bool isAlwaysVisible,
-            Vector3 mouseDelta,
-            Vector3 rotationDeltaEulerAngles)
+        private void SimulateHand(ref long lastSimulatedTimeStamp, UnityEditorHandState state, bool isSimulating, bool isAlwaysVisible)
         {
+            // We are "tracking" the hand, if it's configured to always be visible or if
+            // simulation is active.
             bool enableTracking = isAlwaysVisible || isSimulating;
+
+            // If the hands state is changing from "not tracked" to being tracked, reset its position
+            // to the current mouse position and default distance from the camera.
             if (!state.IsTracked && enableTracking)
             {
-                // Start at current mouse position
                 Vector3 mousePos = Input.mousePosition;
                 state.ScreenPosition = new Vector3(mousePos.x, mousePos.y, profile.DefaultHandDistance);
             }
 
+            // If we are simulating the hand currently, read input and update the hand state.
             if (isSimulating)
             {
-                state.SimulateInput(mouseDelta, profile.HandJitterAmount, rotationDeltaEulerAngles);
+                state.SimulateInput(GetHandPositionDelta(), profile.HandJitterAmount, GetHandRotationDelta());
 
                 if (isAlwaysVisible)
                 {
                     // Toggle gestures on/off
-                    state.GestureName = ToggleGesture(state.GestureName);
+                    state.GestureName = ToggleHandPose(state.GestureName);
                 }
                 else
                 {
@@ -241,6 +223,41 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
                 {
                     state.IsTracked = false;
                 }
+            }
+        }
+
+        /// <summary>
+        /// Updates the hand simulation state. Checks for input whether hands should be tracked or
+        /// always visible.
+        /// </summary>
+        private void UpdateSimulationState()
+        {
+            if (Input.GetKeyDown(profile.ToggleLeftHandKey))
+            {
+                IsAlwaysVisibleLeft = !IsAlwaysVisibleLeft;
+            }
+
+            if (Input.GetKeyDown(profile.ToggleRightHandKey))
+            {
+                IsAlwaysVisibleRight = !IsAlwaysVisibleRight;
+            }
+
+            if (Input.GetKeyDown(profile.LeftHandTrackedKey))
+            {
+                IsTrackingLeftHand = true;
+            }
+            if (Input.GetKeyUp(profile.LeftHandTrackedKey))
+            {
+                IsTrackingLeftHand = false;
+            }
+
+            if (Input.GetKeyDown(profile.RightHandTrackedKey))
+            {
+                IsTrackingRightHand = true;
+            }
+            if (Input.GetKeyUp(profile.RightHandTrackedKey))
+            {
+                IsTrackingRightHand = false;
             }
         }
 
@@ -282,10 +299,11 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         }
 
         /// <summary>
-        /// Gets a simulated depth tracking (hands closer / further from tracking device) update.
+        /// Gets a simulated depth tracking (hands closer / further from tracking device) update, as well
+        /// as the hands simulated (x,y) position.
         /// </summary>
-        /// <returns>Depth position delta.</returns>
-        private Vector3 GetHandDepthDelta()
+        /// <returns>Hand movement delta.</returns>
+        private Vector3 GetHandPositionDelta()
         {
             Vector3 mouseDelta = (lastMousePosition.HasValue ? Input.mousePosition - lastMousePosition.Value : Vector3.zero);
             mouseDelta.z += Input.GetAxis("Mouse ScrollWheel") * profile.HandDepthMultiplier;
@@ -293,9 +311,9 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         }
 
         /// <summary>
-        /// Selects a hand pose to simulate.
+        /// Selects a hand pose to simulate, while its input keycode is pressed.
         /// </summary>
-        /// <returns>Default hand pose if no other requested by user input.</returns>
+        /// <returns><see cref="defaultHandPose"/> if no other fitting user input.</returns>
         private string SelectHandPose()
         {
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
@@ -310,23 +328,23 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
             return defaultHandPose.GestureName;
         }
 
-        private string ToggleGesture(string gestureName)
+        /// <summary>
+        /// Toggles in between the hands default pose and a specified pose whenver the pose input keyode
+        /// is pressed.
+        /// </summary>
+        /// <param name="poseName">The name of the pose to toggle.</param>
+        /// <returns>Pose name of the pose toggled on. Either <see cref="defaultHandPose"/> or <paramref name="poseName"/></returns>
+        private string ToggleHandPose(string poseName)
         {
-            // TODO:
-            //if (Input.GetMouseButtonDown(0))
-            //{
-            //    return gestureName != profile.LeftMouseHandGesture ? profile.LeftMouseHandGesture : profile.DefaultHandGesture;
-            //}
-            //else if (Input.GetMouseButtonDown(1))
-            //{
-            //    return gestureName != profile.RightMouseHandGesture ? profile.RightMouseHandGesture : profile.DefaultHandGesture;
-            //}
-            //else if (Input.GetMouseButtonDown(2))
-            //{
-            //    return gestureName != profile.MiddleMouseHandGesture ? profile.MiddleMouseHandGesture : profile.DefaultHandGesture;
-            //}
+            for (int i = 0; i < profile.PoseDefinitions.Count; i++)
+            {
+                UnityEditorHandPoseData gesture = profile.PoseDefinitions[i];
+                if (Input.GetKeyDown(gesture.KeyCode))
+                {
+                    return poseName != gesture.GestureName ? gesture.GestureName : defaultHandPose.GestureName;
+                }
+            }
 
-            // 'Default' will not change the gesture
             return defaultHandPose.GestureName;
         }
     }

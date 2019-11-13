@@ -14,29 +14,35 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
     [Serializable]
     internal class UnityEditorHandState
     {
-        [SerializeField]
-        private Handedness handedness = Handedness.None;
-        public Handedness Handedness => handedness;
+        /// <summary>
+        /// Gets the handedness for the hand simulated by this state instance.
+        /// </summary>
+        public Handedness Handedness { get; } = Handedness.None;
 
         // Show a tracked hand device
-        public bool IsTracked = false;
+        public bool IsTracked { get; set; } = false;
+
         // Activate the pinch gesture
         public bool IsPinching { get; private set; }
 
         public Vector3 ScreenPosition;
-        // Rotation of the hand
-        public Vector3 HandRotateEulerAngles = Vector3.zero;
-        // Random offset to simulate tracking inaccuracy
-        public Vector3 JitterOffset = Vector3.zero;
 
-        [SerializeField]
+        // Rotation of the hand
+        public Vector3 HandRotateEulerAngles { get; set; } = Vector3.zero;
+
+        // Random offset to simulate tracking inaccuracy
+        public Vector3 JitterOffset { get; set; } = Vector3.zero;
+
         private string gestureName = null;
+        /// <summary>
+        /// Currently used gesture name.
+        /// </summary>
         public string GestureName
         {
-            get { return gestureName; }
+            get => gestureName;
             set
             {
-                if (!string.IsNullOrWhiteSpace(value) && value != gestureName)
+                if (!string.IsNullOrWhiteSpace(value) && !string.Equals(value, gestureName))
                 {
                     gestureName = value;
                     gestureBlending = 0.0f;
@@ -44,19 +50,14 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
             }
         }
 
-        // Interpolation between current pose and target gesture
         private float gestureBlending = 0.0f;
+        /// <summary>
+        /// Interpolation between current pose and target gesture.
+        /// </summary>
         public float GestureBlending
         {
-            get { return gestureBlending; }
-            set
-            {
-                gestureBlending = Mathf.Clamp(value, gestureBlending, 1.0f);
-
-                // Pinch is a special gesture that triggers the Select and TriggerPress input actions
-                // TODO: Probably don't want to have this here.
-                //IsPinching = gesture == ArticulatedHandPose.GestureId.Pinch && gestureBlending > 0.9f;
-            }
+            get => gestureBlending;
+            set => gestureBlending = Mathf.Clamp(value, gestureBlending, 1.0f);
         }
 
         private float poseBlending = 0.0f;
@@ -64,7 +65,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
 
         public UnityEditorHandState(Handedness handedness)
         {
-            this.handedness = handedness;
+            Handedness = handedness;
         }
 
         public void Reset()
@@ -97,10 +98,12 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
             JitterOffset = UnityEngine.Random.insideUnitSphere * noiseAmount;
         }
 
-        public void ResetGesture()
+        /// <summary>
+        /// Reset the current hand pose.
+        /// </summary>
+        private void ResetGesture()
         {
             gestureBlending = 1.0f;
-
             if (UnityEditorHandPose.TryGetPoseByName(gestureName, out UnityEditorHandPose gesturePose))
             {
                 pose.Copy(gesturePose);
@@ -122,7 +125,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
             poseBlending = gestureBlending;
             Quaternion rotation = Quaternion.Euler(HandRotateEulerAngles);
             Vector3 position = CameraCache.Main.ScreenToWorldPoint(ScreenPosition + JitterOffset);
-            pose.ComputeJointPoses(handedness, rotation, position, jointsOut);
+            pose.ComputeJointPoses(Handedness, rotation, position, jointsOut);
         }
     }
 }

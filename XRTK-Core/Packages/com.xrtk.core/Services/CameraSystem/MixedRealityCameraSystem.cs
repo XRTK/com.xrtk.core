@@ -123,11 +123,6 @@ namespace XRTK.Services.CameraSystem
                 profile.IsCameraPersistent)
             {
                 CameraCache.Main.transform.root.DontDestroyOnLoad();
-
-                if (HeadHeight.Equals(0f))
-                {
-                    HeadHeight = DefaultHeadHeight;
-                }
             }
         }
 

@@ -69,7 +69,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
             RightHandData = new UnityEditorHandData();
             RightHandState = new UnityEditorHandState(Handedness.Right);
 
-            UnityEditorHandPose.Initialize(profile.PoseDefinitions);
+            SimulatedHandPose.Initialize(profile.PoseDefinitions);
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
             {
                 UnityEditorHandPoseData pose = profile.PoseDefinitions[i];
@@ -165,6 +165,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         private void SimulateUserInput()
         {
             UpdateSimulationState();
+
             SimulateHand(ref lastSimulatedTimeStampLeftHand, LeftHandState, IsTrackingLeftHand, IsAlwaysVisibleLeft);
             SimulateHand(ref lastSimulatedTimeStampRightHand, RightHandState, IsTrackingRightHand, IsAlwaysVisibleRight);
 
@@ -329,7 +330,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         }
 
         /// <summary>
-        /// Toggles in between the hands default pose and a specified pose whenver the pose input keyode
+        /// Toggles in between the hands default pose and a specified pose whenever the pose input keyode
         /// is pressed.
         /// </summary>
         /// <param name="poseName">The name of the pose to toggle.</param>

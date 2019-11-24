@@ -61,11 +61,12 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         }
 
         private float poseBlending = 0.0f;
-        private UnityEditorHandPose pose = new UnityEditorHandPose();
+        private SimulatedHandPose pose;
 
         public UnityEditorHandState(Handedness handedness)
         {
             Handedness = handedness;
+            pose = new SimulatedHandPose();
         }
 
         public void Reset()
@@ -104,7 +105,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         private void ResetGesture()
         {
             gestureBlending = 1.0f;
-            if (UnityEditorHandPose.TryGetPoseByName(gestureName, out UnityEditorHandPose gesturePose))
+            if (SimulatedHandPose.TryGetPoseByName(gestureName, out SimulatedHandPose gesturePose))
             {
                 pose.Copy(gesturePose);
             }
@@ -112,13 +113,13 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
 
         internal void FillCurrentFrame(MixedRealityPose[] jointsOut)
         {
-            if (UnityEditorHandPose.TryGetPoseByName(gestureName, out UnityEditorHandPose targetPose))
+            if (SimulatedHandPose.TryGetPoseByName(gestureName, out SimulatedHandPose targetPose))
             {
                 if (gestureBlending > poseBlending)
                 {
                     float range = Mathf.Clamp01(1.0f - poseBlending);
                     float lerpFactor = range > 0.0f ? (gestureBlending - poseBlending) / range : 1.0f;
-                    pose.Lerp(pose, targetPose, lerpFactor);
+                    pose = SimulatedHandPose.Lerp(pose, targetPose, lerpFactor);
                 }
             }
 

@@ -10,13 +10,12 @@ using XRTK.Services;
 namespace XRTK.Providers.Controllers.Hands.UnityEditor
 {
     /// <summary>
-    /// Pose of an hand defined by joint poses for use when simulating hands in editor.
-    /// Used by <see cref="UnityEditorHandControllerDataProvider"/> to fake hand tracking.
+    /// Simulatd pose of an hand defined by joint poses. Used by <see cref="UnityEditorHandControllerDataProvider"/> to simulate hand tracking.
     /// </summary>
-    public class UnityEditorHandPose
+    public class SimulatedHandPose
     {
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
-        private static readonly Dictionary<string, UnityEditorHandPose> handPoses = new Dictionary<string, UnityEditorHandPose>();
+        private static readonly Dictionary<string, SimulatedHandPose> handPoses = new Dictionary<string, SimulatedHandPose>();
 
         /// <summary>
         /// Joint poses are stored as right-hand poses in camera space.
@@ -28,7 +27,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         /// Creates a new hand pose with all joints in their
         /// local space origin.
         /// </summary>
-        public UnityEditorHandPose()
+        public SimulatedHandPose()
         {
             localJointPoses = new MixedRealityPose[jointCount];
             SetZero();
@@ -37,8 +36,8 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         /// <summary>
         /// Creates a new hand pose using local pose data for the hand's joints.
         /// </summary>
-        /// <param name="localJointPoses">Jont poses in local space.</param>
-        public UnityEditorHandPose(MixedRealityPose[] localJointPoses)
+        /// <param name="localJointPoses">Joint poses in local space.</param>
+        public SimulatedHandPose(MixedRealityPose[] localJointPoses)
         {
             this.localJointPoses = new MixedRealityPose[jointCount];
             Array.Copy(localJointPoses, this.localJointPoses, jointCount);
@@ -122,24 +121,35 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         }
 
         /// <summary>
-        /// Copy data from another unity editor hand pose.
+        /// Copy data from another simulated hand pose.
         /// </summary>
-        public void Copy(UnityEditorHandPose other)
+        public void Copy(SimulatedHandPose other)
         {
             Array.Copy(other.localJointPoses, localJointPoses, jointCount);
         }
 
         /// <summary>
-        /// Blends between two hand poses.
+        /// Interpolates between the poses a and b by the interpolant t.
         /// </summary>
-        public void Lerp(UnityEditorHandPose poseA, UnityEditorHandPose poseB, float value)
+        /// <param name="a">Pose at t = 0.</param>
+        /// <param name="b">Pose at t = 1.</param>
+        /// <param name="t">The parameter t is clamped to the range [0,1].</param>
+        public static SimulatedHandPose Lerp(SimulatedHandPose a, SimulatedHandPose b, float t)
         {
+            MixedRealityPose[] updatedJointPoses = new MixedRealityPose[jointCount];
+
             for (int i = 0; i < jointCount; i++)
             {
-                var p = Vector3.Lerp(poseA.localJointPoses[i].Position, poseB.localJointPoses[i].Position, value);
-                var r = Quaternion.Slerp(poseA.localJointPoses[i].Rotation, poseB.localJointPoses[i].Rotation, value);
-                localJointPoses[i] = new MixedRealityPose(p, r);
+                MixedRealityPose jointPoseA = a.localJointPoses[i];
+                MixedRealityPose jointPoseB = b.localJointPoses[i];
+
+                Vector3 position = Vector3.Lerp(jointPoseA.Position, jointPoseB.Position, t);
+                Quaternion rotation = Quaternion.Slerp(jointPoseA.Rotation, jointPoseB.Rotation, t);
+
+                updatedJointPoses[i] = new MixedRealityPose(position, rotation);
             }
+
+            return new SimulatedHandPose(updatedJointPoses);
         }
 
         /// <summary>
@@ -148,9 +158,9 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         /// <param name="name">The name of the pose.</param>
         /// <param name="pose">Hand pose reference.</param>
         /// <returns>True, if found.</returns>
-        public static bool TryGetPoseByName(string name, out UnityEditorHandPose pose)
+        public static bool TryGetPoseByName(string name, out SimulatedHandPose pose)
         {
-            if (handPoses.TryGetValue(name, out UnityEditorHandPose p))
+            if (handPoses.TryGetValue(name, out SimulatedHandPose p))
             {
                 pose = p;
                 return true;
@@ -166,24 +176,15 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         /// <param name="poses">List of pose data assets with pose information.</param>
         public static void Initialize(IEnumerable<UnityEditorHandPoseData> poses)
         {
-            foreach (var pose in poses)
+            foreach (var poseData in poses)
             {
-                InitializePose(pose);
+                if (poseData.Data != null)
+                {
+                    SimulatedHandPose pose = new SimulatedHandPose();
+                    pose.FromJson(poseData.Data.text);
+                    handPoses.Add(poseData.GestureName, pose);
+                }
             }
-        }
-
-        private static UnityEditorHandPose InitializePose(UnityEditorHandPoseData poseData)
-        {
-            if (poseData.Data != null)
-            {
-                var pose = new UnityEditorHandPose();
-                pose.FromJson(poseData.Data.text);
-                handPoses.Add(poseData.GestureName, pose);
-
-                return pose;
-            }
-
-            return null;
         }
 
         /// <summary>

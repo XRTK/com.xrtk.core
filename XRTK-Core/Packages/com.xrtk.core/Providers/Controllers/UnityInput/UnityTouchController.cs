@@ -101,7 +101,7 @@ namespace XRTK.Providers.Controllers.UnityInput
         public void Update()
         {
             UpdateController();
-            
+
             if (!isTouched) { return; }
 
             Lifetime += Time.deltaTime;
@@ -186,7 +186,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                         isManipulating = false;
                     }
 
-                    MixedRealityToolkit.InputSystem?.RaisePointerClicked(InputSource.Pointers[0], Interactions[2].MixedRealityInputAction, TouchData.tapCount);
+                    MixedRealityToolkit.InputSystem?.RaisePointerClicked(InputSource.Pointers[0], Interactions[2].MixedRealityInputAction);
                 }
 
                 if (isHolding)

@@ -75,8 +75,12 @@ namespace XRTK.Inspectors.Profiles
                         "Yes",
                         "Later"))
                     {
-                        var playspace = MixedRealityToolkit.Instance.MixedRealityPlayspace;
-                        Debug.Assert(playspace != null);
+                        if (MixedRealityToolkit.CameraSystem != null)
+                        {
+                            var playspace = MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform;
+                            Debug.Assert(playspace != null);
+                        }
+
                         MixedRealityToolkit.Instance.ActiveProfile = configurationProfile;
                     }
                     else
@@ -126,6 +130,8 @@ namespace XRTK.Inspectors.Profiles
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
             serializedObject.Update();
+
+            if (!MixedRealityToolkit.IsInitialized) { return; }
 
             if (!configurationProfile.IsCustomProfile)
             {

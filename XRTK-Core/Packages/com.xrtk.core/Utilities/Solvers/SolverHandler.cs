@@ -1,10 +1,11 @@
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
-using XRTK.Utilities;
+using XRTK.Services;
 
 namespace XRTK.SDK.Utilities.Solvers
 {
@@ -120,7 +121,7 @@ namespace XRTK.SDK.Utilities.Solvers
 
         private bool RequiresOffset => !AdditionalOffset.sqrMagnitude.Equals(0) || !AdditionalRotation.sqrMagnitude.Equals(0);
 
-        protected readonly List<Solver> solvers = new List<Solver>();
+        private readonly List<Solver> solvers = new List<Solver>();
 
         private float lastUpdateTime;
         private GameObject transformWithOffset;
@@ -209,19 +210,27 @@ namespace XRTK.SDK.Utilities.Solvers
 
         protected virtual void AttachToNewTrackedObject()
         {
+            Handedness = Handedness.None;
+
             switch (TrackedObjectToReference)
             {
                 case TrackedObjectType.Head:
-                    // No need to search for a controller if we've already attached to the head.
-                    Handedness = Handedness.None;
-                    TrackTransform(CameraCache.Main.transform);
+                    TrackTransform(MixedRealityToolkit.CameraSystem.CameraRig.CameraTransform);
                     break;
-                case TrackedObjectType.MotionControllerLeft:
+                case TrackedObjectType.LeftHandOrController:
                     Handedness = Handedness.Left;
                     break;
-                case TrackedObjectType.MotionControllerRight:
+                case TrackedObjectType.RightHandOrController:
                     Handedness = Handedness.Right;
                     break;
+                case TrackedObjectType.Body:
+                    TrackTransform(MixedRealityToolkit.CameraSystem.CameraRig.BodyTransform);
+                    break;
+                case TrackedObjectType.Playspace:
+                    TrackTransform(MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
             }
         }
 
@@ -240,7 +249,7 @@ namespace XRTK.SDK.Utilities.Solvers
 
             transformWithOffset.transform.localPosition = Vector3.Scale(AdditionalOffset, transformWithOffset.transform.localScale);
             transformWithOffset.transform.localRotation = Quaternion.Euler(AdditionalRotation);
-            transformWithOffset.name = $"{gameObject.name} on {TrackedObjectToReference.ToString()} with offset {AdditionalOffset}, {AdditionalRotation}";
+            transformWithOffset.name = $"SolverOffset_{gameObject.name}_{TrackedObjectToReference.ToString()}";
             return transformWithOffset.transform;
         }
     }

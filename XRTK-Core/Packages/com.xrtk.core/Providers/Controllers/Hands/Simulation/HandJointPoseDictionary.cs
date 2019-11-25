@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Providers.Controllers.Hands.UnityEditor
+namespace XRTK.Providers.Controllers.Hands.Simulation
 {
     /// <summary>
     /// Utility class to serialize hand pose as a dictionary with full joint names.

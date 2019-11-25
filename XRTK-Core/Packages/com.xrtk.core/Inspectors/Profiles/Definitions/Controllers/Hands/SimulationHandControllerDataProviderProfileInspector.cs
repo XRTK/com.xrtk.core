@@ -9,8 +9,8 @@ using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
 {
-    [CustomEditor(typeof(UnityEditorHandControllerDataProviderProfile))]
-    public class UnityEditorHandControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(SimulationHandControllerDataProviderProfile))]
+    public class SimulationHandControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty isSimulateHandTrackingEnabled;
 

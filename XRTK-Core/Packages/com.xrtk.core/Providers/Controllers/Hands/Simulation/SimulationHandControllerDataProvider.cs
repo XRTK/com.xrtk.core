@@ -6,28 +6,28 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.Hands.UnityEditor;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Providers.Controllers.Hands.UnityEditor
+namespace XRTK.Providers.Controllers.Hands.Simulation
 {
-    public class UnityEditorHandControllerDataProvider : BaseHandControllerDataProvider
+    public class SimulationHandControllerDataProvider : BaseHandControllerDataProvider
     {
-        private UnityEditorHandControllerDataProviderProfile profile;
+        private SimulationHandControllerDataProviderProfile profile;
         private long lastHandControllerUpdateTimeStamp = 0;
         private Vector3? lastMousePosition = null;
-        private UnityEditorHandPoseData defaultHandPose;
+        private SimulationHandPoseData defaultHandPose;
         private long lastSimulatedTimeStampLeftHand = 0;
         private long lastSimulatedTimeStampRightHand = 0;
 
         // Cached delegates for hand joint generation
-        private UnityEditorHandData.HandJointDataGenerator generatorLeft;
-        private UnityEditorHandData.HandJointDataGenerator generatorRight;
+        private SimulationHandData.HandJointDataGenerator generatorLeft;
+        private SimulationHandData.HandJointDataGenerator generatorRight;
 
-        private UnityEditorHandState LeftHandState { get; set; }
+        private SimulationHandState LeftHandState { get; set; }
 
-        private UnityEditorHandData LeftHandData { get; set; }
+        private SimulationHandData LeftHandData { get; set; }
 
-        private UnityEditorHandState RightHandState { get; set; }
+        private SimulationHandState RightHandState { get; set; }
 
-        private UnityEditorHandData RightHandData { get; set; }
+        private SimulationHandData RightHandData { get; set; }
 
         /// <summary>
         /// If true then the left hand is always visible,, even if it's currently
@@ -51,7 +51,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         /// </summary>
         private bool IsTrackingRightHand { get; set; } = false;
 
-        public UnityEditorHandControllerDataProvider(string name, uint priority, UnityEditorHandControllerDataProviderProfile profile)
+        public SimulationHandControllerDataProvider(string name, uint priority, SimulationHandControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
             this.profile = profile;
@@ -64,15 +64,15 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
 
             if (!Application.isPlaying) { return; }
 
-            LeftHandData = new UnityEditorHandData();
-            LeftHandState = new UnityEditorHandState(Handedness.Left);
-            RightHandData = new UnityEditorHandData();
-            RightHandState = new UnityEditorHandState(Handedness.Right);
+            LeftHandData = new SimulationHandData();
+            LeftHandState = new SimulationHandState(Handedness.Left);
+            RightHandData = new SimulationHandData();
+            RightHandState = new SimulationHandState(Handedness.Right);
 
             SimulatedHandPose.Initialize(profile.PoseDefinitions);
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
             {
-                UnityEditorHandPoseData pose = profile.PoseDefinitions[i];
+                SimulationHandPoseData pose = profile.PoseDefinitions[i];
                 if (pose.IsDefault)
                 {
                     defaultHandPose = pose;
@@ -133,7 +133,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         /// <summary>
         /// Capture a snapshot of simulated hand data based on current state.
         /// </summary>
-        private bool UpdateUnityEditorHandData(UnityEditorHandData handDataLeft, UnityEditorHandData handDataRight)
+        private bool UpdateUnityEditorHandData(SimulationHandData handDataLeft, SimulationHandData handDataRight)
         {
             SimulateUserInput();
 
@@ -176,7 +176,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
             lastMousePosition = Input.mousePosition;
         }
 
-        private void SimulateHand(ref long lastSimulatedTimeStamp, UnityEditorHandState state, bool isSimulating, bool isAlwaysVisible)
+        private void SimulateHand(ref long lastSimulatedTimeStamp, SimulationHandState state, bool isSimulating, bool isAlwaysVisible)
         {
             // We are "tracking" the hand, if it's configured to always be visible or if
             // simulation is active.
@@ -319,7 +319,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         {
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
             {
-                UnityEditorHandPoseData gesture = profile.PoseDefinitions[i];
+                SimulationHandPoseData gesture = profile.PoseDefinitions[i];
                 if (Input.GetKeyDown(gesture.KeyCode))
                 {
                     return gesture.GestureName;
@@ -339,7 +339,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         {
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
             {
-                UnityEditorHandPoseData gesture = profile.PoseDefinitions[i];
+                SimulationHandPoseData gesture = profile.PoseDefinitions[i];
                 if (Input.GetKeyDown(gesture.KeyCode))
                 {
                     return poseName != gesture.GestureName ? gesture.GestureName : defaultHandPose.GestureName;

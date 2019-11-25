@@ -4,13 +4,13 @@
 using System;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Providers.Controllers.Hands.UnityEditor
+namespace XRTK.Providers.Controllers.Hands.Simulation
 {
     /// <summary>
     /// Snapshot of simulated hand data.
     /// </summary>
     [Serializable]
-    public class UnityEditorHandData : HandData
+    public class SimulationHandData : HandData
     {
         public bool IsPinching { get; private set; } = false;
 

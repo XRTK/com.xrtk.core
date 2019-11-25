@@ -7,10 +7,10 @@ using System.Collections.Generic;
 using XRTK.Definitions.Utilities;
 using XRTK.Services;
 
-namespace XRTK.Providers.Controllers.Hands.UnityEditor
+namespace XRTK.Providers.Controllers.Hands.Simulation
 {
     /// <summary>
-    /// Simulatd pose of an hand defined by joint poses. Used by <see cref="UnityEditorHandControllerDataProvider"/> to simulate hand tracking.
+    /// Simulatd pose of an hand defined by joint poses. Used by <see cref="SimulationHandControllerDataProvider"/> to simulate hand tracking.
     /// </summary>
     public class SimulatedHandPose
     {
@@ -174,7 +174,7 @@ namespace XRTK.Providers.Controllers.Hands.UnityEditor
         /// Initialize pose data for use in editor from files.
         /// </summary>
         /// <param name="poses">List of pose data assets with pose information.</param>
-        public static void Initialize(IEnumerable<UnityEditorHandPoseData> poses)
+        public static void Initialize(IEnumerable<SimulationHandPoseData> poses)
         {
             foreach (var poseData in poses)
             {

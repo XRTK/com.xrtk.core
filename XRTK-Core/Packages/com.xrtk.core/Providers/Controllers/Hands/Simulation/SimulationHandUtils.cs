@@ -5,9 +5,9 @@ using System.Linq;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Providers.Controllers.Hands.UnityEditor
+namespace XRTK.Providers.Controllers.Hands.Simulation
 {
-    public class UnityEditorHandUtils
+    public class SimulationHandUtils
     {
         /// <summary>
         /// Compute the rotation of each joint, with the forward vector of the rotation pointing along the joint bone, 

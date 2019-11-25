@@ -4,12 +4,12 @@
 using UnityEditor;
 using XRTK.Inspectors.Profiles;
 using XRTK.Inspectors.Utilities;
-using XRTK.Providers.Controllers.Hands.UnityEditor;
+using XRTK.Providers.Controllers.Hands.Simulation;
 
-namespace XRTK.Inspectors.Data.Controllers.Hands.UnityEditor
+namespace XRTK.Inspectors.Data.Controllers.Hands.Simulation
 {
-    [CustomEditor(typeof(UnityEditorHandPoseData))]
-    public class UnityEditorHandPoseDataInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(SimulationHandPoseData))]
+    public class SimulationHandPoseDataInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty gestureName;
         private SerializedProperty gestureDescription;

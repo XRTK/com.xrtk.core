@@ -5,14 +5,14 @@ using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Providers.Controllers.Hands.UnityEditor
+namespace XRTK.Providers.Controllers.Hands.Simulation
 {
     /// <summary>
-    /// A hand pose definition with recorded hand joint data for use with <see cref="UnityEditorHandControllerDataProvider"/>.
-    /// Assign a collection of these poses to the data provider's profile to simulate the pose when working in Editor.
+    /// A hand pose definition with recorded hand joint data for use with <see cref="SimulationHandControllerDataProvider"/>.
+    /// Assign a collection of these poses to the data provider's profile to simulate the pose.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hands/Unity Editor Hand Pose", fileName = "UnityEditorHandPoseData", order = (int)CreateProfileMenuItemIndices.Input)]
-    public class UnityEditorHandPoseData : BaseMixedRealityProfile
+    public class SimulationHandPoseData : BaseMixedRealityProfile
     {
         [SerializeField]
         [Tooltip("Name the hand gesture.")]

@@ -89,57 +89,6 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
 
             LeftHandState.Reset();
             RightHandState.Reset();
-        }
-
-        /// <inheritdoc />
-        public override void Update()
-        {
-            base.Update();
-
-            if (profile.IsSimulateHandTrackingEnabled)
-            {
-                UpdateUnityEditorHandData(LeftHandData, RightHandData);
-            }
-        }
-
-        /// <inheritdoc />
-        public override void LateUpdate()
-        {
-            base.LateUpdate();
-
-            // Apply hand data in LateUpdate to ensure external changes are applied.
-            // HandDataLeft / Right can be modified after the services Update() call.
-            if (profile.IsSimulateHandTrackingEnabled)
-            {
-                DateTime currentTime = DateTime.UtcNow;
-                double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandControllerUpdateTimeStamp)).TotalMilliseconds;
-                // TODO implement custom hand device update frequency here, use 1000/fps instead of 0
-                if (msSinceLastHandUpdate > 0)
-                {
-                    if (LeftHandData.TimeStamp > lastHandControllerUpdateTimeStamp)
-                    {
-                        UpdateHandData(Handedness.Left, LeftHandData);
-                    }
-                    if (RightHandData.TimeStamp > lastHandControllerUpdateTimeStamp)
-                    {
-                        UpdateHandData(Handedness.Right, RightHandData);
-                    }
-
-                    lastHandControllerUpdateTimeStamp = currentTime.Ticks;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Capture a snapshot of simulated hand data based on current state.
-        /// </summary>
-        private bool UpdateUnityEditorHandData(SimulationHandData handDataLeft, SimulationHandData handDataRight)
-        {
-            SimulateUserInput();
-
-            // TODO: DateTime.UtcNow can be quite imprecise, better use Stopwatch.GetTimestamp
-            // https://stackoverflow.com/questions/2143140/c-sharp-datetime-now-precision
-            long timestamp = DateTime.UtcNow.Ticks;
 
             // Cache the generator delegates so we don't gc alloc every frame
             if (generatorLeft == null)
@@ -151,12 +100,45 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             {
                 generatorRight = RightHandState.FillCurrentFrame;
             }
+        }
 
-            bool handDataChanged = false;
-            handDataChanged |= handDataLeft.UpdateWithTimeStamp(timestamp, LeftHandState.IsTracked, LeftHandState.IsPinching, generatorLeft);
-            handDataChanged |= handDataRight.UpdateWithTimeStamp(timestamp, RightHandState.IsTracked, RightHandState.IsPinching, generatorRight);
+        /// <inheritdoc />
+        public override void Update()
+        {
+            base.Update();
 
-            return handDataChanged;
+            //if (profile.IsSimulateHandTrackingEnabled)
+            //{
+            //    UpdateUnityEditorHandData(LeftHandData, RightHandData);
+            //}
+        }
+
+        /// <inheritdoc />
+        protected override HandData OnGetHandData(Handedness handedness)
+        {
+            if (!profile.IsSimulateHandTrackingEnabled
+                || !(handedness == Handedness.Left || handedness == Handedness.Right))
+            {
+                // For any handedness a null hand data equals to IsTracked = false
+                // and will remove the controller for the handedness, if it exists.
+                return null;
+            }
+
+            DateTime currentTime = DateTime.UtcNow;
+            double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandControllerUpdateTimeStamp)).TotalMilliseconds;
+            SimulationHandData handData = handedness == Handedness.Left ? LeftHandData : RightHandData;
+            SimulationHandState handState = handedness == Handedness.Left ? LeftHandState : RightHandState;
+            SimulationHandData.HandJointDataGenerator generator = handedness == Handedness.Left ? generatorLeft : generatorRight;
+
+            // TODO implement custom hand device update frequency here, use 1000/fps instead of 0
+            if (msSinceLastHandUpdate > 0)
+            {
+                SimulateUserInput();
+                lastHandControllerUpdateTimeStamp = currentTime.Ticks;
+                handData.UpdateWithTimeStamp(lastHandControllerUpdateTimeStamp, handState.IsTracked, handState.IsPinching, generator);
+            }
+
+            return handData;
         }
 
         /// <summary>

@@ -24,25 +24,30 @@ namespace XRTK.Inspectors.PropertyDrawers
                 if (!EditorGUI.EndChangeCheck()) { return; }
                 if (property.objectReferenceValue == null) { return; }
 
-                PrefabAssetType prefabAssetType = PrefabUtility.GetPrefabAssetType(property.objectReferenceValue);
+                var prefabAssetType = PrefabUtility.GetPrefabAssetType(property.objectReferenceValue);
 
-                if (prefabAssetType != PrefabAssetType.Regular && prefabAssetType != PrefabAssetType.Variant)
+                if (prefabAssetType != PrefabAssetType.Regular &&
+                    prefabAssetType != PrefabAssetType.Variant)
                 {
                     property.objectReferenceValue = null;
-                    Debug.LogWarning("Assigned GameObject must be a prefab");
+                    Debug.LogWarning("Assigned GameObject must be a prefab!");
                 }
 
-                if (prefabAttribute.Constraint != null)
+                if (prefabAttribute.Constraint == null) { return; }
+
+                if (property.objectReferenceValue is GameObject prefabObject)
                 {
-                    var prefabObject = property.objectReferenceValue as GameObject;
-                    Debug.Assert(prefabObject != null);
                     var constraint = prefabObject.GetComponent(prefabAttribute.Constraint);
 
                     if (constraint == null)
                     {
                         property.objectReferenceValue = null;
-                        Debug.LogWarning($"Assigned GameObject must have {prefabAttribute.Constraint.Name} component");
+                        Debug.LogWarning($"Assigned GameObject must have a {prefabAttribute.Constraint.Name} component.");
                     }
+                }
+                else
+                {
+                    Debug.LogError($"The serialized field {property.name} needs to be serialized as a GameObject type.");
                 }
             }
             else

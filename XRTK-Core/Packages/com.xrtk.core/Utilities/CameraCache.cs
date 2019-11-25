@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Services;
 
 namespace XRTK.Utilities
 {
@@ -24,6 +25,11 @@ namespace XRTK.Utilities
 
                 if (mainCamera == null)
                 {
+                    if (MixedRealityToolkit.IsApplicationQuitting)
+                    {
+                        return null;
+                    }
+
                     mainCamera = new GameObject("Main Camera", typeof(Camera), typeof(AudioListener)) { tag = "MainCamera" }.GetComponent<Camera>();
                 }
 

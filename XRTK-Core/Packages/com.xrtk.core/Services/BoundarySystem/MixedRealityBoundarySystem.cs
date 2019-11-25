@@ -298,7 +298,7 @@ namespace XRTK.Services.BoundarySystem
                 }
 
                 var visualizationParent = new GameObject("Boundary System Visualizations");
-                visualizationParent.transform.parent = MixedRealityToolkit.Instance.MixedRealityPlayspace;
+                visualizationParent.transform.parent = MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform;
                 return boundaryVisualizationParent = visualizationParent;
             }
         }
@@ -599,7 +599,7 @@ namespace XRTK.Services.BoundarySystem
             }
 
             // Handle the user teleporting (boundary moves with them).
-            location = MixedRealityToolkit.Instance.MixedRealityPlayspace.InverseTransformPoint(location);
+            location = MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform.InverseTransformPoint(location);
 
             if (FloorHeight.Value > location.y ||
                 BoundaryHeight < location.y)
@@ -638,7 +638,7 @@ namespace XRTK.Services.BoundarySystem
             }
 
             // Handle the user teleporting (boundary moves with them).
-            var transformedCenter = MixedRealityToolkit.Instance.MixedRealityPlayspace.TransformPoint(
+            var transformedCenter = MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform.TransformPoint(
                 new Vector3(rectangularBounds.Center.x, 0f, rectangularBounds.Center.y));
 
             center = new Vector2(transformedCenter.x, transformedCenter.z);
@@ -665,7 +665,7 @@ namespace XRTK.Services.BoundarySystem
             }
 
             var floorScale = FloorScale;
-            var position = MixedRealityToolkit.Instance.MixedRealityPlayspace.position;
+            var position = MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform.position;
 
             // Render the floor.
             currentFloorObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -752,7 +752,7 @@ namespace XRTK.Services.BoundarySystem
                 layer = DefaultIgnoreRaycastLayer
             };
 
-            var position = MixedRealityToolkit.Instance.MixedRealityPlayspace.position;
+            var position = MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform.position;
 
             currentTrackedAreaObject.AddComponent<LineRenderer>();
             currentTrackedAreaObject.transform.Translate(

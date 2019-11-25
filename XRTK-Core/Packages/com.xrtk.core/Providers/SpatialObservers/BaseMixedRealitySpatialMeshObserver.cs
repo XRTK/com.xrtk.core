@@ -75,6 +75,7 @@ namespace XRTK.Providers.SpatialObservers
 
         #region IMixedRealityService Implementation
 
+        /// <inheritdoc />
         public override void Initialize()
         {
             base.Initialize();

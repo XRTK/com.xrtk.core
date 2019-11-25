@@ -1,7 +1,6 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.Controllers.Hands
@@ -11,8 +10,6 @@ namespace XRTK.Providers.Controllers.Hands
     /// </summary>
     public class HandData
     {
-        private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
-
         /// <summary>
         /// Timestamp of hand data, as FileTime, e.g. DateTime.UtcNow.ToFileTime().
         /// </summary>
@@ -26,7 +23,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Pose information for each hand joint.
         /// </summary>
-        public MixedRealityPose[] Joints { get; } = new MixedRealityPose[jointCount];
+        public MixedRealityPose[] Joints { get; } = new MixedRealityPose[DefaultHandController.JointCount];
 
         /// <summary>
         /// Mesh information of the hand.

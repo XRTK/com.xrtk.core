@@ -15,8 +15,12 @@ namespace XRTK.Providers.Controllers.Hands
     /// </summary>
     public class DefaultHandController : BaseHandController
     {
-        protected static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
         protected readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
+
+        /// <summary>
+        /// Gets the total joint count supported by this hand controller.
+        /// </summary>
+        public static readonly int JointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
         /// <summary>
         /// The Mixed Reality Controller default interactions.
@@ -41,7 +45,7 @@ namespace XRTK.Providers.Controllers.Hands
 
         public override void UpdateState(HandData handData)
         {
-            for (int i = 0; i < jointCount; i++)
+            for (int i = 0; i < JointCount; i++)
             {
                 TrackedHandJoint handJoint = (TrackedHandJoint)i;
                 if (TryGetJointPose(handJoint, out _))

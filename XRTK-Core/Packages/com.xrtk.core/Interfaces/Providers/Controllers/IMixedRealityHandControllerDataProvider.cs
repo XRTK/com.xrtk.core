@@ -40,5 +40,12 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// </summary>
         /// <param name="handler">The handler to unregister.</param>
         void Unregister(IMixedRealityHandDataHandler handler);
+
+        /// <summary>
+        /// Updates the hand data for a given handedness.
+        /// </summary>
+        /// <param name="handedness">Handedness of the hand controller updated.</param>
+        /// <param name="handData">The updated hand data.</param>
+        void UpdateHandData(Handedness handedness, XRTK.Providers.Controllers.Hands.HandData handData);
     }
 }

@@ -267,6 +267,7 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
+        /// <inheritdoc />
         public void UpdateHandData(Handedness handedness, HandData handData)
         {
             if (handData != null && handData.IsTracked)

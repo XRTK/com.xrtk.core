@@ -129,9 +129,6 @@ namespace XRTK.Providers.Controllers.Hands
                     }
                 }
             }
-
-            UpdateHandData(Handedness.Left, OnGetHandData(Handedness.Left));
-            UpdateHandData(Handedness.Right, OnGetHandData(Handedness.Right));
         }
 
         /// <inheritdoc />
@@ -268,16 +265,6 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 handDataUpdateEventHandlers.Remove(handler);
             }
-        }
-
-        /// <summary>
-        /// Override to provide platofrm specific implementations for hand tracking.
-        /// </summary>
-        /// <param name="handedness">The handedness the udpated data is requested for.</param>
-        /// <returns>Updated hand data for the current frame.</returns>
-        protected HandData OnGetHandData(Handedness handedness)
-        {
-            return null;
         }
 
         /// <inheritdoc />

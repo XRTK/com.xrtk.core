@@ -9,21 +9,20 @@ using XRTK.Utilities;
 namespace XRTK.Providers.Controllers.Hands.Simulation
 {
     /// <summary>
-    /// Internal class to define current gesture and smoothly animate hand data points.
+    /// Internal class to define current hand data and smoothly animate hand data points.
     /// </summary>
     [Serializable]
-    internal class SimulationHandState
+    public class SimulationHandState
     {
         /// <summary>
         /// Gets the handedness for the hand simulated by this state instance.
         /// </summary>
         public Handedness Handedness { get; } = Handedness.None;
 
-        // Show a tracked hand device
-        public bool IsTracked { get; set; } = false;
-
-        // Activate the pinch gesture
-        public bool IsPinching { get; private set; }
+        /// <summary>
+        /// The hand data produced by the current simulation state.
+        /// </summary>
+        public HandData HandData { get; } = new HandData();
 
         public Vector3 ScreenPosition;
 
@@ -111,7 +110,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             }
         }
 
-        internal void FillCurrentFrame(MixedRealityPose[] jointsOut)
+        public void FillCurrentFrame(MixedRealityPose[] jointsOut)
         {
             if (SimulatedHandPose.TryGetPoseByName(gestureName, out SimulatedHandPose targetPose))
             {
@@ -127,6 +126,39 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             Quaternion rotation = Quaternion.Euler(HandRotateEulerAngles);
             Vector3 position = CameraCache.Main.ScreenToWorldPoint(ScreenPosition + JitterOffset);
             pose.ComputeJointPoses(Handedness, rotation, position, jointsOut);
+        }
+
+        public delegate void HandJointDataGenerator(MixedRealityPose[] jointPositions);
+
+        /// <summary>
+        /// Computes the next frame of simulated hand data.
+        /// </summary>
+        public void Update()
+        {
+
+        }
+
+        public bool UpdateWithTimeStamp(long timestampNew, bool isTrackedNew, HandJointDataGenerator generator)
+        {
+            bool handDataChanged = false;
+
+            if (HandData.IsTracked != isTrackedNew)
+            {
+                HandData.IsTracked = isTrackedNew;
+                handDataChanged = true;
+            }
+
+            if (HandData.TimeStamp != timestampNew)
+            {
+                HandData.TimeStamp = timestampNew;
+                if (HandData.IsTracked)
+                {
+                    generator(HandData.Joints);
+                    handDataChanged = true;
+                }
+            }
+
+            return handDataChanged;
         }
     }
 }

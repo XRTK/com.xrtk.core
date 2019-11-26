@@ -18,16 +18,12 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         private long lastSimulatedTimeStampRightHand = 0;
 
         // Cached delegates for hand joint generation
-        private SimulationHandData.HandJointDataGenerator generatorLeft;
-        private SimulationHandData.HandJointDataGenerator generatorRight;
+        private SimulationHandState.HandJointDataGenerator generatorLeft;
+        private SimulationHandState.HandJointDataGenerator generatorRight;
 
         private SimulationHandState LeftHandState { get; set; }
 
-        private SimulationHandData LeftHandData { get; set; }
-
         private SimulationHandState RightHandState { get; set; }
-
-        private SimulationHandData RightHandData { get; set; }
 
         /// <summary>
         /// If true then the left hand is always visible,, even if it's currently
@@ -62,11 +58,12 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         {
             base.Initialize();
 
-            if (!Application.isPlaying) { return; }
+            if (!Application.isPlaying)
+            {
+                return;
+            }
 
-            LeftHandData = new SimulationHandData();
             LeftHandState = new SimulationHandState(Handedness.Left);
-            RightHandData = new SimulationHandData();
             RightHandState = new SimulationHandState(Handedness.Right);
 
             SimulatedHandPose.Initialize(profile.PoseDefinitions);
@@ -98,7 +95,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
 
             if (profile.IsSimulateHandTrackingEnabled)
             {
-                UpdateUnityEditorHandData(LeftHandData, RightHandData);
+                UpdateUnityEditorHandData();
             }
         }
 
@@ -116,13 +113,13 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                 // TODO implement custom hand device update frequency here, use 1000/fps instead of 0
                 if (msSinceLastHandUpdate > 0)
                 {
-                    if (LeftHandData.TimeStamp > lastHandControllerUpdateTimeStamp)
+                    if (LeftHandState.HandData.TimeStamp > lastHandControllerUpdateTimeStamp)
                     {
-                        UpdateHandData(Handedness.Left, LeftHandData);
+                        UpdateHandData(Handedness.Left, LeftHandState.HandData);
                     }
-                    if (RightHandData.TimeStamp > lastHandControllerUpdateTimeStamp)
+                    if (RightHandState.HandData.TimeStamp > lastHandControllerUpdateTimeStamp)
                     {
-                        UpdateHandData(Handedness.Right, RightHandData);
+                        UpdateHandData(Handedness.Right, RightHandState.HandData);
                     }
 
                     lastHandControllerUpdateTimeStamp = currentTime.Ticks;
@@ -133,9 +130,21 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <summary>
         /// Capture a snapshot of simulated hand data based on current state.
         /// </summary>
-        private bool UpdateUnityEditorHandData(SimulationHandData handDataLeft, SimulationHandData handDataRight)
+        private bool UpdateUnityEditorHandData()
         {
-            SimulateUserInput();
+            UpdateSimulationInput();
+
+            SimulateHand(ref lastSimulatedTimeStampLeftHand, LeftHandState, IsTrackingLeftHand, IsAlwaysVisibleLeft);
+            SimulateHand(ref lastSimulatedTimeStampRightHand, RightHandState, IsTrackingRightHand, IsAlwaysVisibleRight);
+
+            float gestureAnimDelta = profile.HandGestureAnimationSpeed * Time.deltaTime;
+            LeftHandState.GestureBlending += gestureAnimDelta;
+            RightHandState.GestureBlending += gestureAnimDelta;
+
+            lastMousePosition = Input.mousePosition;
+
+            LeftHandState.Update();
+            RightHandState.Update();
 
             // TODO: DateTime.UtcNow can be quite imprecise, better use Stopwatch.GetTimestamp
             // https://stackoverflow.com/questions/2143140/c-sharp-datetime-now-precision
@@ -153,38 +162,21 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             }
 
             bool handDataChanged = false;
-            handDataChanged |= handDataLeft.UpdateWithTimeStamp(timestamp, LeftHandState.IsTracked, LeftHandState.IsPinching, generatorLeft);
-            handDataChanged |= handDataRight.UpdateWithTimeStamp(timestamp, RightHandState.IsTracked, RightHandState.IsPinching, generatorRight);
+            handDataChanged |= LeftHandState.UpdateWithTimeStamp(timestamp, LeftHandState.HandData.IsTracked, generatorLeft);
+            handDataChanged |= RightHandState.UpdateWithTimeStamp(timestamp, RightHandState.HandData.IsTracked, generatorRight);
 
             return handDataChanged;
-        }
-
-        /// <summary>
-        /// Update hand state based on keyboard and mouse input
-        /// </summary>
-        private void SimulateUserInput()
-        {
-            UpdateSimulationState();
-
-            SimulateHand(ref lastSimulatedTimeStampLeftHand, LeftHandState, IsTrackingLeftHand, IsAlwaysVisibleLeft);
-            SimulateHand(ref lastSimulatedTimeStampRightHand, RightHandState, IsTrackingRightHand, IsAlwaysVisibleRight);
-
-            float gestureAnimDelta = profile.HandGestureAnimationSpeed * Time.deltaTime;
-            LeftHandState.GestureBlending += gestureAnimDelta;
-            RightHandState.GestureBlending += gestureAnimDelta;
-
-            lastMousePosition = Input.mousePosition;
         }
 
         private void SimulateHand(ref long lastSimulatedTimeStamp, SimulationHandState state, bool isSimulating, bool isAlwaysVisible)
         {
             // We are "tracking" the hand, if it's configured to always be visible or if
             // simulation is active.
-            bool enableTracking = isAlwaysVisible || isSimulating;
+            bool isTracked = isAlwaysVisible || isSimulating;
 
             // If the hands state is changing from "not tracked" to being tracked, reset its position
             // to the current mouse position and default distance from the camera.
-            if (!state.IsTracked && enableTracking)
+            if (!state.HandData.IsTracked && isTracked)
             {
                 Vector3 mousePos = Input.mousePosition;
                 state.ScreenPosition = new Vector3(mousePos.x, mousePos.y, profile.DefaultHandDistance);
@@ -212,9 +204,9 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             // TODO: DateTime.UtcNow can be quite imprecise, better use Stopwatch.GetTimestamp
             // https://stackoverflow.com/questions/2143140/c-sharp-datetime-now-precision
             DateTime currentTime = DateTime.UtcNow;
-            if (enableTracking)
+            if (isTracked)
             {
-                state.IsTracked = true;
+                state.HandData.IsTracked = true;
                 lastSimulatedTimeStamp = currentTime.Ticks;
             }
             else
@@ -222,16 +214,15 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                 float timeSinceTracking = (float)currentTime.Subtract(new DateTime(lastSimulatedTimeStamp)).TotalSeconds;
                 if (timeSinceTracking > profile.HandHideTimeout)
                 {
-                    state.IsTracked = false;
+                    state.HandData.IsTracked = false;
                 }
             }
         }
 
         /// <summary>
-        /// Updates the hand simulation state. Checks for input whether hands should be tracked or
-        /// always visible.
+        /// Reads keyboard input to update whether hands should be tracked or always visible.
         /// </summary>
-        private void UpdateSimulationState()
+        private void UpdateSimulationInput()
         {
             if (Input.GetKeyDown(profile.ToggleLeftHandKey))
             {

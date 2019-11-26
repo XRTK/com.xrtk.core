@@ -14,20 +14,10 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         private long lastHandControllerUpdateTimeStamp = 0;
         private Vector3? lastMousePosition = null;
         private SimulationHandPoseData defaultHandPose;
-        private long lastSimulatedTimeStampLeftHand = 0;
-        private long lastSimulatedTimeStampRightHand = 0;
-
-        // Cached delegates for hand joint generation
-        private SimulationHandData.HandJointDataGenerator generatorLeft;
-        private SimulationHandData.HandJointDataGenerator generatorRight;
 
         private SimulationHandState LeftHandState { get; set; }
 
-        private SimulationHandData LeftHandData { get; set; }
-
         private SimulationHandState RightHandState { get; set; }
-
-        private SimulationHandData RightHandData { get; set; }
 
         /// <summary>
         /// If true then the left hand is always visible,, even if it's currently
@@ -62,12 +52,10 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         {
             base.Initialize();
 
-            if (!Application.isPlaying) { return; }
-
-            LeftHandData = new SimulationHandData();
-            LeftHandState = new SimulationHandState(Handedness.Left);
-            RightHandData = new SimulationHandData();
-            RightHandState = new SimulationHandState(Handedness.Right);
+            if (!Application.isPlaying)
+            {
+                return;
+            }
 
             SimulatedHandPose.Initialize(profile.PoseDefinitions);
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
@@ -76,30 +64,20 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                 if (pose.IsDefault)
                 {
                     defaultHandPose = pose;
-                    LeftHandState.GestureName = defaultHandPose.GestureName;
-                    RightHandState.GestureName = defaultHandPose.GestureName;
                     break;
                 }
             }
 
-            if (string.IsNullOrWhiteSpace(LeftHandState.GestureName))
+            if (defaultHandPose == null)
             {
-                Debug.LogError("There is no default editor hand pose defined.");
+                Debug.LogError("There is no default simulated hand pose defined.");
             }
+
+            LeftHandState = new SimulationHandState(profile, Handedness.Left, SimulatedHandPose.GetPoseByName(defaultHandPose.GestureName));
+            RightHandState = new SimulationHandState(profile, Handedness.Right, SimulatedHandPose.GetPoseByName(defaultHandPose.GestureName));
 
             LeftHandState.Reset();
             RightHandState.Reset();
-
-            // Cache the generator delegates so we don't gc alloc every frame
-            if (generatorLeft == null)
-            {
-                generatorLeft = LeftHandState.FillCurrentFrame;
-            }
-
-            if (generatorRight == null)
-            {
-                generatorRight = RightHandState.FillCurrentFrame;
-            }
         }
 
         /// <inheritdoc />
@@ -107,113 +85,71 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         {
             base.Update();
 
-            //if (profile.IsSimulateHandTrackingEnabled)
-            //{
-            //    UpdateUnityEditorHandData(LeftHandData, RightHandData);
-            //}
+            if (profile.IsSimulateHandTrackingEnabled)
+            {
+                UpdateUnityEditorHandData();
+            }
         }
 
         /// <inheritdoc />
-        protected override HandData OnGetHandData(Handedness handedness)
+        public override void LateUpdate()
         {
-            if (!profile.IsSimulateHandTrackingEnabled
-                || !(handedness == Handedness.Left || handedness == Handedness.Right))
+            base.LateUpdate();
+
+            // Apply hand data in LateUpdate to ensure external changes are applied.
+            // HandDataLeft / Right can be modified after the services Update() call.
+            if (profile.IsSimulateHandTrackingEnabled)
             {
-                // For any handedness a null hand data equals to IsTracked = false
-                // and will remove the controller for the handedness, if it exists.
-                return null;
+                DateTime currentTime = DateTime.UtcNow;
+                double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandControllerUpdateTimeStamp)).TotalMilliseconds;
+                // TODO implement custom hand device update frequency here, use 1000/fps instead of 0
+                if (msSinceLastHandUpdate > 0)
+                {
+                    if (LeftHandState.HandData.TimeStamp > lastHandControllerUpdateTimeStamp)
+                    {
+                        UpdateHandData(Handedness.Left, LeftHandState.HandData);
+                    }
+                    if (RightHandState.HandData.TimeStamp > lastHandControllerUpdateTimeStamp)
+                    {
+                        UpdateHandData(Handedness.Right, RightHandState.HandData);
+                    }
+
+                    lastHandControllerUpdateTimeStamp = currentTime.Ticks;
+                }
             }
-
-            DateTime currentTime = DateTime.UtcNow;
-            double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandControllerUpdateTimeStamp)).TotalMilliseconds;
-            SimulationHandData handData = handedness == Handedness.Left ? LeftHandData : RightHandData;
-            SimulationHandState handState = handedness == Handedness.Left ? LeftHandState : RightHandState;
-            SimulationHandData.HandJointDataGenerator generator = handedness == Handedness.Left ? generatorLeft : generatorRight;
-
-            // TODO implement custom hand device update frequency here, use 1000/fps instead of 0
-            if (msSinceLastHandUpdate > 0)
-            {
-                SimulateUserInput();
-                lastHandControllerUpdateTimeStamp = currentTime.Ticks;
-                handData.UpdateWithTimeStamp(lastHandControllerUpdateTimeStamp, handState.IsTracked, handState.IsPinching, generator);
-            }
-
-            return handData;
         }
 
         /// <summary>
-        /// Update hand state based on keyboard and mouse input
+        /// Capture a snapshot of simulated hand data based on current state.
         /// </summary>
-        private void SimulateUserInput()
+        private bool UpdateUnityEditorHandData()
         {
-            UpdateSimulationState();
+            UpdateSimulationInput();
 
-            SimulateHand(ref lastSimulatedTimeStampLeftHand, LeftHandState, IsTrackingLeftHand, IsAlwaysVisibleLeft);
-            SimulateHand(ref lastSimulatedTimeStampRightHand, RightHandState, IsTrackingRightHand, IsAlwaysVisibleRight);
+            LeftHandState.Update(IsTrackingLeftHand, IsAlwaysVisibleLeft, GetHandPositionDelta(), GetHandRotationDelta());
+            RightHandState.Update(IsTrackingRightHand, IsAlwaysVisibleRight, GetHandPositionDelta(), GetHandRotationDelta());
 
             float gestureAnimDelta = profile.HandGestureAnimationSpeed * Time.deltaTime;
             LeftHandState.GestureBlending += gestureAnimDelta;
             RightHandState.GestureBlending += gestureAnimDelta;
 
             lastMousePosition = Input.mousePosition;
-        }
 
-        private void SimulateHand(ref long lastSimulatedTimeStamp, SimulationHandState state, bool isSimulating, bool isAlwaysVisible)
-        {
-            // We are "tracking" the hand, if it's configured to always be visible or if
-            // simulation is active.
-            bool enableTracking = isAlwaysVisible || isSimulating;
-
-            // If the hands state is changing from "not tracked" to being tracked, reset its position
-            // to the current mouse position and default distance from the camera.
-            if (!state.IsTracked && enableTracking)
-            {
-                Vector3 mousePos = Input.mousePosition;
-                state.ScreenPosition = new Vector3(mousePos.x, mousePos.y, profile.DefaultHandDistance);
-            }
-
-            // If we are simulating the hand currently, read input and update the hand state.
-            if (isSimulating)
-            {
-                state.SimulateInput(GetHandPositionDelta(), profile.HandJitterAmount, GetHandRotationDelta());
-
-                if (isAlwaysVisible)
-                {
-                    // Toggle gestures on/off
-                    state.GestureName = ToggleHandPose(state.GestureName);
-                }
-                else
-                {
-                    // Enable gesture while mouse button is pressed
-                    state.GestureName = SelectHandPose();
-                }
-            }
-
-            // Update tracked state of a hand.
-            // If hideTimeout value is null, hands will stay visible after tracking stops.
             // TODO: DateTime.UtcNow can be quite imprecise, better use Stopwatch.GetTimestamp
             // https://stackoverflow.com/questions/2143140/c-sharp-datetime-now-precision
-            DateTime currentTime = DateTime.UtcNow;
-            if (enableTracking)
-            {
-                state.IsTracked = true;
-                lastSimulatedTimeStamp = currentTime.Ticks;
-            }
-            else
-            {
-                float timeSinceTracking = (float)currentTime.Subtract(new DateTime(lastSimulatedTimeStamp)).TotalSeconds;
-                if (timeSinceTracking > profile.HandHideTimeout)
-                {
-                    state.IsTracked = false;
-                }
-            }
+            long timestamp = DateTime.UtcNow.Ticks;
+
+            bool handDataChanged = false;
+            handDataChanged |= LeftHandState.UpdateWithTimeStamp(timestamp, LeftHandState.HandData.IsTracked);
+            handDataChanged |= RightHandState.UpdateWithTimeStamp(timestamp, RightHandState.HandData.IsTracked);
+
+            return handDataChanged;
         }
 
         /// <summary>
-        /// Updates the hand simulation state. Checks for input whether hands should be tracked or
-        /// always visible.
+        /// Reads keyboard input to update whether hands should be tracked or always visible.
         /// </summary>
-        private void UpdateSimulationState()
+        private void UpdateSimulationInput()
         {
             if (Input.GetKeyDown(profile.ToggleLeftHandKey))
             {

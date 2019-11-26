@@ -3,27 +3,32 @@
 
 using System;
 using UnityEngine;
+using XRTK.Definitions.Controllers.Hands.UnityEditor;
 using XRTK.Definitions.Utilities;
 using XRTK.Utilities;
 
 namespace XRTK.Providers.Controllers.Hands.Simulation
 {
     /// <summary>
-    /// Internal class to define current gesture and smoothly animate hand data points.
+    /// Internal class to define current hand data and smoothly animate hand data points.
     /// </summary>
     [Serializable]
-    internal class SimulationHandState
+    public class SimulationHandState
     {
+        private readonly SimulationHandControllerDataProviderProfile profile;
+        private long lastSimulatedTimeStamp = 0;
+        private float poseBlending = 0.0f;
+        private SimulatedHandPose pose;
+
         /// <summary>
         /// Gets the handedness for the hand simulated by this state instance.
         /// </summary>
         public Handedness Handedness { get; } = Handedness.None;
 
-        // Show a tracked hand device
-        public bool IsTracked { get; set; } = false;
-
-        // Activate the pinch gesture
-        public bool IsPinching { get; private set; }
+        /// <summary>
+        /// The current hand data produced by the current simulation state.
+        /// </summary>
+        public HandData HandData { get; } = new HandData();
 
         public Vector3 ScreenPosition;
 
@@ -60,20 +65,28 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             set => gestureBlending = Mathf.Clamp(value, gestureBlending, 1.0f);
         }
 
-        private float poseBlending = 0.0f;
-        private SimulatedHandPose pose;
-
-        public SimulationHandState(Handedness handedness)
+        /// <summary>
+        /// Creates a new simulation hand state for a hand.
+        /// </summary>
+        /// <param name="profile">The active hand simulation profile.</param>
+        /// <param name="handedness">Handedness of the simulated hand.</param>
+        /// <param name="pose">The hand pose to start simulation with.</param>
+        public SimulationHandState(SimulationHandControllerDataProviderProfile profile, Handedness handedness, SimulatedHandPose pose)
         {
             Handedness = handedness;
-            pose = new SimulatedHandPose();
+            this.pose = pose;
+            this.profile = profile;
         }
 
+        /// <summary>
+        /// Resets the simulated hand state.
+        /// </summary>
         public void Reset()
         {
             ScreenPosition = Vector3.zero;
             HandRotateEulerAngles = Vector3.zero;
             JitterOffset = Vector3.zero;
+            GestureName = pose.Id;
 
             ResetGesture();
         }
@@ -86,7 +99,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             ScreenPosition = CameraCache.Main.ViewportToScreenPoint(point);
         }
 
-        public void SimulateInput(Vector3 mouseDelta, float noiseAmount, Vector3 rotationDeltaEulerAngles)
+        private void SimulateInput(Vector3 mouseDelta, float noiseAmount, Vector3 rotationDeltaEulerAngles)
         {
             // Apply mouse delta x/y in screen space, but depth offset in world space
             ScreenPosition.x += mouseDelta.x;
@@ -111,7 +124,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             }
         }
 
-        internal void FillCurrentFrame(MixedRealityPose[] jointsOut)
+        private void UpdateCurrentPoseFrame()
         {
             if (SimulatedHandPose.TryGetPoseByName(gestureName, out SimulatedHandPose targetPose))
             {
@@ -126,7 +139,86 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             poseBlending = gestureBlending;
             Quaternion rotation = Quaternion.Euler(HandRotateEulerAngles);
             Vector3 position = CameraCache.Main.ScreenToWorldPoint(ScreenPosition + JitterOffset);
-            pose.ComputeJointPoses(Handedness, rotation, position, jointsOut);
+            pose.ComputeJointPoses(Handedness, rotation, position, HandData.Joints);
+        }
+
+        public void Update(bool isSimulating, bool isAlwaysVisible, Vector3 handPositionDelta, Vector3 handRotationDelta)
+        {
+            SimulateHand(ref lastSimulatedTimeStamp, isSimulating, isAlwaysVisible, handPositionDelta, handRotationDelta);
+        }
+
+        public bool UpdateWithTimeStamp(long timeStamp, bool isTracked)
+        {
+            bool handDataChanged = false;
+
+            if (HandData.IsTracked != isTracked)
+            {
+                HandData.IsTracked = isTracked;
+                handDataChanged = true;
+            }
+
+            if (HandData.TimeStamp != timeStamp)
+            {
+                HandData.TimeStamp = timeStamp;
+                if (HandData.IsTracked)
+                {
+                    UpdateCurrentPoseFrame();
+                    handDataChanged = true;
+                }
+            }
+
+            return handDataChanged;
+        }
+
+        private void SimulateHand(ref long lastSimulatedTimeStamp, bool isSimulating, bool isAlwaysVisible, Vector3 handPositionDelta, Vector3 handRotationDelta)
+        {
+            // We are "tracking" the hand, if it's configured to always be visible or if
+            // simulation is active.
+            bool isTracked = isAlwaysVisible || isSimulating;
+
+            // If the hands state is changing from "not tracked" to being tracked, reset its position
+            // to the current mouse position and default distance from the camera.
+            if (!HandData.IsTracked && isTracked)
+            {
+                Vector3 mousePos = Input.mousePosition;
+                ScreenPosition = new Vector3(mousePos.x, mousePos.y, profile.DefaultHandDistance);
+            }
+
+            // If we are simulating the hand currently, read input and update the hand state.
+            if (isSimulating)
+            {
+                SimulateInput(handPositionDelta, profile.HandJitterAmount, handRotationDelta);
+
+                //if (isAlwaysVisible)
+                //{
+                //    // Toggle gestures on/off
+                //    GestureName = ToggleHandPose(GestureName);
+                //}
+                //else
+                //{
+                //    // Enable gesture while mouse button is pressed
+                //    GestureName = SelectHandPose();
+                //}
+            }
+
+            // Update tracked state of a hand.
+            // If hideTimeout value is null, hands will stay visible after tracking stops.
+            // TODO: DateTime.UtcNow can be quite imprecise, better use Stopwatch.GetTimestamp
+            // https://stackoverflow.com/questions/2143140/c-sharp-datetime-now-precision
+            DateTime currentTime = DateTime.UtcNow;
+            if (isTracked)
+            {
+                HandData.IsTracked = true;
+                lastSimulatedTimeStamp = currentTime.Ticks;
+            }
+            else
+            {
+                float timeSinceTracking = (float)currentTime.Subtract(new DateTime(lastSimulatedTimeStamp)).TotalSeconds;
+                if (timeSinceTracking > profile.HandHideTimeout)
+                {
+                    HandData.IsTracked = false;
+                }
+            }
         }
     }
 }

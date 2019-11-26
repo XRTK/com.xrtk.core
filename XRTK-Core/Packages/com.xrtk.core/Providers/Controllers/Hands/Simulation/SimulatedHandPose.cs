@@ -24,11 +24,18 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         private MixedRealityPose[] localJointPoses;
 
         /// <summary>
+        /// Gets the unique identifier for the simulated pose.
+        /// </summary>
+        public string Id { get; }
+
+        /// <summary>
         /// Creates a new hand pose with all joints in their
         /// local space origin.
         /// </summary>
-        public SimulatedHandPose()
+        /// <param name="id">Unique pose identfier.</param>
+        public SimulatedHandPose(string id)
         {
+            Id = id;
             localJointPoses = new MixedRealityPose[jointCount];
             SetZero();
         }
@@ -36,11 +43,28 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <summary>
         /// Creates a new hand pose using local pose data for the hand's joints.
         /// </summary>
+        /// <param name="id">Unique pose identfier.</param>
         /// <param name="localJointPoses">Joint poses in local space.</param>
-        public SimulatedHandPose(MixedRealityPose[] localJointPoses)
+        public SimulatedHandPose(string id, MixedRealityPose[] localJointPoses) : this(id)
         {
-            this.localJointPoses = new MixedRealityPose[jointCount];
             Array.Copy(localJointPoses, this.localJointPoses, jointCount);
+        }
+
+        /// <summary>
+        /// Initialize pose data for use in editor from files.
+        /// </summary>
+        /// <param name="poses">List of pose data assets with pose information.</param>
+        public static void Initialize(IEnumerable<SimulationHandPoseData> poses)
+        {
+            foreach (var poseData in poses)
+            {
+                if (poseData.Data != null)
+                {
+                    SimulatedHandPose pose = new SimulatedHandPose(poseData.GestureName);
+                    pose.FromJson(poseData.Data.text);
+                    handPoses.Add(pose.Id, pose);
+                }
+            }
         }
 
         /// <summary>
@@ -149,11 +173,11 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                 updatedJointPoses[i] = new MixedRealityPose(position, rotation);
             }
 
-            return new SimulatedHandPose(updatedJointPoses);
+            return new SimulatedHandPose(t >= 1 ? b.Id : a.Id, updatedJointPoses);
         }
 
         /// <summary>
-        /// Gets the pose data for a given pose name, if it's registered.
+        /// Gets the pose for a given pose name, if it's registered.
         /// </summary>
         /// <param name="name">The name of the pose.</param>
         /// <param name="pose">Hand pose reference.</param>
@@ -171,20 +195,13 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         }
 
         /// <summary>
-        /// Initialize pose data for use in editor from files.
+        /// Gets the pose for a given pose name. Will throw it pose not registered.
         /// </summary>
-        /// <param name="poses">List of pose data assets with pose information.</param>
-        public static void Initialize(IEnumerable<SimulationHandPoseData> poses)
+        /// <param name="name">The name of the pose to lookup.</param>
+        /// <returns>Simulated hand pose.</returns>
+        public static SimulatedHandPose GetPoseByName(string name)
         {
-            foreach (var poseData in poses)
-            {
-                if (poseData.Data != null)
-                {
-                    SimulatedHandPose pose = new SimulatedHandPose();
-                    pose.FromJson(poseData.Data.text);
-                    handPoses.Add(poseData.GestureName, pose);
-                }
-            }
+            return handPoses[name];
         }
 
         /// <summary>

@@ -11,6 +11,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
     public class SimulationHandControllerDataProvider : BaseHandControllerDataProvider
     {
         private SimulationHandControllerDataProviderProfile profile;
+        private SimulationTimeStampStopWatch handUpdateStopWatch;
         private long lastHandUpdateTimeStamp = 0;
         private Vector3? lastMousePosition = null;
         private SimulationHandPoseData defaultHandPose;
@@ -87,6 +88,10 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             RightHandState = new SimulationHandState(profile, Handedness.Right, SimulatedHandPose.GetPoseByName(defaultHandPose.GestureName));
             LeftHandState.Reset();
             RightHandState.Reset();
+
+            // Start the timestamp stopwatch
+            handUpdateStopWatch = new SimulationTimeStampStopWatch();
+            handUpdateStopWatch.Reset();
         }
 
         /// <inheritdoc />
@@ -107,9 +112,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
 
                 lastMousePosition = Input.mousePosition;
 
-                // TODO: DateTime.UtcNow can be quite imprecise, better use Stopwatch.GetTimestamp
-                // https://stackoverflow.com/questions/2143140/c-sharp-datetime-now-precision
-                long timeStamp = DateTime.UtcNow.Ticks;
+                long timeStamp = handUpdateStopWatch.TimeStamp;
                 LeftHandState.UpdateWithTimeStamp(timeStamp, LeftHandState.HandData.IsTracked);
                 RightHandState.UpdateWithTimeStamp(timeStamp, RightHandState.HandData.IsTracked);
             }
@@ -128,8 +131,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                 double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandUpdateTimeStamp)).TotalMilliseconds;
                 if (msSinceLastHandUpdate > profile.SimulatedUpdateFrequency)
                 {
-                    // Only update hands if the simulation state has changed since
-                    // the last update.
+                    // Only update hands if the simulation state has changed since the last update.
                     if (LeftHandState.HandData.TimeStamp > lastHandUpdateTimeStamp)
                     {
                         UpdateHandData(Handedness.Left, LeftHandState.HandData);

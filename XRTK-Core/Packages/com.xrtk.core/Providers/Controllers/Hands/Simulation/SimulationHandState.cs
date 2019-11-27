@@ -16,6 +16,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
     public class SimulationHandState
     {
         private readonly SimulationHandControllerDataProviderProfile profile;
+        private readonly SimulationTimeStampStopWatch lastUpdatedStopWatch;
         private long lastSimulatedTimeStamp = 0;
         private float poseBlending = 0.0f;
         private SimulatedHandPose pose;
@@ -76,6 +77,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             Handedness = handedness;
             this.pose = pose;
             this.profile = profile;
+            lastUpdatedStopWatch = new SimulationTimeStampStopWatch();
         }
 
         /// <summary>
@@ -87,6 +89,9 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             HandRotateEulerAngles = Vector3.zero;
             JitterOffset = Vector3.zero;
             GestureName = pose.Id;
+            HandData.TimeStamp = 0;
+            HandData.IsTracked = false;
+            lastUpdatedStopWatch.Reset();
 
             ResetGesture();
         }
@@ -170,22 +175,21 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             return handDataChanged;
         }
 
-        private void SimulateHand(ref long lastSimulatedTimeStamp, bool isSimulating, bool isAlwaysVisible, Vector3 handPositionDelta, Vector3 handRotationDelta)
+        private void SimulateHand(ref long lastSimulatedTimeStamp, bool isTracked, bool isAlwaysVisible, Vector3 handPositionDelta, Vector3 handRotationDelta)
         {
-            // We are "tracking" the hand, if it's configured to always be visible or if
-            // simulation is active.
-            bool isTracked = isAlwaysVisible || isSimulating;
+            // We are "tracking" the hand, if it's configured to always be visible or if simulation is active.
+            bool isTrackedOrAlwaysVisible = isAlwaysVisible || isTracked;
 
             // If the hands state is changing from "not tracked" to being tracked, reset its position
             // to the current mouse position and default distance from the camera.
-            if (!HandData.IsTracked && isTracked)
+            if (!HandData.IsTracked && isTrackedOrAlwaysVisible)
             {
                 Vector3 mousePos = Input.mousePosition;
                 ScreenPosition = new Vector3(mousePos.x, mousePos.y, profile.DefaultHandDistance);
             }
 
             // If we are simulating the hand currently, read input and update the hand state.
-            if (isSimulating)
+            if (isTracked)
             {
                 SimulateInput(handPositionDelta, profile.HandJitterAmount, handRotationDelta);
 
@@ -201,19 +205,15 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                 //}
             }
 
-            // Update tracked state of a hand.
-            // If hideTimeout value is null, hands will stay visible after tracking stops.
-            // TODO: DateTime.UtcNow can be quite imprecise, better use Stopwatch.GetTimestamp
-            // https://stackoverflow.com/questions/2143140/c-sharp-datetime-now-precision
-            DateTime currentTime = DateTime.UtcNow;
-            if (isTracked)
+            DateTime stopWatchCurrent = lastUpdatedStopWatch.Current;
+            if (isTrackedOrAlwaysVisible)
             {
                 HandData.IsTracked = true;
-                lastSimulatedTimeStamp = currentTime.Ticks;
+                lastSimulatedTimeStamp = lastUpdatedStopWatch.TimeStamp;
             }
             else
             {
-                float timeSinceTracking = (float)currentTime.Subtract(new DateTime(lastSimulatedTimeStamp)).TotalSeconds;
+                float timeSinceTracking = (float)stopWatchCurrent.Subtract(new DateTime(lastSimulatedTimeStamp)).TotalSeconds;
                 if (timeSinceTracking > profile.HandHideTimeout)
                 {
                     HandData.IsTracked = false;

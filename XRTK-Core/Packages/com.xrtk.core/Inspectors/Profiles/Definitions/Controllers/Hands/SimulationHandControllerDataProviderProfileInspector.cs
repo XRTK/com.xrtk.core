@@ -13,6 +13,7 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
     public class SimulationHandControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty isSimulateHandTrackingEnabled;
+        private SerializedProperty simulatedUpdateFrequency;
 
         private SerializedProperty toggleLeftHandKey;
         private SerializedProperty toggleRightHandKey;
@@ -43,6 +44,7 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
             base.OnEnable();
 
             isSimulateHandTrackingEnabled = serializedObject.FindProperty("isSimulateHandTrackingEnabled");
+            simulatedUpdateFrequency = serializedObject.FindProperty("simulatedUpdateFrequency");
 
             toggleLeftHandKey = serializedObject.FindProperty("toggleLeftHandKey");
             toggleRightHandKey = serializedObject.FindProperty("toggleRightHandKey");
@@ -85,6 +87,7 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(isSimulateHandTrackingEnabled);
+            EditorGUILayout.PropertyField(simulatedUpdateFrequency);
             EditorGUILayout.Space();
 
             EditorGUILayout.BeginVertical("Label");

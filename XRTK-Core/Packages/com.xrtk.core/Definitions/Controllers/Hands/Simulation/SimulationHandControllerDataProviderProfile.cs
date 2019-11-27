@@ -11,7 +11,7 @@ namespace XRTK.Definitions.Controllers.Hands.UnityEditor
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hands/Unity Editor Hand Controller Data Provider Profile", fileName = "UnityEditorHandControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
     public class SimulationHandControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
     {
-        [Header("Hand Simulation")]
+        [Header("Hand Simulation Settings")]
 
         [SerializeField]
         [Tooltip("Enable hand simulation")]
@@ -21,6 +21,17 @@ namespace XRTK.Definitions.Controllers.Hands.UnityEditor
         /// Is hand simulation enabled?
         /// </summary>
         public bool IsSimulateHandTrackingEnabled => isSimulateHandTrackingEnabled;
+
+        [SerializeField]
+        [Tooltip("Simulated update frequency for hand data in milliseconds. 0ms is every frame.")]
+        private double simulatedUpdateFrequency = 0;
+
+        /// <summary>
+        /// The simulated update frequency in milliseconds mimicks the hardware's ability to
+        /// update hand tracking data. A value of 0ms will provide simulated hand data
+        /// updates every frame.
+        /// </summary>
+        public double SimulatedUpdateFrequency => simulatedUpdateFrequency;
 
         [Header("Hand Control Settings")]
 

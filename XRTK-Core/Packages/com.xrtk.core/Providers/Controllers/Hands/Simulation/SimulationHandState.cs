@@ -19,7 +19,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         private readonly SimulationTimeStampStopWatch lastUpdatedStopWatch;
         private long lastSimulatedTimeStamp = 0;
         private float poseBlending = 0.0f;
-        private SimulatedHandPose pose;
+        private SimulationHandPose pose;
 
         /// <summary>
         /// Gets the handedness for the hand simulated by this state instance.
@@ -72,7 +72,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <param name="profile">The active hand simulation profile.</param>
         /// <param name="handedness">Handedness of the simulated hand.</param>
         /// <param name="pose">The hand pose to start simulation with.</param>
-        public SimulationHandState(SimulationHandControllerDataProviderProfile profile, Handedness handedness, SimulatedHandPose pose)
+        public SimulationHandState(SimulationHandControllerDataProviderProfile profile, Handedness handedness, SimulationHandPose pose)
         {
             Handedness = handedness;
             this.pose = pose;
@@ -123,7 +123,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         private void ResetGesture()
         {
             gestureBlending = 1.0f;
-            if (SimulatedHandPose.TryGetPoseByName(gestureName, out SimulatedHandPose gesturePose))
+            if (SimulationHandPose.TryGetPoseByName(gestureName, out SimulationHandPose gesturePose))
             {
                 pose.Copy(gesturePose);
             }
@@ -131,13 +131,13 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
 
         private void UpdateCurrentPoseFrame()
         {
-            if (SimulatedHandPose.TryGetPoseByName(gestureName, out SimulatedHandPose targetPose))
+            if (SimulationHandPose.TryGetPoseByName(gestureName, out SimulationHandPose targetPose))
             {
                 if (gestureBlending > poseBlending)
                 {
                     float range = Mathf.Clamp01(1.0f - poseBlending);
                     float lerpFactor = range > 0.0f ? (gestureBlending - poseBlending) / range : 1.0f;
-                    pose = SimulatedHandPose.Lerp(pose, targetPose, lerpFactor);
+                    pose = SimulationHandPose.Lerp(pose, targetPose, lerpFactor);
                 }
             }
 

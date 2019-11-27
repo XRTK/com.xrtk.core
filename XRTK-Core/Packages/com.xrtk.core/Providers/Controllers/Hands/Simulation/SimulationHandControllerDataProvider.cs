@@ -60,7 +60,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
 
             // Initialize available simulated hand poses and find the
             // cofigured default pose.
-            SimulatedHandPose.Initialize(profile.PoseDefinitions);
+            SimulationHandPose.Initialize(profile.PoseDefinitions);
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
             {
                 SimulationHandPoseData pose = profile.PoseDefinitions[i];
@@ -78,8 +78,8 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             }
 
             // Initialize states to default.
-            LeftHandState = new SimulationHandState(profile, Handedness.Left, SimulatedHandPose.GetPoseByName(defaultHandPose.GestureName));
-            RightHandState = new SimulationHandState(profile, Handedness.Right, SimulatedHandPose.GetPoseByName(defaultHandPose.GestureName));
+            LeftHandState = new SimulationHandState(profile, Handedness.Left, SimulationHandPose.GetPoseByName(defaultHandPose.GestureName));
+            RightHandState = new SimulationHandState(profile, Handedness.Right, SimulationHandPose.GetPoseByName(defaultHandPose.GestureName));
             LeftHandState.Reset();
             RightHandState.Reset();
 
@@ -264,18 +264,18 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// Selects a hand pose to simulate, while its input keycode is pressed.
         /// </summary>
         /// <returns>Default pose if no other fitting user input.</returns>
-        private SimulatedHandPose SelectHandPose()
+        private SimulationHandPose SelectHandPose()
         {
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
             {
                 SimulationHandPoseData pose = profile.PoseDefinitions[i];
                 if (Input.GetKeyDown(pose.KeyCode))
                 {
-                    SimulatedHandPose.GetPoseByName(pose.GestureName);
+                    SimulationHandPose.GetPoseByName(pose.GestureName);
                 }
             }
 
-            return SimulatedHandPose.GetPoseByName(defaultHandPose.GestureName);
+            return SimulationHandPose.GetPoseByName(defaultHandPose.GestureName);
         }
 
         /// <summary>
@@ -284,18 +284,18 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// </summary>
         /// <param name="currentPose">The name of the pose currently used.</param>
         /// <returns>Pose name of the pose toggled on. Either default pose or the current one.</returns>
-        private SimulatedHandPose ToggleHandPose(SimulatedHandPose currentPose)
+        private SimulationHandPose ToggleHandPose(SimulationHandPose currentPose)
         {
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
             {
                 SimulationHandPoseData pose = profile.PoseDefinitions[i];
                 if (Input.GetKeyDown(pose.KeyCode))
                 {
-                    return currentPose.Id != pose.GestureName ? currentPose : SimulatedHandPose.GetPoseByName(defaultHandPose.GestureName);
+                    return currentPose.Id != pose.GestureName ? currentPose : SimulationHandPose.GetPoseByName(defaultHandPose.GestureName);
                 }
             }
 
-            return SimulatedHandPose.GetPoseByName(defaultHandPose.GestureName);
+            return SimulationHandPose.GetPoseByName(defaultHandPose.GestureName);
         }
     }
 }

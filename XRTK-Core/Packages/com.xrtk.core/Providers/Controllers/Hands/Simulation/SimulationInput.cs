@@ -35,6 +35,6 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <summary>
         /// The requested hand pose as determined by user input.
         /// </summary>
-        public SimulatedHandPose HandPose { get; set; }
+        public SimulationHandPose HandPose { get; set; }
     }
 }

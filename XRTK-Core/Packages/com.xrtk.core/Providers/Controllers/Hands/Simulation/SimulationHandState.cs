@@ -192,17 +192,6 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             if (simulationInput.IsTracking)
             {
                 SimulateInput(simulationInput.HandPositionDelta, profile.HandJitterAmount, simulationInput.HandRotationDelta);
-
-                //if (isAlwaysVisible)
-                //{
-                //    // Toggle gestures on/off
-                //    GestureName = ToggleHandPose(GestureName);
-                //}
-                //else
-                //{
-                //    // Enable gesture while mouse button is pressed
-                //    GestureName = SelectHandPose();
-                //}
             }
 
             DateTime stopWatchCurrent = lastUpdatedStopWatch.Current;

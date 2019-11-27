@@ -164,6 +164,19 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
 
             LeftHandSimulationInput.HandPositionDelta = GetHandPositionDelta();
             LeftHandSimulationInput.HandRotationDelta = GetHandRotationDelta();
+            if (LeftHandSimulationInput.IsAlwaysVisible)
+            {
+                // When always visible is enabled, we don't want the hand
+                // to return to default pose as soon as its keycode is released.
+                // ToggleHandPose will instead toggle in between default and input pose.
+                LeftHandSimulationInput.HandPose = ToggleHandPose(RightHandSimulationInput.HandPose);
+            }
+            else
+            {
+                // When "tracking" / simulating the hand, return to default pose as soon as
+                // no key is pressed.
+                LeftHandSimulationInput.HandPose = SelectHandPose();
+            }
 
             // Right hand.
             if (Input.GetKeyDown(profile.ToggleRightHandKey))
@@ -183,6 +196,19 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
 
             RightHandSimulationInput.HandPositionDelta = GetHandPositionDelta();
             RightHandSimulationInput.HandRotationDelta = GetHandRotationDelta();
+            if (RightHandSimulationInput.IsAlwaysVisible)
+            {
+                // When always visible is enabled, we don't want the hand
+                // to return to default pose as soon as its keycode is released.
+                // ToggleHandPose will instead toggle in between default and input pose.
+                RightHandSimulationInput.HandPose = ToggleHandPose(RightHandSimulationInput.HandPose);
+            }
+            else
+            {
+                // When "tracking" / simulating the hand, return to default pose as soon as
+                // no key is pressed.
+                RightHandSimulationInput.HandPose = SelectHandPose();
+            }
         }
 
         /// <summary>
@@ -237,39 +263,39 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <summary>
         /// Selects a hand pose to simulate, while its input keycode is pressed.
         /// </summary>
-        /// <returns><see cref="defaultHandPose"/> if no other fitting user input.</returns>
-        private string SelectHandPose()
+        /// <returns>Default pose if no other fitting user input.</returns>
+        private SimulatedHandPose SelectHandPose()
         {
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
             {
-                SimulationHandPoseData gesture = profile.PoseDefinitions[i];
-                if (Input.GetKeyDown(gesture.KeyCode))
+                SimulationHandPoseData pose = profile.PoseDefinitions[i];
+                if (Input.GetKeyDown(pose.KeyCode))
                 {
-                    return gesture.GestureName;
+                    SimulatedHandPose.GetPoseByName(pose.GestureName);
                 }
             }
 
-            return defaultHandPose.GestureName;
+            return SimulatedHandPose.GetPoseByName(defaultHandPose.GestureName);
         }
 
         /// <summary>
         /// Toggles in between the hands default pose and a specified pose whenever the pose input keyode
         /// is pressed.
         /// </summary>
-        /// <param name="poseName">The name of the pose to toggle.</param>
-        /// <returns>Pose name of the pose toggled on. Either <see cref="defaultHandPose"/> or <paramref name="poseName"/></returns>
-        private string ToggleHandPose(string poseName)
+        /// <param name="currentPose">The name of the pose currently used.</param>
+        /// <returns>Pose name of the pose toggled on. Either default pose or the current one.</returns>
+        private SimulatedHandPose ToggleHandPose(SimulatedHandPose currentPose)
         {
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
             {
-                SimulationHandPoseData gesture = profile.PoseDefinitions[i];
-                if (Input.GetKeyDown(gesture.KeyCode))
+                SimulationHandPoseData pose = profile.PoseDefinitions[i];
+                if (Input.GetKeyDown(pose.KeyCode))
                 {
-                    return poseName != gesture.GestureName ? gesture.GestureName : defaultHandPose.GestureName;
+                    return currentPose.Id != pose.GestureName ? currentPose : SimulatedHandPose.GetPoseByName(defaultHandPose.GestureName);
                 }
             }
 
-            return defaultHandPose.GestureName;
+            return SimulatedHandPose.GetPoseByName(defaultHandPose.GestureName);
         }
     }
 }

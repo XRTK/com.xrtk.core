@@ -127,7 +127,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             // HandDataLeft / Right might have been modified after the data provider's Update() call.
             if (profile.IsSimulateHandTrackingEnabled)
             {
-                DateTime currentTime = DateTime.UtcNow;
+                DateTime currentTime = handUpdateStopWatch.Current;
                 double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandUpdateTimeStamp)).TotalMilliseconds;
                 if (msSinceLastHandUpdate > profile.SimulatedUpdateFrequency)
                 {
@@ -136,6 +136,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                     {
                         UpdateHandData(Handedness.Left, LeftHandState.HandData);
                     }
+
                     if (RightHandState.HandData.TimeStamp > lastHandUpdateTimeStamp)
                     {
                         UpdateHandData(Handedness.Right, RightHandState.HandData);

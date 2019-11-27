@@ -147,9 +147,9 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             pose.ComputeJointPoses(Handedness, rotation, position, HandData.Joints);
         }
 
-        public void Update(bool isSimulating, bool isAlwaysVisible, Vector3 handPositionDelta, Vector3 handRotationDelta)
+        public void Update(SimulationInput simulationInput)
         {
-            SimulateHand(ref lastSimulatedTimeStamp, isSimulating, isAlwaysVisible, handPositionDelta, handRotationDelta);
+            SimulateHand(ref lastSimulatedTimeStamp, simulationInput);
         }
 
         public bool UpdateWithTimeStamp(long timeStamp, bool isTracked)
@@ -175,10 +175,10 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             return handDataChanged;
         }
 
-        private void SimulateHand(ref long lastSimulatedTimeStamp, bool isTracked, bool isAlwaysVisible, Vector3 handPositionDelta, Vector3 handRotationDelta)
+        private void SimulateHand(ref long lastSimulatedTimeStamp, SimulationInput simulationInput)
         {
             // We are "tracking" the hand, if it's configured to always be visible or if simulation is active.
-            bool isTrackedOrAlwaysVisible = isAlwaysVisible || isTracked;
+            bool isTrackedOrAlwaysVisible = simulationInput.IsAlwaysVisible || simulationInput.IsTracking;
 
             // If the hands state is changing from "not tracked" to being tracked, reset its position
             // to the current mouse position and default distance from the camera.
@@ -189,9 +189,9 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             }
 
             // If we are simulating the hand currently, read input and update the hand state.
-            if (isTracked)
+            if (simulationInput.IsTracking)
             {
-                SimulateInput(handPositionDelta, profile.HandJitterAmount, handRotationDelta);
+                SimulateInput(simulationInput.HandPositionDelta, profile.HandJitterAmount, simulationInput.HandRotationDelta);
 
                 //if (isAlwaysVisible)
                 //{

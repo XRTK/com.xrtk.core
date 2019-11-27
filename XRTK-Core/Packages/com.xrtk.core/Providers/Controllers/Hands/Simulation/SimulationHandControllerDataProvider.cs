@@ -27,27 +27,21 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         private SimulationHandState RightHandState { get; set; }
 
         /// <summary>
-        /// If true then the left hand is always visible,, even if it's currently
-        /// not being tracked.
+        /// The most current simulation input information for the left hand.
         /// </summary>
-        private bool IsAlwaysVisibleLeft { get; set; } = false;
+        private SimulationInput LeftHandSimulationInput { get; } = new SimulationInput();
 
         /// <summary>
-        /// If true then the right hand is always visible, even if it's currently
-        /// not being tracked.
+        /// The most current simulation input information for the right hand.
         /// </summary>
-        private bool IsAlwaysVisibleRight { get; set; } = false;
+        private SimulationInput RightHandSimulationInput { get; } = new SimulationInput();
 
         /// <summary>
-        /// If true, the left hand is currently being tracked.
+        /// Creates a new instance of the data provider.
         /// </summary>
-        private bool IsTrackingLeftHand { get; set; } = false;
-
-        /// <summary>
-        /// If true, the right hand is currently being tracked.
-        /// </summary>
-        private bool IsTrackingRightHand { get; set; } = false;
-
+        /// <param name="name">Name of the data provider as assigned in the configuration profile.</param>
+        /// <param name="priority">Data provider priority controls the order in the service registry.</param>
+        /// <param name="profile">Hand controller data provider profile assigned to the provider instance in the configuration inspector.</param>
         public SimulationHandControllerDataProvider(string name, uint priority, SimulationHandControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
@@ -103,8 +97,8 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             {
                 UpdateSimulationInput();
 
-                LeftHandState.Update(IsTrackingLeftHand, IsAlwaysVisibleLeft, GetHandPositionDelta(), GetHandRotationDelta());
-                RightHandState.Update(IsTrackingRightHand, IsAlwaysVisibleRight, GetHandPositionDelta(), GetHandRotationDelta());
+                LeftHandState.Update(LeftHandSimulationInput);
+                RightHandState.Update(RightHandSimulationInput);
 
                 float gestureAnimDelta = profile.HandGestureAnimationSpeed * Time.deltaTime;
                 LeftHandState.GestureBlending += gestureAnimDelta;
@@ -152,35 +146,43 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// </summary>
         private void UpdateSimulationInput()
         {
+            // Left hand.
             if (Input.GetKeyDown(profile.ToggleLeftHandKey))
             {
-                IsAlwaysVisibleLeft = !IsAlwaysVisibleLeft;
-            }
-
-            if (Input.GetKeyDown(profile.ToggleRightHandKey))
-            {
-                IsAlwaysVisibleRight = !IsAlwaysVisibleRight;
+                LeftHandSimulationInput.IsAlwaysVisible ^= true;
             }
 
             if (Input.GetKeyDown(profile.LeftHandTrackedKey))
             {
-                IsTrackingLeftHand = true;
+                LeftHandSimulationInput.IsTracking = true;
             }
 
             if (Input.GetKeyUp(profile.LeftHandTrackedKey))
             {
-                IsTrackingLeftHand = false;
+                LeftHandSimulationInput.IsTracking = false;
+            }
+
+            LeftHandSimulationInput.HandPositionDelta = GetHandPositionDelta();
+            LeftHandSimulationInput.HandRotationDelta = GetHandRotationDelta();
+
+            // Right hand.
+            if (Input.GetKeyDown(profile.ToggleRightHandKey))
+            {
+                RightHandSimulationInput.IsAlwaysVisible ^= true;
             }
 
             if (Input.GetKeyDown(profile.RightHandTrackedKey))
             {
-                IsTrackingRightHand = true;
+                RightHandSimulationInput.IsTracking = true;
             }
 
             if (Input.GetKeyUp(profile.RightHandTrackedKey))
             {
-                IsTrackingRightHand = false;
+                RightHandSimulationInput.IsTracking = false;
             }
+
+            RightHandSimulationInput.HandPositionDelta = GetHandPositionDelta();
+            RightHandSimulationInput.HandRotationDelta = GetHandRotationDelta();
         }
 
         /// <summary>

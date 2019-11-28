@@ -19,11 +19,12 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         private readonly Camera playerCamera;
         private readonly SimulationTimeStampStopWatch lastUpdatedStopWatch;
         private long lastSimulatedTimeStamp = 0;
-        private float poseBlending = 0.0f;
+        private float currentPoseBlending = 0.0f;
         private float targetPoseBlending = 0.0f;
         private Vector3 screenPosition;
         private SimulationHandPose initialPose;
-        private SimulationHandPose pose;
+        private SimulationHandPose previousPose;
+        private SimulationHandPose targetPose;
 
         /// <summary>
         /// Gets the hands position in screen space.
@@ -53,14 +54,20 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <summary>
         /// Currently used simulation hand pose.
         /// </summary>
-        public SimulationHandPose Pose
+        public SimulationHandPose Pose { get; private set; }
+
+        /// <summary>
+        /// The currently targeted hand pose, reached when <see cref="TargetPoseBlending"/>
+        /// reaches 1.
+        /// </summary>
+        private SimulationHandPose TargetPose
         {
-            get => pose;
-            private set
+            get => targetPose;
+            set
             {
-                if (!string.Equals(value?.Id, pose?.Id))
+                if (!string.Equals(value?.Id, targetPose?.Id))
                 {
-                    pose = value;
+                    targetPose = value;
                     targetPoseBlending = 0.0f;
                 }
             }
@@ -128,7 +135,13 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             bool isTrackedOld = HandData.IsTracked;
 
             HandleSimulationInput(ref lastSimulatedTimeStamp, simulationInput);
-            Pose = simulationInput.HandPose;
+
+            if (!string.Equals(simulationInput.HandPose.Id, Pose.Id) && HandData.IsTracked)
+            {
+                previousPose = Pose;
+                TargetPose = simulationInput.HandPose;
+            }
+
             TargetPoseBlending += poseAnimationDelta;
 
             bool handDataChanged = false;
@@ -142,7 +155,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                 HandData.TimeStamp = timeStamp;
                 if (HandData.IsTracked)
                 {
-                    UpdatePoseFrame(simulationInput.HandPose);
+                    UpdatePoseFrame();
                     handDataChanged = true;
                 }
             }
@@ -158,7 +171,9 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             TargetPoseBlending = 1.0f;
             if (SimulationHandPose.TryGetPoseByName(Pose.Id, out SimulationHandPose pose))
             {
-                this.pose.Copy(pose);
+                Pose.Copy(pose);
+                previousPose = Pose;
+                TargetPose = Pose;
             }
         }
 
@@ -205,19 +220,19 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             }
         }
 
-        private void UpdatePoseFrame(SimulationHandPose targetPose)
+        private void UpdatePoseFrame()
         {
-            if (TargetPoseBlending > poseBlending)
+            if (TargetPoseBlending > currentPoseBlending)
             {
-                float range = Mathf.Clamp01(1.0f - poseBlending);
-                float lerpFactor = range > 0.0f ? (TargetPoseBlending - poseBlending) / range : 1.0f;
-                pose = SimulationHandPose.Lerp(Pose, targetPose, lerpFactor);
+                float range = Mathf.Clamp01(1.0f - currentPoseBlending);
+                float lerpFactor = range > 0.0f ? (TargetPoseBlending - currentPoseBlending) / range : 1.0f;
+                Pose = SimulationHandPose.Lerp(previousPose, TargetPose, lerpFactor);
             }
 
-            poseBlending = TargetPoseBlending;
+            currentPoseBlending = TargetPoseBlending;
             Quaternion rotation = Quaternion.Euler(HandRotateEulerAngles);
             Vector3 position = playerCamera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
-            pose.ComputeJointPoses(Handedness, rotation, position, HandData.Joints);
+            Pose.ComputeJointPoses(Handedness, rotation, position, HandData.Joints);
         }
     }
 }

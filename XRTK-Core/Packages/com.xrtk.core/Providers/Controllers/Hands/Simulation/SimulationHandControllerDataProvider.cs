@@ -167,7 +167,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                 // When always visible is enabled, we don't want the hand
                 // to return to default pose as soon as its keycode is released.
                 // ToggleHandPose will instead toggle in between default and input pose.
-                LeftHandSimulationInput.HandPose = ToggleHandPose(RightHandSimulationInput.HandPose);
+                LeftHandSimulationInput.HandPose = ToggleHandPose(LeftHandState.Pose);
             }
             else
             {
@@ -199,7 +199,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                 // When always visible is enabled, we don't want the hand
                 // to return to default pose as soon as its keycode is released.
                 // ToggleHandPose will instead toggle in between default and input pose.
-                RightHandSimulationInput.HandPose = ToggleHandPose(RightHandSimulationInput.HandPose);
+                RightHandSimulationInput.HandPose = ToggleHandPose(RightHandState.Pose);
             }
             else
             {
@@ -290,11 +290,12 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                 SimulationHandPoseData pose = profile.PoseDefinitions[i];
                 if (Input.GetKeyDown(pose.KeyCode))
                 {
-                    return currentPose.Id != pose.GestureName ? currentPose : SimulationHandPose.GetPoseByName(defaultHandPose.GestureName);
+                    return !string.Equals(currentPose.Id, pose.GestureName)
+                        ? SimulationHandPose.GetPoseByName(pose.GestureName) : SimulationHandPose.GetPoseByName(defaultHandPose.GestureName);
                 }
             }
 
-            return SimulationHandPose.GetPoseByName(defaultHandPose.GestureName);
+            return currentPose;
         }
     }
 }

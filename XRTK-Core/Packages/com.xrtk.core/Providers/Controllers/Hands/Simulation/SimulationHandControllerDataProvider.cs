@@ -147,7 +147,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             // Left hand.
             if (Input.GetKeyDown(profile.ToggleLeftHandKey))
             {
-                LeftHandSimulationInput.IsAlwaysVisible ^= true;
+                LeftHandSimulationInput.IsAlwaysVisible = !LeftHandSimulationInput.IsAlwaysVisible;
             }
 
             if (Input.GetKeyDown(profile.LeftHandTrackedKey))
@@ -179,7 +179,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             // Right hand.
             if (Input.GetKeyDown(profile.ToggleRightHandKey))
             {
-                RightHandSimulationInput.IsAlwaysVisible ^= true;
+                RightHandSimulationInput.IsAlwaysVisible = !RightHandSimulationInput.IsAlwaysVisible;
             }
 
             if (Input.GetKeyDown(profile.RightHandTrackedKey))
@@ -268,9 +268,9 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
             {
                 SimulationHandPoseData pose = profile.PoseDefinitions[i];
-                if (Input.GetKeyDown(pose.KeyCode))
+                if (Input.GetKey(pose.KeyCode))
                 {
-                    SimulationHandPose.GetPoseByName(pose.GestureName);
+                    return SimulationHandPose.GetPoseByName(pose.GestureName);
                 }
             }
 

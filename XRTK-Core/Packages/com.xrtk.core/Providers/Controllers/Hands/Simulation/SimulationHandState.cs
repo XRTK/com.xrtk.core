@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands.UnityEditor;
 using XRTK.Definitions.Utilities;
-using XRTK.Utilities;
+using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Hands.Simulation
 {
@@ -16,10 +16,19 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
     public class SimulationHandState
     {
         private readonly SimulationHandControllerDataProviderProfile profile;
+        private readonly Camera playerCamera;
         private readonly SimulationTimeStampStopWatch lastUpdatedStopWatch;
         private long lastSimulatedTimeStamp = 0;
         private float poseBlending = 0.0f;
+        private float targetPoseBlending = 0.0f;
+        private Vector3 screenPosition;
+        private SimulationHandPose initialPose;
         private SimulationHandPose pose;
+
+        /// <summary>
+        /// Gets the hands position in screen space.
+        /// </summary>
+        public Vector3 ScreenPosition => screenPosition;
 
         /// <summary>
         /// Gets the handedness for the hand simulated by this state instance.
@@ -31,39 +40,40 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// </summary>
         public HandData HandData { get; } = new HandData();
 
-        public Vector3 ScreenPosition;
-
-        // Rotation of the hand
-        public Vector3 HandRotateEulerAngles { get; set; } = Vector3.zero;
-
-        // Random offset to simulate tracking inaccuracy
-        public Vector3 JitterOffset { get; set; } = Vector3.zero;
-
-        private string gestureName = null;
         /// <summary>
-        /// Currently used gesture name.
+        /// Current rotation of the hand.
         /// </summary>
-        public string GestureName
+        public Vector3 HandRotateEulerAngles { get; private set; } = Vector3.zero;
+
+        /// <summary>
+        /// Current random offset to simulate tracking inaccuracy.
+        /// </summary>
+        public Vector3 JitterOffset { get; private set; } = Vector3.zero;
+
+        /// <summary>
+        /// Currently used simulation hand pose.
+        /// </summary>
+        public SimulationHandPose Pose
         {
-            get => gestureName;
-            set
+            get => pose;
+            private set
             {
-                if (!string.IsNullOrWhiteSpace(value) && !string.Equals(value, gestureName))
+                if (!string.Equals(value?.Id, pose?.Id))
                 {
-                    gestureName = value;
-                    gestureBlending = 0.0f;
+                    pose = value;
+                    targetPoseBlending = 0.0f;
                 }
             }
         }
 
-        private float gestureBlending = 0.0f;
         /// <summary>
-        /// Interpolation between current pose and target gesture.
+        /// Linear interpolation state between current pose and target pose.
+        /// Will get clamped to [0,1] where 1 means the hand has reached the target pose.
         /// </summary>
-        public float GestureBlending
+        public float TargetPoseBlending
         {
-            get => gestureBlending;
-            set => gestureBlending = Mathf.Clamp(value, gestureBlending, 1.0f);
+            get => targetPoseBlending;
+            private set => targetPoseBlending = Mathf.Clamp(value, targetPoseBlending, 1.0f);
         }
 
         /// <summary>
@@ -74,10 +84,12 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <param name="pose">The hand pose to start simulation with.</param>
         public SimulationHandState(SimulationHandControllerDataProviderProfile profile, Handedness handedness, SimulationHandPose pose)
         {
-            Handedness = handedness;
-            this.pose = pose;
             this.profile = profile;
+            Handedness = handedness;
+            initialPose = pose;
+            Pose = pose;
             lastUpdatedStopWatch = new SimulationTimeStampStopWatch();
+            playerCamera = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera;
         }
 
         /// <summary>
@@ -85,15 +97,15 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// </summary>
         public void Reset()
         {
-            ScreenPosition = Vector3.zero;
+            screenPosition = Vector3.zero;
             HandRotateEulerAngles = Vector3.zero;
             JitterOffset = Vector3.zero;
-            GestureName = pose.Id;
+            Pose = initialPose;
             HandData.TimeStamp = 0;
             HandData.IsTracked = false;
             lastUpdatedStopWatch.Reset();
 
-            ResetGesture();
+            ResetPose();
         }
 
         /// <summary>
@@ -101,50 +113,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// </summary>
         public void SetViewportPosition(Vector3 point)
         {
-            ScreenPosition = CameraCache.Main.ViewportToScreenPoint(point);
-        }
-
-        private void SimulateInput(Vector3 mouseDelta, float noiseAmount, Vector3 rotationDeltaEulerAngles)
-        {
-            // Apply mouse delta x/y in screen space, but depth offset in world space
-            ScreenPosition.x += mouseDelta.x;
-            ScreenPosition.y += mouseDelta.y;
-            Vector3 newWorldPoint = CameraCache.Main.ScreenToWorldPoint(ScreenPosition);
-            newWorldPoint += CameraCache.Main.transform.forward * mouseDelta.z;
-            ScreenPosition = CameraCache.Main.WorldToScreenPoint(newWorldPoint);
-
-            HandRotateEulerAngles += rotationDeltaEulerAngles;
-            JitterOffset = UnityEngine.Random.insideUnitSphere * noiseAmount;
-        }
-
-        /// <summary>
-        /// Reset the current hand pose.
-        /// </summary>
-        private void ResetGesture()
-        {
-            gestureBlending = 1.0f;
-            if (SimulationHandPose.TryGetPoseByName(gestureName, out SimulationHandPose gesturePose))
-            {
-                pose.Copy(gesturePose);
-            }
-        }
-
-        private void UpdateCurrentPoseFrame()
-        {
-            if (SimulationHandPose.TryGetPoseByName(gestureName, out SimulationHandPose targetPose))
-            {
-                if (gestureBlending > poseBlending)
-                {
-                    float range = Mathf.Clamp01(1.0f - poseBlending);
-                    float lerpFactor = range > 0.0f ? (gestureBlending - poseBlending) / range : 1.0f;
-                    pose = SimulationHandPose.Lerp(pose, targetPose, lerpFactor);
-                }
-            }
-
-            poseBlending = gestureBlending;
-            Quaternion rotation = Quaternion.Euler(HandRotateEulerAngles);
-            Vector3 position = CameraCache.Main.ScreenToWorldPoint(ScreenPosition + JitterOffset);
-            pose.ComputeJointPoses(Handedness, rotation, position, HandData.Joints);
+            screenPosition = playerCamera.ViewportToScreenPoint(point);
         }
 
         /// <summary>
@@ -156,14 +125,16 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <returns>True, if the simulated hand state has changed.</returns>
         public bool Update(long timeStamp, SimulationInput simulationInput, float poseAnimationDelta)
         {
-            SimulateHand(ref lastSimulatedTimeStamp, simulationInput);
-            GestureBlending += poseAnimationDelta;
+            HandleSimulationInput(ref lastSimulatedTimeStamp, simulationInput);
+            Pose = simulationInput.HandPose;
+            TargetPoseBlending += poseAnimationDelta;
 
             bool handDataChanged = false;
 
-            if (HandData.IsTracked != HandData.IsTracked)
+            if (HandData.IsTracked != simulationInput.IsTracking)
             {
-                HandData.IsTracked = HandData.IsTracked;
+                // The hands tracking state has changed.
+                HandData.IsTracked = simulationInput.IsTracking;
                 handDataChanged = true;
             }
 
@@ -172,7 +143,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                 HandData.TimeStamp = timeStamp;
                 if (HandData.IsTracked)
                 {
-                    UpdateCurrentPoseFrame();
+                    UpdatePoseFrame(simulationInput.HandPose);
                     handDataChanged = true;
                 }
             }
@@ -180,7 +151,19 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             return handDataChanged;
         }
 
-        private void SimulateHand(ref long lastSimulatedTimeStamp, SimulationInput simulationInput)
+        /// <summary>
+        /// Reset the current hand pose.
+        /// </summary>
+        private void ResetPose()
+        {
+            TargetPoseBlending = 1.0f;
+            if (SimulationHandPose.TryGetPoseByName(Pose.Id, out SimulationHandPose pose))
+            {
+                this.pose.Copy(pose);
+            }
+        }
+
+        private void HandleSimulationInput(ref long lastSimulatedTimeStamp, SimulationInput simulationInput)
         {
             // We are "tracking" the hand, if it's configured to always be visible or if simulation is active.
             bool isTrackedOrAlwaysVisible = simulationInput.IsAlwaysVisible || simulationInput.IsTracking;
@@ -190,13 +173,21 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             if (!HandData.IsTracked && isTrackedOrAlwaysVisible)
             {
                 Vector3 mousePos = Input.mousePosition;
-                ScreenPosition = new Vector3(mousePos.x, mousePos.y, profile.DefaultHandDistance);
+                screenPosition = new Vector3(mousePos.x, mousePos.y, profile.DefaultHandDistance);
             }
 
-            // If we are simulating the hand currently, read input and update the hand state.
+            // If we are simulating the hand currently, use input update the hand state.
             if (simulationInput.IsTracking)
             {
-                SimulateInput(simulationInput.HandPositionDelta, profile.HandJitterAmount, simulationInput.HandRotationDelta);
+                // Apply mouse delta x/y in screen space, but depth offset in world space
+                screenPosition.x += simulationInput.HandPositionDelta.x;
+                screenPosition.y += simulationInput.HandPositionDelta.y;
+                Vector3 newWorldPoint = playerCamera.ScreenToWorldPoint(ScreenPosition);
+                newWorldPoint += playerCamera.transform.forward * simulationInput.HandPositionDelta.z;
+                screenPosition = playerCamera.WorldToScreenPoint(newWorldPoint);
+
+                HandRotateEulerAngles += simulationInput.HandRotationDelta;
+                JitterOffset = UnityEngine.Random.insideUnitSphere * profile.HandJitterAmount;
             }
 
             DateTime stopWatchCurrent = lastUpdatedStopWatch.Current;
@@ -213,6 +204,21 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                     HandData.IsTracked = false;
                 }
             }
+        }
+
+        private void UpdatePoseFrame(SimulationHandPose targetPose)
+        {
+            if (TargetPoseBlending > poseBlending)
+            {
+                float range = Mathf.Clamp01(1.0f - poseBlending);
+                float lerpFactor = range > 0.0f ? (TargetPoseBlending - poseBlending) / range : 1.0f;
+                pose = SimulationHandPose.Lerp(Pose, targetPose, lerpFactor);
+            }
+
+            poseBlending = TargetPoseBlending;
+            Quaternion rotation = Quaternion.Euler(HandRotateEulerAngles);
+            Vector3 position = playerCamera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
+            pose.ComputeJointPoses(Handedness, rotation, position, HandData.Joints);
         }
     }
 }

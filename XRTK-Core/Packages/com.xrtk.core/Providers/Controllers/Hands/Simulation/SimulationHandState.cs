@@ -68,7 +68,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
 
         /// <summary>
         /// Linear interpolation state between current pose and target pose.
-        /// Will get clamped to [0,1] where 1 means the hand has reached the target pose.
+        /// Will get clamped to [current,1] where 1 means the hand has reached the target pose.
         /// </summary>
         public float TargetPoseBlending
         {
@@ -125,16 +125,15 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <returns>True, if the simulated hand state has changed.</returns>
         public bool Update(long timeStamp, SimulationInput simulationInput, float poseAnimationDelta)
         {
+            bool isTrackedOld = HandData.IsTracked;
+
             HandleSimulationInput(ref lastSimulatedTimeStamp, simulationInput);
             Pose = simulationInput.HandPose;
             TargetPoseBlending += poseAnimationDelta;
 
             bool handDataChanged = false;
-
-            if (HandData.IsTracked != simulationInput.IsTracking)
+            if (isTrackedOld != HandData.IsTracked)
             {
-                // The hands tracking state has changed.
-                HandData.IsTracked = simulationInput.IsTracking;
                 handDataChanged = true;
             }
 

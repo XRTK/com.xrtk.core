@@ -95,20 +95,18 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
 
             if (profile.IsSimulateHandTrackingEnabled)
             {
+                // Read keyboard / mouse input for hand simulation.
                 UpdateSimulationInput();
 
-                LeftHandState.Update(LeftHandSimulationInput);
-                RightHandState.Update(RightHandSimulationInput);
+                // Calculate pose changes and compute timestamp for hand tracking update.
+                float poseAnimationDelta = profile.HandGestureAnimationSpeed * Time.deltaTime;
+                long timeStamp = handUpdateStopWatch.TimeStamp;
 
-                float gestureAnimDelta = profile.HandGestureAnimationSpeed * Time.deltaTime;
-                LeftHandState.GestureBlending += gestureAnimDelta;
-                RightHandState.GestureBlending += gestureAnimDelta;
+                // Update simualted hand states using collected data.
+                LeftHandState.Update(timeStamp, LeftHandSimulationInput, poseAnimationDelta);
+                RightHandState.Update(timeStamp, RightHandSimulationInput, poseAnimationDelta);
 
                 lastMousePosition = Input.mousePosition;
-
-                long timeStamp = handUpdateStopWatch.TimeStamp;
-                LeftHandState.UpdateWithTimeStamp(timeStamp, LeftHandState.HandData.IsTracked);
-                RightHandState.UpdateWithTimeStamp(timeStamp, RightHandState.HandData.IsTracked);
             }
         }
 
@@ -257,6 +255,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         {
             Vector3 mouseDelta = (lastMousePosition.HasValue ? Input.mousePosition - lastMousePosition.Value : Vector3.zero);
             mouseDelta.z += Input.GetAxis("Mouse ScrollWheel") * profile.HandDepthMultiplier;
+
             return mouseDelta;
         }
 

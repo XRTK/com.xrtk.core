@@ -147,18 +147,23 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             pose.ComputeJointPoses(Handedness, rotation, position, HandData.Joints);
         }
 
-        public void Update(SimulationInput simulationInput)
+        /// <summary>
+        /// Updates the simulated hand state using data provided.
+        /// </summary>
+        /// <param name="timeStamp">Timestamp of the hand tracking update.</param>
+        /// <param name="simulationInput">Simulation input data.</param>
+        /// <param name="poseAnimationDelta">Pose animation changes to apply since last update.</param>
+        /// <returns>True, if the simulated hand state has changed.</returns>
+        public bool Update(long timeStamp, SimulationInput simulationInput, float poseAnimationDelta)
         {
             SimulateHand(ref lastSimulatedTimeStamp, simulationInput);
-        }
+            GestureBlending += poseAnimationDelta;
 
-        public bool UpdateWithTimeStamp(long timeStamp, bool isTracked)
-        {
             bool handDataChanged = false;
 
-            if (HandData.IsTracked != isTracked)
+            if (HandData.IsTracked != HandData.IsTracked)
             {
-                HandData.IsTracked = isTracked;
+                HandData.IsTracked = HandData.IsTracked;
                 handDataChanged = true;
             }
 

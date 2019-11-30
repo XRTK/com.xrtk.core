@@ -1,8 +1,11 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Devices;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
@@ -16,6 +19,8 @@ namespace XRTK.Providers.Controllers.Hands
     {
         private const float currentVelocityWeight = .8f;
         private const float newVelocityWeight = .2f;
+
+        protected readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
 
         // Velocity internal states
         private float deltaTimeStart;
@@ -33,6 +38,11 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public bool IsInPointingPose => HandRay.ShouldShowRay;
 
+        /// <summary>
+        /// Gets the total joint count supported by this hand controller.
+        /// </summary>
+        public static readonly int JointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
+
         protected Vector3 PalmNormal
         {
             get
@@ -44,6 +54,19 @@ namespace XRTK.Providers.Controllers.Hands
                 return Vector3.zero;
             }
         }
+
+        /// <summary>
+        /// The Mixed Reality Controller default interactions.
+        /// </summary>
+        /// <remarks>A single interaction mapping works for both left and right controllers.</remarks>
+        public override MixedRealityInteractionMapping[] DefaultInteractions => new[]
+        {
+            new MixedRealityInteractionMapping(0, "Spatial Pointer", AxisType.SixDof, DeviceInputType.SpatialPointer, MixedRealityInputAction.None),
+            new MixedRealityInteractionMapping(1, "Spatial Grip", AxisType.SixDof, DeviceInputType.SpatialGrip, MixedRealityInputAction.None),
+            new MixedRealityInteractionMapping(2, "Select", AxisType.Digital, DeviceInputType.Select, MixedRealityInputAction.None),
+            new MixedRealityInteractionMapping(3, "Grab", AxisType.SingleAxis, DeviceInputType.TriggerPress, MixedRealityInputAction.None),
+            new MixedRealityInteractionMapping(4, "Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger, MixedRealityInputAction.None),
+        };
 
         /// <summary>
         /// Constructor.
@@ -61,7 +84,23 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
 
-        public abstract void UpdateState(HandData handData);
+        public virtual void UpdateState(HandData handData)
+        {
+            for (int i = 0; i < JointCount; i++)
+            {
+                TrackedHandJoint handJoint = (TrackedHandJoint)i;
+                if (TryGetJointPose(handJoint, out _))
+                {
+                    jointPoses[handJoint] = handData.Joints[i];
+                }
+                else
+                {
+                    jointPoses.Add(handJoint, handData.Joints[i]);
+                }
+            }
+
+            UpdateVelocity();
+        }
 
         public override void SetupDefaultInteractions(Handedness controllerHandedness)
         {
@@ -101,7 +140,10 @@ namespace XRTK.Providers.Controllers.Hands
 
         #endregion Gesture Definitions
 
-        public abstract bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose);
+        public virtual bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose)
+        {
+            return jointPoses.TryGetValue(joint, out pose);
+        }
 
         private Vector3 GetJointPosition(TrackedHandJoint joint)
         {

@@ -78,8 +78,8 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             }
 
             // Initialize states to default.
-            LeftHandState = new SimulationHandState(profile, Handedness.Left, SimulationHandPose.GetPoseByName(defaultHandPose.GestureName));
-            RightHandState = new SimulationHandState(profile, Handedness.Right, SimulationHandPose.GetPoseByName(defaultHandPose.GestureName));
+            LeftHandState = new SimulationHandState(profile, Handedness.Left, SimulationHandPose.GetPoseByName(defaultHandPose.Id));
+            RightHandState = new SimulationHandState(profile, Handedness.Right, SimulationHandPose.GetPoseByName(defaultHandPose.Id));
             LeftHandState.Reset();
             RightHandState.Reset();
 
@@ -93,13 +93,13 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         {
             base.Update();
 
-            if (profile.IsSimulateHandTrackingEnabled)
+            if (profile.HandTrackingEnabled)
             {
                 // Read keyboard / mouse input for hand simulation.
                 UpdateSimulationInput();
 
                 // Calculate pose changes and compute timestamp for hand tracking update.
-                float poseAnimationDelta = profile.HandGestureAnimationSpeed * Time.deltaTime;
+                float poseAnimationDelta = profile.HandPoseAnimationSpeed * Time.deltaTime;
                 long timeStamp = handUpdateStopWatch.TimeStamp;
 
                 // Update simualted hand states using collected data.
@@ -117,7 +117,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
 
             // Apply hand data in LateUpdate to ensure external changes are applied.
             // HandDataLeft / Right might have been modified after the data provider's Update() call.
-            if (profile.IsSimulateHandTrackingEnabled)
+            if (profile.HandTrackingEnabled)
             {
                 DateTime currentTime = handUpdateStopWatch.Current;
                 double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandUpdateTimeStamp)).TotalMilliseconds;
@@ -270,11 +270,11 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                 SimulationHandPoseData pose = profile.PoseDefinitions[i];
                 if (Input.GetKey(pose.KeyCode))
                 {
-                    return SimulationHandPose.GetPoseByName(pose.GestureName);
+                    return SimulationHandPose.GetPoseByName(pose.Id);
                 }
             }
 
-            return SimulationHandPose.GetPoseByName(defaultHandPose.GestureName);
+            return SimulationHandPose.GetPoseByName(defaultHandPose.Id);
         }
 
         /// <summary>
@@ -290,8 +290,8 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                 SimulationHandPoseData pose = profile.PoseDefinitions[i];
                 if (Input.GetKeyDown(pose.KeyCode))
                 {
-                    return !string.Equals(currentPose.Id, pose.GestureName)
-                        ? SimulationHandPose.GetPoseByName(pose.GestureName) : SimulationHandPose.GetPoseByName(defaultHandPose.GestureName);
+                    return !string.Equals(currentPose.Id, pose.Id)
+                        ? SimulationHandPose.GetPoseByName(pose.Id) : SimulationHandPose.GetPoseByName(defaultHandPose.Id);
                 }
             }
 

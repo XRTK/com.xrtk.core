@@ -11,8 +11,8 @@ namespace XRTK.Inspectors.Data.Controllers.Hands.Simulation
     [CustomEditor(typeof(SimulationHandPoseData))]
     public class SimulationHandPoseDataInspector : BaseMixedRealityProfileInspector
     {
-        private SerializedProperty gestureName;
-        private SerializedProperty gestureDescription;
+        private SerializedProperty id;
+        private SerializedProperty description;
         private SerializedProperty isDefault;
         private SerializedProperty keyCode;
         private SerializedProperty data;
@@ -21,8 +21,8 @@ namespace XRTK.Inspectors.Data.Controllers.Hands.Simulation
         {
             base.OnEnable();
 
-            gestureName = serializedObject.FindProperty(nameof(gestureName));
-            gestureDescription = serializedObject.FindProperty(nameof(gestureDescription));
+            id = serializedObject.FindProperty(nameof(id));
+            description = serializedObject.FindProperty(nameof(description));
             isDefault = serializedObject.FindProperty(nameof(isDefault));
             keyCode = serializedObject.FindProperty(nameof(keyCode));
             data = serializedObject.FindProperty(nameof(data));
@@ -36,8 +36,8 @@ namespace XRTK.Inspectors.Data.Controllers.Hands.Simulation
 
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(gestureName);
-            EditorGUILayout.PropertyField(gestureDescription);
+            EditorGUILayout.PropertyField(id);
+            EditorGUILayout.PropertyField(description);
             EditorGUILayout.PropertyField(isDefault);
             EditorGUILayout.PropertyField(keyCode);
             EditorGUILayout.PropertyField(data);

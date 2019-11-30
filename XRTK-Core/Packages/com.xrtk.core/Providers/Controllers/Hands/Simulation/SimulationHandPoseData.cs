@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using UnityEngine.Serialization;
 using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
 
@@ -15,29 +16,30 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
     public class SimulationHandPoseData : BaseMixedRealityProfile
     {
         [SerializeField]
-        [Tooltip("Name the hand gesture.")]
-        private string gestureName = string.Empty;
+        [Tooltip("Assign a unique ID to the pose. Can be used as a descriptive name, but must be unique!")]
+        private string id = string.Empty;
 
         /// <summary>
-        /// Gets the gesture's name.
+        /// A unique identifier for the hand pose.
         /// </summary>
-        public string GestureName => gestureName;
+        public string Id => id;
 
         [SerializeField]
-        [Tooltip("Describe the hand gesture.")]
-        private string gestureDescription = string.Empty;
+        [Tooltip("Describe the hand pose.")]
+        [FormerlySerializedAs("gestureDescription")]
+        private string description = string.Empty;
 
         /// <summary>
         /// Gets the gesture's description.
         /// </summary>
-        public string GestureDescription => gestureDescription;
+        public string Description => description;
 
         [SerializeField]
-        [Tooltip("Is this the default (idle) hand gesture?")]
+        [Tooltip("Is this the default (idle) hand pose?")]
         private bool isDefault = false;
 
         /// <summary>
-        /// Gets whether this hand gesture is the hand's idle gesture.
+        /// Gets whether this hand pose is the hand's idle pose.
         /// </summary>
         public bool IsDefault => isDefault;
 

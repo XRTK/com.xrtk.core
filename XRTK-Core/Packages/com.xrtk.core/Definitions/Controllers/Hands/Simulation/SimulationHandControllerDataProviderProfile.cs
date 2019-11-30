@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using XRTK.Definitions.Utilities;
 using XRTK.Providers.Controllers.Hands.Simulation;
 
@@ -15,12 +16,12 @@ namespace XRTK.Definitions.Controllers.Hands.UnityEditor
 
         [SerializeField]
         [Tooltip("Enable hand simulation")]
-        private bool isSimulateHandTrackingEnabled = false;
+        private bool handTrackingEnabled = false;
 
         /// <summary>
-        /// Is hand simulation enabled?
+        /// Is hand simulated hand tracking enabled?
         /// </summary>
-        public bool IsSimulateHandTrackingEnabled => isSimulateHandTrackingEnabled;
+        public bool HandTrackingEnabled => handTrackingEnabled;
 
         [SerializeField]
         [Tooltip("Simulated update frequency for hand data in milliseconds. 0ms is every frame.")]
@@ -93,30 +94,12 @@ namespace XRTK.Definitions.Controllers.Hands.UnityEditor
 
         [SerializeField]
         [Tooltip("Gesture interpolation per second")]
-        private float handGestureAnimationSpeed = 8.0f;
+        private float handPoseAnimationSpeed = 8.0f;
 
         /// <summary>
-        /// Gesture interpolation per second
+        /// Pose interpolation per second.
         /// </summary>
-        public float HandGestureAnimationSpeed => handGestureAnimationSpeed;
-
-        [SerializeField]
-        [Tooltip("Time until hold gesture starts")]
-        private float holdStartDuration = 0.5f;
-
-        /// <summary>
-        /// Time until hold gesture starts
-        /// </summary>
-        public float HoldStartDuration => holdStartDuration;
-
-        [SerializeField]
-        [Tooltip("The total amount of input source movement that needs to happen to start a manipulation")]
-        private float manipulationStartThreshold = 0.03f;
-
-        /// <summary>
-        /// The total amount of input source movement that needs to happen to start a manipulation
-        /// </summary>
-        public float ManipulationStartThreshold => manipulationStartThreshold;
+        public float HandPoseAnimationSpeed => handPoseAnimationSpeed;
 
         [Header("Hand Placement Settings")]
 

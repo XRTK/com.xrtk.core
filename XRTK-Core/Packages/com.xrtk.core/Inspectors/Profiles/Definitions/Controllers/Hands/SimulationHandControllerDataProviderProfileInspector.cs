@@ -12,7 +12,7 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
     [CustomEditor(typeof(SimulationHandControllerDataProviderProfile))]
     public class SimulationHandControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
-        private SerializedProperty isSimulateHandTrackingEnabled;
+        private SerializedProperty handTrackingEnabled;
         private SerializedProperty simulatedUpdateFrequency;
 
         private SerializedProperty toggleLeftHandKey;
@@ -22,7 +22,7 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
         private SerializedProperty rightHandTrackedKey;
 
         private SerializedProperty poseDefinitions;
-        private SerializedProperty handGestureAnimationSpeed;
+        private SerializedProperty handPoseAnimationSpeed;
 
         private SerializedProperty defaultHandDistance;
         private SerializedProperty handDepthMultiplier;
@@ -36,14 +36,11 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
         private SerializedProperty rollHandCCWKey;
         private SerializedProperty handRotationSpeed;
 
-        private SerializedProperty holdStartDuration;
-        private SerializedProperty manipulationStartThreshold;
-
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            isSimulateHandTrackingEnabled = serializedObject.FindProperty("isSimulateHandTrackingEnabled");
+            handTrackingEnabled = serializedObject.FindProperty("handTrackingEnabled");
             simulatedUpdateFrequency = serializedObject.FindProperty("simulatedUpdateFrequency");
 
             toggleLeftHandKey = serializedObject.FindProperty("toggleLeftHandKey");
@@ -53,10 +50,7 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
             rightHandTrackedKey = serializedObject.FindProperty("rightHandTrackedKey");
 
             poseDefinitions = serializedObject.FindProperty("poseDefinitions");
-            handGestureAnimationSpeed = serializedObject.FindProperty("handGestureAnimationSpeed");
-
-            holdStartDuration = serializedObject.FindProperty("holdStartDuration");
-            manipulationStartThreshold = serializedObject.FindProperty("manipulationStartThreshold");
+            handPoseAnimationSpeed = serializedObject.FindProperty("handPoseAnimationSpeed");
 
             defaultHandDistance = serializedObject.FindProperty("defaultHandDistance");
             handDepthMultiplier = serializedObject.FindProperty("handDepthMultiplier");
@@ -86,7 +80,7 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
 
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(isSimulateHandTrackingEnabled);
+            EditorGUILayout.PropertyField(handTrackingEnabled);
             EditorGUILayout.PropertyField(simulatedUpdateFrequency);
             EditorGUILayout.Space();
 
@@ -100,11 +94,7 @@ namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(poseDefinitions, true);
-            EditorGUILayout.PropertyField(handGestureAnimationSpeed);
-            EditorGUILayout.Space();
-
-            EditorGUILayout.PropertyField(holdStartDuration);
-            EditorGUILayout.PropertyField(manipulationStartThreshold);
+            EditorGUILayout.PropertyField(handPoseAnimationSpeed);
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(defaultHandDistance);

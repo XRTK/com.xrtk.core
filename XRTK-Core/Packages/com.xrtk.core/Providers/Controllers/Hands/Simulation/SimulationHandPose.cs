@@ -60,7 +60,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             {
                 if (poseData.Data != null)
                 {
-                    SimulationHandPose pose = new SimulationHandPose(poseData.GestureName);
+                    SimulationHandPose pose = new SimulationHandPose(poseData.Id);
                     pose.FromJson(poseData.Data.text);
                     handPoses.Add(pose.Id, pose);
                 }

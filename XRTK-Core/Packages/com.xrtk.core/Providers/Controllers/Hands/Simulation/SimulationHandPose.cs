@@ -56,14 +56,57 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <param name="poses">List of pose data assets with pose information.</param>
         public static void Initialize(IEnumerable<SimulationHandPoseData> poses)
         {
+            // To stabilize the simulated hand poses, we look
+            // for the hand "open" pose, which we will use as a reference to offset
+            // all other poses, so the "Palm" joint position stays the same for all simulated
+            // poses. If no open pose is defined, we can't do anything and keep everythign as it is.
+            SimulationHandPose openPose = null;
+            foreach (SimulationHandPoseData poseData in poses)
+            {
+                if (poseData.Id.Equals("open"))
+                {
+                    openPose = new SimulationHandPose(poseData.Id);
+                    openPose.FromJson(poseData.Data.text);
+                    handPoses.Add(openPose.Id, openPose);
+                }
+            }
+
             foreach (var poseData in poses)
             {
                 if (poseData.Data != null)
                 {
-                    SimulationHandPose pose = new SimulationHandPose(poseData.Id);
-                    pose.FromJson(poseData.Data.text);
-                    handPoses.Add(pose.Id, pose);
+                    if (openPose != null)
+                    {
+                        // If we already found the open pose, we don't want it initialized again, since we took
+                        // care of that above.
+                        if (!poseData.Id.Equals("open"))
+                        {
+                            // We have open pose data, offset this pose using it's palm position.
+                            SimulationHandPose pose = new SimulationHandPose(poseData.Id);
+                            pose.FromJson(poseData.Data.text);
+                            OffsetJointsRelativeToOpenPosePalmPosition(openPose, pose);
+                            handPoses.Add(pose.Id, pose);
+                        }
+                    }
+                    else
+                    {
+                        SimulationHandPose pose = new SimulationHandPose(poseData.Id);
+                        pose.FromJson(poseData.Data.text);
+                        handPoses.Add(pose.Id, pose);
+                    }
                 }
+            }
+        }
+
+        private static void OffsetJointsRelativeToOpenPosePalmPosition(SimulationHandPose openPose, SimulationHandPose pose)
+        {
+            Vector3 openHandPalmPosition = openPose.localJointPoses[(int)TrackedHandJoint.Palm].Position;
+            Vector3 posePalmPosition = pose.localJointPoses[(int)TrackedHandJoint.Palm].Position;
+            Vector3 offset = posePalmPosition - openHandPalmPosition;
+
+            for (int i = 0; i < pose.localJointPoses.Length; i++)
+            {
+                pose.localJointPoses[i].Position -= offset;
             }
         }
 

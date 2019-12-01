@@ -60,7 +60,7 @@ namespace XRTK.Definitions.Controllers
         [SerializeField]
         [Tooltip("The hand joint visualizer implementation to use.")]
         [Extends(typeof(BaseHandControllerJointVisualizer), TypeGrouping.ByNamespaceFlat)]
-        private SystemType handJointVisualizer;
+        private SystemType handJointVisualizer = null;
 
         /// <summary>
         /// The hand joint visualizer implementation to use.
@@ -100,7 +100,7 @@ namespace XRTK.Definitions.Controllers
         [SerializeField]
         [Tooltip("The hand joint visualizer implementation to use.")]
         [Extends(typeof(BaseHandControllerMeshVisualizer), TypeGrouping.ByNamespaceFlat)]
-        private SystemType handMeshVisualizer;
+        private SystemType handMeshVisualizer = null;
 
         /// <summary>
         /// The hand mesh visualizer implementation to use.

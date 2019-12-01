@@ -55,6 +55,9 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
+        /// <inheritdoc />
+        public Bounds Bounds { get; private set; }
+
         /// <summary>
         /// The Mixed Reality Controller default interactions.
         /// </summary>
@@ -99,7 +102,31 @@ namespace XRTK.Providers.Controllers.Hands
                 }
             }
 
+            UpdateBounds(handData);
             UpdateVelocity();
+        }
+
+        private void UpdateBounds(HandData handData)
+        {
+            MixedRealityPose palmPose;
+            IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> jointPoses = HandUtils.ToJointPoseDictionary(handData.Joints);
+
+            if (jointPoses.TryGetValue(TrackedHandJoint.Palm, out palmPose))
+            {
+                Bounds newBounds = new Bounds(palmPose.Position, Vector3.zero);
+                foreach (var kvp in jointPoses)
+                {
+                    if (kvp.Key == TrackedHandJoint.None ||
+                        kvp.Key == TrackedHandJoint.Palm)
+                    {
+                        continue;
+                    }
+
+                    newBounds.Encapsulate(kvp.Value.Position);
+                }
+
+                Bounds = newBounds;
+            }
         }
 
         public override void SetupDefaultInteractions(Handedness controllerHandedness)

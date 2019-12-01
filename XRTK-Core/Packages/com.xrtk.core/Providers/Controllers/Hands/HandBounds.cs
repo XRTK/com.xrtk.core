@@ -58,10 +58,7 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <inheritdoc />
-        public void OnSourceDetected(SourceStateEventData eventData)
-        {
-
-        }
+        public void OnSourceDetected(SourceStateEventData eventData) { }
 
         /// <inheritdoc />
         public void OnSourceLost(SourceStateEventData eventData)
@@ -78,7 +75,7 @@ namespace XRTK.Providers.Controllers.Hands
         {
             MixedRealityPose palmPose;
             HandData handData = eventData.InputData;
-            Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = HandUtils.ToJointPoseDictionary(handData.Joints);
+            IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> jointPoses = HandUtils.ToJointPoseDictionary(handData.Joints);
 
             if (jointPoses.TryGetValue(TrackedHandJoint.Palm, out palmPose))
             {

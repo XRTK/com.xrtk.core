@@ -2,14 +2,34 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using UnityEngine.Serialization;
+using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Definitions.Controllers
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Hand Controller Visualization Profile", fileName = "MixedRealityHandControllerVisualizationProfile", order = (int)CreateProfileMenuItemIndices.ControllerVisualization)]
     public class MixedRealityHandControllerVisualizationProfile : BaseMixedRealityProfile
     {
+        #region Joint Visualization Settings
+
+        [Header("Joint Visualization Settings")]
+
+        [SerializeField]
+        [Tooltip("Renders the hand joints. Note: this could reduce performance.")]
+        private bool enableHandJointVisualization = false;
+        /// <summary>
+        /// Renders the hand joints. Note: this could reduce performance.
+        /// </summary>
+        public bool EnableHandJointVisualization
+        {
+            get => enableHandJointVisualization;
+            set
+            {
+                enableHandJointVisualization = value;
+            }
+        }
+
         [SerializeField]
         [Tooltip("The joint prefab to use.")]
         private GameObject jointPrefab = null;
@@ -38,18 +58,27 @@ namespace XRTK.Definitions.Controllers
         public GameObject FingerTipPrefab => fingertipPrefab;
 
         [SerializeField]
-        [Tooltip("If this is not null and hand system supports hand meshes, use this mesh to render hand mesh.")]
-        private GameObject handMeshPrefab = null;
+        [Tooltip("The hand joint visualizer implementation to use.")]
+        [Extends(typeof(BaseHandControllerJointVisualizer), TypeGrouping.ByNamespaceFlat)]
+        private SystemType handJointVisualizer;
 
         /// <summary>
-        /// The hand mesh prefab to use to render the hand
+        /// The hand joint visualizer implementation to use.
         /// </summary>
-        public GameObject HandMeshPrefab => handMeshPrefab;
+        public SystemType HandJointVisualizer => handJointVisualizer;
+
+        #endregion
+
+        #region Mesh Visualization Settings
+
+        [Header("Mesh Visualization Settings")]
 
         [SerializeField]
-        [Tooltip("If true and the hand mesh is available, try to access the hand mesh from the system. Note: this could reduce performance")]
-        [FormerlySerializedAs("enableHandMeshUpdates")]
+        [Tooltip("Renders the hand mesh, if available. Note: this could reduce performance.")]
         private bool enableHandMeshVisualization = false;
+        /// <summary>
+        /// Renders the hand mesh, if available. Note: this could reduce performance.
+        /// </summary>
         public bool EnableHandMeshVisualization
         {
             get => enableHandMeshVisualization;
@@ -60,15 +89,24 @@ namespace XRTK.Definitions.Controllers
         }
 
         [SerializeField]
-        [Tooltip("Renders the hand joints. Note: this could reduce performance")]
-        private bool enableHandJointVisualization = false;
-        public bool EnableHandJointVisualization
-        {
-            get => enableHandJointVisualization;
-            set
-            {
-                enableHandJointVisualization = value;
-            }
-        }
+        [Tooltip("If this is not null and hand system supports hand meshes, use this mesh to render hand mesh.")]
+        private GameObject handMeshPrefab = null;
+
+        /// <summary>
+        /// The hand mesh prefab to use to render the hand
+        /// </summary>
+        public GameObject HandMeshPrefab => handMeshPrefab;
+
+        [SerializeField]
+        [Tooltip("The hand joint visualizer implementation to use.")]
+        [Extends(typeof(BaseHandControllerMeshVisualizer), TypeGrouping.ByNamespaceFlat)]
+        private SystemType handMeshVisualizer;
+
+        /// <summary>
+        /// The hand mesh visualizer implementation to use.
+        /// </summary>
+        public SystemType HandMeshVisualizer => handMeshVisualizer;
+
+        #endregion
     }
 }

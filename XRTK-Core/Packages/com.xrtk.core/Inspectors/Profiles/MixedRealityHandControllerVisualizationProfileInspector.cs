@@ -15,19 +15,25 @@ namespace XRTK.Inspectors.Profiles
         private SerializedProperty palmPrefab;
         private SerializedProperty fingertipPrefab;
         private SerializedProperty handMeshPrefab;
+        private SerializedProperty handJointVisualizer;
+
         private SerializedProperty enableHandMeshVisualization;
         private SerializedProperty enableHandJointVisualization;
+        private SerializedProperty handMeshVisualizer;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
+            enableHandJointVisualization = serializedObject.FindProperty("enableHandJointVisualization");
             jointPrefab = serializedObject.FindProperty("jointPrefab");
             fingertipPrefab = serializedObject.FindProperty("fingertipPrefab");
             palmPrefab = serializedObject.FindProperty("palmPrefab");
-            handMeshPrefab = serializedObject.FindProperty("handMeshPrefab");
+            handJointVisualizer = serializedObject.FindProperty("handJointVisualizer");
+
             enableHandMeshVisualization = serializedObject.FindProperty("enableHandMeshVisualization");
-            enableHandJointVisualization = serializedObject.FindProperty("enableHandJointVisualization");
+            handMeshPrefab = serializedObject.FindProperty("handMeshPrefab");
+            handMeshVisualizer = serializedObject.FindProperty("handMeshVisualizer");
         }
 
         public override void OnInspectorGUI()
@@ -44,14 +50,15 @@ namespace XRTK.Inspectors.Profiles
 
             serializedObject.Update();
 
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Tracked Hand Settings", EditorStyles.boldLabel);
+            EditorGUILayout.PropertyField(enableHandJointVisualization);
             EditorGUILayout.PropertyField(jointPrefab);
             EditorGUILayout.PropertyField(palmPrefab);
             EditorGUILayout.PropertyField(fingertipPrefab);
-            EditorGUILayout.PropertyField(handMeshPrefab);
+            EditorGUILayout.PropertyField(handJointVisualizer);
+
             EditorGUILayout.PropertyField(enableHandMeshVisualization);
-            EditorGUILayout.PropertyField(enableHandJointVisualization);
+            EditorGUILayout.PropertyField(handMeshPrefab);
+            EditorGUILayout.PropertyField(handMeshVisualizer);
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Virtual Hand Settings", EditorStyles.boldLabel);

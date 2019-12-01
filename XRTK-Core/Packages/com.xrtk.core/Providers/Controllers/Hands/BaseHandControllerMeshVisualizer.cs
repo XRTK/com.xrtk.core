@@ -16,17 +16,14 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         protected MeshFilter MeshFilter { get; set; }
 
-        protected override void Start()
+        /// <inheritdoc />
+        protected override void OnDisable()
         {
-            base.Start();
-        }
-
-        protected override void OnDestroy()
-        {
+            base.OnDisable();
             ClearMesh();
-            base.OnDestroy();
         }
 
+        /// <inheritdoc />
         public override void OnHandDataUpdated(InputEventData<HandData> eventData)
         {
             if (eventData.Handedness != Handedness)

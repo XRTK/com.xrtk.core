@@ -15,10 +15,23 @@ namespace XRTK.Providers.Controllers.Hands
     {
         private IMixedRealityHandControllerDataProvider dataProvider;
 
+        [SerializeField]
+        [Tooltip("Should a gizmo be drawn to represent the hand bounds.")]
+        private bool drawBoundsGizmo = true;
+
         /// <summary>
         /// Gets or sets the handedness this visulizer should visualize.
         /// </summary>
         public Handedness Handedness { get; set; }
+
+        /// <summary>
+        /// Should a gizmo be drawn to represent the hand bounds.
+        /// </summary>
+        public bool DrawBoundsGizmo
+        {
+            get { return drawBoundsGizmo; }
+            set { drawBoundsGizmo = value; }
+        }
 
         /// <summary>
         /// The currently active hand visualization profile.
@@ -26,18 +39,35 @@ namespace XRTK.Providers.Controllers.Hands
         protected MixedRealityHandControllerVisualizationProfile Profile => MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile.HandVisualizationProfile;
 
         /// <summary>
-        /// Executes when the visualizer is enabled for the first time.
+        /// Executes when the visualizer is enabled.
         /// </summary>
-        protected virtual void Start()
+        protected virtual void OnEnable()
         {
             dataProvider = MixedRealityToolkit.GetService<IMixedRealityHandControllerDataProvider>();
             dataProvider.Register(this);
         }
 
         /// <summary>
-        /// Executes when the visuailzer is destroyed.
+        /// Called by the Unity runtime when gizmos should be drawn.
         /// </summary>
-        protected virtual void OnDestroy()
+        private void OnDrawGizmos()
+        {
+            if (drawBoundsGizmo)
+            {
+                foreach (var controller in dataProvider.ActiveControllers)
+                {
+                    if (controller.ControllerHandedness == Handedness && controller is IMixedRealityHandController handController)
+                    {
+                        Gizmos.DrawWireCube(handController.Bounds.center, handController.Bounds.size);
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Executes when the visuailzer is disabled.
+        /// </summary>
+        protected virtual void OnDisable()
         {
             dataProvider.Unregister(this);
         }

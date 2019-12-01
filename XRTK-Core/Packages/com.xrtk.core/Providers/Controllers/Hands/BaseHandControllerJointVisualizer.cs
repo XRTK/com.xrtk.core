@@ -13,26 +13,21 @@ namespace XRTK.Providers.Controllers.Hands
     /// </summary>
     public class BaseHandControllerJointVisualizer : BaseHandControllerVisualizer
     {
-        private Dictionary<TrackedHandJoint, Transform> jointTransforms;
+        private Dictionary<TrackedHandJoint, Transform> jointTransforms = new Dictionary<TrackedHandJoint, Transform>();
 
         /// <summary>
         /// Provides read-only access to the joint transforms used for visualization.
         /// </summary>
         public IReadOnlyDictionary<TrackedHandJoint, Transform> JointTransforms => jointTransforms;
 
-        protected override void Start()
+        /// <inheritdoc />
+        protected override void OnDisable()
         {
-            base.Start();
-
-            jointTransforms = new Dictionary<TrackedHandJoint, Transform>();
-        }
-
-        protected override void OnDestroy()
-        {
+            base.OnDisable();
             ClearJoints();
-            base.OnDestroy();
         }
 
+        /// <inheritdoc />
         public override void OnHandDataUpdated(InputEventData<HandData> eventData)
         {
             if (eventData.Handedness != Handedness)

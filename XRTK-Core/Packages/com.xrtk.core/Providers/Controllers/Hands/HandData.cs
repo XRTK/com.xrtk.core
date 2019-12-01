@@ -25,7 +25,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Pose information for each hand joint.
         /// </summary>
-        public MixedRealityPose[] Joints { get; } = new MixedRealityPose[DefaultHandController.JointCount];
+        public MixedRealityPose[] Joints { get; } = new MixedRealityPose[BaseHandController.JointCount];
 
         /// <summary>
         /// Mesh information of the hand.

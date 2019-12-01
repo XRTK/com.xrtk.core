@@ -25,9 +25,9 @@ namespace XRTK.Providers.Controllers.Hands
         private InputEventData<HandData> handDataUpdateEventData;
         private readonly List<IMixedRealityHandDataHandler> handDataUpdateEventHandlers = new List<IMixedRealityHandDataHandler>();
 
-        private DefaultHandController leftHand;
+        private BaseHandController leftHand;
         private readonly Dictionary<TrackedHandJoint, Transform> leftHandJointTransforms = new Dictionary<TrackedHandJoint, Transform>();
-        private DefaultHandController rightHand;
+        private BaseHandController rightHand;
         private readonly Dictionary<TrackedHandJoint, Transform> rightHandJointTransforms = new Dictionary<TrackedHandJoint, Transform>();
 
         /// <summary>
@@ -93,7 +93,7 @@ namespace XRTK.Providers.Controllers.Hands
 
             foreach (IMixedRealityController detectedController in MixedRealityToolkit.InputSystem.DetectedControllers)
             {
-                if (detectedController is DefaultHandController hand)
+                if (detectedController is BaseHandController hand)
                 {
                     if (detectedController.ControllerHandedness == Handedness.Left && leftHand == null)
                     {

@@ -19,17 +19,16 @@ namespace XRTK.Providers.Controllers.Hands
     {
         private const float currentVelocityWeight = .8f;
         private const float newVelocityWeight = .2f;
-
-        protected readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
-
-        // Velocity internal states
         private float deltaTimeStart;
         private Vector3 lastPosition;
         private Vector3 lastPalmNormal;
         private readonly int velocityUpdateInterval = 9;
         private int frameOn = 0;
+        protected readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
 
-        // Hand ray
+        /// <summary>
+        /// Gets the hand controller's ray.
+        /// </summary>
         protected HandRay HandRay { get; } = new HandRay();
 
         /// <inheritdoc />
@@ -43,17 +42,13 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         public static readonly int JointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
-        protected Vector3 PalmNormal
-        {
-            get
-            {
-                if (TryGetJointPose(TrackedHandJoint.Palm, out MixedRealityPose pose))
-                {
-                    return -pose.Up;
-                }
-                return Vector3.zero;
-            }
-        }
+        /// <summary>
+        /// Gets the current palm normal of the hand controller.
+        /// </summary>
+        protected Vector3 PalmNormal => TryGetJointPose(TrackedHandJoint.Palm, out MixedRealityPose pose) ? -pose.Up : Vector3.zero;
+
+        /// <inheritdoc />
+        public IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> JointPoses => jointPoses;
 
         /// <inheritdoc />
         public Bounds Bounds { get; private set; }
@@ -71,6 +66,12 @@ namespace XRTK.Providers.Controllers.Hands
             new MixedRealityInteractionMapping(4, "Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger, MixedRealityInputAction.None),
         };
 
+        /// <inheritdoc />
+        public override MixedRealityInteractionMapping[] DefaultLeftHandedInteractions => DefaultInteractions;
+
+        /// <inheritdoc />
+        public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -82,12 +83,18 @@ namespace XRTK.Providers.Controllers.Hands
                 : base(trackingState, controllerHandedness, inputSource, interactions) { }
 
         /// <inheritdoc />
-        public override MixedRealityInteractionMapping[] DefaultLeftHandedInteractions => DefaultInteractions;
-
-        /// <inheritdoc />
-        public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
-
         public virtual void UpdateState(HandData handData)
+        {
+            UpdateJoints(handData);
+            UpdateBounds(handData);
+            UpdateVelocity();
+        }
+
+        /// <summary>
+        /// Updates the controller's joint poses using provided hand data.
+        /// </summary>
+        /// <param name="handData">The updated hand data for this controller.</param>
+        protected virtual void UpdateJoints(HandData handData)
         {
             for (int i = 0; i < JointCount; i++)
             {
@@ -101,12 +108,13 @@ namespace XRTK.Providers.Controllers.Hands
                     jointPoses.Add(handJoint, handData.Joints[i]);
                 }
             }
-
-            UpdateBounds(handData);
-            UpdateVelocity();
         }
 
-        private void UpdateBounds(HandData handData)
+        /// <summary>
+        /// Updates the controller's axis aligned bounds using provided hand data.
+        /// </summary>
+        /// <param name="handData">The updated hand data for this controller.</param>
+        protected virtual void UpdateBounds(HandData handData)
         {
             MixedRealityPose palmPose;
             IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> jointPoses = HandUtils.ToJointPoseDictionary(handData.Joints);
@@ -129,15 +137,9 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        public override void SetupDefaultInteractions(Handedness controllerHandedness)
-        {
-            AssignControllerMappings(DefaultInteractions);
-        }
-
-        #region Protected InputSource Helpers
-
-        #region Gesture Definitions
-
+        /// <summary>
+        /// Updates the controller's velocity / angular velocity.
+        /// </summary>
         protected void UpdateVelocity()
         {
             if (frameOn == 0)
@@ -155,7 +157,6 @@ namespace XRTK.Providers.Controllers.Hands
 
                 //update angular velocity
                 Vector3 currentPalmNormal = PalmNormal;
-                //currentPalmNormal = new Vector3(0, 1, 0);
                 Quaternion rotation = Quaternion.FromToRotation(lastPalmNormal, currentPalmNormal);
                 Vector3 rotationRate = rotation.eulerAngles * Mathf.Deg2Rad;
                 AngularVelocity = rotationRate / deltaTime;
@@ -165,8 +166,13 @@ namespace XRTK.Providers.Controllers.Hands
             frameOn = frameOn > velocityUpdateInterval ? 0 : frameOn;
         }
 
-        #endregion Gesture Definitions
+        /// <inheritdoc />
+        public override void SetupDefaultInteractions(Handedness controllerHandedness)
+        {
+            AssignControllerMappings(DefaultInteractions);
+        }
 
+        /// <inheritdoc />
         public virtual bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose)
         {
             return jointPoses.TryGetValue(joint, out pose);
@@ -174,12 +180,7 @@ namespace XRTK.Providers.Controllers.Hands
 
         private Vector3 GetJointPosition(TrackedHandJoint joint)
         {
-            if (TryGetJointPose(joint, out MixedRealityPose pose))
-            {
-                return pose.Position;
-            }
-
-            return Vector3.zero;
+            return TryGetJointPose(joint, out MixedRealityPose pose) ? pose.Position : Vector3.zero;
         }
 
         private float DistanceSqrPointToLine(Vector3 lineStart, Vector3 lineEnd, Vector3 point)
@@ -203,7 +204,5 @@ namespace XRTK.Providers.Controllers.Hands
             }
             return ((lineStart + (ray * dot)) - point).sqrMagnitude;
         }
-
-        #endregion Private InputSource Helpers
     }
 }

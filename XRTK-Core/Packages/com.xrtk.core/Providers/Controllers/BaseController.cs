@@ -164,7 +164,7 @@ namespace XRTK.Providers.Controllers
         /// <summary>
         /// Assign the default interactions based on controller handedness if necessary. 
         /// </summary>
-        /// <param name="controllerHandedness"></param>
+        /// <param name="controllerHandedness">The handedness of the controller.</param>
         public abstract void SetupDefaultInteractions(Handedness controllerHandedness);
 
         /// <summary>

@@ -14,9 +14,10 @@ The Mixed Reality Toolkit's primary focus is to make it extremely easy to get st
 
 ## [Getting Started](articles/00-GettingStarted.md)
 
-- Installing
-- Configuring
-- Building
+- [Installing](articles/00-GettingStarted.md#adding-the-mixed-reality-toolkit-to-your-project)
+- [Configuring](articles/00-GettingStarted.md#configure-your-base-scene)
+- [Building](articles/00-GettingStarted.md#build-and-play)
+- [Contributing](CONTRIBUTING.md)
 
 ## Overview
 
@@ -38,9 +39,9 @@ We’d like to invite all the major hardware vendors to help guide their platfor
 
 We recently moved our main converastions regarding Mixed Reality Toolkit over to Discord, which allows us to do a lot more (and the chat / streaming there is awesome), but we keep an Mixed Reality Toolkit presence on Slack too, in order to retain links to our friends on there.
 
-## [Come join us on Discord!](https://t.co/UeUSVjnoIZ?amp=1)
-
 [![Discord](https://cdn0.iconfinder.com/data/icons/free-social-media-set/24/discord-128.png)](https://t.co/UeUSVjnoIZ?amp=1)
+
+### [Come join us on Discord!](https://t.co/UeUSVjnoIZ?amp=1)
 
 ## Supported Platforms
 

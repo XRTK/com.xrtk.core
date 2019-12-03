@@ -8,7 +8,9 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Definitions.Utilities;
 using XRTK.Services;
+using XRTK.Utilities;
 using XRTK.Utilities.Editor;
 using Object = UnityEngine.Object;
 
@@ -184,6 +186,20 @@ namespace XRTK.Inspectors.Utilities
                 EditorGUILayout.HelpBox("This profile is part of the default set from the Mixed Reality Toolkit SDK. You can make a copy of this profile, and customize it if needed.", MessageType.Warning);
                 GUI.enabled = !disableInspector;
             }
+        }
+
+        public static bool CheckProfilePlatform(this BaseMixedRealityProfile _, SupportedPlatforms supportedPlatforms, string infoText = null)
+        {
+            if (!PlatformUtility.IsPlatformSupported(EditorUserBuildSettings.activeBuildTarget, supportedPlatforms))
+            {
+                EditorGUILayout.HelpBox(string.IsNullOrWhiteSpace(infoText) ?
+                   $"You can't edit this profile with the current build target. Please switch to {supportedPlatforms}."
+                   : infoText, MessageType.Info);
+
+                return false;
+            }
+
+            return true;
         }
 
         #endregion Utilities

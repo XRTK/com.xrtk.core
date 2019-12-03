@@ -188,7 +188,14 @@ namespace XRTK.Inspectors.Utilities
             }
         }
 
-        public static bool CheckProfilePlatform(this BaseMixedRealityProfile _, SupportedPlatforms supportedPlatforms, string infoText = null)
+        /// <summary>
+        /// Checks if the profile can be inspected with the currently active build target and renders
+        /// a hint to switch build target if not.
+        /// </summary>
+        /// <param name="supportedPlatforms">The supported platforms by the profile.</param>
+        /// <param name="infoText">Optional info text to override info box text.</param>
+        /// <returns>True, if the profile and the active build target match.</returns>
+        public static bool CheckProfilePlatform(SupportedPlatforms supportedPlatforms, string infoText = null)
         {
             if (!PlatformUtility.IsPlatformSupported(EditorUserBuildSettings.activeBuildTarget, supportedPlatforms))
             {

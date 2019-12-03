@@ -25,6 +25,7 @@ namespace XRTK.Providers.Controllers.Hands
         private readonly int velocityUpdateInterval = 9;
         private int frameOn = 0;
         protected readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
+        private readonly Dictionary<TrackedHandBounds, Bounds> bounds = new Dictionary<TrackedHandBounds, Bounds>();
 
         /// <summary>
         /// Gets the hand controller's ray.
@@ -51,7 +52,7 @@ namespace XRTK.Providers.Controllers.Hands
         public IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> JointPoses => jointPoses;
 
         /// <inheritdoc />
-        public Bounds Bounds { get; private set; }
+        public IReadOnlyDictionary<TrackedHandBounds, Bounds> Bounds => bounds;
 
         /// <summary>
         /// The Mixed Reality Controller default interactions.
@@ -116,12 +117,12 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The updated hand data for this controller.</param>
         protected virtual void UpdateBounds(HandData handData)
         {
-            MixedRealityPose palmPose;
             IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> jointPoses = HandUtils.ToJointPoseDictionary(handData.Joints);
 
-            if (jointPoses.TryGetValue(TrackedHandJoint.Palm, out palmPose))
+            // TrackedHandBounds.Hand
+            if (jointPoses.TryGetValue(TrackedHandJoint.Palm, out MixedRealityPose palmPose))
             {
-                Bounds newBounds = new Bounds(palmPose.Position, Vector3.zero);
+                Bounds newHandBounds = new Bounds(palmPose.Position, Vector3.zero);
                 foreach (var kvp in jointPoses)
                 {
                     if (kvp.Key == TrackedHandJoint.None ||
@@ -130,10 +131,34 @@ namespace XRTK.Providers.Controllers.Hands
                         continue;
                     }
 
-                    newBounds.Encapsulate(kvp.Value.Position);
+                    newHandBounds.Encapsulate(kvp.Value.Position);
                 }
 
-                Bounds = newBounds;
+                if (bounds.ContainsKey(TrackedHandBounds.Hand))
+                {
+                    bounds[TrackedHandBounds.Hand] = newHandBounds;
+                }
+                else
+                {
+                    bounds.Add(TrackedHandBounds.Hand, newHandBounds);
+                }
+            }
+
+            // TrackedHandBounds.IndexFinger
+            if (JointPoses.TryGetValue(TrackedHandJoint.IndexKnuckle, out MixedRealityPose indexKnucklePose)
+                && JointPoses.TryGetValue(TrackedHandJoint.IndexMiddleJoint, out MixedRealityPose indexMiddlePose))
+            {
+                Bounds newIndexFingerBounds = new Bounds(indexKnucklePose.Position, Vector3.zero);
+                newIndexFingerBounds.Encapsulate(indexMiddlePose.Position);
+
+                if (bounds.ContainsKey(TrackedHandBounds.IndexFinger))
+                {
+                    bounds[TrackedHandBounds.IndexFinger] = newIndexFingerBounds;
+                }
+                else
+                {
+                    bounds.Add(TrackedHandBounds.IndexFinger, newIndexFingerBounds);
+                }
             }
         }
 
@@ -167,6 +192,19 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <inheritdoc />
+        public bool TryGetBounds(TrackedHandBounds handBounds, out Bounds? bounds)
+        {
+            if (this.bounds.ContainsKey(handBounds))
+            {
+                bounds = this.bounds[handBounds];
+                return true;
+            }
+
+            bounds = null;
+            return false;
+        }
+
+        /// <inheritdoc />
         public override void SetupDefaultInteractions(Handedness controllerHandedness)
         {
             AssignControllerMappings(DefaultInteractions);
@@ -181,28 +219,6 @@ namespace XRTK.Providers.Controllers.Hands
         private Vector3 GetJointPosition(TrackedHandJoint joint)
         {
             return TryGetJointPose(joint, out MixedRealityPose pose) ? pose.Position : Vector3.zero;
-        }
-
-        private float DistanceSqrPointToLine(Vector3 lineStart, Vector3 lineEnd, Vector3 point)
-        {
-            if (lineStart == lineEnd)
-            {
-                return (point - lineStart).magnitude;
-            }
-
-            float lineSegmentMagnitude = (lineEnd - lineStart).magnitude;
-            Vector3 ray = (lineEnd - lineStart);
-            ray *= (1.0f / lineSegmentMagnitude);
-            float dot = Vector3.Dot(point - lineStart, ray);
-            if (dot <= 0)
-            {
-                return (point - lineStart).sqrMagnitude;
-            }
-            if (dot >= lineSegmentMagnitude)
-            {
-                return (point - lineEnd).sqrMagnitude;
-            }
-            return ((lineStart + (ray * dot)) - point).sqrMagnitude;
         }
     }
 }

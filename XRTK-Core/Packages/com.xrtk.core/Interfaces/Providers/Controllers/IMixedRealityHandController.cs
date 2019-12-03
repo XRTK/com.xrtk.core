@@ -14,9 +14,9 @@ namespace XRTK.Interfaces.Providers.Controllers
     public interface IMixedRealityHandController : IMixedRealityController
     {
         /// <summary>
-        /// Gets the axis aligned bounds of the hand controller.
+        /// Gets the collection of bounds available for this hand controller.
         /// </summary>
-        Bounds Bounds { get; }
+        IReadOnlyDictionary<TrackedHandBounds, Bounds> Bounds { get; }
 
         /// <summary>
         /// Gets whether this hand controller is currently tracked.
@@ -32,6 +32,14 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// The current joint pose dicitionary of the controller.
         /// </summary>
         IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> JointPoses { get; }
+
+        /// <summary>
+        /// Get the hands bounds of a given type, if they are available.
+        /// </summary>
+        /// <param name="handBounds">The requested hand bounds.</param>
+        /// <param name="bounds">The bounds if avaialble.</param>
+        /// <returns>True, if bounds available.</returns>
+        bool TryGetBounds(TrackedHandBounds handBounds, out Bounds? bounds);
 
         /// <summary>
         /// Get the current pose of a joint of the hand.

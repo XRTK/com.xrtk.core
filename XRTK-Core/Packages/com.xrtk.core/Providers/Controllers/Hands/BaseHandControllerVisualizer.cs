@@ -56,9 +56,11 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 foreach (var controller in dataProvider.ActiveControllers)
                 {
-                    if (controller.ControllerHandedness == Handedness && controller is IMixedRealityHandController handController)
+                    if (controller.ControllerHandedness == Handedness
+                        && controller is IMixedRealityHandController handController
+                        && handController.TryGetBounds(TrackedHandBounds.IndexFinger, out Bounds? bounds))
                     {
-                        Gizmos.DrawWireCube(handController.Bounds.center, handController.Bounds.size);
+                        Gizmos.DrawWireCube(bounds.Value.center, bounds.Value.size);
                     }
                 }
             }

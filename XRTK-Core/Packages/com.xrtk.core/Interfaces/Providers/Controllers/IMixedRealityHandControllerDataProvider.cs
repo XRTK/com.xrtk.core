@@ -4,6 +4,7 @@
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem.Handlers;
+using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Interfaces.Providers.Controllers
 {
@@ -46,6 +47,6 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// </summary>
         /// <param name="handedness">Handedness of the hand controller updated.</param>
         /// <param name="handData">The updated hand data.</param>
-        void UpdateHandData(Handedness handedness, XRTK.Providers.Controllers.Hands.HandData handData);
+        void UpdateHandData(Handedness handedness, HandData handData);
     }
 }

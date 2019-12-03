@@ -2,11 +2,6 @@
 
 A brief overview of the tutorial.
 
-## Table of Contents
-
-- [What you'll need](#what-youll-need)
-- [Getting Started](#getting-started)
-
 ## What you'll need
 
 List previous steps if needed and a short list of required materials or skills.

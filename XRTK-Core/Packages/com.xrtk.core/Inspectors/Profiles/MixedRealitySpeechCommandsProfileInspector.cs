@@ -30,9 +30,9 @@ namespace XRTK.Inspectors.Profiles
             base.OnEnable();
 
             inputSystemProfile = thisProfile.ParentProfile as MixedRealityInputSystemProfile;
-            Debug.Assert(inputSystemProfile != null);
 
-            if (inputSystemProfile.InputActionsProfile == null) { return; }
+            if (inputSystemProfile == null ||
+                inputSystemProfile.InputActionsProfile == null) { return; }
 
             recognizerStartBehaviour = serializedObject.FindProperty("startBehavior");
             recognitionConfidenceLevel = serializedObject.FindProperty("recognitionConfidenceLevel");

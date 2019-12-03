@@ -8,5 +8,7 @@
       href: 02-Configuration.md
 - name: Appendices
   items:
+    - name: Coding Guidelines
+      href: A01-CodingGuidelines.md
     - name: XRTK vs MRTK
-      href: A01-ChoosingXRTKvsMRTK.md
+      href: A02-ChoosingXRTKvsMRTK.md

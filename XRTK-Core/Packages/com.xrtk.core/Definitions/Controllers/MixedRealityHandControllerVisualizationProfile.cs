@@ -2,9 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
-using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Definitions.Controllers
 {
@@ -57,16 +55,6 @@ namespace XRTK.Definitions.Controllers
         /// </summary>
         public GameObject FingerTipPrefab => fingertipPrefab;
 
-        [SerializeField]
-        [Tooltip("The hand joint visualizer implementation to use.")]
-        [Extends(typeof(BaseHandControllerJointVisualizer), TypeGrouping.ByNamespaceFlat)]
-        private SystemType handJointVisualizer = null;
-
-        /// <summary>
-        /// The hand joint visualizer implementation to use.
-        /// </summary>
-        public SystemType HandJointVisualizer => handJointVisualizer;
-
         #endregion
 
         #region Mesh Visualization Settings
@@ -96,16 +84,6 @@ namespace XRTK.Definitions.Controllers
         /// The hand mesh prefab to use to render the hand
         /// </summary>
         public GameObject HandMeshPrefab => handMeshPrefab;
-
-        [SerializeField]
-        [Tooltip("The hand joint visualizer implementation to use.")]
-        [Extends(typeof(BaseHandControllerMeshVisualizer), TypeGrouping.ByNamespaceFlat)]
-        private SystemType handMeshVisualizer = null;
-
-        /// <summary>
-        /// The hand mesh visualizer implementation to use.
-        /// </summary>
-        public SystemType HandMeshVisualizer => handMeshVisualizer;
 
         #endregion
     }

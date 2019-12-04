@@ -15,11 +15,9 @@ namespace XRTK.Inspectors.Profiles
         private SerializedProperty palmPrefab;
         private SerializedProperty fingertipPrefab;
         private SerializedProperty handMeshPrefab;
-        private SerializedProperty handJointVisualizer;
 
         private SerializedProperty enableHandMeshVisualization;
         private SerializedProperty enableHandJointVisualization;
-        private SerializedProperty handMeshVisualizer;
 
         protected override void OnEnable()
         {
@@ -29,11 +27,9 @@ namespace XRTK.Inspectors.Profiles
             jointPrefab = serializedObject.FindProperty("jointPrefab");
             fingertipPrefab = serializedObject.FindProperty("fingertipPrefab");
             palmPrefab = serializedObject.FindProperty("palmPrefab");
-            handJointVisualizer = serializedObject.FindProperty("handJointVisualizer");
 
             enableHandMeshVisualization = serializedObject.FindProperty("enableHandMeshVisualization");
             handMeshPrefab = serializedObject.FindProperty("handMeshPrefab");
-            handMeshVisualizer = serializedObject.FindProperty("handMeshVisualizer");
         }
 
         public override void OnInspectorGUI()
@@ -54,11 +50,9 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.PropertyField(jointPrefab);
             EditorGUILayout.PropertyField(palmPrefab);
             EditorGUILayout.PropertyField(fingertipPrefab);
-            EditorGUILayout.PropertyField(handJointVisualizer);
 
             EditorGUILayout.PropertyField(enableHandMeshVisualization);
             EditorGUILayout.PropertyField(handMeshPrefab);
-            EditorGUILayout.PropertyField(handMeshVisualizer);
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Virtual Hand Settings", EditorStyles.boldLabel);

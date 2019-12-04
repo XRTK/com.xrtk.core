@@ -1,12 +1,14 @@
 - name: Getting Started
   items:
-    - name: Downloading the XRTK
-      href: 00-DownloadingTheXRTK.md
     - name: Getting started with the XRTK
-      href: 01-GettingStarted.md      
+      href: 00-GettingStarted.md
+    - name: Downloading the XRTK
+      href: 01-DownloadingTheXRTK.md
+    - name: Configuring your project
+      href: 02-Configuration.md
 - name: Appendices
   items:
-    - name: XRTK UPM detailed installation instructions
-      href: A01-XRTKUPMInstall.md
+    - name: Coding Guidelines
+      href: A01-CodingGuidelines.md
     - name: XRTK vs MRTK
-      href: A02-ChoosingXRTKvsMRTK.md      
+      href: A02-ChoosingXRTKvsMRTK.md

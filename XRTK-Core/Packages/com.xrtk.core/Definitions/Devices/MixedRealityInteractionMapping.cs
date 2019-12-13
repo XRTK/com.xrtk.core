@@ -456,7 +456,7 @@ namespace XRTK.Definitions.Devices
 
                 Changed = boolData != value;
                 // use the internal reading for changed so we don't reset it.
-                Updated = changed || value;
+                // Updated = changed || value;
                 boolData = value;
             }
         }
@@ -484,9 +484,9 @@ namespace XRTK.Definitions.Devices
                     newValue *= -1f;
                 }
 
-                Changed = !floatData.Equals(newValue);
+                // Changed = !floatData.Equals(newValue);
                 // use the internal reading for changed so we don't reset it.
-                Updated = changed || !floatData.Equals(0f);
+                Updated = !floatData.Equals(newValue) || !floatData.Equals(0f);
                 floatData = value;
             }
         }

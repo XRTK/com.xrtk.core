@@ -22,7 +22,7 @@ namespace XRTK.Tests.InputSystem
 
         /// <summary>
         /// We test by initializing a new <see cref="MixedRealityInteractionMapping"/>.
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == false.<para/>
         /// </summary>
         [Test]
@@ -34,7 +34,7 @@ namespace XRTK.Tests.InputSystem
 
             // Test to make sure the initial values are correct.
             Assert.IsNull(initialValue);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.RawData = initialValue;
@@ -42,13 +42,13 @@ namespace XRTK.Tests.InputSystem
             // Test to make sure that setting the same initial
             // value doesn't raise changed or updated.
             Assert.IsNull(interaction.RawData);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
         /// <summary>
         /// We test by setting the interaction data to two different values.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == true, then false after each subsequent check before assigning a new value.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// </summary>
         [Test]
@@ -62,7 +62,7 @@ namespace XRTK.Tests.InputSystem
             interaction.RawData = testValue1;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.RawData;
@@ -71,13 +71,13 @@ namespace XRTK.Tests.InputSystem
             Assert.IsNotNull(setValue1);
             Assert.AreEqual(setValue1, testValue1);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.RawData = testValue2;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue2 = interaction.RawData;
@@ -86,13 +86,13 @@ namespace XRTK.Tests.InputSystem
             Assert.IsNotNull(setValue2);
             Assert.AreEqual(setValue2, testValue2);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.RawData = initialValue;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue3 = interaction.RawData;
@@ -101,13 +101,13 @@ namespace XRTK.Tests.InputSystem
             Assert.IsNull(interaction.RawData);
             Assert.AreEqual(initialValue, setValue3);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
         /// <summary>
         /// We test by setting the interaction data to the same object multiple times.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true.<para/>
         /// </summary>
         [Test]
@@ -119,7 +119,7 @@ namespace XRTK.Tests.InputSystem
             interaction.RawData = testValue;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.RawData;
@@ -128,13 +128,13 @@ namespace XRTK.Tests.InputSystem
             Assert.IsNotNull(setValue1);
             Assert.AreEqual(testValue, setValue1);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.RawData = testValue;
 
             // Make sure if we set the same value changed is false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
 
             // Make sure if we set the same value updated is true
             Assert.IsTrue(interaction.Updated);
@@ -145,7 +145,7 @@ namespace XRTK.Tests.InputSystem
             Assert.IsNotNull(setValue2);
             Assert.AreEqual(testValue, setValue2);
             // Make sure if we set the same value it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
@@ -160,7 +160,7 @@ namespace XRTK.Tests.InputSystem
 
         /// <summary>
         /// We test by initializing a new <see cref="MixedRealityInteractionMapping"/>.
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == false.<para/>
         /// </summary>
         [Test]
@@ -171,7 +171,7 @@ namespace XRTK.Tests.InputSystem
 
             // Test to make sure the initial values are correct.
             Assert.IsFalse(initialValue);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.BoolData = initialValue;
@@ -179,13 +179,13 @@ namespace XRTK.Tests.InputSystem
             // Test to make sure that setting the same initial
             // value doesn't raise changed or updated.
             Assert.IsFalse(initialValue);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
         /// <summary>
         /// We test by setting the interaction data to two different values.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == true, then false after each subsequent check before assigning a new value.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// </summary>
         [Test]
@@ -198,7 +198,7 @@ namespace XRTK.Tests.InputSystem
             interaction.BoolData = testValue1;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.BoolData;
@@ -207,13 +207,13 @@ namespace XRTK.Tests.InputSystem
             Assert.IsTrue(setValue1);
             Assert.True(setValue1 == testValue1);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.BoolData = testValue2;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue2 = interaction.BoolData;
@@ -222,14 +222,14 @@ namespace XRTK.Tests.InputSystem
             Assert.IsFalse(setValue2);
             Assert.True(setValue2 == testValue2);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
         /// <summary>
         /// We test by setting the interaction data to the same object multiple times.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == false.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == false.<para/>
         /// </summary>
         [Test]
         public void Test_02_03_BoolNoChangeAndUpdated()
@@ -240,7 +240,7 @@ namespace XRTK.Tests.InputSystem
             interaction.BoolData = testValue;
 
             // Make sure if we set the value it's true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.BoolData;
@@ -249,13 +249,13 @@ namespace XRTK.Tests.InputSystem
             Assert.IsTrue(testValue);
             Assert.True(setValue1 == testValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.BoolData = testValue;
 
             // Make sure if we set the same value it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
 
             // Make sure if we set the same value it's true
             Assert.IsTrue(interaction.Updated);
@@ -266,7 +266,7 @@ namespace XRTK.Tests.InputSystem
             Assert.IsTrue(testValue);
             Assert.True(setValue2 == testValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
@@ -281,7 +281,7 @@ namespace XRTK.Tests.InputSystem
 
         /// <summary>
         /// We test by initializing a new <see cref="MixedRealityInteractionMapping"/>.
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == false.<para/>
         /// </summary>
         [Test]
@@ -292,7 +292,7 @@ namespace XRTK.Tests.InputSystem
 
             // Test to make sure the initial values are correct.
             Assert.AreEqual(0d, initialValue, double.Epsilon);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.FloatData = initialValue;
@@ -300,13 +300,12 @@ namespace XRTK.Tests.InputSystem
             // Test to make sure that setting the same initial
             // value doesn't raise changed or updated.
             Assert.AreEqual(0d, initialValue, double.Epsilon);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
         /// <summary>
         /// We test by setting the interaction data to two different values.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// </summary>
         [Test]
@@ -320,7 +319,7 @@ namespace XRTK.Tests.InputSystem
             interaction.FloatData = testValue1;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.FloatData;
@@ -328,13 +327,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.AreEqual(testValue1, setValue1, double.Epsilon);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.FloatData = testValue2;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue2 = interaction.FloatData;
@@ -342,13 +341,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.AreEqual(testValue2, setValue2, double.Epsilon);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.FloatData = initialValue;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue3 = interaction.FloatData;
@@ -356,13 +355,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.AreEqual(initialValue, setValue3, double.Epsilon);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
         /// <summary>
         /// We test by setting the interaction data to the same object multiple times.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true.<para/>
         /// </summary>
         [Test]
@@ -374,7 +373,7 @@ namespace XRTK.Tests.InputSystem
             interaction.FloatData = testValue;
 
             // Make sure if we set the value it's true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.FloatData;
@@ -382,13 +381,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.AreEqual(testValue, setValue1, double.Epsilon);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.FloatData = testValue;
 
             // Make sure if we set the same value it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
 
             // Make sure if we set the same value it's true
             Assert.IsTrue(interaction.Updated);
@@ -398,7 +397,7 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.AreEqual(testValue, setValue2, double.Epsilon);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
@@ -413,7 +412,7 @@ namespace XRTK.Tests.InputSystem
 
         /// <summary>
         /// We test by initializing a new <see cref="MixedRealityInteractionMapping"/>.
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == false.<para/>
         /// </summary>
         [Test]
@@ -424,7 +423,7 @@ namespace XRTK.Tests.InputSystem
 
             // Test to make sure the initial values are correct.
             Assert.True(initialValue == Vector2.zero);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.Vector2Data = initialValue;
@@ -432,7 +431,7 @@ namespace XRTK.Tests.InputSystem
             // Test to make sure that setting the same initial
             // value doesn't raise changed or updated.
             Assert.True(initialValue == Vector2.zero);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
@@ -503,7 +502,7 @@ namespace XRTK.Tests.InputSystem
                 invertAxis = !invertAxis;
                 var newValue = value * invertMultiplier;
                 changed = vector2Data != newValue;
-                updated = changed || !newValue.Equals(Vector2.zero);
+                updated = changed || !newValue.Equals(cachedVector2);
                 // use the internal reading for changed so we don't reset it.
                 vector2Data = newValue;
             }
@@ -538,7 +537,7 @@ namespace XRTK.Tests.InputSystem
                 invertAxis = !invertAxis;
                 var newValue = value * invertMultiplier;
                 changed = vector2Data != newValue;
-                updated = changed || !newValue.Equals(Vector2.zero);
+                updated = changed || !newValue.Equals(cachedVector2);
                 vector2Data = newValue;
             }
 
@@ -552,7 +551,7 @@ namespace XRTK.Tests.InputSystem
                 var newValue = value * new Vector2(invertAxis ? -1f : 1f, !invertAxis ? -1f : 1f);
                 invertAxis = !invertAxis;
                 changed = vector2Data != newValue;
-                updated = changed || !newValue.Equals(Vector2.zero);
+                updated = changed || !newValue.Equals(cachedVector2);
                 vector2Data = newValue;
             }
 
@@ -577,7 +576,7 @@ namespace XRTK.Tests.InputSystem
 
                 invertAxis = !invertAxis;
                 changed = vector2Data != newValue;
-                updated = changed || !newValue.Equals(Vector2.zero);
+                updated = changed || !newValue.Equals(cachedVector2);
                 vector2Data = newValue;
             }
 
@@ -587,7 +586,7 @@ namespace XRTK.Tests.InputSystem
 
         /// <summary>
         /// We test by setting the interaction data to two different values.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == true, then false after each subsequent check before assigning a new value.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// </summary>
         [Test]
@@ -603,7 +602,7 @@ namespace XRTK.Tests.InputSystem
             interaction.Vector2Data = testValue1;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.Vector2Data;
@@ -611,13 +610,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue1 == testValue1);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.Vector2Data = testValue2;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue2 = interaction.Vector2Data;
@@ -625,13 +624,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue2 == testValue2);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.Vector2Data = testValue3;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue3 = interaction.Vector2Data;
@@ -639,13 +638,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue3 == testValue3);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.Vector2Data = testValue4;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue4 = interaction.Vector2Data;
@@ -653,13 +652,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue4 == testValue4);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.Vector2Data = initialValue;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue5 = interaction.Vector2Data;
@@ -667,13 +666,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue5 == initialValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
         /// <summary>
         /// We test by setting the inverted interaction data to two different values.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == true, then false after each subsequent check before assigning a new value.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// </summary>
         [Test]
@@ -689,7 +688,7 @@ namespace XRTK.Tests.InputSystem
             interaction.Vector2Data = testValue1;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.Vector2Data;
@@ -697,13 +696,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue1 == testValue1 * -1f);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.Vector2Data = testValue2;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue2 = interaction.Vector2Data;
@@ -711,13 +710,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue2 == testValue2 * -1f);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.Vector2Data = testValue3;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue3 = interaction.Vector2Data;
@@ -725,13 +724,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue3 == testValue3 * -1f);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.Vector2Data = testValue4;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue4 = interaction.Vector2Data;
@@ -739,13 +738,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue4 == testValue4 * -1f);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.Vector2Data = initialValue;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue5 = interaction.Vector2Data;
@@ -753,13 +752,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue5 == initialValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
         /// <summary>
         /// We test by setting the interaction data to the same object multiple times.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true.<para/>
         /// </summary>
         [Test]
@@ -771,7 +770,7 @@ namespace XRTK.Tests.InputSystem
             interaction.Vector2Data = testValue;
 
             // Make sure if we set the value it's true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.Vector2Data;
@@ -779,13 +778,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue1 == testValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.Vector2Data = testValue;
 
             // Make sure if we set the same value it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
 
             // Make sure if we set the same value it's true
             Assert.IsTrue(interaction.Updated);
@@ -795,7 +794,7 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue2 == testValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
@@ -810,7 +809,7 @@ namespace XRTK.Tests.InputSystem
 
         /// <summary>
         /// We test by setting the interaction data to two different values.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == true, then false after each subsequent check before assigning a new value.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// </summary>
         [Test]
@@ -821,7 +820,7 @@ namespace XRTK.Tests.InputSystem
 
             // Test to make sure the initial values are correct.
             Assert.True(initialValue == Vector3.zero);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.PositionData = initialValue;
@@ -829,13 +828,13 @@ namespace XRTK.Tests.InputSystem
             // Test to make sure that setting the same initial
             // value doesn't raise changed or updated.
             Assert.True(initialValue == Vector3.zero);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
         /// <summary>
         /// We test by setting the interaction data to the same object multiple times.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true.<para/>
         /// </summary>
         [Test]
@@ -849,7 +848,7 @@ namespace XRTK.Tests.InputSystem
             interaction.PositionData = testValue1;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.PositionData;
@@ -857,13 +856,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue1 == testValue1);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
+            Assert.IsFalse(interaction.ControlActivated);
 
             interaction.PositionData = testValue2;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue2 = interaction.PositionData;
@@ -871,13 +870,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue2 == testValue2);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
+            Assert.IsFalse(interaction.ControlActivated);
 
             interaction.PositionData = initialValue;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue3 = interaction.PositionData;
@@ -885,13 +884,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue3 == initialValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
+            Assert.IsFalse(interaction.ControlActivated);
         }
 
         /// <summary>
         /// We test by initializing a new <see cref="MixedRealityInteractionMapping"/>.
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == false.<para/>
         /// </summary>
         [Test]
@@ -903,7 +902,7 @@ namespace XRTK.Tests.InputSystem
             interaction.PositionData = testValue;
 
             // Make sure if we set the value it's true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.PositionData;
@@ -911,13 +910,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue1 == testValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.PositionData = testValue;
 
             // Make sure if we set the same value it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
 
             // Make sure if we set the same value it's true
             Assert.IsTrue(interaction.Updated);
@@ -927,7 +926,7 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue2 == testValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
@@ -942,7 +941,7 @@ namespace XRTK.Tests.InputSystem
 
         /// <summary>
         /// We test by setting the interaction data to two different values.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == true, then false after each subsequent check before assigning a new value.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// </summary>
         [Test]
@@ -953,7 +952,7 @@ namespace XRTK.Tests.InputSystem
 
             // Test to make sure the initial values are correct.
             Assert.IsTrue(initialValue == Quaternion.identity);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.RotationData = initialValue;
@@ -961,13 +960,13 @@ namespace XRTK.Tests.InputSystem
             // Test to make sure that setting the same initial
             // value doesn't raise changed or updated.
             Assert.IsTrue(initialValue == Quaternion.identity);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
         /// <summary>
         /// We test by setting the interaction data to the same object multiple times.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true.<para/>
         /// </summary>
         [Test]
@@ -981,7 +980,7 @@ namespace XRTK.Tests.InputSystem
             interaction.RotationData = testValue1;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.RotationData;
@@ -989,13 +988,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue1 == testValue1);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
+            Assert.IsFalse(interaction.ControlActivated);
 
             interaction.RotationData = testValue2;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue2 = interaction.RotationData;
@@ -1003,13 +1002,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue2 == testValue2);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
+            Assert.IsFalse(interaction.ControlActivated);
 
             interaction.RotationData = initialValue;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue3 = interaction.RotationData;
@@ -1017,13 +1016,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue3 == initialValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
+            Assert.IsFalse(interaction.ControlActivated);
         }
 
         /// <summary>
         /// We test by initializing a new <see cref="MixedRealityInteractionMapping"/>.
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == false.<para/>
         /// </summary>
         [Test]
@@ -1035,7 +1034,7 @@ namespace XRTK.Tests.InputSystem
             interaction.RotationData = testValue;
 
             // Make sure if we set the value it's true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.RotationData;
@@ -1043,13 +1042,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue1 == testValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.RotationData = testValue;
 
             // Make sure if we set the same value it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
 
             // Make sure if we set the same value it's true
             Assert.IsTrue(interaction.Updated);
@@ -1059,7 +1058,7 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue2 == testValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
@@ -1074,7 +1073,7 @@ namespace XRTK.Tests.InputSystem
 
         /// <summary>
         /// We test by setting the interaction data to two different values.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == true, then false after each subsequent check before assigning a new value.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// </summary>
         [Test]
@@ -1085,7 +1084,7 @@ namespace XRTK.Tests.InputSystem
 
             // Test to make sure the initial values are correct.
             Assert.IsTrue(initialValue == MixedRealityPose.ZeroIdentity);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.PoseData = initialValue;
@@ -1093,13 +1092,13 @@ namespace XRTK.Tests.InputSystem
             // Test to make sure that setting the same initial
             // value doesn't raise changed or updated.
             Assert.IsTrue(initialValue == MixedRealityPose.ZeroIdentity);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
         /// <summary>
         /// We test by setting the interaction data to the same object multiple times.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true.<para/>
         /// </summary>
         [Test]
@@ -1113,7 +1112,7 @@ namespace XRTK.Tests.InputSystem
             interaction.PoseData = testValue1;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.PoseData;
@@ -1121,13 +1120,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue1 == testValue1);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
+            Assert.IsFalse(interaction.ControlActivated);
 
             interaction.PoseData = testValue2;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue2 = interaction.PoseData;
@@ -1135,13 +1134,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue2 == testValue2);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
+            Assert.IsFalse(interaction.ControlActivated);
 
             interaction.PoseData = initialValue;
 
             // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue3 = interaction.PoseData;
@@ -1149,13 +1148,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue3 == initialValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
+            Assert.IsFalse(interaction.ControlActivated);
         }
 
         /// <summary>
         /// We test by initializing a new <see cref="MixedRealityInteractionMapping"/>.
-        /// We expect that <see cref="MixedRealityInteractionMapping.Changed"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == false.<para/>
         /// </summary>
         [Test]
@@ -1167,7 +1166,7 @@ namespace XRTK.Tests.InputSystem
             interaction.PoseData = testValue;
 
             // Make sure if we set the value it's true
-            Assert.IsTrue(interaction.Changed);
+            Assert.IsTrue(interaction.ControlActivated);
             Assert.IsTrue(interaction.Updated);
 
             var setValue1 = interaction.PoseData;
@@ -1175,13 +1174,13 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue1 == testValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
 
             interaction.PoseData = testValue;
 
             // Make sure if we set the same value it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
 
             // Make sure if we set the same value it's true
             Assert.IsTrue(interaction.Updated);
@@ -1191,7 +1190,7 @@ namespace XRTK.Tests.InputSystem
             // Check the values
             Assert.True(setValue2 == testValue);
             // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.Changed);
+            Assert.IsFalse(interaction.ControlActivated);
             Assert.IsFalse(interaction.Updated);
         }
 
@@ -1214,29 +1213,29 @@ namespace XRTK.Tests.InputSystem
 
             Assert.IsNotNull(initialValue);
             Assert.IsNull(initialValue.RawData);
-            Assert.IsFalse(initialValue.Changed);
+            Assert.IsFalse(initialValue.ControlActivated);
 
             initialValue.RawData = testValue1;
 
-            Assert.IsTrue(initialValue.Changed);
+            Assert.IsTrue(initialValue.ControlActivated);
 
             var setValue1 = interactions[0];
 
             Assert.IsNotNull(setValue1);
             Assert.IsNotNull(setValue1.RawData);
             Assert.AreEqual(setValue1.RawData, testValue1);
-            Assert.IsFalse(setValue1.Changed);
+            Assert.IsFalse(setValue1.ControlActivated);
 
             setValue1.RawData = testValue2;
 
-            Assert.IsTrue(setValue1.Changed);
+            Assert.IsTrue(setValue1.ControlActivated);
 
             var setValue2 = interactions[0];
 
             Assert.IsNotNull(setValue2);
             Assert.IsNotNull(setValue2.RawData);
             Assert.AreEqual(setValue2.RawData, testValue2);
-            Assert.IsFalse(setValue2.Changed);
+            Assert.IsFalse(setValue2.ControlActivated);
         }
 
         [Test]
@@ -1254,29 +1253,29 @@ namespace XRTK.Tests.InputSystem
 
             Assert.IsNotNull(initialValue);
             Assert.IsFalse(initialValue.BoolData);
-            Assert.IsFalse(initialValue.Changed);
+            Assert.IsFalse(initialValue.ControlActivated);
 
             initialValue.BoolData = testValue1;
 
-            Assert.IsTrue(initialValue.Changed);
+            Assert.IsTrue(initialValue.ControlActivated);
 
             var setValue1 = interactions[0];
 
             Assert.IsNotNull(setValue1);
             Assert.IsTrue(setValue1.BoolData);
             Assert.IsTrue(setValue1.BoolData == testValue1);
-            Assert.IsFalse(setValue1.Changed);
+            Assert.IsFalse(setValue1.ControlActivated);
 
             setValue1.BoolData = testValue2;
 
-            Assert.IsTrue(setValue1.Changed);
+            Assert.IsTrue(setValue1.ControlActivated);
 
             var setValue2 = interactions[0];
 
             Assert.IsNotNull(setValue2);
             Assert.IsFalse(setValue2.BoolData);
             Assert.IsTrue(setValue2.BoolData == testValue2);
-            Assert.IsFalse(setValue2.Changed);
+            Assert.IsFalse(setValue2.ControlActivated);
         }
 
         [Test]
@@ -1294,27 +1293,27 @@ namespace XRTK.Tests.InputSystem
 
             Assert.IsNotNull(initialValue);
             Assert.AreEqual(initialValue.FloatData, 0d, double.Epsilon);
-            Assert.IsFalse(initialValue.Changed);
+            Assert.IsFalse(initialValue.ControlActivated);
 
             initialValue.FloatData = testValue1;
 
-            Assert.IsTrue(initialValue.Changed);
+            Assert.IsTrue(initialValue.ControlActivated);
 
             var setValue1 = interactions[0];
 
             Assert.IsNotNull(setValue1);
             Assert.AreEqual(setValue1.FloatData, testValue1, double.Epsilon);
-            Assert.IsFalse(setValue1.Changed);
+            Assert.IsFalse(setValue1.ControlActivated);
 
             setValue1.FloatData = testValue2;
 
-            Assert.IsTrue(setValue1.Changed);
+            Assert.IsTrue(setValue1.ControlActivated);
 
             var setValue2 = interactions[0];
 
             Assert.IsNotNull(setValue2);
             Assert.AreEqual(setValue2.FloatData, testValue2, double.Epsilon);
-            Assert.IsFalse(setValue2.Changed);
+            Assert.IsFalse(setValue2.ControlActivated);
         }
 
         [Test]
@@ -1332,27 +1331,27 @@ namespace XRTK.Tests.InputSystem
 
             Assert.IsNotNull(initialValue);
             Assert.True(initialValue.Vector2Data == Vector2.zero);
-            Assert.IsFalse(initialValue.Changed);
+            Assert.IsFalse(initialValue.ControlActivated);
 
             initialValue.Vector2Data = testValue1;
 
-            Assert.IsTrue(initialValue.Changed);
+            Assert.IsTrue(initialValue.ControlActivated);
 
             var setValue1 = interactions[0];
 
             Assert.IsNotNull(setValue1);
             Assert.True(setValue1.Vector2Data == testValue1);
-            Assert.IsFalse(setValue1.Changed);
+            Assert.IsFalse(setValue1.ControlActivated);
 
             setValue1.Vector2Data = testValue2;
 
-            Assert.IsTrue(setValue1.Changed);
+            Assert.IsTrue(setValue1.ControlActivated);
 
             var setValue2 = interactions[0];
 
             Assert.IsNotNull(setValue2);
             Assert.True(setValue2.Vector2Data == testValue2);
-            Assert.IsFalse(setValue2.Changed);
+            Assert.IsFalse(setValue2.ControlActivated);
         }
 
         [Test]
@@ -1370,27 +1369,27 @@ namespace XRTK.Tests.InputSystem
 
             Assert.IsNotNull(initialValue);
             Assert.True(initialValue.PositionData == Vector3.zero);
-            Assert.IsFalse(initialValue.Changed);
+            Assert.IsFalse(initialValue.ControlActivated);
 
             initialValue.PositionData = testValue1;
 
-            Assert.IsTrue(initialValue.Changed);
+            Assert.IsTrue(initialValue.ControlActivated);
 
             var setValue1 = interactions[0];
 
             Assert.IsNotNull(setValue1);
             Assert.True(setValue1.PositionData == testValue1);
-            Assert.IsFalse(setValue1.Changed);
+            Assert.IsFalse(setValue1.ControlActivated);
 
             setValue1.PositionData = testValue2;
 
-            Assert.IsTrue(setValue1.Changed);
+            Assert.IsTrue(setValue1.ControlActivated);
 
             var setValue2 = interactions[0];
 
             Assert.IsNotNull(setValue2);
             Assert.True(setValue2.PositionData == testValue2);
-            Assert.IsFalse(setValue2.Changed);
+            Assert.IsFalse(setValue2.ControlActivated);
         }
 
         [Test]
@@ -1408,27 +1407,27 @@ namespace XRTK.Tests.InputSystem
 
             Assert.IsNotNull(initialValue);
             Assert.True(initialValue.RotationData.eulerAngles == Quaternion.identity.eulerAngles);
-            Assert.IsFalse(initialValue.Changed);
+            Assert.IsFalse(initialValue.ControlActivated);
 
             initialValue.RotationData = testValue1;
 
-            Assert.IsTrue(initialValue.Changed);
+            Assert.IsTrue(initialValue.ControlActivated);
 
             var setValue1 = interactions[0];
 
             Assert.IsNotNull(setValue1);
             Assert.True(setValue1.RotationData == testValue1);
-            Assert.IsFalse(setValue1.Changed);
+            Assert.IsFalse(setValue1.ControlActivated);
 
             setValue1.RotationData = testValue2;
 
-            Assert.IsTrue(setValue1.Changed);
+            Assert.IsTrue(setValue1.ControlActivated);
 
             var setValue2 = interactions[0];
 
             Assert.IsNotNull(setValue2);
             Assert.True(setValue2.RotationData == testValue2);
-            Assert.IsFalse(setValue2.Changed);
+            Assert.IsFalse(setValue2.ControlActivated);
         }
 
         [Test]
@@ -1449,11 +1448,11 @@ namespace XRTK.Tests.InputSystem
 
             Assert.IsTrue(initialSixDofValue.Position == Vector3.zero);
             Assert.IsTrue(initialSixDofValue == MixedRealityPose.ZeroIdentity);
-            Assert.IsFalse(initialValue.Changed);
+            Assert.IsFalse(initialValue.ControlActivated);
 
             initialValue.PoseData = testValue1;
 
-            Assert.IsTrue(initialValue.Changed);
+            Assert.IsTrue(initialValue.ControlActivated);
 
             var setValue1 = interactions[0];
 
@@ -1461,11 +1460,11 @@ namespace XRTK.Tests.InputSystem
             Assert.IsTrue(setValue1.PoseData == testValue1);
             Assert.IsTrue(setValue1.PoseData.Position == testValue1.Position);
             Assert.IsTrue(setValue1.PoseData.Rotation == testValue1.Rotation);
-            Assert.IsFalse(setValue1.Changed);
+            Assert.IsFalse(setValue1.ControlActivated);
 
             setValue1.PoseData = testValue2;
 
-            Assert.IsTrue(setValue1.Changed);
+            Assert.IsTrue(setValue1.ControlActivated);
 
             var setValue2 = interactions[0];
 
@@ -1473,7 +1472,7 @@ namespace XRTK.Tests.InputSystem
             Assert.IsTrue(setValue2.PoseData == testValue2);
             Assert.IsTrue(setValue2.PoseData.Position == testValue2.Position);
             Assert.IsTrue(setValue2.PoseData.Rotation == testValue2.Rotation);
-            Assert.IsFalse(setValue1.Changed);
+            Assert.IsFalse(setValue1.ControlActivated);
         }
 
         #endregion Interaction Array Tests

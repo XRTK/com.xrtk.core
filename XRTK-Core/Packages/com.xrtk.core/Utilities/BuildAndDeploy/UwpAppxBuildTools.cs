@@ -57,7 +57,7 @@ namespace XRTK.Utilities.Build
             Debug.Log("Starting Unity Appx Build...");
 
             IsBuilding = true;
-            string slnFilename = Path.Combine(buildInfo.OutputDirectory, $"{PlayerSettings.productName}.sln");
+            string slnFilename = Path.Combine(buildInfo.OutputDirectory, $"{PlayerSettings.productName}\\{PlayerSettings.productName}.sln");
 
             if (!File.Exists(slnFilename))
             {
@@ -66,7 +66,7 @@ namespace XRTK.Utilities.Build
             }
 
             // Get and validate the msBuild path...
-            var msBuildPath = await FindMsBuildPathAsync();
+            var msBuildPath = await FindMsBuildPathAsync(cancellationToken);
 
             if (!File.Exists(msBuildPath))
             {
@@ -88,15 +88,10 @@ namespace XRTK.Utilities.Build
                 return IsBuilding = false;
             }
 
-            string storagePath = Path.GetFullPath(Path.Combine(Path.Combine(Application.dataPath, ".."), buildInfo.OutputDirectory));
-            string solutionProjectPath = Path.GetFullPath(Path.Combine(storagePath, $@"{PlayerSettings.productName}.sln"));
-
-            // Now do the actual appx build
-            var processResult = await new Process().RunAsync(
-                $"\"{solutionProjectPath}\" /t:{(buildInfo.RebuildAppx ? "Rebuild" : "Build")} /p:Configuration={buildInfo.Configuration} /p:Platform={buildInfo.BuildPlatform} /verbosity:m",
-                msBuildPath,
-                !Application.isBatchMode,
-                cancellationToken);
+            var storagePath = Path.GetFullPath(Path.Combine(Path.Combine(Application.dataPath, ".."), buildInfo.OutputDirectory));
+            var solutionProjectPath = Path.GetFullPath(Path.Combine(storagePath, $"{PlayerSettings.productName}/{PlayerSettings.productName}.sln"));
+            var appxBuildArgs = $"\"{solutionProjectPath}\" /t:{(buildInfo.RebuildAppx ? "Rebuild" : "Build")} /p:Configuration={buildInfo.Configuration} /p:Platform={buildInfo.BuildPlatform} /verbosity:m";
+            var processResult = await new Process().RunAsync(appxBuildArgs, msBuildPath, !Application.isBatchMode, cancellationToken, false);
 
             switch (processResult.ExitCode)
             {
@@ -154,7 +149,7 @@ namespace XRTK.Utilities.Build
             return processResult.ExitCode == 0;
         }
 
-        private static async Task<string> FindMsBuildPathAsync()
+        private static async Task<string> FindMsBuildPathAsync(CancellationToken cancellationToken)
         {
             var result = await new Process().RunAsync(
                 new ProcessStartInfo
@@ -164,28 +159,27 @@ namespace XRTK.Utilities.Build
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
-                    Arguments = $@"/C vswhere -all -products * -requires Microsoft.Component.MSBuild -property installationPath",
-                    WorkingDirectory = @"C:\Program Files (x86)\Microsoft Visual Studio\Installer"
-                });
+                    WorkingDirectory = @"C:\Program Files (x86)\Microsoft Visual Studio\Installer",
+                    Arguments = "/c vswhere -all -products * -requires Microsoft.Component.MSBuild -property installationPath"
+                }, true, cancellationToken);
 
             foreach (var path in result.Output)
             {
-                if (!string.IsNullOrEmpty(path))
+                if (string.IsNullOrEmpty(path)) { continue; }
+
+                var paths = path.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+
+                if (paths.Length > 0)
                 {
-                    string[] paths = path.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+                    // if there are multiple visual studio installs,
+                    // prefer enterprise, then pro, then community
+                    var bestPath = paths.OrderBy(p => p.ToLower().Contains("enterprise"))
+                        .ThenBy(p => p.ToLower().Contains("professional"))
+                        .ThenBy(p => p.ToLower().Contains("community")).First();
 
-                    if (paths.Length > 0)
-                    {
-                        // if there are multiple visual studio installs,
-                        // prefer enterprise, then pro, then community
-                        var bestPath = paths.OrderBy(p => p.ToLower().Contains("enterprise"))
-                            .ThenBy(p => p.ToLower().Contains("professional"))
-                            .ThenBy(p => p.ToLower().Contains("community")).First();
-
-                        return bestPath.Contains("2019")
-                            ? $@"{bestPath}\MSBuild\Current\Bin\MSBuild.exe"
-                            : $@"{bestPath}\MSBuild\15.0\Bin\MSBuild.exe";
-                    }
+                    return bestPath.Contains("2019")
+                        ? $@"{bestPath}\MSBuild\Current\Bin\MSBuild.exe"
+                        : $@"{bestPath}\MSBuild\15.0\Bin\MSBuild.exe";
                 }
             }
 

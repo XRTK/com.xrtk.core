@@ -362,7 +362,7 @@ namespace XRTK.Utilities.Build
             if (GUILayout.Button("Open in Visual Studio", GUILayout.Width(HALF_WIDTH)))
             {
                 // Open SLN
-                string slnFilename = Path.Combine(BuildDeployPreferences.BuildDirectory, $"{PlayerSettings.productName}.sln");
+                string slnFilename = Path.Combine(BuildDeployPreferences.BuildDirectory, $"{PlayerSettings.productName}\\{PlayerSettings.productName}.sln");
 
                 if (File.Exists(slnFilename))
                 {
@@ -574,7 +574,7 @@ namespace XRTK.Utilities.Build
             GUILayout.FlexibleSpace();
 
             // Open AppX packages location
-            string appxDirectory = curScriptingBackend == ScriptingImplementation.IL2CPP ? $"/AppPackages/{PlayerSettings.productName}" : $"/{PlayerSettings.productName}/AppPackages";
+            string appxDirectory = $"\\{PlayerSettings.productName}\\AppPackages";
             string appxBuildPath = Path.GetFullPath($"{BuildDeployPreferences.BuildDirectory}{appxDirectory}");
             GUI.enabled = Builds.Count > 0 && !string.IsNullOrEmpty(appxBuildPath);
 
@@ -611,7 +611,7 @@ namespace XRTK.Utilities.Build
                 if (GUILayout.Button("Build APPX", GUILayout.Width(HALF_WIDTH)))
                 {
                     // Check if solution exists
-                    string slnFilename = Path.Combine(BuildDeployPreferences.BuildDirectory, $"{PlayerSettings.productName}.sln");
+                    string slnFilename = Path.Combine(BuildDeployPreferences.BuildDirectory, $"{PlayerSettings.productName}\\{PlayerSettings.productName}.sln");
 
                     if (File.Exists(slnFilename))
                     {
@@ -659,7 +659,6 @@ namespace XRTK.Utilities.Build
             }
 
             GUI.enabled = true;
-
             GUILayout.FlexibleSpace();
 
             var previousLabelWidth = EditorGUIUtility.labelWidth;
@@ -1123,14 +1122,14 @@ namespace XRTK.Utilities.Build
         {
             Builds.Clear();
 
-            var curScriptingBackend = PlayerSettings.GetScriptingBackend(BuildTargetGroup.WSA);
-            string appxDirectory = curScriptingBackend == ScriptingImplementation.IL2CPP ? $"AppPackages\\{PlayerSettings.productName}" : $"{PlayerSettings.productName}\\AppPackages";
+            string appxDirectory = $"{PlayerSettings.productName}\\AppPackages\\{PlayerSettings.productName}";
 
             try
             {
                 AppPackageDirectories.Clear();
-                string[] buildList = Directory.GetDirectories(BuildDeployPreferences.AbsoluteBuildDirectory, "*", SearchOption.AllDirectories);
-                foreach (string appBuild in buildList)
+                var buildList = Directory.GetDirectories(BuildDeployPreferences.AbsoluteBuildDirectory, "*", SearchOption.AllDirectories);
+
+                foreach (var appBuild in buildList)
                 {
                     if (appBuild.Contains(appxDirectory) && !appBuild.Contains($"{appxDirectory}\\"))
                     {
@@ -1138,10 +1137,9 @@ namespace XRTK.Utilities.Build
                     }
                 }
 
-                IEnumerable<string> selectedDirectories =
-                    from string directory in AppPackageDirectories
-                    orderby Directory.GetLastWriteTime(directory) descending
-                    select Path.GetFullPath(directory);
+                var selectedDirectories = from string directory in AppPackageDirectories
+                                          orderby Directory.GetLastWriteTime(directory) descending
+                                          select Path.GetFullPath(directory);
                 Builds.AddRange(selectedDirectories);
             }
             catch (DirectoryNotFoundException)
@@ -1157,12 +1155,12 @@ namespace XRTK.Utilities.Build
         private static string CalcMostRecentBuild()
         {
             UpdateBuilds();
-            DateTime mostRecent = DateTime.MinValue;
-            string mostRecentBuild = string.Empty;
+            var mostRecent = DateTime.MinValue;
+            var mostRecentBuild = string.Empty;
 
             foreach (var fullBuildLocation in Builds)
             {
-                DateTime directoryDate = Directory.GetLastWriteTime(fullBuildLocation);
+                var directoryDate = Directory.GetLastWriteTime(fullBuildLocation);
 
                 if (directoryDate > mostRecent)
                 {
@@ -1177,12 +1175,14 @@ namespace XRTK.Utilities.Build
         private void UpdatePortalConnections()
         {
             targetIps = new string[portalConnections.Connections.Count];
+
             if (currentConnectionInfoIndex > portalConnections.Connections.Count - 1)
             {
                 currentConnectionInfoIndex = portalConnections.Connections.Count - 1;
             }
 
             targetIps[0] = LOCAL_MACHINE;
+
             for (int i = 1; i < targetIps.Length; i++)
             {
                 if (string.IsNullOrEmpty(portalConnections.Connections[i].MachineName))
@@ -1194,6 +1194,7 @@ namespace XRTK.Utilities.Build
             }
 
             var devicePortalConnections = new DevicePortalConnections();
+
             for (var i = 0; i < portalConnections.Connections.Count; i++)
             {
                 devicePortalConnections.Connections.Add(portalConnections.Connections[i]);

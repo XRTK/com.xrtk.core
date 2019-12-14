@@ -47,7 +47,7 @@ When you start a new project, we provide a default configuration with every syst
 - **Clone & Customize:** Copies all of the default profile settings for you and enables them to be editable.
   > **Note:** This is great for tweaking existing options to fit your edge case needs.
 - **Create new profiles:** Start with a blank profile with everything turned off by default.
-  > **Note:** This is great for slowly integratig the Mixed Reality Toolkit into an existing project.
+  > **Note:** This is great for slowly integrating the Mixed Reality Toolkit into an existing project.
 
 Each profile can be individually cloned and customized to your project's needs:
 

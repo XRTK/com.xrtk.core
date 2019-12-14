@@ -1,18 +1,47 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
+using NUnit.Framework;
 using System.Diagnostics;
+using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
-using NUnit.Framework;
-using UnityEngine;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Tests.InputSystem
 {
     public class TestFixture_02_InteractionDefinitionTests
     {
+        #region Utilities
+
+        private static void Assert_NoChange_NoUpdate(MixedRealityInteractionMapping mapping)
+        {
+            Assert.IsFalse(mapping.ControlActivated);
+            Assert.IsFalse(mapping.Updated);
+        }
+
+        private static void Assert_Change_NoUpdate(MixedRealityInteractionMapping mapping)
+        {
+            Assert.IsTrue(mapping.ControlActivated);
+            Assert.IsFalse(mapping.Updated);
+        }
+
+        private static void Assert_NoChange_Update(MixedRealityInteractionMapping mapping)
+        {
+            Assert.IsFalse(mapping.ControlActivated);
+            Assert.IsTrue(mapping.Updated);
+        }
+
+        private static void Assert_Change_Update(MixedRealityInteractionMapping mapping)
+        {
+            Assert.IsTrue(mapping.ControlActivated);
+            Assert.IsTrue(mapping.Updated);
+        }
+
+        #endregion Utilities
+
         #region objects
 
         public MixedRealityInteractionMapping InitializeRawInteractionMapping()
@@ -171,103 +200,77 @@ namespace XRTK.Tests.InputSystem
 
             // Test to make sure the initial values are correct.
             Assert.IsFalse(initialValue);
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // ReSharper disable once ConditionIsAlwaysTrueOrFalse
             interaction.BoolData = initialValue;
 
             // Test to make sure that setting the same initial
             // value doesn't raise changed or updated.
             Assert.IsFalse(initialValue);
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         /// <summary>
         /// We test by setting the interaction data to two different values.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == true, then false after each subsequent check before assigning a new value.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == false.<para/>
         /// </summary>
         [Test]
-        public void Test_02_02_BoolChangedAndUpdated()
+        public void Test_02_02_Bool_Changed_NoUpdate()
         {
             var interaction = InitializeBoolInteractionMapping();
             const bool testValue1 = true;
             const bool testValue2 = false;
 
+            // Set the value
             interaction.BoolData = testValue1;
+            Assert_Change_NoUpdate(interaction);
 
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
+            // Check the value
+            Assert.IsTrue(interaction.BoolData);
+            Assert.True(interaction.BoolData == testValue1);
+            Assert_NoChange_NoUpdate(interaction);
 
-            var setValue1 = interaction.BoolData;
-
-            // Check the values
-            Assert.IsTrue(setValue1);
-            Assert.True(setValue1 == testValue1);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
-
+            // Set the value
             interaction.BoolData = testValue2;
+            Assert_Change_NoUpdate(interaction);
 
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue2 = interaction.BoolData;
-
-            // Check the values
-            Assert.IsFalse(setValue2);
-            Assert.True(setValue2 == testValue2);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            // Check the value
+            Assert.IsFalse(interaction.BoolData);
+            Assert.True(interaction.BoolData == testValue2);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         /// <summary>
         /// We test by setting the interaction data to the same object multiple times.<para/>
+        /// Check that the value can be changed, then subsequent identical values show no change.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == false.<para/>
         /// </summary>
         [Test]
-        public void Test_02_03_BoolNoChangeAndUpdated()
+        public void Test_02_03_Bool_NoChange_NoUpdate()
         {
             var interaction = InitializeBoolInteractionMapping();
             const bool testValue = true;
 
+            // Set the value
             interaction.BoolData = testValue;
+            Assert_Change_NoUpdate(interaction);
 
-            // Make sure if we set the value it's true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue1 = interaction.BoolData;
-
-            // Check the values
+            // Check the value
             Assert.IsTrue(testValue);
-            Assert.True(setValue1 == testValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.BoolData == testValue);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the value
             interaction.BoolData = testValue;
+            Assert_NoChange_NoUpdate(interaction);
 
-            // Make sure if we set the same value it's false
-            Assert.IsFalse(interaction.ControlActivated);
-
-            // Make sure if we set the same value it's true
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue2 = interaction.BoolData;
-
-            // Check the values
+            // Check the value
             Assert.IsTrue(testValue);
-            Assert.True(setValue2 == testValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.BoolData == testValue);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         #endregion bools
@@ -292,113 +295,163 @@ namespace XRTK.Tests.InputSystem
 
             // Test to make sure the initial values are correct.
             Assert.AreEqual(0d, initialValue, double.Epsilon);
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert_NoChange_NoUpdate(interaction);
 
             interaction.FloatData = initialValue;
 
             // Test to make sure that setting the same initial
             // value doesn't raise changed or updated.
             Assert.AreEqual(0d, initialValue, double.Epsilon);
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         /// <summary>
-        /// We test by setting the interaction data to two different values.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// </summary>
         [Test]
-        public void Test_03_02_FloatChangedAndUpdated()
+        public void Test_03_02_Float_Changed_Updated()
         {
             var interaction = InitializeFloatInteractionMapping();
-            var initialValue = interaction.FloatData;
-            const float testValue1 = 1f;
-            const float testValue2 = 9001f;
 
-            interaction.FloatData = testValue1;
+            // Initialize the bool values
+            var initialBoolValue = interaction.BoolData;
+            const bool boolValue1 = true;
+            const bool boolValue2 = false;
 
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
+            // Initialize the float values
+            var initialFloatValue = interaction.FloatData;
+            const float floatValue1 = 1f;
+            const float floatValue2 = 9001f;
 
-            var setValue1 = interaction.FloatData;
+            // Set the bool value
+            interaction.BoolData = boolValue1;
+            Assert_Change_NoUpdate(interaction);
 
-            // Check the values
-            Assert.AreEqual(testValue1, setValue1, double.Epsilon);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
-
-            interaction.FloatData = testValue2;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue2 = interaction.FloatData;
+            // Set the float value
+            interaction.FloatData = floatValue1;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.AreEqual(testValue2, setValue2, double.Epsilon);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.IsTrue(boolValue1 == interaction.BoolData);
+            Assert.AreEqual(floatValue1, interaction.FloatData, double.Epsilon);
 
-            interaction.FloatData = initialValue;
+            Assert_NoChange_NoUpdate(interaction);
 
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
+            // Set the bool value
+            interaction.BoolData = boolValue2;
+            Assert_Change_NoUpdate(interaction);
 
-            var setValue3 = interaction.FloatData;
+            // Set the float value
+            interaction.FloatData = floatValue2;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.AreEqual(initialValue, setValue3, double.Epsilon);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.IsTrue(boolValue2 == interaction.BoolData);
+            Assert.AreEqual(floatValue2, interaction.FloatData, double.Epsilon);
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Set the bool value
+            interaction.BoolData = initialBoolValue;
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Set the float value
+            interaction.FloatData = initialFloatValue;
+            Assert_NoChange_Update(interaction);
+
+            // Check the values
+            Assert.IsTrue(initialBoolValue == interaction.BoolData);
+            Assert.AreEqual(initialFloatValue, interaction.FloatData, double.Epsilon);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         /// <summary>
-        /// We test by setting the interaction data to the same object multiple times.<para/>
         /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
-        /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// </summary>
         [Test]
-        public void Test_03_03_FloatNoChangeAndUpdated()
+        public void Test_03_03_Float_NoChange_Updated()
         {
             var interaction = InitializeFloatInteractionMapping();
+            var initialValue = interaction.FloatData;
             const float testValue = 1f;
 
+            // Set the values
             interaction.FloatData = testValue;
-
-            // Make sure if we set the value it's true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue1 = interaction.FloatData;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.AreEqual(testValue, setValue1, double.Epsilon);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.AreEqual(testValue, interaction.FloatData, double.Epsilon);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.FloatData = testValue;
-
-            // Make sure if we set the same value it's false
-            Assert.IsFalse(interaction.ControlActivated);
-
-            // Make sure if we set the same value it's true
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue2 = interaction.FloatData;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.AreEqual(testValue, setValue2, double.Epsilon);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.AreEqual(testValue, interaction.FloatData, double.Epsilon);
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Set the values
+            interaction.FloatData = initialValue;
+            Assert_NoChange_Update(interaction);
+
+            // Check the values
+            Assert.AreEqual(initialValue, interaction.FloatData, double.Epsilon);
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Set the values
+            interaction.FloatData = initialValue;
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Check the values
+            Assert.AreEqual(initialValue, interaction.FloatData, double.Epsilon);
+            Assert_NoChange_NoUpdate(interaction);
+        }
+
+        /// <summary>
+        /// We expect that <see cref="MixedRealityInteractionMapping.ControlActivated"/> == false.<para/>
+        /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
+        /// </summary>
+        [Test]
+        public void Test_03_03_Float_NoChange_Updated_Inverted()
+        {
+            var interaction = new MixedRealityInteractionMapping(1, string.Empty, AxisType.SingleAxis, DeviceInputType.None, MixedRealityInputAction.None, KeyCode.None, string.Empty, string.Empty, true);
+            var initialValue = interaction.FloatData;
+            const float testValue1 = 1f;
+            const float testValue2 = -1f;
+
+            // Set the values
+            interaction.FloatData = testValue1;
+            Assert_NoChange_Update(interaction);
+
+            // Check the values
+            Assert.AreEqual(testValue1 * -1f, interaction.FloatData, double.Epsilon);
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Set the values
+            interaction.FloatData = testValue2;
+            Assert_NoChange_Update(interaction);
+
+            // Check the values
+            Assert.AreEqual(testValue2 * -1f, interaction.FloatData, double.Epsilon);
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Set the values
+            interaction.FloatData = initialValue;
+            Assert_NoChange_Update(interaction);
+
+            // Check the values
+            Assert.AreEqual(initialValue * -1f, interaction.FloatData, double.Epsilon);
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Set the values
+            interaction.FloatData = initialValue;
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Check the values
+            Assert.AreEqual(initialValue * -1f, interaction.FloatData, double.Epsilon);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         #endregion float
@@ -423,16 +476,16 @@ namespace XRTK.Tests.InputSystem
 
             // Test to make sure the initial values are correct.
             Assert.True(initialValue == Vector2.zero);
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+
+            Assert_NoChange_NoUpdate(interaction);
 
             interaction.Vector2Data = initialValue;
 
             // Test to make sure that setting the same initial
             // value doesn't raise changed or updated.
             Assert.True(initialValue == Vector2.zero);
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         [Test]
@@ -590,7 +643,7 @@ namespace XRTK.Tests.InputSystem
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// </summary>
         [Test]
-        public void Test_04_02_01_Vector2ChangedAndUpdated()
+        public void Test_04_02_01_Vector2_Changed_Updated()
         {
             var interaction = InitializeVector2InteractionMapping();
             var initialValue = interaction.Vector2Data;
@@ -599,75 +652,45 @@ namespace XRTK.Tests.InputSystem
             var testValue3 = new Vector2(0.25f, 1f);
             var testValue4 = new Vector2(0.75f, 1f);
 
+            // set the values
             interaction.Vector2Data = testValue1;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue1 = interaction.Vector2Data;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue1 == testValue1);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.Vector2Data == testValue1);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.Vector2Data = testValue2;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue2 = interaction.Vector2Data;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue2 == testValue2);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.Vector2Data == testValue2);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.Vector2Data = testValue3;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue3 = interaction.Vector2Data;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue3 == testValue3);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.Vector2Data == testValue3);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.Vector2Data = testValue4;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue4 = interaction.Vector2Data;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue4 == testValue4);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.Vector2Data == testValue4);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.Vector2Data = initialValue;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue5 = interaction.Vector2Data;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue5 == initialValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.Vector2Data == initialValue);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         /// <summary>
@@ -676,84 +699,55 @@ namespace XRTK.Tests.InputSystem
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true, then false after each subsequent check before assigning a new value.<para/>
         /// </summary>
         [Test]
-        public void Test_04_02_02_Vector2ChangedAndUpdated_Inverted()
+        public void Test_04_02_02_Vector2_NoChanged_Updated_Inverted()
         {
             var interaction = new MixedRealityInteractionMapping(1, string.Empty, AxisType.DualAxis, DeviceInputType.None, MixedRealityInputAction.None, KeyCode.None, string.Empty, string.Empty, true, true);
+
             var initialValue = interaction.Vector2Data;
             var testValue1 = Vector2.up;
             var testValue2 = Vector2.down;
             var testValue3 = new Vector2(0.25f, 1f);
             var testValue4 = new Vector2(0.75f, 1f);
 
+            // Set the values
             interaction.Vector2Data = testValue1;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue1 = interaction.Vector2Data;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue1 == testValue1 * -1f);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.Vector2Data == testValue1 * -1f);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.Vector2Data = testValue2;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue2 = interaction.Vector2Data;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue2 == testValue2 * -1f);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.Vector2Data == testValue2 * -1f);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.Vector2Data = testValue3;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue3 = interaction.Vector2Data;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue3 == testValue3 * -1f);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.Vector2Data == testValue3 * -1f);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.Vector2Data = testValue4;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue4 = interaction.Vector2Data;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue4 == testValue4 * -1f);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.Vector2Data == testValue4 * -1f);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.Vector2Data = initialValue;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue5 = interaction.Vector2Data;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue5 == initialValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.Vector2Data == initialValue);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         /// <summary>
@@ -762,40 +756,25 @@ namespace XRTK.Tests.InputSystem
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true.<para/>
         /// </summary>
         [Test]
-        public void Test_04_03_Vector2NoChangeAndUpdated()
+        public void Test_04_03_Vector2_NoChange_Updated()
         {
             var interaction = InitializeVector2InteractionMapping();
             var testValue = Vector2.one;
 
+            // Set the values
             interaction.Vector2Data = testValue;
-
-            // Make sure if we set the value it's true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue1 = interaction.Vector2Data;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue1 == testValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.Vector2Data == testValue);
+            Assert_NoChange_NoUpdate(interaction);
 
             interaction.Vector2Data = testValue;
-
-            // Make sure if we set the same value it's false
-            Assert.IsFalse(interaction.ControlActivated);
-
-            // Make sure if we set the same value it's true
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue2 = interaction.Vector2Data;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue2 == testValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.Vector2Data == testValue);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         #endregion Vector2
@@ -820,16 +799,14 @@ namespace XRTK.Tests.InputSystem
 
             // Test to make sure the initial values are correct.
             Assert.True(initialValue == Vector3.zero);
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert_NoChange_NoUpdate(interaction);
 
             interaction.PositionData = initialValue;
 
             // Test to make sure that setting the same initial
             // value doesn't raise changed or updated.
             Assert.True(initialValue == Vector3.zero);
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         /// <summary>
@@ -838,54 +815,36 @@ namespace XRTK.Tests.InputSystem
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true.<para/>
         /// </summary>
         [Test]
-        public void Test_05_02_Vector3ChangedAndUpdated()
+        public void Test_05_02_Vector3_NoChange_Updated()
         {
             var interaction = InitializeVector3InteractionMapping();
             var initialValue = interaction.PositionData;
             var testValue1 = Vector3.one;
             var testValue2 = Vector3.one * 0.5f;
 
+            // Set the values
             interaction.PositionData = testValue1;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue1 = interaction.PositionData;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue1 == testValue1);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.ControlActivated);
+            Assert.True(interaction.PositionData == testValue1);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.PositionData = testValue2;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue2 = interaction.PositionData;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue2 == testValue2);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.ControlActivated);
+            Assert.True(interaction.PositionData == testValue2);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.PositionData = initialValue;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue3 = interaction.PositionData;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue3 == initialValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.ControlActivated);
+            Assert.True(interaction.PositionData == initialValue);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         /// <summary>
@@ -894,40 +853,35 @@ namespace XRTK.Tests.InputSystem
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == false.<para/>
         /// </summary>
         [Test]
-        public void Test_05_03_Vector3NoChangeAndUpdated()
+        public void Test_05_03_Vector3_NoChange_NoUpdate()
         {
             var interaction = InitializeVector3InteractionMapping();
+            var initialValue = interaction.PositionData;
             var testValue = Vector3.one;
 
+            // Set the values
             interaction.PositionData = testValue;
-
-            // Make sure if we set the value it's true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue1 = interaction.PositionData;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue1 == testValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.PositionData == testValue);
+            Assert_NoChange_NoUpdate(interaction);
 
-            interaction.PositionData = testValue;
-
-            // Make sure if we set the same value it's false
-            Assert.IsFalse(interaction.ControlActivated);
-
-            // Make sure if we set the same value it's true
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue2 = interaction.PositionData;
+            // Set the values
+            interaction.PositionData = initialValue;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue2 == testValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.PositionData == initialValue);
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Set the values
+            interaction.PositionData = initialValue;
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Check the values
+            Assert.True(interaction.PositionData == initialValue);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         #endregion Vector3
@@ -952,16 +906,14 @@ namespace XRTK.Tests.InputSystem
 
             // Test to make sure the initial values are correct.
             Assert.IsTrue(initialValue == Quaternion.identity);
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert_NoChange_NoUpdate(interaction);
 
             interaction.RotationData = initialValue;
 
             // Test to make sure that setting the same initial
             // value doesn't raise changed or updated.
             Assert.IsTrue(initialValue == Quaternion.identity);
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         /// <summary>
@@ -970,54 +922,36 @@ namespace XRTK.Tests.InputSystem
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true.<para/>
         /// </summary>
         [Test]
-        public void Test_06_02_QuaternionChangedAndUpdated()
+        public void Test_06_02_Quaternion_NoChanged_Updated()
         {
             var interaction = InitializeQuaternionInteractionMapping();
             var initialValue = interaction.RotationData;
             var testValue1 = Quaternion.Euler(45f, 45f, 45f);
             var testValue2 = Quaternion.Euler(270f, 270f, 270f);
 
+            // Set the values
             interaction.RotationData = testValue1;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue1 = interaction.RotationData;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue1 == testValue1);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.ControlActivated);
+            Assert.True(interaction.RotationData == testValue1);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.RotationData = testValue2;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue2 = interaction.RotationData;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue2 == testValue2);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.ControlActivated);
+            Assert.True(interaction.RotationData == testValue2);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.RotationData = initialValue;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue3 = interaction.RotationData;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue3 == initialValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.ControlActivated);
+            Assert.True(interaction.RotationData == initialValue);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         /// <summary>
@@ -1026,40 +960,35 @@ namespace XRTK.Tests.InputSystem
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == false.<para/>
         /// </summary>
         [Test]
-        public void Test_06_03_QuaternionNoChangeAndUpdated()
+        public void Test_06_03_Quaternion_NoChange_NoUpdate()
         {
             var interaction = InitializeQuaternionInteractionMapping();
+            var initialValue = interaction.RotationData;
             var testValue = Quaternion.Euler(45f, 45f, 45f);
 
+            // Set the values
             interaction.RotationData = testValue;
-
-            // Make sure if we set the value it's true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue1 = interaction.RotationData;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue1 == testValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.RotationData == testValue);
+            Assert_NoChange_NoUpdate(interaction);
 
-            interaction.RotationData = testValue;
-
-            // Make sure if we set the same value it's false
-            Assert.IsFalse(interaction.ControlActivated);
-
-            // Make sure if we set the same value it's true
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue2 = interaction.RotationData;
+            // Set the values
+            interaction.RotationData = initialValue;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue2 == testValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.RotationData == initialValue);
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Set the values
+            interaction.RotationData = initialValue;
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Check the values
+            Assert.True(interaction.RotationData == initialValue);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         #endregion Quaternion
@@ -1084,16 +1013,14 @@ namespace XRTK.Tests.InputSystem
 
             // Test to make sure the initial values are correct.
             Assert.IsTrue(initialValue == MixedRealityPose.ZeroIdentity);
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert_NoChange_NoUpdate(interaction);
 
             interaction.PoseData = initialValue;
 
             // Test to make sure that setting the same initial
             // value doesn't raise changed or updated.
             Assert.IsTrue(initialValue == MixedRealityPose.ZeroIdentity);
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         /// <summary>
@@ -1102,54 +1029,36 @@ namespace XRTK.Tests.InputSystem
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == true.<para/>
         /// </summary>
         [Test]
-        public void Test_07_02_MixedRealityPoseChangedAndUpdated()
+        public void Test_07_02_MixedRealityPose_NoChanged_Updated()
         {
             var interaction = InitializeMixedRealityPoseInteractionMapping();
             var initialValue = interaction.PoseData;
             var testValue1 = new MixedRealityPose(Vector3.up, Quaternion.identity);
             var testValue2 = new MixedRealityPose(Vector3.one, new Quaternion(45f, 45f, 45f, 45f));
 
+            // Set the values
             interaction.PoseData = testValue1;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue1 = interaction.PoseData;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue1 == testValue1);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.ControlActivated);
+            Assert.True(interaction.PoseData == testValue1);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.PoseData = testValue2;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue2 = interaction.PoseData;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue2 == testValue2);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.ControlActivated);
+            Assert.True(interaction.PoseData == testValue2);
+            Assert_NoChange_NoUpdate(interaction);
 
+            // Set the values
             interaction.PoseData = initialValue;
-
-            // Make sure the first query after value assignment is true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue3 = interaction.PoseData;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue3 == initialValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.ControlActivated);
+            Assert.True(interaction.PoseData == initialValue);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         /// <summary>
@@ -1158,40 +1067,35 @@ namespace XRTK.Tests.InputSystem
         /// We expect that <see cref="MixedRealityInteractionMapping.Updated"/> == false.<para/>
         /// </summary>
         [Test]
-        public void Test_07_03_MixedRealityPoseNoChangeAndUpdated()
+        public void Test_07_03_MixedRealityPose_NoChange_NoUpdate()
         {
             var interaction = new MixedRealityInteractionMapping(1, string.Empty, AxisType.SixDof, DeviceInputType.None, MixedRealityInputAction.None);
+            var initialValue = interaction.PoseData;
             var testValue = new MixedRealityPose(Vector3.up, Quaternion.identity);
 
+            // Set the values
             interaction.PoseData = testValue;
-
-            // Make sure if we set the value it's true
-            Assert.IsTrue(interaction.ControlActivated);
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue1 = interaction.PoseData;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue1 == testValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.PoseData == testValue);
+            Assert_NoChange_NoUpdate(interaction);
 
-            interaction.PoseData = testValue;
-
-            // Make sure if we set the same value it's false
-            Assert.IsFalse(interaction.ControlActivated);
-
-            // Make sure if we set the same value it's true
-            Assert.IsTrue(interaction.Updated);
-
-            var setValue2 = interaction.PoseData;
+            // Set the values
+            interaction.PoseData = initialValue;
+            Assert_NoChange_Update(interaction);
 
             // Check the values
-            Assert.True(setValue2 == testValue);
-            // Make sure the second time we query it's false
-            Assert.IsFalse(interaction.ControlActivated);
-            Assert.IsFalse(interaction.Updated);
+            Assert.True(interaction.PoseData == initialValue);
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Set the values
+            interaction.PoseData = initialValue;
+            Assert_NoChange_NoUpdate(interaction);
+
+            // Check the values
+            Assert.True(interaction.PoseData == initialValue);
+            Assert_NoChange_NoUpdate(interaction);
         }
 
         #endregion MixedRealityPose

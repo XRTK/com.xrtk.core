@@ -429,7 +429,7 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.Raw)
                 {
-                    Debug.LogError($"SetRawValue is only valid for AxisType.Raw InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"{nameof(RawData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.Raw)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
                 ControlActivated = rawData != value;
@@ -451,7 +451,7 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.Digital && AxisType != AxisType.SingleAxis && AxisType != AxisType.DualAxis)
                 {
-                    Debug.LogError($"SetBoolValue is only valid for AxisType.Digital, AxisType.SingleAxis, or AxisType.DualAxis InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"{nameof(BoolData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.SingleAxis)} or {nameof(AxisType.Digital)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
                 ControlActivated = boolData != value;
@@ -472,7 +472,7 @@ namespace XRTK.Definitions.Devices
                 if (AxisType != AxisType.Digital &&
                     AxisType != AxisType.SingleAxis)
                 {
-                    Debug.LogError($"SetFloatValue is only valid for AxisType.SingleAxis & AxisType.Digital InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"{nameof(FloatData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.SingleAxis)} or {nameof(AxisType.Digital)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
                 var newValue = value;
@@ -483,7 +483,7 @@ namespace XRTK.Definitions.Devices
                 }
 
                 Updated = !floatData.Equals(newValue) || !floatData.Equals(0f);
-                floatData = value;
+                floatData = newValue;
             }
         }
 
@@ -499,7 +499,7 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.DualAxis)
                 {
-                    Debug.LogError($"SetVector2Value is only valid for AxisType.DualAxis InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"{nameof(Vector2Data)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.DualAxis)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
                 var newValue = value;
@@ -514,7 +514,7 @@ namespace XRTK.Definitions.Devices
                     newValue.y *= -1f;
                 }
 
-                Updated = !newValue.x.Equals(0f) && !newValue.y.Equals(0f);
+                Updated = vector2Data != newValue || !newValue.x.Equals(0f) && !newValue.y.Equals(0f);
                 vector2Data = newValue;
             }
         }
@@ -531,10 +531,10 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.ThreeDofPosition)
                 {
-                    Debug.LogError($"{nameof(AxisType.ThreeDofPosition)} is only valid for {nameof(MixedRealityInteractionMapping)}s with positional data.\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"{nameof(PositionData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.ThreeDofPosition)}.\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Updated = !value.x.Equals(0f) && !value.y.Equals(0f) && !value.z.Equals(0f);
+                Updated = positionData != value || !value.x.Equals(0f) && !value.y.Equals(0f) && !value.z.Equals(0f);
                 positionData = value;
             }
         }
@@ -551,10 +551,10 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.ThreeDofRotation)
                 {
-                    Debug.LogError($"SetRotationValue is only valid for AxisType.ThreeDoFRotation InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"{nameof(RotationData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.ThreeDofRotation)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Updated = !value.x.Equals(0f) && !value.y.Equals(0f) && !value.z.Equals(0f) && value.w.Equals(1f);
+                Updated = rotationData != value || !value.x.Equals(0f) && !value.y.Equals(0f) && !value.z.Equals(0f) && value.w.Equals(1f);
                 rotationData = value;
             }
         }
@@ -562,7 +562,7 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// The Pose data value.
         /// </summary>
-        /// <remarks>Only supported for a SixDof mapping axis type</remarks>
+        /// <remarks>Only supported for <see cref="Utilities.AxisType.SixDof"/> <see cref="AxisType"/>s</remarks>
         public MixedRealityPose PoseData
         {
             get => poseData;
@@ -570,10 +570,10 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.SixDof)
                 {
-                    Debug.LogError($"SetPoseValue is only valid for AxisType.SixDoF InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"{nameof(PoseData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.SixDof)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Updated = !value.Equals(MixedRealityPose.ZeroIdentity);
+                Updated = poseData != value || !value.Equals(MixedRealityPose.ZeroIdentity);
                 poseData = value;
                 positionData = poseData.Position;
                 rotationData = poseData.Rotation;

@@ -46,7 +46,7 @@ namespace XRTK.Definitions.Devices
             positionData = Vector3.zero;
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
-            changed = false;
+            activated = false;
             updated = false;
             inputName = string.Empty;
         }
@@ -76,7 +76,7 @@ namespace XRTK.Definitions.Devices
             positionData = Vector3.zero;
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
-            changed = false;
+            activated = false;
             updated = false;
             inputName = string.Empty;
             invertXAxis = false;
@@ -108,7 +108,7 @@ namespace XRTK.Definitions.Devices
             positionData = Vector3.zero;
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
-            changed = false;
+            activated = false;
             updated = false;
             keyCode = KeyCode.None;
             invertXAxis = false;
@@ -147,7 +147,7 @@ namespace XRTK.Definitions.Devices
             positionData = Vector3.zero;
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
-            changed = false;
+            activated = false;
             updated = false;
             inputName = string.Empty;
         }
@@ -184,7 +184,7 @@ namespace XRTK.Definitions.Devices
             positionData = Vector3.zero;
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
-            changed = false;
+            activated = false;
             updated = false;
             keyCode = KeyCode.None;
         }
@@ -213,7 +213,7 @@ namespace XRTK.Definitions.Devices
             positionData = Vector3.zero;
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
-            changed = false;
+            activated = false;
             updated = false;
         }
 
@@ -354,25 +354,25 @@ namespace XRTK.Definitions.Devices
             }
         }
 
-        private bool changed;
+        private bool activated;
 
         /// <summary>
-        /// Has the value changed since the last reading.
+        /// Has the control mechanism been given a signal that deviates from its initial state?
         /// </summary>
-        public bool Changed
+        public bool ControlActivated
         {
             get
             {
-                bool returnValue = changed;
+                bool returnValue = activated;
 
-                if (changed)
+                if (activated)
                 {
-                    changed = false;
+                    activated = false;
                 }
 
                 return returnValue;
             }
-            private set => changed = value;
+            private set => activated = value;
         }
 
         private bool updated;
@@ -432,9 +432,9 @@ namespace XRTK.Definitions.Devices
                     Debug.LogError($"SetRawValue is only valid for AxisType.Raw InteractionMappings\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Changed = rawData != value;
+                ControlActivated = rawData != value;
                 // use the internal reading for changed so we don't reset it.
-                Updated = changed || value != null;
+                Updated = activated || value != null;
                 rawData = value;
             }
         }
@@ -454,9 +454,7 @@ namespace XRTK.Definitions.Devices
                     Debug.LogError($"SetBoolValue is only valid for AxisType.Digital, AxisType.SingleAxis, or AxisType.DualAxis InteractionMappings\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Changed = boolData != value;
-                // use the internal reading for changed so we don't reset it.
-                // Updated = changed || value;
+                ControlActivated = boolData != value;
                 boolData = value;
             }
         }
@@ -484,8 +482,6 @@ namespace XRTK.Definitions.Devices
                     newValue *= -1f;
                 }
 
-                // Changed = !floatData.Equals(newValue);
-                // use the internal reading for changed so we don't reset it.
                 Updated = !floatData.Equals(newValue) || !floatData.Equals(0f);
                 floatData = value;
             }
@@ -518,9 +514,7 @@ namespace XRTK.Definitions.Devices
                     newValue.y *= -1f;
                 }
 
-                Changed = vector2Data != newValue;
-                // use the internal reading for changed so we don't reset it.
-                Updated = changed || !newValue.Equals(Vector2.zero);
+                Updated = !newValue.x.Equals(0f) && !newValue.y.Equals(0f);
                 vector2Data = newValue;
             }
         }
@@ -537,14 +531,10 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.ThreeDofPosition)
                 {
-                    {
-                        Debug.LogError($"SetPositionValue is only valid for AxisType.ThreeDoFPosition InteractionMappings\nPlease check the {inputType} mapping for the current controller");
-                    }
+                    Debug.LogError($"{nameof(AxisType.ThreeDofPosition)} is only valid for {nameof(MixedRealityInteractionMapping)}s with positional data.\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Changed = positionData != value;
-                // use the internal reading for changed so we don't reset it.
-                Updated = changed || !value.Equals(Vector3.zero);
+                Updated = !value.x.Equals(0f) && !value.y.Equals(0f) && !value.z.Equals(0f);
                 positionData = value;
             }
         }
@@ -564,9 +554,7 @@ namespace XRTK.Definitions.Devices
                     Debug.LogError($"SetRotationValue is only valid for AxisType.ThreeDoFRotation InteractionMappings\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Changed = rotationData != value;
-                // use the internal reading for changed so we don't reset it.
-                Updated = changed || !value.Equals(Quaternion.identity);
+                Updated = !value.x.Equals(0f) && !value.y.Equals(0f) && !value.z.Equals(0f) && value.w.Equals(1f);
                 rotationData = value;
             }
         }
@@ -585,9 +573,7 @@ namespace XRTK.Definitions.Devices
                     Debug.LogError($"SetPoseValue is only valid for AxisType.SixDoF InteractionMappings\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Changed = poseData != value;
-                // use the internal reading for changed so we don't reset it.
-                Updated = changed || !value.Equals(MixedRealityPose.ZeroIdentity);
+                Updated = !value.Equals(MixedRealityPose.ZeroIdentity);
                 poseData = value;
                 positionData = poseData.Position;
                 rotationData = poseData.Rotation;

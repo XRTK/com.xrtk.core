@@ -21,7 +21,7 @@ namespace XRTK.Extensions
         /// <param name="controllerHandedness"></param>
         public static void RaiseInputAction(this MixedRealityInteractionMapping interactionMapping, IMixedRealityInputSource inputSource, Handedness controllerHandedness)
         {
-            var changed = interactionMapping.Changed;
+            var changed = interactionMapping.ControlActivated;
             var updated = interactionMapping.Updated;
 
             if (changed &&

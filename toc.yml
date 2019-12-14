@@ -3,7 +3,7 @@
   homepage: api/index.md
 - name: Articles
   href: articles/
-  homepage: articles/index.md
+  homepage: articles/00-GettingStarted.md
 - name: Source Code
   href: https://github.com/XRTK/XRTK-Core
 - name: Releases

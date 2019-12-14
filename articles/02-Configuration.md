@@ -55,6 +55,12 @@ Each profile can be individually cloned and customized to your project's needs:
 
 ---
 
+### Related Articles
+
+* [Building and running your mixed reality application](https://github.com/XRTK/XRTK-Core/blob/development/articles/00-GettingStarted.md#build-and-play)
+
+---
+
 ### [**Raise an Information Request**](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=)
 
 If there is anything not mentioned in this document or you simply want to know more, raise an [RFI (Request for Information) request here](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=).

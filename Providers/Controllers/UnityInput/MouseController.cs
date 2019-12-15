@@ -125,7 +125,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                     Interactions[i].BoolData = keyButton;
 
                     // If our value changed raise it.
-                    if (Interactions[i].Changed)
+                    if (Interactions[i].ControlActivated)
                     {
                         // Raise input system Event if it enabled
                         if (Interactions[i].BoolData)

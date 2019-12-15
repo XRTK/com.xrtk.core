@@ -114,7 +114,7 @@ namespace XRTK.Providers.Controllers.UnityInput
             }
 
             // If our value changed raise it.
-            if (interactionMapping.Changed)
+            if (interactionMapping.ControlActivated)
             {
                 // Raise input system Event if it is enabled
                 if (interactionMapping.BoolData)

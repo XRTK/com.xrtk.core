@@ -106,7 +106,7 @@ namespace XRTK.Providers.Controllers.UnityInput
             {
                 case DeviceInputType.TriggerPress:
                     Debug.Assert(!string.IsNullOrEmpty(interactionMapping.AxisCodeX), $"[{interactionMapping.Description}] Axis mapping does not have an Axis defined");
-                    interactionMapping.BoolData = Input.GetAxisRaw(interactionMapping.AxisCodeX).Equals(interactionMapping.InvertXAxis ? 0f : 1f);
+                    interactionMapping.BoolData = Input.GetAxisRaw(interactionMapping.AxisCodeX).Equals(interactionMapping.InvertXAxis ? -1f : 1f);
                     break;
                 case DeviceInputType.TriggerNearTouch:
                 case DeviceInputType.ThumbNearTouch:
@@ -115,7 +115,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                 case DeviceInputType.RingFingerNearTouch:
                 case DeviceInputType.PinkyFingerNearTouch:
                     Debug.Assert(!string.IsNullOrEmpty(interactionMapping.AxisCodeX), $"[{interactionMapping.Description}] Axis mapping does not have an Axis defined");
-                    interactionMapping.BoolData = !Input.GetAxisRaw(interactionMapping.AxisCodeX).Equals(interactionMapping.InvertXAxis ? 1f : 0f);
+                    interactionMapping.BoolData = !Input.GetAxisRaw(interactionMapping.AxisCodeX).Equals(0f);
                     break;
                 default:
                     interactionMapping.BoolData = Input.GetKey(interactionMapping.KeyCode);
@@ -143,12 +143,12 @@ namespace XRTK.Providers.Controllers.UnityInput
                 case DeviceInputType.Trigger:
                 case DeviceInputType.TriggerPress:
                 case DeviceInputType.TouchpadPress:
-                    interactionMapping.BoolData = interactionMapping.FloatData.Equals(interactionMapping.InvertXAxis ? 0f : 1f);
+                    interactionMapping.BoolData = interactionMapping.FloatData.Equals(interactionMapping.InvertXAxis ? -1f : 1f);
                     break;
                 case DeviceInputType.TriggerTouch:
                 case DeviceInputType.TouchpadTouch:
                 case DeviceInputType.TriggerNearTouch:
-                    interactionMapping.BoolData = !interactionMapping.FloatData.Equals(interactionMapping.InvertXAxis ? 1f : 0f);
+                    interactionMapping.BoolData = !interactionMapping.FloatData.Equals(0f);
                     break;
                 default:
                     Debug.LogError($"Input [{interactionMapping.InputType}] is not handled for this controller [{GetType().Name}]");

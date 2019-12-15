@@ -6,12 +6,21 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.UnityInput
 {
+    /// <summary>
+    /// The <see cref="GenericJoystickController"/> attempts to be a catch-all for joysticks and controllers defined in Unity's legacy input system.
+    /// </summary>
     public class GenericJoystickController : BaseController
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="trackingState"></param>
+        /// <param name="controllerHandedness"></param>
+        /// <param name="inputSource"></param>
+        /// <param name="interactions"></param>
         public GenericJoystickController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
                 : base(trackingState, controllerHandedness, inputSource, interactions)
         {
@@ -97,7 +106,7 @@ namespace XRTK.Providers.Controllers.UnityInput
             {
                 case DeviceInputType.TriggerPress:
                     Debug.Assert(!string.IsNullOrEmpty(interactionMapping.AxisCodeX), $"[{interactionMapping.Description}] Axis mapping does not have an Axis defined");
-                    interactionMapping.BoolData = Input.GetAxisRaw(interactionMapping.AxisCodeX).Equals(1);
+                    interactionMapping.BoolData = Input.GetAxisRaw(interactionMapping.AxisCodeX).Equals(interactionMapping.InvertXAxis ? 0f : 1f);
                     break;
                 case DeviceInputType.TriggerNearTouch:
                 case DeviceInputType.ThumbNearTouch:
@@ -106,31 +115,11 @@ namespace XRTK.Providers.Controllers.UnityInput
                 case DeviceInputType.RingFingerNearTouch:
                 case DeviceInputType.PinkyFingerNearTouch:
                     Debug.Assert(!string.IsNullOrEmpty(interactionMapping.AxisCodeX), $"[{interactionMapping.Description}] Axis mapping does not have an Axis defined");
-                    interactionMapping.BoolData = !Input.GetAxisRaw(interactionMapping.AxisCodeX).Equals(0);
+                    interactionMapping.BoolData = !Input.GetAxisRaw(interactionMapping.AxisCodeX).Equals(interactionMapping.InvertXAxis ? 1f : 0f);
                     break;
                 default:
                     interactionMapping.BoolData = Input.GetKey(interactionMapping.KeyCode);
                     break;
-            }
-
-            // If our value changed raise it.
-            if (interactionMapping.ControlActivated)
-            {
-                // Raise input system Event if it is enabled
-                if (interactionMapping.BoolData)
-                {
-                    MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, interactionMapping.MixedRealityInputAction);
-                }
-                else
-                {
-                    MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, interactionMapping.MixedRealityInputAction);
-                }
-            }
-
-            // If pressed always raise pressed update.
-            if (interactionMapping.Updated)
-            {
-                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, interactionMapping.MixedRealityInputAction);
             }
         }
 
@@ -146,17 +135,24 @@ namespace XRTK.Providers.Controllers.UnityInput
             Debug.Assert(interactionMapping.AxisType == AxisType.SingleAxis);
             Debug.Assert(!string.IsNullOrEmpty(interactionMapping.AxisCodeX), $"[{interactionMapping.Description}] Single Axis mapping does not have an Axis defined");
 
-            var singleAxisValue = Input.GetAxisRaw(interactionMapping.AxisCodeX);
+            interactionMapping.FloatData = Input.GetAxisRaw(interactionMapping.AxisCodeX);
 
-            if (interactionMapping.InputType == DeviceInputType.TriggerPress)
+            switch (interactionMapping.InputType)
             {
-                // Update the interaction data source
-                interactionMapping.BoolData = singleAxisValue.Equals(1);
-            }
-            else
-            {
-                // Update the interaction data source
-                interactionMapping.FloatData = singleAxisValue;
+                case DeviceInputType.Select:
+                case DeviceInputType.Trigger:
+                case DeviceInputType.TriggerPress:
+                case DeviceInputType.TouchpadPress:
+                    interactionMapping.BoolData = interactionMapping.FloatData.Equals(interactionMapping.InvertXAxis ? 0f : 1f);
+                    break;
+                case DeviceInputType.TriggerTouch:
+                case DeviceInputType.TouchpadTouch:
+                case DeviceInputType.TriggerNearTouch:
+                    interactionMapping.BoolData = !interactionMapping.FloatData.Equals(interactionMapping.InvertXAxis ? 1f : 0f);
+                    break;
+                default:
+                    Debug.LogError($"Input [{interactionMapping.InputType}] is not handled for this controller [{GetType().Name}]");
+                    return;
             }
         }
 

@@ -91,7 +91,7 @@ namespace XRTK.Providers.Controllers.UnityInput
         }
 
         /// <summary>
-        /// Update an Interaction Bool data type from a Bool input 
+        /// Update an Interaction Bool data type from a Bool input
         /// </summary>
         /// <remarks>
         /// Raises an Input System "Input Down" event when the key is down, and raises an "Input Up" when it is released (e.g. a Button)
@@ -124,7 +124,7 @@ namespace XRTK.Providers.Controllers.UnityInput
         }
 
         /// <summary>
-        /// Update an Interaction Float data type from a SingleAxis (float) input 
+        /// Update an Interaction Float data type from a SingleAxis (float) input
         /// </summary>
         /// <remarks>
         /// Raises an Input System "Pressed" event when the float data changes

@@ -6,14 +6,14 @@ This document outlines the recommended coding guidelines for the Mixed Reality T
 
 ## Script license information headers
 
-All scripts posted to the XRTK should have the standard License header attached, exactly as shown below:
+All scripts submitted to the Mixed Reality Toolkit should have the standard License header attached (unless covered by an existing license), exactly as shown below:
 
 ```c#
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 ```
 
-Any script files submitted without the license header will be rejected
+Any script files submitted without a license header will be rejected.
 
 ## Function / Method summary headers
 
@@ -343,7 +343,7 @@ public enum SDKType
         /// </summary>
         Other,
         /// <summary>
-        /// The Windows 10 Mixed reality SDK provided by the Universal Windows Platform (UWP), for Immersive MR headsets and HoloLens. 
+        /// The Windows 10 Mixed reality SDK provided by the Universal Windows Platform (UWP), for Immersive MR headsets and HoloLens.
         /// </summary>
         WindowsMR,
         /// <summary>
@@ -451,7 +451,7 @@ public float MyValue;
 
  ```c#
  // Enable private field to be configurable only in editor (field is correctly serialized in Unity)
- [SerializeField] 
+ [SerializeField]
  private float myValue;
   ```
 

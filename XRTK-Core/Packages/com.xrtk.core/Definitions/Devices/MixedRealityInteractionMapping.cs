@@ -22,6 +22,42 @@ namespace XRTK.Definitions.Devices
         /// <param name="description">The description of the interaction mapping.</param>
         /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
         /// <param name="inputType">The physical input device / control</param>
+        /// <param name="axisCodeX">Optional horizontal or single axis value to get axis data from Unity's old input system.</param>
+        /// <param name="axisCodeY">Optional vertical axis value to get axis data from Unity's old input system.</param>
+        /// <param name="invertXAxis">Optional horizontal axis invert option.</param>
+        /// <param name="invertYAxis">Optional vertical axis invert option.</param>
+        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, DeviceInputType inputType, string axisCodeX, string axisCodeY = "", bool invertXAxis = false, bool invertYAxis = false)
+        {
+            this.id = id;
+            this.description = description;
+            this.axisType = axisType;
+            this.inputType = inputType;
+            inputAction = MixedRealityInputAction.None;
+            keyCode = KeyCode.None;
+            this.inputName = string.Empty;
+            this.axisCodeX = axisCodeX;
+            this.axisCodeY = axisCodeY;
+            this.invertXAxis = invertXAxis;
+            this.invertYAxis = invertYAxis;
+            rawData = null;
+            boolData = false;
+            floatData = 0f;
+            vector2Data = Vector2.zero;
+            positionData = Vector3.zero;
+            rotationData = Quaternion.identity;
+            poseData = MixedRealityPose.ZeroIdentity;
+            activated = false;
+            updated = false;
+            inputName = string.Empty;
+        }
+
+        /// <summary>
+        /// The constructor for a new Interaction Mapping definition
+        /// </summary>
+        /// <param name="id">Identity for mapping</param>
+        /// <param name="description">The description of the interaction mapping.</param>
+        /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
+        /// <param name="inputType">The physical input device / control</param>
         /// <param name="keyCode">Optional KeyCode value to get input from Unity's old input system</param>
         public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, DeviceInputType inputType, KeyCode keyCode)
         {
@@ -40,7 +76,7 @@ namespace XRTK.Definitions.Devices
             positionData = Vector3.zero;
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
-            changed = false;
+            activated = false;
             updated = false;
             inputName = string.Empty;
             invertXAxis = false;
@@ -72,7 +108,7 @@ namespace XRTK.Definitions.Devices
             positionData = Vector3.zero;
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
-            changed = false;
+            activated = false;
             updated = false;
             keyCode = KeyCode.None;
             invertXAxis = false;
@@ -110,7 +146,7 @@ namespace XRTK.Definitions.Devices
             positionData = Vector3.zero;
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
-            changed = false;
+            activated = false;
             updated = false;
             inputName = string.Empty;
         }
@@ -147,7 +183,7 @@ namespace XRTK.Definitions.Devices
             positionData = Vector3.zero;
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
-            changed = false;
+            activated = false;
             updated = false;
             inputName = string.Empty;
         }
@@ -176,7 +212,7 @@ namespace XRTK.Definitions.Devices
             positionData = Vector3.zero;
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
-            changed = false;
+            activated = false;
             updated = false;
         }
 
@@ -315,25 +351,25 @@ namespace XRTK.Definitions.Devices
             }
         }
 
-        private bool changed;
+        private bool activated;
 
         /// <summary>
-        /// Has the value changed since the last reading.
+        /// Has the control mechanism been given a signal that deviates from its initial state?
         /// </summary>
-        public bool Changed
+        public bool ControlActivated
         {
             get
             {
-                bool returnValue = changed;
+                bool returnValue = activated;
 
-                if (changed)
+                if (activated)
                 {
-                    changed = false;
+                    activated = false;
                 }
 
                 return returnValue;
             }
-            private set => changed = value;
+            private set => activated = value;
         }
 
         private bool updated;
@@ -413,12 +449,12 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.Raw)
                 {
-                    Debug.LogError($"SetRawValue is only valid for AxisType.Raw InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"{nameof(RawData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.Raw)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Changed = rawData != value;
+                ControlActivated = rawData != value;
                 // use the internal reading for changed so we don't reset it.
-                Updated = changed || value != null;
+                Updated = activated || value != null;
                 rawData = value;
                 Update();
             }
@@ -436,12 +472,10 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.Digital && AxisType != AxisType.SingleAxis && AxisType != AxisType.DualAxis)
                 {
-                    Debug.LogError($"SetBoolValue is only valid for AxisType.Digital, AxisType.SingleAxis, or AxisType.DualAxis InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"{nameof(BoolData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.SingleAxis)} or {nameof(AxisType.Digital)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Changed = boolData != value;
-                // use the internal reading for changed so we don't reset it.
-                Updated = changed || value;
+                ControlActivated = boolData != value;
                 boolData = value;
                 Update();
             }
@@ -460,7 +494,7 @@ namespace XRTK.Definitions.Devices
                 if (AxisType != AxisType.Digital &&
                     AxisType != AxisType.SingleAxis)
                 {
-                    Debug.LogError($"SetFloatValue is only valid for AxisType.SingleAxis & AxisType.Digital InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"{nameof(FloatData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.SingleAxis)} or {nameof(AxisType.Digital)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
                 var newValue = value;
@@ -470,11 +504,8 @@ namespace XRTK.Definitions.Devices
                     newValue *= -1f;
                 }
 
-                Changed = !floatData.Equals(newValue);
-                // use the internal reading for changed so we don't reset it.
-                Updated = changed || !floatData.Equals(0f);
-                floatData = value;
-                Update();
+                Updated = !floatData.Equals(newValue) || !floatData.Equals(0f);
+                floatData = newValue;
             }
         }
 
@@ -490,7 +521,7 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.DualAxis)
                 {
-                    Debug.LogError($"SetVector2Value is only valid for AxisType.DualAxis InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"{nameof(Vector2Data)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.DualAxis)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
                 var newValue = value;
@@ -505,9 +536,7 @@ namespace XRTK.Definitions.Devices
                     newValue.y *= -1f;
                 }
 
-                Changed = vector2Data != newValue;
-                // use the internal reading for changed so we don't reset it.
-                Updated = changed || !newValue.Equals(Vector2.zero);
+                Updated = vector2Data != newValue || !newValue.x.Equals(0f) && !newValue.y.Equals(0f);
                 vector2Data = newValue;
                 Update();
             }
@@ -525,14 +554,10 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.ThreeDofPosition)
                 {
-                    {
-                        Debug.LogError($"SetPositionValue is only valid for AxisType.ThreeDoFPosition InteractionMappings\nPlease check the {inputType} mapping for the current controller");
-                    }
+                    Debug.LogError($"{nameof(PositionData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.ThreeDofPosition)}.\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Changed = positionData != value;
-                // use the internal reading for changed so we don't reset it.
-                Updated = changed || !value.Equals(Vector3.zero);
+                Updated = positionData != value || !value.x.Equals(0f) && !value.y.Equals(0f) && !value.z.Equals(0f);
                 positionData = value;
                 Update();
             }
@@ -550,12 +575,10 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.ThreeDofRotation)
                 {
-                    Debug.LogError($"SetRotationValue is only valid for AxisType.ThreeDoFRotation InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"{nameof(RotationData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.ThreeDofRotation)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Changed = rotationData != value;
-                // use the internal reading for changed so we don't reset it.
-                Updated = changed || !value.Equals(Quaternion.identity);
+                Updated = rotationData != value || !value.x.Equals(0f) && !value.y.Equals(0f) && !value.z.Equals(0f) && value.w.Equals(1f);
                 rotationData = value;
                 Update();
             }
@@ -564,7 +587,7 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// The Pose data value.
         /// </summary>
-        /// <remarks>Only supported for a SixDof mapping axis type</remarks>
+        /// <remarks>Only supported for <see cref="Utilities.AxisType.SixDof"/> <see cref="AxisType"/>s</remarks>
         public MixedRealityPose PoseData
         {
             get => poseData;
@@ -572,12 +595,10 @@ namespace XRTK.Definitions.Devices
             {
                 if (AxisType != AxisType.SixDof)
                 {
-                    Debug.LogError($"SetPoseValue is only valid for AxisType.SixDoF InteractionMappings\nPlease check the {inputType} mapping for the current controller");
+                    Debug.LogError($"{nameof(PoseData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.SixDof)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Changed = poseData != value;
-                // use the internal reading for changed so we don't reset it.
-                Updated = changed || !value.Equals(MixedRealityPose.ZeroIdentity);
+                Updated = poseData != value || !value.Equals(MixedRealityPose.ZeroIdentity);
                 poseData = value;
                 positionData = poseData.Position;
                 rotationData = poseData.Rotation;

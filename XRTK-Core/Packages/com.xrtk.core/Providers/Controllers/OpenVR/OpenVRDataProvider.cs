@@ -32,6 +32,8 @@ namespace XRTK.Providers.Controllers.OpenVR
         /// <inheritdoc />
         protected override GenericJoystickController GetOrAddController(string joystickName)
         {
+            Debug.Assert(!string.IsNullOrEmpty(joystickName), "Joystick name is invalid!");
+
             // If a device is already registered with the ID provided, just return it.
             if (ActiveGenericControllers.ContainsKey(joystickName))
             {
@@ -82,7 +84,6 @@ namespace XRTK.Providers.Controllers.OpenVR
                     controllerType = typeof(WindowsMixedRealityOpenVRMotionController);
                     break;
                 default:
-                    Debug.LogError($"Failed to get a supported controller type: {joystickName}!");
                     return null;
             }
 

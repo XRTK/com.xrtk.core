@@ -78,6 +78,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                 {
                     var joystickName = lastDeviceList[i];
 
+                    if (string.IsNullOrEmpty(joystickName)) { continue; }
                     if (joystickNames[i].Equals(joystickName)) { continue; }
 
                     RemoveController(joystickName);
@@ -180,7 +181,8 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// <returns>The supported controller type</returns>
         protected virtual SupportedControllerType GetCurrentControllerType(string joystickName)
         {
-            if (string.IsNullOrEmpty(joystickName) || joystickName.Contains("<0"))
+            if (string.IsNullOrEmpty(joystickName) ||
+                joystickName.Contains("<0"))
             {
                 Debug.LogError($"Joystick not found! {joystickName}");
                 return SupportedControllerType.None;

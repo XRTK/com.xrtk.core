@@ -6,7 +6,7 @@ using UnityEngine;
 using XRTK.Definitions.InputSystem;
 using XRTK.Inspectors.Utilities;
 
-namespace XRTK.Inspectors.Profiles
+namespace XRTK.Inspectors.Profiles.InputSystem
 {
     [CustomEditor(typeof(MixedRealityInputActionsProfile))]
     public class MixedRealityInputActionsProfileInspector : BaseMixedRealityProfileInspector

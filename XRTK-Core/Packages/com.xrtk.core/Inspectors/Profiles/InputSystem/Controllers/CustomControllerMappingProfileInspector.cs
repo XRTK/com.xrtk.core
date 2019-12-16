@@ -4,7 +4,7 @@
 using UnityEditor;
 using XRTK.Definitions.Controllers;
 
-namespace XRTK.Inspectors.Profiles
+namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 {
     [CustomEditor(typeof(CustomMixedRealityControllerMappingProfile))]
     public class CustomControllerMappingProfileInspector : BaseMixedRealityControllerMappingProfileInspector { }

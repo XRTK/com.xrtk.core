@@ -1737,7 +1737,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    !instance.activeProfile.IsPlatformSystemEnabled)
+                    instance.activeProfile != null && !instance.activeProfile.IsPlatformSystemEnabled)
                 {
                     return null;
                 }
@@ -1769,7 +1769,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    !instance.activeProfile.IsCameraSystemEnabled)
+                    instance.activeProfile != null && !instance.activeProfile.IsCameraSystemEnabled)
                 {
                     return null;
                 }
@@ -1801,7 +1801,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    !instance.activeProfile.IsInputSystemEnabled)
+                    instance.activeProfile != null && !instance.activeProfile.IsInputSystemEnabled)
                 {
                     return null;
                 }
@@ -1833,7 +1833,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    !instance.activeProfile.IsBoundarySystemEnabled)
+                    instance.activeProfile != null && !instance.activeProfile.IsBoundarySystemEnabled)
                 {
                     return null;
                 }
@@ -1865,7 +1865,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    !instance.activeProfile.IsSpatialAwarenessSystemEnabled)
+                    instance.activeProfile != null && !instance.activeProfile.IsSpatialAwarenessSystemEnabled)
                 {
                     return null;
                 }
@@ -1897,7 +1897,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    !instance.activeProfile.IsTeleportSystemEnabled)
+                    instance.activeProfile != null && !instance.activeProfile.IsTeleportSystemEnabled)
                 {
                     return null;
                 }
@@ -1929,7 +1929,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    !instance.activeProfile.IsNetworkingSystemEnabled)
+                    instance.activeProfile != null && !instance.activeProfile.IsNetworkingSystemEnabled)
                 {
                     return null;
                 }
@@ -1961,7 +1961,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    !instance.activeProfile.IsDiagnosticsSystemEnabled)
+                    instance.activeProfile != null && !instance.activeProfile.IsDiagnosticsSystemEnabled)
                 {
                     return null;
                 }

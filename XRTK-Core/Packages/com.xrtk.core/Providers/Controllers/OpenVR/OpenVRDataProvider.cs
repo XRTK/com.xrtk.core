@@ -32,6 +32,8 @@ namespace XRTK.Providers.Controllers.OpenVR
         /// <inheritdoc />
         protected override GenericJoystickController GetOrAddController(string joystickName)
         {
+            Debug.Assert(!string.IsNullOrEmpty(joystickName), "Joystick name is invalid!");
+
             // If a device is already registered with the ID provided, just return it.
             if (ActiveGenericControllers.ContainsKey(joystickName))
             {
@@ -118,11 +120,6 @@ namespace XRTK.Providers.Controllers.OpenVR
         /// <inheritdoc />
         protected override SupportedControllerType GetCurrentControllerType(string joystickName)
         {
-            if (string.IsNullOrEmpty(joystickName) || joystickName.Contains("<0"))
-            {
-                return SupportedControllerType.None;
-            }
-
             if (joystickName.Contains("Oculus Rift CV1") || joystickName.Contains("Oculus Touch"))
             {
                 return SupportedControllerType.OculusTouch;
@@ -153,9 +150,14 @@ namespace XRTK.Providers.Controllers.OpenVR
                 return SupportedControllerType.WindowsMixedReality;
             }
 
-            Debug.LogWarning($"{joystickName} does not have a defined controller type, falling back to generic controller type");
+            if (joystickName.Contains("OpenVR") ||
+                joystickName.Contains("Spatial"))
+            {
+                Debug.LogWarning($"{joystickName} does not have a defined controller type, falling back to {SupportedControllerType.GenericOpenVR} controller type.");
+                return SupportedControllerType.GenericOpenVR;
+            }
 
-            return SupportedControllerType.GenericOpenVR;
+            return base.GetCurrentControllerType(joystickName);
         }
 
         #endregion Controller Utilities

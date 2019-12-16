@@ -9,7 +9,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Utilities;
 using XRTK.Definitions.Controllers;
 
-namespace XRTK.Inspectors.Profiles
+namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 {
     [CustomEditor(typeof(BaseMixedRealityControllerMappingProfile))]
     public class BaseMixedRealityControllerMappingProfileInspector : BaseMixedRealityProfileInspector

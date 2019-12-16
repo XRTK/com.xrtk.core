@@ -4,11 +4,12 @@
 using System.Globalization;
 using System.Text;
 using UnityEngine;
-using UnityEngine.Profiling;
 using XRTK.Utilities;
 
 #if WINDOWS_UWP
 using Windows.System;
+#else
+using UnityEngine.Profiling;
 #endif
 
 namespace XRTK.Services.DiagnosticsSystem

@@ -8,7 +8,7 @@ using XRTK.Definitions.InputSystem;
 using XRTK.Inspectors.Utilities;
 using XRTK.Utilities;
 
-namespace XRTK.Inspectors.Profiles
+namespace XRTK.Inspectors.Profiles.InputSystem
 {
     [CustomEditor(typeof(MixedRealityPointerProfile))]
     public class MixedRealityPointerProfileInspector : BaseMixedRealityProfileInspector

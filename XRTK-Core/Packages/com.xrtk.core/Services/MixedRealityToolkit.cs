@@ -15,6 +15,7 @@ using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Diagnostics;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
+using XRTK.Interfaces.Platform;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Interfaces.SpatialAwarenessSystem;
@@ -363,10 +364,20 @@ namespace XRTK.Services
             ClearCoreSystemCache();
             EnsureMixedRealityRequirements();
 
+            if (!ActiveProfile.IsPlatformSystemEnabled &&
+                (!CreateAndRegisterService<IMixedRealityPlatformSystem>(ActiveProfile.PlatformSystemType, ActiveProfile.PlatformSystemProfile) ||
+                PlatformSystem == null))
+            {
+                Debug.LogError($"Failed to start the Platform System!\nThe Platform System Type and Profile are required by the {nameof(MixedRealityToolkit)}");
+                isInitializing = false;
+                return;
+            }
+
             #region Services Registration
 
             if (ActiveProfile.IsCameraSystemEnabled &&
-                (!CreateAndRegisterService<IMixedRealityCameraSystem>(ActiveProfile.CameraSystemType, ActiveProfile.CameraProfile) || CameraSystem == null))
+                (!CreateAndRegisterService<IMixedRealityCameraSystem>(ActiveProfile.CameraSystemType, ActiveProfile.CameraProfile) ||
+                 CameraSystem == null))
             {
                 Debug.LogError("Failed to start the Camera System!");
                 isInitializing = false;
@@ -1443,11 +1454,17 @@ namespace XRTK.Services
         /// <remarks>
         /// Note: type should be the Interface of the system to be retrieved and not the concrete class itself.
         /// </remarks>
-        /// <returns>True, there is a system registered with the selected interface, False, no system found for that interface</returns>
-        /// <exception cref="T:System.ArgumentNullException">Type is <see langword="null" />.</exception>
+        /// <returns>True, there is a system registered with the selected interface, False, no system found for that interface.</returns>
         public static bool IsSystemRegistered<T>() where T : IMixedRealityService
         {
-            return activeSystems.TryGetValue(typeof(T), out _);
+            try
+            {
+                return activeSystems.TryGetValue(typeof(T), out _);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         private static bool IsCoreSystem(Type concreteType)
@@ -1458,7 +1475,8 @@ namespace XRTK.Services
                 return false;
             }
 
-            return typeof(IMixedRealityCameraSystem).IsAssignableFrom(concreteType) ||
+            return typeof(IMixedRealityPlatformSystem).IsAssignableFrom(concreteType) ||
+                   typeof(IMixedRealityCameraSystem).IsAssignableFrom(concreteType) ||
                    typeof(IMixedRealityInputSystem).IsAssignableFrom(concreteType) ||
                    typeof(IMixedRealityFocusProvider).IsAssignableFrom(concreteType) ||
                    typeof(IMixedRealityTeleportSystem).IsAssignableFrom(concreteType) ||
@@ -1470,6 +1488,7 @@ namespace XRTK.Services
 
         private static void ClearCoreSystemCache()
         {
+            platformSystem = null;
             cameraSystem = null;
             inputSystem = null;
             teleportSystem = null;
@@ -1706,6 +1725,38 @@ namespace XRTK.Services
 
         #region Core System Accessors
 
+        private static IMixedRealityPlatformSystem platformSystem = null;
+
+        /// <summary>
+        /// The current Camera System registered with the Mixed Reality Toolkit.
+        /// </summary>
+        public static IMixedRealityPlatformSystem PlatformSystem
+        {
+            get
+            {
+                if (!IsInitialized ||
+                    isApplicationQuitting ||
+                    instance.activeProfile == null ||
+                    !instance.activeProfile.IsPlatformSystemEnabled)
+                {
+                    return null;
+                }
+
+                if (platformSystem != null)
+                {
+                    return platformSystem;
+                }
+
+                platformSystem = GetService<IMixedRealityPlatformSystem>(showLogs: logPlatformSystem);
+                // If we found a valid system, then we turn logging back on for the next time we need to search.
+                // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
+                logPlatformSystem = platformSystem != null;
+                return platformSystem;
+            }
+        }
+
+        private static bool logPlatformSystem = true;
+
         private static IMixedRealityCameraSystem cameraSystem = null;
 
         /// <summary>
@@ -1718,7 +1769,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    (instance.activeProfile != null && !instance.activeProfile.IsCameraSystemEnabled))
+                    !instance.activeProfile.IsCameraSystemEnabled)
                 {
                     return null;
                 }
@@ -1750,7 +1801,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    (instance.activeProfile != null && !instance.activeProfile.IsInputSystemEnabled))
+                    !instance.activeProfile.IsInputSystemEnabled)
                 {
                     return null;
                 }
@@ -1782,7 +1833,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    (instance.activeProfile != null && !instance.activeProfile.IsBoundarySystemEnabled))
+                    !instance.activeProfile.IsBoundarySystemEnabled)
                 {
                     return null;
                 }
@@ -1814,7 +1865,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    (instance.activeProfile != null && !instance.activeProfile.IsSpatialAwarenessSystemEnabled))
+                    !instance.activeProfile.IsSpatialAwarenessSystemEnabled)
                 {
                     return null;
                 }
@@ -1846,7 +1897,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    (instance.activeProfile != null && !instance.activeProfile.IsTeleportSystemEnabled))
+                    !instance.activeProfile.IsTeleportSystemEnabled)
                 {
                     return null;
                 }
@@ -1878,7 +1929,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    (instance.activeProfile != null && !instance.activeProfile.IsNetworkingSystemEnabled))
+                    !instance.activeProfile.IsNetworkingSystemEnabled)
                 {
                     return null;
                 }
@@ -1910,7 +1961,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     isApplicationQuitting ||
                     instance.activeProfile == null ||
-                    (instance.activeProfile != null && !instance.activeProfile.IsDiagnosticsSystemEnabled))
+                    !instance.activeProfile.IsDiagnosticsSystemEnabled)
                 {
                     return null;
                 }
@@ -1941,6 +1992,9 @@ namespace XRTK.Services
             OnDispose(true);
         }
 
+        /// <summary>
+        /// Dispose the <see cref="MixedRealityToolkit"/> object.
+        /// </summary>
         public void Dispose()
         {
             if (disposed) { return; }

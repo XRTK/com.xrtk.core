@@ -7,6 +7,7 @@ using XRTK.Definitions.BoundarySystem;
 using XRTK.Definitions.Diagnostics;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.NetworkingSystem;
+using XRTK.Definitions.Platform;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.BoundarySystem;
@@ -14,6 +15,7 @@ using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Diagnostics;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
+using XRTK.Interfaces.Platform;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.TeleportSystem;
 
@@ -26,6 +28,38 @@ namespace XRTK.Definitions
     public class MixedRealityToolkitConfigurationProfile : BaseMixedRealityProfile
     {
         #region Mixed Reality Toolkit configurable properties
+
+        #region Platform System Properties
+
+        [SerializeField]
+        [Implements(typeof(IMixedRealityPlatformSystem), TypeGrouping.ByNamespaceFlat)]
+        private SystemType platformSystemType;
+
+        /// <summary>
+        /// The concrete platform system class to run with the Mixed Reality Toolkit.
+        /// </summary>
+        public SystemType PlatformSystemType
+        {
+            get => platformSystemType;
+            internal set => platformSystemType = value;
+        }
+
+        [SerializeField]
+        private MixedRealityPlatformSystemProfile platformSystemProfile = null;
+
+        /// <summary>
+        /// The <see cref="IMixedRealityPlatformSystem"/> configuration profile.
+        /// </summary>
+        public MixedRealityPlatformSystemProfile PlatformSystemProfile => platformSystemProfile;
+
+        /// <summary>
+        /// Is the Platform System enabled?
+        /// </summary>
+        public bool IsPlatformSystemEnabled => platformSystemProfile != null && platformSystemType != null && platformSystemType.Type != null;
+
+        #endregion Platform System Properties
+
+        #region Camera System Properties
 
         [SerializeField]
         [Tooltip("Enable the Camera System on Startup.")]
@@ -54,7 +88,6 @@ namespace XRTK.Definitions
             internal set => cameraSystemType = value;
         }
 
-
         [SerializeField]
         [Tooltip("Camera profile.")]
         private MixedRealityCameraProfile cameraProfile;
@@ -68,6 +101,10 @@ namespace XRTK.Definitions
             get => cameraProfile;
             internal set => cameraProfile = value;
         }
+
+        #endregion Camera System Properties
+
+        #region Input System Properties
 
         [SerializeField]
         [Tooltip("Enable the Input System on Startup.")]
@@ -109,6 +146,10 @@ namespace XRTK.Definitions
             internal set => inputSystemType = value;
         }
 
+        #endregion Input System Properties
+
+        #region Boundary System Properties
+
         [SerializeField]
         [Tooltip("Enable the Boundary on Startup")]
         private bool enableBoundarySystem = false;
@@ -149,6 +190,10 @@ namespace XRTK.Definitions
             internal set => boundaryVisualizationProfile = value;
         }
 
+        #endregion Boundary System Properties
+
+        #region Teleportation System Properties
+
         [SerializeField]
         [Tooltip("Enable the Teleport System on Startup")]
         private bool enableTeleportSystem = false;
@@ -175,6 +220,10 @@ namespace XRTK.Definitions
             get => teleportSystemType;
             internal set => teleportSystemType = value;
         }
+
+        #endregion Teleportation System Properties
+
+        #region Spatial Awareness System Properties
 
         [SerializeField]
         [Tooltip("Enable the Spatial Awareness system on Startup")]
@@ -216,6 +265,10 @@ namespace XRTK.Definitions
             internal set => spatialAwarenessProfile = value;
         }
 
+        #endregion Spatial Awareness System Properties
+
+        #region Networking System Properties
+
         [SerializeField]
         [Tooltip("Profile for wiring up networking assets.")]
         private MixedRealityNetworkSystemProfile networkingSystemProfile;
@@ -256,6 +309,10 @@ namespace XRTK.Definitions
             internal set => networkingSystemType = value;
         }
 
+        #endregion Networking System Properties
+
+        #region Diagnostics System Properties
+
         [SerializeField]
         [Tooltip("Profile for wiring up diagnostic assets.")]
         private MixedRealityDiagnosticsProfile diagnosticsSystemProfile;
@@ -295,6 +352,8 @@ namespace XRTK.Definitions
             get => diagnosticsSystemType;
             internal set => diagnosticsSystemType = value;
         }
+
+        #endregion Diagnostics System Properties
 
         [SerializeField]
         [Tooltip("All the additional non-required services registered with the Mixed Reality Toolkit.")]

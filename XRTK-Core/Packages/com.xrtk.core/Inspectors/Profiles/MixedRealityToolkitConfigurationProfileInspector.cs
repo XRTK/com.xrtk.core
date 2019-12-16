@@ -14,7 +14,10 @@ namespace XRTK.Inspectors.Profiles
     [CustomEditor(typeof(MixedRealityToolkitConfigurationProfile))]
     public class MixedRealityToolkitConfigurationProfileInspector : BaseMixedRealityProfileInspector
     {
-        // Camera properties
+        // Platform system properties
+        private SerializedProperty platformSystemType;
+        private SerializedProperty platformSystemProfile;
+        // Camera system properties
         private SerializedProperty enableCameraSystem;
         private SerializedProperty cameraSystemType;
         private SerializedProperty cameraProfile;
@@ -86,29 +89,39 @@ namespace XRTK.Inspectors.Profiles
                 }
             }
 
-            // Camera configuration
+            // Platform system configuration
+            platformSystemType = serializedObject.FindProperty("platformSystemType");
+            platformSystemProfile = serializedObject.FindProperty("platformSystemProfile");
+
+            // Camera system configuration
             enableCameraSystem = serializedObject.FindProperty("enableCameraSystem");
             cameraSystemType = serializedObject.FindProperty("cameraSystemType");
             cameraProfile = serializedObject.FindProperty("cameraProfile");
+
             // Input system configuration
             enableInputSystem = serializedObject.FindProperty("enableInputSystem");
             inputSystemType = serializedObject.FindProperty("inputSystemType");
             inputSystemProfile = serializedObject.FindProperty("inputSystemProfile");
+
             // Boundary system configuration
             enableBoundarySystem = serializedObject.FindProperty("enableBoundarySystem");
             boundarySystemType = serializedObject.FindProperty("boundarySystemType");
             boundaryVisualizationProfile = serializedObject.FindProperty("boundaryVisualizationProfile");
+
             // Teleport system configuration
             enableTeleportSystem = serializedObject.FindProperty("enableTeleportSystem");
             teleportSystemType = serializedObject.FindProperty("teleportSystemType");
+
             // Spatial Awareness system configuration
             enableSpatialAwarenessSystem = serializedObject.FindProperty("enableSpatialAwarenessSystem");
             spatialAwarenessSystemType = serializedObject.FindProperty("spatialAwarenessSystemType");
             spatialAwarenessProfile = serializedObject.FindProperty("spatialAwarenessProfile");
+
             // Networking system configuration
             enableNetworkingSystem = serializedObject.FindProperty("enableNetworkingSystem");
             networkingSystemType = serializedObject.FindProperty("networkingSystemType");
             networkingSystemProfile = serializedObject.FindProperty("networkingSystemProfile");
+
             // Diagnostics system configuration
             enableDiagnosticsSystem = serializedObject.FindProperty("enableDiagnosticsSystem");
             diagnosticsSystemType = serializedObject.FindProperty("diagnosticsSystemType");
@@ -156,6 +169,13 @@ namespace XRTK.Inspectors.Profiles
             EditorGUIUtility.labelWidth = 160f;
             EditorGUI.BeginChangeCheck();
             bool changed = false;
+
+            // Platform System configuration
+            GUILayout.Space(12f);
+            EditorGUILayout.LabelField("Platform Settings", EditorStyles.boldLabel);
+            // TODO Add dropdown for easy switching between registered platforms.
+            EditorGUILayout.PropertyField(platformSystemType);
+            changed |= RenderProfile(thisProfile, platformSystemProfile);
 
             // Camera System configuration
             GUILayout.Space(12f);

@@ -10,7 +10,7 @@ using XRTK.Inspectors.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Providers.Controllers.UnityInput;
 
-namespace XRTK.Inspectors.Profiles
+namespace XRTK.Inspectors.Profiles.InputSystem
 {
     [CustomEditor(typeof(MixedRealityControllerVisualizationProfile))]
     public class MixedRealityControllerVisualizationProfileInspector : BaseMixedRealityProfileInspector

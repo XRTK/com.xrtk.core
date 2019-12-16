@@ -8,7 +8,7 @@ using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Utilities;
 
-namespace XRTK.Inspectors.Profiles
+namespace XRTK.Inspectors.Profiles.InputSystem
 {
     [CustomEditor(typeof(MixedRealityInputActionRulesProfile))]
     public class MixedRealityInputActionRulesInspector : BaseMixedRealityProfileInspector

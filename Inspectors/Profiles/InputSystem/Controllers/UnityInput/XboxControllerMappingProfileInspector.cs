@@ -2,9 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
-using XRTK.Inspectors.Profiles;
+using XRTK.Definitions.Controllers.UnityInput.Profiles;
 
-namespace XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors
+namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput
 {
     [CustomEditor(typeof(XboxControllerMappingProfile))]
     public class XboxControllerMappingProfileInspector : BaseMixedRealityControllerMappingProfileInspector { }

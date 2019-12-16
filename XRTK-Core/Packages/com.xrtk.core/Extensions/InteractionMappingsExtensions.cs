@@ -43,28 +43,46 @@ namespace XRTK.Extensions
                 switch (interactionMapping.AxisType)
                 {
                     case AxisType.Digital:
-                        MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(inputSource, controllerHandedness,
-                            interactionMapping.MixedRealityInputAction, interactionMapping.BoolData ? 1 : 0);
+                        MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(
+                            inputSource,
+                            controllerHandedness,
+                            interactionMapping.MixedRealityInputAction,
+                            interactionMapping.BoolData ? 1 : 0);
                         break;
                     case AxisType.SingleAxis:
-                        MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(inputSource, controllerHandedness,
-                            interactionMapping.MixedRealityInputAction, interactionMapping.FloatData);
+                        MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(
+                            inputSource,
+                            controllerHandedness,
+                            interactionMapping.MixedRealityInputAction,
+                            interactionMapping.FloatData);
                         break;
                     case AxisType.DualAxis:
-                        MixedRealityToolkit.InputSystem?.RaisePositionInputChanged(inputSource, controllerHandedness,
-                            interactionMapping.MixedRealityInputAction, interactionMapping.Vector2Data);
+                        MixedRealityToolkit.InputSystem?.RaisePositionInputChanged(
+                            inputSource,
+                            controllerHandedness,
+                            interactionMapping.MixedRealityInputAction,
+                            interactionMapping.Vector2Data);
                         break;
                     case AxisType.ThreeDofPosition:
-                        MixedRealityToolkit.InputSystem?.RaisePositionInputChanged(inputSource, controllerHandedness,
-                            interactionMapping.MixedRealityInputAction, interactionMapping.PositionData);
+                        MixedRealityToolkit.InputSystem?.RaisePositionInputChanged(
+                            inputSource,
+                            controllerHandedness,
+                            interactionMapping.MixedRealityInputAction,
+                            interactionMapping.PositionData);
                         break;
                     case AxisType.ThreeDofRotation:
-                        MixedRealityToolkit.InputSystem?.RaiseRotationInputChanged(inputSource, controllerHandedness,
-                            interactionMapping.MixedRealityInputAction, interactionMapping.RotationData);
+                        MixedRealityToolkit.InputSystem?.RaiseRotationInputChanged(
+                            inputSource,
+                            controllerHandedness,
+                            interactionMapping.MixedRealityInputAction,
+                            interactionMapping.RotationData);
                         break;
                     case AxisType.SixDof:
-                        MixedRealityToolkit.InputSystem?.RaisePoseInputChanged(inputSource, controllerHandedness,
-                            interactionMapping.MixedRealityInputAction, interactionMapping.PoseData);
+                        MixedRealityToolkit.InputSystem?.RaisePoseInputChanged(
+                            inputSource,
+                            controllerHandedness,
+                            interactionMapping.MixedRealityInputAction,
+                            interactionMapping.PoseData);
                         break;
                 }
             }

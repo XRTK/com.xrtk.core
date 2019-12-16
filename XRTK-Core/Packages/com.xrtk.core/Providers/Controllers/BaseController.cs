@@ -148,7 +148,7 @@ namespace XRTK.Providers.Controllers
 
             if (!profileFound)
             {
-                Debug.LogWarning($"No controller profile found for type {controllerType.Name}, please ensure all controllers are defined in the configured MixedRealityControllerConfigurationProfile.");
+                Debug.LogWarning($"No controller profile found for type {controllerType.Name}, please ensure all controllers are defined and configured in the {nameof(MixedRealityControllerMappingProfiles)}.");
                 return false;
             }
 

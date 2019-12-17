@@ -8,8 +8,8 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Input;
-using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Events;
+using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Interfaces.InputSystem
 {

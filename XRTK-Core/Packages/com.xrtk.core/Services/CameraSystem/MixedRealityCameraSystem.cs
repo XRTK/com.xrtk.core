@@ -228,11 +228,11 @@ namespace XRTK.Services.CameraSystem
 
         private void SyncRigTransforms()
         {
-            var cameraPosition = CameraRig.CameraTransform.position;
+            var cameraPosition = CameraRig.CameraTransform.localPosition;
             var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
 
             bodyLocalPosition.x = cameraPosition.x;
-            bodyLocalPosition.y = 0f;
+            bodyLocalPosition.y = cameraPosition.y - HeadHeight;
             bodyLocalPosition.z = cameraPosition.z;
 
             CameraRig.BodyTransform.localPosition = bodyLocalPosition;

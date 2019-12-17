@@ -42,6 +42,10 @@ namespace XRTK.SDK.Utilities.Solvers
         [Tooltip("If > 0, this solver will deactivate after this much time, even if the state is still active")]
         private float lifetime = 0;
 
+        [SerializeField]
+        [Tooltip("Should the solver snap to it's goal on enable?")]
+        private bool snapToGoalOnEnable = true;
+
         private float currentLifetime;
 
         /// <summary>
@@ -151,7 +155,7 @@ namespace XRTK.SDK.Utilities.Solvers
         /// </summary>
         protected virtual void OnEnable()
         {
-            if (SolverHandler != null)
+            if (SolverHandler != null && snapToGoalOnEnable)
             {
                 SnapGoalTo(SolverHandler.GoalPosition, SolverHandler.GoalRotation);
             }

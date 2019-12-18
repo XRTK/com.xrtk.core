@@ -5,7 +5,6 @@ using System;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces;
 using XRTK.Interfaces.Platform;
 
 namespace XRTK.Definitions.Platform
@@ -16,15 +15,15 @@ namespace XRTK.Definitions.Platform
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="dataModelType">The concrete type for the system, feature or manager.</param>
-        /// <param name="dataModelName">The simple, human readable name for the system, feature, or manager.</param>
+        /// <param name="platformType">The concrete type for the system, feature or manager.</param>
+        /// <param name="platformName">The simple, human readable name for the system, feature, or manager.</param>
         /// <param name="priority">The priority this system, feature, or manager will be initialized in.</param>
         /// <param name="runtimePlatform">The runtime platform(s) to run this system, feature, or manager on.</param>
         /// <param name="configurationProfile">The configuration profile for the system, feature, or manager.</param>
-        public PlatformConfiguration(SystemType dataModelType, string dataModelName, uint priority, SupportedPlatforms runtimePlatform, MixedRealityPlatformProfile configurationProfile)
+        public PlatformConfiguration(SystemType platformType, string platformName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityPlatformProfile configurationProfile)
         {
-            this.dataModelType = dataModelType;
-            this.dataModelName = dataModelName;
+            this.platformType = platformType;
+            this.platformName = platformName;
             this.priority = priority;
             this.runtimePlatform = runtimePlatform;
             this.configurationProfile = configurationProfile;
@@ -32,20 +31,20 @@ namespace XRTK.Definitions.Platform
 
         [SerializeField]
         [Implements(typeof(IMixedRealityPlatform), TypeGrouping.ByNamespaceFlat)]
-        private SystemType dataModelType;
+        private SystemType platformType;
 
         /// <summary>
         /// The concrete type for the system, feature or manager.
         /// </summary>
-        public SystemType DataModelType => dataModelType;
+        public SystemType PlatformType => platformType;
 
         [SerializeField]
-        private string dataModelName;
+        private string platformName;
 
         /// <summary>
         /// The simple, human readable name for the system, feature, or manager.
         /// </summary>
-        public string DataModelName => dataModelName;
+        public string PlatformName => platformName;
 
         [SerializeField]
         private uint priority;
@@ -65,11 +64,11 @@ namespace XRTK.Definitions.Platform
         public SupportedPlatforms RuntimePlatform => runtimePlatform;
 
         [SerializeField]
-        private MixedRealityPlatformProfile configurationProfile;
+        private BaseMixedRealityPlatformProfile configurationProfile;
 
         /// <summary>
         /// The configuration profile for the system, feature, or manager.
         /// </summary>
-        public MixedRealityPlatformProfile ConfigurationProfile => configurationProfile;
+        public BaseMixedRealityPlatformProfile ConfigurationProfile => configurationProfile;
     }
 }

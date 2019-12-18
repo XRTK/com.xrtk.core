@@ -50,7 +50,11 @@ namespace XRTK.Definitions
         /// <summary>
         /// The <see cref="IMixedRealityPlatformSystem"/> configuration profile.
         /// </summary>
-        public MixedRealityPlatformSystemProfile PlatformSystemProfile => platformSystemProfile;
+        public MixedRealityPlatformSystemProfile PlatformSystemProfile
+        {
+            get => platformSystemProfile;
+            internal set => platformSystemProfile = value;
+        }
 
         /// <summary>
         /// Is the Platform System enabled?

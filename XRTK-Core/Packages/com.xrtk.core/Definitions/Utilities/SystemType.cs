@@ -100,7 +100,7 @@ namespace XRTK.Definitions.Utilities
 
         public static implicit operator Type(SystemType type)
         {
-            return type.Type;
+            return type?.Type;
         }
 
         public static implicit operator SystemType(Type type)

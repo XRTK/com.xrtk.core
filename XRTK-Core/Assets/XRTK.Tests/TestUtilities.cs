@@ -1,13 +1,16 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Linq;
 using NUnit.Framework;
+using System.Linq;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Definitions.Platform;
+using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Extensions;
 using XRTK.Services;
+using XRTK.Services.PlatformSystem;
 
 namespace XRTK.Tests
 {
@@ -38,6 +41,9 @@ namespace XRTK.Tests
             var configuration = useDefaultProfile
                 ? GetDefaultMixedRealityProfile<MixedRealityToolkitConfigurationProfile>()
                 : ScriptableObject.CreateInstance<MixedRealityToolkitConfigurationProfile>();
+
+            configuration.PlatformSystemProfile = ScriptableObject.CreateInstance<MixedRealityPlatformSystemProfile>();
+            configuration.PlatformSystemType = new SystemType(typeof(MixedRealityPlatformSystem));
 
             Assert.IsTrue(configuration != null, "Failed to find the Default Mixed Reality Configuration Profile");
             MixedRealityToolkit.Instance.ResetConfiguration(configuration);

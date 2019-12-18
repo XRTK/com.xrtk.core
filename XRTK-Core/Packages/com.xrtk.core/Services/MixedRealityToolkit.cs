@@ -15,7 +15,7 @@ using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Diagnostics;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
-using XRTK.Interfaces.Platform;
+using XRTK.Interfaces.PlatformSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Interfaces.SpatialAwarenessSystem;

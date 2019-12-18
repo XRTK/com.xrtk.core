@@ -5,9 +5,9 @@ using System;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.Platform;
+using XRTK.Interfaces.PlatformSystem;
 
-namespace XRTK.Definitions.Platform
+namespace XRTK.Definitions.PlatformSystem
 {
     [Serializable]
     public struct PlatformConfiguration

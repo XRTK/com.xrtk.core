@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using XRTK.Definitions;
-using XRTK.Definitions.Platform;
+using XRTK.Definitions.PlatformSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Extensions;
 using XRTK.Services;

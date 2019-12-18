@@ -3,7 +3,7 @@
 
 using XRTK.Interfaces.Events;
 
-namespace XRTK.Interfaces.Platform
+namespace XRTK.Interfaces.PlatformSystem
 {
     /// <summary>
     /// Defines the platform system.

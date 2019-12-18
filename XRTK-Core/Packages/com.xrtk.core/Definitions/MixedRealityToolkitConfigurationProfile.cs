@@ -7,7 +7,7 @@ using XRTK.Definitions.BoundarySystem;
 using XRTK.Definitions.Diagnostics;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.NetworkingSystem;
-using XRTK.Definitions.Platform;
+using XRTK.Definitions.PlatformSystem;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.BoundarySystem;
@@ -15,7 +15,7 @@ using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Diagnostics;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
-using XRTK.Interfaces.Platform;
+using XRTK.Interfaces.PlatformSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.TeleportSystem;
 

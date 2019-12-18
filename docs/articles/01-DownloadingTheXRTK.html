@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to download the Mixed Reality Toolkit | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="How to download the Mixed Reality Toolkit | XRTK-Core ">
+    <meta name="generator" content="docfx 2.48.0.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="how-to-download-the-mixed-reality-toolkit">How to download the Mixed Reality Toolkit</h1>
+
+<p>The Mixed Reality Toolkit provides many ways for users and developers to get access to the Mixed Reality Toolkit and the various extensions/platforms it supports.  These methods are tuned to use the common patterns most familiar to Unity developers, these include:</p>
+<ul>
+<li><p><a href="#automatic-upm-installation">Automatic UPM installation</a> - Registers the Mixed Reality Toolkit's upm server in Unity's Package Manager and automatically installs the XRTK-Core and SDK packages.</p>
+<blockquote>
+<p><strong>Note:</strong> developers are expected to <a href="#install-platform-packages">add the platform support</a> they need by searching for the modules in the Unity Pacakge Manger.</p>
+</blockquote>
+</li>
+<li><p><a href="#manual-upm-installation">Manual UPM installation</a> - Register the Mixed Reality Toolkit upm server in your manifest and manually download modules al la carte.</p>
+</li>
+<li><p><a href="#git-submodules">GIT Submodules</a> - For advanced developers, simply clone the project into your solution and update its submodules to get access to all platforms.</p>
+</li>
+</ul>
+<p>In this article, we will walk through each approach to get you up and running, starting with the simplest first.</p>
+<h2 id="automatic-upm-installation">Automatic UPM Installation</h2>
+<p>Our preferred deployment approach is to fully utilize <a href="https://docs.unity3d.com/Manual/upm-ui.html">Unity's native package manager</a> to incorporate the Mixed Reality Toolkit in your solution, akin to the other modules Unity provides out of the box.  This is the quickest and safest way to get Mixed Reality Toolkit in your solution and is automatically updated as new releases are published.</p>
+<p>Download the <a href="https://github.com/XRTK/XRTK-Core/releases">XRTK-Core.unitypackage</a> asset, then drag and drop it into your project window.  This adds an Mixed Reality Toolkit seed, that will automatically registers the Mixed Reality Toolkit's upm server with the Unity package manager and starts the download and installation of the Core and SDK packages.</p>
+<p><img src="../images/DownloadingTheXRTK/XRTKAutoInstallAsset.png" alt="Seed Package"></p>
+<h3 id="install-platform-packages">Install platform packages</h3>
+<p>The Mixed Reality Toolkit doesn't automatically download all of the various platform support packages by default.  You'll need to add these additional packages via the Unity Package Manager via <code>Unity -&gt; Windows -&gt; Package Manager</code>.</p>
+<p><img src="../images/DownloadingTheXRTK/PackageManagerMenu.png" alt="Package Manager"></p>
+<p>Next, use the search box to filter out the platform specific packages your project needs by typing in <code>XRTK</code> to filter out all of the pacakges availible in scope.</p>
+<p><img src="../images/DownloadingTheXRTK/PackageManager.png" alt="Search Package Manager"></p>
+<h2 id="manual-upm-installation">Manual UPM Installation</h2>
+<p>If you prefer to do things yourself, you can simply edit the <em><strong>manifest.json</strong></em> file in your Unity project and add an entry to register the Mixed Reality Toolkit and begin the download and installation into your project.</p>
+<p>To locate the folder the manifest is in, simply right-click in your Unity project folder on the &quot;Packages&quot; folder as shown below, then select the &quot;Show in Explorer&quot; option:</p>
+<p><img src="../images/DownloadingTheXRTK/LocatePackagesFolder.png" alt="Context Menu"></p>
+<p>In the packages folder, you will see the specific Manifest.json file which you will need to open for editing using your favorite tool (<a href="https://code.visualstudio.com/">We prefer VSCode as it's awesome</a>)</p>
+<p>Inside the Manifest file, you will see all the packages Unity provides &quot;out of the box&quot; listed:</p>
+<p>To this you simply need to add the extra entry for the Mixed Reality Toolkit as follows:</p>
+<pre><code class="lang-json">{
+  &quot;scopedRegistries&quot;: [
+    {
+      &quot;name&quot;: &quot;XRTK&quot;,
+      &quot;url&quot;: &quot;http://upm.xrtk.io:4873/&quot;,
+      &quot;scopes&quot;: [
+        &quot;com.xrtk&quot;
+      ]
+    }
+  ],
+  &quot;dependencies&quot;: {
+    &quot;com.xrtk.core&quot;: &quot;XX.XX.XX&quot;,
+    &quot;com.xrtk.sdk&quot;: &quot;XX.XX.XX&quot;,
+    ...
+  },
+}
+</code></pre>
+<p>Once it's updated and you return to Unity, the packages will be refreshed and all the defined Mixed Reality Toolkit packages will be downloaded and imported.</p>
+<h2 id="git-submodules">GIT Submodules</h2>
+<p>Advanced developers and those wishing to contribute to the Mixed Reality Toolkit also have the option to directly import and edit the framework in their live projects using GIT Submodules.</p>
+<blockquote>
+<p><strong>Note:</strong> The XRTK-Core repository is setup to utilize this GIT Submodule workflow and is a great example of how to utilize this workflow.</p>
+</blockquote>
+<ol>
+<li>Initialize your project's repository with the XRTK-Core submodule.</li>
+<li>Checkout the <strong>development</strong> branch of the XRTK-Core submodule and make sure it's up to date and synced with any upstream changes.</li>
+<li>Create Symbolic links for each package you wish to directly modify in your project by using the project window context menu
+<img src="../images/DownloadingTheXRTK/SymbolicLinks.png" alt="Symbolic Link Context Menu"></li>
+<li>Using the symbolic link wizard, choose the source folder for the package you wish you replace with the editable version, and the target path for your project, then import the package.
+<img src="../images/DownloadingTheXRTK/SymbolicLinkWizard.png" alt="Symbolic Link Wizard">
+<blockquote>
+<p><strong>Note:</strong> it's strongly advised to use the Packages as your target path for upm packages.</p>
+</blockquote>
+</li>
+<li>Repeat step 4 for each package you'd like to directly modify.</li>
+</ol>
+<blockquote>
+<p><em><strong>Warning!</strong></em> We strongly recommend you use do not use the <strong>upm</strong> branch to avoid breaking the symbolic links when switching between branches.</p>
+</blockquote>
+<p>This workflow works with any project using GIT and the symbolically linked folders can be customized to utilize any path availible under source control.</p>
+<hr>
+<h3 id="related-articles">Related Articles</h3>
+<ul>
+<li><a href="00-GettingStarted.html#getting-started-with-the-mixed-reality-toolkit">Getting Started</a>
+<ul>
+<li><a href="00-GettingStarted.html#configure-your-base-scene">Configuring your base scene</a></li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="raise-an-information-request"><a href="https://github.com/XRTK/XRTK-Core/issues/new?assignees=&amp;labels=question&amp;template=request_for_information.md&amp;title="><strong>Raise an Information Request</strong></a></h3>
+<p>If there is anything not mentioned in this document or you simply want to know more, raise an <a href="https://github.com/XRTK/XRTK-Core/issues/new?assignees=&amp;labels=question&amp;template=request_for_information.md&amp;title=">RFI (Request for Information) request here</a>.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/articles/01-DownloadingTheXRTK.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

@@ -1223,42 +1223,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.Controllers.OpenVR.GenericOpenVRControllerMappingProfile.ControllerType
   nameWithType: GenericOpenVRControllerMappingProfile.ControllerType
-- uid: XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles
-  name: XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles
-  href: api/XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.html
-  commentId: N:XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles
-  fullName: XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles
-  nameWithType: XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles
-- uid: XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.GenericOpenVRControllerMappingProfileInspector
-  name: GenericOpenVRControllerMappingProfileInspector
-  href: api/XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.GenericOpenVRControllerMappingProfileInspector.html
-  commentId: T:XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.GenericOpenVRControllerMappingProfileInspector
-  fullName: XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.GenericOpenVRControllerMappingProfileInspector
-  nameWithType: GenericOpenVRControllerMappingProfileInspector
-- uid: XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusGoControllerMappingProfileInspector
-  name: OculusGoControllerMappingProfileInspector
-  href: api/XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusGoControllerMappingProfileInspector.html
-  commentId: T:XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusGoControllerMappingProfileInspector
-  fullName: XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusGoControllerMappingProfileInspector
-  nameWithType: OculusGoControllerMappingProfileInspector
-- uid: XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusRemoteControllerMappingProfileInspector
-  name: OculusRemoteControllerMappingProfileInspector
-  href: api/XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusRemoteControllerMappingProfileInspector.html
-  commentId: T:XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusRemoteControllerMappingProfileInspector
-  fullName: XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusRemoteControllerMappingProfileInspector
-  nameWithType: OculusRemoteControllerMappingProfileInspector
-- uid: XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusTouchControllerMappingProfileInspector
-  name: OculusTouchControllerMappingProfileInspector
-  href: api/XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusTouchControllerMappingProfileInspector.html
-  commentId: T:XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusTouchControllerMappingProfileInspector
-  fullName: XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.OculusTouchControllerMappingProfileInspector
-  nameWithType: OculusTouchControllerMappingProfileInspector
-- uid: XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.ViveWandControllerMappingProfileInspector
-  name: ViveWandControllerMappingProfileInspector
-  href: api/XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.ViveWandControllerMappingProfileInspector.html
-  commentId: T:XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.ViveWandControllerMappingProfileInspector
-  fullName: XRTK.Definitions.Controllers.OpenVR.Inspectors.Profiles.ViveWandControllerMappingProfileInspector
-  nameWithType: ViveWandControllerMappingProfileInspector
 - uid: XRTK.Definitions.Controllers.OpenVR.OculusGoControllerMappingProfile
   name: OculusGoControllerMappingProfile
   href: api/XRTK.Definitions.Controllers.OpenVR.OculusGoControllerMappingProfile.html
@@ -1477,36 +1441,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.Controllers.UnityInput.Profiles.GenericUnityControllerMappingProfile.ControllerType
   nameWithType: GenericUnityControllerMappingProfile.ControllerType
-- uid: XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors
-  name: XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors
-  href: api/XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.html
-  commentId: N:XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors
-  fullName: XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors
-  nameWithType: XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors
-- uid: XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.GenericUnityControllerMappingProfileInspector
-  name: GenericUnityControllerMappingProfileInspector
-  href: api/XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.GenericUnityControllerMappingProfileInspector.html
-  commentId: T:XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.GenericUnityControllerMappingProfileInspector
-  fullName: XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.GenericUnityControllerMappingProfileInspector
-  nameWithType: GenericUnityControllerMappingProfileInspector
-- uid: XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.MouseControllerMappingProfileInspector
-  name: MouseControllerMappingProfileInspector
-  href: api/XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.MouseControllerMappingProfileInspector.html
-  commentId: T:XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.MouseControllerMappingProfileInspector
-  fullName: XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.MouseControllerMappingProfileInspector
-  nameWithType: MouseControllerMappingProfileInspector
-- uid: XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.TouchScreenControllerMappingProfileInspector
-  name: TouchScreenControllerMappingProfileInspector
-  href: api/XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.TouchScreenControllerMappingProfileInspector.html
-  commentId: T:XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.TouchScreenControllerMappingProfileInspector
-  fullName: XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.TouchScreenControllerMappingProfileInspector
-  nameWithType: TouchScreenControllerMappingProfileInspector
-- uid: XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.XboxControllerMappingProfileInspector
-  name: XboxControllerMappingProfileInspector
-  href: api/XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.XboxControllerMappingProfileInspector.html
-  commentId: T:XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.XboxControllerMappingProfileInspector
-  fullName: XRTK.Definitions.Controllers.UnityInput.Profiles.Inspectors.XboxControllerMappingProfileInspector
-  nameWithType: XboxControllerMappingProfileInspector
 - uid: XRTK.Definitions.Controllers.UnityInput.Profiles.MouseControllerMappingProfile
   name: MouseControllerMappingProfile
   href: api/XRTK.Definitions.Controllers.UnityInput.Profiles.MouseControllerMappingProfile.html
@@ -2469,19 +2403,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.BoolData
   nameWithType: MixedRealityInteractionMapping.BoolData
-- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.Changed
-  name: Changed
-  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping_Changed
-  commentId: P:XRTK.Definitions.Devices.MixedRealityInteractionMapping.Changed
-  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.Changed
-  nameWithType: MixedRealityInteractionMapping.Changed
-- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.Changed*
-  name: Changed
-  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping_Changed_
-  commentId: Overload:XRTK.Definitions.Devices.MixedRealityInteractionMapping.Changed
+- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.ControlActivated
+  name: ControlActivated
+  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping_ControlActivated
+  commentId: P:XRTK.Definitions.Devices.MixedRealityInteractionMapping.ControlActivated
+  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.ControlActivated
+  nameWithType: MixedRealityInteractionMapping.ControlActivated
+- uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.ControlActivated*
+  name: ControlActivated
+  href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping_ControlActivated_
+  commentId: Overload:XRTK.Definitions.Devices.MixedRealityInteractionMapping.ControlActivated
   isSpec: "True"
-  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.Changed
-  nameWithType: MixedRealityInteractionMapping.Changed
+  fullName: XRTK.Definitions.Devices.MixedRealityInteractionMapping.ControlActivated
+  nameWithType: MixedRealityInteractionMapping.ControlActivated
 - uid: XRTK.Definitions.Devices.MixedRealityInteractionMapping.Description
   name: Description
   href: api/XRTK.Definitions.Devices.MixedRealityInteractionMapping.html#XRTK_Definitions_Devices_MixedRealityInteractionMapping_Description
@@ -9062,6 +8996,25 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.CameraExtensions.IsInFOV
   nameWithType: CameraExtensions.IsInFOV
+- uid: XRTK.Extensions.CameraExtensions.IsInFrustum(UnityEngine.Camera,UnityEngine.GameObject)
+  name: IsInFrustum(Camera, GameObject)
+  href: api/XRTK.Extensions.CameraExtensions.html#XRTK_Extensions_CameraExtensions_IsInFrustum_UnityEngine_Camera_UnityEngine_GameObject_
+  commentId: M:XRTK.Extensions.CameraExtensions.IsInFrustum(UnityEngine.Camera,UnityEngine.GameObject)
+  fullName: XRTK.Extensions.CameraExtensions.IsInFrustum(UnityEngine.Camera, UnityEngine.GameObject)
+  nameWithType: CameraExtensions.IsInFrustum(Camera, GameObject)
+- uid: XRTK.Extensions.CameraExtensions.IsInFrustum(UnityEngine.Camera,UnityEngine.Transform)
+  name: IsInFrustum(Camera, Transform)
+  href: api/XRTK.Extensions.CameraExtensions.html#XRTK_Extensions_CameraExtensions_IsInFrustum_UnityEngine_Camera_UnityEngine_Transform_
+  commentId: M:XRTK.Extensions.CameraExtensions.IsInFrustum(UnityEngine.Camera,UnityEngine.Transform)
+  fullName: XRTK.Extensions.CameraExtensions.IsInFrustum(UnityEngine.Camera, UnityEngine.Transform)
+  nameWithType: CameraExtensions.IsInFrustum(Camera, Transform)
+- uid: XRTK.Extensions.CameraExtensions.IsInFrustum*
+  name: IsInFrustum
+  href: api/XRTK.Extensions.CameraExtensions.html#XRTK_Extensions_CameraExtensions_IsInFrustum_
+  commentId: Overload:XRTK.Extensions.CameraExtensions.IsInFrustum
+  isSpec: "True"
+  fullName: XRTK.Extensions.CameraExtensions.IsInFrustum
+  nameWithType: CameraExtensions.IsInFrustum
 - uid: XRTK.Extensions.CanvasExtensions
   name: CanvasExtensions
   href: api/XRTK.Extensions.CanvasExtensions.html
@@ -12590,38 +12543,6 @@ references:
   commentId: N:XRTK.Inspectors.Profiles
   fullName: XRTK.Inspectors.Profiles
   nameWithType: XRTK.Inspectors.Profiles
-- uid: XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector
-  name: BaseMixedRealityControllerMappingProfileInspector
-  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.html
-  commentId: T:XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector
-  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector
-  nameWithType: BaseMixedRealityControllerMappingProfileInspector
-- uid: XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.OnEnable
-  name: OnEnable()
-  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityControllerMappingProfileInspector_OnEnable
-  commentId: M:XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.OnEnable
-  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.OnEnable()
-  nameWithType: BaseMixedRealityControllerMappingProfileInspector.OnEnable()
-- uid: XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.OnEnable*
-  name: OnEnable
-  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityControllerMappingProfileInspector_OnEnable_
-  commentId: Overload:XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.OnEnable
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.OnEnable
-  nameWithType: BaseMixedRealityControllerMappingProfileInspector.OnEnable
-- uid: XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI
-  name: OnInspectorGUI()
-  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityControllerMappingProfileInspector_OnInspectorGUI
-  commentId: M:XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI
-  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI()
-  nameWithType: BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI()
-- uid: XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI*
-  name: OnInspectorGUI
-  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityControllerMappingProfileInspector_OnInspectorGUI_
-  commentId: Overload:XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI
-  nameWithType: BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI
 - uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector
   name: BaseMixedRealityProfileInspector
   href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html
@@ -12698,12 +12619,410 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Profiles.BaseMixedRealityToolkitInspector.RenderMixedRealityToolkitLogo
   nameWithType: BaseMixedRealityToolkitInspector.RenderMixedRealityToolkitLogo
-- uid: XRTK.Inspectors.Profiles.CustomControllerMappingProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem
+  name: XRTK.Inspectors.Profiles.InputSystem
+  href: api/XRTK.Inspectors.Profiles.InputSystem.html
+  commentId: N:XRTK.Inspectors.Profiles.InputSystem
+  fullName: XRTK.Inspectors.Profiles.InputSystem
+  nameWithType: XRTK.Inspectors.Profiles.InputSystem
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers
+  name: XRTK.Inspectors.Profiles.InputSystem.Controllers
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.html
+  commentId: N:XRTK.Inspectors.Profiles.InputSystem.Controllers
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers
+  nameWithType: XRTK.Inspectors.Profiles.InputSystem.Controllers
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector
+  name: BaseMixedRealityControllerMappingProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector
+  nameWithType: BaseMixedRealityControllerMappingProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.OnEnable
+  name: OnEnable()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_Controllers_BaseMixedRealityControllerMappingProfileInspector_OnEnable
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.OnEnable
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.OnEnable()
+  nameWithType: BaseMixedRealityControllerMappingProfileInspector.OnEnable()
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.OnEnable*
+  name: OnEnable
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_Controllers_BaseMixedRealityControllerMappingProfileInspector_OnEnable_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.OnEnable
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.OnEnable
+  nameWithType: BaseMixedRealityControllerMappingProfileInspector.OnEnable
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI
+  name: OnInspectorGUI()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_Controllers_BaseMixedRealityControllerMappingProfileInspector_OnInspectorGUI
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI()
+  nameWithType: BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI()
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI*
+  name: OnInspectorGUI
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_Controllers_BaseMixedRealityControllerMappingProfileInspector_OnInspectorGUI_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI
+  nameWithType: BaseMixedRealityControllerMappingProfileInspector.OnInspectorGUI
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.CustomControllerMappingProfileInspector
   name: CustomControllerMappingProfileInspector
-  href: api/XRTK.Inspectors.Profiles.CustomControllerMappingProfileInspector.html
-  commentId: T:XRTK.Inspectors.Profiles.CustomControllerMappingProfileInspector
-  fullName: XRTK.Inspectors.Profiles.CustomControllerMappingProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.CustomControllerMappingProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.Controllers.CustomControllerMappingProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.CustomControllerMappingProfileInspector
   nameWithType: CustomControllerMappingProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR
+  name: XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.html
+  commentId: N:XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR
+  nameWithType: XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.GenericOpenVRControllerMappingProfileInspector
+  name: GenericOpenVRControllerMappingProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.GenericOpenVRControllerMappingProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.GenericOpenVRControllerMappingProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.GenericOpenVRControllerMappingProfileInspector
+  nameWithType: GenericOpenVRControllerMappingProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.OculusGoControllerMappingProfileInspector
+  name: OculusGoControllerMappingProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.OculusGoControllerMappingProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.OculusGoControllerMappingProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.OculusGoControllerMappingProfileInspector
+  nameWithType: OculusGoControllerMappingProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.OculusRemoteControllerMappingProfileInspector
+  name: OculusRemoteControllerMappingProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.OculusRemoteControllerMappingProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.OculusRemoteControllerMappingProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.OculusRemoteControllerMappingProfileInspector
+  nameWithType: OculusRemoteControllerMappingProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.OculusTouchControllerMappingProfileInspector
+  name: OculusTouchControllerMappingProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.OculusTouchControllerMappingProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.OculusTouchControllerMappingProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.OculusTouchControllerMappingProfileInspector
+  nameWithType: OculusTouchControllerMappingProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.ViveWandControllerMappingProfileInspector
+  name: ViveWandControllerMappingProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.ViveWandControllerMappingProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.ViveWandControllerMappingProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.OpenVR.ViveWandControllerMappingProfileInspector
+  nameWithType: ViveWandControllerMappingProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput
+  name: XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.html
+  commentId: N:XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput
+  nameWithType: XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.GenericUnityControllerMappingProfileInspector
+  name: GenericUnityControllerMappingProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.GenericUnityControllerMappingProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.GenericUnityControllerMappingProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.GenericUnityControllerMappingProfileInspector
+  nameWithType: GenericUnityControllerMappingProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.MouseControllerMappingProfileInspector
+  name: MouseControllerMappingProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.MouseControllerMappingProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.MouseControllerMappingProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.MouseControllerMappingProfileInspector
+  nameWithType: MouseControllerMappingProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.TouchScreenControllerMappingProfileInspector
+  name: TouchScreenControllerMappingProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.TouchScreenControllerMappingProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.TouchScreenControllerMappingProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.TouchScreenControllerMappingProfileInspector
+  nameWithType: TouchScreenControllerMappingProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.XboxControllerMappingProfileInspector
+  name: XboxControllerMappingProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.XboxControllerMappingProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.XboxControllerMappingProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.XboxControllerMappingProfileInspector
+  nameWithType: XboxControllerMappingProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector
+  name: MixedRealityControllerDataProviderProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector
+  nameWithType: MixedRealityControllerDataProviderProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnEnable
+  name: OnEnable()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerDataProviderProfileInspector_OnEnable
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnEnable
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnEnable()
+  nameWithType: MixedRealityControllerDataProviderProfileInspector.OnEnable()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnEnable*
+  name: OnEnable
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerDataProviderProfileInspector_OnEnable_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnEnable
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnEnable
+  nameWithType: MixedRealityControllerDataProviderProfileInspector.OnEnable
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
+  name: OnInspectorGUI()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerDataProviderProfileInspector_OnInspectorGUI
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI()
+  nameWithType: MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI*
+  name: OnInspectorGUI
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerDataProviderProfileInspector_OnInspectorGUI_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
+  nameWithType: MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector
+  name: MixedRealityControllerMappingProfilesInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector
+  nameWithType: MixedRealityControllerMappingProfilesInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.OnEnable
+  name: OnEnable()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerMappingProfilesInspector_OnEnable
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.OnEnable
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.OnEnable()
+  nameWithType: MixedRealityControllerMappingProfilesInspector.OnEnable()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.OnEnable*
+  name: OnEnable
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerMappingProfilesInspector_OnEnable_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.OnEnable
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.OnEnable
+  nameWithType: MixedRealityControllerMappingProfilesInspector.OnEnable
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.OnInspectorGUI
+  name: OnInspectorGUI()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerMappingProfilesInspector_OnInspectorGUI
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.OnInspectorGUI()
+  nameWithType: MixedRealityControllerMappingProfilesInspector.OnInspectorGUI()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.OnInspectorGUI*
+  name: OnInspectorGUI
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerMappingProfilesInspector_OnInspectorGUI_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.OnInspectorGUI
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.OnInspectorGUI
+  nameWithType: MixedRealityControllerMappingProfilesInspector.OnInspectorGUI
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector
+  name: MixedRealityControllerVisualizationProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector
+  nameWithType: MixedRealityControllerVisualizationProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.OnEnable
+  name: OnEnable()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerVisualizationProfileInspector_OnEnable
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.OnEnable
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.OnEnable()
+  nameWithType: MixedRealityControllerVisualizationProfileInspector.OnEnable()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.OnEnable*
+  name: OnEnable
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerVisualizationProfileInspector_OnEnable_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.OnEnable
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.OnEnable
+  nameWithType: MixedRealityControllerVisualizationProfileInspector.OnEnable
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI
+  name: OnInspectorGUI()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerVisualizationProfileInspector_OnInspectorGUI
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI()
+  nameWithType: MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI*
+  name: OnInspectorGUI
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerVisualizationProfileInspector_OnInspectorGUI_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI
+  nameWithType: MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector
+  name: MixedRealityGesturesProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector
+  nameWithType: MixedRealityGesturesProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.OnEnable
+  name: OnEnable()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityGesturesProfileInspector_OnEnable
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.OnEnable
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.OnEnable()
+  nameWithType: MixedRealityGesturesProfileInspector.OnEnable()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.OnEnable*
+  name: OnEnable
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityGesturesProfileInspector_OnEnable_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.OnEnable
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.OnEnable
+  nameWithType: MixedRealityGesturesProfileInspector.OnEnable
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.OnInspectorGUI
+  name: OnInspectorGUI()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityGesturesProfileInspector_OnInspectorGUI
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.OnInspectorGUI()
+  nameWithType: MixedRealityGesturesProfileInspector.OnInspectorGUI()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.OnInspectorGUI*
+  name: OnInspectorGUI
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityGesturesProfileInspector_OnInspectorGUI_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.OnInspectorGUI
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityGesturesProfileInspector.OnInspectorGUI
+  nameWithType: MixedRealityGesturesProfileInspector.OnInspectorGUI
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector
+  name: MixedRealityInputActionRulesInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector
+  nameWithType: MixedRealityInputActionRulesInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.OnEnable
+  name: OnEnable()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityInputActionRulesInspector_OnEnable
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.OnEnable
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.OnEnable()
+  nameWithType: MixedRealityInputActionRulesInspector.OnEnable()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.OnEnable*
+  name: OnEnable
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityInputActionRulesInspector_OnEnable_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.OnEnable
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.OnEnable
+  nameWithType: MixedRealityInputActionRulesInspector.OnEnable
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.OnInspectorGUI
+  name: OnInspectorGUI()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityInputActionRulesInspector_OnInspectorGUI
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.OnInspectorGUI()
+  nameWithType: MixedRealityInputActionRulesInspector.OnInspectorGUI()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.OnInspectorGUI*
+  name: OnInspectorGUI
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityInputActionRulesInspector_OnInspectorGUI_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.OnInspectorGUI
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionRulesInspector.OnInspectorGUI
+  nameWithType: MixedRealityInputActionRulesInspector.OnInspectorGUI
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector
+  name: MixedRealityInputActionsProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector
+  nameWithType: MixedRealityInputActionsProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.OnEnable
+  name: OnEnable()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityInputActionsProfileInspector_OnEnable
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.OnEnable
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.OnEnable()
+  nameWithType: MixedRealityInputActionsProfileInspector.OnEnable()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.OnEnable*
+  name: OnEnable
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityInputActionsProfileInspector_OnEnable_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.OnEnable
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.OnEnable
+  nameWithType: MixedRealityInputActionsProfileInspector.OnEnable
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.OnInspectorGUI
+  name: OnInspectorGUI()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityInputActionsProfileInspector_OnInspectorGUI
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.OnInspectorGUI()
+  nameWithType: MixedRealityInputActionsProfileInspector.OnInspectorGUI()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.OnInspectorGUI*
+  name: OnInspectorGUI
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityInputActionsProfileInspector_OnInspectorGUI_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.OnInspectorGUI
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputActionsProfileInspector.OnInspectorGUI
+  nameWithType: MixedRealityInputActionsProfileInspector.OnInspectorGUI
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector
+  name: MixedRealityInputSystemProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector
+  nameWithType: MixedRealityInputSystemProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.OnEnable
+  name: OnEnable()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityInputSystemProfileInspector_OnEnable
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.OnEnable
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.OnEnable()
+  nameWithType: MixedRealityInputSystemProfileInspector.OnEnable()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.OnEnable*
+  name: OnEnable
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityInputSystemProfileInspector_OnEnable_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.OnEnable
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.OnEnable
+  nameWithType: MixedRealityInputSystemProfileInspector.OnEnable
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.OnInspectorGUI
+  name: OnInspectorGUI()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityInputSystemProfileInspector_OnInspectorGUI
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.OnInspectorGUI()
+  nameWithType: MixedRealityInputSystemProfileInspector.OnInspectorGUI()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.OnInspectorGUI*
+  name: OnInspectorGUI
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityInputSystemProfileInspector_OnInspectorGUI_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.OnInspectorGUI
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityInputSystemProfileInspector.OnInspectorGUI
+  nameWithType: MixedRealityInputSystemProfileInspector.OnInspectorGUI
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector
+  name: MixedRealityPointerProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector
+  nameWithType: MixedRealityPointerProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.OnEnable
+  name: OnEnable()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityPointerProfileInspector_OnEnable
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.OnEnable
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.OnEnable()
+  nameWithType: MixedRealityPointerProfileInspector.OnEnable()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.OnEnable*
+  name: OnEnable
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityPointerProfileInspector_OnEnable_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.OnEnable
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.OnEnable
+  nameWithType: MixedRealityPointerProfileInspector.OnEnable
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.OnInspectorGUI
+  name: OnInspectorGUI()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityPointerProfileInspector_OnInspectorGUI
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.OnInspectorGUI()
+  nameWithType: MixedRealityPointerProfileInspector.OnInspectorGUI()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.OnInspectorGUI*
+  name: OnInspectorGUI
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityPointerProfileInspector_OnInspectorGUI_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.OnInspectorGUI
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityPointerProfileInspector.OnInspectorGUI
+  nameWithType: MixedRealityPointerProfileInspector.OnInspectorGUI
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector
+  name: MixedRealitySpeechCommandsProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector
+  nameWithType: MixedRealitySpeechCommandsProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.OnEnable
+  name: OnEnable()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealitySpeechCommandsProfileInspector_OnEnable
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.OnEnable
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.OnEnable()
+  nameWithType: MixedRealitySpeechCommandsProfileInspector.OnEnable()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.OnEnable*
+  name: OnEnable
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealitySpeechCommandsProfileInspector_OnEnable_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.OnEnable
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.OnEnable
+  nameWithType: MixedRealitySpeechCommandsProfileInspector.OnEnable
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI
+  name: OnInspectorGUI()
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealitySpeechCommandsProfileInspector_OnInspectorGUI
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI()
+  nameWithType: MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI*
+  name: OnInspectorGUI
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealitySpeechCommandsProfileInspector_OnInspectorGUI_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI
+  nameWithType: MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI
 - uid: XRTK.Inspectors.Profiles.MixedRealityBoundaryVisualizationProfileInspector
   name: MixedRealityBoundaryVisualizationProfileInspector
   href: api/XRTK.Inspectors.Profiles.MixedRealityBoundaryVisualizationProfileInspector.html
@@ -12768,102 +13087,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Profiles.MixedRealityCameraProfileInspector.OnInspectorGUI
   nameWithType: MixedRealityCameraProfileInspector.OnInspectorGUI
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector
-  name: MixedRealityControllerDataProviderProfileInspector
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.html
-  commentId: T:XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector
-  nameWithType: MixedRealityControllerDataProviderProfileInspector
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.OnEnable
-  name: OnEnable()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityControllerDataProviderProfileInspector_OnEnable
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.OnEnable
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.OnEnable()
-  nameWithType: MixedRealityControllerDataProviderProfileInspector.OnEnable()
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.OnEnable*
-  name: OnEnable
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityControllerDataProviderProfileInspector_OnEnable_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.OnEnable
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.OnEnable
-  nameWithType: MixedRealityControllerDataProviderProfileInspector.OnEnable
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
-  name: OnInspectorGUI()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityControllerDataProviderProfileInspector_OnInspectorGUI
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI()
-  nameWithType: MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI()
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI*
-  name: OnInspectorGUI
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityControllerDataProviderProfileInspector_OnInspectorGUI_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
-  nameWithType: MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector
-  name: MixedRealityControllerMappingProfilesInspector
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.html
-  commentId: T:XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector
-  nameWithType: MixedRealityControllerMappingProfilesInspector
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.OnEnable
-  name: OnEnable()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.html#XRTK_Inspectors_Profiles_MixedRealityControllerMappingProfilesInspector_OnEnable
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.OnEnable
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.OnEnable()
-  nameWithType: MixedRealityControllerMappingProfilesInspector.OnEnable()
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.OnEnable*
-  name: OnEnable
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.html#XRTK_Inspectors_Profiles_MixedRealityControllerMappingProfilesInspector_OnEnable_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.OnEnable
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.OnEnable
-  nameWithType: MixedRealityControllerMappingProfilesInspector.OnEnable
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.OnInspectorGUI
-  name: OnInspectorGUI()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.html#XRTK_Inspectors_Profiles_MixedRealityControllerMappingProfilesInspector_OnInspectorGUI
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.OnInspectorGUI
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.OnInspectorGUI()
-  nameWithType: MixedRealityControllerMappingProfilesInspector.OnInspectorGUI()
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.OnInspectorGUI*
-  name: OnInspectorGUI
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.html#XRTK_Inspectors_Profiles_MixedRealityControllerMappingProfilesInspector_OnInspectorGUI_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.OnInspectorGUI
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerMappingProfilesInspector.OnInspectorGUI
-  nameWithType: MixedRealityControllerMappingProfilesInspector.OnInspectorGUI
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector
-  name: MixedRealityControllerVisualizationProfileInspector
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.html
-  commentId: T:XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector
-  nameWithType: MixedRealityControllerVisualizationProfileInspector
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.OnEnable
-  name: OnEnable()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityControllerVisualizationProfileInspector_OnEnable
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.OnEnable
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.OnEnable()
-  nameWithType: MixedRealityControllerVisualizationProfileInspector.OnEnable()
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.OnEnable*
-  name: OnEnable
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityControllerVisualizationProfileInspector_OnEnable_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.OnEnable
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.OnEnable
-  nameWithType: MixedRealityControllerVisualizationProfileInspector.OnEnable
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI
-  name: OnInspectorGUI()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityControllerVisualizationProfileInspector_OnInspectorGUI
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI()
-  nameWithType: MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI()
-- uid: XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI*
-  name: OnInspectorGUI
-  href: api/XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityControllerVisualizationProfileInspector_OnInspectorGUI_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI
-  nameWithType: MixedRealityControllerVisualizationProfileInspector.OnInspectorGUI
 - uid: XRTK.Inspectors.Profiles.MixedRealityDiagnosticsSystemProfileInspector
   name: MixedRealityDiagnosticsSystemProfileInspector
   href: api/XRTK.Inspectors.Profiles.MixedRealityDiagnosticsSystemProfileInspector.html
@@ -12896,134 +13119,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Profiles.MixedRealityDiagnosticsSystemProfileInspector.OnInspectorGUI
   nameWithType: MixedRealityDiagnosticsSystemProfileInspector.OnInspectorGUI
-- uid: XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector
-  name: MixedRealityGesturesProfileInspector
-  href: api/XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.html
-  commentId: T:XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector
-  fullName: XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector
-  nameWithType: MixedRealityGesturesProfileInspector
-- uid: XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.OnEnable
-  name: OnEnable()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityGesturesProfileInspector_OnEnable
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.OnEnable
-  fullName: XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.OnEnable()
-  nameWithType: MixedRealityGesturesProfileInspector.OnEnable()
-- uid: XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.OnEnable*
-  name: OnEnable
-  href: api/XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityGesturesProfileInspector_OnEnable_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.OnEnable
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.OnEnable
-  nameWithType: MixedRealityGesturesProfileInspector.OnEnable
-- uid: XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.OnInspectorGUI
-  name: OnInspectorGUI()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityGesturesProfileInspector_OnInspectorGUI
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.OnInspectorGUI
-  fullName: XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.OnInspectorGUI()
-  nameWithType: MixedRealityGesturesProfileInspector.OnInspectorGUI()
-- uid: XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.OnInspectorGUI*
-  name: OnInspectorGUI
-  href: api/XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityGesturesProfileInspector_OnInspectorGUI_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.OnInspectorGUI
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityGesturesProfileInspector.OnInspectorGUI
-  nameWithType: MixedRealityGesturesProfileInspector.OnInspectorGUI
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector
-  name: MixedRealityInputActionRulesInspector
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.html
-  commentId: T:XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector
-  nameWithType: MixedRealityInputActionRulesInspector
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.OnEnable
-  name: OnEnable()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.html#XRTK_Inspectors_Profiles_MixedRealityInputActionRulesInspector_OnEnable
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.OnEnable
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.OnEnable()
-  nameWithType: MixedRealityInputActionRulesInspector.OnEnable()
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.OnEnable*
-  name: OnEnable
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.html#XRTK_Inspectors_Profiles_MixedRealityInputActionRulesInspector_OnEnable_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.OnEnable
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.OnEnable
-  nameWithType: MixedRealityInputActionRulesInspector.OnEnable
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.OnInspectorGUI
-  name: OnInspectorGUI()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.html#XRTK_Inspectors_Profiles_MixedRealityInputActionRulesInspector_OnInspectorGUI
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.OnInspectorGUI
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.OnInspectorGUI()
-  nameWithType: MixedRealityInputActionRulesInspector.OnInspectorGUI()
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.OnInspectorGUI*
-  name: OnInspectorGUI
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.html#XRTK_Inspectors_Profiles_MixedRealityInputActionRulesInspector_OnInspectorGUI_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.OnInspectorGUI
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputActionRulesInspector.OnInspectorGUI
-  nameWithType: MixedRealityInputActionRulesInspector.OnInspectorGUI
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector
-  name: MixedRealityInputActionsProfileInspector
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.html
-  commentId: T:XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector
-  nameWithType: MixedRealityInputActionsProfileInspector
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.OnEnable
-  name: OnEnable()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityInputActionsProfileInspector_OnEnable
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.OnEnable
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.OnEnable()
-  nameWithType: MixedRealityInputActionsProfileInspector.OnEnable()
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.OnEnable*
-  name: OnEnable
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityInputActionsProfileInspector_OnEnable_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.OnEnable
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.OnEnable
-  nameWithType: MixedRealityInputActionsProfileInspector.OnEnable
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.OnInspectorGUI
-  name: OnInspectorGUI()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityInputActionsProfileInspector_OnInspectorGUI
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.OnInspectorGUI
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.OnInspectorGUI()
-  nameWithType: MixedRealityInputActionsProfileInspector.OnInspectorGUI()
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.OnInspectorGUI*
-  name: OnInspectorGUI
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityInputActionsProfileInspector_OnInspectorGUI_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.OnInspectorGUI
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputActionsProfileInspector.OnInspectorGUI
-  nameWithType: MixedRealityInputActionsProfileInspector.OnInspectorGUI
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector
-  name: MixedRealityInputSystemProfileInspector
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.html
-  commentId: T:XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector
-  nameWithType: MixedRealityInputSystemProfileInspector
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.OnEnable
-  name: OnEnable()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityInputSystemProfileInspector_OnEnable
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.OnEnable
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.OnEnable()
-  nameWithType: MixedRealityInputSystemProfileInspector.OnEnable()
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.OnEnable*
-  name: OnEnable
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityInputSystemProfileInspector_OnEnable_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.OnEnable
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.OnEnable
-  nameWithType: MixedRealityInputSystemProfileInspector.OnEnable
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.OnInspectorGUI
-  name: OnInspectorGUI()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityInputSystemProfileInspector_OnInspectorGUI
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.OnInspectorGUI
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.OnInspectorGUI()
-  nameWithType: MixedRealityInputSystemProfileInspector.OnInspectorGUI()
-- uid: XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.OnInspectorGUI*
-  name: OnInspectorGUI
-  href: api/XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityInputSystemProfileInspector_OnInspectorGUI_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.OnInspectorGUI
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityInputSystemProfileInspector.OnInspectorGUI
-  nameWithType: MixedRealityInputSystemProfileInspector.OnInspectorGUI
 - uid: XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector
   name: MixedRealityNetworkSystemProfileInspector
   href: api/XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.html
@@ -13056,38 +13151,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.OnInspectorGUI
   nameWithType: MixedRealityNetworkSystemProfileInspector.OnInspectorGUI
-- uid: XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector
-  name: MixedRealityPointerProfileInspector
-  href: api/XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.html
-  commentId: T:XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector
-  fullName: XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector
-  nameWithType: MixedRealityPointerProfileInspector
-- uid: XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.OnEnable
-  name: OnEnable()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityPointerProfileInspector_OnEnable
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.OnEnable
-  fullName: XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.OnEnable()
-  nameWithType: MixedRealityPointerProfileInspector.OnEnable()
-- uid: XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.OnEnable*
-  name: OnEnable
-  href: api/XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityPointerProfileInspector_OnEnable_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.OnEnable
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.OnEnable
-  nameWithType: MixedRealityPointerProfileInspector.OnEnable
-- uid: XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.OnInspectorGUI
-  name: OnInspectorGUI()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityPointerProfileInspector_OnInspectorGUI
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.OnInspectorGUI
-  fullName: XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.OnInspectorGUI()
-  nameWithType: MixedRealityPointerProfileInspector.OnInspectorGUI()
-- uid: XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.OnInspectorGUI*
-  name: OnInspectorGUI
-  href: api/XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityPointerProfileInspector_OnInspectorGUI_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.OnInspectorGUI
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityPointerProfileInspector.OnInspectorGUI
-  nameWithType: MixedRealityPointerProfileInspector.OnInspectorGUI
 - uid: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector
   name: MixedRealityRegisteredServiceProviderProfileInspector
   href: api/XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.html
@@ -13120,38 +13183,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.OnInspectorGUI
   nameWithType: MixedRealityRegisteredServiceProviderProfileInspector.OnInspectorGUI
-- uid: XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector
-  name: MixedRealitySpeechCommandsProfileInspector
-  href: api/XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.html
-  commentId: T:XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector
-  fullName: XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector
-  nameWithType: MixedRealitySpeechCommandsProfileInspector
-- uid: XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.OnEnable
-  name: OnEnable()
-  href: api/XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealitySpeechCommandsProfileInspector_OnEnable
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.OnEnable
-  fullName: XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.OnEnable()
-  nameWithType: MixedRealitySpeechCommandsProfileInspector.OnEnable()
-- uid: XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.OnEnable*
-  name: OnEnable
-  href: api/XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealitySpeechCommandsProfileInspector_OnEnable_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.OnEnable
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.OnEnable
-  nameWithType: MixedRealitySpeechCommandsProfileInspector.OnEnable
-- uid: XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI
-  name: OnInspectorGUI()
-  href: api/XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealitySpeechCommandsProfileInspector_OnInspectorGUI
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI
-  fullName: XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI()
-  nameWithType: MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI()
-- uid: XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI*
-  name: OnInspectorGUI
-  href: api/XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealitySpeechCommandsProfileInspector_OnInspectorGUI_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI
-  nameWithType: MixedRealitySpeechCommandsProfileInspector.OnInspectorGUI
 - uid: XRTK.Inspectors.Profiles.MixedRealityToolkitConfigurationProfileInspector
   name: MixedRealityToolkitConfigurationProfileInspector
   href: api/XRTK.Inspectors.Profiles.MixedRealityToolkitConfigurationProfileInspector.html
@@ -20831,6 +20862,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.OculusApi.GetActiveController
   nameWithType: OculusApi.GetActiveController
+- uid: XRTK.Oculus.OculusApi.GetAdaptiveGPUPerformanceScale
+  name: GetAdaptiveGPUPerformanceScale()
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetAdaptiveGPUPerformanceScale
+  commentId: M:XRTK.Oculus.OculusApi.GetAdaptiveGPUPerformanceScale
+  fullName: XRTK.Oculus.OculusApi.GetAdaptiveGPUPerformanceScale()
+  nameWithType: OculusApi.GetAdaptiveGPUPerformanceScale()
+- uid: XRTK.Oculus.OculusApi.GetAdaptiveGPUPerformanceScale*
+  name: GetAdaptiveGPUPerformanceScale
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetAdaptiveGPUPerformanceScale_
+  commentId: Overload:XRTK.Oculus.OculusApi.GetAdaptiveGPUPerformanceScale
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.GetAdaptiveGPUPerformanceScale
+  nameWithType: OculusApi.GetAdaptiveGPUPerformanceScale
 - uid: XRTK.Oculus.OculusApi.GetBoundaryConfigured
   name: GetBoundaryConfigured()
   href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetBoundaryConfigured
@@ -22144,12 +22188,12 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.OculusApi.TestBoundaryPoint
   nameWithType: OculusApi.TestBoundaryPoint
-- uid: XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Definitions.Utilities.MixedRealityPose,XRTK.Oculus.OculusApi.Posef,System.Boolean)
-  name: ToMixedRealityPose(MixedRealityPose, OculusApi.Posef, Boolean)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ToMixedRealityPose_XRTK_Definitions_Utilities_MixedRealityPose_XRTK_Oculus_OculusApi_Posef_System_Boolean_
-  commentId: M:XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Definitions.Utilities.MixedRealityPose,XRTK.Oculus.OculusApi.Posef,System.Boolean)
-  fullName: XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Definitions.Utilities.MixedRealityPose, XRTK.Oculus.OculusApi.Posef, System.Boolean)
-  nameWithType: OculusApi.ToMixedRealityPose(MixedRealityPose, OculusApi.Posef, Boolean)
+- uid: XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef,System.Boolean)
+  name: ToMixedRealityPose(OculusApi.Posef, Boolean)
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ToMixedRealityPose_XRTK_Oculus_OculusApi_Posef_System_Boolean_
+  commentId: M:XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef,System.Boolean)
+  fullName: XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef, System.Boolean)
+  nameWithType: OculusApi.ToMixedRealityPose(OculusApi.Posef, Boolean)
 - uid: XRTK.Oculus.OculusApi.ToMixedRealityPose*
   name: ToMixedRealityPose
   href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ToMixedRealityPose_
@@ -26597,6 +26641,19 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotating
   nameWithType: ManipulationHandler.IsRotating
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotationLocked
+  name: IsRotationLocked
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_IsRotationLocked
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotationLocked
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotationLocked
+  nameWithType: ManipulationHandler.IsRotationLocked
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotationLocked*
+  name: IsRotationLocked
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_IsRotationLocked_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotationLocked
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotationLocked
+  nameWithType: ManipulationHandler.IsRotationLocked
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotationPossible
   name: IsRotationPossible
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_IsRotationPossible
@@ -26610,6 +26667,19 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsRotationPossible
   nameWithType: ManipulationHandler.IsRotationPossible
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.IsScalingLocked
+  name: IsScalingLocked
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_IsScalingLocked
+  commentId: P:XRTK.SDK.Input.Handlers.ManipulationHandler.IsScalingLocked
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsScalingLocked
+  nameWithType: ManipulationHandler.IsScalingLocked
+- uid: XRTK.SDK.Input.Handlers.ManipulationHandler.IsScalingLocked*
+  name: IsScalingLocked
+  href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_IsScalingLocked_
+  commentId: Overload:XRTK.SDK.Input.Handlers.ManipulationHandler.IsScalingLocked
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.Handlers.ManipulationHandler.IsScalingLocked
+  nameWithType: ManipulationHandler.IsScalingLocked
 - uid: XRTK.SDK.Input.Handlers.ManipulationHandler.IsScalingPossible
   name: IsScalingPossible
   href: api/XRTK.SDK.Input.Handlers.ManipulationHandler.html#XRTK_SDK_Input_Handlers_ManipulationHandler_IsScalingPossible
@@ -38848,32 +38918,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_01_InitializedBoolData
   nameWithType: TestFixture_02_InteractionDefinitionTests.Test_02_01_InitializedBoolData
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_02_BoolChangedAndUpdated
-  name: Test_02_02_BoolChangedAndUpdated()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_02_02_BoolChangedAndUpdated
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_02_BoolChangedAndUpdated
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_02_BoolChangedAndUpdated()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_02_02_BoolChangedAndUpdated()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_02_BoolChangedAndUpdated*
-  name: Test_02_02_BoolChangedAndUpdated
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_02_02_BoolChangedAndUpdated_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_02_BoolChangedAndUpdated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_02_Bool_Changed_NoUpdate
+  name: Test_02_02_Bool_Changed_NoUpdate()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_02_02_Bool_Changed_NoUpdate
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_02_Bool_Changed_NoUpdate
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_02_Bool_Changed_NoUpdate()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_02_02_Bool_Changed_NoUpdate()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_02_Bool_Changed_NoUpdate*
+  name: Test_02_02_Bool_Changed_NoUpdate
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_02_02_Bool_Changed_NoUpdate_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_02_Bool_Changed_NoUpdate
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_02_BoolChangedAndUpdated
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_02_02_BoolChangedAndUpdated
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_03_BoolNoChangeAndUpdated
-  name: Test_02_03_BoolNoChangeAndUpdated()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_02_03_BoolNoChangeAndUpdated
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_03_BoolNoChangeAndUpdated
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_03_BoolNoChangeAndUpdated()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_02_03_BoolNoChangeAndUpdated()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_03_BoolNoChangeAndUpdated*
-  name: Test_02_03_BoolNoChangeAndUpdated
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_02_03_BoolNoChangeAndUpdated_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_03_BoolNoChangeAndUpdated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_02_Bool_Changed_NoUpdate
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_02_02_Bool_Changed_NoUpdate
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_03_Bool_NoChange_NoUpdate
+  name: Test_02_03_Bool_NoChange_NoUpdate()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_02_03_Bool_NoChange_NoUpdate
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_03_Bool_NoChange_NoUpdate
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_03_Bool_NoChange_NoUpdate()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_02_03_Bool_NoChange_NoUpdate()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_03_Bool_NoChange_NoUpdate*
+  name: Test_02_03_Bool_NoChange_NoUpdate
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_02_03_Bool_NoChange_NoUpdate_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_03_Bool_NoChange_NoUpdate
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_03_BoolNoChangeAndUpdated
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_02_03_BoolNoChangeAndUpdated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_02_03_Bool_NoChange_NoUpdate
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_02_03_Bool_NoChange_NoUpdate
 - uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_01_InitializedFloatData
   name: Test_03_01_InitializedFloatData()
   href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_03_01_InitializedFloatData
@@ -38887,32 +38957,45 @@ references:
   isSpec: "True"
   fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_01_InitializedFloatData
   nameWithType: TestFixture_02_InteractionDefinitionTests.Test_03_01_InitializedFloatData
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_02_FloatChangedAndUpdated
-  name: Test_03_02_FloatChangedAndUpdated()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_03_02_FloatChangedAndUpdated
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_02_FloatChangedAndUpdated
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_02_FloatChangedAndUpdated()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_03_02_FloatChangedAndUpdated()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_02_FloatChangedAndUpdated*
-  name: Test_03_02_FloatChangedAndUpdated
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_03_02_FloatChangedAndUpdated_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_02_FloatChangedAndUpdated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_02_Float_Changed_Updated
+  name: Test_03_02_Float_Changed_Updated()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_03_02_Float_Changed_Updated
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_02_Float_Changed_Updated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_02_Float_Changed_Updated()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_03_02_Float_Changed_Updated()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_02_Float_Changed_Updated*
+  name: Test_03_02_Float_Changed_Updated
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_03_02_Float_Changed_Updated_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_02_Float_Changed_Updated
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_02_FloatChangedAndUpdated
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_03_02_FloatChangedAndUpdated
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_FloatNoChangeAndUpdated
-  name: Test_03_03_FloatNoChangeAndUpdated()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_03_03_FloatNoChangeAndUpdated
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_FloatNoChangeAndUpdated
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_FloatNoChangeAndUpdated()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_03_03_FloatNoChangeAndUpdated()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_FloatNoChangeAndUpdated*
-  name: Test_03_03_FloatNoChangeAndUpdated
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_03_03_FloatNoChangeAndUpdated_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_FloatNoChangeAndUpdated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_02_Float_Changed_Updated
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_03_02_Float_Changed_Updated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated
+  name: Test_03_03_Float_NoChange_Updated()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_03_03_Float_NoChange_Updated
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated*
+  name: Test_03_03_Float_NoChange_Updated
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_03_03_Float_NoChange_Updated_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_FloatNoChangeAndUpdated
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_03_03_FloatNoChangeAndUpdated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated_Inverted
+  name: Test_03_03_Float_NoChange_Updated_Inverted()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_03_03_Float_NoChange_Updated_Inverted
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated_Inverted
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated_Inverted()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated_Inverted()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated_Inverted*
+  name: Test_03_03_Float_NoChange_Updated_Inverted
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_03_03_Float_NoChange_Updated_Inverted_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated_Inverted
+  isSpec: "True"
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated_Inverted
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_03_03_Float_NoChange_Updated_Inverted
 - uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_01_Vector2_One
   name: Test_04_01_01_Vector2_One()
   href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_01_01_Vector2_One
@@ -38952,45 +39035,45 @@ references:
   isSpec: "True"
   fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_01_InitializedVector2
   nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_01_InitializedVector2
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated
-  name: Test_04_02_01_Vector2ChangedAndUpdated()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_02_01_Vector2ChangedAndUpdated
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated*
-  name: Test_04_02_01_Vector2ChangedAndUpdated
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_02_01_Vector2ChangedAndUpdated_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2_Changed_Updated
+  name: Test_04_02_01_Vector2_Changed_Updated()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_02_01_Vector2_Changed_Updated
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2_Changed_Updated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2_Changed_Updated()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2_Changed_Updated()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2_Changed_Updated*
+  name: Test_04_02_01_Vector2_Changed_Updated
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_02_01_Vector2_Changed_Updated_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2_Changed_Updated
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2ChangedAndUpdated
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted
-  name: Test_04_02_02_Vector2ChangedAndUpdated_Inverted()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_02_02_Vector2ChangedAndUpdated_Inverted
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted*
-  name: Test_04_02_02_Vector2ChangedAndUpdated_Inverted
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_02_02_Vector2ChangedAndUpdated_Inverted_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2_Changed_Updated
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_02_01_Vector2_Changed_Updated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2_NoChanged_Updated_Inverted
+  name: Test_04_02_02_Vector2_NoChanged_Updated_Inverted()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_02_02_Vector2_NoChanged_Updated_Inverted
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2_NoChanged_Updated_Inverted
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2_NoChanged_Updated_Inverted()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2_NoChanged_Updated_Inverted()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2_NoChanged_Updated_Inverted*
+  name: Test_04_02_02_Vector2_NoChanged_Updated_Inverted
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_02_02_Vector2_NoChanged_Updated_Inverted_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2_NoChanged_Updated_Inverted
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2ChangedAndUpdated_Inverted
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2NoChangeAndUpdated
-  name: Test_04_03_Vector2NoChangeAndUpdated()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_03_Vector2NoChangeAndUpdated
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2NoChangeAndUpdated
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2NoChangeAndUpdated()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2NoChangeAndUpdated()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2NoChangeAndUpdated*
-  name: Test_04_03_Vector2NoChangeAndUpdated
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_03_Vector2NoChangeAndUpdated_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2NoChangeAndUpdated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2_NoChanged_Updated_Inverted
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_02_02_Vector2_NoChanged_Updated_Inverted
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2_NoChange_Updated
+  name: Test_04_03_Vector2_NoChange_Updated()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_03_Vector2_NoChange_Updated
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2_NoChange_Updated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2_NoChange_Updated()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2_NoChange_Updated()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2_NoChange_Updated*
+  name: Test_04_03_Vector2_NoChange_Updated
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_04_03_Vector2_NoChange_Updated_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2_NoChange_Updated
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2NoChangeAndUpdated
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2NoChangeAndUpdated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2_NoChange_Updated
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_04_03_Vector2_NoChange_Updated
 - uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_01_InitializedVector3
   name: Test_05_01_InitializedVector3()
   href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_05_01_InitializedVector3
@@ -39004,32 +39087,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_01_InitializedVector3
   nameWithType: TestFixture_02_InteractionDefinitionTests.Test_05_01_InitializedVector3
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3ChangedAndUpdated
-  name: Test_05_02_Vector3ChangedAndUpdated()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_05_02_Vector3ChangedAndUpdated
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3ChangedAndUpdated
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3ChangedAndUpdated()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3ChangedAndUpdated()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3ChangedAndUpdated*
-  name: Test_05_02_Vector3ChangedAndUpdated
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_05_02_Vector3ChangedAndUpdated_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3ChangedAndUpdated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3_NoChange_Updated
+  name: Test_05_02_Vector3_NoChange_Updated()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_05_02_Vector3_NoChange_Updated
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3_NoChange_Updated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3_NoChange_Updated()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3_NoChange_Updated()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3_NoChange_Updated*
+  name: Test_05_02_Vector3_NoChange_Updated
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_05_02_Vector3_NoChange_Updated_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3_NoChange_Updated
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3ChangedAndUpdated
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3ChangedAndUpdated
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3NoChangeAndUpdated
-  name: Test_05_03_Vector3NoChangeAndUpdated()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_05_03_Vector3NoChangeAndUpdated
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3NoChangeAndUpdated
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3NoChangeAndUpdated()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3NoChangeAndUpdated()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3NoChangeAndUpdated*
-  name: Test_05_03_Vector3NoChangeAndUpdated
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_05_03_Vector3NoChangeAndUpdated_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3NoChangeAndUpdated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3_NoChange_Updated
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_05_02_Vector3_NoChange_Updated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3_NoChange_NoUpdate
+  name: Test_05_03_Vector3_NoChange_NoUpdate()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_05_03_Vector3_NoChange_NoUpdate
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3_NoChange_NoUpdate
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3_NoChange_NoUpdate()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3_NoChange_NoUpdate()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3_NoChange_NoUpdate*
+  name: Test_05_03_Vector3_NoChange_NoUpdate
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_05_03_Vector3_NoChange_NoUpdate_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3_NoChange_NoUpdate
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3NoChangeAndUpdated
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3NoChangeAndUpdated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3_NoChange_NoUpdate
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_05_03_Vector3_NoChange_NoUpdate
 - uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_01_InitializeQuaternion
   name: Test_06_01_InitializeQuaternion()
   href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_06_01_InitializeQuaternion
@@ -39043,32 +39126,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_01_InitializeQuaternion
   nameWithType: TestFixture_02_InteractionDefinitionTests.Test_06_01_InitializeQuaternion
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_02_QuaternionChangedAndUpdated
-  name: Test_06_02_QuaternionChangedAndUpdated()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_06_02_QuaternionChangedAndUpdated
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_02_QuaternionChangedAndUpdated
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_02_QuaternionChangedAndUpdated()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_06_02_QuaternionChangedAndUpdated()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_02_QuaternionChangedAndUpdated*
-  name: Test_06_02_QuaternionChangedAndUpdated
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_06_02_QuaternionChangedAndUpdated_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_02_QuaternionChangedAndUpdated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_02_Quaternion_NoChanged_Updated
+  name: Test_06_02_Quaternion_NoChanged_Updated()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_06_02_Quaternion_NoChanged_Updated
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_02_Quaternion_NoChanged_Updated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_02_Quaternion_NoChanged_Updated()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_06_02_Quaternion_NoChanged_Updated()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_02_Quaternion_NoChanged_Updated*
+  name: Test_06_02_Quaternion_NoChanged_Updated
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_06_02_Quaternion_NoChanged_Updated_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_02_Quaternion_NoChanged_Updated
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_02_QuaternionChangedAndUpdated
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_06_02_QuaternionChangedAndUpdated
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_03_QuaternionNoChangeAndUpdated
-  name: Test_06_03_QuaternionNoChangeAndUpdated()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_06_03_QuaternionNoChangeAndUpdated
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_03_QuaternionNoChangeAndUpdated
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_03_QuaternionNoChangeAndUpdated()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_06_03_QuaternionNoChangeAndUpdated()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_03_QuaternionNoChangeAndUpdated*
-  name: Test_06_03_QuaternionNoChangeAndUpdated
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_06_03_QuaternionNoChangeAndUpdated_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_03_QuaternionNoChangeAndUpdated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_02_Quaternion_NoChanged_Updated
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_06_02_Quaternion_NoChanged_Updated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_03_Quaternion_NoChange_NoUpdate
+  name: Test_06_03_Quaternion_NoChange_NoUpdate()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_06_03_Quaternion_NoChange_NoUpdate
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_03_Quaternion_NoChange_NoUpdate
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_03_Quaternion_NoChange_NoUpdate()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_06_03_Quaternion_NoChange_NoUpdate()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_03_Quaternion_NoChange_NoUpdate*
+  name: Test_06_03_Quaternion_NoChange_NoUpdate
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_06_03_Quaternion_NoChange_NoUpdate_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_03_Quaternion_NoChange_NoUpdate
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_03_QuaternionNoChangeAndUpdated
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_06_03_QuaternionNoChangeAndUpdated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_06_03_Quaternion_NoChange_NoUpdate
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_06_03_Quaternion_NoChange_NoUpdate
 - uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_01_InitializePoseData
   name: Test_07_01_InitializePoseData()
   href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_07_01_InitializePoseData
@@ -39082,123 +39165,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_01_InitializePoseData
   nameWithType: TestFixture_02_InteractionDefinitionTests.Test_07_01_InitializePoseData
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPoseChangedAndUpdated
-  name: Test_07_02_MixedRealityPoseChangedAndUpdated()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_07_02_MixedRealityPoseChangedAndUpdated
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPoseChangedAndUpdated
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPoseChangedAndUpdated()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPoseChangedAndUpdated()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPoseChangedAndUpdated*
-  name: Test_07_02_MixedRealityPoseChangedAndUpdated
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_07_02_MixedRealityPoseChangedAndUpdated_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPoseChangedAndUpdated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPose_NoChanged_Updated
+  name: Test_07_02_MixedRealityPose_NoChanged_Updated()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_07_02_MixedRealityPose_NoChanged_Updated
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPose_NoChanged_Updated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPose_NoChanged_Updated()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPose_NoChanged_Updated()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPose_NoChanged_Updated*
+  name: Test_07_02_MixedRealityPose_NoChanged_Updated
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_07_02_MixedRealityPose_NoChanged_Updated_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPose_NoChanged_Updated
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPoseChangedAndUpdated
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPoseChangedAndUpdated
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPoseNoChangeAndUpdated
-  name: Test_07_03_MixedRealityPoseNoChangeAndUpdated()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_07_03_MixedRealityPoseNoChangeAndUpdated
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPoseNoChangeAndUpdated
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPoseNoChangeAndUpdated()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPoseNoChangeAndUpdated()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPoseNoChangeAndUpdated*
-  name: Test_07_03_MixedRealityPoseNoChangeAndUpdated
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_07_03_MixedRealityPoseNoChangeAndUpdated_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPoseNoChangeAndUpdated
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPose_NoChanged_Updated
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_07_02_MixedRealityPose_NoChanged_Updated
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPose_NoChange_NoUpdate
+  name: Test_07_03_MixedRealityPose_NoChange_NoUpdate()
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_07_03_MixedRealityPose_NoChange_NoUpdate
+  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPose_NoChange_NoUpdate
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPose_NoChange_NoUpdate()
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPose_NoChange_NoUpdate()
+- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPose_NoChange_NoUpdate*
+  name: Test_07_03_MixedRealityPose_NoChange_NoUpdate
+  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_07_03_MixedRealityPose_NoChange_NoUpdate_
+  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPose_NoChange_NoUpdate
   isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPoseNoChangeAndUpdated
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPoseNoChangeAndUpdated
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_01_InteractionArrayObject
-  name: Test_08_01_InteractionArrayObject()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_08_01_InteractionArrayObject
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_01_InteractionArrayObject
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_01_InteractionArrayObject()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_08_01_InteractionArrayObject()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_01_InteractionArrayObject*
-  name: Test_08_01_InteractionArrayObject
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_08_01_InteractionArrayObject_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_01_InteractionArrayObject
-  isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_01_InteractionArrayObject
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_08_01_InteractionArrayObject
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_02_InteractionArrayBool
-  name: Test_08_02_InteractionArrayBool()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_08_02_InteractionArrayBool
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_02_InteractionArrayBool
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_02_InteractionArrayBool()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_08_02_InteractionArrayBool()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_02_InteractionArrayBool*
-  name: Test_08_02_InteractionArrayBool
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_08_02_InteractionArrayBool_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_02_InteractionArrayBool
-  isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_02_InteractionArrayBool
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_08_02_InteractionArrayBool
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_03_InteractionArrayFloat
-  name: Test_08_03_InteractionArrayFloat()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_08_03_InteractionArrayFloat
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_03_InteractionArrayFloat
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_03_InteractionArrayFloat()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_08_03_InteractionArrayFloat()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_03_InteractionArrayFloat*
-  name: Test_08_03_InteractionArrayFloat
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_08_03_InteractionArrayFloat_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_03_InteractionArrayFloat
-  isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_03_InteractionArrayFloat
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_08_03_InteractionArrayFloat
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_04_InteractionArrayVector2
-  name: Test_08_04_InteractionArrayVector2()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_08_04_InteractionArrayVector2
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_04_InteractionArrayVector2
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_04_InteractionArrayVector2()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_08_04_InteractionArrayVector2()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_04_InteractionArrayVector2*
-  name: Test_08_04_InteractionArrayVector2
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_08_04_InteractionArrayVector2_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_04_InteractionArrayVector2
-  isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_04_InteractionArrayVector2
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_08_04_InteractionArrayVector2
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_05_InteractionArrayVector3
-  name: Test_08_05_InteractionArrayVector3()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_08_05_InteractionArrayVector3
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_05_InteractionArrayVector3
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_05_InteractionArrayVector3()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_08_05_InteractionArrayVector3()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_05_InteractionArrayVector3*
-  name: Test_08_05_InteractionArrayVector3
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_08_05_InteractionArrayVector3_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_05_InteractionArrayVector3
-  isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_05_InteractionArrayVector3
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_08_05_InteractionArrayVector3
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_06_InteractionArrayQuaternion
-  name: Test_08_06_InteractionArrayQuaternion()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_08_06_InteractionArrayQuaternion
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_06_InteractionArrayQuaternion
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_06_InteractionArrayQuaternion()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_08_06_InteractionArrayQuaternion()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_06_InteractionArrayQuaternion*
-  name: Test_08_06_InteractionArrayQuaternion
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_08_06_InteractionArrayQuaternion_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_06_InteractionArrayQuaternion
-  isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_06_InteractionArrayQuaternion
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_08_06_InteractionArrayQuaternion
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_07_InteractionArrayMixedRealityPose
-  name: Test_08_07_InteractionArrayMixedRealityPose()
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_08_07_InteractionArrayMixedRealityPose
-  commentId: M:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_07_InteractionArrayMixedRealityPose
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_07_InteractionArrayMixedRealityPose()
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_08_07_InteractionArrayMixedRealityPose()
-- uid: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_07_InteractionArrayMixedRealityPose*
-  name: Test_08_07_InteractionArrayMixedRealityPose
-  href: api/XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.html#XRTK_Tests_InputSystem_TestFixture_02_InteractionDefinitionTests_Test_08_07_InteractionArrayMixedRealityPose_
-  commentId: Overload:XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_07_InteractionArrayMixedRealityPose
-  isSpec: "True"
-  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_08_07_InteractionArrayMixedRealityPose
-  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_08_07_InteractionArrayMixedRealityPose
+  fullName: XRTK.Tests.InputSystem.TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPose_NoChange_NoUpdate
+  nameWithType: TestFixture_02_InteractionDefinitionTests.Test_07_03_MixedRealityPose_NoChange_NoUpdate
 - uid: XRTK.Tests.InputSystem.TestFixture_03_InputSystemTests
   name: TestFixture_03_InputSystemTests
   href: api/XRTK.Tests.InputSystem.TestFixture_03_InputSystemTests.html

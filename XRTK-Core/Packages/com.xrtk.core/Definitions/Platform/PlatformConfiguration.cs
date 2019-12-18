@@ -6,6 +6,7 @@ using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces;
+using XRTK.Interfaces.Platform;
 
 namespace XRTK.Definitions.Platform
 {
@@ -30,7 +31,7 @@ namespace XRTK.Definitions.Platform
         }
 
         [SerializeField]
-        [Implements(typeof(IMixedRealityDataProvider), TypeGrouping.ByNamespaceFlat)]
+        [Implements(typeof(IMixedRealityPlatform), TypeGrouping.ByNamespaceFlat)]
         private SystemType dataModelType;
 
         /// <summary>

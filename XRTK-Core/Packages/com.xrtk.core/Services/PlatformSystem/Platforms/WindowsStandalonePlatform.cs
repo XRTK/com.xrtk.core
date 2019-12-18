@@ -6,19 +6,16 @@ using XRTK.Interfaces.PlatformSystem;
 namespace XRTK.Services.PlatformSystem.Platforms
 {
     /// <summary>
-    /// The Editor platform definition for the Mixed Reality Toolkit.
+    /// The Windows Standalone platform definition for the Mixed Reality Toolkit.
     /// </summary>
-    /// <remarks>
-    /// Defines any editor platform for Win, OSX, and Linux.
-    /// </remarks>
-    public class EditorPlatform : BaseDataProvider, IMixedRealityPlatform
+    public class WindowsStandalonePlatform : BaseDataProvider, IMixedRealityPlatform
     {
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="priority"></param>
-        public EditorPlatform(string name, uint priority) : base(name, priority)
+        public WindowsStandalonePlatform(string name, uint priority) : base(name, priority)
         {
         }
 
@@ -27,7 +24,7 @@ namespace XRTK.Services.PlatformSystem.Platforms
         {
             get
             {
-#if UNITY_EDITOR
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
                 return true;
 #else
                 return false;

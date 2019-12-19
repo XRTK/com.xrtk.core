@@ -4,10 +4,9 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands.UnityEditor;
-using XRTK.Inspectors.Profiles;
 using XRTK.Inspectors.Utilities;
 
-namespace XRTK.Definitions.Controllers.Hands.Inspectors.Profiles
+namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Hands
 {
     [CustomEditor(typeof(SimulationHandControllerDataProviderProfile))]
     public class SimulationHandControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector

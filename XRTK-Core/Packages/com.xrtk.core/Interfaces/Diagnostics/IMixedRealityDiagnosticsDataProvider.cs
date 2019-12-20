@@ -6,18 +6,15 @@ namespace XRTK.Interfaces.Diagnostics
     public interface IMixedRealityDiagnosticsDataProvider : IMixedRealityDataProvider
     {
         /// <summary>
-        /// Enable / disable the profiler diagnostics visualization.
+        /// Registers the diagnostics handler to receive updates.
         /// </summary>
-        bool ShowProfiler { get; set; }
+        /// <param name="handler">The handler to register.</param>
+        void Register(IMixedRealityDiagnosticsHandler handler);
 
         /// <summary>
-        /// The amount of time, in seconds, to collect frames for frame rate calculation.
+        /// Unregisters the diagnostics handler from receiving updates.
         /// </summary>
-        float FrameSampleRate { get; }
-
-        /// <summary>
-        /// Enable / disable console diagnostics visualization.
-        /// </summary>
-        bool ShowConsole { get; set; }
+        /// <param name="handler">The handler to unregister.</param>
+        void Unregister(IMixedRealityDiagnosticsHandler handler);
     }
 }

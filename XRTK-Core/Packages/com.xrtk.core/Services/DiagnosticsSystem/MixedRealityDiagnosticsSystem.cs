@@ -12,6 +12,9 @@ namespace XRTK.Services.DiagnosticsSystem
     /// </summary>
     public class MixedRealityDiagnosticsSystem : BaseSystem, IMixedRealityDiagnosticsSystem
     {
+        /// <inheritdoc />
+        public Transform DiagnosticsTransform { get; private set; }
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -48,6 +51,36 @@ namespace XRTK.Services.DiagnosticsSystem
                     Debug.LogError($"Failed to start {diagnosticsDataProvider.DataProviderName}!");
                 }
             }
+
+            CreateDiagnosticsGameObject();
+        }
+
+        /// <inheritdoc />
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            if (DiagnosticsTransform != null)
+            {
+                if (Application.isEditor)
+                {
+                    Object.DestroyImmediate(DiagnosticsTransform.gameObject);
+                }
+                else
+                {
+                    DiagnosticsTransform.DetachChildren();
+                    Object.Destroy(DiagnosticsTransform.gameObject);
+                }
+
+                DiagnosticsTransform = null;
+            }
+        }
+
+        private void CreateDiagnosticsGameObject()
+        {
+            GameObject diagnosticGameObject = new GameObject("Diagnostics");
+            DiagnosticsTransform = diagnosticGameObject.transform;
+            DiagnosticsTransform.parent = MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform;
         }
     }
 }

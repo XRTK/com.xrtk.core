@@ -25,6 +25,10 @@ namespace XRTK.Services.DiagnosticsSystem
         private static readonly int MaxTargetFrameRate = 120;
         private static readonly int FrameRange = 30;
 
+        [Header("Profiler")]
+        [SerializeField]
+        private TextMeshProUGUI
+
         private static readonly Vector2 DefaultWindowRotation = new Vector2(10.0f, 20.0f);
         private static readonly Vector3 DefaultWindowScale = new Vector3(0.2f, 0.04f, 1.0f);
 
@@ -215,8 +219,6 @@ namespace XRTK.Services.DiagnosticsSystem
 
         private void Start()
         {
-            transform.SetParent(MixedRealityToolkit.DiagnosticsSystem.DiagnosticsTransform, true);
-
             Reset();
             BuildWindow();
             BuildFrameRateStrings();

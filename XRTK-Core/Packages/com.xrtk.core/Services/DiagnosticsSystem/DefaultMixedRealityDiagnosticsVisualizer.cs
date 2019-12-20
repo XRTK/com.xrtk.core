@@ -6,6 +6,7 @@ using System.Text;
 using UnityEngine;
 using XRTK.Utilities;
 using XRTK.Definitions.Diagnostics;
+using XRTK.Interfaces.Diagnostics;
 
 #if WINDOWS_UWP
 using Windows.System;
@@ -18,7 +19,7 @@ namespace XRTK.Services.DiagnosticsSystem
     /// <summary>
     /// The default profiler diagnostics visualizer implementation.
     /// </summary>
-    public class MixedRealityProfilerDiagnosticsVisualizer : MonoBehaviour
+    public class DefaultMixedRealityDiagnosticsVisualizer : MonoBehaviour, IMixedRealityDiagnosticsVisualizer
     {
         private static readonly int MaxStringLength = 32;
         private static readonly int MaxTargetFrameRate = 120;

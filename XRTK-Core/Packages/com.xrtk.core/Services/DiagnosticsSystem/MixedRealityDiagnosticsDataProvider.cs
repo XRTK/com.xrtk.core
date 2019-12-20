@@ -10,8 +10,7 @@ namespace XRTK.Services.DiagnosticsSystem
     public class MixedRealityDiagnosticsDataProvider : BaseDataProvider, IMixedRealityDiagnosticsDataProvider
     {
         private MixedRealityDiagnosticsDataProviderProfile profile;
-        private MixedRealityProfilerDiagnosticsVisualizer profilerDiagnosticsVisualizer = null;
-        private MixedRealityConsoleDiagnosticsVisualizer consoleDiagnosticsVisualizer = null;
+        private DefaultMixedRealityDiagnosticsVisualizer profilerDiagnosticsVisualizer = null;
         private GameObject diagnosticVisualizationParent = null;
 
         private bool showProfiler;
@@ -51,23 +50,8 @@ namespace XRTK.Services.DiagnosticsSystem
             }
         }
 
-        private bool showConsole;
         /// <inheritdoc />
-        public bool ShowConsole
-        {
-            get => showConsole;
-            set
-            {
-                if (value != showConsole)
-                {
-                    showConsole = value;
-                    if (consoleDiagnosticsVisualizer != null)
-                    {
-                        consoleDiagnosticsVisualizer.IsVisible = value;
-                    }
-                }
-            }
-        }
+        public bool ShowConsole { get; set; }
 
         private TextAnchor windowAnchor = TextAnchor.LowerCenter;
 
@@ -185,7 +169,7 @@ namespace XRTK.Services.DiagnosticsSystem
             WindowScale = profile.WindowScale;
             WindowFollowSpeed = profile.WindowFollowSpeed;
 
-            CreateVisualizations();
+            CreateDiagnosticsGameObject();
         }
 
         /// <inheritdoc />
@@ -212,13 +196,13 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <summary>
         /// Creates the diagnostic visualizations and parents them so that the scene hierarchy does not get overly cluttered.
         /// </summary>
-        private void CreateVisualizations()
+        private void CreateDiagnosticsGameObject()
         {
             diagnosticVisualizationParent = new GameObject("Diagnostics");
             diagnosticVisualizationParent.transform.parent = MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform;
 
             // visual profiler settings
-            profilerDiagnosticsVisualizer = diagnosticVisualizationParent.AddComponent<MixedRealityProfilerDiagnosticsVisualizer>();
+            profilerDiagnosticsVisualizer = diagnosticVisualizationParent.AddComponent<DefaultMixedRealityDiagnosticsVisualizer>();
             profilerDiagnosticsVisualizer.profile = profile;
             profilerDiagnosticsVisualizer.WindowParent = diagnosticVisualizationParent.transform;
             profilerDiagnosticsVisualizer.IsVisible = ShowProfiler;

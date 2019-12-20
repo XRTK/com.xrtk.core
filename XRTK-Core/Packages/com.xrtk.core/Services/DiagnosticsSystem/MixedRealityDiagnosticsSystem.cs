@@ -226,7 +226,7 @@ namespace XRTK.Services.DiagnosticsSystem
         /// </summary>
         private GameObject diagnosticVisualizationParent = null;
 
-        private MixedRealityToolkitVisualProfiler visualProfiler = null;
+        private MixedRealityProfilerDiagnosticsVisualizer visualProfiler = null;
 
         /// <summary>
         /// Creates the diagnostic visualizations and parents them so that the scene hierarchy does not get overly cluttered.
@@ -238,7 +238,7 @@ namespace XRTK.Services.DiagnosticsSystem
             diagnosticVisualizationParent.SetActive(ShowDiagnostics);
 
             // visual profiler settings
-            visualProfiler = diagnosticVisualizationParent.AddComponent<MixedRealityToolkitVisualProfiler>();
+            visualProfiler = diagnosticVisualizationParent.AddComponent<MixedRealityProfilerDiagnosticsVisualizer>();
             visualProfiler.WindowParent = diagnosticVisualizationParent.transform;
             visualProfiler.IsVisible = ShowProfiler;
             visualProfiler.FrameSampleRate = FrameSampleRate;

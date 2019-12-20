@@ -16,16 +16,9 @@ using UnityEngine.Profiling;
 namespace XRTK.Services.DiagnosticsSystem
 {
     /// <summary>
-    /// The VisualProfiler provides a drop in, single file, solution for viewing 
-    /// your Windows Mixed Reality Unity application's frame rate and memory usage. Missed 
-    /// frames are displayed over time to visually find problem areas. Memory is reported 
-    /// as current, peak and max usage in a bar graph. 
-    /// 
-    /// USAGE: To use this profiler simply add this script as a component of any GameObject in 
-    /// your Unity scene. The profiler is initially enabled (toggle-able via the initiallyActive 
-    /// property), but can be toggled via the enabled/disable voice commands keywords.
+    /// The default profiler diagnostics visualizer implementation.
     /// </summary>
-    public class MixedRealityToolkitVisualProfiler : MonoBehaviour
+    public class MixedRealityProfilerDiagnosticsVisualizer : MonoBehaviour
     {
         private MixedRealityDiagnosticsSystemProfile profile;
 

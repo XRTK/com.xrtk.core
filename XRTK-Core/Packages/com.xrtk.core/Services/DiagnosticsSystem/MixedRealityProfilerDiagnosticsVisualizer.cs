@@ -20,8 +20,6 @@ namespace XRTK.Services.DiagnosticsSystem
     /// </summary>
     public class MixedRealityProfilerDiagnosticsVisualizer : MonoBehaviour
     {
-        private MixedRealityDiagnosticsSystemProfile profile;
-
         private static readonly int MaxStringLength = 32;
         private static readonly int MaxTargetFrameRate = 120;
         private static readonly int MaxFrameTimings = 128;
@@ -40,6 +38,8 @@ namespace XRTK.Services.DiagnosticsSystem
         private readonly char[] stringBuffer = new char[MaxStringLength];
         private readonly FrameTiming[] frameTimings = new FrameTiming[MaxFrameTimings];
         private readonly System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
+
+        public MixedRealityDiagnosticsDataProviderProfile profile;
 
         /// <summary>
         /// The <see cref="Transform"/> parent of the <see cref="MixedRealityToolkitVisualProfiler"/>
@@ -174,8 +174,6 @@ namespace XRTK.Services.DiagnosticsSystem
 
         private void Reset()
         {
-            profile = MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile;
-
             if (defaultMaterial == null)
             {
                 defaultMaterial = new Material(Shader.Find("Hidden/Internal-Colored"));

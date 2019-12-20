@@ -15,237 +15,39 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="profile">Diagnostics service configuration profile.</param>
+        /// <param name="profile">Diagnostics system configuration profile.</param>
         public MixedRealityDiagnosticsSystem(MixedRealityDiagnosticsSystemProfile profile)
-            : base(profile)
-        {
-            this.profile = profile;
-        }
-
-        private readonly MixedRealityDiagnosticsSystemProfile profile;
-
-        #region IMixedRealityService
+            : base(profile) { }
 
         /// <inheritdoc />
         public override void Initialize()
         {
-            if (!Application.isPlaying) { return; }
+            base.Initialize();
 
-            // Apply profile settings
-            ShowDiagnostics = profile.ShowDiagnostics;
-            ShowProfiler = profile.ShowProfiler;
-            FrameSampleRate = profile.FrameSampleRate;
-            WindowAnchor = profile.WindowAnchor;
-            WindowOffset = profile.WindowOffset;
-            WindowScale = profile.WindowScale;
-            WindowFollowSpeed = profile.WindowFollowSpeed;
-
-            CreateVisualizations();
-        }
-
-        /// <inheritdoc />
-        public override void Destroy()
-        {
-            base.Destroy();
-
-            if (diagnosticVisualizationParent != null)
+            if (!Application.isPlaying || !MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.EnableDiagnostics)
             {
-                if (Application.isEditor)
-                {
-                    Object.DestroyImmediate(diagnosticVisualizationParent);
-                }
-                else
-                {
-                    diagnosticVisualizationParent.transform.DetachChildren();
-                    Object.Destroy(diagnosticVisualizationParent);
-                }
-
-                diagnosticVisualizationParent = null;
+                return;
             }
-        }
 
-        #endregion IMixedRealityService Implementation
-
-        #region IMixedRealityDiagnosticsSystem
-
-        private bool showDiagnostics;
-
-        /// <inheritdoc />
-        public bool ShowDiagnostics
-        {
-            get => showDiagnostics;
-            set
+            foreach (var diagnosticsDataProvider in MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders)
             {
-                if (value != showDiagnostics)
+                //If the DataProvider cannot be resolved, this is likely just a configuration / package missmatch.  User simply needs to be warned, not errored.
+                if (diagnosticsDataProvider.DataProviderType.Type == null)
                 {
-                    showDiagnostics = value;
+                    Debug.LogWarning($"Could not load the configured provider ({diagnosticsDataProvider.DataProviderName})\n\nThis is most likely because the XRTK UPM package for that provider is currently not registered\nCheck the installed packages in the Unity Package Manager\n\n");
+                    continue;
+                }
 
-                    if (diagnosticVisualizationParent != null)
-                    {
-                        diagnosticVisualizationParent.SetActive(value);
-                    }
+                if (!MixedRealityToolkit.CreateAndRegisterService<IMixedRealityDiagnosticsDataProvider>(
+                    diagnosticsDataProvider.DataProviderType,
+                    diagnosticsDataProvider.RuntimePlatform,
+                    diagnosticsDataProvider.DataProviderName,
+                    diagnosticsDataProvider.Priority,
+                    diagnosticsDataProvider.Profile))
+                {
+                    Debug.LogError($"Failed to start {diagnosticsDataProvider.DataProviderName}!");
                 }
             }
-        }
-
-        private bool showProfiler;
-
-        /// <inheritdoc />
-        public bool ShowProfiler
-        {
-            get => showProfiler;
-            set
-            {
-                if (value != showProfiler)
-                {
-                    showProfiler = value;
-                    if (visualProfiler != null)
-                    {
-                        visualProfiler.IsVisible = value;
-                    }
-                }
-            }
-        }
-
-        private float frameSampleRate = 0.1f;
-
-        /// <inheritdoc />
-        public float FrameSampleRate
-        {
-            get => frameSampleRate;
-            set
-            {
-                if (!Mathf.Approximately(frameSampleRate, value))
-                {
-                    frameSampleRate = value;
-
-                    if (visualProfiler != null)
-                    {
-                        visualProfiler.FrameSampleRate = frameSampleRate;
-                    }
-                }
-            }
-        }
-
-        #endregion IMixedRealityDiagnosticsSystem Implementation
-
-        private TextAnchor windowAnchor = TextAnchor.LowerCenter;
-
-        /// <summary>
-        /// What part of the view port to anchor the window to.
-        /// </summary>
-        public TextAnchor WindowAnchor
-        {
-            get => windowAnchor;
-
-            set
-            {
-                if (value != windowAnchor)
-                {
-                    windowAnchor = value;
-
-                    if (visualProfiler != null)
-                    {
-                        visualProfiler.WindowAnchor = windowAnchor;
-                    }
-                }
-            }
-        }
-
-        private Vector2 windowOffset = new Vector2(0.1f, 0.1f);
-
-        /// <summary>
-        /// The offset from the view port center applied based on the window anchor selection.
-        /// </summary>
-        public Vector2 WindowOffset
-        {
-            get => windowOffset;
-
-            set
-            {
-                if (value != windowOffset)
-                {
-                    windowOffset = value;
-
-                    if (visualProfiler != null)
-                    {
-                        visualProfiler.WindowOffset = windowOffset;
-                    }
-                }
-            }
-        }
-
-        private float windowScale = 1.0f;
-
-        /// <summary>
-        /// Use to scale the window size up or down, can simulate a zooming effect.
-        /// </summary>
-        public float WindowScale
-        {
-            get => windowScale;
-
-            set
-            {
-                if (!value.Equals(windowScale))
-                {
-                    windowScale = value;
-
-                    if (visualProfiler != null)
-                    {
-                        visualProfiler.WindowScale = windowScale;
-                    }
-                }
-            }
-        }
-
-        private float windowFollowSpeed = 5.0f;
-
-        /// <summary>
-        /// How quickly to interpolate the window towards its target position and rotation.
-        /// </summary>
-        public float WindowFollowSpeed
-        {
-            get => windowFollowSpeed;
-
-            set
-            {
-                if (!value.Equals(windowFollowSpeed))
-                {
-                    windowFollowSpeed = value;
-
-                    if (visualProfiler != null)
-                    {
-                        visualProfiler.WindowFollowSpeed = windowFollowSpeed;
-                    }
-                }
-            }
-        }
-
-        /// <summary>
-        /// The parent object under which all visualization game objects will be placed.
-        /// </summary>
-        private GameObject diagnosticVisualizationParent = null;
-
-        private MixedRealityProfilerDiagnosticsVisualizer visualProfiler = null;
-
-        /// <summary>
-        /// Creates the diagnostic visualizations and parents them so that the scene hierarchy does not get overly cluttered.
-        /// </summary>
-        private void CreateVisualizations()
-        {
-            diagnosticVisualizationParent = new GameObject("Diagnostics");
-            diagnosticVisualizationParent.transform.parent = MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform;
-            diagnosticVisualizationParent.SetActive(ShowDiagnostics);
-
-            // visual profiler settings
-            visualProfiler = diagnosticVisualizationParent.AddComponent<MixedRealityProfilerDiagnosticsVisualizer>();
-            visualProfiler.WindowParent = diagnosticVisualizationParent.transform;
-            visualProfiler.IsVisible = ShowProfiler;
-            visualProfiler.FrameSampleRate = FrameSampleRate;
-            visualProfiler.WindowAnchor = WindowAnchor;
-            visualProfiler.WindowOffset = WindowOffset;
-            visualProfiler.WindowScale = WindowScale;
-            visualProfiler.WindowFollowSpeed = WindowFollowSpeed;
         }
     }
 }

@@ -1,18 +1,16 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.﻿
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Diagnostics;
 using XRTK.Inspectors.Utilities;
 
-namespace XRTK.Inspectors.Profiles
+namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
 {
-    [CustomEditor(typeof(MixedRealityDiagnosticsSystemProfile))]
-    public class MixedRealityDiagnosticsSystemProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(MixedRealityDiagnosticsDataProviderProfile))]
+    public class MixedRealityDiagnosticsDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
-        private static bool showGeneralSettings = true;
-        private SerializedProperty showDiagnostics;
         private SerializedProperty windowAnchor;
         private SerializedProperty windowOffset;
         private SerializedProperty windowScale;
@@ -30,12 +28,12 @@ namespace XRTK.Inspectors.Profiles
         private SerializedProperty memoryLimitColor;
 
         private static bool showConsoleSettings = true;
+        private SerializedProperty showConsole;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            showDiagnostics = serializedObject.FindProperty(nameof(showDiagnostics));
             windowAnchor = serializedObject.FindProperty(nameof(windowAnchor));
             windowOffset = serializedObject.FindProperty(nameof(windowOffset));
             windowScale = serializedObject.FindProperty(nameof(windowScale));
@@ -50,6 +48,8 @@ namespace XRTK.Inspectors.Profiles
             memoryUsedColor = serializedObject.FindProperty(nameof(memoryUsedColor));
             memoryPeakColor = serializedObject.FindProperty(nameof(memoryPeakColor));
             memoryLimitColor = serializedObject.FindProperty(nameof(memoryLimitColor));
+
+            showConsole = serializedObject.FindProperty(nameof(showConsole));
         }
 
         public override void OnInspectorGUI()
@@ -67,30 +67,11 @@ namespace XRTK.Inspectors.Profiles
             serializedObject.Update();
 
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Diagnostic Visualization Options", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Diagnostic visualizations can help monitor system resources and performance inside an application.", MessageType.Info);
-
-            EditorGUILayout.Space();
-            showGeneralSettings = EditorGUILayout.Foldout(showGeneralSettings, "General Settings", true);
-            if (showGeneralSettings)
-            {
-                using (new EditorGUI.IndentLevelScope())
-                {
-                    EditorGUILayout.PropertyField(showDiagnostics);
-                    if (!showDiagnostics.boolValue)
-                    {
-                        EditorGUILayout.Space();
-                        EditorGUILayout.HelpBox("Diagnostic visualizations have been globally disabled.", MessageType.Info);
-                        EditorGUILayout.Space();
-                    }
-
-                    EditorGUILayout.PropertyField(windowAnchor);
-                    EditorGUILayout.PropertyField(windowOffset);
-                    EditorGUILayout.PropertyField(windowScale);
-                    EditorGUILayout.PropertyField(windowFollowSpeed);
-                    EditorGUILayout.PropertyField(windowBackgroundColor);
-                }
-            }
+            EditorGUILayout.PropertyField(windowAnchor);
+            EditorGUILayout.PropertyField(windowOffset);
+            EditorGUILayout.PropertyField(windowScale);
+            EditorGUILayout.PropertyField(windowFollowSpeed);
+            EditorGUILayout.PropertyField(windowBackgroundColor);
 
             EditorGUILayout.Space();
             showProfilerSettings = EditorGUILayout.Foldout(showProfilerSettings, "Profiler Settings", true);
@@ -113,7 +94,7 @@ namespace XRTK.Inspectors.Profiles
             showConsoleSettings = EditorGUILayout.Foldout(showConsoleSettings, "Console Settings", true);
             if (showConsoleSettings)
             {
-                // TODO:
+                EditorGUILayout.PropertyField(showConsole);
             }
 
             serializedObject.ApplyModifiedProperties();

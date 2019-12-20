@@ -12,50 +12,22 @@ namespace XRTK.Definitions.Diagnostics
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Diagnostics System/Diagnostics Data Provider Profile", fileName = "MixedRealityDiagnosticsDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Diagnostics)]
     public class MixedRealityDiagnosticsDataProviderProfile : BaseMixedRealityProfile
     {
-        [SerializeField]
-        [Tooltip("What part of the view port to anchor the window to.")]
-        private TextAnchor windowAnchor = TextAnchor.LowerCenter;
-
-        /// <summary>
-        /// What part of the view port to anchor the window to.
-        /// </summary>
-        public TextAnchor WindowAnchor => windowAnchor;
+        #region General Settings
 
         [SerializeField]
-        [Tooltip("The offset from the view port center applied based on the window anchor selection.")]
-        private Vector2 windowOffset = new Vector2(0.1f, 0.1f);
+        [Tooltip("The prefab instantiated to visualize diagnostics data.")]
+        private GameObject visualizationPrefab;
 
         /// <summary>
-        /// The offset from the view port center applied based on the window anchor selection.
+        /// The prefab instantiated to visualize diagnostics data.
         /// </summary>
-        public Vector2 WindowOffset => windowOffset;
+        public GameObject VisualizationPrefab
+        {
+            get => visualizationPrefab;
+            private set => visualizationPrefab = value;
+        }
 
-        [SerializeField]
-        [Tooltip("Use to scale the window size up or down, can simulate a zooming effect.")]
-        private float windowScale = 1.0f;
-
-        /// <summary>
-        /// Use to scale the window size up or down, can simulate a zooming effect.
-        /// </summary>
-        public float WindowScale => windowScale;
-
-        [SerializeField]
-        [Tooltip("How quickly to interpolate the window towards its target position and rotation.")]
-        private float windowFollowSpeed = 5.0f;
-
-        /// <summary>
-        /// How quickly to interpolate the window towards its target position and rotation.
-        /// </summary>
-        public float WindowFollowSpeed => windowFollowSpeed;
-
-        [SerializeField]
-        [Tooltip("The color of the window backplate.")]
-        private Color windowBackgroundColor = new Color(80 / 256.0f, 80 / 256.0f, 80 / 256.0f, 1.0f);
-
-        /// <summary>
-        /// The background color of the diagnostics window.
-        /// </summary>
-        public Color WindowBackgroundColor => windowBackgroundColor;
+        #endregion
 
         #region Profiler Diagnostics Settings
 

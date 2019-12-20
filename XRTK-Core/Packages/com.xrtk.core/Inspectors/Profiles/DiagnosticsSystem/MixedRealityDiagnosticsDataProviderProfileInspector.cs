@@ -11,11 +11,7 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
     [CustomEditor(typeof(MixedRealityDiagnosticsDataProviderProfile))]
     public class MixedRealityDiagnosticsDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
-        private SerializedProperty windowAnchor;
-        private SerializedProperty windowOffset;
-        private SerializedProperty windowScale;
-        private SerializedProperty windowFollowSpeed;
-        private SerializedProperty windowBackgroundColor;
+        private SerializedProperty visualizationPrefab;
 
         private static bool showProfilerSettings = true;
         private SerializedProperty showProfiler;
@@ -34,11 +30,7 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
         {
             base.OnEnable();
 
-            windowAnchor = serializedObject.FindProperty(nameof(windowAnchor));
-            windowOffset = serializedObject.FindProperty(nameof(windowOffset));
-            windowScale = serializedObject.FindProperty(nameof(windowScale));
-            windowFollowSpeed = serializedObject.FindProperty(nameof(windowFollowSpeed));
-            windowBackgroundColor = serializedObject.FindProperty(nameof(windowBackgroundColor));
+            visualizationPrefab = serializedObject.FindProperty(nameof(visualizationPrefab));
 
             showProfiler = serializedObject.FindProperty(nameof(showProfiler));
             frameSampleRate = serializedObject.FindProperty(nameof(frameSampleRate));
@@ -67,11 +59,8 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
             serializedObject.Update();
 
             EditorGUILayout.Space();
-            EditorGUILayout.PropertyField(windowAnchor);
-            EditorGUILayout.PropertyField(windowOffset);
-            EditorGUILayout.PropertyField(windowScale);
-            EditorGUILayout.PropertyField(windowFollowSpeed);
-            EditorGUILayout.PropertyField(windowBackgroundColor);
+            EditorGUILayout.HelpBox("Make sure the prefab assigned here has a diagnostics handler attached.", MessageType.Info);
+            EditorGUILayout.PropertyField(visualizationPrefab);
 
             EditorGUILayout.Space();
             showProfilerSettings = EditorGUILayout.Foldout(showProfilerSettings, "Profiler Settings", true);

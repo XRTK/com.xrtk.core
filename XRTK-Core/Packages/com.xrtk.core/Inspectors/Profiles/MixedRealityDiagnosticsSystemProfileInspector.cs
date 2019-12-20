@@ -8,7 +8,7 @@ using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles
 {
-    [CustomEditor(typeof(MixedRealityDiagnosticsProfile))]
+    [CustomEditor(typeof(MixedRealityDiagnosticsSystemProfile))]
     public class MixedRealityDiagnosticsSystemProfileInspector : BaseMixedRealityProfileInspector
     {
         private static bool showGeneralSettings = true;
@@ -17,10 +17,17 @@ namespace XRTK.Inspectors.Profiles
         private SerializedProperty windowOffset;
         private SerializedProperty windowScale;
         private SerializedProperty windowFollowSpeed;
+        private SerializedProperty windowBackgroundColor;
 
         private static bool showProfilerSettings = true;
         private SerializedProperty showProfiler;
         private SerializedProperty frameSampleRate;
+        private SerializedProperty displayedDecimalDigits;
+        private SerializedProperty targetFrameRateColor;
+        private SerializedProperty missedFrameRateColor;
+        private SerializedProperty memoryUsedColor;
+        private SerializedProperty memoryPeakColor;
+        private SerializedProperty memoryLimitColor;
 
         private static bool showConsoleSettings = true;
 
@@ -28,14 +35,21 @@ namespace XRTK.Inspectors.Profiles
         {
             base.OnEnable();
 
-            showDiagnostics = serializedObject.FindProperty("showDiagnostics");
-            windowAnchor = serializedObject.FindProperty("windowAnchor");
-            windowOffset = serializedObject.FindProperty("windowOffset");
-            windowScale = serializedObject.FindProperty("windowScale");
-            windowFollowSpeed = serializedObject.FindProperty("windowFollowSpeed");
+            showDiagnostics = serializedObject.FindProperty(nameof(showDiagnostics));
+            windowAnchor = serializedObject.FindProperty(nameof(windowAnchor));
+            windowOffset = serializedObject.FindProperty(nameof(windowOffset));
+            windowScale = serializedObject.FindProperty(nameof(windowScale));
+            windowFollowSpeed = serializedObject.FindProperty(nameof(windowFollowSpeed));
+            windowBackgroundColor = serializedObject.FindProperty(nameof(windowBackgroundColor));
 
-            showProfiler = serializedObject.FindProperty("showProfiler");
-            frameSampleRate = serializedObject.FindProperty("frameSampleRate");
+            showProfiler = serializedObject.FindProperty(nameof(showProfiler));
+            frameSampleRate = serializedObject.FindProperty(nameof(frameSampleRate));
+            displayedDecimalDigits = serializedObject.FindProperty(nameof(displayedDecimalDigits));
+            targetFrameRateColor = serializedObject.FindProperty(nameof(targetFrameRateColor));
+            missedFrameRateColor = serializedObject.FindProperty(nameof(missedFrameRateColor));
+            memoryUsedColor = serializedObject.FindProperty(nameof(memoryUsedColor));
+            memoryPeakColor = serializedObject.FindProperty(nameof(memoryPeakColor));
+            memoryLimitColor = serializedObject.FindProperty(nameof(memoryLimitColor));
         }
 
         public override void OnInspectorGUI()
@@ -74,6 +88,7 @@ namespace XRTK.Inspectors.Profiles
                     EditorGUILayout.PropertyField(windowOffset);
                     EditorGUILayout.PropertyField(windowScale);
                     EditorGUILayout.PropertyField(windowFollowSpeed);
+                    EditorGUILayout.PropertyField(windowBackgroundColor);
                 }
             }
 
@@ -85,6 +100,12 @@ namespace XRTK.Inspectors.Profiles
                 {
                     EditorGUILayout.PropertyField(showProfiler);
                     EditorGUILayout.PropertyField(frameSampleRate);
+                    EditorGUILayout.PropertyField(displayedDecimalDigits);
+                    EditorGUILayout.PropertyField(targetFrameRateColor);
+                    EditorGUILayout.PropertyField(missedFrameRateColor);
+                    EditorGUILayout.PropertyField(memoryUsedColor);
+                    EditorGUILayout.PropertyField(memoryPeakColor);
+                    EditorGUILayout.PropertyField(memoryLimitColor);
                 }
             }
 

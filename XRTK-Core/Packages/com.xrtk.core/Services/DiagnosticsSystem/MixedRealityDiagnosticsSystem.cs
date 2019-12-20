@@ -16,13 +16,13 @@ namespace XRTK.Services.DiagnosticsSystem
         /// Constructor.
         /// </summary>
         /// <param name="profile">Diagnostics service configuration profile.</param>
-        public MixedRealityDiagnosticsSystem(MixedRealityDiagnosticsProfile profile)
+        public MixedRealityDiagnosticsSystem(MixedRealityDiagnosticsSystemProfile profile)
             : base(profile)
         {
             this.profile = profile;
         }
 
-        private readonly MixedRealityDiagnosticsProfile profile;
+        private readonly MixedRealityDiagnosticsSystemProfile profile;
 
         #region IMixedRealityService
 

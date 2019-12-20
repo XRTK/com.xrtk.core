@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Text;
 using UnityEngine;
 using XRTK.Utilities;
+using XRTK.Definitions.Diagnostics;
 
 #if WINDOWS_UWP
 using Windows.System;
@@ -26,6 +27,8 @@ namespace XRTK.Services.DiagnosticsSystem
     /// </summary>
     public class MixedRealityToolkitVisualProfiler : MonoBehaviour
     {
+        private MixedRealityDiagnosticsSystemProfile profile;
+
         private static readonly int MaxStringLength = 32;
         private static readonly int MaxTargetFrameRate = 120;
         private static readonly int MaxFrameTimings = 128;
@@ -134,37 +137,6 @@ namespace XRTK.Services.DiagnosticsSystem
             set => windowFollowSpeed = Mathf.Abs(value);
         }
 
-        [Header("UI Settings")]
-
-        [Range(0, 3)]
-        [SerializeField]
-        [Tooltip("How many decimal places to display on numeric strings.")]
-        private int displayedDecimalDigits = 1;
-
-        [SerializeField]
-        [Tooltip("The color of the window backplate.")]
-        private Color baseColor = new Color(80 / 256.0f, 80 / 256.0f, 80 / 256.0f, 1.0f);
-
-        [SerializeField]
-        [Tooltip("The color to display on frames which meet or exceed the target frame rate.")]
-        private Color targetFrameRateColor = new Color(127 / 256.0f, 186 / 256.0f, 0 / 256.0f, 1.0f);
-
-        [SerializeField]
-        [Tooltip("The color to display on frames which fall below the target frame rate.")]
-        private Color missedFrameRateColor = new Color(242 / 256.0f, 80 / 256.0f, 34 / 256.0f, 1.0f);
-
-        [SerializeField]
-        [Tooltip("The color to display for current memory usage values.")]
-        private Color memoryUsedColor = new Color(0 / 256.0f, 164 / 256.0f, 239 / 256.0f, 1.0f);
-
-        [SerializeField]
-        [Tooltip("The color to display for peak (aka max) memory usage values.")]
-        private Color memoryPeakColor = new Color(255 / 256.0f, 185 / 256.0f, 0 / 256.0f, 1.0f);
-
-        [SerializeField]
-        [Tooltip("The color to display for the platforms memory usage limit.")]
-        private Color memoryLimitColor = new Color(150 / 256.0f, 150 / 256.0f, 150 / 256.0f, 1.0f);
-
         private GameObject window;
         private TextMesh applicationDetailsText;
         private TextMesh cpuFrameRateText;
@@ -209,6 +181,8 @@ namespace XRTK.Services.DiagnosticsSystem
 
         private void Reset()
         {
+            profile = MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile;
+
             if (defaultMaterial == null)
             {
                 defaultMaterial = new Material(Shader.Find("Hidden/Internal-Colored"));
@@ -345,7 +319,7 @@ namespace XRTK.Services.DiagnosticsSystem
                 // Ideally we would query a device specific API (like the HolographicFramePresentationReport) to detect missed frames.
                 // But, many of these APIs are inaccessible in Unity. Currently missed frames are assumed when the average cpuFrameRate 
                 // is under the target frame rate.
-                frameInfoColors[0] = (cpuFrameRate < ((int)(AppFrameRate) - 1)) ? missedFrameRateColor : targetFrameRateColor;
+                frameInfoColors[0] = (cpuFrameRate < ((int)(AppFrameRate) - 1)) ? profile.MissedFrameRateColor : profile.TargetFrameRateColor;
                 frameInfoPropertyBlock.SetVectorArray(colorId, frameInfoColors);
 
                 // Reset timers.
@@ -380,9 +354,9 @@ namespace XRTK.Services.DiagnosticsSystem
 
             if (limit != limitMemoryUsage)
             {
-                if (window.activeSelf && WillDisplayedMemoryUsageDiffer(limitMemoryUsage, limit, displayedDecimalDigits))
+                if (window.activeSelf && WillDisplayedMemoryUsageDiffer(limitMemoryUsage, limit, profile.DisplayedDecimalDigits))
                 {
-                    MemoryUsageToString(stringBuffer, displayedDecimalDigits, limitMemoryText, LimitMemoryString, limit);
+                    MemoryUsageToString(stringBuffer, profile.DisplayedDecimalDigits, limitMemoryText, LimitMemoryString, limit);
                 }
 
                 limitMemoryUsage = limit;
@@ -396,9 +370,9 @@ namespace XRTK.Services.DiagnosticsSystem
                 scale.x = (float)usage / limitMemoryUsage;
                 usedAnchor.localScale = scale;
 
-                if (window.activeSelf && WillDisplayedMemoryUsageDiffer(memoryUsage, usage, displayedDecimalDigits))
+                if (window.activeSelf && WillDisplayedMemoryUsageDiffer(memoryUsage, usage, profile.DisplayedDecimalDigits))
                 {
-                    MemoryUsageToString(stringBuffer, displayedDecimalDigits, usedMemoryText, UsedMemoryString, usage);
+                    MemoryUsageToString(stringBuffer, profile.DisplayedDecimalDigits, usedMemoryText, UsedMemoryString, usage);
                 }
 
                 memoryUsage = usage;
@@ -410,9 +384,9 @@ namespace XRTK.Services.DiagnosticsSystem
                 scale.x = (float)memoryUsage / limitMemoryUsage;
                 peakAnchor.localScale = scale;
 
-                if (window.activeSelf && WillDisplayedMemoryUsageDiffer(peakMemoryUsage, memoryUsage, displayedDecimalDigits))
+                if (window.activeSelf && WillDisplayedMemoryUsageDiffer(peakMemoryUsage, memoryUsage, profile.DisplayedDecimalDigits))
                 {
-                    MemoryUsageToString(stringBuffer, displayedDecimalDigits, peakMemoryText, PeakMemoryString, memoryUsage);
+                    MemoryUsageToString(stringBuffer, profile.DisplayedDecimalDigits, peakMemoryText, PeakMemoryString, memoryUsage);
                 }
 
                 peakMemoryUsage = memoryUsage;
@@ -468,7 +442,7 @@ namespace XRTK.Services.DiagnosticsSystem
             {
                 window = CreateQuad("VisualProfiler", null);
                 window.transform.parent = WindowParent;
-                InitializeRenderer(window, backgroundMaterial, colorId, baseColor);
+                InitializeRenderer(window, backgroundMaterial, colorId, profile.WindowBackgroundColor);
                 window.transform.localScale = DefaultWindowScale;
                 windowHorizontalRotation = Quaternion.AngleAxis(DefaultWindowRotation.y, Vector3.right);
                 windowHorizontalRotationInverse = Quaternion.Inverse(windowHorizontalRotation);
@@ -497,7 +471,7 @@ namespace XRTK.Services.DiagnosticsSystem
                 {
                     frameInfoMatrices[i] = Matrix4x4.TRS(position, Quaternion.identity, new Vector3(scale.x * 0.8f, scale.y, scale.z));
                     position.x -= scale.x;
-                    frameInfoColors[i] = targetFrameRateColor;
+                    frameInfoColors[i] = profile.TargetFrameRateColor;
                 }
 
                 frameInfoPropertyBlock = new MaterialPropertyBlock();
@@ -506,12 +480,12 @@ namespace XRTK.Services.DiagnosticsSystem
 
             // Add memory usage text and bars.
             {
-                usedMemoryText = CreateText("UsedMemoryText", new Vector3(-0.495f, 0.0f, 0.0f), window.transform, TextAnchor.UpperLeft, textMaterial, memoryUsedColor, UsedMemoryString);
-                peakMemoryText = CreateText("PeakMemoryText", new Vector3(0.0f, 0.0f, 0.0f), window.transform, TextAnchor.UpperCenter, textMaterial, memoryPeakColor, PeakMemoryString);
+                usedMemoryText = CreateText("UsedMemoryText", new Vector3(-0.495f, 0.0f, 0.0f), window.transform, TextAnchor.UpperLeft, textMaterial, profile.MemoryUsedColor, UsedMemoryString);
+                peakMemoryText = CreateText("PeakMemoryText", new Vector3(0.0f, 0.0f, 0.0f), window.transform, TextAnchor.UpperCenter, textMaterial, profile.MemoryPeakColor, PeakMemoryString);
                 limitMemoryText = CreateText("LimitMemoryText", new Vector3(0.495f, 0.0f, 0.0f), window.transform, TextAnchor.UpperRight, textMaterial, Color.white, LimitMemoryString);
 
                 var limitBar = CreateQuad("LimitBar", window.transform);
-                InitializeRenderer(limitBar, defaultMaterial, colorId, memoryLimitColor);
+                InitializeRenderer(limitBar, defaultMaterial, colorId, profile.MemoryLimitColor);
                 limitBar.transform.localScale = new Vector3(0.99f, 0.2f, 1.0f);
                 limitBar.transform.localPosition = new Vector3(0.0f, -0.37f, 0.0f);
 
@@ -520,14 +494,14 @@ namespace XRTK.Services.DiagnosticsSystem
                     var bar = CreateQuad("UsedBar", usedAnchor);
                     var material = new Material(foregroundMaterial);
                     material.renderQueue += 1;
-                    InitializeRenderer(bar, material, colorId, memoryUsedColor);
+                    InitializeRenderer(bar, material, colorId, profile.MemoryUsedColor);
                     bar.transform.localScale = Vector3.one;
                     bar.transform.localPosition = new Vector3(0.5f, 0.0f, 0.0f);
                 }
                 {
                     peakAnchor = CreateAnchor("PeakAnchor", limitBar.transform);
                     var bar = CreateQuad("PeakBar", peakAnchor);
-                    InitializeRenderer(bar, foregroundMaterial, colorId, memoryPeakColor);
+                    InitializeRenderer(bar, foregroundMaterial, colorId, profile.MemoryPeakColor);
                     bar.transform.localScale = Vector3.one;
                     bar.transform.localPosition = new Vector3(0.5f, 0.0f, 0.0f);
                 }
@@ -540,7 +514,7 @@ namespace XRTK.Services.DiagnosticsSystem
         {
             cpuFrameRateStrings = new string[MaxTargetFrameRate + 1];
             gpuFrameRateStrings = new string[MaxTargetFrameRate + 1];
-            var displayedDecimalFormat = $"{{0:F{displayedDecimalDigits}}}";
+            var displayedDecimalFormat = $"{{0:F{profile.DisplayedDecimalDigits}}}";
 
             var stringBuilder = new StringBuilder(32);
             var millisecondStringBuilder = new StringBuilder(16);

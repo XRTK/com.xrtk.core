@@ -258,12 +258,12 @@ namespace XRTK.Definitions
 
         [SerializeField]
         [Tooltip("Profile for wiring up diagnostic assets.")]
-        private MixedRealityDiagnosticsProfile diagnosticsSystemProfile;
+        private MixedRealityDiagnosticsSystemProfile diagnosticsSystemProfile;
 
         /// <summary>
         /// Active profile for diagnostic configuration
         /// </summary>
-        public MixedRealityDiagnosticsProfile DiagnosticsSystemProfile
+        public MixedRealityDiagnosticsSystemProfile DiagnosticsSystemProfile
         {
             get => diagnosticsSystemProfile;
             internal set => diagnosticsSystemProfile = value;

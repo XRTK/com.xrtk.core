@@ -13,26 +13,29 @@ namespace XRTK.Inspectors.Profiles
     {
         private static bool showGeneralSettings = true;
         private SerializedProperty showDiagnostics;
-
-        private static bool showProfilerSettings = true;
-        private SerializedProperty showProfiler;
-        private SerializedProperty frameSampleRate;
         private SerializedProperty windowAnchor;
         private SerializedProperty windowOffset;
         private SerializedProperty windowScale;
         private SerializedProperty windowFollowSpeed;
+
+        private static bool showProfilerSettings = true;
+        private SerializedProperty showProfiler;
+        private SerializedProperty frameSampleRate;
+
+        private static bool showConsoleSettings = true;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
             showDiagnostics = serializedObject.FindProperty("showDiagnostics");
-            showProfiler = serializedObject.FindProperty("showProfiler");
-            frameSampleRate = serializedObject.FindProperty("frameSampleRate");
             windowAnchor = serializedObject.FindProperty("windowAnchor");
             windowOffset = serializedObject.FindProperty("windowOffset");
             windowScale = serializedObject.FindProperty("windowScale");
             windowFollowSpeed = serializedObject.FindProperty("windowFollowSpeed");
+
+            showProfiler = serializedObject.FindProperty("showProfiler");
+            frameSampleRate = serializedObject.FindProperty("frameSampleRate");
         }
 
         public override void OnInspectorGUI()
@@ -66,6 +69,11 @@ namespace XRTK.Inspectors.Profiles
                         EditorGUILayout.HelpBox("Diagnostic visualizations have been globally disabled.", MessageType.Info);
                         EditorGUILayout.Space();
                     }
+
+                    EditorGUILayout.PropertyField(windowAnchor);
+                    EditorGUILayout.PropertyField(windowOffset);
+                    EditorGUILayout.PropertyField(windowScale);
+                    EditorGUILayout.PropertyField(windowFollowSpeed);
                 }
             }
 
@@ -77,11 +85,14 @@ namespace XRTK.Inspectors.Profiles
                 {
                     EditorGUILayout.PropertyField(showProfiler);
                     EditorGUILayout.PropertyField(frameSampleRate);
-                    EditorGUILayout.PropertyField(windowAnchor);
-                    EditorGUILayout.PropertyField(windowOffset);
-                    EditorGUILayout.PropertyField(windowScale);
-                    EditorGUILayout.PropertyField(windowFollowSpeed);
                 }
+            }
+
+            EditorGUILayout.Space();
+            showConsoleSettings = EditorGUILayout.Foldout(showConsoleSettings, "Console Settings", true);
+            if (showConsoleSettings)
+            {
+                // TODO:
             }
 
             serializedObject.ApplyModifiedProperties();

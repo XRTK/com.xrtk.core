@@ -13,35 +13,16 @@ namespace XRTK.Definitions.Diagnostics
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Diagnostics System Profile", fileName = "MixedRealityDiagnosticsProfile", order = (int)CreateProfileMenuItemIndices.Diagnostics)]
     public class MixedRealityDiagnosticsProfile : BaseMixedRealityProfile
     {
+        #region Global Diagnostics Settings
+
         [SerializeField]
-        [FormerlySerializedAs("visible")]
         [Tooltip("Display all enabled diagnostics")]
         private bool showDiagnostics = true;
 
         /// <summary>
-        /// Show or hide diagnostic visualizations.
+        /// Show or hide diagnostic visualizations in general.
         /// </summary>
         public bool ShowDiagnostics => showDiagnostics;
-
-        [SerializeField]
-        [Tooltip("Display profiler")]
-        private bool showProfiler = true;
-
-        /// <summary>
-        /// Show or hide the profiler UI.
-        /// </summary>
-        public bool ShowProfiler => showProfiler;
-
-        [SerializeField]
-        [FormerlySerializedAs("frameRateDuration")]
-        [Tooltip("The amount of time, in seconds, to collect frames for frame rate calculation.")]
-        [Range(0, 5)]
-        private float frameSampleRate = 0.1f;
-
-        /// <summary>
-        /// The amount of time, in seconds, to collect frames for frame rate calculation.
-        /// </summary>
-        public float FrameSampleRate => frameSampleRate;
 
         [SerializeField]
         [Tooltip("What part of the view port to anchor the window to.")]
@@ -78,5 +59,35 @@ namespace XRTK.Definitions.Diagnostics
         /// How quickly to interpolate the window towards its target position and rotation.
         /// </summary>
         public float WindowFollowSpeed => windowFollowSpeed;
+
+        #endregion
+
+        #region Profiler Diagnostics Settings
+
+        [SerializeField]
+        [Tooltip("Display profiler")]
+        private bool showProfiler = true;
+
+        /// <summary>
+        /// Show or hide the profiler UI.
+        /// </summary>
+        public bool ShowProfiler => showProfiler;
+
+        [SerializeField]
+        [FormerlySerializedAs("frameRateDuration")]
+        [Tooltip("The amount of time, in seconds, to collect frames for frame rate calculation.")]
+        [Range(0, 5)]
+        private float frameSampleRate = 0.1f;
+
+        /// <summary>
+        /// The amount of time, in seconds, to collect frames for frame rate calculation.
+        /// </summary>
+        public float FrameSampleRate => frameSampleRate;
+
+        #endregion
+
+        #region Console Diagnostics Settings
+
+        #endregion
     }
 }

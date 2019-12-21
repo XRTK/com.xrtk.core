@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.Diagnostics;
+using XRTK.Services.DiagnosticsSystem;
 
 namespace XRTK.Definitions.Diagnostics
 {
@@ -31,7 +31,7 @@ namespace XRTK.Definitions.Diagnostics
 
         [SerializeField]
         [Tooltip("The concrete type of controller data provider to register.")]
-        [Implements(typeof(IMixedRealityDiagnosticsDataProvider), TypeGrouping.ByNamespaceFlat)]
+        [Extends(typeof(BaseMixedRealityDiagnosticsDataProvider), TypeGrouping.ByNamespaceFlat)]
         private SystemType dataProviderType;
 
         /// <summary>

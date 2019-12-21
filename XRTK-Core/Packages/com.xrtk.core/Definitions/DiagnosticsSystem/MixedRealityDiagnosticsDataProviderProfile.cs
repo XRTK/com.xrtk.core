@@ -12,33 +12,7 @@ namespace XRTK.Definitions.Diagnostics
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Diagnostics System/Diagnostics Data Provider Profile", fileName = "MixedRealityDiagnosticsDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Diagnostics)]
     public class MixedRealityDiagnosticsDataProviderProfile : BaseMixedRealityProfile
     {
-        #region General Settings
-
-        [SerializeField]
-        [Tooltip("The prefab instantiated to visualize diagnostics data.")]
-        private GameObject visualizationPrefab;
-
-        /// <summary>
-        /// The prefab instantiated to visualize diagnostics data.
-        /// </summary>
-        public GameObject VisualizationPrefab
-        {
-            get => visualizationPrefab;
-            private set => visualizationPrefab = value;
-        }
-
-        #endregion
-
         #region Profiler Diagnostics Settings
-
-        [SerializeField]
-        [Tooltip("Display profiler")]
-        private bool showProfiler = true;
-
-        /// <summary>
-        /// Show or hide the profiler UI.
-        /// </summary>
-        public bool ShowProfiler => showProfiler;
 
         [SerializeField]
         [Tooltip("The amount of time, in seconds, to collect frames for frame rate calculation.")]
@@ -49,16 +23,6 @@ namespace XRTK.Definitions.Diagnostics
         /// The amount of time, in seconds, to collect frames for frame rate calculation.
         /// </summary>
         public float FrameSampleRate => frameSampleRate;
-
-        [Range(0, 3)]
-        [SerializeField]
-        [Tooltip("How many decimal places to display on numeric strings.")]
-        private int displayedDecimalDigits = 1;
-
-        /// <summary>
-        /// How many decimal places to display on numeric strings.
-        /// </summary>
-        public int DisplayedDecimalDigits => displayedDecimalDigits;
 
         [SerializeField]
         [Tooltip("The color to display on frames which meet or exceed the target frame rate.")]
@@ -104,19 +68,6 @@ namespace XRTK.Definitions.Diagnostics
         /// The color to display for the platforms memory usage limit.
         /// </summary>
         public Color MemoryLimitColor => memoryLimitColor;
-
-        #endregion
-
-        #region Console Diagnostics Settings
-
-        [SerializeField]
-        [Tooltip("Display profiler")]
-        private bool showConsole = true;
-
-        /// <summary>
-        /// Show or hide the console UI.
-        /// </summary>
-        public bool ShowConsole => showConsole;
 
         #endregion
     }

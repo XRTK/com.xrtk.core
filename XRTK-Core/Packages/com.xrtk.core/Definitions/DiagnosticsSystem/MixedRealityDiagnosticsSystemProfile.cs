@@ -13,17 +13,17 @@ namespace XRTK.Definitions.Diagnostics
     public class MixedRealityDiagnosticsSystemProfile : BaseMixedRealityProfile
     {
         [SerializeField]
-        [Tooltip("Enable or disable diagnostics globally.")]
-        private bool enableDiagnostics = true;
+        [Tooltip("The prefab instantiated to visualize diagnostics data.")]
+        private GameObject visualizationPrefab;
 
         /// <summary>
-        /// Enable / disable diagnostic globally.
+        /// The prefab instantiated to visualize diagnostics data.
         /// </summary>
-        /// <remarks>
-        /// When set to true, settings for individual diagnostics data providers are honored. When set to false,
-        /// all diagnostics are disabled.
-        /// </remarks>
-        public bool EnableDiagnostics => enableDiagnostics;
+        public GameObject VisualizationPrefab
+        {
+            get => visualizationPrefab;
+            private set => visualizationPrefab = value;
+        }
 
         [SerializeField]
         private DiagnosticsDataProviderConfiguration[] registeredDiagnosticsDataProviders = new DiagnosticsDataProviderConfiguration[0];

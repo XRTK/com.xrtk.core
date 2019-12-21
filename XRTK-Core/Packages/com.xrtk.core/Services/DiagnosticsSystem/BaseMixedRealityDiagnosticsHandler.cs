@@ -35,6 +35,15 @@ namespace XRTK.Services.DiagnosticsSystem
         }
 
         /// <inheritdoc />
-        public abstract void UpdateDiagnostics(DiagnosticsData data);
+        public abstract void OnMemoryUsageChanged(ulong oldMemoryUsage, ulong newMemoryUsage);
+
+        /// <inheritdoc />
+        public abstract void OnMemoryLimitChanged(ulong oldMemoryLimit, ulong newMemoryLimit);
+
+        /// <inheritdoc />
+        public abstract void OnMemoryPeakChanged(ulong oldMemoryPeak, ulong newMemoryPeak);
+
+        /// <inheritdoc />
+        public abstract void OnLogReceived(string message, LogType type);
     }
 }

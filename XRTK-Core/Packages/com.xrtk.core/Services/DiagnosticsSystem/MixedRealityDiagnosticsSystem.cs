@@ -15,6 +15,9 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <inheritdoc />
         public Transform DiagnosticsTransform { get; private set; }
 
+        /// <inheritdoc />
+        public string ApplicationSignature => $"{Application.productName} v{Application.version}";
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -27,7 +30,7 @@ namespace XRTK.Services.DiagnosticsSystem
         {
             base.Initialize();
 
-            if (!Application.isPlaying || !MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.EnableDiagnostics)
+            if (!Application.isPlaying)
             {
                 return;
             }
@@ -53,6 +56,7 @@ namespace XRTK.Services.DiagnosticsSystem
             }
 
             CreateDiagnosticsGameObject();
+            CreateVisualizer();
         }
 
         /// <inheritdoc />
@@ -81,6 +85,17 @@ namespace XRTK.Services.DiagnosticsSystem
             GameObject diagnosticGameObject = new GameObject("Diagnostics");
             DiagnosticsTransform = diagnosticGameObject.transform;
             DiagnosticsTransform.parent = MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform;
+        }
+
+        private void CreateVisualizer()
+        {
+            if (MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.VisualizationPrefab == null)
+            {
+                Debug.LogError($"Failed to create a diagnostics visuailzer for {GetType().Name}. Check if a visualizer prefab is assigned in the configuration profile.");
+                return;
+            }
+
+            Object.Instantiate(MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.VisualizationPrefab, MixedRealityToolkit.DiagnosticsSystem.DiagnosticsTransform);
         }
     }
 }

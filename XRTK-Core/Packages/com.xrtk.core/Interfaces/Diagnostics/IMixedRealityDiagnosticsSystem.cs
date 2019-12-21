@@ -14,5 +14,11 @@ namespace XRTK.Interfaces.Diagnostics
         /// Gets the diagnostics transform where any visualized diganostics game objects should live.
         /// </summary>
         Transform DiagnosticsTransform { get; }
+
+        /// <summary>
+        /// Gets the application product name and build version. May be used to identify
+        /// the build the diagnostics belong to.
+        /// </summary>
+        string ApplicationSignature { get; }
     }
 }

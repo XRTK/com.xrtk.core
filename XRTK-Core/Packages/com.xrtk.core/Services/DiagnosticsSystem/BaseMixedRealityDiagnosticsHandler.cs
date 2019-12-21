@@ -35,6 +35,12 @@ namespace XRTK.Services.DiagnosticsSystem
         }
 
         /// <inheritdoc />
+        public abstract void OnMissedFramesChanged(bool[] missedFrames);
+
+        /// <inheritdoc />
+        public abstract void OnFrameRateChanged(int oldFPS, int newFPS, bool isGPU);
+
+        /// <inheritdoc />
         public abstract void OnMemoryUsageChanged(ulong oldMemoryUsage, ulong newMemoryUsage);
 
         /// <inheritdoc />

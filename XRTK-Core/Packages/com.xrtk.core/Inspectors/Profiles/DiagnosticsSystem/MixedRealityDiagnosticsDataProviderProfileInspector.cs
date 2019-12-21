@@ -14,9 +14,6 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
         private SerializedProperty frameSampleRate;
         private SerializedProperty targetFrameRateColor;
         private SerializedProperty missedFrameRateColor;
-        private SerializedProperty memoryUsedColor;
-        private SerializedProperty memoryPeakColor;
-        private SerializedProperty memoryLimitColor;
 
         protected override void OnEnable()
         {
@@ -25,9 +22,6 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
             frameSampleRate = serializedObject.FindProperty(nameof(frameSampleRate));
             targetFrameRateColor = serializedObject.FindProperty(nameof(targetFrameRateColor));
             missedFrameRateColor = serializedObject.FindProperty(nameof(missedFrameRateColor));
-            memoryUsedColor = serializedObject.FindProperty(nameof(memoryUsedColor));
-            memoryPeakColor = serializedObject.FindProperty(nameof(memoryPeakColor));
-            memoryLimitColor = serializedObject.FindProperty(nameof(memoryLimitColor));
         }
 
         public override void OnInspectorGUI()
@@ -49,9 +43,6 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
             EditorGUILayout.PropertyField(frameSampleRate);
             EditorGUILayout.PropertyField(targetFrameRateColor);
             EditorGUILayout.PropertyField(missedFrameRateColor);
-            EditorGUILayout.PropertyField(memoryUsedColor);
-            EditorGUILayout.PropertyField(memoryPeakColor);
-            EditorGUILayout.PropertyField(memoryLimitColor);
 
             serializedObject.ApplyModifiedProperties();
         }

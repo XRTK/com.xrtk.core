@@ -16,7 +16,7 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
         private static readonly GUIContent removeDataProviderContent = new GUIContent("-", "Remove diagnostics data provider");
         private static readonly GUIContent profileContent = new GUIContent("Profile");
 
-        private SerializedProperty visualizationPrefab;
+        private SerializedProperty diagnosticsWindowPrefab;
         private SerializedProperty registeredDiagnosticsDataProviders;
         private bool[] foldouts = null;
 
@@ -24,7 +24,7 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
         {
             base.OnEnable();
 
-            visualizationPrefab = serializedObject.FindProperty(nameof(visualizationPrefab));
+            diagnosticsWindowPrefab = serializedObject.FindProperty(nameof(diagnosticsWindowPrefab));
             registeredDiagnosticsDataProviders = serializedObject.FindProperty(nameof(registeredDiagnosticsDataProviders));
             foldouts = new bool[registeredDiagnosticsDataProviders.arraySize];
         }
@@ -48,8 +48,7 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
             EditorGUILayout.HelpBox("Diagnostic can help monitor system resources and performance inside an application during development.", MessageType.Info);
             EditorGUILayout.Space();
 
-            EditorGUILayout.HelpBox("Make sure the prefab assigned here has a diagnostics handler attached.", MessageType.Info);
-            EditorGUILayout.PropertyField(visualizationPrefab);
+            EditorGUILayout.PropertyField(diagnosticsWindowPrefab);
             EditorGUILayout.Space();
             
             bool changed = false;

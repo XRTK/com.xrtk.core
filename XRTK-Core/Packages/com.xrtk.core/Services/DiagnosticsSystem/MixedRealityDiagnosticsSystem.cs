@@ -89,13 +89,13 @@ namespace XRTK.Services.DiagnosticsSystem
 
         private void CreateVisualizer()
         {
-            if (MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.VisualizationPrefab == null)
+            if (MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.DiagnosticsWindowPrefab == null)
             {
                 Debug.LogError($"Failed to create a diagnostics visuailzer for {GetType().Name}. Check if a visualizer prefab is assigned in the configuration profile.");
                 return;
             }
 
-            Object.Instantiate(MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.VisualizationPrefab, MixedRealityToolkit.DiagnosticsSystem.DiagnosticsTransform);
+            Object.Instantiate(MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.DiagnosticsWindowPrefab, MixedRealityToolkit.DiagnosticsSystem.DiagnosticsTransform);
         }
     }
 }

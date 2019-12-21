@@ -14,15 +14,15 @@ namespace XRTK.Definitions.Diagnostics
     {
         [SerializeField]
         [Tooltip("The prefab instantiated to visualize diagnostics data.")]
-        private GameObject visualizationPrefab;
+        private GameObject diagnosticsWindowPrefab;
 
         /// <summary>
         /// The prefab instantiated to visualize diagnostics data.
         /// </summary>
-        public GameObject VisualizationPrefab
+        public GameObject DiagnosticsWindowPrefab
         {
-            get => visualizationPrefab;
-            private set => visualizationPrefab = value;
+            get => diagnosticsWindowPrefab;
+            private set => diagnosticsWindowPrefab = value;
         }
 
         [SerializeField]

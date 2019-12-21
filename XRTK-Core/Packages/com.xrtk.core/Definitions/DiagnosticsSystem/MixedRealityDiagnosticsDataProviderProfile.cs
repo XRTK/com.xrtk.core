@@ -42,33 +42,6 @@ namespace XRTK.Definitions.Diagnostics
         /// </summary>
         public Color MissedFrameRateColor => missedFrameRateColor;
 
-        [SerializeField]
-        [Tooltip("The color to display for current memory usage values.")]
-        private Color memoryUsedColor = new Color(0 / 256.0f, 164 / 256.0f, 239 / 256.0f, 1.0f);
-
-        /// <summary>
-        /// The color to display for current memory usage values.
-        /// </summary>
-        public Color MemoryUsedColor => memoryUsedColor;
-
-        [SerializeField]
-        [Tooltip("The color to display for peak (aka max) memory usage values.")]
-        private Color memoryPeakColor = new Color(255 / 256.0f, 185 / 256.0f, 0 / 256.0f, 1.0f);
-
-        /// <summary>
-        /// The color to display for peak (aka max) memory usage values.
-        /// </summary>
-        public Color MemoryPeakColor => memoryPeakColor;
-
-        [SerializeField]
-        [Tooltip("The color to display for the platforms memory usage limit.")]
-        private Color memoryLimitColor = new Color(150 / 256.0f, 150 / 256.0f, 150 / 256.0f, 1.0f);
-
-        /// <summary>
-        /// The color to display for the platforms memory usage limit.
-        /// </summary>
-        public Color MemoryLimitColor => memoryLimitColor;
-
         #endregion
     }
 }

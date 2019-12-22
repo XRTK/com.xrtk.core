@@ -1,9 +1,14 @@
 ﻿using System.Collections.Generic;
-using XRTK.Definitions.Diagnostics;
-using XRTK.Interfaces.Diagnostics;
+using XRTK.Interfaces.DiagnosticsSystem;
+using XRTK.Interfaces.DiagnosticsSystem.Handlers;
+using XRTK.Definitions.DiagnosticsSystem;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
+    /// <summary>
+    /// Abstract base implementation for diagnostics data providers. Provides needed implementations to register and unregister
+    /// diagnostics handlers.
+    /// </summary>
     public abstract class BaseMixedRealityDiagnosticsDataProvider : BaseDataProvider, IMixedRealityDiagnosticsDataProvider
     {
         private readonly List<IMixedRealityDiagnosticsHandler> handlers = new List<IMixedRealityDiagnosticsHandler>();

@@ -4,14 +4,14 @@
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.BoundarySystem;
-using XRTK.Definitions.Diagnostics;
+using XRTK.Definitions.DiagnosticsSystem;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.NetworkingSystem;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.CameraSystem;
-using XRTK.Interfaces.Diagnostics;
+using XRTK.Interfaces.DiagnosticsSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem;

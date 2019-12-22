@@ -3,10 +3,14 @@
 
 using System.Diagnostics;
 using UnityEngine;
-using XRTK.Definitions.Diagnostics;
+using XRTK.Definitions.DiagnosticsSystem;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
+    /// <summary>
+    /// Diagnostics data provider for frame diagnostics. It provides frame rate information and missed frames
+    /// information to identify performance issues.
+    /// </summary>
     public class MixedRealityFrameDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider
     {
         private readonly MixedRealityDiagnosticsDataProviderProfile profile;
@@ -15,7 +19,6 @@ namespace XRTK.Services.DiagnosticsSystem
         private readonly FrameTiming[] frameTimings = new FrameTiming[maxFrameTimings];
         private readonly Stopwatch stopwatch = new Stopwatch();
         private int frameCount;
-        private static readonly int maxTargetFrameRate = 120;
         private static readonly int frameRange = 30;
         private static readonly bool[] missedFrames = new bool[frameRange];
 

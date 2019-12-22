@@ -1,18 +1,17 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions.Diagnostics;
-using XRTK.Interfaces.Diagnostics;
+using XRTK.Definitions.DiagnosticsSystem;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
-    public class MixedRealityConsoleDiagnosticsDataProvider : BaseDataProvider, IMixedRealityDiagnosticsDataProvider
+    /// <summary>
+    /// Console diagnostics data providers mirrors the Unity console and digests logs so the
+    /// diagnostics system can work with it.
+    /// </summary>
+    public class MixedRealityConsoleDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider
     {
-        private readonly MixedRealityDiagnosticsDataProviderProfile profile;
-        private readonly List<IMixedRealityDiagnosticsHandler> handlers = new List<IMixedRealityDiagnosticsHandler>();
-
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -20,10 +19,7 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <param name="priority">The priority of the data provider.</param>
         /// <param name="profile">The provider configuration profile assigned.</param>
         public MixedRealityConsoleDiagnosticsDataProvider(string name, uint priority, MixedRealityDiagnosticsDataProviderProfile profile)
-            : base(name, priority)
-        {
-            this.profile = profile;
-        }
+            : base(name, priority, profile) { }
 
         /// <inheritdoc />
         public override void Enable()
@@ -39,29 +35,11 @@ namespace XRTK.Services.DiagnosticsSystem
             base.Disable();
         }
 
-        /// <inheritdoc />
-        public void Register(IMixedRealityDiagnosticsHandler handler)
-        {
-            if (!handlers.Contains(handler))
-            {
-                handlers.Add(handler);
-            }
-        }
-
-        /// <inheritdoc />
-        public void Unregister(IMixedRealityDiagnosticsHandler handler)
-        {
-            if (handlers.Contains(handler))
-            {
-                handlers.Remove(handler);
-            }
-        }
-
         private void Application_logMessageReceived(string condition, string stackTrace, LogType type)
         {
-            for (int i = 0; i < handlers.Count; i++)
+            for (int i = 0; i < Handlers.Count; i++)
             {
-                handlers[i].OnLogReceived(condition, type);
+                Handlers[i].OnLogReceived(condition, type);
             }
         }
     }

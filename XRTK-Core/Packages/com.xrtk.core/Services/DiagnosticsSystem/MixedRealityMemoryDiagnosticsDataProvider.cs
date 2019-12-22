@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.Diagnostics;
+using XRTK.Definitions.DiagnosticsSystem;
 
 #if WINDOWS_UWP
 using Windows.System;
@@ -12,6 +12,9 @@ using UnityEngine.Profiling;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
+    /// <summary>
+    /// Diagnostics data provider for memory diagnostics. E.g. provides information about used application memory.
+    /// </summary>
     public class MixedRealityMemoryDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider
     {
         private ulong lastMemoryUsage;

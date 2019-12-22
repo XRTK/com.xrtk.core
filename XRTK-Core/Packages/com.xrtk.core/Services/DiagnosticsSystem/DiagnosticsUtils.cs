@@ -3,6 +3,9 @@
 
 namespace XRTK.Services.DiagnosticsSystem
 {
+    /// <summary>
+    /// Diagnostics utilities.
+    /// </summary>
     public static class DiagnosticsUtils
     {
         /// <summary>

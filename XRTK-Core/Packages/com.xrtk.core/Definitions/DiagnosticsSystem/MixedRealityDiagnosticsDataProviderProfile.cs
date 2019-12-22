@@ -4,7 +4,7 @@
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Definitions.Diagnostics
+namespace XRTK.Definitions.DiagnosticsSystem
 {
     /// <summary>
     /// Configuration profile settings for setting up a diagnostics data provider.

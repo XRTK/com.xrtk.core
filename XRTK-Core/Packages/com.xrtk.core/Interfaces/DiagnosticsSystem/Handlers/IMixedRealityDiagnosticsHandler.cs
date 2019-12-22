@@ -3,7 +3,7 @@
 
 using UnityEngine;
 
-namespace XRTK.Interfaces.Diagnostics
+namespace XRTK.Interfaces.DiagnosticsSystem.Handlers
 {
     public interface IMixedRealityDiagnosticsHandler
     {

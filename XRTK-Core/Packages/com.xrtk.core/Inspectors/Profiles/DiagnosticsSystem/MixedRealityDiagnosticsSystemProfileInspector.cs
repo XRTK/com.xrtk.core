@@ -3,7 +3,7 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions.Diagnostics;
+using XRTK.Definitions.DiagnosticsSystem;
 using XRTK.Inspectors.Utilities;
 using XRTK.Services;
 

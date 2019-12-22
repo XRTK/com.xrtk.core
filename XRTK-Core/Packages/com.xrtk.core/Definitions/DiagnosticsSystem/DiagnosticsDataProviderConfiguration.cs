@@ -7,7 +7,7 @@ using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
 using XRTK.Services.DiagnosticsSystem;
 
-namespace XRTK.Definitions.Diagnostics
+namespace XRTK.Definitions.DiagnosticsSystem
 {
     [Serializable]
     public struct DiagnosticsDataProviderConfiguration

@@ -3,7 +3,7 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions.Diagnostics;
+using XRTK.Definitions.DiagnosticsSystem;
 using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles.DiagnosticsSystem

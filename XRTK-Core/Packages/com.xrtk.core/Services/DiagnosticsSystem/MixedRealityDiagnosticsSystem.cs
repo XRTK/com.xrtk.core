@@ -2,8 +2,8 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.Diagnostics;
-using XRTK.Interfaces.Diagnostics;
+using XRTK.Definitions.DiagnosticsSystem;
+using XRTK.Interfaces.DiagnosticsSystem;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
@@ -12,10 +12,11 @@ namespace XRTK.Services.DiagnosticsSystem
     /// </summary>
     public class MixedRealityDiagnosticsSystem : BaseSystem, IMixedRealityDiagnosticsSystem
     {
-        private GameObject diagnosticsWindow;
-
         /// <inheritdoc />
         public Transform DiagnosticsTransform { get; private set; }
+
+        /// <inheritdoc />
+        public GameObject DiagnosticsWindow { get; private set; }
 
         /// <inheritdoc />
         public string ApplicationSignature => $"{Application.productName} v{Application.version}";
@@ -27,13 +28,13 @@ namespace XRTK.Services.DiagnosticsSystem
             get { return showWindow; }
             set
             {
-                if (value && diagnosticsWindow == null)
+                if (value && DiagnosticsWindow == null)
                 {
                     CreateDiagnosticsWindow();
                 }
 
                 showWindow = value;
-                diagnosticsWindow.SetActive(showWindow);
+                DiagnosticsWindow.SetActive(showWindow);
             }
         }
 
@@ -114,7 +115,7 @@ namespace XRTK.Services.DiagnosticsSystem
                 return;
             }
 
-            diagnosticsWindow = Object.Instantiate(MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.DiagnosticsWindowPrefab, MixedRealityToolkit.DiagnosticsSystem.DiagnosticsTransform);
+            DiagnosticsWindow = Object.Instantiate(MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.DiagnosticsWindowPrefab, MixedRealityToolkit.DiagnosticsSystem.DiagnosticsTransform);
         }
     }
 }

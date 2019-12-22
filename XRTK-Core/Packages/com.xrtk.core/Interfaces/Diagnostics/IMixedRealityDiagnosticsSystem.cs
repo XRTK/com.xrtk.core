@@ -20,5 +20,10 @@ namespace XRTK.Interfaces.Diagnostics
         /// the build the diagnostics belong to.
         /// </summary>
         string ApplicationSignature { get; }
+
+        /// <summary>
+        /// Should the diagnostics window be displayed?
+        /// </summary>
+        bool ShowWindow { get; set; }
     }
 }

@@ -12,11 +12,30 @@ namespace XRTK.Services.DiagnosticsSystem
     /// </summary>
     public class MixedRealityDiagnosticsSystem : BaseSystem, IMixedRealityDiagnosticsSystem
     {
+        private GameObject diagnosticsWindow;
+
         /// <inheritdoc />
         public Transform DiagnosticsTransform { get; private set; }
 
         /// <inheritdoc />
         public string ApplicationSignature => $"{Application.productName} v{Application.version}";
+
+        private bool showWindow = false;
+        /// <inheritdoc />
+        public bool ShowWindow
+        {
+            get { return showWindow; }
+            set
+            {
+                if (value && diagnosticsWindow == null)
+                {
+                    CreateDiagnosticsWindow();
+                }
+
+                showWindow = value;
+                diagnosticsWindow.SetActive(showWindow);
+            }
+        }
 
         /// <summary>
         /// Constructor.
@@ -55,8 +74,8 @@ namespace XRTK.Services.DiagnosticsSystem
                 }
             }
 
-            CreateDiagnosticsGameObject();
-            CreateVisualizer();
+            CreateDiagnosticsRootGameObject();
+            ShowWindow = MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.ShowDiagnosticsWindowOnStart;
         }
 
         /// <inheritdoc />
@@ -80,14 +99,14 @@ namespace XRTK.Services.DiagnosticsSystem
             }
         }
 
-        private void CreateDiagnosticsGameObject()
+        private void CreateDiagnosticsRootGameObject()
         {
             GameObject diagnosticGameObject = new GameObject("Diagnostics");
             DiagnosticsTransform = diagnosticGameObject.transform;
             DiagnosticsTransform.parent = MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform;
         }
 
-        private void CreateVisualizer()
+        private void CreateDiagnosticsWindow()
         {
             if (MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.DiagnosticsWindowPrefab == null)
             {
@@ -95,7 +114,7 @@ namespace XRTK.Services.DiagnosticsSystem
                 return;
             }
 
-            Object.Instantiate(MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.DiagnosticsWindowPrefab, MixedRealityToolkit.DiagnosticsSystem.DiagnosticsTransform);
+            diagnosticsWindow = Object.Instantiate(MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.DiagnosticsWindowPrefab, MixedRealityToolkit.DiagnosticsSystem.DiagnosticsTransform);
         }
     }
 }

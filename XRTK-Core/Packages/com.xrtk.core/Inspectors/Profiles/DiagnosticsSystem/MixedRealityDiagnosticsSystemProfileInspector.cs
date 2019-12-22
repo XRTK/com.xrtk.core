@@ -17,6 +17,7 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
         private static readonly GUIContent profileContent = new GUIContent("Profile");
 
         private SerializedProperty diagnosticsWindowPrefab;
+        private SerializedProperty showDiagnosticsWindowOnStart;
         private SerializedProperty registeredDiagnosticsDataProviders;
         private bool[] foldouts = null;
 
@@ -25,6 +26,7 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
             base.OnEnable();
 
             diagnosticsWindowPrefab = serializedObject.FindProperty(nameof(diagnosticsWindowPrefab));
+            showDiagnosticsWindowOnStart = serializedObject.FindProperty(nameof(showDiagnosticsWindowOnStart));
             registeredDiagnosticsDataProviders = serializedObject.FindProperty(nameof(registeredDiagnosticsDataProviders));
             foldouts = new bool[registeredDiagnosticsDataProviders.arraySize];
         }
@@ -49,8 +51,9 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(diagnosticsWindowPrefab);
+            EditorGUILayout.PropertyField(showDiagnosticsWindowOnStart);
             EditorGUILayout.Space();
-            
+
             bool changed = false;
             if (GUILayout.Button(addDataProviderContent, EditorStyles.miniButton))
             {

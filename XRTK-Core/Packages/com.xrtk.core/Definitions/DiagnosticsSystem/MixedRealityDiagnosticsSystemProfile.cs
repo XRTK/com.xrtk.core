@@ -14,7 +14,7 @@ namespace XRTK.Definitions.Diagnostics
     {
         [SerializeField]
         [Tooltip("The prefab instantiated to visualize diagnostics data.")]
-        private GameObject diagnosticsWindowPrefab;
+        private GameObject diagnosticsWindowPrefab = null;
 
         /// <summary>
         /// The prefab instantiated to visualize diagnostics data.
@@ -24,6 +24,15 @@ namespace XRTK.Definitions.Diagnostics
             get => diagnosticsWindowPrefab;
             private set => diagnosticsWindowPrefab = value;
         }
+
+        [SerializeField]
+        [Tooltip("Should the diagnostics window be opened on application start?")]
+        private bool showDiagnosticsWindowOnStart = true;
+
+        /// <summary>
+        /// Should the diagnostics window be opened on application start?
+        /// </summary>
+        public bool ShowDiagnosticsWindowOnStart => showDiagnosticsWindowOnStart;
 
         [SerializeField]
         private DiagnosticsDataProviderConfiguration[] registeredDiagnosticsDataProviders = new DiagnosticsDataProviderConfiguration[0];

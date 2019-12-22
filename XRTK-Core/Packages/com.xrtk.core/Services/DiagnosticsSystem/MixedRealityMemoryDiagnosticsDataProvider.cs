@@ -26,7 +26,7 @@ namespace XRTK.Services.DiagnosticsSystem
         /// Computed property reads the current memory usage of the running
         /// application.
         /// </summary>
-        private static ulong AppMemoryUsage
+        private ulong AppMemoryUsage
         {
             get
             {
@@ -41,7 +41,7 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <summary>
         /// Computed property reads the current memory limit avaiable to the application.
         /// </summary>
-        private static ulong AppMemoryUsageLimit
+        private ulong AppMemoryUsageLimit
         {
             get
             {

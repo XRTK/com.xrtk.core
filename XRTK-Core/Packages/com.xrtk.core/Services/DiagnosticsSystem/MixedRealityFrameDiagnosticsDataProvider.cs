@@ -16,11 +16,11 @@ namespace XRTK.Services.DiagnosticsSystem
     {
         private const int maxFrameTimings = 128;
         private const float fallbackRefreshRate = 60.0f;
+        private const int missedFramesRange = 30;
         private readonly FrameTiming[] frameTimings = new FrameTiming[maxFrameTimings];
         private readonly Stopwatch stopwatch = new Stopwatch();
-        private int frameCount;
-        private static readonly int missedFramesRange = 30;
-        private static readonly bool[] missedFrames = new bool[missedFramesRange];
+        private readonly bool[] missedFrames = new bool[missedFramesRange];
+        private int framesPassedSinceLastCalculation;
 
         private float frameSampleRate = 0.1f;
         /// <summary>
@@ -41,18 +41,18 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <summary>
         /// The last computed GPU frame rate.
         /// </summary>
-        private static int GPUFrameRate { get; set; } = 0;
+        private int GPUFrameRate { get; set; } = 0;
 
         /// <summary>
         /// The last computed CPU frame rate.
         /// </summary>
-        private static int CPUFrameRate { get; set; } = 0;
+        private int CPUFrameRate { get; set; } = 0;
 
         /// <summary>
         /// Computed property returns the target refresh rate of the device,
         /// which is used to identify missed frames.
         /// </summary>
-        private static float DeviceTargetRefreshRate
+        private float DeviceTargetRefreshRate
         {
             get
             {
@@ -88,23 +88,23 @@ namespace XRTK.Services.DiagnosticsSystem
             FrameTimingManager.CaptureFrameTimings();
 
             // Increase internal frame count since last FPS calculation.
-            ++frameCount;
+            ++framesPassedSinceLastCalculation;
 
             // Do we have enough sample data for a new FPS calculation?
             float elapsedSeconds = stopwatch.ElapsedMilliseconds * 0.001f;
             if (elapsedSeconds >= frameSampleRate)
             {
-                int newCPUFrameRate = (int)(1.0f / (elapsedSeconds / frameCount));
+                int newCPUFrameRate = (int)(1.0f / (elapsedSeconds / framesPassedSinceLastCalculation));
                 int newGPUFrameRate = 0;
 
                 // Many platforms do not yet support the FrameTimingManager. When timing data is returned from the FrameTimingManager we will use
                 // its timing data, else we will depend on the stopwatch.
-                uint frameTimingsCount = FrameTimingManager.GetLatestTimings((uint)Mathf.Min(frameCount, maxFrameTimings), frameTimings);
+                uint frameTimingsCount = FrameTimingManager.GetLatestTimings((uint)Mathf.Min(framesPassedSinceLastCalculation, maxFrameTimings), frameTimings);
                 if (frameTimingsCount != 0)
                 {
                     AverageFrameTiming(frameTimings, frameTimingsCount, out var cpuFrameTime, out var gpuFrameTime);
-                    newCPUFrameRate = (int)(1.0f / (cpuFrameTime / frameCount));
-                    newGPUFrameRate = (int)(1.0f / (gpuFrameTime / frameCount));
+                    newCPUFrameRate = (int)(1.0f / (cpuFrameTime / framesPassedSinceLastCalculation));
+                    newGPUFrameRate = (int)(1.0f / (gpuFrameTime / framesPassedSinceLastCalculation));
                 }
 
                 if (CPUFrameRate != newCPUFrameRate)
@@ -143,13 +143,13 @@ namespace XRTK.Services.DiagnosticsSystem
                 }
 
                 // Reset timers.
-                frameCount = 0;
+                framesPassedSinceLastCalculation = 0;
                 stopwatch.Reset();
                 stopwatch.Start();
             }
         }
 
-        private static void AverageFrameTiming(FrameTiming[] frameTimings, uint frameTimingsCount, out float cpuFrameTime, out float gpuFrameTime)
+        private void AverageFrameTiming(FrameTiming[] frameTimings, uint frameTimingsCount, out float cpuFrameTime, out float gpuFrameTime)
         {
             double cpuTime = 0.0f;
             double gpuTime = 0.0f;

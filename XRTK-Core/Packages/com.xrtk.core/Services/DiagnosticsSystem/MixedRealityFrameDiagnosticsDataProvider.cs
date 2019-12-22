@@ -149,13 +149,6 @@ namespace XRTK.Services.DiagnosticsSystem
             }
         }
 
-        /// <inheritdoc />
-        public override void Destroy()
-        {
-            base.Destroy();
-            stopwatch.Reset();
-        }
-
         private static void AverageFrameTiming(FrameTiming[] frameTimings, uint frameTimingsCount, out float cpuFrameTime, out float gpuFrameTime)
         {
             double cpuTime = 0.0f;

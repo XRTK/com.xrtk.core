@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
-using XRTK.Services.DiagnosticsSystem;
+using XRTK.Interfaces.DiagnosticsSystem;
 
 namespace XRTK.Definitions.DiagnosticsSystem
 {
@@ -20,7 +20,7 @@ namespace XRTK.Definitions.DiagnosticsSystem
         /// <param name="priority"></param>
         /// <param name="runtimePlatform"></param>
         /// <param name="profile"></param>
-        public DiagnosticsDataProviderConfiguration(SystemType dataProviderType, string dataProviderName, uint priority, SupportedPlatforms runtimePlatform, MixedRealityDiagnosticsDataProviderProfile profile)
+        public DiagnosticsDataProviderConfiguration(SystemType dataProviderType, string dataProviderName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityProfile profile)
         {
             this.dataProviderType = dataProviderType;
             this.dataProviderName = dataProviderName;
@@ -31,7 +31,7 @@ namespace XRTK.Definitions.DiagnosticsSystem
 
         [SerializeField]
         [Tooltip("The concrete type of controller data provider to register.")]
-        [Extends(typeof(BaseMixedRealityDiagnosticsDataProvider), TypeGrouping.ByNamespaceFlat)]
+        [Implements(typeof(IMixedRealityDiagnosticsDataProvider), TypeGrouping.ByNamespaceFlat)]
         private SystemType dataProviderType;
 
         /// <summary>
@@ -65,11 +65,11 @@ namespace XRTK.Definitions.DiagnosticsSystem
         public SupportedPlatforms RuntimePlatform => runtimePlatform;
 
         [SerializeField]
-        private MixedRealityDiagnosticsDataProviderProfile profile;
+        private BaseMixedRealityProfile profile;
 
         /// <summary>
         /// The profile settings for the data provider.
         /// </summary>
-        public MixedRealityDiagnosticsDataProviderProfile Profile => profile;
+        public BaseMixedRealityProfile Profile => profile;
     }
 }

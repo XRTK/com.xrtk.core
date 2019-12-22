@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
+using XRTK.Definitions;
 using XRTK.Interfaces.DiagnosticsSystem;
 using XRTK.Interfaces.DiagnosticsSystem.Handlers;
-using XRTK.Definitions.DiagnosticsSystem;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
@@ -9,14 +9,14 @@ namespace XRTK.Services.DiagnosticsSystem
     /// Abstract base implementation for diagnostics data providers. Provides needed implementations to register and unregister
     /// diagnostics handlers.
     /// </summary>
-    public abstract class BaseMixedRealityDiagnosticsDataProvider : BaseDataProvider, IMixedRealityDiagnosticsDataProvider
+    public abstract class BaseMixedRealityDiagnosticsDataProvider<T> : BaseDataProvider, IMixedRealityGenericDiagnosticsDataProvider<T> where T : IMixedRealityDiagnosticsHandler
     {
-        private readonly List<IMixedRealityDiagnosticsHandler> handlers = new List<IMixedRealityDiagnosticsHandler>();
+        private readonly List<T> handlers = new List<T>();
 
         /// <summary>
         /// Gets currently registered diagnostics handlers.
         /// </summary>
-        protected IReadOnlyList<IMixedRealityDiagnosticsHandler> Handlers => handlers;
+        protected IReadOnlyList<T> Handlers => handlers;
 
         /// <summary>
         /// Constructor.
@@ -24,11 +24,11 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <param name="name">The name of the data provider as assigned in configuration.</param>
         /// <param name="priority">The priority of the data provider.</param>
         /// <param name="profile">The provider configuration profile assigned.</param>
-        public BaseMixedRealityDiagnosticsDataProvider(string name, uint priority, MixedRealityDiagnosticsDataProviderProfile profile)
+        public BaseMixedRealityDiagnosticsDataProvider(string name, uint priority, BaseMixedRealityProfile profile)
             : base(name, priority) { }
 
         /// <inheritdoc />
-        public void Register(IMixedRealityDiagnosticsHandler handler)
+        public void Register(T handler)
         {
             if (!handlers.Contains(handler))
             {
@@ -37,7 +37,7 @@ namespace XRTK.Services.DiagnosticsSystem
         }
 
         /// <inheritdoc />
-        public void Unregister(IMixedRealityDiagnosticsHandler handler)
+        public void Unregister(T handler)
         {
             if (handlers.Contains(handler))
             {

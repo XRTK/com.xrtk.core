@@ -2,7 +2,8 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.DiagnosticsSystem;
+using XRTK.Interfaces.DiagnosticsSystem.Handlers;
+using XRTK.Definitions;
 
 #if WINDOWS_UWP
 using Windows.System;
@@ -15,7 +16,7 @@ namespace XRTK.Services.DiagnosticsSystem
     /// <summary>
     /// Diagnostics data provider for memory diagnostics. E.g. provides information about used application memory.
     /// </summary>
-    public class MixedRealityMemoryDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider
+    public class MixedRealityMemoryDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider<IMixedRealityMemoryDiagnosticsHandler>
     {
         private ulong lastMemoryUsage;
         private ulong peakMemoryUsage;
@@ -58,7 +59,7 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <param name="name">The name of the data provider as assigned in configuration.</param>
         /// <param name="priority">The priority of the data provider.</param>
         /// <param name="profile">The provider configuration profile assigned.</param>
-        public MixedRealityMemoryDiagnosticsDataProvider(string name, uint priority, MixedRealityDiagnosticsDataProviderProfile profile)
+        public MixedRealityMemoryDiagnosticsDataProvider(string name, uint priority, BaseMixedRealityProfile profile)
             : base(name, priority, profile) { }
 
         /// <inheritdoc />

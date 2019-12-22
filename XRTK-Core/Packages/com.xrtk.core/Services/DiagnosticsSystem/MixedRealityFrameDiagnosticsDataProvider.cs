@@ -3,7 +3,8 @@
 
 using System.Diagnostics;
 using UnityEngine;
-using XRTK.Definitions.DiagnosticsSystem;
+using XRTK.Definitions;
+using XRTK.Interfaces.DiagnosticsSystem.Handlers;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
@@ -11,16 +12,15 @@ namespace XRTK.Services.DiagnosticsSystem
     /// Diagnostics data provider for frame diagnostics. It provides frame rate information and missed frames
     /// information to identify performance issues.
     /// </summary>
-    public class MixedRealityFrameDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider
+    public class MixedRealityFrameDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider<IMixedRealityFrameDiagnosticsHandler>
     {
-        private readonly MixedRealityDiagnosticsDataProviderProfile profile;
         private const int maxFrameTimings = 128;
         private const float fallbackRefreshRate = 60.0f;
         private readonly FrameTiming[] frameTimings = new FrameTiming[maxFrameTimings];
         private readonly Stopwatch stopwatch = new Stopwatch();
         private int frameCount;
-        private static readonly int frameRange = 30;
-        private static readonly bool[] missedFrames = new bool[frameRange];
+        private static readonly int missedFramesRange = 30;
+        private static readonly bool[] missedFrames = new bool[missedFramesRange];
 
         private float frameSampleRate = 0.1f;
         /// <summary>
@@ -68,18 +68,8 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <param name="name">The name of the data provider as assigned in configuration.</param>
         /// <param name="priority">The priority of the data provider.</param>
         /// <param name="profile">The provider configuration profile assigned.</param>
-        public MixedRealityFrameDiagnosticsDataProvider(string name, uint priority, MixedRealityDiagnosticsDataProviderProfile profile)
-            : base(name, priority, profile)
-        {
-            this.profile = profile;
-        }
-
-        /// <inheritdoc />
-        public override void Initialize()
-        {
-            base.Initialize();
-            FrameSampleRate = profile.FrameSampleRate;
-        }
+        public MixedRealityFrameDiagnosticsDataProvider(string name, uint priority, BaseMixedRealityProfile profile)
+            : base(name, priority, profile) { }
 
         public override void Enable()
         {
@@ -138,7 +128,7 @@ namespace XRTK.Services.DiagnosticsSystem
                 }
 
                 // Update missed frames.
-                for (int i = frameRange - 1; i > 0; --i)
+                for (int i = missedFramesRange - 1; i > 0; --i)
                 {
                     missedFrames[i] = missedFrames[i - 1];
                 }

@@ -30,7 +30,7 @@ namespace XRTK.Definitions.DiagnosticsSystem
         }
 
         [SerializeField]
-        [Tooltip("The concrete type of controller data provider to register.")]
+        [Tooltip("The concrete type of diagnostics data provider to register.")]
         [Implements(typeof(IMixedRealityDiagnosticsDataProvider), TypeGrouping.ByNamespaceFlat)]
         private SystemType dataProviderType;
 

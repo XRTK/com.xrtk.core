@@ -3,7 +3,6 @@
 
 using UnityEngine;
 using XRTK.Definitions.DiagnosticsSystem;
-using XRTK.Interfaces.DiagnosticsSystem.Handlers;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
@@ -11,37 +10,35 @@ namespace XRTK.Services.DiagnosticsSystem
     /// Console diagnostics data providers mirrors the Unity console and digests logs so the
     /// diagnostics system can work with it.
     /// </summary>
-    public class MixedRealityConsoleDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider<IMixedRealityConsoleDiagnosticsHandler>
+    public class MixedRealityConsoleDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider
     {
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="name">The name of the data provider as assigned in configuration.</param>
-        /// <param name="priority">The priority of the data provider.</param>
-        /// <param name="profile">The provider configuration profile assigned.</param>
+        /// <param name="name"></param>
+        /// <param name="priority"></param>
+        /// <param name="profile"></param>
         public MixedRealityConsoleDiagnosticsDataProvider(string name, uint priority, MixedRealityDiagnosticsDataProviderProfile profile)
-            : base(name, priority, profile) { }
+            : base(name, priority, profile)
+        {
+        }
+
+        #region IMixedRealityServce Implementation
 
         /// <inheritdoc />
         public override void Enable()
         {
             base.Enable();
-            Application.logMessageReceived += Application_logMessageReceived;
+            Application.logMessageReceived += MixedRealityToolkit.DiagnosticsSystem.RaiseLogReceived;
         }
 
         /// <inheritdoc />
         public override void Disable()
         {
-            Application.logMessageReceived -= Application_logMessageReceived;
             base.Disable();
+            Application.logMessageReceived -= MixedRealityToolkit.DiagnosticsSystem.RaiseLogReceived;
         }
 
-        private void Application_logMessageReceived(string condition, string stackTrace, LogType type)
-        {
-            for (int i = 0; i < Handlers.Count; i++)
-            {
-                Handlers[i].OnLogReceived(condition, type);
-            }
-        }
+        #endregion IMixedRealityServce Implementation
     }
 }

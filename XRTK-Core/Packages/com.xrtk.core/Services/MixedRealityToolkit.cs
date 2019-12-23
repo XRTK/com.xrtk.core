@@ -442,19 +442,16 @@ namespace XRTK.Services
 #endif
                 if (CreateAndRegisterService<IMixedRealitySpatialAwarenessSystem>(ActiveProfile.SpatialAwarenessSystemSystemType, ActiveProfile.SpatialAwarenessProfile) && SpatialAwarenessSystem != null)
                 {
-                    if (ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders != null)
+                    foreach (var spatialObserver in ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders)
                     {
-                        foreach (var spatialObserver in ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders)
+                        if (!CreateAndRegisterService<IMixedRealitySpatialObserverDataProvider>(
+                            spatialObserver.SpatialObserverType,
+                            spatialObserver.RuntimePlatform,
+                            spatialObserver.SpatialObserverName,
+                            spatialObserver.Priority,
+                            spatialObserver.Profile))
                         {
-                            if (!CreateAndRegisterService<IMixedRealitySpatialObserverDataProvider>(
-                                spatialObserver.SpatialObserverType,
-                                spatialObserver.RuntimePlatform,
-                                spatialObserver.SpatialObserverName,
-                                spatialObserver.Priority,
-                                spatialObserver.Profile))
-                            {
-                                Debug.LogError($"Failed to start {spatialObserver.SpatialObserverName}!");
-                            }
+                            Debug.LogError($"Failed to start {spatialObserver.SpatialObserverName}!");
                         }
                     }
                 }
@@ -486,19 +483,16 @@ namespace XRTK.Services
             {
                 if (CreateAndRegisterService<IMixedRealityNetworkingSystem>(ActiveProfile.NetworkingSystemSystemType, ActiveProfile.NetworkingSystemProfile) && NetworkingSystem != null)
                 {
-                    if (ActiveProfile.NetworkingSystemProfile.RegisteredNetworkDataProviders != null)
+                    foreach (var networkProvider in ActiveProfile.NetworkingSystemProfile.RegisteredNetworkDataProviders)
                     {
-                        foreach (var networkProvider in ActiveProfile.NetworkingSystemProfile.RegisteredNetworkDataProviders)
+                        if (!CreateAndRegisterService<IMixedRealityNetworkDataProvider>(
+                            networkProvider.DataProviderType,
+                            networkProvider.RuntimePlatform,
+                            networkProvider.DataProviderName,
+                            networkProvider.Priority,
+                            networkProvider.Profile))
                         {
-                            if (!CreateAndRegisterService<IMixedRealityNetworkDataProvider>(
-                                networkProvider.DataProviderType,
-                                networkProvider.RuntimePlatform,
-                                networkProvider.DataProviderName,
-                                networkProvider.Priority,
-                                networkProvider.Profile))
-                            {
-                                Debug.LogError($"Failed to start {networkProvider.DataProviderName}!");
-                            }
+                            Debug.LogError($"Failed to start {networkProvider.DataProviderName}!");
                         }
                     }
                 }
@@ -510,7 +504,22 @@ namespace XRTK.Services
 
             if (ActiveProfile.IsDiagnosticsSystemEnabled)
             {
-                if (!CreateAndRegisterService<IMixedRealityDiagnosticsSystem>(ActiveProfile.DiagnosticsSystemSystemType, ActiveProfile.DiagnosticsSystemProfile) || DiagnosticsSystem == null)
+                if (CreateAndRegisterService<IMixedRealityDiagnosticsSystem>(ActiveProfile.DiagnosticsSystemSystemType, ActiveProfile.DiagnosticsSystemProfile) && DiagnosticsSystem != null)
+                {
+                    foreach (var diagnosticsDataProvider in ActiveProfile.DiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders)
+                    {
+                        if (!CreateAndRegisterService<IMixedRealityDiagnosticsDataProvider>(
+                            diagnosticsDataProvider.DataProviderType,
+                            diagnosticsDataProvider.RuntimePlatform,
+                            diagnosticsDataProvider.DataProviderName,
+                            diagnosticsDataProvider.Priority,
+                            diagnosticsDataProvider.Profile))
+                        {
+                            Debug.LogError($"Failed to start {diagnosticsDataProvider.DataProviderName}!");
+                        }
+                    }
+                }
+                else
                 {
                     Debug.LogError("Failed to start the Diagnostics System!");
                 }

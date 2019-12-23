@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.DiagnosticsSystem
@@ -12,6 +13,7 @@ namespace XRTK.Definitions.DiagnosticsSystem
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Diagnostics System Profile", fileName = "MixedRealityDiagnosticsSystemProfile", order = (int)CreateProfileMenuItemIndices.Diagnostics)]
     public class MixedRealityDiagnosticsSystemProfile : BaseMixedRealityProfile
     {
+        [Prefab]
         [SerializeField]
         [Tooltip("The prefab instantiated to visualize diagnostics data.")]
         private GameObject diagnosticsWindowPrefab = null;
@@ -27,12 +29,12 @@ namespace XRTK.Definitions.DiagnosticsSystem
 
         [SerializeField]
         [Tooltip("Should the diagnostics window be opened on application start?")]
-        private bool showDiagnosticsWindowOnStart = true;
+        private AutoStartBehavior showDiagnosticsWindowOnStart = AutoStartBehavior.ManualStart;
 
         /// <summary>
         /// Should the diagnostics window be opened on application start?
         /// </summary>
-        public bool ShowDiagnosticsWindowOnStart => showDiagnosticsWindowOnStart;
+        public AutoStartBehavior ShowDiagnosticsWindowOnStart => showDiagnosticsWindowOnStart;
 
         [SerializeField]
         private DiagnosticsDataProviderConfiguration[] registeredDiagnosticsDataProviders = new DiagnosticsDataProviderConfiguration[0];

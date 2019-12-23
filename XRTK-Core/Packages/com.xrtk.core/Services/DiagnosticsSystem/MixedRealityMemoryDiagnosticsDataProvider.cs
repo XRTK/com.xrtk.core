@@ -2,102 +2,70 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Interfaces.DiagnosticsSystem.Handlers;
-using XRTK.Definitions.DiagnosticsSystem;
-
-#if WINDOWS_UWP
-using Windows.System;
-#else
 using UnityEngine.Profiling;
-#endif
+using XRTK.Definitions.DiagnosticsSystem;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
     /// <summary>
     /// Diagnostics data provider for memory diagnostics. E.g. provides information about used application memory.
     /// </summary>
-    public class MixedRealityMemoryDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider<IMixedRealityMemoryDiagnosticsHandler>
+    public class MixedRealityMemoryDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider
     {
-        private ulong lastMemoryUsage;
-        private ulong peakMemoryUsage;
-        private ulong lastMemoryLimit;
-
-        /// <summary>
-        /// Computed property reads the current memory usage of the running
-        /// application.
-        /// </summary>
-        private ulong AppMemoryUsage
-        {
-            get
-            {
-#if WINDOWS_UWP
-                return MemoryManager.AppMemoryUsage;
-#else
-                return (ulong)Profiler.GetTotalAllocatedMemoryLong();
-#endif
-            }
-        }
-
-        /// <summary>
-        /// Computed property reads the current memory limit avaiable to the application.
-        /// </summary>
-        private ulong AppMemoryUsageLimit
-        {
-            get
-            {
-#if WINDOWS_UWP
-                return MemoryManager.AppMemoryUsageLimit;
-#else
-                return DiagnosticsUtils.ConvertMegabytesToBytes(SystemInfo.systemMemorySize);
-#endif
-            }
-        }
-
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="name">The name of the data provider as assigned in configuration.</param>
         /// <param name="priority">The priority of the data provider.</param>
-        /// <param name="profile">The provider configuration profile assigned.</param>
+        /// <param name="profile"></param>
         public MixedRealityMemoryDiagnosticsDataProvider(string name, uint priority, MixedRealityDiagnosticsDataProviderProfile profile)
-            : base(name, priority, profile) { }
+            : base(name, priority, profile)
+        {
+        }
+
+        private int systemMemorySize;
+        private int lastSystemMemorySize;
+        private ulong lastMemoryUsage;
+        private ulong peakMemoryUsage;
+        private ulong lastMemoryLimit;
+
+        #region IMixedRealityService Implementation
 
         /// <inheritdoc />
         public override void LateUpdate()
         {
             base.LateUpdate();
 
-            ulong currentMemoryLimit = AppMemoryUsageLimit;
-            if (currentMemoryLimit != lastMemoryLimit)
-            {
-                for (int i = 0; i < Handlers.Count; i++)
-                {
-                    Handlers[i].OnMemoryLimitChanged(lastMemoryLimit, currentMemoryLimit);
-                }
+            systemMemorySize = SystemInfo.systemMemorySize;
 
-                lastMemoryLimit = currentMemoryLimit;
+            if (lastSystemMemorySize != systemMemorySize)
+            {
+                lastSystemMemorySize = systemMemorySize;
+
+                var currentMemoryLimit = DiagnosticsUtils.ConvertMegabytesToBytes(lastSystemMemorySize);
+
+                if (currentMemoryLimit != lastMemoryLimit)
+                {
+                    MixedRealityToolkit.DiagnosticsSystem.RaiseMemoryLimitChanged(new MemoryLimit(currentMemoryLimit));
+                    lastMemoryLimit = currentMemoryLimit;
+                }
             }
 
-            ulong currentMemoryUsage = AppMemoryUsage;
+            var currentMemoryUsage = (ulong)Profiler.GetTotalAllocatedMemoryLong();
+
             if (currentMemoryUsage != lastMemoryUsage)
             {
-                for (int i = 0; i < Handlers.Count; i++)
-                {
-                    Handlers[i].OnMemoryUsageChanged(lastMemoryUsage, currentMemoryUsage);
-                }
-
+                MixedRealityToolkit.DiagnosticsSystem.RaiseMemoryUsageChanged(new MemoryUsage(currentMemoryUsage));
                 lastMemoryUsage = currentMemoryUsage;
             }
 
             if (lastMemoryUsage > peakMemoryUsage)
             {
-                for (int i = 0; i < Handlers.Count; i++)
-                {
-                    Handlers[i].OnMemoryPeakChanged(peakMemoryUsage, lastMemoryUsage);
-                }
-
+                MixedRealityToolkit.DiagnosticsSystem.RaiseMemoryPeakChanged(new MemoryPeak(peakMemoryUsage));
                 peakMemoryUsage = lastMemoryUsage;
             }
         }
+
+        #endregion IMixedRealityService Implementation
     }
 }

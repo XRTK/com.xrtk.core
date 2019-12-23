@@ -20,7 +20,7 @@ namespace XRTK.Definitions.DiagnosticsSystem
         /// <param name="priority"></param>
         /// <param name="runtimePlatform"></param>
         /// <param name="profile"></param>
-        public DiagnosticsDataProviderConfiguration(SystemType dataProviderType, string dataProviderName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityProfile profile)
+        public DiagnosticsDataProviderConfiguration(SystemType dataProviderType, string dataProviderName, uint priority, SupportedPlatforms runtimePlatform, MixedRealityDiagnosticsDataProviderProfile profile)
         {
             this.dataProviderType = dataProviderType;
             this.dataProviderName = dataProviderName;
@@ -65,11 +65,11 @@ namespace XRTK.Definitions.DiagnosticsSystem
         public SupportedPlatforms RuntimePlatform => runtimePlatform;
 
         [SerializeField]
-        private BaseMixedRealityProfile profile;
+        private MixedRealityDiagnosticsDataProviderProfile profile;
 
         /// <summary>
         /// The profile settings for the data provider.
         /// </summary>
-        public BaseMixedRealityProfile Profile => profile;
+        public MixedRealityDiagnosticsDataProviderProfile Profile => profile;
     }
 }

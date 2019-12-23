@@ -3,7 +3,7 @@
 
 using UnityEngine;
 using XRTK.Interfaces.DiagnosticsSystem.Handlers;
-using XRTK.Definitions;
+using XRTK.Definitions.DiagnosticsSystem;
 
 #if WINDOWS_UWP
 using Windows.System;
@@ -59,7 +59,7 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <param name="name">The name of the data provider as assigned in configuration.</param>
         /// <param name="priority">The priority of the data provider.</param>
         /// <param name="profile">The provider configuration profile assigned.</param>
-        public MixedRealityMemoryDiagnosticsDataProvider(string name, uint priority, BaseMixedRealityProfile profile)
+        public MixedRealityMemoryDiagnosticsDataProvider(string name, uint priority, MixedRealityDiagnosticsDataProviderProfile profile)
             : base(name, priority, profile) { }
 
         /// <inheritdoc />

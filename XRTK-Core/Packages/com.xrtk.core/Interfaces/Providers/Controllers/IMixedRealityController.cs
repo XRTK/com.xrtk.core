@@ -76,5 +76,10 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// Mapping definition for this controller, linking the Physical inputs to logical Input System Actions
         /// </summary>
         MixedRealityInteractionMapping[] Interactions { get; }
+
+        /// <summary>
+        /// Updates the current readings for the controller.
+        /// </summary
+        void UpdateController();
     }
 }

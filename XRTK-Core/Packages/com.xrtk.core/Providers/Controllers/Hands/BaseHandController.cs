@@ -74,14 +74,20 @@ namespace XRTK.Providers.Controllers.Hands
         public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
 
         /// <summary>
-        /// Constructor.
+        /// Controller constructor.
         /// </summary>
-        /// <param name="trackingState"></param>
-        /// <param name="controllerHandedness"></param>
-        /// <param name="inputSource"></param>
-        /// <param name="interactions"></param>
+        /// <param name="trackingState">The controller's tracking state.</param>
+        /// <param name="controllerHandedness">The controller's handedness.</param>
+        /// <param name="inputSource">Optional input source of the controller.</param>
+        /// <param name="interactions">Optional controller interactions mappings.</param>
         public BaseHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
                 : base(trackingState, controllerHandedness, inputSource, interactions) { }
+
+        /// <inheritdoc />
+        public override void UpdateController()
+        {
+            //base.UpdateController();
+        }
 
         /// <inheritdoc />
         public virtual void UpdateState(HandData handData)

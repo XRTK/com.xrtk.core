@@ -14,13 +14,13 @@ namespace XRTK.Interfaces.Providers.Controllers
     public interface IMixedRealityHandControllerDataProvider : IMixedRealityControllerDataProvider
     {
         /// <summary>
-        /// Gets a transform following the hand joint.
+        /// Gets the pose of a hand joint, if it's currently tracked.
         /// </summary>
-        /// <param name="joint">The joint to find the transform for.</param>
+        /// <param name="joint">The joint to find the pose for.</param>
         /// <param name="handedness">Handedness of the hand the joint belongs to.</param>
-        /// <param name="jointTransform">If found, the transform following the hand joint.</param>
-        /// <returns>True, if the joint transform was found.</returns>
-        bool TryGetJointTransform(TrackedHandJoint joint, Handedness handedness, out Transform jointTransform);
+        /// <param name="jointTransform">If found, the pose following the hand joint.</param>
+        /// <returns>True, if the joint pose was found.</returns>
+        bool TryGetJointPose(Handedness handedness, TrackedHandJoint joint, out MixedRealityPose pose);
 
         /// <summary>
         /// Gets whether the specified hand is currently being tracked.

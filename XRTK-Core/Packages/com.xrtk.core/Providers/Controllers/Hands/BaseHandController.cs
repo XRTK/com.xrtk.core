@@ -9,6 +9,7 @@ using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Hands
 {
@@ -98,6 +99,8 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateJoints(handData);
             UpdateBounds(handData);
             UpdateVelocity();
+
+            MixedRealityToolkit.InputSystem.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);
         }
 
         /// <summary>

@@ -5,6 +5,7 @@ using UnityEngine;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem.Handlers;
+using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Interfaces.Providers.Controllers
 {
@@ -12,12 +13,13 @@ namespace XRTK.Interfaces.Providers.Controllers
     /// Basic interface for synchronizing to a controller pose.
     /// </summary>
     public interface IMixedRealityControllerPoseSynchronizer : IMixedRealitySourcePoseHandler,
-            IMixedRealityInputHandler,
-            IMixedRealityInputHandler<float>,
-            IMixedRealityInputHandler<Vector2>,
-            IMixedRealityInputHandler<Vector3>,
-            IMixedRealityInputHandler<Quaternion>,
-            IMixedRealityInputHandler<MixedRealityPose>
+        IMixedRealityInputHandler,
+        IMixedRealityInputHandler<float>,
+        IMixedRealityInputHandler<Vector2>,
+        IMixedRealityInputHandler<Vector3>,
+        IMixedRealityInputHandler<Quaternion>,
+        IMixedRealityInputHandler<MixedRealityPose>,
+        IMixedRealityInputHandler<HandData>
     {
         /// <summary>
         /// The <see cref="Transform"/> that will be synchronized with the controller data.
@@ -33,9 +35,9 @@ namespace XRTK.Interfaces.Providers.Controllers
         Handedness Handedness { get; }
 
         /// <summary>
-        /// Should this <see cref="UnityEngine.GameObject"/> clean itself up when it's controller is lost?
+        /// Should this <see cref="GameObject"/> clean itself up when it's controller is lost?
         /// </summary>
-        /// <remarks>It's up to the implementation to properly destroy the <see cref="UnityEngine.GameObject"/>'s this interface will implement.</remarks>
+        /// <remarks>It's up to the implementation to properly destroy the <see cref="GameObject"/>'s this interface will implement.</remarks>
         bool DestroyOnSourceLost { get; set; }
 
         /// <summary>

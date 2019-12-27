@@ -10,6 +10,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Input;
 using XRTK.Interfaces.Events;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Interfaces.InputSystem
 {
@@ -202,6 +203,14 @@ namespace XRTK.Interfaces.InputSystem
         /// <param name="controller"></param>
         /// <param name="position"></param>
         void RaiseSourcePoseChanged(IMixedRealityInputSource source, IMixedRealityController controller, MixedRealityPose position);
+
+        /// <summary>
+        /// Raise the event that the hand data for a input source has changed.
+        /// </summary>
+        /// <param name="source">The input source.</param>
+        /// <param name="handedness">The handedness of the input source.</param>
+        /// <param name="handData">The new hand data.</param>
+        void RaiseHandDataInputChanged(IMixedRealityInputSource source, Handedness handedness, HandData handData);
 
         #endregion Input Source Events
 

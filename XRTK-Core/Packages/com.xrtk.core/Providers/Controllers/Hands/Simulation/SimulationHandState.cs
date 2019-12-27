@@ -179,45 +179,26 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
 
         private void HandleSimulationInput(ref long lastSimulatedTimeStamp, SimulationInput simulationInput)
         {
-            // We are "tracking" the hand, if it's configured to always be visible or if simulation is active.
-            bool isTrackedOrAlwaysVisible = simulationInput.IsAlwaysVisible || simulationInput.IsTracking;
-
             // If the hands state is changing from "not tracked" to being tracked, reset its position
             // to the current mouse position and default distance from the camera.
-            if (!HandData.IsTracked && isTrackedOrAlwaysVisible)
+            if (!HandData.IsTracked)
             {
                 Vector3 mousePos = Input.mousePosition;
                 screenPosition = new Vector3(mousePos.x, mousePos.y, profile.DefaultHandDistance);
             }
 
-            // If we are simulating the hand currently, use input update the hand state.
-            if (simulationInput.IsTracking)
-            {
-                // Apply mouse delta x/y in screen space, but depth offset in world space
-                screenPosition.x += simulationInput.HandPositionDelta.x;
-                screenPosition.y += simulationInput.HandPositionDelta.y;
-                Vector3 newWorldPoint = playerCamera.ScreenToWorldPoint(ScreenPosition);
-                newWorldPoint += playerCamera.transform.forward * simulationInput.HandPositionDelta.z;
-                screenPosition = playerCamera.WorldToScreenPoint(newWorldPoint);
+            // Apply mouse delta x/y in screen space, but depth offset in world space
+            screenPosition.x += simulationInput.HandPositionDelta.x;
+            screenPosition.y += simulationInput.HandPositionDelta.y;
+            Vector3 newWorldPoint = playerCamera.ScreenToWorldPoint(ScreenPosition);
+            newWorldPoint += playerCamera.transform.forward * simulationInput.HandPositionDelta.z;
+            screenPosition = playerCamera.WorldToScreenPoint(newWorldPoint);
 
-                HandRotateEulerAngles += simulationInput.HandRotationDelta;
-                JitterOffset = UnityEngine.Random.insideUnitSphere * profile.HandJitterAmount;
-            }
+            HandRotateEulerAngles += simulationInput.HandRotationDelta;
+            JitterOffset = UnityEngine.Random.insideUnitSphere * profile.HandJitterAmount;
 
-            DateTime stopWatchCurrent = lastUpdatedStopWatch.Current;
-            if (isTrackedOrAlwaysVisible)
-            {
-                HandData.IsTracked = true;
-                lastSimulatedTimeStamp = lastUpdatedStopWatch.TimeStamp;
-            }
-            else
-            {
-                float timeSinceTracking = (float)stopWatchCurrent.Subtract(new DateTime(lastSimulatedTimeStamp)).TotalSeconds;
-                if (timeSinceTracking > profile.HandHideTimeout)
-                {
-                    HandData.IsTracked = false;
-                }
-            }
+            HandData.IsTracked = true;
+            lastSimulatedTimeStamp = lastUpdatedStopWatch.TimeStamp;
         }
 
         private void UpdatePoseFrame()

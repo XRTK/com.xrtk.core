@@ -16,6 +16,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
     {
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
         private static readonly Dictionary<string, SimulationHandPose> handPoses = new Dictionary<string, SimulationHandPose>();
+        private static bool isInitialized = false;
 
         /// <summary>
         /// Joint poses are stored as right-hand poses in camera space.
@@ -27,6 +28,11 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// Gets the unique identifier for the simulated pose.
         /// </summary>
         public string Id { get; }
+
+        /// <summary>
+        /// Gets the configured default pose for simulation hands.
+        /// </summary>
+        public static SimulationHandPoseData DefaultHandPose { get; private set; }
 
         /// <summary>
         /// Creates a new hand pose with all joints in their
@@ -56,6 +62,11 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <param name="poses">List of pose data assets with pose information.</param>
         public static void Initialize(IEnumerable<SimulationHandPoseData> poses)
         {
+            if (isInitialized)
+            {
+                return;
+            }
+
             // To stabilize the simulated hand poses, we look
             // for the hand "open" pose, which we will use as a reference to offset
             // all other poses, so the "Palm" joint position stays the same for all simulated
@@ -95,7 +106,14 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                         handPoses.Add(pose.Id, pose);
                     }
                 }
+
+                if (poseData.IsDefault)
+                {
+                    DefaultHandPose = poseData;
+                }
             }
+
+            isInitialized = true;
         }
 
         private static void OffsetJointsRelativeToOpenPosePalmPosition(SimulationHandPose openPose, SimulationHandPose pose)

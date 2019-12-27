@@ -1,16 +1,10 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
-using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
-using XRTK.EventDatum.Input;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 
@@ -22,9 +16,6 @@ namespace XRTK.Providers.Controllers.Hands
     /// </summary>
     public abstract class BaseHandControllerDataProvider<T> : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider where T : IMixedRealityHandController
     {
-        private InputEventData<HandData> handDataUpdateEventData;
-        private readonly List<IMixedRealityHandDataHandler> handDataUpdateEventHandlers = new List<IMixedRealityHandDataHandler>();
-
         /// <summary>
         /// Base constructor.
         /// </summary>
@@ -33,17 +24,6 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="profile">Hand controller data provider profile assigned to the provider instance in the configuration inspector.</param>
         public BaseHandControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
             : base(name, priority, profile) { }
-
-        /// <inheritdoc />
-        public override void Initialize()
-        {
-            base.Initialize();
-
-            if (Application.isPlaying)
-            {
-                handDataUpdateEventData = new InputEventData<HandData>(EventSystem.current);
-            }
-        }
 
         /// <inheritdoc />
         public override void Update()
@@ -169,53 +149,9 @@ namespace XRTK.Providers.Controllers.Hands
             return false;
         }
 
-        /// <inheritdoc />
-        public void Register(IMixedRealityHandDataHandler handler)
-        {
-            if (handler != null)
-            {
-                handDataUpdateEventHandlers.Add(handler);
-            }
-        }
-
-        /// <inheritdoc />
-        public void Unregister(IMixedRealityHandDataHandler handler)
-        {
-            if (handDataUpdateEventHandlers.Contains(handler))
-            {
-                handDataUpdateEventHandlers.Remove(handler);
-            }
-        }
-
         /// <summary>
         /// Refreshes the active devices for this data provider.
         /// </summary>
         protected abstract void RefreshActiveControllers();
-
-        /// <inheritdoc />
-        public void UpdateHandData(Handedness handedness, HandData handData)
-        {
-            if (handData != null && handData.IsTracked)
-            {
-                IMixedRealityHandController controller = GetOrAddController(handedness);
-                if (controller != null)
-                {
-                    handDataUpdateEventData.Initialize(controller.InputSource, handedness, MixedRealityInputAction.None, handData);
-                    for (int i = 0; i < handDataUpdateEventHandlers.Count; i++)
-                    {
-                        IMixedRealityHandDataHandler handler = handDataUpdateEventHandlers[i];
-                        handler.OnHandDataUpdated(handDataUpdateEventData);
-                    }
-                }
-                else
-                {
-                    Debug.LogError($"Failed to create {controller.GetType().Name} controller");
-                }
-            }
-            else
-            {
-                RemoveController(handedness);
-            }
-        }
     }
 }

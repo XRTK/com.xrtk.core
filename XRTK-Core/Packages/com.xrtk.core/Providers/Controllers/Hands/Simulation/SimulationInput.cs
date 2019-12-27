@@ -12,17 +12,6 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
     public class SimulationInput
     {
         /// <summary>
-        /// If true then the hand is always visible,, even if it's currently
-        /// not being tracked. This feature is unique to simulation.
-        /// </summary>
-        public bool IsAlwaysVisible { get; set; }
-
-        /// <summary>
-        /// If true, the hand is currently being tracked.
-        /// </summary>
-        public bool IsTracking { get; set; }
-
-        /// <summary>
         /// The computed input based hand position delta since the last update.
         /// </summary>
         public Vector3 HandPositionDelta { get; set; }

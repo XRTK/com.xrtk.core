@@ -4,6 +4,7 @@
 using System;
 using UnityEngine;
 using XRTK.Attributes;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;

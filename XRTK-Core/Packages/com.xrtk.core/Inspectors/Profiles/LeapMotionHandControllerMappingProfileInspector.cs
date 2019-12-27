@@ -3,13 +3,13 @@
 
 using UnityEditor;
 using XRTK.Inspectors.Profiles.InputSystem.Controllers;
-using XRTK.Providers.Controllers;
+using XRTK.Providers.Controllers.Hands.LeapMotion;
 
 namespace XRTK.Inspectors.Profiles
 {
-    [CustomEditor(typeof(DefaultHandControllerMappingProfile))]
-    public class DefaultHandControllerMappingProfileInspector : BaseMixedRealityControllerMappingProfileInspector
+    [CustomEditor(typeof(LeapMotionHandControllerMappingProfile))]
+    public class LeapMotionHandControllerMappingProfileInspector : BaseMixedRealityControllerMappingProfileInspector
     {
-        
+
     }
 }

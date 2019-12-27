@@ -4,7 +4,7 @@
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Definitions.Controllers
+namespace XRTK.Definitions.Controllers.Hands
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Hand Controller Visualization Profile", fileName = "MixedRealityHandControllerVisualizationProfile", order = (int)CreateProfileMenuItemIndices.ControllerVisualization)]
     public class MixedRealityHandControllerVisualizationProfile : BaseMixedRealityProfile

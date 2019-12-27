@@ -3,7 +3,7 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles

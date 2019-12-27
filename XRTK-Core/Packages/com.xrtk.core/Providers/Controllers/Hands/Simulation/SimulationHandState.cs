@@ -3,7 +3,7 @@
 
 using System;
 using UnityEngine;
-using XRTK.Definitions.Controllers.Hands.UnityEditor;
+using XRTK.Definitions.Controllers.Hands.Simulation;
 using XRTK.Definitions.Utilities;
 using XRTK.Services;
 

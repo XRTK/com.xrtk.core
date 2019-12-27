@@ -3,12 +3,12 @@
 
 using System;
 using UnityEngine;
-using XRTK.Definitions.Controllers.Hands.UnityEditor;
+using XRTK.Definitions.Controllers.Hands.Simulation;
 using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.Controllers.Hands.Simulation
 {
-    public class SimulationHandControllerDataProvider : BaseHandControllerDataProvider
+    public class SimulationHandControllerDataProvider : BaseHandControllerDataProvider<SimulationHandController>
     {
         private SimulationHandControllerDataProviderProfile profile;
         private SimulationTimeStampStopWatch handUpdateStopWatch;

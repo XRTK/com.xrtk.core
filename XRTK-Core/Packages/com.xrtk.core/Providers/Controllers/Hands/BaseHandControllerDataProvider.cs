@@ -20,7 +20,7 @@ namespace XRTK.Providers.Controllers.Hands
     /// Base implementation for all hand controller data providers. Takes care of all the platform agnostic
     /// hand tracking logic.
     /// </summary>
-    public abstract class BaseHandControllerDataProvider : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider
+    public abstract class BaseHandControllerDataProvider<T> : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider where T : IMixedRealityHandController
     {
         private InputEventData<HandData> handDataUpdateEventData;
         private readonly List<IMixedRealityHandDataHandler> handDataUpdateEventHandlers = new List<IMixedRealityHandDataHandler>();
@@ -66,12 +66,8 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public bool TryGetJointPose(Handedness handedness, TrackedHandJoint joint, out MixedRealityPose pose)
         {
-            if (IsHandTracked(handedness))
+            if (TryGetController(handedness, out T controller))
             {
-                // Since we already checked that the controller for the given handedness is being tracked
-                // currently we can safely use GetOrAddHandController to get the controller instance
-                // without falsely creating it.
-                IMixedRealityHandController controller = GetOrAddHandController(handedness);
                 return controller.TryGetJointPose(joint, out pose);
             }
 
@@ -93,18 +89,18 @@ namespace XRTK.Providers.Controllers.Hands
             return false;
         }
 
-        private IMixedRealityHandController GetOrAddHandController(Handedness handedness)
+        private IMixedRealityHandController GetOrAddController(Handedness handedness)
         {
-            if (TryGetController(handedness, out BaseController existingController))
+            if (TryGetController(handedness, out T existingController))
             {
-                return existingController as IMixedRealityHandController;
+                return existingController;
             }
 
-            IMixedRealityPointer[] pointers = RequestPointers(typeof(DefaultHandController), handedness);
+            IMixedRealityPointer[] pointers = RequestPointers(typeof(T), handedness);
             IMixedRealityInputSource inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{handedness} Hand", pointers);
-            BaseController controller = System.Activator.CreateInstance(typeof(DefaultHandController), TrackingState.Tracked, handedness, inputSource, null) as BaseController;
+            T controller = (T)System.Activator.CreateInstance(typeof(T), TrackingState.Tracked, handedness, inputSource, null);
 
-            if (controller == null || !controller.SetupConfiguration(typeof(DefaultHandController)))
+            if (controller == null || !controller.SetupConfiguration(typeof(T)))
             {
                 // Controller failed to be setup correctly.
                 // Return null so we don't raise the source detected.
@@ -117,10 +113,9 @@ namespace XRTK.Providers.Controllers.Hands
             }
 
             MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);
-
             if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile.RenderMotionControllers)
             {
-                controller.TryRenderControllerModel(typeof(DefaultHandController));
+                controller.TryRenderControllerModel(typeof(T));
             }
 
             AddController(controller);
@@ -129,7 +124,7 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void RemoveController(Handedness handedness)
         {
-            if (TryGetController(handedness, out BaseController controller))
+            if (TryGetController(handedness, out T controller))
             {
                 MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
                 RemoveController(controller);
@@ -144,19 +139,19 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        private bool TryGetController(Handedness handedness, out BaseController controller)
+        private bool TryGetController(Handedness handedness, out T controller)
         {
             for (int i = 0; i < ActiveControllers.Count; i++)
             {
                 IMixedRealityController existingController = ActiveControllers[i];
                 if (existingController.ControllerHandedness == handedness)
                 {
-                    controller = existingController as BaseController;
+                    controller = (T)existingController;
                     return true;
                 }
             }
 
-            controller = null;
+            controller = default;
             return false;
         }
 
@@ -183,7 +178,7 @@ namespace XRTK.Providers.Controllers.Hands
         {
             if (handData != null && handData.IsTracked)
             {
-                IMixedRealityHandController controller = GetOrAddHandController(handedness);
+                IMixedRealityHandController controller = GetOrAddController(handedness);
                 if (controller != null)
                 {
                     controller.UpdateState(handData);

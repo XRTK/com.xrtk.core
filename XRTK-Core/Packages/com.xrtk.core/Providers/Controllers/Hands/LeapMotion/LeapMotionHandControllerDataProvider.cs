@@ -5,7 +5,7 @@ using XRTK.Definitions.Controllers;
 
 namespace XRTK.Providers.Controllers.Hands.LeapMotion
 {
-    public class LeapMotionHandControllerDataProvider : BaseHandControllerDataProvider
+    public class LeapMotionHandControllerDataProvider : BaseHandControllerDataProvider<LeapMotionHandController>
     {
         public LeapMotionHandControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
             : base(name, priority, profile) { }

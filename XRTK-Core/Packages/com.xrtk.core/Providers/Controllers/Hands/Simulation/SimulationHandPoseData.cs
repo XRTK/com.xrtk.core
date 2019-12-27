@@ -12,7 +12,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
     /// A hand pose definition with recorded hand joint data for use with <see cref="SimulationHandControllerDataProvider"/>.
     /// Assign a collection of these poses to the data provider's profile to simulate the pose.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hands/Unity Editor Hand Pose", fileName = "UnityEditorHandPoseData", order = (int)CreateProfileMenuItemIndices.Input)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hands/Simulation Hand Pose", fileName = "SimulationHandPoseData", order = (int)CreateProfileMenuItemIndices.Input)]
     public class SimulationHandPoseData : BaseMixedRealityProfile
     {
         [SerializeField]

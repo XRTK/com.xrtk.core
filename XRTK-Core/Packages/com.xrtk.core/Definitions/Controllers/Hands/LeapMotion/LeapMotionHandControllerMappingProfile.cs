@@ -5,12 +5,11 @@ using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Providers.Controllers.Hands;
 
-namespace XRTK.Providers.Controllers
+namespace XRTK.Providers.Controllers.Hands.LeapMotion
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Mappings/Hand Controller Mapping Profile", fileName = "MixedRealityHandControllerMappingProfile")]
-    public class DefaultHandControllerMappingProfile : BaseMixedRealityControllerMappingProfile
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Mappings/Leap Motion Hand Controller Mapping Profile", fileName = "LeapMotionHandControllerMappingProfile")]
+    public class LeapMotionHandControllerMappingProfile : BaseMixedRealityControllerMappingProfile
     {
         /// <inheritdoc />
         public override SupportedControllerType ControllerType => SupportedControllerType.Hand;
@@ -24,8 +23,8 @@ namespace XRTK.Providers.Controllers
             {
                 ControllerMappings = new[]
                 {
-                    new MixedRealityControllerMapping("Generic", typeof(DefaultHandController), Handedness.Left),
-                    new MixedRealityControllerMapping("Generic", typeof(DefaultHandController), Handedness.Right)
+                    new MixedRealityControllerMapping("Leap Motion Hand Controller Left", typeof(LeapMotionHandController), Handedness.Left),
+                    new MixedRealityControllerMapping("Leap Motion Hand Controller Right", typeof(LeapMotionHandController), Handedness.Right)
                 };
             }
 

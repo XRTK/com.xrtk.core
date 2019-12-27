@@ -6,7 +6,7 @@ using UnityEngine;
 using XRTK.Definitions.Utilities;
 using XRTK.Providers.Controllers.Hands.Simulation;
 
-namespace XRTK.Definitions.Controllers.Hands.UnityEditor
+namespace XRTK.Definitions.Controllers.Hands.Simulation
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hands/Simulation Hand Controller Data Provider Profile", fileName = "SimulationHandControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
     public class SimulationHandControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile

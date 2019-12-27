@@ -67,15 +67,6 @@ namespace XRTK.Services.DiagnosticsSystem
             }
         }
 
-        private int count = 0;
-
-        public override void Update()
-        {
-            base.Update();
-
-            Debug.Log($"test {count++}");
-        }
-
         /// <inheritdoc />
         public override void Disable()
         {

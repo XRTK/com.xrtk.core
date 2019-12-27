@@ -49,11 +49,5 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// i.e. joints rotate primarily around the X-axis.
         /// </remarks>
         bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose);
-
-        /// <summary>
-        /// Updates the state of the hand controller using provided hand data.
-        /// </summary>
-        /// <param name="handData">Updated hand data for this controller.</param>
-        void UpdateState(HandData handData);
     }
 }

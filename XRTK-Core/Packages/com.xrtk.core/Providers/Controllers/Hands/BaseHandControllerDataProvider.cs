@@ -50,6 +50,10 @@ namespace XRTK.Providers.Controllers.Hands
         {
             base.Update();
 
+            // Execute the platform specific implementation to get active hands.
+            RefreshActiveControllers();
+
+            // Update all tracked hands (controllers).
             for (int i = 0; i < ActiveControllers.Count; i++)
             {
                 ActiveControllers[i].UpdateController();
@@ -89,7 +93,13 @@ namespace XRTK.Providers.Controllers.Hands
             return false;
         }
 
-        private IMixedRealityHandController GetOrAddController(Handedness handedness)
+        /// <summary>
+        /// Gets a controller instance of the data providers type if it already exists
+        /// or creates and registers a new one if not.
+        /// </summary>
+        /// <param name="handedness">The handedness to assign to the controller.</param>
+        /// <returns>Controller instance.</returns>
+        public IMixedRealityHandController GetOrAddController(Handedness handedness)
         {
             if (TryGetController(handedness, out T existingController))
             {
@@ -122,7 +132,11 @@ namespace XRTK.Providers.Controllers.Hands
             return controller as IMixedRealityHandController;
         }
 
-        private void RemoveController(Handedness handedness)
+        /// <summary>
+        /// Removes the controller for a given handedness.
+        /// </summary>
+        /// <param name="handedness">The handness of the controller to remove.</param>
+        protected void RemoveController(Handedness handedness)
         {
             if (TryGetController(handedness, out T controller))
             {
@@ -173,6 +187,11 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
+        /// <summary>
+        /// Refreshes the active devices for this data provider.
+        /// </summary>
+        protected abstract void RefreshActiveControllers();
+
         /// <inheritdoc />
         public void UpdateHandData(Handedness handedness, HandData handData)
         {
@@ -181,8 +200,6 @@ namespace XRTK.Providers.Controllers.Hands
                 IMixedRealityHandController controller = GetOrAddController(handedness);
                 if (controller != null)
                 {
-                    controller.UpdateState(handData);
-
                     handDataUpdateEventData.Initialize(controller.InputSource, handedness, MixedRealityInputAction.None, handData);
                     for (int i = 0; i < handDataUpdateEventHandlers.Count; i++)
                     {

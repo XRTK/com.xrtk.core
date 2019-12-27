@@ -88,6 +88,11 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             handUpdateStopWatch.Reset();
         }
 
+        protected override void RefreshActiveControllers()
+        {
+
+        }
+
         /// <inheritdoc />
         public override void Update()
         {

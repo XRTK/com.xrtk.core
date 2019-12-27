@@ -86,11 +86,14 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public override void UpdateController()
         {
-            //base.UpdateController();
+            base.UpdateController();
         }
 
-        /// <inheritdoc />
-        public virtual void UpdateState(HandData handData)
+        /// <summary>
+        /// Updates the state of the hand controller using provided hand data.
+        /// </summary>
+        /// <param name="handData">Updated hand data for this controller.</param>
+        protected virtual void UpdateBase(HandData handData)
         {
             UpdateJoints(handData);
             UpdateBounds(handData);

@@ -9,5 +9,10 @@ namespace XRTK.Providers.Controllers.Hands.LeapMotion
     {
         public LeapMotionHandControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
             : base(name, priority, profile) { }
+
+        protected override void RefreshActiveControllers()
+        {
+
+        }
     }
 }

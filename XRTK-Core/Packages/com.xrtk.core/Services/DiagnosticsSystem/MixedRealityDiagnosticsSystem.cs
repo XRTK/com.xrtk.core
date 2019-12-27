@@ -4,8 +4,11 @@
 using UnityEngine;
 using UnityEngine.EventSystems;
 using XRTK.Definitions.DiagnosticsSystem;
+using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.DiagnosticsSystem;
 using XRTK.Interfaces.DiagnosticsSystem;
+using XRTK.Interfaces.DiagnosticsSystem.Handlers;
+using Object = UnityEngine.Object;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
@@ -29,7 +32,6 @@ namespace XRTK.Services.DiagnosticsSystem
         private FrameEventData frameEventData;
         private MemoryEventData memoryEventData;
         private ConsoleEventData consoleEventData;
-        private MissedFrameEventData missedFrameEventData;
 
         #region IMixedRealityService Implementation
 
@@ -46,8 +48,57 @@ namespace XRTK.Services.DiagnosticsSystem
             var currentEventSystem = EventSystem.current;
             frameEventData = new FrameEventData(currentEventSystem);
             consoleEventData = new ConsoleEventData(currentEventSystem);
-            missedFrameEventData = new MissedFrameEventData(currentEventSystem);
             memoryEventData = new MemoryEventData(currentEventSystem);
+        }
+
+        /// <inheritdoc />
+        public override void Enable()
+        {
+            base.Enable();
+
+            if (!Application.isPlaying)
+            {
+                return;
+            }
+
+            if (profile.ShowDiagnosticsWindowOnStart == AutoStartBehavior.AutoStart)
+            {
+                IsWindowEnabled = true;
+            }
+        }
+
+        private int count = 0;
+
+        public override void Update()
+        {
+            base.Update();
+
+            Debug.Log($"test {count++}");
+        }
+
+        /// <inheritdoc />
+        public override void Disable()
+        {
+            base.Disable();
+
+            if (!Application.isPlaying)
+            {
+                return;
+            }
+
+            if (diagnosticsWindow != null)
+            {
+                Unregister(diagnosticsWindow);
+
+                if (Application.isEditor)
+                {
+                    Object.DestroyImmediate(diagnosticsWindow);
+                }
+                else
+                {
+                    Object.Destroy(diagnosticsWindow);
+                }
+            }
         }
 
         /// <inheritdoc />
@@ -99,6 +150,7 @@ namespace XRTK.Services.DiagnosticsSystem
                 if (diagnosticsWindow == null)
                 {
                     diagnosticsWindow = Object.Instantiate(profile.DiagnosticsWindowPrefab, DiagnosticsRoot);
+                    Register(diagnosticsWindow);
                 }
 
                 return diagnosticsWindow;
@@ -126,38 +178,90 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <inheritdoc />
         public void RaiseMissedFramesChanged(bool[] missedFrames)
         {
-            missedFrameEventData.Initialize(missedFrames);
+            frameEventData.Initialize(missedFrames);
+            HandleEvent(frameEventData, OnFrameMissed);
         }
+
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityFrameDiagnosticsHandler> OnFrameMissed =
+            delegate (IMixedRealityFrameDiagnosticsHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<FrameEventData>(eventData);
+                handler.OnFrameMissed(casted);
+            };
 
         /// <inheritdoc />
         public void RaiseFrameRateChanged(int frameRate, bool isGPU)
         {
             frameEventData.Initialize(frameRate, isGPU);
+            HandleEvent(frameEventData, OnFrameRateChanged);
         }
+
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityFrameDiagnosticsHandler> OnFrameRateChanged =
+            delegate (IMixedRealityFrameDiagnosticsHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<FrameEventData>(eventData);
+                handler.OnFrameRateChanged(casted);
+            };
 
         /// <inheritdoc />
         public void RaiseLogReceived(string message, string stackTrace, LogType logType)
         {
             consoleEventData.Initialize(message, stackTrace, logType);
+            HandleEvent(consoleEventData, OnLogReceived);
         }
+
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityConsoleDiagnosticsHandler> OnLogReceived =
+            delegate (IMixedRealityConsoleDiagnosticsHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<ConsoleEventData>(eventData);
+                handler.OnLogReceived(casted);
+            };
+
+        #region Memory Status Events
 
         /// <inheritdoc />
         public void RaiseMemoryLimitChanged(MemoryLimit currentMemoryLimit)
         {
             memoryEventData.Initialize(currentMemoryLimit);
+            HandleEvent(memoryEventData, OnMemoryLimitChanged);
         }
+
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityMemoryDiagnosticsHandler> OnMemoryLimitChanged =
+            delegate (IMixedRealityMemoryDiagnosticsHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<MemoryEventData>(eventData);
+                handler.OnMemoryLimitChanged(casted);
+            };
 
         /// <inheritdoc />
         public void RaiseMemoryUsageChanged(MemoryUsage currentMemoryUsage)
         {
             memoryEventData.Initialize(currentMemoryUsage);
+            HandleEvent(memoryEventData, OnMemoryUsageChanged);
         }
+
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityMemoryDiagnosticsHandler> OnMemoryUsageChanged =
+            delegate (IMixedRealityMemoryDiagnosticsHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<MemoryEventData>(eventData);
+                handler.OnMemoryUsageChanged(casted);
+            };
 
         /// <inheritdoc />
         public void RaiseMemoryPeakChanged(MemoryPeak peakMemoryUsage)
         {
             memoryEventData.Initialize(peakMemoryUsage);
+            HandleEvent(memoryEventData, OnMemoryPeakChanged);
         }
+
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityMemoryDiagnosticsHandler> OnMemoryPeakChanged =
+            delegate (IMixedRealityMemoryDiagnosticsHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<MemoryEventData>(eventData);
+                handler.OnMemoryPeakChanged(casted);
+            };
+
+        #endregion Memory Status Events
 
         #endregion IMixedRealityDiagnosticsSystem Implementation
     }

@@ -36,7 +36,11 @@ namespace XRTK.Services.DiagnosticsSystem
         public override void Disable()
         {
             base.Disable();
-            Application.logMessageReceived -= MixedRealityToolkit.DiagnosticsSystem.RaiseLogReceived;
+
+            if (MixedRealityToolkit.DiagnosticsSystem != null)
+            {
+                Application.logMessageReceived -= MixedRealityToolkit.DiagnosticsSystem.RaiseLogReceived;
+            }
         }
 
         #endregion IMixedRealityServce Implementation

@@ -13,8 +13,8 @@ namespace XRTK.Interfaces.DiagnosticsSystem.Handlers
         void OnFrameRateChanged(FrameEventData eventData);
 
         /// <summary>
-        /// Missed frames diagnostics have changed.
+        /// A frame target was missed.
         /// </summary>
-        void OnMissedFramesChanged(MissedFrameEventData eventData);
+        void OnFrameMissed(FrameEventData eventData);
     }
 }

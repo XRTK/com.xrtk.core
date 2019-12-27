@@ -21,10 +21,16 @@ namespace XRTK.EventDatum.DiagnosticsSystem
         public bool IsGpuReading { get; private set; }
 
         /// <summary>
+        /// The array of missed frames in the sample period.
+        /// </summary>
+        public bool[] MissedFrames { get; private set; }
+
+        /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="eventSystem"></param>
-        public FrameEventData(EventSystem eventSystem) : base(eventSystem)
+        public FrameEventData(EventSystem eventSystem)
+            : base(eventSystem)
         {
         }
 
@@ -38,6 +44,16 @@ namespace XRTK.EventDatum.DiagnosticsSystem
             BaseInitialize();
             FramesPerSecond = framesPerSecond;
             IsGpuReading = isGpuReading;
+        }
+
+        /// <summary>
+        /// Initializes the <see cref="FrameEventData"/>
+        /// </summary>
+        /// <param name="missedFrames"></param>
+        public void Initialize(bool[] missedFrames)
+        {
+            BaseInitialize();
+            MissedFrames = missedFrames;
         }
     }
 }

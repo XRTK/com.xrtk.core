@@ -44,7 +44,7 @@ namespace XRTK.Services
 
         /// <inheritdoc />
         public virtual void OnApplicationFocus(bool isFocused) { }
-        
+
         /// <inheritdoc />
         public void OnApplicationPause(bool isPaused) { }
 
@@ -59,6 +59,7 @@ namespace XRTK.Services
             OnDispose(true);
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
             if (disposed) { return; }

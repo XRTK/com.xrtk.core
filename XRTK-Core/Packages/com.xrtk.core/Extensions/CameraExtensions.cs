@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Utilities;
 
 namespace XRTK.Extensions
 {
@@ -32,14 +31,13 @@ namespace XRTK.Extensions
 
             var cameraTransform = camera.transform;
             Vector3 deltaPos = position - cameraTransform.position;
-            Vector3 headDeltaPos = MathUtilities.TransformDirectionFromTo(null, cameraTransform, deltaPos).normalized;
+            Vector3 headDeltaPos = cameraTransform.TransformDirection(deltaPos).normalized;
 
             float yaw = Mathf.Asin(headDeltaPos.x) * Mathf.Rad2Deg;
             float pitch = Mathf.Asin(headDeltaPos.y) * Mathf.Rad2Deg;
 
             return (Mathf.Abs(yaw) < horizontalFovHalf && Mathf.Abs(pitch) < verticalFovHalf);
         }
-
 
         /// <summary>
         /// Gets the frustum size at a given distance from the camera.
@@ -62,6 +60,28 @@ namespace XRTK.Extensions
         public static float GetDistanceForFrustumHeight(this Camera camera, float frustumHeight)
         {
             return frustumHeight * 0.5f / Mathf.Max(0.00001f, Mathf.Tan(camera.fieldOfView * 0.5f * Mathf.Deg2Rad));
+        }
+
+        /// <summary>
+        /// Is the <see cref="Transform"/> inside the <see cref="Camera"/>s frustum?
+        /// </summary>
+        /// <param name="camera"></param>
+        /// <param name="transform"></param>
+        /// <returns></returns>
+        public static bool IsInFrustum(this Camera camera, Transform transform)
+        {
+            var planes = GeometryUtility.CalculateFrustumPlanes(camera);
+            return GeometryUtility.TestPlanesAABB(planes, transform.GetRenderBounds());
+        }
+
+        /// <summary>
+        /// Is the <see cref="GameObject"/> inside the <see cref="Camera"/>s frustum?
+        /// </summary>
+        /// <param name="camera"></param>
+        /// <param name="gameObject"></param>
+        public static bool IsInFrustum(this Camera camera, GameObject gameObject)
+        {
+            return IsInFrustum(camera, gameObject.transform);
         }
     }
 }

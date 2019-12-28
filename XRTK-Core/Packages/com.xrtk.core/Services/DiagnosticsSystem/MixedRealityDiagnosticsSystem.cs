@@ -166,6 +166,26 @@ namespace XRTK.Services.DiagnosticsSystem
             }
         }
 
+        #region Console Events
+
+        /// <inheritdoc />
+        public void RaiseLogReceived(string message, string stackTrace, LogType logType)
+        {
+            consoleEventData.Initialize(message, stackTrace, logType);
+            HandleEvent(consoleEventData, OnLogReceived);
+        }
+
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityConsoleDiagnosticsHandler> OnLogReceived =
+            delegate (IMixedRealityConsoleDiagnosticsHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<ConsoleEventData>(eventData);
+                handler.OnLogReceived(casted);
+            };
+
+        #endregion Console Events
+
+        #region Frame Events
+
         /// <inheritdoc />
         public void RaiseMissedFramesChanged(bool[] missedFrames)
         {
@@ -194,21 +214,9 @@ namespace XRTK.Services.DiagnosticsSystem
                 handler.OnFrameRateChanged(casted);
             };
 
-        /// <inheritdoc />
-        public void RaiseLogReceived(string message, string stackTrace, LogType logType)
-        {
-            consoleEventData.Initialize(message, stackTrace, logType);
-            HandleEvent(consoleEventData, OnLogReceived);
-        }
+        #endregion Frame Events
 
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityConsoleDiagnosticsHandler> OnLogReceived =
-            delegate (IMixedRealityConsoleDiagnosticsHandler handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<ConsoleEventData>(eventData);
-                handler.OnLogReceived(casted);
-            };
-
-        #region Memory Status Events
+        #region Memory Events
 
         /// <inheritdoc />
         public void RaiseMemoryLimitChanged(MemoryLimit currentMemoryLimit)
@@ -252,7 +260,7 @@ namespace XRTK.Services.DiagnosticsSystem
                 handler.OnMemoryPeakChanged(casted);
             };
 
-        #endregion Memory Status Events
+        #endregion Memory Events
 
         #endregion IMixedRealityDiagnosticsSystem Implementation
     }

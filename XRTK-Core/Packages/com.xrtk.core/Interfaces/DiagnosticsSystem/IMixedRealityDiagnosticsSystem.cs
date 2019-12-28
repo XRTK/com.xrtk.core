@@ -32,6 +32,8 @@ namespace XRTK.Interfaces.DiagnosticsSystem
         /// </summary>
         bool IsWindowEnabled { get; set; }
 
+        #region Console Events
+
         /// <summary>
         /// Raise the event that a log was received by the <see cref="IMixedRealityDiagnosticsSystem"/>
         /// </summary>
@@ -39,6 +41,10 @@ namespace XRTK.Interfaces.DiagnosticsSystem
         /// <param name="message"></param>
         /// <param name="type"></param>
         void RaiseLogReceived(string condition, string message, LogType type);
+
+        #endregion Console Events
+
+        #region Frame Events
 
         /// <summary>
         /// Raise the event that the frame rate has changed.
@@ -52,6 +58,10 @@ namespace XRTK.Interfaces.DiagnosticsSystem
         /// </summary>
         /// <param name="missedFrames"></param>
         void RaiseMissedFramesChanged(bool[] missedFrames);
+
+        #endregion Frame Events
+
+        #region Memory Events
 
         /// <summary>
         /// Raise the event that the memory limit has changed.
@@ -70,5 +80,7 @@ namespace XRTK.Interfaces.DiagnosticsSystem
         /// </summary>
         /// <param name="peakMemoryUsage"></param>
         void RaiseMemoryPeakChanged(MemoryPeak peakMemoryUsage);
+
+        #endregion Memory Events
     }
 }

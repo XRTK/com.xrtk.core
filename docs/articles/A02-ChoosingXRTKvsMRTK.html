@@ -8,7 +8,7 @@
     <title>Choosing between XRTK and MRTK | XRTK-Core </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Choosing between XRTK and MRTK | XRTK-Core ">
-    <meta name="generator" content="docfx 2.45.1.0">
+    <meta name="generator" content="docfx 2.48.0.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -69,15 +69,14 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="choosing-between-xrtk-and-mrtk">Choosing between XRTK and MRTK</h1>
 
-<p><a href="">XRTK heart MRTK</a></p>
 <p>The choice between the XRTK and Microsoft's base MRTK today is a personal choice on the development path you, the developer or enterprise, wants to take when building your Mixed Reality vision.</p>
 <h2 id="tldr">TL;DR</h2>
-<p>Both projects were originally designed/architected and built by the same developers over the course of 2018. From 2019, they have diverged under different principles, namely:</p>
+<p>Both projects were originally designed/architected and built by the same developers over the course of 2018. From 2019 on, they have diverged under different principles, namely:</p>
 <ul>
 <li>The MRTK is currently only being developed to focus on the needs of Microsoft partners and new HL2 deployments, whilst still retaining the core multi-platform architecture it was designed with.  Microsoft (for the time being) must focus its scope to achieve those deliverables.</li>
 <li>The XRTK is a community-based platform for building cross-platform Mixed Reality solutions (AR / VR / XR / MR) for a multitude of devices and runtime platforms.  Creating solutions to meet the need of a much more diverse set of requirements required by cross-platform solutions.</li>
 </ul>
-<p>Both projects are still tightly coupled and share a lot of the same base code and standards. As such, projects created in one framework are easily transferable to the other with minimal effort, the teams have ensured you are never locked into one framework, should you wish to switch.
+<p>Both projects share a lot of the same base code and standards. As such, projects created in one framework are easily transferable to the other with minimal effort, the teams have ensured you are never locked into one framework, should you wish to switch.
 There will be an increasing number of touchpoints as time goes by, but both teams are invested in keeping the two projects aligned to allow easy adoption of new features in either direction.</p>
 <h2 id="core-differences">Core Differences</h2>
 <p>Where the two frameworks truly diverge, is an adherence to the core architecture, which maintains a highly organized design, tuned to deliver the best performance within the Unity Game Engine (akin to Unity's new ECS/DOTS path). This architecture aims to break the chains to old monolithic approaches for building solutions in Unity.</p>
@@ -95,7 +94,7 @@ There will be an increasing number of touchpoints as time goes by, but both team
 <td>XRTK offers a more Unity focused development channel than that of the enterprise-focused MRTK, utilizing Unity's built-in packaging system.  Additionally, we have streamlined the developer pattern aligned with how community devs interact.</td>
 </tr>
 <tr>
-<td><a href="">Locator pattern</a> based approach</td>
+<td><a href="https://medium.com/@stephen_hodgson/the-mixed-reality-framework-6fdb5c11feb2">Locator pattern</a> based approach</td>
 <td>The original architecture called for only a single Singleton to break the chains of the past.  We encourage developers to follow us on this journey which will set you in good stead for Unity new ECS/DOTS pattern, but in a more Unity friendly way.</td>
 </tr>
 <tr>
@@ -201,16 +200,15 @@ There will be an increasing number of touchpoints as time goes by, but both team
 </tbody>
 </table>
 <blockquote>
-<p><em>TBC</em> - To Be Considered</p>
+<p><em>TBC</em> - To Be Considered
+MRTK status based off Microsoft's currently published road-map</p>
 </blockquote>
-<pre><code> MRTK status based off Microsoft's currently published road-map
-</code></pre>
 <h2 id="mrtk--xrtk-parity">MRTK / XRTK parity</h2>
-<p>As a sustained fork, the XRTK team still works closely with Microsoft to ensure that we maintain a level of parity between the two implementation patterns, ensuring that new Microsoft developments (such as HL2, hand tracking, etc.) are incorporated into the XRTK, in a fashion that complements the XRTK. Most features as they are ported will require some enhancement to comply to the XRTK architecture, but the Developer Product adoption will remain as close as we can to aid porting between frameworks. (in other words, we preserve the runtime whilst finely tuning the backend)</p>
+<p>The XRTK team still works closely with Microsoft to ensure that we maintain a level of parity between the two implementation patterns, ensuring that new Microsoft developments (such as HL2, hand tracking, etc.) are incorporated into the XRTK, in a fashion that complements the XRTK. Most features as they are ported will require some enhancement to comply to the XRTK architecture, but the Developer Product adoption will remain as close as we can to aid porting between frameworks. (in other words, we preserve the runtime whilst finely tuning the backend)</p>
 <h2 id="feedback">Feedback</h2>
 <p>Being community-based, the XRTK is more open to adopting and reacting to feedback, whilst the MRTK has to ensure it complies with its core audience first when prioritizing updates.  That being said, the MRTK team is trying to remain as open as it can to engage with developers.</p>
 <p>Have a question, <a href="https://github.com/XRTK/XRTK-Core/issues/new?assignees=&amp;labels=question&amp;template=request_for_information.md&amp;title=ask%20us%20anything">just log a new RFI Issue</a> (Request for Information) and we'll answer asap.  All questions go to improve the documentation, so literally ask anything (about Mixed Reality!!)</p>
-<h1 id="conclusion">Conclusion</h1>
+<h2 id="conclusion">Conclusion</h2>
 <p>We'd like you to join the XRTK adventure in building a true community-based Mixed Reality Framework, whether you are trying it new for the first time or wanting to transfer from the MRTK.  We will always ensure you have a voice and be on hand to help you through your Mixed Reality projects on whichever platforms are important to you and your project, whilst ensuring you can meet any new demands.</p>
 </article>
           </div>
@@ -239,7 +237,7 @@ There will be an increasing number of touchpoints as time goes by, but both team
             <span class="pull-right">
               <a href="#top">Back to top</a>
             </span>
-            (c) 2019 XRTK
+            (c) XRTK
             
           </div>
         </div>

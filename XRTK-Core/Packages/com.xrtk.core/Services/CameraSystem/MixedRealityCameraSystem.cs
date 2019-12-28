@@ -1,14 +1,19 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Utilities;
 using XRTK.Extensions;
+using XRTK.Interfaces;
 
 namespace XRTK.Services.CameraSystem
 {
+    /// <summary>
+    /// The Mixed Reality Toolkit's default implementation of the <see cref="IMixedRealityCameraSystem"/>.
+    /// </summary>
     public class MixedRealityCameraSystem : BaseSystem, IMixedRealityCameraSystem
     {
         /// <summary>
@@ -19,6 +24,12 @@ namespace XRTK.Services.CameraSystem
             : base(profile)
         {
             this.profile = profile;
+            DefaultHeadHeight = profile.DefaultHeadHeight;
+
+            if (profile.CameraRigType.Type == null)
+            {
+                throw new Exception("Camera rig type cannot be null!");
+            }
         }
 
         private readonly MixedRealityCameraProfile profile;
@@ -41,6 +52,33 @@ namespace XRTK.Services.CameraSystem
             }
         }
 
+        /// <inheritdoc />
+        public float DefaultHeadHeight { get; }
+
+        private float headHeight;
+
+        /// <inheritdoc />
+        public float HeadHeight
+        {
+            get => headHeight;
+            set
+            {
+                if (value.Equals(headHeight))
+                {
+                    return;
+                }
+
+                headHeight = value;
+                CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, headHeight, 0f), Quaternion.identity);
+            }
+        }
+
+        /// <inheritdoc />
+        public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled && UnityEngine.XR.XRDevice.isPresent;
+
+        /// <inheritdoc />
+        public IMixedRealityCameraRig CameraRig { get; private set; }
+
         private DisplayType currentDisplayType;
         private bool cameraOpaqueLastFrame = false;
 
@@ -53,6 +91,8 @@ namespace XRTK.Services.CameraSystem
         /// <inheritdoc />
         public override void Initialize()
         {
+            base.Initialize();
+
             cameraOpaqueLastFrame = IsOpaque;
 
             if (IsOpaque)
@@ -63,10 +103,22 @@ namespace XRTK.Services.CameraSystem
             {
                 ApplySettingsForTransparentDisplay();
             }
+
+            if (CameraRig == null)
+            {
+                CameraRig = CameraCache.Main.gameObject.EnsureComponent(profile.CameraRigType.Type) as IMixedRealityCameraRig;
+                Debug.Assert(CameraRig != null);
+                ResetRigTransforms();
+            }
         }
 
+        /// <inheritdoc />
         public override void Enable()
         {
+            base.Enable();
+
+            ResetRigTransforms();
+
             if (Application.isPlaying &&
                 profile.IsCameraPersistent)
             {
@@ -94,6 +146,54 @@ namespace XRTK.Services.CameraSystem
             }
         }
 
+        /// <inheritdoc />
+        public override void LateUpdate()
+        {
+            base.LateUpdate();
+
+            SyncRigTransforms();
+        }
+
+        /// <inheritdoc />
+        public override void Disable()
+        {
+            base.Disable();
+
+            var camera = CameraCache.Main;
+
+            if (camera != null)
+            {
+                camera.transform.SetParent(null);
+            }
+
+            if (CameraRig == null) { return; }
+
+            if (CameraRig.PlayspaceTransform != null)
+            {
+                if (Application.isPlaying)
+                {
+                    UnityEngine.Object.Destroy(CameraRig.PlayspaceTransform.gameObject);
+                }
+                else
+                {
+                    UnityEngine.Object.DestroyImmediate(CameraRig.PlayspaceTransform.gameObject);
+                }
+            }
+
+            if (CameraRig is Component component &&
+                component is IMixedRealityCameraRig)
+            {
+                if (Application.isPlaying)
+                {
+                    UnityEngine.Object.Destroy(component);
+                }
+                else
+                {
+                    UnityEngine.Object.DestroyImmediate(component);
+                }
+            }
+        }
+
         /// <summary>
         /// Applies opaque settings from camera profile.
         /// </summary>
@@ -114,6 +214,37 @@ namespace XRTK.Services.CameraSystem
             CameraCache.Main.backgroundColor = profile.BackgroundColorTransparentDisplay;
             CameraCache.Main.nearClipPlane = profile.NearClipPlaneTransparentDisplay;
             QualitySettings.SetQualityLevel(profile.TransparentQualityLevel, false);
+        }
+
+        private void ResetRigTransforms()
+        {
+            CameraRig.PlayspaceTransform.position = Vector3.zero;
+            CameraRig.PlayspaceTransform.rotation = Quaternion.identity;
+            CameraRig.CameraTransform.position = Vector3.zero;
+            CameraRig.CameraTransform.rotation = Quaternion.identity;
+            CameraRig.BodyTransform.position = Vector3.zero;
+            CameraRig.BodyTransform.rotation = Quaternion.identity;
+        }
+
+        private void SyncRigTransforms()
+        {
+            var cameraPosition = CameraRig.CameraTransform.localPosition;
+            var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
+
+            bodyLocalPosition.x = cameraPosition.x;
+            bodyLocalPosition.y = cameraPosition.y - HeadHeight;
+            bodyLocalPosition.z = cameraPosition.z;
+
+            CameraRig.BodyTransform.localPosition = bodyLocalPosition;
+
+            var bodyRotation = CameraRig.BodyTransform.rotation;
+            var headRotation = CameraRig.CameraTransform.rotation;
+            var currentAngle = Mathf.Abs(Quaternion.Angle(bodyRotation, headRotation));
+
+            if (currentAngle > profile.BodyAdjustmentAngle)
+            {
+                CameraRig.BodyTransform.rotation = Quaternion.Slerp(bodyRotation, headRotation, Time.deltaTime * profile.BodyAdjustmentSpeed);
+            }
         }
     }
 }

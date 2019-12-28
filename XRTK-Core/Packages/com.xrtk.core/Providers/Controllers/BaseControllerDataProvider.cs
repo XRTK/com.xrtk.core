@@ -50,7 +50,7 @@ namespace XRTK.Providers.Controllers
                     if (((useSpecificType && pointerProfile.ControllerType.Type == controllerType.Type) || (!useSpecificType && pointerProfile.ControllerType.Type == null)) &&
                         (pointerProfile.Handedness == Handedness.Any || pointerProfile.Handedness == Handedness.Both || pointerProfile.Handedness == controllingHand))
                     {
-                        var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, MixedRealityToolkit.Instance.MixedRealityPlayspace);
+                        var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
                         var pointer = pointerObject.GetComponent<IMixedRealityPointer>();
 
                         if (pointer != null)

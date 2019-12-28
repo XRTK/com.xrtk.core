@@ -167,7 +167,7 @@ namespace XRTK.Providers.Controllers
 
             if (!profileFound)
             {
-                Debug.LogWarning($"No controller profile found for type {controllerType.Name}, please ensure all controllers are defined in the configured MixedRealityControllerConfigurationProfile.");
+                Debug.LogWarning($"No controller profile found for type {controllerType.Name}, please ensure all controllers are defined and configured in the {nameof(MixedRealityControllerMappingProfiles)}.");
                 return false;
             }
 
@@ -278,7 +278,7 @@ namespace XRTK.Providers.Controllers
                 if (useSystemDefaultModels && gltfObject != null)
                 {
                     controllerModel.name = $"{controllerType.Name}_Visualization";
-                    controllerModel.transform.SetParent(MixedRealityToolkit.Instance.MixedRealityPlayspace.transform);
+                    controllerModel.transform.SetParent(MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
                     var visualizationType = visualizationProfile.GetControllerVisualizationTypeOverride(controllerType, ControllerHandedness) ??
                                             visualizationProfile.ControllerVisualizationType;
                     controllerModel.AddComponent(visualizationType.Type);
@@ -287,7 +287,7 @@ namespace XRTK.Providers.Controllers
                 //If the model was a prefab
                 else
                 {
-                    var controllerObject = UnityEngine.Object.Instantiate(controllerModel, MixedRealityToolkit.Instance.MixedRealityPlayspace);
+                    var controllerObject = UnityEngine.Object.Instantiate(controllerModel, MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
                     controllerObject.name = $"{controllerType.Name}_Visualization";
                     Visualizer = controllerObject.GetComponent<IMixedRealityControllerVisualizer>();
                 }

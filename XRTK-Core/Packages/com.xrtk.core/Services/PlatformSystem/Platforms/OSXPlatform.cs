@@ -15,7 +15,8 @@ namespace XRTK.Services.PlatformSystem.Platforms
         /// </summary>
         /// <param name="name"></param>
         /// <param name="priority"></param>
-        public OSXPlatform(string name, uint priority) : base(name, priority)
+        public OSXPlatform(string name, uint priority)
+            : base(name, priority)
         {
         }
 

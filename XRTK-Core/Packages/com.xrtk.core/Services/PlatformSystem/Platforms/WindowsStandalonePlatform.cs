@@ -10,12 +10,9 @@ namespace XRTK.Services.PlatformSystem.Platforms
     /// </summary>
     public class WindowsStandalonePlatform : BaseDataProvider, IMixedRealityPlatform
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        public WindowsStandalonePlatform(string name, uint priority) : base(name, priority)
+        /// <inheritdoc />
+        public WindowsStandalonePlatform(string name, uint priority)
+            : base(name, priority)
         {
         }
 

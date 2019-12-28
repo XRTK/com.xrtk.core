@@ -18,14 +18,12 @@ namespace XRTK.Definitions.PlatformSystem
         /// <param name="platformType">The concrete type for the system, feature or manager.</param>
         /// <param name="platformName">The simple, human readable name for the system, feature, or manager.</param>
         /// <param name="priority">The priority this system, feature, or manager will be initialized in.</param>
-        /// <param name="runtimePlatform">The runtime platform(s) to run this system, feature, or manager on.</param>
         /// <param name="configurationProfile">The configuration profile for the system, feature, or manager.</param>
-        public PlatformConfiguration(SystemType platformType, string platformName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityPlatformProfile configurationProfile)
+        public PlatformConfiguration(SystemType platformType, string platformName, uint priority, BaseMixedRealityPlatformProfile configurationProfile)
         {
             this.platformType = platformType;
             this.platformName = platformName;
             this.priority = priority;
-            this.runtimePlatform = runtimePlatform;
             this.configurationProfile = configurationProfile;
         }
 
@@ -53,15 +51,6 @@ namespace XRTK.Definitions.PlatformSystem
         /// The priority this system, feature, or manager will be initialized in.
         /// </summary>
         public uint Priority => priority;
-
-        [EnumFlags]
-        [SerializeField]
-        private SupportedPlatforms runtimePlatform;
-
-        /// <summary>
-        /// The runtime platform(s) to run this system, feature, or manager on.
-        /// </summary>
-        public SupportedPlatforms RuntimePlatform => runtimePlatform;
 
         [SerializeField]
         private BaseMixedRealityPlatformProfile configurationProfile;

@@ -2,9 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
+using XRTK.Definitions.Controllers.Hands.Simulation;
 using XRTK.Inspectors.Profiles;
 using XRTK.Inspectors.Utilities;
-using XRTK.Providers.Controllers.Hands.Simulation;
 
 namespace XRTK.Inspectors.Data.Controllers.Hands.Simulation
 {

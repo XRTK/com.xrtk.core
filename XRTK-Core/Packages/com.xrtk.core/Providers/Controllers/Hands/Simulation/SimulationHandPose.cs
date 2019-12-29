@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using XRTK.Definitions.Utilities;
 using XRTK.Services;
+using XRTK.Definitions.Controllers.Hands.Simulation;
 
 namespace XRTK.Providers.Controllers.Hands.Simulation
 {

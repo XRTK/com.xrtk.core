@@ -3,10 +3,9 @@
 
 using UnityEngine;
 using UnityEngine.Serialization;
-using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Providers.Controllers.Hands.Simulation
+namespace XRTK.Definitions.Controllers.Hands.Simulation
 {
     /// <summary>
     /// A hand pose definition with recorded hand joint data for use with <see cref="SimulationHandControllerDataProvider"/>.

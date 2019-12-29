@@ -1,49 +1,39 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using UnityEngine.EventSystems;
 using XRTK.Definitions.DiagnosticsSystem;
+using XRTK.Definitions.Utilities;
+using XRTK.EventDatum.DiagnosticsSystem;
 using XRTK.Interfaces.DiagnosticsSystem;
+using XRTK.Interfaces.DiagnosticsSystem.Handlers;
+using Object = UnityEngine.Object;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
     /// <summary>
     /// The default implementation of the <see cref="IMixedRealityDiagnosticsSystem"/>
     /// </summary>
-    public class MixedRealityDiagnosticsSystem : BaseSystem, IMixedRealityDiagnosticsSystem
+    public class MixedRealityDiagnosticsSystem : BaseEventSystem, IMixedRealityDiagnosticsSystem
     {
-        /// <inheritdoc />
-        public Transform DiagnosticsTransform { get; private set; }
-
-        /// <inheritdoc />
-        public GameObject DiagnosticsWindow { get; private set; }
-
-        /// <inheritdoc />
-        public string ApplicationSignature => $"{Application.productName} v{Application.version}";
-
-        private bool showWindow = false;
-        /// <inheritdoc />
-        public bool ShowWindow
-        {
-            get { return showWindow; }
-            set
-            {
-                if (value && DiagnosticsWindow == null)
-                {
-                    CreateDiagnosticsWindow();
-                }
-
-                showWindow = value;
-                DiagnosticsWindow.SetActive(showWindow);
-            }
-        }
-
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="profile">Diagnostics system configuration profile.</param>
         public MixedRealityDiagnosticsSystem(MixedRealityDiagnosticsSystemProfile profile)
-            : base(profile) { }
+            : base(profile)
+        {
+            this.profile = profile;
+        }
+
+        private readonly MixedRealityDiagnosticsSystemProfile profile;
+
+        private FrameEventData frameEventData;
+        private MemoryEventData memoryEventData;
+        private ConsoleEventData consoleEventData;
+
+        #region IMixedRealityService Implementation
 
         /// <inheritdoc />
         public override void Initialize()
@@ -55,28 +45,51 @@ namespace XRTK.Services.DiagnosticsSystem
                 return;
             }
 
-            foreach (var diagnosticsDataProvider in MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders)
-            {
-                //If the DataProvider cannot be resolved, this is likely just a configuration / package missmatch.  User simply needs to be warned, not errored.
-                if (diagnosticsDataProvider.DataProviderType.Type == null)
-                {
-                    Debug.LogWarning($"Could not load the configured provider ({diagnosticsDataProvider.DataProviderName})\n\nThis is most likely because the XRTK UPM package for that provider is currently not registered\nCheck the installed packages in the Unity Package Manager\n\n");
-                    continue;
-                }
+            var currentEventSystem = EventSystem.current;
+            frameEventData = new FrameEventData(currentEventSystem);
+            consoleEventData = new ConsoleEventData(currentEventSystem);
+            memoryEventData = new MemoryEventData(currentEventSystem);
+        }
 
-                if (!MixedRealityToolkit.CreateAndRegisterService<IMixedRealityDiagnosticsDataProvider>(
-                    diagnosticsDataProvider.DataProviderType,
-                    diagnosticsDataProvider.RuntimePlatform,
-                    diagnosticsDataProvider.DataProviderName,
-                    diagnosticsDataProvider.Priority,
-                    diagnosticsDataProvider.Profile))
-                {
-                    Debug.LogError($"Failed to start {diagnosticsDataProvider.DataProviderName}!");
-                }
+        /// <inheritdoc />
+        public override void Enable()
+        {
+            base.Enable();
+
+            if (!Application.isPlaying)
+            {
+                return;
             }
 
-            CreateDiagnosticsRootGameObject();
-            ShowWindow = MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.ShowDiagnosticsWindowOnStart;
+            if (profile.ShowDiagnosticsWindowOnStart == AutoStartBehavior.AutoStart)
+            {
+                IsWindowEnabled = true;
+            }
+        }
+
+        /// <inheritdoc />
+        public override void Disable()
+        {
+            base.Disable();
+
+            if (!Application.isPlaying)
+            {
+                return;
+            }
+
+            if (diagnosticsWindow != null)
+            {
+                Unregister(diagnosticsWindow);
+
+                if (Application.isEditor)
+                {
+                    Object.DestroyImmediate(diagnosticsWindow);
+                }
+                else
+                {
+                    Object.Destroy(diagnosticsWindow);
+                }
+            }
         }
 
         /// <inheritdoc />
@@ -84,38 +97,171 @@ namespace XRTK.Services.DiagnosticsSystem
         {
             base.Destroy();
 
-            if (DiagnosticsTransform != null)
+            if (diagnosticsRoot != null)
             {
                 if (Application.isEditor)
                 {
-                    Object.DestroyImmediate(DiagnosticsTransform.gameObject);
+                    Object.DestroyImmediate(diagnosticsRoot.gameObject);
                 }
                 else
                 {
-                    DiagnosticsTransform.DetachChildren();
-                    Object.Destroy(DiagnosticsTransform.gameObject);
+                    Object.Destroy(diagnosticsRoot.gameObject);
+                }
+            }
+        }
+
+        #endregion IMixedRealityService Implementation
+
+        #region IMixedRealityDiagnosticsSystem Implementation
+
+        private Transform diagnosticsRoot = null;
+
+        /// <inheritdoc />
+        public Transform DiagnosticsRoot
+        {
+            get
+            {
+                if (diagnosticsRoot == null)
+                {
+                    diagnosticsRoot = new GameObject("Diagnostics").transform;
+                    diagnosticsRoot.parent = MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform;
                 }
 
-                DiagnosticsTransform = null;
+                return diagnosticsRoot;
             }
         }
 
-        private void CreateDiagnosticsRootGameObject()
-        {
-            GameObject diagnosticGameObject = new GameObject("Diagnostics");
-            DiagnosticsTransform = diagnosticGameObject.transform;
-            DiagnosticsTransform.parent = MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform;
-        }
+        private GameObject diagnosticsWindow = null;
 
-        private void CreateDiagnosticsWindow()
+        /// <inheritdoc />
+        public GameObject DiagnosticsWindow
         {
-            if (MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.DiagnosticsWindowPrefab == null)
+            get
             {
-                Debug.LogError($"Failed to create a diagnostics visuailzer for {GetType().Name}. Check if a visualizer prefab is assigned in the configuration profile.");
-                return;
-            }
+                if (diagnosticsWindow == null)
+                {
+                    diagnosticsWindow = Object.Instantiate(profile.DiagnosticsWindowPrefab, DiagnosticsRoot);
+                    Register(diagnosticsWindow);
+                }
 
-            DiagnosticsWindow = Object.Instantiate(MixedRealityToolkit.Instance.ActiveProfile.DiagnosticsSystemProfile.DiagnosticsWindowPrefab, MixedRealityToolkit.DiagnosticsSystem.DiagnosticsTransform);
+                return diagnosticsWindow;
+            }
         }
+
+        /// <inheritdoc />
+        public string ApplicationSignature => $"{Application.productName} v{Application.version}";
+
+        private bool isWindowEnabled = false;
+
+        /// <inheritdoc />
+        public bool IsWindowEnabled
+        {
+            get => DiagnosticsWindow.activeInHierarchy && isWindowEnabled;
+            set
+            {
+                if (isWindowEnabled == value) { return; }
+
+                isWindowEnabled = value;
+                DiagnosticsWindow.SetActive(isWindowEnabled);
+            }
+        }
+
+        #region Console Events
+
+        /// <inheritdoc />
+        public void RaiseLogReceived(string message, string stackTrace, LogType logType)
+        {
+            consoleEventData.Initialize(message, stackTrace, logType);
+            HandleEvent(consoleEventData, OnLogReceived);
+        }
+
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityConsoleDiagnosticsHandler> OnLogReceived =
+            delegate (IMixedRealityConsoleDiagnosticsHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<ConsoleEventData>(eventData);
+                handler.OnLogReceived(casted);
+            };
+
+        #endregion Console Events
+
+        #region Frame Events
+
+        /// <inheritdoc />
+        public void RaiseMissedFramesChanged(bool[] missedFrames)
+        {
+            frameEventData.Initialize(missedFrames);
+            HandleEvent(frameEventData, OnFrameMissed);
+        }
+
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityFrameDiagnosticsHandler> OnFrameMissed =
+            delegate (IMixedRealityFrameDiagnosticsHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<FrameEventData>(eventData);
+                handler.OnFrameMissed(casted);
+            };
+
+        /// <inheritdoc />
+        public void RaiseFrameRateChanged(int frameRate, bool isGPU)
+        {
+            frameEventData.Initialize(frameRate, isGPU);
+            HandleEvent(frameEventData, OnFrameRateChanged);
+        }
+
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityFrameDiagnosticsHandler> OnFrameRateChanged =
+            delegate (IMixedRealityFrameDiagnosticsHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<FrameEventData>(eventData);
+                handler.OnFrameRateChanged(casted);
+            };
+
+        #endregion Frame Events
+
+        #region Memory Events
+
+        /// <inheritdoc />
+        public void RaiseMemoryLimitChanged(MemoryLimit currentMemoryLimit)
+        {
+            memoryEventData.Initialize(currentMemoryLimit);
+            HandleEvent(memoryEventData, OnMemoryLimitChanged);
+        }
+
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityMemoryDiagnosticsHandler> OnMemoryLimitChanged =
+            delegate (IMixedRealityMemoryDiagnosticsHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<MemoryEventData>(eventData);
+                handler.OnMemoryLimitChanged(casted);
+            };
+
+        /// <inheritdoc />
+        public void RaiseMemoryUsageChanged(MemoryUsage currentMemoryUsage)
+        {
+            memoryEventData.Initialize(currentMemoryUsage);
+            HandleEvent(memoryEventData, OnMemoryUsageChanged);
+        }
+
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityMemoryDiagnosticsHandler> OnMemoryUsageChanged =
+            delegate (IMixedRealityMemoryDiagnosticsHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<MemoryEventData>(eventData);
+                handler.OnMemoryUsageChanged(casted);
+            };
+
+        /// <inheritdoc />
+        public void RaiseMemoryPeakChanged(MemoryPeak peakMemoryUsage)
+        {
+            memoryEventData.Initialize(peakMemoryUsage);
+            HandleEvent(memoryEventData, OnMemoryPeakChanged);
+        }
+
+        private static readonly ExecuteEvents.EventFunction<IMixedRealityMemoryDiagnosticsHandler> OnMemoryPeakChanged =
+            delegate (IMixedRealityMemoryDiagnosticsHandler handler, BaseEventData eventData)
+            {
+                var casted = ExecuteEvents.ValidateEventData<MemoryEventData>(eventData);
+                handler.OnMemoryPeakChanged(casted);
+            };
+
+        #endregion Memory Events
+
+        #endregion IMixedRealityDiagnosticsSystem Implementation
     }
 }

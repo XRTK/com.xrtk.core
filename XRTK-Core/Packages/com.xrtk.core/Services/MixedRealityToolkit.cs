@@ -12,7 +12,7 @@ using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.CameraSystem;
-using XRTK.Interfaces.Diagnostics;
+using XRTK.Interfaces.DiagnosticsSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
 using XRTK.Interfaces.PlatformSystem;
@@ -512,7 +512,22 @@ namespace XRTK.Services
 
             if (ActiveProfile.IsDiagnosticsSystemEnabled)
             {
-                if (!CreateAndRegisterService<IMixedRealityDiagnosticsSystem>(ActiveProfile.DiagnosticsSystemSystemType, ActiveProfile.DiagnosticsSystemProfile) || DiagnosticsSystem == null)
+                if (CreateAndRegisterService<IMixedRealityDiagnosticsSystem>(ActiveProfile.DiagnosticsSystemSystemType, ActiveProfile.DiagnosticsSystemProfile) && DiagnosticsSystem != null)
+                {
+                    foreach (var diagnosticsDataProvider in ActiveProfile.DiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders)
+                    {
+                        if (!CreateAndRegisterService<IMixedRealityDiagnosticsDataProvider>(
+                            diagnosticsDataProvider.DataProviderType,
+                            diagnosticsDataProvider.RuntimePlatform,
+                            diagnosticsDataProvider.DataProviderName,
+                            diagnosticsDataProvider.Priority,
+                            diagnosticsDataProvider.Profile))
+                        {
+                            Debug.LogError($"Failed to start {diagnosticsDataProvider.DataProviderName}!");
+                        }
+                    }
+                }
+                else
                 {
                     Debug.LogError("Failed to start the Diagnostics System!");
                 }

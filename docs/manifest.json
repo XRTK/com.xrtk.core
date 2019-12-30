@@ -213,7 +213,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.BaseMixedRealityExtensionServiceProfile.html",
-          "hash": "yLTfjGDKF8er7Tb5KU+Hgw=="
+          "hash": "Wr3coK/E5B1+cescmS6F1A=="
         }
       },
       "is_incremental": false,
@@ -225,7 +225,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.BaseMixedRealityProfile.html",
-          "hash": "N4rm1HAJeSXEiSCdfbnClA=="
+          "hash": "R2eM1Kpj0P9LHW9o0Jsirg=="
         }
       },
       "is_incremental": false,
@@ -629,11 +629,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.yml",
+      "source_relative_path": "../api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.yml",
       "output": {
         ".html": {
-          "relative_path": "api/XRTK.Definitions.Diagnostics.MixedRealityDiagnosticsProfile.html",
-          "hash": "DkfD88SbM+ghwR6riEzDBQ=="
+          "relative_path": "api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html",
+          "hash": "eH/4RmTD/O/MlPkh6uKS0w=="
         }
       },
       "is_incremental": false,
@@ -641,11 +641,71 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Definitions.Diagnostics.yml",
+      "source_relative_path": "../api/XRTK.Definitions.DiagnosticsSystem.MemoryLimit.yml",
       "output": {
         ".html": {
-          "relative_path": "api/XRTK.Definitions.Diagnostics.html",
-          "hash": "t7Drk8aSdhlt+mtH4X2mdQ=="
+          "relative_path": "api/XRTK.Definitions.DiagnosticsSystem.MemoryLimit.html",
+          "hash": "ZqoddZGptbpXW4hELDCsIA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Definitions.DiagnosticsSystem.MemoryPeak.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Definitions.DiagnosticsSystem.MemoryPeak.html",
+          "hash": "8SLD1FyNMiL6JvEGAncdNQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Definitions.DiagnosticsSystem.MemoryUsage.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Definitions.DiagnosticsSystem.MemoryUsage.html",
+          "hash": "3zsCKsOIaFUxOULe6L8KKg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsDataProviderProfile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsDataProviderProfile.html",
+          "hash": "6kKtiF0NlZVDd8ooHsdIUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.html",
+          "hash": "c7G4yHnFoSjDEQ1rvHmHrw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Definitions.DiagnosticsSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Definitions.DiagnosticsSystem.html",
+          "hash": "gQA0oS2gndb3ayD0inOSyg=="
         }
       },
       "is_incremental": false,
@@ -1065,7 +1125,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.MixedRealityToolkitConfigurationProfile.html",
-          "hash": "7xXOSAou0hW8fD1Lo0Gy9Q=="
+          "hash": "l2I6C1lZtcazj93CZjFfDw=="
         }
       },
       "is_incremental": false,
@@ -1570,6 +1630,66 @@
         ".html": {
           "relative_path": "api/XRTK.EventDatum.Boundary.html",
           "hash": "AhPqFMPBNIIPSoWBOQdjJg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.EventDatum.DiagnosticsSystem.BaseDiagnosticsEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.EventDatum.DiagnosticsSystem.BaseDiagnosticsEventData.html",
+          "hash": "BgbZM0nCnpC4n7Dtks8QWg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.EventDatum.DiagnosticsSystem.ConsoleEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.EventDatum.DiagnosticsSystem.ConsoleEventData.html",
+          "hash": "dqeoP3yeLQZvWb+qvqVnnA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.EventDatum.DiagnosticsSystem.FrameEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.EventDatum.DiagnosticsSystem.FrameEventData.html",
+          "hash": "4f6FV6POXy/NBJq+QyN0cg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.EventDatum.DiagnosticsSystem.MemoryEventData.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.EventDatum.DiagnosticsSystem.MemoryEventData.html",
+          "hash": "OTL4LyO0ojXYF5xSOSKj8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.EventDatum.DiagnosticsSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.EventDatum.DiagnosticsSystem.html",
+          "hash": "OY9Oot7dnYNBeimmwKK0AA=="
         }
       },
       "is_incremental": false,
@@ -2457,7 +2577,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html",
-          "hash": "P4xF4F/2ZJEg2JK3zLNRvw=="
+          "hash": "gV3pq/+yEihfSMmV0DkSpQ=="
         }
       },
       "is_incremental": false,
@@ -2470,6 +2590,30 @@
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.BaseMixedRealityToolkitInspector.html",
           "hash": "v7H3nsqZgm1y5aNR5/VMhg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Inspectors.Profiles.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfileInspector.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Inspectors.Profiles.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfileInspector.html",
+          "hash": "7Ch89cgevm2JV1VpKP5gWA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Inspectors.Profiles.DiagnosticsSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Inspectors.Profiles.DiagnosticsSystem.html",
+          "hash": "DkZ0tVW6KGTB87mUKijPFw=="
         }
       },
       "is_incremental": false,
@@ -2789,18 +2933,6 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Inspectors.Profiles.MixedRealityDiagnosticsSystemProfileInspector.yml",
-      "output": {
-        ".html": {
-          "relative_path": "api/XRTK.Inspectors.Profiles.MixedRealityDiagnosticsSystemProfileInspector.html",
-          "hash": "ipgyexHpQg+kNc4YSw2Cag=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "ManagedReference",
       "source_relative_path": "../api/XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.yml",
       "output": {
         ".html": {
@@ -2901,7 +3033,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Inspectors.Profiles.html",
-          "hash": "vem2c0iJNddFiGhaBbS/DQ=="
+          "hash": "71Paz2b3UV5nvzU5k7NPNQ=="
         }
       },
       "is_incremental": false,
@@ -3389,11 +3521,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.yml",
+      "source_relative_path": "../api/XRTK.Interfaces.DiagnosticsSystem.Handlers.IMixedRealityConsoleDiagnosticsHandler.yml",
       "output": {
         ".html": {
-          "relative_path": "api/XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html",
-          "hash": "FxJFkIYhWc+Q577h4oXSFA=="
+          "relative_path": "api/XRTK.Interfaces.DiagnosticsSystem.Handlers.IMixedRealityConsoleDiagnosticsHandler.html",
+          "hash": "fxMacFlbd05zKGlhx5Wv9A=="
         }
       },
       "is_incremental": false,
@@ -3401,11 +3533,83 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Interfaces.Diagnostics.yml",
+      "source_relative_path": "../api/XRTK.Interfaces.DiagnosticsSystem.Handlers.IMixedRealityDiagnosticsHandler.yml",
       "output": {
         ".html": {
-          "relative_path": "api/XRTK.Interfaces.Diagnostics.html",
-          "hash": "Ftx8nfq+1htdmD2g8mwcvw=="
+          "relative_path": "api/XRTK.Interfaces.DiagnosticsSystem.Handlers.IMixedRealityDiagnosticsHandler.html",
+          "hash": "IdW2T39c5H1kjtbkLa7q3Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Interfaces.DiagnosticsSystem.Handlers.IMixedRealityFrameDiagnosticsHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Interfaces.DiagnosticsSystem.Handlers.IMixedRealityFrameDiagnosticsHandler.html",
+          "hash": "TW9FCQP53Wic1bQkBPa+gA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Interfaces.DiagnosticsSystem.Handlers.IMixedRealityMemoryDiagnosticsHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Interfaces.DiagnosticsSystem.Handlers.IMixedRealityMemoryDiagnosticsHandler.html",
+          "hash": "N2PZ2Ymm5oF8d4GZWKPz2Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Interfaces.DiagnosticsSystem.Handlers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Interfaces.DiagnosticsSystem.Handlers.html",
+          "hash": "lYaCJ3Srv/x1WpBvsGs53A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Interfaces.DiagnosticsSystem.IMixedRealityDiagnosticsDataProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Interfaces.DiagnosticsSystem.IMixedRealityDiagnosticsDataProvider.html",
+          "hash": "x9fnHHF2On2lbn0c/rSC0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Interfaces.DiagnosticsSystem.IMixedRealityDiagnosticsSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Interfaces.DiagnosticsSystem.IMixedRealityDiagnosticsSystem.html",
+          "hash": "JWRIxV7anFF5ovSp8nk1tA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Interfaces.DiagnosticsSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Interfaces.DiagnosticsSystem.html",
+          "hash": "C/aWvKspPm4nvW7C7j8kWQ=="
         }
       },
       "is_incremental": false,
@@ -3465,7 +3669,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.Events.IMixedRealityEventSystem.html",
-          "hash": "awyvCVVfyEpdeBsvibcPhg=="
+          "hash": "L6Zcs8RP7eah1YBBtE7Fxw=="
         }
       },
       "is_incremental": false,
@@ -3525,7 +3729,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Interfaces.IMixedRealityService.html",
-          "hash": "T68ZZtv3BlNpGaUb1AHqGQ=="
+          "hash": "4ZN+3n0QR0ZzoRQEW6bF+Q=="
         }
       },
       "is_incremental": false,
@@ -4449,7 +4653,43 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.BatteryStatus.html",
-          "hash": "lDVvTQQAtn+2tTMhVXwvrg=="
+          "hash": "8nqHcowDNvYYMmE4jsSjYw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Bone.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Bone.html",
+          "hash": "SLjC/uxi1dPuXUIeKeJ+cQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.BoneCapsule.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.BoneCapsule.html",
+          "hash": "yW3SNOxLMUY/pkQqrj0Rrw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.BoneId.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.BoneId.html",
+          "hash": "PteaMdyM4JPpKAzpBMMtqA=="
         }
       },
       "is_incremental": false,
@@ -4461,7 +4701,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Bool.html",
-          "hash": "OchwbHprFmsDIsTBrvU5VA=="
+          "hash": "SyiEfYDm/5nfBzgPEhECag=="
         }
       },
       "is_incremental": false,
@@ -4473,7 +4713,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.BoundaryGeometry.html",
-          "hash": "K4k+henE+xaO/dyJqvvOww=="
+          "hash": "p/2jmg8Nyv5Xm0cDxuGYaQ=="
         }
       },
       "is_incremental": false,
@@ -4485,7 +4725,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.BoundaryTestResult.html",
-          "hash": "AEDZTgUh3h+RQzgi4K7fBg=="
+          "hash": "rEC27sd/4UyXE+x5IrxBWQ=="
         }
       },
       "is_incremental": false,
@@ -4497,7 +4737,55 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.BoundaryType.html",
-          "hash": "X49snexG1lNa9IZ+tvtEZw=="
+          "hash": "qwuyBY2N7PQbfWHuRXvS+g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.CameraExtrinsics.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.CameraExtrinsics.html",
+          "hash": "BQ1Ek/TbBUtQdVec4SmkXQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.CameraIntrinsics.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.CameraIntrinsics.html",
+          "hash": "K9FAbvY3r8kbXZOd9eqkEQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.CameraStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.CameraStatus.html",
+          "hash": "Vdg8DtowjJ3I5zPNVmysyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Colorf.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Colorf.html",
+          "hash": "GsRPOb+Vy/H+lsNCwm5+8g=="
         }
       },
       "is_incremental": false,
@@ -4509,7 +4797,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Controller.html",
-          "hash": "OSK0Fotef3tr6DcRU1eHqA=="
+          "hash": "241F7OHOYX5987V/TImF3g=="
         }
       },
       "is_incremental": false,
@@ -4521,7 +4809,103 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.ControllerState4.html",
-          "hash": "pxmOaKwQ9+fjcSbFHtOMPw=="
+          "hash": "7sNuiIy5WBTrTKYYa1Zfzg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Fovf.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Fovf.html",
+          "hash": "aC11x1YvBYWc/rAOiI6Wgw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Frustumf.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Frustumf.html",
+          "hash": "J9EjQIvGCCmufVwdU8L98w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Frustumf2.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Frustumf2.html",
+          "hash": "vgRTA+miZkSgwdgLgD8+8A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Hand.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Hand.html",
+          "hash": "r2O9XErOrU8yhg4zxgPjCw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.HandFinger.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.HandFinger.html",
+          "hash": "OPPfL/6S0RuVoEWlPxcJQA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.HandFingerPinch.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.HandFingerPinch.html",
+          "hash": "JcEeITXI3ByjNjNPZt4dfQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.HandState.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.HandState.html",
+          "hash": "aJMoWP2GUTKzJc+PUN3T8w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.HandStatus.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.HandStatus.html",
+          "hash": "o2rLkMUB5cdgcahocJpczQ=="
         }
       },
       "is_incremental": false,
@@ -4533,7 +4917,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Handedness.html",
-          "hash": "YqCXGN8hnmCzbPgEcmay/w=="
+          "hash": "mrDVWDybrLLjnP6zyY+Qfg=="
         }
       },
       "is_incremental": false,
@@ -4545,7 +4929,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.HapticsBuffer.html",
-          "hash": "1zM/Q6yNVJxz7vJH+l80+Q=="
+          "hash": "VO/2D/pcVeqhjp6bF1NUZQ=="
         }
       },
       "is_incremental": false,
@@ -4557,7 +4941,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.HapticsDesc.html",
-          "hash": "GzCZhK9sGYSaVbVPLeUdnA=="
+          "hash": "Qrt4fIyqFKgGZQL9p6ucgQ=="
         }
       },
       "is_incremental": false,
@@ -4569,7 +4953,43 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.HapticsState.html",
-          "hash": "y0x8v3rUnXRUPl4ikhYL9A=="
+          "hash": "WsHZk+5eof544KeBnJTHig=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Mesh.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Mesh.html",
+          "hash": "D4g4U9LLO3PkSgo711q5ag=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.MeshConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.MeshConstants.html",
+          "hash": "mJNmF8KTct2zb0HO5bnLbA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.MeshType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.MeshType.html",
+          "hash": "GkBioqflq89+YZr9HMlnvQ=="
         }
       },
       "is_incremental": false,
@@ -4581,7 +5001,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Node.html",
-          "hash": "pa9TTZovfya9pHmyz7q+bA=="
+          "hash": "FlgyRogLJOAT9b/tUl1nIw=="
         }
       },
       "is_incremental": false,
@@ -4593,7 +5013,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.PoseStatef.html",
-          "hash": "hAWW822QoNW+v3Hx9eutcA=="
+          "hash": "xFn5zoAUf8QhDHevw4/Qew=="
         }
       },
       "is_incremental": false,
@@ -4605,7 +5025,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Posef.html",
-          "hash": "otVCUhHhiZXt1lYFRw43gQ=="
+          "hash": "0oEc0VSg0FEiCGHrLvZxeA=="
         }
       },
       "is_incremental": false,
@@ -4617,7 +5037,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Quatf.html",
-          "hash": "Yqd1KuXZXHjX6KZFmaim8w=="
+          "hash": "yRESgTgIDklZbotTkAfTug=="
         }
       },
       "is_incremental": false,
@@ -4629,7 +5049,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.RawAxis1D.html",
-          "hash": "8jbGQmhpyJ9Fh85MpcWeSA=="
+          "hash": "EWWeanUcCM2pztbgZF0Fhw=="
         }
       },
       "is_incremental": false,
@@ -4641,7 +5061,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.RawAxis2D.html",
-          "hash": "Drsc2lHCtqyEOxrYOuYQsg=="
+          "hash": "ABvzFO3NePXuZC+29GetRA=="
         }
       },
       "is_incremental": false,
@@ -4653,7 +5073,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.RawButton.html",
-          "hash": "iamtbaR8htr+Tt/pFeDDoQ=="
+          "hash": "cnBvjAHxXqqvTtuq2VjT4Q=="
         }
       },
       "is_incremental": false,
@@ -4665,7 +5085,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.RawNearTouch.html",
-          "hash": "fdYEkm1bpG6MRIEvg7oPeg=="
+          "hash": "fr7MfOicoVL761XWJw7tZw=="
         }
       },
       "is_incremental": false,
@@ -4677,7 +5097,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.RawTouch.html",
-          "hash": "2nZ5o9/sPDHcnJiyvyB+Iw=="
+          "hash": "nfEzSbg2cxX2havH5b3EAA=="
         }
       },
       "is_incremental": false,
@@ -4689,7 +5109,31 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.RecenterFlags.html",
-          "hash": "lrhl+nmtxgzRfcymIDtuLw=="
+          "hash": "0IhzF00OeovyrtaoFrswsw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Rectf.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Rectf.html",
+          "hash": "nnTEDAGE+03mGq+dVvYw4Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Recti.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Recti.html",
+          "hash": "i1x5EWp44lOR4dgqU7a6xA=="
         }
       },
       "is_incremental": false,
@@ -4701,7 +5145,67 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Result.html",
-          "hash": "7Lymq4WTMglUaJEUIfjlBg=="
+          "hash": "tUFsj7yNa48taf3TIhETqw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Sizef.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Sizef.html",
+          "hash": "xGAFZOgkyD1FYUVVnTfN4A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Sizei.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Sizei.html",
+          "hash": "i4o+SKEW3JudCMjadBWWtQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Skeleton.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Skeleton.html",
+          "hash": "c4KeWLg2Orqa1h/n483N5w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.SkeletonConstants.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.SkeletonConstants.html",
+          "hash": "IEka4g6ySQAlsaoSaUFEEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.SkeletonType.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.SkeletonType.html",
+          "hash": "F8PUDxVb0BKqmvbozGS+ew=="
         }
       },
       "is_incremental": false,
@@ -4713,7 +5217,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Step.html",
-          "hash": "SePsUO4pStncxEpY/EOLDQ=="
+          "hash": "IjiBW2ZIO9Xcj8AHxILo8A=="
         }
       },
       "is_incremental": false,
@@ -4725,7 +5229,19 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.SystemHeadset.html",
-          "hash": "1OMpKW7G/0q5d1PzWcVSiQ=="
+          "hash": "NcNbGCObSKBHGZQkiX73rA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.TrackingConfidence.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.TrackingConfidence.html",
+          "hash": "Yrz5CBBTZvTgUjqGHxAngg=="
         }
       },
       "is_incremental": false,
@@ -4737,7 +5253,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.TrackingOrigin.html",
-          "hash": "HMZf6zSkSmSysuvAdIqy2w=="
+          "hash": "LTV0GwWVGoWVctouSHAcUA=="
         }
       },
       "is_incremental": false,
@@ -4749,7 +5265,19 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Vector2f.html",
-          "hash": "sZIPiaZDNqUmb5lZ+/ssxQ=="
+          "hash": "L0PI4/X07Bk/BIKJgfga1g=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Vector2i.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Vector2i.html",
+          "hash": "D8wIqcq69LUejDJNYAiL4g=="
         }
       },
       "is_incremental": false,
@@ -4761,7 +5289,31 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Vector3f.html",
-          "hash": "DMfnAUD+8Nq7q/nKzziYqw=="
+          "hash": "U1BggOalIfMTfRymMzLsHA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Vector4f.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Vector4f.html",
+          "hash": "ESzRp0NiPkFdy6HUL32s0A=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Oculus.OculusApi.Vector4s.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Oculus.OculusApi.Vector4s.html",
+          "hash": "0Bi0XEFH4mZXjv8zwzHacw=="
         }
       },
       "is_incremental": false,
@@ -4773,7 +5325,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.html",
-          "hash": "B3DPwRKAp4iZuyqoelNdDQ=="
+          "hash": "n42uRG06bFpj7pZKgoe87g=="
         }
       },
       "is_incremental": false,
@@ -4785,7 +5337,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusManifestPreprocessor.html",
-          "hash": "ItmbzVp2VnXoBkanG2fHyA=="
+          "hash": "t3pE7UGNOkGmTluPkWuLbw=="
         }
       },
       "is_incremental": false,
@@ -4845,7 +5397,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.html",
-          "hash": "XOp2sH3u5WY7vSAc09LmUw=="
+          "hash": "VEApz1QpN+Ruh1ijJPSSaw=="
         }
       },
       "is_incremental": false,
@@ -5374,6 +5926,66 @@
         ".html": {
           "relative_path": "api/XRTK.SDK.Audio.Influencers.html",
           "hash": "bzfApiaW34OhhQ2nB/yUyQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.SDK.DiagnosticsSystem.MixedRealityConsoleDiagnosticsHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.SDK.DiagnosticsSystem.MixedRealityConsoleDiagnosticsHandler.html",
+          "hash": "eN99UHgpxfteqUbdVcP82w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.SDK.DiagnosticsSystem.MixedRealityDiagnosticsWindow.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.SDK.DiagnosticsSystem.MixedRealityDiagnosticsWindow.html",
+          "hash": "7/vjb8MFACtmrQ10xRuaKQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.SDK.DiagnosticsSystem.MixedRealityFrameDiagnosticsHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.SDK.DiagnosticsSystem.MixedRealityFrameDiagnosticsHandler.html",
+          "hash": "QB/il5JPpK/SSLxVStEbrQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.SDK.DiagnosticsSystem.MixedRealityMemoryDiagnosticsHandler.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.SDK.DiagnosticsSystem.MixedRealityMemoryDiagnosticsHandler.html",
+          "hash": "9NC67rZH0KBZurb5w7Lpbw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.SDK.DiagnosticsSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.SDK.DiagnosticsSystem.html",
+          "hash": "+x6zvn4eVJKjeKY2LZbZ4g=="
         }
       },
       "is_incremental": false,
@@ -6561,7 +7173,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.BaseDataProvider.html",
-          "hash": "663R20Meuu2FkiZUbR5hcQ=="
+          "hash": "jQ0LKhl0DS23FEkaj2OeoQ=="
         }
       },
       "is_incremental": false,
@@ -6573,7 +7185,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.BaseEventSystem.html",
-          "hash": "+d9xs4c2NH/AYjvSGqYA4w=="
+          "hash": "uizcCOM6svNDbGREH4pUMg=="
         }
       },
       "is_incremental": false,
@@ -6597,7 +7209,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.BaseService.html",
-          "hash": "Es2Mhfw30SSF25hYy3mozA=="
+          "hash": "AbOav/gCpBby1KJT5FSWOw=="
         }
       },
       "is_incremental": false,
@@ -6609,7 +7221,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.BaseServiceWithConstructor.html",
-          "hash": "Q4+tKyiuW6VaHXBn07Cd9A=="
+          "hash": "p6UltCIoeNoFz0SoqgYGJg=="
         }
       },
       "is_incremental": false,
@@ -6621,7 +7233,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.BaseSystem.html",
-          "hash": "WYJvcrHWknydXuiOSPvLow=="
+          "hash": "k/2L93FDsFAbUEwbU5PaZQ=="
         }
       },
       "is_incremental": false,
@@ -6689,11 +7301,11 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.yml",
+      "source_relative_path": "../api/XRTK.Services.DiagnosticsSystem.BaseMixedRealityDiagnosticsDataProvider.yml",
       "output": {
         ".html": {
-          "relative_path": "api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html",
-          "hash": "2SpGCh1tN0saVY5KXRCCSA=="
+          "relative_path": "api/XRTK.Services.DiagnosticsSystem.BaseMixedRealityDiagnosticsDataProvider.html",
+          "hash": "jy1zUZRQBOcgQx8/aFpo/A=="
         }
       },
       "is_incremental": false,
@@ -6701,11 +7313,59 @@
     },
     {
       "type": "ManagedReference",
-      "source_relative_path": "../api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.yml",
+      "source_relative_path": "../api/XRTK.Services.DiagnosticsSystem.DiagnosticsUtils.yml",
       "output": {
         ".html": {
-          "relative_path": "api/XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html",
-          "hash": "JqXEWhZPwTF8BSmcaCO24Q=="
+          "relative_path": "api/XRTK.Services.DiagnosticsSystem.DiagnosticsUtils.html",
+          "hash": "1uk1ksWBoVc8S3SwJGTTUw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Services.DiagnosticsSystem.MixedRealityConsoleDiagnosticsDataProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Services.DiagnosticsSystem.MixedRealityConsoleDiagnosticsDataProvider.html",
+          "hash": "VSAj2Y6rR3zc/kohxnM/kQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html",
+          "hash": "eqU1h42MCw2vEQBktvuhZw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Services.DiagnosticsSystem.MixedRealityFrameDiagnosticsDataProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Services.DiagnosticsSystem.MixedRealityFrameDiagnosticsDataProvider.html",
+          "hash": "u/pgduq1j9UCZ10eGiaGzw=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Services.DiagnosticsSystem.MixedRealityMemoryDiagnosticsDataProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Services.DiagnosticsSystem.MixedRealityMemoryDiagnosticsDataProvider.html",
+          "hash": "W6jrip/DiDmNwmZ9xMMTLw=="
         }
       },
       "is_incremental": false,
@@ -6717,7 +7377,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.DiagnosticsSystem.html",
-          "hash": "W3lQl2izv4og1OiaV6jPEw=="
+          "hash": "jFqG5Oor+GCYPVQLhCxSIg=="
         }
       },
       "is_incremental": false,
@@ -6729,7 +7389,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.InputSystem.FocusProvider.html",
-          "hash": "R6kjhMu8gj/lWTf9nPQlnQ=="
+          "hash": "nP+rJOfArjXyGdZHXak9BA=="
         }
       },
       "is_incremental": false,
@@ -6741,7 +7401,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.InputSystem.MixedRealityInputSystem.html",
-          "hash": "QX9Z7lWG6jQHAdDLdDikkg=="
+          "hash": "penIMgGPFjf6FeSgTyHlLw=="
         }
       },
       "is_incremental": false,
@@ -6813,7 +7473,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Services.MixedRealityToolkit.html",
-          "hash": "7j4GFMN8xVpZyPCBvtX67Q=="
+          "hash": "CTcpIQvMnrwWLUzFpAr4Ww=="
         }
       },
       "is_incremental": false,
@@ -9357,7 +10017,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "8+XmJaK4kurrQ8IsMtktKg=="
+          "hash": "oscNCOAxJv/feQnOrzi7bw=="
         }
       },
       "is_incremental": false,
@@ -9638,17 +10298,17 @@
           "total_file_count": 13,
           "skipped_file_count": 0
         },
+        "ManagedReferenceDocumentProcessor": {
+          "can_incremental": false,
+          "incrementalPhase": "build",
+          "total_file_count": 827,
+          "skipped_file_count": 0
+        },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
           "details": "Processor ResourceDocumentProcessor cannot support incremental build because the processor doesn't implement ISupportIncrementalDocumentProcessor interface.",
           "incrementalPhase": "build",
           "total_file_count": 0,
-          "skipped_file_count": 0
-        },
-        "ManagedReferenceDocumentProcessor": {
-          "can_incremental": false,
-          "incrementalPhase": "build",
-          "total_file_count": 772,
           "skipped_file_count": 0
         }
       }

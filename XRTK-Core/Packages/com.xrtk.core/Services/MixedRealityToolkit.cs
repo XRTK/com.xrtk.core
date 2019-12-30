@@ -12,7 +12,7 @@ using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.CameraSystem;
-using XRTK.Interfaces.Diagnostics;
+using XRTK.Interfaces.DiagnosticsSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
 using XRTK.Interfaces.Providers.Controllers;
@@ -131,6 +131,7 @@ namespace XRTK.Services
 
         #region Mixed Reality runtime service registry
 
+        // ReSharper disable once InconsistentNaming
         private static readonly Dictionary<Type, IMixedRealityService> activeSystems = new Dictionary<Type, IMixedRealityService>();
 
         /// <summary>
@@ -141,6 +142,7 @@ namespace XRTK.Services
         /// </remarks>
         public static IReadOnlyDictionary<Type, IMixedRealityService> ActiveSystems => activeSystems;
 
+        // ReSharper disable once InconsistentNaming
         private static readonly List<Tuple<Type, IMixedRealityService>> registeredMixedRealityServices = new List<Tuple<Type, IMixedRealityService>>();
 
         /// <summary>
@@ -204,7 +206,7 @@ namespace XRTK.Services
                     return null;
                 }
 
-                if (!isApplicationQuitting)
+                if (!IsApplicationQuitting)
                 {
                     // Setup any additional things the instance needs.
                     newInstance.InitializeInstance();
@@ -247,7 +249,7 @@ namespace XRTK.Services
                     DontDestroyOnLoad(instance.transform.root);
                 }
 
-                Application.quitting += () => isApplicationQuitting = true;
+                Application.quitting += () => IsApplicationQuitting = true;
 
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.hierarchyChanged += OnHierarchyChanged;
@@ -267,7 +269,7 @@ namespace XRTK.Services
                     if (playModeState == UnityEditor.PlayModeStateChange.ExitingEditMode ||
                         playModeState == UnityEditor.PlayModeStateChange.EnteredEditMode)
                     {
-                        isApplicationQuitting = false;
+                        IsApplicationQuitting = false;
                     }
 
                     if (activeProfile == null &&
@@ -296,12 +298,10 @@ namespace XRTK.Services
 
         private static bool isInitializing = false;
 
-        private static bool isApplicationQuitting = false;
-
         /// <summary>
         /// Flag stating if the application is currently attempting to quit.
         /// </summary>
-        public static bool IsApplicationQuitting => isApplicationQuitting;
+        public static bool IsApplicationQuitting { get; private set; } = false;
 
         /// <summary>
         /// Expose an assertion whether the MixedRealityToolkit class is initialized.
@@ -384,26 +384,23 @@ namespace XRTK.Services
                 {
                     if (CreateAndRegisterService<IMixedRealityFocusProvider>(ActiveProfile.InputSystemProfile.FocusProviderType))
                     {
-                        if (ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile != null)
+                        foreach (var controllerDataProvider in ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders)
                         {
-                            foreach (var controllerDataProvider in ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders)
+                            //If the DataProvider cannot be resolved, this is likely just a configuration / package missmatch.  User simply needs to be warned, not errored.
+                            if (controllerDataProvider.DataProviderType.Type == null)
                             {
-                                //If the DataProvider cannot be resolved, this is likely just a configuration / package missmatch.  User simply needs to be warned, not errored.
-                                if (controllerDataProvider.DataProviderType.Type == null)
-                                {
-                                    Debug.LogWarning($"Could not load the configured provider ({controllerDataProvider.DataProviderName})\n\nThis is most likely because the XRTK UPM package for that provider is currently not registered\nCheck the installed packages in the Unity Package Manager\n\n");
-                                    continue;
-                                }
+                                Debug.LogWarning($"Could not load the configured provider ({controllerDataProvider.DataProviderName})\n\nThis is most likely because the XRTK UPM package for that provider is currently not registered\nCheck the installed packages in the Unity Package Manager\n\n");
+                                continue;
+                            }
 
-                                if (!CreateAndRegisterService<IMixedRealityControllerDataProvider>(
-                                    controllerDataProvider.DataProviderType,
-                                    controllerDataProvider.RuntimePlatform,
-                                    controllerDataProvider.DataProviderName,
-                                    controllerDataProvider.Priority,
-                                    controllerDataProvider.Profile))
-                                {
-                                    Debug.LogError($"Failed to start {controllerDataProvider.DataProviderName}!");
-                                }
+                            if (!CreateAndRegisterService<IMixedRealityControllerDataProvider>(
+                                controllerDataProvider.DataProviderType,
+                                controllerDataProvider.RuntimePlatform,
+                                controllerDataProvider.DataProviderName,
+                                controllerDataProvider.Priority,
+                                controllerDataProvider.Profile))
+                            {
+                                Debug.LogError($"Failed to start {controllerDataProvider.DataProviderName}!");
                             }
                         }
                     }
@@ -442,19 +439,16 @@ namespace XRTK.Services
 #endif
                 if (CreateAndRegisterService<IMixedRealitySpatialAwarenessSystem>(ActiveProfile.SpatialAwarenessSystemSystemType, ActiveProfile.SpatialAwarenessProfile) && SpatialAwarenessSystem != null)
                 {
-                    if (ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders != null)
+                    foreach (var spatialObserver in ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders)
                     {
-                        foreach (var spatialObserver in ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders)
+                        if (!CreateAndRegisterService<IMixedRealitySpatialObserverDataProvider>(
+                            spatialObserver.SpatialObserverType,
+                            spatialObserver.RuntimePlatform,
+                            spatialObserver.SpatialObserverName,
+                            spatialObserver.Priority,
+                            spatialObserver.Profile))
                         {
-                            if (!CreateAndRegisterService<IMixedRealitySpatialObserverDataProvider>(
-                                spatialObserver.SpatialObserverType,
-                                spatialObserver.RuntimePlatform,
-                                spatialObserver.SpatialObserverName,
-                                spatialObserver.Priority,
-                                spatialObserver.Profile))
-                            {
-                                Debug.LogError($"Failed to start {spatialObserver.SpatialObserverName}!");
-                            }
+                            Debug.LogError($"Failed to start {spatialObserver.SpatialObserverName}!");
                         }
                     }
                 }
@@ -486,19 +480,16 @@ namespace XRTK.Services
             {
                 if (CreateAndRegisterService<IMixedRealityNetworkingSystem>(ActiveProfile.NetworkingSystemSystemType, ActiveProfile.NetworkingSystemProfile) && NetworkingSystem != null)
                 {
-                    if (ActiveProfile.NetworkingSystemProfile.RegisteredNetworkDataProviders != null)
+                    foreach (var networkProvider in ActiveProfile.NetworkingSystemProfile.RegisteredNetworkDataProviders)
                     {
-                        foreach (var networkProvider in ActiveProfile.NetworkingSystemProfile.RegisteredNetworkDataProviders)
+                        if (!CreateAndRegisterService<IMixedRealityNetworkDataProvider>(
+                            networkProvider.DataProviderType,
+                            networkProvider.RuntimePlatform,
+                            networkProvider.DataProviderName,
+                            networkProvider.Priority,
+                            networkProvider.Profile))
                         {
-                            if (!CreateAndRegisterService<IMixedRealityNetworkDataProvider>(
-                                networkProvider.DataProviderType,
-                                networkProvider.RuntimePlatform,
-                                networkProvider.DataProviderName,
-                                networkProvider.Priority,
-                                networkProvider.Profile))
-                            {
-                                Debug.LogError($"Failed to start {networkProvider.DataProviderName}!");
-                            }
+                            Debug.LogError($"Failed to start {networkProvider.DataProviderName}!");
                         }
                     }
                 }
@@ -510,7 +501,22 @@ namespace XRTK.Services
 
             if (ActiveProfile.IsDiagnosticsSystemEnabled)
             {
-                if (!CreateAndRegisterService<IMixedRealityDiagnosticsSystem>(ActiveProfile.DiagnosticsSystemSystemType, ActiveProfile.DiagnosticsSystemProfile) || DiagnosticsSystem == null)
+                if (CreateAndRegisterService<IMixedRealityDiagnosticsSystem>(ActiveProfile.DiagnosticsSystemSystemType, ActiveProfile.DiagnosticsSystemProfile) && DiagnosticsSystem != null)
+                {
+                    foreach (var diagnosticsDataProvider in ActiveProfile.DiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders)
+                    {
+                        if (!CreateAndRegisterService<IMixedRealityDiagnosticsDataProvider>(
+                            diagnosticsDataProvider.DataProviderType,
+                            diagnosticsDataProvider.RuntimePlatform,
+                            diagnosticsDataProvider.DataProviderName,
+                            diagnosticsDataProvider.Priority,
+                            diagnosticsDataProvider.Profile))
+                        {
+                            Debug.LogError($"Failed to start {diagnosticsDataProvider.DataProviderName}!");
+                        }
+                    }
+                }
+                else
                 {
                     Debug.LogError("Failed to start the Diagnostics System!");
                 }
@@ -795,7 +801,7 @@ namespace XRTK.Services
         /// <returns>True, if the service was successfully created and registered.</returns>
         public static bool CreateAndRegisterService<T>(Type concreteType, SupportedPlatforms supportedPlatforms, params object[] args) where T : IMixedRealityService
         {
-            if (isApplicationQuitting)
+            if (IsApplicationQuitting)
             {
                 return false;
             }
@@ -1680,7 +1686,7 @@ namespace XRTK.Services
         /// <returns></returns>
         private static bool CanGetService(Type interfaceType, string serviceName)
         {
-            if (isApplicationQuitting)
+            if (IsApplicationQuitting)
             {
                 return false;
             }
@@ -1716,7 +1722,7 @@ namespace XRTK.Services
             get
             {
                 if (!IsInitialized ||
-                    isApplicationQuitting ||
+                    IsApplicationQuitting ||
                     instance.activeProfile == null ||
                     (instance.activeProfile != null && !instance.activeProfile.IsCameraSystemEnabled))
                 {
@@ -1748,7 +1754,7 @@ namespace XRTK.Services
             get
             {
                 if (!IsInitialized ||
-                    isApplicationQuitting ||
+                    IsApplicationQuitting ||
                     instance.activeProfile == null ||
                     (instance.activeProfile != null && !instance.activeProfile.IsInputSystemEnabled))
                 {
@@ -1780,7 +1786,7 @@ namespace XRTK.Services
             get
             {
                 if (!IsInitialized ||
-                    isApplicationQuitting ||
+                    IsApplicationQuitting ||
                     instance.activeProfile == null ||
                     (instance.activeProfile != null && !instance.activeProfile.IsBoundarySystemEnabled))
                 {
@@ -1812,7 +1818,7 @@ namespace XRTK.Services
             get
             {
                 if (!IsInitialized ||
-                    isApplicationQuitting ||
+                    IsApplicationQuitting ||
                     instance.activeProfile == null ||
                     (instance.activeProfile != null && !instance.activeProfile.IsSpatialAwarenessSystemEnabled))
                 {
@@ -1844,7 +1850,7 @@ namespace XRTK.Services
             get
             {
                 if (!IsInitialized ||
-                    isApplicationQuitting ||
+                    IsApplicationQuitting ||
                     instance.activeProfile == null ||
                     (instance.activeProfile != null && !instance.activeProfile.IsTeleportSystemEnabled))
                 {
@@ -1876,7 +1882,7 @@ namespace XRTK.Services
             get
             {
                 if (!IsInitialized ||
-                    isApplicationQuitting ||
+                    IsApplicationQuitting ||
                     instance.activeProfile == null ||
                     (instance.activeProfile != null && !instance.activeProfile.IsNetworkingSystemEnabled))
                 {
@@ -1908,7 +1914,7 @@ namespace XRTK.Services
             get
             {
                 if (!IsInitialized ||
-                    isApplicationQuitting ||
+                    IsApplicationQuitting ||
                     instance.activeProfile == null ||
                     (instance.activeProfile != null && !instance.activeProfile.IsDiagnosticsSystemEnabled))
                 {

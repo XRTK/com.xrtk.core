@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
@@ -13,7 +13,7 @@ namespace XRTK.Definitions.NetworkingSystem
     public class MixedRealityNetworkSystemProfile : BaseMixedRealityProfile
     {
         [SerializeField]
-        private NetworkDataProviderConfiguration[] registeredNetworkDataProviders = null;
+        private NetworkDataProviderConfiguration[] registeredNetworkDataProviders = new NetworkDataProviderConfiguration[0];
 
         /// <summary>
         /// The list of registered network data providers.

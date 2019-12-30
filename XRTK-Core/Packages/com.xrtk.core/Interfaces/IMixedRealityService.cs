@@ -16,7 +16,7 @@ namespace XRTK.Interfaces
         string Name { get; }
 
         /// <summary>
-        /// Optional Priority to reorder registered managers based on their respective priority, reduces the risk of race conditions by prioritizing the order in which managers are evaluated.
+        /// Optional Priority to reorder registered managers based on their respective priority, reduces the risk of race conditions by prioritizing the order in which services are evaluated.
         /// </summary>
         uint Priority { get; }
 

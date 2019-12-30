@@ -15,7 +15,7 @@ namespace XRTK.Interfaces.Events
         /// <summary>
         /// List of event listeners that are registered to this Event System.
         /// </summary>
-        List<GameObject> EventListeners { get; }
+        IReadOnlyList<GameObject> EventListeners { get; }
 
         /// <summary>
         /// The main function for handling and forwarding all events to their intended recipients.

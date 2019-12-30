@@ -44,7 +44,7 @@ namespace XRTK.EventDatum.Input
         {
             if (eventSystem == null)
             {
-                throw new Exception("Event system cannot be null!");
+                throw new Exception($"{nameof(EventSystem)} cannot be null!");
             }
         }
 

@@ -12,7 +12,7 @@ namespace XRTK.Definitions
     {
         [SerializeField]
         [Tooltip("Currently registered IMixedRealityDataProvider configurations for this extension service.")]
-        private DataModelConfiguration[] registeredDataProviders = null;
+        private DataModelConfiguration[] registeredDataProviders = new DataModelConfiguration[0];
 
         /// <summary>
         /// Currently registered <see cref="Interfaces.IMixedRealityDataProvider"/> configurations for this extension service.

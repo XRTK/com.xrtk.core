@@ -15,7 +15,7 @@ namespace XRTK.Services
         /// </summary>
         /// <param name="name">The name of the service.</param>
         /// <param name="priority">The priority of the service.</param>
-        public BaseServiceWithConstructor(string name = "", uint priority = 10)
+        protected BaseServiceWithConstructor(string name = "", uint priority = 10)
         {
             if (string.IsNullOrWhiteSpace(name))
             {

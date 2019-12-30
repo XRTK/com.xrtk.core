@@ -29,8 +29,10 @@ namespace XRTK.Services
 
         private static int eventExecutionDepth = 0;
 
+        private readonly List<GameObject> eventListeners = new List<GameObject>();
+
         /// <inheritdoc />
-        public List<GameObject> EventListeners { get; } = new List<GameObject>();
+        public IReadOnlyList<GameObject> EventListeners => eventListeners;
 
         /// <inheritdoc />
         public virtual void HandleEvent<T>(BaseEventData eventData, ExecuteEvents.EventFunction<T> eventHandler) where T : IEventSystemHandler
@@ -49,7 +51,7 @@ namespace XRTK.Services
         /// <inheritdoc />
         public virtual async void Register(GameObject listener)
         {
-            if (EventListeners.Contains(listener)) { return; }
+            if (eventListeners.Contains(listener)) { return; }
 
             if (eventExecutionDepth > 0)
             {
@@ -64,13 +66,13 @@ namespace XRTK.Services
                 }
             }
 
-            EventListeners.Add(listener);
+            eventListeners.Add(listener);
         }
 
         /// <inheritdoc />
         public virtual async void Unregister(GameObject listener)
         {
-            if (!EventListeners.Contains(listener)) { return; }
+            if (!eventListeners.Contains(listener)) { return; }
 
             if (eventExecutionDepth > 0)
             {
@@ -85,7 +87,7 @@ namespace XRTK.Services
                 }
             }
 
-            EventListeners.Remove(listener);
+            eventListeners.Remove(listener);
         }
 
         #endregion IMixedRealityEventSystem Implementation

@@ -4,14 +4,14 @@
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.BoundarySystem;
-using XRTK.Definitions.Diagnostics;
+using XRTK.Definitions.DiagnosticsSystem;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.NetworkingSystem;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.CameraSystem;
-using XRTK.Interfaces.Diagnostics;
+using XRTK.Interfaces.DiagnosticsSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem;
@@ -258,12 +258,12 @@ namespace XRTK.Definitions
 
         [SerializeField]
         [Tooltip("Profile for wiring up diagnostic assets.")]
-        private MixedRealityDiagnosticsProfile diagnosticsSystemProfile;
+        private MixedRealityDiagnosticsSystemProfile diagnosticsSystemProfile;
 
         /// <summary>
         /// Active profile for diagnostic configuration
         /// </summary>
-        public MixedRealityDiagnosticsProfile DiagnosticsSystemProfile
+        public MixedRealityDiagnosticsSystemProfile DiagnosticsSystemProfile
         {
             get => diagnosticsSystemProfile;
             internal set => diagnosticsSystemProfile = value;

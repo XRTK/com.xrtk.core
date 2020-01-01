@@ -172,7 +172,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public BaseServiceWithConstructor(string name = &quot;&quot;, uint priority = 10U)</code></pre>
+    <pre><code class="lang-csharp hljs">protected BaseServiceWithConstructor(string name = &quot;&quot;, uint priority = 10U)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -187,12 +187,14 @@
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td><span class="parametername">name</span></td>
-        <td></td>
+        <td><p>The name of the service.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uint32">UInt32</a></td>
         <td><span class="parametername">priority</span></td>
-        <td></td>
+        <td><p>The priority of the service.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -240,7 +242,7 @@
   </span>
   <a id="XRTK_Services_BaseServiceWithConstructor_Priority_" data-uid="XRTK.Services.BaseServiceWithConstructor.Priority*"></a>
   <h4 id="XRTK_Services_BaseServiceWithConstructor_Priority" data-uid="XRTK.Services.BaseServiceWithConstructor.Priority">Priority</h4>
-  <div class="markdown level1 summary"><p>Optional Priority to reorder registered managers based on their respective priority, reduces the risk of race conditions by prioritizing the order in which managers are evaluated.</p>
+  <div class="markdown level1 summary"><p>Optional Priority to reorder registered managers based on their respective priority, reduces the risk of race conditions by prioritizing the order in which services are evaluated.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>

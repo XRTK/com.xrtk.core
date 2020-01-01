@@ -77,17 +77,26 @@
   <div class="markdown level0 remarks"></div>
     <h3 id="classes">Classes
   </h3>
-      <h4><a class="xref" href="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html">MixedRealityDiagnosticsSystem</a></h4>
-      <section><p>The default implementation of the <a class="xref" href="XRTK.Interfaces.Diagnostics.IMixedRealityDiagnosticsSystem.html">IMixedRealityDiagnosticsSystem</a></p>
+      <h4><a class="xref" href="XRTK.Services.DiagnosticsSystem.BaseMixedRealityDiagnosticsDataProvider.html">BaseMixedRealityDiagnosticsDataProvider</a></h4>
+      <section><p>Abstract base implementation for diagnostics data providers. Provides needed implementations to register and unregister
+diagnostics handlers.</p>
 </section>
-      <h4><a class="xref" href="XRTK.Services.DiagnosticsSystem.MixedRealityToolkitVisualProfiler.html">MixedRealityToolkitVisualProfiler</a></h4>
-      <section><p>The VisualProfiler provides a drop in, single file, solution for viewing
-your Windows Mixed Reality Unity application's frame rate and memory usage. Missed
-frames are displayed over time to visually find problem areas. Memory is reported
-as current, peak and max usage in a bar graph.</p>
-<p>USAGE: To use this profiler simply add this script as a component of any GameObject in
-your Unity scene. The profiler is initially enabled (toggle-able via the initiallyActive
-property), but can be toggled via the enabled/disable voice commands keywords.</p>
+      <h4><a class="xref" href="XRTK.Services.DiagnosticsSystem.DiagnosticsUtils.html">DiagnosticsUtils</a></h4>
+      <section><p>Diagnostics utilities.</p>
+</section>
+      <h4><a class="xref" href="XRTK.Services.DiagnosticsSystem.MixedRealityConsoleDiagnosticsDataProvider.html">MixedRealityConsoleDiagnosticsDataProvider</a></h4>
+      <section><p>Console diagnostics data providers mirrors the Unity console and digests logs so the
+diagnostics system can work with it.</p>
+</section>
+      <h4><a class="xref" href="XRTK.Services.DiagnosticsSystem.MixedRealityDiagnosticsSystem.html">MixedRealityDiagnosticsSystem</a></h4>
+      <section><p>The default implementation of the <a class="xref" href="XRTK.Interfaces.DiagnosticsSystem.IMixedRealityDiagnosticsSystem.html">IMixedRealityDiagnosticsSystem</a></p>
+</section>
+      <h4><a class="xref" href="XRTK.Services.DiagnosticsSystem.MixedRealityFrameDiagnosticsDataProvider.html">MixedRealityFrameDiagnosticsDataProvider</a></h4>
+      <section><p>Diagnostics data provider for frame diagnostics. It provides frame rate information and missed frames
+information to identify performance issues.</p>
+</section>
+      <h4><a class="xref" href="XRTK.Services.DiagnosticsSystem.MixedRealityMemoryDiagnosticsDataProvider.html">MixedRealityMemoryDiagnosticsDataProvider</a></h4>
+      <section><p>Diagnostics data provider for memory diagnostics. E.g. provides information about used application memory.</p>
 </section>
 </article>
           </div>

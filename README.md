@@ -1,5 +1,7 @@
 # Welcome to the Mixed Reality Toolkit
 
+![](Images/Branding/XRTK_Logo_948x474.png)
+
 The Mixed Reality Toolkit's primary focus is to make it extremely easy to get started creating Mixed Reality applications and to accelerate deployment to multiple platforms from the same Unity project.
 
 ## Build Status
@@ -21,7 +23,7 @@ The Mixed Reality Toolkit's primary focus is to make it extremely easy to get st
 
 ## Overview
 
-Developing Mixed Reality Applications in Unity is hard, and we know there are many [developers](./CONTRIBUTORS.md) who are frustrated with the current state of both game and general application development within the Mixed Reality ecosystem: a quickly developing market that encompasses the whole spectrum from Mobile Augmented Reality to high end Virtual Reality.
+Developing Mixed Reality Applications in Unity is hard, and we know there are many [developers](./CONTRIBUTORS.md) who are frustrated with the current state of both game and general application development within the Mixed Reality ecosystem: a quickly developing market that encompasses the whole spectrum from Mobile Augmented Reality to high-end Virtual Reality.
 
 To improve this situation, the Mixed Reality Toolkit's vision is simple, to provide a complete cross-platform solution for AR/XR/VR development that supports three different developer skill levels:
 
@@ -33,11 +35,11 @@ To improve this situation, the Mixed Reality Toolkit's vision is simple, to prov
 
 Our philosophy is to enable developers to focus on building content and structure and not have to worry about the underlying complexities for supporting multiple platforms in order to build it everywhere and on each device as required.  In Short, built it once and ship it everywhere with as little effort as possible.
 
-We’d like to invite all the major hardware vendors to help guide their platform specific implementations, from Microsoft’s Windows Mixed Reality and Magic Leap’s Lumin OS to Google’s ARCore and Apple’s ARKit.  Including any upcoming Mixed Reality capable devices that would like to be included for adoption.
+We’d like to invite all the major hardware vendors to help guide their platform-specific implementations, from Microsoft’s Windows Mixed Reality and Magic Leap’s Lumin OS to Google’s ARCore and Apple’s ARKit.  Including any upcoming Mixed Reality capable devices that would like to be included for adoption.
 
 ## Chat with the community
 
-We recently moved our main converastions regarding Mixed Reality Toolkit over to Discord, which allows us to do a lot more (and the chat / streaming there is awesome), but we keep an Mixed Reality Toolkit presence on Slack too, in order to retain links to our friends on there.
+We recently moved our main conversations regarding Mixed Reality Toolkit over to Discord, which allows us to do a lot more (and the chat/streaming there is awesome), but we keep a Mixed Reality Toolkit presence on Slack too, in order to retain links to our friends on there.
 
 [![Discord](https://cdn0.iconfinder.com/data/icons/free-social-media-set/24/discord-128.png)](https://t.co/UeUSVjnoIZ?amp=1)
 

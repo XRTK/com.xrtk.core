@@ -9,7 +9,6 @@ using XRTK.Extensions;
 using XRTK.Inspectors.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Providers.Controllers.UnityInput;
-using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
 {
@@ -27,7 +26,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         };
 
         private SerializedProperty renderMotionControllers;
-        private SerializedProperty handVisualizationProfile;
         private SerializedProperty controllerVisualizationType;
         private SerializedProperty useDefaultModels;
         private SerializedProperty globalLeftHandModel;
@@ -50,7 +48,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             controllerVisualizationProfile = target as MixedRealityControllerVisualizationProfile;
 
             renderMotionControllers = serializedObject.FindProperty("renderMotionControllers");
-            handVisualizationProfile = serializedObject.FindProperty("handVisualizationProfile");
             controllerVisualizationType = serializedObject.FindProperty("controllerVisualizationType");
             useDefaultModels = serializedObject.FindProperty("useDefaultModels");
             globalLeftHandModel = serializedObject.FindProperty("globalLeftHandModel");
@@ -77,9 +74,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             controllerVisualizationProfile.CheckProfileLock();
 
             serializedObject.Update();
-
-            bool changed = false;
-            changed |= RenderProfile(thisProfile, handVisualizationProfile);
 
             EditorGUIUtility.labelWidth = 168f;
             EditorGUILayout.PropertyField(renderMotionControllers);
@@ -128,11 +122,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             }
 
             serializedObject.ApplyModifiedProperties();
-
-            if (changed && MixedRealityToolkit.IsInitialized)
-            {
-                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
-            }
         }
 
         private void RenderControllerList(SerializedProperty controllerList)
@@ -199,7 +188,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 }
 
                 var handednessValue = mixedRealityControllerHandedness.intValue - 1;
-                
+
                 // Reset in case it was set to something other than left, right or both.
                 if (handednessValue < 0 || handednessValue > 2) { handednessValue = 0; }
 

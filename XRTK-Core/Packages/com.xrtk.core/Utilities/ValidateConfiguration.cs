@@ -58,9 +58,6 @@ namespace XRTK.Utilities.Editor
                     }
                     else
                     {
-#if UNITY_EDITOR
-                        UnityEditor.EditorUtility.DisplayDialog("No missing interactions", "No missing interactions", "Ok");
-#endif //UNITY_EDITOR
                         return true;
                     }
                 }
@@ -116,9 +113,6 @@ namespace XRTK.Utilities.Editor
                     }
                     else
                     {
-#if UNITY_EDITOR
-                        UnityEditor.EditorUtility.DisplayDialog("No Controller Profiles missing", "No Controller Profiles missing", "Ok");
-#endif //UNITY_EDITOR
                         return true;
                     }
 

@@ -8,7 +8,6 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Providers.Controllers.Simulation.Hands;
 using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Simulation
@@ -20,6 +19,14 @@ namespace XRTK.Providers.Controllers.Simulation
     /// </summary>
     public class SimulatedControllerDataProvider : BaseControllerDataProvider
     {
+        private SimulationTimeStampStopWatch simulatedUpdateStopWatch;
+        private long lastSimulatedUpdateTimeStamp = 0;
+
+        private bool leftControllerIsAlwaysVisible = false;
+        private bool rightControllerIsAlwaysVisible = false;
+        private bool leftControllerIsTracked = false;
+        private bool rightControllerIsTracked = false;
+
         /// <summary>
         /// Gets the active profile for the simulated controller data provider.
         /// </summary>
@@ -43,8 +50,8 @@ namespace XRTK.Providers.Controllers.Simulation
             base.Enable();
 
             // Start the timestamp stopwatch
-            handUpdateStopWatch = new SimulationTimeStampStopWatch();
-            handUpdateStopWatch.Reset();
+            simulatedUpdateStopWatch = new SimulationTimeStampStopWatch();
+            simulatedUpdateStopWatch.Reset();
         }
 
         /// <inheritdoc />
@@ -68,14 +75,62 @@ namespace XRTK.Providers.Controllers.Simulation
             base.Disable();
         }
 
-        #region Controller Management
-
         private void RefreshSimulatedDevices()
         {
-            // For now the only supported simulated controller type
-            // are hand conttrollers. This code needs to be revisted,
-            // once more simulated controller types, such as motion controllers are added.
-            RefreshHandControllerDevices();
+            DateTime currentTime = simulatedUpdateStopWatch.Current;
+            double msSinceLastUpdate = currentTime.Subtract(new DateTime(lastSimulatedUpdateTimeStamp)).TotalMilliseconds;
+            if (msSinceLastUpdate > Profile.SimulatedUpdateFrequency)
+            {
+                if (Input.GetKeyDown(Profile.ToggleLeftPersistentKey))
+                {
+                    leftControllerIsAlwaysVisible = !leftControllerIsAlwaysVisible;
+                }
+
+                if (Input.GetKeyDown(Profile.LeftControllerTrackedKey))
+                {
+                    leftControllerIsTracked = true;
+                }
+
+                if (Input.GetKeyUp(Profile.LeftControllerTrackedKey))
+                {
+                    leftControllerIsTracked = false;
+                }
+
+                if (leftControllerIsAlwaysVisible || leftControllerIsTracked)
+                {
+                    GetOrAddController(Handedness.Left);
+                }
+                else
+                {
+                    RemoveController(Handedness.Left);
+                }
+
+                if (Input.GetKeyDown(Profile.ToggleRightPersistentKey))
+                {
+                    rightControllerIsAlwaysVisible = !rightControllerIsAlwaysVisible;
+                }
+
+                if (Input.GetKeyDown(Profile.RightControllerTrackedKey))
+                {
+                    rightControllerIsTracked = true;
+                }
+
+                if (Input.GetKeyUp(Profile.RightControllerTrackedKey))
+                {
+                    rightControllerIsTracked = false;
+                }
+
+                if (rightControllerIsAlwaysVisible || rightControllerIsTracked)
+                {
+                    GetOrAddController(Handedness.Right);
+                }
+                else
+                {
+                    RemoveController(Handedness.Right);
+                }
+
+                lastSimulatedUpdateTimeStamp = currentTime.Ticks;
+            }
         }
 
         private IMixedRealityController GetOrAddController(Handedness handedness)
@@ -143,77 +198,5 @@ namespace XRTK.Providers.Controllers.Simulation
             controller = default;
             return false;
         }
-
-        #endregion
-
-        #region Hand Controller Simulation
-
-        private SimulationTimeStampStopWatch handUpdateStopWatch;
-        private long lastHandUpdateTimeStamp = 0;
-
-        private bool leftHandIsAlwaysVisible = false;
-        private bool rightHandIsAlwaysVisible = false;
-        private bool leftHandIsTracked = false;
-        private bool rightHandIsTracked = false;
-
-        private void RefreshHandControllerDevices()
-        {
-            DateTime currentTime = handUpdateStopWatch.Current;
-            double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandUpdateTimeStamp)).TotalMilliseconds;
-            if (msSinceLastHandUpdate > Profile.SimulatedUpdateFrequency)
-            {
-                if (Input.GetKeyDown(Profile.ToggleLeftPersistentKey))
-                {
-                    leftHandIsAlwaysVisible = !leftHandIsAlwaysVisible;
-                }
-
-                if (Input.GetKeyDown(Profile.LeftControllerTrackedKey))
-                {
-                    leftHandIsTracked = true;
-                }
-
-                if (Input.GetKeyUp(Profile.LeftControllerTrackedKey))
-                {
-                    leftHandIsTracked = false;
-                }
-
-                if (leftHandIsAlwaysVisible || leftHandIsTracked)
-                {
-                    GetOrAddController(Handedness.Left);
-                }
-                else
-                {
-                    RemoveController(Handedness.Left);
-                }
-
-                if (Input.GetKeyDown(Profile.ToggleRightPersistentKey))
-                {
-                    rightHandIsAlwaysVisible = !rightHandIsAlwaysVisible;
-                }
-
-                if (Input.GetKeyDown(Profile.RightControllerTrackedKey))
-                {
-                    rightHandIsTracked = true;
-                }
-
-                if (Input.GetKeyUp(Profile.RightControllerTrackedKey))
-                {
-                    rightHandIsTracked = false;
-                }
-
-                if (rightHandIsAlwaysVisible || rightHandIsTracked)
-                {
-                    GetOrAddController(Handedness.Right);
-                }
-                else
-                {
-                    RemoveController(Handedness.Right);
-                }
-
-                lastHandUpdateTimeStamp = currentTime.Ticks;
-            }
-        }
-
-        #endregion
     }
 }

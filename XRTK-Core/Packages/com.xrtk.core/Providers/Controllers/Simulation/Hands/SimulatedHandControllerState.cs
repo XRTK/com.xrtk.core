@@ -126,14 +126,14 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// Updates the simulated hand state using data provided.
         /// </summary>
         /// <param name="timeStamp">Timestamp of the hand tracking update.</param>
-        /// <param name="simulationInput">Simulation input data.</param>
+        /// <param name="rootPoseDelta">The position and rotation change of the hands root pose.</param>
         /// <param name="poseAnimationDelta">Pose animation changes to apply since last update.</param>
         /// <returns>True, if the simulated hand state has changed.</returns>
-        public bool Update(long timeStamp, SimulationInput simulationInput, SimulatedHandControllerPose targetPose, float poseAnimationDelta)
+        public bool Update(long timeStamp, MixedRealityPose rootPoseDelta, SimulatedHandControllerPose targetPose, float poseAnimationDelta)
         {
             bool isTrackedOld = HandData.IsTracked;
 
-            HandleSimulationInput(ref lastSimulatedTimeStamp, simulationInput);
+            HandleSimulationInput(ref lastSimulatedTimeStamp, rootPoseDelta);
 
             if (!string.Equals(targetPose.Id, Pose.Id) && HandData.IsTracked)
             {
@@ -176,7 +176,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             }
         }
 
-        private void HandleSimulationInput(ref long lastSimulatedTimeStamp, SimulationInput simulationInput)
+        private void HandleSimulationInput(ref long lastSimulatedTimeStamp, MixedRealityPose rootPoseDelta)
         {
             // If the hands state is changing from "not tracked" to being tracked, reset its position
             // to the current mouse position and default distance from the camera.
@@ -187,13 +187,13 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             }
 
             // Apply mouse delta x/y in screen space, but depth offset in world space
-            screenPosition.x += simulationInput.HandPositionDelta.x;
-            screenPosition.y += simulationInput.HandPositionDelta.y;
+            screenPosition.x += rootPoseDelta.Position.x;
+            screenPosition.y += rootPoseDelta.Position.y;
             Vector3 newWorldPoint = playerCamera.ScreenToWorldPoint(ScreenPosition);
-            newWorldPoint += playerCamera.transform.forward * simulationInput.HandPositionDelta.z;
+            newWorldPoint += playerCamera.transform.forward * rootPoseDelta.Position.z;
             screenPosition = playerCamera.WorldToScreenPoint(newWorldPoint);
 
-            HandRotateEulerAngles += simulationInput.HandRotationDelta;
+            HandRotateEulerAngles += rootPoseDelta.Rotation.eulerAngles;
             JitterOffset = UnityEngine.Random.insideUnitSphere * profile.HandJitterAmount;
 
             HandData.IsTracked = true;

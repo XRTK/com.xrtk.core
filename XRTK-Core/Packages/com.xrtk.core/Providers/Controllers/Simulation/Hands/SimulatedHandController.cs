@@ -29,11 +29,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         private SimulatedHandControllerState HandState { get; set; }
 
-        /// <summary>
-        /// The most current simulation input information for the left hand.
-        /// </summary>
-        private SimulationInput HandSimulationInput { get; } = new SimulationInput();
-
         public SimulatedHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
             : base(trackingState, controllerHandedness, inputSource, interactions)
         {
@@ -80,16 +75,16 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         {
             base.UpdateController();
 
-            // Read keyboard / mouse input for hand simulation.
-            HandSimulationInput.HandPositionDelta = GetHandPositionDelta();
-            HandSimulationInput.HandRotationDelta = GetHandRotationDelta();
+            // Read keyboard / mouse input to determine the root pose delta since last frame.
+            MixedRealityPose rootPoseDelta = new MixedRealityPose(
+                GetHandPositionDelta(), Quaternion.Euler(GetHandRotationDelta()));
 
             // Calculate pose changes and compute timestamp for hand tracking update.
             float poseAnimationDelta = profile.HandPoseAnimationSpeed * Time.deltaTime;
             long timeStamp = handUpdateStopWatch.TimeStamp;
 
             // Update simualted hand states using collected data.
-            HandState.Update(timeStamp, HandSimulationInput, GetTargetHandPose(), poseAnimationDelta);
+            HandState.Update(timeStamp, rootPoseDelta, GetTargetHandPose(), poseAnimationDelta);
 
             lastMousePosition = Input.mousePosition;
 

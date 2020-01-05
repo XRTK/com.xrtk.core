@@ -11,57 +11,60 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
     [CustomEditor(typeof(SimulatedControllerDataProviderProfile))]
     public class SimulatedControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
-        private SerializedProperty handTrackingEnabled;
+        private SerializedProperty controllerSimulationEnabled;
+        private SerializedProperty simulatedControllerType;
         private SerializedProperty simulatedUpdateFrequency;
+        private SerializedProperty controllerHideTimeout;
 
-        private SerializedProperty toggleLeftHandKey;
-        private SerializedProperty toggleRightHandKey;
-        private SerializedProperty handHideTimeout;
-        private SerializedProperty leftHandTrackedKey;
-        private SerializedProperty rightHandTrackedKey;
+        private SerializedProperty defaultDistance;
+        private SerializedProperty depthMultiplier;
+        private SerializedProperty jitterAmount;
+
+        private SerializedProperty toggleLeftPersistentKey;
+        private SerializedProperty leftControllerTrackedKey;
+        private SerializedProperty toggleRightPersistentKey;
+        private SerializedProperty rightControllerTrackedKey;
 
         private SerializedProperty poseDefinitions;
         private SerializedProperty handPoseAnimationSpeed;
 
-        private SerializedProperty defaultHandDistance;
-        private SerializedProperty handDepthMultiplier;
-        private SerializedProperty handJitterAmount;
 
-        private SerializedProperty yawHandCWKey;
-        private SerializedProperty yawHandCCWKey;
-        private SerializedProperty pitchHandCWKey;
-        private SerializedProperty pitchHandCCWKey;
-        private SerializedProperty rollHandCWKey;
-        private SerializedProperty rollHandCCWKey;
-        private SerializedProperty handRotationSpeed;
+        private SerializedProperty yawCWKey;
+        private SerializedProperty yawCCWKey;
+        private SerializedProperty pitchCWKey;
+        private SerializedProperty pitchCCWKey;
+        private SerializedProperty rollCWKey;
+        private SerializedProperty rollCCWKey;
+        private SerializedProperty rotationSpeed;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            handTrackingEnabled = serializedObject.FindProperty("handTrackingEnabled");
-            simulatedUpdateFrequency = serializedObject.FindProperty("simulatedUpdateFrequency");
+            controllerSimulationEnabled = serializedObject.FindProperty(nameof(controllerSimulationEnabled));
+            simulatedControllerType = serializedObject.FindProperty(nameof(simulatedControllerType));
+            simulatedUpdateFrequency = serializedObject.FindProperty(nameof(simulatedUpdateFrequency));
+            controllerHideTimeout = serializedObject.FindProperty(nameof(controllerHideTimeout));
 
-            toggleLeftHandKey = serializedObject.FindProperty("toggleLeftHandKey");
-            toggleRightHandKey = serializedObject.FindProperty("toggleRightHandKey");
-            handHideTimeout = serializedObject.FindProperty("handHideTimeout");
-            leftHandTrackedKey = serializedObject.FindProperty("leftHandTrackedKey");
-            rightHandTrackedKey = serializedObject.FindProperty("rightHandTrackedKey");
+            defaultDistance = serializedObject.FindProperty(nameof(defaultDistance));
+            depthMultiplier = serializedObject.FindProperty(nameof(depthMultiplier));
+            jitterAmount = serializedObject.FindProperty(nameof(jitterAmount));
 
-            poseDefinitions = serializedObject.FindProperty("poseDefinitions");
-            handPoseAnimationSpeed = serializedObject.FindProperty("handPoseAnimationSpeed");
+            toggleLeftPersistentKey = serializedObject.FindProperty(nameof(toggleLeftPersistentKey));
+            toggleRightPersistentKey = serializedObject.FindProperty(nameof(toggleRightPersistentKey));
+            leftControllerTrackedKey = serializedObject.FindProperty(nameof(leftControllerTrackedKey));
+            rightControllerTrackedKey = serializedObject.FindProperty(nameof(rightControllerTrackedKey));
 
-            defaultHandDistance = serializedObject.FindProperty("defaultHandDistance");
-            handDepthMultiplier = serializedObject.FindProperty("handDepthMultiplier");
-            handJitterAmount = serializedObject.FindProperty("handJitterAmount");
+            yawCWKey = serializedObject.FindProperty(nameof(yawCWKey));
+            yawCCWKey = serializedObject.FindProperty(nameof(yawCCWKey));
+            pitchCWKey = serializedObject.FindProperty(nameof(pitchCWKey));
+            pitchCCWKey = serializedObject.FindProperty(nameof(pitchCCWKey));
+            rollCWKey = serializedObject.FindProperty(nameof(rollCWKey));
+            rollCCWKey = serializedObject.FindProperty(nameof(rollCCWKey));
+            rotationSpeed = serializedObject.FindProperty(nameof(rotationSpeed));
 
-            yawHandCWKey = serializedObject.FindProperty("yawHandCWKey");
-            yawHandCCWKey = serializedObject.FindProperty("yawHandCCWKey");
-            pitchHandCWKey = serializedObject.FindProperty("pitchHandCWKey");
-            pitchHandCCWKey = serializedObject.FindProperty("pitchHandCCWKey");
-            rollHandCWKey = serializedObject.FindProperty("rollHandCWKey");
-            rollHandCCWKey = serializedObject.FindProperty("rollHandCCWKey");
-            handRotationSpeed = serializedObject.FindProperty("handRotationSpeed");
+            poseDefinitions = serializedObject.FindProperty(nameof(poseDefinitions));
+            handPoseAnimationSpeed = serializedObject.FindProperty(nameof(handPoseAnimationSpeed));
         }
 
         public override void OnInspectorGUI()
@@ -79,35 +82,34 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(handTrackingEnabled);
-            EditorGUILayout.PropertyField(simulatedUpdateFrequency);
-            EditorGUILayout.Space();
-
             EditorGUILayout.BeginVertical("Label");
 
-            EditorGUILayout.PropertyField(toggleLeftHandKey);
-            EditorGUILayout.PropertyField(toggleRightHandKey);
-            EditorGUILayout.PropertyField(handHideTimeout);
-            EditorGUILayout.PropertyField(leftHandTrackedKey);
-            EditorGUILayout.PropertyField(rightHandTrackedKey);
+            EditorGUILayout.PropertyField(controllerSimulationEnabled);
+            EditorGUILayout.PropertyField(simulatedControllerType);
+            EditorGUILayout.PropertyField(simulatedUpdateFrequency);
+            EditorGUILayout.PropertyField(controllerHideTimeout);
+            EditorGUILayout.Space();
+
+            EditorGUILayout.PropertyField(defaultDistance);
+            EditorGUILayout.PropertyField(depthMultiplier);
+            EditorGUILayout.PropertyField(jitterAmount);
+            EditorGUILayout.Space();
+
+            EditorGUILayout.PropertyField(toggleLeftPersistentKey);
+            EditorGUILayout.PropertyField(leftControllerTrackedKey);
+            EditorGUILayout.PropertyField(toggleRightPersistentKey);
+            EditorGUILayout.PropertyField(rightControllerTrackedKey);
+            EditorGUILayout.PropertyField(yawCWKey);
+            EditorGUILayout.PropertyField(yawCCWKey);
+            EditorGUILayout.PropertyField(pitchCWKey);
+            EditorGUILayout.PropertyField(pitchCCWKey);
+            EditorGUILayout.PropertyField(rollCWKey);
+            EditorGUILayout.PropertyField(rollCCWKey);
+            EditorGUILayout.PropertyField(rotationSpeed);
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(poseDefinitions, true);
             EditorGUILayout.PropertyField(handPoseAnimationSpeed);
-            EditorGUILayout.Space();
-
-            EditorGUILayout.PropertyField(defaultHandDistance);
-            EditorGUILayout.PropertyField(handDepthMultiplier);
-            EditorGUILayout.PropertyField(handJitterAmount);
-            EditorGUILayout.Space();
-
-            EditorGUILayout.PropertyField(yawHandCWKey);
-            EditorGUILayout.PropertyField(yawHandCCWKey);
-            EditorGUILayout.PropertyField(pitchHandCWKey);
-            EditorGUILayout.PropertyField(pitchHandCCWKey);
-            EditorGUILayout.PropertyField(rollHandCWKey);
-            EditorGUILayout.PropertyField(rollHandCCWKey);
-            EditorGUILayout.PropertyField(handRotationSpeed);
             EditorGUILayout.Space();
 
             EditorGUILayout.EndVertical();

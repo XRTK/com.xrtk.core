@@ -10,6 +10,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Interfaces.Providers.Controllers.Simulation;
 using XRTK.Providers.Controllers.Hands;
 using XRTK.Services;
 
@@ -18,7 +19,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     /// <summary>
     /// The default hand controller implementation for the hand simulation.
     /// </summary>
-    public class SimulatedHandController : BaseHandController
+    public class SimulatedHandController : BaseHandController, IMixedRealitySimulatedController
     {
         private Vector3? lastMousePosition = null;
         private readonly SimulationTimeStampStopWatch handUpdateStopWatch;
@@ -97,30 +98,30 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <returns>Updated hand rotation angles.</returns>
         private Vector3 GetHandRotationDelta()
         {
-            float rotationDelta = profile.HandRotationSpeed * Time.deltaTime;
+            float rotationDelta = profile.RotationSpeed * Time.deltaTime;
             Vector3 rotationDeltaEulerAngles = Vector3.zero;
 
-            if (Input.GetKey(profile.YawHandCCWKey))
+            if (Input.GetKey(profile.YawCCWKey))
             {
                 rotationDeltaEulerAngles.y = -rotationDelta;
             }
-            if (Input.GetKey(profile.YawHandCWKey))
+            if (Input.GetKey(profile.YawCWKey))
             {
                 rotationDeltaEulerAngles.y = rotationDelta;
             }
-            if (Input.GetKey(profile.PitchHandCCWKey))
+            if (Input.GetKey(profile.PitchCCWKey))
             {
                 rotationDeltaEulerAngles.x = rotationDelta;
             }
-            if (Input.GetKey(profile.PitchHandCWKey))
+            if (Input.GetKey(profile.PitchCWKey))
             {
                 rotationDeltaEulerAngles.x = -rotationDelta;
             }
-            if (Input.GetKey(profile.RollHandCCWKey))
+            if (Input.GetKey(profile.RollCCWKey))
             {
                 rotationDeltaEulerAngles.z = rotationDelta;
             }
-            if (Input.GetKey(profile.RollHandCWKey))
+            if (Input.GetKey(profile.RollCWKey))
             {
                 rotationDeltaEulerAngles.z = -rotationDelta;
             }

@@ -78,18 +78,18 @@ namespace XRTK.Providers.Controllers.Simulation
             RefreshHandControllerDevices();
         }
 
-        private IMixedRealityController GetOrAddController(Type controllerType, Handedness handedness)
+        private IMixedRealityController GetOrAddController(Handedness handedness)
         {
             if (TryGetController(handedness, out IMixedRealityController existingController))
             {
                 return existingController;
             }
 
-            IMixedRealityPointer[] pointers = RequestPointers(controllerType, handedness);
-            IMixedRealityInputSource inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{controllerType.Name} {handedness}", pointers);
-            IMixedRealityController controller = (IMixedRealityController)Activator.CreateInstance(controllerType, TrackingState.Tracked, handedness, inputSource, null);
+            IMixedRealityPointer[] pointers = RequestPointers(Profile.SimulatedControllerType, handedness);
+            IMixedRealityInputSource inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{Profile.SimulatedControllerType.Type.Name} {handedness}", pointers);
+            IMixedRealityController controller = (IMixedRealityController)Activator.CreateInstance(Profile.SimulatedControllerType, TrackingState.Tracked, handedness, inputSource, null);
 
-            if (controller == null || !controller.SetupConfiguration(controllerType))
+            if (controller == null || !controller.SetupConfiguration(Profile.SimulatedControllerType))
             {
                 // Controller failed to be setup correctly.
                 // Return null so we don't raise the source detected.
@@ -104,7 +104,7 @@ namespace XRTK.Providers.Controllers.Simulation
             MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);
             if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile.RenderMotionControllers)
             {
-                controller.TryRenderControllerModel(controllerType);
+                controller.TryRenderControllerModel(Profile.SimulatedControllerType);
             }
 
             AddController(controller);
@@ -162,48 +162,48 @@ namespace XRTK.Providers.Controllers.Simulation
             double msSinceLastHandUpdate = currentTime.Subtract(new DateTime(lastHandUpdateTimeStamp)).TotalMilliseconds;
             if (msSinceLastHandUpdate > Profile.SimulatedUpdateFrequency)
             {
-                if (Input.GetKeyDown(Profile.ToggleLeftHandKey))
+                if (Input.GetKeyDown(Profile.ToggleLeftPersistentKey))
                 {
                     leftHandIsAlwaysVisible = !leftHandIsAlwaysVisible;
                 }
 
-                if (Input.GetKeyDown(Profile.LeftHandTrackedKey))
+                if (Input.GetKeyDown(Profile.LeftControllerTrackedKey))
                 {
                     leftHandIsTracked = true;
                 }
 
-                if (Input.GetKeyUp(Profile.LeftHandTrackedKey))
+                if (Input.GetKeyUp(Profile.LeftControllerTrackedKey))
                 {
                     leftHandIsTracked = false;
                 }
 
                 if (leftHandIsAlwaysVisible || leftHandIsTracked)
                 {
-                    GetOrAddController(typeof(SimulatedHandController), Handedness.Left);
+                    GetOrAddController(Handedness.Left);
                 }
                 else
                 {
                     RemoveController(Handedness.Left);
                 }
 
-                if (Input.GetKeyDown(Profile.ToggleRightHandKey))
+                if (Input.GetKeyDown(Profile.ToggleRightPersistentKey))
                 {
                     rightHandIsAlwaysVisible = !rightHandIsAlwaysVisible;
                 }
 
-                if (Input.GetKeyDown(Profile.RightHandTrackedKey))
+                if (Input.GetKeyDown(Profile.RightControllerTrackedKey))
                 {
                     rightHandIsTracked = true;
                 }
 
-                if (Input.GetKeyUp(Profile.RightHandTrackedKey))
+                if (Input.GetKeyUp(Profile.RightControllerTrackedKey))
                 {
                     rightHandIsTracked = false;
                 }
 
                 if (rightHandIsAlwaysVisible || rightHandIsTracked)
                 {
-                    GetOrAddController(typeof(SimulatedHandController), Handedness.Right);
+                    GetOrAddController(Handedness.Right);
                 }
                 else
                 {

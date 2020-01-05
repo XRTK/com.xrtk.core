@@ -183,7 +183,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             if (!HandData.IsTracked)
             {
                 Vector3 mousePos = Input.mousePosition;
-                screenPosition = new Vector3(mousePos.x, mousePos.y, profile.DefaultHandDistance);
+                screenPosition = new Vector3(mousePos.x, mousePos.y, profile.DefaultDistance);
             }
 
             // Apply mouse delta x/y in screen space, but depth offset in world space
@@ -194,7 +194,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             screenPosition = playerCamera.WorldToScreenPoint(newWorldPoint);
 
             HandRotateEulerAngles += rootPoseDelta.Rotation.eulerAngles;
-            JitterOffset = UnityEngine.Random.insideUnitSphere * profile.HandJitterAmount;
+            JitterOffset = UnityEngine.Random.insideUnitSphere * profile.JitterAmount;
 
             HandData.IsTracked = true;
             lastSimulatedTimeStamp = lastUpdatedStopWatch.TimeStamp;

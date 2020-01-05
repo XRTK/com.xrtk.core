@@ -6,17 +6,18 @@ using System;
 using System.Collections.Generic;
 using XRTK.Definitions.Utilities;
 using XRTK.Services;
-using XRTK.Definitions.Controllers.Hands.Simulation;
+using XRTK.Definitions.Controllers.Simulation.Hands;
+using XRTK.Providers.Controllers.Hands;
 
-namespace XRTK.Providers.Controllers.Hands.Simulation
+namespace XRTK.Providers.Controllers.Simulation.Hands
 {
     /// <summary>
-    /// Simulatd pose of an hand defined by joint poses. Used by <see cref="SimulationHandControllerDataProvider"/> to simulate hand tracking.
+    /// Simulatd pose of an hand controller defined by recorded joint poses.
     /// </summary>
-    public class SimulationHandPose
+    public class SimulatedHandControllerPose
     {
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
-        private static readonly Dictionary<string, SimulationHandPose> handPoses = new Dictionary<string, SimulationHandPose>();
+        private static readonly Dictionary<string, SimulatedHandControllerPose> handPoses = new Dictionary<string, SimulatedHandControllerPose>();
         private static bool isInitialized = false;
 
         /// <summary>
@@ -33,14 +34,14 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <summary>
         /// Gets the configured default pose for simulation hands.
         /// </summary>
-        public static SimulationHandPoseData DefaultHandPose { get; private set; }
+        public static SimulatedHandControllerPoseData DefaultHandPose { get; private set; }
 
         /// <summary>
         /// Creates a new hand pose with all joints in their
         /// local space origin.
         /// </summary>
         /// <param name="id">Unique pose identfier.</param>
-        public SimulationHandPose(string id)
+        public SimulatedHandControllerPose(string id)
         {
             Id = id;
             localJointPoses = new MixedRealityPose[jointCount];
@@ -52,7 +53,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// </summary>
         /// <param name="id">Unique pose identfier.</param>
         /// <param name="localJointPoses">Joint poses in local space.</param>
-        public SimulationHandPose(string id, MixedRealityPose[] localJointPoses) : this(id)
+        public SimulatedHandControllerPose(string id, MixedRealityPose[] localJointPoses) : this(id)
         {
             Array.Copy(localJointPoses, this.localJointPoses, jointCount);
         }
@@ -61,7 +62,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// Initialize pose data for use in editor from files.
         /// </summary>
         /// <param name="poses">List of pose data assets with pose information.</param>
-        public static void Initialize(IEnumerable<SimulationHandPoseData> poses)
+        public static void Initialize(IEnumerable<SimulatedHandControllerPoseData> poses)
         {
             if (isInitialized)
             {
@@ -72,12 +73,12 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             // for the hand "open" pose, which we will use as a reference to offset
             // all other poses, so the "Palm" joint position stays the same for all simulated
             // poses. If no open pose is defined, we can't do anything and keep everythign as it is.
-            SimulationHandPose openPose = null;
-            foreach (SimulationHandPoseData poseData in poses)
+            SimulatedHandControllerPose openPose = null;
+            foreach (SimulatedHandControllerPoseData poseData in poses)
             {
                 if (poseData.Id.Equals("open"))
                 {
-                    openPose = new SimulationHandPose(poseData.Id);
+                    openPose = new SimulatedHandControllerPose(poseData.Id);
                     openPose.FromJson(poseData.Data.text);
                     handPoses.Add(openPose.Id, openPose);
                 }
@@ -94,7 +95,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                         if (!poseData.Id.Equals("open"))
                         {
                             // We have open pose data, offset this pose using it's palm position.
-                            SimulationHandPose pose = new SimulationHandPose(poseData.Id);
+                            SimulatedHandControllerPose pose = new SimulatedHandControllerPose(poseData.Id);
                             pose.FromJson(poseData.Data.text);
                             OffsetJointsRelativeToOpenPosePalmPosition(openPose, pose);
                             handPoses.Add(pose.Id, pose);
@@ -102,7 +103,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                     }
                     else
                     {
-                        SimulationHandPose pose = new SimulationHandPose(poseData.Id);
+                        SimulatedHandControllerPose pose = new SimulatedHandControllerPose(poseData.Id);
                         pose.FromJson(poseData.Data.text);
                         handPoses.Add(pose.Id, pose);
                     }
@@ -117,7 +118,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             isInitialized = true;
         }
 
-        private static void OffsetJointsRelativeToOpenPosePalmPosition(SimulationHandPose openPose, SimulationHandPose pose)
+        private static void OffsetJointsRelativeToOpenPosePalmPosition(SimulatedHandControllerPose openPose, SimulatedHandControllerPose pose)
         {
             Vector3 openHandPalmPosition = openPose.localJointPoses[(int)TrackedHandJoint.Palm].Position;
             Vector3 posePalmPosition = pose.localJointPoses[(int)TrackedHandJoint.Palm].Position;
@@ -209,7 +210,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <summary>
         /// Copy data from another simulated hand pose.
         /// </summary>
-        public void Copy(SimulationHandPose other)
+        public void Copy(SimulatedHandControllerPose other)
         {
             Array.Copy(other.localJointPoses, localJointPoses, jointCount);
         }
@@ -220,7 +221,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <param name="a">Pose at t = 0.</param>
         /// <param name="b">Pose at t = 1.</param>
         /// <param name="t">The parameter t is clamped to the range [0,1].</param>
-        public static SimulationHandPose Lerp(SimulationHandPose a, SimulationHandPose b, float t)
+        public static SimulatedHandControllerPose Lerp(SimulatedHandControllerPose a, SimulatedHandControllerPose b, float t)
         {
             MixedRealityPose[] updatedJointPoses = new MixedRealityPose[jointCount];
 
@@ -235,7 +236,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
                 updatedJointPoses[i] = new MixedRealityPose(position, rotation);
             }
 
-            return new SimulationHandPose(t >= 1 ? b.Id : a.Id, updatedJointPoses);
+            return new SimulatedHandControllerPose(t >= 1 ? b.Id : a.Id, updatedJointPoses);
         }
 
         /// <summary>
@@ -244,9 +245,9 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <param name="name">The name of the pose.</param>
         /// <param name="pose">Hand pose reference.</param>
         /// <returns>True, if found.</returns>
-        public static bool TryGetPoseByName(string name, out SimulationHandPose pose)
+        public static bool TryGetPoseByName(string name, out SimulatedHandControllerPose pose)
         {
-            if (handPoses.TryGetValue(name, out SimulationHandPose p))
+            if (handPoses.TryGetValue(name, out SimulatedHandControllerPose p))
             {
                 pose = p;
                 return true;
@@ -261,7 +262,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// </summary>
         /// <param name="name">The name of the pose to lookup.</param>
         /// <returns>Simulated hand pose.</returns>
-        public static SimulationHandPose GetPoseByName(string name)
+        public static SimulatedHandControllerPose GetPoseByName(string name)
         {
             return handPoses[name];
         }

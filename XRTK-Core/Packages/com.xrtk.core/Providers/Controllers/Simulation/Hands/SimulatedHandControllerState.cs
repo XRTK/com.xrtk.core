@@ -1,30 +1,29 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using UnityEngine;
-using XRTK.Definitions.Controllers.Hands.Simulation;
+using XRTK.Definitions.Controllers.Simulation;
 using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers.Hands;
 using XRTK.Services;
 
-namespace XRTK.Providers.Controllers.Hands.Simulation
+namespace XRTK.Providers.Controllers.Simulation.Hands
 {
     /// <summary>
     /// Internal class to define current hand data and smoothly animate hand data points.
     /// </summary>
-    [Serializable]
-    public class SimulationHandState
+    public class SimulatedHandControllerState
     {
-        private readonly SimulationHandControllerDataProviderProfile profile;
+        private readonly SimulatedControllerDataProviderProfile profile;
         private readonly Camera playerCamera;
         private readonly SimulationTimeStampStopWatch lastUpdatedStopWatch;
         private long lastSimulatedTimeStamp = 0;
         private float currentPoseBlending = 0.0f;
         private float targetPoseBlending = 0.0f;
         private Vector3 screenPosition;
-        private SimulationHandPose initialPose;
-        private SimulationHandPose previousPose;
-        private SimulationHandPose targetPose;
+        private SimulatedHandControllerPose initialPose;
+        private SimulatedHandControllerPose previousPose;
+        private SimulatedHandControllerPose targetPose;
 
         /// <summary>
         /// Gets the hands position in screen space.
@@ -54,13 +53,13 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <summary>
         /// Currently used simulation hand pose.
         /// </summary>
-        public SimulationHandPose Pose { get; private set; }
+        public SimulatedHandControllerPose Pose { get; private set; }
 
         /// <summary>
         /// The currently targeted hand pose, reached when <see cref="TargetPoseBlending"/>
         /// reaches 1.
         /// </summary>
-        private SimulationHandPose TargetPose
+        private SimulatedHandControllerPose TargetPose
         {
             get => targetPose;
             set
@@ -89,7 +88,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <param name="profile">The active hand simulation profile.</param>
         /// <param name="handedness">Handedness of the simulated hand.</param>
         /// <param name="pose">The hand pose to start simulation with.</param>
-        public SimulationHandState(SimulationHandControllerDataProviderProfile profile, Handedness handedness, SimulationHandPose pose)
+        public SimulatedHandControllerState(SimulatedControllerDataProviderProfile profile, Handedness handedness, SimulatedHandControllerPose pose)
         {
             this.profile = profile;
             Handedness = handedness;
@@ -130,16 +129,16 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// <param name="simulationInput">Simulation input data.</param>
         /// <param name="poseAnimationDelta">Pose animation changes to apply since last update.</param>
         /// <returns>True, if the simulated hand state has changed.</returns>
-        public bool Update(long timeStamp, SimulationInput simulationInput, float poseAnimationDelta)
+        public bool Update(long timeStamp, SimulationInput simulationInput, SimulatedHandControllerPose targetPose, float poseAnimationDelta)
         {
             bool isTrackedOld = HandData.IsTracked;
 
             HandleSimulationInput(ref lastSimulatedTimeStamp, simulationInput);
 
-            if (!string.Equals(simulationInput.HandPose.Id, Pose.Id) && HandData.IsTracked)
+            if (!string.Equals(targetPose.Id, Pose.Id) && HandData.IsTracked)
             {
                 previousPose = Pose;
-                TargetPose = simulationInput.HandPose;
+                TargetPose = targetPose;
             }
 
             TargetPoseBlending += poseAnimationDelta;
@@ -169,7 +168,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         private void ResetPose()
         {
             TargetPoseBlending = 1.0f;
-            if (SimulationHandPose.TryGetPoseByName(Pose.Id, out SimulationHandPose pose))
+            if (SimulatedHandControllerPose.TryGetPoseByName(Pose.Id, out SimulatedHandControllerPose pose))
             {
                 Pose.Copy(pose);
                 previousPose = Pose;
@@ -207,7 +206,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             {
                 float range = Mathf.Clamp01(1.0f - currentPoseBlending);
                 float lerpFactor = range > 0.0f ? (TargetPoseBlending - currentPoseBlending) / range : 1.0f;
-                Pose = SimulationHandPose.Lerp(previousPose, TargetPose, lerpFactor);
+                Pose = SimulatedHandControllerPose.Lerp(previousPose, TargetPose, lerpFactor);
             }
 
             currentPoseBlending = TargetPoseBlending;

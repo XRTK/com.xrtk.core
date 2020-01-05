@@ -3,7 +3,7 @@
 
 using UnityEngine;
 
-namespace XRTK.Providers.Controllers.Hands.Simulation
+namespace XRTK.Providers.Controllers.Simulation.Hands
 {
     /// <summary>
     /// Simulation input at a given time. Best described as the "sensor data" for
@@ -20,10 +20,5 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// The computed input based hand rotation delta since the last update.
         /// </summary>
         public Vector3 HandRotationDelta { get; set; }
-
-        /// <summary>
-        /// The requested hand pose as determined by user input.
-        /// </summary>
-        public SimulationHandPose HandPose { get; set; }
     }
 }

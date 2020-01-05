@@ -3,55 +3,57 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions.Controllers.Hands.Simulation;
+using XRTK.Definitions.Controllers.Simulation;
+using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Providers.Controllers.Hands;
 using XRTK.Services;
 
-namespace XRTK.Providers.Controllers.Hands.Simulation
+namespace XRTK.Providers.Controllers.Simulation.Hands
 {
     /// <summary>
     /// The default hand controller implementation for the hand simulation.
     /// </summary>
-    public class SimulationHandController : BaseHandController
+    public class SimulatedHandController : BaseHandController
     {
         private Vector3? lastMousePosition = null;
         private readonly SimulationTimeStampStopWatch handUpdateStopWatch;
-        private readonly SimulationHandControllerDataProviderProfile profile;
+        private readonly SimulatedControllerDataProviderProfile profile;
 
         /// <summary>
         /// The simulation state of the left hand.
         /// </summary>
-        private SimulationHandState HandState { get; set; }
+        private SimulatedHandControllerState HandState { get; set; }
 
         /// <summary>
         /// The most current simulation input information for the left hand.
         /// </summary>
         private SimulationInput HandSimulationInput { get; } = new SimulationInput();
 
-        public SimulationHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+        public SimulatedHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
             : base(trackingState, controllerHandedness, inputSource, interactions)
         {
             profile = GetProfile();
             if (profile == null)
             {
-                Debug.LogError($"Could not get active {typeof(SimulationHandControllerDataProviderProfile).Name}.");
+                Debug.LogError($"Could not get active {typeof(SimulatedControllerDataProviderProfile).Name}.");
             }
 
             // Initialize available simulated hand poses and find the
             // cofigured default pose.
-            SimulationHandPose.Initialize(profile.PoseDefinitions);
+            SimulatedHandControllerPose.Initialize(profile.PoseDefinitions);
 
             // Simulation cannot work without a default pose.
-            if (SimulationHandPose.DefaultHandPose == null)
+            if (SimulatedHandControllerPose.DefaultHandPose == null)
             {
                 Debug.LogError($"There is no default simulated hand pose defined. Check the {GetType().Name}!");
             }
 
-            HandState = new SimulationHandState(profile, ControllerHandedness, SimulationHandPose.GetPoseByName(SimulationHandPose.DefaultHandPose.Id));
+            HandState = new SimulatedHandControllerState(profile, ControllerHandedness, SimulatedHandControllerPose.GetPoseByName(SimulatedHandControllerPose.DefaultHandPose.Id));
             HandState.Reset();
 
             // Start the timestamp stopwatch
@@ -59,12 +61,12 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             handUpdateStopWatch.Reset();
         }
 
-        private SimulationHandControllerDataProviderProfile GetProfile()
+        private SimulatedControllerDataProviderProfile GetProfile()
         {
             List<IMixedRealityService> controllerDataProviders = MixedRealityToolkit.GetActiveServices<IMixedRealityControllerDataProvider>();
             for (int i = 0; i < controllerDataProviders.Count; i++)
             {
-                if (controllerDataProviders[i] is SimulationHandControllerDataProvider simulationHandControllerDataProvider)
+                if (controllerDataProviders[i] is SimulatedControllerDataProvider simulationHandControllerDataProvider)
                 {
                     return simulationHandControllerDataProvider.Profile;
                 }
@@ -79,28 +81,19 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             base.UpdateController();
 
             // Read keyboard / mouse input for hand simulation.
-            UpdateSimulationInput();
+            HandSimulationInput.HandPositionDelta = GetHandPositionDelta();
+            HandSimulationInput.HandRotationDelta = GetHandRotationDelta();
 
             // Calculate pose changes and compute timestamp for hand tracking update.
             float poseAnimationDelta = profile.HandPoseAnimationSpeed * Time.deltaTime;
             long timeStamp = handUpdateStopWatch.TimeStamp;
 
             // Update simualted hand states using collected data.
-            HandState.Update(timeStamp, HandSimulationInput, poseAnimationDelta);
+            HandState.Update(timeStamp, HandSimulationInput, GetTargetHandPose(), poseAnimationDelta);
 
             lastMousePosition = Input.mousePosition;
 
             UpdateBase(HandState.HandData);
-        }
-
-        /// <summary>
-        /// Reads keyboard input to update whether hands should be tracked or always visible.
-        /// </summary>
-        private void UpdateSimulationInput()
-        {
-            HandSimulationInput.HandPositionDelta = GetHandPositionDelta();
-            HandSimulationInput.HandRotationDelta = GetHandRotationDelta();
-            HandSimulationInput.HandPose = GetHandPose();
         }
 
         /// <summary>
@@ -157,18 +150,18 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
         /// Selects a hand pose to simulate, while its input keycode is pressed.
         /// </summary>
         /// <returns>Default pose if no other fitting user input.</returns>
-        private SimulationHandPose GetHandPose()
+        private SimulatedHandControllerPose GetTargetHandPose()
         {
             for (int i = 0; i < profile.PoseDefinitions.Count; i++)
             {
-                SimulationHandPoseData pose = profile.PoseDefinitions[i];
+                SimulatedHandControllerPoseData pose = profile.PoseDefinitions[i];
                 if (Input.GetKey(pose.KeyCode))
                 {
-                    return SimulationHandPose.GetPoseByName(pose.Id);
+                    return SimulatedHandControllerPose.GetPoseByName(pose.Id);
                 }
             }
 
-            return SimulationHandPose.GetPoseByName(SimulationHandPose.DefaultHandPose.Id);
+            return SimulatedHandControllerPose.GetPoseByName(SimulatedHandControllerPose.DefaultHandPose.Id);
         }
     }
 }

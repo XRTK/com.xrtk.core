@@ -3,14 +3,17 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Definitions.Controllers.Hands.Simulation
+namespace XRTK.Definitions.Controllers.Simulation
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hands/Simulation Hand Controller Data Provider Profile", fileName = "SimulationHandControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
-    public class SimulationHandControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Simulated Controller Data Provider Profile", fileName = "SimulatedControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
+    public class SimulatedControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
     {
-        [Header("Hand Simulation Settings")]
+        #region Hand Controller Simulation Settings
+
+        [Header("Hand Controller Simulation Settings")]
 
         [SerializeField]
         [Tooltip("Enable hand simulation")]
@@ -83,12 +86,12 @@ namespace XRTK.Definitions.Controllers.Hands.Simulation
 
         [SerializeField]
         [Tooltip("Hand pose definitions.")]
-        private List<SimulationHandPoseData> poseDefinitions = new List<SimulationHandPoseData>();
+        private List<SimulatedHandControllerPoseData> poseDefinitions = new List<SimulatedHandControllerPoseData>();
 
         /// <summary>
         /// Hand pose definitions.
         /// </summary>
-        public IReadOnlyList<SimulationHandPoseData> PoseDefinitions => poseDefinitions;
+        public IReadOnlyList<SimulatedHandControllerPoseData> PoseDefinitions => poseDefinitions;
 
         [SerializeField]
         [Tooltip("Gesture interpolation per second")]
@@ -192,5 +195,7 @@ namespace XRTK.Definitions.Controllers.Hands.Simulation
         /// Angle per second when rotating the hand
         /// </summary>
         public float HandRotationSpeed => handRotationSpeed;
+
+        #endregion
     }
 }

@@ -5,14 +5,14 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Definitions.Controllers.Hands.Simulation
+namespace XRTK.Definitions.Controllers.Simulation.Hands
 {
     /// <summary>
-    /// A hand pose definition with recorded hand joint data for use with <see cref="SimulationHandControllerDataProvider"/>.
+    /// A hand pose definition with recorded hand joint data.
     /// Assign a collection of these poses to the data provider's profile to simulate the pose.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hands/Simulation Hand Pose", fileName = "SimulationHandPoseData", order = (int)CreateProfileMenuItemIndices.Input)]
-    public class SimulationHandPoseData : BaseMixedRealityProfile
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hands/Simulated Hand Controller Pose Data", fileName = "SimulatedHandControllerPoseData", order = (int)CreateProfileMenuItemIndices.Input)]
+    public class SimulatedHandControllerPoseData : BaseMixedRealityProfile
     {
         [SerializeField]
         [Tooltip("Assign a unique ID to the pose. Can be used as a descriptive name, but must be unique!")]

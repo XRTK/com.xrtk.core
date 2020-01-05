@@ -4,7 +4,7 @@
 using System;
 using System.Diagnostics;
 
-namespace XRTK.Providers.Controllers.Hands.Simulation
+namespace XRTK.Providers.Controllers.Simulation
 {
     public sealed class SimulationTimeStampStopWatch
     {

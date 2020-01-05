@@ -1,10 +1,12 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands.Simulation;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
@@ -36,7 +38,7 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
             profile = GetProfile();
             if (profile == null)
             {
-                Debug.LogError($"Expected {typeof(SimulationHandControllerDataProvider).Name} to be the active hand controller data provider.");
+                Debug.LogError($"Could not get active {typeof(SimulationHandControllerDataProviderProfile).Name}.");
             }
 
             // Initialize available simulated hand poses and find the
@@ -59,9 +61,13 @@ namespace XRTK.Providers.Controllers.Hands.Simulation
 
         private SimulationHandControllerDataProviderProfile GetProfile()
         {
-            if (MixedRealityToolkit.GetService<IMixedRealityHandControllerDataProvider>() is SimulationHandControllerDataProvider simulationHandControllerDataProvider)
+            List<IMixedRealityService> controllerDataProviders = MixedRealityToolkit.GetActiveServices<IMixedRealityControllerDataProvider>();
+            for (int i = 0; i < controllerDataProviders.Count; i++)
             {
-                return simulationHandControllerDataProvider.Profile;
+                if (controllerDataProviders[i] is SimulationHandControllerDataProvider simulationHandControllerDataProvider)
+                {
+                    return simulationHandControllerDataProvider.Profile;
+                }
             }
 
             return null;

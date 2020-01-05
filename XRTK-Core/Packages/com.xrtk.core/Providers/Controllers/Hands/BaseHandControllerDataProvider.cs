@@ -14,7 +14,7 @@ namespace XRTK.Providers.Controllers.Hands
     /// Base implementation for all hand controller data providers. Takes care of all the platform agnostic
     /// hand tracking logic.
     /// </summary>
-    public abstract class BaseHandControllerDataProvider<T> : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider where T : IMixedRealityHandController
+    public abstract class BaseHandControllerDataProvider<T> : BaseControllerDataProvider where T : IMixedRealityHandController
     {
         /// <summary>
         /// Base constructor.
@@ -45,32 +45,6 @@ namespace XRTK.Providers.Controllers.Hands
         {
             RemoveAllControllers();
             base.Disable();
-        }
-
-        /// <inheritdoc />
-        public bool TryGetJointPose(Handedness handedness, TrackedHandJoint joint, out MixedRealityPose pose)
-        {
-            if (TryGetController(handedness, out T controller))
-            {
-                return controller.TryGetJointPose(joint, out pose);
-            }
-
-            pose = default;
-            return false;
-        }
-
-        /// <inheritdoc />
-        public bool IsHandTracked(Handedness handedness)
-        {
-            for (int i = 0; i < ActiveControllers.Count; i++)
-            {
-                if (ActiveControllers[i].ControllerHandedness == handedness)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         /// <summary>

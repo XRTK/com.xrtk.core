@@ -4,14 +4,13 @@
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Inspectors.Utilities;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
 {
     [CustomEditor(typeof(NativeLibrarySystemProfile))]
-    public class NativeLibraryProfileInspector : BaseMixedRealityControllerMappingProfileInspector
+    public class NativeLibraryProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty configurations;
         private ReorderableList configurationList;

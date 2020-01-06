@@ -1,6 +1,6 @@
 # Welcome to the Mixed Reality Toolkit
 
-![](Images/Branding/XRTK_Logo_1200x250.png)
+![](/images/Branding/XRTK_Logo_1200x250.png)
 
 The Mixed Reality Toolkit's primary focus is to make it extremely easy to get started creating Mixed Reality applications and to accelerate deployment to multiple platforms from the same Unity project.
 

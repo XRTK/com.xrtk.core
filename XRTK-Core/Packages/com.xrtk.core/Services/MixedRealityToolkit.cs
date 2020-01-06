@@ -1741,7 +1741,7 @@ namespace XRTK.Services
             get
             {
                 if (!IsInitialized ||
-                    isApplicationQuitting ||
+                    IsApplicationQuitting ||
                     instance.activeProfile == null ||
                     instance.activeProfile != null && !instance.activeProfile.IsPlatformSystemEnabled)
                 {

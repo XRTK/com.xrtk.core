@@ -7,6 +7,7 @@ using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
@@ -118,7 +119,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The updated hand data for this controller.</param>
         protected virtual void UpdateBounds(HandData handData)
         {
-            IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> jointPoses = HandUtilities.ToJointPoseDictionary(handData.Joints);
+            IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> jointPoses = handData.Joints.ToJointPoseDictionary();
 
             // TrackedHandBounds.Hand
             if (jointPoses.TryGetValue(TrackedHandJoint.Palm, out MixedRealityPose palmPose))

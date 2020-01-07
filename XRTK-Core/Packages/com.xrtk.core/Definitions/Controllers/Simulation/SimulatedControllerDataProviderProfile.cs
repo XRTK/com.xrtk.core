@@ -34,11 +34,7 @@ namespace XRTK.Definitions.Controllers.Simulation
         /// <summary>
         /// The concrete controller type to simulate.
         /// </summary>
-        public SystemType SimulatedControllerType
-        {
-            get => simulatedControllerType;
-            private set => simulatedControllerType = value;
-        }
+        public SystemType SimulatedControllerType => simulatedControllerType;
 
         [SerializeField]
         [Tooltip("Simulated update frequency for tracking data in milliseconds. 0ms is every frame.")]

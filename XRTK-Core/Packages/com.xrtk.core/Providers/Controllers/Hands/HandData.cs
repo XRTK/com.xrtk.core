@@ -30,6 +30,6 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Mesh information of the hand.
         /// </summary>
-        public HandMeshData Mesh { get; } = new HandMeshData();
+        public HandMeshData Mesh { get; set; } = new HandMeshData();
     }
 }

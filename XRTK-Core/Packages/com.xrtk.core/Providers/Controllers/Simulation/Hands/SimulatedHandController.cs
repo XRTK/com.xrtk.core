@@ -20,6 +20,43 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     /// </summary>
     public class SimulatedHandController : BaseHandController, IMixedRealitySimulatedController
     {
+        /// <summary>
+        /// Controller constructor.
+        /// </summary>
+        /// <param name="trackingState">The controller's tracking state.</param>
+        /// <param name="controllerHandedness">The controller's handedness.</param>
+        /// <param name="inputSource">Optional input source of the controller.</param>
+        /// <param name="interactions">Optional controller interactions mappings.</param>
+        public SimulatedHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+            : base(trackingState, controllerHandedness, inputSource, interactions)
+        {
+            dataProvider = GetProfile();
+            if (dataProvider == null)
+            {
+                Debug.LogError($"Could not get active {nameof(SimulatedControllerDataProvider)}.");
+            }
+
+            // Initialize available simulated hand poses and find the
+            // cofigured default pose.
+            SimulatedHandControllerPose.Initialize(dataProvider.HandPoseDefinitions);
+
+            // Simulation cannot work without a default pose.
+            if (SimulatedHandControllerPose.DefaultHandPose == null)
+            {
+                Debug.LogError($"There is no default simulated hand pose defined. Check the {GetType().Name}!");
+            }
+
+            initialPose = SimulatedHandControllerPose.GetPoseByName(SimulatedHandControllerPose.DefaultHandPose.Id);
+            Pose = initialPose;
+            lastUpdatedStopWatch = new SimulationTimeStampStopWatch();
+            playerCamera = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera;
+            Reset();
+
+            // Start the timestamp stopwatch
+            handUpdateStopWatch = new SimulationTimeStampStopWatch();
+            handUpdateStopWatch.Reset();
+        }
+
         private Vector3? lastMousePosition = null;
         private readonly SimulationTimeStampStopWatch handUpdateStopWatch;
         private readonly SimulatedControllerDataProvider dataProvider;
@@ -83,36 +120,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         {
             get => targetPoseBlending;
             private set => targetPoseBlending = Mathf.Clamp(value, targetPoseBlending, 1.0f);
-        }
-
-        public SimulatedHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-            : base(trackingState, controllerHandedness, inputSource, interactions)
-        {
-            dataProvider = GetProfile();
-            if (dataProvider == null)
-            {
-                Debug.LogError($"Could not get active {nameof(SimulatedControllerDataProvider)}.");
-            }
-
-            // Initialize available simulated hand poses and find the
-            // cofigured default pose.
-            SimulatedHandControllerPose.Initialize(dataProvider.HandPoseDefinitions);
-
-            // Simulation cannot work without a default pose.
-            if (SimulatedHandControllerPose.DefaultHandPose == null)
-            {
-                Debug.LogError($"There is no default simulated hand pose defined. Check the {GetType().Name}!");
-            }
-
-            initialPose = SimulatedHandControllerPose.GetPoseByName(SimulatedHandControllerPose.DefaultHandPose.Id);
-            Pose = initialPose;
-            lastUpdatedStopWatch = new SimulationTimeStampStopWatch();
-            playerCamera = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera;
-            Reset();
-
-            // Start the timestamp stopwatch
-            handUpdateStopWatch = new SimulationTimeStampStopWatch();
-            handUpdateStopWatch.Reset();
         }
 
         private SimulatedControllerDataProvider GetProfile()

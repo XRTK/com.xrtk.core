@@ -8,6 +8,14 @@ namespace XRTK.Providers.Controllers.Simulation
 {
     public sealed class SimulationTimeStampStopWatch
     {
+        /// <summary>
+        /// Creates a new timestamp stopwatch.
+        /// </summary>
+        public SimulationTimeStampStopWatch()
+        {
+            stopwatch = new Stopwatch();
+        }
+
         private readonly Stopwatch stopwatch;
         private DateTime stopwatchStartTime;
 
@@ -20,14 +28,6 @@ namespace XRTK.Providers.Controllers.Simulation
         /// Gets the current stopwatch timestamp.
         /// </summary>
         public long TimeStamp => Current.Ticks;
-
-        /// <summary>
-        /// Creates a new timestamp stopwatch.
-        /// </summary>
-        public SimulationTimeStampStopWatch()
-        {
-            stopwatch = new Stopwatch();
-        }
 
         /// <summary>
         /// Resets the internal stopwatch and thus timestamps provided.

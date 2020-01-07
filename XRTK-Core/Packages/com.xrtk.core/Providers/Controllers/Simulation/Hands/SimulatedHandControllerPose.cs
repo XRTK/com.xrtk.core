@@ -16,6 +16,18 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     /// </summary>
     public class SimulatedHandControllerPose
     {
+        /// <summary>
+        /// Creates a new hand pose with all joints in their
+        /// local space origin.
+        /// </summary>
+        /// <param name="id">Unique pose identfier.</param>
+        public SimulatedHandControllerPose(string id)
+        {
+            Id = id;
+            localJointPoses = new MixedRealityPose[jointCount];
+            SetZero();
+        }
+
         private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
         private static readonly Dictionary<string, SimulatedHandControllerPose> handPoses = new Dictionary<string, SimulatedHandControllerPose>();
         private static bool isInitialized = false;
@@ -35,18 +47,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// Gets the configured default pose for simulation hands.
         /// </summary>
         public static SimulatedHandControllerPoseData DefaultHandPose { get; private set; }
-
-        /// <summary>
-        /// Creates a new hand pose with all joints in their
-        /// local space origin.
-        /// </summary>
-        /// <param name="id">Unique pose identfier.</param>
-        public SimulatedHandControllerPose(string id)
-        {
-            Id = id;
-            localJointPoses = new MixedRealityPose[jointCount];
-            SetZero();
-        }
 
         /// <summary>
         /// Creates a new hand pose using local pose data for the hand's joints.

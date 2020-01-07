@@ -129,7 +129,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The updated hand data for this controller.</param>
         protected virtual void UpdateBounds(HandData handData)
         {
-            IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> jointPoses = HandUtils.ToJointPoseDictionary(handData.Joints);
+            IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> jointPoses = HandUtilities.ToJointPoseDictionary(handData.Joints);
 
             // TrackedHandBounds.Hand
             if (jointPoses.TryGetValue(TrackedHandJoint.Palm, out MixedRealityPose palmPose))

@@ -8,7 +8,7 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.Controllers.Hands
 {
-    public static class HandUtils
+    public static class HandUtilities
     {
         /// <summary>
         /// Converts an input array of joint poses to a dictionary of join keys and poses.

@@ -7,6 +7,7 @@ using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
@@ -18,6 +19,16 @@ namespace XRTK.Providers.Controllers.Hands
     /// </summary>
     public abstract class BaseHandController : BaseController, IMixedRealityHandController
     {
+        /// <summary>
+        /// Controller constructor.
+        /// </summary>
+        /// <param name="trackingState">The controller's tracking state.</param>
+        /// <param name="controllerHandedness">The controller's handedness.</param>
+        /// <param name="inputSource">Optional input source of the controller.</param>
+        /// <param name="interactions">Optional controller interactions mappings.</param>
+        public BaseHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+                : base(trackingState, controllerHandedness, inputSource, interactions) { }
+
         private const float currentVelocityWeight = .8f;
         private const float newVelocityWeight = .2f;
         private float deltaTimeStart;
@@ -27,17 +38,6 @@ namespace XRTK.Providers.Controllers.Hands
         private int frameOn = 0;
         protected readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
         private readonly Dictionary<TrackedHandBounds, Bounds> bounds = new Dictionary<TrackedHandBounds, Bounds>();
-
-        /// <summary>
-        /// Gets the hand controller's ray.
-        /// </summary>
-        protected HandRay HandRay { get; } = new HandRay();
-
-        /// <inheritdoc />
-        public bool IsTracked => TrackingState == TrackingState.Tracked;
-
-        /// <inheritdoc />
-        public bool IsInPointingPose => HandRay.ShouldShowRay;
 
         /// <summary>
         /// Gets the total joint count supported by this hand controller.
@@ -73,16 +73,6 @@ namespace XRTK.Providers.Controllers.Hands
 
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
-
-        /// <summary>
-        /// Controller constructor.
-        /// </summary>
-        /// <param name="trackingState">The controller's tracking state.</param>
-        /// <param name="controllerHandedness">The controller's handedness.</param>
-        /// <param name="inputSource">Optional input source of the controller.</param>
-        /// <param name="interactions">Optional controller interactions mappings.</param>
-        public BaseHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-                : base(trackingState, controllerHandedness, inputSource, interactions) { }
 
         /// <inheritdoc />
         public override void UpdateController()
@@ -129,7 +119,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The updated hand data for this controller.</param>
         protected virtual void UpdateBounds(HandData handData)
         {
-            IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> jointPoses = HandUtils.ToJointPoseDictionary(handData.Joints);
+            IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> jointPoses = handData.Joints.ToJointPoseDictionary();
 
             // TrackedHandBounds.Hand
             if (jointPoses.TryGetValue(TrackedHandJoint.Palm, out MixedRealityPose palmPose))

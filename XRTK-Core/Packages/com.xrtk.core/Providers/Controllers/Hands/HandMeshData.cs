@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.Controllers.Hands
 {
@@ -11,37 +10,32 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// The vertices of the hand mesh in the initial coordinate system.
         /// </summary>
-        public Vector3[] Vertices { get; set; }
+        public Vector3[] Vertices { get; }
 
         /// <summary>
         /// Mesh triangle indices.
         /// </summary>
-        public int[] Triangles { get; set; }
+        public int[] Triangles { get; }
 
         /// <summary>
         /// Hand mesh normals, in initial coordinate system.
         /// </summary>
-        public Vector3[] Normals { get; set; }
+        public Vector3[] Normals { get; }
 
         /// <summary>
-        /// UV mapping of the hand. TODO: Give more specific details about UVs.
+        /// UV mapping of the hand. 
         /// </summary>
-        public Vector2[] Uvs { get; set; }
+        public Vector2[] Uvs { get; }
 
         /// <summary>
         /// Translation to apply to mesh to go from initial coordinates to world coordinates.
         /// </summary>
-        public Vector3 Position { get; set; }
+        public Vector3 Position { get; }
 
         /// <summary>
         /// Rotation to apply to mesh to go from initial coordinates to world coordinates.
         /// </summary>
-        public Quaternion Rotation { get; set; }
-
-        /// <summary>
-        /// Handedness of the updated hand.
-        /// </summary>
-        public Handedness Handedness { get; set; }
+        public Quaternion Rotation { get; }
 
         /// <summary>
         /// Returns true, if the mesh data is empty.

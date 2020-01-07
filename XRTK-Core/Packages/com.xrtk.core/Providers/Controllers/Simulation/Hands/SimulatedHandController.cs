@@ -6,6 +6,7 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;

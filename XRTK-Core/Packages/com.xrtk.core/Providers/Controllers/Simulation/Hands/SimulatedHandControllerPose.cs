@@ -24,19 +24,33 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public SimulatedHandControllerPose(string id)
         {
             Id = id;
-            localJointPoses = new MixedRealityPose[jointCount];
+            LocalJointPoses = new MixedRealityPose[JointCount];
             SetZero();
         }
 
-        private static readonly int jointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
+        /// <summary>
+        /// Creates a new hand pose using local pose data for the hand's joints.
+        /// </summary>
+        /// <param name="id">Unique pose identfier.</param>
+        /// <param name="localJointPoses">Joint poses in local space.</param>
+        public SimulatedHandControllerPose(string id, MixedRealityPose[] localJointPoses) : this(id)
+        {
+            Array.Copy(localJointPoses, LocalJointPoses, JointCount);
+        }
+
         private static readonly Dictionary<string, SimulatedHandControllerPose> handPoses = new Dictionary<string, SimulatedHandControllerPose>();
         private static bool isInitialized = false;
+
+        /// <summary>
+        /// Gets the total count of joints a simulated hand controller pose supports.
+        /// </summary>
+        public static readonly int JointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
         /// <summary>
         /// Joint poses are stored as right-hand poses in camera space.
         /// Output poses are computed in world space, and mirroring on the x axis for the left hand.
         /// </summary>
-        private MixedRealityPose[] localJointPoses;
+        public MixedRealityPose[] LocalJointPoses { get; }
 
         /// <summary>
         /// Gets the unique identifier for the simulated pose.
@@ -47,16 +61,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// Gets the configured default pose for simulation hands.
         /// </summary>
         public static SimulatedHandControllerPoseData DefaultHandPose { get; private set; }
-
-        /// <summary>
-        /// Creates a new hand pose using local pose data for the hand's joints.
-        /// </summary>
-        /// <param name="id">Unique pose identfier.</param>
-        /// <param name="localJointPoses">Joint poses in local space.</param>
-        public SimulatedHandControllerPose(string id, MixedRealityPose[] localJointPoses) : this(id)
-        {
-            Array.Copy(localJointPoses, this.localJointPoses, jointCount);
-        }
 
         /// <summary>
         /// Initialize pose data for use in editor from files.
@@ -120,13 +124,13 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
         private static void OffsetJointsRelativeToOpenPosePalmPosition(SimulatedHandControllerPose openPose, SimulatedHandControllerPose pose)
         {
-            Vector3 openHandPalmPosition = openPose.localJointPoses[(int)TrackedHandJoint.Palm].Position;
-            Vector3 posePalmPosition = pose.localJointPoses[(int)TrackedHandJoint.Palm].Position;
+            Vector3 openHandPalmPosition = openPose.LocalJointPoses[(int)TrackedHandJoint.Palm].Position;
+            Vector3 posePalmPosition = pose.LocalJointPoses[(int)TrackedHandJoint.Palm].Position;
             Vector3 offset = posePalmPosition - openHandPalmPosition;
 
-            for (int i = 0; i < pose.localJointPoses.Length; i++)
+            for (int i = 0; i < pose.LocalJointPoses.Length; i++)
             {
-                pose.localJointPoses[i].Position -= offset;
+                pose.LocalJointPoses[i].Position -= offset;
             }
         }
 
@@ -137,11 +141,11 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         {
             Quaternion cameraRotation = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.transform.rotation;
 
-            for (int i = 0; i < jointCount; i++)
+            for (int i = 0; i < JointCount; i++)
             {
                 // Initialize from local offsets
-                Vector3 p = localJointPoses[i].Position;
-                Quaternion r = localJointPoses[i].Rotation;
+                Vector3 p = LocalJointPoses[i].Position;
+                Quaternion r = LocalJointPoses[i].Rotation;
 
                 // Pose offset are for right hand, mirror on X axis if left hand is needed
                 if (handedness == Handedness.Left)
@@ -171,7 +175,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             var invRotation = Quaternion.Inverse(rotation);
             var invCameraRotation = Quaternion.Inverse(MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.transform.rotation);
 
-            for (int i = 0; i < jointCount; i++)
+            for (int i = 0; i < JointCount; i++)
             {
                 Vector3 p = joints[i].Position;
                 Quaternion r = joints[i].Rotation;
@@ -192,7 +196,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                     r.z = -r.z;
                 }
 
-                localJointPoses[i] = new MixedRealityPose(p, r);
+                LocalJointPoses[i] = new MixedRealityPose(p, r);
             }
         }
 
@@ -201,18 +205,10 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         public void SetZero()
         {
-            for (int i = 0; i < jointCount; i++)
+            for (int i = 0; i < JointCount; i++)
             {
-                localJointPoses[i] = MixedRealityPose.ZeroIdentity;
+                LocalJointPoses[i] = MixedRealityPose.ZeroIdentity;
             }
-        }
-
-        /// <summary>
-        /// Copy data from another simulated hand pose.
-        /// </summary>
-        public void Copy(SimulatedHandControllerPose other)
-        {
-            Array.Copy(other.localJointPoses, localJointPoses, jointCount);
         }
 
         /// <summary>
@@ -223,12 +219,12 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <param name="t">The parameter t is clamped to the range [0,1].</param>
         public static SimulatedHandControllerPose Lerp(SimulatedHandControllerPose a, SimulatedHandControllerPose b, float t)
         {
-            MixedRealityPose[] updatedJointPoses = new MixedRealityPose[jointCount];
+            MixedRealityPose[] updatedJointPoses = new MixedRealityPose[JointCount];
 
-            for (int i = 0; i < jointCount; i++)
+            for (int i = 0; i < JointCount; i++)
             {
-                MixedRealityPose jointPoseA = a.localJointPoses[i];
-                MixedRealityPose jointPoseB = b.localJointPoses[i];
+                MixedRealityPose jointPoseA = a.LocalJointPoses[i];
+                MixedRealityPose jointPoseB = b.LocalJointPoses[i];
 
                 Vector3 position = Vector3.Lerp(jointPoseA.Position, jointPoseB.Position, t);
                 Quaternion rotation = Quaternion.Slerp(jointPoseA.Rotation, jointPoseB.Rotation, t);
@@ -273,7 +269,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public string ToJson()
         {
             var dict = new HandJointPoseDictionary();
-            dict.FromJointPoses(localJointPoses);
+            dict.FromJointPoses(LocalJointPoses);
             return JsonUtility.ToJson(dict);
         }
 
@@ -283,7 +279,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public void FromJson(string json)
         {
             HandJointPoseDictionary dict = JsonUtility.FromJson<HandJointPoseDictionary>(json);
-            dict.ToJointPoses(localJointPoses);
+            dict.ToJointPoses(LocalJointPoses);
         }
     }
 }

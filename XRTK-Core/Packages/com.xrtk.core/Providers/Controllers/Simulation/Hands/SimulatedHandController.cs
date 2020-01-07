@@ -50,7 +50,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             initialPose = SimulatedHandControllerPose.GetPoseByName(SimulatedHandControllerPose.DefaultHandPose.Id);
             Pose = initialPose;
             lastUpdatedStopWatch = new SimulationTimeStampStopWatch();
-            playerCamera = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera;
             Reset();
 
             // Start the timestamp stopwatch
@@ -61,7 +60,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         private Vector3? lastMousePosition = null;
         private readonly SimulationTimeStampStopWatch handUpdateStopWatch;
         private readonly SimulatedControllerDataProvider dataProvider;
-        private readonly Camera playerCamera;
         private readonly SimulationTimeStampStopWatch lastUpdatedStopWatch;
         private long lastSimulatedTimeStamp = 0;
         private float currentPoseBlending = 0.0f;
@@ -299,9 +297,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             // Apply mouse delta x/y in screen space, but depth offset in world space
             screenPosition.x += rootPoseDelta.Position.x;
             screenPosition.y += rootPoseDelta.Position.y;
-            Vector3 newWorldPoint = playerCamera.ScreenToWorldPoint(ScreenPosition);
-            newWorldPoint += playerCamera.transform.forward * rootPoseDelta.Position.z;
-            screenPosition = playerCamera.WorldToScreenPoint(newWorldPoint);
+            Vector3 newWorldPoint = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition);
+            newWorldPoint += MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.transform.forward * rootPoseDelta.Position.z;
+            screenPosition = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.WorldToScreenPoint(newWorldPoint);
 
             HandRotateEulerAngles += rootPoseDelta.Rotation.eulerAngles;
             JitterOffset = Random.insideUnitSphere * dataProvider.JitterAmount;
@@ -321,7 +319,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             currentPoseBlending = TargetPoseBlending;
             Quaternion rotation = Quaternion.Euler(HandRotateEulerAngles);
-            Vector3 position = playerCamera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
+            Vector3 position = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
             Pose.ComputeJointPoses(ControllerHandedness, rotation, position, HandData.Joints);
         }
     }

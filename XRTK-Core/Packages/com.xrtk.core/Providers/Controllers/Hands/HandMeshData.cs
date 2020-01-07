@@ -8,6 +8,30 @@ namespace XRTK.Providers.Controllers.Hands
     public class HandMeshData
     {
         /// <summary>
+        /// Constructs a new empty hand mesh data snapshot.
+        /// </summary>
+        public HandMeshData() { }
+
+        /// <summary>
+        /// Constructs a new hand mesh data snapshot.
+        /// </summary>
+        /// <param name="vertices"></param>
+        /// <param name="triangles"></param>
+        /// <param name="normals"></param>
+        /// <param name="uvs"></param>
+        /// <param name="position"></param>
+        /// <param name="rotation"></param>
+        public HandMeshData(Vector3[] vertices, int[] triangles, Vector3[] normals, Vector2[] uvs, Vector3 position, Quaternion rotation)
+        {
+            Vertices = vertices;
+            Triangles = triangles;
+            Normals = normals;
+            Uvs = uvs;
+            Position = position;
+            Rotation = rotation;
+        }
+
+        /// <summary>
         /// The vertices of the hand mesh in the initial coordinate system.
         /// </summary>
         public Vector3[] Vertices { get; }

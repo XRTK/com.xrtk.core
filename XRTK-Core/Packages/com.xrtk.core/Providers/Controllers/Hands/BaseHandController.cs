@@ -39,17 +39,6 @@ namespace XRTK.Providers.Controllers.Hands
         private readonly Dictionary<TrackedHandBounds, Bounds> bounds = new Dictionary<TrackedHandBounds, Bounds>();
 
         /// <summary>
-        /// Gets the hand controller's ray.
-        /// </summary>
-        protected HandRay HandRay { get; } = new HandRay();
-
-        /// <inheritdoc />
-        public bool IsTracked => TrackingState == TrackingState.Tracked;
-
-        /// <inheritdoc />
-        public bool IsInPointingPose => HandRay.ShouldShowRay;
-
-        /// <summary>
         /// Gets the total joint count supported by this hand controller.
         /// </summary>
         public static readonly int JointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;

@@ -19,16 +19,6 @@ namespace XRTK.Interfaces.Providers.Controllers
         IReadOnlyDictionary<TrackedHandBounds, Bounds> Bounds { get; }
 
         /// <summary>
-        /// Gets whether this hand controller is currently tracked.
-        /// </summary>
-        bool IsTracked { get; }
-
-        /// <summary>
-        /// Gets whether the hand is in pointing pose for raycasting.
-        /// </summary>
-        bool IsInPointingPose { get; }
-
-        /// <summary>
         /// The current joint pose dicitionary of the controller.
         /// </summary>
         IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> JointPoses { get; }

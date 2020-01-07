@@ -60,9 +60,19 @@ namespace XRTK.Providers.Controllers.Simulation
         public float HandDepthMultiplier => profile.HandDepthMultiplier;
 
         /// <summary>
+        /// Gets the amount of simulated jitter offset for simulated controllers.
+        /// </summary>
+        public float JitterAmount => profile.JitterAmount;
+
+        /// <summary>
         /// Gets the rotation speed for simulated hand controller pitch/yaw/roll animation.
         /// </summary>
         public float RotationSpeed => profile.RotationSpeed;
+
+        /// <summary>
+        /// Gets the default distance fom the camera to spawn simulated controllers at.
+        /// </summary>
+        public float DefaultDistance => profile.DefaultDistance;
 
         /// <summary>
         /// Gets the keycode used to yaw the simulated controller counter clockwise.

@@ -2,8 +2,10 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation;
+using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -19,19 +21,6 @@ namespace XRTK.Providers.Controllers.Simulation
     /// </summary>
     public class SimulatedControllerDataProvider : BaseControllerDataProvider
     {
-        private SimulationTimeStampStopWatch simulatedUpdateStopWatch;
-        private long lastSimulatedUpdateTimeStamp = 0;
-
-        private bool leftControllerIsAlwaysVisible = false;
-        private bool rightControllerIsAlwaysVisible = false;
-        private bool leftControllerIsTracked = false;
-        private bool rightControllerIsTracked = false;
-
-        /// <summary>
-        /// Gets the active profile for the simulated controller data provider.
-        /// </summary>
-        public SimulatedControllerDataProviderProfile Profile { get; }
-
         /// <summary>
         /// Creates a new instance of the data provider.
         /// </summary>
@@ -41,8 +30,69 @@ namespace XRTK.Providers.Controllers.Simulation
         public SimulatedControllerDataProvider(string name, uint priority, SimulatedControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
-            Profile = profile;
+            this.profile = profile;
         }
+
+        private readonly SimulatedControllerDataProviderProfile profile;
+        private SimulationTimeStampStopWatch simulatedUpdateStopWatch;
+        private long lastSimulatedUpdateTimeStamp = 0;
+
+        private bool leftControllerIsAlwaysVisible = false;
+        private bool rightControllerIsAlwaysVisible = false;
+        private bool leftControllerIsTracked = false;
+        private bool rightControllerIsTracked = false;
+
+        /// <summary>
+        /// Gets configured simulated hand controller pose definitions used to simulate
+        /// different hand poses.
+        /// </summary>
+        public IReadOnlyList<SimulatedHandControllerPoseData> HandPoseDefinitions => profile.PoseDefinitions;
+
+        /// <summary>
+        /// Gets the simulated hand controller pose animation speed controlling
+        /// how fast the hand will translate from one pose to another.
+        /// </summary>
+        public float HandPoseAnimationSpeed => profile.HandPoseAnimationSpeed;
+
+        /// <summary>
+        /// Gets the hand depth change multiplier used to simulate controller depth movement.
+        /// </summary>
+        public float HandDepthMultiplier => profile.HandDepthMultiplier;
+
+        /// <summary>
+        /// Gets the rotation speed for simulated hand controller pitch/yaw/roll animation.
+        /// </summary>
+        public float RotationSpeed => profile.RotationSpeed;
+
+        /// <summary>
+        /// Gets the keycode used to yaw the simulated controller counter clockwise.
+        /// </summary>
+        public KeyCode YawControllerCounterClockwiseKey => profile.YawCCWKey;
+
+        /// <summary>
+        /// Gets the keycode used to yaw the simulated controller clockwise.
+        /// </summary>
+        public KeyCode YawControllerClockwiseKey => profile.YawCWKey;
+
+        /// <summary>
+        /// Gets the keycode used to pitch the simulated controller counter clockwise.
+        /// </summary>
+        public KeyCode PitchControllerCounterClockwiseKey => profile.PitchCCWKey;
+
+        /// <summary>
+        /// Gets the keycode used to pitch the simulated controller clockwise.
+        /// </summary>
+        public KeyCode PitchControllerClockwiseKey => profile.PitchCWKey;
+
+        /// <summary>
+        /// Gets the keycode used to roll the simulated controller counter clockwise.
+        /// </summary>
+        public KeyCode RollControllerCouterClockwiseKey => profile.RollCCWKey;
+
+        /// <summary>
+        /// Gets the keycode used to roll the simulated controller clockwise.
+        /// </summary>
+        public KeyCode RollControllerClockwiseKey => profile.RollCWKey;
 
         /// <inheritdoc />
         public override void Enable()
@@ -79,19 +129,19 @@ namespace XRTK.Providers.Controllers.Simulation
         {
             DateTime currentTime = simulatedUpdateStopWatch.Current;
             double msSinceLastUpdate = currentTime.Subtract(new DateTime(lastSimulatedUpdateTimeStamp)).TotalMilliseconds;
-            if (msSinceLastUpdate > Profile.SimulatedUpdateFrequency)
+            if (msSinceLastUpdate > profile.SimulatedUpdateFrequency)
             {
-                if (Input.GetKeyDown(Profile.ToggleLeftPersistentKey))
+                if (Input.GetKeyDown(profile.ToggleLeftPersistentKey))
                 {
                     leftControllerIsAlwaysVisible = !leftControllerIsAlwaysVisible;
                 }
 
-                if (Input.GetKeyDown(Profile.LeftControllerTrackedKey))
+                if (Input.GetKeyDown(profile.LeftControllerTrackedKey))
                 {
                     leftControllerIsTracked = true;
                 }
 
-                if (Input.GetKeyUp(Profile.LeftControllerTrackedKey))
+                if (Input.GetKeyUp(profile.LeftControllerTrackedKey))
                 {
                     leftControllerIsTracked = false;
                 }
@@ -105,17 +155,17 @@ namespace XRTK.Providers.Controllers.Simulation
                     RemoveController(Handedness.Left);
                 }
 
-                if (Input.GetKeyDown(Profile.ToggleRightPersistentKey))
+                if (Input.GetKeyDown(profile.ToggleRightPersistentKey))
                 {
                     rightControllerIsAlwaysVisible = !rightControllerIsAlwaysVisible;
                 }
 
-                if (Input.GetKeyDown(Profile.RightControllerTrackedKey))
+                if (Input.GetKeyDown(profile.RightControllerTrackedKey))
                 {
                     rightControllerIsTracked = true;
                 }
 
-                if (Input.GetKeyUp(Profile.RightControllerTrackedKey))
+                if (Input.GetKeyUp(profile.RightControllerTrackedKey))
                 {
                     rightControllerIsTracked = false;
                 }
@@ -140,11 +190,11 @@ namespace XRTK.Providers.Controllers.Simulation
                 return existingController;
             }
 
-            IMixedRealityPointer[] pointers = RequestPointers(Profile.SimulatedControllerType, handedness);
-            IMixedRealityInputSource inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{Profile.SimulatedControllerType.Type.Name} {handedness}", pointers);
-            IMixedRealityController controller = (IMixedRealityController)Activator.CreateInstance(Profile.SimulatedControllerType, TrackingState.Tracked, handedness, inputSource, null);
+            IMixedRealityPointer[] pointers = RequestPointers(profile.SimulatedControllerType, handedness);
+            IMixedRealityInputSource inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{profile.SimulatedControllerType.Type.Name} {handedness}", pointers);
+            IMixedRealityController controller = (IMixedRealityController)Activator.CreateInstance(profile.SimulatedControllerType, TrackingState.Tracked, handedness, inputSource, null);
 
-            if (controller == null || !controller.SetupConfiguration(Profile.SimulatedControllerType))
+            if (controller == null || !controller.SetupConfiguration(profile.SimulatedControllerType))
             {
                 // Controller failed to be setup correctly.
                 // Return null so we don't raise the source detected.
@@ -159,7 +209,7 @@ namespace XRTK.Providers.Controllers.Simulation
             MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);
             if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile.RenderMotionControllers)
             {
-                controller.TryRenderControllerModel(Profile.SimulatedControllerType);
+                controller.TryRenderControllerModel(profile.SimulatedControllerType);
             }
 
             AddController(controller);
@@ -179,6 +229,9 @@ namespace XRTK.Providers.Controllers.Simulation
         {
             while (ActiveControllers.Count > 0)
             {
+                // It's important here to pass the handedness. Passing the controller
+                // will execute the base RmoveController implementation, which will remove
+                // the controller but not RaiseSourceLost.
                 RemoveController(ActiveControllers[0].ControllerHandedness);
             }
         }

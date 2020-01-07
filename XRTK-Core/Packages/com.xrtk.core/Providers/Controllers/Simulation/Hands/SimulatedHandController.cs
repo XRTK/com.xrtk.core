@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions.Controllers.Simulation;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
@@ -23,7 +22,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     {
         private Vector3? lastMousePosition = null;
         private readonly SimulationTimeStampStopWatch handUpdateStopWatch;
-        private readonly SimulatedControllerDataProviderProfile profile;
+        private readonly SimulatedControllerDataProvider dataProvider;
 
         /// <summary>
         /// The simulation state of the left hand.
@@ -33,15 +32,15 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public SimulatedHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
             : base(trackingState, controllerHandedness, inputSource, interactions)
         {
-            profile = GetProfile();
-            if (profile == null)
+            dataProvider = GetProfile();
+            if (dataProvider == null)
             {
-                Debug.LogError($"Could not get active {typeof(SimulatedControllerDataProviderProfile).Name}.");
+                Debug.LogError($"Could not get active {nameof(SimulatedControllerDataProvider)}.");
             }
 
             // Initialize available simulated hand poses and find the
             // cofigured default pose.
-            SimulatedHandControllerPose.Initialize(profile.PoseDefinitions);
+            SimulatedHandControllerPose.Initialize(dataProvider.HandPoseDefinitions);
 
             // Simulation cannot work without a default pose.
             if (SimulatedHandControllerPose.DefaultHandPose == null)
@@ -57,14 +56,14 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             handUpdateStopWatch.Reset();
         }
 
-        private SimulatedControllerDataProviderProfile GetProfile()
+        private SimulatedControllerDataProvider GetProfile()
         {
             List<IMixedRealityService> controllerDataProviders = MixedRealityToolkit.GetActiveServices<IMixedRealityControllerDataProvider>();
             for (int i = 0; i < controllerDataProviders.Count; i++)
             {
                 if (controllerDataProviders[i] is SimulatedControllerDataProvider simulationHandControllerDataProvider)
                 {
-                    return simulationHandControllerDataProvider.Profile;
+                    return simulationHandControllerDataProvider;
                 }
             }
 
@@ -81,7 +80,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 GetHandPositionDelta(), Quaternion.Euler(GetHandRotationDelta()));
 
             // Calculate pose changes and compute timestamp for hand tracking update.
-            float poseAnimationDelta = profile.HandPoseAnimationSpeed * Time.deltaTime;
+            float poseAnimationDelta = dataProvider.HandPoseAnimationSpeed * Time.deltaTime;
             long timeStamp = handUpdateStopWatch.TimeStamp;
 
             // Update simualted hand states using collected data.
@@ -98,30 +97,30 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <returns>Updated hand rotation angles.</returns>
         private Vector3 GetHandRotationDelta()
         {
-            float rotationDelta = profile.RotationSpeed * Time.deltaTime;
+            float rotationDelta = dataProvider.RotationSpeed * Time.deltaTime;
             Vector3 rotationDeltaEulerAngles = Vector3.zero;
 
-            if (Input.GetKey(profile.YawCCWKey))
+            if (Input.GetKey(dataProvider.YawControllerCounterClockwiseKey))
             {
                 rotationDeltaEulerAngles.y = -rotationDelta;
             }
-            if (Input.GetKey(profile.YawCWKey))
+            if (Input.GetKey(dataProvider.YawControllerClockwiseKey))
             {
                 rotationDeltaEulerAngles.y = rotationDelta;
             }
-            if (Input.GetKey(profile.PitchCCWKey))
+            if (Input.GetKey(dataProvider.PitchControllerCounterClockwiseKey))
             {
                 rotationDeltaEulerAngles.x = rotationDelta;
             }
-            if (Input.GetKey(profile.PitchCWKey))
+            if (Input.GetKey(dataProvider.PitchControllerClockwiseKey))
             {
                 rotationDeltaEulerAngles.x = -rotationDelta;
             }
-            if (Input.GetKey(profile.RollCCWKey))
+            if (Input.GetKey(dataProvider.RollControllerCouterClockwiseKey))
             {
                 rotationDeltaEulerAngles.z = rotationDelta;
             }
-            if (Input.GetKey(profile.RollCWKey))
+            if (Input.GetKey(dataProvider.RollControllerClockwiseKey))
             {
                 rotationDeltaEulerAngles.z = -rotationDelta;
             }
@@ -137,7 +136,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         private Vector3 GetHandPositionDelta()
         {
             Vector3 mouseDelta = (lastMousePosition.HasValue ? Input.mousePosition - lastMousePosition.Value : Vector3.zero);
-            mouseDelta.z += Input.GetAxis("Mouse ScrollWheel") * profile.HandDepthMultiplier;
+            mouseDelta.z += Input.GetAxis("Mouse ScrollWheel") * dataProvider.HandDepthMultiplier;
 
             return mouseDelta;
         }
@@ -148,9 +147,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <returns>Default pose if no other fitting user input.</returns>
         private SimulatedHandControllerPose GetTargetHandPose()
         {
-            for (int i = 0; i < profile.PoseDefinitions.Count; i++)
+            for (int i = 0; i < dataProvider.HandPoseDefinitions.Count; i++)
             {
-                SimulatedHandControllerPoseData pose = profile.PoseDefinitions[i];
+                SimulatedHandControllerPoseData pose = dataProvider.HandPoseDefinitions[i];
                 if (Input.GetKey(pose.KeyCode))
                 {
                     return SimulatedHandControllerPose.GetPoseByName(pose.Id);

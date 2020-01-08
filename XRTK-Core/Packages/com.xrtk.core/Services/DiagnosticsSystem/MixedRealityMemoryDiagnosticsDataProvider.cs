@@ -22,7 +22,6 @@ namespace XRTK.Services.DiagnosticsSystem
         {
         }
 
-        private ulong lastSystemMemorySize;
         private ulong lastMemoryUsage;
         private ulong peakMemoryUsage;
         private ulong lastMemoryLimit;
@@ -36,16 +35,12 @@ namespace XRTK.Services.DiagnosticsSystem
 
             var systemMemorySize = (ulong)Profiler.GetTotalReservedMemoryLong();
 
-            if (lastSystemMemorySize != systemMemorySize)
+            if (lastMemoryUsage != systemMemorySize)
             {
-                lastSystemMemorySize = systemMemorySize;
-
-                var currentMemoryLimit = lastSystemMemorySize;
-
-                if (currentMemoryLimit != lastMemoryLimit)
+                if (systemMemorySize > lastMemoryLimit)
                 {
-                    MixedRealityToolkit.DiagnosticsSystem.RaiseMemoryLimitChanged(new MemoryLimit(currentMemoryLimit));
-                    lastMemoryLimit = currentMemoryLimit;
+                    MixedRealityToolkit.DiagnosticsSystem.RaiseMemoryLimitChanged(new MemoryLimit(systemMemorySize));
+                    lastMemoryLimit = systemMemorySize;
                 }
             }
 

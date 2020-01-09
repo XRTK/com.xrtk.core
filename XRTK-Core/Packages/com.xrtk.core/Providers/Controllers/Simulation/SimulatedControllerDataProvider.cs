@@ -74,36 +74,6 @@ namespace XRTK.Providers.Controllers.Simulation
         /// </summary>
         public float DefaultDistance => profile.DefaultDistance;
 
-        /// <summary>
-        /// Gets the keycode used to yaw the simulated controller counter clockwise.
-        /// </summary>
-        public KeyCode YawControllerCounterClockwiseKey => profile.YawCCWKey;
-
-        /// <summary>
-        /// Gets the keycode used to yaw the simulated controller clockwise.
-        /// </summary>
-        public KeyCode YawControllerClockwiseKey => profile.YawCWKey;
-
-        /// <summary>
-        /// Gets the keycode used to pitch the simulated controller counter clockwise.
-        /// </summary>
-        public KeyCode PitchControllerCounterClockwiseKey => profile.PitchCCWKey;
-
-        /// <summary>
-        /// Gets the keycode used to pitch the simulated controller clockwise.
-        /// </summary>
-        public KeyCode PitchControllerClockwiseKey => profile.PitchCWKey;
-
-        /// <summary>
-        /// Gets the keycode used to roll the simulated controller counter clockwise.
-        /// </summary>
-        public KeyCode RollControllerCouterClockwiseKey => profile.RollCCWKey;
-
-        /// <summary>
-        /// Gets the keycode used to roll the simulated controller clockwise.
-        /// </summary>
-        public KeyCode RollControllerClockwiseKey => profile.RollCWKey;
-
         /// <inheritdoc />
         public override void Enable()
         {

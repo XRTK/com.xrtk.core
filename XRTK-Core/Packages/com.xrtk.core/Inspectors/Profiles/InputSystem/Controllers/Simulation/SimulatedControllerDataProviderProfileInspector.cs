@@ -28,13 +28,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
         private SerializedProperty poseDefinitions;
         private SerializedProperty handPoseAnimationSpeed;
 
-
-        private SerializedProperty yawCWKey;
-        private SerializedProperty yawCCWKey;
-        private SerializedProperty pitchCWKey;
-        private SerializedProperty pitchCCWKey;
-        private SerializedProperty rollCWKey;
-        private SerializedProperty rollCCWKey;
         private SerializedProperty rotationSpeed;
 
         protected override void OnEnable()
@@ -55,12 +48,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
             leftControllerTrackedKey = serializedObject.FindProperty(nameof(leftControllerTrackedKey));
             rightControllerTrackedKey = serializedObject.FindProperty(nameof(rightControllerTrackedKey));
 
-            yawCWKey = serializedObject.FindProperty(nameof(yawCWKey));
-            yawCCWKey = serializedObject.FindProperty(nameof(yawCCWKey));
-            pitchCWKey = serializedObject.FindProperty(nameof(pitchCWKey));
-            pitchCCWKey = serializedObject.FindProperty(nameof(pitchCCWKey));
-            rollCWKey = serializedObject.FindProperty(nameof(rollCWKey));
-            rollCCWKey = serializedObject.FindProperty(nameof(rollCCWKey));
             rotationSpeed = serializedObject.FindProperty(nameof(rotationSpeed));
 
             poseDefinitions = serializedObject.FindProperty(nameof(poseDefinitions));
@@ -99,12 +86,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
             EditorGUILayout.PropertyField(leftControllerTrackedKey);
             EditorGUILayout.PropertyField(toggleRightPersistentKey);
             EditorGUILayout.PropertyField(rightControllerTrackedKey);
-            EditorGUILayout.PropertyField(yawCWKey);
-            EditorGUILayout.PropertyField(yawCCWKey);
-            EditorGUILayout.PropertyField(pitchCWKey);
-            EditorGUILayout.PropertyField(pitchCCWKey);
-            EditorGUILayout.PropertyField(rollCWKey);
-            EditorGUILayout.PropertyField(rollCCWKey);
             EditorGUILayout.PropertyField(rotationSpeed);
             EditorGUILayout.Space();
 

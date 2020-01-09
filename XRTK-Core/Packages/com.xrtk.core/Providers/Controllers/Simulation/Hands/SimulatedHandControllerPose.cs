@@ -268,9 +268,13 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         public string ToJson()
         {
-            var dict = new HandJointPoseDictionary();
-            dict.FromJointPoses(LocalJointPoses);
-            return JsonUtility.ToJson(dict);
+            List<RecordedHandJoint> recordings = new List<RecordedHandJoint>();
+            for (int i = 0; i < LocalJointPoses.Length; i++)
+            {
+                recordings.Add(new RecordedHandJoint((TrackedHandJoint)i, LocalJointPoses[i]));
+            }
+
+            return JsonUtility.ToJson(recordings);
         }
 
         /// <summary>
@@ -278,8 +282,12 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         public void FromJson(string json)
         {
-            HandJointPoseDictionary dict = JsonUtility.FromJson<HandJointPoseDictionary>(json);
-            dict.ToJointPoses(LocalJointPoses);
+            RecordedHandJoints record = JsonUtility.FromJson<RecordedHandJoints>(json);
+            for (int i = 0; i < record.items.Length; i++)
+            {
+                RecordedHandJoint jointRecord = record.items[i];
+                LocalJointPoses[(int)jointRecord.JointIndex] = jointRecord.pose;
+            }
         }
     }
 }

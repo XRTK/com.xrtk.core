@@ -73,7 +73,7 @@ namespace XRTK.Definitions.Controllers.Simulation
 
         [SerializeField]
         [Tooltip("Depth change when scrolling the mouse wheel")]
-        private float depthMultiplier = 0.1f;
+        private float depthMultiplier = 0.5f;
 
         /// <summary>
         /// Depth change when scrolling the mouse wheel.
@@ -130,60 +130,6 @@ namespace XRTK.Definitions.Controllers.Simulation
         /// Key to simulate tracking of the right controller.
         /// </summary>
         public KeyCode RightControllerTrackedKey => rightControllerTrackedKey;
-
-        [SerializeField]
-        [Tooltip("Key to turn the controller clockwise")]
-        private KeyCode yawCWKey = KeyCode.E;
-
-        /// <summary>
-        /// Key to turn the controller clockwise.
-        /// </summary>
-        public KeyCode YawCWKey => yawCWKey;
-
-        [SerializeField]
-        [Tooltip("Key to turn the controller counter-clockwise")]
-        private KeyCode yawCCWKey = KeyCode.Q;
-
-        /// <summary>
-        /// Key to turn the controller counter-clockwise.
-        /// </summary>
-        public KeyCode YawCCWKey => yawCCWKey;
-
-        [SerializeField]
-        [Tooltip("Key to pitch the controller upward")]
-        private KeyCode pitchCWKey = KeyCode.F;
-
-        /// <summary>
-        /// Key to pitch the controller upward.
-        /// </summary>
-        public KeyCode PitchCWKey => pitchCWKey;
-
-        [SerializeField]
-        [Tooltip("Key to pitch the controller downward")]
-        private KeyCode pitchCCWKey = KeyCode.R;
-
-        /// <summary>
-        /// Key to pitch the controller downward.
-        /// </summary>
-        public KeyCode PitchCCWKey => pitchCCWKey;
-
-        [SerializeField]
-        [Tooltip("Key to roll the controller right")]
-        private KeyCode rollCWKey = KeyCode.X;
-
-        /// <summary>
-        /// Key to roll the controller right.
-        /// </summary>
-        public KeyCode RollCWKey => rollCWKey;
-
-        [SerializeField]
-        [Tooltip("Key to roll the controller left")]
-        private KeyCode rollCCWKey = KeyCode.Z;
-
-        /// <summary>
-        /// Key to roll the controller left.
-        /// </summary>
-        public KeyCode RollCCWKey => rollCCWKey;
 
         [SerializeField]
         [Tooltip("Angle per second when rotating the controller")]

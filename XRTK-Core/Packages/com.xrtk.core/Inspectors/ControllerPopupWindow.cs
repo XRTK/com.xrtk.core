@@ -95,7 +95,7 @@ namespace XRTK.Inspectors
         private BaseMixedRealityControllerMappingProfile mappingProfile;
 
         private bool IsCustomController => currentControllerType == SupportedControllerType.GenericOpenVR ||
-                                           currentControllerType == SupportedControllerType.GenericUnity;
+                                           currentControllerType == SupportedControllerType.GenericUnity || currentControllerType == SupportedControllerType.Hand;
         private static string EditorWindowOptionsPath => $"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/Inspectors/Data/EditorWindowOptions.json";
 
         private void OnFocus()
@@ -466,7 +466,7 @@ namespace XRTK.Inspectors
 
                 if (useCustomInteractionMapping)
                 {
-                    EditorGUILayout.LabelField($"{i + 1}", GUILayout.Width(32f));
+                    EditorGUILayout.LabelField($"{i}", GUILayout.Width(32f));
                     var inputType = interaction.FindPropertyRelative("inputType");
                     EditorGUILayout.PropertyField(inputType, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
                     var axisType = interaction.FindPropertyRelative("axisType");

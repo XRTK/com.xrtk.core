@@ -71,9 +71,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             EditorGUILayout.HelpBox("Define all the custom controller visualizations you'd like to use for each controller type when they're rendered in the scene.\n\n" +
                                     "Global settings are the default fallback, and any specific controller definitions take precedence.", MessageType.Info);
 
-            controllerVisualizationProfile.CheckProfileLock();
-
             serializedObject.Update();
+
+            controllerVisualizationProfile.CheckProfileLock();
 
             EditorGUIUtility.labelWidth = 168f;
             EditorGUILayout.PropertyField(renderMotionControllers);
@@ -188,7 +188,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 }
 
                 var handednessValue = mixedRealityControllerHandedness.intValue - 1;
-
+                
                 // Reset in case it was set to something other than left, right or both.
                 if (handednessValue < 0 || handednessValue > 2) { handednessValue = 0; }
 

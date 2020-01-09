@@ -77,8 +77,19 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public override void UpdateController()
         {
+            for (int i = 0; i < Interactions?.Length; i++)
+            {
+                UpdateInteraction(Interactions[i]);
+            }
+
             base.UpdateController();
         }
+
+        /// <summary>
+        /// If needed, update the input from the device for an interaction configured.
+        /// </summary>
+        /// <param name="interactionMapping">Interaction mapping to update.</param>
+        protected virtual void UpdateInteraction(MixedRealityInteractionMapping interactionMapping) { }
 
         /// <summary>
         /// Updates the state of the hand controller using provided hand data.

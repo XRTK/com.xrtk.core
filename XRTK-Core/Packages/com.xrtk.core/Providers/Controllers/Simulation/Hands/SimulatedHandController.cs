@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces;
@@ -57,10 +58,10 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             handUpdateStopWatch.Reset();
         }
 
-        private Vector3? lastMousePosition = null;
         private readonly SimulationTimeStampStopWatch handUpdateStopWatch;
         private readonly SimulatedControllerDataProvider dataProvider;
         private readonly SimulationTimeStampStopWatch lastUpdatedStopWatch;
+        private Vector3? lastMousePosition = null;
         private long lastSimulatedTimeStamp = 0;
         private float currentPoseBlending = 0.0f;
         private float targetPoseBlending = 0.0f;
@@ -68,6 +69,19 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         private SimulatedHandControllerPose initialPose;
         private SimulatedHandControllerPose previousPose;
         private SimulatedHandControllerPose targetPose;
+
+        public override MixedRealityInteractionMapping[] DefaultInteractions => new[]
+        {
+            new MixedRealityInteractionMapping(0, "Yaw Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.E),
+            new MixedRealityInteractionMapping(1, "Yaw Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Q),
+            new MixedRealityInteractionMapping(2, "Pitch Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.F),
+            new MixedRealityInteractionMapping(3, "Pitch Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.R),
+            new MixedRealityInteractionMapping(4, "Roll Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.X),
+            new MixedRealityInteractionMapping(5, "Roll Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Z),
+            new MixedRealityInteractionMapping(6, "Move Away (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.PageUp),
+            new MixedRealityInteractionMapping(7, "Move Closer (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.PageDown),
+            new MixedRealityInteractionMapping(8, "Move", AxisType.ThreeDofPosition, DeviceInputType.PointerPosition, MixedRealityInputAction.None)
+        };
 
         /// <summary>
         /// Gets the hands position in screen space.
@@ -186,6 +200,20 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             }
         }
 
+        /// <inheritdoc />
+        protected override void UpdateInteraction(MixedRealityInteractionMapping interactionMapping)
+        {
+            switch (interactionMapping.InputType)
+            {
+                case DeviceInputType.ButtonPress:
+                    interactionMapping.BoolData = Input.GetKey(interactionMapping.KeyCode);
+                    break;
+                case DeviceInputType.PointerPosition:
+                    interactionMapping.PositionData = Input.mousePosition;
+                    break;
+            }
+        }
+
         /// <summary>
         /// Gets a simulated Yaw, Pitch and Roll delta for the current frame.
         /// </summary>
@@ -195,29 +223,29 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             float rotationDelta = dataProvider.RotationSpeed * Time.deltaTime;
             Vector3 rotationDeltaEulerAngles = Vector3.zero;
 
-            if (Input.GetKey(dataProvider.YawControllerCounterClockwiseKey))
-            {
-                rotationDeltaEulerAngles.y = -rotationDelta;
-            }
-            if (Input.GetKey(dataProvider.YawControllerClockwiseKey))
+            if (Interactions[0].BoolData)
             {
                 rotationDeltaEulerAngles.y = rotationDelta;
             }
-            if (Input.GetKey(dataProvider.PitchControllerCounterClockwiseKey))
+            if (Interactions[1].BoolData)
             {
-                rotationDeltaEulerAngles.x = rotationDelta;
+                rotationDeltaEulerAngles.y = -rotationDelta;
             }
-            if (Input.GetKey(dataProvider.PitchControllerClockwiseKey))
+            if (Interactions[2].BoolData)
             {
                 rotationDeltaEulerAngles.x = -rotationDelta;
             }
-            if (Input.GetKey(dataProvider.RollControllerCouterClockwiseKey))
+            if (Interactions[3].BoolData)
             {
-                rotationDeltaEulerAngles.z = rotationDelta;
+                rotationDeltaEulerAngles.x = rotationDelta;
             }
-            if (Input.GetKey(dataProvider.RollControllerClockwiseKey))
+            if (Interactions[4].BoolData)
             {
                 rotationDeltaEulerAngles.z = -rotationDelta;
+            }
+            if (Interactions[5].BoolData)
+            {
+                rotationDeltaEulerAngles.z = rotationDelta;
             }
 
             return rotationDeltaEulerAngles;
@@ -230,8 +258,16 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <returns>Hand movement delta.</returns>
         private Vector3 GetHandPositionDelta()
         {
-            Vector3 mouseDelta = (lastMousePosition.HasValue ? Input.mousePosition - lastMousePosition.Value : Vector3.zero);
-            mouseDelta.z += Input.GetAxis("Mouse ScrollWheel") * dataProvider.HandDepthMultiplier;
+            Vector3 mouseDelta = lastMousePosition.HasValue ? Interactions[8].PositionData - lastMousePosition.Value : Vector3.zero;
+
+            if (Interactions[6].BoolData)
+            {
+                mouseDelta.z += Time.deltaTime * dataProvider.HandDepthMultiplier;
+            }
+            if (Interactions[7].BoolData)
+            {
+                mouseDelta.z -= Time.deltaTime * dataProvider.HandDepthMultiplier;
+            }
 
             return mouseDelta;
         }

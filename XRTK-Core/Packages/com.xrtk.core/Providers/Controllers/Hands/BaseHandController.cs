@@ -40,7 +40,7 @@ namespace XRTK.Providers.Controllers.Hands
         private readonly Dictionary<TrackedHandBounds, Bounds> bounds = new Dictionary<TrackedHandBounds, Bounds>();
 
         /// <summary>
-        /// Gets the total joint count supported by this hand controller.
+        /// Gets the total count of joints a hand controller supports.
         /// </summary>
         public static readonly int JointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 

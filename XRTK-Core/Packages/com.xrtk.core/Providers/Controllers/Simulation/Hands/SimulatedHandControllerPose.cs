@@ -24,7 +24,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public SimulatedHandControllerPose(string id)
         {
             Id = id;
-            LocalJointPoses = new MixedRealityPose[JointCount];
+            LocalJointPoses = new MixedRealityPose[BaseHandController.JointCount];
             SetZero();
         }
 
@@ -35,16 +35,11 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <param name="localJointPoses">Joint poses in local space.</param>
         public SimulatedHandControllerPose(string id, MixedRealityPose[] localJointPoses) : this(id)
         {
-            Array.Copy(localJointPoses, LocalJointPoses, JointCount);
+            Array.Copy(localJointPoses, LocalJointPoses, BaseHandController.JointCount);
         }
 
         private static readonly Dictionary<string, SimulatedHandControllerPose> handPoses = new Dictionary<string, SimulatedHandControllerPose>();
         private static bool isInitialized = false;
-
-        /// <summary>
-        /// Gets the total count of joints a simulated hand controller pose supports.
-        /// </summary>
-        public static readonly int JointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
         /// <summary>
         /// Joint poses are stored as right-hand poses in camera space.

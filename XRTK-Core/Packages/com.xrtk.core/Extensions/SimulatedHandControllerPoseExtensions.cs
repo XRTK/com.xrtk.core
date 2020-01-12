@@ -1,4 +1,5 @@
 ﻿using System;
+using XRTK.Providers.Controllers.Hands;
 using XRTK.Providers.Controllers.Simulation.Hands;
 
 namespace XRTK.Extensions
@@ -10,7 +11,7 @@ namespace XRTK.Extensions
         /// </summary>
         public static void Copy(this SimulatedHandControllerPose pose, SimulatedHandControllerPose other)
         {
-            Array.Copy(other.LocalJointPoses, pose.LocalJointPoses, SimulatedHandControllerPose.JointCount);
+            Array.Copy(other.LocalJointPoses, pose.LocalJointPoses, BaseHandController.JointCount);
         }
     }
 }

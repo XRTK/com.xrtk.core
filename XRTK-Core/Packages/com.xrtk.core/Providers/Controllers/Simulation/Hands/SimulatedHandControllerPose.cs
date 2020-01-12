@@ -136,7 +136,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         {
             Quaternion cameraRotation = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.transform.rotation;
 
-            for (int i = 0; i < JointCount; i++)
+            for (int i = 0; i < BaseHandController.JointCount; i++)
             {
                 // Initialize from local offsets
                 Vector3 p = LocalJointPoses[i].Position;
@@ -170,7 +170,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             var invRotation = Quaternion.Inverse(rotation);
             var invCameraRotation = Quaternion.Inverse(MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.transform.rotation);
 
-            for (int i = 0; i < JointCount; i++)
+            for (int i = 0; i < BaseHandController.JointCount; i++)
             {
                 Vector3 p = joints[i].Position;
                 Quaternion r = joints[i].Rotation;
@@ -200,7 +200,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         public void SetZero()
         {
-            for (int i = 0; i < JointCount; i++)
+            for (int i = 0; i < BaseHandController.JointCount; i++)
             {
                 LocalJointPoses[i] = MixedRealityPose.ZeroIdentity;
             }
@@ -214,9 +214,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <param name="t">The parameter t is clamped to the range [0,1].</param>
         public static SimulatedHandControllerPose Lerp(SimulatedHandControllerPose a, SimulatedHandControllerPose b, float t)
         {
-            MixedRealityPose[] updatedJointPoses = new MixedRealityPose[JointCount];
+            MixedRealityPose[] updatedJointPoses = new MixedRealityPose[BaseHandController.JointCount];
 
-            for (int i = 0; i < JointCount; i++)
+            for (int i = 0; i < BaseHandController.JointCount; i++)
             {
                 MixedRealityPose jointPoseA = a.LocalJointPoses[i];
                 MixedRealityPose jointPoseB = b.LocalJointPoses[i];

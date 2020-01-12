@@ -32,7 +32,7 @@ namespace XRTK.Providers.Controllers.Hands
         private const float currentVelocityWeight = .8f;
         private const float newVelocityWeight = .2f;
         private float deltaTimeStart;
-        private Vector3 lastPosition;
+        private Vector3 lastPalmPosition;
         private Vector3 lastPalmNormal;
         private readonly int velocityUpdateInterval = 9;
         private int frameOn = 0;
@@ -98,7 +98,7 @@ namespace XRTK.Providers.Controllers.Hands
         protected virtual void UpdateBase(HandData handData)
         {
             UpdateJoints(handData);
-            UpdateBounds(handData);
+            UpdateBounds();
             UpdateVelocity();
 
             MixedRealityToolkit.InputSystem.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);
@@ -127,13 +127,10 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Updates the controller's axis aligned bounds using provided hand data.
         /// </summary>
-        /// <param name="handData">The updated hand data for this controller.</param>
-        protected virtual void UpdateBounds(HandData handData)
+        protected virtual void UpdateBounds()
         {
-            IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> jointPoses = handData.Joints.ToJointPoseDictionary();
-
             // TrackedHandBounds.Hand
-            if (jointPoses.TryGetValue(TrackedHandJoint.Palm, out MixedRealityPose palmPose))
+            if (TryGetJointPose(TrackedHandJoint.Palm, out MixedRealityPose palmPose))
             {
                 Bounds newHandBounds = new Bounds(palmPose.Position, Vector3.zero);
                 foreach (var kvp in jointPoses)
@@ -158,8 +155,8 @@ namespace XRTK.Providers.Controllers.Hands
             }
 
             // TrackedHandBounds.IndexFinger
-            if (JointPoses.TryGetValue(TrackedHandJoint.IndexKnuckle, out MixedRealityPose indexKnucklePose)
-                && JointPoses.TryGetValue(TrackedHandJoint.IndexMiddleJoint, out MixedRealityPose indexMiddlePose))
+            if (TryGetJointPose(TrackedHandJoint.IndexKnuckle, out MixedRealityPose indexKnucklePose)
+                && TryGetJointPose(TrackedHandJoint.IndexMiddleJoint, out MixedRealityPose indexMiddlePose))
             {
                 Bounds newIndexFingerBounds = new Bounds(indexKnucklePose.Position, Vector3.zero);
                 newIndexFingerBounds.Encapsulate(indexMiddlePose.Position);
@@ -183,17 +180,17 @@ namespace XRTK.Providers.Controllers.Hands
             if (frameOn == 0)
             {
                 deltaTimeStart = Time.unscaledTime;
-                lastPosition = GetJointPosition(TrackedHandJoint.Palm);
+                lastPalmPosition = GetJointPosition(TrackedHandJoint.Palm);
                 lastPalmNormal = PalmNormal;
             }
             else if (frameOn == velocityUpdateInterval)
             {
-                //update linear velocity
+                // Update linear velocity.
                 float deltaTime = Time.unscaledTime - deltaTimeStart;
-                Vector3 newVelocity = (GetJointPosition(TrackedHandJoint.Palm) - lastPosition) / deltaTime;
+                Vector3 newVelocity = (GetJointPosition(TrackedHandJoint.Palm) - lastPalmPosition) / deltaTime;
                 Velocity = (Velocity * currentVelocityWeight) + (newVelocity * newVelocityWeight);
 
-                //update angular velocity
+                // Update angular velocity.
                 Vector3 currentPalmNormal = PalmNormal;
                 Quaternion rotation = Quaternion.FromToRotation(lastPalmNormal, currentPalmNormal);
                 Vector3 rotationRate = rotation.eulerAngles * Mathf.Deg2Rad;

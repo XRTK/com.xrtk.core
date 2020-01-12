@@ -39,18 +39,6 @@ namespace XRTK.Interfaces.Providers.Controllers
         IMixedRealityControllerVisualizer Visualizer { get; }
 
         /// <summary>
-        /// The controller's angular velocity, if any.
-        /// Angular velocity refers to how fast an object rotates or revolves relative
-        /// to another point.
-        /// </summary>
-        UnityEngine.Vector3 AngularVelocity { get; }
-
-        /// <summary>
-        /// The controller's velocity, if any.
-        /// </summary>
-        UnityEngine.Vector3 Velocity { get; }
-
-        /// <summary>
         /// Indicates that this controller is currently providing position data.
         /// </summary>
         /// <remarks>
@@ -85,17 +73,12 @@ namespace XRTK.Interfaces.Providers.Controllers
         bool SetupConfiguration(Type controllerType);
 
         /// <summary>
-        /// Attempts to load the controller model render settings from the <see cref="MixedRealityControllerVisualizationProfile"/>
+        /// Attempts to load the controller model render settings from the <see cref="Definitions.Controllers.MixedRealityControllerVisualizationProfile"/>
         /// to render the controllers in the scene.
         /// </summary>
         /// <param name="controllerType">The controller type.</param>
         /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
         /// <returns>True, if controller model is being properly rendered.</returns>
         void TryRenderControllerModel(Type controllerType, byte[] glbData = null);
-
-        /// <summary>
-        /// Updates the current readings for the controller.
-        /// </summary
-        void UpdateController();
     }
 }

@@ -8,7 +8,9 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Definitions.Utilities;
 using XRTK.Services;
+using XRTK.Utilities;
 using XRTK.Utilities.Editor;
 using Object = UnityEngine.Object;
 
@@ -184,6 +186,27 @@ namespace XRTK.Inspectors.Utilities
                 EditorGUILayout.HelpBox("This profile is part of the default set from the Mixed Reality Toolkit SDK. You can make a copy of this profile, and customize it if needed.", MessageType.Warning);
                 GUI.enabled = !disableInspector;
             }
+        }
+
+        /// <summary>
+        /// Checks if the profile can be inspected with the currently active build target and renders
+        /// a hint to switch build target if not.
+        /// </summary>
+        /// <param name="supportedPlatforms">The supported platforms by the profile.</param>
+        /// <param name="infoText">Optional info text to override info box text.</param>
+        /// <returns>True, if the profile and the active build target match.</returns>
+        public static bool CheckProfilePlatform(SupportedPlatforms supportedPlatforms, string infoText = null)
+        {
+            if (!PlatformUtility.IsPlatformSupported(EditorUserBuildSettings.activeBuildTarget, supportedPlatforms))
+            {
+                EditorGUILayout.HelpBox(string.IsNullOrWhiteSpace(infoText) ?
+                   $"You can't edit this profile with the current build target. Please switch to {supportedPlatforms}."
+                   : infoText, MessageType.Info);
+
+                return false;
+            }
+
+            return true;
         }
 
         #endregion Utilities

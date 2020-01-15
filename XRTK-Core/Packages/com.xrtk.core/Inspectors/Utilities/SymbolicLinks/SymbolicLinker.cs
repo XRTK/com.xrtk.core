@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -28,10 +27,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         }
 
         private const string LINK_ICON_TEXT = "<=link=>";
-        private const string REGEX_BRACKETS = @"\{(.*?)\}";
         private const FileAttributes FOLDER_SYMLINK_ATTRIBUTES = FileAttributes.ReparsePoint;
-
-        private static readonly Regex BracketRegex = new Regex(REGEX_BRACKETS);
 
         // Style used to draw the symlink indicator in the project view.
         private static GUIStyle SymlinkMarkerStyle => symbolicLinkMarkerStyle ?? (symbolicLinkMarkerStyle = new GUIStyle(EditorStyles.label)
@@ -127,6 +123,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 Debug.Log("Verifying project's symbolic links...");
             }
 
+            bool needsUpdate = false;
             var symbolicLinks = new List<SymbolicLink>(Settings.SymbolicLinks);
 
             foreach (var link in symbolicLinks)
@@ -148,7 +145,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                     if (link.IsActive) { continue; }
 
                     // Check to see if there are any directories that don't belong and remove them.
-                    DisableLink(link.TargetRelativePath);
+                    needsUpdate |= DisableLink(link.TargetRelativePath);
                     continue;
                 }
 
@@ -158,7 +155,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 {
                     if (link.IsActive)
                     {
-                        AddLink(sourceAbsolutePath, targetAbsolutePath);
+                        needsUpdate |= AddLink(sourceAbsolutePath, targetAbsolutePath);
                     }
 
                     continue;
@@ -172,14 +169,14 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 {
                     if (link.IsActive)
                     {
-                        AddLink(sourceAbsolutePath, targetAbsolutePath);
+                        needsUpdate |= AddLink(sourceAbsolutePath, targetAbsolutePath);
                     }
 
                     continue;
                 }
 
                 Debug.LogError($"Unable to find symbolic link source path: {sourceAbsolutePath}");
-                RemoveLink(link.SourceRelativePath, link.TargetRelativePath);
+                needsUpdate |= RemoveLink(link.SourceRelativePath, link.TargetRelativePath);
             }
 
             if (DebugEnabled)
@@ -187,12 +184,15 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 Debug.Log("Project symbolic links verified.");
             }
 
-            EditorUtility.SetDirty(Settings);
-            AssetDatabase.SaveAssets();
-
-            if (!EditorApplication.isUpdating)
+            if (needsUpdate)
             {
-                AssetDatabase.Refresh();
+                EditorUtility.SetDirty(Settings);
+                AssetDatabase.SaveAssets();
+
+                if (!EditorApplication.isUpdating)
+                {
+                    AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+                }
             }
 
             EditorApplication.UnlockReloadAssemblies();
@@ -204,12 +204,12 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// </summary>
         /// <param name="sourceAbsolutePath"></param>
         /// <param name="targetAbsolutePath"></param>
-        public static void AddLink(string sourceAbsolutePath, string targetAbsolutePath)
+        public static bool AddLink(string sourceAbsolutePath, string targetAbsolutePath)
         {
             if (string.IsNullOrEmpty(sourceAbsolutePath) || string.IsNullOrEmpty(targetAbsolutePath))
             {
                 Debug.LogError("Unable to write to the symbolic link settings with null or empty parameters.");
-                return;
+                return false;
             }
 
             targetAbsolutePath = AddSubfolderPathToTarget(sourceAbsolutePath, targetAbsolutePath);
@@ -224,7 +224,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
             if (!CreateSymbolicLink(sourceAbsolutePath, targetAbsolutePath))
             {
-                return;
+                return false;
             }
 
             SymbolicLink symbolicLink;
@@ -250,13 +250,15 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                     symbolicLink.IsActive = true;
                 }
             }
+
+            return true;
         }
 
         /// <summary>
         /// Disables a symbolic link in the settings.
         /// </summary>
         /// <param name="targetRelativePath"></param>
-        public static void DisableLink(string targetRelativePath)
+        public static bool DisableLink(string targetRelativePath)
         {
             var symbolicLink = Settings.SymbolicLinks.Find(link => link.TargetRelativePath == targetRelativePath);
 
@@ -266,12 +268,15 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 {
                     Debug.Log($"Disabled symbolic link to \"{symbolicLink.SourceRelativePath}\" in project.");
                     symbolicLink.IsActive = false;
+                    return true;
                 }
             }
             else
             {
                 Debug.LogError($"Unable to find the specified symbolic link at: {targetRelativePath}");
             }
+
+            return false;
         }
 
         /// <summary>
@@ -279,9 +284,12 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
         /// </summary>
         /// <param name="sourceRelativePath"></param>
         /// <param name="targetRelativePath"></param>
-        public static void RemoveLink(string sourceRelativePath, string targetRelativePath)
+        public static bool RemoveLink(string sourceRelativePath, string targetRelativePath)
         {
-            DisableLink(targetRelativePath);
+            if (!DisableLink(targetRelativePath))
+            {
+                return false;
+            }
 
             var symbolicLink = Settings.SymbolicLinks.Find(link => link.SourceRelativePath == sourceRelativePath);
 
@@ -289,11 +297,11 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
             {
                 Debug.Log($"Removed symbolic link to \"{symbolicLink.SourceRelativePath}\" from project.");
                 Settings.SymbolicLinks.Remove(symbolicLink);
+                return true;
             }
-            else
-            {
-                Debug.LogError($"Unable to find the specified symbolic link source at: {sourceRelativePath}");
-            }
+
+            Debug.LogError($"Unable to find the specified symbolic link source at: {sourceRelativePath}");
+            return false;
         }
 
         private static void OnProjectWindowItemGui(string guid, Rect rect)
@@ -393,7 +401,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
 
             if (!EditorApplication.isUpdating)
             {
-                AssetDatabase.Refresh();
+                AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
             }
 
             return true;
@@ -407,7 +415,7 @@ namespace XRTK.Inspectors.Utilities.SymbolicLinks
                 return false;
             }
 
-            bool success = false;
+            bool success;
 
 #if UNITY_EDITOR_WIN
             success = new Process().Run($"rmdir /q \"{path}\"", out _);

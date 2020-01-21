@@ -16,8 +16,7 @@ namespace XRTK.Providers.Controllers.Simulation
 {
     /// <summary>
     /// The simulated controller data provider is mainly responsible for managing
-    /// active simulated controllers, such as hand controllers. All active controllers
-    /// at a given time are accessible via <see cref="BaseControllerDataProvider.ActiveControllers"/>.
+    /// active simulated controllers, such as hand controllers.
     /// </summary>
     public class SimulatedControllerDataProvider : BaseControllerDataProvider
     {
@@ -34,6 +33,7 @@ namespace XRTK.Providers.Controllers.Simulation
         }
 
         private readonly SimulatedControllerDataProviderProfile profile;
+        private readonly List<BaseController> activeControllers = new List<BaseController>();
         private SimulationTimeStampStopWatch simulatedUpdateStopWatch;
         private long lastSimulatedUpdateTimeStamp = 0;
 
@@ -73,6 +73,13 @@ namespace XRTK.Providers.Controllers.Simulation
         /// Gets the default distance fom the camera to spawn simulated controllers at.
         /// </summary>
         public float DefaultDistance => profile.DefaultDistance;
+
+        /// <summary>
+        /// Gets a read only list of active controllers. This property hides the inherited
+        /// active controllers property.
+        /// </summary>
+        /// <remarks>Subject to change, once the new controller refactorings are in place.</remarks>
+        public new IReadOnlyList<BaseController> ActiveControllers => activeControllers;
 
         /// <inheritdoc />
         public override void Enable()

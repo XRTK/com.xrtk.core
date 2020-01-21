@@ -44,7 +44,7 @@ namespace XRTK.Services
             {
                 var eventListener = EventListeners[i];
                 Debug.Assert(eventListener != null, $"An object at index {i} has been destroyed but remains in the event handler list for {Name}.BaseEventSystem");
-                ExecuteEvents.Execute(EventListeners[i], eventData, eventHandler);
+                ExecuteEvents.Execute(eventListener, eventData, eventHandler);
             }
 
             eventExecutionDepth--;

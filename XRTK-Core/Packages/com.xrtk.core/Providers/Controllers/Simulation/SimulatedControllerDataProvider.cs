@@ -9,7 +9,6 @@ using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Simulation
@@ -135,7 +134,7 @@ namespace XRTK.Providers.Controllers.Simulation
 
                 if (leftControllerIsAlwaysVisible || leftControllerIsTracked)
                 {
-                    GetOrAddController(Handedness.Left);
+                    CreateControllerIfNotExists(Handedness.Left);
                 }
                 else
                 {
@@ -159,7 +158,7 @@ namespace XRTK.Providers.Controllers.Simulation
 
                 if (rightControllerIsAlwaysVisible || rightControllerIsTracked)
                 {
-                    GetOrAddController(Handedness.Right);
+                    CreateControllerIfNotExists(Handedness.Right);
                 }
                 else
                 {
@@ -170,22 +169,22 @@ namespace XRTK.Providers.Controllers.Simulation
             }
         }
 
-        private IMixedRealityController GetOrAddController(Handedness handedness)
+        private void CreateControllerIfNotExists(Handedness handedness)
         {
-            if (TryGetController(handedness, out IMixedRealityController existingController))
+            if (TryGetController(handedness, out _))
             {
-                return existingController;
+                return;
             }
 
-            IMixedRealityPointer[] pointers = RequestPointers(profile.SimulatedControllerType, handedness);
+            IMixedRealityPointer[] pointers = RequestPointers(profile.SimulatedControllerType, handedness, true);
             IMixedRealityInputSource inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{profile.SimulatedControllerType.Type.Name} {handedness}", pointers);
-            IMixedRealityController controller = (IMixedRealityController)Activator.CreateInstance(profile.SimulatedControllerType, TrackingState.Tracked, handedness, inputSource, null);
+            BaseController controller = (BaseController)Activator.CreateInstance(profile.SimulatedControllerType, TrackingState.Tracked, handedness, inputSource, null);
 
             if (controller == null || !controller.SetupConfiguration(profile.SimulatedControllerType))
             {
                 // Controller failed to be setup correctly.
                 // Return null so we don't raise the source detected.
-                return null;
+                return;
             }
 
             for (int i = 0; i < controller.InputSource?.Pointers?.Length; i++)
@@ -193,22 +192,21 @@ namespace XRTK.Providers.Controllers.Simulation
                 controller.InputSource.Pointers[i].Controller = controller;
             }
 
-            MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);
             if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile.RenderMotionControllers)
             {
                 controller.TryRenderControllerModel(profile.SimulatedControllerType);
             }
 
-            AddController(controller);
-            return controller as IMixedRealityHandController;
+            MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);
+            activeControllers.Add(controller);
         }
 
         private void RemoveController(Handedness handedness)
         {
-            if (TryGetController(handedness, out IMixedRealityController controller))
+            if (TryGetController(handedness, out BaseController controller))
             {
                 MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
-                RemoveController(controller);
+                activeControllers.Remove(controller);
             }
         }
 
@@ -217,17 +215,16 @@ namespace XRTK.Providers.Controllers.Simulation
             while (ActiveControllers.Count > 0)
             {
                 // It's important here to pass the handedness. Passing the controller
-                // will execute the base RmoveController implementation, which will remove
-                // the controller but not RaiseSourceLost.
+                // will execute the base RmoveController implementation.
                 RemoveController(ActiveControllers[0].ControllerHandedness);
             }
         }
 
-        private bool TryGetController(Handedness handedness, out IMixedRealityController controller)
+        private bool TryGetController(Handedness handedness, out BaseController controller)
         {
             for (int i = 0; i < ActiveControllers.Count; i++)
             {
-                IMixedRealityController existingController = ActiveControllers[i];
+                BaseController existingController = ActiveControllers[i];
                 if (existingController.ControllerHandedness == handedness)
                 {
                     controller = existingController;

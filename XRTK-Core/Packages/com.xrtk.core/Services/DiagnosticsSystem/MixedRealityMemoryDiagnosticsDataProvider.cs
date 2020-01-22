@@ -1,7 +1,6 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using UnityEngine;
 using UnityEngine.Profiling;
 using XRTK.Definitions.DiagnosticsSystem;
 
@@ -23,8 +22,6 @@ namespace XRTK.Services.DiagnosticsSystem
         {
         }
 
-        private int systemMemorySize;
-        private int lastSystemMemorySize;
         private ulong lastMemoryUsage;
         private ulong peakMemoryUsage;
         private ulong lastMemoryLimit;
@@ -36,18 +33,14 @@ namespace XRTK.Services.DiagnosticsSystem
         {
             base.LateUpdate();
 
-            systemMemorySize = SystemInfo.systemMemorySize;
+            var systemMemorySize = (ulong)Profiler.GetTotalReservedMemoryLong();
 
-            if (lastSystemMemorySize != systemMemorySize)
+            if (lastMemoryUsage != systemMemorySize)
             {
-                lastSystemMemorySize = systemMemorySize;
-
-                var currentMemoryLimit = DiagnosticsUtils.ConvertMegabytesToBytes(lastSystemMemorySize);
-
-                if (currentMemoryLimit != lastMemoryLimit)
+                if (systemMemorySize > lastMemoryLimit)
                 {
-                    MixedRealityToolkit.DiagnosticsSystem.RaiseMemoryLimitChanged(new MemoryLimit(currentMemoryLimit));
-                    lastMemoryLimit = currentMemoryLimit;
+                    MixedRealityToolkit.DiagnosticsSystem.RaiseMemoryLimitChanged(new MemoryLimit(systemMemorySize));
+                    lastMemoryLimit = systemMemorySize;
                 }
             }
 

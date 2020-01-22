@@ -160,7 +160,7 @@ namespace XRTK.Providers.Controllers
         /// <param name="controllerType">The controller type.</param>
         /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
         /// <returns>True, if controller model is being properly rendered.</returns>
-        internal async void TryRenderControllerModel(Type controllerType, byte[] glbData = null) => await TryRenderControllerModelAsync(controllerType, glbData);
+        public async void TryRenderControllerModel(Type controllerType, byte[] glbData = null) => await TryRenderControllerModelAsync(controllerType, glbData);
 
         /// <summary>
         /// Attempts to load the controller model render settings from the <see cref="MixedRealityControllerVisualizationProfile"/>

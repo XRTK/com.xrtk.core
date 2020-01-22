@@ -3,6 +3,8 @@
 
 using System;
 using System.Text;
+using UnityEditor;
+using UnityEngine;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Providers.Controllers;
@@ -12,13 +14,21 @@ namespace XRTK.Utilities.Editor
 {
     public static class ValidateConfiguration
     {
+        private const string IgnoreKey = "_MixedRealityToolkit_Editor_IgnoreControllerMappingsPrompts";
+
         /// <summary>
-        /// 
+        /// Controller Mapping function to test for a controller mappings for a specific hand
         /// </summary>
-        /// <param name="mappingTypesToValidate"></param>
+        /// <param name="mappingTypesToValidate">Array of controller mappings to validate</param>
+        /// <param name="controllerHandedness">The <see cref="Handedness"/> of the controller to valiadte</param>
         /// <returns></returns>
         public static bool ValidateControllerMappings(Type[] mappingTypesToValidate, Handedness controllerHandedness)
         {
+            if (Application.isPlaying || EditorPrefs.GetBool(IgnoreKey, false) )
+            {
+                return false;
+            }
+
             if (MixedRealityToolkit.HasActiveProfile)
             {
                 var mappingConfigurationSource = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.MixedRealityControllerMappings;
@@ -52,11 +62,15 @@ namespace XRTK.Utilities.Editor
                                 errorDescription.AppendLine($" - [{mappingTypesToValidate[i]}]");
                             }
                         }
+                        errorDescription.AppendLine($"\nYou will need to either create a profile and add it to your Controller mappings, or assign the default from the 'DefaultProfiles' folder in the associated package");
 #if UNITY_EDITOR
-                        UnityEditor.EditorUtility.DisplayDialog("Controller Mappings not found", errorDescription.ToString(), "Ok");
+                        if (EditorUtility.DisplayDialog("Controller Mappings not found", errorDescription.ToString(), "Ignore", "Later"))
+                        {
+                            EditorPrefs.SetBool(IgnoreKey, true);
+                        }
 #endif //UNITY_EDITOR
-                    }
-                    else
+                }
+                else
                     {
                         return true;
                     }
@@ -65,6 +79,11 @@ namespace XRTK.Utilities.Editor
             return false;
         }
 
+        /// <summary>
+        /// Controller Mapping function to test for a controller mappings 
+        /// </summary>
+        /// <param name="mappingTypesToValidate">Array of controller mappings to validate</param>
+        /// <returns></returns>
         public static bool ValidateControllerProfiles(Type[] mappingTypesToValidate)
         {
             if (MixedRealityToolkit.HasActiveProfile)
@@ -107,8 +126,12 @@ namespace XRTK.Utilities.Editor
                                 errorDescription.AppendLine($" - [{mappingTypesToValidate[i]}]");
                             }
                         }
+                        errorDescription.AppendLine($"\nYou will need to either create a profile and add it to your Controller mappings, or assign the default from the 'DefaultProfiles' folder in the associated package");
 #if UNITY_EDITOR
-                        UnityEditor.EditorUtility.DisplayDialog("Controller Mappings not found", errorDescription.ToString(), "Ok");
+                        if (EditorUtility.DisplayDialog("Controller Mappings not found", errorDescription.ToString(), "Ignore", "Later"))
+                        {
+                            EditorPrefs.SetBool(IgnoreKey, true);
+                        }
 #endif //UNITY_EDITOR
                     }
                     else

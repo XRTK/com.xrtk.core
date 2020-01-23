@@ -15,6 +15,10 @@ namespace XRTK.Definitions.Controllers.Hands
         /// <inheritdoc />
         public override SupportedControllerType ControllerType => SupportedControllerType.Hand;
 
+        /// <inheritdoc />
+        public override string TexturePath => $"{base.TexturePath}Hand";
+
+        /// <inheritdoc />
         protected override void Awake()
         {
             if (!HasSetupDefaults)

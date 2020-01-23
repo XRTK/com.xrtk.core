@@ -24,10 +24,12 @@ namespace XRTK.Utilities.Editor
         /// <returns></returns>
         public static bool ValidateControllerMappings(Type[] mappingTypesToValidate, Handedness controllerHandedness)
         {
+#if UNITY_EDITOR
             if (Application.isPlaying || EditorPrefs.GetBool(IgnoreKey, false) )
             {
                 return false;
             }
+#endif //UNITY_EDITOR
 
             if (MixedRealityToolkit.HasActiveProfile)
             {
@@ -86,6 +88,13 @@ namespace XRTK.Utilities.Editor
         /// <returns></returns>
         public static bool ValidateControllerProfiles(Type[] mappingTypesToValidate)
         {
+#if UNITY_EDITOR
+            if (Application.isPlaying || EditorPrefs.GetBool(IgnoreKey, false))
+            {
+                return false;
+            }
+#endif //UNITY_EDITOR
+
             if (MixedRealityToolkit.HasActiveProfile)
             {
                 var mappingConfigurationSource = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.MixedRealityControllerMappings;

@@ -3,9 +3,8 @@
 
 using UnityEditor;
 using XRTK.Definitions.Controllers.Simulation.Hands;
-using XRTK.Inspectors.Profiles.InputSystem.Controllers;
 
-namespace XRTK.Inspectors.Profiles
+namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 {
     [CustomEditor(typeof(SimulatedHandControllerMappingProfile))]
     public class SimulationHandControllerMappingProfileInspector : BaseMixedRealityControllerMappingProfileInspector

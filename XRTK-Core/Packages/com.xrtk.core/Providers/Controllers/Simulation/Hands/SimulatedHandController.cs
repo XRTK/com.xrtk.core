@@ -18,7 +18,7 @@ using XRTK.Services;
 namespace XRTK.Providers.Controllers.Simulation.Hands
 {
     /// <summary>
-    /// The default hand controller implementation for the hand simulation.
+    /// Hand controller type for simulated hand controllers.
     /// </summary>
     public class SimulatedHandController : BaseHandController, IMixedRealitySimulatedController
     {

@@ -74,6 +74,11 @@ namespace XRTK.Providers.Controllers.Hands
         public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
 
         /// <inheritdoc />
+        public void UpdateController(HandData handData)
+        {
+        }
+
+        /// <inheritdoc />
         public override void UpdateController()
         {
             for (int i = 0; i < Interactions?.Length; i++)

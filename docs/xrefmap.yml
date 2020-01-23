@@ -14694,6 +14694,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.CheckProfileLock
   nameWithType: MixedRealityInspectorUtility.CheckProfileLock
+- uid: XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.CheckProfilePlatform(XRTK.Definitions.Utilities.SupportedPlatforms,System.String)
+  name: CheckProfilePlatform(SupportedPlatforms, String)
+  href: api/XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.html#XRTK_Inspectors_Utilities_MixedRealityInspectorUtility_CheckProfilePlatform_XRTK_Definitions_Utilities_SupportedPlatforms_System_String_
+  commentId: M:XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.CheckProfilePlatform(XRTK.Definitions.Utilities.SupportedPlatforms,System.String)
+  fullName: XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.CheckProfilePlatform(XRTK.Definitions.Utilities.SupportedPlatforms, System.String)
+  nameWithType: MixedRealityInspectorUtility.CheckProfilePlatform(SupportedPlatforms, String)
+- uid: XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.CheckProfilePlatform*
+  name: CheckProfilePlatform
+  href: api/XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.html#XRTK_Inspectors_Utilities_MixedRealityInspectorUtility_CheckProfilePlatform_
+  commentId: Overload:XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.CheckProfilePlatform
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.CheckProfilePlatform
+  nameWithType: MixedRealityInspectorUtility.CheckProfilePlatform
 - uid: XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.CircleMoveHandle(UnityEngine.Object,UnityEngine.Vector3,System.Single,System.Single,System.Single,System.Single,System.Boolean,System.Boolean)
   name: CircleMoveHandle(Object, Vector3, Single, Single, Single, Single, Boolean, Boolean)
   href: api/XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.html#XRTK_Inspectors_Utilities_MixedRealityInspectorUtility_CircleMoveHandle_UnityEngine_Object_UnityEngine_Vector3_System_Single_System_Single_System_Single_System_Single_System_Boolean_System_Boolean_
@@ -19154,6 +19167,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.Providers.Controllers.IMixedRealityController.IsRotationAvailable
   nameWithType: IMixedRealityController.IsRotationAvailable
+- uid: XRTK.Interfaces.Providers.Controllers.IMixedRealityController.SetupConfiguration(System.Type)
+  name: SetupConfiguration(Type)
+  href: api/XRTK.Interfaces.Providers.Controllers.IMixedRealityController.html#XRTK_Interfaces_Providers_Controllers_IMixedRealityController_SetupConfiguration_System_Type_
+  commentId: M:XRTK.Interfaces.Providers.Controllers.IMixedRealityController.SetupConfiguration(System.Type)
+  fullName: XRTK.Interfaces.Providers.Controllers.IMixedRealityController.SetupConfiguration(System.Type)
+  nameWithType: IMixedRealityController.SetupConfiguration(Type)
+- uid: XRTK.Interfaces.Providers.Controllers.IMixedRealityController.SetupConfiguration*
+  name: SetupConfiguration
+  href: api/XRTK.Interfaces.Providers.Controllers.IMixedRealityController.html#XRTK_Interfaces_Providers_Controllers_IMixedRealityController_SetupConfiguration_
+  commentId: Overload:XRTK.Interfaces.Providers.Controllers.IMixedRealityController.SetupConfiguration
+  isSpec: "True"
+  fullName: XRTK.Interfaces.Providers.Controllers.IMixedRealityController.SetupConfiguration
+  nameWithType: IMixedRealityController.SetupConfiguration
 - uid: XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TrackingState
   name: TrackingState
   href: api/XRTK.Interfaces.Providers.Controllers.IMixedRealityController.html#XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TrackingState
@@ -19167,6 +19193,22 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TrackingState
   nameWithType: IMixedRealityController.TrackingState
+- uid: XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModel(System.Type,System.Byte[])
+  name: TryRenderControllerModel(Type, Byte[])
+  href: api/XRTK.Interfaces.Providers.Controllers.IMixedRealityController.html#XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TryRenderControllerModel_System_Type_System_Byte___
+  commentId: M:XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModel(System.Type,System.Byte[])
+  name.vb: TryRenderControllerModel(Type, Byte())
+  fullName: XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModel(System.Type, System.Byte[])
+  fullName.vb: XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModel(System.Type, System.Byte())
+  nameWithType: IMixedRealityController.TryRenderControllerModel(Type, Byte[])
+  nameWithType.vb: IMixedRealityController.TryRenderControllerModel(Type, Byte())
+- uid: XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModel*
+  name: TryRenderControllerModel
+  href: api/XRTK.Interfaces.Providers.Controllers.IMixedRealityController.html#XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TryRenderControllerModel_
+  commentId: Overload:XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModel
+  isSpec: "True"
+  fullName: XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModel
+  nameWithType: IMixedRealityController.TryRenderControllerModel
 - uid: XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Visualizer
   name: Visualizer
   href: api/XRTK.Interfaces.Providers.Controllers.IMixedRealityController.html#XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Visualizer
@@ -24578,6 +24620,22 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.BaseController.TrackingState
   nameWithType: BaseController.TrackingState
+- uid: XRTK.Providers.Controllers.BaseController.TryRenderControllerModel(System.Type,System.Byte[])
+  name: TryRenderControllerModel(Type, Byte[])
+  href: api/XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_TryRenderControllerModel_System_Type_System_Byte___
+  commentId: M:XRTK.Providers.Controllers.BaseController.TryRenderControllerModel(System.Type,System.Byte[])
+  name.vb: TryRenderControllerModel(Type, Byte())
+  fullName: XRTK.Providers.Controllers.BaseController.TryRenderControllerModel(System.Type, System.Byte[])
+  fullName.vb: XRTK.Providers.Controllers.BaseController.TryRenderControllerModel(System.Type, System.Byte())
+  nameWithType: BaseController.TryRenderControllerModel(Type, Byte[])
+  nameWithType.vb: BaseController.TryRenderControllerModel(Type, Byte())
+- uid: XRTK.Providers.Controllers.BaseController.TryRenderControllerModel*
+  name: TryRenderControllerModel
+  href: api/XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_TryRenderControllerModel_
+  commentId: Overload:XRTK.Providers.Controllers.BaseController.TryRenderControllerModel
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.BaseController.TryRenderControllerModel
+  nameWithType: BaseController.TryRenderControllerModel
 - uid: XRTK.Providers.Controllers.BaseController.UpdateController
   name: UpdateController()
   href: api/XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_UpdateController

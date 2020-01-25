@@ -74,19 +74,29 @@ namespace XRTK.Providers.Controllers.Hands
         public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
 
         /// <inheritdoc />
-        public void UpdateController(HandData handData)
+        public override void UpdateController()
         {
+            base.UpdateController();
+
+            for (int i = 0; i < Interactions?.Length; i++)
+            {
+                UpdateInteraction(Interactions[i]);
+            }
         }
 
         /// <inheritdoc />
-        public override void UpdateController()
+        public void UpdateController(HandData handData)
         {
             for (int i = 0; i < Interactions?.Length; i++)
             {
                 UpdateInteraction(Interactions[i]);
             }
 
-            base.UpdateController();
+            UpdateJoints(handData);
+            UpdateBounds();
+            UpdateVelocity();
+
+            MixedRealityToolkit.InputSystem.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);
         }
 
         /// <summary>
@@ -94,19 +104,6 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         /// <param name="interactionMapping">Interaction mapping to update.</param>
         protected virtual void UpdateInteraction(MixedRealityInteractionMapping interactionMapping) { }
-
-        /// <summary>
-        /// Updates the state of the hand controller using provided hand data.
-        /// </summary>
-        /// <param name="handData">Updated hand data for this controller.</param>
-        protected virtual void UpdateBase(HandData handData)
-        {
-            UpdateJoints(handData);
-            UpdateBounds();
-            UpdateVelocity();
-
-            MixedRealityToolkit.InputSystem.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);
-        }
 
         /// <summary>
         /// Updates the controller's joint poses using provided hand data.

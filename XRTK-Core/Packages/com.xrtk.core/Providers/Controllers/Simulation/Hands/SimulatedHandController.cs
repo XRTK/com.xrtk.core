@@ -154,49 +154,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         {
             base.UpdateController();
 
-            // Read keyboard / mouse input to determine the root pose delta since last frame.
-            MixedRealityPose rootPoseDelta = new MixedRealityPose(
-                GetHandPositionDelta(), Quaternion.Euler(GetHandRotationDelta()));
-
-            // Calculate pose changes and compute timestamp for hand tracking update.
-            float poseAnimationDelta = dataProvider.HandPoseAnimationSpeed * Time.deltaTime;
-            long timeStamp = handUpdateStopWatch.TimeStamp;
-
-            // Update simualted hand states using collected data.
-            SimulatedHandControllerPose newTargetPose = GetTargetHandPose();
-            bool isTrackedOld = HandData.IsTracked;
-
-            HandleSimulationInput(ref lastSimulatedTimeStamp, rootPoseDelta);
-
-            if (!string.Equals(newTargetPose.Id, Pose.Id) && HandData.IsTracked)
+            if (TryGetSimulatedHandData(out HandData handData))
             {
-                previousPose = Pose;
-                TargetPose = newTargetPose;
-            }
-
-            TargetPoseBlending += poseAnimationDelta;
-
-            bool handDataChanged = false;
-            if (isTrackedOld != HandData.IsTracked)
-            {
-                handDataChanged = true;
-            }
-
-            if (HandData.TimeStamp != timeStamp)
-            {
-                HandData.TimeStamp = timeStamp;
-                if (HandData.IsTracked)
-                {
-                    UpdatePoseFrame();
-                    handDataChanged = true;
-                }
-            }
-
-            lastMousePosition = Input.mousePosition;
-
-            if (handDataChanged)
-            {
-                UpdateBase(HandData);
+                UpdateController(handData);
             }
         }
 
@@ -318,6 +278,58 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 previousPose = Pose;
                 TargetPose = Pose;
             }
+        }
+
+        private bool TryGetSimulatedHandData(out HandData handData)
+        {
+            // Read keyboard / mouse input to determine the root pose delta since last frame.
+            MixedRealityPose rootPoseDelta = new MixedRealityPose(
+                GetHandPositionDelta(), Quaternion.Euler(GetHandRotationDelta()));
+
+            // Calculate pose changes and compute timestamp for hand tracking update.
+            float poseAnimationDelta = dataProvider.HandPoseAnimationSpeed * Time.deltaTime;
+            long timeStamp = handUpdateStopWatch.TimeStamp;
+
+            // Update simualted hand states using collected data.
+            SimulatedHandControllerPose newTargetPose = GetTargetHandPose();
+            bool isTrackedOld = HandData.IsTracked;
+
+            HandleSimulationInput(ref lastSimulatedTimeStamp, rootPoseDelta);
+
+            if (!string.Equals(newTargetPose.Id, Pose.Id) && HandData.IsTracked)
+            {
+                previousPose = Pose;
+                TargetPose = newTargetPose;
+            }
+
+            TargetPoseBlending += poseAnimationDelta;
+
+            bool handDataChanged = false;
+            if (isTrackedOld != HandData.IsTracked)
+            {
+                handDataChanged = true;
+            }
+
+            if (HandData.TimeStamp != timeStamp)
+            {
+                HandData.TimeStamp = timeStamp;
+                if (HandData.IsTracked)
+                {
+                    UpdatePoseFrame();
+                    handDataChanged = true;
+                }
+            }
+
+            lastMousePosition = Input.mousePosition;
+
+            if (handDataChanged)
+            {
+                handData = HandData;
+                return true;
+            }
+
+            handData = null;
+            return false;
         }
 
         private void HandleSimulationInput(ref long lastSimulatedTimeStamp, MixedRealityPose rootPoseDelta)

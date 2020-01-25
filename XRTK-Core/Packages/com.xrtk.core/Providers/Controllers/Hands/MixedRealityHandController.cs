@@ -8,7 +8,7 @@ using XRTK.Interfaces.InputSystem;
 namespace XRTK.Providers.Controllers.Hands
 {
     /// <summary>
-    /// Platform agnostic hand controler type.
+    /// Platform agnostic hand controller type.
     /// </summary>
     public class MixedRealityHandController : BaseHandController
     {

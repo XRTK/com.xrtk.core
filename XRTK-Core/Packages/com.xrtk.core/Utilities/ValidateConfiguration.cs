@@ -10,7 +10,7 @@ using XRTK.Extensions;
 using XRTK.Providers.Controllers;
 using XRTK.Services;
 
-namespace XRTK.Utilities.Editor
+namespace XRTK.Utilities
 {
     public static class ValidateConfiguration
     {

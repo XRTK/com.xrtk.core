@@ -152,8 +152,13 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <inheritdoc />
         public override void UpdateController()
         {
+            // The base implementation will make sure to update interaction
+            // mappings before we try to get simualted data, since simulation
+            // depends on them.
             base.UpdateController();
 
+            // If we have upated simulated data, we can execute the actual
+            // base hand controller update.
             if (TryGetSimulatedHandData(out HandData handData))
             {
                 UpdateController(handData);

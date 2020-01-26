@@ -7,6 +7,7 @@ using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
@@ -55,28 +56,11 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public IReadOnlyDictionary<TrackedHandBounds, Bounds> Bounds => bounds;
 
-        /// <summary>
-        /// The Mixed Reality Controller default interactions.
-        /// </summary>
-        /// <remarks>A single interaction mapping works for both left and right controllers.</remarks>
-        public override MixedRealityInteractionMapping[] DefaultInteractions => new[]
-        {
-            new MixedRealityInteractionMapping(0, "Spatial Pointer", AxisType.SixDof, DeviceInputType.SpatialPointer, MixedRealityInputAction.None),
-            new MixedRealityInteractionMapping(1, "Spatial Grip", AxisType.SixDof, DeviceInputType.SpatialGrip, MixedRealityInputAction.None),
-            new MixedRealityInteractionMapping(2, "Select", AxisType.Digital, DeviceInputType.Select, MixedRealityInputAction.None),
-            new MixedRealityInteractionMapping(3, "Grab", AxisType.SingleAxis, DeviceInputType.TriggerPress, MixedRealityInputAction.None),
-            new MixedRealityInteractionMapping(4, "Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger, MixedRealityInputAction.None),
-        };
-
-        /// <inheritdoc />
-        public override MixedRealityInteractionMapping[] DefaultLeftHandedInteractions => DefaultInteractions;
-
-        /// <inheritdoc />
-        public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
-
         /// <inheritdoc />
         public override void UpdateController()
         {
+            if (!Enabled) { return; }
+
             base.UpdateController();
             UpdateInteractions();
         }
@@ -84,6 +68,8 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public void UpdateController(HandData handData)
         {
+            if (!Enabled) { return; }
+
             UpdateInteractions();
             UpdateJoints(handData);
             UpdateBounds();
@@ -115,13 +101,15 @@ namespace XRTK.Providers.Controllers.Hands
                     interactionMapping.PositionData = Input.mousePosition;
                     break;
             }
+
+            interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
         }
 
         /// <summary>
         /// Updates the controller's joint poses using provided hand data.
         /// </summary>
         /// <param name="handData">The updated hand data for this controller.</param>
-        protected virtual void UpdateJoints(HandData handData)
+        private void UpdateJoints(HandData handData)
         {
             for (int i = 0; i < JointCount; i++)
             {
@@ -140,7 +128,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Updates the controller's axis aligned bounds using provided hand data.
         /// </summary>
-        protected virtual void UpdateBounds()
+        private void UpdateBounds()
         {
             // TrackedHandBounds.Hand
             if (TryGetJointPose(TrackedHandJoint.Palm, out MixedRealityPose palmPose))
@@ -188,7 +176,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Updates the controller's velocity / angular velocity.
         /// </summary>
-        protected void UpdateVelocity()
+        private void UpdateVelocity()
         {
             if (frameOn == 0)
             {
@@ -228,10 +216,7 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <inheritdoc />
-        public override void SetupDefaultInteractions(Handedness controllerHandedness)
-        {
-            AssignControllerMappings(DefaultInteractions);
-        }
+        public override void SetupDefaultInteractions(Handedness controllerHandedness) { }
 
         /// <inheritdoc />
         public virtual bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose)

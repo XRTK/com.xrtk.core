@@ -165,20 +165,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             }
         }
 
-        /// <inheritdoc />
-        protected override void UpdateInteraction(MixedRealityInteractionMapping interactionMapping)
-        {
-            switch (interactionMapping.InputType)
-            {
-                case DeviceInputType.ButtonPress:
-                    interactionMapping.BoolData = Input.GetKey(interactionMapping.KeyCode);
-                    break;
-                case DeviceInputType.PointerPosition:
-                    interactionMapping.PositionData = Input.mousePosition;
-                    break;
-            }
-        }
-
         /// <summary>
         /// Gets a simulated Yaw, Pitch and Roll delta for the current frame.
         /// </summary>

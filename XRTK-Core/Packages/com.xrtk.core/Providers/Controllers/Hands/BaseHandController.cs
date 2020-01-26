@@ -78,21 +78,13 @@ namespace XRTK.Providers.Controllers.Hands
         public override void UpdateController()
         {
             base.UpdateController();
-
-            for (int i = 0; i < Interactions?.Length; i++)
-            {
-                UpdateInteraction(Interactions[i]);
-            }
+            UpdateInteractions();
         }
 
         /// <inheritdoc />
         public void UpdateController(HandData handData)
         {
-            for (int i = 0; i < Interactions?.Length; i++)
-            {
-                UpdateInteraction(Interactions[i]);
-            }
-
+            UpdateInteractions();
             UpdateJoints(handData);
             UpdateBounds();
             UpdateVelocity();
@@ -100,11 +92,30 @@ namespace XRTK.Providers.Controllers.Hands
             MixedRealityToolkit.InputSystem.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);
         }
 
+        private void UpdateInteractions()
+        {
+            for (int i = 0; i < Interactions?.Length; i++)
+            {
+                UpdateInteraction(Interactions[i]);
+            }
+        }
+
         /// <summary>
         /// If needed, update the input from the device for an interaction configured.
         /// </summary>
         /// <param name="interactionMapping">Interaction mapping to update.</param>
-        protected virtual void UpdateInteraction(MixedRealityInteractionMapping interactionMapping) { }
+        protected virtual void UpdateInteraction(MixedRealityInteractionMapping interactionMapping)
+        {
+            switch (interactionMapping.InputType)
+            {
+                case DeviceInputType.ButtonPress:
+                    interactionMapping.BoolData = Input.GetKey(interactionMapping.KeyCode);
+                    break;
+                case DeviceInputType.PointerPosition:
+                    interactionMapping.PositionData = Input.mousePosition;
+                    break;
+            }
+        }
 
         /// <summary>
         /// Updates the controller's joint poses using provided hand data.

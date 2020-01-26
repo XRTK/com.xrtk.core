@@ -28,6 +28,9 @@ namespace XRTK.Providers.Controllers.Hands
         public BaseHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
                 : base(trackingState, controllerHandedness, inputSource, interactions) { }
 
+        private readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
+        private readonly Dictionary<TrackedHandBounds, Bounds> bounds = new Dictionary<TrackedHandBounds, Bounds>();
+
         private const float currentVelocityWeight = .8f;
         private const float newVelocityWeight = .2f;
         private float deltaTimeStart;
@@ -35,8 +38,6 @@ namespace XRTK.Providers.Controllers.Hands
         private Vector3 lastPalmNormal;
         private readonly int velocityUpdateInterval = 9;
         private int frameOn = 0;
-        protected readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
-        private readonly Dictionary<TrackedHandBounds, Bounds> bounds = new Dictionary<TrackedHandBounds, Bounds>();
 
         /// <summary>
         /// Gets the total count of joints a hand controller supports.

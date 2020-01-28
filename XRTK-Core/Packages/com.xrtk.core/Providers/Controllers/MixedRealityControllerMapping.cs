@@ -78,6 +78,11 @@ namespace XRTK.Providers.Controllers
         public MixedRealityInteractionMapping[] Interactions => interactions;
 
         /// <summary>
+        /// Default controller mapping that does not contain any interactions.
+        /// </summary>
+        public static MixedRealityControllerMapping None { get; } = new MixedRealityControllerMapping("None", null);
+
+        /// <summary>
         /// Sets the default interaction mapping based on the current controller type.
         /// </summary>
         internal void SetDefaultInteractionMapping(bool overwrite = false)

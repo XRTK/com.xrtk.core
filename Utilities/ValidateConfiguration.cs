@@ -19,7 +19,7 @@ namespace XRTK.Utilities
         /// Controller Mapping function to test for a controller mappings for a specific hand
         /// </summary>
         /// <param name="mappingTypesToValidate">Array of controller mappings to validate</param>
-        /// <param name="controllerHandedness">The <see cref="Handedness"/> of the controller to valiadte</param>
+        /// <param name="controllerHandedness">The <see cref="Handedness"/> of the controller to validate</param>
         /// <returns></returns>
         public static bool ValidateControllerMappings(Type[] mappingTypesToValidate, Handedness controllerHandedness)
         {

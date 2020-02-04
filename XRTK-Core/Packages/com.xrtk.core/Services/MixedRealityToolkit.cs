@@ -7,6 +7,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using XRTK.Definitions;
+using XRTK.Definitions.PlatformSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces;
@@ -364,11 +365,37 @@ namespace XRTK.Services
             ClearCoreSystemCache();
             EnsureMixedRealityRequirements();
 
-            if (!ActiveProfile.IsPlatformSystemEnabled &&
-                (!CreateAndRegisterService<IMixedRealityPlatformSystem>(ActiveProfile.PlatformSystemType, ActiveProfile.PlatformSystemProfile) ||
-                PlatformSystem == null))
+            if (ActiveProfile.IsPlatformSystemEnabled &&
+                CreateAndRegisterService<IMixedRealityPlatformSystem>(ActiveProfile.PlatformSystemType, ActiveProfile.PlatformSystemProfile) &&
+                PlatformSystem != null)
             {
-                Debug.LogError($"Failed to start the Platform System!\nThe Platform System Type and Profile are required by the {nameof(MixedRealityToolkit)}");
+#if UNITY_EDITOR // Self register any found platforms
+                // TODO Check preferences if platform auto registration is available.
+                var platformTypes = AppDomain.CurrentDomain.GetAssemblies()
+                    .SelectMany(assembly => assembly.GetTypes())
+                    .Where(type => typeof(IMixedRealityPlatform).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
+
+                foreach (var platformType in platformTypes)
+                {
+                    if (ActiveProfile.PlatformSystemProfile.PlatformConfigurations.All(configuration => configuration.PlatformType.Type != platformType))
+                    {
+                        var platformConfigurations = ActiveProfile.PlatformSystemProfile.PlatformConfigurations.ToList();
+                        platformConfigurations.Add(new PlatformConfiguration(platformType, (uint)platformConfigurations.Count));
+                        ActiveProfile.PlatformSystemProfile.PlatformConfigurations = platformConfigurations.OrderBy(configuration => configuration.Priority).ToArray();
+                    }
+                }
+#endif
+                foreach (var platformConfiguration in ActiveProfile.PlatformSystemProfile.PlatformConfigurations)
+                {
+                    if (!CreateAndRegisterService<IMixedRealityPlatform>(platformConfiguration.PlatformType, string.Empty, platformConfiguration.Priority))
+                    {
+                        Debug.LogError($"Failed to initialize {platformConfiguration.PlatformType}!");
+                    }
+                }
+            }
+            else
+            {
+                Debug.LogError($"Failed to find and start a {nameof(IMixedRealityPlatformSystem)}!\nA {nameof(IMixedRealityPlatformSystem)} Type and Profile are required by the {nameof(MixedRealityToolkit)}");
                 isInitializing = false;
                 return;
             }

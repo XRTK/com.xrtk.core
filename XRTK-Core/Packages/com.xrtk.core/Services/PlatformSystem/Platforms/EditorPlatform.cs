@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using UnityEngine;
 using XRTK.Interfaces.PlatformSystem;
 
 namespace XRTK.Services.PlatformSystem.Platforms
@@ -24,16 +25,12 @@ namespace XRTK.Services.PlatformSystem.Platforms
         }
 
         /// <inheritdoc />
-        public bool IsActive
-        {
-            get
-            {
-#if UNITY_EDITOR
-                return true;
-#else
-                return false;
-#endif
-            }
-        }
+        public override string Name => "Editor";
+
+        /// <inheritdoc />
+        public override uint Priority => 0;
+
+        /// <inheritdoc />
+        public bool IsActive => Application.isEditor;
     }
 }

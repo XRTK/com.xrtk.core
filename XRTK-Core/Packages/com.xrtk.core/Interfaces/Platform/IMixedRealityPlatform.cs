@@ -9,7 +9,7 @@ namespace XRTK.Interfaces.PlatformSystem
     public interface IMixedRealityPlatform : IMixedRealityDataProvider
     {
         /// <summary>
-        /// Is this platform currently active and available?
+        /// Is this platform currently active and loaded?
         /// </summary>
         bool IsActive { get; }
     }

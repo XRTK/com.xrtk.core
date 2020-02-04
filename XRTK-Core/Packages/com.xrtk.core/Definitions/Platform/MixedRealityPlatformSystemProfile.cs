@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.PlatformSystem;
 using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.PlatformSystem
@@ -16,6 +15,10 @@ namespace XRTK.Definitions.PlatformSystem
         /// <summary>
         /// The currently registered <see cref="PlatformConfiguration"/>s for the application.
         /// </summary>
-        public PlatformConfiguration[] PlatformConfigurations => platformConfigurations;
+        public PlatformConfiguration[] PlatformConfigurations
+        {
+            get => platformConfigurations;
+            internal set => platformConfigurations = value;
+        }
     }
 }

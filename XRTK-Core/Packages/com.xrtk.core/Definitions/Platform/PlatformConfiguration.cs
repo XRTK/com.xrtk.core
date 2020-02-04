@@ -16,15 +16,11 @@ namespace XRTK.Definitions.PlatformSystem
         /// Constructor.
         /// </summary>
         /// <param name="platformType">The concrete type for the system, feature or manager.</param>
-        /// <param name="platformName">The simple, human readable name for the system, feature, or manager.</param>
         /// <param name="priority">The priority this system, feature, or manager will be initialized in.</param>
-        /// <param name="configurationProfile">The configuration profile for the system, feature, or manager.</param>
-        public PlatformConfiguration(SystemType platformType, string platformName, uint priority, BaseMixedRealityPlatformProfile configurationProfile)
+        public PlatformConfiguration(SystemType platformType, uint priority)
         {
             this.platformType = platformType;
-            this.platformName = platformName;
             this.priority = priority;
-            this.configurationProfile = configurationProfile;
         }
 
         [SerializeField]
@@ -37,27 +33,11 @@ namespace XRTK.Definitions.PlatformSystem
         public SystemType PlatformType => platformType;
 
         [SerializeField]
-        private string platformName;
-
-        /// <summary>
-        /// The simple, human readable name for the system, feature, or manager.
-        /// </summary>
-        public string PlatformName => platformName;
-
-        [SerializeField]
         private uint priority;
 
         /// <summary>
         /// The priority this system, feature, or manager will be initialized in.
         /// </summary>
         public uint Priority => priority;
-
-        [SerializeField]
-        private BaseMixedRealityPlatformProfile configurationProfile;
-
-        /// <summary>
-        /// The configuration profile for the system, feature, or manager.
-        /// </summary>
-        public BaseMixedRealityPlatformProfile ConfigurationProfile => configurationProfile;
     }
 }

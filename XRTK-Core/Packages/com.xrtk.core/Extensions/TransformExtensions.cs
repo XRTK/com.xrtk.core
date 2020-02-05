@@ -104,7 +104,7 @@ namespace XRTK.Extensions
         /// <param name="colliders">Optional cached collider collection.</param>
         /// <returns>The total bounds of all colliders attached to this GameObject.
         /// If no colliders attached, returns a bounds of center and extents 0</returns>
-        public static Bounds GetColliderBounds(this Transform transform, bool syncTransform = true, Collider[] colliders = null)
+        public static Bounds GetColliderBounds(this Transform transform, ref Collider[] colliders, bool syncTransform = true)
         {
             // Store current rotation then zero out the rotation so that the bounds
             // are computed when the object is in its 'axis aligned orientation'.
@@ -338,8 +338,9 @@ namespace XRTK.Extensions
         /// <param name="transform"></param>
         /// <param name="direction"></param>
         /// <param name="bounds"></param>
+        /// <param name="cachedColliders"></param>
         /// <returns></returns>
-        public static Vector3 GetPointOnBoundsEdge(this Transform transform, Vector3 direction, Bounds bounds = default)
+        public static Vector3 GetPointOnBoundsEdge(this Transform transform, Vector3 direction, Bounds bounds = default, Collider[] cachedColliders = null)
         {
             if (direction != Vector3.zero)
             {
@@ -348,7 +349,7 @@ namespace XRTK.Extensions
 
             if (bounds == default)
             {
-                bounds = transform.GetColliderBounds();
+                bounds = transform.GetColliderBounds(ref cachedColliders);
             }
 
             return bounds.center + Vector3.Scale(bounds.size, direction * 0.5f);
@@ -415,6 +416,25 @@ namespace XRTK.Extensions
             }
 
             return colliders;
+        }
+
+        /// <summary>
+        /// Sets the collider and all child colliders active with the provided value.
+        /// </summary>
+        /// <param name="transform"></param>
+        /// <param name="isActive"></param>
+        /// <param name="colliders"></param>
+        public static void SetCollidersActive(this Transform transform, bool isActive, ref Collider[] colliders)
+        {
+            if (colliders == null)
+            {
+                colliders = transform.GetComponentsInChildren<Collider>();
+            }
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                colliders[i].enabled = isActive;
+            }
         }
 
         /// <summary>

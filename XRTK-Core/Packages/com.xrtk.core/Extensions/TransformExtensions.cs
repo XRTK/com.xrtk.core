@@ -101,7 +101,7 @@ namespace XRTK.Extensions
         /// <param name="syncTransform">
         /// True, by default, this will sync the <see cref="transform"/> rotation to calculate the axis aligned orientation.
         /// </param>
-        /// <param name="colliders">Optional cached collider collection.</param>
+        /// <param name="colliders">Referenced Collider collection that will be filled with data if none passed.</param>
         /// <returns>The total bounds of all colliders attached to this GameObject.
         /// If no colliders attached, returns a bounds of center and extents 0</returns>
         public static Bounds GetColliderBounds(this Transform transform, ref Collider[] colliders, bool syncTransform = true)

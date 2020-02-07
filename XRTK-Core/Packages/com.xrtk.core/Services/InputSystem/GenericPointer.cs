@@ -60,8 +60,24 @@ namespace XRTK.Services.InputSystem.Pointers
         /// <inheritdoc />
         public IMixedRealityCursor BaseCursor { get; set; }
 
+        private ICursorModifier cursorModifier = null;
+
         /// <inheritdoc />
-        public ICursorModifier CursorModifier { get; set; }
+        public ICursorModifier CursorModifier
+        {
+            get
+            {
+                if (cursorModifier != null &&
+                    cursorModifier.HostTransform != null &&
+                    !cursorModifier.HostTransform.gameObject.activeInHierarchy)
+                {
+                    cursorModifier = null;
+                }
+
+                return cursorModifier;
+            }
+            set => cursorModifier = value;
+        }
 
         /// <inheritdoc />
         public IMixedRealityTeleportHotSpot TeleportHotSpot { get; set; }

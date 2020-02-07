@@ -339,7 +339,7 @@ namespace XRTK.Extensions
         /// <param name="direction"></param>
         /// <param name="bounds"></param>
         /// <param name="cachedColliders"></param>
-        /// <returns></returns>
+        /// <returns>The point on the bounds edge.</returns>
         public static Vector3 GetPointOnBoundsEdge(this Transform transform, Vector3 direction, Bounds bounds = default, Collider[] cachedColliders = null)
         {
             if (direction != Vector3.zero)
@@ -399,8 +399,8 @@ namespace XRTK.Extensions
         /// <summary>
         /// Sets the collider and all child colliders active with the provided value.
         /// </summary>
-        /// <param name="transform"></param>
-        /// <param name="isActive"></param>
+        /// <param name="transform">This transform to get the colliders from.</param>
+        /// <param name="isActive">The active state of the collider.</param>
         /// <param name="colliders">Optional cached collider collection to use instead of looking them all up.</param>
         /// <returns>The collection of colliders that were acted on. This collection can be used later when calling this method again.</returns>
         public static Collider[] SetCollidersActive(this Transform transform, bool isActive, Collider[] colliders = null)
@@ -421,9 +421,9 @@ namespace XRTK.Extensions
         /// <summary>
         /// Sets the collider and all child colliders active with the provided value.
         /// </summary>
-        /// <param name="transform"></param>
-        /// <param name="isActive"></param>
-        /// <param name="colliders"></param>
+        /// <param name="transform">This transform to get the colliders from.</param>
+        /// <param name="isActive">The active state of the collider.</param>
+        /// <param name="colliders">the colliders to set.</param>
         public static void SetCollidersActive(this Transform transform, bool isActive, ref Collider[] colliders)
         {
             if (colliders == null)

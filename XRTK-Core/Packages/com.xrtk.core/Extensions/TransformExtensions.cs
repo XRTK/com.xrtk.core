@@ -101,10 +101,10 @@ namespace XRTK.Extensions
         /// <param name="syncTransform">
         /// True, by default, this will sync the <see cref="transform"/> rotation to calculate the axis aligned orientation.
         /// </param>
-        /// <param name="colliders">Optional cached collider collection.</param>
+        /// <param name="colliders">Referenced Collider collection that will be filled with data if none passed.</param>
         /// <returns>The total bounds of all colliders attached to this GameObject.
         /// If no colliders attached, returns a bounds of center and extents 0</returns>
-        public static Bounds GetColliderBounds(this Transform transform, bool syncTransform = true, Collider[] colliders = null)
+        public static Bounds GetColliderBounds(this Transform transform, ref Collider[] colliders, bool syncTransform = true)
         {
             // Store current rotation then zero out the rotation so that the bounds
             // are computed when the object is in its 'axis aligned orientation'.
@@ -338,8 +338,9 @@ namespace XRTK.Extensions
         /// <param name="transform"></param>
         /// <param name="direction"></param>
         /// <param name="bounds"></param>
-        /// <returns></returns>
-        public static Vector3 GetPointOnBoundsEdge(this Transform transform, Vector3 direction, Bounds bounds = default)
+        /// <param name="cachedColliders"></param>
+        /// <returns>The point on the bounds edge.</returns>
+        public static Vector3 GetPointOnBoundsEdge(this Transform transform, Vector3 direction, Bounds bounds = default, Collider[] cachedColliders = null)
         {
             if (direction != Vector3.zero)
             {
@@ -348,7 +349,7 @@ namespace XRTK.Extensions
 
             if (bounds == default)
             {
-                bounds = transform.GetColliderBounds();
+                bounds = transform.GetColliderBounds(ref cachedColliders);
             }
 
             return bounds.center + Vector3.Scale(bounds.size, direction * 0.5f);
@@ -398,8 +399,8 @@ namespace XRTK.Extensions
         /// <summary>
         /// Sets the collider and all child colliders active with the provided value.
         /// </summary>
-        /// <param name="transform"></param>
-        /// <param name="isActive"></param>
+        /// <param name="transform">This transform to get the colliders from.</param>
+        /// <param name="isActive">The active state of the collider.</param>
         /// <param name="colliders">Optional cached collider collection to use instead of looking them all up.</param>
         /// <returns>The collection of colliders that were acted on. This collection can be used later when calling this method again.</returns>
         public static Collider[] SetCollidersActive(this Transform transform, bool isActive, Collider[] colliders = null)
@@ -415,6 +416,25 @@ namespace XRTK.Extensions
             }
 
             return colliders;
+        }
+
+        /// <summary>
+        /// Sets the collider and all child colliders active with the provided value.
+        /// </summary>
+        /// <param name="transform">This transform to get the colliders from.</param>
+        /// <param name="isActive">The active state of the collider.</param>
+        /// <param name="colliders">the colliders to set.</param>
+        public static void SetCollidersActive(this Transform transform, bool isActive, ref Collider[] colliders)
+        {
+            if (colliders == null)
+            {
+                colliders = transform.GetComponentsInChildren<Collider>();
+            }
+
+            for (int i = 0; i < colliders.Length; i++)
+            {
+                colliders[i].enabled = isActive;
+            }
         }
 
         /// <summary>

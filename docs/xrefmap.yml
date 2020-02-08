@@ -10128,6 +10128,22 @@ references:
   commentId: T:XRTK.Extensions.InteractionMappingsExtensions
   fullName: XRTK.Extensions.InteractionMappingsExtensions
   nameWithType: InteractionMappingsExtensions
+- uid: XRTK.Extensions.InteractionMappingsExtensions.GetControllerInteractionMapping(System.Collections.Generic.List{XRTK.Providers.Controllers.MixedRealityControllerMapping},System.Type,XRTK.Definitions.Utilities.Handedness,XRTK.Providers.Controllers.MixedRealityControllerMapping@)
+  name: GetControllerInteractionMapping(List<MixedRealityControllerMapping>, Type, Handedness, out MixedRealityControllerMapping)
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_GetControllerInteractionMapping_System_Collections_Generic_List_XRTK_Providers_Controllers_MixedRealityControllerMapping__System_Type_XRTK_Definitions_Utilities_Handedness_XRTK_Providers_Controllers_MixedRealityControllerMapping__
+  commentId: M:XRTK.Extensions.InteractionMappingsExtensions.GetControllerInteractionMapping(System.Collections.Generic.List{XRTK.Providers.Controllers.MixedRealityControllerMapping},System.Type,XRTK.Definitions.Utilities.Handedness,XRTK.Providers.Controllers.MixedRealityControllerMapping@)
+  name.vb: GetControllerInteractionMapping(List(Of MixedRealityControllerMapping), Type, Handedness, ByRef MixedRealityControllerMapping)
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.GetControllerInteractionMapping(System.Collections.Generic.List<XRTK.Providers.Controllers.MixedRealityControllerMapping>, System.Type, XRTK.Definitions.Utilities.Handedness, out XRTK.Providers.Controllers.MixedRealityControllerMapping)
+  fullName.vb: XRTK.Extensions.InteractionMappingsExtensions.GetControllerInteractionMapping(System.Collections.Generic.List(Of XRTK.Providers.Controllers.MixedRealityControllerMapping), System.Type, XRTK.Definitions.Utilities.Handedness, ByRef XRTK.Providers.Controllers.MixedRealityControllerMapping)
+  nameWithType: InteractionMappingsExtensions.GetControllerInteractionMapping(List<MixedRealityControllerMapping>, Type, Handedness, out MixedRealityControllerMapping)
+  nameWithType.vb: InteractionMappingsExtensions.GetControllerInteractionMapping(List(Of MixedRealityControllerMapping), Type, Handedness, ByRef MixedRealityControllerMapping)
+- uid: XRTK.Extensions.InteractionMappingsExtensions.GetControllerInteractionMapping*
+  name: GetControllerInteractionMapping
+  href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_GetControllerInteractionMapping_
+  commentId: Overload:XRTK.Extensions.InteractionMappingsExtensions.GetControllerInteractionMapping
+  isSpec: "True"
+  fullName: XRTK.Extensions.InteractionMappingsExtensions.GetControllerInteractionMapping
+  nameWithType: InteractionMappingsExtensions.GetControllerInteractionMapping
 - uid: XRTK.Extensions.InteractionMappingsExtensions.RaiseInputAction(XRTK.Definitions.Devices.MixedRealityInteractionMapping,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Utilities.Handedness)
   name: RaiseInputAction(MixedRealityInteractionMapping, IMixedRealityInputSource, Handedness)
   href: api/XRTK.Extensions.InteractionMappingsExtensions.html#XRTK_Extensions_InteractionMappingsExtensions_RaiseInputAction_XRTK_Definitions_Devices_MixedRealityInteractionMapping_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Utilities_Handedness_
@@ -10608,12 +10624,15 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.TransformExtensions.FindCommonRoot
   nameWithType: TransformExtensions.FindCommonRoot
-- uid: XRTK.Extensions.TransformExtensions.GetColliderBounds(UnityEngine.Transform,System.Boolean)
-  name: GetColliderBounds(Transform, Boolean)
-  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetColliderBounds_UnityEngine_Transform_System_Boolean_
-  commentId: M:XRTK.Extensions.TransformExtensions.GetColliderBounds(UnityEngine.Transform,System.Boolean)
-  fullName: XRTK.Extensions.TransformExtensions.GetColliderBounds(UnityEngine.Transform, System.Boolean)
-  nameWithType: TransformExtensions.GetColliderBounds(Transform, Boolean)
+- uid: XRTK.Extensions.TransformExtensions.GetColliderBounds(UnityEngine.Transform,UnityEngine.Collider[]@,System.Boolean)
+  name: GetColliderBounds(Transform, ref Collider[], Boolean)
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetColliderBounds_UnityEngine_Transform_UnityEngine_Collider____System_Boolean_
+  commentId: M:XRTK.Extensions.TransformExtensions.GetColliderBounds(UnityEngine.Transform,UnityEngine.Collider[]@,System.Boolean)
+  name.vb: GetColliderBounds(Transform, ByRef Collider(), Boolean)
+  fullName: XRTK.Extensions.TransformExtensions.GetColliderBounds(UnityEngine.Transform, ref UnityEngine.Collider[], System.Boolean)
+  fullName.vb: XRTK.Extensions.TransformExtensions.GetColliderBounds(UnityEngine.Transform, ByRef UnityEngine.Collider(), System.Boolean)
+  nameWithType: TransformExtensions.GetColliderBounds(Transform, ref Collider[], Boolean)
+  nameWithType.vb: TransformExtensions.GetColliderBounds(Transform, ByRef Collider(), Boolean)
 - uid: XRTK.Extensions.TransformExtensions.GetColliderBounds*
   name: GetColliderBounds
   href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetColliderBounds_
@@ -10647,12 +10666,15 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.TransformExtensions.GetFullPath
   nameWithType: TransformExtensions.GetFullPath
-- uid: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Bounds)
-  name: GetPointOnBoundsEdge(Transform, Vector3, Bounds)
-  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetPointOnBoundsEdge_UnityEngine_Transform_UnityEngine_Vector3_UnityEngine_Bounds_
-  commentId: M:XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Bounds)
-  fullName: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform, UnityEngine.Vector3, UnityEngine.Bounds)
-  nameWithType: TransformExtensions.GetPointOnBoundsEdge(Transform, Vector3, Bounds)
+- uid: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Bounds,UnityEngine.Collider[])
+  name: GetPointOnBoundsEdge(Transform, Vector3, Bounds, Collider[])
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetPointOnBoundsEdge_UnityEngine_Transform_UnityEngine_Vector3_UnityEngine_Bounds_UnityEngine_Collider___
+  commentId: M:XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform,UnityEngine.Vector3,UnityEngine.Bounds,UnityEngine.Collider[])
+  name.vb: GetPointOnBoundsEdge(Transform, Vector3, Bounds, Collider())
+  fullName: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform, UnityEngine.Vector3, UnityEngine.Bounds, UnityEngine.Collider[])
+  fullName.vb: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge(UnityEngine.Transform, UnityEngine.Vector3, UnityEngine.Bounds, UnityEngine.Collider())
+  nameWithType: TransformExtensions.GetPointOnBoundsEdge(Transform, Vector3, Bounds, Collider[])
+  nameWithType.vb: TransformExtensions.GetPointOnBoundsEdge(Transform, Vector3, Bounds, Collider())
 - uid: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge*
   name: GetPointOnBoundsEdge
   href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetPointOnBoundsEdge_
@@ -10660,12 +10682,15 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.TransformExtensions.GetPointOnBoundsEdge
   nameWithType: TransformExtensions.GetPointOnBoundsEdge
-- uid: XRTK.Extensions.TransformExtensions.GetRenderBounds(UnityEngine.Transform,System.Boolean)
-  name: GetRenderBounds(Transform, Boolean)
-  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetRenderBounds_UnityEngine_Transform_System_Boolean_
-  commentId: M:XRTK.Extensions.TransformExtensions.GetRenderBounds(UnityEngine.Transform,System.Boolean)
-  fullName: XRTK.Extensions.TransformExtensions.GetRenderBounds(UnityEngine.Transform, System.Boolean)
-  nameWithType: TransformExtensions.GetRenderBounds(Transform, Boolean)
+- uid: XRTK.Extensions.TransformExtensions.GetRenderBounds(UnityEngine.Transform,System.Boolean,UnityEngine.Renderer[])
+  name: GetRenderBounds(Transform, Boolean, Renderer[])
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetRenderBounds_UnityEngine_Transform_System_Boolean_UnityEngine_Renderer___
+  commentId: M:XRTK.Extensions.TransformExtensions.GetRenderBounds(UnityEngine.Transform,System.Boolean,UnityEngine.Renderer[])
+  name.vb: GetRenderBounds(Transform, Boolean, Renderer())
+  fullName: XRTK.Extensions.TransformExtensions.GetRenderBounds(UnityEngine.Transform, System.Boolean, UnityEngine.Renderer[])
+  fullName.vb: XRTK.Extensions.TransformExtensions.GetRenderBounds(UnityEngine.Transform, System.Boolean, UnityEngine.Renderer())
+  nameWithType: TransformExtensions.GetRenderBounds(Transform, Boolean, Renderer[])
+  nameWithType.vb: TransformExtensions.GetRenderBounds(Transform, Boolean, Renderer())
 - uid: XRTK.Extensions.TransformExtensions.GetRenderBounds*
   name: GetRenderBounds
   href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_GetRenderBounds_
@@ -10712,12 +10737,24 @@ references:
   isSpec: "True"
   fullName: XRTK.Extensions.TransformExtensions.ScaleAround
   nameWithType: TransformExtensions.ScaleAround
-- uid: XRTK.Extensions.TransformExtensions.SetCollidersActive(UnityEngine.Transform,System.Boolean)
-  name: SetCollidersActive(Transform, Boolean)
-  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_SetCollidersActive_UnityEngine_Transform_System_Boolean_
-  commentId: M:XRTK.Extensions.TransformExtensions.SetCollidersActive(UnityEngine.Transform,System.Boolean)
-  fullName: XRTK.Extensions.TransformExtensions.SetCollidersActive(UnityEngine.Transform, System.Boolean)
-  nameWithType: TransformExtensions.SetCollidersActive(Transform, Boolean)
+- uid: XRTK.Extensions.TransformExtensions.SetCollidersActive(UnityEngine.Transform,System.Boolean,UnityEngine.Collider[])
+  name: SetCollidersActive(Transform, Boolean, Collider[])
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_SetCollidersActive_UnityEngine_Transform_System_Boolean_UnityEngine_Collider___
+  commentId: M:XRTK.Extensions.TransformExtensions.SetCollidersActive(UnityEngine.Transform,System.Boolean,UnityEngine.Collider[])
+  name.vb: SetCollidersActive(Transform, Boolean, Collider())
+  fullName: XRTK.Extensions.TransformExtensions.SetCollidersActive(UnityEngine.Transform, System.Boolean, UnityEngine.Collider[])
+  fullName.vb: XRTK.Extensions.TransformExtensions.SetCollidersActive(UnityEngine.Transform, System.Boolean, UnityEngine.Collider())
+  nameWithType: TransformExtensions.SetCollidersActive(Transform, Boolean, Collider[])
+  nameWithType.vb: TransformExtensions.SetCollidersActive(Transform, Boolean, Collider())
+- uid: XRTK.Extensions.TransformExtensions.SetCollidersActive(UnityEngine.Transform,System.Boolean,UnityEngine.Collider[]@)
+  name: SetCollidersActive(Transform, Boolean, ref Collider[])
+  href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_SetCollidersActive_UnityEngine_Transform_System_Boolean_UnityEngine_Collider____
+  commentId: M:XRTK.Extensions.TransformExtensions.SetCollidersActive(UnityEngine.Transform,System.Boolean,UnityEngine.Collider[]@)
+  name.vb: SetCollidersActive(Transform, Boolean, ByRef Collider())
+  fullName: XRTK.Extensions.TransformExtensions.SetCollidersActive(UnityEngine.Transform, System.Boolean, ref UnityEngine.Collider[])
+  fullName.vb: XRTK.Extensions.TransformExtensions.SetCollidersActive(UnityEngine.Transform, System.Boolean, ByRef UnityEngine.Collider())
+  nameWithType: TransformExtensions.SetCollidersActive(Transform, Boolean, ref Collider[])
+  nameWithType.vb: TransformExtensions.SetCollidersActive(Transform, Boolean, ByRef Collider())
 - uid: XRTK.Extensions.TransformExtensions.SetCollidersActive*
   name: SetCollidersActive
   href: api/XRTK.Extensions.TransformExtensions.html#XRTK_Extensions_TransformExtensions_SetCollidersActive_
@@ -24817,6 +24854,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Providers.Controllers.MixedRealityControllerMapping.Interactions
   nameWithType: MixedRealityControllerMapping.Interactions
+- uid: XRTK.Providers.Controllers.MixedRealityControllerMapping.None
+  name: None
+  href: api/XRTK.Providers.Controllers.MixedRealityControllerMapping.html#XRTK_Providers_Controllers_MixedRealityControllerMapping_None
+  commentId: P:XRTK.Providers.Controllers.MixedRealityControllerMapping.None
+  fullName: XRTK.Providers.Controllers.MixedRealityControllerMapping.None
+  nameWithType: MixedRealityControllerMapping.None
+- uid: XRTK.Providers.Controllers.MixedRealityControllerMapping.None*
+  name: None
+  href: api/XRTK.Providers.Controllers.MixedRealityControllerMapping.html#XRTK_Providers_Controllers_MixedRealityControllerMapping_None_
+  commentId: Overload:XRTK.Providers.Controllers.MixedRealityControllerMapping.None
+  isSpec: "True"
+  fullName: XRTK.Providers.Controllers.MixedRealityControllerMapping.None
+  nameWithType: MixedRealityControllerMapping.None
 - uid: XRTK.Providers.Controllers.OpenVR
   name: XRTK.Providers.Controllers.OpenVR
   href: api/XRTK.Providers.Controllers.OpenVR.html
@@ -29516,6 +29566,19 @@ references:
   commentId: T:XRTK.SDK.Input.InputSystemGlobalListener
   fullName: XRTK.SDK.Input.InputSystemGlobalListener
   nameWithType: InputSystemGlobalListener
+- uid: XRTK.SDK.Input.InputSystemGlobalListener.OnDestroy
+  name: OnDestroy()
+  href: api/XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_OnDestroy
+  commentId: M:XRTK.SDK.Input.InputSystemGlobalListener.OnDestroy
+  fullName: XRTK.SDK.Input.InputSystemGlobalListener.OnDestroy()
+  nameWithType: InputSystemGlobalListener.OnDestroy()
+- uid: XRTK.SDK.Input.InputSystemGlobalListener.OnDestroy*
+  name: OnDestroy
+  href: api/XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_OnDestroy_
+  commentId: Overload:XRTK.SDK.Input.InputSystemGlobalListener.OnDestroy
+  isSpec: "True"
+  fullName: XRTK.SDK.Input.InputSystemGlobalListener.OnDestroy
+  nameWithType: InputSystemGlobalListener.OnDestroy
 - uid: XRTK.SDK.Input.InputSystemGlobalListener.OnDisable
   name: OnDisable()
   href: api/XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_OnDisable
@@ -32046,6 +32109,19 @@ references:
   isSpec: "True"
   fullName: XRTK.SDK.UX.Cursors.BaseCursor.OnCursorStateChange
   nameWithType: BaseCursor.OnCursorStateChange
+- uid: XRTK.SDK.UX.Cursors.BaseCursor.OnDestroy
+  name: OnDestroy()
+  href: api/XRTK.SDK.UX.Cursors.BaseCursor.html#XRTK_SDK_UX_Cursors_BaseCursor_OnDestroy
+  commentId: M:XRTK.SDK.UX.Cursors.BaseCursor.OnDestroy
+  fullName: XRTK.SDK.UX.Cursors.BaseCursor.OnDestroy()
+  nameWithType: BaseCursor.OnDestroy()
+- uid: XRTK.SDK.UX.Cursors.BaseCursor.OnDestroy*
+  name: OnDestroy
+  href: api/XRTK.SDK.UX.Cursors.BaseCursor.html#XRTK_SDK_UX_Cursors_BaseCursor_OnDestroy_
+  commentId: Overload:XRTK.SDK.UX.Cursors.BaseCursor.OnDestroy
+  isSpec: "True"
+  fullName: XRTK.SDK.UX.Cursors.BaseCursor.OnDestroy
+  nameWithType: BaseCursor.OnDestroy
 - uid: XRTK.SDK.UX.Cursors.BaseCursor.OnDisable
   name: OnDisable()
   href: api/XRTK.SDK.UX.Cursors.BaseCursor.html#XRTK_SDK_UX_Cursors_BaseCursor_OnDisable
@@ -49898,6 +49974,44 @@ references:
   isSpec: "True"
   fullName: XRTK.Utilities.Rendering.ClippingSphere.UpdateShaderProperties
   nameWithType: ClippingSphere.UpdateShaderProperties
+- uid: XRTK.Utilities.ValidateConfiguration
+  name: ValidateConfiguration
+  href: api/XRTK.Utilities.ValidateConfiguration.html
+  commentId: T:XRTK.Utilities.ValidateConfiguration
+  fullName: XRTK.Utilities.ValidateConfiguration
+  nameWithType: ValidateConfiguration
+- uid: XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings(System.Type[],XRTK.Definitions.Utilities.Handedness)
+  name: ValidateControllerMappings(Type[], Handedness)
+  href: api/XRTK.Utilities.ValidateConfiguration.html#XRTK_Utilities_ValidateConfiguration_ValidateControllerMappings_System_Type___XRTK_Definitions_Utilities_Handedness_
+  commentId: M:XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings(System.Type[],XRTK.Definitions.Utilities.Handedness)
+  name.vb: ValidateControllerMappings(Type(), Handedness)
+  fullName: XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings(System.Type[], XRTK.Definitions.Utilities.Handedness)
+  fullName.vb: XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings(System.Type(), XRTK.Definitions.Utilities.Handedness)
+  nameWithType: ValidateConfiguration.ValidateControllerMappings(Type[], Handedness)
+  nameWithType.vb: ValidateConfiguration.ValidateControllerMappings(Type(), Handedness)
+- uid: XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings*
+  name: ValidateControllerMappings
+  href: api/XRTK.Utilities.ValidateConfiguration.html#XRTK_Utilities_ValidateConfiguration_ValidateControllerMappings_
+  commentId: Overload:XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings
+  isSpec: "True"
+  fullName: XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings
+  nameWithType: ValidateConfiguration.ValidateControllerMappings
+- uid: XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles(System.Type[])
+  name: ValidateControllerProfiles(Type[])
+  href: api/XRTK.Utilities.ValidateConfiguration.html#XRTK_Utilities_ValidateConfiguration_ValidateControllerProfiles_System_Type___
+  commentId: M:XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles(System.Type[])
+  name.vb: ValidateControllerProfiles(Type())
+  fullName: XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles(System.Type[])
+  fullName.vb: XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles(System.Type())
+  nameWithType: ValidateConfiguration.ValidateControllerProfiles(Type[])
+  nameWithType.vb: ValidateConfiguration.ValidateControllerProfiles(Type())
+- uid: XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles*
+  name: ValidateControllerProfiles
+  href: api/XRTK.Utilities.ValidateConfiguration.html#XRTK_Utilities_ValidateConfiguration_ValidateControllerProfiles_
+  commentId: Overload:XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles
+  isSpec: "True"
+  fullName: XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles
+  nameWithType: ValidateConfiguration.ValidateControllerProfiles
 - uid: XRTK.Utilities.WebRequestRest
   name: XRTK.Utilities.WebRequestRest
   href: api/XRTK.Utilities.WebRequestRest.html

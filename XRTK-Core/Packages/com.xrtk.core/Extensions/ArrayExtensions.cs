@@ -29,5 +29,20 @@ namespace XRTK.Extensions
         {
             return array != null && array.Length > 0;
         }
+
+        /// <summary>
+        /// Extends an existing array to add a new item
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="array">The array to extend</param>
+        /// <param name="newItem">The item to add to the array</param>
+        /// <returns></returns>
+        public static T[] AddItem<T>(this T[] array, T newItem)
+        {
+            var newArray = new T[array.Length + 1];
+            array.CopyTo(newArray, 0);
+            newArray[array.Length] = newItem;
+            return newArray;
+        }
     }
 }

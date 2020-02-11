@@ -37,10 +37,10 @@ namespace XRTK.Extensions
         /// <param name="array">The array to extend</param>
         /// <param name="newItem">The item to add to the array</param>
         /// <returns></returns>
-        public static T[] AddItem<T>(this T[] array, T newItem)
+        public static T[] AddItem<T>(this T[] array, T newItem, int insertAtIndex = 0)
         {
             var newArray = new T[array.Length + 1];
-            array.CopyTo(newArray, 0);
+            array.CopyTo(newArray, insertAtIndex);
             newArray[array.Length] = newItem;
             return newArray;
         }

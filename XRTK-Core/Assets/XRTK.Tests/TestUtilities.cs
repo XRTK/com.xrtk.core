@@ -31,6 +31,8 @@ namespace XRTK.Tests
             // Setup
             CleanupScene();
             Assert.IsTrue(!MixedRealityToolkit.IsInitialized);
+            Assert.AreEqual(0, MixedRealityToolkit.ActiveSystems.Count);
+            Assert.AreEqual(0, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
             InitializeMixedRealityToolkit();
 
             // Tests

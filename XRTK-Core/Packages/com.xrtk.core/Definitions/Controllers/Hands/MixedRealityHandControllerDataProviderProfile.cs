@@ -15,6 +15,16 @@ namespace XRTK.Definitions.Controllers.Hands
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hand Controller Data Provider Profile", fileName = "HandControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
     public class MixedRealityHandControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
     {
+        [Header("General Settings")]
+
+        [SerializeField]
+        [Tooltip("If set, hand mesh data will be read and available for visualzation. Disable for optimized performance.")]
+        private bool handMeshingEnabled = false;
+        /// <summary>
+        /// If set, hand mesh data will be read and available for visualzation. Disable for optimized performance.
+        /// </summary>
+        public bool HandMeshingEnabled => handMeshingEnabled;
+
         [Header("Hand Physics")]
 
         [SerializeField]

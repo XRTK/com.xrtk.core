@@ -1,10 +1,9 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Attributes;
-using XRTK.Definitions.Controllers.Simulation.Hands;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers.Simulation;
 
@@ -16,15 +15,6 @@ namespace XRTK.Definitions.Controllers.Simulation
         #region General Settings
 
         [Header("General Settings")]
-
-        [SerializeField]
-        [Tooltip("Enable controller simulation")]
-        private bool controllerSimulationEnabled = false;
-
-        /// <summary>
-        /// Is hand simulated hand tracking enabled?
-        /// </summary>
-        public bool ControllerSimulationEnabled => controllerSimulationEnabled;
 
         [SerializeField]
         [Implements(typeof(IMixedRealitySimulatedController), TypeGrouping.ByNamespaceFlat)]
@@ -142,28 +132,12 @@ namespace XRTK.Definitions.Controllers.Simulation
 
         #endregion
 
-        #region Simulated Hand Controller Settings
-
-        [Header("Simulated Hand Controller Settings")]
-
         [SerializeField]
-        [Tooltip("Hand pose definitions.")]
-        private List<SimulatedHandControllerPoseData> poseDefinitions = new List<SimulatedHandControllerPoseData>();
+        private ControllerDataProviderConfiguration[] registeredControllerDataProviders = new ControllerDataProviderConfiguration[0];
 
         /// <summary>
-        /// Hand pose definitions.
+        /// The currently registered controller data providers for simulation.
         /// </summary>
-        public IReadOnlyList<SimulatedHandControllerPoseData> PoseDefinitions => poseDefinitions;
-
-        [SerializeField]
-        [Tooltip("Gesture interpolation per second")]
-        private float handPoseAnimationSpeed = 8.0f;
-
-        /// <summary>
-        /// Pose interpolation per second.
-        /// </summary>
-        public float HandPoseAnimationSpeed => handPoseAnimationSpeed;
-
-        #endregion
+        public ControllerDataProviderConfiguration[] RegisteredControllerDataProviders => registeredControllerDataProviders;
     }
 }

@@ -5,10 +5,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation;
-using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Simulation
@@ -29,6 +29,20 @@ namespace XRTK.Providers.Controllers.Simulation
             : base(name, priority, profile)
         {
             this.profile = profile;
+
+            for (int i = 0; i < profile.RegisteredControllerDataProviders.Length; i++)
+            {
+                Definitions.InputSystem.ControllerDataProviderConfiguration dataProvider = profile.RegisteredControllerDataProviders[i];
+                if (!MixedRealityToolkit.CreateAndRegisterService<IMixedRealityControllerDataProvider>(
+                                dataProvider.DataProviderType,
+                                dataProvider.RuntimePlatform,
+                                dataProvider.DataProviderName,
+                                dataProvider.Priority,
+                                dataProvider.Profile))
+                {
+                    Debug.LogError($"Failed to register {dataProvider.DataProviderName} for controller simulation!");
+                }
+            }
         }
 
         private readonly SimulatedControllerDataProviderProfile profile;
@@ -40,18 +54,6 @@ namespace XRTK.Providers.Controllers.Simulation
         private bool rightControllerIsAlwaysVisible = false;
         private bool leftControllerIsTracked = false;
         private bool rightControllerIsTracked = false;
-
-        /// <summary>
-        /// Gets configured simulated hand controller pose definitions used to simulate
-        /// different hand poses.
-        /// </summary>
-        public IReadOnlyList<SimulatedHandControllerPoseData> HandPoseDefinitions => profile.PoseDefinitions;
-
-        /// <summary>
-        /// Gets the simulated hand controller pose animation speed controlling
-        /// how fast the hand will translate from one pose to another.
-        /// </summary>
-        public float HandPoseAnimationSpeed => profile.HandPoseAnimationSpeed;
 
         /// <summary>
         /// Gets the hand depth change multiplier used to simulate controller depth movement.
@@ -85,7 +87,6 @@ namespace XRTK.Providers.Controllers.Simulation
         {
             base.Enable();
 
-            // Start the timestamp stopwatch
             simulatedUpdateStopWatch = new SimulationTimeStampStopWatch();
             simulatedUpdateStopWatch.Reset();
         }

@@ -23,6 +23,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
         protected override void OnPlatformInspectorGUI()
         {
+            EditorGUILayout.LabelField("Simulated Hand Controller Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(poseDefinitions, true);
             EditorGUILayout.PropertyField(handPoseAnimationSpeed);
         }

@@ -26,10 +26,14 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="inputSource">Optional input source of the controller.</param>
         /// <param name="interactions">Optional controller interactions mappings.</param>
         public BaseHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-                : base(trackingState, controllerHandedness, inputSource, interactions) { }
+                : base(trackingState, controllerHandedness, inputSource, interactions)
+        {
+            handControllerDataProvider = MixedRealityToolkit.GetService<IMixedRealityHandControllerDataProvider>();
+        }
 
         private readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
         private readonly Dictionary<TrackedHandBounds, Bounds[]> bounds = new Dictionary<TrackedHandBounds, Bounds[]>();
+        private readonly IMixedRealityHandControllerDataProvider handControllerDataProvider;
 
         private const float currentVelocityWeight = .8f;
         private const float newVelocityWeight = .2f;
@@ -63,39 +67,54 @@ namespace XRTK.Providers.Controllers.Hands
         {
             if (!Enabled) { return; }
 
-            UpdateInteractions();
+            TrackingState lastState = TrackingState;
+
             UpdateJoints(handData);
             UpdateBounds();
             UpdateVelocity();
 
+            MixedRealityPose wristPose;
+            if (TryGetJointPose(TrackedHandJoint.Wrist, out wristPose))
+            {
+                IsPositionAvailable = true;
+                IsPositionApproximate = false;
+                IsRotationAvailable = true;
+                TrackingState = IsPositionAvailable && IsRotationAvailable ? TrackingState.Tracked : TrackingState.NotTracked;
+                MixedRealityToolkit.InputSystem.RaiseSourcePoseChanged(InputSource, this, wristPose);
+            }
+
+            if (lastState != TrackingState)
+            {
+                MixedRealityToolkit.InputSystem.RaiseSourceTrackingStateChanged(InputSource, this, TrackingState);
+            }
+
+            if (TrackingState == TrackingState.Tracked)
+            {
+                MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, wristPose);
+            }
+
             MixedRealityToolkit.InputSystem.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);
+
+            UpdateInteractions();
         }
 
         private void UpdateInteractions()
         {
             for (int i = 0; i < Interactions?.Length; i++)
             {
-                UpdateInteraction(Interactions[i]);
-            }
-        }
+                MixedRealityInteractionMapping interactionMapping = Interactions[i];
+                switch (interactionMapping.InputType)
+                {
+                    case DeviceInputType.ButtonPress:
+                        interactionMapping.BoolData = Input.GetKey(interactionMapping.KeyCode);
+                        break;
+                    case DeviceInputType.PointerPosition:
+                        interactionMapping.PositionData = Input.mousePosition;
+                        break;
+                }
 
-        /// <summary>
-        /// If needed, update the input from the device for an interaction configured.
-        /// </summary>
-        /// <param name="interactionMapping">Interaction mapping to update.</param>
-        protected virtual void UpdateInteraction(MixedRealityInteractionMapping interactionMapping)
-        {
-            switch (interactionMapping.InputType)
-            {
-                case DeviceInputType.ButtonPress:
-                    interactionMapping.BoolData = Input.GetKey(interactionMapping.KeyCode);
-                    break;
-                case DeviceInputType.PointerPosition:
-                    interactionMapping.PositionData = Input.mousePosition;
-                    break;
+                interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
             }
-
-            interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
         }
 
         /// <summary>
@@ -122,13 +141,19 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateBounds()
         {
-            UpdateHandBounds();
-            UpdatePalmBounds();
-            UpdateThumbBounds();
-            UpdateIndexFingerBounds();
-            UpdateMiddleFingerBounds();
-            UpdateRingFingerBounds();
-            UpdatePinkyFingerBounds();
+            if (handControllerDataProvider.HandPhysicsEnabled && handControllerDataProvider.BoundsMode == HandBoundsMode.Hand)
+            {
+                UpdateHandBounds();
+            }
+            else if (handControllerDataProvider.HandPhysicsEnabled && handControllerDataProvider.BoundsMode == HandBoundsMode.Fingers)
+            {
+                UpdatePalmBounds();
+                UpdateThumbBounds();
+                UpdateIndexFingerBounds();
+                UpdateMiddleFingerBounds();
+                UpdateRingFingerBounds();
+                UpdatePinkyFingerBounds();
+            }
         }
 
         private void UpdatePalmBounds()

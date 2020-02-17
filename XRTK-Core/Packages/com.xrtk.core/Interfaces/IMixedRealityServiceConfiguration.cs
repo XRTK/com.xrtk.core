@@ -20,5 +20,10 @@ namespace XRTK.Interfaces
         /// The configuration profile for the <see cref="IMixedRealityService"/>.
         /// </summary>
         BaseMixedRealityProfile ConfigurationProfile { get; }
+
+        /// <summary>
+        /// The simple, human readable name for the <see cref="IMixedRealityService"/>.
+        /// </summary>
+        string Name { get; }
     }
 }

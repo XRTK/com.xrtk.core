@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using System;
@@ -15,11 +15,11 @@ namespace XRTK.Definitions
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="dataModelType">The concrete type for the system, feature or manager.</param>
-        /// <param name="dataModelName">The simple, human readable name for the system, feature, or manager.</param>
-        /// <param name="priority">The priority this system, feature, or manager will be initialized in.</param>
-        /// <param name="runtimePlatform">The runtime platform(s) to run this system, feature, or manager on.</param>
-        /// <param name="configurationProfile">The configuration profile for the system, feature, or manager.</param>
+        /// <param name="dataModelType">The concrete type for the <see cref="IMixedRealityDataProvider"/>.</param>
+        /// <param name="dataModelName">The simple, human readable name for the <see cref="IMixedRealityDataProvider"/>.</param>
+        /// <param name="priority">The priority this <see cref="IMixedRealityDataProvider"/> will be initialized in.</param>
+        /// <param name="runtimePlatform">The runtime platform(s) to run this <see cref="IMixedRealityDataProvider"/> on.</param>
+        /// <param name="configurationProfile">The configuration profile for the <see cref="IMixedRealityDataProvider"/>.</param>
         public DataModelConfiguration(SystemType dataModelType, string dataModelName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityProfile configurationProfile)
         {
             this.dataModelType = dataModelType;
@@ -39,10 +39,8 @@ namespace XRTK.Definitions
         [SerializeField]
         private string dataModelName;
 
-        /// <summary>
-        /// The simple, human readable name for the system, feature, or manager.
-        /// </summary>
-        public string DataModelName => dataModelName;
+        /// <inheritdoc />
+        public string Name => dataModelName;
 
         [SerializeField]
         private uint priority;

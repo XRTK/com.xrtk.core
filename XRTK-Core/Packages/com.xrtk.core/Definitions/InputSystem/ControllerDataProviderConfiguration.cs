@@ -42,10 +42,8 @@ namespace XRTK.Definitions.InputSystem
         [SerializeField]
         private string dataProviderName;
 
-        /// <summary>
-        /// The simple, human readable name for the system, feature, or manager.
-        /// </summary>
-        public string DataProviderName => dataProviderName;
+        /// <inheritdoc />
+        public string Name => dataProviderName;
 
         [SerializeField]
         private uint priority;

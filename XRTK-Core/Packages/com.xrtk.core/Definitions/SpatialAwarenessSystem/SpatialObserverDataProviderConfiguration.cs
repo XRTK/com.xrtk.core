@@ -45,10 +45,8 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         [SerializeField]
         private string spatialObserverName;
 
-        /// <summary>
-        /// The simple, human readable name for the system, feature, or manager.
-        /// </summary>
-        public string SpatialObserverName => spatialObserverName;
+        /// <inheritdoc />
+        public string Name => spatialObserverName;
 
         [SerializeField]
         private uint priority;

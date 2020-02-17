@@ -16,7 +16,7 @@ namespace XRTK.Extensions
             {
                 if (typeof(T).IsAssignableFrom(configurations[i].InstancedType.Type))
                 {
-                    name = configurations[i].DataModelName;
+                    name = configurations[i].Name;
                     return true;
                 }
             }

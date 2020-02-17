@@ -392,18 +392,18 @@ namespace XRTK.Services
                             //If the DataProvider cannot be resolved, this is likely just a configuration / package missmatch.  User simply needs to be warned, not errored.
                             if (controllerDataProvider.InstancedType.Type == null)
                             {
-                                Debug.LogWarning($"Could not load the configured provider ({controllerDataProvider.DataProviderName})\n\nThis is most likely because the XRTK UPM package for that provider is currently not registered\nCheck the installed packages in the Unity Package Manager\n\n");
+                                Debug.LogWarning($"Could not load the configured provider ({controllerDataProvider.Name})\n\nThis is most likely because the XRTK UPM package for that provider is currently not registered\nCheck the installed packages in the Unity Package Manager\n\n");
                                 continue;
                             }
 
                             if (!CreateAndRegisterService<IMixedRealityControllerDataProvider>(
                                 controllerDataProvider.InstancedType,
                                 controllerDataProvider.RuntimePlatform,
-                                controllerDataProvider.DataProviderName,
+                                controllerDataProvider.Name,
                                 controllerDataProvider.Priority,
                                 controllerDataProvider.ConfigurationProfile))
                             {
-                                Debug.LogError($"Failed to start {controllerDataProvider.DataProviderName}!");
+                                Debug.LogError($"Failed to start {controllerDataProvider.Name}!");
                             }
                         }
                     }
@@ -447,11 +447,11 @@ namespace XRTK.Services
                         if (!CreateAndRegisterService<IMixedRealitySpatialObserverDataProvider>(
                             spatialObserver.InstancedType,
                             spatialObserver.RuntimePlatform,
-                            spatialObserver.SpatialObserverName,
+                            spatialObserver.Name,
                             spatialObserver.Priority,
                             spatialObserver.ConfigurationProfile))
                         {
-                            Debug.LogError($"Failed to start {spatialObserver.SpatialObserverName}!");
+                            Debug.LogError($"Failed to start {spatialObserver.Name}!");
                         }
                     }
                 }
@@ -488,11 +488,11 @@ namespace XRTK.Services
                         if (!CreateAndRegisterService<IMixedRealityNetworkDataProvider>(
                             networkProvider.InstancedType,
                             networkProvider.RuntimePlatform,
-                            networkProvider.DataProviderName,
+                            networkProvider.Name,
                             networkProvider.Priority,
                             networkProvider.ConfigurationProfile))
                         {
-                            Debug.LogError($"Failed to start {networkProvider.DataProviderName}!");
+                            Debug.LogError($"Failed to start {networkProvider.Name}!");
                         }
                     }
                 }
@@ -511,11 +511,11 @@ namespace XRTK.Services
                         if (!CreateAndRegisterService<IMixedRealityDiagnosticsDataProvider>(
                             diagnosticsDataProvider.InstancedType,
                             diagnosticsDataProvider.RuntimePlatform,
-                            diagnosticsDataProvider.DataProviderName,
+                            diagnosticsDataProvider.Name,
                             diagnosticsDataProvider.Priority,
                             diagnosticsDataProvider.ConfigurationProfile))
                         {
-                            Debug.LogError($"Failed to start {diagnosticsDataProvider.DataProviderName}!");
+                            Debug.LogError($"Failed to start {diagnosticsDataProvider.Name}!");
                         }
                     }
                 }
@@ -532,7 +532,7 @@ namespace XRTK.Services
                     if (CreateAndRegisterService<IMixedRealityExtensionService>(
                         configuration.InstancedType,
                         configuration.RuntimePlatform,
-                        configuration.ComponentName,
+                        configuration.Name,
                         configuration.Priority,
                         configuration.ConfigurationProfile))
                     {
@@ -543,17 +543,17 @@ namespace XRTK.Services
                             if (!CreateAndRegisterService<IMixedRealityDataProvider>(
                                 dataProvider.InstancedType,
                                 dataProvider.RuntimePlatform,
-                                dataProvider.DataModelName,
+                                dataProvider.Name,
                                 dataProvider.Priority,
                                 dataProvider.ConfigurationProfile))
                             {
-                                Debug.LogError($"Failed to register {dataProvider.DataModelName} data model for {configuration.ComponentName} extension service!");
+                                Debug.LogError($"Failed to register {dataProvider.Name} data model for {configuration.Name} extension service!");
                             }
                         }
                     }
                     else
                     {
-                        Debug.LogError($"Failed to register {configuration.ComponentName} extension service!");
+                        Debug.LogError($"Failed to register {configuration.Name} extension service!");
                     }
                 }
             }

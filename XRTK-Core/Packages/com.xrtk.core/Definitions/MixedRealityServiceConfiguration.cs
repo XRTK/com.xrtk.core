@@ -3,6 +3,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces;
@@ -18,15 +19,15 @@ namespace XRTK.Definitions
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="componentType">The concrete type for the system, feature or manager.</param>
-        /// <param name="componentName">The simple, human readable name for the system, feature, or manager.</param>
-        /// <param name="priority">The priority this system, feature, or manager will be initialized in.</param>
-        /// <param name="runtimePlatform">The runtime platform(s) to run this system, feature, or manager on.</param>
-        /// <param name="configurationProfile">The configuration profile for the system, feature, or manager.</param>
-        public MixedRealityServiceConfiguration(SystemType componentType, string componentName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityExtensionServiceProfile configurationProfile)
+        /// <param name="componentType">The concrete type for the <see cref="IMixedRealityService"/>.</param>
+        /// <param name="name">The simple, human readable name for the <see cref="IMixedRealityService"/>.</param>
+        /// <param name="priority">The priority this <see cref="IMixedRealityService"/> will be initialized in.</param>
+        /// <param name="runtimePlatform">The runtime platform(s) to run this <see cref="IMixedRealityService"/> to run on.</param>
+        /// <param name="configurationProfile">The configuration profile for <see cref="IMixedRealityService"/>.</param>
+        public MixedRealityServiceConfiguration(SystemType componentType, string name, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityExtensionServiceProfile configurationProfile)
         {
             this.componentType = componentType;
-            this.componentName = componentName;
+            this.name = name;
             this.priority = priority;
             this.runtimePlatform = runtimePlatform;
             this.configurationProfile = configurationProfile;
@@ -40,12 +41,13 @@ namespace XRTK.Definitions
         public SystemType InstancedType => componentType;
 
         [SerializeField]
-        private string componentName;
+        [FormerlySerializedAs("componentName")]
+        private string name;
 
         /// <summary>
         /// The simple, human readable name for the system, feature, or manager.
         /// </summary>
-        public string ComponentName => componentName;
+        public string Name => name;
 
         [SerializeField]
         private uint priority;

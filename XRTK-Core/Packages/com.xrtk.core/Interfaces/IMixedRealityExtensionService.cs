@@ -1,10 +1,12 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using XRTK.Definitions;
+
 namespace XRTK.Interfaces
 {
     /// <summary>
-    /// Generic interface for all optional Mixed Reality systems, components, or features that can be added to the <see cref="Definitions.MixedRealityServiceConfiguration"/>
+    /// Generic interface for all optional Mixed Reality systems, components, or features that can be added to the <see cref="MixedRealityExtensionServiceConfiguration"/>
     /// </summary>
     public interface IMixedRealityExtensionService : IMixedRealityService
     {

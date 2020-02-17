@@ -15,7 +15,7 @@ namespace XRTK.Definitions.NetworkingSystem
     /// Configuration settings for a registered <see cref="IMixedRealityDataProvider"/>.
     /// </summary>
     [Serializable]
-    public struct NetworkDataProviderConfiguration : IBaseMixedRealityServiceConfiguration
+    public struct NetworkDataProviderConfiguration : IMixedRealityServiceConfiguration
     {
         /// <summary>
         /// Constructor.
@@ -59,17 +59,13 @@ namespace XRTK.Definitions.NetworkingSystem
         [SerializeField]
         private SupportedPlatforms runtimePlatform;
 
-        /// <summary>
-        /// The runtime platform(s) to run this system, feature, or manager on.
-        /// </summary>
+        /// <inheritdoc />
         public SupportedPlatforms RuntimePlatform => runtimePlatform;
 
         [SerializeField]
         private BaseMixedRealityNetworkProviderProfile profile;
 
-        /// <summary>
-        /// The configuration profile for the system, feature, or manager.
-        /// </summary>
-        public BaseMixedRealityNetworkProviderProfile Profile => profile;
+        /// <inheritdoc />
+        public BaseMixedRealityProfile ConfigurationProfile => profile;
     }
 }

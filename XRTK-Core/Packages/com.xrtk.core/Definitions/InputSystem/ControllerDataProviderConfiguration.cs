@@ -12,7 +12,7 @@ using XRTK.Interfaces;
 namespace XRTK.Definitions.InputSystem
 {
     [Serializable]
-    public struct ControllerDataProviderConfiguration : IBaseMixedRealityServiceConfiguration
+    public struct ControllerDataProviderConfiguration : IMixedRealityServiceConfiguration
     {
         /// <summary>
         /// Constructor.
@@ -57,17 +57,13 @@ namespace XRTK.Definitions.InputSystem
         [SerializeField]
         private SupportedPlatforms runtimePlatform;
 
-        /// <summary>
-        /// The runtime platform(s) to run this system, feature, or manager on.
-        /// </summary>
+        /// <inheritdoc />
         public SupportedPlatforms RuntimePlatform => runtimePlatform;
 
         [SerializeField]
         private BaseMixedRealityControllerDataProviderProfile profile;
 
-        /// <summary>
-        /// The profile settings for the controller data provider.
-        /// </summary>
-        public BaseMixedRealityControllerDataProviderProfile Profile => profile;
+        /// <inheritdoc />
+        public BaseMixedRealityProfile ConfigurationProfile => profile;
     }
 }

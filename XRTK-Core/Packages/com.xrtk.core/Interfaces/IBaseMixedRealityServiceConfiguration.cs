@@ -7,7 +7,7 @@ using XRTK.Services;
 namespace XRTK.Interfaces
 {
     /// <summary>
-    /// This interface is meant to be used with serialized structs that define valid <see cref="IMixedRealityService"/> configurations.
+    /// Base Mixed Reality Service Configuration
     /// </summary>
     public interface IBaseMixedRealityServiceConfiguration
     {

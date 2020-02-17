@@ -15,7 +15,7 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
     /// The configuration setting for a <see cref="IMixedRealitySpatialObserverDataProvider"/>
     /// </summary>
     [Serializable]
-    public struct SpatialObserverDataProviderConfiguration : IBaseMixedRealityServiceConfiguration
+    public struct SpatialObserverDataProviderConfiguration : IMixedRealityServiceConfiguration
     {
         /// <summary>
         /// Constructor.
@@ -60,17 +60,13 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         [SerializeField]
         private SupportedPlatforms runtimePlatform;
 
-        /// <summary>
-        /// The runtime platform(s) to run this system, feature, or manager on.
-        /// </summary>
+        /// <inheritdoc />
         public SupportedPlatforms RuntimePlatform => runtimePlatform;
 
         [SerializeField]
         private BaseMixedRealitySpatialObserverProfile profile;
 
-        /// <summary>
-        /// The profile to use for this spatial observer.
-        /// </summary>
-        public BaseMixedRealitySpatialObserverProfile Profile => profile;
+        /// <inheritdoc />
+        public BaseMixedRealityProfile ConfigurationProfile => profile;
     }
 }

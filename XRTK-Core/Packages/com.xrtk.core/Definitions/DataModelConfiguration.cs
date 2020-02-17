@@ -10,7 +10,7 @@ using XRTK.Interfaces;
 namespace XRTK.Definitions
 {
     [Serializable]
-    public struct DataModelConfiguration : IBaseMixedRealityServiceConfiguration
+    public struct DataModelConfiguration : IMixedRealityServiceConfiguration
     {
         /// <summary>
         /// Constructor.
@@ -54,17 +54,13 @@ namespace XRTK.Definitions
         [SerializeField]
         private SupportedPlatforms runtimePlatform;
 
-        /// <summary>
-        /// The runtime platform(s) to run this system, feature, or manager on.
-        /// </summary>
+        /// <inheritdoc />
         public SupportedPlatforms RuntimePlatform => runtimePlatform;
 
         [SerializeField]
         private BaseMixedRealityProfile configurationProfile;
 
-        /// <summary>
-        /// The configuration profile for the system, feature, or manager.
-        /// </summary>
+        /// <inheritdoc />
         public BaseMixedRealityProfile ConfigurationProfile => configurationProfile;
     }
 }

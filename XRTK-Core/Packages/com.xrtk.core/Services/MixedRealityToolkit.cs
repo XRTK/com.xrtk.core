@@ -401,7 +401,7 @@ namespace XRTK.Services
                                 controllerDataProvider.RuntimePlatform,
                                 controllerDataProvider.DataProviderName,
                                 controllerDataProvider.Priority,
-                                controllerDataProvider.Profile))
+                                controllerDataProvider.ConfigurationProfile))
                             {
                                 Debug.LogError($"Failed to start {controllerDataProvider.DataProviderName}!");
                             }
@@ -449,7 +449,7 @@ namespace XRTK.Services
                             spatialObserver.RuntimePlatform,
                             spatialObserver.SpatialObserverName,
                             spatialObserver.Priority,
-                            spatialObserver.Profile))
+                            spatialObserver.ConfigurationProfile))
                         {
                             Debug.LogError($"Failed to start {spatialObserver.SpatialObserverName}!");
                         }
@@ -490,7 +490,7 @@ namespace XRTK.Services
                             networkProvider.RuntimePlatform,
                             networkProvider.DataProviderName,
                             networkProvider.Priority,
-                            networkProvider.Profile))
+                            networkProvider.ConfigurationProfile))
                         {
                             Debug.LogError($"Failed to start {networkProvider.DataProviderName}!");
                         }
@@ -513,7 +513,7 @@ namespace XRTK.Services
                             diagnosticsDataProvider.RuntimePlatform,
                             diagnosticsDataProvider.DataProviderName,
                             diagnosticsDataProvider.Priority,
-                            diagnosticsDataProvider.Profile))
+                            diagnosticsDataProvider.ConfigurationProfile))
                         {
                             Debug.LogError($"Failed to start {diagnosticsDataProvider.DataProviderName}!");
                         }
@@ -538,7 +538,7 @@ namespace XRTK.Services
                     {
                         if (configuration.ConfigurationProfile == null) { continue; }
 
-                        foreach (var dataProvider in configuration.ConfigurationProfile.RegisteredDataProviders)
+                        foreach (var dataProvider in (configuration.ConfigurationProfile as BaseMixedRealityExtensionServiceProfile).RegisteredDataProviders)
                         {
                             if (!CreateAndRegisterService<IMixedRealityDataProvider>(
                                 dataProvider.InstancedType,

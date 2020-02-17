@@ -11,7 +11,7 @@ using XRTK.Interfaces.DiagnosticsSystem;
 namespace XRTK.Definitions.DiagnosticsSystem
 {
     [Serializable]
-    public struct DiagnosticsDataProviderConfiguration : IBaseMixedRealityServiceConfiguration
+    public struct DiagnosticsDataProviderConfiguration : IMixedRealityServiceConfiguration
     {
         /// <summary>
         /// Constructor.
@@ -35,6 +35,7 @@ namespace XRTK.Definitions.DiagnosticsSystem
         [Implements(typeof(IMixedRealityDiagnosticsDataProvider), TypeGrouping.ByNamespaceFlat)]
         private SystemType dataProviderType;
 
+        /// <inheritdoc />
         public SystemType InstancedType => dataProviderType;
 
         [SerializeField]
@@ -54,17 +55,13 @@ namespace XRTK.Definitions.DiagnosticsSystem
         [SerializeField]
         private SupportedPlatforms runtimePlatform;
 
-        /// <summary>
-        /// The runtime platform(s) to run this system, feature, or manager on.
-        /// </summary>
+        /// <inheritdoc />
         public SupportedPlatforms RuntimePlatform => runtimePlatform;
 
         [SerializeField]
         private MixedRealityDiagnosticsDataProviderProfile profile;
 
-        /// <summary>
-        /// The profile settings for the data provider.
-        /// </summary>
-        public MixedRealityDiagnosticsDataProviderProfile Profile => profile;
+        /// <inheritdoc />
+        public BaseMixedRealityProfile ConfigurationProfile => profile;
     }
 }

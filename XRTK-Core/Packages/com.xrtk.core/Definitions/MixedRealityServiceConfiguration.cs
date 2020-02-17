@@ -13,7 +13,7 @@ namespace XRTK.Definitions
     /// Defines a system, feature, or manager to be registered with as a <see cref="IMixedRealityExtensionService"/> on startup.
     /// </summary>
     [Serializable]
-    public struct MixedRealityServiceConfiguration : IBaseMixedRealityServiceConfiguration
+    public struct MixedRealityServiceConfiguration : IMixedRealityServiceConfiguration
     {
         /// <summary>
         /// Constructor.
@@ -68,6 +68,6 @@ namespace XRTK.Definitions
         /// <summary>
         /// The configuration profile for the system, feature, or manager.
         /// </summary>
-        public BaseMixedRealityExtensionServiceProfile ConfigurationProfile => configurationProfile;
+        public BaseMixedRealityProfile ConfigurationProfile => configurationProfile;
     }
 }

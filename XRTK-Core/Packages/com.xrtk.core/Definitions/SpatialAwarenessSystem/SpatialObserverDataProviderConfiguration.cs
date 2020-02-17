@@ -6,6 +6,7 @@ using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Providers.SpatialObservers;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces;
 using XRTK.Interfaces.Providers.SpatialObservers;
 
 namespace XRTK.Definitions.SpatialAwarenessSystem
@@ -14,7 +15,7 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
     /// The configuration setting for a <see cref="IMixedRealitySpatialObserverDataProvider"/>
     /// </summary>
     [Serializable]
-    public struct SpatialObserverDataProviderConfiguration
+    public struct SpatialObserverDataProviderConfiguration : IBaseMixedRealityServiceConfiguration
     {
         /// <summary>
         /// Constructor.
@@ -38,10 +39,8 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         [Implements(typeof(IMixedRealitySpatialObserverDataProvider), TypeGrouping.ByNamespaceFlat)]
         private SystemType spatialObserverType;
 
-        /// <summary>
-        /// The concrete type to use for this spatial observer.
-        /// </summary>
-        public SystemType SpatialObserverType => spatialObserverType;
+        /// <inheritdoc />
+        public SystemType InstancedType => spatialObserverType;
 
         [SerializeField]
         private string spatialObserverName;
@@ -54,9 +53,7 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         [SerializeField]
         private uint priority;
 
-        /// <summary>
-        /// The priority this system, feature, or manager will be initialized in.
-        /// </summary>
+        /// <inheritdoc />
         public uint Priority => priority;
 
         [EnumFlags]

@@ -36,6 +36,7 @@ namespace XRTK.Extensions
         /// <typeparam name="T"></typeparam>
         /// <param name="array">The array to extend</param>
         /// <param name="newItem">The item to add to the array</param>
+        /// <param name="insertAtIndex">The index to insert the item at.</param>
         /// <returns></returns>
         public static T[] AddItem<T>(this T[] array, T newItem, int insertAtIndex = 0)
         {

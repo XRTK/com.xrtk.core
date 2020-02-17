@@ -7,11 +7,12 @@ using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Definitions.Controllers;
+using XRTK.Interfaces;
 
 namespace XRTK.Definitions.InputSystem
 {
     [Serializable]
-    public struct ControllerDataProviderConfiguration
+    public struct ControllerDataProviderConfiguration : IBaseMixedRealityServiceConfiguration
     {
         /// <summary>
         /// Constructor.
@@ -35,10 +36,8 @@ namespace XRTK.Definitions.InputSystem
         [Implements(typeof(IMixedRealityControllerDataProvider), TypeGrouping.ByNamespaceFlat)]
         private SystemType dataProviderType;
 
-        /// <summary>
-        /// The concrete type to use for this controller data provider.
-        /// </summary>
-        public SystemType DataProviderType => dataProviderType;
+        /// <inheritdoc />
+        public SystemType InstancedType => dataProviderType;
 
         [SerializeField]
         private string dataProviderName;
@@ -51,9 +50,7 @@ namespace XRTK.Definitions.InputSystem
         [SerializeField]
         private uint priority;
 
-        /// <summary>
-        /// The priority this system, feature, or manager will be initialized in.
-        /// </summary>
+        /// <inheritdoc />
         public uint Priority => priority;
 
         [EnumFlags]

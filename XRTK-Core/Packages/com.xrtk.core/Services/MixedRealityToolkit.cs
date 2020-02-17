@@ -138,7 +138,7 @@ namespace XRTK.Services
         /// Current active systems registered with the MixedRealityToolkit.
         /// </summary>
         /// <remarks>
-        /// Systems can only be registered once by <see cref="Type"/>
+        /// Systems can only be registered once by <see cref="Type"/> and are executed in a specific priority order.
         /// </remarks>
         public static IReadOnlyDictionary<Type, IMixedRealityService> ActiveSystems => activeSystems;
 
@@ -149,7 +149,7 @@ namespace XRTK.Services
         /// Local service registry for the Mixed Reality Toolkit, to allow runtime use of the <see cref="IMixedRealityService"/>.
         /// </summary>
         /// <remarks>
-        /// Services can have one or more instances registered. Best to get them out by name.
+        /// Services can have one or more instances registered and can be executed simultaneously. Best to get them out by name or guid.
         /// </remarks>
         public static IReadOnlyList<Tuple<Type, IMixedRealityService>> RegisteredMixedRealityServices => registeredMixedRealityServices;
 
@@ -317,7 +317,7 @@ namespace XRTK.Services
         public static bool IsInitialized => instance != null;
 
         /// <summary>
-        /// Static function to determine if the MixedRealityToolkit class has been initialized or not.
+        /// Static function to determine if the <see cref="MixedRealityToolkit"/> class has been initialized or not.
         /// </summary>
         public static bool ConfirmInitialized()
         {
@@ -360,6 +360,9 @@ namespace XRTK.Services
             }
 #endif
 
+            Debug.Assert(ActiveSystems.Count == 0);
+            Debug.Assert(RegisteredMixedRealityServices.Count == 0);
+
             ClearCoreSystemCache();
             EnsureMixedRealityRequirements();
 
@@ -387,14 +390,14 @@ namespace XRTK.Services
                         foreach (var controllerDataProvider in ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders)
                         {
                             //If the DataProvider cannot be resolved, this is likely just a configuration / package missmatch.  User simply needs to be warned, not errored.
-                            if (controllerDataProvider.DataProviderType.Type == null)
+                            if (controllerDataProvider.InstancedType.Type == null)
                             {
                                 Debug.LogWarning($"Could not load the configured provider ({controllerDataProvider.DataProviderName})\n\nThis is most likely because the XRTK UPM package for that provider is currently not registered\nCheck the installed packages in the Unity Package Manager\n\n");
                                 continue;
                             }
 
                             if (!CreateAndRegisterService<IMixedRealityControllerDataProvider>(
-                                controllerDataProvider.DataProviderType,
+                                controllerDataProvider.InstancedType,
                                 controllerDataProvider.RuntimePlatform,
                                 controllerDataProvider.DataProviderName,
                                 controllerDataProvider.Priority,
@@ -442,7 +445,7 @@ namespace XRTK.Services
                     foreach (var spatialObserver in ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders)
                     {
                         if (!CreateAndRegisterService<IMixedRealitySpatialObserverDataProvider>(
-                            spatialObserver.SpatialObserverType,
+                            spatialObserver.InstancedType,
                             spatialObserver.RuntimePlatform,
                             spatialObserver.SpatialObserverName,
                             spatialObserver.Priority,
@@ -483,7 +486,7 @@ namespace XRTK.Services
                     foreach (var networkProvider in ActiveProfile.NetworkingSystemProfile.RegisteredNetworkDataProviders)
                     {
                         if (!CreateAndRegisterService<IMixedRealityNetworkDataProvider>(
-                            networkProvider.DataProviderType,
+                            networkProvider.InstancedType,
                             networkProvider.RuntimePlatform,
                             networkProvider.DataProviderName,
                             networkProvider.Priority,
@@ -506,7 +509,7 @@ namespace XRTK.Services
                     foreach (var diagnosticsDataProvider in ActiveProfile.DiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders)
                     {
                         if (!CreateAndRegisterService<IMixedRealityDiagnosticsDataProvider>(
-                            diagnosticsDataProvider.DataProviderType,
+                            diagnosticsDataProvider.InstancedType,
                             diagnosticsDataProvider.RuntimePlatform,
                             diagnosticsDataProvider.DataProviderName,
                             diagnosticsDataProvider.Priority,
@@ -527,7 +530,7 @@ namespace XRTK.Services
                 foreach (var configuration in ActiveProfile.RegisteredServiceProvidersProfile.Configurations)
                 {
                     if (CreateAndRegisterService<IMixedRealityExtensionService>(
-                        configuration.ComponentType,
+                        configuration.InstancedType,
                         configuration.RuntimePlatform,
                         configuration.ComponentName,
                         configuration.Priority,
@@ -538,7 +541,7 @@ namespace XRTK.Services
                         foreach (var dataProvider in configuration.ConfigurationProfile.RegisteredDataProviders)
                         {
                             if (!CreateAndRegisterService<IMixedRealityDataProvider>(
-                                dataProvider.DataModelType,
+                                dataProvider.InstancedType,
                                 dataProvider.RuntimePlatform,
                                 dataProvider.DataModelName,
                                 dataProvider.Priority,

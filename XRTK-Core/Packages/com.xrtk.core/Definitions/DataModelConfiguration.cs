@@ -10,7 +10,7 @@ using XRTK.Interfaces;
 namespace XRTK.Definitions
 {
     [Serializable]
-    public struct DataModelConfiguration
+    public struct DataModelConfiguration : IBaseMixedRealityServiceConfiguration
     {
         /// <summary>
         /// Constructor.
@@ -33,10 +33,8 @@ namespace XRTK.Definitions
         [Implements(typeof(IMixedRealityDataProvider), TypeGrouping.ByNamespaceFlat)]
         private SystemType dataModelType;
 
-        /// <summary>
-        /// The concrete type for the system, feature or manager.
-        /// </summary>
-        public SystemType DataModelType => dataModelType;
+        /// <inheritdoc />
+        public SystemType InstancedType => dataModelType;
 
         [SerializeField]
         private string dataModelName;
@@ -49,9 +47,7 @@ namespace XRTK.Definitions
         [SerializeField]
         private uint priority;
 
-        /// <summary>
-        /// The priority this system, feature, or manager will be initialized in.
-        /// </summary>
+        /// <inheritdoc />
         public uint Priority => priority;
 
         [EnumFlags]

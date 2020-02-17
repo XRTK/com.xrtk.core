@@ -122,7 +122,7 @@ namespace XRTK.Inspectors.Profiles
             var configurationProfile = managerConfig.FindPropertyRelative("configurationProfile");
             configurationProfile.objectReferenceValue = null;
             serializedObject.ApplyModifiedProperties();
-            var componentType = ((MixedRealityRegisteredServiceProvidersProfile)serializedObject.targetObject).Configurations[index].ComponentType;
+            var componentType = ((MixedRealityRegisteredServiceProvidersProfile)serializedObject.targetObject).Configurations[index].InstancedType;
             componentType.Type = null;
         }
 

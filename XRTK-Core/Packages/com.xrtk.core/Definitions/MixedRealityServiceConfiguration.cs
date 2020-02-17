@@ -13,7 +13,7 @@ namespace XRTK.Definitions
     /// Defines a system, feature, or manager to be registered with as a <see cref="IMixedRealityExtensionService"/> on startup.
     /// </summary>
     [Serializable]
-    public struct MixedRealityServiceConfiguration
+    public struct MixedRealityServiceConfiguration : IBaseMixedRealityServiceConfiguration
     {
         /// <summary>
         /// Constructor.
@@ -36,10 +36,8 @@ namespace XRTK.Definitions
         [Implements(typeof(IMixedRealityExtensionService), TypeGrouping.ByNamespaceFlat)]
         private SystemType componentType;
 
-        /// <summary>
-        /// The concrete type for the system, feature or manager.
-        /// </summary>
-        public SystemType ComponentType => componentType;
+        /// <inheritdoc />
+        public SystemType InstancedType => componentType;
 
         [SerializeField]
         private string componentName;
@@ -52,9 +50,7 @@ namespace XRTK.Definitions
         [SerializeField]
         private uint priority;
 
-        /// <summary>
-        /// The priority this system, feature, or manager will be initialized in.
-        /// </summary>
+        /// <inheritdoc />
         public uint Priority => priority;
 
         [EnumFlags]

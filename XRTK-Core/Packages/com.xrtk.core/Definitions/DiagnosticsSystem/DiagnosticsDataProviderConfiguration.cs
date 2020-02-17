@@ -5,12 +5,13 @@ using System;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces;
 using XRTK.Interfaces.DiagnosticsSystem;
 
 namespace XRTK.Definitions.DiagnosticsSystem
 {
     [Serializable]
-    public struct DiagnosticsDataProviderConfiguration
+    public struct DiagnosticsDataProviderConfiguration : IBaseMixedRealityServiceConfiguration
     {
         /// <summary>
         /// Constructor.
@@ -34,10 +35,7 @@ namespace XRTK.Definitions.DiagnosticsSystem
         [Implements(typeof(IMixedRealityDiagnosticsDataProvider), TypeGrouping.ByNamespaceFlat)]
         private SystemType dataProviderType;
 
-        /// <summary>
-        /// The concrete type to use for this data provider.
-        /// </summary>
-        public SystemType DataProviderType => dataProviderType;
+        public SystemType InstancedType => dataProviderType;
 
         [SerializeField]
         private string dataProviderName;
@@ -50,9 +48,6 @@ namespace XRTK.Definitions.DiagnosticsSystem
         [SerializeField]
         private uint priority;
 
-        /// <summary>
-        /// The priority this system, feature, or manager will be initialized in.
-        /// </summary>
         public uint Priority => priority;
 
         [EnumFlags]

@@ -15,7 +15,7 @@ namespace XRTK.Definitions.NetworkingSystem
     /// Configuration settings for a registered <see cref="IMixedRealityDataProvider"/>.
     /// </summary>
     [Serializable]
-    public struct NetworkDataProviderConfiguration
+    public struct NetworkDataProviderConfiguration : IBaseMixedRealityServiceConfiguration
     {
         /// <summary>
         /// Constructor.
@@ -38,10 +38,8 @@ namespace XRTK.Definitions.NetworkingSystem
         [Implements(typeof(IMixedRealityNetworkDataProvider), TypeGrouping.ByNamespaceFlat)]
         private SystemType dataProviderType;
 
-        /// <summary>
-        /// The concrete type for the system, feature or manager.
-        /// </summary>
-        public SystemType DataProviderType => dataProviderType;
+        /// <inheritdoc />
+        public SystemType InstancedType => dataProviderType;
 
         [SerializeField]
         private string dataProviderName;
@@ -54,9 +52,7 @@ namespace XRTK.Definitions.NetworkingSystem
         [SerializeField]
         private uint priority;
 
-        /// <summary>
-        /// The priority this system, feature, or manager will be initialized in.
-        /// </summary>
+        /// <inheritdoc />
         public uint Priority => priority;
 
         [EnumFlags]

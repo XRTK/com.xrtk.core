@@ -35,7 +35,7 @@ namespace XRTK.Utilities
             if (MixedRealityToolkit.HasActiveProfile)
             {
                 var errorsFound = false;
-                var providerConfigurationSource = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile?.ControllerDataProvidersProfile?.RegisteredControllerDataProviders;
+                var providerConfigurationSource = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders;
 
                 if (providerConfigurationSource != null)
                 {
@@ -128,7 +128,7 @@ namespace XRTK.Utilities
             if (MixedRealityToolkit.HasActiveProfile)
             {
                 var errorsFound = false;
-                var mappingConfigurationSource = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile?.ControllerMappingProfiles?.MixedRealityControllerMappings;
+                var mappingConfigurationSource = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.MixedRealityControllerMappings;
 
                 if (mappingConfigurationSource != null)
                 {
@@ -211,7 +211,7 @@ namespace XRTK.Utilities
             if (MixedRealityToolkit.HasActiveProfile)
             {
                 var errorsFound = false;
-                var mappingConfigurationSource = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile?.ControllerMappingProfiles?.MixedRealityControllerMappings;
+                var mappingConfigurationSource = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.MixedRealityControllerMappings;
 
                 if (mappingConfigurationSource != null)
                 {

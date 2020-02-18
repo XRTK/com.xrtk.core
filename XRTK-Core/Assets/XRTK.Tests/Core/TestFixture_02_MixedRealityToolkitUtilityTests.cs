@@ -2,7 +2,8 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using NUnit.Framework;
-using System;
+using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
@@ -20,8 +21,8 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_01_ConfirmDataProviderConfigurationNotPresent()
         {
-            Type[] dataProviderTypes = new[] { typeof(TestDataProvider1) };
-            ControllerDataProviderConfiguration[] dataProviderConfiguration = new[] { new ControllerDataProviderConfiguration(typeof(TestDataProvider1), "Test Controller Data Provider", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null) };
+            var dataProviderTypes = new[] { typeof(TestDataProvider1) };
+            var dataProviderConfiguration = new[] { new ControllerDataProviderConfiguration(typeof(TestDataProvider1), "Test Controller Data Provider", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null) };
 
             TestUtilities.InitializeMixedRealityToolkitScene();
 
@@ -33,8 +34,8 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_02_ConfirmDataProviderConfigurationPresent()
         {
-            Type[] dataProviderTypes = new[] { typeof(TestDataProvider1) };
-            ControllerDataProviderConfiguration[] dataProviderConfiguration = new[] { new ControllerDataProviderConfiguration(typeof(TestDataProvider1), "Test Controller Data Provider", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null) };
+            var dataProviderTypes = new[] { typeof(TestDataProvider1) };
+            var dataProviderConfiguration = new[] { new ControllerDataProviderConfiguration(typeof(TestDataProvider1), "Test Controller Data Provider", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null) };
 
             TestUtilities.InitializeMixedRealityToolkitScene();
 
@@ -48,8 +49,8 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_03_ConfirmControllerMappingConfigurationNotPresent()
         {
-            Type[] controllerTypes = new[] { typeof(GenericOpenVRController) };
-            ControllerDataProviderConfiguration[] dataProviderConfiguration = new[] { new ControllerDataProviderConfiguration(typeof(TestDataProvider1), "Test Controller Data Provider", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null) };
+            var controllerTypes = new[] { typeof(GenericOpenVRController) };
+            var dataProviderConfiguration = new[] { new ControllerDataProviderConfiguration(typeof(TestDataProvider1), "Test Controller Data Provider", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null) };
 
             TestUtilities.InitializeMixedRealityToolkitScene();
 
@@ -60,9 +61,9 @@ namespace XRTK.Tests.Core
 
         private void InitializeDefaultInputSystemProfile()
         {
-            var inputSystemProfile = new MixedRealityInputSystemProfile();
-            inputSystemProfile.ControllerDataProvidersProfile = new Definitions.Controllers.MixedRealityControllerDataProvidersProfile();
-            inputSystemProfile.ControllerMappingProfiles = new Definitions.Controllers.MixedRealityControllerMappingProfiles();
+            var inputSystemProfile = ScriptableObject.CreateInstance<MixedRealityInputSystemProfile>();
+            inputSystemProfile.ControllerDataProvidersProfile = ScriptableObject.CreateInstance<MixedRealityControllerDataProvidersProfile>();
+            inputSystemProfile.ControllerMappingProfiles = ScriptableObject.CreateInstance<MixedRealityControllerMappingProfiles>();
             MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile = inputSystemProfile;
         }
         #endregion Configuration Validation Tests

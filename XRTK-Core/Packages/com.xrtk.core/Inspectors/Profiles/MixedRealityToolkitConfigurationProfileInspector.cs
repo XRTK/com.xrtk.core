@@ -125,7 +125,7 @@ namespace XRTK.Inspectors.Profiles
 
             if (!MixedRealityToolkit.IsInitialized) { return; }
 
-            if (!configurationProfile.IsDefaultProfile)
+            if (!configurationProfile.IsEditable)
             {
                 EditorGUILayout.HelpBox("The Mixed Reality Toolkit's core SDK profiles can be used to get up and running quickly.\n\n" +
                                         "You can use the default profiles provided, copy and customize the default profiles, or create your own.", MessageType.Warning);
@@ -147,7 +147,7 @@ namespace XRTK.Inspectors.Profiles
             }
 
             // We don't call the CheckLock method so won't get a duplicate message.
-            if (MixedRealityPreferences.LockProfiles && !ThisProfile.IsDefaultProfile)
+            if (MixedRealityPreferences.LockProfiles && !ThisProfile.IsEditable)
             {
                 GUI.enabled = false;
             }

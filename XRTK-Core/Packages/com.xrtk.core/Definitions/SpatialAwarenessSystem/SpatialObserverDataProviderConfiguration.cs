@@ -1,8 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Providers.SpatialObservers;
 using XRTK.Definitions.Utilities;
@@ -20,33 +21,35 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="spatialObserverType"></param>
-        /// <param name="spatialObserverName"></param>
+        /// <param name="instancedType"></param>
+        /// <param name="name"></param>
         /// <param name="priority"></param>
         /// <param name="runtimePlatform"></param>
         /// <param name="profile"></param>
-        public SpatialObserverDataProviderConfiguration(SystemType spatialObserverType, string spatialObserverName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealitySpatialObserverProfile profile)
+        public SpatialObserverDataProviderConfiguration(SystemType instancedType, string name, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealitySpatialObserverProfile profile)
         {
-            this.spatialObserverType = spatialObserverType;
-            this.spatialObserverName = spatialObserverName;
+            this.instancedType = instancedType;
+            this.name = name;
             this.priority = priority;
             this.runtimePlatform = runtimePlatform;
             this.profile = profile;
         }
 
         [SerializeField]
+        [FormerlySerializedAs("spatialObserverType")]
         [Tooltip("The concrete type of spatial observer to register.")]
         [Implements(typeof(IMixedRealitySpatialObserverDataProvider), TypeGrouping.ByNamespaceFlat)]
-        private SystemType spatialObserverType;
+        private SystemType instancedType;
 
         /// <inheritdoc />
-        public SystemType InstancedType => spatialObserverType;
+        public SystemType InstancedType => instancedType;
 
+        [FormerlySerializedAs("spatialObserverName")]
         [SerializeField]
-        private string spatialObserverName;
+        private string name;
 
         /// <inheritdoc />
-        public string Name => spatialObserverName;
+        public string Name => name;
 
         [SerializeField]
         private uint priority;

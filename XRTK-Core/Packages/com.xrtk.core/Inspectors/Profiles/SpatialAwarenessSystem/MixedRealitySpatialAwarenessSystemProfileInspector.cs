@@ -56,8 +56,8 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             {
                 registeredSpatialObserverDataProviders.arraySize++;
                 var spatialObserverConfiguration = registeredSpatialObserverDataProviders.GetArrayElementAtIndex(registeredSpatialObserverDataProviders.arraySize - 1);
-                var spatialObserverType = spatialObserverConfiguration.FindPropertyRelative("spatialObserverType");
-                var spatialObserverName = spatialObserverConfiguration.FindPropertyRelative("spatialObserverName");
+                var spatialObserverType = spatialObserverConfiguration.FindPropertyRelative("instancedType");
+                var spatialObserverName = spatialObserverConfiguration.FindPropertyRelative("name");
                 var priority = spatialObserverConfiguration.FindPropertyRelative("priority");
                 var runtimePlatform = spatialObserverConfiguration.FindPropertyRelative("runtimePlatform");
                 var profile = spatialObserverConfiguration.FindPropertyRelative("profile");
@@ -78,8 +78,8 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             for (int i = 0; i < registeredSpatialObserverDataProviders?.arraySize; i++)
             {
                 var spatialObserverConfiguration = registeredSpatialObserverDataProviders.GetArrayElementAtIndex(i);
-                var spatialObserverType = spatialObserverConfiguration.FindPropertyRelative("spatialObserverType");
-                var spatialObserverName = spatialObserverConfiguration.FindPropertyRelative("spatialObserverName");
+                var spatialObserverType = spatialObserverConfiguration.FindPropertyRelative("instancedType");
+                var spatialObserverName = spatialObserverConfiguration.FindPropertyRelative("name");
                 var priority = spatialObserverConfiguration.FindPropertyRelative("priority");
                 var runtimePlatform = spatialObserverConfiguration.FindPropertyRelative("runtimePlatform");
                 var profile = spatialObserverConfiguration.FindPropertyRelative("profile");

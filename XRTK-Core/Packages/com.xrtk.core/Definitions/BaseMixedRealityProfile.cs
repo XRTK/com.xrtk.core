@@ -10,15 +10,16 @@ namespace XRTK.Definitions
     {
         [SerializeField]
         [FormerlySerializedAs("isCustomProfile")]
-        private bool isDefaultProfile = true;
+        [FormerlySerializedAs("isDefaultProfile")]
+        private bool isEditable = true;
 
         /// <summary>
         /// Is this profile in an editable state?
         /// </summary>
-        internal bool IsDefaultProfile
+        internal bool IsEditable
         {
-            get => isDefaultProfile;
-            set => isDefaultProfile = value;
+            get => isEditable;
+            set => isEditable = value;
         }
 
         /// <summary>

@@ -80,8 +80,8 @@ namespace XRTK.Inspectors.Profiles
             var profileRect = new Rect(rect.x, rect.y + halfFieldHeight * 16, rect.width, EditorGUIUtility.singleLineHeight);
 
             var managerConfig = configurations.GetArrayElementAtIndex(index);
-            var componentName = managerConfig.FindPropertyRelative("componentName");
-            var componentType = managerConfig.FindPropertyRelative("componentType");
+            var componentName = managerConfig.FindPropertyRelative("name");
+            var componentType = managerConfig.FindPropertyRelative("instancedType");
             var priority = managerConfig.FindPropertyRelative("priority");
             var runtimePlatform = managerConfig.FindPropertyRelative("runtimePlatform");
             var configurationProfile = managerConfig.FindPropertyRelative("configurationProfile");
@@ -113,7 +113,7 @@ namespace XRTK.Inspectors.Profiles
             configurations.arraySize += 1;
             var index = configurations.arraySize - 1;
             var managerConfig = configurations.GetArrayElementAtIndex(index);
-            var componentName = managerConfig.FindPropertyRelative("componentName");
+            var componentName = managerConfig.FindPropertyRelative("name");
             componentName.stringValue = $"New Configuration {index}";
             var priority = managerConfig.FindPropertyRelative("priority");
             priority.intValue = index;

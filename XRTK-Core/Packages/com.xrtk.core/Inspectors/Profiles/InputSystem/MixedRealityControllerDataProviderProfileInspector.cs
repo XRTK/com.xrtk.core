@@ -54,8 +54,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             {
                 controllerDataProviders.arraySize += 1;
                 var newConfiguration = controllerDataProviders.GetArrayElementAtIndex(controllerDataProviders.arraySize - 1);
-                var dataProviderType = newConfiguration.FindPropertyRelative("dataProviderType");
-                var dataProviderName = newConfiguration.FindPropertyRelative("dataProviderName");
+                var dataProviderType = newConfiguration.FindPropertyRelative("instancedType");
+                var dataProviderName = newConfiguration.FindPropertyRelative("name");
                 var priority = newConfiguration.FindPropertyRelative("priority");
                 var runtimePlatform = newConfiguration.FindPropertyRelative("runtimePlatform");
                 var profile = newConfiguration.FindPropertyRelative("profile");
@@ -77,8 +77,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             for (int i = 0; i < controllerDataProviders.arraySize; i++)
             {
                 var controllerConfiguration = controllerDataProviders.GetArrayElementAtIndex(i);
-                var dataProviderName = controllerConfiguration.FindPropertyRelative("dataProviderName");
-                var dataProviderType = controllerConfiguration.FindPropertyRelative("dataProviderType");
+                var dataProviderName = controllerConfiguration.FindPropertyRelative("name");
+                var dataProviderType = controllerConfiguration.FindPropertyRelative("instancedType");
                 var priority = controllerConfiguration.FindPropertyRelative("priority");
                 var runtimePlatform = controllerConfiguration.FindPropertyRelative("runtimePlatform");
                 var profile = controllerConfiguration.FindPropertyRelative("profile");

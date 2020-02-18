@@ -98,8 +98,8 @@ namespace XRTK.Inspectors.Profiles
                 Debug.Assert(renderedProfile != null);
                 Debug.Assert(profile != null, "No profile was set in OnEnable. Did you forget to call base.OnEnable in a derived profile class?");
 
-                if (profile.IsDefaultProfile &&
-                    !renderedProfile.IsDefaultProfile &&
+                if (profile.IsEditable &&
+                    !renderedProfile.IsEditable &&
                     GUILayout.Button(CopyProfileContent, EditorStyles.miniButton, GUILayout.Width(42f)))
                 {
                     profileToCopy = renderedProfile;
@@ -154,7 +154,7 @@ namespace XRTK.Inspectors.Profiles
             Selection.activeObject = profile;
             EditorGUIUtility.PingObject(profile);
 
-            if (!profileToCopy.IsDefaultProfile)
+            if (!profileToCopy.IsEditable)
             {
                 // For now we only replace it if it's the master configuration profile.
                 // Sub-profiles are easy to update in the master configuration inspector.

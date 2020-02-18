@@ -3,6 +3,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces;
@@ -15,32 +16,34 @@ namespace XRTK.Definitions
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="dataModelType">The concrete type for the <see cref="IMixedRealityDataProvider"/>.</param>
-        /// <param name="dataModelName">The simple, human readable name for the <see cref="IMixedRealityDataProvider"/>.</param>
+        /// <param name="instancedType">The concrete type for the <see cref="IMixedRealityDataProvider"/>.</param>
+        /// <param name="name">The simple, human readable name for the <see cref="IMixedRealityDataProvider"/>.</param>
         /// <param name="priority">The priority this <see cref="IMixedRealityDataProvider"/> will be initialized in.</param>
         /// <param name="runtimePlatform">The runtime platform(s) to run this <see cref="IMixedRealityDataProvider"/> on.</param>
         /// <param name="configurationProfile">The configuration profile for the <see cref="IMixedRealityDataProvider"/>.</param>
-        public DataModelConfiguration(SystemType dataModelType, string dataModelName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityProfile configurationProfile)
+        public DataModelConfiguration(SystemType instancedType, string name, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityProfile configurationProfile)
         {
-            this.dataModelType = dataModelType;
-            this.dataModelName = dataModelName;
+            this.instancedType = instancedType;
+            this.name = name;
             this.priority = priority;
             this.runtimePlatform = runtimePlatform;
             this.configurationProfile = configurationProfile;
         }
 
         [SerializeField]
+        [FormerlySerializedAs("dataModelType")]
         [Implements(typeof(IMixedRealityDataProvider), TypeGrouping.ByNamespaceFlat)]
-        private SystemType dataModelType;
+        private SystemType instancedType;
 
         /// <inheritdoc />
-        public SystemType InstancedType => dataModelType;
+        public SystemType InstancedType => instancedType;
 
         [SerializeField]
-        private string dataModelName;
+        [FormerlySerializedAs("dataModelName")]
+        private string name;
 
         /// <inheritdoc />
-        public string Name => dataModelName;
+        public string Name => name;
 
         [SerializeField]
         private uint priority;

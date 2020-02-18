@@ -1,10 +1,19 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using XRTK.Definitions;
 
 namespace XRTK.Interfaces
 {
+    public interface IMixedRealityService<out T> : IMixedRealityService where T : BaseMixedRealityProfile
+    {
+        /// <summary>
+        /// The type of <see cref="BaseMixedRealityProfile"/> that is associated to this <see cref="IMixedRealityService{T}"/>
+        /// </summary>
+        T ProfileType { get; }
+    }
+
     /// <summary>
     /// Generic interface for all Mixed Reality Services
     /// </summary>

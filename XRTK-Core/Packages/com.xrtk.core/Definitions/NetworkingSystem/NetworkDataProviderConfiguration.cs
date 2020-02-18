@@ -1,8 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Providers.Networking.Profiles;
 using XRTK.Definitions.Utilities;
@@ -20,32 +21,34 @@ namespace XRTK.Definitions.NetworkingSystem
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="dataProviderType">The concrete type for the system, feature or manager.</param>
-        /// <param name="dataProviderName">The simple, human readable name for the system, feature, or manager.</param>
+        /// <param name="instancedType">The concrete type for the system, feature or manager.</param>
+        /// <param name="name">The simple, human readable name for the system, feature, or manager.</param>
         /// <param name="priority">The priority this system, feature, or manager will be initialized in.</param>
         /// <param name="runtimePlatform">The runtime platform(s) to run this system, feature, or manager on.</param>
         /// <param name="profile">The configuration profile for the system, feature, or manager.</param>
-        public NetworkDataProviderConfiguration(SystemType dataProviderType, string dataProviderName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityNetworkProviderProfile profile)
+        public NetworkDataProviderConfiguration(SystemType instancedType, string name, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityNetworkProviderProfile profile)
         {
-            this.dataProviderType = dataProviderType;
-            this.dataProviderName = dataProviderName;
+            this.instancedType = instancedType;
+            this.name = name;
             this.priority = priority;
             this.runtimePlatform = runtimePlatform;
             this.profile = profile;
         }
 
         [SerializeField]
+        [FormerlySerializedAs("dataProviderType")]
         [Implements(typeof(IMixedRealityNetworkDataProvider), TypeGrouping.ByNamespaceFlat)]
-        private SystemType dataProviderType;
+        private SystemType instancedType;
 
         /// <inheritdoc />
-        public SystemType InstancedType => dataProviderType;
+        public SystemType InstancedType => instancedType;
 
         [SerializeField]
-        private string dataProviderName;
+        [FormerlySerializedAs("dataProviderName")]
+        private string name;
 
         /// <inheritdoc />
-        public string Name => dataProviderName;
+        public string Name => name;
 
         [SerializeField]
         private uint priority;

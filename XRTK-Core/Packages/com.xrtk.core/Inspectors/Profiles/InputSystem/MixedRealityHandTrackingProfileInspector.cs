@@ -3,13 +3,13 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions.Controllers.Hands;
+using XRTK.Definitions.InputSystem;
 using XRTK.Inspectors.Utilities;
 
-namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Hands
+namespace XRTK.Inspectors.Profiles.InputSystem
 {
-    [CustomEditor(typeof(MixedRealityHandControllerDataProviderProfile))]
-    public class MixedRealityHandControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(MixedRealityHandTrackingProfile))]
+    public class MixedRealityHandTrackingProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty handMeshingEnabled;
         private SerializedProperty handPhysicsEnabled;
@@ -29,8 +29,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Hands
         public override void OnInspectorGUI()
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+
             if (thisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Configuration Profile"))
+                GUILayout.Button("Back To Input System Profile"))
             {
                 Selection.activeObject = thisProfile.ParentProfile;
             }
@@ -46,19 +47,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Hands
             EditorGUILayout.PropertyField(useTriggers);
             EditorGUILayout.PropertyField(boundsMode);
             EditorGUILayout.EndVertical();
-            EditorGUILayout.Space();
-            EditorGUILayout.Space();
-
-            // We give child implementations a chance here to render their platform
-            // specifics.
-            OnPlatformInspectorGUI();
 
             serializedObject.ApplyModifiedProperties();
         }
-
-        /// <summary>
-        /// Renders platform specific profile configuration.
-        /// </summary>
-        protected virtual void OnPlatformInspectorGUI() { }
     }
 }

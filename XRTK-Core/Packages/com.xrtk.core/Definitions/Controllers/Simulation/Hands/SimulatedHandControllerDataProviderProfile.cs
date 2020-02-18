@@ -3,13 +3,12 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.Controllers.Simulation.Hands
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Simulated Hand Controller Data Provider Profile", fileName = "SimulatedHandControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
-    public class SimulatedHandControllerDataProviderProfile : MixedRealityHandControllerDataProviderProfile
+    public class SimulatedHandControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
     {
         [SerializeField]
         [Tooltip("Hand pose definitions.")]

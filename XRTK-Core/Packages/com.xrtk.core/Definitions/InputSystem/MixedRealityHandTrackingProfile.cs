@@ -5,15 +5,13 @@ using UnityEngine;
 using XRTK.Definitions.Utilities;
 using XRTK.Providers.Controllers.Hands;
 
-namespace XRTK.Definitions.Controllers.Hands
+namespace XRTK.Definitions.InputSystem
 {
     /// <summary>
-    /// The hand controller data provider profile defines configuration settings
-    /// that are common to all hand data providers. Use it as a base if adding custom
-    /// configurations that are platform specific.
+    /// Configuration profile settings for setting up and consuming gesture based input actions.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Hand Controller Data Provider Profile", fileName = "HandControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
-    public class MixedRealityHandControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Hand Tracking Profile", fileName = "MixedRealityHandTrackingProfile", order = (int)CreateProfileMenuItemIndices.HandTracking)]
+    public class MixedRealityHandTrackingProfile : BaseMixedRealityProfile
     {
         [Header("General Settings")]
 

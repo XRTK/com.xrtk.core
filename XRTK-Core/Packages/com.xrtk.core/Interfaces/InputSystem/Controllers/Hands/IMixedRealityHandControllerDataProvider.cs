@@ -22,5 +22,10 @@ namespace XRTK.Interfaces.InputSystem
         /// Gets the configured hand bounds mode to be used with hand physics.
         /// </summary>
         HandBoundsMode BoundsMode { get; }
+
+        /// <summary>
+        /// Should hand mesh data be read if the platform provides it?
+        /// </summary>
+        bool HandMeshingEnabled { get; }
     }
 }

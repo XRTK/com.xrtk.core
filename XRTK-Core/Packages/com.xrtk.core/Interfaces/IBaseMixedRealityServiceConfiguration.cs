@@ -7,7 +7,7 @@ using XRTK.Services;
 namespace XRTK.Interfaces
 {
     /// <summary>
-    /// Base Mixed Reality Service Configuration
+    /// Base Mixed Reality Service Configuration for services that don't have configuration profiles or names.
     /// </summary>
     public interface IBaseMixedRealityServiceConfiguration
     {

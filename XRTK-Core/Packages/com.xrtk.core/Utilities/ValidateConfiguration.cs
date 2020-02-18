@@ -47,9 +47,9 @@ namespace XRTK.Utilities
                         {
                             foreach (var profile in providerConfigurationSource)
                             {
-                                if (profile.DataProviderType == null) { continue; }
+                                if (profile.InstancedType == null) { continue; }
 
-                                if (profile.DataProviderType == providerTypesToValidate[i])
+                                if (profile.InstancedType == providerTypesToValidate[i])
                                 {
                                     typesValidated[i] = true;
                                 }

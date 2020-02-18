@@ -1,13 +1,20 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using XRTK.Interfaces;
 
 namespace XRTK.Extensions
 {
-    public static class DataModelConfigurationExtensions
+    public static class ConfigurationExtensions
     {
-        public static bool TryGetConfigurationName<T>(this IMixedRealityServiceConfiguration[] configurations, out string name) where T : IMixedRealityDataProvider
+        /// <summary>
+        /// Attempts to get the name of the first configuration?
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="configurations"></param>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static bool TryGetConfigurationName<T>(this IMixedRealityServiceConfiguration[] configurations, out string name) where T : IMixedRealityService
         {
             name = string.Empty;
 

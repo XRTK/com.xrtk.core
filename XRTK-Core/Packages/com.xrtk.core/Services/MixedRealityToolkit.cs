@@ -527,7 +527,7 @@ namespace XRTK.Services
 
             if (ActiveProfile.RegisteredServiceProvidersProfile != null)
             {
-                foreach (var configuration in ActiveProfile.RegisteredServiceProvidersProfile.Configurations)
+                foreach (var configuration in ActiveProfile.RegisteredServiceProvidersProfile.ServiceConfigurations)
                 {
                     if (CreateAndRegisterService<IMixedRealityExtensionService>(
                         configuration.InstancedType,

@@ -387,7 +387,7 @@ namespace XRTK.Services
                 {
                     if (CreateAndRegisterService<IMixedRealityFocusProvider>(ActiveProfile.InputSystemProfile.FocusProviderType))
                     {
-                        foreach (var controllerDataProvider in ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders)
+                        foreach (var controllerDataProvider in ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredServiceConfigurations)
                         {
                             //If the DataProvider cannot be resolved, this is likely just a configuration / package missmatch.  User simply needs to be warned, not errored.
                             if (controllerDataProvider.InstancedType.Type == null)
@@ -396,12 +396,7 @@ namespace XRTK.Services
                                 continue;
                             }
 
-                            if (!CreateAndRegisterService<IMixedRealityControllerDataProvider>(
-                                controllerDataProvider.InstancedType,
-                                controllerDataProvider.RuntimePlatform,
-                                controllerDataProvider.Name,
-                                controllerDataProvider.Priority,
-                                controllerDataProvider.ConfigurationProfile))
+                            if (!CreateAndRegisterService<IMixedRealityControllerDataProvider>(controllerDataProvider))
                             {
                                 Debug.LogError($"Failed to start {controllerDataProvider.Name}!");
                             }
@@ -442,14 +437,9 @@ namespace XRTK.Services
 #endif
                 if (CreateAndRegisterService<IMixedRealitySpatialAwarenessSystem>(ActiveProfile.SpatialAwarenessSystemSystemType, ActiveProfile.SpatialAwarenessProfile) && SpatialAwarenessSystem != null)
                 {
-                    foreach (var spatialObserver in ActiveProfile.SpatialAwarenessProfile.RegisteredSpatialObserverDataProviders)
+                    foreach (var spatialObserver in ActiveProfile.SpatialAwarenessProfile.RegisteredServiceConfigurations)
                     {
-                        if (!CreateAndRegisterService<IMixedRealitySpatialObserverDataProvider>(
-                            spatialObserver.InstancedType,
-                            spatialObserver.RuntimePlatform,
-                            spatialObserver.Name,
-                            spatialObserver.Priority,
-                            spatialObserver.ConfigurationProfile))
+                        if (!CreateAndRegisterService<IMixedRealitySpatialObserverDataProvider>(spatialObserver))
                         {
                             Debug.LogError($"Failed to start {spatialObserver.Name}!");
                         }
@@ -483,14 +473,9 @@ namespace XRTK.Services
             {
                 if (CreateAndRegisterService<IMixedRealityNetworkingSystem>(ActiveProfile.NetworkingSystemSystemType, ActiveProfile.NetworkingSystemProfile) && NetworkingSystem != null)
                 {
-                    foreach (var networkProvider in ActiveProfile.NetworkingSystemProfile.RegisteredNetworkDataProviders)
+                    foreach (var networkProvider in ActiveProfile.NetworkingSystemProfile.RegisteredServiceConfigurations)
                     {
-                        if (!CreateAndRegisterService<IMixedRealityNetworkDataProvider>(
-                            networkProvider.InstancedType,
-                            networkProvider.RuntimePlatform,
-                            networkProvider.Name,
-                            networkProvider.Priority,
-                            networkProvider.ConfigurationProfile))
+                        if (!CreateAndRegisterService<IMixedRealityNetworkDataProvider>(networkProvider))
                         {
                             Debug.LogError($"Failed to start {networkProvider.Name}!");
                         }
@@ -506,14 +491,9 @@ namespace XRTK.Services
             {
                 if (CreateAndRegisterService<IMixedRealityDiagnosticsSystem>(ActiveProfile.DiagnosticsSystemSystemType, ActiveProfile.DiagnosticsSystemProfile) && DiagnosticsSystem != null)
                 {
-                    foreach (var diagnosticsDataProvider in ActiveProfile.DiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders)
+                    foreach (var diagnosticsDataProvider in ActiveProfile.DiagnosticsSystemProfile.RegisteredServiceConfigurations)
                     {
-                        if (!CreateAndRegisterService<IMixedRealityDiagnosticsDataProvider>(
-                            diagnosticsDataProvider.InstancedType,
-                            diagnosticsDataProvider.RuntimePlatform,
-                            diagnosticsDataProvider.Name,
-                            diagnosticsDataProvider.Priority,
-                            diagnosticsDataProvider.ConfigurationProfile))
+                        if (!CreateAndRegisterService<IMixedRealityDiagnosticsDataProvider>(diagnosticsDataProvider))
                         {
                             Debug.LogError($"Failed to start {diagnosticsDataProvider.Name}!");
                         }
@@ -527,25 +507,15 @@ namespace XRTK.Services
 
             if (ActiveProfile.RegisteredServiceProvidersProfile != null)
             {
-                foreach (var configuration in ActiveProfile.RegisteredServiceProvidersProfile.ServiceConfigurations)
+                foreach (var configuration in ActiveProfile.RegisteredServiceProvidersProfile.RegisteredServiceConfigurations)
                 {
-                    if (CreateAndRegisterService<IMixedRealityExtensionService>(
-                        configuration.InstancedType,
-                        configuration.RuntimePlatform,
-                        configuration.Name,
-                        configuration.Priority,
-                        configuration.ConfigurationProfile))
+                    if (CreateAndRegisterService<IMixedRealityExtensionService>(configuration))
                     {
                         if (configuration.ConfigurationProfile == null) { continue; }
 
-                        foreach (var dataProvider in (configuration.ConfigurationProfile as BaseMixedRealityExtensionServiceProfile).RegisteredDataProviders)
+                        foreach (var dataProvider in (configuration.ConfigurationProfile as BaseMixedRealityExtensionServiceProfile).RegisteredServiceConfigurations)
                         {
-                            if (!CreateAndRegisterService<IMixedRealityDataProvider>(
-                                dataProvider.InstancedType,
-                                dataProvider.RuntimePlatform,
-                                dataProvider.Name,
-                                dataProvider.Priority,
-                                dataProvider.ConfigurationProfile))
+                            if (!CreateAndRegisterService<IMixedRealityDataProvider>(dataProvider))
                             {
                                 Debug.LogError($"Failed to register {dataProvider.Name} data model for {configuration.Name} extension service!");
                             }
@@ -780,6 +750,22 @@ namespace XRTK.Services
         private static bool RegisterService(Type interfaceType, IMixedRealityService serviceInstance)
         {
             return RegisterServiceInternal(interfaceType, serviceInstance);
+        }
+
+        /// <summary>
+        /// Creates a new instance of a service and registers it to the Mixed Reality Toolkit service registry for the specified platform.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="configuration"></param>
+        /// <returns></returns>
+        public static bool CreateAndRegisterService<T>(IMixedRealityServiceConfiguration configuration) where T : IMixedRealityService
+        {
+            return CreateAndRegisterService<T>(
+                configuration.InstancedType,
+                configuration.RuntimePlatform,
+                configuration.Name,
+                configuration.Priority,
+                configuration.ConfigurationProfile);
         }
 
         /// <summary>

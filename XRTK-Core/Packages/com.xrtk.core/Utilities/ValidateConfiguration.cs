@@ -35,7 +35,7 @@ namespace XRTK.Utilities
             if (MixedRealityToolkit.HasActiveProfile)
             {
                 var errorsFound = false;
-                var providerConfigurationSource = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders;
+                var providerConfigurationSource = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredServiceConfigurations;
 
                 if (providerConfigurationSource != null)
                 {
@@ -91,7 +91,7 @@ namespace XRTK.Utilities
                                     {
                                         if (!typesValidated[i])
                                         {
-                                            MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders = providerConfigurationSource.AddItem(providerDefaultConfiguration[i]);
+                                            MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredServiceConfigurations = providerConfigurationSource.AddItem(providerDefaultConfiguration[i]);
                                         }
                                     }
                                     return true;

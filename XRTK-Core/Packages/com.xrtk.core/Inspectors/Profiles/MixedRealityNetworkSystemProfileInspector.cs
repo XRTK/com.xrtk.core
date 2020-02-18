@@ -12,13 +12,13 @@ namespace XRTK.Inspectors.Profiles
     [CustomEditor(typeof(MixedRealityNetworkSystemProfile))]
     public class MixedRealityNetworkSystemProfileInspector : BaseMixedRealityProfileInspector
     {
-        private SerializedProperty registeredNetworkDataProviders;
+        private SerializedProperty configurations;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            registeredNetworkDataProviders = serializedObject.FindProperty("registeredNetworkDataProviders");
+            configurations = serializedObject.FindProperty(nameof(configurations));
         }
 
         public override void OnInspectorGUI()
@@ -40,7 +40,7 @@ namespace XRTK.Inspectors.Profiles
             serializedObject.Update();
 
             EditorGUI.BeginChangeCheck();
-            EditorGUILayout.PropertyField(registeredNetworkDataProviders, true);
+            EditorGUILayout.PropertyField(configurations, true);
 
             if (EditorGUI.EndChangeCheck() && MixedRealityToolkit.IsInitialized)
             {

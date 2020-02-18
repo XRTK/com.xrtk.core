@@ -41,7 +41,7 @@ namespace XRTK.Tests.Core
 
             InitializeDefaultInputSystemProfile();
 
-            MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders.AddItem<ControllerDataProviderConfiguration>(dataProviderConfiguration[0]);
+            MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredServiceConfigurations = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredServiceConfigurations.AddItem(dataProviderConfiguration[0]);
 
             Assert.IsTrue(ValidateConfiguration.ValidateDataProviders(dataProviderTypes, dataProviderConfiguration, false));
         }

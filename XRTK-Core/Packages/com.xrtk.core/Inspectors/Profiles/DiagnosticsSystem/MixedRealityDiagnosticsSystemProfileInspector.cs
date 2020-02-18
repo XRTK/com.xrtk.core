@@ -18,7 +18,7 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
 
         private SerializedProperty diagnosticsWindowPrefab;
         private SerializedProperty showDiagnosticsWindowOnStart;
-        private SerializedProperty registeredDiagnosticsDataProviders;
+        private SerializedProperty configurations;
         private bool[] foldouts = null;
 
         protected override void OnEnable()
@@ -27,8 +27,8 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
 
             diagnosticsWindowPrefab = serializedObject.FindProperty(nameof(diagnosticsWindowPrefab));
             showDiagnosticsWindowOnStart = serializedObject.FindProperty(nameof(showDiagnosticsWindowOnStart));
-            registeredDiagnosticsDataProviders = serializedObject.FindProperty(nameof(registeredDiagnosticsDataProviders));
-            foldouts = new bool[registeredDiagnosticsDataProviders.arraySize];
+            configurations = serializedObject.FindProperty(nameof(configurations));
+            foldouts = new bool[configurations.arraySize];
         }
 
         public override void OnInspectorGUI()
@@ -57,8 +57,8 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
             bool changed = false;
             if (GUILayout.Button(addDataProviderContent, EditorStyles.miniButton))
             {
-                registeredDiagnosticsDataProviders.arraySize += 1;
-                var newConfiguration = registeredDiagnosticsDataProviders.GetArrayElementAtIndex(registeredDiagnosticsDataProviders.arraySize - 1);
+                configurations.arraySize += 1;
+                var newConfiguration = configurations.GetArrayElementAtIndex(configurations.arraySize - 1);
                 var dataProviderType = newConfiguration.FindPropertyRelative("instancedType");
                 var dataProviderName = newConfiguration.FindPropertyRelative("name");
                 var priority = newConfiguration.FindPropertyRelative("priority");
@@ -72,16 +72,16 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
                 runtimePlatform.intValue = 0;
                 profile.objectReferenceValue = null;
                 serializedObject.ApplyModifiedProperties();
-                foldouts = new bool[registeredDiagnosticsDataProviders.arraySize];
+                foldouts = new bool[configurations.arraySize];
                 changed = true;
             }
 
             EditorGUILayout.Space();
             EditorGUILayout.BeginVertical();
 
-            for (int i = 0; i < registeredDiagnosticsDataProviders.arraySize; i++)
+            for (int i = 0; i < configurations.arraySize; i++)
             {
-                var controllerConfiguration = registeredDiagnosticsDataProviders.GetArrayElementAtIndex(i);
+                var controllerConfiguration = configurations.GetArrayElementAtIndex(i);
                 var dataProviderName = controllerConfiguration.FindPropertyRelative("name");
                 var dataProviderType = controllerConfiguration.FindPropertyRelative("instancedType");
                 var priority = controllerConfiguration.FindPropertyRelative("priority");
@@ -93,9 +93,9 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
 
                 if (GUILayout.Button(removeDataProviderContent, EditorStyles.miniButtonRight, GUILayout.Width(24f)))
                 {
-                    registeredDiagnosticsDataProviders.DeleteArrayElementAtIndex(i);
+                    configurations.DeleteArrayElementAtIndex(i);
                     serializedObject.ApplyModifiedProperties();
-                    foldouts = new bool[registeredDiagnosticsDataProviders.arraySize];
+                    foldouts = new bool[configurations.arraySize];
                     EditorGUILayout.EndHorizontal();
                     EditorGUILayout.EndVertical();
                     return;

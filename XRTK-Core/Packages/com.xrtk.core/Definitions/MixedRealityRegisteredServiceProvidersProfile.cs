@@ -16,7 +16,7 @@ namespace XRTK.Definitions
         /// <summary>
         /// Currently registered system and manager configurations.
         /// </summary>
-        public override IMixedRealityServiceConfiguration[] ServiceConfigurations
+        public override IMixedRealityServiceConfiguration[] RegisteredServiceConfigurations
         {
             get
             {

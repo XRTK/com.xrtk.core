@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using XRTK.Interfaces;
 
 namespace XRTK.Extensions
 {
@@ -33,14 +34,15 @@ namespace XRTK.Extensions
         /// <summary>
         /// Extends an existing array to add a new item
         /// </summary>
-        /// <typeparam name="T"></typeparam>
+        /// <typeparam name="TCollection"></typeparam>
+        /// <typeparam name="TItem"></typeparam>
         /// <param name="array">The array to extend</param>
         /// <param name="newItem">The item to add to the array</param>
         /// <param name="insertAtIndex">The index to insert the item at.</param>
         /// <returns></returns>
-        public static T[] AddItem<T>(this T[] array, T newItem, int insertAtIndex = 0)
+        public static TCollection[] AddItem<TCollection, TItem>(this TCollection[] array, TItem newItem, int insertAtIndex = 0) where TItem : TCollection
         {
-            var newArray = new T[array.Length + 1];
+            var newArray = new TCollection[array.Length + 1];
             array.CopyTo(newArray, insertAtIndex);
             newArray[array.Length] = newItem;
             return newArray;

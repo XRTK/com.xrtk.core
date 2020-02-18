@@ -1,15 +1,12 @@
-﻿using UnityEngine;
-using XRTK.Definitions.Utilities;
-using XRTK.Interfaces;
+﻿using XRTK.Interfaces;
 
 namespace XRTK.Definitions
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Registered Service Profile", fileName = "MixedRealityRegisteredServiceProfile", order = (int)CreateProfileMenuItemIndices.RegisteredServiceProviders)]
-    public class BaseMixedRealityServiceProfile : BaseMixedRealityProfile
+    public abstract class BaseMixedRealityServiceProfile : BaseMixedRealityProfile
     {
         /// <summary>
-        /// Currently registered system and manager configurations.
+        /// Currently registered system and manager <see cref="IMixedRealityServiceConfiguration"/>s.
         /// </summary>
-        public virtual IMixedRealityServiceConfiguration[] ServiceConfigurations { get; internal set; }
+        public virtual IMixedRealityServiceConfiguration[] RegisteredServiceConfigurations { get; internal set; }
     }
 }

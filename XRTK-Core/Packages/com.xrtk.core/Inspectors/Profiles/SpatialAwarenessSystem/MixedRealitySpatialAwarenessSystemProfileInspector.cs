@@ -34,10 +34,10 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (thisProfile.ParentProfile != null &&
+            if (ThisProfile.ParentProfile != null &&
                 GUILayout.Button("Back to Configuration Profile"))
             {
-                Selection.activeObject = thisProfile.ParentProfile;
+                Selection.activeObject = ThisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
@@ -46,7 +46,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             EditorGUILayout.Space();
             serializedObject.Update();
 
-            thisProfile.CheckProfileLock();
+            ThisProfile.CheckProfileLock();
 
             EditorGUILayout.Space();
             EditorGUILayout.PropertyField(meshDisplayOption);
@@ -106,7 +106,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
                     EditorGUILayout.PropertyField(spatialObserverName);
                     EditorGUILayout.PropertyField(priority);
                     EditorGUILayout.PropertyField(runtimePlatform);
-                    RenderProfile(thisProfile, profile, false);
+                    RenderProfile(ThisProfile, profile, false);
                     EditorGUI.indentLevel--;
                 }
 

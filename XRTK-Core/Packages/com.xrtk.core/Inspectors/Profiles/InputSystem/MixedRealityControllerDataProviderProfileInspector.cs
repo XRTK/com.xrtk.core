@@ -32,17 +32,17 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (thisProfile.ParentProfile != null &&
+            if (ThisProfile.ParentProfile != null &&
                 GUILayout.Button("Back to Input Profile"))
             {
-                Selection.activeObject = thisProfile.ParentProfile;
+                Selection.activeObject = ThisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Controller Data Providers", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Use this profile to define all the input sources your application can get input data from.", MessageType.Info);
 
-            thisProfile.CheckProfileLock();
+            ThisProfile.CheckProfileLock();
 
             serializedObject.Update();
 
@@ -107,7 +107,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                     EditorGUILayout.PropertyField(dataProviderName);
                     EditorGUILayout.PropertyField(priority);
                     EditorGUILayout.PropertyField(runtimePlatform);
-                    RenderProfile(thisProfile, profile, ProfileContent, false);
+                    RenderProfile(ThisProfile, profile, ProfileContent, false);
 
                     if (EditorGUI.EndChangeCheck())
                     {

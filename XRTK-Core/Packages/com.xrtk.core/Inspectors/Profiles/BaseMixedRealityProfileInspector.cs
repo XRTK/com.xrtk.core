@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
@@ -15,7 +15,7 @@ namespace XRTK.Inspectors.Profiles
     /// </summary>
     public abstract class BaseMixedRealityProfileInspector : Editor
     {
-        private const string IsCustomProfileProperty = "isCustomProfile";
+        private const string IsDefaultProfileProperty = "isDefaultProfile";
 
         private static readonly GUIContent NewProfileContent = new GUIContent("+", "Create New Profile");
         private static readonly GUIContent CopyProfileContent = new GUIContent("Clone", "Replace with a copy of the default profile.");
@@ -24,14 +24,14 @@ namespace XRTK.Inspectors.Profiles
         private static BaseMixedRealityProfile profile;
         private static BaseMixedRealityProfile profileToCopy;
 
-        protected BaseMixedRealityProfile thisProfile;
+        protected BaseMixedRealityProfile ThisProfile { get; private set; }
 
         protected virtual void OnEnable()
         {
             targetProfile = serializedObject;
             profile = target as BaseMixedRealityProfile;
             Debug.Assert(profile != null);
-            thisProfile = profile;
+            ThisProfile = profile;
         }
 
         /// <summary>
@@ -98,8 +98,8 @@ namespace XRTK.Inspectors.Profiles
                 Debug.Assert(renderedProfile != null);
                 Debug.Assert(profile != null, "No profile was set in OnEnable. Did you forget to call base.OnEnable in a derived profile class?");
 
-                if (profile.IsCustomProfile &&
-                    !renderedProfile.IsCustomProfile &&
+                if (profile.IsDefaultProfile &&
+                    !renderedProfile.IsDefaultProfile &&
                     GUILayout.Button(CopyProfileContent, EditorStyles.miniButton, GUILayout.Width(42f)))
                 {
                     profileToCopy = renderedProfile;
@@ -154,7 +154,7 @@ namespace XRTK.Inspectors.Profiles
             Selection.activeObject = profile;
             EditorGUIUtility.PingObject(profile);
 
-            if (!profileToCopy.IsCustomProfile)
+            if (!profileToCopy.IsDefaultProfile)
             {
                 // For now we only replace it if it's the master configuration profile.
                 // Sub-profiles are easy to update in the master configuration inspector.
@@ -177,7 +177,7 @@ namespace XRTK.Inspectors.Profiles
             return profile != null &&
                    targetProfile != null &&
                    profileToCopy != null &&
-                   targetProfile.FindProperty(IsCustomProfileProperty).boolValue &&
+                   targetProfile.FindProperty(IsDefaultProfileProperty).boolValue &&
                    profile.GetType() == profileToCopy.GetType();
         }
 
@@ -185,14 +185,14 @@ namespace XRTK.Inspectors.Profiles
         private static void PasteProfileValues()
         {
             Undo.RecordObject(profile, "Paste Profile Values");
-            var targetIsCustom = targetProfile.FindProperty(IsCustomProfileProperty).boolValue;
+            var targetIsCustom = targetProfile.FindProperty(IsDefaultProfileProperty).boolValue;
             var originalName = targetProfile.targetObject.name;
             EditorUtility.CopySerialized(profileToCopy, targetProfile.targetObject);
             targetProfile.Update();
-            targetProfile.FindProperty(IsCustomProfileProperty).boolValue = targetIsCustom;
+            targetProfile.FindProperty(IsDefaultProfileProperty).boolValue = targetIsCustom;
             targetProfile.ApplyModifiedProperties();
             targetProfile.targetObject.name = originalName;
-            Debug.Assert(targetProfile.FindProperty(IsCustomProfileProperty).boolValue == targetIsCustom);
+            Debug.Assert(targetProfile.FindProperty(IsDefaultProfileProperty).boolValue == targetIsCustom);
             AssetDatabase.SaveAssets();
         }
 

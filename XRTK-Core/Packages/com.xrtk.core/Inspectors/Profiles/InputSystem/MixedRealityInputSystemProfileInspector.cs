@@ -41,17 +41,17 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (thisProfile.ParentProfile != null &&
+            if (ThisProfile.ParentProfile != null &&
                 GUILayout.Button("Back to Configuration Profile"))
             {
-                Selection.activeObject = thisProfile.ParentProfile;
+                Selection.activeObject = ThisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Input System Profile", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("The Input System Profile helps developers configure input no matter what platform you're building for.", MessageType.Info);
 
-            thisProfile.CheckProfileLock();
+            ThisProfile.CheckProfileLock();
 
             serializedObject.Update();
             bool changed = false;
@@ -64,14 +64,14 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 changed = true;
             }
 
-            changed |= RenderProfile(thisProfile, inputActionsProfile);
-            changed |= RenderProfile(thisProfile, inputActionRulesProfile);
-            changed |= RenderProfile(thisProfile, pointerProfile);
-            changed |= RenderProfile(thisProfile, gesturesProfile);
-            changed |= RenderProfile(thisProfile, speechCommandsProfile);
-            changed |= RenderProfile(thisProfile, controllerVisualizationProfile);
-            changed |= RenderProfile(thisProfile, controllerDataProvidersProfile);
-            changed |= RenderProfile(thisProfile, controllerMappingProfiles);
+            changed |= RenderProfile(ThisProfile, inputActionsProfile);
+            changed |= RenderProfile(ThisProfile, inputActionRulesProfile);
+            changed |= RenderProfile(ThisProfile, pointerProfile);
+            changed |= RenderProfile(ThisProfile, gesturesProfile);
+            changed |= RenderProfile(ThisProfile, speechCommandsProfile);
+            changed |= RenderProfile(ThisProfile, controllerVisualizationProfile);
+            changed |= RenderProfile(ThisProfile, controllerDataProvidersProfile);
+            changed |= RenderProfile(ThisProfile, controllerMappingProfiles);
 
             serializedObject.ApplyModifiedProperties();
 

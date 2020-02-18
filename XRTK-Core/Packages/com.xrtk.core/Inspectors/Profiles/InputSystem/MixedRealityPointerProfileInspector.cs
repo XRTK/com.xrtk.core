@@ -52,10 +52,10 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (thisProfile.ParentProfile != null &&
+            if (ThisProfile.ParentProfile != null &&
                 GUILayout.Button("Back to Input Profile"))
             {
-                Selection.activeObject = thisProfile.ParentProfile;
+                Selection.activeObject = ThisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
@@ -63,7 +63,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             EditorGUILayout.HelpBox("Pointers attach themselves onto controllers as they are initialized.", MessageType.Info);
             EditorGUILayout.Space();
 
-            thisProfile.CheckProfileLock();
+            ThisProfile.CheckProfileLock();
             serializedObject.Update();
             currentlySelectedPointerOption = -1;
 

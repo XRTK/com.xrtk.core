@@ -117,7 +117,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             inputActionRulesProfile.CheckProfileLock();
 
-            var isGuiLocked = !(MixedRealityPreferences.LockProfiles && !inputActionRulesProfile.IsCustomProfile);
+            var isGuiLocked = !(MixedRealityPreferences.LockProfiles && !inputActionRulesProfile.IsDefaultProfile);
             GUI.enabled = isGuiLocked;
 
             serializedObject.Update();

@@ -35,13 +35,13 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (thisProfile.ParentProfile != null &&
+            if (ThisProfile.ParentProfile != null &&
                 GUILayout.Button("Back to Configuration Profile"))
             {
-                Selection.activeObject = thisProfile.ParentProfile;
+                Selection.activeObject = ThisProfile.ParentProfile;
             }
 
-            thisProfile.CheckProfileLock();
+            ThisProfile.CheckProfileLock();
 
             serializedObject.Update();
 
@@ -112,7 +112,7 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
                     EditorGUILayout.PropertyField(dataProviderName);
                     EditorGUILayout.PropertyField(priority);
                     EditorGUILayout.PropertyField(runtimePlatform);
-                    RenderProfile(thisProfile, profile, profileContent, false);
+                    RenderProfile(ThisProfile, profile, profileContent, false);
 
                     if (EditorGUI.EndChangeCheck())
                     {

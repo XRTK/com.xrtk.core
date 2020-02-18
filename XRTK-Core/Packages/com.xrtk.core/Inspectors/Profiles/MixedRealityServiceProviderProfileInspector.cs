@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
@@ -10,8 +10,8 @@ using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
 {
-    [CustomEditor(typeof(MixedRealityRegisteredServiceProvidersProfile))]
-    public class MixedRealityRegisteredServiceProviderProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(BaseMixedRealityServiceProfile))]
+    public class MixedRealityServiceProviderProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty configurations;
         private ReorderableList configurationList;
@@ -37,10 +37,10 @@ namespace XRTK.Inspectors.Profiles
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (thisProfile.ParentProfile != null &&
+            if (ThisProfile.ParentProfile != null &&
                 GUILayout.Button("Back to Configuration Profile"))
             {
-                Selection.activeObject = thisProfile.ParentProfile;
+                Selection.activeObject = ThisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
@@ -48,7 +48,7 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.HelpBox("This profile defines any additional Services like systems, features, and managers to register with the Mixed Reality Toolkit.\n\n" +
                                     "Note: The order of the list determines the order these services get created.", MessageType.Info);
 
-            thisProfile.CheckProfileLock();
+            ThisProfile.CheckProfileLock();
 
             serializedObject.Update();
             EditorGUILayout.Space();
@@ -122,7 +122,7 @@ namespace XRTK.Inspectors.Profiles
             var configurationProfile = managerConfig.FindPropertyRelative("configurationProfile");
             configurationProfile.objectReferenceValue = null;
             serializedObject.ApplyModifiedProperties();
-            var componentType = ((MixedRealityRegisteredServiceProvidersProfile)serializedObject.targetObject).Configurations[index].InstancedType;
+            var componentType = ((BaseMixedRealityServiceProfile)serializedObject.targetObject).ServiceConfigurations[index].InstancedType;
             componentType.Type = null;
         }
 

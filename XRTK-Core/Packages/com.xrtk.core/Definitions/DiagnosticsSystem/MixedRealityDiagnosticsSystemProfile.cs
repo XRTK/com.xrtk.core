@@ -2,10 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces;
+using XRTK.Interfaces.DiagnosticsSystem;
 
 namespace XRTK.Definitions.DiagnosticsSystem
 {
@@ -13,7 +12,7 @@ namespace XRTK.Definitions.DiagnosticsSystem
     /// Configuration profile settings for setting up diagnostics.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Diagnostics System Profile", fileName = "MixedRealityDiagnosticsSystemProfile", order = (int)CreateProfileMenuItemIndices.Diagnostics)]
-    public class MixedRealityDiagnosticsSystemProfile : BaseMixedRealityServiceProfile
+    public class MixedRealityDiagnosticsSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityDiagnosticsDataProvider>
     {
         [Prefab]
         [SerializeField]
@@ -37,46 +36,5 @@ namespace XRTK.Definitions.DiagnosticsSystem
         /// Should the diagnostics window be opened on application start?
         /// </summary>
         public AutoStartBehavior ShowDiagnosticsWindowOnStart => showDiagnosticsWindowOnStart;
-
-        [SerializeField]
-        [FormerlySerializedAs("registeredDiagnosticsDataProviders")]
-        private DiagnosticsDataProviderConfiguration[] configurations = new DiagnosticsDataProviderConfiguration[0];
-
-        /// <summary>
-        /// The currently registered diagnostics data providers for the diagnostics system.
-        /// </summary>
-        public override IMixedRealityServiceConfiguration[] RegisteredServiceConfigurations
-        {
-            get
-            {
-                IMixedRealityServiceConfiguration[] serviceConfigurations;
-
-                if (configurations == null)
-                {
-                    return null;
-                }
-                else
-                {
-                    serviceConfigurations = new IMixedRealityServiceConfiguration[configurations.Length];
-                    configurations.CopyTo(serviceConfigurations, 0);
-                }
-
-                return serviceConfigurations;
-            }
-            internal set
-            {
-                var serviceConfigurations = value;
-
-                if (serviceConfigurations == null)
-                {
-                    configurations = null;
-                }
-                else
-                {
-                    configurations = new DiagnosticsDataProviderConfiguration[serviceConfigurations.Length];
-                    serviceConfigurations.CopyTo(configurations, 0);
-                }
-            }
-        }
     }
 }

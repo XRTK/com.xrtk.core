@@ -34,16 +34,14 @@ namespace XRTK.Extensions
         /// <summary>
         /// Extends an existing array to add a new item
         /// </summary>
-        /// <typeparam name="TCollection"></typeparam>
-        /// <typeparam name="TItem"></typeparam>
+        /// <typeparam name="T"></typeparam>
         /// <param name="array">The array to extend</param>
         /// <param name="newItem">The item to add to the array</param>
-        /// <param name="insertAtIndex">The index to insert the item at.</param>
         /// <returns></returns>
-        public static TCollection[] AddItem<TCollection, TItem>(this TCollection[] array, TItem newItem, int insertAtIndex = 0) where TItem : TCollection
+        public static T[] AddItem<T>(this T[] array, T newItem)
         {
-            var newArray = new TCollection[array.Length + 1];
-            array.CopyTo(newArray, insertAtIndex);
+            var newArray = new T[array.Length + 1];
+            array.CopyTo(newArray, 0);
             newArray[array.Length] = newItem;
             return newArray;
         }

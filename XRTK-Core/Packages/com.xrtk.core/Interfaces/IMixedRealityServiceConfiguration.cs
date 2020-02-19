@@ -6,6 +6,10 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Interfaces
 {
+    public interface IMixedRealityServiceConfiguration<T> : IMixedRealityServiceConfiguration where T : IMixedRealityService
+    {
+    }
+
     /// <summary>
     /// This interface is meant to be used with serialized structs that define valid <see cref="IMixedRealityService"/> configurations.
     /// </summary>

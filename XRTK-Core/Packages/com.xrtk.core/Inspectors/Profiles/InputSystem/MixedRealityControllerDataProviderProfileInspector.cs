@@ -10,13 +10,11 @@ using XRTK.Services;
 namespace XRTK.Inspectors.Profiles.InputSystem
 {
     [CustomEditor(typeof(MixedRealityControllerDataProvidersProfile))]
-    public class MixedRealityControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
+    public class MixedRealityControllerDataProviderProfileInspector : MixedRealityServiceProfileInspector
     {
         private static readonly GUIContent AddControllerDataProviderContent = new GUIContent("+ Add a New Controller Data Provider");
         private static readonly GUIContent RemoveControllerDataProviderContent = new GUIContent("-", "Remove Controller Data Provider");
         private static readonly GUIContent ProfileContent = new GUIContent("Profile");
-
-        private SerializedProperty configurations;
 
         private bool[] foldouts = null;
 
@@ -24,8 +22,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             base.OnEnable();
 
-            configurations = serializedObject.FindProperty(nameof(configurations));
-            foldouts = new bool[configurations.arraySize];
+            foldouts = new bool[Configurations.arraySize];
         }
 
         public override void OnInspectorGUI()
@@ -52,13 +49,13 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             if (GUILayout.Button(AddControllerDataProviderContent, EditorStyles.miniButton))
             {
-                configurations.arraySize += 1;
-                var newConfiguration = configurations.GetArrayElementAtIndex(configurations.arraySize - 1);
+                Configurations.arraySize += 1;
+                var newConfiguration = Configurations.GetArrayElementAtIndex(Configurations.arraySize - 1);
                 var dataProviderType = newConfiguration.FindPropertyRelative("instancedType");
                 var dataProviderName = newConfiguration.FindPropertyRelative("name");
                 var priority = newConfiguration.FindPropertyRelative("priority");
                 var runtimePlatform = newConfiguration.FindPropertyRelative("runtimePlatform");
-                var profile = newConfiguration.FindPropertyRelative("profile");
+                var profile = newConfiguration.FindPropertyRelative("configurationProfile");
 
                 serializedObject.ApplyModifiedProperties();
                 dataProviderType.FindPropertyRelative("reference").stringValue = string.Empty;
@@ -67,30 +64,30 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 runtimePlatform.intValue = 0;
                 profile.objectReferenceValue = null;
                 serializedObject.ApplyModifiedProperties();
-                foldouts = new bool[configurations.arraySize];
+                foldouts = new bool[Configurations.arraySize];
                 changed = true;
             }
 
             EditorGUILayout.Space();
             EditorGUILayout.BeginVertical();
 
-            for (int i = 0; i < configurations.arraySize; i++)
+            for (int i = 0; i < Configurations.arraySize; i++)
             {
-                var controllerConfiguration = configurations.GetArrayElementAtIndex(i);
+                var controllerConfiguration = Configurations.GetArrayElementAtIndex(i);
                 var dataProviderName = controllerConfiguration.FindPropertyRelative("name");
                 var dataProviderType = controllerConfiguration.FindPropertyRelative("instancedType");
                 var priority = controllerConfiguration.FindPropertyRelative("priority");
                 var runtimePlatform = controllerConfiguration.FindPropertyRelative("runtimePlatform");
-                var profile = controllerConfiguration.FindPropertyRelative("profile");
+                var profile = controllerConfiguration.FindPropertyRelative("configurationProfile");
 
                 EditorGUILayout.BeginHorizontal();
                 foldouts[i] = EditorGUILayout.Foldout(foldouts[i], dataProviderName.stringValue, true);
 
                 if (GUILayout.Button(RemoveControllerDataProviderContent, EditorStyles.miniButtonRight, GUILayout.Width(24f)))
                 {
-                    configurations.DeleteArrayElementAtIndex(i);
+                    Configurations.DeleteArrayElementAtIndex(i);
                     serializedObject.ApplyModifiedProperties();
-                    foldouts = new bool[configurations.arraySize];
+                    foldouts = new bool[Configurations.arraySize];
                     EditorGUILayout.EndHorizontal();
                     EditorGUILayout.EndVertical();
                     return;

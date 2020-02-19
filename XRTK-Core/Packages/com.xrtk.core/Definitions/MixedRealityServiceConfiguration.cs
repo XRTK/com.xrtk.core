@@ -22,7 +22,7 @@ namespace XRTK.Definitions
         /// <param name="priority">The priority this <see cref="IMixedRealityService"/> will be initialized in.</param>
         /// <param name="runtimePlatform">The runtime platform(s) to run this <see cref="IMixedRealityService"/> to run on.</param>
         /// <param name="configurationProfile">The configuration profile for <see cref="IMixedRealityService"/>.</param>
-        public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityServiceProfile configurationProfile)
+        public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityProfile configurationProfile)
         {
             this.instancedType = instancedType;
             this.name = name;
@@ -32,37 +32,62 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
+        [FormerlySerializedAs("dataModelType")]
         [FormerlySerializedAs("componentType")]
-        [Implements(typeof(IMixedRealityService), TypeGrouping.ByNamespaceFlat)]
+        [FormerlySerializedAs("dataProviderType")]
+        [FormerlySerializedAs("spatialObserverType")]
         private SystemType instancedType;
 
         /// <inheritdoc />
-        public SystemType InstancedType => instancedType;
+        public SystemType InstancedType
+        {
+            get => instancedType;
+            internal set => instancedType = value;
+        }
 
         [SerializeField]
+        [FormerlySerializedAs("dataModelName")]
         [FormerlySerializedAs("componentName")]
+        [FormerlySerializedAs("dataProviderName")]
+        [FormerlySerializedAs("spatialObserverName")]
         private string name;
 
         /// <inheritdoc />
-        public string Name => name;
+        public string Name
+        {
+            get => name;
+            internal set => name = value;
+        }
 
         [SerializeField]
         private uint priority;
 
         /// <inheritdoc />
-        public uint Priority => priority;
+        public uint Priority
+        {
+            get => priority;
+            internal set => priority = value;
+        }
 
         [EnumFlags]
         [SerializeField]
         private SupportedPlatforms runtimePlatform;
 
         /// <inheritdoc />
-        public SupportedPlatforms RuntimePlatform => runtimePlatform;
+        public SupportedPlatforms RuntimePlatform
+        {
+            get => runtimePlatform;
+            internal set => runtimePlatform = value;
+        }
 
         [SerializeField]
-        private BaseMixedRealityServiceProfile configurationProfile;
+        private BaseMixedRealityProfile configurationProfile;
 
         /// <inheritdoc />
-        public BaseMixedRealityProfile ConfigurationProfile => configurationProfile;
+        public BaseMixedRealityProfile ConfigurationProfile
+        {
+            get => configurationProfile;
+            internal set => configurationProfile = value;
+        }
     }
 }

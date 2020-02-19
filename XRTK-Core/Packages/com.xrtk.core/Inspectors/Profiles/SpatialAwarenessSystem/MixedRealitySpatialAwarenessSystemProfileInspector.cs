@@ -60,7 +60,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
                 var spatialObserverName = spatialObserverConfiguration.FindPropertyRelative("name");
                 var priority = spatialObserverConfiguration.FindPropertyRelative("priority");
                 var runtimePlatform = spatialObserverConfiguration.FindPropertyRelative("runtimePlatform");
-                var profile = spatialObserverConfiguration.FindPropertyRelative("profile");
+                var profile = spatialObserverConfiguration.FindPropertyRelative("configurationProfile");
 
                 spatialObserverType.FindPropertyRelative("reference").stringValue = string.Empty;
                 spatialObserverName.stringValue = "New Spatial Observer Data Provider";
@@ -82,7 +82,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
                 var spatialObserverName = spatialObserverConfiguration.FindPropertyRelative("name");
                 var priority = spatialObserverConfiguration.FindPropertyRelative("priority");
                 var runtimePlatform = spatialObserverConfiguration.FindPropertyRelative("runtimePlatform");
-                var profile = spatialObserverConfiguration.FindPropertyRelative("profile");
+                var profile = spatialObserverConfiguration.FindPropertyRelative("configurationProfile");
 
                 EditorGUILayout.BeginHorizontal();
                 foldouts[i] = EditorGUILayout.Foldout(foldouts[i], spatialObserverName.stringValue, true);

@@ -2,17 +2,10 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using XRTK.Definitions;
 using XRTK.Interfaces;
 
 namespace XRTK.Services
 {
-    public abstract class BaseService<T> : BaseService, IMixedRealityService<T> where T : BaseMixedRealityProfile
-    {
-        /// <inheritdoc />
-        public T ProfileType { get; }
-    }
-
     /// <summary>
     /// The base service implements <see cref="IMixedRealityService"/> and provides default properties for all services.
     /// </summary>

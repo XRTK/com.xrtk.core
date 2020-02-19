@@ -10,20 +10,22 @@ using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
 {
-    [CustomEditor(typeof(BaseMixedRealityServiceProfile))]
-    public class MixedRealityServiceProviderProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(BaseMixedRealityServiceProfile<>))]
+    public class MixedRealityServiceProfileInspector : BaseMixedRealityProfileInspector
     {
-        private SerializedProperty configurations;
         private ReorderableList configurationList;
         private int currentlySelectedConfigurationOption;
+
+        protected SerializedProperty Configurations { get; private set; }
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            configurations = serializedObject.FindProperty("configurations");
+            Configurations = serializedObject.FindProperty(nameof(Configurations).ToLower());
+            Debug.Assert(Configurations != null);
 
-            configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true)
+            configurationList = new ReorderableList(serializedObject, Configurations, true, false, true, true)
             {
                 elementHeight = EditorGUIUtility.singleLineHeight * 5.5f
             };
@@ -55,7 +57,7 @@ namespace XRTK.Inspectors.Profiles
             configurationList.DoLayoutList();
             EditorGUILayout.Space();
 
-            if (configurations == null || configurations.arraySize == 0)
+            if (Configurations == null || Configurations.arraySize == 0)
             {
                 EditorGUILayout.HelpBox("Register a new Service Provider.", MessageType.Warning);
             }
@@ -79,7 +81,7 @@ namespace XRTK.Inspectors.Profiles
             var runtimeRect = new Rect(rect.x, rect.y + halfFieldHeight * 11, rect.width, EditorGUIUtility.singleLineHeight);
             var profileRect = new Rect(rect.x, rect.y + halfFieldHeight * 16, rect.width, EditorGUIUtility.singleLineHeight);
 
-            var managerConfig = configurations.GetArrayElementAtIndex(index);
+            var managerConfig = Configurations.GetArrayElementAtIndex(index);
             var componentName = managerConfig.FindPropertyRelative("name");
             var componentType = managerConfig.FindPropertyRelative("instancedType");
             var priority = managerConfig.FindPropertyRelative("priority");
@@ -110,27 +112,27 @@ namespace XRTK.Inspectors.Profiles
 
         private void OnConfigurationOptionAdded(ReorderableList list)
         {
-            configurations.arraySize += 1;
-            var index = configurations.arraySize - 1;
-            var managerConfig = configurations.GetArrayElementAtIndex(index);
-            var componentName = managerConfig.FindPropertyRelative("name");
-            componentName.stringValue = $"New Configuration {index}";
+            Configurations.arraySize += 1;
+            var index = Configurations.arraySize - 1;
+            var managerConfig = Configurations.GetArrayElementAtIndex(index);
+            var configurationName = managerConfig.FindPropertyRelative("name");
+            configurationName.stringValue = $"New Configuration {index}";
             var priority = managerConfig.FindPropertyRelative("priority");
             priority.intValue = index;
             var runtimePlatform = managerConfig.FindPropertyRelative("runtimePlatform");
             runtimePlatform.intValue = 0;
+            var instancedType = managerConfig.FindPropertyRelative("instancedType");
+            instancedType.FindPropertyRelative("reference").stringValue = string.Empty;
             var configurationProfile = managerConfig.FindPropertyRelative("configurationProfile");
             configurationProfile.objectReferenceValue = null;
             serializedObject.ApplyModifiedProperties();
-            var componentType = ((BaseMixedRealityServiceProfile)serializedObject.targetObject).RegisteredServiceConfigurations[index].InstancedType;
-            componentType.Type = null;
         }
 
         private void OnConfigurationOptionRemoved(ReorderableList list)
         {
             if (currentlySelectedConfigurationOption >= 0)
             {
-                configurations.DeleteArrayElementAtIndex(currentlySelectedConfigurationOption);
+                Configurations.DeleteArrayElementAtIndex(currentlySelectedConfigurationOption);
             }
 
             serializedObject.ApplyModifiedProperties();

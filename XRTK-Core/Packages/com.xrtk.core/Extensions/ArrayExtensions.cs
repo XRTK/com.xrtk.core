@@ -40,6 +40,11 @@ namespace XRTK.Extensions
         /// <returns></returns>
         public static T[] AddItem<T>(this T[] array, T newItem)
         {
+            if (array == null)
+            {
+                return new[] { newItem };
+            }
+
             var newArray = new T[array.Length + 1];
             array.CopyTo(newArray, 0);
             newArray[array.Length] = newItem;

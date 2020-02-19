@@ -6,7 +6,11 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Interfaces
 {
-    public interface IMixedRealityServiceConfiguration<T> : IMixedRealityServiceConfiguration where T : IMixedRealityService
+    /// <summary>
+    /// The generic interface for <see cref="IMixedRealityServiceConfiguration"/>s.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IMixedRealityServiceConfiguration<out T> : IMixedRealityServiceConfiguration where T : IMixedRealityService
     {
     }
 

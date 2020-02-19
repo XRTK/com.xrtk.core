@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 using XRTK.Attributes;
@@ -8,11 +11,20 @@ using XRTK.Services;
 
 namespace XRTK.Definitions
 {
+    public class MixedRealityServiceConfiguration<T> : MixedRealityServiceConfiguration, IMixedRealityServiceConfiguration<T>
+        where T : IMixedRealityService
+    {
+        public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityProfile configurationProfile)
+            : base(instancedType, name, priority, runtimePlatform, configurationProfile)
+        {
+        }
+    }
+
     /// <summary>
     /// Defines a <see cref="IMixedRealityService"/> to be registered with the <see cref="MixedRealityToolkit"/>.
     /// </summary>
     [Serializable]
-    public struct MixedRealityServiceConfiguration : IMixedRealityServiceConfiguration
+    public class MixedRealityServiceConfiguration : IMixedRealityServiceConfiguration
     {
         /// <summary>
         /// Constructor.

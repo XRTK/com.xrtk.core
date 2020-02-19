@@ -700,7 +700,7 @@ namespace XRTK.Services
         /// <typeparam name="T"></typeparam>
         /// <param name="configurations"></param>
         /// <returns></returns>
-        public static bool RegisterServices<T>(IMixedRealityServiceConfiguration<T>[] configurations) where T : IMixedRealityService
+        public static bool RegisterServices<T>(MixedRealityServiceConfiguration<T>[] configurations) where T : IMixedRealityService
         {
             bool anyFailed = false;
 

@@ -25,7 +25,7 @@ namespace XRTK.Utilities
         /// <param name="providerDefaultConfiguration">Array of Data Provider default configurations to add if missing</param>
         /// <param name="prompt">Unit Test helper, to control whether the UI prompt is offered or not</param>
         /// <returns></returns>
-        public static bool ValidateService<T>(this BaseMixedRealityServiceProfile<T> profile, Type[] providerTypesToValidate, IMixedRealityServiceConfiguration<T>[] providerDefaultConfiguration, bool prompt = true) where T : IMixedRealityService
+        public static bool ValidateService<T>(this BaseMixedRealityServiceProfile<T> profile, Type[] providerTypesToValidate, MixedRealityServiceConfiguration<T>[] providerDefaultConfiguration, bool prompt = true) where T : IMixedRealityService
         {
 #if UNITY_EDITOR
             if (Application.isPlaying || EditorPrefs.GetBool(IgnoreKey, false))
@@ -45,12 +45,15 @@ namespace XRTK.Utilities
 
                 var registeredConfigurations = profile.RegisteredServiceConfigurations;
 
-                if (providerTypesToValidate != null && providerTypesToValidate.Length > 0)
+                if (providerTypesToValidate != null &&
+                    providerTypesToValidate.Length > 0)
                 {
                     var typesValidated = new bool[providerTypesToValidate.Length];
 
                     for (int i = 0; i < providerTypesToValidate.Length; i++)
                     {
+                        if (providerTypesToValidate[i] == null) { continue; }
+
                         for (var j = 0; j < registeredConfigurations.Length; j++)
                         {
                             var subProfile = registeredConfigurations[j];

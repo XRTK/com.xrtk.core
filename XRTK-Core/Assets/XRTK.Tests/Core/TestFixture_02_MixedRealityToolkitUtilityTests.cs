@@ -30,31 +30,28 @@ namespace XRTK.Tests.Core
         public void Test_01_ConfirmDataProviderConfigurationNotPresent()
         {
             SetupServiceLocator();
-
+            var profile = MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile;
             var dataProviderTypes = new[] { typeof(TestExtensionServiceProvider1) };
-            IMixedRealityServiceConfiguration[] dataProviderConfiguration =
+            var newConfigs = new[]
             {
-                new MixedRealityServiceConfiguration(typeof(TestExtensionServiceProvider1), "Test Data Provider 1", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null)
+                new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionServiceProvider1), "Test Data Provider 1", 2,SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null)
             };
 
-            Assert.IsFalse(MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile.ValidateService(dataProviderTypes, (IMixedRealityServiceConfiguration<IMixedRealityExtensionService>[])dataProviderConfiguration, false));
+            Assert.IsFalse(profile.ValidateService(dataProviderTypes, newConfigs, false));
         }
 
         [Test]
         public void Test_02_ConfirmDataProviderConfigurationPresent()
         {
             SetupServiceLocator();
+            var profile = MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile;
             var dataProviderTypes = new[] { typeof(TestExtensionServiceProvider1) };
-            IMixedRealityServiceConfiguration[] dataProviderConfiguration =
-            {
-                new MixedRealityServiceConfiguration(typeof(TestExtensionServiceProvider1), "Test Data Provider 1", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null)
-            };
-
-            var castedDataProviderConfiguration = new IMixedRealityServiceConfiguration<IMixedRealityExtensionService>[dataProviderConfiguration.Length];
-            castedDataProviderConfiguration[0] = (IMixedRealityServiceConfiguration<IMixedRealityExtensionService>)dataProviderConfiguration[0];
-
-            MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile.RegisteredServiceConfigurations = MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile.RegisteredServiceConfigurations.AddItem(castedDataProviderConfiguration[0]);
-            Assert.IsTrue(MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile.ValidateService(dataProviderTypes, castedDataProviderConfiguration, false));
+            var newConfig = new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionServiceProvider1), "Test Data Provider 1", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null);
+            Debug.Assert(newConfig != null);
+            var newConfigs = profile.RegisteredServiceConfigurations.AddItem(newConfig);
+            Debug.Assert(newConfigs != null);
+            profile.RegisteredServiceConfigurations = newConfigs;
+            Assert.IsTrue(profile.ValidateService(dataProviderTypes, newConfigs, false));
         }
 
         [Test]

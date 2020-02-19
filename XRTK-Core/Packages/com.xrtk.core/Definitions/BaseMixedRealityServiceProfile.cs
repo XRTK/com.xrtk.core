@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using UnityEngine;
 using XRTK.Interfaces;
 
 namespace XRTK.Definitions
@@ -11,7 +14,7 @@ namespace XRTK.Definitions
         /// <summary>
         /// The <see cref="IMixedRealityServiceConfiguration"/>s registered for this profile.
         /// </summary>
-        public IMixedRealityServiceConfiguration<TService>[] RegisteredServiceConfigurations
+        public MixedRealityServiceConfiguration<TService>[] RegisteredServiceConfigurations
         {
             get
             {
@@ -20,9 +23,18 @@ namespace XRTK.Definitions
                     configurations = new MixedRealityServiceConfiguration[0];
                 }
 
-                var serviceConfigurations = new IMixedRealityServiceConfiguration[configurations.Length];
-                configurations.CopyTo(serviceConfigurations, 0);
-                return serviceConfigurations as IMixedRealityServiceConfiguration<TService>[];
+                var serviceConfigurations = new MixedRealityServiceConfiguration<TService>[configurations.Length];
+
+                for (int i = 0; i < serviceConfigurations.Length; i++)
+                {
+                    var cachedConfig = configurations[i];
+                    Debug.Assert(cachedConfig != null);
+                    var serviceConfig = new MixedRealityServiceConfiguration<TService>(cachedConfig.InstancedType, cachedConfig.Name, cachedConfig.Priority, cachedConfig.RuntimePlatform, cachedConfig.ConfigurationProfile);
+                    Debug.Assert(serviceConfig != null);
+                    serviceConfigurations[i] = serviceConfig;
+                }
+
+                return serviceConfigurations;
             }
             internal set
             {
@@ -30,7 +42,7 @@ namespace XRTK.Definitions
 
                 if (serviceConfigurations == null)
                 {
-                    configurations = null;
+                    configurations = new MixedRealityServiceConfiguration[0];
                 }
                 else
                 {
@@ -38,14 +50,11 @@ namespace XRTK.Definitions
 
                     for (int i = 0; i < serviceConfigurations.Length; i++)
                     {
-                        var oldConfig = configurations[i];
-                        var newConfig = serviceConfigurations[i];
-
-                        oldConfig.InstancedType = newConfig.InstancedType;
-                        oldConfig.Name = newConfig.Name;
-                        oldConfig.Priority = newConfig.Priority;
-                        oldConfig.RuntimePlatform = newConfig.RuntimePlatform;
-                        configurations[i] = oldConfig;
+                        var serviceConfig = serviceConfigurations[i];
+                        Debug.Assert(serviceConfig != null);
+                        var newConfig = new MixedRealityServiceConfiguration(serviceConfig.InstancedType, serviceConfig.Name, serviceConfig.Priority, serviceConfig.RuntimePlatform, serviceConfig.ConfigurationProfile);
+                        Debug.Assert(newConfig != null);
+                        configurations[i] = newConfig;
                     }
                 }
             }

@@ -10,7 +10,7 @@ using XRTK.Services;
 namespace XRTK.Inspectors.Profiles.InputSystem
 {
     [CustomEditor(typeof(MixedRealityControllerDataProvidersProfile))]
-    public class MixedRealityControllerDataProviderProfileInspector : MixedRealityServiceProfileInspector
+    public class MixedRealityControllerDataProvidersProfileInspector : BaseMixedRealityProfileInspector
     {
         private static readonly GUIContent AddControllerDataProviderContent = new GUIContent("+ Add a New Controller Data Provider");
         private static readonly GUIContent RemoveControllerDataProviderContent = new GUIContent("-", "Remove Controller Data Provider");

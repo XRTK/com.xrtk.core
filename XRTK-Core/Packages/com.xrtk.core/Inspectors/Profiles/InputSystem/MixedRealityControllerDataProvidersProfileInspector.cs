@@ -16,13 +16,15 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private static readonly GUIContent RemoveControllerDataProviderContent = new GUIContent("-", "Remove Controller Data Provider");
         private static readonly GUIContent ProfileContent = new GUIContent("Profile");
 
+        private SerializedProperty configurations;
         private bool[] foldouts = null;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            foldouts = new bool[Configurations.arraySize];
+            configurations = serializedObject.FindProperty(nameof(configurations));
+            foldouts = new bool[configurations.arraySize];
         }
 
         public override void OnInspectorGUI()
@@ -49,8 +51,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             if (GUILayout.Button(AddControllerDataProviderContent, EditorStyles.miniButton))
             {
-                Configurations.arraySize += 1;
-                var newConfiguration = Configurations.GetArrayElementAtIndex(Configurations.arraySize - 1);
+                configurations.arraySize += 1;
+                var newConfiguration = configurations.GetArrayElementAtIndex(configurations.arraySize - 1);
                 var dataProviderType = newConfiguration.FindPropertyRelative("instancedType");
                 var dataProviderName = newConfiguration.FindPropertyRelative("name");
                 var priority = newConfiguration.FindPropertyRelative("priority");
@@ -64,16 +66,16 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 runtimePlatform.intValue = 0;
                 profile.objectReferenceValue = null;
                 serializedObject.ApplyModifiedProperties();
-                foldouts = new bool[Configurations.arraySize];
+                foldouts = new bool[configurations.arraySize];
                 changed = true;
             }
 
             EditorGUILayout.Space();
             EditorGUILayout.BeginVertical();
 
-            for (int i = 0; i < Configurations.arraySize; i++)
+            for (int i = 0; i < configurations.arraySize; i++)
             {
-                var controllerConfiguration = Configurations.GetArrayElementAtIndex(i);
+                var controllerConfiguration = configurations.GetArrayElementAtIndex(i);
                 var dataProviderName = controllerConfiguration.FindPropertyRelative("name");
                 var dataProviderType = controllerConfiguration.FindPropertyRelative("instancedType");
                 var priority = controllerConfiguration.FindPropertyRelative("priority");
@@ -85,9 +87,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
                 if (GUILayout.Button(RemoveControllerDataProviderContent, EditorStyles.miniButtonRight, GUILayout.Width(24f)))
                 {
-                    Configurations.DeleteArrayElementAtIndex(i);
+                    configurations.DeleteArrayElementAtIndex(i);
                     serializedObject.ApplyModifiedProperties();
-                    foldouts = new bool[Configurations.arraySize];
+                    foldouts = new bool[configurations.arraySize];
                     EditorGUILayout.EndHorizontal();
                     EditorGUILayout.EndVertical();
                     return;

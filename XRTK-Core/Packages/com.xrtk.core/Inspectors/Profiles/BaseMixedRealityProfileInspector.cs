@@ -15,7 +15,7 @@ namespace XRTK.Inspectors.Profiles
     /// </summary>
     public abstract class BaseMixedRealityProfileInspector : Editor
     {
-        private const string IsDefaultProfileProperty = "isDefaultProfile";
+        private const string IsDefaultProfileProperty = "isEditable";
 
         private static readonly GUIContent NewProfileContent = new GUIContent("+", "Create New Profile");
         private static readonly GUIContent CopyProfileContent = new GUIContent("Clone", "Replace with a copy of the default profile.");

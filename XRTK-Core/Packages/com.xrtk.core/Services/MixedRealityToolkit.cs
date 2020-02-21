@@ -7,7 +7,6 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using XRTK.Definitions;
-using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces;
@@ -418,8 +417,8 @@ namespace XRTK.Services
             {
 #if UNITY_EDITOR
                 // Setup the default spatial awareness layers in the project settings.
-                LayerExtensions.SetupLayer(31, MixedRealitySpatialAwarenessSystemProfile.SpatialAwarenessMeshesLayerName);
-                LayerExtensions.SetupLayer(30, MixedRealitySpatialAwarenessSystemProfile.SpatialAwarenessSurfacesLayerName);
+                LayerExtensions.SetupLayer(31, Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.SpatialAwarenessMeshesLayerName);
+                LayerExtensions.SetupLayer(30, Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.SpatialAwarenessSurfacesLayerName);
 #endif
                 if (CreateAndRegisterService<IMixedRealitySpatialAwarenessSystem>(ActiveProfile.SpatialAwarenessSystemSystemType, ActiveProfile.SpatialAwarenessProfile) && SpatialAwarenessSystem != null)
                 {
@@ -433,8 +432,8 @@ namespace XRTK.Services
             else
             {
 #if UNITY_EDITOR
-                LayerExtensions.RemoveLayer(MixedRealitySpatialAwarenessSystemProfile.SpatialAwarenessMeshesLayerName);
-                LayerExtensions.RemoveLayer(MixedRealitySpatialAwarenessSystemProfile.SpatialAwarenessSurfacesLayerName);
+                LayerExtensions.RemoveLayer(Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.SpatialAwarenessMeshesLayerName);
+                LayerExtensions.RemoveLayer(Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.SpatialAwarenessSurfacesLayerName);
 #endif
             }
 

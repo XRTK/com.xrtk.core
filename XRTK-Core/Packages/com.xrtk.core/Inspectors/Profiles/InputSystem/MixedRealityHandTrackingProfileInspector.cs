@@ -12,6 +12,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
     public class MixedRealityHandTrackingProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty handMeshingEnabled;
+        private SerializedProperty handRayType;
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
         private SerializedProperty boundsMode;
@@ -21,6 +22,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             base.OnEnable();
 
             handMeshingEnabled = serializedObject.FindProperty(nameof(handMeshingEnabled));
+            handRayType = serializedObject.FindProperty(nameof(handRayType));
             handPhysicsEnabled = serializedObject.FindProperty(nameof(handPhysicsEnabled));
             useTriggers = serializedObject.FindProperty(nameof(useTriggers));
             boundsMode = serializedObject.FindProperty(nameof(boundsMode));
@@ -41,6 +43,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             EditorGUILayout.BeginVertical();
             EditorGUILayout.PropertyField(handMeshingEnabled);
+            EditorGUILayout.PropertyField(handRayType);
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(handPhysicsEnabled);

@@ -2,7 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.InputSystem.Controllers.Hands;
 using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Definitions.InputSystem
@@ -22,6 +24,16 @@ namespace XRTK.Definitions.InputSystem
         /// If set, hand mesh data will be read and available for visualzation. Disable for optimized performance.
         /// </summary>
         public bool HandMeshingEnabled => handMeshingEnabled;
+
+        [SerializeField]
+        [Tooltip("The hand ray concrete type to use when raycasting for hand interaction.")]
+        [Implements(typeof(IMixedRealityHandRay), TypeGrouping.ByNamespaceFlat)]
+        private SystemType handRayType;
+
+        /// <summary>
+        /// The hand ray concrete type to use when raycasting for hand interaction.
+        /// </summary>
+        public SystemType HandRayType => handRayType;
 
         [Header("Hand Physics")]
 

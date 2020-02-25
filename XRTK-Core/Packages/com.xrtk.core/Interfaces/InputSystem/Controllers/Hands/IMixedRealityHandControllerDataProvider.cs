@@ -4,7 +4,7 @@
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Providers.Controllers.Hands;
 
-namespace XRTK.Interfaces.InputSystem
+namespace XRTK.Interfaces.InputSystem.Controllers.Hands
 {
     public interface IMixedRealityHandControllerDataProvider : IMixedRealityControllerDataProvider
     {

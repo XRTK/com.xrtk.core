@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using XRTK.Definitions.Controllers;
-using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.InputSystem.Controllers.Hands;
 using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Hands

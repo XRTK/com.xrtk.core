@@ -14,7 +14,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         private static readonly GUIContent SpatialObserverAddButtonContent = new GUIContent("+ Add a New Spatial Observer");
         private static readonly GUIContent SpatialObserverMinusButtonContent = new GUIContent("-", "Remove Spatial Observer");
 
-        private SerializedProperty registeredSpatialObserverDataProviders;
+        private SerializedProperty configurations;
         private SerializedProperty meshDisplayOption;
 
         private bool[] foldouts = null;
@@ -24,9 +24,9 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         {
             base.OnEnable();
 
-            registeredSpatialObserverDataProviders = serializedObject.FindProperty("registeredSpatialObserverDataProviders");
+            configurations = serializedObject.FindProperty(nameof(configurations));
             meshDisplayOption = serializedObject.FindProperty("meshDisplayOption");
-            foldouts = new bool[registeredSpatialObserverDataProviders.arraySize];
+            foldouts = new bool[configurations.arraySize];
         }
 
         /// <inheritdoc />
@@ -54,13 +54,13 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
 
             if (GUILayout.Button(SpatialObserverAddButtonContent, EditorStyles.miniButton))
             {
-                registeredSpatialObserverDataProviders.arraySize++;
-                var spatialObserverConfiguration = registeredSpatialObserverDataProviders.GetArrayElementAtIndex(registeredSpatialObserverDataProviders.arraySize - 1);
-                var spatialObserverType = spatialObserverConfiguration.FindPropertyRelative("spatialObserverType");
-                var spatialObserverName = spatialObserverConfiguration.FindPropertyRelative("spatialObserverName");
+                configurations.arraySize++;
+                var spatialObserverConfiguration = configurations.GetArrayElementAtIndex(configurations.arraySize - 1);
+                var spatialObserverType = spatialObserverConfiguration.FindPropertyRelative("instancedType");
+                var spatialObserverName = spatialObserverConfiguration.FindPropertyRelative("name");
                 var priority = spatialObserverConfiguration.FindPropertyRelative("priority");
                 var runtimePlatform = spatialObserverConfiguration.FindPropertyRelative("runtimePlatform");
-                var profile = spatialObserverConfiguration.FindPropertyRelative("profile");
+                var profile = spatialObserverConfiguration.FindPropertyRelative("configurationProfile");
 
                 spatialObserverType.FindPropertyRelative("reference").stringValue = string.Empty;
                 spatialObserverName.stringValue = "New Spatial Observer Data Provider";
@@ -68,30 +68,30 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
                 runtimePlatform.intValue = 0;
                 profile.objectReferenceValue = null;
                 serializedObject.ApplyModifiedProperties();
-                foldouts = new bool[registeredSpatialObserverDataProviders.arraySize];
+                foldouts = new bool[configurations.arraySize];
                 return;
             }
 
             EditorGUILayout.Space();
             EditorGUILayout.BeginVertical();
 
-            for (int i = 0; i < registeredSpatialObserverDataProviders?.arraySize; i++)
+            for (int i = 0; i < configurations?.arraySize; i++)
             {
-                var spatialObserverConfiguration = registeredSpatialObserverDataProviders.GetArrayElementAtIndex(i);
-                var spatialObserverType = spatialObserverConfiguration.FindPropertyRelative("spatialObserverType");
-                var spatialObserverName = spatialObserverConfiguration.FindPropertyRelative("spatialObserverName");
+                var spatialObserverConfiguration = configurations.GetArrayElementAtIndex(i);
+                var spatialObserverType = spatialObserverConfiguration.FindPropertyRelative("instancedType");
+                var spatialObserverName = spatialObserverConfiguration.FindPropertyRelative("name");
                 var priority = spatialObserverConfiguration.FindPropertyRelative("priority");
                 var runtimePlatform = spatialObserverConfiguration.FindPropertyRelative("runtimePlatform");
-                var profile = spatialObserverConfiguration.FindPropertyRelative("profile");
+                var profile = spatialObserverConfiguration.FindPropertyRelative("configurationProfile");
 
                 EditorGUILayout.BeginHorizontal();
                 foldouts[i] = EditorGUILayout.Foldout(foldouts[i], spatialObserverName.stringValue, true);
 
                 if (GUILayout.Button(SpatialObserverMinusButtonContent, EditorStyles.miniButtonRight, GUILayout.Width(24f)))
                 {
-                    registeredSpatialObserverDataProviders.DeleteArrayElementAtIndex(i);
+                    configurations.DeleteArrayElementAtIndex(i);
                     serializedObject.ApplyModifiedProperties();
-                    foldouts = new bool[registeredSpatialObserverDataProviders.arraySize];
+                    foldouts = new bool[configurations.arraySize];
                     EditorGUILayout.EndHorizontal();
                     EditorGUILayout.EndVertical();
                     return;

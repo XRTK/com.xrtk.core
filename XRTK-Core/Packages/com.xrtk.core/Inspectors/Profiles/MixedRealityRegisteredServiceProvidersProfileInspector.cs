@@ -7,5 +7,5 @@ using XRTK.Definitions;
 namespace XRTK.Inspectors.Profiles
 {
     [CustomEditor(typeof(MixedRealityRegisteredServiceProvidersProfile))]
-    public class MixedRealityRegisteredServiceProvidersProfileInspector : MixedRealityServiceProviderProfileInspector { }
+    public class MixedRealityRegisteredServiceProvidersProfileInspector : MixedRealityServiceProfileInspector { }
 }

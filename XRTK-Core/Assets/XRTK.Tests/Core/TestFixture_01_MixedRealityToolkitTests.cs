@@ -251,7 +251,7 @@ namespace XRTK.Tests.Core
 
             // Add test data providers
             MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1(testName1));
-            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestDataProvider2(testName2, 10));
+            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestDataProvider2(testName2));
 
             // Retrieve 
             var dataProvider1 = (TestDataProvider1)MixedRealityToolkit.GetService<ITestDataProvider1>(testName1);
@@ -625,7 +625,7 @@ namespace XRTK.Tests.Core
             MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test07-01-1.2"));
 
             // Add test 2 services
-            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestDataProvider2("Test07-01-2.1", 10));
+            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestDataProvider2("Test07-01-2.1"));
             MixedRealityToolkit.RegisterService<ITestExtensionService2>(new TestExtensionService2("Test07-01-2.2"));
 
             // Enable all test services
@@ -651,7 +651,7 @@ namespace XRTK.Tests.Core
             MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test07-01-1.2"));
 
             // Add test 2 services
-            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestDataProvider2("Test07-01-2.1", 10));
+            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestDataProvider2("Test07-01-2.1"));
             MixedRealityToolkit.RegisterService<ITestExtensionService2>(new TestExtensionService2("Test07-01-2.2"));
 
             // Enable all test services

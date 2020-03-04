@@ -7,6 +7,14 @@ using XRTK.Definitions.Utilities;
 namespace XRTK.Interfaces
 {
     /// <summary>
+    /// The generic interface for <see cref="IMixedRealityServiceConfiguration"/>s.
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public interface IMixedRealityServiceConfiguration<out T> : IMixedRealityServiceConfiguration where T : IMixedRealityService
+    {
+    }
+
+    /// <summary>
     /// This interface is meant to be used with serialized structs that define valid <see cref="IMixedRealityService"/> configurations.
     /// </summary>
     public interface IMixedRealityServiceConfiguration : IBaseMixedRealityServiceConfiguration

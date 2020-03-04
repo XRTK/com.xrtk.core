@@ -1,14 +1,15 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using XRTK.Interfaces;
 
 namespace XRTK.Services
 {
     /// <summary>
-    /// The base service implements <see cref="Interfaces.IMixedRealityService"/> and provides default properties for all services.
+    /// The base service implements <see cref="IMixedRealityService"/> and provides default properties for all services.
     /// </summary>
-    public abstract class BaseService : Interfaces.IMixedRealityService
+    public abstract class BaseService : IMixedRealityService
     {
         #region IMixedRealityService Implementation
 

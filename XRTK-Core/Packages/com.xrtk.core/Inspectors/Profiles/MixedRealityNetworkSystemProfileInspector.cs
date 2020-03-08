@@ -5,22 +5,12 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.NetworkingSystem;
 using XRTK.Inspectors.Utilities;
-using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
 {
     [CustomEditor(typeof(MixedRealityNetworkSystemProfile))]
-    public class MixedRealityNetworkSystemProfileInspector : BaseMixedRealityProfileInspector
+    public class MixedRealityNetworkSystemProfileInspector : MixedRealityServiceProfileInspector
     {
-        private SerializedProperty configurations;
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
-
-            configurations = serializedObject.FindProperty(nameof(configurations));
-        }
-
         public override void OnInspectorGUI()
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
@@ -36,17 +26,10 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.HelpBox("The Network System Profile helps developers configure networking messages no matter what platform you're building for.", MessageType.Info);
 
             ThisProfile.CheckProfileLock();
-
             serializedObject.Update();
-
-            EditorGUI.BeginChangeCheck();
-            EditorGUILayout.PropertyField(configurations, true);
-
-            if (EditorGUI.EndChangeCheck() && MixedRealityToolkit.IsInitialized)
-            {
-                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
-            }
-
+            EditorGUILayout.Space();
+            base.OnInspectorGUI();
+            EditorGUILayout.Space();
             serializedObject.ApplyModifiedProperties();
         }
     }

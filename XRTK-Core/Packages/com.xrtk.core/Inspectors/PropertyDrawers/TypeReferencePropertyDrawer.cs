@@ -3,6 +3,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEngine;
@@ -74,7 +75,7 @@ namespace XRTK.Inspectors.PropertyDrawers
 
             foreach (var assembly in assemblies)
             {
-                Assembly compiledAssembly = Assembly.Load(assembly.name);
+                var compiledAssembly = Assembly.Load(assembly.name);
                 FilterTypes(compiledAssembly, filter, excludedTypes, types);
             }
 
@@ -84,27 +85,12 @@ namespace XRTK.Inspectors.PropertyDrawers
 
         private static void FilterTypes(Assembly assembly, SystemTypeAttribute filter, ICollection<Type> excludedTypes, List<Type> output)
         {
-            foreach (var type in assembly.GetTypes())
-            {
-                bool isValid = type.IsValueType && !type.IsEnum || type.IsClass;
-
-                if (!type.IsVisible || !isValid)
-                {
-                    continue;
-                }
-
-                if (filter != null && !filter.IsConstraintSatisfied(type))
-                {
-                    continue;
-                }
-
-                if (excludedTypes != null && excludedTypes.Contains(type))
-                {
-                    continue;
-                }
-
-                output.Add(type);
-            }
+            output.AddRange(from type in assembly.GetTypes()
+                            let isValid = type.IsValueType && !type.IsEnum || type.IsClass
+                            where type.IsVisible && isValid
+                            where filter == null || filter.IsConstraintSatisfied(type)
+                            where excludedTypes == null || !excludedTypes.Contains(type)
+                            select type);
         }
 
         #endregion Type Filtering
@@ -217,15 +203,15 @@ namespace XRTK.Inspectors.PropertyDrawers
         /// Draws the selection control for the type.
         /// </summary>
         /// <param name="position"></param>
-        /// <param name="property"></param>
+        /// <param name="systemTypeProperty"></param>
         /// <param name="label"></param>
         /// <param name="filter"></param>
         /// <returns>True, if the class reference was resolved successfully.</returns>
-        private static void DrawTypeSelectionControl(Rect position, SerializedProperty property, GUIContent label, SystemTypeAttribute filter)
+        private static void DrawTypeSelectionControl(Rect position, SerializedProperty systemTypeProperty, GUIContent label, SystemTypeAttribute filter)
         {
             try
             {
-                var referenceProperty = property.FindPropertyRelative("reference");
+                var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
 
                 EditorGUI.showMixedValue = referenceProperty.hasMultipleDifferentValues;
 
@@ -240,7 +226,7 @@ namespace XRTK.Inspectors.PropertyDrawers
 
                     if (isValidClassRef)
                     {
-                        Debug.LogWarning($"Fixed missing class reference for property '{label.text}' on {property.serializedObject.targetObject.name}");
+                        Debug.LogWarning($"Fixed missing class reference for property '{label.text}' on {systemTypeProperty.serializedObject.targetObject.name}");
                     }
                     else
                     {
@@ -325,18 +311,7 @@ namespace XRTK.Inspectors.PropertyDrawers
 
         private static Type[] FindTypesByName(string typeName, SystemTypeAttribute filter)
         {
-            var types = new List<Type>();
-            var filteredTypes = GetFilteredTypes(filter);
-
-            foreach (var type in filteredTypes)
-            {
-                if (type.Name.Equals(typeName))
-                {
-                    types.Add(type);
-                }
-            }
-
-            return types.ToArray();
+            return GetFilteredTypes(filter).Where(type => type.Name.Equals(typeName)).ToArray();
         }
 
         private static void DisplayDropDown(Rect position, List<Type> types, Type selectedType, TypeGrouping grouping)
@@ -401,11 +376,13 @@ namespace XRTK.Inspectors.PropertyDrawers
 
         #endregion Control Drawing / Event Handling
 
+        /// <inheritdoc />
         public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
             return EditorStyles.popup.CalcHeight(GUIContent.none, 0);
         }
 
+        /// <inheritdoc />
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             DrawTypeSelectionControl(position, property, label, attribute as SystemTypeAttribute);

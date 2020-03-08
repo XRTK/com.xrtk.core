@@ -11,9 +11,11 @@ using XRTK.Services;
 
 namespace XRTK.Definitions
 {
+    /// <inheritdoc cref="MixedRealityServiceConfiguration" />
     public class MixedRealityServiceConfiguration<T> : MixedRealityServiceConfiguration, IMixedRealityServiceConfiguration<T>
         where T : IMixedRealityService
     {
+        /// <inheritdoc />
         public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityProfile configurationProfile)
             : base(instancedType, name, priority, runtimePlatform, configurationProfile)
         {
@@ -48,6 +50,7 @@ namespace XRTK.Definitions
         [FormerlySerializedAs("componentType")]
         [FormerlySerializedAs("dataProviderType")]
         [FormerlySerializedAs("spatialObserverType")]
+        [Implements(typeof(IMixedRealityService), TypeGrouping.ByNamespaceFlat)]
         private SystemType instancedType;
 
         /// <inheritdoc />

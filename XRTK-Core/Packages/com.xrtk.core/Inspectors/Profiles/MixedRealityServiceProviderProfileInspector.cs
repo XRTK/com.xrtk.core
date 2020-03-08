@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Definitions;
-using XRTK.Inspectors.Utilities;
+using XRTK.Interfaces;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
@@ -16,16 +16,16 @@ namespace XRTK.Inspectors.Profiles
         private ReorderableList configurationList;
         private int currentlySelectedConfigurationOption;
 
-        protected SerializedProperty Configurations { get; private set; }
+        private SerializedProperty configurations;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            Configurations = serializedObject.FindProperty(nameof(Configurations).ToLower());
-            Debug.Assert(Configurations != null);
+            configurations = serializedObject.FindProperty(nameof(configurations));
+            Debug.Assert(configurations != null);
 
-            configurationList = new ReorderableList(serializedObject, Configurations, true, false, true, true)
+            configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true)
             {
                 elementHeight = EditorGUIUtility.singleLineHeight * 5.5f
             };
@@ -37,27 +37,10 @@ namespace XRTK.Inspectors.Profiles
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
-
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Configuration Profile"))
-            {
-                Selection.activeObject = ThisProfile.ParentProfile;
-            }
-
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Registered Service Providers Profile", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("This profile defines any additional Services like systems, features, and managers to register with the Mixed Reality Toolkit.\n\n" +
-                                    "Note: The order of the list determines the order these services get created.", MessageType.Info);
-
-            ThisProfile.CheckProfileLock();
-
             serializedObject.Update();
-            EditorGUILayout.Space();
             configurationList.DoLayoutList();
-            EditorGUILayout.Space();
 
-            if (Configurations == null || Configurations.arraySize == 0)
+            if (configurations == null || configurations.arraySize == 0)
             {
                 EditorGUILayout.HelpBox("Register a new Service Provider.", MessageType.Warning);
             }
@@ -81,27 +64,26 @@ namespace XRTK.Inspectors.Profiles
             var runtimeRect = new Rect(rect.x, rect.y + halfFieldHeight * 11, rect.width, EditorGUIUtility.singleLineHeight);
             var profileRect = new Rect(rect.x, rect.y + halfFieldHeight * 16, rect.width, EditorGUIUtility.singleLineHeight);
 
-            var managerConfig = Configurations.GetArrayElementAtIndex(index);
-            var componentName = managerConfig.FindPropertyRelative("name");
-            var componentType = managerConfig.FindPropertyRelative("instancedType");
-            var priority = managerConfig.FindPropertyRelative("priority");
-            var runtimePlatform = managerConfig.FindPropertyRelative("runtimePlatform");
-            var configurationProfile = managerConfig.FindPropertyRelative("configurationProfile");
+            var configuration = configurations.GetArrayElementAtIndex(index);
+            var nameProperty = configuration.FindPropertyRelative("name");
+            var instanceTypeProperty = configuration.FindPropertyRelative("instancedType");
+            var priorityProperty = configuration.FindPropertyRelative("priority");
+            var runtimePlatformProperty = configuration.FindPropertyRelative("runtimePlatform");
+            var configurationProfileProperty = configuration.FindPropertyRelative("configurationProfile");
 
             EditorGUI.BeginChangeCheck();
-
-            EditorGUI.PropertyField(nameRect, componentName);
-            EditorGUI.PropertyField(typeRect, componentType);
-            priority.intValue = index;
-            EditorGUI.PropertyField(runtimeRect, runtimePlatform);
-            EditorGUI.PropertyField(profileRect, configurationProfile);
+            EditorGUI.PropertyField(nameRect, nameProperty);
+            EditorGUI.PropertyField(typeRect, instanceTypeProperty);
+            priorityProperty.intValue = index;
+            EditorGUI.PropertyField(runtimeRect, runtimePlatformProperty);
+            EditorGUI.PropertyField(profileRect, configurationProfileProperty);
 
             if (EditorGUI.EndChangeCheck())
             {
                 serializedObject.ApplyModifiedProperties();
 
                 if (MixedRealityToolkit.IsInitialized &&
-                    !string.IsNullOrEmpty(componentType.FindPropertyRelative("reference").stringValue))
+                    !string.IsNullOrEmpty(instanceTypeProperty.FindPropertyRelative("reference").stringValue))
                 {
                     MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
                 }
@@ -112,19 +94,22 @@ namespace XRTK.Inspectors.Profiles
 
         private void OnConfigurationOptionAdded(ReorderableList list)
         {
-            Configurations.arraySize += 1;
-            var index = Configurations.arraySize - 1;
-            var managerConfig = Configurations.GetArrayElementAtIndex(index);
-            var configurationName = managerConfig.FindPropertyRelative("name");
-            configurationName.stringValue = $"New Configuration {index}";
-            var priority = managerConfig.FindPropertyRelative("priority");
-            priority.intValue = index;
-            var runtimePlatform = managerConfig.FindPropertyRelative("runtimePlatform");
-            runtimePlatform.intValue = 0;
-            var instancedType = managerConfig.FindPropertyRelative("instancedType");
-            instancedType.FindPropertyRelative("reference").stringValue = string.Empty;
-            var configurationProfile = managerConfig.FindPropertyRelative("configurationProfile");
-            configurationProfile.objectReferenceValue = null;
+            configurations.arraySize += 1;
+            var index = configurations.arraySize - 1;
+
+            var configuration = configurations.GetArrayElementAtIndex(index);
+            var nameProperty = configuration.FindPropertyRelative("name");
+            var instancedTypeProperty = configuration.FindPropertyRelative("instancedType");
+            var priorityProperty = configuration.FindPropertyRelative("priority");
+            var runtimePlatformProperty = configuration.FindPropertyRelative("runtimePlatform");
+            var configurationProfileProperty = configuration.FindPropertyRelative("configurationProfile");
+
+            nameProperty.stringValue = $"New Configuration {index}";
+            instancedTypeProperty.FindPropertyRelative("reference").stringValue = string.Empty;
+            priorityProperty.intValue = index;
+            runtimePlatformProperty.intValue = 0;
+            configurationProfileProperty.objectReferenceValue = null;
+
             serializedObject.ApplyModifiedProperties();
         }
 
@@ -132,7 +117,7 @@ namespace XRTK.Inspectors.Profiles
         {
             if (currentlySelectedConfigurationOption >= 0)
             {
-                Configurations.DeleteArrayElementAtIndex(currentlySelectedConfigurationOption);
+                configurations.DeleteArrayElementAtIndex(currentlySelectedConfigurationOption);
             }
 
             serializedObject.ApplyModifiedProperties();

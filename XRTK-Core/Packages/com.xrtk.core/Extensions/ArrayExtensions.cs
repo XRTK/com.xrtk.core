@@ -42,7 +42,7 @@ namespace XRTK.Extensions
             // Initialise the array if it is null
             if (array == null)
             {
-                array = new T[0];
+                return new[] { newItem };
             }
 
             //Extend the array, copy the items and add the new one
@@ -64,7 +64,7 @@ namespace XRTK.Extensions
             // Initialise the array if it is null
             if (array == null)
             {
-                array = new T[1];
+                return new[] { newItem };
             }
 
             //Set all the items to the provided value

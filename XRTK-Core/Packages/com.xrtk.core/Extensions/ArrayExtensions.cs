@@ -64,7 +64,7 @@ namespace XRTK.Extensions
             // Initialise the array if it is null
             if (array == null)
             {
-                array = new T[1];
+                return new[] { newItem };
             }
 
             //Set all the items to the provided value

@@ -45,8 +45,7 @@ UWP | Universal Windows Platform (Windows 10) | <ul><li>Windows 10 WMR</li><li>H
 Lumin / Magic Leap | Magic leap support | <ul><li>Magic Leap One</li></ul> | **Not Supported**
 Oculus (Windows) | Running native Oculus API on Windows | <ul><li>Rift</li><li>Rift S</li></ul> | **Not Supported**
 Oculus (Android) | Running native Oculus API on Android | <ul><li>Oculus Go</li><li>Oculus Quest</li></ul> | **Not Supported**
-Steam (Windows) | Running native Steam API on Windows | <ul><li>Vive</li><li>Vive Pro</li><br/> (planned)</ul> | **Not Supported**
-Steam (Android) | Running native Steam API on Android | <ul><li>Vive index <br/> (planned)</li></ul> | **Not Supported**
+Steam (Windows) | Running native Steam API on Windows | <ul><li>Vive</li><li>Vive Pro</li>(planned)<li>Vive index (planned)</li></ul> | **Not Supported**
 ARCore (Android) | ARCore support / integration on Android | planned | tbc
 ARKit (iOS) | ARKit support / integration | planned | tbc
 |||||

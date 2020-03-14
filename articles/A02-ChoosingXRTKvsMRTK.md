@@ -10,7 +10,6 @@ Both projects were originally designed/architected and built by the same develop
 
 * The MRTK is currently only being developed to focus on the needs of Microsoft partners and new HL2 deployments, whilst still retaining the core multi-platform architecture it was designed with.  Microsoft (for the time being) must focus its scope to achieve those deliverables.
 
-
 Both projects share a lot of the same base code and standards. As such, projects created in one framework are easily transferable to the other with minimal effort, the teams have ensured you are never locked into one framework, should you wish to switch.
 There will be an increasing number of touchpoints as time goes by, but both teams are invested in keeping the two projects aligned to allow easy adoption of new features in either direction.
 

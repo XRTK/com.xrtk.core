@@ -6,8 +6,9 @@ The choice between the XRTK and Microsoft's base MRTK today is a personal choice
 
 Both projects were originally designed/architected and built by the same developers over the course of 2018. From 2019 on, they have diverged under different principles, namely:
 
-* The MRTK is currently only being developed to focus on the needs of Microsoft partners and new HL2 deployments, whilst still retaining the core multi-platform architecture it was designed with.  Microsoft (for the time being) must focus its scope to achieve those deliverables.
 * The XRTK is a community-based platform for building cross-platform Mixed Reality solutions (AR / VR / XR / MR) for a multitude of devices and runtime platforms.  Creating solutions to meet the need of a much more diverse set of requirements required by cross-platform solutions.
+
+* The MRTK is currently only being developed to focus on the needs of Microsoft partners and new HL2 deployments, whilst still retaining the core multi-platform architecture it was designed with.  Microsoft (for the time being) must focus its scope to achieve those deliverables.
 
 Both projects share a lot of the same base code and standards. As such, projects created in one framework are easily transferable to the other with minimal effort, the teams have ensured you are never locked into one framework, should you wish to switch.
 There will be an increasing number of touchpoints as time goes by, but both teams are invested in keeping the two projects aligned to allow easy adoption of new features in either direction.
@@ -37,20 +38,18 @@ The MRTK focuses on delivery to new and pre-existing partner solutions and as su
 
 Platform | Description | XRTK Support | MRTK Support
 ---|---|---|---|
-OpenVR (Windows) | Running OpenVR projects on Windows / Windows 10 | <ul><li>WMR</li><li>Vive</li><li>Rift</li></ul>| <ul><li>WMR</li><li>Vive</li><li>Rift</li></ul>|
-OpenVR (Android) | Running OpenVR projects on Android | <ul><li>Oculus GO</li><li>Oculus Quest<br/> (coming very soon)</li></ul> | **Not Supported**
-UWP | Universal Windows Platform (Windows 10) | <ul><li>Windows 10 WMR</li><li>HoloLens 1</li></ul> | <ul><li>Windows 10 WMR</li><li>HoloLens 1</li><li>HoloLens 2</li></ul>
+OpenVR (Windows) | Running OpenVR projects on Windows / Windows 10 | Any Supported *OpenVR device | Any Supported *OpenVR device
+OpenVR (Android) | Running OpenVR projects on Android | <ul><li>Oculus GO</li><li>Oculus Quest</li></ul> | **Not Supported**
+UWP | Universal Windows Platform (Windows 10) | <ul><li>Windows 10 WMR</li><li>HoloLens 1</li><li>HoloLens 2</li>(Hands pending)</ul> | <ul><li>Windows 10 WMR</li><li>HoloLens 1</li><li>HoloLens 2</li></ul>
 Lumin / Magic Leap | Magic leap support | <ul><li>Magic Leap One</li></ul> | **Not Supported**
-Oculus (Windows) | Running native Oculus API on Windows | <ul><li>Rift</li><li>Rift S<br/> (planned)</li></ul> | **Not Supported**
-Oculus (Android) | Running native Oculus API on Android | <ul><li>Oculus Go</li><li>Oculus Quest<br/> (coming very soon)</li></ul> | **Not Supported**
-Steam (Windows) | Running native Steam API on Windows | <ul><li>Vive</li><li>Vive Pro</li></ul> | **Not Supported**
-Steam (Android) | Running native Steam API on Android | <ul><li>Vive index <br/> (planned)</li></ul> | **Not Supported**
+Oculus (Windows) | Running native Oculus API on Windows | <ul><li>Rift</li><li>Rift S</li></ul> | **Not Supported**
+Oculus (Android) | Running native Oculus API on Android | <ul><li>Oculus Go</li><li>Oculus Quest</li></ul> | **Not Supported**
+Steam (Windows) | Running native Steam API on Windows | <ul><li>Vive</li><li>Vive Pro</li>(planned)<li>Vive index (planned)</li></ul> | **Not Supported**
 ARCore (Android) | ARCore support / integration on Android | planned | tbc
 ARKit (iOS) | ARKit support / integration | planned | tbc
 |||||
 
-> *TBC* - To Be Considered
-> MRTK status based off Microsoft's currently published road-map
+> *OpenVR* - we support all devices that can run OpenVR based builds, but only support controllers for Vive, Rift, Quest, Go and WMR currently
 
 ## MRTK / XRTK parity
 

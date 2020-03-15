@@ -59,6 +59,7 @@ namespace XRTK.Extensions
         /// <param name="array">The array to initialise</param>
         /// <param name="newItem">The default item to set all the array items to</param>
         /// <returns></returns>
+        /// <remarks>Please note, this extension should only be used with value types such as structs.  Reference types should not be used.</remarks>
         public static T[] InitialiseArray<T>(this T[] array, T newItem)
         {
             // Initialise the array if it is null

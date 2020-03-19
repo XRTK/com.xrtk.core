@@ -90,7 +90,8 @@ namespace XRTK.Inspectors.PropertyDrawers
             output.AddRange(from type in assembly.GetTypes()
                             let isValid = (type.IsValueType && !type.IsEnum) || type.IsClass
                             where type.IsVisible && isValid
-                            where (FilterConstraintOverride != null && FilterConstraintOverride.Invoke(type)) && (filter == null || filter.IsConstraintSatisfied(type))
+                            where (FilterConstraintOverride == null || FilterConstraintOverride.Invoke(type)) &&
+                                  (filter == null || filter.IsConstraintSatisfied(type))
                             where excludedTypes == null || !excludedTypes.Contains(type)
                             select type);
         }

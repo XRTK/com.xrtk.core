@@ -1,11 +1,13 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System;
+using System.Linq;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Definitions;
-using XRTK.Interfaces;
+using XRTK.Inspectors.PropertyDrawers;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
@@ -18,12 +20,27 @@ namespace XRTK.Inspectors.Profiles
 
         private SerializedProperty configurations;
 
+        protected Type ServiceConstraint { get; private set; } = null;
+
         protected override void OnEnable()
         {
             base.OnEnable();
 
             configurations = serializedObject.FindProperty(nameof(configurations));
+
             Debug.Assert(configurations != null);
+            var baseType = ThisProfile.GetType().BaseType;
+            var genericTypeArgs = baseType?.GenericTypeArguments;
+
+            Debug.Assert(genericTypeArgs != null);
+
+            foreach (var interfaceType in genericTypeArgs)
+            {
+                ServiceConstraint = interfaceType;
+                break;
+            }
+
+            Debug.Assert(ServiceConstraint != null);
 
             configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true)
             {
@@ -64,15 +81,17 @@ namespace XRTK.Inspectors.Profiles
             var runtimeRect = new Rect(rect.x, rect.y + halfFieldHeight * 11, rect.width, EditorGUIUtility.singleLineHeight);
             var profileRect = new Rect(rect.x, rect.y + halfFieldHeight * 16, rect.width, EditorGUIUtility.singleLineHeight);
 
-            var configuration = configurations.GetArrayElementAtIndex(index);
-            var nameProperty = configuration.FindPropertyRelative("name");
-            var instanceTypeProperty = configuration.FindPropertyRelative("instancedType");
-            var priorityProperty = configuration.FindPropertyRelative("priority");
-            var runtimePlatformProperty = configuration.FindPropertyRelative("runtimePlatform");
-            var configurationProfileProperty = configuration.FindPropertyRelative("configurationProfile");
+            var configurationProperty = configurations.GetArrayElementAtIndex(index);
+
+            var nameProperty = configurationProperty.FindPropertyRelative("name");
+            var priorityProperty = configurationProperty.FindPropertyRelative("priority");
+            var instanceTypeProperty = configurationProperty.FindPropertyRelative("instancedType");
+            var runtimePlatformProperty = configurationProperty.FindPropertyRelative("runtimePlatform");
+            var configurationProfileProperty = configurationProperty.FindPropertyRelative("configurationProfile");
 
             EditorGUI.BeginChangeCheck();
             EditorGUI.PropertyField(nameRect, nameProperty);
+            TypeReferencePropertyDrawer.FilterConstraintOverride = IsConstraintSatisfied;
             EditorGUI.PropertyField(typeRect, instanceTypeProperty);
             priorityProperty.intValue = index;
             EditorGUI.PropertyField(runtimeRect, runtimePlatformProperty);
@@ -90,6 +109,11 @@ namespace XRTK.Inspectors.Profiles
             }
 
             EditorGUIUtility.wideMode = lastMode;
+        }
+
+        private bool IsConstraintSatisfied(Type type)
+        {
+            return !type.IsAbstract && type.GetInterfaces().Any(interfaceType => interfaceType == ServiceConstraint);
         }
 
         private void OnConfigurationOptionAdded(ReorderableList list)

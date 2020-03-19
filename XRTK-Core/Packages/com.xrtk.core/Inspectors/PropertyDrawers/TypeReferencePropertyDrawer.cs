@@ -67,7 +67,9 @@ namespace XRTK.Inspectors.PropertyDrawers
         /// </example>
         public static Func<ICollection<Type>> ExcludedTypeCollectionGetter { get; set; }
 
-        private static List<Type> GetFilteredTypes(SystemTypeAttribute filter)
+        public static Func<Type, bool> FilterConstraintOverride { get; set; }
+
+        private static IEnumerable<Type> GetFilteredTypes(SystemTypeAttribute filter)
         {
             var types = new List<Type>();
             var assemblies = CompilationPipeline.GetAssemblies();
@@ -86,9 +88,9 @@ namespace XRTK.Inspectors.PropertyDrawers
         private static void FilterTypes(Assembly assembly, SystemTypeAttribute filter, ICollection<Type> excludedTypes, List<Type> output)
         {
             output.AddRange(from type in assembly.GetTypes()
-                            let isValid = type.IsValueType && !type.IsEnum || type.IsClass
+                            let isValid = (type.IsValueType && !type.IsEnum) || type.IsClass
                             where type.IsVisible && isValid
-                            where filter == null || filter.IsConstraintSatisfied(type)
+                            where (FilterConstraintOverride != null && FilterConstraintOverride.Invoke(type)) && (filter == null || filter.IsConstraintSatisfied(type))
                             where excludedTypes == null || !excludedTypes.Contains(type)
                             select type);
         }
@@ -99,7 +101,7 @@ namespace XRTK.Inspectors.PropertyDrawers
 
         private static Type ResolveType(string classRef)
         {
-            if (!TypeMap.TryGetValue(classRef, out Type type))
+            if (!TypeMap.TryGetValue(classRef, out var type))
             {
                 type = !string.IsNullOrEmpty(classRef) ? Type.GetType(classRef) : null;
                 TypeMap[classRef] = type;
@@ -120,34 +122,30 @@ namespace XRTK.Inspectors.PropertyDrawers
         /// <param name="classRef"></param>
         /// <param name="filter"></param>
         /// <returns>True, if the class reference was successfully resolved.</returns>
-        private static void DrawTypeSelectionControl(Rect position, GUIContent label, ref string classRef,
-            SystemTypeAttribute filter)
+        private static void DrawTypeSelectionControl(Rect position, GUIContent label, ref string classRef, SystemTypeAttribute filter)
         {
             if (label != null && label != GUIContent.none)
             {
                 position = EditorGUI.PrefixLabel(position, label);
             }
 
-            int controlId = GUIUtility.GetControlID(ControlHint, FocusType.Keyboard, position);
-
-            bool triggerDropDown = false;
+            var triggerDropDown = false;
+            var controlId = GUIUtility.GetControlID(ControlHint, FocusType.Keyboard, position);
 
             switch (Event.current.GetTypeForControl(controlId))
             {
                 case EventType.ExecuteCommand:
-                    if (Event.current.commandName == "TypeReferenceUpdated")
+                    if (Event.current.commandName == "TypeReferenceUpdated" &&
+                        selectionControlId == controlId)
                     {
-                        if (selectionControlId == controlId)
+                        if (classRef != selectedReference)
                         {
-                            if (classRef != selectedReference)
-                            {
-                                classRef = selectedReference;
-                                GUI.changed = true;
-                            }
-
-                            selectionControlId = 0;
-                            selectedReference = null;
+                            classRef = selectedReference;
+                            GUI.changed = true;
                         }
+
+                        selectionControlId = 0;
+                        selectedReference = null;
                     }
 
                     break;
@@ -273,6 +271,7 @@ namespace XRTK.Inspectors.PropertyDrawers
             }
             finally
             {
+                FilterConstraintOverride = null;
                 ExcludedTypeCollectionGetter = null;
             }
         }
@@ -291,7 +290,10 @@ namespace XRTK.Inspectors.PropertyDrawers
                     if (showPickerWindow)
                     {
                         EditorApplication.delayCall += () =>
-                            EditorUtility.DisplayDialog("No types found", $"No types with the name '{typeNameWithoutNamespace}' were found.", "OK");
+                            EditorUtility.DisplayDialog(
+                                "No types found",
+                                $"No types with the name '{typeNameWithoutNamespace}' were found.",
+                                "OK");
                     }
 
                     return false;
@@ -314,7 +316,7 @@ namespace XRTK.Inspectors.PropertyDrawers
             return GetFilteredTypes(filter).Where(type => type.Name.Equals(typeName)).ToArray();
         }
 
-        private static void DisplayDropDown(Rect position, List<Type> types, Type selectedType, TypeGrouping grouping)
+        private static void DisplayDropDown(Rect position, IEnumerable<Type> types, Type selectedType, TypeGrouping grouping)
         {
             var menu = new GenericMenu();
             menu.AddItem(new GUIContent("(None)"), selectedType == null, OnSelectedTypeName, null);
@@ -361,7 +363,7 @@ namespace XRTK.Inspectors.PropertyDrawers
                     }
 
                     Debug.Assert(type.FullName != null);
-                    return $"Scripts/{type.FullName.Replace('.', '/')}";
+                    return $"Scripts/{type.FullName?.Replace('.', '/')}";
                 default:
                     throw new ArgumentOutOfRangeException(nameof(grouping), grouping, null);
             }

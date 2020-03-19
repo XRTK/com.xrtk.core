@@ -20,6 +20,10 @@ namespace XRTK.Inspectors.PropertyDrawers
     [CustomPropertyDrawer(typeof(SystemTypeAttribute), true)]
     public class TypeReferencePropertyDrawer : PropertyDrawer
     {
+        private const string None = "(None)";
+        private const string Missing = " {missing}";
+        private const string TypeReferenceUpdated = "TypeReferenceUpdated";
+
         private static int selectionControlId;
         private static string selectedReference;
         private static readonly Dictionary<string, Type> TypeMap = new Dictionary<string, Type>();
@@ -49,7 +53,8 @@ namespace XRTK.Inspectors.PropertyDrawers
         /// <code language="csharp"><![CDATA[
         /// private SerializedProperty someTypeReferenceProperty;
         /// 
-        /// public override void OnInspectorGUI() {
+        /// public override void OnInspectorGUI()
+        /// {
         ///     serializedObject.Update();
         /// 
         ///     ClassTypeReferencePropertyDrawer.ExcludedTypeCollectionGetter = GetExcludedTypeCollection;
@@ -58,7 +63,8 @@ namespace XRTK.Inspectors.PropertyDrawers
         ///     serializedObject.ApplyModifiedProperties();
         /// }
         /// 
-        /// private ICollection<Type> GetExcludedTypeCollection() {
+        /// private ICollection<Type> GetExcludedTypeCollection()
+        /// {
         ///     var set = new HashSet<Type>();
         ///     set.Add(typeof(SpecialClassToHideInDropdown));
         ///     return set;
@@ -67,6 +73,37 @@ namespace XRTK.Inspectors.PropertyDrawers
         /// </example>
         public static Func<ICollection<Type>> ExcludedTypeCollectionGetter { get; set; }
 
+        /// <summary>
+        /// Gets or sets a function that returns if the constraint has been satisfied.
+        /// </summary>
+        /// <remarks>
+        /// <para>This will override any attribute filter already set.</para>
+        /// <para>This property must be set immediately before presenting a class
+        /// type reference property field using <see cref="EditorGUI.PropertyField(Rect,SerializedProperty)"/>
+        /// or <see cref="EditorGUILayout.PropertyField(SerializedProperty,UnityEngine.GUILayoutOption[])"/> since the value of this
+        /// property is reset to <c>null</c> each time the control is drawn.</para>
+        /// </remarks>
+        /// <example>
+        /// <para>Override the constraint for the property:</para>
+        /// <code language="csharp"><![CDATA[
+        /// private SerializedProperty someTypeReferenceProperty;
+        /// 
+        /// public override void OnInspectorGUI()
+        /// {
+        ///     serializedObject.Update();
+        /// 
+        ///     ClassTypeReferencePropertyDrawer.FilterConstraintOverride = IsConstraintSatisfied;
+        ///     EditorGUILayout.PropertyField(someTypeReferenceProperty);
+        /// 
+        ///     serializedObject.ApplyModifiedProperties();
+        /// }
+        /// 
+        /// private bool IsConstraintSatisfied(Type type)
+        /// {
+        ///     return !type.IsAbstract && type.GetInterfaces().Any(interfaceType => interfaceType == ServiceConstraint);
+        /// }
+        /// ]]></code>
+        /// </example>
         public static Func<Type, bool> FilterConstraintOverride { get; set; }
 
         private static IEnumerable<Type> GetFilteredTypes(SystemTypeAttribute filter)
@@ -136,7 +173,7 @@ namespace XRTK.Inspectors.PropertyDrawers
             switch (Event.current.GetTypeForControl(controlId))
             {
                 case EventType.ExecuteCommand:
-                    if (Event.current.commandName == "TypeReferenceUpdated" &&
+                    if (Event.current.commandName == TypeReferenceUpdated &&
                         selectionControlId == controlId)
                     {
                         if (classRef != selectedReference)
@@ -182,7 +219,7 @@ namespace XRTK.Inspectors.PropertyDrawers
 
                     if (TempContent.text == string.Empty)
                     {
-                        TempContent.text = "(None)";
+                        TempContent.text = None;
                     }
 
                     EditorStyles.popup.Draw(position, TempContent, controlId);
@@ -229,9 +266,9 @@ namespace XRTK.Inspectors.PropertyDrawers
                     }
                     else
                     {
-                        if (!reference.Contains(" {missing}"))
+                        if (!reference.Contains(Missing))
                         {
-                            reference += " {missing}";
+                            reference += Missing;
                         }
                     }
                 }
@@ -279,7 +316,7 @@ namespace XRTK.Inspectors.PropertyDrawers
 
         private static bool TypeSearch(SerializedProperty property, ref string typeName, SystemTypeAttribute filter, bool showPickerWindow)
         {
-            if (typeName.Contains(" {missing}")) { return false; }
+            if (typeName.Contains(Missing)) { return false; }
 
             var typeNameWithoutAssembly = typeName.Split(new[] { "," }, StringSplitOptions.None)[0];
             var typeNameWithoutNamespace = System.Text.RegularExpressions.Regex.Replace(typeNameWithoutAssembly, @"[.\w]+\.(\w+)", "$1");
@@ -320,7 +357,7 @@ namespace XRTK.Inspectors.PropertyDrawers
         private static void DisplayDropDown(Rect position, IEnumerable<Type> types, Type selectedType, TypeGrouping grouping)
         {
             var menu = new GenericMenu();
-            menu.AddItem(new GUIContent("(None)"), selectedType == null, OnSelectedTypeName, null);
+            menu.AddItem(new GUIContent(None), selectedType == null, OnSelectedTypeName, null);
             menu.AddSeparator(string.Empty);
 
             foreach (var type in types)
@@ -373,7 +410,7 @@ namespace XRTK.Inspectors.PropertyDrawers
         private static void OnSelectedTypeName(object userData)
         {
             selectedReference = SystemType.GetReference(userData as Type);
-            var typeReferenceUpdatedEvent = EditorGUIUtility.CommandEvent("TypeReferenceUpdated");
+            var typeReferenceUpdatedEvent = EditorGUIUtility.CommandEvent(TypeReferenceUpdated);
             EditorWindow.focusedWindow.SendEvent(typeReferenceUpdatedEvent);
         }
 

@@ -13,6 +13,7 @@ using XRTK.Inspectors.Data;
 using XRTK.Inspectors.Utilities;
 using XRTK.Definitions.Controllers;
 using XRTK.Utilities.Editor;
+using XRTK.Extensions;
 
 namespace XRTK.Inspectors
 {
@@ -333,11 +334,11 @@ namespace XRTK.Inspectors
 
             if (!useCustomInteractionMapping)
             {
-                if (currentControllerOption.IsLabelFlipped.Length != interactionList.arraySize)
+                if (currentControllerOption.IsLabelFlipped == null || currentControllerOption.IsLabelFlipped.Length != interactionList.arraySize)
                 {
                     var newArray = new bool[interactionList.arraySize];
 
-                    for (int i = 0; i < currentControllerOption.IsLabelFlipped.Length; i++)
+                    for (int i = 0; i < currentControllerOption.IsLabelFlipped?.Length; i++)
                     {
                         newArray[i] = currentControllerOption.IsLabelFlipped[i];
                     }
@@ -345,11 +346,11 @@ namespace XRTK.Inspectors
                     currentControllerOption.IsLabelFlipped = newArray;
                 }
 
-                if (currentControllerOption.InputLabelPositions.Length != interactionList.arraySize)
+                if (currentControllerOption.InputLabelPositions == null || currentControllerOption.InputLabelPositions.Length != interactionList.arraySize)
                 {
-                    var newArray = new Vector2[interactionList.arraySize];
+                    var newArray = new Vector2[interactionList.arraySize].InitialiseArray(new Vector2(0, 25));
 
-                    for (int i = 0; i < currentControllerOption.InputLabelPositions.Length; i++)
+                    for (int i = 0; i < currentControllerOption.InputLabelPositions?.Length; i++)
                     {
                         newArray[i] = currentControllerOption.InputLabelPositions[i];
                     }

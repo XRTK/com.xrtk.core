@@ -16,6 +16,10 @@ namespace XRTK.Definitions.Controllers
         /// <summary>
         /// The currently registered controller data providers for this input system.
         /// </summary>
-        public ControllerDataProviderConfiguration[] RegisteredControllerDataProviders => registeredControllerDataProviders;
+        public ControllerDataProviderConfiguration[] RegisteredControllerDataProviders
+        {
+            get => registeredControllerDataProviders;
+            internal set => registeredControllerDataProviders = value;
+        }
     }
 }

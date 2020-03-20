@@ -17,7 +17,11 @@ namespace XRTK.Definitions.Controllers
         /// <summary>
         /// A list of all the Controller Mapping Profiles.
         /// </summary>
-        public List<BaseMixedRealityControllerMappingProfile> ControllerMappingProfiles => controllerMappingProfiles;
+        public List<BaseMixedRealityControllerMappingProfile> ControllerMappingProfiles
+        {
+            get => controllerMappingProfiles;
+            internal set => controllerMappingProfiles = value;
+        }
 
         /// <summary>
         /// The list of controller mappings across all <see cref="ControllerMappingProfiles"/>.

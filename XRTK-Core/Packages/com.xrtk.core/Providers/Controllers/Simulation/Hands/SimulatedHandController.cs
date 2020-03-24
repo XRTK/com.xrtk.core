@@ -186,6 +186,26 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             }
         }
 
+        /// <inheritdoc />
+        protected override void UpdateInteractions()
+        {
+            for (int i = 0; i < Interactions?.Length; i++)
+            {
+                MixedRealityInteractionMapping interactionMapping = Interactions[i];
+                switch (interactionMapping.InputType)
+                {
+                    // Simualted hand controller movement is controlled
+                    // via button mappings.
+                    case DeviceInputType.ButtonPress:
+                        interactionMapping.BoolData = Input.GetKey(interactionMapping.KeyCode);
+                        interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+                        break;
+                }
+            }
+
+            base.UpdateInteractions();
+        }
+
         /// <summary>
         /// Gets a simulated Yaw, Pitch and Roll delta for the current frame.
         /// </summary>

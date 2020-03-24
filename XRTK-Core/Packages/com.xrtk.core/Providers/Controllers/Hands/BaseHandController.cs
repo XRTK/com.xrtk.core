@@ -99,22 +99,21 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateInteractions();
         }
 
-        private void UpdateInteractions()
+        /// <summary>
+        /// Updates interaction mappings on the controller.
+        /// </summary>
+        protected virtual void UpdateInteractions()
         {
             for (int i = 0; i < Interactions?.Length; i++)
             {
                 MixedRealityInteractionMapping interactionMapping = Interactions[i];
                 switch (interactionMapping.InputType)
                 {
-                    case DeviceInputType.ButtonPress:
-                        interactionMapping.BoolData = Input.GetKey(interactionMapping.KeyCode);
-                        break;
                     case DeviceInputType.PointerPosition:
-                        interactionMapping.PositionData = Input.mousePosition;
+                        interactionMapping.PoseData = new MixedRealityPose(Input.mousePosition);
+                        interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
                         break;
                 }
-
-                interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
             }
         }
 

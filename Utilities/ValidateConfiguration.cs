@@ -5,9 +5,11 @@ using System;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions.InputSystem;
+using XRTK.Definitions;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
+using XRTK.Interfaces;
 using XRTK.Services;
 
 namespace XRTK.Utilities
@@ -17,13 +19,13 @@ namespace XRTK.Utilities
         private const string IgnoreKey = "_MixedRealityToolkit_Editor_IgnoreControllerMappingsPrompts";
 
         /// <summary>
-        /// Controller Mapping function to test for a controller mappings 
         /// </summary>
+        /// <param name="profile"></param>
         /// <param name="providerTypesToValidate">Array of Data Provider types to validate</param>
         /// <param name="providerDefaultConfiguration">Array of Data Provider default configurations to add if missing</param>
         /// <param name="prompt">Unit Test helper, to control whether the UI prompt is offered or not</param>
         /// <returns></returns>
-        public static bool ValidateDataProviders(Type[] providerTypesToValidate, ControllerDataProviderConfiguration[] providerDefaultConfiguration, bool prompt = true)
+        public static bool ValidateService<T>(this BaseMixedRealityServiceProfile<T> profile, Type[] providerTypesToValidate, MixedRealityServiceConfiguration<T>[] providerDefaultConfiguration, bool prompt = true) where T : IMixedRealityService
         {
 #if UNITY_EDITOR
             if (Application.isPlaying || EditorPrefs.GetBool(IgnoreKey, false))
@@ -35,88 +37,100 @@ namespace XRTK.Utilities
             if (MixedRealityToolkit.HasActiveProfile)
             {
                 var errorsFound = false;
-                var providerConfigurationSource = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders;
 
-                if (providerConfigurationSource != null)
+                if (profile == null)
                 {
-                    if (providerTypesToValidate != null && providerTypesToValidate.Length > 0)
+                    return false;
+                }
+
+                var registeredConfigurations = profile.RegisteredServiceConfigurations;
+
+                if (providerTypesToValidate != null &&
+                    providerTypesToValidate.Length > 0)
+                {
+                    var typesValidated = new bool[providerTypesToValidate.Length];
+
+                    for (int i = 0; i < providerTypesToValidate.Length; i++)
                     {
-                        var typesValidated = new bool[providerTypesToValidate.Length];
+                        if (providerTypesToValidate[i] == null) { continue; }
 
-                        for (int i = 0; i < providerTypesToValidate.Length; i++)
+                        for (var j = 0; j < registeredConfigurations.Length; j++)
                         {
-                            foreach (var profile in providerConfigurationSource)
-                            {
-                                if (profile.DataProviderType == null) { continue; }
+                            var subProfile = registeredConfigurations[j];
 
-                                if (profile.DataProviderType == providerTypesToValidate[i])
-                                {
-                                    typesValidated[i] = true;
-                                }
+                            if (subProfile.InstancedType?.Type == providerTypesToValidate[i])
+                            {
+                                typesValidated[i] = true;
                             }
                         }
+                    }
 
-                        for (var i = 0; i < typesValidated.Length; i++)
+                    for (var i = 0; i < typesValidated.Length; i++)
+                    {
+                        if (!typesValidated[i])
+                        {
+                            errorsFound = true;
+                        }
+                    }
+
+                    if (errorsFound)
+                    {
+                        var errorDescription = new StringBuilder();
+                        errorDescription.AppendLine("The following Data Providers were not found in the current Mixed Reality Configuration profile:\n");
+
+                        for (int i = 0; i < typesValidated.Length; i++)
                         {
                             if (!typesValidated[i])
                             {
-                                errorsFound = true;
+                                errorDescription.AppendLine($" [{providerTypesToValidate[i]}]");
                             }
                         }
 
-                        if (errorsFound)
-                        {
-                            var errorDescription = new StringBuilder();
-                            errorDescription.AppendLine("The following Data Providers were not found in the current Mixed Reality Configuration profile:\n");
-
-                            for (int i = 0; i < typesValidated.Length; i++)
-                            {
-                                if (!typesValidated[i])
-                                {
-                                    errorDescription.AppendLine($" [{providerTypesToValidate[i]}]");
-                                }
-                            }
-
-                            errorDescription.AppendLine($"\nYou can either add this manually in\nInput Profile ->  Controller Data providers\n or click 'App Provider' to add this automatically");
+                        errorDescription.AppendLine($"\nYou can either add this manually in\nInput Profile ->  Controller Data providers\n or click 'App Provider' to add this automatically");
 #if UNITY_EDITOR
-                            if (prompt)
+                        if (prompt)
+                        {
+                            if (EditorUtility.DisplayDialog($"{providerTypesToValidate[0]} provider not found", errorDescription.ToString(), "Ignore", "Add Provider"))
                             {
-                                if (EditorUtility.DisplayDialog($"{providerTypesToValidate[0]} provider not found", errorDescription.ToString(), "Ignore", "Add Provider"))
-                                {
-                                    EditorPrefs.SetBool(IgnoreKey, true);
-                                }
-                                else
-                                {
-                                    for (int i = 0; i < providerTypesToValidate.Length; i++)
-                                    {
-                                        if (!typesValidated[i])
-                                        {
-                                            MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders = providerConfigurationSource.AddItem(providerDefaultConfiguration[i]);
-                                        }
-                                    }
-                                    return true;
-                                }
+                                EditorPrefs.SetBool(IgnoreKey, true);
                             }
-#endif //UNITY_EDITOR
+                            else
+                            {
+                                for (int i = 0; i < providerTypesToValidate.Length; i++)
+                                {
+                                    if (!typesValidated[i])
+                                    {
+                                        profile.RegisteredServiceConfigurations = registeredConfigurations.AddItem(providerDefaultConfiguration[i]);
+                                    }
+                                }
+
+                                return true;
+                            }
                         }
                         else
                         {
-                            return true;
+                            Debug.LogWarning(errorDescription);
                         }
-
+#endif //UNITY_EDITOR
+                    }
+                    else
+                    {
+                        return true;
                     }
                 }
             }
+
             return false;
         }
 
         /// <summary>
         /// Controller Mapping function to test for a controller mappings 
         /// </summary>
+        /// <param name="profile"></param>
         /// <param name="mappingTypesToValidate">Array of controller mappings to validate</param>
         /// <param name="prompt">Unit Test helper, to control whether the UI prompt is offered or not</param>
         /// <returns></returns>
-        public static bool ValidateControllerProfiles(Type[] mappingTypesToValidate, bool prompt = true)
+        public static bool ValidateControllerProfiles(this MixedRealityControllerMappingProfiles profile, Type[] mappingTypesToValidate, bool prompt = true)
         {
 #if UNITY_EDITOR
             if (Application.isPlaying || EditorPrefs.GetBool(IgnoreKey, false))
@@ -128,7 +142,7 @@ namespace XRTK.Utilities
             if (MixedRealityToolkit.HasActiveProfile)
             {
                 var errorsFound = false;
-                var mappingConfigurationSource = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.MixedRealityControllerMappings;
+                var mappingConfigurationSource = profile.MixedRealityControllerMappings;
 
                 if (mappingConfigurationSource != null)
                 {
@@ -138,11 +152,11 @@ namespace XRTK.Utilities
 
                         for (int i = 0; i < mappingTypesToValidate.Length; i++)
                         {
-                            foreach (var profile in mappingConfigurationSource)
+                            foreach (var mappingProfile in mappingConfigurationSource)
                             {
-                                if (profile.ControllerType == null) { continue; }
+                                if (mappingProfile.ControllerType == null) { continue; }
 
-                                if (profile.ControllerType == mappingTypesToValidate[i])
+                                if (mappingProfile.ControllerType == mappingTypesToValidate[i])
                                 {
                                     typesValidated[i] = true;
                                 }

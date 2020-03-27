@@ -18,8 +18,21 @@ namespace XRTK.Interfaces
     /// <summary>
     /// This interface is meant to be used with serialized structs that define valid <see cref="IMixedRealityService"/> configurations.
     /// </summary>
-    public interface IMixedRealityServiceConfiguration : IBaseMixedRealityServiceConfiguration
+    public interface IMixedRealityServiceConfiguration
     {
+        /// <summary>
+        /// The concrete type for the <see cref="IMixedRealityService"/> that will be instantiated and ran by the service locator.
+        /// </summary>
+        SystemType InstancedType { get; }
+
+        /// <summary>
+        /// The priority order of execution for this <see cref="IMixedRealityService"/>.
+        /// </summary>
+        /// <remarks>
+        /// Multiple <see cref="IMixedRealityService"/>s may be running at the same priority for services that are not specifically registered to the <see cref="MixedRealityToolkit.ActiveSystems"/>.
+        /// </remarks>
+        uint Priority { get; }
+
         /// <summary>
         /// The runtime platform(s) to run this <see cref="IMixedRealityService"/> to run on.
         /// </summary>

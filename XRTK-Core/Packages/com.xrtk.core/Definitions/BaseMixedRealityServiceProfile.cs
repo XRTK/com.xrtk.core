@@ -10,8 +10,8 @@ namespace XRTK.Definitions
     /// The base profile type to derive all <see cref="IMixedRealityService"/>s from.
     /// </summary>
     /// <typeparam name="TService">
-    /// The <see cref="IMixedRealityService"/> type to constrain all of the valid <see cref="IBaseMixedRealityServiceConfiguration.InstancedType"/>s to.
-    /// Only types that implement the <see cref="TService"/> will show up in the inspector dropdown for the <see cref="IBaseMixedRealityServiceConfiguration.InstancedType"/>
+    /// The <see cref="IMixedRealityService"/> type to constrain all of the valid <see cref="IMixedRealityServiceConfiguration.InstancedType"/>s to.
+    /// Only types that implement the <see cref="TService"/> will show up in the inspector dropdown for the <see cref="IMixedRealityServiceConfiguration.InstancedType"/>
     /// </typeparam>
     public abstract class BaseMixedRealityServiceProfile<TService> : BaseMixedRealityProfile where TService : IMixedRealityService
     {

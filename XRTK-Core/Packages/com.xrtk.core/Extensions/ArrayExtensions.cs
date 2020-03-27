@@ -29,5 +29,52 @@ namespace XRTK.Extensions
         {
             return array != null && array.Length > 0;
         }
+
+        /// <summary>
+        /// Extends an existing array to add a new item
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="array">The array to extend</param>
+        /// <param name="newItem">The item to add to the array</param>
+        /// <returns></returns>
+        public static T[] AddItem<T>(this T[] array, T newItem)
+        {
+            // Initialise the array if it is null
+            if (array == null)
+            {
+                return new[] { newItem };
+            }
+
+            //Extend the array, copy the items and add the new one
+            var newArray = new T[array.Length + 1];
+            array.CopyTo(newArray, 0);
+            newArray[array.Length] = newItem;
+            return newArray;
+        }
+
+        /// <summary>
+        /// Initialises an array with a default item
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="array">The array to initialise</param>
+        /// <param name="newItem">The default item to set all the array items to</param>
+        /// <returns></returns>
+        /// <remarks>Please note, this extension should only be used with value types such as structs.  Reference types should not be used.</remarks>
+        public static T[] InitialiseArray<T>(this T[] array, T newItem)
+        {
+            // Initialise the array if it is null
+            if (array == null)
+            {
+                return new[] { newItem };
+            }
+
+            //Set all the items to the provided value
+            for (int i = 0; i < array.Length; i++)
+            {
+                array[i] = newItem;
+            }
+
+            return array;
+        }
     }
 }

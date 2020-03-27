@@ -303,7 +303,11 @@ namespace XRTK.Definitions
         /// <summary>
         /// All the additional non-required systems, features, and managers registered with the Mixed Reality Toolkit.
         /// </summary>
-        public MixedRealityRegisteredServiceProvidersProfile RegisteredServiceProvidersProfile => registeredServiceProvidersProfile;
+        public MixedRealityRegisteredServiceProvidersProfile RegisteredServiceProvidersProfile
+        {
+            get => registeredServiceProvidersProfile;
+            internal set => registeredServiceProvidersProfile = value;
+        }
 
         #endregion Mixed Reality Toolkit configurable properties
     }

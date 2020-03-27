@@ -55,15 +55,6 @@ namespace XRTK.Providers.Controllers.Hands
         protected Vector3 PalmNormal => TryGetJointPose(TrackedHandJoint.Palm, out MixedRealityPose pose) ? -pose.Up : Vector3.zero;
 
         /// <inheritdoc />
-        public override void UpdateController()
-        {
-            if (!Enabled) { return; }
-
-            base.UpdateController();
-            UpdateInteractions();
-        }
-
-        /// <inheritdoc />
         public void UpdateController(HandData handData)
         {
             if (!Enabled) { return; }
@@ -110,8 +101,11 @@ namespace XRTK.Providers.Controllers.Hands
                 switch (interactionMapping.InputType)
                 {
                     case DeviceInputType.PointerPosition:
-                        interactionMapping.PoseData = new MixedRealityPose(Input.mousePosition);
-                        interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+                        if (TryGetJointPose(TrackedHandJoint.Palm, out MixedRealityPose pose))
+                        {
+                            interactionMapping.PoseData = pose;
+                            interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+                        }
                         break;
                 }
             }

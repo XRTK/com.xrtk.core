@@ -173,10 +173,12 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <inheritdoc />
         public override void UpdateController()
         {
-            // The base implementation will make sure to update interaction
-            // mappings before we try to get simualted data, since simulation
-            // depends on them.
-            base.UpdateController();
+            if (!Enabled) { return; }
+
+            // Before we can update the simualted hand state, we need
+            // to update the simulation specific interaction mappings since they
+            // might have an effect on the next frame's state.
+            UpdateSimulationInteractions();
 
             // If we have upated simulated data, we can execute the actual
             // base hand controller update.
@@ -186,24 +188,19 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             }
         }
 
-        /// <inheritdoc />
-        protected override void UpdateInteractions()
+        private void UpdateSimulationInteractions()
         {
             for (int i = 0; i < Interactions?.Length; i++)
             {
                 MixedRealityInteractionMapping interactionMapping = Interactions[i];
                 switch (interactionMapping.InputType)
                 {
-                    // Simualted hand controller movement is controlled
-                    // via button mappings.
                     case DeviceInputType.ButtonPress:
                         interactionMapping.BoolData = Input.GetKey(interactionMapping.KeyCode);
                         interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
                         break;
                 }
             }
-
-            base.UpdateInteractions();
         }
 
         /// <summary>

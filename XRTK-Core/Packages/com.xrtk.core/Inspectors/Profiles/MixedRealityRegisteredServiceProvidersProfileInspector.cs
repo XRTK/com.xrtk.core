@@ -1,15 +1,15 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions.NetworkingSystem;
+using XRTK.Definitions;
 using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles
 {
-    [CustomEditor(typeof(MixedRealityNetworkSystemProfile))]
-    public class MixedRealityNetworkSystemProfileInspector : MixedRealityServiceProfileInspector
+    [CustomEditor(typeof(MixedRealityRegisteredServiceProvidersProfile))]
+    public class MixedRealityRegisteredServiceProvidersProfileInspector : MixedRealityServiceProfileInspector
     {
         public override void OnInspectorGUI()
         {
@@ -22,8 +22,9 @@ namespace XRTK.Inspectors.Profiles
             }
 
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Network System Profile", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("The Network System Profile helps developers configure networking messages no matter what platform you're building for.", MessageType.Info);
+            EditorGUILayout.LabelField("Registered Service Providers Profile", EditorStyles.boldLabel);
+            EditorGUILayout.HelpBox("This profile defines any additional Services like systems, features, and managers to register with the Mixed Reality Toolkit.\n\n" +
+                                    "Note: The order of the list determines the order these services get created.", MessageType.Info);
 
             ThisProfile.CheckProfileLock();
             serializedObject.Update();

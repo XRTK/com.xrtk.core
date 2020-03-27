@@ -181,7 +181,7 @@ namespace XRTK.Inspectors.Utilities
         /// <param name="disableInspector">Optional value to disable the inspector if the profile is also locked.</param>
         public static void CheckProfileLock(this BaseMixedRealityProfile target, bool disableInspector = true)
         {
-            if (MixedRealityPreferences.LockProfiles && !target.IsCustomProfile)
+            if (MixedRealityPreferences.LockProfiles && !target.IsEditable)
             {
                 EditorGUILayout.HelpBox("This profile is part of the default set from the Mixed Reality Toolkit SDK. You can make a copy of this profile, and customize it if needed.", MessageType.Warning);
                 GUI.enabled = !disableInspector;

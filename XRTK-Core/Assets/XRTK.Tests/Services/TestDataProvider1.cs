@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using XRTK.Services;
@@ -7,7 +7,7 @@ namespace XRTK.Tests.Services
 {
     internal class TestDataProvider1 : BaseServiceWithConstructor, ITestDataProvider1
     {
-        public TestDataProvider1(string name) : base(name, 5) { }
+        public TestDataProvider1(string name, uint priority = 10) : base(name, priority) { }
 
         public bool IsEnabled { get; private set; }
 

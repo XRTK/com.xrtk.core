@@ -10,6 +10,7 @@ namespace XRTK.Interfaces
     /// The generic interface for <see cref="IMixedRealityServiceConfiguration"/>s.
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    // ReSharper disable once UnusedTypeParameter (Used in concrete Implementations)
     public interface IMixedRealityServiceConfiguration<out T> : IMixedRealityServiceConfiguration where T : IMixedRealityService
     {
     }
@@ -32,6 +33,9 @@ namespace XRTK.Interfaces
         /// <summary>
         /// The simple, human readable name for the <see cref="IMixedRealityService"/>.
         /// </summary>
+        /// <remarks>
+        /// This name should be unique.
+        /// </remarks>
         string Name { get; }
     }
 }

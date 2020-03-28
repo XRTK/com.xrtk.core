@@ -702,7 +702,7 @@ namespace XRTK.Services
         #region Registration
 
         /// <summary>
-        ///
+        /// Registers all the services defined in the provided configuration collection.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="configurations"></param>

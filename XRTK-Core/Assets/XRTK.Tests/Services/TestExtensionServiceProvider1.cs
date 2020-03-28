@@ -11,5 +11,21 @@ namespace XRTK.Tests.Services
         public TestExtensionServiceProvider1(string name, uint priority = 10, BaseMixedRealityExtensionDataProviderProfile profile = null) : base(name, priority)
         {
         }
+
+        public bool IsEnabled { get; private set; }
+
+        public override void Enable()
+        {
+            base.Enable();
+
+            IsEnabled = true;
+        }
+
+        public override void Disable()
+        {
+            base.Disable();
+
+            IsEnabled = false;
+        }
     }
 }

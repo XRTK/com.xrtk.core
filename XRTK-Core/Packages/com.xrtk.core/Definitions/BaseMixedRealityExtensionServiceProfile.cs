@@ -5,7 +5,7 @@ using XRTK.Interfaces;
 
 namespace XRTK.Definitions
 {
-    public abstract class BaseMixedRealityExtensionServiceProfile : BaseMixedRealityServiceProfile<IMixedRealityExtensionService>
+    public abstract class BaseMixedRealityExtensionServiceProfile : BaseMixedRealityServiceProfile<IMixedRealityService>
     {
 
     }

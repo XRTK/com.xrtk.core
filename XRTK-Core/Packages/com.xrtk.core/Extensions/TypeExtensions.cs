@@ -32,7 +32,7 @@ namespace XRTK.Extensions
                 return FindTopmostGenericTypeArguments(root.BaseType, --maxRecursionDepth);
             }
 
-            Debug.LogError($"FindTopmostGenericTypeArguments - Maximum recursion depth reached without finding generic type arguments.");
+            Debug.LogError($"{nameof(FindTopmostGenericTypeArguments)} - Maximum recursion depth reached without finding generic type arguments.");
             return null;
         }
     }

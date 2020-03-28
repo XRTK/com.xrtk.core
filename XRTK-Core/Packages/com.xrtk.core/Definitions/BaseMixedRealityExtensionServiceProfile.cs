@@ -3,7 +3,7 @@
 
 namespace XRTK.Definitions
 {
-    public abstract class BaseMixedRealityExtensionServiceProfile : BaseMixedRealityProfile
+    public abstract class BaseMixedRealityExtensionServiceProfile : BaseMixedRealityServiceProfile<IMixedRealityExtensionService>
     {
 
     }

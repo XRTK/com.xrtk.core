@@ -34,7 +34,7 @@ namespace XRTK.Tests.Core
             var dataProviderTypes = new[] { typeof(TestExtensionService1) };
             var newConfigs = new[]
             {
-                new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Data Provider 1", 2,SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null)
+                new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Extension Service 1", 2,SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null)
             };
 
             Assert.IsFalse(profile.ValidateService(dataProviderTypes, newConfigs, false));
@@ -46,7 +46,7 @@ namespace XRTK.Tests.Core
             SetupServiceLocator();
             var profile = MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile;
             var dataProviderTypes = new[] { typeof(TestExtensionService1) };
-            var newConfig = new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Data Provider 1", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null);
+            var newConfig = new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Extension Service 1", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null);
             Debug.Assert(newConfig != null);
             var newConfigs = profile.RegisteredServiceConfigurations.AddItem(newConfig);
             Debug.Assert(newConfigs != null);

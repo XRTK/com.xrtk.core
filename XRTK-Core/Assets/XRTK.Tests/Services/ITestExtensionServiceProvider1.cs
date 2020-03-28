@@ -3,5 +3,5 @@
 
 namespace XRTK.Tests.Services
 {
-    internal interface ITestExtensionServiceProvider1 : ITestDataProvider1, ITestExtensionService1 { }
+    internal interface ITestExtensionServiceProvider1 : ITestDataProvider1 { }
 }

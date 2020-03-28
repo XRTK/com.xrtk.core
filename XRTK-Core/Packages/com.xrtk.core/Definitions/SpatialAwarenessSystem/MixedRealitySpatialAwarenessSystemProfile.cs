@@ -12,7 +12,7 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
     /// Configuration profile settings for setting up the spatial awareness system.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Spatial Awareness System Profile", fileName = "MixedRealitySpatialAwarenessSystemProfile", order = (int)CreateProfileMenuItemIndices.SpatialAwareness)]
-    public class MixedRealitySpatialAwarenessSystemProfile : BaseMixedRealityProfile
+    public class MixedRealitySpatialAwarenessSystemProfile : BaseMixedRealityServiceProfile<IMixedRealitySpatialObserverDataProvider>
     {
         /// <summary>
         /// The name of the Spatial Awareness Mesh Physics Layer.
@@ -23,15 +23,6 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         /// The name of the Spatial Awareness Surfaces Physics Layer.
         /// </summary>
         public const string SpatialAwarenessSurfacesLayerName = "Spatial Awareness Surfaces";
-
-        [SerializeField]
-        [Tooltip("The list of registered spatial observer data providers.")]
-        private SpatialObserverDataProviderConfiguration[] registeredSpatialObserverDataProviders = new SpatialObserverDataProviderConfiguration[0];
-
-        /// <summary>
-        /// The list of registered <see cref="IMixedRealitySpatialObserverDataProvider"/>s.
-        /// </summary>
-        public SpatialObserverDataProviderConfiguration[] RegisteredSpatialObserverDataProviders => registeredSpatialObserverDataProviders;
 
         [SerializeField]
         [Tooltip("Indicates how the BaseMixedRealitySpatialMeshObserver is to display surface meshes within the application.")]

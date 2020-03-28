@@ -138,7 +138,7 @@ namespace XRTK.Inspectors.Profiles
 
             if (!MixedRealityToolkit.IsInitialized) { return; }
 
-            if (!configurationProfile.IsCustomProfile)
+            if (!configurationProfile.IsEditable)
             {
                 EditorGUILayout.HelpBox("The Mixed Reality Toolkit's core SDK profiles can be used to get up and running quickly.\n\n" +
                                         "You can use the default profiles provided, copy and customize the default profiles, or create your own.", MessageType.Warning);
@@ -160,7 +160,7 @@ namespace XRTK.Inspectors.Profiles
             }
 
             // We don't call the CheckLock method so won't get a duplicate message.
-            if (MixedRealityPreferences.LockProfiles && !thisProfile.IsCustomProfile)
+            if (MixedRealityPreferences.LockProfiles && !ThisProfile.IsEditable)
             {
                 GUI.enabled = false;
             }
@@ -175,28 +175,28 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.LabelField("Platform Settings", EditorStyles.boldLabel);
             // TODO Add dropdown for easy switching between registered platforms.
             EditorGUILayout.PropertyField(platformSystemType);
-            changed |= RenderProfile(thisProfile, platformSystemProfile);
+            changed |= RenderProfile(ThisProfile, platformSystemProfile);
 
             // Camera System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Camera System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableCameraSystem);
             EditorGUILayout.PropertyField(cameraSystemType);
-            changed |= RenderProfile(thisProfile, cameraProfile);
+            changed |= RenderProfile(ThisProfile, cameraProfile);
 
             // Input System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Input System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableInputSystem);
             EditorGUILayout.PropertyField(inputSystemType);
-            changed |= RenderProfile(thisProfile, inputSystemProfile);
+            changed |= RenderProfile(ThisProfile, inputSystemProfile);
 
             // Boundary System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Boundary System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableBoundarySystem);
             EditorGUILayout.PropertyField(boundarySystemType);
-            changed |= RenderProfile(thisProfile, boundaryVisualizationProfile);
+            changed |= RenderProfile(ThisProfile, boundaryVisualizationProfile);
 
             // Teleport System configuration
             GUILayout.Space(12f);
@@ -209,25 +209,25 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.LabelField("Spatial Awareness System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableSpatialAwarenessSystem);
             EditorGUILayout.PropertyField(spatialAwarenessSystemType);
-            changed |= RenderProfile(thisProfile, spatialAwarenessProfile);
+            changed |= RenderProfile(ThisProfile, spatialAwarenessProfile);
 
             // Networking System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Networking System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableNetworkingSystem);
             EditorGUILayout.PropertyField(networkingSystemType);
-            changed |= RenderProfile(thisProfile, networkingSystemProfile);
+            changed |= RenderProfile(ThisProfile, networkingSystemProfile);
 
             // Diagnostics System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Diagnostics System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableDiagnosticsSystem);
             EditorGUILayout.PropertyField(diagnosticsSystemType);
-            changed |= RenderProfile(thisProfile, diagnosticsSystemProfile);
+            changed |= RenderProfile(ThisProfile, diagnosticsSystemProfile);
 
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Additional Service Providers", EditorStyles.boldLabel);
-            changed |= RenderProfile(thisProfile, registeredServiceProvidersProfile);
+            changed |= RenderProfile(ThisProfile, registeredServiceProvidersProfile);
 
             if (!changed)
             {

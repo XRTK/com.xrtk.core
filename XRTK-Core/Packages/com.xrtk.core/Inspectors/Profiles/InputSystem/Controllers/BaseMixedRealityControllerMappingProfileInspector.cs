@@ -48,10 +48,10 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (thisProfile.ParentProfile != null &&
+            if (ThisProfile.ParentProfile != null &&
                 GUILayout.Button("Back to controller mapping list"))
             {
-                Selection.activeObject = thisProfile.ParentProfile;
+                Selection.activeObject = ThisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
@@ -133,7 +133,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                 if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
                 {
                     serializedObject.ApplyModifiedProperties();
-                    EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, controllerMappingProfile.ControllerType, interactions, handedness, MixedRealityPreferences.LockProfiles && !thisProfile.IsCustomProfile);
+                    EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, controllerMappingProfile.ControllerType, interactions, handedness, MixedRealityPreferences.LockProfiles && !ThisProfile.IsEditable);
                 }
 
                 if (handedness != Handedness.Left)

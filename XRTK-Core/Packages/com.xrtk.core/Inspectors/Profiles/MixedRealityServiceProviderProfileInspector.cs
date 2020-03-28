@@ -31,7 +31,7 @@ namespace XRTK.Inspectors.Profiles
 
             Debug.Assert(configurations != null);
             var baseType = ThisProfile.GetType().BaseType;
-            var genericTypeArgs = baseType.FindTopmostGenericTypeArguments();
+            var genericTypeArgs = baseType?.FindTopmostGenericTypeArguments();
 
             Debug.Assert(genericTypeArgs != null);
 

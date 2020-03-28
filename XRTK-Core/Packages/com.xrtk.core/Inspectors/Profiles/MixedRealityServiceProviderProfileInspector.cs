@@ -21,7 +21,12 @@ namespace XRTK.Inspectors.Profiles
 
         private SerializedProperty configurations;
 
-        protected Type ServiceConstraint { get; private set; } = null;
+        /// <summary>
+        /// Gets the service constraint used to filter options listed in the
+        /// <see cref="configurations"/> instance type dropdown. Set after
+        /// <see cref="OnEnable"/> was called to override.
+        /// </summary>
+        protected Type ServiceConstraint { get; set; } = null;
 
         protected override void OnEnable()
         {

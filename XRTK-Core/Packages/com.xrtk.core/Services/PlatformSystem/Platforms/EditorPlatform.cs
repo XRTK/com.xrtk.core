@@ -31,6 +31,6 @@ namespace XRTK.Services.PlatformSystem.Platforms
         public override uint Priority => 0;
 
         /// <inheritdoc />
-        public bool IsActive => Application.isEditor;
+        public bool IsAvailable => Application.isEditor;
     }
 }

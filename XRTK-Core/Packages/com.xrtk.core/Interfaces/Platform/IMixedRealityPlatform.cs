@@ -4,13 +4,13 @@
 namespace XRTK.Interfaces.PlatformSystem
 {
     /// <summary>
-    /// Defines the device and platform to be registered and used in <see cref="IMixedRealityPlatformSystem"/>
+    /// Defines the platform to be registered and used in <see cref="IMixedRealityPlatformSystem"/>
     /// </summary>
     public interface IMixedRealityPlatform : IMixedRealityDataProvider
     {
         /// <summary>
-        /// Is this platform currently active and loaded?
+        /// Is this platform currently available?
         /// </summary>
-        bool IsActive { get; }
+        bool IsAvailable { get; }
     }
 }

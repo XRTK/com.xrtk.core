@@ -17,7 +17,7 @@ namespace XRTK.Services.PlatformSystem.Platforms
         }
 
         /// <inheritdoc />
-        public bool IsActive
+        public bool IsAvailable
         {
             get
             {

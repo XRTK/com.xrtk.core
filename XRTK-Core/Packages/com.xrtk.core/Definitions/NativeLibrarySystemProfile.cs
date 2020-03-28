@@ -4,22 +4,12 @@
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces;
 
 namespace XRTK.Services
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Native Library System Profile", fileName = "NativeLibrariesConfigurationProfile", order = (int)CreateProfileMenuItemIndices.NativeLibraryDataProviders)]
-    public class NativeLibrarySystemProfile : BaseMixedRealityProfile
+    public class NativeLibrarySystemProfile : BaseMixedRealityServiceProfile<IMixedRealityNativeDataProvider>
     {
-        [SerializeField]
-        private NativeDataModelConfiguration[] nativeDataModelConfigurations = new NativeDataModelConfiguration[0];
-
-        /// <summary>
-        /// Currently registered native library data models.
-        /// </summary>
-        public NativeDataModelConfiguration[] NativeDataModelConfigurations
-        {
-            get => nativeDataModelConfigurations;
-            internal set => nativeDataModelConfigurations = value;
-        }
     }
 }

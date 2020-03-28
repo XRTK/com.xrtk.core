@@ -380,7 +380,5 @@ namespace XRTK.Definitions
             get => registeredServiceProvidersProfile;
             internal set => registeredServiceProvidersProfile = value;
         }
-
-        #endregion Mixed Reality Toolkit configurable properties
     }
 }

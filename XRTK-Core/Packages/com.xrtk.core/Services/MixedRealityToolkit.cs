@@ -476,7 +476,7 @@ namespace XRTK.Services
             {
                 if (CreateAndRegisterService<IMixedRealityNativeLibrarySystem>(ActiveProfile.NativeLibrarySystemType, ActiveProfile.NativeLibrarySystemProfile) && NativeLibrarySystem != null)
                 {
-                    RegisterServices(ActiveProfile.NativeLibrarySystemProfile.NativeDataModelConfigurations);
+                    RegisterServices(ActiveProfile.NativeLibrarySystemProfile.RegisteredServiceConfigurations);
                 }
                 else
                 {

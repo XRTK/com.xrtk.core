@@ -218,7 +218,7 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.LabelField("Native Library System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableNativeLibrarySystem);
             EditorGUILayout.PropertyField(nativeLibrarySystemType);
-            changed |= RenderProfile(thisProfile, nativeLibrarySystemProfile);
+            changed |= RenderProfile(ThisProfile, nativeLibrarySystemProfile);
 
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Additional Service Providers", EditorStyles.boldLabel);

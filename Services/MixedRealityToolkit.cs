@@ -479,7 +479,7 @@ namespace XRTK.Services
                 {
                     if (CreateAndRegisterService(configuration))
                     {
-                        if (configuration.ConfigurationProfile is BaseMixedRealityExtensionDataProviderProfile extensionServiceProfile)
+                        if (configuration.ConfigurationProfile is BaseMixedRealityExtensionServiceProfile extensionServiceProfile)
                         {
                             RegisterServices(extensionServiceProfile.RegisteredServiceConfigurations);
                         }

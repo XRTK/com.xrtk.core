@@ -62,7 +62,7 @@ namespace XRTK.Definitions
         private MixedRealityCameraProfile cameraProfile;
 
         /// <summary>
-        /// Profile for customizing your camera and quality settings based on if your 
+        /// Profile for customizing your camera and quality settings based on if your
         /// head mounted display (HMD) is a transparent device or an occluded device.
         /// </summary>
         public MixedRealityCameraProfile CameraProfile
@@ -375,6 +375,12 @@ namespace XRTK.Definitions
         /// <summary>
         /// All the additional non-required systems, features, and managers registered with the Mixed Reality Toolkit.
         /// </summary>
-        public MixedRealityRegisteredServiceProvidersProfile RegisteredServiceProvidersProfile => registeredServiceProvidersProfile;
+        public MixedRealityRegisteredServiceProvidersProfile RegisteredServiceProvidersProfile
+        {
+            get => registeredServiceProvidersProfile;
+            internal set => registeredServiceProvidersProfile = value;
+        }
+
+        #endregion Mixed Reality Toolkit configurable properties
     }
 }

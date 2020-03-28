@@ -10,7 +10,7 @@
     "Mixed Reality",
     "DI"
   ],
-  "version": "0.1.30",
+  "version": "0.1.31",
   "unity": "2019.1",
   "license": "MIT",
   "author": "XRTK Team (https://github.com/XRTK)",
@@ -19,6 +19,6 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.unitywebrequest": "1.0.0",
     "com.unity.textmeshpro": "1.0.0",
-    "com.unity.xr.legacyinputhelpers": "2.0.6"
+    "com.unity.xr.legacyinputhelpers": "2.0.8"
   }
 }

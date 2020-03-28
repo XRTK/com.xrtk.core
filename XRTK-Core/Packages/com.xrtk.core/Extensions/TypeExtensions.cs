@@ -7,7 +7,7 @@ using UnityEngine;
 namespace XRTK.Extensions
 {
     /// <summary>
-    /// Extension methods for Unity's Vector struct
+    /// Extension methods for <see cref="Type"/> instances.
     /// </summary>
     public static class TypeExtensions
     {

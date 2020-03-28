@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MixedRealityBoundarySystem
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.48.1.0">
+    <meta name="generator" content="docfx 2.51.0.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -1162,7 +1162,8 @@ Boundary.Type.TrackedArea for the area defined by the boundary edges.</p>
   </span>
   <a id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_HandleEvent_" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.HandleEvent*"></a>
   <h4 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_HandleEvent__1_UnityEngine_EventSystems_BaseEventData_UnityEngine_EventSystems_ExecuteEvents_EventFunction___0__" data-uid="XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.HandleEvent``1(UnityEngine.EventSystems.BaseEventData,UnityEngine.EventSystems.ExecuteEvents.EventFunction{``0})">HandleEvent&lt;T&gt;(BaseEventData, ExecuteEvents.EventFunction&lt;T&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The main function for handling and forwarding all events to their intended recipients.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -1182,12 +1183,14 @@ Boundary.Type.TrackedArea for the area defined by the boundary edges.</p>
       <tr>
         <td><span class="xref">UnityEngine.EventSystems.BaseEventData</span></td>
         <td><span class="parametername">eventData</span></td>
-        <td></td>
+        <td><p>Event Data</p>
+</td>
       </tr>
       <tr>
         <td><span class="xref">UnityEngine.EventSystems.ExecuteEvents.EventFunction</span>&lt;T&gt;</td>
         <td><span class="parametername">eventHandler</span></td>
-        <td></td>
+        <td><p>Event Handler delegate</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1202,12 +1205,16 @@ Boundary.Type.TrackedArea for the area defined by the boundary edges.</p>
     <tbody>
       <tr>
         <td><span class="parametername">T</span></td>
-        <td></td>
+        <td><p>Event Handler Interface Type</p>
+</td>
       </tr>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><span class="xref">XRTK.Services.BaseEventSystem.HandleEvent&lt;T&gt;(UnityEngine.EventSystems.BaseEventData, UnityEngine.EventSystems.ExecuteEvents.EventFunction&lt;T&gt;)</span></div>
+  <h5 id="XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_HandleEvent__1_UnityEngine_EventSystems_BaseEventData_UnityEngine_EventSystems_ExecuteEvents_EventFunction___0___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>See: <a href="https://docs.unity3d.com/Manual/MessagingSystem.html">https://docs.unity3d.com/Manual/MessagingSystem.html</a> for more information.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_BoundarySystem_MixedRealityBoundarySystem_Initialize.md&amp;value=---%0Auid%3A%20XRTK.Services.BoundarySystem.MixedRealityBoundarySystem.Initialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>

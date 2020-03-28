@@ -1,9 +1,10 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.DiagnosticsSystem;
 
 namespace XRTK.Definitions.DiagnosticsSystem
 {
@@ -11,7 +12,7 @@ namespace XRTK.Definitions.DiagnosticsSystem
     /// Configuration profile settings for setting up diagnostics.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Diagnostics System Profile", fileName = "MixedRealityDiagnosticsSystemProfile", order = (int)CreateProfileMenuItemIndices.Diagnostics)]
-    public class MixedRealityDiagnosticsSystemProfile : BaseMixedRealityProfile
+    public class MixedRealityDiagnosticsSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityDiagnosticsDataProvider>
     {
         [Prefab]
         [SerializeField]
@@ -35,13 +36,5 @@ namespace XRTK.Definitions.DiagnosticsSystem
         /// Should the diagnostics window be opened on application start?
         /// </summary>
         public AutoStartBehavior ShowDiagnosticsWindowOnStart => showDiagnosticsWindowOnStart;
-
-        [SerializeField]
-        private DiagnosticsDataProviderConfiguration[] registeredDiagnosticsDataProviders = new DiagnosticsDataProviderConfiguration[0];
-
-        /// <summary>
-        /// The currently registered diagnostics data providers for the diagnostics system.
-        /// </summary>
-        public DiagnosticsDataProviderConfiguration[] RegisteredDiagnosticsDataProviders => registeredDiagnosticsDataProviders;
     }
 }

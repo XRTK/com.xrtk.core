@@ -1,27 +1,46 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System;
+using System.Linq;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Definitions;
-using XRTK.Inspectors.Utilities;
+using XRTK.Inspectors.PropertyDrawers;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
 {
-    [CustomEditor(typeof(MixedRealityRegisteredServiceProvidersProfile))]
-    public class MixedRealityRegisteredServiceProviderProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(BaseMixedRealityServiceProfile<>))]
+    public class MixedRealityServiceProfileInspector : BaseMixedRealityProfileInspector
     {
-        private SerializedProperty configurations;
         private ReorderableList configurationList;
         private int currentlySelectedConfigurationOption;
+
+        private SerializedProperty configurations;
+
+        protected Type ServiceConstraint { get; private set; } = null;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            configurations = serializedObject.FindProperty("configurations");
+            configurations = serializedObject.FindProperty(nameof(configurations));
+
+            Debug.Assert(configurations != null);
+            var baseType = ThisProfile.GetType().BaseType;
+            var genericTypeArgs = baseType?.GenericTypeArguments;
+
+            Debug.Assert(genericTypeArgs != null);
+
+            foreach (var interfaceType in genericTypeArgs)
+            {
+                ServiceConstraint = interfaceType;
+                break;
+            }
+
+            Debug.Assert(ServiceConstraint != null);
 
             configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true)
             {
@@ -35,25 +54,8 @@ namespace XRTK.Inspectors.Profiles
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
-
-            if (thisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Configuration Profile"))
-            {
-                Selection.activeObject = thisProfile.ParentProfile;
-            }
-
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Registered Service Providers Profile", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("This profile defines any additional Services like systems, features, and managers to register with the Mixed Reality Toolkit.\n\n" +
-                                    "Note: The order of the list determines the order these services get created.", MessageType.Info);
-
-            thisProfile.CheckProfileLock();
-
             serializedObject.Update();
-            EditorGUILayout.Space();
             configurationList.DoLayoutList();
-            EditorGUILayout.Space();
 
             if (configurations == null || configurations.arraySize == 0)
             {
@@ -79,27 +81,28 @@ namespace XRTK.Inspectors.Profiles
             var runtimeRect = new Rect(rect.x, rect.y + halfFieldHeight * 11, rect.width, EditorGUIUtility.singleLineHeight);
             var profileRect = new Rect(rect.x, rect.y + halfFieldHeight * 16, rect.width, EditorGUIUtility.singleLineHeight);
 
-            var managerConfig = configurations.GetArrayElementAtIndex(index);
-            var componentName = managerConfig.FindPropertyRelative("componentName");
-            var componentType = managerConfig.FindPropertyRelative("componentType");
-            var priority = managerConfig.FindPropertyRelative("priority");
-            var runtimePlatform = managerConfig.FindPropertyRelative("runtimePlatform");
-            var configurationProfile = managerConfig.FindPropertyRelative("configurationProfile");
+            var configurationProperty = configurations.GetArrayElementAtIndex(index);
+
+            var nameProperty = configurationProperty.FindPropertyRelative("name");
+            var priorityProperty = configurationProperty.FindPropertyRelative("priority");
+            var instanceTypeProperty = configurationProperty.FindPropertyRelative("instancedType");
+            var runtimePlatformProperty = configurationProperty.FindPropertyRelative("runtimePlatform");
+            var configurationProfileProperty = configurationProperty.FindPropertyRelative("configurationProfile");
 
             EditorGUI.BeginChangeCheck();
-
-            EditorGUI.PropertyField(nameRect, componentName);
-            EditorGUI.PropertyField(typeRect, componentType);
-            priority.intValue = index;
-            EditorGUI.PropertyField(runtimeRect, runtimePlatform);
-            EditorGUI.PropertyField(profileRect, configurationProfile);
+            EditorGUI.PropertyField(nameRect, nameProperty);
+            TypeReferencePropertyDrawer.FilterConstraintOverride = IsConstraintSatisfied;
+            EditorGUI.PropertyField(typeRect, instanceTypeProperty);
+            priorityProperty.intValue = index;
+            EditorGUI.PropertyField(runtimeRect, runtimePlatformProperty);
+            EditorGUI.PropertyField(profileRect, configurationProfileProperty);
 
             if (EditorGUI.EndChangeCheck())
             {
                 serializedObject.ApplyModifiedProperties();
 
                 if (MixedRealityToolkit.IsInitialized &&
-                    !string.IsNullOrEmpty(componentType.FindPropertyRelative("reference").stringValue))
+                    !string.IsNullOrEmpty(instanceTypeProperty.FindPropertyRelative("reference").stringValue))
                 {
                     MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
                 }
@@ -108,22 +111,30 @@ namespace XRTK.Inspectors.Profiles
             EditorGUIUtility.wideMode = lastMode;
         }
 
+        private bool IsConstraintSatisfied(Type type)
+        {
+            return !type.IsAbstract && type.GetInterfaces().Any(interfaceType => interfaceType == ServiceConstraint);
+        }
+
         private void OnConfigurationOptionAdded(ReorderableList list)
         {
             configurations.arraySize += 1;
             var index = configurations.arraySize - 1;
-            var managerConfig = configurations.GetArrayElementAtIndex(index);
-            var componentName = managerConfig.FindPropertyRelative("componentName");
-            componentName.stringValue = $"New Configuration {index}";
-            var priority = managerConfig.FindPropertyRelative("priority");
-            priority.intValue = index;
-            var runtimePlatform = managerConfig.FindPropertyRelative("runtimePlatform");
-            runtimePlatform.intValue = 0;
-            var configurationProfile = managerConfig.FindPropertyRelative("configurationProfile");
-            configurationProfile.objectReferenceValue = null;
+
+            var configuration = configurations.GetArrayElementAtIndex(index);
+            var nameProperty = configuration.FindPropertyRelative("name");
+            var instancedTypeProperty = configuration.FindPropertyRelative("instancedType");
+            var priorityProperty = configuration.FindPropertyRelative("priority");
+            var runtimePlatformProperty = configuration.FindPropertyRelative("runtimePlatform");
+            var configurationProfileProperty = configuration.FindPropertyRelative("configurationProfile");
+
+            nameProperty.stringValue = $"New Configuration {index}";
+            instancedTypeProperty.FindPropertyRelative("reference").stringValue = string.Empty;
+            priorityProperty.intValue = index;
+            runtimePlatformProperty.intValue = 0;
+            configurationProfileProperty.objectReferenceValue = null;
+
             serializedObject.ApplyModifiedProperties();
-            var componentType = ((MixedRealityRegisteredServiceProvidersProfile)serializedObject.targetObject).Configurations[index].ComponentType;
-            componentType.Type = null;
         }
 
         private void OnConfigurationOptionRemoved(ReorderableList list)

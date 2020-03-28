@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.NetworkingSystem;
 
 namespace XRTK.Definitions.NetworkingSystem
 {
@@ -10,14 +11,7 @@ namespace XRTK.Definitions.NetworkingSystem
     /// Configuration profile settings for setting up networking.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Network System Profile", fileName = "MixedRealityNetworkSystemProfile", order = (int)CreateProfileMenuItemIndices.Networking)]
-    public class MixedRealityNetworkSystemProfile : BaseMixedRealityProfile
+    public class MixedRealityNetworkSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityNetworkDataProvider>
     {
-        [SerializeField]
-        private NetworkDataProviderConfiguration[] registeredNetworkDataProviders = new NetworkDataProviderConfiguration[0];
-
-        /// <summary>
-        /// The list of registered network data providers.
-        /// </summary>
-        public NetworkDataProviderConfiguration[] RegisteredNetworkDataProviders => registeredNetworkDataProviders;
     }
 }

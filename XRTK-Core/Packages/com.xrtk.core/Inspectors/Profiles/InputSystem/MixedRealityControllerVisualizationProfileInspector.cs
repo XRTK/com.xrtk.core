@@ -60,7 +60,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (thisProfile.ParentProfile != null &&
+            if (ThisProfile.ParentProfile != null &&
                 GUILayout.Button("Back to Input Profile"))
             {
                 Selection.activeObject = controllerVisualizationProfile.ParentProfile;

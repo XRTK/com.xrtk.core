@@ -5,12 +5,12 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Struct MixedRealityServiceConfiguration
+    <title>Class MixedRealityServiceConfiguration
    | XRTK-Core </title>
     <meta name="viewport" content="width=device-width">
-    <meta name="title" content="Struct MixedRealityServiceConfiguration
+    <meta name="title" content="Class MixedRealityServiceConfiguration
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.48.1.0">
+    <meta name="generator" content="docfx 2.51.0.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -71,30 +71,43 @@
             <article class="content wrap" id="_content" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration">
   
   
-  <h1 id="XRTK_Definitions_MixedRealityServiceConfiguration" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration" class="text-break">Struct MixedRealityServiceConfiguration
+  <h1 id="XRTK_Definitions_MixedRealityServiceConfiguration" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration" class="text-break">Class MixedRealityServiceConfiguration
   </h1>
-  <div class="markdown level0 summary"><p>Defines a system, feature, or manager to be registered with as a <a class="xref" href="XRTK.Interfaces.IMixedRealityExtensionService.html">IMixedRealityExtensionService</a> on startup.</p>
+  <div class="markdown level0 summary"><p>Defines a <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a> to be registered with the <a class="xref" href="XRTK.Services.MixedRealityToolkit.html">MixedRealityToolkit</a>.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">MixedRealityServiceConfiguration</span></div>
+      <div class="level2"><a class="xref" href="XRTK.Definitions.MixedRealityServiceConfiguration-1.html">MixedRealityServiceConfiguration&lt;T&gt;</a></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="XRTK.Interfaces.IMixedRealityServiceConfiguration.html">IMixedRealityServiceConfiguration</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.valuetype.equals#System_ValueType_Equals_System_Object_">ValueType.Equals(Object)</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.valuetype.gethashcode#System_ValueType_GetHashCode">ValueType.GetHashCode()</a>
-    </div>
-    <div>
-      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.valuetype.tostring#System_ValueType_ToString">ValueType.ToString()</a>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
     </div>
     <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.Definitions.html">XRTK.Definitions</a></h6>
@@ -102,25 +115,25 @@
   <h5 id="XRTK_Definitions_MixedRealityServiceConfiguration_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Serializable]
-public struct MixedRealityServiceConfiguration</code></pre>
+public class MixedRealityServiceConfiguration : IMixedRealityServiceConfiguration</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_MixedRealityServiceConfiguration__ctor_XRTK_Definitions_Utilities_SystemType_System_String_System_UInt32_XRTK_Definitions_Utilities_SupportedPlatforms_XRTK_Definitions_BaseMixedRealityExtensionServiceProfile_.md&amp;value=---%0Auid%3A%20XRTK.Definitions.MixedRealityServiceConfiguration.%23ctor(XRTK.Definitions.Utilities.SystemType%2CSystem.String%2CSystem.UInt32%2CXRTK.Definitions.Utilities.SupportedPlatforms%2CXRTK.Definitions.BaseMixedRealityExtensionServiceProfile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_MixedRealityServiceConfiguration__ctor_XRTK_Definitions_Utilities_SystemType_System_String_System_UInt32_XRTK_Definitions_Utilities_SupportedPlatforms_XRTK_Definitions_BaseMixedRealityProfile_.md&amp;value=---%0Auid%3A%20XRTK.Definitions.MixedRealityServiceConfiguration.%23ctor(XRTK.Definitions.Utilities.SystemType%2CSystem.String%2CSystem.UInt32%2CXRTK.Definitions.Utilities.SupportedPlatforms%2CXRTK.Definitions.BaseMixedRealityProfile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/MixedRealityServiceConfiguration.cs/#L26">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/MixedRealityServiceConfiguration.cs/#L39">View Source</a>
   </span>
   <a id="XRTK_Definitions_MixedRealityServiceConfiguration__ctor_" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.#ctor*"></a>
-  <h4 id="XRTK_Definitions_MixedRealityServiceConfiguration__ctor_XRTK_Definitions_Utilities_SystemType_System_String_System_UInt32_XRTK_Definitions_Utilities_SupportedPlatforms_XRTK_Definitions_BaseMixedRealityExtensionServiceProfile_" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Definitions.BaseMixedRealityExtensionServiceProfile)">MixedRealityServiceConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityExtensionServiceProfile)</h4>
+  <h4 id="XRTK_Definitions_MixedRealityServiceConfiguration__ctor_XRTK_Definitions_Utilities_SystemType_System_String_System_UInt32_XRTK_Definitions_Utilities_SupportedPlatforms_XRTK_Definitions_BaseMixedRealityProfile_" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Definitions.BaseMixedRealityProfile)">MixedRealityServiceConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityProfile)</h4>
   <div class="markdown level1 summary"><p>Constructor.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MixedRealityServiceConfiguration(SystemType componentType, string componentName, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityExtensionServiceProfile configurationProfile)</code></pre>
+    <pre><code class="lang-csharp hljs">public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityProfile configurationProfile)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -134,32 +147,32 @@ public struct MixedRealityServiceConfiguration</code></pre>
     <tbody>
       <tr>
         <td><a class="xref" href="XRTK.Definitions.Utilities.SystemType.html">SystemType</a></td>
-        <td><span class="parametername">componentType</span></td>
-        <td><p>The concrete type for the system, feature or manager.</p>
+        <td><span class="parametername">instancedType</span></td>
+        <td><p>The concrete type for the <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a>.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">componentName</span></td>
-        <td><p>The simple, human readable name for the system, feature, or manager.</p>
+        <td><span class="parametername">name</span></td>
+        <td><p>The simple, human readable name for the <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a>.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uint32">UInt32</a></td>
         <td><span class="parametername">priority</span></td>
-        <td><p>The priority this system, feature, or manager will be initialized in.</p>
+        <td><p>The priority this <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a> will be initialized in.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="XRTK.Definitions.Utilities.SupportedPlatforms.html">SupportedPlatforms</a></td>
         <td><span class="parametername">runtimePlatform</span></td>
-        <td><p>The runtime platform(s) to run this system, feature, or manager on.</p>
+        <td><p>The runtime platform(s) to run this <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a> to run on.</p>
 </td>
       </tr>
       <tr>
-        <td><a class="xref" href="XRTK.Definitions.BaseMixedRealityExtensionServiceProfile.html">BaseMixedRealityExtensionServiceProfile</a></td>
+        <td><a class="xref" href="XRTK.Definitions.BaseMixedRealityProfile.html">BaseMixedRealityProfile</a></td>
         <td><span class="parametername">configurationProfile</span></td>
-        <td><p>The configuration profile for the system, feature, or manager.</p>
+        <td><p>The configuration profile for <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a>.</p>
 </td>
       </tr>
     </tbody>
@@ -168,19 +181,19 @@ public struct MixedRealityServiceConfiguration</code></pre>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_MixedRealityServiceConfiguration_ComponentName.md&amp;value=---%0Auid%3A%20XRTK.Definitions.MixedRealityServiceConfiguration.ComponentName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_MixedRealityServiceConfiguration_ConfigurationProfile.md&amp;value=---%0Auid%3A%20XRTK.Definitions.MixedRealityServiceConfiguration.ConfigurationProfile%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/MixedRealityServiceConfiguration.cs/#L50">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/MixedRealityServiceConfiguration.cs/#L102">View Source</a>
   </span>
-  <a id="XRTK_Definitions_MixedRealityServiceConfiguration_ComponentName_" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.ComponentName*"></a>
-  <h4 id="XRTK_Definitions_MixedRealityServiceConfiguration_ComponentName" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.ComponentName">ComponentName</h4>
-  <div class="markdown level1 summary"><p>The simple, human readable name for the system, feature, or manager.</p>
+  <a id="XRTK_Definitions_MixedRealityServiceConfiguration_ConfigurationProfile_" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.ConfigurationProfile*"></a>
+  <h4 id="XRTK_Definitions_MixedRealityServiceConfiguration_ConfigurationProfile" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.ConfigurationProfile">ConfigurationProfile</h4>
+  <div class="markdown level1 summary"><p>The configuration profile for the <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public string ComponentName { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public BaseMixedRealityProfile ConfigurationProfile { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -192,26 +205,26 @@ public struct MixedRealityServiceConfiguration</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><a class="xref" href="XRTK.Definitions.BaseMixedRealityProfile.html">BaseMixedRealityProfile</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_MixedRealityServiceConfiguration_ComponentType.md&amp;value=---%0Auid%3A%20XRTK.Definitions.MixedRealityServiceConfiguration.ComponentType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_MixedRealityServiceConfiguration_InstancedType.md&amp;value=---%0Auid%3A%20XRTK.Definitions.MixedRealityServiceConfiguration.InstancedType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/MixedRealityServiceConfiguration.cs/#L42">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/MixedRealityServiceConfiguration.cs/#L57">View Source</a>
   </span>
-  <a id="XRTK_Definitions_MixedRealityServiceConfiguration_ComponentType_" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.ComponentType*"></a>
-  <h4 id="XRTK_Definitions_MixedRealityServiceConfiguration_ComponentType" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.ComponentType">ComponentType</h4>
-  <div class="markdown level1 summary"><p>The concrete type for the system, feature or manager.</p>
+  <a id="XRTK_Definitions_MixedRealityServiceConfiguration_InstancedType_" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.InstancedType*"></a>
+  <h4 id="XRTK_Definitions_MixedRealityServiceConfiguration_InstancedType" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.InstancedType">InstancedType</h4>
+  <div class="markdown level1 summary"><p>The concrete type for the <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a> that will be instantiated and ran by the service locator.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SystemType ComponentType { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public SystemType InstancedType { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -230,19 +243,19 @@ public struct MixedRealityServiceConfiguration</code></pre>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_MixedRealityServiceConfiguration_ConfigurationProfile.md&amp;value=---%0Auid%3A%20XRTK.Definitions.MixedRealityServiceConfiguration.ConfigurationProfile%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_MixedRealityServiceConfiguration_Name.md&amp;value=---%0Auid%3A%20XRTK.Definitions.MixedRealityServiceConfiguration.Name%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/MixedRealityServiceConfiguration.cs/#L75">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/MixedRealityServiceConfiguration.cs/#L71">View Source</a>
   </span>
-  <a id="XRTK_Definitions_MixedRealityServiceConfiguration_ConfigurationProfile_" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.ConfigurationProfile*"></a>
-  <h4 id="XRTK_Definitions_MixedRealityServiceConfiguration_ConfigurationProfile" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.ConfigurationProfile">ConfigurationProfile</h4>
-  <div class="markdown level1 summary"><p>The configuration profile for the system, feature, or manager.</p>
+  <a id="XRTK_Definitions_MixedRealityServiceConfiguration_Name_" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.Name*"></a>
+  <h4 id="XRTK_Definitions_MixedRealityServiceConfiguration_Name" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.Name">Name</h4>
+  <div class="markdown level1 summary"><p>The simple, human readable name for the <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public BaseMixedRealityExtensionServiceProfile ConfigurationProfile { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public string Name { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -254,21 +267,24 @@ public struct MixedRealityServiceConfiguration</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Definitions.BaseMixedRealityExtensionServiceProfile.html">BaseMixedRealityExtensionServiceProfile</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <h5 id="XRTK_Definitions_MixedRealityServiceConfiguration_Name_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This name should be unique.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_MixedRealityServiceConfiguration_Priority.md&amp;value=---%0Auid%3A%20XRTK.Definitions.MixedRealityServiceConfiguration.Priority%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/MixedRealityServiceConfiguration.cs/#L58">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/MixedRealityServiceConfiguration.cs/#L81">View Source</a>
   </span>
   <a id="XRTK_Definitions_MixedRealityServiceConfiguration_Priority_" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.Priority*"></a>
   <h4 id="XRTK_Definitions_MixedRealityServiceConfiguration_Priority" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.Priority">Priority</h4>
-  <div class="markdown level1 summary"><p>The priority this system, feature, or manager will be initialized in.</p>
+  <div class="markdown level1 summary"><p>The priority order of execution for this <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -290,16 +306,19 @@ public struct MixedRealityServiceConfiguration</code></pre>
       </tr>
     </tbody>
   </table>
+  <h5 id="XRTK_Definitions_MixedRealityServiceConfiguration_Priority_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Multiple <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a>s may be running at the same priority for services that are not specifically registered to the <a class="xref" href="XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_ActiveSystems">ActiveSystems</a>.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_MixedRealityServiceConfiguration_RuntimePlatform.md&amp;value=---%0Auid%3A%20XRTK.Definitions.MixedRealityServiceConfiguration.RuntimePlatform%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/MixedRealityServiceConfiguration.cs/#L67">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/MixedRealityServiceConfiguration.cs/#L92">View Source</a>
   </span>
   <a id="XRTK_Definitions_MixedRealityServiceConfiguration_RuntimePlatform_" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.RuntimePlatform*"></a>
   <h4 id="XRTK_Definitions_MixedRealityServiceConfiguration_RuntimePlatform" data-uid="XRTK.Definitions.MixedRealityServiceConfiguration.RuntimePlatform">RuntimePlatform</h4>
-  <div class="markdown level1 summary"><p>The runtime platform(s) to run this system, feature, or manager on.</p>
+  <div class="markdown level1 summary"><p>The runtime platform(s) to run this <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a> to run on.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -321,6 +340,10 @@ public struct MixedRealityServiceConfiguration</code></pre>
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealityServiceConfiguration.html">IMixedRealityServiceConfiguration</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
@@ -339,7 +362,7 @@ public struct MixedRealityServiceConfiguration</code></pre>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_MixedRealityServiceConfiguration.md&amp;value=---%0Auid%3A%20XRTK.Definitions.MixedRealityServiceConfiguration%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/MixedRealityServiceConfiguration.cs/#L15" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/MixedRealityServiceConfiguration.cs/#L28" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

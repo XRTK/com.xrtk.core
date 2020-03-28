@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "D:/a/1/s/docfx_project",
+  "source_base_path": "d:/a/1/s/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -4845,7 +4845,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Controller.html",
-          "hash": "NGscaVP9oJxIFufJRT77sw=="
+          "hash": "O8VA8K/Cw0q/C5WGVXEGng=="
         }
       },
       "is_incremental": false,
@@ -5085,7 +5085,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Posef.html",
-          "hash": "yRgVt0f+Qulgt577tmyLXg=="
+          "hash": "5KO/Vq1lbQjpNjyBYBlq5Q=="
         }
       },
       "is_incremental": false,
@@ -5097,7 +5097,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Quatf.html",
-          "hash": "C9JwRIKw/v5FloMYUqz41A=="
+          "hash": "WLrPu4FOI1V5KB2HqJU0MQ=="
         }
       },
       "is_incremental": false,
@@ -5349,7 +5349,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Oculus.OculusApi.Vector3f.html",
-          "hash": "DaO1ZrkGmGdnU9Exvr7lIw=="
+          "hash": "G0JjObDEuI/oMuucKBbRgg=="
         }
       },
       "is_incremental": false,
@@ -7929,7 +7929,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Build.BuildInfo.html",
-          "hash": "eHr2TXNrN+yTc3t6aSAuxA=="
+          "hash": "OFPEJY4r5IimcIAg8FTc5w=="
         }
       },
       "is_incremental": false,
@@ -7953,7 +7953,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Build.IBuildInfo.html",
-          "hash": "ynUMKlre8lppB5c3q8tI+A=="
+          "hash": "8JHC/4+vEdkXSDJlVyFUDg=="
         }
       },
       "is_incremental": false,
@@ -8013,7 +8013,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Build.UwpBuildInfo.html",
-          "hash": "6d6oC+v2Vb5LK+lw9Vm+uQ=="
+          "hash": "N2DmVyJuXHtR5cebWnfc3Q=="
         }
       },
       "is_incremental": false,

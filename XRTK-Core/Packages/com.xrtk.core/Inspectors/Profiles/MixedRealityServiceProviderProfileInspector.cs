@@ -9,6 +9,7 @@ using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Inspectors.PropertyDrawers;
 using XRTK.Services;
+using XRTK.Extensions;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -30,7 +31,7 @@ namespace XRTK.Inspectors.Profiles
 
             Debug.Assert(configurations != null);
             var baseType = ThisProfile.GetType().BaseType;
-            var genericTypeArgs = baseType?.GenericTypeArguments;
+            var genericTypeArgs = baseType.FindTopmostGenericTypeArguments();
 
             Debug.Assert(genericTypeArgs != null);
 

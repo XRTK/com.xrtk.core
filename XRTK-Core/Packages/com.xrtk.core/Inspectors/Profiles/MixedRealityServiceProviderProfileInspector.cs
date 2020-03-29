@@ -7,9 +7,10 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using XRTK.Inspectors.PropertyDrawers;
 using XRTK.Services;
-using XRTK.Extensions;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -38,7 +39,7 @@ namespace XRTK.Inspectors.Profiles
             var baseType = ThisProfile.GetType().BaseType;
             var genericTypeArgs = baseType?.FindTopmostGenericTypeArguments();
             Debug.Assert(genericTypeArgs != null);
-            ServiceConstraint = genericTypeArgs[0];
+            ServiceConstraint = genericTypeArgs?[0];
             Debug.Assert(ServiceConstraint != null);
 
             configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true)
@@ -58,7 +59,7 @@ namespace XRTK.Inspectors.Profiles
 
             if (configurations == null || configurations.arraySize == 0)
             {
-                EditorGUILayout.HelpBox("Register a new Service Provider.", MessageType.Warning);
+                EditorGUILayout.HelpBox($"Register a new Configuration", MessageType.Warning);
             }
 
             serializedObject.ApplyModifiedProperties();
@@ -72,13 +73,24 @@ namespace XRTK.Inspectors.Profiles
             }
 
             var lastMode = EditorGUIUtility.wideMode;
+            var prevLabelWidth = EditorGUIUtility.labelWidth;
+
+            EditorGUIUtility.labelWidth = prevLabelWidth - 18f;
             EditorGUIUtility.wideMode = true;
 
+            var isScrollBarActive = (int)(EditorGUIUtility.currentViewWidth - (rect.width + 25f)) == 36;
+
+            var halfFieldWidth = rect.width * 0.5f;
             var halfFieldHeight = EditorGUIUtility.singleLineHeight * 0.25f;
+
             var nameRect = new Rect(rect.x, rect.y + halfFieldHeight, rect.width, EditorGUIUtility.singleLineHeight);
             var typeRect = new Rect(rect.x, rect.y + halfFieldHeight * 6, rect.width, EditorGUIUtility.singleLineHeight);
             var runtimeRect = new Rect(rect.x, rect.y + halfFieldHeight * 11, rect.width, EditorGUIUtility.singleLineHeight);
             var profileRect = new Rect(rect.x, rect.y + halfFieldHeight * 16, rect.width, EditorGUIUtility.singleLineHeight);
+
+            var profileHeight = rect.y + halfFieldHeight * 16;
+            var profilePosition = rect.x + EditorGUIUtility.labelWidth;
+            var profileLabelRect = new Rect(rect.x, profileHeight, halfFieldWidth, EditorGUIUtility.singleLineHeight);
 
             var configurationProperty = configurations.GetArrayElementAtIndex(index);
 
@@ -88,15 +100,78 @@ namespace XRTK.Inspectors.Profiles
             var runtimePlatformProperty = configurationProperty.FindPropertyRelative("runtimePlatform");
             var configurationProfileProperty = configurationProperty.FindPropertyRelative("configurationProfile");
 
+            var configurationProfile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
+
             EditorGUI.BeginChangeCheck();
             EditorGUI.PropertyField(nameRect, nameProperty);
             TypeReferencePropertyDrawer.FilterConstraintOverride = IsConstraintSatisfied;
             EditorGUI.PropertyField(typeRect, instanceTypeProperty);
+            var systemTypeReference = new SystemType(instanceTypeProperty.FindPropertyRelative("reference").stringValue);
+
+            Type profileType = null;
+
+            if (systemTypeReference.Type != null)
+            {
+                var constructors = systemTypeReference.Type.GetConstructors();
+
+                foreach (var constructorInfo in constructors)
+                {
+                    var parameters = constructorInfo.GetParameters();
+
+                    foreach (var parameterInfo in parameters)
+                    {
+                        if (parameterInfo.ParameterType.IsSubclassOf(typeof(BaseMixedRealityProfile)))
+                        {
+                            profileType = parameterInfo.ParameterType;
+                            break;
+                        }
+                    }
+
+                    if (profileType != null)
+                    {
+                        break;
+                    }
+                }
+            }
+
             priorityProperty.intValue = index;
             EditorGUI.PropertyField(runtimeRect, runtimePlatformProperty);
-            EditorGUI.PropertyField(profileRect, configurationProfileProperty);
 
-            if (EditorGUI.EndChangeCheck())
+            var update = false;
+
+            if (profileType != null)
+            {
+                EditorGUI.LabelField(profileLabelRect, "Profile");
+                var isNullProfile = configurationProfileProperty.objectReferenceValue == null;
+
+                var buttonWidth = isNullProfile ? 20f : 42f;
+                var profileObjectWidth = EditorGUIUtility.currentViewWidth - profilePosition - buttonWidth - 12f;
+                var scrollOffset = isScrollBarActive ? 15f : 0f;
+                var profileObjectRect = new Rect(profilePosition, profileHeight, profileObjectWidth - scrollOffset, EditorGUIUtility.singleLineHeight);
+                var buttonRect = new Rect(profilePosition + profileObjectWidth - scrollOffset, profileHeight, buttonWidth, EditorGUIUtility.singleLineHeight);
+
+                configurationProfileProperty.objectReferenceValue = EditorGUI.ObjectField(profileObjectRect, configurationProfileProperty.objectReferenceValue, profileType, false);
+                update = GUI.Button(buttonRect, isNullProfile ? NewProfileContent : CloneProfileContent);
+
+                if (update)
+                {
+                    if (isNullProfile)
+                    {
+                        CreateNewProfileInstance(ThisProfile, configurationProfileProperty, profileType);
+                    }
+                    else
+                    {
+                        CloneProfileInstance(ThisProfile, configurationProfileProperty, configurationProfile);
+                    }
+                }
+            }
+            else
+            {
+                EditorGUI.PropertyField(profileRect, configurationProfileProperty);
+            }
+
+            if (update ||
+                EditorGUI.EndChangeCheck())
             {
                 serializedObject.ApplyModifiedProperties();
 
@@ -108,6 +183,7 @@ namespace XRTK.Inspectors.Profiles
             }
 
             EditorGUIUtility.wideMode = lastMode;
+            EditorGUIUtility.labelWidth = prevLabelWidth;
         }
 
         private bool IsConstraintSatisfied(Type type)

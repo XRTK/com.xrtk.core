@@ -27,26 +27,26 @@ namespace XRTK.Tests.Core
         #region Configuration Validation Tests
 
         [Test]
-        public void Test_01_ConfirmDataProviderConfigurationNotPresent()
+        public void Test_01_ConfirmExtensionServiceProviderConfigurationNotPresent()
         {
             SetupServiceLocator();
             var profile = MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile;
-            var dataProviderTypes = new[] { typeof(TestExtensionServiceProvider1) };
+            var dataProviderTypes = new[] { typeof(TestExtensionService1) };
             var newConfigs = new[]
             {
-                new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionServiceProvider1), "Test Data Provider 1", 2,SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null)
+                new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Extension Service 1", 2,SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null)
             };
 
             Assert.IsFalse(profile.ValidateService(dataProviderTypes, newConfigs, false));
         }
 
         [Test]
-        public void Test_02_ConfirmDataProviderConfigurationPresent()
+        public void Test_02_ConfirmExtensionServiceProviderConfigurationPresent()
         {
             SetupServiceLocator();
             var profile = MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile;
-            var dataProviderTypes = new[] { typeof(TestExtensionServiceProvider1) };
-            var newConfig = new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionServiceProvider1), "Test Data Provider 1", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null);
+            var dataProviderTypes = new[] { typeof(TestExtensionService1) };
+            var newConfig = new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Extension Service 1", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null);
             Debug.Assert(newConfig != null);
             var newConfigs = profile.RegisteredServiceConfigurations.AddItem(newConfig);
             Debug.Assert(newConfigs != null);

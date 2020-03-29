@@ -5,7 +5,7 @@ using XRTK.Interfaces;
 
 namespace XRTK.Tests.Services
 {
-    internal interface ITestDataProvider1 : IMixedRealityDataProvider, ITestService
+    internal interface ITestDataProvider1 : IMixedRealityDataProvider
     {
     }
 }

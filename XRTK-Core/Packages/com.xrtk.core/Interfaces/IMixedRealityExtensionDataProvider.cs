@@ -4,9 +4,9 @@
 namespace XRTK.Interfaces
 {
     /// <summary>
-    /// Generic interface for all optional <see cref="IMixedRealityService"/>s that can be added to the <see cref="Definitions.MixedRealityRegisteredServiceProvidersProfile"/>
+    /// Generic interface for all optional <see cref="IMixedRealityDataProvider"/>s that can be added to the <see cref="Definitions.BaseMixedRealityExtensionServiceProfile"/>
     /// </summary>
-    public interface IMixedRealityExtensionService : IMixedRealityService
+    public interface IMixedRealityExtensionDataProvider : IMixedRealityDataProvider
     {
         // Empty for now, but it is used to filter out the valid class types in the inspector dropdown.
     }

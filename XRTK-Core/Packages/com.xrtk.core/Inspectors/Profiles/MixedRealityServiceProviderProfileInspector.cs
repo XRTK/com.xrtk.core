@@ -78,7 +78,6 @@ namespace XRTK.Inspectors.Profiles
             EditorGUIUtility.labelWidth = prevLabelWidth - 18f;
             EditorGUIUtility.wideMode = true;
 
-            var lastRect = GUILayoutUtility.GetLastRect();
             var isScrollBarActive = (int)(EditorGUIUtility.currentViewWidth - (rect.width + 25f)) == 36;
 
             var halfFieldWidth = rect.width * 0.5f;

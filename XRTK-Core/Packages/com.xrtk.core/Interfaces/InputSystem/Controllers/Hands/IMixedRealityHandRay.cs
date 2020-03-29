@@ -8,6 +8,5 @@ namespace XRTK.Interfaces.InputSystem.Controllers.Hands
     /// </summary>
     public interface IMixedRealityHandRay
     {
-
     }
 }

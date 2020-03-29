@@ -38,14 +38,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 Debug.LogError($"Could not get active {nameof(SimulatedHandControllerDataProvider)}.");
             }
 
-            simulatedControllerDataProvider = GetSimulatedControllerDataProvider();
-            if (simulatedControllerDataProvider == null)
-            {
-                Debug.LogError($"Could not get active {nameof(SimulatedControllerDataProvider)}.");
-            }
-
             // Initialize available simulated hand poses and find the
-            // cofigured default pose.
+            // configured default pose.
             SimulatedHandControllerPose.Initialize(simulatedHandControllerDataProvider.HandPoseDefinitions);
 
             // Simulation cannot work without a default pose.
@@ -66,7 +60,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
         private readonly SimulatedHandControllerDataProvider simulatedHandControllerDataProvider;
         private readonly SimulationTimeStampStopWatch handUpdateStopWatch;
-        private readonly SimulatedControllerDataProvider simulatedControllerDataProvider;
         private readonly SimulationTimeStampStopWatch lastUpdatedStopWatch;
         private Vector3? lastMousePosition = null;
         private long lastSimulatedTimeStamp = 0;
@@ -142,20 +135,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             private set => targetPoseBlending = Mathf.Clamp(value, targetPoseBlending, 1.0f);
         }
 
-        private SimulatedControllerDataProvider GetSimulatedControllerDataProvider()
-        {
-            List<IMixedRealityService> controllerDataProviders = MixedRealityToolkit.GetActiveServices<IMixedRealityControllerDataProvider>();
-            for (int i = 0; i < controllerDataProviders.Count; i++)
-            {
-                if (controllerDataProviders[i] is SimulatedControllerDataProvider simulatedControllerDataProvider)
-                {
-                    return simulatedControllerDataProvider;
-                }
-            }
-
-            return null;
-        }
-
         private SimulatedHandControllerDataProvider GetSimulatedHandControllerDataProvider()
         {
             List<IMixedRealityService> controllerDataProviders = MixedRealityToolkit.GetActiveServices<IMixedRealityControllerDataProvider>();
@@ -174,11 +153,11 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public override void UpdateController()
         {
             // The base implementation will make sure to update interaction
-            // mappings before we try to get simualted data, since simulation
+            // mappings before we try to get simulated data, since simulation
             // depends on them.
             base.UpdateController();
 
-            // If we have upated simulated data, we can execute the actual
+            // If we have updated simulated data, we can execute the actual
             // base hand controller update.
             if (TryGetSimulatedHandData(out HandData handData))
             {
@@ -192,7 +171,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <returns>Updated hand rotation angles.</returns>
         private Vector3 GetHandRotationDelta()
         {
-            float rotationDelta = simulatedControllerDataProvider.RotationSpeed * Time.deltaTime;
+            float rotationDelta = simulatedHandControllerDataProvider.RotationSpeed * Time.deltaTime;
             Vector3 rotationDeltaEulerAngles = Vector3.zero;
 
             if (Interactions[0].BoolData)
@@ -234,11 +213,11 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             if (Interactions[6].BoolData)
             {
-                mouseDelta.z += Time.deltaTime * simulatedControllerDataProvider.HandDepthMultiplier;
+                mouseDelta.z += Time.deltaTime * simulatedHandControllerDataProvider.DepthMultiplier;
             }
             if (Interactions[7].BoolData)
             {
-                mouseDelta.z -= Time.deltaTime * simulatedControllerDataProvider.HandDepthMultiplier;
+                mouseDelta.z -= Time.deltaTime * simulatedHandControllerDataProvider.DepthMultiplier;
             }
 
             return mouseDelta;
@@ -351,7 +330,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             if (!HandData.IsTracked)
             {
                 Vector3 mousePos = Input.mousePosition;
-                screenPosition = new Vector3(mousePos.x, mousePos.y, simulatedControllerDataProvider.DefaultDistance);
+                screenPosition = new Vector3(mousePos.x, mousePos.y, simulatedHandControllerDataProvider.DefaultDistance);
             }
 
             // Apply mouse delta x/y in screen space, but depth offset in world space
@@ -362,7 +341,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             screenPosition = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.WorldToScreenPoint(newWorldPoint);
 
             HandRotateEulerAngles += rootPoseDelta.Rotation.eulerAngles;
-            JitterOffset = Random.insideUnitSphere * simulatedControllerDataProvider.JitterAmount;
+            JitterOffset = Random.insideUnitSphere * simulatedHandControllerDataProvider.JitterAmount;
 
             HandData.IsTracked = true;
             lastSimulatedTimeStamp = lastUpdatedStopWatch.TimeStamp;

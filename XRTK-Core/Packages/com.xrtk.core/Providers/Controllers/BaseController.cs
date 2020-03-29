@@ -107,14 +107,12 @@ namespace XRTK.Providers.Controllers
                 return false;
             }
 
-            MixedRealityControllerMapping controllerMapping;
-
             // Have to test that a controller type has been registered in the profiles,
             // else it's Unity Input manager mappings will not have been setup by the inspector
             bool profileFound = false;
 
             // We can only enable controller profiles if mappings exist. Assign any known interaction mappings if found.
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.MixedRealityControllerMappings.GetControllerInteractionMapping(controllerType, ControllerHandedness, out controllerMapping))
+            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.MixedRealityControllerMappings.GetControllerInteractionMapping(controllerType, ControllerHandedness, out var controllerMapping))
             {
                 profileFound = true;
 

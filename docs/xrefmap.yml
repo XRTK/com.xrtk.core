@@ -343,25 +343,12 @@ references:
   commentId: N:XRTK.Definitions
   fullName: XRTK.Definitions
   nameWithType: XRTK.Definitions
-- uid: XRTK.Definitions.BaseMixedRealityExtensionServiceProfile
-  name: BaseMixedRealityExtensionServiceProfile
-  href: api/XRTK.Definitions.BaseMixedRealityExtensionServiceProfile.html
-  commentId: T:XRTK.Definitions.BaseMixedRealityExtensionServiceProfile
-  fullName: XRTK.Definitions.BaseMixedRealityExtensionServiceProfile
-  nameWithType: BaseMixedRealityExtensionServiceProfile
-- uid: XRTK.Definitions.BaseMixedRealityExtensionServiceProfile.RegisteredDataProviders
-  name: RegisteredDataProviders
-  href: api/XRTK.Definitions.BaseMixedRealityExtensionServiceProfile.html#XRTK_Definitions_BaseMixedRealityExtensionServiceProfile_RegisteredDataProviders
-  commentId: P:XRTK.Definitions.BaseMixedRealityExtensionServiceProfile.RegisteredDataProviders
-  fullName: XRTK.Definitions.BaseMixedRealityExtensionServiceProfile.RegisteredDataProviders
-  nameWithType: BaseMixedRealityExtensionServiceProfile.RegisteredDataProviders
-- uid: XRTK.Definitions.BaseMixedRealityExtensionServiceProfile.RegisteredDataProviders*
-  name: RegisteredDataProviders
-  href: api/XRTK.Definitions.BaseMixedRealityExtensionServiceProfile.html#XRTK_Definitions_BaseMixedRealityExtensionServiceProfile_RegisteredDataProviders_
-  commentId: Overload:XRTK.Definitions.BaseMixedRealityExtensionServiceProfile.RegisteredDataProviders
-  isSpec: "True"
-  fullName: XRTK.Definitions.BaseMixedRealityExtensionServiceProfile.RegisteredDataProviders
-  nameWithType: BaseMixedRealityExtensionServiceProfile.RegisteredDataProviders
+- uid: XRTK.Definitions.BaseMixedRealityExtensionDataProviderProfile
+  name: BaseMixedRealityExtensionDataProviderProfile
+  href: api/XRTK.Definitions.BaseMixedRealityExtensionDataProviderProfile.html
+  commentId: T:XRTK.Definitions.BaseMixedRealityExtensionDataProviderProfile
+  fullName: XRTK.Definitions.BaseMixedRealityExtensionDataProviderProfile
+  nameWithType: BaseMixedRealityExtensionDataProviderProfile
 - uid: XRTK.Definitions.BaseMixedRealityProfile
   name: BaseMixedRealityProfile
   href: api/XRTK.Definitions.BaseMixedRealityProfile.html
@@ -381,6 +368,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.BaseMixedRealityProfile.ParentProfile
   nameWithType: BaseMixedRealityProfile.ParentProfile
+- uid: XRTK.Definitions.BaseMixedRealityServiceProfile`1
+  name: BaseMixedRealityServiceProfile<TService>
+  href: api/XRTK.Definitions.BaseMixedRealityServiceProfile-1.html
+  commentId: T:XRTK.Definitions.BaseMixedRealityServiceProfile`1
+  name.vb: BaseMixedRealityServiceProfile(Of TService)
+  fullName: XRTK.Definitions.BaseMixedRealityServiceProfile<TService>
+  fullName.vb: XRTK.Definitions.BaseMixedRealityServiceProfile(Of TService)
+  nameWithType: BaseMixedRealityServiceProfile<TService>
+  nameWithType.vb: BaseMixedRealityServiceProfile(Of TService)
+- uid: XRTK.Definitions.BaseMixedRealityServiceProfile`1.RegisteredServiceConfigurations
+  name: RegisteredServiceConfigurations
+  href: api/XRTK.Definitions.BaseMixedRealityServiceProfile-1.html#XRTK_Definitions_BaseMixedRealityServiceProfile_1_RegisteredServiceConfigurations
+  commentId: P:XRTK.Definitions.BaseMixedRealityServiceProfile`1.RegisteredServiceConfigurations
+  fullName: XRTK.Definitions.BaseMixedRealityServiceProfile<TService>.RegisteredServiceConfigurations
+  fullName.vb: XRTK.Definitions.BaseMixedRealityServiceProfile(Of TService).RegisteredServiceConfigurations
+  nameWithType: BaseMixedRealityServiceProfile<TService>.RegisteredServiceConfigurations
+  nameWithType.vb: BaseMixedRealityServiceProfile(Of TService).RegisteredServiceConfigurations
+- uid: XRTK.Definitions.BaseMixedRealityServiceProfile`1.RegisteredServiceConfigurations*
+  name: RegisteredServiceConfigurations
+  href: api/XRTK.Definitions.BaseMixedRealityServiceProfile-1.html#XRTK_Definitions_BaseMixedRealityServiceProfile_1_RegisteredServiceConfigurations_
+  commentId: Overload:XRTK.Definitions.BaseMixedRealityServiceProfile`1.RegisteredServiceConfigurations
+  isSpec: "True"
+  fullName: XRTK.Definitions.BaseMixedRealityServiceProfile<TService>.RegisteredServiceConfigurations
+  fullName.vb: XRTK.Definitions.BaseMixedRealityServiceProfile(Of TService).RegisteredServiceConfigurations
+  nameWithType: BaseMixedRealityServiceProfile<TService>.RegisteredServiceConfigurations
+  nameWithType.vb: BaseMixedRealityServiceProfile(Of TService).RegisteredServiceConfigurations
 - uid: XRTK.Definitions.BoundarySystem
   name: XRTK.Definitions.BoundarySystem
   href: api/XRTK.Definitions.BoundarySystem.html
@@ -859,19 +872,6 @@ references:
   commentId: T:XRTK.Definitions.Controllers.MixedRealityControllerDataProvidersProfile
   fullName: XRTK.Definitions.Controllers.MixedRealityControllerDataProvidersProfile
   nameWithType: MixedRealityControllerDataProvidersProfile
-- uid: XRTK.Definitions.Controllers.MixedRealityControllerDataProvidersProfile.RegisteredControllerDataProviders
-  name: RegisteredControllerDataProviders
-  href: api/XRTK.Definitions.Controllers.MixedRealityControllerDataProvidersProfile.html#XRTK_Definitions_Controllers_MixedRealityControllerDataProvidersProfile_RegisteredControllerDataProviders
-  commentId: P:XRTK.Definitions.Controllers.MixedRealityControllerDataProvidersProfile.RegisteredControllerDataProviders
-  fullName: XRTK.Definitions.Controllers.MixedRealityControllerDataProvidersProfile.RegisteredControllerDataProviders
-  nameWithType: MixedRealityControllerDataProvidersProfile.RegisteredControllerDataProviders
-- uid: XRTK.Definitions.Controllers.MixedRealityControllerDataProvidersProfile.RegisteredControllerDataProviders*
-  name: RegisteredControllerDataProviders
-  href: api/XRTK.Definitions.Controllers.MixedRealityControllerDataProvidersProfile.html#XRTK_Definitions_Controllers_MixedRealityControllerDataProvidersProfile_RegisteredControllerDataProviders_
-  commentId: Overload:XRTK.Definitions.Controllers.MixedRealityControllerDataProvidersProfile.RegisteredControllerDataProviders
-  isSpec: "True"
-  fullName: XRTK.Definitions.Controllers.MixedRealityControllerDataProvidersProfile.RegisteredControllerDataProviders
-  nameWithType: MixedRealityControllerDataProvidersProfile.RegisteredControllerDataProviders
 - uid: XRTK.Definitions.Controllers.MixedRealityControllerMappingProfiles
   name: MixedRealityControllerMappingProfiles
   href: api/XRTK.Definitions.Controllers.MixedRealityControllerMappingProfiles.html
@@ -1550,90 +1550,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.Controllers.UnityInput.Profiles.XboxControllerMappingProfile.TexturePath
   nameWithType: XboxControllerMappingProfile.TexturePath
-- uid: XRTK.Definitions.DataModelConfiguration
-  name: DataModelConfiguration
-  href: api/XRTK.Definitions.DataModelConfiguration.html
-  commentId: T:XRTK.Definitions.DataModelConfiguration
-  fullName: XRTK.Definitions.DataModelConfiguration
-  nameWithType: DataModelConfiguration
-- uid: XRTK.Definitions.DataModelConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Definitions.BaseMixedRealityProfile)
-  name: DataModelConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityProfile)
-  href: api/XRTK.Definitions.DataModelConfiguration.html#XRTK_Definitions_DataModelConfiguration__ctor_XRTK_Definitions_Utilities_SystemType_System_String_System_UInt32_XRTK_Definitions_Utilities_SupportedPlatforms_XRTK_Definitions_BaseMixedRealityProfile_
-  commentId: M:XRTK.Definitions.DataModelConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Definitions.BaseMixedRealityProfile)
-  fullName: XRTK.Definitions.DataModelConfiguration.DataModelConfiguration(XRTK.Definitions.Utilities.SystemType, System.String, System.UInt32, XRTK.Definitions.Utilities.SupportedPlatforms, XRTK.Definitions.BaseMixedRealityProfile)
-  nameWithType: DataModelConfiguration.DataModelConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityProfile)
-- uid: XRTK.Definitions.DataModelConfiguration.#ctor*
-  name: DataModelConfiguration
-  href: api/XRTK.Definitions.DataModelConfiguration.html#XRTK_Definitions_DataModelConfiguration__ctor_
-  commentId: Overload:XRTK.Definitions.DataModelConfiguration.#ctor
-  isSpec: "True"
-  fullName: XRTK.Definitions.DataModelConfiguration.DataModelConfiguration
-  nameWithType: DataModelConfiguration.DataModelConfiguration
-- uid: XRTK.Definitions.DataModelConfiguration.ConfigurationProfile
-  name: ConfigurationProfile
-  href: api/XRTK.Definitions.DataModelConfiguration.html#XRTK_Definitions_DataModelConfiguration_ConfigurationProfile
-  commentId: P:XRTK.Definitions.DataModelConfiguration.ConfigurationProfile
-  fullName: XRTK.Definitions.DataModelConfiguration.ConfigurationProfile
-  nameWithType: DataModelConfiguration.ConfigurationProfile
-- uid: XRTK.Definitions.DataModelConfiguration.ConfigurationProfile*
-  name: ConfigurationProfile
-  href: api/XRTK.Definitions.DataModelConfiguration.html#XRTK_Definitions_DataModelConfiguration_ConfigurationProfile_
-  commentId: Overload:XRTK.Definitions.DataModelConfiguration.ConfigurationProfile
-  isSpec: "True"
-  fullName: XRTK.Definitions.DataModelConfiguration.ConfigurationProfile
-  nameWithType: DataModelConfiguration.ConfigurationProfile
-- uid: XRTK.Definitions.DataModelConfiguration.DataModelName
-  name: DataModelName
-  href: api/XRTK.Definitions.DataModelConfiguration.html#XRTK_Definitions_DataModelConfiguration_DataModelName
-  commentId: P:XRTK.Definitions.DataModelConfiguration.DataModelName
-  fullName: XRTK.Definitions.DataModelConfiguration.DataModelName
-  nameWithType: DataModelConfiguration.DataModelName
-- uid: XRTK.Definitions.DataModelConfiguration.DataModelName*
-  name: DataModelName
-  href: api/XRTK.Definitions.DataModelConfiguration.html#XRTK_Definitions_DataModelConfiguration_DataModelName_
-  commentId: Overload:XRTK.Definitions.DataModelConfiguration.DataModelName
-  isSpec: "True"
-  fullName: XRTK.Definitions.DataModelConfiguration.DataModelName
-  nameWithType: DataModelConfiguration.DataModelName
-- uid: XRTK.Definitions.DataModelConfiguration.DataModelType
-  name: DataModelType
-  href: api/XRTK.Definitions.DataModelConfiguration.html#XRTK_Definitions_DataModelConfiguration_DataModelType
-  commentId: P:XRTK.Definitions.DataModelConfiguration.DataModelType
-  fullName: XRTK.Definitions.DataModelConfiguration.DataModelType
-  nameWithType: DataModelConfiguration.DataModelType
-- uid: XRTK.Definitions.DataModelConfiguration.DataModelType*
-  name: DataModelType
-  href: api/XRTK.Definitions.DataModelConfiguration.html#XRTK_Definitions_DataModelConfiguration_DataModelType_
-  commentId: Overload:XRTK.Definitions.DataModelConfiguration.DataModelType
-  isSpec: "True"
-  fullName: XRTK.Definitions.DataModelConfiguration.DataModelType
-  nameWithType: DataModelConfiguration.DataModelType
-- uid: XRTK.Definitions.DataModelConfiguration.Priority
-  name: Priority
-  href: api/XRTK.Definitions.DataModelConfiguration.html#XRTK_Definitions_DataModelConfiguration_Priority
-  commentId: P:XRTK.Definitions.DataModelConfiguration.Priority
-  fullName: XRTK.Definitions.DataModelConfiguration.Priority
-  nameWithType: DataModelConfiguration.Priority
-- uid: XRTK.Definitions.DataModelConfiguration.Priority*
-  name: Priority
-  href: api/XRTK.Definitions.DataModelConfiguration.html#XRTK_Definitions_DataModelConfiguration_Priority_
-  commentId: Overload:XRTK.Definitions.DataModelConfiguration.Priority
-  isSpec: "True"
-  fullName: XRTK.Definitions.DataModelConfiguration.Priority
-  nameWithType: DataModelConfiguration.Priority
-- uid: XRTK.Definitions.DataModelConfiguration.RuntimePlatform
-  name: RuntimePlatform
-  href: api/XRTK.Definitions.DataModelConfiguration.html#XRTK_Definitions_DataModelConfiguration_RuntimePlatform
-  commentId: P:XRTK.Definitions.DataModelConfiguration.RuntimePlatform
-  fullName: XRTK.Definitions.DataModelConfiguration.RuntimePlatform
-  nameWithType: DataModelConfiguration.RuntimePlatform
-- uid: XRTK.Definitions.DataModelConfiguration.RuntimePlatform*
-  name: RuntimePlatform
-  href: api/XRTK.Definitions.DataModelConfiguration.html#XRTK_Definitions_DataModelConfiguration_RuntimePlatform_
-  commentId: Overload:XRTK.Definitions.DataModelConfiguration.RuntimePlatform
-  isSpec: "True"
-  fullName: XRTK.Definitions.DataModelConfiguration.RuntimePlatform
-  nameWithType: DataModelConfiguration.RuntimePlatform
 - uid: XRTK.Definitions.Devices
   name: XRTK.Definitions.Devices
   href: api/XRTK.Definitions.Devices.html
@@ -2767,90 +2683,6 @@ references:
   commentId: N:XRTK.Definitions.DiagnosticsSystem
   fullName: XRTK.Definitions.DiagnosticsSystem
   nameWithType: XRTK.Definitions.DiagnosticsSystem
-- uid: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration
-  name: DiagnosticsDataProviderConfiguration
-  href: api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html
-  commentId: T:XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration
-  fullName: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration
-  nameWithType: DiagnosticsDataProviderConfiguration
-- uid: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsDataProviderProfile)
-  name: DiagnosticsDataProviderConfiguration(SystemType, String, UInt32, SupportedPlatforms, MixedRealityDiagnosticsDataProviderProfile)
-  href: api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html#XRTK_Definitions_DiagnosticsSystem_DiagnosticsDataProviderConfiguration__ctor_XRTK_Definitions_Utilities_SystemType_System_String_System_UInt32_XRTK_Definitions_Utilities_SupportedPlatforms_XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsDataProviderProfile_
-  commentId: M:XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsDataProviderProfile)
-  fullName: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.DiagnosticsDataProviderConfiguration(XRTK.Definitions.Utilities.SystemType, System.String, System.UInt32, XRTK.Definitions.Utilities.SupportedPlatforms, XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsDataProviderProfile)
-  nameWithType: DiagnosticsDataProviderConfiguration.DiagnosticsDataProviderConfiguration(SystemType, String, UInt32, SupportedPlatforms, MixedRealityDiagnosticsDataProviderProfile)
-- uid: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.#ctor*
-  name: DiagnosticsDataProviderConfiguration
-  href: api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html#XRTK_Definitions_DiagnosticsSystem_DiagnosticsDataProviderConfiguration__ctor_
-  commentId: Overload:XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.#ctor
-  isSpec: "True"
-  fullName: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.DiagnosticsDataProviderConfiguration
-  nameWithType: DiagnosticsDataProviderConfiguration.DiagnosticsDataProviderConfiguration
-- uid: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.DataProviderName
-  name: DataProviderName
-  href: api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html#XRTK_Definitions_DiagnosticsSystem_DiagnosticsDataProviderConfiguration_DataProviderName
-  commentId: P:XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.DataProviderName
-  fullName: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.DataProviderName
-  nameWithType: DiagnosticsDataProviderConfiguration.DataProviderName
-- uid: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.DataProviderName*
-  name: DataProviderName
-  href: api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html#XRTK_Definitions_DiagnosticsSystem_DiagnosticsDataProviderConfiguration_DataProviderName_
-  commentId: Overload:XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.DataProviderName
-  isSpec: "True"
-  fullName: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.DataProviderName
-  nameWithType: DiagnosticsDataProviderConfiguration.DataProviderName
-- uid: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.DataProviderType
-  name: DataProviderType
-  href: api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html#XRTK_Definitions_DiagnosticsSystem_DiagnosticsDataProviderConfiguration_DataProviderType
-  commentId: P:XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.DataProviderType
-  fullName: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.DataProviderType
-  nameWithType: DiagnosticsDataProviderConfiguration.DataProviderType
-- uid: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.DataProviderType*
-  name: DataProviderType
-  href: api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html#XRTK_Definitions_DiagnosticsSystem_DiagnosticsDataProviderConfiguration_DataProviderType_
-  commentId: Overload:XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.DataProviderType
-  isSpec: "True"
-  fullName: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.DataProviderType
-  nameWithType: DiagnosticsDataProviderConfiguration.DataProviderType
-- uid: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.Priority
-  name: Priority
-  href: api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html#XRTK_Definitions_DiagnosticsSystem_DiagnosticsDataProviderConfiguration_Priority
-  commentId: P:XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.Priority
-  fullName: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.Priority
-  nameWithType: DiagnosticsDataProviderConfiguration.Priority
-- uid: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.Priority*
-  name: Priority
-  href: api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html#XRTK_Definitions_DiagnosticsSystem_DiagnosticsDataProviderConfiguration_Priority_
-  commentId: Overload:XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.Priority
-  isSpec: "True"
-  fullName: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.Priority
-  nameWithType: DiagnosticsDataProviderConfiguration.Priority
-- uid: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.Profile
-  name: Profile
-  href: api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html#XRTK_Definitions_DiagnosticsSystem_DiagnosticsDataProviderConfiguration_Profile
-  commentId: P:XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.Profile
-  fullName: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.Profile
-  nameWithType: DiagnosticsDataProviderConfiguration.Profile
-- uid: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.Profile*
-  name: Profile
-  href: api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html#XRTK_Definitions_DiagnosticsSystem_DiagnosticsDataProviderConfiguration_Profile_
-  commentId: Overload:XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.Profile
-  isSpec: "True"
-  fullName: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.Profile
-  nameWithType: DiagnosticsDataProviderConfiguration.Profile
-- uid: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.RuntimePlatform
-  name: RuntimePlatform
-  href: api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html#XRTK_Definitions_DiagnosticsSystem_DiagnosticsDataProviderConfiguration_RuntimePlatform
-  commentId: P:XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.RuntimePlatform
-  fullName: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.RuntimePlatform
-  nameWithType: DiagnosticsDataProviderConfiguration.RuntimePlatform
-- uid: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.RuntimePlatform*
-  name: RuntimePlatform
-  href: api/XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html#XRTK_Definitions_DiagnosticsSystem_DiagnosticsDataProviderConfiguration_RuntimePlatform_
-  commentId: Overload:XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.RuntimePlatform
-  isSpec: "True"
-  fullName: XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.RuntimePlatform
-  nameWithType: DiagnosticsDataProviderConfiguration.RuntimePlatform
 - uid: XRTK.Definitions.DiagnosticsSystem.MemoryLimit
   name: MemoryLimit
   href: api/XRTK.Definitions.DiagnosticsSystem.MemoryLimit.html
@@ -3008,19 +2840,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.DiagnosticsWindowPrefab
   nameWithType: MixedRealityDiagnosticsSystemProfile.DiagnosticsWindowPrefab
-- uid: XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders
-  name: RegisteredDiagnosticsDataProviders
-  href: api/XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.html#XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsSystemProfile_RegisteredDiagnosticsDataProviders
-  commentId: P:XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders
-  fullName: XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders
-  nameWithType: MixedRealityDiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders
-- uid: XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders*
-  name: RegisteredDiagnosticsDataProviders
-  href: api/XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.html#XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsSystemProfile_RegisteredDiagnosticsDataProviders_
-  commentId: Overload:XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders
-  isSpec: "True"
-  fullName: XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders
-  nameWithType: MixedRealityDiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders
 - uid: XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.ShowDiagnosticsWindowOnStart
   name: ShowDiagnosticsWindowOnStart
   href: api/XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.html#XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsSystemProfile_ShowDiagnosticsWindowOnStart
@@ -3098,90 +2917,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.InputSystem.AnimatedCursorData.Parameter
   nameWithType: AnimatedCursorData.Parameter
-- uid: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration
-  name: ControllerDataProviderConfiguration
-  href: api/XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.html
-  commentId: T:XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration
-  fullName: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration
-  nameWithType: ControllerDataProviderConfiguration
-- uid: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  name: ControllerDataProviderConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityControllerDataProviderProfile)
-  href: api/XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.html#XRTK_Definitions_InputSystem_ControllerDataProviderConfiguration__ctor_XRTK_Definitions_Utilities_SystemType_System_String_System_UInt32_XRTK_Definitions_Utilities_SupportedPlatforms_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_
-  commentId: M:XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  fullName: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.ControllerDataProviderConfiguration(XRTK.Definitions.Utilities.SystemType, System.String, System.UInt32, XRTK.Definitions.Utilities.SupportedPlatforms, XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)
-  nameWithType: ControllerDataProviderConfiguration.ControllerDataProviderConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityControllerDataProviderProfile)
-- uid: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.#ctor*
-  name: ControllerDataProviderConfiguration
-  href: api/XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.html#XRTK_Definitions_InputSystem_ControllerDataProviderConfiguration__ctor_
-  commentId: Overload:XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.#ctor
-  isSpec: "True"
-  fullName: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.ControllerDataProviderConfiguration
-  nameWithType: ControllerDataProviderConfiguration.ControllerDataProviderConfiguration
-- uid: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.DataProviderName
-  name: DataProviderName
-  href: api/XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.html#XRTK_Definitions_InputSystem_ControllerDataProviderConfiguration_DataProviderName
-  commentId: P:XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.DataProviderName
-  fullName: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.DataProviderName
-  nameWithType: ControllerDataProviderConfiguration.DataProviderName
-- uid: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.DataProviderName*
-  name: DataProviderName
-  href: api/XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.html#XRTK_Definitions_InputSystem_ControllerDataProviderConfiguration_DataProviderName_
-  commentId: Overload:XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.DataProviderName
-  isSpec: "True"
-  fullName: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.DataProviderName
-  nameWithType: ControllerDataProviderConfiguration.DataProviderName
-- uid: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.DataProviderType
-  name: DataProviderType
-  href: api/XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.html#XRTK_Definitions_InputSystem_ControllerDataProviderConfiguration_DataProviderType
-  commentId: P:XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.DataProviderType
-  fullName: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.DataProviderType
-  nameWithType: ControllerDataProviderConfiguration.DataProviderType
-- uid: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.DataProviderType*
-  name: DataProviderType
-  href: api/XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.html#XRTK_Definitions_InputSystem_ControllerDataProviderConfiguration_DataProviderType_
-  commentId: Overload:XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.DataProviderType
-  isSpec: "True"
-  fullName: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.DataProviderType
-  nameWithType: ControllerDataProviderConfiguration.DataProviderType
-- uid: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.Priority
-  name: Priority
-  href: api/XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.html#XRTK_Definitions_InputSystem_ControllerDataProviderConfiguration_Priority
-  commentId: P:XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.Priority
-  fullName: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.Priority
-  nameWithType: ControllerDataProviderConfiguration.Priority
-- uid: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.Priority*
-  name: Priority
-  href: api/XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.html#XRTK_Definitions_InputSystem_ControllerDataProviderConfiguration_Priority_
-  commentId: Overload:XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.Priority
-  isSpec: "True"
-  fullName: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.Priority
-  nameWithType: ControllerDataProviderConfiguration.Priority
-- uid: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.Profile
-  name: Profile
-  href: api/XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.html#XRTK_Definitions_InputSystem_ControllerDataProviderConfiguration_Profile
-  commentId: P:XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.Profile
-  fullName: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.Profile
-  nameWithType: ControllerDataProviderConfiguration.Profile
-- uid: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.Profile*
-  name: Profile
-  href: api/XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.html#XRTK_Definitions_InputSystem_ControllerDataProviderConfiguration_Profile_
-  commentId: Overload:XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.Profile
-  isSpec: "True"
-  fullName: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.Profile
-  nameWithType: ControllerDataProviderConfiguration.Profile
-- uid: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.RuntimePlatform
-  name: RuntimePlatform
-  href: api/XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.html#XRTK_Definitions_InputSystem_ControllerDataProviderConfiguration_RuntimePlatform
-  commentId: P:XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.RuntimePlatform
-  fullName: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.RuntimePlatform
-  nameWithType: ControllerDataProviderConfiguration.RuntimePlatform
-- uid: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.RuntimePlatform*
-  name: RuntimePlatform
-  href: api/XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.html#XRTK_Definitions_InputSystem_ControllerDataProviderConfiguration_RuntimePlatform_
-  commentId: Overload:XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.RuntimePlatform
-  isSpec: "True"
-  fullName: XRTK.Definitions.InputSystem.ControllerDataProviderConfiguration.RuntimePlatform
-  nameWithType: ControllerDataProviderConfiguration.RuntimePlatform
 - uid: XRTK.Definitions.InputSystem.CursorStateEnum
   name: CursorStateEnum
   href: api/XRTK.Definitions.InputSystem.CursorStateEnum.html
@@ -4885,31 +4620,18 @@ references:
   commentId: T:XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile
   fullName: XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile
   nameWithType: MixedRealityRegisteredServiceProvidersProfile
-- uid: XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile.Configurations
-  name: Configurations
-  href: api/XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile.html#XRTK_Definitions_MixedRealityRegisteredServiceProvidersProfile_Configurations
-  commentId: P:XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile.Configurations
-  fullName: XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile.Configurations
-  nameWithType: MixedRealityRegisteredServiceProvidersProfile.Configurations
-- uid: XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile.Configurations*
-  name: Configurations
-  href: api/XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile.html#XRTK_Definitions_MixedRealityRegisteredServiceProvidersProfile_Configurations_
-  commentId: Overload:XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile.Configurations
-  isSpec: "True"
-  fullName: XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile.Configurations
-  nameWithType: MixedRealityRegisteredServiceProvidersProfile.Configurations
 - uid: XRTK.Definitions.MixedRealityServiceConfiguration
   name: MixedRealityServiceConfiguration
   href: api/XRTK.Definitions.MixedRealityServiceConfiguration.html
   commentId: T:XRTK.Definitions.MixedRealityServiceConfiguration
   fullName: XRTK.Definitions.MixedRealityServiceConfiguration
   nameWithType: MixedRealityServiceConfiguration
-- uid: XRTK.Definitions.MixedRealityServiceConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Definitions.BaseMixedRealityExtensionServiceProfile)
-  name: MixedRealityServiceConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityExtensionServiceProfile)
-  href: api/XRTK.Definitions.MixedRealityServiceConfiguration.html#XRTK_Definitions_MixedRealityServiceConfiguration__ctor_XRTK_Definitions_Utilities_SystemType_System_String_System_UInt32_XRTK_Definitions_Utilities_SupportedPlatforms_XRTK_Definitions_BaseMixedRealityExtensionServiceProfile_
-  commentId: M:XRTK.Definitions.MixedRealityServiceConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Definitions.BaseMixedRealityExtensionServiceProfile)
-  fullName: XRTK.Definitions.MixedRealityServiceConfiguration.MixedRealityServiceConfiguration(XRTK.Definitions.Utilities.SystemType, System.String, System.UInt32, XRTK.Definitions.Utilities.SupportedPlatforms, XRTK.Definitions.BaseMixedRealityExtensionServiceProfile)
-  nameWithType: MixedRealityServiceConfiguration.MixedRealityServiceConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityExtensionServiceProfile)
+- uid: XRTK.Definitions.MixedRealityServiceConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Definitions.BaseMixedRealityProfile)
+  name: MixedRealityServiceConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityProfile)
+  href: api/XRTK.Definitions.MixedRealityServiceConfiguration.html#XRTK_Definitions_MixedRealityServiceConfiguration__ctor_XRTK_Definitions_Utilities_SystemType_System_String_System_UInt32_XRTK_Definitions_Utilities_SupportedPlatforms_XRTK_Definitions_BaseMixedRealityProfile_
+  commentId: M:XRTK.Definitions.MixedRealityServiceConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Definitions.BaseMixedRealityProfile)
+  fullName: XRTK.Definitions.MixedRealityServiceConfiguration.MixedRealityServiceConfiguration(XRTK.Definitions.Utilities.SystemType, System.String, System.UInt32, XRTK.Definitions.Utilities.SupportedPlatforms, XRTK.Definitions.BaseMixedRealityProfile)
+  nameWithType: MixedRealityServiceConfiguration.MixedRealityServiceConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityProfile)
 - uid: XRTK.Definitions.MixedRealityServiceConfiguration.#ctor*
   name: MixedRealityServiceConfiguration
   href: api/XRTK.Definitions.MixedRealityServiceConfiguration.html#XRTK_Definitions_MixedRealityServiceConfiguration__ctor_
@@ -4917,32 +4639,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.MixedRealityServiceConfiguration.MixedRealityServiceConfiguration
   nameWithType: MixedRealityServiceConfiguration.MixedRealityServiceConfiguration
-- uid: XRTK.Definitions.MixedRealityServiceConfiguration.ComponentName
-  name: ComponentName
-  href: api/XRTK.Definitions.MixedRealityServiceConfiguration.html#XRTK_Definitions_MixedRealityServiceConfiguration_ComponentName
-  commentId: P:XRTK.Definitions.MixedRealityServiceConfiguration.ComponentName
-  fullName: XRTK.Definitions.MixedRealityServiceConfiguration.ComponentName
-  nameWithType: MixedRealityServiceConfiguration.ComponentName
-- uid: XRTK.Definitions.MixedRealityServiceConfiguration.ComponentName*
-  name: ComponentName
-  href: api/XRTK.Definitions.MixedRealityServiceConfiguration.html#XRTK_Definitions_MixedRealityServiceConfiguration_ComponentName_
-  commentId: Overload:XRTK.Definitions.MixedRealityServiceConfiguration.ComponentName
-  isSpec: "True"
-  fullName: XRTK.Definitions.MixedRealityServiceConfiguration.ComponentName
-  nameWithType: MixedRealityServiceConfiguration.ComponentName
-- uid: XRTK.Definitions.MixedRealityServiceConfiguration.ComponentType
-  name: ComponentType
-  href: api/XRTK.Definitions.MixedRealityServiceConfiguration.html#XRTK_Definitions_MixedRealityServiceConfiguration_ComponentType
-  commentId: P:XRTK.Definitions.MixedRealityServiceConfiguration.ComponentType
-  fullName: XRTK.Definitions.MixedRealityServiceConfiguration.ComponentType
-  nameWithType: MixedRealityServiceConfiguration.ComponentType
-- uid: XRTK.Definitions.MixedRealityServiceConfiguration.ComponentType*
-  name: ComponentType
-  href: api/XRTK.Definitions.MixedRealityServiceConfiguration.html#XRTK_Definitions_MixedRealityServiceConfiguration_ComponentType_
-  commentId: Overload:XRTK.Definitions.MixedRealityServiceConfiguration.ComponentType
-  isSpec: "True"
-  fullName: XRTK.Definitions.MixedRealityServiceConfiguration.ComponentType
-  nameWithType: MixedRealityServiceConfiguration.ComponentType
 - uid: XRTK.Definitions.MixedRealityServiceConfiguration.ConfigurationProfile
   name: ConfigurationProfile
   href: api/XRTK.Definitions.MixedRealityServiceConfiguration.html#XRTK_Definitions_MixedRealityServiceConfiguration_ConfigurationProfile
@@ -4956,6 +4652,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.MixedRealityServiceConfiguration.ConfigurationProfile
   nameWithType: MixedRealityServiceConfiguration.ConfigurationProfile
+- uid: XRTK.Definitions.MixedRealityServiceConfiguration.InstancedType
+  name: InstancedType
+  href: api/XRTK.Definitions.MixedRealityServiceConfiguration.html#XRTK_Definitions_MixedRealityServiceConfiguration_InstancedType
+  commentId: P:XRTK.Definitions.MixedRealityServiceConfiguration.InstancedType
+  fullName: XRTK.Definitions.MixedRealityServiceConfiguration.InstancedType
+  nameWithType: MixedRealityServiceConfiguration.InstancedType
+- uid: XRTK.Definitions.MixedRealityServiceConfiguration.InstancedType*
+  name: InstancedType
+  href: api/XRTK.Definitions.MixedRealityServiceConfiguration.html#XRTK_Definitions_MixedRealityServiceConfiguration_InstancedType_
+  commentId: Overload:XRTK.Definitions.MixedRealityServiceConfiguration.InstancedType
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityServiceConfiguration.InstancedType
+  nameWithType: MixedRealityServiceConfiguration.InstancedType
+- uid: XRTK.Definitions.MixedRealityServiceConfiguration.Name
+  name: Name
+  href: api/XRTK.Definitions.MixedRealityServiceConfiguration.html#XRTK_Definitions_MixedRealityServiceConfiguration_Name
+  commentId: P:XRTK.Definitions.MixedRealityServiceConfiguration.Name
+  fullName: XRTK.Definitions.MixedRealityServiceConfiguration.Name
+  nameWithType: MixedRealityServiceConfiguration.Name
+- uid: XRTK.Definitions.MixedRealityServiceConfiguration.Name*
+  name: Name
+  href: api/XRTK.Definitions.MixedRealityServiceConfiguration.html#XRTK_Definitions_MixedRealityServiceConfiguration_Name_
+  commentId: Overload:XRTK.Definitions.MixedRealityServiceConfiguration.Name
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityServiceConfiguration.Name
+  nameWithType: MixedRealityServiceConfiguration.Name
 - uid: XRTK.Definitions.MixedRealityServiceConfiguration.Priority
   name: Priority
   href: api/XRTK.Definitions.MixedRealityServiceConfiguration.html#XRTK_Definitions_MixedRealityServiceConfiguration_Priority
@@ -4982,6 +4704,32 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.MixedRealityServiceConfiguration.RuntimePlatform
   nameWithType: MixedRealityServiceConfiguration.RuntimePlatform
+- uid: XRTK.Definitions.MixedRealityServiceConfiguration`1
+  name: MixedRealityServiceConfiguration<T>
+  href: api/XRTK.Definitions.MixedRealityServiceConfiguration-1.html
+  commentId: T:XRTK.Definitions.MixedRealityServiceConfiguration`1
+  name.vb: MixedRealityServiceConfiguration(Of T)
+  fullName: XRTK.Definitions.MixedRealityServiceConfiguration<T>
+  fullName.vb: XRTK.Definitions.MixedRealityServiceConfiguration(Of T)
+  nameWithType: MixedRealityServiceConfiguration<T>
+  nameWithType.vb: MixedRealityServiceConfiguration(Of T)
+- uid: XRTK.Definitions.MixedRealityServiceConfiguration`1.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Definitions.BaseMixedRealityProfile)
+  name: MixedRealityServiceConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityProfile)
+  href: api/XRTK.Definitions.MixedRealityServiceConfiguration-1.html#XRTK_Definitions_MixedRealityServiceConfiguration_1__ctor_XRTK_Definitions_Utilities_SystemType_System_String_System_UInt32_XRTK_Definitions_Utilities_SupportedPlatforms_XRTK_Definitions_BaseMixedRealityProfile_
+  commentId: M:XRTK.Definitions.MixedRealityServiceConfiguration`1.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Definitions.BaseMixedRealityProfile)
+  fullName: XRTK.Definitions.MixedRealityServiceConfiguration<T>.MixedRealityServiceConfiguration(XRTK.Definitions.Utilities.SystemType, System.String, System.UInt32, XRTK.Definitions.Utilities.SupportedPlatforms, XRTK.Definitions.BaseMixedRealityProfile)
+  fullName.vb: XRTK.Definitions.MixedRealityServiceConfiguration(Of T).MixedRealityServiceConfiguration(XRTK.Definitions.Utilities.SystemType, System.String, System.UInt32, XRTK.Definitions.Utilities.SupportedPlatforms, XRTK.Definitions.BaseMixedRealityProfile)
+  nameWithType: MixedRealityServiceConfiguration<T>.MixedRealityServiceConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityProfile)
+  nameWithType.vb: MixedRealityServiceConfiguration(Of T).MixedRealityServiceConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityProfile)
+- uid: XRTK.Definitions.MixedRealityServiceConfiguration`1.#ctor*
+  name: MixedRealityServiceConfiguration
+  href: api/XRTK.Definitions.MixedRealityServiceConfiguration-1.html#XRTK_Definitions_MixedRealityServiceConfiguration_1__ctor_
+  commentId: Overload:XRTK.Definitions.MixedRealityServiceConfiguration`1.#ctor
+  isSpec: "True"
+  fullName: XRTK.Definitions.MixedRealityServiceConfiguration<T>.MixedRealityServiceConfiguration
+  fullName.vb: XRTK.Definitions.MixedRealityServiceConfiguration(Of T).MixedRealityServiceConfiguration
+  nameWithType: MixedRealityServiceConfiguration<T>.MixedRealityServiceConfiguration
+  nameWithType.vb: MixedRealityServiceConfiguration(Of T).MixedRealityServiceConfiguration
 - uid: XRTK.Definitions.MixedRealityToolkitConfigurationProfile
   name: MixedRealityToolkitConfigurationProfile
   href: api/XRTK.Definitions.MixedRealityToolkitConfigurationProfile.html
@@ -5273,103 +5021,6 @@ references:
   commentId: T:XRTK.Definitions.NetworkingSystem.MixedRealityNetworkSystemProfile
   fullName: XRTK.Definitions.NetworkingSystem.MixedRealityNetworkSystemProfile
   nameWithType: MixedRealityNetworkSystemProfile
-- uid: XRTK.Definitions.NetworkingSystem.MixedRealityNetworkSystemProfile.RegisteredNetworkDataProviders
-  name: RegisteredNetworkDataProviders
-  href: api/XRTK.Definitions.NetworkingSystem.MixedRealityNetworkSystemProfile.html#XRTK_Definitions_NetworkingSystem_MixedRealityNetworkSystemProfile_RegisteredNetworkDataProviders
-  commentId: P:XRTK.Definitions.NetworkingSystem.MixedRealityNetworkSystemProfile.RegisteredNetworkDataProviders
-  fullName: XRTK.Definitions.NetworkingSystem.MixedRealityNetworkSystemProfile.RegisteredNetworkDataProviders
-  nameWithType: MixedRealityNetworkSystemProfile.RegisteredNetworkDataProviders
-- uid: XRTK.Definitions.NetworkingSystem.MixedRealityNetworkSystemProfile.RegisteredNetworkDataProviders*
-  name: RegisteredNetworkDataProviders
-  href: api/XRTK.Definitions.NetworkingSystem.MixedRealityNetworkSystemProfile.html#XRTK_Definitions_NetworkingSystem_MixedRealityNetworkSystemProfile_RegisteredNetworkDataProviders_
-  commentId: Overload:XRTK.Definitions.NetworkingSystem.MixedRealityNetworkSystemProfile.RegisteredNetworkDataProviders
-  isSpec: "True"
-  fullName: XRTK.Definitions.NetworkingSystem.MixedRealityNetworkSystemProfile.RegisteredNetworkDataProviders
-  nameWithType: MixedRealityNetworkSystemProfile.RegisteredNetworkDataProviders
-- uid: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration
-  name: NetworkDataProviderConfiguration
-  href: api/XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.html
-  commentId: T:XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration
-  fullName: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration
-  nameWithType: NetworkDataProviderConfiguration
-- uid: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Providers.Networking.Profiles.BaseMixedRealityNetworkProviderProfile)
-  name: NetworkDataProviderConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityNetworkProviderProfile)
-  href: api/XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.html#XRTK_Definitions_NetworkingSystem_NetworkDataProviderConfiguration__ctor_XRTK_Definitions_Utilities_SystemType_System_String_System_UInt32_XRTK_Definitions_Utilities_SupportedPlatforms_XRTK_Providers_Networking_Profiles_BaseMixedRealityNetworkProviderProfile_
-  commentId: M:XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Providers.Networking.Profiles.BaseMixedRealityNetworkProviderProfile)
-  fullName: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.NetworkDataProviderConfiguration(XRTK.Definitions.Utilities.SystemType, System.String, System.UInt32, XRTK.Definitions.Utilities.SupportedPlatforms, XRTK.Providers.Networking.Profiles.BaseMixedRealityNetworkProviderProfile)
-  nameWithType: NetworkDataProviderConfiguration.NetworkDataProviderConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealityNetworkProviderProfile)
-- uid: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.#ctor*
-  name: NetworkDataProviderConfiguration
-  href: api/XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.html#XRTK_Definitions_NetworkingSystem_NetworkDataProviderConfiguration__ctor_
-  commentId: Overload:XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.#ctor
-  isSpec: "True"
-  fullName: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.NetworkDataProviderConfiguration
-  nameWithType: NetworkDataProviderConfiguration.NetworkDataProviderConfiguration
-- uid: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.DataProviderName
-  name: DataProviderName
-  href: api/XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.html#XRTK_Definitions_NetworkingSystem_NetworkDataProviderConfiguration_DataProviderName
-  commentId: P:XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.DataProviderName
-  fullName: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.DataProviderName
-  nameWithType: NetworkDataProviderConfiguration.DataProviderName
-- uid: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.DataProviderName*
-  name: DataProviderName
-  href: api/XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.html#XRTK_Definitions_NetworkingSystem_NetworkDataProviderConfiguration_DataProviderName_
-  commentId: Overload:XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.DataProviderName
-  isSpec: "True"
-  fullName: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.DataProviderName
-  nameWithType: NetworkDataProviderConfiguration.DataProviderName
-- uid: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.DataProviderType
-  name: DataProviderType
-  href: api/XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.html#XRTK_Definitions_NetworkingSystem_NetworkDataProviderConfiguration_DataProviderType
-  commentId: P:XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.DataProviderType
-  fullName: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.DataProviderType
-  nameWithType: NetworkDataProviderConfiguration.DataProviderType
-- uid: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.DataProviderType*
-  name: DataProviderType
-  href: api/XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.html#XRTK_Definitions_NetworkingSystem_NetworkDataProviderConfiguration_DataProviderType_
-  commentId: Overload:XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.DataProviderType
-  isSpec: "True"
-  fullName: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.DataProviderType
-  nameWithType: NetworkDataProviderConfiguration.DataProviderType
-- uid: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.Priority
-  name: Priority
-  href: api/XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.html#XRTK_Definitions_NetworkingSystem_NetworkDataProviderConfiguration_Priority
-  commentId: P:XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.Priority
-  fullName: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.Priority
-  nameWithType: NetworkDataProviderConfiguration.Priority
-- uid: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.Priority*
-  name: Priority
-  href: api/XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.html#XRTK_Definitions_NetworkingSystem_NetworkDataProviderConfiguration_Priority_
-  commentId: Overload:XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.Priority
-  isSpec: "True"
-  fullName: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.Priority
-  nameWithType: NetworkDataProviderConfiguration.Priority
-- uid: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.Profile
-  name: Profile
-  href: api/XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.html#XRTK_Definitions_NetworkingSystem_NetworkDataProviderConfiguration_Profile
-  commentId: P:XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.Profile
-  fullName: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.Profile
-  nameWithType: NetworkDataProviderConfiguration.Profile
-- uid: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.Profile*
-  name: Profile
-  href: api/XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.html#XRTK_Definitions_NetworkingSystem_NetworkDataProviderConfiguration_Profile_
-  commentId: Overload:XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.Profile
-  isSpec: "True"
-  fullName: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.Profile
-  nameWithType: NetworkDataProviderConfiguration.Profile
-- uid: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.RuntimePlatform
-  name: RuntimePlatform
-  href: api/XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.html#XRTK_Definitions_NetworkingSystem_NetworkDataProviderConfiguration_RuntimePlatform
-  commentId: P:XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.RuntimePlatform
-  fullName: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.RuntimePlatform
-  nameWithType: NetworkDataProviderConfiguration.RuntimePlatform
-- uid: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.RuntimePlatform*
-  name: RuntimePlatform
-  href: api/XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.html#XRTK_Definitions_NetworkingSystem_NetworkDataProviderConfiguration_RuntimePlatform_
-  commentId: Overload:XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.RuntimePlatform
-  isSpec: "True"
-  fullName: XRTK.Definitions.NetworkingSystem.NetworkDataProviderConfiguration.RuntimePlatform
-  nameWithType: NetworkDataProviderConfiguration.RuntimePlatform
 - uid: XRTK.Definitions.Physics
   name: XRTK.Definitions.Physics
   href: api/XRTK.Definitions.Physics.html
@@ -5795,19 +5446,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.MeshDisplayOption
   nameWithType: MixedRealitySpatialAwarenessSystemProfile.MeshDisplayOption
-- uid: XRTK.Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.RegisteredSpatialObserverDataProviders
-  name: RegisteredSpatialObserverDataProviders
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.html#XRTK_Definitions_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystemProfile_RegisteredSpatialObserverDataProviders
-  commentId: P:XRTK.Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.RegisteredSpatialObserverDataProviders
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.RegisteredSpatialObserverDataProviders
-  nameWithType: MixedRealitySpatialAwarenessSystemProfile.RegisteredSpatialObserverDataProviders
-- uid: XRTK.Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.RegisteredSpatialObserverDataProviders*
-  name: RegisteredSpatialObserverDataProviders
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.html#XRTK_Definitions_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystemProfile_RegisteredSpatialObserverDataProviders_
-  commentId: Overload:XRTK.Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.RegisteredSpatialObserverDataProviders
-  isSpec: "True"
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.RegisteredSpatialObserverDataProviders
-  nameWithType: MixedRealitySpatialAwarenessSystemProfile.RegisteredSpatialObserverDataProviders
 - uid: XRTK.Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.SpatialAwarenessMeshesLayerName
   name: SpatialAwarenessMeshesLayerName
   href: api/XRTK.Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.html#XRTK_Definitions_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystemProfile_SpatialAwarenessMeshesLayerName
@@ -6007,90 +5645,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialMeshObject.Renderer
   nameWithType: SpatialMeshObject.Renderer
-- uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration
-  name: SpatialObserverDataProviderConfiguration
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.html
-  commentId: T:XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration
-  nameWithType: SpatialObserverDataProviderConfiguration
-- uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverProfile)
-  name: SpatialObserverDataProviderConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealitySpatialObserverProfile)
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.html#XRTK_Definitions_SpatialAwarenessSystem_SpatialObserverDataProviderConfiguration__ctor_XRTK_Definitions_Utilities_SystemType_System_String_System_UInt32_XRTK_Definitions_Utilities_SupportedPlatforms_XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverProfile_
-  commentId: M:XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.#ctor(XRTK.Definitions.Utilities.SystemType,System.String,System.UInt32,XRTK.Definitions.Utilities.SupportedPlatforms,XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverProfile)
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.SpatialObserverDataProviderConfiguration(XRTK.Definitions.Utilities.SystemType, System.String, System.UInt32, XRTK.Definitions.Utilities.SupportedPlatforms, XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverProfile)
-  nameWithType: SpatialObserverDataProviderConfiguration.SpatialObserverDataProviderConfiguration(SystemType, String, UInt32, SupportedPlatforms, BaseMixedRealitySpatialObserverProfile)
-- uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.#ctor*
-  name: SpatialObserverDataProviderConfiguration
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.html#XRTK_Definitions_SpatialAwarenessSystem_SpatialObserverDataProviderConfiguration__ctor_
-  commentId: Overload:XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.#ctor
-  isSpec: "True"
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.SpatialObserverDataProviderConfiguration
-  nameWithType: SpatialObserverDataProviderConfiguration.SpatialObserverDataProviderConfiguration
-- uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.Priority
-  name: Priority
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.html#XRTK_Definitions_SpatialAwarenessSystem_SpatialObserverDataProviderConfiguration_Priority
-  commentId: P:XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.Priority
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.Priority
-  nameWithType: SpatialObserverDataProviderConfiguration.Priority
-- uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.Priority*
-  name: Priority
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.html#XRTK_Definitions_SpatialAwarenessSystem_SpatialObserverDataProviderConfiguration_Priority_
-  commentId: Overload:XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.Priority
-  isSpec: "True"
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.Priority
-  nameWithType: SpatialObserverDataProviderConfiguration.Priority
-- uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.Profile
-  name: Profile
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.html#XRTK_Definitions_SpatialAwarenessSystem_SpatialObserverDataProviderConfiguration_Profile
-  commentId: P:XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.Profile
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.Profile
-  nameWithType: SpatialObserverDataProviderConfiguration.Profile
-- uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.Profile*
-  name: Profile
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.html#XRTK_Definitions_SpatialAwarenessSystem_SpatialObserverDataProviderConfiguration_Profile_
-  commentId: Overload:XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.Profile
-  isSpec: "True"
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.Profile
-  nameWithType: SpatialObserverDataProviderConfiguration.Profile
-- uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.RuntimePlatform
-  name: RuntimePlatform
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.html#XRTK_Definitions_SpatialAwarenessSystem_SpatialObserverDataProviderConfiguration_RuntimePlatform
-  commentId: P:XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.RuntimePlatform
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.RuntimePlatform
-  nameWithType: SpatialObserverDataProviderConfiguration.RuntimePlatform
-- uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.RuntimePlatform*
-  name: RuntimePlatform
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.html#XRTK_Definitions_SpatialAwarenessSystem_SpatialObserverDataProviderConfiguration_RuntimePlatform_
-  commentId: Overload:XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.RuntimePlatform
-  isSpec: "True"
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.RuntimePlatform
-  nameWithType: SpatialObserverDataProviderConfiguration.RuntimePlatform
-- uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.SpatialObserverName
-  name: SpatialObserverName
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.html#XRTK_Definitions_SpatialAwarenessSystem_SpatialObserverDataProviderConfiguration_SpatialObserverName
-  commentId: P:XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.SpatialObserverName
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.SpatialObserverName
-  nameWithType: SpatialObserverDataProviderConfiguration.SpatialObserverName
-- uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.SpatialObserverName*
-  name: SpatialObserverName
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.html#XRTK_Definitions_SpatialAwarenessSystem_SpatialObserverDataProviderConfiguration_SpatialObserverName_
-  commentId: Overload:XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.SpatialObserverName
-  isSpec: "True"
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.SpatialObserverName
-  nameWithType: SpatialObserverDataProviderConfiguration.SpatialObserverName
-- uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.SpatialObserverType
-  name: SpatialObserverType
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.html#XRTK_Definitions_SpatialAwarenessSystem_SpatialObserverDataProviderConfiguration_SpatialObserverType
-  commentId: P:XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.SpatialObserverType
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.SpatialObserverType
-  nameWithType: SpatialObserverDataProviderConfiguration.SpatialObserverType
-- uid: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.SpatialObserverType*
-  name: SpatialObserverType
-  href: api/XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.html#XRTK_Definitions_SpatialAwarenessSystem_SpatialObserverDataProviderConfiguration_SpatialObserverType_
-  commentId: Overload:XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.SpatialObserverType
-  isSpec: "True"
-  fullName: XRTK.Definitions.SpatialAwarenessSystem.SpatialObserverDataProviderConfiguration.SpatialObserverType
-  nameWithType: SpatialObserverDataProviderConfiguration.SpatialObserverType
 - uid: XRTK.Definitions.Utilities
   name: XRTK.Definitions.Utilities
   href: api/XRTK.Definitions.Utilities.html
@@ -8896,6 +8450,38 @@ references:
   commentId: T:XRTK.Extensions.ArrayExtensions
   fullName: XRTK.Extensions.ArrayExtensions
   nameWithType: ArrayExtensions
+- uid: XRTK.Extensions.ArrayExtensions.AddItem*
+  name: AddItem
+  href: api/XRTK.Extensions.ArrayExtensions.html#XRTK_Extensions_ArrayExtensions_AddItem_
+  commentId: Overload:XRTK.Extensions.ArrayExtensions.AddItem
+  isSpec: "True"
+  fullName: XRTK.Extensions.ArrayExtensions.AddItem
+  nameWithType: ArrayExtensions.AddItem
+- uid: XRTK.Extensions.ArrayExtensions.AddItem``1(``0[],``0)
+  name: AddItem<T>(T[], T)
+  href: api/XRTK.Extensions.ArrayExtensions.html#XRTK_Extensions_ArrayExtensions_AddItem__1___0_____0_
+  commentId: M:XRTK.Extensions.ArrayExtensions.AddItem``1(``0[],``0)
+  name.vb: AddItem(Of T)(T(), T)
+  fullName: XRTK.Extensions.ArrayExtensions.AddItem<T>(T[], T)
+  fullName.vb: XRTK.Extensions.ArrayExtensions.AddItem(Of T)(T(), T)
+  nameWithType: ArrayExtensions.AddItem<T>(T[], T)
+  nameWithType.vb: ArrayExtensions.AddItem(Of T)(T(), T)
+- uid: XRTK.Extensions.ArrayExtensions.InitialiseArray*
+  name: InitialiseArray
+  href: api/XRTK.Extensions.ArrayExtensions.html#XRTK_Extensions_ArrayExtensions_InitialiseArray_
+  commentId: Overload:XRTK.Extensions.ArrayExtensions.InitialiseArray
+  isSpec: "True"
+  fullName: XRTK.Extensions.ArrayExtensions.InitialiseArray
+  nameWithType: ArrayExtensions.InitialiseArray
+- uid: XRTK.Extensions.ArrayExtensions.InitialiseArray``1(``0[],``0)
+  name: InitialiseArray<T>(T[], T)
+  href: api/XRTK.Extensions.ArrayExtensions.html#XRTK_Extensions_ArrayExtensions_InitialiseArray__1___0_____0_
+  commentId: M:XRTK.Extensions.ArrayExtensions.InitialiseArray``1(``0[],``0)
+  name.vb: InitialiseArray(Of T)(T(), T)
+  fullName: XRTK.Extensions.ArrayExtensions.InitialiseArray<T>(T[], T)
+  fullName.vb: XRTK.Extensions.ArrayExtensions.InitialiseArray(Of T)(T(), T)
+  nameWithType: ArrayExtensions.InitialiseArray<T>(T[], T)
+  nameWithType.vb: ArrayExtensions.InitialiseArray(Of T)(T(), T)
 - uid: XRTK.Extensions.ArrayExtensions.IsValidArray(System.Array)
   name: IsValidArray(Array)
   href: api/XRTK.Extensions.ArrayExtensions.html#XRTK_Extensions_ArrayExtensions_IsValidArray_System_Array_
@@ -9861,28 +9447,6 @@ references:
   fullName.vb: XRTK.Extensions.ConverterExtensions.GetBuiltInTypeValueFromBytes(Of T)(System.Byte())
   nameWithType: ConverterExtensions.GetBuiltInTypeValueFromBytes<T>(Byte[])
   nameWithType.vb: ConverterExtensions.GetBuiltInTypeValueFromBytes(Of T)(Byte())
-- uid: XRTK.Extensions.DataModelConfigurationExtensions
-  name: DataModelConfigurationExtensions
-  href: api/XRTK.Extensions.DataModelConfigurationExtensions.html
-  commentId: T:XRTK.Extensions.DataModelConfigurationExtensions
-  fullName: XRTK.Extensions.DataModelConfigurationExtensions
-  nameWithType: DataModelConfigurationExtensions
-- uid: XRTK.Extensions.DataModelConfigurationExtensions.TryGetConfigurationName*
-  name: TryGetConfigurationName
-  href: api/XRTK.Extensions.DataModelConfigurationExtensions.html#XRTK_Extensions_DataModelConfigurationExtensions_TryGetConfigurationName_
-  commentId: Overload:XRTK.Extensions.DataModelConfigurationExtensions.TryGetConfigurationName
-  isSpec: "True"
-  fullName: XRTK.Extensions.DataModelConfigurationExtensions.TryGetConfigurationName
-  nameWithType: DataModelConfigurationExtensions.TryGetConfigurationName
-- uid: XRTK.Extensions.DataModelConfigurationExtensions.TryGetConfigurationName``1(XRTK.Definitions.DataModelConfiguration[],System.String@)
-  name: TryGetConfigurationName<T>(DataModelConfiguration[], out String)
-  href: api/XRTK.Extensions.DataModelConfigurationExtensions.html#XRTK_Extensions_DataModelConfigurationExtensions_TryGetConfigurationName__1_XRTK_Definitions_DataModelConfiguration___System_String__
-  commentId: M:XRTK.Extensions.DataModelConfigurationExtensions.TryGetConfigurationName``1(XRTK.Definitions.DataModelConfiguration[],System.String@)
-  name.vb: TryGetConfigurationName(Of T)(DataModelConfiguration(), ByRef String)
-  fullName: XRTK.Extensions.DataModelConfigurationExtensions.TryGetConfigurationName<T>(XRTK.Definitions.DataModelConfiguration[], out System.String)
-  fullName.vb: XRTK.Extensions.DataModelConfigurationExtensions.TryGetConfigurationName(Of T)(XRTK.Definitions.DataModelConfiguration(), ByRef System.String)
-  nameWithType: DataModelConfigurationExtensions.TryGetConfigurationName<T>(DataModelConfiguration[], out String)
-  nameWithType.vb: DataModelConfigurationExtensions.TryGetConfigurationName(Of T)(DataModelConfiguration(), ByRef String)
 - uid: XRTK.Extensions.DoubleExtensions
   name: DoubleExtensions
   href: api/XRTK.Extensions.DoubleExtensions.html
@@ -13086,12 +12650,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.RenderProfile
   nameWithType: BaseMixedRealityProfileInspector.RenderProfile
-- uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.thisProfile
-  name: thisProfile
-  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_thisProfile
-  commentId: F:XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.thisProfile
-  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.thisProfile
-  nameWithType: BaseMixedRealityProfileInspector.thisProfile
+- uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.ThisProfile
+  name: ThisProfile
+  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_ThisProfile
+  commentId: P:XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.ThisProfile
+  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.ThisProfile
+  nameWithType: BaseMixedRealityProfileInspector.ThisProfile
+- uid: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.ThisProfile*
+  name: ThisProfile
+  href: api/XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.html#XRTK_Inspectors_Profiles_BaseMixedRealityProfileInspector_ThisProfile_
+  commentId: Overload:XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.ThisProfile
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.BaseMixedRealityProfileInspector.ThisProfile
+  nameWithType: BaseMixedRealityProfileInspector.ThisProfile
 - uid: XRTK.Inspectors.Profiles.BaseMixedRealityToolkitInspector
   name: BaseMixedRealityToolkitInspector
   href: api/XRTK.Inspectors.Profiles.BaseMixedRealityToolkitInspector.html
@@ -13265,38 +12836,25 @@ references:
   commentId: T:XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.XboxControllerMappingProfileInspector
   fullName: XRTK.Inspectors.Profiles.InputSystem.Controllers.UnityInput.XboxControllerMappingProfileInspector
   nameWithType: XboxControllerMappingProfileInspector
-- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector
-  name: MixedRealityControllerDataProviderProfileInspector
-  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.html
-  commentId: T:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector
-  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector
-  nameWithType: MixedRealityControllerDataProviderProfileInspector
-- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnEnable
-  name: OnEnable()
-  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerDataProviderProfileInspector_OnEnable
-  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnEnable
-  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnEnable()
-  nameWithType: MixedRealityControllerDataProviderProfileInspector.OnEnable()
-- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnEnable*
-  name: OnEnable
-  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerDataProviderProfileInspector_OnEnable_
-  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnEnable
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnEnable
-  nameWithType: MixedRealityControllerDataProviderProfileInspector.OnEnable
-- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProvidersProfileInspector
+  name: MixedRealityControllerDataProvidersProfileInspector
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProvidersProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProvidersProfileInspector
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProvidersProfileInspector
+  nameWithType: MixedRealityControllerDataProvidersProfileInspector
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProvidersProfileInspector.OnInspectorGUI
   name: OnInspectorGUI()
-  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerDataProviderProfileInspector_OnInspectorGUI
-  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
-  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI()
-  nameWithType: MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI()
-- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI*
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProvidersProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerDataProvidersProfileInspector_OnInspectorGUI
+  commentId: M:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProvidersProfileInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProvidersProfileInspector.OnInspectorGUI()
+  nameWithType: MixedRealityControllerDataProvidersProfileInspector.OnInspectorGUI()
+- uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProvidersProfileInspector.OnInspectorGUI*
   name: OnInspectorGUI
-  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerDataProviderProfileInspector_OnInspectorGUI_
-  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
+  href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProvidersProfileInspector.html#XRTK_Inspectors_Profiles_InputSystem_MixedRealityControllerDataProvidersProfileInspector_OnInspectorGUI_
+  commentId: Overload:XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProvidersProfileInspector.OnInspectorGUI
   isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
-  nameWithType: MixedRealityControllerDataProviderProfileInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerDataProvidersProfileInspector.OnInspectorGUI
+  nameWithType: MixedRealityControllerDataProvidersProfileInspector.OnInspectorGUI
 - uid: XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector
   name: MixedRealityControllerMappingProfilesInspector
   href: api/XRTK.Inspectors.Profiles.InputSystem.MixedRealityControllerMappingProfilesInspector.html
@@ -13623,19 +13181,6 @@ references:
   commentId: T:XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector
   fullName: XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector
   nameWithType: MixedRealityNetworkSystemProfileInspector
-- uid: XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.OnEnable
-  name: OnEnable()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityNetworkSystemProfileInspector_OnEnable
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.OnEnable
-  fullName: XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.OnEnable()
-  nameWithType: MixedRealityNetworkSystemProfileInspector.OnEnable()
-- uid: XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.OnEnable*
-  name: OnEnable
-  href: api/XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityNetworkSystemProfileInspector_OnEnable_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.OnEnable
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.OnEnable
-  nameWithType: MixedRealityNetworkSystemProfileInspector.OnEnable
 - uid: XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.OnInspectorGUI
   name: OnInspectorGUI()
   href: api/XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityNetworkSystemProfileInspector_OnInspectorGUI
@@ -13649,38 +13194,70 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.Profiles.MixedRealityNetworkSystemProfileInspector.OnInspectorGUI
   nameWithType: MixedRealityNetworkSystemProfileInspector.OnInspectorGUI
-- uid: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector
-  name: MixedRealityRegisteredServiceProviderProfileInspector
-  href: api/XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.html
-  commentId: T:XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector
-  fullName: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector
-  nameWithType: MixedRealityRegisteredServiceProviderProfileInspector
-- uid: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.OnEnable
-  name: OnEnable()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityRegisteredServiceProviderProfileInspector_OnEnable
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.OnEnable
-  fullName: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.OnEnable()
-  nameWithType: MixedRealityRegisteredServiceProviderProfileInspector.OnEnable()
-- uid: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.OnEnable*
-  name: OnEnable
-  href: api/XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityRegisteredServiceProviderProfileInspector_OnEnable_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.OnEnable
-  isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.OnEnable
-  nameWithType: MixedRealityRegisteredServiceProviderProfileInspector.OnEnable
-- uid: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.OnInspectorGUI
+- uid: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProvidersProfileInspector
+  name: MixedRealityRegisteredServiceProvidersProfileInspector
+  href: api/XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProvidersProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProvidersProfileInspector
+  fullName: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProvidersProfileInspector
+  nameWithType: MixedRealityRegisteredServiceProvidersProfileInspector
+- uid: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProvidersProfileInspector.OnInspectorGUI
   name: OnInspectorGUI()
-  href: api/XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityRegisteredServiceProviderProfileInspector_OnInspectorGUI
-  commentId: M:XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.OnInspectorGUI
-  fullName: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.OnInspectorGUI()
-  nameWithType: MixedRealityRegisteredServiceProviderProfileInspector.OnInspectorGUI()
-- uid: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.OnInspectorGUI*
+  href: api/XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProvidersProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityRegisteredServiceProvidersProfileInspector_OnInspectorGUI
+  commentId: M:XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProvidersProfileInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProvidersProfileInspector.OnInspectorGUI()
+  nameWithType: MixedRealityRegisteredServiceProvidersProfileInspector.OnInspectorGUI()
+- uid: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProvidersProfileInspector.OnInspectorGUI*
   name: OnInspectorGUI
-  href: api/XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityRegisteredServiceProviderProfileInspector_OnInspectorGUI_
-  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.OnInspectorGUI
+  href: api/XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProvidersProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityRegisteredServiceProvidersProfileInspector_OnInspectorGUI_
+  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProvidersProfileInspector.OnInspectorGUI
   isSpec: "True"
-  fullName: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProviderProfileInspector.OnInspectorGUI
-  nameWithType: MixedRealityRegisteredServiceProviderProfileInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.MixedRealityRegisteredServiceProvidersProfileInspector.OnInspectorGUI
+  nameWithType: MixedRealityRegisteredServiceProvidersProfileInspector.OnInspectorGUI
+- uid: XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector
+  name: MixedRealityServiceProfileInspector
+  href: api/XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.html
+  commentId: T:XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector
+  fullName: XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector
+  nameWithType: MixedRealityServiceProfileInspector
+- uid: XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.OnEnable
+  name: OnEnable()
+  href: api/XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityServiceProfileInspector_OnEnable
+  commentId: M:XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.OnEnable
+  fullName: XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.OnEnable()
+  nameWithType: MixedRealityServiceProfileInspector.OnEnable()
+- uid: XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.OnEnable*
+  name: OnEnable
+  href: api/XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityServiceProfileInspector_OnEnable_
+  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.OnEnable
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.OnEnable
+  nameWithType: MixedRealityServiceProfileInspector.OnEnable
+- uid: XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.OnInspectorGUI
+  name: OnInspectorGUI()
+  href: api/XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityServiceProfileInspector_OnInspectorGUI
+  commentId: M:XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.OnInspectorGUI
+  fullName: XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.OnInspectorGUI()
+  nameWithType: MixedRealityServiceProfileInspector.OnInspectorGUI()
+- uid: XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.OnInspectorGUI*
+  name: OnInspectorGUI
+  href: api/XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityServiceProfileInspector_OnInspectorGUI_
+  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.OnInspectorGUI
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.OnInspectorGUI
+  nameWithType: MixedRealityServiceProfileInspector.OnInspectorGUI
+- uid: XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.ServiceConstraint
+  name: ServiceConstraint
+  href: api/XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityServiceProfileInspector_ServiceConstraint
+  commentId: P:XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.ServiceConstraint
+  fullName: XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.ServiceConstraint
+  nameWithType: MixedRealityServiceProfileInspector.ServiceConstraint
+- uid: XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.ServiceConstraint*
+  name: ServiceConstraint
+  href: api/XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.html#XRTK_Inspectors_Profiles_MixedRealityServiceProfileInspector_ServiceConstraint_
+  commentId: Overload:XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.ServiceConstraint
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Profiles.MixedRealityServiceProfileInspector.ServiceConstraint
+  nameWithType: MixedRealityServiceProfileInspector.ServiceConstraint
 - uid: XRTK.Inspectors.Profiles.MixedRealityToolkitConfigurationProfileInspector
   name: MixedRealityToolkitConfigurationProfileInspector
   href: api/XRTK.Inspectors.Profiles.MixedRealityToolkitConfigurationProfileInspector.html
@@ -13999,6 +13576,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Inspectors.PropertyDrawers.TypeReferencePropertyDrawer.ExcludedTypeCollectionGetter
   nameWithType: TypeReferencePropertyDrawer.ExcludedTypeCollectionGetter
+- uid: XRTK.Inspectors.PropertyDrawers.TypeReferencePropertyDrawer.FilterConstraintOverride
+  name: FilterConstraintOverride
+  href: api/XRTK.Inspectors.PropertyDrawers.TypeReferencePropertyDrawer.html#XRTK_Inspectors_PropertyDrawers_TypeReferencePropertyDrawer_FilterConstraintOverride
+  commentId: P:XRTK.Inspectors.PropertyDrawers.TypeReferencePropertyDrawer.FilterConstraintOverride
+  fullName: XRTK.Inspectors.PropertyDrawers.TypeReferencePropertyDrawer.FilterConstraintOverride
+  nameWithType: TypeReferencePropertyDrawer.FilterConstraintOverride
+- uid: XRTK.Inspectors.PropertyDrawers.TypeReferencePropertyDrawer.FilterConstraintOverride*
+  name: FilterConstraintOverride
+  href: api/XRTK.Inspectors.PropertyDrawers.TypeReferencePropertyDrawer.html#XRTK_Inspectors_PropertyDrawers_TypeReferencePropertyDrawer_FilterConstraintOverride_
+  commentId: Overload:XRTK.Inspectors.PropertyDrawers.TypeReferencePropertyDrawer.FilterConstraintOverride
+  isSpec: "True"
+  fullName: XRTK.Inspectors.PropertyDrawers.TypeReferencePropertyDrawer.FilterConstraintOverride
+  nameWithType: TypeReferencePropertyDrawer.FilterConstraintOverride
 - uid: XRTK.Inspectors.PropertyDrawers.TypeReferencePropertyDrawer.GetPropertyHeight(UnityEditor.SerializedProperty,UnityEngine.GUIContent)
   name: GetPropertyHeight(SerializedProperty, GUIContent)
   href: api/XRTK.Inspectors.PropertyDrawers.TypeReferencePropertyDrawer.html#XRTK_Inspectors_PropertyDrawers_TypeReferencePropertyDrawer_GetPropertyHeight_UnityEditor_SerializedProperty_UnityEngine_GUIContent_
@@ -14788,6 +14378,19 @@ references:
   commentId: F:XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.DottedLineScreenSpace
   fullName: XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.DottedLineScreenSpace
   nameWithType: MixedRealityInspectorUtility.DottedLineScreenSpace
+- uid: XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.DrawWireCapsule(UnityEngine.Vector3,UnityEngine.Quaternion,System.Single,System.Single,UnityEngine.Color)
+  name: DrawWireCapsule(Vector3, Quaternion, Single, Single, Color)
+  href: api/XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.html#XRTK_Inspectors_Utilities_MixedRealityInspectorUtility_DrawWireCapsule_UnityEngine_Vector3_UnityEngine_Quaternion_System_Single_System_Single_UnityEngine_Color_
+  commentId: M:XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.DrawWireCapsule(UnityEngine.Vector3,UnityEngine.Quaternion,System.Single,System.Single,UnityEngine.Color)
+  fullName: XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.DrawWireCapsule(UnityEngine.Vector3, UnityEngine.Quaternion, System.Single, System.Single, UnityEngine.Color)
+  nameWithType: MixedRealityInspectorUtility.DrawWireCapsule(Vector3, Quaternion, Single, Single, Color)
+- uid: XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.DrawWireCapsule*
+  name: DrawWireCapsule
+  href: api/XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.html#XRTK_Inspectors_Utilities_MixedRealityInspectorUtility_DrawWireCapsule_
+  commentId: Overload:XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.DrawWireCapsule
+  isSpec: "True"
+  fullName: XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.DrawWireCapsule
+  nameWithType: MixedRealityInspectorUtility.DrawWireCapsule
 - uid: XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.ErrorColor
   name: ErrorColor
   href: api/XRTK.Inspectors.Utilities.MixedRealityInspectorUtility.html#XRTK_Inspectors_Utilities_MixedRealityInspectorUtility_ErrorColor
@@ -16193,6 +15796,86 @@ references:
   isSpec: "True"
   fullName: XRTK.Interfaces.IMixedRealityService.Update
   nameWithType: IMixedRealityService.Update
+- uid: XRTK.Interfaces.IMixedRealityServiceConfiguration
+  name: IMixedRealityServiceConfiguration
+  href: api/XRTK.Interfaces.IMixedRealityServiceConfiguration.html
+  commentId: T:XRTK.Interfaces.IMixedRealityServiceConfiguration
+  fullName: XRTK.Interfaces.IMixedRealityServiceConfiguration
+  nameWithType: IMixedRealityServiceConfiguration
+- uid: XRTK.Interfaces.IMixedRealityServiceConfiguration.ConfigurationProfile
+  name: ConfigurationProfile
+  href: api/XRTK.Interfaces.IMixedRealityServiceConfiguration.html#XRTK_Interfaces_IMixedRealityServiceConfiguration_ConfigurationProfile
+  commentId: P:XRTK.Interfaces.IMixedRealityServiceConfiguration.ConfigurationProfile
+  fullName: XRTK.Interfaces.IMixedRealityServiceConfiguration.ConfigurationProfile
+  nameWithType: IMixedRealityServiceConfiguration.ConfigurationProfile
+- uid: XRTK.Interfaces.IMixedRealityServiceConfiguration.ConfigurationProfile*
+  name: ConfigurationProfile
+  href: api/XRTK.Interfaces.IMixedRealityServiceConfiguration.html#XRTK_Interfaces_IMixedRealityServiceConfiguration_ConfigurationProfile_
+  commentId: Overload:XRTK.Interfaces.IMixedRealityServiceConfiguration.ConfigurationProfile
+  isSpec: "True"
+  fullName: XRTK.Interfaces.IMixedRealityServiceConfiguration.ConfigurationProfile
+  nameWithType: IMixedRealityServiceConfiguration.ConfigurationProfile
+- uid: XRTK.Interfaces.IMixedRealityServiceConfiguration.InstancedType
+  name: InstancedType
+  href: api/XRTK.Interfaces.IMixedRealityServiceConfiguration.html#XRTK_Interfaces_IMixedRealityServiceConfiguration_InstancedType
+  commentId: P:XRTK.Interfaces.IMixedRealityServiceConfiguration.InstancedType
+  fullName: XRTK.Interfaces.IMixedRealityServiceConfiguration.InstancedType
+  nameWithType: IMixedRealityServiceConfiguration.InstancedType
+- uid: XRTK.Interfaces.IMixedRealityServiceConfiguration.InstancedType*
+  name: InstancedType
+  href: api/XRTK.Interfaces.IMixedRealityServiceConfiguration.html#XRTK_Interfaces_IMixedRealityServiceConfiguration_InstancedType_
+  commentId: Overload:XRTK.Interfaces.IMixedRealityServiceConfiguration.InstancedType
+  isSpec: "True"
+  fullName: XRTK.Interfaces.IMixedRealityServiceConfiguration.InstancedType
+  nameWithType: IMixedRealityServiceConfiguration.InstancedType
+- uid: XRTK.Interfaces.IMixedRealityServiceConfiguration.Name
+  name: Name
+  href: api/XRTK.Interfaces.IMixedRealityServiceConfiguration.html#XRTK_Interfaces_IMixedRealityServiceConfiguration_Name
+  commentId: P:XRTK.Interfaces.IMixedRealityServiceConfiguration.Name
+  fullName: XRTK.Interfaces.IMixedRealityServiceConfiguration.Name
+  nameWithType: IMixedRealityServiceConfiguration.Name
+- uid: XRTK.Interfaces.IMixedRealityServiceConfiguration.Name*
+  name: Name
+  href: api/XRTK.Interfaces.IMixedRealityServiceConfiguration.html#XRTK_Interfaces_IMixedRealityServiceConfiguration_Name_
+  commentId: Overload:XRTK.Interfaces.IMixedRealityServiceConfiguration.Name
+  isSpec: "True"
+  fullName: XRTK.Interfaces.IMixedRealityServiceConfiguration.Name
+  nameWithType: IMixedRealityServiceConfiguration.Name
+- uid: XRTK.Interfaces.IMixedRealityServiceConfiguration.Priority
+  name: Priority
+  href: api/XRTK.Interfaces.IMixedRealityServiceConfiguration.html#XRTK_Interfaces_IMixedRealityServiceConfiguration_Priority
+  commentId: P:XRTK.Interfaces.IMixedRealityServiceConfiguration.Priority
+  fullName: XRTK.Interfaces.IMixedRealityServiceConfiguration.Priority
+  nameWithType: IMixedRealityServiceConfiguration.Priority
+- uid: XRTK.Interfaces.IMixedRealityServiceConfiguration.Priority*
+  name: Priority
+  href: api/XRTK.Interfaces.IMixedRealityServiceConfiguration.html#XRTK_Interfaces_IMixedRealityServiceConfiguration_Priority_
+  commentId: Overload:XRTK.Interfaces.IMixedRealityServiceConfiguration.Priority
+  isSpec: "True"
+  fullName: XRTK.Interfaces.IMixedRealityServiceConfiguration.Priority
+  nameWithType: IMixedRealityServiceConfiguration.Priority
+- uid: XRTK.Interfaces.IMixedRealityServiceConfiguration.RuntimePlatform
+  name: RuntimePlatform
+  href: api/XRTK.Interfaces.IMixedRealityServiceConfiguration.html#XRTK_Interfaces_IMixedRealityServiceConfiguration_RuntimePlatform
+  commentId: P:XRTK.Interfaces.IMixedRealityServiceConfiguration.RuntimePlatform
+  fullName: XRTK.Interfaces.IMixedRealityServiceConfiguration.RuntimePlatform
+  nameWithType: IMixedRealityServiceConfiguration.RuntimePlatform
+- uid: XRTK.Interfaces.IMixedRealityServiceConfiguration.RuntimePlatform*
+  name: RuntimePlatform
+  href: api/XRTK.Interfaces.IMixedRealityServiceConfiguration.html#XRTK_Interfaces_IMixedRealityServiceConfiguration_RuntimePlatform_
+  commentId: Overload:XRTK.Interfaces.IMixedRealityServiceConfiguration.RuntimePlatform
+  isSpec: "True"
+  fullName: XRTK.Interfaces.IMixedRealityServiceConfiguration.RuntimePlatform
+  nameWithType: IMixedRealityServiceConfiguration.RuntimePlatform
+- uid: XRTK.Interfaces.IMixedRealityServiceConfiguration`1
+  name: IMixedRealityServiceConfiguration<T>
+  href: api/XRTK.Interfaces.IMixedRealityServiceConfiguration-1.html
+  commentId: T:XRTK.Interfaces.IMixedRealityServiceConfiguration`1
+  name.vb: IMixedRealityServiceConfiguration(Of T)
+  fullName: XRTK.Interfaces.IMixedRealityServiceConfiguration<T>
+  fullName.vb: XRTK.Interfaces.IMixedRealityServiceConfiguration(Of T)
+  nameWithType: IMixedRealityServiceConfiguration<T>
+  nameWithType.vb: IMixedRealityServiceConfiguration(Of T)
 - uid: XRTK.Interfaces.InputSystem
   name: XRTK.Interfaces.InputSystem
   href: api/XRTK.Interfaces.InputSystem.html
@@ -21073,6 +20756,114 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.Controllers.OculusTouchController.SetupDefaultInteractions
   nameWithType: OculusTouchController.SetupDefaultInteractions
+- uid: XRTK.Oculus.Extensions
+  name: XRTK.Oculus.Extensions
+  href: api/XRTK.Oculus.Extensions.html
+  commentId: N:XRTK.Oculus.Extensions
+  fullName: XRTK.Oculus.Extensions
+  nameWithType: XRTK.Oculus.Extensions
+- uid: XRTK.Oculus.Extensions.ControllerExtensions
+  name: ControllerExtensions
+  href: api/XRTK.Oculus.Extensions.ControllerExtensions.html
+  commentId: T:XRTK.Oculus.Extensions.ControllerExtensions
+  fullName: XRTK.Oculus.Extensions.ControllerExtensions
+  nameWithType: ControllerExtensions
+- uid: XRTK.Oculus.Extensions.ControllerExtensions.ToControllerType(XRTK.Oculus.OculusApi.Controller)
+  name: ToControllerType(OculusApi.Controller)
+  href: api/XRTK.Oculus.Extensions.ControllerExtensions.html#XRTK_Oculus_Extensions_ControllerExtensions_ToControllerType_XRTK_Oculus_OculusApi_Controller_
+  commentId: M:XRTK.Oculus.Extensions.ControllerExtensions.ToControllerType(XRTK.Oculus.OculusApi.Controller)
+  fullName: XRTK.Oculus.Extensions.ControllerExtensions.ToControllerType(XRTK.Oculus.OculusApi.Controller)
+  nameWithType: ControllerExtensions.ToControllerType(OculusApi.Controller)
+- uid: XRTK.Oculus.Extensions.ControllerExtensions.ToControllerType*
+  name: ToControllerType
+  href: api/XRTK.Oculus.Extensions.ControllerExtensions.html#XRTK_Oculus_Extensions_ControllerExtensions_ToControllerType_
+  commentId: Overload:XRTK.Oculus.Extensions.ControllerExtensions.ToControllerType
+  isSpec: "True"
+  fullName: XRTK.Oculus.Extensions.ControllerExtensions.ToControllerType
+  nameWithType: ControllerExtensions.ToControllerType
+- uid: XRTK.Oculus.Extensions.ControllerExtensions.ToHandedness(XRTK.Oculus.OculusApi.Controller)
+  name: ToHandedness(OculusApi.Controller)
+  href: api/XRTK.Oculus.Extensions.ControllerExtensions.html#XRTK_Oculus_Extensions_ControllerExtensions_ToHandedness_XRTK_Oculus_OculusApi_Controller_
+  commentId: M:XRTK.Oculus.Extensions.ControllerExtensions.ToHandedness(XRTK.Oculus.OculusApi.Controller)
+  fullName: XRTK.Oculus.Extensions.ControllerExtensions.ToHandedness(XRTK.Oculus.OculusApi.Controller)
+  nameWithType: ControllerExtensions.ToHandedness(OculusApi.Controller)
+- uid: XRTK.Oculus.Extensions.ControllerExtensions.ToHandedness*
+  name: ToHandedness
+  href: api/XRTK.Oculus.Extensions.ControllerExtensions.html#XRTK_Oculus_Extensions_ControllerExtensions_ToHandedness_
+  commentId: Overload:XRTK.Oculus.Extensions.ControllerExtensions.ToHandedness
+  isSpec: "True"
+  fullName: XRTK.Oculus.Extensions.ControllerExtensions.ToHandedness
+  nameWithType: ControllerExtensions.ToHandedness
+- uid: XRTK.Oculus.Extensions.MixedRealityPoseExtensions
+  name: MixedRealityPoseExtensions
+  href: api/XRTK.Oculus.Extensions.MixedRealityPoseExtensions.html
+  commentId: T:XRTK.Oculus.Extensions.MixedRealityPoseExtensions
+  fullName: XRTK.Oculus.Extensions.MixedRealityPoseExtensions
+  nameWithType: MixedRealityPoseExtensions
+- uid: XRTK.Oculus.Extensions.MixedRealityPoseExtensions.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef,System.Boolean)
+  name: ToMixedRealityPose(OculusApi.Posef, Boolean)
+  href: api/XRTK.Oculus.Extensions.MixedRealityPoseExtensions.html#XRTK_Oculus_Extensions_MixedRealityPoseExtensions_ToMixedRealityPose_XRTK_Oculus_OculusApi_Posef_System_Boolean_
+  commentId: M:XRTK.Oculus.Extensions.MixedRealityPoseExtensions.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef,System.Boolean)
+  fullName: XRTK.Oculus.Extensions.MixedRealityPoseExtensions.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef, System.Boolean)
+  nameWithType: MixedRealityPoseExtensions.ToMixedRealityPose(OculusApi.Posef, Boolean)
+- uid: XRTK.Oculus.Extensions.MixedRealityPoseExtensions.ToMixedRealityPose*
+  name: ToMixedRealityPose
+  href: api/XRTK.Oculus.Extensions.MixedRealityPoseExtensions.html#XRTK_Oculus_Extensions_MixedRealityPoseExtensions_ToMixedRealityPose_
+  commentId: Overload:XRTK.Oculus.Extensions.MixedRealityPoseExtensions.ToMixedRealityPose
+  isSpec: "True"
+  fullName: XRTK.Oculus.Extensions.MixedRealityPoseExtensions.ToMixedRealityPose
+  nameWithType: MixedRealityPoseExtensions.ToMixedRealityPose
+- uid: XRTK.Oculus.Extensions.QuaternionExtensions
+  name: QuaternionExtensions
+  href: api/XRTK.Oculus.Extensions.QuaternionExtensions.html
+  commentId: T:XRTK.Oculus.Extensions.QuaternionExtensions
+  fullName: XRTK.Oculus.Extensions.QuaternionExtensions
+  nameWithType: QuaternionExtensions
+- uid: XRTK.Oculus.Extensions.QuaternionExtensions.FromFlippedZQuatf(XRTK.Oculus.OculusApi.Quatf)
+  name: FromFlippedZQuatf(OculusApi.Quatf)
+  href: api/XRTK.Oculus.Extensions.QuaternionExtensions.html#XRTK_Oculus_Extensions_QuaternionExtensions_FromFlippedZQuatf_XRTK_Oculus_OculusApi_Quatf_
+  commentId: M:XRTK.Oculus.Extensions.QuaternionExtensions.FromFlippedZQuatf(XRTK.Oculus.OculusApi.Quatf)
+  fullName: XRTK.Oculus.Extensions.QuaternionExtensions.FromFlippedZQuatf(XRTK.Oculus.OculusApi.Quatf)
+  nameWithType: QuaternionExtensions.FromFlippedZQuatf(OculusApi.Quatf)
+- uid: XRTK.Oculus.Extensions.QuaternionExtensions.FromFlippedZQuatf*
+  name: FromFlippedZQuatf
+  href: api/XRTK.Oculus.Extensions.QuaternionExtensions.html#XRTK_Oculus_Extensions_QuaternionExtensions_FromFlippedZQuatf_
+  commentId: Overload:XRTK.Oculus.Extensions.QuaternionExtensions.FromFlippedZQuatf
+  isSpec: "True"
+  fullName: XRTK.Oculus.Extensions.QuaternionExtensions.FromFlippedZQuatf
+  nameWithType: QuaternionExtensions.FromFlippedZQuatf
+- uid: XRTK.Oculus.Extensions.Vector3Extensions
+  name: Vector3Extensions
+  href: api/XRTK.Oculus.Extensions.Vector3Extensions.html
+  commentId: T:XRTK.Oculus.Extensions.Vector3Extensions
+  fullName: XRTK.Oculus.Extensions.Vector3Extensions
+  nameWithType: Vector3Extensions
+- uid: XRTK.Oculus.Extensions.Vector3Extensions.FromFlippedZVector3f(XRTK.Oculus.OculusApi.Vector3f)
+  name: FromFlippedZVector3f(OculusApi.Vector3f)
+  href: api/XRTK.Oculus.Extensions.Vector3Extensions.html#XRTK_Oculus_Extensions_Vector3Extensions_FromFlippedZVector3f_XRTK_Oculus_OculusApi_Vector3f_
+  commentId: M:XRTK.Oculus.Extensions.Vector3Extensions.FromFlippedZVector3f(XRTK.Oculus.OculusApi.Vector3f)
+  fullName: XRTK.Oculus.Extensions.Vector3Extensions.FromFlippedZVector3f(XRTK.Oculus.OculusApi.Vector3f)
+  nameWithType: Vector3Extensions.FromFlippedZVector3f(OculusApi.Vector3f)
+- uid: XRTK.Oculus.Extensions.Vector3Extensions.FromFlippedZVector3f*
+  name: FromFlippedZVector3f
+  href: api/XRTK.Oculus.Extensions.Vector3Extensions.html#XRTK_Oculus_Extensions_Vector3Extensions_FromFlippedZVector3f_
+  commentId: Overload:XRTK.Oculus.Extensions.Vector3Extensions.FromFlippedZVector3f
+  isSpec: "True"
+  fullName: XRTK.Oculus.Extensions.Vector3Extensions.FromFlippedZVector3f
+  nameWithType: Vector3Extensions.FromFlippedZVector3f
+- uid: XRTK.Oculus.Extensions.Vector3Extensions.GetPosePosition(XRTK.Oculus.OculusApi.Posef)
+  name: GetPosePosition(OculusApi.Posef)
+  href: api/XRTK.Oculus.Extensions.Vector3Extensions.html#XRTK_Oculus_Extensions_Vector3Extensions_GetPosePosition_XRTK_Oculus_OculusApi_Posef_
+  commentId: M:XRTK.Oculus.Extensions.Vector3Extensions.GetPosePosition(XRTK.Oculus.OculusApi.Posef)
+  fullName: XRTK.Oculus.Extensions.Vector3Extensions.GetPosePosition(XRTK.Oculus.OculusApi.Posef)
+  nameWithType: Vector3Extensions.GetPosePosition(OculusApi.Posef)
+- uid: XRTK.Oculus.Extensions.Vector3Extensions.GetPosePosition*
+  name: GetPosePosition
+  href: api/XRTK.Oculus.Extensions.Vector3Extensions.html#XRTK_Oculus_Extensions_Vector3Extensions_GetPosePosition_
+  commentId: Overload:XRTK.Oculus.Extensions.Vector3Extensions.GetPosePosition
+  isSpec: "True"
+  fullName: XRTK.Oculus.Extensions.Vector3Extensions.GetPosePosition
+  nameWithType: Vector3Extensions.GetPosePosition
 - uid: XRTK.Oculus.Inspectors
   name: XRTK.Oculus.Inspectors
   href: api/XRTK.Oculus.Inspectors.html
@@ -21631,6 +21422,18 @@ references:
   commentId: F:XRTK.Oculus.OculusApi.Controller.Gamepad
   fullName: XRTK.Oculus.OculusApi.Controller.Gamepad
   nameWithType: OculusApi.Controller.Gamepad
+- uid: XRTK.Oculus.OculusApi.Controller.Hands
+  name: Hands
+  href: api/XRTK.Oculus.OculusApi.Controller.html#XRTK_Oculus_OculusApi_Controller_Hands
+  commentId: F:XRTK.Oculus.OculusApi.Controller.Hands
+  fullName: XRTK.Oculus.OculusApi.Controller.Hands
+  nameWithType: OculusApi.Controller.Hands
+- uid: XRTK.Oculus.OculusApi.Controller.LHand
+  name: LHand
+  href: api/XRTK.Oculus.OculusApi.Controller.html#XRTK_Oculus_OculusApi_Controller_LHand
+  commentId: F:XRTK.Oculus.OculusApi.Controller.LHand
+  fullName: XRTK.Oculus.OculusApi.Controller.LHand
+  nameWithType: OculusApi.Controller.LHand
 - uid: XRTK.Oculus.OculusApi.Controller.LTouch
   name: LTouch
   href: api/XRTK.Oculus.OculusApi.Controller.html#XRTK_Oculus_OculusApi_Controller_LTouch
@@ -21655,6 +21458,12 @@ references:
   commentId: F:XRTK.Oculus.OculusApi.Controller.Remote
   fullName: XRTK.Oculus.OculusApi.Controller.Remote
   nameWithType: OculusApi.Controller.Remote
+- uid: XRTK.Oculus.OculusApi.Controller.RHand
+  name: RHand
+  href: api/XRTK.Oculus.OculusApi.Controller.html#XRTK_Oculus_OculusApi_Controller_RHand
+  commentId: F:XRTK.Oculus.OculusApi.Controller.RHand
+  fullName: XRTK.Oculus.OculusApi.Controller.RHand
+  nameWithType: OculusApi.Controller.RHand
 - uid: XRTK.Oculus.OculusApi.Controller.RTouch
   name: RTouch
   href: api/XRTK.Oculus.OculusApi.Controller.html#XRTK_Oculus_OculusApi_Controller_RTouch
@@ -21975,6 +21784,74 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.OculusApi.EyeHeight
   nameWithType: OculusApi.EyeHeight
+- uid: XRTK.Oculus.OculusApi.fixedFoveatedRenderingLevel
+  name: fixedFoveatedRenderingLevel
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_fixedFoveatedRenderingLevel
+  commentId: P:XRTK.Oculus.OculusApi.fixedFoveatedRenderingLevel
+  fullName: XRTK.Oculus.OculusApi.fixedFoveatedRenderingLevel
+  nameWithType: OculusApi.fixedFoveatedRenderingLevel
+- uid: XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel
+  name: OculusApi.FixedFoveatedRenderingLevel
+  href: api/XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.html
+  commentId: T:XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel
+  fullName: XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel
+  nameWithType: OculusApi.FixedFoveatedRenderingLevel
+- uid: XRTK.Oculus.OculusApi.fixedFoveatedRenderingLevel*
+  name: fixedFoveatedRenderingLevel
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_fixedFoveatedRenderingLevel_
+  commentId: Overload:XRTK.Oculus.OculusApi.fixedFoveatedRenderingLevel
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.fixedFoveatedRenderingLevel
+  nameWithType: OculusApi.fixedFoveatedRenderingLevel
+- uid: XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.EnumSize
+  name: EnumSize
+  href: api/XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.html#XRTK_Oculus_OculusApi_FixedFoveatedRenderingLevel_EnumSize
+  commentId: F:XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.EnumSize
+  fullName: XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.EnumSize
+  nameWithType: OculusApi.FixedFoveatedRenderingLevel.EnumSize
+- uid: XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.High
+  name: High
+  href: api/XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.html#XRTK_Oculus_OculusApi_FixedFoveatedRenderingLevel_High
+  commentId: F:XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.High
+  fullName: XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.High
+  nameWithType: OculusApi.FixedFoveatedRenderingLevel.High
+- uid: XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.HighTop
+  name: HighTop
+  href: api/XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.html#XRTK_Oculus_OculusApi_FixedFoveatedRenderingLevel_HighTop
+  commentId: F:XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.HighTop
+  fullName: XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.HighTop
+  nameWithType: OculusApi.FixedFoveatedRenderingLevel.HighTop
+- uid: XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.Low
+  name: Low
+  href: api/XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.html#XRTK_Oculus_OculusApi_FixedFoveatedRenderingLevel_Low
+  commentId: F:XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.Low
+  fullName: XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.Low
+  nameWithType: OculusApi.FixedFoveatedRenderingLevel.Low
+- uid: XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.Medium
+  name: Medium
+  href: api/XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.html#XRTK_Oculus_OculusApi_FixedFoveatedRenderingLevel_Medium
+  commentId: F:XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.Medium
+  fullName: XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.Medium
+  nameWithType: OculusApi.FixedFoveatedRenderingLevel.Medium
+- uid: XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.Off
+  name: Off
+  href: api/XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.html#XRTK_Oculus_OculusApi_FixedFoveatedRenderingLevel_Off
+  commentId: F:XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.Off
+  fullName: XRTK.Oculus.OculusApi.FixedFoveatedRenderingLevel.Off
+  nameWithType: OculusApi.FixedFoveatedRenderingLevel.Off
+- uid: XRTK.Oculus.OculusApi.fixedFoveatedRenderingSupported
+  name: fixedFoveatedRenderingSupported
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_fixedFoveatedRenderingSupported
+  commentId: P:XRTK.Oculus.OculusApi.fixedFoveatedRenderingSupported
+  fullName: XRTK.Oculus.OculusApi.fixedFoveatedRenderingSupported
+  nameWithType: OculusApi.fixedFoveatedRenderingSupported
+- uid: XRTK.Oculus.OculusApi.fixedFoveatedRenderingSupported*
+  name: fixedFoveatedRenderingSupported
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_fixedFoveatedRenderingSupported_
+  commentId: Overload:XRTK.Oculus.OculusApi.fixedFoveatedRenderingSupported
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.fixedFoveatedRenderingSupported
+  nameWithType: OculusApi.fixedFoveatedRenderingSupported
 - uid: XRTK.Oculus.OculusApi.Fovf
   name: OculusApi.Fovf
   href: api/XRTK.Oculus.OculusApi.Fovf.html
@@ -22370,19 +22247,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.OculusApi.GetNodeVelocity
   nameWithType: OculusApi.GetNodeVelocity
-- uid: XRTK.Oculus.OculusApi.GetPosePosition(XRTK.Oculus.OculusApi.Posef)
-  name: GetPosePosition(OculusApi.Posef)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetPosePosition_XRTK_Oculus_OculusApi_Posef_
-  commentId: M:XRTK.Oculus.OculusApi.GetPosePosition(XRTK.Oculus.OculusApi.Posef)
-  fullName: XRTK.Oculus.OculusApi.GetPosePosition(XRTK.Oculus.OculusApi.Posef)
-  nameWithType: OculusApi.GetPosePosition(OculusApi.Posef)
-- uid: XRTK.Oculus.OculusApi.GetPosePosition*
-  name: GetPosePosition
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetPosePosition_
-  commentId: Overload:XRTK.Oculus.OculusApi.GetPosePosition
-  isSpec: "True"
-  fullName: XRTK.Oculus.OculusApi.GetPosePosition
-  nameWithType: OculusApi.GetPosePosition
 - uid: XRTK.Oculus.OculusApi.GetSkeleton(XRTK.Oculus.OculusApi.SkeletonType,XRTK.Oculus.OculusApi.Skeleton@)
   name: GetSkeleton(OculusApi.SkeletonType, out OculusApi.Skeleton)
   href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetSkeleton_XRTK_Oculus_OculusApi_SkeletonType_XRTK_Oculus_OculusApi_Skeleton__
@@ -22412,6 +22276,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.OculusApi.GetSystemHeadsetType
   nameWithType: OculusApi.GetSystemHeadsetType
+- uid: XRTK.Oculus.OculusApi.GetSystemHmd3DofModeEnabled
+  name: GetSystemHmd3DofModeEnabled()
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetSystemHmd3DofModeEnabled
+  commentId: M:XRTK.Oculus.OculusApi.GetSystemHmd3DofModeEnabled
+  fullName: XRTK.Oculus.OculusApi.GetSystemHmd3DofModeEnabled()
+  nameWithType: OculusApi.GetSystemHmd3DofModeEnabled()
+- uid: XRTK.Oculus.OculusApi.GetSystemHmd3DofModeEnabled*
+  name: GetSystemHmd3DofModeEnabled
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetSystemHmd3DofModeEnabled_
+  commentId: Overload:XRTK.Oculus.OculusApi.GetSystemHmd3DofModeEnabled
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.GetSystemHmd3DofModeEnabled
+  nameWithType: OculusApi.GetSystemHmd3DofModeEnabled
 - uid: XRTK.Oculus.OculusApi.GetTrackingCalibratedOrigin
   name: GetTrackingCalibratedOrigin()
   href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_GetTrackingCalibratedOrigin
@@ -23994,19 +23871,6 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.OculusApi.TestBoundaryPoint
   nameWithType: OculusApi.TestBoundaryPoint
-- uid: XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef,System.Boolean)
-  name: ToMixedRealityPose(OculusApi.Posef, Boolean)
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ToMixedRealityPose_XRTK_Oculus_OculusApi_Posef_System_Boolean_
-  commentId: M:XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef,System.Boolean)
-  fullName: XRTK.Oculus.OculusApi.ToMixedRealityPose(XRTK.Oculus.OculusApi.Posef, System.Boolean)
-  nameWithType: OculusApi.ToMixedRealityPose(OculusApi.Posef, Boolean)
-- uid: XRTK.Oculus.OculusApi.ToMixedRealityPose*
-  name: ToMixedRealityPose
-  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_ToMixedRealityPose_
-  commentId: Overload:XRTK.Oculus.OculusApi.ToMixedRealityPose
-  isSpec: "True"
-  fullName: XRTK.Oculus.OculusApi.ToMixedRealityPose
-  nameWithType: OculusApi.ToMixedRealityPose
 - uid: XRTK.Oculus.OculusApi.TrackingConfidence
   name: OculusApi.TrackingConfidence
   href: api/XRTK.Oculus.OculusApi.TrackingConfidence.html
@@ -24068,6 +23932,19 @@ references:
   isSpec: "True"
   fullName: XRTK.Oculus.OculusApi.UpdateNodePhysicsPoses
   nameWithType: OculusApi.UpdateNodePhysicsPoses
+- uid: XRTK.Oculus.OculusApi.useDynamicFixedFoveatedRendering
+  name: useDynamicFixedFoveatedRendering
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_useDynamicFixedFoveatedRendering
+  commentId: P:XRTK.Oculus.OculusApi.useDynamicFixedFoveatedRendering
+  fullName: XRTK.Oculus.OculusApi.useDynamicFixedFoveatedRendering
+  nameWithType: OculusApi.useDynamicFixedFoveatedRendering
+- uid: XRTK.Oculus.OculusApi.useDynamicFixedFoveatedRendering*
+  name: useDynamicFixedFoveatedRendering
+  href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_useDynamicFixedFoveatedRendering_
+  commentId: Overload:XRTK.Oculus.OculusApi.useDynamicFixedFoveatedRendering
+  isSpec: "True"
+  fullName: XRTK.Oculus.OculusApi.useDynamicFixedFoveatedRendering
+  nameWithType: OculusApi.useDynamicFixedFoveatedRendering
 - uid: XRTK.Oculus.OculusApi.UserPresent
   name: UserPresent
   href: api/XRTK.Oculus.OculusApi.html#XRTK_Oculus_OculusApi_UserPresent
@@ -36304,12 +36181,12 @@ references:
   commentId: T:XRTK.Services.BaseExtensionService
   fullName: XRTK.Services.BaseExtensionService
   nameWithType: BaseExtensionService
-- uid: XRTK.Services.BaseExtensionService.#ctor(System.String,System.UInt32,XRTK.Definitions.BaseMixedRealityExtensionServiceProfile)
-  name: BaseExtensionService(String, UInt32, BaseMixedRealityExtensionServiceProfile)
-  href: api/XRTK.Services.BaseExtensionService.html#XRTK_Services_BaseExtensionService__ctor_System_String_System_UInt32_XRTK_Definitions_BaseMixedRealityExtensionServiceProfile_
-  commentId: M:XRTK.Services.BaseExtensionService.#ctor(System.String,System.UInt32,XRTK.Definitions.BaseMixedRealityExtensionServiceProfile)
-  fullName: XRTK.Services.BaseExtensionService.BaseExtensionService(System.String, System.UInt32, XRTK.Definitions.BaseMixedRealityExtensionServiceProfile)
-  nameWithType: BaseExtensionService.BaseExtensionService(String, UInt32, BaseMixedRealityExtensionServiceProfile)
+- uid: XRTK.Services.BaseExtensionService.#ctor(System.String,System.UInt32,XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile)
+  name: BaseExtensionService(String, UInt32, MixedRealityRegisteredServiceProvidersProfile)
+  href: api/XRTK.Services.BaseExtensionService.html#XRTK_Services_BaseExtensionService__ctor_System_String_System_UInt32_XRTK_Definitions_MixedRealityRegisteredServiceProvidersProfile_
+  commentId: M:XRTK.Services.BaseExtensionService.#ctor(System.String,System.UInt32,XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile)
+  fullName: XRTK.Services.BaseExtensionService.BaseExtensionService(System.String, System.UInt32, XRTK.Definitions.MixedRealityRegisteredServiceProvidersProfile)
+  nameWithType: BaseExtensionService.BaseExtensionService(String, UInt32, MixedRealityRegisteredServiceProvidersProfile)
 - uid: XRTK.Services.BaseExtensionService.#ctor*
   name: BaseExtensionService
   href: api/XRTK.Services.BaseExtensionService.html#XRTK_Services_BaseExtensionService__ctor_
@@ -39530,6 +39407,15 @@ references:
   fullName.vb: XRTK.Services.MixedRealityToolkit.CreateAndRegisterService(Of T)(System.Type, XRTK.Definitions.Utilities.SupportedPlatforms, System.Object())
   nameWithType: MixedRealityToolkit.CreateAndRegisterService<T>(Type, SupportedPlatforms, Object[])
   nameWithType.vb: MixedRealityToolkit.CreateAndRegisterService(Of T)(Type, SupportedPlatforms, Object())
+- uid: XRTK.Services.MixedRealityToolkit.CreateAndRegisterService``1(XRTK.Interfaces.IMixedRealityServiceConfiguration{``0})
+  name: CreateAndRegisterService<T>(IMixedRealityServiceConfiguration<T>)
+  href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_CreateAndRegisterService__1_XRTK_Interfaces_IMixedRealityServiceConfiguration___0__
+  commentId: M:XRTK.Services.MixedRealityToolkit.CreateAndRegisterService``1(XRTK.Interfaces.IMixedRealityServiceConfiguration{``0})
+  name.vb: CreateAndRegisterService(Of T)(IMixedRealityServiceConfiguration(Of T))
+  fullName: XRTK.Services.MixedRealityToolkit.CreateAndRegisterService<T>(XRTK.Interfaces.IMixedRealityServiceConfiguration<T>)
+  fullName.vb: XRTK.Services.MixedRealityToolkit.CreateAndRegisterService(Of T)(XRTK.Interfaces.IMixedRealityServiceConfiguration(Of T))
+  nameWithType: MixedRealityToolkit.CreateAndRegisterService<T>(IMixedRealityServiceConfiguration<T>)
+  nameWithType.vb: MixedRealityToolkit.CreateAndRegisterService(Of T)(IMixedRealityServiceConfiguration(Of T))
 - uid: XRTK.Services.MixedRealityToolkit.DiagnosticsSystem
   name: DiagnosticsSystem
   href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_DiagnosticsSystem
@@ -39813,6 +39699,22 @@ references:
   fullName.vb: XRTK.Services.MixedRealityToolkit.RegisterService(Of T)(XRTK.Interfaces.IMixedRealityService)
   nameWithType: MixedRealityToolkit.RegisterService<T>(IMixedRealityService)
   nameWithType.vb: MixedRealityToolkit.RegisterService(Of T)(IMixedRealityService)
+- uid: XRTK.Services.MixedRealityToolkit.RegisterServices*
+  name: RegisterServices
+  href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_RegisterServices_
+  commentId: Overload:XRTK.Services.MixedRealityToolkit.RegisterServices
+  isSpec: "True"
+  fullName: XRTK.Services.MixedRealityToolkit.RegisterServices
+  nameWithType: MixedRealityToolkit.RegisterServices
+- uid: XRTK.Services.MixedRealityToolkit.RegisterServices``1(XRTK.Definitions.MixedRealityServiceConfiguration{``0}[])
+  name: RegisterServices<T>(MixedRealityServiceConfiguration<T>[])
+  href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_RegisterServices__1_XRTK_Definitions_MixedRealityServiceConfiguration___0____
+  commentId: M:XRTK.Services.MixedRealityToolkit.RegisterServices``1(XRTK.Definitions.MixedRealityServiceConfiguration{``0}[])
+  name.vb: RegisterServices(Of T)(MixedRealityServiceConfiguration(Of T)())
+  fullName: XRTK.Services.MixedRealityToolkit.RegisterServices<T>(XRTK.Definitions.MixedRealityServiceConfiguration<T>[])
+  fullName.vb: XRTK.Services.MixedRealityToolkit.RegisterServices(Of T)(XRTK.Definitions.MixedRealityServiceConfiguration(Of T)())
+  nameWithType: MixedRealityToolkit.RegisterServices<T>(MixedRealityServiceConfiguration<T>[])
+  nameWithType.vb: MixedRealityToolkit.RegisterServices(Of T)(MixedRealityServiceConfiguration(Of T)())
 - uid: XRTK.Services.MixedRealityToolkit.ResetConfiguration(XRTK.Definitions.MixedRealityToolkitConfigurationProfile)
   name: ResetConfiguration(MixedRealityToolkitConfigurationProfile)
   href: api/XRTK.Services.MixedRealityToolkit.html#XRTK_Services_MixedRealityToolkit_ResetConfiguration_XRTK_Definitions_MixedRealityToolkitConfigurationProfile_
@@ -40817,6 +40719,83 @@ references:
   isSpec: "True"
   fullName: XRTK.Tests.Core.TestFixture_01_MixedRealityToolkitTests.Test_07_02_DisableServicesByType
   nameWithType: TestFixture_01_MixedRealityToolkitTests.Test_07_02_DisableServicesByType
+- uid: XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests
+  name: TestFixture_02_MixedRealityToolkitUtilityTests
+  href: api/XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.html
+  commentId: T:XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests
+  fullName: XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests
+  nameWithType: TestFixture_02_MixedRealityToolkitUtilityTests
+- uid: XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_01_ConfirmDataProviderConfigurationNotPresent
+  name: Test_01_ConfirmDataProviderConfigurationNotPresent()
+  href: api/XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.html#XRTK_Tests_Core_TestFixture_02_MixedRealityToolkitUtilityTests_Test_01_ConfirmDataProviderConfigurationNotPresent
+  commentId: M:XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_01_ConfirmDataProviderConfigurationNotPresent
+  fullName: XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_01_ConfirmDataProviderConfigurationNotPresent()
+  nameWithType: TestFixture_02_MixedRealityToolkitUtilityTests.Test_01_ConfirmDataProviderConfigurationNotPresent()
+- uid: XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_01_ConfirmDataProviderConfigurationNotPresent*
+  name: Test_01_ConfirmDataProviderConfigurationNotPresent
+  href: api/XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.html#XRTK_Tests_Core_TestFixture_02_MixedRealityToolkitUtilityTests_Test_01_ConfirmDataProviderConfigurationNotPresent_
+  commentId: Overload:XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_01_ConfirmDataProviderConfigurationNotPresent
+  isSpec: "True"
+  fullName: XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_01_ConfirmDataProviderConfigurationNotPresent
+  nameWithType: TestFixture_02_MixedRealityToolkitUtilityTests.Test_01_ConfirmDataProviderConfigurationNotPresent
+- uid: XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_02_ConfirmDataProviderConfigurationPresent
+  name: Test_02_ConfirmDataProviderConfigurationPresent()
+  href: api/XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.html#XRTK_Tests_Core_TestFixture_02_MixedRealityToolkitUtilityTests_Test_02_ConfirmDataProviderConfigurationPresent
+  commentId: M:XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_02_ConfirmDataProviderConfigurationPresent
+  fullName: XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_02_ConfirmDataProviderConfigurationPresent()
+  nameWithType: TestFixture_02_MixedRealityToolkitUtilityTests.Test_02_ConfirmDataProviderConfigurationPresent()
+- uid: XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_02_ConfirmDataProviderConfigurationPresent*
+  name: Test_02_ConfirmDataProviderConfigurationPresent
+  href: api/XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.html#XRTK_Tests_Core_TestFixture_02_MixedRealityToolkitUtilityTests_Test_02_ConfirmDataProviderConfigurationPresent_
+  commentId: Overload:XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_02_ConfirmDataProviderConfigurationPresent
+  isSpec: "True"
+  fullName: XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_02_ConfirmDataProviderConfigurationPresent
+  nameWithType: TestFixture_02_MixedRealityToolkitUtilityTests.Test_02_ConfirmDataProviderConfigurationPresent
+- uid: XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_03_ConfirmControllerMappingConfigurationNotPresent
+  name: Test_03_ConfirmControllerMappingConfigurationNotPresent()
+  href: api/XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.html#XRTK_Tests_Core_TestFixture_02_MixedRealityToolkitUtilityTests_Test_03_ConfirmControllerMappingConfigurationNotPresent
+  commentId: M:XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_03_ConfirmControllerMappingConfigurationNotPresent
+  fullName: XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_03_ConfirmControllerMappingConfigurationNotPresent()
+  nameWithType: TestFixture_02_MixedRealityToolkitUtilityTests.Test_03_ConfirmControllerMappingConfigurationNotPresent()
+- uid: XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_03_ConfirmControllerMappingConfigurationNotPresent*
+  name: Test_03_ConfirmControllerMappingConfigurationNotPresent
+  href: api/XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.html#XRTK_Tests_Core_TestFixture_02_MixedRealityToolkitUtilityTests_Test_03_ConfirmControllerMappingConfigurationNotPresent_
+  commentId: Overload:XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_03_ConfirmControllerMappingConfigurationNotPresent
+  isSpec: "True"
+  fullName: XRTK.Tests.Core.TestFixture_02_MixedRealityToolkitUtilityTests.Test_03_ConfirmControllerMappingConfigurationNotPresent
+  nameWithType: TestFixture_02_MixedRealityToolkitUtilityTests.Test_03_ConfirmControllerMappingConfigurationNotPresent
+- uid: XRTK.Tests.Core.TestFixture_03_ExtensionsTests
+  name: TestFixture_03_ExtensionsTests
+  href: api/XRTK.Tests.Core.TestFixture_03_ExtensionsTests.html
+  commentId: T:XRTK.Tests.Core.TestFixture_03_ExtensionsTests
+  fullName: XRTK.Tests.Core.TestFixture_03_ExtensionsTests
+  nameWithType: TestFixture_03_ExtensionsTests
+- uid: XRTK.Tests.Core.TestFixture_03_ExtensionsTests.Test_01_Array_AddItem_Extension
+  name: Test_01_Array_AddItem_Extension()
+  href: api/XRTK.Tests.Core.TestFixture_03_ExtensionsTests.html#XRTK_Tests_Core_TestFixture_03_ExtensionsTests_Test_01_Array_AddItem_Extension
+  commentId: M:XRTK.Tests.Core.TestFixture_03_ExtensionsTests.Test_01_Array_AddItem_Extension
+  fullName: XRTK.Tests.Core.TestFixture_03_ExtensionsTests.Test_01_Array_AddItem_Extension()
+  nameWithType: TestFixture_03_ExtensionsTests.Test_01_Array_AddItem_Extension()
+- uid: XRTK.Tests.Core.TestFixture_03_ExtensionsTests.Test_01_Array_AddItem_Extension*
+  name: Test_01_Array_AddItem_Extension
+  href: api/XRTK.Tests.Core.TestFixture_03_ExtensionsTests.html#XRTK_Tests_Core_TestFixture_03_ExtensionsTests_Test_01_Array_AddItem_Extension_
+  commentId: Overload:XRTK.Tests.Core.TestFixture_03_ExtensionsTests.Test_01_Array_AddItem_Extension
+  isSpec: "True"
+  fullName: XRTK.Tests.Core.TestFixture_03_ExtensionsTests.Test_01_Array_AddItem_Extension
+  nameWithType: TestFixture_03_ExtensionsTests.Test_01_Array_AddItem_Extension
+- uid: XRTK.Tests.Core.TestFixture_03_ExtensionsTests.Test_02_Array_InitialiseArray_Extension
+  name: Test_02_Array_InitialiseArray_Extension()
+  href: api/XRTK.Tests.Core.TestFixture_03_ExtensionsTests.html#XRTK_Tests_Core_TestFixture_03_ExtensionsTests_Test_02_Array_InitialiseArray_Extension
+  commentId: M:XRTK.Tests.Core.TestFixture_03_ExtensionsTests.Test_02_Array_InitialiseArray_Extension
+  fullName: XRTK.Tests.Core.TestFixture_03_ExtensionsTests.Test_02_Array_InitialiseArray_Extension()
+  nameWithType: TestFixture_03_ExtensionsTests.Test_02_Array_InitialiseArray_Extension()
+- uid: XRTK.Tests.Core.TestFixture_03_ExtensionsTests.Test_02_Array_InitialiseArray_Extension*
+  name: Test_02_Array_InitialiseArray_Extension
+  href: api/XRTK.Tests.Core.TestFixture_03_ExtensionsTests.html#XRTK_Tests_Core_TestFixture_03_ExtensionsTests_Test_02_Array_InitialiseArray_Extension_
+  commentId: Overload:XRTK.Tests.Core.TestFixture_03_ExtensionsTests.Test_02_Array_InitialiseArray_Extension
+  isSpec: "True"
+  fullName: XRTK.Tests.Core.TestFixture_03_ExtensionsTests.Test_02_Array_InitialiseArray_Extension
+  nameWithType: TestFixture_03_ExtensionsTests.Test_02_Array_InitialiseArray_Extension
 - uid: XRTK.Tests.InputSystem
   name: XRTK.Tests.InputSystem
   href: api/XRTK.Tests.InputSystem.html
@@ -43411,6 +43390,25 @@ references:
   fullName: XRTK.Utilities.Editor.MixedRealityEditorSettings.UnityEditor.Build.IActiveBuildTargetChanged.OnActiveBuildTargetChanged
   nameWithType: MixedRealityEditorSettings.IActiveBuildTargetChanged.OnActiveBuildTargetChanged
   nameWithType.vb: MixedRealityEditorSettings.UnityEditor.Build.IActiveBuildTargetChanged.OnActiveBuildTargetChanged
+- uid: XRTK.Utilities.Editor.SceneHelpers
+  name: SceneHelpers
+  href: api/XRTK.Utilities.Editor.SceneHelpers.html
+  commentId: T:XRTK.Utilities.Editor.SceneHelpers
+  fullName: XRTK.Utilities.Editor.SceneHelpers
+  nameWithType: SceneHelpers
+- uid: XRTK.Utilities.Editor.SceneHelpers.CreateFloor
+  name: CreateFloor()
+  href: api/XRTK.Utilities.Editor.SceneHelpers.html#XRTK_Utilities_Editor_SceneHelpers_CreateFloor
+  commentId: M:XRTK.Utilities.Editor.SceneHelpers.CreateFloor
+  fullName: XRTK.Utilities.Editor.SceneHelpers.CreateFloor()
+  nameWithType: SceneHelpers.CreateFloor()
+- uid: XRTK.Utilities.Editor.SceneHelpers.CreateFloor*
+  name: CreateFloor
+  href: api/XRTK.Utilities.Editor.SceneHelpers.html#XRTK_Utilities_Editor_SceneHelpers_CreateFloor_
+  commentId: Overload:XRTK.Utilities.Editor.SceneHelpers.CreateFloor
+  isSpec: "True"
+  fullName: XRTK.Utilities.Editor.SceneHelpers.CreateFloor
+  nameWithType: SceneHelpers.CreateFloor
 - uid: XRTK.Utilities.Editor.Usb
   name: XRTK.Utilities.Editor.Usb
   href: api/XRTK.Utilities.Editor.Usb.html
@@ -49980,15 +49978,15 @@ references:
   commentId: T:XRTK.Utilities.ValidateConfiguration
   fullName: XRTK.Utilities.ValidateConfiguration
   nameWithType: ValidateConfiguration
-- uid: XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings(System.Type[],XRTK.Definitions.Utilities.Handedness)
-  name: ValidateControllerMappings(Type[], Handedness)
-  href: api/XRTK.Utilities.ValidateConfiguration.html#XRTK_Utilities_ValidateConfiguration_ValidateControllerMappings_System_Type___XRTK_Definitions_Utilities_Handedness_
-  commentId: M:XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings(System.Type[],XRTK.Definitions.Utilities.Handedness)
-  name.vb: ValidateControllerMappings(Type(), Handedness)
-  fullName: XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings(System.Type[], XRTK.Definitions.Utilities.Handedness)
-  fullName.vb: XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings(System.Type(), XRTK.Definitions.Utilities.Handedness)
-  nameWithType: ValidateConfiguration.ValidateControllerMappings(Type[], Handedness)
-  nameWithType.vb: ValidateConfiguration.ValidateControllerMappings(Type(), Handedness)
+- uid: XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings(System.Type[],XRTK.Definitions.Utilities.Handedness,System.Boolean)
+  name: ValidateControllerMappings(Type[], Handedness, Boolean)
+  href: api/XRTK.Utilities.ValidateConfiguration.html#XRTK_Utilities_ValidateConfiguration_ValidateControllerMappings_System_Type___XRTK_Definitions_Utilities_Handedness_System_Boolean_
+  commentId: M:XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings(System.Type[],XRTK.Definitions.Utilities.Handedness,System.Boolean)
+  name.vb: ValidateControllerMappings(Type(), Handedness, Boolean)
+  fullName: XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings(System.Type[], XRTK.Definitions.Utilities.Handedness, System.Boolean)
+  fullName.vb: XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings(System.Type(), XRTK.Definitions.Utilities.Handedness, System.Boolean)
+  nameWithType: ValidateConfiguration.ValidateControllerMappings(Type[], Handedness, Boolean)
+  nameWithType.vb: ValidateConfiguration.ValidateControllerMappings(Type(), Handedness, Boolean)
 - uid: XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings*
   name: ValidateControllerMappings
   href: api/XRTK.Utilities.ValidateConfiguration.html#XRTK_Utilities_ValidateConfiguration_ValidateControllerMappings_
@@ -49996,15 +49994,15 @@ references:
   isSpec: "True"
   fullName: XRTK.Utilities.ValidateConfiguration.ValidateControllerMappings
   nameWithType: ValidateConfiguration.ValidateControllerMappings
-- uid: XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles(System.Type[])
-  name: ValidateControllerProfiles(Type[])
-  href: api/XRTK.Utilities.ValidateConfiguration.html#XRTK_Utilities_ValidateConfiguration_ValidateControllerProfiles_System_Type___
-  commentId: M:XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles(System.Type[])
-  name.vb: ValidateControllerProfiles(Type())
-  fullName: XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles(System.Type[])
-  fullName.vb: XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles(System.Type())
-  nameWithType: ValidateConfiguration.ValidateControllerProfiles(Type[])
-  nameWithType.vb: ValidateConfiguration.ValidateControllerProfiles(Type())
+- uid: XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles(XRTK.Definitions.Controllers.MixedRealityControllerMappingProfiles,System.Type[],System.Boolean)
+  name: ValidateControllerProfiles(MixedRealityControllerMappingProfiles, Type[], Boolean)
+  href: api/XRTK.Utilities.ValidateConfiguration.html#XRTK_Utilities_ValidateConfiguration_ValidateControllerProfiles_XRTK_Definitions_Controllers_MixedRealityControllerMappingProfiles_System_Type___System_Boolean_
+  commentId: M:XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles(XRTK.Definitions.Controllers.MixedRealityControllerMappingProfiles,System.Type[],System.Boolean)
+  name.vb: ValidateControllerProfiles(MixedRealityControllerMappingProfiles, Type(), Boolean)
+  fullName: XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles(XRTK.Definitions.Controllers.MixedRealityControllerMappingProfiles, System.Type[], System.Boolean)
+  fullName.vb: XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles(XRTK.Definitions.Controllers.MixedRealityControllerMappingProfiles, System.Type(), System.Boolean)
+  nameWithType: ValidateConfiguration.ValidateControllerProfiles(MixedRealityControllerMappingProfiles, Type[], Boolean)
+  nameWithType.vb: ValidateConfiguration.ValidateControllerProfiles(MixedRealityControllerMappingProfiles, Type(), Boolean)
 - uid: XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles*
   name: ValidateControllerProfiles
   href: api/XRTK.Utilities.ValidateConfiguration.html#XRTK_Utilities_ValidateConfiguration_ValidateControllerProfiles_
@@ -50012,6 +50010,22 @@ references:
   isSpec: "True"
   fullName: XRTK.Utilities.ValidateConfiguration.ValidateControllerProfiles
   nameWithType: ValidateConfiguration.ValidateControllerProfiles
+- uid: XRTK.Utilities.ValidateConfiguration.ValidateService*
+  name: ValidateService
+  href: api/XRTK.Utilities.ValidateConfiguration.html#XRTK_Utilities_ValidateConfiguration_ValidateService_
+  commentId: Overload:XRTK.Utilities.ValidateConfiguration.ValidateService
+  isSpec: "True"
+  fullName: XRTK.Utilities.ValidateConfiguration.ValidateService
+  nameWithType: ValidateConfiguration.ValidateService
+- uid: XRTK.Utilities.ValidateConfiguration.ValidateService``1(XRTK.Definitions.BaseMixedRealityServiceProfile{``0},System.Type[],XRTK.Definitions.MixedRealityServiceConfiguration{``0}[],System.Boolean)
+  name: ValidateService<T>(BaseMixedRealityServiceProfile<T>, Type[], MixedRealityServiceConfiguration<T>[], Boolean)
+  href: api/XRTK.Utilities.ValidateConfiguration.html#XRTK_Utilities_ValidateConfiguration_ValidateService__1_XRTK_Definitions_BaseMixedRealityServiceProfile___0__System_Type___XRTK_Definitions_MixedRealityServiceConfiguration___0____System_Boolean_
+  commentId: M:XRTK.Utilities.ValidateConfiguration.ValidateService``1(XRTK.Definitions.BaseMixedRealityServiceProfile{``0},System.Type[],XRTK.Definitions.MixedRealityServiceConfiguration{``0}[],System.Boolean)
+  name.vb: ValidateService(Of T)(BaseMixedRealityServiceProfile(Of T), Type(), MixedRealityServiceConfiguration(Of T)(), Boolean)
+  fullName: XRTK.Utilities.ValidateConfiguration.ValidateService<T>(XRTK.Definitions.BaseMixedRealityServiceProfile<T>, System.Type[], XRTK.Definitions.MixedRealityServiceConfiguration<T>[], System.Boolean)
+  fullName.vb: XRTK.Utilities.ValidateConfiguration.ValidateService(Of T)(XRTK.Definitions.BaseMixedRealityServiceProfile(Of T), System.Type(), XRTK.Definitions.MixedRealityServiceConfiguration(Of T)(), System.Boolean)
+  nameWithType: ValidateConfiguration.ValidateService<T>(BaseMixedRealityServiceProfile<T>, Type[], MixedRealityServiceConfiguration<T>[], Boolean)
+  nameWithType.vb: ValidateConfiguration.ValidateService(Of T)(BaseMixedRealityServiceProfile(Of T), Type(), MixedRealityServiceConfiguration(Of T)(), Boolean)
 - uid: XRTK.Utilities.WebRequestRest
   name: XRTK.Utilities.WebRequestRest
   href: api/XRTK.Utilities.WebRequestRest.html
@@ -51481,25 +51495,25 @@ references:
   isSpec: "True"
   fullName: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityController.SetupDefaultInteractions
   nameWithType: WindowsMixedRealityController.SetupDefaultInteractions
-- uid: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider
-  name: WindowsMixedRealityDataProvider
-  href: api/XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider.html
-  commentId: T:XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider
-  fullName: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider
-  nameWithType: WindowsMixedRealityDataProvider
-- uid: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider.#ctor(System.String,System.UInt32,XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityControllerDataProviderProfile)
-  name: WindowsMixedRealityDataProvider(String, UInt32, WindowsMixedRealityControllerDataProviderProfile)
-  href: api/XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider.html#XRTK_WindowsMixedReality_Controllers_WindowsMixedRealityDataProvider__ctor_System_String_System_UInt32_XRTK_WindowsMixedReality_Profiles_WindowsMixedRealityControllerDataProviderProfile_
-  commentId: M:XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider.#ctor(System.String,System.UInt32,XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityControllerDataProviderProfile)
-  fullName: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider.WindowsMixedRealityDataProvider(System.String, System.UInt32, XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityControllerDataProviderProfile)
-  nameWithType: WindowsMixedRealityDataProvider.WindowsMixedRealityDataProvider(String, UInt32, WindowsMixedRealityControllerDataProviderProfile)
-- uid: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider.#ctor*
-  name: WindowsMixedRealityDataProvider
-  href: api/XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider.html#XRTK_WindowsMixedReality_Controllers_WindowsMixedRealityDataProvider__ctor_
-  commentId: Overload:XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider.#ctor
+- uid: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityControllerDataProvider
+  name: WindowsMixedRealityControllerDataProvider
+  href: api/XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityControllerDataProvider.html
+  commentId: T:XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityControllerDataProvider
+  fullName: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityControllerDataProvider
+  nameWithType: WindowsMixedRealityControllerDataProvider
+- uid: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityControllerDataProvider.#ctor(System.String,System.UInt32,XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityControllerDataProviderProfile)
+  name: WindowsMixedRealityControllerDataProvider(String, UInt32, WindowsMixedRealityControllerDataProviderProfile)
+  href: api/XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityControllerDataProvider.html#XRTK_WindowsMixedReality_Controllers_WindowsMixedRealityControllerDataProvider__ctor_System_String_System_UInt32_XRTK_WindowsMixedReality_Profiles_WindowsMixedRealityControllerDataProviderProfile_
+  commentId: M:XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityControllerDataProvider.#ctor(System.String,System.UInt32,XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityControllerDataProviderProfile)
+  fullName: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityControllerDataProvider.WindowsMixedRealityControllerDataProvider(System.String, System.UInt32, XRTK.WindowsMixedReality.Profiles.WindowsMixedRealityControllerDataProviderProfile)
+  nameWithType: WindowsMixedRealityControllerDataProvider.WindowsMixedRealityControllerDataProvider(String, UInt32, WindowsMixedRealityControllerDataProviderProfile)
+- uid: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityControllerDataProvider.#ctor*
+  name: WindowsMixedRealityControllerDataProvider
+  href: api/XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityControllerDataProvider.html#XRTK_WindowsMixedReality_Controllers_WindowsMixedRealityControllerDataProvider__ctor_
+  commentId: Overload:XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityControllerDataProvider.#ctor
   isSpec: "True"
-  fullName: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityDataProvider.WindowsMixedRealityDataProvider
-  nameWithType: WindowsMixedRealityDataProvider.WindowsMixedRealityDataProvider
+  fullName: XRTK.WindowsMixedReality.Controllers.WindowsMixedRealityControllerDataProvider.WindowsMixedRealityControllerDataProvider
+  nameWithType: WindowsMixedRealityControllerDataProvider.WindowsMixedRealityControllerDataProvider
 - uid: XRTK.WindowsMixedReality.Inspectors
   name: XRTK.WindowsMixedReality.Inspectors
   href: api/XRTK.WindowsMixedReality.Inspectors.html

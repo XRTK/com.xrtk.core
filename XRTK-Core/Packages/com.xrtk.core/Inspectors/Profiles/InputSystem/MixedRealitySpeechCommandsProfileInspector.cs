@@ -29,7 +29,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             base.OnEnable();
 
-            inputSystemProfile = thisProfile.ParentProfile as MixedRealityInputSystemProfile;
+            inputSystemProfile = ThisProfile.ParentProfile as MixedRealityInputSystemProfile;
 
             if (inputSystemProfile == null ||
                 inputSystemProfile.InputActionsProfile == null) { return; }
@@ -51,7 +51,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 Selection.activeObject = inputSystemProfile;
             }
 
-            thisProfile.CheckProfileLock();
+            ThisProfile.CheckProfileLock();
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Speech Commands", EditorStyles.boldLabel);

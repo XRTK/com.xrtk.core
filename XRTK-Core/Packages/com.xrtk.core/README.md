@@ -52,6 +52,20 @@ By default, we support OpenVR on all platforms that support the standard, as wel
 - [x] Windows Standalone
 - [x] Linux
 - [x] OSX Standalone
+- [x] Open VR
+- [ ] Open XR
+- [x] [Windows Mixed Reality](https://github.com/XRTK/WindowsMixedReality)
+    - [x] HoloLens
+    - [x] Windows Mixed Reality HMDs
+    - [-] HoloLens 2 (platform supported, hands / eyes pending)
+- [x] [Lumin (aka Magic Leap)](https://github.com/XRTK/Lumin)
+- [x] [Native Oculus API](https://github.com/XRTK/Oculus)
+    - [x] Rift
+    - [x] Quest
+    - [ ] Go
+- [ ] Native Steam VR
+    - [ ] HTC Vive
+    - [ ] Vive Index
 - [ ] iOS
     - [ ] ARKit
 - [ ] Android
@@ -59,16 +73,3 @@ By default, we support OpenVR on all platforms that support the standard, as wel
 - [ ] WebAssembly
     - [ ] WebVR
     - [ ] WebXR
-- [x] Open VR
-- [ ] Open XR
-- [x] [Windows Mixed Reality](https://github.com/XRTK/WindowsMixedReality)
-    - [x] HoloLens
-    - [x] Windows Mixed Reality HMDs
-    - [ ] HoloLens 2
-- [x] [Lumin (aka Magic Leap)](https://github.com/XRTK/Lumin)
-- [x] [Native Oculus API](https://github.com/XRTK/Oculus)
-    - [x] Rift
-    - [x] Quest
-- [ ] Native Steam VR
-    - [ ] HTC Vive
-    - [ ] Vive Index

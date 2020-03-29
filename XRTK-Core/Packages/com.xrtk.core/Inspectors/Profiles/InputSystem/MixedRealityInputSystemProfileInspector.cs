@@ -1,5 +1,5 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information. 
+// Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
 using UnityEngine;
@@ -21,7 +21,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private SerializedProperty controllerVisualizationProfile;
         private SerializedProperty controllerDataProvidersProfile;
         private SerializedProperty controllerMappingProfiles;
-        private SerializedProperty handTrackingProfile;
 
         protected override void OnEnable()
         {
@@ -36,24 +35,23 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             controllerVisualizationProfile = serializedObject.FindProperty("controllerVisualizationProfile");
             controllerDataProvidersProfile = serializedObject.FindProperty("controllerDataProvidersProfile");
             controllerMappingProfiles = serializedObject.FindProperty("controllerMappingProfiles");
-            handTrackingProfile = serializedObject.FindProperty(nameof(handTrackingProfile));
         }
 
         public override void OnInspectorGUI()
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (thisProfile.ParentProfile != null &&
+            if (ThisProfile.ParentProfile != null &&
                 GUILayout.Button("Back to Configuration Profile"))
             {
-                Selection.activeObject = thisProfile.ParentProfile;
+                Selection.activeObject = ThisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Input System Profile", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("The Input System Profile helps developers configure input no matter what platform you're building for.", MessageType.Info);
 
-            thisProfile.CheckProfileLock();
+            ThisProfile.CheckProfileLock();
 
             serializedObject.Update();
             bool changed = false;
@@ -66,15 +64,14 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 changed = true;
             }
 
-            changed |= RenderProfile(thisProfile, inputActionsProfile);
-            changed |= RenderProfile(thisProfile, inputActionRulesProfile);
-            changed |= RenderProfile(thisProfile, pointerProfile);
-            changed |= RenderProfile(thisProfile, gesturesProfile);
-            changed |= RenderProfile(thisProfile, speechCommandsProfile);
-            changed |= RenderProfile(thisProfile, controllerVisualizationProfile);
-            changed |= RenderProfile(thisProfile, controllerDataProvidersProfile);
-            changed |= RenderProfile(thisProfile, controllerMappingProfiles);
-            changed |= RenderProfile(thisProfile, handTrackingProfile);
+            changed |= RenderProfile(ThisProfile, inputActionsProfile);
+            changed |= RenderProfile(ThisProfile, inputActionRulesProfile);
+            changed |= RenderProfile(ThisProfile, pointerProfile);
+            changed |= RenderProfile(ThisProfile, gesturesProfile);
+            changed |= RenderProfile(ThisProfile, speechCommandsProfile);
+            changed |= RenderProfile(ThisProfile, controllerVisualizationProfile);
+            changed |= RenderProfile(ThisProfile, controllerDataProvidersProfile);
+            changed |= RenderProfile(ThisProfile, controllerMappingProfiles);
 
             serializedObject.ApplyModifiedProperties();
 

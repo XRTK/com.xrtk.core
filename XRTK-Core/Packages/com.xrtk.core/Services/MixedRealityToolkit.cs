@@ -479,9 +479,17 @@ namespace XRTK.Services
                 {
                     if (CreateAndRegisterService(configuration))
                     {
-                        if (configuration.ConfigurationProfile is BaseMixedRealityExtensionServiceProfile extensionServiceProfile)
+                        switch (configuration.ConfigurationProfile)
                         {
-                            RegisterServices(extensionServiceProfile.RegisteredServiceConfigurations);
+                            case null:
+                                // Nothing
+                                break;
+                            case BaseMixedRealityExtensionServiceProfile extensionServiceProfile:
+                                RegisterServices(extensionServiceProfile.RegisteredServiceConfigurations);
+                                break;
+                            default:
+                                Debug.LogError($"{configuration.ConfigurationProfile.name} does not derive from {nameof(BaseMixedRealityExtensionServiceProfile)}");
+                                break;
                         }
                     }
                     else
@@ -694,11 +702,11 @@ namespace XRTK.Services
         #region Registration
 
         /// <summary>
-        /// 
+        /// Registers all the services defined in the provided configuration collection.
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="configurations"></param>
-        /// <returns></returns>
+        /// <returns>True, if all configurations successfully created and registered their services.</returns>
         public static bool RegisterServices<T>(MixedRealityServiceConfiguration<T>[] configurations) where T : IMixedRealityService
         {
             bool anyFailed = false;
@@ -721,7 +729,7 @@ namespace XRTK.Services
                 }
             }
 
-            return anyFailed;
+            return !anyFailed;
         }
 
         /// <summary>
@@ -751,7 +759,7 @@ namespace XRTK.Services
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="configuration"></param>
-        /// <returns></returns>
+        /// <returns>True, if the service was successfully created and registered.</returns>
         public static bool CreateAndRegisterService<T>(IMixedRealityServiceConfiguration<T> configuration) where T : IMixedRealityService
         {
             return CreateAndRegisterService<T>(
@@ -865,14 +873,13 @@ namespace XRTK.Services
             {
                 activeSystems.Add(interfaceType, serviceInstance);
             }
-            else if (typeof(IMixedRealityDataProvider).IsAssignableFrom(interfaceType) ||
-                     typeof(IMixedRealityExtensionService).IsAssignableFrom(interfaceType))
+            else if (typeof(IMixedRealityService).IsAssignableFrom(interfaceType))
             {
                 registeredMixedRealityServices.Add(new Tuple<Type, IMixedRealityService>(interfaceType, serviceInstance));
             }
             else
             {
-                Debug.LogError($"Unable to register {interfaceType.Name}. Concrete type does not implement {typeof(IMixedRealityExtensionService).Name} or {typeof(IMixedRealityDataProvider).Name}.");
+                Debug.LogError($"Unable to register {interfaceType.Name}. Concrete type does not implement an interface that derives from {nameof(IMixedRealityService)}");
                 return false;
             }
 

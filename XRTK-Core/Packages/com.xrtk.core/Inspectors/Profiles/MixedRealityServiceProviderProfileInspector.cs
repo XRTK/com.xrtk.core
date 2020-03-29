@@ -37,15 +37,8 @@ namespace XRTK.Inspectors.Profiles
             Debug.Assert(configurations != null);
             var baseType = ThisProfile.GetType().BaseType;
             var genericTypeArgs = baseType?.FindTopmostGenericTypeArguments();
-
             Debug.Assert(genericTypeArgs != null);
-
-            foreach (var interfaceType in genericTypeArgs)
-            {
-                ServiceConstraint = interfaceType;
-                break;
-            }
-
+            ServiceConstraint = genericTypeArgs[0];
             Debug.Assert(ServiceConstraint != null);
 
             configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true)

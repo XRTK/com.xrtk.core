@@ -72,10 +72,16 @@ namespace XRTK.Inspectors.Profiles
                 currentlySelectedConfigurationOption = index;
             }
 
-            var prevLabelWidth = EditorGUIUtility.labelWidth;
-            EditorGUIUtility.labelWidth = prevLabelWidth - 18f;
+
             var lastMode = EditorGUIUtility.wideMode;
+            var prevLabelWidth = EditorGUIUtility.labelWidth;
+            var labelWidth = prevLabelWidth - 18f;
+
+            EditorGUIUtility.labelWidth = labelWidth;
             EditorGUIUtility.wideMode = true;
+
+            var lastRect = GUILayoutUtility.GetLastRect();
+            var isScrollBarActive = (int)(EditorGUIUtility.currentViewWidth - (rect.width + 25f)) == 36;
 
             var halfFieldWidth = rect.width * 0.5f;
             var halfFieldHeight = EditorGUIUtility.singleLineHeight * 0.25f;
@@ -86,7 +92,7 @@ namespace XRTK.Inspectors.Profiles
             var profileRect = new Rect(rect.x, rect.y + halfFieldHeight * 16, rect.width, EditorGUIUtility.singleLineHeight);
 
             var profileHeight = rect.y + halfFieldHeight * 16;
-            var profilePosition = rect.x + EditorGUIUtility.labelWidth;
+            var profilePosition = rect.x + labelWidth;
             var profileLabelRect = new Rect(rect.x, profileHeight, halfFieldWidth, EditorGUIUtility.singleLineHeight);
 
             var configurationProperty = configurations.GetArrayElementAtIndex(index);
@@ -139,12 +145,13 @@ namespace XRTK.Inspectors.Profiles
             if (profileType != null)
             {
                 EditorGUI.LabelField(profileLabelRect, "Profile");
-                var tempWidth = EditorGUIUtility.currentViewWidth - profilePosition - 12;
                 var isNullProfile = configurationProfileProperty.objectReferenceValue == null;
+
                 var buttonWidth = isNullProfile ? 20f : 42f;
-                var profileObjectWidth = tempWidth - buttonWidth;
-                var profileObjectRect = new Rect(profilePosition, profileHeight, profileObjectWidth - 4f, EditorGUIUtility.singleLineHeight);
-                var buttonRect = new Rect(profilePosition + profileObjectWidth, profileHeight, buttonWidth, EditorGUIUtility.singleLineHeight);
+                var profileObjectWidth = EditorGUIUtility.currentViewWidth - profilePosition - buttonWidth - 12f;
+                var scrollOffset = isScrollBarActive ? 15f : 0f;
+                var profileObjectRect = new Rect(profilePosition, profileHeight, profileObjectWidth - scrollOffset, EditorGUIUtility.singleLineHeight);
+                var buttonRect = new Rect(profilePosition + profileObjectWidth - scrollOffset, profileHeight, buttonWidth, EditorGUIUtility.singleLineHeight);
 
                 configurationProfileProperty.objectReferenceValue = EditorGUI.ObjectField(profileObjectRect, configurationProfileProperty.objectReferenceValue, profileType, false);
                 update = GUI.Button(buttonRect, isNullProfile ? NewProfileContent : CloneProfileContent);

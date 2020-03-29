@@ -121,6 +121,8 @@ namespace XRTK.Inspectors.Profiles
 
                     foreach (var parameterInfo in parameters)
                     {
+                        if (parameterInfo.ParameterType.IsAbstract) { continue; }
+
                         if (parameterInfo.ParameterType.IsSubclassOf(typeof(BaseMixedRealityProfile)))
                         {
                             profileType = parameterInfo.ParameterType;
@@ -151,7 +153,26 @@ namespace XRTK.Inspectors.Profiles
                 var profileObjectRect = new Rect(profilePosition, profileHeight, profileObjectWidth - scrollOffset, EditorGUIUtility.singleLineHeight);
                 var buttonRect = new Rect(profilePosition + profileObjectWidth - scrollOffset, profileHeight, buttonWidth, EditorGUIUtility.singleLineHeight);
 
-                configurationProfileProperty.objectReferenceValue = EditorGUI.ObjectField(profileObjectRect, configurationProfileProperty.objectReferenceValue, profileType, false);
+                var newProfileObjectReference = EditorGUI.ObjectField(profileObjectRect, configurationProfileProperty.objectReferenceValue, profileType, false);
+
+                if (newProfileObjectReference is BaseMixedRealityProfile newProfile)
+                {
+                    var newProfileType = newProfile.GetType();
+                    if (newProfileType == profileType ||
+                        newProfileType.IsSubclassOf(profileType))
+                    {
+                        configurationProfileProperty.objectReferenceValue = newProfileObjectReference;
+                    }
+                    else
+                    {
+                        Debug.LogError($"{newProfileObjectReference.name} does not derive from {profileType.Name}!");
+                    }
+                }
+                else if (newProfileObjectReference is null)
+                {
+                    configurationProfileProperty.objectReferenceValue = null;
+                }
+
                 update = GUI.Button(buttonRect, isNullProfile ? NewProfileContent : CloneProfileContent);
 
                 if (update)
@@ -168,7 +189,7 @@ namespace XRTK.Inspectors.Profiles
             }
             else
             {
-                EditorGUI.PropertyField(profileRect, configurationProfileProperty, ProfileContent);
+                EditorGUI.LabelField(profileRect, "No Configuration Profile needed");
             }
 
             if (configurationProfileProperty.objectReferenceValue != null)

@@ -17,6 +17,7 @@ namespace XRTK.Inspectors.Profiles
     [CustomEditor(typeof(BaseMixedRealityServiceProfile<>))]
     public class MixedRealityServiceProfileInspector : BaseMixedRealityProfileInspector
     {
+        private readonly GUIContent ProfileContent = new GUIContent("Profile", "The configuration profile for this service.");
         private ReorderableList configurationList;
         private int currentlySelectedConfigurationOption;
 
@@ -141,7 +142,7 @@ namespace XRTK.Inspectors.Profiles
 
             if (profileType != null)
             {
-                EditorGUI.LabelField(profileLabelRect, "Profile");
+                EditorGUI.LabelField(profileLabelRect, ProfileContent);
                 var isNullProfile = configurationProfileProperty.objectReferenceValue == null;
 
                 var buttonWidth = isNullProfile ? 20f : 42f;
@@ -167,7 +168,19 @@ namespace XRTK.Inspectors.Profiles
             }
             else
             {
-                EditorGUI.PropertyField(profileRect, configurationProfileProperty);
+                EditorGUI.PropertyField(profileRect, configurationProfileProperty, ProfileContent);
+            }
+
+            if (configurationProfileProperty.objectReferenceValue != null)
+            {
+                var renderedProfile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
+                Debug.Assert(renderedProfile != null);
+
+                if (renderedProfile.ParentProfile == null ||
+                    renderedProfile.ParentProfile != ThisProfile)
+                {
+                    renderedProfile.ParentProfile = ThisProfile;
+                }
             }
 
             if (update ||

@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Inspectors.Extensions;
+using XRTK.Inspectors.Utilities;
 using XRTK.Services;
 using XRTK.Utilities.Async;
 
@@ -33,6 +34,17 @@ namespace XRTK.Inspectors.Profiles
             profile = target as BaseMixedRealityProfile;
             Debug.Assert(profile != null);
             ThisProfile = profile;
+        }
+
+        protected void RenderHeader()
+        {
+            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+
+            if (ThisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to parent profile"))
+            {
+                Selection.activeObject = ThisProfile.ParentProfile;
+            }
         }
 
         /// <summary>

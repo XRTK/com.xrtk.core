@@ -72,12 +72,10 @@ namespace XRTK.Inspectors.Profiles
                 currentlySelectedConfigurationOption = index;
             }
 
-
             var lastMode = EditorGUIUtility.wideMode;
             var prevLabelWidth = EditorGUIUtility.labelWidth;
-            var labelWidth = prevLabelWidth - 18f;
 
-            EditorGUIUtility.labelWidth = labelWidth;
+            EditorGUIUtility.labelWidth = prevLabelWidth - 18f;
             EditorGUIUtility.wideMode = true;
 
             var lastRect = GUILayoutUtility.GetLastRect();
@@ -92,7 +90,7 @@ namespace XRTK.Inspectors.Profiles
             var profileRect = new Rect(rect.x, rect.y + halfFieldHeight * 16, rect.width, EditorGUIUtility.singleLineHeight);
 
             var profileHeight = rect.y + halfFieldHeight * 16;
-            var profilePosition = rect.x + labelWidth;
+            var profilePosition = rect.x + EditorGUIUtility.labelWidth;
             var profileLabelRect = new Rect(rect.x, profileHeight, halfFieldWidth, EditorGUIUtility.singleLineHeight);
 
             var configurationProperty = configurations.GetArrayElementAtIndex(index);

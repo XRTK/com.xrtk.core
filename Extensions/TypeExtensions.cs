@@ -18,10 +18,11 @@ namespace XRTK.Extensions
         /// </summary>
         /// <param name="root">Root type to start looking for generic type arguments at.</param>
         /// <param name="maxRecursionDepth">The maximum recursion depth until execution gets canceled even if no results found.</param>
-        /// <returns>Found gneneric type arguments array or null, if none found.</returns>
+        /// <returns>Found generic type arguments array or null, if none found.</returns>
         public static Type[] FindTopmostGenericTypeArguments(this Type root, int maxRecursionDepth = 5)
         {
-            Type[] genericTypeArgs = root?.GenericTypeArguments;
+            var genericTypeArgs = root?.GenericTypeArguments;
+
             if (genericTypeArgs != null && genericTypeArgs.Length > 0)
             {
                 return genericTypeArgs;

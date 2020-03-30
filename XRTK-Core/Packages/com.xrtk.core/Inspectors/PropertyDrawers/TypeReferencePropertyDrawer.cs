@@ -29,6 +29,7 @@ namespace XRTK.Inspectors.PropertyDrawers
         private static readonly Dictionary<string, Type> TypeMap = new Dictionary<string, Type>();
         private static readonly int ControlHint = typeof(TypeReferencePropertyDrawer).GetHashCode();
         private static readonly GUIContent TempContent = new GUIContent();
+        private static readonly GUIContent RepairContent = new GUIContent("Repair", "Try to repair the reference");
         private static readonly Color EnabledColor = Color.white;
         private static readonly Color DisabledColor = Color.Lerp(Color.white, Color.clear, 0.5f);
 
@@ -287,15 +288,18 @@ namespace XRTK.Inspectors.PropertyDrawers
                     }
                     else
                     {
+                        const float leftPadding = 8f;
+                        const float iconSize = 24f;
+                        const float buttonWidth = 40f;
                         var errorContent = EditorGUIUtility.IconContent("d_console.erroricon.sml");
-                        GUI.Label(new Rect(position.width, position.y, position.width, position.height), errorContent);
+                        GUI.Label(new Rect(EditorGUIUtility.currentViewWidth - iconSize - leftPadding, position.y, iconSize, iconSize), errorContent);
 
-                        var dropdownPosition = new Rect(position.x, position.y, position.width - 90, position.height);
-                        var buttonPosition = new Rect(position.width - 75, position.y, 75, position.height);
+                        var dropdownPosition = new Rect(position.x, position.y, position.width - buttonWidth - 28f, position.height);
+                        var buttonPosition = new Rect(EditorGUIUtility.currentViewWidth - buttonWidth - leftPadding - iconSize, position.y, buttonWidth, position.height);
 
                         DrawTypeSelectionControl(dropdownPosition, label, ref reference, filter);
 
-                        if (GUI.Button(buttonPosition, "Try Repair", EditorStyles.miniButton))
+                        if (GUI.Button(buttonPosition, RepairContent, EditorStyles.miniButton))
                         {
                             TypeSearch(referenceProperty, ref reference, filter, true);
                         }

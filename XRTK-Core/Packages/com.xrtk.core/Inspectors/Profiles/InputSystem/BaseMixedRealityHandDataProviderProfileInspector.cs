@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
-using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Controllers.Hands;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
 {

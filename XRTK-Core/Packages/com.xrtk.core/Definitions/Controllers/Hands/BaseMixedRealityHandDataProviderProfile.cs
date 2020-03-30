@@ -7,7 +7,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem.Controllers.Hands;
 using XRTK.Providers.Controllers.Hands;
 
-namespace XRTK.Definitions.Controllers
+namespace XRTK.Definitions.Controllers.Hands
 {
     /// <summary>
     /// Provides additional configuration options for hand controller data providers.

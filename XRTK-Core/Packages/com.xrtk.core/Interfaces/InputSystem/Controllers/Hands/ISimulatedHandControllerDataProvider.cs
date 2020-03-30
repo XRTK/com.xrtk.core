@@ -6,7 +6,7 @@ using XRTK.Definitions.Controllers.Simulation.Hands;
 
 namespace XRTK.Interfaces.InputSystem.Controllers.Hands
 {
-    public interface ISimulatedHandControllerDataProvider : ISimulatedControllerDataProvider
+    public interface ISimulatedHandControllerDataProvider : ISimulatedControllerDataProvider, IMixedRealityHandControllerDataProvider
     {
         /// <summary>
         /// Gets configured simulated hand controller pose definitions used to simulate

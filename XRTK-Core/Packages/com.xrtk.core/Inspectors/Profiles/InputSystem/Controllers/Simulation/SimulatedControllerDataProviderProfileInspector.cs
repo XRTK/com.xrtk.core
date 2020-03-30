@@ -12,7 +12,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
     [CustomEditor(typeof(SimulatedControllerDataProviderProfile))]
     public class SimulatedControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
-        private SerializedProperty simulatedControllerType;
         private SerializedProperty simulatedUpdateFrequency;
         private SerializedProperty controllerHideTimeout;
 
@@ -31,7 +30,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
         {
             base.OnEnable();
 
-            simulatedControllerType = serializedObject.FindProperty(nameof(simulatedControllerType));
             simulatedUpdateFrequency = serializedObject.FindProperty(nameof(simulatedUpdateFrequency));
             controllerHideTimeout = serializedObject.FindProperty(nameof(controllerHideTimeout));
 
@@ -63,7 +61,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
             serializedObject.Update();
 
             EditorGUI.BeginChangeCheck();
-            EditorGUILayout.PropertyField(simulatedControllerType);
             EditorGUILayout.PropertyField(simulatedUpdateFrequency);
             EditorGUILayout.PropertyField(controllerHideTimeout);
             EditorGUILayout.Space();
@@ -80,10 +77,16 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
             EditorGUILayout.PropertyField(rotationSpeed);
             EditorGUILayout.Space();
 
+            OnInspectorAdditionalGUI();
+
+            serializedObject.ApplyModifiedProperties();
+
             if (EditorGUI.EndChangeCheck() && MixedRealityToolkit.IsInitialized)
             {
                 EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
             }
         }
+
+        protected virtual void OnInspectorAdditionalGUI() { }
     }
 }

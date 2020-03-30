@@ -2,14 +2,12 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
-using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation.Hands;
-using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 {
     [CustomEditor(typeof(SimulatedHandControllerDataProviderProfile))]
-    public class SimulatedHandControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
+    public class SimulatedHandControllerDataProviderProfileInspector : SimulatedControllerDataProviderProfileInspector
     {
         private SerializedProperty poseDefinitions;
         private SerializedProperty handPoseAnimationSpeed;
@@ -22,26 +20,11 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
             handPoseAnimationSpeed = serializedObject.FindProperty(nameof(handPoseAnimationSpeed));
         }
 
-        public override void OnInspectorGUI()
+        protected override void OnInspectorAdditionalGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
-
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button("Back To Configuration Profile"))
-            {
-                Selection.activeObject = ThisProfile.ParentProfile;
-            }
-
-            ThisProfile.CheckProfileLock();
-            serializedObject.Update();
-
-            EditorGUILayout.BeginVertical();
-            EditorGUILayout.Space();
             EditorGUILayout.PropertyField(poseDefinitions, true);
             EditorGUILayout.PropertyField(handPoseAnimationSpeed);
-            EditorGUILayout.EndVertical();
-
-            serializedObject.ApplyModifiedProperties();
+            EditorGUILayout.Space();
         }
     }
 }

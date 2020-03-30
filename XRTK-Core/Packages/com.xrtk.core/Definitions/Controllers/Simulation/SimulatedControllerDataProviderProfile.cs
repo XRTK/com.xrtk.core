@@ -2,9 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.Providers.Controllers.Simulation;
 
 namespace XRTK.Definitions.Controllers.Simulation
 {
@@ -14,16 +12,6 @@ namespace XRTK.Definitions.Controllers.Simulation
         #region General Settings
 
         [Header("General Settings")]
-
-        [SerializeField]
-        [Implements(typeof(IMixedRealitySimulatedController), TypeGrouping.ByNamespaceFlat)]
-        [Tooltip("The concrete controller type to simulate.")]
-        private SystemType simulatedControllerType = null;
-
-        /// <summary>
-        /// The concrete controller type to simulate.
-        /// </summary>
-        public SystemType SimulatedControllerType => simulatedControllerType;
 
         [SerializeField]
         [Tooltip("Simulated update frequency for tracking data in milliseconds. 0ms is every frame.")]

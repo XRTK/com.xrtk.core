@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation;
-using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem.Controllers.Hands;
 using XRTK.Services;
@@ -13,10 +12,9 @@ using XRTK.Services;
 namespace XRTK.Providers.Controllers.Simulation
 {
     /// <summary>
-    /// The simulated controller data provider is mainly responsible for managing
-    /// active simulated controllers, such as hand controllers.
+    /// Base data provider implementation for controller simulation data providers.
     /// </summary>
-    public class SimulatedControllerDataProvider : BaseControllerDataProvider, ISimulatedControllerDataProvider
+    public abstract class BaseSimulatedControllerDataProvider : BaseControllerDataProvider, ISimulatedControllerDataProvider
     {
         /// <summary>
         /// Creates a new instance of the data provider.
@@ -24,7 +22,7 @@ namespace XRTK.Providers.Controllers.Simulation
         /// <param name="name">Name of the data provider as assigned in the configuration profile.</param>
         /// <param name="priority">Data provider priority controls the order in the service registry.</param>
         /// <param name="profile">Controller data provider profile assigned to the provider instance in the configuration inspector.</param>
-        public SimulatedControllerDataProvider(string name, uint priority, SimulatedControllerDataProviderProfile profile)
+        public BaseSimulatedControllerDataProvider(string name, uint priority, SimulatedControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
             if (profile == null)
@@ -32,7 +30,6 @@ namespace XRTK.Providers.Controllers.Simulation
                 throw new NullReferenceException($"A {nameof(SimulatedControllerDataProviderProfile)} is required for {name}");
             }
 
-            simulatedControllerType = profile.SimulatedControllerType?.Type ?? throw new NullReferenceException($"{nameof(SimulatedControllerDataProviderProfile)}.{nameof(SimulatedControllerDataProviderProfile.SimulatedControllerType)} cannot be null.");
             SimulatedUpdateFrequency = profile.SimulatedUpdateFrequency;
             ControllerHideTimeout = profile.ControllerHideTimeout;
             DefaultDistance = profile.DefaultDistance;
@@ -45,16 +42,35 @@ namespace XRTK.Providers.Controllers.Simulation
             RotationSpeed = profile.RotationSpeed;
         }
 
-        private readonly Type simulatedControllerType;
-        private readonly List<BaseController> activeControllers = new List<BaseController>();
-
         private SimulationTimeStampStopWatch simulatedUpdateStopWatch;
         private long lastSimulatedUpdateTimeStamp = 0;
 
-        private bool leftControllerIsAlwaysVisible = false;
-        private bool rightControllerIsAlwaysVisible = false;
-        private bool leftControllerIsTracked = false;
-        private bool rightControllerIsTracked = false;
+        /// <summary>
+        /// Internal read/write list of currently simulated controllers.
+        /// </summary>
+        protected List<BaseController> SimulatedControllers { get; } = new List<BaseController>();
+
+        /// <summary>
+        /// Gets or sets whether the left controller is currently set to be always visible
+        /// no matter the simulated tracking state.
+        /// </summary>
+        protected bool LeftControllerIsAlwaysVisible { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether the right controller is currently set to be always visible
+        /// no matter the simulated tracking state.
+        /// </summary>
+        protected bool RightControllerIsAlwaysVisible { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether the left controller is currently tracked by simulation.
+        /// </summary>
+        protected bool LeftControllerIsTracked { get; set; }
+
+        /// <summary>
+        /// Gets or sets whether the right controller is currently tracked by simulation.
+        /// </summary>
+        protected bool RightControllerIsTracked { get; set; }
 
         /// <inheritdoc />
         public double SimulatedUpdateFrequency { get; }
@@ -91,7 +107,7 @@ namespace XRTK.Providers.Controllers.Simulation
         /// active controllers property.
         /// </summary>
         /// <remarks>Subject to change, once the new controller refactorings are in place.</remarks>
-        public new IReadOnlyList<BaseController> ActiveControllers => activeControllers;
+        public new IReadOnlyList<BaseController> ActiveControllers => SimulatedControllers;
 
         /// <inheritdoc />
         public override void Enable()
@@ -132,22 +148,23 @@ namespace XRTK.Providers.Controllers.Simulation
             {
                 if (Input.GetKeyDown(ToggleLeftPersistentKey))
                 {
-                    leftControllerIsAlwaysVisible = !leftControllerIsAlwaysVisible;
+                    LeftControllerIsAlwaysVisible = !LeftControllerIsAlwaysVisible;
                 }
 
                 if (Input.GetKeyDown(LeftControllerTrackedKey))
                 {
-                    leftControllerIsTracked = true;
+                    LeftControllerIsTracked = true;
                 }
 
                 if (Input.GetKeyUp(LeftControllerTrackedKey))
                 {
-                    leftControllerIsTracked = false;
+                    LeftControllerIsTracked = false;
                 }
 
-                if (leftControllerIsAlwaysVisible || leftControllerIsTracked)
+                if ((LeftControllerIsAlwaysVisible || LeftControllerIsTracked) &&
+                    !TryGetController(Handedness.Left, out _))
                 {
-                    CreateControllerIfNotExists(Handedness.Left);
+                    CreateAndRegisterSimulatedController(Handedness.Left);
                 }
                 else
                 {
@@ -156,22 +173,23 @@ namespace XRTK.Providers.Controllers.Simulation
 
                 if (Input.GetKeyDown(ToggleRightPersistentKey))
                 {
-                    rightControllerIsAlwaysVisible = !rightControllerIsAlwaysVisible;
+                    RightControllerIsAlwaysVisible = !RightControllerIsAlwaysVisible;
                 }
 
                 if (Input.GetKeyDown(RightControllerTrackedKey))
                 {
-                    rightControllerIsTracked = true;
+                    RightControllerIsTracked = true;
                 }
 
                 if (Input.GetKeyUp(RightControllerTrackedKey))
                 {
-                    rightControllerIsTracked = false;
+                    RightControllerIsTracked = false;
                 }
 
-                if (rightControllerIsAlwaysVisible || rightControllerIsTracked)
+                if ((RightControllerIsAlwaysVisible || RightControllerIsTracked) &&
+                    !TryGetController(Handedness.Right, out _))
                 {
-                    CreateControllerIfNotExists(Handedness.Right);
+                    CreateAndRegisterSimulatedController(Handedness.Right);
                 }
                 else
                 {
@@ -182,48 +200,23 @@ namespace XRTK.Providers.Controllers.Simulation
             }
         }
 
-        private void CreateControllerIfNotExists(Handedness handedness)
-        {
-            if (TryGetController(handedness, out _))
-            {
-                return;
-            }
-
-            var pointers = RequestPointers(simulatedControllerType, handedness, true);
-            var inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{simulatedControllerType.Name} {handedness}", pointers);
-            var controller = (BaseController)Activator.CreateInstance(simulatedControllerType, TrackingState.Tracked, handedness, inputSource, null);
-
-            if (controller == null || !controller.SetupConfiguration(simulatedControllerType))
-            {
-                // Controller failed to be setup correctly.
-                // Return null so we don't raise the source detected.
-                return;
-            }
-
-            for (int i = 0; i < controller.InputSource?.Pointers?.Length; i++)
-            {
-                controller.InputSource.Pointers[i].Controller = controller;
-            }
-
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile.RenderMotionControllers)
-            {
-                controller.TryRenderControllerModel(simulatedControllerType);
-            }
-
-            MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);
-            activeControllers.Add(controller);
-        }
-
-        private void RemoveController(Handedness handedness)
+        /// <summary>
+        /// Removes the simulated controller and unregisters it for a given hand, if it exists.
+        /// </summary>
+        /// <param name="handedness">Handedness of the controller to remove.</param>
+        protected void RemoveController(Handedness handedness)
         {
             if (TryGetController(handedness, out BaseController controller))
             {
                 MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
-                activeControllers.Remove(controller);
+                SimulatedControllers.Remove(controller);
             }
         }
 
-        private void RemoveAllControllers()
+        /// <summary>
+        /// Removes and unregisters all currently active simulated controllers.
+        /// </summary>
+        protected void RemoveAllControllers()
         {
             while (ActiveControllers.Count > 0)
             {
@@ -233,7 +226,13 @@ namespace XRTK.Providers.Controllers.Simulation
             }
         }
 
-        private bool TryGetController(Handedness handedness, out BaseController controller)
+        /// <summary>
+        /// Gets a simulated controller instance for a hand if it exists.
+        /// </summary>
+        /// <param name="handedness">Handedness to lookup.</param>
+        /// <param name="controller">Controller instance if found.</param>
+        /// <returns>True, if instance exists for given handedness.</returns>
+        protected bool TryGetController(Handedness handedness, out BaseController controller)
         {
             for (int i = 0; i < ActiveControllers.Count; i++)
             {
@@ -248,5 +247,11 @@ namespace XRTK.Providers.Controllers.Simulation
             controller = default;
             return false;
         }
+
+        /// <summary>
+        /// Asks the concrete simulation data create and regisgter a new simulated controller.
+        /// </summary>
+        /// <param name="handedness">The handedness of the controller to create.</param>
+        protected abstract void CreateAndRegisterSimulatedController(Handedness handedness);
     }
 }

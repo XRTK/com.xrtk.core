@@ -64,12 +64,12 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <inheritdoc />
         protected override void CreateAndRegisterSimulatedController(Handedness handedness)
         {
-            Type simulatedControllertype = typeof(SimulatedHandController);
-            var pointers = RequestPointers(simulatedControllertype, handedness, true);
-            var inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{simulatedControllertype.Name} {handedness}", pointers);
-            var controller = (BaseController)Activator.CreateInstance(simulatedControllertype, TrackingState.Tracked, handedness, inputSource, null);
+            var controllerType = typeof(SimulatedHandController);
+            var pointers = RequestPointers(controllerType, handedness, true);
+            var inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{controllerType.Name} {handedness}", pointers);
+            var controller = (BaseController)Activator.CreateInstance(controllerType, TrackingState.Tracked, handedness, inputSource, null);
 
-            if (controller == null || !controller.SetupConfiguration(simulatedControllertype))
+            if (controller == null || !controller.SetupConfiguration(controllerType))
             {
                 // Controller failed to be setup correctly.
                 // Return null so we don't raise the source detected.
@@ -83,7 +83,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile.RenderMotionControllers)
             {
-                controller.TryRenderControllerModel(simulatedControllertype);
+                controller.TryRenderControllerModel(controllerType);
             }
 
             MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);

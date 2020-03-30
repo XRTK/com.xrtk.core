@@ -376,15 +376,17 @@ namespace XRTK.Services
                     .SelectMany(assembly => assembly.GetTypes())
                     .Where(type => typeof(IMixedRealityPlatform).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
 
+                var platformConfigurations = ActiveProfile.PlatformSystemProfile.PlatformConfigurations.ToList();
+
                 foreach (var platformType in platformTypes)
                 {
                     if (ActiveProfile.PlatformSystemProfile.PlatformConfigurations.All(configuration => configuration.PlatformType.Type != platformType))
                     {
-                        var platformConfigurations = ActiveProfile.PlatformSystemProfile.PlatformConfigurations.ToList();
                         platformConfigurations.Add(new PlatformConfiguration(platformType, (uint)platformConfigurations.Count));
-                        ActiveProfile.PlatformSystemProfile.PlatformConfigurations = platformConfigurations.OrderBy(configuration => configuration.Priority).ToArray();
                     }
                 }
+
+                ActiveProfile.PlatformSystemProfile.PlatformConfigurations = platformConfigurations.OrderBy(configuration => configuration.Priority).ToArray();
 #endif
                 foreach (var platformConfiguration in ActiveProfile.PlatformSystemProfile.PlatformConfigurations)
                 {

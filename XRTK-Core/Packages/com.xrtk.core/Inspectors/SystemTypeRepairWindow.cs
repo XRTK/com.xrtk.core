@@ -37,11 +37,11 @@ namespace XRTK.Inspectors
 
         private void OnGUI()
         {
-            for (int i = 0; i < repairedTypeOptions.Length; i++)
+            foreach (var type in repairedTypeOptions)
             {
-                if (GUILayout.Button(repairedTypeOptions[i].FullName, EditorStyles.miniButton))
+                if (GUILayout.Button(type.FullName, EditorStyles.miniButton))
                 {
-                    property.stringValue = SystemType.GetReference(repairedTypeOptions[i]);
+                    property.stringValue = SystemType.GetReference(type);
                     property.serializedObject.ApplyModifiedProperties();
                     Close();
                 }

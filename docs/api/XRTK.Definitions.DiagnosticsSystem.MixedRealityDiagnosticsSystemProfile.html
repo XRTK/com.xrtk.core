@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MixedRealityDiagnosticsSystemProfile
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.48.1.0">
+    <meta name="generator" content="docfx 2.51.0.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -82,10 +82,14 @@
     <div class="level1"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a></div>
     <div class="level2"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.ScriptableObject.html">ScriptableObject</a></div>
     <div class="level3"><a class="xref" href="XRTK.Definitions.BaseMixedRealityProfile.html">BaseMixedRealityProfile</a></div>
-    <div class="level4"><span class="xref">MixedRealityDiagnosticsSystemProfile</span></div>
+    <div class="level4"><a class="xref" href="XRTK.Definitions.BaseMixedRealityServiceProfile-1.html">BaseMixedRealityServiceProfile</a>&lt;<a class="xref" href="XRTK.Interfaces.DiagnosticsSystem.IMixedRealityDiagnosticsDataProvider.html">IMixedRealityDiagnosticsDataProvider</a>&gt;</div>
+    <div class="level5"><span class="xref">MixedRealityDiagnosticsSystemProfile</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="XRTK.Definitions.BaseMixedRealityServiceProfile-1.html#XRTK_Definitions_BaseMixedRealityServiceProfile_1_RegisteredServiceConfigurations">BaseMixedRealityServiceProfile&lt;IMixedRealityDiagnosticsDataProvider&gt;.RegisteredServiceConfigurations</a>
+    </div>
     <div>
       <a class="xref" href="XRTK.Definitions.BaseMixedRealityProfile.html#XRTK_Definitions_BaseMixedRealityProfile_ParentProfile">BaseMixedRealityProfile.ParentProfile</a>
     </div>
@@ -209,7 +213,7 @@
   <h5 id="XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsSystemProfile_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[CreateAssetMenu(menuName = &quot;Mixed Reality Toolkit/Diagnostics System Profile&quot;, fileName = &quot;MixedRealityDiagnosticsSystemProfile&quot;, order = 16)]
-public class MixedRealityDiagnosticsSystemProfile : BaseMixedRealityProfile</code></pre>
+public class MixedRealityDiagnosticsSystemProfile : BaseMixedRealityServiceProfile&lt;IMixedRealityDiagnosticsDataProvider&gt;</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -218,7 +222,7 @@ public class MixedRealityDiagnosticsSystemProfile : BaseMixedRealityProfile</cod
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsSystemProfile_DiagnosticsWindowPrefab.md&amp;value=---%0Auid%3A%20XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.DiagnosticsWindowPrefab%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsSystemProfile.cs/#L24">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsSystemProfile.cs/#L25">View Source</a>
   </span>
   <a id="XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsSystemProfile_DiagnosticsWindowPrefab_" data-uid="XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.DiagnosticsWindowPrefab*"></a>
   <h4 id="XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsSystemProfile_DiagnosticsWindowPrefab" data-uid="XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.DiagnosticsWindowPrefab">DiagnosticsWindowPrefab</h4>
@@ -246,41 +250,10 @@ public class MixedRealityDiagnosticsSystemProfile : BaseMixedRealityProfile</cod
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsSystemProfile_RegisteredDiagnosticsDataProviders.md&amp;value=---%0Auid%3A%20XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsSystemProfile.cs/#L45">View Source</a>
-  </span>
-  <a id="XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsSystemProfile_RegisteredDiagnosticsDataProviders_" data-uid="XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders*"></a>
-  <h4 id="XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsSystemProfile_RegisteredDiagnosticsDataProviders" data-uid="XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.RegisteredDiagnosticsDataProviders">RegisteredDiagnosticsDataProviders</h4>
-  <div class="markdown level1 summary"><p>The currently registered diagnostics data providers for the diagnostics system.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public DiagnosticsDataProviderConfiguration[] RegisteredDiagnosticsDataProviders { get; }</code></pre>
-  </div>
-  <h5 class="propertyValue">Property Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="XRTK.Definitions.DiagnosticsSystem.DiagnosticsDataProviderConfiguration.html">DiagnosticsDataProviderConfiguration</a>[]</td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsSystemProfile_ShowDiagnosticsWindowOnStart.md&amp;value=---%0Auid%3A%20XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.ShowDiagnosticsWindowOnStart%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsSystemProfile.cs/#L37">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsSystemProfile.cs/#L38">View Source</a>
   </span>
   <a id="XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsSystemProfile_ShowDiagnosticsWindowOnStart_" data-uid="XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.ShowDiagnosticsWindowOnStart*"></a>
   <h4 id="XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsSystemProfile_ShowDiagnosticsWindowOnStart" data-uid="XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile.ShowDiagnosticsWindowOnStart">ShowDiagnosticsWindowOnStart</h4>
@@ -314,6 +287,9 @@ public class MixedRealityDiagnosticsSystemProfile : BaseMixedRealityProfile</cod
       <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
   </div>
   <div>
+      <a class="xref" href="XRTK.Utilities.ValidateConfiguration.html#XRTK_Utilities_ValidateConfiguration_ValidateService__1_XRTK_Definitions_BaseMixedRealityServiceProfile___0__System_Type___XRTK_Definitions_MixedRealityServiceConfiguration___0____System_Boolean_">ValidateConfiguration.ValidateService&lt;T&gt;(BaseMixedRealityServiceProfile&lt;T&gt;, Type[], MixedRealityServiceConfiguration&lt;T&gt;[], Boolean)</a>
+  </div>
+  <div>
       <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
   </div>
   <div>
@@ -339,7 +315,7 @@ public class MixedRealityDiagnosticsSystemProfile : BaseMixedRealityProfile</cod
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_DiagnosticsSystem_MixedRealityDiagnosticsSystemProfile.md&amp;value=---%0Auid%3A%20XRTK.Definitions.DiagnosticsSystem.MixedRealityDiagnosticsSystemProfile%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsSystemProfile.cs/#L13" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/DiagnosticsSystem/MixedRealityDiagnosticsSystemProfile.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

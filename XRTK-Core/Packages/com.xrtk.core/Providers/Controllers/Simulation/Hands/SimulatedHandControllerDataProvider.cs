@@ -3,14 +3,14 @@
 
 using System.Collections.Generic;
 using XRTK.Definitions.Controllers.Simulation.Hands;
-using XRTK.Providers.Controllers.Hands;
+using XRTK.Interfaces.InputSystem.Controllers.Hands;
 
 namespace XRTK.Providers.Controllers.Simulation.Hands
 {
     /// <summary>
     /// Hand controller type for simulated hand controllers.
     /// </summary>
-    public class SimulatedHandControllerDataProvider : BaseHandControllerDataProvider<SimulatedHandControllerDataProviderProfile>
+    public class SimulatedHandControllerDataProvider : SimulatedControllerDataProvider, ISimulatedHandControllerDataProvider
     {
         /// <summary>
         /// Constructor.
@@ -19,12 +19,26 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <param name="priority">Data provider priority controls the order in the service registry.</param>
         /// <param name="profile">Controller data provider profile assigned to the provider instance in the configuration inspector.</param>
         public SimulatedHandControllerDataProvider(string name, uint priority, SimulatedHandControllerDataProviderProfile profile)
-            : base(name, priority, profile) { }
+            : base(name, priority, profile)
+        {
+            var poseDefinitions = profile.PoseDefinitions;
+
+            handPoseDefinitions = new List<SimulatedHandControllerPoseData>(poseDefinitions.Count);
+
+            foreach (var poseDefinition in poseDefinitions)
+            {
+                handPoseDefinitions.Add(poseDefinition);
+            }
+
+            HandPoseAnimationSpeed = profile.HandPoseAnimationSpeed;
+        }
+
+        private readonly List<SimulatedHandControllerPoseData> handPoseDefinitions;
 
         /// <inheritdoc />
-        public IReadOnlyList<SimulatedHandControllerPoseData> HandPoseDefinitions => Profile.PoseDefinitions;
+        public IReadOnlyList<SimulatedHandControllerPoseData> HandPoseDefinitions => handPoseDefinitions;
 
         /// <inheritdoc />
-        public float HandPoseAnimationSpeed => Profile.HandPoseAnimationSpeed;
+        public float HandPoseAnimationSpeed { get; }
     }
 }

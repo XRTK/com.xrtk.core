@@ -3,7 +3,6 @@
 
 using UnityEngine;
 using XRTK.Attributes;
-using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers.Simulation;
 
@@ -31,7 +30,7 @@ namespace XRTK.Definitions.Controllers.Simulation
         private double simulatedUpdateFrequency = 0;
 
         /// <summary>
-        /// The simulated update frequency in milliseconds mimicks the hardware's ability to
+        /// The simulated update frequency in milliseconds mimics the hardware's ability to
         /// update controller tracking data. A value of 0ms will provide data
         /// updates every frame.
         /// </summary>
@@ -42,7 +41,7 @@ namespace XRTK.Definitions.Controllers.Simulation
         private float controllerHideTimeout = 0.2f;
 
         /// <summary>
-        /// ime after which uncontrolled controllers are hidden
+        /// Time after which uncontrolled controllers are hidden
         /// </summary>
         public float ControllerHideTimeout => controllerHideTimeout;
 
@@ -68,7 +67,7 @@ namespace XRTK.Definitions.Controllers.Simulation
         /// <summary>
         /// Depth change when scrolling the mouse wheel.
         /// </summary>
-        public float HandDepthMultiplier => depthMultiplier;
+        public float DepthMultiplier => depthMultiplier;
 
         [SerializeField]
         [Tooltip("Apply random offset to the controller position")]
@@ -131,13 +130,5 @@ namespace XRTK.Definitions.Controllers.Simulation
         public float RotationSpeed => rotationSpeed;
 
         #endregion
-
-        [SerializeField]
-        private ControllerDataProviderConfiguration[] registeredControllerDataProviders = new ControllerDataProviderConfiguration[0];
-
-        /// <summary>
-        /// The currently registered controller data providers for simulation.
-        /// </summary>
-        public ControllerDataProviderConfiguration[] RegisteredControllerDataProviders => registeredControllerDataProviders;
     }
 }

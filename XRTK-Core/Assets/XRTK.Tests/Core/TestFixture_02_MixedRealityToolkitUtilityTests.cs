@@ -3,10 +3,12 @@
 
 using NUnit.Framework;
 using UnityEngine;
+using XRTK.Definitions;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
+using XRTK.Interfaces;
 using XRTK.Providers.Controllers.OpenVR;
 using XRTK.Services;
 using XRTK.Tests.Services;
@@ -16,56 +18,52 @@ namespace XRTK.Tests.Core
 {
     public class TestFixture_02_MixedRealityToolkitUtilityTests
     {
+        private void SetupServiceLocator()
+        {
+            TestUtilities.InitializeMixedRealityToolkitScene();
+            MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile = ScriptableObject.CreateInstance<MixedRealityRegisteredServiceProvidersProfile>();
+        }
+
         #region Configuration Validation Tests
 
         [Test]
-        public void Test_01_ConfirmDataProviderConfigurationNotPresent()
+        public void Test_01_ConfirmExtensionServiceProviderConfigurationNotPresent()
         {
-            var dataProviderTypes = new[] { typeof(TestDataProvider1) };
-            var dataProviderConfiguration = new[] { new ControllerDataProviderConfiguration(typeof(TestDataProvider1), "Test Controller Data Provider", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null) };
+            SetupServiceLocator();
+            var profile = MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile;
+            var dataProviderTypes = new[] { typeof(TestExtensionService1) };
+            var newConfigs = new[]
+            {
+                new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Extension Service 1", 2,SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null)
+            };
 
-            TestUtilities.InitializeMixedRealityToolkitScene();
-
-            InitializeDefaultInputSystemProfile();
-
-            Assert.IsFalse(ValidateConfiguration.ValidateDataProviders(dataProviderTypes, dataProviderConfiguration, false));
+            Assert.IsFalse(profile.ValidateService(dataProviderTypes, newConfigs, false));
         }
 
         [Test]
-        public void Test_02_ConfirmDataProviderConfigurationPresent()
+        public void Test_02_ConfirmExtensionServiceProviderConfigurationPresent()
         {
-            var dataProviderTypes = new[] { typeof(TestDataProvider1) };
-            var dataProviderConfiguration = new[] { new ControllerDataProviderConfiguration(typeof(TestDataProvider1), "Test Controller Data Provider", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null) };
-
-            TestUtilities.InitializeMixedRealityToolkitScene();
-
-            InitializeDefaultInputSystemProfile();
-
-            MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredControllerDataProviders.AddItem<ControllerDataProviderConfiguration>(dataProviderConfiguration[0]);
-
-            Assert.IsTrue(ValidateConfiguration.ValidateDataProviders(dataProviderTypes, dataProviderConfiguration, false));
+            SetupServiceLocator();
+            var profile = MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile;
+            var dataProviderTypes = new[] { typeof(TestExtensionService1) };
+            var newConfig = new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Extension Service 1", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null);
+            Debug.Assert(newConfig != null);
+            var newConfigs = profile.RegisteredServiceConfigurations.AddItem(newConfig);
+            Debug.Assert(newConfigs != null);
+            profile.RegisteredServiceConfigurations = newConfigs;
+            Assert.IsTrue(profile.ValidateService(dataProviderTypes, newConfigs, false));
         }
 
         [Test]
         public void Test_03_ConfirmControllerMappingConfigurationNotPresent()
         {
+            SetupServiceLocator();
             var controllerTypes = new[] { typeof(GenericOpenVRController) };
-            var dataProviderConfiguration = new[] { new ControllerDataProviderConfiguration(typeof(TestDataProvider1), "Test Controller Data Provider", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null) };
-
-            TestUtilities.InitializeMixedRealityToolkitScene();
-
-            InitializeDefaultInputSystemProfile();
-
-            Assert.IsFalse(ValidateConfiguration.ValidateControllerProfiles(controllerTypes, false));
+            MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile = ScriptableObject.CreateInstance<MixedRealityInputSystemProfile>();
+            MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles = ScriptableObject.CreateInstance<MixedRealityControllerMappingProfiles>();
+            Assert.IsFalse(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.ValidateControllerProfiles(controllerTypes, false));
         }
 
-        private void InitializeDefaultInputSystemProfile()
-        {
-            var inputSystemProfile = ScriptableObject.CreateInstance<MixedRealityInputSystemProfile>();
-            inputSystemProfile.ControllerDataProvidersProfile = ScriptableObject.CreateInstance<MixedRealityControllerDataProvidersProfile>();
-            inputSystemProfile.ControllerMappingProfiles = ScriptableObject.CreateInstance<MixedRealityControllerMappingProfiles>();
-            MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile = inputSystemProfile;
-        }
         #endregion Configuration Validation Tests
     }
 }

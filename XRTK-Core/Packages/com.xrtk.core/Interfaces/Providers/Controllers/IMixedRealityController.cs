@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -65,6 +66,16 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// Mapping definition for this controller, linking the Physical inputs to logical Input System Actions
         /// </summary>
         MixedRealityInteractionMapping[] Interactions { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        Vector3 AngularVelocity { get; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        Vector3 Velocity { get; }
 
         /// <summary>
         /// Setups up the configuration based on the Mixed Reality Controller Mapping Profile.

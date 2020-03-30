@@ -1,25 +1,14 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Definitions.Controllers
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers Profiles", fileName = "MixedRealityControllerDataModelsProfile", order = (int)CreateProfileMenuItemIndices.ControllerDataProviders)]
-    public class MixedRealityControllerDataProvidersProfile : BaseMixedRealityProfile
+    public class MixedRealityControllerDataProvidersProfile : BaseMixedRealityServiceProfile<IMixedRealityControllerDataProvider>
     {
-        [SerializeField]
-        private ControllerDataProviderConfiguration[] registeredControllerDataProviders = new ControllerDataProviderConfiguration[0];
-
-        /// <summary>
-        /// The currently registered controller data providers for this input system.
-        /// </summary>
-        public ControllerDataProviderConfiguration[] RegisteredControllerDataProviders
-        {
-            get => registeredControllerDataProviders;
-            internal set => registeredControllerDataProviders = value;
-        }
     }
 }

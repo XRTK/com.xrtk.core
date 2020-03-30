@@ -26,13 +26,13 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (thisProfile.ParentProfile != null &&
+            if (ThisProfile.ParentProfile != null &&
                 GUILayout.Button("Back To Configuration Profile"))
             {
-                Selection.activeObject = thisProfile.ParentProfile;
+                Selection.activeObject = ThisProfile.ParentProfile;
             }
 
-            thisProfile.CheckProfileLock();
+            ThisProfile.CheckProfileLock();
             serializedObject.Update();
 
             EditorGUILayout.BeginVertical();

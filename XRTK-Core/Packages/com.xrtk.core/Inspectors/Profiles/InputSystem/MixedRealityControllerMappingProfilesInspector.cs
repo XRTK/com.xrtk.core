@@ -30,10 +30,10 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (thisProfile.ParentProfile != null &&
+            if (ThisProfile.ParentProfile != null &&
                 GUILayout.Button("Back to Input Profile"))
             {
-                Selection.activeObject = thisProfile.ParentProfile;
+                Selection.activeObject = ThisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
@@ -41,7 +41,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             EditorGUILayout.HelpBox("Use this profile to define all the controllers and their inputs your users will be able to use in your application.\n\n" +
                                     "You'll want to define all your Input Actions and Controller Data Providers first so you can wire up actions to hardware sensors, controllers, gestures, and other input devices.", MessageType.Info);
 
-            thisProfile.CheckProfileLock();
+            ThisProfile.CheckProfileLock();
 
             serializedObject.Update();
 
@@ -72,7 +72,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 }
 
                 EditorGUILayout.BeginHorizontal();
-                profileChanged |= RenderProfile(thisProfile, controllerProfile, new GUIContent(profileName), false);
+                profileChanged |= RenderProfile(ThisProfile, controllerProfile, new GUIContent(profileName), false);
 
                 if (profileChanged && controllerProfile.objectReferenceValue != null)
                 {

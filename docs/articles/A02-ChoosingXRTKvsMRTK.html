@@ -8,7 +8,7 @@
     <title>Choosing between XRTK and MRTK | XRTK-Core </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Choosing between XRTK and MRTK | XRTK-Core ">
-    <meta name="generator" content="docfx 2.48.1.0">
+    <meta name="generator" content="docfx 2.51.0.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
@@ -73,8 +73,10 @@
 <h2 id="tldr">TL;DR</h2>
 <p>Both projects were originally designed/architected and built by the same developers over the course of 2018. From 2019 on, they have diverged under different principles, namely:</p>
 <ul>
-<li>The MRTK is currently only being developed to focus on the needs of Microsoft partners and new HL2 deployments, whilst still retaining the core multi-platform architecture it was designed with.  Microsoft (for the time being) must focus its scope to achieve those deliverables.</li>
-<li>The XRTK is a community-based platform for building cross-platform Mixed Reality solutions (AR / VR / XR / MR) for a multitude of devices and runtime platforms.  Creating solutions to meet the need of a much more diverse set of requirements required by cross-platform solutions.</li>
+<li><p>The XRTK is a community-based platform for building cross-platform Mixed Reality solutions (AR / VR / XR / MR) for a multitude of devices and runtime platforms.  Creating solutions to meet the need of a much more diverse set of requirements required by cross-platform solutions.</p>
+</li>
+<li><p>The MRTK is currently only being developed to focus on the needs of Microsoft partners and new HL2 deployments, whilst still retaining the core multi-platform architecture it was designed with.  Microsoft (for the time being) must focus its scope to achieve those deliverables.</p>
+</li>
 </ul>
 <p>Both projects share a lot of the same base code and standards. As such, projects created in one framework are easily transferable to the other with minimal effort, the teams have ensured you are never locked into one framework, should you wish to switch.
 There will be an increasing number of touchpoints as time goes by, but both teams are invested in keeping the two projects aligned to allow easy adoption of new features in either direction.</p>
@@ -134,19 +136,19 @@ There will be an increasing number of touchpoints as time goes by, but both team
 <tr>
 <td>OpenVR (Windows)</td>
 <td>Running OpenVR projects on Windows / Windows 10</td>
-<td><ul><li>WMR</li><li>Vive</li><li>Rift</li></ul></td>
-<td><ul><li>WMR</li><li>Vive</li><li>Rift</li></ul></td>
+<td>Any Supported *OpenVR device</td>
+<td>Any Supported *OpenVR device</td>
 </tr>
 <tr>
 <td>OpenVR (Android)</td>
 <td>Running OpenVR projects on Android</td>
-<td><ul><li>Oculus GO</li><li>Oculus Quest<br> (coming very soon)</li></ul></td>
+<td><ul><li>Oculus GO</li><li>Oculus Quest</li></ul></td>
 <td><strong>Not Supported</strong></td>
 </tr>
 <tr>
 <td>UWP</td>
 <td>Universal Windows Platform (Windows 10)</td>
-<td><ul><li>Windows 10 WMR</li><li>HoloLens 1</li></ul></td>
+<td><ul><li>Windows 10 WMR</li><li>HoloLens 1</li><li>HoloLens 2</li>(Hands pending)</ul></td>
 <td><ul><li>Windows 10 WMR</li><li>HoloLens 1</li><li>HoloLens 2</li></ul></td>
 </tr>
 <tr>
@@ -158,25 +160,19 @@ There will be an increasing number of touchpoints as time goes by, but both team
 <tr>
 <td>Oculus (Windows)</td>
 <td>Running native Oculus API on Windows</td>
-<td><ul><li>Rift</li><li>Rift S<br> (planned)</li></ul></td>
+<td><ul><li>Rift</li><li>Rift S</li></ul></td>
 <td><strong>Not Supported</strong></td>
 </tr>
 <tr>
 <td>Oculus (Android)</td>
 <td>Running native Oculus API on Android</td>
-<td><ul><li>Oculus Go</li><li>Oculus Quest<br> (coming very soon)</li></ul></td>
+<td><ul><li>Oculus Go</li><li>Oculus Quest</li></ul></td>
 <td><strong>Not Supported</strong></td>
 </tr>
 <tr>
 <td>Steam (Windows)</td>
 <td>Running native Steam API on Windows</td>
-<td><ul><li>Vive</li><li>Vive Pro</li></ul></td>
-<td><strong>Not Supported</strong></td>
-</tr>
-<tr>
-<td>Steam (Android)</td>
-<td>Running native Steam API on Android</td>
-<td><ul><li>Vive index <br> (planned)</li></ul></td>
+<td><ul><li>Vive</li><li>Vive Pro</li>(planned)<li>Vive index (planned)</li></ul></td>
 <td><strong>Not Supported</strong></td>
 </tr>
 <tr>
@@ -200,8 +196,7 @@ There will be an increasing number of touchpoints as time goes by, but both team
 </tbody>
 </table>
 <blockquote>
-<p><em>TBC</em> - To Be Considered
-MRTK status based off Microsoft's currently published road-map</p>
+<p><em>OpenVR</em> - we support all devices that can run OpenVR based builds, but only support controllers for Vive, Rift, Quest, Go and WMR currently</p>
 </blockquote>
 <h2 id="mrtk--xrtk-parity">MRTK / XRTK parity</h2>
 <p>The XRTK team still works closely with Microsoft to ensure that we maintain a level of parity between the two implementation patterns, ensuring that new Microsoft developments (such as HL2, hand tracking, etc.) are incorporated into the XRTK, in a fashion that complements the XRTK. Most features as they are ported will require some enhancement to comply to the XRTK architecture, but the Developer Product adoption will remain as close as we can to aid porting between frameworks. (in other words, we preserve the runtime whilst finely tuning the backend)</p>

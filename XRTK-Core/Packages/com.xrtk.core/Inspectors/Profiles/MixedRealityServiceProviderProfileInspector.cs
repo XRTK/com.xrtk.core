@@ -170,6 +170,18 @@ namespace XRTK.Inspectors.Profiles
                 EditorGUI.PropertyField(profileRect, configurationProfileProperty);
             }
 
+            if (configurationProfileProperty.objectReferenceValue != null)
+            {
+                var renderedProfile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
+                Debug.Assert(renderedProfile != null);
+
+                if (renderedProfile.ParentProfile == null ||
+                    renderedProfile.ParentProfile != ThisProfile)
+                {
+                    renderedProfile.ParentProfile = ThisProfile;
+                }
+            }
+
             if (update ||
                 EditorGUI.EndChangeCheck())
             {

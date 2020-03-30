@@ -8,7 +8,7 @@ using XRTK.Definitions.Utilities;
 namespace XRTK.Definitions.Controllers.Simulation.Hands
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Simulated Hand Controller Data Provider Profile", fileName = "SimulatedHandControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
-    public class SimulatedHandControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
+    public class SimulatedHandControllerDataProviderProfile : SimulatedControllerDataProviderProfile
     {
         [SerializeField]
         [Tooltip("Hand pose definitions.")]

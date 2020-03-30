@@ -2,14 +2,12 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
-using UnityEngine;
-using XRTK.Definitions.InputSystem;
-using XRTK.Inspectors.Utilities;
+using XRTK.Definitions.Controllers.Hands;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
 {
-    [CustomEditor(typeof(MixedRealityHandTrackingProfile))]
-    public class MixedRealityHandTrackingProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(BaseMixedRealityHandDataProviderProfile))]
+    public class BaseMixedRealityHandDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty handMeshingEnabled;
         private SerializedProperty handRayType;
@@ -30,15 +28,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
-
-            if (thisProfile.ParentProfile != null &&
-                GUILayout.Button("Back To Input System Profile"))
-            {
-                Selection.activeObject = thisProfile.ParentProfile;
-            }
-
-            thisProfile.CheckProfileLock();
             serializedObject.Update();
 
             EditorGUILayout.BeginVertical();

@@ -32,7 +32,7 @@ namespace XRTK.Inspectors.Data.Controllers.Simulation.Hands
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            thisProfile.CheckProfileLock();
+            ThisProfile.CheckProfileLock();
 
             serializedObject.Update();
 

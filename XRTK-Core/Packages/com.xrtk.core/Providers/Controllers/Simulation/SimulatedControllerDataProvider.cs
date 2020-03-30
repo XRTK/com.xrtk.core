@@ -7,8 +7,7 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem;
-using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Interfaces.InputSystem.Controllers.Hands;
 using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Simulation
@@ -17,7 +16,7 @@ namespace XRTK.Providers.Controllers.Simulation
     /// The simulated controller data provider is mainly responsible for managing
     /// active simulated controllers, such as hand controllers.
     /// </summary>
-    public class SimulatedControllerDataProvider : BaseControllerDataProvider
+    public class SimulatedControllerDataProvider : BaseControllerDataProvider, ISimulatedControllerDataProvider
     {
         /// <summary>
         /// Creates a new instance of the data provider.
@@ -28,25 +27,27 @@ namespace XRTK.Providers.Controllers.Simulation
         public SimulatedControllerDataProvider(string name, uint priority, SimulatedControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
-            this.profile = profile;
-
-            for (int i = 0; i < profile.RegisteredControllerDataProviders.Length; i++)
+            if (profile == null)
             {
-                Definitions.InputSystem.ControllerDataProviderConfiguration dataProvider = profile.RegisteredControllerDataProviders[i];
-                if (!MixedRealityToolkit.CreateAndRegisterService<IMixedRealityControllerDataProvider>(
-                                dataProvider.DataProviderType,
-                                dataProvider.RuntimePlatform,
-                                dataProvider.DataProviderName,
-                                dataProvider.Priority,
-                                dataProvider.Profile))
-                {
-                    Debug.LogError($"Failed to register {dataProvider.DataProviderName} for controller simulation!");
-                }
+                throw new NullReferenceException($"A {nameof(SimulatedControllerDataProviderProfile)} is required for {name}");
             }
+
+            simulatedControllerType = profile.SimulatedControllerType?.Type ?? throw new NullReferenceException($"{nameof(SimulatedControllerDataProviderProfile)}.{nameof(SimulatedControllerDataProviderProfile.SimulatedControllerType)} cannot be null.");
+            SimulatedUpdateFrequency = profile.SimulatedUpdateFrequency;
+            ControllerHideTimeout = profile.ControllerHideTimeout;
+            DefaultDistance = profile.DefaultDistance;
+            DepthMultiplier = profile.DepthMultiplier;
+            JitterAmount = profile.JitterAmount;
+            ToggleLeftPersistentKey = profile.ToggleLeftPersistentKey;
+            LeftControllerTrackedKey = profile.LeftControllerTrackedKey;
+            ToggleRightPersistentKey = profile.ToggleRightPersistentKey;
+            RightControllerTrackedKey = profile.RightControllerTrackedKey;
+            RotationSpeed = profile.RotationSpeed;
         }
 
-        private readonly SimulatedControllerDataProviderProfile profile;
+        private readonly Type simulatedControllerType;
         private readonly List<BaseController> activeControllers = new List<BaseController>();
+
         private SimulationTimeStampStopWatch simulatedUpdateStopWatch;
         private long lastSimulatedUpdateTimeStamp = 0;
 
@@ -55,25 +56,35 @@ namespace XRTK.Providers.Controllers.Simulation
         private bool leftControllerIsTracked = false;
         private bool rightControllerIsTracked = false;
 
-        /// <summary>
-        /// Gets the hand depth change multiplier used to simulate controller depth movement.
-        /// </summary>
-        public float HandDepthMultiplier => profile.HandDepthMultiplier;
+        /// <inheritdoc />
+        public double SimulatedUpdateFrequency { get; }
 
-        /// <summary>
-        /// Gets the amount of simulated jitter offset for simulated controllers.
-        /// </summary>
-        public float JitterAmount => profile.JitterAmount;
+        /// <inheritdoc />
+        public float ControllerHideTimeout { get; }
 
-        /// <summary>
-        /// Gets the rotation speed for simulated hand controller pitch/yaw/roll animation.
-        /// </summary>
-        public float RotationSpeed => profile.RotationSpeed;
+        /// <inheritdoc />
+        public float DefaultDistance { get; }
 
-        /// <summary>
-        /// Gets the default distance fom the camera to spawn simulated controllers at.
-        /// </summary>
-        public float DefaultDistance => profile.DefaultDistance;
+        /// <inheritdoc />
+        public float DepthMultiplier { get; }
+
+        /// <inheritdoc />
+        public float JitterAmount { get; }
+
+        /// <inheritdoc />
+        public KeyCode ToggleLeftPersistentKey { get; }
+
+        /// <inheritdoc />
+        public KeyCode LeftControllerTrackedKey { get; }
+
+        /// <inheritdoc />
+        public KeyCode ToggleRightPersistentKey { get; }
+
+        /// <inheritdoc />
+        public KeyCode RightControllerTrackedKey { get; }
+
+        /// <inheritdoc />
+        public float RotationSpeed { get; }
 
         /// <summary>
         /// Gets a read only list of active controllers. This property hides the inherited
@@ -114,21 +125,22 @@ namespace XRTK.Providers.Controllers.Simulation
 
         private void RefreshSimulatedDevices()
         {
-            DateTime currentTime = simulatedUpdateStopWatch.Current;
-            double msSinceLastUpdate = currentTime.Subtract(new DateTime(lastSimulatedUpdateTimeStamp)).TotalMilliseconds;
-            if (msSinceLastUpdate > profile.SimulatedUpdateFrequency)
+            var currentTime = simulatedUpdateStopWatch.Current;
+            var msSinceLastUpdate = currentTime.Subtract(new DateTime(lastSimulatedUpdateTimeStamp)).TotalMilliseconds;
+
+            if (msSinceLastUpdate > SimulatedUpdateFrequency)
             {
-                if (Input.GetKeyDown(profile.ToggleLeftPersistentKey))
+                if (Input.GetKeyDown(ToggleLeftPersistentKey))
                 {
                     leftControllerIsAlwaysVisible = !leftControllerIsAlwaysVisible;
                 }
 
-                if (Input.GetKeyDown(profile.LeftControllerTrackedKey))
+                if (Input.GetKeyDown(LeftControllerTrackedKey))
                 {
                     leftControllerIsTracked = true;
                 }
 
-                if (Input.GetKeyUp(profile.LeftControllerTrackedKey))
+                if (Input.GetKeyUp(LeftControllerTrackedKey))
                 {
                     leftControllerIsTracked = false;
                 }
@@ -142,17 +154,17 @@ namespace XRTK.Providers.Controllers.Simulation
                     RemoveController(Handedness.Left);
                 }
 
-                if (Input.GetKeyDown(profile.ToggleRightPersistentKey))
+                if (Input.GetKeyDown(ToggleRightPersistentKey))
                 {
                     rightControllerIsAlwaysVisible = !rightControllerIsAlwaysVisible;
                 }
 
-                if (Input.GetKeyDown(profile.RightControllerTrackedKey))
+                if (Input.GetKeyDown(RightControllerTrackedKey))
                 {
                     rightControllerIsTracked = true;
                 }
 
-                if (Input.GetKeyUp(profile.RightControllerTrackedKey))
+                if (Input.GetKeyUp(RightControllerTrackedKey))
                 {
                     rightControllerIsTracked = false;
                 }
@@ -177,11 +189,11 @@ namespace XRTK.Providers.Controllers.Simulation
                 return;
             }
 
-            IMixedRealityPointer[] pointers = RequestPointers(profile.SimulatedControllerType, handedness, true);
-            IMixedRealityInputSource inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{profile.SimulatedControllerType.Type.Name} {handedness}", pointers);
-            BaseController controller = (BaseController)Activator.CreateInstance(profile.SimulatedControllerType, TrackingState.Tracked, handedness, inputSource, null);
+            var pointers = RequestPointers(simulatedControllerType, handedness, true);
+            var inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{simulatedControllerType.Name} {handedness}", pointers);
+            var controller = (BaseController)Activator.CreateInstance(simulatedControllerType, TrackingState.Tracked, handedness, inputSource, null);
 
-            if (controller == null || !controller.SetupConfiguration(profile.SimulatedControllerType))
+            if (controller == null || !controller.SetupConfiguration(simulatedControllerType))
             {
                 // Controller failed to be setup correctly.
                 // Return null so we don't raise the source detected.
@@ -195,7 +207,7 @@ namespace XRTK.Providers.Controllers.Simulation
 
             if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile.RenderMotionControllers)
             {
-                controller.TryRenderControllerModel(profile.SimulatedControllerType);
+                controller.TryRenderControllerModel(simulatedControllerType);
             }
 
             MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);
@@ -216,7 +228,7 @@ namespace XRTK.Providers.Controllers.Simulation
             while (ActiveControllers.Count > 0)
             {
                 // It's important here to pass the handedness. Passing the controller
-                // will execute the base RmoveController implementation.
+                // will execute the base RemoveController implementation.
                 RemoveController(ActiveControllers[0].ControllerHandedness);
             }
         }

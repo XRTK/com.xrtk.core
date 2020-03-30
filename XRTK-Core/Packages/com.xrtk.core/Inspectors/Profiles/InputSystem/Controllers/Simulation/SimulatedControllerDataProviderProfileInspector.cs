@@ -12,10 +12,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
     [CustomEditor(typeof(SimulatedControllerDataProviderProfile))]
     public class SimulatedControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
-        private static readonly GUIContent AddControllerDataProviderContent = new GUIContent("+ Add a New Controller Data Provider");
-        private static readonly GUIContent RemoveControllerDataProviderContent = new GUIContent("-", "Remove Controller Data Provider");
-        private static readonly GUIContent ProfileContent = new GUIContent("Profile");
-
         private SerializedProperty simulatedControllerType;
         private SerializedProperty simulatedUpdateFrequency;
         private SerializedProperty controllerHideTimeout;
@@ -30,8 +26,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
         private SerializedProperty rightControllerTrackedKey;
 
         private SerializedProperty rotationSpeed;
-        private SerializedProperty registeredControllerDataProviders;
-        private bool[] foldouts = null;
 
         protected override void OnEnable()
         {
@@ -51,27 +45,24 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
             rightControllerTrackedKey = serializedObject.FindProperty(nameof(rightControllerTrackedKey));
 
             rotationSpeed = serializedObject.FindProperty(nameof(rotationSpeed));
-            registeredControllerDataProviders = serializedObject.FindProperty(nameof(registeredControllerDataProviders));
-            foldouts = new bool[registeredControllerDataProviders.arraySize];
         }
 
         public override void OnInspectorGUI()
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
-            if (thisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Configuration Profile"))
+            if (ThisProfile.ParentProfile != null &&
+                GUILayout.Button($"Back to {ThisProfile.ParentProfile.name}"))
             {
-                Selection.activeObject = thisProfile.ParentProfile;
+                Selection.activeObject = ThisProfile.ParentProfile;
             }
 
             EditorGUILayout.Space();
-            thisProfile.CheckProfileLock();
+            ThisProfile.CheckProfileLock();
 
             serializedObject.Update();
 
-            EditorGUILayout.BeginVertical("Label");
-
+            EditorGUI.BeginChangeCheck();
             EditorGUILayout.PropertyField(simulatedControllerType);
             EditorGUILayout.PropertyField(simulatedUpdateFrequency);
             EditorGUILayout.PropertyField(controllerHideTimeout);
@@ -89,88 +80,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
             EditorGUILayout.PropertyField(rotationSpeed);
             EditorGUILayout.Space();
 
-            EditorGUILayout.EndVertical();
-
-            bool changed = false;
-
-            EditorGUILayout.BeginVertical();
-            EditorGUILayout.LabelField("Simulated Controller Data Providers", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Register data providers for specific types of simulated controllers here.", MessageType.Info);
-
-            if (GUILayout.Button(AddControllerDataProviderContent, EditorStyles.miniButton))
-            {
-                registeredControllerDataProviders.arraySize += 1;
-                var newConfiguration = registeredControllerDataProviders.GetArrayElementAtIndex(registeredControllerDataProviders.arraySize - 1);
-                var dataProviderType = newConfiguration.FindPropertyRelative("dataProviderType");
-                var dataProviderName = newConfiguration.FindPropertyRelative("dataProviderName");
-                var priority = newConfiguration.FindPropertyRelative("priority");
-                var runtimePlatform = newConfiguration.FindPropertyRelative("runtimePlatform");
-                var profile = newConfiguration.FindPropertyRelative("profile");
-
-                serializedObject.ApplyModifiedProperties();
-                dataProviderType.FindPropertyRelative("reference").stringValue = string.Empty;
-                dataProviderName.stringValue = "New Controller Data Provider";
-                priority.intValue = 5;
-                runtimePlatform.intValue = 0;
-                profile.objectReferenceValue = null;
-                serializedObject.ApplyModifiedProperties();
-                foldouts = new bool[registeredControllerDataProviders.arraySize];
-                changed = true;
-            }
-
-            EditorGUILayout.Space();
-
-            for (int i = 0; i < registeredControllerDataProviders.arraySize; i++)
-            {
-                var controllerConfiguration = registeredControllerDataProviders.GetArrayElementAtIndex(i);
-                var dataProviderName = controllerConfiguration.FindPropertyRelative("dataProviderName");
-                var dataProviderType = controllerConfiguration.FindPropertyRelative("dataProviderType");
-                var priority = controllerConfiguration.FindPropertyRelative("priority");
-                var runtimePlatform = controllerConfiguration.FindPropertyRelative("runtimePlatform");
-                var profile = controllerConfiguration.FindPropertyRelative("profile");
-
-                EditorGUILayout.BeginHorizontal();
-                foldouts[i] = EditorGUILayout.Foldout(foldouts[i], dataProviderName.stringValue, true);
-
-                if (GUILayout.Button(RemoveControllerDataProviderContent, EditorStyles.miniButtonRight, GUILayout.Width(24f)))
-                {
-                    registeredControllerDataProviders.DeleteArrayElementAtIndex(i);
-                    serializedObject.ApplyModifiedProperties();
-                    foldouts = new bool[registeredControllerDataProviders.arraySize];
-                    EditorGUILayout.EndHorizontal();
-                    EditorGUILayout.EndVertical();
-                    return;
-                }
-
-                EditorGUILayout.EndHorizontal();
-
-                if (foldouts[i])
-                {
-                    EditorGUI.indentLevel++;
-                    EditorGUI.BeginChangeCheck();
-
-                    EditorGUILayout.PropertyField(dataProviderType);
-                    EditorGUILayout.PropertyField(dataProviderName);
-                    EditorGUILayout.PropertyField(priority);
-                    EditorGUILayout.PropertyField(runtimePlatform);
-                    RenderProfile(thisProfile, profile, ProfileContent, false);
-
-                    if (EditorGUI.EndChangeCheck())
-                    {
-                        changed = true;
-                    }
-
-                    EditorGUI.indentLevel--;
-                }
-
-                EditorGUILayout.Space();
-            }
-
-            EditorGUILayout.EndVertical();
-
-            serializedObject.ApplyModifiedProperties();
-
-            if (changed && MixedRealityToolkit.IsInitialized)
+            if (EditorGUI.EndChangeCheck() && MixedRealityToolkit.IsInitialized)
             {
                 EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
             }

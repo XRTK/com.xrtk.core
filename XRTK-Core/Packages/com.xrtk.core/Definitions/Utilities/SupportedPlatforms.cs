@@ -9,6 +9,7 @@ namespace XRTK.Definitions.Utilities
     /// The supported platforms for Mixed Reality Toolkit Components and Features.
     /// </summary>
     [Flags]
+    //[Obsolete]
     public enum SupportedPlatforms
     {
         /// <summary>

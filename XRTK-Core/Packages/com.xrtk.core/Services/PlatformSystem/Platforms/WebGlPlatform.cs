@@ -6,12 +6,11 @@ using XRTK.Interfaces.PlatformSystem;
 namespace XRTK.Services.PlatformSystem.Platforms
 {
     /// <summary>
-    /// The Windows Standalone platform definition for the Mixed Reality Toolkit.
+    /// The IOS platform definition for the Mixed Reality Toolkit.
     /// </summary>
-    public class WindowsStandalonePlatform : BaseDataProvider, IMixedRealityPlatform
+    public class WebGlPlatform : BaseDataProvider, IMixedRealityPlatform
     {
-        /// <inheritdoc />
-        public WindowsStandalonePlatform(string name, uint priority)
+        public WebGlPlatform(string name, uint priority)
             : base(name, priority)
         {
         }
@@ -21,7 +20,7 @@ namespace XRTK.Services.PlatformSystem.Platforms
         {
             get
             {
-#if UNITY_STANDALONE_WIN
+#if PLATFORM_WEBGL
                 return true;
 #else
                 return false;

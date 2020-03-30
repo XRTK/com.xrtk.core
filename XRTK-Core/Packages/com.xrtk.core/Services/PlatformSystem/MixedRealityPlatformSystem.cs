@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections.Generic;
+using UnityEngine;
 using XRTK.Definitions.PlatformSystem;
 using XRTK.Interfaces.PlatformSystem;
 
@@ -20,7 +21,30 @@ namespace XRTK.Services.PlatformSystem
         {
         }
 
+        private readonly List<IMixedRealityPlatform> activePlatforms = new List<IMixedRealityPlatform>();
+
         /// <inheritdoc />
-        public IReadOnlyList<IMixedRealityPlatform> ActivePlatforms { get; }
+        public IReadOnlyList<IMixedRealityPlatform> ActivePlatforms => activePlatforms;
+
+        /// <inheritdoc />
+        public override void Initialize()
+        {
+            base.Initialize();
+
+            var registeredPlatforms = MixedRealityToolkit.GetActiveServices<IMixedRealityPlatform>();
+
+            activePlatforms.Clear();
+
+            foreach (var service in registeredPlatforms)
+            {
+                var platform = service as IMixedRealityPlatform;
+
+                if (platform.IsAvailable)
+                {
+                    Debug.Log(platform.Name);
+                    activePlatforms.Add(platform);
+                }
+            }
+        }
     }
 }

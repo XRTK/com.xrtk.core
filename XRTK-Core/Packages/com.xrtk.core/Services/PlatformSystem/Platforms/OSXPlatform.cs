@@ -25,7 +25,7 @@ namespace XRTK.Services.PlatformSystem.Platforms
         {
             get
             {
-#if UNITY_STANDALONE_OSX || UNITY_EDITOR_OSX
+#if UNITY_STANDALONE_OSX
                 return true;
 #else
                 return false;

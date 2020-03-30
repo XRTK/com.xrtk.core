@@ -1,14 +1,12 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Interfaces.PlatformSystem;
-
 namespace XRTK.Services.PlatformSystem.Platforms
 {
     /// <summary>
     /// The OSX platform definition for the Mixed Reality Toolkit.
     /// </summary>
-    public class OSXPlatform : BaseDataProvider, IMixedRealityPlatform
+    public class OSXPlatform : BasePlatform
     {
         /// <summary>
         /// Constructor.
@@ -21,7 +19,7 @@ namespace XRTK.Services.PlatformSystem.Platforms
         }
 
         /// <inheritdoc />
-        public bool IsAvailable
+        public override bool IsAvailable
         {
             get
             {

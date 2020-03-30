@@ -1,14 +1,12 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Interfaces.PlatformSystem;
-
 namespace XRTK.Services.PlatformSystem.Platforms
 {
     /// <summary>
     /// The Android platform definition for the Mixed Reality Toolkit.
     /// </summary>
-    public class AndroidPlatform : BaseDataProvider, IMixedRealityPlatform
+    public class AndroidPlatform : BasePlatform
     {
         public AndroidPlatform(string name, uint priority)
             : base(name, priority)
@@ -16,7 +14,7 @@ namespace XRTK.Services.PlatformSystem.Platforms
         }
 
         /// <inheritdoc />
-        public bool IsAvailable
+        public override bool IsAvailable
         {
             get
             {

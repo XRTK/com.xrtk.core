@@ -17,6 +17,7 @@ namespace XRTK.Inspectors.Profiles
     [CustomEditor(typeof(BaseMixedRealityServiceProfile<>))]
     public class MixedRealityServiceProfileInspector : BaseMixedRealityProfileInspector
     {
+        private readonly GUIContent ProfileContent = new GUIContent("Profile", "The configuration profile for this service.");
         private ReorderableList configurationList;
         private int currentlySelectedConfigurationOption;
 
@@ -120,6 +121,8 @@ namespace XRTK.Inspectors.Profiles
 
                     foreach (var parameterInfo in parameters)
                     {
+                        if (parameterInfo.ParameterType.IsAbstract) { continue; }
+
                         if (parameterInfo.ParameterType.IsSubclassOf(typeof(BaseMixedRealityProfile)))
                         {
                             profileType = parameterInfo.ParameterType;
@@ -141,7 +144,7 @@ namespace XRTK.Inspectors.Profiles
 
             if (profileType != null)
             {
-                EditorGUI.LabelField(profileLabelRect, "Profile");
+                EditorGUI.LabelField(profileLabelRect, ProfileContent);
                 var isNullProfile = configurationProfileProperty.objectReferenceValue == null;
 
                 var buttonWidth = isNullProfile ? 20f : 42f;
@@ -150,7 +153,26 @@ namespace XRTK.Inspectors.Profiles
                 var profileObjectRect = new Rect(profilePosition, profileHeight, profileObjectWidth - scrollOffset, EditorGUIUtility.singleLineHeight);
                 var buttonRect = new Rect(profilePosition + profileObjectWidth - scrollOffset, profileHeight, buttonWidth, EditorGUIUtility.singleLineHeight);
 
-                configurationProfileProperty.objectReferenceValue = EditorGUI.ObjectField(profileObjectRect, configurationProfileProperty.objectReferenceValue, profileType, false);
+                var newProfileObjectReference = EditorGUI.ObjectField(profileObjectRect, configurationProfileProperty.objectReferenceValue, profileType, false);
+
+                if (newProfileObjectReference is BaseMixedRealityProfile newProfile)
+                {
+                    var newProfileType = newProfile.GetType();
+                    if (newProfileType == profileType ||
+                        newProfileType.IsSubclassOf(profileType))
+                    {
+                        configurationProfileProperty.objectReferenceValue = newProfileObjectReference;
+                    }
+                    else
+                    {
+                        Debug.LogError($"{newProfileObjectReference.name} does not derive from {profileType.Name}!");
+                    }
+                }
+                else if (newProfileObjectReference is null)
+                {
+                    configurationProfileProperty.objectReferenceValue = null;
+                }
+
                 update = GUI.Button(buttonRect, isNullProfile ? NewProfileContent : CloneProfileContent);
 
                 if (update)
@@ -167,7 +189,19 @@ namespace XRTK.Inspectors.Profiles
             }
             else
             {
-                EditorGUI.PropertyField(profileRect, configurationProfileProperty);
+                EditorGUI.LabelField(profileRect, "No Configuration Profile needed");
+            }
+
+            if (configurationProfileProperty.objectReferenceValue != null)
+            {
+                var renderedProfile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
+                Debug.Assert(renderedProfile != null);
+
+                if (renderedProfile.ParentProfile == null ||
+                    renderedProfile.ParentProfile != ThisProfile)
+                {
+                    renderedProfile.ParentProfile = ThisProfile;
+                }
             }
 
             if (update ||

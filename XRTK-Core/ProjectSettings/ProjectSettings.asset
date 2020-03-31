@@ -422,6 +422,9 @@ PlayerSettings:
   - m_BuildTarget: WebGL
     m_Enabled: 1
     m_Devices: []
+  - m_BuildTarget: iPhone
+    m_Enabled: 1
+    m_Devices: []
   m_BuildTargetEnableVuforiaSettings: []
   openGLRequireES31: 0
   openGLRequireES31AEP: 0
@@ -666,6 +669,7 @@ PlayerSettings:
     Standalone: 1
     WebGL: 1
     Windows Store Apps: 1
+    iPhone: 1
   il2cppCompilerConfiguration: {}
   managedStrippingLevel: {}
   incrementalIl2cppBuild: {}

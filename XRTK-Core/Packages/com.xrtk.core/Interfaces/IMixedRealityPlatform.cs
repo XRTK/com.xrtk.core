@@ -1,12 +1,12 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-namespace XRTK.Interfaces.PlatformSystem
+namespace XRTK.Interfaces
 {
     /// <summary>
-    /// Defines the platform to be registered and used in <see cref="IMixedRealityPlatformSystem"/>
+    /// Defines the platform to be registered
     /// </summary>
-    public interface IMixedRealityPlatform : IMixedRealityDataProvider
+    public interface IMixedRealityPlatform
     {
         /// <summary>
         /// Is this platform currently available?

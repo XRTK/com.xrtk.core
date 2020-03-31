@@ -98,10 +98,12 @@ namespace XRTK.Inspectors.Profiles
             var nameProperty = configurationProperty.FindPropertyRelative("name");
             var priorityProperty = configurationProperty.FindPropertyRelative("priority");
             var instanceTypeProperty = configurationProperty.FindPropertyRelative("instancedType");
-            var runtimePlatformProperty = configurationProperty.FindPropertyRelative("runtimePlatform");
+            var platformEntriesProperty = configurationProperty.FindPropertyRelative("platformEntries");
             var configurationProfileProperty = configurationProperty.FindPropertyRelative("configurationProfile");
 
             var configurationProfile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
+
+            priorityProperty.intValue = index;
 
             EditorGUI.BeginChangeCheck();
             EditorGUI.PropertyField(nameRect, nameProperty);
@@ -137,8 +139,7 @@ namespace XRTK.Inspectors.Profiles
                 }
             }
 
-            priorityProperty.intValue = index;
-            EditorGUI.PropertyField(runtimeRect, runtimePlatformProperty);
+            EditorGUI.PropertyField(runtimeRect, platformEntriesProperty);
 
             var update = false;
 
@@ -231,16 +232,18 @@ namespace XRTK.Inspectors.Profiles
             var index = configurations.arraySize - 1;
 
             var configuration = configurations.GetArrayElementAtIndex(index);
+
             var nameProperty = configuration.FindPropertyRelative("name");
-            var instancedTypeProperty = configuration.FindPropertyRelative("instancedType");
             var priorityProperty = configuration.FindPropertyRelative("priority");
-            var runtimePlatformProperty = configuration.FindPropertyRelative("runtimePlatform");
+            var instancedTypeProperty = configuration.FindPropertyRelative("instancedType");
+            var platformEntriesProperty = configuration.FindPropertyRelative("platformEntries");
             var configurationProfileProperty = configuration.FindPropertyRelative("configurationProfile");
+            var runtimePlatformsProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
 
             nameProperty.stringValue = $"New Configuration {index}";
             instancedTypeProperty.FindPropertyRelative("reference").stringValue = string.Empty;
             priorityProperty.intValue = index;
-            runtimePlatformProperty.intValue = 0;
+            runtimePlatformsProperty.ClearArray();
             configurationProfileProperty.objectReferenceValue = null;
 
             serializedObject.ApplyModifiedProperties();

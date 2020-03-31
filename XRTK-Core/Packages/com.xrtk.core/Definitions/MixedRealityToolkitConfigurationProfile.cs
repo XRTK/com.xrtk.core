@@ -7,7 +7,6 @@ using XRTK.Definitions.BoundarySystem;
 using XRTK.Definitions.DiagnosticsSystem;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.NetworkingSystem;
-using XRTK.Definitions.PlatformSystem;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.BoundarySystem;
@@ -15,7 +14,6 @@ using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.DiagnosticsSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.NetworkingSystem;
-using XRTK.Interfaces.PlatformSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.TeleportSystem;
 
@@ -28,40 +26,6 @@ namespace XRTK.Definitions
     public class MixedRealityToolkitConfigurationProfile : BaseMixedRealityProfile
     {
         #region Mixed Reality Toolkit configurable properties
-
-        #region Platform System Properties
-
-        [SerializeField]
-        [Implements(typeof(IMixedRealityPlatformSystem), TypeGrouping.ByNamespaceFlat)]
-        private SystemType platformSystemType;
-
-        /// <summary>
-        /// The concrete platform system class to run with the Mixed Reality Toolkit.
-        /// </summary>
-        public SystemType PlatformSystemType
-        {
-            get => platformSystemType;
-            internal set => platformSystemType = value;
-        }
-
-        [SerializeField]
-        private MixedRealityPlatformSystemProfile platformSystemProfile = null;
-
-        /// <summary>
-        /// The <see cref="IMixedRealityPlatformSystem"/> configuration profile.
-        /// </summary>
-        public MixedRealityPlatformSystemProfile PlatformSystemProfile
-        {
-            get => platformSystemProfile;
-            internal set => platformSystemProfile = value;
-        }
-
-        /// <summary>
-        /// Is the Platform System enabled?
-        /// </summary>
-        public bool IsPlatformSystemEnabled => platformSystemProfile != null && platformSystemType != null && platformSystemType.Type != null;
-
-        #endregion Platform System Properties
 
         #region Camera System Properties
 

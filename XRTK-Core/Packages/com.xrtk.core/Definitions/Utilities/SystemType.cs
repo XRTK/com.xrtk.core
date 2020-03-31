@@ -110,7 +110,7 @@ namespace XRTK.Definitions.Utilities
 
         public override string ToString()
         {
-            return Type?.FullName ?? "(None)";
+            return Type?.FullName ?? (string.IsNullOrWhiteSpace(reference) ? "{None}" : reference);
         }
     }
 }

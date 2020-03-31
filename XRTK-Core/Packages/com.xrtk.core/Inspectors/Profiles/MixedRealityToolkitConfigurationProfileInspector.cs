@@ -14,9 +14,6 @@ namespace XRTK.Inspectors.Profiles
     [CustomEditor(typeof(MixedRealityToolkitConfigurationProfile))]
     public class MixedRealityToolkitConfigurationProfileInspector : BaseMixedRealityProfileInspector
     {
-        // Platform system properties
-        private SerializedProperty platformSystemType;
-        private SerializedProperty platformSystemProfile;
         // Camera system properties
         private SerializedProperty enableCameraSystem;
         private SerializedProperty cameraSystemType;
@@ -88,10 +85,6 @@ namespace XRTK.Inspectors.Profiles
                     }
                 }
             }
-
-            // Platform system configuration
-            platformSystemType = serializedObject.FindProperty("platformSystemType");
-            platformSystemProfile = serializedObject.FindProperty("platformSystemProfile");
 
             // Camera system configuration
             enableCameraSystem = serializedObject.FindProperty("enableCameraSystem");
@@ -169,13 +162,6 @@ namespace XRTK.Inspectors.Profiles
             EditorGUIUtility.labelWidth = 160f;
             EditorGUI.BeginChangeCheck();
             bool changed = false;
-
-            // Platform System configuration
-            GUILayout.Space(12f);
-            EditorGUILayout.LabelField("Platform Settings", EditorStyles.boldLabel);
-            // TODO Add dropdown for easy switching between registered platforms.
-            EditorGUILayout.PropertyField(platformSystemType);
-            changed |= RenderProfile(ThisProfile, platformSystemProfile);
 
             // Camera System configuration
             GUILayout.Space(12f);

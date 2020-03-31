@@ -835,7 +835,7 @@ namespace XRTK.Services
         /// </summary>
         /// <typeparam name="T">The interface type for the system to be registered.</typeparam>
         /// <param name="concreteType">The concrete type to instantiate.</param>
-        /// <param name="runtimePlatforms"></param>
+        /// <param name="runtimePlatforms">The runtime platform to check against when registering.</param>
         /// <param name="args">Optional arguments used when instantiating the concrete type.</param>
         /// <returns>True, if the service was successfully created and registered.</returns>
         public static bool CreateAndRegisterService<T>(Type concreteType, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, params object[] args) where T : IMixedRealityService

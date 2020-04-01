@@ -10,7 +10,7 @@ namespace XRTK.Definitions.Controllers
     /// <summary>
     /// Custom Mixed Reality Controller class to inherit from to enable custom profile support in mapping profile.
     /// </summary>
-    public class CustomMixedRealityControllerMappingProfile : BaseMixedRealityControllerMappingProfile
+    public abstract class CustomMixedRealityControllerMappingProfile : BaseMixedRealityControllerMappingProfile
     {
         /// <inheritdoc />
         public override SupportedControllerType ControllerType => SupportedControllerType.None;

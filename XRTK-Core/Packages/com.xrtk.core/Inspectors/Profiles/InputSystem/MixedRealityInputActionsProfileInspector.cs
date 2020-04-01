@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
@@ -18,37 +18,26 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
         private static Vector2 scrollPosition = Vector2.zero;
 
-        private SerializedProperty inputActionList;
+        private SerializedProperty inputActions;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            inputActionList = serializedObject.FindProperty("inputActions");
+            inputActions = serializedObject.FindProperty(nameof(inputActions));
         }
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            RenderHeader();
 
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = ThisProfile.ParentProfile;
-            }
-
-            ThisProfile.CheckProfileLock();
-
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Input Actions", EditorStyles.boldLabel);
-
             EditorGUILayout.HelpBox("Input Actions are any/all actions your users will be able to make when interacting with your application.\n\n" +
                                     "After defining all your actions, you can then wire up these actions to hardware sensors, controllers, and other input devices.", MessageType.Info);
 
             ThisProfile.CheckProfileLock();
-
             serializedObject.Update();
-            RenderList(inputActionList);
+            RenderList(inputActions);
             serializedObject.ApplyModifiedProperties();
         }
 

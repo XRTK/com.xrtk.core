@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
-using UnityEngine;
 using XRTK.Definitions.DiagnosticsSystem;
 using XRTK.Inspectors.Utilities;
 
@@ -24,25 +23,18 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            RenderHeader();
 
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Configuration Profile"))
-            {
-                Selection.activeObject = ThisProfile.ParentProfile;
-            }
-
-            ThisProfile.CheckProfileLock();
-            serializedObject.Update();
-
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Diagnostic System Profile", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Diagnostic can help monitor system resources and performance inside an application during development.", MessageType.Info);
             EditorGUILayout.Space();
+
+            ThisProfile.CheckProfileLock();
+            serializedObject.Update();
             EditorGUILayout.PropertyField(diagnosticsWindowPrefab);
             EditorGUILayout.PropertyField(showDiagnosticsWindowOnStart);
-            EditorGUILayout.Space();
             serializedObject.ApplyModifiedProperties();
+
             base.OnInspectorGUI();
         }
     }

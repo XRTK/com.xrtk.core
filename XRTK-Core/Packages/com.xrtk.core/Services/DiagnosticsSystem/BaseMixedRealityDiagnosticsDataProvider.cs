@@ -1,4 +1,7 @@
-﻿using XRTK.Definitions.DiagnosticsSystem;
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using XRTK.Definitions;
 using XRTK.Interfaces.DiagnosticsSystem;
 
 namespace XRTK.Services.DiagnosticsSystem
@@ -15,7 +18,7 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <param name="name"></param>
         /// <param name="priority"></param>
         /// <param name="profile"></param>
-        protected BaseMixedRealityDiagnosticsDataProvider(string name, uint priority, MixedRealityDiagnosticsDataProviderProfile profile)
+        protected BaseMixedRealityDiagnosticsDataProvider(string name, uint priority, BaseMixedRealityProfile profile)
             : base(name, priority)
         {
         }

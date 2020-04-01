@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
@@ -47,26 +47,19 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             controllerVisualizationProfile = target as MixedRealityControllerVisualizationProfile;
 
-            renderMotionControllers = serializedObject.FindProperty("renderMotionControllers");
-            controllerVisualizationType = serializedObject.FindProperty("controllerVisualizationType");
-            useDefaultModels = serializedObject.FindProperty("useDefaultModels");
-            globalLeftHandModel = serializedObject.FindProperty("globalLeftHandModel");
-            globalRightHandModel = serializedObject.FindProperty("globalRightHandModel");
-            globalPointerPose = serializedObject.FindProperty("globalPointerPose");
-            controllerVisualizationSettings = serializedObject.FindProperty("controllerVisualizationSettings");
+            renderMotionControllers = serializedObject.FindProperty(nameof(renderMotionControllers));
+            controllerVisualizationType = serializedObject.FindProperty(nameof(controllerVisualizationType));
+            useDefaultModels = serializedObject.FindProperty(nameof(useDefaultModels));
+            globalLeftHandModel = serializedObject.FindProperty(nameof(globalLeftHandModel));
+            globalRightHandModel = serializedObject.FindProperty(nameof(globalRightHandModel));
+            globalPointerPose = serializedObject.FindProperty(nameof(globalPointerPose));
+            controllerVisualizationSettings = serializedObject.FindProperty(nameof(controllerVisualizationSettings));
         }
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            RenderHeader();
 
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = controllerVisualizationProfile.ParentProfile;
-            }
-
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Controller Visualizations", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Define all the custom controller visualizations you'd like to use for each controller type when they're rendered in the scene.\n\n" +
                                     "Global settings are the default fallback, and any specific controller definitions take precedence.", MessageType.Info);
@@ -188,7 +181,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 }
 
                 var handednessValue = mixedRealityControllerHandedness.intValue - 1;
-                
+
                 // Reset in case it was set to something other than left, right or both.
                 if (handednessValue < 0 || handednessValue > 2) { handednessValue = 0; }
 

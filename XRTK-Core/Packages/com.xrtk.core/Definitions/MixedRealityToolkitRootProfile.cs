@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
@@ -20,12 +20,14 @@ using XRTK.Interfaces.TeleportSystem;
 namespace XRTK.Definitions
 {
     /// <summary>
-    /// Configuration profile settings for the Mixed Reality Toolkit.
+    /// The root profile for the Mixed Reality Toolkit's settings.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Toolkit Configuration Profile", fileName = "MixedRealityToolkitConfigurationProfile", order = (int)CreateProfileMenuItemIndices.Configuration)]
-    public class MixedRealityToolkitConfigurationProfile : BaseMixedRealityProfile
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Toolkit Root Profile", fileName = "MixedRealityToolkitRootProfile", order = (int)CreateProfileMenuItemIndices.Configuration)]
+    public sealed class MixedRealityToolkitRootProfile : BaseMixedRealityProfile
     {
-        #region Mixed Reality Toolkit configurable properties
+        #region Mixed Reality Toolkit system properties
+
+        #region Camera System Properties
 
         [SerializeField]
         [Tooltip("Enable the Camera System on Startup.")]
@@ -54,7 +56,6 @@ namespace XRTK.Definitions
             internal set => cameraSystemType = value;
         }
 
-
         [SerializeField]
         [Tooltip("Camera profile.")]
         private MixedRealityCameraProfile cameraProfile;
@@ -68,6 +69,10 @@ namespace XRTK.Definitions
             get => cameraProfile;
             internal set => cameraProfile = value;
         }
+
+        #endregion Camera System Properties
+
+        #region Input System Properties
 
         [SerializeField]
         [Tooltip("Enable the Input System on Startup.")]
@@ -109,6 +114,10 @@ namespace XRTK.Definitions
             internal set => inputSystemType = value;
         }
 
+        #endregion Input System Properties
+
+        #region Boundary System Properties
+
         [SerializeField]
         [Tooltip("Enable the Boundary on Startup")]
         private bool enableBoundarySystem = false;
@@ -149,6 +158,10 @@ namespace XRTK.Definitions
             internal set => boundaryVisualizationProfile = value;
         }
 
+        #endregion Boundary System Properties
+
+        #region Teleportation System Properties
+
         [SerializeField]
         [Tooltip("Enable the Teleport System on Startup")]
         private bool enableTeleportSystem = false;
@@ -175,6 +188,10 @@ namespace XRTK.Definitions
             get => teleportSystemType;
             internal set => teleportSystemType = value;
         }
+
+        #endregion Teleportation System Properties
+
+        #region Spatial Awareness System Properties
 
         [SerializeField]
         [Tooltip("Enable the Spatial Awareness system on Startup")]
@@ -216,6 +233,10 @@ namespace XRTK.Definitions
             internal set => spatialAwarenessProfile = value;
         }
 
+        #endregion Spatial Awareness System Properties
+
+        #region Networking System Properties
+
         [SerializeField]
         [Tooltip("Profile for wiring up networking assets.")]
         private MixedRealityNetworkSystemProfile networkingSystemProfile;
@@ -255,6 +276,10 @@ namespace XRTK.Definitions
             get => networkingSystemType;
             internal set => networkingSystemType = value;
         }
+
+        #endregion Networking System Properties
+
+        #region Diagnostics System Properties
 
         [SerializeField]
         [Tooltip("Profile for wiring up diagnostic assets.")]
@@ -296,6 +321,10 @@ namespace XRTK.Definitions
             internal set => diagnosticsSystemType = value;
         }
 
+        #endregion Diagnostics System Properties
+
+        #endregion Mixed Reality Toolkit system properties
+
         [SerializeField]
         [Tooltip("All the additional non-required services registered with the Mixed Reality Toolkit.")]
         private MixedRealityRegisteredServiceProvidersProfile registeredServiceProvidersProfile = null;
@@ -308,7 +337,5 @@ namespace XRTK.Definitions
             get => registeredServiceProvidersProfile;
             internal set => registeredServiceProvidersProfile = value;
         }
-
-        #endregion Mixed Reality Toolkit configurable properties
     }
 }

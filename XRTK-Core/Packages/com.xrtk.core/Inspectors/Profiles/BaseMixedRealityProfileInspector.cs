@@ -1,10 +1,12 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Inspectors.Extensions;
+using XRTK.Inspectors.Utilities;
 using XRTK.Services;
 using XRTK.Utilities.Async;
 
@@ -17,8 +19,8 @@ namespace XRTK.Inspectors.Profiles
     {
         private const string IsDefaultProfileProperty = "isEditable";
 
-        private static readonly GUIContent NewProfileContent = new GUIContent("+", "Create New Profile");
-        private static readonly GUIContent CopyProfileContent = new GUIContent("Clone", "Replace with a copy of the default profile.");
+        protected static readonly GUIContent NewProfileContent = new GUIContent("+", "Create New Profile");
+        protected static readonly GUIContent CloneProfileContent = new GUIContent("Clone", "Replace with a copy of the default profile.");
 
         private static SerializedObject targetProfile;
         private static BaseMixedRealityProfile profile;
@@ -32,6 +34,19 @@ namespace XRTK.Inspectors.Profiles
             profile = target as BaseMixedRealityProfile;
             Debug.Assert(profile != null);
             ThisProfile = profile;
+        }
+
+        protected void RenderHeader()
+        {
+            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+
+            if (ThisProfile.ParentProfile != null &&
+                GUILayout.Button("Back to parent profile"))
+            {
+                Selection.activeObject = ThisProfile.ParentProfile;
+            }
+
+            EditorGUILayout.Space();
         }
 
         /// <summary>
@@ -80,15 +95,7 @@ namespace XRTK.Inspectors.Profiles
                 if (showAddButton &&
                     GUILayout.Button(NewProfileContent, EditorStyles.miniButton, GUILayout.Width(20f)))
                 {
-                    var profileTypeName = property.type.Replace("PPtr<$", string.Empty).Replace(">", string.Empty);
-                    Debug.Assert(profileTypeName != null, "No Type Found");
-
-                    var instance = CreateInstance(profileTypeName);
-                    var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
-                    Debug.Assert(newProfile != null);
-                    newProfile.ParentProfile = parentProfile;
-                    property.objectReferenceValue = newProfile;
-                    property.serializedObject.ApplyModifiedProperties();
+                    CreateNewProfileInstance(parentProfile, property);
                     changed = true;
                 }
             }
@@ -100,19 +107,9 @@ namespace XRTK.Inspectors.Profiles
 
                 if (profile.IsEditable &&
                     !renderedProfile.IsEditable &&
-                    GUILayout.Button(CopyProfileContent, EditorStyles.miniButton, GUILayout.Width(42f)))
+                    GUILayout.Button(CloneProfileContent, EditorStyles.miniButton, GUILayout.Width(42f)))
                 {
-                    profileToCopy = renderedProfile;
-                    var typeName = renderedProfile.GetType().Name;
-                    Debug.Assert(typeName != null, "No Type Found");
-
-                    var instance = CreateInstance(typeName);
-                    var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
-                    Debug.Assert(newProfile != null);
-                    newProfile.ParentProfile = parentProfile;
-                    property.objectReferenceValue = newProfile;
-                    property.serializedObject.ApplyModifiedProperties();
-                    PasteProfileValuesDelay(newProfile);
+                    CloneProfileInstance(parentProfile, property, renderedProfile);
                     changed = true;
                 }
             }
@@ -122,7 +119,7 @@ namespace XRTK.Inspectors.Profiles
                 var renderedProfile = property.objectReferenceValue as BaseMixedRealityProfile;
                 Debug.Assert(renderedProfile != null);
 
-                if (!(renderedProfile is MixedRealityToolkitConfigurationProfile) &&
+                if (!(renderedProfile is MixedRealityToolkitRootProfile) &&
                      (renderedProfile.ParentProfile == null ||
                       renderedProfile.ParentProfile != parentProfile))
                 {
@@ -137,6 +134,59 @@ namespace XRTK.Inspectors.Profiles
 
             EditorGUILayout.EndHorizontal();
             return changed;
+        }
+
+        /// <summary>
+        /// Creates a new <see cref="BaseMixedRealityProfile"/> instance and sets it to the <see cref="SerializedProperty"/>.
+        /// </summary>
+        /// <param name="parentProfile"></param>
+        /// <param name="property"></param>
+        /// <param name="profileType"></param>
+        protected static void CreateNewProfileInstance(BaseMixedRealityProfile parentProfile, SerializedProperty property, Type profileType = null)
+        {
+            ScriptableObject instance;
+
+            if (profileType == null)
+            {
+                if (!string.IsNullOrWhiteSpace(property.type))
+                {
+                    var profileTypeName = property.type?.Replace("PPtr<$", string.Empty).Replace(">", string.Empty);
+                    instance = CreateInstance(profileTypeName);
+                }
+                else
+                {
+                    Debug.LogError("No property type found!");
+                    return;
+                }
+            }
+            else
+            {
+                instance = CreateInstance(profileType);
+            }
+
+            var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
+            Debug.Assert(newProfile != null);
+            newProfile.ParentProfile = parentProfile;
+            property.objectReferenceValue = newProfile;
+            property.serializedObject.ApplyModifiedProperties();
+        }
+
+        /// <summary>
+        /// Clones an instance of a <see cref="BaseMixedRealityProfile"/> and sets it to the <see cref="SerializedProperty"/>.
+        /// </summary>
+        /// <param name="parentProfile"></param>
+        /// <param name="property"></param>
+        /// <param name="renderedProfile"></param>
+        protected static void CloneProfileInstance(BaseMixedRealityProfile parentProfile, SerializedProperty property, BaseMixedRealityProfile renderedProfile)
+        {
+            profileToCopy = renderedProfile;
+            var instance = CreateInstance(renderedProfile.GetType());
+            var newProfile = instance.CreateAsset(AssetDatabase.GetAssetPath(Selection.activeObject)) as BaseMixedRealityProfile;
+            Debug.Assert(newProfile != null);
+            newProfile.ParentProfile = parentProfile;
+            property.objectReferenceValue = newProfile;
+            property.serializedObject.ApplyModifiedProperties();
+            PasteProfileValuesDelay(newProfile);
         }
 
         [MenuItem("CONTEXT/BaseMixedRealityProfile/Create Clone from Profile Values", false, 0)]
@@ -156,11 +206,11 @@ namespace XRTK.Inspectors.Profiles
 
             if (!profileToCopy.IsEditable)
             {
-                // For now we only replace it if it's the master configuration profile.
-                // Sub-profiles are easy to update in the master configuration inspector.
+                // For now we only replace it if it's the master settings profile.
+                // Sub-profiles are easy to update in the master settings inspector.
                 if (MixedRealityToolkit.Instance.ActiveProfile.GetType() == profile.GetType())
                 {
-                    MixedRealityToolkit.Instance.ActiveProfile = profile as MixedRealityToolkitConfigurationProfile;
+                    MixedRealityToolkit.Instance.ActiveProfile = profile as MixedRealityToolkitRootProfile;
                 }
             }
         }

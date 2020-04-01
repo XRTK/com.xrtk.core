@@ -7,7 +7,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using XRTK.Definitions;
-using XRTK.Definitions.Utilities;
+using XRTK.Definitions.Platforms;
 using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Interfaces.BoundarySystem;
@@ -128,6 +128,22 @@ namespace XRTK.Services
         #endregion Mixed Reality Toolkit Profile configuration
 
         #region Mixed Reality runtime service registry
+
+        // ReSharper disable once InconsistentNaming
+        private static readonly List<IMixedRealityPlatform> availablePlatforms = new List<IMixedRealityPlatform>();
+
+        /// <summary>
+        /// The list of active platforms detected by the <see cref="MixedRealityToolkit"/>.
+        /// </summary>
+        public static IReadOnlyList<IMixedRealityPlatform> AvailablePlatforms => availablePlatforms;
+
+        // ReSharper disable once InconsistentNaming
+        private static readonly List<IMixedRealityPlatform> activePlatforms = new List<IMixedRealityPlatform>();
+
+        /// <summary>
+        /// The list of active platforms detected by the <see cref="MixedRealityToolkit"/>.
+        /// </summary>
+        public static IReadOnlyList<IMixedRealityPlatform> ActivePlatforms => activePlatforms;
 
         // ReSharper disable once InconsistentNaming
         private static readonly Dictionary<Type, IMixedRealityService> activeSystems = new Dictionary<Type, IMixedRealityService>();
@@ -283,6 +299,7 @@ namespace XRTK.Services
 
                 if (HasActiveProfile)
                 {
+                    EnsureMixedRealityRequirements();
                     InitializeServiceLocator();
                 }
             }
@@ -324,6 +341,8 @@ namespace XRTK.Services
             return IsInitialized;
         }
 
+        #endregion Instance Management
+
         /// <summary>
         /// Once all services are registered and properties updated, the Mixed Reality Toolkit will initialize all active services.
         /// This ensures all services can reference each other once started.
@@ -362,16 +381,14 @@ namespace XRTK.Services
             Debug.Assert(RegisteredMixedRealityServices.Count == 0);
 
             ClearCoreSystemCache();
-            EnsureMixedRealityRequirements();
 
             #region Services Registration
 
             if (ActiveProfile.IsCameraSystemEnabled &&
-                (!CreateAndRegisterService<IMixedRealityCameraSystem>(ActiveProfile.CameraSystemType, ActiveProfile.CameraProfile) || CameraSystem == null))
+                (!CreateAndRegisterService<IMixedRealityCameraSystem>(ActiveProfile.CameraSystemType, ActiveProfile.CameraProfile) ||
+                 CameraSystem == null))
             {
                 Debug.LogError("Failed to start the Camera System!");
-                isInitializing = false;
-                return;
             }
 
             if (ActiveProfile.IsInputSystemEnabled)
@@ -528,6 +545,37 @@ namespace XRTK.Services
 
         private static void EnsureMixedRealityRequirements()
         {
+            activePlatforms.Clear();
+            availablePlatforms.Clear();
+
+            var platformTypes = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => typeof(IMixedRealityPlatform).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract)
+                .OrderBy(type => type.Name);
+
+            foreach (var platformType in platformTypes)
+            {
+                IMixedRealityPlatform platformInstance = null;
+
+                try
+                {
+                    platformInstance = Activator.CreateInstance(platformType) as IMixedRealityPlatform;
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
+                }
+
+                if (platformInstance == null) { continue; }
+
+                availablePlatforms.Add(platformInstance);
+
+                if (platformInstance.IsAvailable)
+                {
+                    activePlatforms.Add(platformInstance);
+                }
+            }
+
             // There's lots of documented cases that if the camera doesn't start at 0,0,0, things break with the WMR SDK specifically.
             // We'll enforce that here, then tracking can update it to the appropriate position later.
             CameraCache.Main.transform.position = Vector3.zero;
@@ -568,8 +616,6 @@ namespace XRTK.Services
                 CameraCache.Main.gameObject.EnsureComponent<EventSystem>();
             }
         }
-
-        #endregion Instance Management
 
         #region MonoBehaviour Implementation
 
@@ -764,7 +810,7 @@ namespace XRTK.Services
         {
             return CreateAndRegisterService<T>(
                 configuration.InstancedType,
-                configuration.RuntimePlatform,
+                configuration.RuntimePlatforms,
                 configuration.Name,
                 configuration.Priority,
                 configuration.ConfigurationProfile);
@@ -779,33 +825,58 @@ namespace XRTK.Services
         /// <returns>True, if the service was successfully created and registered.</returns>
         public static bool CreateAndRegisterService<T>(Type concreteType, params object[] args) where T : IMixedRealityService
         {
-            return CreateAndRegisterService<T>(concreteType, (SupportedPlatforms)(-1), args);
+            return CreateAndRegisterService<T>(concreteType, AllPlatforms, args);
         }
+
+        private static readonly IMixedRealityPlatform[] AllPlatforms = { new AllPlatforms() };
 
         /// <summary>
         /// Creates a new instance of a service and registers it to the Mixed Reality Toolkit service registry for the specified platform.
         /// </summary>
         /// <typeparam name="T">The interface type for the system to be registered.</typeparam>
         /// <param name="concreteType">The concrete type to instantiate.</param>
-        /// <param name="supportedPlatforms">The runtime platform to check against when registering.</param>
+        /// <param name="runtimePlatforms">The runtime platform to check against when registering.</param>
         /// <param name="args">Optional arguments used when instantiating the concrete type.</param>
         /// <returns>True, if the service was successfully created and registered.</returns>
-        public static bool CreateAndRegisterService<T>(Type concreteType, SupportedPlatforms supportedPlatforms, params object[] args) where T : IMixedRealityService
+        public static bool CreateAndRegisterService<T>(Type concreteType, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, params object[] args) where T : IMixedRealityService
         {
             if (IsApplicationQuitting)
             {
                 return false;
             }
 
-#if !UNITY_EDITOR
-            if (!Application.platform.IsPlatformSupported(supportedPlatforms))
-#else
-            if (!UnityEditor.EditorUserBuildSettings.activeBuildTarget.IsPlatformSupported(supportedPlatforms))
-#endif
+            bool canRunOnPlatform = false;
+
+            for (var i = 0; i < runtimePlatforms?.Count; i++)
+            {
+                for (var j = 0; j < ActivePlatforms.Count; j++)
+                {
+                    if (ActivePlatforms[j].GetType() == runtimePlatforms[i].GetType())
+                    {
+                        canRunOnPlatform = true;
+                        break;
+                    }
+                }
+
+                if (canRunOnPlatform)
+                {
+                    break;
+                }
+            }
+
+            if (!canRunOnPlatform)
             {
                 // We return true so we don't raise en error.
                 // Even though we did not register the service,
-                // it's expected that this is the intended behavior.
+                // it's expected that this is the intended behavior
+                // when there isn't a valid platform to run the service on.
+
+                if (runtimePlatforms == null ||
+                    runtimePlatforms.Count == 0)
+                {
+                    Debug.LogWarning($"No runtime platforms defined for the {concreteType?.Name} service.");
+                }
+
                 return true;
             }
 
@@ -1439,11 +1510,17 @@ namespace XRTK.Services
         /// <remarks>
         /// Note: type should be the Interface of the system to be retrieved and not the concrete class itself.
         /// </remarks>
-        /// <returns>True, there is a system registered with the selected interface, False, no system found for that interface</returns>
-        /// <exception cref="T:System.ArgumentNullException">Type is <see langword="null" />.</exception>
+        /// <returns>True, there is a system registered with the selected interface, False, no system found for that interface.</returns>
         public static bool IsSystemRegistered<T>() where T : IMixedRealityService
         {
-            return activeSystems.TryGetValue(typeof(T), out _);
+            try
+            {
+                return activeSystems.TryGetValue(typeof(T), out _);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
         private static bool IsCoreSystem(Type concreteType)
@@ -1714,7 +1791,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
                     instance.activeProfile == null ||
-                    (instance.activeProfile != null && !instance.activeProfile.IsCameraSystemEnabled))
+                    instance.activeProfile != null && !instance.activeProfile.IsCameraSystemEnabled)
                 {
                     return null;
                 }
@@ -1746,7 +1823,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
                     instance.activeProfile == null ||
-                    (instance.activeProfile != null && !instance.activeProfile.IsInputSystemEnabled))
+                    instance.activeProfile != null && !instance.activeProfile.IsInputSystemEnabled)
                 {
                     return null;
                 }
@@ -1778,7 +1855,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
                     instance.activeProfile == null ||
-                    (instance.activeProfile != null && !instance.activeProfile.IsBoundarySystemEnabled))
+                    instance.activeProfile != null && !instance.activeProfile.IsBoundarySystemEnabled)
                 {
                     return null;
                 }
@@ -1810,7 +1887,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
                     instance.activeProfile == null ||
-                    (instance.activeProfile != null && !instance.activeProfile.IsSpatialAwarenessSystemEnabled))
+                    instance.activeProfile != null && !instance.activeProfile.IsSpatialAwarenessSystemEnabled)
                 {
                     return null;
                 }
@@ -1842,7 +1919,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
                     instance.activeProfile == null ||
-                    (instance.activeProfile != null && !instance.activeProfile.IsTeleportSystemEnabled))
+                    instance.activeProfile != null && !instance.activeProfile.IsTeleportSystemEnabled)
                 {
                     return null;
                 }
@@ -1874,7 +1951,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
                     instance.activeProfile == null ||
-                    (instance.activeProfile != null && !instance.activeProfile.IsNetworkingSystemEnabled))
+                    instance.activeProfile != null && !instance.activeProfile.IsNetworkingSystemEnabled)
                 {
                     return null;
                 }
@@ -1906,7 +1983,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
                     instance.activeProfile == null ||
-                    (instance.activeProfile != null && !instance.activeProfile.IsDiagnosticsSystemEnabled))
+                    instance.activeProfile != null && !instance.activeProfile.IsDiagnosticsSystemEnabled)
                 {
                     return null;
                 }
@@ -1937,6 +2014,9 @@ namespace XRTK.Services
             OnDispose(true);
         }
 
+        /// <summary>
+        /// Dispose the <see cref="MixedRealityToolkit"/> object.
+        /// </summary>
         public void Dispose()
         {
             if (disposed) { return; }

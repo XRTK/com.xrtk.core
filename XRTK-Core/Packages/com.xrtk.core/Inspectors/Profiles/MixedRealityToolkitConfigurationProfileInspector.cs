@@ -14,7 +14,7 @@ namespace XRTK.Inspectors.Profiles
     [CustomEditor(typeof(MixedRealityToolkitConfigurationProfile))]
     public class MixedRealityToolkitConfigurationProfileInspector : BaseMixedRealityProfileInspector
     {
-        // Camera properties
+        // Camera system properties
         private SerializedProperty enableCameraSystem;
         private SerializedProperty cameraSystemType;
         private SerializedProperty cameraProfile;
@@ -86,29 +86,35 @@ namespace XRTK.Inspectors.Profiles
                 }
             }
 
-            // Camera configuration
+            // Camera system configuration
             enableCameraSystem = serializedObject.FindProperty("enableCameraSystem");
             cameraSystemType = serializedObject.FindProperty("cameraSystemType");
             cameraProfile = serializedObject.FindProperty("cameraProfile");
+
             // Input system configuration
             enableInputSystem = serializedObject.FindProperty("enableInputSystem");
             inputSystemType = serializedObject.FindProperty("inputSystemType");
             inputSystemProfile = serializedObject.FindProperty("inputSystemProfile");
+
             // Boundary system configuration
             enableBoundarySystem = serializedObject.FindProperty("enableBoundarySystem");
             boundarySystemType = serializedObject.FindProperty("boundarySystemType");
             boundaryVisualizationProfile = serializedObject.FindProperty("boundaryVisualizationProfile");
+
             // Teleport system configuration
             enableTeleportSystem = serializedObject.FindProperty("enableTeleportSystem");
             teleportSystemType = serializedObject.FindProperty("teleportSystemType");
+
             // Spatial Awareness system configuration
             enableSpatialAwarenessSystem = serializedObject.FindProperty("enableSpatialAwarenessSystem");
             spatialAwarenessSystemType = serializedObject.FindProperty("spatialAwarenessSystemType");
             spatialAwarenessProfile = serializedObject.FindProperty("spatialAwarenessProfile");
+
             // Networking system configuration
             enableNetworkingSystem = serializedObject.FindProperty("enableNetworkingSystem");
             networkingSystemType = serializedObject.FindProperty("networkingSystemType");
             networkingSystemProfile = serializedObject.FindProperty("networkingSystemProfile");
+
             // Diagnostics system configuration
             enableDiagnosticsSystem = serializedObject.FindProperty("enableDiagnosticsSystem");
             diagnosticsSystemType = serializedObject.FindProperty("diagnosticsSystemType");

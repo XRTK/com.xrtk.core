@@ -46,7 +46,7 @@ namespace XRTK.Extensions
         {
             // If there are 0 or 1 characters, just return the string.
             if (value == null) { return string.Empty; }
-            if (value.Length < 2) { return value.ToUpper(); }
+            if (value.Length < 4) { return value.ToUpper(); }
             // If there's already spaces in the string, return.
             if (value.Contains(WhiteSpace)) { return value; }
 

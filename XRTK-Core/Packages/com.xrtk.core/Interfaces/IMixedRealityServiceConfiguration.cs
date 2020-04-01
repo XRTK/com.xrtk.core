@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System.Collections.Generic;
 using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
 using XRTK.Services;
@@ -27,6 +28,14 @@ namespace XRTK.Interfaces
         SystemType InstancedType { get; }
 
         /// <summary>
+        /// The simple, human readable name for the <see cref="IMixedRealityService"/>.
+        /// </summary>
+        /// <remarks>
+        /// This name should be unique.
+        /// </remarks>
+        string Name { get; }
+
+        /// <summary>
         /// The priority order of execution for this <see cref="IMixedRealityService"/>.
         /// </summary>
         /// <remarks>
@@ -37,19 +46,11 @@ namespace XRTK.Interfaces
         /// <summary>
         /// The runtime platform(s) to run this <see cref="IMixedRealityService"/> to run on.
         /// </summary>
-        SupportedPlatforms RuntimePlatform { get; }
+        IReadOnlyList<IMixedRealityPlatform> RuntimePlatforms { get; }
 
         /// <summary>
         /// The configuration profile for the <see cref="IMixedRealityService"/>.
         /// </summary>
         BaseMixedRealityProfile ConfigurationProfile { get; }
-
-        /// <summary>
-        /// The simple, human readable name for the <see cref="IMixedRealityService"/>.
-        /// </summary>
-        /// <remarks>
-        /// This name should be unique.
-        /// </remarks>
-        string Name { get; }
     }
 }

@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace XRTK.Extensions
@@ -11,6 +12,24 @@ namespace XRTK.Extensions
     /// </summary>
     public static class TypeExtensions
     {
+        private static readonly Dictionary<string, Type> TypeMap = new Dictionary<string, Type>();
+
+        /// <summary>
+        /// Attempts to resolve the class reference by the <see cref="Type.AssemblyQualifiedName"/>.
+        /// </summary>
+        /// <param name="classRef">The <see cref="Type.AssemblyQualifiedName"/> of the type to get.</param>
+        /// <returns>The <see cref="Type"/> from <see cref="classRef"/></returns>
+        public static Type ResolveType(string classRef)
+        {
+            if (!TypeMap.TryGetValue(classRef, out var type))
+            {
+                type = !string.IsNullOrEmpty(classRef) ? Type.GetType(classRef) : null;
+                TypeMap[classRef] = type;
+            }
+
+            return type;
+        }
+
         /// <summary>
         /// Recursively looks for generic type arguments in type hierarchy, starting with the
         /// root type provided. If no generic type arguments are found on a type, it's base

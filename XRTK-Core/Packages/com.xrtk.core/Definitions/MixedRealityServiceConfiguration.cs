@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using XRTK.Attributes;
@@ -16,8 +17,8 @@ namespace XRTK.Definitions
         where T : IMixedRealityService
     {
         /// <inheritdoc />
-        public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityProfile configurationProfile)
-            : base(instancedType, name, priority, runtimePlatform, configurationProfile)
+        public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, BaseMixedRealityProfile configurationProfile)
+            : base(instancedType, name, priority, runtimePlatforms, configurationProfile)
         {
         }
     }
@@ -34,14 +35,26 @@ namespace XRTK.Definitions
         /// <param name="instancedType">The concrete type for the <see cref="IMixedRealityService"/>.</param>
         /// <param name="name">The simple, human readable name for the <see cref="IMixedRealityService"/>.</param>
         /// <param name="priority">The priority this <see cref="IMixedRealityService"/> will be initialized in.</param>
-        /// <param name="runtimePlatform">The runtime platform(s) to run this <see cref="IMixedRealityService"/> to run on.</param>
+        /// <param name="runtimePlatforms">runtimePlatform">The runtime platform(s) to run this <see cref="IMixedRealityService"/> to run on.</param>
         /// <param name="configurationProfile">The configuration profile for <see cref="IMixedRealityService"/>.</param>
-        public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, SupportedPlatforms runtimePlatform, BaseMixedRealityProfile configurationProfile)
+        public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, BaseMixedRealityProfile configurationProfile)
         {
             this.instancedType = instancedType;
             this.name = name;
             this.priority = priority;
-            this.runtimePlatform = runtimePlatform;
+
+            if (runtimePlatforms != null)
+            {
+                this.runtimePlatforms = new List<IMixedRealityPlatform>(runtimePlatforms.Count);
+
+                for (int i = 0; i < runtimePlatforms.Count; i++)
+                {
+                    this.runtimePlatforms.Add(runtimePlatforms[i]);
+                }
+
+                platformEntries = new RuntimePlatformEntry(runtimePlatforms);
+            }
+
             this.configurationProfile = configurationProfile;
         }
 
@@ -84,15 +97,48 @@ namespace XRTK.Definitions
             internal set => priority = value;
         }
 
-        [EnumFlags]
         [SerializeField]
-        private SupportedPlatforms runtimePlatform;
+        private RuntimePlatformEntry platformEntries = new RuntimePlatformEntry();
+
+        [NonSerialized]
+        private List<IMixedRealityPlatform> runtimePlatforms = null;
 
         /// <inheritdoc />
-        public SupportedPlatforms RuntimePlatform
+        public IReadOnlyList<IMixedRealityPlatform> RuntimePlatforms
         {
-            get => runtimePlatform;
-            internal set => runtimePlatform = value;
+            get
+            {
+                if (runtimePlatforms == null ||
+                    runtimePlatforms.Count == 0 ||
+                    runtimePlatforms.Count != platformEntries?.RuntimePlatforms?.Length)
+                {
+                    runtimePlatforms = new List<IMixedRealityPlatform>();
+
+                    for (int i = 0; i < MixedRealityToolkit.AvailablePlatforms.Count; i++)
+                    {
+                        var availablePlatform = MixedRealityToolkit.AvailablePlatforms[i];
+                        var availablePlatformType = availablePlatform.GetType();
+
+                        for (int j = 0; j < platformEntries?.RuntimePlatforms?.Length; j++)
+                        {
+                            var platformType = platformEntries.RuntimePlatforms[j]?.Type;
+
+                            if (platformType == null)
+                            {
+                                Debug.LogError($"Failed to resolve {platformEntries.RuntimePlatforms[j]} for {name}");
+                                continue;
+                            }
+
+                            if (availablePlatformType == platformType)
+                            {
+                                runtimePlatforms.Add(availablePlatform);
+                            }
+                        }
+                    }
+                }
+
+                return runtimePlatforms;
+            }
         }
 
         [SerializeField]

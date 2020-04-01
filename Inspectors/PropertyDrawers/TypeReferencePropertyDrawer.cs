@@ -9,6 +9,7 @@ using UnityEditor.Compilation;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using Assembly = System.Reflection.Assembly;
 
 namespace XRTK.Inspectors.PropertyDrawers
@@ -26,7 +27,6 @@ namespace XRTK.Inspectors.PropertyDrawers
 
         private static int selectionControlId;
         private static string selectedReference;
-        private static readonly Dictionary<string, Type> TypeMap = new Dictionary<string, Type>();
         private static readonly int ControlHint = typeof(TypeReferencePropertyDrawer).GetHashCode();
         private static readonly GUIContent TempContent = new GUIContent();
         private static readonly GUIContent RepairContent = new GUIContent("Repair", "Try to repair the reference");
@@ -136,21 +136,6 @@ namespace XRTK.Inspectors.PropertyDrawers
 
         #endregion Type Filtering
 
-        #region Type Utility
-
-        private static Type ResolveType(string classRef)
-        {
-            if (!TypeMap.TryGetValue(classRef, out var type))
-            {
-                type = !string.IsNullOrEmpty(classRef) ? Type.GetType(classRef) : null;
-                TypeMap[classRef] = type;
-            }
-
-            return type;
-        }
-
-        #endregion Type Utility
-
         #region Control Drawing / Event Handling
 
         /// <summary>
@@ -232,7 +217,7 @@ namespace XRTK.Inspectors.PropertyDrawers
                 selectionControlId = controlId;
                 selectedReference = classRef;
 
-                DisplayDropDown(position, GetFilteredTypes(filter), ResolveType(classRef), filter?.Grouping ?? TypeGrouping.ByNamespaceFlat);
+                DisplayDropDown(position, GetFilteredTypes(filter), TypeExtensions.ResolveType(classRef), filter?.Grouping ?? TypeGrouping.ByNamespaceFlat);
             }
         }
 
@@ -255,7 +240,7 @@ namespace XRTK.Inspectors.PropertyDrawers
                 var restoreColor = GUI.color;
                 var reference = referenceProperty.stringValue;
                 var restoreShowMixedValue = EditorGUI.showMixedValue;
-                var isValidClassRef = string.IsNullOrEmpty(reference) || ResolveType(reference) != null;
+                var isValidClassRef = string.IsNullOrEmpty(reference) || TypeExtensions.ResolveType(reference) != null;
 
                 if (!isValidClassRef)
                 {
@@ -411,11 +396,10 @@ namespace XRTK.Inspectors.PropertyDrawers
             }
         }
 
-        private static void OnSelectedTypeName(object userData)
+        private static void OnSelectedTypeName(object typeRef)
         {
-            selectedReference = SystemType.GetReference(userData as Type);
-            var typeReferenceUpdatedEvent = EditorGUIUtility.CommandEvent(TypeReferenceUpdated);
-            EditorWindow.focusedWindow.SendEvent(typeReferenceUpdatedEvent);
+            selectedReference = SystemType.GetReference(typeRef as Type);
+            EditorWindow.focusedWindow.SendEvent(EditorGUIUtility.CommandEvent(TypeReferenceUpdated));
         }
 
         #endregion Control Drawing / Event Handling

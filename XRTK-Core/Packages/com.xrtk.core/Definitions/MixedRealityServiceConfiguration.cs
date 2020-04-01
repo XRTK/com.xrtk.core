@@ -17,8 +17,8 @@ namespace XRTK.Definitions
         where T : IMixedRealityService
     {
         /// <inheritdoc />
-        public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, BaseMixedRealityProfile configurationProfile)
-            : base(instancedType, name, priority, runtimePlatforms, configurationProfile)
+        public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, BaseMixedRealityProfile profile)
+            : base(instancedType, name, priority, runtimePlatforms, profile)
         {
         }
     }
@@ -36,8 +36,8 @@ namespace XRTK.Definitions
         /// <param name="name">The simple, human readable name for the <see cref="IMixedRealityService"/>.</param>
         /// <param name="priority">The priority this <see cref="IMixedRealityService"/> will be initialized in.</param>
         /// <param name="runtimePlatforms">runtimePlatform">The runtime platform(s) to run this <see cref="IMixedRealityService"/> to run on.</param>
-        /// <param name="configurationProfile">The configuration profile for <see cref="IMixedRealityService"/>.</param>
-        public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, BaseMixedRealityProfile configurationProfile)
+        /// <param name="profile">The configuration profile for <see cref="IMixedRealityService"/>.</param>
+        public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, BaseMixedRealityProfile profile)
         {
             this.instancedType = instancedType;
             this.name = name;
@@ -55,7 +55,7 @@ namespace XRTK.Definitions
                 platformEntries = new RuntimePlatformEntry(runtimePlatforms);
             }
 
-            this.configurationProfile = configurationProfile;
+            this.profile = profile;
         }
 
         [SerializeField]
@@ -142,13 +142,14 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
-        private BaseMixedRealityProfile configurationProfile;
+        [FormerlySerializedAs("configurationProfile")]
+        private BaseMixedRealityProfile profile;
 
         /// <inheritdoc />
         public BaseMixedRealityProfile ConfigurationProfile
         {
-            get => configurationProfile;
-            internal set => configurationProfile = value;
+            get => profile;
+            internal set => profile = value;
         }
     }
 }

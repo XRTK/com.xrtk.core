@@ -59,12 +59,12 @@ namespace XRTK.Services
         /// </summary>
         [SerializeField]
         [Tooltip("The current active configuration for the Mixed Reality project")]
-        private MixedRealityToolkitConfigurationProfile activeProfile = null;
+        private MixedRealityToolkitRootProfile activeProfile = null;
 
         /// <summary>
         /// The public property of the Active Profile, ensuring events are raised on the change of the configuration
         /// </summary>
-        public MixedRealityToolkitConfigurationProfile ActiveProfile
+        public MixedRealityToolkitRootProfile ActiveProfile
         {
             get
             {
@@ -88,7 +88,7 @@ namespace XRTK.Services
         /// When a configuration Profile is replaced with a new configuration, force all services to reset and read the new values
         /// </summary>
         /// <param name="profile"></param>
-        public void ResetConfiguration(MixedRealityToolkitConfigurationProfile profile)
+        public void ResetConfiguration(MixedRealityToolkitRootProfile profile)
         {
             if (isResetting)
             {
@@ -457,7 +457,7 @@ namespace XRTK.Services
             if (ActiveProfile.IsTeleportSystemEnabled)
             {
                 // Note: The Teleport system doesn't have a profile, but might in the future.
-                var dummyProfile = ScriptableObject.CreateInstance<MixedRealityToolkitConfigurationProfile>();
+                var dummyProfile = ScriptableObject.CreateInstance<MixedRealityToolkitRootProfile>();
 
                 if (!CreateAndRegisterService<IMixedRealityTeleportSystem>(ActiveProfile.TeleportSystemSystemType, dummyProfile) || TeleportSystem == null)
                 {

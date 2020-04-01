@@ -117,7 +117,7 @@ namespace XRTK.Inspectors.Profiles
                 var renderedProfile = property.objectReferenceValue as BaseMixedRealityProfile;
                 Debug.Assert(renderedProfile != null);
 
-                if (!(renderedProfile is MixedRealityToolkitConfigurationProfile) &&
+                if (!(renderedProfile is MixedRealityToolkitRootProfile) &&
                      (renderedProfile.ParentProfile == null ||
                       renderedProfile.ParentProfile != parentProfile))
                 {
@@ -204,11 +204,11 @@ namespace XRTK.Inspectors.Profiles
 
             if (!profileToCopy.IsEditable)
             {
-                // For now we only replace it if it's the master configuration profile.
-                // Sub-profiles are easy to update in the master configuration inspector.
+                // For now we only replace it if it's the master settings profile.
+                // Sub-profiles are easy to update in the master settings inspector.
                 if (MixedRealityToolkit.Instance.ActiveProfile.GetType() == profile.GetType())
                 {
-                    MixedRealityToolkit.Instance.ActiveProfile = profile as MixedRealityToolkitConfigurationProfile;
+                    MixedRealityToolkit.Instance.ActiveProfile = profile as MixedRealityToolkitRootProfile;
                 }
             }
         }

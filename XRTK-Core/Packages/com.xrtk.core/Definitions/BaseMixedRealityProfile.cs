@@ -6,6 +6,9 @@ using UnityEngine.Serialization;
 
 namespace XRTK.Definitions
 {
+    /// <summary>
+    /// Base Profile for all data containers to use in the Mixed Reality Toolkit.
+    /// </summary>
     public abstract class BaseMixedRealityProfile : ScriptableObject
     {
         [SerializeField]

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using System;
@@ -19,7 +19,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private static readonly GUIContent KeyCodeContent = new GUIContent("KeyCode", "The keyboard key that will trigger the action.");
         private static readonly GUIContent ActionContent = new GUIContent("Action", "The action to trigger when a keyboard key is pressed or keyword is recognized.");
 
-        private SerializedProperty recognizerStartBehaviour;
+        private SerializedProperty startBehavior;
         private SerializedProperty recognitionConfidenceLevel;
         private SerializedProperty speechCommands;
         private static GUIContent[] actionLabels;
@@ -35,26 +35,17 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             if (inputSystemProfile == null ||
                 inputSystemProfile.InputActionsProfile == null) { return; }
 
-            recognizerStartBehaviour = serializedObject.FindProperty("startBehavior");
-            recognitionConfidenceLevel = serializedObject.FindProperty("recognitionConfidenceLevel");
-            speechCommands = serializedObject.FindProperty("speechCommands");
+            startBehavior = serializedObject.FindProperty(nameof(startBehavior));
+            recognitionConfidenceLevel = serializedObject.FindProperty(nameof(recognitionConfidenceLevel));
+            speechCommands = serializedObject.FindProperty(nameof(speechCommands));
             actionLabels = inputSystemProfile.InputActionsProfile.InputActions.Select(action => new GUIContent(action.Description)).Prepend(new GUIContent("None")).ToArray();
             actionIds = inputSystemProfile.InputActionsProfile.InputActions.Select(action => (int)action.Id).Prepend(0).ToArray();
         }
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            RenderHeader();
 
-            if (inputSystemProfile != null &&
-                GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = inputSystemProfile;
-            }
-
-            ThisProfile.CheckProfileLock();
-
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Speech Commands", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Speech Commands are any/all spoken keywords your users will be able say to raise an Input Action in your application.", MessageType.Info);
             EditorGUILayout.Space();
@@ -71,9 +62,11 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 return;
             }
 
+
+            ThisProfile.CheckProfileLock();
             serializedObject.Update();
 
-            EditorGUILayout.PropertyField(recognizerStartBehaviour);
+            EditorGUILayout.PropertyField(startBehavior);
             EditorGUILayout.PropertyField(recognitionConfidenceLevel);
 
             RenderList(speechCommands);

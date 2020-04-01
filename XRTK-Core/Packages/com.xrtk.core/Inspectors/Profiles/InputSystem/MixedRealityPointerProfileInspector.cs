@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
@@ -30,13 +30,13 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             base.OnEnable();
 
-            pointingExtent = serializedObject.FindProperty("pointingExtent");
-            pointingRaycastLayerMasks = serializedObject.FindProperty("pointingRaycastLayerMasks");
-            debugDrawPointingRays = serializedObject.FindProperty("debugDrawPointingRays");
-            debugDrawPointingRayColors = serializedObject.FindProperty("debugDrawPointingRayColors");
-            gazeCursorPrefab = serializedObject.FindProperty("gazeCursorPrefab");
-            gazeProviderType = serializedObject.FindProperty("gazeProviderType");
-            pointerOptions = serializedObject.FindProperty("pointerOptions");
+            pointingExtent = serializedObject.FindProperty(nameof(pointingExtent));
+            pointingRaycastLayerMasks = serializedObject.FindProperty(nameof(pointingRaycastLayerMasks));
+            debugDrawPointingRays = serializedObject.FindProperty(nameof(debugDrawPointingRays));
+            debugDrawPointingRayColors = serializedObject.FindProperty(nameof(debugDrawPointingRayColors));
+            gazeCursorPrefab = serializedObject.FindProperty(nameof(gazeCursorPrefab));
+            gazeProviderType = serializedObject.FindProperty(nameof(gazeProviderType));
+            pointerOptions = serializedObject.FindProperty(nameof(pointerOptions));
 
             pointerOptionList = new ReorderableList(serializedObject, pointerOptions, false, false, true, true)
             {
@@ -50,15 +50,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            RenderHeader();
 
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = ThisProfile.ParentProfile;
-            }
-
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Pointer Options", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Pointers attach themselves onto controllers as they are initialized.", MessageType.Info);
             EditorGUILayout.Space();

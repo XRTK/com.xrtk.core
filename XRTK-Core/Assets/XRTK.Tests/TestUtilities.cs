@@ -38,11 +38,11 @@ namespace XRTK.Tests
             Assert.IsFalse(MixedRealityToolkit.HasActiveProfile);
 
             var configuration = useDefaultProfile
-                ? GetDefaultMixedRealityProfile<MixedRealityToolkitConfigurationProfile>()
-                : ScriptableObject.CreateInstance<MixedRealityToolkitConfigurationProfile>();
+                ? GetDefaultMixedRealityProfile<MixedRealityToolkitRootProfile>()
+                : ScriptableObject.CreateInstance<MixedRealityToolkitRootProfile>();
 
-            Assert.IsTrue(configuration != null, "Failed to find the Default Mixed Reality Configuration Profile");
-            MixedRealityToolkit.Instance.ResetConfiguration(configuration);
+            Assert.IsTrue(configuration != null, "Failed to find the Default Mixed Reality Settings Profile");
+            MixedRealityToolkit.Instance.ResetProfile(configuration);
             Assert.IsTrue(MixedRealityToolkit.Instance.ActiveProfile != null);
             Assert.IsTrue(MixedRealityToolkit.IsInitialized);
         }

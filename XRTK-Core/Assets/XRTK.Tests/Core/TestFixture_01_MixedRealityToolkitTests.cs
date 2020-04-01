@@ -31,7 +31,7 @@ namespace XRTK.Tests.Core
         }
 
         [Test]
-        public void Test_02_TestNoMixedRealityConfigurationFound()
+        public void Test_02_TestNoMixedRealityProfileFound()
         {
             // Setup
             TestUtilities.CleanupScene();
@@ -48,7 +48,7 @@ namespace XRTK.Tests.Core
             Assert.IsFalse(MixedRealityToolkit.HasActiveProfile);
             Assert.IsNull(MixedRealityToolkit.Instance.ActiveProfile);
             Assert.IsFalse(MixedRealityToolkit.HasActiveProfile);
-            LogAssert.Expect(LogType.Error, "No Mixed Reality Configuration Profile found, cannot initialize the Mixed Reality Toolkit");
+            LogAssert.Expect(LogType.Error, "No Mixed Reality Root Profile found, cannot initialize the Mixed Reality Toolkit");
         }
 
         [Test]

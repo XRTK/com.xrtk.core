@@ -30,25 +30,15 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            RenderHeader();
 
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = ThisProfile.ParentProfile;
-            }
-
-            ThisProfile.CheckProfileLock();
-
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Input Actions", EditorStyles.boldLabel);
-
             EditorGUILayout.HelpBox("Input Actions are any/all actions your users will be able to make when interacting with your application.\n\n" +
                                     "After defining all your actions, you can then wire up these actions to hardware sensors, controllers, and other input devices.", MessageType.Info);
+            EditorGUILayout.Space();
 
             ThisProfile.CheckProfileLock();
             serializedObject.Update();
-            EditorGUILayout.Space();
             RenderList(inputActions);
             serializedObject.ApplyModifiedProperties();
         }

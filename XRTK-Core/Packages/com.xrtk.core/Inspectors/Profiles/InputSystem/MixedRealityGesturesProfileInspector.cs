@@ -35,7 +35,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             base.OnEnable();
 
-            gestures = serializedObject.FindProperty("gestures");
+            gestures = serializedObject.FindProperty(nameof(gestures));
 
             gesturesProfile = target as MixedRealityGesturesProfile;
             Debug.Assert(gesturesProfile != null);
@@ -79,13 +79,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
-
-            if (inputSystemProfile != null &&
-                GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = inputSystemProfile;
-            }
+            RenderHeader();
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Gesture Input", EditorStyles.boldLabel);

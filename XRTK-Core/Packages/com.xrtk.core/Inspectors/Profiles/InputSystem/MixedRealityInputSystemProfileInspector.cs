@@ -26,7 +26,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             focusProviderType = serializedObject.FindProperty(nameof(focusProviderType));
             inputActionsProfile = serializedObject.FindProperty(nameof(inputActionsProfile));
-            inputActionRulesProfile = serializedObject.FindProperty(nameof(inputActionRulesProfile));
             pointerProfile = serializedObject.FindProperty(nameof(pointerProfile));
             gesturesProfile = serializedObject.FindProperty(nameof(gesturesProfile));
             speechCommandsProfile = serializedObject.FindProperty(nameof(speechCommandsProfile));

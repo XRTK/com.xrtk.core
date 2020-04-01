@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using System.Collections.Generic;
@@ -40,21 +40,14 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
         {
             base.OnEnable();
 
-            controllerMappings = serializedObject.FindProperty("controllerMappings");
+            controllerMappings = serializedObject.FindProperty(nameof(controllerMappings));
             controllerMappingProfile = target as BaseMixedRealityControllerMappingProfile;
         }
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            RenderHeader();
 
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to controller mapping list"))
-            {
-                Selection.activeObject = ThisProfile.ParentProfile;
-            }
-
-            EditorGUILayout.Space();
             var deviceName = controllerMappingProfile.ControllerType == SupportedControllerType.None ? "Custom Device" : controllerMappingProfile.ControllerType.ToString();
             EditorGUILayout.LabelField($"{deviceName} Mappings", EditorStyles.boldLabel);
 

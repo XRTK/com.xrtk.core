@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information. 
 
 using UnityEditor;
@@ -40,13 +40,12 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             RenderHeader();
 
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Input System Profile", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("The Input System Profile helps developers configure input no matter what platform you're building for.", MessageType.Info);
 
             ThisProfile.CheckProfileLock();
-
             serializedObject.Update();
+
             bool changed = false;
 
             EditorGUI.BeginChangeCheck();

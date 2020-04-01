@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
@@ -34,16 +34,16 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         {
             base.OnEnable();
 
-            surfacePhysicsLayerOverride = serializedObject.FindProperty("surfacePhysicsLayerOverride");
-            surfaceFindingMinimumArea = serializedObject.FindProperty("surfaceFindingMinimumArea");
-            displayFloorSurfaces = serializedObject.FindProperty("displayFloorSurfaces");
-            floorSurfaceMaterial = serializedObject.FindProperty("floorSurfaceMaterial");
-            displayCeilingSurfaces = serializedObject.FindProperty("displayCeilingSurfaces");
-            ceilingSurfaceMaterial = serializedObject.FindProperty("ceilingSurfaceMaterial");
-            displayWallSurfaces = serializedObject.FindProperty("displayWallSurfaces");
-            wallSurfaceMaterial = serializedObject.FindProperty("wallSurfaceMaterial");
-            displayPlatformSurfaces = serializedObject.FindProperty("displayPlatformSurfaces");
-            platformSurfaceMaterial = serializedObject.FindProperty("platformSurfaceMaterial");
+            surfacePhysicsLayerOverride = serializedObject.FindProperty(nameof(surfacePhysicsLayerOverride));
+            surfaceFindingMinimumArea = serializedObject.FindProperty(nameof(surfaceFindingMinimumArea));
+            displayFloorSurfaces = serializedObject.FindProperty(nameof(displayFloorSurfaces));
+            floorSurfaceMaterial = serializedObject.FindProperty(nameof(floorSurfaceMaterial));
+            displayCeilingSurfaces = serializedObject.FindProperty(nameof(displayCeilingSurfaces));
+            ceilingSurfaceMaterial = serializedObject.FindProperty(nameof(ceilingSurfaceMaterial));
+            displayWallSurfaces = serializedObject.FindProperty(nameof(displayWallSurfaces));
+            wallSurfaceMaterial = serializedObject.FindProperty(nameof(wallSurfaceMaterial));
+            displayPlatformSurfaces = serializedObject.FindProperty(nameof(displayPlatformSurfaces));
+            platformSurfaceMaterial = serializedObject.FindProperty(nameof(platformSurfaceMaterial));
         }
 
         /// <inheritdoc />

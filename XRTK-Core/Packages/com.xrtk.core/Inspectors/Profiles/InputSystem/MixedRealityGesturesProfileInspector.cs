@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using System;
@@ -81,7 +81,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             RenderHeader();
 
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Gesture Input", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("This gesture map is any and all movements of part the user's body, especially a hand or the head, that raise actions through the input system.\n\nNote: Defined controllers can look up the list of gestures and raise the events based on specific criteria.", MessageType.Info);
 
@@ -98,8 +97,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             }
 
             gesturesProfile.CheckProfileLock();
-
             serializedObject.Update();
+
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Defined Recognizable Gestures", EditorStyles.boldLabel);
             RenderList(gestures);

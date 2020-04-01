@@ -45,6 +45,8 @@ namespace XRTK.Inspectors.Profiles
             {
                 Selection.activeObject = ThisProfile.ParentProfile;
             }
+
+            EditorGUILayout.Space();
         }
 
         /// <summary>

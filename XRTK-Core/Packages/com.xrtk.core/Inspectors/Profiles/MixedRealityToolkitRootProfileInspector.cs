@@ -12,7 +12,7 @@ using XRTK.Services;
 namespace XRTK.Inspectors.Profiles
 {
     [CustomEditor(typeof(MixedRealityToolkitRootProfile))]
-    public class MixedRealityToolkitSettingsProfileInspector : BaseMixedRealityProfileInspector
+    public class MixedRealityToolkitRootProfileInspector : BaseMixedRealityProfileInspector
     {
         // Camera system properties
         private SerializedProperty enableCameraSystem;

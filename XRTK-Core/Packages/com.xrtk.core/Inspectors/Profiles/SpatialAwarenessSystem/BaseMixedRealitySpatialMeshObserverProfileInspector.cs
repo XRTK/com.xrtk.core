@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
@@ -25,14 +25,14 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         {
             base.OnEnable();
 
-            meshPhysicsLayerOverride = serializedObject.FindProperty("meshPhysicsLayerOverride");
-            meshLevelOfDetail = serializedObject.FindProperty("meshLevelOfDetail");
-            meshTrianglesPerCubicMeter = serializedObject.FindProperty("meshTrianglesPerCubicMeter");
-            meshRecalculateNormals = serializedObject.FindProperty("meshRecalculateNormals");
-            meshVisibleMaterial = serializedObject.FindProperty("meshVisibleMaterial");
-            meshOcclusionMaterial = serializedObject.FindProperty("meshOcclusionMaterial");
-            additionalComponents = serializedObject.FindProperty("additionalComponents");
-            meshObjectPrefab = serializedObject.FindProperty("meshObjectPrefab");
+            meshPhysicsLayerOverride = serializedObject.FindProperty(nameof(meshPhysicsLayerOverride));
+            meshLevelOfDetail = serializedObject.FindProperty(nameof(meshLevelOfDetail));
+            meshTrianglesPerCubicMeter = serializedObject.FindProperty(nameof(meshTrianglesPerCubicMeter));
+            meshRecalculateNormals = serializedObject.FindProperty(nameof(meshRecalculateNormals));
+            meshVisibleMaterial = serializedObject.FindProperty(nameof(meshVisibleMaterial));
+            meshOcclusionMaterial = serializedObject.FindProperty(nameof(meshOcclusionMaterial));
+            additionalComponents = serializedObject.FindProperty(nameof(additionalComponents));
+            meshObjectPrefab = serializedObject.FindProperty(nameof(meshObjectPrefab));
         }
 
         /// <inheritdoc />

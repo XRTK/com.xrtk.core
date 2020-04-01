@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
@@ -52,7 +52,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             RenderHeader();
 
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Pointer Options", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Pointers attach themselves onto controllers as they are initialized.", MessageType.Info);
             EditorGUILayout.Space();

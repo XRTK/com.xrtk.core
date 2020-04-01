@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
@@ -42,48 +42,41 @@ namespace XRTK.Inspectors.Profiles
         {
             base.OnEnable();
 
-            boundaryHeight = serializedObject.FindProperty("boundaryHeight");
+            boundaryHeight = serializedObject.FindProperty(nameof(boundaryHeight));
 
-            showFloor = serializedObject.FindProperty("showFloor");
-            floorMaterial = serializedObject.FindProperty("floorMaterial");
-            floorScale = serializedObject.FindProperty("floorScale");
-            floorPhysicsLayer = serializedObject.FindProperty("floorPhysicsLayer");
+            showFloor = serializedObject.FindProperty(nameof(showFloor));
+            floorMaterial = serializedObject.FindProperty(nameof(floorMaterial));
+            floorScale = serializedObject.FindProperty(nameof(floorScale));
+            floorPhysicsLayer = serializedObject.FindProperty(nameof(floorPhysicsLayer));
 
-            showPlayArea = serializedObject.FindProperty("showPlayArea");
-            playAreaMaterial = serializedObject.FindProperty("playAreaMaterial");
-            playAreaPhysicsLayer = serializedObject.FindProperty("playAreaPhysicsLayer");
+            showPlayArea = serializedObject.FindProperty(nameof(showPlayArea));
+            playAreaMaterial = serializedObject.FindProperty(nameof(playAreaMaterial));
+            playAreaPhysicsLayer = serializedObject.FindProperty(nameof(playAreaPhysicsLayer));
 
-            showTrackedArea = serializedObject.FindProperty("showTrackedArea");
-            trackedAreaMaterial = serializedObject.FindProperty("trackedAreaMaterial");
-            trackedAreaPhysicsLayer = serializedObject.FindProperty("trackedAreaPhysicsLayer");
+            showTrackedArea = serializedObject.FindProperty(nameof(showTrackedArea));
+            trackedAreaMaterial = serializedObject.FindProperty(nameof(trackedAreaMaterial));
+            trackedAreaPhysicsLayer = serializedObject.FindProperty(nameof(trackedAreaPhysicsLayer));
 
-            showBoundaryWalls = serializedObject.FindProperty("showBoundaryWalls");
-            boundaryWallMaterial = serializedObject.FindProperty("boundaryWallMaterial");
-            boundaryWallsPhysicsLayer = serializedObject.FindProperty("boundaryWallsPhysicsLayer");
+            showBoundaryWalls = serializedObject.FindProperty(nameof(showBoundaryWalls));
+            boundaryWallMaterial = serializedObject.FindProperty(nameof(boundaryWallMaterial));
+            boundaryWallsPhysicsLayer = serializedObject.FindProperty(nameof(boundaryWallsPhysicsLayer));
 
-            showBoundaryCeiling = serializedObject.FindProperty("showBoundaryCeiling");
-            boundaryCeilingMaterial = serializedObject.FindProperty("boundaryCeilingMaterial");
-            ceilingPhysicsLayer = serializedObject.FindProperty("ceilingPhysicsLayer");
+            showBoundaryCeiling = serializedObject.FindProperty(nameof(showBoundaryCeiling));
+            boundaryCeilingMaterial = serializedObject.FindProperty(nameof(boundaryCeilingMaterial));
+            ceilingPhysicsLayer = serializedObject.FindProperty(nameof(ceilingPhysicsLayer));
         }
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            RenderHeader();
 
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Configuration Profile"))
-            {
-                Selection.activeObject = ThisProfile.ParentProfile;
-            }
-
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Boundary Visualization Options", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Boundary visualizations can help users stay oriented and comfortable in the experience.", MessageType.Info);
             EditorGUILayout.Space();
 
-            (target as BaseMixedRealityProfile).CheckProfileLock();
-
+            ThisProfile.CheckProfileLock();
             serializedObject.Update();
+
             EditorGUILayout.PropertyField(boundaryHeight);
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Floor Settings:", EditorStyles.boldLabel);

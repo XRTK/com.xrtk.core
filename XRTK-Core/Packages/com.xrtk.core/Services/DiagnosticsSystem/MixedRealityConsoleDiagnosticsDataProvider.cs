@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.DiagnosticsSystem;
+using XRTK.Definitions;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
@@ -18,7 +18,7 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <param name="name"></param>
         /// <param name="priority"></param>
         /// <param name="profile"></param>
-        public MixedRealityConsoleDiagnosticsDataProvider(string name, uint priority, MixedRealityDiagnosticsDataProviderProfile profile)
+        public MixedRealityConsoleDiagnosticsDataProvider(string name, uint priority, BaseMixedRealityProfile profile)
             : base(name, priority, profile)
         {
         }

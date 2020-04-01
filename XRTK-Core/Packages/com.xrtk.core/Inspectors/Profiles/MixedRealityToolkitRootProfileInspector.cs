@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
@@ -11,36 +11,43 @@ using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
 {
-    [CustomEditor(typeof(MixedRealityToolkitConfigurationProfile))]
-    public class MixedRealityToolkitConfigurationProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(MixedRealityToolkitRootProfile))]
+    public class MixedRealityToolkitRootProfileInspector : BaseMixedRealityProfileInspector
     {
-        // Camera properties
+        // Camera system properties
         private SerializedProperty enableCameraSystem;
         private SerializedProperty cameraSystemType;
         private SerializedProperty cameraProfile;
+
         // Input system properties
         private SerializedProperty enableInputSystem;
         private SerializedProperty inputSystemType;
         private SerializedProperty inputSystemProfile;
+
         // Boundary system properties
         private SerializedProperty enableBoundarySystem;
         private SerializedProperty boundarySystemType;
         private SerializedProperty boundaryVisualizationProfile;
+
         // Teleport system properties
         private SerializedProperty enableTeleportSystem;
         private SerializedProperty teleportSystemType;
+
         // Spatial Awareness system properties
         private SerializedProperty enableSpatialAwarenessSystem;
         private SerializedProperty spatialAwarenessSystemType;
         private SerializedProperty spatialAwarenessProfile;
+
         // Networking system properties
         private SerializedProperty enableNetworkingSystem;
         private SerializedProperty networkingSystemType;
         private SerializedProperty networkingSystemProfile;
+
         // Diagnostic system properties
         private SerializedProperty enableDiagnosticsSystem;
         private SerializedProperty diagnosticsSystemType;
         private SerializedProperty diagnosticsSystemProfile;
+
         // Native Library system properties
         private SerializedProperty enableNativeLibrarySystem;
         private SerializedProperty nativeLibrarySystemType;
@@ -49,13 +56,13 @@ namespace XRTK.Inspectors.Profiles
         // Additional registered components profile
         private SerializedProperty registeredServiceProvidersProfile;
 
-        private MixedRealityToolkitConfigurationProfile configurationProfile;
+        private MixedRealityToolkitRootProfile rootProfile;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            configurationProfile = target as MixedRealityToolkitConfigurationProfile;
+            rootProfile = target as MixedRealityToolkitRootProfile;
 
             var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
 
@@ -81,7 +88,7 @@ namespace XRTK.Inspectors.Profiles
                             Debug.Assert(playspace != null);
                         }
 
-                        MixedRealityToolkit.Instance.ActiveProfile = configurationProfile;
+                        MixedRealityToolkit.Instance.ActiveProfile = rootProfile;
                     }
                     else
                     {
@@ -90,40 +97,47 @@ namespace XRTK.Inspectors.Profiles
                 }
             }
 
-            // Camera configuration
-            enableCameraSystem = serializedObject.FindProperty("enableCameraSystem");
-            cameraSystemType = serializedObject.FindProperty("cameraSystemType");
-            cameraProfile = serializedObject.FindProperty("cameraProfile");
+            // Camera system configuration
+            enableCameraSystem = serializedObject.FindProperty(nameof(enableCameraSystem));
+            cameraSystemType = serializedObject.FindProperty(nameof(cameraSystemType));
+            cameraProfile = serializedObject.FindProperty(nameof(cameraProfile));
+
             // Input system configuration
-            enableInputSystem = serializedObject.FindProperty("enableInputSystem");
-            inputSystemType = serializedObject.FindProperty("inputSystemType");
-            inputSystemProfile = serializedObject.FindProperty("inputSystemProfile");
+            enableInputSystem = serializedObject.FindProperty(nameof(enableInputSystem));
+            inputSystemType = serializedObject.FindProperty(nameof(inputSystemType));
+            inputSystemProfile = serializedObject.FindProperty(nameof(inputSystemProfile));
+
             // Boundary system configuration
-            enableBoundarySystem = serializedObject.FindProperty("enableBoundarySystem");
-            boundarySystemType = serializedObject.FindProperty("boundarySystemType");
-            boundaryVisualizationProfile = serializedObject.FindProperty("boundaryVisualizationProfile");
+            enableBoundarySystem = serializedObject.FindProperty(nameof(enableBoundarySystem));
+            boundarySystemType = serializedObject.FindProperty(nameof(boundarySystemType));
+            boundaryVisualizationProfile = serializedObject.FindProperty(nameof(boundaryVisualizationProfile));
+
             // Teleport system configuration
-            enableTeleportSystem = serializedObject.FindProperty("enableTeleportSystem");
-            teleportSystemType = serializedObject.FindProperty("teleportSystemType");
+            enableTeleportSystem = serializedObject.FindProperty(nameof(enableTeleportSystem));
+            teleportSystemType = serializedObject.FindProperty(nameof(teleportSystemType));
+
             // Spatial Awareness system configuration
-            enableSpatialAwarenessSystem = serializedObject.FindProperty("enableSpatialAwarenessSystem");
-            spatialAwarenessSystemType = serializedObject.FindProperty("spatialAwarenessSystemType");
-            spatialAwarenessProfile = serializedObject.FindProperty("spatialAwarenessProfile");
+            enableSpatialAwarenessSystem = serializedObject.FindProperty(nameof(enableSpatialAwarenessSystem));
+            spatialAwarenessSystemType = serializedObject.FindProperty(nameof(spatialAwarenessSystemType));
+            spatialAwarenessProfile = serializedObject.FindProperty(nameof(spatialAwarenessProfile));
+
             // Networking system configuration
-            enableNetworkingSystem = serializedObject.FindProperty("enableNetworkingSystem");
-            networkingSystemType = serializedObject.FindProperty("networkingSystemType");
-            networkingSystemProfile = serializedObject.FindProperty("networkingSystemProfile");
+            enableNetworkingSystem = serializedObject.FindProperty(nameof(enableNetworkingSystem));
+            networkingSystemType = serializedObject.FindProperty(nameof(networkingSystemType));
+            networkingSystemProfile = serializedObject.FindProperty(nameof(networkingSystemProfile));
+
             // Diagnostics system configuration
-            enableDiagnosticsSystem = serializedObject.FindProperty("enableDiagnosticsSystem");
-            diagnosticsSystemType = serializedObject.FindProperty("diagnosticsSystemType");
-            diagnosticsSystemProfile = serializedObject.FindProperty("diagnosticsSystemProfile");
+            enableDiagnosticsSystem = serializedObject.FindProperty(nameof(enableDiagnosticsSystem));
+            diagnosticsSystemType = serializedObject.FindProperty(nameof(diagnosticsSystemType));
+            diagnosticsSystemProfile = serializedObject.FindProperty(nameof(diagnosticsSystemProfile));
+
             // Native library system configuration
-            enableNativeLibrarySystem = serializedObject.FindProperty("enableNativeLibrarySystem");
-            nativeLibrarySystemType = serializedObject.FindProperty("nativeLibrarySystemType");
-            nativeLibrarySystemProfile = serializedObject.FindProperty("nativeLibrarySystemProfile");
+            enableNativeLibrarySystem = serializedObject.FindProperty(nameof(enableNativeLibrarySystem));
+            nativeLibrarySystemType = serializedObject.FindProperty(nameof(nativeLibrarySystemType));
+            nativeLibrarySystemProfile = serializedObject.FindProperty(nameof(nativeLibrarySystemProfile));
 
             // Additional registered components configuration
-            registeredServiceProvidersProfile = serializedObject.FindProperty("registeredServiceProvidersProfile");
+            registeredServiceProvidersProfile = serializedObject.FindProperty(nameof(registeredServiceProvidersProfile));
         }
 
         public override void OnInspectorGUI()
@@ -133,7 +147,7 @@ namespace XRTK.Inspectors.Profiles
 
             if (!MixedRealityToolkit.IsInitialized) { return; }
 
-            if (!configurationProfile.IsEditable)
+            if (!rootProfile.IsEditable)
             {
                 EditorGUILayout.HelpBox("The Mixed Reality Toolkit's core SDK profiles can be used to get up and running quickly.\n\n" +
                                         "You can use the default profiles provided, copy and customize the default profiles, or create your own.", MessageType.Warning);
@@ -146,8 +160,8 @@ namespace XRTK.Inspectors.Profiles
 
                 if (GUILayout.Button("Create new profiles"))
                 {
-                    var profile = CreateInstance(nameof(MixedRealityToolkitConfigurationProfile));
-                    var newProfile = profile.CreateAsset() as MixedRealityToolkitConfigurationProfile;
+                    var profile = CreateInstance(nameof(MixedRealityToolkitRootProfile));
+                    var newProfile = profile.CreateAsset() as MixedRealityToolkitRootProfile;
                     MixedRealityToolkit.Instance.ActiveProfile = newProfile;
                 }
 
@@ -234,9 +248,9 @@ namespace XRTK.Inspectors.Profiles
 
             if (changed &&
                 MixedRealityToolkit.IsInitialized &&
-                MixedRealityToolkit.Instance.ActiveProfile == configurationProfile)
+                MixedRealityToolkit.Instance.ActiveProfile == rootProfile)
             {
-                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(configurationProfile);
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(rootProfile);
             }
         }
     }

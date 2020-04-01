@@ -100,7 +100,7 @@ namespace XRTK.Definitions.Utilities
 
         public static implicit operator Type(SystemType type)
         {
-            return type.Type;
+            return type?.Type;
         }
 
         public static implicit operator SystemType(Type type)
@@ -110,7 +110,7 @@ namespace XRTK.Definitions.Utilities
 
         public override string ToString()
         {
-            return Type?.FullName ?? "(None)";
+            return Type?.FullName ?? (string.IsNullOrWhiteSpace(reference) ? "{None}" : reference);
         }
     }
 }

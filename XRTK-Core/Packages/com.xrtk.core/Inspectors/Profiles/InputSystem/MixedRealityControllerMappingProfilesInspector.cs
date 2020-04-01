@@ -1,12 +1,15 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Extensions;
 using XRTK.Inspectors.Utilities;
 using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Utilities;
+using XRTK.Inspectors.PropertyDrawers;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
@@ -18,96 +21,73 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private static readonly GUIContent RemoveMappingDefinitionContent = new GUIContent("-", "Remove Mapping Definition");
 
         private SerializedProperty controllerMappingProfiles;
+        private List<Type> mappingTypes;
+        private bool changed;
+        private Rect dropdownRect;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            controllerMappingProfiles = serializedObject.FindProperty("controllerMappingProfiles");
+            controllerMappingProfiles = serializedObject.FindProperty(nameof(controllerMappingProfiles));
+
+            mappingTypes = AppDomain.CurrentDomain.GetAssemblies()
+                .SelectMany(assembly => assembly.GetTypes())
+                .Where(type => typeof(BaseMixedRealityControllerMappingProfile).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract)
+                .ToList();
         }
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            RenderHeader();
 
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = ThisProfile.ParentProfile;
-            }
-
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Controller Input Mappings", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Use this profile to define all the controllers and their inputs your users will be able to use in your application.\n\n" +
                                     "You'll want to define all your Input Actions and Controller Data Providers first so you can wire up actions to hardware sensors, controllers, gestures, and other input devices.", MessageType.Info);
-
-            ThisProfile.CheckProfileLock();
-
-            serializedObject.Update();
-
             EditorGUILayout.Space();
 
-            bool changed = false;
+            ThisProfile.CheckProfileLock();
+            serializedObject.Update();
 
-            if (GUILayout.Button(AddMappingDefinitionContent, EditorStyles.miniButton))
+            EditorGUILayout.LabelField("Select a profile type:");
+
+            changed = false;
+
+            var showDropdown = EditorGUILayout.DropdownButton(AddMappingDefinitionContent, FocusType.Keyboard);
+
+            if (Event.current.type == EventType.Repaint)
             {
-                controllerMappingProfiles.arraySize += 1;
-                var newItem = controllerMappingProfiles.GetArrayElementAtIndex(controllerMappingProfiles.arraySize - 1);
-                newItem.objectReferenceValue = null;
-                changed = true;
+                dropdownRect = GUILayoutUtility.GetLastRect();
+            }
+
+            if (showDropdown)
+            {
+                TypeReferencePropertyDrawer.DisplayDropDown(dropdownRect, mappingTypes, null, TypeGrouping.ByNamespaceFlat);
+            }
+
+            if (Event.current.type == EventType.ExecuteCommand)
+            {
+                if (Event.current.commandName == TypeReferencePropertyDrawer.TypeReferenceUpdated)
+                {
+                    controllerMappingProfiles.arraySize += 1;
+                    var newItem = controllerMappingProfiles.GetArrayElementAtIndex(controllerMappingProfiles.arraySize - 1);
+                    CreateNewProfileInstance(ThisProfile, newItem, TypeReferencePropertyDrawer.SelectedType);
+
+                    TypeReferencePropertyDrawer.SelectedType = null;
+                    TypeReferencePropertyDrawer.SelectedReference = null;
+
+                    changed = true;
+                }
             }
 
             EditorGUILayout.Space();
 
             for (int i = 0; i < controllerMappingProfiles.arraySize; i++)
             {
-                var profileChanged = false;
                 var controllerProfile = controllerMappingProfiles.GetArrayElementAtIndex(i);
-                var profileObject = controllerProfile.objectReferenceValue;
-                var profileName = "Assign or create a profile";
-
-                if (profileObject != null)
-                {
-                    profileName = controllerProfile.objectReferenceValue.name.ToProperCase().Replace("Default ", string.Empty).Replace(" Controller Mapping Profile", string.Empty);
-                }
 
                 EditorGUILayout.BeginHorizontal();
-                profileChanged |= RenderProfile(ThisProfile, controllerProfile, new GUIContent(profileName), false);
-
-                if (profileChanged && controllerProfile.objectReferenceValue != null)
-                {
-                    var knownProfiles = new List<Object>();
-
-                    for (int j = 0; j < controllerMappingProfiles.arraySize; j++)
-                    {
-                        var knownProfile = controllerMappingProfiles.GetArrayElementAtIndex(j);
-
-                        if (knownProfile.objectReferenceValue != null)
-                        {
-                            knownProfiles.Add(knownProfile.objectReferenceValue);
-                        }
-                    }
-
-                    var count = 0;
-
-                    for (int j = 0; j < knownProfiles.Count; j++)
-                    {
-                        if (knownProfiles[j] == controllerProfile.objectReferenceValue)
-                        {
-                            count++;
-                        }
-                    }
-
-                    if (count >= 2)
-                    {
-                        Debug.LogWarning($"{controllerProfile.objectReferenceValue.name} is already registered!");
-                        controllerProfile.objectReferenceValue = null;
-                        serializedObject.ApplyModifiedProperties();
-                        break;
-                    }
-                }
-
-                changed |= profileChanged;
+                changed |= RenderProfile(ThisProfile, controllerProfile, GUIContent.none, false);
 
                 if (GUILayout.Button(RemoveMappingDefinitionContent, EditorStyles.miniButtonRight, GUILayout.Width(24f)))
                 {
@@ -116,13 +96,18 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 }
 
                 EditorGUILayout.EndHorizontal();
+
+                if (changed)
+                {
+                    break;
+                }
             }
 
             serializedObject.ApplyModifiedProperties();
 
             if (changed && MixedRealityToolkit.IsInitialized)
             {
-                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
             }
         }
     }

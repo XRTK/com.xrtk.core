@@ -16,6 +16,8 @@ namespace XRTK.Tests.InputSystem
         public void Test01_CreateMixedRealityInputSystem()
         {
             TestUtilities.InitializeMixedRealityToolkitScene();
+            var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
+            var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
             // Add Input System
             MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile = InputSystemTestUtilities.SetupInputSystemProfile();
@@ -23,8 +25,8 @@ namespace XRTK.Tests.InputSystem
 
             // Tests
             Assert.IsNotEmpty(MixedRealityToolkit.ActiveSystems);
-            Assert.AreEqual(1, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(0, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.AreEqual(activeSystemCount + 1, MixedRealityToolkit.ActiveSystems.Count);
+            Assert.AreEqual(activeServiceCount, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
         }
 
         [Test]

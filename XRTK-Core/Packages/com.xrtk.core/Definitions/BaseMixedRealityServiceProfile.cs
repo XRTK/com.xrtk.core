@@ -36,7 +36,7 @@ namespace XRTK.Definitions
                 {
                     var cachedConfig = configurations[i];
                     Debug.Assert(cachedConfig != null);
-                    var serviceConfig = new MixedRealityServiceConfiguration<TService>(cachedConfig.InstancedType, cachedConfig.Name, cachedConfig.Priority, cachedConfig.RuntimePlatform, cachedConfig.ConfigurationProfile);
+                    var serviceConfig = new MixedRealityServiceConfiguration<TService>(cachedConfig.InstancedType, cachedConfig.Name, cachedConfig.Priority, cachedConfig.RuntimePlatforms, cachedConfig.Profile);
                     Debug.Assert(serviceConfig != null);
                     serviceConfigurations[i] = serviceConfig;
                 }
@@ -59,7 +59,7 @@ namespace XRTK.Definitions
                     {
                         var serviceConfig = serviceConfigurations[i];
                         Debug.Assert(serviceConfig != null);
-                        var newConfig = new MixedRealityServiceConfiguration(serviceConfig.InstancedType, serviceConfig.Name, serviceConfig.Priority, serviceConfig.RuntimePlatform, serviceConfig.ConfigurationProfile);
+                        var newConfig = new MixedRealityServiceConfiguration(serviceConfig.InstancedType, serviceConfig.Name, serviceConfig.Priority, serviceConfig.RuntimePlatforms, serviceConfig.Profile);
                         Debug.Assert(newConfig != null);
                         configurations[i] = newConfig;
                     }

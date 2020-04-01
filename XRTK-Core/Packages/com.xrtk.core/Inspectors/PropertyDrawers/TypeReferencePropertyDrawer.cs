@@ -9,6 +9,7 @@ using UnityEditor.Compilation;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using Assembly = System.Reflection.Assembly;
 
 namespace XRTK.Inspectors.PropertyDrawers
@@ -20,13 +21,15 @@ namespace XRTK.Inspectors.PropertyDrawers
     [CustomPropertyDrawer(typeof(SystemTypeAttribute), true)]
     public class TypeReferencePropertyDrawer : PropertyDrawer
     {
+        public const string TypeReferenceUpdated = "TypeReferenceUpdated";
+
         private const string None = "(None)";
         private const string Missing = " {missing}";
-        private const string TypeReferenceUpdated = "TypeReferenceUpdated";
+
+        public static Type SelectedType;
+        public static string SelectedReference;
 
         private static int selectionControlId;
-        private static string selectedReference;
-        private static readonly Dictionary<string, Type> TypeMap = new Dictionary<string, Type>();
         private static readonly int ControlHint = typeof(TypeReferencePropertyDrawer).GetHashCode();
         private static readonly GUIContent TempContent = new GUIContent();
         private static readonly GUIContent RepairContent = new GUIContent("Repair", "Try to repair the reference");
@@ -136,21 +139,6 @@ namespace XRTK.Inspectors.PropertyDrawers
 
         #endregion Type Filtering
 
-        #region Type Utility
-
-        private static Type ResolveType(string classRef)
-        {
-            if (!TypeMap.TryGetValue(classRef, out var type))
-            {
-                type = !string.IsNullOrEmpty(classRef) ? Type.GetType(classRef) : null;
-                TypeMap[classRef] = type;
-            }
-
-            return type;
-        }
-
-        #endregion Type Utility
-
         #region Control Drawing / Event Handling
 
         /// <summary>
@@ -177,14 +165,15 @@ namespace XRTK.Inspectors.PropertyDrawers
                     if (Event.current.commandName == TypeReferenceUpdated &&
                         selectionControlId == controlId)
                     {
-                        if (classRef != selectedReference)
+                        if (classRef != SelectedReference)
                         {
-                            classRef = selectedReference;
+                            classRef = SelectedReference;
                             GUI.changed = true;
                         }
 
                         selectionControlId = 0;
-                        selectedReference = null;
+                        SelectedType = null;
+                        SelectedReference = null;
                     }
 
                     break;
@@ -230,9 +219,9 @@ namespace XRTK.Inspectors.PropertyDrawers
             if (triggerDropDown)
             {
                 selectionControlId = controlId;
-                selectedReference = classRef;
+                SelectedReference = classRef;
 
-                DisplayDropDown(position, GetFilteredTypes(filter), ResolveType(classRef), filter?.Grouping ?? TypeGrouping.ByNamespaceFlat);
+                DisplayDropDown(position, GetFilteredTypes(filter), TypeExtensions.ResolveType(classRef), filter?.Grouping ?? TypeGrouping.ByNamespaceFlat);
             }
         }
 
@@ -255,7 +244,7 @@ namespace XRTK.Inspectors.PropertyDrawers
                 var restoreColor = GUI.color;
                 var reference = referenceProperty.stringValue;
                 var restoreShowMixedValue = EditorGUI.showMixedValue;
-                var isValidClassRef = string.IsNullOrEmpty(reference) || ResolveType(reference) != null;
+                var isValidClassRef = string.IsNullOrEmpty(reference) || TypeExtensions.ResolveType(reference) != null;
 
                 if (!isValidClassRef)
                 {
@@ -358,7 +347,7 @@ namespace XRTK.Inspectors.PropertyDrawers
             return GetFilteredTypes(filter).Where(type => type.Name.Equals(typeName)).ToArray();
         }
 
-        private static void DisplayDropDown(Rect position, IEnumerable<Type> types, Type selectedType, TypeGrouping grouping)
+        public static void DisplayDropDown(Rect position, IEnumerable<Type> types, Type selectedType, TypeGrouping grouping)
         {
             var menu = new GenericMenu();
             menu.AddItem(new GUIContent(None), selectedType == null, OnSelectedTypeName, null);
@@ -375,6 +364,13 @@ namespace XRTK.Inspectors.PropertyDrawers
             }
 
             menu.DropDown(position);
+
+            void OnSelectedTypeName(object typeRef)
+            {
+                SelectedType = typeRef as Type;
+                SelectedReference = SystemType.GetReference(SelectedType);
+                EditorWindow.focusedWindow.SendEvent(EditorGUIUtility.CommandEvent(TypeReferenceUpdated));
+            }
         }
 
         private static string FormatGroupedTypeName(Type type, TypeGrouping grouping)
@@ -409,13 +405,6 @@ namespace XRTK.Inspectors.PropertyDrawers
                 default:
                     throw new ArgumentOutOfRangeException(nameof(grouping), grouping, null);
             }
-        }
-
-        private static void OnSelectedTypeName(object userData)
-        {
-            selectedReference = SystemType.GetReference(userData as Type);
-            var typeReferenceUpdatedEvent = EditorGUIUtility.CommandEvent(TypeReferenceUpdated);
-            EditorWindow.focusedWindow.SendEvent(typeReferenceUpdatedEvent);
         }
 
         #endregion Control Drawing / Event Handling

@@ -99,7 +99,7 @@ namespace XRTK.Inspectors.Profiles
             var priorityProperty = configurationProperty.FindPropertyRelative("priority");
             var instanceTypeProperty = configurationProperty.FindPropertyRelative("instancedType");
             var platformEntriesProperty = configurationProperty.FindPropertyRelative("platformEntries");
-            var configurationProfileProperty = configurationProperty.FindPropertyRelative("configurationProfile");
+            var configurationProfileProperty = configurationProperty.FindPropertyRelative("profile");
 
             var configurationProfile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
 
@@ -237,7 +237,7 @@ namespace XRTK.Inspectors.Profiles
             var priorityProperty = configuration.FindPropertyRelative("priority");
             var instancedTypeProperty = configuration.FindPropertyRelative("instancedType");
             var platformEntriesProperty = configuration.FindPropertyRelative("platformEntries");
-            var configurationProfileProperty = configuration.FindPropertyRelative("configurationProfile");
+            var configurationProfileProperty = configuration.FindPropertyRelative("profile");
             var runtimePlatformsProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
 
             nameProperty.stringValue = $"New Configuration {index}";

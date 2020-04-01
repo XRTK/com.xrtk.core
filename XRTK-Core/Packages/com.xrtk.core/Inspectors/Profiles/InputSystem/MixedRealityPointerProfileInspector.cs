@@ -30,13 +30,13 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             base.OnEnable();
 
-            pointingExtent = serializedObject.FindProperty("pointingExtent");
-            pointingRaycastLayerMasks = serializedObject.FindProperty("pointingRaycastLayerMasks");
-            debugDrawPointingRays = serializedObject.FindProperty("debugDrawPointingRays");
-            debugDrawPointingRayColors = serializedObject.FindProperty("debugDrawPointingRayColors");
-            gazeCursorPrefab = serializedObject.FindProperty("gazeCursorPrefab");
-            gazeProviderType = serializedObject.FindProperty("gazeProviderType");
-            pointerOptions = serializedObject.FindProperty("pointerOptions");
+            pointingExtent = serializedObject.FindProperty(nameof(pointingExtent));
+            pointingRaycastLayerMasks = serializedObject.FindProperty(nameof(pointingRaycastLayerMasks));
+            debugDrawPointingRays = serializedObject.FindProperty(nameof(debugDrawPointingRays));
+            debugDrawPointingRayColors = serializedObject.FindProperty(nameof(debugDrawPointingRayColors));
+            gazeCursorPrefab = serializedObject.FindProperty(nameof(gazeCursorPrefab));
+            gazeProviderType = serializedObject.FindProperty(nameof(gazeProviderType));
+            pointerOptions = serializedObject.FindProperty(nameof(pointerOptions));
 
             pointerOptionList = new ReorderableList(serializedObject, pointerOptions, false, false, true, true)
             {
@@ -50,13 +50,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
-
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = ThisProfile.ParentProfile;
-            }
+            RenderHeader();
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Pointer Options", EditorStyles.boldLabel);

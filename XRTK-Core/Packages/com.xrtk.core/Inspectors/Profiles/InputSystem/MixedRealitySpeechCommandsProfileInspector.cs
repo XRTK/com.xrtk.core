@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -94,6 +95,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 keyCode.intValue = (int)KeyCode.None;
                 var action = speechCommand.FindPropertyRelative("action");
                 var actionId = action.FindPropertyRelative("id");
+                var profileGuidProperty = action.FindPropertyRelative("profileGuid");
+                profileGuidProperty.stringValue = DefaultGuidString;
                 actionId.intValue = 0;
             }
 
@@ -128,8 +131,11 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 EditorGUILayout.PropertyField(keyCode, GUIContent.none, GUILayout.Width(64f));
                 var action = speechCommand.FindPropertyRelative("action");
                 var actionId = action.FindPropertyRelative("id");
+                var profileGuidProperty = action.FindPropertyRelative("profileGuid");
                 var actionDescription = action.FindPropertyRelative("description");
                 var actionConstraint = action.FindPropertyRelative("axisConstraint");
+
+                profileGuidProperty.stringValue = actionId.intValue > 0 ? ThisProfileGuidString : DefaultGuidString;
 
                 EditorGUI.BeginChangeCheck();
                 actionId.intValue = EditorGUILayout.IntPopup(GUIContent.none, actionId.intValue, actionLabels, actionIds, GUILayout.Width(64f));

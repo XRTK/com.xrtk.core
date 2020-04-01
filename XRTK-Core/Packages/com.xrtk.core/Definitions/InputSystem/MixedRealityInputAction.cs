@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -22,6 +22,24 @@ namespace XRTK.Definitions.InputSystem
         /// <param name="axisConstraint"></param>
         public MixedRealityInputAction(uint id, string description, AxisType axisConstraint = AxisType.None)
         {
+            this.cachedGuid = default;
+            this.profileGuid = cachedGuid.ToString("N");
+            this.id = id;
+            this.description = description;
+            this.axisConstraint = axisConstraint;
+        }
+
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="profileGuid"></param>
+        /// <param name="id"></param>
+        /// <param name="description"></param>
+        /// <param name="axisConstraint"></param>
+        public MixedRealityInputAction(Guid profileGuid, uint id, string description, AxisType axisConstraint = AxisType.None)
+        {
+            this.cachedGuid = profileGuid;
+            this.profileGuid = profileGuid.ToString("N");
             this.id = id;
             this.description = description;
             this.axisConstraint = axisConstraint;
@@ -30,7 +48,31 @@ namespace XRTK.Definitions.InputSystem
         /// <summary>
         /// Default input action that doesn't represent any defined action.
         /// </summary>
-        public static MixedRealityInputAction None { get; } = new MixedRealityInputAction(0, "None");
+        public static MixedRealityInputAction None { get; } = new MixedRealityInputAction(default, 0, "None");
+
+        private static readonly string DefaultGuidString = default(Guid).ToString("N");
+
+        [SerializeField]
+        private string profileGuid;
+
+        private Guid cachedGuid;
+
+        /// <summary>
+        /// The guid reference to the <see cref="MixedRealityInputActionsProfile"/> this action belongs to.
+        /// </summary>
+        public Guid ProfileGuid
+        {
+            get
+            {
+                if (cachedGuid == default &&
+                    profileGuid != DefaultGuidString)
+                {
+                    Guid.TryParse(profileGuid, out cachedGuid);
+                }
+
+                return cachedGuid;
+            }
+        }
 
         [SerializeField]
         private uint id;
@@ -68,33 +110,37 @@ namespace XRTK.Definitions.InputSystem
 
         #region IEqualityComparer Implementation
 
+        /// <inheritdoc />
         bool IEqualityComparer.Equals(object left, object right)
         {
-            if (ReferenceEquals(null, left) || ReferenceEquals(null, right)) { return false; }
+            if (left is null || right is null) { return false; }
             if (!(left is MixedRealityInputAction) || !(right is MixedRealityInputAction)) { return false; }
             return ((MixedRealityInputAction)left).Equals((MixedRealityInputAction)right);
         }
 
         public bool Equals(MixedRealityInputAction other)
         {
-            return Id == other.Id &&
+            return ProfileGuid == other.ProfileGuid &&
+                   Id == other.Id &&
                    AxisConstraint == other.AxisConstraint;
         }
 
+        /// <inheritdoc />
         public override bool Equals(object obj)
         {
-            return !ReferenceEquals(null, obj) &&
-                   obj is MixedRealityInputAction action && Equals(action);
+            return !(obj is null) && obj is MixedRealityInputAction action && Equals(action);
         }
 
+        /// <inheritdoc />
         int IEqualityComparer.GetHashCode(object obj)
         {
             return obj is MixedRealityInputAction action ? action.GetHashCode() : 0;
         }
 
+        /// <inheritdoc />
         public override int GetHashCode()
         {
-            return $"{Id}.{AxisConstraint}".GetHashCode();
+            return $"{ProfileGuid}.{Id}.{AxisConstraint}".GetHashCode();
         }
 
         #endregion IEqualityComparer Implementation

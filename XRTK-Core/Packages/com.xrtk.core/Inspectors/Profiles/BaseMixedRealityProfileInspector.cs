@@ -19,6 +19,7 @@ namespace XRTK.Inspectors.Profiles
     {
         private const string IsDefaultProfileProperty = "isEditable";
 
+        protected static readonly string DefaultGuidString = default(Guid).ToString("N");
         protected static readonly GUIContent NewProfileContent = new GUIContent("+", "Create New Profile");
         protected static readonly GUIContent CloneProfileContent = new GUIContent("Clone", "Replace with a copy of the default profile.");
 
@@ -26,6 +27,14 @@ namespace XRTK.Inspectors.Profiles
         private static BaseMixedRealityProfile profile;
         private static BaseMixedRealityProfile profileToCopy;
 
+        /// <summary>
+        /// The <see cref="Guid"/> string representation for this profile asset.
+        /// </summary>
+        protected string ThisProfileGuidString { get; private set; }
+
+        /// <summary>
+        /// The instanced reference of the currently rendered <see cref="BaseMixedRealityProfile"/>.
+        /// </summary>
         protected BaseMixedRealityProfile ThisProfile { get; private set; }
 
         protected virtual void OnEnable()
@@ -34,6 +43,8 @@ namespace XRTK.Inspectors.Profiles
             profile = target as BaseMixedRealityProfile;
             Debug.Assert(profile != null);
             ThisProfile = profile;
+            AssetDatabase.TryGetGUIDAndLocalFileIdentifier(ThisProfile, out var guidHex, out long _);
+            ThisProfileGuidString = guidHex;
         }
 
         protected void RenderHeader()

@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -53,6 +54,7 @@ namespace XRTK.Inspectors.PropertyDrawers
             }
 
             var label = EditorGUI.BeginProperty(rect, content, property);
+
             var inputActionId = property.FindPropertyRelative("id");
 
             if (profile == null || profile.InputActions == null || actionLabels == null || actionIds == null)
@@ -68,16 +70,22 @@ namespace XRTK.Inspectors.PropertyDrawers
 
                 if (EditorGUI.EndChangeCheck())
                 {
+                    var profileProperty = property.FindPropertyRelative("profileGuid");
                     var description = property.FindPropertyRelative("description");
                     var axisConstraint = property.FindPropertyRelative("axisConstraint");
 
                     if (inputActionId.intValue > 0)
                     {
+                        AssetDatabase.TryGetGUIDAndLocalFileIdentifier(profile, out var hex, out long _);
+                        Guid.TryParse(hex, out var guid);
+                        Debug.Log(profileProperty.type);
+                        profileProperty.stringValue = guid.ToString("N");
                         description.stringValue = profile.InputActions[inputActionId.intValue - 1].Description;
                         axisConstraint.intValue = (int)profile.InputActions[inputActionId.intValue - 1].AxisConstraint;
                     }
                     else
                     {
+                        profileProperty.stringValue = default(Guid).ToString("N");
                         description.stringValue = "None";
                         axisConstraint.intValue = 0;
                     }

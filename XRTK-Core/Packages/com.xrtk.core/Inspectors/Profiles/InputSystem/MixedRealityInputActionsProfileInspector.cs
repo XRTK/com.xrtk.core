@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
@@ -18,15 +19,13 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
         private static Vector2 scrollPosition = Vector2.zero;
 
-        private SerializedProperty inputActionList;
-        private SerializedProperty inputActionProfileList;
+        private SerializedProperty inputActions;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            inputActionList = serializedObject.FindProperty("inputActions");
-            inputActionProfileList = serializedObject.FindProperty("inputActionProfiles");
+            inputActions = serializedObject.FindProperty(nameof(inputActions));
         }
 
         public override void OnInspectorGUI()
@@ -48,20 +47,14 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                                     "After defining all your actions, you can then wire up these actions to hardware sensors, controllers, and other input devices.", MessageType.Info);
 
             ThisProfile.CheckProfileLock();
-
             serializedObject.Update();
-            RenderList(inputActionList);
-
             EditorGUILayout.Space();
-
-            EditorGUILayout.PropertyField(inputActionProfileList, true);
-
+            RenderList(inputActions);
             serializedObject.ApplyModifiedProperties();
         }
 
-        private static void RenderList(SerializedProperty list)
+        private void RenderList(SerializedProperty list)
         {
-            EditorGUILayout.Space();
             GUILayout.BeginVertical();
 
             if (GUILayout.Button(AddButtonContent, EditorStyles.miniButton))
@@ -69,9 +62,12 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 list.arraySize += 1;
                 var inputAction = list.GetArrayElementAtIndex(list.arraySize - 1);
                 var inputActionId = inputAction.FindPropertyRelative("id");
+                var profileGuidProperty = inputAction.FindPropertyRelative("profileGuid");
                 var inputActionDescription = inputAction.FindPropertyRelative("description");
                 var inputActionConstraint = inputAction.FindPropertyRelative("axisConstraint");
+
                 inputActionConstraint.intValue = 0;
+                profileGuidProperty.stringValue = ThisProfileGuidString;
                 inputActionDescription.stringValue = $"New Action {inputActionId.intValue = list.arraySize}";
             }
 
@@ -95,8 +91,12 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 var previousLabelWidth = EditorGUIUtility.labelWidth;
                 EditorGUIUtility.labelWidth = 64f;
                 var inputAction = list.GetArrayElementAtIndex(i);
+                var profileGuidProperty = inputAction.FindPropertyRelative("profileGuid");
                 var inputActionDescription = inputAction.FindPropertyRelative("description");
                 var inputActionConstraint = inputAction.FindPropertyRelative("axisConstraint");
+
+                profileGuidProperty.stringValue = ThisProfileGuidString;
+
                 EditorGUILayout.PropertyField(inputActionDescription, GUIContent.none);
                 EditorGUILayout.PropertyField(inputActionConstraint, GUIContent.none, GUILayout.Width(96f));
                 EditorGUIUtility.labelWidth = previousLabelWidth;

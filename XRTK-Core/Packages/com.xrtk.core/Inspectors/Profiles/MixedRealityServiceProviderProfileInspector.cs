@@ -17,7 +17,7 @@ namespace XRTK.Inspectors.Profiles
     [CustomEditor(typeof(BaseMixedRealityServiceProfile<>))]
     public class MixedRealityServiceProfileInspector : BaseMixedRealityProfileInspector
     {
-        private readonly GUIContent ProfileContent = new GUIContent("Profile", "The configuration profile for this service.");
+        private readonly GUIContent ProfileContent = new GUIContent("Profile", "The settings profile for this service.");
         private ReorderableList configurationList;
         private int currentlySelectedConfigurationOption;
 
@@ -40,7 +40,7 @@ namespace XRTK.Inspectors.Profiles
             var baseType = ThisProfile.GetType().BaseType;
             var genericTypeArgs = baseType?.FindTopmostGenericTypeArguments();
             Debug.Assert(genericTypeArgs != null);
-            ServiceConstraint = genericTypeArgs?[0];
+            ServiceConstraint = genericTypeArgs[0];
             Debug.Assert(ServiceConstraint != null);
 
             configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true)
@@ -60,7 +60,7 @@ namespace XRTK.Inspectors.Profiles
 
             if (configurations == null || configurations.arraySize == 0)
             {
-                EditorGUILayout.HelpBox($"Register a new Configuration", MessageType.Warning);
+                EditorGUILayout.HelpBox("Register a new Service Configuration", MessageType.Warning);
             }
 
             serializedObject.ApplyModifiedProperties();

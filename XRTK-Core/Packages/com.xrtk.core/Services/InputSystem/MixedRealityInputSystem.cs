@@ -52,11 +52,15 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public event Action InputDisabled;
 
-        /// <inheritdoc />
-        public HashSet<IMixedRealityInputSource> DetectedInputSources { get; } = new HashSet<IMixedRealityInputSource>();
+        private readonly HashSet<IMixedRealityInputSource> detectedInputSources = new HashSet<IMixedRealityInputSource>();
 
         /// <inheritdoc />
-        public HashSet<IMixedRealityController> DetectedControllers { get; } = new HashSet<IMixedRealityController>();
+        public IReadOnlyCollection<IMixedRealityInputSource> DetectedInputSources => detectedInputSources;
+
+        private readonly HashSet<IMixedRealityController> detectedControllers = new HashSet<IMixedRealityController>();
+
+        /// <inheritdoc />
+        public IReadOnlyCollection<IMixedRealityController> DetectedControllers => detectedControllers;
 
         private IMixedRealityFocusProvider focusProvider = null;
 
@@ -379,7 +383,7 @@ namespace XRTK.Services.InputSystem
         }
 
         /// <summary>
-        /// Pop disabled input state. When the last disabled state is 
+        /// Pop disabled input state. When the last disabled state is
         /// popped off the stack input will be re-enabled.
         /// </summary>
         public void PopInputDisable()
@@ -488,7 +492,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public bool TryGetController(IMixedRealityInputSource inputSource, out IMixedRealityController controller)
         {
-            foreach (var mixedRealityController in DetectedControllers)
+            foreach (var mixedRealityController in detectedControllers)
             {
                 if (inputSource.SourceId == mixedRealityController.InputSource.SourceId)
                 {
@@ -515,7 +519,7 @@ namespace XRTK.Services.InputSystem
         {
             var newId = (uint)UnityEngine.Random.Range(1, int.MaxValue);
 
-            foreach (var inputSource in DetectedInputSources)
+            foreach (var inputSource in detectedInputSources)
             {
                 if (inputSource.SourceId == newId)
                 {
@@ -537,13 +541,13 @@ namespace XRTK.Services.InputSystem
             // Create input event
             sourceStateEventData.Initialize(source, controller);
 
-            Debug.Assert(!DetectedInputSources.Contains(source), $"{source.SourceName} has already been registered with the Input Manager!");
+            Debug.Assert(!detectedInputSources.Contains(source), $"{source.SourceName} has already been registered with the Input Manager!");
 
-            DetectedInputSources.Add(source);
+            detectedInputSources.Add(source);
 
             if (controller != null)
             {
-                DetectedControllers.Add(controller);
+                detectedControllers.Add(controller);
             }
 
             FocusProvider?.OnSourceDetected(sourceStateEventData);
@@ -565,13 +569,13 @@ namespace XRTK.Services.InputSystem
             // Create input event
             sourceStateEventData.Initialize(source, controller);
 
-            Debug.Assert(DetectedInputSources.Contains(source), $"{source.SourceName} was never registered with the Input Manager!");
+            Debug.Assert(detectedInputSources.Contains(source), $"{source.SourceName} was never registered with the Input Manager!");
 
-            DetectedInputSources.Remove(source);
+            detectedInputSources.Remove(source);
 
             if (controller != null)
             {
-                DetectedControllers.Remove(controller);
+                detectedControllers.Remove(controller);
             }
 
             // Pass handler through HandleEvent to perform modal/fallback logic
@@ -1014,7 +1018,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseOnInputDown(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction)
         {
-            Debug.Assert(DetectedInputSources.Contains(source));
+            Debug.Assert(detectedInputSources.Contains(source));
 
             inputAction = ProcessRules(inputAction, true);
 
@@ -1038,7 +1042,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction)
         {
-            Debug.Assert(DetectedInputSources.Contains(source));
+            Debug.Assert(detectedInputSources.Contains(source));
 
             inputAction = ProcessRules(inputAction, true);
 
@@ -1058,7 +1062,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseOnInputPressed(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction, float pressAmount)
         {
-            Debug.Assert(DetectedInputSources.Contains(source));
+            Debug.Assert(detectedInputSources.Contains(source));
 
             inputAction = ProcessRules(inputAction, pressAmount);
 
@@ -1089,7 +1093,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseOnInputUp(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction)
         {
-            Debug.Assert(DetectedInputSources.Contains(source));
+            Debug.Assert(detectedInputSources.Contains(source));
 
             inputAction = ProcessRules(inputAction, false);
 
@@ -1120,7 +1124,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction, float inputPosition)
         {
-            Debug.Assert(DetectedInputSources.Contains(source));
+            Debug.Assert(detectedInputSources.Contains(source));
 
             inputAction = ProcessRules(inputAction, inputPosition);
 
@@ -1147,7 +1151,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction, Vector2 inputPosition)
         {
-            Debug.Assert(DetectedInputSources.Contains(source));
+            Debug.Assert(detectedInputSources.Contains(source));
 
             inputAction = ProcessRules(inputAction, inputPosition);
 
@@ -1174,7 +1178,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaisePositionInputChanged(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction, Vector3 position)
         {
-            Debug.Assert(DetectedInputSources.Contains(source));
+            Debug.Assert(detectedInputSources.Contains(source));
 
             inputAction = ProcessRules(inputAction, position);
 
@@ -1205,7 +1209,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseRotationInputChanged(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction, Quaternion rotation)
         {
-            Debug.Assert(DetectedInputSources.Contains(source));
+            Debug.Assert(detectedInputSources.Contains(source));
 
             inputAction = ProcessRules(inputAction, rotation);
 
@@ -1236,7 +1240,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaisePoseInputChanged(IMixedRealityInputSource source, Handedness handedness, MixedRealityInputAction inputAction, MixedRealityPose inputData)
         {
-            Debug.Assert(DetectedInputSources.Contains(source));
+            Debug.Assert(detectedInputSources.Contains(source));
 
             inputAction = ProcessRules(inputAction, inputData);
 
@@ -1280,7 +1284,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseGestureStarted(IMixedRealityController controller, MixedRealityInputAction action)
         {
-            Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
+            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
 
             action = ProcessRules(action, true);
             inputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action);
@@ -1297,7 +1301,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action)
         {
-            Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
+            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
             action = ProcessRules(action, true);
             inputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action);
             HandleEvent(inputEventData, OnGestureUpdated);
@@ -1313,7 +1317,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action, Vector2 inputData)
         {
-            Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
+            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
             action = ProcessRules(action, inputData);
             vector2InputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(vector2InputEventData, OnGestureVector2PositionUpdated);
@@ -1329,7 +1333,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action, Vector3 inputData)
         {
-            Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
+            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
             action = ProcessRules(action, inputData);
             positionInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(positionInputEventData, OnGesturePositionUpdated);
@@ -1345,7 +1349,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action, Quaternion inputData)
         {
-            Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
+            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
             action = ProcessRules(action, inputData);
             rotationInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(rotationInputEventData, OnGestureRotationUpdated);
@@ -1361,7 +1365,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseGestureUpdated(IMixedRealityController controller, MixedRealityInputAction action, MixedRealityPose inputData)
         {
-            Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
+            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
             action = ProcessRules(action, inputData);
             poseInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(poseInputEventData, OnGesturePoseUpdated);
@@ -1377,7 +1381,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action)
         {
-            Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
+            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
             action = ProcessRules(action, false);
             inputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action);
             HandleEvent(inputEventData, OnGestureCompleted);
@@ -1393,7 +1397,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action, Vector2 inputData)
         {
-            Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
+            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
             action = ProcessRules(action, inputData);
             vector2InputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(vector2InputEventData, OnGestureVector2PositionCompleted);
@@ -1409,7 +1413,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action, Vector3 inputData)
         {
-            Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
+            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
             action = ProcessRules(action, inputData);
             positionInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(positionInputEventData, OnGesturePositionCompleted);
@@ -1425,7 +1429,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action, Quaternion inputData)
         {
-            Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
+            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
             action = ProcessRules(action, inputData);
             rotationInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(rotationInputEventData, OnGestureRotationCompleted);
@@ -1441,7 +1445,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseGestureCompleted(IMixedRealityController controller, MixedRealityInputAction action, MixedRealityPose inputData)
         {
-            Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
+            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
             action = ProcessRules(action, inputData);
             poseInputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action, inputData);
             HandleEvent(poseInputEventData, OnGesturePoseCompleted);
@@ -1457,7 +1461,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseGestureCanceled(IMixedRealityController controller, MixedRealityInputAction action)
         {
-            Debug.Assert(DetectedInputSources.Contains(controller.InputSource));
+            Debug.Assert(detectedInputSources.Contains(controller.InputSource));
             action = ProcessRules(action, false);
             inputEventData.Initialize(controller.InputSource, controller.ControllerHandedness, action);
             HandleEvent(inputEventData, OnGestureCanceled);
@@ -1477,7 +1481,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseSpeechCommandRecognized(IMixedRealityInputSource source, MixedRealityInputAction inputAction, RecognitionConfidenceLevel confidence, TimeSpan phraseDuration, DateTime phraseStartTime, string text)
         {
-            Debug.Assert(DetectedInputSources.Contains(source));
+            Debug.Assert(detectedInputSources.Contains(source));
 
             // Create input event
             speechEventData.Initialize(source, inputAction, confidence, phraseDuration, phraseStartTime, text);
@@ -1500,7 +1504,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseDictationHypothesis(IMixedRealityInputSource source, string dictationHypothesis, AudioClip dictationAudioClip = null)
         {
-            Debug.Assert(DetectedInputSources.Contains(source));
+            Debug.Assert(detectedInputSources.Contains(source));
 
             // Create input event
             dictationEventData.Initialize(source, dictationHypothesis, dictationAudioClip);
@@ -1519,7 +1523,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseDictationResult(IMixedRealityInputSource source, string dictationResult, AudioClip dictationAudioClip = null)
         {
-            Debug.Assert(DetectedInputSources.Contains(source));
+            Debug.Assert(detectedInputSources.Contains(source));
 
             // Create input event
             dictationEventData.Initialize(source, dictationResult, dictationAudioClip);
@@ -1538,7 +1542,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseDictationComplete(IMixedRealityInputSource source, string dictationResult, AudioClip dictationAudioClip)
         {
-            Debug.Assert(DetectedInputSources.Contains(source));
+            Debug.Assert(detectedInputSources.Contains(source));
 
             // Create input event
             dictationEventData.Initialize(source, dictationResult, dictationAudioClip);
@@ -1557,7 +1561,7 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public void RaiseDictationError(IMixedRealityInputSource source, string dictationResult, AudioClip dictationAudioClip = null)
         {
-            Debug.Assert(DetectedInputSources.Contains(source));
+            Debug.Assert(detectedInputSources.Contains(source));
 
             // Create input event
             dictationEventData.Initialize(source, dictationResult, dictationAudioClip);

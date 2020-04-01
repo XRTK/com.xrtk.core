@@ -33,7 +33,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <summary>
         /// List of the Interaction Input Sources as detected by the input manager like hands or motion controllers.
         /// </summary>
-        HashSet<IMixedRealityInputSource> DetectedInputSources { get; }
+        IReadOnlyCollection<IMixedRealityInputSource> DetectedInputSources { get; }
 
         /// <summary>
         /// List of <see cref="IMixedRealityController"/>s currently detected by the input manager.
@@ -41,7 +41,7 @@ namespace XRTK.Interfaces.InputSystem
         /// <remarks>
         /// This property is similar to <see cref="DetectedInputSources"/>, as this is a subset of those <see cref="IMixedRealityInputSource"/>s in that list.
         /// </remarks>
-        HashSet<IMixedRealityController> DetectedControllers { get; }
+        IReadOnlyCollection<IMixedRealityController> DetectedControllers { get; }
 
         /// <summary>
         /// The current Focus Provider that's been implemented by this Input System.

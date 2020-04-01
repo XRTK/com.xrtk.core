@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
@@ -20,12 +20,12 @@ using XRTK.Interfaces.TeleportSystem;
 namespace XRTK.Definitions
 {
     /// <summary>
-    /// Configuration profile settings for the Mixed Reality Toolkit.
+    /// The root profile for the Mixed Reality Toolkit's settings.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Toolkit Configuration Profile", fileName = "MixedRealityToolkitConfigurationProfile", order = (int)CreateProfileMenuItemIndices.Configuration)]
-    public class MixedRealityToolkitConfigurationProfile : BaseMixedRealityProfile
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Toolkit Root Profile", fileName = "MixedRealityToolkitRootProfile", order = (int)CreateProfileMenuItemIndices.Configuration)]
+    public sealed class MixedRealityToolkitRootProfile : BaseMixedRealityProfile
     {
-        #region Mixed Reality Toolkit configurable properties
+        #region Mixed Reality Toolkit system properties
 
         #region Camera System Properties
 
@@ -323,6 +323,8 @@ namespace XRTK.Definitions
 
         #endregion Diagnostics System Properties
 
+        #endregion Mixed Reality Toolkit system properties
+
         [SerializeField]
         [Tooltip("All the additional non-required services registered with the Mixed Reality Toolkit.")]
         private MixedRealityRegisteredServiceProvidersProfile registeredServiceProvidersProfile = null;
@@ -335,7 +337,5 @@ namespace XRTK.Definitions
             get => registeredServiceProvidersProfile;
             internal set => registeredServiceProvidersProfile = value;
         }
-
-        #endregion Mixed Reality Toolkit configurable properties
     }
 }

@@ -1,12 +1,13 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.InputSystem;
-using XRTK.Definitions.Utilities;
+using XRTK.Definitions.Platforms;
 using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Providers.Controllers.OpenVR;
@@ -26,6 +27,8 @@ namespace XRTK.Tests.Core
 
         #region Configuration Validation Tests
 
+        private readonly List<IMixedRealityPlatform> testPlatforms = new List<IMixedRealityPlatform> { new EditorPlatform(), new WindowsStandalonePlatform() };
+
         [Test]
         public void Test_01_ConfirmExtensionServiceProviderConfigurationNotPresent()
         {
@@ -34,7 +37,7 @@ namespace XRTK.Tests.Core
             var dataProviderTypes = new[] { typeof(TestExtensionService1) };
             var newConfigs = new[]
             {
-                new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Extension Service 1", 2,SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null)
+                new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Extension Service 1", 2, testPlatforms, null)
             };
 
             Assert.IsFalse(profile.ValidateService(dataProviderTypes, newConfigs, false));
@@ -46,7 +49,7 @@ namespace XRTK.Tests.Core
             SetupServiceLocator();
             var profile = MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile;
             var dataProviderTypes = new[] { typeof(TestExtensionService1) };
-            var newConfig = new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Extension Service 1", 2, SupportedPlatforms.WindowsStandalone | SupportedPlatforms.Editor, null);
+            var newConfig = new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Extension Service 1", 2, testPlatforms, null);
             Debug.Assert(newConfig != null);
             var newConfigs = profile.RegisteredServiceConfigurations.AddItem(newConfig);
             Debug.Assert(newConfigs != null);

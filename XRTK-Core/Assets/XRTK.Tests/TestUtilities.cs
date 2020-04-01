@@ -1,8 +1,8 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Linq;
 using NUnit.Framework;
+using System.Linq;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using XRTK.Definitions;
@@ -28,6 +28,8 @@ namespace XRTK.Tests
             // Setup
             CleanupScene();
             Assert.IsTrue(!MixedRealityToolkit.IsInitialized);
+            Assert.AreEqual(0, MixedRealityToolkit.ActiveSystems.Count);
+            Assert.AreEqual(0, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
             InitializeMixedRealityToolkit();
 
             // Tests

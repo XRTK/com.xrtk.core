@@ -3,7 +3,6 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Definitions.BoundarySystem;
 using XRTK.Inspectors.Utilities;
 

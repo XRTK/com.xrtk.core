@@ -3,7 +3,7 @@
 
 using System.Diagnostics;
 using UnityEngine;
-using XRTK.Definitions.DiagnosticsSystem;
+using XRTK.Definitions;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
@@ -19,7 +19,7 @@ namespace XRTK.Services.DiagnosticsSystem
         /// <param name="name"></param>
         /// <param name="priority"></param>
         /// <param name="profile"></param>
-        public MixedRealityFrameDiagnosticsDataProvider(string name, uint priority, MixedRealityDiagnosticsDataProviderProfile profile)
+        public MixedRealityFrameDiagnosticsDataProvider(string name, uint priority, BaseMixedRealityProfile profile)
             : base(name, priority, profile)
         {
         }

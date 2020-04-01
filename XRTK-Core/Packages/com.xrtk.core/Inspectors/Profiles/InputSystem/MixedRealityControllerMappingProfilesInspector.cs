@@ -44,11 +44,10 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             EditorGUILayout.LabelField("Controller Input Mappings", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Use this profile to define all the controllers and their inputs your users will be able to use in your application.\n\n" +
                                     "You'll want to define all your Input Actions and Controller Data Providers first so you can wire up actions to hardware sensors, controllers, gestures, and other input devices.", MessageType.Info);
+            EditorGUILayout.Space();
 
             ThisProfile.CheckProfileLock();
             serializedObject.Update();
-
-            EditorGUILayout.Space();
 
             EditorGUILayout.LabelField("Select a profile type:");
 

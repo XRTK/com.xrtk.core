@@ -42,7 +42,7 @@ namespace XRTK.Tests
                 : ScriptableObject.CreateInstance<MixedRealityToolkitRootProfile>();
 
             Assert.IsTrue(configuration != null, "Failed to find the Default Mixed Reality Settings Profile");
-            MixedRealityToolkit.Instance.ResetConfiguration(configuration);
+            MixedRealityToolkit.Instance.ResetProfile(configuration);
             Assert.IsTrue(MixedRealityToolkit.Instance.ActiveProfile != null);
             Assert.IsTrue(MixedRealityToolkit.IsInitialized);
         }

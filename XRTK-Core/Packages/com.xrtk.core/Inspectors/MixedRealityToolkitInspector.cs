@@ -100,7 +100,7 @@ namespace XRTK.Inspectors
 
             if (changed)
             {
-                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration((MixedRealityToolkitRootProfile)activeProfile.objectReferenceValue);
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile((MixedRealityToolkitRootProfile)activeProfile.objectReferenceValue);
             }
         }
 

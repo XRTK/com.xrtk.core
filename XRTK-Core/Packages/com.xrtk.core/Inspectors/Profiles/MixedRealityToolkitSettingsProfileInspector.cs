@@ -233,7 +233,7 @@ namespace XRTK.Inspectors.Profiles
                 MixedRealityToolkit.IsInitialized &&
                 MixedRealityToolkit.Instance.ActiveProfile == rootProfile)
             {
-                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(rootProfile);
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(rootProfile);
             }
         }
     }

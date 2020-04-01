@@ -146,7 +146,7 @@ namespace XRTK.Definitions
         private BaseMixedRealityProfile profile;
 
         /// <inheritdoc />
-        public BaseMixedRealityProfile ConfigurationProfile
+        public BaseMixedRealityProfile Profile
         {
             get => profile;
             internal set => profile = value;

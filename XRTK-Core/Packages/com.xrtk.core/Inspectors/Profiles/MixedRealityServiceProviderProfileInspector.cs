@@ -213,7 +213,7 @@ namespace XRTK.Inspectors.Profiles
                 if (MixedRealityToolkit.IsInitialized &&
                     !string.IsNullOrEmpty(instanceTypeProperty.FindPropertyRelative("reference").stringValue))
                 {
-                    MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
+                    MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
                 }
             }
 
@@ -260,7 +260,7 @@ namespace XRTK.Inspectors.Profiles
 
             if (MixedRealityToolkit.IsInitialized)
             {
-                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
             }
         }
     }

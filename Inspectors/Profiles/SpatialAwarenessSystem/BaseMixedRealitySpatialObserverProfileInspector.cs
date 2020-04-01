@@ -1,8 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
-using UnityEngine;
 using XRTK.Inspectors.Utilities;
 using XRTK.Providers.SpatialObservers;
 
@@ -24,31 +23,23 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         {
             base.OnEnable();
 
-            startupBehavior = serializedObject.FindProperty("startupBehavior");
-            observationExtents = serializedObject.FindProperty("observationExtents");
-            isStationaryObserver = serializedObject.FindProperty("isStationaryObserver");
-            updateInterval = serializedObject.FindProperty("updateInterval");
-            physicsLayer = serializedObject.FindProperty("physicsLayer");
+            startupBehavior = serializedObject.FindProperty(nameof(startupBehavior));
+            observationExtents = serializedObject.FindProperty(nameof(observationExtents));
+            isStationaryObserver = serializedObject.FindProperty(nameof(isStationaryObserver));
+            updateInterval = serializedObject.FindProperty(nameof(updateInterval));
+            physicsLayer = serializedObject.FindProperty(nameof(physicsLayer));
         }
 
         /// <inheritdoc />
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            RenderHeader();
 
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Spatial Awareness Profile"))
-            {
-                Selection.activeObject = ThisProfile.ParentProfile;
-            }
-
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Spatial Observer Options", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("The Spatial Awareness Observer Data Provider supplies the Spatial Awareness system with all the data it needs to understand the world around you.", MessageType.Info);
             EditorGUILayout.Space();
 
             ThisProfile.CheckProfileLock();
-
             serializedObject.Update();
 
             foldout = EditorGUILayout.Foldout(foldout, "General Settings", true);

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using System.Collections.Generic;
@@ -23,26 +23,18 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             base.OnEnable();
 
-            controllerMappingProfiles = serializedObject.FindProperty("controllerMappingProfiles");
+            controllerMappingProfiles = serializedObject.FindProperty(nameof(controllerMappingProfiles));
         }
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            RenderHeader();
 
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Input Profile"))
-            {
-                Selection.activeObject = ThisProfile.ParentProfile;
-            }
-
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Controller Input Mappings", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Use this profile to define all the controllers and their inputs your users will be able to use in your application.\n\n" +
                                     "You'll want to define all your Input Actions and Controller Data Providers first so you can wire up actions to hardware sensors, controllers, gestures, and other input devices.", MessageType.Info);
 
             ThisProfile.CheckProfileLock();
-
             serializedObject.Update();
 
             EditorGUILayout.Space();
@@ -122,7 +114,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             if (changed && MixedRealityToolkit.IsInitialized)
             {
-                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
             }
         }
     }

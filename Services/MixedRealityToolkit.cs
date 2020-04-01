@@ -23,14 +23,14 @@ namespace XRTK.Services
 {
     /// <summary>
     /// This class is responsible for coordinating the operation of the Mixed Reality Toolkit. It is the only Singleton in the entire project.
-    /// It provides a service registry for all active services that are used within a project as well as providing the active configuration profile for the project.
+    /// It provides a service registry for all active services that are used within a project as well as providing the active profile for the project.
     /// The <see cref="ActiveProfile"/> can be swapped out at any time to meet the needs of your project.
     /// </summary>
     [ExecuteInEditMode]
     [DisallowMultipleComponent]
     public sealed class MixedRealityToolkit : MonoBehaviour, IDisposable
     {
-        #region Mixed Reality Toolkit Profile configuration
+        #region Mixed Reality Toolkit Profile properties
 
         /// <summary>
         /// Checks if there is a valid instance of the MixedRealityToolkit, then checks if there is there a valid Active Profile.
@@ -54,17 +54,17 @@ namespace XRTK.Services
         }
 
         /// <summary>
-        /// The active profile of the Mixed Reality Toolkit which controls which services are active and their initial configuration.
-        /// *Note configuration is used on project initialization or replacement, changes to properties while it is running has no effect.
+        /// The active profile of the Mixed Reality Toolkit which controls which services are active and their initial settings.
+        /// *Note a profile is used on project initialization or replacement, changes to properties while it is running has no effect.
         /// </summary>
         [SerializeField]
-        [Tooltip("The current active configuration for the Mixed Reality project")]
-        private MixedRealityToolkitConfigurationProfile activeProfile = null;
+        [Tooltip("The current active settings for the Mixed Reality project")]
+        private MixedRealityToolkitRootProfile activeProfile = null;
 
         /// <summary>
-        /// The public property of the Active Profile, ensuring events are raised on the change of the configuration
+        /// The public property of the Active Profile, ensuring events are raised on the change of the reference
         /// </summary>
-        public MixedRealityToolkitConfigurationProfile ActiveProfile
+        public MixedRealityToolkitRootProfile ActiveProfile
         {
             get
             {
@@ -80,25 +80,25 @@ namespace XRTK.Services
             }
             set
             {
-                ResetConfiguration(value);
+                ResetProfile(value);
             }
         }
 
         /// <summary>
-        /// When a configuration Profile is replaced with a new configuration, force all services to reset and read the new values
+        /// When a profile is replaced with a new one, force all services to reset and read the new values
         /// </summary>
         /// <param name="profile"></param>
-        public void ResetConfiguration(MixedRealityToolkitConfigurationProfile profile)
+        public void ResetProfile(MixedRealityToolkitRootProfile profile)
         {
             if (isResetting)
             {
-                Debug.LogWarning("Already attempting to reset the configurations!");
+                Debug.LogWarning("Already attempting to reset the root profile!");
                 return;
             }
 
             if (isInitializing)
             {
-                Debug.LogWarning("Already attempting to initialize the configurations!");
+                Debug.LogWarning("Already attempting to initialize the root profile!");
                 return;
             }
 
@@ -125,7 +125,7 @@ namespace XRTK.Services
 
         private static bool isResetting = false;
 
-        #endregion Mixed Reality Toolkit Profile configuration
+        #endregion Mixed Reality Toolkit Profile properties
 
         #region Mixed Reality runtime service registry
 
@@ -351,7 +351,7 @@ namespace XRTK.Services
         {
             if (isInitializing)
             {
-                Debug.LogWarning("Already attempting to initialize the configurations!");
+                Debug.LogWarning("Already attempting to initialize the service locator!");
                 return;
             }
 
@@ -360,7 +360,7 @@ namespace XRTK.Services
             //If the Mixed Reality Toolkit is not configured, stop.
             if (ActiveProfile == null)
             {
-                Debug.LogError("No Mixed Reality Configuration Profile found, cannot initialize the Mixed Reality Toolkit");
+                Debug.LogError("No Mixed Reality Root Profile found, cannot initialize the Mixed Reality Toolkit");
                 isInitializing = false;
                 return;
             }
@@ -457,7 +457,7 @@ namespace XRTK.Services
             if (ActiveProfile.IsTeleportSystemEnabled)
             {
                 // Note: The Teleport system doesn't have a profile, but might in the future.
-                var dummyProfile = ScriptableObject.CreateInstance<MixedRealityToolkitConfigurationProfile>();
+                var dummyProfile = ScriptableObject.CreateInstance<MixedRealityToolkitRootProfile>();
 
                 if (!CreateAndRegisterService<IMixedRealityTeleportSystem>(ActiveProfile.TeleportSystemSystemType, dummyProfile) || TeleportSystem == null)
                 {
@@ -496,7 +496,7 @@ namespace XRTK.Services
                 {
                     if (CreateAndRegisterService(configuration))
                     {
-                        switch (configuration.ConfigurationProfile)
+                        switch (configuration.Profile)
                         {
                             case null:
                                 // Nothing
@@ -505,7 +505,7 @@ namespace XRTK.Services
                                 RegisterServices(extensionServiceProfile.RegisteredServiceConfigurations);
                                 break;
                             default:
-                                Debug.LogError($"{configuration.ConfigurationProfile.name} does not derive from {nameof(BaseMixedRealityExtensionServiceProfile)}");
+                                Debug.LogError($"{configuration.Profile.name} does not derive from {nameof(BaseMixedRealityExtensionServiceProfile)}");
                                 break;
                         }
                     }
@@ -813,7 +813,7 @@ namespace XRTK.Services
                 configuration.RuntimePlatforms,
                 configuration.Name,
                 configuration.Priority,
-                configuration.ConfigurationProfile);
+                configuration.Profile);
         }
 
         /// <summary>

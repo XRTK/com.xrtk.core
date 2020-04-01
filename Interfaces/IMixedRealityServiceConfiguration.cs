@@ -49,8 +49,8 @@ namespace XRTK.Interfaces
         IReadOnlyList<IMixedRealityPlatform> RuntimePlatforms { get; }
 
         /// <summary>
-        /// The configuration profile for the <see cref="IMixedRealityService"/>.
+        /// The <see cref="BaseMixedRealityProfile"/> for <see cref="IMixedRealityService"/>.
         /// </summary>
-        BaseMixedRealityProfile ConfigurationProfile { get; }
+        BaseMixedRealityProfile Profile { get; }
     }
 }

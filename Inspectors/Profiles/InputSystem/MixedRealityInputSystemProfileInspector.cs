@@ -1,8 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information. 
 
 using UnityEditor;
-using UnityEngine;
 using XRTK.Definitions.InputSystem;
 using XRTK.Inspectors.Utilities;
 using XRTK.Services;
@@ -26,34 +25,27 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         {
             base.OnEnable();
 
-            focusProviderType = serializedObject.FindProperty("focusProviderType");
-            inputActionsProfile = serializedObject.FindProperty("inputActionsProfile");
-            inputActionRulesProfile = serializedObject.FindProperty("inputActionRulesProfile");
-            pointerProfile = serializedObject.FindProperty("pointerProfile");
-            gesturesProfile = serializedObject.FindProperty("gesturesProfile");
-            speechCommandsProfile = serializedObject.FindProperty("speechCommandsProfile");
-            controllerVisualizationProfile = serializedObject.FindProperty("controllerVisualizationProfile");
-            controllerDataProvidersProfile = serializedObject.FindProperty("controllerDataProvidersProfile");
-            controllerMappingProfiles = serializedObject.FindProperty("controllerMappingProfiles");
+            focusProviderType = serializedObject.FindProperty(nameof(focusProviderType));
+            inputActionsProfile = serializedObject.FindProperty(nameof(inputActionsProfile));
+            inputActionRulesProfile = serializedObject.FindProperty(nameof(inputActionRulesProfile));
+            pointerProfile = serializedObject.FindProperty(nameof(pointerProfile));
+            gesturesProfile = serializedObject.FindProperty(nameof(gesturesProfile));
+            speechCommandsProfile = serializedObject.FindProperty(nameof(speechCommandsProfile));
+            controllerVisualizationProfile = serializedObject.FindProperty(nameof(controllerVisualizationProfile));
+            controllerDataProvidersProfile = serializedObject.FindProperty(nameof(controllerDataProvidersProfile));
+            controllerMappingProfiles = serializedObject.FindProperty(nameof(controllerMappingProfiles));
         }
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            RenderHeader();
 
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button("Back to Configuration Profile"))
-            {
-                Selection.activeObject = ThisProfile.ParentProfile;
-            }
-
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Input System Profile", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("The Input System Profile helps developers configure input no matter what platform you're building for.", MessageType.Info);
 
             ThisProfile.CheckProfileLock();
-
             serializedObject.Update();
+
             bool changed = false;
 
             EditorGUI.BeginChangeCheck();
@@ -77,7 +69,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             if (changed && MixedRealityToolkit.IsInitialized)
             {
-                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
             }
         }
     }

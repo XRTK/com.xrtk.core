@@ -58,7 +58,7 @@ namespace XRTK.Services
         /// *Note configuration is used on project initialization or replacement, changes to properties while it is running has no effect.
         /// </summary>
         [SerializeField]
-        [Tooltip("The current active configuration for the Mixed Reality project")]
+        [Tooltip("The current active settings for the Mixed Reality project")]
         private MixedRealityToolkitRootProfile activeProfile = null;
 
         /// <summary>

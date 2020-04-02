@@ -30,7 +30,8 @@ namespace XRTK.Inspectors.PropertyDrawers
             profileGuid = property.FindPropertyRelative(nameof(profileGuid));
             description = property.FindPropertyRelative(nameof(description));
             axisConstraint = property.FindPropertyRelative(nameof(axisConstraint));
-            var prevAction = new MixedRealityInputAction(Guid.Parse(profileGuid.stringValue), (uint)id.intValue, description.stringValue, (AxisType)axisConstraint.intValue);
+
+            var currentAction = new MixedRealityInputAction(Guid.Parse(profileGuid.stringValue), (uint)id.intValue, description.stringValue, (AxisType)axisConstraint.intValue);
 
             if (dropdownMenu == null)
             {
@@ -43,22 +44,38 @@ namespace XRTK.Inspectors.PropertyDrawers
                 {
                     foreach (var inputAction in inputActionProfile.InputActions)
                     {
-                        dropdownMenu.AddItem(
-                            new GUIContent(inputAction.Description),
-                            inputAction.ProfileGuid == prevAction.ProfileGuid && inputAction.Id == prevAction.Id,
-                            data => SetInputAction(inputAction),
-                            null);
+                        // Upgrade old action references
+                        if (id.intValue != 0 && profileGuid.stringValue == DefaultGuidString)
+                        {
+                            AssetDatabase.TryGetGUIDAndLocalFileIdentifier(inputActionProfile, out var guid, out long _);
+                            var upgradedAction = new MixedRealityInputAction(Guid.Parse(guid), currentAction.Id, currentAction.Description, currentAction.AxisConstraint);
+                            SetInputAction(upgradedAction);
+                            AddInputActionItem(inputAction, upgradedAction);
+                        }
+                        else
+                        {
+                            AddInputActionItem(inputAction, currentAction);
+                        }
+
+                        void AddInputActionItem(MixedRealityInputAction actionItem, MixedRealityInputAction selectedItem)
+                        {
+                            dropdownMenu.AddItem(
+                                new GUIContent(inputAction.Description),
+                                actionItem.ProfileGuid == selectedItem.ProfileGuid && actionItem.Id == selectedItem.Id,
+                                data => SetInputAction(actionItem),
+                                null);
+                        }
                     }
                 }
 
-                void SetInputAction(MixedRealityInputAction action)
+                void SetInputAction(MixedRealityInputAction inputAction)
                 {
-                    id.intValue = (int)action.Id;
-                    description.stringValue = action.Description;
-                    axisConstraint.intValue = (int)action.AxisConstraint;
-                    profileGuid.stringValue = action.ProfileGuid.ToString("N");
+                    id.intValue = (int)inputAction.Id;
+                    description.stringValue = inputAction.Description;
+                    axisConstraint.intValue = (int)inputAction.AxisConstraint;
+                    profileGuid.stringValue = inputAction.ProfileGuid.ToString("N");
                     property.serializedObject.ApplyModifiedProperties();
-                    GUI.changed = prevAction != action;
+                    GUI.changed = currentAction != inputAction;
                 }
             }
 

@@ -120,6 +120,12 @@ namespace XRTK.Definitions.InputSystem
 
         public bool Equals(MixedRealityInputAction other)
         {
+            // Backwards compatibility for actions that haven't been re-serialized.
+            if (other.ProfileGuid == default && other.Id != 0)
+            {
+                return Id == other.Id && AxisConstraint == other.AxisConstraint;
+            }
+
             return ProfileGuid == other.ProfileGuid &&
                    Id == other.Id &&
                    AxisConstraint == other.AxisConstraint;

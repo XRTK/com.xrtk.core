@@ -2,94 +2,72 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
-using XRTK.Extensions;
-using XRTK.Services;
+using XRTK.Definitions.Utilities;
+using XRTK.Inspectors.Extensions;
 
 namespace XRTK.Inspectors.PropertyDrawers
 {
     [CustomPropertyDrawer(typeof(MixedRealityInputAction))]
     public class InputActionPropertyDrawer : PropertyDrawer
     {
-        private static MixedRealityInputActionsProfile profile = null;
-        private static GUIContent[] actionLabels = { new GUIContent("Missing Input Action Profile") };
-        private static int[] actionIds = { 0 };
+        private static readonly string DefaultGuidString = default(Guid).ToString("N");
+        private static readonly Tuple<MixedRealityInputActionsProfile, GUIContent, MixedRealityInputAction> DefaultNoneEntry = new Tuple<MixedRealityInputActionsProfile, GUIContent, MixedRealityInputAction>(null, new GUIContent("None"), MixedRealityInputAction.None);
+
+        private GenericMenu dropdownMenu;
+        private MixedRealityInputActionsProfile[] allInputActionProfiles;
+
+        private SerializedProperty id;
+        private SerializedProperty profileGuid;
+        private SerializedProperty description;
+        private SerializedProperty axisConstraint;
 
         public override void OnGUI(Rect rect, SerializedProperty property, GUIContent content)
         {
-            profile = null;
-            actionLabels = new[] { new GUIContent("Missing Mixed Reality Toolkit") };
-            actionIds = new[] { 0 };
+            id = property.FindPropertyRelative(nameof(id));
+            profileGuid = property.FindPropertyRelative(nameof(profileGuid));
+            description = property.FindPropertyRelative(nameof(description));
+            axisConstraint = property.FindPropertyRelative(nameof(axisConstraint));
+            var prevAction = new MixedRealityInputAction(Guid.Parse(profileGuid.stringValue), (uint)id.intValue, description.stringValue, (AxisType)axisConstraint.intValue);
 
-            if (MixedRealityToolkit.IsInitialized && MixedRealityToolkit.HasActiveProfile)
+            if (dropdownMenu == null)
             {
-                if (profile == null ||
-                    (MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
-                     profile.InputActions != null &&
-                     profile.InputActions != MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions))
-                {
-                    profile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile;
+                dropdownMenu = new GenericMenu();
+                dropdownMenu.AddItem(new GUIContent("None"), false, data => SetInputAction(MixedRealityInputAction.None), null);
 
-                    if (profile != null)
+                allInputActionProfiles = ScriptableObjectExtensions.GetAllInstances<MixedRealityInputActionsProfile>();
+
+                foreach (var inputActionProfile in allInputActionProfiles)
+                {
+                    foreach (var inputAction in inputActionProfile.InputActions)
                     {
-                        actionLabels = profile.InputActions.Select(action => new GUIContent(action.Description)).Prepend(new GUIContent("None")).ToArray();
-                        actionIds = profile.InputActions.Select(action => (int)action.Id).Prepend(0).ToArray();
-                    }
-                    else
-                    {
-                        actionLabels = new[] { new GUIContent("No input action profile found") };
-                        actionIds = new[] { 0 };
+                        dropdownMenu.AddItem(
+                            new GUIContent(inputAction.Description),
+                            inputAction.ProfileGuid == prevAction.ProfileGuid && inputAction.Id == prevAction.Id,
+                            data => SetInputAction(inputAction),
+                            null);
                     }
                 }
 
-                if (!MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
+                void SetInputAction(MixedRealityInputAction action)
                 {
-                    profile = null;
-                    actionLabels = new[] { new GUIContent("Input System Disabled") };
-                    actionIds = new[] { 0 };
+                    id.intValue = (int)action.Id;
+                    description.stringValue = action.Description;
+                    axisConstraint.intValue = (int)action.AxisConstraint;
+                    profileGuid.stringValue = action.ProfileGuid.ToString("N");
+                    property.serializedObject.ApplyModifiedProperties();
+                    GUI.changed = prevAction != action;
                 }
             }
 
             var label = EditorGUI.BeginProperty(rect, content, property);
+            var prefix = EditorGUI.PrefixLabel(rect, label);
 
-            var inputActionId = property.FindPropertyRelative("id");
-
-            if (profile == null || profile.InputActions == null || actionLabels == null || actionIds == null)
+            if (EditorGUI.DropdownButton(prefix, new GUIContent(description.stringValue), FocusType.Passive))
             {
-                GUI.enabled = false;
-                EditorGUI.IntPopup(rect, label, inputActionId.intValue.ResetIfGreaterThan(0), actionLabels, actionIds);
-                GUI.enabled = true;
-            }
-            else
-            {
-                EditorGUI.BeginChangeCheck();
-                inputActionId.intValue = EditorGUI.IntPopup(rect, label, inputActionId.intValue.ResetIfGreaterThan(profile.InputActions.Length), actionLabels, actionIds);
-
-                if (EditorGUI.EndChangeCheck())
-                {
-                    var profileProperty = property.FindPropertyRelative("profileGuid");
-                    var description = property.FindPropertyRelative("description");
-                    var axisConstraint = property.FindPropertyRelative("axisConstraint");
-
-                    if (inputActionId.intValue > 0)
-                    {
-                        AssetDatabase.TryGetGUIDAndLocalFileIdentifier(profile, out var hex, out long _);
-                        Guid.TryParse(hex, out var guid);
-                        Debug.Log(profileProperty.type);
-                        profileProperty.stringValue = guid.ToString("N");
-                        description.stringValue = profile.InputActions[inputActionId.intValue - 1].Description;
-                        axisConstraint.intValue = (int)profile.InputActions[inputActionId.intValue - 1].AxisConstraint;
-                    }
-                    else
-                    {
-                        profileProperty.stringValue = default(Guid).ToString("N");
-                        description.stringValue = "None";
-                        axisConstraint.intValue = 0;
-                    }
-                }
+                dropdownMenu.DropDown(prefix);
             }
 
             EditorGUI.EndProperty();

@@ -8,25 +8,14 @@ using UnityEngine.Events;
 namespace XRTK.Definitions.InputSystem
 {
     /// <summary>
-    /// Data class that maps <see cref="MixedRealityInputAction"/>s to <see cref="UnityEvent"/>s wired up in the inspector.
+    /// Data class that maps <see cref="MixedRealityInputAction"/>s to <see cref="UnityEngine.Events.UnityEvent"/>s wired up in the inspector.
     /// </summary>
     [Serializable]
-    public struct InputActionEventPair
+    public class InputActionEventPair
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="inputAction"></param>
-        /// <param name="unityEvent"></param>
-        public InputActionEventPair(MixedRealityInputAction inputAction, UnityEvent unityEvent)
-        {
-            this.inputAction = inputAction;
-            this.unityEvent = unityEvent;
-        }
-
         [SerializeField]
         [Tooltip("The MixedRealityInputAction to listen for to invoke the UnityEvent.")]
-        private MixedRealityInputAction inputAction;
+        private MixedRealityInputAction inputAction = MixedRealityInputAction.None;
 
         /// <summary>
         /// The <see cref="MixedRealityInputAction"/> to listen for to invoke the <see cref="UnityEvent"/>.
@@ -35,7 +24,7 @@ namespace XRTK.Definitions.InputSystem
 
         [SerializeField]
         [Tooltip("The UnityEvent to invoke when MixedRealityInputAction is raised.")]
-        private UnityEvent unityEvent;
+        private UnityEvent unityEvent = null;
 
         /// <summary>
         /// The <see cref="UnityEvent"/> to invoke when <see cref="MixedRealityInputAction"/> is raised.

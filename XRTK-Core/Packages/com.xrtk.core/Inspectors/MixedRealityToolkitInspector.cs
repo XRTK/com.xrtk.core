@@ -25,7 +25,7 @@ namespace XRTK.Inspectors
 
         private void OnEnable()
         {
-            activeProfile = serializedObject.FindProperty("activeProfile");
+            activeProfile = serializedObject.FindProperty(nameof(activeProfile));
             currentPickerWindow = -1;
             checkChange = activeProfile.objectReferenceValue == null;
         }
@@ -39,22 +39,22 @@ namespace XRTK.Inspectors
             EditorGUILayout.PropertyField(activeProfile);
             var changed = EditorGUI.EndChangeCheck();
             var commandName = Event.current.commandName;
-            var allConfigProfiles = ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitConfigurationProfile>();
+            var profiles = ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitRootProfile>();
 
             if (activeProfile.objectReferenceValue == null)
             {
                 if (currentPickerWindow == -1 && checkChange)
                 {
-                    if (allConfigProfiles.Length > 1)
+                    if (profiles.Length > 1)
                     {
                         EditorUtility.DisplayDialog("Attention!", "You must choose a profile for the Mixed Reality Toolkit.", "OK");
                         currentPickerWindow = GUIUtility.GetControlID(FocusType.Passive);
-                        EditorGUIUtility.ShowObjectPicker<MixedRealityToolkitConfigurationProfile>(
-                            GetDefaultProfile(allConfigProfiles), false, string.Empty, currentPickerWindow);
+                        EditorGUIUtility.ShowObjectPicker<MixedRealityToolkitRootProfile>(
+                            GetDefaultProfile(profiles), false, string.Empty, currentPickerWindow);
                     }
-                    else if (allConfigProfiles.Length == 1)
+                    else if (profiles.Length == 1)
                     {
-                        var profile = allConfigProfiles[0];
+                        var profile = profiles[0];
                         activeProfile.objectReferenceValue = profile;
                         changed = true;
                         EditorApplication.delayCall += () =>
@@ -67,9 +67,9 @@ namespace XRTK.Inspectors
                     checkChange = false;
                 }
 
-                if (GUILayout.Button("Create new configuration"))
+                if (GUILayout.Button("Create new settings profile"))
                 {
-                    var profile = CreateInstance(nameof(MixedRealityToolkitConfigurationProfile));
+                    var profile = CreateInstance(nameof(MixedRealityToolkitRootProfile));
                     profile.CreateAsset();
                     activeProfile.objectReferenceValue = profile;
                 }
@@ -100,7 +100,7 @@ namespace XRTK.Inspectors
 
             if (changed)
             {
-                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration((MixedRealityToolkitConfigurationProfile)activeProfile.objectReferenceValue);
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile((MixedRealityToolkitRootProfile)activeProfile.objectReferenceValue);
             }
         }
 
@@ -166,9 +166,9 @@ namespace XRTK.Inspectors
             }
         }
 
-        private static MixedRealityToolkitConfigurationProfile GetDefaultProfile(IEnumerable<MixedRealityToolkitConfigurationProfile> allProfiles)
+        private static MixedRealityToolkitRootProfile GetDefaultProfile(IEnumerable<MixedRealityToolkitRootProfile> profiles)
         {
-            return allProfiles.FirstOrDefault(profile => profile.name == "DefaultMixedRealityToolkitConfigurationProfile");
+            return profiles.FirstOrDefault(profile => profile.name == $"Default{nameof(MixedRealityToolkitRootProfile)}");
         }
     }
 }

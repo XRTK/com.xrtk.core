@@ -83,7 +83,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
             if (EditorGUI.EndChangeCheck() && MixedRealityToolkit.IsInitialized)
             {
-                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
             }
         }
 

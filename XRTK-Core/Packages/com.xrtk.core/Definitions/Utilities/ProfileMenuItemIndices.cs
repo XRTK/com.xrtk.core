@@ -9,6 +9,7 @@ namespace XRTK.Definitions.Utilities
     public enum CreateProfileMenuItemIndices
     {
         Configuration = 0,
+        Platform,
         Camera,
         Input,
         Pointer,

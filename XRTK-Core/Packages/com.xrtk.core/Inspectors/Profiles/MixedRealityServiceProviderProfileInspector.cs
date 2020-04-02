@@ -17,7 +17,7 @@ namespace XRTK.Inspectors.Profiles
     [CustomEditor(typeof(BaseMixedRealityServiceProfile<>))]
     public class MixedRealityServiceProfileInspector : BaseMixedRealityProfileInspector
     {
-        private readonly GUIContent ProfileContent = new GUIContent("Profile", "The configuration profile for this service.");
+        private readonly GUIContent ProfileContent = new GUIContent("Profile", "The settings profile for this service.");
         private ReorderableList configurationList;
         private int currentlySelectedConfigurationOption;
 
@@ -40,7 +40,7 @@ namespace XRTK.Inspectors.Profiles
             var baseType = ThisProfile.GetType().BaseType;
             var genericTypeArgs = baseType?.FindTopmostGenericTypeArguments();
             Debug.Assert(genericTypeArgs != null);
-            ServiceConstraint = genericTypeArgs?[0];
+            ServiceConstraint = genericTypeArgs[0];
             Debug.Assert(ServiceConstraint != null);
 
             configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true)
@@ -55,12 +55,13 @@ namespace XRTK.Inspectors.Profiles
 
         public override void OnInspectorGUI()
         {
+            EditorGUILayout.Space();
             serializedObject.Update();
             configurationList.DoLayoutList();
 
             if (configurations == null || configurations.arraySize == 0)
             {
-                EditorGUILayout.HelpBox($"Register a new Configuration", MessageType.Warning);
+                EditorGUILayout.HelpBox("Register a new Service Configuration", MessageType.Warning);
             }
 
             serializedObject.ApplyModifiedProperties();
@@ -98,10 +99,12 @@ namespace XRTK.Inspectors.Profiles
             var nameProperty = configurationProperty.FindPropertyRelative("name");
             var priorityProperty = configurationProperty.FindPropertyRelative("priority");
             var instanceTypeProperty = configurationProperty.FindPropertyRelative("instancedType");
-            var runtimePlatformProperty = configurationProperty.FindPropertyRelative("runtimePlatform");
-            var configurationProfileProperty = configurationProperty.FindPropertyRelative("configurationProfile");
+            var platformEntriesProperty = configurationProperty.FindPropertyRelative("platformEntries");
+            var configurationProfileProperty = configurationProperty.FindPropertyRelative("profile");
 
             var configurationProfile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
+
+            priorityProperty.intValue = index;
 
             EditorGUI.BeginChangeCheck();
             EditorGUI.PropertyField(nameRect, nameProperty);
@@ -137,8 +140,7 @@ namespace XRTK.Inspectors.Profiles
                 }
             }
 
-            priorityProperty.intValue = index;
-            EditorGUI.PropertyField(runtimeRect, runtimePlatformProperty);
+            EditorGUI.PropertyField(runtimeRect, platformEntriesProperty);
 
             var update = false;
 
@@ -224,7 +226,7 @@ namespace XRTK.Inspectors.Profiles
                 if (MixedRealityToolkit.IsInitialized &&
                     !string.IsNullOrEmpty(instanceTypeProperty.FindPropertyRelative("reference").stringValue))
                 {
-                    MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
+                    MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
                 }
             }
 
@@ -243,16 +245,18 @@ namespace XRTK.Inspectors.Profiles
             var index = configurations.arraySize - 1;
 
             var configuration = configurations.GetArrayElementAtIndex(index);
+
             var nameProperty = configuration.FindPropertyRelative("name");
-            var instancedTypeProperty = configuration.FindPropertyRelative("instancedType");
             var priorityProperty = configuration.FindPropertyRelative("priority");
-            var runtimePlatformProperty = configuration.FindPropertyRelative("runtimePlatform");
-            var configurationProfileProperty = configuration.FindPropertyRelative("configurationProfile");
+            var instancedTypeProperty = configuration.FindPropertyRelative("instancedType");
+            var platformEntriesProperty = configuration.FindPropertyRelative("platformEntries");
+            var configurationProfileProperty = configuration.FindPropertyRelative("profile");
+            var runtimePlatformsProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
 
             nameProperty.stringValue = $"New Configuration {index}";
             instancedTypeProperty.FindPropertyRelative("reference").stringValue = string.Empty;
             priorityProperty.intValue = index;
-            runtimePlatformProperty.intValue = 0;
+            runtimePlatformsProperty.ClearArray();
             configurationProfileProperty.objectReferenceValue = null;
 
             serializedObject.ApplyModifiedProperties();
@@ -269,7 +273,7 @@ namespace XRTK.Inspectors.Profiles
 
             if (MixedRealityToolkit.IsInitialized)
             {
-                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetConfiguration(MixedRealityToolkit.Instance.ActiveProfile);
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
             }
         }
     }

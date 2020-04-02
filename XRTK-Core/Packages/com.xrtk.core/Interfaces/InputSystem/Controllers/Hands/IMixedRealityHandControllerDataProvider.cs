@@ -9,6 +9,11 @@ namespace XRTK.Interfaces.InputSystem.Controllers.Hands
     public interface IMixedRealityHandControllerDataProvider : IMixedRealityControllerDataProvider
     {
         /// <summary>
+        /// Should hand mesh data be read if the platform provides it?
+        /// </summary>
+        bool HandMeshingEnabled { get; }
+
+        /// <summary>
         /// Are hand physics enabled?
         /// </summary>
         bool HandPhysicsEnabled { get; }
@@ -22,10 +27,5 @@ namespace XRTK.Interfaces.InputSystem.Controllers.Hands
         /// Gets the configured hand bounds mode to be used with hand physics.
         /// </summary>
         HandBoundsMode BoundsMode { get; }
-
-        /// <summary>
-        /// Should hand mesh data be read if the platform provides it?
-        /// </summary>
-        bool HandMeshingEnabled { get; }
     }
 }

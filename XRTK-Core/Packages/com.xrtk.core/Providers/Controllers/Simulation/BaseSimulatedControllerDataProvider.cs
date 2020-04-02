@@ -161,10 +161,12 @@ namespace XRTK.Providers.Controllers.Simulation
                     LeftControllerIsTracked = false;
                 }
 
-                if ((LeftControllerIsAlwaysVisible || LeftControllerIsTracked) &&
-                    !TryGetController(Handedness.Left, out _))
+                if (LeftControllerIsAlwaysVisible || LeftControllerIsTracked)
                 {
-                    CreateAndRegisterSimulatedController(Handedness.Left);
+                    if (!TryGetController(Handedness.Left, out _))
+                    {
+                        CreateAndRegisterSimulatedController(Handedness.Left);
+                    }
                 }
                 else
                 {
@@ -186,10 +188,12 @@ namespace XRTK.Providers.Controllers.Simulation
                     RightControllerIsTracked = false;
                 }
 
-                if ((RightControllerIsAlwaysVisible || RightControllerIsTracked) &&
-                    !TryGetController(Handedness.Right, out _))
+                if (RightControllerIsAlwaysVisible || RightControllerIsTracked)
                 {
-                    CreateAndRegisterSimulatedController(Handedness.Right);
+                    if (!TryGetController(Handedness.Right, out _))
+                    {
+                        CreateAndRegisterSimulatedController(Handedness.Right);
+                    }
                 }
                 else
                 {

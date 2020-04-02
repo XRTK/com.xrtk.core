@@ -67,6 +67,11 @@ namespace XRTK.Definitions.InputSystem
                 if (cachedGuid == default &&
                     profileGuid != DefaultGuidString)
                 {
+                    if (string.IsNullOrWhiteSpace(profileGuid))
+                    {
+                        profileGuid = DefaultGuidString;
+                    }
+
                     Guid.TryParse(profileGuid, out cachedGuid);
                 }
 

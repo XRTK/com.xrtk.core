@@ -20,6 +20,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private SerializedProperty controllerVisualizationProfile;
         private SerializedProperty controllerDataProvidersProfile;
         private SerializedProperty controllerMappingProfiles;
+        private SerializedProperty handTrackingProfile;
 
         protected override void OnEnable()
         {
@@ -34,6 +35,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             controllerVisualizationProfile = serializedObject.FindProperty(nameof(controllerVisualizationProfile));
             controllerDataProvidersProfile = serializedObject.FindProperty(nameof(controllerDataProvidersProfile));
             controllerMappingProfiles = serializedObject.FindProperty(nameof(controllerMappingProfiles));
+            handTrackingProfile = serializedObject.FindProperty(nameof(handTrackingProfile));
         }
 
         public override void OnInspectorGUI()
@@ -64,6 +66,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             changed |= RenderProfile(ThisProfile, controllerVisualizationProfile);
             changed |= RenderProfile(ThisProfile, controllerDataProvidersProfile);
             changed |= RenderProfile(ThisProfile, controllerMappingProfiles);
+            changed |= RenderProfile(ThisProfile, handTrackingProfile);
 
             serializedObject.ApplyModifiedProperties();
 

@@ -144,18 +144,19 @@ namespace XRTK.Definitions.InputSystem
             internal set => controllerVisualizationProfile = value;
         }
 
-        //[SerializeField]
-        //[Tooltip("Profile for platform agnostic hand tracking configuration.")]
-        //private MixedRealityHandTrackingProfile handTrackingProfile;
+        [SerializeField]
+        [Tooltip("Global hands configuration settings applied, if not overriden by platform data provider.")]
+        private MixedRealityHandTrackingProfile handTrackingProfile;
 
-        ///// <summary>
-        ///// Profile for platform agnostic hand tracking configuration.
-        ///// </summary>
-        //public MixedRealityHandTrackingProfile HandTrackingProfile
-        //{
-        //    get => handTrackingProfile;
-        //    internal set => handTrackingProfile = value;
-        //}
+        /// <summary>
+        /// Global hands configuration settings applied, if not overriden by platform
+        /// data provider.
+        /// </summary>
+        public MixedRealityHandTrackingProfile HandTrackingProfile
+        {
+            get => handTrackingProfile;
+            internal set => handTrackingProfile = value;
+        }
 
         private IMixedRealityFocusProvider focusProvider;
 

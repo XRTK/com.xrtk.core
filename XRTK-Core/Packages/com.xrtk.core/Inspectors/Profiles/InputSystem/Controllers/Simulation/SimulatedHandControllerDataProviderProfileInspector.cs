@@ -9,6 +9,13 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
     [CustomEditor(typeof(SimulatedHandControllerDataProviderProfile))]
     public class SimulatedHandControllerDataProviderProfileInspector : SimulatedControllerDataProviderProfileInspector
     {
+        // Global hand settings overrides
+        private SerializedProperty handMeshingEnabled;
+        private SerializedProperty handRayType;
+        private SerializedProperty handPhysicsEnabled;
+        private SerializedProperty useTriggers;
+        private SerializedProperty boundsMode;
+
         private SerializedProperty poseDefinitions;
         private SerializedProperty handPoseAnimationSpeed;
 
@@ -16,12 +23,26 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
         {
             base.OnEnable();
 
+            handMeshingEnabled = serializedObject.FindProperty(nameof(handMeshingEnabled));
+            handRayType = serializedObject.FindProperty(nameof(handRayType));
+            handPhysicsEnabled = serializedObject.FindProperty(nameof(handPhysicsEnabled));
+            useTriggers = serializedObject.FindProperty(nameof(useTriggers));
+            boundsMode = serializedObject.FindProperty(nameof(boundsMode));
+
             poseDefinitions = serializedObject.FindProperty(nameof(poseDefinitions));
             handPoseAnimationSpeed = serializedObject.FindProperty(nameof(handPoseAnimationSpeed));
         }
 
         protected override void OnInspectorAdditionalGUI()
         {
+            EditorGUILayout.PropertyField(handMeshingEnabled);
+            EditorGUILayout.PropertyField(handRayType);
+            EditorGUILayout.PropertyField(handPhysicsEnabled);
+            EditorGUILayout.PropertyField(useTriggers);
+            EditorGUILayout.PropertyField(boundsMode);
+            EditorGUILayout.Space();
+
+            EditorGUILayout.LabelField("Hand Simulation", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(poseDefinitions, true);
             EditorGUILayout.PropertyField(handPoseAnimationSpeed);
             EditorGUILayout.Space();

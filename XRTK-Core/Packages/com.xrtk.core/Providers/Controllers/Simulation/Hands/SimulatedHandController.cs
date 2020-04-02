@@ -1,16 +1,14 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
-using XRTK.Interfaces;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Interfaces.InputSystem.Controllers.Hands;
 using XRTK.Interfaces.Providers.Controllers.Simulation;
 using XRTK.Providers.Controllers.Hands;
 using XRTK.Services;
@@ -32,7 +30,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public SimulatedHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
             : base(trackingState, controllerHandedness, inputSource, interactions)
         {
-            simulatedHandControllerDataProvider = GetSimulatedHandControllerDataProvider();
+            simulatedHandControllerDataProvider = MixedRealityToolkit.GetService<ISimulatedHandControllerDataProvider>();
             if (simulatedHandControllerDataProvider == null)
             {
                 Debug.LogError($"Could not get active {nameof(SimulatedHandControllerDataProvider)}.");
@@ -58,7 +56,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             handUpdateStopWatch.Reset();
         }
 
-        private readonly SimulatedHandControllerDataProvider simulatedHandControllerDataProvider;
+        private readonly ISimulatedHandControllerDataProvider simulatedHandControllerDataProvider;
         private readonly SimulationTimeStampStopWatch handUpdateStopWatch;
         private readonly SimulationTimeStampStopWatch lastUpdatedStopWatch;
         private Vector3? lastMousePosition = null;
@@ -135,33 +133,31 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             private set => targetPoseBlending = Mathf.Clamp(value, targetPoseBlending, 1.0f);
         }
 
-        private SimulatedHandControllerDataProvider GetSimulatedHandControllerDataProvider()
-        {
-            List<IMixedRealityService> controllerDataProviders = MixedRealityToolkit.GetActiveServices<IMixedRealityControllerDataProvider>();
-            for (int i = 0; i < controllerDataProviders.Count; i++)
-            {
-                if (controllerDataProviders[i] is SimulatedHandControllerDataProvider simulatedHandControllerDataProvider)
-                {
-                    return simulatedHandControllerDataProvider;
-                }
-            }
-
-            return null;
-        }
-
         /// <inheritdoc />
         public override void UpdateController()
         {
-            // The base implementation will make sure to update interaction
-            // mappings before we try to get simulated data, since simulation
-            // depends on them.
-            base.UpdateController();
+            UpdateSimulationMappings();
 
             // If we have updated simulated data, we can execute the actual
             // base hand controller update.
             if (TryGetSimulatedHandData(out HandData handData))
             {
                 UpdateController(handData);
+            }
+        }
+
+        private void UpdateSimulationMappings()
+        {
+            for (int i = 0; i < Interactions?.Length; i++)
+            {
+                MixedRealityInteractionMapping interactionMapping = Interactions[i];
+                switch (interactionMapping.InputType)
+                {
+                    case DeviceInputType.ButtonPress:
+                        interactionMapping.BoolData = Input.GetKey(interactionMapping.KeyCode);
+                        interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+                        break;
+                }
             }
         }
 

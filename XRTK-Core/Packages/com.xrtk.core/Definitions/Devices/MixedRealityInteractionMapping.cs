@@ -357,29 +357,6 @@ namespace XRTK.Definitions.Devices
             private set => updated = value;
         }
 
-        /// <summary>
-        /// The timestamp when this data was last updated.
-        /// </summary>
-        public float LastUpdatedTime { get; private set; } = 0f;
-
-        /// <summary>
-        /// The current count of changes since the <see cref="LastUpdatedTime"/>.
-        /// </summary>
-        public int Count { get; private set; } = 0;
-
-        [SerializeField]
-        [Tooltip("The rate at which the Count is reset")]
-        private float countResetTimer = 0.25f;
-
-        /// <summary>
-        /// The rate at which the <see cref="Count"/> is reset.
-        /// </summary>
-        public float CountResetTimer
-        {
-            get => countResetTimer;
-            set => countResetTimer = value;
-        }
-
         #endregion Interaction Properties
 
         #region Definition Data Items
@@ -420,7 +397,6 @@ namespace XRTK.Definitions.Devices
                 // use the internal reading for changed so we don't reset it.
                 Updated = activated || value != null;
                 rawData = value;
-                Update();
             }
         }
 
@@ -441,7 +417,6 @@ namespace XRTK.Definitions.Devices
 
                 ControlActivated = boolData != value;
                 boolData = value;
-                Update();
             }
         }
 
@@ -502,7 +477,6 @@ namespace XRTK.Definitions.Devices
 
                 Updated = vector2Data != newValue || !newValue.x.Equals(0f) && !newValue.y.Equals(0f);
                 vector2Data = newValue;
-                Update();
             }
         }
 
@@ -523,7 +497,6 @@ namespace XRTK.Definitions.Devices
 
                 Updated = positionData != value || !value.x.Equals(0f) && !value.y.Equals(0f) && !value.z.Equals(0f);
                 positionData = value;
-                Update();
             }
         }
 
@@ -544,7 +517,6 @@ namespace XRTK.Definitions.Devices
 
                 Updated = rotationData != value || !value.x.Equals(0f) && !value.y.Equals(0f) && !value.z.Equals(0f) && value.w.Equals(1f);
                 rotationData = value;
-                Update();
             }
         }
 
@@ -566,24 +538,9 @@ namespace XRTK.Definitions.Devices
                 poseData = value;
                 positionData = poseData.Position;
                 rotationData = poseData.Rotation;
-                Update();
             }
         }
 
         #endregion Data Properties
-
-        private void Update()
-        {
-            LastUpdatedTime = Time.time;
-            Count++;
-        }
-
-        internal void Tick()
-        {
-            if (Time.time - LastUpdatedTime > CountResetTimer && Count > 0)
-            {
-                // TODO Check input action profile triggers then raise events based on them.
-            }
-        }
     }
 }

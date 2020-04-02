@@ -10,6 +10,37 @@ using XRTK.Inspectors.Extensions;
 
 namespace XRTK.Inspectors.PropertyDrawers
 {
+    /// <summary>
+    /// Draws the <see cref="MixedRealityInputAction"/> property field in custom inspectors.
+    /// </summary>
+    /// <example>
+    /// <code language="csharp"><![CDATA[
+    /// [CustomEditor(typeof(CustomScript))]
+    /// public class CustomInspector : Editor
+    /// {
+    ///     private readonly MixedRealityInputActionDropdown inputActionDropdown = new MixedRealityInputActionDropdown();
+    /// 
+    ///     private SerializedProperty testAction;
+    ///     private SerializedProperty test2Action;
+    /// 
+    ///     private void OnEnable()
+    ///     {
+    ///         testAction = serializedObject.FindProperty(nameof(testAction));
+    ///         test2Action = serializedObject.FindProperty(nameof(test2Action));
+    ///     }
+    /// 
+    ///     public override void OnInspectorGUI()
+    ///     {
+    ///         inputActionDropdown.OnGui(GUIContent.none, testAction);
+    ///         inputActionDropdown.OnGui(GUIContent.none, test2Action, AxisType.DualAxis);
+    /// 
+    ///         // The same as:
+    ///         EditorGUILayout.PropertyField(testAction);
+    ///         EditorGUILayout.PropertyField(test2Action);
+    ///     }
+    /// }
+    /// ]]></code>
+    /// </example>
     public class MixedRealityInputActionDropdown
     {
         private static readonly string DefaultGuidString = default(Guid).ToString("N");

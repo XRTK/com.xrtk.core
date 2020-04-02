@@ -12,7 +12,6 @@ namespace XRTK.Attributes
     /// This will filter the dropdown items to only display actions that match the <see cref="AxisConstraint"/>
     /// </summary>
     /// <example>
-    /// <para>Exclude a specific type from being selected:</para>
     /// <code language="csharp"><![CDATA[
     /// [SerializeField]
     /// [AxisConstraint(AxisType.DualAxis)]

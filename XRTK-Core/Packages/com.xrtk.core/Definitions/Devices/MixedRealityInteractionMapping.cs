@@ -192,6 +192,7 @@ namespace XRTK.Definitions.Devices
         public uint Id => id;
 
         [SerializeField]
+        [Tooltip("The human readable description of the interaction mapping.")]
         private string description;
 
         /// <summary>
@@ -200,6 +201,7 @@ namespace XRTK.Definitions.Devices
         public string Description => description;
 
         [SerializeField]
+        [Tooltip("The axis type of the button, e.g. Analogue, Digital, etc.")]
         private AxisType axisType;
 
         /// <summary>

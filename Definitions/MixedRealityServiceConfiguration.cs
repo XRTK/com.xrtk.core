@@ -125,7 +125,6 @@ namespace XRTK.Definitions
 
                             if (platformType == null)
                             {
-                                Debug.LogError($"Failed to resolve {platformEntries.RuntimePlatforms[j]} for {name}");
                                 continue;
                             }
 

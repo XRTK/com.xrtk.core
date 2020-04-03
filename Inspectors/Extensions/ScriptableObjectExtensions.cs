@@ -45,12 +45,12 @@ namespace XRTK.Inspectors.Extensions
         {
             var name = string.IsNullOrEmpty(fileName) ? $"{scriptableObject.GetType().Name}" : fileName;
 
-            if (string.IsNullOrEmpty(path))
+            if (string.IsNullOrWhiteSpace(path))
             {
                 path = MixedRealityPreferences.ProfileGenerationPath;
             }
 
-            if (Path.GetExtension(path) != string.Empty)
+            if (!string.IsNullOrWhiteSpace(Path.GetExtension(path)))
             {
                 var subtractedPath = path.Substring(path.LastIndexOf("/", StringComparison.Ordinal));
                 path = path.Replace(subtractedPath, string.Empty);
@@ -73,10 +73,9 @@ namespace XRTK.Inspectors.Extensions
 
             if (ping)
             {
-                EditorUtility.FocusProjectWindow();
-
                 EditorApplication.delayCall += () =>
                 {
+                    EditorUtility.FocusProjectWindow();
                     EditorGUIUtility.PingObject(scriptableObject);
                     Selection.activeObject = scriptableObject;
                 };

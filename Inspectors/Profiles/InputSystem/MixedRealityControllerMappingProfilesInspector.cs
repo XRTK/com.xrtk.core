@@ -46,7 +46,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                                     "You'll want to define all your Input Actions and Controller Data Providers first so you can wire up actions to hardware sensors, controllers, gestures, and other input devices.", MessageType.Info);
             EditorGUILayout.Space();
 
-            ThisProfile.CheckProfileLock();
             serializedObject.Update();
 
             EditorGUILayout.LabelField("Select a profile type:");
@@ -70,8 +69,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 if (Event.current.commandName == TypeReferencePropertyDrawer.TypeReferenceUpdated)
                 {
                     controllerMappingProfiles.arraySize += 1;
-                    var newItem = controllerMappingProfiles.GetArrayElementAtIndex(controllerMappingProfiles.arraySize - 1);
-                    CreateNewProfileInstance(ThisProfile, newItem, TypeReferencePropertyDrawer.SelectedType);
+                    var mappingProfileProperty = controllerMappingProfiles.GetArrayElementAtIndex(controllerMappingProfiles.arraySize - 1);
+                    ThisProfile.CreateNewProfileInstance(mappingProfileProperty, TypeReferencePropertyDrawer.SelectedType);
 
                     TypeReferencePropertyDrawer.SelectedType = null;
                     TypeReferencePropertyDrawer.SelectedReference = null;
@@ -87,7 +86,11 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 var controllerProfile = controllerMappingProfiles.GetArrayElementAtIndex(i);
 
                 EditorGUILayout.BeginHorizontal();
-                changed |= RenderProfile(ThisProfile, controllerProfile, GUIContent.none, false);
+                EditorGUI.BeginChangeCheck();
+                MixedRealityProfilePropertyDrawer.DrawCloneButtons = false;
+                MixedRealityProfilePropertyDrawer.ProfileTypeOverride = typeof(BaseMixedRealityControllerMappingProfile);
+                EditorGUILayout.PropertyField(controllerProfile, GUIContent.none);
+                changed |= EditorGUI.EndChangeCheck();
 
                 if (GUILayout.Button(RemoveMappingDefinitionContent, EditorStyles.miniButtonRight, GUILayout.Width(24f)))
                 {

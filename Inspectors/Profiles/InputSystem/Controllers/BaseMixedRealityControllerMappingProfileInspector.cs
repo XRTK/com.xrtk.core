@@ -6,7 +6,6 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Inspectors.Utilities;
 using XRTK.Definitions.Controllers;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
@@ -50,8 +49,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
             var deviceName = controllerMappingProfile.ControllerType == SupportedControllerType.None ? "Custom Device" : controllerMappingProfile.ControllerType.ToString();
             EditorGUILayout.LabelField($"{deviceName} Mappings", EditorStyles.boldLabel);
-
-            controllerMappingProfile.CheckProfileLock(false);
 
             if (controllerButtonStyle == null)
             {
@@ -126,7 +123,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                 if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
                 {
                     serializedObject.ApplyModifiedProperties();
-                    EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, controllerMappingProfile.ControllerType, interactions, handedness, MixedRealityPreferences.LockProfiles && !ThisProfile.IsEditable);
+                    EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, controllerMappingProfile.ControllerType, interactions, handedness);
                 }
 
                 if (handedness != Handedness.Left)

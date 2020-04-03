@@ -115,15 +115,10 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 return;
             }
 
-            inputActionRulesProfile.CheckProfileLock();
-
-            var isGuiLocked = !(MixedRealityPreferences.LockProfiles && !inputActionRulesProfile.IsEditable);
-            GUI.enabled = isGuiLocked;
-
             serializedObject.Update();
 
             selectedBaseActionId = RenderBaseInputAction(selectedBaseActionId, out currentBaseAction);
-            GUI.enabled = isGuiLocked && currentBaseAction != MixedRealityInputAction.None;
+            GUI.enabled = currentBaseAction != MixedRealityInputAction.None;
             RenderCriteriaField(currentBaseAction);
 
             if (selectedBaseActionId == selectedRuleActionId)
@@ -135,8 +130,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             EditorGUILayout.Space();
 
-            GUI.enabled = isGuiLocked &&
-                          !RuleExists() &&
+            GUI.enabled = !RuleExists() &&
                           currentBaseAction != MixedRealityInputAction.None &&
                           currentRuleAction != MixedRealityInputAction.None &&
                           currentBaseAction.AxisConstraint != AxisType.None &&
@@ -147,8 +141,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 AddRule();
                 ResetCriteria();
             }
-
-            GUI.enabled = isGuiLocked;
 
             EditorGUILayout.Space();
 

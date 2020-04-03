@@ -46,28 +46,21 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             ThisProfile.CheckProfileLock();
             serializedObject.Update();
 
-            bool changed = false;
-
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.PropertyField(focusProviderType);
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                changed = true;
-            }
-
-            changed |= RenderProfile(ThisProfile, inputActionsProfile);
-            changed |= RenderProfile(ThisProfile, inputActionRulesProfile);
-            changed |= RenderProfile(ThisProfile, pointerProfile);
-            changed |= RenderProfile(ThisProfile, gesturesProfile);
-            changed |= RenderProfile(ThisProfile, speechCommandsProfile);
-            changed |= RenderProfile(ThisProfile, controllerVisualizationProfile);
-            changed |= RenderProfile(ThisProfile, controllerDataProvidersProfile);
-            changed |= RenderProfile(ThisProfile, controllerMappingProfiles);
+            EditorGUILayout.PropertyField(inputActionsProfile);
+            EditorGUILayout.PropertyField(inputActionRulesProfile);
+            EditorGUILayout.PropertyField(pointerProfile);
+            EditorGUILayout.PropertyField(gesturesProfile);
+            EditorGUILayout.PropertyField(speechCommandsProfile);
+            EditorGUILayout.PropertyField(controllerVisualizationProfile);
+            EditorGUILayout.PropertyField(controllerDataProvidersProfile);
+            EditorGUILayout.PropertyField(controllerMappingProfiles);
 
             serializedObject.ApplyModifiedProperties();
 
-            if (changed && MixedRealityToolkit.IsInitialized)
+            if (EditorGUI.EndChangeCheck() &&
+                MixedRealityToolkit.IsInitialized)
             {
                 EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
             }

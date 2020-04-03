@@ -87,7 +87,11 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 var controllerProfile = controllerMappingProfiles.GetArrayElementAtIndex(i);
 
                 EditorGUILayout.BeginHorizontal();
-                changed |= RenderProfile(ThisProfile, controllerProfile, GUIContent.none, false);
+                EditorGUI.BeginChangeCheck();
+                MixedRealityProfilePropertyDrawer.DrawCloneButtons = false;
+                MixedRealityProfilePropertyDrawer.ProfileTypeOverride = typeof(BaseMixedRealityControllerMappingProfile);
+                EditorGUILayout.PropertyField(controllerProfile, GUIContent.none);
+                changed |= EditorGUI.EndChangeCheck();
 
                 if (GUILayout.Button(RemoveMappingDefinitionContent, EditorStyles.miniButtonRight, GUILayout.Width(24f)))
                 {

@@ -66,13 +66,6 @@ namespace XRTK.Inspectors
 
                     checkChange = false;
                 }
-
-                if (GUILayout.Button("Create new settings profile"))
-                {
-                    var profile = CreateInstance(nameof(MixedRealityToolkitRootProfile));
-                    profile.CreateAsset();
-                    activeProfile.objectReferenceValue = profile;
-                }
             }
 
             if (EditorGUIUtility.GetObjectPickerControlID() == currentPickerWindow)

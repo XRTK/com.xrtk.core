@@ -3,7 +3,6 @@
 
 using UnityEditor;
 using XRTK.Definitions.SpatialAwarenessSystem;
-using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles.SpatialAwareness
 {
@@ -29,7 +28,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             EditorGUILayout.HelpBox("Spatial Awareness can enhance your experience by enabling objects to interact with the real world.\n\nBelow is a list of registered Spatial Observers that can gather data about your environment.", MessageType.Info);
             EditorGUILayout.Space();
 
-            ThisProfile.CheckProfileLock();
             serializedObject.Update();
             EditorGUILayout.PropertyField(meshDisplayOption);
             serializedObject.ApplyModifiedProperties();

@@ -59,6 +59,7 @@ namespace XRTK.Inspectors.Utilities
 
         public static void CopySerializedValues(this BaseMixedRealityProfile target, BaseMixedRealityProfile source)
         {
+            Debug.Assert(target != null);
             var serializedObject = new SerializedObject(target);
             Undo.RecordObject(target, "Paste Profile Values");
             var isEditable = serializedObject.FindProperty("isEditable").boolValue;

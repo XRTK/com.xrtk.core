@@ -3,7 +3,6 @@
 
 using UnityEditor;
 using XRTK.Definitions.InputSystem;
-using XRTK.Inspectors.Utilities;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
@@ -42,8 +41,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             EditorGUILayout.LabelField("Input System Profile", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("The Input System Profile helps developers configure input no matter what platform you're building for.", MessageType.Info);
+            EditorGUILayout.Space();
 
-            ThisProfile.CheckProfileLock();
             serializedObject.Update();
 
             EditorGUI.BeginChangeCheck();

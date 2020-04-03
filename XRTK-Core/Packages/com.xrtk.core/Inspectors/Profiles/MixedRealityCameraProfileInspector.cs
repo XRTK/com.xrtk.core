@@ -4,7 +4,6 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
-using XRTK.Inspectors.Utilities;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
@@ -59,7 +58,6 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.LabelField("Camera Profile", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("The Camera Profile helps tweak camera settings no matter what platform you're building for.", MessageType.Info);
 
-            ThisProfile.CheckProfileLock();
             serializedObject.Update();
 
             EditorGUI.BeginChangeCheck();

@@ -6,7 +6,6 @@ using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.Utilities;
-using XRTK.Services;
 using XRTK.Utilities.Async;
 
 namespace XRTK.Inspectors.Profiles
@@ -16,8 +15,6 @@ namespace XRTK.Inspectors.Profiles
     /// </summary>
     public abstract class BaseMixedRealityProfileInspector : Editor
     {
-        private const string IsEditableProfileProperty = "isEditable";
-
         private static SerializedObject targetProfile;
         private static BaseMixedRealityProfile currentlySelectedProfile;
         private static BaseMixedRealityProfile profileSource;
@@ -59,16 +56,6 @@ namespace XRTK.Inspectors.Profiles
             PasteProfileValues();
             Selection.activeObject = currentlySelectedProfile;
             EditorGUIUtility.PingObject(currentlySelectedProfile);
-
-            if (!profileSource.IsEditable)
-            {
-                // For now we only replace it if it's the master settings profile.
-                // Sub-profiles are easy to update in the master settings inspector.
-                if (currentlySelectedProfile is MixedRealityToolkitRootProfile rootProfile)
-                {
-                    MixedRealityToolkit.Instance.ActiveProfile = rootProfile;
-                }
-            }
         }
 
         [MenuItem("CONTEXT/BaseMixedRealityProfile/Copy Profile Values", false, 1)]
@@ -83,7 +70,7 @@ namespace XRTK.Inspectors.Profiles
             return currentlySelectedProfile != null &&
                    targetProfile != null &&
                    profileSource != null &&
-                   targetProfile.FindProperty(IsEditableProfileProperty).boolValue &&
+                   targetProfile.FindProperty("isEditable").boolValue &&
                    currentlySelectedProfile.GetType() == profileSource.GetType();
         }
 

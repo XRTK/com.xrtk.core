@@ -5,7 +5,6 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
-using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.PropertyDrawers
@@ -42,13 +41,12 @@ namespace XRTK.Inspectors.PropertyDrawers
                 ParentProfileOverride = null;
             }
 
-
             if (property.objectReferenceValue != null)
             {
                 profile = property.objectReferenceValue as BaseMixedRealityProfile;
             }
 
-            Debug.Assert(!(profile is MixedRealityToolkitRootProfile) && parent != null || profile is MixedRealityToolkitRootProfile && parent == null);
+            Debug.Assert(profile == null || !(profile is MixedRealityToolkitRootProfile) && parent != null || profile is MixedRealityToolkitRootProfile && parent == null);
 
             var propertyLabel = EditorGUI.BeginProperty(position, label, property);
             var profileType = ProfileTypeOverride ?? fieldInfo.FieldType;

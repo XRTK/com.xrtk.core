@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
 using XRTK.Inspectors.Utilities;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
@@ -47,7 +46,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                                     "You'll want to define all your Input Actions and Controller Data Providers first so you can wire up actions to hardware sensors, controllers, gestures, and other input devices.", MessageType.Info);
             EditorGUILayout.Space();
 
-            ThisProfile.CheckProfileLock();
             serializedObject.Update();
 
             EditorGUILayout.LabelField("Select a profile type:");

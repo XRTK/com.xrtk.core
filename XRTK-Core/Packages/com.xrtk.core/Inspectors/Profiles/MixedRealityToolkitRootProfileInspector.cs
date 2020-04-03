@@ -5,8 +5,6 @@ using UnityEditor;
 using UnityEditor.Experimental.SceneManagement;
 using UnityEngine;
 using XRTK.Definitions;
-using XRTK.Inspectors.Extensions;
-using XRTK.Inspectors.PropertyDrawers;
 using XRTK.Inspectors.Utilities;
 using XRTK.Services;
 
@@ -137,33 +135,6 @@ namespace XRTK.Inspectors.Profiles
             serializedObject.Update();
 
             if (!MixedRealityToolkit.IsInitialized) { return; }
-
-            if (!rootProfile.IsEditable)
-            {
-                EditorGUILayout.HelpBox("The Mixed Reality Toolkit's core SDK profiles can be used to get up and running quickly.\n\n" +
-                                        "You can use the default profiles provided, copy and customize the default profiles, or create your own.", MessageType.Warning);
-                EditorGUILayout.BeginHorizontal();
-
-                if (GUILayout.Button("Clone & Customize"))
-                {
-                    CreateCloneProfile();
-                }
-
-                if (GUILayout.Button("Create new profiles"))
-                {
-                    var profile = CreateInstance(nameof(MixedRealityToolkitRootProfile));
-                    var newProfile = profile.CreateAsset() as MixedRealityToolkitRootProfile;
-                    MixedRealityToolkit.Instance.ActiveProfile = newProfile;
-                }
-
-                EditorGUILayout.EndHorizontal();
-            }
-
-            // We don't call the CheckLock method so won't get a duplicate message.
-            if (MixedRealityPreferences.LockProfiles && !ThisProfile.IsEditable)
-            {
-                GUI.enabled = false;
-            }
 
             var previousLabelWidth = EditorGUIUtility.labelWidth;
             EditorGUIUtility.labelWidth = 160f;

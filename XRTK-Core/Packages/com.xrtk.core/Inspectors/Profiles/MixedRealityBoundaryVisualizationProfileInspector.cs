@@ -4,7 +4,6 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.BoundarySystem;
-using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -73,7 +72,6 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.HelpBox("Boundary visualizations can help users stay oriented and comfortable in the experience.", MessageType.Info);
             EditorGUILayout.Space();
 
-            ThisProfile.CheckProfileLock();
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(boundaryHeight);

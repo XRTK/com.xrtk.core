@@ -3,7 +3,6 @@
 
 using UnityEditor;
 using XRTK.Definitions.InputSystem;
-using XRTK.Inspectors.Utilities;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
@@ -40,31 +39,24 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             EditorGUILayout.LabelField("Input System Profile", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("The Input System Profile helps developers configure input no matter what platform you're building for.", MessageType.Info);
+            EditorGUILayout.Space();
 
-            ThisProfile.CheckProfileLock();
             serializedObject.Update();
-
-            bool changed = false;
 
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.PropertyField(focusProviderType);
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                changed = true;
-            }
-
-            changed |= RenderProfile(ThisProfile, inputActionsProfile);
-            changed |= RenderProfile(ThisProfile, pointerProfile);
-            changed |= RenderProfile(ThisProfile, gesturesProfile);
-            changed |= RenderProfile(ThisProfile, speechCommandsProfile);
-            changed |= RenderProfile(ThisProfile, controllerVisualizationProfile);
-            changed |= RenderProfile(ThisProfile, controllerDataProvidersProfile);
-            changed |= RenderProfile(ThisProfile, controllerMappingProfiles);
+            EditorGUILayout.PropertyField(inputActionsProfile);
+            EditorGUILayout.PropertyField(pointerProfile);
+            EditorGUILayout.PropertyField(gesturesProfile);
+            EditorGUILayout.PropertyField(speechCommandsProfile);
+            EditorGUILayout.PropertyField(controllerVisualizationProfile);
+            EditorGUILayout.PropertyField(controllerDataProvidersProfile);
+            EditorGUILayout.PropertyField(controllerMappingProfiles);
 
             serializedObject.ApplyModifiedProperties();
 
-            if (changed && MixedRealityToolkit.IsInitialized)
+            if (EditorGUI.EndChangeCheck() &&
+                MixedRealityToolkit.IsInitialized)
             {
                 EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
             }

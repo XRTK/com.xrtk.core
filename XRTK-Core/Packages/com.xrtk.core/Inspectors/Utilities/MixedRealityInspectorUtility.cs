@@ -8,6 +8,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Services;
 using XRTK.Utilities.Editor;
 using Object = UnityEngine.Object;
 
@@ -91,7 +92,7 @@ namespace XRTK.Inspectors.Utilities
             {
                 if (darkThemeLogo == null)
                 {
-                    darkThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/StandardAssets/Textures/XRTK_Logo.png", typeof(Texture2D));
+                    darkThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/XRTK_Logo.png", typeof(Texture2D));
                 }
 
                 return darkThemeLogo;
@@ -106,7 +107,7 @@ namespace XRTK.Inspectors.Utilities
             {
                 if (lightThemeLogo == null)
                 {
-                    lightThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/StandardAssets/Textures/XRTK_Logo.png", typeof(Texture2D));
+                    lightThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/XRTK_Logo.png", typeof(Texture2D));
                 }
 
                 return lightThemeLogo;
@@ -131,24 +132,6 @@ namespace XRTK.Inspectors.Utilities
         }
 
         #endregion Logos
-
-        #region Utilities
-
-        /// <summary>
-        /// Checks if the profile is locked and displays a warning.
-        /// </summary>
-        /// <param name="target">The <see cref="BaseMixedRealityProfile"/> to check.</param>
-        /// <param name="disableInspector">Optional value to disable the inspector if the profile is also locked.</param>
-        public static void CheckProfileLock(this BaseMixedRealityProfile target, bool disableInspector = true)
-        {
-            if (MixedRealityPreferences.LockProfiles && !target.IsEditable)
-            {
-                EditorGUILayout.HelpBox("This profile is part of the default set from the Mixed Reality Toolkit SDK. You can make a copy of this profile, and customize it if needed.", MessageType.Warning);
-                GUI.enabled = !disableInspector;
-            }
-        }
-
-        #endregion Utilities
 
         #region Gizmos
 

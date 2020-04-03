@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.IO;
 using UnityEditor;
 using UnityEditor.Build;
@@ -17,11 +18,12 @@ namespace XRTK.Utilities.Editor
     {
         private const string IgnoreKey = "_MixedRealityToolkit_Editor_IgnoreSettingsPrompts";
         private const string SessionKey = "_MixedRealityToolkit_Editor_ShownSettingsPrompts";
-        private const string PathFinder = "/Utilities/Editor/PathFinder.cs";
+        private const string CorePathFinder = "/Utilities/Editor/CorePathFinder.cs";
 
         /// <summary>
         /// The absolute folder path to the Mixed Reality Toolkit in your project.
         /// </summary>
+        [Obsolete("Use PathFinderUtility.XRTK_Core_AbsoluteFolderPath instead.")]
         public static string MixedRealityToolkit_AbsoluteFolderPath
         {
             get
@@ -40,6 +42,7 @@ namespace XRTK.Utilities.Editor
         /// <summary>
         /// The relative folder path to the Mixed Reality Toolkit in relation to the "Assets" or "Packages" folders.
         /// </summary>
+        [Obsolete("Use PathFinderUtility.XRTK_Core_RelativeFolderPath instead.")]
         public static string MixedRealityToolkit_RelativeFolderPath
         {
             get
@@ -49,8 +52,8 @@ namespace XRTK.Utilities.Editor
                     mixedRealityToolkit_RelativeFolderPath =
                         AssetDatabase.GetAssetPath(
                             MonoScript.FromScriptableObject(
-                                ScriptableObject.CreateInstance<PathFinder>()))
-                                    .Replace(PathFinder, string.Empty);
+                                ScriptableObject.CreateInstance<CorePathFinder>()))
+                                    .Replace(CorePathFinder, string.Empty);
                 }
 
                 return mixedRealityToolkit_RelativeFolderPath;

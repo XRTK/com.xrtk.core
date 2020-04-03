@@ -8,7 +8,6 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
-using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
 {
@@ -83,6 +82,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             EditorGUILayout.LabelField("Gesture Input", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("This gesture map is any and all movements of part the user's body, especially a hand or the head, that raise actions through the input system.\n\nNote: Defined controllers can look up the list of gestures and raise the events based on specific criteria.", MessageType.Info);
+            EditorGUILayout.Space();
 
             if (inputSystemProfile == null)
             {
@@ -96,10 +96,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 return;
             }
 
-            gesturesProfile.CheckProfileLock();
             serializedObject.Update();
 
-            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Defined Recognizable Gestures", EditorStyles.boldLabel);
             RenderList(gestures);
             serializedObject.ApplyModifiedProperties();

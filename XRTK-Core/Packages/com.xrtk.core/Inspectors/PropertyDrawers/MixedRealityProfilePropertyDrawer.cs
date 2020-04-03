@@ -42,10 +42,13 @@ namespace XRTK.Inspectors.PropertyDrawers
                 ParentProfileOverride = null;
             }
 
+
             if (property.objectReferenceValue != null)
             {
                 profile = property.objectReferenceValue as BaseMixedRealityProfile;
             }
+
+            Debug.Assert(!(profile is MixedRealityToolkitRootProfile) && parent != null || profile is MixedRealityToolkitRootProfile && parent == null);
 
             var propertyLabel = EditorGUI.BeginProperty(position, label, property);
             var profileType = ProfileTypeOverride ?? fieldInfo.FieldType;
@@ -82,7 +85,7 @@ namespace XRTK.Inspectors.PropertyDrawers
 
                 if (GUI.Button(buttonRect, buttonContent, EditorStyles.miniButton))
                 {
-                    selectedProfile = CreateNewProfileInstance(property, profileType, hasSelection);
+                    selectedProfile = parent.CreateNewProfileInstance(property, profileType, hasSelection);
                 }
             }
 
@@ -92,57 +95,20 @@ namespace XRTK.Inspectors.PropertyDrawers
                 if (selectedProfile.ParentProfile == null ||
                     selectedProfile.ParentProfile != parent)
                 {
-                    if (parent != null)
+                    if (parent != null &&
+                        parent != selectedProfile)
                     {
-                        Debug.Log($"Set parent: {parent.name}.{selectedProfile.name}");
                         selectedProfile.ParentProfile = parent;
                     }
                 }
 
                 Debug.Assert(selectedProfile.ParentProfile != null);
+                Debug.Assert(selectedProfile.ParentProfile != selectedProfile);
             }
 
             DrawCloneButtons = true;
             ProfileTypeOverride = null;
             EditorGUI.EndProperty();
-        }
-
-        private BaseMixedRealityProfile CreateNewProfileInstance(SerializedProperty property, Type profileType, bool clone)
-        {
-            ScriptableObject instance;
-
-            if (profileType == null)
-            {
-                if (!string.IsNullOrWhiteSpace(property.type))
-                {
-                    var profileTypeName = property.type?.Replace("PPtr<$", string.Empty).Replace(">", string.Empty);
-                    instance = ScriptableObject.CreateInstance(profileTypeName);
-                }
-                else
-                {
-                    Debug.LogError("No property type found!");
-                    return null;
-                }
-            }
-            else
-            {
-                instance = ScriptableObject.CreateInstance(profileType);
-            }
-
-            var assetPath = AssetDatabase.GetAssetPath(parent);
-            var newProfile = instance.CreateAsset(assetPath) as BaseMixedRealityProfile;
-            Debug.Assert(newProfile != null);
-
-            if (clone &&
-                property.objectReferenceValue != null)
-            {
-                var oldProfile = property.objectReferenceValue as BaseMixedRealityProfile;
-                newProfile.CopySerializedValues(oldProfile);
-            }
-
-            newProfile.ParentProfile = parent;
-            property.objectReferenceValue = newProfile;
-            return newProfile;
         }
     }
 }

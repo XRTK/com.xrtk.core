@@ -1,11 +1,62 @@
-﻿using UnityEditor;
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.﻿
+
+using System;
+using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Inspectors.Extensions;
 
 namespace XRTK.Inspectors.Utilities
 {
     public static class BaseMixedRealityProfileInspectorExtension
     {
+        /// <summary>
+        /// Creates a new <see cref="BaseMixedRealityProfile"/> instance and sets it to the <see cref="SerializedProperty"/>.
+        /// </summary>
+        /// <param name="parentProfile"></param>
+        /// <param name="property"></param>
+        /// <param name="profileType"></param>
+        /// <param name="clone"></param>
+        public static BaseMixedRealityProfile CreateNewProfileInstance(this BaseMixedRealityProfile parentProfile, SerializedProperty property, Type profileType, bool clone = false)
+        {
+            Debug.Assert(parentProfile != null);
+            ScriptableObject instance;
+
+            if (profileType == null)
+            {
+                if (!string.IsNullOrWhiteSpace(property.type))
+                {
+                    var profileTypeName = property.type?.Replace("PPtr<$", string.Empty).Replace(">", string.Empty);
+                    instance = ScriptableObject.CreateInstance(profileTypeName);
+                }
+                else
+                {
+                    Debug.LogError("No property type found!");
+                    return null;
+                }
+            }
+            else
+            {
+                instance = ScriptableObject.CreateInstance(profileType);
+            }
+
+            var assetPath = AssetDatabase.GetAssetPath(parentProfile);
+            var newProfile = instance.CreateAsset(assetPath) as BaseMixedRealityProfile;
+            Debug.Assert(newProfile != null);
+
+            if (clone &&
+                property.objectReferenceValue != null)
+            {
+                var oldProfile = property.objectReferenceValue as BaseMixedRealityProfile;
+                newProfile.CopySerializedValues(oldProfile);
+            }
+
+            newProfile.ParentProfile = parentProfile;
+            property.objectReferenceValue = newProfile;
+            return newProfile;
+        }
+
         public static void CopySerializedValues(this BaseMixedRealityProfile target, BaseMixedRealityProfile source)
         {
             var serializedObject = new SerializedObject(target);

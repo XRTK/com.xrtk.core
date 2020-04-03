@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Definitions;
 using XRTK.Inspectors.Utilities;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
@@ -70,8 +71,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 if (Event.current.commandName == TypeReferencePropertyDrawer.TypeReferenceUpdated)
                 {
                     controllerMappingProfiles.arraySize += 1;
-                    var newItem = controllerMappingProfiles.GetArrayElementAtIndex(controllerMappingProfiles.arraySize - 1);
-                    CreateNewProfileInstance(ThisProfile, newItem, TypeReferencePropertyDrawer.SelectedType);
+                    var mappingProfileProperty = controllerMappingProfiles.GetArrayElementAtIndex(controllerMappingProfiles.arraySize - 1);
+                    ThisProfile.CreateNewProfileInstance(mappingProfileProperty, TypeReferencePropertyDrawer.SelectedType);
 
                     TypeReferencePropertyDrawer.SelectedType = null;
                     TypeReferencePropertyDrawer.SelectedReference = null;

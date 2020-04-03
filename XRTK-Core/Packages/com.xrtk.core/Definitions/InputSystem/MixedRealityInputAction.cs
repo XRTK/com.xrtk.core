@@ -48,7 +48,7 @@ namespace XRTK.Definitions.InputSystem
         /// <summary>
         /// Default input action that doesn't represent any defined action.
         /// </summary>
-        public static MixedRealityInputAction None { get; } = new MixedRealityInputAction(default, 0, "None");
+        public static readonly MixedRealityInputAction None = new MixedRealityInputAction(default, 0, "None");
 
         private static readonly string DefaultGuidString = default(Guid).ToString("N");
 

@@ -3,7 +3,6 @@
 
 using UnityEditor;
 using XRTK.Definitions.NetworkingSystem;
-using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles
 {
@@ -17,8 +16,6 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.LabelField("Network System Profile", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("The Network System Profile helps developers configure networking messages no matter what platform you're building for.", MessageType.Info);
             EditorGUILayout.Space();
-
-            ThisProfile.CheckProfileLock();
 
             base.OnInspectorGUI();
         }

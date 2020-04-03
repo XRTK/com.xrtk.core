@@ -47,16 +47,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
-
-            if (ThisProfile.ParentProfile != null &&
-                GUILayout.Button($"Back to {ThisProfile.ParentProfile.name}"))
-            {
-                Selection.activeObject = ThisProfile.ParentProfile;
-            }
+            RenderHeader();
 
             EditorGUILayout.Space();
-            ThisProfile.CheckProfileLock();
 
             serializedObject.Update();
 

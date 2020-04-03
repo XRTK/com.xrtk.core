@@ -35,8 +35,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             EditorGUILayout.LabelField("Hand Tracking Options", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("This profile defines global hand tracking options applied to all platforms that support hand tracking. You may override these globals per platform in the platform's data provider profile.", MessageType.Info);
+            EditorGUILayout.Space();
 
-            ThisProfile.CheckProfileLock();
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(handMeshingEnabled);

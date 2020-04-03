@@ -81,7 +81,6 @@ namespace XRTK.Inspectors
 
         private static Vector2 horizontalScrollPosition;
 
-        private bool isLocked = false;
         private SerializedProperty currentInteractionList;
 
         private Handedness currentHandedness;
@@ -97,7 +96,7 @@ namespace XRTK.Inspectors
 
         private bool IsCustomController => currentControllerType == SupportedControllerType.GenericOpenVR ||
                                            currentControllerType == SupportedControllerType.GenericUnity || currentControllerType == SupportedControllerType.Hand;
-        private static string EditorWindowOptionsPath => $"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/Inspectors/Data/EditorWindowOptions.json";
+        private static string EditorWindowOptionsPath => $"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/Inspectors/Data/EditorWindowOptions.json";
 
         private void OnFocus()
         {
@@ -212,7 +211,7 @@ namespace XRTK.Inspectors
             #endregion  Interaction Constraint Setup
         }
 
-        public static void Show(BaseMixedRealityControllerMappingProfile profile, SupportedControllerType controllerType, SerializedProperty interactionsList, Handedness handedness = Handedness.None, bool isLocked = false)
+        public static void Show(BaseMixedRealityControllerMappingProfile profile, SupportedControllerType controllerType, SerializedProperty interactionsList, Handedness handedness = Handedness.None)
         {
             var handednessTitleText = handedness != Handedness.None ? $"{handedness} Hand " : string.Empty;
 
@@ -223,7 +222,6 @@ namespace XRTK.Inspectors
 
             window = (ControllerPopupWindow)CreateInstance(typeof(ControllerPopupWindow));
             window.titleContent = new GUIContent($"{controllerType} {handednessTitleText}Input Action Assignment");
-            window.isLocked = isLocked;
             window.mappingProfile = profile;
             window.currentHandedness = handedness;
             window.currentControllerType = controllerType;
@@ -321,8 +319,6 @@ namespace XRTK.Inspectors
 
         private void RenderInteractionList(SerializedProperty interactionList, bool useCustomInteractionMapping)
         {
-            GUI.enabled = !isLocked;
-
             if (interactionList == null)
             {
                 Debug.LogError("No interaction list found!");

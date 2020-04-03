@@ -30,9 +30,7 @@ namespace XRTK.Inspectors.Data.Controllers.Simulation.Hands
 
         public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
-
-            ThisProfile.CheckProfileLock();
+            RenderHeader();
 
             serializedObject.Update();
 

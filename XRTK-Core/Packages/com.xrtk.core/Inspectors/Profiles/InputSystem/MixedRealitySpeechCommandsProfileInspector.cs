@@ -5,7 +5,6 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
-using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
 {
@@ -62,7 +61,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             }
 
 
-            ThisProfile.CheckProfileLock();
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(startBehavior);

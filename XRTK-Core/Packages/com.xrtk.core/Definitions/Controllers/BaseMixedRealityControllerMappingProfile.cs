@@ -52,7 +52,7 @@ namespace XRTK.Definitions.Controllers
             {
                 // this path is meaningless outside of the editor.
 #if UNITY_EDITOR
-                return $"{XRTK.Utilities.Editor.MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/StandardAssets/Textures/";
+                return $"{XRTK.Utilities.Editor.PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/";
 #else
                 return string.Empty;
 #endif

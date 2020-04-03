@@ -7,6 +7,7 @@ using UnityEngine;
 
 namespace XRTK.Utilities.Editor
 {
+    [CanEditMultipleObjects]
     [CustomEditor(typeof(DefaultAsset))]
     public class IconEditor : UnityEditor.Editor
     {

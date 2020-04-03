@@ -3,7 +3,6 @@
 
 using UnityEditor;
 using XRTK.Definitions.DiagnosticsSystem;
-using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
 {
@@ -29,7 +28,6 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
             EditorGUILayout.HelpBox("Diagnostic can help monitor system resources and performance inside an application during development.", MessageType.Info);
             EditorGUILayout.Space();
 
-            ThisProfile.CheckProfileLock();
             serializedObject.Update();
             EditorGUILayout.PropertyField(diagnosticsWindowPrefab);
             EditorGUILayout.PropertyField(showDiagnosticsWindowOnStart);

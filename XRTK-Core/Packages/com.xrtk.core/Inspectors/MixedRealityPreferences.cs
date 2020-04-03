@@ -17,33 +17,6 @@ namespace XRTK.Inspectors
     {
         private static readonly string[] XRTK_Keywords = { "XRTK", "Mixed", "Reality" };
 
-        #region Lock Profile Preferences
-
-        private static readonly GUIContent LockContent = new GUIContent("Lock SDK profiles", "Locks the SDK profiles from being edited.\n\nThis setting only applies to the currently running project.");
-        private const string LOCK_KEY = "LockProfiles";
-        private static bool lockPrefLoaded;
-        private static bool lockProfiles;
-
-        /// <summary>
-        /// Should the default profile inspectors be disabled to prevent editing?
-        /// </summary>
-        public static bool LockProfiles
-        {
-            get
-            {
-                if (!lockPrefLoaded)
-                {
-                    lockProfiles = EditorPreferences.Get(LOCK_KEY, true);
-                    lockPrefLoaded = true;
-                }
-
-                return lockProfiles;
-            }
-            set => EditorPreferences.Set(LOCK_KEY, lockProfiles = value);
-        }
-
-        #endregion Lock Profile Preferences
-
         #region Ignore startup settings prompt
 
         private static readonly GUIContent IgnoreContent = new GUIContent("Ignore settings prompt on startup", "Prevents settings dialog popup from showing on startup.\n\nThis setting applies to all projects using XRTK.");
@@ -102,7 +75,7 @@ namespace XRTK.Inspectors
 
         private static readonly GUIContent GeneratedProfilePathContent = new GUIContent("New Generated Profiles Default Path:", "When generating new profiles, their files are saved in this location.");
         private const string PROFILE_GENERATION_PATH_KEY = "_MixedRealityToolkit_Editor_Profile_Generation_Path";
-        private const string DefaultGenerationPath = "Assets/XRTK.Generated/CustomProfiles";
+        private const string DefaultGenerationPath = "Assets/XRTK.Generated/Profiles";
         private static string profileGenerationPath;
         private static bool isProfilePathPrefLoaded;
 
@@ -393,23 +366,6 @@ namespace XRTK.Inspectors
             }
 
             #endregion Symbolic Links Preferences
-
-            #region Lock Profile Preference
-
-            EditorGUI.BeginChangeCheck();
-            lockProfiles = EditorGUILayout.Toggle(LockContent, LockProfiles);
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                LockProfiles = lockProfiles;
-            }
-
-            if (!LockProfiles)
-            {
-                EditorGUILayout.HelpBox("This is only to be used to update the default SDK profiles. If any edits are made, and not checked into the XRTK's Github, the changes may be lost next time you update your local copy.", MessageType.Warning);
-            }
-
-            #endregion Lock Profile Preference
 
             EditorGUIUtility.labelWidth = prevLabelWidth;
         }

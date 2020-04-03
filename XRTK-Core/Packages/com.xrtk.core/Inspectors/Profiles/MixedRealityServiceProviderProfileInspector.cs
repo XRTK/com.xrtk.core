@@ -17,7 +17,7 @@ namespace XRTK.Inspectors.Profiles
     [CustomEditor(typeof(BaseMixedRealityServiceProfile<>))]
     public class MixedRealityServiceProfileInspector : BaseMixedRealityProfileInspector
     {
-        private readonly GUIContent ProfileContent = new GUIContent("Profile", "The settings profile for this service.");
+        private readonly GUIContent profileContent = new GUIContent("Profile", "The settings profile for this service.");
         private ReorderableList configurationList;
         private int currentlySelectedConfigurationOption;
 
@@ -80,19 +80,12 @@ namespace XRTK.Inspectors.Profiles
             EditorGUIUtility.labelWidth = prevLabelWidth - 18f;
             EditorGUIUtility.wideMode = true;
 
-            var isScrollBarActive = (int)(EditorGUIUtility.currentViewWidth - (rect.width + 25f)) == 36;
-
-            var halfFieldWidth = rect.width * 0.5f;
             var halfFieldHeight = EditorGUIUtility.singleLineHeight * 0.25f;
 
             var nameRect = new Rect(rect.x, rect.y + halfFieldHeight, rect.width, EditorGUIUtility.singleLineHeight);
             var typeRect = new Rect(rect.x, rect.y + halfFieldHeight * 6, rect.width, EditorGUIUtility.singleLineHeight);
             var runtimeRect = new Rect(rect.x, rect.y + halfFieldHeight * 11, rect.width, EditorGUIUtility.singleLineHeight);
             var profileRect = new Rect(rect.x, rect.y + halfFieldHeight * 16, rect.width, EditorGUIUtility.singleLineHeight);
-
-            var profileHeight = rect.y + halfFieldHeight * 16;
-            var profilePosition = rect.x + EditorGUIUtility.labelWidth;
-            var profileLabelRect = new Rect(rect.x, profileHeight, halfFieldWidth, EditorGUIUtility.singleLineHeight);
 
             var configurationProperty = configurations.GetArrayElementAtIndex(index);
 
@@ -101,8 +94,6 @@ namespace XRTK.Inspectors.Profiles
             var instanceTypeProperty = configurationProperty.FindPropertyRelative("instancedType");
             var platformEntriesProperty = configurationProperty.FindPropertyRelative("platformEntries");
             var configurationProfileProperty = configurationProperty.FindPropertyRelative("profile");
-
-            var configurationProfile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
 
             priorityProperty.intValue = index;
 
@@ -142,52 +133,10 @@ namespace XRTK.Inspectors.Profiles
 
             EditorGUI.PropertyField(runtimeRect, platformEntriesProperty);
 
-            var update = false;
-
             if (profileType != null)
             {
-                EditorGUI.LabelField(profileLabelRect, ProfileContent);
-                var isNullProfile = configurationProfileProperty.objectReferenceValue == null;
-
-                var buttonWidth = isNullProfile ? 20f : 42f;
-                var profileObjectWidth = EditorGUIUtility.currentViewWidth - profilePosition - buttonWidth - 12f;
-                var scrollOffset = isScrollBarActive ? 15f : 0f;
-                var profileObjectRect = new Rect(profilePosition, profileHeight, profileObjectWidth - scrollOffset, EditorGUIUtility.singleLineHeight);
-                var buttonRect = new Rect(profilePosition + profileObjectWidth - scrollOffset, profileHeight, buttonWidth, EditorGUIUtility.singleLineHeight);
-
-                var newProfileObjectReference = EditorGUI.ObjectField(profileObjectRect, configurationProfileProperty.objectReferenceValue, profileType, false);
-
-                if (newProfileObjectReference is BaseMixedRealityProfile newProfile)
-                {
-                    var newProfileType = newProfile.GetType();
-                    if (newProfileType == profileType ||
-                        newProfileType.IsSubclassOf(profileType))
-                    {
-                        configurationProfileProperty.objectReferenceValue = newProfileObjectReference;
-                    }
-                    else
-                    {
-                        Debug.LogError($"{newProfileObjectReference.name} does not derive from {profileType.Name}!");
-                    }
-                }
-                else if (newProfileObjectReference is null)
-                {
-                    configurationProfileProperty.objectReferenceValue = null;
-                }
-
-                update = GUI.Button(buttonRect, isNullProfile ? NewProfileContent : CloneProfileContent);
-
-                if (update)
-                {
-                    if (isNullProfile)
-                    {
-                        CreateNewProfileInstance(ThisProfile, configurationProfileProperty, profileType);
-                    }
-                    else
-                    {
-                        CloneProfileInstance(ThisProfile, configurationProfileProperty, configurationProfile);
-                    }
-                }
+                MixedRealityProfilePropertyDrawer.ProfileTypeOverride = profileType;
+                EditorGUI.PropertyField(profileRect, configurationProfileProperty, profileContent);
             }
             else
             {
@@ -206,8 +155,7 @@ namespace XRTK.Inspectors.Profiles
                 }
             }
 
-            if (update ||
-                EditorGUI.EndChangeCheck())
+            if (EditorGUI.EndChangeCheck())
             {
                 serializedObject.ApplyModifiedProperties();
 

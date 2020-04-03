@@ -22,8 +22,8 @@ namespace XRTK.Tests.Core
             EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Single);
             MixedRealityToolkit.ConfirmInitialized();
 
-            Debug.Log(MixedRealityEditorSettings.MixedRealityToolkit_AbsoluteFolderPath);
-            Debug.Log(MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath);
+            Debug.Log(PathFinderUtility.XRTK_Core_AbsoluteFolderPath);
+            Debug.Log(PathFinderUtility.XRTK_Core_RelativeFolderPath);
 
             // Tests
             var gameObject = GameObject.Find(nameof(MixedRealityToolkit));

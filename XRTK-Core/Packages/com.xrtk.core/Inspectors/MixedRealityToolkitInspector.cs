@@ -52,7 +52,7 @@ namespace XRTK.Inspectors
                         currentPickerWindow = GUIUtility.GetControlID(FocusType.Passive);
                         EditorGUIUtility.ShowObjectPicker<MixedRealityToolkitRootProfile>(null, false, string.Empty, currentPickerWindow);
                     }
-                    else if (profiles.Length == 1)
+                    else if (profiles.Length == 1 && !string.IsNullOrWhiteSpace(PathFinderUtility.XRTK_SDK_RelativeFolderPath))
                     {
                         string rootProfilePath = null;
                         var allProfiles = ScriptableObjectExtensions.GetAllInstances<BaseMixedRealityProfile>();
@@ -64,6 +64,7 @@ namespace XRTK.Inspectors
                                 var mixedRealityProfile = allProfiles[i];
                                 var sourceAssetPath = AssetDatabase.GetAssetPath(mixedRealityProfile);
                                 var destinationPath = sourceAssetPath.Replace($"{PathFinderUtility.XRTK_SDK_RelativeFolderPath}/DefaultProfiles/", "");
+                                Debug.Log(destinationPath);
                                 destinationPath = destinationPath.Replace("Default", "");
                                 destinationPath = $"{MixedRealityPreferences.ProfileGenerationPath}/{destinationPath}";
                                 destinationPath = Path.Combine(Directory.GetParent(Application.dataPath).FullName, destinationPath);

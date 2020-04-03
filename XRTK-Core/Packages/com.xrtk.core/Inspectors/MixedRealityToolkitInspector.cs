@@ -64,7 +64,6 @@ namespace XRTK.Inspectors
                                 var mixedRealityProfile = allProfiles[i];
                                 var sourceAssetPath = AssetDatabase.GetAssetPath(mixedRealityProfile);
                                 var destinationPath = sourceAssetPath.Replace($"{PathFinderUtility.XRTK_SDK_RelativeFolderPath}/DefaultProfiles/", "");
-                                Debug.Log(destinationPath);
                                 destinationPath = destinationPath.Replace("Default", "");
                                 destinationPath = $"{MixedRealityPreferences.ProfileGenerationPath}/{destinationPath}";
                                 destinationPath = Path.Combine(Directory.GetParent(Application.dataPath).FullName, destinationPath);

@@ -14,8 +14,8 @@ namespace XRTK.Utilities.Editor
 
     public static class PathFinderUtility
     {
-        private const string CorePathFinder = "/Utilities/Editor/CorePathFinder.cs";
-        private const string SdkPathFinder = "/Inspectors/SdkPathFinder.cs";
+        private const string CORE_PATH_FINDER = "/Utilities/Editor/CorePathFinder.cs";
+        private const string SDK_PATH_FINDER = "/Inspectors/SdkPathFinder.cs";
 
         private static List<Type> GetAllPathFinders
         {
@@ -29,27 +29,28 @@ namespace XRTK.Utilities.Editor
             }
         }
 
-        private static Type ResolvedCorePathFinder
+        private static readonly Dictionary<string, string> ResolvedFinderCache = new Dictionary<string, string>();
+
+        private static string ResolvePath(string finderPath)
         {
-            get
+            if (!ResolvedFinderCache.TryGetValue(finderPath, out var resolvedPath))
             {
-                if (resolvedCorePathFinder == null)
+                foreach (var type in GetAllPathFinders)
                 {
-                    foreach (var type in GetAllPathFinders)
+                    if (type.Name == Path.GetFileNameWithoutExtension(finderPath))
                     {
-                        if (type.Name == nameof(CorePathFinder))
-                        {
-                            resolvedCorePathFinder = type;
-                            break;
-                        }
+                        resolvedPath = AssetDatabase.GetAssetPath(
+                            MonoScript.FromScriptableObject(
+                                ScriptableObject.CreateInstance(type)))
+                                    .Replace(finderPath, string.Empty);
+                        ResolvedFinderCache.Add(finderPath, resolvedPath);
+                        break;
                     }
                 }
-
-                return resolvedCorePathFinder;
             }
-        }
 
-        private static Type resolvedCorePathFinder = null;
+            return resolvedPath;
+        }
 
         /// <summary>
         /// The absolute folder path to the Mixed Reality Toolkit in your project.
@@ -76,14 +77,10 @@ namespace XRTK.Utilities.Editor
         {
             get
             {
-                if (string.IsNullOrEmpty(coreRelativeFolderPath) &&
-                    ResolvedCorePathFinder != null)
+                if (string.IsNullOrEmpty(coreRelativeFolderPath))
                 {
-                    coreRelativeFolderPath =
-                        AssetDatabase.GetAssetPath(
-                                MonoScript.FromScriptableObject(
-                                    ScriptableObject.CreateInstance(ResolvedCorePathFinder)))
-                            .Replace(CorePathFinder, string.Empty);
+                    coreRelativeFolderPath = ResolvePath(CORE_PATH_FINDER);
+                    Debug.Assert(!string.IsNullOrWhiteSpace(coreRelativeFolderPath));
                 }
 
                 return coreRelativeFolderPath;
@@ -91,29 +88,6 @@ namespace XRTK.Utilities.Editor
         }
 
         private static string coreRelativeFolderPath = string.Empty;
-
-        private static Type ResolvedSdkPathFinder
-        {
-            get
-            {
-                if (resolvedSdkPathFinder == null)
-                {
-                    foreach (var type in GetAllPathFinders)
-                    {
-                        if (type.Name == nameof(SdkPathFinder))
-                        {
-                            resolvedSdkPathFinder = type;
-                            break;
-                        }
-                    }
-                }
-
-                return resolvedSdkPathFinder;
-            }
-        }
-
-        private static Type resolvedSdkPathFinder = null;
-
 
         /// <summary>
         /// The absolute folder path to the Mixed Reality Toolkit's SDK in your project.
@@ -140,14 +114,9 @@ namespace XRTK.Utilities.Editor
         {
             get
             {
-                if (string.IsNullOrEmpty(sdkRelativeFolderPath) &&
-                    ResolvedSdkPathFinder != null)
+                if (string.IsNullOrEmpty(sdkRelativeFolderPath))
                 {
-                    sdkRelativeFolderPath =
-                        AssetDatabase.GetAssetPath(
-                                MonoScript.FromScriptableObject(
-                                    ScriptableObject.CreateInstance(ResolvedSdkPathFinder)))
-                            .Replace(SdkPathFinder, string.Empty);
+                    sdkRelativeFolderPath = ResolvePath(SDK_PATH_FINDER);
                 }
 
                 return sdkRelativeFolderPath;

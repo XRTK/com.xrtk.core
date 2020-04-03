@@ -17,6 +17,8 @@ namespace XRTK.Utilities.Editor
         private const string CORE_PATH_FINDER = "/Utilities/Editor/CorePathFinder.cs";
         private const string SDK_PATH_FINDER = "/Inspectors/SdkPathFinder.cs";
 
+        private static readonly Dictionary<string, string> ResolvedFinderCache = new Dictionary<string, string>();
+
         private static List<Type> GetAllPathFinders
         {
             get
@@ -28,8 +30,6 @@ namespace XRTK.Utilities.Editor
                     .ToList();
             }
         }
-
-        private static readonly Dictionary<string, string> ResolvedFinderCache = new Dictionary<string, string>();
 
         private static string ResolvePath(string finderPath)
         {

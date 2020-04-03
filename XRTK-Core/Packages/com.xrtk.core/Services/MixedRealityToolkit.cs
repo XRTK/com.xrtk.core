@@ -297,9 +297,10 @@ namespace XRTK.Services
                 }
 #endif // UNITY_EDITOR
 
+                EnsureMixedRealityRequirements();
+
                 if (HasActiveProfile)
                 {
-                    EnsureMixedRealityRequirements();
                     InitializeServiceLocator();
                 }
             }
@@ -858,6 +859,8 @@ namespace XRTK.Services
             }
 
             bool canRunOnPlatform = false;
+
+            Debug.Assert(ActivePlatforms.Count > 0);
 
             for (var i = 0; i < runtimePlatforms?.Count; i++)
             {

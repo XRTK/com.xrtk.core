@@ -5,7 +5,6 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
-using XRTK.Inspectors.Utilities;
 using XRTK.Utilities;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
@@ -56,7 +55,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             EditorGUILayout.HelpBox("Pointers attach themselves onto controllers as they are initialized.", MessageType.Info);
             EditorGUILayout.Space();
 
-            ThisProfile.CheckProfileLock();
             serializedObject.Update();
             currentlySelectedPointerOption = -1;
 

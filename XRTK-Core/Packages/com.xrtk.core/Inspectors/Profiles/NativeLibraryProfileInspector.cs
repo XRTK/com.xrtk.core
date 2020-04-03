@@ -20,8 +20,6 @@ namespace XRTK.Inspectors.Profiles
                                     "Note: The order of the list determines the order these services get created.", MessageType.Info);
             EditorGUILayout.Space();
 
-            ThisProfile.CheckProfileLock();
-
             base.OnInspectorGUI();
         }
     }

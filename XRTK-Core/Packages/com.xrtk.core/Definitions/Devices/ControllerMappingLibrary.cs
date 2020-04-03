@@ -313,7 +313,7 @@ namespace XRTK.Definitions.Devices
                 }
             }
 
-            return GetControllerTextureInternal($"{MixedRealityEditorSettings.MixedRealityToolkit_RelativeFolderPath}/StandardAssets/Textures/Generic_controller", Handedness.None, scaled);
+            return GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/Generic_controller", Handedness.None, scaled);
         }
 
         private static Texture2D GetControllerTextureInternal(string fullTexturePath, Handedness handedness, bool scaled)

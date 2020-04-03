@@ -5,7 +5,6 @@ using UnityEditor;
 using UnityEditor.Experimental.SceneManagement;
 using UnityEngine;
 using XRTK.Definitions;
-using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.Utilities;
 using XRTK.Services;
 
@@ -147,58 +146,30 @@ namespace XRTK.Inspectors.Profiles
 
             if (!MixedRealityToolkit.IsInitialized) { return; }
 
-            if (!rootProfile.IsEditable)
-            {
-                EditorGUILayout.HelpBox("The Mixed Reality Toolkit's core SDK profiles can be used to get up and running quickly.\n\n" +
-                                        "You can use the default profiles provided, copy and customize the default profiles, or create your own.", MessageType.Warning);
-                EditorGUILayout.BeginHorizontal();
-
-                if (GUILayout.Button("Clone & Customize"))
-                {
-                    CreateCloneProfile();
-                }
-
-                if (GUILayout.Button("Create new profiles"))
-                {
-                    var profile = CreateInstance(nameof(MixedRealityToolkitRootProfile));
-                    var newProfile = profile.CreateAsset() as MixedRealityToolkitRootProfile;
-                    MixedRealityToolkit.Instance.ActiveProfile = newProfile;
-                }
-
-                EditorGUILayout.EndHorizontal();
-            }
-
-            // We don't call the CheckLock method so won't get a duplicate message.
-            if (MixedRealityPreferences.LockProfiles && !ThisProfile.IsEditable)
-            {
-                GUI.enabled = false;
-            }
-
             var previousLabelWidth = EditorGUIUtility.labelWidth;
             EditorGUIUtility.labelWidth = 160f;
             EditorGUI.BeginChangeCheck();
-            bool changed = false;
 
             // Camera System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Camera System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableCameraSystem);
             EditorGUILayout.PropertyField(cameraSystemType);
-            changed |= RenderProfile(ThisProfile, cameraProfile);
+            EditorGUILayout.PropertyField(cameraProfile);
 
             // Input System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Input System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableInputSystem);
             EditorGUILayout.PropertyField(inputSystemType);
-            changed |= RenderProfile(ThisProfile, inputSystemProfile);
+            EditorGUILayout.PropertyField(inputSystemProfile);
 
             // Boundary System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Boundary System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableBoundarySystem);
             EditorGUILayout.PropertyField(boundarySystemType);
-            changed |= RenderProfile(ThisProfile, boundaryVisualizationProfile);
+            EditorGUILayout.PropertyField(boundaryVisualizationProfile);
 
             // Teleport System configuration
             GUILayout.Space(12f);
@@ -211,42 +182,37 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.LabelField("Spatial Awareness System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableSpatialAwarenessSystem);
             EditorGUILayout.PropertyField(spatialAwarenessSystemType);
-            changed |= RenderProfile(ThisProfile, spatialAwarenessProfile);
+            EditorGUILayout.PropertyField(spatialAwarenessProfile);
 
             // Networking System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Networking System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableNetworkingSystem);
             EditorGUILayout.PropertyField(networkingSystemType);
-            changed |= RenderProfile(ThisProfile, networkingSystemProfile);
+            EditorGUILayout.PropertyField(networkingSystemProfile);
 
             // Diagnostics System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Diagnostics System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableDiagnosticsSystem);
             EditorGUILayout.PropertyField(diagnosticsSystemType);
-            changed |= RenderProfile(ThisProfile, diagnosticsSystemProfile);
+            EditorGUILayout.PropertyField(diagnosticsSystemProfile);
 
             // Native Library System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Native Library System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableNativeLibrarySystem);
             EditorGUILayout.PropertyField(nativeLibrarySystemType);
-            changed |= RenderProfile(ThisProfile, nativeLibrarySystemProfile);
+            EditorGUILayout.PropertyField(nativeLibrarySystemProfile);
 
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Additional Service Providers", EditorStyles.boldLabel);
-            changed |= RenderProfile(ThisProfile, registeredServiceProvidersProfile);
-
-            if (!changed)
-            {
-                changed |= EditorGUI.EndChangeCheck();
-            }
+            EditorGUILayout.PropertyField(registeredServiceProvidersProfile);
 
             EditorGUIUtility.labelWidth = previousLabelWidth;
             serializedObject.ApplyModifiedProperties();
 
-            if (changed &&
+            if (EditorGUI.EndChangeCheck() &&
                 MixedRealityToolkit.IsInitialized &&
                 MixedRealityToolkit.Instance.ActiveProfile == rootProfile)
             {

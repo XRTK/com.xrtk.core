@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
-using XRTK.Inspectors.Utilities;
 using XRTK.Definitions.Controllers;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
@@ -16,8 +15,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             EditorGUILayout.LabelField("Controller Data Providers", EditorStyles.boldLabel);
             EditorGUILayout.HelpBox("Use this profile to define all the input sources your application can get input data from.", MessageType.Info);
-
-            ThisProfile.CheckProfileLock();
+            EditorGUILayout.Space();
 
             base.OnInspectorGUI();
         }

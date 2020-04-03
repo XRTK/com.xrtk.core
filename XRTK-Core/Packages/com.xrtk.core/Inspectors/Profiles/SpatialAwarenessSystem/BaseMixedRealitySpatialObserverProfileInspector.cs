@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
-using XRTK.Inspectors.Utilities;
 using XRTK.Providers.SpatialObservers;
 
 namespace XRTK.Inspectors.Profiles.SpatialAwareness
@@ -39,7 +38,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             EditorGUILayout.HelpBox("The Spatial Awareness Observer Data Provider supplies the Spatial Awareness system with all the data it needs to understand the world around you.", MessageType.Info);
             EditorGUILayout.Space();
 
-            ThisProfile.CheckProfileLock();
             serializedObject.Update();
 
             foldout = EditorGUILayout.Foldout(foldout, "General Settings", true);

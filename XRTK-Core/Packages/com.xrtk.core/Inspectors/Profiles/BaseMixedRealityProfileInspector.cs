@@ -46,7 +46,7 @@ namespace XRTK.Inspectors.Profiles
         }
 
         [MenuItem("CONTEXT/BaseMixedRealityProfile/Create Clone from Profile Values", false, 0)]
-        private static async void CreateCloneProfile()
+        protected static async void CreateCloneProfile()
         {
             profileSource = currentlySelectedProfile;
             var newProfile = CreateInstance(currentlySelectedProfile.GetType().ToString());

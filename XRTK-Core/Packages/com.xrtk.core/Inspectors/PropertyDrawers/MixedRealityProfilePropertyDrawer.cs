@@ -46,7 +46,10 @@ namespace XRTK.Inspectors.PropertyDrawers
                 profile = property.objectReferenceValue as BaseMixedRealityProfile;
             }
 
-            Debug.Assert(profile == null || !(profile is MixedRealityToolkitRootProfile) && parent != null || profile is MixedRealityToolkitRootProfile && parent == null);
+            if (profile != null)
+            {
+                Debug.Assert(!(profile is MixedRealityToolkitRootProfile) && parent != null || profile is MixedRealityToolkitRootProfile && parent == null, $"{profile?.name}.{profile?.ParentProfile}");
+            }
 
             var propertyLabel = EditorGUI.BeginProperty(position, label, property);
             var profileType = ProfileTypeOverride ?? fieldInfo.FieldType;

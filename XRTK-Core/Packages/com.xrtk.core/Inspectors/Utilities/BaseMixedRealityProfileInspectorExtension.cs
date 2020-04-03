@@ -20,7 +20,6 @@ namespace XRTK.Inspectors.Utilities
         /// <param name="clone"></param>
         public static BaseMixedRealityProfile CreateNewProfileInstance(this BaseMixedRealityProfile parentProfile, SerializedProperty property, Type profileType, bool clone = false)
         {
-            Debug.Assert(parentProfile != null);
             ScriptableObject instance;
 
             if (profileType == null)
@@ -41,7 +40,7 @@ namespace XRTK.Inspectors.Utilities
                 instance = ScriptableObject.CreateInstance(profileType);
             }
 
-            var assetPath = AssetDatabase.GetAssetPath(parentProfile);
+            var assetPath = parentProfile != null ? AssetDatabase.GetAssetPath(parentProfile) : string.Empty;
             var newProfile = instance.CreateAsset(assetPath) as BaseMixedRealityProfile;
             Debug.Assert(newProfile != null);
 
@@ -62,14 +61,11 @@ namespace XRTK.Inspectors.Utilities
             Debug.Assert(target != null);
             var serializedObject = new SerializedObject(target);
             Undo.RecordObject(target, "Paste Profile Values");
-            var isEditable = serializedObject.FindProperty("isEditable").boolValue;
             var originalName = serializedObject.targetObject.name;
             EditorUtility.CopySerialized(source, serializedObject.targetObject);
             serializedObject.Update();
-            serializedObject.FindProperty("isEditable").boolValue = isEditable;
             serializedObject.ApplyModifiedProperties();
             serializedObject.targetObject.name = originalName;
-            Debug.Assert(serializedObject.FindProperty("isEditable").boolValue == isEditable);
             AssetDatabase.SaveAssets();
         }
     }

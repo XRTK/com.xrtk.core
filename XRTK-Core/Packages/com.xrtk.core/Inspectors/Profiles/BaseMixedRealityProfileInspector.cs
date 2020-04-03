@@ -70,7 +70,6 @@ namespace XRTK.Inspectors.Profiles
             return currentlySelectedProfile != null &&
                    targetProfile != null &&
                    profileSource != null &&
-                   targetProfile.FindProperty("isEditable").boolValue &&
                    currentlySelectedProfile.GetType() == profileSource.GetType();
         }
 

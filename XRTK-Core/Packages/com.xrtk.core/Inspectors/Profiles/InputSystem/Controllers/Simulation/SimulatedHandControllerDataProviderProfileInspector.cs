@@ -33,6 +33,10 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
             handPoseAnimationSpeed = serializedObject.FindProperty(nameof(handPoseAnimationSpeed));
         }
 
+        /// <summary>
+        /// We are using this entry point to render any hand simulation specific settings
+        /// to the base simulation settings profile.
+        /// </summary>
         protected override void OnInspectorAdditionalGUI()
         {
             EditorGUILayout.PropertyField(handMeshingEnabled);

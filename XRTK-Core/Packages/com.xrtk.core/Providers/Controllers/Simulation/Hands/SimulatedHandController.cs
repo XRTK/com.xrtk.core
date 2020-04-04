@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
@@ -12,6 +13,7 @@ using XRTK.Interfaces.InputSystem.Controllers.Hands;
 using XRTK.Interfaces.Providers.Controllers.Simulation;
 using XRTK.Providers.Controllers.Hands;
 using XRTK.Services;
+using Random = UnityEngine.Random;
 
 namespace XRTK.Providers.Controllers.Simulation.Hands
 {
@@ -31,13 +33,13 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             : base(trackingState, controllerHandedness, inputSource, interactions)
         {
             simulatedHandControllerDataProvider = MixedRealityToolkit.GetService<ISimulatedHandControllerDataProvider>();
+
             if (simulatedHandControllerDataProvider == null)
             {
-                Debug.LogError($"Could not get active {nameof(SimulatedHandControllerDataProvider)}.");
+                throw new Exception($"Could not get active {nameof(SimulatedHandControllerDataProvider)}.");
             }
 
-            // Initialize available simulated hand poses and find the
-            // configured default pose.
+            // Initialize available simulated hand poses and find the configured default pose.
             SimulatedHandControllerPose.Initialize(simulatedHandControllerDataProvider.HandPoseDefinitions);
 
             // Simulation cannot work without a default pose.
@@ -47,7 +49,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             }
 
             initialPose = SimulatedHandControllerPose.GetPoseByName(SimulatedHandControllerPose.DefaultHandPose.Id);
-            Pose = initialPose;
+            pose = new SimulatedHandControllerPose(initialPose);
             lastUpdatedStopWatch = new SimulationTimeStampStopWatch();
             Reset();
 
@@ -60,11 +62,11 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         private readonly SimulationTimeStampStopWatch handUpdateStopWatch;
         private readonly SimulationTimeStampStopWatch lastUpdatedStopWatch;
         private Vector3? lastMousePosition = null;
-        private long lastSimulatedTimeStamp = 0;
+
         private float currentPoseBlending = 0.0f;
         private float targetPoseBlending = 0.0f;
         private Vector3 screenPosition;
-        private SimulatedHandControllerPose initialPose;
+        private readonly SimulatedHandControllerPose initialPose;
         private SimulatedHandControllerPose previousPose;
         private SimulatedHandControllerPose targetPose;
 
@@ -101,10 +103,12 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         public Vector3 JitterOffset { get; private set; } = Vector3.zero;
 
+        private SimulatedHandControllerPose pose;
+
         /// <summary>
         /// Currently used simulation hand pose.
         /// </summary>
-        public SimulatedHandControllerPose Pose { get; private set; }
+        public SimulatedHandControllerPose Pose => pose;
 
         /// <summary>
         /// The currently targeted hand pose, reached when <see cref="TargetPoseBlending"/>
@@ -115,7 +119,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             get => targetPose;
             set
             {
-                if (!string.Equals(value?.Id, targetPose?.Id))
+                if (!string.Equals(value.Id, targetPose.Id))
                 {
                     targetPose = value;
                     targetPoseBlending = 0.0f;
@@ -138,9 +142,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         {
             UpdateSimulationMappings();
 
-            // If we have updated simulated data, we can execute the actual
-            // base hand controller update.
-            if (TryGetSimulatedHandData(out HandData handData))
+            // If we have updated simulated data, we can execute the actual base hand controller update.
+            if (TryGetSimulatedHandData(out var handData))
             {
                 UpdateController(handData);
             }
@@ -150,7 +153,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         {
             for (int i = 0; i < Interactions?.Length; i++)
             {
-                MixedRealityInteractionMapping interactionMapping = Interactions[i];
+                var interactionMapping = Interactions[i];
+
                 switch (interactionMapping.InputType)
                 {
                     case DeviceInputType.ButtonPress:
@@ -174,22 +178,27 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             {
                 rotationDeltaEulerAngles.y = rotationDelta;
             }
+
             if (Interactions[1].BoolData)
             {
                 rotationDeltaEulerAngles.y = -rotationDelta;
             }
+
             if (Interactions[2].BoolData)
             {
                 rotationDeltaEulerAngles.x = -rotationDelta;
             }
+
             if (Interactions[3].BoolData)
             {
                 rotationDeltaEulerAngles.x = rotationDelta;
             }
+
             if (Interactions[4].BoolData)
             {
                 rotationDeltaEulerAngles.z = -rotationDelta;
             }
+
             if (Interactions[5].BoolData)
             {
                 rotationDeltaEulerAngles.z = rotationDelta;
@@ -211,6 +220,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             {
                 mouseDelta.z += Time.deltaTime * simulatedHandControllerDataProvider.DepthMultiplier;
             }
+
             if (Interactions[7].BoolData)
             {
                 mouseDelta.z -= Time.deltaTime * simulatedHandControllerDataProvider.DepthMultiplier;
@@ -227,10 +237,11 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         {
             for (int i = 0; i < simulatedHandControllerDataProvider.HandPoseDefinitions.Count; i++)
             {
-                SimulatedHandControllerPoseData pose = simulatedHandControllerDataProvider.HandPoseDefinitions[i];
-                if (Input.GetKey(pose.KeyCode))
+                var result = simulatedHandControllerDataProvider.HandPoseDefinitions[i];
+
+                if (Input.GetKey(result.KeyCode))
                 {
-                    return SimulatedHandControllerPose.GetPoseByName(pose.Id);
+                    return SimulatedHandControllerPose.GetPoseByName(result.Id);
                 }
             }
 
@@ -245,43 +256,35 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             screenPosition = Vector3.zero;
             HandRotateEulerAngles = Vector3.zero;
             JitterOffset = Vector3.zero;
-            Pose = initialPose;
             HandData.TimeStamp = 0;
             HandData.IsTracked = false;
             lastUpdatedStopWatch.Reset();
 
-            ResetPose();
-        }
-
-        /// <summary>
-        /// Reset the current hand pose.
-        /// </summary>
-        private void ResetPose()
-        {
+            // reset to the initial pose.
             TargetPoseBlending = 1.0f;
-            if (SimulatedHandControllerPose.TryGetPoseByName(Pose.Id, out SimulatedHandControllerPose pose))
+
+            if (SimulatedHandControllerPose.TryGetPoseByName(initialPose.Id, out var result))
             {
-                Pose.Copy(pose);
-                previousPose = Pose;
-                TargetPose = Pose;
+                pose = new SimulatedHandControllerPose(result);
+                previousPose = pose;
+                TargetPose = pose;
             }
         }
 
         private bool TryGetSimulatedHandData(out HandData handData)
         {
             // Read keyboard / mouse input to determine the root pose delta since last frame.
-            MixedRealityPose rootPoseDelta = new MixedRealityPose(
-                GetHandPositionDelta(), Quaternion.Euler(GetHandRotationDelta()));
+            var rootPoseDelta = new MixedRealityPose(GetHandPositionDelta(), Quaternion.Euler(GetHandRotationDelta()));
 
             // Calculate pose changes and compute timestamp for hand tracking update.
-            float poseAnimationDelta = simulatedHandControllerDataProvider.HandPoseAnimationSpeed * Time.deltaTime;
-            long timeStamp = handUpdateStopWatch.TimeStamp;
+            var poseAnimationDelta = simulatedHandControllerDataProvider.HandPoseAnimationSpeed * Time.deltaTime;
+            var timeStamp = handUpdateStopWatch.TimeStamp;
 
-            // Update simualted hand states using collected data.
-            SimulatedHandControllerPose newTargetPose = GetTargetHandPose();
-            bool isTrackedOld = HandData.IsTracked;
+            // Update simulated hand states using collected data.
+            var newTargetPose = GetTargetHandPose();
+            var isTrackedOld = HandData.IsTracked;
 
-            HandleSimulationInput(ref lastSimulatedTimeStamp, rootPoseDelta);
+            HandleSimulationInput(rootPoseDelta);
 
             if (!string.Equals(newTargetPose.Id, Pose.Id) && HandData.IsTracked)
             {
@@ -291,11 +294,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             TargetPoseBlending += poseAnimationDelta;
 
-            bool handDataChanged = false;
-            if (isTrackedOld != HandData.IsTracked)
-            {
-                handDataChanged = true;
-            }
+            bool handDataChanged = isTrackedOld != HandData.IsTracked;
 
             if (HandData.TimeStamp != timeStamp)
             {
@@ -319,7 +318,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             return false;
         }
 
-        private void HandleSimulationInput(ref long lastSimulatedTimeStamp, MixedRealityPose rootPoseDelta)
+        private void HandleSimulationInput(MixedRealityPose rootPoseDelta)
         {
             // If the hands state is changing from "not tracked" to being tracked, reset its position
             // to the current mouse position and default distance from the camera.
@@ -340,7 +339,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             JitterOffset = Random.insideUnitSphere * simulatedHandControllerDataProvider.JitterAmount;
 
             HandData.IsTracked = true;
-            lastSimulatedTimeStamp = lastUpdatedStopWatch.TimeStamp;
         }
 
         private void UpdatePoseFrame()
@@ -349,12 +347,12 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             {
                 float range = Mathf.Clamp01(1.0f - currentPoseBlending);
                 float lerpFactor = range > 0.0f ? (TargetPoseBlending - currentPoseBlending) / range : 1.0f;
-                Pose = SimulatedHandControllerPose.Lerp(previousPose, TargetPose, lerpFactor);
+                SimulatedHandControllerPose.Lerp(ref pose, previousPose, TargetPose, lerpFactor);
             }
 
             currentPoseBlending = TargetPoseBlending;
-            Quaternion rotation = Quaternion.Euler(HandRotateEulerAngles);
-            Vector3 position = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
+            var rotation = Quaternion.Euler(HandRotateEulerAngles);
+            var position = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
             Pose.ComputeJointPoses(ControllerHandedness, rotation, position, HandData.Joints);
         }
     }

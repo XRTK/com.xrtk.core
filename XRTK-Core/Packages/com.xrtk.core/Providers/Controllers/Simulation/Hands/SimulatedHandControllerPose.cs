@@ -1,26 +1,35 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using UnityEngine;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
-using XRTK.Services;
-using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Providers.Controllers.Hands;
+using XRTK.Services;
 
-namespace XRTK.Providers.Controllers.Simulation.Hands
+namespace XRTK.Definitions.Controllers.Simulation.Hands
 {
     /// <summary>
-    /// Simulatd pose of an hand controller defined by recorded joint poses.
+    /// Simulated pose of an hand controller defined by recorded joint poses.
     /// </summary>
-    public class SimulatedHandControllerPose
+    public struct SimulatedHandControllerPose : IEqualityComparer
     {
+        public SimulatedHandControllerPose(SimulatedHandControllerPose pose)
+        {
+            Id = pose.Id;
+            LocalJointPoses = new MixedRealityPose[BaseHandController.JointCount];
+            SetZero();
+            Array.Copy(pose.LocalJointPoses, LocalJointPoses, BaseHandController.JointCount);
+        }
+
         /// <summary>
         /// Creates a new hand pose with all joints in their
         /// local space origin.
         /// </summary>
-        /// <param name="id">Unique pose identfier.</param>
+        /// <param name="id">Unique pose identifier.</param>
         public SimulatedHandControllerPose(string id)
         {
             Id = id;
@@ -28,29 +37,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             SetZero();
         }
 
-        /// <summary>
-        /// Creates a new hand pose using local pose data for the hand's joints.
-        /// </summary>
-        /// <param name="id">Unique pose identfier.</param>
-        /// <param name="localJointPoses">Joint poses in local space.</param>
-        public SimulatedHandControllerPose(string id, MixedRealityPose[] localJointPoses) : this(id)
-        {
-            Array.Copy(localJointPoses, LocalJointPoses, BaseHandController.JointCount);
-        }
+        private static readonly Dictionary<string, SimulatedHandControllerPose> HandPoses = new Dictionary<string, SimulatedHandControllerPose>();
 
-        private static readonly Dictionary<string, SimulatedHandControllerPose> handPoses = new Dictionary<string, SimulatedHandControllerPose>();
         private static bool isInitialized = false;
-
-        /// <summary>
-        /// Joint poses are stored as right-hand poses in camera space.
-        /// Output poses are computed in world space, and mirroring on the x axis for the left hand.
-        /// </summary>
-        public MixedRealityPose[] LocalJointPoses { get; }
-
-        /// <summary>
-        /// Gets the unique identifier for the simulated pose.
-        /// </summary>
-        public string Id { get; }
 
         /// <summary>
         /// Gets the configured default pose for simulation hands.
@@ -58,10 +47,37 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public static SimulatedHandControllerPoseData DefaultHandPose { get; private set; }
 
         /// <summary>
+        /// Gets the unique identifier for the simulated pose.
+        /// </summary>
+        public string Id { get; private set; }
+
+        /// <summary>
+        /// Joint poses are stored as right-hand poses in camera space.
+        /// Output poses are computed in world space, and mirroring on the x axis for the left hand.
+        /// </summary>
+        public MixedRealityPose[] LocalJointPoses { get; private set; }
+
+        public static bool operator ==(SimulatedHandControllerPose left, SimulatedHandControllerPose right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(SimulatedHandControllerPose left, SimulatedHandControllerPose right)
+        {
+            return !left.Equals(right);
+        }
+
+        /// <inheritdoc />
+        public override string ToString()
+        {
+            return $"{ToJson()}";
+        }
+
+        /// <summary>
         /// Initialize pose data for use in editor from files.
         /// </summary>
         /// <param name="poses">List of pose data assets with pose information.</param>
-        public static void Initialize(IEnumerable<SimulatedHandControllerPoseData> poses)
+        public static void Initialize(IReadOnlyList<SimulatedHandControllerPoseData> poses)
         {
             if (isInitialized)
             {
@@ -71,15 +87,17 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             // To stabilize the simulated hand poses, we look
             // for the hand "open" pose, which we will use as a reference to offset
             // all other poses, so the "Palm" joint position stays the same for all simulated
-            // poses. If no open pose is defined, we can't do anything and keep everythign as it is.
-            SimulatedHandControllerPose openPose = null;
-            foreach (SimulatedHandControllerPoseData poseData in poses)
+            // poses. If no open pose is defined, we can't do anything and keep everything as it is.
+            SimulatedHandControllerPose openPose = default;
+
+            foreach (var poseData in poses)
             {
                 if (poseData.Id.Equals("open"))
                 {
                     openPose = new SimulatedHandControllerPose(poseData.Id);
                     openPose.FromJson(poseData.Data.text);
-                    handPoses.Add(openPose.Id, openPose);
+                    HandPoses.Add(openPose.Id, openPose);
+                    //break;
                 }
             }
 
@@ -87,24 +105,24 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             {
                 if (poseData.Data != null)
                 {
-                    if (openPose != null)
+                    if (openPose != default)
                     {
                         // If we already found the open pose, we don't want it initialized again, since we took
                         // care of that above.
                         if (!poseData.Id.Equals("open"))
                         {
                             // We have open pose data, offset this pose using it's palm position.
-                            SimulatedHandControllerPose pose = new SimulatedHandControllerPose(poseData.Id);
+                            var pose = new SimulatedHandControllerPose(poseData.Id);
                             pose.FromJson(poseData.Data.text);
                             OffsetJointsRelativeToOpenPosePalmPosition(openPose, pose);
-                            handPoses.Add(pose.Id, pose);
+                            HandPoses.Add(pose.Id, pose);
                         }
                     }
                     else
                     {
-                        SimulatedHandControllerPose pose = new SimulatedHandControllerPose(poseData.Id);
+                        var pose = new SimulatedHandControllerPose(poseData.Id);
                         pose.FromJson(poseData.Data.text);
-                        handPoses.Add(pose.Id, pose);
+                        HandPoses.Add(pose.Id, pose);
                     }
                 }
 
@@ -139,26 +157,26 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             for (int i = 0; i < BaseHandController.JointCount; i++)
             {
                 // Initialize from local offsets
-                Vector3 p = LocalJointPoses[i].Position;
-                Quaternion r = LocalJointPoses[i].Rotation;
+                var localPosition = LocalJointPoses[i].Position;
+                var localRotation = LocalJointPoses[i].Rotation;
 
                 // Pose offset are for right hand, mirror on X axis if left hand is needed
                 if (handedness == Handedness.Left)
                 {
-                    p.x = -p.x;
-                    r.y = -r.y;
-                    r.z = -r.z;
+                    localPosition.x = -localPosition.x;
+                    localRotation.y = -localRotation.y;
+                    localRotation.z = -localRotation.z;
                 }
 
                 // Apply camera transform
-                p = cameraRotation * p;
-                r = cameraRotation * r;
+                localPosition = cameraRotation * localPosition;
+                localRotation = cameraRotation * localRotation;
 
                 // Apply external transform
-                p = position + rotation * p;
-                r = rotation * r;
+                localPosition = position + rotation * localPosition;
+                localRotation = rotation * localRotation;
 
-                jointsOut[i] = new MixedRealityPose(p, r);
+                jointsOut[i] = new MixedRealityPose(localPosition, localRotation);
             }
         }
 
@@ -200,7 +218,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         public void SetZero()
         {
-            for (int i = 0; i < BaseHandController.JointCount; i++)
+            for (int i = 0; i < LocalJointPoses.Length; i++)
             {
                 LocalJointPoses[i] = MixedRealityPose.ZeroIdentity;
             }
@@ -209,42 +227,41 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <summary>
         /// Interpolates between the poses a and b by the interpolant t.
         /// </summary>
+        /// <param name="interpolatedPose"></param>
         /// <param name="a">Pose at t = 0.</param>
         /// <param name="b">Pose at t = 1.</param>
         /// <param name="t">The parameter t is clamped to the range [0,1].</param>
-        public static SimulatedHandControllerPose Lerp(SimulatedHandControllerPose a, SimulatedHandControllerPose b, float t)
+        public static void Lerp(ref SimulatedHandControllerPose interpolatedPose, SimulatedHandControllerPose a, SimulatedHandControllerPose b, float t)
         {
-            MixedRealityPose[] updatedJointPoses = new MixedRealityPose[BaseHandController.JointCount];
-
-            for (int i = 0; i < BaseHandController.JointCount; i++)
+            for (int i = 0; i < interpolatedPose.LocalJointPoses.Length; i++)
             {
-                MixedRealityPose jointPoseA = a.LocalJointPoses[i];
-                MixedRealityPose jointPoseB = b.LocalJointPoses[i];
+                var jointPoseA = a.LocalJointPoses[i];
+                var jointPoseB = b.LocalJointPoses[i];
 
-                Vector3 position = Vector3.Lerp(jointPoseA.Position, jointPoseB.Position, t);
-                Quaternion rotation = Quaternion.Slerp(jointPoseA.Rotation, jointPoseB.Rotation, t);
+                var position = Vector3.Lerp(jointPoseA.Position, jointPoseB.Position, t);
+                var rotation = Quaternion.Slerp(jointPoseA.Rotation, jointPoseB.Rotation, t);
 
-                updatedJointPoses[i] = new MixedRealityPose(position, rotation);
+                interpolatedPose.LocalJointPoses[i] = new MixedRealityPose(position, rotation);
             }
 
-            return new SimulatedHandControllerPose(t >= 1 ? b.Id : a.Id, updatedJointPoses);
+            interpolatedPose.Id = t >= 1 ? b.Id : a.Id;
         }
 
         /// <summary>
         /// Gets the pose for a given pose name, if it's registered.
         /// </summary>
         /// <param name="name">The name of the pose.</param>
-        /// <param name="pose">Hand pose reference.</param>
+        /// <param name="result">Hand pose reference.</param>
         /// <returns>True, if found.</returns>
-        public static bool TryGetPoseByName(string name, out SimulatedHandControllerPose pose)
+        public static bool TryGetPoseByName(string name, out SimulatedHandControllerPose result)
         {
-            if (handPoses.TryGetValue(name, out SimulatedHandControllerPose p))
+            if (HandPoses.TryGetValue(name, out var pose))
             {
-                pose = p;
+                result = pose;
                 return true;
             }
 
-            pose = null;
+            result = default;
             return false;
         }
 
@@ -255,7 +272,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <returns>Simulated hand pose.</returns>
         public static SimulatedHandControllerPose GetPoseByName(string name)
         {
-            return handPoses[name];
+            return HandPoses[name];
         }
 
         /// <summary>
@@ -263,7 +280,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         public string ToJson()
         {
-            List<RecordedHandJoint> recordings = new List<RecordedHandJoint>();
+            var recordings = new List<RecordedHandJoint>();
+
             for (int i = 0; i < LocalJointPoses.Length; i++)
             {
                 recordings.Add(new RecordedHandJoint((TrackedHandJoint)i, LocalJointPoses[i]));
@@ -277,12 +295,44 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         public void FromJson(string json)
         {
-            RecordedHandJoints record = JsonUtility.FromJson<RecordedHandJoints>(json);
+            var record = JsonUtility.FromJson<RecordedHandJoints>(json);
+
             for (int i = 0; i < record.items.Length; i++)
             {
-                RecordedHandJoint jointRecord = record.items[i];
+                var jointRecord = record.items[i];
                 LocalJointPoses[(int)jointRecord.JointIndex] = jointRecord.pose;
             }
         }
+
+        #region IEqualityComparer Implementation
+
+        bool IEqualityComparer.Equals(object left, object right)
+        {
+            if (left is null || right is null) { return false; }
+            if (!(left is SimulatedHandControllerPose) || !(right is SimulatedHandControllerPose)) { return false; }
+            return ((SimulatedHandControllerPose)left).Equals((SimulatedHandControllerPose)right);
+        }
+
+        public bool Equals(SimulatedHandControllerPose other)
+        {
+            return Id == other.Id;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return !(obj is null) && (obj is SimulatedHandControllerPose pose && Equals(pose));
+        }
+
+        int IEqualityComparer.GetHashCode(object obj)
+        {
+            return obj is SimulatedHandControllerPose pose ? pose.GetHashCode() : 0;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        #endregion IEqualityComparer Implementation
     }
 }

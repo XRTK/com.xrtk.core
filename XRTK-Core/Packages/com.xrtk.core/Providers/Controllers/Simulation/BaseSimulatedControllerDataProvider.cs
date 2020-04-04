@@ -210,9 +210,9 @@ namespace XRTK.Providers.Controllers.Simulation
         /// <param name="handedness">Handedness of the controller to remove.</param>
         protected void RemoveController(Handedness handedness)
         {
-            if (TryGetController(handedness, out BaseController controller))
+            if (TryGetController(handedness, out var controller))
             {
-                MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
+                MixedRealityToolkit.InputSystem?.RaiseSourceLost(controller.InputSource, controller);
                 SimulatedControllers.Remove(controller);
             }
         }
@@ -240,7 +240,8 @@ namespace XRTK.Providers.Controllers.Simulation
         {
             for (int i = 0; i < ActiveControllers.Count; i++)
             {
-                BaseController existingController = ActiveControllers[i];
+                var existingController = ActiveControllers[i];
+
                 if (existingController.ControllerHandedness == handedness)
                 {
                     controller = existingController;
@@ -253,7 +254,7 @@ namespace XRTK.Providers.Controllers.Simulation
         }
 
         /// <summary>
-        /// Asks the concrete simulation data create and regisgter a new simulated controller.
+        /// Asks the concrete simulation data create and register a new simulated controller.
         /// </summary>
         /// <param name="handedness">The handedness of the controller to create.</param>
         protected abstract void CreateAndRegisterSimulatedController(Handedness handedness);

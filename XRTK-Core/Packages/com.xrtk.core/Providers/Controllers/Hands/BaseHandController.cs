@@ -32,17 +32,20 @@ namespace XRTK.Providers.Controllers.Hands
             handControllerDataProvider = MixedRealityToolkit.GetService<IMixedRealityHandControllerDataProvider>();
         }
 
-        private readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
-        private readonly Dictionary<TrackedHandBounds, Bounds[]> bounds = new Dictionary<TrackedHandBounds, Bounds[]>();
-        private readonly IMixedRealityHandControllerDataProvider handControllerDataProvider;
-
-        private const float currentVelocityWeight = .8f;
         private const float newVelocityWeight = .2f;
-        private float deltaTimeStart;
-        private Vector3 lastPalmPosition;
-        private Vector3 lastPalmNormal;
+        private const float currentVelocityWeight = .8f;
+
         private readonly int velocityUpdateInterval = 9;
+        private readonly IMixedRealityHandControllerDataProvider handControllerDataProvider;
+        private readonly Dictionary<TrackedHandBounds, Bounds[]> bounds = new Dictionary<TrackedHandBounds, Bounds[]>();
+        private readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
+
         private int frameOn = 0;
+
+        private float deltaTimeStart;
+
+        private Vector3 lastPalmNormal;
+        private Vector3 lastPalmPosition;
 
         /// <summary>
         /// Gets the total count of joints a hand controller supports.
@@ -52,21 +55,19 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Gets the current palm normal of the hand controller.
         /// </summary>
-        protected Vector3 PalmNormal => TryGetJointPose(TrackedHandJoint.Palm, out MixedRealityPose pose) ? -pose.Up : Vector3.zero;
+        protected Vector3 PalmNormal => TryGetJointPose(TrackedHandJoint.Palm, out var pose) ? -pose.Up : Vector3.zero;
 
-        /// <inheritdoc />
         public void UpdateController(HandData handData)
         {
             if (!Enabled) { return; }
 
-            TrackingState lastState = TrackingState;
+            var lastState = TrackingState;
 
             UpdateJoints(handData);
             UpdateBounds();
             UpdateVelocity();
 
-            MixedRealityPose wristPose;
-            if (TryGetJointPose(TrackedHandJoint.Wrist, out wristPose))
+            if (TryGetJointPose(TrackedHandJoint.Wrist, out var wristPose))
             {
                 IsPositionAvailable = true;
                 IsPositionApproximate = false;
@@ -85,7 +86,7 @@ namespace XRTK.Providers.Controllers.Hands
                 MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, wristPose);
             }
 
-            MixedRealityToolkit.InputSystem.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);
+            MixedRealityToolkit.InputSystem?.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);
 
             UpdateInteractions();
         }
@@ -95,13 +96,14 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         protected virtual void UpdateInteractions()
         {
-            for (int i = 0; i < Interactions?.Length; i++)
+            for (var i = 0; i < Interactions?.Length; i++)
             {
-                MixedRealityInteractionMapping interactionMapping = Interactions[i];
+                var interactionMapping = Interactions[i];
+
                 switch (interactionMapping.InputType)
                 {
                     case DeviceInputType.PointerPosition:
-                        if (TryGetJointPose(TrackedHandJoint.Palm, out MixedRealityPose pose))
+                        if (TryGetJointPose(TrackedHandJoint.Palm, out var pose))
                         {
                             interactionMapping.PoseData = pose;
                             interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
@@ -117,9 +119,10 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The updated hand data for this controller.</param>
         private void UpdateJoints(HandData handData)
         {
-            for (int i = 0; i < JointCount; i++)
+            for (var i = 0; i < JointCount; i++)
             {
-                TrackedHandJoint handJoint = (TrackedHandJoint)i;
+                var handJoint = (TrackedHandJoint)i;
+
                 if (TryGetJointPose(handJoint, out _))
                 {
                     jointPoses[handJoint] = handData.Joints[i];
@@ -152,36 +155,36 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdatePalmBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.PinkyMetacarpal, out MixedRealityPose pinkyMetacarpalPose)
-                && TryGetJointPose(TrackedHandJoint.PinkyKnuckle, out MixedRealityPose pinkyKnucklePose)
-                && TryGetJointPose(TrackedHandJoint.RingMetacarpal, out MixedRealityPose ringMetacarpalPose)
-                && TryGetJointPose(TrackedHandJoint.RingKnuckle, out MixedRealityPose ringKnucklePose)
-                && TryGetJointPose(TrackedHandJoint.MiddleMetacarpal, out MixedRealityPose middleMetacarpalPose)
-                && TryGetJointPose(TrackedHandJoint.MiddleKnuckle, out MixedRealityPose middleKnucklePose)
-                && TryGetJointPose(TrackedHandJoint.IndexMetacarpal, out MixedRealityPose indexMetacarpalPose)
-                && TryGetJointPose(TrackedHandJoint.IndexKnuckle, out MixedRealityPose indexKnucklePose))
+            if (TryGetJointPose(TrackedHandJoint.PinkyMetacarpal, out var pinkyMetacarpalPose) &&
+                TryGetJointPose(TrackedHandJoint.PinkyKnuckle, out var pinkyKnucklePose) &&
+                TryGetJointPose(TrackedHandJoint.RingMetacarpal, out var ringMetacarpalPose) &&
+                TryGetJointPose(TrackedHandJoint.RingKnuckle, out var ringKnucklePose) &&
+                TryGetJointPose(TrackedHandJoint.MiddleMetacarpal, out var middleMetacarpalPose) &&
+                TryGetJointPose(TrackedHandJoint.MiddleKnuckle, out var middleKnucklePose) &&
+                TryGetJointPose(TrackedHandJoint.IndexMetacarpal, out var indexMetacarpalPose) &&
+                TryGetJointPose(TrackedHandJoint.IndexKnuckle, out var indexKnucklePose))
             {
                 // Palm bounds are a composite of each finger's metacarpal -> knuckle joint bounds.
                 // Excluding the thumb here.
-                Bounds[] palmBounds = new Bounds[4];
+                var palmBounds = new Bounds[4];
 
                 // Index
-                Bounds indexPalmBounds = new Bounds(indexMetacarpalPose.Position, Vector3.zero);
+                var indexPalmBounds = new Bounds(indexMetacarpalPose.Position, Vector3.zero);
                 indexPalmBounds.Encapsulate(indexKnucklePose.Position);
                 palmBounds[0] = indexPalmBounds;
 
                 // Middle
-                Bounds middlePalmBounds = new Bounds(middleMetacarpalPose.Position, Vector3.zero);
+                var middlePalmBounds = new Bounds(middleMetacarpalPose.Position, Vector3.zero);
                 middlePalmBounds.Encapsulate(middleKnucklePose.Position);
                 palmBounds[1] = middlePalmBounds;
 
                 // Ring
-                Bounds ringPalmBounds = new Bounds(ringMetacarpalPose.Position, Vector3.zero);
+                var ringPalmBounds = new Bounds(ringMetacarpalPose.Position, Vector3.zero);
                 ringPalmBounds.Encapsulate(ringKnucklePose.Position);
                 palmBounds[2] = ringPalmBounds;
 
                 // Pinky
-                Bounds pinkyPalmBounds = new Bounds(pinkyMetacarpalPose.Position, Vector3.zero);
+                var pinkyPalmBounds = new Bounds(pinkyMetacarpalPose.Position, Vector3.zero);
                 pinkyPalmBounds.Encapsulate(pinkyKnucklePose.Position);
                 palmBounds[3] = pinkyPalmBounds;
 
@@ -199,9 +202,9 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateHandBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.Palm, out MixedRealityPose palmPose))
+            if (TryGetJointPose(TrackedHandJoint.Palm, out var palmPose))
             {
-                Bounds newHandBounds = new Bounds(palmPose.Position, Vector3.zero);
+                var newHandBounds = new Bounds(palmPose.Position, Vector3.zero);
                 foreach (var kvp in jointPoses)
                 {
                     if (kvp.Key == TrackedHandJoint.None ||
@@ -226,20 +229,20 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateThumbBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.ThumbMetacarpalJoint, out MixedRealityPose knucklePose)
-                && TryGetJointPose(TrackedHandJoint.ThumbProximalJoint, out MixedRealityPose middlePose)
-                && TryGetJointPose(TrackedHandJoint.ThumbTip, out MixedRealityPose tipPose))
+            if (TryGetJointPose(TrackedHandJoint.ThumbMetacarpalJoint, out var knucklePose)
+                && TryGetJointPose(TrackedHandJoint.ThumbProximalJoint, out var middlePose)
+                && TryGetJointPose(TrackedHandJoint.ThumbTip, out var tipPose))
             {
                 // Thumb bounds include metacarpal -> proximal and proximal -> tip bounds.
-                Bounds[] thumbBounds = new Bounds[2];
+                var thumbBounds = new Bounds[2];
 
                 // Knuckle to middle joint bounds.
-                Bounds knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
+                var knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
                 knuckleToMiddleBounds.Encapsulate(middlePose.Position);
                 thumbBounds[0] = knuckleToMiddleBounds;
 
                 // Middle to tip joint bounds.
-                Bounds middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
+                var middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
                 middleToTipBounds.Encapsulate(tipPose.Position);
                 thumbBounds[1] = middleToTipBounds;
 
@@ -257,20 +260,20 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateIndexFingerBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.IndexKnuckle, out MixedRealityPose knucklePose)
-                && TryGetJointPose(TrackedHandJoint.IndexMiddleJoint, out MixedRealityPose middlePose)
-                && TryGetJointPose(TrackedHandJoint.IndexTip, out MixedRealityPose tipPose))
+            if (TryGetJointPose(TrackedHandJoint.IndexKnuckle, out var knucklePose) &&
+                TryGetJointPose(TrackedHandJoint.IndexMiddleJoint, out var middlePose) &&
+                TryGetJointPose(TrackedHandJoint.IndexTip, out var tipPose))
             {
                 // Index finger bounds include knuckle -> middle and middle -> tip bounds.
-                Bounds[] indexFingerBounds = new Bounds[2];
+                var indexFingerBounds = new Bounds[2];
 
                 // Knuckle to middle joint bounds.
-                Bounds knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
+                var knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
                 knuckleToMiddleBounds.Encapsulate(middlePose.Position);
                 indexFingerBounds[0] = knuckleToMiddleBounds;
 
                 // Middle to tip joint bounds.
-                Bounds middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
+                var middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
                 middleToTipBounds.Encapsulate(tipPose.Position);
                 indexFingerBounds[1] = middleToTipBounds;
 
@@ -288,20 +291,20 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateMiddleFingerBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.MiddleKnuckle, out MixedRealityPose knucklePose)
-                && TryGetJointPose(TrackedHandJoint.MiddleMiddleJoint, out MixedRealityPose middlePose)
-                && TryGetJointPose(TrackedHandJoint.MiddleTip, out MixedRealityPose tipPose))
+            if (TryGetJointPose(TrackedHandJoint.MiddleKnuckle, out var knucklePose) &&
+                TryGetJointPose(TrackedHandJoint.MiddleMiddleJoint, out var middlePose) &&
+                TryGetJointPose(TrackedHandJoint.MiddleTip, out var tipPose))
             {
                 // Middle finger bounds include knuckle -> middle and middle -> tip bounds.
-                Bounds[] middleFingerBounds = new Bounds[2];
+                var middleFingerBounds = new Bounds[2];
 
                 // Knuckle to middle joint bounds.
-                Bounds knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
+                var knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
                 knuckleToMiddleBounds.Encapsulate(middlePose.Position);
                 middleFingerBounds[0] = knuckleToMiddleBounds;
 
                 // Middle to tip joint bounds.
-                Bounds middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
+                var middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
                 middleToTipBounds.Encapsulate(tipPose.Position);
                 middleFingerBounds[1] = middleToTipBounds;
 
@@ -319,20 +322,20 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateRingFingerBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.RingKnuckle, out MixedRealityPose knucklePose)
-                && TryGetJointPose(TrackedHandJoint.RingMiddleJoint, out MixedRealityPose middlePose)
-                && TryGetJointPose(TrackedHandJoint.RingTip, out MixedRealityPose tipPose))
+            if (TryGetJointPose(TrackedHandJoint.RingKnuckle, out var knucklePose) &&
+                TryGetJointPose(TrackedHandJoint.RingMiddleJoint, out var middlePose) &&
+                TryGetJointPose(TrackedHandJoint.RingTip, out var tipPose))
             {
                 // Ring finger bounds include knuckle -> middle and middle -> tip bounds.
-                Bounds[] ringFingerBounds = new Bounds[2];
+                var ringFingerBounds = new Bounds[2];
 
                 // Knuckle to middle joint bounds.
-                Bounds knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
+                var knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
                 knuckleToMiddleBounds.Encapsulate(middlePose.Position);
                 ringFingerBounds[0] = knuckleToMiddleBounds;
 
                 // Middle to tip joint bounds.
-                Bounds middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
+                var middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
                 middleToTipBounds.Encapsulate(tipPose.Position);
                 ringFingerBounds[1] = middleToTipBounds;
 
@@ -350,20 +353,20 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdatePinkyFingerBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.PinkyKnuckle, out MixedRealityPose knucklePose)
-                && TryGetJointPose(TrackedHandJoint.PinkyMiddleJoint, out MixedRealityPose middlePose)
-                && TryGetJointPose(TrackedHandJoint.PinkyTip, out MixedRealityPose tipPose))
+            if (TryGetJointPose(TrackedHandJoint.PinkyKnuckle, out var knucklePose) &&
+                TryGetJointPose(TrackedHandJoint.PinkyMiddleJoint, out var middlePose) &&
+                TryGetJointPose(TrackedHandJoint.PinkyTip, out var tipPose))
             {
                 // Pinky finger bounds include knuckle -> middle and middle -> tip bounds.
-                Bounds[] pinkyBounds = new Bounds[2];
+                var pinkyBounds = new Bounds[2];
 
                 // Knuckle to middle joint bounds.
-                Bounds knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
+                var knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
                 knuckleToMiddleBounds.Encapsulate(middlePose.Position);
                 pinkyBounds[0] = knuckleToMiddleBounds;
 
                 // Middle to tip joint bounds.
-                Bounds middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
+                var middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
                 middleToTipBounds.Encapsulate(tipPose.Position);
                 pinkyBounds[1] = middleToTipBounds;
 
@@ -395,14 +398,14 @@ namespace XRTK.Providers.Controllers.Hands
             else if (frameOn == velocityUpdateInterval)
             {
                 // Update linear velocity.
-                float deltaTime = Time.unscaledTime - deltaTimeStart;
-                Vector3 newVelocity = (GetJointPosition(TrackedHandJoint.Palm) - lastPalmPosition) / deltaTime;
+                var deltaTime = Time.unscaledTime - deltaTimeStart;
+                var newVelocity = (GetJointPosition(TrackedHandJoint.Palm) - lastPalmPosition) / deltaTime;
                 Velocity = (Velocity * currentVelocityWeight) + (newVelocity * newVelocityWeight);
 
                 // Update angular velocity.
-                Vector3 currentPalmNormal = PalmNormal;
-                Quaternion rotation = Quaternion.FromToRotation(lastPalmNormal, currentPalmNormal);
-                Vector3 rotationRate = rotation.eulerAngles * Mathf.Deg2Rad;
+                var currentPalmNormal = PalmNormal;
+                var rotation = Quaternion.FromToRotation(lastPalmNormal, currentPalmNormal);
+                var rotationRate = rotation.eulerAngles * Mathf.Deg2Rad;
                 AngularVelocity = rotationRate / deltaTime;
             }
 
@@ -411,15 +414,15 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <inheritdoc />
-        public bool TryGetBounds(TrackedHandBounds handBounds, out Bounds[] bounds)
+        public bool TryGetBounds(TrackedHandBounds handBounds, out Bounds[] newBounds)
         {
-            if (this.bounds.ContainsKey(handBounds))
+            if (bounds.ContainsKey(handBounds))
             {
-                bounds = this.bounds[handBounds];
+                newBounds = bounds[handBounds];
                 return true;
             }
 
-            bounds = null;
+            newBounds = null;
             return false;
         }
 
@@ -429,6 +432,6 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public virtual bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose) => jointPoses.TryGetValue(joint, out pose);
 
-        private Vector3 GetJointPosition(TrackedHandJoint joint) => TryGetJointPose(joint, out MixedRealityPose pose) ? pose.Position : Vector3.zero;
+        private Vector3 GetJointPosition(TrackedHandJoint joint) => TryGetJointPose(joint, out var pose) ? pose.Position : Vector3.zero;
     }
 }

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
@@ -16,7 +16,7 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// Get the hands bounds of a given type, if they are available.
         /// </summary>
         /// <param name="handBounds">The requested hand bounds.</param>
-        /// <param name="bounds">The bounds if avaialble.</param>
+        /// <param name="bounds">The bounds if available.</param>
         /// <returns>True, if bounds available.</returns>
         bool TryGetBounds(TrackedHandBounds handBounds, out Bounds[] bounds);
 
@@ -28,11 +28,5 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// i.e. joints rotate primarily around the X-axis.
         /// </remarks>
         bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose);
-
-        /// <summary>
-        /// Updates the hand controller using mapped hand data.
-        /// </summary>
-        /// <param name="handData">Platform agnostics hand controller data.</param>
-        void UpdateController(HandData handData);
     }
 }

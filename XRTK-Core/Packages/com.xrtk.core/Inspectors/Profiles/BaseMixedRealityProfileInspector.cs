@@ -17,8 +17,6 @@ namespace XRTK.Inspectors.Profiles
     public abstract class BaseMixedRealityProfileInspector : Editor
     {
         protected static readonly string DefaultGuidString = default(Guid).ToString("N");
-        protected static readonly GUIContent NewProfileContent = new GUIContent("+", "Create New Profile");
-        protected static readonly GUIContent CloneProfileContent = new GUIContent("Clone", "Replace with a copy of the default profile.");
 
         private static SerializedObject targetProfile;
         private static BaseMixedRealityProfile currentlySelectedProfile;
@@ -92,14 +90,6 @@ namespace XRTK.Inspectors.Profiles
         private static void PasteProfileValues()
         {
             currentlySelectedProfile.CopySerializedValues(profileSource);
-        }
-
-        private static async void PasteProfileValuesDelay(BaseMixedRealityProfile newProfile)
-        {
-            await new WaitUntil(() => currentlySelectedProfile == newProfile);
-            Selection.activeObject = null;
-            PasteProfileValues();
-            Selection.activeObject = newProfile;
         }
     }
 }

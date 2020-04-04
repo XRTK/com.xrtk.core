@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Linq;
 using NUnit.Framework;
 using XRTK.Definitions.InputSystem;
@@ -33,6 +34,7 @@ namespace XRTK.Tests.InputSystem
         {
             var oldActionWithNoGuid = new MixedRealityInputAction(default, 1, "Select", AxisType.Digital);
             var profileAction = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions.FirstOrDefault(action => action.Id == 1);
+            Assert.IsTrue(profileAction.ProfileGuid != default);
             Assert.IsTrue(oldActionWithNoGuid == profileAction);
         }
 

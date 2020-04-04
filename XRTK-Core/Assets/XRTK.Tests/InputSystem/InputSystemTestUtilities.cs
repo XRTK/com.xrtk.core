@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
@@ -13,7 +13,7 @@ namespace XRTK.Tests.InputSystem
     {
         public static MixedRealityInputSystemProfile SetupInputSystemProfile()
         {
-            // Create a Input System Profiles
+            // Create blank Input System Profiles
             var inputSystemProfile = ScriptableObject.CreateInstance<MixedRealityInputSystemProfile>();
             inputSystemProfile.FocusProviderType = typeof(FocusProvider);
             inputSystemProfile.InputActionsProfile = ScriptableObject.CreateInstance<MixedRealityInputActionsProfile>();

@@ -9,11 +9,20 @@ using XRTK.Definitions.Utilities;
 namespace XRTK.Definitions.InputSystem
 {
     /// <summary>
-    /// An Input Action for mapping an action to an Input Sources Button, Joystick, Sensor, etc.
+    /// An Input Action for mapping an action to an Input Control like a Button, Joystick, Sensor, etc.
     /// </summary>
     [Serializable]
     public struct MixedRealityInputAction : IEqualityComparer
     {
+        private MixedRealityInputAction(string description)
+        {
+            this.cachedGuid = default;
+            this.profileGuid = cachedGuid.ToString("N");
+            this.id = 0;
+            this.description = description;
+            this.axisConstraint = AxisType.None;
+        }
+
         /// <summary>
         /// Constructor.
         /// </summary>
@@ -22,6 +31,16 @@ namespace XRTK.Definitions.InputSystem
         /// <param name="axisConstraint"></param>
         public MixedRealityInputAction(uint id, string description, AxisType axisConstraint = AxisType.None)
         {
+            if (id == 0)
+            {
+                throw new ArgumentException($"{nameof(id)} cannot be 0");
+            }
+
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                throw new ArgumentException($"{nameof(description)} cannot be empty");
+            }
+
             this.cachedGuid = default;
             this.profileGuid = cachedGuid.ToString("N");
             this.id = id;
@@ -38,6 +57,16 @@ namespace XRTK.Definitions.InputSystem
         /// <param name="axisConstraint"></param>
         public MixedRealityInputAction(Guid profileGuid, uint id, string description, AxisType axisConstraint = AxisType.None)
         {
+            if (id == 0)
+            {
+                throw new ArgumentException($"{nameof(id)} cannot be 0");
+            }
+
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                throw new ArgumentException($"{nameof(description)} cannot be empty");
+            }
+
             this.cachedGuid = profileGuid;
             this.profileGuid = profileGuid.ToString("N");
             this.id = id;
@@ -48,7 +77,10 @@ namespace XRTK.Definitions.InputSystem
         /// <summary>
         /// Default input action that doesn't represent any defined action.
         /// </summary>
-        public static readonly MixedRealityInputAction None = new MixedRealityInputAction(default, 0, "None");
+        /// <remarks>
+        /// Any action that has an id of 0 is considered the same as None.
+        /// </remarks>
+        public static readonly MixedRealityInputAction None = new MixedRealityInputAction("None");
 
         private static readonly string DefaultGuidString = default(Guid).ToString("N");
 
@@ -64,7 +96,8 @@ namespace XRTK.Definitions.InputSystem
         {
             get
             {
-                if (cachedGuid == default &&
+                if (id != 0 &&
+                    cachedGuid == default &&
                     profileGuid != DefaultGuidString)
                 {
                     if (string.IsNullOrWhiteSpace(profileGuid))

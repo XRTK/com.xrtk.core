@@ -15,6 +15,16 @@ namespace XRTK.Inspectors.PropertyDrawers
     /// </summary>
     /// <example>
     /// <code language="csharp"><![CDATA[
+    /// public class CustomScript : Monobehaviour
+    /// {
+    ///     [SerializeField]
+    ///     private MixedRealityInputAction testAction = MixedRealityInputAction.None;
+    /// 
+    ///     [SerializeField]
+    ///     [AxisConstraint(AxisType.DualAxis)]
+    ///     private MixedRealityInputAction test2Action = MixedRealityInputAction.None;
+    /// }
+    /// 
     /// [CustomEditor(typeof(CustomScript))]
     /// public class CustomInspector : Editor
     /// {

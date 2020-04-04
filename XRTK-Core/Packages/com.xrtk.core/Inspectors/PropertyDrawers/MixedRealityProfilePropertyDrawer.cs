@@ -48,7 +48,7 @@ namespace XRTK.Inspectors.PropertyDrawers
 
             if (profile != null)
             {
-                Debug.Assert(!(profile is MixedRealityToolkitRootProfile) && parent != null || profile is MixedRealityToolkitRootProfile && parent == null, $"{profile?.name}.{profile?.ParentProfile}");
+                Debug.Assert(!(profile is MixedRealityToolkitRootProfile) && parent != null || profile is MixedRealityToolkitRootProfile && parent == null);
             }
 
             var propertyLabel = EditorGUI.BeginProperty(position, label, property);

@@ -23,7 +23,7 @@ namespace XRTK.Tests
             EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
         }
 
-        public static void InitializeMixedRealityToolkitScene(bool useDefaultProfile = false)
+        public static void InitializeMixedRealityToolkitScene(bool useDefaultProfile)
         {
             // Setup
             CleanupScene();
@@ -41,7 +41,7 @@ namespace XRTK.Tests
                 ? GetDefaultMixedRealityProfile<MixedRealityToolkitRootProfile>()
                 : ScriptableObject.CreateInstance<MixedRealityToolkitRootProfile>();
 
-            Assert.IsTrue(configuration != null, "Failed to find the Default Mixed Reality Settings Profile");
+            Assert.IsTrue(configuration != null, "Failed to find the Default Mixed Reality Root Profile");
             MixedRealityToolkit.Instance.ResetProfile(configuration);
             Assert.IsTrue(MixedRealityToolkit.Instance.ActiveProfile != null);
             Assert.IsTrue(MixedRealityToolkit.IsInitialized);

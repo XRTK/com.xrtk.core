@@ -3,7 +3,6 @@
 
 using UnityEditor;
 using XRTK.Definitions.InputSystem;
-using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
 {
@@ -11,7 +10,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
     public class MixedRealityHandTrackingProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty handMeshingEnabled;
-        private SerializedProperty handRayType;
 
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
@@ -22,7 +20,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             base.OnEnable();
 
             handMeshingEnabled = serializedObject.FindProperty(nameof(handMeshingEnabled));
-            handRayType = serializedObject.FindProperty(nameof(handRayType));
 
             handPhysicsEnabled = serializedObject.FindProperty(nameof(handPhysicsEnabled));
             useTriggers = serializedObject.FindProperty(nameof(useTriggers));
@@ -40,7 +37,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(handMeshingEnabled);
-            EditorGUILayout.PropertyField(handRayType);
             EditorGUILayout.Space();
 
             EditorGUILayout.PropertyField(handPhysicsEnabled);

@@ -14,6 +14,7 @@ using XRTK.Interfaces.InputSystem.Controllers.Hands;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Providers.Controllers.Hands;
 using XRTK.Services;
+using XRTK.Utilities;
 using Random = UnityEngine.Random;
 
 namespace XRTK.Providers.Controllers.Simulation.Hands
@@ -51,17 +52,17 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             initialPose = SimulatedHandControllerPose.GetPoseByName(SimulatedHandControllerPose.DefaultHandPose.Id);
             pose = new SimulatedHandControllerPose(initialPose);
-            lastUpdatedStopWatch = new SimulationTimeStampStopWatch();
+            lastUpdatedStopWatch = new StopWatch();
             Reset();
 
             // Start the timestamp stopwatch
-            handUpdateStopWatch = new SimulationTimeStampStopWatch();
+            handUpdateStopWatch = new StopWatch();
             handUpdateStopWatch.Reset();
         }
 
         private readonly ISimulatedHandControllerDataProvider simulatedHandControllerDataProvider;
-        private readonly SimulationTimeStampStopWatch handUpdateStopWatch;
-        private readonly SimulationTimeStampStopWatch lastUpdatedStopWatch;
+        private readonly StopWatch handUpdateStopWatch;
+        private readonly StopWatch lastUpdatedStopWatch;
         private Vector3? lastMousePosition = null;
 
         private float currentPoseBlending = 0.0f;

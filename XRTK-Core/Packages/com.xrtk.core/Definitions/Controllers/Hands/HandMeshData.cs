@@ -1,17 +1,15 @@
-﻿using UnityEngine;
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
 
-namespace XRTK.Providers.Controllers.Hands
+using UnityEngine;
+
+namespace XRTK.Definitions.Controllers.Hands
 {
     /// <summary>
     /// Snapshot of hand mesh information.
     /// </summary>
-    public class HandMeshData
+    public struct HandMeshData
     {
-        /// <summary>
-        /// Constructs a new empty hand mesh data snapshot.
-        /// </summary>
-        public HandMeshData() { }
-
         /// <summary>
         /// Constructs a new hand mesh data snapshot.
         /// </summary>

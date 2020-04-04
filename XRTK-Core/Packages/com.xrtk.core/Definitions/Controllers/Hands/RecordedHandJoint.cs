@@ -6,11 +6,11 @@ using UnityEngine;
 using XRTK.Definitions.Utilities;
 using XRTK.Providers.Controllers.Hands;
 
-namespace XRTK.Providers.Controllers.Simulation.Hands
+namespace XRTK.Definitions.Controllers.Hands
 {
     /// <summary>
     /// Unity's <see cref="JsonUtility"/> "currently" (stated in 2011) does not support top-level arrays.
-    /// But hey, it's on their "future" roadmap. That's why we need a wrapper definition around or items.
+    /// But hey, it's on their "future" road-map. That's why we need a wrapper definition around or items.
     /// </summary>
     /// <remarks>The <see cref="JsonUtility"/> also does not support properties, so we gotta use fields. Oh and it also
     /// does not support auto mapping of JSON naming "items" to C# naming "Items".</remarks>
@@ -36,11 +36,11 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <param name="pose"></param>
         public RecordedHandJoint(TrackedHandJoint joint, MixedRealityPose pose)
         {
-            this.joint = jointNames[(int)joint];
+            this.joint = JointNames[(int)joint];
             this.pose = pose;
         }
 
-        private static readonly string[] jointNames = Enum.GetNames(typeof(TrackedHandJoint));
+        private static readonly string[] JointNames = Enum.GetNames(typeof(TrackedHandJoint));
 
         /// <summary>
         /// Name of the joint recorded. Rather use <see cref="JointIndex"/> below for convenience.
@@ -59,15 +59,17 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         {
             get
             {
-                int nameIndex = Array.FindIndex(jointNames, IsJointName);
+                int nameIndex = Array.FindIndex(JointNames, IsJointName);
+
                 if (nameIndex < 0)
                 {
-                    Debug.LogError($"Joint name {joint} not in TrackedHandJoint enum");
+                    Debug.LogError($"Joint name {joint} not in {nameof(TrackedHandJoint)} enum");
                     return TrackedHandJoint.None;
                 }
+
                 return (TrackedHandJoint)nameIndex;
             }
-            set { joint = jointNames[(int)value]; }
+            set => joint = JointNames[(int)value];
         }
 
         private bool IsJointName(string s)

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
@@ -11,6 +12,7 @@ namespace XRTK.Definitions.InputSystem
     /// <summary>
     /// Configuration profile settings for setting up controller pointers.
     /// </summary>
+    [Obsolete]
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Pointer Profile", fileName = "MixedRealityInputPointerProfile", order = (int)CreateProfileMenuItemIndices.Pointer)]
     public class MixedRealityPointerProfile : BaseMixedRealityProfile
     {
@@ -33,12 +35,12 @@ namespace XRTK.Definitions.InputSystem
         public LayerMask[] PointingRaycastLayerMasks => pointingRaycastLayerMasks;
 
         [SerializeField]
-        private bool debugDrawPointingRays = false;
+        private bool drawDebugPointingRays = false;
 
         /// <summary>
         /// Toggle to enable or disable debug pointing rays.
         /// </summary>
-        public bool DebugDrawPointingRays => debugDrawPointingRays;
+        public bool DrawDebugPointingRays => drawDebugPointingRays;
 
         [SerializeField]
         private Color[] debugDrawPointingRayColors = null;

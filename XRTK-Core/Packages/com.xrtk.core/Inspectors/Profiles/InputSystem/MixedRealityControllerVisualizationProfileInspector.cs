@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
@@ -11,6 +12,7 @@ using XRTK.Providers.Controllers.UnityInput;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
 {
+    [Obsolete]
     [CustomEditor(typeof(MixedRealityControllerVisualizationProfile))]
     public class MixedRealityControllerVisualizationProfileInspector : BaseMixedRealityProfileInspector
     {

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
@@ -9,6 +10,7 @@ using XRTK.Utilities;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
 {
+    [Obsolete]
     [CustomEditor(typeof(MixedRealityPointerProfile))]
     public class MixedRealityPointerProfileInspector : BaseMixedRealityProfileInspector
     {
@@ -20,6 +22,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private SerializedProperty debugDrawPointingRayColors;
         private SerializedProperty gazeCursorPrefab;
         private SerializedProperty gazeProviderType;
+
         private SerializedProperty pointerOptions;
         private ReorderableList pointerOptionList;
 

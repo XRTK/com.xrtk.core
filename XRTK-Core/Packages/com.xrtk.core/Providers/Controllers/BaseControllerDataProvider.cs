@@ -2,13 +2,11 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections.Generic;
-using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
-using Object = UnityEngine.Object;
 
 namespace XRTK.Providers.Controllers
 {
@@ -39,31 +37,30 @@ namespace XRTK.Providers.Controllers
         {
             var pointers = new List<IMixedRealityPointer>();
 
-            if (MixedRealityToolkit.HasActiveProfile &&
-                MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
-                MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile != null)
-            {
-                for (int i = 0; i < MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.PointerOptions.Length; i++)
-                {
-                    var pointerProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.PointerOptions[i];
+            //if (MixedRealityToolkit.HasActiveProfile &&
+            //    MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
+            //{
+            //    for (int i = 0; i < MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.PointerOptions.Length; i++)
+            //    {
+            //        var pointerProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.PointerOptions[i];
 
-                    if (((useSpecificType && pointerProfile.ControllerType.Type == controllerType.Type) || (!useSpecificType && pointerProfile.ControllerType.Type == null)) &&
-                        (pointerProfile.Handedness == Handedness.Any || pointerProfile.Handedness == Handedness.Both || pointerProfile.Handedness == controllingHand))
-                    {
-                        var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
-                        var pointer = pointerObject.GetComponent<IMixedRealityPointer>();
+            //        if (((useSpecificType && pointerProfile.ControllerType.Type == controllerType.Type) || (!useSpecificType && pointerProfile.ControllerType.Type == null)) &&
+            //            (pointerProfile.Handedness == Handedness.Any || pointerProfile.Handedness == Handedness.Both || pointerProfile.Handedness == controllingHand))
+            //        {
+            //            var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
+            //            var pointer = pointerObject.GetComponent<IMixedRealityPointer>();
 
-                        if (pointer != null)
-                        {
-                            pointers.Add(pointer);
-                        }
-                        else
-                        {
-                            Debug.LogWarning($"Failed to attach {pointerProfile.PointerPrefab.name} to {controllerType.Type.Name}.");
-                        }
-                    }
-                }
-            }
+            //            if (pointer != null)
+            //            {
+            //                pointers.Add(pointer);
+            //            }
+            //            else
+            //            {
+            //                Debug.LogWarning($"Failed to attach {pointerProfile.PointerPrefab.name} to {controllerType.Type.Name}.");
+            //            }
+            //        }
+            //    }
+            //}
 
             return pointers.Count == 0 ? null : pointers.ToArray();
         }

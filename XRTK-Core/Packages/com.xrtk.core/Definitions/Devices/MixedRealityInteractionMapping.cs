@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -241,7 +241,7 @@ namespace XRTK.Definitions.Devices
         public KeyCode KeyCode => keyCode;
 
         [SerializeField]
-        [Tooltip("Optional KeyCode value to get input from Unity's old input system.")]
+        [Tooltip("Optional inputName value to get input for a coded input identity from a provider.")]
         private string inputName;
 
         /// <summary>

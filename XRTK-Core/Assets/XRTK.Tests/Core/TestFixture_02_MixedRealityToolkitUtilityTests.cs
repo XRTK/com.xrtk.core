@@ -57,15 +57,15 @@ namespace XRTK.Tests.Core
             Assert.IsTrue(profile.ValidateService(dataProviderTypes, newConfigs, false));
         }
 
-        [Test]
-        public void Test_03_ConfirmControllerMappingConfigurationNotPresent()
-        {
-            SetupServiceLocator();
-            var controllerTypes = new[] { typeof(GenericOpenVRController) };
-            MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile = ScriptableObject.CreateInstance<MixedRealityInputSystemProfile>();
-            MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles = ScriptableObject.CreateInstance<MixedRealityControllerMappingProfiles>();
-            Assert.IsFalse(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.ValidateControllerProfiles(controllerTypes, false));
-        }
+        //[Test]
+        //public void Test_03_ConfirmControllerMappingConfigurationNotPresent()
+        //{
+        //    SetupServiceLocator();
+        //    var controllerTypes = new[] { typeof(GenericOpenVRController) };
+        //    MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile = ScriptableObject.CreateInstance<MixedRealityInputSystemProfile>();
+        //    MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles = ScriptableObject.CreateInstance<MixedRealityControllerMappingProfiles>();
+        //    Assert.IsFalse(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.ValidateControllerProfiles(controllerTypes, false));
+        //}
 
         #endregion Configuration Validation Tests
     }

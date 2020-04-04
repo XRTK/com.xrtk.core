@@ -10,6 +10,7 @@ using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Definitions.Controllers
 {
+    [Obsolete]
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Visualization Profile", fileName = "MixedRealityControllerVisualizationProfile", order = (int)CreateProfileMenuItemIndices.ControllerVisualization)]
     public class MixedRealityControllerVisualizationProfile : BaseMixedRealityProfile
     {
@@ -84,7 +85,7 @@ namespace XRTK.Definitions.Controllers
             get => globalRightHandModel;
             private set => globalRightHandModel = value;
         }
-        
+
         [SerializeField]
         [Tooltip("Default Pose Action.\nNote: If an override profile is not found for a specific controller, the default pose action is used.")]
         private MixedRealityInputAction globalPointerPose;

@@ -232,21 +232,16 @@ namespace XRTK.Extensions
         }
 
         /// <summary>
-        /// Gets a component on the game object if it's already attached to it.
-        /// If the component does not exist on the game object, it will be attached and returned.
+        /// Gets a <see cref="Component"/> on the <see cref="GameObject"/> if it's already attached to it.
+        /// If the <see cref="Component"/> does not exist on the <see cref="GameObject"/>, it will be added and returned.
         /// </summary>
-        /// <typeparam name="T">The type of the component to lookup on the game object.</typeparam>
-        /// <param name="g">GameObject instance.</param>
-        /// <returns>Existing instance of component or newly created one.</returns>
-        public static T GetOrAddComponent<T>(this GameObject g) where T : Component
+        /// <typeparam name="T">The type of the <see cref="Component"/> to lookup on the <see cref="GameObject"/>.</typeparam>
+        /// <param name="gameObject"><see cref="GameObject"/> instance.</param>
+        /// <returns>The existing or new instance of <see cref="Component"/>.</returns>
+        public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
         {
-            T component = g.GetComponent<T>();
-            if (component != null)
-            {
-                return component;
-            }
-
-            return g.AddComponent<T>();
+            T component = gameObject.GetComponent<T>();
+            return component != null ? component : gameObject.AddComponent<T>();
         }
     }
 }

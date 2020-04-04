@@ -11,7 +11,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
     {
         // Global hand settings overrides
         private SerializedProperty handMeshingEnabled;
-        private SerializedProperty handRayType;
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
         private SerializedProperty boundsMode;
@@ -24,7 +23,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
             base.OnEnable();
 
             handMeshingEnabled = serializedObject.FindProperty(nameof(handMeshingEnabled));
-            handRayType = serializedObject.FindProperty(nameof(handRayType));
             handPhysicsEnabled = serializedObject.FindProperty(nameof(handPhysicsEnabled));
             useTriggers = serializedObject.FindProperty(nameof(useTriggers));
             boundsMode = serializedObject.FindProperty(nameof(boundsMode));
@@ -40,7 +38,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
         protected override void OnInspectorAdditionalGUI()
         {
             EditorGUILayout.PropertyField(handMeshingEnabled);
-            EditorGUILayout.PropertyField(handRayType);
             EditorGUILayout.PropertyField(handPhysicsEnabled);
             EditorGUILayout.PropertyField(useTriggers);
             EditorGUILayout.PropertyField(boundsMode);

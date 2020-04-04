@@ -385,7 +385,7 @@ namespace XRTK.Inspectors
 
                 if (useCustomInteractionMapping)
                 {
-                    EditorGUILayout.LabelField($"{i + 1}", GUILayout.Width(32f));
+                    EditorGUILayout.LabelField($"{i}", GUILayout.Width(32f));
                     EditorGUILayout.PropertyField(inputType, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
                     EditorGUILayout.PropertyField(axisType, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
 

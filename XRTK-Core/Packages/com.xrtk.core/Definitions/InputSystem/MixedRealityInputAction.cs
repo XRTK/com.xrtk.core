@@ -31,7 +31,7 @@ namespace XRTK.Definitions.InputSystem
         /// <param name="axisConstraint"></param>
         public MixedRealityInputAction(uint id, string description, AxisType axisConstraint = AxisType.None)
         {
-            if (id == 0)
+            if (id == 0 && description != "None")
             {
                 throw new ArgumentException($"{nameof(id)} cannot be 0");
             }
@@ -57,7 +57,7 @@ namespace XRTK.Definitions.InputSystem
         /// <param name="axisConstraint"></param>
         public MixedRealityInputAction(Guid profileGuid, uint id, string description, AxisType axisConstraint = AxisType.None)
         {
-            if (id == 0)
+            if (id == 0 && description != "None")
             {
                 throw new ArgumentException($"{nameof(id)} cannot be 0");
             }
@@ -78,7 +78,7 @@ namespace XRTK.Definitions.InputSystem
         /// Default input action that doesn't represent any defined action.
         /// </summary>
         /// <remarks>
-        /// Any action that has an id of 0 is considered the same as None.
+        /// Any action that has an id of 0 is considered the same as "None".
         /// </remarks>
         public static readonly MixedRealityInputAction None = new MixedRealityInputAction("None");
 
@@ -156,6 +156,9 @@ namespace XRTK.Definitions.InputSystem
             return ((MixedRealityInputAction)left).Equals((MixedRealityInputAction)right);
         }
 
+        /// <summary>
+        /// Determines whether the specified objects are equal.
+        /// </summary>
         public bool Equals(MixedRealityInputAction other)
         {
             // Backwards compatibility for actions that haven't been re-serialized.

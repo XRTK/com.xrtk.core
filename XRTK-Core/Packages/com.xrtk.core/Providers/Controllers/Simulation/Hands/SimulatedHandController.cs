@@ -3,6 +3,7 @@
 
 using System;
 using UnityEngine;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
@@ -10,7 +11,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Controllers.Hands;
-using XRTK.Interfaces.Providers.Controllers.Simulation;
+using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Providers.Controllers.Hands;
 using XRTK.Services;
 using Random = UnityEngine.Random;

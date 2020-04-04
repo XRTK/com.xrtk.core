@@ -3,8 +3,9 @@
 
 using System;
 using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers.Hands;
 
-namespace XRTK.Providers.Controllers.Hands
+namespace XRTK.Definitions.Controllers.Hands
 {
     /// <summary>
     /// Snapshot of hand data.
@@ -13,7 +14,12 @@ namespace XRTK.Providers.Controllers.Hands
     public class HandData
     {
         /// <summary>
-        /// Timestamp of hand data, as FileTime, e.g. DateTime.UtcNow.ToFileTime().
+        /// Gets the total count of joints the hand data supports.
+        /// </summary>
+        public static readonly int JointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
+
+        /// <summary>
+        /// Timestamp of hand data, as FileTime, e.g. <see cref="DateTime.UtcNow"/>
         /// </summary>
         public long TimeStamp { get; set; } = 0;
 
@@ -25,7 +31,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Pose information for each hand joint.
         /// </summary>
-        public MixedRealityPose[] Joints { get; } = new MixedRealityPose[BaseHandController.JointCount];
+        public MixedRealityPose[] Joints { get; } = new MixedRealityPose[JointCount];
 
         /// <summary>
         /// Mesh information of the hand.

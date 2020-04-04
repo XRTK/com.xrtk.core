@@ -96,7 +96,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         protected virtual void UpdateInteractions()
         {
-            for (var i = 0; i < Interactions?.Length; i++)
+            for (int i = 0; i < Interactions?.Length; i++)
             {
                 var interactionMapping = Interactions[i];
 
@@ -119,7 +119,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The updated hand data for this controller.</param>
         private void UpdateJoints(HandData handData)
         {
-            for (var i = 0; i < JointCount; i++)
+            for (int i = 0; i < JointCount; i++)
             {
                 var handJoint = (TrackedHandJoint)i;
 
@@ -205,6 +205,7 @@ namespace XRTK.Providers.Controllers.Hands
             if (TryGetJointPose(TrackedHandJoint.Palm, out var palmPose))
             {
                 var newHandBounds = new Bounds(palmPose.Position, Vector3.zero);
+
                 foreach (var kvp in jointPoses)
                 {
                     if (kvp.Key == TrackedHandJoint.None ||
@@ -229,9 +230,9 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateThumbBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.ThumbMetacarpalJoint, out var knucklePose)
-                && TryGetJointPose(TrackedHandJoint.ThumbProximalJoint, out var middlePose)
-                && TryGetJointPose(TrackedHandJoint.ThumbTip, out var tipPose))
+            if (TryGetJointPose(TrackedHandJoint.ThumbMetacarpalJoint, out var knucklePose) &&
+                TryGetJointPose(TrackedHandJoint.ThumbProximalJoint, out var middlePose) &&
+                TryGetJointPose(TrackedHandJoint.ThumbTip, out var tipPose))
             {
                 // Thumb bounds include metacarpal -> proximal and proximal -> tip bounds.
                 var thumbBounds = new Bounds[2];

@@ -39,7 +39,6 @@ namespace XRTK.Inspectors
             EditorGUILayout.PropertyField(activeProfile);
             var changed = EditorGUI.EndChangeCheck();
             var commandName = Event.current.commandName;
-
             var profiles = ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitRootProfile>();
 
             if (activeProfile.objectReferenceValue == null)

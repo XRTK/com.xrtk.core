@@ -21,7 +21,7 @@ namespace XRTK.Tests.Core
     {
         private void SetupServiceLocator()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
             MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile = ScriptableObject.CreateInstance<MixedRealityRegisteredServiceProvidersProfile>();
         }
 

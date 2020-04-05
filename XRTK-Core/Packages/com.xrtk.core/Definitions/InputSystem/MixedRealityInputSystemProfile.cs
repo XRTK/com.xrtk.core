@@ -3,10 +3,10 @@
 
 using UnityEngine;
 using XRTK.Attributes;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Definitions.Controllers;
 using XRTK.Services;
 
 namespace XRTK.Definitions.InputSystem
@@ -42,19 +42,6 @@ namespace XRTK.Definitions.InputSystem
         {
             get => inputActionsProfile;
             internal set => inputActionsProfile = value;
-        }
-
-        [SerializeField]
-        [Tooltip("Input Action Rules Profile for raising actions based on specific criteria.")]
-        private MixedRealityInputActionRulesProfile inputActionRulesProfile;
-
-        /// <summary>
-        /// Input Action Rules Profile for raising actions based on specific criteria.
-        /// </summary>
-        public MixedRealityInputActionRulesProfile InputActionRulesProfile
-        {
-            get => inputActionRulesProfile;
-            internal set => inputActionRulesProfile = value;
         }
 
         [SerializeField]

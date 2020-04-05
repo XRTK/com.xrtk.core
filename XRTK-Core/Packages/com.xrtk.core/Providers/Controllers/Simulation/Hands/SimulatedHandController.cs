@@ -82,6 +82,46 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         };
 
         /// <summary>
+        /// Gets a simulated Yaw, Pitch and Roll delta for the current frame.
+        /// </summary>
+        /// <returns>Updated hand rotation angles.</returns>
+        private Vector3 RotationDelta
+        {
+            get
+            {
+                float rotationDelta = simulatedHandControllerDataProvider.RotationSpeed * Time.deltaTime;
+                Vector3 rotationDeltaEulerAngles = Vector3.zero;
+
+                if (Interactions[0].BoolData)
+                {
+                    rotationDeltaEulerAngles.y = rotationDelta;
+                }
+                if (Interactions[1].BoolData)
+                {
+                    rotationDeltaEulerAngles.y = -rotationDelta;
+                }
+                if (Interactions[2].BoolData)
+                {
+                    rotationDeltaEulerAngles.x = -rotationDelta;
+                }
+                if (Interactions[3].BoolData)
+                {
+                    rotationDeltaEulerAngles.x = rotationDelta;
+                }
+                if (Interactions[4].BoolData)
+                {
+                    rotationDeltaEulerAngles.z = -rotationDelta;
+                }
+                if (Interactions[5].BoolData)
+                {
+                    rotationDeltaEulerAngles.z = rotationDelta;
+                }
+
+                return rotationDeltaEulerAngles;
+            }
+        }
+
+        /// <summary>
         /// Gets the hands position in screen space.
         /// </summary>
         public Vector3 ScreenPosition => screenPosition;
@@ -153,49 +193,16 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 MixedRealityInteractionMapping interactionMapping = Interactions[i];
                 switch (interactionMapping.InputType)
                 {
+                    case DeviceInputType.PointerPosition:
+                        interactionMapping.PoseData = new MixedRealityPose(Input.mousePosition);
+                        interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+                        break;
                     case DeviceInputType.ButtonPress:
                         interactionMapping.BoolData = Input.GetKey(interactionMapping.KeyCode);
                         interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
                         break;
                 }
             }
-        }
-
-        /// <summary>
-        /// Gets a simulated Yaw, Pitch and Roll delta for the current frame.
-        /// </summary>
-        /// <returns>Updated hand rotation angles.</returns>
-        private Vector3 GetHandRotationDelta()
-        {
-            float rotationDelta = simulatedHandControllerDataProvider.RotationSpeed * Time.deltaTime;
-            Vector3 rotationDeltaEulerAngles = Vector3.zero;
-
-            if (Interactions[0].BoolData)
-            {
-                rotationDeltaEulerAngles.y = rotationDelta;
-            }
-            if (Interactions[1].BoolData)
-            {
-                rotationDeltaEulerAngles.y = -rotationDelta;
-            }
-            if (Interactions[2].BoolData)
-            {
-                rotationDeltaEulerAngles.x = -rotationDelta;
-            }
-            if (Interactions[3].BoolData)
-            {
-                rotationDeltaEulerAngles.x = rotationDelta;
-            }
-            if (Interactions[4].BoolData)
-            {
-                rotationDeltaEulerAngles.z = -rotationDelta;
-            }
-            if (Interactions[5].BoolData)
-            {
-                rotationDeltaEulerAngles.z = rotationDelta;
-            }
-
-            return rotationDeltaEulerAngles;
         }
 
         /// <summary>
@@ -271,7 +278,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         {
             // Read keyboard / mouse input to determine the root pose delta since last frame.
             MixedRealityPose rootPoseDelta = new MixedRealityPose(
-                GetHandPositionDelta(), Quaternion.Euler(GetHandRotationDelta()));
+                GetHandPositionDelta(), Quaternion.Euler(RotationDelta));
 
             // Calculate pose changes and compute timestamp for hand tracking update.
             float poseAnimationDelta = simulatedHandControllerDataProvider.HandPoseAnimationSpeed * Time.deltaTime;

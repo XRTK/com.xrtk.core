@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Controllers.Hands;
 using XRTK.Interfaces.Providers.Controllers;
@@ -41,7 +40,7 @@ namespace XRTK.Providers.Controllers.Hands
         private readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
 
         private int frameOn = 0;
-
+        private MixedRealityPose controllerPose = MixedRealityPose.ZeroIdentity;
         private float deltaTimeStart;
 
         private Vector3 lastPalmNormal;
@@ -102,12 +101,8 @@ namespace XRTK.Providers.Controllers.Hands
 
                 switch (interactionMapping.InputType)
                 {
-                    case DeviceInputType.PointerPosition:
-                        if (TryGetJointPose(TrackedHandJoint.Palm, out var pose))
-                        {
-                            interactionMapping.PoseData = pose;
-                            interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
-                        }
+                    case DeviceInputType.SpatialPointer:
+                        interactionMapping.PoseData = controllerPose;
                         break;
                 }
             }

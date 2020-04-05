@@ -1098,5 +1098,11 @@ namespace XRTK.Tests.InputSystem
         }
 
         #endregion MixedRealityPose
+
+        [TearDown]
+        public void CleanupMixedRealityToolkitTests()
+        {
+            TestUtilities.CleanupScene();
+        }
     }
 }

@@ -54,7 +54,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_03_CreateMixedRealityToolkit()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Tests
             Assert.AreEqual(0, MixedRealityToolkit.ActiveSystems.Count);
@@ -68,7 +68,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_04_01_RegisterMixedRealityDataProvider()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Register
             MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
@@ -87,7 +87,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_04_02_01_UnregisterMixedRealityDataProviderByType()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Register
             MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
@@ -116,7 +116,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_04_02_02_UnregisterMixedRealityDataProviderByTypeAndName()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Register
             MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
@@ -151,7 +151,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_04_03_RegisterMixedRealityDataProviders()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test ExtensionService
             MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
@@ -170,7 +170,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_04_04_UnregisterMixedRealityDataProvidersByType()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
@@ -217,7 +217,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_04_05_MixedRealityDataProviderDoesNotExist()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test data provider 1
             MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
@@ -233,7 +233,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_04_06_MixedRealityDataProviderDoesNotReturn()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             const string serviceName = "Test Data Provider";
 
@@ -250,7 +250,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_04_07_ValidateMixedRealityDataProviderName()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             var testName1 = "Test04-07-1";
             var testName2 = "Test04-07-2";
@@ -271,7 +271,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_04_08_GetMixedRealityDataProviderCollectionByInterface()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test data provider 1
             MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestExtensionService1("Test04-08-1"));
@@ -290,7 +290,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_04_09_GetAllMixedRealityDataProviders()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test 1 services
             MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestExtensionService1("Test16-1.1"));
@@ -314,7 +314,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_05_01_RegisterMixedRealityExtensionService()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
@@ -333,7 +333,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_05_02_01_UnregisterMixedRealityExtensionServiceByType()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
@@ -364,7 +364,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_05_02_02_UnregisterMixedRealityExtensionServiceByTypeAndName()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
@@ -395,7 +395,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_05_03_RegisterMixedRealityExtensionServices()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
@@ -415,7 +415,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_05_04_UnregisterMixedRealityExtensionServicesByType()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
@@ -458,7 +458,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_05_05_MixedRealityExtensionService2DoesNotExist()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test ExtensionService 1
             MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test ExtensionService 1"));
@@ -474,7 +474,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_05_06_MixedRealityExtensionServiceDoesNotReturnByName()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             const string serviceName = "Test ExtensionService 1";
 
@@ -491,7 +491,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_05_07_ValidateExtensionServiceName()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test ExtensionService 1
             MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test14-1"));
@@ -515,7 +515,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_05_08_GetMixedRealityExtensionServiceCollectionByInterface()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test ExtensionService 1
             MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test15-1"));
@@ -534,7 +534,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_05_09_GetAllMixedRealityExtensionServices()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test 1 services
             MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test16-1.1"));
@@ -558,7 +558,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_06_01_TryRegisterMixedRealityDataProvider()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
@@ -580,7 +580,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_06_02_TryRegisterMixedRealityDataProviderFail()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
@@ -598,7 +598,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_06_03_TryRegisterMixedRealityDataProviderByName()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
@@ -629,7 +629,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_07_01_EnableServicesByType()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test 1 services
             MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test07-01-1.1"));
@@ -655,7 +655,7 @@ namespace XRTK.Tests.Core
         [Test]
         public void Test_07_02_DisableServicesByType()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test 1 services
             MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test07-01-1.1"));

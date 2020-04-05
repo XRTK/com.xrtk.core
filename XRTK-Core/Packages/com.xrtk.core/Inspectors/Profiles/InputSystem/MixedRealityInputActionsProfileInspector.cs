@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
@@ -40,9 +41,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             serializedObject.ApplyModifiedProperties();
         }
 
-        private static void RenderList(SerializedProperty list)
+        private void RenderList(SerializedProperty list)
         {
-            EditorGUILayout.Space();
             GUILayout.BeginVertical();
 
             if (GUILayout.Button(AddButtonContent, EditorStyles.miniButton))
@@ -50,9 +50,12 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 list.arraySize += 1;
                 var inputAction = list.GetArrayElementAtIndex(list.arraySize - 1);
                 var inputActionId = inputAction.FindPropertyRelative("id");
+                var profileGuidProperty = inputAction.FindPropertyRelative("profileGuid");
                 var inputActionDescription = inputAction.FindPropertyRelative("description");
                 var inputActionConstraint = inputAction.FindPropertyRelative("axisConstraint");
+
                 inputActionConstraint.intValue = 0;
+                profileGuidProperty.stringValue = ThisProfileGuidString;
                 inputActionDescription.stringValue = $"New Action {inputActionId.intValue = list.arraySize}";
             }
 
@@ -76,8 +79,12 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 var previousLabelWidth = EditorGUIUtility.labelWidth;
                 EditorGUIUtility.labelWidth = 64f;
                 var inputAction = list.GetArrayElementAtIndex(i);
+                var profileGuidProperty = inputAction.FindPropertyRelative("profileGuid");
                 var inputActionDescription = inputAction.FindPropertyRelative("description");
                 var inputActionConstraint = inputAction.FindPropertyRelative("axisConstraint");
+
+                profileGuidProperty.stringValue = ThisProfileGuidString;
+
                 EditorGUILayout.PropertyField(inputActionDescription, GUIContent.none);
                 EditorGUILayout.PropertyField(inputActionConstraint, GUIContent.none, GUILayout.Width(96f));
                 EditorGUIUtility.labelWidth = previousLabelWidth;

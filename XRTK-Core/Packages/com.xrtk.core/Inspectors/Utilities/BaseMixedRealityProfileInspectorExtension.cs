@@ -40,6 +40,8 @@ namespace XRTK.Inspectors.Utilities
                 instance = ScriptableObject.CreateInstance(profileType);
             }
 
+            Debug.Assert(instance != null);
+
             var assetPath = parentProfile != null ? AssetDatabase.GetAssetPath(parentProfile) : string.Empty;
             var newProfile = instance.CreateAsset(assetPath) as BaseMixedRealityProfile;
             Debug.Assert(newProfile != null);

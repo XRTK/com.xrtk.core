@@ -12,7 +12,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
     {
         private SerializedProperty focusProviderType;
         private SerializedProperty inputActionsProfile;
-        private SerializedProperty inputActionRulesProfile;
         private SerializedProperty pointerProfile;
         private SerializedProperty gesturesProfile;
         private SerializedProperty speechCommandsProfile;
@@ -27,7 +26,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             focusProviderType = serializedObject.FindProperty(nameof(focusProviderType));
             inputActionsProfile = serializedObject.FindProperty(nameof(inputActionsProfile));
-            inputActionRulesProfile = serializedObject.FindProperty(nameof(inputActionRulesProfile));
             pointerProfile = serializedObject.FindProperty(nameof(pointerProfile));
             gesturesProfile = serializedObject.FindProperty(nameof(gesturesProfile));
             speechCommandsProfile = serializedObject.FindProperty(nameof(speechCommandsProfile));
@@ -50,7 +48,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.PropertyField(focusProviderType);
             EditorGUILayout.PropertyField(inputActionsProfile);
-            EditorGUILayout.PropertyField(inputActionRulesProfile);
             EditorGUILayout.PropertyField(pointerProfile);
             EditorGUILayout.PropertyField(gesturesProfile);
             EditorGUILayout.PropertyField(speechCommandsProfile);

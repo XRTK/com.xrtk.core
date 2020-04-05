@@ -45,19 +45,6 @@ namespace XRTK.Definitions.InputSystem
         }
 
         [SerializeField]
-        [Tooltip("Input Action Rules Profile for raising actions based on specific criteria.")]
-        private MixedRealityInputActionRulesProfile inputActionRulesProfile;
-
-        /// <summary>
-        /// Input Action Rules Profile for raising actions based on specific criteria.
-        /// </summary>
-        public MixedRealityInputActionRulesProfile InputActionRulesProfile
-        {
-            get => inputActionRulesProfile;
-            internal set => inputActionRulesProfile = value;
-        }
-
-        [SerializeField]
         [Tooltip("Pointer Configuration options")]
         private MixedRealityPointerProfile pointerProfile;
 

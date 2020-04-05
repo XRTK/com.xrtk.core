@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
@@ -15,10 +16,20 @@ namespace XRTK.Inspectors.Profiles
     /// </summary>
     public abstract class BaseMixedRealityProfileInspector : Editor
     {
+        protected static readonly string DefaultGuidString = default(Guid).ToString("N");
+
         private static SerializedObject targetProfile;
         private static BaseMixedRealityProfile currentlySelectedProfile;
         private static BaseMixedRealityProfile profileSource;
 
+        /// <summary>
+        /// The <see cref="Guid"/> string representation for this profile asset.
+        /// </summary>
+        protected string ThisProfileGuidString { get; private set; }
+
+        /// <summary>
+        /// The instanced reference of the currently rendered <see cref="BaseMixedRealityProfile"/>.
+        /// </summary>
         protected BaseMixedRealityProfile ThisProfile { get; private set; }
 
         protected virtual void OnEnable()
@@ -27,6 +38,8 @@ namespace XRTK.Inspectors.Profiles
             currentlySelectedProfile = target as BaseMixedRealityProfile;
             Debug.Assert(currentlySelectedProfile != null);
             ThisProfile = currentlySelectedProfile;
+            AssetDatabase.TryGetGUIDAndLocalFileIdentifier(ThisProfile, out var guidHex, out long _);
+            ThisProfileGuidString = guidHex;
         }
 
         protected void RenderHeader()
@@ -77,14 +90,6 @@ namespace XRTK.Inspectors.Profiles
         private static void PasteProfileValues()
         {
             currentlySelectedProfile.CopySerializedValues(profileSource);
-        }
-
-        private static async void PasteProfileValuesDelay(BaseMixedRealityProfile newProfile)
-        {
-            await new WaitUntil(() => currentlySelectedProfile == newProfile);
-            Selection.activeObject = null;
-            PasteProfileValues();
-            Selection.activeObject = newProfile;
         }
     }
 }

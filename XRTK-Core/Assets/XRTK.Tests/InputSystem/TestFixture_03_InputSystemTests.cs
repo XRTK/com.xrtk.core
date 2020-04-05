@@ -15,7 +15,7 @@ namespace XRTK.Tests.InputSystem
         [Test]
         public void Test01_CreateMixedRealityInputSystem()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
@@ -32,7 +32,7 @@ namespace XRTK.Tests.InputSystem
         [Test]
         public void Test02_TestGetMixedRealityInputSystem()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add Input System
             MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile = InputSystemTestUtilities.SetupInputSystemProfile();
@@ -49,7 +49,7 @@ namespace XRTK.Tests.InputSystem
         public void Test03_TestMixedRealityInputSystemDoesNotExist()
         {
             // Initialize without the default profile configuration
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Check for Input System
             var inputSystemExists = MixedRealityToolkit.IsServiceRegistered<IMixedRealityInputSystem>();
@@ -63,7 +63,8 @@ namespace XRTK.Tests.InputSystem
         public void Test04_TestMixedRealityInputSystemExists()
         {
             // Initialize with the default profile configuration
-            TestUtilities.InitializeMixedRealityToolkitScene();
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
+
             // Add Input System
             MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile = InputSystemTestUtilities.SetupInputSystemProfile();
             MixedRealityToolkit.RegisterService<IMixedRealityInputSystem>(new MixedRealityInputSystem(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile));

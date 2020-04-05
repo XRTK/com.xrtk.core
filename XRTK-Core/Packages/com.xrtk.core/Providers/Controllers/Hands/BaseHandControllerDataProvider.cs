@@ -4,6 +4,7 @@
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Interfaces.InputSystem.Controllers.Hands;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Hands
 {
@@ -21,10 +22,23 @@ namespace XRTK.Providers.Controllers.Hands
         public BaseHandControllerDataProvider(string name, uint priority, BaseHandControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
-            HandMeshingEnabled = profile.HandMeshingEnabled;
-            HandPhysicsEnabled = profile.HandPhysicsEnabled;
-            UseTriggers = profile.UseTriggers;
-            BoundsMode = profile.BoundsMode;
+            var globalSettingsProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.HandTrackingProfile;
+
+            HandMeshingEnabled = profile.HandMeshingEnabled != globalSettingsProfile.HandMeshingEnabled
+                ? profile.HandMeshingEnabled
+                : globalSettingsProfile.HandMeshingEnabled;
+
+            HandPhysicsEnabled = profile.HandPhysicsEnabled != globalSettingsProfile.HandPhysicsEnabled
+                ? profile.HandPhysicsEnabled
+                : globalSettingsProfile.HandPhysicsEnabled;
+
+            UseTriggers = profile.UseTriggers != globalSettingsProfile.UseTriggers
+                ? profile.UseTriggers
+                : globalSettingsProfile.UseTriggers;
+
+            BoundsMode = profile.BoundsMode != globalSettingsProfile.BoundsMode
+                ? profile.BoundsMode
+                : globalSettingsProfile.BoundsMode;
         }
 
         /// <inheritdoc />

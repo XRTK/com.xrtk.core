@@ -8,7 +8,7 @@ using XRTK.Definitions.Utilities;
 namespace XRTK.Definitions.InputSystem
 {
     /// <summary>
-    /// Global settings profile for hand tracking.
+    /// Global settings profile for hand tracking on all platforms.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Hand Tracking Profile", fileName = "MixedRealityHandTrackingProfile", order = (int)CreateProfileMenuItemIndices.HandTracking)]
     public class MixedRealityHandTrackingProfile : BaseMixedRealityProfile

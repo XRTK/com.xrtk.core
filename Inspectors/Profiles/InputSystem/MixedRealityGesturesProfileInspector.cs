@@ -119,6 +119,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 var action = speechCommand.FindPropertyRelative("action");
                 var actionId = action.FindPropertyRelative("id");
                 actionId.intValue = 0;
+                var profileGuidProperty = action.FindPropertyRelative("profileGuid");
+                profileGuidProperty.stringValue = DefaultGuidString;
                 var actionDescription = action.FindPropertyRelative("description");
                 actionDescription.stringValue = string.Empty;
                 var actionConstraint = action.FindPropertyRelative("axisConstraint");
@@ -155,8 +157,11 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 var gestureType = gesture.FindPropertyRelative("gestureType");
                 var action = gesture.FindPropertyRelative("action");
                 var actionId = action.FindPropertyRelative("id");
+                var profileGuidProperty = action.FindPropertyRelative("profileGuid");
                 var actionDescription = action.FindPropertyRelative("description");
                 var actionConstraint = action.FindPropertyRelative("axisConstraint");
+
+                profileGuidProperty.stringValue = actionId.intValue > 0 ? ThisProfileGuidString : DefaultGuidString;
 
                 EditorGUILayout.PropertyField(keyword, GUIContent.none, GUILayout.ExpandWidth(true));
 

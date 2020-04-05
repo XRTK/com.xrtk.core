@@ -71,6 +71,8 @@ namespace XRTK.Inspectors.Extensions
                 AssetDatabase.Refresh();
             }
 
+            scriptableObject = AssetDatabase.LoadAssetAtPath<ScriptableObject>(assetPathAndName);
+
             if (ping)
             {
                 EditorApplication.delayCall += () =>
@@ -80,6 +82,8 @@ namespace XRTK.Inspectors.Extensions
                     Selection.activeObject = scriptableObject;
                 };
             }
+
+            Debug.Assert(scriptableObject != null);
 
             return scriptableObject;
         }

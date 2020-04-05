@@ -4,14 +4,14 @@
 using System;
 using System.Diagnostics;
 
-namespace XRTK.Providers.Controllers.Simulation
+namespace XRTK.Utilities
 {
-    public sealed class SimulationTimeStampStopWatch
+    public sealed class StopWatch
     {
         /// <summary>
         /// Creates a new timestamp stopwatch.
         /// </summary>
-        public SimulationTimeStampStopWatch()
+        public StopWatch()
         {
             stopwatch = new Stopwatch();
         }

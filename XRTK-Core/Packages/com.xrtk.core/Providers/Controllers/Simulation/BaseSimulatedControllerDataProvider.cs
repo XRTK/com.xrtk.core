@@ -8,6 +8,7 @@ using XRTK.Definitions.Controllers.Simulation;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem.Controllers.Hands;
 using XRTK.Services;
+using XRTK.Utilities;
 
 namespace XRTK.Providers.Controllers.Simulation
 {
@@ -42,7 +43,7 @@ namespace XRTK.Providers.Controllers.Simulation
             RotationSpeed = profile.RotationSpeed;
         }
 
-        private SimulationTimeStampStopWatch simulatedUpdateStopWatch;
+        private StopWatch simulatedUpdateStopWatch;
         private long lastSimulatedUpdateTimeStamp = 0;
 
         /// <summary>
@@ -114,7 +115,7 @@ namespace XRTK.Providers.Controllers.Simulation
         {
             base.Enable();
 
-            simulatedUpdateStopWatch = new SimulationTimeStampStopWatch();
+            simulatedUpdateStopWatch = new StopWatch();
             simulatedUpdateStopWatch.Reset();
         }
 
@@ -210,9 +211,9 @@ namespace XRTK.Providers.Controllers.Simulation
         /// <param name="handedness">Handedness of the controller to remove.</param>
         protected void RemoveController(Handedness handedness)
         {
-            if (TryGetController(handedness, out BaseController controller))
+            if (TryGetController(handedness, out var controller))
             {
-                MixedRealityToolkit.InputSystem.RaiseSourceLost(controller.InputSource, controller);
+                MixedRealityToolkit.InputSystem?.RaiseSourceLost(controller.InputSource, controller);
                 SimulatedControllers.Remove(controller);
             }
         }
@@ -240,7 +241,8 @@ namespace XRTK.Providers.Controllers.Simulation
         {
             for (int i = 0; i < ActiveControllers.Count; i++)
             {
-                BaseController existingController = ActiveControllers[i];
+                var existingController = ActiveControllers[i];
+
                 if (existingController.ControllerHandedness == handedness)
                 {
                     controller = existingController;
@@ -253,7 +255,7 @@ namespace XRTK.Providers.Controllers.Simulation
         }
 
         /// <summary>
-        /// Asks the concrete simulation data create and regisgter a new simulated controller.
+        /// Asks the concrete simulation data create and register a new simulated controller.
         /// </summary>
         /// <param name="handedness">The handedness of the controller to create.</param>
         protected abstract void CreateAndRegisterSimulatedController(Handedness handedness);

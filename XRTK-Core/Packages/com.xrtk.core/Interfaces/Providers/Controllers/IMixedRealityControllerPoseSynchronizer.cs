@@ -2,10 +2,10 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem.Handlers;
-using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Interfaces.Providers.Controllers
 {

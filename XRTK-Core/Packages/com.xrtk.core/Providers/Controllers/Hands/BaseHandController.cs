@@ -1,9 +1,9 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -45,11 +45,6 @@ namespace XRTK.Providers.Controllers.Hands
 
         private Vector3 lastPalmNormal;
         private Vector3 lastPalmPosition;
-
-        /// <summary>
-        /// Gets the total count of joints a hand controller supports.
-        /// </summary>
-        public static readonly int JointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
         /// <summary>
         /// Gets the current palm normal of the hand controller.
@@ -114,7 +109,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The updated hand data for this controller.</param>
         private void UpdateJoints(HandData handData)
         {
-            for (int i = 0; i < JointCount; i++)
+            for (int i = 0; i < HandData.JointCount; i++)
             {
                 var handJoint = (TrackedHandJoint)i;
 

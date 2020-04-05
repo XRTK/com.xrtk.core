@@ -4,13 +4,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Input;
 using XRTK.Interfaces.Events;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Interfaces.InputSystem
 {

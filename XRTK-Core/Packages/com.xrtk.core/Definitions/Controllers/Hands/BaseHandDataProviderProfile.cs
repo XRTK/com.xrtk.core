@@ -2,16 +2,13 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.Controllers.Hands;
-using XRTK.Definitions.Utilities;
 
-namespace XRTK.Definitions.InputSystem
+namespace XRTK.Definitions.Controllers.Hands
 {
     /// <summary>
-    /// Global settings profile for hand tracking.
+    /// Provides additional configuration options for hand data providers.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Hand Tracking Profile", fileName = "MixedRealityHandTrackingProfile", order = (int)CreateProfileMenuItemIndices.HandTracking)]
-    public class MixedRealityHandTrackingProfile : BaseMixedRealityProfile
+    public abstract class BaseHandDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
     {
         [Header("General Settings")]
 

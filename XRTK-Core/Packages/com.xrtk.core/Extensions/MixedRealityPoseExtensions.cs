@@ -2,8 +2,8 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections.Generic;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
-using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Extensions
 {
@@ -16,13 +16,14 @@ namespace XRTK.Extensions
         /// <returns>Dictionary of joint keys and their poses.</returns>
         public static IReadOnlyDictionary<TrackedHandJoint, MixedRealityPose> ToJointPoseDictionary(this MixedRealityPose[] poses)
         {
-            Dictionary<TrackedHandJoint, MixedRealityPose> dict = new Dictionary<TrackedHandJoint, MixedRealityPose>();
+            var result = new Dictionary<TrackedHandJoint, MixedRealityPose>();
+
             for (int i = 0; i < poses.Length; i++)
             {
-                dict.Add((TrackedHandJoint)i, poses[i]);
+                result.Add((TrackedHandJoint)i, poses[i]);
             }
 
-            return dict;
+            return result;
         }
     }
 }

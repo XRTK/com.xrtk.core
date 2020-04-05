@@ -230,5 +230,18 @@ namespace XRTK.Extensions
 
             return t1.IsParentOrChildOf(t2);
         }
+
+        /// <summary>
+        /// Gets a <see cref="Component"/> on the <see cref="GameObject"/> if it's already attached to it.
+        /// If the <see cref="Component"/> does not exist on the <see cref="GameObject"/>, it will be added and returned.
+        /// </summary>
+        /// <typeparam name="T">The type of the <see cref="Component"/> to lookup on the <see cref="GameObject"/>.</typeparam>
+        /// <param name="gameObject"><see cref="GameObject"/> instance.</param>
+        /// <returns>The existing or new instance of <see cref="Component"/>.</returns>
+        public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
+        {
+            T component = gameObject.GetComponent<T>();
+            return component != null ? component : gameObject.AddComponent<T>();
+        }
     }
 }

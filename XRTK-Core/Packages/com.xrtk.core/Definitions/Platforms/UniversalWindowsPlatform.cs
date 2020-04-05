@@ -13,7 +13,7 @@ namespace XRTK.Definitions.Platforms
         {
             get
             {
-#if UNITY_WSA
+#if WINDOWS_UWP
                 return true;
 #else
                 return false;

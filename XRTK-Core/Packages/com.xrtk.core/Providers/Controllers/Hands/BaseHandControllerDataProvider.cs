@@ -12,6 +12,21 @@ namespace XRTK.Providers.Controllers.Hands
     /// </summary>
     public abstract class BaseHandControllerDataProvider : BaseControllerDataProvider, IMixedRealityHandControllerDataProvider
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="priority"></param>
+        /// <param name="profile"></param>
+        public BaseHandControllerDataProvider(string name, uint priority, BaseHandControllerDataProviderProfile profile)
+            : base(name, priority, profile)
+        {
+            HandMeshingEnabled = profile.HandMeshingEnabled;
+            HandPhysicsEnabled = profile.HandPhysicsEnabled;
+            UseTriggers = profile.UseTriggers;
+            BoundsMode = profile.BoundsMode;
+        }
+
         /// <inheritdoc />
         public bool HandMeshingEnabled { get; }
 
@@ -23,14 +38,5 @@ namespace XRTK.Providers.Controllers.Hands
 
         /// <inheritdoc />
         public HandBoundsMode BoundsMode { get; }
-
-        protected BaseHandControllerDataProvider(string name, uint priority, BaseHandControllerDataProviderProfile profile)
-            : base(name, priority, profile)
-        {
-            HandMeshingEnabled = profile.HandMeshingEnabled;
-            HandPhysicsEnabled = profile.HandPhysicsEnabled;
-            UseTriggers = profile.UseTriggers;
-            BoundsMode = profile.BoundsMode;
-        }
     }
 }

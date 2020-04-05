@@ -81,26 +81,6 @@ namespace XRTK.Providers.Controllers.Hands
             }
 
             MixedRealityToolkit.InputSystem?.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);
-
-            UpdateInteractions();
-        }
-
-        /// <summary>
-        /// Updates interaction mappings on the controller.
-        /// </summary>
-        protected virtual void UpdateInteractions()
-        {
-            for (int i = 0; i < Interactions?.Length; i++)
-            {
-                var interactionMapping = Interactions[i];
-
-                switch (interactionMapping.InputType)
-                {
-                    case DeviceInputType.SpatialPointer:
-                        interactionMapping.PoseData = controllerPose;
-                        break;
-                }
-            }
         }
 
         /// <summary>

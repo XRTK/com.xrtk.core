@@ -72,6 +72,81 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         private SimulatedHandControllerPose previousPose;
         private SimulatedHandControllerPose targetPose;
 
+        /// <summary>
+        /// Gets a simulated Yaw, Pitch and Roll delta for the current frame.
+        /// </summary>
+        /// <returns>Updated hand rotation angles.</returns>
+        private Vector3 DeltaRotation
+        {
+            get
+            {
+                UpdateSimulationMappings();
+
+                float rotationDelta = simulatedHandControllerDataProvider.RotationSpeed * Time.deltaTime;
+                Vector3 rotationDeltaEulerAngles = Vector3.zero;
+
+                if (Interactions[0].BoolData)
+                {
+                    rotationDeltaEulerAngles.y = rotationDelta;
+                }
+
+                if (Interactions[1].BoolData)
+                {
+                    rotationDeltaEulerAngles.y = -rotationDelta;
+                }
+
+                if (Interactions[2].BoolData)
+                {
+                    rotationDeltaEulerAngles.x = -rotationDelta;
+                }
+
+                if (Interactions[3].BoolData)
+                {
+                    rotationDeltaEulerAngles.x = rotationDelta;
+                }
+
+                if (Interactions[4].BoolData)
+                {
+                    rotationDeltaEulerAngles.z = -rotationDelta;
+                }
+
+                if (Interactions[5].BoolData)
+                {
+                    rotationDeltaEulerAngles.z = rotationDelta;
+                }
+
+                return rotationDeltaEulerAngles;
+            }
+        }
+
+        /// <summary>
+        /// Gets a simulated depth tracking (hands closer / further from tracking device) update, as well
+        /// as the hands simulated (x,y) position.
+        /// </summary>
+        /// <returns>Hand movement delta.</returns>
+        private Vector3 DeltaPosition
+        {
+            get
+            {
+                UpdateSimulationMappings();
+
+                Vector3 mouseDelta = lastMousePosition.HasValue ? Input.mousePosition - lastMousePosition.Value : Vector3.zero;
+
+                if (Interactions[6].BoolData)
+                {
+                    mouseDelta.z += Time.deltaTime * simulatedHandControllerDataProvider.DepthMultiplier;
+                }
+
+                if (Interactions[7].BoolData)
+                {
+                    mouseDelta.z -= Time.deltaTime * simulatedHandControllerDataProvider.DepthMultiplier;
+                }
+
+                return mouseDelta;
+            }
+        }
+
+        /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultInteractions => new[]
         {
             new MixedRealityInteractionMapping(0, "Yaw Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.E),
@@ -81,8 +156,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             new MixedRealityInteractionMapping(4, "Roll Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.X),
             new MixedRealityInteractionMapping(5, "Roll Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Z),
             new MixedRealityInteractionMapping(6, "Move Away (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.PageUp),
-            new MixedRealityInteractionMapping(7, "Move Closer (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.PageDown),
-            new MixedRealityInteractionMapping(8, "Move", AxisType.ThreeDofPosition, DeviceInputType.PointerPosition, MixedRealityInputAction.None)
+            new MixedRealityInteractionMapping(7, "Move Closer (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.PageDown)
         };
 
         /// <summary>
@@ -142,9 +216,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <inheritdoc />
         public override void UpdateController()
         {
-            UpdateSimulationMappings();
-
-            // If we have updated simulated data, we can execute the actual base hand controller update.
             if (TryGetSimulatedHandData(out var handData))
             {
                 UpdateController(handData);
@@ -165,70 +236,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                         break;
                 }
             }
-        }
-
-        /// <summary>
-        /// Gets a simulated Yaw, Pitch and Roll delta for the current frame.
-        /// </summary>
-        /// <returns>Updated hand rotation angles.</returns>
-        private Vector3 GetHandRotationDelta()
-        {
-            float rotationDelta = simulatedHandControllerDataProvider.RotationSpeed * Time.deltaTime;
-            Vector3 rotationDeltaEulerAngles = Vector3.zero;
-
-            if (Interactions[0].BoolData)
-            {
-                rotationDeltaEulerAngles.y = rotationDelta;
-            }
-
-            if (Interactions[1].BoolData)
-            {
-                rotationDeltaEulerAngles.y = -rotationDelta;
-            }
-
-            if (Interactions[2].BoolData)
-            {
-                rotationDeltaEulerAngles.x = -rotationDelta;
-            }
-
-            if (Interactions[3].BoolData)
-            {
-                rotationDeltaEulerAngles.x = rotationDelta;
-            }
-
-            if (Interactions[4].BoolData)
-            {
-                rotationDeltaEulerAngles.z = -rotationDelta;
-            }
-
-            if (Interactions[5].BoolData)
-            {
-                rotationDeltaEulerAngles.z = rotationDelta;
-            }
-
-            return rotationDeltaEulerAngles;
-        }
-
-        /// <summary>
-        /// Gets a simulated depth tracking (hands closer / further from tracking device) update, as well
-        /// as the hands simulated (x,y) position.
-        /// </summary>
-        /// <returns>Hand movement delta.</returns>
-        private Vector3 GetHandPositionDelta()
-        {
-            Vector3 mouseDelta = lastMousePosition.HasValue ? Interactions[8].PositionData - lastMousePosition.Value : Vector3.zero;
-
-            if (Interactions[6].BoolData)
-            {
-                mouseDelta.z += Time.deltaTime * simulatedHandControllerDataProvider.DepthMultiplier;
-            }
-
-            if (Interactions[7].BoolData)
-            {
-                mouseDelta.z -= Time.deltaTime * simulatedHandControllerDataProvider.DepthMultiplier;
-            }
-
-            return mouseDelta;
         }
 
         /// <summary>
@@ -276,7 +283,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         private bool TryGetSimulatedHandData(out HandData handData)
         {
             // Read keyboard / mouse input to determine the root pose delta since last frame.
-            var rootPoseDelta = new MixedRealityPose(GetHandPositionDelta(), Quaternion.Euler(GetHandRotationDelta()));
+            var rootPoseDelta = new MixedRealityPose(DeltaPosition, Quaternion.Euler(DeltaRotation));
 
             // Calculate pose changes and compute timestamp for hand tracking update.
             var poseAnimationDelta = simulatedHandControllerDataProvider.HandPoseAnimationSpeed * Time.deltaTime;

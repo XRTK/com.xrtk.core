@@ -40,7 +40,6 @@ namespace XRTK.Providers.Controllers.Hands
         private readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
 
         private int frameOn = 0;
-        private MixedRealityPose controllerPose = MixedRealityPose.ZeroIdentity;
         private float deltaTimeStart;
 
         private Vector3 lastPalmNormal;

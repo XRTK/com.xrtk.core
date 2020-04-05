@@ -8,7 +8,7 @@ namespace XRTK.Definitions.Controllers.Hands
     /// <summary>
     /// Provides additional configuration options for hand data providers.
     /// </summary>
-    public abstract class BaseHandDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
+    public abstract class BaseHandControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
     {
         [Header("General Settings")]
 

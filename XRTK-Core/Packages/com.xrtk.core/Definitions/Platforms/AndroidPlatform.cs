@@ -1,6 +1,8 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using UnityEngine;
+
 namespace XRTK.Definitions.Platforms
 {
     /// <summary>
@@ -14,7 +16,7 @@ namespace XRTK.Definitions.Platforms
             get
             {
 #if PLATFORM_ANDROID
-                return true;
+                return !Application.isEditor;
 #else
                 return false;
 #endif

@@ -4,7 +4,6 @@
 using System;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
-using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Definitions.Controllers.Hands
 {

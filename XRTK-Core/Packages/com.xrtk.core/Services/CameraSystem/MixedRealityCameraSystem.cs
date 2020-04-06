@@ -110,6 +110,8 @@ namespace XRTK.Services.CameraSystem
                 Debug.Assert(CameraRig != null);
                 ResetRigTransforms();
             }
+            
+            ApplySettingsForDefaultHeadHeight();
         }
 
         /// <inheritdoc />
@@ -124,6 +126,8 @@ namespace XRTK.Services.CameraSystem
             {
                 CameraCache.Main.transform.root.DontDestroyOnLoad();
             }
+            
+            ApplySettingsForDefaultHeadHeight();
         }
 
         /// <inheritdoc />
@@ -191,6 +195,25 @@ namespace XRTK.Services.CameraSystem
                 {
                     UnityEngine.Object.DestroyImmediate(component);
                 }
+            }
+        }
+        
+        /// <summary>
+        /// Depending on whether there is an XR device connected,
+        /// moves the camera to the setting from the camera profile.
+        /// </summary>
+        private void ApplySettingsForDefaultHeadHeight()
+        {
+            if (!IsStereoscopic)
+            {
+                // If not device attached we'll just use the default head height setting.
+                CameraRig.CameraTransform.Translate(0f, DefaultHeadHeight, 0f);
+            }
+            else
+            {
+                // If we have a stereoscopic device attached we'll leave
+                // height control to the device itself and reset everything to origin.
+                ResetRigTransforms();
             }
         }
 

@@ -58,9 +58,9 @@ namespace XRTK.Providers.Controllers.UnityInput
         {
             base.Disable();
 
-            foreach (var genericOpenVRController in ActiveGenericControllers)
+            foreach (var controller in ActiveGenericControllers)
             {
-                RemoveController(genericOpenVRController.Key, false);
+                RemoveController(controller.Key, false);
             }
 
             ActiveGenericControllers.Clear();

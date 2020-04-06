@@ -23,14 +23,16 @@ namespace XRTK.Providers.Controllers
     public abstract class BaseController : IMixedRealityController
     {
         /// <summary>
-        /// Constructor.
+        /// Controller constructor.
         /// </summary>
-        /// <param name="trackingState"></param>
-        /// <param name="controllerHandedness"></param>
-        /// <param name="inputSource"></param>
-        /// <param name="interactions"></param>
-        protected BaseController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+        /// <param name="controllerDataProvider">The controller's data provider reference.</param>
+        /// <param name="trackingState">The controller's tracking state.</param>
+        /// <param name="controllerHandedness">The controller's handedness.</param>
+        /// <param name="inputSource">Optional input source of the controller.</param>
+        /// <param name="interactions">Optional controller interactions mappings.</param>
+        protected BaseController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
         {
+            ControllerDataProvider = controllerDataProvider;
             TrackingState = trackingState;
             ControllerHandedness = controllerHandedness;
             InputSource = inputSource;
@@ -62,6 +64,9 @@ namespace XRTK.Providers.Controllers
 
         /// <inheritdoc />
         public bool Enabled { get; set; }
+
+        /// <inheritdoc />
+        public IMixedRealityControllerDataProvider ControllerDataProvider { get; }
 
         /// <inheritdoc />
         public TrackingState TrackingState { get; protected set; }

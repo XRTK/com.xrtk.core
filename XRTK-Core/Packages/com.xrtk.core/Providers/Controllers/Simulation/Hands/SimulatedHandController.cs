@@ -24,15 +24,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     /// </summary>
     public class SimulatedHandController : BaseHandController, IMixedRealitySimulatedController
     {
-        /// <summary>
-        /// Controller constructor.
-        /// </summary>
-        /// <param name="trackingState">The controller's tracking state.</param>
-        /// <param name="controllerHandedness">The controller's handedness.</param>
-        /// <param name="inputSource">Optional input source of the controller.</param>
-        /// <param name="interactions">Optional controller interactions mappings.</param>
-        public SimulatedHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-            : base(trackingState, controllerHandedness, inputSource, interactions)
+        /// <inheritdoc />
+        public SimulatedHandController(IMixedRealityControllerDataProvider dataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+            : base(dataProvider, trackingState, controllerHandedness, inputSource, interactions)
         {
             simulatedHandControllerDataProvider = MixedRealityToolkit.GetService<ISimulatedHandControllerDataProvider>();
 

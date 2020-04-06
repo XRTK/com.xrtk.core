@@ -17,12 +17,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     /// </summary>
     public class SimulatedHandControllerDataProvider : BaseSimulatedControllerDataProvider, ISimulatedHandControllerDataProvider
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name">Name of the data provider as assigned in the configuration profile.</param>
-        /// <param name="priority">Data provider priority controls the order in the service registry.</param>
-        /// <param name="profile">Controller data provider profile assigned to the provider instance in the configuration inspector.</param>
+        /// <inheritdoc />
         public SimulatedHandControllerDataProvider(string name, uint priority, SimulatedHandControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
@@ -87,7 +82,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             }
 
             MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);
-            SimulatedControllers.Add(controller);
+            AddController(controller);
         }
     }
 }

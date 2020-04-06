@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation;
 using XRTK.Definitions.Utilities;
@@ -17,12 +16,7 @@ namespace XRTK.Providers.Controllers.Simulation
     /// </summary>
     public abstract class BaseSimulatedControllerDataProvider : BaseControllerDataProvider, ISimulatedControllerDataProvider
     {
-        /// <summary>
-        /// Creates a new instance of the data provider.
-        /// </summary>
-        /// <param name="name">Name of the data provider as assigned in the configuration profile.</param>
-        /// <param name="priority">Data provider priority controls the order in the service registry.</param>
-        /// <param name="profile">Controller data provider profile assigned to the provider instance in the configuration inspector.</param>
+        /// <inheritdoc />
         public BaseSimulatedControllerDataProvider(string name, uint priority, SimulatedControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
@@ -45,11 +39,6 @@ namespace XRTK.Providers.Controllers.Simulation
 
         private StopWatch simulatedUpdateStopWatch;
         private long lastSimulatedUpdateTimeStamp = 0;
-
-        /// <summary>
-        /// Internal read/write list of currently simulated controllers.
-        /// </summary>
-        protected List<BaseController> SimulatedControllers { get; } = new List<BaseController>();
 
         /// <summary>
         /// Gets or sets whether the left controller is currently set to be always visible
@@ -102,13 +91,6 @@ namespace XRTK.Providers.Controllers.Simulation
 
         /// <inheritdoc />
         public float RotationSpeed { get; }
-
-        /// <summary>
-        /// Gets a read only list of active controllers. This property hides the inherited
-        /// active controllers property.
-        /// </summary>
-        /// <remarks>Subject to change, once the new controller refactorings are in place.</remarks>
-        public new IReadOnlyList<BaseController> ActiveControllers => SimulatedControllers;
 
         /// <inheritdoc />
         public override void Enable()
@@ -214,7 +196,7 @@ namespace XRTK.Providers.Controllers.Simulation
             if (TryGetController(handedness, out var controller))
             {
                 MixedRealityToolkit.InputSystem?.RaiseSourceLost(controller.InputSource, controller);
-                SimulatedControllers.Remove(controller);
+                RemoveController(controller);
             }
         }
 
@@ -241,9 +223,8 @@ namespace XRTK.Providers.Controllers.Simulation
         {
             for (int i = 0; i < ActiveControllers.Count; i++)
             {
-                var existingController = ActiveControllers[i];
-
-                if (existingController.ControllerHandedness == handedness)
+                if (ActiveControllers[i] is BaseController existingController &&
+                    existingController.ControllerHandedness == handedness)
                 {
                     controller = existingController;
                     return true;

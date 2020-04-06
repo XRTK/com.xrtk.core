@@ -18,24 +18,16 @@ namespace XRTK.Providers.Controllers.Hands
     /// </summary>
     public abstract class BaseHandController : BaseController, IMixedRealityHandController
     {
-        /// <summary>
-        /// Controller constructor.
-        /// </summary>
-        /// <param name="trackingState">The controller's tracking state.</param>
-        /// <param name="controllerHandedness">The controller's handedness.</param>
-        /// <param name="inputSource">Optional input source of the controller.</param>
-        /// <param name="interactions">Optional controller interactions mappings.</param>
-        public BaseHandController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-                : base(trackingState, controllerHandedness, inputSource, interactions)
+        /// <inheritdoc />
+        public BaseHandController(IMixedRealityControllerDataProvider dataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+                : base(dataProvider, trackingState, controllerHandedness, inputSource, interactions)
         {
-            handControllerDataProvider = MixedRealityToolkit.GetService<IMixedRealityHandControllerDataProvider>();
         }
 
-        private const float newVelocityWeight = .2f;
-        private const float currentVelocityWeight = .8f;
+        private const float NEW_VELOCITY_WEIGHT = .2f;
+        private const float CURRENT_VELOCITY_WEIGHT = .8f;
 
         private readonly int velocityUpdateInterval = 9;
-        private readonly IMixedRealityHandControllerDataProvider handControllerDataProvider;
         private readonly Dictionary<TrackedHandBounds, Bounds[]> bounds = new Dictionary<TrackedHandBounds, Bounds[]>();
         private readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
 
@@ -65,13 +57,13 @@ namespace XRTK.Providers.Controllers.Hands
                 IsPositionAvailable = true;
                 IsPositionApproximate = false;
                 IsRotationAvailable = true;
-                TrackingState = IsPositionAvailable && IsRotationAvailable ? TrackingState.Tracked : TrackingState.NotTracked;
-                MixedRealityToolkit.InputSystem.RaiseSourcePoseChanged(InputSource, this, wristPose);
+                TrackingState = handData.IsTracked ? TrackingState.Tracked : TrackingState.NotTracked;
+                MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, wristPose);
             }
 
             if (lastState != TrackingState)
             {
-                MixedRealityToolkit.InputSystem.RaiseSourceTrackingStateChanged(InputSource, this, TrackingState);
+                MixedRealityToolkit.InputSystem?.RaiseSourceTrackingStateChanged(InputSource, this, TrackingState);
             }
 
             if (TrackingState == TrackingState.Tracked)
@@ -107,6 +99,8 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateBounds()
         {
+            var handControllerDataProvider = (IMixedRealityHandControllerDataProvider)ControllerDataProvider;
+
             if (handControllerDataProvider.HandPhysicsEnabled && handControllerDataProvider.BoundsMode == HandBoundsMode.Hand)
             {
                 UpdateHandBounds();
@@ -370,7 +364,7 @@ namespace XRTK.Providers.Controllers.Hands
                 // Update linear velocity.
                 var deltaTime = Time.unscaledTime - deltaTimeStart;
                 var newVelocity = (GetJointPosition(TrackedHandJoint.Palm) - lastPalmPosition) / deltaTime;
-                Velocity = (Velocity * currentVelocityWeight) + (newVelocity * newVelocityWeight);
+                Velocity = (Velocity * CURRENT_VELOCITY_WEIGHT) + (newVelocity * NEW_VELOCITY_WEIGHT);
 
                 // Update angular velocity.
                 var currentPalmNormal = PalmNormal;

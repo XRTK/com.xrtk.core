@@ -10,7 +10,7 @@ using XRTK.Interfaces.InputSystem;
 namespace XRTK.Interfaces.Providers.Controllers
 {
     /// <summary>
-    /// Mixed Reality Toolkit controller definition, used to manage a specific controller type
+    /// Mixed Reality Toolkit controller definition, used to manage a specific controller type.
     /// </summary>
     public interface IMixedRealityController
     {
@@ -18,6 +18,11 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// Is the controller enabled?
         /// </summary>
         bool Enabled { get; set; }
+
+        /// <summary>
+        /// The data provider service this controller belongs to.
+        /// </summary>
+        IMixedRealityControllerDataProvider ControllerDataProvider { get; }
 
         /// <summary>
         /// Outputs the current state of the Input Source, whether it is tracked or not. As defined by the SDK / Unity.

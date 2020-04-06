@@ -61,7 +61,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                 mouseInputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource("Mouse Input", pointers);
             }
 
-            Controller = new MouseController(TrackingState.NotApplicable, Handedness.Any, mouseInputSource);
+            Controller = new MouseController(this, TrackingState.NotApplicable, Handedness.Any, mouseInputSource);
 
             if (mouseInputSource != null)
             {

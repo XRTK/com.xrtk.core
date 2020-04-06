@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using System;
@@ -8,15 +8,15 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Devices;
-using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Data;
 using XRTK.Inspectors.Utilities;
 using XRTK.Definitions.Controllers;
 using XRTK.Utilities.Editor;
 using XRTK.Extensions;
-using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.PropertyDrawers;
+using XRTK.Providers.Controllers.OpenVR;
+using XRTK.Providers.Controllers.UnityInput;
 
 namespace XRTK.Inspectors
 {
@@ -73,17 +73,17 @@ namespace XRTK.Inspectors
         private SerializedProperty currentInteractionList;
 
         private Handedness currentHandedness;
-        private SupportedControllerType currentControllerType;
+        private SystemType currentControllerType;
 
         private Vector2 mouseDragOffset;
         private GUIStyle flippedLabelStyle;
         private Texture2D currentControllerTexture;
         private ControllerInputActionOption currentControllerOption;
 
-        private BaseMixedRealityControllerMappingProfile mappingProfile;
+        private MixedRealityControllerMappingProfile controllerDataProviderProfile;
 
-        private bool IsCustomController => currentControllerType == SupportedControllerType.GenericOpenVR ||
-                                           currentControllerType == SupportedControllerType.GenericUnity;
+        private bool IsCustomController => currentControllerType == typeof(GenericOpenVRController) ||
+                                           currentControllerType == typeof(GenericJoystickController);
         private static string EditorWindowOptionsPath => $"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/Inspectors/Data/EditorWindowOptions.json";
 
         private void OnFocus()
@@ -93,7 +93,7 @@ namespace XRTK.Inspectors
                 Close();
             }
 
-            currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(mappingProfile, currentControllerType, currentHandedness);
+            currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(controllerDataProviderProfile, currentHandedness);
 
             #region Interaction Constraint Setup
 
@@ -109,7 +109,7 @@ namespace XRTK.Inspectors
             #endregion  Interaction Constraint Setup
         }
 
-        public static void Show(BaseMixedRealityControllerMappingProfile profile, SupportedControllerType controllerType, SerializedProperty interactionsList, Handedness handedness = Handedness.None)
+        public static void Show(MixedRealityControllerMappingProfile profile, SerializedProperty interactionsList, Handedness handedness = Handedness.None)
         {
             var handednessTitleText = handedness != Handedness.None ? $"{handedness} Hand " : string.Empty;
 
@@ -119,12 +119,12 @@ namespace XRTK.Inspectors
             }
 
             window = (ControllerPopupWindow)CreateInstance(typeof(ControllerPopupWindow));
-            window.titleContent = new GUIContent($"{controllerType} {handednessTitleText}Input Action Assignment");
-            window.mappingProfile = profile;
+            window.titleContent = new GUIContent($"{profile.ControllerType} {handednessTitleText}Input Action Assignment");
+            window.controllerDataProviderProfile = profile;
             window.currentHandedness = handedness;
-            window.currentControllerType = controllerType;
+            window.currentControllerType = profile.ControllerType;
             window.currentInteractionList = interactionsList;
-            window.currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(profile, controllerType, handedness);
+            window.currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(profile, handedness);
 
             isMouseInRects = new bool[interactionsList.arraySize];
 
@@ -138,7 +138,7 @@ namespace XRTK.Inspectors
                     {
                         new ControllerInputActionOption
                         {
-                            Controller = SupportedControllerType.None,
+                            Controller = null,
                             Handedness = Handedness.None,
                             InputLabelPositions = new[] { new Vector2(0, 0) },
                             IsLabelFlipped = new []{ false }
@@ -154,11 +154,11 @@ namespace XRTK.Inspectors
                 controllerInputActionOptions = JsonUtility.FromJson<ControllerInputActionOptions>(asset.text);
 
                 // if the controller option doesn't exist, then make a new one.
-                if (!controllerInputActionOptions.Controllers.Any(option => option.Controller == controllerType && option.Handedness == handedness))
+                if (!controllerInputActionOptions.Controllers.Any(option => option.Controller == window.currentControllerType && option.Handedness == handedness))
                 {
                     var newOption = new ControllerInputActionOption
                     {
-                        Controller = controllerType,
+                        Controller = window.currentControllerType,
                         Handedness = handedness,
                         InputLabelPositions = new Vector2[interactionsList.arraySize],
                         IsLabelFlipped = new bool[interactionsList.arraySize]
@@ -167,7 +167,7 @@ namespace XRTK.Inspectors
                     controllerInputActionOptions.Controllers.Add(newOption);
                 }
 
-                window.currentControllerOption = controllerInputActionOptions.Controllers.FirstOrDefault(option => option.Controller == controllerType && option.Handedness == handedness);
+                window.currentControllerOption = controllerInputActionOptions.Controllers.FirstOrDefault(option => option.Controller == window.currentControllerType && option.Handedness == handedness);
 
                 if (window.currentControllerOption.IsLabelFlipped == null)
                 {
@@ -270,11 +270,6 @@ namespace XRTK.Inspectors
 
             if (useCustomInteractionMapping)
             {
-                useCustomInteractionMapping = !(currentControllerType == SupportedControllerType.WindowsMixedReality && currentHandedness == Handedness.None);
-            }
-
-            if (useCustomInteractionMapping)
-            {
                 horizontalScrollPosition = EditorGUILayout.BeginScrollView(horizontalScrollPosition, false, false, GUILayout.ExpandWidth(true), GUILayout.ExpandWidth(true));
             }
 
@@ -332,11 +327,11 @@ namespace XRTK.Inspectors
                             controllerInputActionOptions.Controllers.Add(currentControllerOption);
                             isMouseInRects = new bool[currentInteractionList.arraySize];
 
-                            if (controllerInputActionOptions.Controllers.Any(option => option.Controller == SupportedControllerType.None))
+                            if (controllerInputActionOptions.Controllers.Any(option => option.Controller == null))
                             {
                                 controllerInputActionOptions.Controllers.Remove(
                                     controllerInputActionOptions.Controllers.Find(option =>
-                                        option.Controller == SupportedControllerType.None));
+                                        option.Controller == null));
                             }
 
                             AssetDatabase.DeleteAsset(EditorWindowOptionsPath);
@@ -487,26 +482,26 @@ namespace XRTK.Inspectors
                         bool skip = false;
                         var description = interactionDescription.stringValue;
 
-                        if (currentControllerType == SupportedControllerType.WindowsMixedReality && currentHandedness == Handedness.None)
-                        {
-                            switch (description)
-                            {
-                                case "Grip Press":
-                                case "Trigger Position":
-                                case "Trigger Touched":
-                                case "Touchpad Position":
-                                case "Touchpad Touch":
-                                case "Touchpad Press":
-                                case "Menu Press":
-                                case "Thumbstick Position":
-                                case "Thumbstick Press":
-                                    skip = true;
-                                    break;
-                                case "Trigger Press (Select)":
-                                    description = "Air Tap (Select)";
-                                    break;
-                            }
-                        }
+                        //if (currentControllerType == SupportedControllerType.WindowsMixedReality && currentHandedness == Handedness.None)
+                        //{
+                        //    switch (description)
+                        //    {
+                        //        case "Grip Press":
+                        //        case "Trigger Position":
+                        //        case "Trigger Touched":
+                        //        case "Touchpad Position":
+                        //        case "Touchpad Touch":
+                        //        case "Touchpad Press":
+                        //        case "Menu Press":
+                        //        case "Thumbstick Position":
+                        //        case "Thumbstick Press":
+                        //            skip = true;
+                        //            break;
+                        //        case "Trigger Press (Select)":
+                        //            description = "Air Tap (Select)";
+                        //            break;
+                        //    }
+                        //}
 
                         if (!skip)
                         {

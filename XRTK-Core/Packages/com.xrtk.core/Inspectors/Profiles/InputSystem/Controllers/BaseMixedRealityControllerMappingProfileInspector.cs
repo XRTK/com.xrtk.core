@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
@@ -10,16 +11,16 @@ using XRTK.Definitions.Controllers;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 {
-    [CustomEditor(typeof(BaseMixedRealityControllerMappingProfile))]
+    [CustomEditor(typeof(MixedRealityControllerMappingProfile))]
     public class BaseMixedRealityControllerMappingProfileInspector : BaseMixedRealityProfileInspector
     {
         private struct ControllerItem
         {
-            public readonly SupportedControllerType ControllerType;
+            public readonly Type ControllerType;
             public readonly Handedness Handedness;
-            public readonly MixedRealityInteractionMapping[] Interactions;
+            public readonly MixedRealityInteractionMappingProfile[] Interactions;
 
-            public ControllerItem(SupportedControllerType controllerType, Handedness handedness, MixedRealityInteractionMapping[] interactions)
+            public ControllerItem(Type controllerType, Handedness handedness, MixedRealityInteractionMappingProfile[] interactions)
             {
                 ControllerType = controllerType;
                 Handedness = handedness;
@@ -31,7 +32,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
         private SerializedProperty controllerMappings;
 
-        private BaseMixedRealityControllerMappingProfile controllerMappingProfile;
+        private MixedRealityControllerMappingProfile controllerMappingProfile;
 
         private GUIStyle controllerButtonStyle;
 
@@ -40,14 +41,14 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             base.OnEnable();
 
             controllerMappings = serializedObject.FindProperty(nameof(controllerMappings));
-            controllerMappingProfile = target as BaseMixedRealityControllerMappingProfile;
+            controllerMappingProfile = target as MixedRealityControllerMappingProfile;
         }
 
         public override void OnInspectorGUI()
         {
             RenderHeader();
 
-            var deviceName = controllerMappingProfile.ControllerType == SupportedControllerType.None ? "Custom Device" : controllerMappingProfile.ControllerType.ToString();
+            var deviceName = controllerMappingProfile.ControllerType.ToString();
             EditorGUILayout.LabelField($"{deviceName} Mappings", EditorStyles.boldLabel);
 
             if (controllerButtonStyle == null)
@@ -89,7 +90,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                     if (controllerItems[j].ControllerType == supportedControllerType &&
                         controllerItems[j].Handedness == handedness)
                     {
-                        controllerMappingProfile.ControllerMappings[i].SynchronizeInputActions(controllerItems[j].Interactions);
+                        controllerMappingProfile.SynchronizeInputActions(controllerItems[j].Interactions);
                         serializedObject.ApplyModifiedProperties();
                         skip = true;
                     }
@@ -97,7 +98,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
                 if (skip) { continue; }
 
-                controllerItems.Add(new ControllerItem(supportedControllerType, handedness, controllerMappingProfile.ControllerMappings[i].Interactions));
+                controllerItems.Add(new ControllerItem(supportedControllerType, handedness, controllerMappingProfile.InteractionMappings));
 
                 string handednessContent = string.Empty;
 
@@ -106,10 +107,10 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                     case Handedness.Left:
                     case Handedness.Right:
                     case Handedness.Other:
-                        handednessContent = $" {handedness.ToString()} hand";
+                        handednessContent = $" {handedness} hand";
                         break;
                     case Handedness.Both:
-                        handednessContent = $" {handedness.ToString()} hands";
+                        handednessContent = $" {handedness} hands";
                         break;
                 }
 
@@ -118,12 +119,12 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                     GUILayout.BeginHorizontal();
                 }
 
-                var buttonContent = new GUIContent($"Edit {description.stringValue}{handednessContent}", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile, supportedControllerType, handedness));
+                var buttonContent = new GUIContent($"Edit {description.stringValue}{handednessContent}", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile, handedness));
 
                 if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
                 {
                     serializedObject.ApplyModifiedProperties();
-                    EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, controllerMappingProfile.ControllerType, interactions, handedness);
+                    EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, interactions, handedness);
                 }
 
                 if (handedness != Handedness.Left)

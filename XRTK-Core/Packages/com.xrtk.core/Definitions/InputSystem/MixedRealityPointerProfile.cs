@@ -1,8 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -12,10 +12,15 @@ namespace XRTK.Definitions.InputSystem
     /// <summary>
     /// Configuration profile settings for setting up controller pointers.
     /// </summary>
-    [Obsolete]
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Pointer Profile", fileName = "MixedRealityInputPointerProfile", order = (int)CreateProfileMenuItemIndices.Pointer)]
     public class MixedRealityPointerProfile : BaseMixedRealityProfile
     {
+        [SerializeField]
+        [Prefab(typeof(IMixedRealityPointer))]
+        private GameObject pointerPrefab = null;
+
+        public GameObject PointerPrefab => pointerPrefab;
+
         [SerializeField]
         [Tooltip("Maximum distance at which all pointers can collide with a GameObject, unless it has an override extent.")]
         private float pointingExtent = 10f;
@@ -43,43 +48,12 @@ namespace XRTK.Definitions.InputSystem
         public bool DrawDebugPointingRays => drawDebugPointingRays;
 
         [SerializeField]
-        private Color[] debugDrawPointingRayColors = null;
+        [FormerlySerializedAs("debugDrawPointingRayColors")]
+        private Color[] debugPointingRayColors = null;
 
         /// <summary>
         /// The colors to use when debugging pointer rays.
         /// </summary>
-        public Color[] DebugDrawPointingRayColors => debugDrawPointingRayColors;
-
-        [Prefab]
-        [SerializeField]
-        [Tooltip("The gaze cursor prefab to use on the Gaze pointer.")]
-        private GameObject gazeCursorPrefab = null;
-
-        /// <summary>
-        /// The gaze cursor prefab to use on the Gaze pointer.
-        /// </summary>
-        public GameObject GazeCursorPrefab => gazeCursorPrefab;
-
-        [SerializeField]
-        [Tooltip("The concrete type of IMixedRealityGazeProvider to use.")]
-        [Implements(typeof(IMixedRealityGazeProvider), TypeGrouping.ByNamespaceFlat)]
-        private SystemType gazeProviderType;
-
-        /// <summary>
-        /// The concrete type of <see cref="IMixedRealityGazeProvider"/> to use.
-        /// </summary>
-        public SystemType GazeProviderType
-        {
-            get => gazeProviderType;
-            internal set => gazeProviderType = value;
-        }
-
-        [SerializeField]
-        private PointerOption[] pointerOptions = new PointerOption[0];
-
-        /// <summary>
-        /// The Pointer options for this profile.
-        /// </summary>
-        public PointerOption[] PointerOptions => pointerOptions;
+        public Color[] DebugPointingRayColors => debugPointingRayColors;
     }
 }

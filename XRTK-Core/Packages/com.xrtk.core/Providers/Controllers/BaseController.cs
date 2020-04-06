@@ -290,7 +290,7 @@ namespace XRTK.Providers.Controllers
                 }
                 else if (visualizationProfile.GlobalPointerPose != MixedRealityInputAction.None)
                 {
-                    visualizer.UseSourcePoseData = true;
+                    visualizer.UseSourcePoseData = false;
                     visualizer.PoseAction = visualizationProfile.GlobalPointerPose;
                 }
                 else

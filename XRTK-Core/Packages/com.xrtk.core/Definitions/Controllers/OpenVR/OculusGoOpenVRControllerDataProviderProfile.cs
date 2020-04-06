@@ -3,11 +3,11 @@
 
 namespace XRTK.Definitions.Controllers.OpenVR
 {
-    public class OculusRemoteControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
+    public class OculusGoOpenVRControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
     {
         public override ControllerDefinition[] GetControllerDefinitions()
         {
-            //  new MixedRealityControllerMapping("Oculus Remote Controller", typeof(OculusRemoteOpenVRController)),
+            // new MixedRealityControllerMapping("Oculus Go OpenVR Controller", typeof(OculusGoOpenVRController), Handedness.Both),
             throw new System.NotImplementedException();
         }
     }

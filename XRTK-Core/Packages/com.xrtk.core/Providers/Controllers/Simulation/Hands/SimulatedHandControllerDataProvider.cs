@@ -62,7 +62,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             var controllerType = typeof(SimulatedHandController);
             var pointers = RequestPointers(controllerType, handedness, true);
             var inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{controllerType.Name} {handedness}", pointers);
-            var controller = (BaseController)Activator.CreateInstance(controllerType, TrackingState.Tracked, handedness, inputSource, null);
+            var controller = new SimulatedHandController(this, TrackingState.Tracked, handedness, inputSource, null);
 
             if (controller == null || !controller.SetupConfiguration(controllerType))
             {

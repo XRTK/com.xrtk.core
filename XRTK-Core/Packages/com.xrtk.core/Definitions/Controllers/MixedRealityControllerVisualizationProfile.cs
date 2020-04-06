@@ -94,7 +94,7 @@ namespace XRTK.Definitions.Controllers
         /// </summary>
         /// <remarks>
         /// If the pointer pose action for the specific controller can not be found, the controller will fall back and use this setting for visualization.
-        /// </remarks>        
+        /// </remarks>
         /// <remarks>
         /// If the default model for the right hand controller can not be found, the controller will fall back and use this setting for visualization.
         /// </remarks>

@@ -15,20 +15,23 @@ namespace XRTK.Definitions.Devices
     [Serializable]
     public class MixedRealityInteractionMapping
     {
-        /// <summary>
-        /// The constructor for a new Interaction Mapping definition
-        /// </summary>
-        /// <param name="id">Identity for mapping</param>
-        /// <param name="description">The description of the interaction mapping.</param>
-        /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
-        /// <param name="inputType">The physical input device / control</param>
-        /// <param name="keyCode">Optional KeyCode value to get input from Unity's old input system</param>
-        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, DeviceInputType inputType, KeyCode keyCode)
+        private MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType)
         {
-            this.id = id;
             this.description = description;
             this.axisType = axisType;
             this.inputType = inputType;
+        }
+
+        /// <summary>
+        /// The constructor for a new Interaction Mapping definition
+        /// </summary>
+        /// <param name="description">The description of the interaction mapping.</param>
+        /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
+        /// <param name="inputType">The physical input device / control type.</param>
+        /// <param name="keyCode">Optional KeyCode value to get input from Unity's old input system</param>
+        public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType, KeyCode keyCode)
+            : this(description, axisType, inputType)
+        {
             inputAction = MixedRealityInputAction.None;
             this.keyCode = keyCode;
             axisCodeX = string.Empty;
@@ -50,17 +53,13 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// The constructor for a new Interaction Mapping definition
         /// </summary>
-        /// <param name="id">Identity for mapping</param>
         /// <param name="description">The description of the interaction mapping.</param>
-        /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
-        /// <param name="inputType">The physical input device / control</param>
-        /// <param name="inputName">Optional inputName value to get input for a coded input identity from a provider</param>
-        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, string inputName, DeviceInputType inputType)
+        /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping.</param>
+        /// <param name="inputName">Optional inputName value to get input for a coded input identity from a provider.</param>
+        /// <param name="inputType">The physical input device / control type.</param>
+        public MixedRealityInteractionMapping(string description, AxisType axisType, string inputName, DeviceInputType inputType)
+            : this(description, axisType, inputType)
         {
-            this.id = id;
-            this.description = description;
-            this.axisType = axisType;
-            this.inputType = inputType;
             inputAction = MixedRealityInputAction.None;
             this.inputName = inputName;
             axisCodeX = string.Empty;
@@ -82,20 +81,16 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// The constructor for a new Interaction Mapping definition
         /// </summary>
-        /// <param name="id">Identity for mapping</param>
         /// <param name="description">The description of the interaction mapping.</param>
         /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
-        /// <param name="inputType">The physical input device / control</param>
+        /// <param name="inputType">The physical input device / control type.</param>
         /// <param name="axisCodeX">Optional horizontal or single axis value to get axis data from Unity's old input system.</param>
         /// <param name="axisCodeY">Optional vertical axis value to get axis data from Unity's old input system.</param>
         /// <param name="invertXAxis">Optional horizontal axis invert option.</param>
         /// <param name="invertYAxis">Optional vertical axis invert option.</param>
-        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, DeviceInputType inputType, string axisCodeX, string axisCodeY = "", bool invertXAxis = false, bool invertYAxis = false)
+        public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType, string axisCodeX, string axisCodeY = "", bool invertXAxis = false, bool invertYAxis = false)
+            : this(description, axisType, inputType)
         {
-            this.id = id;
-            this.description = description;
-            this.axisType = axisType;
-            this.inputType = inputType;
             inputAction = MixedRealityInputAction.None;
             keyCode = KeyCode.None;
             this.inputName = string.Empty;
@@ -118,22 +113,18 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// The constructor for a new Interaction Mapping definition
         /// </summary>
-        /// <param name="id">Identity for mapping</param>
         /// <param name="description">The description of the interaction mapping.</param>
         /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
-        /// <param name="inputType">The physical input device / control</param>
+        /// <param name="inputType">The physical input device / control type.</param>
         /// <param name="inputAction">The logical MixedRealityInputAction that this input performs</param>
         /// <param name="keyCode">Optional KeyCode value to get input from Unity's old input system</param>
         /// <param name="axisCodeX">Optional horizontal or single axis value to get axis data from Unity's old input system.</param>
         /// <param name="axisCodeY">Optional vertical axis value to get axis data from Unity's old input system.</param>
         /// <param name="invertXAxis">Optional horizontal axis invert option.</param>
         /// <param name="invertYAxis">Optional vertical axis invert option.</param>
-        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, DeviceInputType inputType, MixedRealityInputAction inputAction, KeyCode keyCode = KeyCode.None, string axisCodeX = "", string axisCodeY = "", bool invertXAxis = false, bool invertYAxis = false)
+        public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType, MixedRealityInputAction inputAction, KeyCode keyCode = KeyCode.None, string axisCodeX = "", string axisCodeY = "", bool invertXAxis = false, bool invertYAxis = false)
+            : this(description, axisType, inputType)
         {
-            this.id = id;
-            this.description = description;
-            this.axisType = axisType;
-            this.inputType = inputType;
             this.inputAction = inputAction;
             this.keyCode = keyCode;
             this.axisCodeX = axisCodeX;
@@ -155,20 +146,19 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// Creates a copy of a <see cref="MixedRealityInteractionMapping"/>
         /// </summary>
-        /// <param name="mixedRealityInteractionMapping"></param>
-        public MixedRealityInteractionMapping(MixedRealityInteractionMapping mixedRealityInteractionMapping)
+        /// <param name="mapping"></param>
+        public MixedRealityInteractionMapping(MixedRealityInteractionMapping mapping)
         {
-            id = mixedRealityInteractionMapping.id;
-            description = mixedRealityInteractionMapping.description;
-            axisType = mixedRealityInteractionMapping.axisType;
-            inputType = mixedRealityInteractionMapping.inputType;
-            inputAction = mixedRealityInteractionMapping.inputAction;
-            keyCode = mixedRealityInteractionMapping.keyCode;
-            inputName = mixedRealityInteractionMapping.inputName;
-            axisCodeX = mixedRealityInteractionMapping.axisCodeX;
-            axisCodeY = mixedRealityInteractionMapping.axisCodeY;
-            invertXAxis = mixedRealityInteractionMapping.invertXAxis;
-            invertYAxis = mixedRealityInteractionMapping.invertYAxis;
+            description = mapping.description;
+            axisType = mapping.axisType;
+            inputType = mapping.inputType;
+            inputAction = mapping.inputAction;
+            keyCode = mapping.keyCode;
+            inputName = mapping.inputName;
+            axisCodeX = mapping.axisCodeX;
+            axisCodeY = mapping.axisCodeY;
+            invertXAxis = mapping.invertXAxis;
+            invertYAxis = mapping.invertYAxis;
             rawData = null;
             boolData = false;
             floatData = 0f;
@@ -183,15 +173,6 @@ namespace XRTK.Definitions.Devices
         #region Interaction Properties
 
         [SerializeField]
-        [Tooltip("The Id assigned to the Interaction.")]
-        private uint id;
-
-        /// <summary>
-        /// The Id assigned to the Interaction.
-        /// </summary>
-        public uint Id => id;
-
-        [SerializeField]
         [Tooltip("The human readable description of the interaction mapping.")]
         private string description;
 
@@ -199,6 +180,15 @@ namespace XRTK.Definitions.Devices
         /// The description of the interaction mapping.
         /// </summary>
         public string Description => description;
+
+        [SerializeField]
+        [Tooltip("Influences how the Interaction determines state changes that will raise the InputAction.")]
+        private StateChangeType stateChangeType = StateChangeType.Continuous;
+
+        /// <summary>
+        /// Influences how the Interaction determines state changes that will raise the <see cref="MixedRealityInputAction"/>.
+        /// </summary>
+        public StateChangeType StateChangeType => stateChangeType;
 
         [SerializeField]
         [Tooltip("The axis type of the button, e.g. Analogue, Digital, etc.")]
@@ -384,7 +374,7 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// The Raw (object) data value.
         /// </summary>
-        /// <remarks>Only supported for a Raw mapping axis type</remarks>
+        /// <remarks>Only supported for a Raw mapping axis type.</remarks>
         public object RawData
         {
             get => rawData;
@@ -405,7 +395,7 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// The Bool data value.
         /// </summary>
-        /// <remarks>Only supported for a Digital mapping axis type</remarks>
+        /// <remarks>Only supported for a Digital mapping axis type.</remarks>
         public bool BoolData
         {
             get => boolData;
@@ -425,7 +415,7 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// The Float data value.
         /// </summary>
-        /// <remarks>Only supported for a SingleAxis mapping axis type</remarks>
+        /// <remarks>Only supported for a SingleAxis mapping axis type.</remarks>
         public float FloatData
         {
             get => floatData;
@@ -453,7 +443,7 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// The Vector2 data value.
         /// </summary>
-        /// <remarks>Only supported for a DualAxis mapping axis type</remarks>
+        /// <remarks>Only supported for a DualAxis mapping axis type.</remarks>
         public Vector2 Vector2Data
         {
             get => vector2Data;
@@ -485,7 +475,7 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// The ThreeDof Vector3 Position data value.
         /// </summary>
-        /// <remarks>Only supported for a ThreeDof mapping axis type</remarks>
+        /// <remarks>Only supported for a ThreeDof mapping axis type.</remarks>
         public Vector3 PositionData
         {
             get => positionData;
@@ -505,7 +495,7 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// The ThreeDof Quaternion Rotation data value.
         /// </summary>
-        /// <remarks>Only supported for a ThreeDof mapping axis type</remarks>
+        /// <remarks>Only supported for a ThreeDof mapping axis type.</remarks>
         public Quaternion RotationData
         {
             get => rotationData;

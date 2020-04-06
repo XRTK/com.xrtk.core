@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -122,20 +122,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                 return controller;
             }
 
-            Type controllerType;
-
-            switch (GetCurrentControllerType(joystickName))
-            {
-                default:
-                    return null;
-                case SupportedControllerType.GenericUnity:
-                    controllerType = typeof(GenericJoystickController);
-                    break;
-                case SupportedControllerType.Xbox:
-                    controllerType = typeof(XboxController);
-                    break;
-            }
-
+            var controllerType = GetCurrentControllerType(joystickName);
             var inputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource($"{controllerType.Name} Controller");
             var detectedController = Activator.CreateInstance(controllerType, TrackingState.NotTracked, Handedness.None, inputSource, null) as GenericJoystickController;
 
@@ -179,13 +166,13 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// </summary>
         /// <param name="joystickName">The name of they joystick from Unity's <see cref="Input.GetJoystickNames"/></param>
         /// <returns>The supported controller type</returns>
-        protected virtual SupportedControllerType GetCurrentControllerType(string joystickName)
+        protected virtual Type GetCurrentControllerType(string joystickName)
         {
             if (string.IsNullOrEmpty(joystickName) ||
                 joystickName.Contains("<0"))
             {
                 Debug.LogError($"Joystick not found! {joystickName}");
-                return SupportedControllerType.None;
+                return null;
             }
 
             if (joystickName.Contains("Xbox Controller") ||
@@ -193,11 +180,11 @@ namespace XRTK.Providers.Controllers.UnityInput
                 joystickName.Contains("Xbox Bluetooth Gamepad") ||
                 joystickName.Contains("Xbox Wireless Controller"))
             {
-                return SupportedControllerType.Xbox;
+                return typeof(XboxController);
             }
 
             Debug.Log($"{joystickName} does not have a defined controller type, falling back to generic controller type");
-            return SupportedControllerType.GenericUnity;
+            return typeof(GenericJoystickController);
         }
     }
 }

@@ -12,6 +12,7 @@ namespace XRTK.Definitions.InputSystem
     /// <summary>
     /// Defines a pointer option to assign to a controller.
     /// </summary>
+    [Obsolete]
     [Serializable]
     public struct PointerOption
     {

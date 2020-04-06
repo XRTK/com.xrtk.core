@@ -1,8 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
@@ -10,21 +11,21 @@ using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Definitions.Controllers
 {
-    [Obsolete]
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Visualization Profile", fileName = "MixedRealityControllerVisualizationProfile", order = (int)CreateProfileMenuItemIndices.ControllerVisualization)]
     public class MixedRealityControllerVisualizationProfile : BaseMixedRealityProfile
     {
         [SerializeField]
-        [Tooltip("Enable and configure the controller rendering of the Motion Controllers on Startup.")]
-        private bool renderMotionControllers = false;
+        [FormerlySerializedAs("renderMotionControllers")]
+        [Tooltip("Enable and configure the controller rendering of Tracked Controllers on Startup.")]
+        private bool renderTrackedControllers = false;
 
         /// <summary>
-        /// Enable and configure the controller rendering of the Motion Controllers on Startup.
+        /// Enable and configure the controller rendering of Tracked Controllers on Startup.
         /// </summary>
-        public bool RenderMotionControllers
+        public bool RenderTrackedControllers
         {
-            get => renderMotionControllers;
-            private set => renderMotionControllers = value;
+            get => renderTrackedControllers;
+            private set => renderTrackedControllers = value;
         }
 
         [SerializeField]
@@ -95,7 +96,7 @@ namespace XRTK.Definitions.Controllers
         /// </summary>
         /// <remarks>
         /// If the pointer pose action for the specific controller can not be found, the controller will fall back and use this setting for visualization.
-        /// </remarks>        
+        /// </remarks>
         /// <remarks>
         /// If the default model for the right hand controller can not be found, the controller will fall back and use this setting for visualization.
         /// </remarks>

@@ -14,7 +14,7 @@ namespace XRTK.Definitions.Platforms
             get
             {
 #if PLATFORM_IOS
-                return !Application.isEditor;
+                return !UnityEngine.Application.isEditor;
 #else
                 return false;
 #endif

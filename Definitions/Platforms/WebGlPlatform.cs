@@ -14,7 +14,7 @@ namespace XRTK.Definitions.Platforms
             get
             {
 #if PLATFORM_WEBGL
-                return !Application.isEditor;
+                return !UnityEngine.Application.isEditor;
 #else
                 return false;
 #endif

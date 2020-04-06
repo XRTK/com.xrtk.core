@@ -1,10 +1,6 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-#if PLATFORM_WEBGL
-using UnityEngine;
-#endif
-
 namespace XRTK.Definitions.Platforms
 {
     /// <summary>
@@ -18,7 +14,7 @@ namespace XRTK.Definitions.Platforms
             get
             {
 #if PLATFORM_WEBGL
-                return !Application.isEditor;
+                return !UnityEngine.Application.isEditor;
 #else
                 return false;
 #endif

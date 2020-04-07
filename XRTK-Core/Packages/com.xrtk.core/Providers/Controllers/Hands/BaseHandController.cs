@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;

@@ -137,14 +137,14 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultInteractions => new[]
         {
-            new MixedRealityInteractionMapping(0, "Yaw Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.E),
-            new MixedRealityInteractionMapping(1, "Yaw Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Q),
-            new MixedRealityInteractionMapping(2, "Pitch Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.F),
-            new MixedRealityInteractionMapping(3, "Pitch Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.R),
-            new MixedRealityInteractionMapping(4, "Roll Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.X),
-            new MixedRealityInteractionMapping(5, "Roll Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Z),
-            new MixedRealityInteractionMapping(6, "Move Away (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.PageUp),
-            new MixedRealityInteractionMapping(7, "Move Closer (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.PageDown)
+            new MixedRealityInteractionMapping("Yaw Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.E),
+            new MixedRealityInteractionMapping("Yaw Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Q),
+            new MixedRealityInteractionMapping("Pitch Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.F),
+            new MixedRealityInteractionMapping("Pitch Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.R),
+            new MixedRealityInteractionMapping("Roll Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.X),
+            new MixedRealityInteractionMapping("Roll Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Z),
+            new MixedRealityInteractionMapping("Move Away (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.PageUp),
+            new MixedRealityInteractionMapping("Move Closer (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.PageDown)
         };
 
         /// <summary>

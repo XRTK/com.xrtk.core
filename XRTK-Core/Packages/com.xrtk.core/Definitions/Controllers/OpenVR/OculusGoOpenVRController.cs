@@ -8,7 +8,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 
-namespace XRTK.Providers.Controllers.OpenVR
+namespace XRTK.Definitions.Controllers.OpenVR
 {
     public class OculusGoOpenVRController : GenericOpenVRController
     {

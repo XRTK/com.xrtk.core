@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
@@ -8,7 +8,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 
-namespace XRTK.Providers.Controllers.OpenVR
+namespace XRTK.Definitions.Controllers.OpenVR
 {
     /// <summary>
     /// Open VR Implementation of the Windows Mixed Reality Motion Controllers.

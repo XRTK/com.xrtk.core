@@ -7,7 +7,7 @@ using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Definitions.Controllers
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers Profiles", fileName = "MixedRealityControllerDataModelsProfile", order = (int)CreateProfileMenuItemIndices.ControllerDataProviders)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers Profile", fileName = "MixedRealityControllerDataProvidersProfile", order = (int)CreateProfileMenuItemIndices.ControllerDataProviders)]
     public class MixedRealityControllerDataProvidersProfile : BaseMixedRealityServiceProfile<IMixedRealityControllerDataProvider>
     {
     }

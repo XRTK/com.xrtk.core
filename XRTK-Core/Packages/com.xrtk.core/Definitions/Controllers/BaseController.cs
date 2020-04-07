@@ -10,7 +10,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 
-namespace XRTK.Providers.Controllers
+namespace XRTK.Definitions.Controllers
 {
     /// <summary>
     /// Base Controller class to inherit from for all controllers.
@@ -24,7 +24,7 @@ namespace XRTK.Providers.Controllers
         /// <param name="trackingState">The initial tracking state of this controller.</param>
         /// <param name="controllerHandedness">The controller's handedness.</param>
         /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> this controller belongs to.</param>
-        /// <param name="interactions">The <see cref="MixedRealityControllerMapping.Interactions"/> currently assigned to this controller.</param>
+        /// <param name="interactions">The <see cref="MixedRealityInteractionMapping"/>s currently assigned to this controller.</param>
         protected BaseController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
         {
             ControllerDataProvider = controllerDataProvider;

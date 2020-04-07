@@ -4,6 +4,8 @@
 using System;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Controllers.OpenVR;
+using XRTK.Definitions.Controllers.UnityInput;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Providers.Controllers.UnityInput;
@@ -14,15 +16,10 @@ namespace XRTK.Providers.Controllers.OpenVR
     /// <summary>
     /// Manages Open VR Devices using unity's input system.
     /// </summary>
-    public class OpenVRDataProvider : UnityJoystickDataProvider
+    public class OpenVRDataControllerDataProvider : UnityJoystickDataProvider
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        /// <param name="profile"></param>
-        public OpenVRDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
+        /// <inheritdoc />
+        public OpenVRDataControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
         }
@@ -75,7 +72,7 @@ namespace XRTK.Providers.Controllers.OpenVR
 
             if (detectedController == null)
             {
-                Debug.LogError($"Failed to create {controllerType.Name} controller");
+                Debug.LogError($"Failed to create {controllerType.Name}");
                 return null;
             }
 
@@ -83,7 +80,7 @@ namespace XRTK.Providers.Controllers.OpenVR
             {
                 // Controller failed to be setup correctly.
                 // Return null so we don't raise the source detected.
-                Debug.LogError($"Failed to Setup {controllerType.Name} controller");
+                Debug.LogError($"Failed to Setup {controllerType.Name}");
                 return null;
             }
 
@@ -102,7 +99,8 @@ namespace XRTK.Providers.Controllers.OpenVR
         /// <inheritdoc />
         protected override Type GetCurrentControllerType(string joystickName)
         {
-            if (joystickName.Contains("Oculus Rift CV1") || joystickName.Contains("Oculus Touch"))
+            if (joystickName.Contains("Oculus Rift CV1") ||
+                joystickName.Contains("Oculus Touch"))
             {
                 return typeof(OculusTouchOpenVRController);
             }

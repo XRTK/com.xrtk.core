@@ -1,4 +1,4 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -403,7 +403,10 @@ namespace XRTK.Services
                 {
                     if (CreateAndRegisterService<IMixedRealityFocusProvider>(ActiveProfile.InputSystemProfile.FocusProviderType))
                     {
-                        RegisterServices(ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredServiceConfigurations);
+                        if (ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile != null)
+                        {
+                            RegisterServices(ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredServiceConfigurations);
+                        }
                     }
                     else
                     {

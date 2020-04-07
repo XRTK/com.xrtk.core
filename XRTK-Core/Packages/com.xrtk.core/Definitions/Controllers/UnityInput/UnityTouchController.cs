@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
@@ -9,7 +9,7 @@ using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 
-namespace XRTK.Providers.Controllers.UnityInput
+namespace XRTK.Definitions.Controllers.UnityInput
 {
     public class UnityTouchController : BaseController
     {

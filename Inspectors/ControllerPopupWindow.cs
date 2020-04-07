@@ -83,7 +83,7 @@ namespace XRTK.Inspectors
         private BaseMixedRealityControllerMappingProfile mappingProfile;
 
         private bool IsCustomController => currentControllerType == SupportedControllerType.GenericOpenVR ||
-                                           currentControllerType == SupportedControllerType.GenericUnity;
+                                           currentControllerType == SupportedControllerType.GenericUnity || currentControllerType == SupportedControllerType.Hand;
         private static string EditorWindowOptionsPath => $"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/Inspectors/Data/EditorWindowOptions.json";
 
         private void OnFocus()

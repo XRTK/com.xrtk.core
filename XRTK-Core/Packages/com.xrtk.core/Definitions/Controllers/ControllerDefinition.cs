@@ -6,16 +6,17 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.Controllers
 {
+    [Serializable]
     public struct ControllerDefinition
     {
-        public ControllerDefinition(Type controllerType, Handedness handedness, bool useCustomInteractions) : this()
+        public ControllerDefinition(SystemType controllerType, Handedness handedness = Handedness.None, bool useCustomInteractions = false) : this()
         {
             ControllerType = controllerType;
             Handedness = handedness;
             UseCustomInteractions = useCustomInteractions;
         }
 
-        public readonly Type ControllerType;
+        public readonly SystemType ControllerType;
 
         public readonly Handedness Handedness;
 

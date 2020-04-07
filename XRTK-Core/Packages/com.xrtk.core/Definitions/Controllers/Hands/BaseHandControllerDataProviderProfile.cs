@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Definitions.Controllers.Hands
 {
@@ -18,8 +20,6 @@ namespace XRTK.Definitions.Controllers.Hands
         /// If set, hand mesh data will be read and available for visualization. Disable for optimized performance.
         /// </summary>
         public bool HandMeshingEnabled => handMeshingEnabled;
-
-        [Header("Hand Physics")]
 
         [SerializeField]
         [Tooltip("If set, hands will be setup with colliders and a rigidbody to work with Unity's physics system.")]
@@ -47,5 +47,14 @@ namespace XRTK.Definitions.Controllers.Hands
         /// Set the bounds mode to use for calculating hand bounds.
         /// </summary>
         public HandBoundsMode BoundsMode => boundsMode;
+
+        public override ControllerDefinition[] GetDefaultControllerOptions()
+        {
+            return new[]
+            {
+                new ControllerDefinition(typeof(MixedRealityHandController), Handedness.Left),
+                new ControllerDefinition(typeof(MixedRealityHandController), Handedness.Right),
+            };
+        }
     }
 }

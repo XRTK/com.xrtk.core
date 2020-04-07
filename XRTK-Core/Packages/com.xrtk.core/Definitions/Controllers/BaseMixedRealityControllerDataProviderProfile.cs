@@ -27,30 +27,6 @@ namespace XRTK.Definitions.Controllers
             internal set => controllerMappingProfiles = value;
         }
 
-        // TODO Move all this into the inspector's OnEnable method?
-        protected virtual void Awake()
-        {
-            if (!hasSetupDefaults)
-            {
-                var controllerDefinitions = GetControllerDefinitions();
-                controllerMappingProfiles = new MixedRealityControllerMappingProfile[controllerDefinitions.Length];
-
-                for (int i = 0; i < controllerMappingProfiles.Length; i++)
-                {
-                    var instance = CreateInstance(nameof(MixedRealityControllerMappingProfile)) as MixedRealityControllerMappingProfile;
-                    Debug.Assert(instance != null);
-                    // TODO Need to create the asset and save it to disk.
-                    instance.ControllerType = controllerDefinitions[i].ControllerType;
-                    instance.Handedness = controllerDefinitions[i].Handedness;
-                    instance.UseCustomInteractions = controllerDefinitions[i].UseCustomInteractions;
-                    instance.SetDefaultInteractionMapping();
-                    controllerMappingProfiles[i] = instance;
-                }
-
-                hasSetupDefaults = true;
-            }
-        }
-
-        public abstract ControllerDefinition[] GetControllerDefinitions();
+        public abstract ControllerDefinition[] GetDefaultControllerOptions();
     }
 }

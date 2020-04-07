@@ -119,9 +119,8 @@ namespace XRTK.Definitions.Controllers.Simulation
 
         #endregion
 
-        public override ControllerDefinition[] GetControllerDefinitions()
+        public override ControllerDefinition[] GetDefaultControllerOptions()
         {
-            // TODO
             return null;
         }
     }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers.Simulation.Hands;
 
 namespace XRTK.Definitions.Controllers.Simulation.Hands
 {
@@ -65,11 +66,13 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// </summary>
         public HandBoundsMode BoundsMode => boundsMode;
 
-        public override ControllerDefinition[] GetControllerDefinitions()
+        public override ControllerDefinition[] GetDefaultControllerOptions()
         {
-            // new MixedRealityControllerMapping("Simulated Hand Controller Left", typeof(SimulatedHandController), Handedness.Left),
-            // new MixedRealityControllerMapping("Simulated Hand Controller Right", typeof(SimulatedHandController), Handedness.Right)
-            throw new System.NotImplementedException();
+            return new[]
+            {
+                new ControllerDefinition(typeof(SimulatedHandController), Handedness.Left),
+                new ControllerDefinition(typeof(SimulatedHandController), Handedness.Right),
+            };
         }
     }
 }

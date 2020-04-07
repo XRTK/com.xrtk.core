@@ -5,13 +5,14 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.Controllers.UnityInput.Profiles
 {
-    public class MouseControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
+    public class UnityInputControllerDataProfile : BaseMixedRealityControllerDataProviderProfile
     {
         public override ControllerDefinition[] GetDefaultControllerOptions()
         {
             return new[]
             {
-                new ControllerDefinition(typeof(MouseController), Handedness.Any),
+                new ControllerDefinition(typeof(GenericJoystickController), Handedness.None, true),
+                new ControllerDefinition(typeof(XboxController))
             };
         }
     }

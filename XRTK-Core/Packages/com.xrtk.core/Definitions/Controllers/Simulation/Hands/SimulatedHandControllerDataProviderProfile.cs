@@ -29,9 +29,6 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// </summary>
         public float HandPoseAnimationSpeed => handPoseAnimationSpeed;
 
-
-        [Header("General Settings")]
-
         [SerializeField]
         [Tooltip("If set, hand mesh data will be read and available for visualization. Disable for optimized performance.")]
         private bool handMeshingEnabled = false;
@@ -40,8 +37,6 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// If set, hand mesh data will be read and available for visualization. Disable for optimized performance.
         /// </summary>
         public bool HandMeshingEnabled => handMeshingEnabled;
-
-        [Header("Hand Physics")]
 
         [SerializeField]
         [Tooltip("If set, hands will be setup with colliders and a rigidbody to work with Unity's physics system.")]

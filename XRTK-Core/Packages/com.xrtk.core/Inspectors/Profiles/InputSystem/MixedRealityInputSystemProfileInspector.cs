@@ -78,9 +78,10 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             if (showGlobalPointerOptions)
             {
-                EditorGUI.indentLevel++;
                 EditorGUILayout.HelpBox("Global pointer options applied to all controllers that support pointers. You may override these globals per controller in the its controller mapping profile.", MessageType.Info);
+                EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(pointingExtent);
+                EditorGUILayout.Space();
                 EditorGUILayout.PropertyField(pointingRaycastLayerMasks, true);
                 EditorGUILayout.Space();
 
@@ -94,6 +95,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                     drawDebugPointingRays.boolValue = newValue;
                 }
 
+                EditorGUILayout.Space();
                 EditorGUILayout.PropertyField(debugPointingRayColors, true);
                 EditorGUI.indentLevel--;
             }
@@ -104,9 +106,13 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             if (showGlobalHandOptions)
             {
-                EditorGUI.indentLevel++;
                 EditorGUILayout.HelpBox("Global hand tracking options applied to all platforms that support hand tracking. You may override these globals per platform in the platform's data provider profile.", MessageType.Info);
+                EditorGUI.indentLevel++;
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField("Hand Rendering Settings", EditorStyles.boldLabel);
                 EditorGUILayout.PropertyField(handMeshingEnabled);
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField("Hand Physics Settings", EditorStyles.boldLabel);
                 EditorGUILayout.PropertyField(handPhysicsEnabled);
                 EditorGUILayout.PropertyField(useTriggers);
                 EditorGUILayout.PropertyField(boundsMode);

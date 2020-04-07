@@ -14,128 +14,128 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
     [CustomEditor(typeof(MixedRealityControllerMappingProfile))]
     public class BaseMixedRealityControllerMappingProfileInspector : BaseMixedRealityProfileInspector
     {
-        private struct ControllerItem
-        {
-            public readonly Type ControllerType;
-            public readonly Handedness Handedness;
-            public readonly MixedRealityInteractionMappingProfile[] Interactions;
+        //private struct ControllerItem
+        //{
+        //    public readonly Type ControllerType;
+        //    public readonly Handedness Handedness;
+        //    public readonly MixedRealityInteractionMappingProfile[] Interactions;
 
-            public ControllerItem(Type controllerType, Handedness handedness, MixedRealityInteractionMappingProfile[] interactions)
-            {
-                ControllerType = controllerType;
-                Handedness = handedness;
-                Interactions = interactions;
-            }
-        }
+        //    public ControllerItem(Type controllerType, Handedness handedness, MixedRealityInteractionMappingProfile[] interactions)
+        //    {
+        //        ControllerType = controllerType;
+        //        Handedness = handedness;
+        //        Interactions = interactions;
+        //    }
+        //}
 
-        private readonly List<ControllerItem> controllerItems = new List<ControllerItem>();
+        //private readonly List<ControllerItem> controllerItems = new List<ControllerItem>();
 
-        private SerializedProperty controllerMappings;
+        //private SerializedProperty controllerMappings;
 
-        private MixedRealityControllerMappingProfile controllerMappingProfile;
+        //private MixedRealityControllerMappingProfile controllerMappingProfile;
 
-        private GUIStyle controllerButtonStyle;
+        //private GUIStyle controllerButtonStyle;
 
-        protected override void OnEnable()
-        {
-            base.OnEnable();
+        //protected override void OnEnable()
+        //{
+        //    base.OnEnable();
 
-            controllerMappings = serializedObject.FindProperty(nameof(controllerMappings));
-            controllerMappingProfile = target as MixedRealityControllerMappingProfile;
-        }
+        //    controllerMappings = serializedObject.FindProperty(nameof(controllerMappings));
+        //    controllerMappingProfile = target as MixedRealityControllerMappingProfile;
+        //}
 
-        public override void OnInspectorGUI()
-        {
-            RenderHeader();
+        //public override void OnInspectorGUI()
+        //{
+        //    RenderHeader();
 
-            var deviceName = controllerMappingProfile.ControllerType.ToString();
-            EditorGUILayout.LabelField($"{deviceName} Mappings", EditorStyles.boldLabel);
+        //    var deviceName = controllerMappingProfile.ControllerType.ToString();
+        //    EditorGUILayout.LabelField($"{deviceName} Mappings", EditorStyles.boldLabel);
 
-            if (controllerButtonStyle == null)
-            {
-                controllerButtonStyle = new GUIStyle("LargeButton")
-                {
-                    imagePosition = ImagePosition.ImageAbove,
-                    fontStyle = FontStyle.Bold,
-                    stretchHeight = true,
-                    stretchWidth = true,
-                    wordWrap = true,
-                    fontSize = 10,
-                };
-            }
+        //    if (controllerButtonStyle == null)
+        //    {
+        //        controllerButtonStyle = new GUIStyle("LargeButton")
+        //        {
+        //            imagePosition = ImagePosition.ImageAbove,
+        //            fontStyle = FontStyle.Bold,
+        //            stretchHeight = true,
+        //            stretchWidth = true,
+        //            wordWrap = true,
+        //            fontSize = 10,
+        //        };
+        //    }
 
-            serializedObject.Update();
-            controllerItems.Clear();
+        //    serializedObject.Update();
+        //    controllerItems.Clear();
 
-            GUILayout.BeginVertical();
+        //    GUILayout.BeginVertical();
 
-            if (controllerMappings.arraySize == 0)
-            {
-                EditorGUILayout.HelpBox("You must override the controller mappings in your custom implementation to see a list of mappings for your device.", MessageType.Error);
-            }
+        //    if (controllerMappings.arraySize == 0)
+        //    {
+        //        EditorGUILayout.HelpBox("You must override the controller mappings in your custom implementation to see a list of mappings for your device.", MessageType.Error);
+        //    }
 
-            for (int i = 0; i < controllerMappings?.arraySize; i++)
-            {
-                var supportedControllerType = controllerMappingProfile.ControllerType;
-                var controllerMapping = controllerMappings.GetArrayElementAtIndex(i);
-                var handednessValue = controllerMapping.FindPropertyRelative("handedness");
-                var handedness = (Handedness)handednessValue.intValue;
-                var description = controllerMapping.FindPropertyRelative("description");
-                var interactions = controllerMapping.FindPropertyRelative("interactions");
+        //    for (int i = 0; i < controllerMappings?.arraySize; i++)
+        //    {
+        //        var supportedControllerType = controllerMappingProfile.ControllerType;
+        //        var controllerMapping = controllerMappings.GetArrayElementAtIndex(i);
+        //        var handednessValue = controllerMapping.FindPropertyRelative("handedness");
+        //        var handedness = (Handedness)handednessValue.intValue;
+        //        var description = controllerMapping.FindPropertyRelative("description");
+        //        var interactions = controllerMapping.FindPropertyRelative("interactions");
 
-                bool skip = false;
+        //        bool skip = false;
 
-                for (int j = 0; j < controllerItems.Count; j++)
-                {
-                    if (controllerItems[j].ControllerType == supportedControllerType &&
-                        controllerItems[j].Handedness == handedness)
-                    {
-                        controllerMappingProfile.SynchronizeInputActions(controllerItems[j].Interactions);
-                        serializedObject.ApplyModifiedProperties();
-                        skip = true;
-                    }
-                }
+        //        for (int j = 0; j < controllerItems.Count; j++)
+        //        {
+        //            if (controllerItems[j].ControllerType == supportedControllerType &&
+        //                controllerItems[j].Handedness == handedness)
+        //            {
+        //                controllerMappingProfile.SynchronizeInputActions(controllerItems[j].Interactions);
+        //                serializedObject.ApplyModifiedProperties();
+        //                skip = true;
+        //            }
+        //        }
 
-                if (skip) { continue; }
+        //        if (skip) { continue; }
 
-                controllerItems.Add(new ControllerItem(supportedControllerType, handedness, controllerMappingProfile.InteractionMappings));
+        //        controllerItems.Add(new ControllerItem(supportedControllerType, handedness, controllerMappingProfile.InteractionMappings));
 
-                string handednessContent = string.Empty;
+        //        string handednessContent = string.Empty;
 
-                switch (handedness)
-                {
-                    case Handedness.Left:
-                    case Handedness.Right:
-                    case Handedness.Other:
-                        handednessContent = $" {handedness} hand";
-                        break;
-                    case Handedness.Both:
-                        handednessContent = $" {handedness} hands";
-                        break;
-                }
+        //        switch (handedness)
+        //        {
+        //            case Handedness.Left:
+        //            case Handedness.Right:
+        //            case Handedness.Other:
+        //                handednessContent = $" {handedness} hand";
+        //                break;
+        //            case Handedness.Both:
+        //                handednessContent = $" {handedness} hands";
+        //                break;
+        //        }
 
-                if (handedness != Handedness.Right)
-                {
-                    GUILayout.BeginHorizontal();
-                }
+        //        if (handedness != Handedness.Right)
+        //        {
+        //            GUILayout.BeginHorizontal();
+        //        }
 
-                var buttonContent = new GUIContent($"Edit {description.stringValue}{handednessContent}", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile, handedness));
+        //        var buttonContent = new GUIContent($"Edit {description.stringValue}{handednessContent}", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile, handedness));
 
-                if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
-                {
-                    serializedObject.ApplyModifiedProperties();
-                    EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, interactions, handedness);
-                }
+        //        if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
+        //        {
+        //            serializedObject.ApplyModifiedProperties();
+        //            EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, interactions, handedness);
+        //        }
 
-                if (handedness != Handedness.Left)
-                {
-                    GUILayout.EndHorizontal();
-                }
-            }
+        //        if (handedness != Handedness.Left)
+        //        {
+        //            GUILayout.EndHorizontal();
+        //        }
+        //    }
 
-            GUILayout.EndVertical();
+        //    GUILayout.EndVertical();
 
-            serializedObject.ApplyModifiedProperties();
-        }
+        //    serializedObject.ApplyModifiedProperties();
+        //}
     }
 }

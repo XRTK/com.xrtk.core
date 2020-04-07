@@ -12,7 +12,7 @@
 //using XRTK.Inspectors.PropertyDrawers;
 //using XRTK.Services;
 
-//namespace XRTK.Inspectors.Profiles.InputSystem
+//namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 //{
 //    [CustomEditor(typeof(MixedRealityControllerMappingProfiles))]
 //    public class MixedRealityControllerMappingProfilesInspector : BaseMixedRealityProfileInspector

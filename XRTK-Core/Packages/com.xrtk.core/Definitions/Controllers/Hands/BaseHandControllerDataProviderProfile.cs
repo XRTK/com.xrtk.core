@@ -10,8 +10,6 @@ namespace XRTK.Definitions.Controllers.Hands
     /// </summary>
     public abstract class BaseHandControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
     {
-        [Header("General Settings")]
-
         [SerializeField]
         [Tooltip("If set, hand mesh data will be read and available for visualization. Disable for optimized performance.")]
         private bool handMeshingEnabled = false;

@@ -105,8 +105,6 @@ namespace XRTK.Definitions.InputSystem
         /// </summary>
         public bool HandMeshingEnabled => handMeshingEnabled;
 
-        [Header("Hand Physics")]
-
         [SerializeField]
         [Tooltip("If set, hands will be setup with colliders and a rigidbody to work with Unity's physics system.")]
         private bool handPhysicsEnabled = false;

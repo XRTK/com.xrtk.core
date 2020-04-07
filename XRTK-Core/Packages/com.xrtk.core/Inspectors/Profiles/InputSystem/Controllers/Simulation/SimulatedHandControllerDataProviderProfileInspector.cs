@@ -9,7 +9,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
     [CustomEditor(typeof(SimulatedHandControllerDataProviderProfile))]
     public class SimulatedHandControllerDataProviderProfileInspector : SimulatedControllerDataProviderProfileInspector
     {
-        // Global hand settings overrides
         private SerializedProperty handMeshingEnabled;
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
@@ -31,22 +30,26 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
             handPoseAnimationSpeed = serializedObject.FindProperty(nameof(handPoseAnimationSpeed));
         }
 
-        /// <summary>
-        /// We are using this entry point to render any hand simulation specific settings
-        /// to the base simulation settings profile.
-        /// </summary>
-        protected override void OnInspectorAdditionalGUI()
+        public override void OnInspectorGUI()
         {
+            base.OnInspectorGUI();
+
+            serializedObject.Update();
+
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Hand Rendering Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(handMeshingEnabled);
+            EditorGUILayout.LabelField("Hand Physics Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(handPhysicsEnabled);
             EditorGUILayout.PropertyField(useTriggers);
             EditorGUILayout.PropertyField(boundsMode);
             EditorGUILayout.Space();
 
-            EditorGUILayout.LabelField("Hand Simulation", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("Hand Simulation Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(poseDefinitions, true);
             EditorGUILayout.PropertyField(handPoseAnimationSpeed);
-            EditorGUILayout.Space();
+
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

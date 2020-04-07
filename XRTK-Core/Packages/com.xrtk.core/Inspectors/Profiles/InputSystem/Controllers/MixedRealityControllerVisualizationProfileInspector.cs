@@ -10,7 +10,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.Providers.Controllers;
 
-namespace XRTK.Inspectors.Profiles.InputSystem
+namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 {
     [Obsolete]
     [CustomEditor(typeof(MixedRealityControllerVisualizationProfile))]

@@ -58,7 +58,6 @@ namespace XRTK.Providers.Controllers.Hands
                 IsPositionApproximate = false;
                 IsRotationAvailable = true;
                 TrackingState = handData.IsTracked ? TrackingState.Tracked : TrackingState.NotTracked;
-                MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, wristPose);
             }
 
             if (lastState != TrackingState)

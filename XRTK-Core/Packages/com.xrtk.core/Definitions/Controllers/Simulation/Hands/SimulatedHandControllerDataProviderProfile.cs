@@ -69,5 +69,12 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// Set the bounds mode to use for calculating hand bounds.
         /// </summary>
         public HandBoundsMode BoundsMode => boundsMode;
+
+        public override ControllerDefinition[] GetControllerDefinitions()
+        {
+            // new MixedRealityControllerMapping("Simulated Hand Controller Left", typeof(SimulatedHandController), Handedness.Left),
+            // new MixedRealityControllerMapping("Simulated Hand Controller Right", typeof(SimulatedHandController), Handedness.Right)
+            throw new System.NotImplementedException();
+        }
     }
 }

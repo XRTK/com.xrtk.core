@@ -121,7 +121,8 @@ namespace XRTK.Definitions.Controllers.Simulation
 
         public override ControllerDefinition[] GetControllerDefinitions()
         {
-            throw new System.NotImplementedException();
+            // TODO
+            return null;
         }
     }
 }

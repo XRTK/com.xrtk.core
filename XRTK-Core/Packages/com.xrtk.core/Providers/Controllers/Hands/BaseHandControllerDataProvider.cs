@@ -22,7 +22,7 @@ namespace XRTK.Providers.Controllers.Hands
         public BaseHandControllerDataProvider(string name, uint priority, BaseHandControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
-            var globalSettingsProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.HandTrackingProfile;
+            var globalSettingsProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
 
             HandMeshingEnabled = profile.HandMeshingEnabled != globalSettingsProfile.HandMeshingEnabled
                 ? profile.HandMeshingEnabled

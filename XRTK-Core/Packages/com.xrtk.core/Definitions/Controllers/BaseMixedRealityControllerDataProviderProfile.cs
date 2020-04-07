@@ -27,7 +27,7 @@ namespace XRTK.Definitions.Controllers
             internal set => controllerMappingProfiles = value;
         }
 
-        // TODO Move all this into the inspector's OnEnable method
+        // TODO Move all this into the inspector's OnEnable method?
         protected virtual void Awake()
         {
             if (!hasSetupDefaults)

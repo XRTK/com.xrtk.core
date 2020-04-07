@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -23,7 +23,7 @@ namespace XRTK.Definitions.Controllers.UnityInput
         /// <param name="name"></param>
         /// <param name="priority"></param>
         /// <param name="profile"></param>
-        public MouseDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
+        public MouseDataProvider(string name, uint priority, MouseControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
         }

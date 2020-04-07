@@ -3,9 +3,9 @@
 
 using System;
 using UnityEngine;
-using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Controllers.OpenVR;
 using XRTK.Definitions.Controllers.UnityInput;
+using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Providers.Controllers.UnityInput;
@@ -19,7 +19,7 @@ namespace XRTK.Providers.Controllers.OpenVR
     public class OpenVRDataControllerDataProvider : UnityJoystickDataProvider
     {
         /// <inheritdoc />
-        public OpenVRDataControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
+        public OpenVRDataControllerDataProvider(string name, uint priority, BaseUnityInputControllerDataProfile profile)
             : base(name, priority, profile)
         {
         }

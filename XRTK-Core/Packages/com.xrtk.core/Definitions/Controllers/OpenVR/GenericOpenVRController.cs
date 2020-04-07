@@ -10,7 +10,6 @@ using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Providers.Controllers.UnityInput;
 using XRTK.Services;
 
 namespace XRTK.Definitions.Controllers.OpenVR

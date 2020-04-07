@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Providers.Controllers;
 
 namespace XRTK.Definitions.Controllers
 {

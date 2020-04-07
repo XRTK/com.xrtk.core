@@ -3,8 +3,8 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Controllers.UnityInput;
+using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -24,7 +24,7 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// <param name="name"></param>
         /// <param name="priority"></param>
         /// <param name="profile"></param>
-        public UnityTouchDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
+        public UnityTouchDataProvider(string name, uint priority, TouchScreenControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
         }

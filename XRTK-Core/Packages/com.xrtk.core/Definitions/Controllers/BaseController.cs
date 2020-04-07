@@ -87,10 +87,10 @@ namespace XRTK.Definitions.Controllers
         public MixedRealityInteractionMapping[] Interactions { get; private set; } = null;
 
         /// <inheritdoc />
-        public Vector3 AngularVelocity { get; } = Vector3.zero;
+        public Vector3 AngularVelocity { get; protected set; } = Vector3.zero;
 
         /// <inheritdoc />
-        public Vector3 Velocity { get; } = Vector3.zero;
+        public Vector3 Velocity { get; protected set; } = Vector3.zero;
 
         #endregion IMixedRealityController Implementation
 

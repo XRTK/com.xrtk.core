@@ -23,13 +23,13 @@ namespace XRTK.Providers.Controllers
     public abstract class BaseController : IMixedRealityController
     {
         /// <summary>
-        /// Constructor.
+        /// Creates a new instance of a controller.
         /// </summary>
-        /// <param name="controllerDataProvider"></param>
-        /// <param name="trackingState"></param>
-        /// <param name="controllerHandedness"></param>
-        /// <param name="inputSource"></param>
-        /// <param name="interactions"></param>
+        /// <param name="controllerDataProvider">The <see cref="IMixedRealityControllerDataProvider"/> this controller belongs to.</param>
+        /// <param name="trackingState">The initial tracking state of this controller.</param>
+        /// <param name="controllerHandedness">The controller's handedness.</param>
+        /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> this controller belongs to.</param>
+        /// <param name="interactions">The <see cref="MixedRealityControllerMapping.Interactions"/> currently assigned to this controller.</param>
         protected BaseController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
         {
             ControllerDataProvider = controllerDataProvider;

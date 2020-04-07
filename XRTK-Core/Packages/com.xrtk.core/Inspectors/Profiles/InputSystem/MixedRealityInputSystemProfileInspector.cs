@@ -106,7 +106,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             if (showGlobalHandOptions)
             {
-                EditorGUILayout.HelpBox("Global hand tracking options applied to all platforms that support hand tracking. You may override these globals per platform in the platform's data provider profile.", MessageType.Info);
+                EditorGUILayout.HelpBox("Global hand tracking options applied to all platforms that support hand tracking. You may override these globals per platform in the platform's hand controller data provider profile.", MessageType.Info);
                 EditorGUI.indentLevel++;
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Hand Rendering Settings", EditorStyles.boldLabel);

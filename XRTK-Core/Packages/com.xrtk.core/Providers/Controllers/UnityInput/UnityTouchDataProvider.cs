@@ -91,7 +91,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                     inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"Touch {touch.fingerId}", pointers);
                 }
 
-                controller = new UnityTouchController(TrackingState.NotApplicable, Handedness.Any, inputSource);
+                controller = new UnityTouchController(this, TrackingState.NotApplicable, Handedness.Any, inputSource);
 
                 if (inputSource != null)
                 {

@@ -18,11 +18,12 @@ namespace XRTK.Providers.Controllers
     public abstract class BaseControllerDataProvider : BaseDataProvider, IMixedRealityControllerDataProvider
     {
         /// <summary>
-        /// Constructor.
+        /// Creates a new instance of the data provider.
         /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        /// <param name="profile"></param>
+        /// <param name="name">Name of the data provider as assigned in the configuration profile.</param>
+        /// <param name="priority">Data provider priority controls the order in the service registry.</param>
+        /// <param name="profile">Controller data provider profile assigned to the provider instance in the configuration inspector.</param>
+
         public BaseControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
             : base(name, priority)
         {
@@ -80,7 +81,10 @@ namespace XRTK.Providers.Controllers
 
         protected void RemoveController(IMixedRealityController controller)
         {
-            activeControllers.Remove(controller);
+            if (controller != null)
+            {
+                activeControllers.Remove(controller);
+            }
         }
     }
 }

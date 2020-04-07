@@ -33,6 +33,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
                 var defaultProfiles = new MixedRealityControllerMappingProfile[defaultControllerOptions.Length];
 
+                controllerMappingProfiles.ClearArray();
+
                 for (int i = 0; i < defaultProfiles.Length; i++)
                 {
                     var instance = CreateInstance(nameof(MixedRealityControllerMappingProfile)).CreateAsset() as MixedRealityControllerMappingProfile;
@@ -42,6 +44,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                     instance.UseCustomInteractions = defaultControllerOptions[i].UseCustomInteractions;
                     instance.SetDefaultInteractionMapping();
                     defaultProfiles[i] = instance;
+                    controllerMappingProfiles.InsertArrayElementAtIndex(i);
+                    var mappingProfile = controllerMappingProfiles.GetArrayElementAtIndex(i);
+                    mappingProfile.objectReferenceValue = instance;
                 }
 
                 hasSetupDefaults.boolValue = true;

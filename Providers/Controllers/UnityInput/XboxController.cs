@@ -5,6 +5,7 @@ using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Providers.Controllers.UnityInput
 {
@@ -13,21 +14,13 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// </summary>
     public class XboxController : GenericJoystickController
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="trackingState"></param>
-        /// <param name="controllerHandedness"></param>
-        /// <param name="inputSource"></param>
-        /// <param name="interactions"></param>
-        public XboxController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-            : base(trackingState, controllerHandedness, inputSource, interactions)
+        /// <inheritdoc />
+        public XboxController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+            : base(controllerDataProvider, trackingState, controllerHandedness, inputSource, interactions)
         {
         }
 
-        /// <summary>
-        /// Default interactions for Xbox Controller using Unity Input System.
-        /// </summary>
+        /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultInteractions => new[]
         {
             new MixedRealityInteractionMapping(0, "Left Thumbstick", AxisType.DualAxis, DeviceInputType.ThumbStick, ControllerMappingLibrary.AXIS_1, ControllerMappingLibrary.AXIS_2, false, true),

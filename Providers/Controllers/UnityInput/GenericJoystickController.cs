@@ -6,6 +6,7 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Providers.Controllers.UnityInput
 {
@@ -14,15 +15,9 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// </summary>
     public class GenericJoystickController : BaseController
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="trackingState"></param>
-        /// <param name="controllerHandedness"></param>
-        /// <param name="inputSource"></param>
-        /// <param name="interactions"></param>
-        public GenericJoystickController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-                : base(trackingState, controllerHandedness, inputSource, interactions)
+        /// <inheritdoc />
+        public GenericJoystickController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+                : base(controllerDataProvider, trackingState, controllerHandedness, inputSource, interactions)
         {
         }
 

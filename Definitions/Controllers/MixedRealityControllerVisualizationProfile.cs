@@ -84,7 +84,7 @@ namespace XRTK.Definitions.Controllers
             get => globalRightHandModel;
             private set => globalRightHandModel = value;
         }
-        
+
         [SerializeField]
         [Tooltip("Default Pose Action.\nNote: If an override profile is not found for a specific controller, the default pose action is used.")]
         private MixedRealityInputAction globalPointerPose;
@@ -94,7 +94,7 @@ namespace XRTK.Definitions.Controllers
         /// </summary>
         /// <remarks>
         /// If the pointer pose action for the specific controller can not be found, the controller will fall back and use this setting for visualization.
-        /// </remarks>        
+        /// </remarks>
         /// <remarks>
         /// If the default model for the right hand controller can not be found, the controller will fall back and use this setting for visualization.
         /// </remarks>

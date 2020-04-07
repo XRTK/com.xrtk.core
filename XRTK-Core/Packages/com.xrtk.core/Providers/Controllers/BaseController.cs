@@ -100,7 +100,9 @@ namespace XRTK.Providers.Controllers
 
         #endregion IMixedRealityController Implementation
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Updates the current readings for the controller.
+        /// </summary>
         public virtual void UpdateController() { }
 
         /// <inheritdoc />

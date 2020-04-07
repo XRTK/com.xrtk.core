@@ -12,12 +12,18 @@ namespace XRTK.Inspectors.Profiles.InputSystem
     public class MixedRealityInputSystemProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty focusProviderType;
+        private SerializedProperty gazeProviderType;
+        private SerializedProperty gazeCursorPrefab;
+
         private SerializedProperty pointingExtent;
         private SerializedProperty pointingRaycastLayerMasks;
         private SerializedProperty drawDebugPointingRays;
         private SerializedProperty debugPointingRayColors;
-        private SerializedProperty gazeProviderType;
-        private SerializedProperty gazeCursorPrefab;
+
+        private SerializedProperty handMeshingEnabled;
+        private SerializedProperty handPhysicsEnabled;
+        private SerializedProperty useTriggers;
+        private SerializedProperty boundsMode;
 
         private SerializedProperty inputActionsProfile;
         private SerializedProperty speechCommandsProfile;
@@ -25,18 +31,25 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private SerializedProperty controllerDataProvidersProfile;
 
         private bool showGlobalPointerOptions;
+        private bool showGlobalHandOptions;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
             focusProviderType = serializedObject.FindProperty(nameof(focusProviderType));
+            gazeProviderType = serializedObject.FindProperty(nameof(gazeProviderType));
+            gazeCursorPrefab = serializedObject.FindProperty(nameof(gazeCursorPrefab));
+
             pointingExtent = serializedObject.FindProperty(nameof(pointingExtent));
             pointingRaycastLayerMasks = serializedObject.FindProperty(nameof(pointingRaycastLayerMasks));
             drawDebugPointingRays = serializedObject.FindProperty(nameof(drawDebugPointingRays));
             debugPointingRayColors = serializedObject.FindProperty(nameof(debugPointingRayColors));
-            gazeProviderType = serializedObject.FindProperty(nameof(gazeProviderType));
-            gazeCursorPrefab = serializedObject.FindProperty(nameof(gazeCursorPrefab));
+
+            handMeshingEnabled = serializedObject.FindProperty(nameof(handMeshingEnabled));
+            handPhysicsEnabled = serializedObject.FindProperty(nameof(handPhysicsEnabled));
+            useTriggers = serializedObject.FindProperty(nameof(useTriggers));
+            boundsMode = serializedObject.FindProperty(nameof(boundsMode));
 
             inputActionsProfile = serializedObject.FindProperty(nameof(inputActionsProfile));
             gesturesProfile = serializedObject.FindProperty(nameof(gesturesProfile));
@@ -61,11 +74,12 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             EditorGUILayout.Space();
 
-            showGlobalPointerOptions = EditorGUILayout.Foldout(showGlobalPointerOptions, new GUIContent("Global Pointer Options"), true);
+            showGlobalPointerOptions = EditorGUILayout.Foldout(showGlobalPointerOptions, new GUIContent("Global Pointer Settings"), true);
 
             if (showGlobalPointerOptions)
             {
                 EditorGUI.indentLevel++;
+                EditorGUILayout.HelpBox("Global pointer options applied to all controllers that support pointers. You may override these globals per controller in the its controller mapping profile.", MessageType.Info);
                 EditorGUILayout.PropertyField(pointingExtent);
                 EditorGUILayout.PropertyField(pointingRaycastLayerMasks, true);
                 EditorGUILayout.Space();
@@ -81,6 +95,21 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 }
 
                 EditorGUILayout.PropertyField(debugPointingRayColors, true);
+                EditorGUI.indentLevel--;
+            }
+
+            EditorGUILayout.Space();
+
+            showGlobalHandOptions = EditorGUILayout.Foldout(showGlobalHandOptions, new GUIContent("Global Hand Settings"), true);
+
+            if (showGlobalHandOptions)
+            {
+                EditorGUI.indentLevel++;
+                EditorGUILayout.HelpBox("Global hand tracking options applied to all platforms that support hand tracking. You may override these globals per platform in the platform's data provider profile.", MessageType.Info);
+                EditorGUILayout.PropertyField(handMeshingEnabled);
+                EditorGUILayout.PropertyField(handPhysicsEnabled);
+                EditorGUILayout.PropertyField(useTriggers);
+                EditorGUILayout.PropertyField(boundsMode);
                 EditorGUI.indentLevel--;
             }
 

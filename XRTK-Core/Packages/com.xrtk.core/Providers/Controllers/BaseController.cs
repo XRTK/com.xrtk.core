@@ -23,14 +23,16 @@ namespace XRTK.Providers.Controllers
     public abstract class BaseController : IMixedRealityController
     {
         /// <summary>
-        /// Constructor.
+        /// Creates a new instance of a controller.
         /// </summary>
-        /// <param name="trackingState"></param>
-        /// <param name="controllerHandedness"></param>
-        /// <param name="inputSource"></param>
-        /// <param name="interactions"></param>
-        protected BaseController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+        /// <param name="controllerDataProvider">The <see cref="IMixedRealityControllerDataProvider"/> this controller belongs to.</param>
+        /// <param name="trackingState">The initial tracking state of this controller.</param>
+        /// <param name="controllerHandedness">The controller's handedness.</param>
+        /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> this controller belongs to.</param>
+        /// <param name="interactions">The <see cref="MixedRealityControllerMapping.Interactions"/> currently assigned to this controller.</param>
+        protected BaseController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
         {
+            ControllerDataProvider = controllerDataProvider;
             TrackingState = trackingState;
             ControllerHandedness = controllerHandedness;
             InputSource = inputSource;
@@ -64,6 +66,9 @@ namespace XRTK.Providers.Controllers
         public bool Enabled { get; set; }
 
         /// <inheritdoc />
+        public IMixedRealityControllerDataProvider ControllerDataProvider { get; }
+
+        /// <inheritdoc />
         public TrackingState TrackingState { get; protected set; }
 
         /// <inheritdoc />
@@ -87,6 +92,12 @@ namespace XRTK.Providers.Controllers
         /// <inheritdoc />
         public MixedRealityInteractionMapping[] Interactions { get; private set; } = null;
 
+        /// <inheritdoc />
+        public Vector3 AngularVelocity { get; } = Vector3.zero;
+
+        /// <inheritdoc />
+        public Vector3 Velocity { get; } = Vector3.zero;
+
         #endregion IMixedRealityController Implementation
 
         /// <summary>
@@ -94,10 +105,7 @@ namespace XRTK.Providers.Controllers
         /// </summary>
         public virtual void UpdateController() { }
 
-        /// <summary>
-        /// Setups up the configuration based on the Mixed Reality Controller Mapping Profile.
-        /// </summary>
-        /// <param name="controllerType"></param>
+        /// <inheritdoc />
         public bool SetupConfiguration(Type controllerType)
         {
             if (controllerType == null)
@@ -106,14 +114,12 @@ namespace XRTK.Providers.Controllers
                 return false;
             }
 
-            MixedRealityControllerMapping controllerMapping;
-
             // Have to test that a controller type has been registered in the profiles,
             // else it's Unity Input manager mappings will not have been setup by the inspector
             bool profileFound = false;
 
             // We can only enable controller profiles if mappings exist. Assign any known interaction mappings if found.
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.MixedRealityControllerMappings.GetControllerInteractionMapping(controllerType, ControllerHandedness, out controllerMapping))
+            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.MixedRealityControllerMappings.GetControllerInteractionMapping(controllerType, ControllerHandedness, out var controllerMapping))
             {
                 profileFound = true;
 
@@ -142,9 +148,9 @@ namespace XRTK.Providers.Controllers
         }
 
         /// <summary>
-        /// Assign the default interactions based on controller handedness if necessary. 
+        /// Assign the default interactions based on controller handedness if necessary.
         /// </summary>
-        /// <param name="controllerHandedness"></param>
+        /// <param name="controllerHandedness">The handedness of the controller.</param>
         public abstract void SetupDefaultInteractions(Handedness controllerHandedness);
 
         /// <summary>
@@ -153,13 +159,7 @@ namespace XRTK.Providers.Controllers
         /// <param name="mappings">Configured mappings from a controller mapping profile</param>
         public void AssignControllerMappings(MixedRealityInteractionMapping[] mappings) => Interactions = mappings;
 
-        /// <summary>
-        /// Attempts to load the controller model render settings from the <see cref="MixedRealityControllerVisualizationProfile"/>
-        /// to render the controllers in the scene.
-        /// </summary>
-        /// <param name="controllerType">The controller type.</param>
-        /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
-        /// <returns>True, if controller model is being properly rendered.</returns>
+        /// <inheritdoc />
         public async void TryRenderControllerModel(Type controllerType, byte[] glbData = null) => await TryRenderControllerModelAsync(controllerType, glbData);
 
         /// <summary>

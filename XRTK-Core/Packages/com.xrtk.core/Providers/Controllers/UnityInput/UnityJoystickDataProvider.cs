@@ -58,9 +58,9 @@ namespace XRTK.Providers.Controllers.UnityInput
         {
             base.Disable();
 
-            foreach (var genericOpenVRController in ActiveGenericControllers)
+            foreach (var controller in ActiveGenericControllers)
             {
-                RemoveController(genericOpenVRController.Key, false);
+                RemoveController(controller.Key, false);
             }
 
             ActiveGenericControllers.Clear();
@@ -165,11 +165,11 @@ namespace XRTK.Providers.Controllers.UnityInput
             if (controller != null)
             {
                 MixedRealityToolkit.InputSystem?.RaiseSourceLost(controller.InputSource, controller);
-                RemoveController(controller);
             }
 
             if (clearFromRegistry)
             {
+                RemoveController(controller);
                 ActiveGenericControllers.Remove(joystickName);
             }
         }

@@ -87,7 +87,7 @@ namespace XRTK.Providers.Controllers
         /// </summary>
         internal void SetDefaultInteractionMapping(bool overwrite = false)
         {
-            if (Activator.CreateInstance(controllerType, TrackingState.NotTracked, handedness, null, null) is BaseController detectedController &&
+            if (Activator.CreateInstance(controllerType, null, TrackingState.NotTracked, handedness, null, null) is BaseController detectedController &&
                 (interactions == null || interactions.Length == 0 || overwrite))
             {
                 switch (handedness)

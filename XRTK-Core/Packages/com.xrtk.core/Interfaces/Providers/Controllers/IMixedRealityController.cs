@@ -1,7 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -9,7 +10,7 @@ using XRTK.Interfaces.InputSystem;
 namespace XRTK.Interfaces.Providers.Controllers
 {
     /// <summary>
-    /// Mixed Reality Toolkit controller definition, used to manage a specific controller type
+    /// Mixed Reality Toolkit controller definition, used to manage a specific controller type.
     /// </summary>
     public interface IMixedRealityController
     {
@@ -17,6 +18,11 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// Is the controller enabled?
         /// </summary>
         bool Enabled { get; set; }
+
+        /// <summary>
+        /// The data provider service this controller belongs to.
+        /// </summary>
+        IMixedRealityControllerDataProvider ControllerDataProvider { get; }
 
         /// <summary>
         /// Outputs the current state of the Input Source, whether it is tracked or not. As defined by the SDK / Unity.
@@ -65,6 +71,17 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// Mapping definition for this controller, linking the Physical inputs to logical Input System Actions
         /// </summary>
         MixedRealityInteractionMapping[] Interactions { get; }
+
+        /// <summary>
+        /// Gets how fast the controller rotates or revolves relative to its
+        /// pivot point.
+        /// </summary>
+        Vector3 AngularVelocity { get; }
+
+        /// <summary>
+        /// Gets the controller's current movement speed.
+        /// </summary>
+        Vector3 Velocity { get; }
 
         /// <summary>
         /// Setups up the configuration based on the Mixed Reality Controller Mapping Profile.

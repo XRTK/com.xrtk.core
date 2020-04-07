@@ -74,8 +74,11 @@ namespace XRTK.Definitions.Controllers
         private GameObject globalRightHandModel;
 
         /// <summary>
-        /// The Default controller pose action, for when there is no specific pose for specific controller / hand combination.
+        /// The Default controller model, for when there is no specific controller model for the right hand or when no hand is specified (Handedness = none)
         /// </summary>
+        /// <remarks>
+        /// If the pointer pose action for the specific controller can not be found, the controller will fall back and use this setting for visualization.
+        /// </remarks>
         /// <remarks>
         /// If the default model for the right hand controller can not be found, the controller will fall back and use this setting for visualization.
         /// </remarks>
@@ -90,14 +93,8 @@ namespace XRTK.Definitions.Controllers
         private MixedRealityInputAction globalPointerPose;
 
         /// <summary>
-        /// The Default controller model, for when there is no specific controller model for the Left hand or when no hand is specified (Handedness = none)
+        /// The Default controller pose action, for when there is no specific pose for specific controller / hand combination.
         /// </summary>
-        /// <remarks>
-        /// If the pointer pose action for the specific controller can not be found, the controller will fall back and use this setting for visualization.
-        /// </remarks>
-        /// <remarks>
-        /// If the default model for the right hand controller can not be found, the controller will fall back and use this setting for visualization.
-        /// </remarks>
         public MixedRealityInputAction GlobalPointerPose
         {
             get => globalPointerPose;

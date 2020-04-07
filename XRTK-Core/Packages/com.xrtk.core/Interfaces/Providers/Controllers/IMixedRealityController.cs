@@ -97,5 +97,10 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
         /// <returns>True, if controller model is being properly rendered.</returns>
         void TryRenderControllerModel(Type controllerType, byte[] glbData = null);
+
+        /// <summary>
+        /// Updates the controller's state.
+        /// </summary>
+        void UpdateController();
     }
 }

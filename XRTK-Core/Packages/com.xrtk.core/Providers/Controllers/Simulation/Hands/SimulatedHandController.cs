@@ -1,7 +1,6 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Controllers.Simulation.Hands;
@@ -25,15 +24,10 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     public class SimulatedHandController : BaseHandController, IMixedRealitySimulatedController
     {
         /// <inheritdoc />
-        public SimulatedHandController(IMixedRealityControllerDataProvider dataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-            : base(dataProvider, trackingState, controllerHandedness, inputSource, interactions)
+        public SimulatedHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+            : base(controllerDataProvider, trackingState, controllerHandedness, inputSource, interactions)
         {
-            simulatedHandControllerDataProvider = MixedRealityToolkit.GetService<ISimulatedHandControllerDataProvider>();
-
-            if (simulatedHandControllerDataProvider == null)
-            {
-                throw new Exception($"Could not get active {nameof(SimulatedHandControllerDataProvider)}.");
-            }
+            simulatedHandControllerDataProvider = (ISimulatedHandControllerDataProvider)controllerDataProvider;
 
             // Initialize available simulated hand poses and find the configured default pose.
             SimulatedHandControllerPose.Initialize(simulatedHandControllerDataProvider.HandPoseDefinitions);

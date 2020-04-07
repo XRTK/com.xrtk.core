@@ -16,8 +16,8 @@ namespace XRTK.Providers.Controllers.OpenVR
     public class WindowsMixedRealityOpenVRMotionController : GenericOpenVRController
     {
         /// <inheritdoc />
-        public WindowsMixedRealityOpenVRMotionController(IMixedRealityControllerDataProvider dataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-            : base(dataProvider, trackingState, controllerHandedness, inputSource, interactions)
+        public WindowsMixedRealityOpenVRMotionController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+            : base(controllerDataProvider, trackingState, controllerHandedness, inputSource, interactions)
         {
             PointerOffsetAngle = -30f;
         }

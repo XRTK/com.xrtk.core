@@ -16,8 +16,8 @@ namespace XRTK.Providers.Controllers.UnityInput
     public class GenericJoystickController : BaseController
     {
         /// <inheritdoc />
-        public GenericJoystickController(IMixedRealityControllerDataProvider dataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-                : base(dataProvider, trackingState, controllerHandedness, inputSource, interactions)
+        public GenericJoystickController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+                : base(controllerDataProvider, trackingState, controllerHandedness, inputSource, interactions)
         {
         }
 

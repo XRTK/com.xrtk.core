@@ -17,13 +17,13 @@ namespace XRTK.Providers.Controllers.OpenVR
     public class GenericOpenVRController : GenericJoystickController
     {
         /// <inheritdoc />
-        public GenericOpenVRController(IMixedRealityControllerDataProvider dataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-            : base(dataProvider, trackingState, controllerHandedness, inputSource, interactions)
+        public GenericOpenVRController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+            : base(controllerDataProvider, trackingState, controllerHandedness, inputSource, interactions)
         {
             nodeType = controllerHandedness == Handedness.Left ? XRNode.LeftHand : XRNode.RightHand;
         }
 
-        private XRNode nodeType;
+        private readonly XRNode nodeType;
 
         /// <summary>
         /// The current source state reading for this OpenVR Controller.

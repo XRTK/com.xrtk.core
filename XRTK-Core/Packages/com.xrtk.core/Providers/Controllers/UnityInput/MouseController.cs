@@ -17,8 +17,8 @@ namespace XRTK.Providers.Controllers.UnityInput
     public class MouseController : BaseController
     {
         /// <inheritdoc />
-        public MouseController(IMixedRealityControllerDataProvider dataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-            : base(dataProvider, trackingState, controllerHandedness, inputSource, interactions)
+        public MouseController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+            : base(controllerDataProvider, trackingState, controllerHandedness, inputSource, interactions)
         {
         }
 

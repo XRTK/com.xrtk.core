@@ -89,7 +89,18 @@ namespace XRTK.Providers.Controllers.OpenVR
 
             var pointers = RequestPointers(controllerType, controllingHand);
             var inputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource($"{currentControllerType} Controller {controllingHand}", pointers);
-            var detectedController = Activator.CreateInstance(controllerType, TrackingState.NotTracked, controllingHand, inputSource, null) as GenericOpenVRController;
+
+            GenericOpenVRController detectedController;
+
+            try
+            {
+                detectedController = Activator.CreateInstance(controllerType, this, TrackingState.NotTracked, controllingHand, inputSource, null) as GenericOpenVRController;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return null;
+            }
 
             if (detectedController == null)
             {

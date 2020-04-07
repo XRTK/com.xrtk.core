@@ -165,11 +165,11 @@ namespace XRTK.Providers.Controllers.UnityInput
             if (controller != null)
             {
                 MixedRealityToolkit.InputSystem?.RaiseSourceLost(controller.InputSource, controller);
-                RemoveController(controller);
             }
 
             if (clearFromRegistry)
             {
+                RemoveController(controller);
                 ActiveGenericControllers.Remove(joystickName);
             }
         }

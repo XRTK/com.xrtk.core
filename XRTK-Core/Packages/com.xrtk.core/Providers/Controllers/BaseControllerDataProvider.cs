@@ -80,7 +80,10 @@ namespace XRTK.Providers.Controllers
 
         protected void RemoveController(IMixedRealityController controller)
         {
-            activeControllers.Remove(controller);
+            if (controller != null)
+            {
+                activeControllers.Remove(controller);
+            }
         }
     }
 }

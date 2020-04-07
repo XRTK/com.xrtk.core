@@ -6,7 +6,7 @@ using UnityEngine;
 namespace XRTK.Definitions.Controllers
 {
     /// <summary>
-    /// Provides additional information about the controller data provider other than the input mapping.
+    /// Provides additional configuration options for controller data providers.
     /// </summary>
     public abstract class BaseMixedRealityControllerDataProviderProfile : BaseMixedRealityProfile
     {

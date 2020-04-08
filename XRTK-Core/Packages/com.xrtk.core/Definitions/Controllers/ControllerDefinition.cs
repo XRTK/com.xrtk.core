@@ -9,14 +9,31 @@ namespace XRTK.Definitions.Controllers
     [Serializable]
     public struct ControllerDefinition
     {
-        public ControllerDefinition(SystemType controllerType, Handedness handedness = Handedness.None, bool useCustomInteractions = false) : this()
+        public ControllerDefinition(SystemType controllerType, Handedness handedness = Handedness.None, bool useCustomInteractions = false)
         {
             ControllerType = controllerType;
             Handedness = handedness;
             UseCustomInteractions = useCustomInteractions;
+
+            string description = null;
+
+            if (ControllerType?.Type != null)
+            {
+                description = $"{handedness}{ControllerType.Type.Name}";
+            }
+
+            Description = description;
+        }
+
+        public ControllerDefinition(string description, SystemType controllerType, Handedness handedness = Handedness.None, bool useCustomInteractions = false)
+            : this(controllerType, handedness, useCustomInteractions)
+        {
+            Description = description;
         }
 
         public readonly SystemType ControllerType;
+
+        public readonly string Description;
 
         public readonly Handedness Handedness;
 

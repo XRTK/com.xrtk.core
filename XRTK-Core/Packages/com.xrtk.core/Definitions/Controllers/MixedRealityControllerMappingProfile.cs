@@ -1,17 +1,17 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using UnityEngine;
-using UnityEngine.Serialization;
-using XRTK.Definitions.Devices;
+using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Definitions.Controllers
 {
     public class MixedRealityControllerMappingProfile : BaseMixedRealityProfile
     {
         [SerializeField]
+        [Implements(typeof(IMixedRealityController), TypeGrouping.ByNamespaceFlat)]
         private SystemType controllerType = null;
 
         /// <summary>
@@ -42,75 +42,24 @@ namespace XRTK.Definitions.Controllers
         }
 
         [SerializeField]
-        [FormerlySerializedAs("useCustomInteractionMappings")]
-        [Tooltip("Override the default interaction mappings.")]
-        private bool useCustomInteractions = false;
+        private bool useCustomInteractions = true;
 
-        /// <summary>
-        /// Is this controller mapping using custom interactions?
-        /// </summary>
-        public bool UseCustomInteractions
+        internal bool UseCustomInteractions
         {
             get => useCustomInteractions;
-            internal set => useCustomInteractions = value;
+            set => useCustomInteractions = value;
         }
 
         [SerializeField]
-        [FormerlySerializedAs("interactions")]
-        [Tooltip("Details the list of available buttons / interactions available from the device.")]
-        private MixedRealityInteractionMappingProfile[] interactionMappings = new MixedRealityInteractionMappingProfile[0];
+        private MixedRealityInteractionMappingProfile[] interactionMappingProfiles = new MixedRealityInteractionMappingProfile[0];
 
         /// <summary>
-        /// Details the list of available buttons / interactions available from the device.
+        /// Details the list of available interaction profiles available for the controller.
         /// </summary>
-        public MixedRealityInteractionMappingProfile[] InteractionMappings
+        public MixedRealityInteractionMappingProfile[] InteractionMappingProfiles
         {
-            get => interactionMappings;
-            internal set => interactionMappings = value;
-        }
-
-        internal void SetDefaultInteractionMapping(bool overwrite = false)
-        {
-            if (Activator.CreateInstance(controllerType, TrackingState.NotTracked, handedness, null, null) is BaseController detectedController &&
-                (interactionMappings == null || interactionMappings.Length == 0 || overwrite))
-            {
-                switch (handedness)
-                {
-                    case Handedness.Left:
-                        interactionMappings = CreateDefaultMappingProfiles(detectedController.DefaultLeftHandedInteractions);
-                        break;
-                    case Handedness.Right:
-                        interactionMappings = CreateDefaultMappingProfiles(detectedController.DefaultRightHandedInteractions);
-                        break;
-                    default:
-                        interactionMappings = CreateDefaultMappingProfiles(detectedController.DefaultInteractions);
-                        break;
-                }
-            }
-        }
-
-        private MixedRealityInteractionMappingProfile[] CreateDefaultMappingProfiles(MixedRealityInteractionMapping[] defaultMappings)
-        {
-            // TODO
-            return null;
-        }
-
-        /// <summary>
-        /// Synchronizes the Input Actions of the same physical controller of a different concrete type.
-        /// </summary>
-        /// <param name="otherControllerMapping"></param>
-        internal void SynchronizeInputActions(MixedRealityInteractionMappingProfile[] otherControllerMapping)
-        {
-            if (otherControllerMapping.Length != interactionMappings.Length)
-            {
-                Debug.LogError("Controller Input Actions must be the same length!");
-                return;
-            }
-
-            for (int i = 0; i < interactionMappings.Length; i++)
-            {
-                interactionMappings[i].InteractionMapping.MixedRealityInputAction = otherControllerMapping[i].InteractionMapping.MixedRealityInputAction;
-            }
+            get => interactionMappingProfiles;
+            internal set => interactionMappingProfiles = value;
         }
     }
 }

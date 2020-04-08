@@ -9,18 +9,20 @@ namespace XRTK.Inspectors.Profiles.InputSystem
     [CustomEditor(typeof(MixedRealityPointerProfile))]
     public class MixedRealityPointerProfileInspector : BaseMixedRealityProfileInspector
     {
+        private SerializedProperty pointerPrefab;
         private SerializedProperty pointingExtent;
         private SerializedProperty pointingRaycastLayerMasks;
-        private SerializedProperty debugDrawPointingRays;
+        private SerializedProperty drawDebugPointingRays;
         private SerializedProperty debugPointingRayColors;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
+            pointerPrefab = serializedObject.FindProperty(nameof(pointerPrefab));
             pointingExtent = serializedObject.FindProperty(nameof(pointingExtent));
             pointingRaycastLayerMasks = serializedObject.FindProperty(nameof(pointingRaycastLayerMasks));
-            debugDrawPointingRays = serializedObject.FindProperty(nameof(debugDrawPointingRays));
+            drawDebugPointingRays = serializedObject.FindProperty(nameof(drawDebugPointingRays));
             debugPointingRayColors = serializedObject.FindProperty(nameof(debugPointingRayColors));
         }
 
@@ -29,14 +31,14 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             RenderHeader();
 
             EditorGUILayout.LabelField("Pointer Options", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Pointers are the raycasters for controllers and other tracked objects that need to understand what they're 'looking' at.\n\nPointers are managed and updated by the Focus Provider.", MessageType.Info);
+            EditorGUILayout.HelpBox("Pointers are the raycasters that are attached to controllers and other tracked objects, that understand what they're 'looking' at.\n\nPointers are managed and updated by the Focus Provider.", MessageType.Info);
             EditorGUILayout.Space();
 
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(pointingExtent);
             EditorGUILayout.PropertyField(pointingRaycastLayerMasks, true);
-            EditorGUILayout.PropertyField(debugDrawPointingRays);
+            EditorGUILayout.PropertyField(drawDebugPointingRays);
             EditorGUILayout.PropertyField(debugPointingRayColors, true);
 
             serializedObject.ApplyModifiedProperties();

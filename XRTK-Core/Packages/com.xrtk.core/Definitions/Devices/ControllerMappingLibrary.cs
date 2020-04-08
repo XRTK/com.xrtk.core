@@ -266,51 +266,49 @@ namespace XRTK.Definitions.Devices
         /// Gets a texture based on the <see cref="MixedRealityControllerMappingProfile"/>.
         /// </summary>
         /// <param name="mappingProfile"></param>
-        /// <param name="handedness"></param>
-        /// <returns>The texture for the controller type, if none found then a generic texture is returned.</returns>
+        /// <returns>The texture for the controller profile, if none found then a generic texture is returned.</returns>
         /// <remarks>
-        /// The file name should be formatted as:<para/>XRTK/StandardAssets/Textures/{ControllerName}_{handedness}_{theme}_{scaled}.png<para/>
+        /// The file name should be formatted as:<para/>XRTK/StandardAssets/Textures/{ControllerTypeName}_{handedness}_{theme}_{scaled}.png<para/>
         /// scaled suffix is optional.<para/>
         /// </remarks>
-        public static Texture2D GetControllerTexture(MixedRealityControllerMappingProfile mappingProfile, Handedness handedness)
+        public static Texture2D GetControllerTexture(MixedRealityControllerMappingProfile mappingProfile)
         {
-            return GetControllerTextureCached(mappingProfile, handedness);
+            return GetControllerTextureCached(mappingProfile);
         }
 
         /// <summary>
         /// Gets a texture based on the <see cref="MixedRealityControllerMappingProfile"/>.
         /// </summary>
         /// <param name="mappingProfile"></param>
-        /// <param name="handedness"></param>
-        /// <returns>The scaled texture for the controller type, if none found then a generic texture is returned.</returns>
+        /// <returns>The scaled texture for the controller profile, if none found then a generic texture is returned.</returns>
         /// <remarks>
         /// The file name should be formatted as:<para/>XRTK/StandardAssets/Textures/{ControllerName}_{handedness}_{theme}_{scaled}.png<para/>
         /// </remarks>
-        public static Texture2D GetControllerTextureScaled(MixedRealityControllerMappingProfile mappingProfile, Handedness handedness)
+        public static Texture2D GetControllerTextureScaled(MixedRealityControllerMappingProfile mappingProfile)
         {
-            return GetControllerTextureCached(mappingProfile, handedness, true);
+            return GetControllerTextureCached(mappingProfile, true);
         }
 
-        private static Texture2D GetControllerTextureCached(MixedRealityControllerMappingProfile mappingProfile, Handedness handedness, bool scaled = false)
+        private static Texture2D GetControllerTextureCached(MixedRealityControllerMappingProfile mappingProfile, bool scaled = false)
         {
-            var key = new Tuple<Type, Handedness, bool>(mappingProfile.ControllerType.Type, handedness, scaled);
+            var key = new Tuple<Type, Handedness, bool>(mappingProfile.ControllerType.Type, mappingProfile.Handedness, scaled);
 
             if (CachedTextures.TryGetValue(key, out var texture))
             {
                 return texture;
             }
 
-            texture = GetControllerTextureInternal(mappingProfile, handedness, scaled);
+            texture = GetControllerTextureInternal(mappingProfile, scaled);
             CachedTextures.Add(key, texture);
             return texture;
         }
 
-        private static Texture2D GetControllerTextureInternal(MixedRealityControllerMappingProfile mappingProfile, Handedness handedness, bool scaled)
+        private static Texture2D GetControllerTextureInternal(MixedRealityControllerMappingProfile mappingProfile, bool scaled)
         {
             if (mappingProfile != null &&
                 mappingProfile.ControllerType.Type != null)
             {
-                var texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/{mappingProfile.ControllerType.Type.Name}", handedness, scaled);
+                var texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/{mappingProfile.ControllerType.Type.Name}", mappingProfile.Handedness, scaled);
 
                 if (texture != null)
                 {

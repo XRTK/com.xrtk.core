@@ -13,27 +13,12 @@ namespace XRTK.Definitions.Devices
     /// </summary>
     /// <remarks>One definition should exist for each physical device input, such as buttons, triggers, joysticks, dpads, and more.</remarks>
     [Serializable]
-    public class MixedRealityInteractionMapping
+    public struct MixedRealityInteractionMapping
     {
-        private MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType)
+        public MixedRealityInteractionMapping(string description = "None")
         {
             this.description = description;
-            this.axisType = axisType;
-            this.inputType = inputType;
-        }
-
-        /// <summary>
-        /// The constructor for a new Interaction Mapping definition
-        /// </summary>
-        /// <param name="description">The description of the interaction mapping.</param>
-        /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
-        /// <param name="inputType">The physical input device / control type.</param>
-        /// <param name="keyCode">Optional KeyCode value to get input from Unity's old input system</param>
-        public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType, KeyCode keyCode)
-            : this(description, axisType, inputType)
-        {
             inputAction = MixedRealityInputAction.None;
-            this.keyCode = keyCode;
             axisCodeX = string.Empty;
             axisCodeY = string.Empty;
             rawData = null;
@@ -48,6 +33,29 @@ namespace XRTK.Definitions.Devices
             inputName = string.Empty;
             invertXAxis = false;
             invertYAxis = false;
+            stateChangeType = StateChangeType.Continuous;
+            axisType = AxisType.None;
+            inputType = DeviceInputType.None;
+            keyCode = KeyCode.None;
+        }
+
+        public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType) : this(description)
+        {
+            this.axisType = axisType;
+            this.inputType = inputType;
+        }
+
+        /// <summary>
+        /// The constructor for a new Interaction Mapping definition
+        /// </summary>
+        /// <param name="description">The description of the interaction mapping.</param>
+        /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
+        /// <param name="inputType">The physical input device / control type.</param>
+        /// <param name="keyCode">Optional KeyCode value to get input from Unity's old input system</param>
+        public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType, KeyCode keyCode)
+            : this(description, axisType, inputType)
+        {
+            this.keyCode = keyCode;
         }
 
         /// <summary>
@@ -60,22 +68,7 @@ namespace XRTK.Definitions.Devices
         public MixedRealityInteractionMapping(string description, AxisType axisType, string inputName, DeviceInputType inputType)
             : this(description, axisType, inputType)
         {
-            inputAction = MixedRealityInputAction.None;
             this.inputName = inputName;
-            axisCodeX = string.Empty;
-            axisCodeY = string.Empty;
-            rawData = null;
-            boolData = false;
-            floatData = 0f;
-            vector2Data = Vector2.zero;
-            positionData = Vector3.zero;
-            rotationData = Quaternion.identity;
-            poseData = MixedRealityPose.ZeroIdentity;
-            activated = false;
-            updated = false;
-            keyCode = KeyCode.None;
-            invertXAxis = false;
-            invertYAxis = false;
         }
 
         /// <summary>
@@ -91,23 +84,10 @@ namespace XRTK.Definitions.Devices
         public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType, string axisCodeX, string axisCodeY = "", bool invertXAxis = false, bool invertYAxis = false)
             : this(description, axisType, inputType)
         {
-            inputAction = MixedRealityInputAction.None;
-            keyCode = KeyCode.None;
-            this.inputName = string.Empty;
             this.axisCodeX = axisCodeX;
             this.axisCodeY = axisCodeY;
             this.invertXAxis = invertXAxis;
             this.invertYAxis = invertYAxis;
-            rawData = null;
-            boolData = false;
-            floatData = 0f;
-            vector2Data = Vector2.zero;
-            positionData = Vector3.zero;
-            rotationData = Quaternion.identity;
-            poseData = MixedRealityPose.ZeroIdentity;
-            activated = false;
-            updated = false;
-            inputName = string.Empty;
         }
 
         /// <summary>
@@ -131,16 +111,6 @@ namespace XRTK.Definitions.Devices
             this.axisCodeY = axisCodeY;
             this.invertXAxis = invertXAxis;
             this.invertYAxis = invertYAxis;
-            rawData = null;
-            boolData = false;
-            floatData = 0f;
-            vector2Data = Vector2.zero;
-            positionData = Vector3.zero;
-            rotationData = Quaternion.identity;
-            poseData = MixedRealityPose.ZeroIdentity;
-            activated = false;
-            updated = false;
-            inputName = string.Empty;
         }
 
         /// <summary>
@@ -168,6 +138,7 @@ namespace XRTK.Definitions.Devices
             poseData = MixedRealityPose.ZeroIdentity;
             activated = false;
             updated = false;
+            stateChangeType = StateChangeType.Continuous;
         }
 
         #region Interaction Properties
@@ -183,7 +154,7 @@ namespace XRTK.Definitions.Devices
 
         [SerializeField]
         [Tooltip("Influences how the Interaction determines state changes that will raise the InputAction.")]
-        private StateChangeType stateChangeType = StateChangeType.Continuous;
+        private StateChangeType stateChangeType;
 
         /// <summary>
         /// Influences how the Interaction determines state changes that will raise the <see cref="MixedRealityInputAction"/>.

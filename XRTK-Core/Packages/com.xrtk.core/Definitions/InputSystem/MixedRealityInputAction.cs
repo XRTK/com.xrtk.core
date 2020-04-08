@@ -14,7 +14,7 @@ namespace XRTK.Definitions.InputSystem
     [Serializable]
     public struct MixedRealityInputAction : IEqualityComparer
     {
-        private MixedRealityInputAction(string description)
+        private MixedRealityInputAction(string description = "None")
         {
             this.cachedGuid = default;
             this.profileGuid = cachedGuid.ToString("N");
@@ -29,7 +29,7 @@ namespace XRTK.Definitions.InputSystem
         /// <param name="id"></param>
         /// <param name="description"></param>
         /// <param name="axisConstraint"></param>
-        public MixedRealityInputAction(uint id, string description, AxisType axisConstraint = AxisType.None)
+        public MixedRealityInputAction(uint id, string description, AxisType axisConstraint = AxisType.None) : this(description)
         {
             if (id == 0 && description != "None")
             {

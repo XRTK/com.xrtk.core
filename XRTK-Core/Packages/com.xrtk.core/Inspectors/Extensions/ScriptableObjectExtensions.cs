@@ -45,10 +45,14 @@ namespace XRTK.Inspectors.Extensions
         {
             var name = string.IsNullOrEmpty(fileName) ? $"{scriptableObject.GetType().Name}" : fileName;
 
+            name = name.Replace(" ", string.Empty);
+
             if (string.IsNullOrWhiteSpace(path))
             {
                 path = MixedRealityPreferences.ProfileGenerationPath;
             }
+
+            path = path.Replace(".asset", string.Empty);
 
             if (!string.IsNullOrWhiteSpace(Path.GetExtension(path)))
             {

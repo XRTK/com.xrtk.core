@@ -14,8 +14,10 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Inspectors.Data;
+using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.PropertyDrawers;
 using XRTK.Inspectors.Utilities;
+using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Utilities.Editor;
 
 namespace XRTK.Inspectors
@@ -70,10 +72,7 @@ namespace XRTK.Inspectors
 
         private readonly MixedRealityInputActionDropdown inputActionDropdown = new MixedRealityInputActionDropdown();
 
-        private SerializedProperty currentInteractionList;
-
-        private Handedness currentHandedness;
-        private SystemType currentControllerType;
+        private SerializedProperty currentInteractionProfiles;
 
         private Vector2 mouseDragOffset;
         private GUIStyle flippedLabelStyle;
@@ -82,8 +81,13 @@ namespace XRTK.Inspectors
 
         private MixedRealityControllerMappingProfile controllerDataProviderProfile;
 
-        private bool IsCustomController => currentControllerType == typeof(GenericOpenVRController) ||
-                                           currentControllerType == typeof(GenericJoystickController);
+        private Type ControllerType => controllerDataProviderProfile.ControllerType;
+        private Handedness Handedness => controllerDataProviderProfile.Handedness;
+
+        private bool IsCustomController => ControllerType == typeof(GenericOpenVRController) ||
+                                           ControllerType == typeof(GenericJoystickController) ||
+                                           ControllerType == typeof(IMixedRealityHandController);
+
         private static string EditorWindowOptionsPath => $"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/Inspectors/Data/EditorWindowOptions.json";
 
         private void OnFocus()
@@ -93,7 +97,7 @@ namespace XRTK.Inspectors
                 Close();
             }
 
-            currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(controllerDataProviderProfile, currentHandedness);
+            currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(controllerDataProviderProfile);
 
             #region Interaction Constraint Setup
 
@@ -109,9 +113,9 @@ namespace XRTK.Inspectors
             #endregion  Interaction Constraint Setup
         }
 
-        public static void Show(MixedRealityControllerMappingProfile profile, SerializedProperty interactionsList, Handedness handedness = Handedness.None)
+        public static void Show(MixedRealityControllerMappingProfile profile, SerializedProperty interactionMappingProfiles)
         {
-            var handednessTitleText = handedness != Handedness.None ? $"{handedness} Hand " : string.Empty;
+            var handednessTitleText = profile.Handedness != Handedness.None ? $"{profile.Handedness} Hand " : string.Empty;
 
             if (window != null)
             {
@@ -121,12 +125,10 @@ namespace XRTK.Inspectors
             window = (ControllerPopupWindow)CreateInstance(typeof(ControllerPopupWindow));
             window.titleContent = new GUIContent($"{profile.ControllerType} {handednessTitleText}Input Action Assignment");
             window.controllerDataProviderProfile = profile;
-            window.currentHandedness = handedness;
-            window.currentControllerType = profile.ControllerType;
-            window.currentInteractionList = interactionsList;
-            window.currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(profile, handedness);
+            window.currentInteractionProfiles = interactionMappingProfiles;
+            window.currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(profile);
 
-            isMouseInRects = new bool[interactionsList.arraySize];
+            isMouseInRects = new bool[interactionMappingProfiles.arraySize];
 
             var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(EditorWindowOptionsPath);
 
@@ -154,29 +156,29 @@ namespace XRTK.Inspectors
                 controllerInputActionOptions = JsonUtility.FromJson<ControllerInputActionOptions>(asset.text);
 
                 // if the controller option doesn't exist, then make a new one.
-                if (!controllerInputActionOptions.Controllers.Any(option => option.Controller == window.currentControllerType && option.Handedness == handedness))
+                if (!controllerInputActionOptions.Controllers.Any(option => option.Controller == window.ControllerType && option.Handedness == window.Handedness))
                 {
                     var newOption = new ControllerInputActionOption
                     {
-                        Controller = window.currentControllerType,
-                        Handedness = handedness,
-                        InputLabelPositions = new Vector2[interactionsList.arraySize],
-                        IsLabelFlipped = new bool[interactionsList.arraySize]
+                        Controller = window.ControllerType,
+                        Handedness = window.Handedness,
+                        InputLabelPositions = new Vector2[interactionMappingProfiles.arraySize],
+                        IsLabelFlipped = new bool[interactionMappingProfiles.arraySize]
                     };
 
                     controllerInputActionOptions.Controllers.Add(newOption);
                 }
 
-                window.currentControllerOption = controllerInputActionOptions.Controllers.FirstOrDefault(option => option.Controller == window.currentControllerType && option.Handedness == handedness);
+                window.currentControllerOption = controllerInputActionOptions.Controllers.FirstOrDefault(option => option.Controller == window.ControllerType && option.Handedness == window.Handedness);
 
                 if (window.currentControllerOption.IsLabelFlipped == null)
                 {
-                    window.currentControllerOption.IsLabelFlipped = new bool[interactionsList.arraySize];
+                    window.currentControllerOption.IsLabelFlipped = new bool[interactionMappingProfiles.arraySize];
                 }
 
                 if (window.currentControllerOption.InputLabelPositions == null)
                 {
-                    window.currentControllerOption.InputLabelPositions = new Vector2[interactionsList.arraySize];
+                    window.currentControllerOption.InputLabelPositions = new Vector2[interactionMappingProfiles.arraySize];
                 }
             }
 
@@ -218,31 +220,32 @@ namespace XRTK.Inspectors
 
             try
             {
-                RenderInteractionList(currentInteractionList, IsCustomController || currentControllerTexture == null);
+                RenderInteractionList(currentInteractionProfiles, IsCustomController || currentControllerTexture == null);
             }
-            catch
+            catch (Exception e)
             {
+                Debug.LogError(e);
                 Close();
             }
         }
 
-        private void RenderInteractionList(SerializedProperty interactionList, bool useCustomInteractionMapping)
+        private void RenderInteractionList(SerializedProperty interactionProfilesList, bool useCustomInteractionMapping)
         {
-            if (interactionList == null)
+            if (interactionProfilesList == null)
             {
                 Debug.LogError("No interaction list found!");
                 Close();
                 return;
             }
 
-            bool noInteractions = interactionList.arraySize == 0;
+            bool noInteractions = interactionProfilesList.arraySize == 0;
 
             if (!useCustomInteractionMapping)
             {
                 if (currentControllerOption.IsLabelFlipped == null ||
-                    currentControllerOption.IsLabelFlipped.Length != interactionList.arraySize)
+                    currentControllerOption.IsLabelFlipped.Length != interactionProfilesList.arraySize)
                 {
-                    var newArray = new bool[interactionList.arraySize];
+                    var newArray = new bool[interactionProfilesList.arraySize];
 
                     for (int i = 0; i < currentControllerOption.IsLabelFlipped?.Length; i++)
                     {
@@ -253,9 +256,9 @@ namespace XRTK.Inspectors
                 }
 
                 if (currentControllerOption.InputLabelPositions == null ||
-                    currentControllerOption.InputLabelPositions.Length != interactionList.arraySize)
+                    currentControllerOption.InputLabelPositions.Length != interactionProfilesList.arraySize)
                 {
-                    var newArray = new Vector2[interactionList.arraySize].InitialiseArray(new Vector2(0, 25));
+                    var newArray = new Vector2[interactionProfilesList.arraySize].InitialiseArray(new Vector2(0, 25));
 
                     for (int i = 0; i < currentControllerOption.InputLabelPositions?.Length; i++)
                     {
@@ -277,19 +280,10 @@ namespace XRTK.Inspectors
             {
                 if (GUILayout.Button(InteractionAddButtonContent))
                 {
-                    interactionList.arraySize += 1;
-                    var interaction = interactionList.GetArrayElementAtIndex(interactionList.arraySize - 1);
-                    var axisType = interaction.FindPropertyRelative("axisType");
-                    axisType.enumValueIndex = 0;
-                    var inputType = interaction.FindPropertyRelative("inputType");
-                    inputType.enumValueIndex = 0;
-                    var action = interaction.FindPropertyRelative("inputAction");
-                    var actionId = action.FindPropertyRelative("id");
-                    actionId.intValue = 0;
-                    var profileGuid = action.FindPropertyRelative("profileGuid");
-                    profileGuid.stringValue = default(Guid).ToString("N");
-                    var actionDescription = action.FindPropertyRelative("description");
-                    actionDescription.stringValue = "None";
+                    interactionProfilesList.arraySize += 1;
+                    var interactionProfileProperty = interactionProfilesList.GetArrayElementAtIndex(interactionProfilesList.arraySize - 1);
+                    interactionProfileProperty.objectReferenceValue = CreateInstance<MixedRealityInteractionMappingProfile>().CreateAsset(false);
+                    interactionProfileProperty.serializedObject.ApplyModifiedProperties();
                 }
 
                 if (noInteractions)
@@ -314,18 +308,18 @@ namespace XRTK.Inspectors
                     }
                     else
                     {
-                        if (!controllerInputActionOptions.Controllers.Any(option => option.Controller == currentControllerType && option.Handedness == currentHandedness))
+                        if (!controllerInputActionOptions.Controllers.Any(option => option.Controller == ControllerType && option.Handedness == Handedness))
                         {
                             currentControllerOption = new ControllerInputActionOption
                             {
-                                Controller = currentControllerType,
-                                Handedness = currentHandedness,
-                                InputLabelPositions = new Vector2[currentInteractionList.arraySize],
-                                IsLabelFlipped = new bool[currentInteractionList.arraySize]
+                                Controller = ControllerType,
+                                Handedness = Handedness,
+                                InputLabelPositions = new Vector2[currentInteractionProfiles.arraySize],
+                                IsLabelFlipped = new bool[currentInteractionProfiles.arraySize]
                             };
 
                             controllerInputActionOptions.Controllers.Add(currentControllerOption);
-                            isMouseInRects = new bool[currentInteractionList.arraySize];
+                            isMouseInRects = new bool[currentInteractionProfiles.arraySize];
 
                             if (controllerInputActionOptions.Controllers.Any(option => option.Controller == null))
                             {
@@ -364,15 +358,24 @@ namespace XRTK.Inspectors
 
             GUILayout.EndHorizontal();
 
-            for (int i = 0; i < interactionList.arraySize; i++)
+            for (int i = 0; i < interactionProfilesList.arraySize; i++)
             {
-                var interaction = interactionList.GetArrayElementAtIndex(i);
-                var axisType = interaction.FindPropertyRelative("axisType");
-                var action = interaction.FindPropertyRelative("inputAction");
-                var inputType = interaction.FindPropertyRelative("inputType");
-                var invertXAxis = interaction.FindPropertyRelative("invertXAxis");
-                var invertYAxis = interaction.FindPropertyRelative("invertYAxis");
-                var interactionDescription = interaction.FindPropertyRelative("description");
+                var interactionProfileProperty = interactionProfilesList.GetArrayElementAtIndex(i);
+                var mappingProfile = interactionProfileProperty.objectReferenceValue as MixedRealityInteractionMappingProfile;
+
+                if (mappingProfile == null)
+                {
+                    continue;
+                }
+
+                var interactionMappingProperty = new SerializedObject(mappingProfile).FindProperty("interactionMapping");
+
+                var axisType = interactionMappingProperty.FindPropertyRelative("axisType");
+                var action = interactionMappingProperty.FindPropertyRelative("inputAction");
+                var inputType = interactionMappingProperty.FindPropertyRelative("inputType");
+                var invertXAxis = interactionMappingProperty.FindPropertyRelative("invertXAxis");
+                var invertYAxis = interactionMappingProperty.FindPropertyRelative("invertYAxis");
+                var interactionDescription = interactionMappingProperty.FindPropertyRelative("description");
 
                 var axisConstraint = (AxisType)axisType.intValue;
 
@@ -388,7 +391,7 @@ namespace XRTK.Inspectors
 
                     if (axisConstraint == AxisType.Digital)
                     {
-                        EditorGUILayout.PropertyField(interaction.FindPropertyRelative("keyCode"), GUIContent.none, GUILayout.Width(InputActionLabelWidth));
+                        EditorGUILayout.PropertyField(interactionMappingProperty.FindPropertyRelative("keyCode"), GUIContent.none, GUILayout.Width(InputActionLabelWidth));
                     }
                     else
                     {
@@ -452,7 +455,7 @@ namespace XRTK.Inspectors
                     if (axisConstraint == AxisType.SingleAxis ||
                         axisConstraint == AxisType.DualAxis)
                     {
-                        var axisCodeX = interaction.FindPropertyRelative("axisCodeX");
+                        var axisCodeX = interactionMappingProperty.FindPropertyRelative("axisCodeX");
                         RenderAxisPopup(axisCodeX, InputActionLabelWidth);
                     }
                     else
@@ -462,7 +465,7 @@ namespace XRTK.Inspectors
 
                     if (axisConstraint == AxisType.DualAxis)
                     {
-                        var axisCodeY = interaction.FindPropertyRelative("axisCodeY");
+                        var axisCodeY = interactionMappingProperty.FindPropertyRelative("axisCodeY");
                         RenderAxisPopup(axisCodeY, InputActionLabelWidth);
                     }
                     else
@@ -472,7 +475,7 @@ namespace XRTK.Inspectors
 
                     if (GUILayout.Button(InteractionMinusButtonContent, EditorStyles.miniButtonRight, GUILayout.ExpandWidth(true)))
                     {
-                        interactionList.DeleteArrayElementAtIndex(i);
+                        interactionProfilesList.DeleteArrayElementAtIndex(i);
                     }
                 }
                 else
@@ -482,26 +485,26 @@ namespace XRTK.Inspectors
                         bool skip = false;
                         var description = interactionDescription.stringValue;
 
-                        //if (currentControllerType == SupportedControllerType.WindowsMixedReality && currentHandedness == Handedness.None)
-                        //{
-                        //    switch (description)
-                        //    {
-                        //        case "Grip Press":
-                        //        case "Trigger Position":
-                        //        case "Trigger Touched":
-                        //        case "Touchpad Position":
-                        //        case "Touchpad Touch":
-                        //        case "Touchpad Press":
-                        //        case "Menu Press":
-                        //        case "Thumbstick Position":
-                        //        case "Thumbstick Press":
-                        //            skip = true;
-                        //            break;
-                        //        case "Trigger Press (Select)":
-                        //            description = "Air Tap (Select)";
-                        //            break;
-                        //    }
-                        //}
+                        if (ControllerType.Name == "WindowsMixedRealityController" && Handedness == Handedness.None)
+                        {
+                            switch (description)
+                            {
+                                case "Grip Press":
+                                case "Trigger Position":
+                                case "Trigger Touched":
+                                case "Touchpad Position":
+                                case "Touchpad Touch":
+                                case "Touchpad Press":
+                                case "Menu Press":
+                                case "Thumbstick Position":
+                                case "Thumbstick Press":
+                                    skip = true;
+                                    break;
+                                case "Trigger Press (Select)":
+                                    description = "Air Tap (Select)";
+                                    break;
+                            }
+                        }
 
                         if (!skip)
                         {
@@ -632,6 +635,7 @@ namespace XRTK.Inspectors
                     }
                 }
 
+                interactionMappingProperty.serializedObject.ApplyModifiedProperties();
                 EditorGUILayout.EndHorizontal();
             }
 
@@ -640,7 +644,7 @@ namespace XRTK.Inspectors
                 EditorGUILayout.EndScrollView();
             }
 
-            interactionList.serializedObject.ApplyModifiedProperties();
+            interactionProfilesList.serializedObject.ApplyModifiedProperties();
             GUILayout.EndVertical();
         }
 

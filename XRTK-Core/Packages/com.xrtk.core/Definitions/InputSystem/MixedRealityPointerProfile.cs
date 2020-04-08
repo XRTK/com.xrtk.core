@@ -2,9 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using UnityEngine.Serialization;
 using XRTK.Attributes;
-using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 
 namespace XRTK.Definitions.InputSystem
@@ -12,7 +10,6 @@ namespace XRTK.Definitions.InputSystem
     /// <summary>
     /// Configuration profile settings for setting up controller pointers.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Pointer Profile", fileName = "MixedRealityInputPointerProfile", order = (int)CreateProfileMenuItemIndices.Pointer)]
     public class MixedRealityPointerProfile : BaseMixedRealityProfile
     {
         [SerializeField]
@@ -48,8 +45,7 @@ namespace XRTK.Definitions.InputSystem
         public bool DrawDebugPointingRays => drawDebugPointingRays;
 
         [SerializeField]
-        [FormerlySerializedAs("debugDrawPointingRayColors")]
-        private Color[] debugPointingRayColors = null;
+        private Color[] debugPointingRayColors = { Color.green };
 
         /// <summary>
         /// The colors to use when debugging pointer rays.

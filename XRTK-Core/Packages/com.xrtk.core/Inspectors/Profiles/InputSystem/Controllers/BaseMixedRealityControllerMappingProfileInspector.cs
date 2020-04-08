@@ -1,141 +1,106 @@
-﻿// Copyright (c) XRTK. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.﻿
+﻿//Copyright(c) XRTK.All rights reserved.
+//Licensed under the MIT License.See LICENSE in the project root for license information.
 
-using System;
-using System.Collections.Generic;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
-using XRTK.Definitions.Devices;
-using XRTK.Definitions.Utilities;
 using XRTK.Definitions.Controllers;
+using XRTK.Inspectors.PropertyDrawers;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 {
     [CustomEditor(typeof(MixedRealityControllerMappingProfile))]
     public class BaseMixedRealityControllerMappingProfileInspector : BaseMixedRealityProfileInspector
     {
-        //private struct ControllerItem
-        //{
-        //    public readonly Type ControllerType;
-        //    public readonly Handedness Handedness;
-        //    public readonly MixedRealityInteractionMappingProfile[] Interactions;
+        private static readonly GUIContent EditButtonContent = new GUIContent("Edit Button Mappings");
 
-        //    public ControllerItem(Type controllerType, Handedness handedness, MixedRealityInteractionMappingProfile[] interactions)
-        //    {
-        //        ControllerType = controllerType;
-        //        Handedness = handedness;
-        //        Interactions = interactions;
-        //    }
-        //}
+        private SerializedProperty controllerType;
+        private SerializedProperty handedness;
+        private SerializedProperty visualizationProfile;
+        private SerializedProperty useCustomInteractions;
+        private SerializedProperty interactionMappingProfiles;
 
-        //private readonly List<ControllerItem> controllerItems = new List<ControllerItem>();
+        private MixedRealityControllerMappingProfile controllerMappingProfile;
 
-        //private SerializedProperty controllerMappings;
+        private ReorderableList interactionsList;
+        private int currentlySelectedElement;
 
-        //private MixedRealityControllerMappingProfile controllerMappingProfile;
+        protected override void OnEnable()
+        {
+            base.OnEnable();
 
-        //private GUIStyle controllerButtonStyle;
+            controllerType = serializedObject.FindProperty(nameof(controllerType));
+            handedness = serializedObject.FindProperty(nameof(handedness));
+            visualizationProfile = serializedObject.FindProperty(nameof(visualizationProfile));
+            useCustomInteractions = serializedObject.FindProperty(nameof(useCustomInteractions));
+            interactionMappingProfiles = serializedObject.FindProperty(nameof(interactionMappingProfiles));
 
-        //protected override void OnEnable()
-        //{
-        //    base.OnEnable();
+            controllerMappingProfile = target as MixedRealityControllerMappingProfile;
 
-        //    controllerMappings = serializedObject.FindProperty(nameof(controllerMappings));
-        //    controllerMappingProfile = target as MixedRealityControllerMappingProfile;
-        //}
+            var showButtons = useCustomInteractions.boolValue;
 
-        //public override void OnInspectorGUI()
-        //{
-        //    RenderHeader();
+            interactionsList = new ReorderableList(serializedObject, interactionMappingProfiles, false, false, showButtons, showButtons)
+            {
+                elementHeight = EditorGUIUtility.singleLineHeight * 1.5f
+            };
+            interactionsList.drawElementCallback += DrawConfigurationOptionElement;
+            interactionsList.onAddCallback += OnConfigurationOptionAdded;
+            interactionsList.onRemoveCallback += OnConfigurationOptionRemoved;
+        }
 
-        //    var deviceName = controllerMappingProfile.ControllerType.ToString();
-        //    EditorGUILayout.LabelField($"{deviceName} Mappings", EditorStyles.boldLabel);
+        private void DrawConfigurationOptionElement(Rect position, int index, bool isActive, bool isFocused)
+        {
+            if (isFocused)
+            {
+                currentlySelectedElement = index;
+            }
 
-        //    if (controllerButtonStyle == null)
-        //    {
-        //        controllerButtonStyle = new GUIStyle("LargeButton")
-        //        {
-        //            imagePosition = ImagePosition.ImageAbove,
-        //            fontStyle = FontStyle.Bold,
-        //            stretchHeight = true,
-        //            stretchWidth = true,
-        //            wordWrap = true,
-        //            fontSize = 10,
-        //        };
-        //    }
+            position.height = EditorGUIUtility.singleLineHeight;
+            position.y += 3;
+            var mappingProfileProperty = interactionMappingProfiles.GetArrayElementAtIndex(index);
+            MixedRealityProfilePropertyDrawer.ProfileTypeOverride = typeof(MixedRealityInteractionMappingProfile);
+            EditorGUI.PropertyField(position, mappingProfileProperty, GUIContent.none);
+        }
 
-        //    serializedObject.Update();
-        //    controllerItems.Clear();
+        private void OnConfigurationOptionAdded(ReorderableList list)
+        {
+            interactionMappingProfiles.arraySize += 1;
+            var index = interactionMappingProfiles.arraySize - 1;
 
-        //    GUILayout.BeginVertical();
+            var mappingProfileProperty = interactionMappingProfiles.GetArrayElementAtIndex(index);
+            mappingProfileProperty.objectReferenceValue = null;
+            serializedObject.ApplyModifiedProperties();
+        }
 
-        //    if (controllerMappings.arraySize == 0)
-        //    {
-        //        EditorGUILayout.HelpBox("You must override the controller mappings in your custom implementation to see a list of mappings for your device.", MessageType.Error);
-        //    }
+        private void OnConfigurationOptionRemoved(ReorderableList list)
+        {
+            if (currentlySelectedElement >= 0)
+            {
+                interactionMappingProfiles.DeleteArrayElementAtIndex(currentlySelectedElement);
+            }
 
-        //    for (int i = 0; i < controllerMappings?.arraySize; i++)
-        //    {
-        //        var supportedControllerType = controllerMappingProfile.ControllerType;
-        //        var controllerMapping = controllerMappings.GetArrayElementAtIndex(i);
-        //        var handednessValue = controllerMapping.FindPropertyRelative("handedness");
-        //        var handedness = (Handedness)handednessValue.intValue;
-        //        var description = controllerMapping.FindPropertyRelative("description");
-        //        var interactions = controllerMapping.FindPropertyRelative("interactions");
+            serializedObject.ApplyModifiedProperties();
+        }
 
-        //        bool skip = false;
+        public override void OnInspectorGUI()
+        {
+            RenderHeader();
 
-        //        for (int j = 0; j < controllerItems.Count; j++)
-        //        {
-        //            if (controllerItems[j].ControllerType == supportedControllerType &&
-        //                controllerItems[j].Handedness == handedness)
-        //            {
-        //                controllerMappingProfile.SynchronizeInputActions(controllerItems[j].Interactions);
-        //                serializedObject.ApplyModifiedProperties();
-        //                skip = true;
-        //            }
-        //        }
+            serializedObject.Update();
 
-        //        if (skip) { continue; }
+            EditorGUILayout.PropertyField(controllerType);
+            EditorGUILayout.PropertyField(handedness);
+            EditorGUILayout.PropertyField(visualizationProfile);
 
-        //        controllerItems.Add(new ControllerItem(supportedControllerType, handedness, controllerMappingProfile.InteractionMappings));
+            if (!useCustomInteractions.boolValue &&
+                GUILayout.Button(EditButtonContent))
+            {
+                ControllerPopupWindow.Show(controllerMappingProfile, interactionMappingProfiles);
+            }
 
-        //        string handednessContent = string.Empty;
+            interactionsList.DoLayoutList();
 
-        //        switch (handedness)
-        //        {
-        //            case Handedness.Left:
-        //            case Handedness.Right:
-        //            case Handedness.Other:
-        //                handednessContent = $" {handedness} hand";
-        //                break;
-        //            case Handedness.Both:
-        //                handednessContent = $" {handedness} hands";
-        //                break;
-        //        }
-
-        //        if (handedness != Handedness.Right)
-        //        {
-        //            GUILayout.BeginHorizontal();
-        //        }
-
-        //        var buttonContent = new GUIContent($"Edit {description.stringValue}{handednessContent}", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile, handedness));
-
-        //        if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
-        //        {
-        //            serializedObject.ApplyModifiedProperties();
-        //            EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, interactions, handedness);
-        //        }
-
-        //        if (handedness != Handedness.Left)
-        //        {
-        //            GUILayout.EndHorizontal();
-        //        }
-        //    }
-
-        //    GUILayout.EndVertical();
-
-        //    serializedObject.ApplyModifiedProperties();
-        //}
+            serializedObject.ApplyModifiedProperties();
+        }
     }
 }

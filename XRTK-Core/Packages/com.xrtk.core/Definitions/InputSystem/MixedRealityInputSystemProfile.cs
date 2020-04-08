@@ -85,7 +85,7 @@ namespace XRTK.Definitions.InputSystem
         public bool DrawDebugPointingRays => drawDebugPointingRays;
 
         [SerializeField]
-        private Color[] debugPointingRayColors = new Color[0];
+        private Color[] debugPointingRayColors = { Color.green };
 
         /// <summary>
         /// The colors to use when debugging pointer rays.

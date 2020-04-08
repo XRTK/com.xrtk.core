@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
 using NUnit.Framework;
 using System.Diagnostics;
 using UnityEngine;
@@ -415,7 +416,7 @@ namespace XRTK.Tests.InputSystem
         [Test]
         public void Test_03_03_Float_NoChange_Updated_Inverted()
         {
-            var interaction = new MixedRealityInteractionMapping(string.Empty, AxisType.SingleAxis, DeviceInputType.None, MixedRealityInputAction.None, KeyCode.None, string.Empty, string.Empty, true);
+            var interaction = new MixedRealityInteractionMapping(string.Empty, AxisType.SingleAxis, DeviceInputType.None, MixedRealityInputAction.None, KeyCode.None, string.Empty, string.Empty);
             var initialValue = interaction.FloatData;
             const float testValue1 = 1f;
             const float testValue2 = -1f;
@@ -700,7 +701,7 @@ namespace XRTK.Tests.InputSystem
         [Test]
         public void Test_04_02_02_Vector2_NoChanged_Updated_Inverted()
         {
-            var interaction = new MixedRealityInteractionMapping(string.Empty, AxisType.DualAxis, DeviceInputType.None, MixedRealityInputAction.None, KeyCode.None, string.Empty, string.Empty, true, true);
+            var interaction = new MixedRealityInteractionMapping(string.Empty, AxisType.DualAxis, DeviceInputType.None, MixedRealityInputAction.None, KeyCode.None, string.Empty, string.Empty);
 
             var initialValue = interaction.Vector2Data;
             var testValue1 = Vector2.up;
@@ -1098,6 +1099,55 @@ namespace XRTK.Tests.InputSystem
         }
 
         #endregion MixedRealityPose
+
+        [Test]
+        public void Test_08_Processors_TestGetProcessorsOfGenericTypes()
+        {
+            var createdProcessors = new List<InputProcessor>();
+            var floatAxisProcessor = ScriptableObject.CreateInstance<InvertSingleAxisProcessor>();
+            var dualAxisProcessor = ScriptableObject.CreateInstance<InvertDualAxisProcessor>();
+            dualAxisProcessor.InvertX = true;
+
+            createdProcessors.Add(floatAxisProcessor);
+            createdProcessors.Add(dualAxisProcessor);
+
+            var interaction = new MixedRealityInteractionMapping(string.Empty, AxisType.DualAxis, DeviceInputType.None, createdProcessors);
+
+            var processors = interaction.GetInputProcessorForType<Vector2>();
+            Assert.IsTrue(processors.Count == 1);
+
+            for (var i = 0; i < processors.Count; i++)
+            {
+                var inputProcessor = processors[i];
+
+                if (inputProcessor is InvertDualAxisProcessor processor)
+                {
+                    Assert.IsTrue(processor.InvertX);
+                }
+            }
+        }
+
+        [Test]
+        public void Test_09_Processors_TestGetProcessorsOfSpecificTypes()
+        {
+            var createdProcessors = new List<InputProcessor>();
+            var floatAxisProcessor = ScriptableObject.CreateInstance<InvertSingleAxisProcessor>();
+            var dualAxisProcessor = ScriptableObject.CreateInstance<InvertDualAxisProcessor>();
+            dualAxisProcessor.InvertX = true;
+
+            createdProcessors.Add(floatAxisProcessor);
+            createdProcessors.Add(dualAxisProcessor);
+
+            var interaction = new MixedRealityInteractionMapping(string.Empty, AxisType.DualAxis, DeviceInputType.None, createdProcessors);
+
+            var processors = interaction.GetInputProcessors<InvertDualAxisProcessor>();
+            Assert.IsTrue(processors.Count == 1);
+
+            for (var i = 0; i < processors.Count; i++)
+            {
+                Assert.IsTrue(processors[i].InvertX);
+            }
+        }
 
         [TearDown]
         public void CleanupMixedRealityToolkitTests()

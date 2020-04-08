@@ -57,6 +57,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             EditorGUILayout.PropertyField(controllerType);
             EditorGUILayout.PropertyField(handedness);
             EditorGUILayout.PropertyField(visualizationProfile);
+            EditorGUILayout.Space();
 
             if (!useCustomInteractions.boolValue &&
                 GUILayout.Button(EditButtonContent))
@@ -64,6 +65,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                 ControllerPopupWindow.Show(controllerMappingProfile, interactionMappingProfiles);
             }
 
+            EditorGUILayout.Space();
             interactionsList.DoLayoutList();
 
             serializedObject.ApplyModifiedProperties();

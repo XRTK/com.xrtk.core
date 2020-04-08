@@ -11,7 +11,7 @@ namespace XRTK.Definitions.Controllers.UnityInput.Profiles
         {
             return new[]
             {
-                new ControllerDefinition(nameof(MouseController), typeof(MouseController), Handedness.Any, true),
+                new ControllerDefinition(typeof(MouseController), Handedness.Any, true),
             };
         }
     }

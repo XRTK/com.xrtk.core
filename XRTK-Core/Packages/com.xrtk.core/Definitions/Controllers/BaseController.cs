@@ -42,17 +42,17 @@ namespace XRTK.Definitions.Controllers
         /// <summary>
         /// The default interactions for this controller.
         /// </summary>
-        public virtual MixedRealityInteractionMapping[] DefaultInteractions { get; } = null;
+        public virtual MixedRealityInteractionMapping[] DefaultInteractions { get; } = new MixedRealityInteractionMapping[0];
 
         /// <summary>
         /// The Default Left Handed interactions for this controller.
         /// </summary>
-        public virtual MixedRealityInteractionMapping[] DefaultLeftHandedInteractions { get; } = null;
+        public virtual MixedRealityInteractionMapping[] DefaultLeftHandedInteractions { get; } = new MixedRealityInteractionMapping[0];
 
         /// <summary>
         /// The Default Right Handed interactions for this controller.
         /// </summary>
-        public virtual MixedRealityInteractionMapping[] DefaultRightHandedInteractions { get; } = null;
+        public virtual MixedRealityInteractionMapping[] DefaultRightHandedInteractions { get; } = new MixedRealityInteractionMapping[0];
 
         #region IMixedRealityController Implementation
 

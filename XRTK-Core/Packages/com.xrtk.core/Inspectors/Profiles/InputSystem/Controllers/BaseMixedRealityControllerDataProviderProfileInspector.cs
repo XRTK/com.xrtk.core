@@ -49,7 +49,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
                 for (int i = 0; i < defaultProfiles.Length; i++)
                 {
-                    var instance = CreateInstance(nameof(MixedRealityControllerMappingProfile)).CreateAsset($"{profileRootPath}/{defaultControllerOptions[i].Description}/", $"{defaultControllerOptions[i].Description}Profile", false) as MixedRealityControllerMappingProfile;
+                    var instance = CreateInstance(nameof(MixedRealityControllerMappingProfile)).CreateAsset($"{profileRootPath}/", $"{defaultControllerOptions[i].Description}Profile", false) as MixedRealityControllerMappingProfile;
                     Debug.Assert(instance != null);
                     instance.ControllerType = defaultControllerOptions[i].ControllerType;
                     instance.Handedness = defaultControllerOptions[i].Handedness;
@@ -89,6 +89,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             }
 
             serializedObject.ApplyModifiedProperties();
+            EditorGUILayout.Space();
         }
 
         private void DrawConfigurationOptionElement(Rect position, int index, bool isActive, bool isFocused)

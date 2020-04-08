@@ -19,7 +19,14 @@ namespace XRTK.Definitions.Controllers
 
             if (ControllerType?.Type != null)
             {
-                description = $"{handedness}{ControllerType.Type.Name}";
+                if (handedness == Handedness.Right || handedness == Handedness.Left)
+                {
+                    description = $"{handedness}{ControllerType.Type.Name}";
+                }
+                else
+                {
+                    description = ControllerType.Type.Name;
+                }
             }
 
             Description = description;

@@ -11,7 +11,7 @@ namespace XRTK.Definitions.Controllers.UnityInput.Profiles
         {
             return new[]
             {
-                new ControllerDefinition(typeof(UnityTouchController), Handedness.Any)
+                new ControllerDefinition(typeof(UnityTouchController), Handedness.Any, true)
             };
         }
     }

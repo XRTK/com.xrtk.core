@@ -18,7 +18,7 @@ namespace XRTK.Definitions.Devices
     public struct MixedRealityInteractionMapping
     {
         #region Constructors
-        public MixedRealityInteractionMapping(string description = "None", List<InputProcessor> inputProcessors = null)
+        public MixedRealityInteractionMapping(string description = "None", List<InputProcessor> inputProcessors = null) : this()
         {
             this.description = description;
             this.inputProcessors = inputProcessors ?? new List<InputProcessor>();
@@ -42,6 +42,13 @@ namespace XRTK.Definitions.Devices
             poseData = MixedRealityPose.ZeroIdentity;
             updated = false;
             activated = false;
+
+            BoolInputProcessors = GetInputProcessorForType<bool>();
+            FloatInputProcessors = GetInputProcessorForType<float>();
+            Vector2InputProcessors = GetInputProcessorForType<Vector2>();
+            Vector3InputProcessors = GetInputProcessorForType<Vector3>();
+            QuaternionInputProcessors = GetInputProcessorForType<Quaternion>();
+            PoseInputProcessors = GetInputProcessorForType<MixedRealityPose>();
         }
 
         public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType, List<InputProcessor> inputProcessors = null)
@@ -119,7 +126,7 @@ namespace XRTK.Definitions.Devices
         /// Creates a copy of a <see cref="MixedRealityInteractionMapping"/>
         /// </summary>
         /// <param name="mapping"></param>
-        public MixedRealityInteractionMapping(MixedRealityInteractionMapping mapping)
+        public MixedRealityInteractionMapping(MixedRealityInteractionMapping mapping) : this()
         {
             description = mapping.description;
             axisType = mapping.axisType;
@@ -141,6 +148,13 @@ namespace XRTK.Definitions.Devices
             poseData = MixedRealityPose.ZeroIdentity;
             activated = false;
             updated = false;
+
+            BoolInputProcessors = GetInputProcessorForType<bool>();
+            FloatInputProcessors = GetInputProcessorForType<float>();
+            Vector2InputProcessors = GetInputProcessorForType<Vector2>();
+            Vector3InputProcessors = GetInputProcessorForType<Vector3>();
+            QuaternionInputProcessors = GetInputProcessorForType<Quaternion>();
+            PoseInputProcessors = GetInputProcessorForType<MixedRealityPose>();
         }
 
         #endregion Constructors
@@ -335,10 +349,19 @@ namespace XRTK.Definitions.Devices
                     Debug.LogError($"{nameof(BoolData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.SingleAxis)} or {nameof(AxisType.Digital)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                ControlActivated = boolData != value;
-                boolData = value;
+                var newValue = value;
+
+                for (int i = 0; i < BoolInputProcessors.Count; i++)
+                {
+                    BoolInputProcessors[i].Process(ref newValue);
+                }
+
+                ControlActivated = boolData != newValue;
+                boolData = newValue;
             }
         }
+
+        private IReadOnlyList<InputProcessor<bool>> BoolInputProcessors { get; }
 
         /// <summary>
         /// The Float data value.
@@ -358,15 +381,17 @@ namespace XRTK.Definitions.Devices
 
                 var newValue = value;
 
-                if (invertXAxis)
+                for (int i = 0; i < FloatInputProcessors.Count; i++)
                 {
-                    newValue *= -1f;
+                    FloatInputProcessors[i].Process(ref newValue);
                 }
 
                 Updated = !floatData.Equals(newValue) || !floatData.Equals(0f);
                 floatData = newValue;
             }
         }
+
+        private IReadOnlyList<InputProcessor<float>> FloatInputProcessors { get; }
 
         /// <summary>
         /// The Vector2 data value.
@@ -385,20 +410,17 @@ namespace XRTK.Definitions.Devices
 
                 var newValue = value;
 
-                if (invertXAxis)
+                for (int i = 0; i < Vector2InputProcessors.Count; i++)
                 {
-                    newValue.x *= -1f;
-                }
-
-                if (invertYAxis)
-                {
-                    newValue.y *= -1f;
+                    Vector2InputProcessors[i].Process(ref newValue);
                 }
 
                 Updated = vector2Data != newValue || !newValue.x.Equals(0f) && !newValue.y.Equals(0f);
                 vector2Data = newValue;
             }
         }
+
+        private IReadOnlyList<InputProcessor<Vector2>> Vector2InputProcessors { get; }
 
         /// <summary>
         /// The ThreeDof Vector3 Position data value.
@@ -415,10 +437,19 @@ namespace XRTK.Definitions.Devices
                     Debug.LogError($"{nameof(PositionData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.ThreeDofPosition)}.\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Updated = positionData != value || !value.x.Equals(0f) && !value.y.Equals(0f) && !value.z.Equals(0f);
-                positionData = value;
+                var newValue = value;
+
+                for (int i = 0; i < Vector3InputProcessors.Count; i++)
+                {
+                    Vector3InputProcessors[i].Process(ref newValue);
+                }
+
+                Updated = positionData != newValue || !newValue.x.Equals(0f) && !newValue.y.Equals(0f) && !newValue.z.Equals(0f);
+                positionData = newValue;
             }
         }
+
+        private IReadOnlyList<InputProcessor<Vector3>> Vector3InputProcessors { get; }
 
         /// <summary>
         /// The ThreeDof Quaternion Rotation data value.
@@ -435,10 +466,19 @@ namespace XRTK.Definitions.Devices
                     Debug.LogError($"{nameof(RotationData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.ThreeDofRotation)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Updated = rotationData != value || !value.x.Equals(0f) && !value.y.Equals(0f) && !value.z.Equals(0f) && value.w.Equals(1f);
-                rotationData = value;
+                var newValue = value;
+
+                for (int i = 0; i < QuaternionInputProcessors.Count; i++)
+                {
+                    QuaternionInputProcessors[i].Process(ref newValue);
+                }
+
+                Updated = rotationData != newValue || !newValue.x.Equals(0f) && !newValue.y.Equals(0f) && !newValue.z.Equals(0f) && newValue.w.Equals(1f);
+                rotationData = newValue;
             }
         }
+
+        private IReadOnlyList<InputProcessor<Quaternion>> QuaternionInputProcessors { get; }
 
         /// <summary>
         /// The Pose data value.
@@ -454,12 +494,21 @@ namespace XRTK.Definitions.Devices
                     Debug.LogError($"{nameof(PoseData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.SixDof)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Updated = poseData != value || !value.Equals(MixedRealityPose.ZeroIdentity);
-                poseData = value;
+                var newValue = value;
+
+                for (int i = 0; i < PoseInputProcessors.Count; i++)
+                {
+                    PoseInputProcessors[i].Process(ref newValue);
+                }
+
+                Updated = poseData != newValue || !newValue.Equals(MixedRealityPose.ZeroIdentity);
+                poseData = newValue;
                 positionData = poseData.Position;
                 rotationData = poseData.Rotation;
             }
         }
+
+        private IReadOnlyList<InputProcessor<MixedRealityPose>> PoseInputProcessors { get; }
 
         #endregion Data Properties
 
@@ -488,19 +537,17 @@ namespace XRTK.Definitions.Devices
         /// Get the input processors for a specific <see cref="InputProcessor"/> type. (i.e. InvertDualAxisProcessor).
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        public IReadOnlyList<T> GetInputProcessors<T>() where T : InputProcessor
+        public T GetInputProcessors<T>() where T : InputProcessor
         {
-            var processors = new List<T>(inputProcessors.Count);
-
             for (int i = 0; i < inputProcessors.Count; i++)
             {
                 if (inputProcessors[i].GetType() == typeof(T))
                 {
-                    processors.Add((T)inputProcessors[i]);
+                    return (T)inputProcessors[i];
                 }
             }
 
-            return processors;
+            return null;
         }
     }
 }

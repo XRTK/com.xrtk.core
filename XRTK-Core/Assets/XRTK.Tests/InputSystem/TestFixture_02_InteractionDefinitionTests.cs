@@ -1141,12 +1141,7 @@ namespace XRTK.Tests.InputSystem
             var interaction = new MixedRealityInteractionMapping(string.Empty, AxisType.DualAxis, DeviceInputType.None, createdProcessors);
 
             var processors = interaction.GetInputProcessors<InvertDualAxisProcessor>();
-            Assert.IsTrue(processors.Count == 1);
-
-            for (var i = 0; i < processors.Count; i++)
-            {
-                Assert.IsTrue(processors[i].InvertX);
-            }
+            Assert.IsTrue(processors.InvertX);
         }
 
         [TearDown]

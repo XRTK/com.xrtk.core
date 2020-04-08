@@ -10,7 +10,7 @@ namespace XRTK.Definitions.Controllers
     public class MixedRealityInteractionMappingProfile : BaseMixedRealityProfile
     {
         [SerializeField]
-        private MixedRealityInteractionMapping interactionMapping = new MixedRealityInteractionMapping();
+        private MixedRealityInteractionMapping interactionMapping = new MixedRealityInteractionMapping("None");
 
         public MixedRealityInteractionMapping InteractionMapping
         {

@@ -49,16 +49,65 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
                 for (int i = 0; i < defaultProfiles.Length; i++)
                 {
-                    var instance = CreateInstance(nameof(MixedRealityControllerMappingProfile)).CreateAsset($"{profileRootPath}/", $"{defaultControllerOptions[i].Description}Profile", false) as MixedRealityControllerMappingProfile;
-                    Debug.Assert(instance != null);
-                    instance.ControllerType = defaultControllerOptions[i].ControllerType;
-                    instance.Handedness = defaultControllerOptions[i].Handedness;
-                    instance.UseCustomInteractions = defaultControllerOptions[i].UseCustomInteractions;
-                    defaultProfiles[i] = instance;
+                    var controllerMappingAsset = CreateInstance(nameof(MixedRealityControllerMappingProfile)).CreateAsset($"{profileRootPath}/", $"{defaultControllerOptions[i].Description}Profile", false) as MixedRealityControllerMappingProfile;
+                    Debug.Assert(controllerMappingAsset != null);
+
+                    var mappingProfileSerializedObject = new SerializedObject(controllerMappingAsset);
+                    mappingProfileSerializedObject.Update();
+
+                    var controllerTypeProperty = mappingProfileSerializedObject.FindProperty("controllerType").FindPropertyRelative("reference");
+                    var handednessProperty = mappingProfileSerializedObject.FindProperty("handedness");
+                    var useCustomInteractionsProperty = mappingProfileSerializedObject.FindProperty("useCustomInteractions");
+                    var interactionMappingProfilesProperty = mappingProfileSerializedObject.FindProperty("interactionMappingProfiles");
+
+                    controllerTypeProperty.stringValue = SystemType.GetReference(defaultControllerOptions[i].ControllerType);
+                    handednessProperty.intValue = (int)defaultControllerOptions[i].Handedness;
+                    useCustomInteractionsProperty.boolValue = defaultControllerOptions[i].UseCustomInteractions;
+
+                    SetDefaultInteractionMapping();
+                    mappingProfileSerializedObject.ApplyModifiedProperties();
+
+                    defaultProfiles[i] = controllerMappingAsset;
                     controllerMappingProfiles.InsertArrayElementAtIndex(i);
                     var mappingProfile = controllerMappingProfiles.GetArrayElementAtIndex(i);
-                    mappingProfile.objectReferenceValue = instance;
-                    SetDefaultInteractionMapping(instance);
+                    mappingProfile.objectReferenceValue = controllerMappingAsset;
+                    mappingProfile.serializedObject.ApplyModifiedProperties();
+
+                    void SetDefaultInteractionMapping()
+                    {
+                        if (Activator.CreateInstance(new SystemType(controllerTypeProperty.stringValue), null, TrackingState.NotTracked, (Handedness)handednessProperty.intValue, null, null) is BaseController detectedController)
+                        {
+                            interactionMappingProfilesProperty.ClearArray();
+
+                            switch ((Handedness)handednessProperty.intValue)
+                            {
+                                case Handedness.Left:
+                                    CreateDefaultMappingProfiles(detectedController.DefaultLeftHandedInteractions);
+                                    break;
+                                case Handedness.Right:
+                                    CreateDefaultMappingProfiles(detectedController.DefaultRightHandedInteractions);
+                                    break;
+                                default:
+                                    CreateDefaultMappingProfiles(detectedController.DefaultInteractions);
+                                    break;
+                            }
+                        }
+
+                        void CreateDefaultMappingProfiles(MixedRealityInteractionMapping[] defaultMappings)
+                        {
+                            var mappingProfileRootPath = AssetDatabase.GetAssetPath(controllerMappingAsset);
+
+                            for (int j = 0; j < defaultMappings.Length; j++)
+                            {
+                                var interactionMappingAsset = CreateInstance(nameof(MixedRealityInteractionMappingProfile)).CreateAsset($"{mappingProfileRootPath}/", $"{defaultMappings[j].Description}Profile", false) as MixedRealityInteractionMappingProfile;
+                                Debug.Assert(interactionMappingAsset != null);
+                                interactionMappingAsset.InteractionMapping = defaultMappings[j];
+                                interactionMappingProfilesProperty.InsertArrayElementAtIndex(j);
+                                var interactionsProperty = interactionMappingProfilesProperty.GetArrayElementAtIndex(j);
+                                interactionsProperty.objectReferenceValue = interactionMappingAsset;
+                            }
+                        }
+                    }
                 }
 
                 hasSetupDefaults.boolValue = true;
@@ -124,41 +173,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             }
 
             serializedObject.ApplyModifiedProperties();
-        }
-
-        private void SetDefaultInteractionMapping(MixedRealityControllerMappingProfile mappingProfile)
-        {
-            if (Activator.CreateInstance(mappingProfile.ControllerType, null, TrackingState.NotTracked, mappingProfile.Handedness, null, null) is BaseController detectedController)
-            {
-                switch (mappingProfile.Handedness)
-                {
-                    case Handedness.Left:
-                        mappingProfile.InteractionMappingProfiles = CreateDefaultMappingProfiles(detectedController.DefaultLeftHandedInteractions);
-                        break;
-                    case Handedness.Right:
-                        mappingProfile.InteractionMappingProfiles = CreateDefaultMappingProfiles(detectedController.DefaultRightHandedInteractions);
-                        break;
-                    default:
-                        mappingProfile.InteractionMappingProfiles = CreateDefaultMappingProfiles(detectedController.DefaultInteractions);
-                        break;
-                }
-            }
-
-            MixedRealityInteractionMappingProfile[] CreateDefaultMappingProfiles(MixedRealityInteractionMapping[] defaultMappings)
-            {
-                var mappingProfiles = new MixedRealityInteractionMappingProfile[defaultMappings.Length];
-                var profileRootPath = AssetDatabase.GetAssetPath(mappingProfile);
-
-                for (int i = 0; i < defaultMappings.Length; i++)
-                {
-                    var instance = CreateInstance(nameof(MixedRealityInteractionMappingProfile)).CreateAsset($"{profileRootPath}/", $"{defaultMappings[i].Description}Profile", false) as MixedRealityInteractionMappingProfile;
-                    Debug.Assert(instance != null);
-                    instance.InteractionMapping = defaultMappings[i];
-                    mappingProfiles[i] = instance;
-                }
-
-                return mappingProfiles;
-            }
         }
     }
 }

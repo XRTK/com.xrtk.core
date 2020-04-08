@@ -59,11 +59,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
         public override void OnInspectorGUI()
         {
-            RenderHeader();
-
-            EditorGUILayout.LabelField("Input System Profile", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("The Input System Profile helps developers configure input no matter what platform you're building for.", MessageType.Info);
-            EditorGUILayout.Space();
+            RenderHeader("The Input System Profile helps developers configure input no matter what platform you're building for.");
 
             serializedObject.Update();
             EditorGUI.BeginChangeCheck();

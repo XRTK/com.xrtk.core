@@ -1,5 +1,5 @@
-﻿//Copyright(c) XRTK.All rights reserved.
-//Licensed under the MIT License.See LICENSE in the project root for license information.
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
 using UnityEditorInternal;
@@ -48,6 +48,27 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             interactionsList.onRemoveCallback += OnConfigurationOptionRemoved;
         }
 
+        public override void OnInspectorGUI()
+        {
+            RenderHeader("This profile defines the type of controller that is valid for this data provider, which hand it belongs to, and how to visualize this controller in the scene, and binds each interactions on every physical control mechanism or sensor on the device.");
+
+            serializedObject.Update();
+
+            EditorGUILayout.PropertyField(controllerType);
+            EditorGUILayout.PropertyField(handedness);
+            EditorGUILayout.PropertyField(visualizationProfile);
+
+            if (!useCustomInteractions.boolValue &&
+                GUILayout.Button(EditButtonContent))
+            {
+                ControllerPopupWindow.Show(controllerMappingProfile, interactionMappingProfiles);
+            }
+
+            interactionsList.DoLayoutList();
+
+            serializedObject.ApplyModifiedProperties();
+        }
+
         private void DrawConfigurationOptionElement(Rect position, int index, bool isActive, bool isFocused)
         {
             if (isFocused)
@@ -78,27 +99,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             {
                 interactionMappingProfiles.DeleteArrayElementAtIndex(currentlySelectedElement);
             }
-
-            serializedObject.ApplyModifiedProperties();
-        }
-
-        public override void OnInspectorGUI()
-        {
-            RenderHeader();
-
-            serializedObject.Update();
-
-            EditorGUILayout.PropertyField(controllerType);
-            EditorGUILayout.PropertyField(handedness);
-            EditorGUILayout.PropertyField(visualizationProfile);
-
-            if (!useCustomInteractions.boolValue &&
-                GUILayout.Button(EditButtonContent))
-            {
-                ControllerPopupWindow.Show(controllerMappingProfile, interactionMappingProfiles);
-            }
-
-            interactionsList.DoLayoutList();
 
             serializedObject.ApplyModifiedProperties();
         }

@@ -11,11 +11,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
     {
         public override void OnInspectorGUI()
         {
-            RenderHeader();
-
-            EditorGUILayout.LabelField("Controller Data Providers", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Use this profile to define all the input sources your application can get input data from.", MessageType.Info);
-            EditorGUILayout.Space();
+            RenderHeader("Below is a list of registered Controller Data Providers for each platform that defines how controllers are setup and work.");
 
             base.OnInspectorGUI();
         }

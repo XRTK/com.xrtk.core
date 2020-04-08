@@ -66,11 +66,7 @@ namespace XRTK.Inspectors.Profiles
 
         public override void OnInspectorGUI()
         {
-            RenderHeader();
-
-            EditorGUILayout.LabelField("Boundary Visualization Options", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Boundary visualizations can help users stay oriented and comfortable in the experience.", MessageType.Info);
-            EditorGUILayout.Space();
+            RenderHeader("Boundary visualizations can help users stay oriented and comfortable in the experience.");
 
             serializedObject.Update();
 
@@ -84,26 +80,22 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.PropertyField(floorScale, scaleContent, GUILayout.ExpandWidth(true));
             EditorGUIUtility.wideMode = prevWideMode;
             EditorGUILayout.PropertyField(floorPhysicsLayer);
-
-            GUILayout.Space(12f);
+            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Play Area Settings:", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(showPlayArea, showContent);
             EditorGUILayout.PropertyField(playAreaMaterial, materialContent);
             EditorGUILayout.PropertyField(playAreaPhysicsLayer);
-
-            GUILayout.Space(12f);
+            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Tracked Area Settings:", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(showTrackedArea, showContent);
             EditorGUILayout.PropertyField(trackedAreaMaterial, materialContent);
             EditorGUILayout.PropertyField(trackedAreaPhysicsLayer);
-
-            GUILayout.Space(12f);
+            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Boundary Wall Settings:", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(showBoundaryWalls, showContent);
             EditorGUILayout.PropertyField(boundaryWallMaterial, materialContent);
             EditorGUILayout.PropertyField(boundaryWallsPhysicsLayer);
-
-            GUILayout.Space(12f);
+            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Boundary Ceiling Settings:", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(showBoundaryCeiling, showContent);
             EditorGUILayout.PropertyField(boundaryCeilingMaterial, materialContent);

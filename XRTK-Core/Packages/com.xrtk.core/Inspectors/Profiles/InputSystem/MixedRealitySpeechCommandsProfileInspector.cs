@@ -1,7 +1,6 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
-using System;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -32,7 +31,10 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             inputSystemProfile = ThisProfile.ParentProfile as MixedRealityInputSystemProfile;
 
             if (inputSystemProfile == null ||
-                inputSystemProfile.InputActionsProfile == null) { return; }
+                inputSystemProfile.InputActionsProfile == null)
+            {
+                return;
+            }
 
             startBehavior = serializedObject.FindProperty(nameof(startBehavior));
             recognitionConfidenceLevel = serializedObject.FindProperty(nameof(recognitionConfidenceLevel));
@@ -43,11 +45,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
         public override void OnInspectorGUI()
         {
-            RenderHeader();
-
-            EditorGUILayout.LabelField("Speech Commands", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Speech Commands are any/all spoken keywords your users will be able say to raise an Input Action in your application.", MessageType.Info);
-            EditorGUILayout.Space();
+            RenderHeader("Speech Commands are any/all spoken keywords your users will be able say to raise an Input Action in your application.");
 
             if (inputSystemProfile == null)
             {
@@ -60,7 +58,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 EditorGUILayout.HelpBox("No input actions found, please specify a input action profile in the input system profile.", MessageType.Error);
                 return;
             }
-
 
             serializedObject.Update();
 

@@ -32,11 +32,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         /// <inheritdoc />
         public override void OnInspectorGUI()
         {
-            RenderHeader();
-
-            EditorGUILayout.LabelField("Spatial Observer Options", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("The Spatial Awareness Observer Data Provider supplies the Spatial Awareness system with all the data it needs to understand the world around you.", MessageType.Info);
-            EditorGUILayout.Space();
+            RenderHeader("The Spatial Awareness Observer Data Provider supplies the Spatial Awareness System with all the data it needs to understand the world around you.");
 
             serializedObject.Update();
 

@@ -28,11 +28,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
         public override void OnInspectorGUI()
         {
-            RenderHeader();
-
-            EditorGUILayout.LabelField("Pointer Options", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Pointers are the raycasters that are attached to controllers and other tracked objects, that understand what they're 'looking' at.\n\nPointers are managed and updated by the Focus Provider.", MessageType.Info);
-            EditorGUILayout.Space();
+            RenderHeader("Pointers are the raycasters that are attached to controllers and other tracked objects, that understand what they're 'looking' at.\n\nPointers are managed and updated by the Focus Provider.");
 
             serializedObject.Update();
 

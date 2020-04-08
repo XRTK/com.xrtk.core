@@ -40,12 +40,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
         public override void OnInspectorGUI()
         {
-            RenderHeader();
-
-            EditorGUILayout.LabelField("Controller Visualizations", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Define all the custom controller visualizations you'd like to use for each controller type when they're rendered in the scene.\n\n" +
-                                    "Global settings are the default fallback, and any specific controller definitions take precedence.", MessageType.Info);
-            EditorGUILayout.Space();
+            RenderHeader("This profile controls how the controller should be rendered in the scene.");
 
             serializedObject.Update();
 

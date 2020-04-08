@@ -44,7 +44,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
         public override void OnInspectorGUI()
         {
-            RenderHeader();
+            RenderHeader("This profile contains all of the settings for simulating all kinds of controllers in the editor runtime.");
 
             EditorGUILayout.Space();
 

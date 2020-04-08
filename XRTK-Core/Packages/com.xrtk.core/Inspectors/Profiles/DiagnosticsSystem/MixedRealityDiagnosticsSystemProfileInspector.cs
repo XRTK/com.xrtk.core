@@ -22,11 +22,7 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
 
         public override void OnInspectorGUI()
         {
-            RenderHeader();
-
-            EditorGUILayout.LabelField("Diagnostic System Profile", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Diagnostic can help monitor system resources and performance inside an application during development.", MessageType.Info);
-            EditorGUILayout.Space();
+            RenderHeader("Diagnostics monitors system resources and performance inside an application during development.");
 
             serializedObject.Update();
             EditorGUILayout.PropertyField(diagnosticsWindowPrefab);

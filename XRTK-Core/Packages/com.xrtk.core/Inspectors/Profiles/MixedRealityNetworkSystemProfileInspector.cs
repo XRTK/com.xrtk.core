@@ -11,11 +11,7 @@ namespace XRTK.Inspectors.Profiles
     {
         public override void OnInspectorGUI()
         {
-            RenderHeader();
-
-            EditorGUILayout.LabelField("Network System Profile", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("The Network System Profile helps developers configure networking messages no matter what platform you're building for.", MessageType.Info);
-            EditorGUILayout.Space();
+            RenderHeader("The Network System Profile helps developers configure networking messages no matter what platform you're building for.");
 
             base.OnInspectorGUI();
         }

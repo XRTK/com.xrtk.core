@@ -8,10 +8,8 @@ using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Extensions;
 using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.PropertyDrawers;
-using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 {
@@ -79,11 +77,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
         public override void OnInspectorGUI()
         {
-            RenderHeader();
-
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField($"{dataProviderProfile.name.ToProperCase()} Settings", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("This profile defines all of the controllers and their mappings to use. Additional platform settings can also be available as well.", MessageType.Info);
+            RenderHeader("This profile defines all of the controllers and their mappings to use. Additional platform settings can also be available as well.");
 
             serializedObject.Update();
 

@@ -5,6 +5,7 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Extensions;
 using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.Utilities;
 using XRTK.Utilities.Async;
@@ -42,7 +43,7 @@ namespace XRTK.Inspectors.Profiles
             ThisProfileGuidString = guidHex;
         }
 
-        protected void RenderHeader()
+        protected void RenderHeader(string infoBoxText = "")
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
@@ -50,6 +51,14 @@ namespace XRTK.Inspectors.Profiles
                 GUILayout.Button("Back to parent profile"))
             {
                 Selection.activeObject = ThisProfile.ParentProfile;
+            }
+
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField($"{ThisProfile.name.ToProperCase()} Settings", EditorStyles.boldLabel);
+
+            if (!string.IsNullOrWhiteSpace(infoBoxText))
+            {
+                EditorGUILayout.HelpBox(infoBoxText, MessageType.Info);
             }
 
             EditorGUILayout.Space();

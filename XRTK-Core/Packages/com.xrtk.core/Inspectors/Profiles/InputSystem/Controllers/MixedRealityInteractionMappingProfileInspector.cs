@@ -1,4 +1,7 @@
-﻿using UnityEditor;
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.﻿
+
+using UnityEditor;
 using XRTK.Definitions.Controllers;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
@@ -19,7 +22,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
         public override void OnInspectorGUI()
         {
-            RenderHeader();
+            RenderHeader("A distinct input pattern that can be recognized on a physical control mechanism. An Interaction only triggers an InputAction when the device's raw input matches the criteria defined by the Processor.");
 
             serializedObject.Update();
 

@@ -107,6 +107,11 @@ namespace XRTK.Inspectors.Profiles
 
             if (systemTypeReference.Type != null)
             {
+                if (nameProperty.stringValue.Contains("New Configuration"))
+                {
+                    nameProperty.stringValue = systemTypeReference.Type.Name.ToProperCase();
+                }
+
                 var constructors = systemTypeReference.Type.GetConstructors();
 
                 foreach (var constructorInfo in constructors)
@@ -137,10 +142,6 @@ namespace XRTK.Inspectors.Profiles
             {
                 MixedRealityProfilePropertyDrawer.ProfileTypeOverride = profileType;
                 EditorGUI.PropertyField(profileRect, configurationProfileProperty, profileContent);
-            }
-            else
-            {
-                EditorGUI.LabelField(profileRect, "No Configuration Profile needed");
             }
 
             if (configurationProfileProperty.objectReferenceValue != null)

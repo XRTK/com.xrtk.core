@@ -1,7 +1,6 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
-using System;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
@@ -29,12 +28,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
         public override void OnInspectorGUI()
         {
-            RenderHeader();
-
-            EditorGUILayout.LabelField("Input Actions", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Input Actions are any/all actions your users will be able to make when interacting with your application.\n\n" +
-                                    "After defining all your actions, you can then wire up these actions to hardware sensors, controllers, and other input devices.", MessageType.Info);
-            EditorGUILayout.Space();
+            RenderHeader("Input Actions are any/all actions your users will be able to make when interacting with your application.\n\nAfter defining all your actions, you can then wire up these actions to hardware sensors, controllers, and other input devices.");
 
             serializedObject.Update();
             RenderList(inputActions);

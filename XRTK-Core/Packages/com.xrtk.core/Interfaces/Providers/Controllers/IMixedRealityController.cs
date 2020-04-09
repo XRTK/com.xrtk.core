@@ -84,12 +84,6 @@ namespace XRTK.Interfaces.Providers.Controllers
         Vector3 Velocity { get; }
 
         /// <summary>
-        /// Setups up the configuration based on the Mixed Reality Controller Mapping Profile.
-        /// </summary>
-        /// <param name="controllerType">The type of the controller.</param>
-        bool SetupConfiguration(Type controllerType);
-
-        /// <summary>
         /// Attempts to load the controller model render settings from the <see cref="Definitions.Controllers.MixedRealityControllerVisualizationProfile"/>
         /// to render the controllers in the scene.
         /// </summary>

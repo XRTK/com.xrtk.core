@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
@@ -10,6 +11,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
+using Object = UnityEngine.Object;
 
 namespace XRTK.Providers.Controllers
 {
@@ -39,11 +41,15 @@ namespace XRTK.Providers.Controllers
                 handednessPrefix = $"{controllerHandedness} ";
             }
 
-            // SetupConfiguration();
-            // Interactions = interactions;
-            // var pointers = RequestPointers();
+            var pointers = AssignControllerMappings(controllerMappingProfile.InteractionMappingProfiles);
 
-            InputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource($"{handednessPrefix}{GetType().Name}"/*, pointers*/);
+            // If no controller mappings found, warn the user.  Does not stop the project from running.
+            if (Interactions == null || Interactions.Length < 1)
+            {
+                throw new Exception($"No Controller interaction mappings found for {controllerMappingProfile.name}!");
+            }
+
+            InputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource($"{handednessPrefix}{GetType().Name}", pointers);
 
             for (int i = 0; i < InputSource?.Pointers?.Length; i++)
             {
@@ -117,87 +123,6 @@ namespace XRTK.Providers.Controllers
         /// </summary>
         public virtual void UpdateController() { }
 
-        ///// <summary>
-        ///// Request an array of pointers for the controller type.
-        ///// </summary>
-        ///// <param name="controllerType">The controller type making the request for pointers.</param>
-        ///// <param name="controllingHand">The handedness of the controller making the request.</param>
-        ///// <param name="useSpecificType">Only register pointers with a specific type.</param>
-        ///// <returns></returns>
-        //protected virtual IMixedRealityPointer[] RequestPointers(SystemType controllerType, Handedness controllingHand, bool useSpecificType = false)
-        //{
-        //    var pointers = new List<IMixedRealityPointer>();
-
-        //    if (MixedRealityToolkit.HasActiveProfile &&
-        //        MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
-        //    {
-        //        for (int i = 0; i < MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.PointerOptions.Length; i++)
-        //        {
-        //            var pointerProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.PointerOptions[i];
-
-        //            if (((useSpecificType && pointerProfile.ControllerType.Type == controllerType.Type) || (!useSpecificType && pointerProfile.ControllerType.Type == null)) &&
-        //                (pointerProfile.Handedness == Handedness.Any || pointerProfile.Handedness == Handedness.Both || pointerProfile.Handedness == controllingHand))
-        //            {
-        //                var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
-        //                var pointer = pointerObject.GetComponent<IMixedRealityPointer>();
-
-        //                if (pointer != null)
-        //                {
-        //                    pointers.Add(pointer);
-        //                }
-        //                else
-        //                {
-        //                    Debug.LogWarning($"Failed to attach {pointerProfile.PointerPrefab.name} to {controllerType.Type.Name}.");
-        //                }
-        //            }
-        //        }
-        //    }
-
-        //    return pointers.Count == 0 ? null : pointers.ToArray();
-        //}
-
-        /// <inheritdoc />
-        public bool SetupConfiguration(Type controllerType)
-        {
-            if (controllerType == null)
-            {
-                Debug.LogError("controllerType cannot be null");
-                return false;
-            }
-
-            //// Have to test that a controller type has been registered in the profiles,
-            //// else it's Unity Input manager mappings will not have been setup by the inspector
-            //bool profileFound = false;
-
-            //// We can only enable controller profiles if mappings exist. Assign any known interaction mappings if found.
-            //if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.MixedRealityControllerMappings.GetControllerInteractionMapping(controllerType, ControllerHandedness, out MixedRealityControllerMapping controllerMapping))
-            //{
-            //    profileFound = true;
-
-            //    AssignControllerMappings(controllerMapping.Interactions);
-
-            //    // If no controller mappings found, warn the user.  Does not stop the project from running.
-            //    if (Interactions == null || Interactions.Length < 1)
-            //    {
-            //        SetupDefaultInteractions(ControllerHandedness);
-
-            //        // We still don't have controller mappings, so this may be a custom controller.
-            //        if (Interactions == null || Interactions.Length < 1)
-            //        {
-            //            Debug.LogWarning($"No Controller interaction mappings found for {controllerMapping.Description}!\nThe default interactions were assigned.");
-            //        }
-            //    }
-            //}
-
-            //if (!profileFound)
-            {
-                //Debug.LogWarning($"No controller profile found for type {controllerType.Name}, please ensure all controllers are defined and configured in the {nameof(MixedRealityControllerMappingProfiles)}.");
-                return false;
-            }
-
-            //return true;
-        }
-
         /// <summary>
         /// Assign the default interactions based on controller handedness if necessary.
         /// </summary>
@@ -207,8 +132,40 @@ namespace XRTK.Providers.Controllers
         /// <summary>
         /// Load the Interaction mappings for this controller from the configured Controller Mapping profile
         /// </summary>
-        /// <param name="mappings">Configured mappings from a controller mapping profile</param>
-        public void AssignControllerMappings(MixedRealityInteractionMapping[] mappings) => Interactions = mappings;
+        protected void AssignControllerMappings(MixedRealityInteractionMapping[] mappings) => Interactions = mappings;
+
+        private IMixedRealityPointer[] AssignControllerMappings(MixedRealityInteractionMappingProfile[] interactionMappingProfiles)
+        {
+            var pointers = new List<IMixedRealityPointer>();
+            var interactions = new MixedRealityInteractionMapping[interactionMappingProfiles.Length];
+
+            for (int i = 0; i < interactions.Length; i++)
+            {
+                var interactionProfile = interactionMappingProfiles[i];
+
+                for (int j = 0; j < interactionProfile.PointerProfiles.Length; j++)
+                {
+                    var pointerProfile = interactionProfile.PointerProfiles[j];
+                    var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
+                    var pointer = pointerObject.GetComponent<IMixedRealityPointer>();
+
+                    if (pointer != null)
+                    {
+                        pointers.Add(pointer);
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Failed to attach {pointerProfile.PointerPrefab.name} to {GetType().Name} {ControllerHandedness}.");
+                    }
+                }
+
+                interactions[i] = interactionProfile.InteractionMapping;
+            }
+
+            AssignControllerMappings(interactions);
+
+            return pointers.Count > 0 ? pointers.ToArray() : null;
+        }
 
         /// <inheritdoc />
         public async void TryRenderControllerModel(Type controllerType, byte[] glbData = null) => await TryRenderControllerModelAsync(controllerType, glbData);

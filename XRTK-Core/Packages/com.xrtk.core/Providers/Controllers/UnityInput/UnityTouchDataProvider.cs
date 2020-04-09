@@ -102,12 +102,6 @@ namespace XRTK.Providers.Controllers.UnityInput
                     touchPointer.FingerId = touch.fingerId;
                 }
 
-                if (!controller.SetupConfiguration(typeof(UnityTouchController)))
-                {
-                    Debug.LogError($"Failed to configure {typeof(UnityTouchController).Name} controller!");
-                    return;
-                }
-
                 ActiveTouches.Add(touch.fingerId, controller);
                 AddController(controller);
             }

@@ -703,10 +703,10 @@ namespace XRTK.Tests.InputSystem
         [Test]
         public void Test_04_02_02_Vector2_NoChanged_Updated_Inverted()
         {
-            var singleAxisInputProcessor = ScriptableObject.CreateInstance<InvertDualAxisProcessor>();
-            singleAxisInputProcessor.InvertX = true;
-            singleAxisInputProcessor.InvertY = true;
-            var interaction = new MixedRealityInteractionMapping(string.Empty, AxisType.DualAxis, DeviceInputType.None, MixedRealityInputAction.None, KeyCode.None, string.Empty, string.Empty);
+            var invertDualAxisProcessor = ScriptableObject.CreateInstance<InvertDualAxisProcessor>();
+            invertDualAxisProcessor.InvertX = true;
+            invertDualAxisProcessor.InvertY = true;
+            var interaction = new MixedRealityInteractionMapping(string.Empty, AxisType.DualAxis, DeviceInputType.None, MixedRealityInputAction.None, KeyCode.None, string.Empty, string.Empty, new List<InputProcessor> { invertDualAxisProcessor });
 
             var initialValue = interaction.Vector2Data;
             var testValue1 = Vector2.up;

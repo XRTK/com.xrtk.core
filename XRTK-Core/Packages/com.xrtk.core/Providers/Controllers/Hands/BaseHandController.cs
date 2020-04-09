@@ -7,7 +7,6 @@ using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Controllers.Hands;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
@@ -20,8 +19,8 @@ namespace XRTK.Providers.Controllers.Hands
     public abstract class BaseHandController : BaseController, IMixedRealityHandController
     {
         /// <inheritdoc />
-        public BaseHandController(IMixedRealityControllerDataProvider dataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-                : base(dataProvider, trackingState, controllerHandedness, inputSource, interactions)
+        protected BaseHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
+            : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
         {
         }
 

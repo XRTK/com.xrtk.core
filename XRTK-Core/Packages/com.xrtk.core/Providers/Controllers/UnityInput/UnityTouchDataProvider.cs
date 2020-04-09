@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.UnityInput;
@@ -84,25 +85,21 @@ namespace XRTK.Providers.Controllers.UnityInput
         {
             if (!ActiveTouches.TryGetValue(touch.fingerId, out var controller))
             {
-                IMixedRealityInputSource inputSource = null;
-
-                if (MixedRealityToolkit.InputSystem != null)
+                try
                 {
-                    var pointers = RequestPointers(typeof(UnityTouchController), Handedness.Any, true);
-                    inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"Touch {touch.fingerId}", pointers);
+                    controller = new UnityTouchController(this, TrackingState.NotApplicable, Handedness.Any, GetControllerMappingProfile(typeof(UnityTouchController), Handedness.Any));
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"Failed to create {nameof(UnityTouchController)}!\n{e}");
+                    return;
                 }
 
-                controller = new UnityTouchController(this, TrackingState.NotApplicable, Handedness.Any, inputSource);
-
-                if (inputSource != null)
+                for (int i = 0; i < controller.InputSource?.Pointers.Length; i++)
                 {
-                    for (int i = 0; i < inputSource.Pointers.Length; i++)
-                    {
-                        inputSource.Pointers[i].Controller = controller;
-                        var touchPointer = (IMixedRealityTouchPointer)inputSource.Pointers[i];
-                        touchPointer.TouchRay = ray;
-                        touchPointer.FingerId = touch.fingerId;
-                    }
+                    var touchPointer = (IMixedRealityTouchPointer)controller.InputSource.Pointers[i];
+                    touchPointer.TouchRay = ray;
+                    touchPointer.FingerId = touch.fingerId;
                 }
 
                 if (!controller.SetupConfiguration(typeof(UnityTouchController)))

@@ -2,13 +2,13 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Controllers.Hands;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Providers.Controllers.Hands;
@@ -24,8 +24,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     public class SimulatedHandController : BaseHandController, IMixedRealitySimulatedController
     {
         /// <inheritdoc />
-        public SimulatedHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-            : base(controllerDataProvider, trackingState, controllerHandedness, inputSource, interactions)
+        public SimulatedHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
+            : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
         {
             simulatedHandControllerDataProvider = (ISimulatedHandControllerDataProvider)controllerDataProvider;
 

@@ -19,7 +19,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="name"></param>
         /// <param name="priority"></param>
         /// <param name="profile"></param>
-        public BaseHandControllerDataProvider(string name, uint priority, BaseHandControllerDataProviderProfile profile)
+        protected BaseHandControllerDataProvider(string name, uint priority, BaseHandControllerDataProviderProfile profile)
             : base(name, priority, profile)
         {
             var globalSettingsProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;

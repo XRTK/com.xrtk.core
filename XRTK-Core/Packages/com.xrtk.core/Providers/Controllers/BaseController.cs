@@ -9,6 +9,7 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Services;
 
 namespace XRTK.Providers.Controllers
 {
@@ -23,15 +24,31 @@ namespace XRTK.Providers.Controllers
         /// <param name="controllerDataProvider">The <see cref="IMixedRealityControllerDataProvider"/> this controller belongs to.</param>
         /// <param name="trackingState">The initial tracking state of this controller.</param>
         /// <param name="controllerHandedness">The controller's handedness.</param>
-        /// <param name="inputSource">The <see cref="IMixedRealityInputSource"/> this controller belongs to.</param>
-        /// <param name="interactions">The <see cref="MixedRealityInteractionMapping"/>s currently assigned to this controller.</param>
-        protected BaseController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
+        /// <param name="controllerMappingProfile"></param>
+        protected BaseController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
         {
             ControllerDataProvider = controllerDataProvider;
             TrackingState = trackingState;
             ControllerHandedness = controllerHandedness;
-            InputSource = inputSource;
-            Interactions = interactions;
+
+            var handednessPrefix = string.Empty;
+
+            if (controllerHandedness == Handedness.Left ||
+                controllerHandedness == Handedness.Right)
+            {
+                handednessPrefix = $"{controllerHandedness} ";
+            }
+
+            // SetupConfiguration();
+            // Interactions = interactions;
+            // var pointers = RequestPointers();
+
+            InputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource($"{handednessPrefix}{GetType().Name}"/*, pointers*/);
+
+            for (int i = 0; i < InputSource?.Pointers?.Length; i++)
+            {
+                InputSource.Pointers[i].Controller = this;
+            }
 
             IsPositionAvailable = false;
             IsPositionApproximate = false;
@@ -70,7 +87,7 @@ namespace XRTK.Providers.Controllers
         public Handedness ControllerHandedness { get; }
 
         /// <inheritdoc />
-        public IMixedRealityInputSource InputSource { get; }
+        public IMixedRealityInputSource InputSource { get; private set; }
 
         /// <inheritdoc />
         public IMixedRealityControllerVisualizer Visualizer { get; private set; }
@@ -100,6 +117,45 @@ namespace XRTK.Providers.Controllers
         /// </summary>
         public virtual void UpdateController() { }
 
+        ///// <summary>
+        ///// Request an array of pointers for the controller type.
+        ///// </summary>
+        ///// <param name="controllerType">The controller type making the request for pointers.</param>
+        ///// <param name="controllingHand">The handedness of the controller making the request.</param>
+        ///// <param name="useSpecificType">Only register pointers with a specific type.</param>
+        ///// <returns></returns>
+        //protected virtual IMixedRealityPointer[] RequestPointers(SystemType controllerType, Handedness controllingHand, bool useSpecificType = false)
+        //{
+        //    var pointers = new List<IMixedRealityPointer>();
+
+        //    if (MixedRealityToolkit.HasActiveProfile &&
+        //        MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
+        //    {
+        //        for (int i = 0; i < MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.PointerOptions.Length; i++)
+        //        {
+        //            var pointerProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.PointerOptions[i];
+
+        //            if (((useSpecificType && pointerProfile.ControllerType.Type == controllerType.Type) || (!useSpecificType && pointerProfile.ControllerType.Type == null)) &&
+        //                (pointerProfile.Handedness == Handedness.Any || pointerProfile.Handedness == Handedness.Both || pointerProfile.Handedness == controllingHand))
+        //            {
+        //                var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
+        //                var pointer = pointerObject.GetComponent<IMixedRealityPointer>();
+
+        //                if (pointer != null)
+        //                {
+        //                    pointers.Add(pointer);
+        //                }
+        //                else
+        //                {
+        //                    Debug.LogWarning($"Failed to attach {pointerProfile.PointerPrefab.name} to {controllerType.Type.Name}.");
+        //                }
+        //            }
+        //        }
+        //    }
+
+        //    return pointers.Count == 0 ? null : pointers.ToArray();
+        //}
+
         /// <inheritdoc />
         public bool SetupConfiguration(Type controllerType)
         {
@@ -109,11 +165,11 @@ namespace XRTK.Providers.Controllers
                 return false;
             }
 
-            // Have to test that a controller type has been registered in the profiles,
-            // else it's Unity Input manager mappings will not have been setup by the inspector
-            bool profileFound = false;
+            //// Have to test that a controller type has been registered in the profiles,
+            //// else it's Unity Input manager mappings will not have been setup by the inspector
+            //bool profileFound = false;
 
-            // We can only enable controller profiles if mappings exist. Assign any known interaction mappings if found.
+            //// We can only enable controller profiles if mappings exist. Assign any known interaction mappings if found.
             //if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.MixedRealityControllerMappings.GetControllerInteractionMapping(controllerType, ControllerHandedness, out MixedRealityControllerMapping controllerMapping))
             //{
             //    profileFound = true;
@@ -133,13 +189,13 @@ namespace XRTK.Providers.Controllers
             //    }
             //}
 
-            if (!profileFound)
+            //if (!profileFound)
             {
                 //Debug.LogWarning($"No controller profile found for type {controllerType.Name}, please ensure all controllers are defined and configured in the {nameof(MixedRealityControllerMappingProfiles)}.");
                 return false;
             }
 
-            return true;
+            //return true;
         }
 
         /// <summary>
@@ -185,11 +241,11 @@ namespace XRTK.Providers.Controllers
         internal async Task TryRenderControllerModelAsync(Type controllerType, byte[] glbData = null, bool useAlternatePoseAction = false)
 #pragma warning restore 1998
         {
-            //if (controllerType == null)
-            //{
-            //    Debug.LogError("Unknown type of controller, cannot render");
-            //    return;
-            //}
+            if (controllerType == null)
+            {
+                Debug.LogError("Unknown type of controller, cannot render");
+                return;
+            }
 
             //var visualizationProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile;
 
@@ -264,7 +320,7 @@ namespace XRTK.Providers.Controllers
             //    }
             //    else
             //    {
-            //        Debug.LogWarning($"Failed to attach a valid IMixedRealityControllerVisualizer to {controllerType.Name}");
+            //        Debug.LogWarning($"Failed to attach a valid {nameof(IMixedRealityControllerVisualizer)} to {controllerType.Name}");
             //    }
             //}
 

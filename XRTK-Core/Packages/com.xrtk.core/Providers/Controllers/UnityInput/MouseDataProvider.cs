@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Devices;
@@ -50,31 +51,17 @@ namespace XRTK.Providers.Controllers.UnityInput
 #endif
 
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-
-            IMixedRealityInputSource mouseInputSource = null;
+            Cursor.lockState = CursorLockMode.Locked; ;
 
             MixedRealityRaycaster.DebugEnabled = true;
 
-            if (MixedRealityToolkit.InputSystem != null)
+            try
             {
-                var pointers = RequestPointers(new SystemType(typeof(MouseController)), Handedness.Any, true);
-                mouseInputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource(nameof(MouseController), pointers);
+                Controller = new MouseController(this, TrackingState.NotApplicable, Handedness.Any, GetControllerMappingProfile(typeof(MouseController), Handedness.Any));
             }
-
-            Controller = new MouseController(this, TrackingState.NotApplicable, Handedness.Any, mouseInputSource);
-
-            if (mouseInputSource != null)
+            catch (Exception e)
             {
-                for (int i = 0; i < mouseInputSource.Pointers.Length; i++)
-                {
-                    mouseInputSource.Pointers[i].Controller = Controller;
-                }
-            }
-
-            if (!Controller.SetupConfiguration(typeof(MouseController)))
-            {
-                Debug.LogError($"Failed to configure {typeof(MouseController).Name} controller!");
+                Debug.LogError($"Failed to create {nameof(MouseController)}!\n{e}");
                 return;
             }
 

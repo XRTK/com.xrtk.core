@@ -2,9 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Providers.Controllers.OpenVR
@@ -12,8 +12,8 @@ namespace XRTK.Providers.Controllers.OpenVR
     public class OculusRemoteOpenVRController : GenericOpenVRController
     {
         /// <inheritdoc />
-        public OculusRemoteOpenVRController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-            : base(controllerDataProvider, trackingState, controllerHandedness, inputSource, interactions)
+        public OculusRemoteOpenVRController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
+            : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
         {
         }
 

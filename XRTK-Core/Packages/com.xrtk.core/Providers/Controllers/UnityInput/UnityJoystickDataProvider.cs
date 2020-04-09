@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions.Controllers.UnityInput;
 using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
@@ -28,7 +27,7 @@ namespace XRTK.Providers.Controllers.UnityInput
         {
         }
 
-        private const float DeviceRefreshInterval = 3.0f;
+        private const float DEVICE_REFRESH_INTERVAL = 3.0f;
 
         protected static readonly Dictionary<string, GenericJoystickController> ActiveGenericControllers = new Dictionary<string, GenericJoystickController>();
 
@@ -42,7 +41,7 @@ namespace XRTK.Providers.Controllers.UnityInput
 
             deviceRefreshTimer += Time.unscaledDeltaTime;
 
-            if (deviceRefreshTimer >= DeviceRefreshInterval)
+            if (deviceRefreshTimer >= DEVICE_REFRESH_INTERVAL)
             {
                 deviceRefreshTimer = 0.0f;
                 RefreshDevices();
@@ -124,20 +123,22 @@ namespace XRTK.Providers.Controllers.UnityInput
             }
 
             var controllerType = GetCurrentControllerType(joystickName);
-            var inputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource($"{controllerType.Name} Controller");
-            var detectedController = Activator.CreateInstance(controllerType, this, TrackingState.NotTracked, Handedness.None, inputSource, null) as GenericJoystickController;
 
-            if (detectedController == null)
+            GenericJoystickController detectedController;
+
+            try
             {
-                Debug.LogError($"Failed to create {controllerType.Name} controller");
+                detectedController = Activator.CreateInstance(controllerType, this, TrackingState.NotTracked, Handedness.None, GetControllerMappingProfile(controllerType, Handedness.None)) as GenericJoystickController;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Failed to create {controllerType.Name} controller!\n{e}");
                 return null;
             }
 
-            if (!detectedController.SetupConfiguration(controllerType))
+            if (detectedController == null)
             {
-                // Controller failed to be setup correctly.
-                // Return null so we don't raise the source detected.
-                Debug.LogError($"Failed to configure {controllerType.Name} controller!");
+                Debug.LogError($"Failed to create {controllerType.Name} controller!");
                 return null;
             }
 

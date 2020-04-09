@@ -39,30 +39,28 @@ namespace XRTK.Providers.Controllers.OpenVR
                 return controller;
             }
 
-            Handedness controllingHand;
+            Handedness handedness;
 
             if (joystickName.Contains("Left"))
             {
-                controllingHand = Handedness.Left;
+                handedness = Handedness.Left;
             }
             else if (joystickName.Contains("Right"))
             {
-                controllingHand = Handedness.Right;
+                handedness = Handedness.Right;
             }
             else
             {
-                controllingHand = Handedness.None;
+                handedness = Handedness.None;
             }
 
             var controllerType = GetCurrentControllerType(joystickName);
-            var pointers = RequestPointers(controllerType, controllingHand);
-            var inputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource($"{controllerType.Name} {controllingHand}", pointers);
 
             GenericOpenVRController detectedController;
 
             try
             {
-                detectedController = Activator.CreateInstance(controllerType, this, TrackingState.NotTracked, controllingHand, inputSource, null) as GenericOpenVRController;
+                detectedController = Activator.CreateInstance(controllerType, this, TrackingState.NotTracked, handedness) as GenericOpenVRController;
             }
             catch (Exception e)
             {
@@ -74,19 +72,6 @@ namespace XRTK.Providers.Controllers.OpenVR
             {
                 Debug.LogError($"Failed to create {controllerType.Name}");
                 return null;
-            }
-
-            if (!detectedController.SetupConfiguration(controllerType))
-            {
-                // Controller failed to be setup correctly.
-                // Return null so we don't raise the source detected.
-                Debug.LogError($"Failed to Setup {controllerType.Name}");
-                return null;
-            }
-
-            for (int i = 0; i < detectedController.InputSource?.Pointers?.Length; i++)
-            {
-                detectedController.InputSource.Pointers[i].Controller = detectedController;
             }
 
             detectedController.TryRenderControllerModel(controllerType);

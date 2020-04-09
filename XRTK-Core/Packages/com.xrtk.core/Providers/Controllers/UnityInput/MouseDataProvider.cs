@@ -10,7 +10,7 @@ using XRTK.Providers.Controllers;
 using XRTK.Services;
 using XRTK.Utilities.Physics;
 
-namespace XRTK.Definitions.Controllers.UnityInput
+namespace XRTK.Providers.Controllers.UnityInput
 {
     /// <summary>
     /// The mouse data provider.

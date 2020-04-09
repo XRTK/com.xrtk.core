@@ -8,8 +8,6 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
-using XRTK.Definitions.Controllers.OpenVR;
-using XRTK.Definitions.Controllers.UnityInput;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
@@ -18,6 +16,8 @@ using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.PropertyDrawers;
 using XRTK.Inspectors.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Providers.Controllers.OpenVR;
+using XRTK.Providers.Controllers.UnityInput;
 using XRTK.Utilities.Editor;
 
 namespace XRTK.Inspectors

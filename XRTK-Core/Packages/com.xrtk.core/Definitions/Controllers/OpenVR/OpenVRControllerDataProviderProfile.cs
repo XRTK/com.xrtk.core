@@ -3,6 +3,7 @@
 
 using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers.OpenVR;
 
 namespace XRTK.Definitions.Controllers.OpenVR.Profiles
 {

@@ -4,12 +4,13 @@
 using System;
 using System.Threading.Tasks;
 using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 
-namespace XRTK.Definitions.Controllers
+namespace XRTK.Providers.Controllers
 {
     /// <summary>
     /// Base Controller class to inherit from for all controllers.

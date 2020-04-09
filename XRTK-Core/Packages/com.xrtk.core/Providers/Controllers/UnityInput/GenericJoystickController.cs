@@ -8,7 +8,7 @@ using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 
-namespace XRTK.Definitions.Controllers.UnityInput
+namespace XRTK.Providers.Controllers.UnityInput
 {
     /// <summary>
     /// The <see cref="GenericJoystickController"/> attempts to be a catch-all for joysticks and controllers defined in Unity's legacy input system.

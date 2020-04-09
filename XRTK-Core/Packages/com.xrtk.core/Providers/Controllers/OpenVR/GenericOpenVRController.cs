@@ -4,15 +4,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
-using XRTK.Definitions.Controllers.UnityInput;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Providers.Controllers.UnityInput;
 using XRTK.Services;
 
-namespace XRTK.Definitions.Controllers.OpenVR
+namespace XRTK.Providers.Controllers.OpenVR
 {
     public class GenericOpenVRController : GenericJoystickController
     {

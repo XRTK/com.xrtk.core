@@ -10,6 +10,7 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.PropertyDrawers;
+using XRTK.Providers.Controllers;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 {

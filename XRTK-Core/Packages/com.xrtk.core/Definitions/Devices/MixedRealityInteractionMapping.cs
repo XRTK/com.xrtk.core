@@ -24,7 +24,6 @@ namespace XRTK.Definitions.Devices
             this.inputProcessors = inputProcessors ?? new List<InputProcessor>();
 
             inputAction = MixedRealityInputAction.None;
-
             stateChangeType = StateChangeType.Continuous;
             inputName = string.Empty;
             axisType = AxisType.None;
@@ -248,6 +247,12 @@ namespace XRTK.Definitions.Devices
 
         [SerializeField]
         private List<InputProcessor> inputProcessors;
+
+        internal List<InputProcessor> InputProcessors
+        {
+            get => inputProcessors;
+            set => inputProcessors = value;
+        }
 
         #endregion Serialized Properties
 

@@ -42,12 +42,11 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
                 Debug.Assert(defaultControllerOptions != null, $"Missing default controller definitions for {dataProviderProfile.name}");
 
-                var defaultProfiles = new MixedRealityControllerMappingProfile[defaultControllerOptions.Length];
                 var profileRootPath = AssetDatabase.GetAssetPath(dataProviderProfile);
 
                 controllerMappingProfiles.ClearArray();
 
-                for (int i = 0; i < defaultProfiles.Length; i++)
+                for (int i = 0; i < defaultControllerOptions.Length; i++)
                 {
                     var controllerMappingAsset = CreateInstance(nameof(MixedRealityControllerMappingProfile)).CreateAsset($"{profileRootPath}/", $"{defaultControllerOptions[i].Description}Profile", false) as MixedRealityControllerMappingProfile;
                     Debug.Assert(controllerMappingAsset != null);
@@ -67,7 +66,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                     SetDefaultInteractionMapping();
                     mappingProfileSerializedObject.ApplyModifiedProperties();
 
-                    defaultProfiles[i] = controllerMappingAsset;
                     controllerMappingProfiles.InsertArrayElementAtIndex(i);
                     var mappingProfile = controllerMappingProfiles.GetArrayElementAtIndex(i);
                     mappingProfile.objectReferenceValue = controllerMappingAsset;
@@ -99,12 +97,50 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
                             for (int j = 0; j < defaultMappings.Length; j++)
                             {
-                                var interactionMappingAsset = CreateInstance(nameof(MixedRealityInteractionMappingProfile)).CreateAsset($"{mappingProfileRootPath}/", $"{defaultMappings[j].Description}Profile", false) as MixedRealityInteractionMappingProfile;
-                                Debug.Assert(interactionMappingAsset != null);
-                                interactionMappingAsset.InteractionMapping = defaultMappings[j];
+                                var interactionMappingProfileAsset = CreateInstance(nameof(MixedRealityInteractionMappingProfile)).CreateAsset($"{mappingProfileRootPath}/", $"{defaultMappings[j].Description}Profile", false) as MixedRealityInteractionMappingProfile;
+                                Debug.Assert(interactionMappingProfileAsset != null);
+                                var mapping = defaultMappings[j];
+
+                                var interactionMappingProfileSerializedObject = new SerializedObject(interactionMappingProfileAsset);
+                                interactionMappingProfileSerializedObject.Update();
+
+                                var interactionMappingProperty = interactionMappingProfileSerializedObject.FindProperty("interactionMapping");
+
+                                var descriptionProperty = interactionMappingProperty.FindPropertyRelative("description");
+                                var stateChangeTypeProperty = interactionMappingProperty.FindPropertyRelative("stateChangeType");
+                                var inputNameProperty = interactionMappingProperty.FindPropertyRelative("inputName");
+                                var axisTypeProperty = interactionMappingProperty.FindPropertyRelative("axisType");
+                                var inputTypeProperty = interactionMappingProperty.FindPropertyRelative("inputType");
+                                var keyCodeProperty = interactionMappingProperty.FindPropertyRelative("keyCode");
+                                var axisCodeXProperty = interactionMappingProperty.FindPropertyRelative("axisCodeX");
+                                var axisCodeYProperty = interactionMappingProperty.FindPropertyRelative("axisCodeY");
+                                var inputProcessorsProperty = interactionMappingProperty.FindPropertyRelative("inputProcessors");
+
+                                descriptionProperty.stringValue = mapping.Description;
+                                stateChangeTypeProperty.intValue = (int)mapping.StateChangeType;
+                                inputNameProperty.stringValue = mapping.InputName;
+                                axisTypeProperty.intValue = (int)mapping.AxisType;
+                                inputTypeProperty.intValue = (int)mapping.InputType;
+                                keyCodeProperty.intValue = (int)mapping.KeyCode;
+                                axisCodeXProperty.stringValue = mapping.AxisCodeX;
+                                axisCodeYProperty.stringValue = mapping.AxisCodeY;
+
+                                for (int k = 0; k < mapping.InputProcessors.Count; k++)
+                                {
+                                    inputProcessorsProperty.InsertArrayElementAtIndex(k);
+                                    var processorProperty = inputProcessorsProperty.GetArrayElementAtIndex(k);
+                                    var processor = mapping.InputProcessors[k];
+                                    var processorAsset = !AssetDatabase.TryGetGUIDAndLocalFileIdentifier(processor, out var guid, out long localId)
+                                        ? processor.CreateAsset($"{mappingProfileRootPath}/", false)
+                                        : AssetDatabase.LoadAssetAtPath<ScriptableObject>(AssetDatabase.GUIDToAssetPath(guid));
+                                    processorProperty.objectReferenceValue = processorAsset;
+                                }
+
+                                interactionMappingProfileSerializedObject.ApplyModifiedProperties();
+
                                 interactionMappingProfilesProperty.InsertArrayElementAtIndex(j);
                                 var interactionsProperty = interactionMappingProfilesProperty.GetArrayElementAtIndex(j);
-                                interactionsProperty.objectReferenceValue = interactionMappingAsset;
+                                interactionsProperty.objectReferenceValue = interactionMappingProfileAsset;
                             }
                         }
                     }

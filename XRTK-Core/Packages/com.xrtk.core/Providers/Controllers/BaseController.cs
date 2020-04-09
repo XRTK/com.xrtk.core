@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
+using XRTK.Utilities.Gltf.Schema;
+using XRTK.Utilities.Gltf.Serialization;
 using Object = UnityEngine.Object;
 
 namespace XRTK.Providers.Controllers
@@ -41,6 +44,7 @@ namespace XRTK.Providers.Controllers
                 handednessPrefix = $"{controllerHandedness} ";
             }
 
+            visualizationProfile = controllerMappingProfile.VisualizationProfile;
             var pointers = AssignControllerMappings(controllerMappingProfile.InteractionMappingProfiles);
 
             // If no controller mappings found, warn the user.  Does not stop the project from running.
@@ -62,6 +66,8 @@ namespace XRTK.Providers.Controllers
 
             Enabled = true;
         }
+
+        private readonly MixedRealityControllerVisualizationProfile visualizationProfile;
 
         /// <summary>
         /// The default interactions for this controller.
@@ -186,17 +192,7 @@ namespace XRTK.Providers.Controllers
         /// <param name="controllerType">The controller type.</param>
         /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
         /// <param name="useAlternatePoseAction">Should the visualizer be assigned the alternate pose actions?</param>
-        /// <returns>True, if controller model is being properly rendered.</returns>
-        /// <remarks>
-        /// (Given a user can, have no system default and override specific controller types with a system default, OR, enable a system system default but override that default for specific controllers)
-        /// Flow is as follows:
-        /// 1. Check if either there is a global setting for an system override and if there is a specific customization for that controller type
-        /// 2. If either the there is a system data and either the
-        ///
-        /// </remarks>
-#pragma warning disable 1998
         internal async Task TryRenderControllerModelAsync(Type controllerType, byte[] glbData = null, bool useAlternatePoseAction = false)
-#pragma warning restore 1998
         {
             if (controllerType == null)
             {
@@ -204,112 +200,89 @@ namespace XRTK.Providers.Controllers
                 return;
             }
 
-            //var visualizationProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile;
+            if (visualizationProfile == null)
+            {
+                Debug.LogError($"Missing {nameof(visualizationProfile)}!");
+                return;
+            }
 
-            //if (visualizationProfile == null)
-            //{
-            //    Debug.LogError("Missing ControllerVisualizationProfile!");
-            //    return;
-            //}
+            GltfObject gltfObject = null;
+            GameObject controllerModel = null;
 
-            //if (!visualizationProfile.RenderMotionControllers) { return; }
+            // if we have model data from the platform and the controller has been configured to use the default model, attempt to load the controller model from glbData.
+            if (glbData != null)
+            {
+                gltfObject = GltfUtility.GetGltfObjectFromGlb(glbData);
+                await gltfObject.ConstructAsync();
+                controllerModel = gltfObject.GameObjectReference;
+            }
 
-            //GltfObject gltfObject = null;
+            // If we didn't get an override model, and we didn't load the driver model,
+            // then get the global controller model for each hand.
+            if (controllerModel == null)
+            {
+                switch (ControllerHandedness)
+                {
+                    case Handedness.Left when visualizationProfile.LeftHandModel != null:
+                        controllerModel = visualizationProfile.LeftHandModel;
+                        break;
+                    case Handedness.Right when visualizationProfile.LeftHandModel != null:
+                        controllerModel = visualizationProfile.LeftHandModel;
+                        break;
+                }
+            }
 
-            //// If a specific controller template exists, check if it wants to override the global model, or use the system default specifically (in case global default is not used)
-            //bool useSystemDefaultModels = visualizationProfile.GetControllerModelOverride(controllerType, ControllerHandedness, out var controllerModel);
+            // If we've got a controller model, then place it in the scene and get/attach the visualizer.
+            if (controllerModel != null)
+            {
+                //If the model was loaded from a system template
+                if (gltfObject != null)
+                {
+                    controllerModel.name = $"{controllerType.Name}_Visualization";
+                    controllerModel.transform.SetParent(MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
+                    var visualizationType = visualizationProfile.ControllerVisualizationType;
+                    controllerModel.AddComponent(visualizationType.Type);
+                    Visualizer = controllerModel.GetComponent<IMixedRealityControllerVisualizer>();
+                }
+                // If the model was a prefab
+                else
+                {
+                    var controllerObject = Object.Instantiate(controllerModel, MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform) as GameObject;
+                    Debug.Assert(controllerObject != null);
+                    controllerObject.name = $"{controllerType.Name}_Visualization";
+                    Visualizer = controllerObject.GetComponent<IMixedRealityControllerVisualizer>();
+                }
 
-            //// If an override is not configured for defaults and has no model, then use the system default check
-            //if (!useSystemDefaultModels && controllerModel == null)
-            //{
-            //    useSystemDefaultModels = visualizationProfile.UseDefaultModels;
-            //}
+                // If a visualizer exists, set it up and bind it to the controller
+                if (Visualizer != null)
+                {
+                    Visualizer.Controller = this;
+                    SetupController(Visualizer);
+                }
+                else
+                {
+                    Debug.LogWarning($"Failed to attach a valid {nameof(IMixedRealityControllerVisualizer)} to {controllerType.Name}");
+                }
+            }
 
-            //// if we have model data from the platform and the controller has been configured to use the default model, attempt to load the controller model from glbData.
-            //if (glbData != null && useSystemDefaultModels)
-            //{
-            //    gltfObject = GltfUtility.GetGltfObjectFromGlb(glbData);
-            //    await gltfObject.ConstructAsync();
-            //    controllerModel = gltfObject.GameObjectReference;
-            //}
+            if (Visualizer == null)
+            {
+                Debug.LogError("Failed to render controller model!");
+            }
 
-            //// If we didn't get an override model, and we didn't load the driver model,
-            //// then get the global controller model for each hand.
-            //if (controllerModel == null)
-            //{
-            //    switch (ControllerHandedness)
-            //    {
-            //        case Handedness.Left when visualizationProfile.GlobalLeftHandModel != null:
-            //            controllerModel = visualizationProfile.GlobalLeftHandModel;
-            //            break;
-            //        case Handedness.Right when visualizationProfile.GlobalRightHandModel != null:
-            //            controllerModel = visualizationProfile.GlobalRightHandModel;
-            //            break;
-            //    }
-            //}
-
-            //// If we've got a controller model, then place it in the scene and get/attach the visualizer.
-            //if (controllerModel != null)
-            //{
-            //    //If the model was loaded from a system template
-            //    if (useSystemDefaultModels && gltfObject != null)
-            //    {
-            //        controllerModel.name = $"{controllerType.Name}_Visualization";
-            //        controllerModel.transform.SetParent(MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
-            //        var visualizationType = visualizationProfile.GetControllerVisualizationTypeOverride(controllerType, ControllerHandedness) ??
-            //                                visualizationProfile.ControllerVisualizationType;
-            //        controllerModel.AddComponent(visualizationType.Type);
-            //        Visualizer = controllerModel.GetComponent<IMixedRealityControllerVisualizer>();
-            //    }
-            //    //If the model was a prefab
-            //    else
-            //    {
-            //        var controllerObject = UnityEngine.Object.Instantiate(controllerModel, MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
-            //        controllerObject.name = $"{controllerType.Name}_Visualization";
-            //        Visualizer = controllerObject.GetComponent<IMixedRealityControllerVisualizer>();
-            //    }
-
-            //    //If a visualizer exists, set it up and bind it to the controller
-            //    if (Visualizer != null)
-            //    {
-            //        Visualizer.Controller = this;
-            //        SetupController(Visualizer);
-            //    }
-            //    else
-            //    {
-            //        Debug.LogWarning($"Failed to attach a valid {nameof(IMixedRealityControllerVisualizer)} to {controllerType.Name}");
-            //    }
-            //}
-
-            //if (Visualizer == null)
-            //{
-            //    Debug.LogError("Failed to render controller model!");
-            //}
-
-            //void SetupController(IMixedRealityControllerVisualizer visualizer)
-            //{
-            //    if (!useAlternatePoseAction &&
-            //        visualizationProfile.TryGetControllerPose(controllerType, ControllerHandedness, out MixedRealityInputAction poseAction))
-            //    {
-            //        visualizer.UseSourcePoseData = false;
-            //        visualizer.PoseAction = poseAction;
-            //    }
-            //    else if (useAlternatePoseAction &&
-            //             visualizationProfile.TryGetControllerPoseOverride(controllerType, ControllerHandedness, out MixedRealityInputAction altPoseAction))
-            //    {
-            //        visualizer.UseSourcePoseData = false;
-            //        visualizer.PoseAction = altPoseAction;
-            //    }
-            //    else if (visualizationProfile.GlobalPointerPose != MixedRealityInputAction.None)
-            //    {
-            //        visualizer.UseSourcePoseData = false;
-            //        visualizer.PoseAction = visualizationProfile.GlobalPointerPose;
-            //    }
-            //    else
-            //    {
-            //        Debug.LogError("Failed to get pose actions for controller visual.");
-            //    }
-            //}
+            void SetupController(IMixedRealityControllerVisualizer visualizer)
+            {
+                if (useAlternatePoseAction)
+                {
+                    visualizer.UseSourcePoseData = visualizationProfile.AlternatePointerPose == MixedRealityInputAction.None;
+                    visualizer.PoseAction = visualizationProfile.AlternatePointerPose;
+                }
+                else
+                {
+                    visualizer.UseSourcePoseData = visualizationProfile.PointerPose == MixedRealityInputAction.None;
+                    visualizer.PoseAction = visualizationProfile.PointerPose;
+                }
+            }
         }
     }
 }

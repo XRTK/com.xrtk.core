@@ -68,5 +68,18 @@ namespace XRTK.Definitions.Controllers
             get => pointerPose;
             private set => pointerPose = value;
         }
+
+        [SerializeField]
+        [Tooltip("This is the controller pose that this visualization will synchronize it's position and rotation with.")]
+        private MixedRealityInputAction alternatePointerPose = MixedRealityInputAction.None;
+
+        /// <summary>
+        /// This is the controller pose that this visualization will synchronize it's position and rotation with.
+        /// </summary>
+        public MixedRealityInputAction AlternatePointerPose
+        {
+            get => alternatePointerPose;
+            private set => alternatePointerPose = value;
+        }
     }
 }

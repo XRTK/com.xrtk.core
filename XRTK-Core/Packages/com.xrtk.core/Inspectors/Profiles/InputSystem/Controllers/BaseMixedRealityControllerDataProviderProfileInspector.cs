@@ -76,7 +76,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
                     void SetDefaultInteractionMapping()
                     {
-                        if (Activator.CreateInstance(new SystemType(controllerTypeProperty.stringValue), null, TrackingState.NotTracked, (Handedness)handednessProperty.intValue, null, null) is BaseController detectedController)
+                        if (Activator.CreateInstance(new SystemType(controllerTypeProperty.stringValue), null, TrackingState.NotTracked, (Handedness)handednessProperty.intValue, null) is BaseController detectedController)
                         {
                             interactionMappingProfilesProperty.ClearArray();
 

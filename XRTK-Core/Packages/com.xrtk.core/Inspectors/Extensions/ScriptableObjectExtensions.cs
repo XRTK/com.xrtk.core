@@ -93,6 +93,41 @@ namespace XRTK.Inspectors.Extensions
         }
 
         /// <summary>
+        /// Attempts to find the asset associated to the instance of the <see cref="ScriptableObject"/>, if none is found a new asset is created.
+        /// </summary>
+        /// <param name="scriptableObject"><see cref="ScriptableObject"/> you want to create an asset file for.</param>
+        /// <param name="ping">The new asset should be selected and opened in the inspector.</param>
+        public static ScriptableObject GetOrCreateAsset(this ScriptableObject scriptableObject, bool ping = true)
+        {
+            return GetOrCreateAsset(scriptableObject, null, ping);
+        }
+
+        /// <summary>
+        /// Attempts to find the asset associated to the instance of the <see cref="ScriptableObject"/>, if none is found a new asset is created.
+        /// </summary>
+        /// <param name="scriptableObject"><see cref="ScriptableObject"/> you want to create an asset file for.</param>
+        /// <param name="path">Optional path for the new asset.</param>
+        /// <param name="ping">The new asset should be selected and opened in the inspector.</param>
+        public static ScriptableObject GetOrCreateAsset(this ScriptableObject scriptableObject, string path, bool ping = true)
+        {
+            return GetOrCreateAsset(scriptableObject, path, null, ping);
+        }
+
+        /// <summary>
+        /// Attempts to find the asset associated to the instance of the <see cref="ScriptableObject"/>, if none is found a new asset is created.
+        /// </summary>
+        /// <param name="scriptableObject"><see cref="ScriptableObject"/> you want get or create an asset file for.</param>
+        /// <param name="path">Optional path for the new asset.</param>
+        /// <param name="fileName">Optional filename for the new asset.</param>
+        /// <param name="ping">The new asset should be selected and opened in the inspector.</param>
+        public static ScriptableObject GetOrCreateAsset(this ScriptableObject scriptableObject, string path, string fileName, bool ping)
+        {
+            return !AssetDatabase.TryGetGUIDAndLocalFileIdentifier(scriptableObject, out var guid, out long _)
+                ? scriptableObject.CreateAsset(path, fileName, ping)
+                : AssetDatabase.LoadAssetAtPath<ScriptableObject>(AssetDatabase.GUIDToAssetPath(guid));
+        }
+
+        /// <summary>
         /// Gets all the scriptable object instances in the project.
         /// </summary>
         /// <typeparam name="T">The Type of <see cref="ScriptableObject"/> you're wanting to find instances of.</typeparam>

@@ -38,17 +38,19 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
             if (!hasSetupDefaults.boolValue)
             {
-                var defaultControllerOptions = dataProviderProfile.GetDefaultControllerOptions();
+                var defaultControllerMappingProfiles = dataProviderProfile.GetDefaultControllerOptions();
 
-                Debug.Assert(defaultControllerOptions != null, $"Missing default controller definitions for {dataProviderProfile.name}");
+                Debug.Assert(defaultControllerMappingProfiles != null, $"Missing default controller definitions for {dataProviderProfile.name}");
 
                 var profileRootPath = AssetDatabase.GetAssetPath(dataProviderProfile);
 
                 controllerMappingProfiles.ClearArray();
 
-                for (int i = 0; i < defaultControllerOptions.Length; i++)
+                for (int i = 0; i < defaultControllerMappingProfiles.Length; i++)
                 {
-                    var controllerMappingAsset = CreateInstance(nameof(MixedRealityControllerMappingProfile)).CreateAsset($"{profileRootPath}/", $"{defaultControllerOptions[i].Description}Profile", false) as MixedRealityControllerMappingProfile;
+                    var defaultControllerMappingProfile = defaultControllerMappingProfiles[i];
+                    var controllerMappingAsset = CreateInstance(nameof(MixedRealityControllerMappingProfile)).CreateAsset($"{profileRootPath}/", $"{defaultControllerMappingProfile.Description}Profile", false) as MixedRealityControllerMappingProfile;
+
                     Debug.Assert(controllerMappingAsset != null);
 
                     var mappingProfileSerializedObject = new SerializedObject(controllerMappingAsset);
@@ -59,9 +61,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                     var useCustomInteractionsProperty = mappingProfileSerializedObject.FindProperty("useCustomInteractions");
                     var interactionMappingProfilesProperty = mappingProfileSerializedObject.FindProperty("interactionMappingProfiles");
 
-                    controllerTypeProperty.stringValue = SystemType.GetReference(defaultControllerOptions[i].ControllerType);
-                    handednessProperty.intValue = (int)defaultControllerOptions[i].Handedness;
-                    useCustomInteractionsProperty.boolValue = defaultControllerOptions[i].UseCustomInteractions;
+                    controllerTypeProperty.stringValue = SystemType.GetReference(defaultControllerMappingProfile.ControllerType);
+                    handednessProperty.intValue = (int)defaultControllerMappingProfile.Handedness;
+                    useCustomInteractionsProperty.boolValue = defaultControllerMappingProfile.UseCustomInteractions;
 
                     SetDefaultInteractionMapping();
                     mappingProfileSerializedObject.ApplyModifiedProperties();
@@ -130,9 +132,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                                     inputProcessorsProperty.InsertArrayElementAtIndex(k);
                                     var processorProperty = inputProcessorsProperty.GetArrayElementAtIndex(k);
                                     var processor = mapping.InputProcessors[k];
-                                    var processorAsset = !AssetDatabase.TryGetGUIDAndLocalFileIdentifier(processor, out var guid, out long localId)
-                                        ? processor.CreateAsset($"{mappingProfileRootPath}/", false)
-                                        : AssetDatabase.LoadAssetAtPath<ScriptableObject>(AssetDatabase.GUIDToAssetPath(guid));
+                                    var processorAsset = processor.GetOrCreateAsset($"{mappingProfileRootPath}/", false);
                                     processorProperty.objectReferenceValue = processorAsset;
                                 }
 

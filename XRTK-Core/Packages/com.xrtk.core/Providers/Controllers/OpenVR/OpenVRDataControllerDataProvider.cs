@@ -57,7 +57,7 @@ namespace XRTK.Providers.Controllers.OpenVR
 
             try
             {
-                detectedController = Activator.CreateInstance(controllerType, this, TrackingState.NotTracked, handedness) as GenericOpenVRController;
+                detectedController = Activator.CreateInstance(controllerType, this, TrackingState.NotTracked, handedness, GetControllerMappingProfile(controllerType, handedness)) as GenericOpenVRController;
             }
             catch (Exception e)
             {

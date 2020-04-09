@@ -6,8 +6,6 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem;
-using XRTK.Providers.Controllers;
 using XRTK.Services;
 using XRTK.Utilities.Physics;
 

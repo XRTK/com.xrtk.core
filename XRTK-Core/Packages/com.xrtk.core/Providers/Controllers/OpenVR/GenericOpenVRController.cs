@@ -16,6 +16,8 @@ namespace XRTK.Providers.Controllers.OpenVR
 {
     public class GenericOpenVRController : GenericJoystickController
     {
+        public GenericOpenVRController() : base() { }
+
         /// <inheritdoc />
         public GenericOpenVRController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)

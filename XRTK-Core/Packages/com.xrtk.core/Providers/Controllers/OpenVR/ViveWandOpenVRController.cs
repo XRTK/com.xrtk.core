@@ -12,6 +12,8 @@ namespace XRTK.Providers.Controllers.OpenVR
 {
     public class ViveWandOpenVRController : GenericOpenVRController
     {
+        public ViveWandOpenVRController() : base() { }
+
         /// <inheritdoc />
         public ViveWandOpenVRController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)

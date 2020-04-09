@@ -6,13 +6,14 @@ using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Providers.Controllers.OpenVR
 {
     public class OculusGoOpenVRController : GenericOpenVRController
     {
+        public OculusGoOpenVRController() : base() { }
+
         /// <inheritdoc />
         public OculusGoOpenVRController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)

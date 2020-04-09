@@ -15,6 +15,8 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// </summary>
     public class XboxController : GenericJoystickController
     {
+        public XboxController() : base() { }
+
         /// <inheritdoc />
         public XboxController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)

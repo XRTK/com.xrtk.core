@@ -13,6 +13,8 @@ namespace XRTK.Providers.Controllers.UnityInput
 {
     public class UnityTouchController : BaseController
     {
+        public UnityTouchController() : base() { }
+
         /// <inheritdoc />
         public UnityTouchController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)

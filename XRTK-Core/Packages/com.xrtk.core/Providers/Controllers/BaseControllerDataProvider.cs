@@ -49,7 +49,7 @@ namespace XRTK.Providers.Controllers
                 return null;
             }
 
-            if (!controllerType.IsAssignableFrom(typeof(IMixedRealityController)))
+            if (!typeof(IMixedRealityController).IsAssignableFrom(controllerType))
             {
                 Debug.LogError($"{controllerType.Name} does not implement {nameof(IMixedRealityController)}");
                 return null;

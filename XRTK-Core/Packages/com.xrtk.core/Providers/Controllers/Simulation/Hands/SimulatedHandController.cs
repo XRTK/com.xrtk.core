@@ -23,6 +23,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     /// </summary>
     public class SimulatedHandController : BaseHandController, IMixedRealitySimulatedController
     {
+        public SimulatedHandController() : base() { }
+
         /// <inheritdoc />
         public SimulatedHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)

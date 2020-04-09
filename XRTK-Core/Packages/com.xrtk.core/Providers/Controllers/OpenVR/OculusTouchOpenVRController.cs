@@ -12,6 +12,8 @@ namespace XRTK.Providers.Controllers.OpenVR
 {
     public class OculusTouchOpenVRController : GenericOpenVRController
     {
+        public OculusTouchOpenVRController() : base() { }
+
         /// <inheritdoc />
         public OculusTouchOpenVRController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)

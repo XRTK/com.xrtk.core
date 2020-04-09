@@ -16,6 +16,8 @@ namespace XRTK.Providers.Controllers.OpenVR
     /// </summary>
     public class WindowsMixedRealityOpenVRMotionController : GenericOpenVRController
     {
+        public WindowsMixedRealityOpenVRMotionController() : base() { }
+
         /// <inheritdoc />
         public WindowsMixedRealityOpenVRMotionController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)

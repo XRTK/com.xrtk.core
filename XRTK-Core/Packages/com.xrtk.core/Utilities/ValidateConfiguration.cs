@@ -7,7 +7,6 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.Controllers;
-using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Services;

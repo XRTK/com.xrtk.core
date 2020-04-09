@@ -46,7 +46,7 @@ namespace XRTK.Tests.InputSystem
 
         public MixedRealityInteractionMapping InitializeRawInteractionMapping()
         {
-            return new MixedRealityInteractionMapping(string.Empty, AxisType.Raw, DeviceInputType.None, MixedRealityInputAction.None);
+            return new MixedRealityInteractionMapping(string.Empty, AxisType.Raw, DeviceInputType.None);
         }
 
         /// <summary>
@@ -184,7 +184,7 @@ namespace XRTK.Tests.InputSystem
 
         public MixedRealityInteractionMapping InitializeBoolInteractionMapping()
         {
-            return new MixedRealityInteractionMapping(string.Empty, AxisType.Digital, DeviceInputType.None, MixedRealityInputAction.None);
+            return new MixedRealityInteractionMapping(string.Empty, AxisType.Digital, DeviceInputType.None);
         }
 
         /// <summary>
@@ -279,7 +279,7 @@ namespace XRTK.Tests.InputSystem
 
         public MixedRealityInteractionMapping InitializeFloatInteractionMapping()
         {
-            return new MixedRealityInteractionMapping(string.Empty, AxisType.SingleAxis, DeviceInputType.None, MixedRealityInputAction.None);
+            return new MixedRealityInteractionMapping(string.Empty, AxisType.SingleAxis, DeviceInputType.None);
         }
 
         /// <summary>
@@ -460,7 +460,7 @@ namespace XRTK.Tests.InputSystem
 
         public MixedRealityInteractionMapping InitializeVector2InteractionMapping()
         {
-            return new MixedRealityInteractionMapping(string.Empty, AxisType.DualAxis, DeviceInputType.None, MixedRealityInputAction.None);
+            return new MixedRealityInteractionMapping(string.Empty, AxisType.DualAxis, DeviceInputType.None);
         }
 
         /// <summary>
@@ -783,7 +783,7 @@ namespace XRTK.Tests.InputSystem
 
         public MixedRealityInteractionMapping InitializeVector3InteractionMapping()
         {
-            return new MixedRealityInteractionMapping(string.Empty, AxisType.ThreeDofPosition, DeviceInputType.None, MixedRealityInputAction.None);
+            return new MixedRealityInteractionMapping(string.Empty, AxisType.ThreeDofPosition, DeviceInputType.None);
         }
 
         /// <summary>
@@ -890,7 +890,7 @@ namespace XRTK.Tests.InputSystem
 
         public MixedRealityInteractionMapping InitializeQuaternionInteractionMapping()
         {
-            return new MixedRealityInteractionMapping(string.Empty, AxisType.ThreeDofRotation, DeviceInputType.None, MixedRealityInputAction.None);
+            return new MixedRealityInteractionMapping(string.Empty, AxisType.ThreeDofRotation, DeviceInputType.None);
         }
 
         /// <summary>
@@ -997,7 +997,7 @@ namespace XRTK.Tests.InputSystem
 
         public MixedRealityInteractionMapping InitializeMixedRealityPoseInteractionMapping()
         {
-            return new MixedRealityInteractionMapping(string.Empty, AxisType.SixDof, DeviceInputType.None, MixedRealityInputAction.None);
+            return new MixedRealityInteractionMapping(string.Empty, AxisType.SixDof, DeviceInputType.None);
         }
 
         /// <summary>
@@ -1069,7 +1069,7 @@ namespace XRTK.Tests.InputSystem
         [Test]
         public void Test_07_03_MixedRealityPose_NoChange_NoUpdate()
         {
-            var interaction = new MixedRealityInteractionMapping(string.Empty, AxisType.SixDof, DeviceInputType.None, MixedRealityInputAction.None);
+            var interaction = new MixedRealityInteractionMapping(string.Empty, AxisType.SixDof, DeviceInputType.None);
             var initialValue = interaction.PoseData;
             var testValue = new MixedRealityPose(Vector3.up, Quaternion.identity);
 

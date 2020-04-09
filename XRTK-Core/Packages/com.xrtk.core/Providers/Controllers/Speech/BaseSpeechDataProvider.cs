@@ -3,13 +3,14 @@
 
 using XRTK.Definitions.Controllers;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Speech
 {
     /// <summary>
     /// Base speech data provider to inherit from when implementing <see cref="IMixedRealitySpeechDataProvider"/>s
     /// </summary>
-    public abstract class BaseSpeechDataProvider : BaseControllerDataProvider, IMixedRealitySpeechDataProvider
+    public abstract class BaseSpeechDataProvider : BaseDataProvider, IMixedRealitySpeechDataProvider
     {
         /// <summary>
         /// Constructor.
@@ -18,7 +19,7 @@ namespace XRTK.Providers.Controllers.Speech
         /// <param name="priority"></param>
         /// <param name="profile"></param>
         protected BaseSpeechDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
-            : base(name, priority, profile)
+            : base(name, priority)
         {
         }
 

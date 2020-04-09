@@ -9,7 +9,7 @@ namespace XRTK.Interfaces.Providers.Controllers
     /// <summary>
     /// Mixed Reality Toolkit controller definition, used to manage a specific controller type
     /// </summary>
-    public interface IMixedRealityDictationDataProvider : IMixedRealityControllerDataProvider
+    public interface IMixedRealityDictationDataProvider : IMixedRealityInputDataProvider
     {
         /// <summary>
         /// Is the system currently listing to dictation input?

@@ -6,7 +6,7 @@ namespace XRTK.Interfaces.Providers.Controllers
     /// <summary>
     /// Mixed Reality Toolkit controller definition, used to manage a specific controller type
     /// </summary>
-    public interface IMixedRealitySpeechDataProvider : IMixedRealityControllerDataProvider
+    public interface IMixedRealitySpeechDataProvider : IMixedRealityInputDataProvider
     {
         /// <summary>
         /// Query whether or not the speech system is active

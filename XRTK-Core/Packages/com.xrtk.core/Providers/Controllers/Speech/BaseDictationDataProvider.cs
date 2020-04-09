@@ -5,13 +5,14 @@ using System.Threading.Tasks;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Speech
 {
     /// <summary>
     /// Base dictation data provider to use when implementing <see cref="IMixedRealityDictationDataProvider"/>s
     /// </summary>
-    public abstract class BaseDictationDataProvider : BaseControllerDataProvider, IMixedRealityDictationDataProvider
+    public abstract class BaseDictationDataProvider : BaseDataProvider, IMixedRealityDictationDataProvider
     {
         /// <summary>
         /// Constructor.
@@ -20,7 +21,7 @@ namespace XRTK.Providers.Controllers.Speech
         /// <param name="priority"></param>
         /// <param name="profile"></param>
         protected BaseDictationDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
-            : base(name, priority, profile)
+            : base(name, priority)
         {
         }
 

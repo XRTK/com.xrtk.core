@@ -3,7 +3,6 @@
 
 using UnityEngine;
 using XRTK.Attributes;
-using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -179,12 +178,12 @@ namespace XRTK.Definitions.InputSystem
 
         [SerializeField]
         [Tooltip("Device profile for registering platform specific input data sources.")]
-        private MixedRealityControllerDataProvidersProfile controllerDataProvidersProfile;
+        private MixedRealityInputDataProvidersProfile controllerDataProvidersProfile;
 
         /// <summary>
         /// Active profile for controller mapping configuration
         /// </summary>
-        public MixedRealityControllerDataProvidersProfile ControllerDataProvidersProfile
+        public MixedRealityInputDataProvidersProfile ControllerDataProvidersProfile
         {
             get => controllerDataProvidersProfile;
             internal set => controllerDataProvidersProfile = value;

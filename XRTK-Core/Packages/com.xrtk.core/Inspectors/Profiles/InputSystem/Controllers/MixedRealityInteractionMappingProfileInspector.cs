@@ -3,6 +3,7 @@
 
 using UnityEditor;
 using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Utilities;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 {
@@ -27,7 +28,20 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(interactionMapping, true);
-            EditorGUILayout.PropertyField(pointerProfile);
+
+            var axisType = (AxisType)interactionMapping.FindPropertyRelative("axisType").intValue;
+
+            if (axisType == AxisType.ThreeDofPosition || axisType == AxisType.SixDof)
+            {
+                EditorGUILayout.PropertyField(pointerProfile, true);
+            }
+            else
+            {
+                if (pointerProfile.arraySize > 0)
+                {
+                    pointerProfile.ClearArray();
+                }
+            }
 
             serializedObject.ApplyModifiedProperties();
         }

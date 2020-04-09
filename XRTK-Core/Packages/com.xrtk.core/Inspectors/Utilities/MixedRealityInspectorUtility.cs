@@ -7,8 +7,6 @@ using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
-using XRTK.Services;
 using XRTK.Utilities.Editor;
 using Object = UnityEngine.Object;
 

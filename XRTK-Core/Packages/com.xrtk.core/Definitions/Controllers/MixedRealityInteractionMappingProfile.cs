@@ -19,12 +19,12 @@ namespace XRTK.Definitions.Controllers
         }
 
         [SerializeField]
-        private MixedRealityPointerProfile pointerProfile = null;
+        private MixedRealityPointerProfile[] pointerProfile = null;
 
         /// <summary>
-        /// The pointer profile for this interaction if the interaction is 3 or 6 Dof
+        /// The pointer profiles for this interaction if the interaction is 3 or 6 Dof
         /// </summary>
-        public MixedRealityPointerProfile PointerProfile
+        public MixedRealityPointerProfile[] PointerProfile
         {
             get => pointerProfile;
             internal set => pointerProfile = value;

@@ -15,10 +15,11 @@ namespace XRTK.Definitions.Devices
     /// </summary>
     /// <remarks>One definition should exist for each physical device input, such as buttons, triggers, joysticks, dpads, and more.</remarks>
     [Serializable]
-    public struct MixedRealityInteractionMapping
+    public class MixedRealityInteractionMapping
     {
         #region Constructors
-        public MixedRealityInteractionMapping(string description = "None", List<InputProcessor> inputProcessors = null) : this()
+
+        public MixedRealityInteractionMapping(string description = "None", List<InputProcessor> inputProcessors = null)
         {
             this.description = description;
             this.inputProcessors = inputProcessors ?? new List<InputProcessor>();

@@ -416,7 +416,9 @@ namespace XRTK.Tests.InputSystem
         [Test]
         public void Test_03_03_Float_NoChange_Updated_Inverted()
         {
-            var interaction = new MixedRealityInteractionMapping(string.Empty, AxisType.SingleAxis, DeviceInputType.None, MixedRealityInputAction.None, KeyCode.None, string.Empty, string.Empty);
+            var singleAxisInputProcessor = ScriptableObject.CreateInstance<InvertSingleAxisProcessor>();
+            singleAxisInputProcessor.Invert = true;
+            var interaction = new MixedRealityInteractionMapping(string.Empty, AxisType.SingleAxis, DeviceInputType.None, MixedRealityInputAction.None, KeyCode.None, string.Empty, string.Empty, new List<InputProcessor> { singleAxisInputProcessor });
             var initialValue = interaction.FloatData;
             const float testValue1 = 1f;
             const float testValue2 = -1f;
@@ -701,6 +703,9 @@ namespace XRTK.Tests.InputSystem
         [Test]
         public void Test_04_02_02_Vector2_NoChanged_Updated_Inverted()
         {
+            var singleAxisInputProcessor = ScriptableObject.CreateInstance<InvertDualAxisProcessor>();
+            singleAxisInputProcessor.InvertX = true;
+            singleAxisInputProcessor.InvertY = true;
             var interaction = new MixedRealityInteractionMapping(string.Empty, AxisType.DualAxis, DeviceInputType.None, MixedRealityInputAction.None, KeyCode.None, string.Empty, string.Empty);
 
             var initialValue = interaction.Vector2Data;

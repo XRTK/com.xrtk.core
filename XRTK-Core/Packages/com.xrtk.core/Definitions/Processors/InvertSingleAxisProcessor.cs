@@ -8,7 +8,7 @@ namespace XRTK.Definitions.Devices
     public class InvertSingleAxisProcessor : InputProcessor<float>
     {
         [SerializeField]
-        private bool invert = false;
+        private bool invert = true;
 
         public bool Invert
         {

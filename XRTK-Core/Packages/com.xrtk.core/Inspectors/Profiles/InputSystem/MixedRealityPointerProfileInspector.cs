@@ -32,6 +32,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             serializedObject.Update();
 
+            EditorGUILayout.PropertyField(pointerPrefab);
             EditorGUILayout.PropertyField(pointingExtent);
             EditorGUILayout.PropertyField(pointingRaycastLayerMasks, true);
             EditorGUILayout.PropertyField(drawDebugPointingRays);

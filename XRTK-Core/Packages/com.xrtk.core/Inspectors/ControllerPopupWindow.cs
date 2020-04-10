@@ -24,7 +24,7 @@ namespace XRTK.Inspectors
 {
     public class ControllerPopupWindow : EditorWindow
     {
-        private const float InputActionLabelWidth = 128f;
+        private const float INPUT_ACTION_LABEL_WIDTH = 119f;
 
         /// <summary>
         /// Used to enable editing the input axis label positions on controllers
@@ -330,13 +330,13 @@ namespace XRTK.Inspectors
 
             if (useCustomInteractionMapping)
             {
-                EditorGUILayout.LabelField(new GUIContent("Profile"), GUILayout.Width(InputActionLabelWidth));
-                EditorGUILayout.LabelField(ControllerInputTypeContent, GUILayout.Width(InputActionLabelWidth));
-                EditorGUILayout.LabelField(AxisTypeContent, GUILayout.Width(InputActionLabelWidth));
-                EditorGUILayout.LabelField(ActionContent, GUILayout.Width(InputActionLabelWidth));
-                EditorGUILayout.LabelField(KeyCodeContent, GUILayout.Width(InputActionLabelWidth));
-                EditorGUILayout.LabelField(XAxisContent, GUILayout.Width(InputActionLabelWidth));
-                EditorGUILayout.LabelField(YAxisContent, GUILayout.Width(InputActionLabelWidth));
+                EditorGUILayout.LabelField(new GUIContent("Profile"), GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
+                EditorGUILayout.LabelField(ControllerInputTypeContent, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
+                EditorGUILayout.LabelField(AxisTypeContent, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
+                EditorGUILayout.LabelField(ActionContent, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
+                EditorGUILayout.LabelField(KeyCodeContent, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
+                EditorGUILayout.LabelField(XAxisContent, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
+                EditorGUILayout.LabelField(YAxisContent, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
                 GUILayout.FlexibleSpace();
                 EditorGUILayout.LabelField(string.Empty, GUILayout.Width(24f));
 
@@ -370,39 +370,39 @@ namespace XRTK.Inspectors
                 if (useCustomInteractionMapping)
                 {
                     MixedRealityProfilePropertyDrawer.DrawCloneButtons = false;
-                    EditorGUILayout.PropertyField(interactionProfileProperty, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
-                    EditorGUILayout.PropertyField(inputType, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
-                    EditorGUILayout.PropertyField(axisType, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
+                    EditorGUILayout.PropertyField(interactionProfileProperty, GUIContent.none, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
+                    EditorGUILayout.PropertyField(inputType, GUIContent.none, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
+                    EditorGUILayout.PropertyField(axisType, GUIContent.none, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
 
-                    inputActionDropdown.OnGui(GUIContent.none, action, axisConstraint, GUILayout.Width(InputActionLabelWidth));
+                    inputActionDropdown.OnGui(GUIContent.none, action, axisConstraint, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
 
                     if (axisConstraint == AxisType.Digital)
                     {
-                        EditorGUILayout.PropertyField(interactionMappingProperty.FindPropertyRelative("keyCode"), GUIContent.none, GUILayout.Width(InputActionLabelWidth));
+                        EditorGUILayout.PropertyField(interactionMappingProperty.FindPropertyRelative("keyCode"), GUIContent.none, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
                     }
                     else
                     {
-                        EditorGUILayout.LabelField(GUIContent.none, GUILayout.Width(InputActionLabelWidth));
+                        EditorGUILayout.LabelField(GUIContent.none, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
                     }
                     if (axisConstraint == AxisType.SingleAxis ||
                         axisConstraint == AxisType.DualAxis)
                     {
                         var axisCodeX = interactionMappingProperty.FindPropertyRelative("axisCodeX");
-                        RenderAxisPopup(axisCodeX, InputActionLabelWidth);
+                        RenderAxisPopup(axisCodeX, INPUT_ACTION_LABEL_WIDTH);
                     }
                     else
                     {
-                        EditorGUILayout.LabelField(GUIContent.none, GUILayout.Width(InputActionLabelWidth));
+                        EditorGUILayout.LabelField(GUIContent.none, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
                     }
 
                     if (axisConstraint == AxisType.DualAxis)
                     {
                         var axisCodeY = interactionMappingProperty.FindPropertyRelative("axisCodeY");
-                        RenderAxisPopup(axisCodeY, InputActionLabelWidth);
+                        RenderAxisPopup(axisCodeY, INPUT_ACTION_LABEL_WIDTH);
                     }
                     else
                     {
-                        EditorGUILayout.LabelField(GUIContent.none, GUILayout.Width(InputActionLabelWidth));
+                        EditorGUILayout.LabelField(GUIContent.none, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
                     }
 
                     GUILayout.FlexibleSpace();

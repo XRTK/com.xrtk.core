@@ -347,8 +347,6 @@ namespace XRTK.Inspectors
                 EditorGUILayout.LabelField(AxisTypeContent, GUILayout.Width(InputActionLabelWidth));
                 EditorGUILayout.LabelField(ActionContent, GUILayout.Width(InputActionLabelWidth));
                 EditorGUILayout.LabelField(KeyCodeContent, GUILayout.Width(InputActionLabelWidth));
-                EditorGUILayout.LabelField(XAxisContent, GUILayout.Width(InputActionLabelWidth));
-                EditorGUILayout.LabelField(YAxisContent, GUILayout.Width(InputActionLabelWidth));
                 GUILayout.FlexibleSpace();
                 EditorGUILayout.LabelField(string.Empty, GUILayout.Width(24f));
 
@@ -373,8 +371,6 @@ namespace XRTK.Inspectors
                 var axisType = interactionMappingProperty.FindPropertyRelative("axisType");
                 var action = interactionMappingProperty.FindPropertyRelative("inputAction");
                 var inputType = interactionMappingProperty.FindPropertyRelative("inputType");
-                var invertXAxis = interactionMappingProperty.FindPropertyRelative("invertXAxis");
-                var invertYAxis = interactionMappingProperty.FindPropertyRelative("invertYAxis");
                 var interactionDescription = interactionMappingProperty.FindPropertyRelative("description");
 
                 var axisConstraint = (AxisType)axisType.intValue;
@@ -387,7 +383,7 @@ namespace XRTK.Inspectors
                     EditorGUILayout.PropertyField(inputType, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
                     EditorGUILayout.PropertyField(axisType, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
 
-                    inputActionDropdown.OnGui(GUIContent.none, action, axisConstraint);
+                    inputActionDropdown.OnGui(GUIContent.none, action, axisConstraint, GUILayout.Width(InputActionLabelWidth));
 
                     if (axisConstraint == AxisType.Digital)
                     {
@@ -395,83 +391,10 @@ namespace XRTK.Inspectors
                     }
                     else
                     {
-                        if (axisConstraint == AxisType.DualAxis)
-                        {
-                            EditorGUIUtility.labelWidth = InputActionLabelWidth * 0.5f;
-                            EditorGUIUtility.fieldWidth = InputActionLabelWidth * 0.5f;
-
-                            int currentAxisSetting = 0;
-
-                            if (invertXAxis.boolValue)
-                            {
-                                currentAxisSetting += 1;
-                            }
-
-                            if (invertYAxis.boolValue)
-                            {
-                                currentAxisSetting += 2;
-                            }
-
-                            EditorGUI.BeginChangeCheck();
-                            currentAxisSetting = EditorGUILayout.IntPopup(InvertContent, currentAxisSetting, InvertAxisContent, InvertAxisValues, GUILayout.Width(InputActionLabelWidth));
-
-                            if (EditorGUI.EndChangeCheck())
-                            {
-                                switch (currentAxisSetting)
-                                {
-                                    case 0:
-                                        invertXAxis.boolValue = false;
-                                        invertYAxis.boolValue = false;
-                                        break;
-                                    case 1:
-                                        invertXAxis.boolValue = true;
-                                        invertYAxis.boolValue = false;
-                                        break;
-                                    case 2:
-                                        invertXAxis.boolValue = false;
-                                        invertYAxis.boolValue = true;
-                                        break;
-                                    case 3:
-                                        invertXAxis.boolValue = true;
-                                        invertYAxis.boolValue = true;
-                                        break;
-                                }
-                            }
-
-                            EditorGUIUtility.labelWidth = defaultLabelWidth;
-                            EditorGUIUtility.fieldWidth = defaultFieldWidth;
-                        }
-                        else if (axisConstraint == AxisType.SingleAxis)
-                        {
-                            invertXAxis.boolValue = EditorGUILayout.ToggleLeft("Invert X", invertXAxis.boolValue, GUILayout.Width(InputActionLabelWidth));
-                            EditorGUIUtility.labelWidth = defaultLabelWidth;
-                        }
-                        else
-                        {
-                            EditorGUILayout.LabelField(GUIContent.none, GUILayout.Width(InputActionLabelWidth));
-                        }
-                    }
-
-                    if (axisConstraint == AxisType.SingleAxis ||
-                        axisConstraint == AxisType.DualAxis)
-                    {
-                        var axisCodeX = interactionMappingProperty.FindPropertyRelative("axisCodeX");
-                        RenderAxisPopup(axisCodeX, InputActionLabelWidth);
-                    }
-                    else
-                    {
                         EditorGUILayout.LabelField(GUIContent.none, GUILayout.Width(InputActionLabelWidth));
                     }
 
-                    if (axisConstraint == AxisType.DualAxis)
-                    {
-                        var axisCodeY = interactionMappingProperty.FindPropertyRelative("axisCodeY");
-                        RenderAxisPopup(axisCodeY, InputActionLabelWidth);
-                    }
-                    else
-                    {
-                        EditorGUILayout.LabelField(GUIContent.none, GUILayout.Width(InputActionLabelWidth));
-                    }
+                    EditorGUILayout.LabelField(GUIContent.none, GUILayout.Width(InputActionLabelWidth));
 
                     if (GUILayout.Button(InteractionMinusButtonContent, EditorStyles.miniButtonRight, GUILayout.ExpandWidth(true)))
                     {
@@ -508,22 +431,6 @@ namespace XRTK.Inspectors
 
                         if (!skip)
                         {
-                            var currentLabelWidth = EditorGUIUtility.labelWidth;
-
-                            if (axisConstraint == AxisType.SingleAxis ||
-                                axisConstraint == AxisType.DualAxis)
-                            {
-                                EditorGUIUtility.labelWidth = 12f;
-                                EditorGUILayout.LabelField("Invert:");
-                                invertXAxis.boolValue = EditorGUILayout.Toggle("X", invertXAxis.boolValue);
-                            }
-
-                            if (axisConstraint == AxisType.DualAxis)
-                            {
-                                invertYAxis.boolValue = EditorGUILayout.Toggle("Y", invertYAxis.boolValue);
-                            }
-
-                            EditorGUIUtility.labelWidth = currentLabelWidth;
                             inputActionDropdown.OnGui(GUIContent.none, action, axisConstraint);
                             EditorGUILayout.LabelField(description, GUILayout.ExpandWidth(true));
                             GUILayout.FlexibleSpace();
@@ -546,55 +453,14 @@ namespace XRTK.Inspectors
                         var labelRect = new Rect(rectPosition + offset, new Vector2(InputActionLabelPosition.x, EditorGUIUtility.singleLineHeight));
                         EditorGUI.LabelField(labelRect, interactionDescription.stringValue, flipped ? flippedLabelStyle : EditorStyles.label);
 
-                        if (!editInputActionPositions)
-                        {
-                            offset = flipped
-                                ? InputActionLabelPosition + InputActionDropdownPosition + HorizontalSpace
-                                : Vector2.zero;
-
-                            if (axisConstraint == AxisType.SingleAxis ||
-                                axisConstraint == AxisType.DualAxis)
-                            {
-                                if (!flipped)
-                                {
-                                    if (axisConstraint == AxisType.DualAxis)
-                                    {
-                                        offset += new Vector2(-112f, 0f);
-                                    }
-                                    else
-                                    {
-                                        offset += new Vector2(-76f, 0f);
-                                    }
-                                }
-
-                                var boxSize = axisConstraint == AxisType.DualAxis ? new Vector2(112f, EditorGUIUtility.singleLineHeight) : new Vector2(76f, EditorGUIUtility.singleLineHeight);
-
-                                GUI.Box(new Rect(rectPosition + offset, boxSize), GUIContent.none, EditorGUIUtility.isProSkin ? "ObjectPickerBackground" : "ObjectPickerResultsEven");
-
-                                labelRect = new Rect(rectPosition + offset, new Vector2(48f, EditorGUIUtility.singleLineHeight));
-                                EditorGUI.LabelField(labelRect, "Invert X", flipped ? flippedLabelStyle : EditorStyles.label);
-                                offset += new Vector2(52f, 0f);
-                                var toggleXAxisRect = new Rect(rectPosition + offset, new Vector2(12f, EditorGUIUtility.singleLineHeight));
-                                invertXAxis.boolValue = EditorGUI.Toggle(toggleXAxisRect, invertXAxis.boolValue);
-                            }
-
-                            if (axisConstraint == AxisType.DualAxis)
-                            {
-                                offset += new Vector2(24f, 0f);
-                                labelRect = new Rect(rectPosition + offset, new Vector2(8f, EditorGUIUtility.singleLineHeight));
-                                EditorGUI.LabelField(labelRect, "Y", flipped ? flippedLabelStyle : EditorStyles.label);
-                                offset += new Vector2(12f, 0f);
-                                var toggleYAxisRect = new Rect(rectPosition + offset, new Vector2(12f, EditorGUIUtility.singleLineHeight));
-                                invertYAxis.boolValue = EditorGUI.Toggle(toggleYAxisRect, invertYAxis.boolValue);
-                            }
-                        }
-                        else
+                        if (editInputActionPositions)
                         {
                             offset = flipped
                                 ? InputActionLabelPosition + InputActionDropdownPosition + HorizontalSpace
                                 : InputActionFlipTogglePosition;
 
-                            var toggleRect = new Rect(rectPosition + offset, new Vector2(-InputActionFlipTogglePosition.x, EditorGUIUtility.singleLineHeight));
+                            var toggleRect = new Rect(rectPosition + offset,
+                                new Vector2(-InputActionFlipTogglePosition.x, EditorGUIUtility.singleLineHeight));
 
                             EditorGUI.BeginChangeCheck();
 
@@ -616,16 +482,21 @@ namespace XRTK.Inspectors
                             {
                                 switch (Event.current.type)
                                 {
-                                    case EventType.MouseDrag when labelRect.Contains(Event.current.mousePosition) && !isMouseInRects[i]:
+                                    case EventType.MouseDrag
+                                        when labelRect.Contains(Event.current.mousePosition) && !isMouseInRects[i]:
                                         isMouseInRects[i] = true;
-                                        mouseDragOffset = Event.current.mousePosition - currentControllerOption.InputLabelPositions[i];
+                                        mouseDragOffset =
+                                            Event.current.mousePosition -
+                                            currentControllerOption.InputLabelPositions[i];
                                         break;
                                     case EventType.Repaint when isMouseInRects[i]:
                                     case EventType.DragUpdated when isMouseInRects[i]:
-                                        currentControllerOption.InputLabelPositions[i] = Event.current.mousePosition - mouseDragOffset;
+                                        currentControllerOption.InputLabelPositions[i] =
+                                            Event.current.mousePosition - mouseDragOffset;
                                         break;
                                     case EventType.MouseUp when isMouseInRects[i]:
-                                        currentControllerOption.InputLabelPositions[i] = Event.current.mousePosition - mouseDragOffset;
+                                        currentControllerOption.InputLabelPositions[i] =
+                                            Event.current.mousePosition - mouseDragOffset;
                                         mouseDragOffset = Vector2.zero;
                                         isMouseInRects[i] = false;
                                         break;
@@ -646,31 +517,6 @@ namespace XRTK.Inspectors
 
             interactionProfilesList.serializedObject.ApplyModifiedProperties();
             GUILayout.EndVertical();
-        }
-
-        private static void RenderAxisPopup(SerializedProperty axisCode, float customLabelWidth)
-        {
-            int axisId = -1;
-
-            for (int i = 0; i < axisLabels.Length; i++)
-            {
-                if (axisLabels[i].text.Equals(axisCode.stringValue))
-                {
-                    axisId = i;
-                    break;
-                }
-            }
-
-            EditorGUI.BeginChangeCheck();
-            axisId = EditorGUILayout.IntPopup(GUIContent.none, axisId, axisLabels, null, GUILayout.Width(customLabelWidth));
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                axisCode.stringValue = axisId == 0
-                    ? string.Empty
-                    : axisLabels[axisId].text;
-                axisCode.serializedObject.ApplyModifiedProperties();
-            }
         }
     }
 }

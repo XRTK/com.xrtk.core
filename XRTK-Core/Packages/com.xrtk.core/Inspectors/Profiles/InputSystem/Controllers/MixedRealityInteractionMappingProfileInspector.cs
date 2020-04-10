@@ -70,6 +70,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             serializedObject.Update();
 
             EditorGUILayout.PropertyField(description);
+            EditorGUILayout.PropertyField(inputName);
             // EditorGUILayout.PropertyField(stateChangeType); TODO Implement
             EditorGUILayout.PropertyField(axisType);
             var currentAxisType = (AxisType)axisType.intValue;

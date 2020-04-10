@@ -39,16 +39,6 @@ namespace XRTK.Inspectors
         private static readonly GUIContent KeyCodeContent = new GUIContent("KeyCode", "Unity Input KeyCode id to listen for.");
         private static readonly GUIContent XAxisContent = new GUIContent("X Axis", "Horizontal Axis to listen for.");
         private static readonly GUIContent YAxisContent = new GUIContent("Y Axis", "Vertical Axis to listen for.");
-        private static readonly GUIContent InvertContent = new GUIContent("Invert", "Should an Axis be inverted?");
-        private static readonly GUIContent[] InvertAxisContent =
-        {
-            new GUIContent("None"),
-            new GUIContent("X"),
-            new GUIContent("Y"),
-            new GUIContent("Both")
-        };
-
-        private static readonly int[] InvertAxisValues = { 0, 1, 2, 3 };
 
         private static readonly Vector2 HorizontalSpace = new Vector2(8f, 0f);
         private static readonly Vector2 InputActionLabelPosition = new Vector2(256f, 0f);
@@ -340,13 +330,12 @@ namespace XRTK.Inspectors
 
             if (useCustomInteractionMapping)
             {
-                EditorGUILayout.LabelField("Id", GUILayout.Width(32f));
-                EditorGUIUtility.labelWidth = 24f;
-                EditorGUIUtility.fieldWidth = 24f;
                 EditorGUILayout.LabelField(ControllerInputTypeContent, GUILayout.Width(InputActionLabelWidth));
                 EditorGUILayout.LabelField(AxisTypeContent, GUILayout.Width(InputActionLabelWidth));
                 EditorGUILayout.LabelField(ActionContent, GUILayout.Width(InputActionLabelWidth));
                 EditorGUILayout.LabelField(KeyCodeContent, GUILayout.Width(InputActionLabelWidth));
+                EditorGUILayout.LabelField(XAxisContent, GUILayout.Width(InputActionLabelWidth));
+                EditorGUILayout.LabelField(YAxisContent, GUILayout.Width(InputActionLabelWidth));
                 GUILayout.FlexibleSpace();
                 EditorGUILayout.LabelField(string.Empty, GUILayout.Width(24f));
 
@@ -379,7 +368,6 @@ namespace XRTK.Inspectors
 
                 if (useCustomInteractionMapping)
                 {
-                    EditorGUILayout.LabelField($"{i}", GUILayout.Width(32f));
                     EditorGUILayout.PropertyField(inputType, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
                     EditorGUILayout.PropertyField(axisType, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
 
@@ -393,10 +381,29 @@ namespace XRTK.Inspectors
                     {
                         EditorGUILayout.LabelField(GUIContent.none, GUILayout.Width(InputActionLabelWidth));
                     }
+                    if (axisConstraint == AxisType.SingleAxis ||
+                        axisConstraint == AxisType.DualAxis)
+                    {
+                        var axisCodeX = interactionMappingProperty.FindPropertyRelative("axisCodeX");
+                        RenderAxisPopup(axisCodeX, InputActionLabelWidth);
+                    }
+                    else
+                    {
+                        EditorGUILayout.LabelField(GUIContent.none, GUILayout.Width(InputActionLabelWidth));
+                    }
 
-                    EditorGUILayout.LabelField(GUIContent.none, GUILayout.Width(InputActionLabelWidth));
+                    if (axisConstraint == AxisType.DualAxis)
+                    {
+                        var axisCodeY = interactionMappingProperty.FindPropertyRelative("axisCodeY");
+                        RenderAxisPopup(axisCodeY, InputActionLabelWidth);
+                    }
+                    else
+                    {
+                        EditorGUILayout.LabelField(GUIContent.none, GUILayout.Width(InputActionLabelWidth));
+                    }
 
-                    if (GUILayout.Button(InteractionMinusButtonContent, EditorStyles.miniButtonRight, GUILayout.ExpandWidth(true)))
+                    GUILayout.FlexibleSpace();
+                    if (GUILayout.Button(InteractionMinusButtonContent, EditorStyles.miniButtonRight, GUILayout.ExpandWidth(true), GUILayout.Width(24f)))
                     {
                         interactionProfilesList.DeleteArrayElementAtIndex(i);
                     }
@@ -512,6 +519,31 @@ namespace XRTK.Inspectors
 
             interactionProfilesList.serializedObject.ApplyModifiedProperties();
             GUILayout.EndVertical();
+        }
+
+        private static void RenderAxisPopup(SerializedProperty axisCode, float customLabelWidth)
+        {
+            int axisId = -1;
+
+            for (int i = 0; i < axisLabels.Length; i++)
+            {
+                if (axisLabels[i].text.Equals(axisCode.stringValue))
+                {
+                    axisId = i;
+                    break;
+                }
+            }
+
+            EditorGUI.BeginChangeCheck();
+            axisId = EditorGUILayout.IntPopup(GUIContent.none, axisId, axisLabels, null, GUILayout.Width(customLabelWidth));
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                axisCode.stringValue = axisId == 0
+                    ? string.Empty
+                    : axisLabels[axisId].text;
+                axisCode.serializedObject.ApplyModifiedProperties();
+            }
         }
     }
 }

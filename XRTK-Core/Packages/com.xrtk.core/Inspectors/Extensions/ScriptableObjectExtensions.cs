@@ -5,6 +5,7 @@ using System;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Utilities.Editor;
 
 namespace XRTK.Inspectors.Extensions
 {
@@ -64,6 +65,8 @@ namespace XRTK.Inspectors.Extensions
             {
                 Directory.CreateDirectory(Path.GetFullPath(path));
             }
+
+            path = path.Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty);
 
             string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath($"{path}/{name}.asset");
 

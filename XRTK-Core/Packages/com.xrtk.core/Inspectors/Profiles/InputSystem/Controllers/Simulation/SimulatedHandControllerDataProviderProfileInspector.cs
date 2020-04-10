@@ -82,7 +82,14 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
             rect.height = EditorGUIUtility.singleLineHeight;
             rect.y += 3;
             var poseDataProperty = poseDefinitions.GetArrayElementAtIndex(index);
-            poseDataProperty.objectReferenceValue = EditorGUI.ObjectField(rect, poseDataProperty.objectReferenceValue, typeof(SimulatedHandControllerPoseData), false);
+            var selectedPoseData = EditorGUI.ObjectField(rect, poseDataProperty.objectReferenceValue, typeof(SimulatedHandControllerPoseData), false) as SimulatedHandControllerPoseData;
+
+            if (selectedPoseData != null)
+            {
+                selectedPoseData.ParentProfile = ThisProfile;
+            }
+
+            poseDataProperty.objectReferenceValue = selectedPoseData;
         }
 
         private void OnConfigurationOptionAdded(ReorderableList list)

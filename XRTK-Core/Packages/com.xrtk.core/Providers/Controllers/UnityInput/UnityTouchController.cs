@@ -51,9 +51,9 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
         {
-            new MixedRealityInteractionMapping("Touch Pointer Delta", AxisType.DualAxis, DeviceInputType.PointerPosition, MixedRealityInputAction.None),
-            new MixedRealityInteractionMapping("Touch Pointer Position", AxisType.SixDof, DeviceInputType.SpatialPointer, MixedRealityInputAction.None),
-            new MixedRealityInteractionMapping("Touch Press", AxisType.Digital, DeviceInputType.PointerClick, MixedRealityInputAction.None),
+            new MixedRealityInteractionMapping("Touch Pointer Delta", AxisType.DualAxis, DeviceInputType.PointerPosition),
+            new MixedRealityInteractionMapping("Touch Pointer Position", AxisType.SixDof, DeviceInputType.SpatialPointer),
+            new MixedRealityInteractionMapping("Touch Press", AxisType.Digital, DeviceInputType.PointerClick),
         };
 
         private bool isTouched;

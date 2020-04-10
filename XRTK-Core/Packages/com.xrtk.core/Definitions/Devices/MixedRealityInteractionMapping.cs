@@ -55,20 +55,6 @@ namespace XRTK.Definitions.Devices
         /// The constructor for a new Interaction Mapping definition
         /// </summary>
         /// <param name="description">The description of the interaction mapping.</param>
-        /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
-        /// <param name="inputType">The physical input device / control type.</param>
-        /// <param name="keyCode">Optional KeyCode value to get input from Unity's old input system</param>
-        /// <param name="inputProcessors"></param>
-        public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType, KeyCode keyCode, List<InputProcessor> inputProcessors = null)
-            : this(description, axisType, inputType, inputProcessors)
-        {
-            this.keyCode = keyCode;
-        }
-
-        /// <summary>
-        /// The constructor for a new Interaction Mapping definition
-        /// </summary>
-        /// <param name="description">The description of the interaction mapping.</param>
         /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping.</param>
         /// <param name="inputName">Optional inputName value to get input for a coded input identity from a provider.</param>
         /// <param name="inputType">The physical input device / control type.</param>
@@ -101,18 +87,12 @@ namespace XRTK.Definitions.Devices
         /// <param name="description">The description of the interaction mapping.</param>
         /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
         /// <param name="inputType">The physical input device / control type.</param>
-        /// <param name="inputAction">The logical MixedRealityInputAction that this input performs</param>
         /// <param name="keyCode">Optional KeyCode value to get input from Unity's old input system</param>
-        /// <param name="axisCodeX">Optional horizontal or single axis value to get axis data from Unity's old input system.</param>
-        /// <param name="axisCodeY">Optional vertical axis value to get axis data from Unity's old input system.</param>
         /// <param name="inputProcessors"></param>
-        public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType, MixedRealityInputAction inputAction, KeyCode keyCode = KeyCode.None, string axisCodeX = "", string axisCodeY = "", List<InputProcessor> inputProcessors = null)
+        public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType, KeyCode keyCode, List<InputProcessor> inputProcessors = null)
             : this(description, axisType, inputType, inputProcessors)
         {
-            this.inputAction = inputAction;
             this.keyCode = keyCode;
-            this.axisCodeX = axisCodeX;
-            this.axisCodeY = axisCodeY;
         }
 
         /// <summary>
@@ -374,8 +354,6 @@ namespace XRTK.Definitions.Devices
                 }
 
                 var newValue = value;
-
-                Debug.Log(FloatInputProcessors.Count);
 
                 for (int i = 0; i < FloatInputProcessors.Count; i++)
                 {

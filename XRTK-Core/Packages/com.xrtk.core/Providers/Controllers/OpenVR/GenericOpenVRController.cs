@@ -46,8 +46,8 @@ namespace XRTK.Providers.Controllers.OpenVR
                 return new[]
                 {
                     // Controller Pose
-                    new MixedRealityInteractionMapping("Spatial Pointer", AxisType.SixDof, DeviceInputType.SpatialPointer, MixedRealityInputAction.None),
-                    new MixedRealityInteractionMapping("Spatial Grip", AxisType.SixDof, DeviceInputType.SpatialGrip, MixedRealityInputAction.None),
+                    new MixedRealityInteractionMapping("Spatial Pointer", AxisType.SixDof, DeviceInputType.SpatialPointer),
+                    new MixedRealityInteractionMapping("Spatial Grip", AxisType.SixDof, DeviceInputType.SpatialGrip),
                     // HTC Vive Controller - Left Controller Trigger (7) Squeeze
                     // Oculus Touch Controller - Axis1D.PrimaryIndexTrigger Squeeze
                     // Valve Knuckles Controller - Left Controller Trigger Squeeze
@@ -105,8 +105,8 @@ namespace XRTK.Providers.Controllers.OpenVR
                 return new[]
                 {
                     // Controller Pose
-                    new MixedRealityInteractionMapping("Spatial Pointer", AxisType.SixDof, DeviceInputType.SpatialPointer, MixedRealityInputAction.None),
-                    new MixedRealityInteractionMapping("Spatial Grip", AxisType.SixDof, DeviceInputType.SpatialGrip, MixedRealityInputAction.None),
+                    new MixedRealityInteractionMapping("Spatial Pointer", AxisType.SixDof, DeviceInputType.SpatialPointer),
+                    new MixedRealityInteractionMapping("Spatial Grip", AxisType.SixDof, DeviceInputType.SpatialGrip),
                     // HTC Vive Controller - Right Controller Trigger (7) Squeeze
                     // Oculus Touch Controller - Axis1D.SecondaryIndexTrigger Squeeze
                     // Valve Knuckles Controller - Right Controller Trigger Squeeze

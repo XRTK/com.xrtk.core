@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace XRTK.Definitions.Devices
 {
+    [CreateAssetMenu(fileName = "InvertSingleAxisProcessor", menuName = "Mixed Reality Toolkit/Input Processors/InvertSingleAxisProcessor", order = 0)]
     public class InvertSingleAxisProcessor : InputProcessor<float>
     {
         [SerializeField]

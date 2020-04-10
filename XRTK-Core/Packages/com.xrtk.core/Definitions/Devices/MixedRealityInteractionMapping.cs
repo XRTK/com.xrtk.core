@@ -173,7 +173,7 @@ namespace XRTK.Definitions.Devices
         public MixedRealityInputAction MixedRealityInputAction
         {
             get => inputAction;
-            internal set => inputAction = value;
+            set => inputAction = value;
         }
 
         [SerializeField]

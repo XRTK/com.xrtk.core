@@ -459,8 +459,7 @@ namespace XRTK.Inspectors
                                 ? InputActionLabelPosition + InputActionDropdownPosition + HorizontalSpace
                                 : InputActionFlipTogglePosition;
 
-                            var toggleRect = new Rect(rectPosition + offset,
-                                new Vector2(-InputActionFlipTogglePosition.x, EditorGUIUtility.singleLineHeight));
+                            var toggleRect = new Rect(rectPosition + offset, new Vector2(-InputActionFlipTogglePosition.x, EditorGUIUtility.singleLineHeight));
 
                             EditorGUI.BeginChangeCheck();
 
@@ -485,18 +484,14 @@ namespace XRTK.Inspectors
                                     case EventType.MouseDrag
                                         when labelRect.Contains(Event.current.mousePosition) && !isMouseInRects[i]:
                                         isMouseInRects[i] = true;
-                                        mouseDragOffset =
-                                            Event.current.mousePosition -
-                                            currentControllerOption.InputLabelPositions[i];
+                                        mouseDragOffset = Event.current.mousePosition - currentControllerOption.InputLabelPositions[i];
                                         break;
                                     case EventType.Repaint when isMouseInRects[i]:
                                     case EventType.DragUpdated when isMouseInRects[i]:
-                                        currentControllerOption.InputLabelPositions[i] =
-                                            Event.current.mousePosition - mouseDragOffset;
+                                        currentControllerOption.InputLabelPositions[i] = Event.current.mousePosition - mouseDragOffset;
                                         break;
                                     case EventType.MouseUp when isMouseInRects[i]:
-                                        currentControllerOption.InputLabelPositions[i] =
-                                            Event.current.mousePosition - mouseDragOffset;
+                                        currentControllerOption.InputLabelPositions[i] = Event.current.mousePosition - mouseDragOffset;
                                         mouseDragOffset = Vector2.zero;
                                         isMouseInRects[i] = false;
                                         break;

@@ -330,6 +330,7 @@ namespace XRTK.Inspectors
 
             if (useCustomInteractionMapping)
             {
+                EditorGUILayout.LabelField(new GUIContent("Profile"), GUILayout.Width(InputActionLabelWidth));
                 EditorGUILayout.LabelField(ControllerInputTypeContent, GUILayout.Width(InputActionLabelWidth));
                 EditorGUILayout.LabelField(AxisTypeContent, GUILayout.Width(InputActionLabelWidth));
                 EditorGUILayout.LabelField(ActionContent, GUILayout.Width(InputActionLabelWidth));
@@ -365,6 +366,9 @@ namespace XRTK.Inspectors
                 var axisConstraint = (AxisType)axisType.intValue;
 
                 EditorGUILayout.BeginHorizontal();
+
+                MixedRealityProfilePropertyDrawer.DrawCloneButtons = false;
+                EditorGUILayout.PropertyField(interactionProfileProperty, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
 
                 if (useCustomInteractionMapping)
                 {

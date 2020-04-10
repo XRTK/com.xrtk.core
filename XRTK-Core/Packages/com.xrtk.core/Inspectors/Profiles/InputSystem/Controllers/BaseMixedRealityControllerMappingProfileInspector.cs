@@ -59,8 +59,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             EditorGUILayout.PropertyField(visualizationProfile);
             EditorGUILayout.Space();
 
-            if (!useCustomInteractions.boolValue &&
-                GUILayout.Button(EditButtonContent))
+            if (GUILayout.Button(EditButtonContent))
             {
                 ControllerPopupWindow.Show(controllerMappingProfile, interactionMappingProfiles);
             }

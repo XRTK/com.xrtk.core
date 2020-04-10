@@ -17,12 +17,10 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
     [CustomEditor(typeof(MixedRealityInteractionMappingProfile))]
     public class MixedRealityInteractionMappingProfileInspector : BaseMixedRealityProfileInspector
     {
+        private readonly MixedRealityInputActionDropdown inputActionDropdown = new MixedRealityInputActionDropdown();
+
         private SerializedProperty interactionMapping;
         private SerializedProperty pointerProfiles;
-
-        private int selectedPointerIndex;
-
-        private ReorderableList profileList;
         private SerializedProperty description;
         private SerializedProperty stateChangeType;
         private SerializedProperty axisType;
@@ -33,6 +31,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
         private SerializedProperty axisCodeX;
         private SerializedProperty axisCodeY;
         private SerializedProperty inputProcessors;
+
+        private ReorderableList profileList;
+        private int selectedPointerIndex;
 
         protected override void OnEnable()
         {
@@ -71,9 +72,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             EditorGUILayout.PropertyField(description);
             // EditorGUILayout.PropertyField(stateChangeType); TODO Implement
             EditorGUILayout.PropertyField(axisType);
-            EditorGUILayout.PropertyField(inputAction);
-
             var currentAxisType = (AxisType)axisType.intValue;
+            inputActionDropdown.OnGui(new GUIContent(inputAction.displayName, inputAction.tooltip), inputAction, currentAxisType);
 
             switch (currentAxisType)
             {

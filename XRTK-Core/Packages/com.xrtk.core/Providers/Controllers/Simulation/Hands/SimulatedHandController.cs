@@ -137,7 +137,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         }
 
         /// <inheritdoc />
-        public override MixedRealityInteractionMapping[] DefaultInteractions => new[]
+        public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
         {
             new MixedRealityInteractionMapping("Yaw Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.E),
             new MixedRealityInteractionMapping("Yaw Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Q),
@@ -148,6 +148,22 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             new MixedRealityInteractionMapping("Move Away (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.PageUp),
             new MixedRealityInteractionMapping("Move Closer (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.PageDown)
         };
+
+        /// <summary>
+        /// The Default Left Handed interactions for this controller.
+        /// </summary>
+        public override MixedRealityInteractionMapping[] DefaultLeftHandedInteractions => DefaultInteractions;
+
+        /// <summary>
+        /// The Default Right Handed interactions for this controller.
+        /// </summary>
+        public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
+
+        /// <inheritdoc />
+        public override void SetupDefaultInteractions(Handedness controllerHandedness)
+        {
+            AssignControllerMappings(DefaultInteractions);
+        }
 
         /// <summary>
         /// Gets the hands position in screen space.

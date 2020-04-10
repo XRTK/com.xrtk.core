@@ -42,13 +42,6 @@ namespace XRTK.Definitions.Devices
             poseData = MixedRealityPose.ZeroIdentity;
             updated = false;
             activated = false;
-
-            BoolInputProcessors = GetInputProcessorForType<bool>();
-            FloatInputProcessors = GetInputProcessorForType<float>();
-            Vector2InputProcessors = GetInputProcessorForType<Vector2>();
-            Vector3InputProcessors = GetInputProcessorForType<Vector3>();
-            QuaternionInputProcessors = GetInputProcessorForType<Quaternion>();
-            PoseInputProcessors = GetInputProcessorForType<MixedRealityPose>();
         }
 
         public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType, List<InputProcessor> inputProcessors = null)
@@ -148,13 +141,6 @@ namespace XRTK.Definitions.Devices
             poseData = MixedRealityPose.ZeroIdentity;
             activated = false;
             updated = false;
-
-            BoolInputProcessors = GetInputProcessorForType<bool>();
-            FloatInputProcessors = GetInputProcessorForType<float>();
-            Vector2InputProcessors = GetInputProcessorForType<Vector2>();
-            Vector3InputProcessors = GetInputProcessorForType<Vector3>();
-            QuaternionInputProcessors = GetInputProcessorForType<Quaternion>();
-            PoseInputProcessors = GetInputProcessorForType<MixedRealityPose>();
         }
 
         #endregion Constructors
@@ -367,7 +353,9 @@ namespace XRTK.Definitions.Devices
             }
         }
 
-        private IReadOnlyList<InputProcessor<bool>> BoolInputProcessors { get; }
+        private IReadOnlyList<InputProcessor<bool>> boolInputProcessors;
+
+        private IReadOnlyList<InputProcessor<bool>> BoolInputProcessors => boolInputProcessors ?? (boolInputProcessors = GetInputProcessorForType<bool>());
 
         /// <summary>
         /// The Float data value.
@@ -387,6 +375,8 @@ namespace XRTK.Definitions.Devices
 
                 var newValue = value;
 
+                Debug.Log(FloatInputProcessors.Count);
+
                 for (int i = 0; i < FloatInputProcessors.Count; i++)
                 {
                     FloatInputProcessors[i].Process(ref newValue);
@@ -397,7 +387,9 @@ namespace XRTK.Definitions.Devices
             }
         }
 
-        private IReadOnlyList<InputProcessor<float>> FloatInputProcessors { get; }
+        private IReadOnlyList<InputProcessor<float>> floatInputProcessors;
+
+        private IReadOnlyList<InputProcessor<float>> FloatInputProcessors => floatInputProcessors ?? (floatInputProcessors = GetInputProcessorForType<float>());
 
         /// <summary>
         /// The Vector2 data value.
@@ -426,7 +418,9 @@ namespace XRTK.Definitions.Devices
             }
         }
 
-        private IReadOnlyList<InputProcessor<Vector2>> Vector2InputProcessors { get; }
+        private IReadOnlyList<InputProcessor<Vector2>> vector2InputProcessors;
+
+        private IReadOnlyList<InputProcessor<Vector2>> Vector2InputProcessors => vector2InputProcessors ?? (vector2InputProcessors = GetInputProcessorForType<Vector2>());
 
         /// <summary>
         /// The ThreeDof Vector3 Position data value.
@@ -455,7 +449,9 @@ namespace XRTK.Definitions.Devices
             }
         }
 
-        private IReadOnlyList<InputProcessor<Vector3>> Vector3InputProcessors { get; }
+        private IReadOnlyList<InputProcessor<Vector3>> vector3InputProcessors;
+
+        private IReadOnlyList<InputProcessor<Vector3>> Vector3InputProcessors => vector3InputProcessors ?? (vector3InputProcessors = GetInputProcessorForType<Vector3>());
 
         /// <summary>
         /// The ThreeDof Quaternion Rotation data value.
@@ -484,7 +480,9 @@ namespace XRTK.Definitions.Devices
             }
         }
 
-        private IReadOnlyList<InputProcessor<Quaternion>> QuaternionInputProcessors { get; }
+        private IReadOnlyList<InputProcessor<Quaternion>> quaternionInputProcessors;
+
+        private IReadOnlyList<InputProcessor<Quaternion>> QuaternionInputProcessors => quaternionInputProcessors ?? (quaternionInputProcessors = GetInputProcessorForType<Quaternion>());
 
         /// <summary>
         /// The Pose data value.
@@ -514,7 +512,9 @@ namespace XRTK.Definitions.Devices
             }
         }
 
-        private IReadOnlyList<InputProcessor<MixedRealityPose>> PoseInputProcessors { get; }
+        private IReadOnlyList<InputProcessor<MixedRealityPose>> poseInputProcessors;
+
+        private IReadOnlyList<InputProcessor<MixedRealityPose>> PoseInputProcessors => poseInputProcessors ?? (poseInputProcessors = GetInputProcessorForType<MixedRealityPose>());
 
         #endregion Data Properties
 

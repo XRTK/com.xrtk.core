@@ -176,35 +176,19 @@ namespace XRTK.Providers.Controllers
         }
 
         /// <inheritdoc />
-        public async void TryRenderControllerModel(Type controllerType, byte[] glbData = null) => await TryRenderControllerModelAsync(controllerType, glbData);
+        public async void TryRenderControllerModel(byte[] glbData = null, bool useAlternatePoseAction = false) => await TryRenderControllerModelAsync(glbData, useAlternatePoseAction);
 
         /// <summary>
         /// Attempts to load the controller model render settings from the <see cref="MixedRealityControllerVisualizationProfile"/>
         /// to render the controllers in the scene.
         /// </summary>
-        /// <param name="controllerType">The controller type.</param>
-        /// <param name="useAlternatePoseAction">Should the visualizer be assigned the alternate pose actions?</param>
-        /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
-        internal async void TryRenderControllerModel(Type controllerType, bool useAlternatePoseAction, byte[] glbData = null) => await TryRenderControllerModelAsync(controllerType, glbData, useAlternatePoseAction);
-
-        /// <summary>
-        /// Attempts to load the controller model render settings from the <see cref="MixedRealityControllerVisualizationProfile"/>
-        /// to render the controllers in the scene.
-        /// </summary>
-        /// <param name="controllerType">The controller type.</param>
         /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
         /// <param name="useAlternatePoseAction">Should the visualizer be assigned the alternate pose actions?</param>
-        internal async Task TryRenderControllerModelAsync(Type controllerType, byte[] glbData = null, bool useAlternatePoseAction = false)
+        public async Task TryRenderControllerModelAsync(byte[] glbData = null, bool useAlternatePoseAction = false)
         {
-            if (controllerType == null)
-            {
-                Debug.LogError("Unknown type of controller, cannot render");
-                return;
-            }
-
             if (visualizationProfile == null)
             {
-                Debug.LogError($"Missing {nameof(visualizationProfile)}!");
+                Debug.LogWarning($"Missing {nameof(visualizationProfile)} for {GetType().Name}");
                 return;
             }
 
@@ -240,7 +224,7 @@ namespace XRTK.Providers.Controllers
                 //If the model was loaded from a system template
                 if (gltfObject != null)
                 {
-                    controllerModel.name = $"{controllerType.Name}_Visualization";
+                    controllerModel.name = $"{GetType().Name}_Visualization";
                     controllerModel.transform.SetParent(MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
                     var visualizationType = visualizationProfile.ControllerVisualizationType;
                     controllerModel.AddComponent(visualizationType.Type);
@@ -251,7 +235,7 @@ namespace XRTK.Providers.Controllers
                 {
                     var controllerObject = Object.Instantiate(controllerModel, MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform) as GameObject;
                     Debug.Assert(controllerObject != null);
-                    controllerObject.name = $"{controllerType.Name}_Visualization";
+                    controllerObject.name = $"{GetType().Name}_Visualization";
                     Visualizer = controllerObject.GetComponent<IMixedRealityControllerVisualizer>();
                 }
 
@@ -263,7 +247,7 @@ namespace XRTK.Providers.Controllers
                 }
                 else
                 {
-                    Debug.LogWarning($"Failed to attach a valid {nameof(IMixedRealityControllerVisualizer)} to {controllerType.Name}");
+                    Debug.LogWarning($"Failed to attach a valid {nameof(IMixedRealityControllerVisualizer)} to {GetType().Name}");
                 }
             }
 

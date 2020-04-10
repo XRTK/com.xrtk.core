@@ -71,7 +71,7 @@ namespace XRTK.Providers.Controllers.OpenVR
                 return null;
             }
 
-            detectedController.TryRenderControllerModel(controllerType);
+            detectedController.TryRenderControllerModel();
 
             ActiveGenericControllers.Add(joystickName, detectedController);
             AddController(detectedController);

@@ -8,7 +8,7 @@ namespace XRTK.Definitions.Devices
     /// <summary>
     ///  An operation that the device applies to an input value. For example, an "invert" Processor inverts a floating-point value.
     /// </summary>
-    public class InputProcessor : ScriptableObject { }
+    public class InputProcessor : BaseMixedRealityProfile { }
 
     /// <inheritdoc />
     /// <typeparam name="T"></typeparam>

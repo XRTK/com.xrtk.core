@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.IO;
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
@@ -44,6 +45,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                 Debug.Assert(defaultControllerMappingProfiles != null, $"Missing default controller definitions for {dataProviderProfile.name}");
 
                 var profileRootPath = AssetDatabase.GetAssetPath(dataProviderProfile);
+                profileRootPath = $"{Directory.GetParent(Directory.GetParent(profileRootPath).FullName).FullName}/DataProviders";
 
                 controllerMappingProfiles.ClearArray();
 
@@ -97,6 +99,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                         void CreateDefaultMappingProfiles(MixedRealityInteractionMapping[] defaultMappings)
                         {
                             var mappingProfileRootPath = AssetDatabase.GetAssetPath(controllerMappingAsset);
+                            mappingProfileRootPath = mappingProfileRootPath.Replace("DataProviderProfile", string.Empty);
 
                             for (int j = 0; j < defaultMappings.Length; j++)
                             {

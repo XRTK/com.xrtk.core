@@ -80,6 +80,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
             position.height = EditorGUIUtility.singleLineHeight;
             position.y += 3;
+            position.xMin += 8;
             var mappingProfileProperty = interactionMappingProfiles.GetArrayElementAtIndex(index);
             MixedRealityProfilePropertyDrawer.ProfileTypeOverride = typeof(MixedRealityInteractionMappingProfile);
             EditorGUI.PropertyField(position, mappingProfileProperty, GUIContent.none);

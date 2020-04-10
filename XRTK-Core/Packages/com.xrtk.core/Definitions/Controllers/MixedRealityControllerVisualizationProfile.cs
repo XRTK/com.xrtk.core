@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
@@ -38,22 +39,15 @@ namespace XRTK.Definitions.Controllers
             private set => useDefaultModels = value;
         }
 
+        [Prefab]
         [SerializeField]
-        private GameObject leftHandModel = null;
+        [FormerlySerializedAs("leftHandModel")]
+        private GameObject model = null;
 
         public GameObject LeftHandModel
         {
-            get => leftHandModel;
-            private set => leftHandModel = value;
-        }
-
-        [SerializeField]
-        private GameObject rightHandModel = null;
-
-        public GameObject RightHandModel
-        {
-            get => rightHandModel;
-            private set => rightHandModel = value;
+            get => model;
+            private set => model = value;
         }
 
         [SerializeField]

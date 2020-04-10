@@ -4,6 +4,8 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Utilities;
+using XRTK.Inspectors.PropertyDrawers;
 using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
@@ -13,12 +15,14 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
     {
         private SerializedProperty controllerVisualizationType;
         private SerializedProperty useDefaultModels;
-        private SerializedProperty leftHandModel;
-        private SerializedProperty rightHandModel;
+        private SerializedProperty model;
         private SerializedProperty pointerPose;
+        private SerializedProperty alternatePointerPose;
         private SerializedProperty controllerVisualizationSettings;
 
         private MixedRealityControllerVisualizationProfile controllerVisualizationProfile;
+
+        private readonly MixedRealityInputActionDropdown inputActionDropdown = new MixedRealityInputActionDropdown();
 
         private float defaultLabelWidth;
 
@@ -32,9 +36,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
             controllerVisualizationType = serializedObject.FindProperty(nameof(controllerVisualizationType));
             useDefaultModels = serializedObject.FindProperty(nameof(useDefaultModels));
-            leftHandModel = serializedObject.FindProperty(nameof(leftHandModel));
-            rightHandModel = serializedObject.FindProperty(nameof(rightHandModel));
+            model = serializedObject.FindProperty(nameof(model));
             pointerPose = serializedObject.FindProperty(nameof(pointerPose));
+            alternatePointerPose = serializedObject.FindProperty(nameof(alternatePointerPose));
             controllerVisualizationSettings = serializedObject.FindProperty(nameof(controllerVisualizationSettings));
         }
 
@@ -46,8 +50,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
             EditorGUIUtility.labelWidth = 168f;
 
-            var leftHandModelPrefab = leftHandModel.objectReferenceValue as GameObject;
-            var rightHandModelPrefab = rightHandModel.objectReferenceValue as GameObject;
+            var leftHandModelPrefab = model.objectReferenceValue as GameObject;
 
             EditorGUILayout.PropertyField(controllerVisualizationType);
 
@@ -59,28 +62,21 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
             EditorGUILayout.PropertyField(useDefaultModels);
 
-            if (useDefaultModels.boolValue && (leftHandModelPrefab != null || rightHandModelPrefab != null))
+            if (useDefaultModels.boolValue && leftHandModelPrefab != null)
             {
                 EditorGUILayout.HelpBox("When default models are used, the global left and right hand models will only be used if the default models cannot be loaded from the driver.", MessageType.Warning);
             }
 
             EditorGUI.BeginChangeCheck();
-            leftHandModelPrefab = EditorGUILayout.ObjectField(new GUIContent(leftHandModel.displayName, "Note: If the default model is not found, the fallback is the global left hand model."), leftHandModelPrefab, typeof(GameObject), false) as GameObject;
+            leftHandModelPrefab = EditorGUILayout.ObjectField(new GUIContent(model.displayName, "Note: If the default model is not found, the fallback is the global left hand model."), leftHandModelPrefab, typeof(GameObject), false) as GameObject;
 
             if (EditorGUI.EndChangeCheck() && CheckVisualizer(leftHandModelPrefab))
             {
-                leftHandModel.objectReferenceValue = leftHandModelPrefab;
+                model.objectReferenceValue = leftHandModelPrefab;
             }
 
-            EditorGUI.BeginChangeCheck();
-            rightHandModelPrefab = EditorGUILayout.ObjectField(new GUIContent(rightHandModel.displayName, "Note: If the default model is not found, the fallback is the global right hand model."), rightHandModelPrefab, typeof(GameObject), false) as GameObject;
-
-            if (EditorGUI.EndChangeCheck() && CheckVisualizer(rightHandModelPrefab))
-            {
-                rightHandModel.objectReferenceValue = rightHandModelPrefab;
-            }
-
-            EditorGUILayout.PropertyField(pointerPose);
+            inputActionDropdown.OnGui(new GUIContent(pointerPose.displayName, pointerPose.tooltip), pointerPose, AxisType.SixDof);
+            inputActionDropdown.OnGui(new GUIContent(alternatePointerPose.displayName, alternatePointerPose.tooltip), alternatePointerPose, AxisType.SixDof);
 
             EditorGUIUtility.labelWidth = defaultLabelWidth;
 

@@ -367,11 +367,10 @@ namespace XRTK.Inspectors
 
                 EditorGUILayout.BeginHorizontal();
 
-                MixedRealityProfilePropertyDrawer.DrawCloneButtons = false;
-                EditorGUILayout.PropertyField(interactionProfileProperty, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
-
                 if (useCustomInteractionMapping)
                 {
+                    MixedRealityProfilePropertyDrawer.DrawCloneButtons = false;
+                    EditorGUILayout.PropertyField(interactionProfileProperty, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
                     EditorGUILayout.PropertyField(inputType, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
                     EditorGUILayout.PropertyField(axisType, GUIContent.none, GUILayout.Width(InputActionLabelWidth));
 
@@ -453,6 +452,11 @@ namespace XRTK.Inspectors
                         var rectPosition = currentControllerOption.InputLabelPositions[i];
                         var rectSize = InputActionLabelPosition + InputActionDropdownPosition + new Vector2(flipped ? 0f : 8f, EditorGUIUtility.singleLineHeight);
 
+                        if (rectPosition == Vector2.zero)
+                        {
+                            rectPosition.y += (i + 1) * (EditorGUIUtility.singleLineHeight + 2);
+                        }
+
                         GUI.Box(new Rect(rectPosition, rectSize), GUIContent.none, EditorGUIUtility.isProSkin ? "ObjectPickerBackground" : "ObjectPickerResultsEven");
 
                         var offset = flipped ? InputActionLabelPosition : Vector2.zero;
@@ -495,7 +499,7 @@ namespace XRTK.Inspectors
                                     case EventType.MouseDrag
                                         when labelRect.Contains(Event.current.mousePosition) && !isMouseInRects[i]:
                                         isMouseInRects[i] = true;
-                                        mouseDragOffset = Event.current.mousePosition - currentControllerOption.InputLabelPositions[i];
+                                        mouseDragOffset = Event.current.mousePosition - rectPosition;
                                         break;
                                     case EventType.Repaint when isMouseInRects[i]:
                                     case EventType.DragUpdated when isMouseInRects[i]:

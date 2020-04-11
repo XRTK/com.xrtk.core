@@ -2,9 +2,8 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using XRTK.Definitions.Controllers.Hands;
-using XRTK.Interfaces.Providers.Controllers;
 
-namespace XRTK.Interfaces.InputSystem.Controllers.Hands
+namespace XRTK.Interfaces.Providers.Controllers.Hands
 {
     public interface IMixedRealityHandControllerDataProvider : IMixedRealityControllerDataProvider
     {

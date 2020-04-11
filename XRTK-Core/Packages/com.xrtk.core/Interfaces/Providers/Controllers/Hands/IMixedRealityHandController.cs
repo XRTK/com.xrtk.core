@@ -5,7 +5,7 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
 
-namespace XRTK.Interfaces.Providers.Controllers
+namespace XRTK.Interfaces.Providers.Controllers.Hands
 {
     /// <summary>
     /// Controller definition, used to manage a hand controller.

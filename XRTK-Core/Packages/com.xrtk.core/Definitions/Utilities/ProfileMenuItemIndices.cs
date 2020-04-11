@@ -9,15 +9,13 @@ namespace XRTK.Definitions.Utilities
     public enum CreateProfileMenuItemIndices
     {
         Configuration = 0,
-        Platform,
         Camera,
         Input,
         Pointer,
         InputActions,
-        InputActionRules,
         Gestures,
         SpeechCommands,
-        ControllerDataProviders,
+        InputDataProviders,
         ControllerMappings,
         ControllerVisualization,
         HandTracking,

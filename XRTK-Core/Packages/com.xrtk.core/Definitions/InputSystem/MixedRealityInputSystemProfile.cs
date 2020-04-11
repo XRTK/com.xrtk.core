@@ -2,11 +2,13 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Interfaces.Providers;
+using XRTK.Interfaces.Providers.Speech;
 using XRTK.Services;
 
 namespace XRTK.Definitions.InputSystem
@@ -94,16 +96,17 @@ namespace XRTK.Definitions.InputSystem
         public bool IsDictationEnabled => MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled && DictationDataProvider != null;
 
         [SerializeField]
+        [FormerlySerializedAs("controllerDataProvidersProfile")]
         [Tooltip("Device profile for registering platform specific input data sources.")]
-        private MixedRealityControllerDataProvidersProfile controllerDataProvidersProfile;
+        private MixedRealityInputDataProvidersProfile inputDataProvidersProfile;
 
         /// <summary>
         /// Active profile for controller mapping configuration
         /// </summary>
-        public MixedRealityControllerDataProvidersProfile ControllerDataProvidersProfile
+        public MixedRealityInputDataProvidersProfile InputDataProvidersProfile
         {
-            get => controllerDataProvidersProfile;
-            internal set => controllerDataProvidersProfile = value;
+            get => inputDataProvidersProfile;
+            internal set => inputDataProvidersProfile = value;
         }
 
         [SerializeField]

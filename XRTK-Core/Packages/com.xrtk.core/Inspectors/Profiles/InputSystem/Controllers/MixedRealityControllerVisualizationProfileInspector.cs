@@ -6,7 +6,7 @@ using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.PropertyDrawers;
-using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Interfaces.InputSystem.Handlers;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 {

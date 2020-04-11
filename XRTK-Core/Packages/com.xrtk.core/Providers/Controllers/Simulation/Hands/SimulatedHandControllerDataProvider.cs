@@ -8,8 +8,8 @@ using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem.Controllers.Hands;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Simulation.Hands

@@ -6,6 +6,7 @@ using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.InputSystem.Handlers;
 
 namespace XRTK.Interfaces.Providers.Controllers
 {
@@ -40,7 +41,7 @@ namespace XRTK.Interfaces.Providers.Controllers
         IMixedRealityInputSource InputSource { get; }
 
         /// <summary>
-        /// The controller's "Visual" <see cref="UnityEngine.Component"/> in the scene.
+        /// The controller's "Visual" <see cref="Component"/> in the scene.
         /// </summary>
         IMixedRealityControllerVisualizer Visualizer { get; }
 

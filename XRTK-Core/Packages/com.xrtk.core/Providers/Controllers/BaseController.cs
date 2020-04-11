@@ -133,12 +133,6 @@ namespace XRTK.Providers.Controllers
         public virtual void UpdateController() { }
 
         /// <summary>
-        /// Assign the default interactions based on controller handedness if necessary.
-        /// </summary>
-        /// <param name="controllerHandedness">The handedness of the controller.</param>
-        public abstract void SetupDefaultInteractions(Handedness controllerHandedness);
-
-        /// <summary>
         /// Load the Interaction mappings for this controller from the configured Controller Mapping profile
         /// </summary>
         protected void AssignControllerMappings(MixedRealityInteractionMapping[] mappings) => Interactions = mappings;

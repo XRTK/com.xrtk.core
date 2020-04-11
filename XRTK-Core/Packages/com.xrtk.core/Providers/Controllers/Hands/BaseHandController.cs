@@ -7,7 +7,6 @@ using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;
@@ -391,9 +390,6 @@ namespace XRTK.Providers.Controllers.Hands
             newBounds = null;
             return false;
         }
-
-        /// <inheritdoc />
-        public override void SetupDefaultInteractions(Handedness controllerHandedness) { }
 
         /// <inheritdoc />
         public virtual bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose) => jointPoses.TryGetValue(joint, out pose);

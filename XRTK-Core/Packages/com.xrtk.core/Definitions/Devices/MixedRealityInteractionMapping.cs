@@ -143,7 +143,7 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// Influences how the Interaction determines state changes that will raise the <see cref="MixedRealityInputAction"/>.
         /// </summary>
-        public StateChangeType StateChangeType => stateChangeType;
+        //public StateChangeType StateChangeType => stateChangeType;
 
         [SerializeField]
         [Tooltip("The axis type of the button, e.g. Analogue, Digital, etc.")]

@@ -1,13 +1,12 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using System.Collections.Generic;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem.Controllers.Hands;
+using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.Simulation.Hands

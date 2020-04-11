@@ -3,7 +3,7 @@
 
 using UnityEngine;
 
-namespace XRTK.Interfaces.Providers.Controllers
+namespace XRTK.Interfaces.InputSystem.Handlers
 {
     public interface IMixedRealityControllerVisualizer : IMixedRealityControllerPoseSynchronizer
     {

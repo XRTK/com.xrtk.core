@@ -14,10 +14,19 @@ namespace XRTK.Definitions.InputSystem
     [Serializable]
     public struct MixedRealityInputAction : IEqualityComparer
     {
-        private MixedRealityInputAction(string description = "None")
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="description"></param>
+        private MixedRealityInputAction(string description)
         {
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                throw new ArgumentException($"{nameof(description)} cannot be empty");
+            }
+
             this.cachedGuid = default;
-            this.profileGuid = cachedGuid.ToString("N");
+            this.profileGuid = DefaultGuidString;
             this.id = 0;
             this.description = description;
             this.axisConstraint = AxisType.None;
@@ -36,15 +45,7 @@ namespace XRTK.Definitions.InputSystem
                 throw new ArgumentException($"{nameof(id)} cannot be 0");
             }
 
-            if (string.IsNullOrWhiteSpace(description))
-            {
-                throw new ArgumentException($"{nameof(description)} cannot be empty");
-            }
-
-            this.cachedGuid = default;
-            this.profileGuid = cachedGuid.ToString("N");
             this.id = id;
-            this.description = description;
             this.axisConstraint = axisConstraint;
         }
 
@@ -56,22 +57,10 @@ namespace XRTK.Definitions.InputSystem
         /// <param name="description"></param>
         /// <param name="axisConstraint"></param>
         public MixedRealityInputAction(Guid profileGuid, uint id, string description, AxisType axisConstraint = AxisType.None)
+            : this(id, description, axisConstraint)
         {
-            if (id == 0 && description != "None")
-            {
-                throw new ArgumentException($"{nameof(id)} cannot be 0");
-            }
-
-            if (string.IsNullOrWhiteSpace(description))
-            {
-                throw new ArgumentException($"{nameof(description)} cannot be empty");
-            }
-
             this.cachedGuid = profileGuid;
             this.profileGuid = profileGuid.ToString("N");
-            this.id = id;
-            this.description = description;
-            this.axisConstraint = axisConstraint;
         }
 
         /// <summary>
@@ -161,7 +150,7 @@ namespace XRTK.Definitions.InputSystem
         /// </summary>
         public bool Equals(MixedRealityInputAction other)
         {
-            // Backwards compatibility for actions that haven't been re-serialized.
+            // TODO remove backwards compatibility for actions that haven't been re-serialized.
             if (ProfileGuid == default && Id != 0 ||
                 other.ProfileGuid == default && other.Id != 0)
             {

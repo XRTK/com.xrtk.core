@@ -123,7 +123,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                                 var inputProcessorsProperty = interactionMappingProperty.FindPropertyRelative("inputProcessors");
 
                                 descriptionProperty.stringValue = mapping.Description;
-                                stateChangeTypeProperty.intValue = (int)mapping.StateChangeType;
+                                //stateChangeTypeProperty.intValue = (int)mapping.StateChangeType;
                                 inputNameProperty.stringValue = mapping.InputName;
                                 axisTypeProperty.intValue = (int)mapping.AxisType;
                                 inputTypeProperty.intValue = (int)mapping.InputType;

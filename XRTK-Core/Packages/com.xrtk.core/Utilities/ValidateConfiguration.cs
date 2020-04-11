@@ -3,13 +3,16 @@
 
 using System;
 using System.Text;
-using UnityEditor;
-using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.Controllers;
-using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Services;
+
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEngine;
+using XRTK.Extensions;
+#endif
 
 namespace XRTK.Utilities
 {

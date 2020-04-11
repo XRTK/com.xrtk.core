@@ -2,14 +2,10 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Interfaces.Providers;
-using XRTK.Interfaces.Providers.Speech;
-using XRTK.Services;
 
 namespace XRTK.Definitions.InputSystem
 {

@@ -5,9 +5,9 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem.Handlers;
+using XRTK.Interfaces.Providers.Controllers;
 
-namespace XRTK.Interfaces.Providers.Controllers
+namespace XRTK.Interfaces.InputSystem.Handlers
 {
     /// <summary>
     /// Basic interface for synchronizing to a controller pose.

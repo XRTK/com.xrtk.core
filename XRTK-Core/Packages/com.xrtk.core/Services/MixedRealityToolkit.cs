@@ -1811,10 +1811,7 @@ namespace XRTK.Services
                     instance.activeProfile == null ||
                     instance.activeProfile != null && !instance.activeProfile.IsCameraSystemEnabled)
                 {
-                    if (!isResetting && isInitializing)
-                    {
-                        return null;
-                    }
+                    return null;
                 }
 
                 if (cameraSystem != null)

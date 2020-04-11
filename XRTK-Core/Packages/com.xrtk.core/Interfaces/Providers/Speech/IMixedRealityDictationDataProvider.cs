@@ -4,12 +4,12 @@
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace XRTK.Interfaces.Providers.Controllers
+namespace XRTK.Interfaces.Providers.Speech
 {
     /// <summary>
     /// Mixed Reality Toolkit controller definition, used to manage a specific controller type
     /// </summary>
-    public interface IMixedRealityDictationDataProvider : IMixedRealityControllerDataProvider
+    public interface IMixedRealityDictationDataProvider : IMixedRealityInputDataProvider
     {
         /// <summary>
         /// Is the system currently listing to dictation input?

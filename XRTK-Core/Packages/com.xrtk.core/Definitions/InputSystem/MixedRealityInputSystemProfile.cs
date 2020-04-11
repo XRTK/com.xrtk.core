@@ -6,7 +6,8 @@ using XRTK.Attributes;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Interfaces.Providers;
+using XRTK.Interfaces.Providers.Speech;
 using XRTK.Services;
 
 namespace XRTK.Definitions.InputSystem
@@ -95,12 +96,12 @@ namespace XRTK.Definitions.InputSystem
 
         [SerializeField]
         [Tooltip("Device profile for registering platform specific input data sources.")]
-        private MixedRealityControllerDataProvidersProfile controllerDataProvidersProfile;
+        private MixedRealityInputDataProvidersProfile controllerDataProvidersProfile;
 
         /// <summary>
         /// Active profile for controller mapping configuration
         /// </summary>
-        public MixedRealityControllerDataProvidersProfile ControllerDataProvidersProfile
+        public MixedRealityInputDataProvidersProfile ControllerDataProvidersProfile
         {
             get => controllerDataProvidersProfile;
             internal set => controllerDataProvidersProfile = value;

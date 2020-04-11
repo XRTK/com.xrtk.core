@@ -1846,10 +1846,7 @@ namespace XRTK.Services
                     instance.activeProfile == null ||
                     instance.activeProfile != null && !instance.activeProfile.IsInputSystemEnabled)
                 {
-                    if (!isResetting && isInitializing)
-                    {
-                        return null;
-                    }
+                    return null;
                 }
 
                 if (inputSystem != null)
@@ -1881,10 +1878,7 @@ namespace XRTK.Services
                     instance.activeProfile == null ||
                     instance.activeProfile != null && !instance.activeProfile.IsBoundarySystemEnabled)
                 {
-                    if (!isResetting && isInitializing)
-                    {
-                        return null;
-                    }
+                    return null;
                 }
 
                 if (boundarySystem != null)
@@ -1916,10 +1910,7 @@ namespace XRTK.Services
                     instance.activeProfile == null ||
                     instance.activeProfile != null && !instance.activeProfile.IsSpatialAwarenessSystemEnabled)
                 {
-                    if (!isResetting && isInitializing)
-                    {
-                        return null;
-                    }
+                    return null;
                 }
 
                 if (spatialAwarenessSystem != null)
@@ -1951,10 +1942,7 @@ namespace XRTK.Services
                     instance.activeProfile == null ||
                     instance.activeProfile != null && !instance.activeProfile.IsTeleportSystemEnabled)
                 {
-                    if (!isResetting && isInitializing)
-                    {
-                        return null;
-                    }
+                    return null;
                 }
 
                 if (teleportSystem != null)
@@ -1986,10 +1974,7 @@ namespace XRTK.Services
                     instance.activeProfile == null ||
                     instance.activeProfile != null && !instance.activeProfile.IsNetworkingSystemEnabled)
                 {
-                    if (!isResetting && isInitializing)
-                    {
-                        return null;
-                    }
+                    return null;
                 }
 
                 if (networkingSystem != null)
@@ -2021,10 +2006,7 @@ namespace XRTK.Services
                     instance.activeProfile == null ||
                     instance.activeProfile != null && !instance.activeProfile.IsDiagnosticsSystemEnabled)
                 {
-                    if (!isResetting && isInitializing)
-                    {
-                        return null;
-                    }
+                    return null;
                 }
 
                 if (diagnosticsSystem != null)

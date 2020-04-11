@@ -234,7 +234,7 @@ namespace XRTK.Providers.CameraSystem
         {
             base.Disable();
 
-            if (CameraRig == null) { return; }
+            if (CameraRig.GameObject == null) { return; }
 
             ResetRigTransforms();
 

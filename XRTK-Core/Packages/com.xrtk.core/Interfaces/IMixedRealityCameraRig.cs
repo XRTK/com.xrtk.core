@@ -12,6 +12,11 @@ namespace XRTK.Interfaces.CameraSystem
     public interface IMixedRealityCameraRig
     {
         /// <summary>
+        /// The <see cref="GameObject"/> reference for this camera rig.
+        /// </summary>
+        GameObject GameObject { get; }
+
+        /// <summary>
         /// The root playspace transform that serves as the root of the camera rig.
         /// </summary>
         /// <remarks>

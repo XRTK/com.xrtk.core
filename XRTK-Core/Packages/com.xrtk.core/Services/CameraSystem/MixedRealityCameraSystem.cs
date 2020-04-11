@@ -72,6 +72,11 @@ namespace XRTK.Services.CameraSystem
         /// <inheritdoc />
         public void RegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider)
         {
+            if (dataProvider.CameraRig.PlayerCamera == CameraCache.Main)
+            {
+                MainCameraRig = dataProvider.CameraRig;
+            }
+
             cameraDataProviders.Add(dataProvider);
         }
 

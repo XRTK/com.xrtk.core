@@ -50,12 +50,6 @@ namespace XRTK.Providers.Controllers.UnityInput
             }
         }
 
-        /// <inheritdoc />
-        public override void SetupDefaultInteractions(Handedness controllerHandedness)
-        {
-            AssignControllerMappings(DefaultInteractions);
-        }
-
         private MixedRealityPose controllerPose = MixedRealityPose.ZeroIdentity;
         private Vector2 mouseDelta;
 

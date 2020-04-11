@@ -159,12 +159,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
 
-        /// <inheritdoc />
-        public override void SetupDefaultInteractions(Handedness controllerHandedness)
-        {
-            AssignControllerMappings(DefaultInteractions);
-        }
-
         /// <summary>
         /// Gets the hands position in screen space.
         /// </summary>

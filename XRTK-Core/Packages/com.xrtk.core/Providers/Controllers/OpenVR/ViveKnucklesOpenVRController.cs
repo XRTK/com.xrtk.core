@@ -57,11 +57,5 @@ namespace XRTK.Providers.Controllers.OpenVR
             new MixedRealityInteractionMapping("Ring Finger Cap Sensor", AxisType.SingleAxis, DeviceInputType.RingFinger, ControllerMappingLibrary.AXIS_25),
             new MixedRealityInteractionMapping("Pinky Finger Cap Sensor", AxisType.SingleAxis, DeviceInputType.PinkyFinger, ControllerMappingLibrary.AXIS_27),
         };
-
-        /// <inheritdoc />
-        public override void SetupDefaultInteractions(Handedness controllerHandedness)
-        {
-            AssignControllerMappings(controllerHandedness == Handedness.Left ? DefaultLeftHandedInteractions : DefaultRightHandedInteractions);
-        }
     }
 }

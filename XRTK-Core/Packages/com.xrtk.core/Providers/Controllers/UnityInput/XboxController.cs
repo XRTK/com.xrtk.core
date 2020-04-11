@@ -51,11 +51,5 @@ namespace XRTK.Providers.Controllers.UnityInput
                 };
             }
         }
-
-        /// <inheritdoc />
-        public override void SetupDefaultInteractions(Handedness controllerHandedness)
-        {
-            AssignControllerMappings(DefaultInteractions);
-        }
     }
 }

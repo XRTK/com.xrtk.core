@@ -26,11 +26,5 @@ namespace XRTK.Providers.Controllers.OpenVR
             new MixedRealityInteractionMapping("Button.One", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.JoystickButton0),
             new MixedRealityInteractionMapping("Button.Two", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.JoystickButton1),
         };
-
-        /// <inheritdoc />
-        public override void SetupDefaultInteractions(Handedness controllerHandedness)
-        {
-            AssignControllerMappings(DefaultInteractions);
-        }
     }
 }

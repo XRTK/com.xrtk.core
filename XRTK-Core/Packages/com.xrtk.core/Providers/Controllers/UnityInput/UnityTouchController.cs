@@ -63,31 +63,6 @@ namespace XRTK.Providers.Controllers.UnityInput
         private bool isManipulating;
         private MixedRealityPose lastPose = MixedRealityPose.ZeroIdentity;
 
-        /// <inheritdoc />
-        public override void SetupDefaultInteractions(Handedness controllerHandedness)
-        {
-            AssignControllerMappings(DefaultInteractions);
-
-            if (MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
-                MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.GesturesProfile != null)
-            {
-                for (int i = 0; i < MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.GesturesProfile.Gestures.Length; i++)
-                {
-                    var gesture = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.GesturesProfile.Gestures[i];
-
-                    switch (gesture.GestureType)
-                    {
-                        case GestureInputType.Hold:
-                            holdingAction = gesture.Action;
-                            break;
-                        case GestureInputType.Manipulation:
-                            manipulationAction = gesture.Action;
-                            break;
-                    }
-                }
-            }
-        }
-
         /// <summary>
         /// Start the touch.
         /// </summary>

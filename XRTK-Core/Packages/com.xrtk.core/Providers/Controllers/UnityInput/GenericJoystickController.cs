@@ -35,12 +35,6 @@ namespace XRTK.Providers.Controllers.UnityInput
         protected MixedRealityPose LastControllerPose = MixedRealityPose.ZeroIdentity;
         protected MixedRealityPose CurrentControllerPose = MixedRealityPose.ZeroIdentity;
 
-        /// <inheritdoc />
-        public override void SetupDefaultInteractions(Handedness controllerHandedness)
-        {
-            // Generic unity controller's will not have default interactions
-        }
-
         /// <summary>
         /// Update the controller data from Unity's Input Manager
         /// </summary>

@@ -53,10 +53,7 @@ namespace XRTK.Inspectors.Profiles
 
         public override void OnInspectorGUI()
         {
-            RenderHeader();
-
-            EditorGUILayout.LabelField("Camera Profile", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("The Camera Profile helps tweak camera settings no matter what platform you're building for.", MessageType.Info);
+            RenderHeader("The Camera Profile helps tweak camera settings no matter what platform you're building for.");
 
             serializedObject.Update();
 

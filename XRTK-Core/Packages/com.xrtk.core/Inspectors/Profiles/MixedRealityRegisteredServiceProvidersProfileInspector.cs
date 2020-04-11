@@ -11,12 +11,7 @@ namespace XRTK.Inspectors.Profiles
     {
         public override void OnInspectorGUI()
         {
-            RenderHeader();
-
-            EditorGUILayout.LabelField("Registered Service Providers Profile", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("This profile defines any additional Services like systems, features, and managers to register with the Mixed Reality Toolkit.\n\n" +
-                                    "Note: The order of the list determines the order these services get created.", MessageType.Info);
-            EditorGUILayout.Space();
+            RenderHeader("This profile defines any additional Services like systems, features, and managers to register with the Mixed Reality Toolkit.\n\nNote: The order of the list determines the order these services get created and the priority they get events such as Enable, Update, and Disable.");
 
             base.OnInspectorGUI();
         }

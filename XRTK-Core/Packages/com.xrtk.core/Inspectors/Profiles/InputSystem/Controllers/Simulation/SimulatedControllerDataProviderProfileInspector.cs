@@ -2,9 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
-using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation;
-using XRTK.Inspectors.Utilities;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
@@ -47,7 +45,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
         public override void OnInspectorGUI()
         {
-            RenderHeader();
+            RenderHeader("This profile contains all of the settings for simulating all kinds of controllers in the editor runtime.");
 
             EditorGUILayout.Space();
 
@@ -68,18 +66,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
             EditorGUILayout.PropertyField(toggleRightPersistentKey);
             EditorGUILayout.PropertyField(rightControllerTrackedKey);
             EditorGUILayout.PropertyField(rotationSpeed);
-            EditorGUILayout.Space();
-
-            OnInspectorAdditionalGUI();
 
             serializedObject.ApplyModifiedProperties();
-
-            if (EditorGUI.EndChangeCheck() && MixedRealityToolkit.IsInitialized)
-            {
-                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
-            }
         }
-
-        protected virtual void OnInspectorAdditionalGUI() { }
     }
 }

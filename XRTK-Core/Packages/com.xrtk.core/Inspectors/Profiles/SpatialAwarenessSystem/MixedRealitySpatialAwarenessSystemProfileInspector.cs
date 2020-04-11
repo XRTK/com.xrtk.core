@@ -22,11 +22,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         /// <inheritdoc />
         public override void OnInspectorGUI()
         {
-            RenderHeader();
-
-            EditorGUILayout.LabelField("Spatial Awareness System Settings", EditorStyles.boldLabel);
-            EditorGUILayout.HelpBox("Spatial Awareness can enhance your experience by enabling objects to interact with the real world.\n\nBelow is a list of registered Spatial Observers that can gather data about your environment.", MessageType.Info);
-            EditorGUILayout.Space();
+            RenderHeader("Spatial Awareness can enhance your experience by enabling objects to interact with the real world.\n\nBelow is a list of registered Spatial Observers that can gather data about your environment.");
 
             serializedObject.Update();
             EditorGUILayout.PropertyField(meshDisplayOption);

@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
@@ -41,7 +40,6 @@ namespace XRTK.Definitions.Controllers
 
         [Prefab]
         [SerializeField]
-        [FormerlySerializedAs("leftHandModel")]
         private GameObject model = null;
 
         public GameObject LeftHandModel

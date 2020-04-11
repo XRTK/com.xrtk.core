@@ -6,7 +6,6 @@ using UnityEngine;
 using UnityEngine.XR;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
-using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Providers.Controllers.UnityInput;

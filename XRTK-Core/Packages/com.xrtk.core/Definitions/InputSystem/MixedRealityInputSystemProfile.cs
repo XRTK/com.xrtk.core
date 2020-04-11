@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
@@ -178,7 +177,6 @@ namespace XRTK.Definitions.InputSystem
         }
 
         [SerializeField]
-        [FormerlySerializedAs("controllerDataProvidersProfile")]
         [Tooltip("Device profile for registering platform specific input data sources.")]
         private MixedRealityInputDataProvidersProfile inputDataProvidersProfile;
 

@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces;
@@ -59,10 +58,6 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
-        [FormerlySerializedAs("dataModelType")]
-        [FormerlySerializedAs("componentType")]
-        [FormerlySerializedAs("dataProviderType")]
-        [FormerlySerializedAs("spatialObserverType")]
         [Implements(typeof(IMixedRealityService), TypeGrouping.ByNamespaceFlat)]
         private SystemType instancedType;
 
@@ -74,10 +69,6 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
-        [FormerlySerializedAs("dataModelName")]
-        [FormerlySerializedAs("componentName")]
-        [FormerlySerializedAs("dataProviderName")]
-        [FormerlySerializedAs("spatialObserverName")]
         private string name;
 
         /// <inheritdoc />
@@ -141,7 +132,6 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
-        [FormerlySerializedAs("configurationProfile")]
         private BaseMixedRealityProfile profile;
 
         /// <inheritdoc />

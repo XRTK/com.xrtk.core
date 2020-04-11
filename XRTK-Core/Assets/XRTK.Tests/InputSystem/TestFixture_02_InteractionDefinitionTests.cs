@@ -6,7 +6,6 @@ using NUnit.Framework;
 using System.Diagnostics;
 using UnityEngine;
 using XRTK.Definitions.Devices;
-using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using Debug = UnityEngine.Debug;
 

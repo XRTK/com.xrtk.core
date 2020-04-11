@@ -7,8 +7,6 @@ using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
-using XRTK.Services;
 using XRTK.Utilities.Editor;
 using Object = UnityEngine.Object;
 
@@ -122,7 +120,6 @@ namespace XRTK.Inspectors.Utilities
         /// </summary>
         public static void RenderMixedRealityToolkitLogo()
         {
-            GUI.enabled = true;
             GUILayout.BeginHorizontal();
             GUILayout.FlexibleSpace();
             GUILayout.Label(EditorGUIUtility.isProSkin ? LightThemeLogo : DarkThemeLogo, GUILayout.MaxHeight(128f));

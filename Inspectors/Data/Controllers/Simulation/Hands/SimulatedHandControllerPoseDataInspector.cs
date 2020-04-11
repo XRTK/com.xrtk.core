@@ -4,7 +4,6 @@
 using UnityEditor;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Inspectors.Profiles;
-using XRTK.Inspectors.Utilities;
 
 namespace XRTK.Inspectors.Data.Controllers.Simulation.Hands
 {
@@ -30,7 +29,7 @@ namespace XRTK.Inspectors.Data.Controllers.Simulation.Hands
 
         public override void OnInspectorGUI()
         {
-            RenderHeader();
+            RenderHeader("This profile helps to define all of the available poses for simulated hands.");
 
             serializedObject.Update();
 

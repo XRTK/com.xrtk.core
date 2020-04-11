@@ -103,8 +103,8 @@ namespace XRTK.Providers.Controllers.UnityInput
             {
                 case DeviceInputType.TriggerPress:
                     Debug.Assert(!string.IsNullOrEmpty(interactionMapping.AxisCodeX), $"[{interactionMapping.Description}] Axis mapping does not have an Axis defined");
-                    var processor = interactionMapping.GetInputProcessors<InvertSingleAxisProcessor>();
-                    interactionMapping.BoolData = Input.GetAxisRaw(interactionMapping.AxisCodeX).Equals(processor.Invert ? -1f : 1f);
+                    var floatData = Input.GetAxisRaw(interactionMapping.AxisCodeX);
+                    interactionMapping.BoolData = floatData.Approximately(-1f, 0.01f) || floatData.Approximately(1f, 0.01f);
                     break;
                 case DeviceInputType.TriggerNearTouch:
                 case DeviceInputType.ThumbNearTouch:
@@ -141,8 +141,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                 case DeviceInputType.Trigger:
                 case DeviceInputType.TriggerPress:
                 case DeviceInputType.TouchpadPress:
-                    var processor = interactionMapping.GetInputProcessors<InvertSingleAxisProcessor>();
-                    interactionMapping.BoolData = interactionMapping.FloatData.Equals(processor.Invert ? -1f : 1f);
+                    interactionMapping.BoolData = interactionMapping.FloatData.Approximately(-1f, 0.01f) || interactionMapping.FloatData.Approximately(1f, 0.01f);
                     break;
                 case DeviceInputType.TriggerTouch:
                 case DeviceInputType.TouchpadTouch:

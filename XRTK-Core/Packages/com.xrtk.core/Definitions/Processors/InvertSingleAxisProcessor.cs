@@ -2,10 +2,11 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.Devices
 {
-    [CreateAssetMenu(fileName = "InvertSingleAxisProcessor", menuName = "Mixed Reality Toolkit/Input Processors/InvertSingleAxisProcessor", order = 0)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Processors/Invert Single Axis", fileName = "InvertSingleAxisProcessor", order = (int)CreateProfileMenuItemIndices.InputProcessors)]
     public class InvertSingleAxisProcessor : InputProcessor<float>
     {
         [SerializeField]

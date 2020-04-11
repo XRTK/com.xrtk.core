@@ -16,7 +16,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private SerializedProperty gesturesProfile;
         private SerializedProperty speechCommandsProfile;
         private SerializedProperty controllerVisualizationProfile;
-        private SerializedProperty controllerDataProvidersProfile;
+        private SerializedProperty inputDataProvidersProfile;
         private SerializedProperty controllerMappingProfiles;
         private SerializedProperty handTrackingProfile;
 
@@ -30,7 +30,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             gesturesProfile = serializedObject.FindProperty(nameof(gesturesProfile));
             speechCommandsProfile = serializedObject.FindProperty(nameof(speechCommandsProfile));
             controllerVisualizationProfile = serializedObject.FindProperty(nameof(controllerVisualizationProfile));
-            controllerDataProvidersProfile = serializedObject.FindProperty(nameof(controllerDataProvidersProfile));
+            inputDataProvidersProfile = serializedObject.FindProperty(nameof(inputDataProvidersProfile));
             controllerMappingProfiles = serializedObject.FindProperty(nameof(controllerMappingProfiles));
             handTrackingProfile = serializedObject.FindProperty(nameof(handTrackingProfile));
         }
@@ -52,7 +52,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             EditorGUILayout.PropertyField(gesturesProfile);
             EditorGUILayout.PropertyField(speechCommandsProfile);
             EditorGUILayout.PropertyField(controllerVisualizationProfile);
-            EditorGUILayout.PropertyField(controllerDataProvidersProfile);
+            EditorGUILayout.PropertyField(inputDataProvidersProfile);
             EditorGUILayout.PropertyField(controllerMappingProfiles);
             EditorGUILayout.PropertyField(handTrackingProfile);
 

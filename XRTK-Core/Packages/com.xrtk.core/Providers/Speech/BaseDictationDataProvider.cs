@@ -4,10 +4,10 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
-using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Interfaces.Providers.Speech;
 using XRTK.Services;
 
-namespace XRTK.Providers.Controllers.Speech
+namespace XRTK.Providers.Speech
 {
     /// <summary>
     /// Base dictation data provider to use when implementing <see cref="IMixedRealityDictationDataProvider"/>s

@@ -13,7 +13,7 @@ using XRTK.Utilities.Async;
 using UnityEngine.Windows.Speech;
 #endif // UNITY_STANDALONE_WIN || UNITY_WSA || UNITY_EDITOR_WIN
 
-namespace XRTK.Providers.Controllers.Speech
+namespace XRTK.Providers.Speech
 {
     /// <summary>
     /// Dictation data provider for Windows 10 based platforms.

@@ -3,9 +3,9 @@
 
 using UnityEngine;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Interfaces.Providers;
 
-namespace XRTK.Definitions
+namespace XRTK.Definitions.InputSystem
 {
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Input Providers Profile", fileName = "MixedRealityInputDataProvidersProfile", order = (int)CreateProfileMenuItemIndices.InputDataProviders)]
     public class MixedRealityInputDataProvidersProfile : BaseMixedRealityServiceProfile<IMixedRealityInputDataProvider>

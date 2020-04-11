@@ -23,16 +23,50 @@ namespace XRTK.Services.CameraSystem
         public MixedRealityCameraSystem(MixedRealityCameraProfile profile)
             : base(profile)
         {
-            this.profile = profile;
             DefaultHeadHeight = profile.DefaultHeadHeight;
 
-            if (profile.CameraRigType.Type == null)
+            if (profile.CameraRigType?.Type == null)
             {
                 throw new Exception("Camera rig type cannot be null!");
             }
+
+            cameraRigType = profile.CameraRigType?.Type;
+            isCameraPersistent = profile.IsCameraPersistent;
+
+            opaqueQualityLevel = profile.OpaqueQualityLevel;
+            transparentQualityLevel = profile.TransparentQualityLevel;
+
+            nearClipPlaneOpaqueDisplay = profile.NearClipPlaneOpaqueDisplay;
+            nearClipPlaneTransparentDisplay = profile.NearClipPlaneTransparentDisplay;
+
+            backgroundColorOpaqueDisplay = profile.BackgroundColorOpaqueDisplay;
+            backgroundColorTransparentDisplay = profile.BackgroundColorTransparentDisplay;
+
+            cameraClearFlagsOpaqueDisplay = profile.CameraClearFlagsOpaqueDisplay;
+            cameraClearFlagsTransparentDisplay = profile.CameraClearFlagsTransparentDisplay;
+
+            bodyAdjustmentAngle = profile.BodyAdjustmentAngle;
+            bodyAdjustmentSpeed = profile.BodyAdjustmentSpeed;
         }
 
-        private readonly MixedRealityCameraProfile profile;
+        private readonly Type cameraRigType;
+
+        private readonly bool isCameraPersistent;
+
+        private readonly int opaqueQualityLevel;
+        private readonly int transparentQualityLevel;
+
+        private readonly float nearClipPlaneOpaqueDisplay;
+        private readonly float nearClipPlaneTransparentDisplay;
+
+        private readonly Color backgroundColorOpaqueDisplay;
+        private readonly Color backgroundColorTransparentDisplay;
+
+        private readonly CameraClearFlags cameraClearFlagsOpaqueDisplay;
+        private readonly CameraClearFlags cameraClearFlagsTransparentDisplay;
+
+        private readonly float bodyAdjustmentSpeed;
+        private readonly double bodyAdjustmentAngle;
 
         /// <inheritdoc />
         public bool IsOpaque
@@ -106,11 +140,11 @@ namespace XRTK.Services.CameraSystem
 
             if (CameraRig == null)
             {
-                CameraRig = CameraCache.Main.gameObject.EnsureComponent(profile.CameraRigType.Type) as IMixedRealityCameraRig;
+                CameraRig = CameraCache.Main.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
                 Debug.Assert(CameraRig != null);
                 ResetRigTransforms();
             }
-            
+
             ApplySettingsForDefaultHeadHeight();
         }
 
@@ -122,11 +156,11 @@ namespace XRTK.Services.CameraSystem
             ResetRigTransforms();
 
             if (Application.isPlaying &&
-                profile.IsCameraPersistent)
+                isCameraPersistent)
             {
                 CameraCache.Main.transform.root.DontDestroyOnLoad();
             }
-            
+
             ApplySettingsForDefaultHeadHeight();
         }
 
@@ -197,7 +231,7 @@ namespace XRTK.Services.CameraSystem
                 }
             }
         }
-        
+
         /// <summary>
         /// Depending on whether there is an XR device connected,
         /// moves the camera to the setting from the camera profile.
@@ -222,10 +256,10 @@ namespace XRTK.Services.CameraSystem
         /// </summary>
         private void ApplySettingsForOpaqueDisplay()
         {
-            CameraCache.Main.clearFlags = profile.CameraClearFlagsOpaqueDisplay;
-            CameraCache.Main.nearClipPlane = profile.NearClipPlaneOpaqueDisplay;
-            CameraCache.Main.backgroundColor = profile.BackgroundColorOpaqueDisplay;
-            QualitySettings.SetQualityLevel(profile.OpaqueQualityLevel, false);
+            CameraCache.Main.clearFlags = cameraClearFlagsOpaqueDisplay;
+            CameraCache.Main.nearClipPlane = nearClipPlaneOpaqueDisplay;
+            CameraCache.Main.backgroundColor = backgroundColorOpaqueDisplay;
+            QualitySettings.SetQualityLevel(opaqueQualityLevel, false);
         }
 
         /// <summary>
@@ -233,10 +267,10 @@ namespace XRTK.Services.CameraSystem
         /// </summary>
         private void ApplySettingsForTransparentDisplay()
         {
-            CameraCache.Main.clearFlags = profile.CameraClearFlagsTransparentDisplay;
-            CameraCache.Main.backgroundColor = profile.BackgroundColorTransparentDisplay;
-            CameraCache.Main.nearClipPlane = profile.NearClipPlaneTransparentDisplay;
-            QualitySettings.SetQualityLevel(profile.TransparentQualityLevel, false);
+            CameraCache.Main.clearFlags = cameraClearFlagsTransparentDisplay;
+            CameraCache.Main.backgroundColor = backgroundColorTransparentDisplay;
+            CameraCache.Main.nearClipPlane = nearClipPlaneTransparentDisplay;
+            QualitySettings.SetQualityLevel(transparentQualityLevel, false);
         }
 
         private void ResetRigTransforms()
@@ -264,9 +298,9 @@ namespace XRTK.Services.CameraSystem
             var headRotation = CameraRig.CameraTransform.rotation;
             var currentAngle = Mathf.Abs(Quaternion.Angle(bodyRotation, headRotation));
 
-            if (currentAngle > profile.BodyAdjustmentAngle)
+            if (currentAngle > bodyAdjustmentAngle)
             {
-                CameraRig.BodyTransform.rotation = Quaternion.Slerp(bodyRotation, headRotation, Time.deltaTime * profile.BodyAdjustmentSpeed);
+                CameraRig.BodyTransform.rotation = Quaternion.Slerp(bodyRotation, headRotation, Time.deltaTime * bodyAdjustmentSpeed);
             }
         }
     }

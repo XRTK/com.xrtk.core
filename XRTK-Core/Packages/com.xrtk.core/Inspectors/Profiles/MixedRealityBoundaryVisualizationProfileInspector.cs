@@ -80,14 +80,14 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.PropertyField(floorScale, scaleContent, GUILayout.ExpandWidth(true));
             EditorGUIUtility.wideMode = prevWideMode;
             EditorGUILayout.PropertyField(floorPhysicsLayer);
-            EditorGUILayout.Space();
 
+            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Play Area Settings:", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(showPlayArea, showContent);
             EditorGUILayout.PropertyField(playAreaMaterial, materialContent);
             EditorGUILayout.PropertyField(playAreaPhysicsLayer);
-            EditorGUILayout.Space();
 
+            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Tracked Area Settings:", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(showTrackedArea, showContent);
             EditorGUILayout.PropertyField(trackedAreaMaterial, materialContent);

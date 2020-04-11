@@ -2,12 +2,12 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
-using XRTK.Definitions.Controllers;
+using XRTK.Definitions.InputSystem;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
 {
-    [CustomEditor(typeof(MixedRealityControllerDataProvidersProfile))]
-    public class MixedRealityControllerDataProvidersProfileInspector : MixedRealityServiceProfileInspector
+    [CustomEditor(typeof(MixedRealityInputDataProvidersProfile))]
+    public class MixedRealityInputDataProvidersProfileInspector : MixedRealityServiceProfileInspector
     {
         public override void OnInspectorGUI()
         {

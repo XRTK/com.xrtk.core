@@ -81,20 +81,24 @@ namespace XRTK.Inspectors.Profiles
             EditorGUIUtility.wideMode = prevWideMode;
             EditorGUILayout.PropertyField(floorPhysicsLayer);
             EditorGUILayout.Space();
+
             EditorGUILayout.LabelField("Play Area Settings:", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(showPlayArea, showContent);
             EditorGUILayout.PropertyField(playAreaMaterial, materialContent);
             EditorGUILayout.PropertyField(playAreaPhysicsLayer);
             EditorGUILayout.Space();
+
             EditorGUILayout.LabelField("Tracked Area Settings:", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(showTrackedArea, showContent);
             EditorGUILayout.PropertyField(trackedAreaMaterial, materialContent);
             EditorGUILayout.PropertyField(trackedAreaPhysicsLayer);
+
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Boundary Wall Settings:", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(showBoundaryWalls, showContent);
             EditorGUILayout.PropertyField(boundaryWallMaterial, materialContent);
             EditorGUILayout.PropertyField(boundaryWallsPhysicsLayer);
+
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Boundary Ceiling Settings:", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(showBoundaryCeiling, showContent);

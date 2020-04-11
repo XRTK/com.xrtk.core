@@ -28,7 +28,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private SerializedProperty inputActionsProfile;
         private SerializedProperty speechCommandsProfile;
         private SerializedProperty gesturesProfile;
-        private SerializedProperty controllerDataProvidersProfile;
+        private SerializedProperty inputDataProvidersProfile;
 
         private bool showGlobalPointerOptions;
         private bool showGlobalHandOptions;
@@ -54,7 +54,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             inputActionsProfile = serializedObject.FindProperty(nameof(inputActionsProfile));
             gesturesProfile = serializedObject.FindProperty(nameof(gesturesProfile));
             speechCommandsProfile = serializedObject.FindProperty(nameof(speechCommandsProfile));
-            controllerDataProvidersProfile = serializedObject.FindProperty(nameof(controllerDataProvidersProfile));
+            inputDataProvidersProfile = serializedObject.FindProperty(nameof(inputDataProvidersProfile));
         }
 
         public override void OnInspectorGUI()
@@ -120,7 +120,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             EditorGUILayout.PropertyField(inputActionsProfile);
             EditorGUILayout.PropertyField(speechCommandsProfile);
             EditorGUILayout.PropertyField(gesturesProfile);
-            EditorGUILayout.PropertyField(controllerDataProvidersProfile);
+            EditorGUILayout.PropertyField(inputDataProvidersProfile);
 
             serializedObject.ApplyModifiedProperties();
 

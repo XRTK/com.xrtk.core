@@ -57,9 +57,9 @@ namespace XRTK.Inspectors.PropertyDrawers
 
         private MixedRealityInputActionsProfile[] allInputActionProfiles;
 
-        public void OnGui(GUIContent content, SerializedProperty property, AxisType axisConstraintFilter = AxisType.None)
+        public void OnGui(GUIContent content, SerializedProperty property, AxisType axisConstraintFilter = AxisType.None, params GUILayoutOption[] layoutOptions)
         {
-            var rect = GUILayoutUtility.GetRect(content, "MiniPullDown", null);
+            var rect = GUILayoutUtility.GetRect(content, "MiniPullDown", layoutOptions);
             OnGui(rect, property, content, axisConstraintFilter);
         }
 

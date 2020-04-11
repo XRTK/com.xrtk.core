@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -45,6 +45,8 @@ namespace XRTK.Inspectors.Extensions
         {
             var name = string.IsNullOrEmpty(fileName) ? $"{scriptableObject.GetType().Name}" : fileName;
 
+            name = name.Replace(" ", string.Empty);
+
             if (string.IsNullOrWhiteSpace(path))
             {
                 path = MixedRealityPreferences.ProfileGenerationPath;
@@ -60,6 +62,8 @@ namespace XRTK.Inspectors.Extensions
             {
                 Directory.CreateDirectory(Path.GetFullPath(path));
             }
+
+            path = path.Replace(".asset", string.Empty);
 
             string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath($"{path}/{name}.asset");
 
@@ -86,6 +90,41 @@ namespace XRTK.Inspectors.Extensions
             Debug.Assert(scriptableObject != null);
 
             return scriptableObject;
+        }
+
+        /// <summary>
+        /// Attempts to find the asset associated to the instance of the <see cref="ScriptableObject"/>, if none is found a new asset is created.
+        /// </summary>
+        /// <param name="scriptableObject"><see cref="ScriptableObject"/> you want to create an asset file for.</param>
+        /// <param name="ping">The new asset should be selected and opened in the inspector.</param>
+        public static ScriptableObject GetOrCreateAsset(this ScriptableObject scriptableObject, bool ping = true)
+        {
+            return GetOrCreateAsset(scriptableObject, null, ping);
+        }
+
+        /// <summary>
+        /// Attempts to find the asset associated to the instance of the <see cref="ScriptableObject"/>, if none is found a new asset is created.
+        /// </summary>
+        /// <param name="scriptableObject"><see cref="ScriptableObject"/> you want to create an asset file for.</param>
+        /// <param name="path">Optional path for the new asset.</param>
+        /// <param name="ping">The new asset should be selected and opened in the inspector.</param>
+        public static ScriptableObject GetOrCreateAsset(this ScriptableObject scriptableObject, string path, bool ping = true)
+        {
+            return GetOrCreateAsset(scriptableObject, path, null, ping);
+        }
+
+        /// <summary>
+        /// Attempts to find the asset associated to the instance of the <see cref="ScriptableObject"/>, if none is found a new asset is created.
+        /// </summary>
+        /// <param name="scriptableObject"><see cref="ScriptableObject"/> you want get or create an asset file for.</param>
+        /// <param name="path">Optional path for the new asset.</param>
+        /// <param name="fileName">Optional filename for the new asset.</param>
+        /// <param name="ping">The new asset should be selected and opened in the inspector.</param>
+        public static ScriptableObject GetOrCreateAsset(this ScriptableObject scriptableObject, string path, string fileName, bool ping)
+        {
+            return !AssetDatabase.TryGetGUIDAndLocalFileIdentifier(scriptableObject, out var guid, out long _)
+                ? scriptableObject.CreateAsset(path, fileName, ping)
+                : AssetDatabase.LoadAssetAtPath<ScriptableObject>(AssetDatabase.GUIDToAssetPath(guid));
         }
 
         /// <summary>

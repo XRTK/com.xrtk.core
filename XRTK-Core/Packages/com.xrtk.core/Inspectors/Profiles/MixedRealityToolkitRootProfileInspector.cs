@@ -134,8 +134,6 @@ namespace XRTK.Inspectors.Profiles
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
             serializedObject.Update();
 
-            if (!MixedRealityToolkit.IsInitialized) { return; }
-
             var previousLabelWidth = EditorGUIUtility.labelWidth;
             EditorGUIUtility.labelWidth = 160f;
             EditorGUI.BeginChangeCheck();

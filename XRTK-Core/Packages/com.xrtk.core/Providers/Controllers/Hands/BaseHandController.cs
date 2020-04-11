@@ -6,6 +6,7 @@ using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Providers.Controllers.Hands;
@@ -38,6 +39,18 @@ namespace XRTK.Providers.Controllers.Hands
 
         private Vector3 lastPalmNormal;
         private Vector3 lastPalmPosition;
+
+        /// <inheritdoc />
+        public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
+        {
+            new MixedRealityInteractionMapping(0, "Spatial Pointer Pose", AxisType.SixDof, DeviceInputType.SpatialPointer, MixedRealityInputAction.None)
+        };
+
+        /// <inheritdoc />
+        public override MixedRealityInteractionMapping[] DefaultLeftHandedInteractions => DefaultInteractions;
+
+        /// <inheritdoc />
+        public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
 
         /// <summary>
         /// Gets the current palm normal of the hand controller.

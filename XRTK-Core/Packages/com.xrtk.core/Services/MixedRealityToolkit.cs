@@ -403,9 +403,9 @@ namespace XRTK.Services
                 {
                     if (CreateAndRegisterService<IMixedRealityFocusProvider>(ActiveProfile.InputSystemProfile.FocusProviderType))
                     {
-                        if (ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile != null)
+                        if (ActiveProfile.InputSystemProfile.InputDataProvidersProfile != null)
                         {
-                            RegisterServices(ActiveProfile.InputSystemProfile.ControllerDataProvidersProfile.RegisteredServiceConfigurations);
+                            RegisterServices(ActiveProfile.InputSystemProfile.InputDataProvidersProfile.RegisteredServiceConfigurations);
                         }
                     }
                     else

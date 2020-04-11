@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections.Generic;
+using UnityEngine;
 using XRTK.Definitions.CameraSystem;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Utilities;
@@ -33,6 +34,14 @@ namespace XRTK.Services.CameraSystem
                     MainCameraRig = dataProvider.CameraRig;
                 }
             }
+        }
+
+        /// <inheritdoc />
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            Debug.Assert(cameraDataProviders.Count == 0, "Failed to clean up camera data provider references!");
         }
 
         #endregion IMixedRealityService Implementation

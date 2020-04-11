@@ -20,58 +20,63 @@ namespace XRTK.Providers.CameraSystem
         public BaseCameraDataProvider(string name, uint priority, BaseMixedRealityCameraDataProviderProfile profile)
             : base(name, priority)
         {
-            if (profile == null)
-            {
-                throw new ArgumentException($"Missing the profile for {base.Name}!");
-            }
-
-            if (profile.CameraRigType?.Type == null)
-            {
-                throw new Exception($"{nameof(profile.CameraRigType)} cannot be null!");
-            }
-
             var globalProfile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile;
 
-            isCameraPersistent = profile.IsCameraPersistent != globalProfile.IsCameraPersistent
+            if (profile != null)
+            {
+                if (profile.CameraRigType?.Type == null)
+                {
+                    throw new Exception($"{nameof(profile.CameraRigType)} cannot be null!");
+                }
+            }
+            else
+            {
+                if (globalProfile.CameraRigType?.Type == null)
+                {
+                    throw new Exception($"{nameof(globalProfile.CameraRigType)} cannot be null!");
+                }
+            }
+
+            isCameraPersistent = profile != null
                 ? profile.IsCameraPersistent
                 : globalProfile.IsCameraPersistent;
-            cameraRigType = profile.CameraRigType.Type != globalProfile.CameraRigType.Type
+            cameraRigType = profile != null
                 ? profile.CameraRigType.Type
                 : globalProfile.CameraRigType.Type;
-            DefaultHeadHeight = !profile.DefaultHeadHeight.Approximately(globalProfile.DefaultHeadHeight, 0.01f)
+            DefaultHeadHeight = profile != null
                 ? profile.DefaultHeadHeight
                 : globalProfile.DefaultHeadHeight;
 
-            nearClipPlaneOpaqueDisplay = !profile.NearClipPlaneOpaqueDisplay.Approximately(globalProfile.NearClipPlaneOpaqueDisplay, 0.01f)
+            nearClipPlaneOpaqueDisplay = profile != null
                 ? profile.NearClipPlaneOpaqueDisplay
                 : globalProfile.NearClipPlaneOpaqueDisplay;
-            cameraClearFlagsOpaqueDisplay = profile.CameraClearFlagsOpaqueDisplay != globalProfile.CameraClearFlagsOpaqueDisplay
+            cameraClearFlagsOpaqueDisplay = profile != null
                 ? profile.CameraClearFlagsOpaqueDisplay
                 : globalProfile.CameraClearFlagsOpaqueDisplay;
-            backgroundColorOpaqueDisplay = profile.BackgroundColorOpaqueDisplay != globalProfile.BackgroundColorOpaqueDisplay
+            backgroundColorOpaqueDisplay = profile != null
                 ? profile.BackgroundColorOpaqueDisplay
                 : globalProfile.BackgroundColorOpaqueDisplay;
-            opaqueQualityLevel = profile.OpaqueQualityLevel != globalProfile.OpaqueQualityLevel
+            opaqueQualityLevel = profile != null
                 ? profile.OpaqueQualityLevel
                 : globalProfile.OpaqueQualityLevel;
 
-            nearClipPlaneTransparentDisplay = !profile.NearClipPlaneTransparentDisplay.Approximately(globalProfile.NearClipPlaneTransparentDisplay, 0.01f)
+            nearClipPlaneTransparentDisplay = profile != null
                 ? profile.NearClipPlaneTransparentDisplay
                 : globalProfile.NearClipPlaneTransparentDisplay;
-            cameraClearFlagsTransparentDisplay = profile.CameraClearFlagsTransparentDisplay != globalProfile.CameraClearFlagsTransparentDisplay
+            cameraClearFlagsTransparentDisplay = profile != null
                 ? profile.CameraClearFlagsTransparentDisplay
                 : globalProfile.CameraClearFlagsTransparentDisplay;
-            backgroundColorTransparentDisplay = profile.BackgroundColorTransparentDisplay != globalProfile.BackgroundColorTransparentDisplay
+            backgroundColorTransparentDisplay = profile != null
                 ? profile.BackgroundColorTransparentDisplay
                 : globalProfile.BackgroundColorTransparentDisplay;
-            transparentQualityLevel = profile.TransparentQualityLevel != globalProfile.TransparentQualityLevel
+            transparentQualityLevel = profile != null
                 ? profile.TransparentQualityLevel
                 : globalProfile.TransparentQualityLevel;
 
-            bodyAdjustmentAngle = !profile.BodyAdjustmentAngle.Approximately(globalProfile.BodyAdjustmentAngle, 0.01f)
+            bodyAdjustmentAngle = profile != null
                 ? profile.BodyAdjustmentAngle
                 : globalProfile.BodyAdjustmentAngle;
-            bodyAdjustmentSpeed = !profile.BodyAdjustmentSpeed.Approximately(globalProfile.BodyAdjustmentSpeed, 0.01f)
+            bodyAdjustmentSpeed = profile != null
                 ? profile.BodyAdjustmentSpeed
                 : globalProfile.BodyAdjustmentSpeed;
         }
@@ -156,6 +161,14 @@ namespace XRTK.Providers.CameraSystem
         {
             base.Initialize();
 
+            if (CameraRig == null)
+            {
+                // TODO Currently we get always get the main camera. Should we provide a tag to search for alts?
+                CameraRig = CameraCache.Main.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
+                Debug.Assert(CameraRig != null);
+            }
+
+            ApplySettingsForDefaultHeadHeight();
             cameraOpaqueLastFrame = IsOpaque;
 
             if (IsOpaque)
@@ -167,16 +180,6 @@ namespace XRTK.Providers.CameraSystem
                 ApplySettingsForTransparentDisplay();
             }
 
-            if (CameraRig == null)
-            {
-                // TODO Currently we get always get the main camera. Should we provide a tag to search for alts?
-                CameraRig = CameraCache.Main.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
-                Debug.Assert(CameraRig != null);
-                ResetRigTransforms();
-            }
-
-            ApplySettingsForDefaultHeadHeight();
-
             MixedRealityToolkit.CameraSystem.RegisterCameraDataProvider(this);
         }
 
@@ -184,8 +187,6 @@ namespace XRTK.Providers.CameraSystem
         public override void Enable()
         {
             base.Enable();
-
-            ResetRigTransforms();
 
             if (Application.isPlaying &&
                 isCameraPersistent)
@@ -200,6 +201,8 @@ namespace XRTK.Providers.CameraSystem
         public override void Update()
         {
             base.Update();
+
+            if (!Application.isPlaying) { return; }
 
             if (IsOpaque != cameraOpaqueLastFrame)
             {
@@ -221,6 +224,8 @@ namespace XRTK.Providers.CameraSystem
         {
             base.LateUpdate();
 
+            if (!Application.isPlaying) { return; }
+
             SyncRigTransforms();
         }
 
@@ -231,10 +236,15 @@ namespace XRTK.Providers.CameraSystem
 
             if (CameraRig == null) { return; }
 
+            ResetRigTransforms();
+
             if (CameraRig.PlayerCamera != null &&
                 CameraRig.PlayerCamera.transform != null)
             {
-                CameraRig.PlayerCamera.transform.SetParent(null);
+                var cameraTransform = CameraRig.PlayerCamera.transform;
+                cameraTransform.SetParent(null);
+                cameraTransform.position = Vector3.one;
+                cameraTransform.rotation = Quaternion.identity;
             }
 
             if (CameraRig.PlayspaceTransform != null)
@@ -279,8 +289,10 @@ namespace XRTK.Providers.CameraSystem
         /// </summary>
         private void ApplySettingsForDefaultHeadHeight()
         {
-            headHeight = DefaultHeadHeight;
+            HeadHeight = DefaultHeadHeight;
             ResetRigTransforms();
+            SyncRigTransforms();
+            CameraRig.PlayspaceTransform.Translate(0f, HeadHeight, 0f);
         }
 
         /// <summary>

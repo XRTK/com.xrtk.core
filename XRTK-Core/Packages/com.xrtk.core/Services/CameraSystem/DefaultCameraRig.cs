@@ -4,7 +4,7 @@
 using UnityEngine;
 using UnityEngine.SpatialTracking;
 using XRTK.Extensions;
-using XRTK.Interfaces;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Utilities;
 
 namespace XRTK.Services.CameraSystem

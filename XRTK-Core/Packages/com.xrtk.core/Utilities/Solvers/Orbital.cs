@@ -129,7 +129,7 @@ namespace XRTK.SDK.Utilities.Solvers
             var desiredRot = Quaternion.identity;
             var cameraTransform = MixedRealityToolkit.CameraSystem == null
                 ? CameraCache.Main.transform
-                : MixedRealityToolkit.CameraSystem.CameraRig.CameraTransform;
+                : MixedRealityToolkit.CameraSystem.MainCameraRig.CameraTransform;
 
             switch (orientationType)
             {

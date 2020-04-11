@@ -4,7 +4,7 @@
 using UnityEngine;
 using UnityEngine.SpatialTracking;
 
-namespace XRTK.Interfaces
+namespace XRTK.Interfaces.CameraSystem
 {
     /// <summary>
     /// This interface is to be implemented by a <see cref="MonoBehaviour"/> and attached to the playspace root object.

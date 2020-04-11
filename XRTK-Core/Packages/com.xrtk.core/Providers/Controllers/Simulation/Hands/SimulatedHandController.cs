@@ -328,9 +328,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             // Apply mouse delta x/y in screen space, but depth offset in world space
             screenPosition.x += rootPoseDelta.Position.x;
             screenPosition.y += rootPoseDelta.Position.y;
-            Vector3 newWorldPoint = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition);
-            newWorldPoint += MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.transform.forward * rootPoseDelta.Position.z;
-            screenPosition = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.WorldToScreenPoint(newWorldPoint);
+            Vector3 newWorldPoint = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition);
+            newWorldPoint += MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.forward * rootPoseDelta.Position.z;
+            screenPosition = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.WorldToScreenPoint(newWorldPoint);
 
             HandRotateEulerAngles += rootPoseDelta.Rotation.eulerAngles;
             JitterOffset = Random.insideUnitSphere * simulatedHandControllerDataProvider.JitterAmount;
@@ -349,7 +349,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             currentPoseBlending = TargetPoseBlending;
             var rotation = Quaternion.Euler(HandRotateEulerAngles);
-            var position = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
+            var position = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
             Pose.ComputeJointPoses(ControllerHandedness, rotation, position, HandData.Joints);
         }
     }

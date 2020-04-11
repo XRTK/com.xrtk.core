@@ -11,33 +11,31 @@ namespace XRTK.Interfaces.CameraSystem
     public interface IMixedRealityCameraSystem : IMixedRealityService
     {
         /// <summary>
-        /// Is the current camera displaying on an Opaque (AR) device or a VR / immersive device
-        /// </summary>
-        bool IsOpaque { get; }
-
-        /// <summary>
-        /// Is the current camera displaying on a traditional 2d screen or a stereoscopic display?
-        /// </summary>
-        bool IsStereoscopic { get; }
-
-        /// <summary>
-        /// The <see cref="IMixedRealityCameraRig"/> component used in the current configuration.
-        /// </summary>
-        IMixedRealityCameraRig CameraRig { get; }
-
-        /// <summary>
-        /// The default head height when a platform doesn't automatically set it.
-        /// </summary>
-        float DefaultHeadHeight { get; }
-
-        /// <summary>
-        /// The current head height of the player
-        /// </summary>
-        float HeadHeight { get; set; }
-
-        /// <summary>
         /// The list of <see cref="IMixedRealityCameraDataProvider"/>s registered and running with the system.
         /// </summary>
         IReadOnlyCollection<IMixedRealityCameraDataProvider> CameraDataProviders { get; }
+
+        /// <summary>
+        /// The reference to the <see cref="IMixedRealityCameraRig"/> attached to the Main Camera (typically this is the player's camera).
+        /// </summary>
+        IMixedRealityCameraRig MainCameraRig { get; }
+
+        /// <summary>
+        /// Sets the <see cref="IMixedRealityCameraDataProvider.HeadHeight"/> on for the <see cref="MainCameraRig"/>.
+        /// </summary>
+        /// <param name="value"></param>
+        void SetHeadHeight(float value);
+
+        /// <summary>
+        /// Registers the <see cref="IMixedRealityCameraDataProvider"/> with the <see cref="IMixedRealityCameraSystem"/>.
+        /// </summary>
+        /// <param name="dataProvider"></param>
+        void RegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider);
+
+        /// <summary>
+        /// UnRegisters the <see cref="IMixedRealityCameraDataProvider"/> with the <see cref="IMixedRealityCameraSystem"/>.
+        /// </summary>
+        /// <param name="dataProvider"></param>
+        void UnRegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider);
     }
 }

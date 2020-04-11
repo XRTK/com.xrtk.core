@@ -246,7 +246,7 @@ namespace XRTK.Providers.Controllers
                 if (useSystemDefaultModels && gltfObject != null)
                 {
                     controllerModel.name = $"{controllerType.Name}_Visualization";
-                    controllerModel.transform.SetParent(MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
+                    controllerModel.transform.SetParent(MixedRealityToolkit.CameraSystem?.MainCameraRig.PlayspaceTransform);
                     var visualizationType = visualizationProfile.GetControllerVisualizationTypeOverride(controllerType, ControllerHandedness) ??
                                             visualizationProfile.ControllerVisualizationType;
                     controllerModel.AddComponent(visualizationType.Type);
@@ -255,7 +255,7 @@ namespace XRTK.Providers.Controllers
                 //If the model was a prefab
                 else
                 {
-                    var controllerObject = UnityEngine.Object.Instantiate(controllerModel, MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
+                    var controllerObject = UnityEngine.Object.Instantiate(controllerModel, MixedRealityToolkit.CameraSystem?.MainCameraRig.PlayspaceTransform);
                     controllerObject.name = $"{controllerType.Name}_Visualization";
                     Visualizer = controllerObject.GetComponent<IMixedRealityControllerVisualizer>();
                 }

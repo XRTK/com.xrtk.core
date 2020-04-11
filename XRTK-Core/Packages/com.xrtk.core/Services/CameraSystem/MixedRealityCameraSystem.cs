@@ -1,12 +1,8 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using System.Collections.Generic;
-using UnityEngine;
 using XRTK.Definitions.CameraSystem;
-using XRTK.Extensions;
-using XRTK.Interfaces;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Utilities;
 
@@ -17,303 +13,65 @@ namespace XRTK.Services.CameraSystem
     /// </summary>
     public class MixedRealityCameraSystem : BaseSystem, IMixedRealityCameraSystem
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="profile"></param>
+        /// <inheritdoc />
         public MixedRealityCameraSystem(MixedRealityCameraSystemProfile profile)
             : base(profile)
         {
-            if (profile.CameraRigType?.Type == null)
-            {
-                throw new Exception($"{nameof(profile.CameraRigType)} cannot be null!");
-            }
-
-            isCameraPersistent = profile.IsCameraPersistent;
-            cameraRigType = profile.CameraRigType.Type;
-
-            DefaultHeadHeight = profile.DefaultHeadHeight;
-
-            nearClipPlaneOpaqueDisplay = profile.NearClipPlaneOpaqueDisplay;
-            cameraClearFlagsOpaqueDisplay = profile.CameraClearFlagsOpaqueDisplay;
-            backgroundColorOpaqueDisplay = profile.BackgroundColorOpaqueDisplay;
-            opaqueQualityLevel = profile.OpaqueQualityLevel;
-
-            nearClipPlaneTransparentDisplay = profile.NearClipPlaneTransparentDisplay;
-            cameraClearFlagsTransparentDisplay = profile.CameraClearFlagsTransparentDisplay;
-            backgroundColorTransparentDisplay = profile.BackgroundColorTransparentDisplay;
-            transparentQualityLevel = profile.TransparentQualityLevel;
-
-            bodyAdjustmentAngle = profile.BodyAdjustmentAngle;
-            bodyAdjustmentSpeed = profile.BodyAdjustmentSpeed;
         }
 
-        private readonly Type cameraRigType;
-
-        private readonly bool isCameraPersistent;
-
-        private readonly int opaqueQualityLevel;
-        private readonly int transparentQualityLevel;
-
-        private readonly float nearClipPlaneOpaqueDisplay;
-        private readonly float nearClipPlaneTransparentDisplay;
-
-        private readonly Color backgroundColorOpaqueDisplay;
-        private readonly Color backgroundColorTransparentDisplay;
-
-        private readonly CameraClearFlags cameraClearFlagsOpaqueDisplay;
-        private readonly CameraClearFlags cameraClearFlagsTransparentDisplay;
-
-        private readonly float bodyAdjustmentSpeed;
-        private readonly double bodyAdjustmentAngle;
-
-        private bool cameraOpaqueLastFrame;
-        private DisplayType currentDisplayType;
-
-        private enum DisplayType
-        {
-            Opaque = 0,
-            Transparent
-        }
-
-        #region IMixedRealityCameraSystem Impelementation
-
-        /// <inheritdoc />
-        public bool IsOpaque
-        {
-            get
-            {
-                currentDisplayType = DisplayType.Opaque;
-#if UNITY_WSA
-                if (!UnityEngine.XR.WSA.HolographicSettings.IsDisplayOpaque)
-                {
-                    currentDisplayType = DisplayType.Transparent;
-                }
-#elif PLATFORM_LUMIN
-                currentDisplayType = DisplayType.Transparent;
-#endif
-                return currentDisplayType == DisplayType.Opaque;
-            }
-        }
-
-        /// <inheritdoc />
-        public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled && UnityEngine.XR.XRDevice.isPresent;
-
-        /// <inheritdoc />
-        public IMixedRealityCameraRig CameraRig { get; private set; }
-
-        /// <inheritdoc />
-        public float DefaultHeadHeight { get; }
-
-        private float headHeight;
-
-        /// <inheritdoc />
-        public float HeadHeight
-        {
-            get => headHeight;
-            set
-            {
-                if (value.Equals(headHeight))
-                {
-                    return;
-                }
-
-                headHeight = value;
-                CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, headHeight, 0f), Quaternion.identity);
-            }
-        }
-
-        private readonly HashSet<IMixedRealityCameraDataProvider> cameraDataProviders = new HashSet<IMixedRealityCameraDataProvider>();
-
-        /// <inheritdoc />
-        public IReadOnlyCollection<IMixedRealityCameraDataProvider> CameraDataProviders => cameraDataProviders;
-
-        #endregion IMixedRealityCameraSystem Impelementation
-
-        #region IMixedRealitySerivce Implementation
-
-        /// <inheritdoc />
-        public override void Initialize()
-        {
-            base.Initialize();
-
-            cameraOpaqueLastFrame = IsOpaque;
-
-            if (IsOpaque)
-            {
-                ApplySettingsForOpaqueDisplay();
-            }
-            else
-            {
-                ApplySettingsForTransparentDisplay();
-            }
-
-            if (CameraRig == null)
-            {
-                CameraRig = CameraCache.Main.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
-                Debug.Assert(CameraRig != null);
-                ResetRigTransforms();
-            }
-
-            ApplySettingsForDefaultHeadHeight();
-        }
+        #region IMixedRealityService Implementation
 
         /// <inheritdoc />
         public override void Enable()
         {
             base.Enable();
 
-            ResetRigTransforms();
-
-            if (Application.isPlaying &&
-                isCameraPersistent)
+            foreach (var dataProvider in cameraDataProviders)
             {
-                CameraCache.Main.transform.root.DontDestroyOnLoad();
+                if (dataProvider.CameraRig.PlayerCamera == CameraCache.Main)
+                {
+                    MainCameraRig = dataProvider.CameraRig;
+                }
             }
+        }
 
-            ApplySettingsForDefaultHeadHeight();
+        #endregion IMixedRealityService Implementation
+
+        #region IMixedRealityCameraSystem Impelementation
+
+        private readonly HashSet<IMixedRealityCameraDataProvider> cameraDataProviders = new HashSet<IMixedRealityCameraDataProvider>();
+
+        /// <inheritdoc />
+        public IReadOnlyCollection<IMixedRealityCameraDataProvider> CameraDataProviders => cameraDataProviders;
+
+        /// <inheritdoc />
+        public IMixedRealityCameraRig MainCameraRig { get; private set; }
+
+        /// <inheritdoc />
+        public void SetHeadHeight(float value)
+        {
+            foreach (var dataProvider in cameraDataProviders)
+            {
+                if (dataProvider.CameraRig == MainCameraRig)
+                {
+                    dataProvider.HeadHeight = value;
+                    break;
+                }
+            }
         }
 
         /// <inheritdoc />
-        public override void Update()
+        public void RegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider)
         {
-            base.Update();
-
-            if (IsOpaque != cameraOpaqueLastFrame)
-            {
-                cameraOpaqueLastFrame = IsOpaque;
-
-                if (IsOpaque)
-                {
-                    ApplySettingsForOpaqueDisplay();
-                }
-                else
-                {
-                    ApplySettingsForTransparentDisplay();
-                }
-            }
+            cameraDataProviders.Add(dataProvider);
         }
 
         /// <inheritdoc />
-        public override void LateUpdate()
+        public void UnRegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider)
         {
-            base.LateUpdate();
-
-            SyncRigTransforms();
+            cameraDataProviders.Remove(dataProvider);
         }
 
-        /// <inheritdoc />
-        public override void Disable()
-        {
-            base.Disable();
-
-            var camera = CameraCache.Main;
-
-            if (camera != null)
-            {
-                camera.transform.SetParent(null);
-            }
-
-            if (CameraRig == null) { return; }
-
-            if (CameraRig.PlayspaceTransform != null)
-            {
-                if (Application.isPlaying)
-                {
-                    UnityEngine.Object.Destroy(CameraRig.PlayspaceTransform.gameObject);
-                }
-                else
-                {
-                    UnityEngine.Object.DestroyImmediate(CameraRig.PlayspaceTransform.gameObject);
-                }
-            }
-
-            if (CameraRig is Component component &&
-                component is IMixedRealityCameraRig)
-            {
-                if (Application.isPlaying)
-                {
-                    UnityEngine.Object.Destroy(component);
-                }
-                else
-                {
-                    UnityEngine.Object.DestroyImmediate(component);
-                }
-            }
-        }
-
-        #endregion IMixedRealitySerivce Implementation
-
-        /// <summary>
-        /// Depending on whether there is an XR device connected,
-        /// moves the camera to the setting from the camera profile.
-        /// </summary>
-        private void ApplySettingsForDefaultHeadHeight()
-        {
-            if (!IsStereoscopic)
-            {
-                // If not device attached we'll just use the default head height setting.
-                CameraRig.CameraTransform.Translate(0f, DefaultHeadHeight, 0f);
-            }
-            else
-            {
-                // If we have a stereoscopic device attached we'll leave
-                // height control to the device itself and reset everything to origin.
-                ResetRigTransforms();
-            }
-        }
-
-        /// <summary>
-        /// Applies opaque settings from camera profile.
-        /// </summary>
-        private void ApplySettingsForOpaqueDisplay()
-        {
-            CameraCache.Main.clearFlags = cameraClearFlagsOpaqueDisplay;
-            CameraCache.Main.nearClipPlane = nearClipPlaneOpaqueDisplay;
-            CameraCache.Main.backgroundColor = backgroundColorOpaqueDisplay;
-            QualitySettings.SetQualityLevel(opaqueQualityLevel, false);
-        }
-
-        /// <summary>
-        /// Applies transparent settings from camera profile.
-        /// </summary>
-        private void ApplySettingsForTransparentDisplay()
-        {
-            CameraCache.Main.clearFlags = cameraClearFlagsTransparentDisplay;
-            CameraCache.Main.backgroundColor = backgroundColorTransparentDisplay;
-            CameraCache.Main.nearClipPlane = nearClipPlaneTransparentDisplay;
-            QualitySettings.SetQualityLevel(transparentQualityLevel, false);
-        }
-
-        private void ResetRigTransforms()
-        {
-            CameraRig.PlayspaceTransform.position = Vector3.zero;
-            CameraRig.PlayspaceTransform.rotation = Quaternion.identity;
-            CameraRig.CameraTransform.position = Vector3.zero;
-            CameraRig.CameraTransform.rotation = Quaternion.identity;
-            CameraRig.BodyTransform.position = Vector3.zero;
-            CameraRig.BodyTransform.rotation = Quaternion.identity;
-        }
-
-        private void SyncRigTransforms()
-        {
-            var cameraPosition = CameraRig.CameraTransform.localPosition;
-            var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
-
-            bodyLocalPosition.x = cameraPosition.x;
-            bodyLocalPosition.y = cameraPosition.y - HeadHeight;
-            bodyLocalPosition.z = cameraPosition.z;
-
-            CameraRig.BodyTransform.localPosition = bodyLocalPosition;
-
-            var bodyRotation = CameraRig.BodyTransform.rotation;
-            var headRotation = CameraRig.CameraTransform.rotation;
-            var currentAngle = Mathf.Abs(Quaternion.Angle(bodyRotation, headRotation));
-
-            if (currentAngle > bodyAdjustmentAngle)
-            {
-                CameraRig.BodyTransform.rotation = Quaternion.Slerp(bodyRotation, headRotation, Time.deltaTime * bodyAdjustmentSpeed);
-            }
-        }
+        #endregion IMixedRealityCameraSystem Impelementation
     }
 }

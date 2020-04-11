@@ -4,36 +4,25 @@
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
-using XRTK.Services.CameraSystem;
 using XRTK.Interfaces.CameraSystem;
+using XRTK.Services.CameraSystem;
 
 namespace XRTK.Definitions.CameraSystem
 {
     /// <summary>
-    /// This <see cref="BaseMixedRealityProfile"/> tells you if your head mounted display (HMD)
-    /// is a transparent device or an occluded device.
-    /// Based on those values, you can customize your camera and quality settings.
+    /// Provides additional configuration options for camera data providers.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Camera System Profile", fileName = "MixedRealityCameraSystemProfile", order = (int)CreateProfileMenuItemIndices.Camera)]
-    public class MixedRealityCameraSystemProfile : BaseMixedRealityProfile
+    public class BaseMixedRealityCameraDataProviderProfile : BaseMixedRealityProfile
     {
         [SerializeField]
-        [Tooltip("The list of registered Camera Data Providers for each platform.")]
-        private MixedRealityCameraDataProvidersProfile cameraDataProvidersProfile = null;
-
-        /// <summary>
-        /// The The list of registered <see cref="IMixedRealityCameraDataProvider"/>s for each platform.
-        /// </summary>
-        public MixedRealityCameraDataProvidersProfile CameraDataProvidersProfile => cameraDataProvidersProfile;
-
-        [SerializeField]
-        private bool isCameraPersistent = false;
+        private bool isCameraPersistent = true;
 
         /// <summary>
         /// Should the camera be reused in each scene?
         /// If so, then the camera's root will be flagged so it is not destroyed when the scene is unloaded.
         /// </summary>
         public bool IsCameraPersistent => isCameraPersistent;
+
 
         [SerializeField]
         [Tooltip("The near clipping plane distance for an opaque display.")]
@@ -135,7 +124,7 @@ namespace XRTK.Definitions.CameraSystem
         public float DefaultHeadHeight => defaultHeadHeight;
 
         [SerializeField]
-        [UnityEngine.Range(0f, 180f)]
+        [Range(0f, 180f)]
         [Tooltip("This is the angle that will be used to adjust the player's body rotation in relation to their head position.")]
         private float bodyAdjustmentAngle = 60f;
 

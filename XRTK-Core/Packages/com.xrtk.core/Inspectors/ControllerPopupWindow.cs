@@ -113,7 +113,7 @@ namespace XRTK.Inspectors
             }
 
             window = (ControllerPopupWindow)CreateInstance(typeof(ControllerPopupWindow));
-            window.titleContent = new GUIContent($"{profile.ControllerType} {handednessTitleText}Input Action Assignment");
+            window.titleContent = new GUIContent($"{profile.ControllerType.Name} {handednessTitleText}Input Action Assignment");
             window.controllerDataProviderProfile = profile;
             window.currentInteractionProfiles = interactionMappingProfiles;
             window.currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(profile);

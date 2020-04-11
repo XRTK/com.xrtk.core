@@ -2,11 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.Controllers.Simulation
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Simulated Controller Data Provider Profile", fileName = "SimulatedControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
     public class SimulatedControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
     {
         #region General Settings

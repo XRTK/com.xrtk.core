@@ -3,6 +3,7 @@
 
 using UnityEditor;
 using XRTK.Definitions.Controllers.Simulation;
+using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 {

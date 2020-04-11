@@ -11,7 +11,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
     {
         public override void OnInspectorGUI()
         {
-            RenderHeader("Below is a list of registered Input Data Providers for each platform that defines how Input devices, controllers, and other inputs are setup and work.");
+            RenderHeader("Use this profile to define all the input sources your application can get input data from.\n\nBelow is a list of registered Input Data Providers for each platform.");
 
             base.OnInspectorGUI();
         }

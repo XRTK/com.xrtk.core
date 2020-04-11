@@ -1,13 +1,14 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions;
-using XRTK.Interfaces.CameraSystem;
-using XRTK.Utilities;
+using XRTK.Definitions.CameraSystem;
 using XRTK.Extensions;
 using XRTK.Interfaces;
+using XRTK.Interfaces.CameraSystem;
+using XRTK.Utilities;
 
 namespace XRTK.Services.CameraSystem
 {
@@ -20,30 +21,28 @@ namespace XRTK.Services.CameraSystem
         /// Constructor.
         /// </summary>
         /// <param name="profile"></param>
-        public MixedRealityCameraSystem(MixedRealityCameraProfile profile)
+        public MixedRealityCameraSystem(MixedRealityCameraSystemProfile profile)
             : base(profile)
         {
-            DefaultHeadHeight = profile.DefaultHeadHeight;
-
             if (profile.CameraRigType?.Type == null)
             {
-                throw new Exception("Camera rig type cannot be null!");
+                throw new Exception($"{nameof(profile.CameraRigType)} cannot be null!");
             }
 
-            cameraRigType = profile.CameraRigType?.Type;
             isCameraPersistent = profile.IsCameraPersistent;
+            cameraRigType = profile.CameraRigType.Type;
 
-            opaqueQualityLevel = profile.OpaqueQualityLevel;
-            transparentQualityLevel = profile.TransparentQualityLevel;
+            DefaultHeadHeight = profile.DefaultHeadHeight;
 
             nearClipPlaneOpaqueDisplay = profile.NearClipPlaneOpaqueDisplay;
-            nearClipPlaneTransparentDisplay = profile.NearClipPlaneTransparentDisplay;
-
-            backgroundColorOpaqueDisplay = profile.BackgroundColorOpaqueDisplay;
-            backgroundColorTransparentDisplay = profile.BackgroundColorTransparentDisplay;
-
             cameraClearFlagsOpaqueDisplay = profile.CameraClearFlagsOpaqueDisplay;
+            backgroundColorOpaqueDisplay = profile.BackgroundColorOpaqueDisplay;
+            opaqueQualityLevel = profile.OpaqueQualityLevel;
+
+            nearClipPlaneTransparentDisplay = profile.NearClipPlaneTransparentDisplay;
             cameraClearFlagsTransparentDisplay = profile.CameraClearFlagsTransparentDisplay;
+            backgroundColorTransparentDisplay = profile.BackgroundColorTransparentDisplay;
+            transparentQualityLevel = profile.TransparentQualityLevel;
 
             bodyAdjustmentAngle = profile.BodyAdjustmentAngle;
             bodyAdjustmentSpeed = profile.BodyAdjustmentSpeed;
@@ -68,6 +67,17 @@ namespace XRTK.Services.CameraSystem
         private readonly float bodyAdjustmentSpeed;
         private readonly double bodyAdjustmentAngle;
 
+        private bool cameraOpaqueLastFrame;
+        private DisplayType currentDisplayType;
+
+        private enum DisplayType
+        {
+            Opaque = 0,
+            Transparent
+        }
+
+        #region IMixedRealityCameraSystem Impelementation
+
         /// <inheritdoc />
         public bool IsOpaque
         {
@@ -85,6 +95,12 @@ namespace XRTK.Services.CameraSystem
                 return currentDisplayType == DisplayType.Opaque;
             }
         }
+
+        /// <inheritdoc />
+        public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled && UnityEngine.XR.XRDevice.isPresent;
+
+        /// <inheritdoc />
+        public IMixedRealityCameraRig CameraRig { get; private set; }
 
         /// <inheritdoc />
         public float DefaultHeadHeight { get; }
@@ -107,20 +123,14 @@ namespace XRTK.Services.CameraSystem
             }
         }
 
-        /// <inheritdoc />
-        public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled && UnityEngine.XR.XRDevice.isPresent;
+        private readonly HashSet<IMixedRealityCameraDataProvider> cameraDataProviders = new HashSet<IMixedRealityCameraDataProvider>();
 
         /// <inheritdoc />
-        public IMixedRealityCameraRig CameraRig { get; private set; }
+        public IReadOnlyCollection<IMixedRealityCameraDataProvider> CameraDataProviders => cameraDataProviders;
 
-        private DisplayType currentDisplayType;
-        private bool cameraOpaqueLastFrame = false;
+        #endregion IMixedRealityCameraSystem Impelementation
 
-        private enum DisplayType
-        {
-            Opaque = 0,
-            Transparent
-        }
+        #region IMixedRealitySerivce Implementation
 
         /// <inheritdoc />
         public override void Initialize()
@@ -231,6 +241,8 @@ namespace XRTK.Services.CameraSystem
                 }
             }
         }
+
+        #endregion IMixedRealitySerivce Implementation
 
         /// <summary>
         /// Depending on whether there is an XR device connected,

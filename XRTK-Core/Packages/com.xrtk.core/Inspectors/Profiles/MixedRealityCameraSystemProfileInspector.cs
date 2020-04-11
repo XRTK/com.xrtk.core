@@ -3,15 +3,18 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
+using XRTK.Definitions.CameraSystem;
 using XRTK.Services;
 
-namespace XRTK.Inspectors.Profiles
+namespace XRTK.Inspectors.Profiles.CameraSystem
 {
-    [CustomEditor(typeof(MixedRealityCameraProfile))]
-    public class MixedRealityCameraProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(MixedRealityCameraSystemProfile))]
+    public class MixedRealityCameraSystemProfileInspector : BaseMixedRealityProfileInspector
     {
+        private SerializedProperty cameraDataProvidersProfile;
+
         private SerializedProperty isCameraPersistent;
+
         private SerializedProperty nearClipPlaneOpaqueDisplay;
         private SerializedProperty cameraClearFlagsOpaqueDisplay;
         private SerializedProperty backgroundColorOpaqueDisplay;
@@ -33,6 +36,8 @@ namespace XRTK.Inspectors.Profiles
         protected override void OnEnable()
         {
             base.OnEnable();
+
+            cameraDataProvidersProfile = serializedObject.FindProperty(nameof(cameraDataProvidersProfile));
 
             isCameraPersistent = serializedObject.FindProperty(nameof(isCameraPersistent));
             nearClipPlaneOpaqueDisplay = serializedObject.FindProperty(nameof(nearClipPlaneOpaqueDisplay));
@@ -59,8 +64,11 @@ namespace XRTK.Inspectors.Profiles
 
             EditorGUI.BeginChangeCheck();
 
+            EditorGUILayout.PropertyField(cameraDataProvidersProfile);
+
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Global Settings:", EditorStyles.boldLabel);
+
             EditorGUILayout.PropertyField(isCameraPersistent);
             EditorGUILayout.PropertyField(cameraRigType);
             EditorGUILayout.PropertyField(defaultHeadHeight);

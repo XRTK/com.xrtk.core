@@ -2,8 +2,10 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Definitions.BoundarySystem;
+using XRTK.Definitions.CameraSystem;
 using XRTK.Definitions.DiagnosticsSystem;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.NetworkingSystem;
@@ -38,7 +40,7 @@ namespace XRTK.Definitions
         /// </summary>
         public bool IsCameraSystemEnabled
         {
-            get => CameraProfile != null && cameraSystemType != null && cameraSystemType.Type != null && enableCameraSystem;
+            get => CameraSystemProfile != null && cameraSystemType != null && cameraSystemType.Type != null && enableCameraSystem;
             internal set => enableCameraSystem = value;
         }
 
@@ -57,17 +59,18 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
-        [Tooltip("Camera profile.")]
-        private MixedRealityCameraProfile cameraProfile;
+        [Tooltip("Camera system profile.")]
+        [FormerlySerializedAs("cameraProfile")]
+        private MixedRealityCameraSystemProfile cameraSystemProfile;
 
         /// <summary>
         /// Profile for customizing your camera and quality settings based on if your 
         /// head mounted display (HMD) is a transparent device or an occluded device.
         /// </summary>
-        public MixedRealityCameraProfile CameraProfile
+        public MixedRealityCameraSystemProfile CameraSystemProfile
         {
-            get => cameraProfile;
-            internal set => cameraProfile = value;
+            get => cameraSystemProfile;
+            internal set => cameraSystemProfile = value;
         }
 
         #endregion Camera System Properties

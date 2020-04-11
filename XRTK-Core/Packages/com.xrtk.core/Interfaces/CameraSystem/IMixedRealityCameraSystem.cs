@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
 
 namespace XRTK.Interfaces.CameraSystem
 {
@@ -33,5 +34,10 @@ namespace XRTK.Interfaces.CameraSystem
         /// The current head height of the player
         /// </summary>
         float HeadHeight { get; set; }
+
+        /// <summary>
+        /// The list of <see cref="IMixedRealityCameraDataProvider"/>s registered and running with the system.
+        /// </summary>
+        IReadOnlyCollection<IMixedRealityCameraDataProvider> CameraDataProviders { get; }
     }
 }

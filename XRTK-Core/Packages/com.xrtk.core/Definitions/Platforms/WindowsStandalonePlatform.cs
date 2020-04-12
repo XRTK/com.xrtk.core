@@ -14,7 +14,7 @@ namespace XRTK.Definitions.Platforms
             get
             {
 #if UNITY_STANDALONE_WIN
-                return true;
+                return !UnityEngine.Application.isEditor;
 #else
                 return false;
 #endif

@@ -79,6 +79,7 @@ namespace XRTK.Providers.Controllers.Hands
             if (!Enabled) { return; }
 
             var lastState = TrackingState;
+            var lastIsInInputDownPose = IsInInputDownPose;
 
             UpdateJoints(handData);
             UpdateBounds();
@@ -100,6 +101,18 @@ namespace XRTK.Providers.Controllers.Hands
             if (TrackingState == TrackingState.Tracked)
             {
                 MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, wristPose);
+            }
+
+            if (lastIsInInputDownPose != IsInInputDownPose)
+            {
+                if (IsInInputDownPose && !lastIsInInputDownPose)
+                {
+                    MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, MixedRealityInputAction.None);
+                }
+                else if (!IsInInputDownPose && lastIsInInputDownPose)
+                {
+                    MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, MixedRealityInputAction.None);
+                }
             }
 
             MixedRealityToolkit.InputSystem?.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);

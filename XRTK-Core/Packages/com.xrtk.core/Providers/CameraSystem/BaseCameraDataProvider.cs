@@ -20,6 +20,7 @@ namespace XRTK.Providers.CameraSystem
         public BaseCameraDataProvider(string name, uint priority, BaseMixedRealityCameraDataProviderProfile profile)
             : base(name, priority)
         {
+            cameraSystem = MixedRealityToolkit.CameraSystem;
             var globalProfile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile;
 
             if (profile != null)
@@ -103,6 +104,8 @@ namespace XRTK.Providers.CameraSystem
         private bool cameraOpaqueLastFrame;
         private DisplayType currentDisplayType;
 
+        private IMixedRealityCameraSystem cameraSystem = null;
+
         private enum DisplayType
         {
             Opaque = 0,
@@ -180,7 +183,7 @@ namespace XRTK.Providers.CameraSystem
                 ApplySettingsForTransparentDisplay();
             }
 
-            MixedRealityToolkit.CameraSystem.RegisterCameraDataProvider(this);
+            cameraSystem.RegisterCameraDataProvider(this);
         }
 
         /// <inheritdoc />
@@ -278,7 +281,7 @@ namespace XRTK.Providers.CameraSystem
         {
             base.Destroy();
 
-            MixedRealityToolkit.CameraSystem.UnRegisterCameraDataProvider(this);
+            cameraSystem.UnRegisterCameraDataProvider(this);
         }
 
         #endregion IMixedRealitySerivce Implementation

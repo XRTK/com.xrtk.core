@@ -52,6 +52,8 @@ namespace XRTK.Inspectors.Extensions
                 path = MixedRealityPreferences.ProfileGenerationPath;
             }
 
+            path = path.Replace(".asset", string.Empty);
+
             if (!string.IsNullOrWhiteSpace(Path.GetExtension(path)))
             {
                 var subtractedPath = path.Substring(path.LastIndexOf("/", StringComparison.Ordinal));
@@ -63,7 +65,7 @@ namespace XRTK.Inspectors.Extensions
                 Directory.CreateDirectory(Path.GetFullPath(path));
             }
 
-            path = path.Replace(".asset", string.Empty);
+            path = path.Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty);
 
             string assetPathAndName = AssetDatabase.GenerateUniqueAssetPath($"{path}/{name}.asset");
 

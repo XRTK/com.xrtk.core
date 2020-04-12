@@ -55,7 +55,7 @@ namespace XRTK.Inspectors.PropertyDrawers
 
                 if (profile is MixedRealityToolkitRootProfile && parent != null)
                 {
-                    Debug.LogError($"{profile.name} should not have a parent!");
+                    profile.ParentProfile = null;
                 }
             }
 

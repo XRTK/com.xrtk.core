@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 
-namespace XRTK.Interfaces.InputSystem.Controllers.Hands
+namespace XRTK.Interfaces.Providers.Controllers.Hands
 {
     public interface ISimulatedHandControllerDataProvider : ISimulatedControllerDataProvider, IMixedRealityHandControllerDataProvider
     {

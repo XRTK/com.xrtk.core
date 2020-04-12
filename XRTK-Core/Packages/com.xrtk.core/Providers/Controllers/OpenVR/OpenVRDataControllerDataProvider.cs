@@ -107,13 +107,13 @@ namespace XRTK.Providers.Controllers.OpenVR
                 return typeof(ViveKnucklesOpenVRController);
             }
 
-            if (joystickName.Contains("WindowsMR"))
+            if (joystickName.Contains("WindowsMR") ||
+                joystickName.Contains("Spatial"))
             {
                 return typeof(WindowsMixedRealityOpenVRMotionController);
             }
 
-            if (joystickName.Contains("OpenVR") ||
-                joystickName.Contains("Spatial"))
+            if (joystickName.Contains("OpenVR"))
             {
                 Debug.LogWarning($"{joystickName} does not have a defined controller type, falling back to {nameof(GenericOpenVRController)}.");
                 return typeof(GenericOpenVRController);

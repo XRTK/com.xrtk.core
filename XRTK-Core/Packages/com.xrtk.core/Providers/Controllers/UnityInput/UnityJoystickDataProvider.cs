@@ -124,6 +124,11 @@ namespace XRTK.Providers.Controllers.UnityInput
 
             var controllerType = GetCurrentControllerType(joystickName);
 
+            if (controllerType == null)
+            {
+                return null;
+            }
+
             GenericJoystickController detectedController;
 
             try
@@ -185,8 +190,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                 return typeof(XboxController);
             }
 
-            Debug.Log($"{joystickName} does not have a defined controller type, falling back to generic controller type");
-            return typeof(GenericJoystickController);
+            return null;
         }
     }
 }

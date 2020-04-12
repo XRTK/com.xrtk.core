@@ -4,13 +4,18 @@
 using UnityEngine;
 using UnityEngine.SpatialTracking;
 
-namespace XRTK.Interfaces
+namespace XRTK.Interfaces.CameraSystem
 {
     /// <summary>
     /// This interface is to be implemented by a <see cref="MonoBehaviour"/> and attached to the playspace root object.
     /// </summary>
     public interface IMixedRealityCameraRig
     {
+        /// <summary>
+        /// The <see cref="GameObject"/> reference for this camera rig.
+        /// </summary>
+        GameObject GameObject { get; }
+
         /// <summary>
         /// The root playspace transform that serves as the root of the camera rig.
         /// </summary>

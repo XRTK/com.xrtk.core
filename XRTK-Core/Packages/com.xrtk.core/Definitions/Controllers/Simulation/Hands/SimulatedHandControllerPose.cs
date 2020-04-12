@@ -151,7 +151,7 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// </summary>
         public void ComputeJointPoses(Handedness handedness, Quaternion rotation, Vector3 position, MixedRealityPose[] jointsOut)
         {
-            Quaternion cameraRotation = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.transform.rotation;
+            Quaternion cameraRotation = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation;
 
             for (int i = 0; i < HandData.JointCount; i++)
             {
@@ -185,7 +185,7 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         public void ParseFromJointPoses(MixedRealityPose[] joints, Handedness handedness, Quaternion rotation, Vector3 position)
         {
             var invRotation = Quaternion.Inverse(rotation);
-            var invCameraRotation = Quaternion.Inverse(MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.transform.rotation);
+            var invCameraRotation = Quaternion.Inverse(MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation);
 
             for (int i = 0; i < HandData.JointCount; i++)
             {

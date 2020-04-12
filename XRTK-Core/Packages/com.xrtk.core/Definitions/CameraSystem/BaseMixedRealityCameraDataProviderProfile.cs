@@ -1,30 +1,28 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Services.CameraSystem;
 
-namespace XRTK.Definitions
+namespace XRTK.Definitions.CameraSystem
 {
     /// <summary>
-    /// This <see cref="ScriptableObject"/> tells you if your head mounted display (HMD)
-    /// is a transparent device or an occluded device.
-    /// Based on those values, you can customize your camera and quality settings.
+    /// Provides additional configuration options for camera data providers.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Camera Profile", fileName = "MixedRealityCameraProfile", order = (int)CreateProfileMenuItemIndices.Camera)]
-    public class MixedRealityCameraProfile : BaseMixedRealityProfile
+    public class BaseMixedRealityCameraDataProviderProfile : BaseMixedRealityProfile
     {
         [SerializeField]
-        private bool isCameraPersistent = false;
+        private bool isCameraPersistent = true;
 
         /// <summary>
         /// Should the camera be reused in each scene?
         /// If so, then the camera's root will be flagged so it is not destroyed when the scene is unloaded.
         /// </summary>
         public bool IsCameraPersistent => isCameraPersistent;
+
 
         [SerializeField]
         [Tooltip("The near clipping plane distance for an opaque display.")]

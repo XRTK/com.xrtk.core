@@ -385,11 +385,23 @@ namespace XRTK.Services
 
             #region Services Registration
 
-            if (ActiveProfile.IsCameraSystemEnabled &&
-                (!CreateAndRegisterService<IMixedRealityCameraSystem>(ActiveProfile.CameraSystemType, ActiveProfile.CameraProfile) ||
-                 CameraSystem == null))
+            if (ActiveProfile.IsCameraSystemEnabled)
             {
-                Debug.LogError("Failed to start the Camera System!");
+                if (CreateAndRegisterService<IMixedRealityCameraSystem>(ActiveProfile.CameraSystemType, ActiveProfile.CameraSystemProfile) && CameraSystem != null)
+                {
+                    if (activeProfile.CameraSystemProfile.CameraDataProvidersProfile != null)
+                    {
+                        RegisterServices(ActiveProfile.CameraSystemProfile.CameraDataProvidersProfile.RegisteredServiceConfigurations);
+                    }
+                    else
+                    {
+                        Debug.LogError("Missing required Camera Data Providers Profile for the Camera System!");
+                    }
+                }
+                else
+                {
+                    Debug.LogError("Failed to start the Camera System!");
+                }
             }
 
             if (ActiveProfile.IsInputSystemEnabled)

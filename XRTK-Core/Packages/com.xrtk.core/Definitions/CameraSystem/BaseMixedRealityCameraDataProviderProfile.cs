@@ -23,7 +23,6 @@ namespace XRTK.Definitions.CameraSystem
         /// </summary>
         public bool IsCameraPersistent => isCameraPersistent;
 
-
         [SerializeField]
         [Tooltip("The near clipping plane distance for an opaque display.")]
         private float nearClipPlaneOpaqueDisplay = 0.1f;

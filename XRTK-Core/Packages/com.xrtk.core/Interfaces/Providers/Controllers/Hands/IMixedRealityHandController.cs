@@ -13,6 +13,12 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
     public interface IMixedRealityHandController : IMixedRealityController
     {
         /// <summary>
+        /// Gets whether the hand is currently in input down pose
+        /// (select / pinch / airtap).
+        /// </summary>
+        bool IsInInputDownPose { get; }
+
+        /// <summary>
         /// Get the hands bounds of a given type, if they are available.
         /// </summary>
         /// <param name="handBounds">The requested hand bounds.</param>

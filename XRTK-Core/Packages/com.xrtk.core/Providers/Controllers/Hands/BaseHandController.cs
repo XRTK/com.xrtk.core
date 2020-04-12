@@ -27,6 +27,7 @@ namespace XRTK.Providers.Controllers.Hands
 
         private const float NEW_VELOCITY_WEIGHT = .2f;
         private const float CURRENT_VELOCITY_WEIGHT = .8f;
+        private const float INPUT_DOWN_POSE_EPSILON = .02f;
 
         private readonly int velocityUpdateInterval = 9;
         private readonly Dictionary<TrackedHandBounds, Bounds[]> bounds = new Dictionary<TrackedHandBounds, Bounds[]>();
@@ -54,6 +55,24 @@ namespace XRTK.Providers.Controllers.Hands
         /// Gets the current palm normal of the hand controller.
         /// </summary>
         protected Vector3 PalmNormal => TryGetJointPose(TrackedHandJoint.Palm, out var pose) ? -pose.Up : Vector3.zero;
+
+        /// <inheritdoc />
+        public bool IsInInputDownPose
+        {
+            get
+            {
+                if (TryGetJointPose(TrackedHandJoint.ThumbTip, out var thumbTip) &&
+                    TryGetJointPose(TrackedHandJoint.IndexTip, out var indexTip))
+                {
+                    if (Vector3.Distance(thumbTip.Position, indexTip.Position) < INPUT_DOWN_POSE_EPSILON)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        }
 
         public void UpdateController(HandData handData)
         {

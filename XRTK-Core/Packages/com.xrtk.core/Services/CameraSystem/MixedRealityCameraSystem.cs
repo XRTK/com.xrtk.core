@@ -53,8 +53,27 @@ namespace XRTK.Services.CameraSystem
         /// <inheritdoc />
         public IReadOnlyCollection<IMixedRealityCameraDataProvider> CameraDataProviders => cameraDataProviders;
 
+        private IMixedRealityCameraRig mainCameraRig = null;
+
         /// <inheritdoc />
-        public IMixedRealityCameraRig MainCameraRig { get; private set; }
+        public IMixedRealityCameraRig MainCameraRig
+        {
+            get
+            {
+                if (mainCameraRig == null)
+                {
+                    foreach (var dataProvider in cameraDataProviders)
+                    {
+                        if (dataProvider.CameraRig.PlayerCamera == CameraCache.Main)
+                        {
+                            mainCameraRig = dataProvider.CameraRig;
+                        }
+                    }
+                }
+
+                return mainCameraRig;
+            }
+        }
 
         /// <inheritdoc />
         public void SetHeadHeight(float value, bool setForAllCameraProviders = false)
@@ -77,11 +96,6 @@ namespace XRTK.Services.CameraSystem
         /// <inheritdoc />
         public void RegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider)
         {
-            if (dataProvider.CameraRig.PlayerCamera == CameraCache.Main)
-            {
-                MainCameraRig = dataProvider.CameraRig;
-            }
-
             cameraDataProviders.Add(dataProvider);
         }
 

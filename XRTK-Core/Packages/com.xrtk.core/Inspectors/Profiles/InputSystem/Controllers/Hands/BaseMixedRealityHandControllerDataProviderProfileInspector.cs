@@ -27,13 +27,14 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-
-            EditorGUILayout.LabelField("Global Hand Tracking Settings Overrides", EditorStyles.boldLabel);
-            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Hand Rendering Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(handMeshingEnabled);
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Hand Physics Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(handPhysicsEnabled);
             EditorGUILayout.PropertyField(useTriggers);
             EditorGUILayout.PropertyField(boundsMode);
+            EditorGUILayout.Space();
         }
     }
 }

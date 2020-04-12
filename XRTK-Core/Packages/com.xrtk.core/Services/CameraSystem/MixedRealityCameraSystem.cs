@@ -23,20 +23,6 @@ namespace XRTK.Services.CameraSystem
         #region IMixedRealityService Implementation
 
         /// <inheritdoc />
-        public override void Enable()
-        {
-            base.Enable();
-
-            foreach (var dataProvider in cameraDataProviders)
-            {
-                if (dataProvider.CameraRig.PlayerCamera == CameraCache.Main)
-                {
-                    MainCameraRig = dataProvider.CameraRig;
-                }
-            }
-        }
-
-        /// <inheritdoc />
         public override void Destroy()
         {
             base.Destroy();

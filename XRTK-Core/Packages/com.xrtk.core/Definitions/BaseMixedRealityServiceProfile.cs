@@ -16,6 +16,19 @@ namespace XRTK.Definitions
     public abstract class BaseMixedRealityServiceProfile<TService> : BaseMixedRealityProfile where TService : IMixedRealityService
     {
         [SerializeField]
+        [Tooltip("Only registers one configuration based on the first active platform found.")]
+        private bool onlyRegisterSinglePlatform = true;
+
+        /// <summary>
+        /// Only registers one configuration based on the first active platform found.
+        /// </summary>
+        /// <remarks>
+        /// This doesn't prevent multiple services from being manually registered in the service locator, it only prevents the profile
+        /// from registering multiple services based on the platforms defined in the whole collection of <see cref="RegisteredServiceConfigurations"/>.
+        /// </remarks>
+        public bool OnlyRegisterSinglePlatform => onlyRegisterSinglePlatform;
+
+        [SerializeField]
         private MixedRealityServiceConfiguration[] configurations = new MixedRealityServiceConfiguration[0];
 
         /// <summary>

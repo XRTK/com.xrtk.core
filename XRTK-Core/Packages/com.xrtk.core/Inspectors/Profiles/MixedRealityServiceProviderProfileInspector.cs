@@ -22,6 +22,7 @@ namespace XRTK.Inspectors.Profiles
         private int currentlySelectedConfigurationOption;
 
         private SerializedProperty configurations;
+        private SerializedProperty onlyRegisterSinglePlatform;
 
         /// <summary>
         /// Gets the service constraint used to filter options listed in the
@@ -35,6 +36,7 @@ namespace XRTK.Inspectors.Profiles
             base.OnEnable();
 
             configurations = serializedObject.FindProperty(nameof(configurations));
+            onlyRegisterSinglePlatform = serializedObject.FindProperty(nameof(onlyRegisterSinglePlatform));
 
             Debug.Assert(configurations != null);
             var baseType = ThisProfile.GetType().BaseType;
@@ -56,7 +58,11 @@ namespace XRTK.Inspectors.Profiles
         public override void OnInspectorGUI()
         {
             EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Configuration Options", EditorStyles.boldLabel);
+            EditorGUILayout.Space();
             serializedObject.Update();
+            onlyRegisterSinglePlatform.boolValue = EditorGUILayout.ToggleLeft("Only register the first valid configuration.", onlyRegisterSinglePlatform.boolValue);
+            EditorGUILayout.Space();
             configurationList.DoLayoutList();
 
             if (configurations == null || configurations.arraySize == 0)

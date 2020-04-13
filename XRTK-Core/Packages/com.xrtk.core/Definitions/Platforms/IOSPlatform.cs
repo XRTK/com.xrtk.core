@@ -9,12 +9,25 @@ namespace XRTK.Definitions.Platforms
     public class IOSPlatform : BasePlatform
     {
         /// <inheritdoc />
-        public override bool IsAvailable
+        public override bool IsActive
         {
             get
             {
 #if PLATFORM_IOS
                 return !UnityEngine.Application.isEditor;
+#else
+                return false;
+#endif
+            }
+        }
+
+        /// <inheritdoc />
+        public override bool IsBuildTargetAvailable
+        {
+            get
+            {
+#if UNITY_EDITOR
+                return UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.iOS;
 #else
                 return false;
 #endif

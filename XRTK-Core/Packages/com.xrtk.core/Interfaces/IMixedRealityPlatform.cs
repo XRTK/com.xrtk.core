@@ -9,8 +9,16 @@ namespace XRTK.Interfaces
     public interface IMixedRealityPlatform
     {
         /// <summary>
-        /// Is this platform currently available?
+        /// Is this platform currently active?
         /// </summary>
-        bool IsAvailable { get; }
+        bool IsActive { get; }
+
+        /// <summary>
+        /// The this platform build target available?
+        /// </summary>
+        /// <remarks>
+        /// Only returns true in editor.
+        /// </remarks>
+        bool IsBuildTargetAvailable { get; }
     }
 }

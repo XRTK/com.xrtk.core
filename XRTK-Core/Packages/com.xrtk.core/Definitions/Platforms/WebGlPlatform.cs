@@ -9,12 +9,25 @@ namespace XRTK.Definitions.Platforms
     public class WebGlPlatform : BasePlatform
     {
         /// <inheritdoc />
-        public override bool IsAvailable
+        public override bool IsActive
         {
             get
             {
 #if PLATFORM_WEBGL
                 return !UnityEngine.Application.isEditor;
+#else
+                return false;
+#endif
+            }
+        }
+
+        /// <inheritdoc />
+        public override bool IsBuildTargetAvailable
+        {
+            get
+            {
+#if UNITY_EDITOR
+                return UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.WebGL;
 #else
                 return false;
 #endif

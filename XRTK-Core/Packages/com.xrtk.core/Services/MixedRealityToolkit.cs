@@ -864,7 +864,7 @@ namespace XRTK.Services
 
             var platforms = new List<IMixedRealityPlatform>();
 
-            Debug.Assert(AvailablePlatforms.Count > 0);
+            Debug.Assert(ActivePlatforms.Count > 0);
 
             for (var i = 0; i < runtimePlatforms?.Count; i++)
             {
@@ -876,9 +876,9 @@ namespace XRTK.Services
                     break;
                 }
 
-                for (var j = 0; j < AvailablePlatforms.Count; j++)
+                for (var j = 0; j < ActivePlatforms.Count; j++)
                 {
-                    var activePlatform = AvailablePlatforms[j].GetType();
+                    var activePlatform = ActivePlatforms[j].GetType();
 
                     if (activePlatform == runtimePlatform)
                     {
@@ -890,17 +890,16 @@ namespace XRTK.Services
 
             if (platforms.Count == 0)
             {
-                // We return true so we don't raise en error.
-                // Even though we did not register the service,
-                // it's expected that this is the intended behavior
-                // when there isn't a valid platform to run the service on.
-
                 if (runtimePlatforms == null ||
                     runtimePlatforms.Count == 0)
                 {
                     Debug.LogWarning($"No runtime platforms defined for the {concreteType?.Name} service.");
                 }
 
+                // We return true so we don't raise en error.
+                // Even though we did not register the service,
+                // it's expected that this is the intended behavior
+                // when there isn't a valid platform to run the service on.
                 return true;
             }
 
@@ -916,7 +915,6 @@ namespace XRTK.Services
                 // Even though we did not register the service,
                 // it's expected that this is the intended behavior
                 // when there isn't a valid build target active to run the service on.
-
                 return true;
             }
 

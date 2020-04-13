@@ -9,12 +9,26 @@ namespace XRTK.Definitions.Platforms
     public class WindowsStandalonePlatform : BasePlatform
     {
         /// <inheritdoc />
-        public override bool IsAvailable
+        public override bool IsActive
         {
             get
             {
 #if UNITY_STANDALONE_WIN
                 return !UnityEngine.Application.isEditor;
+#else
+                return false;
+#endif
+            }
+        }
+
+        /// <inheritdoc />
+        public override bool IsBuildTargetAvailable
+        {
+            get
+            {
+#if UNITY_EDITOR
+                return UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.StandaloneWindows ||
+                       UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.StandaloneWindows64;
 #else
                 return false;
 #endif

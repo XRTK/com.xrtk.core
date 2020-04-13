@@ -586,7 +586,7 @@ namespace XRTK.Services
 
                 availablePlatforms.Add(platformInstance);
 
-                if (platformInstance.IsActive ||
+                if (platformInstance.IsAvailable ||
                     platformInstance.IsBuildTargetAvailable)
                 {
                     activePlatforms.Add(platformInstance);

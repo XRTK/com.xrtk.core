@@ -9,7 +9,7 @@ namespace XRTK.Definitions.Platforms
     public class WebGlPlatform : BasePlatform
     {
         /// <inheritdoc />
-        public override bool IsActive
+        public override bool IsAvailable
         {
             get
             {

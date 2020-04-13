@@ -9,7 +9,7 @@ namespace XRTK.Definitions.Platforms
     public sealed class AllPlatforms : BasePlatform
     {
         /// <inheritdoc />
-        public override bool IsActive => true;
+        public override bool IsAvailable => true;
 
         /// <inheritdoc />
         public override bool IsBuildTargetAvailable => true;

@@ -125,6 +125,7 @@ namespace XRTK.Definitions.CameraSystem
             internal set => cameraRigType = value;
         }
 
+        [Range(0f, 3f)]
         [SerializeField]
         [Tooltip("The default head height the rig will start at if a platform doesn't automatically adjust the height for you.")]
         private float defaultHeadHeight = 1.6f;
@@ -135,7 +136,7 @@ namespace XRTK.Definitions.CameraSystem
         public float DefaultHeadHeight => defaultHeadHeight;
 
         [SerializeField]
-        [UnityEngine.Range(0f, 180f)]
+        [Range(0f, 180f)]
         [Tooltip("This is the angle that will be used to adjust the player's body rotation in relation to their head position.")]
         private float bodyAdjustmentAngle = 60f;
 

@@ -113,6 +113,7 @@ namespace XRTK.Definitions.CameraSystem
             internal set => cameraRigType = value;
         }
 
+        [Range(0f, 3f)]
         [SerializeField]
         [Tooltip("The default head height the rig will start at if a platform doesn't automatically adjust the height for you.")]
         private float defaultHeadHeight = 1.6f;

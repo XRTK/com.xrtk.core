@@ -82,6 +82,8 @@ namespace XRTK.Providers.CameraSystem
                 : globalProfile.BodyAdjustmentSpeed;
         }
 
+        private readonly IMixedRealityCameraSystem cameraSystem = null;
+
         private readonly Type cameraRigType;
 
         private readonly bool isCameraPersistent;
@@ -102,36 +104,12 @@ namespace XRTK.Providers.CameraSystem
         private readonly double bodyAdjustmentAngle;
 
         private bool cameraOpaqueLastFrame;
-        private DisplayType currentDisplayType;
-
-        private IMixedRealityCameraSystem cameraSystem = null;
-
-        private enum DisplayType
-        {
-            Opaque = 0,
-            Transparent
-        }
 
         /// <inheritdoc />
-        public virtual bool IsOpaque
-        {
-            get
-            {
-                currentDisplayType = DisplayType.Opaque;
-#if UNITY_WSA
-                if (!UnityEngine.XR.WSA.HolographicSettings.IsDisplayOpaque)
-                {
-                    currentDisplayType = DisplayType.Transparent;
-                }
-#elif PLATFORM_LUMIN
-                currentDisplayType = DisplayType.Transparent;
-#endif
-                return currentDisplayType == DisplayType.Opaque;
-            }
-        }
+        public virtual bool IsOpaque => true;
 
         /// <inheritdoc />
-        public virtual bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled && UnityEngine.XR.XRDevice.isPresent;
+        public virtual bool IsStereoscopic => CameraRig.PlayerCamera.stereoEnabled;
 
         /// <inheritdoc />
         public IMixedRealityCameraRig CameraRig { get; private set; }
@@ -290,18 +268,17 @@ namespace XRTK.Providers.CameraSystem
         /// Depending on whether there is an XR device connected,
         /// moves the camera to the setting from the camera profile.
         /// </summary>
-        private void ApplySettingsForDefaultHeadHeight()
+        protected virtual void ApplySettingsForDefaultHeadHeight()
         {
             HeadHeight = DefaultHeadHeight;
             ResetRigTransforms();
             SyncRigTransforms();
-            CameraRig.PlayspaceTransform.Translate(0f, HeadHeight, 0f);
         }
 
         /// <summary>
         /// Applies opaque settings from camera profile.
         /// </summary>
-        private void ApplySettingsForOpaqueDisplay()
+        protected virtual void ApplySettingsForOpaqueDisplay()
         {
             CameraRig.PlayerCamera.clearFlags = cameraClearFlagsOpaqueDisplay;
             CameraRig.PlayerCamera.nearClipPlane = nearClipPlaneOpaqueDisplay;
@@ -312,7 +289,7 @@ namespace XRTK.Providers.CameraSystem
         /// <summary>
         /// Applies transparent settings from camera profile.
         /// </summary>
-        private void ApplySettingsForTransparentDisplay()
+        protected virtual void ApplySettingsForTransparentDisplay()
         {
             CameraRig.PlayerCamera.clearFlags = cameraClearFlagsTransparentDisplay;
             CameraRig.PlayerCamera.backgroundColor = backgroundColorTransparentDisplay;
@@ -320,24 +297,41 @@ namespace XRTK.Providers.CameraSystem
             QualitySettings.SetQualityLevel(transparentQualityLevel, false);
         }
 
-        private void ResetRigTransforms()
+        /// <summary>
+        /// Resets the <see cref="IMixedRealityCameraRig.PlayspaceTransform"/>, <see cref="IMixedRealityCameraRig.CameraTransform"/>,
+        /// and <see cref="IMixedRealityCameraRig.BodyTransform"/> poses.
+        /// </summary>
+        protected virtual void ResetRigTransforms()
         {
             CameraRig.PlayspaceTransform.position = Vector3.zero;
             CameraRig.PlayspaceTransform.rotation = Quaternion.identity;
-            CameraRig.CameraTransform.position = Vector3.zero;
+            CameraRig.CameraTransform.position = IsStereoscopic ? Vector3.zero : new Vector3(0f, HeadHeight, 0f);
             CameraRig.CameraTransform.rotation = Quaternion.identity;
             CameraRig.BodyTransform.position = Vector3.zero;
             CameraRig.BodyTransform.rotation = Quaternion.identity;
         }
 
-        private void SyncRigTransforms()
+        /// <summary>
+        /// Called each <see cref="LateUpdate"/> to the sync the <see cref="IMixedRealityCameraRig.PlayspaceTransform"/>, <see cref="IMixedRealityCameraRig.CameraTransform"/>,
+        /// and <see cref="IMixedRealityCameraRig.BodyTransform"/> poses.
+        /// </summary>
+        protected virtual void SyncRigTransforms()
         {
-            var cameraPosition = CameraRig.CameraTransform.localPosition;
+            var cameraLocalPosition = CameraRig.CameraTransform.localPosition;
             var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
 
-            bodyLocalPosition.x = cameraPosition.x;
-            bodyLocalPosition.y = cameraPosition.y - HeadHeight;
-            bodyLocalPosition.z = cameraPosition.z;
+            bodyLocalPosition.x = cameraLocalPosition.x;
+
+            if (HeadHeight > 0f)
+            {
+                bodyLocalPosition.y = cameraLocalPosition.y - HeadHeight;
+            }
+            else
+            {
+                bodyLocalPosition.y = cameraLocalPosition.y - 1.6f;
+            }
+
+            bodyLocalPosition.z = cameraLocalPosition.z;
 
             CameraRig.BodyTransform.localPosition = bodyLocalPosition;
 

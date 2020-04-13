@@ -497,7 +497,7 @@ namespace XRTK.Services
             {
                 if (CreateAndRegisterService<IMixedRealityDiagnosticsSystem>(ActiveProfile.DiagnosticsSystemSystemType, ActiveProfile.DiagnosticsSystemProfile) && DiagnosticsSystem != null)
                 {
-                    RegisterServices(ActiveProfile.DiagnosticsSystemProfile.RegisteredServiceConfigurations, false);
+                    RegisterServices(ActiveProfile.DiagnosticsSystemProfile.RegisteredServiceConfigurations);
                 }
                 else
                 {
@@ -518,7 +518,7 @@ namespace XRTK.Services
                                 // Nothing
                                 break;
                             case BaseMixedRealityExtensionServiceProfile extensionServiceProfile:
-                                RegisterServices(extensionServiceProfile.RegisteredServiceConfigurations, extensionServiceProfile.OnlyRegisterSinglePlatform);
+                                RegisterServices(extensionServiceProfile.RegisteredServiceConfigurations);
                                 break;
                             default:
                                 Debug.LogError($"{configuration.Profile.name} does not derive from {nameof(BaseMixedRealityExtensionServiceProfile)}");
@@ -769,9 +769,8 @@ namespace XRTK.Services
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="configurations">The list of <see cref="MixedRealityServiceConfiguration"/>s</param>
-        /// <param name="registerFirstFound">Only registers the first successful service created.</param>
         /// <returns>True, if all configurations successfully created and registered their services.</returns>
-        public static bool RegisterServices<T>(MixedRealityServiceConfiguration<T>[] configurations, bool registerFirstFound = true) where T : IMixedRealityService
+        public static bool RegisterServices<T>(MixedRealityServiceConfiguration<T>[] configurations) where T : IMixedRealityService
         {
             bool anyFailed = false;
 
@@ -786,18 +785,11 @@ namespace XRTK.Services
                     continue;
                 }
 
-                if (CreateAndRegisterService(configuration))
+                if (!CreateAndRegisterService(configuration))
                 {
-                    if (registerFirstFound)
-                    {
-                        break;
-                    }
-
-                    continue;
+                    Debug.LogError($"Failed to start {configuration.Name}!");
+                    anyFailed = true;
                 }
-
-                Debug.LogError($"Failed to start {configuration.Name}!");
-                anyFailed = true;
             }
 
             return !anyFailed;

@@ -703,6 +703,8 @@ namespace XRTK.Services.BoundarySystem
             currentFloorObject.layer = FloorPhysicsLayer;
             currentFloorObject.GetComponent<Renderer>().sharedMaterial = FloorMaterial;
 
+            currentFloorObject.transform.parent = BoundaryVisualizationParent.transform;
+
             return currentFloorObject;
         }
 

@@ -13,7 +13,7 @@ namespace XRTK.Definitions.Platforms
     public abstract class BasePlatform : IMixedRealityPlatform
     {
         /// <inheritdoc />
-        public virtual bool IsActive => false;
+        public virtual bool IsAvailable => false;
 
         /// <inheritdoc />
         public virtual bool IsBuildTargetAvailable => false;

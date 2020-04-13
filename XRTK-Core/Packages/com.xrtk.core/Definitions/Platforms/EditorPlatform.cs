@@ -14,7 +14,7 @@ namespace XRTK.Definitions.Platforms
     public sealed class EditorPlatform : BasePlatform
     {
         /// <inheritdoc />
-        public override bool IsActive => Application.isEditor;
+        public override bool IsAvailable => Application.isEditor;
 
         /// <inheritdoc />
         public override bool IsBuildTargetAvailable => false;

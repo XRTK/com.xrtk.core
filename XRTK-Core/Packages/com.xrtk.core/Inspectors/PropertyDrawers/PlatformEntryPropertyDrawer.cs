@@ -2,12 +2,14 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.Platforms;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
+using XRTK.Interfaces;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.PropertyDrawers
@@ -26,6 +28,8 @@ namespace XRTK.Inspectors.PropertyDrawers
 
         private static int selectionControlId;
         private static int arraySize = 0;
+
+        private static GUIContent editorContent;
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
@@ -82,31 +86,7 @@ namespace XRTK.Inspectors.PropertyDrawers
                     break;
 
                 case EventType.Repaint:
-                    switch (runtimePlatformsProperty.arraySize)
-                    {
-                        case 0:
-                            TempContent.text = Nothing;
-                            break;
-                        case 1:
-                            // Remove assembly name and namespace from content of popup control.
-                            var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(0);
-                            var classRefProperty = systemTypeProperty.FindPropertyRelative("reference");
-                            var classRefParts = classRefProperty.stringValue.Split(',');
-                            var className = classRefParts[0].Trim();
-                            className = className.Substring(className.LastIndexOf(".", StringComparison.Ordinal) + 1);
-                            TempContent.text = className.Replace("Platform", "").ToProperCase();
-
-                            if (TempContent.text == string.Empty)
-                            {
-                                TempContent.text = Nothing;
-                            }
-
-                            break;
-                        default:
-                            TempContent.text = runtimePlatformsProperty.arraySize == MixedRealityToolkit.AvailablePlatforms.Count ? "Everything" : "Multiple...";
-                            break;
-                    }
-
+                    TempContent.text = GetDropdownContentText();
                     EditorStyles.popup.Draw(position, TempContent, controlId);
                     break;
             }
@@ -118,179 +98,304 @@ namespace XRTK.Inspectors.PropertyDrawers
 
                 var menu = new GenericMenu();
 
+                var editorIsActive = IsPlatformActive(typeof(EditorPlatform));
+                var isAllPlatformsActive = IsPlatformActive(typeof(AllPlatforms));
+                var editorBuildTargetIsActive = IsPlatformActive(typeof(CurrentBuildTargetPlatform));
+
+                if (editorIsActive || editorBuildTargetIsActive)
+                {
+                    Debug.Assert(editorIsActive != editorBuildTargetIsActive);
+                }
+
                 menu.AddItem(NothingContent, arraySize == 0, OnNothingSelected, null);
-                menu.AddItem(EverythingContent, arraySize == MixedRealityToolkit.AvailablePlatforms.Count, OnEverythingSelected, null);
+                menu.AddItem(EverythingContent, isAllPlatformsActive, OnEverythingSelected, null);
+
+                if (!isAllPlatformsActive)
+                {
+                    menu.AddItem(new GUIContent("Editor Only"), editorIsActive, () =>
+                    {
+                        if (!TryRemovePlatformReference(SystemType.GetReference(typeof(EditorPlatform))))
+                        {
+                            runtimePlatformsProperty.ClearArray();
+                            TryAddPlatformReference(SystemType.GetReference(typeof(EditorPlatform)));
+                        }
+                    });
+                }
+
+                menu.AddItem(isAllPlatformsActive ? new GUIContent("Editor") : new GUIContent("Editor Build Target"), isAllPlatformsActive || editorBuildTargetIsActive, OnEditorSelected, null);
+                menu.AddSeparator("");
 
                 for (var i = 0; i < MixedRealityToolkit.AvailablePlatforms.Count; i++)
                 {
                     var platform = MixedRealityToolkit.AvailablePlatforms[i];
                     var platformType = platform.GetType();
-                    if (platformType == typeof(AllPlatforms)) { continue; }
-                    menu.AddItem(new GUIContent(platformType.Name.Replace("Platform", "").ToProperCase()), IsPlatformActive(platformType), OnSelectedTypeName, platformType);
+
+                    if (platformType == typeof(AllPlatforms) ||
+                        platformType == typeof(EditorPlatform) ||
+                        platformType == typeof(CurrentBuildTargetPlatform))
+                    {
+                        continue;
+                    }
+
+                    menu.AddItem(new GUIContent(platformType.Name.Replace("Platform", "").ToProperCase()), IsPlatformActive(platformType) || isAllPlatformsActive, OnSelectedTypeName, platformType);
                 }
 
                 menu.DropDown(position);
+            }
 
-                void OnNothingSelected(object _)
+            bool IsPlatformActive(Type platformType)
+            {
+                var isActive = false;
+
+                for (int i = 0; i < runtimePlatformsProperty.arraySize; i++)
                 {
-                    runtimePlatformsProperty.ClearArray();
-                    runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
-                    EditorWindow.focusedWindow.SendEvent(EditorGUIUtility.CommandEvent(TypeReferenceUpdated));
+                    var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
+                    var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
+                    var referenceType = TypeExtensions.ResolveType(referenceProperty.stringValue);
+
+                    // Clean up any broken references
+                    if (referenceType == null)
+                    {
+                        Debug.LogError($"Failed to resolve {referenceProperty.stringValue}! Removing from runtime platform entry...");
+                        runtimePlatformsProperty.DeleteArrayElementAtIndex(i);
+                        runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
+                        continue;
+                    }
+
+                    if (platformType == referenceType)
+                    {
+                        isActive = true;
+                    }
                 }
 
-                void OnEverythingSelected(object _)
+                return isActive;
+            }
+
+            string GetDropdownContentText()
+            {
+                if (runtimePlatformsProperty.arraySize == 0)
+                {
+                    return Nothing;
+                }
+
+                if (runtimePlatformsProperty.arraySize == 1)
+                {
+                    if (IsPlatformActive(typeof(AllPlatforms)))
+                    {
+                        return "Everything";
+                    }
+
+                    // Remove assembly name and namespace from content of popup control.
+                    var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(0);
+                    var classRefProperty = systemTypeProperty.FindPropertyRelative("reference");
+                    var classRefParts = classRefProperty.stringValue.Split(',');
+                    var className = classRefParts[0].Trim();
+                    className = className.Substring(className.LastIndexOf(".", StringComparison.Ordinal) + 1);
+                    var contentText = className.Replace("Platform", "").ToProperCase();
+
+                    if (contentText == string.Empty)
+                    {
+                        contentText = Nothing;
+                    }
+
+                    return contentText;
+                }
+
+                return "Multiple...";
+            }
+
+            void OnNothingSelected(object _)
+            {
+                runtimePlatformsProperty.ClearArray();
+                runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
+                EditorWindow.focusedWindow.SendEvent(EditorGUIUtility.CommandEvent(TypeReferenceUpdated));
+            }
+
+            void OnEverythingSelected(object _)
+            {
+                runtimePlatformsProperty.ClearArray();
+                TryAddPlatformReference(SystemType.GetReference(typeof(AllPlatforms)));
+                runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
+                EditorWindow.focusedWindow.SendEvent(EditorGUIUtility.CommandEvent(TypeReferenceUpdated));
+            }
+
+            void OnEditorSelected(object _)
+            {
+                var isAllPlatformsActive = false;
+                var isCurrentBuildTargetPlatformActive = false;
+
+                for (int i = 0; i < runtimePlatformsProperty.arraySize; i++)
+                {
+                    var typeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
+                    var refProperty = typeProperty.FindPropertyRelative("reference");
+                    var referenceType = TypeExtensions.ResolveType(refProperty.stringValue);
+
+                    if (referenceType == typeof(CurrentBuildTargetPlatform))
+                    {
+                        isCurrentBuildTargetPlatformActive = true;
+                    }
+
+                    if (referenceType == typeof(AllPlatforms))
+                    {
+                        isAllPlatformsActive = true;
+                    }
+                }
+
+                if (isAllPlatformsActive)
                 {
                     runtimePlatformsProperty.ClearArray();
 
                     for (int i = 0; i < MixedRealityToolkit.AvailablePlatforms.Count; i++)
                     {
-                        AddPlatformReference(SystemType.GetReference(MixedRealityToolkit.AvailablePlatforms[i].GetType()), true);
-                    }
+                        var platformType = MixedRealityToolkit.AvailablePlatforms[i].GetType();
 
-                    runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
-                    EditorWindow.focusedWindow.SendEvent(EditorGUIUtility.CommandEvent(TypeReferenceUpdated));
-                }
-
-                void OnSelectedTypeName(object typeRef)
-                {
-                    var selectedPlatformType = typeRef as Type;
-                    var selectedReference = SystemType.GetReference(selectedPlatformType);
-
-                    if (!TryRemovePlatformReference(selectedReference))
-                    {
-                        if (runtimePlatformsProperty.arraySize + 2 == MixedRealityToolkit.AvailablePlatforms.Count)
+                        if (platformType == typeof(AllPlatforms) ||
+                            platformType == typeof(EditorPlatform) ||
+                            platformType == typeof(CurrentBuildTargetPlatform))
                         {
-                            OnEverythingSelected(null);
-                            return;
-                        }
-
-                        if (selectedPlatformType != null)
-                        {
-                            AddPlatformReference(selectedReference);
-                        }
-                    }
-
-                    EditorWindow.focusedWindow.SendEvent(EditorGUIUtility.CommandEvent(TypeReferenceUpdated));
-                }
-
-                bool IsPlatformActive(Type platformType)
-                {
-                    for (int i = 0; i < runtimePlatformsProperty.arraySize; i++)
-                    {
-                        var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
-                        var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
-                        var referenceType = TypeExtensions.ResolveType(referenceProperty.stringValue);
-
-                        // Clean up any broken references
-                        if (referenceType == null)
-                        {
-                            Debug.LogError($"Failed to resolve {referenceProperty.stringValue}! Removing from runtime platform entry...");
-                            runtimePlatformsProperty.DeleteArrayElementAtIndex(i);
-                            runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
                             continue;
                         }
 
-                        if (platformType == referenceType)
-                        {
-                            return true;
-                        }
+                        TryAddPlatformReference(SystemType.GetReference(platformType));
                     }
 
-                    return false;
+                    return;
                 }
 
-                void AddPlatformReference(string classReference, bool forceAdd = false)
+                if (isCurrentBuildTargetPlatformActive)
                 {
-                    if (!forceAdd)
+                    TryRemovePlatformReference(SystemType.GetReference(typeof(CurrentBuildTargetPlatform)));
+
+                    if (runtimePlatformsProperty.arraySize == MixedRealityToolkit.AvailablePlatforms.Count - 3)
                     {
-                        var selectedPlatformType = TypeExtensions.ResolveType(classReference);
+                        OnEverythingSelected(null);
+                    }
+                }
+                else
+                {
+                    TryAddPlatformReference(SystemType.GetReference(typeof(CurrentBuildTargetPlatform)));
 
-                        for (int i = 0; i < runtimePlatformsProperty.arraySize; i++)
+                    foreach (var platform in MixedRealityToolkit.AvailablePlatforms)
+                    {
+                        if (platform is AllPlatforms ||
+                            platform is EditorPlatform ||
+                            platform is CurrentBuildTargetPlatform)
                         {
-                            var typeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
-                            var refProperty = typeProperty.FindPropertyRelative("reference");
-                            var referenceType = TypeExtensions.ResolveType(refProperty.stringValue);
-
-                            if (selectedPlatformType == referenceType)
-                            {
-                                return;
-                            }
-
-                            if (selectedPlatformType == typeof(CurrentBuildTargetPlatform) &&
-                                referenceType == typeof(EditorPlatform) ||
-                                selectedPlatformType == typeof(EditorPlatform) &&
-                                referenceType == typeof(CurrentBuildTargetPlatform))
-                            {
-                                TryRemovePlatformReference(refProperty.stringValue);
-                            }
+                            continue;
                         }
 
-                        if (selectedPlatformType == typeof(CurrentBuildTargetPlatform))
+                        if (platform.IsBuildTargetAvailable)
                         {
-                            for (int i = 0; i < MixedRealityToolkit.AvailablePlatforms.Count; i++)
-                            {
-                                var activeBuildTarget = MixedRealityToolkit.AvailablePlatforms[i];
-
-                                if (activeBuildTarget.IsBuildTargetAvailable)
-                                {
-                                    var activePlatformType = activeBuildTarget.GetType();
-
-                                    if (activePlatformType != typeof(AllPlatforms) &&
-                                        activePlatformType != typeof(EditorPlatform) &&
-                                        activePlatformType != typeof(CurrentBuildTargetPlatform))
-                                    {
-                                        AddPlatformReference(SystemType.GetReference(activePlatformType));
-                                    }
-                                }
-                            }
-                        }
-                        else if (selectedPlatformType == typeof(EditorPlatform))
-                        {
-                            TryRemovePlatformReference(SystemType.GetReference(typeof(CurrentBuildTargetPlatform)));
+                            TryAddPlatformReference(SystemType.GetReference(platform.GetType()));
                         }
                     }
 
-                    var index = runtimePlatformsProperty.arraySize;
-                    runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
-                    runtimePlatformsProperty.InsertArrayElementAtIndex(index);
-                    var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(index);
+                    if (runtimePlatformsProperty.arraySize == MixedRealityToolkit.AvailablePlatforms.Count - 2)
+                    {
+                        OnEverythingSelected(null);
+                    }
+                }
+            }
+
+            void OnSelectedTypeName(object typeRef)
+            {
+                var selectedPlatformType = typeRef as Type;
+                var selectedReference = SystemType.GetReference(selectedPlatformType);
+
+                if (!TryRemovePlatformReference(selectedReference))
+                {
+                    if (runtimePlatformsProperty.arraySize == MixedRealityToolkit.AvailablePlatforms.Count - 3)
+                    {
+                        OnEverythingSelected(null);
+                    }
+                    else
+                    {
+                        TryAddPlatformReference(selectedReference);
+                    }
+                }
+
+                EditorWindow.focusedWindow.SendEvent(EditorGUIUtility.CommandEvent(TypeReferenceUpdated));
+            }
+
+            bool TryAddPlatformReference(string classReference)
+            {
+                if (TryRemovePlatformReference(SystemType.GetReference(typeof(EditorPlatform))))
+                {
+                    TryAddPlatformReference(SystemType.GetReference(typeof(CurrentBuildTargetPlatform)));
+                }
+
+                var selectedPlatformType = TypeExtensions.ResolveType(classReference);
+
+                for (int i = 0; i < runtimePlatformsProperty.arraySize; i++)
+                {
+                    var existingSystemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
+                    var existingReferenceProperty = existingSystemTypeProperty.FindPropertyRelative("reference");
+                    var existingPlatformType = TypeExtensions.ResolveType(existingReferenceProperty.stringValue);
+
+                    if (selectedPlatformType == existingPlatformType)
+                    {
+                        return false;
+                    }
+                }
+
+                var index = runtimePlatformsProperty.arraySize;
+                runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
+                runtimePlatformsProperty.InsertArrayElementAtIndex(index);
+                var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(index);
+                var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
+                referenceProperty.stringValue = classReference;
+                runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
+                return true;
+            }
+
+            bool TryRemovePlatformReference(string classReference)
+            {
+                var selectedPlatformType = TypeExtensions.ResolveType(classReference);
+
+                if (IsPlatformActive(typeof(AllPlatforms)))
+                {
+                    runtimePlatformsProperty.ClearArray();
+
+                    for (int j = 0; j < MixedRealityToolkit.AvailablePlatforms.Count; j++)
+                    {
+                        var platformType = MixedRealityToolkit.AvailablePlatforms[j].GetType();
+
+                        if (platformType != selectedPlatformType &&
+                            platformType != typeof(AllPlatforms) &&
+                            platformType != typeof(EditorPlatform))
+                        {
+                            TryAddPlatformReference(SystemType.GetReference(platformType));
+                        }
+                    }
+
+                    return true;
+                }
+
+                for (int i = 0; i < runtimePlatformsProperty.arraySize; i++)
+                {
+                    var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
                     var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
-                    referenceProperty.stringValue = classReference;
-                    runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
-                }
+                    var referenceType = TypeExtensions.ResolveType(referenceProperty.stringValue);
 
-                bool TryRemovePlatformReference(string classReference)
-                {
-                    var selectedPlatformType = TypeExtensions.ResolveType(classReference);
-
-                    for (int i = 0; i < runtimePlatformsProperty.arraySize; i++)
+                    if (selectedPlatformType == referenceType)
                     {
-                        var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
-                        var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
-                        var referenceType = TypeExtensions.ResolveType(referenceProperty.stringValue);
-
-                        if (selectedPlatformType == referenceType)
+                        if (runtimePlatformsProperty.arraySize == 2 &&
+                            IsPlatformActive(typeof(CurrentBuildTargetPlatform)) &&
+                            selectedPlatformType != typeof(CurrentBuildTargetPlatform))
                         {
-                            bool removeEveryPlatform = selectedPlatformType != typeof(AllPlatforms) &&
-                                                       runtimePlatformsProperty.arraySize == MixedRealityToolkit.AvailablePlatforms.Count;
-
-                            runtimePlatformsProperty.DeleteArrayElementAtIndex(i);
-
-                            if (removeEveryPlatform)
-                            {
-                                TryRemovePlatformReference(SystemType.GetReference(typeof(AllPlatforms)));
-                            }
-                            else
-                            {
-                                runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
-                            }
-
+                            runtimePlatformsProperty.ClearArray();
+                            runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
+                            TryAddPlatformReference(SystemType.GetReference(typeof(EditorPlatform)));
                             return true;
                         }
-                    }
 
-                    return false;
+                        runtimePlatformsProperty.DeleteArrayElementAtIndex(i);
+                        runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
+                        return true;
+                    }
                 }
+
+                return false;
             }
         }
     }

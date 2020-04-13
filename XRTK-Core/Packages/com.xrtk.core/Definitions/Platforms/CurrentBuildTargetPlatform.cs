@@ -13,7 +13,7 @@ namespace XRTK.Definitions.Platforms
     public sealed class CurrentBuildTargetPlatform : BasePlatform
     {
         /// <inheritdoc />
-        public override bool IsActive => Application.isEditor;
+        public override bool IsAvailable => Application.isEditor;
 
         /// <summary>
         /// Checks to see if the current build target is available for the list of provided platform.
@@ -38,7 +38,7 @@ namespace XRTK.Definitions.Platforms
                 if (platform is CurrentBuildTargetPlatform)
                 {
                     isEditor = true;
-                    isEditorPlatformActive = platform.IsActive;
+                    isEditorPlatformActive = platform.IsAvailable;
                 }
                 else
                 {

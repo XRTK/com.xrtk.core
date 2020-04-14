@@ -63,54 +63,82 @@ namespace XRTK.Tests.Core
 
         #endregion Service Locator Tests
 
-        #region IMixedRealityDataprovider Tests
+        #region IMixedRealityService Tests
 
         [Test]
-        public void Test_04_01_RegisterMixedRealityDataProvider()
+        public void Test_04_01_RegisterMixedRealityServiceAndDataProvider()
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
+            var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
+            var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
+
             // Register
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
+            MixedRealityToolkit.TryRegisterService<ITestService>(new TestService1());
 
             // Retrieve
-            var extensionService1 = MixedRealityToolkit.GetService<ITestDataProvider1>();
+            var testService1 = MixedRealityToolkit.GetService<ITestService>();
+
+            // Register
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider1>(new TestDataProvider1(testService1));
+
+            // Retrieve
+            var dataProvider1 = MixedRealityToolkit.GetService<ITestDataProvider1>();
 
             // Tests
-            Assert.IsEmpty(MixedRealityToolkit.ActiveSystems);
-            Assert.AreEqual(1, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsNotNull(testService1);
+            Assert.IsNotNull(dataProvider1);
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount + 2 == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
 
             // Tests
-            Assert.IsNotNull(extensionService1);
+            Assert.IsNotNull(dataProvider1);
         }
 
         [Test]
-        public void Test_04_02_01_UnregisterMixedRealityDataProviderByType()
+        public void Test_04_02_01_UnregisterMixedRealityServiceAndDataProviderByType()
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
+            var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
+            var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
+
             // Register
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
+            MixedRealityToolkit.TryRegisterService<ITestService>(new TestService1());
 
             // Retrieve
-            var extensionService1 = MixedRealityToolkit.GetService<ITestDataProvider1>();
+            var testService1 = MixedRealityToolkit.GetService<ITestService>();
+
+            // Register
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider1>(new TestDataProvider1(testService1));
+
+            // Retrieve
+            var dataProvider1 = MixedRealityToolkit.GetService<ITestDataProvider1>();
 
             // Tests
-            Assert.IsNotNull(extensionService1);
-            Assert.IsEmpty(MixedRealityToolkit.ActiveSystems);
-            Assert.AreEqual(1, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsNotNull(testService1);
+            Assert.IsNotNull(dataProvider1);
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount + 2 == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
 
-            var success = MixedRealityToolkit.UnregisterServicesOfType<ITestDataProvider1>();
+            // Unregister
+            var successService = MixedRealityToolkit.TryUnregisterServicesOfType<ITestService>();
+            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestService).Name} service.");
+
+            var successDataProvider = MixedRealityToolkit.TryUnregisterServicesOfType<ITestDataProvider1>();
+            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestDataProvider1).Name} service.");
 
             // Validate non-existent service
-            var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestDataProvider1>();
+            var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestService>();
+            var isDataProviderRegistered = MixedRealityToolkit.IsServiceRegistered<ITestDataProvider1>();
 
             // Tests
-            Assert.IsTrue(success);
+            Assert.IsTrue(successService);
+            Assert.IsFalse(successDataProvider);
             Assert.IsFalse(isServiceRegistered);
-            Assert.IsEmpty(MixedRealityToolkit.ActiveSystems);
-            Assert.IsEmpty(MixedRealityToolkit.RegisteredMixedRealityServices);
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestDataProvider1).Name} service.");
+            Assert.IsFalse(isDataProviderRegistered);
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
         }
 
         [Test]
@@ -118,34 +146,46 @@ namespace XRTK.Tests.Core
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
+            var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
+            var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
+
             // Register
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
+            MixedRealityToolkit.TryRegisterService<ITestService>(new TestService1());
 
             // Retrieve
-            var extensionService1 = MixedRealityToolkit.GetService<ITestDataProvider1>();
+            var testService1 = MixedRealityToolkit.GetService<ITestService>();
 
             // Tests
-            Assert.IsNotNull(extensionService1);
-            Assert.IsEmpty(MixedRealityToolkit.ActiveSystems);
-            Assert.AreEqual(1, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsNotNull(testService1);
 
-            // Retrieve service
-            var dataProvider = MixedRealityToolkit.GetService<ITestDataProvider1>();
+            // Register
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider1>(new TestDataProvider1(testService1));
 
-            // Validate
-            Assert.IsNotNull(dataProvider);
+            // Retrieve
+            var dataProvider1 = MixedRealityToolkit.GetService<ITestDataProvider1>();
 
-            var success = MixedRealityToolkit.UnregisterService<ITestDataProvider1>(dataProvider.Name);
+            // Tests
+            Assert.IsNotNull(dataProvider1);
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount + 2 == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+
+            // Unregister
+            var successService = MixedRealityToolkit.TryUnregisterService<ITestService>(testService1.Name);
+            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestService).Name} service.");
+            var successDataProvider = MixedRealityToolkit.TryUnregisterService<ITestDataProvider1>(dataProvider1.Name);
+            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestDataProvider1).Name} service.");
 
             // Validate non-existent service
-            var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestDataProvider1>();
+            var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestService>();
+            var isDataProviderRegistered = MixedRealityToolkit.IsServiceRegistered<ITestDataProvider1>();
 
             // Tests
-            Assert.IsTrue(success);
+            Assert.IsTrue(successService);
+            Assert.IsFalse(successDataProvider);
             Assert.IsFalse(isServiceRegistered);
-            Assert.IsEmpty(MixedRealityToolkit.ActiveSystems);
-            Assert.IsEmpty(MixedRealityToolkit.RegisteredMixedRealityServices);
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestDataProvider1).Name} service.");
+            Assert.IsFalse(isDataProviderRegistered);
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
         }
 
         [Test]
@@ -153,18 +193,26 @@ namespace XRTK.Tests.Core
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
-            // Add test ExtensionService
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
-            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestDataProvider2("Test Data Provider 2"));
+            var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
+            var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
-            // Retrieve all registered IMixedRealityExtensionServices
+            // Register
+            MixedRealityToolkit.TryRegisterService<ITestService>(new TestService1());
+
+            // Retrieve
+            var testService1 = MixedRealityToolkit.GetService<ITestService>();
+
+            // Register
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider1>(new TestDataProvider1(testService1));
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider2>(new TestDataProvider2(testService1));
+
+            // Retrieve all registered IMixedRealityDataProviders
             var extensionServices = MixedRealityToolkit.GetActiveServices<IMixedRealityDataProvider>();
 
             // Tests
-            Assert.IsNotNull(MixedRealityToolkit.Instance.ActiveProfile);
-            Assert.IsEmpty(MixedRealityToolkit.ActiveSystems);
-            Assert.AreEqual(2, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
-            Assert.AreEqual(extensionServices.Count, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsNotEmpty(extensionServices);
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount + 3 == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
         }
 
         [Test]
@@ -175,18 +223,26 @@ namespace XRTK.Tests.Core
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
-            // Add test ExtensionService
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
-            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestDataProvider2("Test Data Provider 2"));
+            // Register
+            MixedRealityToolkit.TryRegisterService<ITestService>(new TestService1());
 
-            // Retrieve all registered IMixedRealityExtensionServices
-            var extensionServices = MixedRealityToolkit.GetActiveServices<IMixedRealityDataProvider>();
+            // Retrieve
+            var testService1 = MixedRealityToolkit.GetService<ITestService>();
+
+            // Validate
+            Assert.IsNotNull(testService1);
+
+            // Register
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider1>(new TestDataProvider1(testService1));
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider2>(new TestDataProvider2(testService1));
+
+            // Retrieve all data providers
+            var dataProviders = MixedRealityToolkit.GetActiveServices<IMixedRealityDataProvider>();
 
             // Tests
-            Assert.IsNotNull(MixedRealityToolkit.Instance.ActiveProfile);
-            Assert.AreEqual(activeSystemCount, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(activeServiceCount + 2, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
-            Assert.AreEqual(extensionServices.Count, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsTrue(dataProviders.Count == 2);
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount + 3 == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
 
             // Retrieve services
             var extensionService1 = MixedRealityToolkit.GetService<ITestDataProvider1>();
@@ -196,22 +252,30 @@ namespace XRTK.Tests.Core
             Assert.IsNotNull(extensionService1);
             Assert.IsNotNull(extensionService2);
 
-            var success1 = MixedRealityToolkit.UnregisterServicesOfType<ITestDataProvider1>();
-            var success2 = MixedRealityToolkit.UnregisterServicesOfType<ITestDataProvider2>();
-
-            // Validate non-existent service
-            var isService1Registered = MixedRealityToolkit.IsServiceRegistered<ITestDataProvider1>();
-            var isService2Registered = MixedRealityToolkit.IsServiceRegistered<ITestDataProvider2>();
+            // Unregister
+            var successService = MixedRealityToolkit.TryUnregisterServicesOfType<ITestService>();
+            var successDataProvider1 = MixedRealityToolkit.TryUnregisterServicesOfType<ITestDataProvider1>();
+            var successDataProvider2 = MixedRealityToolkit.TryUnregisterServicesOfType<ITestDataProvider2>();
 
             // Tests
-            Assert.IsTrue(success1);
-            Assert.IsTrue(success2);
+            Assert.IsTrue(successService);
+            Assert.IsFalse(successDataProvider1);
+            Assert.IsFalse(successDataProvider2);
+
+            // Validate non-existent service
+            var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestService>();
+            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestService).Name} service.");
+            var isService1Registered = MixedRealityToolkit.IsServiceRegistered<ITestDataProvider1>();
+            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestDataProvider1).Name} service.");
+            var isService2Registered = MixedRealityToolkit.IsServiceRegistered<ITestDataProvider2>();
+            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestDataProvider2).Name} service.");
+
+            // Tests
+            Assert.IsFalse(isServiceRegistered);
             Assert.IsFalse(isService1Registered);
             Assert.IsFalse(isService2Registered);
-            Assert.AreEqual(activeSystemCount, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(activeServiceCount, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestDataProvider1).Name} service.");
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestDataProvider2).Name} service.");
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
         }
 
         [Test]
@@ -219,29 +283,39 @@ namespace XRTK.Tests.Core
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
-            // Add test data provider 1
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
+            // Register
+            MixedRealityToolkit.TryRegisterService<ITestService>(new TestService1());
 
-            // Validate non-existent data provider
+            var testService1 = MixedRealityToolkit.GetService<ITestService>();
+
+            // Add test data provider 1
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider1>(new TestDataProvider1(testService1));
+
+            // Validate non-existent data provider 2
             var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestDataProvider2>();
 
             // Tests
-            Assert.IsFalse(isServiceRegistered);
             LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestDataProvider2).Name} service.");
+            Assert.IsFalse(isServiceRegistered);
         }
 
         [Test]
-        public void Test_04_06_MixedRealityDataProviderDoesNotReturn()
+        public void Test_04_06_MixedRealityDataProviderNameDoesNotReturn()
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
+
+            // Register
+            MixedRealityToolkit.TryRegisterService<ITestService>(new TestService1());
+
+            var testService1 = MixedRealityToolkit.GetService<ITestService>();
 
             const string serviceName = "Test Data Provider";
 
             // Add test test data provider
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1(serviceName));
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider1>(new TestDataProvider1(testService1, serviceName));
 
-            // Validate non-existent ExtensionService
-            MixedRealityToolkit.GetService<ITestExtensionService2>(serviceName);
+            // Validate non-existent data provider
+            MixedRealityToolkit.GetService<ITestDataProvider2>(serviceName);
 
             // Tests
             LogAssert.Expect(LogType.Error, $"Unable to find {serviceName} service.");
@@ -252,16 +326,19 @@ namespace XRTK.Tests.Core
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
-            var testName1 = "Test04-07-1";
-            var testName2 = "Test04-07-2";
+            MixedRealityToolkit.TryRegisterService<ITestService>(new TestService1());
+            var testService1 = MixedRealityToolkit.GetService<ITestService>();
+
+            const string testName1 = "Test04-07-1";
+            const string testName2 = "Test04-07-2";
 
             // Add test data providers
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1(testName1));
-            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestDataProvider2(testName2));
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider1>(new TestDataProvider1(testService1, testName1));
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider2>(new TestDataProvider2(testService1, testName2));
 
-            // Retrieve 
-            var dataProvider1 = (TestDataProvider1)MixedRealityToolkit.GetService<ITestDataProvider1>(testName1);
-            var dataProvider2 = (TestDataProvider2)MixedRealityToolkit.GetService<ITestDataProvider2>(testName2);
+            // Retrieve
+            var dataProvider1 = MixedRealityToolkit.GetService<ITestDataProvider1>(testName1);
+            var dataProvider2 = MixedRealityToolkit.GetService<ITestDataProvider2>(testName2);
 
             // Tests
             Assert.AreEqual(testName1, dataProvider1.Name);
@@ -274,40 +351,25 @@ namespace XRTK.Tests.Core
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test data provider 1
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestExtensionService1("Test04-08-1"));
+            MixedRealityToolkit.TryRegisterService<ITestService>(new TestService1("Test04-08-1"));
+            var testService1 = MixedRealityToolkit.GetService<ITestService>();
+
+            var failService = new TestDataProvider1(testService1, "Test04-08-2.1");
 
             // Add test data provider 2
-            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestExtensionService2("Test04-08-2.1"));
-            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestExtensionService2("Test04-08-2.2"));
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider2>(failService);
+            LogAssert.Expect(LogType.Error, $"{failService.Name} does not implement {typeof(ITestDataProvider2).Name}");
+
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider2>(new TestDataProvider2(testService1, "Test04-08-2.2"));
 
             // Retrieve all ITestDataProvider2 services
             var test2DataProviderServices = MixedRealityToolkit.GetActiveServices<ITestDataProvider2>();
 
             // Tests
-            Assert.AreEqual(2, test2DataProviderServices.Count);
+            Assert.IsTrue(1 == test2DataProviderServices.Count);
         }
 
-        [Test]
-        public void Test_04_09_GetAllMixedRealityDataProviders()
-        {
-            TestUtilities.InitializeMixedRealityToolkitScene(false);
-
-            // Add test 1 services
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestExtensionService1("Test16-1.1"));
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestExtensionService1("Test16-1.2"));
-
-            // Add test 2 services
-            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestExtensionService2("Test16-2.1"));
-            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestExtensionService2("Test16-2.2"));
-
-            // Retrieve all extension services.
-            var allExtensionServices = MixedRealityToolkit.GetActiveServices<IMixedRealityExtensionService>();
-
-            // Tests
-            Assert.AreEqual(4, allExtensionServices.Count);
-        }
-
-        #endregion IMixedRealityDataprovider Tests
+        #endregion IMixedRealityService Tests
 
         #region IMixedRealityExtensionService Tests
 
@@ -319,15 +381,15 @@ namespace XRTK.Tests.Core
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
             // Register ITestExtensionService1
-            MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test ExtensionService 1"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService1>(new TestExtensionService1("Test ExtensionService 1"));
 
             // Retrieve ITestExtensionService1
             var extensionService1 = MixedRealityToolkit.GetService<ITestExtensionService1>();
 
             // Tests
             Assert.IsNotNull(extensionService1);
-            Assert.AreEqual(activeSystemCount, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(activeServiceCount + 1, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount + 1 == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
         }
 
         [Test]
@@ -338,27 +400,27 @@ namespace XRTK.Tests.Core
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
             // Register ITestExtensionService1
-            MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test ExtensionService 1"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService1>(new TestExtensionService1("Test ExtensionService 1"));
 
             // Retrieve ITestExtensionService1
             var extensionService1 = MixedRealityToolkit.GetService<ITestExtensionService1>();
 
             // Tests
             Assert.IsNotNull(extensionService1);
-            Assert.AreEqual(activeSystemCount, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(activeServiceCount + 1, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount + 1 == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
 
-            var success = MixedRealityToolkit.UnregisterServicesOfType<ITestExtensionService1>();
+            var success = MixedRealityToolkit.TryUnregisterServicesOfType<ITestExtensionService1>();
 
             // Validate non-existent service
             var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestExtensionService1>();
+            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestExtensionService1).Name} service.");
 
             // Tests
             Assert.IsTrue(success);
             Assert.IsFalse(isServiceRegistered);
-            Assert.AreEqual(activeSystemCount, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(activeServiceCount, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestExtensionService1).Name} service.");
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
         }
 
         [Test]
@@ -369,27 +431,27 @@ namespace XRTK.Tests.Core
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
             // Register ITestExtensionService1
-            MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test ExtensionService 1"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService1>(new TestExtensionService1("Test ExtensionService 1"));
 
             // Retrieve ITestExtensionService1
             var extensionService1 = MixedRealityToolkit.GetService<ITestExtensionService1>();
 
             // Tests
             Assert.IsNotNull(extensionService1);
-            Assert.AreEqual(activeSystemCount, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(activeServiceCount + 1, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount + 1 == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
 
-            var success = MixedRealityToolkit.UnregisterService<ITestExtensionService1>(extensionService1.Name);
+            var success = MixedRealityToolkit.TryUnregisterService<ITestExtensionService1>(extensionService1.Name);
 
             // Validate non-existent service
             var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestExtensionService1>();
+            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestExtensionService1).Name} service.");
 
             // Tests
             Assert.IsTrue(success);
             Assert.IsFalse(isServiceRegistered);
-            Assert.AreEqual(activeSystemCount, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(activeServiceCount, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestExtensionService1).Name} service.");
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
         }
 
         [Test]
@@ -400,16 +462,16 @@ namespace XRTK.Tests.Core
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
             // Add test ExtensionService
-            MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test ExtensionService 1"));
-            MixedRealityToolkit.RegisterService<ITestExtensionService2>(new TestExtensionService2("Test ExtensionService 2"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService1>(new TestExtensionService1("Test ExtensionService 1"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService2>(new TestExtensionService2("Test ExtensionService 2"));
 
             // Retrieve all registered IMixedRealityExtensionServices
             var extensionServices = MixedRealityToolkit.GetActiveServices<IMixedRealityExtensionService>();
 
             // Tests
             Assert.IsNotNull(MixedRealityToolkit.Instance.ActiveProfile);
-            Assert.AreEqual(activeSystemCount, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(activeServiceCount + extensionServices.Count, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount + extensionServices.Count == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
         }
 
         [Test]
@@ -420,16 +482,16 @@ namespace XRTK.Tests.Core
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
             // Add test ExtensionService
-            MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test ExtensionService 1"));
-            MixedRealityToolkit.RegisterService<ITestExtensionService2>(new TestExtensionService2("Test ExtensionService 2"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService1>(new TestExtensionService1("Test ExtensionService 1"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService2>(new TestExtensionService2("Test ExtensionService 2"));
 
             // Retrieve all registered IMixedRealityExtensionServices
             var extensionServices = MixedRealityToolkit.GetActiveServices<IMixedRealityExtensionService>();
 
             // Tests
             Assert.IsNotNull(MixedRealityToolkit.Instance.ActiveProfile);
-            Assert.AreEqual(activeSystemCount, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(activeServiceCount + extensionServices.Count, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount + extensionServices.Count == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
 
             // Retrieve services
             var extensionService1 = MixedRealityToolkit.GetService<ITestExtensionService1>();
@@ -439,20 +501,20 @@ namespace XRTK.Tests.Core
             Assert.IsNotNull(extensionService1);
             Assert.IsNotNull(extensionService2);
 
-            var success = MixedRealityToolkit.UnregisterServicesOfType<IMixedRealityExtensionService>();
+            var success = MixedRealityToolkit.TryUnregisterServicesOfType<IMixedRealityExtensionService>();
 
             // Validate non-existent service
             var isService1Registered = MixedRealityToolkit.IsServiceRegistered<ITestExtensionService1>();
+            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestExtensionService1).Name} service.");
             var isService2Registered = MixedRealityToolkit.IsServiceRegistered<ITestExtensionService2>();
+            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestExtensionService2).Name} service.");
 
             // Tests
             Assert.IsTrue(success);
             Assert.IsFalse(isService1Registered);
             Assert.IsFalse(isService2Registered);
-            Assert.AreEqual(activeSystemCount, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(activeServiceCount, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestExtensionService1).Name} service.");
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestExtensionService2).Name} service.");
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
         }
 
         [Test]
@@ -461,7 +523,7 @@ namespace XRTK.Tests.Core
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test ExtensionService 1
-            MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test ExtensionService 1"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService1>(new TestExtensionService1("Test ExtensionService 1"));
 
             // Validate non-existent ExtensionService
             var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestExtensionService2>();
@@ -479,7 +541,7 @@ namespace XRTK.Tests.Core
             const string serviceName = "Test ExtensionService 1";
 
             // Add test ITestExtensionService1
-            MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1(serviceName));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService1>(new TestExtensionService1(serviceName));
 
             // Validate non-existent ExtensionService
             MixedRealityToolkit.GetService<ITestExtensionService2>(serviceName);
@@ -494,10 +556,10 @@ namespace XRTK.Tests.Core
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test ExtensionService 1
-            MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test14-1"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService1>(new TestExtensionService1("Test14-1"));
 
             // Add test ExtensionService 2
-            MixedRealityToolkit.RegisterService<ITestExtensionService2>(new TestExtensionService2("Test14-2"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService2>(new TestExtensionService2("Test14-2"));
 
             // Retrieve Test ExtensionService 2-2
             var extensionService2 = (TestExtensionService2)MixedRealityToolkit.GetService<ITestExtensionService2>("Test14-2");
@@ -518,11 +580,11 @@ namespace XRTK.Tests.Core
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test ExtensionService 1
-            MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test15-1"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService1>(new TestExtensionService1("Test15-1"));
 
             // Add test ExtensionServices 2
-            MixedRealityToolkit.RegisterService<ITestExtensionService2>(new TestExtensionService2("Test15-2.1"));
-            MixedRealityToolkit.RegisterService<ITestExtensionService2>(new TestExtensionService2("Test15-2.2"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService2>(new TestExtensionService2("Test15-2.1"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService2>(new TestExtensionService2("Test15-2.2"));
 
             // Retrieve ExtensionService 2
             var extensionServices = MixedRealityToolkit.GetActiveServices<ITestExtensionService2>();
@@ -537,23 +599,23 @@ namespace XRTK.Tests.Core
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test 1 services
-            MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test16-1.1"));
-            MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test16-1.2"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService1>(new TestExtensionService1("Test16-1.1"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService1>(new TestExtensionService1("Test16-1.2"));
 
             // Add test 2 services
-            MixedRealityToolkit.RegisterService<ITestExtensionService2>(new TestExtensionService2("Test16-2.1"));
-            MixedRealityToolkit.RegisterService<ITestExtensionService2>(new TestExtensionService2("Test16-2.2"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService2>(new TestExtensionService2("Test16-2.1"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService2>(new TestExtensionService2("Test16-2.2"));
 
             // Retrieve all extension services.
             var allExtensionServices = MixedRealityToolkit.GetActiveServices<IMixedRealityExtensionService>();
 
             // Tests
-            Assert.AreEqual(4, allExtensionServices.Count);
+            Assert.IsTrue(allExtensionServices.Count == 4);
         }
 
         #endregion IMixedRealityExtensionService Tests
 
-        #region TryServiceRetrieval Tests
+        #region Service Retrieval Tests
 
         [Test]
         public void Test_06_01_TryRegisterMixedRealityDataProvider()
@@ -562,15 +624,18 @@ namespace XRTK.Tests.Core
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
+            MixedRealityToolkit.TryRegisterService<ITestService>(new TestService1());
+            var testService1 = MixedRealityToolkit.GetService<ITestService>();
+
             // Register
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider1>(new TestDataProvider1(testService1));
 
             // Retrieve
             var result = MixedRealityToolkit.TryGetService<ITestDataProvider1>(out var extensionService1);
 
             // Tests
-            Assert.AreEqual(activeSystemCount, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(activeServiceCount + 1, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount + 2 == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
 
             // Tests
             Assert.IsTrue(result);
@@ -586,13 +651,13 @@ namespace XRTK.Tests.Core
 
             // Retrieve
             var result = MixedRealityToolkit.TryGetService<ITestDataProvider1>(out var extensionService1);
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestDataProvider1)} service.");
 
             // Tests
-            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestDataProvider1)} service.");
             Assert.IsFalse(result);
             Assert.IsNull(extensionService1);
-            Assert.AreEqual(activeSystemCount, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(activeServiceCount, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
         }
 
         [Test]
@@ -602,8 +667,11 @@ namespace XRTK.Tests.Core
             var activeSystemCount = MixedRealityToolkit.ActiveSystems.Count;
             var activeServiceCount = MixedRealityToolkit.RegisteredMixedRealityServices.Count;
 
+            MixedRealityToolkit.TryRegisterService<ITestService>(new TestService1());
+            var testService1 = MixedRealityToolkit.GetService<ITestService>();
+
             // Register
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test Data Provider 1"));
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider1>(new TestDataProvider1(testService1));
 
             // Retrieve
             var resultTrue = MixedRealityToolkit.TryGetService<ITestDataProvider1>("Test Data Provider 1", out var extensionService1);
@@ -611,18 +679,15 @@ namespace XRTK.Tests.Core
 
             // Tests
             LogAssert.Expect(LogType.Error, "Unable to find Test Data Provider 2 service.");
-
-            Assert.AreEqual(activeSystemCount, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(activeServiceCount + 1, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
-
-            // Tests
+            Assert.IsTrue(activeSystemCount == MixedRealityToolkit.ActiveSystems.Count);
+            Assert.IsTrue(activeServiceCount + 2 == MixedRealityToolkit.RegisteredMixedRealityServices.Count);
             Assert.IsTrue(resultTrue, "Test Data Provider 1 found");
             Assert.IsFalse(resultFalse, "Test Data Provider 2 not found");
             Assert.IsNotNull(extensionService1, "Test Data Provider 1 service found");
             Assert.IsNull(extensionService2, "Test Data Provider 2 service not found");
         }
 
-        #endregion TryServiceRetrieval Tests
+        #endregion Service Retrieval Tests Tests
 
         #region Service Enable/Disable Tests
 
@@ -631,13 +696,16 @@ namespace XRTK.Tests.Core
         {
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
+            MixedRealityToolkit.TryRegisterService<ITestService>(new TestService1());
+            var testService1 = MixedRealityToolkit.GetService<ITestService>();
+
             // Add test 1 services
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test07-01-1.1"));
-            MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test07-01-1.2"));
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider1>(new TestDataProvider1(testService1));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService1>(new TestExtensionService1());
 
             // Add test 2 services
-            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestDataProvider2("Test07-01-2.1"));
-            MixedRealityToolkit.RegisterService<ITestExtensionService2>(new TestExtensionService2("Test07-01-2.2"));
+            MixedRealityToolkit.TryRegisterService<ITestDataProvider2>(new TestDataProvider2(testService1));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService2>(new TestExtensionService2());
 
             // Enable all test services
             MixedRealityToolkit.EnableAllServicesOfType<ITestService>();
@@ -647,8 +715,8 @@ namespace XRTK.Tests.Core
 
             foreach (var service in testServices)
             {
-                Assert.IsTrue(service is ITestService);
-                Assert.IsTrue((service as ITestService).IsEnabled);
+                Assert.IsTrue(service != null);
+                Assert.IsTrue(service.IsEnabled);
             }
         }
 
@@ -658,12 +726,14 @@ namespace XRTK.Tests.Core
             TestUtilities.InitializeMixedRealityToolkitScene(false);
 
             // Add test 1 services
-            MixedRealityToolkit.RegisterService<ITestDataProvider1>(new TestDataProvider1("Test07-01-1.1"));
-            MixedRealityToolkit.RegisterService<ITestExtensionService1>(new TestExtensionService1("Test07-01-1.2"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService1>(new TestExtensionService1());
+            var testService1 = MixedRealityToolkit.GetService<ITestExtensionService1>();
+            MixedRealityToolkit.TryRegisterService<ITestExtensionDataProvider1>(new TestExtensionDataProvider1(testService1));
 
             // Add test 2 services
-            MixedRealityToolkit.RegisterService<ITestDataProvider2>(new TestDataProvider2("Test07-01-2.1"));
-            MixedRealityToolkit.RegisterService<ITestExtensionService2>(new TestExtensionService2("Test07-01-2.2"));
+            MixedRealityToolkit.TryRegisterService<ITestExtensionService2>(new TestExtensionService2());
+            var testService2 = MixedRealityToolkit.GetService<ITestExtensionService2>();
+            MixedRealityToolkit.TryRegisterService<ITestExtensionDataProvider2>(new TestExtensionDataProvider2(testService2));
 
             // Enable all test services
             MixedRealityToolkit.EnableAllServicesOfType<ITestService>();
@@ -673,8 +743,8 @@ namespace XRTK.Tests.Core
 
             foreach (var service in testServices)
             {
-                Assert.IsTrue(service is ITestService);
-                Assert.IsTrue((service as ITestService).IsEnabled);
+                Assert.IsTrue(service != null);
+                Assert.IsTrue(service.IsEnabled);
             }
 
             // Enable all test services
@@ -682,8 +752,8 @@ namespace XRTK.Tests.Core
 
             foreach (var service in testServices)
             {
-                Assert.IsTrue(service is ITestService);
-                Assert.IsFalse((service as ITestService).IsEnabled);
+                Assert.IsTrue(service != null);
+                Assert.IsFalse(service.IsEnabled);
             }
         }
 

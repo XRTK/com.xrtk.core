@@ -17,8 +17,8 @@ namespace XRTK.Providers.CameraSystem
     public class BaseCameraDataProvider : BaseDataProvider, IMixedRealityCameraDataProvider
     {
         /// <inheritdoc />
-        public BaseCameraDataProvider(string name, uint priority, BaseMixedRealityCameraDataProviderProfile profile)
-            : base(name, priority)
+        public BaseCameraDataProvider(string name, uint priority, BaseMixedRealityCameraDataProviderProfile profile, IMixedRealityCameraSystem parentService)
+            : base(name, priority, profile, parentService)
         {
             cameraSystem = MixedRealityToolkit.CameraSystem;
             var globalProfile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile;
@@ -185,7 +185,7 @@ namespace XRTK.Providers.CameraSystem
 
             if (!Application.isPlaying) { return; }
 
-            if (IsOpaque != cameraOpaqueLastFrame)
+            if (cameraOpaqueLastFrame != IsOpaque)
             {
                 cameraOpaqueLastFrame = IsOpaque;
 
@@ -273,6 +273,11 @@ namespace XRTK.Providers.CameraSystem
             HeadHeight = DefaultHeadHeight;
             ResetRigTransforms();
             SyncRigTransforms();
+
+            if (HeadHeight.Approximately(0f, 0.1f))
+            {
+                CameraRig.PlayspaceTransform.Translate(-CameraRig.BodyTransform.position);
+            }
         }
 
         /// <summary>

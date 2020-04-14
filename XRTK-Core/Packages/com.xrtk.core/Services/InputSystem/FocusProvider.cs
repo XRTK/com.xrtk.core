@@ -8,6 +8,7 @@ using UnityEngine.EventSystems;
 using XRTK.Definitions.Physics;
 using XRTK.EventDatum.Input;
 using XRTK.Extensions;
+using XRTK.Interfaces;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Utilities;
 using XRTK.Utilities.Physics;
@@ -1158,5 +1159,8 @@ namespace XRTK.Services.InputSystem
         }
 
         #endregion ISourceState Implementation
+
+        /// <inheritdoc />
+        public IMixedRealityService ParentService => MixedRealityToolkit.InputSystem;
     }
 }

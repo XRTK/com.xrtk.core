@@ -4,6 +4,7 @@
 using System.Threading.Tasks;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Speech;
 using XRTK.Services;
 
@@ -14,14 +15,9 @@ namespace XRTK.Providers.Speech
     /// </summary>
     public abstract class BaseDictationDataProvider : BaseDataProvider, IMixedRealityDictationDataProvider
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        /// <param name="profile"></param>
-        protected BaseDictationDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
-            : base(name, priority)
+        /// <inheritdoc />
+        protected BaseDictationDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
+            : base(name, priority, profile, parentService)
         {
         }
 

@@ -6,9 +6,9 @@ using XRTK.Services;
 
 namespace XRTK.Tests.Services
 {
-    internal class TestDataProvider1 : BaseDataProvider, ITestDataProvider1
+    internal class TestExtensionDataProvider2 : BaseExtensionDataProvider, ITestExtensionDataProvider2
     {
-        public TestDataProvider1(ITestService parentService, string name = "Test Data Provider 1", uint priority = 1, BaseMixedRealityProfile profile = null)
+        public TestExtensionDataProvider2(ITestExtensionService2 parentService, string name = "Test Extension Data Provider 2", uint priority = 10, BaseMixedRealityExtensionDataProviderProfile profile = null)
             : base(name, priority, profile, parentService)
         {
         }
@@ -17,11 +17,15 @@ namespace XRTK.Tests.Services
 
         public override void Enable()
         {
+            base.Enable();
+
             IsEnabled = true;
         }
 
         public override void Disable()
         {
+            base.Disable();
+
             IsEnabled = false;
         }
     }

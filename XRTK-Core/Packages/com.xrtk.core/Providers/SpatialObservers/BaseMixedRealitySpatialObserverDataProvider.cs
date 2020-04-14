@@ -6,6 +6,7 @@ using System.Collections;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.SpatialObservers;
+using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Services;
 
 namespace XRTK.Providers.SpatialObservers
@@ -15,14 +16,9 @@ namespace XRTK.Providers.SpatialObservers
     /// </summary>
     public abstract class BaseMixedRealitySpatialObserverDataProvider : BaseDataProvider, IMixedRealitySpatialObserverDataProvider
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        /// <param name="profile"></param>
-        protected BaseMixedRealitySpatialObserverDataProvider(string name, uint priority, BaseMixedRealitySpatialObserverProfile profile)
-            : base(name, priority)
+        /// <inheritdoc />
+        protected BaseMixedRealitySpatialObserverDataProvider(string name, uint priority, BaseMixedRealitySpatialObserverProfile profile, IMixedRealitySpatialAwarenessSystem parentService)
+            : base(name, priority, profile, parentService)
         {
             if (profile == null)
             {

@@ -9,6 +9,7 @@ using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;
 
@@ -20,8 +21,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     public class SimulatedHandControllerDataProvider : BaseSimulatedControllerDataProvider, ISimulatedHandControllerDataProvider
     {
         /// <inheritdoc />
-        public SimulatedHandControllerDataProvider(string name, uint priority, SimulatedHandControllerDataProviderProfile profile)
-            : base(name, priority, profile)
+        public SimulatedHandControllerDataProvider(string name, uint priority, SimulatedHandControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
+            : base(name, priority, profile, parentService)
         {
             var poseDefinitions = profile.PoseDefinitions;
             handPoseDefinitions = new List<SimulatedHandControllerPoseData>(poseDefinitions.Count);

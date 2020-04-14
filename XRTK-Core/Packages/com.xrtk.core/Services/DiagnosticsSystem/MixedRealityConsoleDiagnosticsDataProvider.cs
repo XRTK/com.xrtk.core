@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Interfaces.DiagnosticsSystem;
 
 namespace XRTK.Services.DiagnosticsSystem
 {
@@ -12,14 +13,9 @@ namespace XRTK.Services.DiagnosticsSystem
     /// </summary>
     public class MixedRealityConsoleDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        /// <param name="profile"></param>
-        public MixedRealityConsoleDiagnosticsDataProvider(string name, uint priority, BaseMixedRealityProfile profile)
-            : base(name, priority, profile)
+        /// <inheritdoc />
+        public MixedRealityConsoleDiagnosticsDataProvider(string name, uint priority, BaseMixedRealityProfile profile, IMixedRealityDiagnosticsSystem parentService)
+            : base(name, priority, profile, parentService)
         {
         }
 

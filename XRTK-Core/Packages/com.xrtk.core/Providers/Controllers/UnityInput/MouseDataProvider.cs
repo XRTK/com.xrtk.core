@@ -6,6 +6,7 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 using XRTK.Utilities.Physics;
 
@@ -16,14 +17,9 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// </summary>
     public class MouseDataProvider : BaseControllerDataProvider
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        /// <param name="profile"></param>
-        public MouseDataProvider(string name, uint priority, MouseControllerDataProviderProfile profile)
-            : base(name, priority, profile)
+        /// <inheritdoc />
+        public MouseDataProvider(string name, uint priority, MouseControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
+            : base(name, priority, profile, parentService)
         {
         }
 

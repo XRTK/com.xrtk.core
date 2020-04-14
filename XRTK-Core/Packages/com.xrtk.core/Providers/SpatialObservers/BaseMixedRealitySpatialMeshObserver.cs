@@ -8,6 +8,7 @@ using UnityEngine;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Extensions;
 using XRTK.Interfaces.Providers.SpatialObservers;
+using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Services;
 using XRTK.Utilities.Async;
 
@@ -18,14 +19,9 @@ namespace XRTK.Providers.SpatialObservers
     /// </summary>
     public abstract class BaseMixedRealitySpatialMeshObserver : BaseMixedRealitySpatialObserverDataProvider, IMixedRealitySpatialMeshObserver
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        /// <param name="profile"></param>
-        protected BaseMixedRealitySpatialMeshObserver(string name, uint priority, BaseMixedRealitySpatialMeshObserverProfile profile)
-            : base(name, priority, profile)
+        /// <inheritdoc />
+        protected BaseMixedRealitySpatialMeshObserver(string name, uint priority, BaseMixedRealitySpatialMeshObserverProfile profile, IMixedRealitySpatialAwarenessSystem parentService)
+            : base(name, priority, profile, parentService)
         {
             MeshPhysicsLayerOverride = profile.MeshPhysicsLayerOverride;
             MeshLevelOfDetail = profile.MeshLevelOfDetail;

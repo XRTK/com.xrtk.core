@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using XRTK.Definitions;
 using XRTK.Extensions;
 using XRTK.Interfaces.NetworkingSystem;
 using XRTK.Services;
@@ -34,8 +35,8 @@ namespace XRTK.Providers.Networking.WebRTC
         }
 
         /// <inheritdoc />
-        public MixedRealityWebRtcDataProvider(string name, uint priority)
-            : base(name, priority)
+        public MixedRealityWebRtcDataProvider(string name, uint priority, BaseMixedRealityProfile profile, IMixedRealityNetworkingSystem parentService)
+            : base(name, priority, profile, parentService)
         {
         }
 

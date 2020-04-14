@@ -12,14 +12,9 @@ namespace XRTK.Services.DiagnosticsSystem
     /// </summary>
     public abstract class BaseMixedRealityDiagnosticsDataProvider : BaseDataProvider, IMixedRealityDiagnosticsDataProvider
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        /// <param name="profile"></param>
-        protected BaseMixedRealityDiagnosticsDataProvider(string name, uint priority, BaseMixedRealityProfile profile)
-            : base(name, priority)
+        /// <inheritdoc />
+        protected BaseMixedRealityDiagnosticsDataProvider(string name, uint priority, BaseMixedRealityProfile profile, IMixedRealityDiagnosticsSystem parentService)
+            : base(name, priority, profile, parentService)
         {
         }
     }

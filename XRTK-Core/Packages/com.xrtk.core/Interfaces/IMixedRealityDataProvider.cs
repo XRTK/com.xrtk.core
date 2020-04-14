@@ -8,6 +8,9 @@ namespace XRTK.Interfaces
     /// </summary>
     public interface IMixedRealityDataProvider : IMixedRealityService
     {
-        // Reserved for future use.
+        /// <summary>
+        /// The <see cref="IMixedRealityService"/> this data provider is registered with.
+        /// </summary>
+        IMixedRealityService ParentService { get; }
     }
 }

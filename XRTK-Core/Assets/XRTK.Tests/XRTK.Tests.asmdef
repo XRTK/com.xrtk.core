@@ -3,7 +3,8 @@
     "references": [
         "XRTK",
         "XRTK.Utilities.Editor",
-        "XRTK.Inspectors"
+        "XRTK.Inspectors",
+        "XRTK.Tests.Services"
     ],
     "optionalUnityReferences": [
         "TestAssemblies"

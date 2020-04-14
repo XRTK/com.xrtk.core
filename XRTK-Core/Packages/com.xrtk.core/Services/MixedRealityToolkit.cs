@@ -496,28 +496,7 @@ namespace XRTK.Services
             if (ActiveProfile.RegisteredServiceProvidersProfile != null &&
                 ActiveProfile.RegisteredServiceProvidersProfile.RegisteredServiceConfigurations != null)
             {
-                foreach (var configuration in ActiveProfile.RegisteredServiceProvidersProfile.RegisteredServiceConfigurations)
-                {
-                    if (TryCreateAndRegisterService(configuration, out var service))
-                    {
-                        switch (configuration.Profile)
-                        {
-                            case null:
-                                // Nothing
-                                break;
-                            case BaseMixedRealityExtensionServiceProfile extensionServiceProfile:
-                                TryRegisterDataProviderConfigurations(extensionServiceProfile.RegisteredServiceConfigurations, service);
-                                break;
-                            default:
-                                Debug.LogError($"{configuration.Profile.name} does not derive from {nameof(BaseMixedRealityExtensionServiceProfile)}");
-                                break;
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogError($"Failed to register {configuration.Name} extension service!");
-                    }
-                }
+                TryRegisterServiceConfigurations(ActiveProfile.RegisteredServiceProvidersProfile.RegisteredServiceConfigurations);
             }
 
             #endregion Service Registration

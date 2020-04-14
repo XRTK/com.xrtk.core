@@ -1,7 +1,10 @@
+// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
 using UnityEngine;
 using XRTK.Interfaces.InputSystem;
 
-namespace XRTK.Tests.InputSystem.TestAssets
+namespace XRTK.Tests.Services.InputSystem
 {
     public class TestGazeProvider : MonoBehaviour, IMixedRealityGazeProvider
     {

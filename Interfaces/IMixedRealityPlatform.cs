@@ -12,5 +12,13 @@ namespace XRTK.Interfaces
         /// Is this platform currently available?
         /// </summary>
         bool IsAvailable { get; }
+
+        /// <summary>
+        /// The this platform build target available?
+        /// </summary>
+        /// <remarks>
+        /// Only returns true in editor.
+        /// </remarks>
+        bool IsBuildTargetAvailable { get; }
     }
 }

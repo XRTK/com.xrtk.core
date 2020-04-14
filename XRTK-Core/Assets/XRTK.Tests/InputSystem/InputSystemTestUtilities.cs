@@ -4,7 +4,7 @@
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
 using XRTK.Services.InputSystem;
-using XRTK.Tests.InputSystem.TestAssets;
+using XRTK.Tests.Services.InputSystem;
 
 namespace XRTK.Tests.InputSystem
 {

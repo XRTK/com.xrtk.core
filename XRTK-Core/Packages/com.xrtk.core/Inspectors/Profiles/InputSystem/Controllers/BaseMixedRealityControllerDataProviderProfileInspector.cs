@@ -12,6 +12,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.PropertyDrawers;
 using XRTK.Providers.Controllers;
+using XRTK.Extensions;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 {
@@ -26,6 +27,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
         private ReorderableList mappingProfileList;
         private int currentlySelectedElement;
+        private int selectedMappingsViewModeTab = 0;
+        private GUIStyle controllerButtonStyle;
 
         protected override void OnEnable()
         {
@@ -168,17 +171,83 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
         {
             RenderHeader("This profile defines all of the controllers and their mappings to use. Additional platform settings can also be available as well.");
 
-            serializedObject.Update();
-
-            showMappingProfiles = EditorGUILayout.Foldout(showMappingProfiles, new GUIContent("Controller Mapping Profiles"), true);
-
+            showMappingProfiles = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showMappingProfiles, new GUIContent("Controller Mapping Profiles"), true);
             if (showMappingProfiles)
             {
-                mappingProfileList.DoLayoutList();
+                EditorGUILayout.Space();
+                EditorGUILayout.HelpBox("Simple:\t\tEdit Controller Mappings assigned to this data provider.\nAdvanced:\tRegister new controller mappings and advanced options.", MessageType.Info);
+                selectedMappingsViewModeTab = GUILayout.Toolbar(selectedMappingsViewModeTab, new string[] { "Simple", "Advanced" });
+                switch (selectedMappingsViewModeTab)
+                {
+                    case 0:
+                        DrawSimpleControllerMappingProfilesView();
+                        break;
+                    case 1:
+                        DrawAdvancedControllerMappingProfilesView();
+                        break;
+                }
             }
 
-            serializedObject.ApplyModifiedProperties();
             EditorGUILayout.Space();
+        }
+
+        private void DrawAdvancedControllerMappingProfilesView()
+        {
+            serializedObject.Update();
+            mappingProfileList.DoLayoutList();
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        private void DrawSimpleControllerMappingProfilesView()
+        {
+            if (controllerButtonStyle == null)
+            {
+                controllerButtonStyle = new GUIStyle("LargeButton")
+                {
+                    imagePosition = ImagePosition.ImageAbove,
+                    fontStyle = FontStyle.Bold,
+                    stretchHeight = true,
+                    stretchWidth = true,
+                    wordWrap = true,
+                    fontSize = 10,
+                };
+            }
+
+            bool appliedModifications = false;
+            serializedObject.Update();
+
+            for (int i = 0; i < controllerMappingProfiles?.arraySize; i++)
+            {
+                var target = controllerMappingProfiles.GetArrayElementAtIndex(i)?.objectReferenceValue;
+                var controllerMappingProfile = (MixedRealityControllerMappingProfile)target;
+                if (controllerMappingProfile != null)
+                {
+                    var handedness = controllerMappingProfile.Handedness;
+
+                    if (handedness != Handedness.Right)
+                    {
+                        GUILayout.BeginHorizontal();
+                    }
+
+                    var buttonContent = new GUIContent($"Edit {controllerMappingProfile.name.ToProperCase()}", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile));
+                    if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
+                    {
+                        serializedObject.ApplyModifiedProperties();
+                        EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, controllerMappingProfiles?.GetArrayElementAtIndex(i).FindPropertyRelative("controllerMappingProfiles"));
+                        appliedModifications = true;
+                    }
+
+                    if (handedness != Handedness.Left)
+                    {
+                        GUILayout.EndHorizontal();
+                    }
+                }
+            }
+
+            if (!appliedModifications)
+            {
+                serializedObject.ApplyModifiedProperties();
+            }
         }
 
         private void DrawConfigurationOptionElement(Rect position, int index, bool isActive, bool isFocused)

@@ -12,14 +12,12 @@ namespace XRTK.Services
     /// <remarks>
     /// Empty, but reserved for future use, in case additional <see cref="IMixedRealityExtensionDataProvider"/> properties or methods are assigned.
     /// </remarks>
-    public abstract class BaseExtensionDataProvider : BaseServiceWithConstructor, IMixedRealityExtensionDataProvider
+    public abstract class BaseExtensionDataProvider : BaseDataProvider, IMixedRealityExtensionDataProvider
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        /// <param name="profile"></param>
-        public BaseExtensionDataProvider(string name, uint priority, BaseMixedRealityExtensionDataProviderProfile profile) : base(name, priority) { }
+        /// <inheritdoc />
+        protected BaseExtensionDataProvider(string name, uint priority, BaseMixedRealityExtensionDataProviderProfile profile, IMixedRealityService parentService)
+            : base(name, priority, profile, parentService)
+        {
+        }
     }
 }

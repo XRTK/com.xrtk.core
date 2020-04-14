@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 
@@ -16,14 +17,9 @@ namespace XRTK.Providers.Controllers
     /// </summary>
     public abstract class BaseControllerDataProvider : BaseDataProvider, IMixedRealityControllerDataProvider
     {
-        /// <summary>
-        /// Creates a new instance of the data provider.
-        /// </summary>
-        /// <param name="name">Name of the data provider as assigned in the configuration profile.</param>
-        /// <param name="priority">Data provider priority controls the order in the service registry.</param>
-        /// <param name="profile">Controller data provider profile assigned to the provider instance in the configuration inspector.</param>
-        protected BaseControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
-            : base(name, priority)
+        /// <inheritdoc />
+        protected BaseControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
+            : base(name, priority, profile, parentService)
         {
             if (profile == null)
             {

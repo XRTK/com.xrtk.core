@@ -17,8 +17,8 @@ namespace XRTK.Providers.CameraSystem
     public class BaseCameraDataProvider : BaseDataProvider, IMixedRealityCameraDataProvider
     {
         /// <inheritdoc />
-        public BaseCameraDataProvider(string name, uint priority, BaseMixedRealityCameraDataProviderProfile profile)
-            : base(name, priority)
+        public BaseCameraDataProvider(string name, uint priority, BaseMixedRealityCameraDataProviderProfile profile, IMixedRealityCameraSystem parentService)
+            : base(name, priority, profile, parentService)
         {
             cameraSystem = MixedRealityToolkit.CameraSystem;
             var globalProfile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile;

@@ -7,6 +7,7 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.UnityInput
@@ -16,14 +17,9 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// </summary>
     public class UnityJoystickDataProvider : BaseControllerDataProvider
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        /// <param name="profile"></param>
-        public UnityJoystickDataProvider(string name, uint priority, UnityInputControllerDataProfile profile)
-            : base(name, priority, profile)
+        /// <inheritdoc />
+        public UnityJoystickDataProvider(string name, uint priority, UnityInputControllerDataProfile profile, IMixedRealityInputSystem parentService)
+            : base(name, priority, profile, parentService)
         {
         }
 

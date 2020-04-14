@@ -14,7 +14,19 @@ namespace XRTK.Definitions.Platforms
             get
             {
 #if WINDOWS_UWP
-                return true;
+                return !UnityEngine.Application.isEditor;
+#else
+                return false;
+#endif
+            }
+        }
+
+        public override bool IsBuildTargetAvailable
+        {
+            get
+            {
+#if UNITY_EDITOR
+                return UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.WSAPlayer;
 #else
                 return false;
 #endif

@@ -5,6 +5,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation.Hands;
+using XRTK.Inspectors.Extensions;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 {
@@ -21,6 +22,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
         private ReorderableList poseList;
         private int currentlySelectedElement;
+
+        private bool showSimulatedHandTrackingSettings = true;
 
         protected override void OnEnable()
         {
@@ -56,18 +59,30 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
             serializedObject.Update();
 
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Hand Rendering Settings", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(handMeshingEnabled);
-            EditorGUILayout.LabelField("Hand Physics Settings", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(handPhysicsEnabled);
-            EditorGUILayout.PropertyField(useTriggers);
-            EditorGUILayout.PropertyField(boundsMode);
-            EditorGUILayout.Space();
 
-            EditorGUILayout.LabelField("Hand Simulation Settings", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(handPoseAnimationSpeed);
-
-            poseList.DoLayoutList();
+            showSimulatedHandTrackingSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showSimulatedHandTrackingSettings, new GUIContent("Simulated Hand Tracking Settings"), true);
+            if (showSimulatedHandTrackingSettings)
+            {
+                EditorGUI.indentLevel++;
+                EditorGUILayout.LabelField("Hand Rendering Settings");
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(handMeshingEnabled);
+                EditorGUI.indentLevel--;
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField("Hand Physics Settings");
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(handPhysicsEnabled);
+                EditorGUILayout.PropertyField(useTriggers);
+                EditorGUILayout.PropertyField(boundsMode);
+                EditorGUILayout.Space();
+                EditorGUI.indentLevel--;
+                EditorGUILayout.LabelField("Simulated Poses");
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(handPoseAnimationSpeed);
+                poseList.DoLayoutList();
+                EditorGUI.indentLevel--;
+                EditorGUI.indentLevel--;
+            }
 
             serializedObject.ApplyModifiedProperties();
         }

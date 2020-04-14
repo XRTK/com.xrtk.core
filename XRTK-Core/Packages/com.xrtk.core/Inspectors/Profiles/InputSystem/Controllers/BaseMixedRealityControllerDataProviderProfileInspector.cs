@@ -175,7 +175,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             if (showMappingProfiles)
             {
                 EditorGUILayout.Space();
-                EditorGUILayout.HelpBox("Simple:\t\tEdit Controller Mappings assigned to this data provider.\nAdvanced:\tRegister new controller mappings and advanced options.", MessageType.Info);
                 selectedMappingsViewModeTab = GUILayout.Toolbar(selectedMappingsViewModeTab, new string[] { "Simple", "Advanced" });
                 switch (selectedMappingsViewModeTab)
                 {
@@ -218,8 +217,12 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
             for (int i = 0; i < controllerMappingProfiles?.arraySize; i++)
             {
-                var target = controllerMappingProfiles.GetArrayElementAtIndex(i)?.objectReferenceValue;
-                var controllerMappingProfile = (MixedRealityControllerMappingProfile)target;
+                var targetObjectReference = controllerMappingProfiles.GetArrayElementAtIndex(i)?.objectReferenceValue;
+                var controllerMappingProfile = (MixedRealityControllerMappingProfile)targetObjectReference;
+
+                // In advanced mode new profiel entries might have been created
+                // but not assiged, which leads to null entries in the mapping profiles list.
+                // We can safely ignore those for the simplified view.
                 if (controllerMappingProfile != null)
                 {
                     var handedness = controllerMappingProfile.Handedness;
@@ -233,7 +236,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                     if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
                     {
                         serializedObject.ApplyModifiedProperties();
-                        EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, controllerMappingProfiles?.GetArrayElementAtIndex(i).FindPropertyRelative("controllerMappingProfiles"));
+                        EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, new SerializedObject(controllerMappingProfile).FindProperty("interactionMappingProfiles"));
                         appliedModifications = true;
                     }
 

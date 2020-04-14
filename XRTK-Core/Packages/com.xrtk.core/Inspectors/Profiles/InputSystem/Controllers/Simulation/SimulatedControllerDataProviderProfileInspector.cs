@@ -2,7 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
+using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation;
+using XRTK.Inspectors.Extensions;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 {
@@ -22,6 +24,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
         private SerializedProperty rightControllerTrackedKey;
 
         private SerializedProperty rotationSpeed;
+
+        private bool showSimulationSettings = true;
 
         protected override void OnEnable()
         {
@@ -48,21 +52,38 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
             serializedObject.Update();
 
-            EditorGUI.BeginChangeCheck();
-            EditorGUILayout.PropertyField(simulatedUpdateFrequency);
-            EditorGUILayout.PropertyField(controllerHideTimeout);
-            EditorGUILayout.Space();
+            showSimulationSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showSimulationSettings, new GUIContent("Simulation Settings"), true);
+            if (showSimulationSettings)
+            {
+                EditorGUI.indentLevel++;
 
-            EditorGUILayout.PropertyField(defaultDistance);
-            EditorGUILayout.PropertyField(depthMultiplier);
-            EditorGUILayout.PropertyField(jitterAmount);
-            EditorGUILayout.Space();
+                EditorGUILayout.LabelField("General Settings");
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(simulatedUpdateFrequency);
+                EditorGUILayout.PropertyField(controllerHideTimeout);
+                EditorGUILayout.Space();
+                EditorGUI.indentLevel--;
 
-            EditorGUILayout.PropertyField(toggleLeftPersistentKey);
-            EditorGUILayout.PropertyField(leftControllerTrackedKey);
-            EditorGUILayout.PropertyField(toggleRightPersistentKey);
-            EditorGUILayout.PropertyField(rightControllerTrackedKey);
-            EditorGUILayout.PropertyField(rotationSpeed);
+                EditorGUILayout.LabelField("Placement Settings");
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(defaultDistance);
+                EditorGUILayout.PropertyField(depthMultiplier);
+                EditorGUILayout.PropertyField(jitterAmount);
+                EditorGUILayout.Space();
+                EditorGUI.indentLevel--;
+
+                EditorGUILayout.LabelField("Controls Settings");
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(toggleLeftPersistentKey);
+                EditorGUILayout.PropertyField(leftControllerTrackedKey);
+                EditorGUILayout.PropertyField(toggleRightPersistentKey);
+                EditorGUILayout.PropertyField(rightControllerTrackedKey);
+                EditorGUILayout.PropertyField(rotationSpeed);
+                EditorGUI.indentLevel--;
+
+                EditorGUI.indentLevel--;
+
+            }
 
             serializedObject.ApplyModifiedProperties();
         }

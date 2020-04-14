@@ -9,8 +9,6 @@ namespace XRTK.Definitions.Controllers.Simulation
     {
         #region General Settings
 
-        [Header("General Settings")]
-
         [SerializeField]
         [Tooltip("Simulated update frequency for tracking data in milliseconds. 0ms is every frame.")]
         private double simulatedUpdateFrequency = 0;
@@ -34,8 +32,6 @@ namespace XRTK.Definitions.Controllers.Simulation
         #endregion
 
         #region Placement Settings
-
-        [Header("Placement Settings")]
 
         [SerializeField]
         [Tooltip("Default distance of the controller from the camera")]
@@ -67,8 +63,6 @@ namespace XRTK.Definitions.Controllers.Simulation
         #endregion
 
         #region Controls Settings
-
-        [Header("Controls Settings")]
 
         [SerializeField]
         [Tooltip("Key to toggle persistent mode for the left controller")]

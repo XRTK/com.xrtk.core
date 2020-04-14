@@ -20,5 +20,19 @@ namespace XRTK.Definitions.Platforms
 #endif
             }
         }
+
+        /// <inheritdoc />
+        public override bool IsBuildTargetAvailable
+        {
+            get
+            {
+#if UNITY_EDITOR
+                return UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.StandaloneWindows ||
+                       UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.StandaloneWindows64;
+#else
+                return false;
+#endif
+            }
+        }
     }
 }

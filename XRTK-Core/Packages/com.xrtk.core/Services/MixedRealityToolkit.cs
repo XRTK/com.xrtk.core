@@ -574,7 +574,8 @@ namespace XRTK.Services
 
                 availablePlatforms.Add(platformInstance);
 
-                if (platformInstance.IsAvailable)
+                if (platformInstance.IsAvailable ||
+                    platformInstance.IsBuildTargetAvailable)
                 {
                     activePlatforms.Add(platformInstance);
                 }
@@ -755,7 +756,7 @@ namespace XRTK.Services
         /// Registers all the services defined in the provided configuration collection.
         /// </summary>
         /// <typeparam name="T"></typeparam>
-        /// <param name="configurations"></param>
+        /// <param name="configurations">The list of <see cref="MixedRealityServiceConfiguration"/>s</param>
         /// <returns>True, if all configurations successfully created and registered their services.</returns>
         public static bool RegisterServices<T>(MixedRealityServiceConfiguration<T>[] configurations) where T : IMixedRealityService
         {
@@ -849,40 +850,44 @@ namespace XRTK.Services
                 return false;
             }
 
-            bool canRunOnPlatform = false;
+            var platforms = new List<IMixedRealityPlatform>();
 
             Debug.Assert(ActivePlatforms.Count > 0);
 
             for (var i = 0; i < runtimePlatforms?.Count; i++)
             {
+                var runtimePlatform = runtimePlatforms[i].GetType();
+
+                if (runtimePlatform == typeof(AllPlatforms))
+                {
+                    platforms.Add(runtimePlatforms[i]);
+                    break;
+                }
+
                 for (var j = 0; j < ActivePlatforms.Count; j++)
                 {
-                    if (ActivePlatforms[j].GetType() == runtimePlatforms[i].GetType())
+                    var activePlatform = ActivePlatforms[j].GetType();
+
+                    if (activePlatform == runtimePlatform)
                     {
-                        canRunOnPlatform = true;
+                        platforms.Add(runtimePlatforms[i]);
                         break;
                     }
                 }
-
-                if (canRunOnPlatform)
-                {
-                    break;
-                }
             }
 
-            if (!canRunOnPlatform)
+            if (platforms.Count == 0)
             {
-                // We return true so we don't raise en error.
-                // Even though we did not register the service,
-                // it's expected that this is the intended behavior
-                // when there isn't a valid platform to run the service on.
-
                 if (runtimePlatforms == null ||
                     runtimePlatforms.Count == 0)
                 {
                     Debug.LogWarning($"No runtime platforms defined for the {concreteType?.Name} service.");
                 }
 
+                // We return true so we don't raise en error.
+                // Even though we did not register the service,
+                // it's expected that this is the intended behavior
+                // when there isn't a valid platform to run the service on.
                 return true;
             }
 
@@ -890,6 +895,15 @@ namespace XRTK.Services
             {
                 Debug.LogError($"Unable to register a service with a null concrete {typeof(T).Name} type.");
                 return false;
+            }
+
+            if (!CurrentBuildTargetPlatform.IsBuildTargetActive(platforms))
+            {
+                // We return true so we don't raise en error.
+                // Even though we did not register the service,
+                // it's expected that this is the intended behavior
+                // when there isn't a valid build target active to run the service on.
+                return true;
             }
 
             if (!typeof(IMixedRealityService).IsAssignableFrom(concreteType))

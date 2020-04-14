@@ -20,5 +20,18 @@ namespace XRTK.Definitions.Platforms
 #endif
             }
         }
+
+        /// <inheritdoc />
+        public override bool IsBuildTargetAvailable
+        {
+            get
+            {
+#if UNITY_EDITOR
+                return UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.Android;
+#else
+                return false;
+#endif
+            }
+        }
     }
 }

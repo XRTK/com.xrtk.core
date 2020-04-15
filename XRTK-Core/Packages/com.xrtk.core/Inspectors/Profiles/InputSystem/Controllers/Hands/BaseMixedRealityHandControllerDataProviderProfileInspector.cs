@@ -2,7 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
+using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
+using XRTK.Inspectors.Extensions;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 {
@@ -13,6 +15,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
         private SerializedProperty boundsMode;
+
+        private bool showHandTrackingSettings = true;
+        private static readonly GUIContent handTrackingSettingsFoldoutHeader = new GUIContent("Hand Tracking Settings");
 
         protected override void OnEnable()
         {
@@ -27,14 +32,29 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            EditorGUILayout.LabelField("Hand Rendering Settings", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(handMeshingEnabled);
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Hand Physics Settings", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(handPhysicsEnabled);
-            EditorGUILayout.PropertyField(useTriggers);
-            EditorGUILayout.PropertyField(boundsMode);
-            EditorGUILayout.Space();
+
+            serializedObject.Update();
+
+            showHandTrackingSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showHandTrackingSettings, handTrackingSettingsFoldoutHeader, true);
+            if (showHandTrackingSettings)
+            {
+                EditorGUI.indentLevel++;
+                EditorGUILayout.LabelField("Hand Rendering Settings");
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(handMeshingEnabled);
+                EditorGUI.indentLevel--;
+                EditorGUILayout.Space();
+                EditorGUILayout.LabelField("Hand Physics Settings");
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(handPhysicsEnabled);
+                EditorGUILayout.PropertyField(useTriggers);
+                EditorGUILayout.PropertyField(boundsMode);
+                EditorGUILayout.Space();
+                EditorGUI.indentLevel--;
+                EditorGUI.indentLevel--;
+            }
+
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

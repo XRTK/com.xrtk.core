@@ -93,12 +93,10 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 if (IsInInputDownPose && !lastIsInInputDownPose)
                 {
-                    Debug.Log("Raised On Input Down");
                     MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, MixedRealityInputAction.None);
                 }
                 else if (!IsInInputDownPose && lastIsInInputDownPose)
                 {
-                    Debug.Log("Raised On Input Up");
                     MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, MixedRealityInputAction.None);
                 }
             }

@@ -213,7 +213,7 @@ namespace XRTK.Services.Teleportation
 
             var cameraTransform = MixedRealityToolkit.CameraSystem == null
                 ? CameraCache.Main.transform
-                : MixedRealityToolkit.CameraSystem.CameraRig.CameraTransform;
+                : MixedRealityToolkit.CameraSystem.MainCameraRig.CameraTransform;
             var cameraPosition = cameraTransform.position;
             var cameraParent = cameraTransform.parent;
             Debug.Assert(cameraParent != null, "Teleport system requires that the camera be parented under another object.");

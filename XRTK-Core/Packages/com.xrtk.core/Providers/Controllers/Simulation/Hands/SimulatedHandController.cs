@@ -2,13 +2,12 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
-using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Providers.Controllers.Hands;
@@ -23,9 +22,11 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     /// </summary>
     public class SimulatedHandController : BaseHandController, IMixedRealitySimulatedController
     {
+        public SimulatedHandController() : base() { }
+
         /// <inheritdoc />
-        public SimulatedHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-            : base(controllerDataProvider, trackingState, controllerHandedness, inputSource, interactions)
+        public SimulatedHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
+            : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
         {
             simulatedHandControllerDataProvider = (ISimulatedHandControllerDataProvider)controllerDataProvider;
 
@@ -135,17 +136,27 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         }
 
         /// <inheritdoc />
-        public override MixedRealityInteractionMapping[] DefaultInteractions => new[]
+        public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
         {
-            new MixedRealityInteractionMapping(0, "Yaw Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.E),
-            new MixedRealityInteractionMapping(1, "Yaw Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Q),
-            new MixedRealityInteractionMapping(2, "Pitch Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.F),
-            new MixedRealityInteractionMapping(3, "Pitch Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.R),
-            new MixedRealityInteractionMapping(4, "Roll Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.X),
-            new MixedRealityInteractionMapping(5, "Roll Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Z),
-            new MixedRealityInteractionMapping(6, "Move Away (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.PageUp),
-            new MixedRealityInteractionMapping(7, "Move Closer (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.PageDown)
+            new MixedRealityInteractionMapping("Yaw Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.E),
+            new MixedRealityInteractionMapping("Yaw Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Q),
+            new MixedRealityInteractionMapping("Pitch Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.F),
+            new MixedRealityInteractionMapping("Pitch Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.R),
+            new MixedRealityInteractionMapping("Roll Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.X),
+            new MixedRealityInteractionMapping("Roll Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Z),
+            new MixedRealityInteractionMapping("Move Away (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.PageUp),
+            new MixedRealityInteractionMapping("Move Closer (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.PageDown)
         };
+
+        /// <summary>
+        /// The Default Left Handed interactions for this controller.
+        /// </summary>
+        public override MixedRealityInteractionMapping[] DefaultLeftHandedInteractions => DefaultInteractions;
+
+        /// <summary>
+        /// The Default Right Handed interactions for this controller.
+        /// </summary>
+        public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
 
         /// <summary>
         /// Gets the hands position in screen space.
@@ -328,9 +339,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             // Apply mouse delta x/y in screen space, but depth offset in world space
             screenPosition.x += rootPoseDelta.Position.x;
             screenPosition.y += rootPoseDelta.Position.y;
-            Vector3 newWorldPoint = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition);
-            newWorldPoint += MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.transform.forward * rootPoseDelta.Position.z;
-            screenPosition = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.WorldToScreenPoint(newWorldPoint);
+            Vector3 newWorldPoint = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition);
+            newWorldPoint += MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.forward * rootPoseDelta.Position.z;
+            screenPosition = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.WorldToScreenPoint(newWorldPoint);
 
             HandRotateEulerAngles += rootPoseDelta.Rotation.eulerAngles;
             JitterOffset = Random.insideUnitSphere * simulatedHandControllerDataProvider.JitterAmount;
@@ -349,7 +360,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             currentPoseBlending = TargetPoseBlending;
             var rotation = Quaternion.Euler(HandRotateEulerAngles);
-            var position = MixedRealityToolkit.CameraSystem.CameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
+            var position = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
             Pose.ComputeJointPoses(ControllerHandedness, rotation, position, HandData.Joints);
         }
     }

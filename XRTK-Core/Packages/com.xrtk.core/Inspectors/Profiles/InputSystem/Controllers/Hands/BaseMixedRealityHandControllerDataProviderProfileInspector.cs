@@ -2,10 +2,12 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
+using XRTK.Definitions.Controllers.Hands;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 {
-    public abstract class BaseMixedRealityHandControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(BaseHandControllerDataProviderProfile), true, isFallback = true)]
+    public class BaseMixedRealityHandControllerDataProviderProfileInspector : BaseMixedRealityControllerDataProviderProfileInspector
     {
         private SerializedProperty handMeshingEnabled;
         private SerializedProperty handPhysicsEnabled;
@@ -24,12 +26,15 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
         public override void OnInspectorGUI()
         {
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Global Hand Tracking Settings Overrides");
+            base.OnInspectorGUI();
+            EditorGUILayout.LabelField("Hand Rendering Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(handMeshingEnabled);
+            EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Hand Physics Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(handPhysicsEnabled);
             EditorGUILayout.PropertyField(useTriggers);
             EditorGUILayout.PropertyField(boundsMode);
+            EditorGUILayout.Space();
         }
     }
 }

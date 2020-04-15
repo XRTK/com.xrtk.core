@@ -5,9 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
-using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;
@@ -19,9 +17,12 @@ namespace XRTK.Providers.Controllers.Hands
     /// </summary>
     public abstract class BaseHandController : BaseController, IMixedRealityHandController
     {
-        /// <inheritdoc />
-        public BaseHandController(IMixedRealityControllerDataProvider dataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-                : base(dataProvider, trackingState, controllerHandedness, inputSource, interactions) { }
+        protected BaseHandController() : base() { }
+
+        protected BaseHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
+            : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
+        {
+        }
 
         private const float NEW_VELOCITY_WEIGHT = .2f;
         private const float CURRENT_VELOCITY_WEIGHT = .8f;
@@ -42,7 +43,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
         {
-            new MixedRealityInteractionMapping(0, "Spatial Pointer Pose", AxisType.SixDof, DeviceInputType.SpatialPointer, MixedRealityInputAction.None)
+            new MixedRealityInteractionMapping("Spatial Pointer Pose", AxisType.SixDof, DeviceInputType.SpatialPointer)
         };
 
         /// <inheritdoc />
@@ -466,9 +467,6 @@ namespace XRTK.Providers.Controllers.Hands
             newBounds = null;
             return false;
         }
-
-        /// <inheritdoc />
-        public override void SetupDefaultInteractions(Handedness controllerHandedness) { }
 
         /// <inheritdoc />
         public virtual bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose) => jointPoses.TryGetValue(joint, out pose);

@@ -8,7 +8,10 @@ namespace XRTK.Tests.Services
 {
     internal class TestExtensionService1 : BaseExtensionService, ITestExtensionService1
     {
-        public TestExtensionService1(string name, uint priority = 10, BaseMixedRealityExtensionServiceProfile profile = null) : base(name, priority, profile) { }
+        public TestExtensionService1(string name = "Test Extension Service 1", uint priority = 10, BaseMixedRealityExtensionServiceProfile profile = null)
+            : base(name, priority, profile)
+        {
+        }
 
         public bool IsEnabled { get; private set; }
 

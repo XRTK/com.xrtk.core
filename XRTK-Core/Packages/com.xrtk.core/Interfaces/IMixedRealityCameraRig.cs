@@ -4,7 +4,7 @@
 using UnityEngine;
 using UnityEngine.SpatialTracking;
 
-namespace XRTK.Interfaces
+namespace XRTK.Interfaces.CameraSystem
 {
     /// <summary>
     /// This interface is to be implemented by a <see cref="MonoBehaviour"/> and attached to the playspace root object.
@@ -12,12 +12,15 @@ namespace XRTK.Interfaces
     public interface IMixedRealityCameraRig
     {
         /// <summary>
-        /// The root playspace transform that serves as the root of the camera rig.
+        /// The <see cref="GameObject"/> reference for this camera rig.
         /// </summary>
-        /// <remarks>
-        /// This transform serves as a virtual representation of the physical space.
+        GameObject GameObject { get; }
+
+        /// <summary>
+        /// The root playspace transform that serves as the root of the camera rig.<para/>
+        /// This transform serves as a virtual representation of the physical space.<para/>
         /// All physical objects that have digital twins will use this frame of reference to synchronize their transform data.
-        /// </remarks>
+        /// </summary>
         Transform PlayspaceTransform { get; }
 
         /// <summary>
@@ -26,7 +29,7 @@ namespace XRTK.Interfaces
         Transform CameraTransform { get; }
 
         /// <summary>
-        /// The player's <see cref="Camera"/> reference.
+        /// The player's <see cref="Camera"/> reference, located at their tracked head position.
         /// </summary>
         Camera PlayerCamera { get; }
 
@@ -36,7 +39,7 @@ namespace XRTK.Interfaces
         TrackedPoseDriver CameraPoseDriver { get; }
 
         /// <summary>
-        /// The player's body transform.
+        /// The player's body transform, located at the player's feet.
         /// </summary>
         /// <remarks>
         /// This <see cref="Transform"/> is synced to the player's head camera X &amp; Z values

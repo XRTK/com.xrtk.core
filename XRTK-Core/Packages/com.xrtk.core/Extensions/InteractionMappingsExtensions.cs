@@ -1,12 +1,9 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
-using System.Collections.Generic;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Providers.Controllers;
 using XRTK.Services;
 
 namespace XRTK.Extensions
@@ -89,33 +86,6 @@ namespace XRTK.Extensions
                         break;
                 }
             }
-        }
-
-        /// <summary>
-        /// Query the controller mapping library for any mappings for a specific controller
-        /// </summary>
-        /// <param name="mappings"></param>
-        /// <param name="controllerType">Type of controller to search for</param>
-        /// <param name="handedness">Specific controller hand to query</param>
-        /// <param name="resolvedMapping">If found, the specific controller mapping is returned</param>
-        /// <returns>Returns true if a mapping profile is found</returns>
-        /// <remarks>Will also check for any controller mappings assigned to the handedness of Both (both hands) allowing a single configuration to be used for either hand</remarks>
-        public static bool GetControllerInteractionMapping(this List<MixedRealityControllerMapping> mappings, Type controllerType, Handedness handedness, out MixedRealityControllerMapping resolvedMapping)
-        {
-            resolvedMapping = MixedRealityControllerMapping.None;
-
-            for (int i = 0; i < mappings?.Count; i++)
-            {
-                // Assign any known interaction mappings.
-                if (mappings[i].ControllerType?.Type == controllerType &&
-                    (mappings[i].Handedness == handedness || mappings[i].Handedness == Handedness.Both) &&
-                    mappings[i].Interactions.Length > 0)
-                {
-                    resolvedMapping = mappings[i];
-                    return true;
-                }
-            }
-                    return false;
         }
     }
 }

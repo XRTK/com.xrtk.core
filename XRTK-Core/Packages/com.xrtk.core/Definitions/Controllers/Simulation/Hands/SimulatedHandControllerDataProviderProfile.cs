@@ -5,10 +5,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
+using XRTK.Providers.Controllers.Simulation.Hands;
 
 namespace XRTK.Definitions.Controllers.Simulation.Hands
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Simulated Hand Controller Data Provider Profile", fileName = "SimulatedHandControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
     public class SimulatedHandControllerDataProviderProfile : SimulatedControllerDataProviderProfile
     {
         [SerializeField]
@@ -29,9 +29,6 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// </summary>
         public float HandPoseAnimationSpeed => handPoseAnimationSpeed;
 
-
-        [Header("General Settings")]
-
         [SerializeField]
         [Tooltip("If set, hand mesh data will be read and available for visualization. Disable for optimized performance.")]
         private bool handMeshingEnabled = false;
@@ -40,8 +37,6 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// If set, hand mesh data will be read and available for visualization. Disable for optimized performance.
         /// </summary>
         public bool HandMeshingEnabled => handMeshingEnabled;
-
-        [Header("Hand Physics")]
 
         [SerializeField]
         [Tooltip("If set, hands will be setup with colliders and a rigidbody to work with Unity's physics system.")]
@@ -69,5 +64,14 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// Set the bounds mode to use for calculating hand bounds.
         /// </summary>
         public HandBoundsMode BoundsMode => boundsMode;
+
+        public override ControllerDefinition[] GetDefaultControllerOptions()
+        {
+            return new[]
+            {
+                new ControllerDefinition(typeof(SimulatedHandController), Handedness.Left),
+                new ControllerDefinition(typeof(SimulatedHandController), Handedness.Right),
+            };
+        }
     }
 }

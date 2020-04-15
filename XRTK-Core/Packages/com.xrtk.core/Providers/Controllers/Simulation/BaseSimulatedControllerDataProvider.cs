@@ -5,6 +5,7 @@ using System;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 using XRTK.Utilities;
@@ -17,8 +18,8 @@ namespace XRTK.Providers.Controllers.Simulation
     public abstract class BaseSimulatedControllerDataProvider : BaseControllerDataProvider, ISimulatedControllerDataProvider
     {
         /// <inheritdoc />
-        public BaseSimulatedControllerDataProvider(string name, uint priority, SimulatedControllerDataProviderProfile profile)
-            : base(name, priority, profile)
+        protected BaseSimulatedControllerDataProvider(string name, uint priority, SimulatedControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
+            : base(name, priority, profile, parentService)
         {
             if (profile == null)
             {
@@ -239,6 +240,6 @@ namespace XRTK.Providers.Controllers.Simulation
         /// Asks the concrete simulation data create and register a new simulated controller.
         /// </summary>
         /// <param name="handedness">The handedness of the controller to create.</param>
-        protected abstract void CreateAndRegisterSimulatedController(Handedness handedness);
+        protected abstract IMixedRealitySimulatedController CreateAndRegisterSimulatedController(Handedness handedness);
     }
 }

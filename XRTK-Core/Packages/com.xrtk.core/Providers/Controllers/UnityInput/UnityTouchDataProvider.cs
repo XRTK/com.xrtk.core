@@ -1,9 +1,10 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -17,14 +18,9 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// </summary>
     public class UnityTouchDataProvider : BaseControllerDataProvider
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        /// <param name="profile"></param>
-        public UnityTouchDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
-            : base(name, priority, profile)
+        /// <inheritdoc />
+        public UnityTouchDataProvider(string name, uint priority, TouchScreenControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
+            : base(name, priority, profile, parentService)
         {
         }
 
@@ -83,31 +79,21 @@ namespace XRTK.Providers.Controllers.UnityInput
         {
             if (!ActiveTouches.TryGetValue(touch.fingerId, out var controller))
             {
-                IMixedRealityInputSource inputSource = null;
-
-                if (MixedRealityToolkit.InputSystem != null)
+                try
                 {
-                    var pointers = RequestPointers(typeof(UnityTouchController), Handedness.Any, true);
-                    inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"Touch {touch.fingerId}", pointers);
+                    controller = new UnityTouchController(this, TrackingState.NotApplicable, Handedness.Any, GetControllerMappingProfile(typeof(UnityTouchController), Handedness.Any));
                 }
-
-                controller = new UnityTouchController(this, TrackingState.NotApplicable, Handedness.Any, inputSource);
-
-                if (inputSource != null)
+                catch (Exception e)
                 {
-                    for (int i = 0; i < inputSource.Pointers.Length; i++)
-                    {
-                        inputSource.Pointers[i].Controller = controller;
-                        var touchPointer = (IMixedRealityTouchPointer)inputSource.Pointers[i];
-                        touchPointer.TouchRay = ray;
-                        touchPointer.FingerId = touch.fingerId;
-                    }
-                }
-
-                if (!controller.SetupConfiguration(typeof(UnityTouchController)))
-                {
-                    Debug.LogError($"Failed to configure {typeof(UnityTouchController).Name} controller!");
+                    Debug.LogError($"Failed to create {nameof(UnityTouchController)}!\n{e}");
                     return;
+                }
+
+                for (int i = 0; i < controller.InputSource?.Pointers.Length; i++)
+                {
+                    var touchPointer = (IMixedRealityTouchPointer)controller.InputSource.Pointers[i];
+                    touchPointer.TouchRay = ray;
+                    touchPointer.FingerId = touch.fingerId;
                 }
 
                 ActiveTouches.Add(touch.fingerId, controller);

@@ -3,12 +3,11 @@
 
 using UnityEditor;
 using XRTK.Definitions.Controllers.Simulation;
-using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 {
     [CustomEditor(typeof(SimulatedControllerDataProviderProfile))]
-    public class SimulatedControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
+    public class SimulatedControllerDataProviderProfileInspector : BaseMixedRealityControllerDataProviderProfileInspector
     {
         private SerializedProperty simulatedUpdateFrequency;
         private SerializedProperty controllerHideTimeout;
@@ -45,9 +44,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
         public override void OnInspectorGUI()
         {
-            RenderHeader("This profile contains all of the settings for simulating all kinds of controllers in the editor runtime.");
-
-            EditorGUILayout.Space();
+            base.OnInspectorGUI();
 
             serializedObject.Update();
 

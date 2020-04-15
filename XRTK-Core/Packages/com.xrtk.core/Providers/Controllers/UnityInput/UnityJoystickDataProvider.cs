@@ -1,12 +1,13 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.UnityInput
@@ -16,18 +17,13 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// </summary>
     public class UnityJoystickDataProvider : BaseControllerDataProvider
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        /// <param name="profile"></param>
-        public UnityJoystickDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)
-            : base(name, priority, profile)
+        /// <inheritdoc />
+        public UnityJoystickDataProvider(string name, uint priority, UnityInputControllerDataProfile profile, IMixedRealityInputSystem parentService)
+            : base(name, priority, profile, parentService)
         {
         }
 
-        private const float DeviceRefreshInterval = 3.0f;
+        private const float DEVICE_REFRESH_INTERVAL = 3.0f;
 
         protected static readonly Dictionary<string, GenericJoystickController> ActiveGenericControllers = new Dictionary<string, GenericJoystickController>();
 
@@ -41,7 +37,7 @@ namespace XRTK.Providers.Controllers.UnityInput
 
             deviceRefreshTimer += Time.unscaledDeltaTime;
 
-            if (deviceRefreshTimer >= DeviceRefreshInterval)
+            if (deviceRefreshTimer >= DEVICE_REFRESH_INTERVAL)
             {
                 deviceRefreshTimer = 0.0f;
                 RefreshDevices();
@@ -122,34 +118,28 @@ namespace XRTK.Providers.Controllers.UnityInput
                 return controller;
             }
 
-            Type controllerType;
+            var controllerType = GetCurrentControllerType(joystickName);
 
-            switch (GetCurrentControllerType(joystickName))
+            if (controllerType == null)
             {
-                default:
-                    return null;
-                case SupportedControllerType.GenericUnity:
-                    controllerType = typeof(GenericJoystickController);
-                    break;
-                case SupportedControllerType.Xbox:
-                    controllerType = typeof(XboxController);
-                    break;
-            }
-
-            var inputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource($"{controllerType.Name} Controller");
-            var detectedController = Activator.CreateInstance(controllerType, this, TrackingState.NotTracked, Handedness.None, inputSource, null) as GenericJoystickController;
-
-            if (detectedController == null)
-            {
-                Debug.LogError($"Failed to create {controllerType.Name} controller");
                 return null;
             }
 
-            if (!detectedController.SetupConfiguration(controllerType))
+            GenericJoystickController detectedController;
+
+            try
             {
-                // Controller failed to be setup correctly.
-                // Return null so we don't raise the source detected.
-                Debug.LogError($"Failed to configure {controllerType.Name} controller!");
+                detectedController = Activator.CreateInstance(controllerType, this, TrackingState.NotTracked, Handedness.None, GetControllerMappingProfile(controllerType, Handedness.None)) as GenericJoystickController;
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Failed to create {controllerType.Name} controller!\n{e}");
+                return null;
+            }
+
+            if (detectedController == null)
+            {
+                Debug.LogError($"Failed to create {controllerType.Name} controller!");
                 return null;
             }
 
@@ -179,13 +169,13 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// </summary>
         /// <param name="joystickName">The name of they joystick from Unity's <see cref="Input.GetJoystickNames"/></param>
         /// <returns>The supported controller type</returns>
-        protected virtual SupportedControllerType GetCurrentControllerType(string joystickName)
+        protected virtual Type GetCurrentControllerType(string joystickName)
         {
             if (string.IsNullOrEmpty(joystickName) ||
                 joystickName.Contains("<0"))
             {
                 Debug.LogError($"Joystick not found! {joystickName}");
-                return SupportedControllerType.None;
+                return null;
             }
 
             if (joystickName.Contains("Xbox Controller") ||
@@ -193,11 +183,10 @@ namespace XRTK.Providers.Controllers.UnityInput
                 joystickName.Contains("Xbox Bluetooth Gamepad") ||
                 joystickName.Contains("Xbox Wireless Controller"))
             {
-                return SupportedControllerType.Xbox;
+                return typeof(XboxController);
             }
 
-            Debug.Log($"{joystickName} does not have a defined controller type, falling back to generic controller type");
-            return SupportedControllerType.GenericUnity;
+            return null;
         }
     }
 }

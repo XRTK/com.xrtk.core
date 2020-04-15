@@ -418,6 +418,8 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateIsInputDownPose()
         {
+            ((IMixedRealityHandControllerDataProvider)ControllerDataProvider).PoseResolver.ResolvePose(ControllerHandedness, jointPoses);
+
             if (TrackingState == TrackingState.Tracked)
             {
                 var isInInputDownPoseThisFrame = false;

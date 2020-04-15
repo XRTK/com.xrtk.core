@@ -1,9 +1,8 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Collections.Generic;
 using XRTK.Definitions.Controllers.Hands;
-using XRTK.Definitions.Controllers.Simulation.Hands;
+using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Interfaces.Providers.Controllers.Hands
 {
@@ -30,8 +29,8 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         HandBoundsMode BoundsMode { get; }
 
         /// <summary>
-        /// Gets tracked poses for hand pose recognition.
+        /// Gets the active pose resolver instance for the data provider.
         /// </summary>
-        IReadOnlyList<SimulatedHandControllerPoseData> TrackedPoses { get; }
+        HandPoseRecognizer PoseResolver { get; }
     }
 }

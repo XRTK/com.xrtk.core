@@ -12,6 +12,7 @@ using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;
+using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Providers.Controllers.Simulation.Hands
 {
@@ -51,22 +52,17 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 ? profile.BoundsMode
                 : globalSettingsProfile.BoundsMode;
 
-            if (profile.TrackedPoses != null)
+            if (profile.TrackedPoses.Count > 0)
             {
-                if (globalSettingsProfile.TrackedPoses != null)
-                {
-                    TrackedPoses = profile.TrackedPoses.Count != globalSettingsProfile.TrackedPoses.Count
-                        ? profile.TrackedPoses
-                        : globalSettingsProfile.TrackedPoses;
-                }
-                else
-                {
-                    TrackedPoses = profile.TrackedPoses;
-                }
+                var trackedPoses = profile.TrackedPoses.Count != globalSettingsProfile.TrackedPoses.Count
+                    ? profile.TrackedPoses
+                    : globalSettingsProfile.TrackedPoses;
+
+                PoseResolver = new HandPoseRecognizer(trackedPoses);
             }
             else
             {
-                TrackedPoses = globalSettingsProfile.TrackedPoses;
+                PoseResolver = new HandPoseRecognizer(globalSettingsProfile.TrackedPoses);
             }
         }
 
@@ -91,7 +87,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public bool HandMeshingEnabled { get; }
 
         /// <inheritdoc />
-        public IReadOnlyList<SimulatedHandControllerPoseData> TrackedPoses { get; }
+        public HandPoseRecognizer PoseResolver { get; }
 
         /// <inheritdoc />
         protected override IMixedRealitySimulatedController CreateAndRegisterSimulatedController(Handedness handedness)

@@ -63,12 +63,13 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Tries to reconize the hands pose using the the provided <see cref="HandPoseRecognizer"/>.
         /// </summary>
-        /// <param name="localJointPoses">Local joint poses retrieved from initial conversion.</param>
+        /// <param name="jointPoses">Local joint poses retrieved from initial conversion.</param>
         /// <param name="recognizedPoseId">The recognized pose ID, if any.</param>
         /// <returns>True, if a pose was recognized.</returns>
         protected bool TryRecognizePose(MixedRealityPose[] jointPoses, out string recognizedPoseId)
         {
-            var localJointPoses = ParseFromJointPoses(jointPoses, handedness, Quaternion.identity, Vector3.zero);
+            var wristPose = jointPoses[(int)TrackedHandJoint.Wrist];
+            var localJointPoses = ParseFromJointPoses(jointPoses, handedness, wristPose.Rotation, wristPose.Position);
             var currentFrame = new HandPoseFrame(localJointPoses);
 
             for (int i = 0; i < trackedPoses.Length; i++)

@@ -47,8 +47,11 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             // Start the timestamp stopwatch
             handUpdateStopWatch = new StopWatch();
             handUpdateStopWatch.Reset();
+
+            converter = new SimulatedHandDataConverter(ControllerHandedness, simulatedHandControllerDataProvider.TrackedPoses);
         }
 
+        private readonly SimulatedHandDataConverter converter;
         private readonly ISimulatedHandControllerDataProvider simulatedHandControllerDataProvider;
         private readonly StopWatch handUpdateStopWatch;
         private readonly StopWatch lastUpdatedStopWatch;
@@ -217,6 +220,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         {
             if (TryGetSimulatedHandData(out var handData))
             {
+                converter.Finalize(handData);
                 UpdateController(handData);
             }
         }

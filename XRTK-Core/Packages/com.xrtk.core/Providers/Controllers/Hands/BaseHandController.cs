@@ -21,19 +21,19 @@ namespace XRTK.Providers.Controllers.Hands
     {
         /// <inheritdoc />
         public BaseHandController(IMixedRealityControllerDataProvider dataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-                : base(dataProvider, trackingState, controllerHandedness, inputSource, interactions)
-        {
-        }
+                : base(dataProvider, trackingState, controllerHandedness, inputSource, interactions) { }
 
         private const float NEW_VELOCITY_WEIGHT = .2f;
         private const float CURRENT_VELOCITY_WEIGHT = .8f;
         private const float INPUT_DOWN_POSE_EPSILON = .02f;
+        private const int INPUT_DOWN_FRAME_BUFFER_SIZE = 5;
 
-        private readonly int velocityUpdateInterval = 9;
+        private readonly int velocityUpdateFrameInterval = 9;
         private readonly Dictionary<TrackedHandBounds, Bounds[]> bounds = new Dictionary<TrackedHandBounds, Bounds[]>();
         private readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
+        private readonly Queue<bool> inputDownBuffer = new Queue<bool>(INPUT_DOWN_FRAME_BUFFER_SIZE);
 
-        private int frameOn = 0;
+        private int velocityUpdateFrame = 0;
         private float deltaTimeStart;
 
         private Vector3 lastPalmNormal;
@@ -57,22 +57,7 @@ namespace XRTK.Providers.Controllers.Hands
         protected Vector3 PalmNormal => TryGetJointPose(TrackedHandJoint.Palm, out var pose) ? -pose.Up : Vector3.zero;
 
         /// <inheritdoc />
-        public bool IsInInputDownPose
-        {
-            get
-            {
-                if (TryGetJointPose(TrackedHandJoint.ThumbTip, out var thumbTip) &&
-                    TryGetJointPose(TrackedHandJoint.IndexTip, out var indexTip))
-                {
-                    if (Vector3.Distance(thumbTip.Position, indexTip.Position) < INPUT_DOWN_POSE_EPSILON)
-                    {
-                        return true;
-                    }
-                }
-
-                return false;
-            }
-        }
+        public bool IsInInputDownPose { get; private set; }
 
         public void UpdateController(HandData handData)
         {
@@ -84,6 +69,7 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateJoints(handData);
             UpdateBounds();
             UpdateVelocity();
+            UpdateIsInputDownPose();
 
             if (TryGetJointPose(TrackedHandJoint.Wrist, out var wristPose))
             {
@@ -107,10 +93,12 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 if (IsInInputDownPose && !lastIsInInputDownPose)
                 {
+                    Debug.Log("Raised On Input Down");
                     MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, MixedRealityInputAction.None);
                 }
                 else if (!IsInInputDownPose && lastIsInInputDownPose)
                 {
+                    Debug.Log("Raised On Input Up");
                     MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, MixedRealityInputAction.None);
                 }
             }
@@ -397,13 +385,13 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         private void UpdateVelocity()
         {
-            if (frameOn == 0)
+            if (velocityUpdateFrame == 0)
             {
                 deltaTimeStart = Time.unscaledTime;
                 lastPalmPosition = GetJointPosition(TrackedHandJoint.Palm);
                 lastPalmNormal = PalmNormal;
             }
-            else if (frameOn == velocityUpdateInterval)
+            else if (velocityUpdateFrame == velocityUpdateFrameInterval)
             {
                 // Update linear velocity.
                 var deltaTime = Time.unscaledTime - deltaTimeStart;
@@ -417,8 +405,55 @@ namespace XRTK.Providers.Controllers.Hands
                 AngularVelocity = rotationRate / deltaTime;
             }
 
-            frameOn++;
-            frameOn = frameOn > velocityUpdateInterval ? 0 : frameOn;
+            velocityUpdateFrame++;
+            velocityUpdateFrame = velocityUpdateFrame > velocityUpdateFrameInterval ? 0 : velocityUpdateFrame;
+        }
+
+        private void UpdateIsInputDownPose()
+        {
+            if (TrackingState == TrackingState.Tracked)
+            {
+                var isInInputDownPoseThisFrame = false;
+                if (TryGetJointPose(TrackedHandJoint.ThumbTip, out var thumbTip) &&
+                        TryGetJointPose(TrackedHandJoint.IndexTip, out var indexTip))
+                {
+                    if (Vector3.Distance(thumbTip.Position, indexTip.Position) < INPUT_DOWN_POSE_EPSILON)
+                    {
+                        isInInputDownPoseThisFrame = true;
+                    }
+                }
+
+                if (inputDownBuffer.Count < INPUT_DOWN_FRAME_BUFFER_SIZE)
+                {
+                    inputDownBuffer.Enqueue(isInInputDownPoseThisFrame);
+                    IsInInputDownPose = false;
+                }
+                else
+                {
+                    inputDownBuffer.Dequeue();
+                    inputDownBuffer.Enqueue(isInInputDownPoseThisFrame);
+
+                    isInInputDownPoseThisFrame = true;
+                    for (int i = 0; i < inputDownBuffer.Count; i++)
+                    {
+                        var value = inputDownBuffer.Dequeue();
+
+                        if (!value)
+                        {
+                            isInInputDownPoseThisFrame = false;
+                        }
+
+                        inputDownBuffer.Enqueue(value);
+                    }
+
+                    IsInInputDownPose = isInInputDownPoseThisFrame;
+                }
+            }
+            else
+            {
+                inputDownBuffer.Clear();
+                IsInInputDownPose = false;
+            }
         }
 
         /// <inheritdoc />

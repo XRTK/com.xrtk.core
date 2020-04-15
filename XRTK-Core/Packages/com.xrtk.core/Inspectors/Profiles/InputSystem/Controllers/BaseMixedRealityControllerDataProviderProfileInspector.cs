@@ -30,6 +30,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
         private int selectedMappingsViewModeTab = 0;
         private GUIStyle controllerButtonStyle;
 
+        private static readonly GUIContent controllerProfilesFoldoutHeader = new GUIContent("Controller Mapping Profiles");
+        private static readonly string[] viewModeToolbarOptions = new string[] { "Simple", "Advanced" };
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -171,11 +174,11 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
         {
             RenderHeader("This profile defines all of the controllers and their mappings to use. Additional platform settings can also be available as well.");
 
-            showMappingProfiles = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showMappingProfiles, new GUIContent("Controller Mapping Profiles"), true);
+            showMappingProfiles = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showMappingProfiles, controllerProfilesFoldoutHeader, true);
             if (showMappingProfiles)
             {
                 EditorGUILayout.Space();
-                selectedMappingsViewModeTab = GUILayout.Toolbar(selectedMappingsViewModeTab, new string[] { "Simple", "Advanced" });
+                selectedMappingsViewModeTab = GUILayout.Toolbar(selectedMappingsViewModeTab, viewModeToolbarOptions);
                 switch (selectedMappingsViewModeTab)
                 {
                     case 0:

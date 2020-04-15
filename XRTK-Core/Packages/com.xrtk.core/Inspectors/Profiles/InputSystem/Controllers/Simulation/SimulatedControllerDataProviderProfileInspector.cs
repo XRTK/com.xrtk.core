@@ -26,6 +26,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
         private SerializedProperty rotationSpeed;
 
         private bool showSimulationSettings = true;
+        private static readonly GUIContent simulationSettingsFoldoutHeader = new GUIContent("Simulation Settings");
 
         protected override void OnEnable()
         {
@@ -52,7 +53,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
             serializedObject.Update();
 
-            showSimulationSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showSimulationSettings, new GUIContent("Simulation Settings"), true);
+            showSimulationSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showSimulationSettings, simulationSettingsFoldoutHeader, true);
             if (showSimulationSettings)
             {
                 EditorGUI.indentLevel++;

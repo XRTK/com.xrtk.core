@@ -25,6 +25,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
         private bool showSimulatedHandTrackingSettings = true;
 
+        private static readonly GUIContent simulatedHandSettingsFoldoutHeader = new GUIContent("Simulated Hand Tracking Settings");
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -60,7 +62,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
             EditorGUILayout.Space();
 
-            showSimulatedHandTrackingSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showSimulatedHandTrackingSettings, new GUIContent("Simulated Hand Tracking Settings"), true);
+            showSimulatedHandTrackingSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showSimulatedHandTrackingSettings, simulatedHandSettingsFoldoutHeader, true);
             if (showSimulatedHandTrackingSettings)
             {
                 EditorGUI.indentLevel++;

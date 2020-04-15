@@ -105,6 +105,11 @@ namespace XRTK.Providers.Controllers.Hands
                 }
             }
 
+            if (IsInInputDownPose)
+            {
+                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, MixedRealityInputAction.None);
+            }
+
             MixedRealityToolkit.InputSystem?.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);
         }
 

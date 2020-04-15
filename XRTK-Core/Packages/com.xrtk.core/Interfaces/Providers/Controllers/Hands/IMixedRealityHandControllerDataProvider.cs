@@ -1,7 +1,9 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
 using XRTK.Definitions.Controllers.Hands;
+using XRTK.Definitions.Controllers.Simulation.Hands;
 
 namespace XRTK.Interfaces.Providers.Controllers.Hands
 {
@@ -26,5 +28,10 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         /// Gets the configured hand bounds mode to be used with hand physics.
         /// </summary>
         HandBoundsMode BoundsMode { get; }
+
+        /// <summary>
+        /// Gets tracked poses for hand pose recognition.
+        /// </summary>
+        IReadOnlyList<SimulatedHandControllerPoseData> TrackedPoses { get; }
     }
 }

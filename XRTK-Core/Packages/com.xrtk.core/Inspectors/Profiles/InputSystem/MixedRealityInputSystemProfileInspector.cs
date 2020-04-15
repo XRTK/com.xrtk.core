@@ -4,6 +4,7 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
+using XRTK.Inspectors.Extensions;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
@@ -25,6 +26,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private SerializedProperty useTriggers;
         private SerializedProperty boundsMode;
 
+        private SerializedProperty trackedPoses;
+
         private SerializedProperty inputActionsProfile;
         private SerializedProperty speechCommandsProfile;
         private SerializedProperty gesturesProfile;
@@ -32,6 +35,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
         private bool showGlobalPointerOptions;
         private bool showGlobalHandOptions;
+
+        private static readonly GUIContent globalPointerSettingsFoldoutHeader = new GUIContent("Global Pointer Settings");
+        private static readonly GUIContent globalHandTrackingSettingsFoldoutHeader = new GUIContent("Global Hand Tracking Settings");
 
         protected override void OnEnable()
         {
@@ -50,6 +56,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             handPhysicsEnabled = serializedObject.FindProperty(nameof(handPhysicsEnabled));
             useTriggers = serializedObject.FindProperty(nameof(useTriggers));
             boundsMode = serializedObject.FindProperty(nameof(boundsMode));
+
+            trackedPoses = serializedObject.FindProperty(nameof(trackedPoses));
 
             inputActionsProfile = serializedObject.FindProperty(nameof(inputActionsProfile));
             gesturesProfile = serializedObject.FindProperty(nameof(gesturesProfile));
@@ -70,7 +78,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             EditorGUILayout.Space();
 
-            showGlobalPointerOptions = EditorGUILayout.Foldout(showGlobalPointerOptions, new GUIContent("Global Pointer Settings"), true);
+            showGlobalPointerOptions = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showGlobalPointerOptions, globalPointerSettingsFoldoutHeader, true);
 
             if (showGlobalPointerOptions)
             {
@@ -98,20 +106,34 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             EditorGUILayout.Space();
 
-            showGlobalHandOptions = EditorGUILayout.Foldout(showGlobalHandOptions, new GUIContent("Global Hand Settings"), true);
+            showGlobalHandOptions = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showGlobalHandOptions, globalHandTrackingSettingsFoldoutHeader, true);
 
             if (showGlobalHandOptions)
             {
                 EditorGUILayout.HelpBox("Global hand tracking options applied to all platforms that support hand tracking. You may override these globals per platform in the platform's hand controller data provider profile.", MessageType.Info);
+
                 EditorGUI.indentLevel++;
-                EditorGUILayout.Space();
-                EditorGUILayout.LabelField("Hand Rendering Settings", EditorStyles.boldLabel);
+
+                EditorGUILayout.LabelField("Hand Rendering Settings");
+                EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(handMeshingEnabled);
                 EditorGUILayout.Space();
-                EditorGUILayout.LabelField("Hand Physics Settings", EditorStyles.boldLabel);
+                EditorGUI.indentLevel--;
+
+                EditorGUILayout.LabelField("Hand Physics Settings");
+                EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(handPhysicsEnabled);
                 EditorGUILayout.PropertyField(useTriggers);
                 EditorGUILayout.PropertyField(boundsMode);
+                EditorGUILayout.Space();
+                EditorGUI.indentLevel--;
+
+                EditorGUILayout.LabelField("Tracked Hand Poses");
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(trackedPoses, true);
+                EditorGUILayout.Space();
+                EditorGUI.indentLevel--;
+
                 EditorGUI.indentLevel--;
             }
 

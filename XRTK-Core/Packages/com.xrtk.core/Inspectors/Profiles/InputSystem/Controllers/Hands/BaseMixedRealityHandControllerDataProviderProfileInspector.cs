@@ -15,6 +15,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
         private SerializedProperty boundsMode;
+        private SerializedProperty trackedPoses;
 
         private bool showHandTrackingSettings = true;
         private static readonly GUIContent handTrackingSettingsFoldoutHeader = new GUIContent("Hand Tracking Settings");
@@ -27,6 +28,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             handPhysicsEnabled = serializedObject.FindProperty(nameof(handPhysicsEnabled));
             useTriggers = serializedObject.FindProperty(nameof(useTriggers));
             boundsMode = serializedObject.FindProperty(nameof(boundsMode));
+            trackedPoses = serializedObject.FindProperty(nameof(trackedPoses));
         }
 
         public override void OnInspectorGUI()
@@ -39,11 +41,13 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             if (showHandTrackingSettings)
             {
                 EditorGUI.indentLevel++;
+
                 EditorGUILayout.LabelField("Hand Rendering Settings");
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(handMeshingEnabled);
-                EditorGUI.indentLevel--;
                 EditorGUILayout.Space();
+                EditorGUI.indentLevel--;
+
                 EditorGUILayout.LabelField("Hand Physics Settings");
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(handPhysicsEnabled);
@@ -51,6 +55,13 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                 EditorGUILayout.PropertyField(boundsMode);
                 EditorGUILayout.Space();
                 EditorGUI.indentLevel--;
+
+                EditorGUILayout.LabelField("Tracked Hand Poses");
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(trackedPoses, true);
+                EditorGUILayout.Space();
+                EditorGUI.indentLevel--;
+
                 EditorGUI.indentLevel--;
             }
 

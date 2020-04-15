@@ -1,7 +1,9 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
 using XRTK.Definitions.Controllers.Hands;
+using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;
@@ -34,6 +36,24 @@ namespace XRTK.Providers.Controllers.Hands
             BoundsMode = profile.BoundsMode != globalSettingsProfile.BoundsMode
                 ? profile.BoundsMode
                 : globalSettingsProfile.BoundsMode;
+
+            if (profile.TrackedPoses != null)
+            {
+                if (globalSettingsProfile.TrackedPoses != null)
+                {
+                    TrackedPoses = profile.TrackedPoses.Count != globalSettingsProfile.TrackedPoses.Count
+                        ? profile.TrackedPoses
+                        : globalSettingsProfile.TrackedPoses;
+                }
+                else
+                {
+                    TrackedPoses = profile.TrackedPoses;
+                }
+            }
+            else
+            {
+                TrackedPoses = globalSettingsProfile.TrackedPoses;
+            }
         }
 
         /// <inheritdoc />
@@ -47,5 +67,8 @@ namespace XRTK.Providers.Controllers.Hands
 
         /// <inheritdoc />
         public HandBoundsMode BoundsMode { get; }
+
+        /// <inheritdoc />
+        public IReadOnlyList<SimulatedHandControllerPoseData> TrackedPoses { get; }
     }
 }

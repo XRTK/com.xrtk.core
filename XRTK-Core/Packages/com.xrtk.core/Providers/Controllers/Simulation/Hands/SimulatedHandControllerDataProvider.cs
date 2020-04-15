@@ -24,6 +24,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public SimulatedHandControllerDataProvider(string name, uint priority, SimulatedHandControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
             : base(name, priority, profile, parentService)
         {
+            var globalSettingsProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
             var poseDefinitions = profile.PoseDefinitions;
             handPoseDefinitions = new List<SimulatedHandControllerPoseData>(poseDefinitions.Count);
 
@@ -33,10 +34,40 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             }
 
             HandPoseAnimationSpeed = profile.HandPoseAnimationSpeed;
-            HandPhysicsEnabled = profile.HandPhysicsEnabled;
-            UseTriggers = profile.UseTriggers;
-            BoundsMode = profile.BoundsMode;
-            HandMeshingEnabled = profile.HandMeshingEnabled;
+
+            HandMeshingEnabled = profile.HandMeshingEnabled != globalSettingsProfile.HandMeshingEnabled
+                ? profile.HandMeshingEnabled
+                : globalSettingsProfile.HandMeshingEnabled;
+
+            HandPhysicsEnabled = profile.HandPhysicsEnabled != globalSettingsProfile.HandPhysicsEnabled
+                ? profile.HandPhysicsEnabled
+                : globalSettingsProfile.HandPhysicsEnabled;
+
+            UseTriggers = profile.UseTriggers != globalSettingsProfile.UseTriggers
+                ? profile.UseTriggers
+                : globalSettingsProfile.UseTriggers;
+
+            BoundsMode = profile.BoundsMode != globalSettingsProfile.BoundsMode
+                ? profile.BoundsMode
+                : globalSettingsProfile.BoundsMode;
+
+            if (profile.TrackedPoses != null)
+            {
+                if (globalSettingsProfile.TrackedPoses != null)
+                {
+                    TrackedPoses = profile.TrackedPoses.Count != globalSettingsProfile.TrackedPoses.Count
+                        ? profile.TrackedPoses
+                        : globalSettingsProfile.TrackedPoses;
+                }
+                else
+                {
+                    TrackedPoses = profile.TrackedPoses;
+                }
+            }
+            else
+            {
+                TrackedPoses = globalSettingsProfile.TrackedPoses;
+            }
         }
 
         private readonly List<SimulatedHandControllerPoseData> handPoseDefinitions;
@@ -58,6 +89,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
         /// <inheritdoc />
         public bool HandMeshingEnabled { get; }
+
+        /// <inheritdoc />
+        public IReadOnlyList<SimulatedHandControllerPoseData> TrackedPoses { get; }
 
         /// <inheritdoc />
         protected override IMixedRealitySimulatedController CreateAndRegisterSimulatedController(Handedness handedness)

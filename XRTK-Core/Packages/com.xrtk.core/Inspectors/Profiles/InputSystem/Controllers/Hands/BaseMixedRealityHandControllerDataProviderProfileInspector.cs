@@ -17,6 +17,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
         private SerializedProperty boundsMode;
 
         private bool showHandTrackingSettings = true;
+        private static readonly GUIContent handTrackingSettingsFoldoutHeader = new GUIContent("Hand Tracking Settings");
 
         protected override void OnEnable()
         {
@@ -34,7 +35,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
             serializedObject.Update();
 
-            showHandTrackingSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showHandTrackingSettings, new GUIContent("Hand Tracking Settings"), true);
+            showHandTrackingSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showHandTrackingSettings, handTrackingSettingsFoldoutHeader, true);
             if (showHandTrackingSettings)
             {
                 EditorGUI.indentLevel++;

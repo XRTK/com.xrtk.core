@@ -13,6 +13,7 @@ using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.PropertyDrawers;
 using XRTK.Providers.Controllers;
 using XRTK.Extensions;
+using System.Collections.Generic;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 {
@@ -32,6 +33,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
         private static readonly GUIContent controllerProfilesFoldoutHeader = new GUIContent("Controller Mapping Profiles");
         private static readonly string[] viewModeToolbarOptions = new string[] { "Simple", "Advanced" };
+        private static readonly List<int> nullElementIndexes = new List<int>();
 
         protected override void OnEnable()
         {
@@ -215,17 +217,18 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                 };
             }
 
-            bool appliedModifications = false;
-            serializedObject.Update();
+            // Clear found null element indexes from previous loop.
+            nullElementIndexes.Clear();
 
             for (int i = 0; i < controllerMappingProfiles?.arraySize; i++)
             {
                 var targetObjectReference = controllerMappingProfiles.GetArrayElementAtIndex(i)?.objectReferenceValue;
                 var controllerMappingProfile = (MixedRealityControllerMappingProfile)targetObjectReference;
 
-                // In advanced mode new profiel entries might have been created
-                // but not assiged, which leads to null entries in the mapping profiles list.
-                // We can safely ignore those for the simplified view.
+                // In advanced mode new profile entries might have been created
+                // but not assigned, which leads to null entries in the mapping profiles list.
+                // We can safely ignore those for the simplified view but will remember the index
+                // to remove them later on and cleanup the list of nulls.
                 if (controllerMappingProfile != null)
                 {
                     var handedness = controllerMappingProfile.Handedness;
@@ -238,9 +241,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                     var buttonContent = new GUIContent($"Edit {controllerMappingProfile.name.ToProperCase()}", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile));
                     if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
                     {
-                        serializedObject.ApplyModifiedProperties();
                         EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, new SerializedObject(controllerMappingProfile).FindProperty("interactionMappingProfiles"));
-                        appliedModifications = true;
                     }
 
                     if (handedness != Handedness.Left)
@@ -248,10 +249,24 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                         GUILayout.EndHorizontal();
                     }
                 }
+                else
+                {
+                    nullElementIndexes.Add(i);
+                }
             }
 
-            if (!appliedModifications)
+            if (nullElementIndexes.Count > 0)
             {
+                serializedObject.Update();
+
+                for (int i = 0; i < nullElementIndexes.Count; i++)
+                {
+                    // Every time we remove an element from the mapping profiles list,
+                    // we need to reduce the null element index by the count of already removed items,
+                    // since the list is shrinking.
+                    controllerMappingProfiles.DeleteArrayElementAtIndex(nullElementIndexes[i] - i);
+                }
+
                 serializedObject.ApplyModifiedProperties();
             }
         }

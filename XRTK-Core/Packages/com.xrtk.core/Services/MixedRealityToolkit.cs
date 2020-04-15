@@ -1802,7 +1802,7 @@ namespace XRTK.Services
         /// <param name="services">Memory reference value of the service list to update.</param>
         private static void GetAllServicesInternal<T>(Type interfaceType, ref List<T> services) where T : IMixedRealityService
         {
-            GetAllServicesByNameInternal<T>(interfaceType, string.Empty, ref services);
+            GetAllServicesByNameInternal(interfaceType, string.Empty, ref services);
         }
 
         /// <summary>

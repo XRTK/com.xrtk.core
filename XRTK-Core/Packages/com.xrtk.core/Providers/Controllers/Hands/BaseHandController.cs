@@ -417,7 +417,7 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 var isInInputDownPoseThisFrame = false;
                 if (TryGetJointPose(TrackedHandJoint.ThumbTip, out var thumbTip) &&
-                        TryGetJointPose(TrackedHandJoint.IndexTip, out var indexTip))
+                    TryGetJointPose(TrackedHandJoint.IndexTip, out var indexTip))
                 {
                     if (Vector3.Distance(thumbTip.Position, indexTip.Position) < INPUT_DOWN_POSE_EPSILON)
                     {

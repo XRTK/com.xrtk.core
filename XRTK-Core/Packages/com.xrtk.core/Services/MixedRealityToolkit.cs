@@ -1814,7 +1814,7 @@ namespace XRTK.Services
         /// <param name="services">Memory reference value of the service list to update.</param>
         private static void GetAllServicesInternal<T>(Type interfaceType, ref List<T> services) where T : IMixedRealityService
         {
-            GetAllServicesByNameInternal<T>(interfaceType, string.Empty, ref services);
+            GetAllServicesByNameInternal(interfaceType, string.Empty, ref services);
         }
 
         /// <summary>
@@ -1857,25 +1857,9 @@ namespace XRTK.Services
         /// <returns>True, if the registered service contains the interface type and name.</returns>
         private static bool CheckServiceMatch(Type interfaceType, string serviceName, Type registeredInterfaceType, IMixedRealityService serviceInstance)
         {
-            bool isValid = string.IsNullOrEmpty(serviceName) || serviceInstance.Name == serviceName;
-
-            if ((registeredInterfaceType.Name == interfaceType.Name ||
-                 serviceInstance.GetType().Name == interfaceType.Name) && isValid)
-            {
-                return true;
-            }
-
-            var interfaces = serviceInstance.GetType().GetInterfaces();
-
-            for (int i = 0; i < interfaces.Length; i++)
-            {
-                if (interfaces[i].Name == interfaceType.Name && isValid)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            bool isNameValid = string.IsNullOrEmpty(serviceName) || serviceInstance.Name == serviceName;
+            bool isInstanceValid = interfaceType == registeredInterfaceType || interfaceType.IsInstanceOfType(serviceInstance);
+            return isNameValid && isInstanceValid;
         }
 
         private static bool CanGetService(Type interfaceType, string serviceName)

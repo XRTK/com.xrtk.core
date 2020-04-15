@@ -24,8 +24,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         protected BaseHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
-        {
-        }
+        { }
 
         private const float NEW_VELOCITY_WEIGHT = .2f;
         private const float CURRENT_VELOCITY_WEIGHT = .8f;
@@ -74,6 +73,8 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateBounds();
             UpdateVelocity();
             UpdateIsInputDownPose();
+
+            Debug.Log(handData.PoseId);
 
             if (TryGetJointPose(TrackedHandJoint.Wrist, out var wristPose))
             {
@@ -418,8 +419,6 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateIsInputDownPose()
         {
-            ((IMixedRealityHandControllerDataProvider)ControllerDataProvider).PoseResolver.ResolvePose(ControllerHandedness, jointPoses);
-
             if (TrackingState == TrackingState.Tracked)
             {
                 var isInInputDownPoseThisFrame = false;

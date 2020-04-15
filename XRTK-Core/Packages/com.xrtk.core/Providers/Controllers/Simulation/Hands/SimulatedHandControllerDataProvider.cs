@@ -54,15 +54,13 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             if (profile.TrackedPoses.Count > 0)
             {
-                var trackedPoses = profile.TrackedPoses.Count != globalSettingsProfile.TrackedPoses.Count
+                TrackedPoses = profile.TrackedPoses.Count != globalSettingsProfile.TrackedPoses.Count
                     ? profile.TrackedPoses
                     : globalSettingsProfile.TrackedPoses;
-
-                PoseResolver = new HandPoseRecognizer(trackedPoses);
             }
             else
             {
-                PoseResolver = new HandPoseRecognizer(globalSettingsProfile.TrackedPoses);
+                TrackedPoses = globalSettingsProfile.TrackedPoses;
             }
         }
 
@@ -87,7 +85,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public bool HandMeshingEnabled { get; }
 
         /// <inheritdoc />
-        public HandPoseRecognizer PoseResolver { get; }
+        public IReadOnlyList<SimulatedHandControllerPoseData> TrackedPoses { get; }
 
         /// <inheritdoc />
         protected override IMixedRealitySimulatedController CreateAndRegisterSimulatedController(Handedness handedness)

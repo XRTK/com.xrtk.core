@@ -180,39 +180,6 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         }
 
         /// <summary>
-        /// Takes world space joint poses from any hand and convert into right-hand, camera-space poses.
-        /// </summary>
-        public void ParseFromJointPoses(MixedRealityPose[] joints, Handedness handedness, Quaternion rotation, Vector3 position)
-        {
-            var invRotation = Quaternion.Inverse(rotation);
-            var invCameraRotation = Quaternion.Inverse(MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation);
-
-            for (int i = 0; i < HandData.JointCount; i++)
-            {
-                Vector3 p = joints[i].Position;
-                Quaternion r = joints[i].Rotation;
-
-                // Apply inverse external transform
-                p = invRotation * (p - position);
-                r = invRotation * r;
-
-                // To camera space
-                p = invCameraRotation * p;
-                r = invCameraRotation * r;
-
-                // Pose offset are for right hand, mirror on X axis if left hand is given
-                if (handedness == Handedness.Left)
-                {
-                    p.x = -p.x;
-                    r.y = -r.y;
-                    r.z = -r.z;
-                }
-
-                LocalJointPoses[i] = new MixedRealityPose(p, r);
-            }
-        }
-
-        /// <summary>
         /// Set all poses to zero.
         /// </summary>
         public void SetZero()

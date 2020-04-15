@@ -10,5 +10,8 @@ namespace XRTK.Definitions.Platforms
     {
         /// <inheritdoc />
         public override bool IsAvailable => true;
+
+        /// <inheritdoc />
+        public override bool IsBuildTargetAvailable => true;
     }
 }

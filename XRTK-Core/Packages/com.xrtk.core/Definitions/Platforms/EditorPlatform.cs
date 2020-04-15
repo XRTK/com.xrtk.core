@@ -6,7 +6,7 @@ using UnityEngine;
 namespace XRTK.Definitions.Platforms
 {
     /// <summary>
-    ///  Used by the XRTK to signal that the feature is available in the Unity Editor.
+    /// Used by the XRTK to signal that the feature is available in the Unity Editor.
     /// </summary>
     /// <remarks>
     /// Defines any editor platform for Win, OSX, and Linux.
@@ -15,5 +15,8 @@ namespace XRTK.Definitions.Platforms
     {
         /// <inheritdoc />
         public override bool IsAvailable => Application.isEditor;
+
+        /// <inheritdoc />
+        public override bool IsBuildTargetAvailable => false;
     }
 }

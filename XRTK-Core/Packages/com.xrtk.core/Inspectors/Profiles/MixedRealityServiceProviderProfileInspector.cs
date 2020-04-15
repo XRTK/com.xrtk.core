@@ -56,7 +56,10 @@ namespace XRTK.Inspectors.Profiles
         public override void OnInspectorGUI()
         {
             EditorGUILayout.Space();
+            EditorGUILayout.LabelField("Configuration Options", EditorStyles.boldLabel);
+            EditorGUILayout.Space();
             serializedObject.Update();
+            EditorGUILayout.Space();
             configurationList.DoLayoutList();
 
             if (configurations == null || configurations.arraySize == 0)

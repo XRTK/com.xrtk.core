@@ -54,9 +54,23 @@ namespace XRTK.Services.BoundarySystem
         {
             base.Initialize();
 
-            if (!Application.isPlaying) { return; }
+            if (!Application.isPlaying)
+            {
+                return;
+            }
 
             boundaryEventData = new BoundaryEventData(EventSystem.current);
+        }
+
+        /// <inheritdoc/>
+        public override void Enable()
+        {
+            base.Enable();
+
+            if (!Application.isPlaying)
+            {
+                return;
+            }
 
             CalculateBoundaryBounds();
             Boundary.visible = true;
@@ -90,13 +104,30 @@ namespace XRTK.Services.BoundarySystem
         }
 
         /// <inheritdoc/>
+        public override void Disable()
+        {
+            base.Disable();
+
+            if (!Application.isPlaying)
+            {
+                return;
+            }
+
+            showFloor = false;
+            showPlayArea = false;
+            showTrackedArea = false;
+            showBoundaryWalls = false;
+            showCeiling = false;
+            Boundary.visible = false;
+        }
+
+        /// <inheritdoc/>
         public override void Destroy()
         {
             // First, detach the child objects (we are tracking them separately)
             // and clean up the parent.
             if (boundaryVisualizationParent != null)
             {
-
                 if (Application.isEditor)
                 {
                     Object.DestroyImmediate(boundaryVisualizationParent);
@@ -180,12 +211,6 @@ namespace XRTK.Services.BoundarySystem
 
                 currentCeilingObject = null;
             }
-
-            showFloor = false;
-            showPlayArea = false;
-            showTrackedArea = false;
-            showBoundaryWalls = false;
-            showCeiling = false;
 
             RaiseBoundaryVisualizationChanged();
         }
@@ -677,6 +702,8 @@ namespace XRTK.Services.BoundarySystem
                 position.z));
             currentFloorObject.layer = FloorPhysicsLayer;
             currentFloorObject.GetComponent<Renderer>().sharedMaterial = FloorMaterial;
+
+            currentFloorObject.transform.parent = BoundaryVisualizationParent.transform;
 
             return currentFloorObject;
         }

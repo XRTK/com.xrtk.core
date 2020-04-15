@@ -14,7 +14,20 @@ namespace XRTK.Definitions.Platforms
             get
             {
 #if UNITY_STANDALONE_OSX
-                return true;
+                return !UnityEngine.Application.isEditor;
+#else
+                return false;
+#endif
+            }
+        }
+
+        /// <inheritdoc />
+        public override bool IsBuildTargetAvailable
+        {
+            get
+            {
+#if UNITY_EDITOR
+                return UnityEditor.EditorUserBuildSettings.activeBuildTarget == UnityEditor.BuildTarget.StandaloneOSX;
 #else
                 return false;
 #endif

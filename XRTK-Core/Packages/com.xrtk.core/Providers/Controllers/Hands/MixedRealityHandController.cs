@@ -42,6 +42,11 @@ namespace XRTK.Providers.Controllers.Hands
         private Vector3 lastPalmNormal;
         private Vector3 lastPalmPosition;
 
+        /// <summary>
+        /// The last pose recognized for this hand controller.
+        /// </summary>
+        private HandControllerPoseDefinition LastPose { get; set; }
+
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
         {
@@ -76,9 +81,7 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateJoints(handData);
             UpdateBounds();
             UpdateVelocity();
-            UpdateIsInputDownPose();
-
-            Debug.Log(handData.PoseDefinition?.Id);
+            //UpdateIsInputDownPose();
 
             if (TryGetJointPose(TrackedHandJoint.Wrist, out var wristPose))
             {
@@ -98,23 +101,41 @@ namespace XRTK.Providers.Controllers.Hands
                 MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, wristPose);
             }
 
-            if (lastIsInInputDownPose != IsInInputDownPose)
+            //if (lastIsInInputDownPose != IsInInputDownPose)
+            //{
+            //    if (IsInInputDownPose && !lastIsInInputDownPose)
+            //    {
+            //        MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, MixedRealityInputAction.None);
+            //    }
+            //    else if (!IsInInputDownPose && lastIsInInputDownPose)
+            //    {
+            //        MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, MixedRealityInputAction.None);
+            //    }
+            //}
+
+            //if (IsInInputDownPose)
+            //{
+            //    MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, MixedRealityInputAction.None);
+            //}
+
+            // Update hand controller pose.
+            if (LastPose != null && LastPose.Id.Equals(handData.PoseDefinition?.Id))
             {
-                if (IsInInputDownPose && !lastIsInInputDownPose)
-                {
-                    MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, MixedRealityInputAction.None);
-                }
-                else if (!IsInInputDownPose && lastIsInInputDownPose)
-                {
-                    MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, MixedRealityInputAction.None);
-                }
+                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, new MixedRealityInputAction(int.MaxValue, LastPose.Id, AxisType.Digital));
+            }
+            else if (LastPose != null && !LastPose.Id.Equals(handData.PoseDefinition?.Id))
+            {
+                MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, new MixedRealityInputAction(int.MaxValue, LastPose.Id, AxisType.Digital));
+                LastPose = null;
+            }
+            else if (handData.PoseDefinition != null)
+            {
+                var newPose = handData.PoseDefinition;
+                MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, new MixedRealityInputAction(int.MaxValue, newPose.Id, AxisType.Digital));
+                LastPose = newPose;
             }
 
-            if (IsInInputDownPose)
-            {
-                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, MixedRealityInputAction.None);
-            }
-
+            // Raise general hand data update.
             MixedRealityToolkit.InputSystem?.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);
         }
 

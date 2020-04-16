@@ -3,6 +3,7 @@
 
 using System;
 using UnityEngine;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.Controllers.Hands
@@ -14,16 +15,6 @@ namespace XRTK.Providers.Controllers.Hands
     public struct HandPoseFrame
     {
         /// <summary>
-        /// Unique identifier for the pose frame.
-        /// </summary>
-        public string Id { get; }
-
-        /// <summary>
-        /// Joint poses are stored as right-hand poses in camera space.
-        /// </summary>
-        public MixedRealityPose[] LocalJointPoses { get; }
-
-        /// <summary>
         /// Constructs a pose frame from local joint poses.
         /// </summary>
         /// <param name="id">Identifier for the frame.</param>
@@ -32,6 +23,10 @@ namespace XRTK.Providers.Controllers.Hands
         {
             Id = id;
             LocalJointPoses = localJointPoses;
+
+            var wristPose = LocalJointPoses[(int)TrackedHandJoint.Wrist];
+            var palmPose = LocalJointPoses[(int)TrackedHandJoint.Palm];
+            scaleDenominator = Vector3.Distance(wristPose.Position, palmPose.Position);
         }
 
         /// <summary>
@@ -43,25 +38,46 @@ namespace XRTK.Providers.Controllers.Hands
             : this(Guid.NewGuid().ToString(), localJointPoses)
         { }
 
+        private readonly float scaleDenominator;
+
+        /// <summary>
+        /// Unique identifier for the pose frame.
+        /// </summary>
+        public string Id { get; }
+
+        /// <summary>
+        /// Joint poses are stored as right-hand poses in camera space.
+        /// </summary>
+        public MixedRealityPose[] LocalJointPoses { get; }
+
         public bool Compare(HandPoseFrame otherFrame, float tolerance)
         {
-            for (int i = 0; i < LocalJointPoses.Length - 1; i++)
+            var otherWristPose = otherFrame.LocalJointPoses[(int)TrackedHandJoint.Wrist];
+            var otherPalmPose = otherFrame.LocalJointPoses[(int)TrackedHandJoint.Palm];
+            var otherScaleDenominator = Vector3.Distance(otherWristPose.Position, otherPalmPose.Position);
+            var scale = otherScaleDenominator / scaleDenominator;
+
+            int requiredMatches = HandData.JointCount;
+            int matches = 0;
+
+            var aPalmPose = LocalJointPoses[(int)TrackedHandJoint.Palm];
+            var bPalmPose = otherFrame.LocalJointPoses[(int)TrackedHandJoint.Palm];
+
+            for (int i = 0; i < LocalJointPoses.Length; i++)
             {
                 var a = LocalJointPoses[i];
-                var b = LocalJointPoses[i + 1];
-                var diff = Vector3.Distance(a.Position, b.Position);
+                var b = otherFrame.LocalJointPoses[i];
 
-                var aOther = otherFrame.LocalJointPoses[i];
-                var bOther = otherFrame.LocalJointPoses[i + 1];
-                var diffOther = Vector3.Distance(aOther.Position, bOther.Position);
+                var aDiff = Vector3.Distance(aPalmPose.Position, a.Position);
+                var bDiff = Vector3.Distance(bPalmPose.Position, b.Position);
 
-                if (Math.Abs(diff - diffOther) >= tolerance)
+                if (Math.Abs(aDiff - bDiff * scale) <= tolerance)
                 {
-                    return false;
+                    matches++;
                 }
             }
 
-            return true;
+            return matches >= requiredMatches;
         }
     }
 }

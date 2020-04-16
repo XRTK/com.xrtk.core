@@ -2,9 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
-using UnityEditorInternal;
 using UnityEngine;
-using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Inspectors.Extensions;
 
@@ -21,10 +19,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
         private SerializedProperty trackedPoses;
 
         private SerializedProperty handPoseAnimationSpeed;
-        private SerializedProperty poseDefinitions;
-
-        private ReorderableList poseList;
-        private int currentlySelectedElement;
 
         private bool showSimulatedHandTrackingSettings = true;
 
@@ -41,22 +35,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
             trackedPoses = serializedObject.FindProperty(nameof(trackedPoses));
 
-            poseDefinitions = serializedObject.FindProperty(nameof(poseDefinitions));
             handPoseAnimationSpeed = serializedObject.FindProperty(nameof(handPoseAnimationSpeed));
-
-            poseList = new ReorderableList(serializedObject, poseDefinitions, true, false, true, true)
-            {
-                elementHeight = EditorGUIUtility.singleLineHeight * 1.5f
-            };
-            poseList.drawHeaderCallback += DrawHeaderCallback;
-            poseList.drawElementCallback += DrawConfigurationOptionElement;
-            poseList.onAddCallback += OnConfigurationOptionAdded;
-            poseList.onRemoveCallback += OnConfigurationOptionRemoved;
-        }
-
-        private void DrawHeaderCallback(Rect rect)
-        {
-            EditorGUI.LabelField(rect, "Pose Definitions");
         }
 
         public override void OnInspectorGUI()
@@ -95,50 +74,10 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
                 EditorGUILayout.LabelField("Simulated Poses");
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(handPoseAnimationSpeed);
-                poseList.DoLayoutList();
+                EditorGUILayout.Space();
                 EditorGUI.indentLevel--;
 
                 EditorGUI.indentLevel--;
-            }
-
-            serializedObject.ApplyModifiedProperties();
-        }
-
-        private void DrawConfigurationOptionElement(Rect rect, int index, bool isActive, bool isFocused)
-        {
-            if (isFocused)
-            {
-                currentlySelectedElement = index;
-            }
-
-            rect.height = EditorGUIUtility.singleLineHeight;
-            rect.y += 3;
-            var poseDataProperty = poseDefinitions.GetArrayElementAtIndex(index);
-            var selectedPoseData = EditorGUI.ObjectField(rect, poseDataProperty.objectReferenceValue, typeof(HandControllerPoseDefinition), false) as HandControllerPoseDefinition;
-
-            if (selectedPoseData != null)
-            {
-                selectedPoseData.ParentProfile = ThisProfile;
-            }
-
-            poseDataProperty.objectReferenceValue = selectedPoseData;
-        }
-
-        private void OnConfigurationOptionAdded(ReorderableList list)
-        {
-            poseDefinitions.arraySize += 1;
-            var index = poseDefinitions.arraySize - 1;
-
-            var mappingProfileProperty = poseDefinitions.GetArrayElementAtIndex(index);
-            mappingProfileProperty.objectReferenceValue = null;
-            serializedObject.ApplyModifiedProperties();
-        }
-
-        private void OnConfigurationOptionRemoved(ReorderableList list)
-        {
-            if (currentlySelectedElement >= 0)
-            {
-                poseDefinitions.DeleteArrayElementAtIndex(currentlySelectedElement);
             }
 
             serializedObject.ApplyModifiedProperties();

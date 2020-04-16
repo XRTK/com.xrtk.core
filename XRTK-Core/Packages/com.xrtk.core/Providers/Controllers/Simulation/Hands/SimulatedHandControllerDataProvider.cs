@@ -26,13 +26,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             : base(name, priority, profile, parentService)
         {
             var globalSettingsProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
-            var poseDefinitions = profile.PoseDefinitions;
-            handPoseDefinitions = new List<HandControllerPoseDefinition>(poseDefinitions.Count);
-
-            foreach (var poseDefinition in poseDefinitions)
-            {
-                handPoseDefinitions.Add(poseDefinition);
-            }
 
             HandPoseAnimationSpeed = profile.HandPoseAnimationSpeed;
 
@@ -67,7 +60,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 Handedness.Left,
                 TrackedPoses,
                 HandPoseAnimationSpeed,
-                HandPoseDefinitions,
                 JitterAmount,
                 DefaultDistance);
 
@@ -75,17 +67,12 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 Handedness.Right,
                 TrackedPoses,
                 HandPoseAnimationSpeed,
-                HandPoseDefinitions,
                 JitterAmount,
                 DefaultDistance);
         }
 
-        private readonly List<HandControllerPoseDefinition> handPoseDefinitions;
         private readonly SimulatedHandDataConverter leftHandConverter;
         private readonly SimulatedHandDataConverter rightHandConverter;
-
-        /// <inheritdoc />
-        public IReadOnlyList<HandControllerPoseDefinition> HandPoseDefinitions => handPoseDefinitions;
 
         /// <inheritdoc />
         public float HandPoseAnimationSpeed { get; }

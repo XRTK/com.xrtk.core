@@ -12,15 +12,6 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
     public class SimulatedHandControllerDataProviderProfile : SimulatedControllerDataProviderProfile
     {
         [SerializeField]
-        [Tooltip("Hand pose definitions.")]
-        private List<HandControllerPoseDefinition> poseDefinitions = new List<HandControllerPoseDefinition>();
-
-        /// <summary>
-        /// Hand pose definitions.
-        /// </summary>
-        public IReadOnlyList<HandControllerPoseDefinition> PoseDefinitions => poseDefinitions;
-
-        [SerializeField]
         [Tooltip("Gesture interpolation per second")]
         private float handPoseAnimationSpeed = 8.0f;
 

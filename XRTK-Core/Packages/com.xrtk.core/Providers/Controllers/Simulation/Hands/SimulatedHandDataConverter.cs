@@ -21,18 +21,17 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public SimulatedHandDataConverter(Handedness handedness,
             IReadOnlyList<HandControllerPoseDefinition> trackedPoses,
             float handPoseAnimationSpeed,
-            IReadOnlyList<HandControllerPoseDefinition> handPoseDefinitions,
             float jitterAmount,
             float defaultDistance)
             : base(handedness, trackedPoses)
         {
             this.handPoseAnimationSpeed = handPoseAnimationSpeed;
-            this.handPoseDefinitions = handPoseDefinitions;
             this.jitterAmount = jitterAmount;
             this.defaultDistance = defaultDistance;
+            this.poseDefinitions = trackedPoses;
 
             // Initialize available simulated hand poses and find the configured default pose.
-            SimulatedHandControllerPose.Initialize(handPoseDefinitions);
+            SimulatedHandControllerPose.Initialize(trackedPoses);
 
             // Simulation cannot work without a default pose.
             if (SimulatedHandControllerPose.DefaultHandPose == null)
@@ -53,9 +52,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         }
 
         private readonly float handPoseAnimationSpeed;
-        private readonly IReadOnlyList<HandControllerPoseDefinition> handPoseDefinitions;
         private readonly float jitterAmount;
         private readonly float defaultDistance;
+        private readonly IReadOnlyList<HandControllerPoseDefinition> poseDefinitions;
         private readonly StopWatch handUpdateStopWatch;
         private readonly StopWatch lastUpdatedStopWatch;
 
@@ -215,9 +214,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <returns>Default pose if no other fitting user input.</returns>
         private SimulatedHandControllerPose GetTargetHandPose()
         {
-            for (int i = 0; i < handPoseDefinitions.Count; i++)
+            for (int i = 0; i < poseDefinitions.Count; i++)
             {
-                var result = handPoseDefinitions[i];
+                var result = poseDefinitions[i];
 
                 if (Input.GetKey(result.KeyCode))
                 {

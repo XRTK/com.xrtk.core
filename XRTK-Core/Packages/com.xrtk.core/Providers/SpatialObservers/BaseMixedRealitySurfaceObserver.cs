@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Interfaces.Providers.SpatialObservers;
+using XRTK.Interfaces.SpatialAwarenessSystem;
 
 namespace XRTK.Providers.SpatialObservers
 {
@@ -12,14 +13,9 @@ namespace XRTK.Providers.SpatialObservers
     /// </summary>
     public abstract class BaseMixedRealitySurfaceObserver : BaseMixedRealitySpatialObserverDataProvider, IMixedRealitySurfaceObserver
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="priority"></param>
-        /// <param name="profile"></param>
-        protected BaseMixedRealitySurfaceObserver(string name, uint priority, BaseMixedRealitySurfaceObserverProfile profile)
-            : base(name, priority, profile)
+        /// <inheritdoc />
+        protected BaseMixedRealitySurfaceObserver(string name, uint priority, BaseMixedRealitySurfaceObserverProfile profile, IMixedRealitySpatialAwarenessSystem parentService)
+            : base(name, priority, profile, parentService)
         {
             SurfacePhysicsLayerOverride = profile.SurfacePhysicsLayerOverride;
             SurfaceFindingMinimumArea = profile.SurfaceFindingMinimumArea;

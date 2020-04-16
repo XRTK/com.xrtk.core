@@ -78,7 +78,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         }
 
         /// <inheritdoc />
-        public Vector3 GetDeltaPosition(float depthMultiplier)
+        public Vector3 GetPosition(float depthMultiplier)
         {
             UpdateSimulationMappings();
 

@@ -101,7 +101,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 : rightHandConverter;
 
             simulatedHandController.UpdateController(converter.GetSimulatedHandData(
-                simulatedController.GetDeltaPosition(DepthMultiplier),
+                simulatedController.GetPosition(DepthMultiplier),
                 simulatedController.GetDeltaRotation(RotationSpeed)));
         }
 

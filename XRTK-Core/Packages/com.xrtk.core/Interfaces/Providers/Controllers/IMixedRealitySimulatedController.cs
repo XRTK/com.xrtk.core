@@ -15,11 +15,10 @@ namespace XRTK.Interfaces.Providers.Controllers
         Vector3 GetDeltaRotation(float rotationSpeed);
 
         /// <summary>
-        /// Gets a simulated depth tracking (controller closer / further from tracking device) update, as well
-        /// as the controller's simulated (x,y) position.
+        /// Gets a simulated root position in camera space for the simulated controller.
         /// </summary>
         /// <param name="depthMultiplier">Multiplier for z-axis movement.</param>
-        /// <returns>Controller movement delta.</returns>
-        Vector3 GetDeltaPosition(float depthMultiplier);
+        /// <returns>Controller root position.</returns>
+        Vector3 GetPosition(float depthMultiplier);
     }
 }

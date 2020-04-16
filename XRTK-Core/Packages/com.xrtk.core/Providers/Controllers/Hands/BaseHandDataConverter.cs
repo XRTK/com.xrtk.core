@@ -23,7 +23,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="poseRecognizer">Pose recognizer instance to use for pose recognition.</param>
         protected BaseHandDataConverter(Handedness handedness, IReadOnlyList<SimulatedHandControllerPoseData> trackedPoses)
         {
-            this.Handedness = handedness;
+            Handedness = handedness;
             this.trackedPoses = new HandPoseFrame[trackedPoses.Count];
 
             int i = 0;

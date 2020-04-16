@@ -10,14 +10,17 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// <summary>
         /// Gets a simulated Yaw, Pitch and Roll delta for the current frame.
         /// </summary>
+        /// <param name="rotationSpeed">The speed at which to rotate the simulated controller.</param>
         /// <returns>Updated controller rotation angles.</returns>
-        Vector3 DeltaRotation { get; }
+        Vector3 GetDeltaRotation(float rotationSpeed);
 
         /// <summary>
         /// Gets a simulated depth tracking (controller closer / further from tracking device) update, as well
         /// as the controller's simulated (x,y) position.
         /// </summary>
+        /// <param name="lastMousePosition">The position of the mouse at the time of the last position update.</param>
+        /// <param name="depthMultiplier">Multiplier for z-axis movement.</param>
         /// <returns>Controller movement delta.</returns>
-        Vector3 DeltaPosition { get; }
+        Vector3 GetDeltaPosition(Vector3? lastMousePosition, float depthMultiplier);
     }
 }

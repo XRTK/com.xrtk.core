@@ -62,6 +62,10 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public bool IsInInputDownPose { get; private set; }
 
+        /// <summary>
+        /// Updates the hand controller with new hand data input.
+        /// </summary>
+        /// <param name="handData">Updated hand data.</param>
         public void UpdateController(HandData handData)
         {
             if (!Enabled) { return; }

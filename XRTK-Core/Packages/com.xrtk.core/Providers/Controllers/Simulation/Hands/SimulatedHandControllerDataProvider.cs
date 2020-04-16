@@ -84,6 +84,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         private readonly SimulatedHandDataConverter leftHandConverter;
         private readonly SimulatedHandDataConverter rightHandConverter;
 
+        private Vector3? lastMousePosition = null;
+
         /// <inheritdoc />
         public IReadOnlyList<SimulatedHandControllerPoseData> HandPoseDefinitions => handPoseDefinitions;
 
@@ -108,17 +110,16 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <inheritdoc />
         protected override void UpdateSimulatedController(IMixedRealitySimulatedController simulatedController)
         {
-            if (simulatedController is MixedRealityHandController simulatedHandController)
-            {
-                var converter = simulatedHandController.ControllerHandedness == Handedness.Left
-                    ? leftHandConverter
-                    : rightHandConverter;
+            var simulatedHandController = (MixedRealityHandController)simulatedController;
+            var converter = simulatedHandController.ControllerHandedness == Handedness.Left
+                ? leftHandConverter
+                : rightHandConverter;
 
-                simulatedHandController.UpdateController(converter.GetSimulatedHandData(simulatedController.DeltaPosition, simulatedController.DeltaRotation));
-                return;
-            }
+            simulatedHandController.UpdateController(converter.GetSimulatedHandData(
+                simulatedController.GetDeltaPosition(lastMousePosition, DepthMultiplier),
+                simulatedController.GetDeltaRotation(RotationSpeed)));
 
-            base.UpdateSimulatedController(simulatedController);
+            lastMousePosition = Input.mousePosition;
         }
 
         /// <inheritdoc />

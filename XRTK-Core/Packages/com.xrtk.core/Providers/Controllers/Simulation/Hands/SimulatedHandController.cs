@@ -7,7 +7,6 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Providers.Controllers.Simulation.Hands
@@ -22,82 +21,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <inheritdoc />
         public SimulatedHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
-        {
-            simulatedHandControllerDataProvider = (ISimulatedHandControllerDataProvider)controllerDataProvider;
-        }
-
-        private readonly ISimulatedHandControllerDataProvider simulatedHandControllerDataProvider;
-
-        private Vector3? lastMousePosition = null;
-
-        /// <inheritdoc />
-        public Vector3 DeltaRotation
-        {
-            get
-            {
-                UpdateSimulationMappings();
-
-                float rotationDelta = simulatedHandControllerDataProvider.RotationSpeed * Time.deltaTime;
-                Vector3 rotationDeltaEulerAngles = Vector3.zero;
-
-                if (Interactions[0].BoolData)
-                {
-                    rotationDeltaEulerAngles.y = rotationDelta;
-                }
-
-                if (Interactions[1].BoolData)
-                {
-                    rotationDeltaEulerAngles.y = -rotationDelta;
-                }
-
-                if (Interactions[2].BoolData)
-                {
-                    rotationDeltaEulerAngles.x = -rotationDelta;
-                }
-
-                if (Interactions[3].BoolData)
-                {
-                    rotationDeltaEulerAngles.x = rotationDelta;
-                }
-
-                if (Interactions[4].BoolData)
-                {
-                    rotationDeltaEulerAngles.z = -rotationDelta;
-                }
-
-                if (Interactions[5].BoolData)
-                {
-                    rotationDeltaEulerAngles.z = rotationDelta;
-                }
-
-                return rotationDeltaEulerAngles;
-            }
-        }
-
-        /// <inheritdoc />
-        public Vector3 DeltaPosition
-        {
-            get
-            {
-                UpdateSimulationMappings();
-
-                Vector3 mouseDelta = lastMousePosition.HasValue ? Input.mousePosition - lastMousePosition.Value : Vector3.zero;
-
-                if (Interactions[6].BoolData)
-                {
-                    mouseDelta.z += Time.deltaTime * simulatedHandControllerDataProvider.DepthMultiplier;
-                }
-
-                if (Interactions[7].BoolData)
-                {
-                    mouseDelta.z -= Time.deltaTime * simulatedHandControllerDataProvider.DepthMultiplier;
-                }
-
-                lastMousePosition = Input.mousePosition;
-
-                return mouseDelta;
-            }
-        }
+        { }
 
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
@@ -111,6 +35,67 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             new MixedRealityInteractionMapping("Move Away (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.PageUp),
             new MixedRealityInteractionMapping("Move Closer (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.PageDown)
         };
+
+        /// <inheritdoc />
+        public Vector3 GetDeltaRotation(float rotationSpeed)
+        {
+            UpdateSimulationMappings();
+
+            float rotationDelta = rotationSpeed * Time.deltaTime;
+            Vector3 rotationDeltaEulerAngles = Vector3.zero;
+
+            if (Interactions[0].BoolData)
+            {
+                rotationDeltaEulerAngles.y = rotationDelta;
+            }
+
+            if (Interactions[1].BoolData)
+            {
+                rotationDeltaEulerAngles.y = -rotationDelta;
+            }
+
+            if (Interactions[2].BoolData)
+            {
+                rotationDeltaEulerAngles.x = -rotationDelta;
+            }
+
+            if (Interactions[3].BoolData)
+            {
+                rotationDeltaEulerAngles.x = rotationDelta;
+            }
+
+            if (Interactions[4].BoolData)
+            {
+                rotationDeltaEulerAngles.z = -rotationDelta;
+            }
+
+            if (Interactions[5].BoolData)
+            {
+                rotationDeltaEulerAngles.z = rotationDelta;
+            }
+
+            return rotationDeltaEulerAngles;
+        }
+
+        /// <inheritdoc />
+        public Vector3 GetDeltaPosition(Vector3? lastMousePosition, float depthMultiplier)
+        {
+            UpdateSimulationMappings();
+
+            Vector3 mouseDelta = lastMousePosition.HasValue ? Input.mousePosition - lastMousePosition.Value : Vector3.zero;
+
+            if (Interactions[6].BoolData)
+            {
+                mouseDelta.z += Time.deltaTime * depthMultiplier;
+            }
+
+            if (Interactions[7].BoolData)
+            {
+                mouseDelta.z -= Time.deltaTime * depthMultiplier;
+            }
+
+            return mouseDelta;
+        }
 
         private void UpdateSimulationMappings()
         {

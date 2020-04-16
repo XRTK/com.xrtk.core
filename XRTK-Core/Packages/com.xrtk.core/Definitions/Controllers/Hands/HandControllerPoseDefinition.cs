@@ -14,20 +14,20 @@ namespace XRTK.Definitions.Controllers.Hands
     public class HandControllerPoseDefinition : BaseMixedRealityProfile
     {
         [SerializeField]
-        [Tooltip("Assign a unique ID to the pose. Can be used as a descriptive name, but must be unique!")]
+        [Tooltip("A unique ID to the pose. Can be a descriptive name, but must be unique!")]
         private string id = string.Empty;
 
         /// <summary>
-        /// A unique identifier for the hand pose.
+        /// A unique ID to the pose.
         /// </summary>
         public string Id => id;
 
         [SerializeField]
-        [Tooltip("Describe the hand pose.")]
+        [Tooltip("Describes the hand pose.")]
         private string description = string.Empty;
 
         /// <summary>
-        /// Gets the gesture's description.
+        /// Describes the hand pose.
         /// </summary>
         public string Description => description;
 
@@ -36,9 +36,18 @@ namespace XRTK.Definitions.Controllers.Hands
         private bool isDefault = false;
 
         /// <summary>
-        /// Gets whether this hand pose is the hand's idle pose.
+        /// Is this the default (idle) hand pose?
         /// </summary>
         public bool IsDefault => isDefault;
+
+        [SerializeField]
+        [Tooltip("Is this a selection pose used to select things?")]
+        private bool isSelectionPose = false;
+
+        /// <summary>
+        /// Is this a selection pose used to select things?
+        /// </summary>
+        public bool IsSelectionPose => isSelectionPose;
 
         [SerializeField]
         [Tooltip("Key used to trigger the gesture simulation.")]

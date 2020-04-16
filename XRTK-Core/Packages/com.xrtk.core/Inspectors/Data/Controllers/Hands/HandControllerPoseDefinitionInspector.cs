@@ -13,6 +13,7 @@ namespace XRTK.Inspectors.Data.Controllers.Hands
         private SerializedProperty id;
         private SerializedProperty description;
         private SerializedProperty isDefault;
+        private SerializedProperty isSelectionPose;
         private SerializedProperty keyCode;
         private SerializedProperty data;
 
@@ -23,6 +24,7 @@ namespace XRTK.Inspectors.Data.Controllers.Hands
             id = serializedObject.FindProperty(nameof(id));
             description = serializedObject.FindProperty(nameof(description));
             isDefault = serializedObject.FindProperty(nameof(isDefault));
+            isSelectionPose = serializedObject.FindProperty(nameof(isSelectionPose));
             keyCode = serializedObject.FindProperty(nameof(keyCode));
             data = serializedObject.FindProperty(nameof(data));
         }
@@ -36,6 +38,7 @@ namespace XRTK.Inspectors.Data.Controllers.Hands
             EditorGUILayout.PropertyField(id);
             EditorGUILayout.PropertyField(description);
             EditorGUILayout.PropertyField(isDefault);
+            EditorGUILayout.PropertyField(isSelectionPose);
             EditorGUILayout.PropertyField(keyCode);
             EditorGUILayout.PropertyField(data);
 

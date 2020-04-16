@@ -22,6 +22,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
         private bool showSimulatedHandTrackingSettings = true;
 
+        private static readonly GUIContent handPoseAnimationSpeedLabel = new GUIContent("Hand Pose Animation Speed");
         private static readonly GUIContent simulatedHandSettingsFoldoutHeader = new GUIContent("Simulated Hand Tracking Settings");
 
         protected override void OnEnable()
@@ -73,7 +74,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
                 EditorGUILayout.LabelField("Simulated Poses");
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(handPoseAnimationSpeed);
+                handPoseAnimationSpeed.floatValue = EditorGUILayout.Slider(handPoseAnimationSpeedLabel, handPoseAnimationSpeed.floatValue, 1, 10);
                 EditorGUILayout.Space();
                 EditorGUI.indentLevel--;
 

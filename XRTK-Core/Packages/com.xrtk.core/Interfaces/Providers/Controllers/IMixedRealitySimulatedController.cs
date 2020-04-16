@@ -18,9 +18,8 @@ namespace XRTK.Interfaces.Providers.Controllers
         /// Gets a simulated depth tracking (controller closer / further from tracking device) update, as well
         /// as the controller's simulated (x,y) position.
         /// </summary>
-        /// <param name="lastMousePosition">The position of the mouse at the time of the last position update.</param>
         /// <param name="depthMultiplier">Multiplier for z-axis movement.</param>
         /// <returns>Controller movement delta.</returns>
-        Vector3 GetDeltaPosition(Vector3? lastMousePosition, float depthMultiplier);
+        Vector3 GetDeltaPosition(float depthMultiplier);
     }
 }

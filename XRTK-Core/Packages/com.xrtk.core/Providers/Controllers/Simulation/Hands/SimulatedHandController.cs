@@ -78,23 +78,23 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         }
 
         /// <inheritdoc />
-        public Vector3 GetDeltaPosition(Vector3? lastMousePosition, float depthMultiplier)
+        public Vector3 GetDeltaPosition(float depthMultiplier)
         {
             UpdateSimulationMappings();
 
-            Vector3 mouseDelta = lastMousePosition.HasValue ? Input.mousePosition - lastMousePosition.Value : Vector3.zero;
+            Vector3 mousePosition = Input.mousePosition;
 
             if (Interactions[6].BoolData)
             {
-                mouseDelta.z += Time.deltaTime * depthMultiplier;
+                mousePosition.z += Time.deltaTime * depthMultiplier;
             }
 
             if (Interactions[7].BoolData)
             {
-                mouseDelta.z -= Time.deltaTime * depthMultiplier;
+                mousePosition.z -= Time.deltaTime * depthMultiplier;
             }
 
-            return mouseDelta;
+            return mousePosition;
         }
 
         private void UpdateSimulationMappings()

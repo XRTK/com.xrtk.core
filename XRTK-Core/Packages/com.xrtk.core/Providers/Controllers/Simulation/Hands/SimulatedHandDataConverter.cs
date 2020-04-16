@@ -120,10 +120,16 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         public Vector3 JitterOffset { get; private set; } = Vector3.zero;
 
-        public HandData GetSimulatedHandData(Vector3 deltaPosition, Vector3 deltaRotation)
+        /// <summary>
+        /// Gets simulated hand data for a <see cref="MixedRealityHandController"/>.
+        /// </summary>
+        /// <param name="position">The simulated camera space position of the hand controller.</param>
+        /// <param name="deltaRotation">The rotation delta applied to the hand since last update.</param>
+        /// <returns></returns>
+        public HandData GetSimulatedHandData(Vector3 position, Vector3 deltaRotation)
         {
             // Read keyboard / mouse input to determine the root pose delta since last frame.
-            var rootPoseDelta = new MixedRealityPose(deltaPosition, Quaternion.Euler(deltaRotation));
+            var rootPoseDelta = new MixedRealityPose(position, Quaternion.Euler(deltaRotation));
 
             // Calculate pose changes and compute timestamp for hand tracking update.
             var poseAnimationDelta = handPoseAnimationSpeed * Time.deltaTime;
@@ -163,7 +169,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             return HandData;
         }
 
-        private void HandleSimulationInput(MixedRealityPose rootPoseDelta)
+        private void HandleSimulationInput(MixedRealityPose handRootPose)
         {
             // If the hands state is changing from "not tracked" to being tracked, reset its position
             // to the current mouse position and default distance from the camera.
@@ -173,14 +179,16 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 screenPosition = new Vector3(mousePos.x, mousePos.y, defaultDistance);
             }
 
-            // Apply mouse delta x/y in screen space, but depth offset in world space
-            screenPosition.x += rootPoseDelta.Position.x;
-            screenPosition.y += rootPoseDelta.Position.y;
+            // Apply position delta x / y in screen space, but depth (z) offset in world space
+            screenPosition.x = handRootPose.Position.x;
+            screenPosition.y = handRootPose.Position.y;
             Vector3 newWorldPoint = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition);
-            newWorldPoint += MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.forward * rootPoseDelta.Position.z;
+            newWorldPoint += MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.forward * handRootPose.Position.z;
             screenPosition = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.WorldToScreenPoint(newWorldPoint);
 
-            HandRotateEulerAngles += rootPoseDelta.Rotation.eulerAngles;
+            // The provided hand root pose rotation is just a delta from the
+            // previous frame, so we need to determine the final rotation still.
+            HandRotateEulerAngles += handRootPose.Rotation.eulerAngles;
             JitterOffset = Random.insideUnitSphere * jitterAmount;
 
             HandData.IsTracked = true;

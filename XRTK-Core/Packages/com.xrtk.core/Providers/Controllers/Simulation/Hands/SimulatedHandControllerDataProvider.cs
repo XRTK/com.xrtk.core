@@ -84,8 +84,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         private readonly SimulatedHandDataConverter leftHandConverter;
         private readonly SimulatedHandDataConverter rightHandConverter;
 
-        private Vector3? lastMousePosition = null;
-
         /// <inheritdoc />
         public IReadOnlyList<SimulatedHandControllerPoseData> HandPoseDefinitions => handPoseDefinitions;
 
@@ -116,10 +114,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 : rightHandConverter;
 
             simulatedHandController.UpdateController(converter.GetSimulatedHandData(
-                simulatedController.GetDeltaPosition(lastMousePosition, DepthMultiplier),
+                simulatedController.GetDeltaPosition(DepthMultiplier),
                 simulatedController.GetDeltaRotation(RotationSpeed)));
-
-            lastMousePosition = Input.mousePosition;
         }
 
         /// <inheritdoc />

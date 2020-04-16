@@ -20,7 +20,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     /// <summary>
     /// Hand controller type for simulated hand controllers.
     /// </summary>
-    public class SimulatedHandController : BaseHandController, IMixedRealitySimulatedController
+    public class SimulatedHandController : MixedRealityHandController, IMixedRealitySimulatedController
     {
         public SimulatedHandController() : base() { }
 

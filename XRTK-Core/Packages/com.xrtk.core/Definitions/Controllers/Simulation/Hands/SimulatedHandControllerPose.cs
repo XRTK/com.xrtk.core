@@ -43,7 +43,7 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// <summary>
         /// Gets the configured default pose for simulation hands.
         /// </summary>
-        public static SimulatedHandControllerPoseData DefaultHandPose { get; private set; }
+        public static HandControllerPoseDefinition DefaultHandPose { get; private set; }
 
         /// <summary>
         /// Gets the unique identifier for the simulated pose.
@@ -76,7 +76,7 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// Initialize pose data for use in editor from files.
         /// </summary>
         /// <param name="poses">List of pose data assets with pose information.</param>
-        public static void Initialize(IReadOnlyList<SimulatedHandControllerPoseData> poses)
+        public static void Initialize(IReadOnlyList<HandControllerPoseDefinition> poses)
         {
             if (isInitialized)
             {

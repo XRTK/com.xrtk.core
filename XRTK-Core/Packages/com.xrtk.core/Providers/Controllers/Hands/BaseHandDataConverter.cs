@@ -21,7 +21,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         /// <param name="handedness">Handedness this converter is converting to.</param>
         /// <param name="poseRecognizer">Pose recognizer instance to use for pose recognition.</param>
-        protected BaseHandDataConverter(Handedness handedness, IReadOnlyList<SimulatedHandControllerPoseData> trackedPoses)
+        protected BaseHandDataConverter(Handedness handedness, IReadOnlyList<HandControllerPoseDefinition> trackedPoses)
         {
             Handedness = handedness;
             this.trackedPoses = new HandPoseFrame[trackedPoses.Count];

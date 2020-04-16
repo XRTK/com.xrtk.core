@@ -19,9 +19,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     public sealed class SimulatedHandDataConverter : BaseHandDataConverter
     {
         public SimulatedHandDataConverter(Handedness handedness,
-            IReadOnlyList<SimulatedHandControllerPoseData> trackedPoses,
+            IReadOnlyList<HandControllerPoseDefinition> trackedPoses,
             float handPoseAnimationSpeed,
-            IReadOnlyList<SimulatedHandControllerPoseData> handPoseDefinitions,
+            IReadOnlyList<HandControllerPoseDefinition> handPoseDefinitions,
             float jitterAmount,
             float defaultDistance)
             : base(handedness, trackedPoses)
@@ -53,7 +53,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         }
 
         private readonly float handPoseAnimationSpeed;
-        private readonly IReadOnlyList<SimulatedHandControllerPoseData> handPoseDefinitions;
+        private readonly IReadOnlyList<HandControllerPoseDefinition> handPoseDefinitions;
         private readonly float jitterAmount;
         private readonly float defaultDistance;
         private readonly StopWatch handUpdateStopWatch;

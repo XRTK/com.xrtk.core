@@ -27,7 +27,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         {
             var globalSettingsProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
             var poseDefinitions = profile.PoseDefinitions;
-            handPoseDefinitions = new List<SimulatedHandControllerPoseData>(poseDefinitions.Count);
+            handPoseDefinitions = new List<HandControllerPoseDefinition>(poseDefinitions.Count);
 
             foreach (var poseDefinition in poseDefinitions)
             {
@@ -80,12 +80,12 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 DefaultDistance);
         }
 
-        private readonly List<SimulatedHandControllerPoseData> handPoseDefinitions;
+        private readonly List<HandControllerPoseDefinition> handPoseDefinitions;
         private readonly SimulatedHandDataConverter leftHandConverter;
         private readonly SimulatedHandDataConverter rightHandConverter;
 
         /// <inheritdoc />
-        public IReadOnlyList<SimulatedHandControllerPoseData> HandPoseDefinitions => handPoseDefinitions;
+        public IReadOnlyList<HandControllerPoseDefinition> HandPoseDefinitions => handPoseDefinitions;
 
         /// <inheritdoc />
         public float HandPoseAnimationSpeed { get; }
@@ -103,7 +103,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public bool HandMeshingEnabled { get; }
 
         /// <inheritdoc />
-        public IReadOnlyList<SimulatedHandControllerPoseData> TrackedPoses { get; }
+        public IReadOnlyList<HandControllerPoseDefinition> TrackedPoses { get; }
 
         /// <inheritdoc />
         protected override void UpdateSimulatedController(IMixedRealitySimulatedController simulatedController)

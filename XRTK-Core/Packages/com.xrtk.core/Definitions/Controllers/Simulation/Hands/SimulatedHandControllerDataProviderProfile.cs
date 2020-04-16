@@ -13,12 +13,12 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
     {
         [SerializeField]
         [Tooltip("Hand pose definitions.")]
-        private List<SimulatedHandControllerPoseData> poseDefinitions = new List<SimulatedHandControllerPoseData>();
+        private List<HandControllerPoseDefinition> poseDefinitions = new List<HandControllerPoseDefinition>();
 
         /// <summary>
         /// Hand pose definitions.
         /// </summary>
-        public IReadOnlyList<SimulatedHandControllerPoseData> PoseDefinitions => poseDefinitions;
+        public IReadOnlyList<HandControllerPoseDefinition> PoseDefinitions => poseDefinitions;
 
         [SerializeField]
         [Tooltip("Gesture interpolation per second")]
@@ -67,12 +67,12 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
 
         [SerializeField]
         [Tooltip("Tracked hand poses for pose detection.")]
-        private List<SimulatedHandControllerPoseData> trackedPoses = new List<SimulatedHandControllerPoseData>();
+        private List<HandControllerPoseDefinition> trackedPoses = new List<HandControllerPoseDefinition>();
 
         /// <summary>
         /// Tracked hand poses for pose detection.
         /// </summary>
-        public IReadOnlyList<SimulatedHandControllerPoseData> TrackedPoses => trackedPoses;
+        public IReadOnlyList<HandControllerPoseDefinition> TrackedPoses => trackedPoses;
 
         public override ControllerDefinition[] GetDefaultControllerOptions()
         {

@@ -2,13 +2,13 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
-using XRTK.Definitions.Controllers.Simulation.Hands;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Inspectors.Profiles;
 
-namespace XRTK.Inspectors.Data.Controllers.Simulation.Hands
+namespace XRTK.Inspectors.Data.Controllers.Hands
 {
-    [CustomEditor(typeof(SimulatedHandControllerPoseData))]
-    public class SimulatedHandControllerPoseDataInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(HandControllerPoseDefinition))]
+    public class HandControllerPoseDefinitionInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty id;
         private SerializedProperty description;

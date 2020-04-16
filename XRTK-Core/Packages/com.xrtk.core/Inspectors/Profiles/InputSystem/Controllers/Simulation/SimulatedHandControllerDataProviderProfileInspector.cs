@@ -4,6 +4,7 @@
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Inspectors.Extensions;
 
@@ -113,7 +114,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
             rect.height = EditorGUIUtility.singleLineHeight;
             rect.y += 3;
             var poseDataProperty = poseDefinitions.GetArrayElementAtIndex(index);
-            var selectedPoseData = EditorGUI.ObjectField(rect, poseDataProperty.objectReferenceValue, typeof(SimulatedHandControllerPoseData), false) as SimulatedHandControllerPoseData;
+            var selectedPoseData = EditorGUI.ObjectField(rect, poseDataProperty.objectReferenceValue, typeof(HandControllerPoseDefinition), false) as HandControllerPoseDefinition;
 
             if (selectedPoseData != null)
             {

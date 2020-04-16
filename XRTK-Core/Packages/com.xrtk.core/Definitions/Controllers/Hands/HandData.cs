@@ -18,9 +18,9 @@ namespace XRTK.Definitions.Controllers.Hands
         public static readonly int JointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
         /// <summary>
-        /// The recognized hand pose identifier.
+        /// The recognized hand pose, if any.
         /// </summary>
-        public string PoseId { get; set; } = null;
+        public HandControllerPoseDefinition PoseDefinition { get; set; } = null;
 
         /// <summary>
         /// Timestamp of hand data, as FileTime, e.g. <see cref="DateTime.UtcNow"/>

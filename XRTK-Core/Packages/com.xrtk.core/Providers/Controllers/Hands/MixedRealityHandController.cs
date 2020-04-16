@@ -78,7 +78,7 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateVelocity();
             UpdateIsInputDownPose();
 
-            Debug.Log(handData.PoseId);
+            Debug.Log(handData.PoseDefinition?.Id);
 
             if (TryGetJointPose(TrackedHandJoint.Wrist, out var wristPose))
             {

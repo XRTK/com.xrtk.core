@@ -23,7 +23,8 @@ namespace XRTK.Providers.Controllers.Hands
         protected BaseHandDataConverter(Handedness handedness, IReadOnlyList<HandControllerPoseDefinition> trackedPoses)
         {
             Handedness = handedness;
-            this.trackedPoses = new HandPoseFrame[trackedPoses.Count];
+            poseCompareFrames = new HandPoseFrame[trackedPoses.Count];
+            this.trackedPoses = new Dictionary<string, HandControllerPoseDefinition>();
 
             int i = 0;
             foreach (var item in trackedPoses)
@@ -36,12 +37,15 @@ namespace XRTK.Providers.Controllers.Hands
                     recordedLocalJointPoses[(int)jointRecord.JointIndex] = jointRecord.pose;
                 }
 
-                this.trackedPoses[i] = new HandPoseFrame(item.Id, recordedLocalJointPoses);
+                poseCompareFrames[i] = new HandPoseFrame(item.Id, recordedLocalJointPoses);
+                this.trackedPoses.Add(item.Id, item);
+
                 i++;
             }
         }
 
-        private readonly HandPoseFrame[] trackedPoses;
+        private readonly Dictionary<string, HandControllerPoseDefinition> trackedPoses;
+        private readonly HandPoseFrame[] poseCompareFrames;
 
         /// <summary>
         /// The handedness this converter is converting to.
@@ -58,11 +62,11 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 if (TryRecognizePose(handData.Joints, out var recognizedPoseId))
                 {
-                    handData.PoseId = recognizedPoseId;
+                    handData.PoseDefinition = recognizedPoseId;
                 }
                 else
                 {
-                    handData.PoseId = null;
+                    handData.PoseDefinition = null;
                 }
             }
         }
@@ -71,26 +75,26 @@ namespace XRTK.Providers.Controllers.Hands
         /// Tries to reconize the hands pose using the the provided <see cref="HandPoseRecognizer"/>.
         /// </summary>
         /// <param name="jointPoses">Local joint poses retrieved from initial conversion.</param>
-        /// <param name="recognizedPoseId">The recognized pose ID, if any.</param>
+        /// <param name="recognizedPose">The recognized pose ID, if any.</param>
         /// <returns>True, if a pose was recognized.</returns>
-        protected bool TryRecognizePose(MixedRealityPose[] jointPoses, out string recognizedPoseId)
+        protected bool TryRecognizePose(MixedRealityPose[] jointPoses, out HandControllerPoseDefinition recognizedPose)
         {
             var wristPose = jointPoses[(int)TrackedHandJoint.Wrist];
             var localJointPoses = ParseFromJointPoses(jointPoses, Handedness, wristPose.Rotation, wristPose.Position);
             var currentFrame = new HandPoseFrame(localJointPoses);
 
-            for (int i = 0; i < trackedPoses.Length; i++)
+            for (int i = 0; i < poseCompareFrames.Length; i++)
             {
-                var compareFrame = trackedPoses[i];
+                var compareFrame = poseCompareFrames[i];
 
                 if (compareFrame.Compare(currentFrame, .01f))
                 {
-                    recognizedPoseId = compareFrame.Id;
+                    recognizedPose = trackedPoses[compareFrame.Id];
                     return true;
                 }
             }
 
-            recognizedPoseId = null;
+            recognizedPose = null;
             return false;
         }
 

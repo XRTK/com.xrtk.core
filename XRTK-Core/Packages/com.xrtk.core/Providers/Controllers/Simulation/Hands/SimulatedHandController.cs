@@ -152,16 +152,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         };
 
         /// <summary>
-        /// The Default Left Handed interactions for this controller.
-        /// </summary>
-        public override MixedRealityInteractionMapping[] DefaultLeftHandedInteractions => DefaultInteractions;
-
-        /// <summary>
-        /// The Default Right Handed interactions for this controller.
-        /// </summary>
-        public override MixedRealityInteractionMapping[] DefaultRightHandedInteractions => DefaultInteractions;
-
-        /// <summary>
         /// Gets the hands position in screen space.
         /// </summary>
         public Vector3 ScreenPosition => screenPosition;

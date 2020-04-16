@@ -62,9 +62,27 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             {
                 TrackedPoses = globalSettingsProfile.TrackedPoses;
             }
+
+            leftHandConverter = new SimulatedHandDataConverter(
+                Handedness.Left,
+                TrackedPoses,
+                HandPoseAnimationSpeed,
+                HandPoseDefinitions,
+                JitterAmount,
+                DefaultDistance);
+
+            rightHandConverter = new SimulatedHandDataConverter(
+                Handedness.Right,
+                TrackedPoses,
+                HandPoseAnimationSpeed,
+                HandPoseDefinitions,
+                JitterAmount,
+                DefaultDistance);
         }
 
         private readonly List<SimulatedHandControllerPoseData> handPoseDefinitions;
+        private readonly SimulatedHandDataConverter leftHandConverter;
+        private readonly SimulatedHandDataConverter rightHandConverter;
 
         /// <inheritdoc />
         public IReadOnlyList<SimulatedHandControllerPoseData> HandPoseDefinitions => handPoseDefinitions;
@@ -86,6 +104,22 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
         /// <inheritdoc />
         public IReadOnlyList<SimulatedHandControllerPoseData> TrackedPoses { get; }
+
+        /// <inheritdoc />
+        protected override void UpdateSimulatedController(IMixedRealitySimulatedController simulatedController)
+        {
+            if (simulatedController is MixedRealityHandController simulatedHandController)
+            {
+                var converter = simulatedHandController.ControllerHandedness == Handedness.Left
+                    ? leftHandConverter
+                    : rightHandConverter;
+
+                simulatedHandController.UpdateController(converter.GetSimulatedHandData(simulatedController.DeltaPosition, simulatedController.DeltaRotation));
+                return;
+            }
+
+            base.UpdateSimulatedController(simulatedController);
+        }
 
         /// <inheritdoc />
         protected override IMixedRealitySimulatedController CreateAndRegisterSimulatedController(Handedness handedness)

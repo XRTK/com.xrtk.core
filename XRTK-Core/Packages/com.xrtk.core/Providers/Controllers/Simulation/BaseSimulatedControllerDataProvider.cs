@@ -112,7 +112,7 @@ namespace XRTK.Providers.Controllers.Simulation
             // Update all active simulated controllers.
             for (int i = 0; i < ActiveControllers.Count; i++)
             {
-                ActiveControllers[i].UpdateController();
+                UpdateSimulatedController((IMixedRealitySimulatedController)ActiveControllers[i]);
             }
         }
 
@@ -234,6 +234,15 @@ namespace XRTK.Providers.Controllers.Simulation
 
             controller = default;
             return false;
+        }
+
+        /// <summary>
+        /// Updates the provided simulated controller instance.
+        /// </summary>
+        /// <param name="simulatedController">Controller to update.</param>
+        protected virtual void UpdateSimulatedController(IMixedRealitySimulatedController simulatedController)
+        {
+            simulatedController.UpdateController();
         }
 
         /// <summary>

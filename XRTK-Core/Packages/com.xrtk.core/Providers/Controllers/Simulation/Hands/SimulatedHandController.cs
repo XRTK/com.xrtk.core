@@ -24,25 +24,14 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
         {
             simulatedHandControllerDataProvider = (ISimulatedHandControllerDataProvider)controllerDataProvider;
-
-            converter = new SimulatedHandDataConverter(ControllerHandedness,
-                simulatedHandControllerDataProvider.TrackedPoses,
-                simulatedHandControllerDataProvider.HandPoseAnimationSpeed,
-                simulatedHandControllerDataProvider.HandPoseDefinitions,
-                simulatedHandControllerDataProvider.JitterAmount,
-                simulatedHandControllerDataProvider.DefaultDistance);
         }
 
-        private readonly SimulatedHandDataConverter converter;
         private readonly ISimulatedHandControllerDataProvider simulatedHandControllerDataProvider;
 
         private Vector3? lastMousePosition = null;
 
-        /// <summary>
-        /// Gets a simulated Yaw, Pitch and Roll delta for the current frame.
-        /// </summary>
-        /// <returns>Updated hand rotation angles.</returns>
-        private Vector3 DeltaRotation
+        /// <inheritdoc />
+        public Vector3 DeltaRotation
         {
             get
             {
@@ -85,12 +74,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             }
         }
 
-        /// <summary>
-        /// Gets a simulated depth tracking (hands closer / further from tracking device) update, as well
-        /// as the hands simulated (x,y) position.
-        /// </summary>
-        /// <returns>Hand movement delta.</returns>
-        private Vector3 DeltaPosition
+        /// <inheritdoc />
+        public Vector3 DeltaPosition
         {
             get
             {
@@ -108,6 +93,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                     mouseDelta.z -= Time.deltaTime * simulatedHandControllerDataProvider.DepthMultiplier;
                 }
 
+                lastMousePosition = Input.mousePosition;
+
                 return mouseDelta;
             }
         }
@@ -124,13 +111,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             new MixedRealityInteractionMapping("Move Away (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.PageUp),
             new MixedRealityInteractionMapping("Move Closer (Depth)", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.PageDown)
         };
-
-        /// <inheritdoc />
-        public override void UpdateController()
-        {
-            UpdateController(converter.GetSimulatedHandData(DeltaPosition, DeltaRotation));
-            lastMousePosition = Input.mousePosition;
-        }
 
         private void UpdateSimulationMappings()
         {

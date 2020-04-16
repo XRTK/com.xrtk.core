@@ -60,6 +60,10 @@ namespace XRTK.Providers.Controllers.Hands
                 {
                     handData.PoseId = recognizedPoseId;
                 }
+                else
+                {
+                    handData.PoseId = null;
+                }
             }
         }
 

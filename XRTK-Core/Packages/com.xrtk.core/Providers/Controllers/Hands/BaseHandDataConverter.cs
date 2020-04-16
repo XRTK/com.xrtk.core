@@ -16,9 +16,6 @@ namespace XRTK.Providers.Controllers.Hands
     /// </summary>
     public abstract class BaseHandDataConverter
     {
-        private readonly Handedness handedness;
-        private readonly HandPoseFrame[] trackedPoses;
-
         /// <summary>
         /// Creates a new instance of the hand data converter.
         /// </summary>
@@ -26,7 +23,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="poseRecognizer">Pose recognizer instance to use for pose recognition.</param>
         protected BaseHandDataConverter(Handedness handedness, IReadOnlyList<SimulatedHandControllerPoseData> trackedPoses)
         {
-            this.handedness = handedness;
+            this.Handedness = handedness;
             this.trackedPoses = new HandPoseFrame[trackedPoses.Count];
 
             int i = 0;
@@ -44,6 +41,13 @@ namespace XRTK.Providers.Controllers.Hands
                 i++;
             }
         }
+
+        private readonly HandPoseFrame[] trackedPoses;
+
+        /// <summary>
+        /// The handedness this converter is converting to.
+        /// </summary>
+        protected Handedness Handedness { get; }
 
         /// <summary>
         /// Applies post conversion steps to the generated hand data.
@@ -69,7 +73,7 @@ namespace XRTK.Providers.Controllers.Hands
         protected bool TryRecognizePose(MixedRealityPose[] jointPoses, out string recognizedPoseId)
         {
             var wristPose = jointPoses[(int)TrackedHandJoint.Wrist];
-            var localJointPoses = ParseFromJointPoses(jointPoses, handedness, wristPose.Rotation, wristPose.Position);
+            var localJointPoses = ParseFromJointPoses(jointPoses, Handedness, wristPose.Rotation, wristPose.Position);
             var currentFrame = new HandPoseFrame(localJointPoses);
 
             for (int i = 0; i < trackedPoses.Length; i++)

@@ -76,7 +76,7 @@ namespace XRTK.Providers.Controllers.Hands
             if (!Enabled) { return; }
 
             var lastState = TrackingState;
-            var lastIsInInputDownPose = IsInInputDownPose;
+            //var lastIsInInputDownPose = IsInInputDownPose;
 
             UpdateJoints(handData);
             UpdateBounds();

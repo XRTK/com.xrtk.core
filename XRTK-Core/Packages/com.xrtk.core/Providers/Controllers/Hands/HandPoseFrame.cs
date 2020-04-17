@@ -50,6 +50,13 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         public MixedRealityPose[] LocalJointPoses { get; }
 
+        /// <summary>
+        /// Compares another hand pose frame and returns true, if they can be considered
+        /// equal.
+        /// </summary>
+        /// <param name="otherFrame">The frame to compare to.</param>
+        /// <param name="tolerance">Tolerance for considering joints equal.</param>
+        /// <returns></returns>
         public bool Compare(HandPoseFrame otherFrame, float tolerance)
         {
             var otherWristPose = otherFrame.LocalJointPoses[(int)TrackedHandJoint.Wrist];
@@ -57,26 +64,28 @@ namespace XRTK.Providers.Controllers.Hands
             var otherScaleDenominator = Vector3.Distance(otherWristPose.Position, otherPalmPose.Position);
             var scale = otherScaleDenominator / scaleDenominator;
 
-            int requiredMatches = HandData.JointCount;
             int matches = 0;
 
-            var aPalmPose = LocalJointPoses[(int)TrackedHandJoint.Palm];
-            var bPalmPose = otherFrame.LocalJointPoses[(int)TrackedHandJoint.Palm];
-
-            for (int i = 0; i < LocalJointPoses.Length; i++)
+            // Skip None, Wrist and Palm.
+            var skippedJoints = 3;
+            var requiredMatches = HandData.JointCount - skippedJoints;
+            for (int i = skippedJoints; i < LocalJointPoses.Length; i++)
             {
-                var a = LocalJointPoses[i];
-                var b = otherFrame.LocalJointPoses[i];
+                var thisJoint = LocalJointPoses[i].Position;
+                var otherJoint = scale * otherFrame.LocalJointPoses[i].Position;
 
-                var aDiff = Vector3.Distance(aPalmPose.Position, a.Position);
-                var bDiff = Vector3.Distance(bPalmPose.Position, b.Position);
+                var considerEqual =
+                    Math.Abs(thisJoint.x - otherJoint.x) <= tolerance &&
+                    Math.Abs(thisJoint.y - otherJoint.y) <= tolerance &&
+                    Math.Abs(thisJoint.z - otherJoint.z) <= tolerance;
 
-                if (Math.Abs(aDiff - bDiff * scale) <= tolerance)
+                if (considerEqual)
                 {
                     matches++;
                 }
             }
 
+            Debug.Log(matches);
             return matches >= requiredMatches;
         }
     }

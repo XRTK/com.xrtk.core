@@ -189,6 +189,8 @@ namespace XRTK.Providers.CameraSystem
             {
                 cameraOpaqueLastFrame = IsOpaque;
 
+                ApplySettingsForDefaultHeadHeight();
+
                 if (IsOpaque)
                 {
                     ApplySettingsForOpaqueDisplay();
@@ -215,7 +217,11 @@ namespace XRTK.Providers.CameraSystem
         {
             base.Disable();
 
-            if (CameraRig.GameObject == null) { return; }
+            if (CameraRig == null ||
+                CameraRig.GameObject == null)
+            {
+                return;
+            }
 
             ResetRigTransforms();
 
@@ -310,6 +316,7 @@ namespace XRTK.Providers.CameraSystem
         {
             CameraRig.PlayspaceTransform.position = Vector3.zero;
             CameraRig.PlayspaceTransform.rotation = Quaternion.identity;
+            // If the camera is a 2d camera when we can adjust the camera's height to match the head height.
             CameraRig.CameraTransform.position = IsStereoscopic ? Vector3.zero : new Vector3(0f, HeadHeight, 0f);
             CameraRig.CameraTransform.rotation = Quaternion.identity;
             CameraRig.BodyTransform.position = Vector3.zero;

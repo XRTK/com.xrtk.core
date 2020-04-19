@@ -45,7 +45,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private bool showGlobalHandOptions;
         private bool showAggregatedSimpleControllerMappingProfiles;
 
-        private Dictionary<string, BaseMixedRealityControllerDataProviderProfile> controllerMappingProfiles;
+        private Dictionary<string, Tuple<BaseMixedRealityControllerDataProviderProfile, MixedRealityControllerMappingProfile>> controllerMappingProfiles;
 
         protected override void OnEnable()
         {
@@ -69,7 +69,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             gesturesProfile = serializedObject.FindProperty(nameof(gesturesProfile));
             speechCommandsProfile = serializedObject.FindProperty(nameof(speechCommandsProfile));
 
-            controllerMappingProfiles = new Dictionary<string, BaseMixedRealityControllerDataProviderProfile>();
+            controllerMappingProfiles = new Dictionary<string, Tuple<BaseMixedRealityControllerDataProviderProfile, MixedRealityControllerMappingProfile>>();
 
             for (int i = 0; i < Configurations?.arraySize; i++)
             {
@@ -77,15 +77,22 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 var configurationProfileProperty = configurationProperty.FindPropertyRelative("profile");
                 if (configurationProfileProperty != null)
                 {
-                    var profile = (BaseMixedRealityControllerDataProviderProfile)configurationProfileProperty.objectReferenceValue;
+                    var controllerDataProviderProfile = (BaseMixedRealityControllerDataProviderProfile)configurationProfileProperty.objectReferenceValue;
 
-                    if (profile == null) { continue; }
-
-                    AssetDatabase.TryGetGUIDAndLocalFileIdentifier(profile, out var guid, out long localId);
-
-                    if (!controllerMappingProfiles.ContainsKey(guid))
+                    if (controllerDataProviderProfile == null ||
+                        controllerDataProviderProfile.ControllerMappingProfiles == null)
                     {
-                        controllerMappingProfiles.Add(guid, profile);
+                        continue;
+                    }
+
+                    foreach (var mappingProfile in controllerDataProviderProfile.ControllerMappingProfiles)
+                    {
+                        AssetDatabase.TryGetGUIDAndLocalFileIdentifier(mappingProfile, out var guid, out long _);
+
+                        if (!controllerMappingProfiles.ContainsKey(guid))
+                        {
+                            controllerMappingProfiles.Add(guid, new Tuple<BaseMixedRealityControllerDataProviderProfile, MixedRealityControllerMappingProfile>(controllerDataProviderProfile, mappingProfile));
+                        }
                     }
                 }
             }
@@ -161,11 +168,14 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             if (showAggregatedSimpleControllerMappingProfiles)
             {
-                foreach (var profileEditor in controllerMappingProfiles.Select(item => CreateEditor(item.Value)))
+                foreach (var controllerMappingProfile in controllerMappingProfiles)
                 {
+                    var (dataProviderProfile, mappingProfile) = controllerMappingProfile.Value;
+                    var profileEditor = CreateEditor(dataProviderProfile);
+
                     if (profileEditor is BaseMixedRealityControllerDataProviderProfileInspector inspector)
                     {
-                        inspector.DrawSimpleControllerMappingProfilesView();
+                        inspector.RenderControllerMappingButton(mappingProfile);
                     }
                 }
             }

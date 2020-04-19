@@ -202,22 +202,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             serializedObject.ApplyModifiedProperties();
         }
 
-        internal void DrawSimpleControllerMappingProfilesView()
+        private void DrawSimpleControllerMappingProfilesView()
         {
             if (controllerMappingProfiles == null) { return; }
-
-            if (controllerButtonStyle == null)
-            {
-                controllerButtonStyle = new GUIStyle("LargeButton")
-                {
-                    imagePosition = ImagePosition.ImageAbove,
-                    fontStyle = FontStyle.Bold,
-                    stretchHeight = true,
-                    stretchWidth = true,
-                    wordWrap = true,
-                    fontSize = 10,
-                };
-            }
 
             // Clear found null element indexes from previous loop.
             nullElementIndexes.Clear();
@@ -233,30 +220,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                 // to remove them later on and cleanup the list of nulls.
                 if (controllerMappingProfile != null)
                 {
-                    var handedness = controllerMappingProfile.Handedness;
-
-                    if (handedness != Handedness.Right)
-                    {
-                        GUILayout.BeginHorizontal();
-                    }
-
-                    var typeName = controllerMappingProfile.ControllerType.Type.Name.ToProperCase();
-
-                    if (controllerMappingProfile.ControllerType.Type.Name == "WindowsMixedRealityMotionController" && controllerMappingProfile.Handedness == Handedness.None)
-                    {
-                        typeName = "HoloLens 1";
-                    }
-
-                    var buttonContent = new GUIContent($"Edit {typeName} Action Mapping", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile));
-                    if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
-                    {
-                        EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, new SerializedObject(controllerMappingProfile).FindProperty("interactionMappingProfiles"));
-                    }
-
-                    if (handedness != Handedness.Left)
-                    {
-                        GUILayout.EndHorizontal();
-                    }
+                    RenderControllerMappingButton(controllerMappingProfile);
                 }
                 else
                 {
@@ -277,6 +241,47 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                 }
 
                 serializedObject.ApplyModifiedProperties();
+            }
+        }
+
+        internal void RenderControllerMappingButton(MixedRealityControllerMappingProfile controllerMappingProfile)
+        {
+            if (controllerButtonStyle == null)
+            {
+                controllerButtonStyle = new GUIStyle("LargeButton")
+                {
+                    imagePosition = ImagePosition.ImageAbove,
+                    fontStyle = FontStyle.Bold,
+                    stretchHeight = true,
+                    stretchWidth = true,
+                    wordWrap = true,
+                    fontSize = 10,
+                };
+            }
+
+            var handedness = controllerMappingProfile.Handedness;
+
+            if (handedness != Handedness.Right)
+            {
+                GUILayout.BeginHorizontal();
+            }
+
+            var typeName = controllerMappingProfile.ControllerType.Type.Name.ToProperCase();
+
+            if (controllerMappingProfile.ControllerType.Type.Name == "WindowsMixedRealityMotionController" && controllerMappingProfile.Handedness == Handedness.None)
+            {
+                typeName = "HoloLens 1";
+            }
+
+            var buttonContent = new GUIContent($"Edit {typeName} Action Mapping", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile));
+            if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
+            {
+                EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, new SerializedObject(controllerMappingProfile).FindProperty("interactionMappingProfiles"));
+            }
+
+            if (handedness != Handedness.Left)
+            {
+                GUILayout.EndHorizontal();
             }
         }
 

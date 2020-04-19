@@ -11,7 +11,6 @@ using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.PropertyDrawers;
-using XRTK.Inspectors.Utilities;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles

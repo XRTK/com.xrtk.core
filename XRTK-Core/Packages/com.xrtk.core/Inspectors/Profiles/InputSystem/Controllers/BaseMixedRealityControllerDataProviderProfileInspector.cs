@@ -204,6 +204,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
         internal void DrawSimpleControllerMappingProfilesView()
         {
+            if (controllerMappingProfiles == null) { return; }
+
             if (controllerButtonStyle == null)
             {
                 controllerButtonStyle = new GUIStyle("LargeButton")
@@ -220,9 +222,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             // Clear found null element indexes from previous loop.
             nullElementIndexes.Clear();
 
-            for (int i = 0; i < controllerMappingProfiles?.arraySize; i++)
+            for (int i = 0; i < controllerMappingProfiles.arraySize; i++)
             {
-                var targetObjectReference = controllerMappingProfiles.GetArrayElementAtIndex(i)?.objectReferenceValue;
+                var targetObjectReference = controllerMappingProfiles.GetArrayElementAtIndex(i).objectReferenceValue;
                 var controllerMappingProfile = (MixedRealityControllerMappingProfile)targetObjectReference;
 
                 // In advanced mode new profile entries might have been created

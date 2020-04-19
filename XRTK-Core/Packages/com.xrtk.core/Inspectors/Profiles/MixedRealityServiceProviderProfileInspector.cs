@@ -9,7 +9,9 @@ using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
+using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.PropertyDrawers;
+using XRTK.Inspectors.Utilities;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles
@@ -59,7 +61,7 @@ namespace XRTK.Inspectors.Profiles
         public override void OnInspectorGUI()
         {
             EditorGUILayout.Space();
-            showConfigurationFoldout = EditorGUILayout.Foldout(showConfigurationFoldout, configurationContent, true);
+            showConfigurationFoldout = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showConfigurationFoldout, configurationContent, true);
 
             if (showConfigurationFoldout)
             {

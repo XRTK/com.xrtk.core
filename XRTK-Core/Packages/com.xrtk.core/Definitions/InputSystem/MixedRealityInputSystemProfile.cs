@@ -6,6 +6,7 @@ using XRTK.Attributes;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.Providers;
 
 namespace XRTK.Definitions.InputSystem
 {
@@ -13,7 +14,7 @@ namespace XRTK.Definitions.InputSystem
     /// Configuration profile settings for setting up controller pointers.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System Profile", fileName = "MixedRealityInputSystemProfile", order = (int)CreateProfileMenuItemIndices.Input)]
-    public class MixedRealityInputSystemProfile : BaseMixedRealityProfile
+    public class MixedRealityInputSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityInputDataProvider>
     {
         #region Global Input System Options
 
@@ -174,19 +175,6 @@ namespace XRTK.Definitions.InputSystem
         {
             get => gesturesProfile;
             internal set => gesturesProfile = value;
-        }
-
-        [SerializeField]
-        [Tooltip("Device profile for registering platform specific input data sources.")]
-        private MixedRealityInputDataProvidersProfile inputDataProvidersProfile;
-
-        /// <summary>
-        /// Active profile for controller mapping configuration
-        /// </summary>
-        public MixedRealityInputDataProvidersProfile InputDataProvidersProfile
-        {
-            get => inputDataProvidersProfile;
-            internal set => inputDataProvidersProfile = value;
         }
 
         #endregion Profile Options

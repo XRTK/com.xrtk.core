@@ -4,13 +4,19 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
+using XRTK.Inspectors.Extensions;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
 {
     [CustomEditor(typeof(MixedRealityInputSystemProfile))]
-    public class MixedRealityInputSystemProfileInspector : BaseMixedRealityProfileInspector
+    public class MixedRealityInputSystemProfileInspector : MixedRealityServiceProfileInspector
     {
+        private static readonly GUIContent FocusProviderContent = new GUIContent("Focus Provider");
+        private static readonly GUIContent GazeProviderContent = new GUIContent("Gaze Provider");
+        private static readonly GUIContent GlobalPointerSettingsContent = new GUIContent("Global Pointer Settings");
+        private static readonly GUIContent GlobalHandSettingsContent = new GUIContent("Global Hand Settings");
+
         private SerializedProperty focusProviderType;
         private SerializedProperty gazeProviderType;
         private SerializedProperty gazeCursorPrefab;
@@ -28,7 +34,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private SerializedProperty inputActionsProfile;
         private SerializedProperty speechCommandsProfile;
         private SerializedProperty gesturesProfile;
-        private SerializedProperty inputDataProvidersProfile;
 
         private bool showGlobalPointerOptions;
         private bool showGlobalHandOptions;
@@ -54,7 +59,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             inputActionsProfile = serializedObject.FindProperty(nameof(inputActionsProfile));
             gesturesProfile = serializedObject.FindProperty(nameof(gesturesProfile));
             speechCommandsProfile = serializedObject.FindProperty(nameof(speechCommandsProfile));
-            inputDataProvidersProfile = serializedObject.FindProperty(nameof(inputDataProvidersProfile));
         }
 
         public override void OnInspectorGUI()
@@ -64,13 +68,13 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             serializedObject.Update();
             EditorGUI.BeginChangeCheck();
 
-            EditorGUILayout.PropertyField(focusProviderType, new GUIContent("Focus Provider"));
-            EditorGUILayout.PropertyField(gazeProviderType, new GUIContent("Gaze Provider"));
+            EditorGUILayout.PropertyField(focusProviderType, FocusProviderContent);
+            EditorGUILayout.PropertyField(gazeProviderType, GazeProviderContent);
             EditorGUILayout.PropertyField(gazeCursorPrefab);
 
             EditorGUILayout.Space();
 
-            showGlobalPointerOptions = EditorGUILayout.Foldout(showGlobalPointerOptions, new GUIContent("Global Pointer Settings"), true);
+            showGlobalPointerOptions = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showGlobalPointerOptions, GlobalPointerSettingsContent, true);
 
             if (showGlobalPointerOptions)
             {
@@ -98,7 +102,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             EditorGUILayout.Space();
 
-            showGlobalHandOptions = EditorGUILayout.Foldout(showGlobalHandOptions, new GUIContent("Global Hand Settings"), true);
+            showGlobalHandOptions = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showGlobalHandOptions, GlobalHandSettingsContent, true);
 
             if (showGlobalHandOptions)
             {
@@ -120,7 +124,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             EditorGUILayout.PropertyField(inputActionsProfile);
             EditorGUILayout.PropertyField(speechCommandsProfile);
             EditorGUILayout.PropertyField(gesturesProfile);
-            EditorGUILayout.PropertyField(inputDataProvidersProfile);
+
+            base.OnInspectorGUI();
 
             serializedObject.ApplyModifiedProperties();
 

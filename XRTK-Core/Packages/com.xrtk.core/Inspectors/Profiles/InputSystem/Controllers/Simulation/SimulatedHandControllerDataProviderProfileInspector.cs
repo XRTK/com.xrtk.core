@@ -12,6 +12,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
     [CustomEditor(typeof(SimulatedHandControllerDataProviderProfile))]
     public class SimulatedHandControllerDataProviderProfileInspector : SimulatedControllerDataProviderProfileInspector
     {
+        private static readonly GUIContent SimulatedHandSettingsFoldoutHeader = new GUIContent("Simulated Hand Tracking Settings");
+
         private SerializedProperty handMeshingEnabled;
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
@@ -24,8 +26,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
         private int currentlySelectedPoseElement;
 
         private bool showSimulatedHandTrackingSettings = true;
-
-        private static readonly GUIContent simulatedHandSettingsFoldoutHeader = new GUIContent("Simulated Hand Tracking Settings");
 
         protected override void OnEnable()
         {
@@ -62,7 +62,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
             EditorGUILayout.Space();
 
-            showSimulatedHandTrackingSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showSimulatedHandTrackingSettings, simulatedHandSettingsFoldoutHeader, true);
+            showSimulatedHandTrackingSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showSimulatedHandTrackingSettings, SimulatedHandSettingsFoldoutHeader, true);
             if (showSimulatedHandTrackingSettings)
             {
                 EditorGUI.indentLevel++;

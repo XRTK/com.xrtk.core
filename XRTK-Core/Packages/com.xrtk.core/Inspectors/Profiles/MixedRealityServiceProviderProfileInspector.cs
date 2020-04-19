@@ -22,7 +22,10 @@ namespace XRTK.Inspectors.Profiles
         private ReorderableList configurationList;
         private int currentlySelectedConfigurationOption;
 
-        private SerializedProperty configurations;
+        [SerializeField]
+        private SerializedProperty configurations; // Cannot be auto property bc field is serialized.
+
+        protected SerializedProperty Configurations => configurations;
 
         private bool showConfigurationFoldout = true;
 

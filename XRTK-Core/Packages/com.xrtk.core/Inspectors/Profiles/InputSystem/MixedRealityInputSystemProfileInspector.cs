@@ -1,10 +1,14 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.InputSystem;
 using XRTK.Inspectors.Extensions;
+using XRTK.Inspectors.Profiles.InputSystem.Controllers;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
@@ -16,6 +20,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private static readonly GUIContent GazeProviderContent = new GUIContent("Gaze Provider");
         private static readonly GUIContent GlobalPointerSettingsContent = new GUIContent("Global Pointer Settings");
         private static readonly GUIContent GlobalHandSettingsContent = new GUIContent("Global Hand Settings");
+        private static readonly GUIContent ShowControllerMappingsContent = new GUIContent("Controller Action Mappings");
 
         private SerializedProperty focusProviderType;
         private SerializedProperty gazeProviderType;
@@ -37,6 +42,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
         private bool showGlobalPointerOptions;
         private bool showGlobalHandOptions;
+        private bool showAggregatedSimpleControllerMappingProfiles;
+
+        private List<BaseMixedRealityControllerDataProviderProfile> controllerMappingProfiles;
 
         protected override void OnEnable()
         {
@@ -59,6 +67,18 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             inputActionsProfile = serializedObject.FindProperty(nameof(inputActionsProfile));
             gesturesProfile = serializedObject.FindProperty(nameof(gesturesProfile));
             speechCommandsProfile = serializedObject.FindProperty(nameof(speechCommandsProfile));
+
+            controllerMappingProfiles = new List<BaseMixedRealityControllerDataProviderProfile>();
+
+            for (int i = 0; i < Configurations?.arraySize; i++)
+            {
+                var configurationProperty = Configurations.GetArrayElementAtIndex(i);
+                var configurationProfileProperty = configurationProperty.FindPropertyRelative("profile");
+                if (configurationProfileProperty != null)
+                {
+                    controllerMappingProfiles.Add((BaseMixedRealityControllerDataProviderProfile)configurationProfileProperty.objectReferenceValue);
+                }
+            }
         }
 
         public override void OnInspectorGUI()
@@ -124,6 +144,21 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             EditorGUILayout.PropertyField(inputActionsProfile);
             EditorGUILayout.PropertyField(speechCommandsProfile);
             EditorGUILayout.PropertyField(gesturesProfile);
+
+            EditorGUILayout.Space();
+
+            showAggregatedSimpleControllerMappingProfiles = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showAggregatedSimpleControllerMappingProfiles, ShowControllerMappingsContent, true);
+
+            if (showAggregatedSimpleControllerMappingProfiles)
+            {
+                foreach (var profileEditor in controllerMappingProfiles.Select(CreateEditor))
+                {
+                    if (profileEditor is BaseMixedRealityControllerDataProviderProfileInspector inspector)
+                    {
+                        inspector.DrawSimpleControllerMappingProfilesView();
+                    }
+                }
+            }
 
             base.OnInspectorGUI();
 

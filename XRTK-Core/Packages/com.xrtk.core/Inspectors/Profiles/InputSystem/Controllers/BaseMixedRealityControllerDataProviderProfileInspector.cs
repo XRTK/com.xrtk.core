@@ -121,7 +121,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                                 var interactionMappingProperty = interactionMappingProfileSerializedObject.FindProperty("interactionMapping");
 
                                 var descriptionProperty = interactionMappingProperty.FindPropertyRelative("description");
-                                var stateChangeTypeProperty = interactionMappingProperty.FindPropertyRelative("stateChangeType");
+                                //var stateChangeTypeProperty = interactionMappingProperty.FindPropertyRelative("stateChangeType");
                                 var inputNameProperty = interactionMappingProperty.FindPropertyRelative("inputName");
                                 var axisTypeProperty = interactionMappingProperty.FindPropertyRelative("axisType");
                                 var inputTypeProperty = interactionMappingProperty.FindPropertyRelative("inputType");
@@ -202,7 +202,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             serializedObject.ApplyModifiedProperties();
         }
 
-        private void DrawSimpleControllerMappingProfilesView()
+        internal void DrawSimpleControllerMappingProfilesView()
         {
             if (controllerButtonStyle == null)
             {

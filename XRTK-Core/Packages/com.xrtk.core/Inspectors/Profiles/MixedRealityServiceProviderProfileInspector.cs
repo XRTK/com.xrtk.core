@@ -18,10 +18,13 @@ namespace XRTK.Inspectors.Profiles
     public class MixedRealityServiceProfileInspector : BaseMixedRealityProfileInspector
     {
         private readonly GUIContent profileContent = new GUIContent("Profile", "The settings profile for this service.");
+        private readonly GUIContent configurationContent = new GUIContent("Configuration Options");
         private ReorderableList configurationList;
         private int currentlySelectedConfigurationOption;
 
         private SerializedProperty configurations;
+
+        private bool showConfigurationFoldout = true;
 
         /// <summary>
         /// Gets the service constraint used to filter options listed in the
@@ -56,18 +59,21 @@ namespace XRTK.Inspectors.Profiles
         public override void OnInspectorGUI()
         {
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Configuration Options", EditorStyles.boldLabel);
-            EditorGUILayout.Space();
-            serializedObject.Update();
-            EditorGUILayout.Space();
-            configurationList.DoLayoutList();
+            showConfigurationFoldout = EditorGUILayout.Foldout(showConfigurationFoldout, configurationContent, true);
 
-            if (configurations == null || configurations.arraySize == 0)
+            if (showConfigurationFoldout)
             {
-                EditorGUILayout.HelpBox("Register a new Service Configuration", MessageType.Warning);
-            }
+                serializedObject.Update();
+                EditorGUILayout.Space();
+                configurationList.DoLayoutList();
 
-            serializedObject.ApplyModifiedProperties();
+                if (configurations == null || configurations.arraySize == 0)
+                {
+                    EditorGUILayout.HelpBox($"Register a new {ServiceConstraint.Name} Configuration", MessageType.Warning);
+                }
+
+                serializedObject.ApplyModifiedProperties();
+            }
         }
 
         private void DrawConfigurationOptionElement(Rect rect, int index, bool isActive, bool isFocused)

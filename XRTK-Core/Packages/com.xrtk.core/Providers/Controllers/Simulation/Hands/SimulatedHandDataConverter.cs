@@ -205,7 +205,40 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             currentPoseBlending = TargetPoseBlending;
             var rotation = Quaternion.Euler(HandRotateEulerAngles);
             var position = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
-            Pose.ComputeJointPoses(Handedness, rotation, position, HandData.Joints);
+            ComputeJointPoses(Pose, Handedness, rotation, position, HandData.Joints);
+        }
+
+        /// <summary>
+        /// Computes world space poses from camera-space joint data.
+        /// </summary>
+        private void ComputeJointPoses(SimulatedHandControllerPose pose, Handedness handedness, Quaternion rotation, Vector3 position, MixedRealityPose[] jointsOut)
+        {
+            Quaternion cameraRotation = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation;
+
+            for (int i = 0; i < HandData.JointCount; i++)
+            {
+                // Initialize from local offsets
+                var localPosition = pose.LocalJointPoses[i].Position;
+                var localRotation = pose.LocalJointPoses[i].Rotation;
+
+                // Pose offset are for right hand, mirror on X axis if left hand is needed
+                if (handedness == Handedness.Left)
+                {
+                    localPosition.x = -localPosition.x;
+                    localRotation.y = -localRotation.y;
+                    localRotation.z = -localRotation.z;
+                }
+
+                // Apply camera transform
+                localPosition = cameraRotation * localPosition;
+                localRotation = cameraRotation * localRotation;
+
+                // Apply external transform
+                localPosition = position + rotation * localPosition;
+                localRotation = rotation * localRotation;
+
+                jointsOut[i] = new MixedRealityPose(localPosition, localRotation);
+            }
         }
 
         /// <summary>

@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
-using XRTK.Services;
 
 namespace XRTK.Definitions.Controllers.Simulation.Hands
 {
@@ -143,39 +142,6 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
             for (int i = 0; i < pose.LocalJointPoses.Length; i++)
             {
                 pose.LocalJointPoses[i].Position -= offset;
-            }
-        }
-
-        /// <summary>
-        /// Computes world space poses from camera-space joint data.
-        /// </summary>
-        public void ComputeJointPoses(Handedness handedness, Quaternion rotation, Vector3 position, MixedRealityPose[] jointsOut)
-        {
-            Quaternion cameraRotation = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation;
-
-            for (int i = 0; i < HandData.JointCount; i++)
-            {
-                // Initialize from local offsets
-                var localPosition = LocalJointPoses[i].Position;
-                var localRotation = LocalJointPoses[i].Rotation;
-
-                // Pose offset are for right hand, mirror on X axis if left hand is needed
-                if (handedness == Handedness.Left)
-                {
-                    localPosition.x = -localPosition.x;
-                    localRotation.y = -localRotation.y;
-                    localRotation.z = -localRotation.z;
-                }
-
-                // Apply camera transform
-                localPosition = cameraRotation * localPosition;
-                localRotation = cameraRotation * localRotation;
-
-                // Apply external transform
-                localPosition = position + rotation * localPosition;
-                localRotation = rotation * localRotation;
-
-                jointsOut[i] = new MixedRealityPose(localPosition, localRotation);
             }
         }
 

@@ -21,7 +21,7 @@ namespace XRTK.Providers.CameraSystem
             : base(name, priority, profile, parentService)
         {
             cameraSystem = MixedRealityToolkit.CameraSystem;
-            var globalProfile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile;
+            var globalProfile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile.GlobalCameraProfile;
 
             if (profile != null)
             {

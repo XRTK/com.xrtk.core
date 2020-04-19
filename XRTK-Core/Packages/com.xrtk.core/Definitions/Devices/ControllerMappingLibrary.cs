@@ -305,7 +305,7 @@ namespace XRTK.Definitions.Devices
 
         private static Texture2D GetControllerTextureInternal(MixedRealityControllerMappingProfile mappingProfile, bool scaled)
         {
-            Texture2D texture;
+            Texture2D texture = null;
 
             if (mappingProfile != null &&
                 mappingProfile.ControllerType.Type != null)
@@ -318,9 +318,14 @@ namespace XRTK.Definitions.Devices
                 {
                     return texture;
                 }
+
+                texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/{controllerName}", Handedness.None, scaled);
             }
 
-            texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/Generic_controller", mappingProfile.Handedness, scaled);
+            if (texture == null)
+            {
+                texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/Generic_controller", mappingProfile.Handedness, scaled);
+            }
 
             if (texture == null)
             {

@@ -120,7 +120,7 @@ namespace XRTK.Providers.CameraSystem
         private float headHeight;
 
         /// <inheritdoc />
-        public float HeadHeight
+        public virtual float HeadHeight
         {
             get => headHeight;
             set
@@ -319,8 +319,8 @@ namespace XRTK.Providers.CameraSystem
         }
 
         /// <summary>
-        /// Called each <see cref="LateUpdate"/> to the sync the <see cref="IMixedRealityCameraRig.PlayspaceTransform"/>, <see cref="IMixedRealityCameraRig.CameraTransform"/>,
-        /// and <see cref="IMixedRealityCameraRig.BodyTransform"/> poses.
+        /// Called each <see cref="LateUpdate"/> to the sync the <see cref="IMixedRealityCameraRig.PlayspaceTransform"/>,
+        /// <see cref="IMixedRealityCameraRig.CameraTransform"/>, and <see cref="IMixedRealityCameraRig.BodyTransform"/> poses.
         /// </summary>
         protected virtual void SyncRigTransforms()
         {

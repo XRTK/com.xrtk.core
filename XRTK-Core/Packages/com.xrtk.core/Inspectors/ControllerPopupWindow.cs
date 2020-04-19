@@ -353,6 +353,16 @@ namespace XRTK.Inspectors
 
                 if (mappingProfile == null)
                 {
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.PropertyField(interactionProfileProperty, GUIContent.none, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
+                    GUILayout.FlexibleSpace();
+
+                    if (GUILayout.Button(InteractionMinusButtonContent, EditorStyles.miniButtonRight, GUILayout.ExpandWidth(true), GUILayout.Width(24f)))
+                    {
+                        interactionProfilesList.DeleteArrayElementAtIndex(i);
+                    }
+
+                    EditorGUILayout.EndHorizontal();
                     continue;
                 }
 

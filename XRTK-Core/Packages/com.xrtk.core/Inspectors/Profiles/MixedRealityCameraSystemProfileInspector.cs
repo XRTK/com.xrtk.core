@@ -8,17 +8,15 @@ using XRTK.Services;
 namespace XRTK.Inspectors.Profiles.CameraSystem
 {
     [CustomEditor(typeof(MixedRealityCameraSystemProfile))]
-    public class MixedRealityCameraSystemProfileInspector : BaseMixedRealityProfileInspector
+    public class MixedRealityCameraSystemProfileInspector : MixedRealityServiceProfileInspector
     {
         private SerializedProperty globalCameraProfile;
-        private SerializedProperty cameraDataProvidersProfile;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
             globalCameraProfile = serializedObject.FindProperty(nameof(globalCameraProfile));
-            cameraDataProvidersProfile = serializedObject.FindProperty(nameof(cameraDataProvidersProfile));
         }
 
         public override void OnInspectorGUI()
@@ -29,8 +27,9 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
 
             EditorGUI.BeginChangeCheck();
 
-            EditorGUILayout.PropertyField(cameraDataProvidersProfile);
             EditorGUILayout.PropertyField(globalCameraProfile);
+
+            base.OnInspectorGUI();
 
             serializedObject.ApplyModifiedProperties();
 

@@ -21,65 +21,33 @@ namespace XRTK.Providers.CameraSystem
             : base(name, priority, profile, parentService)
         {
             cameraSystem = MixedRealityToolkit.CameraSystem;
-            var globalProfile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile.GlobalCameraProfile;
 
-            if (profile != null)
+            if (profile == null)
             {
-                if (profile.CameraRigType?.Type == null)
-                {
-                    throw new Exception($"{nameof(profile.CameraRigType)} cannot be null!");
-                }
-            }
-            else
-            {
-                if (globalProfile.CameraRigType?.Type == null)
-                {
-                    throw new Exception($"{nameof(globalProfile.CameraRigType)} cannot be null!");
-                }
+                profile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile.GlobalCameraProfile;
             }
 
-            isCameraPersistent = profile != null
-                ? profile.IsCameraPersistent
-                : globalProfile.IsCameraPersistent;
-            cameraRigType = profile != null
-                ? profile.CameraRigType.Type
-                : globalProfile.CameraRigType.Type;
-            DefaultHeadHeight = profile != null
-                ? profile.DefaultHeadHeight
-                : globalProfile.DefaultHeadHeight;
+            if (profile.CameraRigType?.Type == null)
+            {
+                throw new Exception($"{nameof(profile.CameraRigType)} cannot be null!");
+            }
 
-            nearClipPlaneOpaqueDisplay = profile != null
-                ? profile.NearClipPlaneOpaqueDisplay
-                : globalProfile.NearClipPlaneOpaqueDisplay;
-            cameraClearFlagsOpaqueDisplay = profile != null
-                ? profile.CameraClearFlagsOpaqueDisplay
-                : globalProfile.CameraClearFlagsOpaqueDisplay;
-            backgroundColorOpaqueDisplay = profile != null
-                ? profile.BackgroundColorOpaqueDisplay
-                : globalProfile.BackgroundColorOpaqueDisplay;
-            opaqueQualityLevel = profile != null
-                ? profile.OpaqueQualityLevel
-                : globalProfile.OpaqueQualityLevel;
+            isCameraPersistent = profile.IsCameraPersistent;
+            cameraRigType = profile.CameraRigType.Type;
+            DefaultHeadHeight = profile.DefaultHeadHeight;
 
-            nearClipPlaneTransparentDisplay = profile != null
-                ? profile.NearClipPlaneTransparentDisplay
-                : globalProfile.NearClipPlaneTransparentDisplay;
-            cameraClearFlagsTransparentDisplay = profile != null
-                ? profile.CameraClearFlagsTransparentDisplay
-                : globalProfile.CameraClearFlagsTransparentDisplay;
-            backgroundColorTransparentDisplay = profile != null
-                ? profile.BackgroundColorTransparentDisplay
-                : globalProfile.BackgroundColorTransparentDisplay;
-            transparentQualityLevel = profile != null
-                ? profile.TransparentQualityLevel
-                : globalProfile.TransparentQualityLevel;
+            nearClipPlaneOpaqueDisplay = profile.NearClipPlaneOpaqueDisplay;
+            cameraClearFlagsOpaqueDisplay = profile.CameraClearFlagsOpaqueDisplay;
+            backgroundColorOpaqueDisplay = profile.BackgroundColorOpaqueDisplay;
+            opaqueQualityLevel = profile.OpaqueQualityLevel;
 
-            bodyAdjustmentAngle = profile != null
-                ? profile.BodyAdjustmentAngle
-                : globalProfile.BodyAdjustmentAngle;
-            bodyAdjustmentSpeed = profile != null
-                ? profile.BodyAdjustmentSpeed
-                : globalProfile.BodyAdjustmentSpeed;
+            nearClipPlaneTransparentDisplay = profile.NearClipPlaneTransparentDisplay;
+            cameraClearFlagsTransparentDisplay = profile.CameraClearFlagsTransparentDisplay;
+            backgroundColorTransparentDisplay = profile.BackgroundColorTransparentDisplay;
+            transparentQualityLevel = profile.TransparentQualityLevel;
+
+            bodyAdjustmentAngle = profile.BodyAdjustmentAngle;
+            bodyAdjustmentSpeed = profile.BodyAdjustmentSpeed;
         }
 
         private readonly IMixedRealityCameraSystem cameraSystem = null;

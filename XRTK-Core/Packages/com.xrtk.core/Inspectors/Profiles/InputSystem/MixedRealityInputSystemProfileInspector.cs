@@ -79,6 +79,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 {
                     var profile = (BaseMixedRealityControllerDataProviderProfile)configurationProfileProperty.objectReferenceValue;
 
+                    if (profile == null) { continue; }
+
                     AssetDatabase.TryGetGUIDAndLocalFileIdentifier(profile, out var guid, out long localId);
 
                     if (!controllerMappingProfiles.ContainsKey(guid))

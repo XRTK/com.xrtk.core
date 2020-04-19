@@ -240,7 +240,14 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                         GUILayout.BeginHorizontal();
                     }
 
-                    var buttonContent = new GUIContent($"Edit {controllerMappingProfile.ControllerType.Type.Name.ToProperCase()} Action Mapping", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile));
+                    var typeName = controllerMappingProfile.ControllerType.Type.Name.ToProperCase();
+
+                    if (controllerMappingProfile.ControllerType.Type.Name == "WindowsMixedRealityMotionController" && controllerMappingProfile.Handedness == Handedness.None)
+                    {
+                        typeName = "HoloLens 1";
+                    }
+
+                    var buttonContent = new GUIContent($"Edit {typeName} Action Mapping", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile));
                     if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
                     {
                         EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, new SerializedObject(controllerMappingProfile).FindProperty("interactionMappingProfiles"));

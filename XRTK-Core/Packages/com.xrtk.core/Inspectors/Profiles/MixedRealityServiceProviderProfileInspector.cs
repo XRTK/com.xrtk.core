@@ -20,7 +20,6 @@ namespace XRTK.Inspectors.Profiles
     public class MixedRealityServiceProfileInspector : BaseMixedRealityProfileInspector
     {
         private readonly GUIContent profileContent = new GUIContent("Profile", "The settings profile for this service.");
-        private readonly GUIContent configurationContent = new GUIContent("Configuration Options");
         private ReorderableList configurationList;
         private int currentlySelectedConfigurationOption;
 
@@ -61,7 +60,7 @@ namespace XRTK.Inspectors.Profiles
         public override void OnInspectorGUI()
         {
             EditorGUILayout.Space();
-            showConfigurationFoldout = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showConfigurationFoldout, configurationContent, true);
+            showConfigurationFoldout = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showConfigurationFoldout, new GUIContent($"{ServiceConstraint.Name} Configuration Options"), true);
 
             if (showConfigurationFoldout)
             {

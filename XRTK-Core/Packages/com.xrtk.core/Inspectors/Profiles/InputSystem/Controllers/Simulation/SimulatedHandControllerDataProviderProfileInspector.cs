@@ -21,7 +21,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
         private SerializedProperty poseDefinitions;
 
         private ReorderableList poseList;
-        private int currentlySelectedElement;
+        private int currentlySelectedPoseElement;
 
         private bool showSimulatedHandTrackingSettings = true;
 
@@ -93,7 +93,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
         {
             if (isFocused)
             {
-                currentlySelectedElement = index;
+                currentlySelectedPoseElement = index;
             }
 
             rect.height = EditorGUIUtility.singleLineHeight;
@@ -121,9 +121,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
         private void OnConfigurationOptionRemoved(ReorderableList list)
         {
-            if (currentlySelectedElement >= 0)
+            if (currentlySelectedPoseElement >= 0)
             {
-                poseDefinitions.DeleteArrayElementAtIndex(currentlySelectedElement);
+                poseDefinitions.DeleteArrayElementAtIndex(currentlySelectedPoseElement);
             }
 
             serializedObject.ApplyModifiedProperties();

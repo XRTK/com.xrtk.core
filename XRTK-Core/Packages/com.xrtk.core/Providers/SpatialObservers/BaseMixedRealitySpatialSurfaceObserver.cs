@@ -1,23 +1,34 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Interfaces.SpatialAwarenessSystem;
+using XRTK.Services;
 
 namespace XRTK.Providers.SpatialObservers
 {
     /// <summary>
-    /// Base <see cref="IMixedRealitySurfaceObserver"/> implementation.
+    /// Base <see cref="IMixedRealitySpatialSurfaceObserver"/> implementation.
     /// </summary>
-    public abstract class BaseMixedRealitySurfaceObserver : BaseMixedRealitySpatialObserverDataProvider, IMixedRealitySurfaceObserver
+    public abstract class BaseMixedRealitySpatialSurfaceObserver : BaseMixedRealitySpatialObserverDataProvider, IMixedRealitySpatialSurfaceObserver
     {
         /// <inheritdoc />
-        protected BaseMixedRealitySurfaceObserver(string name, uint priority, BaseMixedRealitySurfaceObserverProfile profile, IMixedRealitySpatialAwarenessSystem parentService)
+        protected BaseMixedRealitySpatialSurfaceObserver(string name, uint priority, BaseMixedRealitySurfaceObserverProfile profile, IMixedRealitySpatialAwarenessSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            SurfacePhysicsLayerOverride = profile.SurfacePhysicsLayerOverride;
+            if (profile == null)
+            {
+                profile = MixedRealityToolkit.Instance.ActiveProfile.SpatialAwarenessProfile.GlobalSurfaceObserverProfile;
+            }
+
+            if (profile == null)
+            {
+                throw new ArgumentNullException($"Missing a {profile.GetType().Name} profile for {name}");
+            }
+
             SurfaceFindingMinimumArea = profile.SurfaceFindingMinimumArea;
             DisplayFloorSurfaces = profile.DisplayFloorSurfaces;
             FloorSurfaceMaterial = profile.FloorSurfaceMaterial;
@@ -28,13 +39,6 @@ namespace XRTK.Providers.SpatialObservers
             DisplayPlatformSurfaces = profile.DisplayPlatformSurfaces;
             PlatformSurfaceMaterial = profile.PlatformSurfaceMaterial;
         }
-
-        /// <inheritdoc />
-        public override int PhysicsLayer => SurfacePhysicsLayerOverride == -1 ? base.PhysicsLayer : SurfacePhysicsLayerOverride;
-
-
-        /// <inheritdoc />
-        public int SurfacePhysicsLayerOverride { get; }
 
         /// <inheritdoc />
         public float SurfaceFindingMinimumArea { get; }

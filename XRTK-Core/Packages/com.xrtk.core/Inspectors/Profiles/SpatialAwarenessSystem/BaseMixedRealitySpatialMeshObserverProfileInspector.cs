@@ -10,9 +10,8 @@ using XRTK.Providers.SpatialObservers;
 namespace XRTK.Inspectors.Profiles.SpatialAwareness
 {
     [CustomEditor(typeof(BaseMixedRealitySpatialMeshObserverProfile), true, isFallback = true)]
-    public abstract class BaseMixedRealitySpatialMeshObserverProfileInspector : BaseMixedRealitySpatialObserverProfileInspector
+    public class BaseMixedRealitySpatialMeshObserverProfileInspector : BaseMixedRealitySpatialObserverProfileInspector
     {
-        private SerializedProperty meshPhysicsLayerOverride;
         private SerializedProperty meshLevelOfDetail;
         private SerializedProperty meshTrianglesPerCubicMeter;
         private SerializedProperty meshRecalculateNormals;
@@ -30,7 +29,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         {
             base.OnEnable();
 
-            meshPhysicsLayerOverride = serializedObject.FindProperty(nameof(meshPhysicsLayerOverride));
             meshLevelOfDetail = serializedObject.FindProperty(nameof(meshLevelOfDetail));
             meshTrianglesPerCubicMeter = serializedObject.FindProperty(nameof(meshTrianglesPerCubicMeter));
             meshRecalculateNormals = serializedObject.FindProperty(nameof(meshRecalculateNormals));
@@ -93,7 +91,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             if (foldout)
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(meshPhysicsLayerOverride);
                 EditorGUILayout.PropertyField(meshLevelOfDetail);
                 EditorGUILayout.PropertyField(meshTrianglesPerCubicMeter);
                 EditorGUILayout.PropertyField(meshRecalculateNormals);

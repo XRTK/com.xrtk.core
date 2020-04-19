@@ -367,7 +367,7 @@ namespace XRTK.Providers.SpatialObservers
                 newGameObject.layer = layer;
             }
 
-            newGameObject.transform.parent = MixedRealityToolkit.SpatialAwarenessSystem.SpatialMeshesParent.transform;
+            newGameObject.transform.SetParent(MixedRealityToolkit.SpatialAwarenessSystem.SpatialMeshesParent.transform, false);
             newGameObject.SetActive(false);
             return newGameObject;
         }

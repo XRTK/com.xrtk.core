@@ -45,7 +45,12 @@ namespace XRTK.Services.SpatialAwarenessSystem
             get
             {
                 var spatialAwarenessSystemObject = new GameObject("Spatial Awareness System");
-                spatialAwarenessSystemObject.transform.SetParent(MixedRealityToolkit.CameraSystem?.MainCameraRig.PlayspaceTransform, false);
+
+                if (MixedRealityToolkit.CameraSystem != null)
+                {
+                    spatialAwarenessSystemObject.transform.SetParent(MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform, false);
+                }
+
                 return spatialAwarenessSystemObject;
             }
         }
@@ -89,7 +94,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
         private GameObject CreateSecondGenerationParent(string name)
         {
             var secondGeneration = new GameObject(name);
-            secondGeneration.transform.parent = SpatialAwarenessRootParent.transform;
+            secondGeneration.transform.SetParent(SpatialAwarenessRootParent.transform, false);
             return secondGeneration;
         }
 

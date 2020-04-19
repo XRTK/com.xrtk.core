@@ -13,7 +13,7 @@ namespace XRTK.Definitions.CameraSystem
     /// Based on those values, you can customize your camera and quality settings.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Camera System Profile", fileName = "MixedRealityCameraSystemProfile", order = (int)CreateProfileMenuItemIndices.Camera)]
-    public class MixedRealityCameraSystemProfile : BaseMixedRealityProfile
+    public class MixedRealityCameraSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityCameraDataProvider>
     {
         [SerializeField]
         [Tooltip("The Global Camera Profile Settings.")]
@@ -23,14 +23,5 @@ namespace XRTK.Definitions.CameraSystem
         /// The default camera data provider profile <see cref="IMixedRealityCameraDataProvider"/>s will use if no profile is assigned.
         /// </summary>
         public BaseMixedRealityCameraDataProviderProfile GlobalCameraProfile => globalCameraProfile;
-
-        [SerializeField]
-        [Tooltip("The list of registered Camera Data Providers for each platform.")]
-        private MixedRealityCameraDataProvidersProfile cameraDataProvidersProfile = null;
-
-        /// <summary>
-        /// The list of registered <see cref="IMixedRealityCameraDataProvider"/>s for each platform.
-        /// </summary>
-        public MixedRealityCameraDataProvidersProfile CameraDataProvidersProfile => cameraDataProvidersProfile;
     }
 }

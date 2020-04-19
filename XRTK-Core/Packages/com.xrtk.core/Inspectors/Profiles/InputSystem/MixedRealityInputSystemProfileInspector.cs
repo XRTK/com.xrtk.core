@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
@@ -44,7 +45,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private bool showGlobalHandOptions;
         private bool showAggregatedSimpleControllerMappingProfiles;
 
-        private List<BaseMixedRealityControllerDataProviderProfile> controllerMappingProfiles;
+        private Dictionary<string, BaseMixedRealityControllerDataProviderProfile> controllerMappingProfiles;
 
         protected override void OnEnable()
         {
@@ -68,7 +69,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             gesturesProfile = serializedObject.FindProperty(nameof(gesturesProfile));
             speechCommandsProfile = serializedObject.FindProperty(nameof(speechCommandsProfile));
 
-            controllerMappingProfiles = new List<BaseMixedRealityControllerDataProviderProfile>();
+            controllerMappingProfiles = new Dictionary<string, BaseMixedRealityControllerDataProviderProfile>();
 
             for (int i = 0; i < Configurations?.arraySize; i++)
             {
@@ -76,7 +77,14 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 var configurationProfileProperty = configurationProperty.FindPropertyRelative("profile");
                 if (configurationProfileProperty != null)
                 {
-                    controllerMappingProfiles.Add((BaseMixedRealityControllerDataProviderProfile)configurationProfileProperty.objectReferenceValue);
+                    var profile = (BaseMixedRealityControllerDataProviderProfile)configurationProfileProperty.objectReferenceValue;
+
+                    AssetDatabase.TryGetGUIDAndLocalFileIdentifier(profile, out var guid, out long localId);
+
+                    if (!controllerMappingProfiles.ContainsKey(guid))
+                    {
+                        controllerMappingProfiles.Add(guid, profile);
+                    }
                 }
             }
         }
@@ -151,7 +159,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             if (showAggregatedSimpleControllerMappingProfiles)
             {
-                foreach (var profileEditor in controllerMappingProfiles.Select(CreateEditor))
+                foreach (var profileEditor in controllerMappingProfiles.Select(item => CreateEditor(item.Value)))
                 {
                     if (profileEditor is BaseMixedRealityControllerDataProviderProfileInspector inspector)
                     {

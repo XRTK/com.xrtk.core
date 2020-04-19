@@ -240,7 +240,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                         GUILayout.BeginHorizontal();
                     }
 
-                    var buttonContent = new GUIContent($"Edit {controllerMappingProfile.name.ToProperCase()}", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile));
+                    var buttonContent = new GUIContent($"Edit {controllerMappingProfile.ControllerType.Type.Name.ToProperCase()} Action Mapping", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile));
                     if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
                     {
                         EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, new SerializedObject(controllerMappingProfile).FindProperty("interactionMappingProfiles"));

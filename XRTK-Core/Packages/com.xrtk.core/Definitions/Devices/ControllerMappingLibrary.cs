@@ -305,11 +305,14 @@ namespace XRTK.Definitions.Devices
 
         private static Texture2D GetControllerTextureInternal(MixedRealityControllerMappingProfile mappingProfile, bool scaled)
         {
+            Texture2D texture;
+
             if (mappingProfile != null &&
                 mappingProfile.ControllerType.Type != null)
             {
                 var controllerName = mappingProfile.ControllerType.Type.Name.Replace("OpenVR", string.Empty);
-                var texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/{controllerName}", mappingProfile.Handedness, scaled);
+                controllerName = controllerName.Replace("Simulated", string.Empty);
+                texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/{controllerName}", mappingProfile.Handedness, scaled);
 
                 if (texture != null)
                 {
@@ -317,7 +320,14 @@ namespace XRTK.Definitions.Devices
                 }
             }
 
-            return GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/Generic_controller", Handedness.None, scaled);
+            texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/Generic_controller", mappingProfile.Handedness, scaled);
+
+            if (texture == null)
+            {
+                texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/Generic_controller", Handedness.Right, scaled);
+            }
+
+            return texture;
         }
 
         private static Texture2D GetControllerTextureInternal(string fullTexturePath, Handedness handedness, bool scaled)

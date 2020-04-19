@@ -221,7 +221,7 @@ namespace XRTK.Services.Teleportation
 
             if (MixedRealityToolkit.CameraSystem != null)
             {
-                height += MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.position.y; // + MixedRealityToolkit.CameraSystem.MainCameraRig.BodyTransform.position.y;
+                height += MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.position.y;
             }
 
             targetPosition -= cameraPosition - cameraParent.position;

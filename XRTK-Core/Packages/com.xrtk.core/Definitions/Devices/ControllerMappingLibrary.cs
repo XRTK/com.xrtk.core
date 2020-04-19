@@ -308,7 +308,8 @@ namespace XRTK.Definitions.Devices
             if (mappingProfile != null &&
                 mappingProfile.ControllerType.Type != null)
             {
-                var texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/{mappingProfile.ControllerType.Type.Name}", mappingProfile.Handedness, scaled);
+                var controllerName = mappingProfile.ControllerType.Type.Name.Replace("OpenVR", string.Empty);
+                var texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/{controllerName}", mappingProfile.Handedness, scaled);
 
                 if (texture != null)
                 {

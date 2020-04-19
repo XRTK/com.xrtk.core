@@ -389,14 +389,7 @@ namespace XRTK.Services
             {
                 if (TryCreateAndRegisterService<IMixedRealityCameraSystem>(ActiveProfile.CameraSystemType, out var service, ActiveProfile.CameraSystemProfile) && CameraSystem != null)
                 {
-                    if (activeProfile.CameraSystemProfile.CameraDataProvidersProfile != null)
-                    {
-                        TryRegisterDataProviderConfigurations(ActiveProfile.CameraSystemProfile.CameraDataProvidersProfile.RegisteredServiceConfigurations, service);
-                    }
-                    else
-                    {
-                        Debug.LogError("Missing required Camera Data Providers Profile for the Camera System!");
-                    }
+                    TryRegisterDataProviderConfigurations(ActiveProfile.CameraSystemProfile.RegisteredServiceConfigurations, service);
                 }
                 else
                 {

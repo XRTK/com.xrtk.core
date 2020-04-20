@@ -13,7 +13,7 @@ namespace XRTK.Inspectors.Data
     [Serializable]
     public struct ControllerInputActionOption
     {
-        public SystemType Controller;
+        public string Controller;
         public Handedness Handedness;
         public Vector2[] InputLabelPositions;
         public bool[] IsLabelFlipped;

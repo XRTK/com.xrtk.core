@@ -2,58 +2,21 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information. 
 
 using UnityEditor;
-using UnityEngine;
 using XRTK.Definitions.CameraSystem;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.CameraSystem
 {
     [CustomEditor(typeof(MixedRealityCameraSystemProfile))]
-    public class MixedRealityCameraSystemProfileInspector : BaseMixedRealityProfileInspector
+    public class MixedRealityCameraSystemProfileInspector : MixedRealityServiceProfileInspector
     {
-        private SerializedProperty cameraDataProvidersProfile;
-
-        private SerializedProperty isCameraPersistent;
-
-        private SerializedProperty nearClipPlaneOpaqueDisplay;
-        private SerializedProperty cameraClearFlagsOpaqueDisplay;
-        private SerializedProperty backgroundColorOpaqueDisplay;
-        private SerializedProperty opaqueQualityLevel;
-
-        private SerializedProperty nearClipPlaneTransparentDisplay;
-        private SerializedProperty cameraClearFlagsTransparentDisplay;
-        private SerializedProperty backgroundColorTransparentDisplay;
-        private SerializedProperty transparentQualityLevel;
-
-        private SerializedProperty cameraRigType;
-        private SerializedProperty defaultHeadHeight;
-        private SerializedProperty bodyAdjustmentAngle;
-        private SerializedProperty bodyAdjustmentSpeed;
-
-        private readonly GUIContent nearClipTitle = new GUIContent("Near Clip");
-        private readonly GUIContent clearFlagsTitle = new GUIContent("Clear Flags");
+        private SerializedProperty globalCameraProfile;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            cameraDataProvidersProfile = serializedObject.FindProperty(nameof(cameraDataProvidersProfile));
-
-            isCameraPersistent = serializedObject.FindProperty(nameof(isCameraPersistent));
-            nearClipPlaneOpaqueDisplay = serializedObject.FindProperty(nameof(nearClipPlaneOpaqueDisplay));
-            cameraClearFlagsOpaqueDisplay = serializedObject.FindProperty(nameof(cameraClearFlagsOpaqueDisplay));
-            backgroundColorOpaqueDisplay = serializedObject.FindProperty(nameof(backgroundColorOpaqueDisplay));
-            opaqueQualityLevel = serializedObject.FindProperty(nameof(opaqueQualityLevel));
-
-            nearClipPlaneTransparentDisplay = serializedObject.FindProperty(nameof(nearClipPlaneTransparentDisplay));
-            cameraClearFlagsTransparentDisplay = serializedObject.FindProperty(nameof(cameraClearFlagsTransparentDisplay));
-            backgroundColorTransparentDisplay = serializedObject.FindProperty(nameof(backgroundColorTransparentDisplay));
-            transparentQualityLevel = serializedObject.FindProperty(nameof(transparentQualityLevel));
-
-            cameraRigType = serializedObject.FindProperty(nameof(cameraRigType));
-            defaultHeadHeight = serializedObject.FindProperty(nameof(defaultHeadHeight));
-            bodyAdjustmentAngle = serializedObject.FindProperty(nameof(bodyAdjustmentAngle));
-            bodyAdjustmentSpeed = serializedObject.FindProperty(nameof(bodyAdjustmentSpeed));
+            globalCameraProfile = serializedObject.FindProperty(nameof(globalCameraProfile));
         }
 
         public override void OnInspectorGUI()
@@ -64,40 +27,9 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
 
             EditorGUI.BeginChangeCheck();
 
-            EditorGUILayout.PropertyField(cameraDataProvidersProfile);
+            EditorGUILayout.PropertyField(globalCameraProfile);
 
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Global Settings:", EditorStyles.boldLabel);
-
-            EditorGUILayout.PropertyField(isCameraPersistent);
-            EditorGUILayout.PropertyField(cameraRigType);
-            EditorGUILayout.PropertyField(defaultHeadHeight);
-            EditorGUILayout.PropertyField(bodyAdjustmentAngle);
-            EditorGUILayout.PropertyField(bodyAdjustmentSpeed);
-
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Opaque Display Settings:", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(nearClipPlaneOpaqueDisplay, nearClipTitle);
-            EditorGUILayout.PropertyField(cameraClearFlagsOpaqueDisplay, clearFlagsTitle);
-
-            if ((CameraClearFlags)cameraClearFlagsOpaqueDisplay.intValue == CameraClearFlags.Color)
-            {
-                backgroundColorOpaqueDisplay.colorValue = EditorGUILayout.ColorField("Background Color", backgroundColorOpaqueDisplay.colorValue);
-            }
-
-            opaqueQualityLevel.intValue = EditorGUILayout.Popup("Quality Setting", opaqueQualityLevel.intValue, QualitySettings.names);
-
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Transparent Display Settings:", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(nearClipPlaneTransparentDisplay, nearClipTitle);
-            EditorGUILayout.PropertyField(cameraClearFlagsTransparentDisplay, clearFlagsTitle);
-
-            if ((CameraClearFlags)cameraClearFlagsTransparentDisplay.intValue == CameraClearFlags.Color)
-            {
-                backgroundColorTransparentDisplay.colorValue = EditorGUILayout.ColorField("Background Color", backgroundColorTransparentDisplay.colorValue);
-            }
-
-            transparentQualityLevel.intValue = EditorGUILayout.Popup("Quality Setting", transparentQualityLevel.intValue, QualitySettings.names);
+            base.OnInspectorGUI();
 
             serializedObject.ApplyModifiedProperties();
 

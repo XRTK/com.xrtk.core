@@ -69,8 +69,8 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         {
             return new[]
             {
-                new ControllerDefinition(typeof(SimulatedHandController), Handedness.Left),
-                new ControllerDefinition(typeof(SimulatedHandController), Handedness.Right),
+                new ControllerDefinition(typeof(SimulatedMixedRealityHandController), Handedness.Left),
+                new ControllerDefinition(typeof(SimulatedMixedRealityHandController), Handedness.Right),
             };
         }
     }

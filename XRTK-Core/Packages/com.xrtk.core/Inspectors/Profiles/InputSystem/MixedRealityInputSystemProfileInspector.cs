@@ -1,17 +1,27 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.InputSystem;
 using XRTK.Inspectors.Extensions;
+using XRTK.Inspectors.Profiles.InputSystem.Controllers;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.InputSystem
 {
     [CustomEditor(typeof(MixedRealityInputSystemProfile))]
-    public class MixedRealityInputSystemProfileInspector : BaseMixedRealityProfileInspector
+    public class MixedRealityInputSystemProfileInspector : MixedRealityServiceProfileInspector
     {
+        private static readonly GUIContent FocusProviderContent = new GUIContent("Focus Provider");
+        private static readonly GUIContent GazeProviderContent = new GUIContent("Gaze Provider");
+        private static readonly GUIContent ShowControllerMappingsContent = new GUIContent("Controller Action Mappings");
+        private static readonly GUIContent globalPointerSettingsFoldoutHeader = new GUIContent("Global Pointer Settings");
+        private static readonly GUIContent globalHandTrackingSettingsFoldoutHeader = new GUIContent("Global Hand Tracking Settings");
+
         private SerializedProperty focusProviderType;
         private SerializedProperty gazeProviderType;
         private SerializedProperty gazeCursorPrefab;
@@ -31,13 +41,12 @@ namespace XRTK.Inspectors.Profiles.InputSystem
         private SerializedProperty inputActionsProfile;
         private SerializedProperty speechCommandsProfile;
         private SerializedProperty gesturesProfile;
-        private SerializedProperty inputDataProvidersProfile;
 
         private bool showGlobalPointerOptions;
         private bool showGlobalHandOptions;
+        private bool showAggregatedSimpleControllerMappingProfiles;
 
-        private static readonly GUIContent globalPointerSettingsFoldoutHeader = new GUIContent("Global Pointer Settings");
-        private static readonly GUIContent globalHandTrackingSettingsFoldoutHeader = new GUIContent("Global Hand Tracking Settings");
+        private Dictionary<string, Tuple<BaseMixedRealityControllerDataProviderProfile, MixedRealityControllerMappingProfile>> controllerMappingProfiles;
 
         protected override void OnEnable()
         {
@@ -62,7 +71,34 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             inputActionsProfile = serializedObject.FindProperty(nameof(inputActionsProfile));
             gesturesProfile = serializedObject.FindProperty(nameof(gesturesProfile));
             speechCommandsProfile = serializedObject.FindProperty(nameof(speechCommandsProfile));
-            inputDataProvidersProfile = serializedObject.FindProperty(nameof(inputDataProvidersProfile));
+
+            controllerMappingProfiles = new Dictionary<string, Tuple<BaseMixedRealityControllerDataProviderProfile, MixedRealityControllerMappingProfile>>();
+
+            for (int i = 0; i < Configurations?.arraySize; i++)
+            {
+                var configurationProperty = Configurations.GetArrayElementAtIndex(i);
+                var configurationProfileProperty = configurationProperty.FindPropertyRelative("profile");
+                if (configurationProfileProperty != null)
+                {
+                    var controllerDataProviderProfile = (BaseMixedRealityControllerDataProviderProfile)configurationProfileProperty.objectReferenceValue;
+
+                    if (controllerDataProviderProfile == null ||
+                        controllerDataProviderProfile.ControllerMappingProfiles == null)
+                    {
+                        continue;
+                    }
+
+                    foreach (var mappingProfile in controllerDataProviderProfile.ControllerMappingProfiles)
+                    {
+                        AssetDatabase.TryGetGUIDAndLocalFileIdentifier(mappingProfile, out var guid, out long _);
+
+                        if (!controllerMappingProfiles.ContainsKey(guid))
+                        {
+                            controllerMappingProfiles.Add(guid, new Tuple<BaseMixedRealityControllerDataProviderProfile, MixedRealityControllerMappingProfile>(controllerDataProviderProfile, mappingProfile));
+                        }
+                    }
+                }
+            }
         }
 
         public override void OnInspectorGUI()
@@ -72,14 +108,13 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             serializedObject.Update();
             EditorGUI.BeginChangeCheck();
 
-            EditorGUILayout.PropertyField(focusProviderType, new GUIContent("Focus Provider"));
-            EditorGUILayout.PropertyField(gazeProviderType, new GUIContent("Gaze Provider"));
+            EditorGUILayout.PropertyField(focusProviderType, FocusProviderContent);
+            EditorGUILayout.PropertyField(gazeProviderType, GazeProviderContent);
             EditorGUILayout.PropertyField(gazeCursorPrefab);
 
             EditorGUILayout.Space();
 
             showGlobalPointerOptions = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showGlobalPointerOptions, globalPointerSettingsFoldoutHeader, true);
-
             if (showGlobalPointerOptions)
             {
                 EditorGUILayout.HelpBox("Global pointer options applied to all controllers that support pointers. You may override these globals per controller in the its controller mapping profile.", MessageType.Info);
@@ -107,7 +142,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             EditorGUILayout.Space();
 
             showGlobalHandOptions = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showGlobalHandOptions, globalHandTrackingSettingsFoldoutHeader, true);
-
             if (showGlobalHandOptions)
             {
                 EditorGUILayout.HelpBox("Global hand tracking options applied to all platforms that support hand tracking. You may override these globals per platform in the platform's hand controller data provider profile.", MessageType.Info);
@@ -142,7 +176,26 @@ namespace XRTK.Inspectors.Profiles.InputSystem
             EditorGUILayout.PropertyField(inputActionsProfile);
             EditorGUILayout.PropertyField(speechCommandsProfile);
             EditorGUILayout.PropertyField(gesturesProfile);
-            EditorGUILayout.PropertyField(inputDataProvidersProfile);
+
+            EditorGUILayout.Space();
+
+            showAggregatedSimpleControllerMappingProfiles = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showAggregatedSimpleControllerMappingProfiles, ShowControllerMappingsContent, true);
+
+            if (showAggregatedSimpleControllerMappingProfiles)
+            {
+                foreach (var controllerMappingProfile in controllerMappingProfiles)
+                {
+                    var (dataProviderProfile, mappingProfile) = controllerMappingProfile.Value;
+                    var profileEditor = CreateEditor(dataProviderProfile);
+
+                    if (profileEditor is BaseMixedRealityControllerDataProviderProfileInspector inspector)
+                    {
+                        inspector.RenderControllerMappingButton(mappingProfile);
+                    }
+                }
+            }
+
+            base.OnInspectorGUI();
 
             serializedObject.ApplyModifiedProperties();
 

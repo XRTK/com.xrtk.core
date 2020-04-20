@@ -42,8 +42,8 @@ namespace XRTK.Interfaces.CameraSystem
         /// The player's body transform, located at the player's feet.
         /// </summary>
         /// <remarks>
-        /// This <see cref="Transform"/> is synced to the player's head camera X &amp; Z values
-        /// and the <see cref="PlayspaceTransform"/>'s Y value.
+        /// This <see cref="Transform"/> is synced to the player's head camera X &amp; Z values.
+        /// Y value is set using current <see cref="IMixedRealityCameraDataProvider.HeadHeight"/>.
         /// </remarks>
         Transform BodyTransform { get; }
     }

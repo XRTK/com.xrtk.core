@@ -21,65 +21,33 @@ namespace XRTK.Providers.CameraSystem
             : base(name, priority, profile, parentService)
         {
             cameraSystem = MixedRealityToolkit.CameraSystem;
-            var globalProfile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile;
 
-            if (profile != null)
+            if (profile == null)
             {
-                if (profile.CameraRigType?.Type == null)
-                {
-                    throw new Exception($"{nameof(profile.CameraRigType)} cannot be null!");
-                }
-            }
-            else
-            {
-                if (globalProfile.CameraRigType?.Type == null)
-                {
-                    throw new Exception($"{nameof(globalProfile.CameraRigType)} cannot be null!");
-                }
+                profile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile.GlobalCameraProfile;
             }
 
-            isCameraPersistent = profile != null
-                ? profile.IsCameraPersistent
-                : globalProfile.IsCameraPersistent;
-            cameraRigType = profile != null
-                ? profile.CameraRigType.Type
-                : globalProfile.CameraRigType.Type;
-            DefaultHeadHeight = profile != null
-                ? profile.DefaultHeadHeight
-                : globalProfile.DefaultHeadHeight;
+            if (profile.CameraRigType?.Type == null)
+            {
+                throw new Exception($"{nameof(profile.CameraRigType)} cannot be null!");
+            }
 
-            nearClipPlaneOpaqueDisplay = profile != null
-                ? profile.NearClipPlaneOpaqueDisplay
-                : globalProfile.NearClipPlaneOpaqueDisplay;
-            cameraClearFlagsOpaqueDisplay = profile != null
-                ? profile.CameraClearFlagsOpaqueDisplay
-                : globalProfile.CameraClearFlagsOpaqueDisplay;
-            backgroundColorOpaqueDisplay = profile != null
-                ? profile.BackgroundColorOpaqueDisplay
-                : globalProfile.BackgroundColorOpaqueDisplay;
-            opaqueQualityLevel = profile != null
-                ? profile.OpaqueQualityLevel
-                : globalProfile.OpaqueQualityLevel;
+            isCameraPersistent = profile.IsCameraPersistent;
+            cameraRigType = profile.CameraRigType.Type;
+            DefaultHeadHeight = profile.DefaultHeadHeight;
 
-            nearClipPlaneTransparentDisplay = profile != null
-                ? profile.NearClipPlaneTransparentDisplay
-                : globalProfile.NearClipPlaneTransparentDisplay;
-            cameraClearFlagsTransparentDisplay = profile != null
-                ? profile.CameraClearFlagsTransparentDisplay
-                : globalProfile.CameraClearFlagsTransparentDisplay;
-            backgroundColorTransparentDisplay = profile != null
-                ? profile.BackgroundColorTransparentDisplay
-                : globalProfile.BackgroundColorTransparentDisplay;
-            transparentQualityLevel = profile != null
-                ? profile.TransparentQualityLevel
-                : globalProfile.TransparentQualityLevel;
+            nearClipPlaneOpaqueDisplay = profile.NearClipPlaneOpaqueDisplay;
+            cameraClearFlagsOpaqueDisplay = profile.CameraClearFlagsOpaqueDisplay;
+            backgroundColorOpaqueDisplay = profile.BackgroundColorOpaqueDisplay;
+            opaqueQualityLevel = profile.OpaqueQualityLevel;
 
-            bodyAdjustmentAngle = profile != null
-                ? profile.BodyAdjustmentAngle
-                : globalProfile.BodyAdjustmentAngle;
-            bodyAdjustmentSpeed = profile != null
-                ? profile.BodyAdjustmentSpeed
-                : globalProfile.BodyAdjustmentSpeed;
+            nearClipPlaneTransparentDisplay = profile.NearClipPlaneTransparentDisplay;
+            cameraClearFlagsTransparentDisplay = profile.CameraClearFlagsTransparentDisplay;
+            backgroundColorTransparentDisplay = profile.BackgroundColorTransparentDisplay;
+            transparentQualityLevel = profile.TransparentQualityLevel;
+
+            bodyAdjustmentAngle = profile.BodyAdjustmentAngle;
+            bodyAdjustmentSpeed = profile.BodyAdjustmentSpeed;
         }
 
         private readonly IMixedRealityCameraSystem cameraSystem = null;
@@ -120,7 +88,7 @@ namespace XRTK.Providers.CameraSystem
         private float headHeight;
 
         /// <inheritdoc />
-        public float HeadHeight
+        public virtual float HeadHeight
         {
             get => headHeight;
             set
@@ -189,6 +157,8 @@ namespace XRTK.Providers.CameraSystem
             {
                 cameraOpaqueLastFrame = IsOpaque;
 
+                ApplySettingsForDefaultHeadHeight();
+
                 if (IsOpaque)
                 {
                     ApplySettingsForOpaqueDisplay();
@@ -215,7 +185,11 @@ namespace XRTK.Providers.CameraSystem
         {
             base.Disable();
 
-            if (CameraRig.GameObject == null) { return; }
+            if (CameraRig == null ||
+                CameraRig.GameObject == null)
+            {
+                return;
+            }
 
             ResetRigTransforms();
 
@@ -273,11 +247,6 @@ namespace XRTK.Providers.CameraSystem
             HeadHeight = DefaultHeadHeight;
             ResetRigTransforms();
             SyncRigTransforms();
-
-            if (HeadHeight.Approximately(0f, 0.1f))
-            {
-                CameraRig.PlayspaceTransform.Translate(-CameraRig.BodyTransform.position);
-            }
         }
 
         /// <summary>
@@ -310,6 +279,7 @@ namespace XRTK.Providers.CameraSystem
         {
             CameraRig.PlayspaceTransform.position = Vector3.zero;
             CameraRig.PlayspaceTransform.rotation = Quaternion.identity;
+            // If the camera is a 2d camera when we can adjust the camera's height to match the head height.
             CameraRig.CameraTransform.position = IsStereoscopic ? Vector3.zero : new Vector3(0f, HeadHeight, 0f);
             CameraRig.CameraTransform.rotation = Quaternion.identity;
             CameraRig.BodyTransform.position = Vector3.zero;
@@ -317,8 +287,8 @@ namespace XRTK.Providers.CameraSystem
         }
 
         /// <summary>
-        /// Called each <see cref="LateUpdate"/> to the sync the <see cref="IMixedRealityCameraRig.PlayspaceTransform"/>, <see cref="IMixedRealityCameraRig.CameraTransform"/>,
-        /// and <see cref="IMixedRealityCameraRig.BodyTransform"/> poses.
+        /// Called each <see cref="LateUpdate"/> to the sync the <see cref="IMixedRealityCameraRig.PlayspaceTransform"/>,
+        /// <see cref="IMixedRealityCameraRig.CameraTransform"/>, and <see cref="IMixedRealityCameraRig.BodyTransform"/> poses.
         /// </summary>
         protected virtual void SyncRigTransforms()
         {

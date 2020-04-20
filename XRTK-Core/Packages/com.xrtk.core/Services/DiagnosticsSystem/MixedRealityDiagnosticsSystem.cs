@@ -124,7 +124,7 @@ namespace XRTK.Services.DiagnosticsSystem
                 if (diagnosticsRoot == null)
                 {
                     diagnosticsRoot = new GameObject("Diagnostics").transform;
-                    diagnosticsRoot.parent = MixedRealityToolkit.CameraSystem?.MainCameraRig.PlayspaceTransform;
+                    diagnosticsRoot.transform.SetParent(MixedRealityToolkit.CameraSystem?.MainCameraRig.PlayspaceTransform, false);
                 }
 
                 return diagnosticsRoot;

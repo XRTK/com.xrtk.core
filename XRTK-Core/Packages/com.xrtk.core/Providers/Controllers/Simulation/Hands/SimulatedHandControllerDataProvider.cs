@@ -108,16 +108,16 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <inheritdoc />
         protected override IMixedRealitySimulatedController CreateAndRegisterSimulatedController(Handedness handedness)
         {
-            SimulatedHandController controller;
+            SimulatedMixedRealityHandController controller;
 
             try
             {
-                controller = new SimulatedHandController(this, TrackingState.Tracked, handedness, GetControllerMappingProfile(typeof(SimulatedHandController), handedness));
+                controller = new SimulatedMixedRealityHandController(this, TrackingState.Tracked, handedness, GetControllerMappingProfile(typeof(SimulatedMixedRealityHandController), handedness));
 
             }
             catch (Exception e)
             {
-                Debug.LogError($"Failed to create {nameof(SimulatedHandController)}!\n{e}");
+                Debug.LogError($"Failed to create {nameof(SimulatedMixedRealityHandController)}!\n{e}");
                 return null;
             }
 

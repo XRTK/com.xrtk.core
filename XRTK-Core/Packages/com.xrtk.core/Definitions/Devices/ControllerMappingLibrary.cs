@@ -305,18 +305,34 @@ namespace XRTK.Definitions.Devices
 
         private static Texture2D GetControllerTextureInternal(MixedRealityControllerMappingProfile mappingProfile, bool scaled)
         {
+            Texture2D texture = null;
+
             if (mappingProfile != null &&
                 mappingProfile.ControllerType.Type != null)
             {
-                var texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/{mappingProfile.ControllerType.Type.Name}", mappingProfile.Handedness, scaled);
+                var controllerName = mappingProfile.ControllerType.Type.Name.Replace("OpenVR", string.Empty);
+                controllerName = controllerName.Replace("Simulated", string.Empty);
+                texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/{controllerName}", mappingProfile.Handedness, scaled);
 
                 if (texture != null)
                 {
                     return texture;
                 }
+
+                texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/{controllerName}", Handedness.None, scaled);
             }
 
-            return GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/Generic_controller", Handedness.None, scaled);
+            if (texture == null)
+            {
+                texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/Generic_controller", mappingProfile.Handedness, scaled);
+            }
+
+            if (texture == null)
+            {
+                texture = GetControllerTextureInternal($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/Generic_controller", Handedness.Right, scaled);
+            }
+
+            return texture;
         }
 
         private static Texture2D GetControllerTextureInternal(string fullTexturePath, Handedness handedness, bool scaled)

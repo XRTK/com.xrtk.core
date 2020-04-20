@@ -11,6 +11,8 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
     [CustomEditor(typeof(SimulatedControllerDataProviderProfile))]
     public class SimulatedControllerDataProviderProfileInspector : BaseMixedRealityControllerDataProviderProfileInspector
     {
+        private static readonly GUIContent SimulationSettingsFoldoutHeader = new GUIContent("Simulation Settings");
+
         private SerializedProperty simulatedUpdateFrequency;
         private SerializedProperty controllerHideTimeout;
 
@@ -26,7 +28,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
         private SerializedProperty rotationSpeed;
 
         private bool showSimulationSettings = true;
-        private static readonly GUIContent simulationSettingsFoldoutHeader = new GUIContent("Simulation Settings");
 
         protected override void OnEnable()
         {
@@ -53,7 +54,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 
             serializedObject.Update();
 
-            showSimulationSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showSimulationSettings, simulationSettingsFoldoutHeader, true);
+            showSimulationSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showSimulationSettings, SimulationSettingsFoldoutHeader, true);
             if (showSimulationSettings)
             {
                 EditorGUI.indentLevel++;

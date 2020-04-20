@@ -1,13 +1,14 @@
 variables:
-  - group: Global Pipeline Settings
-  - name: project.folder
-    value: 'XRTK'
-  - name: project.name
-    value: 'XRTK-Core'
-  - name: package.name
-    value: 'com.xrtk.core'
+  group: Global Pipeline Settings
+  project.folder: 'XRTK'
+  project.name: 'XRTK-Core'
+  package.name: 'com.xrtk.core'
+  ${{ if nq(variables[build.reason], 'PullRequest') }}:
+    revisionNumber: XRTK.Core-$(Date:yyyyMMdd)$(Rev:.r)
+  ${{ if eq(variables[build.reason], 'PullRequest') }}:
+    revisionNumber: XRTK.Core-$(System.PullRequest.PullRequestNumber)$(Rev:.r)
 
-name: $(project.name)-$[coalesce('$(System.PullRequest.PullRequestId)', $(Date:yyyyMMdd))]$(Rev:.r)
+name: $(revisionNumber)
 
 pr:
   autoCancel: true

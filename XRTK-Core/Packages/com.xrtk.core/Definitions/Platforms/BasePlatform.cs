@@ -17,5 +17,8 @@ namespace XRTK.Definitions.Platforms
 
         /// <inheritdoc />
         public virtual bool IsBuildTargetAvailable => false;
+
+        /// <inheritdoc />
+        public virtual IMixedRealityPlatform[] PlatformOverrides { get; } = new IMixedRealityPlatform[0];
     }
 }

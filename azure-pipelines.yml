@@ -8,7 +8,7 @@ variables:
   ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
     revisionNumber: $(System.PullRequest.PullRequestNumber)
 
-name: XRTK.Core-${{revisionNumber}}$(Rev:.r)
+name: XRTK.Core-$(revisionNumber)$(Rev:.r)
 
 pr:
   autoCancel: true

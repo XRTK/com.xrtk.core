@@ -7,7 +7,7 @@ variables:
   - name: package.name
     value: 'com.xrtk.core'
 
-name: $(project.name)-${{ coalesce('$(System.PullRequest.PullRequestNumber)', 'date:yyyyMMdd') }}$(Rev:.r)
+name: $(project.name)-$[coalesce($(System.PullRequest.PullRequestNumber), date:yyyyMMdd) ]$(Rev:.r)
 
 pr:
   autoCancel: true

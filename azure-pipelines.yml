@@ -4,9 +4,9 @@ variables:
   project.name: 'XRTK-Core'
   package.name: 'com.xrtk.core'
   ${{ if ne(variables['Build.Reason'], 'PullRequest') }}:
-    revisionNumber: '$(Date:yyyyMMdd)'
+    revisionNumber: '${{Date:yyyyMMdd}}'
   ${{ if eq(variables['Build.Reason'], 'PullRequest') }}:
-    revisionNumber: '$(System.PullRequest.PullRequestNumber)'
+    revisionNumber: '${{System.PullRequest.PullRequestNumber}}'
 
 name: XRTK.Core-$(revisionNumber)$(Rev:.r)
 

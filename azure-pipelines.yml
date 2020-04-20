@@ -1,3 +1,12 @@
+variables:
+  - group: Global Pipeline Settings
+  - name: project.folder
+    value: 'XRTK'
+  - name: project.name
+    value: 'XRTK-Core'
+  - name: package.name
+    value: 'com.xrtk.core'
+
 name: XRTK-$(System.PullRequest.PullRequestNumber)$(Rev:.r)
 
 pr:
@@ -8,26 +17,19 @@ pr:
      - feature/*
   paths:
     include:
-    - XRTK-Core/*
+    - $(project.name)/*
     - docfx_project
     exclude:
       - '*'
-      - XRTK-Core/Packages/com.xrtk.core/README.md
-      - XRTK-Core/Packages/com.xrtk.core/LICENSE.md
-      - XRTK-Core/Packages/com.xrtk.core/.github/*
+      - $(project.name)/Packages/$(package.name)/README.md
+      - $(project.name)/Packages/$(package.name)/LICENSE.md
+      - $(project.name)/Packages/$(package.name)/.github/*
 
 pool:
   name: Azure Pipelines
   vmImage: 'vs2017-win2016'
   demands:
     - unity -equals true
-
-variables:
-  - group: Global Pipeline Settings
-  - name: project.folder
-    value: 'XRTK'
-  - name: project.name
-    value: 'XRTK-Core'
 
 steps:
 - task: DownloadSecureFile@1

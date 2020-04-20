@@ -23,9 +23,11 @@ pool:
     - unity -equals true
 
 variables:
-  project.folder: 'XRTK'
-  project.name: 'XRTK-Core'
-  group: Global Pipeline Settings
+  - group: Global Pipeline Settings
+  - name: project.folder
+    value: 'XRTK'
+  - name: project.name
+    value: 'XRTK-Core'
 
 steps:
 - task: DownloadSecureFile@1

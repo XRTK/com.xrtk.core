@@ -10,6 +10,7 @@ variables:
 name: XRTK-$(System.PullRequest.PullRequestNumber)$(Rev:.r)
 
 pr:
+  autoCancel: true
   branches:
    include:
      - master

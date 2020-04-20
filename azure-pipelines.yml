@@ -15,7 +15,7 @@ pr:
       - XRTK-Core/Packages/com.xrtk.core/.github/*
 
 pool:
-  name: Azure Pipelines
+  vmImage: 'vs2017-win2016'
   demands:
   - unity -equals true
 

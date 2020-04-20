@@ -1,0 +1,29 @@
+pr:
+  branches:
+   include:
+     - master
+     - development
+     - feature/*
+  paths:
+    include:
+    - XRTK-Core/*
+    - docfx_project
+    exclude:
+      - '*'
+      - XRTK-Core/Packages/com.xrtk.core/README.md
+      - XRTK-Core/Packages/com.xrtk.core/LICENSE.md
+      - XRTK-Core/Packages/com.xrtk.core/.github/*
+
+pool:
+  name: 'Azure Pipelines'
+  demands:
+  - unity -equals true
+
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+    echo Add other tasks to build, test, and deploy your project.
+    echo See https://aka.ms/yaml
+  displayName: 'Run a multi-line script'

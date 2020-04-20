@@ -16,7 +16,9 @@ pr:
 
 pool:
   name: Azure Pipelines
-  demands: unity -equals true
+  vmImage: 'vs2017-win2016'
+  demands:
+    - unity -equals true
 
 variables:
   project.folder: 'XRTK'

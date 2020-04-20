@@ -30,6 +30,7 @@ namespace XRTK.Definitions.InputSystem
             this.id = 0;
             this.description = description;
             this.axisConstraint = AxisType.None;
+            tryAgain = true;
         }
 
         /// <summary>
@@ -78,6 +79,8 @@ namespace XRTK.Definitions.InputSystem
 
         private Guid cachedGuid;
 
+        private bool tryAgain;
+
         /// <summary>
         /// The guid reference to the <see cref="MixedRealityInputActionsProfile"/> this action belongs to.
         /// </summary>
@@ -94,7 +97,10 @@ namespace XRTK.Definitions.InputSystem
                         profileGuid = DefaultGuidString;
                     }
 
-                    Guid.TryParse(profileGuid, out cachedGuid);
+                    if (tryAgain)
+                    {
+                        tryAgain = !Guid.TryParse(profileGuid, out cachedGuid);
+                    }
                 }
 
                 return cachedGuid;

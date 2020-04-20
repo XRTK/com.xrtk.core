@@ -29,7 +29,7 @@ namespace XRTK.Inspectors
         /// <summary>
         /// Used to enable editing the input axis label positions on controllers
         /// </summary>
-        private static readonly bool EnableWysiwyg = false;
+        private static readonly bool EnableWysiwyg = true;
 
         private static readonly GUIContent InteractionAddButtonContent = new GUIContent("+ Add a New Interaction Mapping");
         private static readonly GUIContent InteractionMinusButtonContent = new GUIContent("-", "Remove Interaction Mapping");
@@ -70,6 +70,7 @@ namespace XRTK.Inspectors
         private ControllerInputActionOption currentControllerOption;
 
         private MixedRealityControllerMappingProfile controllerDataProviderProfile;
+        private string currentControllerName;
 
         private Type ControllerType => controllerDataProviderProfile.ControllerType;
         private Handedness Handedness => controllerDataProviderProfile.Handedness;
@@ -113,7 +114,9 @@ namespace XRTK.Inspectors
             }
 
             window = (ControllerPopupWindow)CreateInstance(typeof(ControllerPopupWindow));
-            window.titleContent = new GUIContent($"{profile.ControllerType.Type.Name} {handednessTitleText}Input Action Assignment");
+            window.currentControllerName = profile.ControllerType.Type.Name;
+
+            window.titleContent = new GUIContent($"{window.currentControllerName} {handednessTitleText}Input Action Assignment");
             window.controllerDataProviderProfile = profile;
             window.currentInteractionProfiles = interactionMappingProfiles;
             window.currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(profile);
@@ -146,11 +149,11 @@ namespace XRTK.Inspectors
                 controllerInputActionOptions = JsonUtility.FromJson<ControllerInputActionOptions>(asset.text);
 
                 // if the controller option doesn't exist, then make a new one.
-                if (!controllerInputActionOptions.Controllers.Any(option => option.Controller == window.ControllerType && option.Handedness == window.Handedness))
+                if (!controllerInputActionOptions.Controllers.Any(option => option.Controller == window.currentControllerName && option.Handedness == window.Handedness))
                 {
                     var newOption = new ControllerInputActionOption
                     {
-                        Controller = window.ControllerType,
+                        Controller = window.currentControllerName,
                         Handedness = window.Handedness,
                         InputLabelPositions = new Vector2[interactionMappingProfiles.arraySize],
                         IsLabelFlipped = new bool[interactionMappingProfiles.arraySize]
@@ -159,7 +162,7 @@ namespace XRTK.Inspectors
                     controllerInputActionOptions.Controllers.Add(newOption);
                 }
 
-                window.currentControllerOption = controllerInputActionOptions.Controllers.FirstOrDefault(option => option.Controller == window.ControllerType && option.Handedness == window.Handedness);
+                window.currentControllerOption = controllerInputActionOptions.Controllers.FirstOrDefault(option => option.Controller == window.currentControllerName && option.Handedness == window.Handedness);
 
                 if (window.currentControllerOption.IsLabelFlipped == null)
                 {
@@ -298,11 +301,11 @@ namespace XRTK.Inspectors
                     }
                     else
                     {
-                        if (!controllerInputActionOptions.Controllers.Any(option => option.Controller == ControllerType && option.Handedness == Handedness))
+                        if (!controllerInputActionOptions.Controllers.Any(option => option.Controller == currentControllerName && option.Handedness == Handedness))
                         {
                             currentControllerOption = new ControllerInputActionOption
                             {
-                                Controller = ControllerType,
+                                Controller = currentControllerName,
                                 Handedness = Handedness,
                                 InputLabelPositions = new Vector2[currentInteractionProfiles.arraySize],
                                 IsLabelFlipped = new bool[currentInteractionProfiles.arraySize]

@@ -1,3 +1,5 @@
+name: XRTK-$(System.PullRequest.PullRequestNumber)$(Rev:.r)
+
 pr:
   branches:
    include:

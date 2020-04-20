@@ -32,10 +32,8 @@ pool:
   demands:
     - unity -equals true
 
-
 steps:
 - checkout: self
-  clean: true
   submodules: recursive
 
 - task: DownloadSecureFile@1

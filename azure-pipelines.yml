@@ -32,6 +32,10 @@ pool:
     - unity -equals true
 
 steps:
+- checkout: self
+  clean: true
+  submodules: true
+
 - task: DownloadSecureFile@1
   displayName: 'Download Unity Credentials'
   inputs:

@@ -538,7 +538,6 @@ namespace XRTK.Services
 
             var platformOverrides = new List<Type>();
 
-            Debug.Log("Available Platforms:");
             foreach (var platformType in platformTypes)
             {
                 IMixedRealityPlatform platform = null;
@@ -555,7 +554,6 @@ namespace XRTK.Services
                 if (platform == null) { continue; }
 
                 availablePlatforms.Add(platform);
-                Debug.Log($"{platform.GetType().Name} | {platform.IsAvailable} | {platform.IsBuildTargetAvailable}");
 
                 if (platform.IsAvailable ||
                     platform.IsBuildTargetAvailable)
@@ -567,13 +565,6 @@ namespace XRTK.Services
                 }
             }
 
-            Debug.LogWarning("Platform Overrides:");
-            foreach (var platform in platformOverrides)
-            {
-                Debug.LogWarning(platform.Name);
-            }
-
-            Debug.LogError("Active Platforms:");
             foreach (var platform in availablePlatforms)
             {
                 if (platformOverrides.Contains(platform.GetType()))
@@ -584,7 +575,6 @@ namespace XRTK.Services
                 if (platform.IsAvailable ||
                     platform.IsBuildTargetAvailable)
                 {
-                    Debug.LogError(platform.GetType().Name);
                     activePlatforms.Add(platform);
                 }
             }

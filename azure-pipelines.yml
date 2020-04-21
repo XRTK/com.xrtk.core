@@ -68,7 +68,7 @@ jobs:
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
         Write-Host $editorInstance.Path
         Write-Host "Activating License..."
-        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru
+        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
@@ -124,7 +124,7 @@ jobs:
         $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
 
-        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget StandaloneWindows64 -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log`"" -PassThru
+        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget StandaloneWindows64 -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log`"" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
@@ -145,7 +145,7 @@ jobs:
         $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
 
-        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-batchmode -returnlicense -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\deactivation.log`"" -PassThru
+        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\deactivation.log`"" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\deactivation.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )

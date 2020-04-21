@@ -6,6 +6,8 @@ variables:
     value: 'XRTK-Core'
   - name: package.name
     value: 'com.xrtk.core'
+  - name: EditorPath
+    value: ''
 
 name: XRTK.Core-$(Date:yyyyMMdd)$(Rev:.r)
 # name: XRTK.Core$(System.PullRequest.PullRequestNumber)$(Rev:.r)
@@ -85,7 +87,6 @@ jobs:
 
         exit $process.ExitCode
       failOnStderr: true
-      name: EditorPath
       displayName: 'Activate Unity License'
 
     - powershell: |

@@ -91,7 +91,7 @@ jobs:
         $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
 
-        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log`" -editorTestsResultFile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.xml`" -runEditorTests" -PassThru
+        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log`" -editorTestsResultFile .\tests.xml" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
@@ -112,7 +112,7 @@ jobs:
       inputs:
         testResultsFormat: NUnit
         testResultsFiles: 'test?.xml'
-        searchFolder: '$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs'
+        searchFolder: '$(System.DefaultWorkingDirectory)\$(project.name)'
         mergeTestResults: true
         failTaskOnFailedTests: true
       condition: always()

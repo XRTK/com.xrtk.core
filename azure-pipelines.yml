@@ -47,7 +47,7 @@ jobs:
       failOnStderr: true
       displayName: 'Install UnitySetup.Powershell module'
 
-    - powershell: 'Install-Script -Name Invoke-Process -Scope CurrentUser -Repository PSGallery -Force'
+    - powershell: 'Install-Module -Name Invoke-Process -Scope CurrentUser -Repository PSGallery -Force'
       failOnStderr: true
       displayName: 'Install Invoke-Process module'
 

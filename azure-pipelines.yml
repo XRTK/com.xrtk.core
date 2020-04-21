@@ -74,11 +74,14 @@ jobs:
         $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
 
-        while ( -not $process.HasExited -or $ljob.HasMoreData )
+        while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
             Receive-Job $ljob
-            Start-Sleep -Milliseconds 200
+            Start-Sleep -Milliseconds 100
         }
+
+        # wait a bit more to make sure we've got all our log content
+        Start-Sleep -Milliseconds 500
 
         Receive-Job $ljob
         Stop-Job $ljob
@@ -112,7 +115,7 @@ jobs:
 
     - powershell: |
         Write-Host "Starting Windows x64 Build..."
-        Start-UnityEditor -Latest -BatchMode -BuildTarget StandaloneWindows64 -ExecuteMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\windows-build.log -Wait -PassThru
+        Start-UnityEditor -Latest -BatchMode -BuildTarget StandaloneWindows64 -ExecuteMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\windows-build.log -Wait
       displayName: 'Build Windows x64 Unity Player'
 
     - powershell: |
@@ -126,7 +129,22 @@ jobs:
         Write-Host "Returning License..."
         $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
-        $process = Start-Process "$editorPath" -ArgumentList "-quit -batchmode -returnlicense" -PassThru -Wait
+        $process = Start-Process "$editorPath" -ArgumentList "-quit -batchmode -returnlicense" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru
+        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
+
+        while ( -not $process.HasExited -and $ljob.HasMoreData )
+        {
+            Receive-Job $ljob
+            Start-Sleep -Milliseconds 100
+        }
+
+        # wait a bit more to make sure we've got all our log content
+        Start-Sleep -Milliseconds 500
+
+        Receive-Job $ljob
+        Stop-Job $ljob
+        Remove-Job $ljob
+
         exit $process.ExitCode
       displayName: 'Return Unity License'
       condition: always()

@@ -20,7 +20,6 @@ pr:
   paths:
     include:
     - $(project.name)/*
-    - docfx_project
     exclude:
       - '*'
       - $(project.name)/Packages/$(package.name)/README.md
@@ -33,110 +32,120 @@ pool:
   demands:
     - unity -equals true
 
-steps:
-- checkout: self
-  submodules: recursive
+jobs:
+  - job: InstallUnity
+    steps:
+    - checkout: self
+      submodules: recursive
 
-- task: DownloadSecureFile@1
-  displayName: 'Download Unity Credentials'
-  inputs:
-    secureFile: '47a1e34d-3344-416c-85c8-0d055ae43ddc'
+    - task: DownloadSecureFile@1
+      displayName: 'Download Unity Credentials'
+      inputs:
+        secureFile: '47a1e34d-3344-416c-85c8-0d055ae43ddc'
 
-- powershell: 'Install-Module -Name UnitySetup -AllowPrerelease -RequiredVersion $(UnityPowerShellHelperVersion) -Scope CurrentUser -Repository PSGallery -Force'
-  failOnStderr: true
-  displayName: 'Install UnitySetup.Powershell module'
+    - powershell: 'Install-Module -Name UnitySetup -AllowPrerelease -RequiredVersion $(UnityPowerShellHelperVersion) -Scope CurrentUser -Repository PSGallery -Force'
+      failOnStderr: true
+      displayName: 'Install UnitySetup.Powershell module'
 
-- powershell: 'Install-UnitySetupInstance -Verbose -Installers ( Find-UnitySetupInstaller -Version $(UnityVersion) -Components  ''Windows'', ''Windows_IL2CPP'' -Verbose )'
-  displayName: 'Install Unity Editor'
+    - powershell: 'Install-UnitySetupInstance -Verbose -Installers ( Find-UnitySetupInstaller -Version $(UnityVersion) -Components  ''Windows'', ''Windows_IL2CPP'' -Verbose )'
+      displayName: 'Install Unity Editor'
 
-- powershell: 'Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize'
-  displayName: 'List Unity installs'
+    - powershell: 'Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize'
+      displayName: 'List Unity installs'
 
-- powershell: |
-    New-Item -ItemType Directory -Force -Path "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"
+    - powershell: |
+        New-Item -ItemType Directory -Force -Path "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"
 
-    $unityCredentials = (Get-Content "$(Agent.TempDirectory)\xrtk-build-credentials.json" -Raw) | ConvertFrom-Json
+        $unityCredentials = (Get-Content "$(Agent.TempDirectory)\xrtk-build-credentials.json" -Raw) | ConvertFrom-Json
 
-    if ( -not $unityCredentials ) {
-        Write-Error "Failed to find unity credentials"
-        exit 1
-    }
+        if ( -not $unityCredentials ) {
+            Write-Error "Failed to find unity credentials"
+            exit 1
+        }
 
-    $username = $unityCredentials.username
-    $password = $unityCredentials.password
-    $serial = $unityCredentials.serial
+        $username = $unityCredentials.username
+        $password = $unityCredentials.password
+        $serial = $unityCredentials.serial
 
-    $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
-    $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
-    Write-Host $editorInstance.Path
-    Write-Host "Activating License..."
-    $process = Start-Process "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru -Wait
-
-    if( $process.ExitCode -ne 0 ) {
-        Write-Host "Failed to activate license"
-        Get-Content $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
-    }
-
-    exit $process.ExitCode
-  displayName: 'Activate Unity License'
-
-- powershell: |
-    if ( Test-Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log -Type Leaf ) {
-        Get-Content $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
-    }
-  displayName: 'Print Activation Logs'
-  condition: always()
-
-- powershell: |
-    Write-Host "Starting Unity Unit Tests..."
-    Start-UnityEditor -Latest -BatchMode -RunEditorTests -EditorTestsResultFile .\tests.xml -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log -Wait
-  displayName: 'Run Unity Unit Tests'
-  timeoutInMinutes: 15
-
-- task: PublishTestResults@2
-  displayName: 'Publish Test Results'
-  inputs:
-    testResultsFormat: NUnit
-    testResultsFiles: 'test?.xml'
-    searchFolder: '$(System.DefaultWorkingDirectory)\$(project.name)'
-    mergeTestResults: true
-    failTaskOnFailedTests: true
-  condition: always()
-
-- powershell: |
-    if ( Test-Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log -Type Leaf ) {
-        Get-Content $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log
-    }
-  displayName: 'Print Unit Test Logs'
-  condition: always()
-
-- powershell: |
-    Write-Host "Starting Windows x64 Build..."
-    Start-UnityEditor -Latest -BatchMode -BuildTarget StandaloneWindows64 -ExecuteMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\windows-build.log -Wait
-  displayName: 'Build Windows x64 Unity Player'
-
-- powershell: |
-    if ( Test-Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\windows-build.log -Type Leaf ) {
-        Get-Content $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\windows-build.log
-    }
-  displayName: 'Print Windows Build Logs'
-  condition: always()
-
-- powershell: |
-    if ( Test-Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log -Type Leaf ) {
-        Write-Host "Returning License..."
         $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
-        $process = Start-Process "$editorPath" -ArgumentList "-quit -batchmode -returnlicense" -PassThru -Wait
-        exit $process.ExitCode
-    }
-  displayName: 'Return Unity License'
-  condition: always()
+        Write-Host $editorInstance.Path
+        Write-Host "Activating License..."
+        $process = Start-Process "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru -Wait
 
-- task: PublishPipelineArtifact@0
-  displayName: 'Publish Pipeline Artifact'
-  inputs:
-    artifactName: Builds
-    targetPath: '$(project.name)/Builds'
-  condition: always()
+        if( $process.ExitCode -ne 0 ) {
+            Write-Host "Failed to activate license"
+            Get-Content $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
+        }
+
+        exit $process.ExitCode
+      displayName: 'Activate Unity License'
+
+    - powershell: |
+        if ( Test-Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log -Type Leaf ) {
+            Get-Content $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
+        }
+      displayName: 'Print Activation Logs'
+      condition: always()
+
+  - job: RunUnitTests
+    steps:
+    - powershell: |
+        Write-Host "Starting Unity Unit Tests..."
+        Start-UnityEditor -Latest -BatchMode -RunEditorTests -EditorTestsResultFile .\tests.xml -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log -Wait
+      displayName: 'Run Unity Unit Tests'
+      timeoutInMinutes: 15
+
+    - task: PublishTestResults@2
+      displayName: 'Publish Test Results'
+      inputs:
+        testResultsFormat: NUnit
+        testResultsFiles: 'test?.xml'
+        searchFolder: '$(System.DefaultWorkingDirectory)\$(project.name)'
+        mergeTestResults: true
+        failTaskOnFailedTests: true
+      condition: always()
+
+    - powershell: |
+        if ( Test-Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log -Type Leaf ) {
+            Get-Content $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log
+        }
+      displayName: 'Print Unit Test Logs'
+      condition: always()
+
+  - job: WindowsBuild
+    steps:
+    - powershell: |
+        Write-Host "Starting Windows x64 Build..."
+        Start-UnityEditor -Latest -BatchMode -BuildTarget StandaloneWindows64 -ExecuteMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\windows-build.log -Wait
+      displayName: 'Build Windows x64 Unity Player'
+
+    - powershell: |
+        if ( Test-Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\windows-build.log -Type Leaf ) {
+            Get-Content $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\windows-build.log
+        }
+      displayName: 'Print Windows Build Logs'
+      condition: always()
+
+  - job: ReturnLicense
+    steps:
+    - powershell: |
+        if ( Test-Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log -Type Leaf ) {
+            Write-Host "Returning License..."
+            $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
+            $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
+            $process = Start-Process "$editorPath" -ArgumentList "-quit -batchmode -returnlicense" -PassThru -Wait
+            exit $process.ExitCode
+        }
+      displayName: 'Return Unity License'
+      condition: always()
+
+  - job: PublishArtifacts
+    steps:
+    - task: PublishPipelineArtifact@0
+      displayName: 'Publish Pipeline Artifact'
+      inputs:
+        artifactName: Builds
+        targetPath: '$(project.name)/Builds'
+      condition: always()
 

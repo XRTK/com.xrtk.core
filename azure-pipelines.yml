@@ -74,7 +74,6 @@ jobs:
         while ( -not $process.HasExited )
         {
           Receive-Job $ljob
-          Start-Sleep -Milliseconds 100
         }
 
         Receive-Job $ljob

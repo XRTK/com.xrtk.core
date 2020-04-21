@@ -71,7 +71,7 @@ jobs:
         Write-Host $editorInstance.Path
         Write-Host "Activating License..."
         $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru
-        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"
+        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {

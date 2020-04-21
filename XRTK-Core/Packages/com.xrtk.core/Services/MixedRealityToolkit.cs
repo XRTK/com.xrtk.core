@@ -536,27 +536,46 @@ namespace XRTK.Services
                 .Where(type => typeof(IMixedRealityPlatform).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract)
                 .OrderBy(type => type.Name);
 
+            var platformOverrides = new List<Type>();
+
             foreach (var platformType in platformTypes)
             {
-                IMixedRealityPlatform platformInstance = null;
+                IMixedRealityPlatform platform = null;
 
                 try
                 {
-                    platformInstance = Activator.CreateInstance(platformType) as IMixedRealityPlatform;
+                    platform = Activator.CreateInstance(platformType) as IMixedRealityPlatform;
                 }
                 catch (Exception e)
                 {
                     Debug.LogError(e);
                 }
 
-                if (platformInstance == null) { continue; }
+                if (platform == null) { continue; }
 
-                availablePlatforms.Add(platformInstance);
+                availablePlatforms.Add(platform);
 
-                if (platformInstance.IsAvailable ||
-                    platformInstance.IsBuildTargetAvailable)
+                if (platform.IsAvailable ||
+                    platform.IsBuildTargetAvailable)
                 {
-                    activePlatforms.Add(platformInstance);
+                    foreach (var platformOverride in platform.PlatformOverrides)
+                    {
+                        platformOverrides.Add(platformOverride.GetType());
+                    }
+                }
+            }
+
+            foreach (var platform in availablePlatforms)
+            {
+                if (platformOverrides.Contains(platform.GetType()))
+                {
+                    continue;
+                }
+
+                if (platform.IsAvailable ||
+                    platform.IsBuildTargetAvailable)
+                {
+                    activePlatforms.Add(platform);
                 }
             }
 
@@ -886,23 +905,17 @@ namespace XRTK.Services
 
             Debug.Assert(ActivePlatforms.Count > 0);
 
-            for (var i = 0; i < runtimePlatforms?.Count; i++)
+            for (var i = 0; i < ActivePlatforms.Count; i++)
             {
-                var runtimePlatform = runtimePlatforms[i].GetType();
+                var activePlatform = ActivePlatforms[i].GetType();
 
-                if (runtimePlatform == typeof(AllPlatforms))
+                for (var j = 0; j < runtimePlatforms?.Count; j++)
                 {
-                    platforms.Add(runtimePlatforms[i]);
-                    break;
-                }
-
-                for (var j = 0; j < ActivePlatforms.Count; j++)
-                {
-                    var activePlatform = ActivePlatforms[j].GetType();
+                    var runtimePlatform = runtimePlatforms[j].GetType();
 
                     if (activePlatform == runtimePlatform)
                     {
-                        platforms.Add(runtimePlatforms[i]);
+                        platforms.Add(runtimePlatforms[j]);
                         break;
                     }
                 }

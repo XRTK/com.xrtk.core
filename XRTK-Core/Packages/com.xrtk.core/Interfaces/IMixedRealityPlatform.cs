@@ -20,5 +20,10 @@ namespace XRTK.Interfaces
         /// Only returns true in editor.
         /// </remarks>
         bool IsBuildTargetAvailable { get; }
+
+        /// <summary>
+        /// The list of platforms that this specific platform will override and make the others return not available.
+        /// </summary>
+        IMixedRealityPlatform[] PlatformOverrides { get; }
     }
 }

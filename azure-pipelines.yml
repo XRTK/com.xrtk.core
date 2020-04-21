@@ -47,11 +47,10 @@ jobs:
       failOnStderr: true
       displayName: 'Install UnitySetup.Powershell module'
 
-    - powershell: 'Install-UnitySetupInstance -Verbose -Installers ( Find-UnitySetupInstaller -Version $(UnityVersion) -Components  ''Windows'', ''Windows_IL2CPP'' -Verbose )'
+    - powershell: |
+        Install-UnitySetupInstance -Verbose -Installers ( Find-UnitySetupInstaller -Version $(UnityVersion) -Components  ''Windows'', ''Windows_IL2CPP'' -Verbose )
+        Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize
       displayName: 'Install Unity Editor'
-
-    - powershell: 'Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize'
-      displayName: 'List Unity installs'
 
     - powershell: |
         New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log -ItemType File -Force
@@ -89,6 +88,8 @@ jobs:
 
     - powershell: |
         Write-Host "Starting Unity Unit Tests..."
+        New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log -ItemType File -Force
+
         $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -runEditorTests -editorTestsResultFile .\tests.xml -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log`"" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log
 
@@ -119,6 +120,7 @@ jobs:
 
     - powershell: |
         Write-Host "Starting Windows x64 Build..."
+        New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log -ItemType File -Force
         $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget StandaloneWindows64 -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log`"" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log
 

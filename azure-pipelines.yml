@@ -59,11 +59,11 @@ jobs:
         Write-Host $logDirectory
         echo "##vso[task.setvariable variable=LogDirectory]$logDirectory"
 
-        New-Item -Path $(logDirectory)\activation.log -ItemType File -Force
+        New-Item -Path $logDirectory\activation.log -ItemType File -Force
 
         Write-Host "Activating License..."
-        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $(UnitySerial) -username `"$(UnityUsername)`" -password `"$(UnityPassword)`" -logfile `"$(logDirectory)\activation.log`"" -PassThru
-        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(logDirectory)\activation.log
+        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $(UnitySerial) -username `"$(UnityUsername)`" -password `"$(UnityPassword)`" -logfile `"$logDirectory\activation.log`"" -PassThru
+        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $logDirectory\activation.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {

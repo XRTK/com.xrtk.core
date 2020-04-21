@@ -71,7 +71,7 @@ jobs:
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
         Write-Host $editorInstance.Path
         Write-Host "Activating License..."
-        $process = Start-Process "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile -" -PassThru -Wait
+        $process = Start-Process "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile" -PassThru -Wait
 
         if( $process.ExitCode -ne 0 ) {
             Write-Host "Failed to activate license"

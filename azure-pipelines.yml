@@ -38,24 +38,28 @@ jobs:
     - checkout: self
       submodules: recursive
 
-    - task: DownloadSecureFile@1
-      displayName: 'Download Unity Credentials'
-      inputs:
-        secureFile: '47a1e34d-3344-416c-85c8-0d055ae43ddc'
+    - powershell: 'Install-Script -Name Invoke-Process -Scope CurrentUser -Repository PSGallery -Force'
+      failOnStderr: true
+      displayName: 'Install Invoke-Process script'
+
+    - powershell: 'Get-InstalledScript'
+      failOnStderr: true
+      displayName: 'Check Script Install'
 
     - powershell: 'Install-Module -Name UnitySetup -AllowPrerelease -RequiredVersion $(UnityPowerShellHelperVersion) -Scope CurrentUser -Repository PSGallery -Force'
       failOnStderr: true
       displayName: 'Install UnitySetup.Powershell module'
-
-    - powershell: 'Install-Script -Name Invoke-Process -Scope CurrentUser -Repository PSGallery -Force . Invoke-Process.ps1'
-      failOnStderr: true
-      displayName: 'Install Invoke-Process script'
 
     - powershell: 'Install-UnitySetupInstance -Verbose -Installers ( Find-UnitySetupInstaller -Version $(UnityVersion) -Components  ''Windows'', ''Windows_IL2CPP'' -Verbose )'
       displayName: 'Install Unity Editor'
 
     - powershell: 'Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize'
       displayName: 'List Unity installs'
+
+    - task: DownloadSecureFile@1
+      displayName: 'Download Unity Credentials'
+      inputs:
+        secureFile: '47a1e34d-3344-416c-85c8-0d055ae43ddc'
 
     - powershell: |
         New-Item -ItemType Directory -Force -Path "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"

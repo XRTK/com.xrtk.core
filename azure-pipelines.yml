@@ -1,22 +1,17 @@
 variables:
-  - group: Global Pipeline Settings
-  - name: project.folder
-    value: 'XRTK'
-  - name: project.name
-    value: 'XRTK-Core'
-  - name: package.name
-    value: 'com.xrtk.core'
-  - name: EditorPath
-    value: ''
-  - name: LogDirectory
-    value: ''
+  project.folder: 'XRTK'
+  project.name: 'XRTK-Core'
+  package.name: 'com.xrtk.core'
+  project.upmSha: ''
+  EditorPath: ''
+  LogDirectory: ''
+  ${{ if nq(variables[build.reason], 'PullRequest') }}:
+    pipelineName: $(package.name)-$(Date:yyyyMMdd)$(Rev:.r)
+  ${{ if eq(variables[build.reason], 'PullRequest') }}:
+    pipelineName: $(package.name)-$(System.PullRequest.PullRequestNumber)$(Rev:.r)
 
+name: $(pipelineName)
 # name: $(package.name)-$(Date:yyyyMMdd)$(Rev:.r)
-name: |
- ${{ if nq(variables[build.reason], 'PullRequest') }}:
-  $(package.name)-$(Date:yyyyMMdd)$(Rev:.r)
- ${{ if eq(variables[build.reason], 'PullRequest') }}:
-  $(package.name)-$(System.PullRequest.PullRequestNumber)$(Rev:.r)
 
 pr:
   autoCancel: true
@@ -42,6 +37,8 @@ pool:
 
 jobs:
   - job: pr_validation
+    variables:
+    - group: Global Pipeline Settings
     steps:
     - checkout: self
       submodules: recursive

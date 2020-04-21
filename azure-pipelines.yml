@@ -88,8 +88,6 @@ jobs:
       displayName: 'Print Activation Logs'
       condition: always()
 
-  - job: RunUnitTests
-    steps:
     - powershell: |
         Write-Host "Starting Unity Unit Tests..."
         Start-UnityEditor -Latest -BatchMode -RunEditorTests -EditorTestsResultFile .\tests.xml -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log -Wait
@@ -113,8 +111,6 @@ jobs:
       displayName: 'Print Unit Test Logs'
       condition: always()
 
-  - job: WindowsBuild
-    steps:
     - powershell: |
         Write-Host "Starting Windows x64 Build..."
         Start-UnityEditor -Latest -BatchMode -BuildTarget StandaloneWindows64 -ExecuteMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\windows-build.log -Wait
@@ -127,8 +123,6 @@ jobs:
       displayName: 'Print Windows Build Logs'
       condition: always()
 
-  - job: ReturnLicense
-    steps:
     - powershell: |
         if ( Test-Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log -Type Leaf ) {
             Write-Host "Returning License..."
@@ -140,8 +134,6 @@ jobs:
       displayName: 'Return Unity License'
       condition: always()
 
-  - job: PublishArtifacts
-    steps:
     - task: PublishPipelineArtifact@0
       displayName: 'Publish Pipeline Artifact'
       inputs:

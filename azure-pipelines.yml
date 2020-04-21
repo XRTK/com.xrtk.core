@@ -119,7 +119,7 @@ jobs:
       inputs:
         testResultsFormat: NUnit
         testResultsFiles: 'test?.xml'
-        searchFolder: '$(System.DefaultWorkingDirectory)\$(project.name)'
+        searchFolder: '$(System.DefaultWorkingDirectory)\$(project.name)\Builds'
         mergeTestResults: true
         failTaskOnFailedTests: true
       condition: always()

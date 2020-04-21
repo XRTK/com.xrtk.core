@@ -11,8 +11,12 @@ variables:
   - name: LogDirectory
     value: ''
 
-name: $(package.name)-$(Date:yyyyMMdd)$(Rev:.r)
-# name: XRTK.Core-$(System.PullRequest.PullRequestNumber)$(Rev:.r)
+# name: $(package.name)-$(Date:yyyyMMdd)$(Rev:.r)
+name: |
+ ${{ if nq(variables[build.reason], 'PullRequest') }}:
+  $(package.name)-$(Date:yyyyMMdd)$(Rev:.r)
+ ${{ if eq(variables[build.reason], 'PullRequest') }}:
+  $(package.name)-$(System.PullRequest.PullRequestNumber)$(Rev:.r)
 
 pr:
   autoCancel: true

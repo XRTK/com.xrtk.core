@@ -12,6 +12,7 @@ variables:
     value: ''
 
 name: XRTK.Core-$(Date:yyyyMMdd)$(Rev:.r)
+name: ${{ package.name }}-$(Date:yyyyMMdd)$(Rev:.r)
 # name: XRTK.Core-$(System.PullRequest.PullRequestNumber)$(Rev:.r)
 
 pr:

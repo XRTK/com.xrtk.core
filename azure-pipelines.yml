@@ -51,8 +51,6 @@ jobs:
       displayName: 'Install Unity Editor'
 
     - powershell: |
-        New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log -ItemType File -Force
-
         $unityCredentials = (Get-Content "$(Agent.TempDirectory)\xrtk-build-credentials.json" -Raw) | ConvertFrom-Json
 
         if ( -not $unityCredentials ) {
@@ -66,7 +64,11 @@ jobs:
 
         $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
-        echo "##vso[task.setvariable variable=EditorPath]$editorInstance.Path"
+        echo "##vso[task.setvariable variable=EditorPath]$editorPath"
+
+        Write-Host "$(EditorPath)"
+
+        New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log -ItemType File -Force
 
         Write-Host "Activating License..."
         $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru

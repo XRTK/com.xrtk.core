@@ -76,7 +76,7 @@ jobs:
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
             Receive-Job $ljob
-            Start-Sleep -Milliseconds 500
+            Start-Sleep -Milliseconds 100
         }
 
         Receive-Job $ljob
@@ -90,13 +90,16 @@ jobs:
         Write-Host "Starting Unity Unit Tests..."
         New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log -ItemType File -Force
 
+        $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
+        $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
+
         $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -runEditorTests -editorTestsResultFile .\tests.xml -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log`"" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
             Receive-Job $ljob
-            Start-Sleep -Milliseconds 500
+            Start-Sleep -Milliseconds 100
         }
 
         Receive-Job $ljob
@@ -121,13 +124,17 @@ jobs:
     - powershell: |
         Write-Host "Starting Windows x64 Build..."
         New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log -ItemType File -Force
+
+        $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
+        $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
+
         $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget StandaloneWindows64 -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log`"" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
             Receive-Job $ljob
-            Start-Sleep -Milliseconds 500
+            Start-Sleep -Milliseconds 100
         }
 
         Receive-Job $ljob
@@ -140,8 +147,10 @@ jobs:
 
     - powershell: |
         Write-Host "Returning License..."
+
         $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
+
         $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
 

@@ -83,7 +83,6 @@ jobs:
         # wait a bit more to make sure we've got all our log content?
         Start-Sleep -Milliseconds 500
 
-        Get-Job $ljob
         Receive-Job $ljob
         Stop-Job $ljob
         Remove-Job $ljob

@@ -42,6 +42,8 @@ jobs:
     dependsOn: Setup
     continueOnError: true
     steps:
+      - checkout: none #skip checking out the default repository resource
+
       - task: DownloadSecureFile@1
         displayName: 'Download Unity Credentials'
         inputs:
@@ -93,6 +95,8 @@ jobs:
     condition: succeeded('InstallUnityEditor')
     continueOnError: true
     steps:
+      - checkout: none #skip checking out the default repository resource
+
       - powershell: |
           Write-Host "Starting Unity Unit Tests..."
           New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log -ItemType File -Force
@@ -130,6 +134,8 @@ jobs:
     dependsOn: UnitTests
     condition: succeeded('UnitTests')
     steps:
+      - checkout: none #skip checking out the default repository resource
+
       - powershell: |
           Write-Host "Starting Windows x64 Build..."
           New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log -ItemType File -Force
@@ -160,6 +166,8 @@ jobs:
       - UnitTests
     condition: always()
     steps:
+      - checkout: none #skip checking out the default repository resource
+
       - powershell: |
           Write-Host "Returning License..."
 

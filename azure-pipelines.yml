@@ -76,7 +76,6 @@ jobs:
           Receive-Job $ljob
         }
 
-        Start-Sleep -Milliseconds 1000
         Receive-Job $ljob
         Stop-Job $ljob
         Remove-Job $ljob
@@ -99,7 +98,6 @@ jobs:
           Receive-Job $ljob
         }
 
-        Start-Sleep -Milliseconds 1000
         Receive-Job $ljob
         Stop-Job $ljob
         Remove-Job $ljob
@@ -129,7 +127,7 @@ jobs:
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
-            Receive-Job $ljob
+          Receive-Job $ljob
         }
 
         Receive-Job $ljob
@@ -150,11 +148,8 @@ jobs:
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
-            Receive-Job $ljob
+          Receive-Job $ljob
         }
-
-        # wait a bit more to make sure we've got all our log content?
-        Start-Sleep -Milliseconds 500
 
         Receive-Job $ljob
         Stop-Job $ljob

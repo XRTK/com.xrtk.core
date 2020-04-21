@@ -77,11 +77,8 @@ jobs:
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
             Receive-Job $ljob
-            Start-Sleep -Milliseconds 100
+            Start-Sleep -Milliseconds 500
         }
-
-        # wait a bit more to make sure we've got all our log content?
-        Start-Sleep -Milliseconds 500
 
         Receive-Job $ljob
         Stop-Job $ljob
@@ -92,7 +89,21 @@ jobs:
 
     - powershell: |
         Write-Host "Starting Unity Unit Tests..."
-        Start-UnityEditor -Latest -BatchMode -RunEditorTests -EditorTestsResultFile .\tests.xml -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log -Wait
+        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -runEditorTests -editorTestsResultFile .\tests.xml -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log`"" -PassThru
+        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log
+
+        while ( -not $process.HasExited -and $ljob.HasMoreData )
+        {
+            Receive-Job $ljob
+            Start-Sleep -Milliseconds 500
+        }
+
+        Receive-Job $ljob
+        Stop-Job $ljob
+        Remove-Job $ljob
+
+        exit $process.ExitCode
+        # Start-UnityEditor -Latest -BatchMode -RunEditorTests -EditorTestsResultFile .\tests.xml -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log -Wait
       displayName: 'Run Unity Unit Tests'
       timeoutInMinutes: 15
 
@@ -107,23 +118,23 @@ jobs:
       condition: always()
 
     - powershell: |
-        if ( Test-Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log -Type Leaf ) {
-            Get-Content $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log
-        }
-      displayName: 'Print Unit Test Logs'
-      condition: always()
-
-    - powershell: |
         Write-Host "Starting Windows x64 Build..."
-        Start-UnityEditor -Latest -BatchMode -BuildTarget StandaloneWindows64 -ExecuteMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\windows-build.log -Wait
-      displayName: 'Build Windows x64 Unity Player'
+        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget StandaloneWindows64 -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log`"" -PassThru
+        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log
 
-    - powershell: |
-        if ( Test-Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\windows-build.log -Type Leaf ) {
-            Get-Content $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\windows-build.log
+        while ( -not $process.HasExited -and $ljob.HasMoreData )
+        {
+            Receive-Job $ljob
+            Start-Sleep -Milliseconds 500
         }
-      displayName: 'Print Windows Build Logs'
-      condition: always()
+
+        Receive-Job $ljob
+        Stop-Job $ljob
+        Remove-Job $ljob
+
+        exit $process.ExitCode
+        # Start-UnityEditor -Latest -BatchMode -BuildTarget StandaloneWindows64 -ExecuteMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log -Wait
+      displayName: 'Build Windows x64 Unity Player'
 
     - powershell: |
         Write-Host "Returning License..."
@@ -141,7 +152,6 @@ jobs:
         # wait a bit more to make sure we've got all our log content?
         Start-Sleep -Milliseconds 500
 
-        Get-Job $ljob
         Receive-Job $ljob
         Stop-Job $ljob
         Remove-Job $ljob

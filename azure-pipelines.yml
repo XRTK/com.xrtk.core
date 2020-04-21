@@ -76,6 +76,8 @@ jobs:
           Receive-Job $ljob
         }
 
+        Wait-Process -InputObject $process -Timeout 30
+
         Receive-Job $ljob
         Stop-Job $ljob
         Remove-Job $ljob
@@ -90,7 +92,7 @@ jobs:
         $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
 
-        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -runEditorTests -editorTestsResultFile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.xml`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log`"" -PassThru
+        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log`" -editorTestsResultFile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.xml`" -runEditorTests" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
@@ -99,13 +101,14 @@ jobs:
             Start-Sleep -Milliseconds 100
         }
 
+        Wait-Process -InputObject $process -Timeout 30
+
         Receive-Job $ljob
         Stop-Job $ljob
         Remove-Job $ljob
 
         exit $process.ExitCode
       displayName: 'Run Unity Unit Tests'
-      timeoutInMinutes: 15
 
     - task: PublishTestResults@2
       displayName: 'Publish Test Results'

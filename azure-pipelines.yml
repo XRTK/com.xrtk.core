@@ -54,7 +54,7 @@ jobs:
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
         echo "##vso[task.setvariable variable=EditorPath]$editorPath"
 
-        $logDirectory = "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"
+        $logDirectory = `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs`"
         echo "##vso[task.setvariable variable=LogDirectory]logDirectory"
 
         New-Item -Path $(logDirectory)\activation.log -ItemType File -Force

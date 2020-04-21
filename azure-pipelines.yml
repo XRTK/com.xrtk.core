@@ -47,9 +47,9 @@ jobs:
       failOnStderr: true
       displayName: 'Install UnitySetup.Powershell module'
 
-    - powershell: 'Install-Script -Name Invoke-Process'
+    - powershell: 'Install-Script -Name Invoke-Process -Scope CurrentUser -Repository PSGallery -Force'
       failOnStderr: true
-      displayName: 'Install Invoke-Process.ps1'
+      displayName: 'Install Invoke-Process module'
 
     - powershell: 'Install-UnitySetupInstance -Verbose -Installers ( Find-UnitySetupInstaller -Version $(UnityVersion) -Components  ''Windows'', ''Windows_IL2CPP'' -Verbose )'
       displayName: 'Install Unity Editor'

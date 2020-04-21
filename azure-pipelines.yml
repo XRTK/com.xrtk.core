@@ -123,13 +123,11 @@ jobs:
       condition: always()
 
     - powershell: |
-        if ( Test-Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log -Type Leaf ) {
-            Write-Host "Returning License..."
-            $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
-            $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
-            $process = Start-Process "$editorPath" -ArgumentList "-quit -batchmode -returnlicense" -PassThru -Wait
-            exit $process.ExitCode
-        }
+        Write-Host "Returning License..."
+        $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
+        $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
+        $process = Start-Process "$editorPath" -ArgumentList "-quit -batchmode -returnlicense" -PassThru -Wait
+        exit $process.ExitCode
       displayName: 'Return Unity License'
       condition: always()
 

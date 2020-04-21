@@ -46,15 +46,15 @@ jobs:
         Install-Module -Name UnitySetup -AllowPrerelease -RequiredVersion $(UnityPowerShellHelperVersion) -Scope CurrentUser -Repository PSGallery -Force
         Install-UnitySetupInstance -Verbose -Installers ( Find-UnitySetupInstaller -Version $(UnityVersion) -Components  'Windows', 'Windows_IL2CPP' -Verbose )
         Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize
+        $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
+        $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
+        Write-Host ""
+        Write-Host "UnityEditor path set to: " + $editorPath
+        echo "##vso[task.setvariable variable=EditorPath]$editorPath"
       failOnStderr: true
       displayName: 'Install Unity Editor'
 
     - powershell: |
-        $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
-        $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
-        Write-Host $editorPath
-        echo "##vso[task.setvariable variable=EditorPath]$editorPath"
-
         $logDirectory = "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"
         Write-Host $logDirectory
         echo "##vso[task.setvariable variable=LogDirectory]$logDirectory"
@@ -62,7 +62,7 @@ jobs:
         New-Item -Path $logDirectory\activation.log -ItemType File -Force
 
         Write-Host "Activating License..."
-        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $(UnitySerial) -username `"$(UnityUsername)`" -password `"$(UnityPassword)`" -logfile `"$logDirectory\activation.log`"" -PassThru
+        $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $(UnitySerial) -username `"$(UnityUsername)`" -password `"$(UnityPassword)`" -logfile `"$logDirectory\activation.log`"" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $logDirectory\activation.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
@@ -79,8 +79,6 @@ jobs:
       displayName: 'Activate Unity License'
 
     - powershell: |
-        Write-Host "$(EditorPath)"
-        Write-Host "$(LogDirectory)"
         New-Item -Path $(LogDirectory)\tests.log -ItemType File -Force
 
         Write-Host "Starting Unity Unit Tests..."

@@ -53,8 +53,7 @@ jobs:
     - powershell: 'Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize'
       displayName: 'List Unity installs'
     - powershell: |
-        New-Item -ItemType Directory -Force -Path "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"
-
+        New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log -ItemType File -Force
         $unityCredentials = (Get-Content "$(Agent.TempDirectory)\xrtk-build-credentials.json" -Raw) | ConvertFrom-Json
 
         if ( -not $unityCredentials ) {

@@ -81,6 +81,7 @@ jobs:
         Remove-Job $ljob
 
         exit $process.ExitCode
+      failOnStderr: true
       displayName: 'Activate Unity License'
 
     - powershell: |
@@ -103,6 +104,7 @@ jobs:
         Remove-Job $ljob
 
         exit $process.ExitCode
+      failOnStderr: true
       displayName: 'Run Unity Unit Tests'
 
     - task: PublishTestResults@2
@@ -135,6 +137,7 @@ jobs:
         Remove-Job $ljob
 
         exit $process.ExitCode
+      failOnStderr: true
       displayName: 'Build Windows x64 Unity Player'
 
     - powershell: |
@@ -156,12 +159,13 @@ jobs:
         Remove-Job $ljob
 
         exit $process.ExitCode
+      failOnStderr: false
       displayName: 'Return Unity License'
       condition: always()
 
-    - task: PublishPipelineArtifact@0
+    - task: PublishPipelineArtifact@1
       displayName: 'Publish Pipeline Artifact'
       inputs:
-        artifactName: Builds
         targetPath: '$(project.name)/Builds'
+        artifactName: 'PR Validation Build Artifacts'
       condition: always()

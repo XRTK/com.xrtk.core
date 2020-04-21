@@ -33,7 +33,7 @@ pool:
     - unity -equals true
 
 jobs:
-  - job: InstallUnity
+  - job:
     steps:
     - checkout: self
       submodules: recursive

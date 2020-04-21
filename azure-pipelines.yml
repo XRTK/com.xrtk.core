@@ -8,7 +8,7 @@ variables:
     value: 'com.xrtk.core'
 
 name: XRTK.Core-$(Date:yyyyMMdd)$(Rev:.r)
-# name: XRTK.Core-$(System.PullRequest.PullRequestNumber)$(Rev:.r)
+# name: XRTK.Core$(System.PullRequest.PullRequestNumber)$(Rev:.r)
 
 pr:
   autoCancel: true
@@ -28,7 +28,7 @@ pr:
 
 pool:
   name: Azure Pipelines
-  vmImage: 'windows-latest'
+  vmImage: 'vs2017-win2016'
   demands:
     - unity -equals true
 

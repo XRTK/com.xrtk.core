@@ -23,7 +23,7 @@ namespace XRTK.Services.CameraSystem
         #region IMixedRealityService Implementation
 
         /// <inheritdoc />
-        public override uint Priority => 1;
+        public override uint Priority => 0;
 
         /// <inheritdoc />
         public override void Destroy()

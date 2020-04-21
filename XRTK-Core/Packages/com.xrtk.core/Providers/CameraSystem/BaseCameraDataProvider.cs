@@ -106,6 +106,9 @@ namespace XRTK.Providers.CameraSystem
         #region IMixedRealitySerivce Implementation
 
         /// <inheritdoc />
+        public override uint Priority => 0;
+
+        /// <inheritdoc />
         public override void Initialize()
         {
             base.Initialize();

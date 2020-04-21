@@ -93,7 +93,7 @@ jobs:
         $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
 
-        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -runEditorTests -editorTestsResultFile .\tests.xml -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log`"" -PassThru
+        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -runEditorTests -editorTestsResultFile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\tests.xml`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log`"" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
@@ -107,7 +107,6 @@ jobs:
         Remove-Job $ljob
 
         exit $process.ExitCode
-        # Start-UnityEditor -Latest -BatchMode -RunEditorTests -EditorTestsResultFile .\tests.xml -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log -Wait
       displayName: 'Run Unity Unit Tests'
       timeoutInMinutes: 15
 
@@ -142,7 +141,6 @@ jobs:
         Remove-Job $ljob
 
         exit $process.ExitCode
-        # Start-UnityEditor -Latest -BatchMode -BuildTarget StandaloneWindows64 -ExecuteMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log -Wait
       displayName: 'Build Windows x64 Unity Player'
 
     - powershell: |

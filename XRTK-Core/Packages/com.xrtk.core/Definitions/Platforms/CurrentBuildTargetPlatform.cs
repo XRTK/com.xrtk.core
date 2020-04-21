@@ -22,27 +22,25 @@ namespace XRTK.Definitions.Platforms
         /// <returns>True, if any build target is active.</returns>
         public static bool IsBuildTargetActive(List<IMixedRealityPlatform> platforms)
         {
+            if (!Application.isEditor) { return false; }
+
             var isEditor = false;
             var isBuildTargetActive = false;
             var isEditorPlatformActive = false;
 
-            for (var i = 0; i < platforms.Count; i++)
+            foreach (var platform in platforms)
             {
-                var platform = platforms[i];
-
-                if (platform is AllPlatforms)
+                switch (platform)
                 {
-                    return true;
-                }
-
-                if (platform is CurrentBuildTargetPlatform)
-                {
-                    isEditor = true;
-                    isEditorPlatformActive = platform.IsAvailable;
-                }
-                else
-                {
-                    isBuildTargetActive |= platform.IsBuildTargetAvailable;
+                    case AllPlatforms _:
+                        return true;
+                    case CurrentBuildTargetPlatform _:
+                        isEditor = true;
+                        isEditorPlatformActive = platform.IsAvailable;
+                        break;
+                    default:
+                        isBuildTargetActive |= platform.IsBuildTargetAvailable;
+                        break;
                 }
             }
 

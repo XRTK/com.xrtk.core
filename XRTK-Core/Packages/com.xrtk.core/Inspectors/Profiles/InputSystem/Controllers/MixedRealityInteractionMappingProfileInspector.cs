@@ -73,6 +73,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
             EditorGUILayout.PropertyField(inputName);
             // EditorGUILayout.PropertyField(stateChangeType); TODO Implement
             EditorGUILayout.PropertyField(axisType);
+            EditorGUILayout.PropertyField(inputType);
             var currentAxisType = (AxisType)axisType.intValue;
             inputActionDropdown.OnGui(new GUIContent(inputAction.displayName, inputAction.tooltip), inputAction, currentAxisType);
 

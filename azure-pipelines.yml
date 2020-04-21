@@ -80,9 +80,10 @@ jobs:
             Start-Sleep -Milliseconds 100
         }
 
-        # wait a bit more to make sure we've got all our log content
+        # wait a bit more to make sure we've got all our log content?
         Start-Sleep -Milliseconds 500
 
+        Get-Job $ljob
         Receive-Job $ljob
         Stop-Job $ljob
         Remove-Job $ljob
@@ -129,7 +130,7 @@ jobs:
         Write-Host "Returning License..."
         $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
-        $process = Start-Process "$editorPath" -ArgumentList "-quit -batchmode -returnlicense" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru
+        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
@@ -138,9 +139,10 @@ jobs:
             Start-Sleep -Milliseconds 100
         }
 
-        # wait a bit more to make sure we've got all our log content
+        # wait a bit more to make sure we've got all our log content?
         Start-Sleep -Milliseconds 500
 
+        Get-Job $ljob
         Receive-Job $ljob
         Stop-Job $ljob
         Remove-Job $ljob

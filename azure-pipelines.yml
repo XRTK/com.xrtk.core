@@ -55,8 +55,6 @@ jobs:
     - powershell: |
         New-Item -ItemType Directory -Force -Path "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"
 
-        $logFIle = New-Item -Path "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log" -ItemType File -Force
-
         $unityCredentials = (Get-Content "$(Agent.TempDirectory)\xrtk-build-credentials.json" -Raw) | ConvertFrom-Json
 
         if ( -not $unityCredentials ) {
@@ -72,8 +70,8 @@ jobs:
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
         Write-Host $editorInstance.Path
         Write-Host "Activating License..."
-        $process = Start-Process "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile `"$logFile.FullName`"" -PassThru
-        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $logFile.FullName
+        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru
+        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
@@ -87,7 +85,7 @@ jobs:
 
         if( $process.ExitCode -ne 0 ) {
             Write-Host "Failed to activate license"
-            Get-Content $logFile.FullName
+            Get-Content $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
         }
 
         exit $process.ExitCode

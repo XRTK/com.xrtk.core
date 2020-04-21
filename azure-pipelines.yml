@@ -71,13 +71,12 @@ jobs:
         $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru
         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
 
-        while ( -not $process.HasExited )
+        while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
           Receive-Job $ljob
         }
 
-        Wait-Process -InputObject $process -Timeout 30
-
+        Start-Sleep -Milliseconds 1000
         Receive-Job $ljob
         Stop-Job $ljob
         Remove-Job $ljob
@@ -97,12 +96,10 @@ jobs:
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
-            Receive-Job $ljob
-            Start-Sleep -Milliseconds 100
+          Receive-Job $ljob
         }
 
-        Wait-Process -InputObject $process -Timeout 30
-
+        Start-Sleep -Milliseconds 1000
         Receive-Job $ljob
         Stop-Job $ljob
         Remove-Job $ljob
@@ -133,7 +130,6 @@ jobs:
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
             Receive-Job $ljob
-            Start-Sleep -Milliseconds 100
         }
 
         Receive-Job $ljob

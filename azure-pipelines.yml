@@ -38,13 +38,10 @@ jobs:
     - checkout: self
       submodules: recursive
 
-    - powershell: 'Install-Script -Name Invoke-Process -Scope CurrentUser -Repository PSGallery -Force'
-      failOnStderr: true
-      displayName: 'Install Invoke-Process script'
-
-    - powershell: 'Get-InstalledScript'
-      failOnStderr: true
-      displayName: 'Check Script Install'
+    - task: DownloadSecureFile@1
+      displayName: 'Download Unity Credentials'
+      inputs:
+        secureFile: '47a1e34d-3344-416c-85c8-0d055ae43ddc'
 
     - powershell: 'Install-Module -Name UnitySetup -AllowPrerelease -RequiredVersion $(UnityPowerShellHelperVersion) -Scope CurrentUser -Repository PSGallery -Force'
       failOnStderr: true
@@ -55,14 +52,10 @@ jobs:
 
     - powershell: 'Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize'
       displayName: 'List Unity installs'
-
-    - task: DownloadSecureFile@1
-      displayName: 'Download Unity Credentials'
-      inputs:
-        secureFile: '47a1e34d-3344-416c-85c8-0d055ae43ddc'
-
     - powershell: |
         New-Item -ItemType Directory -Force -Path "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"
+
+        $logFIle = New-Item -Path "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log" -ItemType File -Force
 
         $unityCredentials = (Get-Content "$(Agent.TempDirectory)\xrtk-build-credentials.json" -Raw) | ConvertFrom-Json
 
@@ -79,7 +72,25 @@ jobs:
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
         Write-Host $editorInstance.Path
         Write-Host "Activating License..."
-        Invoke-Process "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru -Wait
+        $process = Start-Process "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile `"`$logFile.FullName"" -PassThru -Wait
+        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $logFile.FullName
+
+        while ( -not $process.HasExited -and $ljob.HasMoreData )
+        {
+            Receive-Job $ljob
+            Start-Sleep -Milliseconds 200
+        }
+
+        Receive-Job $ljob
+        Stop-Job $ljob
+        Remove-Job $ljob
+
+        if( $process.ExitCode -ne 0 ) {
+            Write-Host "Failed to activate license"
+            Get-Content $logFile.FullName
+        }
+
+        exit $process.ExitCode
       displayName: 'Activate Unity License'
 
     - powershell: |

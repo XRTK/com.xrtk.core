@@ -52,6 +52,7 @@ jobs:
 
     - powershell: 'Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize'
       displayName: 'List Unity installs'
+
     - powershell: |
         New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log -ItemType File -Force
 
@@ -111,7 +112,7 @@ jobs:
 
     - powershell: |
         Write-Host "Starting Windows x64 Build..."
-        Start-UnityEditor -Latest -BatchMode -BuildTarget StandaloneWindows64 -ExecuteMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\windows-build.log -Wait
+        Start-UnityEditor -Latest -BatchMode -BuildTarget StandaloneWindows64 -ExecuteMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -LogFile $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\windows-build.log -Wait -PassThru
       displayName: 'Build Windows x64 Unity Player'
 
     - powershell: |

@@ -145,13 +145,12 @@ jobs:
         $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Latest
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
 
-        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru
-        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
+        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\deactivation.log`"" -PassThru
+        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\deactivation.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
             Receive-Job $ljob
-            Start-Sleep -Milliseconds 100
         }
 
         # wait a bit more to make sure we've got all our log content?

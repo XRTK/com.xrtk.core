@@ -57,7 +57,7 @@ jobs:
 
         $logDirectory = "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"
         Write-Host $logDirectory
-        echo "##vso[task.setvariable variable=LogDirectory]logDirectory"
+        echo "##vso[task.setvariable variable=LogDirectory]$logDirectory"
 
         New-Item -Path $(logDirectory)\activation.log -ItemType File -Force
 

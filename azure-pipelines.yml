@@ -8,6 +8,8 @@ variables:
     value: 'com.xrtk.core'
   - name: EditorPath
     value: ''
+  - name: LogDirectory
+    value: ''
 
 name: XRTK.Core-$(Date:yyyyMMdd)$(Rev:.r)
 # name: XRTK.Core$(System.PullRequest.PullRequestNumber)$(Rev:.r)
@@ -70,11 +72,13 @@ jobs:
 
         Write-Host "$(EditorPath)"
 
-        New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log -ItemType File -Force
+        echo "##vso[task.setvariable variable=LogDirectory]$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"
+
+        New-Item -Path $(LogDirectory)\activation.log -ItemType File -Force
 
         Write-Host "Activating License..."
-        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log`"" -PassThru
-        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
+        $process = Start-Process -FilePath "$editorPath" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $serial -username `"$username`" -password `"$password`" -logfile `"$(LogDirectory)\activation.log`"" -PassThru
+        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\activation.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
@@ -91,10 +95,10 @@ jobs:
 
     - powershell: |
         Write-Host "Starting Unity Unit Tests..."
-        New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log -ItemType File -Force
+        New-Item -Path $(LogDirectory)\tests.log -ItemType File -Force
 
-        $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log`" -editorTestsResultFile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.xml`" -runEditorTests" -PassThru
-        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\tests.log
+        $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -logfile `"$(LogDirectory)\tests.log`" -editorTestsResultFile `"$(LogDirectory)\tests.xml`" -runEditorTests" -PassThru
+        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\tests.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
@@ -114,17 +118,17 @@ jobs:
       inputs:
         testResultsFormat: NUnit
         testResultsFiles: 'test?.xml'
-        searchFolder: '$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs'
+        searchFolder: '$(LogDirectory)'
         mergeTestResults: true
         failTaskOnFailedTests: true
       condition: always()
 
     - powershell: |
         Write-Host "Starting Windows x64 Build..."
-        New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log -ItemType File -Force
+        New-Item -Path $(LogDirectory)\StandaloneWindows64.log -ItemType File -Force
 
-        $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget StandaloneWindows64 -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log`"" -PassThru
-        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\StandaloneWindows64.log
+        $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget StandaloneWindows64 -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$(LogDirectory)\StandaloneWindows64.log`"" -PassThru
+        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\StandaloneWindows64.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {
@@ -142,8 +146,8 @@ jobs:
     - powershell: |
         Write-Host "Returning License..."
 
-        $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\deactivation.log`"" -PassThru
-        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\deactivation.log
+        $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$(LogDirectory)\deactivation.log`"" -PassThru
+        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\deactivation.log
 
         while ( -not $process.HasExited -and $ljob.HasMoreData )
         {

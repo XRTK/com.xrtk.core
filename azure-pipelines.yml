@@ -54,6 +54,7 @@ jobs:
       displayName: 'List Unity installs'
     - powershell: |
         New-Item -Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log -ItemType File -Force
+
         $unityCredentials = (Get-Content "$(Agent.TempDirectory)\xrtk-build-credentials.json" -Raw) | ConvertFrom-Json
 
         if ( -not $unityCredentials ) {
@@ -82,20 +83,8 @@ jobs:
         Stop-Job $ljob
         Remove-Job $ljob
 
-        if( $process.ExitCode -ne 0 ) {
-            Write-Host "Failed to activate license"
-            Get-Content $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
-        }
-
         exit $process.ExitCode
       displayName: 'Activate Unity License'
-
-    - powershell: |
-        if ( Test-Path $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log -Type Leaf ) {
-            Get-Content $(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs\activation.log
-        }
-      displayName: 'Print Activation Logs'
-      condition: always()
 
     - powershell: |
         Write-Host "Starting Unity Unit Tests..."

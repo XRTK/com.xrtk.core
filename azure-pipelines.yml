@@ -12,7 +12,7 @@ variables:
     value: ''
 
 name: XRTK.Core-$(Date:yyyyMMdd)$(Rev:.r)
-# name: XRTK.Core$(System.PullRequest.PullRequestNumber)$(Rev:.r)
+# name: XRTK.Core-$(System.PullRequest.PullRequestNumber)$(Rev:.r)
 
 pr:
   autoCancel: true
@@ -48,8 +48,7 @@ jobs:
         Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize
         $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Version $(UnityVersion)
         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
-        Write-Host ""
-        Write-Host "UnityEditor path set to: " + $editorPath
+        Write-Host "UnityEditor path set to: $editorPath"
         echo "##vso[task.setvariable variable=EditorPath]$editorPath"
       failOnStderr: true
       displayName: 'Install Unity Editor'

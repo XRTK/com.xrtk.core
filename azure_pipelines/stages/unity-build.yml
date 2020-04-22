@@ -5,13 +5,13 @@ parameters:
 
 stages:
 - stage: Build for ${{ format('{0} ({1})', parameters.target, parameters.image) }}
-  pool:
-    name: 'Azure Pipelines'
-    vmImage: ${{ parameters.image }}
-    demands:
-      - unity -equals true
   jobs:
-  - job:
+    - job: Build
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: ${{ parameters.image }}
+        demands:
+          - unity -equals true
       steps:
       - checkout: self
         submodules: recursive

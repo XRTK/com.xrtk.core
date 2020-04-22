@@ -1,10 +1,14 @@
 steps:
   - powershell: |
-      New-Item -Path $(LogDirectory)\${{ parameters.target }}.log -ItemType File -Force
       Write-Host "Starting ${{ parameters.target }} Build..."
+      $logPath = $(LogDirectory)\${{ parameters.target }}.log
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$logPath`"" -PassThru
 
-      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$(LogDirectory)\${{ parameters.target }}.log`"" -PassThru
-      $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\${{ parameters.target }}.log
+      while ( -not (Test-Path $logPath -Type Leaf) ) {
+          Start-Sleep -Milliseconds 100
+      }
+
+      $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\$logPath
 
       while ( -not $process.HasExited )
       {

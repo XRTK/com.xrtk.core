@@ -1,10 +1,14 @@
 steps:
   - powershell: |
-      New-Item -Path $(LogDirectory)\deactivation.log -ItemType File -Force
       Write-Host "Returning License..."
+      $logPath = $(LogDirectory)\deactivation.log
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$logPath`"" -PassThru
 
-      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$(LogDirectory)\deactivation.log`"" -PassThru
-      $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\deactivation.log
+      while ( -not (Test-Path $logPath -Type Leaf) ) {
+          Start-Sleep -Milliseconds 100
+      }
+
+      $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $logPath
 
       while ( -not $process.HasExited )
       {

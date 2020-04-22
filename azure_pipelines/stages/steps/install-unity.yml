@@ -12,12 +12,19 @@ steps:
 
   - powershell: |
       $logDirectory = "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"
+      New-Item -ItemType Directory -Force -Path $logDirectory
       echo "##vso[task.setvariable variable=LogDirectory]$logDirectory"
-      New-Item -Path $logDirectory\activation.log -ItemType File -Force
 
       Write-Host "Activating License..."
-      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $(UnitySerial) -username `"$(UnityUsername)`" -password `"$(UnityPassword)`" -logfile `"$logDirectory\activation.log`"" -PassThru
-      $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $logDirectory\activation.log
+
+      $logPath = $logDirectory\activation.log
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $(UnitySerial) -username `"$(UnityUsername)`" -password `"$(UnityPassword)`" -logfile `"$logPath`"" -PassThru
+
+      while ( -not (Test-Path $logPath -Type Leaf) ) {
+          Start-Sleep -Milliseconds 100
+      }
+
+      $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $logPath
 
       while ( -not $process.HasExited )
       {

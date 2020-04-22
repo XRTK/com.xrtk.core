@@ -1,10 +1,14 @@
 steps:
   - powershell: |
-      New-Item -Path $(LogDirectory)\${{ parameters.target }}-tests.log -ItemType File -Force
       Write-Host "Starting ${{ parameters.target }} Unit Tests..."
+      $logPath = $(LogDirectory)\${{ parameters.target }}-tests.log
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -logfile `"$logPath`" -editorTestsResultFile `"$(LogDirectory)\${{ parameters.target }}-tests.xml`" -runEditorTests" -PassThru
 
-      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -logfile `"$(LogDirectory)\${{ parameters.target }}-tests.log`" -editorTestsResultFile `"$(LogDirectory)\${{ parameters.target }}-tests.xml`" -runEditorTests" -PassThru
-      $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\${{ parameters.target }}-tests.log
+      while ( -not (Test-Path $logPath -Type Leaf) ) {
+          Start-Sleep -Milliseconds 100
+      }
+
+      $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\$logPath
 
       while ( -not $process.HasExited )
       {

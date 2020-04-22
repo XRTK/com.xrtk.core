@@ -15,8 +15,8 @@ stages:
       - ${{ each item in parameters.targets }}:
         - template: steps/run-unity-tests.yml
           parameters:
-            target: ${{ item.name }}
+            target: ${{ item.value }}
         - template: steps/build-unity-player.yml
           parameters:
-            target: ${{ item.name }}
+            target: ${{ item.value }}
       - template: steps/release-unity.yml

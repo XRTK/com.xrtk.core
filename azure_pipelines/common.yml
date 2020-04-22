@@ -21,7 +21,10 @@ parameters:
 stages:
 #- ${{ each pair in parameters.os }}:
   - template: stages/unity-build.yml
-#    parameters:
+    parameters:
+      image: windows-latest
+      target: StandaloneWindows64
+      components: '"Windows", "Windows_IL2CPP"'
 #      platform: ${{ pair.key }}
 #      ${{ insert }}: ${{ pair.value }}
 

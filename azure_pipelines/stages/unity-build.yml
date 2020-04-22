@@ -1,7 +1,7 @@
-parameters:
-- name: buildDocs
-  type: boolean
-  default: false
+# parameters:
+# - name: buildDocs
+#   type: boolean
+#   default: false
 
 stages:
 - stage: Build for ${{ format('{0} ({1})', parameters.target, parameters.image) }}
@@ -99,28 +99,28 @@ stages:
         failOnStderr: true
         displayName: 'Build ${{ parameters.target }} Player'
 
-      - powershell: |
-          choco install docfx
+      # - powershell: |
+      #     choco install docfx
 
-          docfx $(System.DefaultWorkingDirectory)\docfx_project\docfx.json
+      #     docfx $(System.DefaultWorkingDirectory)\docfx_project\docfx.json
 
-          git config user.email "XRTK-Build-Bot@users.noreply.github.com"
-          git config user.name "XRTK-Build-Bot"
-          git status
-          git add ./docs
-          git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\README.md"
-          git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\LICENSE.md"
-          git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\.github"
-          git status
-          git commit -m "docfx build $(project.version)@$(Build.SourceVersion)"
-          git checkout -b docfx
-          git fetch origin master
-          git checkout master
-          git merge docfx
-          git branch -D docfx
-          git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git master
-        displayName: 'Build Docfx'
-        condition: ${{ parameters.buildDocs }}
+      #     git config user.email "XRTK-Build-Bot@users.noreply.github.com"
+      #     git config user.name "XRTK-Build-Bot"
+      #     git status
+      #     git add ./docs
+      #     git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\README.md"
+      #     git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\LICENSE.md"
+      #     git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\.github"
+      #     git status
+      #     git commit -m "docfx build $(project.version)@$(Build.SourceVersion)"
+      #     git checkout -b docfx
+      #     git fetch origin master
+      #     git checkout master
+      #     git merge docfx
+      #     git branch -D docfx
+      #     git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git master
+      #   displayName: 'Build Docfx'
+      #   condition: ${{ parameters.buildDocs }}
 
       - powershell: |
           New-Item -Path $(LogDirectory)\deactivation.log -ItemType File -Force

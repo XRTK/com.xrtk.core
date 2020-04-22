@@ -773,16 +773,17 @@ namespace XRTK.Services
 
                 if (TryCreateAndRegisterService(configuration, out var serviceInstance))
                 {
-                    if (configuration.Profile is IMixedRealityServiceProfile<IMixedRealityDataProvider> profile)
+                    if (configuration.Profile is IMixedRealityServiceProfile<IMixedRealityDataProvider> profile &&
+                        !TryRegisterDataProviderConfigurations(profile.RegisteredServiceConfigurations, serviceInstance))
                     {
-                        TryRegisterDataProviderConfigurations(profile.RegisteredServiceConfigurations, serviceInstance);
+                        anyFailed = true;
                     }
-
-                    continue;
                 }
-
-                Debug.LogError($"Failed to start {configuration.Name}!");
-                anyFailed = true;
+                else
+                {
+                    Debug.LogError($"Failed to start {configuration.Name}!");
+                    anyFailed = true;
+                }
             }
 
             return !anyFailed;

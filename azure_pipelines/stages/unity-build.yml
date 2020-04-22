@@ -9,16 +9,20 @@ stages:
         demands:
           - unity -equals true
       steps:
-      - checkout: self
-        submodules: recursive
-      - template: steps/install-unity.yml
-        parameters:
-          components: ${{ parameters.components }}
-      - ${{ each item in parameters.targets }}:
-        - template: steps/run-unity-tests.yml
-          parameters:
-            target: ${{ item.value }}
-        - template: steps/build-unity-player.yml
-          parameters:
-            target: ${{ item.value }}
-      - template: steps/release-unity.yml
+      - checkout: none
+      - ${{ each parameter in parameters }}:
+        - script: echo ${{ parameter.Key }}
+        - script: echo ${{ parameter.Value }}
+      # - checkout: self
+      #   submodules: recursive
+      # - template: steps/install-unity.yml
+      #   parameters:
+      #     components: ${{ parameters.components }}
+      # - ${{ each item in parameters.targets }}:
+      #   - template: steps/run-unity-tests.yml
+      #     parameters:
+      #       target: ${{ item.value }}
+      #   - template: steps/build-unity-player.yml
+      #     parameters:
+      #       target: ${{ item.value }}
+      # - template: steps/release-unity.yml

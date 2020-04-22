@@ -1,17 +1,20 @@
 variables:
-  project.folder: 'XRTK'
-  project.name: 'XRTK-Core'
-  package.name: 'com.xrtk.core'
-  project.upmSha: ''
-  EditorPath: ''
-  LogDirectory: ''
-  ${{ if nq(variables[build.reason], 'PullRequest') }}:
-    pipelineName: $(package.name)-$(Date:yyyyMMdd)$(Rev:.r)
-  ${{ if eq(variables[build.reason], 'PullRequest') }}:
-    pipelineName: $(package.name)-$(System.PullRequest.PullRequestNumber)$(Rev:.r)
+  - group: Global Pipeline Settings
+  - group: Discord Webhook Publishing Variables
+  - name: project.folder
+    value: 'XRTK'
+  - name: project.name
+    value: 'XRTK-Core'
+  - name: package.name
+    value: 'com.xrtk.core'
+  - name: project.upmSha
+    value: ''
+  - name: EditorPath
+    value: ''
+  - name: LogDirectory
+    value: ''
 
-name: $(pipelineName)
-# name: $(package.name)-$(Date:yyyyMMdd)$(Rev:.r)
+name: $(package.name)-$(Date:yyyyMMdd)$(Rev:.r)
 
 pr:
   autoCancel: true

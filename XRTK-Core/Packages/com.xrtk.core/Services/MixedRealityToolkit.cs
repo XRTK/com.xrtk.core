@@ -756,7 +756,7 @@ namespace XRTK.Services
         /// <typeparam name="T">The interface type for the <see cref="IMixedRealityService"/> to be registered.</typeparam>
         /// <param name="configurations">The list of <see cref="MixedRealityServiceConfiguration{T}"/>s.</param>
         /// <returns>True, if all configurations successfully created and registered their services.</returns>
-        public static bool TryRegisterServiceConfigurations<T>(MixedRealityServiceConfiguration<T>[] configurations) where T : IMixedRealityService
+        public static bool TryRegisterServiceConfigurations<T>(IMixedRealityServiceConfiguration<T>[] configurations) where T : IMixedRealityService
         {
             bool anyFailed = false;
 
@@ -773,7 +773,7 @@ namespace XRTK.Services
 
                 if (TryCreateAndRegisterService(configuration, out var serviceInstance))
                 {
-                    if (configuration.Profile is BaseMixedRealityServiceProfile<IMixedRealityDataProvider> profile)
+                    if (configuration.Profile is IMixedRealityServiceProfile<IMixedRealityDataProvider> profile)
                     {
                         TryRegisterDataProviderConfigurations(profile.RegisteredServiceConfigurations, serviceInstance);
                     }
@@ -795,7 +795,7 @@ namespace XRTK.Services
         /// <param name="configurations">The list of <see cref="MixedRealityServiceConfiguration{T}"/>s.</param>
         /// <param name="serviceParent">The <see cref="IMixedRealityService"/> that the <see cref="IMixedRealityDataProvider"/> will be assigned to.</param>
         /// <returns>True, if all configurations successfully created and registered their data providers.</returns>
-        public static bool TryRegisterDataProviderConfigurations<T>(MixedRealityServiceConfiguration<T>[] configurations, IMixedRealityService serviceParent) where T : IMixedRealityDataProvider
+        public static bool TryRegisterDataProviderConfigurations<T>(IMixedRealityServiceConfiguration<T>[] configurations, IMixedRealityService serviceParent) where T : IMixedRealityDataProvider
         {
             bool anyFailed = false;
 

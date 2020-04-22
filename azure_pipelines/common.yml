@@ -13,10 +13,10 @@ parameters:
         image: macOS-latest
         components: '"Mac", "Mac_IL2CPP"'
         target: StandaloneOSX
-    linux:
-      image: ubuntu-latest
-      components: '"Linux"'
-      target: StandaloneLinux64
+      linux:
+        image: ubuntu-latest
+        components: '"Linux"'
+        target: StandaloneLinux64
 
 stages:
 - ${{ each pair in parameters.os }}:

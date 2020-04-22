@@ -4,9 +4,9 @@
 #   default: false
 
 stages:
-- stage: Build for ${{ format('{0} ({1})', parameters.target, parameters.image) }}
+- stage: build_stage_${{ format('{0}_({1})', parameters.target, parameters.image) }}
   jobs:
-    - job: Build
+    - job: build_job_${{ format('{0}_({1})', parameters.target, parameters.image) }}
       pool:
         name: 'Azure Pipelines'
         vmImage: ${{ parameters.image }}

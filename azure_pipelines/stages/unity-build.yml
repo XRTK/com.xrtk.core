@@ -13,13 +13,13 @@ stages:
         submodules: recursive
       - template: steps/install-unity.yml
         parameters:
-          components: ${{ parameters.components }}
+          ${{ insert }}: ${{ parameters.components }}
       - template: steps/run-unity-tests.yml
         parameters:
-          components: ${{ parameters.target }}
+          ${{ insert }}: ${{ parameters.target }}
       - template: steps/build-unity-player.yml
         parameters:
-          components: ${{ parameters.target }}
+          ${{ insert }}: ${{ parameters.target }}
       # - ${{ each item in parameters.targets }}:
       #   - template: steps/run-unity-tests.yml
       #     parameters:

@@ -1,4 +1,18 @@
 parameters:
+  - name: 'platform'
+    type: object
+    default:
+      windows:
+  - name: 'image'
+    type: string
+    default: 'windows-latest'
+  - name: 'components'
+    type: string
+    default:
+      - Windows
+      - Windows_IL2CPP
+      - UWP_IL2CPP
+      - Android
   - name: 'targets'
     type: string
     default:

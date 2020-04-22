@@ -2,7 +2,7 @@ parameters:
   - name: os
     type: object
     default:
-      Windows:
+      windows:
         image: windows-latest
         components: '"Windows", "Windows_IL2CPP", "UWP_IL2CPP", "Android"'
         # https://github.com/microsoft/unitysetup.powershell installer component options
@@ -14,12 +14,12 @@ parameters:
         # Unity -buildTarget command line args https://docs.unity3d.com/Manual/CommandLineArguments.html
         # 'StandaloneOSX', 'StandaloneWindows', 'iOS', 'Android', 'StandaloneLinux', 'StandaloneWindows64', 'WebGL',
         # 'WSAPlayer', 'StandaloneLinux64', 'StandaloneLinuxUniversal', 'Tizen', 'PSP2', 'PS4', 'XBoxOne', 'N3DS', 'WiiU', 'tvOS', 'Switch', 'Lumin'
-      MacOS:
+      macOS:
         image: macOS-latest
         components: '"Mac", "Mac_IL2CPP"'
         # targets:
         #   - StandaloneOSX
-      Linux:
+      linux:
         image: ubuntu-latest
         components: '"Linux"'
         # targets:
@@ -28,8 +28,8 @@ parameters:
 stages:
   - template: stages/unity-build.yml
     parameters:
-      platform: Windows
-      ${{ insert }}: ${{ parameters.os.Windows }}
+      platform: windows
+      ${{ insert }}: ${{ parameters.os.windows }}
 
 # - template: stages/publish.yml
 #   parameters:

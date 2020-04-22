@@ -23,7 +23,7 @@ steps:
     displayName: 'Publish ${{ parameters.target }} Test Results'
     inputs:
       testResultsFormat: NUnit
-      testResultsFiles: 'test?.xml'
+      testResultsFiles: '*test?.xml'
       searchFolder: '$(LogDirectory)'
       mergeTestResults: true
       failTaskOnFailedTests: true

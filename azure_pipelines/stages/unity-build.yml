@@ -1,6 +1,14 @@
+parameters:
+  - name: 'targets'
+    type: string
+    default:
+      - StandaloneWindows64
+      - WSAPlayer
+      - Android
+
 stages:
 - stage:
-  displayName: ${{ format('{0} build ({1})', parameters.platform, parameters.image) }}
+  displayName: ${{ format('{0} Build', parameters.platform, parameters.image) }}
   jobs:
     - job:
       pool:

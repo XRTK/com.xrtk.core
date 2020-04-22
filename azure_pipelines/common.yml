@@ -1,0 +1,31 @@
+parameters:
+  - name: os
+    type: object
+    default:
+      windows:
+        image: windows-latest
+        components: '"Windows", "Windows_IL2CPP"'
+        # UWP_IL2CPP, Lumin, Android, iOS, Mac, Mac_IL2CPP , WebGL
+        target: StandaloneWindows64
+        # 'StandaloneOSX', 'StandaloneWindows', 'iOS', 'Android', 'StandaloneLinux', 'StandaloneWindows64', 'WebGL',
+        # 'WSAPlayer', 'StandaloneLinux64', 'StandaloneLinuxUniversal', 'Tizen', 'PSP2', 'PS4', 'XBoxOne', 'N3DS', 'WiiU', 'tvOS', 'Switch', 'Lumin'
+      macOS:
+        image: macOS-latest
+        components: '"Mac", "Mac_IL2CPP"'
+        target: StandaloneOSX
+    linux:
+      image: ubuntu-latest
+      components: '"Linux"'
+      target: StandaloneLinux64
+
+stages:
+- ${{ each pair in parameters.os }}:
+  - template: stages/unity-build.yml
+    parameters:
+      platform: ${{ pair.key }}
+      ${{ insert }}: ${{ pair.value }}
+
+# - template: stages/publish.yml
+#   parameters:
+#     shouldRun: and(eq(variables[build.reason], 'IndividualCI'), eq(variables[build.sourceBranchName], 'master'))
+#     vmImage: ${{ parameters.os.windows.image }}

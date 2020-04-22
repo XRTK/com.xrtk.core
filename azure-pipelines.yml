@@ -16,6 +16,21 @@ variables:
 
 name: $(package.name)-$(Date:yyyyMMdd)$(Rev:.r)
 
+# trigger:
+#   batch: true
+#   branches:
+#     include:
+#     - master
+#   paths:
+#     include:
+#       - docfx_project
+#       - $(project.name)/*
+#     exclude:
+#       - '*'
+#       - $(project.name)/Packages/$(package.name)/README.md
+#       - $(project.name)/Packages/$(package.name)/LICENSE.md
+#       - $(project.name)/Packages/$(package.name)/.github/*
+
 pr:
   autoCancel: true
   branches:
@@ -32,127 +47,127 @@ pr:
       - $(project.name)/Packages/$(package.name)/LICENSE.md
       - $(project.name)/Packages/$(package.name)/.github/*
 
-pool:
-  name: Azure Pipelines
-  vmImage: 'windows-latest'
-  demands:
-    - unity -equals true
+# pool:
+#   name: Azure Pipelines
+#   vmImage: 'windows-latest'
+#   demands:
+#     - unity -equals true
 
-jobs:
-  - job: pr_validation
-    variables:
-    - group: Global Pipeline Settings
-    steps:
-    - checkout: self
-      submodules: recursive
+# jobs:
+#   - job: pr_validation
+#     variables:
+#     - group: Global Pipeline Settings
+#     steps:
+#     - checkout: self
+#       submodules: recursive
 
-    - powershell: |
-        Install-Module -Name UnitySetup -AllowPrerelease -RequiredVersion $(UnityPowerShellHelperVersion) -Scope CurrentUser -Repository PSGallery -Force
-        Install-UnitySetupInstance -Verbose -Installers ( Find-UnitySetupInstaller -Version $(UnityVersion) -Components  'Windows', 'Windows_IL2CPP' -Verbose )
-        Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize
-        $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Version $(UnityVersion)
-        $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
-        Write-Host "UnityEditor path set to: $editorPath"
-        echo "##vso[task.setvariable variable=EditorPath]$editorPath"
-      failOnStderr: true
-      displayName: 'Install Unity Editor'
+#     - powershell: |
+#         Install-Module -Name UnitySetup -AllowPrerelease -RequiredVersion $(UnityPowerShellHelperVersion) -Scope CurrentUser -Repository PSGallery -Force
+#         Install-UnitySetupInstance -Verbose -Installers ( Find-UnitySetupInstaller -Version $(UnityVersion) -Components  'Windows', 'Windows_IL2CPP' -Verbose )
+#         Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize
+#         $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Version $(UnityVersion)
+#         $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
+#         Write-Host "UnityEditor path set to: $editorPath"
+#         echo "##vso[task.setvariable variable=EditorPath]$editorPath"
+#       failOnStderr: true
+#       displayName: 'Install Unity Editor'
 
-    - powershell: |
-        $logDirectory = "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"
-        echo "##vso[task.setvariable variable=LogDirectory]$logDirectory"
-        New-Item -Path $logDirectory\activation.log -ItemType File -Force
+#     - powershell: |
+#         $logDirectory = "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"
+#         echo "##vso[task.setvariable variable=LogDirectory]$logDirectory"
+#         New-Item -Path $logDirectory\activation.log -ItemType File -Force
 
-        Write-Host "Activating License..."
-        $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $(UnitySerial) -username `"$(UnityUsername)`" -password `"$(UnityPassword)`" -logfile `"$logDirectory\activation.log`"" -PassThru
-        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $logDirectory\activation.log
+#         Write-Host "Activating License..."
+#         $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $(UnitySerial) -username `"$(UnityUsername)`" -password `"$(UnityPassword)`" -logfile `"$logDirectory\activation.log`"" -PassThru
+#         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $logDirectory\activation.log
 
-        while ( -not $process.HasExited -and $ljob.HasMoreData )
-        {
-          Receive-Job $ljob
-        }
+#         while ( -not $process.HasExited -and $ljob.HasMoreData )
+#         {
+#           Receive-Job $ljob
+#         }
 
-        Receive-Job $ljob
-        Stop-Job $ljob
-        Remove-Job $ljob
+#         Receive-Job $ljob
+#         Stop-Job $ljob
+#         Remove-Job $ljob
 
-        exit $process.ExitCode
-      failOnStderr: true
-      displayName: 'Activate Unity License'
+#         exit $process.ExitCode
+#       failOnStderr: true
+#       displayName: 'Activate Unity License'
 
-    - powershell: |
-        New-Item -Path $(LogDirectory)\tests.log -ItemType File -Force
-        Write-Host "Starting Unity Unit Tests..."
+#     - powershell: |
+#         New-Item -Path $(LogDirectory)\tests.log -ItemType File -Force
+#         Write-Host "Starting Unity Unit Tests..."
 
-        $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -logfile `"$(LogDirectory)\tests.log`" -editorTestsResultFile `"$(LogDirectory)\tests.xml`" -runEditorTests" -PassThru
-        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\tests.log
+#         $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -logfile `"$(LogDirectory)\tests.log`" -editorTestsResultFile `"$(LogDirectory)\tests.xml`" -runEditorTests" -PassThru
+#         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\tests.log
 
-        while ( -not $process.HasExited -and $ljob.HasMoreData )
-        {
-          Receive-Job $ljob
-        }
+#         while ( -not $process.HasExited -and $ljob.HasMoreData )
+#         {
+#           Receive-Job $ljob
+#         }
 
-        Receive-Job $ljob
-        Stop-Job $ljob
-        Remove-Job $ljob
+#         Receive-Job $ljob
+#         Stop-Job $ljob
+#         Remove-Job $ljob
 
-        exit $process.ExitCode
-      failOnStderr: true
-      displayName: 'Run Unity Unit Tests'
+#         exit $process.ExitCode
+#       failOnStderr: true
+#       displayName: 'Run Unity Unit Tests'
 
-    - task: PublishTestResults@2
-      displayName: 'Publish Test Results'
-      inputs:
-        testResultsFormat: NUnit
-        testResultsFiles: 'test?.xml'
-        searchFolder: '$(LogDirectory)'
-        mergeTestResults: true
-        failTaskOnFailedTests: true
-      condition: always()
+#     - task: PublishTestResults@2
+#       displayName: 'Publish Test Results'
+#       inputs:
+#         testResultsFormat: NUnit
+#         testResultsFiles: 'test?.xml'
+#         searchFolder: '$(LogDirectory)'
+#         mergeTestResults: true
+#         failTaskOnFailedTests: true
+#       condition: always()
 
-    - powershell: |
-        New-Item -Path $(LogDirectory)\StandaloneWindows64.log -ItemType File -Force
-        Write-Host "Starting Windows x64 Build..."
+#     - powershell: |
+#         New-Item -Path $(LogDirectory)\StandaloneWindows64.log -ItemType File -Force
+#         Write-Host "Starting Windows x64 Build..."
 
-        $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget StandaloneWindows64 -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$(LogDirectory)\StandaloneWindows64.log`"" -PassThru
-        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\StandaloneWindows64.log
+#         $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget StandaloneWindows64 -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$(LogDirectory)\StandaloneWindows64.log`"" -PassThru
+#         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\StandaloneWindows64.log
 
-        while ( -not $process.HasExited -and $ljob.HasMoreData )
-        {
-          Receive-Job $ljob
-        }
+#         while ( -not $process.HasExited -and $ljob.HasMoreData )
+#         {
+#           Receive-Job $ljob
+#         }
 
-        Receive-Job $ljob
-        Stop-Job $ljob
-        Remove-Job $ljob
+#         Receive-Job $ljob
+#         Stop-Job $ljob
+#         Remove-Job $ljob
 
-        exit $process.ExitCode
-      failOnStderr: true
-      displayName: 'Build Windows x64 Unity Player'
+#         exit $process.ExitCode
+#       failOnStderr: true
+#       displayName: 'Build Windows x64 Unity Player'
 
-    - powershell: |
-        New-Item -Path $(LogDirectory)\deactivation.log -ItemType File -Force
-        Write-Host "Returning License..."
+#     - powershell: |
+#         New-Item -Path $(LogDirectory)\deactivation.log -ItemType File -Force
+#         Write-Host "Returning License..."
 
-        $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$(LogDirectory)\deactivation.log`"" -PassThru
-        $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\deactivation.log
+#         $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$(LogDirectory)\deactivation.log`"" -PassThru
+#         $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\deactivation.log
 
-        while ( -not $process.HasExited -and $ljob.HasMoreData )
-        {
-          Receive-Job $ljob
-        }
+#         while ( -not $process.HasExited -and $ljob.HasMoreData )
+#         {
+#           Receive-Job $ljob
+#         }
 
-        Receive-Job $ljob
-        Stop-Job $ljob
-        Remove-Job $ljob
+#         Receive-Job $ljob
+#         Stop-Job $ljob
+#         Remove-Job $ljob
 
-        exit $process.ExitCode
-      failOnStderr: false
-      displayName: 'Return Unity License'
-      condition: always()
+#         exit $process.ExitCode
+#       failOnStderr: false
+#       displayName: 'Return Unity License'
+#       condition: always()
 
-    - task: PublishPipelineArtifact@1
-      displayName: 'Publish Pipeline Artifact'
-      inputs:
-        targetPath: '$(project.name)/Builds'
-        artifactName: 'PR Validation Build Artifacts'
-      condition: always()
+#     - task: PublishPipelineArtifact@1
+#       displayName: 'Publish Pipeline Artifact'
+#       inputs:
+#         targetPath: '$(project.name)/Builds'
+#         artifactName: 'PR Validation Build Artifacts'
+#       condition: always()

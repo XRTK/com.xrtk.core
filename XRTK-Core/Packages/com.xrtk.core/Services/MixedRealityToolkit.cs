@@ -754,7 +754,7 @@ namespace XRTK.Services
         /// Registers all the <see cref="IMixedRealityService"/>s defined in the provided configuration collection.
         /// </summary>
         /// <typeparam name="T">The interface type for the <see cref="IMixedRealityService"/> to be registered.</typeparam>
-        /// <param name="configurations">The list of <see cref="MixedRealityServiceConfiguration{T}"/>s.</param>
+        /// <param name="configurations">The list of <see cref="IMixedRealityServiceConfiguration{T}"/>s.</param>
         /// <returns>True, if all configurations successfully created and registered their services.</returns>
         public static bool TryRegisterServiceConfigurations<T>(IMixedRealityServiceConfiguration<T>[] configurations) where T : IMixedRealityService
         {
@@ -792,7 +792,7 @@ namespace XRTK.Services
         /// Registers all the <see cref="IMixedRealityDataProvider"/>s defined in the provided configuration collection.
         /// </summary>
         /// <typeparam name="T">The interface type for the <see cref="IMixedRealityDataProvider"/> to be registered.</typeparam>
-        /// <param name="configurations">The list of <see cref="MixedRealityServiceConfiguration{T}"/>s.</param>
+        /// <param name="configurations">The list of <see cref="IMixedRealityServiceConfiguration{T}"/>s.</param>
         /// <param name="serviceParent">The <see cref="IMixedRealityService"/> that the <see cref="IMixedRealityDataProvider"/> will be assigned to.</param>
         /// <returns>True, if all configurations successfully created and registered their data providers.</returns>
         public static bool TryRegisterDataProviderConfigurations<T>(IMixedRealityServiceConfiguration<T>[] configurations, IMixedRealityService serviceParent) where T : IMixedRealityDataProvider

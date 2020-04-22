@@ -19,14 +19,12 @@ steps:
       $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $(UnitySerial) -username `"$(UnityUsername)`" -password `"$(UnityPassword)`" -logfile `"$logDirectory\activation.log`"" -PassThru
       $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $logDirectory\activation.log
 
-      while ( -not $process.HasExited -and $ljob.HasMoreData )
+      while ( -not $process.HasExited )
       {
         Receive-Job $ljob
       }
 
-      Receive-Job $ljob
-      Stop-Job $ljob
-      Remove-Job $ljob
+      Receive-Job $ljob -Wait -AutoRemove
 
       exit $process.ExitCode
     failOnStderr: true

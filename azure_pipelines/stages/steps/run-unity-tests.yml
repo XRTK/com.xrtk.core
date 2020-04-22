@@ -6,14 +6,12 @@ steps:
       $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -logfile `"$(LogDirectory)\${{ parameters.target }}-tests.log`" -editorTestsResultFile `"$(LogDirectory)\${{ parameters.target }}-tests.xml`" -runEditorTests" -PassThru
       $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\${{ parameters.target }}-tests.log
 
-      while ( -not $process.HasExited -and $ljob.HasMoreData )
+      while ( -not $process.HasExited )
       {
         Receive-Job $ljob
       }
 
-      Receive-Job $ljob
-      Stop-Job $ljob
-      Remove-Job $ljob
+      Receive-Job $ljob -Wait -AutoRemove
 
       exit $process.ExitCode
     failOnStderr: true

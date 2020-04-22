@@ -1,25 +1,3 @@
-parameters:
-  - name: 'platform'
-    type: object
-    default:
-      windows:
-  - name: 'image'
-    type: string
-    default: 'windows-latest'
-  - name: 'components'
-    type: string
-    default:
-      - Windows
-      - Windows_IL2CPP
-      - UWP_IL2CPP
-      - Android
-  - name: 'targets'
-    type: string
-    default:
-      - StandaloneWindows64
-      - WSAPlayer
-      - Android
-
 stages:
 - stage:
   displayName: ${{ format('{0} Build', parameters.platform, parameters.image) }}
@@ -34,11 +12,11 @@ stages:
       - checkout: self
         submodules: recursive
       - template: steps/install-unity.yml
-      - ${{ each pair in parameters.targets }}:
+      - ${{ each item in parameters.targets }}:
         - template: steps/run-unity-tests.yml
           parameters:
-            target: ${{ pair.value }}
+            target: ${{ item.value }}
         - template: steps/build-unity-player.yml
           parameters:
-            target: ${{ pair.value }}
+            target: ${{ item.value }}
       - template: steps/release-unity.yml

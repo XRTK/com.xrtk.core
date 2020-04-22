@@ -835,7 +835,7 @@ namespace XRTK.Services
         /// Creates a new instance of a service and registers it to the Mixed Reality Toolkit service registry for the specified platform.
         /// </summary>
         /// <typeparam name="T">The interface type for the <see cref="IMixedRealityService"/> to be registered.</typeparam>
-        /// <param name="configuration">The <see cref="MixedRealityServiceConfiguration"/> to use to create and register the service.</param>
+        /// <param name="configuration">The <see cref="IMixedRealityServiceConfiguration{T}"/> to use to create and register the service.</param>
         /// <param name="service">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
         /// <returns>True, if the service was successfully created and registered.</returns>
         public static bool TryCreateAndRegisterService<T>(IMixedRealityServiceConfiguration<T> configuration, out IMixedRealityService service) where T : IMixedRealityService
@@ -853,7 +853,7 @@ namespace XRTK.Services
         /// Creates a new instance of a data provider and registers it to the Mixed Reality Toolkit service registry for the specified platform.
         /// </summary>
         /// <typeparam name="T">The interface type for the <see cref="IMixedRealityService"/> to be registered.</typeparam>
-        /// <param name="configuration">The <see cref="MixedRealityServiceConfiguration"/> to use to create and register the service.</param>
+        /// <param name="configuration">The <see cref="IMixedRealityServiceConfiguration{T}"/> to use to create and register the data provider.</param>
         /// <param name="serviceParent">The <see cref="IMixedRealityService"/> that the <see cref="IMixedRealityDataProvider"/> will be assigned to.</param>
         /// <returns>True, if the service was successfully created and registered.</returns>
         public static bool TryCreateAndRegisterDataProvider<T>(IMixedRealityServiceConfiguration<T> configuration, IMixedRealityService serviceParent) where T : IMixedRealityDataProvider

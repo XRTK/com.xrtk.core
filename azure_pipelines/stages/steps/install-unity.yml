@@ -1,3 +1,8 @@
+parameters:
+  - name: components
+    type: string
+    default: ''
+
 steps:
   - powershell: |
       Install-Module -Name UnitySetup -AllowPrerelease -RequiredVersion $(UnityPowerShellHelperVersion) -Scope CurrentUser -Repository PSGallery -Force

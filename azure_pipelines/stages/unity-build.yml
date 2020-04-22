@@ -1,6 +1,6 @@
 stages:
 - stage:
-  displayName: ${{ format('{0} Build', parameters.platform, parameters.image) }}
+  displayName: ${{ format('{0} build', parameters.platform, parameters.image) }}
   jobs:
     - job:
       pool:
@@ -12,6 +12,7 @@ stages:
       - checkout: self
         submodules: recursive
       - template: steps/install-unity.yml
+        parameters: ${{ parameters.components }}
       # - ${{ each item in parameters.targets }}:
       #   - template: steps/run-unity-tests.yml
       #     parameters:

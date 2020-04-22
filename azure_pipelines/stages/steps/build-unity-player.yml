@@ -4,11 +4,15 @@ steps:
       $logPath = $(LogDirectory)\${{ parameters.target }}.log
       $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$logPath`"" -PassThru
 
-      while ( -not (Test-Path $logPath -Type Leaf) ) {
-          Start-Sleep -Milliseconds 100
-      }
+      $ljob = Start-Job -ScriptBlock {
+        param($log)
 
-      $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\$logPath
+        while ( (Test-Path $$log -Type Leaf) ) {
+            Start-Sleep -Milliseconds 100
+        }
+
+        Get-Content "$log" -Wait
+      } -ArgumentList $logPath
 
       while ( -not $process.HasExited )
       {

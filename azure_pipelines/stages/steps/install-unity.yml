@@ -20,11 +20,15 @@ steps:
       $logPath = $logDirectory\activation.log
       $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $(UnitySerial) -username `"$(UnityUsername)`" -password `"$(UnityPassword)`" -logfile `"$logPath`"" -PassThru
 
-      while ( -not (Test-Path $logPath -Type Leaf) ) {
-          Start-Sleep -Milliseconds 100
-      }
+      $ljob = Start-Job -ScriptBlock {
+        param($log)
 
-      $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $logPath
+        while ( (Test-Path $$log -Type Leaf) ) {
+            Start-Sleep -Milliseconds 100
+        }
+
+        Get-Content "$log" -Wait
+      } -ArgumentList $logPath
 
       while ( -not $process.HasExited )
       {

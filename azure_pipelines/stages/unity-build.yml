@@ -1,8 +1,9 @@
 stages:
 - stage:
-  displayName: ${{ format('{0} build', parameters.platform, parameters.image) }}
+  displayName: ${{ format('{0} build', parameters.platform) }}
   jobs:
     - job:
+      displayName: ${{ format('{0}', parameters.image) }}
       pool:
         name: 'Azure Pipelines'
         vmImage: ${{ parameters.image }}

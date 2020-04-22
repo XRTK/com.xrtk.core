@@ -8,7 +8,7 @@ steps:
         param($log)
 
         while ( (Test-Path $$log -Type Leaf) ) {
-            Start-Sleep -Milliseconds 100
+            Start-Sleep -Milliseconds 1000
         }
 
         Get-Content "$log" -Wait
@@ -17,8 +17,10 @@ steps:
       while ( -not $process.HasExited )
       {
         Receive-Job $ljob
+        Start-Sleep -Milliseconds 1000
       }
 
+      Start-Sleep -Milliseconds 2000
       Receive-Job $ljob
       Stop-Job $ljob
       Remove-Job $ljob

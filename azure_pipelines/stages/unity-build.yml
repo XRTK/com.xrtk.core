@@ -12,7 +12,9 @@ parameters:
   - name: targets
     type: string
     default:
-      - StandaloneWindows64
+    - 'StandaloneWindows64'
+    - 'WSAPlayer'
+    - 'Android'
 
 stages:
 - stage:

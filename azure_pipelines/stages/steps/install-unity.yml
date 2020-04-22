@@ -27,16 +27,16 @@ steps:
             Start-Sleep -Milliseconds 1000
         }
 
-        Get-Content "$log" -Wait
+        Get-Content "$log" -Wait | Write-Host
       } -ArgumentList $logPath
 
       while ( -not $process.HasExited )
       {
-        Receive-Job $ljob
         Start-Sleep -Milliseconds 1000
+        Receive-Job $ljob
       }
 
-      Start-Sleep -Milliseconds 2000
+      Start-Sleep -Milliseconds 5000
       Receive-Job $ljob
       Stop-Job $ljob
       Remove-Job $ljob

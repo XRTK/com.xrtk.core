@@ -18,11 +18,11 @@ steps:
 
       while ( -not $process.HasExited )
       {
-        Receive-Job $ljob
         Start-Sleep -Milliseconds 1000
+        Receive-Job $ljob
       }
 
-      Start-Sleep -Milliseconds 2000
+      Start-Sleep -Milliseconds 5000
       Receive-Job $ljob
       Stop-Job $ljob
       Remove-Job $ljob

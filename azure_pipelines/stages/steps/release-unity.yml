@@ -1,0 +1,28 @@
+steps:
+  - powershell: |
+      New-Item -Path $(LogDirectory)\deactivation.log -ItemType File -Force
+      Write-Host "Returning License..."
+
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$(LogDirectory)\deactivation.log`"" -PassThru
+      $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\deactivation.log
+
+      while ( -not $process.HasExited -and $ljob.HasMoreData )
+      {
+        Receive-Job $ljob
+      }
+
+      Receive-Job $ljob
+      Stop-Job $ljob
+      Remove-Job $ljob
+
+      exit $process.ExitCode
+    failOnStderr: false
+    displayName: 'Return Unity License'
+    condition: always()
+
+  - task: PublishPipelineArtifact@1
+    displayName: 'Publish Pipeline Artifact'
+    inputs:
+      targetPath: '$(project.name)/Builds'
+      artifactName: 'PR Validation Build Artifacts'
+    condition: always()

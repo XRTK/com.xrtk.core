@@ -1,0 +1,35 @@
+parameters:
+  name: target
+  type: string
+  default: 'StandaloneWindows64'
+
+steps:
+  - powershell: |
+      New-Item -Path $(LogDirectory)\${{ parameters.target }}-tests.log -ItemType File -Force
+      Write-Host "Starting ${{ parameters.target }} Unit Tests..."
+
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -logfile `"$(LogDirectory)\${{ parameters.target }}-tests.log`" -editorTestsResultFile `"$(LogDirectory)\${{ parameters.target }}-tests.xml`" -runEditorTests" -PassThru
+      $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\${{ parameters.target }}-tests.log
+
+      while ( -not $process.HasExited -and $ljob.HasMoreData )
+      {
+        Receive-Job $ljob
+      }
+
+      Receive-Job $ljob
+      Stop-Job $ljob
+      Remove-Job $ljob
+
+      exit $process.ExitCode
+    failOnStderr: true
+    displayName: 'Run Unity Unit Tests'
+
+  - task: PublishTestResults@2
+    displayName: 'Publish Test Results'
+    inputs:
+      testResultsFormat: NUnit
+      testResultsFiles: 'test?.xml'
+      searchFolder: '$(LogDirectory)'
+      mergeTestResults: true
+      failTaskOnFailedTests: true
+    condition: always()

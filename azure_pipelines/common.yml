@@ -4,39 +4,27 @@ parameters:
     default:
       windows:
         image: windows-latest
-        components: '"Windows", "Windows_IL2CPP"'
-        # UWP_IL2CPP, Lumin, Android, iOS, Mac, Mac_IL2CPP , WebGL
-        target: StandaloneWindows64
+        components: '"Windows", "Windows_IL2CPP", "UWP_IL2CPP", "Android"'
+        # https://github.com/microsoft/unitysetup.powershell installer component options
+        # Windows, Windows_IL2CPP, UWP_IL2CPP, Lumin, Android, iOS, Mac, Mac_IL2CPP , WebGL
+        targets: '"StandaloneWindows64", "WSAPlayer", "Android"'
+        # Unity -buildTarget command line args https://docs.unity3d.com/Manual/CommandLineArguments.html
         # 'StandaloneOSX', 'StandaloneWindows', 'iOS', 'Android', 'StandaloneLinux', 'StandaloneWindows64', 'WebGL',
         # 'WSAPlayer', 'StandaloneLinux64', 'StandaloneLinuxUniversal', 'Tizen', 'PSP2', 'PS4', 'XBoxOne', 'N3DS', 'WiiU', 'tvOS', 'Switch', 'Lumin'
       macOS:
         image: macOS-latest
         components: '"Mac", "Mac_IL2CPP"'
-        target: StandaloneOSX
+        targets: '"StandaloneOSX"'
       linux:
         image: ubuntu-latest
         components: '"Linux"'
-        target: StandaloneLinux64
+        targets: '"StandaloneLinux64"'
 
 stages:
-#- ${{ each pair in parameters.os }}:
   - template: stages/unity-build.yml
     parameters:
-      image: windows-latest
-      target: StandaloneWindows64
-      components: '"Windows", "Windows_IL2CPP"'
-  - template: stages/unity-build.yml
-    parameters:
-      image: macOS-latest
-      target: StandaloneOSX
-      components: '"Mac", "Mac_IL2CPP"'
-  - template: stages/unity-build.yml
-    parameters:
-      image: ubuntu-latest
-      target: StandaloneLinux64
-      components: '"Linux"'
-#      platform: ${{ pair.key }}
-#      ${{ insert }}: ${{ pair.value }}
+      platform: windows
+      ${{ insert }}: ${{ parameters.os.windows }}
 
 # - template: stages/publish.yml
 #   parameters:

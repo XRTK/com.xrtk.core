@@ -1,12 +1,8 @@
-# parameters:
-# - name: buildDocs
-#   type: boolean
-#   default: false
-
 stages:
-- stage: ${{ parameters.target }}
+- stage:
+  displayName: ${{ format('{0} build ({1})', parameters.platform, parameters.image) }}
   jobs:
-    - job: ${{ parameters.target }}
+    - job:
       pool:
         name: 'Azure Pipelines'
         vmImage: ${{ parameters.image }}
@@ -15,137 +11,12 @@ stages:
       steps:
       - checkout: self
         submodules: recursive
-
-      - powershell: |
-          Install-Module -Name UnitySetup -AllowPrerelease -RequiredVersion $(UnityPowerShellHelperVersion) -Scope CurrentUser -Repository PSGallery -Force
-          Install-UnitySetupInstance -Verbose -Installers ( Find-UnitySetupInstaller -Version $(UnityVersion) -Components ${{ parameters.components }} -Verbose )
-          Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize
-          $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Version $(UnityVersion)
-          $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
-          Write-Host "UnityEditor path set to: $editorPath"
-          echo "##vso[task.setvariable variable=EditorPath]$editorPath"
-        failOnStderr: true
-        displayName: 'Install Unity Editor'
-
-      - powershell: |
-          $logDirectory = "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"
-          echo "##vso[task.setvariable variable=LogDirectory]$logDirectory"
-          New-Item -Path $logDirectory\activation.log -ItemType File -Force
-
-          Write-Host "Activating License..."
-          $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $(UnitySerial) -username `"$(UnityUsername)`" -password `"$(UnityPassword)`" -logfile `"$logDirectory\activation.log`"" -PassThru
-          $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $logDirectory\activation.log
-
-          while ( -not $process.HasExited -and $ljob.HasMoreData )
-          {
-            Receive-Job $ljob
-          }
-
-          Receive-Job $ljob
-          Stop-Job $ljob
-          Remove-Job $ljob
-
-          exit $process.ExitCode
-        failOnStderr: true
-        displayName: 'Activate Unity License'
-
-      - powershell: |
-          New-Item -Path $(LogDirectory)\tests.log -ItemType File -Force
-          Write-Host "Starting Unity Unit Tests..."
-
-          $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -logfile `"$(LogDirectory)\tests.log`" -editorTestsResultFile `"$(LogDirectory)\tests.xml`" -runEditorTests" -PassThru
-          $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\tests.log
-
-          while ( -not $process.HasExited -and $ljob.HasMoreData )
-          {
-            Receive-Job $ljob
-          }
-
-          Receive-Job $ljob
-          Stop-Job $ljob
-          Remove-Job $ljob
-
-          exit $process.ExitCode
-        failOnStderr: true
-        displayName: 'Run Unity Unit Tests'
-
-      - task: PublishTestResults@2
-        displayName: 'Publish Test Results'
-        inputs:
-          testResultsFormat: NUnit
-          testResultsFiles: 'test?.xml'
-          searchFolder: '$(LogDirectory)'
-          mergeTestResults: true
-          failTaskOnFailedTests: true
-        condition: always()
-
-      - powershell: |
-          New-Item -Path $(LogDirectory)\${{ parameters.target }}.log -ItemType File -Force
-          Write-Host "Starting ${{ parameters.target }} Build..."
-
-          $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$(LogDirectory)\${{ parameters.target }}.log`"" -PassThru
-          $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\${{ parameters.target }}.log
-
-          while ( -not $process.HasExited -and $ljob.HasMoreData )
-          {
-            Receive-Job $ljob
-          }
-
-          Receive-Job $ljob
-          Stop-Job $ljob
-          Remove-Job $ljob
-
-          exit $process.ExitCode
-        failOnStderr: true
-        displayName: 'Build ${{ parameters.target }} Player'
-
-      # - powershell: |
-      #     choco install docfx
-
-      #     docfx $(System.DefaultWorkingDirectory)\docfx_project\docfx.json
-
-      #     git config user.email "XRTK-Build-Bot@users.noreply.github.com"
-      #     git config user.name "XRTK-Build-Bot"
-      #     git status
-      #     git add ./docs
-      #     git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\README.md"
-      #     git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\LICENSE.md"
-      #     git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\.github"
-      #     git status
-      #     git commit -m "docfx build $(project.version)@$(Build.SourceVersion)"
-      #     git checkout -b docfx
-      #     git fetch origin master
-      #     git checkout master
-      #     git merge docfx
-      #     git branch -D docfx
-      #     git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git master
-      #   displayName: 'Build Docfx'
-      #   condition: ${{ parameters.buildDocs }}
-
-      - powershell: |
-          New-Item -Path $(LogDirectory)\deactivation.log -ItemType File -Force
-          Write-Host "Returning License..."
-
-          $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$(LogDirectory)\deactivation.log`"" -PassThru
-          $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\deactivation.log
-
-          while ( -not $process.HasExited -and $ljob.HasMoreData )
-          {
-            Receive-Job $ljob
-          }
-
-          Receive-Job $ljob
-          Stop-Job $ljob
-          Remove-Job $ljob
-
-          exit $process.ExitCode
-        failOnStderr: false
-        displayName: 'Return Unity License'
-        condition: always()
-
-      - task: PublishPipelineArtifact@1
-        displayName: 'Publish Pipeline Artifact'
-        inputs:
-          targetPath: '$(project.name)/Builds'
-          artifactName: 'PR Validation Build Artifacts'
-        condition: always()
+      - template: steps/install-unity.yml
+      - ${{ each pair in parameters.targets }}:
+        - template: steps/run-unity-tests.yml
+          parameters:
+            target: ${{ pair.value }}
+        - template: steps/build-unity-player.yml
+          parameters:
+            target: ${{ pair.value }}
+      - template: steps/release-unity.yml

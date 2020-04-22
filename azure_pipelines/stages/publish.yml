@@ -1,0 +1,105 @@
+parameters:
+- name: shouldRun
+  type: boolean
+  default: false
+
+stages:
+- stage: Publish
+  condition: ${{ parameters.shouldRun }}
+  pool:
+    name: 'Azure Pipelines'
+    demands:
+      - unity -equals false
+  jobs:
+    - powershell: |
+        git config user.email "XRTK-Build-Bot@users.noreply.github.com"
+        git config user.name "XRTK-Build-Bot"
+        git status
+        git fetch origin master
+        git pull origin master
+        git subtree split --prefix="$(project.name)/Packages/$(package.name)" --branch upm
+        $upmSha = git rev-parse upm
+        Write-Host "##vso[task.setvariable variable=project.upmSha]$($upmSha)"
+        git tag $(project.version) upm
+        git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git upm $(project.version) --force
+      displayName: 'ump mirror'
+
+    - task: GitHubRelease@0
+      displayName: 'GitHub release (create)'
+      inputs:
+        gitHubConnection: 'XRTK Build Bot Connection'
+        target: '$(project.upmSha)'
+        tagSource: manual
+        tag: '$(project.version)'
+        title: '$(project.name) $(project.version)'
+        releaseNotesSource: input
+        releaseNotes: |
+          # Release Notes
+
+          ## Requirements
+
+          - [Unity $(UnityVersion)](https://unity3d.com/unity/whats-new/$(UnityVersion)) or later
+          - Microsoft Visual Studio $(VisualStudioVersion)
+          - Windows 10 $(WindowsBuildVersion) or later
+          - Windows SDK $(WindowsSdkVersion) or later
+
+          ## Import via Unity Package Manager (upm)
+
+          Find `Packages/manifest.json` in your project and edit the dependencies to include:
+
+          ```json
+          {
+            "scopedRegistries": [
+              {
+                "name": "XRTK",
+                "url": "http://upm.xrtk.io:4873/",
+                "scopes": [
+                  "com.xrtk"
+                ]
+              }
+            ],
+            "dependencies": {
+              "$(package.name)": "$(project.version)",
+              ...
+            },
+          }
+          ```
+
+          Once the registry has been added, you can search for each platform in the UPM Package Manager window.
+
+          > Note: For pre-releases you'll need to enable `show preview packages` under the Advanced dropdown in Unity's Package Manager.
+
+          ## Importing the asset directly into your project
+
+          1. Download the release asset unity package
+          2. Import unity package directly into your project by dragging and dropping the file into your project window
+
+          assets: '$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Packages\$(project.name).unitypackage'
+        isPreRelease: true
+
+    - task: PublishPipelineArtifact@0
+      displayName: 'Publish Build Artifacts'
+      inputs:
+        artifactName: Builds
+        targetPath: '$(project.name)/Builds'
+      continueOnError: true
+      condition: always()
+
+    - task: robmburke.ado-discord-webhook.custom-build-release-task.ado-discord-webhook@1
+      displayName: 'Discord Release Webhook'
+      inputs:
+        channelId: '$(Discord.WebhookChannelId)'
+        webhookKey: '$(Discord.WebhookKey)'
+        name: '$(Discord.WebhookAuthor)'
+        avatar: '$(Discord.WebhookAvatarUrl)'
+        messageType: embeds
+        embeds: |
+          [{
+              "title": "$(project.name) has a new release!",
+              "description": "Release $(project.version) is now available.",
+              "author": {
+                  "name": "$(Discord.WebhookAuthor)"
+              },
+              "url": "https://github.com/XRTK/$(project.name)/releases"
+          }]
+      continueOnError: true

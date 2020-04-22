@@ -1,0 +1,33 @@
+steps:
+  - powershell: |
+      Install-Module -Name UnitySetup -AllowPrerelease -RequiredVersion $(UnityPowerShellHelperVersion) -Scope CurrentUser -Repository PSGallery -Force
+      Install-UnitySetupInstance -Verbose -Installers ( Find-UnitySetupInstaller -Version $(UnityVersion) -Components ${{ parameters.components }} -Verbose )
+      Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize
+      $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Version $(UnityVersion)
+      $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
+      Write-Host "UnityEditor path set to: $editorPath"
+      echo "##vso[task.setvariable variable=EditorPath]$editorPath"
+    failOnStderr: true
+    displayName: 'Install Unity Editor'
+
+  - powershell: |
+      $logDirectory = "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs"
+      echo "##vso[task.setvariable variable=LogDirectory]$logDirectory"
+      New-Item -Path $logDirectory\activation.log -ItemType File -Force
+
+      Write-Host "Activating License..."
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -serial $(UnitySerial) -username `"$(UnityUsername)`" -password `"$(UnityPassword)`" -logfile `"$logDirectory\activation.log`"" -PassThru
+      $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $logDirectory\activation.log
+
+      while ( -not $process.HasExited -and $ljob.HasMoreData )
+      {
+        Receive-Job $ljob
+      }
+
+      Receive-Job $ljob
+      Stop-Job $ljob
+      Remove-Job $ljob
+
+      exit $process.ExitCode
+    failOnStderr: true
+    displayName: 'Activate Unity License'

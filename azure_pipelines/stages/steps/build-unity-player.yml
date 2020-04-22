@@ -1,0 +1,25 @@
+parameters:
+  name: target
+  type: string
+  default: 'StandaloneWindows64'
+
+steps:
+  - powershell: |
+      New-Item -Path $(LogDirectory)\${{ parameters.target }}.log -ItemType File -Force
+      Write-Host "Starting ${{ parameters.target }} Build..."
+
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$(LogDirectory)\${{ parameters.target }}.log`"" -PassThru
+      $ljob = Start-Job -ScriptBlock { param($log) Get-Content "$log" -Wait } -ArgumentList $(LogDirectory)\${{ parameters.target }}.log
+
+      while ( -not $process.HasExited -and $ljob.HasMoreData )
+      {
+        Receive-Job $ljob
+      }
+
+      Receive-Job $ljob
+      Stop-Job $ljob
+      Remove-Job $ljob
+
+      exit $process.ExitCode
+    failOnStderr: true
+    displayName: 'Build ${{ parameters.target }} Player'

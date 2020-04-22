@@ -25,6 +25,16 @@ stages:
       image: windows-latest
       target: StandaloneWindows64
       components: '"Windows", "Windows_IL2CPP"'
+  - template: stages/unity-build.yml
+    parameters:
+      image: macOS-latest
+      target: StandaloneOSX
+      components: '"Mac", "Mac_IL2CPP"'
+  - template: stages/unity-build.yml
+    parameters:
+      image: ubuntu-latest
+      target: StandaloneLinux64
+      components: '"Linux"'
 #      platform: ${{ pair.key }}
 #      ${{ insert }}: ${{ pair.value }}
 

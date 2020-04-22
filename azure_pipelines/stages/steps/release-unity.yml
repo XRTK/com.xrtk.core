@@ -1,7 +1,7 @@
 steps:
   - powershell: |
       Write-Host "Returning License..."
-      $logPath = $(LogDirectory)\deactivation.log
+      $logPath = "$(LogDirectory)\deactivation.log"
       $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$logPath`"" -PassThru
 
       $ljob = Start-Job -ScriptBlock {

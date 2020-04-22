@@ -1,7 +1,7 @@
 steps:
   - powershell: |
       Write-Host "Starting ${{ parameters.target }} Unit Tests..."
-      $logPath = $(LogDirectory)\${{ parameters.target }}-tests.log
+      $logPath = "$(LogDirectory)\${{ parameters.target }}-tests.log"
       $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -logfile `"$logPath`" -editorTestsResultFile `"$(LogDirectory)\${{ parameters.target }}-tests.xml`" -runEditorTests" -PassThru
 
       $ljob = Start-Job -ScriptBlock {

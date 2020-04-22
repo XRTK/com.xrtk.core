@@ -32,17 +32,10 @@ steps:
 
       while ( -not $process.HasExited )
       {
-        do {
-            $logOutput = Receive-Job $ljob
-            $logOutput | Write-Host
-        } until($logOutput.Length == 0)
+        Receive-Job $ljob
       }
 
-      do {
-          $logOutput = Receive-Job $ljob
-          $logOutput | Write-Host
-      } until($logOutput.Length == 0)
-
+      Receive-Job $ljob
       Stop-Job $ljob
       Remove-Job $ljob
 

@@ -29,7 +29,7 @@ stages:
   - template: stages/unity-build.yml
     parameters:
       platform: Windows
-      ${{ insert }}: ${{ parameters.os.windows }}
+      ${{ insert }}: ${{ parameters.os.Windows }}
 
 # - template: stages/publish.yml
 #   parameters:

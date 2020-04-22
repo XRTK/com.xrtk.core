@@ -13,7 +13,6 @@ stages:
         submodules: recursive
       - template: steps/install-unity.yml
       - template: steps/run-unity-tests.yml
-        parameters: ${{ parameters.target }}
       # - ${{ each item in parameters.targets }}:
       #   - template: steps/run-unity-tests.yml
       #     parameters:

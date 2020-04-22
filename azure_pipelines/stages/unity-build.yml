@@ -1,6 +1,6 @@
 stages:
 - stage:
-  displayName: ${{ format('{0} build', parameters.platform) }}
+  displayName: ${{ format('{0} build agent', parameters.platform) }}
   jobs:
     - job:
       displayName: ${{ format('{0}', parameters.image) }}

@@ -11,7 +11,9 @@ steps:
         Receive-Job $ljob
       }
 
-      Receive-Job $ljob -Wait -AutoRemove
+      Receive-Job $ljob
+      Stop-Job $ljob
+      Remove-Job $ljob
 
       exit $process.ExitCode
     failOnStderr: false

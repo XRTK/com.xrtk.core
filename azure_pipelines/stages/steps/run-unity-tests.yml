@@ -25,9 +25,6 @@ steps:
       Stop-Job $ljob
       Remove-Job $ljob
 
-      Stop-Job $ljob
-      Remove-Job $ljob
-
       exit $process.ExitCode
     failOnStderr: true
     displayName: 'Run ${{ parameters.target }} Unit Tests'

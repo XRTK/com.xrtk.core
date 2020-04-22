@@ -1,3 +1,19 @@
+parameters:
+  - name: platform
+    type: object
+    default:
+      windows:
+  - name: image
+    type: string
+    default: ''
+  - name: components
+    type: string
+    default: ''
+  - name: targets
+    type: string
+    default:
+      - StandaloneWindows64
+
 stages:
 - stage:
   displayName: ${{ format('{0} build', parameters.platform, parameters.image) }}

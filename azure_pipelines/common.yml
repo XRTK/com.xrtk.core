@@ -18,9 +18,6 @@ parameters:
         components: '"Linux"'
         target: StandaloneLinux64
 
-pool:
-  name: 'Azure Pipelines'
-
 stages:
 - ${{ each pair in parameters.os }}:
   - template: stages/unity-build.yml

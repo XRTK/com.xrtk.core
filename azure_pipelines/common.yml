@@ -19,11 +19,11 @@ parameters:
         target: StandaloneLinux64
 
 stages:
-- ${{ each pair in parameters.os }}:
+#- ${{ each pair in parameters.os }}:
   - template: stages/unity-build.yml
-    parameters:
-      platform: ${{ pair.key }}
-      ${{ insert }}: ${{ pair.value }}
+#    parameters:
+#      platform: ${{ pair.key }}
+#      ${{ insert }}: ${{ pair.value }}
 
 # - template: stages/publish.yml
 #   parameters:

@@ -8,9 +8,9 @@ parameters:
         # https://github.com/microsoft/unitysetup.powershell installer component options
         # Windows, Windows_IL2CPP, UWP_IL2CPP, Lumin, Android, iOS, Mac, Mac_IL2CPP , WebGL
         targets:
-        - 'StandaloneWindows64'
-        - 'WSAPlayer'
-        - 'Android'
+        - StandaloneWindows64
+        - WSAPlayer
+        - Android
         # Unity -buildTarget command line args https://docs.unity3d.com/Manual/CommandLineArguments.html
         # 'StandaloneOSX', 'StandaloneWindows', 'iOS', 'Android', 'StandaloneLinux', 'StandaloneWindows64', 'WebGL',
         # 'WSAPlayer', 'StandaloneLinux64', 'StandaloneLinuxUniversal', 'Tizen', 'PSP2', 'PS4', 'XBoxOne', 'N3DS', 'WiiU', 'tvOS', 'Switch', 'Lumin'
@@ -18,12 +18,12 @@ parameters:
         image: macOS-latest
         components: '"Mac", "Mac_IL2CPP"'
         targets:
-        - 'StandaloneOSX'
+        - StandaloneOSX
       linux:
         image: ubuntu-latest
         components: '"Linux"'
         targets:
-        - 'StandaloneLinux64'
+        - StandaloneLinux64
 
 stages:
   - template: stages/unity-build.yml

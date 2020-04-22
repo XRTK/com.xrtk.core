@@ -48,7 +48,7 @@ pr:
       - $(project.name)/Packages/$(package.name)/.github/*
 
 extends:
-  template: azure_pipelines/common.yml@templates
+  template: azure_pipelines/common.yml
 
 # pool:
 #   name: Azure Pipelines

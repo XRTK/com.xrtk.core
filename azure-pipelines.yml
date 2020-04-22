@@ -47,6 +47,9 @@ pr:
       - $(project.name)/Packages/$(package.name)/LICENSE.md
       - $(project.name)/Packages/$(package.name)/.github/*
 
+extends:
+  template: azure_pipelines/common.yml@templates
+
 # pool:
 #   name: Azure Pipelines
 #   vmImage: 'windows-latest'

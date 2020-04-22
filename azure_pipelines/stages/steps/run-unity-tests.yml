@@ -17,10 +17,10 @@ steps:
 
       exit $process.ExitCode
     failOnStderr: true
-    displayName: 'Run Unity Unit Tests'
+    displayName: 'Run ${{ parameters.target }} Unit Tests'
 
   - task: PublishTestResults@2
-    displayName: 'Publish Test Results'
+    displayName: 'Publish ${{ parameters.target }} Test Results'
     inputs:
       testResultsFormat: NUnit
       testResultsFiles: 'test?.xml'

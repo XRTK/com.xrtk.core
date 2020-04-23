@@ -50,6 +50,11 @@ namespace XRTK.Providers.CameraSystem
             bodyAdjustmentSpeed = profile.BodyAdjustmentSpeed;
         }
 
+        /// <summary>
+        /// The fallback value if the <see cref="DefaultHeadHeight"/> is zero.
+        /// </summary>
+        private const float BodyHeightFallback = 1.6f;
+
         private readonly IMixedRealityCameraSystem cameraSystem = null;
 
         private readonly Type cameraRigType;
@@ -300,14 +305,9 @@ namespace XRTK.Providers.CameraSystem
 
             bodyLocalPosition.x = cameraLocalPosition.x;
 
-            if (HeadHeight > 0f)
-            {
-                bodyLocalPosition.y = cameraLocalPosition.y - HeadHeight;
-            }
-            else
-            {
-                bodyLocalPosition.y = cameraLocalPosition.y - 1.6f;
-            }
+            bodyLocalPosition.y = HeadHeight > 0f
+                ? cameraLocalPosition.y - HeadHeight
+                : cameraLocalPosition.y - BodyHeightFallback;
 
             bodyLocalPosition.z = cameraLocalPosition.z;
 

@@ -2,7 +2,7 @@ variables:
   - group: Global Pipeline Settings
   - group: Discord Webhook Publishing Variables
   - name: buildNumberName
-    value: "${{ coalesce( variables['System.PullRequest.PullRequestNumber'], $(Date:yyyyMMdd) ) }}"
+    value: $[coalesce( variables['System.PullRequest.PullRequestNumber'], $(Date:yyyyMMdd) )]
   - name: project.folder
     value: 'XRTK'
   - name: project.name

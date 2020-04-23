@@ -8,9 +8,7 @@ using XRTK.Interfaces.CameraSystem;
 namespace XRTK.Definitions.CameraSystem
 {
     /// <summary>
-    /// This <see cref="BaseMixedRealityProfile"/> tells you if your head mounted display (HMD)
-    /// is a transparent device or an occluded device.
-    /// Based on those values, you can customize your camera and quality settings.
+    /// This <see cref="BaseMixedRealityProfile"/> to configuring your applications <see cref="IMixedRealityCameraDataProvider"/>s.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Camera System Profile", fileName = "MixedRealityCameraSystemProfile", order = (int)CreateProfileMenuItemIndices.Camera)]
     public class MixedRealityCameraSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityCameraDataProvider>

@@ -32,55 +32,36 @@ namespace XRTK.Providers.CameraSystem
             }
             else
             {
-                if (globalProfile.CameraRigType?.Type == null)
+                profile = globalProfile;
+
+                if (profile.CameraRigType?.Type == null)
                 {
                     throw new Exception($"{nameof(globalProfile.CameraRigType)} cannot be null!");
                 }
             }
 
-            isCameraPersistent = profile != null
-                ? profile.IsCameraPersistent
-                : globalProfile.IsCameraPersistent;
-            cameraRigType = profile != null
-                ? profile.CameraRigType.Type
-                : globalProfile.CameraRigType.Type;
-            DefaultHeadHeight = profile != null
-                ? profile.DefaultHeadHeight
-                : globalProfile.DefaultHeadHeight;
+            isCameraPersistent = profile.IsCameraPersistent;
+            cameraRigType = profile.CameraRigType.Type;
+            DefaultHeadHeight = profile.DefaultHeadHeight;
 
-            nearClipPlaneOpaqueDisplay = profile != null
-                ? profile.NearClipPlaneOpaqueDisplay
-                : globalProfile.NearClipPlaneOpaqueDisplay;
-            cameraClearFlagsOpaqueDisplay = profile != null
-                ? profile.CameraClearFlagsOpaqueDisplay
-                : globalProfile.CameraClearFlagsOpaqueDisplay;
-            backgroundColorOpaqueDisplay = profile != null
-                ? profile.BackgroundColorOpaqueDisplay
-                : globalProfile.BackgroundColorOpaqueDisplay;
-            opaqueQualityLevel = profile != null
-                ? profile.OpaqueQualityLevel
-                : globalProfile.OpaqueQualityLevel;
+            nearClipPlaneOpaqueDisplay = profile.NearClipPlaneOpaqueDisplay;
+            cameraClearFlagsOpaqueDisplay = profile.CameraClearFlagsOpaqueDisplay;
+            backgroundColorOpaqueDisplay = profile.BackgroundColorOpaqueDisplay;
+            opaqueQualityLevel = profile.OpaqueQualityLevel;
 
-            nearClipPlaneTransparentDisplay = profile != null
-                ? profile.NearClipPlaneTransparentDisplay
-                : globalProfile.NearClipPlaneTransparentDisplay;
-            cameraClearFlagsTransparentDisplay = profile != null
-                ? profile.CameraClearFlagsTransparentDisplay
-                : globalProfile.CameraClearFlagsTransparentDisplay;
-            backgroundColorTransparentDisplay = profile != null
-                ? profile.BackgroundColorTransparentDisplay
-                : globalProfile.BackgroundColorTransparentDisplay;
-            transparentQualityLevel = profile != null
-                ? profile.TransparentQualityLevel
-                : globalProfile.TransparentQualityLevel;
+            nearClipPlaneTransparentDisplay = profile.NearClipPlaneTransparentDisplay;
+            cameraClearFlagsTransparentDisplay = profile.CameraClearFlagsTransparentDisplay;
+            backgroundColorTransparentDisplay = profile.BackgroundColorTransparentDisplay;
+            transparentQualityLevel = profile.TransparentQualityLevel;
 
-            bodyAdjustmentAngle = profile != null
-                ? profile.BodyAdjustmentAngle
-                : globalProfile.BodyAdjustmentAngle;
-            bodyAdjustmentSpeed = profile != null
-                ? profile.BodyAdjustmentSpeed
-                : globalProfile.BodyAdjustmentSpeed;
+            bodyAdjustmentAngle = profile.BodyAdjustmentAngle;
+            bodyAdjustmentSpeed = profile.BodyAdjustmentSpeed;
         }
+
+        /// <summary>
+        /// The fallback value if the <see cref="DefaultHeadHeight"/> is zero.
+        /// </summary>
+        private const float BodyHeightFallback = 1.6f;
 
         private readonly IMixedRealityCameraSystem cameraSystem = null;
 
@@ -329,14 +310,9 @@ namespace XRTK.Providers.CameraSystem
 
             bodyLocalPosition.x = cameraLocalPosition.x;
 
-            if (HeadHeight > 0f)
-            {
-                bodyLocalPosition.y = cameraLocalPosition.y - HeadHeight;
-            }
-            else
-            {
-                bodyLocalPosition.y = cameraLocalPosition.y - 1.6f;
-            }
+            bodyLocalPosition.y = HeadHeight > 0f
+                ? cameraLocalPosition.y - HeadHeight
+                : cameraLocalPosition.y - BodyHeightFallback;
 
             bodyLocalPosition.z = cameraLocalPosition.z;
 

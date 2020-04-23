@@ -10,7 +10,7 @@ using XRTK.Services.CameraSystem;
 namespace XRTK.Definitions.CameraSystem
 {
     /// <summary>
-    /// Provides additional configuration options for camera data providers.
+    /// Provides configuration options for <see cref="IMixedRealityCameraDataProvider"/>s.
     /// </summary>
     public class BaseMixedRealityCameraDataProviderProfile : BaseMixedRealityProfile
     {

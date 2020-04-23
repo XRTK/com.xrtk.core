@@ -14,8 +14,7 @@ variables:
   - name: LogDirectory
     value: ''
 
-name: $(package.name)${{ coalesce( variables['System.PullRequest.PullRequestNumber'], 'ERROR') }}$(Rev:.r)
-#$(Date:yyyyMMdd)
+name: $(package.name)${{ coalesce( variables['System.PullRequest.PullRequestNumber'], format('{0:yyyyMMdd}', pipeline.startTime)) }}$(Rev:.r)
 
 # trigger:
 #   batch: true

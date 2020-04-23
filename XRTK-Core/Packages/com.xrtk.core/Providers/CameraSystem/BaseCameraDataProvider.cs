@@ -21,23 +21,15 @@ namespace XRTK.Providers.CameraSystem
             : base(name, priority, profile, parentService)
         {
             cameraSystem = MixedRealityToolkit.CameraSystem;
-            var globalProfile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile.GlobalCameraProfile;
 
-            if (profile != null)
+            if (profile == null)
             {
-                if (profile.CameraRigType?.Type == null)
-                {
-                    throw new Exception($"{nameof(profile.CameraRigType)} cannot be null!");
-                }
+                profile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile.GlobalCameraProfile;
             }
-            else
-            {
-                profile = globalProfile;
 
-                if (profile.CameraRigType?.Type == null)
-                {
-                    throw new Exception($"{nameof(globalProfile.CameraRigType)} cannot be null!");
-                }
+            if (profile.CameraRigType?.Type == null)
+            {
+                throw new Exception($"{nameof(profile.CameraRigType)} cannot be null!");
             }
 
             isCameraPersistent = profile.IsCameraPersistent;
@@ -117,6 +109,9 @@ namespace XRTK.Providers.CameraSystem
         }
 
         #region IMixedRealitySerivce Implementation
+
+        /// <inheritdoc />
+        public override uint Priority => 0;
 
         /// <inheritdoc />
         public override void Initialize()

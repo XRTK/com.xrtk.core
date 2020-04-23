@@ -51,7 +51,6 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
             bodyAdjustmentSpeed = serializedObject.FindProperty(nameof(bodyAdjustmentSpeed));
         }
 
-
         public override void OnInspectorGUI()
         {
             RenderHeader("The Camera Data Provider Profile helps tweak camera settings no matter what platform you're building for.");

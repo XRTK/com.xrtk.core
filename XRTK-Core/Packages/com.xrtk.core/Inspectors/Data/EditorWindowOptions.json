@@ -349,29 +349,6 @@
             ]
         },
         {
-            "Controller": "OculusRemoteController",
-            "Handedness": 0,
-            "InputLabelPositions": [
-                {
-                    "x": 482.0,
-                    "y": 154.0
-                },
-                {
-                    "x": -64.0,
-                    "y": 151.0
-                },
-                {
-                    "x": -63.0,
-                    "y": 230.0
-                }
-            ],
-            "IsLabelFlipped": [
-                false,
-                true,
-                true
-            ]
-        },
-        {
             "Controller": "WindowsMixedRealityMotionController",
             "Handedness": 1,
             "InputLabelPositions": [
@@ -1158,29 +1135,6 @@
             ]
         },
         {
-            "Controller": "OculusRemoteOpenVRController",
-            "Handedness": 0,
-            "InputLabelPositions": [
-                {
-                    "x": 300.0,
-                    "y": 65.0
-                },
-                {
-                    "x": 500.0,
-                    "y": 160.0
-                },
-                {
-                    "x": 500.0,
-                    "y": 180.0
-                }
-            ],
-            "IsLabelFlipped": [
-                false,
-                false,
-                false
-            ]
-        },
-        {
             "Controller": "OculusGoController",
             "Handedness": 1,
             "InputLabelPositions": [
@@ -1341,6 +1295,77 @@
                 false,
                 false,
                 false,
+                false,
+                false,
+                false
+            ]
+        },
+        {
+            "Controller": "OculusRemoteController",
+            "Handedness": 0,
+            "InputLabelPositions": [
+                {
+                    "x": 340.0,
+                    "y": 80.0
+                },
+                {
+                    "x": 340.0,
+                    "y": 220.0
+                },
+                {
+                    "x": 0.0,
+                    "y": 155.0
+                },
+                {
+                    "x": 420.0,
+                    "y": 155.0
+                },
+                {
+                    "x": 490.0,
+                    "y": 260.0
+                },
+                {
+                    "x": 490.0,
+                    "y": 280.0
+                },
+                {
+                    "x": -63.0,
+                    "y": 260.0
+                },
+                {
+                    "x": -63.0,
+                    "y": 280.0
+                }
+            ],
+            "IsLabelFlipped": [
+                false,
+                false,
+                true,
+                false,
+                false,
+                false,
+                true,
+                true
+            ]
+        },
+        {
+            "Controller": "OculusRemoteOpenVRController",
+            "Handedness": 0,
+            "InputLabelPositions": [
+                {
+                    "x": 340.0,
+                    "y": 155.0
+                },
+                {
+                    "x": 490.0,
+                    "y": 260.0
+                },
+                {
+                    "x": 490.0,
+                    "y": 280.0
+                }
+            ],
+            "IsLabelFlipped": [
                 false,
                 false,
                 false

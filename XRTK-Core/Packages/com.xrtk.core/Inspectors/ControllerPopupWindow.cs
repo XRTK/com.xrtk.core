@@ -28,7 +28,7 @@ namespace XRTK.Inspectors
         /// <summary>
         /// Used to enable editing the input axis label positions on controllers
         /// </summary>
-        private static readonly bool EnableWysiwyg = true;
+        private static readonly bool EnableWysiwyg = false;
 
         private static readonly Vector2 HorizontalSpace = new Vector2(8f, 0f);
         private static readonly Vector2 InputActionLabelPosition = new Vector2(256f, 0f);

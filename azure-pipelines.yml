@@ -1,6 +1,8 @@
 variables:
   - group: Global Pipeline Settings
   - group: Discord Webhook Publishing Variables
+  - name: buildNumberName
+    value: ${{ coalesce(system.pullRequest.pullRequestNumber, $(Date:yyyyMMdd) ) }}
   - name: project.folder
     value: 'XRTK'
   - name: project.name
@@ -14,7 +16,7 @@ variables:
   - name: LogDirectory
     value: ''
 
-name: $(package.name)-$[coalesce( $(SYSTEM_PULLREQUEST_PULLREQUESTNUMBER), $(Date:yyyyMMdd) )]$(Rev:.r)
+name: $(package.name)-$(buildNumberName)$(Rev:.r)
 
 # trigger:
 #   batch: true

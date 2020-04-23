@@ -26,7 +26,7 @@ namespace XRTK.Inspectors.PropertyDrawers
         private static readonly GUIContent EverythingContent = new GUIContent(Everything);
         private static readonly GUIContent EditorOnlyContent = new GUIContent("Editor Only");
         private static readonly GUIContent RuntimePlatformContent = new GUIContent("Runtime Platforms");
-        private static readonly GUIContent EditorBuildTargetContent = new GUIContent("Editor Build Target");
+        private static readonly GUIContent EditorBuildTargetContent = new GUIContent("Editor + Build Target");
 
         private static readonly int ControlHint = typeof(PlatformEntryPropertyDrawer).GetHashCode();
 

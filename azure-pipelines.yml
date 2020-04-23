@@ -16,20 +16,20 @@ variables:
 
 name: $(package.name) ${{ coalesce( variables['System.PullRequest.PullRequestNumber'], variables['Build.SourceBranchName'], '$(Date:yyyyMMdd)') }}$(Rev:.r)
 
-trigger:
-  batch: true
-  branches:
-    include:
-    - master
-  paths:
-    include:
-      - docfx_project
-      - $(project.name)/*
-    exclude:
-      - '*'
-      - $(project.name)/Packages/$(package.name)/README.md
-      - $(project.name)/Packages/$(package.name)/LICENSE.md
-      - $(project.name)/Packages/$(package.name)/.github/*
+# trigger:
+#   batch: true
+#   branches:
+#     include:
+#     - master
+#   paths:
+#     include:
+#       - docfx_project
+#       - $(project.name)/*
+#     exclude:
+#       - '*'
+#       - $(project.name)/Packages/$(package.name)/README.md
+#       - $(project.name)/Packages/$(package.name)/LICENSE.md
+#       - $(project.name)/Packages/$(package.name)/.github/*
 
 pr:
   autoCancel: true

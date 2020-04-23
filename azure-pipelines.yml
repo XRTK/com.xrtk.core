@@ -14,7 +14,7 @@ variables:
   - name: LogDirectory
     value: ''
 
-name: $(package.name)-${{ coalesce($(System.PullRequest.PullRequestNumber), $(Date:yyyyMMdd)) }}$(Rev:.r)
+name: $(package.name)-$[coalesce( $(System.PullRequest.PullRequestNumber), $(Date:yyyyMMdd) )]$(Rev:.r)
 
 # trigger:
 #   batch: true

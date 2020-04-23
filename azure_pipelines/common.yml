@@ -4,12 +4,13 @@ parameters:
     default:
       windows:
         image: windows-latest
-        components: '"Windows", "Windows_IL2CPP", "Android"'
+        components: '"Windows", "Windows_IL2CPP", "Android", "UWP_IL2CPP"'
         # https://github.com/microsoft/unitysetup.powershell installer component options
         # Windows, Windows_IL2CPP, UWP_IL2CPP, Lumin, Android, iOS, Mac, Mac_IL2CPP , WebGL
         targets:
         - StandaloneWindows64
         - Android
+        - WSAPlayer
         # Unity -buildTarget command line args https://docs.unity3d.com/Manual/CommandLineArguments.html
         # 'StandaloneOSX', 'StandaloneWindows', 'iOS', 'Android', 'StandaloneLinux', 'StandaloneWindows64', 'WebGL',
         # 'WSAPlayer', 'StandaloneLinux64', 'StandaloneLinuxUniversal', 'Tizen', 'PSP2', 'PS4', 'XBoxOne', 'N3DS', 'WiiU', 'tvOS', 'Switch', 'Lumin'

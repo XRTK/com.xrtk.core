@@ -30,8 +30,8 @@ stages:
     parameters:
       platform: windows
       ${{ insert }}: ${{ parameters.os.windows }}
-
-# - template: stages/publish.yml
-#   parameters:
-#     shouldRun: and(eq(variables[build.reason], 'IndividualCI'), eq(variables[build.sourceBranchName], 'master'))
-#     vmImage: ${{ parameters.os.windows.image }}
+  # - ${{ if ne(variables.build.sourceBranchName, 'master') }}:
+  #   - template: stages/publish.yml
+  #     parameters:
+  #       shouldRun: and(eq(variables[build.reason], 'IndividualCI'), eq(variables[build.sourceBranchName], 'master'))
+  #       vmImage: ${{ parameters.os.windows.image }}

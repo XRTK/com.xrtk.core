@@ -29,9 +29,9 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
 
             EditorGUILayout.PropertyField(globalCameraProfile);
 
-            serializedObject.ApplyModifiedProperties();
-
             base.OnInspectorGUI();
+
+            serializedObject.ApplyModifiedProperties();
 
             if (MixedRealityToolkit.IsInitialized && EditorGUI.EndChangeCheck())
             {

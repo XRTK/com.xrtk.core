@@ -24,19 +24,21 @@ steps:
         param($log)
 
         while ( (Test-Path $$log -Type Leaf) ) {
-            Start-Sleep -Milliseconds 1000
+            Start-Sleep -Seconds 1
         }
 
-        Get-Content "$log" -Wait | Write-Host
+        Get-Content "$log" -Wait
       } -ArgumentList $logPath
 
       while ( -not $process.HasExited )
       {
-        Start-Sleep -Milliseconds 1000
+        # While waiting, Get-Content checks the file once each second
+        Start-Sleep -Seconds 1
         Receive-Job $ljob
       }
 
-      Start-Sleep -Milliseconds 5000
+      # Wait for the last of the log information to be written
+      Start-Sleep -Seconds 10
       Receive-Job $ljob
       Stop-Job $ljob
       Remove-Job $ljob

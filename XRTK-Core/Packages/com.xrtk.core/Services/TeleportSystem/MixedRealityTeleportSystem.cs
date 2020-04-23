@@ -216,15 +216,10 @@ namespace XRTK.Services.Teleportation
                 : MixedRealityToolkit.CameraSystem.MainCameraRig.CameraTransform;
             var cameraPosition = cameraTransform.position;
             var cameraParent = cameraTransform.parent;
+            var parentPosition = cameraParent.position;
             Debug.Assert(cameraParent != null, "The Teleport System requires that the camera be parented under another object.");
-            var height = targetPosition.y;
-
-            if (MixedRealityToolkit.CameraSystem != null)
-            {
-                height += MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.position.y;
-            }
-
-            targetPosition -= cameraPosition - cameraParent.position;
+            var height = targetPosition.y + parentPosition.y;
+            targetPosition -= cameraPosition - parentPosition;
             targetPosition.y = height;
             cameraParent.position = targetPosition;
             cameraParent.RotateAround(cameraPosition, Vector3.up, targetRotation.y - cameraTransform.eulerAngles.y);

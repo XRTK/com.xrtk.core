@@ -948,7 +948,8 @@ namespace XRTK.Services
                 return false;
             }
 
-            if (!CurrentBuildTargetPlatform.IsBuildTargetActive(platforms))
+            if (Application.isEditor &&
+                !CurrentBuildTargetPlatform.IsBuildTargetActive(platforms))
             {
                 // We return true so we don't raise en error.
                 // Even though we did not register the service,

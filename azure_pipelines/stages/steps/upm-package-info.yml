@@ -26,4 +26,4 @@ stages:
       Copy-Item "$(System.DefaultWorkingDirectory)\LICENSE.md" -Destination $(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name) -force -Verbose
       Copy-Item "$(System.DefaultWorkingDirectory)\.github" -Destination $(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name) -force -Verbose -Recurse
     failOnStderr: true
-    displayName: 'Get/Set Package Info'
+    displayName: 'Sync Package Info'

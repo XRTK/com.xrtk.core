@@ -29,3 +29,6 @@ steps:
 
       exit $process.ExitCode
   displayName: 'Unity Export Package Seed'
+
+# TODO only build if com.xrtk.core and master build
+# TODO publish build artifact with package for publish pipeline

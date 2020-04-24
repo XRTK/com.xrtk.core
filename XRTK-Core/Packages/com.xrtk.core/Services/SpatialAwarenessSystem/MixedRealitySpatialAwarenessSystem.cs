@@ -10,6 +10,7 @@ using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem.Handlers;
 using XRTK.Providers.SpatialObservers;
+using XRTK.Utilities;
 
 namespace XRTK.Services.SpatialAwarenessSystem
 {
@@ -45,12 +46,10 @@ namespace XRTK.Services.SpatialAwarenessSystem
             get
             {
                 var spatialAwarenessSystemObject = new GameObject("Spatial Awareness System");
-
-                if (MixedRealityToolkit.CameraSystem != null)
-                {
-                    spatialAwarenessSystemObject.transform.SetParent(MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform, false);
-                }
-
+                var playspaceTransform = MixedRealityToolkit.CameraSystem != null
+                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
+                    : CameraCache.Main.transform.parent;
+                spatialAwarenessSystemObject.transform.SetParent(playspaceTransform, false);
                 return spatialAwarenessSystemObject;
             }
         }

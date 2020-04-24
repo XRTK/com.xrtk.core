@@ -8,6 +8,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.DiagnosticsSystem;
 using XRTK.Interfaces.DiagnosticsSystem;
 using XRTK.Interfaces.DiagnosticsSystem.Handlers;
+using XRTK.Utilities;
 using Object = UnityEngine.Object;
 
 namespace XRTK.Services.DiagnosticsSystem
@@ -124,7 +125,10 @@ namespace XRTK.Services.DiagnosticsSystem
                 if (diagnosticsRoot == null)
                 {
                     diagnosticsRoot = new GameObject("Diagnostics").transform;
-                    diagnosticsRoot.transform.SetParent(MixedRealityToolkit.CameraSystem?.MainCameraRig.PlayspaceTransform, false);
+                    var playspaceTransform = MixedRealityToolkit.CameraSystem != null
+                        ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
+                        : CameraCache.Main.transform.parent;
+                    diagnosticsRoot.transform.SetParent(playspaceTransform, false);
                 }
 
                 return diagnosticsRoot;

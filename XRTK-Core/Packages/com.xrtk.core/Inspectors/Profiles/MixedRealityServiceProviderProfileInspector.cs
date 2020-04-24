@@ -9,6 +9,7 @@ using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
+using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.PropertyDrawers;
 using XRTK.Services;
 
@@ -58,7 +59,7 @@ namespace XRTK.Inspectors.Profiles
         public override void OnInspectorGUI()
         {
             EditorGUILayout.Space();
-            showConfigurationFoldout = EditorGUILayout.Foldout(showConfigurationFoldout, new GUIContent($"{ServiceConstraint.Name} Configuration Options"), true);
+            showConfigurationFoldout = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showConfigurationFoldout, new GUIContent($"{ServiceConstraint.Name} Configuration Options"), true);
 
             if (showConfigurationFoldout)
             {

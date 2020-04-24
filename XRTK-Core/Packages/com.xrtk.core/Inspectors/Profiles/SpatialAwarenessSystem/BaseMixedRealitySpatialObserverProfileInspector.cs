@@ -2,6 +2,8 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
+using UnityEngine;
+using XRTK.Inspectors.Extensions;
 using XRTK.Providers.SpatialObservers;
 
 namespace XRTK.Inspectors.Profiles.SpatialAwareness
@@ -15,7 +17,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         private SerializedProperty updateInterval;
         private SerializedProperty physicsLayer;
 
-        private static bool foldout = true;
+        private readonly GUIContent generalSettingsFoldoutHeader = new GUIContent("General Settings");
 
         /// <inheritdoc />
         protected override void OnEnable()
@@ -23,6 +25,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             base.OnEnable();
 
             startupBehavior = serializedObject.FindProperty(nameof(startupBehavior));
+            startupBehavior.isExpanded = true;
             observationExtents = serializedObject.FindProperty(nameof(observationExtents));
             isStationaryObserver = serializedObject.FindProperty(nameof(isStationaryObserver));
             updateInterval = serializedObject.FindProperty(nameof(updateInterval));
@@ -36,9 +39,8 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
 
             serializedObject.Update();
 
-            foldout = EditorGUILayout.Foldout(foldout, "General Settings", true);
-
-            if (foldout)
+            startupBehavior.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(startupBehavior.isExpanded, generalSettingsFoldoutHeader, true);
+            if (startupBehavior.isExpanded)
             {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(startupBehavior);
@@ -48,6 +50,8 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
                 EditorGUILayout.PropertyField(physicsLayer);
                 EditorGUI.indentLevel--;
             }
+
+            EditorGUILayout.Space();
 
             serializedObject.ApplyModifiedProperties();
         }

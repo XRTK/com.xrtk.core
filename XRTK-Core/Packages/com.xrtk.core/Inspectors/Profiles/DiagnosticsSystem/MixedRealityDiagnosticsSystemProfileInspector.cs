@@ -2,7 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
+using UnityEngine;
 using XRTK.Definitions.DiagnosticsSystem;
+using XRTK.Inspectors.Extensions;
 
 namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
 {
@@ -12,11 +14,14 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
         private SerializedProperty diagnosticsWindowPrefab;
         private SerializedProperty showDiagnosticsWindowOnStart;
 
+        private readonly GUIContent generalSettingsFoldoutHeader = new GUIContent("General Settings");
+
         protected override void OnEnable()
         {
             base.OnEnable();
 
             diagnosticsWindowPrefab = serializedObject.FindProperty(nameof(diagnosticsWindowPrefab));
+            diagnosticsWindowPrefab.isExpanded = true;
             showDiagnosticsWindowOnStart = serializedObject.FindProperty(nameof(showDiagnosticsWindowOnStart));
         }
 
@@ -25,8 +30,18 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
             RenderHeader("Diagnostics monitors system resources and performance inside an application during development.");
 
             serializedObject.Update();
-            EditorGUILayout.PropertyField(diagnosticsWindowPrefab);
-            EditorGUILayout.PropertyField(showDiagnosticsWindowOnStart);
+
+            diagnosticsWindowPrefab.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(diagnosticsWindowPrefab.isExpanded, generalSettingsFoldoutHeader, true);
+            if (diagnosticsWindowPrefab.isExpanded)
+            {
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(diagnosticsWindowPrefab);
+                EditorGUILayout.PropertyField(showDiagnosticsWindowOnStart);
+                EditorGUI.indentLevel--;
+            }
+
+            EditorGUILayout.Space();
+
             serializedObject.ApplyModifiedProperties();
 
             base.OnInspectorGUI();

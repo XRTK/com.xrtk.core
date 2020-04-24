@@ -4,6 +4,7 @@
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.PropertyDrawers;
 using XRTK.Providers.SpatialObservers;
 
@@ -20,9 +21,10 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         private SerializedProperty additionalComponents;
         private SerializedProperty meshObjectPrefab;
 
-        private static bool foldout = true;
         private ReorderableList additionalComponentsList;
         private int currentlySelectedConfigurationOption;
+
+        private readonly GUIContent spatialMeshSettingsFoldoutHeader = new GUIContent("Spatial Mesh Settings");
 
         /// <inheritdoc />
         protected override void OnEnable()
@@ -30,6 +32,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             base.OnEnable();
 
             meshLevelOfDetail = serializedObject.FindProperty(nameof(meshLevelOfDetail));
+            meshLevelOfDetail.isExpanded = true;
             meshTrianglesPerCubicMeter = serializedObject.FindProperty(nameof(meshTrianglesPerCubicMeter));
             meshRecalculateNormals = serializedObject.FindProperty(nameof(meshRecalculateNormals));
             meshVisibleMaterial = serializedObject.FindProperty(nameof(meshVisibleMaterial));
@@ -86,9 +89,8 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
 
             serializedObject.Update();
 
-            foldout = EditorGUILayout.Foldout(foldout, "Spatial Mesh Settings", true);
-
-            if (foldout)
+            meshLevelOfDetail.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(meshLevelOfDetail.isExpanded, spatialMeshSettingsFoldoutHeader, true);
+            if (meshLevelOfDetail.isExpanded)
             {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(meshLevelOfDetail);
@@ -102,6 +104,8 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
                 EditorGUILayout.HelpBox("The mesh object is procedurally generated, but you can also use an empty prefab object as well with predefined components and data.", MessageType.Info);
                 EditorGUI.indentLevel--;
             }
+
+            EditorGUILayout.Space();
 
             serializedObject.ApplyModifiedProperties();
         }

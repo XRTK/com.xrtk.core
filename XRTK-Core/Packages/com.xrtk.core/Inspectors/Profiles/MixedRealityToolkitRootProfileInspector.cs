@@ -141,54 +141,70 @@ namespace XRTK.Inspectors.Profiles
             // Camera System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Camera System Settings", EditorStyles.boldLabel);
+            EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(enableCameraSystem);
             EditorGUILayout.PropertyField(cameraSystemType);
             EditorGUILayout.PropertyField(cameraSystemProfile);
+            EditorGUI.indentLevel--;
 
             // Input System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Input System Settings", EditorStyles.boldLabel);
+            EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(enableInputSystem);
             EditorGUILayout.PropertyField(inputSystemType);
             EditorGUILayout.PropertyField(inputSystemProfile);
+            EditorGUI.indentLevel--;
 
             // Boundary System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Boundary System Settings", EditorStyles.boldLabel);
+            EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(enableBoundarySystem);
             EditorGUILayout.PropertyField(boundarySystemType);
             EditorGUILayout.PropertyField(boundaryVisualizationProfile);
+            EditorGUI.indentLevel--;
 
             // Teleport System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Teleport System Settings", EditorStyles.boldLabel);
+            EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(enableTeleportSystem);
             EditorGUILayout.PropertyField(teleportSystemType);
+            EditorGUI.indentLevel--;
 
             // Spatial Awareness System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Spatial Awareness System Settings", EditorStyles.boldLabel);
+            EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(enableSpatialAwarenessSystem);
             EditorGUILayout.PropertyField(spatialAwarenessSystemType);
             EditorGUILayout.PropertyField(spatialAwarenessProfile);
+            EditorGUI.indentLevel--;
 
             // Networking System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Networking System Settings", EditorStyles.boldLabel);
+            EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(enableNetworkingSystem);
             EditorGUILayout.PropertyField(networkingSystemType);
             EditorGUILayout.PropertyField(networkingSystemProfile);
+            EditorGUI.indentLevel--;
 
             // Diagnostics System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Diagnostics System Settings", EditorStyles.boldLabel);
+            EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(enableDiagnosticsSystem);
             EditorGUILayout.PropertyField(diagnosticsSystemType);
             EditorGUILayout.PropertyField(diagnosticsSystemProfile);
+            EditorGUI.indentLevel--;
 
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Additional Service Providers", EditorStyles.boldLabel);
+            EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(registeredServiceProvidersProfile);
+            EditorGUI.indentLevel--;
 
             EditorGUIUtility.labelWidth = previousLabelWidth;
             serializedObject.ApplyModifiedProperties();

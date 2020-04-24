@@ -52,6 +52,10 @@ namespace XRTK.Inspectors.Profiles
 
         private MixedRealityToolkitRootProfile rootProfile;
 
+        private readonly GUIContent enabledLabel = new GUIContent("Enabled");
+        private readonly GUIContent typeLabel = new GUIContent("Type");
+        private readonly GUIContent profileLabel = new GUIContent("Profile");
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -134,79 +138,76 @@ namespace XRTK.Inspectors.Profiles
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
             serializedObject.Update();
 
-            var previousLabelWidth = EditorGUIUtility.labelWidth;
-            EditorGUIUtility.labelWidth = 160f;
             EditorGUI.BeginChangeCheck();
 
             // Camera System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Camera System Settings", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(enableCameraSystem);
-            EditorGUILayout.PropertyField(cameraSystemType);
-            EditorGUILayout.PropertyField(cameraSystemProfile);
+            enableCameraSystem.boolValue = EditorGUILayout.ToggleLeft(enabledLabel, enableCameraSystem.boolValue);
+            EditorGUILayout.PropertyField(cameraSystemType, typeLabel);
+            EditorGUILayout.PropertyField(cameraSystemProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Input System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Input System Settings", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(enableInputSystem);
-            EditorGUILayout.PropertyField(inputSystemType);
-            EditorGUILayout.PropertyField(inputSystemProfile);
+            enableInputSystem.boolValue = EditorGUILayout.ToggleLeft(enabledLabel, enableInputSystem.boolValue);
+            EditorGUILayout.PropertyField(inputSystemType, typeLabel);
+            EditorGUILayout.PropertyField(inputSystemProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Boundary System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Boundary System Settings", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(enableBoundarySystem);
-            EditorGUILayout.PropertyField(boundarySystemType);
-            EditorGUILayout.PropertyField(boundaryVisualizationProfile);
+            enableBoundarySystem.boolValue = EditorGUILayout.ToggleLeft(enabledLabel, enableBoundarySystem.boolValue);
+            EditorGUILayout.PropertyField(boundarySystemType, typeLabel);
+            EditorGUILayout.PropertyField(boundaryVisualizationProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Teleport System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Teleport System Settings", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(enableTeleportSystem);
-            EditorGUILayout.PropertyField(teleportSystemType);
+            enableTeleportSystem.boolValue = EditorGUILayout.ToggleLeft(enabledLabel, enableTeleportSystem.boolValue);
+            EditorGUILayout.PropertyField(teleportSystemType, typeLabel);
             EditorGUI.indentLevel--;
 
             // Spatial Awareness System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Spatial Awareness System Settings", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(enableSpatialAwarenessSystem);
-            EditorGUILayout.PropertyField(spatialAwarenessSystemType);
-            EditorGUILayout.PropertyField(spatialAwarenessProfile);
+            enableSpatialAwarenessSystem.boolValue = EditorGUILayout.ToggleLeft(enabledLabel, enableSpatialAwarenessSystem.boolValue);
+            EditorGUILayout.PropertyField(spatialAwarenessSystemType, typeLabel);
+            EditorGUILayout.PropertyField(spatialAwarenessProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Networking System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Networking System Settings", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(enableNetworkingSystem);
-            EditorGUILayout.PropertyField(networkingSystemType);
-            EditorGUILayout.PropertyField(networkingSystemProfile);
+            enableNetworkingSystem.boolValue = EditorGUILayout.ToggleLeft(enabledLabel, enableNetworkingSystem.boolValue);
+            EditorGUILayout.PropertyField(networkingSystemType, typeLabel);
+            EditorGUILayout.PropertyField(networkingSystemProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Diagnostics System configuration
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Diagnostics System Settings", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(enableDiagnosticsSystem);
-            EditorGUILayout.PropertyField(diagnosticsSystemType);
-            EditorGUILayout.PropertyField(diagnosticsSystemProfile);
+            enableDiagnosticsSystem.boolValue = EditorGUILayout.ToggleLeft(enabledLabel, enableDiagnosticsSystem.boolValue);
+            EditorGUILayout.PropertyField(diagnosticsSystemType, typeLabel);
+            EditorGUILayout.PropertyField(diagnosticsSystemProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             GUILayout.Space(12f);
             EditorGUILayout.LabelField("Additional Service Providers", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(registeredServiceProvidersProfile);
+            EditorGUILayout.PropertyField(registeredServiceProvidersProfile, profileLabel);
             EditorGUI.indentLevel--;
 
-            EditorGUIUtility.labelWidth = previousLabelWidth;
             serializedObject.ApplyModifiedProperties();
 
             if (EditorGUI.EndChangeCheck() &&

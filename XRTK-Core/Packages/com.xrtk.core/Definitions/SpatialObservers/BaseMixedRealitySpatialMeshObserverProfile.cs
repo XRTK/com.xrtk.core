@@ -8,18 +8,8 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Providers.SpatialObservers
 {
-    public abstract class BaseMixedRealitySpatialMeshObserverProfile : BaseMixedRealitySpatialObserverProfile
+    public class BaseMixedRealitySpatialMeshObserverProfile : BaseMixedRealitySpatialObserverProfile
     {
-        [PhysicsLayer]
-        [SerializeField]
-        [Tooltip("The optional mesh Physics layer override of the base PhysicsLayer")]
-        private int meshPhysicsLayerOverride = -1;
-
-        /// <summary>
-        /// The optional Physics layer override of the base <see cref="Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.PhysicsLayer"/>
-        /// </summary>
-        public int MeshPhysicsLayerOverride => meshPhysicsLayerOverride;
-
         [SerializeField]
         [Tooltip("Level of detail for the mesh")]
         private SpatialAwarenessMeshLevelOfDetail meshLevelOfDetail = SpatialAwarenessMeshLevelOfDetail.Coarse;

@@ -6,7 +6,7 @@ using XRTK.Providers.SpatialObservers;
 
 namespace XRTK.Inspectors.Profiles.SpatialAwareness
 {
-    [CustomEditor(typeof(BaseMixedRealitySpatialObserverProfile))]
+    [CustomEditor(typeof(BaseMixedRealitySpatialObserverProfile), true, isFallback = true)]
     public abstract class BaseMixedRealitySpatialObserverProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty startupBehavior;

@@ -13,11 +13,6 @@ namespace XRTK.Interfaces.Providers.SpatialObservers
     public interface IMixedRealitySpatialMeshObserver : IMixedRealitySpatialObserverDataProvider
     {
         /// <summary>
-        /// The optional Physics layer override of the base <see cref="IMixedRealitySpatialObserverDataProvider.PhysicsLayer"/>
-        /// </summary>
-        int MeshPhysicsLayerOverride { get; }
-
-        /// <summary>
         /// Gets or sets the level of detail, as a MixedRealitySpatialAwarenessMeshLevelOfDetail value, for the returned spatial mesh.
         /// Setting this value to Custom, implies that the developer is specifying a custom value for MeshTrianglesPerCubicMeter. 
         /// </summary>

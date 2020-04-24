@@ -128,9 +128,9 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         /// <param name="surfaceId">Value identifying the surface.</param>
         /// <param name="surfaceObject">The surface <see cref="GameObject"/>.</param>
         /// <remarks>
-        /// This method is to be called by implementations of the <see cref="IMixedRealitySurfaceObserver"/> interface, and not by application code.
+        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialSurfaceObserver"/> interface, and not by application code.
         /// </remarks>
-        void RaiseSurfaceAdded(IMixedRealitySurfaceObserver observer, int surfaceId, GameObject surfaceObject);
+        void RaiseSurfaceAdded(IMixedRealitySpatialSurfaceObserver observer, int surfaceId, GameObject surfaceObject);
 
         /// <summary>
         /// The spatial awareness system will call the <see cref="IMixedRealitySpatialAwarenessSurfaceFindingHandler{T}.OnSurfaceUpdated"/> method to indicate an existing planar surface has been updated.
@@ -139,9 +139,9 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         /// <param name="surfaceId">Value identifying the surface.</param>
         /// <param name="surfaceObject">The surface <see cref="GameObject"/>.</param>
         /// <remarks>
-        /// This method is to be called by implementations of the <see cref="IMixedRealitySurfaceObserver"/> interface, and not by application code.
+        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialSurfaceObserver"/> interface, and not by application code.
         /// </remarks>
-        void RaiseSurfaceUpdated(IMixedRealitySurfaceObserver observer, int surfaceId, GameObject surfaceObject);
+        void RaiseSurfaceUpdated(IMixedRealitySpatialSurfaceObserver observer, int surfaceId, GameObject surfaceObject);
 
         /// <summary>
         /// The spatial awareness system will call the <see cref="IMixedRealitySpatialAwarenessSurfaceFindingHandler{T}.OnSurfaceUpdated"/> method to indicate an existing planar surface has been removed.
@@ -149,9 +149,9 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         /// <param name="observer"></param>
         /// <param name="surfaceId">Value identifying the surface.</param>
         /// <remarks>
-        /// This method is to be called by implementations of the <see cref="IMixedRealitySurfaceObserver"/> interface, and not by application code.
+        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialSurfaceObserver"/> interface, and not by application code.
         /// </remarks>
-        void RaiseSurfaceRemoved(IMixedRealitySurfaceObserver observer, int surfaceId);
+        void RaiseSurfaceRemoved(IMixedRealitySpatialSurfaceObserver observer, int surfaceId);
 
         #endregion Surface Finding Events
     }

@@ -30,6 +30,7 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
 
         private readonly GUIContent nearClipTitle = new GUIContent("Near Clip");
         private readonly GUIContent clearFlagsTitle = new GUIContent("Clear Flags");
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -50,7 +51,6 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
             bodyAdjustmentAngle = serializedObject.FindProperty(nameof(bodyAdjustmentAngle));
             bodyAdjustmentSpeed = serializedObject.FindProperty(nameof(bodyAdjustmentSpeed));
         }
-
 
         public override void OnInspectorGUI()
         {

@@ -3,15 +3,16 @@
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions;
+using XRTK.Definitions.CameraSystem;
 using XRTK.Services;
 
-namespace XRTK.Inspectors.Profiles
+namespace XRTK.Inspectors.Profiles.CameraSystem
 {
-    [CustomEditor(typeof(MixedRealityCameraProfile))]
-    public class MixedRealityCameraProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(BaseMixedRealityCameraDataProviderProfile), true, isFallback = true)]
+    public class BaseMixedRealityCameraDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty isCameraPersistent;
+
         private SerializedProperty nearClipPlaneOpaqueDisplay;
         private SerializedProperty cameraClearFlagsOpaqueDisplay;
         private SerializedProperty backgroundColorOpaqueDisplay;
@@ -53,14 +54,14 @@ namespace XRTK.Inspectors.Profiles
 
         public override void OnInspectorGUI()
         {
-            RenderHeader("The Camera Profile helps tweak camera settings no matter what platform you're building for.");
+            RenderHeader("The Camera Data Provider Profile helps tweak camera settings no matter what platform you're building for.");
 
             serializedObject.Update();
 
             EditorGUI.BeginChangeCheck();
 
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Global Settings:", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("Platform Specific Settings:", EditorStyles.boldLabel);
+
             EditorGUILayout.PropertyField(isCameraPersistent);
             EditorGUILayout.PropertyField(cameraRigType);
             EditorGUILayout.PropertyField(defaultHeadHeight);

@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
 
 namespace XRTK.Interfaces.CameraSystem
 {
@@ -10,28 +11,34 @@ namespace XRTK.Interfaces.CameraSystem
     public interface IMixedRealityCameraSystem : IMixedRealityService
     {
         /// <summary>
-        /// Is the current camera displaying on an Opaque (AR) device or a VR / immersive device
+        /// The list of <see cref="IMixedRealityCameraDataProvider"/>s registered and running with the system.
         /// </summary>
-        bool IsOpaque { get; }
+        IReadOnlyCollection<IMixedRealityCameraDataProvider> CameraDataProviders { get; }
 
         /// <summary>
-        /// Is the current camera displaying on a traditional 2d screen or a stereoscopic display?
+        /// The reference to the <see cref="IMixedRealityCameraRig"/> attached to the Main Camera (typically this is the player's camera).
         /// </summary>
-        bool IsStereoscopic { get; }
+        IMixedRealityCameraRig MainCameraRig { get; }
 
         /// <summary>
-        /// The <see cref="IMixedRealityCameraRig"/> component used in the current configuration.
+        /// Sets the <see cref="IMixedRealityCameraDataProvider.HeadHeight"/>. If <see cref="setForAllCameraProviders"/> is true, then it's set
+        /// for all <see cref="CameraDataProviders"/>, otherwise it only sets the <see cref="MainCameraRig"/>.
         /// </summary>
-        IMixedRealityCameraRig CameraRig { get; }
+        /// <param name="value">The height value to set.</param>
+        /// <param name="setForAllCameraProviders">If <see cref="setForAllCameraProviders"/> is true, then it's set
+        /// for all <see cref="CameraDataProviders"/>, otherwise it only sets the <see cref="MainCameraRig"/>.</param>
+        void SetHeadHeight(float value, bool setForAllCameraProviders = false);
 
         /// <summary>
-        /// The default head height when a platform doesn't automatically set it.
+        /// Registers the <see cref="IMixedRealityCameraDataProvider"/> with the <see cref="IMixedRealityCameraSystem"/>.
         /// </summary>
-        float DefaultHeadHeight { get; }
+        /// <param name="dataProvider"></param>
+        void RegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider);
 
         /// <summary>
-        /// The current head height of the player
+        /// UnRegisters the <see cref="IMixedRealityCameraDataProvider"/> with the <see cref="IMixedRealityCameraSystem"/>.
         /// </summary>
-        float HeadHeight { get; set; }
+        /// <param name="dataProvider"></param>
+        void UnRegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider);
     }
 }

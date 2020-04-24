@@ -2,7 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
+using UnityEngine;
 using XRTK.Definitions.DiagnosticsSystem;
+using XRTK.Inspectors.Extensions;
 
 namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
 {
@@ -11,6 +13,8 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
     {
         private SerializedProperty diagnosticsWindowPrefab;
         private SerializedProperty showDiagnosticsWindowOnStart;
+
+        private readonly GUIContent generalSettingsFoldoutHeader = new GUIContent("General Settings");
 
         protected override void OnEnable()
         {
@@ -25,8 +29,16 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
             RenderHeader("Diagnostics monitors system resources and performance inside an application during development.");
 
             serializedObject.Update();
-            EditorGUILayout.PropertyField(diagnosticsWindowPrefab);
-            EditorGUILayout.PropertyField(showDiagnosticsWindowOnStart);
+
+            if (diagnosticsWindowPrefab.FoldoutWithBoldLabelPropertyField(generalSettingsFoldoutHeader))
+            {
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(showDiagnosticsWindowOnStart);
+                EditorGUI.indentLevel--;
+            }
+
+            EditorGUILayout.Space();
+
             serializedObject.ApplyModifiedProperties();
 
             base.OnInspectorGUI();

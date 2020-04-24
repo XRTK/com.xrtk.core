@@ -23,6 +23,14 @@ namespace XRTK.Inspectors
         private int currentPickerWindow = -1;
         private bool checkChange;
 
+        private void Awake()
+        {
+            if (target.name != nameof(MixedRealityToolkit))
+            {
+                target.name = nameof(MixedRealityToolkit);
+            }
+        }
+
         private void OnEnable()
         {
             activeProfile = serializedObject.FindProperty(nameof(activeProfile));
@@ -36,7 +44,8 @@ namespace XRTK.Inspectors
 
             serializedObject.Update();
             EditorGUI.BeginChangeCheck();
-            EditorGUILayout.PropertyField(activeProfile);
+            EditorGUILayout.LabelField(new GUIContent("Mixed Reality Toolkit Root Profile", "This profile is the main root configuration for the entire XRTK."));
+            EditorGUILayout.PropertyField(activeProfile, GUIContent.none);
             var changed = EditorGUI.EndChangeCheck();
             var commandName = Event.current.commandName;
             var profiles = ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitRootProfile>();
@@ -131,6 +140,24 @@ namespace XRTK.Inspectors
                             Selection.activeObject = activeProfile.objectReferenceValue;
                         };
                         break;
+                }
+            }
+
+            if (activeProfile.objectReferenceValue != null)
+            {
+                var rootProfile = activeProfile.objectReferenceValue as MixedRealityToolkitRootProfile;
+                var profileInspector = CreateEditor(rootProfile);
+
+                if (profileInspector is MixedRealityToolkitRootProfileInspector rootProfileInspector)
+                {
+                    EditorGUILayout.Space();
+                    EditorGUILayout.Space();
+                    EditorGUILayout.Space();
+                    Rect rect = new Rect(GUILayoutUtility.GetLastRect()) { height = 0.75f };
+                    EditorGUI.DrawRect(rect, Color.gray);
+                    EditorGUILayout.Space();
+
+                    rootProfileInspector.RenderSystemFields();
                 }
             }
 

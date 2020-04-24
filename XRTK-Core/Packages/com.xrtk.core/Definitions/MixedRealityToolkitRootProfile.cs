@@ -45,7 +45,6 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
-        [Tooltip("Camera System Class to instantiate at runtime.")]
         [Implements(typeof(IMixedRealityCameraSystem), TypeGrouping.ByNamespaceFlat)]
         private SystemType cameraSystemType;
 
@@ -104,7 +103,6 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
-        [Tooltip("Input System Class to instantiate at runtime.")]
         [Implements(typeof(IMixedRealityInputSystem), TypeGrouping.ByNamespaceFlat)]
         private SystemType inputSystemType;
 
@@ -122,7 +120,7 @@ namespace XRTK.Definitions
         #region Boundary System Properties
 
         [SerializeField]
-        [Tooltip("Enable the Boundary on Startup")]
+        [Tooltip("Enable the Boundary on Startup.")]
         private bool enableBoundarySystem = false;
 
         /// <summary>
@@ -135,7 +133,6 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
-        [Tooltip("Boundary System Class to instantiate at runtime.")]
         [Implements(typeof(IMixedRealityBoundarySystem), TypeGrouping.ByNamespaceFlat)]
         private SystemType boundarySystemType;
 
@@ -166,7 +163,7 @@ namespace XRTK.Definitions
         #region Teleportation System Properties
 
         [SerializeField]
-        [Tooltip("Enable the Teleport System on Startup")]
+        [Tooltip("Enable the Teleport System on Startup.")]
         private bool enableTeleportSystem = false;
 
         /// <summary>
@@ -179,7 +176,6 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
-        [Tooltip("Boundary System Class to instantiate at runtime.")]
         [Implements(typeof(IMixedRealityTeleportSystem), TypeGrouping.ByNamespaceFlat)]
         private SystemType teleportSystemType;
 
@@ -197,7 +193,7 @@ namespace XRTK.Definitions
         #region Spatial Awareness System Properties
 
         [SerializeField]
-        [Tooltip("Enable the Spatial Awareness system on Startup")]
+        [Tooltip("Enable the Spatial Awareness system on Startup.")]
         private bool enableSpatialAwarenessSystem = false;
 
         /// <summary>
@@ -210,7 +206,6 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
-        [Tooltip("Spatial Awareness System Class to instantiate at runtime.")]
         [Implements(typeof(IMixedRealitySpatialAwarenessSystem), TypeGrouping.ByNamespaceFlat)]
         private SystemType spatialAwarenessSystemType;
 
@@ -254,7 +249,7 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
-        [Tooltip("Enable networking system")]
+        [Tooltip("Enable Networking System on Startup.")]
         private bool enableNetworkingSystem = false;
 
         /// <summary>
@@ -267,7 +262,6 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
-        [Tooltip("Networking System Class to instantiate at runtime.")]
         [Implements(typeof(IMixedRealityNetworkingSystem), TypeGrouping.ByNamespaceFlat)]
         private SystemType networkingSystemType;
 
@@ -298,7 +292,7 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
-        [Tooltip("Enable diagnostic system")]
+        [Tooltip("Enable Diagnostic System on Startup.")]
         private bool enableDiagnosticsSystem = false;
 
         /// <summary>
@@ -311,7 +305,6 @@ namespace XRTK.Definitions
         }
 
         [SerializeField]
-        [Tooltip("Diagnostics System Class to instantiate at runtime.")]
         [Implements(typeof(IMixedRealityDiagnosticsSystem), TypeGrouping.ByNamespaceFlat)]
         private SystemType diagnosticsSystemType;
 

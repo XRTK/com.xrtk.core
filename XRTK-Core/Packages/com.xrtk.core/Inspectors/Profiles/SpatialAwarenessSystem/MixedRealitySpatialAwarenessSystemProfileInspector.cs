@@ -30,6 +30,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
 
             serializedObject.Update();
             EditorGUILayout.PropertyField(meshDisplayOption);
+            EditorGUILayout.Space();
             EditorGUILayout.PropertyField(globalMeshObserverProfile);
             EditorGUILayout.PropertyField(globalSurfaceObserverProfile);
             serializedObject.ApplyModifiedProperties();

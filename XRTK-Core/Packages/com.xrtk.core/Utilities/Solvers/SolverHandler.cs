@@ -215,7 +215,7 @@ namespace XRTK.SDK.Utilities.Solvers
             switch (TrackedObjectToReference)
             {
                 case TrackedObjectType.Head:
-                    TrackTransform(MixedRealityToolkit.CameraSystem.CameraRig.CameraTransform);
+                    TrackTransform(MixedRealityToolkit.CameraSystem.MainCameraRig.CameraTransform);
                     break;
                 case TrackedObjectType.LeftHandOrController:
                     Handedness = Handedness.Left;
@@ -224,10 +224,10 @@ namespace XRTK.SDK.Utilities.Solvers
                     Handedness = Handedness.Right;
                     break;
                 case TrackedObjectType.Body:
-                    TrackTransform(MixedRealityToolkit.CameraSystem.CameraRig.BodyTransform);
+                    TrackTransform(MixedRealityToolkit.CameraSystem.MainCameraRig.BodyTransform);
                     break;
                 case TrackedObjectType.Playspace:
-                    TrackTransform(MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform);
+                    TrackTransform(MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

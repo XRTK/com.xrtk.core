@@ -1,24 +1,21 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Services.CameraSystem;
 
-namespace XRTK.Definitions
+namespace XRTK.Definitions.CameraSystem
 {
     /// <summary>
-    /// This <see cref="ScriptableObject"/> tells you if your head mounted display (HMD)
-    /// is a transparent device or an occluded device.
-    /// Based on those values, you can customize your camera and quality settings.
+    /// Provides configuration options for <see cref="IMixedRealityCameraDataProvider"/>s.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Camera Profile", fileName = "MixedRealityCameraProfile", order = (int)CreateProfileMenuItemIndices.Camera)]
-    public class MixedRealityCameraProfile : BaseMixedRealityProfile
+    public class BaseMixedRealityCameraDataProviderProfile : BaseMixedRealityProfile
     {
         [SerializeField]
-        private bool isCameraPersistent = false;
+        private bool isCameraPersistent = true;
 
         /// <summary>
         /// Should the camera be reused in each scene?
@@ -116,6 +113,7 @@ namespace XRTK.Definitions
             internal set => cameraRigType = value;
         }
 
+        [Range(0f, 3f)]
         [SerializeField]
         [Tooltip("The default head height the rig will start at if a platform doesn't automatically adjust the height for you.")]
         private float defaultHeadHeight = 1.6f;

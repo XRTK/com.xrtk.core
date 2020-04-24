@@ -94,7 +94,11 @@ namespace XRTK.Definitions.InputSystem
                         profileGuid = DefaultGuidString;
                     }
 
-                    Guid.TryParse(profileGuid, out cachedGuid);
+                    if (Guid.TryParse(profileGuid, out var temp))
+                    {
+                        cachedGuid = temp;
+                        Debug.Log(cachedGuid);
+                    }
                 }
 
                 return cachedGuid;

@@ -6,13 +6,8 @@ using UnityEngine;
 
 namespace XRTK.Interfaces.Providers.SpatialObservers
 {
-    public interface IMixedRealitySurfaceObserver : IMixedRealitySpatialObserverDataProvider
+    public interface IMixedRealitySpatialSurfaceObserver : IMixedRealitySpatialObserverDataProvider
     {
-        /// <summary>
-        /// Overrides the <see cref="IMixedRealitySpatialObserverDataProvider.PhysicsLayer"/> with the provided value.
-        /// </summary>
-        int SurfacePhysicsLayerOverride { get; }
-
         /// <summary>
         /// Gets or sets the minimum surface area, in square meters, that must be satisfied before a surface is identified.
         /// </summary>

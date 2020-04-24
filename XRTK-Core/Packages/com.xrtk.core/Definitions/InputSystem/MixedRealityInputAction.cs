@@ -18,14 +18,14 @@ namespace XRTK.Definitions.InputSystem
         /// Constructor.
         /// </summary>
         /// <param name="description"></param>
-        private MixedRealityInputAction(string description)
+        private MixedRealityInputAction(string description) : this()
         {
             if (string.IsNullOrWhiteSpace(description))
             {
                 throw new ArgumentException($"{nameof(description)} cannot be empty");
             }
 
-            this.profileGuid = DefaultGuidString;
+            Profile = DefaultGuidString;
             this.id = 0;
             this.description = description;
             this.axisConstraint = AxisType.None;
@@ -58,7 +58,7 @@ namespace XRTK.Definitions.InputSystem
         public MixedRealityInputAction(Guid profileGuid, uint id, string description, AxisType axisConstraint = AxisType.None)
             : this(id, description, axisConstraint)
         {
-            this.profileGuid = profileGuid.ToString("N");
+            Profile = profileGuid.ToString("N");
         }
 
         /// <summary>
@@ -73,6 +73,20 @@ namespace XRTK.Definitions.InputSystem
 
         [SerializeField]
         private string profileGuid;
+
+        private string Profile
+        {
+            get => profileGuid;
+            set
+            {
+                profileGuid = value;
+
+                if (Guid.TryParse(profileGuid, out var temp))
+                {
+                    ProfileGuid = temp;
+                }
+            }
+        }
 
         /// <summary>
         /// The guid reference to the <see cref="MixedRealityInputActionsProfile"/> this action belongs to.
@@ -165,7 +179,7 @@ namespace XRTK.Definitions.InputSystem
         /// <inheritdoc />
         public void OnBeforeSerialize()
         {
-            profileGuid = ProfileGuid.ToString("N");
+            Profile = ProfileGuid.ToString("N");
         }
 
         /// <inheritdoc />

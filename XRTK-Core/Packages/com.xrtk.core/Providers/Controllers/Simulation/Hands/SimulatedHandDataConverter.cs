@@ -181,9 +181,14 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             // Apply position delta x / y in screen space, but depth (z) offset in world space
             screenPosition.x = handRootPose.Position.x;
             screenPosition.y = handRootPose.Position.y;
-            Vector3 newWorldPoint = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition);
-            newWorldPoint += MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.forward * handRootPose.Position.z;
-            screenPosition = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.WorldToScreenPoint(newWorldPoint);
+
+            var camera = MixedRealityToolkit.CameraSystem != null
+                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera
+                : CameraCache.Main;
+
+            Vector3 newWorldPoint = camera.ScreenToWorldPoint(ScreenPosition);
+            newWorldPoint += camera.transform.forward * handRootPose.Position.z;
+            screenPosition = camera.WorldToScreenPoint(newWorldPoint);
 
             // The provided hand root pose rotation is just a delta from the
             // previous frame, so we need to determine the final rotation still.
@@ -204,7 +209,11 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             currentPoseBlending = TargetPoseBlending;
             var rotation = Quaternion.Euler(HandRotateEulerAngles);
-            var position = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
+            var camera = MixedRealityToolkit.CameraSystem != null
+                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera
+                : CameraCache.Main;
+
+            var position = camera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
             ComputeJointPoses(Pose, Handedness, rotation, position, HandData.Joints);
         }
 
@@ -213,7 +222,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         private void ComputeJointPoses(SimulatedHandControllerPose pose, Handedness handedness, Quaternion rotation, Vector3 position, MixedRealityPose[] jointsOut)
         {
-            Quaternion cameraRotation = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation;
+            Quaternion cameraRotation = MixedRealityToolkit.CameraSystem != null
+                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation
+                : CameraCache.Main.transform.rotation;
 
             for (int i = 0; i < HandData.JointCount; i++)
             {

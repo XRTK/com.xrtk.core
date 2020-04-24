@@ -6,6 +6,7 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
 using XRTK.Services;
+using XRTK.Utilities;
 
 namespace XRTK.Providers.Controllers.Hands
 {
@@ -105,7 +106,9 @@ namespace XRTK.Providers.Controllers.Hands
         {
             var localJointPoses = new MixedRealityPose[joints.Length];
             var invRotation = Quaternion.Inverse(rotation);
-            var invCameraRotation = Quaternion.Inverse(MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation);
+            var invCameraRotation = Quaternion.Inverse(MixedRealityToolkit.CameraSystem != null
+                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation
+                : CameraCache.Main.transform.rotation);
 
             for (int i = 0; i < HandData.JointCount; i++)
             {

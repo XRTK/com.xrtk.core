@@ -756,9 +756,9 @@ namespace XRTK.Services
         /// Registers all the <see cref="IMixedRealityService"/>s defined in the provided configuration collection.
         /// </summary>
         /// <typeparam name="T">The interface type for the <see cref="IMixedRealityService"/> to be registered.</typeparam>
-        /// <param name="configurations">The list of <see cref="MixedRealityServiceConfiguration{T}"/>s.</param>
+        /// <param name="configurations">The list of <see cref="IMixedRealityServiceConfiguration{T}"/>s.</param>
         /// <returns>True, if all configurations successfully created and registered their services.</returns>
-        public static bool TryRegisterServiceConfigurations<T>(MixedRealityServiceConfiguration<T>[] configurations) where T : IMixedRealityService
+        public static bool TryRegisterServiceConfigurations<T>(IMixedRealityServiceConfiguration<T>[] configurations) where T : IMixedRealityService
         {
             bool anyFailed = false;
 
@@ -775,16 +775,17 @@ namespace XRTK.Services
 
                 if (TryCreateAndRegisterService(configuration, out var serviceInstance))
                 {
-                    if (configuration.Profile is BaseMixedRealityServiceProfile<IMixedRealityDataProvider> profile)
+                    if (configuration.Profile is IMixedRealityServiceProfile<IMixedRealityDataProvider> profile &&
+                        !TryRegisterDataProviderConfigurations(profile.RegisteredServiceConfigurations, serviceInstance))
                     {
-                        TryRegisterDataProviderConfigurations(profile.RegisteredServiceConfigurations, serviceInstance);
+                        anyFailed = true;
                     }
-
-                    continue;
                 }
-
-                Debug.LogError($"Failed to start {configuration.Name}!");
-                anyFailed = true;
+                else
+                {
+                    Debug.LogError($"Failed to start {configuration.Name}!");
+                    anyFailed = true;
+                }
             }
 
             return !anyFailed;
@@ -794,10 +795,10 @@ namespace XRTK.Services
         /// Registers all the <see cref="IMixedRealityDataProvider"/>s defined in the provided configuration collection.
         /// </summary>
         /// <typeparam name="T">The interface type for the <see cref="IMixedRealityDataProvider"/> to be registered.</typeparam>
-        /// <param name="configurations">The list of <see cref="MixedRealityServiceConfiguration{T}"/>s.</param>
+        /// <param name="configurations">The list of <see cref="IMixedRealityServiceConfiguration{T}"/>s.</param>
         /// <param name="serviceParent">The <see cref="IMixedRealityService"/> that the <see cref="IMixedRealityDataProvider"/> will be assigned to.</param>
         /// <returns>True, if all configurations successfully created and registered their data providers.</returns>
-        public static bool TryRegisterDataProviderConfigurations<T>(MixedRealityServiceConfiguration<T>[] configurations, IMixedRealityService serviceParent) where T : IMixedRealityDataProvider
+        public static bool TryRegisterDataProviderConfigurations<T>(IMixedRealityServiceConfiguration<T>[] configurations, IMixedRealityService serviceParent) where T : IMixedRealityDataProvider
         {
             bool anyFailed = false;
 
@@ -837,7 +838,7 @@ namespace XRTK.Services
         /// Creates a new instance of a service and registers it to the Mixed Reality Toolkit service registry for the specified platform.
         /// </summary>
         /// <typeparam name="T">The interface type for the <see cref="IMixedRealityService"/> to be registered.</typeparam>
-        /// <param name="configuration">The <see cref="MixedRealityServiceConfiguration"/> to use to create and register the service.</param>
+        /// <param name="configuration">The <see cref="IMixedRealityServiceConfiguration{T}"/> to use to create and register the service.</param>
         /// <param name="service">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
         /// <returns>True, if the service was successfully created and registered.</returns>
         public static bool TryCreateAndRegisterService<T>(IMixedRealityServiceConfiguration<T> configuration, out IMixedRealityService service) where T : IMixedRealityService
@@ -855,7 +856,7 @@ namespace XRTK.Services
         /// Creates a new instance of a data provider and registers it to the Mixed Reality Toolkit service registry for the specified platform.
         /// </summary>
         /// <typeparam name="T">The interface type for the <see cref="IMixedRealityService"/> to be registered.</typeparam>
-        /// <param name="configuration">The <see cref="MixedRealityServiceConfiguration"/> to use to create and register the service.</param>
+        /// <param name="configuration">The <see cref="IMixedRealityServiceConfiguration{T}"/> to use to create and register the data provider.</param>
         /// <param name="serviceParent">The <see cref="IMixedRealityService"/> that the <see cref="IMixedRealityDataProvider"/> will be assigned to.</param>
         /// <returns>True, if the service was successfully created and registered.</returns>
         public static bool TryCreateAndRegisterDataProvider<T>(IMixedRealityServiceConfiguration<T> configuration, IMixedRealityService serviceParent) where T : IMixedRealityDataProvider
@@ -944,7 +945,8 @@ namespace XRTK.Services
                 return false;
             }
 
-            if (!CurrentBuildTargetPlatform.IsBuildTargetActive(platforms))
+            if (Application.isEditor &&
+                !CurrentBuildTargetPlatform.IsBuildTargetActive(platforms))
             {
                 // We return true so we don't raise en error.
                 // Even though we did not register the service,

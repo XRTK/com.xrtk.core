@@ -22,7 +22,12 @@ namespace XRTK.Providers.SpatialObservers
         {
             if (profile == null)
             {
-                throw new ArgumentNullException($"Missing profile for {name}");
+                profile = MixedRealityToolkit.Instance.ActiveProfile.SpatialAwarenessProfile.GlobalMeshObserverProfile;
+            }
+
+            if (profile == null)
+            {
+                throw new ArgumentNullException($"Missing a {profile.GetType().Name} profile for {name}");
             }
 
             SourceId = MixedRealityToolkit.SpatialAwarenessSystem.GenerateNewObserverId();
@@ -67,7 +72,7 @@ namespace XRTK.Providers.SpatialObservers
         public float UpdateInterval { get; set; }
 
         /// <inheritdoc />
-        public virtual int PhysicsLayer { get; }
+        public virtual int PhysicsLayer { get; set; }
 
         /// <inheritdoc />
         public bool IsRunning { get; protected set; }

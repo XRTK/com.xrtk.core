@@ -22,11 +22,9 @@ namespace XRTK.Definitions.Platforms
         /// <returns>True, if any build target is active.</returns>
         public static bool IsBuildTargetActive(List<IMixedRealityPlatform> platforms)
         {
-            if (!Application.isEditor) { return false; }
-
-            var isEditor = false;
             var isBuildTargetActive = false;
             var isEditorPlatformActive = false;
+            var isEditorPlatformPresent = false;
 
             foreach (var platform in platforms)
             {
@@ -35,7 +33,7 @@ namespace XRTK.Definitions.Platforms
                     case AllPlatforms _:
                         return true;
                     case CurrentBuildTargetPlatform _:
-                        isEditor = true;
+                        isEditorPlatformPresent = true;
                         isEditorPlatformActive = platform.IsAvailable;
                         break;
                     default:
@@ -44,7 +42,7 @@ namespace XRTK.Definitions.Platforms
                 }
             }
 
-            return !isEditor || isBuildTargetActive && isEditorPlatformActive;
+            return !isEditorPlatformPresent || isBuildTargetActive && isEditorPlatformActive;
         }
     }
 }

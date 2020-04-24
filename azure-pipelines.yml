@@ -14,7 +14,7 @@ variables:
   - name: LogDirectory
     value: ''
 
-name: $(package.name) ${{ coalesce( variables['System.PullRequest.PullRequestNumber'], variables['Build.SourceBranchName'], '$(Date:yyyyMMdd)') }}$(Rev:.r)
+name: $(package.name) ${{ coalesce( variables['System.PullRequest.PullRequestNumber'], variables['Build.SourceBranch'], '$(Date:yyyyMMdd)') }}$(Rev:.r)
 
 # trigger:
 #   batch: true

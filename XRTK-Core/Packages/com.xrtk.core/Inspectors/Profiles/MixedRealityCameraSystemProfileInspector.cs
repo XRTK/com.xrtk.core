@@ -2,7 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information. 
 
 using UnityEditor;
+using UnityEngine;
 using XRTK.Definitions.CameraSystem;
+using XRTK.Inspectors.Extensions;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.CameraSystem
@@ -11,6 +13,8 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
     public class MixedRealityCameraSystemProfileInspector : MixedRealityServiceProfileInspector
     {
         private SerializedProperty globalCameraProfile;
+
+        private readonly GUIContent generalSettingsFoldoutHeader = new GUIContent("General Settings");
 
         protected override void OnEnable()
         {
@@ -27,7 +31,14 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
 
             EditorGUI.BeginChangeCheck();
 
-            EditorGUILayout.PropertyField(globalCameraProfile);
+            if (globalCameraProfile.FoldoutWithBoldLabelPropertyField(generalSettingsFoldoutHeader))
+            {
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(globalCameraProfile);
+                EditorGUI.indentLevel--;
+            }
+
+            EditorGUILayout.Space();
 
             base.OnInspectorGUI();
 

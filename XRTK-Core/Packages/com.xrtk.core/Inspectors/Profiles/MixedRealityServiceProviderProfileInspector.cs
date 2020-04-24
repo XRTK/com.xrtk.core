@@ -27,8 +27,6 @@ namespace XRTK.Inspectors.Profiles
 
         protected SerializedProperty Configurations => configurations;
 
-        private bool showConfigurationFoldout = true;
-
         /// <summary>
         /// Gets the service constraint used to filter options listed in the
         /// <see cref="configurations"/> instance type dropdown. Set after
@@ -62,9 +60,9 @@ namespace XRTK.Inspectors.Profiles
         public override void OnInspectorGUI()
         {
             EditorGUILayout.Space();
-            showConfigurationFoldout = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showConfigurationFoldout, new GUIContent($"{ServiceConstraint.Name} Configuration Options"), true);
+            configurations.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(configurations.isExpanded, new GUIContent($"{ServiceConstraint.Name} Configuration Options"));
 
-            if (showConfigurationFoldout)
+            if (configurations.isExpanded)
             {
                 serializedObject.Update();
                 EditorGUILayout.Space();

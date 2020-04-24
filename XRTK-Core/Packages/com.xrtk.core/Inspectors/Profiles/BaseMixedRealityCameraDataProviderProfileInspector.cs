@@ -30,6 +30,7 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
 
         private readonly GUIContent nearClipTitle = new GUIContent("Near Clip");
         private readonly GUIContent clearFlagsTitle = new GUIContent("Clear Flags");
+
         protected override void OnEnable()
         {
             base.OnEnable();

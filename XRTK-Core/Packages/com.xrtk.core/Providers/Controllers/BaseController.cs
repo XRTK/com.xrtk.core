@@ -13,6 +13,7 @@ using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
+using XRTK.Utilities;
 using XRTK.Utilities.Gltf.Schema;
 using XRTK.Utilities.Gltf.Serialization;
 
@@ -242,20 +243,24 @@ namespace XRTK.Providers.Controllers
             // If we've got a controller model, then place it in the scene and get/attach the visualizer.
             if (controllerModel != null)
             {
-                //If the model was loaded from a system template
+                var playspaceTransform = MixedRealityToolkit.CameraSystem != null
+                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
+                    : CameraCache.Main.transform.parent;
+
+                // If the model was loaded from a system template
                 if (useSystemDefaultModels && gltfObject != null)
                 {
                     controllerModel.name = $"{controllerType.Name}_Visualization";
-                    controllerModel.transform.SetParent(MixedRealityToolkit.CameraSystem?.MainCameraRig.PlayspaceTransform);
+                    controllerModel.transform.SetParent(playspaceTransform);
                     var visualizationType = visualizationProfile.GetControllerVisualizationTypeOverride(controllerType, ControllerHandedness) ??
                                             visualizationProfile.ControllerVisualizationType;
                     controllerModel.AddComponent(visualizationType.Type);
                     Visualizer = controllerModel.GetComponent<IMixedRealityControllerVisualizer>();
                 }
-                //If the model was a prefab
                 else
                 {
-                    var controllerObject = UnityEngine.Object.Instantiate(controllerModel, MixedRealityToolkit.CameraSystem?.MainCameraRig.PlayspaceTransform);
+                    // If the model was a prefab
+                    var controllerObject = UnityEngine.Object.Instantiate(controllerModel, playspaceTransform);
                     controllerObject.name = $"{controllerType.Name}_Visualization";
                     Visualizer = controllerObject.GetComponent<IMixedRealityControllerVisualizer>();
                 }

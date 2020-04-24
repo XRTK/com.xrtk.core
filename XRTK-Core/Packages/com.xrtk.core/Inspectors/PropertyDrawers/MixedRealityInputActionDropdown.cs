@@ -120,7 +120,7 @@ namespace XRTK.Inspectors.PropertyDrawers
                     {
                         dropdownMenu.AddItem(
                             new GUIContent(inputAction.Description),
-                            actionItem == selectedItem,
+                            inputAction.ProfileGuid == selectedItem.ProfileGuid && actionItem.Id == selectedItem.Id,
                             data => SetInputAction(actionItem),
                             null);
                     }

@@ -10,6 +10,8 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
     public class MixedRealitySpatialAwarenessSystemProfileInspector : MixedRealityServiceProfileInspector
     {
         private SerializedProperty meshDisplayOption;
+        private SerializedProperty globalMeshObserverProfile;
+        private SerializedProperty globalSurfaceObserverProfile;
 
         /// <inheritdoc />
         protected override void OnEnable()
@@ -17,6 +19,8 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             base.OnEnable();
 
             meshDisplayOption = serializedObject.FindProperty(nameof(meshDisplayOption));
+            globalMeshObserverProfile = serializedObject.FindProperty(nameof(globalMeshObserverProfile));
+            globalSurfaceObserverProfile = serializedObject.FindProperty(nameof(globalSurfaceObserverProfile));
         }
 
         /// <inheritdoc />
@@ -26,6 +30,9 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
 
             serializedObject.Update();
             EditorGUILayout.PropertyField(meshDisplayOption);
+            EditorGUILayout.Space();
+            EditorGUILayout.PropertyField(globalMeshObserverProfile);
+            EditorGUILayout.PropertyField(globalSurfaceObserverProfile);
             serializedObject.ApplyModifiedProperties();
 
             base.OnInspectorGUI();

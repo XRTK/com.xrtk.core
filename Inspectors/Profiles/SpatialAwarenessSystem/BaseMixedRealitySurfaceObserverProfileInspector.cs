@@ -7,8 +7,8 @@ using XRTK.Providers.SpatialObservers;
 
 namespace XRTK.Inspectors.Profiles.SpatialAwareness
 {
-    [CustomEditor(typeof(BaseMixedRealitySurfaceObserverProfile))]
-    public abstract class BaseMixedRealitySurfaceObserverProfileInspector : BaseMixedRealitySpatialObserverProfileInspector
+    [CustomEditor(typeof(BaseMixedRealitySurfaceObserverProfile), true, isFallback = true)]
+    public class BaseMixedRealitySurfaceObserverProfileInspector : BaseMixedRealitySpatialObserverProfileInspector
     {
         private SerializedProperty surfacePhysicsLayerOverride;
         private SerializedProperty surfaceFindingMinimumArea;

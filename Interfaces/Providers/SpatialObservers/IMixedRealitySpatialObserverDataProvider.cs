@@ -27,7 +27,7 @@ namespace XRTK.Interfaces.Providers.SpatialObservers
         /// <remarks>
         /// Some implementations may override this.
         /// </remarks>
-        int PhysicsLayer { get; }
+        int PhysicsLayer { get; set; }
 
         /// <summary>
         /// Is the observer running (actively accumulating spatial data)?

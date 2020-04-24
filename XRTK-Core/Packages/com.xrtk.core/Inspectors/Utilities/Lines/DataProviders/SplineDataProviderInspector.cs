@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
+using XRTK.Inspectors.Extensions;
 using XRTK.Utilities.Lines.DataProviders;
 
 namespace XRTK.Inspectors.Utilities.Lines.DataProviders
@@ -31,8 +32,6 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
         private static readonly GUIContent RemoveControlPointContent = new GUIContent("-", "Remove a control point");
         private static readonly GUIContent ControlPointHeaderContent = new GUIContent("Spline Control Points", "The current control points for the spline.");
 
-        private static bool controlPointFoldout = true;
-
         private SerializedProperty controlPoints;
         private SerializedProperty alignAllControlPoints;
 
@@ -46,8 +45,8 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
             base.OnEnable();
 
             splineData = (SplineDataProvider)target;
-            controlPoints = serializedObject.FindProperty("controlPoints");
-            alignAllControlPoints = serializedObject.FindProperty("alignAllControlPoints");
+            controlPoints = serializedObject.FindProperty(nameof(controlPoints));
+            alignAllControlPoints = serializedObject.FindProperty(nameof(alignAllControlPoints));
 
             controlPointList = new ReorderableList(serializedObject, controlPoints, false, false, false, false)
             {
@@ -87,9 +86,9 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
             GUI.enabled = true;
             GUILayout.EndHorizontal();
 
-            controlPointFoldout = EditorGUILayout.Foldout(controlPointFoldout, ControlPointHeaderContent, true);
+            controlPoints.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(controlPoints.isExpanded, ControlPointHeaderContent);
 
-            if (controlPointFoldout)
+            if (controlPoints.isExpanded)
             {
                 // If we found overlapping points, provide an option to auto-separate them
                 if (OverlappingPointIndexes.Count > 0)

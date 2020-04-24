@@ -32,7 +32,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             base.OnEnable();
 
             meshLevelOfDetail = serializedObject.FindProperty(nameof(meshLevelOfDetail));
-            meshLevelOfDetail.isExpanded = true;
             meshTrianglesPerCubicMeter = serializedObject.FindProperty(nameof(meshTrianglesPerCubicMeter));
             meshRecalculateNormals = serializedObject.FindProperty(nameof(meshRecalculateNormals));
             meshVisibleMaterial = serializedObject.FindProperty(nameof(meshVisibleMaterial));
@@ -89,11 +88,9 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
 
             serializedObject.Update();
 
-            meshLevelOfDetail.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(meshLevelOfDetail.isExpanded, spatialMeshSettingsFoldoutHeader, true);
-            if (meshLevelOfDetail.isExpanded)
+            if (meshLevelOfDetail.FoldoutWithBoldLabelPropertyField(spatialMeshSettingsFoldoutHeader))
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(meshLevelOfDetail);
                 EditorGUILayout.PropertyField(meshTrianglesPerCubicMeter);
                 EditorGUILayout.PropertyField(meshRecalculateNormals);
                 EditorGUILayout.PropertyField(meshVisibleMaterial);

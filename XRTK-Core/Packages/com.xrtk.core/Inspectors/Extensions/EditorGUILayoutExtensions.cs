@@ -18,7 +18,7 @@ namespace XRTK.Inspectors.Extensions
         /// <param name="content">Foldout label content.</param>
         /// <param name="toggleOnLabelClick">Should the foldout toggle on label click?</param>
         /// <returns>Returns true, if foldout unfolded.</returns>
-        public static bool FoldoutWithBoldLabel(bool foldout, GUIContent content, bool toggleOnLabelClick)
+        public static bool FoldoutWithBoldLabel(bool foldout, GUIContent content, bool toggleOnLabelClick = true)
         {
             GUIStyle defaultStyle = EditorStyles.foldout;
             FontStyle previousStyle = defaultStyle.fontStyle;

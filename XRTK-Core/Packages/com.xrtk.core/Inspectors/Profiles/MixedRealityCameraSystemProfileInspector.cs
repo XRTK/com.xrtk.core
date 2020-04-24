@@ -21,7 +21,6 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
             base.OnEnable();
 
             globalCameraProfile = serializedObject.FindProperty(nameof(globalCameraProfile));
-            globalCameraProfile.isExpanded = true;
         }
 
         public override void OnInspectorGUI()
@@ -32,8 +31,7 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
 
             EditorGUI.BeginChangeCheck();
 
-            globalCameraProfile.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(globalCameraProfile.isExpanded, generalSettingsFoldoutHeader, true);
-            if (globalCameraProfile.isExpanded)
+            if (globalCameraProfile.FoldoutWithBoldLabelPropertyField(generalSettingsFoldoutHeader))
             {
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(globalCameraProfile);

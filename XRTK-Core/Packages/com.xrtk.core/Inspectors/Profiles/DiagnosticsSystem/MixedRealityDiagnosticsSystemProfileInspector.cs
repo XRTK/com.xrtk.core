@@ -21,7 +21,6 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
             base.OnEnable();
 
             diagnosticsWindowPrefab = serializedObject.FindProperty(nameof(diagnosticsWindowPrefab));
-            diagnosticsWindowPrefab.isExpanded = true;
             showDiagnosticsWindowOnStart = serializedObject.FindProperty(nameof(showDiagnosticsWindowOnStart));
         }
 
@@ -31,11 +30,9 @@ namespace XRTK.Inspectors.Profiles.DiagnosticsSystem
 
             serializedObject.Update();
 
-            diagnosticsWindowPrefab.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(diagnosticsWindowPrefab.isExpanded, generalSettingsFoldoutHeader, true);
-            if (diagnosticsWindowPrefab.isExpanded)
+            if (diagnosticsWindowPrefab.FoldoutWithBoldLabelPropertyField(generalSettingsFoldoutHeader))
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(diagnosticsWindowPrefab);
                 EditorGUILayout.PropertyField(showDiagnosticsWindowOnStart);
                 EditorGUI.indentLevel--;
             }

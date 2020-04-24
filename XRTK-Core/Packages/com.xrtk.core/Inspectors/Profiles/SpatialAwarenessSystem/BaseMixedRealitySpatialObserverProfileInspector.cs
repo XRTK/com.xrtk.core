@@ -25,7 +25,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             base.OnEnable();
 
             startupBehavior = serializedObject.FindProperty(nameof(startupBehavior));
-            startupBehavior.isExpanded = true;
             observationExtents = serializedObject.FindProperty(nameof(observationExtents));
             isStationaryObserver = serializedObject.FindProperty(nameof(isStationaryObserver));
             updateInterval = serializedObject.FindProperty(nameof(updateInterval));
@@ -39,11 +38,9 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
 
             serializedObject.Update();
 
-            startupBehavior.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(startupBehavior.isExpanded, generalSettingsFoldoutHeader, true);
-            if (startupBehavior.isExpanded)
+            if (startupBehavior.FoldoutWithBoldLabelPropertyField(generalSettingsFoldoutHeader))
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(startupBehavior);
                 EditorGUILayout.PropertyField(observationExtents);
                 EditorGUILayout.PropertyField(isStationaryObserver);
                 EditorGUILayout.PropertyField(updateInterval);

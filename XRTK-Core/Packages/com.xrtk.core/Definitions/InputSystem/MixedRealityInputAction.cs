@@ -160,11 +160,15 @@ namespace XRTK.Definitions.InputSystem
 
         #endregion IEqualityComparer Implementation
 
+        #region ISerializationCallbackReceiver Implementation
+
+        /// <inheritdoc />
         public void OnBeforeSerialize()
         {
             profileGuid = ProfileGuid.ToString("N");
         }
 
+        /// <inheritdoc />
         public void OnAfterDeserialize()
         {
             if (Guid.TryParse(profileGuid, out var temp))
@@ -172,5 +176,7 @@ namespace XRTK.Definitions.InputSystem
                 ProfileGuid = temp;
             }
         }
+
+        #endregion ISerializationCallbackReceiver Implementation
     }
 }

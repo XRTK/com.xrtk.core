@@ -1,13 +1,11 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
+using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions;
+using XRTK.Definitions.CameraSystem;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Utilities;
-using XRTK.Extensions;
-using XRTK.Interfaces;
 
 namespace XRTK.Services.CameraSystem
 {
@@ -16,258 +14,86 @@ namespace XRTK.Services.CameraSystem
     /// </summary>
     public class MixedRealityCameraSystem : BaseSystem, IMixedRealityCameraSystem
     {
-        /// <summary>
-        /// Constructor.
-        /// </summary>
-        /// <param name="profile"></param>
-        public MixedRealityCameraSystem(MixedRealityCameraProfile profile)
+        /// <inheritdoc />
+        public MixedRealityCameraSystem(MixedRealityCameraSystemProfile profile)
             : base(profile)
         {
-            this.profile = profile;
-            DefaultHeadHeight = profile.DefaultHeadHeight;
-
-            if (profile.CameraRigType.Type == null)
-            {
-                throw new Exception("Camera rig type cannot be null!");
-            }
         }
 
-        private readonly MixedRealityCameraProfile profile;
+        #region IMixedRealityService Implementation
 
         /// <inheritdoc />
-        public bool IsOpaque
+        public override uint Priority => 0;
+
+        /// <inheritdoc />
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            Debug.Assert(cameraDataProviders.Count == 0, "Failed to clean up camera data provider references!");
+        }
+
+        #endregion IMixedRealityService Implementation
+
+        #region IMixedRealityCameraSystem Impelementation
+
+        private readonly HashSet<IMixedRealityCameraDataProvider> cameraDataProviders = new HashSet<IMixedRealityCameraDataProvider>();
+
+        /// <inheritdoc />
+        public IReadOnlyCollection<IMixedRealityCameraDataProvider> CameraDataProviders => cameraDataProviders;
+
+        private IMixedRealityCameraRig mainCameraRig = null;
+
+        /// <inheritdoc />
+        public IMixedRealityCameraRig MainCameraRig
         {
             get
             {
-                currentDisplayType = DisplayType.Opaque;
-#if UNITY_WSA
-                if (!UnityEngine.XR.WSA.HolographicSettings.IsDisplayOpaque)
+                if (mainCameraRig == null)
                 {
-                    currentDisplayType = DisplayType.Transparent;
-                }
-#elif PLATFORM_LUMIN
-                currentDisplayType = DisplayType.Transparent;
-#endif
-                return currentDisplayType == DisplayType.Opaque;
-            }
-        }
-
-        /// <inheritdoc />
-        public float DefaultHeadHeight { get; }
-
-        private float headHeight;
-
-        /// <inheritdoc />
-        public float HeadHeight
-        {
-            get => headHeight;
-            set
-            {
-                if (value.Equals(headHeight))
-                {
-                    return;
+                    foreach (var dataProvider in cameraDataProviders)
+                    {
+                        if (dataProvider.CameraRig.PlayerCamera == CameraCache.Main)
+                        {
+                            mainCameraRig = dataProvider.CameraRig;
+                        }
+                    }
                 }
 
-                headHeight = value;
-                CameraRig.CameraPoseDriver.originPose = new Pose(new Vector3(0f, headHeight, 0f), Quaternion.identity);
+                return mainCameraRig;
             }
         }
 
         /// <inheritdoc />
-        public bool IsStereoscopic => UnityEngine.XR.XRSettings.enabled && UnityEngine.XR.XRDevice.isPresent;
-
-        /// <inheritdoc />
-        public IMixedRealityCameraRig CameraRig { get; private set; }
-
-        private DisplayType currentDisplayType;
-        private bool cameraOpaqueLastFrame = false;
-
-        private enum DisplayType
+        public void SetHeadHeight(float value, bool setForAllCameraProviders = false)
         {
-            Opaque = 0,
-            Transparent
-        }
-
-        /// <inheritdoc />
-        public override void Initialize()
-        {
-            base.Initialize();
-
-            cameraOpaqueLastFrame = IsOpaque;
-
-            if (IsOpaque)
+            foreach (var dataProvider in cameraDataProviders)
             {
-                ApplySettingsForOpaqueDisplay();
-            }
-            else
-            {
-                ApplySettingsForTransparentDisplay();
-            }
-
-            if (CameraRig == null)
-            {
-                CameraRig = CameraCache.Main.gameObject.EnsureComponent(profile.CameraRigType.Type) as IMixedRealityCameraRig;
-                Debug.Assert(CameraRig != null);
-                ResetRigTransforms();
-            }
-            
-            ApplySettingsForDefaultHeadHeight();
-        }
-
-        /// <inheritdoc />
-        public override void Enable()
-        {
-            base.Enable();
-
-            ResetRigTransforms();
-
-            if (Application.isPlaying &&
-                profile.IsCameraPersistent)
-            {
-                CameraCache.Main.transform.root.DontDestroyOnLoad();
-            }
-            
-            ApplySettingsForDefaultHeadHeight();
-        }
-
-        /// <inheritdoc />
-        public override void Update()
-        {
-            base.Update();
-
-            if (IsOpaque != cameraOpaqueLastFrame)
-            {
-                cameraOpaqueLastFrame = IsOpaque;
-
-                if (IsOpaque)
+                if (setForAllCameraProviders ||
+                    dataProvider.CameraRig == MainCameraRig)
                 {
-                    ApplySettingsForOpaqueDisplay();
-                }
-                else
-                {
-                    ApplySettingsForTransparentDisplay();
+                    dataProvider.HeadHeight = value;
+
+                    if (!setForAllCameraProviders)
+                    {
+                        break;
+                    }
                 }
             }
         }
 
         /// <inheritdoc />
-        public override void LateUpdate()
+        public void RegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider)
         {
-            base.LateUpdate();
-
-            SyncRigTransforms();
+            cameraDataProviders.Add(dataProvider);
         }
 
         /// <inheritdoc />
-        public override void Disable()
+        public void UnRegisterCameraDataProvider(IMixedRealityCameraDataProvider dataProvider)
         {
-            base.Disable();
-
-            var camera = CameraCache.Main;
-
-            if (camera != null)
-            {
-                camera.transform.SetParent(null);
-            }
-
-            if (CameraRig == null) { return; }
-
-            if (CameraRig.PlayspaceTransform != null)
-            {
-                if (Application.isPlaying)
-                {
-                    UnityEngine.Object.Destroy(CameraRig.PlayspaceTransform.gameObject);
-                }
-                else
-                {
-                    UnityEngine.Object.DestroyImmediate(CameraRig.PlayspaceTransform.gameObject);
-                }
-            }
-
-            if (CameraRig is Component component &&
-                component is IMixedRealityCameraRig)
-            {
-                if (Application.isPlaying)
-                {
-                    UnityEngine.Object.Destroy(component);
-                }
-                else
-                {
-                    UnityEngine.Object.DestroyImmediate(component);
-                }
-            }
-        }
-        
-        /// <summary>
-        /// Depending on whether there is an XR device connected,
-        /// moves the camera to the setting from the camera profile.
-        /// </summary>
-        private void ApplySettingsForDefaultHeadHeight()
-        {
-            if (!IsStereoscopic)
-            {
-                // If not device attached we'll just use the default head height setting.
-                CameraRig.CameraTransform.Translate(0f, DefaultHeadHeight, 0f);
-            }
-            else
-            {
-                // If we have a stereoscopic device attached we'll leave
-                // height control to the device itself and reset everything to origin.
-                ResetRigTransforms();
-            }
+            cameraDataProviders.Remove(dataProvider);
         }
 
-        /// <summary>
-        /// Applies opaque settings from camera profile.
-        /// </summary>
-        private void ApplySettingsForOpaqueDisplay()
-        {
-            CameraCache.Main.clearFlags = profile.CameraClearFlagsOpaqueDisplay;
-            CameraCache.Main.nearClipPlane = profile.NearClipPlaneOpaqueDisplay;
-            CameraCache.Main.backgroundColor = profile.BackgroundColorOpaqueDisplay;
-            QualitySettings.SetQualityLevel(profile.OpaqueQualityLevel, false);
-        }
-
-        /// <summary>
-        /// Applies transparent settings from camera profile.
-        /// </summary>
-        private void ApplySettingsForTransparentDisplay()
-        {
-            CameraCache.Main.clearFlags = profile.CameraClearFlagsTransparentDisplay;
-            CameraCache.Main.backgroundColor = profile.BackgroundColorTransparentDisplay;
-            CameraCache.Main.nearClipPlane = profile.NearClipPlaneTransparentDisplay;
-            QualitySettings.SetQualityLevel(profile.TransparentQualityLevel, false);
-        }
-
-        private void ResetRigTransforms()
-        {
-            CameraRig.PlayspaceTransform.position = Vector3.zero;
-            CameraRig.PlayspaceTransform.rotation = Quaternion.identity;
-            CameraRig.CameraTransform.position = Vector3.zero;
-            CameraRig.CameraTransform.rotation = Quaternion.identity;
-            CameraRig.BodyTransform.position = Vector3.zero;
-            CameraRig.BodyTransform.rotation = Quaternion.identity;
-        }
-
-        private void SyncRigTransforms()
-        {
-            var cameraPosition = CameraRig.CameraTransform.localPosition;
-            var bodyLocalPosition = CameraRig.BodyTransform.localPosition;
-
-            bodyLocalPosition.x = cameraPosition.x;
-            bodyLocalPosition.y = cameraPosition.y - HeadHeight;
-            bodyLocalPosition.z = cameraPosition.z;
-
-            CameraRig.BodyTransform.localPosition = bodyLocalPosition;
-
-            var bodyRotation = CameraRig.BodyTransform.rotation;
-            var headRotation = CameraRig.CameraTransform.rotation;
-            var currentAngle = Mathf.Abs(Quaternion.Angle(bodyRotation, headRotation));
-
-            if (currentAngle > profile.BodyAdjustmentAngle)
-            {
-                CameraRig.BodyTransform.rotation = Quaternion.Slerp(bodyRotation, headRotation, Time.deltaTime * profile.BodyAdjustmentSpeed);
-            }
-        }
+        #endregion IMixedRealityCameraSystem Impelementation
     }
 }

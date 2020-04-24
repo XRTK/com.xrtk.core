@@ -16,7 +16,7 @@ namespace XRTK.Inspectors.Profiles
         // Camera system properties
         private SerializedProperty enableCameraSystem;
         private SerializedProperty cameraSystemType;
-        private SerializedProperty cameraProfile;
+        private SerializedProperty cameraSystemProfile;
 
         // Input system properties
         private SerializedProperty enableInputSystem;
@@ -78,7 +78,7 @@ namespace XRTK.Inspectors.Profiles
                     {
                         if (MixedRealityToolkit.CameraSystem != null)
                         {
-                            var playspace = MixedRealityToolkit.CameraSystem.CameraRig.PlayspaceTransform;
+                            var playspace = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform;
                             Debug.Assert(playspace != null);
                         }
 
@@ -94,7 +94,7 @@ namespace XRTK.Inspectors.Profiles
             // Camera system configuration
             enableCameraSystem = serializedObject.FindProperty(nameof(enableCameraSystem));
             cameraSystemType = serializedObject.FindProperty(nameof(cameraSystemType));
-            cameraProfile = serializedObject.FindProperty(nameof(cameraProfile));
+            cameraSystemProfile = serializedObject.FindProperty(nameof(cameraSystemProfile));
 
             // Input system configuration
             enableInputSystem = serializedObject.FindProperty(nameof(enableInputSystem));
@@ -143,7 +143,7 @@ namespace XRTK.Inspectors.Profiles
             EditorGUILayout.LabelField("Camera System Settings", EditorStyles.boldLabel);
             EditorGUILayout.PropertyField(enableCameraSystem);
             EditorGUILayout.PropertyField(cameraSystemType);
-            EditorGUILayout.PropertyField(cameraProfile);
+            EditorGUILayout.PropertyField(cameraSystemProfile);
 
             // Input System configuration
             GUILayout.Space(12f);

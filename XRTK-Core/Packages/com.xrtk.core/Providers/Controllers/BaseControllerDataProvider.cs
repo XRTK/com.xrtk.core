@@ -8,6 +8,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
+using XRTK.Utilities;
 using Object = UnityEngine.Object;
 
 namespace XRTK.Providers.Controllers
@@ -45,7 +46,10 @@ namespace XRTK.Providers.Controllers
                     if (((useSpecificType && pointerProfile.ControllerType.Type == controllerType.Type) || (!useSpecificType && pointerProfile.ControllerType.Type == null)) &&
                         (pointerProfile.Handedness == Handedness.Any || pointerProfile.Handedness == Handedness.Both || pointerProfile.Handedness == controllingHand))
                     {
-                        var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, MixedRealityToolkit.CameraSystem?.CameraRig.PlayspaceTransform);
+                        var playspaceTransform = MixedRealityToolkit.CameraSystem != null
+                            ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
+                            : CameraCache.Main.transform.parent;
+                        var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, playspaceTransform);
                         var pointer = pointerObject.GetComponent<IMixedRealityPointer>();
 
                         if (pointer != null)

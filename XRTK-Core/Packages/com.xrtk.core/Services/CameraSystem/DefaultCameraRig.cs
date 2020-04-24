@@ -1,10 +1,11 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using UnityEngine.SpatialTracking;
 using XRTK.Extensions;
-using XRTK.Interfaces;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Utilities;
 
 namespace XRTK.Services.CameraSystem
@@ -22,6 +23,22 @@ namespace XRTK.Services.CameraSystem
 
         [SerializeField]
         private Transform playspaceTransform = null;
+
+        /// <inheritdoc />
+        public GameObject GameObject
+        {
+            get
+            {
+                try
+                {
+                    return gameObject;
+                }
+                catch
+                {
+                    return null;
+                }
+            }
+        }
 
         /// <inheritdoc />
         public Transform PlayspaceTransform

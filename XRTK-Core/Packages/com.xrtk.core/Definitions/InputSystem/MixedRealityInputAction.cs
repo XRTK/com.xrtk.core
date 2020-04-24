@@ -12,7 +12,7 @@ namespace XRTK.Definitions.InputSystem
     /// An Input Action for mapping an action to an Input Control like a Button, Joystick, Sensor, etc.
     /// </summary>
     [Serializable]
-    public struct MixedRealityInputAction : IEqualityComparer
+    public struct MixedRealityInputAction : IEqualityComparer, ISerializationCallbackReceiver
     {
         /// <summary>
         /// Constructor.
@@ -25,7 +25,6 @@ namespace XRTK.Definitions.InputSystem
                 throw new ArgumentException($"{nameof(description)} cannot be empty");
             }
 
-            this.cachedGuid = default;
             this.profileGuid = DefaultGuidString;
             this.id = 0;
             this.description = description;
@@ -59,7 +58,6 @@ namespace XRTK.Definitions.InputSystem
         public MixedRealityInputAction(Guid profileGuid, uint id, string description, AxisType axisConstraint = AxisType.None)
             : this(id, description, axisConstraint)
         {
-            this.cachedGuid = profileGuid;
             this.profileGuid = profileGuid.ToString("N");
         }
 
@@ -76,34 +74,10 @@ namespace XRTK.Definitions.InputSystem
         [SerializeField]
         private string profileGuid;
 
-        private Guid cachedGuid;
-
         /// <summary>
         /// The guid reference to the <see cref="MixedRealityInputActionsProfile"/> this action belongs to.
         /// </summary>
-        public Guid ProfileGuid
-        {
-            get
-            {
-                if (id != 0 &&
-                    cachedGuid == default &&
-                    profileGuid != DefaultGuidString)
-                {
-                    if (string.IsNullOrWhiteSpace(profileGuid))
-                    {
-                        profileGuid = DefaultGuidString;
-                    }
-
-                    if (Guid.TryParse(profileGuid, out var temp))
-                    {
-                        cachedGuid = temp;
-                        Debug.Log(cachedGuid);
-                    }
-                }
-
-                return cachedGuid;
-            }
-        }
+        public Guid ProfileGuid { get; private set; }
 
         [SerializeField]
         private uint id;
@@ -185,5 +159,18 @@ namespace XRTK.Definitions.InputSystem
         }
 
         #endregion IEqualityComparer Implementation
+
+        public void OnBeforeSerialize()
+        {
+            profileGuid = ProfileGuid.ToString("N");
+        }
+
+        public void OnAfterDeserialize()
+        {
+            if (Guid.TryParse(profileGuid, out var temp))
+            {
+                ProfileGuid = temp;
+            }
+        }
     }
 }

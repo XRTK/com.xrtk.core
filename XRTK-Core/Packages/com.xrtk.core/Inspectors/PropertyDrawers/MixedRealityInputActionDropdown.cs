@@ -104,24 +104,26 @@ namespace XRTK.Inspectors.PropertyDrawers
                     }
 
                     // Upgrade old action references
+                    MixedRealityInputAction selectedItem = default;
+
                     if (id.intValue != 0 && profileGuid.stringValue == DefaultGuidString)
                     {
                         AssetDatabase.TryGetGUIDAndLocalFileIdentifier(inputActionProfile, out var guid, out long _);
-                        var upgradedAction = new MixedRealityInputAction(Guid.Parse(guid), currentAction.Id, currentAction.Description, currentAction.AxisConstraint);
-                        SetInputAction(upgradedAction);
-                        AddInputActionItem(inputAction, upgradedAction);
+                        selectedItem = new MixedRealityInputAction(Guid.Parse(guid), currentAction.Id, currentAction.Description, currentAction.AxisConstraint);
+                        SetInputAction(selectedItem);
+                        AddInputActionItem(true);
                     }
                     else
                     {
-                        AddInputActionItem(inputAction, currentAction);
+                        AddInputActionItem();
                     }
 
-                    void AddInputActionItem(MixedRealityInputAction actionItem, MixedRealityInputAction selectedItem)
+                    void AddInputActionItem(bool selectedNew = false)
                     {
                         dropdownMenu.AddItem(
                             new GUIContent(inputAction.Description),
-                            actionItem == selectedItem,
-                            data => SetInputAction(actionItem),
+                            inputAction == (selectedNew ? selectedItem : currentAction),
+                            data => SetInputAction(inputAction),
                             null);
                     }
                 }

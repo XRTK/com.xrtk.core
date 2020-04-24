@@ -30,7 +30,6 @@ namespace XRTK.Definitions.InputSystem
             this.id = 0;
             this.description = description;
             this.axisConstraint = AxisType.None;
-            tryAgain = true;
         }
 
         /// <summary>

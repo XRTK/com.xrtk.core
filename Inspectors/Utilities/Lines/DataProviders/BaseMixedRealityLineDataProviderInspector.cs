@@ -4,6 +4,7 @@
 using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
+using XRTK.Inspectors.Extensions;
 using XRTK.Utilities.Lines.DataProviders;
 using XRTK.Utilities.Lines.Renderers;
 using XRTK.Utilities.Physics.Distorters;
@@ -14,14 +15,11 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
     public class BaseMixedRealityLineDataProviderInspector : Editor
     {
         private const string DrawLinePointsKey = "XRTK_Line_Inspector_DrawLinePoints";
-        private const string BasicSettingsFoldoutKey = "XRTK_Line_Inspector_BasicSettings";
         private const string DrawLineRotationsKey = "XRTK_Line_Inspector_DrawLineRotations";
         private const string EditorSettingsFoldoutKey = "XRTK_Line_Inspector_EditorSettings";
         private const string RotationArrowLengthKey = "XRTK_Line_Inspector_RotationArrowLength";
-        private const string RotationSettingsFoldoutKey = "XRTK_Line_Inspector_RotationSettings";
         private const string ManualUpVectorLengthKey = "XRTK_Line_Inspector_ManualUpVectorLength";
         private const string LinePreviewResolutionKey = "XRTK_Line_Inspector_LinePreviewResolution";
-        private const string DistortionSettingsFoldoutKey = "XRTK_Line_Inspector_DistortionSettings";
         private const string DrawLineManualUpVectorsKey = "XRTK_Line_Inspector_DrawLineManualUpVectors";
 
         private const float ManualUpVectorHandleSizeModifier = 0.1f;
@@ -32,11 +30,7 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
         private static readonly GUIContent RotationSettingsContent = new GUIContent("Rotation Settings");
         private static readonly GUIContent DistortionSettingsContent = new GUIContent("Distortion Settings");
 
-        private static bool basicSettingsFoldout = true;
         private static bool editorSettingsFoldout = false;
-        private static bool rotationSettingsFoldout = true;
-        private static bool distortionSettingsFoldout = true;
-
         protected static int LinePreviewResolution = 16;
 
         protected static bool DrawLinePoints = false;
@@ -51,7 +45,7 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
         private SerializedProperty lineStartClamp;
         private SerializedProperty lineEndClamp;
         private SerializedProperty loops;
-        private SerializedProperty rotationType;
+        private SerializedProperty rotationMode;
         private SerializedProperty flipUpVector;
         private SerializedProperty originOffset;
         private SerializedProperty manualUpVectorBlend;
@@ -69,11 +63,7 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
 
         protected virtual void OnEnable()
         {
-            basicSettingsFoldout = SessionState.GetBool(BasicSettingsFoldoutKey, basicSettingsFoldout);
             editorSettingsFoldout = SessionState.GetBool(EditorSettingsFoldoutKey, editorSettingsFoldout);
-            rotationSettingsFoldout = SessionState.GetBool(RotationSettingsFoldoutKey, rotationSettingsFoldout);
-            distortionSettingsFoldout = SessionState.GetBool(DistortionSettingsFoldoutKey, distortionSettingsFoldout);
-
             LinePreviewResolution = SessionState.GetInt(LinePreviewResolutionKey, LinePreviewResolution);
             DrawLinePoints = SessionState.GetBool(DrawLinePointsKey, DrawLinePoints);
             DrawLineRotations = SessionState.GetBool(DrawLineRotationsKey, DrawLineRotations);
@@ -82,21 +72,21 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
             ManualUpVectorLength = SessionState.GetFloat(ManualUpVectorLengthKey, ManualUpVectorLength);
 
             LineData = (BaseMixedRealityLineDataProvider)target;
-            transformMode = serializedObject.FindProperty("transformMode");
-            customLineTransform = serializedObject.FindProperty("customLineTransform");
-            lineStartClamp = serializedObject.FindProperty("lineStartClamp");
-            lineEndClamp = serializedObject.FindProperty("lineEndClamp");
-            loops = serializedObject.FindProperty("loops");
-            rotationType = serializedObject.FindProperty("rotationMode");
-            flipUpVector = serializedObject.FindProperty("flipUpVector");
-            originOffset = serializedObject.FindProperty("originOffset");
-            manualUpVectorBlend = serializedObject.FindProperty("manualUpVectorBlend");
-            manualUpVectors = serializedObject.FindProperty("manualUpVectors");
-            velocitySearchRange = serializedObject.FindProperty("velocitySearchRange");
-            distorters = serializedObject.FindProperty("distorters");
-            distortionMode = serializedObject.FindProperty("distortionMode");
-            distortionStrength = serializedObject.FindProperty("distortionStrength");
-            uniformDistortionStrength = serializedObject.FindProperty("uniformDistortionStrength");
+            transformMode = serializedObject.FindProperty(nameof(transformMode));
+            customLineTransform = serializedObject.FindProperty(nameof(customLineTransform));
+            lineStartClamp = serializedObject.FindProperty(nameof(lineStartClamp));
+            lineEndClamp = serializedObject.FindProperty(nameof(lineEndClamp));
+            loops = serializedObject.FindProperty(nameof(loops));
+            rotationMode = serializedObject.FindProperty(nameof(rotationMode));
+            flipUpVector = serializedObject.FindProperty(nameof(flipUpVector));
+            originOffset = serializedObject.FindProperty(nameof(originOffset));
+            manualUpVectorBlend = serializedObject.FindProperty(nameof(manualUpVectorBlend));
+            manualUpVectors = serializedObject.FindProperty(nameof(manualUpVectors));
+            velocitySearchRange = serializedObject.FindProperty(nameof(velocitySearchRange));
+            distorters = serializedObject.FindProperty(nameof(distorters));
+            distortionMode = serializedObject.FindProperty(nameof(distortionMode));
+            distortionStrength = serializedObject.FindProperty(nameof(distortionStrength));
+            uniformDistortionStrength = serializedObject.FindProperty(nameof(uniformDistortionStrength));
 
             manualUpVectorList = new ReorderableList(serializedObject, manualUpVectors, false, true, true, true);
             manualUpVectorList.drawElementCallback += DrawManualUpVectorListElement;
@@ -120,7 +110,7 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
         {
             serializedObject.Update();
 
-            editorSettingsFoldout = EditorGUILayout.Foldout(editorSettingsFoldout, EditorSettingsContent, true);
+            editorSettingsFoldout = EditorGUILayoutExtensions.FoldoutWithBoldLabel(editorSettingsFoldout, EditorSettingsContent);
             SessionState.SetBool(EditorSettingsFoldoutKey, editorSettingsFoldout);
 
             if (editorSettingsFoldout)
@@ -192,14 +182,10 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
                 EditorGUI.indentLevel--;
             }
 
-            basicSettingsFoldout = EditorGUILayout.Foldout(basicSettingsFoldout, BasicSettingsContent, true);
-            SessionState.SetBool(BasicSettingsFoldoutKey, basicSettingsFoldout);
-
-            if (basicSettingsFoldout)
+            if (transformMode.FoldoutWithBoldLabelPropertyField(BasicSettingsContent))
             {
                 EditorGUI.indentLevel++;
 
-                EditorGUILayout.PropertyField(transformMode);
                 EditorGUILayout.PropertyField(customLineTransform);
                 EditorGUILayout.PropertyField(lineStartClamp);
                 EditorGUILayout.PropertyField(lineEndClamp);
@@ -208,14 +194,11 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
                 EditorGUI.indentLevel--;
             }
 
-            rotationSettingsFoldout = EditorGUILayout.Foldout(rotationSettingsFoldout, RotationSettingsContent, true);
-            SessionState.SetBool(RotationSettingsFoldoutKey, rotationSettingsFoldout);
-
-            if (rotationSettingsFoldout)
+            if (rotationMode.FoldoutWithBoldLabelPropertyField(RotationSettingsContent))
             {
                 EditorGUI.indentLevel++;
 
-                EditorGUILayout.PropertyField(rotationType);
+                EditorGUILayout.PropertyField(rotationMode);
                 EditorGUILayout.PropertyField(flipUpVector);
                 EditorGUILayout.PropertyField(originOffset);
                 EditorGUILayout.PropertyField(velocitySearchRange);
@@ -248,13 +231,8 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
                 EditorGUI.indentLevel--;
             }
 
-            distortionSettingsFoldout = EditorGUILayout.Foldout(distortionSettingsFoldout, DistortionSettingsContent, true);
-            SessionState.SetBool(DistortionSettingsFoldoutKey, distortionSettingsFoldout);
-
-            if (distortionSettingsFoldout)
+            if (distortionMode.FoldoutWithBoldLabelPropertyField(DistortionSettingsContent))
             {
-                EditorGUILayout.HelpBox("No distorters attached to this line.\nTry adding a distortion component.", MessageType.Info);
-
                 EditorGUI.indentLevel++;
 
                 EditorGUILayout.PropertyField(distortionMode);

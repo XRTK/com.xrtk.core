@@ -22,12 +22,7 @@ namespace XRTK.Inspectors.Profiles
         private ReorderableList configurationList;
         private int currentlySelectedConfigurationOption;
 
-        [SerializeField]
-        private SerializedProperty configurations; // Cannot be auto property bc field is serialized.
-
-        protected SerializedProperty Configurations => configurations;
-
-        private bool showConfigurationFoldout = true;
+        private SerializedProperty configurations;
 
         /// <summary>
         /// Gets the service constraint used to filter options listed in the
@@ -62,9 +57,9 @@ namespace XRTK.Inspectors.Profiles
         public override void OnInspectorGUI()
         {
             EditorGUILayout.Space();
-            showConfigurationFoldout = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showConfigurationFoldout, new GUIContent($"{ServiceConstraint.Name} Configuration Options"), true);
+            configurations.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(configurations.isExpanded, new GUIContent($"{ServiceConstraint.Name} Configuration Options"));
 
-            if (showConfigurationFoldout)
+            if (configurations.isExpanded)
             {
                 serializedObject.Update();
                 EditorGUILayout.Space();

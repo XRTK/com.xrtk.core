@@ -4,6 +4,7 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.CameraSystem;
+using XRTK.Inspectors.Extensions;
 using XRTK.Services;
 
 namespace XRTK.Inspectors.Profiles.CameraSystem
@@ -30,12 +31,16 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
 
         private readonly GUIContent nearClipTitle = new GUIContent("Near Clip");
         private readonly GUIContent clearFlagsTitle = new GUIContent("Clear Flags");
+        private readonly GUIContent platformSettingsFoldoutHeader = new GUIContent("Platform Specific Settings");
+        private readonly GUIContent opaqueSettingsFoldoutHeader = new GUIContent("Opaque Display Settings");
+        private readonly GUIContent transparentSettingsFoldoutHeader = new GUIContent("Transparent Display Settings");
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
             isCameraPersistent = serializedObject.FindProperty(nameof(isCameraPersistent));
+
             nearClipPlaneOpaqueDisplay = serializedObject.FindProperty(nameof(nearClipPlaneOpaqueDisplay));
             cameraClearFlagsOpaqueDisplay = serializedObject.FindProperty(nameof(cameraClearFlagsOpaqueDisplay));
             backgroundColorOpaqueDisplay = serializedObject.FindProperty(nameof(backgroundColorOpaqueDisplay));
@@ -60,37 +65,49 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
 
             EditorGUI.BeginChangeCheck();
 
-            EditorGUILayout.LabelField("Platform Specific Settings:", EditorStyles.boldLabel);
-
-            EditorGUILayout.PropertyField(isCameraPersistent);
-            EditorGUILayout.PropertyField(cameraRigType);
-            EditorGUILayout.PropertyField(defaultHeadHeight);
-            EditorGUILayout.PropertyField(bodyAdjustmentAngle);
-            EditorGUILayout.PropertyField(bodyAdjustmentSpeed);
-
-            EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Opaque Display Settings:", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(nearClipPlaneOpaqueDisplay, nearClipTitle);
-            EditorGUILayout.PropertyField(cameraClearFlagsOpaqueDisplay, clearFlagsTitle);
-
-            if ((CameraClearFlags)cameraClearFlagsOpaqueDisplay.intValue == CameraClearFlags.Color)
+            if (isCameraPersistent.FoldoutWithBoldLabelPropertyField(platformSettingsFoldoutHeader))
             {
-                backgroundColorOpaqueDisplay.colorValue = EditorGUILayout.ColorField("Background Color", backgroundColorOpaqueDisplay.colorValue);
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(cameraRigType);
+                EditorGUILayout.PropertyField(defaultHeadHeight);
+                EditorGUILayout.PropertyField(bodyAdjustmentAngle);
+                EditorGUILayout.PropertyField(bodyAdjustmentSpeed);
+                EditorGUI.indentLevel--;
             }
 
-            opaqueQualityLevel.intValue = EditorGUILayout.Popup("Quality Setting", opaqueQualityLevel.intValue, QualitySettings.names);
-
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Transparent Display Settings:", EditorStyles.boldLabel);
-            EditorGUILayout.PropertyField(nearClipPlaneTransparentDisplay, nearClipTitle);
-            EditorGUILayout.PropertyField(cameraClearFlagsTransparentDisplay, clearFlagsTitle);
 
-            if ((CameraClearFlags)cameraClearFlagsTransparentDisplay.intValue == CameraClearFlags.Color)
+            if (nearClipPlaneOpaqueDisplay.FoldoutWithBoldLabelPropertyField(opaqueSettingsFoldoutHeader, nearClipTitle))
             {
-                backgroundColorTransparentDisplay.colorValue = EditorGUILayout.ColorField("Background Color", backgroundColorTransparentDisplay.colorValue);
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(cameraClearFlagsOpaqueDisplay, clearFlagsTitle);
+
+                if ((CameraClearFlags)cameraClearFlagsOpaqueDisplay.intValue == CameraClearFlags.Color)
+                {
+                    backgroundColorOpaqueDisplay.colorValue = EditorGUILayout.ColorField("Background Color", backgroundColorOpaqueDisplay.colorValue);
+                }
+
+                opaqueQualityLevel.intValue = EditorGUILayout.Popup("Quality Setting", opaqueQualityLevel.intValue, QualitySettings.names);
+                EditorGUI.indentLevel--;
             }
 
-            transparentQualityLevel.intValue = EditorGUILayout.Popup("Quality Setting", transparentQualityLevel.intValue, QualitySettings.names);
+            EditorGUILayout.Space();
+
+            if (nearClipPlaneTransparentDisplay.FoldoutWithBoldLabelPropertyField(transparentSettingsFoldoutHeader, nearClipTitle))
+            {
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(cameraClearFlagsTransparentDisplay, clearFlagsTitle);
+
+                if ((CameraClearFlags)cameraClearFlagsTransparentDisplay.intValue == CameraClearFlags.Color)
+                {
+                    backgroundColorTransparentDisplay.colorValue = EditorGUILayout.ColorField("Background Color", backgroundColorTransparentDisplay.colorValue);
+                }
+
+                transparentQualityLevel.intValue = EditorGUILayout.Popup("Quality Setting", transparentQualityLevel.intValue, QualitySettings.names);
+                EditorGUI.indentLevel--;
+            }
+
+            EditorGUILayout.Space();
 
             serializedObject.ApplyModifiedProperties();
 

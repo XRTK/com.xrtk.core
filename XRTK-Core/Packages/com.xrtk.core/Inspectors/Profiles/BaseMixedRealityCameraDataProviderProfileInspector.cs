@@ -40,16 +40,13 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
             base.OnEnable();
 
             isCameraPersistent = serializedObject.FindProperty(nameof(isCameraPersistent));
-            isCameraPersistent.isExpanded = true;
 
             nearClipPlaneOpaqueDisplay = serializedObject.FindProperty(nameof(nearClipPlaneOpaqueDisplay));
-            nearClipPlaneOpaqueDisplay.isExpanded = true;
             cameraClearFlagsOpaqueDisplay = serializedObject.FindProperty(nameof(cameraClearFlagsOpaqueDisplay));
             backgroundColorOpaqueDisplay = serializedObject.FindProperty(nameof(backgroundColorOpaqueDisplay));
             opaqueQualityLevel = serializedObject.FindProperty(nameof(opaqueQualityLevel));
 
             nearClipPlaneTransparentDisplay = serializedObject.FindProperty(nameof(nearClipPlaneTransparentDisplay));
-            nearClipPlaneTransparentDisplay.isExpanded = true;
             cameraClearFlagsTransparentDisplay = serializedObject.FindProperty(nameof(cameraClearFlagsTransparentDisplay));
             backgroundColorTransparentDisplay = serializedObject.FindProperty(nameof(backgroundColorTransparentDisplay));
             transparentQualityLevel = serializedObject.FindProperty(nameof(transparentQualityLevel));
@@ -68,11 +65,9 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
 
             EditorGUI.BeginChangeCheck();
 
-            isCameraPersistent.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(isCameraPersistent.isExpanded, platformSettingsFoldoutHeader, true);
-            if (isCameraPersistent.isExpanded)
+            if (isCameraPersistent.FoldoutWithBoldLabelPropertyField(platformSettingsFoldoutHeader))
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(isCameraPersistent);
                 EditorGUILayout.PropertyField(cameraRigType);
                 EditorGUILayout.PropertyField(defaultHeadHeight);
                 EditorGUILayout.PropertyField(bodyAdjustmentAngle);
@@ -82,11 +77,9 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
 
             EditorGUILayout.Space();
 
-            nearClipPlaneOpaqueDisplay.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(nearClipPlaneOpaqueDisplay.isExpanded, opaqueSettingsFoldoutHeader, true);
-            if (nearClipPlaneOpaqueDisplay.isExpanded)
+            if (nearClipPlaneOpaqueDisplay.FoldoutWithBoldLabelPropertyField(opaqueSettingsFoldoutHeader, nearClipTitle))
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(nearClipPlaneOpaqueDisplay, nearClipTitle);
                 EditorGUILayout.PropertyField(cameraClearFlagsOpaqueDisplay, clearFlagsTitle);
 
                 if ((CameraClearFlags)cameraClearFlagsOpaqueDisplay.intValue == CameraClearFlags.Color)
@@ -100,11 +93,9 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
 
             EditorGUILayout.Space();
 
-            nearClipPlaneTransparentDisplay.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(nearClipPlaneTransparentDisplay.isExpanded, transparentSettingsFoldoutHeader, true);
-            if (nearClipPlaneTransparentDisplay.isExpanded)
+            if (nearClipPlaneTransparentDisplay.FoldoutWithBoldLabelPropertyField(transparentSettingsFoldoutHeader, nearClipTitle))
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(nearClipPlaneTransparentDisplay, nearClipTitle);
                 EditorGUILayout.PropertyField(cameraClearFlagsTransparentDisplay, clearFlagsTitle);
 
                 if ((CameraClearFlags)cameraClearFlagsTransparentDisplay.intValue == CameraClearFlags.Color)

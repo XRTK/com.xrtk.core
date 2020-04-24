@@ -23,7 +23,6 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             base.OnEnable();
 
             meshDisplayOption = serializedObject.FindProperty(nameof(meshDisplayOption));
-            meshDisplayOption.isExpanded = true;
             globalMeshObserverProfile = serializedObject.FindProperty(nameof(globalMeshObserverProfile));
             globalSurfaceObserverProfile = serializedObject.FindProperty(nameof(globalSurfaceObserverProfile));
         }
@@ -35,12 +34,10 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
 
             serializedObject.Update();
 
-            meshDisplayOption.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(meshDisplayOption.isExpanded, generalSettingsFoldoutHeader, true);
-            if (meshDisplayOption.isExpanded)
+            if (meshDisplayOption.FoldoutWithBoldLabelPropertyField(generalSettingsFoldoutHeader))
             {
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(meshDisplayOption);
                 EditorGUILayout.Space();
+                EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(globalMeshObserverProfile);
                 EditorGUILayout.PropertyField(globalSurfaceObserverProfile);
                 EditorGUI.indentLevel--;

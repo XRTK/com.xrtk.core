@@ -52,14 +52,37 @@ namespace XRTK.Inspectors.Profiles
 
         private MixedRealityToolkitRootProfile rootProfile;
 
-        private readonly GUIContent enabledLabel = new GUIContent("Enabled");
-        private readonly GUIContent typeLabel = new GUIContent("Type");
+        private readonly GUIContent typeLabel = new GUIContent("Instanced Type", "The class type to instantiate at runtime for this system.");
         private readonly GUIContent profileLabel = new GUIContent("Profile");
+        private GUIStyle headerStyle;
+
+        private GUIStyle HeaderStyle
+        {
+            get
+            {
+                if (headerStyle == null)
+                {
+                    var editorStyle = EditorGUIUtility.isProSkin ? EditorStyles.whiteLargeLabel : EditorStyles.largeLabel;
+
+                    if (editorStyle != null)
+                    {
+                        headerStyle = new GUIStyle(editorStyle)
+                        {
+                            alignment = TextAnchor.MiddleCenter,
+                            fontSize = 18,
+                            padding = new RectOffset(0, 0, -8, -8)
+                        };
+                    }
+                }
+
+                return headerStyle;
+            }
+        }
 
         protected override void OnEnable()
         {
             base.OnEnable();
-
+            headerStyle = null;
             rootProfile = target as MixedRealityToolkitRootProfile;
 
             var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
@@ -67,8 +90,6 @@ namespace XRTK.Inspectors.Profiles
             // Create The MR Manager if none exists.
             if (!MixedRealityToolkit.IsInitialized && prefabStage == null)
             {
-                // TODO Check base scene for service locator existence?
-
                 // Search for all instances, in case we've just hot reloaded the assembly.
                 var managerSearch = FindObjectsOfType<MixedRealityToolkit>();
 
@@ -136,75 +157,89 @@ namespace XRTK.Inspectors.Profiles
         public override void OnInspectorGUI()
         {
             MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            EditorGUILayout.LabelField("The Mixed Reality Toolkit", HeaderStyle);
+            EditorGUILayout.Space();
+            EditorGUILayout.Space();
+            RenderSystemFields();
+        }
+
+        internal void RenderSystemFields()
+        {
             serializedObject.Update();
 
             EditorGUI.BeginChangeCheck();
 
             // Camera System configuration
-            GUILayout.Space(12f);
-            EditorGUILayout.LabelField("Camera System Settings", EditorStyles.boldLabel);
+            enableCameraSystem.boolValue = EditorGUILayout.ToggleLeft("Camera System", enableCameraSystem.boolValue, EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            enableCameraSystem.boolValue = EditorGUILayout.ToggleLeft(enabledLabel, enableCameraSystem.boolValue);
+            typeLabel.tooltip = cameraSystemType.tooltip;
             EditorGUILayout.PropertyField(cameraSystemType, typeLabel);
+            profileLabel.tooltip = cameraSystemProfile.tooltip;
             EditorGUILayout.PropertyField(cameraSystemProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Input System configuration
-            GUILayout.Space(12f);
-            EditorGUILayout.LabelField("Input System Settings", EditorStyles.boldLabel);
+            EditorGUILayout.Space();
+            enableInputSystem.boolValue = EditorGUILayout.ToggleLeft("Input System", enableInputSystem.boolValue, EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            enableInputSystem.boolValue = EditorGUILayout.ToggleLeft(enabledLabel, enableInputSystem.boolValue);
+            typeLabel.tooltip = inputSystemType.tooltip;
             EditorGUILayout.PropertyField(inputSystemType, typeLabel);
+            profileLabel.tooltip = inputSystemProfile.tooltip;
             EditorGUILayout.PropertyField(inputSystemProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Boundary System configuration
-            GUILayout.Space(12f);
-            EditorGUILayout.LabelField("Boundary System Settings", EditorStyles.boldLabel);
+            EditorGUILayout.Space();
+            enableBoundarySystem.boolValue = EditorGUILayout.ToggleLeft("Boundary System", enableBoundarySystem.boolValue, EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            enableBoundarySystem.boolValue = EditorGUILayout.ToggleLeft(enabledLabel, enableBoundarySystem.boolValue);
+            typeLabel.tooltip = boundarySystemType.tooltip;
             EditorGUILayout.PropertyField(boundarySystemType, typeLabel);
+            profileLabel.tooltip = boundaryVisualizationProfile.tooltip;
             EditorGUILayout.PropertyField(boundaryVisualizationProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Teleport System configuration
-            GUILayout.Space(12f);
-            EditorGUILayout.LabelField("Teleport System Settings", EditorStyles.boldLabel);
+            EditorGUILayout.Space();
+            enableTeleportSystem.boolValue = EditorGUILayout.ToggleLeft("Teleport System", enableTeleportSystem.boolValue, EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            enableTeleportSystem.boolValue = EditorGUILayout.ToggleLeft(enabledLabel, enableTeleportSystem.boolValue);
+            typeLabel.tooltip = teleportSystemType.tooltip;
             EditorGUILayout.PropertyField(teleportSystemType, typeLabel);
             EditorGUI.indentLevel--;
 
             // Spatial Awareness System configuration
-            GUILayout.Space(12f);
-            EditorGUILayout.LabelField("Spatial Awareness System Settings", EditorStyles.boldLabel);
+            EditorGUILayout.Space();
+            enableSpatialAwarenessSystem.boolValue = EditorGUILayout.ToggleLeft("Spatial Awareness System", enableSpatialAwarenessSystem.boolValue, EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            enableSpatialAwarenessSystem.boolValue = EditorGUILayout.ToggleLeft(enabledLabel, enableSpatialAwarenessSystem.boolValue);
+            typeLabel.tooltip = spatialAwarenessSystemType.tooltip;
             EditorGUILayout.PropertyField(spatialAwarenessSystemType, typeLabel);
+            profileLabel.tooltip = spatialAwarenessProfile.tooltip;
             EditorGUILayout.PropertyField(spatialAwarenessProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Networking System configuration
-            GUILayout.Space(12f);
-            EditorGUILayout.LabelField("Networking System Settings", EditorStyles.boldLabel);
+            EditorGUILayout.Space();
+            enableNetworkingSystem.boolValue = EditorGUILayout.ToggleLeft("Networking System", enableNetworkingSystem.boolValue, EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            enableNetworkingSystem.boolValue = EditorGUILayout.ToggleLeft(enabledLabel, enableNetworkingSystem.boolValue);
+            typeLabel.tooltip = networkingSystemType.tooltip;
             EditorGUILayout.PropertyField(networkingSystemType, typeLabel);
+            profileLabel.tooltip = networkingSystemProfile.tooltip;
             EditorGUILayout.PropertyField(networkingSystemProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Diagnostics System configuration
-            GUILayout.Space(12f);
-            EditorGUILayout.LabelField("Diagnostics System Settings", EditorStyles.boldLabel);
+            EditorGUILayout.Space();
+            enableDiagnosticsSystem.boolValue = EditorGUILayout.ToggleLeft("Diagnostics System", enableDiagnosticsSystem.boolValue, EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            enableDiagnosticsSystem.boolValue = EditorGUILayout.ToggleLeft(enabledLabel, enableDiagnosticsSystem.boolValue);
+            typeLabel.tooltip = diagnosticsSystemType.tooltip;
             EditorGUILayout.PropertyField(diagnosticsSystemType, typeLabel);
+            profileLabel.tooltip = diagnosticsSystemProfile.tooltip;
             EditorGUILayout.PropertyField(diagnosticsSystemProfile, profileLabel);
             EditorGUI.indentLevel--;
 
-            GUILayout.Space(12f);
+            EditorGUILayout.Space();
             EditorGUILayout.LabelField("Additional Service Providers", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
+            profileLabel.tooltip = registeredServiceProvidersProfile.tooltip;
             EditorGUILayout.PropertyField(registeredServiceProvidersProfile, profileLabel);
             EditorGUI.indentLevel--;
 

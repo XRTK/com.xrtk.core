@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Inspectors.Utilities;
+using XRTK.Services;
 
 namespace XRTK.Inspectors.PropertyDrawers
 {
@@ -35,7 +36,14 @@ namespace XRTK.Inspectors.PropertyDrawers
 
                 if (parent == null)
                 {
-                    parent = Selection.activeObject as BaseMixedRealityProfile;
+                    if (Selection.activeObject.name.Equals(nameof(MixedRealityToolkit)))
+                    {
+                        parent = MixedRealityToolkit.Instance.ActiveProfile;
+                    }
+                    else
+                    {
+                        parent = Selection.activeObject as BaseMixedRealityProfile;
+                    }
                 }
 
                 ParentProfileOverride = null;

@@ -153,7 +153,7 @@ namespace XRTK.Inspectors
                     EditorGUILayout.Space();
                     EditorGUILayout.Space();
                     EditorGUILayout.Space();
-                    Rect rect = new Rect(GUILayoutUtility.GetLastRect()) { height = 0.5f };
+                    Rect rect = new Rect(GUILayoutUtility.GetLastRect()) { height = 0.75f };
                     EditorGUI.DrawRect(rect, Color.gray);
                     EditorGUILayout.Space();
 

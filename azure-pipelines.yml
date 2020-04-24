@@ -14,7 +14,7 @@ variables:
   - name: LogDirectory
     value: ''
 
-name: $(package.name) $(Build.SourceBranchName) $(Date:yyyyMMdd)$(Rev:.r)
+name: $(package.name) $(Date:yyyyMMdd)$(Rev:.r)
 
 # trigger:
 #   batch: true

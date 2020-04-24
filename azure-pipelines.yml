@@ -7,6 +7,8 @@ variables:
     value: 'XRTK-Core'
   - name: package.name
     value: 'com.xrtk.core'
+  - name: package.version
+    value: ''
   - name: project.upmSha
     value: ''
   - name: EditorPath

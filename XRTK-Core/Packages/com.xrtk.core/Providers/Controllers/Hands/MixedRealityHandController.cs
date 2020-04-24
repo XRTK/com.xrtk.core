@@ -8,6 +8,7 @@ using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;
@@ -37,10 +38,10 @@ namespace XRTK.Providers.Controllers.Hands
         private readonly Queue<bool> inputDownBuffer = new Queue<bool>(INPUT_DOWN_FRAME_BUFFER_SIZE);
 
         private int velocityUpdateFrame = 0;
-        private float deltaTimeStart;
+        private float deltaTimeStart = 0;
 
-        private Vector3 lastPalmNormal;
-        private Vector3 lastPalmPosition;
+        private Vector3 lastPalmNormal = Vector3.zero;
+        private Vector3 lastPalmPosition = Vector3.zero;
 
         /// <summary>
         /// The last pose recognized for this hand controller.
@@ -50,7 +51,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
         {
-            new MixedRealityInteractionMapping("Spatial Pointer Pose", AxisType.SixDof, DeviceInputType.SpatialPointer)
+            new MixedRealityInteractionMapping("Spatial Pointer", AxisType.SixDof, DeviceInputType.SpatialPointer)
         };
 
         /// <inheritdoc />
@@ -135,7 +136,10 @@ namespace XRTK.Providers.Controllers.Hands
                 LastPose = newPose;
             }
 
-            // Raise general hand data update.
+            // Update hand controller interaction mappings.
+            UpdateInteractionMappings();
+
+            // Raise general hand data update for visualizers.
             MixedRealityToolkit.InputSystem?.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);
         }
 
@@ -413,6 +417,32 @@ namespace XRTK.Providers.Controllers.Hands
 
         #endregion
 
+        #region Interaction Mappings
+
+        protected virtual void UpdateInteractionMappings()
+        {
+            for (int i = 0; i < Interactions.Length; i++)
+            {
+                var interactionMapping = Interactions[i];
+                switch (interactionMapping.InputType)
+                {
+                    case DeviceInputType.SpatialPointer:
+                        if (TryGetJointPose(TrackedHandJoint.Wrist, out var wristPose) &&
+                            TryGetJointPose(TrackedHandJoint.ThumbProximalJoint, out var thumbProximalPose) &&
+                            TryGetJointPose(TrackedHandJoint.IndexDistalJoint, out var indexDistalPose))
+                        {
+                            var pointerPosition = Vector3.Lerp(thumbProximalPose.Position, indexDistalPose.Position, .5f);
+                            var pointerRotation = Quaternion.LookRotation(wristPose.Up, wristPose.Forward);
+                            interactionMapping.PoseData = new MixedRealityPose(pointerPosition);
+                            interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+                        }
+                        break;
+                }
+            }
+        }
+
+        #endregion
+
         /// <summary>
         /// Updates the controller's velocity / angular velocity.
         /// </summary>
@@ -441,6 +471,8 @@ namespace XRTK.Providers.Controllers.Hands
             velocityUpdateFrame++;
             velocityUpdateFrame = velocityUpdateFrame > velocityUpdateFrameInterval ? 0 : velocityUpdateFrame;
         }
+
+
 
         private void UpdateIsInputDownPose()
         {

@@ -104,23 +104,20 @@ namespace XRTK.Inspectors.PropertyDrawers
                         continue;
                     }
 
-                    if (AssetDatabase.TryGetGUIDAndLocalFileIdentifier(inputActionProfile, out var guid, out long _))
+                    dropdownMenu.AddItem(
+                        new GUIContent($"{inputActionProfile.name}/{inputAction.Description}"),
+                        inputAction == currentAction,
+                        OnItemSelect,
+                        null);
+
+                    void OnItemSelect(object _)
                     {
-                        dropdownMenu.AddItem(
-                            new GUIContent($"{inputActionProfile.name}/{inputAction.Description}"),
-                            inputAction.ProfileGuid == currentAction.ProfileGuid &&
-                            inputAction.Id == currentAction.Id &&
-                            inputAction.AxisConstraint == currentAction.AxisConstraint,
-                            data =>
-                            {
-                                id.intValue = (int)inputAction.Id;
-                                description.stringValue = inputAction.Description;
-                                axisConstraint.intValue = (int)inputAction.AxisConstraint;
-                                profileGuid.stringValue = inputAction.ProfileGuid.ToString("N");
-                                property.serializedObject.ApplyModifiedProperties();
-                                GUI.changed = true;
-                            },
-                            inputAction);
+                        id.intValue = (int)inputAction.Id;
+                        description.stringValue = inputAction.Description;
+                        axisConstraint.intValue = (int)inputAction.AxisConstraint;
+                        profileGuid.stringValue = inputAction.ProfileGuid.ToString("N");
+                        property.serializedObject.ApplyModifiedProperties();
+                        GUI.changed = true;
                     }
                 }
             }

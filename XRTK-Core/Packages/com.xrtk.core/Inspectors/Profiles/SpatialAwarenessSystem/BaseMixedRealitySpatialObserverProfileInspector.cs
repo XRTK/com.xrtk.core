@@ -2,11 +2,13 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
+using UnityEngine;
+using XRTK.Inspectors.Extensions;
 using XRTK.Providers.SpatialObservers;
 
 namespace XRTK.Inspectors.Profiles.SpatialAwareness
 {
-    [CustomEditor(typeof(BaseMixedRealitySpatialObserverProfile))]
+    [CustomEditor(typeof(BaseMixedRealitySpatialObserverProfile), true, isFallback = true)]
     public abstract class BaseMixedRealitySpatialObserverProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty startupBehavior;
@@ -15,7 +17,7 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         private SerializedProperty updateInterval;
         private SerializedProperty physicsLayer;
 
-        private static bool foldout = true;
+        private readonly GUIContent generalSettingsFoldoutHeader = new GUIContent("General Settings");
 
         /// <inheritdoc />
         protected override void OnEnable()
@@ -36,18 +38,17 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
 
             serializedObject.Update();
 
-            foldout = EditorGUILayout.Foldout(foldout, "General Settings", true);
-
-            if (foldout)
+            if (startupBehavior.FoldoutWithBoldLabelPropertyField(generalSettingsFoldoutHeader))
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(startupBehavior);
                 EditorGUILayout.PropertyField(observationExtents);
                 EditorGUILayout.PropertyField(isStationaryObserver);
                 EditorGUILayout.PropertyField(updateInterval);
                 EditorGUILayout.PropertyField(physicsLayer);
                 EditorGUI.indentLevel--;
             }
+
+            EditorGUILayout.Space();
 
             serializedObject.ApplyModifiedProperties();
         }

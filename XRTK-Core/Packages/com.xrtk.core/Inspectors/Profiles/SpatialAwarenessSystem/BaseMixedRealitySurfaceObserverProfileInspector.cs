@@ -3,14 +3,16 @@
 
 using UnityEditor;
 using UnityEngine;
+using XRTK.Inspectors.Extensions;
 using XRTK.Providers.SpatialObservers;
 
 namespace XRTK.Inspectors.Profiles.SpatialAwareness
 {
-    [CustomEditor(typeof(BaseMixedRealitySurfaceObserverProfile))]
-    public abstract class BaseMixedRealitySurfaceObserverProfileInspector : BaseMixedRealitySpatialObserverProfileInspector
+    [CustomEditor(typeof(BaseMixedRealitySurfaceObserverProfile), true, isFallback = true)]
+    public class BaseMixedRealitySurfaceObserverProfileInspector : BaseMixedRealitySpatialObserverProfileInspector
     {
-        private SerializedProperty surfacePhysicsLayerOverride;
+        private readonly GUIContent surfaceFoldoutContent = new GUIContent("Surface Finding Settings");
+
         private SerializedProperty surfaceFindingMinimumArea;
         private SerializedProperty displayFloorSurfaces;
         private SerializedProperty floorSurfaceMaterial;
@@ -27,14 +29,11 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
         private readonly GUIContent wallMaterialContent = new GUIContent("Wall Material");
         private readonly GUIContent minimumAreaContent = new GUIContent("Minimum Area");
 
-        private bool foldout = true;
-
         /// <inheritdoc />
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            surfacePhysicsLayerOverride = serializedObject.FindProperty(nameof(surfacePhysicsLayerOverride));
             surfaceFindingMinimumArea = serializedObject.FindProperty(nameof(surfaceFindingMinimumArea));
             displayFloorSurfaces = serializedObject.FindProperty(nameof(displayFloorSurfaces));
             floorSurfaceMaterial = serializedObject.FindProperty(nameof(floorSurfaceMaterial));
@@ -53,13 +52,9 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
 
             serializedObject.Update();
 
-            foldout = EditorGUILayout.Foldout(foldout, "Surface Finding Settings", true);
-
-            if (foldout)
+            if (surfaceFindingMinimumArea.FoldoutWithBoldLabelPropertyField(surfaceFoldoutContent, minimumAreaContent))
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(surfacePhysicsLayerOverride);
-                EditorGUILayout.PropertyField(surfaceFindingMinimumArea, minimumAreaContent);
                 EditorGUILayout.PropertyField(displayFloorSurfaces);
                 EditorGUILayout.PropertyField(floorSurfaceMaterial, floorMaterialContent);
                 EditorGUILayout.PropertyField(displayCeilingSurfaces);

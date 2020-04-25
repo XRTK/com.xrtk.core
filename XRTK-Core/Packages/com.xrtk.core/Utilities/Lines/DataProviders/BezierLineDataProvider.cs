@@ -92,8 +92,6 @@ namespace XRTK.Utilities.Lines
 
         public override int PointCount => 4;
 
-        [Header("Bezier Settings")]
-
         [SerializeField]
         private BezierInertia inertia;
 

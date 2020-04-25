@@ -2,7 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
+using UnityEngine;
 using XRTK.Definitions.SpatialAwarenessSystem;
+using XRTK.Inspectors.Extensions;
 
 namespace XRTK.Inspectors.Profiles.SpatialAwareness
 {
@@ -10,6 +12,10 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
     public class MixedRealitySpatialAwarenessSystemProfileInspector : MixedRealityServiceProfileInspector
     {
         private SerializedProperty meshDisplayOption;
+        private SerializedProperty globalMeshObserverProfile;
+        private SerializedProperty globalSurfaceObserverProfile;
+
+        private readonly GUIContent generalSettingsFoldoutHeader = new GUIContent("General Settings");
 
         /// <inheritdoc />
         protected override void OnEnable()
@@ -17,6 +23,8 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             base.OnEnable();
 
             meshDisplayOption = serializedObject.FindProperty(nameof(meshDisplayOption));
+            globalMeshObserverProfile = serializedObject.FindProperty(nameof(globalMeshObserverProfile));
+            globalSurfaceObserverProfile = serializedObject.FindProperty(nameof(globalSurfaceObserverProfile));
         }
 
         /// <inheritdoc />
@@ -25,7 +33,16 @@ namespace XRTK.Inspectors.Profiles.SpatialAwareness
             RenderHeader("Spatial Awareness can enhance your experience by enabling objects to interact with the real world.\n\nBelow is a list of registered Spatial Observers that can gather data about your environment.");
 
             serializedObject.Update();
-            EditorGUILayout.PropertyField(meshDisplayOption);
+
+            if (meshDisplayOption.FoldoutWithBoldLabelPropertyField(generalSettingsFoldoutHeader))
+            {
+                EditorGUILayout.Space();
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(globalMeshObserverProfile);
+                EditorGUILayout.PropertyField(globalSurfaceObserverProfile);
+                EditorGUI.indentLevel--;
+            }
+
             serializedObject.ApplyModifiedProperties();
 
             base.OnInspectorGUI();

@@ -9,6 +9,7 @@ using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
+using XRTK.Inspectors.Extensions;
 using XRTK.Inspectors.PropertyDrawers;
 using XRTK.Services;
 
@@ -22,8 +23,6 @@ namespace XRTK.Inspectors.Profiles
         private int currentlySelectedConfigurationOption;
 
         private SerializedProperty configurations;
-
-        private bool showConfigurationFoldout = true;
 
         /// <summary>
         /// Gets the service constraint used to filter options listed in the
@@ -58,9 +57,9 @@ namespace XRTK.Inspectors.Profiles
         public override void OnInspectorGUI()
         {
             EditorGUILayout.Space();
-            showConfigurationFoldout = EditorGUILayout.Foldout(showConfigurationFoldout, new GUIContent($"{ServiceConstraint.Name} Configuration Options"), true);
+            configurations.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(configurations.isExpanded, new GUIContent($"{ServiceConstraint.Name} Configuration Options"));
 
-            if (showConfigurationFoldout)
+            if (configurations.isExpanded)
             {
                 serializedObject.Update();
                 EditorGUILayout.Space();

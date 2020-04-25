@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -23,7 +23,16 @@ namespace XRTK.Providers.SpatialObservers
         protected BaseMixedRealitySpatialMeshObserver(string name, uint priority, BaseMixedRealitySpatialMeshObserverProfile profile, IMixedRealitySpatialAwarenessSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            MeshPhysicsLayerOverride = profile.MeshPhysicsLayerOverride;
+            if (profile == null)
+            {
+                profile = MixedRealityToolkit.Instance.ActiveProfile.SpatialAwarenessProfile.GlobalMeshObserverProfile;
+            }
+
+            if (profile == null)
+            {
+                throw new ArgumentNullException($"Missing a {profile.GetType().Name} profile for {name}");
+            }
+
             MeshLevelOfDetail = profile.MeshLevelOfDetail;
             MeshTrianglesPerCubicMeter = profile.MeshTrianglesPerCubicMeter;
             MeshRecalculateNormals = profile.MeshRecalculateNormals;
@@ -177,12 +186,6 @@ namespace XRTK.Providers.SpatialObservers
         #region IMixedRealitySpatialMeshObserver Implementation
 
         private SpatialAwarenessMeshLevelOfDetail meshLevelOfDetail = SpatialAwarenessMeshLevelOfDetail.Coarse;
-
-        /// <inheritdoc />
-        public override int PhysicsLayer => MeshPhysicsLayerOverride == -1 ? base.PhysicsLayer : MeshPhysicsLayerOverride;
-
-        /// <inheritdoc />
-        public int MeshPhysicsLayerOverride { get; }
 
         /// <inheritdoc />
         public SpatialAwarenessMeshLevelOfDetail MeshLevelOfDetail
@@ -346,13 +349,11 @@ namespace XRTK.Providers.SpatialObservers
         {
             GameObject newGameObject;
 
-            var layer = MeshPhysicsLayerOverride == -1 ? base.PhysicsLayer : MeshPhysicsLayerOverride;
-
             if (meshObjectPrefab == null)
             {
                 newGameObject = new GameObject("Blank Spatial Mesh GameObject", requiredMeshComponents)
                 {
-                    layer = layer
+                    layer = PhysicsLayer
                 };
             }
             else
@@ -364,10 +365,10 @@ namespace XRTK.Providers.SpatialObservers
                     newGameObject.EnsureComponent(requiredMeshComponents[i]);
                 }
 
-                newGameObject.layer = layer;
+                newGameObject.layer = PhysicsLayer;
             }
 
-            newGameObject.transform.parent = MixedRealityToolkit.SpatialAwarenessSystem.SpatialMeshesParent.transform;
+            newGameObject.transform.SetParent(MixedRealityToolkit.SpatialAwarenessSystem.SpatialMeshesParent.transform, false);
             newGameObject.SetActive(false);
             return newGameObject;
         }

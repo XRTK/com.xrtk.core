@@ -1,5 +1,6 @@
 ﻿using UnityEditor;
 using UnityEngine;
+using XRTK.Inspectors.Extensions;
 using XRTK.Utilities.Lines;
 
 namespace XRTK.Inspectors.Utilities.Lines.DataProviders
@@ -20,9 +21,9 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
         {
             base.OnEnable();
 
-            controlPoints = serializedObject.FindProperty("controlPoints");
-            inertia = serializedObject.FindProperty("inertia");
-            useLocalTangentPoints = serializedObject.FindProperty("useLocalTangentPoints");
+            controlPoints = serializedObject.FindProperty(nameof(controlPoints));
+            inertia = serializedObject.FindProperty(nameof(inertia));
+            useLocalTangentPoints = serializedObject.FindProperty(nameof(useLocalTangentPoints));
         }
 
         public override void OnInspectorGUI()
@@ -32,10 +33,13 @@ namespace XRTK.Inspectors.Utilities.Lines.DataProviders
 
             // We always draw line points for bezier.
             DrawLinePoints = true;
-
-            EditorGUILayout.PropertyField(controlPoints, true);
-            EditorGUILayout.PropertyField(inertia, true);
-            EditorGUILayout.PropertyField(useLocalTangentPoints);
+            if (useLocalTangentPoints.FoldoutWithBoldLabelPropertyField(new GUIContent("Bezier Settings")))
+            {
+                EditorGUI.indentLevel++;
+                EditorGUILayout.PropertyField(controlPoints, true);
+                EditorGUILayout.PropertyField(inertia, true);
+                EditorGUI.indentLevel--;
+            }
 
             serializedObject.ApplyModifiedProperties();
         }

@@ -12,21 +12,20 @@ namespace XRTK.Definitions.InputSystem
     /// An Input Action for mapping an action to an Input Control like a Button, Joystick, Sensor, etc.
     /// </summary>
     [Serializable]
-    public struct MixedRealityInputAction : IEqualityComparer
+    public struct MixedRealityInputAction : IEqualityComparer, ISerializationCallbackReceiver
     {
         /// <summary>
         /// Constructor.
         /// </summary>
         /// <param name="description"></param>
-        private MixedRealityInputAction(string description)
+        private MixedRealityInputAction(string description) : this()
         {
             if (string.IsNullOrWhiteSpace(description))
             {
                 throw new ArgumentException($"{nameof(description)} cannot be empty");
             }
 
-            this.cachedGuid = default;
-            this.profileGuid = DefaultGuidString;
+            Profile = DefaultGuidString;
             this.id = 0;
             this.description = description;
             this.axisConstraint = AxisType.None;
@@ -59,8 +58,7 @@ namespace XRTK.Definitions.InputSystem
         public MixedRealityInputAction(Guid profileGuid, uint id, string description, AxisType axisConstraint = AxisType.None)
             : this(id, description, axisConstraint)
         {
-            this.cachedGuid = profileGuid;
-            this.profileGuid = profileGuid.ToString("N");
+            Profile = profileGuid.ToString("N");
         }
 
         /// <summary>
@@ -76,30 +74,24 @@ namespace XRTK.Definitions.InputSystem
         [SerializeField]
         private string profileGuid;
 
-        private Guid cachedGuid;
+        private string Profile
+        {
+            get => profileGuid;
+            set
+            {
+                profileGuid = value;
+
+                if (Guid.TryParse(profileGuid, out var temp))
+                {
+                    ProfileGuid = temp;
+                }
+            }
+        }
 
         /// <summary>
         /// The guid reference to the <see cref="MixedRealityInputActionsProfile"/> this action belongs to.
         /// </summary>
-        public Guid ProfileGuid
-        {
-            get
-            {
-                if (id != 0 &&
-                    cachedGuid == default &&
-                    profileGuid != DefaultGuidString)
-                {
-                    if (string.IsNullOrWhiteSpace(profileGuid))
-                    {
-                        profileGuid = DefaultGuidString;
-                    }
-
-                    Guid.TryParse(profileGuid, out cachedGuid);
-                }
-
-                return cachedGuid;
-            }
-        }
+        public Guid ProfileGuid { get; private set; }
 
         [SerializeField]
         private uint id;
@@ -181,5 +173,24 @@ namespace XRTK.Definitions.InputSystem
         }
 
         #endregion IEqualityComparer Implementation
+
+        #region ISerializationCallbackReceiver Implementation
+
+        /// <inheritdoc />
+        public void OnBeforeSerialize()
+        {
+            Profile = ProfileGuid.ToString("N");
+        }
+
+        /// <inheritdoc />
+        public void OnAfterDeserialize()
+        {
+            if (Guid.TryParse(profileGuid, out var temp))
+            {
+                ProfileGuid = temp;
+            }
+        }
+
+        #endregion ISerializationCallbackReceiver Implementation
     }
 }

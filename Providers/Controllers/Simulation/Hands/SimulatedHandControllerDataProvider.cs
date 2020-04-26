@@ -1,11 +1,14 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;
@@ -57,32 +60,26 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public bool HandMeshingEnabled { get; }
 
         /// <inheritdoc />
-        protected override void CreateAndRegisterSimulatedController(Handedness handedness)
+        protected override IMixedRealitySimulatedController CreateAndRegisterSimulatedController(Handedness handedness)
         {
-            var controllerType = typeof(SimulatedHandController);
-            var pointers = RequestPointers(controllerType, handedness, true);
-            var inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource($"{controllerType.Name} {handedness}", pointers);
-            var controller = new SimulatedHandController(this, TrackingState.Tracked, handedness, inputSource, null);
+            SimulatedMixedRealityHandController controller;
 
-            if (controller == null || !controller.SetupConfiguration(controllerType))
+            try
             {
-                // Controller failed to be setup correctly.
-                // Return null so we don't raise the source detected.
-                return;
+                controller = new SimulatedMixedRealityHandController(this, TrackingState.Tracked, handedness, GetControllerMappingProfile(typeof(SimulatedMixedRealityHandController), handedness));
+
+            }
+            catch (Exception e)
+            {
+                Debug.LogError($"Failed to create {nameof(SimulatedMixedRealityHandController)}!\n{e}");
+                return null;
             }
 
-            for (int i = 0; i < controller.InputSource?.Pointers?.Length; i++)
-            {
-                controller.InputSource.Pointers[i].Controller = controller;
-            }
+            controller.TryRenderControllerModel();
 
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerVisualizationProfile.RenderMotionControllers)
-            {
-                controller.TryRenderControllerModel(controllerType);
-            }
-
-            MixedRealityToolkit.InputSystem.RaiseSourceDetected(controller.InputSource, controller);
+            MixedRealityToolkit.InputSystem?.RaiseSourceDetected(controller.InputSource, controller);
             AddController(controller);
+            return controller;
         }
     }
 }

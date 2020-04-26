@@ -240,6 +240,6 @@ namespace XRTK.Providers.Controllers.Simulation
         /// Asks the concrete simulation data create and register a new simulated controller.
         /// </summary>
         /// <param name="handedness">The handedness of the controller to create.</param>
-        protected abstract void CreateAndRegisterSimulatedController(Handedness handedness);
+        protected abstract IMixedRealitySimulatedController CreateAndRegisterSimulatedController(Handedness handedness);
     }
 }

@@ -19,31 +19,31 @@ namespace XRTK.Inspectors.PropertyDrawers
     /// {
     ///     [SerializeField]
     ///     private MixedRealityInputAction testAction = MixedRealityInputAction.None;
-    /// 
+    ///
     ///     [SerializeField]
     ///     [AxisConstraint(AxisType.DualAxis)]
     ///     private MixedRealityInputAction test2Action = MixedRealityInputAction.None;
     /// }
-    /// 
+    ///
     /// [CustomEditor(typeof(CustomScript))]
     /// public class CustomInspector : Editor
     /// {
     ///     private readonly MixedRealityInputActionDropdown inputActionDropdown = new MixedRealityInputActionDropdown();
-    /// 
+    ///
     ///     private SerializedProperty testAction;
     ///     private SerializedProperty test2Action;
-    /// 
+    ///
     ///     private void OnEnable()
     ///     {
     ///         testAction = serializedObject.FindProperty(nameof(testAction));
     ///         test2Action = serializedObject.FindProperty(nameof(test2Action));
     ///     }
-    /// 
+    ///
     ///     public override void OnInspectorGUI()
     ///     {
     ///         inputActionDropdown.OnGui(GUIContent.none, testAction);
     ///         inputActionDropdown.OnGui(GUIContent.none, test2Action, AxisType.DualAxis);
-    /// 
+    ///
     ///         // The same as:
     ///         EditorGUILayout.PropertyField(testAction);
     ///         EditorGUILayout.PropertyField(test2Action);

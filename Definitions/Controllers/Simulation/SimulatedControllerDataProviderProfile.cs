@@ -2,16 +2,12 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.Controllers.Simulation
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Controller Data Providers/Simulated Controller Data Provider Profile", fileName = "SimulatedControllerDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
     public class SimulatedControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
     {
         #region General Settings
-
-        [Header("General Settings")]
 
         [SerializeField]
         [Tooltip("Simulated update frequency for tracking data in milliseconds. 0ms is every frame.")]
@@ -36,8 +32,6 @@ namespace XRTK.Definitions.Controllers.Simulation
         #endregion
 
         #region Placement Settings
-
-        [Header("Placement Settings")]
 
         [SerializeField]
         [Tooltip("Default distance of the controller from the camera")]
@@ -69,8 +63,6 @@ namespace XRTK.Definitions.Controllers.Simulation
         #endregion
 
         #region Controls Settings
-
-        [Header("Controls Settings")]
 
         [SerializeField]
         [Tooltip("Key to toggle persistent mode for the left controller")]
@@ -118,5 +110,10 @@ namespace XRTK.Definitions.Controllers.Simulation
         public float RotationSpeed => rotationSpeed;
 
         #endregion
+
+        public override ControllerDefinition[] GetDefaultControllerOptions()
+        {
+            return null;
+        }
     }
 }

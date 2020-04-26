@@ -1,10 +1,12 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 
 namespace XRTK.Definitions.Devices
 {
@@ -15,24 +17,22 @@ namespace XRTK.Definitions.Devices
     [Serializable]
     public class MixedRealityInteractionMapping
     {
-        /// <summary>
-        /// The constructor for a new Interaction Mapping definition
-        /// </summary>
-        /// <param name="id">Identity for mapping</param>
-        /// <param name="description">The description of the interaction mapping.</param>
-        /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
-        /// <param name="inputType">The physical input device / control</param>
-        /// <param name="keyCode">Optional KeyCode value to get input from Unity's old input system</param>
-        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, DeviceInputType inputType, KeyCode keyCode)
+        #region Constructors
+
+        public MixedRealityInteractionMapping(string description = "None", List<InputProcessor> inputProcessors = null)
         {
-            this.id = id;
             this.description = description;
-            this.axisType = axisType;
-            this.inputType = inputType;
+            this.inputProcessors = inputProcessors ?? new List<InputProcessor>();
+
             inputAction = MixedRealityInputAction.None;
-            this.keyCode = keyCode;
+            stateChangeType = StateChangeType.Continuous;
+            inputName = string.Empty;
+            axisType = AxisType.None;
+            inputType = DeviceInputType.None;
+            keyCode = KeyCode.None;
             axisCodeX = string.Empty;
             axisCodeY = string.Empty;
+
             rawData = null;
             boolData = false;
             floatData = 0f;
@@ -40,135 +40,78 @@ namespace XRTK.Definitions.Devices
             positionData = Vector3.zero;
             rotationData = Quaternion.identity;
             poseData = MixedRealityPose.ZeroIdentity;
-            activated = false;
             updated = false;
-            inputName = string.Empty;
-            invertXAxis = false;
-            invertYAxis = false;
+            activated = false;
+        }
+
+        public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType, List<InputProcessor> inputProcessors = null)
+            : this(description, inputProcessors)
+        {
+            this.axisType = axisType;
+            this.inputType = inputType;
         }
 
         /// <summary>
         /// The constructor for a new Interaction Mapping definition
         /// </summary>
-        /// <param name="id">Identity for mapping</param>
         /// <param name="description">The description of the interaction mapping.</param>
-        /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
-        /// <param name="inputType">The physical input device / control</param>
-        /// <param name="inputName">Optional inputName value to get input for a coded input identity from a provider</param>
-        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, string inputName, DeviceInputType inputType)
+        /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping.</param>
+        /// <param name="inputName">Optional inputName value to get input for a coded input identity from a provider.</param>
+        /// <param name="inputType">The physical input device / control type.</param>
+        /// <param name="inputProcessors"></param>
+        public MixedRealityInteractionMapping(string description, AxisType axisType, string inputName, DeviceInputType inputType, List<InputProcessor> inputProcessors = null)
+            : this(description, axisType, inputType, inputProcessors)
         {
-            this.id = id;
-            this.description = description;
-            this.axisType = axisType;
-            this.inputType = inputType;
-            inputAction = MixedRealityInputAction.None;
             this.inputName = inputName;
-            axisCodeX = string.Empty;
-            axisCodeY = string.Empty;
-            rawData = null;
-            boolData = false;
-            floatData = 0f;
-            vector2Data = Vector2.zero;
-            positionData = Vector3.zero;
-            rotationData = Quaternion.identity;
-            poseData = MixedRealityPose.ZeroIdentity;
-            activated = false;
-            updated = false;
-            keyCode = KeyCode.None;
-            invertXAxis = false;
-            invertYAxis = false;
         }
 
         /// <summary>
         /// The constructor for a new Interaction Mapping definition
         /// </summary>
-        /// <param name="id">Identity for mapping</param>
         /// <param name="description">The description of the interaction mapping.</param>
         /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
-        /// <param name="inputType">The physical input device / control</param>
+        /// <param name="inputType">The physical input device / control type.</param>
         /// <param name="axisCodeX">Optional horizontal or single axis value to get axis data from Unity's old input system.</param>
         /// <param name="axisCodeY">Optional vertical axis value to get axis data from Unity's old input system.</param>
-        /// <param name="invertXAxis">Optional horizontal axis invert option.</param>
-        /// <param name="invertYAxis">Optional vertical axis invert option.</param>
-        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, DeviceInputType inputType, string axisCodeX, string axisCodeY = "", bool invertXAxis = false, bool invertYAxis = false)
+        /// <param name="inputProcessors"></param>
+        public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType, string axisCodeX, string axisCodeY = "", List<InputProcessor> inputProcessors = null)
+            : this(description, axisType, inputType, inputProcessors)
         {
-            this.id = id;
-            this.description = description;
-            this.axisType = axisType;
-            this.inputType = inputType;
-            inputAction = MixedRealityInputAction.None;
-            keyCode = KeyCode.None;
-            this.inputName = string.Empty;
             this.axisCodeX = axisCodeX;
             this.axisCodeY = axisCodeY;
-            this.invertXAxis = invertXAxis;
-            this.invertYAxis = invertYAxis;
-            rawData = null;
-            boolData = false;
-            floatData = 0f;
-            vector2Data = Vector2.zero;
-            positionData = Vector3.zero;
-            rotationData = Quaternion.identity;
-            poseData = MixedRealityPose.ZeroIdentity;
-            activated = false;
-            updated = false;
-            inputName = string.Empty;
         }
 
         /// <summary>
         /// The constructor for a new Interaction Mapping definition
         /// </summary>
-        /// <param name="id">Identity for mapping</param>
         /// <param name="description">The description of the interaction mapping.</param>
         /// <param name="axisType">The axis that the mapping operates on, also denotes the data type for the mapping</param>
-        /// <param name="inputType">The physical input device / control</param>
-        /// <param name="inputAction">The logical MixedRealityInputAction that this input performs</param>
+        /// <param name="inputType">The physical input device / control type.</param>
         /// <param name="keyCode">Optional KeyCode value to get input from Unity's old input system</param>
-        /// <param name="axisCodeX">Optional horizontal or single axis value to get axis data from Unity's old input system.</param>
-        /// <param name="axisCodeY">Optional vertical axis value to get axis data from Unity's old input system.</param>
-        /// <param name="invertXAxis">Optional horizontal axis invert option.</param>
-        /// <param name="invertYAxis">Optional vertical axis invert option.</param>
-        public MixedRealityInteractionMapping(uint id, string description, AxisType axisType, DeviceInputType inputType, MixedRealityInputAction inputAction, KeyCode keyCode = KeyCode.None, string axisCodeX = "", string axisCodeY = "", bool invertXAxis = false, bool invertYAxis = false)
+        /// <param name="inputProcessors"></param>
+        public MixedRealityInteractionMapping(string description, AxisType axisType, DeviceInputType inputType, KeyCode keyCode, List<InputProcessor> inputProcessors = null)
+            : this(description, axisType, inputType, inputProcessors)
         {
-            this.id = id;
-            this.description = description;
-            this.axisType = axisType;
-            this.inputType = inputType;
-            this.inputAction = inputAction;
             this.keyCode = keyCode;
-            this.axisCodeX = axisCodeX;
-            this.axisCodeY = axisCodeY;
-            this.invertXAxis = invertXAxis;
-            this.invertYAxis = invertYAxis;
-            rawData = null;
-            boolData = false;
-            floatData = 0f;
-            vector2Data = Vector2.zero;
-            positionData = Vector3.zero;
-            rotationData = Quaternion.identity;
-            poseData = MixedRealityPose.ZeroIdentity;
-            activated = false;
-            updated = false;
-            inputName = string.Empty;
         }
 
         /// <summary>
         /// Creates a copy of a <see cref="MixedRealityInteractionMapping"/>
         /// </summary>
-        /// <param name="mixedRealityInteractionMapping"></param>
-        public MixedRealityInteractionMapping(MixedRealityInteractionMapping mixedRealityInteractionMapping)
+        /// <param name="mapping"></param>
+        public MixedRealityInteractionMapping(MixedRealityInteractionMapping mapping) : this()
         {
-            id = mixedRealityInteractionMapping.id;
-            description = mixedRealityInteractionMapping.description;
-            axisType = mixedRealityInteractionMapping.axisType;
-            inputType = mixedRealityInteractionMapping.inputType;
-            inputAction = mixedRealityInteractionMapping.inputAction;
-            keyCode = mixedRealityInteractionMapping.keyCode;
-            inputName = mixedRealityInteractionMapping.inputName;
-            axisCodeX = mixedRealityInteractionMapping.axisCodeX;
-            axisCodeY = mixedRealityInteractionMapping.axisCodeY;
-            invertXAxis = mixedRealityInteractionMapping.invertXAxis;
-            invertYAxis = mixedRealityInteractionMapping.invertYAxis;
+            description = mapping.description;
+            axisType = mapping.axisType;
+            inputType = mapping.inputType;
+            inputAction = mapping.inputAction;
+            keyCode = mapping.keyCode;
+            inputName = mapping.inputName;
+            axisCodeX = mapping.axisCodeX;
+            axisCodeY = mapping.axisCodeY;
+            inputProcessors = mapping.inputProcessors;
+            stateChangeType = mapping.stateChangeType;
+
             rawData = null;
             boolData = false;
             floatData = 0f;
@@ -180,16 +123,9 @@ namespace XRTK.Definitions.Devices
             updated = false;
         }
 
-        #region Interaction Properties
+        #endregion Constructors
 
-        [SerializeField]
-        [Tooltip("The Id assigned to the Interaction.")]
-        private uint id;
-
-        /// <summary>
-        /// The Id assigned to the Interaction.
-        /// </summary>
-        public uint Id => id;
+        #region Serialized Properties
 
         [SerializeField]
         [Tooltip("The human readable description of the interaction mapping.")]
@@ -199,6 +135,15 @@ namespace XRTK.Definitions.Devices
         /// The description of the interaction mapping.
         /// </summary>
         public string Description => description;
+
+        [SerializeField]
+        [Tooltip("Influences how the Interaction determines state changes that will raise the InputAction.")]
+        private StateChangeType stateChangeType;
+
+        /// <summary>
+        /// Influences how the Interaction determines state changes that will raise the <see cref="MixedRealityInputAction"/>.
+        /// </summary>
+        //public StateChangeType StateChangeType => stateChangeType;
 
         [SerializeField]
         [Tooltip("The axis type of the button, e.g. Analogue, Digital, etc.")]
@@ -228,7 +173,7 @@ namespace XRTK.Definitions.Devices
         public MixedRealityInputAction MixedRealityInputAction
         {
             get => inputAction;
-            internal set => inputAction = value;
+            set => inputAction = value;
         }
 
         [SerializeField]
@@ -241,7 +186,7 @@ namespace XRTK.Definitions.Devices
         public KeyCode KeyCode => keyCode;
 
         [SerializeField]
-        [Tooltip("Optional KeyCode value to get input from Unity's old input system.")]
+        [Tooltip("Optional inputName value to get input for a coded input identity from a provider.")]
         private string inputName;
 
         /// <summary>
@@ -268,54 +213,15 @@ namespace XRTK.Definitions.Devices
         public string AxisCodeY => axisCodeY;
 
         [SerializeField]
-        [Tooltip("Should the X axis be inverted?")]
-        private bool invertXAxis;
+        private List<InputProcessor> inputProcessors;
 
-        /// <summary>
-        /// Should the X axis be inverted?
-        /// </summary>
-        /// <remarks>
-        /// Only valid for <see cref="Utilities.AxisType.SingleAxis"/> and <see cref="Utilities.AxisType.DualAxis"/> inputs.
-        /// </remarks>
-        public bool InvertXAxis
+        internal List<InputProcessor> InputProcessors
         {
-            get => invertXAxis;
-            set
-            {
-                if (axisType != AxisType.SingleAxis && axisType != AxisType.DualAxis)
-                {
-                    Debug.LogWarning("Inverted X axis only valid for Single or Dual Axis inputs.");
-                    return;
-                }
-
-                invertXAxis = value;
-            }
+            get => inputProcessors;
+            set => inputProcessors = value;
         }
 
-        [SerializeField]
-        [Tooltip("Should the Y axis be inverted?")]
-        private bool invertYAxis;
-
-        /// <summary>
-        /// Should the Y axis be inverted?
-        /// </summary>
-        /// <remarks>
-        /// Only valid for <see cref="Utilities.AxisType.DualAxis"/> inputs.
-        /// </remarks>
-        public bool InvertYAxis
-        {
-            get => invertYAxis;
-            set
-            {
-                if (axisType != AxisType.DualAxis)
-                {
-                    Debug.LogWarning("Inverted Y axis only valid for Dual Axis inputs.");
-                    return;
-                }
-
-                invertYAxis = value;
-            }
-        }
+        #endregion Serialized Properties
 
         private bool activated;
 
@@ -359,8 +265,6 @@ namespace XRTK.Definitions.Devices
             private set => updated = value;
         }
 
-        #endregion Interaction Properties
-
         #region Definition Data Items
 
         private object rawData;
@@ -384,7 +288,7 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// The Raw (object) data value.
         /// </summary>
-        /// <remarks>Only supported for a Raw mapping axis type</remarks>
+        /// <remarks>Only supported for a Raw mapping axis type.</remarks>
         public object RawData
         {
             get => rawData;
@@ -405,7 +309,7 @@ namespace XRTK.Definitions.Devices
         /// <summary>
         /// The Bool data value.
         /// </summary>
-        /// <remarks>Only supported for a Digital mapping axis type</remarks>
+        /// <remarks>Only supported for a Digital mapping axis type.</remarks>
         public bool BoolData
         {
             get => boolData;
@@ -417,15 +321,26 @@ namespace XRTK.Definitions.Devices
                     Debug.LogError($"{nameof(BoolData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.SingleAxis)} or {nameof(AxisType.Digital)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                ControlActivated = boolData != value;
-                boolData = value;
+                var newValue = value;
+
+                for (int i = 0; i < BoolInputProcessors.Count; i++)
+                {
+                    BoolInputProcessors[i].Process(ref newValue);
+                }
+
+                ControlActivated = boolData != newValue;
+                boolData = newValue;
             }
         }
+
+        private IReadOnlyList<InputProcessor<bool>> boolInputProcessors;
+
+        private IReadOnlyList<InputProcessor<bool>> BoolInputProcessors => boolInputProcessors ?? (boolInputProcessors = GetInputProcessorForType<bool>());
 
         /// <summary>
         /// The Float data value.
         /// </summary>
-        /// <remarks>Only supported for a SingleAxis mapping axis type</remarks>
+        /// <remarks>Only supported for a SingleAxis mapping axis type.</remarks>
         public float FloatData
         {
             get => floatData;
@@ -440,9 +355,9 @@ namespace XRTK.Definitions.Devices
 
                 var newValue = value;
 
-                if (invertXAxis)
+                for (int i = 0; i < FloatInputProcessors.Count; i++)
                 {
-                    newValue *= -1f;
+                    FloatInputProcessors[i].Process(ref newValue);
                 }
 
                 Updated = !floatData.Equals(newValue) || !floatData.Equals(0f);
@@ -450,10 +365,14 @@ namespace XRTK.Definitions.Devices
             }
         }
 
+        private IReadOnlyList<InputProcessor<float>> floatInputProcessors;
+
+        private IReadOnlyList<InputProcessor<float>> FloatInputProcessors => floatInputProcessors ?? (floatInputProcessors = GetInputProcessorForType<float>());
+
         /// <summary>
         /// The Vector2 data value.
         /// </summary>
-        /// <remarks>Only supported for a DualAxis mapping axis type</remarks>
+        /// <remarks>Only supported for a DualAxis mapping axis type.</remarks>
         public Vector2 Vector2Data
         {
             get => vector2Data;
@@ -467,14 +386,9 @@ namespace XRTK.Definitions.Devices
 
                 var newValue = value;
 
-                if (invertXAxis)
+                for (int i = 0; i < Vector2InputProcessors.Count; i++)
                 {
-                    newValue.x *= -1f;
-                }
-
-                if (invertYAxis)
-                {
-                    newValue.y *= -1f;
+                    Vector2InputProcessors[i].Process(ref newValue);
                 }
 
                 Updated = vector2Data != newValue || !newValue.x.Equals(0f) && !newValue.y.Equals(0f);
@@ -482,10 +396,14 @@ namespace XRTK.Definitions.Devices
             }
         }
 
+        private IReadOnlyList<InputProcessor<Vector2>> vector2InputProcessors;
+
+        private IReadOnlyList<InputProcessor<Vector2>> Vector2InputProcessors => vector2InputProcessors ?? (vector2InputProcessors = GetInputProcessorForType<Vector2>());
+
         /// <summary>
         /// The ThreeDof Vector3 Position data value.
         /// </summary>
-        /// <remarks>Only supported for a ThreeDof mapping axis type</remarks>
+        /// <remarks>Only supported for a ThreeDof mapping axis type.</remarks>
         public Vector3 PositionData
         {
             get => positionData;
@@ -497,15 +415,26 @@ namespace XRTK.Definitions.Devices
                     Debug.LogError($"{nameof(PositionData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.ThreeDofPosition)}.\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Updated = positionData != value || !value.x.Equals(0f) && !value.y.Equals(0f) && !value.z.Equals(0f);
-                positionData = value;
+                var newValue = value;
+
+                for (int i = 0; i < Vector3InputProcessors.Count; i++)
+                {
+                    Vector3InputProcessors[i].Process(ref newValue);
+                }
+
+                Updated = positionData != newValue || !newValue.x.Equals(0f) && !newValue.y.Equals(0f) && !newValue.z.Equals(0f);
+                positionData = newValue;
             }
         }
+
+        private IReadOnlyList<InputProcessor<Vector3>> vector3InputProcessors;
+
+        private IReadOnlyList<InputProcessor<Vector3>> Vector3InputProcessors => vector3InputProcessors ?? (vector3InputProcessors = GetInputProcessorForType<Vector3>());
 
         /// <summary>
         /// The ThreeDof Quaternion Rotation data value.
         /// </summary>
-        /// <remarks>Only supported for a ThreeDof mapping axis type</remarks>
+        /// <remarks>Only supported for a ThreeDof mapping axis type.</remarks>
         public Quaternion RotationData
         {
             get => rotationData;
@@ -517,10 +446,21 @@ namespace XRTK.Definitions.Devices
                     Debug.LogError($"{nameof(RotationData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.ThreeDofRotation)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Updated = rotationData != value || !value.x.Equals(0f) && !value.y.Equals(0f) && !value.z.Equals(0f) && value.w.Equals(1f);
-                rotationData = value;
+                var newValue = value;
+
+                for (int i = 0; i < QuaternionInputProcessors.Count; i++)
+                {
+                    QuaternionInputProcessors[i].Process(ref newValue);
+                }
+
+                Updated = rotationData != newValue || !newValue.x.Equals(0f) && !newValue.y.Equals(0f) && !newValue.z.Equals(0f) && newValue.w.Equals(1f);
+                rotationData = newValue;
             }
         }
+
+        private IReadOnlyList<InputProcessor<Quaternion>> quaternionInputProcessors;
+
+        private IReadOnlyList<InputProcessor<Quaternion>> QuaternionInputProcessors => quaternionInputProcessors ?? (quaternionInputProcessors = GetInputProcessorForType<Quaternion>());
 
         /// <summary>
         /// The Pose data value.
@@ -536,13 +476,62 @@ namespace XRTK.Definitions.Devices
                     Debug.LogError($"{nameof(PoseData)} value can only be set when the {nameof(AxisType)} is {nameof(AxisType.SixDof)}\nPlease check the {inputType} mapping for the current controller");
                 }
 
-                Updated = poseData != value || !value.Equals(MixedRealityPose.ZeroIdentity);
-                poseData = value;
+                var newValue = value;
+
+                for (int i = 0; i < PoseInputProcessors.Count; i++)
+                {
+                    PoseInputProcessors[i].Process(ref newValue);
+                }
+
+                Updated = poseData != newValue || !newValue.Equals(MixedRealityPose.ZeroIdentity);
+                poseData = newValue;
                 positionData = poseData.Position;
                 rotationData = poseData.Rotation;
             }
         }
 
+        private IReadOnlyList<InputProcessor<MixedRealityPose>> poseInputProcessors;
+
+        private IReadOnlyList<InputProcessor<MixedRealityPose>> PoseInputProcessors => poseInputProcessors ?? (poseInputProcessors = GetInputProcessorForType<MixedRealityPose>());
+
         #endregion Data Properties
+
+        /// <summary>
+        /// Get the input processors for a specific axis type.
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public IReadOnlyList<InputProcessor<T>> GetInputProcessorForType<T>() where T : struct
+        {
+            var processors = new List<InputProcessor<T>>(inputProcessors.Count);
+
+            for (int i = 0; i < inputProcessors.Count; i++)
+            {
+                var genericTypeConstraint = inputProcessors[i].GetType().FindTopmostGenericTypeArguments();
+
+                if (genericTypeConstraint[0] == typeof(T))
+                {
+                    processors.Add((InputProcessor<T>)inputProcessors[i]);
+                }
+            }
+
+            return processors;
+        }
+
+        /// <summary>
+        /// Get the input processors for a specific <see cref="InputProcessor"/> type. (i.e. InvertDualAxisProcessor).
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        public T GetInputProcessors<T>() where T : InputProcessor
+        {
+            for (int i = 0; i < inputProcessors.Count; i++)
+            {
+                if (inputProcessors[i].GetType() == typeof(T))
+                {
+                    return (T)inputProcessors[i];
+                }
+            }
+
+            return null;
+        }
     }
 }

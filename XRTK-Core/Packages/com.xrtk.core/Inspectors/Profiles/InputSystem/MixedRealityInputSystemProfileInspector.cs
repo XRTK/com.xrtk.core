@@ -180,9 +180,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem
                 }
             }
 
-            base.OnInspectorGUI();
-
             serializedObject.ApplyModifiedProperties();
+
+            base.OnInspectorGUI();
 
             if (EditorGUI.EndChangeCheck() &&
                 MixedRealityToolkit.IsInitialized)

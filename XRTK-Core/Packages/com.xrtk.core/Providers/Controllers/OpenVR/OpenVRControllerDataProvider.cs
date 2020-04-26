@@ -14,10 +14,10 @@ namespace XRTK.Providers.Controllers.OpenVR
     /// <summary>
     /// Manages Open VR Devices using unity's input system.
     /// </summary>
-    public class OpenVRDataControllerDataProvider : UnityJoystickDataProvider
+    public class OpenVRControllerDataProvider : UnityJoystickDataProvider
     {
         /// <inheritdoc />
-        public OpenVRDataControllerDataProvider(string name, uint priority, OpenVRControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
+        public OpenVRControllerDataProvider(string name, uint priority, OpenVRControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
             : base(name, priority, profile, parentService)
         {
         }

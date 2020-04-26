@@ -31,12 +31,7 @@ namespace XRTK.Inspectors.Profiles.CameraSystem
 
             EditorGUI.BeginChangeCheck();
 
-            if (globalCameraProfile.FoldoutWithBoldLabelPropertyField(generalSettingsFoldoutHeader))
-            {
-                EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(globalCameraProfile);
-                EditorGUI.indentLevel--;
-            }
+            globalCameraProfile.FoldoutWithBoldLabelPropertyField(generalSettingsFoldoutHeader);
 
             EditorGUILayout.Space();
 

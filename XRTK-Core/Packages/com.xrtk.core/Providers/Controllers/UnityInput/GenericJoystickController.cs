@@ -1,11 +1,11 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Providers.Controllers.UnityInput
@@ -15,9 +15,11 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// </summary>
     public class GenericJoystickController : BaseController
     {
+        public GenericJoystickController() : base() { }
+
         /// <inheritdoc />
-        public GenericJoystickController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-                : base(controllerDataProvider, trackingState, controllerHandedness, inputSource, interactions)
+        public GenericJoystickController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
+                : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
         {
         }
 
@@ -32,12 +34,6 @@ namespace XRTK.Providers.Controllers.UnityInput
         private MixedRealityPose pointerOffsetPose = MixedRealityPose.ZeroIdentity;
         protected MixedRealityPose LastControllerPose = MixedRealityPose.ZeroIdentity;
         protected MixedRealityPose CurrentControllerPose = MixedRealityPose.ZeroIdentity;
-
-        /// <inheritdoc />
-        public override void SetupDefaultInteractions(Handedness controllerHandedness)
-        {
-            // Generic unity controller's will not have default interactions
-        }
 
         /// <summary>
         /// Update the controller data from Unity's Input Manager
@@ -101,7 +97,8 @@ namespace XRTK.Providers.Controllers.UnityInput
             {
                 case DeviceInputType.TriggerPress:
                     Debug.Assert(!string.IsNullOrEmpty(interactionMapping.AxisCodeX), $"[{interactionMapping.Description}] Axis mapping does not have an Axis defined");
-                    interactionMapping.BoolData = Input.GetAxisRaw(interactionMapping.AxisCodeX).Equals(interactionMapping.InvertXAxis ? -1f : 1f);
+                    var floatData = Input.GetAxisRaw(interactionMapping.AxisCodeX);
+                    interactionMapping.BoolData = floatData.Approximately(-1f, 0.01f) || floatData.Approximately(1f, 0.01f);
                     break;
                 case DeviceInputType.TriggerNearTouch:
                 case DeviceInputType.ThumbNearTouch:
@@ -138,7 +135,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                 case DeviceInputType.Trigger:
                 case DeviceInputType.TriggerPress:
                 case DeviceInputType.TouchpadPress:
-                    interactionMapping.BoolData = interactionMapping.FloatData.Equals(interactionMapping.InvertXAxis ? -1f : 1f);
+                    interactionMapping.BoolData = interactionMapping.FloatData.Approximately(-1f, 0.01f) || interactionMapping.FloatData.Approximately(1f, 0.01f);
                     break;
                 case DeviceInputType.TriggerTouch:
                 case DeviceInputType.TouchpadTouch:

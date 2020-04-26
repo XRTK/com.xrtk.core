@@ -1,15 +1,12 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using UnityEngine.Serialization;
 using XRTK.Attributes;
-using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers;
-using XRTK.Interfaces.Providers.Speech;
-using XRTK.Services;
 
 namespace XRTK.Definitions.InputSystem
 {
@@ -17,8 +14,10 @@ namespace XRTK.Definitions.InputSystem
     /// Configuration profile settings for setting up controller pointers.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System Profile", fileName = "MixedRealityInputSystemProfile", order = (int)CreateProfileMenuItemIndices.Input)]
-    public class MixedRealityInputSystemProfile : BaseMixedRealityProfile
+    public class MixedRealityInputSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityInputDataProvider>
     {
+        #region Global Input System Options
+
         [SerializeField]
         [Tooltip("The focus provider service concrete type to use when raycasting.")]
         [Implements(typeof(IMixedRealityFocusProvider), TypeGrouping.ByNamespaceFlat)]
@@ -34,11 +33,117 @@ namespace XRTK.Definitions.InputSystem
         }
 
         [SerializeField]
-        [Tooltip("Input System Action Mapping profile for wiring up Controller input to Actions.")]
+        [Tooltip("The concrete type of IMixedRealityGazeProvider to use.")]
+        [Implements(typeof(IMixedRealityGazeProvider), TypeGrouping.ByNamespaceFlat)]
+        private SystemType gazeProviderType;
+
+        /// <summary>
+        /// The concrete type of <see cref="IMixedRealityGazeProvider"/> to use.
+        /// </summary>
+        public SystemType GazeProviderType
+        {
+            get => gazeProviderType;
+            internal set => gazeProviderType = value;
+        }
+
+        [Prefab]
+        [SerializeField]
+        [Tooltip("The gaze cursor prefab to use on the Gaze pointer.")]
+        private GameObject gazeCursorPrefab = null;
+
+        /// <summary>
+        /// The gaze cursor prefab to use on the Gaze pointer.
+        /// </summary>
+        public GameObject GazeCursorPrefab => gazeCursorPrefab;
+
+        #region Global Pointer Options
+
+        [SerializeField]
+        [Tooltip("Maximum distance at which all pointers can collide with a GameObject, unless it has an override extent.")]
+        private float pointingExtent = 10f;
+
+        /// <summary>
+        /// Maximum distance at which all pointers can collide with a GameObject, unless it has an override extent.
+        /// </summary>
+        public float PointingExtent => pointingExtent;
+
+        [SerializeField]
+        [Tooltip("The LayerMasks, in prioritized order, that are used to determine the GazeTarget when raycasting.")]
+        private LayerMask[] pointingRaycastLayerMasks = { UnityEngine.Physics.DefaultRaycastLayers };
+
+        /// <summary>
+        /// The LayerMasks, in prioritized order, that are used to determine the GazeTarget when raycasting.
+        /// </summary>
+        public LayerMask[] PointingRaycastLayerMasks => pointingRaycastLayerMasks;
+
+        [SerializeField]
+        private bool drawDebugPointingRays = false;
+
+        /// <summary>
+        /// Toggle to enable or disable debug pointing rays.
+        /// </summary>
+        public bool DrawDebugPointingRays => drawDebugPointingRays;
+
+        [SerializeField]
+        private Color[] debugPointingRayColors = { Color.green };
+
+        /// <summary>
+        /// The colors to use when debugging pointer rays.
+        /// </summary>
+        public Color[] DebugPointingRayColors => debugPointingRayColors;
+
+        #endregion Global Pointer Options
+
+        #region Global Hand Options
+
+        [SerializeField]
+        [Tooltip("If set, hand mesh data will be read and available for visualization. Disable for optimized performance.")]
+        private bool handMeshingEnabled = false;
+
+        /// <summary>
+        /// If set, hand mesh data will be read and available for visualization. Disable for optimized performance.
+        /// </summary>
+        public bool HandMeshingEnabled => handMeshingEnabled;
+
+        [SerializeField]
+        [Tooltip("If set, hands will be setup with colliders and a rigidbody to work with Unity's physics system.")]
+        private bool handPhysicsEnabled = false;
+
+        /// <summary>
+        /// If set, hands will be setup with colliders and a rigidbody to work with Unity's physics system.
+        /// </summary>
+        public bool HandPhysicsEnabled => handPhysicsEnabled;
+
+        [SerializeField]
+        [Tooltip("If set, hand colliders will be setup as triggers.")]
+        private bool useTriggers = false;
+
+        /// <summary>
+        /// If set, hand colliders will be setup as triggers.
+        /// </summary>
+        public bool UseTriggers => useTriggers;
+
+        [SerializeField]
+        [Tooltip("Set the bounds mode to use for calculating hand bounds.")]
+        private HandBoundsMode boundsMode = HandBoundsMode.Hand;
+
+        /// <summary>
+        /// Set the bounds mode to use for calculating hand bounds.
+        /// </summary>
+        public HandBoundsMode BoundsMode => boundsMode;
+
+        #endregion Global Hand Options
+
+        #endregion Global Input System Options
+
+        #region Profile Options
+
+        [SerializeField]
+        [Tooltip("Input System Action Mapping profile for setting up avery action a user can make in your application.")]
         private MixedRealityInputActionsProfile inputActionsProfile;
 
         /// <summary>
-        /// Input System Action Mapping profile for wiring up Controller input to Actions.
+        /// Input System Action Mapping profile for setting up avery action a user can make in your application.
         /// </summary>
         public MixedRealityInputActionsProfile InputActionsProfile
         {
@@ -47,16 +152,16 @@ namespace XRTK.Definitions.InputSystem
         }
 
         [SerializeField]
-        [Tooltip("Pointer Configuration options")]
-        private MixedRealityPointerProfile pointerProfile;
+        [Tooltip("Speech Command profile for wiring up Voice Input to Actions.")]
+        private MixedRealitySpeechCommandsProfile speechCommandsProfile;
 
         /// <summary>
-        /// Pointer configuration options
+        /// Speech commands profile for configured speech commands, for use by the speech recognition system
         /// </summary>
-        public MixedRealityPointerProfile PointerProfile
+        public MixedRealitySpeechCommandsProfile SpeechCommandsProfile
         {
-            get => pointerProfile;
-            internal set => pointerProfile = value;
+            get => speechCommandsProfile;
+            internal set => speechCommandsProfile = value;
         }
 
         [SerializeField]
@@ -72,101 +177,6 @@ namespace XRTK.Definitions.InputSystem
             internal set => gesturesProfile = value;
         }
 
-        /// <summary>
-        /// Is the speech Commands Enabled?
-        /// </summary>
-        public bool IsSpeechCommandsEnabled => speechCommandsProfile != null && SpeechDataProvider != null && MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled;
-
-        [SerializeField]
-        [Tooltip("Speech Command profile for wiring up Voice Input to Actions.")]
-        private MixedRealitySpeechCommandsProfile speechCommandsProfile;
-
-        /// <summary>
-        /// Speech commands profile for configured speech commands, for use by the speech recognition system
-        /// </summary>
-        public MixedRealitySpeechCommandsProfile SpeechCommandsProfile
-        {
-            get => speechCommandsProfile;
-            internal set => speechCommandsProfile = value;
-        }
-
-        /// <summary>
-        /// Is Dictation Enabled?
-        /// </summary>
-        public bool IsDictationEnabled => MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled && DictationDataProvider != null;
-
-        [SerializeField]
-        [FormerlySerializedAs("controllerDataProvidersProfile")]
-        [Tooltip("Device profile for registering platform specific input data sources.")]
-        private MixedRealityInputDataProvidersProfile inputDataProvidersProfile;
-
-        /// <summary>
-        /// Active profile for controller mapping configuration
-        /// </summary>
-        public MixedRealityInputDataProvidersProfile InputDataProvidersProfile
-        {
-            get => inputDataProvidersProfile;
-            internal set => inputDataProvidersProfile = value;
-        }
-
-        [SerializeField]
-        private MixedRealityControllerMappingProfiles controllerMappingProfiles;
-
-        /// <summary>
-        /// The profile for setting up registered data provider controller mappings.
-        /// </summary>
-        public MixedRealityControllerMappingProfiles ControllerMappingProfiles
-        {
-            get => controllerMappingProfiles;
-            internal set => controllerMappingProfiles = value;
-        }
-
-        [SerializeField]
-        [Tooltip("Device profile for rendering spatial controllers.")]
-        private MixedRealityControllerVisualizationProfile controllerVisualizationProfile;
-
-        /// <summary>
-        /// Device profile for rendering spatial controllers.
-        /// </summary>
-        public MixedRealityControllerVisualizationProfile ControllerVisualizationProfile
-        {
-            get => controllerVisualizationProfile;
-            internal set => controllerVisualizationProfile = value;
-        }
-
-        [SerializeField]
-        [Tooltip("Global hands configuration settings applied, if not overriden by platform data provider.")]
-        private MixedRealityHandTrackingProfile handTrackingProfile;
-
-        /// <summary>
-        /// Global hands configuration settings applied, if not overriden by platform
-        /// data provider.
-        /// </summary>
-        public MixedRealityHandTrackingProfile HandTrackingProfile
-        {
-            get => handTrackingProfile;
-            internal set => handTrackingProfile = value;
-        }
-
-        private IMixedRealityFocusProvider focusProvider;
-
-        /// <summary>
-        /// Current Registered <see cref="IMixedRealityFocusProvider"/>.
-        /// </summary>
-        public IMixedRealityFocusProvider FocusProvider => focusProvider ?? (focusProvider = MixedRealityToolkit.GetService<IMixedRealityFocusProvider>());
-
-        private IMixedRealitySpeechDataProvider speechDataProvider;
-
-        /// <summary>
-        /// Current Registered <see cref="IMixedRealitySpeechDataProvider"/>
-        /// </summary>
-        public IMixedRealitySpeechDataProvider SpeechDataProvider => speechDataProvider ?? (speechDataProvider = MixedRealityToolkit.GetService<IMixedRealitySpeechDataProvider>());
-
-        private IMixedRealityDictationDataProvider dictationDataProvider;
-
-        /// <summary>
-        /// Current Registered <see cref="IMixedRealityDictationDataProvider"/>.
-        /// </summary>
-        public IMixedRealityDictationDataProvider DictationDataProvider => dictationDataProvider ?? (dictationDataProvider = MixedRealityToolkit.GetService<IMixedRealityDictationDataProvider>());
+        #endregion Profile Options
     }
 }

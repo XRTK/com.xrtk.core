@@ -1,8 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
-using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -17,7 +18,7 @@ namespace XRTK.Providers.Controllers.UnityInput
     public class MouseDataProvider : BaseControllerDataProvider
     {
         /// <inheritdoc />
-        public MouseDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
+        public MouseDataProvider(string name, uint priority, MouseControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
             : base(name, priority, profile, parentService)
         {
         }
@@ -44,31 +45,17 @@ namespace XRTK.Providers.Controllers.UnityInput
 #endif
 
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked;
-
-            IMixedRealityInputSource mouseInputSource = null;
+            Cursor.lockState = CursorLockMode.Locked; ;
 
             MixedRealityRaycaster.DebugEnabled = true;
 
-            if (MixedRealityToolkit.InputSystem != null)
+            try
             {
-                var pointers = RequestPointers(new SystemType(typeof(MouseController)), Handedness.Any, true);
-                mouseInputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource("Mouse Input", pointers);
+                Controller = new MouseController(this, TrackingState.NotApplicable, Handedness.Any, GetControllerMappingProfile(typeof(MouseController), Handedness.Any));
             }
-
-            Controller = new MouseController(this, TrackingState.NotApplicable, Handedness.Any, mouseInputSource);
-
-            if (mouseInputSource != null)
+            catch (Exception e)
             {
-                for (int i = 0; i < mouseInputSource.Pointers.Length; i++)
-                {
-                    mouseInputSource.Pointers[i].Controller = Controller;
-                }
-            }
-
-            if (!Controller.SetupConfiguration(typeof(MouseController)))
-            {
-                Debug.LogError($"Failed to configure {typeof(MouseController).Name} controller!");
+                Debug.LogError($"Failed to create {nameof(MouseController)}!\n{e}");
                 return;
             }
 

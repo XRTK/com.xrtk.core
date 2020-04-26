@@ -1,7 +1,7 @@
 ﻿// Copyright (c) XRTK All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
@@ -85,19 +85,22 @@ namespace XRTK.Interfaces.Providers.Controllers
         Vector3 Velocity { get; }
 
         /// <summary>
-        /// Setups up the configuration based on the Mixed Reality Controller Mapping Profile.
+        /// Attempts to load the controller model render settings from the <see cref="Definitions.Controllers.MixedRealityControllerVisualizationProfile"/>
+        /// to render the controllers in the scene.
         /// </summary>
-        /// <param name="controllerType">The type of the controller.</param>
-        bool SetupConfiguration(Type controllerType);
+        /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
+        /// <param name="useAlternatePoseAction">Should the rendered controller use the alternate pose action?</param>
+        /// <returns>True, if controller model is being properly rendered.</returns>
+        void TryRenderControllerModel(byte[] glbData = null, bool useAlternatePoseAction = false);
 
         /// <summary>
         /// Attempts to load the controller model render settings from the <see cref="Definitions.Controllers.MixedRealityControllerVisualizationProfile"/>
         /// to render the controllers in the scene.
         /// </summary>
-        /// <param name="controllerType">The controller type.</param>
         /// <param name="glbData">The raw binary glb data of the controller model, typically loaded from the driver.</param>
+        /// <param name="useAlternatePoseAction">Should the rendered controller use the alternate pose action?</param>
         /// <returns>True, if controller model is being properly rendered.</returns>
-        void TryRenderControllerModel(Type controllerType, byte[] glbData = null);
+        Task TryRenderControllerModelAsync(byte[] glbData = null, bool useAlternatePoseAction = false);
 
         /// <summary>
         /// Updates the controller's state.

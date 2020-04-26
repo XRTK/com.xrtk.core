@@ -3,7 +3,6 @@
 
 using System;
 using UnityEngine;
-using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 
 namespace XRTK.Inspectors.Data
@@ -14,7 +13,7 @@ namespace XRTK.Inspectors.Data
     [Serializable]
     public struct ControllerInputActionOption
     {
-        public SupportedControllerType Controller;
+        public string Controller;
         public Handedness Handedness;
         public Vector2[] InputLabelPositions;
         public bool[] IsLabelFlipped;

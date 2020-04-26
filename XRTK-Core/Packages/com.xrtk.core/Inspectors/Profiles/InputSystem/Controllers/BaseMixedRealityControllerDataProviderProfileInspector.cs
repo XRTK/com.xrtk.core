@@ -20,6 +20,10 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
     [CustomEditor(typeof(BaseMixedRealityControllerDataProviderProfile), true, isFallback = true)]
     public class BaseMixedRealityControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
+        private static readonly GUIContent controllerProfilesFoldoutHeader = new GUIContent("Controller Mapping Profiles");
+        private static readonly string[] viewModeToolbarOptions = { "Simple", "Advanced" };
+        private static readonly List<int> nullElementIndexes = new List<int>();
+
         private SerializedProperty hasSetupDefaults;
         private SerializedProperty controllerMappingProfiles;
 
@@ -30,10 +34,6 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
         private int currentlySelectedElement;
         private int selectedMappingsViewModeTab = 0;
         private GUIStyle controllerButtonStyle;
-
-        private static readonly GUIContent controllerProfilesFoldoutHeader = new GUIContent("Controller Mapping Profiles");
-        private static readonly string[] viewModeToolbarOptions = new string[] { "Simple", "Advanced" };
-        private static readonly List<int> nullElementIndexes = new List<int>();
 
         protected override void OnEnable()
         {
@@ -246,6 +246,10 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 
         internal void RenderControllerMappingButton(MixedRealityControllerMappingProfile controllerMappingProfile)
         {
+            var controllerType = controllerMappingProfile.ControllerType?.Type;
+
+            if (controllerType == null) { return; }
+
             if (controllerButtonStyle == null)
             {
                 controllerButtonStyle = new GUIStyle("LargeButton")
@@ -266,9 +270,9 @@ namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
                 GUILayout.BeginHorizontal();
             }
 
-            var typeName = controllerMappingProfile.ControllerType.Type.Name.ToProperCase();
+            var typeName = controllerType.Name.ToProperCase();
 
-            if (controllerMappingProfile.ControllerType.Type.Name == "WindowsMixedRealityMotionController" && controllerMappingProfile.Handedness == Handedness.None)
+            if (controllerType.Name == "WindowsMixedRealityMotionController" && controllerMappingProfile.Handedness == Handedness.None)
             {
                 typeName = "HoloLens 1";
             }

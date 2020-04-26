@@ -1,8 +1,8 @@
 steps:
-- powershell: |
-    New-Item -ItemType Directory -Force -Path "$(System.DefaultWorkingDirectory)\XRTK-Core\Builds\Packages"
-    $logPath = "$(System.DefaultWorkingDirectory)\XRTK-Core\Builds\Logs\export.log"
-    $process = Start-Process -FilePath "$(EditorPath)" -AdditionalArguments "-quit -batchmode -logFile $logPath -projectPath `".\XRTK-Core`" -exportPackage `"Assets\XRTK.Seed`" `"$(System.DefaultWorkingDirectory)\XRTK-Core\Builds\Packages\XRTK-Core.unitypackage`""
+  - powershell: |
+      New-Item -ItemType Directory -Force -Path "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Packages"
+      $logPath = "$(LogDirectory)\export.log"
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -logFile $logPath -exportPackage `"Assets\XRTK.Seed`" `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Packages\$(project.name).unitypackage`"" -PassThru
 
       $ljob = Start-Job -ScriptBlock {
         param($log)
@@ -28,7 +28,4 @@ steps:
       Remove-Job $ljob
 
       exit $process.ExitCode
-  displayName: 'Unity Export Package Seed'
-
-# TODO only build if com.xrtk.core and master build
-# TODO publish build artifact with package for publish pipeline
+    displayName: 'Unity Export Package Seed'

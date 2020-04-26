@@ -1,4 +1,4 @@
-stages:
+steps:
   - powershell: |
       $packageJsonFile = "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\package.json"
       Write-Host Current Project Version
@@ -7,7 +7,7 @@ stages:
       Write-Host $version
 
       Write-Host Determining latest release version...
-      $releases = "https://api.github.com/repos/XRTK/$project.name/releases"
+      $releases = "https://api.github.com/repos/XRTK/$(project.name)/releases"
       [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
       $oldVersion = [version]::new([string](Invoke-WebRequest -Uri $releases -UseBasicParsing | ConvertFrom-Json)[0].tag_name)
 

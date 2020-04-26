@@ -3,4 +3,3 @@ steps:
       choco install docfx
       docfx $(System.DefaultWorkingDirectory)\docfx_project\docfx.json
     displayName: "Build Docfx"
-# TODO Only build if com.xrtk.core and master build

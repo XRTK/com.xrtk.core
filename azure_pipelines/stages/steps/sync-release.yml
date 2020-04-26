@@ -1,12 +1,4 @@
 steps:
-  - task: PublishPipelineArtifact@0
-    displayName: 'Publish Build Artifacts'
-    inputs:
-      artifactName: Builds # TODO put this someplace where the publish pipeline can get it
-      targetPath: '$(project.name)/Builds'
-    continueOnError: true
-    condition: always()
-
   - powershell: |
       git config user.email "XRTK-Build-Bot@users.noreply.github.com"
       git config user.name "XRTK-Build-Bot"

@@ -31,10 +31,3 @@ steps:
     failOnStderr: false
     displayName: 'Return Unity License'
     condition: always()
-
-  - task: PublishPipelineArtifact@1
-    displayName: 'Publish Pipeline Artifact'
-    inputs:
-      targetPath: '$(project.name)/Builds'
-      artifactName: 'PR Validation Build Artifacts'
-    condition: always()

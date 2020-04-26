@@ -1,16 +1,18 @@
 parameters:
+  - name: isReleaseBuild
+    type: boolean
+    default: false
   - name: os
     type: object
     default:
       windows:
         image: windows-latest
-        components: '"Windows", "Windows_IL2CPP", "Android", "UWP_IL2CPP"'
+        # TODO: Only use XRTK defined platforms for build and install the correct components and switch to the correct targets as needed
+        components: '"Windows", "Windows_IL2CPP"'
         # https://github.com/microsoft/unitysetup.powershell installer component options
         # Windows, Windows_IL2CPP, UWP_IL2CPP, Lumin, Android, iOS, Mac, Mac_IL2CPP , WebGL
         targets:
         - StandaloneWindows64
-        - Android
-        - WSAPlayer
         # Unity -buildTarget command line args https://docs.unity3d.com/Manual/CommandLineArguments.html
         # 'StandaloneOSX', 'StandaloneWindows', 'iOS', 'Android', 'StandaloneLinux', 'StandaloneWindows64', 'WebGL',
         # 'WSAPlayer', 'StandaloneLinux64', 'StandaloneLinuxUniversal', 'Tizen', 'PSP2', 'PS4', 'XBoxOne', 'N3DS', 'WiiU', 'tvOS', 'Switch', 'Lumin'
@@ -30,8 +32,6 @@ stages:
     parameters:
       platform: windows
       ${{ insert }}: ${{ parameters.os.windows }}
-  # - ${{ if ne(variables.build.sourceBranchName, 'master') }}:
-  #   - template: stages/publish.yml
-  #     parameters:
-  #       shouldRun: and(eq(variables[build.reason], 'IndividualCI'), eq(variables[build.sourceBranchName], 'master'))
-  #       vmImage: ${{ parameters.os.windows.image }}
+      isReleaseBuild: ${{ parameters.isReleaseBuild }}
+  - ${{ if eq( parameters.isReleaseBuild, 'true' ) }}:
+    - template: stages/publish.yml

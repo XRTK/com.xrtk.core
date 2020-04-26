@@ -1,37 +1,17 @@
 variables:
-  - group: Global Pipeline Settings
-  - group: Discord Webhook Publishing Variables
-  - name: project.folder
-    value: 'XRTK'
-  - name: project.name
-    value: 'XRTK-Core'
-  - name: package.name
-    value: 'com.xrtk.core'
-  - name: package.version
-    value: ''
-  - name: project.upmSha
-    value: ''
-  - name: EditorPath
-    value: ''
-  - name: LogDirectory
-    value: ''
+  project.folder: 'XRTK'
+  project.name: 'XRTK-Core'
+  package.name: 'com.xrtk.core'
+  package.version: ''
+  project.upmSha: ''
+  EditorPath: ''
+  LogDirectory: ''
+  ${{ if eq( variables['build.reason'], 'PullRequest' ) }}:
+    date: ''
+  ${{ if ne( variables['build.reason'], 'PullRequest' ) }}:
+    date: ${{ '$(Date:yyyyMMdd)' }}
 
-name: $(package.name) $(Date:yyyyMMdd)$(Rev:.r)
-
-# trigger:
-#   batch: true
-#   branches:
-#     include:
-#     - master
-#   paths:
-#     include:
-#       - docfx_project
-#       - $(project.name)/*
-#     exclude:
-#       - '*'
-#       - $(project.name)/Packages/$(package.name)/README.md
-#       - $(project.name)/Packages/$(package.name)/LICENSE.md
-#       - $(project.name)/Packages/$(package.name)/.github/*
+name: $(package.name) ${{ coalesce( variables['date'], '$(System.PullRequest.PullRequestNumber)', '$(Date:yyyyMMdd)' ) }}$(Rev:.r)
 
 pr:
   autoCancel: true
@@ -39,15 +19,36 @@ pr:
    include:
      - master
      - development
-     - feature/*
+     - feature/**
   paths:
     include:
-    - $(project.name)/*
+    - azure-pipelines.yml
+    - azure-pipelines/**
+    - XRTK-Core/**
     exclude:
       - '*'
-      - $(project.name)/Packages/$(package.name)/README.md
-      - $(project.name)/Packages/$(package.name)/LICENSE.md
-      - $(project.name)/Packages/$(package.name)/.github/*
+      - XRTK-Core/Packages/com.xrtk.core/README.md
+      - XRTK-Core/Packages/com.xrtk.core/LICENSE.md
+      - XRTK-Core/Packages/com.xrtk.core/.github/*
+
+trigger:
+  batch: true
+  branches:
+    include:
+      - master
+  paths:
+    include:
+      - azure-pipelines.yml
+      - azure-pipelines/**
+      - docfx_project
+      - XRTK-Core/**
+    exclude:
+      - '*'
+      - XRTK-Core/Packages/com.xrtk.core/README.md
+      - XRTK-Core/Packages/com.xrtk.core/LICENSE.md
+      - XRTK-Core/Packages/com.xrtk.core/.github/*
 
 extends:
   template: azure_pipelines/common.yml
+  parameters:
+    isReleaseBuild: ${{ and( eq(variables['Build.SourceBranchName'], 'master'), or( eq(variables['build.reason'], 'BatchedCI'), eq(variables['build.reason'], 'Manual') ) ) }}

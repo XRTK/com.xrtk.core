@@ -1,79 +1,106 @@
-# TODO Add manual approval so that all the pacakges release at the same time
+# TODO Add approvals so that all the pacakges release at the same time
 stages:
 - stage: Publish
   pool:
     name: 'Azure Pipelines'
     demands:
       - unity -equals false
+
   jobs:
+    - job:
+      variables:
+      - group: Global Pipeline Settings
+      - group: Discord Webhook Publishing Variables
+
+      steps:
+      - checkout: self
+
+      - powershell: |
+          git fetch origin upm
+          git checkout upm
+        displayName: 'Checkout UPM'
+
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download Pipeline Artifact'
+        inputs:
+          targetPath: '$(System.DefaultWorkingDirectory)\Builds'
+
+      # TODO Uncomment out when we're done testing
+      # - task: Npm@1
+      #   displayName: 'upm publish'
+      #   inputs:
+      #     command: publish
+      #     verbose: false
+      #     publishEndpoint: 'XRTK UPM Server'
+
       # TODO Get build artifact from master build with package
-    - task: GitHubRelease@0
-      displayName: 'GitHub release (create)'
-      inputs:
-        gitHubConnection: 'XRTK Build Bot Connection'
-        target: '$(project.upmSha)'
-        tagSource: manual
-        tag: '$(project.version)'
-        title: '$(project.name) $(project.version)'
-        releaseNotesSource: input
-        releaseNotes: |
-          # Release Notes
+      - task: GitHubRelease@1
+        displayName: 'GitHub release (create)'
+        inputs:
+          gitHubConnection: 'XRTK Build Bot Connection'
+          target: '$(project.upmSha)'
+          tagSource: manual
+          tag: '$(project.version)'
+          title: '$(project.name) $(project.version)'
+          releaseNotesSource: input
+          releaseNotes: |
+            # Release Notes
 
-          ## Requirements
+            ## Requirements
 
-          - [Unity $(UnityVersion)](https://unity3d.com/unity/whats-new/$(UnityVersion)) or later
-          - Microsoft Visual Studio $(VisualStudioVersion)
-          - Windows 10 $(WindowsBuildVersion) or later
-          - Windows SDK $(WindowsSdkVersion) or later
+            - [Unity $(UnityVersion)](https://unity3d.com/unity/whats-new/$(UnityVersion)) or later
+            - Microsoft Visual Studio $(VisualStudioVersion)
+            - Windows 10 $(WindowsBuildVersion) or later
+            - Windows SDK $(WindowsSdkVersion) or later
 
-          ## Import via Unity Package Manager (upm)
+            ## Import via Unity Package Manager (upm)
 
-          Find `Packages/manifest.json` in your project and edit the dependencies to include:
+            Find `Packages/manifest.json` in your project and edit the dependencies to include:
 
-          ```json
-          {
-            "scopedRegistries": [
-              {
-                "name": "XRTK",
-                "url": "http://upm.xrtk.io:4873/",
-                "scopes": [
-                  "com.xrtk"
-                ]
-              }
-            ],
-            "dependencies": {
-              "$(package.name)": "$(project.version)",
-              ...
-            },
-          }
-          ```
-
-          Once the registry has been added, you can search for each platform in the UPM Package Manager window.
-
-          > Note: For pre-releases you'll need to enable `show preview packages` under the Advanced dropdown in Unity's Package Manager.
-
-          ## Importing the asset directly into your project
-
-          1. Download the release asset unity package
-          2. Import unity package directly into your project by dragging and dropping the file into your project window
-          assets: '$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Packages\$(project.name).unitypackage'
-        isPreRelease: true
-
-    - task: robmburke.ado-discord-webhook.custom-build-release-task.ado-discord-webhook@1
-      displayName: 'Discord Release Webhook'
-      inputs:
-        channelId: '$(Discord.WebhookChannelId)'
-        webhookKey: '$(Discord.WebhookKey)'
-        name: '$(Discord.WebhookAuthor)'
-        avatar: '$(Discord.WebhookAvatarUrl)'
-        messageType: embeds
-        embeds: |
-          [{
-              "title": "$(project.name) has a new release!",
-              "description": "Release $(project.version) is now available.",
-              "author": {
-                  "name": "$(Discord.WebhookAuthor)"
+            ```json
+            {
+              "scopedRegistries": [
+                {
+                  "name": "XRTK",
+                  "url": "http://upm.xrtk.io:4873/",
+                  "scopes": [
+                    "com.xrtk"
+                  ]
+                }
+              ],
+              "dependencies": {
+                "$(package.name)": "$(project.version)",
+                ...
               },
-              "url": "https://github.com/XRTK/$(project.name)/releases"
-          }]
-      continueOnError: true
+            }
+            ```
+
+            Once the registry has been added, you can search for each platform in the UPM Package Manager window.
+
+            > Note: For pre-releases you'll need to enable `show preview packages` under the Advanced dropdown in Unity's Package Manager.
+
+            ## Importing the asset directly into your project
+
+            1. Download the release asset unity package
+            2. Import unity package directly into your project by dragging and dropping the file into your project window
+            assets: '$(System.DefaultWorkingDirectory)\Builds\Packages\$(project.name).unitypackage'
+          isPreRelease: true
+
+      - task: robmburke.ado-discord-webhook.custom-build-release-task.ado-discord-webhook@1
+        displayName: 'Discord Release Webhook'
+        inputs:
+          channelId: '$(Discord.WebhookChannelId)'
+          webhookKey: '$(Discord.WebhookKey)'
+          name: '$(Discord.WebhookAuthor)'
+          avatar: '$(Discord.WebhookAvatarUrl)'
+          messageType: embeds
+          embeds: |
+            [{
+                "title": "$TEST - (project.name) has a new release!",
+                "description": "Release $(project.version) is now available.",
+                "author": {
+                    "name": "$(Discord.WebhookAuthor)"
+                },
+                "url": "https://github.com/XRTK/$(project.name)/releases"
+            }]
+        continueOnError: true

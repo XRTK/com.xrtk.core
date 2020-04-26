@@ -17,7 +17,7 @@ using System.Collections.Generic;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers
 {
-    [CustomEditor(typeof(BaseMixedRealityControllerDataProviderProfile), true, isFallback = true)]
+    [CustomEditor(typeof(BaseMixedRealityControllerDataProviderProfile), editorForChildClasses: true, isFallback = true)]
     public class BaseMixedRealityControllerDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
         private static readonly GUIContent controllerProfilesFoldoutHeader = new GUIContent("Controller Mapping Profiles");

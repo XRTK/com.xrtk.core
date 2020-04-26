@@ -115,7 +115,7 @@ namespace XRTK.Inspectors.Profiles.InputSystem
 
             if (showGlobalPointerOptions)
             {
-                EditorGUILayout.HelpBox("Global pointer options applied to all controllers that support pointers. You may override these globals per controller in the its controller mapping profile.", MessageType.Info);
+                EditorGUILayout.HelpBox("Global pointer options applied to all controllers that support pointers. You may override these globals per controller mapping profile.", MessageType.Info);
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(pointingExtent);
                 EditorGUILayout.Space();

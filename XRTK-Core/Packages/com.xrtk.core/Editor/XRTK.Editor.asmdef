@@ -1,5 +1,5 @@
 {
-    "name": "XRTK.Inspectors",
+    "name": "XRTK.Editor",
     "references": [
         "GUID:f3241d040533491e8a1e2714b27c3111",
         "GUID:b6de896d71a648ec9fa913e154ba8b46",

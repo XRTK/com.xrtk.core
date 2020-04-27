@@ -118,6 +118,7 @@ namespace XRTK.Services
                 DestroyAllServices();
             }
 
+            EnsureMixedRealityRequirements();
             InitializeServiceLocator();
 
             isResetting = false;
@@ -380,6 +381,7 @@ namespace XRTK.Services
 
             Debug.Assert(ActiveSystems.Count == 0);
             Debug.Assert(RegisteredMixedRealityServices.Count == 0);
+            Debug.Assert(ActivePlatforms.Count > 0, "No Active Platforms found!");
 
             ClearCoreSystemCache();
 

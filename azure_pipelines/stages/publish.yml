@@ -13,7 +13,7 @@ stages:
       - group: Discord Webhook Publishing Variables
 
       steps:
-      - checkout: none
+      - checkout: self
 
       - powershell: |
           $env:GIT_REDIRECT_STDERR = '2>&1'

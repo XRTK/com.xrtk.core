@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using XRTK.Definitions.Controllers.Hands;
-using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;

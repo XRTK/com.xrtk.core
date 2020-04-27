@@ -3,9 +3,9 @@
 
 using UnityEditor;
 using XRTK.Definitions.Controllers.Hands;
-using XRTK.Inspectors.Profiles;
+using XRTK.Editor.Profiles;
 
-namespace XRTK.Inspectors.Data.Controllers.Hands
+namespace XRTK.Editor.Data.Controllers.Hands
 {
     [CustomEditor(typeof(HandControllerPoseDefinition))]
     public class HandControllerPoseDefinitionInspector : BaseMixedRealityProfileInspector

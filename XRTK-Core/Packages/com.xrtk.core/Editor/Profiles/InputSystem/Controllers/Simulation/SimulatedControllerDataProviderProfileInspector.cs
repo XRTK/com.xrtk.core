@@ -4,7 +4,8 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation;
-using XRTK.Inspectors.Extensions;
+using XRTK.Editor.Extensions;
+using XRTK.Editor.Profiles.InputSystem.Controllers;
 
 namespace XRTK.Inspectors.Profiles.InputSystem.Controllers.Simulation
 {

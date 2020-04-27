@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Controllers.Hands;
@@ -131,6 +132,16 @@ namespace XRTK.Definitions.InputSystem
         /// Set the bounds mode to use for calculating hand bounds.
         /// </summary>
         public HandBoundsMode BoundsMode => boundsMode;
+
+        [SerializeField]
+        [Tooltip("Hand controller poses tracked.")]
+        private List<HandControllerPoseDefinition> trackedPoses;
+
+        /// <summary>
+        /// Hand controller poses tracked.
+        /// </summary>
+        public List<HandControllerPoseDefinition> TrackedPoses => trackedPoses;
+
 
         #endregion Global Hand Options
 

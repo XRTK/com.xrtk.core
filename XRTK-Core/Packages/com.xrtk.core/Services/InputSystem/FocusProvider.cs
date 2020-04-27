@@ -42,10 +42,9 @@ namespace XRTK.Services.InputSystem
             get
             {
                 if (MixedRealityToolkit.HasActiveProfile &&
-                    MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
-                    MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile != null)
+                    MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
                 {
-                    return MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.PointingExtent;
+                    return MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointingExtent;
                 }
 
                 return 10f;
@@ -62,10 +61,9 @@ namespace XRTK.Services.InputSystem
                 if (focusLayerMasks == null)
                 {
                     if (MixedRealityToolkit.HasActiveProfile &&
-                        MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
-                        MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile != null)
+                        MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
                     {
-                        return focusLayerMasks = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.PointingRaycastLayerMasks;
+                        return focusLayerMasks = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointingRaycastLayerMasks;
                     }
 
                     return focusLayerMasks = new LayerMask[] { Physics.DefaultRaycastLayers };
@@ -111,12 +109,6 @@ namespace XRTK.Services.InputSystem
                 if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile == null)
                 {
                     Debug.LogError($"Unable to start {Name}. An Input System Profile is required for this feature.");
-                    return false;
-                }
-
-                if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile == null)
-                {
-                    Debug.LogError($"Unable to start {Name}. An Pointer Profile is required for this feature.");
                     return false;
                 }
 
@@ -772,20 +764,15 @@ namespace XRTK.Services.InputSystem
             {
                 UpdatePointer(pointer);
 
-                // TODO remove profile call here and use a value set on the pointer itself.
-                var pointerProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile;
-
-                if (pointerProfile == null || !pointerProfile.DebugDrawPointingRays) { continue; }
-
                 // TODO Let's only set this once on start.This will overwrite the property each update.
-                MixedRealityRaycaster.DebugEnabled = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.DebugDrawPointingRays;
+                MixedRealityRaycaster.DebugEnabled = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.DrawDebugPointingRays;
 
                 Color rayColor;
 
-                if (pointerProfile.DebugDrawPointingRayColors != null &&
-                    pointerProfile.DebugDrawPointingRayColors.Length > 0)
+                if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.DebugPointingRayColors != null &&
+                    MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.DebugPointingRayColors.Length > 0)
                 {
-                    rayColor = pointerProfile.DebugDrawPointingRayColors[pointerCount++ % pointerProfile.DebugDrawPointingRayColors.Length];
+                    rayColor = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.DebugPointingRayColors[pointerCount++ % MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.DebugPointingRayColors.Length];
                 }
                 else
                 {

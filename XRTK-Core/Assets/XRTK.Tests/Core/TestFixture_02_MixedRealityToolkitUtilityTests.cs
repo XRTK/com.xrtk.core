@@ -5,8 +5,7 @@ using System.Collections.Generic;
 using NUnit.Framework;
 using UnityEngine;
 using XRTK.Definitions;
-using XRTK.Definitions.Controllers;
-using XRTK.Definitions.InputSystem;
+using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Platforms;
 using XRTK.Extensions;
 using XRTK.Interfaces;
@@ -62,9 +61,10 @@ namespace XRTK.Tests.Core
         {
             SetupServiceLocator();
             var controllerTypes = new[] { typeof(GenericOpenVRController) };
-            MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile = ScriptableObject.CreateInstance<MixedRealityInputSystemProfile>();
-            MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles = ScriptableObject.CreateInstance<MixedRealityControllerMappingProfiles>();
-            Assert.IsFalse(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.ControllerMappingProfiles.ValidateControllerProfiles(controllerTypes, false));
+
+            var controllerDataMappingProfile = ScriptableObject.CreateInstance<UnityInputControllerDataProfile>();
+
+            Assert.IsFalse(controllerDataMappingProfile.ValidateControllerProfiles(controllerTypes, false));
         }
 
         #endregion Configuration Validation Tests

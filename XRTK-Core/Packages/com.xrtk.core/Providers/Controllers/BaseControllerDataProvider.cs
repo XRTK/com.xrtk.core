@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
@@ -8,8 +9,6 @@ using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
-using XRTK.Utilities;
-using Object = UnityEngine.Object;
 
 namespace XRTK.Providers.Controllers
 {
@@ -22,55 +21,49 @@ namespace XRTK.Providers.Controllers
         protected BaseControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
             : base(name, priority, profile, parentService)
         {
-        }
-
-        /// <summary>
-        /// Request an array of pointers for the controller type.
-        /// </summary>
-        /// <param name="controllerType">The controller type making the request for pointers.</param>
-        /// <param name="controllingHand">The handedness of the controller making the request.</param>
-        /// <param name="useSpecificType">Only register pointers with a specific type.</param>
-        /// <returns></returns>
-        protected virtual IMixedRealityPointer[] RequestPointers(SystemType controllerType, Handedness controllingHand, bool useSpecificType = false)
-        {
-            var pointers = new List<IMixedRealityPointer>();
-
-            if (MixedRealityToolkit.HasActiveProfile &&
-                MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
-                MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile != null)
+            if (profile == null)
             {
-                for (int i = 0; i < MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.PointerOptions.Length; i++)
-                {
-                    var pointerProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.PointerOptions[i];
-
-                    if (((useSpecificType && pointerProfile.ControllerType.Type == controllerType.Type) || (!useSpecificType && pointerProfile.ControllerType.Type == null)) &&
-                        (pointerProfile.Handedness == Handedness.Any || pointerProfile.Handedness == Handedness.Both || pointerProfile.Handedness == controllingHand))
-                    {
-                        var playspaceTransform = MixedRealityToolkit.CameraSystem != null
-                            ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
-                            : CameraCache.Main.transform.parent;
-                        var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, playspaceTransform);
-                        var pointer = pointerObject.GetComponent<IMixedRealityPointer>();
-
-                        if (pointer != null)
-                        {
-                            pointers.Add(pointer);
-                        }
-                        else
-                        {
-                            Debug.LogWarning($"Failed to attach {pointerProfile.PointerPrefab.name} to {controllerType.Type.Name}.");
-                        }
-                    }
-                }
+                throw new UnassignedReferenceException($"A {nameof(profile)} is required for {name}");
             }
 
-            return pointers.Count == 0 ? null : pointers.ToArray();
+            controllerMappingProfiles = profile.ControllerMappingProfiles;
         }
+
+        private readonly MixedRealityControllerMappingProfile[] controllerMappingProfiles;
 
         private readonly List<IMixedRealityController> activeControllers = new List<IMixedRealityController>();
 
         /// <inheritdoc />
         public IReadOnlyList<IMixedRealityController> ActiveControllers => activeControllers;
+
+        /// <inheritdoc />
+        public MixedRealityControllerMappingProfile GetControllerMappingProfile(Type controllerType, Handedness handedness)
+        {
+            if (controllerType == null)
+            {
+                Debug.LogError($"{nameof(controllerType)} is null!");
+                return null;
+            }
+
+            if (!typeof(IMixedRealityController).IsAssignableFrom(controllerType))
+            {
+                Debug.LogError($"{controllerType.Name} does not implement {nameof(IMixedRealityController)}");
+                return null;
+            }
+
+            // TODO provide a way to choose profiles with additional args instead of returning the first one found.
+
+            for (int i = 0; i < controllerMappingProfiles.Length; i++)
+            {
+                if (handedness == controllerMappingProfiles[i].Handedness &&
+                    controllerMappingProfiles[i].ControllerType?.Type == controllerType)
+                {
+                    return controllerMappingProfiles[i];
+                }
+            }
+
+            return null;
+        }
 
         protected void AddController(IMixedRealityController controller)
         {

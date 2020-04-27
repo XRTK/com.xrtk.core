@@ -1,11 +1,11 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
-using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
 
@@ -16,31 +16,38 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// </summary>
     public class MouseController : BaseController
     {
+        public MouseController() : base() { }
+
         /// <inheritdoc />
-        public MouseController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)
-            : base(controllerDataProvider, trackingState, controllerHandedness, inputSource, interactions)
+        public MouseController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
+            : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
         {
         }
 
         /// <inheritdoc />
-        public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
+        public override MixedRealityInteractionMapping[] DefaultInteractions
         {
-            new MixedRealityInteractionMapping(0, "Spatial Mouse Position", AxisType.SixDof, DeviceInputType.SpatialPointer, MixedRealityInputAction.None),
-            new MixedRealityInteractionMapping(1, "Mouse Delta Position", AxisType.DualAxis, DeviceInputType.PointerPosition, ControllerMappingLibrary.MouseX, ControllerMappingLibrary.MouseY),
-            new MixedRealityInteractionMapping(2, "Mouse Scroll Position", AxisType.DualAxis, DeviceInputType.Scroll, ControllerMappingLibrary.MouseScroll, ControllerMappingLibrary.MouseScroll, true, true),
-            new MixedRealityInteractionMapping(3, "Left Mouse Button", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Mouse0),
-            new MixedRealityInteractionMapping(4, "Right Mouse Button", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Mouse1),
-            new MixedRealityInteractionMapping(5, "Mouse Button 2", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Mouse2),
-            new MixedRealityInteractionMapping(6, "Mouse Button 3", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Mouse3),
-            new MixedRealityInteractionMapping(7, "Mouse Button 4", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Mouse4),
-            new MixedRealityInteractionMapping(8, "Mouse Button 5", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Mouse5),
-            new MixedRealityInteractionMapping(9, "Mouse Button 6", AxisType.Digital, DeviceInputType.ButtonPress, MixedRealityInputAction.None, KeyCode.Mouse6),
-        };
-
-        /// <inheritdoc />
-        public override void SetupDefaultInteractions(Handedness controllerHandedness)
-        {
-            AssignControllerMappings(DefaultInteractions);
+            get
+            {
+                var singleAxisProcessor = ScriptableObject.CreateInstance<InvertDualAxisProcessor>();
+                singleAxisProcessor.InvertX = true;
+                var dualAxisProcessor = ScriptableObject.CreateInstance<InvertDualAxisProcessor>();
+                dualAxisProcessor.InvertX = true;
+                dualAxisProcessor.InvertY = true;
+                return new[]
+                {
+                    new MixedRealityInteractionMapping("Spatial Mouse Position", AxisType.SixDof, DeviceInputType.SpatialPointer),
+                    new MixedRealityInteractionMapping("Mouse Delta Position", AxisType.DualAxis, DeviceInputType.PointerPosition, ControllerMappingLibrary.MouseY, ControllerMappingLibrary.MouseX, new List<InputProcessor>{ singleAxisProcessor }),
+                    new MixedRealityInteractionMapping("Mouse Scroll Position", AxisType.DualAxis, DeviceInputType.Scroll, ControllerMappingLibrary.MouseScroll, ControllerMappingLibrary.MouseScroll, new List<InputProcessor>{ dualAxisProcessor }),
+                    new MixedRealityInteractionMapping("Left Mouse Button", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse0),
+                    new MixedRealityInteractionMapping("Right Mouse Button", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse1),
+                    new MixedRealityInteractionMapping("Mouse Button 2", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse2),
+                    new MixedRealityInteractionMapping("Mouse Button 3", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse3),
+                    new MixedRealityInteractionMapping("Mouse Button 4", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse4),
+                    new MixedRealityInteractionMapping("Mouse Button 5", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse5),
+                    new MixedRealityInteractionMapping("Mouse Button 6", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse6),
+                };
+            }
         }
 
         private MixedRealityPose controllerPose = MixedRealityPose.ZeroIdentity;
@@ -70,14 +77,13 @@ namespace XRTK.Providers.Controllers.UnityInput
                 controllerPose.Rotation = InputSource.Pointers[0].BaseCursor.Rotation;
             }
 
-            // Don't ask me why it's mapped weird. Bc Unity...
             mouseDelta.x = Input.GetAxis(Interactions[1].AxisCodeX);
             mouseDelta.y = Input.GetAxis(Interactions[1].AxisCodeY);
 
             MixedRealityToolkit.InputSystem?.RaiseSourcePositionChanged(InputSource, this, mouseDelta);
             MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, controllerPose);
 
-            for (int i = 0; i < Interactions?.Length; i++)
+            for (int i = 0; i < Interactions.Length; i++)
             {
                 if (Interactions[i].InputType == DeviceInputType.SpatialPointer)
                 {

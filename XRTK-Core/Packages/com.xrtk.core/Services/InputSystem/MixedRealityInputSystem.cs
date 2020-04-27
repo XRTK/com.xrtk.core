@@ -30,12 +30,7 @@ namespace XRTK.Services.InputSystem
         /// <param name="profile"></param>
         public MixedRealityInputSystem(MixedRealityInputSystemProfile profile) : base(profile)
         {
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile == null)
-            {
-                throw new Exception("The Input system is missing the required Pointer Profile!");
-            }
-
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.GazeProviderType?.Type == null)
+            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.GazeProviderType?.Type == null)
             {
                 throw new Exception("The Input system is missing the required GazeProviderType!");
             }
@@ -179,7 +174,7 @@ namespace XRTK.Services.InputSystem
             }
 
             // ReSharper disable once SuspiciousTypeConversion.Global
-            GazeProvider = CameraCache.Main.gameObject.EnsureComponent(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerProfile.GazeProviderType.Type) as IMixedRealityGazeProvider;
+            GazeProvider = CameraCache.Main.gameObject.EnsureComponent(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.GazeProviderType.Type) as IMixedRealityGazeProvider;
         }
 
         /// <inheritdoc />

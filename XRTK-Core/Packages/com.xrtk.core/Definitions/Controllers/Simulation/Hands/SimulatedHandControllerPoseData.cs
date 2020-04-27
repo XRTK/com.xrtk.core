@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using UnityEngine.Serialization;
 using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.Controllers.Simulation.Hands
@@ -25,7 +24,6 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
 
         [SerializeField]
         [Tooltip("Describe the hand pose.")]
-        [FormerlySerializedAs("gestureDescription")]
         private string description = string.Empty;
 
         /// <summary>

@@ -256,9 +256,7 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
 
         internal void RenderControllerMappingButton(MixedRealityControllerMappingProfile controllerMappingProfile)
         {
-            var controllerType = controllerMappingProfile.ControllerType?.Type;
-
-            if (controllerType == null) { return; }
+            var controllerType = controllerMappingProfile.ControllerType.Type;
 
             if (controllerButtonStyle == null)
             {
@@ -280,9 +278,9 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
                 GUILayout.BeginHorizontal();
             }
 
-            var typeName = controllerType.Name.ToProperCase();
+            var typeName = controllerType?.Name.ToProperCase();
 
-            if (controllerType.Name == "WindowsMixedRealityMotionController" && controllerMappingProfile.Handedness == Handedness.None)
+            if (controllerType?.Name == "WindowsMixedRealityMotionController" && controllerMappingProfile.Handedness == Handedness.None)
             {
                 typeName = "HoloLens 1";
             }

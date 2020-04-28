@@ -268,7 +268,7 @@ namespace XRTK.Editor.PropertyDrawers
                     {
                         var qualifiedNameComponents = resolvedType?.AssemblyQualifiedName?.Split(',');
                         Debug.Assert(qualifiedNameComponents?.Length >= 2);
-                        referenceProperty.stringValue = $"{qualifiedNameComponents[0]}, {qualifiedNameComponents[1].Trim()}"; ;
+                        referenceProperty.stringValue = $"{qualifiedNameComponents[0]}, {qualifiedNameComponents[1].Trim()}";
                     }
                 }
 

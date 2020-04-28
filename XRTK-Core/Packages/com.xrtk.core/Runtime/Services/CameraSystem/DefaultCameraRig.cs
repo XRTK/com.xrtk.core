@@ -14,6 +14,7 @@ namespace XRTK.Services.CameraSystem
     /// The default <see cref="IMixedRealityCameraRig"/> for the XRTK.
     /// </summary>
     [ExecuteAlways]
+    [System.Runtime.InteropServices.Guid("8E0EE4FC-C8A5-4B10-9FCA-EE55B6D421FF")]
     public class DefaultCameraRig : MonoBehaviour, IMixedRealityCameraRig
     {
         #region IMixedRealityCameraRig Implementation

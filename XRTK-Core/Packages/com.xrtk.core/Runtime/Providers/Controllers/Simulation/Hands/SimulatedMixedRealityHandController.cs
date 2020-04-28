@@ -20,9 +20,11 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     /// <summary>
     /// Hand controller type for simulated hand controllers.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("435C4F16-8E23-4228-B2B0-5FCE09A97043")]
     public class SimulatedMixedRealityHandController : BaseHandController, IMixedRealitySimulatedController
     {
-        public SimulatedMixedRealityHandController() : base() { }
+        /// <inheritdoc />
+        public SimulatedMixedRealityHandController() { }
 
         /// <inheritdoc />
         public SimulatedMixedRealityHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)

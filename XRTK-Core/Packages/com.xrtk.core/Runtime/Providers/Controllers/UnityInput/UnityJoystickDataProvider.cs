@@ -15,6 +15,7 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// <summary>
     /// Manages joysticks using unity input system.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("A4D8D13B-253C-469A-A3A2-ECFE16DD969F")]
     public class UnityJoystickDataProvider : BaseControllerDataProvider
     {
         /// <inheritdoc />

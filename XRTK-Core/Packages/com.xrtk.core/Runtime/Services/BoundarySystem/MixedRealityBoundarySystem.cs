@@ -17,6 +17,7 @@ namespace XRTK.Services.BoundarySystem
     /// <summary>
     /// The Boundary system controls the presentation and display of the users boundary in a scene.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("FE458876-CC0F-4B6F-9459-544DDF6A9263")]
     public class MixedRealityBoundarySystem : BaseEventSystem, IMixedRealityBoundarySystem
     {
         /// <summary>

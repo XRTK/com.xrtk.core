@@ -19,6 +19,7 @@ namespace XRTK.Services.InputSystem
     /// The focus provider handles the focused objects per input source.
     /// </summary>
     /// <remarks>There are convenience properties for getting only Gaze Pointer if needed.</remarks>
+    [System.Runtime.InteropServices.Guid("249D4D78-CADD-45BA-9438-DB9FC2509213")]
     public class FocusProvider : BaseService, IMixedRealityFocusProvider
     {
         private readonly HashSet<PointerData> pointers = new HashSet<PointerData>();

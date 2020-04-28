@@ -13,9 +13,11 @@ namespace XRTK.Providers.Controllers.OpenVR
     /// <summary>
     /// Open VR Implementation of the Windows Mixed Reality Motion Controllers.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("193F55D4-44E0-4D3B-82FD-0CB417B3668B")]
     public class WindowsMixedRealityOpenVRMotionController : GenericOpenVRController
     {
-        public WindowsMixedRealityOpenVRMotionController() : base() { }
+        /// <inheritdoc />
+        public WindowsMixedRealityOpenVRMotionController() { }
 
         /// <inheritdoc />
         public WindowsMixedRealityOpenVRMotionController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)

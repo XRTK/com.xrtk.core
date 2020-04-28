@@ -6,6 +6,7 @@ namespace XRTK.Definitions.Platforms
     /// <summary>
     /// Used by the XRTK to signal that the feature is available on the WebGL platform.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("A2FFB628-3CE7-4759-9C66-8F2BA8D16FC2")]
     public class WebGlPlatform : BasePlatform
     {
         /// <inheritdoc />

@@ -16,6 +16,7 @@ namespace XRTK.Services.DiagnosticsSystem
     /// <summary>
     /// The default implementation of the <see cref="IMixedRealityDiagnosticsSystem"/>
     /// </summary>
+    [System.Runtime.InteropServices.Guid("2044B5AE-8F50-4B66-B508-D8087356C140")]
     public class MixedRealityDiagnosticsSystem : BaseEventSystem, IMixedRealityDiagnosticsSystem
     {
         /// <summary>

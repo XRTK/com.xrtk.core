@@ -18,6 +18,7 @@ namespace XRTK.Providers.Speech
     /// <summary>
     /// Speech data provider for windows 10 based platforms.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("12E24F3D-7689-4863-A403-DD7A80DA3C25")]
     public class WindowsSpeechDataProvider : BaseSpeechDataProvider
     {
         /// <inheritdoc />

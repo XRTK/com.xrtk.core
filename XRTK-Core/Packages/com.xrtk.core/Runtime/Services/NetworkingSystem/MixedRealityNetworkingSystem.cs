@@ -10,6 +10,7 @@ namespace XRTK.Services.NetworkingSystem
     /// <summary>
     /// The Mixed Reality Toolkit's default implementation of the <see cref="IMixedRealityNetworkingSystem"/>
     /// </summary>
+    [System.Runtime.InteropServices.Guid("6CB7110B-058B-4AA6-B81D-792FE443191A")]
     public class MixedRealityNetworkingSystem : BaseEventSystem, IMixedRealityNetworkingSystem
     {
         /// <summary>

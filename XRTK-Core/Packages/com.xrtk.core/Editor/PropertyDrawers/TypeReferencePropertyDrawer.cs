@@ -255,10 +255,9 @@ namespace XRTK.Editor.PropertyDrawers
             {
                 var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
                 EditorGUI.showMixedValue = referenceProperty.hasMultipleDifferentValues;
-                var guid = referenceProperty.stringValue;
                 var restoreShowMixedValue = EditorGUI.showMixedValue;
 
-                if (TypeExtensions.TryResolveType(guid, out var resolvedType))
+                if (TypeExtensions.TryResolveType(referenceProperty.stringValue, out var resolvedType))
                 {
                     if (resolvedType.GUID != Guid.Empty)
                     {

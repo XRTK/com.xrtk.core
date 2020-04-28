@@ -25,7 +25,6 @@ namespace XRTK.Editor.PropertyDrawers
         public const string TypeReferenceUpdated = "TypeReferenceUpdated";
 
         private const string None = "(None)";
-        private const string Missing = " {missing}";
 
         /// <summary>
         /// The currently selected <see cref="Type"/> in the dropdown menu.
@@ -35,9 +34,6 @@ namespace XRTK.Editor.PropertyDrawers
         private static int selectionControlId;
         private static readonly int ControlHint = typeof(TypeReferencePropertyDrawer).GetHashCode();
         private static readonly GUIContent TempContent = new GUIContent();
-        private static readonly GUIContent RepairContent = new GUIContent("Repair", "Try to repair the reference");
-        private static readonly Color EnabledColor = Color.white;
-        private static readonly Color DisabledColor = Color.Lerp(Color.white, Color.clear, 0.5f);
 
         #region Type Filtering
 
@@ -279,47 +275,6 @@ namespace XRTK.Editor.PropertyDrawers
                 FilterConstraintOverride = null;
                 ExcludedTypeCollectionGetter = null;
             }
-        }
-
-        private static readonly char[] CsvSplit = { ',' };
-
-        private static bool TypeSearch(SerializedProperty property, ref string typeName, SystemTypeAttribute filter, bool showPickerWindow)
-        {
-            if (typeName.Contains(Missing)) { return false; }
-            var typeNameWithoutAssembly = typeName.Split(CsvSplit, StringSplitOptions.None)[0];
-            var typeNameWithoutNamespace = System.Text.RegularExpressions.Regex.Replace(typeNameWithoutAssembly, @"[.\w]+\.(\w+)", "$1");
-            var repairedTypeOptions = FindTypesByName(typeNameWithoutNamespace, filter);
-
-            switch (repairedTypeOptions.Length)
-            {
-                case 0:
-                    if (showPickerWindow)
-                    {
-                        EditorApplication.delayCall += () =>
-                            EditorUtility.DisplayDialog(
-                                "No types found",
-                                $"No types with the name '{typeNameWithoutNamespace}' were found.",
-                                "OK");
-                    }
-
-                    return false;
-                case 1:
-                    typeName = repairedTypeOptions[0].GUID.ToString();
-                    return true;
-                default:
-                    if (showPickerWindow)
-                    {
-                        EditorApplication.delayCall += () =>
-                            SystemTypeRepairWindow.Display(repairedTypeOptions, property);
-                    }
-
-                    return false;
-            }
-        }
-
-        private static Type[] FindTypesByName(string typeName, SystemTypeAttribute filter)
-        {
-            return GetFilteredTypes(filter).Where(type => type.Name.Equals(typeName)).ToArray();
         }
 
         /// <summary>

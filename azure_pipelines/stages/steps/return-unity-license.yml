@@ -1,0 +1,33 @@
+steps:
+  - powershell: |
+      Write-Host "Returning License..."
+      $logPath = "$(LogDirectory)\deactivation.log"
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -returnlicense -logfile `"$logPath`"" -PassThru
+
+      $ljob = Start-Job -ScriptBlock {
+        param($log)
+
+        while ( (Test-Path $$log -Type Leaf) ) {
+            Start-Sleep -Seconds 1
+        }
+
+        Get-Content "$log" -Wait
+      } -ArgumentList $logPath
+
+      while ( -not $process.HasExited )
+      {
+        # While waiting, Get-Content checks the file once each second
+        Start-Sleep -Seconds 1
+        Receive-Job $ljob
+      }
+
+      # Wait for the last of the log information to be written
+      Start-Sleep -Seconds 10
+      Receive-Job $ljob
+      Stop-Job $ljob
+      Remove-Job $ljob
+
+      exit $process.ExitCode
+    failOnStderr: false
+    displayName: 'Return Unity License'
+    condition: always()

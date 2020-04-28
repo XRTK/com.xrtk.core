@@ -1,0 +1,29 @@
+steps:
+  - powershell: |
+      $packageJsonFile = "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\package.json"
+      Write-Host Current Project Version
+      $packageInfo = (Get-Content $packageJsonFile -Raw) | ConvertFrom-Json
+      $version = [version] $packageInfo.version;
+      Write-Host $version
+
+      Write-Host Determining latest release version...
+      $releases = "https://api.github.com/repos/XRTK/$(project.name)/releases"
+      [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+      $oldVersion = [version]::new([string](Invoke-WebRequest -Uri $releases -UseBasicParsing | ConvertFrom-Json)[0].tag_name)
+
+      if( $version -le $oldVersion )
+      {
+        $version = [version]::new($oldVersion.Major, $oldVersion.Minor, $oldVersion.Build + 1)
+      }
+
+      Write-Host Next Release Version
+      Write-Host $oldVersion -> $version
+      $packageInfo.version = [string] $version
+      Write-Host "##vso[task.setvariable variable=package.version]$($packageInfo.version)"
+      $packageInfo | ConvertTo-Json | Set-Content $packageJsonFile
+
+      Copy-Item "$(System.DefaultWorkingDirectory)\README.md" -Destination $(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name) -force -Verbose
+      Copy-Item "$(System.DefaultWorkingDirectory)\LICENSE.md" -Destination $(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name) -force -Verbose
+      Copy-Item "$(System.DefaultWorkingDirectory)\.github" -Destination $(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name) -force -Verbose -Recurse
+    failOnStderr: true
+    displayName: 'Sync Package Info'

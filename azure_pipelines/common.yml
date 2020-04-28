@@ -1,0 +1,37 @@
+parameters:
+  - name: isReleaseBuild
+    type: boolean
+    default: false
+  - name: os
+    type: object
+    default:
+      windows:
+        image: windows-latest
+        # TODO: Only use XRTK defined platforms for build and install the correct components and switch to the correct targets as needed
+        components: '"Windows", "Windows_IL2CPP"'
+        # https://github.com/microsoft/unitysetup.powershell installer component options
+        # Windows, Windows_IL2CPP, UWP_IL2CPP, Lumin, Android, iOS, Mac, Mac_IL2CPP , WebGL
+        targets:
+        - StandaloneWindows64
+        # Unity -buildTarget command line args https://docs.unity3d.com/Manual/CommandLineArguments.html
+        # 'StandaloneOSX', 'StandaloneWindows', 'iOS', 'Android', 'StandaloneLinux', 'StandaloneWindows64', 'WebGL',
+        # 'WSAPlayer', 'StandaloneLinux64', 'StandaloneLinuxUniversal', 'Tizen', 'PSP2', 'PS4', 'XBoxOne', 'N3DS', 'WiiU', 'tvOS', 'Switch', 'Lumin'
+      macOS:
+        image: macOS-latest
+        components: '"Mac", "Mac_IL2CPP"'
+        targets:
+        - StandaloneOSX
+      linux:
+        image: ubuntu-latest
+        components: '"Linux"'
+        targets:
+        - StandaloneLinux64
+
+stages:
+  - template: stages/unity-build.yml
+    parameters:
+      platform: windows
+      ${{ insert }}: ${{ parameters.os.windows }}
+      isReleaseBuild: ${{ parameters.isReleaseBuild }}
+  - ${{ if eq( parameters.isReleaseBuild, 'true' ) }}:
+    - template: stages/publish.yml

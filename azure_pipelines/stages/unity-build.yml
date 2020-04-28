@@ -1,0 +1,47 @@
+stages:
+- stage: Build
+  displayName: ${{ format('{0} build agent', parameters.platform) }}
+
+  jobs:
+    - job:
+      displayName: ${{ format('{0}', parameters.image) }}
+      variables:
+      - group: Global Pipeline Settings
+      pool:
+        name: 'Azure Pipelines'
+        vmImage: ${{ parameters.image }}
+        demands:
+          - unity -equals true
+
+      steps:
+      - checkout: self
+        submodules: recursive
+
+      - template: steps/install-unity.yml
+        parameters:
+          components: ${{ parameters.components }}
+
+      - ${{ if eq( parameters.isReleaseBuild, 'true' ) }}:
+        - template: steps/upm-package-info.yml
+
+      - ${{ each item in parameters.targets }}:
+        - template: steps/run-unity-tests.yml
+          parameters:
+            target: ${{ item }}
+        - template: steps/build-unity-player.yml
+          parameters:
+            target: ${{ item }}
+
+        - ${{ if and( eq(parameters.isReleaseBuild, 'true'), eq(parameters.platform, 'windows'), eq(variables['package.name'], 'com.xrtk.core') ) }}:
+          - template: steps/export-package-seed.yml
+            # TODO better doc builds for each individual package
+          - template: steps/build-docfx.yml
+
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish Pipeline Artifacts'
+        inputs:
+          targetPath: '$(System.DefaultWorkingDirectory)\$(project.name)\Builds'
+          artifact: ${{ format('{0}.{1}', '$(Build.BuildNumber)', '$(Build.BuildId)') }}
+        condition: always()
+
+      - template: steps/return-unity-license.yml

@@ -9,9 +9,11 @@ using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Providers.Controllers.OpenVR
 {
+    [System.Runtime.InteropServices.Guid("9550BBBB-799E-48AB-B421-3E64CCB7A2E7")]
     public class ViveKnucklesOpenVRController : GenericOpenVRController
     {
-        public ViveKnucklesOpenVRController() : base() { }
+        /// <inheritdoc />
+        public ViveKnucklesOpenVRController() { }
 
         /// <inheritdoc />
         public ViveKnucklesOpenVRController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)

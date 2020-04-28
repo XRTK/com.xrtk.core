@@ -10,6 +10,7 @@ namespace XRTK.Definitions.Platforms
     /// <summary>
     /// Used by the XRTK to signal that the feature is only available when the current built target matches the platform target.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("C838C4F5-A87E-48C7-8742-09A4D85FC3BC")]
     public sealed class CurrentBuildTargetPlatform : BasePlatform
     {
         /// <inheritdoc />

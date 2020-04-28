@@ -14,9 +14,11 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// <summary>
     /// Manages the mouse using unity input system.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("A80E17F6-8221-49C3-BC4B-CAB495C91D6C")]
     public class MouseController : BaseController
     {
-        public MouseController() : base() { }
+        /// <inheritdoc />
+        public MouseController() { }
 
         /// <inheritdoc />
         public MouseController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)

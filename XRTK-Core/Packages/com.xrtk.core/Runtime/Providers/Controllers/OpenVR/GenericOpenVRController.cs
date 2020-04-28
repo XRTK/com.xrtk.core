@@ -13,9 +13,11 @@ using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.OpenVR
 {
+    [System.Runtime.InteropServices.Guid("8DE3A393-71F8-47A4-89FE-7927B034DEAB")]
     public class GenericOpenVRController : GenericJoystickController
     {
-        public GenericOpenVRController() : base() { }
+        /// <inheritdoc />
+        public GenericOpenVRController() { }
 
         /// <inheritdoc />
         public GenericOpenVRController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)

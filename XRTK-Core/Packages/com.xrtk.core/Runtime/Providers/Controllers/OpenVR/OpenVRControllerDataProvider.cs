@@ -14,6 +14,7 @@ namespace XRTK.Providers.Controllers.OpenVR
     /// <summary>
     /// Manages Open VR Devices using unity's input system.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("9B116969-7F4B-4CF9-9D5A-4FBA7793F50E")]
     public class OpenVRControllerDataProvider : UnityJoystickDataProvider
     {
         /// <inheritdoc />

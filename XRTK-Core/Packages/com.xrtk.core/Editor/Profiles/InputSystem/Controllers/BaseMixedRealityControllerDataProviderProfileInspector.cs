@@ -12,6 +12,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Providers.Controllers;
 using XRTK.Extensions;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.PropertyDrawers;
 
@@ -48,19 +49,20 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
 
             if (!hasSetupDefaults.boolValue)
             {
-                var defaultControllerMappingProfiles = dataProviderProfile.GetDefaultControllerOptions();
+                var defaultControllerOptions = dataProviderProfile.GetDefaultControllerOptions();
 
-                Debug.Assert(defaultControllerMappingProfiles != null, $"Missing default controller definitions for {dataProviderProfile.name}");
+                Debug.Assert(defaultControllerOptions != null, $"Missing default controller definitions for {dataProviderProfile.name}");
 
                 var profileRootPath = AssetDatabase.GetAssetPath(dataProviderProfile);
                 profileRootPath = $"{Directory.GetParent(Directory.GetParent(profileRootPath).FullName).FullName}/DataProviders";
 
                 controllerMappingProfiles.ClearArray();
 
-                for (int i = 0; i < defaultControllerMappingProfiles.Length; i++)
+                for (int i = 0; i < defaultControllerOptions.Length; i++)
                 {
-                    var defaultControllerMappingProfile = defaultControllerMappingProfiles[i];
-                    var controllerMappingAsset = CreateInstance(nameof(MixedRealityControllerMappingProfile)).CreateAsset($"{profileRootPath}/", $"{defaultControllerMappingProfile.Description}Profile", false) as MixedRealityControllerMappingProfile;
+                    var defaultControllerOption = defaultControllerOptions[i];
+
+                    var controllerMappingAsset = CreateInstance(nameof(MixedRealityControllerMappingProfile)).CreateAsset($"{profileRootPath}/", $"{defaultControllerOption.Description}Profile", false) as MixedRealityControllerMappingProfile;
 
                     Debug.Assert(controllerMappingAsset != null);
 
@@ -72,9 +74,17 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
                     var useCustomInteractionsProperty = mappingProfileSerializedObject.FindProperty("useCustomInteractions");
                     var interactionMappingProfilesProperty = mappingProfileSerializedObject.FindProperty("interactionMappingProfiles");
 
-                    controllerTypeProperty.stringValue = SystemType.GetReference(defaultControllerMappingProfile.ControllerType);
-                    handednessProperty.intValue = (int)defaultControllerMappingProfile.Handedness;
-                    useCustomInteractionsProperty.boolValue = defaultControllerMappingProfile.UseCustomInteractions;
+                    if (defaultControllerOption.ControllerType.Type.GUID != Guid.Empty)
+                    {
+                        controllerTypeProperty.stringValue = defaultControllerOption.ControllerType.Type.GUID.ToString();
+                    }
+                    else
+                    {
+                        Debug.LogError($"{defaultControllerOption.ControllerType} requires a {nameof(GuidAttribute)}");
+                    }
+
+                    handednessProperty.intValue = (int)defaultControllerOption.Handedness;
+                    useCustomInteractionsProperty.boolValue = defaultControllerOption.UseCustomInteractions;
 
                     SetDefaultInteractionMapping();
                     mappingProfileSerializedObject.ApplyModifiedProperties();
@@ -246,9 +256,7 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
 
         internal void RenderControllerMappingButton(MixedRealityControllerMappingProfile controllerMappingProfile)
         {
-            var controllerType = controllerMappingProfile.ControllerType?.Type;
-
-            if (controllerType == null) { return; }
+            var controllerType = controllerMappingProfile.ControllerType.Type;
 
             if (controllerButtonStyle == null)
             {
@@ -270,9 +278,9 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
                 GUILayout.BeginHorizontal();
             }
 
-            var typeName = controllerType.Name.ToProperCase();
+            var typeName = controllerType?.Name.ToProperCase();
 
-            if (controllerType.Name == "WindowsMixedRealityMotionController" && controllerMappingProfile.Handedness == Handedness.None)
+            if (controllerType?.Name == "WindowsMixedRealityMotionController" && controllerMappingProfile.Handedness == Handedness.None)
             {
                 typeName = "HoloLens 1";
             }

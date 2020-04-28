@@ -22,6 +22,7 @@ namespace XRTK.Services.InputSystem
     /// <summary>
     /// The Mixed Reality Toolkit's specific implementation of the <see cref="IMixedRealityInputSystem"/>
     /// </summary>
+    [System.Runtime.InteropServices.Guid("18C9CAF0-8D36-4ADD-BB49-CDF7561CF793")]
     public class MixedRealityInputSystem : BaseEventSystem, IMixedRealityInputSystem
     {
         /// <summary>

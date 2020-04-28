@@ -16,6 +16,7 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// <summary>
     /// Manages Touch devices using unity input system.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("4D4D36E3-6ACB-45E5-8316-0B15A098EA2F")]
     public class UnityTouchDataProvider : BaseControllerDataProvider
     {
         /// <inheritdoc />

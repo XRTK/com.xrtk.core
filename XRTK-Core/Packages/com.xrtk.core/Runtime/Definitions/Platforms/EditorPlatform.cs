@@ -11,6 +11,7 @@ namespace XRTK.Definitions.Platforms
     /// <remarks>
     /// Defines any editor platform for Win, OSX, and Linux.
     /// </remarks>
+    [System.Runtime.InteropServices.Guid("3324B4A2-30F0-4145-BB06-CD65B8945487")]
     public sealed class EditorPlatform : BasePlatform
     {
         /// <inheritdoc />

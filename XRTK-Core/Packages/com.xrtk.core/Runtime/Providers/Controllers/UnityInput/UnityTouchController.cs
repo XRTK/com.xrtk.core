@@ -10,9 +10,11 @@ using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.UnityInput
 {
+    [System.Runtime.InteropServices.Guid("98F97EDA-4418-4B4B-88E9-E4F1F0734E4E")]
     public class UnityTouchController : BaseController
     {
-        public UnityTouchController() : base() { }
+        /// <inheritdoc />
+        public UnityTouchController() { }
 
         /// <inheritdoc />
         public UnityTouchController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)

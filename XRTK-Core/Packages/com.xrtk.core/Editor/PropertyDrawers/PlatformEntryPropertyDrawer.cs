@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.Runtime.InteropServices;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
@@ -18,15 +19,17 @@ namespace XRTK.Editor.PropertyDrawers
         private const string Nothing = "Nothing";
         private const string Everything = "Everything";
         private const string Platform = "Platform";
+        private const string EditorOnly = "Editor Only";
+        private const string EditorAnd = "Editor &";
         private const string TypeReferenceUpdated = "TypeReferenceUpdated";
 
         private static readonly GUIContent TempContent = new GUIContent();
         private static readonly GUIContent EditorContent = new GUIContent("Editor");
         private static readonly GUIContent NothingContent = new GUIContent(Nothing);
         private static readonly GUIContent EverythingContent = new GUIContent(Everything);
-        private static readonly GUIContent EditorOnlyContent = new GUIContent("Editor Only");
+        private static readonly GUIContent EditorOnlyContent = new GUIContent(EditorOnly);
         private static readonly GUIContent RuntimePlatformContent = new GUIContent("Runtime Platforms");
-        private static readonly GUIContent EditorBuildTargetContent = new GUIContent("Editor + Build Target");
+        private static readonly GUIContent EditorBuildTargetContent = new GUIContent($"{EditorAnd} Build Target");
 
         private static readonly int ControlHint = typeof(PlatformEntryPropertyDrawer).GetHashCode();
 
@@ -34,9 +37,9 @@ namespace XRTK.Editor.PropertyDrawers
         private static readonly Type EditorPlatformType = typeof(EditorPlatform);
         private static readonly Type EditorBuildTargetType = typeof(CurrentBuildTargetPlatform);
 
-        private static readonly string AllPlatformTypeReference = SystemType.GetReference(AllPlatformsType);
-        private static readonly string EditorPlatformTypeReference = SystemType.GetReference(EditorPlatformType);
-        private static readonly string EditorBuildTargetTypeReference = SystemType.GetReference(EditorBuildTargetType);
+        private static readonly string AllPlatformTypeReference = AllPlatformsType.GUID.ToString();
+        private static readonly string EditorPlatformTypeReference = EditorPlatformType.GUID.ToString();
+        private static readonly string EditorBuildTargetTypeReference = EditorBuildTargetType.GUID.ToString();
 
         private static int selectionControlId;
         private static int arraySize = 0;
@@ -162,7 +165,7 @@ namespace XRTK.Editor.PropertyDrawers
                 {
                     var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
                     var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
-                    var referenceType = TypeExtensions.ResolveType(referenceProperty.stringValue);
+                    TypeExtensions.TryResolveType(referenceProperty.stringValue, out var referenceType);
 
                     // Clean up any broken references
                     if (referenceType == null)
@@ -193,26 +196,52 @@ namespace XRTK.Editor.PropertyDrawers
                 {
                     if (IsPlatformActive(AllPlatformsType))
                     {
-                        return "Everything";
+                        return Everything;
                     }
 
-                    // Remove assembly name and namespace from content of popup control.
+                    if (IsPlatformActive(EditorPlatformType))
+                    {
+                        return EditorOnly;
+                    }
+
                     var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(0);
                     var classRefProperty = systemTypeProperty.FindPropertyRelative("reference");
-                    var classRefParts = classRefProperty.stringValue.Split(',');
-                    var className = classRefParts[0].Trim();
-                    className = className.Substring(className.LastIndexOf(".", StringComparison.Ordinal) + 1);
-                    var contentText = className.Replace("Platform", "").ToProperCase();
 
-                    if (contentText == string.Empty)
-                    {
-                        contentText = Nothing;
-                    }
-
-                    return contentText;
+                    return TypeExtensions.TryResolveType(classRefProperty.stringValue, out var resolvedType)
+                        ? resolvedType.Name.Replace(Platform, string.Empty).ToProperCase()
+                        : Nothing;
                 }
 
-                return "Multiple...";
+                var contentText = "Multiple...";
+
+                if (IsPlatformActive(EditorBuildTargetType))
+                {
+                    if (runtimePlatformsProperty.arraySize == 2)
+                    {
+                        Type type = null;
+
+                        for (int i = 0; i < runtimePlatformsProperty.arraySize; i++)
+                        {
+                            var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
+                            var classRefProperty = systemTypeProperty.FindPropertyRelative("reference");
+
+                            if (TypeExtensions.TryResolveType(classRefProperty.stringValue, out var resolvedType) &&
+                                resolvedType != EditorBuildTargetType)
+                            {
+                                type = resolvedType;
+                                break;
+                            }
+                        }
+
+                        Debug.Assert(type != null, "Failed to resolve platform type");
+                        contentText = type.Name.Replace(Platform, string.Empty).ToProperCase();
+                        return $"{EditorAnd} {contentText}";
+                    }
+
+                    contentText = $"{EditorAnd} {contentText}";
+                }
+
+                return contentText;
             }
 
             void OnNothingSelected(object _)
@@ -239,7 +268,7 @@ namespace XRTK.Editor.PropertyDrawers
                 {
                     var typeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
                     var refProperty = typeProperty.FindPropertyRelative("reference");
-                    var referenceType = TypeExtensions.ResolveType(refProperty.stringValue);
+                    TypeExtensions.TryResolveType(refProperty.stringValue, out var referenceType);
 
                     if (referenceType == EditorBuildTargetType)
                     {
@@ -267,7 +296,7 @@ namespace XRTK.Editor.PropertyDrawers
                             continue;
                         }
 
-                        TryAddPlatformReference(SystemType.GetReference(platformType));
+                        TryAddPlatformReference(platformType.GUID.ToString());
                     }
                 }
                 else
@@ -296,7 +325,7 @@ namespace XRTK.Editor.PropertyDrawers
 
                             if (platform.IsBuildTargetAvailable)
                             {
-                                TryAddPlatformReference(SystemType.GetReference(platform.GetType()));
+                                TryAddPlatformReference(platform.GetType().ToString());
                             }
                         }
 
@@ -313,7 +342,14 @@ namespace XRTK.Editor.PropertyDrawers
             void OnSelectedTypeName(object typeRef)
             {
                 var selectedPlatformType = typeRef as Type;
-                var selectedReference = SystemType.GetReference(selectedPlatformType);
+
+                if (selectedPlatformType != null && selectedPlatformType.GUID == Guid.Empty)
+                {
+                    Debug.LogError($"{selectedPlatformType.Name} does not implement a required {nameof(GuidAttribute)}");
+                    return;
+                }
+
+                var selectedReference = selectedPlatformType?.GUID.ToString();
 
                 if (!TryRemovePlatformReference(selectedReference))
                 {
@@ -330,24 +366,24 @@ namespace XRTK.Editor.PropertyDrawers
                 EditorWindow.focusedWindow.SendEvent(EditorGUIUtility.CommandEvent(TypeReferenceUpdated));
             }
 
-            bool TryAddPlatformReference(string classReference)
+            void TryAddPlatformReference(string classReference)
             {
                 if (TryRemovePlatformReference(EditorPlatformTypeReference))
                 {
                     TryAddPlatformReference(EditorBuildTargetTypeReference);
                 }
 
-                var selectedPlatformType = TypeExtensions.ResolveType(classReference);
+                if (!TypeExtensions.TryResolveType(classReference, out var selectedPlatformType)) { return; }
 
                 for (int i = 0; i < runtimePlatformsProperty.arraySize; i++)
                 {
                     var existingSystemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
                     var existingReferenceProperty = existingSystemTypeProperty.FindPropertyRelative("reference");
-                    var existingPlatformType = TypeExtensions.ResolveType(existingReferenceProperty.stringValue);
 
-                    if (selectedPlatformType == existingPlatformType)
+                    if (!TypeExtensions.TryResolveType(existingReferenceProperty.stringValue, out var existingPlatformType) ||
+                        selectedPlatformType == existingPlatformType)
                     {
-                        return false;
+                        return;
                     }
                 }
 
@@ -358,12 +394,11 @@ namespace XRTK.Editor.PropertyDrawers
                 var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
                 referenceProperty.stringValue = classReference;
                 runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
-                return true;
             }
 
             bool TryRemovePlatformReference(string classReference)
             {
-                var selectedPlatformType = TypeExtensions.ResolveType(classReference);
+                TypeExtensions.TryResolveType(classReference, out var selectedPlatformType);
 
                 if (IsPlatformActive(AllPlatformsType))
                 {
@@ -377,7 +412,7 @@ namespace XRTK.Editor.PropertyDrawers
                             platformType != AllPlatformsType &&
                             platformType != EditorPlatformType)
                         {
-                            TryAddPlatformReference(SystemType.GetReference(platformType));
+                            TryAddPlatformReference(platformType.GUID.ToString());
                         }
                     }
 
@@ -388,9 +423,9 @@ namespace XRTK.Editor.PropertyDrawers
                 {
                     var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(i);
                     var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
-                    var referenceType = TypeExtensions.ResolveType(referenceProperty.stringValue);
 
-                    if (selectedPlatformType == referenceType)
+                    if (TypeExtensions.TryResolveType(referenceProperty.stringValue, out var referenceType) &&
+                        selectedPlatformType == referenceType)
                     {
                         if (runtimePlatformsProperty.arraySize == 2 &&
                             IsPlatformActive(EditorBuildTargetType) &&

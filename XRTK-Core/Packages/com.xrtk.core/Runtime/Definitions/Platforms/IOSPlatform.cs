@@ -6,6 +6,7 @@ namespace XRTK.Definitions.Platforms
     /// <summary>
     ///  Used by the XRTK to signal that the feature is available on the iOS platform.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("BCAC2CEF-E793-47B8-9DB7-116AF668CB66")]
     public class IOSPlatform : BasePlatform
     {
         /// <inheritdoc />

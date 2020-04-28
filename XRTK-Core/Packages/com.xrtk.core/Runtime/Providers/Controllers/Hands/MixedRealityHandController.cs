@@ -11,9 +11,10 @@ namespace XRTK.Providers.Controllers.Hands
     /// <summary>
     /// Platform agnostic hand controller type.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("B18A9A6C-E5FD-40AE-89E9-9822415EC62B")]
     public class MixedRealityHandController : BaseHandController
     {
-        public MixedRealityHandController() : base() { }
+        public MixedRealityHandController() { }
 
         /// <inheritdoc />
         public MixedRealityHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)

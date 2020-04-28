@@ -11,6 +11,7 @@ namespace XRTK.Services.DiagnosticsSystem
     /// <summary>
     /// Diagnostics data provider for memory diagnostics. E.g. provides information about used application memory.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("9F9C6912-DD68-4010-8B4A-B7B01B6AD77B")]
     public class MixedRealityMemoryDiagnosticsDataProvider : BaseMixedRealityDiagnosticsDataProvider
     {
         /// <inheritdoc />

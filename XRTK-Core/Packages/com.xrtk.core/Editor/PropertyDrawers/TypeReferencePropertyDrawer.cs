@@ -10,6 +10,7 @@ using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
+using XRTK.Interfaces;
 using Assembly = System.Reflection.Assembly;
 
 namespace XRTK.Editor.PropertyDrawers
@@ -26,8 +27,10 @@ namespace XRTK.Editor.PropertyDrawers
         private const string None = "(None)";
         private const string Missing = " {missing}";
 
+        /// <summary>
+        /// The currently selected <see cref="Type"/> in the dropdown menu.
+        /// </summary>
         public static Type SelectedType;
-        public static string SelectedReference;
 
         private static int selectionControlId;
         private static readonly int ControlHint = typeof(TypeReferencePropertyDrawer).GetHashCode();
@@ -146,10 +149,11 @@ namespace XRTK.Editor.PropertyDrawers
         /// </summary>
         /// <param name="position"></param>
         /// <param name="label"></param>
-        /// <param name="classRef"></param>
+        /// <param name="referenceProperty"></param>
+        /// <param name="selectedType"></param>
         /// <param name="filter"></param>
         /// <returns>True, if the class reference was successfully resolved.</returns>
-        private static void DrawTypeSelectionControl(Rect position, GUIContent label, ref string classRef, SystemTypeAttribute filter)
+        private static void DrawTypeSelectionControl(Rect position, GUIContent label, SerializedProperty referenceProperty, Type selectedType, SystemTypeAttribute filter)
         {
             if (label != null && label != GUIContent.none)
             {
@@ -165,15 +169,32 @@ namespace XRTK.Editor.PropertyDrawers
                     if (Event.current.commandName == TypeReferenceUpdated &&
                         selectionControlId == controlId)
                     {
-                        if (classRef != SelectedReference)
+                        if (selectedType != SelectedType)
                         {
-                            classRef = SelectedReference;
+                            selectedType = SelectedType;
+
+                            if (selectedType == null)
+                            {
+                                referenceProperty.stringValue = string.Empty;
+                            }
+                            else
+                            {
+                                if (selectedType.GUID != Guid.Empty)
+                                {
+                                    referenceProperty.stringValue = selectedType.GUID.ToString();
+                                }
+                                else
+                                {
+                                    Debug.LogWarning($"{selectedType.Name} is missing {nameof(System.Runtime.InteropServices.GuidAttribute)}");
+                                    referenceProperty.stringValue = selectedType.AssemblyQualifiedName;
+                                }
+                            }
+
                             GUI.changed = true;
                         }
 
                         selectionControlId = 0;
                         SelectedType = null;
-                        SelectedReference = null;
                     }
 
                     break;
@@ -201,11 +222,7 @@ namespace XRTK.Editor.PropertyDrawers
                     break;
 
                 case EventType.Repaint:
-                    // Remove assembly name and namespace from content of popup control.
-                    var classRefParts = classRef.Split(',');
-                    var className = classRefParts[0].Trim();
-                    className = className.Substring(className.LastIndexOf(".", StringComparison.Ordinal) + 1);
-                    TempContent.text = className;
+                    TempContent.text = selectedType == null ? "(None)" : selectedType.Name;
 
                     if (TempContent.text == string.Empty)
                     {
@@ -219,9 +236,8 @@ namespace XRTK.Editor.PropertyDrawers
             if (triggerDropDown)
             {
                 selectionControlId = controlId;
-                SelectedReference = classRef;
-
-                DisplayDropDown(position, GetFilteredTypes(filter), TypeExtensions.ResolveType(classRef), filter?.Grouping ?? TypeGrouping.ByNamespaceFlat);
+                SelectedType = selectedType;
+                DisplayDropDown(position, GetFilteredTypes(filter), selectedType, filter?.Grouping ?? TypeGrouping.ByNamespaceFlat);
             }
         }
 
@@ -238,66 +254,25 @@ namespace XRTK.Editor.PropertyDrawers
             try
             {
                 var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
-
                 EditorGUI.showMixedValue = referenceProperty.hasMultipleDifferentValues;
-
-                var restoreColor = GUI.color;
-                var reference = referenceProperty.stringValue;
+                var guid = referenceProperty.stringValue;
                 var restoreShowMixedValue = EditorGUI.showMixedValue;
-                var isValidClassRef = string.IsNullOrEmpty(reference) || TypeExtensions.ResolveType(reference) != null;
 
-                if (!isValidClassRef)
+                if (TypeExtensions.TryResolveType(guid, out var resolvedType))
                 {
-                    isValidClassRef = TypeSearch(referenceProperty, ref reference, filter, false);
-
-                    if (isValidClassRef)
+                    if (resolvedType.GUID != Guid.Empty)
                     {
-                        Debug.LogWarning($"Fixed missing class reference for property '{label.text}' on {systemTypeProperty.serializedObject.targetObject.name}");
+                        referenceProperty.stringValue = resolvedType.GUID.ToString();
                     }
                     else
                     {
-                        if (!reference.Contains(Missing))
-                        {
-                            reference += Missing;
-                        }
+                        var qualifiedNameComponents = resolvedType?.AssemblyQualifiedName?.Split(',');
+                        Debug.Assert(qualifiedNameComponents?.Length >= 2);
+                        referenceProperty.stringValue = $"{qualifiedNameComponents[0]}, {qualifiedNameComponents[1].Trim()}"; ;
                     }
                 }
 
-                if (isValidClassRef)
-                {
-                    GUI.color = EnabledColor;
-                    DrawTypeSelectionControl(position, label, ref reference, filter);
-                }
-                else
-                {
-                    if (SystemTypeRepairWindow.WindowOpen)
-                    {
-                        GUI.color = DisabledColor;
-                        DrawTypeSelectionControl(position, label, ref reference, filter);
-                    }
-                    else
-                    {
-                        const float leftPadding = 8f;
-                        const float iconSize = 24f;
-                        const float buttonWidth = 40f;
-                        var errorContent = EditorGUIUtility.IconContent("d_console.erroricon.sml");
-                        GUI.Label(new Rect(EditorGUIUtility.currentViewWidth - iconSize - leftPadding, position.y, iconSize, iconSize), errorContent);
-
-                        var dropdownPosition = new Rect(position.x, position.y, position.width - buttonWidth - 28f, position.height);
-                        var buttonPosition = new Rect(EditorGUIUtility.currentViewWidth - buttonWidth - leftPadding - iconSize, position.y, buttonWidth, position.height);
-
-                        DrawTypeSelectionControl(dropdownPosition, label, ref reference, filter);
-
-                        if (GUI.Button(buttonPosition, RepairContent, EditorStyles.miniButton))
-                        {
-                            TypeSearch(referenceProperty, ref reference, filter, true);
-                        }
-                    }
-                }
-
-                GUI.color = restoreColor;
-                referenceProperty.stringValue = reference;
-                referenceProperty.serializedObject.ApplyModifiedProperties();
+                DrawTypeSelectionControl(position, label, referenceProperty, resolvedType, filter);
                 EditorGUI.showMixedValue = restoreShowMixedValue;
             }
             finally
@@ -307,11 +282,12 @@ namespace XRTK.Editor.PropertyDrawers
             }
         }
 
+        private static readonly char[] CsvSplit = { ',' };
+
         private static bool TypeSearch(SerializedProperty property, ref string typeName, SystemTypeAttribute filter, bool showPickerWindow)
         {
             if (typeName.Contains(Missing)) { return false; }
-
-            var typeNameWithoutAssembly = typeName.Split(new[] { "," }, StringSplitOptions.None)[0];
+            var typeNameWithoutAssembly = typeName.Split(CsvSplit, StringSplitOptions.None)[0];
             var typeNameWithoutNamespace = System.Text.RegularExpressions.Regex.Replace(typeNameWithoutAssembly, @"[.\w]+\.(\w+)", "$1");
             var repairedTypeOptions = FindTypesByName(typeNameWithoutNamespace, filter);
 
@@ -329,7 +305,7 @@ namespace XRTK.Editor.PropertyDrawers
 
                     return false;
                 case 1:
-                    typeName = SystemType.GetReference(repairedTypeOptions[0]);
+                    typeName = repairedTypeOptions[0].GUID.ToString();
                     return true;
                 default:
                     if (showPickerWindow)
@@ -347,6 +323,13 @@ namespace XRTK.Editor.PropertyDrawers
             return GetFilteredTypes(filter).Where(type => type.Name.Equals(typeName)).ToArray();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="position"></param>
+        /// <param name="types"></param>
+        /// <param name="selectedType"></param>
+        /// <param name="grouping"></param>
         public static void DisplayDropDown(Rect position, IEnumerable<Type> types, Type selectedType, TypeGrouping grouping)
         {
             var menu = new GenericMenu();
@@ -368,7 +351,6 @@ namespace XRTK.Editor.PropertyDrawers
             void OnSelectedTypeName(object typeRef)
             {
                 SelectedType = typeRef as Type;
-                SelectedReference = SystemType.GetReference(SelectedType);
                 EditorWindow.focusedWindow.SendEvent(EditorGUIUtility.CommandEvent(TypeReferenceUpdated));
             }
         }

@@ -13,9 +13,11 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// <summary>
     /// The <see cref="GenericJoystickController"/> attempts to be a catch-all for joysticks and controllers defined in Unity's legacy input system.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("0E3781D2-72AE-4C85-A083-703CC21E8693")]
     public class GenericJoystickController : BaseController
     {
-        public GenericJoystickController() : base() { }
+        /// <inheritdoc />
+        public GenericJoystickController() { }
 
         /// <inheritdoc />
         public GenericJoystickController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)

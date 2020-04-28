@@ -14,6 +14,7 @@ namespace XRTK.Services.Teleportation
     /// <summary>
     /// The Mixed Reality Toolkit's specific implementation of the <see cref="IMixedRealityTeleportSystem"/>
     /// </summary>
+    [System.Runtime.InteropServices.Guid("2C18630A-9837-46FA-ADDF-6C8AF34D4143")]
     public class MixedRealityTeleportSystem : BaseEventSystem, IMixedRealityTeleportSystem
     {
         /// <summary>

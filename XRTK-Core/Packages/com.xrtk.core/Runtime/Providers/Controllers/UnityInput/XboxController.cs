@@ -13,9 +13,11 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// <summary>
     /// Xbox Controller using Unity Input System
     /// </summary>
+    [System.Runtime.InteropServices.Guid("71E70C1B-9F77-4B69-BFC7-974905BB7702")]
     public class XboxController : GenericJoystickController
     {
-        public XboxController() : base() { }
+        /// <inheritdoc />
+        public XboxController() { }
 
         /// <inheritdoc />
         public XboxController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)

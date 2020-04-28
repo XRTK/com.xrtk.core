@@ -12,6 +12,7 @@ using XRTK.Definitions.Utilities;
 using XRTK.Providers.Controllers;
 using XRTK.Extensions;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.PropertyDrawers;
 
@@ -48,18 +49,19 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
 
             if (!hasSetupDefaults.boolValue)
             {
-                var defaultControllerMappingProfiles = dataProviderProfile.GetDefaultControllerOptions();
+                var defaultControllerOptions = dataProviderProfile.GetDefaultControllerOptions();
 
-                Debug.Assert(defaultControllerMappingProfiles != null, $"Missing default controller definitions for {dataProviderProfile.name}");
+                Debug.Assert(defaultControllerOptions != null, $"Missing default controller definitions for {dataProviderProfile.name}");
 
                 var profileRootPath = AssetDatabase.GetAssetPath(dataProviderProfile);
                 profileRootPath = $"{Directory.GetParent(Directory.GetParent(profileRootPath).FullName).FullName}/DataProviders";
 
                 controllerMappingProfiles.ClearArray();
 
-                for (int i = 0; i < defaultControllerMappingProfiles.Length; i++)
+                for (int i = 0; i < defaultControllerOptions.Length; i++)
                 {
-                    var defaultControllerMappingProfile = defaultControllerMappingProfiles[i];
+                    var defaultControllerMappingProfile = defaultControllerOptions[i];
+
                     var controllerMappingAsset = CreateInstance(nameof(MixedRealityControllerMappingProfile)).CreateAsset($"{profileRootPath}/", $"{defaultControllerMappingProfile.Description}Profile", false) as MixedRealityControllerMappingProfile;
 
                     Debug.Assert(controllerMappingAsset != null);
@@ -68,11 +70,20 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
                     mappingProfileSerializedObject.Update();
 
                     var controllerTypeProperty = mappingProfileSerializedObject.FindProperty("controllerType").FindPropertyRelative("reference");
+                    TypeExtensions.TryResolveType(controllerTypeProperty.stringValue, out var controllerType);
                     var handednessProperty = mappingProfileSerializedObject.FindProperty("handedness");
                     var useCustomInteractionsProperty = mappingProfileSerializedObject.FindProperty("useCustomInteractions");
                     var interactionMappingProfilesProperty = mappingProfileSerializedObject.FindProperty("interactionMappingProfiles");
 
-                    controllerTypeProperty.stringValue = SystemType.GetReference(defaultControllerMappingProfile.ControllerType);
+                    if (defaultControllerMappingProfile.ControllerType?.Type?.GUID != Guid.Empty)
+                    {
+                        controllerTypeProperty.stringValue = defaultControllerMappingProfile.ControllerType?.Type?.GUID.ToString();
+                    }
+                    else
+                    {
+                        Debug.LogError($"{defaultControllerMappingProfile.ControllerType} requires a {nameof(GuidAttribute)}");
+                    }
+
                     handednessProperty.intValue = (int)defaultControllerMappingProfile.Handedness;
                     useCustomInteractionsProperty.boolValue = defaultControllerMappingProfile.UseCustomInteractions;
 

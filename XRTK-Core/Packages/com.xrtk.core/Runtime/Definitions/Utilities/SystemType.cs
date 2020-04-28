@@ -16,7 +16,16 @@ namespace XRTK.Definitions.Utilities
         /// <summary>
         /// Initializes a new instance of the <see cref="SystemType"/> class.
         /// </summary>
-        /// <param name="typeGuid"><see cref="System.Type.GUID"/> reference as <see cref="string"/>.</param>
+        /// <param name="type">Class type.</param>
+        public SystemType(Type type)
+        {
+            Type = type;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SystemType"/> class.
+        /// </summary>
+        /// <param name="typeGuid"><see cref="T:Type.GUID"/> reference as <see cref="string"/>.</param>
         public SystemType(string typeGuid)
         {
             TypeExtensions.TryResolveType(typeGuid, out var resolvedType);
@@ -26,10 +35,11 @@ namespace XRTK.Definitions.Utilities
         /// <summary>
         /// Initializes a new instance of the <see cref="SystemType"/> class.
         /// </summary>
-        /// <param name="type">Class type.</param>
-        public SystemType(Type type)
+        /// <param name="guid"><see cref="T:Type.GUID"/> reference of the type to instantiate.</param>
+        public SystemType(Guid guid)
         {
-            Type = type;
+            TypeExtensions.TryResolveType(guid, out var resolvedType);
+            Type = resolvedType;
         }
 
         #region ISerializationCallbackReceiver Members
@@ -96,6 +106,16 @@ namespace XRTK.Definitions.Utilities
         {
             return new SystemType(type);
         }
+
+        public static implicit operator SystemType(Guid guid)
+        {
+            return new SystemType(guid);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="T:System.Guid"/> associated with the <see cref="T:System.Type" />.
+        /// </summary>
+        public Guid Guid => type.GUID;
 
         /// <inheritdoc />
         public override string ToString()

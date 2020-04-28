@@ -37,9 +37,9 @@ namespace XRTK.Editor.PropertyDrawers
         private static readonly Type EditorPlatformType = typeof(EditorPlatform);
         private static readonly Type EditorBuildTargetType = typeof(CurrentBuildTargetPlatform);
 
-        private static readonly string AllPlatformTypeReference = AllPlatformsType.GUID.ToString();
-        private static readonly string EditorPlatformTypeReference = EditorPlatformType.GUID.ToString();
-        private static readonly string EditorBuildTargetTypeReference = EditorBuildTargetType.GUID.ToString();
+        private static readonly Guid AllPlatformsGuid = AllPlatformsType.GUID;
+        private static readonly Guid EditorPlatformGuid = EditorPlatformType.GUID;
+        private static readonly Guid EditorBuildTargetGuid = EditorBuildTargetType.GUID;
 
         private static int selectionControlId;
         private static int arraySize = 0;
@@ -127,10 +127,10 @@ namespace XRTK.Editor.PropertyDrawers
                 {
                     menu.AddItem(EditorOnlyContent, editorIsActive, () =>
                     {
-                        if (!TryRemovePlatformReference(EditorPlatformTypeReference))
+                        if (!TryRemovePlatformReference(EditorPlatformGuid))
                         {
                             runtimePlatformsProperty.ClearArray();
-                            TryAddPlatformReference(EditorPlatformTypeReference);
+                            TryAddPlatformReference(EditorPlatformGuid);
                             EditorWindow.focusedWindow.SendEvent(EditorGUIUtility.CommandEvent(TypeReferenceUpdated));
                         }
                     });
@@ -254,7 +254,7 @@ namespace XRTK.Editor.PropertyDrawers
             void OnEverythingSelected(object _)
             {
                 runtimePlatformsProperty.ClearArray();
-                TryAddPlatformReference(AllPlatformTypeReference);
+                TryAddPlatformReference(AllPlatformsGuid);
                 runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
                 EditorWindow.focusedWindow.SendEvent(EditorGUIUtility.CommandEvent(TypeReferenceUpdated));
             }
@@ -296,14 +296,14 @@ namespace XRTK.Editor.PropertyDrawers
                             continue;
                         }
 
-                        TryAddPlatformReference(platformType.GUID.ToString());
+                        TryAddPlatformReference(platformType.GUID);
                     }
                 }
                 else
                 {
                     if (isCurrentBuildTargetPlatformActive)
                     {
-                        TryRemovePlatformReference(EditorBuildTargetTypeReference);
+                        TryRemovePlatformReference(EditorBuildTargetGuid);
 
                         if (runtimePlatformsProperty.arraySize == MixedRealityToolkit.AvailablePlatforms.Count - 3)
                         {
@@ -312,7 +312,7 @@ namespace XRTK.Editor.PropertyDrawers
                     }
                     else
                     {
-                        TryAddPlatformReference(EditorBuildTargetTypeReference);
+                        TryAddPlatformReference(EditorBuildTargetGuid);
 
                         foreach (var platform in MixedRealityToolkit.AvailablePlatforms)
                         {
@@ -325,7 +325,7 @@ namespace XRTK.Editor.PropertyDrawers
 
                             if (platform.IsBuildTargetAvailable)
                             {
-                                TryAddPlatformReference(platform.GetType().ToString());
+                                TryAddPlatformReference(platform.GetType().GUID);
                             }
                         }
 
@@ -343,15 +343,15 @@ namespace XRTK.Editor.PropertyDrawers
             {
                 var selectedPlatformType = typeRef as Type;
 
-                if (selectedPlatformType != null && selectedPlatformType.GUID == Guid.Empty)
+                if (selectedPlatformType == null) { return; }
+
+                if (selectedPlatformType.GUID == Guid.Empty)
                 {
                     Debug.LogError($"{selectedPlatformType.Name} does not implement a required {nameof(GuidAttribute)}");
                     return;
                 }
 
-                var selectedReference = selectedPlatformType?.GUID.ToString();
-
-                if (!TryRemovePlatformReference(selectedReference))
+                if (!TryRemovePlatformReference(selectedPlatformType.GUID))
                 {
                     if (runtimePlatformsProperty.arraySize == MixedRealityToolkit.AvailablePlatforms.Count - 3)
                     {
@@ -359,18 +359,18 @@ namespace XRTK.Editor.PropertyDrawers
                     }
                     else
                     {
-                        TryAddPlatformReference(selectedReference);
+                        TryAddPlatformReference(selectedPlatformType.GUID);
                     }
                 }
 
                 EditorWindow.focusedWindow.SendEvent(EditorGUIUtility.CommandEvent(TypeReferenceUpdated));
             }
 
-            void TryAddPlatformReference(string classReference)
+            void TryAddPlatformReference(Guid classReference)
             {
-                if (TryRemovePlatformReference(EditorPlatformTypeReference))
+                if (TryRemovePlatformReference(EditorPlatformGuid))
                 {
-                    TryAddPlatformReference(EditorBuildTargetTypeReference);
+                    TryAddPlatformReference(EditorBuildTargetGuid);
                 }
 
                 if (!TypeExtensions.TryResolveType(classReference, out var selectedPlatformType)) { return; }
@@ -392,11 +392,11 @@ namespace XRTK.Editor.PropertyDrawers
                 runtimePlatformsProperty.InsertArrayElementAtIndex(index);
                 var systemTypeProperty = runtimePlatformsProperty.GetArrayElementAtIndex(index);
                 var referenceProperty = systemTypeProperty.FindPropertyRelative("reference");
-                referenceProperty.stringValue = classReference;
+                referenceProperty.stringValue = classReference.ToString();
                 runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
             }
 
-            bool TryRemovePlatformReference(string classReference)
+            bool TryRemovePlatformReference(Guid classReference)
             {
                 TypeExtensions.TryResolveType(classReference, out var selectedPlatformType);
 
@@ -412,7 +412,7 @@ namespace XRTK.Editor.PropertyDrawers
                             platformType != AllPlatformsType &&
                             platformType != EditorPlatformType)
                         {
-                            TryAddPlatformReference(platformType.GUID.ToString());
+                            TryAddPlatformReference(platformType.GUID);
                         }
                     }
 
@@ -433,7 +433,7 @@ namespace XRTK.Editor.PropertyDrawers
                         {
                             runtimePlatformsProperty.ClearArray();
                             runtimePlatformsProperty.serializedObject.ApplyModifiedProperties();
-                            TryAddPlatformReference(EditorPlatformTypeReference);
+                            TryAddPlatformReference(EditorPlatformGuid);
                             return true;
                         }
 

@@ -24,11 +24,44 @@ namespace XRTK.Extensions
             .Where(type => type.IsClass && !type.IsAbstract));
 
         /// <summary>
-        /// Attempts to resolve the type using a the <see cref="System.Type.AssemblyQualifiedName"/> or <see cref="System.Type.GUID"/> as <see cref="string"/>.
+        /// Attempts to resolve the type using the class <see cref="Guid"/>.
         /// </summary>
-        /// <param name="typeRef">The <see cref="System.Type.GUID"/> or <see cref="System.Type.AssemblyQualifiedName"/> as <see cref="string"/>.</param>
-        /// <param name="resolvedType"></param>
-        /// <returns>The resolved <see cref="Type"/></returns>
+        /// <param name="guid">Class <see cref="Guid"/> reference.</param>
+        /// <param name="resolvedType">The resolved <see cref="Type"/>.</param>
+        /// <returns>True if the <see cref="resolvedType"/> was successfully obtained from or added to the <see cref="TypeCache"/>, otherwise false.</returns>
+        public static bool TryResolveType(Guid guid, out Type resolvedType)
+        {
+            resolvedType = null;
+
+            if (guid == Guid.Empty)
+            {
+                return false;
+            }
+
+            if (!TypeCache.TryGetValue(guid, out resolvedType))
+            {
+                resolvedType = AllTypes.FirstOrDefault(type => type.GUID == guid);
+            }
+
+            if (resolvedType != null && !resolvedType.IsAbstract)
+            {
+                if (!TypeCache.ContainsKey(guid))
+                {
+                    TypeCache.Add(guid, resolvedType);
+                }
+
+                return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Attempts to resolve the type using a the <see cref="System.Type.AssemblyQualifiedName"/> or <see cref="Type.GUID"/> as <see cref="string"/>.
+        /// </summary>
+        /// <param name="typeRef">The <see cref="Type.GUID"/> or <see cref="System.Type.AssemblyQualifiedName"/> as <see cref="string"/>.</param>
+        /// <param name="resolvedType">The resolved <see cref="Type"/>.</param>
+        /// <returns>True if the <see cref="resolvedType"/> was successfully obtained from or added to the <see cref="TypeCache"/>, otherwise false.</returns>
         public static bool TryResolveType(string typeRef, out Type resolvedType)
         {
             resolvedType = null;
@@ -37,35 +70,25 @@ namespace XRTK.Extensions
 
             if (Guid.TryParse(typeRef, out var guid))
             {
-                if (!TypeCache.TryGetValue(guid, out resolvedType))
-                {
-                    resolvedType = AllTypes.FirstOrDefault(type => type.GUID == guid);
-                }
+                return TryResolveType(guid, out resolvedType);
             }
             else
             {
                 resolvedType = Type.GetType(typeRef);
 
-                if (resolvedType != null &&
-                    resolvedType.GUID != Guid.Empty)
+                if (resolvedType != null)
                 {
-                    guid = resolvedType.GUID;
-                }
-            }
-
-            if (resolvedType != null && !resolvedType.IsAbstract)
-            {
-                if (!TypeCache.ContainsKey(guid))
-                {
-                    if (resolvedType.GUID == Guid.Empty)
+                    if (resolvedType.GUID != Guid.Empty)
                     {
-                        Debug.LogWarning($"{resolvedType.Name} is missing a {nameof(GuidAttribute)}. This extension has been upgraded to use System.Type.GUID instead of System.Type.AssemblyQualifiedName");
+                        return TryResolveType(guid, out resolvedType);
                     }
 
-                    TypeCache.Add(guid, resolvedType);
+                    if (!resolvedType.IsAbstract)
+                    {
+                        Debug.LogWarning($"{resolvedType.Name} is missing a {nameof(GuidAttribute)}. This extension has been upgraded to use System.Type.GUID instead of System.Type.AssemblyQualifiedName");
+                        return true;
+                    }
                 }
-
-                return true;
             }
 
             return false;

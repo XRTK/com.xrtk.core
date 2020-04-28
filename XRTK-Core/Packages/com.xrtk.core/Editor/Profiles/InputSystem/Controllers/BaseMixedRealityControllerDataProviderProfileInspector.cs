@@ -60,9 +60,9 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
 
                 for (int i = 0; i < defaultControllerOptions.Length; i++)
                 {
-                    var defaultControllerMappingProfile = defaultControllerOptions[i];
+                    var defaultControllerOption = defaultControllerOptions[i];
 
-                    var controllerMappingAsset = CreateInstance(nameof(MixedRealityControllerMappingProfile)).CreateAsset($"{profileRootPath}/", $"{defaultControllerMappingProfile.Description}Profile", false) as MixedRealityControllerMappingProfile;
+                    var controllerMappingAsset = CreateInstance(nameof(MixedRealityControllerMappingProfile)).CreateAsset($"{profileRootPath}/", $"{defaultControllerOption.Description}Profile", false) as MixedRealityControllerMappingProfile;
 
                     Debug.Assert(controllerMappingAsset != null);
 
@@ -70,22 +70,21 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
                     mappingProfileSerializedObject.Update();
 
                     var controllerTypeProperty = mappingProfileSerializedObject.FindProperty("controllerType").FindPropertyRelative("reference");
-                    TypeExtensions.TryResolveType(controllerTypeProperty.stringValue, out var controllerType);
                     var handednessProperty = mappingProfileSerializedObject.FindProperty("handedness");
                     var useCustomInteractionsProperty = mappingProfileSerializedObject.FindProperty("useCustomInteractions");
                     var interactionMappingProfilesProperty = mappingProfileSerializedObject.FindProperty("interactionMappingProfiles");
 
-                    if (defaultControllerMappingProfile.ControllerType?.Type?.GUID != Guid.Empty)
+                    if (defaultControllerOption.ControllerType.Type.GUID != Guid.Empty)
                     {
-                        controllerTypeProperty.stringValue = defaultControllerMappingProfile.ControllerType?.Type?.GUID.ToString();
+                        controllerTypeProperty.stringValue = defaultControllerOption.ControllerType.Type.GUID.ToString();
                     }
                     else
                     {
-                        Debug.LogError($"{defaultControllerMappingProfile.ControllerType} requires a {nameof(GuidAttribute)}");
+                        Debug.LogError($"{defaultControllerOption.ControllerType} requires a {nameof(GuidAttribute)}");
                     }
 
-                    handednessProperty.intValue = (int)defaultControllerMappingProfile.Handedness;
-                    useCustomInteractionsProperty.boolValue = defaultControllerMappingProfile.UseCustomInteractions;
+                    handednessProperty.intValue = (int)defaultControllerOption.Handedness;
+                    useCustomInteractionsProperty.boolValue = defaultControllerOption.UseCustomInteractions;
 
                     SetDefaultInteractionMapping();
                     mappingProfileSerializedObject.ApplyModifiedProperties();

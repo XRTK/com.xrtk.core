@@ -2,17 +2,18 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEditor;
-using XRTK.Definitions.Controllers.Simulation.Hands;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Editor.Profiles;
 
-namespace XRTK.Editor.Data.Controllers.Simulation.Hands
+namespace XRTK.Editor.Data.Controllers.Hands
 {
-    [CustomEditor(typeof(SimulatedHandControllerPoseData))]
-    public class SimulatedHandControllerPoseDataInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(HandControllerPoseDefinition))]
+    public class HandControllerPoseDefinitionInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty id;
         private SerializedProperty description;
         private SerializedProperty isDefault;
+        private SerializedProperty isSelectionPose;
         private SerializedProperty keyCode;
         private SerializedProperty data;
 
@@ -23,6 +24,7 @@ namespace XRTK.Editor.Data.Controllers.Simulation.Hands
             id = serializedObject.FindProperty(nameof(id));
             description = serializedObject.FindProperty(nameof(description));
             isDefault = serializedObject.FindProperty(nameof(isDefault));
+            isSelectionPose = serializedObject.FindProperty(nameof(isSelectionPose));
             keyCode = serializedObject.FindProperty(nameof(keyCode));
             data = serializedObject.FindProperty(nameof(data));
         }
@@ -36,6 +38,7 @@ namespace XRTK.Editor.Data.Controllers.Simulation.Hands
             EditorGUILayout.PropertyField(id);
             EditorGUILayout.PropertyField(description);
             EditorGUILayout.PropertyField(isDefault);
+            EditorGUILayout.PropertyField(isSelectionPose);
             EditorGUILayout.PropertyField(keyCode);
             EditorGUILayout.PropertyField(data);
 

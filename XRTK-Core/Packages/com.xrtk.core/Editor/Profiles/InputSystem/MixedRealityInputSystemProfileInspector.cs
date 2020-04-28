@@ -36,6 +36,7 @@ namespace XRTK.Editor.Profiles.InputSystem
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
         private SerializedProperty boundsMode;
+        private SerializedProperty trackedPoses;
 
         private SerializedProperty inputActionsProfile;
         private SerializedProperty speechCommandsProfile;
@@ -64,6 +65,7 @@ namespace XRTK.Editor.Profiles.InputSystem
             handPhysicsEnabled = serializedObject.FindProperty(nameof(handPhysicsEnabled));
             useTriggers = serializedObject.FindProperty(nameof(useTriggers));
             boundsMode = serializedObject.FindProperty(nameof(boundsMode));
+            trackedPoses = serializedObject.FindProperty(nameof(trackedPoses));
 
             inputActionsProfile = serializedObject.FindProperty(nameof(inputActionsProfile));
             gesturesProfile = serializedObject.FindProperty(nameof(gesturesProfile));
@@ -153,6 +155,7 @@ namespace XRTK.Editor.Profiles.InputSystem
                 EditorGUILayout.PropertyField(handPhysicsEnabled);
                 EditorGUILayout.PropertyField(useTriggers);
                 EditorGUILayout.PropertyField(boundsMode);
+                EditorGUILayout.PropertyField(trackedPoses, true);
                 EditorGUI.indentLevel--;
             }
 

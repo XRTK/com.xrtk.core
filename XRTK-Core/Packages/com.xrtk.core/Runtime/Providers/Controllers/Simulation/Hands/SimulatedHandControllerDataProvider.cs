@@ -12,6 +12,7 @@ using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;
+using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Providers.Controllers.Simulation.Hands
 {
@@ -24,25 +25,54 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public SimulatedHandControllerDataProvider(string name, uint priority, SimulatedHandControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            var poseDefinitions = profile.PoseDefinitions;
-            handPoseDefinitions = new List<SimulatedHandControllerPoseData>(poseDefinitions.Count);
-
-            foreach (var poseDefinition in poseDefinitions)
-            {
-                handPoseDefinitions.Add(poseDefinition);
-            }
+            var globalSettingsProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
 
             HandPoseAnimationSpeed = profile.HandPoseAnimationSpeed;
-            HandPhysicsEnabled = profile.HandPhysicsEnabled;
-            UseTriggers = profile.UseTriggers;
-            BoundsMode = profile.BoundsMode;
-            HandMeshingEnabled = profile.HandMeshingEnabled;
+
+            HandMeshingEnabled = profile.HandMeshingEnabled != globalSettingsProfile.HandMeshingEnabled
+                ? profile.HandMeshingEnabled
+                : globalSettingsProfile.HandMeshingEnabled;
+
+            HandPhysicsEnabled = profile.HandPhysicsEnabled != globalSettingsProfile.HandPhysicsEnabled
+                ? profile.HandPhysicsEnabled
+                : globalSettingsProfile.HandPhysicsEnabled;
+
+            UseTriggers = profile.UseTriggers != globalSettingsProfile.UseTriggers
+                ? profile.UseTriggers
+                : globalSettingsProfile.UseTriggers;
+
+            BoundsMode = profile.BoundsMode != globalSettingsProfile.BoundsMode
+                ? profile.BoundsMode
+                : globalSettingsProfile.BoundsMode;
+
+            if (profile.TrackedPoses.Count > 0)
+            {
+                TrackedPoses = profile.TrackedPoses.Count != globalSettingsProfile.TrackedPoses.Count
+                    ? profile.TrackedPoses
+                    : globalSettingsProfile.TrackedPoses;
+            }
+            else
+            {
+                TrackedPoses = globalSettingsProfile.TrackedPoses;
+            }
+
+            leftHandConverter = new SimulatedHandDataConverter(
+                Handedness.Left,
+                TrackedPoses,
+                HandPoseAnimationSpeed,
+                JitterAmount,
+                DefaultDistance);
+
+            rightHandConverter = new SimulatedHandDataConverter(
+                Handedness.Right,
+                TrackedPoses,
+                HandPoseAnimationSpeed,
+                JitterAmount,
+                DefaultDistance);
         }
 
-        private readonly List<SimulatedHandControllerPoseData> handPoseDefinitions;
-
-        /// <inheritdoc />
-        public IReadOnlyList<SimulatedHandControllerPoseData> HandPoseDefinitions => handPoseDefinitions;
+        private readonly SimulatedHandDataConverter leftHandConverter;
+        private readonly SimulatedHandDataConverter rightHandConverter;
 
         /// <inheritdoc />
         public float HandPoseAnimationSpeed { get; }
@@ -58,6 +88,22 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
         /// <inheritdoc />
         public bool HandMeshingEnabled { get; }
+
+        /// <inheritdoc />
+        public IReadOnlyList<HandControllerPoseDefinition> TrackedPoses { get; }
+
+        /// <inheritdoc />
+        protected override void UpdateSimulatedController(IMixedRealitySimulatedController simulatedController)
+        {
+            var simulatedHandController = (MixedRealityHandController)simulatedController;
+            var converter = simulatedHandController.ControllerHandedness == Handedness.Left
+                ? leftHandConverter
+                : rightHandConverter;
+
+            simulatedHandController.UpdateController(converter.GetSimulatedHandData(
+                simulatedController.GetPosition(DepthMultiplier),
+                simulatedController.GetDeltaRotation(RotationSpeed)));
+        }
 
         /// <inheritdoc />
         protected override IMixedRealitySimulatedController CreateAndRegisterSimulatedController(Handedness handedness)

@@ -218,7 +218,7 @@ namespace XRTK.Editor.PropertyDrawers
                     break;
 
                 case EventType.Repaint:
-                    TempContent.text = selectedType == null ? "(None)" : selectedType.Name;
+                    TempContent.text = selectedType == null ? None : selectedType.Name;
 
                     if (TempContent.text == string.Empty)
                     {

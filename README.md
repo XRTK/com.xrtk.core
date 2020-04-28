@@ -6,7 +6,7 @@ The Mixed Reality Toolkit's primary focus is to make it extremely easy to get st
 
 ## Build Status
 
-| Modules | Build Agent | OpenUpm |
+| Modules | Azure Pipelines | OpenUpm |
 |---|---|---|
 |XRTK-Core|[![Build Status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/com.xrtk.core?branchName=master)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=44&branchName=master)|[![openupm](https://img.shields.io/npm/v/com.xrtk.core?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.xrtk.core/)|
 |[SDK](https://github.com/XRTK/SDK)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.SDK%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=23)|[![openupm](https://img.shields.io/npm/v/com.xrtk.sdk?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.xrtk.sdk/)|

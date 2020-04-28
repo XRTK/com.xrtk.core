@@ -114,7 +114,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             try
             {
                 controller = new SimulatedMixedRealityHandController(this, TrackingState.Tracked, handedness, GetControllerMappingProfile(typeof(SimulatedMixedRealityHandController), handedness));
-
             }
             catch (Exception e)
             {

@@ -10,7 +10,6 @@ using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
-using XRTK.Interfaces;
 using Assembly = System.Reflection.Assembly;
 
 namespace XRTK.Editor.PropertyDrawers

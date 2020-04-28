@@ -1,0 +1,120 @@
+stages:
+- stage: Publish
+  pool:
+    name: 'Azure Pipelines'
+    vmImage: 'ubuntu-latest'
+    demands:
+      - unity -equals false
+
+  jobs:
+    - job: Publish
+      variables:
+      - group: Global Pipeline Settings
+      - group: Discord Webhook Publishing Variables
+
+      steps:
+      - checkout: self
+
+      - powershell: |
+          $env:GIT_REDIRECT_STDERR = '2>&1'
+
+          $packageJsonFile = "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\package.json"
+          Write-Host Current Project Version
+          $packageInfo = (Get-Content $packageJsonFile -Raw) | ConvertFrom-Json
+          $version = [version] $packageInfo.version;
+          Write-Host $version
+          Write-Host "##vso[task.setvariable variable=package.version]$($packageInfo.version)"
+          Write-Host upm split tree for $(package.name)@$version
+          git config user.email "XRTK-Build-Bot@users.noreply.github.com"
+          git config user.name "XRTK-Build-Bot"
+          git status
+          git fetch origin master
+          git pull origin master
+          git subtree split --prefix="$(project.name)/Packages/$(package.name)" --branch upm
+          $upmSha = git rev-parse upm
+          Write-Host "##vso[task.setvariable variable=project.upmSha]$($upmSha)"
+          git tag $version upm
+          git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git upm $version --force
+        displayName: 'UPM Mirror'
+
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download Pipeline Artifact'
+        inputs:
+          artifact: ${{ format('{0}.{1}', '$(Build.BuildNumber)', '$(Build.BuildId)') }}
+
+      - task: Npm@1
+        displayName: 'upm publish'
+        inputs:
+          command: publish
+          verbose: false
+          publishEndpoint: 'XRTK UPM Server'
+
+      - task: GitHubRelease@1
+        displayName: 'GitHub release (create)'
+        inputs:
+          gitHubConnection: 'XRTK Build Bot Connection'
+          target: '$(project.upmSha)'
+          tagSource: userSpecifiedTag
+          tag: '$(package.version)'
+          title: '$(project.name) $(package.version)'
+          releaseNotesSource: inline
+          releaseNotesInline: |
+            # Release Notes
+
+            ## Requirements
+
+            - [Unity $(UnityVersion)](https://unity3d.com/unity/whats-new/$(UnityVersion)) or later
+            - Microsoft Visual Studio $(VisualStudioVersion)
+            - Windows 10 $(WindowsBuildVersion) or later
+            - Windows SDK $(WindowsSdkVersion) or later
+
+            ## Import via Unity Package Manager (upm)
+
+            Find `Packages/manifest.json` in your project and edit the dependencies to include:
+
+            ```json
+            {
+              "scopedRegistries": [
+                {
+                  "name": "XRTK",
+                  "url": "http://upm.xrtk.io:4873/",
+                  "scopes": [
+                    "com.xrtk"
+                  ]
+                }
+              ],
+              "dependencies": {
+                "$(package.name)": "$(package.version)",
+                ...
+              },
+            }
+            ```
+
+            Once the registry has been added, you can search for each platform in the UPM Package Manager window.
+
+            > Note: For pre-releases you'll need to enable `show preview packages` under the Advanced dropdown in Unity's Package Manager.
+
+            ## Importing the asset directly into your project
+
+            1. Download the release asset unity package
+            2. Import unity package directly into your project by dragging and dropping the file into your project window
+          assets: '$(Pipeline.Workspace)/**/*.unitypackage'
+          isPreRelease: true
+
+      - task: robmburke.ado-discord-webhook.custom-build-release-task.ado-discord-webhook@1
+        displayName: 'Discord Release Webhook'
+        inputs:
+          channelId: '$(Discord.WebhookChannelId)'
+          webhookKey: '$(Discord.WebhookKey)'
+          name: '$(Discord.WebhookAuthor)'
+          avatar: '$(Discord.WebhookAvatarUrl)'
+          messageType: embeds
+          embeds: |
+            [{
+                "title": "TEST - (project.name) has a new release!",
+                "description": "Release $(package.version) is now available.",
+                "author": {
+                    "name": "$(Discord.WebhookAuthor)"
+                },
+                "url": "https://github.com/XRTK/$(project.name)/releases"
+            }]

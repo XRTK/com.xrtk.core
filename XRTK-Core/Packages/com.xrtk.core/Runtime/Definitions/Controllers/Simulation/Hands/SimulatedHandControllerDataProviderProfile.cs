@@ -12,15 +12,6 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
     public class SimulatedHandControllerDataProviderProfile : SimulatedControllerDataProviderProfile
     {
         [SerializeField]
-        [Tooltip("Hand pose definitions.")]
-        private List<SimulatedHandControllerPoseData> poseDefinitions = new List<SimulatedHandControllerPoseData>();
-
-        /// <summary>
-        /// Hand pose definitions.
-        /// </summary>
-        public IReadOnlyList<SimulatedHandControllerPoseData> PoseDefinitions => poseDefinitions;
-
-        [SerializeField]
         [Tooltip("Gesture interpolation per second")]
         private float handPoseAnimationSpeed = 8.0f;
 
@@ -64,6 +55,15 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// Set the bounds mode to use for calculating hand bounds.
         /// </summary>
         public HandBoundsMode BoundsMode => boundsMode;
+
+        [SerializeField]
+        [Tooltip("Tracked hand poses for pose detection.")]
+        private List<HandControllerPoseDefinition> trackedPoses = new List<HandControllerPoseDefinition>();
+
+        /// <summary>
+        /// Tracked hand poses for pose detection.
+        /// </summary>
+        public IReadOnlyList<HandControllerPoseDefinition> TrackedPoses => trackedPoses;
 
         public override ControllerDefinition[] GetDefaultControllerOptions()
         {

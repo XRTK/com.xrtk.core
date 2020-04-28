@@ -9,9 +9,11 @@ using XRTK.Interfaces.Providers.Controllers;
 
 namespace XRTK.Providers.Controllers.OpenVR
 {
+    [System.Runtime.InteropServices.Guid("F5779130-4990-44F7-A61A-196B34FA3AEF")]
     public class OculusTouchOpenVRController : GenericOpenVRController
     {
-        public OculusTouchOpenVRController() : base() { }
+        /// <inheritdoc />
+        public OculusTouchOpenVRController() { }
 
         /// <inheritdoc />
         public OculusTouchOpenVRController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)

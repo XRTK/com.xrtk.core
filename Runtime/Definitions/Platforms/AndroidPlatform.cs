@@ -6,6 +6,7 @@ namespace XRTK.Definitions.Platforms
     /// <summary>
     /// Used by the XRTK to signal that the feature is available on the Android platform.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("DAC9EAD8-54F9-4935-A27F-9F82F465C972")]
     public class AndroidPlatform : BasePlatform
     {
         /// <inheritdoc />

@@ -1,7 +1,9 @@
-﻿using System;
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using System;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions.Utilities;
 
 namespace XRTK.Editor
 {
@@ -39,9 +41,10 @@ namespace XRTK.Editor
         {
             foreach (var type in repairedTypeOptions)
             {
-                if (GUILayout.Button(type.FullName, EditorStyles.miniButton))
+                if (type.GUID != Guid.Empty &&
+                    GUILayout.Button(type.FullName, EditorStyles.miniButton))
                 {
-                    property.stringValue = SystemType.GetReference(type);
+                    property.stringValue = type.GUID.ToString();
                     property.serializedObject.ApplyModifiedProperties();
                     Close();
                 }

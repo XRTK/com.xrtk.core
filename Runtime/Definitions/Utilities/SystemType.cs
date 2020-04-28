@@ -1,8 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
 using UnityEngine;
+using XRTK.Extensions;
 
 namespace XRTK.Definitions.Utilities
 {
@@ -12,44 +13,6 @@ namespace XRTK.Definitions.Utilities
     [Serializable]
     public sealed class SystemType : ISerializationCallbackReceiver
     {
-        [SerializeField]
-        private string reference = string.Empty;
-
-        private Type type;
-
-        public static string GetReference(Type type)
-        {
-            if (type == null || string.IsNullOrEmpty(type.AssemblyQualifiedName))
-            {
-                return string.Empty;
-            }
-
-            var qualifiedNameComponents = type.AssemblyQualifiedName.Split(',');
-            Debug.Assert(qualifiedNameComponents.Length >= 2);
-            return $"{qualifiedNameComponents[0]}, {qualifiedNameComponents[1].Trim()}";
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SystemType"/> class.
-        /// </summary>
-        /// <param name="assemblyQualifiedClassName">Assembly qualified class name.</param>
-        public SystemType(string assemblyQualifiedClassName)
-        {
-            if (!string.IsNullOrEmpty(assemblyQualifiedClassName))
-            {
-                Type = Type.GetType(assemblyQualifiedClassName);
-
-                if (Type != null && Type.IsAbstract)
-                {
-                    Type = null;
-                }
-            }
-            else
-            {
-                Type = null;
-            }
-        }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SystemType"/> class.
         /// </summary>
@@ -59,16 +22,47 @@ namespace XRTK.Definitions.Utilities
             Type = type;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SystemType"/> class.
+        /// </summary>
+        /// <param name="typeGuid"><see cref="T:Type.GUID"/> reference as <see cref="string"/>.</param>
+        public SystemType(string typeGuid)
+        {
+            TypeExtensions.TryResolveType(typeGuid, out var resolvedType);
+            Type = resolvedType;
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="SystemType"/> class.
+        /// </summary>
+        /// <param name="guid"><see cref="T:Type.GUID"/> reference of the type to instantiate.</param>
+        public SystemType(Guid guid)
+        {
+            TypeExtensions.TryResolveType(guid, out var resolvedType);
+            Type = resolvedType;
+        }
+
         #region ISerializationCallbackReceiver Members
+
+        [SerializeField]
+        private string reference = string.Empty;
 
         void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
-            type = !string.IsNullOrEmpty(reference) ? Type.GetType(reference) : null;
+            TypeExtensions.TryResolveType(reference, out type);
         }
 
-        void ISerializationCallbackReceiver.OnBeforeSerialize() { }
+        void ISerializationCallbackReceiver.OnBeforeSerialize()
+        {
+            if (type != null && type.GUID != Guid.Empty)
+            {
+                reference = type.GUID.ToString();
+            }
+        }
 
         #endregion ISerializationCallbackReceiver Members
+
+        private Type type;
 
         /// <summary>
         /// Gets or sets type of class reference.
@@ -89,8 +83,13 @@ namespace XRTK.Definitions.Utilities
                 }
 
                 type = value;
-                reference = GetReference(value);
+                reference = type?.GUID.ToString();
             }
+        }
+
+        public static implicit operator Guid(SystemType type)
+        {
+            return type.type == null ? Guid.Empty : type.type.GUID;
         }
 
         public static implicit operator string(SystemType type)
@@ -108,6 +107,17 @@ namespace XRTK.Definitions.Utilities
             return new SystemType(type);
         }
 
+        public static implicit operator SystemType(Guid guid)
+        {
+            return new SystemType(guid);
+        }
+
+        /// <summary>
+        /// Gets the <see cref="T:System.Guid"/> associated with the <see cref="T:System.Type" />.
+        /// </summary>
+        public Guid Guid => type.GUID;
+
+        /// <inheritdoc />
         public override string ToString()
         {
             return Type?.FullName ?? (string.IsNullOrWhiteSpace(reference) ? "{None}" : reference);

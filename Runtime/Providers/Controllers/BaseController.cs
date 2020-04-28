@@ -25,7 +25,10 @@ namespace XRTK.Providers.Controllers
     /// </summary>
     public abstract class BaseController : IMixedRealityController
     {
-        public BaseController() { }
+        /// <summary>
+        /// Creates a new instance of a controller.
+        /// </summary>
+        protected BaseController() { }
 
         /// <summary>
         /// Creates a new instance of a controller.

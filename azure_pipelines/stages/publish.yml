@@ -7,7 +7,7 @@ stages:
       - unity -equals false
 
   jobs:
-    - job:
+    - job: Publish
       variables:
       - group: Global Pipeline Settings
       - group: Discord Webhook Publishing Variables
@@ -17,6 +17,14 @@ stages:
 
       - powershell: |
           $env:GIT_REDIRECT_STDERR = '2>&1'
+
+          $packageJsonFile = "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\package.json"
+          Write-Host Current Project Version
+          $packageInfo = (Get-Content $packageJsonFile -Raw) | ConvertFrom-Json
+          $version = [version] $packageInfo.version;
+          Write-Host $version
+          Write-Host "##vso[task.setvariable variable=package.version]$($packageInfo.version)"
+          Write-Host upm split tree for $(package.name)@$version
           git config user.email "XRTK-Build-Bot@users.noreply.github.com"
           git config user.name "XRTK-Build-Bot"
           git status
@@ -25,35 +33,33 @@ stages:
           git subtree split --prefix="$(project.name)/Packages/$(package.name)" --branch upm
           $upmSha = git rev-parse upm
           Write-Host "##vso[task.setvariable variable=project.upmSha]$($upmSha)"
-          git tag $(package.version) upm
-          git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git upm $(package.version) --force
+          git tag $version upm
+          git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git upm $version --force
         displayName: 'UPM Mirror'
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download Pipeline Artifact'
         inputs:
-          targetPath: '$(System.DefaultWorkingDirectory)\Builds'
-          artifact: '$(Build.BuildNumber)'
+          artifact: ${{ format('{0}.{1}', '$(Build.BuildNumber)', '$(Build.BuildId)') }}
 
-      # TODO Uncomment out when we're done testing
-      # - task: Npm@1
-      #   displayName: 'upm publish'
-      #   inputs:
-      #     command: publish
-      #     verbose: false
-      #     publishEndpoint: 'XRTK UPM Server'
+      TODO Uncomment out when we're done testing
+      - task: Npm@1
+        displayName: 'upm publish'
+        inputs:
+          command: publish
+          verbose: false
+          publishEndpoint: 'XRTK UPM Server'
 
-      # TODO Get build artifact from master build with package
-      - task: GitHubRelease@0
+      - task: GitHubRelease@1
         displayName: 'GitHub release (create)'
         inputs:
           gitHubConnection: 'XRTK Build Bot Connection'
           target: '$(project.upmSha)'
-          tagSource: manual
+          tagSource: userSpecifiedTag
           tag: '$(package.version)'
           title: '$(project.name) $(package.version)'
-          releaseNotesSource: input
-          releaseNotes: |
+          releaseNotesSource: inline
+          releaseNotesInline: |
             # Release Notes
 
             ## Requirements
@@ -93,7 +99,7 @@ stages:
 
             1. Download the release asset unity package
             2. Import unity package directly into your project by dragging and dropping the file into your project window
-            assets: '$(System.DefaultWorkingDirectory)\Builds\Packages\$(project.name).unitypackage'
+          assets: '$(Pipeline.Workspace)/**/*.unitypackage'
           isPreRelease: true
 
       - task: robmburke.ado-discord-webhook.custom-build-release-task.ado-discord-webhook@1
@@ -106,7 +112,7 @@ stages:
           messageType: embeds
           embeds: |
             [{
-                "title": "$TEST - (project.name) has a new release!",
+                "title": "TEST - (project.name) has a new release!",
                 "description": "Release $(package.version) is now available.",
                 "author": {
                     "name": "$(Discord.WebhookAuthor)"

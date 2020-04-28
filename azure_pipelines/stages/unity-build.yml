@@ -41,7 +41,7 @@ stages:
         displayName: 'Publish Pipeline Artifacts'
         inputs:
           targetPath: '$(System.DefaultWorkingDirectory)\$(project.name)\Builds'
-          artifact: '$(Build.BuildNumber)'
+          artifact: ${{ format('{0}.{1}', '$(Build.BuildNumber)', '$(Build.BuildId)') }}
         condition: always()
 
       - template: steps/return-unity-license.yml

@@ -1,8 +1,8 @@
 variables:
   project.name: 'XRTK-Core'
+  project.upmSha: ''
   package.name: 'com.xrtk.core'
   package.version: ''
-  project.upmSha: ''
   EditorPath: ''
   LogDirectory: ''
   ${{ if eq( variables['build.reason'], 'PullRequest' ) }}:

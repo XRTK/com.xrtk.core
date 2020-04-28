@@ -42,7 +42,6 @@ stages:
         inputs:
           artifact: ${{ format('{0}.{1}', '$(Build.BuildNumber)', '$(Build.BuildId)') }}
 
-      TODO Uncomment out when we're done testing
       - task: Npm@1
         displayName: 'upm publish'
         inputs:

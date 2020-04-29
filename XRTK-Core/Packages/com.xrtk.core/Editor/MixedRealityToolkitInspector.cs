@@ -51,29 +51,32 @@ namespace XRTK.Editor
             if (activeProfile.objectReferenceValue == null &&
                 currentPickerWindow == -1 && checkChange)
             {
-                if (rootProfiles.Length > 1)
+                switch (rootProfiles.Length)
                 {
-                    if (rootProfiles.Length == 2)
-                    {
-                        var rootProfilePath = AssetDatabase.GetAssetPath(rootProfiles[1]);
+                    case 0:
+                        EditorGUIUtility.PingObject(target);
+                        EditorUtility.DisplayDialog("Attention!", "No root profile for the Mixed Reality Toolkit was found.\n\nYou'll need to create a new one by pressing `+` or from the project window context menu: \"Create/Mixed Reality Toolkit/Root Profile\"", "OK");
+                        break;
+                    case 1:
+                        var rootProfilePath = AssetDatabase.GetAssetPath(rootProfiles[0]);
 
                         EditorApplication.delayCall += () =>
                         {
                             changed = true;
-                            var rootProfile = AssetDatabase.LoadAssetAtPath<MixedRealityToolkitRootProfile>(rootProfilePath);
+                            var rootProfile =
+                                AssetDatabase.LoadAssetAtPath<MixedRealityToolkitRootProfile>(rootProfilePath);
                             Debug.Assert(rootProfile != null);
                             activeProfile.objectReferenceValue = rootProfile;
                             EditorGUIUtility.PingObject(rootProfile);
                             Selection.activeObject = rootProfile;
                             MixedRealityToolkit.Instance.ResetProfile(rootProfile);
                         };
-                    }
-                    else
-                    {
+                        break;
+                    default:
                         EditorUtility.DisplayDialog("Attention!", "You must choose a profile for the Mixed Reality Toolkit.", "OK");
                         currentPickerWindow = GUIUtility.GetControlID(FocusType.Passive);
                         EditorGUIUtility.ShowObjectPicker<MixedRealityToolkitRootProfile>(null, false, string.Empty, currentPickerWindow);
-                    }
+                        break;
                 }
 
                 checkChange = false;

@@ -26,14 +26,14 @@ MonoBehaviour:
     targetRelativePath: /XRTK-Core/Packages/com.xrtk.oculus
     isActive: 1
   - sourceRelativePath: /Submodules/SDK/XRTK.SDK/Packages/com.xrtk.sdk/Profiles~
-    targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/SDK/Profiles~
+    targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/SDK/Profiles
     isActive: 1
   - sourceRelativePath: /Submodules/Lumin/XRTK.Lumin/Packages/com.xrtk.lumin/Profiles~
-    targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/Lumin/Profiles~
+    targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/Lumin/Profiles
     isActive: 1
   - sourceRelativePath: /Submodules/Oculus/XRTK.Oculus/Packages/com.xrtk.oculus/Profiles~
-    targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/Oculus/Profiles~
+    targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/Oculus/Profiles
     isActive: 1
   - sourceRelativePath: /Submodules/WindowsMixedReality/XRTK.WindowsMixedReality/Packages/com.xrtk.wmr/Profiles~
-    targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/WindowsMixedReality/Profiles~
+    targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/WindowsMixedReality/Profiles
     isActive: 1

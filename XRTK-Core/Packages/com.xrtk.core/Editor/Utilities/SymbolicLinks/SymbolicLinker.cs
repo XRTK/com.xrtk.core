@@ -40,12 +40,10 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
 
         internal static string ProjectRoot => GitUtilities.RepositoryRootDir;
 
-        private static bool isRunningSync;
-
         /// <summary>
         /// Is the sync task running?
         /// </summary>
-        public static bool IsSyncing => isRunningSync;
+        public static bool IsSyncing { get; private set; }
 
         /// <summary>
         /// Debug the symbolic linker utility.
@@ -115,7 +113,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 return;
             }
 
-            isRunningSync = true;
+            IsSyncing = true;
             EditorApplication.LockReloadAssemblies();
 
             if (DebugEnabled)
@@ -196,7 +194,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
             }
 
             EditorApplication.UnlockReloadAssemblies();
-            isRunningSync = false;
+            IsSyncing = false;
         }
 
         /// <summary>
@@ -347,7 +345,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 return false;
             }
 
-            targetAbsolutePath = AddSubfolderPathToTarget(sourceAbsolutePath, targetAbsolutePath).Replace("~", "");
+            targetAbsolutePath = AddSubfolderPathToTarget(sourceAbsolutePath, targetAbsolutePath);
             var ignorePath = targetAbsolutePath;
 
             if (ignorePath.Contains("Assets/ThirdParty"))
@@ -478,7 +476,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 targetPath = $"{targetPath}/{subFolder}";
             }
 
-            return targetPath;
+            return targetPath.Replace("~", string.Empty);
         }
     }
 }

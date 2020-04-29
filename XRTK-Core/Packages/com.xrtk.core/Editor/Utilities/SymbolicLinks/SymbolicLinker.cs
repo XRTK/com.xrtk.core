@@ -347,7 +347,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 return false;
             }
 
-            targetAbsolutePath = AddSubfolderPathToTarget(sourceAbsolutePath, targetAbsolutePath);
+            targetAbsolutePath = AddSubfolderPathToTarget(sourceAbsolutePath, targetAbsolutePath).Replace("~", "");
             var ignorePath = targetAbsolutePath;
 
             if (ignorePath.Contains("Assets/ThirdParty"))

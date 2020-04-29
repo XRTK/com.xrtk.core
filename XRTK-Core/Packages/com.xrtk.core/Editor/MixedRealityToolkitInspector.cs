@@ -43,7 +43,20 @@ namespace XRTK.Editor
             serializedObject.Update();
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.LabelField(new GUIContent("Mixed Reality Toolkit Root Profile", "This profile is the main root configuration for the entire XRTK."));
-            EditorGUILayout.PropertyField(activeProfile, GUIContent.none);
+
+            if (activeProfile.objectReferenceValue != null)
+            {
+                EditorGUILayout.PropertyField(activeProfile, GUIContent.none);
+            }
+            else
+            {
+                if (GUILayout.Button("Create a new root profile"))
+                {
+                    var rootProfile = CreateInstance<MixedRealityToolkitRootProfile>().GetOrCreateAsset();
+                    activeProfile.objectReferenceValue = rootProfile;
+                }
+            }
+
             var changed = EditorGUI.EndChangeCheck();
             var commandName = Event.current.commandName;
             var rootProfiles = ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitRootProfile>();
@@ -55,7 +68,7 @@ namespace XRTK.Editor
                 {
                     case 0:
                         EditorGUIUtility.PingObject(target);
-                        EditorUtility.DisplayDialog("Attention!", "No root profile for the Mixed Reality Toolkit was found.\n\nYou'll need to create a new one by pressing `+` or from the project window context menu: \"Create/Mixed Reality Toolkit/Root Profile\"", "OK");
+                        EditorUtility.DisplayDialog("Attention!", "No root profile for the Mixed Reality Toolkit was found.\n\nYou'll need to create a new one.", "OK");
                         break;
                     case 1:
                         var rootProfilePath = AssetDatabase.GetAssetPath(rootProfiles[0]);

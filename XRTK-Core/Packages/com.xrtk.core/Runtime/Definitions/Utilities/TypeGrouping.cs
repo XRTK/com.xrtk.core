@@ -14,7 +14,7 @@ namespace XRTK.Definitions.Utilities
         None,
 
         /// <summary>
-        /// No grouping, just show the type names in a lies; for instance, "SpecialClass".
+        /// No grouping, just show the type names in a list; for instance, "SpecialClass".
         /// </summary>
         NoneByNameNoNamespace,
 

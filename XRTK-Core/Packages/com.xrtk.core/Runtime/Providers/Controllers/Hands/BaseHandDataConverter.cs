@@ -45,6 +45,8 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
+        private const float TWO_CM_SQUARE_MAGNITUDE = 0.0004f;
+
         private readonly Dictionary<string, HandControllerPoseDefinition> trackedPoses;
         private readonly HandPoseFrame[] poseCompareFrames;
 
@@ -59,21 +61,54 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The hand data retrieved from conversion.</param>
         protected void PostProcess(HandData handData)
         {
+            //if (TryRecognizePose(handData.Joints, out var recognizedPoseId))
+            //{
+            //    handData.PoseDefinition = recognizedPoseId;
+            //}
+            //else
+            //{
+            //    handData.PoseDefinition = null;
+            //}
+
+            UpdateIsPinching(handData);
+            UpdateIsPointing(handData);
+        }
+
+        private void UpdateIsPinching(HandData handData)
+        {
             if (handData.IsTracked)
             {
-                if (TryRecognizePose(handData.Joints, out var recognizedPoseId))
-                {
-                    handData.PoseDefinition = recognizedPoseId;
-                }
-                else
-                {
-                    handData.PoseDefinition = null;
-                }
+                var thumbTipPose = handData.Joints[(int)TrackedHandJoint.ThumbTip];
+                var indexTipPose = handData.Joints[(int)TrackedHandJoint.IndexTip];
+                handData.IsPinching = (thumbTipPose.Position - indexTipPose.Position).sqrMagnitude < TWO_CM_SQUARE_MAGNITUDE;
+            }
+            else
+            {
+                handData.IsPinching = false;
+            }
+        }
+
+        private void UpdateIsPointing(HandData handData)
+        {
+            if (handData.IsTracked)
+            {
+                var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
+                var cameraTransform = MixedRealityToolkit.CameraSystem != null
+                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform
+                : CameraCache.Main.transform;
+
+                // We check if the palm forward is roughly in line with the camera lookAt.
+                var projectedPalmUp = Vector3.ProjectOnPlane(-palmPose.Up, cameraTransform.up);
+                handData.IsPointing = Vector3.Dot(cameraTransform.forward, projectedPalmUp) > 0.3f;
+            }
+            else
+            {
+                handData.IsPointing = false;
             }
         }
 
         /// <summary>
-        /// Tries to reconize the hands pose using the the provided <see cref="HandPoseRecognizer"/>.
+        /// Tries to reconize the current tracked hand pose.
         /// </summary>
         /// <param name="jointPoses">Local joint poses retrieved from initial conversion.</param>
         /// <param name="recognizedPose">The recognized pose ID, if any.</param>

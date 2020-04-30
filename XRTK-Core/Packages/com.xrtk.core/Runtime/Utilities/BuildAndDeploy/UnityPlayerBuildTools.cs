@@ -225,6 +225,15 @@ namespace XRTK.Utilities.Build
         }
 
         /// <summary>
+        /// Get the Unity Project Root Path.
+        /// </summary>
+        /// <returns>The full path to the project's root.</returns>
+        public static string GetProjectPath()
+        {
+            return Path.GetDirectoryName(Path.GetFullPath(Application.dataPath));
+        }
+
+        /// <summary>
         /// Parses the command like arguments.
         /// </summary>
         /// <param name="buildInfo"></param>

@@ -14,6 +14,11 @@ namespace XRTK.Definitions.Utilities
         None,
 
         /// <summary>
+        /// No grouping, just show the type names in a lies; for instance, "SpecialClass".
+        /// </summary>
+        NoneByNameNoNamespace,
+
+        /// <summary>
         /// Group classes by namespace and show foldout menus for nested namespaces; for
         /// instance, "Some > Nested > Namespace > SpecialClass".
         /// </summary>

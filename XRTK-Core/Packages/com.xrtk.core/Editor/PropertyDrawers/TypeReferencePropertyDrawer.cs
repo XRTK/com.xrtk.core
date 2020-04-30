@@ -108,6 +108,11 @@ namespace XRTK.Editor.PropertyDrawers
         /// </example>
         public static Func<Type, bool> FilterConstraintOverride { get; set; }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public static TypeGrouping? GroupingOverride { get; set; }
+
         private static IEnumerable<Type> GetFilteredTypes(SystemTypeAttribute filter)
         {
             var types = new List<Type>();
@@ -232,7 +237,7 @@ namespace XRTK.Editor.PropertyDrawers
             {
                 selectionControlId = controlId;
                 SelectedType = selectedType;
-                DisplayDropDown(position, GetFilteredTypes(filter), selectedType, filter?.Grouping ?? TypeGrouping.ByNamespaceFlat);
+                DisplayDropDown(position, GetFilteredTypes(filter), selectedType, GroupingOverride ?? filter?.Grouping ?? TypeGrouping.ByNamespaceFlat);
             }
         }
 
@@ -271,6 +276,7 @@ namespace XRTK.Editor.PropertyDrawers
             }
             finally
             {
+                GroupingOverride = null;
                 FilterConstraintOverride = null;
                 ExcludedTypeCollectionGetter = null;
             }
@@ -316,6 +322,8 @@ namespace XRTK.Editor.PropertyDrawers
             {
                 case TypeGrouping.None:
                     return name;
+                case TypeGrouping.NoneByNameNoNamespace:
+                    return type.Name;
                 case TypeGrouping.ByNamespace:
                     return string.IsNullOrEmpty(name) ? string.Empty : name.Replace('.', '/');
                 case TypeGrouping.ByNamespaceFlat:

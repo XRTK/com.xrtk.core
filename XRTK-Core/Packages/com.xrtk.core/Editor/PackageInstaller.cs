@@ -28,7 +28,6 @@ namespace XRTK.Editor
         /// <returns></returns>
         public static bool TryInstallProfiles(string sourcePath, string destinationPath)
         {
-            Debug.Log($"Installing to {destinationPath}");
             var anyFail = false;
             var profilePaths = Directory.EnumerateFiles(Path.GetFullPath(sourcePath), "*.asset", SearchOption.AllDirectories).ToList();
 

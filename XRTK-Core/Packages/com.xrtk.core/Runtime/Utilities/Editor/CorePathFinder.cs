@@ -6,7 +6,12 @@ using UnityEngine;
 namespace XRTK.Utilities.Editor
 {
     /// <summary>
-    /// Dummy scriptable object used to find the relative path of the editor.
+    /// Dummy scriptable object used to find the relative path to com.xrtk.core.
     /// </summary>
-    internal class CorePathFinder : ScriptableObject, IPathFinder { }
+    /// <inheritdoc cref="IPathFinder" />
+    public class CorePathFinder : ScriptableObject, IPathFinder
+    {
+        /// <inheritdoc />
+        public string Location => $"/Runtime/Utilities/Editor/{nameof(CorePathFinder)}.cs";
+    }
 }

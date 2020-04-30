@@ -69,11 +69,11 @@ namespace XRTK.Services
             get
             {
 #if UNITY_EDITOR
-                if (!Application.isPlaying && activeProfile == null)
+                if (!Application.isPlaying &&
+                    activeProfile == null &&
+                    UnityEditor.Selection.activeObject != Instance)
                 {
                     UnityEditor.Selection.activeObject = Instance;
-                    UnityEditor.EditorApplication.delayCall += () =>
-                        UnityEditor.EditorGUIUtility.PingObject(Instance);
                 }
 #endif // UNITY_EDITOR
                 return activeProfile;

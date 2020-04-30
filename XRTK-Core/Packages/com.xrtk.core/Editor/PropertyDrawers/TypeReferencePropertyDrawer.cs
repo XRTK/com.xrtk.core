@@ -108,6 +108,15 @@ namespace XRTK.Editor.PropertyDrawers
         /// </example>
         public static Func<Type, bool> FilterConstraintOverride { get; set; }
 
+        /// <summary>
+        /// <para>This will override any grouping drawn for the drop-down.</para>
+        /// <para>This property must be set immediately before presenting a class
+        /// type reference property field using <see cref="EditorGUI.PropertyField(Rect,SerializedProperty)"/>
+        /// or <see cref="EditorGUILayout.PropertyField(SerializedProperty,UnityEngine.GUILayoutOption[])"/> since the value of this
+        /// property is reset to <c>null</c> each time the control is drawn.</para>
+        /// </summary>
+        public static TypeGrouping? GroupingOverride { get; set; }
+
         private static IEnumerable<Type> GetFilteredTypes(SystemTypeAttribute filter)
         {
             var types = new List<Type>();
@@ -232,7 +241,7 @@ namespace XRTK.Editor.PropertyDrawers
             {
                 selectionControlId = controlId;
                 SelectedType = selectedType;
-                DisplayDropDown(position, GetFilteredTypes(filter), selectedType, filter?.Grouping ?? TypeGrouping.ByNamespaceFlat);
+                DisplayDropDown(position, GetFilteredTypes(filter), selectedType, GroupingOverride ?? filter?.Grouping ?? TypeGrouping.ByNamespaceFlat);
             }
         }
 
@@ -271,6 +280,7 @@ namespace XRTK.Editor.PropertyDrawers
             }
             finally
             {
+                GroupingOverride = null;
                 FilterConstraintOverride = null;
                 ExcludedTypeCollectionGetter = null;
             }
@@ -316,6 +326,8 @@ namespace XRTK.Editor.PropertyDrawers
             {
                 case TypeGrouping.None:
                     return name;
+                case TypeGrouping.NoneByNameNoNamespace:
+                    return type.Name;
                 case TypeGrouping.ByNamespace:
                     return string.IsNullOrEmpty(name) ? string.Empty : name.Replace('.', '/');
                 case TypeGrouping.ByNamespaceFlat:

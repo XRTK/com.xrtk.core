@@ -9,6 +9,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Editor.Utilities.SymbolicLinks;
 using XRTK.Editor.Extensions;
+using XRTK.Extensions;
 using XRTK.Utilities.Editor;
 
 namespace XRTK.Editor
@@ -73,9 +74,14 @@ namespace XRTK.Editor
 
         #region Custom Profile Generation Path
 
+        /// <summary>
+        /// The hidden profile path for each XRTK package.
+        /// </summary>
+        public const string HIDDEN_PROFILES_PATH = "Profiles~";
+
         private static readonly GUIContent GeneratedProfilePathContent = new GUIContent("New Generated Profiles Default Path:", "When generating new profiles, their files are saved in this location.");
         private const string PROFILE_GENERATION_PATH_KEY = "_MixedRealityToolkit_Editor_Profile_Generation_Path";
-        private const string DefaultGenerationPath = "Assets/XRTK.Generated/Profiles";
+        private const string DEFAULT_GENERATION_PATH = "Assets/XRTK.Generated/";
         private static string profileGenerationPath;
         private static bool isProfilePathPrefLoaded;
 
@@ -89,7 +95,7 @@ namespace XRTK.Editor
                 if (!isProfilePathPrefLoaded ||
                     string.IsNullOrWhiteSpace(profileGenerationPath))
                 {
-                    profileGenerationPath = EditorPreferences.Get(PROFILE_GENERATION_PATH_KEY, DefaultGenerationPath);
+                    profileGenerationPath = EditorPreferences.Get(PROFILE_GENERATION_PATH_KEY, DEFAULT_GENERATION_PATH);
                     isProfilePathPrefLoaded = true;
                 }
 
@@ -98,15 +104,19 @@ namespace XRTK.Editor
             set
             {
                 var newPath = value;
-                var root = Path.GetFullPath(Application.dataPath).Replace("\\", "/");
+                var root = Path.GetFullPath(Application.dataPath).ToBackSlashes();
 
                 if (!newPath.Contains(root))
                 {
                     Debug.LogWarning("Path must be in the Assets folder");
-                    newPath = DefaultGenerationPath;
+                    newPath = DEFAULT_GENERATION_PATH;
                 }
 
                 newPath = newPath.Replace(root, "Assets");
+                if (!newPath.EndsWith("/"))
+                {
+                    newPath += "/";
+                }
 
                 EditorPreferences.Set(PROFILE_GENERATION_PATH_KEY, profileGenerationPath = newPath);
             }

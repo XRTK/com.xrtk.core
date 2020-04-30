@@ -72,8 +72,6 @@ XRTK-Core/Assets/Plugins/Lumin/Editor/
 XRTK-Core/Assets/Plugins/Lumin/Editor.meta
 XRTK-Core/Assets/StreamingAssets/
 XRTK-Core/Assets/StreamingAssets.meta
-XRTK-Core/Assets/XRTK.Generated/Profiles
-XRTK-Core/Assets/XRTK.Generated/Profiles.meta
 
 # ====================== #
 # Project Symbolic Links #
@@ -83,3 +81,11 @@ XRTK-Core/Packages/com.xrtk.wmr
 XRTK-Core/Packages/com.xrtk.lumin
 XRTK-Core/Packages/com.xrtk.sdk
 XRTK-Core/Packages/com.xrtk.oculus
+XRTK-Core/Assets/XRTK.Generated/SDK
+XRTK-Core/Assets/XRTK.Generated/SDK.meta
+XRTK-Core/Assets/XRTK.Generated/Lumin
+XRTK-Core/Assets/XRTK.Generated/Lumin.meta
+XRTK-Core/Assets/XRTK.Generated/Oculus
+XRTK-Core/Assets/XRTK.Generated/Oculus.meta
+XRTK-Core/Assets/XRTK.Generated/WindowsMixedReality
+XRTK-Core/Assets/XRTK.Generated/WindowsMixedReality.meta

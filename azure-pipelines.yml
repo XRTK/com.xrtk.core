@@ -18,17 +18,17 @@ pr:
    include:
      - master
      - development
-     - feature/**/*
+     - feature/*
   paths:
     include:
     - azure-pipelines.yml
-    - azure-pipelines/**/*
-    - XRTK-Core/**/*
+    - azure-pipelines/*
+    - XRTK-Core/*
     exclude:
       - '*'
       - XRTK-Core/Packages/com.xrtk.core/README.md
       - XRTK-Core/Packages/com.xrtk.core/LICENSE.md
-      - XRTK-Core/Packages/com.xrtk.core/.github/**/*
+      - XRTK-Core/Packages/com.xrtk.core/.github/*
 
 trigger:
   batch: true
@@ -38,13 +38,13 @@ trigger:
   paths:
     include:
       - azure-pipelines.yml
-      - azure-pipelines/**/*
-      - XRTK-Core/**/*
+      - azure-pipelines/*
+      - XRTK-Core/*
     exclude:
       - '*'
       - XRTK-Core/Packages/com.xrtk.core/README.md
       - XRTK-Core/Packages/com.xrtk.core/LICENSE.md
-      - XRTK-Core/Packages/com.xrtk.core/.github/**/*
+      - XRTK-Core/Packages/com.xrtk.core/.github/*
 
 extends:
   template: azure_pipelines/common.yml

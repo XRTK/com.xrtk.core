@@ -109,7 +109,11 @@ namespace XRTK.Editor.PropertyDrawers
         public static Func<Type, bool> FilterConstraintOverride { get; set; }
 
         /// <summary>
-        /// 
+        /// <para>This will override any grouping drawn for the drop-down.</para>
+        /// <para>This property must be set immediately before presenting a class
+        /// type reference property field using <see cref="EditorGUI.PropertyField(Rect,SerializedProperty)"/>
+        /// or <see cref="EditorGUILayout.PropertyField(SerializedProperty,UnityEngine.GUILayoutOption[])"/> since the value of this
+        /// property is reset to <c>null</c> each time the control is drawn.</para>
         /// </summary>
         public static TypeGrouping? GroupingOverride { get; set; }
 

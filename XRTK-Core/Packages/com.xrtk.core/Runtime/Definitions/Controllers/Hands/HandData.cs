@@ -18,11 +18,6 @@ namespace XRTK.Definitions.Controllers.Hands
         public static readonly int JointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
         /// <summary>
-        /// The recognized hand pose, if any.
-        /// </summary>
-        public HandControllerPoseDefinition PoseDefinition { get; set; } = null;
-
-        /// <summary>
         /// Timestamp of hand data, as FileTime, e.g. <see cref="DateTime.UtcNow"/>
         /// </summary>
         public long TimeStamp { get; set; } = 0;
@@ -31,6 +26,27 @@ namespace XRTK.Definitions.Controllers.Hands
         /// Is the hand currently being tracked by the system?
         /// </summary>
         public bool IsTracked { get; set; } = false;
+
+        /// <summary>
+        /// Is the hand currently in a pinch pose?
+        /// </summary>
+        public bool IsPinching { get; set; }
+
+        /// <summary>
+        /// Is the hand currently in a pointing pose?
+        /// </summary>
+        public bool IsPointing { get; set; }
+
+        /// <summary>
+        /// Is the hand currently in a grabbing pose?
+        /// </summary>
+        public bool IsGrabbing { get; set; }
+
+        /// <summary>
+        /// Recognized hand pose, if any.
+        /// Recognizable hand poses are defined in <see cref="BaseHandControllerDataProviderProfile.TrackedPoses"/>.
+        /// </summary>
+        public HandControllerPoseDefinition TrackedPose { get; set; } = null;
 
         /// <summary>
         /// Pose information for each hand joint.

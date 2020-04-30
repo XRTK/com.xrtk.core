@@ -468,7 +468,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
 
         private static string AddSubfolderPathToTarget(string sourcePath, string targetPath)
         {
-            var subFolder = sourcePath.Substring(sourcePath.LastIndexOf("/", StringComparison.Ordinal) + 1);
+            var subFolder = sourcePath.Substring(sourcePath.LastIndexOf("/", StringComparison.Ordinal) + 1).Replace("~", string.Empty);
 
             // Check to see if our target path already has the sub folder reference.
             if (!targetPath.Substring(targetPath.LastIndexOf("/", StringComparison.Ordinal) + 1).Equals(subFolder))
@@ -476,7 +476,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 targetPath = $"{targetPath}/{subFolder}";
             }
 
-            return targetPath.Replace("~", string.Empty);
+            return targetPath;
         }
     }
 }

@@ -87,6 +87,8 @@ namespace XRTK.Editor.Profiles.InputSystem
 
                     foreach (var mappingProfile in controllerDataProviderProfile.ControllerMappingProfiles)
                     {
+                        if (mappingProfile == null) { continue; }
+
                         AssetDatabase.TryGetGUIDAndLocalFileIdentifier(mappingProfile, out var guid, out long _);
 
                         if (!controllerMappingProfiles.ContainsKey(guid))

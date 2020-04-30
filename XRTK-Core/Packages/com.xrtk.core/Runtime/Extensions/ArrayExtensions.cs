@@ -53,7 +53,7 @@ namespace XRTK.Extensions
         }
 
         /// <summary>
-        /// Initialises an array with a default item
+        /// Initializes an array with a default item
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="array">The array to initialise</param>

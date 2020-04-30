@@ -21,6 +21,7 @@ namespace XRTK.Providers.Controllers.Hands
     [System.Runtime.InteropServices.Guid("B18A9A6C-E5FD-40AE-89E9-9822415EC62B")]
     public class MixedRealityHandController : BaseController, IMixedRealityHandController
     {
+        /// <inheritdoc />
         public MixedRealityHandController() : base() { }
 
         /// <inheritdoc />
@@ -28,15 +29,24 @@ namespace XRTK.Providers.Controllers.Hands
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
         { }
 
+        ~MixedRealityHandController()
+        {
+            if (LastPose != null)
+            {
+                MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, new MixedRealityInputAction(int.MaxValue, LastPose.Id, AxisType.Digital));
+                LastPose = null;
+            }
+        }
+
         private const float NEW_VELOCITY_WEIGHT = .2f;
         private const float CURRENT_VELOCITY_WEIGHT = .8f;
-        private const float INPUT_DOWN_POSE_EPSILON = .02f;
-        private const int INPUT_DOWN_FRAME_BUFFER_SIZE = 5;
+        private const int POSE_FRAME_BUFFER_SIZE = 5;
 
         private readonly int velocityUpdateFrameInterval = 9;
         private readonly Dictionary<TrackedHandBounds, Bounds[]> bounds = new Dictionary<TrackedHandBounds, Bounds[]>();
         private readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
-        private readonly Queue<bool> inputDownBuffer = new Queue<bool>(INPUT_DOWN_FRAME_BUFFER_SIZE);
+        private readonly Queue<bool> isPinchingBuffer = new Queue<bool>(POSE_FRAME_BUFFER_SIZE);
+        private readonly Queue<bool> isPointingBuffer = new Queue<bool>(POSE_FRAME_BUFFER_SIZE);
 
         private int velocityUpdateFrame = 0;
         private float deltaTimeStart = 0;
@@ -67,7 +77,10 @@ namespace XRTK.Providers.Controllers.Hands
         protected Vector3 PalmNormal => TryGetJointPose(TrackedHandJoint.Palm, out var pose) ? -pose.Up : Vector3.zero;
 
         /// <inheritdoc />
-        public bool IsInInputDownPose { get; private set; }
+        public bool IsPinching { get; private set; }
+
+        /// <inheritdoc />
+        public bool IsPointing { get; private set; }
 
         /// <summary>
         /// Updates the hand controller with new hand data input.
@@ -77,14 +90,19 @@ namespace XRTK.Providers.Controllers.Hands
         {
             if (!Enabled) { return; }
 
-            var lastState = TrackingState;
-            //var lastIsInInputDownPose = IsInInputDownPose;
+            var lastTrackingState = TrackingState;
+            var lastIsPinching = IsPinching;
+            var lastIsPointing = IsPointing;
 
+            // Update internals.
             UpdateJoints(handData);
+            UpdateIsPinching(handData);
+            UpdateIsIsPointing(handData);
             UpdateBounds();
             UpdateVelocity();
-            //UpdateIsInputDownPose();
 
+            // We assume hand controller position and roation to be available
+            // if we can successfully retrieve the wrist joint pose.
             if (TryGetJointPose(TrackedHandJoint.Wrist, out var wristPose))
             {
                 IsPositionAvailable = true;
@@ -93,46 +111,65 @@ namespace XRTK.Providers.Controllers.Hands
                 TrackingState = handData.IsTracked ? TrackingState.Tracked : TrackingState.NotTracked;
             }
 
-            if (lastState != TrackingState)
+            // Update controller tracking state.
+            if (lastTrackingState != TrackingState)
             {
                 MixedRealityToolkit.InputSystem?.RaiseSourceTrackingStateChanged(InputSource, this, TrackingState);
             }
 
+            // Update controller pose.
             if (TrackingState == TrackingState.Tracked)
             {
                 MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, wristPose);
             }
 
-            //if (lastIsInInputDownPose != IsInInputDownPose)
-            //{
-            //    if (IsInInputDownPose && !lastIsInInputDownPose)
-            //    {
-            //        MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, MixedRealityInputAction.None);
-            //    }
-            //    else if (!IsInInputDownPose && lastIsInInputDownPose)
-            //    {
-            //        MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, MixedRealityInputAction.None);
-            //    }
-            //}
+            // Update is pinching input action.
+            if (!lastIsPinching && IsPinching)
+            {
+                Debug.Log("Pinch Start");
+                MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, MixedRealityInputAction.None);
+            }
+            else if (lastIsPinching && !IsPinching)
+            {
+                Debug.Log("Pinch End");
+                MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, MixedRealityInputAction.None);
+            }
+            else if (IsPinching)
+            {
+                Debug.Log("Pinching");
+                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, MixedRealityInputAction.None);
+            }
 
-            //if (IsInInputDownPose)
-            //{
-            //    MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, MixedRealityInputAction.None);
-            //}
+            // Update is pointing input action.
+            if (!lastIsPointing && IsPointing)
+            {
+                Debug.Log("Pointing Start");
+                MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, MixedRealityInputAction.None);
+            }
+            else if (lastIsPointing && !IsPointing)
+            {
+                Debug.Log("Pointing End");
+                MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, MixedRealityInputAction.None);
+            }
+            else if (IsPointing)
+            {
+                Debug.Log("Pointing");
+                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, MixedRealityInputAction.None);
+            }
 
-            // Update hand controller pose.
-            if (LastPose != null && LastPose.Id.Equals(handData.PoseDefinition?.Id))
+            // Update tracked hand pose input action.
+            if (LastPose != null && LastPose.Id.Equals(handData.TrackedPose?.Id))
             {
                 MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, new MixedRealityInputAction(int.MaxValue, LastPose.Id, AxisType.Digital));
             }
-            else if (LastPose != null && !LastPose.Id.Equals(handData.PoseDefinition?.Id))
+            else if (LastPose != null && !LastPose.Id.Equals(handData.TrackedPose?.Id))
             {
                 MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, new MixedRealityInputAction(int.MaxValue, LastPose.Id, AxisType.Digital));
                 LastPose = null;
             }
-            else if (handData.PoseDefinition != null)
+            else if (handData.TrackedPose != null)
             {
-                var newPose = handData.PoseDefinition;
+                var newPose = handData.TrackedPose;
                 MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, new MixedRealityInputAction(int.MaxValue, newPose.Id, AxisType.Digital));
                 LastPose = newPose;
             }
@@ -473,52 +510,79 @@ namespace XRTK.Providers.Controllers.Hands
             velocityUpdateFrame = velocityUpdateFrame > velocityUpdateFrameInterval ? 0 : velocityUpdateFrame;
         }
 
-
-
-        private void UpdateIsInputDownPose()
+        private void UpdateIsPinching(HandData handData)
         {
-            if (TrackingState == TrackingState.Tracked)
+            if (handData.IsTracked)
             {
-                var isInInputDownPoseThisFrame = false;
-                if (TryGetJointPose(TrackedHandJoint.ThumbTip, out var thumbTip) &&
-                    TryGetJointPose(TrackedHandJoint.IndexTip, out var indexTip))
+                var isPinchingThisFrame = handData.IsPinching;
+                if (isPinchingBuffer.Count < POSE_FRAME_BUFFER_SIZE)
                 {
-                    if (Vector3.Distance(thumbTip.Position, indexTip.Position) < INPUT_DOWN_POSE_EPSILON)
-                    {
-                        isInInputDownPoseThisFrame = true;
-                    }
-                }
-
-                if (inputDownBuffer.Count < INPUT_DOWN_FRAME_BUFFER_SIZE)
-                {
-                    inputDownBuffer.Enqueue(isInInputDownPoseThisFrame);
-                    IsInInputDownPose = false;
+                    isPinchingBuffer.Enqueue(isPinchingThisFrame);
+                    IsPinching = false;
                 }
                 else
                 {
-                    inputDownBuffer.Dequeue();
-                    inputDownBuffer.Enqueue(isInInputDownPoseThisFrame);
+                    isPinchingBuffer.Dequeue();
+                    isPinchingBuffer.Enqueue(isPinchingThisFrame);
 
-                    isInInputDownPoseThisFrame = true;
-                    for (int i = 0; i < inputDownBuffer.Count; i++)
+                    isPinchingThisFrame = true;
+                    for (int i = 0; i < isPinchingBuffer.Count; i++)
                     {
-                        var value = inputDownBuffer.Dequeue();
+                        var value = isPinchingBuffer.Dequeue();
 
                         if (!value)
                         {
-                            isInInputDownPoseThisFrame = false;
+                            isPinchingThisFrame = false;
                         }
 
-                        inputDownBuffer.Enqueue(value);
+                        isPinchingBuffer.Enqueue(value);
                     }
 
-                    IsInInputDownPose = isInInputDownPoseThisFrame;
+                    IsPinching = isPinchingThisFrame;
                 }
             }
             else
             {
-                inputDownBuffer.Clear();
-                IsInInputDownPose = false;
+                isPinchingBuffer.Clear();
+                IsPinching = false;
+            }
+        }
+
+        private void UpdateIsIsPointing(HandData handData)
+        {
+            if (handData.IsTracked)
+            {
+                var isPointingThisFrame = handData.IsPointing;
+                if (isPointingBuffer.Count < POSE_FRAME_BUFFER_SIZE)
+                {
+                    isPointingBuffer.Enqueue(isPointingThisFrame);
+                    IsPointing = false;
+                }
+                else
+                {
+                    isPointingBuffer.Dequeue();
+                    isPointingBuffer.Enqueue(isPointingThisFrame);
+
+                    isPointingThisFrame = true;
+                    for (int i = 0; i < isPointingBuffer.Count; i++)
+                    {
+                        var value = isPointingBuffer.Dequeue();
+
+                        if (!value)
+                        {
+                            isPointingThisFrame = false;
+                        }
+
+                        isPointingBuffer.Enqueue(value);
+                    }
+
+                    IsPointing = isPointingThisFrame;
+                }
+            }
+            else
+            {
+                isPointingBuffer.Clear();
+                IsPointing = false;
             }
         }
 

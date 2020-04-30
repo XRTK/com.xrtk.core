@@ -90,7 +90,7 @@ namespace XRTK.Editor.Utilities
             {
                 if (darkThemeLogo == null)
                 {
-                    darkThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/XRTK_Logo.png", typeof(Texture2D));
+                    darkThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/Runtime/StandardAssets/Textures/XRTK_Logo.png", typeof(Texture2D));
                 }
 
                 return darkThemeLogo;
@@ -105,7 +105,7 @@ namespace XRTK.Editor.Utilities
             {
                 if (lightThemeLogo == null)
                 {
-                    lightThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/StandardAssets/Textures/XRTK_Logo.png", typeof(Texture2D));
+                    lightThemeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath($"{PathFinderUtility.XRTK_Core_RelativeFolderPath}/Runtime/StandardAssets/Textures/XRTK_Logo.png", typeof(Texture2D));
                 }
 
                 return lightThemeLogo;

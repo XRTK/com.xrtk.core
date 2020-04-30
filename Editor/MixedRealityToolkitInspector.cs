@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.IO;
 using UnityEditor;
 using UnityEditor.Experimental.SceneManagement;
 using UnityEditor.SceneManagement;
@@ -12,7 +11,6 @@ using XRTK.Definitions;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.Profiles;
 using XRTK.Services;
-using XRTK.Utilities.Editor;
 
 namespace XRTK.Editor
 {
@@ -45,81 +43,56 @@ namespace XRTK.Editor
             serializedObject.Update();
             EditorGUI.BeginChangeCheck();
             EditorGUILayout.LabelField(new GUIContent("Mixed Reality Toolkit Root Profile", "This profile is the main root configuration for the entire XRTK."));
-            EditorGUILayout.PropertyField(activeProfile, GUIContent.none);
+
+            if (activeProfile.objectReferenceValue != null)
+            {
+                EditorGUILayout.PropertyField(activeProfile, GUIContent.none);
+            }
+            else
+            {
+                if (GUILayout.Button("Create a new root profile"))
+                {
+                    var rootProfile = CreateInstance<MixedRealityToolkitRootProfile>().GetOrCreateAsset();
+                    activeProfile.objectReferenceValue = rootProfile;
+                }
+            }
+
             var changed = EditorGUI.EndChangeCheck();
             var commandName = Event.current.commandName;
-            var profiles = ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitRootProfile>();
+            var rootProfiles = ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitRootProfile>();
 
-            if (activeProfile.objectReferenceValue == null)
+            if (activeProfile.objectReferenceValue == null &&
+                currentPickerWindow == -1 && checkChange)
             {
-                if (currentPickerWindow == -1 && checkChange)
+                switch (rootProfiles.Length)
                 {
-                    string rootProfilePath = null;
+                    case 0:
+                        EditorGUIUtility.PingObject(target);
+                        EditorUtility.DisplayDialog("Attention!", "No root profile for the Mixed Reality Toolkit was found.\n\nYou'll need to create a new one.", "OK");
+                        break;
+                    case 1:
+                        var rootProfilePath = AssetDatabase.GetAssetPath(rootProfiles[0]);
 
-                    if (profiles.Length > 1)
-                    {
-                        if (profiles.Length == 2)
+                        EditorApplication.delayCall += () =>
                         {
-                            rootProfilePath = AssetDatabase.GetAssetPath(profiles[1]);
                             changed = true;
-                            EditorApplication.delayCall += SetRootProfileReference;
-                        }
-                        else
-                        {
-                            EditorUtility.DisplayDialog("Attention!", "You must choose a profile for the Mixed Reality Toolkit.", "OK");
-                            currentPickerWindow = GUIUtility.GetControlID(FocusType.Passive);
-                            EditorGUIUtility.ShowObjectPicker<MixedRealityToolkitRootProfile>(null, false, string.Empty, currentPickerWindow);
-                        }
-                    }
-                    else if (profiles.Length == 1 && !string.IsNullOrWhiteSpace(PathFinderUtility.XRTK_SDK_RelativeFolderPath))
-                    {
-                        var allProfiles = ScriptableObjectExtensions.GetAllInstances<BaseMixedRealityProfile>();
-
-                        if (profiles[0].name == $"Default{nameof(MixedRealityToolkitRootProfile)}")
-                        {
-                            for (var i = 0; i < allProfiles.Length; i++)
-                            {
-                                var mixedRealityProfile = allProfiles[i];
-                                var sourceAssetPath = AssetDatabase.GetAssetPath(mixedRealityProfile);
-                                var destinationPath = sourceAssetPath.Replace($"{PathFinderUtility.XRTK_SDK_RelativeFolderPath}/DefaultProfiles/", "");
-                                destinationPath = destinationPath.Replace("Default", "");
-                                destinationPath = $"{MixedRealityPreferences.ProfileGenerationPath}/{destinationPath}";
-                                destinationPath = Path.Combine(Directory.GetParent(Application.dataPath).FullName, destinationPath);
-                                var fullPath = Directory.GetParent(destinationPath).FullName;
-
-                                if (File.Exists(destinationPath))
-                                {
-                                    continue;
-                                }
-
-                                Directory.CreateDirectory(fullPath);
-                                File.Copy(Path.GetFullPath(sourceAssetPath), destinationPath);
-
-                                if (mixedRealityProfile is MixedRealityToolkitRootProfile)
-                                {
-                                    rootProfilePath = destinationPath.Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", "");
-                                }
-                            }
-
-                            AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
-                        }
-
-                        changed = true;
-                        EditorApplication.delayCall += SetRootProfileReference;
-                    }
-
-                    void SetRootProfileReference()
-                    {
-                        var rootProfile = AssetDatabase.LoadAssetAtPath<MixedRealityToolkitRootProfile>(rootProfilePath);
-                        Debug.Assert(rootProfile != null);
-                        activeProfile.objectReferenceValue = rootProfile;
-                        EditorGUIUtility.PingObject(rootProfile);
-                        Selection.activeObject = rootProfile;
-                        MixedRealityToolkit.Instance.ResetProfile(rootProfile);
-                    }
-
-                    checkChange = false;
+                            var rootProfile =
+                                AssetDatabase.LoadAssetAtPath<MixedRealityToolkitRootProfile>(rootProfilePath);
+                            Debug.Assert(rootProfile != null);
+                            activeProfile.objectReferenceValue = rootProfile;
+                            EditorGUIUtility.PingObject(rootProfile);
+                            Selection.activeObject = rootProfile;
+                            MixedRealityToolkit.Instance.ResetProfile(rootProfile);
+                        };
+                        break;
+                    default:
+                        EditorUtility.DisplayDialog("Attention!", "You must choose a profile for the Mixed Reality Toolkit.", "OK");
+                        currentPickerWindow = GUIUtility.GetControlID(FocusType.Passive);
+                        EditorGUIUtility.ShowObjectPicker<MixedRealityToolkitRootProfile>(null, false, string.Empty, currentPickerWindow);
+                        break;
                 }
+
+                checkChange = false;
             }
 
             if (EditorGUIUtility.GetObjectPickerControlID() == currentPickerWindow)

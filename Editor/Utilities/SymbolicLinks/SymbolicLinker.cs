@@ -40,12 +40,10 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
 
         internal static string ProjectRoot => GitUtilities.RepositoryRootDir;
 
-        private static bool isRunningSync;
-
         /// <summary>
         /// Is the sync task running?
         /// </summary>
-        public static bool IsSyncing => isRunningSync;
+        public static bool IsSyncing { get; private set; }
 
         /// <summary>
         /// Debug the symbolic linker utility.
@@ -115,7 +113,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
                 return;
             }
 
-            isRunningSync = true;
+            IsSyncing = true;
             EditorApplication.LockReloadAssemblies();
 
             if (DebugEnabled)
@@ -196,7 +194,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
             }
 
             EditorApplication.UnlockReloadAssemblies();
-            isRunningSync = false;
+            IsSyncing = false;
         }
 
         /// <summary>
@@ -470,7 +468,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
 
         private static string AddSubfolderPathToTarget(string sourcePath, string targetPath)
         {
-            var subFolder = sourcePath.Substring(sourcePath.LastIndexOf("/", StringComparison.Ordinal) + 1);
+            var subFolder = sourcePath.Substring(sourcePath.LastIndexOf("/", StringComparison.Ordinal) + 1).Replace("~", string.Empty);
 
             // Check to see if our target path already has the sub folder reference.
             if (!targetPath.Substring(targetPath.LastIndexOf("/", StringComparison.Ordinal) + 1).Equals(subFolder))

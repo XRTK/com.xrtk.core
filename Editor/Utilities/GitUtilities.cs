@@ -63,9 +63,11 @@ namespace XRTK.Editor.Utilities
 
             var rootDir = RepositoryRootDir;
             ignoredPath = ignoredPath.Replace($"{rootDir.ToBackSlashes()}/", string.Empty);
-            var ignoreFilePath = $"{rootDir}\\.gitignore";
+            var directory = ignoredPath.Replace(Path.GetFileName(ignoredPath), Path.GetFileNameWithoutExtension(ignoredPath));
+            directory = directory.Substring(0, directory.LastIndexOf("/", StringComparison.Ordinal));
+            var gitIgnoreFilePath = $"{rootDir}\\.gitignore";
 
-            if (File.Exists(ignoreFilePath))
+            if (File.Exists(gitIgnoreFilePath))
             {
                 bool addPath = true;
 
@@ -73,7 +75,7 @@ namespace XRTK.Editor.Utilities
                 {
                     // Create a new StreamReader, tell it which file to read and what encoding the file was saved as
                     // Immediately clean up the reader after this block of code is done.
-                    using (var reader = new StreamReader(ignoreFilePath))
+                    using (var reader = new StreamReader(gitIgnoreFilePath))
                     {
                         // While there's lines left in the text file, do this:
                         string line;
@@ -81,7 +83,8 @@ namespace XRTK.Editor.Utilities
                         {
                             line = reader.ReadLine();
 
-                            if (!string.IsNullOrEmpty(line) && line.Equals(ignoredPath))
+                            if (!string.IsNullOrEmpty(line) &&
+                                (line.Equals(ignoredPath) || line.Contains(directory)))
                             {
                                 // Don't add the line if it already exists.
                                 addPath = false;
@@ -101,12 +104,12 @@ namespace XRTK.Editor.Utilities
 
                 if (addPath)
                 {
-                    File.AppendAllText(ignoreFilePath, $"{ignoredPath}{Environment.NewLine}", Encoding.UTF8);
+                    File.AppendAllText(gitIgnoreFilePath, $"{ignoredPath}{Environment.NewLine}", Encoding.UTF8);
                 }
             }
             else
             {
-                File.WriteAllText(ignoreFilePath, $"{ignoredPath}{Environment.NewLine}", Encoding.UTF8);
+                File.WriteAllText(gitIgnoreFilePath, $"{ignoredPath}{Environment.NewLine}", Encoding.UTF8);
             }
         }
 
@@ -142,7 +145,7 @@ namespace XRTK.Editor.Utilities
         {
             var result = await new Process().RunAsync($"git ls-remote --tags {url}");
 
-            if (result.ExitCode !=0 || !(result.Output.Length > 0))
+            if (result.ExitCode != 0 || !(result.Output.Length > 0))
             {
                 var messageBuilder = new StringBuilder("Failed to get remote tags:");
 

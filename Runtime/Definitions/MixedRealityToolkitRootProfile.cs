@@ -24,7 +24,7 @@ namespace XRTK.Definitions
     /// <summary>
     /// The root profile for the Mixed Reality Toolkit's settings.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Toolkit Root Profile", fileName = "MixedRealityToolkitRootProfile", order = (int)CreateProfileMenuItemIndices.Configuration)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Mixed Reality Toolkit Root Profile", fileName = "MixedRealityToolkitRootProfile", order = (int)CreateProfileMenuItemIndices.Configuration - 1)]
     public sealed class MixedRealityToolkitRootProfile : BaseMixedRealityProfile
     {
         #region Mixed Reality Toolkit system properties

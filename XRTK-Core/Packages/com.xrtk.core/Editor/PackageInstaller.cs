@@ -8,6 +8,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Editor.Extensions;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Providers;
@@ -20,12 +21,6 @@ namespace XRTK.Editor
     {
         private const string META_SUFFIX = ".meta";
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="sourcePath"></param>
-        /// <param name="destinationPath"></param>
-        /// <returns></returns>
         public static bool TryInstallProfiles(string sourcePath, string destinationPath)
         {
             var anyFail = false;
@@ -59,8 +54,12 @@ namespace XRTK.Editor
 
                 if (platformConfigurationProfile == null) { continue; }
 
+                var rootProfile = MixedRealityToolkit.IsInitialized
+                    ? MixedRealityToolkit.Instance.ActiveProfile
+                    : ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitRootProfile>()[0];
+
                 if (EditorUtility.DisplayDialog("We found a new Platform Configuration",
-                    $"We found the {platformConfigurationProfile.name.ToProperCase()}. Would you like to add this platform configuration to your project?",
+                    $"We found the {platformConfigurationProfile.name.ToProperCase()}. Would you like to add this platform configuration to your {rootProfile.name}?",
                     "Yes, Absolutely!",
                     "later"))
                 {
@@ -72,7 +71,7 @@ namespace XRTK.Editor
                         switch (configurationType)
                         {
                             case Type cameraDataProvider when typeof(IMixedRealityCameraDataProvider).IsAssignableFrom(configurationType):
-                                var cameraSystemProfile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile;
+                                var cameraSystemProfile = rootProfile.CameraSystemProfile;
                                 var cameraDataProviderConfiguration = new MixedRealityServiceConfiguration<IMixedRealityCameraDataProvider>(configuration.InstancedType, configuration.Name, configuration.Priority, configuration.RuntimePlatforms, configuration.Profile);
 
                                 if (cameraSystemProfile.RegisteredServiceConfigurations.All(serviceConfiguration => serviceConfiguration.InstancedType.Type != cameraDataProviderConfiguration.InstancedType.Type))
@@ -83,7 +82,7 @@ namespace XRTK.Editor
                                 break;
 
                             case Type inputDataProvider when typeof(IMixedRealityInputDataProvider).IsAssignableFrom(configurationType):
-                                var inputSystemProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
+                                var inputSystemProfile = rootProfile.InputSystemProfile;
                                 var inputDataProviderConfiguration = new MixedRealityServiceConfiguration<IMixedRealityInputDataProvider>(configuration.InstancedType, configuration.Name, configuration.Priority, configuration.RuntimePlatforms, configuration.Profile);
 
                                 if (inputSystemProfile.RegisteredServiceConfigurations.All(serviceConfiguration => serviceConfiguration.InstancedType.Type != inputDataProviderConfiguration.InstancedType.Type))
@@ -94,7 +93,7 @@ namespace XRTK.Editor
                                 break;
 
                             case Type spatialDataProvider when typeof(IMixedRealitySpatialObserverDataProvider).IsAssignableFrom(configurationType):
-                                var spatialAwarenessSystemProfile = MixedRealityToolkit.Instance.ActiveProfile.SpatialAwarenessProfile;
+                                var spatialAwarenessSystemProfile = rootProfile.SpatialAwarenessProfile;
                                 var spatialObserverConfiguration = new MixedRealityServiceConfiguration<IMixedRealitySpatialObserverDataProvider>(configuration.InstancedType, configuration.Name, configuration.Priority, configuration.RuntimePlatforms, configuration.Profile);
 
                                 if (spatialAwarenessSystemProfile.RegisteredServiceConfigurations.All(serviceConfiguration => serviceConfiguration.InstancedType.Type != spatialObserverConfiguration.InstancedType.Type))

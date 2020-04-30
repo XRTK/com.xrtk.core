@@ -16,7 +16,12 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         /// Gets whether the hand is currently in input down pose
         /// (select / pinch / airtap).
         /// </summary>
-        bool IsInInputDownPose { get; }
+        bool IsPinching { get; }
+
+        /// <summary>
+        /// Gets whether the hand is currently in a pointing pose.
+        /// </summary>
+        bool IsPointing { get; }
 
         /// <summary>
         /// Get the hands bounds of a given type, if they are available.

@@ -10,13 +10,26 @@ using UnityEngine;
 
 namespace XRTK.Utilities.Editor
 {
-    public interface IPathFinder { }
+    /// <summary>
+    /// Interface to implement on a <see cref="ScriptableObject"/> to make it easier to find relative/absolute folder paths using the <see cref="PathFinderUtility"/>.
+    /// </summary>
+    /// <remarks>
+    /// Required to be a standalone class in a separate file or else <see cref="MonoScript.FromScriptableObject"/> returns an empty string path.
+    /// </remarks>
+    public interface IPathFinder
+    {
+        /// <summary>
+        /// The relative path to this <see cref="IPathFinder"/> class from either the Assets or Packages folder.
+        /// </summary>
+        string Location { get; }
+    }
 
     public static class PathFinderUtility
     {
-        private const string CORE_PATH_FINDER = "/Utilities/Editor/CorePathFinder.cs";
+        private const string CORE_PATH_FINDER = "/Runtime/Utilities/Editor/CorePathFinder.cs";
         private const string SDK_PATH_FINDER = "/Editor/SdkPathFinder.cs";
 
+        private static readonly Dictionary<Type, string> PathFinderCache = new Dictionary<Type, string>();
         private static readonly Dictionary<string, string> ResolvedFinderCache = new Dictionary<string, string>();
 
         private static List<Type> GetAllPathFinders
@@ -51,6 +64,47 @@ namespace XRTK.Utilities.Editor
 
             return resolvedPath;
         }
+
+        /// <summary>
+        /// Resolves the path to the provided <see cref="IPathFinder"/>.<see cref="T:Type"/>
+        /// </summary>
+        /// <typeparam name="T"><see cref="IPathFinder"/> constraint.</typeparam>
+        /// <param name="pathFinderType">The <see cref="T:Type"/> of <see cref="IPathFinder"/> to resolve the path for.</param>
+        /// <returns>If found, the relative path to the root folder this <see cref="IPathFinder"/> references.</returns>
+        public static string ResolvePath<T>(Type pathFinderType) where T : IPathFinder
+        {
+            if (pathFinderType is null)
+            {
+                Debug.LogError($"{nameof(pathFinderType)} is null!");
+                return null;
+            }
+
+            if (!typeof(T).IsAssignableFrom(pathFinderType))
+            {
+                Debug.LogError($"{pathFinderType.Name} must implement {nameof(IPathFinder)}");
+                return null;
+            }
+
+            if (!typeof(ScriptableObject).IsAssignableFrom(pathFinderType))
+            {
+                Debug.LogError($"{pathFinderType.Name} must derive from {nameof(ScriptableObject)}");
+                return null;
+            }
+
+            if (!PathFinderCache.TryGetValue(pathFinderType, out var resolvedPath))
+            {
+                var pathFinder = ScriptableObject.CreateInstance(pathFinderType) as IPathFinder;
+                Debug.Assert(pathFinder != null, $"{nameof(pathFinder)} != null");
+                resolvedPath = AssetDatabase.GetAssetPath(
+                    MonoScript.FromScriptableObject((ScriptableObject)pathFinder))
+                        .Replace(pathFinder.Location, string.Empty);
+                PathFinderCache.Add(pathFinderType, resolvedPath);
+            }
+
+            return resolvedPath;
+        }
+
+        #region Core Paths
 
         /// <summary>
         /// The absolute folder path to the Mixed Reality Toolkit in your project.
@@ -89,6 +143,10 @@ namespace XRTK.Utilities.Editor
 
         private static string coreRelativeFolderPath = string.Empty;
 
+        #endregion Core Paths
+
+        #region SDK Paths
+
         /// <summary>
         /// The absolute folder path to the Mixed Reality Toolkit's SDK in your project.
         /// </summary>
@@ -124,5 +182,7 @@ namespace XRTK.Utilities.Editor
         }
 
         private static string sdkRelativeFolderPath = string.Empty;
+
+        #endregion SDK Paths
     }
 }

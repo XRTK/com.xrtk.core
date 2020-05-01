@@ -49,7 +49,7 @@ namespace XRTK.Tests
 
         public static T GetDefaultMixedRealityProfile<T>() where T : BaseMixedRealityProfile
         {
-            return ScriptableObjectExtensions.GetAllInstances<T>().FirstOrDefault(profile => profile.name.Equals($"Default{typeof(T).Name}"));
+            return ScriptableObjectExtensions.GetAllInstances<T>().FirstOrDefault(profile => profile.name.Equals(typeof(T).Name));
         }
     }
 }

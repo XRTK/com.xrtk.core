@@ -45,7 +45,7 @@ namespace XRTK.Seed
             {
                 switch (package.name)
                 {
-                    case string sdkName when package.name.Equals("com.xrtk.sdk"):
+                    case string _ when package.name.Equals("com.xrtk.sdk"):
                         Packages.Insert(0, new Tuple<PackageInfo, bool>(package, true));
                         break;
                     default:
@@ -127,6 +127,7 @@ namespace XRTK.Seed
 
                 File.WriteAllText(PackageManifest.ManifestFilePath, JsonConvert.SerializeObject(manifest, Formatting.Indented));
                 AssetDatabase.DeleteAsset("Assets/XRTK.Seed");
+                AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                 Close();
             }
 

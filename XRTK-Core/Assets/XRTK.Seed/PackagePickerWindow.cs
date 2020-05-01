@@ -45,8 +45,6 @@ namespace XRTK.Seed
             {
                 switch (package.name)
                 {
-                    case string coreName when package.name.Equals("com.xrtk.core"):
-                        break;
                     case string sdkName when package.name.Equals("com.xrtk.sdk"):
                         Packages.Insert(0, new Tuple<PackageInfo, bool>(package, true));
                         break;
@@ -94,6 +92,7 @@ namespace XRTK.Seed
             for (var i = 0; i < Packages.Count; i++)
             {
                 var (package, enabled) = Packages[i];
+                if (package.name.Equals("com.xrtk.core")) { continue; }
                 EditorGUI.BeginChangeCheck();
                 GUILayout.Space(2f);
                 GUILayout.BeginHorizontal();

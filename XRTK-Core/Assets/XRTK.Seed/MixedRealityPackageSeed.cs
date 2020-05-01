@@ -2,14 +2,41 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
+using Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
+using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 namespace XRTK.Seed
 {
+    internal class PackageManifest
+    {
+        internal static string ManifestFilePath => $"{Directory.GetParent(Application.dataPath)}\\Packages\\manifest.json";
+
+        [JsonProperty("scopedRegistries")]
+        public List<ScopedRegistry> ScopedRegistries { get; set; }
+
+        [JsonProperty("dependencies")]
+        public Dictionary<string, string> Dependencies { get; set; }
+    }
+
+    internal class ScopedRegistry
+    {
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("url")]
+        public string Url { get; set; }
+
+        [JsonProperty("scopes")]
+        public List<string> Scopes { get; set; }
+    }
+
     /// <summary>
     /// Sets up the Mixed Reality Toolkit package then self destructs.
     /// </summary>
@@ -19,20 +46,9 @@ namespace XRTK.Seed
     [InitializeOnLoad]
     public class MixedRealityPackageSeed
     {
-        private const string ScopedRegistryEntry = @"{
-  ""scopedRegistries"": [
-    {
-      ""name"": ""XRTK"",
-      ""url"": ""http://upm.xrtk.io:4873/"",
-      ""scopes"": [
-        ""com.xrtk""
-      ]
-    }
-  ],
-";
-
         static MixedRealityPackageSeed()
         {
+            EditorUtility.ClearProgressBar();
             EditorApplication.delayCall += Run;
         }
 
@@ -44,7 +60,7 @@ namespace XRTK.Seed
             {
                 assembly = Assembly.Load("XRTK");
             }
-            catch (Exception)
+            catch
             {
                 // ignored
             }
@@ -52,27 +68,79 @@ namespace XRTK.Seed
             {
                 if (assembly == null)
                 {
-                    var manifestFilePath = $"{Directory.GetParent(Application.dataPath)}\\Packages\\manifest.json";
+                    AddRegistry();
+                }
+            }
+        }
 
-                    if (File.Exists(manifestFilePath))
+        private static void AddRegistry()
+        {
+            try
+            {
+                if (File.Exists(PackageManifest.ManifestFilePath))
+                {
+                    var manifest = JsonConvert.DeserializeObject<PackageManifest>(File.ReadAllText(PackageManifest.ManifestFilePath));
+
+                    if (manifest.ScopedRegistries == null)
                     {
-                        var text = File.ReadAllText(manifestFilePath);
-
-                        if (!text.Contains("XRTK"))
-                        {
-                            text = text.TrimStart('{');
-                            text = $"{ScopedRegistryEntry}{text}";
-                        }
-
-                        File.WriteAllText(manifestFilePath, text);
-
-                        Client.Add("com.xrtk.sdk");
-                        AssetDatabase.DeleteAsset("Assets/XRTK.Seed");
+                        manifest.ScopedRegistries = new List<ScopedRegistry>();
                     }
-                    else
+
+                    manifest.ScopedRegistries.Add(new ScopedRegistry
                     {
-                        Debug.LogError("Failed to install XRTK, couldn't find the project manifest!");
-                    }
+                        Name = "XRTK",
+                        Url = "http://upm.xrtk.io:4873/",
+                        Scopes = new List<string> { "com.xrtk" }
+                    });
+
+                    File.WriteAllText(PackageManifest.ManifestFilePath, JsonConvert.SerializeObject(manifest, Formatting.Indented));
+                    ListXrtkPackages();
+                }
+                else
+                {
+                    Debug.LogError("Failed to install XRTK, couldn't find the project manifest!");
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
+        }
+
+        [MenuItem("Mixed Reality Toolkit/List upm packages")]
+        internal static void ListXrtkPackages()
+        {
+            var progress = 0f;
+            EditorUtility.DisplayProgressBar("Searching upm packages...", "Searching...", progress++ / 100f);
+            var request = Client.SearchAll(false);
+            var xrtkPackages = new List<PackageInfo>();
+
+            EditorApplication.update += Progress;
+
+            void Progress()
+            {
+                switch (request.Status)
+                {
+                    case StatusCode.Success:
+                        xrtkPackages.AddRange(request.Result.Where(package => package.name.Contains("com.xrtk.")));
+                        break;
+
+                    case StatusCode.InProgress:
+                        EditorUtility.DisplayProgressBar("Searching upm packages...", "Searching...", progress += 0.0025f);
+                        if (progress > 1f) { progress = 0f; }
+                        break;
+
+                    default:
+                        // case StatusCode.Failure:
+                        if (request.Status >= StatusCode.Failure) { Debug.Log(request.Error.message); }
+                        break;
+                }
+
+                if (request.IsCompleted)
+                {
+                    EditorUtility.ClearProgressBar();
+                    EditorApplication.update -= Progress;
+                    PackagePickerWindow.ShowPackageWindow(xrtkPackages);
                 }
             }
         }

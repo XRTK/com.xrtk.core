@@ -28,6 +28,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
         {
             new MixedRealityInteractionMapping("Spatial Pointer", AxisType.SixDof, DeviceInputType.SpatialPointer),
+            new MixedRealityInteractionMapping("Select", AxisType.Digital, DeviceInputType.Select),
+            new MixedRealityInteractionMapping("Grab", AxisType.SingleAxis, DeviceInputType.TriggerPress),
+            new MixedRealityInteractionMapping("Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger),
             new MixedRealityInteractionMapping("Yaw Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.E),
             new MixedRealityInteractionMapping("Yaw Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Q),
             new MixedRealityInteractionMapping("Pitch Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.F),
@@ -46,32 +49,32 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             float rotationDelta = rotationSpeed * Time.deltaTime;
             Vector3 rotationDeltaEulerAngles = Vector3.zero;
 
-            if (Interactions[1].BoolData)
+            if (Interactions[4].BoolData)
             {
                 rotationDeltaEulerAngles.y = rotationDelta;
             }
 
-            if (Interactions[2].BoolData)
+            if (Interactions[5].BoolData)
             {
                 rotationDeltaEulerAngles.y = -rotationDelta;
             }
 
-            if (Interactions[3].BoolData)
+            if (Interactions[6].BoolData)
             {
                 rotationDeltaEulerAngles.x = -rotationDelta;
             }
 
-            if (Interactions[4].BoolData)
+            if (Interactions[7].BoolData)
             {
                 rotationDeltaEulerAngles.x = rotationDelta;
             }
 
-            if (Interactions[5].BoolData)
+            if (Interactions[8].BoolData)
             {
                 rotationDeltaEulerAngles.z = -rotationDelta;
             }
 
-            if (Interactions[6].BoolData)
+            if (Interactions[9].BoolData)
             {
                 rotationDeltaEulerAngles.z = rotationDelta;
             }
@@ -86,12 +89,12 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             Vector3 mousePosition = Input.mousePosition;
 
-            if (Interactions[7].BoolData)
+            if (Interactions[10].BoolData)
             {
                 mousePosition.z += Time.deltaTime * depthMultiplier;
             }
 
-            if (Interactions[8].BoolData)
+            if (Interactions[11].BoolData)
             {
                 mousePosition.z -= Time.deltaTime * depthMultiplier;
             }

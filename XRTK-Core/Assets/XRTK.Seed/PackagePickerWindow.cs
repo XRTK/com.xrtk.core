@@ -92,7 +92,9 @@ namespace XRTK.Seed
             for (var i = 0; i < Packages.Count; i++)
             {
                 var (package, enabled) = Packages[i];
+
                 if (package.name.Equals("com.xrtk.core")) { continue; }
+
                 EditorGUI.BeginChangeCheck();
                 GUILayout.Space(2f);
                 GUILayout.BeginHorizontal();
@@ -100,6 +102,7 @@ namespace XRTK.Seed
                 enabled = GUILayout.Toggle(enabled, new GUIContent($"  {package.displayName.Replace("XRTK.", string.Empty)}", package.description));
                 GUILayout.EndHorizontal();
                 GUILayout.Space(2f);
+
                 if (EditorGUI.EndChangeCheck())
                 {
                     Packages[i] = new Tuple<PackageInfo, bool>(package, enabled);

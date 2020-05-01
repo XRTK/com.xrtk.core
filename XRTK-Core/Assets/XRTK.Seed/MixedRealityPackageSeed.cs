@@ -1,12 +1,12 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Newtonsoft.Json;
 using UnityEditor;
 using UnityEditor.PackageManager;
 using UnityEngine;
@@ -14,29 +14,6 @@ using PackageInfo = UnityEditor.PackageManager.PackageInfo;
 
 namespace XRTK.Seed
 {
-    internal class PackageManifest
-    {
-        internal static string ManifestFilePath => $"{Directory.GetParent(Application.dataPath)}\\Packages\\manifest.json";
-
-        [JsonProperty("scopedRegistries")]
-        public List<ScopedRegistry> ScopedRegistries { get; set; }
-
-        [JsonProperty("dependencies")]
-        public Dictionary<string, string> Dependencies { get; set; }
-    }
-
-    internal class ScopedRegistry
-    {
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("url")]
-        public string Url { get; set; }
-
-        [JsonProperty("scopes")]
-        public List<string> Scopes { get; set; }
-    }
-
     /// <summary>
     /// Sets up the Mixed Reality Toolkit package then self destructs.
     /// </summary>
@@ -107,7 +84,7 @@ namespace XRTK.Seed
             }
         }
 
-        [MenuItem("Mixed Reality Toolkit/List upm packages")]
+        [MenuItem("Mixed Reality Toolkit/List Packages")]
         internal static void ListXrtkPackages()
         {
             var progress = 0f;
@@ -130,8 +107,7 @@ namespace XRTK.Seed
                         if (progress > 1f) { progress = 0f; }
                         break;
 
-                    default:
-                        // case StatusCode.Failure:
+                    default: // case StatusCode.Failure:
                         if (request.Status >= StatusCode.Failure) { Debug.Log(request.Error.message); }
                         break;
                 }

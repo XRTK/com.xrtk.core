@@ -127,7 +127,7 @@ namespace XRTK.Seed
 
                 File.WriteAllText(PackageManifest.ManifestFilePath, JsonConvert.SerializeObject(manifest, Formatting.Indented));
                 AssetDatabase.DeleteAsset("Assets/XRTK.Seed");
-                AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+                EditorApplication.delayCall += () => AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                 Close();
             }
 

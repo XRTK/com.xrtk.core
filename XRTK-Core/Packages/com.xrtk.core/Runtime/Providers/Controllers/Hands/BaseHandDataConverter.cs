@@ -20,7 +20,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// Creates a new instance of the hand data converter.
         /// </summary>
         /// <param name="handedness">Handedness this converter is converting to.</param>
-        /// <param name="poseRecognizer">Pose recognizer instance to use for pose recognition.</param>
+        /// <param name="trackedPoses">Pose recognizer instance to use for pose recognition.</param>
         protected BaseHandDataConverter(Handedness handedness, IReadOnlyList<HandControllerPoseDefinition> trackedPoses)
         {
             Handedness = handedness;
@@ -28,10 +28,12 @@ namespace XRTK.Providers.Controllers.Hands
             this.trackedPoses = new Dictionary<string, HandControllerPoseDefinition>();
 
             int i = 0;
+
             foreach (var item in trackedPoses)
             {
                 var recordedHandData = JsonUtility.FromJson<RecordedHandJoints>(item.Data.text);
                 var recordedLocalJointPoses = new MixedRealityPose[HandData.JointCount];
+
                 for (int j = 0; j < recordedHandData.items.Length; j++)
                 {
                     var jointRecord = recordedHandData.items[j];

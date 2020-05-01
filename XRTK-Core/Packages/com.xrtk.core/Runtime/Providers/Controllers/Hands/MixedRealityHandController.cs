@@ -161,11 +161,11 @@ namespace XRTK.Providers.Controllers.Hands
             }
 
             // Update tracked hand pose input action.
-            if (LastPose != null && LastPose.Id.Equals(handData.TrackedPose?.Id))
+            if (LastPose != null && LastPose.Id.Equals(handData.TrackedPose.Id))
             {
                 MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, new MixedRealityInputAction(int.MaxValue, LastPose.Id, AxisType.Digital));
             }
-            else if (LastPose != null && !LastPose.Id.Equals(handData.TrackedPose?.Id))
+            else if (LastPose != null && !LastPose.Id.Equals(handData.TrackedPose.Id))
             {
                 MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, new MixedRealityInputAction(int.MaxValue, LastPose.Id, AxisType.Digital));
                 LastPose = null;

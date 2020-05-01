@@ -72,6 +72,12 @@ namespace XRTK.Providers.Controllers.Hands
 
             UpdateIsPinching(handData);
             UpdateIsPointing(handData);
+
+            // IsPinching > IsPointing
+            if (handData.IsPinching && handData.IsPointing)
+            {
+                handData.IsPointing = false;
+            }
         }
 
         private void UpdateIsPinching(HandData handData)

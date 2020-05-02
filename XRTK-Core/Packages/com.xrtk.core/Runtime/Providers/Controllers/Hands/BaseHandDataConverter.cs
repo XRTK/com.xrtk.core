@@ -201,7 +201,6 @@ namespace XRTK.Providers.Controllers.Hands
             var indexDistalPose = handData.Joints[(int)TrackedHandJoint.IndexDistalJoint];
             var pointerPosition = Vector3.Lerp(thumbProximalPose.Position, indexDistalPose.Position, .5f);
 
-            var wristPose = handData.Joints[(int)TrackedHandJoint.Wrist];
             var bodyPose = MixedRealityToolkit.CameraSystem.MainCameraRig.BodyTransform;
             var pointerRotation = bodyPose.localRotation;
 

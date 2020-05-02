@@ -124,9 +124,12 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         /// <param name="position">The simulated camera space position of the hand controller.</param>
         /// <param name="deltaRotation">The rotation delta applied to the hand since last update.</param>
-        /// <returns></returns>
+        /// <returns>Updated simulated hand data.</returns>
         public HandData GetSimulatedHandData(Vector3 position, Vector3 deltaRotation)
         {
+            // Reset the cached pointer pose.
+            HandData.PointerPose = MixedRealityPose.ZeroIdentity;
+
             // Read keyboard / mouse input to determine the root pose delta since last frame.
             var rootPoseDelta = new MixedRealityPose(position, Quaternion.Euler(deltaRotation));
 

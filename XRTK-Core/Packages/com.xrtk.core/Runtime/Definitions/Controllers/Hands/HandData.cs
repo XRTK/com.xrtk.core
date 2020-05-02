@@ -43,6 +43,11 @@ namespace XRTK.Definitions.Controllers.Hands
         public bool IsGrabbing { get; set; }
 
         /// <summary>
+        /// The hand's pointer pose.
+        /// </summary>
+        public MixedRealityPose PointerPose { get; set; }
+
+        /// <summary>
         /// Recognized hand pose, if any.
         /// Recognizable hand poses are defined in <see cref="BaseHandControllerDataProviderProfile.TrackedPoses"/>.
         /// </summary>

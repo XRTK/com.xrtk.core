@@ -59,6 +59,11 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         private HandControllerPoseDefinition LastPose { get; set; }
 
+        /// <summary>
+        /// The hand's pointer pose.
+        /// </summary>
+        private MixedRealityPose PointerPose { get; set; }
+
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
         {
@@ -77,7 +82,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Gets the current palm normal of the hand controller.
         /// </summary>
-        protected Vector3 PalmNormal => TryGetJointPose(TrackedHandJoint.Palm, out var pose) ? -pose.Up : Vector3.zero;
+        private Vector3 PalmNormal => TryGetJointPose(TrackedHandJoint.Palm, out var pose) ? -pose.Up : Vector3.zero;
 
         /// <inheritdoc />
         public bool IsPinching { get; private set; }
@@ -103,9 +108,10 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateIsIsPointing(handData);
             UpdateBounds();
             UpdateVelocity();
+            PointerPose = handData.PointerPose;
 
             // We assume hand controller position and roation to be available
-            // if we can successfully retrieve the wrist joint pose.
+            // if we can successfully retrieve the wrist pose.
             if (TryGetJointPose(TrackedHandJoint.Wrist, out var wristPose))
             {
                 IsPositionAvailable = true;
@@ -126,54 +132,48 @@ namespace XRTK.Providers.Controllers.Hands
                 MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, wristPose);
             }
 
-            // Update is pinching input action.
+            // Update is pinching input events.
             if (!lastIsPinching && IsPinching)
             {
-                Debug.Log("Pinch Start");
-                MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, MixedRealityInputAction.None);
+                MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, new MixedRealityInputAction(10, "Pinch Start", AxisType.Raw));
             }
             else if (lastIsPinching && !IsPinching)
             {
-                Debug.Log("Pinch End");
-                MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, MixedRealityInputAction.None);
+                MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, new MixedRealityInputAction(11, "Pinch End", AxisType.Raw));
             }
             else if (IsPinching)
             {
-                Debug.Log("Pinching");
-                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, MixedRealityInputAction.None);
+                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, new MixedRealityInputAction(12, "Pinching", AxisType.Raw));
             }
 
-            // Update is pointing input action.
+            // Update is pointing input events.
             if (!lastIsPointing && IsPointing)
             {
-                Debug.Log("Pointing Start");
-                MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, MixedRealityInputAction.None);
+                MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, new MixedRealityInputAction(20, "Pointing Start", AxisType.Raw));
             }
             else if (lastIsPointing && !IsPointing)
             {
-                Debug.Log("Pointing End");
-                MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, MixedRealityInputAction.None);
+                MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, new MixedRealityInputAction(21, "Pointing End", AxisType.Raw));
             }
             else if (IsPointing)
             {
-                Debug.Log("Pointing");
-                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, MixedRealityInputAction.None);
+                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, new MixedRealityInputAction(22, "Pointing", AxisType.Raw));
             }
 
-            // Update tracked hand pose input action.
+            // Update tracked hand pose input events.
             if (LastPose != null && LastPose.Id.Equals(handData.TrackedPose.Id))
             {
-                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, new MixedRealityInputAction(int.MaxValue, LastPose.Id, AxisType.Digital));
+                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, new MixedRealityInputAction(30, LastPose.Id, AxisType.Digital));
             }
             else if (LastPose != null && !LastPose.Id.Equals(handData.TrackedPose.Id))
             {
-                MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, new MixedRealityInputAction(int.MaxValue, LastPose.Id, AxisType.Digital));
+                MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, new MixedRealityInputAction(31, LastPose.Id, AxisType.Digital));
                 LastPose = null;
             }
             else if (handData.TrackedPose != null)
             {
                 var newPose = handData.TrackedPose;
-                MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, new MixedRealityInputAction(int.MaxValue, newPose.Id, AxisType.Digital));
+                MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, new MixedRealityInputAction(32, newPose.Id, AxisType.Digital));
                 LastPose = newPose;
             }
 
@@ -206,6 +206,19 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         #region Hand Bounds Implementation
+
+        /// <inheritdoc />
+        public bool TryGetBounds(TrackedHandBounds handBounds, out Bounds[] newBounds)
+        {
+            if (bounds.ContainsKey(handBounds))
+            {
+                newBounds = bounds[handBounds];
+                return true;
+            }
+
+            newBounds = null;
+            return false;
+        }
 
         private void UpdateBounds()
         {
@@ -468,17 +481,50 @@ namespace XRTK.Providers.Controllers.Hands
                 switch (interactionMapping.InputType)
                 {
                     case DeviceInputType.SpatialPointer:
-                        if (TryGetJointPose(TrackedHandJoint.Wrist, out var wristPose) &&
-                            TryGetJointPose(TrackedHandJoint.ThumbProximalJoint, out var thumbProximalPose) &&
-                            TryGetJointPose(TrackedHandJoint.IndexDistalJoint, out var indexDistalPose))
-                        {
-                            var pointerPosition = Vector3.Lerp(thumbProximalPose.Position, indexDistalPose.Position, .5f);
-                            var pointerRotation = Quaternion.LookRotation(wristPose.Up, wristPose.Forward);
-                            interactionMapping.PoseData = new MixedRealityPose(pointerPosition);
-                            interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
-                        }
+                        UpdateSpatialPointerMapping(interactionMapping);
+                        break;
+                    case DeviceInputType.Select:
+                        UpdateSelectMapping(interactionMapping);
+                        break;
+                    case DeviceInputType.SpatialGrip:
+                        UpdateSpatialGripMapping(interactionMapping);
+                        break;
+                    case DeviceInputType.IndexFinger:
+                        UpdateIndexFingerMapping(interactionMapping);
                         break;
                 }
+            }
+        }
+
+        private void UpdateSpatialGripMapping(MixedRealityInteractionMapping interactionMapping)
+        {
+            // TODO: Update spatial grip.
+        }
+
+        private void UpdateSpatialPointerMapping(MixedRealityInteractionMapping interactionMapping)
+        {
+            Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
+
+            interactionMapping.PoseData = PointerPose;
+            interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+        }
+
+        private void UpdateSelectMapping(MixedRealityInteractionMapping interactionMapping)
+        {
+            Debug.Assert(interactionMapping.AxisType == AxisType.Digital);
+
+            interactionMapping.BoolData = IsPinching;
+            interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+        }
+
+        private void UpdateIndexFingerMapping(MixedRealityInteractionMapping interactionMapping)
+        {
+            Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
+
+            if (TryGetJointPose(TrackedHandJoint.IndexTip, out var indexTipPose))
+            {
+                interactionMapping.PoseData = indexTipPose;
+                interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
             }
         }
 
@@ -513,6 +559,12 @@ namespace XRTK.Providers.Controllers.Hands
             velocityUpdateFrame = velocityUpdateFrame > velocityUpdateFrameInterval ? 0 : velocityUpdateFrame;
         }
 
+        /// <summary>
+        /// Updates the hand controller's internal is pinching state.
+        /// Instead of updating the value for each frame, is pinching state
+        /// is buffered for a few frames to stabilize and avoid false positives.
+        /// </summary>
+        /// <param name="handData">The hand data received for the current hand update frame.</param>
         private void UpdateIsPinching(HandData handData)
         {
             if (handData.IsTracked)
@@ -551,6 +603,12 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
+        /// <summary>
+        /// Updates the hand controller's internal is pointing state.
+        /// Instead of updating the value for each frame, is pointing state
+        /// is buffered for a few frames to stabilize and avoid false positives.
+        /// </summary>
+        /// <param name="handData">The hand data received for the current hand update frame.</param>
         private void UpdateIsIsPointing(HandData handData)
         {
             if (handData.IsTracked)
@@ -587,19 +645,6 @@ namespace XRTK.Providers.Controllers.Hands
                 isPointingBuffer.Clear();
                 IsPointing = false;
             }
-        }
-
-        /// <inheritdoc />
-        public bool TryGetBounds(TrackedHandBounds handBounds, out Bounds[] newBounds)
-        {
-            if (bounds.ContainsKey(handBounds))
-            {
-                newBounds = bounds[handBounds];
-                return true;
-            }
-
-            newBounds = null;
-            return false;
         }
 
         /// <inheritdoc />

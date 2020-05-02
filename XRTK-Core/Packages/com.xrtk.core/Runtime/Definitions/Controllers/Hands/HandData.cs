@@ -30,22 +30,22 @@ namespace XRTK.Definitions.Controllers.Hands
         /// <summary>
         /// Is the hand currently in a pinch pose?
         /// </summary>
-        public bool IsPinching { get; set; }
+        public bool IsPinching { get; set; } = false;
 
         /// <summary>
         /// Is the hand currently in a pointing pose?
         /// </summary>
-        public bool IsPointing { get; set; }
+        public bool IsPointing { get; set; } = false;
 
         /// <summary>
         /// Is the hand currently in a grabbing pose?
         /// </summary>
-        public bool IsGrabbing { get; set; }
+        public bool IsGrabbing { get; set; } = false;
 
         /// <summary>
         /// The hand's pointer pose.
         /// </summary>
-        public MixedRealityPose PointerPose { get; set; }
+        public MixedRealityPose PointerPose { get; set; } = MixedRealityPose.ZeroIdentity;
 
         /// <summary>
         /// Recognized hand pose, if any.

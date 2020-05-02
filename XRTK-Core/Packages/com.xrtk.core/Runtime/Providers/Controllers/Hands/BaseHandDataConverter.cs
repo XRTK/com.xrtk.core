@@ -47,7 +47,7 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        private const float TWO_CM_SQUARE_MAGNITUDE = 0.0004f;
+        private const float TWO_CENTIMETER_SQUARE_MAGNITUDE = 0.0004f;
 
         private readonly Dictionary<string, HandControllerPoseDefinition> trackedPoses;
         private readonly HandPoseFrame[] poseCompareFrames;
@@ -80,6 +80,8 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 handData.IsPointing = false;
             }
+
+            EnsurePointerPose(handData);
         }
 
         private void UpdateIsPinching(HandData handData)
@@ -88,7 +90,7 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 var thumbTipPose = handData.Joints[(int)TrackedHandJoint.ThumbTip];
                 var indexTipPose = handData.Joints[(int)TrackedHandJoint.IndexTip];
-                handData.IsPinching = (thumbTipPose.Position - indexTipPose.Position).sqrMagnitude < TWO_CM_SQUARE_MAGNITUDE;
+                handData.IsPinching = (thumbTipPose.Position - indexTipPose.Position).sqrMagnitude < TWO_CENTIMETER_SQUARE_MAGNITUDE;
             }
             else
             {
@@ -178,6 +180,32 @@ namespace XRTK.Providers.Controllers.Hands
             }
 
             return localJointPoses;
+        }
+
+        private void EnsurePointerPose(HandData handData)
+        {
+            if (handData.IsTracked && handData.PointerPose == MixedRealityPose.ZeroIdentity)
+            {
+                handData.PointerPose = ComputeFallbackPointerPose(handData);
+            }
+        }
+
+        /// <summary>
+        /// Naive fallback to compute a pointer pose for the hand controller, in case the platofrm didn't provide
+        /// one.
+        /// </summary>
+        /// <param name="handData">The hand data to update pointer pose for.</param>
+        /// <returns></returns>
+        private MixedRealityPose ComputeFallbackPointerPose(HandData handData)
+        {
+            var wristPose = handData.Joints[(int)TrackedHandJoint.Wrist];
+            var thumbProximalPose = handData.Joints[(int)TrackedHandJoint.ThumbProximalJoint];
+            var indexDistalPose = handData.Joints[(int)TrackedHandJoint.IndexDistalJoint];
+
+            var pointerPosition = Vector3.Lerp(thumbProximalPose.Position, indexDistalPose.Position, .5f);
+            var pointerRotation = indexDistalPose.Rotation;
+
+            return new MixedRealityPose(pointerPosition, pointerRotation);
         }
     }
 }

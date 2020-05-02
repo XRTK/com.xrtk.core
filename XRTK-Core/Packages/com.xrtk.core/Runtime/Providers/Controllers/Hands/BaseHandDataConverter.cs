@@ -63,24 +63,20 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The hand data retrieved from conversion.</param>
         protected void PostProcess(HandData handData)
         {
-            //if (TryRecognizePose(handData.Joints, out var recognizedPoseId))
+            // TODO: Work In Progress
+            // - Need to find a way to make TryRecognizePose more reliable
+            // - Optimize for maximum performance
+            //if (TryRecognizePose(handData.Joints, out var recognizedPose))
             //{
-            //    handData.PoseDefinition = recognizedPoseId;
+            //    handData.TrackedPose = recognizedPose;
             //}
             //else
             //{
-            //    handData.PoseDefinition = null;
+            //    handData.TrackedPose = null;
             //}
 
             UpdateIsPinching(handData);
             UpdateIsPointing(handData);
-
-            // IsPinching > IsPointing
-            if (handData.IsPinching && handData.IsPointing)
-            {
-                handData.IsPointing = false;
-            }
-
             EnsurePointerPose(handData);
         }
 
@@ -100,7 +96,7 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateIsPointing(HandData handData)
         {
-            if (handData.IsTracked)
+            if (handData.IsTracked && !handData.IsPinching)
             {
                 var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
                 var cameraTransform = MixedRealityToolkit.CameraSystem != null
@@ -182,6 +178,10 @@ namespace XRTK.Providers.Controllers.Hands
             return localJointPoses;
         }
 
+        /// <summary>
+        /// Ensures a pointer pose is set for the hand in case the platform didn't provide one.
+        /// </summary>
+        /// <param name="handData"></param>
         private void EnsurePointerPose(HandData handData)
         {
             if (handData.IsTracked && handData.PointerPose == MixedRealityPose.ZeroIdentity)
@@ -191,19 +191,19 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <summary>
-        /// Naive fallback to compute a pointer pose for the hand controller, in case the platofrm didn't provide
-        /// one.
+        /// Naive fallback to compute a pointer pose for the hand controller.
         /// </summary>
         /// <param name="handData">The hand data to update pointer pose for.</param>
-        /// <returns></returns>
+        /// <returns>Returns a pointer pose estimated using body transofrm data and hand data.</returns>
         private MixedRealityPose ComputeFallbackPointerPose(HandData handData)
         {
-            var wristPose = handData.Joints[(int)TrackedHandJoint.Wrist];
             var thumbProximalPose = handData.Joints[(int)TrackedHandJoint.ThumbProximalJoint];
             var indexDistalPose = handData.Joints[(int)TrackedHandJoint.IndexDistalJoint];
-
             var pointerPosition = Vector3.Lerp(thumbProximalPose.Position, indexDistalPose.Position, .5f);
-            var pointerRotation = indexDistalPose.Rotation;
+
+            var wristPose = handData.Joints[(int)TrackedHandJoint.Wrist];
+            var bodyPose = MixedRealityToolkit.CameraSystem.MainCameraRig.BodyTransform;
+            var pointerRotation = bodyPose.localRotation;
 
             return new MixedRealityPose(pointerPosition, pointerRotation);
         }

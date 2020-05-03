@@ -71,7 +71,6 @@ namespace XRTK.Definitions.InputSystem
         [SerializeField]
         [Tooltip("The Physics Layers, in prioritized order, that are used to determine the pointers target when raycasting.")]
         [FormerlySerializedAs("pointingRaycastLayerMasks")]
-        [FormerlySerializedAs("farInteractionRaycastLayerMasks")]
         private LayerMask[] pointerRaycastLayerMasks = { UnityEngine.Physics.DefaultRaycastLayers };
 
         /// <summary>

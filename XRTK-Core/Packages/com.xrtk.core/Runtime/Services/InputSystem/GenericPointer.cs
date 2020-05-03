@@ -83,8 +83,10 @@ namespace XRTK.Services.InputSystem.Pointers
         public IMixedRealityTeleportHotSpot TeleportHotSpot { get; set; }
 
         /// <inheritdoc />
-        public bool IsInteractionEnabled { get; set; }
+        public Collider NearInteractionCollider { get; } = null;
 
+        /// <inheritdoc />
+        public bool IsInteractionEnabled { get; protected set; }
 
         private bool isFocusLocked = false;
 
@@ -164,7 +166,7 @@ namespace XRTK.Services.InputSystem.Pointers
         public RayStep[] Rays { get; protected set; } = { new RayStep(Vector3.zero, Vector3.forward) };
 
         /// <inheritdoc />
-        public LayerMask[] PrioritizedLayerMasksOverride { get; set; }
+        public LayerMask[] PointerRaycastLayerMasksOverride { get; set; } = null;
 
         /// <inheritdoc />
         public IMixedRealityFocusHandler FocusHandler { get; set; }
@@ -228,23 +230,18 @@ namespace XRTK.Services.InputSystem.Pointers
 
         #region IEquality Implementation
 
-        public static bool Equals(IMixedRealityPointer left, IMixedRealityPointer right)
-        {
-            return left.Equals(right);
-        }
-
+        /// <inheritdoc />
         bool IEqualityComparer.Equals(object left, object right)
         {
             return left.Equals(right);
         }
 
+        /// <inheritdoc />
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) { return false; }
+            if (obj is null) { return false; }
             if (ReferenceEquals(this, obj)) { return true; }
-            if (obj.GetType() != GetType()) { return false; }
-
-            return Equals((IMixedRealityPointer)obj);
+            return obj.GetType() == GetType() && Equals((IMixedRealityPointer)obj);
         }
 
         private bool Equals(IMixedRealityPointer other)
@@ -252,11 +249,13 @@ namespace XRTK.Services.InputSystem.Pointers
             return other != null && PointerId == other.PointerId && string.Equals(PointerName, other.PointerName);
         }
 
+        /// <inheritdoc />
         int IEqualityComparer.GetHashCode(object obj)
         {
             return obj.GetHashCode();
         }
 
+        /// <inheritdoc />
         public override int GetHashCode()
         {
             unchecked

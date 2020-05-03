@@ -143,7 +143,7 @@ namespace XRTK.Providers.Controllers.Hands
             }
             else if (IsPinching)
             {
-                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, new MixedRealityInputAction(12, "Pinching", AxisType.Raw));
+                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, new MixedRealityInputAction(12, "Pinching", AxisType.Raw));
             }
 
             // Update is pointing input events.

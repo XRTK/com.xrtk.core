@@ -54,23 +54,15 @@ namespace XRTK.Providers.Controllers.Hands
         private Vector3 lastPalmNormal = Vector3.zero;
         private Vector3 lastPalmPosition = Vector3.zero;
 
-        /// <summary>
-        /// The last pose recognized for this hand controller.
-        /// </summary>
-        private HandControllerPoseDefinition LastPose { get; set; }
-
-        /// <summary>
-        /// The hand's pointer pose.
-        /// </summary>
-        private MixedRealityPose PointerPose { get; set; }
-
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
         {
             new MixedRealityInteractionMapping("Spatial Pointer", AxisType.SixDof, DeviceInputType.SpatialPointer),
             new MixedRealityInteractionMapping("Select", AxisType.Digital, DeviceInputType.Select),
+            new MixedRealityInteractionMapping("Point", AxisType.Digital, DeviceInputType.ButtonPress),
             new MixedRealityInteractionMapping("Grab", AxisType.SingleAxis, DeviceInputType.TriggerPress),
-            new MixedRealityInteractionMapping("Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger)
+            new MixedRealityInteractionMapping("Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger),
+            new MixedRealityInteractionMapping("Tracked Pose", AxisType.Raw, DeviceInputType.Hand)
         };
 
         /// <inheritdoc />
@@ -84,11 +76,42 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         private Vector3 PalmNormal => TryGetJointPose(TrackedHandJoint.Palm, out var pose) ? -pose.Up : Vector3.zero;
 
+        /// <summary>
+        /// Is pinching state from the previous update frame.
+        /// </summary>
+        private bool LastIsPinching { get; set; }
+
         /// <inheritdoc />
         public bool IsPinching { get; private set; }
 
+        /// <summary>
+        /// Is pointing state from the previous update frame.
+        /// </summary>
+        private bool LastIsPointing { get; set; }
+
         /// <inheritdoc />
         public bool IsPointing { get; private set; }
+
+        /// <summary>
+        /// Is grabbing state from the previous update frame.
+        /// </summary>
+        private bool LastIsGrabbing { get; set; }
+
+        /// <inheritdoc />
+        public bool IsGrabbing { get; private set; }
+
+        /// <summary>
+        /// The last pose recognized for this hand controller.
+        /// </summary>
+        private HandControllerPoseDefinition LastPose { get; set; }
+
+        /// <inheritdoc />
+        public HandControllerPoseDefinition Pose { get; private set; }
+
+        /// <summary>
+        /// The hand's pointer pose.
+        /// </summary>
+        private MixedRealityPose PointerPose { get; set; }
 
         /// <summary>
         /// Updates the hand controller with new hand data input.
@@ -99,8 +122,9 @@ namespace XRTK.Providers.Controllers.Hands
             if (!Enabled) { return; }
 
             var lastTrackingState = TrackingState;
-            var lastIsPinching = IsPinching;
-            var lastIsPointing = IsPointing;
+            LastIsPinching = IsPinching;
+            LastIsPointing = IsPointing;
+            LastPose = Pose;
 
             // Update internals.
             UpdateJoints(handData);
@@ -109,6 +133,7 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateBounds();
             UpdateVelocity();
             PointerPose = handData.PointerPose;
+            Pose = handData.TrackedPose;
 
             // We assume hand controller position and roation to be available
             // if we can successfully retrieve the wrist pose.
@@ -130,51 +155,6 @@ namespace XRTK.Providers.Controllers.Hands
             if (TrackingState == TrackingState.Tracked)
             {
                 MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, wristPose);
-            }
-
-            // Update is pinching input events.
-            if (!lastIsPinching && IsPinching)
-            {
-                MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, new MixedRealityInputAction(10, "Pinch Start", AxisType.Raw));
-            }
-            else if (lastIsPinching && !IsPinching)
-            {
-                MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, new MixedRealityInputAction(11, "Pinch End", AxisType.Raw));
-            }
-            else if (IsPinching)
-            {
-                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, new MixedRealityInputAction(12, "Pinching", AxisType.Raw));
-            }
-
-            // Update is pointing input events.
-            if (!lastIsPointing && IsPointing)
-            {
-                MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, new MixedRealityInputAction(20, "Pointing Start", AxisType.Raw));
-            }
-            else if (lastIsPointing && !IsPointing)
-            {
-                MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, new MixedRealityInputAction(21, "Pointing End", AxisType.Raw));
-            }
-            else if (IsPointing)
-            {
-                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, new MixedRealityInputAction(22, "Pointing", AxisType.Raw));
-            }
-
-            // Update tracked hand pose input events.
-            if (LastPose != null && LastPose.Id.Equals(handData.TrackedPose.Id))
-            {
-                MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, new MixedRealityInputAction(30, LastPose.Id, AxisType.Digital));
-            }
-            else if (LastPose != null && !LastPose.Id.Equals(handData.TrackedPose.Id))
-            {
-                MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, new MixedRealityInputAction(31, LastPose.Id, AxisType.Digital));
-                LastPose = null;
-            }
-            else if (handData.TrackedPose != null)
-            {
-                var newPose = handData.TrackedPose;
-                MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, new MixedRealityInputAction(32, newPose.Id, AxisType.Digital));
-                LastPose = newPose;
             }
 
             // Update hand controller interaction mappings.
@@ -486,45 +466,95 @@ namespace XRTK.Providers.Controllers.Hands
                     case DeviceInputType.Select:
                         UpdateSelectMapping(interactionMapping);
                         break;
+                    case DeviceInputType.ButtonPress:
+                        UpdatePointingMapping(interactionMapping);
+                        break;
                     case DeviceInputType.SpatialGrip:
                         UpdateSpatialGripMapping(interactionMapping);
                         break;
                     case DeviceInputType.IndexFinger:
                         UpdateIndexFingerMapping(interactionMapping);
                         break;
+                    case DeviceInputType.Hand:
+                        UpdateHandPoseMapping(interactionMapping);
+                        break;
                 }
+
+                interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
             }
         }
 
         private void UpdateSpatialGripMapping(MixedRealityInteractionMapping interactionMapping)
         {
-            // TODO: Update spatial grip.
+            Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
+            if (TryGetJointPose(TrackedHandJoint.Palm, out var palmPose))
+            {
+                interactionMapping.PoseData = palmPose;
+            }
         }
 
         private void UpdateSpatialPointerMapping(MixedRealityInteractionMapping interactionMapping)
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
-
             interactionMapping.PoseData = PointerPose;
-            interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
         }
 
         private void UpdateSelectMapping(MixedRealityInteractionMapping interactionMapping)
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.Digital);
 
-            interactionMapping.BoolData = IsPinching;
-            interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+            if (!LastIsPinching && IsPinching)
+            {
+                interactionMapping.BoolData = true;
+            }
+            else if (LastIsPinching && !IsPinching)
+            {
+                interactionMapping.BoolData = false;
+            }
+            else if (IsPinching)
+            {
+                interactionMapping.BoolData = LastIsPinching;
+            }
+        }
+
+        private void UpdatePointingMapping(MixedRealityInteractionMapping interactionMapping)
+        {
+            Debug.Assert(interactionMapping.AxisType == AxisType.Digital);
+
+            if (!LastIsPointing && IsPointing)
+            {
+                interactionMapping.BoolData = true;
+            }
+            else if (LastIsPointing && !IsPointing)
+            {
+                interactionMapping.BoolData = false;
+            }
+            else if (IsPointing)
+            {
+                interactionMapping.BoolData = LastIsPointing;
+            }
         }
 
         private void UpdateIndexFingerMapping(MixedRealityInteractionMapping interactionMapping)
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
-
             if (TryGetJointPose(TrackedHandJoint.IndexTip, out var indexTipPose))
             {
                 interactionMapping.PoseData = indexTipPose;
-                interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+            }
+        }
+
+        private void UpdateHandPoseMapping(MixedRealityInteractionMapping interactionMapping)
+        {
+            Debug.Assert(interactionMapping.AxisType == AxisType.Raw);
+
+            if (string.Equals(LastPose?.Id, Pose?.Id))
+            {
+                interactionMapping.RawData = LastPose?.Id;
+            }
+            else if (!string.Equals(LastPose?.Id, Pose?.Id))
+            {
+                interactionMapping.RawData = Pose?.Id;
             }
         }
 

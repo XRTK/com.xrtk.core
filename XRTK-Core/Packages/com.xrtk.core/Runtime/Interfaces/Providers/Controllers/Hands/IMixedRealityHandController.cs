@@ -24,6 +24,16 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         bool IsPointing { get; }
 
         /// <summary>
+        /// Gets whether the hand is currently in grabbing pose.
+        /// </summary>
+        bool IsGrabbing { get; }
+
+        /// <summary>
+        /// Gets the hands current pose.
+        /// </summary>
+        HandControllerPoseDefinition Pose { get; }
+
+        /// <summary>
         /// Get the hands bounds of a given type, if they are available.
         /// </summary>
         /// <param name="handBounds">The requested hand bounds.</param>

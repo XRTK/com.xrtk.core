@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Extensions;
@@ -119,7 +120,7 @@ namespace XRTK.Editor.Utilities
             var utility = canvas.GetComponent<CanvasUtility>();
 
             // Remove the helper if we don't need it.
-            if (removeUtility || !IsUtilityValid)
+            if (removeUtility)
             {
                 if (utility != null)
                 {

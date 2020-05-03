@@ -96,6 +96,16 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <inheritdoc />
         protected override void UpdateSimulatedController(IMixedRealitySimulatedController simulatedController)
         {
+            // Ignore updates if the simulated controllers are not tracked, but only visible.
+            if (simulatedController.ControllerHandedness == Handedness.Left && !LeftControllerIsTracked)
+            {
+                return;
+            }
+            else if (simulatedController.ControllerHandedness == Handedness.Right && !RightControllerIsTracked)
+            {
+                return;
+            }
+
             var simulatedHandController = (MixedRealityHandController)simulatedController;
             var converter = simulatedHandController.ControllerHandedness == Handedness.Left
                 ? leftHandConverter

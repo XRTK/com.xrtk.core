@@ -63,7 +63,7 @@ namespace XRTK.Interfaces.InputSystem
         bool IsInteractionEnabled { get; }
 
         /// <summary>
-        /// The far interaction pointer's extent when raycasting.
+        /// The pointer's extent when raycasting.
         /// </summary>
         float PointerExtent { get; set; }
 

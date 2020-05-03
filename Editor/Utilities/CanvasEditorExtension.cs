@@ -119,7 +119,7 @@ namespace XRTK.Editor.Utilities
             var utility = canvas.GetComponent<CanvasUtility>();
 
             // Remove the helper if we don't need it.
-            if (removeUtility || !IsUtilityValid)
+            if (removeUtility)
             {
                 if (utility != null)
                 {

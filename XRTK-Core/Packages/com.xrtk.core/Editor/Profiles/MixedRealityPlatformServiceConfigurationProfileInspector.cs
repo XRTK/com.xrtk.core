@@ -17,7 +17,7 @@ using XRTK.Services;
 namespace XRTK.Editor.Profiles
 {
     [CustomEditor(typeof(MixedRealityPlatformServiceConfigurationProfile))]
-    public class MixedRealityServiceConfigurationProfileInspector : BaseMixedRealityProfileInspector
+    public class MixedRealityPlatformServiceConfigurationProfileInspector : BaseMixedRealityProfileInspector
     {
         private readonly GUIContent profileContent = new GUIContent("Profile", "The settings profile for this service.");
         private ReorderableList configurationList;
@@ -183,18 +183,23 @@ namespace XRTK.Editor.Profiles
             GUI.enabled = false;
             var runtimePlatformProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
             var globalRuntimePlatformProperty = platformEntries.FindPropertyRelative("runtimePlatforms");
+            bool addPlatforms = false;
 
             if (runtimePlatformProperty.arraySize != globalRuntimePlatformProperty.arraySize)
             {
+                addPlatforms = true;
                 runtimePlatformProperty.ClearArray();
             }
 
             if (globalRuntimePlatformProperty.arraySize > 0)
             {
-
                 for (int i = 0; i < globalRuntimePlatformProperty.arraySize; i++)
                 {
-                    runtimePlatformProperty.InsertArrayElementAtIndex(i);
+                    if (addPlatforms)
+                    {
+                        runtimePlatformProperty.InsertArrayElementAtIndex(i);
+                    }
+
                     var globalPlatform = globalRuntimePlatformProperty.GetArrayElementAtIndex(i).FindPropertyRelative("reference").stringValue;
                     runtimePlatformProperty.GetArrayElementAtIndex(i).FindPropertyRelative("reference").stringValue = globalPlatform;
                 }

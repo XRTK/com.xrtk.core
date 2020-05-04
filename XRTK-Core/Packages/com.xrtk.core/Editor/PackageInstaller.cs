@@ -57,7 +57,7 @@ namespace XRTK.Editor
                 return false;
             }
 
-            GuidRegenerator.RegenerateGuids(destinationPath, false);
+            GuidRegenerator.RegenerateGuids(Path.GetFullPath(destinationPath), false);
             EditorApplication.delayCall += () => { AddConfigurations(profilePaths); };
             return true;
         }

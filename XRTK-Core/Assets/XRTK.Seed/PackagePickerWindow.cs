@@ -111,6 +111,8 @@ namespace XRTK.Seed
 
             GUILayout.FlexibleSpace();
 
+            GUI.enabled = !EditorPrefs.HasKey("XRTK"); // Don't enable in XRTK-Core project
+
             if (GUILayout.Button("Add selected packages", EditorStyles.miniButton, GUILayout.Height(16f)))
             {
                 var manifest = JsonConvert.DeserializeObject<PackageManifest>(File.ReadAllText(PackageManifest.ManifestFilePath));
@@ -119,7 +121,7 @@ namespace XRTK.Seed
                 {
                     var (package, enabled) = item;
 
-                    if (enabled)
+                    if (enabled && !manifest.Dependencies.ContainsKey(package.name))
                     {
                         manifest.Dependencies.Add(package.name, package.version);
                     }
@@ -131,6 +133,7 @@ namespace XRTK.Seed
                 Close();
             }
 
+            GUI.enabled = true;
             EditorGUILayout.Space();
             GUILayout.EndVertical();
         }

@@ -25,9 +25,9 @@ namespace XRTK.Editor
         /// <summary>
         /// Attempt to copy any assets found in the source path into the project.
         /// </summary>
-        /// <param name="sourcePath">The source path</param>
-        /// <param name="destinationPath"></param>
-        /// <param name="regenerateGuids"></param>
+        /// <param name="sourcePath">The source path of the assets to be installed. This should typically be from a hidden upm package folder marked with a "~".</param>
+        /// <param name="destinationPath">The destination path, typically inside the projects "Assets" directory.</param>
+        /// <param name="regenerateGuids">Should the guids for the copied assets be regenerated?</param>
         /// <returns>Returns true if the profiles were successfully copies, installed, and added to the <see cref="MixedRealityToolkitRootProfile"/>.</returns>
         public static bool TryInstallAssets(string sourcePath, string destinationPath, bool regenerateGuids = true)
         {

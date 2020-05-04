@@ -84,11 +84,16 @@ namespace XRTK.Editor
                     foreach (var configuration in platformConfigurationProfile.Configurations)
                     {
                         var configurationType = configuration.InstancedType.Type;
-                        Debug.Log(configuration.InstancedType.Type.Name);
+
+                        if (configurationType == null)
+                        {
+                            Debug.LogError($"Failed to find a valid {nameof(configuration.InstancedType)} for {configuration.Name}!");
+                            continue;
+                        }
 
                         switch (configurationType)
                         {
-                            case Type cameraDataProvider when typeof(IMixedRealityCameraDataProvider).IsAssignableFrom(configurationType):
+                            case Type _ when typeof(IMixedRealityCameraDataProvider).IsAssignableFrom(configurationType):
                                 var cameraSystemProfile = rootProfile.CameraSystemProfile;
                                 var cameraDataProviderConfiguration = new MixedRealityServiceConfiguration<IMixedRealityCameraDataProvider>(configuration.InstancedType, configuration.Name, configuration.Priority, configuration.RuntimePlatforms, configuration.Profile);
 
@@ -99,7 +104,7 @@ namespace XRTK.Editor
                                 }
                                 break;
 
-                            case Type inputDataProvider when typeof(IMixedRealityInputDataProvider).IsAssignableFrom(configurationType):
+                            case Type _ when typeof(IMixedRealityInputDataProvider).IsAssignableFrom(configurationType):
                                 var inputSystemProfile = rootProfile.InputSystemProfile;
                                 var inputDataProviderConfiguration = new MixedRealityServiceConfiguration<IMixedRealityInputDataProvider>(configuration.InstancedType, configuration.Name, configuration.Priority, configuration.RuntimePlatforms, configuration.Profile);
 
@@ -110,7 +115,7 @@ namespace XRTK.Editor
                                 }
                                 break;
 
-                            case Type spatialDataProvider when typeof(IMixedRealitySpatialObserverDataProvider).IsAssignableFrom(configurationType):
+                            case Type _ when typeof(IMixedRealitySpatialObserverDataProvider).IsAssignableFrom(configurationType):
                                 var spatialAwarenessSystemProfile = rootProfile.SpatialAwarenessProfile;
                                 var spatialObserverConfiguration = new MixedRealityServiceConfiguration<IMixedRealitySpatialObserverDataProvider>(configuration.InstancedType, configuration.Name, configuration.Priority, configuration.RuntimePlatforms, configuration.Profile);
 

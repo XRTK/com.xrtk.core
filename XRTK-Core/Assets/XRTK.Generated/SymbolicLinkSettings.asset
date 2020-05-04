@@ -37,3 +37,6 @@ MonoBehaviour:
   - sourceRelativePath: /Submodules/WindowsMixedReality/XRTK.WindowsMixedReality/Packages/com.xrtk.wmr/Profiles~
     targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/WindowsMixedReality/Profiles
     isActive: 1
+  - sourceRelativePath: /Submodules/SDK/XRTK.SDK/Packages/com.xrtk.sdk/Prefabs~
+    targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/SDK/Prefabs
+    isActive: 1

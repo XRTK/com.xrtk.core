@@ -9,6 +9,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Editor.Extensions;
+using XRTK.Editor.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Providers;
@@ -21,13 +22,23 @@ namespace XRTK.Editor
     {
         private const string META_SUFFIX = ".meta";
 
+        /// <summary>
+        /// Attempt to copy any assets found in the source path into the project.
+        /// </summary>
+        /// <param name="sourcePath"></param>
+        /// <param name="destinationPath"></param>
+        /// <returns></returns>
         public static bool TryInstallProfiles(string sourcePath, string destinationPath)
         {
             var anyFail = false;
             var profilePaths = Directory.EnumerateFiles(Path.GetFullPath(sourcePath), "*.asset", SearchOption.AllDirectories).ToList();
 
+            EditorUtility.DisplayProgressBar("Copying profiles...", $"{sourcePath} -> {destinationPath}", 0);
+
             for (var i = 0; i < profilePaths.Count; i++)
             {
+                EditorUtility.DisplayProgressBar("Copying profiles...", Path.GetFileNameWithoutExtension(profilePaths[i]), i / (float)profilePaths.Count);
+
                 try
                 {
                     profilePaths[i] = CopyAsset(sourcePath, profilePaths[i], $"{destinationPath}\\Profiles");
@@ -39,9 +50,16 @@ namespace XRTK.Editor
                 }
             }
 
-            EditorApplication.delayCall += () => { AddConfigurations(profilePaths); };
+            EditorUtility.ClearProgressBar();
 
-            return !anyFail;
+            if (anyFail)
+            {
+                return false;
+            }
+
+            GuidRegenerator.RegenerateGuids(destinationPath, false);
+            EditorApplication.delayCall += () => { AddConfigurations(profilePaths); };
+            return true;
         }
 
         private static void AddConfigurations(List<string> profiles)

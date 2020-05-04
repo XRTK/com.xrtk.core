@@ -16,7 +16,7 @@ MonoBehaviour:
   - instancedType:
       reference: a1e7bfed-f290-43e3-84b6-01c740cc9614
     name: Lumin Spatial Mesh Observer
-    priority: 3
+    priority: 0
     platformEntries:
       runtimePlatforms:
       - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
@@ -25,7 +25,7 @@ MonoBehaviour:
   - instancedType:
       reference: 0861c801-e20e-4e76-8c4e-711c1cb43ddf
     name: Windows Mixed Reality Spatial Mesh Observer
-    priority: 3
+    priority: 1
     platformEntries:
       runtimePlatforms:
       - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc

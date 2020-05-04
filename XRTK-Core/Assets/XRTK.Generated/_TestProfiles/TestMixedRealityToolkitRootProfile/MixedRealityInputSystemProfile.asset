@@ -83,7 +83,7 @@ MonoBehaviour:
   - instancedType:
       reference: 0de5da40-feb8-4891-b9b2-942eafd041b9
     name: Oculus Controller Data Provider
-    priority: 1
+    priority: 6
     platformEntries:
       runtimePlatforms:
       - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
@@ -92,7 +92,7 @@ MonoBehaviour:
   - instancedType:
       reference: ea666456-baef-4412-a829-a4c7132e98c3
     name: Oculus Hand Controller Data Provider
-    priority: 2
+    priority: 7
     platformEntries:
       runtimePlatforms:
       - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
@@ -101,7 +101,7 @@ MonoBehaviour:
   - instancedType:
       reference: 851006a2-0762-49aa-80a5-a01c9a8dbb58
     name: Lumin Controller Data Provider
-    priority: 1
+    priority: 8
     platformEntries:
       runtimePlatforms:
       - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
@@ -110,7 +110,7 @@ MonoBehaviour:
   - instancedType:
       reference: 9511d571-2e24-41ef-aa7e-df4432617de1
     name: Lumin Hand Controller Data Provider
-    priority: 2
+    priority: 9
     platformEntries:
       runtimePlatforms:
       - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
@@ -119,7 +119,7 @@ MonoBehaviour:
   - instancedType:
       reference: 12e02ef8-4177-46ab-bc50-19af7148bd4a
     name: Windows Mixed Reality Controller Data Provider
-    priority: 1
+    priority: 10
     platformEntries:
       runtimePlatforms:
       - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
@@ -130,7 +130,7 @@ MonoBehaviour:
   - instancedType:
       reference: f2e0d0ef-6393-4f96-90cc-df78ca1dc8a2
     name: Windows Mixed Reality Hand Controller Data Provider
-    priority: 2
+    priority: 11
     platformEntries:
       runtimePlatforms:
       - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc

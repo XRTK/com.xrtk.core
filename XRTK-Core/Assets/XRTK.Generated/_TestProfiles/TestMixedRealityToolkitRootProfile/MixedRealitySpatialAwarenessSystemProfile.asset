@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80a1ad34855542cbbd15a6a6dde2e935, type: 3}
+  m_Name: MixedRealitySpatialAwarenessSystemProfile
+  m_EditorClassIdentifier: 
+  configurations:
+  - instancedType:
+      reference: a1e7bfed-f290-43e3-84b6-01c740cc9614
+    name: Lumin Spatial Mesh Observer
+    priority: 3
+    platformEntries:
+      runtimePlatforms:
+      - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
+      - reference: 39ebb366-21a7-4d08-9412-036b32976d0c
+    profile: {fileID: 0}
+  - instancedType:
+      reference: 0861c801-e20e-4e76-8c4e-711c1cb43ddf
+    name: Windows Mixed Reality Spatial Mesh Observer
+    priority: 3
+    platformEntries:
+      runtimePlatforms:
+      - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
+      - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
+      - reference: 7dc72b4e-34f6-4b26-afd7-cde0c51f83a3
+      - reference: 7dc72b4e-34f6-4b26-afd7-cde0c51f83a3
+    profile: {fileID: 0}
+  meshDisplayOption: 0
+  globalMeshObserverProfile: {fileID: 11400000, guid: 6cbcb6266beaa724780d064525cf2896,
+    type: 2}
+  globalSurfaceObserverProfile: {fileID: 0}

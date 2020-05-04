@@ -80,6 +80,7 @@ namespace XRTK.Editor.PropertyDrawers
             if (EditorGUI.EndChangeCheck())
             {
                 property.objectReferenceValue = selectedProfile;
+                property.serializedObject.ApplyModifiedProperties();
 
                 if (!(selectedProfile is null) &&
                     !(selectedProfile is MixedRealityToolkitRootProfile))

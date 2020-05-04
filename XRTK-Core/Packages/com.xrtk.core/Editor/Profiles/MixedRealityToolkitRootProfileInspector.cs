@@ -249,7 +249,6 @@ namespace XRTK.Editor.Profiles
 
             // Native Library System configuration
             EditorGUILayout.Space();
-            EditorGUILayout.LabelField("Native Library System Settings", EditorStyles.boldLabel);
             enableNativeLibrarySystem.boolValue = EditorGUILayout.ToggleLeft("Native Library System", enableNativeLibrarySystem.boolValue, EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
             typeLabel.tooltip = nativeLibrarySystemType.tooltip;

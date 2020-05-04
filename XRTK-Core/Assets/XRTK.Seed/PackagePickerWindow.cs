@@ -74,6 +74,12 @@ namespace XRTK.Seed
                 isNew = false;
             }
 
+            if (Packages.Count == 0)
+            {
+                Debug.LogWarning($"{nameof(PackagePickerWindow)}.{nameof(Packages)} is empty!");
+                Close();
+            }
+
             GUILayout.BeginVertical();
             GUILayout.Label(Logo, new GUIStyle
             {

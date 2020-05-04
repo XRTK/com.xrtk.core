@@ -31,18 +31,31 @@ namespace XRTK.Editor
         /// <returns>Returns true if the profiles were successfully copies, installed, and added to the <see cref="MixedRealityToolkitRootProfile"/>.</returns>
         public static bool TryInstallAssets(string sourcePath, string destinationPath, bool regenerateGuids = true)
         {
-            var anyFail = false;
-            var profilePaths = Directory.EnumerateFiles(Path.GetFullPath(sourcePath), "*.asset", SearchOption.AllDirectories).ToList();
+            if (Directory.Exists(destinationPath))
+            {
+                var installedAssets = Directory.EnumerateFiles(Path.GetFullPath(destinationPath), "*.asset", SearchOption.AllDirectories).ToList();
+
+                for (int i = 0; i < installedAssets.Count; i++)
+                {
+                    installedAssets[i] = installedAssets[i].Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty).ToForwardSlashes();
+                }
+
+                EditorApplication.delayCall += () => AddConfigurations(installedAssets);
+                return true;
+            }
 
             EditorUtility.DisplayProgressBar("Copying assets...", $"{sourcePath} -> {destinationPath}", 0);
+            var assetPaths = Directory.EnumerateFiles(Path.GetFullPath(sourcePath), "*.asset", SearchOption.AllDirectories).ToList();
 
-            for (var i = 0; i < profilePaths.Count; i++)
+            var anyFail = false;
+
+            for (var i = 0; i < assetPaths.Count; i++)
             {
-                EditorUtility.DisplayProgressBar("Copying assets...", Path.GetFileNameWithoutExtension(profilePaths[i]), i / (float)profilePaths.Count);
+                EditorUtility.DisplayProgressBar("Copying assets...", Path.GetFileNameWithoutExtension(assetPaths[i]), i / (float)assetPaths.Count);
 
                 try
                 {
-                    profilePaths[i] = CopyAsset(sourcePath, profilePaths[i], destinationPath);
+                    assetPaths[i] = CopyAsset(sourcePath, assetPaths[i], destinationPath);
                 }
                 catch (Exception e)
                 {
@@ -63,7 +76,7 @@ namespace XRTK.Editor
                 GuidRegenerator.RegenerateGuids(Path.GetFullPath(destinationPath), false);
             }
 
-            EditorApplication.delayCall += () => { AddConfigurations(profilePaths); };
+            EditorApplication.delayCall += () => AddConfigurations(assetPaths);
             return true;
         }
 

@@ -8,7 +8,6 @@ using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions;
-using XRTK.Definitions.Platforms;
 using XRTK.Definitions.Utilities;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.PropertyDrawers;
@@ -17,7 +16,7 @@ using XRTK.Services;
 
 namespace XRTK.Editor.Profiles
 {
-    [CustomEditor(typeof(MixedRealityServiceConfigurationProfile))]
+    [CustomEditor(typeof(MixedRealityPlatformServiceConfigurationProfile))]
     public class MixedRealityServiceConfigurationProfileInspector : BaseMixedRealityProfileInspector
     {
         private readonly GUIContent profileContent = new GUIContent("Profile", "The settings profile for this service.");
@@ -73,6 +72,14 @@ namespace XRTK.Editor.Profiles
         public override void OnInspectorGUI()
         {
             RenderHeader("Use this configuration profile to setup all of the services you would like to add to any existing profile configurations when the target platform package is installed");
+            EditorGUILayout.Space();
+
+            if (GUILayout.Button("Install Platform Service Configuration"))
+            {
+                EditorApplication.delayCall += () => PackageInstaller.InstallConfiguration(target as MixedRealityPlatformServiceConfigurationProfile, MixedRealityToolkit.Instance.ActiveProfile);
+            }
+
+            EditorGUILayout.Space();
             EditorGUILayout.Space();
 
             serializedObject.Update();

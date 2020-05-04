@@ -79,6 +79,11 @@ namespace XRTK.Editor
         /// </summary>
         public const string HIDDEN_PROFILES_PATH = "Profiles~";
 
+        /// <summary>
+        /// The hidden prefab path for each XRTK package.
+        /// </summary>
+        public const string HIDDEN_PREFABS_PATH = "Prefabs~";
+
         private static readonly GUIContent GeneratedProfilePathContent = new GUIContent("New Generated Profiles Default Path:", "When generating new profiles, their files are saved in this location.");
         private const string PROFILE_GENERATION_PATH_KEY = "_MixedRealityToolkit_Editor_Profile_Generation_Path";
         private const string DEFAULT_GENERATION_PATH = "Assets/XRTK.Generated/";

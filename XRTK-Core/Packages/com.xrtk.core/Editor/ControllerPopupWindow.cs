@@ -77,6 +77,11 @@ namespace XRTK.Editor
             currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(controllerDataProviderProfile);
         }
 
+        /// <summary>
+        /// Shows the controller pop out window using the provided profile and serialized interaction mapping property
+        /// </summary>
+        /// <param name="profile"></param>
+        /// <param name="interactionMappingProfiles"></param>
         public static void Show(MixedRealityControllerMappingProfile profile, SerializedProperty interactionMappingProfiles)
         {
             var handednessTitleText = profile.Handedness != Handedness.None ? $"{profile.Handedness} Hand " : string.Empty;
@@ -86,8 +91,14 @@ namespace XRTK.Editor
                 window.Close();
             }
 
-            window = (ControllerPopupWindow)CreateInstance(typeof(ControllerPopupWindow));
+            if (profile.ControllerType?.Type == null)
+            {
+                Debug.LogError($"No controller type defined for {profile.name}");
+                return;
+            }
+
             window.currentControllerName = profile.ControllerType.Type.Name;
+            window = (ControllerPopupWindow)CreateInstance(typeof(ControllerPopupWindow));
 
             window.titleContent = new GUIContent($"{window.currentControllerName} {handednessTitleText}Input Action Assignment");
             window.controllerDataProviderProfile = profile;

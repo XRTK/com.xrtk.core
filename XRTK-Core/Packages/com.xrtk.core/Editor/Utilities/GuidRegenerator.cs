@@ -19,18 +19,6 @@ namespace XRTK.Editor.Utilities
     /// </summary>
     internal static class GuidRegenerator
     {
-        private static readonly string[] DefaultFileExtensions = {
-            "*.meta",
-            "*.mat",
-            "*.anim",
-            "*.prefab",
-            "*.unity",
-            "*.asset",
-            "*.guiskin",
-            "*.fontsettings",
-            "*.controller",
-        };
-
         /// <summary>
         /// Regenerate the guids for assets located in the <see cref="assetsRootPath"/>.
         /// </summary>
@@ -58,12 +46,7 @@ namespace XRTK.Editor.Utilities
         private static void RegenerateGuidsInternal(string assetsRootPath)
         {
             // Get list of working files
-            var filesPaths = new List<string>();
-
-            foreach (var extension in DefaultFileExtensions)
-            {
-                filesPaths.AddRange(Directory.GetFiles(assetsRootPath, extension, SearchOption.AllDirectories));
-            }
+            var filesPaths = UnityFileHelper.GetUnityFiles(assetsRootPath);
 
             // Create dictionary to hold old-to-new GUID map
             var guidOldToNewMap = new Dictionary<string, string>();

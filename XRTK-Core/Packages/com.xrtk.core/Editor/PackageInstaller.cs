@@ -29,11 +29,11 @@ namespace XRTK.Editor
         /// <param name="destinationPath">The destination path, typically inside the projects "Assets" directory.</param>
         /// <param name="regenerateGuids">Should the guids for the copied assets be regenerated?</param>
         /// <returns>Returns true if the profiles were successfully copies, installed, and added to the <see cref="MixedRealityToolkitRootProfile"/>.</returns>
-        public static bool TryInstallAssets(string sourcePath, string destinationPath, string extension = "asset", bool regenerateGuids = true)
+        public static bool TryInstallAssets(string sourcePath, string destinationPath, bool regenerateGuids = true)
         {
             if (Directory.Exists(destinationPath))
             {
-                var installedAssets = Directory.EnumerateFiles(Path.GetFullPath(destinationPath), $"*.{extension}", SearchOption.AllDirectories).ToList();
+                var installedAssets = UnityFileHelper.GetUnityFiles(destinationPath);
 
                 for (int i = 0; i < installedAssets.Count; i++)
                 {
@@ -49,7 +49,7 @@ namespace XRTK.Editor
             }
 
             EditorUtility.DisplayProgressBar("Copying assets...", $"{sourcePath} -> {destinationPath}", 0);
-            var assetPaths = Directory.EnumerateFiles(Path.GetFullPath(sourcePath), $"*.{extension}", SearchOption.AllDirectories).ToList();
+            var assetPaths = UnityFileHelper.GetUnityFiles(sourcePath);
 
             var anyFail = false;
 
@@ -88,7 +88,7 @@ namespace XRTK.Editor
         {
             AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
 
-            foreach (var profile in profiles)
+            foreach (var profile in profiles.Where(x => x.EndsWith(".asset")))
             {
                 var platformConfigurationProfile = AssetDatabase.LoadAssetAtPath<MixedRealityPlatformServiceConfigurationProfile>(profile);
 
@@ -123,7 +123,6 @@ namespace XRTK.Editor
                 Directory.CreateDirectory(Directory.GetParent(destinationPath).FullName);
 
                 File.Copy(sourceAssetPath, destinationPath);
-                File.Copy($"{sourceAssetPath}{META_SUFFIX}", $"{destinationPath}{META_SUFFIX}");
             }
 
             return destinationPath.Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty);

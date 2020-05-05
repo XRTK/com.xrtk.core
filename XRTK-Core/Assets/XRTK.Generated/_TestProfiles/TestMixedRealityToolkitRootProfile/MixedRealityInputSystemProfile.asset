@@ -145,16 +145,25 @@ MonoBehaviour:
   gazeCursorPrefab: {fileID: 1000012072213228, guid: 79f96834fcc44889b558cc13518979a0,
     type: 3}
   pointingExtent: 10
-  pointingRaycastLayerMasks:
+  pointerRaycastLayerMasks:
   - serializedVersion: 2
     m_Bits: 4294967291
   drawDebugPointingRays: 1
   debugPointingRayColors:
   - {r: 0, g: 1, b: 0, a: 1}
-  handMeshingEnabled: 1
+  handMeshingEnabled: 0
   handPhysicsEnabled: 0
   useTriggers: 0
   boundsMode: 0
+  trackedPoses:
+  - {fileID: 11400000, guid: 287ec39181134fc4eaee0a3a5e47ab9f, type: 2}
+  - {fileID: 11400000, guid: d3d67de686d952849b6771a111518e0d, type: 2}
+  - {fileID: 11400000, guid: 5269abf28f233044d9ec71f10b94552d, type: 2}
+  - {fileID: 11400000, guid: 0ece078ec16cbbd44bb7eba974dca862, type: 2}
+  - {fileID: 11400000, guid: 9fba060de129a9d4ea929a0d74fdc3fa, type: 2}
+  - {fileID: 11400000, guid: 1251200226ad995498472e45aaf12178, type: 2}
+  - {fileID: 11400000, guid: 5e6bcc3863bdc634d82a8a59598a070b, type: 2}
+  - {fileID: 11400000, guid: 2f6c29c72cd30c74f9717c932bd87a4a, type: 2}
   inputActionsProfile: {fileID: 11400000, guid: 399335ccc89c4d12b79f3539ca7771db,
     type: 2}
   speechCommandsProfile: {fileID: 11400000, guid: 89759c8b9c98420794a5d650ce3b2f90,

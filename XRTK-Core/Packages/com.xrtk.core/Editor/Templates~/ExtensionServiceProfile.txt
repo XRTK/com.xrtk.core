@@ -1,0 +1,8 @@
+using XRTK.Definitions;
+
+namespace #NAMESPACE#
+{
+    public class #NAME#ServiceProfile : BaseMixedRealityExtensionServiceProfile
+    {
+    }
+}

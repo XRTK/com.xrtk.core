@@ -1,0 +1,14 @@
+using XRTK.Interfaces;
+using XRTK.Services;
+
+namespace #NAMESPACE#
+{
+    [System.Runtime.InteropServices.Guid("#GUID#")]
+    public class #NAME#DataProvider : BaseExtensionDataProvider
+    {
+        public #NAME#DataProvider(string name, uint priority, #NAME#DataProviderProfile profile, #PARENT# parentService)
+            : base(name, priority, profile, parentService)
+        {
+        }
+    }
+}

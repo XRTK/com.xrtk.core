@@ -15,7 +15,7 @@ using XRTK.Services;
 
 namespace XRTK.Editor.Profiles
 {
-    [CustomEditor(typeof(BaseMixedRealityServiceProfile<>))]
+    [CustomEditor(typeof(BaseMixedRealityServiceProfile<>), true, isFallback = true)]
     public class MixedRealityServiceProfileInspector : BaseMixedRealityProfileInspector
     {
         private readonly GUIContent profileContent = new GUIContent("Profile", "The settings profile for this service.");
@@ -46,6 +46,7 @@ namespace XRTK.Editor.Profiles
             Debug.Assert(genericTypeArgs != null);
             ServiceConstraint = genericTypeArgs[0];
             Debug.Assert(ServiceConstraint != null);
+            TypeReferencePropertyDrawer.OnCreateTypeTrigger += CreateTypeTrigger;
 
             configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true)
             {
@@ -57,8 +58,14 @@ namespace XRTK.Editor.Profiles
             configurationList.onRemoveCallback += OnConfigurationOptionRemoved;
         }
 
+        protected void OnDisable()
+        {
+            TypeReferencePropertyDrawer.OnCreateTypeTrigger -= CreateTypeTrigger;
+        }
+
         public override void OnInspectorGUI()
         {
+            RenderHeader();
             EditorGUILayout.Space();
             configurations.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(configurations.isExpanded, new GUIContent($"{ServiceConstraint.Name} Configuration Options"));
 
@@ -222,6 +229,11 @@ namespace XRTK.Editor.Profiles
             {
                 EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
             }
+        }
+
+        private void CreateTypeTrigger()
+        {
+            Debug.Log($"Let's create a new {ServiceConstraint.Name} type!");
         }
     }
 }

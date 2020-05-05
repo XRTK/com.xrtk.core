@@ -1,0 +1,13 @@
+using XRTK.Services;
+
+namespace #NAMESPACE#
+{
+    [System.Runtime.InteropServices.Guid("#GUID#")]
+    public class #NAME#ExtensionService : BaseExtensionService
+    {
+        public #NAME#ExtensionService(string name, uint priority, #NAME#ExtensionServiceProfile profile)
+            : base(name, priority, profile)
+        {
+        }
+    }
+}

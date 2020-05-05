@@ -23,12 +23,17 @@ namespace XRTK.Editor.PropertyDrawers
     {
         public const string TypeReferenceUpdated = "TypeReferenceUpdated";
 
-        private const string None = "(None)";
+        private const string NONE = "(None)";
 
         /// <summary>
         /// The currently selected <see cref="Type"/> in the dropdown menu.
         /// </summary>
         public static Type SelectedType;
+
+        /// <summary>
+        /// Action callback used when creating new types.
+        /// </summary>
+        public static event Action OnCreateTypeTrigger;
 
         private static int selectionControlId;
         private static readonly int ControlHint = typeof(TypeReferencePropertyDrawer).GetHashCode();
@@ -226,11 +231,11 @@ namespace XRTK.Editor.PropertyDrawers
                     break;
 
                 case EventType.Repaint:
-                    TempContent.text = selectedType == null ? None : selectedType.Name;
+                    TempContent.text = selectedType == null ? NONE : selectedType.Name;
 
                     if (TempContent.text == string.Empty)
                     {
-                        TempContent.text = None;
+                        TempContent.text = NONE;
                     }
 
                     EditorStyles.popup.Draw(position, TempContent, controlId);
@@ -287,7 +292,7 @@ namespace XRTK.Editor.PropertyDrawers
         }
 
         /// <summary>
-        /// 
+        /// Displays the type picker dropdown.
         /// </summary>
         /// <param name="position"></param>
         /// <param name="types"></param>
@@ -296,7 +301,7 @@ namespace XRTK.Editor.PropertyDrawers
         public static void DisplayDropDown(Rect position, IEnumerable<Type> types, Type selectedType, TypeGrouping grouping)
         {
             var menu = new GenericMenu();
-            menu.AddItem(new GUIContent(None), selectedType == null, OnSelectedTypeName, null);
+            menu.AddItem(new GUIContent(NONE), selectedType == null, OnSelectedTypeName, null);
             menu.AddSeparator(string.Empty);
 
             foreach (var type in types)
@@ -307,6 +312,12 @@ namespace XRTK.Editor.PropertyDrawers
 
                 var content = new GUIContent(menuLabel);
                 menu.AddItem(content, type == selectedType, OnSelectedTypeName, type);
+            }
+
+            if (OnCreateTypeTrigger != null)
+            {
+                menu.AddSeparator(string.Empty);
+                menu.AddItem(new GUIContent("Create new..."), false, data => { OnCreateTypeTrigger.Invoke(); }, null);
             }
 
             menu.DropDown(position);

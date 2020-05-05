@@ -9,7 +9,7 @@ using XRTK.Editor.Extensions;
 
 namespace XRTK.Editor.Utilities
 {
-    public static class BaseMixedRealityProfileInspectorExtension
+    public static class BaseMixedRealityProfileInspectorExtensions
     {
         /// <summary>
         /// Creates a new <see cref="BaseMixedRealityProfile"/> instance and sets it to the <see cref="SerializedProperty"/>.

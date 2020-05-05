@@ -8,6 +8,9 @@ namespace XRTK.Editor.Utilities
 {
     public static class UnityFileHelper
     {
+        /// <summary>
+        /// Managed list of recognised Unity files
+        /// </summary>
         private static readonly string[] UnityFileExtensions = {
             "*.meta",
             "*.mat",
@@ -20,6 +23,11 @@ namespace XRTK.Editor.Utilities
             "*.controller",
         };
 
+        /// <summary>
+        /// Utility to return all the unity recognised files, including meta files within a specific path
+        /// </summary>
+        /// <param name="assetsRootPath">Root folder from which to search from</param>
+        /// <returns></returns>
         public static List<string> GetUnityAssetsAtPath(string assetsRootPath)
         {
             // Get list of working files

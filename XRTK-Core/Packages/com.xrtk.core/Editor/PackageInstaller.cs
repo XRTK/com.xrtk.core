@@ -29,11 +29,11 @@ namespace XRTK.Editor
         /// <param name="destinationPath">The destination path, typically inside the projects "Assets" directory.</param>
         /// <param name="regenerateGuids">Should the guids for the copied assets be regenerated?</param>
         /// <returns>Returns true if the profiles were successfully copies, installed, and added to the <see cref="MixedRealityToolkitRootProfile"/>.</returns>
-        public static bool TryInstallAssets(string sourcePath, string destinationPath, bool regenerateGuids = true)
+        public static bool TryInstallAssets(string sourcePath, string destinationPath, string extension = "asset", bool regenerateGuids = true)
         {
             if (Directory.Exists(destinationPath))
             {
-                var installedAssets = Directory.EnumerateFiles(Path.GetFullPath(destinationPath), "*.asset", SearchOption.AllDirectories).ToList();
+                var installedAssets = Directory.EnumerateFiles(Path.GetFullPath(destinationPath), $"*.{extension}", SearchOption.AllDirectories).ToList();
 
                 for (int i = 0; i < installedAssets.Count; i++)
                 {
@@ -43,9 +43,13 @@ namespace XRTK.Editor
                 EditorApplication.delayCall += () => AddConfigurations(installedAssets);
                 return true;
             }
+            else
+            {
+                Directory.CreateDirectory(Path.GetFullPath(destinationPath));
+            }
 
             EditorUtility.DisplayProgressBar("Copying assets...", $"{sourcePath} -> {destinationPath}", 0);
-            var assetPaths = Directory.EnumerateFiles(Path.GetFullPath(sourcePath), "*.asset", SearchOption.AllDirectories).ToList();
+            var assetPaths = Directory.EnumerateFiles(Path.GetFullPath(sourcePath), $"*.{extension}", SearchOption.AllDirectories).ToList();
 
             var anyFail = false;
 

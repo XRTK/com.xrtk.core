@@ -20,7 +20,7 @@ namespace XRTK.Editor.Utilities
             "*.controller",
         };
 
-        public static List<string> GetUnityFiles(string assetsRootPath)
+        public static List<string> GetUnityAssetsAtPath(string assetsRootPath)
         {
             // Get list of working files
             var filesPaths = new List<string>();

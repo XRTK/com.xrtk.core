@@ -46,7 +46,7 @@ namespace XRTK.Editor.Utilities
         private static void RegenerateGuidsInternal(string assetsRootPath)
         {
             // Get list of working files
-            var filesPaths = UnityFileHelper.GetUnityFiles(assetsRootPath);
+            var filesPaths = UnityFileHelper.GetUnityAssetsAtPath(assetsRootPath);
 
             // Create dictionary to hold old-to-new GUID map
             var guidOldToNewMap = new Dictionary<string, string>();

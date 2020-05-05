@@ -33,7 +33,7 @@ namespace XRTK.Editor
         {
             if (Directory.Exists(destinationPath))
             {
-                var installedAssets = UnityFileHelper.GetUnityFiles(destinationPath);
+                var installedAssets = UnityFileHelper.GetUnityAssetsAtPath(destinationPath);
 
                 for (int i = 0; i < installedAssets.Count; i++)
                 {
@@ -49,7 +49,7 @@ namespace XRTK.Editor
             }
 
             EditorUtility.DisplayProgressBar("Copying assets...", $"{sourcePath} -> {destinationPath}", 0);
-            var assetPaths = UnityFileHelper.GetUnityFiles(sourcePath);
+            var assetPaths = UnityFileHelper.GetUnityAssetsAtPath(sourcePath);
 
             var anyFail = false;
 

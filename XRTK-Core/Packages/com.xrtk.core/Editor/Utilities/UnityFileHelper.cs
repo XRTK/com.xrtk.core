@@ -9,7 +9,7 @@ namespace XRTK.Editor.Utilities
     public static class UnityFileHelper
     {
         /// <summary>
-        /// Managed list of recognised Unity files
+        /// Managed list of native Unity asset file extensions
         /// </summary>
         private static readonly string[] UnityFileExtensions = {
             "*.meta",

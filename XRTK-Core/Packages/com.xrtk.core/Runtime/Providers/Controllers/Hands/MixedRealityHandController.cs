@@ -6,7 +6,6 @@ using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
-using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.Providers.Controllers;
@@ -29,15 +28,6 @@ namespace XRTK.Providers.Controllers.Hands
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
         { }
 
-        ~MixedRealityHandController()
-        {
-            if (LastPose != null)
-            {
-                MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, new MixedRealityInputAction(int.MaxValue, LastPose.Id, AxisType.Digital));
-                LastPose = null;
-            }
-        }
-
         private const float NEW_VELOCITY_WEIGHT = .2f;
         private const float CURRENT_VELOCITY_WEIGHT = .8f;
         private const int POSE_FRAME_BUFFER_SIZE = 5;
@@ -46,6 +36,7 @@ namespace XRTK.Providers.Controllers.Hands
         private readonly Dictionary<TrackedHandBounds, Bounds[]> bounds = new Dictionary<TrackedHandBounds, Bounds[]>();
         private readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
         private readonly Queue<bool> isPinchingBuffer = new Queue<bool>(POSE_FRAME_BUFFER_SIZE);
+        private readonly Queue<bool> isGrabbingBuffer = new Queue<bool>(POSE_FRAME_BUFFER_SIZE);
         private readonly Queue<bool> isPointingBuffer = new Queue<bool>(POSE_FRAME_BUFFER_SIZE);
 
         private int velocityUpdateFrame = 0;
@@ -123,6 +114,7 @@ namespace XRTK.Providers.Controllers.Hands
 
             var lastTrackingState = TrackingState;
             LastIsPinching = IsPinching;
+            LastIsGrabbing = IsGrabbing;
             LastIsPointing = IsPointing;
             LastPose = Pose;
 
@@ -130,6 +122,7 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateJoints(handData);
             UpdateIsPinching(handData);
             UpdateIsIsPointing(handData);
+            UpdateIsIsGrabbing(handData);
             UpdateBounds();
             UpdateVelocity();
             PointerPose = handData.PointerPose;
@@ -674,6 +667,50 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 isPointingBuffer.Clear();
                 IsPointing = false;
+            }
+        }
+
+        /// <summary>
+        /// Updates the hand controller's internal is grabbing state.
+        /// Instead of updating the value for each frame, is grabbing state
+        /// is buffered for a few frames to stabilize and avoid false positives.
+        /// </summary>
+        /// <param name="handData">The hand data received for the current hand update frame.</param>
+        private void UpdateIsIsGrabbing(HandData handData)
+        {
+            if (handData.IsTracked)
+            {
+                var isGrabbingThisFrame = handData.IsGrabbing;
+                if (isGrabbingBuffer.Count < POSE_FRAME_BUFFER_SIZE)
+                {
+                    isGrabbingBuffer.Enqueue(isGrabbingThisFrame);
+                    IsGrabbing = false;
+                }
+                else
+                {
+                    isGrabbingBuffer.Dequeue();
+                    isGrabbingBuffer.Enqueue(isGrabbingThisFrame);
+
+                    isGrabbingThisFrame = true;
+                    for (int i = 0; i < isGrabbingBuffer.Count; i++)
+                    {
+                        var value = isGrabbingBuffer.Dequeue();
+
+                        if (!value)
+                        {
+                            isGrabbingThisFrame = false;
+                        }
+
+                        isGrabbingBuffer.Enqueue(value);
+                    }
+
+                    IsGrabbing = isGrabbingThisFrame;
+                }
+            }
+            else
+            {
+                isGrabbingBuffer.Clear();
+                IsGrabbing = false;
             }
         }
 

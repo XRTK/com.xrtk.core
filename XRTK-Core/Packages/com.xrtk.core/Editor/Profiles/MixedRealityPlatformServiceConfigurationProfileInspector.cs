@@ -8,7 +8,6 @@ using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions;
-using XRTK.Definitions.Platforms;
 using XRTK.Definitions.Utilities;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.PropertyDrawers;
@@ -17,8 +16,8 @@ using XRTK.Services;
 
 namespace XRTK.Editor.Profiles
 {
-    [CustomEditor(typeof(MixedRealityServiceConfigurationProfile))]
-    public class MixedRealityServiceConfigurationProfileInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(MixedRealityPlatformServiceConfigurationProfile))]
+    public class MixedRealityPlatformServiceConfigurationProfileInspector : BaseMixedRealityProfileInspector
     {
         private readonly GUIContent profileContent = new GUIContent("Profile", "The settings profile for this service.");
         private ReorderableList configurationList;
@@ -73,6 +72,14 @@ namespace XRTK.Editor.Profiles
         public override void OnInspectorGUI()
         {
             RenderHeader("Use this configuration profile to setup all of the services you would like to add to any existing profile configurations when the target platform package is installed");
+            EditorGUILayout.Space();
+
+            if (GUILayout.Button("Install Platform Service Configuration"))
+            {
+                EditorApplication.delayCall += () => PackageInstaller.InstallConfiguration(target as MixedRealityPlatformServiceConfigurationProfile, MixedRealityToolkit.Instance.ActiveProfile);
+            }
+
+            EditorGUILayout.Space();
             EditorGUILayout.Space();
 
             serializedObject.Update();
@@ -176,18 +183,23 @@ namespace XRTK.Editor.Profiles
             GUI.enabled = false;
             var runtimePlatformProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
             var globalRuntimePlatformProperty = platformEntries.FindPropertyRelative("runtimePlatforms");
+            bool addPlatforms = false;
 
             if (runtimePlatformProperty.arraySize != globalRuntimePlatformProperty.arraySize)
             {
+                addPlatforms = true;
                 runtimePlatformProperty.ClearArray();
             }
 
             if (globalRuntimePlatformProperty.arraySize > 0)
             {
-
                 for (int i = 0; i < globalRuntimePlatformProperty.arraySize; i++)
                 {
-                    runtimePlatformProperty.InsertArrayElementAtIndex(i);
+                    if (addPlatforms)
+                    {
+                        runtimePlatformProperty.InsertArrayElementAtIndex(i);
+                    }
+
                     var globalPlatform = globalRuntimePlatformProperty.GetArrayElementAtIndex(i).FindPropertyRelative("reference").stringValue;
                     runtimePlatformProperty.GetArrayElementAtIndex(i).FindPropertyRelative("reference").stringValue = globalPlatform;
                 }

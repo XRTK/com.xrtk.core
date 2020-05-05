@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1564b9320d5f4bdf9823a35bb66d61a7, type: 3}
+  m_Name: MixedRealityDiagnosticsSystemProfile
+  m_EditorClassIdentifier: 
+  configurations:
+  - instancedType:
+      reference: 9f9c6912-dd68-4010-8b4a-b7b01b6ad77b
+    name: Memory Diagnostics Data Provider
+    priority: 0
+    platformEntries:
+      runtimePlatforms:
+      - reference: c6bf6315-2e9c-4602-827d-2d4871d29422
+    profile: {fileID: 0}
+  - instancedType:
+      reference: 1b5e5a67-864c-4a3d-a099-5a46ead399a8
+    name: Frame Diagnostics Data Provider
+    priority: 1
+    platformEntries:
+      runtimePlatforms:
+      - reference: c6bf6315-2e9c-4602-827d-2d4871d29422
+    profile: {fileID: 0}
+  - instancedType:
+      reference: 06916f29-4640-475e-8bf6-313c6b831fcf
+    name: Console Diagnostics Data Provider
+    priority: 2
+    platformEntries:
+      runtimePlatforms:
+      - reference: c6bf6315-2e9c-4602-827d-2d4871d29422
+    profile: {fileID: 0}
+  diagnosticsWindowPrefab: {fileID: 2161880003638299081, guid: be9153b959e0d4d4aa50a4a1a6617daa,
+    type: 3}
+  showDiagnosticsWindowOnStart: 1

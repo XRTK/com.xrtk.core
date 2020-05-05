@@ -24,7 +24,7 @@ namespace XRTK.Editor.Utilities
         /// </summary>
         /// <param name="assetsRootPath">The root directory to search for assets to regenerate guids for.</param>
         /// <param name="refreshAssetDatabase">Should <see cref="AssetDatabase.Refresh(ImportAssetOptions)"/> be called after finishing regeneration? (Default is true)</param>
-        public static void RegenerateGuids(string assetsRootPath, bool refreshAssetDatabase = true)
+        public static void RegenerateGuids(string[] assetsRootPath, bool refreshAssetDatabase = true)
         {
             try
             {
@@ -43,10 +43,14 @@ namespace XRTK.Editor.Utilities
             }
         }
 
-        private static void RegenerateGuidsInternal(string assetsRootPath)
+        private static void RegenerateGuidsInternal(string[] assetsRootPath)
         {
             // Get list of working files
-            var filesPaths = UnityFileHelper.GetUnityAssetsAtPath(assetsRootPath);
+            var filesPaths = new List<string>();
+            for (int i = 0; i < assetsRootPath?.Length; i++)
+            {
+                filesPaths.AddRange(UnityFileHelper.GetUnityAssetsAtPath(assetsRootPath[i]));
+            }
 
             // Create dictionary to hold old-to-new GUID map
             var guidOldToNewMap = new Dictionary<string, string>();
@@ -61,7 +65,7 @@ namespace XRTK.Editor.Utilities
 
             foreach (var filePath in filesPaths)
             {
-                EditorUtility.DisplayProgressBar($"Scanning {assetsRootPath} folder", MakeRelativePath(assetsRootPath, filePath), counter / (float)filesPaths.Count);
+                EditorUtility.DisplayProgressBar($"Scanning {assetsRootPath} folder", filePath, counter / (float)filesPaths.Count);
 
                 var isFirstGuid = true;
                 var guids = GetGuids(File.ReadAllText(filePath));
@@ -102,7 +106,7 @@ namespace XRTK.Editor.Utilities
 
             foreach (var filePath in guidsInFileMap.Keys)
             {
-                EditorUtility.DisplayProgressBar("Regenerating GUIDs...", MakeRelativePath(assetsRootPath, filePath), counter / (float)guidsInFileMapKeysCount);
+                EditorUtility.DisplayProgressBar("Regenerating GUIDs...", filePath, counter / (float)guidsInFileMapKeysCount);
                 counter++;
 
                 var contents = File.ReadAllText(filePath);

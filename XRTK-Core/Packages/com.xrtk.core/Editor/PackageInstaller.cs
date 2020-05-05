@@ -20,8 +20,6 @@ namespace XRTK.Editor
 {
     public static class PackageInstaller
     {
-        private const string META_SUFFIX = ".meta";
-
         /// <summary>
         /// Attempt to copy any assets found in the source path into the project.
         /// </summary>
@@ -77,7 +75,7 @@ namespace XRTK.Editor
 
             if (regenerateGuids)
             {
-                GuidRegenerator.RegenerateGuids(Path.GetFullPath(destinationPath), false);
+                RegenerateGuids(new[] { Path.GetFullPath(destinationPath) });
             }
 
             EditorApplication.delayCall += () => AddConfigurations(assetPaths);
@@ -187,6 +185,11 @@ namespace XRTK.Editor
 
             AssetDatabase.SaveAssets();
             EditorApplication.delayCall += () => AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+        }
+
+        public static void RegenerateGuids(string[] filePaths)
+        {
+            GuidRegenerator.RegenerateGuids(filePaths, false);
         }
     }
 }

@@ -27,7 +27,7 @@ namespace XRTK.Editor.Profiles.InputSystem
         private SerializedProperty gazeCursorPrefab;
 
         private SerializedProperty pointingExtent;
-        private SerializedProperty pointingRaycastLayerMasks;
+        private SerializedProperty pointerRaycastLayerMasks;
         private SerializedProperty drawDebugPointingRays;
         private SerializedProperty debugPointingRayColors;
 
@@ -56,7 +56,7 @@ namespace XRTK.Editor.Profiles.InputSystem
             gazeCursorPrefab = serializedObject.FindProperty(nameof(gazeCursorPrefab));
 
             pointingExtent = serializedObject.FindProperty(nameof(pointingExtent));
-            pointingRaycastLayerMasks = serializedObject.FindProperty(nameof(pointingRaycastLayerMasks));
+            pointerRaycastLayerMasks = serializedObject.FindProperty(nameof(pointerRaycastLayerMasks));
             drawDebugPointingRays = serializedObject.FindProperty(nameof(drawDebugPointingRays));
             debugPointingRayColors = serializedObject.FindProperty(nameof(debugPointingRayColors));
 
@@ -122,7 +122,7 @@ namespace XRTK.Editor.Profiles.InputSystem
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(pointingExtent);
                 EditorGUILayout.Space();
-                EditorGUILayout.PropertyField(pointingRaycastLayerMasks, true);
+                EditorGUILayout.PropertyField(pointerRaycastLayerMasks, true);
                 EditorGUILayout.Space();
 
                 EditorGUI.BeginChangeCheck();

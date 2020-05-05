@@ -11,7 +11,7 @@ namespace XRTK.Extensions.XRTK.Extensions
     public static class ColliderExtensions
     {
         /// <summary>
-        /// Gets all the corner points of the collider's bounds in world space.
+        /// Gets all the corner points of the colliders bounds in world space.
         /// </summary>
         /// <param name="collider"></param>
         /// <param name="transform"></param>

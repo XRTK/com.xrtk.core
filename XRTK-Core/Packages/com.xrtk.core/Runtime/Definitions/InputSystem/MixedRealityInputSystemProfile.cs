@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using XRTK.Attributes;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
@@ -69,13 +70,14 @@ namespace XRTK.Definitions.InputSystem
         public float PointingExtent => pointingExtent;
 
         [SerializeField]
-        [Tooltip("The LayerMasks, in prioritized order, that are used to determine the GazeTarget when raycasting.")]
-        private LayerMask[] pointingRaycastLayerMasks = { UnityEngine.Physics.DefaultRaycastLayers };
+        [Tooltip("The Physics Layers, in prioritized order, that are used to determine the pointers target when raycasting.")]
+        [FormerlySerializedAs("pointingRaycastLayerMasks")]
+        private LayerMask[] pointerRaycastLayerMasks = { UnityEngine.Physics.DefaultRaycastLayers };
 
         /// <summary>
-        /// The LayerMasks, in prioritized order, that are used to determine the GazeTarget when raycasting.
+        /// The Physics Layers, in prioritized order, that are used to determine the <see cref="IPointerResult.CurrentPointerTarget"/> when raycasting.
         /// </summary>
-        public LayerMask[] PointingRaycastLayerMasks => pointingRaycastLayerMasks;
+        public LayerMask[] PointerRaycastLayerMasks => pointerRaycastLayerMasks;
 
         [SerializeField]
         private bool drawDebugPointingRays = false;

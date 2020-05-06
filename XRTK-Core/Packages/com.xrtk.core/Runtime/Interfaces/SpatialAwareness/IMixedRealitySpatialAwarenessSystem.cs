@@ -93,9 +93,9 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         /// <param name="observer"></param>
         /// <param name="meshObject">The mesh <see cref="SpatialMeshObject"/>.</param>
         /// <remarks>
-        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialMeshDataProvider"/> interface, and not by application code.
+        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialMeshObserver"/> interface, and not by application code.
         /// </remarks>
-        void RaiseMeshAdded(IMixedRealitySpatialMeshDataProvider observer, SpatialMeshObject meshObject);
+        void RaiseMeshAdded(IMixedRealitySpatialMeshObserver observer, SpatialMeshObject meshObject);
 
         /// <summary>
         /// The spatial awareness system will call the <see cref="IMixedRealitySpatialAwarenessMeshHandler{T}.OnMeshUpdated"/> method to indicate an existing mesh has been updated.
@@ -103,9 +103,9 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         /// <param name="observer"></param>
         /// <param name="meshObject">The mesh <see cref="SpatialMeshObject"/>.</param>
         /// <remarks>
-        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialMeshDataProvider"/> interface, and not by application code.
+        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialMeshObserver"/> interface, and not by application code.
         /// </remarks>
-        void RaiseMeshUpdated(IMixedRealitySpatialMeshDataProvider observer, SpatialMeshObject meshObject);
+        void RaiseMeshUpdated(IMixedRealitySpatialMeshObserver observer, SpatialMeshObject meshObject);
 
         /// <summary>
         /// The spatial awareness system will call the <see cref="IMixedRealitySpatialAwarenessMeshHandler{T}.OnMeshUpdated"/> method to indicate an existing mesh has been removed.
@@ -113,9 +113,9 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         /// <param name="observer"></param>
         /// <param name="meshObject">The mesh <see cref="SpatialMeshObject"/>.</param>
         /// <remarks>
-        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialMeshDataProvider"/> interface, and not by application code.
+        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialMeshObserver"/> interface, and not by application code.
         /// </remarks>
-        void RaiseMeshRemoved(IMixedRealitySpatialMeshDataProvider observer, SpatialMeshObject meshObject);
+        void RaiseMeshRemoved(IMixedRealitySpatialMeshObserver observer, SpatialMeshObject meshObject);
 
         #endregion Mesh Events
 
@@ -128,9 +128,9 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         /// <param name="surfaceId">Value identifying the surface.</param>
         /// <param name="surfaceObject">The surface <see cref="GameObject"/>.</param>
         /// <remarks>
-        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialSurfaceDataProvider"/> interface, and not by application code.
+        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialSurfaceObserver"/> interface, and not by application code.
         /// </remarks>
-        void RaiseSurfaceAdded(IMixedRealitySpatialSurfaceDataProvider observer, int surfaceId, GameObject surfaceObject);
+        void RaiseSurfaceAdded(IMixedRealitySpatialSurfaceObserver observer, int surfaceId, GameObject surfaceObject);
 
         /// <summary>
         /// The spatial awareness system will call the <see cref="IMixedRealitySpatialAwarenessSurfaceFindingHandler{T}.OnSurfaceUpdated"/> method to indicate an existing planar surface has been updated.
@@ -139,9 +139,9 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         /// <param name="surfaceId">Value identifying the surface.</param>
         /// <param name="surfaceObject">The surface <see cref="GameObject"/>.</param>
         /// <remarks>
-        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialSurfaceDataProvider"/> interface, and not by application code.
+        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialSurfaceObserver"/> interface, and not by application code.
         /// </remarks>
-        void RaiseSurfaceUpdated(IMixedRealitySpatialSurfaceDataProvider observer, int surfaceId, GameObject surfaceObject);
+        void RaiseSurfaceUpdated(IMixedRealitySpatialSurfaceObserver observer, int surfaceId, GameObject surfaceObject);
 
         /// <summary>
         /// The spatial awareness system will call the <see cref="IMixedRealitySpatialAwarenessSurfaceFindingHandler{T}.OnSurfaceUpdated"/> method to indicate an existing planar surface has been removed.
@@ -149,9 +149,9 @@ namespace XRTK.Interfaces.SpatialAwarenessSystem
         /// <param name="observer"></param>
         /// <param name="surfaceId">Value identifying the surface.</param>
         /// <remarks>
-        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialSurfaceDataProvider"/> interface, and not by application code.
+        /// This method is to be called by implementations of the <see cref="IMixedRealitySpatialSurfaceObserver"/> interface, and not by application code.
         /// </remarks>
-        void RaiseSurfaceRemoved(IMixedRealitySpatialSurfaceDataProvider observer, int surfaceId);
+        void RaiseSurfaceRemoved(IMixedRealitySpatialSurfaceObserver observer, int surfaceId);
 
         #endregion Surface Finding Events
     }

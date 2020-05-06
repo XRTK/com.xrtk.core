@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace XRTK.Interfaces.Providers.SpatialObservers
 {
-    public interface IMixedRealitySpatialSurfaceDataProvider : IMixedRealitySpatialAwarenessDataProvider
+    public interface IMixedRealitySpatialSurfaceObserver : IMixedRealitySpatialAwarenessDataProvider
     {
         /// <summary>
         /// Gets or sets the minimum surface area, in square meters, that must be satisfied before a surface is identified.

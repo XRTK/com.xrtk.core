@@ -255,7 +255,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
         #region Mesh Events
 
         /// <inheritdoc />
-        public void RaiseMeshAdded(IMixedRealitySpatialMeshDataProvider observer, SpatialMeshObject spatialMeshObject)
+        public void RaiseMeshAdded(IMixedRealitySpatialMeshObserver observer, SpatialMeshObject spatialMeshObject)
         {
             // Parent the mesh object
             spatialMeshObject.GameObject.transform.parent = SpatialMeshesParent.transform;
@@ -275,7 +275,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
             };
 
         /// <inheritdoc />
-        public void RaiseMeshUpdated(IMixedRealitySpatialMeshDataProvider observer, SpatialMeshObject spatialMeshObject)
+        public void RaiseMeshUpdated(IMixedRealitySpatialMeshObserver observer, SpatialMeshObject spatialMeshObject)
         {
             // Parent the mesh object
             spatialMeshObject.GameObject.transform.parent = SpatialMeshesParent.transform;
@@ -295,7 +295,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
             };
 
         /// <inheritdoc />
-        public void RaiseMeshRemoved(IMixedRealitySpatialMeshDataProvider observer, SpatialMeshObject spatialMeshObject)
+        public void RaiseMeshRemoved(IMixedRealitySpatialMeshObserver observer, SpatialMeshObject spatialMeshObject)
         {
             meshEventData.Initialize(observer, spatialMeshObject.Id, spatialMeshObject);
             HandleEvent(meshEventData, OnMeshRemoved);
@@ -316,7 +316,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
         #region Surface Finding Events
 
         /// <inheritdoc />
-        public void RaiseSurfaceAdded(IMixedRealitySpatialSurfaceDataProvider observer, int surfaceId, GameObject surfaceObject)
+        public void RaiseSurfaceAdded(IMixedRealitySpatialSurfaceObserver observer, int surfaceId, GameObject surfaceObject)
         {
             surfaceFindingEventData.Initialize(observer, surfaceId, surfaceObject);
             HandleEvent(surfaceFindingEventData, OnSurfaceAdded);
@@ -333,7 +333,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
             };
 
         /// <inheritdoc />
-        public void RaiseSurfaceUpdated(IMixedRealitySpatialSurfaceDataProvider observer, int surfaceId, GameObject surfaceObject)
+        public void RaiseSurfaceUpdated(IMixedRealitySpatialSurfaceObserver observer, int surfaceId, GameObject surfaceObject)
         {
             surfaceFindingEventData.Initialize(observer, surfaceId, surfaceObject);
             HandleEvent(surfaceFindingEventData, OnSurfaceUpdated);
@@ -350,7 +350,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
             };
 
         /// <inheritdoc />
-        public void RaiseSurfaceRemoved(IMixedRealitySpatialSurfaceDataProvider observer, int surfaceId)
+        public void RaiseSurfaceRemoved(IMixedRealitySpatialSurfaceObserver observer, int surfaceId)
         {
             surfaceFindingEventData.Initialize(observer, surfaceId, null);
             HandleEvent(surfaceFindingEventData, OnSurfaceRemoved);

@@ -10,7 +10,7 @@ namespace XRTK.Interfaces.Providers.SpatialObservers
     /// <summary>
     /// The interface contract for Mixed Reality spatial observers.
     /// </summary>
-    public interface IMixedRealitySpatialMeshDataProvider : IMixedRealitySpatialObserverDataProvider
+    public interface IMixedRealitySpatialMeshDataProvider : IMixedRealitySpatialAwarenessDataProvider
     {
         /// <summary>
         /// Gets or sets the level of detail, as a MixedRealitySpatialAwarenessMeshLevelOfDetail value, for the returned spatial mesh.

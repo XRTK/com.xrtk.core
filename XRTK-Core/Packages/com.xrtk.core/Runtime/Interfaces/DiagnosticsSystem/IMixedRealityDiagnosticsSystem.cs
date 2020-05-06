@@ -9,7 +9,7 @@ namespace XRTK.Interfaces.DiagnosticsSystem
     /// <summary>
     /// The interface contract that defines the Diagnostics system in the Mixed Reality Toolkit
     /// </summary>
-    public interface IMixedRealityDiagnosticsSystem : IMixedRealityService
+    public interface IMixedRealityDiagnosticsSystem : IMixedRealitySystem
     {
         /// <summary>
         /// Gets the root transform where any visualized diagnostics <see cref="GameObject"/>s should live.

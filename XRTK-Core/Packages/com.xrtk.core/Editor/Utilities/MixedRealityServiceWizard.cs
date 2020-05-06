@@ -16,6 +16,7 @@ using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.Events;
+using XRTK.Interfaces.TeleportSystem;
 using XRTK.Services;
 using XRTK.Utilities.Editor;
 using Assembly = System.Reflection.Assembly;
@@ -165,9 +166,10 @@ namespace XRTK.Editor.Utilities
             EditorGUILayout.Space();
 
             EditorGUILayout.LabelField(new GUIContent($"Choose a path to put your new {Path.GetFileNameWithoutExtension(instanceTemplatePath).ToProperCase()}:"));
+            const int maxCharacterLength = 56;
             EditorGUILayout.TextField(outputPath, new GUIStyle("label")
             {
-                alignment = outputPath.Length > 56
+                alignment = outputPath.Length > maxCharacterLength
                     ? TextAnchor.MiddleRight
                     : TextAnchor.MiddleLeft
             });
@@ -201,11 +203,6 @@ namespace XRTK.Editor.Utilities
 
             EditorGUI.BeginChangeCheck();
             instanceName = EditorGUILayout.TextField("Instance Name", instanceName);
-
-            if (EditorGUI.EndChangeCheck() && !instanceName.Contains(interfaceStrippedName))
-            {
-                instanceName = $"{instanceName}{interfaceStrippedName}";
-            }
 
             GUILayout.FlexibleSpace();
 
@@ -290,7 +287,7 @@ namespace XRTK.Editor.Utilities
 
                         usingList.Clear();
 
-                        var instanceTemplate = File.ReadAllText(instanceTemplatePath);
+                        var instanceTemplate = File.ReadAllText(instanceTemplatePath ?? throw new InvalidOperationException());
                         instanceTemplate = instanceTemplate.Replace(USING, @using);
                         instanceTemplate = instanceTemplate.Replace(NAMESPACE, @namespace);
                         instanceTemplate = instanceTemplate.Replace(GUID, Guid.NewGuid().ToString());
@@ -300,7 +297,7 @@ namespace XRTK.Editor.Utilities
                         instanceTemplate = instanceTemplate.Replace(PARENT_INTERFACE, parentInterfaceType?.Name);
                         instanceTemplate = instanceTemplate.Replace(IMPLEMENTS, implements);
 
-                        File.WriteAllText($"{outputPath}/{instanceName}{Path.GetFileNameWithoutExtension(instanceTemplatePath)}.cs", instanceTemplate);
+                        File.WriteAllText($"{outputPath}/{instanceName}.cs", instanceTemplate);
 
                         var profileBaseTypeName = profileBaseType.Name;
 
@@ -326,7 +323,8 @@ namespace XRTK.Editor.Utilities
                             }
                             else
                             {
-                                if (interfaceType == typeof(IMixedRealityBoundarySystem))
+                                if (interfaceType == typeof(IMixedRealityBoundarySystem) ||
+                                    interfaceType == typeof(IMixedRealityTeleportSystem))
                                 {
                                     profileBaseTypeName = nameof(BaseMixedRealityProfile);
                                 }
@@ -343,13 +341,13 @@ namespace XRTK.Editor.Utilities
 
                         @using = usingList.Aggregate(string.Empty, (current, item) => $"{current}{Environment.NewLine}using {item};");
 
-                        var profileTemplate = File.ReadAllText(profileTemplatePath);
+                        var profileTemplate = File.ReadAllText(profileTemplatePath ?? throw new InvalidOperationException());
                         profileTemplate = profileTemplate.Replace(USING, @using);
                         profileTemplate = profileTemplate.Replace(NAMESPACE, @namespace);
                         profileTemplate = profileTemplate.Replace(NAME, instanceName);
                         profileTemplate = profileTemplate.Replace(BASE, profileBaseTypeName);
 
-                        File.WriteAllText($"{outputPath}/{instanceName}{Path.GetFileNameWithoutExtension(profileTemplatePath)}.cs", profileTemplate);
+                        File.WriteAllText($"{outputPath}/{instanceName}Profile.cs", profileTemplate);
                     }
                     catch (Exception e)
                     {

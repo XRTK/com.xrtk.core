@@ -10,6 +10,7 @@ using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.PropertyDrawers;
+using XRTK.Editor.Utilities;
 using XRTK.Extensions;
 using XRTK.Services;
 
@@ -41,12 +42,12 @@ namespace XRTK.Editor.Profiles
             configurations = serializedObject.FindProperty(nameof(configurations));
 
             Debug.Assert(configurations != null);
+
             var baseType = ThisProfile.GetType().BaseType;
             var genericTypeArgs = baseType?.FindTopmostGenericTypeArguments();
             Debug.Assert(genericTypeArgs != null);
             ServiceConstraint = genericTypeArgs[0];
             Debug.Assert(ServiceConstraint != null);
-            TypeReferencePropertyDrawer.OnCreateTypeTrigger += CreateTypeTrigger;
 
             configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true)
             {
@@ -56,11 +57,6 @@ namespace XRTK.Editor.Profiles
             configurationList.drawElementCallback += DrawConfigurationOptionElement;
             configurationList.onAddCallback += OnConfigurationOptionAdded;
             configurationList.onRemoveCallback += OnConfigurationOptionRemoved;
-        }
-
-        protected void OnDisable()
-        {
-            TypeReferencePropertyDrawer.OnCreateTypeTrigger -= CreateTypeTrigger;
         }
 
         public override void OnInspectorGUI()
@@ -82,6 +78,8 @@ namespace XRTK.Editor.Profiles
 
                 serializedObject.ApplyModifiedProperties();
             }
+
+            TypeReferencePropertyDrawer.CreateNewTypeOverride = null;
         }
 
         private void DrawConfigurationOptionElement(Rect rect, int index, bool isActive, bool isFocused)
@@ -116,7 +114,13 @@ namespace XRTK.Editor.Profiles
 
             EditorGUI.BeginChangeCheck();
             EditorGUI.PropertyField(nameRect, nameProperty);
-            TypeReferencePropertyDrawer.FilterConstraintOverride = IsConstraintSatisfied;
+
+            TypeReferencePropertyDrawer.FilterConstraintOverride = type =>
+            {
+                return !type.IsAbstract &&
+                       type.GetInterfaces().Any(interfaceType => interfaceType == ServiceConstraint);
+            };
+            TypeReferencePropertyDrawer.CreateNewTypeOverride = ServiceConstraint;
             EditorGUI.PropertyField(typeRect, instanceTypeProperty);
             var systemTypeReference = new SystemType(instanceTypeProperty.FindPropertyRelative("reference").stringValue);
 
@@ -186,11 +190,6 @@ namespace XRTK.Editor.Profiles
 
             EditorGUIUtility.wideMode = lastMode;
             EditorGUIUtility.labelWidth = prevLabelWidth;
-        }
-
-        private bool IsConstraintSatisfied(Type type)
-        {
-            return !type.IsAbstract && type.GetInterfaces().Any(interfaceType => interfaceType == ServiceConstraint);
         }
 
         private void OnConfigurationOptionAdded(ReorderableList list)

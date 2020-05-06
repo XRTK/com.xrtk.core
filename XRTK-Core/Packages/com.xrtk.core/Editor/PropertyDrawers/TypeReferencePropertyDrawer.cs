@@ -9,6 +9,7 @@ using UnityEditor.Compilation;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
+using XRTK.Editor.Utilities;
 using XRTK.Extensions;
 using Assembly = System.Reflection.Assembly;
 
@@ -25,19 +26,25 @@ namespace XRTK.Editor.PropertyDrawers
 
         private const string NONE = "(None)";
 
-        /// <summary>
-        /// The currently selected <see cref="Type"/> in the dropdown menu.
-        /// </summary>
-        public static Type SelectedType;
-
-        /// <summary>
-        /// Action callback used when creating new types.
-        /// </summary>
-        public static event Action OnCreateTypeTrigger;
-
         private static int selectionControlId;
         private static readonly int ControlHint = typeof(TypeReferencePropertyDrawer).GetHashCode();
         private static readonly GUIContent TempContent = new GUIContent();
+
+        /// <summary>
+        /// The currently selected <see cref="Type"/> in the dropdown menu.
+        /// </summary>
+        public static Type SelectedType { get; private set; }
+
+        /// <summary>
+        /// Gets or sets a Type to be created using the "Create new ..." menu.
+        /// </summary>
+        /// <remarks>
+        /// <para>This property must be set immediately before presenting a class
+        /// type reference property field using <see cref="EditorGUI.PropertyField(Rect,SerializedProperty)"/>
+        /// or <see cref="EditorGUILayout.PropertyField(SerializedProperty,UnityEngine.GUILayoutOption[])"/> since the value of this
+        /// property is reset to <c>null</c> each time the control is drawn.</para>
+        /// </remarks>
+        public static Type CreateNewTypeOverride { get; set; }
 
         #region Type Filtering
 
@@ -204,6 +211,7 @@ namespace XRTK.Editor.PropertyDrawers
 
                         selectionControlId = 0;
                         SelectedType = null;
+                        CreateNewTypeOverride = null;
                     }
 
                     break;
@@ -215,6 +223,10 @@ namespace XRTK.Editor.PropertyDrawers
                         triggerDropDown = true;
                         Event.current.Use();
                     }
+                    else
+                    {
+                        CreateNewTypeOverride = null;
+                    }
 
                     break;
 
@@ -225,6 +237,11 @@ namespace XRTK.Editor.PropertyDrawers
                         {
                             triggerDropDown = true;
                             Event.current.Use();
+                        }
+
+                        if (Event.current.keyCode == KeyCode.Escape)
+                        {
+                            CreateNewTypeOverride = null;
                         }
                     }
 
@@ -246,7 +263,14 @@ namespace XRTK.Editor.PropertyDrawers
             {
                 selectionControlId = controlId;
                 SelectedType = selectedType;
-                DisplayDropDown(position, GetFilteredTypes(filter), selectedType, GroupingOverride ?? filter?.Grouping ?? TypeGrouping.ByNamespaceFlat);
+
+                Type createInterfaceType = null;
+                if (filter is ImplementsAttribute implementsAttribute)
+                {
+                    createInterfaceType = implementsAttribute.InterfaceType;
+                }
+
+                DisplayDropDown(position, GetFilteredTypes(filter), selectedType, GroupingOverride ?? filter?.Grouping ?? TypeGrouping.ByNamespaceFlat, CreateNewTypeOverride ?? createInterfaceType);
             }
         }
 
@@ -298,7 +322,8 @@ namespace XRTK.Editor.PropertyDrawers
         /// <param name="types"></param>
         /// <param name="selectedType"></param>
         /// <param name="grouping"></param>
-        public static void DisplayDropDown(Rect position, IEnumerable<Type> types, Type selectedType, TypeGrouping grouping)
+        /// <param name="newType"></param>
+        public static void DisplayDropDown(Rect position, IEnumerable<Type> types, Type selectedType, TypeGrouping grouping, Type newType = null)
         {
             var menu = new GenericMenu();
             menu.AddItem(new GUIContent(NONE), selectedType == null, OnSelectedTypeName, null);
@@ -314,10 +339,14 @@ namespace XRTK.Editor.PropertyDrawers
                 menu.AddItem(content, type == selectedType, OnSelectedTypeName, type);
             }
 
-            if (OnCreateTypeTrigger != null)
+            if (newType != null)
             {
                 menu.AddSeparator(string.Empty);
-                menu.AddItem(new GUIContent("Create new..."), false, data => { OnCreateTypeTrigger.Invoke(); }, null);
+                menu.AddItem(new GUIContent($"Create new {newType.Name}..."), false, data =>
+                {
+                    MixedRealityServiceWizard.ShowNewServiceWizard(newType);
+                    CreateNewTypeOverride = null;
+                }, null);
             }
 
             menu.DropDown(position);

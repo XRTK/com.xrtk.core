@@ -38,7 +38,7 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         private BaseMixedRealitySpatialMeshObserverProfile globalMeshObserverProfile = null;
 
         /// <summary>
-        /// The global mesh observer profile settings to use for the <see cref="IMixedRealitySpatialMeshObserver"/>s if no profile is provided.
+        /// The global mesh observer profile settings to use for the <see cref="IMixedRealitySpatialMeshDataProvider"/>s if no profile is provided.
         /// </summary>
         public BaseMixedRealitySpatialMeshObserverProfile GlobalMeshObserverProfile => globalMeshObserverProfile;
 
@@ -47,7 +47,7 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
         private BaseMixedRealitySurfaceObserverProfile globalSurfaceObserverProfile = null;
 
         /// <summary>
-        /// The global mesh observer profile settings to use for the <see cref="IMixedRealitySpatialMeshObserver"/>s if no profile is provided.
+        /// The global mesh observer profile settings to use for the <see cref="IMixedRealitySpatialMeshDataProvider"/>s if no profile is provided.
         /// </summary>
         public BaseMixedRealitySurfaceObserverProfile GlobalSurfaceObserverProfile => globalSurfaceObserverProfile;
     }

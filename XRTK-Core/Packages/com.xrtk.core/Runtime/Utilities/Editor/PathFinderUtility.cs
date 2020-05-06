@@ -115,7 +115,7 @@ namespace XRTK.Utilities.Editor
             {
                 if (string.IsNullOrWhiteSpace(coreAbsoluteFolderPath))
                 {
-                    coreAbsoluteFolderPath = Path.GetFullPath(XRTK_Core_RelativeFolderPath).Replace('\\', '/');
+                    coreAbsoluteFolderPath = Path.GetFullPath(XRTK_Core_RelativeFolderPath);
                 }
 
                 return coreAbsoluteFolderPath;
@@ -156,7 +156,7 @@ namespace XRTK.Utilities.Editor
             {
                 if (string.IsNullOrWhiteSpace(sdkAbsoluteFolderPath))
                 {
-                    sdkAbsoluteFolderPath = Path.GetFullPath(XRTK_SDK_RelativeFolderPath).Replace('\\', '/');
+                    sdkAbsoluteFolderPath = Path.GetFullPath(XRTK_SDK_RelativeFolderPath);
                 }
 
                 return sdkAbsoluteFolderPath;

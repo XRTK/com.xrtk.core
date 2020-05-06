@@ -1,8 +1,0 @@
-using XRTK.Definitions;
-
-namespace #NAMESPACE#
-{
-    public class #NAME#DataProviderProfile : BaseMixedRealityExtensionDataProviderProfile
-    {
-    }
-}

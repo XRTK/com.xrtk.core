@@ -1,0 +1,13 @@
+#USING#
+
+namespace #NAMESPACE#
+{
+    [System.Runtime.InteropServices.Guid("#GUID#")]
+    public class #NAME# : #BASE#, #INTERFACE#
+    {
+        public #NAME#(string name, uint priority, #NAME#Profile profile)
+            : base(name, priority, profile)
+        {
+        }#IMPLEMENTS#
+    }
+}

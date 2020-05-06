@@ -17,7 +17,7 @@ namespace XRTK.Providers.SpatialObservers
     /// <summary>
     /// Base class for spatial awareness observers.
     /// </summary>
-    public abstract class BaseMixedRealitySpatialMeshObserver : BaseMixedRealitySpatialObserverDataProvider, IMixedRealitySpatialMeshObserver
+    public abstract class BaseMixedRealitySpatialMeshObserver : BaseMixedRealitySpatialObserverDataProvider, IMixedRealitySpatialMeshDataProvider
     {
         /// <inheritdoc />
         protected BaseMixedRealitySpatialMeshObserver(string name, uint priority, BaseMixedRealitySpatialMeshObserverProfile profile, IMixedRealitySpatialAwarenessSystem parentService)

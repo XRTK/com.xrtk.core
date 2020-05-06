@@ -11,9 +11,9 @@ using XRTK.Services;
 namespace XRTK.Providers.SpatialObservers
 {
     /// <summary>
-    /// Base <see cref="IMixedRealitySpatialSurfaceObserver"/> implementation.
+    /// Base <see cref="IMixedRealitySpatialSurfaceDataProvider"/> implementation.
     /// </summary>
-    public abstract class BaseMixedRealitySpatialSurfaceObserver : BaseMixedRealitySpatialObserverDataProvider, IMixedRealitySpatialSurfaceObserver
+    public abstract class BaseMixedRealitySpatialSurfaceObserver : BaseMixedRealitySpatialObserverDataProvider, IMixedRealitySpatialSurfaceDataProvider
     {
         /// <inheritdoc />
         protected BaseMixedRealitySpatialSurfaceObserver(string name, uint priority, BaseMixedRealitySurfaceObserverProfile profile, IMixedRealitySpatialAwarenessSystem parentService)

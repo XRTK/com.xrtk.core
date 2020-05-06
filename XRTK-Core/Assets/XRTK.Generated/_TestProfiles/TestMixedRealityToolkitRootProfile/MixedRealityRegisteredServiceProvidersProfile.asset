@@ -12,12 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48c48e65a9914a9ab61b891d9b405064, type: 3}
   m_Name: MixedRealityRegisteredServiceProvidersProfile
   m_EditorClassIdentifier: 
-  configurations:
-  - instancedType:
-      reference: 2662dea2-1b44-4da9-83cb-30ad9357ed81
-    name: Test Extension Service
-    priority: 0
-    platformEntries:
-      runtimePlatforms:
-      - reference: c6bf6315-2e9c-4602-827d-2d4871d29422
-    profile: {fileID: 11400000, guid: 1c43c93d2103c7f41bdc21d0168454fa, type: 2}
+  configurations: []

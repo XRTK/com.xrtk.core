@@ -229,10 +229,5 @@ namespace XRTK.Editor.Profiles
                 EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
             }
         }
-
-        private void CreateTypeTrigger()
-        {
-            Debug.Log($"Let's create a new {ServiceConstraint.Name} type!");
-        }
     }
 }

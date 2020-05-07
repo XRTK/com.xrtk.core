@@ -128,6 +128,20 @@ namespace XRTK.Editor.Utilities
             GUILayout.Space(12f);
         }
 
+        /// <summary>
+        /// Render a custom header for the profile inspector.
+        /// </summary>
+        /// <param name="image"></param>
+        public static void RenderCustomHeader(Texture2D image)
+        {
+            GUILayout.BeginHorizontal();
+            GUILayout.FlexibleSpace();
+            GUILayout.Label(image, GUILayout.MaxHeight(128f));
+            GUILayout.FlexibleSpace();
+            GUILayout.EndHorizontal();
+            GUILayout.Space(12f);
+        }
+
         #endregion Logos
 
         #region Gizmos

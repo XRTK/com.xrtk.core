@@ -6,8 +6,8 @@ using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions
 {
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Platform Service Configurations", fileName = "MixedRealityServiceConfigurationProfile", order = (int)CreateProfileMenuItemIndices.Configuration)]
-    public class MixedRealityServiceConfigurationProfile : BaseMixedRealityProfile
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Platform Service Configurations", fileName = "MixedRealityPlatformServiceConfigurationProfile", order = (int)CreateProfileMenuItemIndices.Configuration)]
+    public class MixedRealityPlatformServiceConfigurationProfile : BaseMixedRealityProfile
     {
         [SerializeField]
         private RuntimePlatformEntry platformEntries = new RuntimePlatformEntry();

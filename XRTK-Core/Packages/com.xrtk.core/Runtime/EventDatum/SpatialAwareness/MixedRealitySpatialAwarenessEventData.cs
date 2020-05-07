@@ -33,7 +33,7 @@ namespace XRTK.EventDatum.SpatialAwarenessSystem
         /// <param name="spatialAwarenessObserver"></param>
         /// <param name="id"></param>
         /// <param name="spatialObject"></param>
-        public void Initialize(IMixedRealitySpatialObserverDataProvider spatialAwarenessObserver, int id, T spatialObject)
+        public void Initialize(IMixedRealitySpatialAwarenessDataProvider spatialAwarenessObserver, int id, T spatialObject)
         {
             BaseInitialize(spatialAwarenessObserver);
             Id = id;

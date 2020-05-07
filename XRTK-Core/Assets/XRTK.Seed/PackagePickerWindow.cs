@@ -143,10 +143,5 @@ namespace XRTK.Seed
             EditorGUILayout.Space();
             GUILayout.EndVertical();
         }
-
-        private void Update()
-        {
-            Repaint();
-        }
     }
 }

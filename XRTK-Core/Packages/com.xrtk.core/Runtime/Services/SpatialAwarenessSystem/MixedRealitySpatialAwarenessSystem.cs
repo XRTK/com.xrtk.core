@@ -101,10 +101,10 @@ namespace XRTK.Services.SpatialAwarenessSystem
         #region IMixedRealitySpatialAwarenessSystem Implementation
 
         /// <inheritdoc />
-        public HashSet<IMixedRealitySpatialObserverDataProvider> DetectedSpatialObservers { get; } = new HashSet<IMixedRealitySpatialObserverDataProvider>();
+        public HashSet<IMixedRealitySpatialAwarenessDataProvider> DetectedSpatialObservers { get; } = new HashSet<IMixedRealitySpatialAwarenessDataProvider>();
 
         /// <inheritdoc />
-        public bool IsObserverRunning(IMixedRealitySpatialObserverDataProvider observer)
+        public bool IsObserverRunning(IMixedRealitySpatialAwarenessDataProvider observer)
         {
             foreach (var detectedObserver in DetectedSpatialObservers)
             {
@@ -134,7 +134,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
         }
 
         /// <inheritdoc />
-        public void StartObserver(IMixedRealitySpatialObserverDataProvider observer)
+        public void StartObserver(IMixedRealitySpatialAwarenessDataProvider observer)
         {
             foreach (var spatialObserver in DetectedSpatialObservers)
             {
@@ -147,7 +147,7 @@ namespace XRTK.Services.SpatialAwarenessSystem
         }
 
         /// <inheritdoc />
-        public void SuspendObserver(IMixedRealitySpatialObserverDataProvider observer)
+        public void SuspendObserver(IMixedRealitySpatialAwarenessDataProvider observer)
         {
             foreach (var spatialObserver in DetectedSpatialObservers)
             {
@@ -160,13 +160,13 @@ namespace XRTK.Services.SpatialAwarenessSystem
         }
 
         /// <inheritdoc />
-        public void RaiseSpatialAwarenessObserverDetected(IMixedRealitySpatialObserverDataProvider observer)
+        public void RaiseSpatialAwarenessObserverDetected(IMixedRealitySpatialAwarenessDataProvider observer)
         {
             DetectedSpatialObservers.Add(observer);
         }
 
         /// <inheritdoc />
-        public void RaiseSpatialAwarenessObserverLost(IMixedRealitySpatialObserverDataProvider observer)
+        public void RaiseSpatialAwarenessObserverLost(IMixedRealitySpatialAwarenessDataProvider observer)
         {
             DetectedSpatialObservers.Remove(observer);
         }

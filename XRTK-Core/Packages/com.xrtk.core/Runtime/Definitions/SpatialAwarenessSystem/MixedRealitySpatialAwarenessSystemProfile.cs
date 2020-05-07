@@ -12,7 +12,7 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
     /// Configuration profile settings for setting up the spatial awareness system.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Spatial Awareness System Profile", fileName = "MixedRealitySpatialAwarenessSystemProfile", order = (int)CreateProfileMenuItemIndices.SpatialAwareness)]
-    public class MixedRealitySpatialAwarenessSystemProfile : BaseMixedRealityServiceProfile<IMixedRealitySpatialObserverDataProvider>
+    public class MixedRealitySpatialAwarenessSystemProfile : BaseMixedRealityServiceProfile<IMixedRealitySpatialAwarenessDataProvider>
     {
         /// <summary>
         /// The name of the Spatial Awareness Mesh Physics Layer.

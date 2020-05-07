@@ -15,7 +15,7 @@ namespace XRTK.Services
     public abstract class BaseExtensionDataProvider : BaseDataProvider, IMixedRealityExtensionDataProvider
     {
         /// <inheritdoc />
-        protected BaseExtensionDataProvider(string name, uint priority, BaseMixedRealityExtensionDataProviderProfile profile, IMixedRealityService parentService)
+        protected BaseExtensionDataProvider(string name, uint priority, BaseMixedRealityExtensionDataProviderProfile profile, IMixedRealityExtensionService parentService)
             : base(name, priority, profile, parentService)
         {
         }

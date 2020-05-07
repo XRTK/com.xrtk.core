@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50519740e1dd4b5f97f104c7dc8d6ae6, type: 3}
+  m_Name: MixedRealityCameraSystemProfile
+  m_EditorClassIdentifier: 
+  configurations:
+  - instancedType:
+      reference: ea4c0c19-e533-4ae8-91a2-6998cb8905bb
+    name: Default Camera Data Provider
+    priority: 0
+    platformEntries:
+      runtimePlatforms:
+      - reference: dac9ead8-54f9-4935-a27f-9f82f465c972
+      - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
+      - reference: bcac2cef-e793-47b8-9db7-116af668cb66
+      - reference: 97344133-03b4-4314-9581-e42d1aac91ba
+      - reference: a2ffb628-3ce7-4759-9c66-8f2ba8d16fc2
+      - reference: 58de2d2a-db5f-4090-a949-4028b8ea3afd
+    profile: {fileID: 11400000, guid: c02516a14adf1ff45b2e6feaefd1d090, type: 2}
+  - instancedType:
+      reference: 83eff552-adf4-47c8-ad53-df7406856d3f
+    name: Oculus Camera Data Provider
+    priority: 1
+    platformEntries:
+      runtimePlatforms:
+      - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
+      - reference: db1acc26-ec8d-4bc6-afca-c51351b2da2e
+    profile: {fileID: 0}
+  - instancedType:
+      reference: 49e17dac-c786-4b1a-a66a-54da654923d5
+    name: Lumin Camera Data Provider
+    priority: 2
+    platformEntries:
+      runtimePlatforms:
+      - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
+      - reference: 39ebb366-21a7-4d08-9412-036b32976d0c
+    profile: {fileID: 11400000, guid: 10c5453922d4a744595e0415ef57dda4, type: 2}
+  - instancedType:
+      reference: 0f33b864-e4b9-4697-af40-f7772f3bc596
+    name: Windows Mixed Reality Camera Data Provider
+    priority: 3
+    platformEntries:
+      runtimePlatforms:
+      - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
+      - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
+      - reference: 7dc72b4e-34f6-4b26-afd7-cde0c51f83a3
+      - reference: 7dc72b4e-34f6-4b26-afd7-cde0c51f83a3
+    profile: {fileID: 11400000, guid: 57a7de86787ebb74ead8edbc180d4d14, type: 2}
+  globalCameraProfile: {fileID: 11400000, guid: c02516a14adf1ff45b2e6feaefd1d090,
+    type: 2}

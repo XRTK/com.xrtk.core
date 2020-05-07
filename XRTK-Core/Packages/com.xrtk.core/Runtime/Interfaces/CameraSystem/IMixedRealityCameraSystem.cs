@@ -8,7 +8,7 @@ namespace XRTK.Interfaces.CameraSystem
     /// <summary>
     /// The base interface for implementing a mixed reality camera system.
     /// </summary>
-    public interface IMixedRealityCameraSystem : IMixedRealityService
+    public interface IMixedRealityCameraSystem : IMixedRealitySystem
     {
         /// <summary>
         /// The list of <see cref="IMixedRealityCameraDataProvider"/>s registered and running with the system.

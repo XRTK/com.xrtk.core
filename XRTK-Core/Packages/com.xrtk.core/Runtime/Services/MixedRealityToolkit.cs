@@ -1033,7 +1033,7 @@ namespace XRTK.Services
                 return false;
             }
 
-            if (IsCoreSystem(interfaceType))
+            if (IsSystem(interfaceType))
             {
                 activeSystems.Add(interfaceType, serviceInstance);
             }
@@ -1159,7 +1159,7 @@ namespace XRTK.Services
                     Debug.LogError($"{e.Message}\n{e.StackTrace}");
                 }
 
-                if (IsCoreSystem(interfaceType))
+                if (IsSystem(interfaceType))
                 {
                     activeSystems.Remove(interfaceType);
                     return true;
@@ -1326,7 +1326,7 @@ namespace XRTK.Services
                 return services;
             }
 
-            if (IsCoreSystem(interfaceType))
+            if (IsSystem(interfaceType))
             {
                 foreach (var system in activeSystems)
                 {
@@ -1674,23 +1674,15 @@ namespace XRTK.Services
             }
         }
 
-        private static bool IsCoreSystem(Type concreteType)
+        private static bool IsSystem(Type concreteType)
         {
             if (concreteType == null)
             {
-                Debug.LogWarning("Null cannot be a core system.");
+                Debug.LogError($"{nameof(concreteType)} is null.");
                 return false;
             }
 
-            return typeof(IMixedRealityCameraSystem).IsAssignableFrom(concreteType) ||
-                   typeof(IMixedRealityInputSystem).IsAssignableFrom(concreteType) ||
-                   typeof(IMixedRealityFocusProvider).IsAssignableFrom(concreteType) ||
-                   typeof(IMixedRealityTeleportSystem).IsAssignableFrom(concreteType) ||
-                   typeof(IMixedRealityBoundarySystem).IsAssignableFrom(concreteType) ||
-                   typeof(IMixedRealitySpatialAwarenessSystem).IsAssignableFrom(concreteType) ||
-                   typeof(IMixedRealityNetworkingSystem).IsAssignableFrom(concreteType) ||
-                   typeof(IMixedRealityDiagnosticsSystem).IsAssignableFrom(concreteType) ||
-                   typeof(IMixedRealityNativeLibrarySystem).IsAssignableFrom(concreteType);
+            return typeof(IMixedRealitySystem).IsAssignableFrom(concreteType);
         }
 
         private static void ClearCoreSystemCache()
@@ -1796,7 +1788,7 @@ namespace XRTK.Services
 
             if (!CanGetService(interfaceType, serviceName)) { return false; }
 
-            if (IsCoreSystem(interfaceType))
+            if (IsSystem(interfaceType))
             {
                 if (activeSystems.TryGetValue(interfaceType, out serviceInstance))
                 {
@@ -1848,7 +1840,7 @@ namespace XRTK.Services
         {
             if (!CanGetService(interfaceType, serviceName)) { return; }
 
-            if (IsCoreSystem(interfaceType))
+            if (IsSystem(interfaceType))
             {
                 if (GetServiceByNameInternal(interfaceType, serviceName, out var serviceInstance) &&
                     CheckServiceMatch(interfaceType, serviceName, interfaceType, serviceInstance))

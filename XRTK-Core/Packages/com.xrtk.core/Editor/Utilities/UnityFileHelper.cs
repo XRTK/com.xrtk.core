@@ -24,7 +24,7 @@ namespace XRTK.Editor.Utilities
         };
 
         /// <summary>
-        /// Utility to return all the unity recognised files, including meta files within a specific path
+        /// Utility to return all the unity recognized files, including meta files within a specific path
         /// </summary>
         /// <param name="assetsRootPath">Root folder from which to search from</param>
         /// <returns></returns>

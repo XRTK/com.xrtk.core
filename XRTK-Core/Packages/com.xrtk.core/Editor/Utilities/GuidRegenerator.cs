@@ -24,7 +24,17 @@ namespace XRTK.Editor.Utilities
         /// </summary>
         /// <param name="assetsRootPath">The root directory to search for assets to regenerate guids for.</param>
         /// <param name="refreshAssetDatabase">Should <see cref="AssetDatabase.Refresh(ImportAssetOptions)"/> be called after finishing regeneration? (Default is true)</param>
-        public static void RegenerateGuids(string[] assetsRootPath, bool refreshAssetDatabase = true)
+        public static void RegenerateGuids(string assetsRootPath, bool refreshAssetDatabase = true)
+        {
+            RegenerateGuids(new List<string> { assetsRootPath }, refreshAssetDatabase);
+        }
+
+        /// <summary>
+        /// Regenerate the guids for assets located in the <see cref="assetsRootPath"/>.
+        /// </summary>
+        /// <param name="assetsRootPath">The root directory to search for assets to regenerate guids for.</param>
+        /// <param name="refreshAssetDatabase">Should <see cref="AssetDatabase.Refresh(ImportAssetOptions)"/> be called after finishing regeneration? (Default is true)</param>
+        public static void RegenerateGuids(List<string> assetsRootPath, bool refreshAssetDatabase = true)
         {
             try
             {
@@ -43,11 +53,12 @@ namespace XRTK.Editor.Utilities
             }
         }
 
-        private static void RegenerateGuidsInternal(string[] assetsRootPath)
+        private static void RegenerateGuidsInternal(List<string> assetsRootPath)
         {
             // Get list of working files
             var filesPaths = new List<string>();
-            for (int i = 0; i < assetsRootPath?.Length; i++)
+
+            for (int i = 0; i < assetsRootPath?.Count; i++)
             {
                 filesPaths.AddRange(UnityFileHelper.GetUnityAssetsAtPath(assetsRootPath[i]));
             }

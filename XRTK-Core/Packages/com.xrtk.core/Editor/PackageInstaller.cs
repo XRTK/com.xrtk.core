@@ -12,7 +12,6 @@ using XRTK.Editor.Extensions;
 using XRTK.Editor.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Services;
@@ -30,44 +29,75 @@ namespace XRTK.Editor
         /// <returns>Returns true if the profiles were successfully copies, installed, and added to the <see cref="MixedRealityToolkitRootProfile"/>.</returns>
         public static bool TryInstallAssets(string sourcePath, string destinationPath, bool regenerateGuids = true)
         {
-            if (Directory.Exists(destinationPath))
-            {
-                var installedAssets = UnityFileHelper.GetUnityAssetsAtPath(destinationPath);
+            return TryInstallAssets(new Dictionary<string, string> { { sourcePath, destinationPath } }, regenerateGuids);
+        }
 
-                for (int i = 0; i < installedAssets.Count; i++)
-                {
-                    installedAssets[i] = installedAssets[i].Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty).ToForwardSlashes();
-                }
-
-                EditorApplication.delayCall += () => AddConfigurations(installedAssets);
-                return true;
-            }
-            else
-            {
-                Directory.CreateDirectory(Path.GetFullPath(destinationPath));
-            }
-
-            EditorUtility.DisplayProgressBar("Copying assets...", $"{sourcePath} -> {destinationPath}", 0);
-            var assetPaths = UnityFileHelper.GetUnityAssetsAtPath(sourcePath);
-
+        /// <summary>
+        /// Attempt to copy any assets found in the source path into the project.
+        /// </summary>
+        /// <param name="installationPaths">The assets paths to be installed. Key is the source path of the assets to be installed. This should typically be from a hidden upm package folder marked with a "~". Value is the destination.</param>
+        /// <param name="regenerateGuids">Should the guids for the copied assets be regenerated?</param>
+        /// <returns>Returns true if the profiles were successfully copies, installed, and added to the <see cref="MixedRealityToolkitRootProfile"/>.</returns>
+        public static bool TryInstallAssets(Dictionary<string, string> installationPaths, bool regenerateGuids = true)
+        {
             var anyFail = false;
+            var installedAssets = new List<string>();
 
-            for (var i = 0; i < assetPaths.Count; i++)
+            foreach (var installationPath in installationPaths)
             {
-                EditorUtility.DisplayProgressBar("Copying assets...", Path.GetFileNameWithoutExtension(assetPaths[i]), i / (float)assetPaths.Count);
+                var sourcePath = installationPath.Key;
+                var destinationPath = installationPath.Value;
 
-                try
+                if (Directory.Exists(destinationPath))
                 {
-                    assetPaths[i] = CopyAsset(sourcePath, assetPaths[i], destinationPath);
+                    installedAssets.AddRange(UnityFileHelper.GetUnityAssetsAtPath(destinationPath));
+
+                    for (int i = 0; i < installedAssets.Count; i++)
+                    {
+                        installedAssets[i] = installedAssets[i].Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty).ToForwardSlashes();
+                    }
                 }
-                catch (Exception e)
+                else
                 {
-                    Debug.LogError(e);
-                    anyFail = true;
+                    Directory.CreateDirectory(Path.GetFullPath(destinationPath));
+                    EditorUtility.DisplayProgressBar("Copying assets...", $"{sourcePath} -> {destinationPath}", 0);
+
+                    var copiedAssets = UnityFileHelper.GetUnityAssetsAtPath(sourcePath);
+
+                    for (var i = 0; i < copiedAssets.Count; i++)
+                    {
+                        EditorUtility.DisplayProgressBar("Copying assets...", Path.GetFileNameWithoutExtension(copiedAssets[i]), i / (float)copiedAssets.Count);
+
+                        try
+                        {
+                            copiedAssets[i] = CopyAsset(sourcePath, copiedAssets[i], destinationPath);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogError(e);
+                            anyFail = true;
+                        }
+                    }
+
+                    if (!anyFail)
+                    {
+                        installedAssets.AddRange(copiedAssets);
+                    }
+                    else
+                    {
+                        try
+                        {
+                            Directory.Delete(destinationPath);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogError(e);
+                        }
+                    }
+
+                    EditorUtility.ClearProgressBar();
                 }
             }
-
-            EditorUtility.ClearProgressBar();
 
             if (anyFail)
             {
@@ -76,10 +106,10 @@ namespace XRTK.Editor
 
             if (regenerateGuids)
             {
-                RegenerateGuids(new[] { Path.GetFullPath(destinationPath) });
+                GuidRegenerator.RegenerateGuids(installedAssets);
             }
 
-            EditorApplication.delayCall += () => AddConfigurations(assetPaths);
+            EditorApplication.delayCall += () => AddConfigurations(installedAssets);
             return true;
         }
 
@@ -186,11 +216,6 @@ namespace XRTK.Editor
 
             AssetDatabase.SaveAssets();
             EditorApplication.delayCall += () => AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
-        }
-
-        public static void RegenerateGuids(string[] filePaths)
-        {
-            GuidRegenerator.RegenerateGuids(filePaths, false);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace XRTK.Services.Teleportation
         /// </summary>
         /// <param name="profile"></param>
         public MixedRealityTeleportSystem(BaseMixedRealityProfile profile)
-                : base(profile)
+            : base(profile)
         {
         }
 

@@ -42,18 +42,25 @@ namespace XRTK.Editor
         {
             var anyFail = false;
             var installedAssets = new List<string>();
+            var installedDirectories = new List<string>();
 
             foreach (var installationPath in installationPaths)
             {
                 var sourcePath = installationPath.Key;
                 var destinationPath = installationPath.Value;
+                installedDirectories.Add(destinationPath);
+
+                Debug.Log($"{sourcePath} -> {destinationPath}");
 
                 if (Directory.Exists(destinationPath))
                 {
+                    EditorUtility.DisplayProgressBar("Verifying assets...", $"{sourcePath} -> {destinationPath}", 0);
+
                     installedAssets.AddRange(UnityFileHelper.GetUnityAssetsAtPath(destinationPath));
 
                     for (int i = 0; i < installedAssets.Count; i++)
                     {
+                        EditorUtility.DisplayProgressBar("Verifying assets...", Path.GetFileNameWithoutExtension(installedAssets[i]), i / (float)installedAssets.Count);
                         installedAssets[i] = installedAssets[i].Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty).ToForwardSlashes();
                     }
                 }
@@ -83,17 +90,6 @@ namespace XRTK.Editor
                     {
                         installedAssets.AddRange(copiedAssets);
                     }
-                    else
-                    {
-                        try
-                        {
-                            Directory.Delete(destinationPath);
-                        }
-                        catch (Exception e)
-                        {
-                            Debug.LogError(e);
-                        }
-                    }
 
                     EditorUtility.ClearProgressBar();
                 }
@@ -101,12 +97,25 @@ namespace XRTK.Editor
 
             if (anyFail)
             {
-                return false;
+                foreach (var installedDirectory in installedDirectories)
+                {
+                    try
+                    {
+                        if (Directory.Exists(installedDirectory))
+                        {
+                            Directory.Delete(installedDirectory);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError(e);
+                    }
+                }
             }
 
             if (regenerateGuids)
             {
-                GuidRegenerator.RegenerateGuids(installedAssets);
+                GuidRegenerator.RegenerateGuids(installedDirectories);
             }
 
             EditorApplication.delayCall += () => AddConfigurations(installedAssets);

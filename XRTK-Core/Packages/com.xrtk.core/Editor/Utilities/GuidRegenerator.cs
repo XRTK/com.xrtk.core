@@ -174,16 +174,5 @@ namespace XRTK.Editor.Utilities
         }
 
         private static bool IsGuid(string text) => text.All(c => (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z'));
-
-        private static string MakeRelativePath(string fromPath, string toPath)
-        {
-            var toUri = new Uri(toPath);
-            var fromUri = new Uri(fromPath);
-
-            var relativeUri = fromUri.MakeRelativeUri(toUri);
-            var relativePath = Uri.UnescapeDataString(relativeUri.ToString());
-
-            return relativePath;
-        }
     }
 }

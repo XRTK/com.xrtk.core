@@ -90,7 +90,6 @@ namespace XRTK.Utilities.Editor
             SessionState.SetBool(SessionKey, false);
 
             bool refresh = false;
-            bool restart = false;
 
             var message = "The Mixed Reality Toolkit needs to apply the following settings to your project:\n\n";
 
@@ -115,11 +114,6 @@ namespace XRTK.Utilities.Editor
                 message += "- Change the Scripting Backend to use IL2CPP\n";
             }
 
-            if (!PlayerSettings.virtualRealitySupported)
-            {
-                message += "- Enable XR Settings for your current platform\n";
-            }
-
             if (EditorUserBuildSettings.selectedBuildTargetGroup == BuildTargetGroup.WSA)
             {
                 message += "- Enable Shared Depth Buffer in the XR SDK Settings\n";
@@ -127,7 +121,7 @@ namespace XRTK.Utilities.Editor
 
             message += "\nWould you like to make these changes?\n\n";
 
-            if (!forceTextSerialization || !il2Cpp || !visibleMetaFiles || !PlayerSettings.virtualRealitySupported)
+            if (!forceTextSerialization || !il2Cpp || !visibleMetaFiles)
             {
                 var choice = EditorUtility.DisplayDialogComplex("Apply Mixed Reality Toolkit Default Settings?", message, "Apply", "Ignore", "Later");
 
@@ -137,7 +131,6 @@ namespace XRTK.Utilities.Editor
                         EditorSettings.serializationMode = SerializationMode.ForceText;
                         EditorSettings.externalVersionControl = "Visible Meta Files";
                         PlayerSettings.SetScriptingBackend(EditorUserBuildSettings.selectedBuildTargetGroup, ScriptingImplementation.IL2CPP);
-                        PlayerSettings.virtualRealitySupported = true;
 
                         var projectSettingsObject = AssetDatabase.LoadAssetAtPath<Object>("ProjectSettings/ProjectSettings.asset");
                         Debug.Assert(projectSettingsObject != null);
@@ -165,13 +158,7 @@ namespace XRTK.Utilities.Editor
                 }
             }
 
-            if (PlayerSettings.scriptingRuntimeVersion != ScriptingRuntimeVersion.Latest)
-            {
-                PlayerSettings.scriptingRuntimeVersion = ScriptingRuntimeVersion.Latest;
-                restart = true;
-            }
-
-            if (refresh || restart)
+            if (refresh)
             {
                 AssetDatabase.SaveAssets();
 
@@ -179,11 +166,6 @@ namespace XRTK.Utilities.Editor
                 {
                     AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                 }
-            }
-
-            if (restart)
-            {
-                EditorApplication.OpenProject(Directory.GetParent(Application.dataPath).ToString());
             }
         }
 

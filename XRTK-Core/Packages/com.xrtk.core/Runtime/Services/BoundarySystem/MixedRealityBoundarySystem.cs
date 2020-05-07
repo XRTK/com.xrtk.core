@@ -911,6 +911,8 @@ namespace XRTK.Services.BoundarySystem
 
         #endregion IMixedRealityBoundarySystem Implementation
 
+        private readonly XRInputSubsystem inputSubsystem = new XRInputSubsystem();
+
         /// <summary>
         /// The largest rectangle that is contained withing the play space geometry.
         /// </summary>
@@ -932,8 +934,7 @@ namespace XRTK.Services.BoundarySystem
             FloorHeight = null;
             rectangularBounds = null;
 
-            // Boundaries are supported for Room Scale experiences only.
-            if (XRDevice.GetTrackingSpaceType() != TrackingSpaceType.RoomScale)
+            if (inputSubsystem.GetTrackingOriginMode() != TrackingOriginModeFlags.Floor)
             {
                 return;
             }

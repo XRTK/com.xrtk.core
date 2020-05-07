@@ -76,7 +76,9 @@ namespace XRTK.Extensions
                 }
             }, true);
 #elif UNITY_EDITOR_WIN
+#pragma warning disable 618
             StartHaptics(interactionSource.id, intensity, durationInSeconds);
+#pragma warning restore 618
 #endif // WINDOWS_UWP
         }
 
@@ -101,7 +103,9 @@ namespace XRTK.Extensions
                 }
             }, true);
 #elif UNITY_EDITOR_WIN
+#pragma warning disable 618
             StopHaptics(interactionSource.id);
+#pragma warning restore 618
 #endif // WINDOWS_UWP
         }
 #endif //UNITY_WSA

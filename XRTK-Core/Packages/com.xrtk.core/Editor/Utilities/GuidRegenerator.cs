@@ -76,7 +76,7 @@ namespace XRTK.Editor.Utilities
 
             foreach (var filePath in filesPaths)
             {
-                EditorUtility.DisplayProgressBar($"Scanning {assetsRootPath} folder", filePath, counter / (float)filesPaths.Count);
+                EditorUtility.DisplayProgressBar("Gathering asset info...", filePath, counter / (float)filesPaths.Count);
 
                 var isFirstGuid = true;
                 var guids = GetGuids(File.ReadAllText(filePath));

@@ -1,8 +1,10 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using System.IO;
+using UnityEngine;
 
 namespace XRTK.Editor.Utilities
 {
@@ -24,18 +26,26 @@ namespace XRTK.Editor.Utilities
         };
 
         /// <summary>
-        /// Utility to return all the unity recognised files, including meta files within a specific path
+        /// Utility to return all the unity recognized files, including meta files within a specific path
         /// </summary>
         /// <param name="assetsRootPath">Root folder from which to search from</param>
-        /// <returns></returns>
         public static List<string> GetUnityAssetsAtPath(string assetsRootPath)
         {
             // Get list of working files
             var filesPaths = new List<string>();
 
+            assetsRootPath = Path.GetFullPath(assetsRootPath);
+
             foreach (var extension in UnityFileExtensions)
             {
-                filesPaths.AddRange(Directory.GetFiles(assetsRootPath, extension, SearchOption.AllDirectories));
+                try
+                {
+                    filesPaths.AddRange(Directory.GetFiles(assetsRootPath, extension, SearchOption.AllDirectories));
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError($"{e}\n{assetsRootPath}");
+                }
             }
 
             return filesPaths;

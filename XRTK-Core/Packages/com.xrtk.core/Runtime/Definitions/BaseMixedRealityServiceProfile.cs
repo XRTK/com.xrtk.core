@@ -21,7 +21,9 @@ namespace XRTK.Definitions
     /// The <see cref="IMixedRealityService"/> type to constrain all of the valid <see cref="IMixedRealityServiceConfiguration.InstancedType"/>s to.
     /// Only types that implement the <see cref="TService"/> will show up in the inspector dropdown for the <see cref="IMixedRealityServiceConfiguration.InstancedType"/>
     /// </typeparam>
-    public abstract class BaseMixedRealityServiceProfile<TService> : BaseMixedRealityProfile, IMixedRealityServiceProfile<TService> where TService : IMixedRealityService
+    public abstract class BaseMixedRealityServiceProfile<TService> : BaseMixedRealityProfile,
+        IMixedRealityServiceProfile<TService>
+        where TService : IMixedRealityService
     {
         [SerializeField]
         private MixedRealityServiceConfiguration[] configurations = new MixedRealityServiceConfiguration[0];

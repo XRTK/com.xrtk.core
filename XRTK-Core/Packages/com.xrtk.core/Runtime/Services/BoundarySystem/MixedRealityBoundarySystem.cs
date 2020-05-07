@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ using XRTK.Definitions.BoundarySystem;
 using XRTK.EventDatum.Boundary;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Utilities;
+using Object = UnityEngine.Object;
 
 namespace XRTK.Services.BoundarySystem
 {
@@ -46,6 +48,10 @@ namespace XRTK.Services.BoundarySystem
             ceilingPhysicsLayer = profile.CeilingPhysicsLayer;
         }
 
+        private readonly List<XRInputSubsystemDescriptor> descriptors = new List<XRInputSubsystemDescriptor>();
+
+        private XRInputSubsystem inputSubsystem;
+
         #region IMixedRealityService Implementation
 
         private BoundaryEventData boundaryEventData = null;
@@ -61,6 +67,30 @@ namespace XRTK.Services.BoundarySystem
             }
 
             boundaryEventData = new BoundaryEventData(EventSystem.current);
+
+            if (inputSubsystem == null)
+            {
+                descriptors.Clear();
+                SubsystemManager.GetSubsystemDescriptors(descriptors);
+
+                if (descriptors.Count > 0)
+                {
+                    var descriptorToUse = descriptors[0];
+
+                    if (descriptors.Count > 1)
+                    {
+                        var typeOfD = typeof(XRInputSubsystemDescriptor);
+                        Debug.LogWarning($"Found {descriptors.Count} {typeOfD.Name}s. Using \"{descriptorToUse.id}\"");
+                    }
+
+                    inputSubsystem = descriptorToUse.Create();
+                }
+
+                if (inputSubsystem == null)
+                {
+                    throw new Exception($"Failed to start {nameof(XRInputSubsystem)}!");
+                }
+            }
         }
 
         /// <inheritdoc/>
@@ -910,8 +940,6 @@ namespace XRTK.Services.BoundarySystem
         }
 
         #endregion IMixedRealityBoundarySystem Implementation
-
-        private readonly XRInputSubsystem inputSubsystem = new XRInputSubsystem();
 
         /// <summary>
         /// The largest rectangle that is contained withing the play space geometry.

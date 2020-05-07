@@ -12,6 +12,7 @@ using XRTK.Editor.Extensions;
 using XRTK.Editor.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Services;
@@ -168,9 +169,9 @@ namespace XRTK.Editor
                         }
                         break;
 
-                    case Type _ when typeof(IMixedRealitySpatialObserverDataProvider).IsAssignableFrom(configurationType):
+                    case Type _ when typeof(IMixedRealitySpatialAwarenessDataProvider).IsAssignableFrom(configurationType):
                         var spatialAwarenessSystemProfile = rootProfile.SpatialAwarenessProfile;
-                        var spatialObserverConfiguration = new MixedRealityServiceConfiguration<IMixedRealitySpatialObserverDataProvider>(configuration.InstancedType, configuration.Name, configuration.Priority, configuration.RuntimePlatforms, configuration.Profile);
+                        var spatialObserverConfiguration = new MixedRealityServiceConfiguration<IMixedRealitySpatialAwarenessDataProvider>(configuration.InstancedType, configuration.Name, configuration.Priority, configuration.RuntimePlatforms, configuration.Profile);
 
                         if (spatialAwarenessSystemProfile.RegisteredServiceConfigurations.All(serviceConfiguration => serviceConfiguration.InstancedType.Type != spatialObserverConfiguration.InstancedType.Type))
                         {

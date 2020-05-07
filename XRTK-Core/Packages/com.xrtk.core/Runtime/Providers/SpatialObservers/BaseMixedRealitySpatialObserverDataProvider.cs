@@ -12,9 +12,9 @@ using XRTK.Services;
 namespace XRTK.Providers.SpatialObservers
 {
     /// <summary>
-    /// Base <see cref="IMixedRealitySpatialObserverDataProvider"/> implementation
+    /// Base <see cref="IMixedRealitySpatialAwarenessDataProvider"/> implementation
     /// </summary>
-    public abstract class BaseMixedRealitySpatialObserverDataProvider : BaseDataProvider, IMixedRealitySpatialObserverDataProvider
+    public abstract class BaseMixedRealitySpatialObserverDataProvider : BaseDataProvider, IMixedRealitySpatialAwarenessDataProvider
     {
         /// <inheritdoc />
         protected BaseMixedRealitySpatialObserverDataProvider(string name, uint priority, BaseMixedRealitySpatialObserverProfile profile, IMixedRealitySpatialAwarenessSystem parentService)
@@ -111,7 +111,7 @@ namespace XRTK.Providers.SpatialObservers
         /// <param name="left"></param>
         /// <param name="right"></param>
         /// <returns></returns>
-        public static bool Equals(IMixedRealitySpatialObserverDataProvider left, IMixedRealitySpatialObserverDataProvider right)
+        public static bool Equals(IMixedRealitySpatialAwarenessDataProvider left, IMixedRealitySpatialAwarenessDataProvider right)
         {
             return left.Equals(right);
         }
@@ -129,10 +129,10 @@ namespace XRTK.Providers.SpatialObservers
             if (ReferenceEquals(this, obj)) { return true; }
             if (obj.GetType() != GetType()) { return false; }
 
-            return Equals((IMixedRealitySpatialObserverDataProvider)obj);
+            return Equals((IMixedRealitySpatialAwarenessDataProvider)obj);
         }
 
-        private bool Equals(IMixedRealitySpatialObserverDataProvider other)
+        private bool Equals(IMixedRealitySpatialAwarenessDataProvider other)
         {
             return other != null && SourceId == other.SourceId && string.Equals(SourceName, other.SourceName);
         }

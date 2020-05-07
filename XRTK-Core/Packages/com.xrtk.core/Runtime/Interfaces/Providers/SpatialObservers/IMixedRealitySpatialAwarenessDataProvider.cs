@@ -9,7 +9,7 @@ namespace XRTK.Interfaces.Providers.SpatialObservers
     /// <summary>
     /// The Mixed Reality Spatial Observer Data Provider contract.
     /// </summary>
-    public interface IMixedRealitySpatialObserverDataProvider : IMixedRealityDataProvider, IMixedRealityEventSource
+    public interface IMixedRealitySpatialAwarenessDataProvider : IMixedRealityDataProvider, IMixedRealityEventSource
     {
         /// <summary>
         /// The startup behavior of the hardware resource.

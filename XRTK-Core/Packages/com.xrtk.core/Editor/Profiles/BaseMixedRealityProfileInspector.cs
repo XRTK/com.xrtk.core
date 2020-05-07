@@ -15,7 +15,8 @@ namespace XRTK.Editor.Profiles
     /// <summary>
     /// Base class for all <see cref="BaseMixedRealityProfile"/> Inspectors to inherit from.
     /// </summary>
-    public abstract class BaseMixedRealityProfileInspector : UnityEditor.Editor
+    [CustomEditor(typeof(BaseMixedRealityProfile), true, isFallback = true)]
+    public class BaseMixedRealityProfileInspector : UnityEditor.Editor
     {
         protected static readonly string DefaultGuidString = default(Guid).ToString("N");
 
@@ -33,6 +34,8 @@ namespace XRTK.Editor.Profiles
         /// </summary>
         protected BaseMixedRealityProfile ThisProfile { get; private set; }
 
+        private bool isOverrideHeader = false;
+
         protected virtual void OnEnable()
         {
             targetProfile = serializedObject;
@@ -43,9 +46,32 @@ namespace XRTK.Editor.Profiles
             ThisProfileGuidString = guidHex;
         }
 
-        protected void RenderHeader(string infoBoxText = "")
+        public override void OnInspectorGUI()
         {
-            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            RenderHeader();
+            DrawDefaultInspector();
+        }
+
+        protected void RenderHeader(string infoBoxText = "", Texture2D image = null)
+        {
+            if (image != null ||
+                !string.IsNullOrWhiteSpace(infoBoxText))
+            {
+                isOverrideHeader = true;
+            }
+            else
+            {
+                if (isOverrideHeader) { return; }
+            }
+
+            if (image == null)
+            {
+                MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
+            }
+            else
+            {
+                MixedRealityInspectorUtility.RenderCustomHeader(image);
+            }
 
             if (ThisProfile.ParentProfile != null &&
                 GUILayout.Button("Back to parent profile"))
@@ -56,7 +82,7 @@ namespace XRTK.Editor.Profiles
             EditorGUILayout.Space();
             EditorGUILayout.LabelField($"{ThisProfile.name.ToProperCase()} Settings", EditorStyles.boldLabel);
 
-            if (!string.IsNullOrWhiteSpace(infoBoxText))
+            if (isOverrideHeader)
             {
                 EditorGUILayout.HelpBox(infoBoxText, MessageType.Info);
             }

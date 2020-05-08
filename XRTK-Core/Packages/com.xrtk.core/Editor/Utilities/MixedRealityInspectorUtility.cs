@@ -114,31 +114,25 @@ namespace XRTK.Editor.Utilities
 
         private static Texture2D lightThemeLogo = null;
 
+        private static GUIStyle centeredGuiStyle;
+
+        private static GUIStyle CenteredGuiStyle => centeredGuiStyle ?? (centeredGuiStyle = new GUIStyle { alignment = TextAnchor.MiddleCenter });
 
         /// <summary>
         /// Render the Mixed Reality Toolkit Logo.
         /// </summary>
         public static void RenderMixedRealityToolkitLogo()
         {
-            GUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            GUILayout.Label(EditorGUIUtility.isProSkin ? LightThemeLogo : DarkThemeLogo, GUILayout.MaxHeight(128f));
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
-            GUILayout.Space(12f);
+            RenderInspectorHeader(EditorGUIUtility.isProSkin ? LightThemeLogo : DarkThemeLogo);
         }
 
         /// <summary>
-        /// Render a custom header for the profile inspector.
+        /// Render a header for the profile inspector.
         /// </summary>
         /// <param name="image"></param>
-        public static void RenderCustomHeader(Texture2D image)
+        public static void RenderInspectorHeader(Texture2D image)
         {
-            GUILayout.BeginHorizontal();
-            GUILayout.FlexibleSpace();
-            GUILayout.Label(image, GUILayout.MaxHeight(128f));
-            GUILayout.FlexibleSpace();
-            GUILayout.EndHorizontal();
+            GUILayout.Label(image, CenteredGuiStyle, GUILayout.MaxHeight(128f));
             GUILayout.Space(12f);
         }
 

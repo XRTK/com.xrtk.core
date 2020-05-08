@@ -51,7 +51,39 @@ namespace XRTK.Editor
         private SerializedProperty currentInteractionProfiles;
 
         private Vector2 mouseDragOffset;
-        private GUIStyle flippedLabelStyle;
+
+        private static GUIStyle labelStyle;
+        private static GUIStyle LabelStyle => labelStyle ?? (labelStyle = new GUIStyle(EditorStyles.label)
+        {
+            alignment = TextAnchor.MiddleLeft,
+            normal = new GUIStyleState
+            {
+                textColor = EditorGUIUtility.isProSkin
+                    ? Color.white
+                    : Color.black
+            },
+            stretchHeight = true,
+            stretchWidth = true,
+        });
+
+        private static GUIStyle flippedLabelStyle;
+        private static GUIStyle FlippedLabelStyle => flippedLabelStyle ?? (flippedLabelStyle = new GUIStyle(EditorStyles.label)
+        {
+            alignment = TextAnchor.MiddleRight,
+            normal = new GUIStyleState
+            {
+                textColor = EditorGUIUtility.isProSkin
+                    ? Color.white
+                    : Color.black
+            },
+            stretchHeight = true,
+            stretchWidth = true,
+        });
+
+        private static GUIStyle backgroundStyle;
+
+        private static GUIStyle BackgroundStyle => backgroundStyle ?? (backgroundStyle = new GUIStyle(EditorStyles.toolbar));
+
         private Texture2D currentControllerTexture;
         private ControllerInputActionOption currentControllerOption;
 
@@ -97,9 +129,9 @@ namespace XRTK.Editor
                 return;
             }
 
-            window.currentControllerName = profile.ControllerType.Type.Name;
             window = (ControllerPopupWindow)CreateInstance(typeof(ControllerPopupWindow));
 
+            window.currentControllerName = profile.ControllerType.Type.Name;
             window.titleContent = new GUIContent($"{window.currentControllerName} {handednessTitleText}Input Action Assignment");
             window.controllerDataProviderProfile = profile;
             window.currentInteractionProfiles = interactionMappingProfiles;
@@ -177,15 +209,6 @@ namespace XRTK.Editor
 
         private void OnGUI()
         {
-            if (flippedLabelStyle == null)
-            {
-                flippedLabelStyle = new GUIStyle("Label")
-                {
-                    alignment = TextAnchor.UpperRight,
-                    stretchWidth = true
-                };
-            }
-
             if (!IsCustomController && currentControllerTexture != null)
             {
                 GUILayout.BeginHorizontal();
@@ -361,7 +384,7 @@ namespace XRTK.Editor
                         rectPosition.y += (i + 1) * (EditorGUIUtility.singleLineHeight + 2);
                     }
 
-                    GUI.Box(new Rect(rectPosition, rectSize), GUIContent.none, EditorGUIUtility.isProSkin ? "ObjectPickerBackground" : "ObjectPickerResultsEven");
+                    GUI.Box(new Rect(rectPosition, rectSize), GUIContent.none, BackgroundStyle);
 
                     var offset = flipped ? InputActionLabelPosition : Vector2.zero;
                     var popupRect = new Rect(rectPosition + offset, new Vector2(InputActionDropdownPosition.x, EditorGUIUtility.singleLineHeight));
@@ -370,7 +393,7 @@ namespace XRTK.Editor
 
                     offset = flipped ? Vector2.zero : InputActionDropdownPosition;
                     var labelRect = new Rect(rectPosition + offset, new Vector2(InputActionLabelPosition.x, EditorGUIUtility.singleLineHeight));
-                    EditorGUI.LabelField(labelRect, interactionDescription.stringValue, flipped ? flippedLabelStyle : EditorStyles.label);
+                    EditorGUI.LabelField(labelRect, interactionDescription.stringValue, flipped ? FlippedLabelStyle : LabelStyle);
 
                     if (editInputActionPositions)
                     {

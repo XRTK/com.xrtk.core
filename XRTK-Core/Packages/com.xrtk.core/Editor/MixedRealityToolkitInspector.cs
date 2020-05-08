@@ -10,12 +10,13 @@ using UnityEngine.SceneManagement;
 using XRTK.Definitions;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.Profiles;
+using XRTK.Editor.Utilities;
 using XRTK.Services;
 
 namespace XRTK.Editor
 {
     [CustomEditor(typeof(MixedRealityToolkit))]
-    public class MixedRealityToolkitInspector : BaseMixedRealityToolkitInspector
+    public class MixedRealityToolkitInspector : UnityEditor.Editor
     {
         private SerializedProperty activeProfile;
         private int currentPickerWindow = -1;
@@ -38,7 +39,7 @@ namespace XRTK.Editor
 
         public override void OnInspectorGUI()
         {
-            RenderMixedRealityToolkitLogo();
+            MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
 
             serializedObject.Update();
             EditorGUI.BeginChangeCheck();

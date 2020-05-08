@@ -44,5 +44,10 @@ MonoBehaviour:
   enableDiagnosticsSystem: 1
   diagnosticsSystemType:
     reference: 2044b5ae-8f50-4b66-b508-d8087356c140
+  enableNativeLibrarySystem: 1
+  nativeLibrarySystemType:
+    reference: 05400710-c49c-4498-be2a-7234af715eaf
+  nativeLibrarySystemProfile: {fileID: 11400000, guid: f5fb2befce25ba745a4e05b12d073d61,
+    type: 2}
   registeredServiceProvidersProfile: {fileID: 11400000, guid: 511ad0cf7c4894a4b871c18a457f96f8,
     type: 2}

@@ -70,7 +70,7 @@ namespace XRTK.Editor.Profiles
             }
             else
             {
-                MixedRealityInspectorUtility.RenderCustomHeader(image);
+                MixedRealityInspectorUtility.RenderInspectorHeader(image);
             }
 
             if (ThisProfile.ParentProfile != null &&

@@ -65,7 +65,7 @@ namespace XRTK.Editor.PropertyDrawers
             var propertyLabel = EditorGUI.BeginProperty(position, label, property);
             var profileType = ProfileTypeOverride ?? fieldInfo.FieldType;
             var hasSelection = property.objectReferenceValue != null;
-            var buttonWidth = hasSelection ? 42f : 20f;
+            var buttonWidth = hasSelection ? 48f : 20f;
             var objectRect = position;
 
             if (DrawCloneButtons)

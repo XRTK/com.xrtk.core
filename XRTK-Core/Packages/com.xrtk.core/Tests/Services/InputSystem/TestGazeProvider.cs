@@ -20,6 +20,6 @@ namespace XRTK.Tests.Services.InputSystem
         public Vector3 GazeDirection { get; } = Vector3.zero;
         public Vector3 HeadVelocity { get; } = Vector3.zero;
         public Vector3 HeadMovementDirection { get; } = Vector3.zero;
-        public GameObject GameObjectReference { get; } = null;
+        public GameObject GameObject { get; } = null;
     }
 }

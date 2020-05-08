@@ -23,6 +23,13 @@ namespace XRTK.Seed
     [InitializeOnLoad]
     public class MixedRealityPackageSeed
     {
+        private static readonly ScopedRegistry XRTKRegistry = new ScopedRegistry
+        {
+            Name = "XRTK",
+            Url = "http://upm.xrtk.io:4873/",
+            Scopes = new List<string> { "com.xrtk" }
+        };
+
         static MixedRealityPackageSeed()
         {
             EditorUtility.ClearProgressBar();
@@ -63,14 +70,12 @@ namespace XRTK.Seed
                         manifest.ScopedRegistries = new List<ScopedRegistry>();
                     }
 
-                    manifest.ScopedRegistries.Add(new ScopedRegistry
+                    if (!manifest.ScopedRegistries.Contains(XRTKRegistry))
                     {
-                        Name = "XRTK",
-                        Url = "http://upm.xrtk.io:4873/",
-                        Scopes = new List<string> { "com.xrtk" }
-                    });
+                        manifest.ScopedRegistries.Add(XRTKRegistry);
+                        File.WriteAllText(PackageManifest.ManifestFilePath, JsonConvert.SerializeObject(manifest, Formatting.Indented));
+                    }
 
-                    File.WriteAllText(PackageManifest.ManifestFilePath, JsonConvert.SerializeObject(manifest, Formatting.Indented));
                     ListXrtkPackages();
                 }
                 else

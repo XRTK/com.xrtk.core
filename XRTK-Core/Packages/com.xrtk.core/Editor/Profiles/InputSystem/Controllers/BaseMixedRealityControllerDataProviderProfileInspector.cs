@@ -34,7 +34,18 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
         private ReorderableList mappingProfileList;
         private int currentlySelectedElement;
         private int selectedMappingsViewModeTab = 0;
+
         private GUIStyle controllerButtonStyle;
+
+        private GUIStyle ControllerButtonStyle => controllerButtonStyle ?? (controllerButtonStyle = new GUIStyle("button")
+        {
+            imagePosition = ImagePosition.ImageAbove,
+            fontStyle = FontStyle.Bold,
+            stretchHeight = true,
+            stretchWidth = true,
+            wordWrap = true,
+            fontSize = 10,
+        });
 
         protected override void OnEnable()
         {
@@ -258,19 +269,6 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
         {
             var controllerType = controllerMappingProfile.ControllerType.Type;
 
-            if (controllerButtonStyle == null)
-            {
-                controllerButtonStyle = new GUIStyle("LargeButton")
-                {
-                    imagePosition = ImagePosition.ImageAbove,
-                    fontStyle = FontStyle.Bold,
-                    stretchHeight = true,
-                    stretchWidth = true,
-                    wordWrap = true,
-                    fontSize = 10,
-                };
-            }
-
             var handedness = controllerMappingProfile.Handedness;
 
             if (handedness != Handedness.Right)
@@ -286,7 +284,7 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
             }
 
             var buttonContent = new GUIContent($"Edit {typeName} Action Mapping", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile));
-            if (GUILayout.Button(buttonContent, controllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
+            if (GUILayout.Button(buttonContent, ControllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
             {
                 EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, new SerializedObject(controllerMappingProfile).FindProperty("interactionMappingProfiles"));
             }

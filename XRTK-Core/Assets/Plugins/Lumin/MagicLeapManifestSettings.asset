@@ -1,0 +1,108 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cf5b356e131a944286fec26d7c40b4e, type: 3}
+  m_Name: MagicLeapManifestSettings
+  m_EditorClassIdentifier: 
+  m_MinimumAPILevel: 8
+  m_Privileges:
+  - name: LowLatencyLightwear
+    enabled: 1
+  - name: BackgroundDownload
+    enabled: 0
+  - name: BackgroundUpload
+    enabled: 0
+  - name: BatteryInfo
+    enabled: 0
+  - name: ConnectBackgroundMusicService
+    enabled: 0
+  - name: ControllerPose
+    enabled: 1
+  - name: DrmCertificates
+    enabled: 0
+  - name: GesturesConfig
+    enabled: 1
+  - name: GesturesSubscribe
+    enabled: 1
+  - name: IdentityRead
+    enabled: 0
+  - name: InAppPurchase
+    enabled: 0
+  - name: Internet
+    enabled: 0
+  - name: MusicService
+    enabled: 0
+  - name: NormalNotificationsUsage
+    enabled: 0
+  - name: Occlusion
+    enabled: 1
+  - name: PowerInfo
+    enabled: 0
+  - name: RegisterBackgroundMusicService
+    enabled: 0
+  - name: ScreensProvider
+    enabled: 0
+  - name: AddressBookRead
+    enabled: 0
+  - name: AddressBookWrite
+    enabled: 0
+  - name: LocalAreaNetwork
+    enabled: 0
+  - name: PwFoundObjRead
+    enabled: 0
+  - name: AudioCaptureMic
+    enabled: 0
+  - name: AudioRecognizer
+    enabled: 0
+  - name: CameraCapture
+    enabled: 1
+  - name: CoarseLocation
+    enabled: 0
+  - name: ComputerVision
+    enabled: 0
+  - name: VoiceInput
+    enabled: 0
+  - name: WifiStatusRead
+    enabled: 0
+  - name: WorldReconstruction
+    enabled: 1
+  - name: AddressBookBasicAccess
+    enabled: 0
+  - name: BluetoothAdapterExternalApp
+    enabled: 0
+  - name: BluetoothAdapterUser
+    enabled: 0
+  - name: BluetoothGattWrite
+    enabled: 0
+  - name: ConnectionAccess
+    enabled: 0
+  - name: DesktopCompanion
+    enabled: 0
+  - name: HandMesh
+    enabled: 1
+  - name: Expressions
+    enabled: 0
+  - name: ConnectionAudioCaptureStreaming
+    enabled: 0
+  - name: ConnectionVideoCaptureStreaming
+    enabled: 0
+  - name: PcfRead
+    enabled: 0
+  - name: SecureBrowserWindow
+    enabled: 0
+  - name: SocialConnectionsInvitesAccess
+    enabled: 0
+  - name: SocialConnectionsSelectAccess
+    enabled: 0
+  - name: ObjectData
+    enabled: 0
+  - name: FineLocation
+    enabled: 0

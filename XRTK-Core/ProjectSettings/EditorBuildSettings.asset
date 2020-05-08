@@ -8,4 +8,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/BaseScene.unity
     guid: c71bfba9e4cd8644486e0622ec4da627
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.xr.magicleap.magic_leap_settings: {fileID: 11400000, guid: 31a8c1f9badf2664badf6229ab102ca7,
+      type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: c4303dedc54495d439f0220e10896a0f,
+      type: 2}

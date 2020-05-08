@@ -6,7 +6,7 @@
     ],
     "m_SettingValues": [
         "True",
-        "False",
+        "True",
         ",Standalone,iPhone,Android,WebGL,Metro,Lumin"
     ]
 }

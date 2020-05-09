@@ -3,8 +3,8 @@
 
 using System;
 using System.Collections.Generic;
-using XRTK.Extensions;
 using XRTK.Definitions.Physics;
+using XRTK.Extensions;
 
 namespace XRTK.Utilities.Physics
 {

@@ -4,10 +4,10 @@
 using System.Collections;
 using UnityEngine;
 using XRTK.Definitions.Physics;
-using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Physics;
+using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.TeleportSystem;
 
 namespace XRTK.Services.InputSystem.Pointers

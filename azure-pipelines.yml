@@ -22,7 +22,7 @@ pr:
   paths:
     include:
     - azure-pipelines.yml
-    - azure-pipelines/*
+    - azure_pipelines/*
     - XRTK-Core/*
     exclude:
       - '*'
@@ -38,7 +38,7 @@ trigger:
   paths:
     include:
       - azure-pipelines.yml
-      - azure-pipelines/*
+      - azure_pipelines/*
       - XRTK-Core/*
     exclude:
       - '*'

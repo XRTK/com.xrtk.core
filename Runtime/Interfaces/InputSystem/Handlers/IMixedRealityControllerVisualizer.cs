@@ -5,15 +5,18 @@ using UnityEngine;
 
 namespace XRTK.Interfaces.InputSystem.Handlers
 {
+    /// <summary>
+    /// Interface for configuring controller visualization.
+    /// </summary>
     public interface IMixedRealityControllerVisualizer : IMixedRealityControllerPoseSynchronizer
     {
         /// <summary>
-        /// The <see cref="GameObject"/> reference for this controller.
+        /// The <see cref="UnityEngine.GameObject"/> reference for this controller.
         /// </summary>
         /// <remarks>
         /// This reference may not always be available when called.
         /// </remarks>
-        GameObject GameObjectProxy { get; }
+        GameObject GameObject { get; }
 
         // TODO add defined elements or transforms?
     }

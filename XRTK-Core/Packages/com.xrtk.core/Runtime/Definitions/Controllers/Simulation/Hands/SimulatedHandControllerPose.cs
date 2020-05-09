@@ -238,6 +238,7 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
 
         #region IEqualityComparer Implementation
 
+        /// <inheritdoc />
         bool IEqualityComparer.Equals(object left, object right)
         {
             if (left is null || right is null) { return false; }
@@ -250,16 +251,19 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
             return Id == other.Id;
         }
 
+        /// <inheritdoc />
         public override bool Equals(object obj)
         {
             return !(obj is null) && (obj is SimulatedHandControllerPose pose && Equals(pose));
         }
 
+        /// <inheritdoc />
         int IEqualityComparer.GetHashCode(object obj)
         {
             return obj is SimulatedHandControllerPose pose ? pose.GetHashCode() : 0;
         }
 
+        /// <inheritdoc />
         public override int GetHashCode()
         {
             return base.GetHashCode();

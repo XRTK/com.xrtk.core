@@ -11,7 +11,7 @@ namespace XRTK.Interfaces.InputSystem
     public interface IMixedRealityGazeProvider
     {
         /// <summary>
-        /// Enable or disable the <see cref="Component"/> attached to the <see cref="GameObjectReference"/>
+        /// Enable or disable the <see cref="Component"/> attached to the <see cref="UnityEngine.GameObject"/>
         /// </summary>
         bool Enabled { get; set; }
 
@@ -73,8 +73,8 @@ namespace XRTK.Interfaces.InputSystem
         Vector3 HeadMovementDirection { get; }
 
         /// <summary>
-        /// Get the GameObject reference for this Gaze Provider.
+        /// Get the <see cref="UnityEngine.GameObject"/> reference for this <see cref="IMixedRealityGazeProvider"/>.
         /// </summary>
-        GameObject GameObjectReference { get; }
+        GameObject GameObject { get; }
     }
 }

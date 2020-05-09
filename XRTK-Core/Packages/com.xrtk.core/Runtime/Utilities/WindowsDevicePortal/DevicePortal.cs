@@ -1,14 +1,14 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Extensions;
-using XRTK.Utilities.Async;
 using System;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
+using XRTK.Extensions;
+using XRTK.Utilities.Async;
 using XRTK.Utilities.WebRequestRest;
 using XRTK.Utilities.WindowsDevicePortal.DataStructures;
 using FileInfo = System.IO.FileInfo;

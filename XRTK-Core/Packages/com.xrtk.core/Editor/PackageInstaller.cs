@@ -12,7 +12,6 @@ using XRTK.Editor.Extensions;
 using XRTK.Editor.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
-using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Services;
@@ -21,8 +20,6 @@ namespace XRTK.Editor
 {
     public static class PackageInstaller
     {
-        private const string META_SUFFIX = ".meta";
-
         /// <summary>
         /// Attempt to copy any assets found in the source path into the project.
         /// </summary>
@@ -32,52 +29,96 @@ namespace XRTK.Editor
         /// <returns>Returns true if the profiles were successfully copies, installed, and added to the <see cref="MixedRealityToolkitRootProfile"/>.</returns>
         public static bool TryInstallAssets(string sourcePath, string destinationPath, bool regenerateGuids = true)
         {
-            if (Directory.Exists(destinationPath))
-            {
-                var installedAssets = Directory.EnumerateFiles(Path.GetFullPath(destinationPath), "*.asset", SearchOption.AllDirectories).ToList();
+            return TryInstallAssets(new Dictionary<string, string> { { sourcePath, destinationPath } }, regenerateGuids);
+        }
 
-                for (int i = 0; i < installedAssets.Count; i++)
-                {
-                    installedAssets[i] = installedAssets[i].Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty).ToForwardSlashes();
-                }
-
-                EditorApplication.delayCall += () => AddConfigurations(installedAssets);
-                return true;
-            }
-
-            EditorUtility.DisplayProgressBar("Copying assets...", $"{sourcePath} -> {destinationPath}", 0);
-            var assetPaths = Directory.EnumerateFiles(Path.GetFullPath(sourcePath), "*.asset", SearchOption.AllDirectories).ToList();
-
+        /// <summary>
+        /// Attempt to copy any assets found in the source path into the project.
+        /// </summary>
+        /// <param name="installationPaths">The assets paths to be installed. Key is the source path of the assets to be installed. This should typically be from a hidden upm package folder marked with a "~". Value is the destination.</param>
+        /// <param name="regenerateGuids">Should the guids for the copied assets be regenerated?</param>
+        /// <returns>Returns true if the profiles were successfully copies, installed, and added to the <see cref="MixedRealityToolkitRootProfile"/>.</returns>
+        public static bool TryInstallAssets(Dictionary<string, string> installationPaths, bool regenerateGuids = true)
+        {
             var anyFail = false;
+            var installedAssets = new List<string>();
+            var installedDirectories = new List<string>();
 
-            for (var i = 0; i < assetPaths.Count; i++)
+            foreach (var installationPath in installationPaths)
             {
-                EditorUtility.DisplayProgressBar("Copying assets...", Path.GetFileNameWithoutExtension(assetPaths[i]), i / (float)assetPaths.Count);
+                var sourcePath = installationPath.Key;
+                var destinationPath = installationPath.Value;
+                installedDirectories.Add(destinationPath);
 
-                try
+                Debug.Log($"{sourcePath} -> {destinationPath}");
+
+                if (Directory.Exists(destinationPath))
                 {
-                    assetPaths[i] = CopyAsset(sourcePath, assetPaths[i], destinationPath);
+                    EditorUtility.DisplayProgressBar("Verifying assets...", $"{sourcePath} -> {destinationPath}", 0);
+
+                    installedAssets.AddRange(UnityFileHelper.GetUnityAssetsAtPath(destinationPath));
+
+                    for (int i = 0; i < installedAssets.Count; i++)
+                    {
+                        EditorUtility.DisplayProgressBar("Verifying assets...", Path.GetFileNameWithoutExtension(installedAssets[i]), i / (float)installedAssets.Count);
+                        installedAssets[i] = installedAssets[i].Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty).ToForwardSlashes();
+                    }
                 }
-                catch (Exception e)
+                else
                 {
-                    Debug.LogError(e);
-                    anyFail = true;
+                    Directory.CreateDirectory(Path.GetFullPath(destinationPath));
+                    EditorUtility.DisplayProgressBar("Copying assets...", $"{sourcePath} -> {destinationPath}", 0);
+
+                    var copiedAssets = UnityFileHelper.GetUnityAssetsAtPath(sourcePath);
+
+                    for (var i = 0; i < copiedAssets.Count; i++)
+                    {
+                        EditorUtility.DisplayProgressBar("Copying assets...", Path.GetFileNameWithoutExtension(copiedAssets[i]), i / (float)copiedAssets.Count);
+
+                        try
+                        {
+                            copiedAssets[i] = CopyAsset(sourcePath, copiedAssets[i], destinationPath);
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogError(e);
+                            anyFail = true;
+                        }
+                    }
+
+                    if (!anyFail)
+                    {
+                        installedAssets.AddRange(copiedAssets);
+                    }
+
+                    EditorUtility.ClearProgressBar();
                 }
             }
-
-            EditorUtility.ClearProgressBar();
 
             if (anyFail)
             {
-                return false;
+                foreach (var installedDirectory in installedDirectories)
+                {
+                    try
+                    {
+                        if (Directory.Exists(installedDirectory))
+                        {
+                            Directory.Delete(installedDirectory);
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError(e);
+                    }
+                }
             }
 
             if (regenerateGuids)
             {
-                GuidRegenerator.RegenerateGuids(Path.GetFullPath(destinationPath), false);
+                GuidRegenerator.RegenerateGuids(installedDirectories);
             }
 
-            EditorApplication.delayCall += () => AddConfigurations(assetPaths);
+            EditorApplication.delayCall += () => AddConfigurations(installedAssets);
             return true;
         }
 
@@ -85,7 +126,7 @@ namespace XRTK.Editor
         {
             AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
 
-            foreach (var profile in profiles)
+            foreach (var profile in profiles.Where(x => x.EndsWith(".asset")))
             {
                 var platformConfigurationProfile = AssetDatabase.LoadAssetAtPath<MixedRealityPlatformServiceConfigurationProfile>(profile);
 
@@ -120,7 +161,6 @@ namespace XRTK.Editor
                 Directory.CreateDirectory(Directory.GetParent(destinationPath).FullName);
 
                 File.Copy(sourceAssetPath, destinationPath);
-                File.Copy($"{sourceAssetPath}{META_SUFFIX}", $"{destinationPath}{META_SUFFIX}");
             }
 
             return destinationPath.Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty);

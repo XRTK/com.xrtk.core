@@ -19,24 +19,22 @@ namespace XRTK.Editor.Utilities
     /// </summary>
     internal static class GuidRegenerator
     {
-        private static readonly string[] DefaultFileExtensions = {
-            "*.meta",
-            "*.mat",
-            "*.anim",
-            "*.prefab",
-            "*.unity",
-            "*.asset",
-            "*.guiskin",
-            "*.fontsettings",
-            "*.controller",
-        };
-
         /// <summary>
         /// Regenerate the guids for assets located in the <see cref="assetsRootPath"/>.
         /// </summary>
         /// <param name="assetsRootPath">The root directory to search for assets to regenerate guids for.</param>
         /// <param name="refreshAssetDatabase">Should <see cref="AssetDatabase.Refresh(ImportAssetOptions)"/> be called after finishing regeneration? (Default is true)</param>
         public static void RegenerateGuids(string assetsRootPath, bool refreshAssetDatabase = true)
+        {
+            RegenerateGuids(new List<string> { assetsRootPath }, refreshAssetDatabase);
+        }
+
+        /// <summary>
+        /// Regenerate the guids for assets located in the <see cref="assetsRootPath"/>.
+        /// </summary>
+        /// <param name="assetsRootPath">The root directory to search for assets to regenerate guids for.</param>
+        /// <param name="refreshAssetDatabase">Should <see cref="AssetDatabase.Refresh(ImportAssetOptions)"/> be called after finishing regeneration? (Default is true)</param>
+        public static void RegenerateGuids(List<string> assetsRootPath, bool refreshAssetDatabase = true)
         {
             try
             {
@@ -55,14 +53,14 @@ namespace XRTK.Editor.Utilities
             }
         }
 
-        private static void RegenerateGuidsInternal(string assetsRootPath)
+        private static void RegenerateGuidsInternal(List<string> assetsRootPath)
         {
             // Get list of working files
             var filesPaths = new List<string>();
 
-            foreach (var extension in DefaultFileExtensions)
+            for (int i = 0; i < assetsRootPath?.Count; i++)
             {
-                filesPaths.AddRange(Directory.GetFiles(assetsRootPath, extension, SearchOption.AllDirectories));
+                filesPaths.AddRange(UnityFileHelper.GetUnityAssetsAtPath(assetsRootPath[i]));
             }
 
             // Create dictionary to hold old-to-new GUID map
@@ -78,7 +76,7 @@ namespace XRTK.Editor.Utilities
 
             foreach (var filePath in filesPaths)
             {
-                EditorUtility.DisplayProgressBar($"Scanning {assetsRootPath} folder", MakeRelativePath(assetsRootPath, filePath), counter / (float)filesPaths.Count);
+                EditorUtility.DisplayProgressBar("Gathering asset info...", filePath, counter / (float)filesPaths.Count);
 
                 var isFirstGuid = true;
                 var guids = GetGuids(File.ReadAllText(filePath));
@@ -119,7 +117,7 @@ namespace XRTK.Editor.Utilities
 
             foreach (var filePath in guidsInFileMap.Keys)
             {
-                EditorUtility.DisplayProgressBar("Regenerating GUIDs...", MakeRelativePath(assetsRootPath, filePath), counter / (float)guidsInFileMapKeysCount);
+                EditorUtility.DisplayProgressBar("Regenerating GUIDs...", filePath, counter / (float)guidsInFileMapKeysCount);
                 counter++;
 
                 var contents = File.ReadAllText(filePath);
@@ -176,16 +174,5 @@ namespace XRTK.Editor.Utilities
         }
 
         private static bool IsGuid(string text) => text.All(c => (c >= '0' && c <= '9') || (c >= 'a' && c <= 'z'));
-
-        private static string MakeRelativePath(string fromPath, string toPath)
-        {
-            var toUri = new Uri(toPath);
-            var fromUri = new Uri(fromPath);
-
-            var relativeUri = fromUri.MakeRelativeUri(toUri);
-            var relativePath = Uri.UnescapeDataString(relativeUri.ToString());
-
-            return relativePath;
-        }
     }
 }

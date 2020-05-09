@@ -1,9 +1,13 @@
 steps:
   - powershell: |
+      $version = Select-String -Path "$(System.DefaultWorkingDirectory)\$(project.name)\ProjectSettings\ProjectVersion.txt" -Pattern "(?<version>(?:(?<major>\d+)\.)?(?:(?<minor>\d+)\.)?(?:(?<patch>\d+[fab]\d+)\b))|((?:\((?<revision>\w+))\))" -AllMatches | % { $_.Matches } | % { $_.Value } | select-object -first 1
+
+      Write-Host "Attempting to install Unity $version"
+
       Install-Module -Name UnitySetup -AllowPrerelease -RequiredVersion $(UnityPowerShellHelperVersion) -Scope CurrentUser -Repository PSGallery -Force
-      Install-UnitySetupInstance -Verbose -Installers ( Find-UnitySetupInstaller -Version $(UnityVersion) -Components ${{ parameters.components }} -Verbose )
+      Install-UnitySetupInstance -Verbose -Installers ( Find-UnitySetupInstaller -Version $version -Components ${{ parameters.components }} -Verbose )
       Get-UnitySetupInstance | Select-UnitySetupInstance | Format-Table -Wrap -AutoSize
-      $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Version $(UnityVersion)
+      $editorInstance = Get-UnitySetupInstance | Select-UnitySetupInstance -Version $version
       $editorPath = $editorInstance.Path + "\Editor\Unity.exe"
       Write-Host "UnityEditor path set to: $editorPath"
       echo "##vso[task.setvariable variable=EditorPath]$editorPath"

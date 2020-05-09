@@ -39,6 +39,11 @@ namespace XRTK.Providers.Controllers
         /// <param name="controllerMappingProfile"></param>
         protected BaseController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
         {
+            if (controllerMappingProfile == null)
+            {
+                throw new Exception($"{nameof(controllerMappingProfile)} cannot be null");
+            }
+
             ControllerDataProvider = controllerDataProvider;
             TrackingState = trackingState;
             ControllerHandedness = controllerHandedness;

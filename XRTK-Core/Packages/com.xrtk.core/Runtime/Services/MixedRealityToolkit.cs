@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using XRTK.Definitions;
@@ -18,6 +19,7 @@ using XRTK.Interfaces.NetworkingSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.TeleportSystem;
 using XRTK.Utilities;
+using XRTK.Utilities.Async;
 
 namespace XRTK.Services
 {
@@ -343,8 +345,6 @@ namespace XRTK.Services
             return IsInitialized;
         }
 
-        #endregion Instance Management
-
         /// <summary>
         /// Once all services are registered and properties updated, the Mixed Reality Toolkit will initialize all active services.
         /// This ensures all services can reference each other once started.
@@ -635,6 +635,8 @@ namespace XRTK.Services
                 CameraCache.Main.gameObject.EnsureComponent<EventSystem>();
             }
         }
+
+        #endregion Instance Management
 
         #region MonoBehaviour Implementation
 
@@ -1903,10 +1905,12 @@ namespace XRTK.Services
 
         #region Core System Accessors
 
+        #region Camera System
+
         private static IMixedRealityCameraSystem cameraSystem = null;
 
         /// <summary>
-        /// The current Camera System registered with the Mixed Reality Toolkit.
+        /// The current <see cref="IMixedRealityCameraSystem"/> registered with the Mixed Reality Toolkit.
         /// </summary>
         public static IMixedRealityCameraSystem CameraSystem
         {
@@ -1935,10 +1939,34 @@ namespace XRTK.Services
 
         private static bool logCameraSystem = true;
 
+        /// <summary>
+        /// Waits for the <see cref="IMixedRealityCameraSystem"/> to be valid.
+        /// </summary>
+        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
+        /// <returns>True, when the input system is valid, otherwise false.</returns>
+        public static async Task<bool> ValidateCameraSystemAsync(int timeout = 10)
+        {
+            try
+            {
+                await CameraSystem.WaitUntil(system => system != null, timeout);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion Camera System
+
+        #region Input System
+
         private static IMixedRealityInputSystem inputSystem = null;
 
         /// <summary>
-        /// The current Input System registered with the Mixed Reality Toolkit.
+        /// The current <see cref="IMixedRealityInputSystem"/> registered with the Mixed Reality Toolkit.
         /// </summary>
         public static IMixedRealityInputSystem InputSystem
         {
@@ -1967,10 +1995,34 @@ namespace XRTK.Services
 
         private static bool logInputSystem = true;
 
+        /// <summary>
+        /// Waits for the <see cref="IMixedRealityInputSystem"/> to be valid.
+        /// </summary>
+        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
+        /// <returns>True, when the input system is valid, otherwise false.</returns>
+        public static async Task<bool> ValidateInputSystemAsync(int timeout = 10)
+        {
+            try
+            {
+                await InputSystem.WaitUntil(system => system != null, timeout);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion Input System
+
+        #region Boundary System
+
         private static IMixedRealityBoundarySystem boundarySystem = null;
 
         /// <summary>
-        /// The current Boundary System registered with the Mixed Reality Toolkit.
+        /// The current <see cref="IMixedRealityBoundarySystem"/> registered with the Mixed Reality Toolkit.
         /// </summary>
         public static IMixedRealityBoundarySystem BoundarySystem
         {
@@ -1999,10 +2051,34 @@ namespace XRTK.Services
 
         private static bool logBoundarySystem = true;
 
+        /// <summary>
+        /// Waits for the <see cref="IMixedRealityBoundarySystem"/> to be valid.
+        /// </summary>
+        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
+        /// <returns>True, when the input system is valid, otherwise false.</returns>
+        public static async Task<bool> ValidateBoundarySystemAsync(int timeout = 10)
+        {
+            try
+            {
+                await BoundarySystem.WaitUntil(system => system != null, timeout);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion Boundary System
+
+        #region Spatial Awareness System
+
         private static IMixedRealitySpatialAwarenessSystem spatialAwarenessSystem = null;
 
         /// <summary>
-        /// The current Spatial Awareness System registered with the Mixed Reality Toolkit.
+        /// The current <see cref="IMixedRealitySpatialAwarenessSystem"/> registered with the Mixed Reality Toolkit.
         /// </summary>
         public static IMixedRealitySpatialAwarenessSystem SpatialAwarenessSystem
         {
@@ -2031,10 +2107,34 @@ namespace XRTK.Services
 
         private static bool logSpatialAwarenessSystem = true;
 
+        /// <summary>
+        /// Waits for the <see cref="IMixedRealitySpatialAwarenessSystem"/> to be valid.
+        /// </summary>
+        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
+        /// <returns>True, when the input system is valid, otherwise false.</returns>
+        public static async Task<bool> ValidateSpatialAwarenessSystemAsync(int timeout = 10)
+        {
+            try
+            {
+                await SpatialAwarenessSystem.WaitUntil(system => system != null, timeout);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion Spatial Awareness System
+
+        #region Teleport System
+
         private static IMixedRealityTeleportSystem teleportSystem = null;
 
         /// <summary>
-        /// The current Teleport System registered with the Mixed Reality Toolkit.
+        /// The current <see cref="IMixedRealityTeleportSystem"/> registered with the Mixed Reality Toolkit.
         /// </summary>
         public static IMixedRealityTeleportSystem TeleportSystem
         {
@@ -2063,10 +2163,34 @@ namespace XRTK.Services
 
         private static bool logTeleportSystem = true;
 
+        /// <summary>
+        /// Waits for the <see cref="IMixedRealityTeleportSystem"/> to be valid.
+        /// </summary>
+        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
+        /// <returns>True, when the input system is valid, otherwise false.</returns>
+        public static async Task<bool> ValidateTeleportSystemAsync(int timeout = 10)
+        {
+            try
+            {
+                await TeleportSystem.WaitUntil(system => system != null, timeout);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion Teleport System
+
+        #region Networking System
+
         private static IMixedRealityNetworkingSystem networkingSystem = null;
 
         /// <summary>
-        /// The current Networking System registered with the Mixed Reality Toolkit.
+        /// The current <see cref="IMixedRealityNetworkingSystem"/> registered with the Mixed Reality Toolkit.
         /// </summary>
         public static IMixedRealityNetworkingSystem NetworkingSystem
         {
@@ -2094,6 +2218,86 @@ namespace XRTK.Services
         }
 
         private static bool logNetworkingSystem = true;
+
+        /// <summary>
+        /// Waits for the <see cref="IMixedRealityNetworkingSystem"/> to be valid.
+        /// </summary>
+        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
+        /// <returns>True, when the input system is valid, otherwise false.</returns>
+        public static async Task<bool> ValidateNetworkingSystemAsync(int timeout = 10)
+        {
+            try
+            {
+                await NetworkingSystem.WaitUntil(system => system != null, timeout);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion Networking System
+
+        #region Diagnostics System
+
+        private static IMixedRealityDiagnosticsSystem diagnosticsSystem = null;
+
+        /// <summary>
+        /// The current <see cref="IMixedRealityDiagnosticsSystem"/> registered with the Mixed Reality Toolkit.
+        /// </summary>
+        public static IMixedRealityDiagnosticsSystem DiagnosticsSystem
+        {
+            get
+            {
+                if (!IsInitialized ||
+                    IsApplicationQuitting ||
+                    instance.activeProfile == null ||
+                    instance.activeProfile != null && !instance.activeProfile.IsDiagnosticsSystemEnabled)
+                {
+                    return null;
+                }
+
+                if (diagnosticsSystem != null)
+                {
+                    return diagnosticsSystem;
+                }
+
+                diagnosticsSystem = GetService<IMixedRealityDiagnosticsSystem>(showLogs: logDiagnosticsSystem);
+                // If we found a valid system, then we turn logging back on for the next time we need to search.
+                // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
+                logDiagnosticsSystem = diagnosticsSystem != null;
+                return diagnosticsSystem;
+            }
+        }
+
+        private static bool logDiagnosticsSystem = true;
+
+        /// <summary>
+        /// Waits for the <see cref="IMixedRealityDiagnosticsSystem"/> to be valid.
+        /// </summary>
+        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
+        /// <returns>True, when the input system is valid, otherwise false.</returns>
+        public static async Task<bool> ValidateDiagnosticsSystemAsync(int timeout = 10)
+        {
+            try
+            {
+                await DiagnosticsSystem.WaitUntil(system => system != null, timeout);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion Diagnostics System
+
+        #region Native Library System
 
         private static IMixedRealityNativeLibrarySystem nativeLibrarySystem = null;
 
@@ -2127,37 +2331,27 @@ namespace XRTK.Services
 
         private static bool logNativeLibrarySystem = true;
 
-        private static IMixedRealityDiagnosticsSystem diagnosticsSystem = null;
-
         /// <summary>
-        /// The current Diagnostics System registered with the Mixed Reality Toolkit.
+        /// Waits for the <see cref="IMixedRealityNativeLibrarySystem"/> to be valid.
         /// </summary>
-        public static IMixedRealityDiagnosticsSystem DiagnosticsSystem
+        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
+        /// <returns>True, when the input system is valid, otherwise false.</returns>
+        public static async Task<bool> ValidateNativeLibrarySystemAsync(int timeout = 10)
         {
-            get
+            try
             {
-                if (!IsInitialized ||
-                    IsApplicationQuitting ||
-                    instance.activeProfile == null ||
-                    instance.activeProfile != null && !instance.activeProfile.IsDiagnosticsSystemEnabled)
-                {
-                    return null;
-                }
-
-                if (diagnosticsSystem != null)
-                {
-                    return diagnosticsSystem;
-                }
-
-                diagnosticsSystem = GetService<IMixedRealityDiagnosticsSystem>(showLogs: logDiagnosticsSystem);
-                // If we found a valid system, then we turn logging back on for the next time we need to search.
-                // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
-                logDiagnosticsSystem = diagnosticsSystem != null;
-                return diagnosticsSystem;
+                await NativeLibrarySystem.WaitUntil(system => system != null, timeout);
             }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return false;
+            }
+
+            return true;
         }
 
-        private static bool logDiagnosticsSystem = true;
+        #endregion Native Library System
 
         #endregion Core System Accessors
 

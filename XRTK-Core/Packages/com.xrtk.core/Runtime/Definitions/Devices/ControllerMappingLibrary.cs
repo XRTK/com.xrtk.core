@@ -6,8 +6,8 @@ using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using XRTK.Definitions.Utilities;
 using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Utilities;
 using XRTK.Utilities.Editor;
 #endif
 

@@ -39,4 +39,4 @@ MonoBehaviour:
     profile: {fileID: 0}
   diagnosticsWindowPrefab: {fileID: 2161880003638299081, guid: be9153b959e0d4d4aa50a4a1a6617daa,
     type: 3}
-  showDiagnosticsWindowOnStart: 1
+  showDiagnosticsWindowOnStart: 0

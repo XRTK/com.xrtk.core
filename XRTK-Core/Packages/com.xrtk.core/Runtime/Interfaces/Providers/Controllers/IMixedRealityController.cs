@@ -16,6 +16,11 @@ namespace XRTK.Interfaces.Providers.Controllers
     public interface IMixedRealityController
     {
         /// <summary>
+        /// The human readable description of the controller.
+        /// </summary>
+        string Name { get; }
+
+        /// <summary>
         /// Is the controller enabled?
         /// </summary>
         bool Enabled { get; set; }

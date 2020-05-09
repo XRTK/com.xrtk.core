@@ -90,7 +90,7 @@
         },
         {
             "Controller": "LuminController",
-            "Handedness": 1,
+            "Handedness": 3,
             "InputLabelPositions": [
                 {
                     "x": -137.0,
@@ -139,59 +139,6 @@
                 true,
                 true,
                 true
-            ]
-        },
-        {
-            "Controller": "LuminController",
-            "Handedness": 2,
-            "InputLabelPositions": [
-                {
-                    "x": 568.0,
-                    "y": 298.0
-                },
-                {
-                    "x": 63.0,
-                    "y": 375.0
-                },
-                {
-                    "x": 62.0,
-                    "y": 397.0
-                },
-                {
-                    "x": 61.0,
-                    "y": 422.0
-                },
-                {
-                    "x": 570.0,
-                    "y": 371.0
-                },
-                {
-                    "x": 463.0,
-                    "y": 133.0
-                },
-                {
-                    "x": 527.0,
-                    "y": 193.0
-                },
-                {
-                    "x": 527.0,
-                    "y": 235.0
-                },
-                {
-                    "x": 527.0,
-                    "y": 215.0
-                }
-            ],
-            "IsLabelFlipped": [
-                false,
-                true,
-                true,
-                true,
-                false,
-                false,
-                false,
-                false,
-                false
             ]
         },
         {

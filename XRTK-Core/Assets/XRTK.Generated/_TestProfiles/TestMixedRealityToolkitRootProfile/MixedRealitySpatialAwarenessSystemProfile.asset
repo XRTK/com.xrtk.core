@@ -33,7 +33,7 @@ MonoBehaviour:
       - reference: 7dc72b4e-34f6-4b26-afd7-cde0c51f83a3
       - reference: 7dc72b4e-34f6-4b26-afd7-cde0c51f83a3
     profile: {fileID: 0}
-  meshDisplayOption: 0
+  meshDisplayOption: 1
   globalMeshObserverProfile: {fileID: 11400000, guid: 6cbcb6266beaa724780d064525cf2896,
     type: 2}
   globalSurfaceObserverProfile: {fileID: 0}

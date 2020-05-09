@@ -6,7 +6,6 @@ using XRTK.EventDatum.Input;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Services;
 using XRTK.Services.InputSystem.Pointers;
 using XRTK.Services.InputSystem.Sources;
 using XRTK.Utilities;

@@ -38,6 +38,9 @@ namespace XRTK.Services.DiagnosticsSystem
         #region IMixedRealityService Implementation
 
         /// <inheritdoc />
+        public override uint Priority => 0;
+
+        /// <inheritdoc />
         public override void Initialize()
         {
             base.Initialize();

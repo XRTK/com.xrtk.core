@@ -3,16 +3,15 @@
 
 using System.Collections.Generic;
 using XRTK.Definitions.Controllers.Hands;
-using XRTK.Definitions.Controllers.Simulation.Hands;
 
 namespace XRTK.Interfaces.Providers.Controllers.Hands
 {
     public interface IMixedRealityHandControllerDataProvider : IMixedRealityControllerDataProvider
     {
         /// <summary>
-        /// Should hand mesh data be read if the platform provides it?
+        /// Gets the current rendering mode for hand controllers.
         /// </summary>
-        bool HandMeshingEnabled { get; }
+        HandRenderingMode RenderingMode { get; }
 
         /// <summary>
         /// Are hand physics enabled?

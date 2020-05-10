@@ -31,7 +31,7 @@ namespace XRTK.Editor.Profiles.InputSystem
         private SerializedProperty drawDebugPointingRays;
         private SerializedProperty debugPointingRayColors;
 
-        private SerializedProperty handMeshingEnabled;
+        private SerializedProperty renderingMode;
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
         private SerializedProperty boundsMode;
@@ -60,7 +60,7 @@ namespace XRTK.Editor.Profiles.InputSystem
             drawDebugPointingRays = serializedObject.FindProperty(nameof(drawDebugPointingRays));
             debugPointingRayColors = serializedObject.FindProperty(nameof(debugPointingRayColors));
 
-            handMeshingEnabled = serializedObject.FindProperty(nameof(handMeshingEnabled));
+            renderingMode = serializedObject.FindProperty(nameof(renderingMode));
             handPhysicsEnabled = serializedObject.FindProperty(nameof(handPhysicsEnabled));
             useTriggers = serializedObject.FindProperty(nameof(useTriggers));
             boundsMode = serializedObject.FindProperty(nameof(boundsMode));
@@ -150,7 +150,7 @@ namespace XRTK.Editor.Profiles.InputSystem
                 EditorGUI.indentLevel++;
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Hand Rendering Settings", EditorStyles.boldLabel);
-                EditorGUILayout.PropertyField(handMeshingEnabled);
+                EditorGUILayout.PropertyField(renderingMode);
                 EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Hand Physics Settings", EditorStyles.boldLabel);
                 EditorGUILayout.PropertyField(handPhysicsEnabled);

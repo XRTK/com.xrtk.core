@@ -30,9 +30,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             HandPoseAnimationSpeed = profile.HandPoseAnimationSpeed;
 
-            HandMeshingEnabled = profile.HandMeshingEnabled != globalSettingsProfile.HandMeshingEnabled
-                ? profile.HandMeshingEnabled
-                : globalSettingsProfile.HandMeshingEnabled;
+            RenderingMode = profile.RenderingMode != globalSettingsProfile.RenderingMode
+                ? profile.RenderingMode
+                : globalSettingsProfile.RenderingMode;
 
             HandPhysicsEnabled = profile.HandPhysicsEnabled != globalSettingsProfile.HandPhysicsEnabled
                 ? profile.HandPhysicsEnabled
@@ -88,7 +88,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public HandBoundsMode BoundsMode { get; }
 
         /// <inheritdoc />
-        public bool HandMeshingEnabled { get; }
+        public HandRenderingMode RenderingMode { get; }
 
         /// <inheritdoc />
         public IReadOnlyList<HandControllerPoseDefinition> TrackedPoses { get; }

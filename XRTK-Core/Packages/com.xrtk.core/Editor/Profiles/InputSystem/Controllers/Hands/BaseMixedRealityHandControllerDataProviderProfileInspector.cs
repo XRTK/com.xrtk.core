@@ -11,7 +11,7 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
     [CustomEditor(typeof(BaseHandControllerDataProviderProfile), true, isFallback = true)]
     public class BaseMixedRealityHandControllerDataProviderProfileInspector : BaseMixedRealityControllerDataProviderProfileInspector
     {
-        private SerializedProperty handMeshingEnabled;
+        private SerializedProperty renderingMode;
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
         private SerializedProperty boundsMode;
@@ -24,7 +24,7 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
         {
             base.OnEnable();
 
-            handMeshingEnabled = serializedObject.FindProperty(nameof(handMeshingEnabled));
+            renderingMode = serializedObject.FindProperty(nameof(renderingMode));
             handPhysicsEnabled = serializedObject.FindProperty(nameof(handPhysicsEnabled));
             useTriggers = serializedObject.FindProperty(nameof(useTriggers));
             boundsMode = serializedObject.FindProperty(nameof(boundsMode));
@@ -44,7 +44,7 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
 
                 EditorGUILayout.LabelField("Hand Rendering Settings");
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(handMeshingEnabled);
+                EditorGUILayout.PropertyField(renderingMode);
                 EditorGUILayout.Space();
                 EditorGUI.indentLevel--;
 

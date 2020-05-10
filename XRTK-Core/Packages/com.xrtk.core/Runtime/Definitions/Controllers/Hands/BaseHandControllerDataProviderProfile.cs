@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using UnityEngine;
-using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Utilities;
 using XRTK.Providers.Controllers.Hands;
 
@@ -15,13 +14,13 @@ namespace XRTK.Definitions.Controllers.Hands
     public abstract class BaseHandControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
     {
         [SerializeField]
-        [Tooltip("If set, hand mesh data will be read and available for visualization. Disable for optimized performance.")]
-        private bool handMeshingEnabled = false;
+        [Tooltip("Defines what kind of data should be aggregated for the hands rendering.")]
+        private HandRenderingMode renderingMode = HandRenderingMode.Joints;
 
         /// <summary>
-        /// If set, hand mesh data will be read and available for visualization. Disable for optimized performance.
+        /// Defines what kind of data should be aggregated for the hands rendering.
         /// </summary>
-        public bool HandMeshingEnabled => handMeshingEnabled;
+        public HandRenderingMode RenderingMode => renderingMode;
 
         [SerializeField]
         [Tooltip("If set, hands will be setup with colliders and a rigidbody to work with Unity's physics system.")]

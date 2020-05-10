@@ -20,9 +20,9 @@ namespace XRTK.Providers.Controllers.Hands
         {
             var globalSettingsProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
 
-            HandMeshingEnabled = profile.HandMeshingEnabled != globalSettingsProfile.HandMeshingEnabled
-                ? profile.HandMeshingEnabled
-                : globalSettingsProfile.HandMeshingEnabled;
+            RenderingMode = profile.RenderingMode != globalSettingsProfile.RenderingMode
+                ? profile.RenderingMode
+                : globalSettingsProfile.RenderingMode;
 
             HandPhysicsEnabled = profile.HandPhysicsEnabled != globalSettingsProfile.HandPhysicsEnabled
                 ? profile.HandPhysicsEnabled
@@ -49,7 +49,7 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <inheritdoc />
-        public bool HandMeshingEnabled { get; }
+        public HandRenderingMode RenderingMode { get; }
 
         /// <inheritdoc />
         public bool HandPhysicsEnabled { get; }

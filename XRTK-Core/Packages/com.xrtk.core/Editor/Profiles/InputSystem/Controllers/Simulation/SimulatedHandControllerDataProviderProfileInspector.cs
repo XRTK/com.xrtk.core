@@ -14,7 +14,7 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers.Simulation
         private static readonly GUIContent SimulatedHandSettingsFoldoutHeader = new GUIContent("Simulated Hand Tracking Settings");
         private static readonly GUIContent handPoseAnimationSpeedLabel = new GUIContent("Hand Pose Animation Speed");
 
-        private SerializedProperty handMeshingEnabled;
+        private SerializedProperty renderingMode;
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
         private SerializedProperty boundsMode;
@@ -27,7 +27,7 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers.Simulation
         {
             base.OnEnable();
 
-            handMeshingEnabled = serializedObject.FindProperty(nameof(handMeshingEnabled));
+            renderingMode = serializedObject.FindProperty(nameof(renderingMode));
             handPhysicsEnabled = serializedObject.FindProperty(nameof(handPhysicsEnabled));
             useTriggers = serializedObject.FindProperty(nameof(useTriggers));
             boundsMode = serializedObject.FindProperty(nameof(boundsMode));
@@ -52,7 +52,7 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers.Simulation
 
                 EditorGUILayout.LabelField("Hand Rendering Settings");
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(handMeshingEnabled);
+                EditorGUILayout.PropertyField(renderingMode);
                 EditorGUILayout.Space();
                 EditorGUI.indentLevel--;
 

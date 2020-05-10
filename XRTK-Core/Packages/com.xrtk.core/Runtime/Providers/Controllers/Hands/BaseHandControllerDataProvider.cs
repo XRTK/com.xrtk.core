@@ -49,7 +49,7 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <inheritdoc />
-        public HandRenderingMode RenderingMode { get; }
+        public HandRenderingMode RenderingMode { get; set; }
 
         /// <inheritdoc />
         public bool HandPhysicsEnabled { get; }

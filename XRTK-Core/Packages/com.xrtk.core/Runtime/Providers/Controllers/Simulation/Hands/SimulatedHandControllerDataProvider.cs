@@ -88,7 +88,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public HandBoundsMode BoundsMode { get; }
 
         /// <inheritdoc />
-        public HandRenderingMode RenderingMode { get; }
+        public HandRenderingMode RenderingMode { get; set; }
 
         /// <inheritdoc />
         public IReadOnlyList<HandControllerPoseDefinition> TrackedPoses { get; }

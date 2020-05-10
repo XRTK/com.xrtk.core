@@ -11,7 +11,7 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         /// <summary>
         /// Gets the current rendering mode for hand controllers.
         /// </summary>
-        HandRenderingMode RenderingMode { get; }
+        HandRenderingMode RenderingMode { get; set; }
 
         /// <summary>
         /// Are hand physics enabled?

@@ -84,7 +84,8 @@ namespace XRTK.Providers.Controllers.OpenVR
         protected override Type GetCurrentControllerType(string joystickName)
         {
             if (joystickName.Contains("Oculus Rift CV1") ||
-                joystickName.Contains("Oculus Touch"))
+                joystickName.Contains("Oculus Touch") ||
+                joystickName.Contains("Oculus Quest"))
             {
                 return typeof(OculusTouchOpenVRController);
             }

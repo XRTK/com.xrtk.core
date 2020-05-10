@@ -6,6 +6,7 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
 using XRTK.Services;
+using XRTK.Services.InputSystem;
 using XRTK.Utilities;
 
 namespace XRTK.Providers.Controllers.Hands
@@ -185,12 +186,20 @@ namespace XRTK.Providers.Controllers.Hands
         /// <returns>Pointer pose.</returns>
         private MixedRealityPose ComputeFallbackPointerPose(HandData handData)
         {
+            var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
+            palmPose.Rotation = Quaternion.Inverse(palmPose.Rotation) * palmPose.Rotation;
+
             var thumbProximalPose = handData.Joints[(int)TrackedHandJoint.ThumbProximalJoint];
             var indexDistalPose = handData.Joints[(int)TrackedHandJoint.IndexDistalJoint];
             var pointerPosition = Vector3.Lerp(thumbProximalPose.Position, indexDistalPose.Position, .5f);
+            var pointerEndPosition = pointerPosition + palmPose.Forward * 10f;
 
-            var bodyTransform = MixedRealityToolkit.CameraSystem.MainCameraRig.BodyTransform;
-            var pointerRotation = Quaternion.LookRotation(bodyTransform.forward, bodyTransform.up);
+            var camera = MixedRealityToolkit.CameraSystem != null
+                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera
+                : CameraCache.Main;
+
+            var pointerDirection = pointerEndPosition - pointerPosition;
+            var pointerRotation = Quaternion.LookRotation(pointerDirection, camera.transform.up);
 
             return new MixedRealityPose(pointerPosition, pointerRotation);
         }

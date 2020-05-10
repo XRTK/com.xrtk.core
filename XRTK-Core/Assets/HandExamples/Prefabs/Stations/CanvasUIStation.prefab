@@ -1143,10 +1143,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4921078653626617464, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+    - target: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
-      propertyPath: m_Mesh
-      value: 
+      propertyPath: m_textInfo.characterCount
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3917820510407092929, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
@@ -1184,30 +1204,35 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+    - target: {fileID: 4921078653626617464, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336437836207700531, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_text
+      value: UGUI UI
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 15
+      value: 7
       objectReference: {fileID: 0}
-    - target: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ab67fec43eb02c48ad8eccc70bbd61b, type: 3}

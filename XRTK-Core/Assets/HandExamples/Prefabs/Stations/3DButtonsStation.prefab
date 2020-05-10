@@ -1019,7 +1019,7 @@ PrefabInstance:
     - target: {fileID: 8166074040417619579, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
       propertyPath: m_Name
-      value: InstructionsPanel
+      value: ButtonsStationResultPanel
       objectReference: {fileID: 0}
     - target: {fileID: 6428953436839194961, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
@@ -1076,15 +1076,40 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6339228401341687518, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4921078653626617464, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 6339228401341687518, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+    - target: {fileID: 6336437836207700531, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
       propertyPath: m_Mesh
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_text
+      value: 3D UI / Interaction
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ab67fec43eb02c48ad8eccc70bbd61b, type: 3}

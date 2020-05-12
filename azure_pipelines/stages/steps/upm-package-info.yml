@@ -44,7 +44,7 @@ steps:
 
       Write-Host Next Release Version
 
-      if ( $(isPreviewBuild) ) {
+      if ( $(isPreviewBuild) -eq 'true' ) {
         # 0.2.0-preview.1
 
         $buildNumber = $env:Build_BuildNumber

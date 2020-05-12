@@ -41,8 +41,10 @@ stages:
         - template: steps/build-unity-player.yml
           parameters:
             target: ${{ item }}
-        - template: steps/export-package-seed.yml
         - template: steps/build-docs.yml
+
+        - ${{ if eq(parameters.platform, 'windows') }}:
+          - template: steps/export-package-seed.yml
 
       - task: PublishPipelineArtifact@1
         displayName: 'Publish Pipeline Artifacts'

@@ -27,8 +27,8 @@ stages:
           Write-Host "isPreviewBuild? $(isPreviewBuild)"
         displayName: 'Debug parameters'
 
-      #- ${{ if or( eq('$(isReleaseBuild)', 'true'), eq('$(isPreviewBuild)', 'true') ) }}:
-      - template: steps/upm-package-info.yml
+      - ${{ if or( eq('$(isReleaseBuild)', 'true'), eq('$(isPreviewBuild)', 'true') ) }}:
+        - template: steps/upm-package-info.yml
 
       - template: steps/install-unity.yml
         parameters:

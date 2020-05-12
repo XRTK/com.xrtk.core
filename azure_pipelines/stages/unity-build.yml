@@ -17,17 +17,18 @@ stages:
       - checkout: self
         submodules: recursive
 
+      - template: steps/upm-package-info.yml
+
       - powershell: |
           $buildNumber = '$(Build.BuildNumber)'
           $split = $buildNumber.Split('.')
           $revision = $split[$split.Count - 1]
           Write-Host "Build Number: $buildNumber"
           Write-Host "Build Revision Number: $revision"
+          Write-Host "Package Version: $(package.version)"
           Write-Host "isReleaseBuild? $(isReleaseBuild)"
           Write-Host "isPreviewBuild? $(isPreviewBuild)"
         displayName: 'Build Variables'
-
-      - template: steps/upm-package-info.yml
 
       # - template: steps/install-unity.yml
       #   parameters:

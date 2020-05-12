@@ -17,12 +17,12 @@ stages:
       steps:
       - checkout: self
 
-      - template: steps/upm-package-info.yml
+      #- template: steps/upm-package-info.yml
 
       - powershell: |
           $buildNumber = '$(Build.BuildNumber)'
           Write-Host "Build Number: $buildNumber"
-          Write-Host Package Version Found: $(package.version)
+          Write-Host "Package Version: $(package.version)"
           Write-Host "isReleaseBuild? $(isReleaseBuild)"
           Write-Host "isPreviewBuild? $(isPreviewBuild)"
         displayName: 'Publish Variables'

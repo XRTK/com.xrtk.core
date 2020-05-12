@@ -39,4 +39,4 @@ steps:
       searchFolder: '$(LogDirectory)'
       mergeTestResults: true
       failTaskOnFailedTests: true
-    condition: always()
+    condition: succeededOrFailed()

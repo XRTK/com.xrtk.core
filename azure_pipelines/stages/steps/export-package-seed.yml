@@ -29,4 +29,4 @@ steps:
 
       exit $process.ExitCode
     displayName: 'Unity Export Package Seed'
-    condition: ${{ and(succeeded(), eq(variables['isReleaseBuild'], 'True'), eq('${{ package.name }}', 'com.xrtk.core') ) }}
+    condition: and(succeeded(), eq(variables['isReleaseBuild'], 'True'), eq(variables['Build.Repository.Name]', 'XRTK-Core') )

@@ -15,7 +15,7 @@ steps:
 
       # Strip SemVer since version type is not compatible. We do a hard replace on the preview tag anyway.
       $version = [version] ($packageInfo.version -replace "-preview.\d*", "")
-      $oldVersion = [version] ($oldVersionString - repalce "-preview.\d*", "")
+      $oldVersion = [version] ($oldVersionString -repalce "-preview.\d*", "")
 
       if( $(isPreviewBuild) ) {
         # if preview only bump build number if less than

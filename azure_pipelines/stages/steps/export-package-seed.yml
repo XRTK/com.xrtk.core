@@ -29,3 +29,4 @@ steps:
 
       exit $process.ExitCode
     displayName: 'Unity Export Package Seed'
+    condition: and(succeeded(), eq(variables['isReleaseBuild'], 'True'), eq(variables['package.name'], 'com.xrtk.core') )

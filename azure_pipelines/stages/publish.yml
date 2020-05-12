@@ -10,7 +10,7 @@ stages:
 
   jobs:
     - job:
-      displayName: $[ format('publish {0}', variables['package.name']) ]
+      displayName: ${{ format('publish {0}', variables['Build.BuildNumber']) }}
       variables:
       - group: Global Pipeline Settings
       - group: Discord Webhook Publishing Variables

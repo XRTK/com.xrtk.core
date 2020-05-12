@@ -52,7 +52,7 @@ steps:
         $packageInfo.version = [string] $version
       }
 
-      Write-Host "##vso[task.setvariable variable=package.version;isOutput=true]$($packageInfo.version)"
+      Write-Host "##vso[task.setvariable variable=package.version]$($packageInfo.version)"
       $packageInfo | ConvertTo-Json | Set-Content $packageJsonFile
       # NOTE: packageInfo is only committed back to the master branch in build-docfx.yaml when doing a release build
     failOnStderr: true

@@ -1,7 +1,4 @@
 parameters:
-  - name: isReleaseBuild
-    type: boolean
-    default: false
   - name: os
     type: object
     default:
@@ -32,6 +29,4 @@ stages:
     parameters:
       platform: windows
       ${{ insert }}: ${{ parameters.os.windows }}
-      isReleaseBuild: ${{ parameters.isReleaseBuild }}
-  - ${{ if eq( parameters.isReleaseBuild, 'true' ) }}:
-    - template: stages/publish.yml
+  - template: stages/publish.yml

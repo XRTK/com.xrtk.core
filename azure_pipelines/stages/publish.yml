@@ -1,6 +1,7 @@
 stages:
-- stage: Publish
+- stage:
   condition: or( eq(variables['isReleaseBuild'], 'True'), eq(variables['isPreviewBuild'], 'True') )
+  dependsOn: Build
   pool:
     name: 'Azure Pipelines'
     vmImage: 'ubuntu-latest'
@@ -9,7 +10,7 @@ stages:
 
   jobs:
     - job:
-      displayName: ${{ format('Publishing {0}', variables['package.name']) }}
+      displayName: ${{ format('Publishing {0}', '$(package.name)') }}
       variables:
       - group: Global Pipeline Settings
       - group: Discord Webhook Publishing Variables

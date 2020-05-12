@@ -18,7 +18,11 @@ stages:
         submodules: recursive
 
       - powershell: |
-          Write-Host "Build Revision Number: $(System.PullRequest.PullRequestNumber)$(Rev:.r)"
+          $buildNumber = $env:Bulid_BuildNumber
+          $split = $buildNumber.Split('.')
+          $revision = $split[$split.Count - 1]
+          Write-Host "Build Number: $buildNumber"
+          Write-Host "Build Revision Number: $revision"
           Write-Host "isReleaseBuild? $(parameters.isReleaseBuild)"
           Write-Host "isPreviewBuild? $(parameters.isPreviewBuild)"
         displayName: 'Debug parameters'

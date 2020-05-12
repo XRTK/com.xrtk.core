@@ -1,5 +1,6 @@
 stages:
 - stage:
+  displayName: 'publish'
   condition: or( eq(variables['isReleaseBuild'], 'True'), eq(variables['isPreviewBuild'], 'True') )
   dependsOn: Build
   pool:
@@ -10,7 +11,6 @@ stages:
 
   jobs:
     - job:
-      displayName: 'publish'
       variables:
       - group: Global Pipeline Settings
       - group: Discord Webhook Publishing Variables

@@ -17,12 +17,22 @@ stages:
       - checkout: self
         submodules: recursive
 
+      - template: steps/upm-package-info.yml
+
+      - powershell: |
+          $buildNumber = '$(Build.BuildNumber)'
+          $split = $buildNumber.Split('.')
+          $revision = $split[$split.Count - 1]
+          Write-Host "Build Number: $buildNumber"
+          Write-Host "Build Revision Number: $revision"
+          Write-Host "Package Version: $(package.version)"
+          Write-Host "isReleaseBuild? $(isReleaseBuild)"
+          Write-Host "isPreviewBuild? $(isPreviewBuild)"
+        displayName: 'Build Variables'
+
       - template: steps/install-unity.yml
         parameters:
           components: ${{ parameters.components }}
-
-      - ${{ if eq( parameters.isReleaseBuild, 'true' ) }}:
-        - template: steps/upm-package-info.yml
 
       - ${{ each item in parameters.targets }}:
         - template: steps/run-unity-tests.yml
@@ -31,11 +41,10 @@ stages:
         - template: steps/build-unity-player.yml
           parameters:
             target: ${{ item }}
+        - template: steps/build-docs.yml
 
-        - ${{ if and( eq(parameters.isReleaseBuild, 'true'), eq(parameters.platform, 'windows'), eq(variables['package.name'], 'com.xrtk.core') ) }}:
+        - ${{ if eq(parameters.platform, 'windows') }}:
           - template: steps/export-package-seed.yml
-            # TODO better doc builds for each individual package
-          - template: steps/build-docfx.yml
 
       - task: PublishPipelineArtifact@1
         displayName: 'Publish Pipeline Artifacts'

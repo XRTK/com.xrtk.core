@@ -17,6 +17,12 @@ stages:
       - checkout: self
         submodules: recursive
 
+      - powershell: |
+          Write-Host "Build Revision Number: $(System.PullRequest.PullRequestNumber)$(Rev:.r)"
+          Write-Host "isReleaseBuild? $(parameters.isReleaseBuild)"
+          Write-Host "isPreviewBuild? $(parameters.isPreviewBuild)"
+        displayName: 'Debug parameters'
+
       - template: steps/install-unity.yml
         parameters:
           components: ${{ parameters.components }}

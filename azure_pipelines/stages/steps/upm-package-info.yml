@@ -24,9 +24,6 @@ steps:
         if( $version -lt $oldVersion ) {
           $version = [version]::new($oldVersion.Major, $oldVersion.Minor, $oldVersion.Build + 1)
         }
-        else {
-          $version = [version]::new($oldVersion.Major, $oldVersion.Minor, $oldVersion.Build)
-        }
       }
       else {
         if( '$(isReleaseBuild)' -eq 'True' ) {
@@ -36,9 +33,6 @@ steps:
           if( $version -le $oldVersion ) {
             $version = [version]::new($oldVersion.Major, $oldVersion.Minor, $oldVersion.Build + 1)
           }
-        }
-        else {
-          $version = [version]::new($oldVersion.Major, $oldVersion.Minor, $oldVersion.Build)
         }
       }
 

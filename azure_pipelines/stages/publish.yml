@@ -16,6 +16,8 @@ stages:
       steps:
       - checkout: self
 
+      - template: steps/upm-package-info.yml
+
       - powershell: |
           Write-Host Package Version Found: $(package.version)
           Write-Host "isReleaseBuild? $(isReleaseBuild)"

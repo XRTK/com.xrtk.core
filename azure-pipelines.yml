@@ -50,4 +50,4 @@ extends:
   template: azure_pipelines/common.yml
   parameters:
     isReleaseBuild: ${{ and( eq(variables['Build.SourceBranchName'], 'master'), or( eq(variables['build.reason'], 'BatchedCI'), eq(variables['build.reason'], 'Manual') ) ) }}
-    isPreviewBuild: ${{ and( eq(variables['System.PullRequest.TargetBranch'], 'master'), eq(variables['build.reason'], 'PullRequest') ) }}
+    isPreviewBuild: ${{ and( eq($(System.PullRequest.TargetBranch), 'master'), eq(variables['build.reason'], 'PullRequest') ) }}

@@ -8,7 +8,8 @@ stages:
       - unity -equals false
 
   jobs:
-    - job: Publish
+    - job:
+      displayName: ${{ format('Publishing {0}', variables['package.name']) }}
       variables:
       - group: Global Pipeline Settings
       - group: Discord Webhook Publishing Variables
@@ -19,7 +20,7 @@ stages:
       - template: steps/upm-package-info.yml
 
       - powershell: |
-          $buildNumber = $(Build.BuildNumber)
+          $buildNumber = '$(Build.BuildNumber)'
           Write-Host "Build Number: $buildNumber"
           Write-Host Package Version Found: $(package.version)
           Write-Host "isReleaseBuild? $(isReleaseBuild)"

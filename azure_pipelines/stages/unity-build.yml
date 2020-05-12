@@ -21,8 +21,11 @@ stages:
         parameters:
           components: ${{ parameters.components }}
 
-      - ${{ if eq( parameters.isReleaseBuild, 'true' ) }}:
+      - ${{ if or ( eq( parameters.isReleaseBuild, 'true' ), eq( parameters.isPreviewBuild, 'true' ) ) }}:
         - template: steps/upm-package-info.yml
+          parameters:
+            bumpVersionNumber: ${{ parameters.isReleaseBuild }}
+            isPreviewBuild: ${{ parameters.isPreviewBuild }}
 
       - ${{ each item in parameters.targets }}:
         - template: steps/run-unity-tests.yml

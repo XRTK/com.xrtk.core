@@ -33,5 +33,6 @@ stages:
       platform: windows
       ${{ insert }}: ${{ parameters.os.windows }}
       isReleaseBuild: ${{ parameters.isReleaseBuild }}
-  - ${{ if eq( parameters.isReleaseBuild, 'true' ) }}:
-    - template: stages/publish.yml
+      isPreviewBuild: ${{ parameters.isPreviewBuild }}
+  # - ${{ if or ( eq( parameters.isReleaseBuild, 'true' ), eq( parameters.isPreviewBuild, 'true' ) ) }}:
+  #   - template: stages/publish.yml

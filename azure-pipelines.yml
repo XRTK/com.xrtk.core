@@ -9,8 +9,8 @@ variables:
     date: ''
   ${{ if ne( variables['build.reason'], 'PullRequest' ) }}:
     date: ${{ '$(Date:yyyyMMdd)' }}
-  isReleaseBuild: $[ and( eq(variables['Build.SourceBranchName'], 'master'), or( eq(variables['build.reason'], 'BatchedCI'), eq(variables['build.reason'], 'Manual') ) ) ]
-  isPreviewBuild: $[ and( eq('$(System.PullRequest.TargetBranch)', 'master'), eq(variables['build.reason'], 'PullRequest') ) ]
+  isReleaseBuild: ${{ and( eq(variables['Build.SourceBranchName'], 'master'), or( eq(variables['build.reason'], 'BatchedCI'), eq(variables['build.reason'], 'Manual') ) ) }}
+  isPreviewBuild: ${{ and( eq('$(System.PullRequest.TargetBranch)', 'master'), eq(variables['build.reason'], 'PullRequest') ) }}
 
 name: $(package.name) ${{ coalesce( variables['date'], '$(System.PullRequest.PullRequestNumber)', '$(Date:yyyyMMdd)' ) }}$(Rev:.r)
 

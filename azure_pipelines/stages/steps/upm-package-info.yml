@@ -36,8 +36,6 @@ steps:
         }
       }
 
-      Write-Host Next Release Version
-
       if ( '$(isPreviewBuild)' -eq 'True' ) {
         # 0.2.0-preview.1
 
@@ -48,13 +46,12 @@ steps:
         Write-Host $oldVersionString -> $packageInfo.version
       }
       else {
-        Write-Host $oldVersion -> $version
+        Write-Host Last Release Version: $oldVersion -> Current Project Version $version
         $packageInfo.version = [string] $version
       }
 
       Write-Host "##vso[task.setvariable variable=package.version]$($packageInfo.version)"
       $packageInfo | ConvertTo-Json | Set-Content $packageJsonFile
-      # NOTE: packageInfo is only committed back to the master branch in build-docfx.yaml when doing a release build
+      # NOTE: packageInfo is only committed back to the master branch in build-docs.yaml when doing a release build
     failOnStderr: true
     displayName: 'Sync Package Info'
-    condition: and(succeeded(), or( eq(variables['isReleaseBuild'], 'True'), eq(variables['isPreviewBuild'], 'True') ) )

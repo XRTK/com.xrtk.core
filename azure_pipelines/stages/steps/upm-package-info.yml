@@ -52,7 +52,7 @@ steps:
         $packageInfo.version = [string] $version
       }
 
-      Write-Host "##vso[task.setvariable variable=package.version]$($packageInfo.version)"
+      Write-Host "##vso[task.setvariable variable=package.version;isOutput=true]$($packageInfo.version)"
       $packageInfo | ConvertTo-Json | Set-Content $packageJsonFile
     failOnStderr: true
     displayName: 'Sync Package Info'

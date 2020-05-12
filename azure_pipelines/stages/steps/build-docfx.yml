@@ -20,3 +20,4 @@ steps:
       git branch -D docfx
       git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git master
     displayName: 'Build Docfx'
+    condition: eq(variables['isReleaseBuild'], 'True')

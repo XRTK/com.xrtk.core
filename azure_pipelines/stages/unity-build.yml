@@ -27,8 +27,7 @@ stages:
           Write-Host "isPreviewBuild? $(isPreviewBuild)"
         displayName: 'Debug parameters'
 
-      - ${{ if or( eq(variables['isReleaseBuild'], 'True'), eq(variables['isPreviewBuild'], 'True') ) }}:
-        - template: steps/upm-package-info.yml
+      - template: steps/upm-package-info.yml
 
       - template: steps/install-unity.yml
         parameters:
@@ -42,7 +41,7 @@ stages:
           parameters:
             target: ${{ item }}
 
-        - ${{ if and( eq(variables['isReleaseBuild'], 'True'), eq(parameters.platform, 'windows'), eq(variables['package.name'], 'com.xrtk.core') ) }}:
+        - ${{ if and( eq(parameters.platform, 'windows'), eq(variables['package.name'], 'com.xrtk.core') ) }}:
           - template: steps/export-package-seed.yml
             # TODO better doc builds for each individual package
           - template: steps/build-docfx.yml

@@ -4,9 +4,13 @@ steps:
       Copy-Item "$(System.DefaultWorkingDirectory)\README.md" -Destination $(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name) -force -Verbose
       Copy-Item "$(System.DefaultWorkingDirectory)\LICENSE.md" -Destination $(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name) -force -Verbose
 
-      choco install docfx
+      $buildDocfx = Test-Path '$(System.DefaultWorkingDirectory)\docfx_project\docfx.json'
 
-      docfx $(System.DefaultWorkingDirectory)\docfx_project\docfx.json
+      if( $buildDocfx ) {
+        choco install docfx
+
+        docfx $(System.DefaultWorkingDirectory)\docfx_project\docfx.json
+      }
 
       $env:GIT_REDIRECT_STDERR = '2>&1'
       git config user.email "XRTK-Build-Bot@users.noreply.github.com"
@@ -18,11 +22,11 @@ steps:
       git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\LICENSE.md"
       git status
       git commit -m "docs $(package.version)@$(Build.SourceVersion)"
-      git checkout -b docfx
+      git checkout -b docs
       git fetch origin master
       git checkout master
-      git merge docfx
-      git branch -D docfx
+      git merge docs
+      git branch -D docs
       git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git master
-    displayName: 'Build Docfx'
-    condition: and( eq(variables['isReleaseBuild'], 'True'), eq(variables['package.name'], 'com.xrtk.core') )
+    displayName: 'Build Docs'
+    condition: and(succeeded(), eq(variables['isReleaseBuild'], 'True') )

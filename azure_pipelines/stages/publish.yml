@@ -1,7 +1,7 @@
 stages:
 - stage:
   displayName: 'publish'
-  condition: or( eq(variables['isReleaseBuild'], 'True'), eq(variables['isPreviewBuild'], 'True') )
+  condition: and(succeeded(), or( eq(variables['isReleaseBuild'], 'True'), eq(variables['isPreviewBuild'], 'True') ) )
   dependsOn: Build
   pool:
     name: 'Azure Pipelines'
@@ -57,13 +57,13 @@ stages:
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download Pipeline Artifact'
-        condition: eq(variables['isReleaseBuild'], 'True')
+        condition:  and(succeeded(), eq(variables['isReleaseBuild'], 'True') )
         inputs:
           artifact: ${{ format('{0}.{1}', '$(Build.BuildNumber)', '$(Build.BuildId)') }}
 
       - task: GitHubRelease@1
         displayName: 'GitHub release (create)'
-        condition: eq(variables['isReleaseBuild'], 'True')
+        condition:  and(succeeded(), eq(variables['isReleaseBuild'], 'True') )
         inputs:
           gitHubConnection: 'XRTK Build Bot Connection'
           target: '$(project.upmSha)'
@@ -116,7 +116,7 @@ stages:
 
       - task: robmburke.ado-discord-webhook.custom-build-release-task.ado-discord-webhook@1
         displayName: 'Discord Release Webhook'
-        condition: eq(variables['isReleaseBuild'], 'True')
+        condition: and(succeeded(), eq(variables['isReleaseBuild'], 'True') )
         inputs:
           channelId: '$(Discord.WebhookChannelId)'
           webhookKey: '$(Discord.WebhookKey)'

@@ -57,4 +57,4 @@ steps:
       # NOTE: packageInfo is only committed back to the master branch in build-docfx.yaml when doing a release build
     failOnStderr: true
     displayName: 'Sync Package Info'
-    condition: or( eq(variables['isReleaseBuild'], 'True'), eq(variables['isPreviewBuild'], 'True') )
+    condition: and(succeeded(), or( eq(variables['isReleaseBuild'], 'True'), eq(variables['isPreviewBuild'], 'True') ) )

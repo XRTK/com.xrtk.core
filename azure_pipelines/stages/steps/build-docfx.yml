@@ -13,6 +13,7 @@ steps:
       git config user.name "XRTK-Build-Bot"
       git status
       git add ./docs
+      git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\package.json"
       git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\README.md"
       git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\LICENSE.md"
       git status

@@ -17,7 +17,7 @@ steps:
       $version = [version] ($packageInfo.version -replace "-preview.\d*", "")
       $oldVersion = [version] ($oldVersionString -replace "-preview.\d*", "")
 
-      if( $(isPreviewBuild) -eq 'True' ) {
+      if( '$(isPreviewBuild)' -eq 'True' ) {
         Write-Host "Update Preview Build Version"
         # if preview only bump build number if less than
 
@@ -29,7 +29,7 @@ steps:
         }
       }
       else {
-        if( $(isReleaseBuild) -eq 'True' ) {
+        if( '$(isReleaseBuild)' -eq 'True' ) {
           Write-Host "Update Release Build Version"
           # if release build, then always bump build number if less than or equal
 
@@ -44,7 +44,7 @@ steps:
 
       Write-Host Next Release Version
 
-      if ( $(isPreviewBuild) -eq 'True' ) {
+      if ( '$(isPreviewBuild)' -eq 'True' ) {
         # 0.2.0-preview.1
 
         $buildNumber = $env:Build_BuildNumber

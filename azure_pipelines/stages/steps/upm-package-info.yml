@@ -54,9 +54,6 @@ steps:
 
       Write-Host "##vso[task.setvariable variable=package.version]$($packageInfo.version)"
       $packageInfo | ConvertTo-Json | Set-Content $packageJsonFile
-
-      Copy-Item "$(System.DefaultWorkingDirectory)\README.md" -Destination $(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name) -force -Verbose
-      Copy-Item "$(System.DefaultWorkingDirectory)\LICENSE.md" -Destination $(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name) -force -Verbose
     failOnStderr: true
     displayName: 'Sync Package Info'
     condition: or( eq(variables['isReleaseBuild'], 'True'), eq(variables['isPreviewBuild'], 'True') )

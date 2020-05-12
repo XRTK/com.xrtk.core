@@ -1,5 +1,9 @@
 steps:
   - powershell: |
+      Write-Host Updating project docs...
+      Copy-Item "$(System.DefaultWorkingDirectory)\README.md" -Destination $(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name) -force -Verbose
+      Copy-Item "$(System.DefaultWorkingDirectory)\LICENSE.md" -Destination $(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name) -force -Verbose
+
       choco install docfx
 
       docfx $(System.DefaultWorkingDirectory)\docfx_project\docfx.json

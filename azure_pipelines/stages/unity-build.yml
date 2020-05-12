@@ -23,19 +23,16 @@ stages:
           $revision = $split[$split.Count - 1]
           Write-Host "Build Number: $buildNumber"
           Write-Host "Build Revision Number: $revision"
-          Write-Host "isReleaseBuild? ${{ parameters.isReleaseBuild }}"
-          Write-Host "isPreviewBuild? ${{ parameters.isPreviewBuild }}"
+          Write-Host "isReleaseBuild? $(isReleaseBuild)"
+          Write-Host "isPreviewBuild? $(parameters.isPreviewBuild)"
         displayName: 'Debug parameters'
 
       - template: steps/install-unity.yml
         parameters:
           components: ${{ parameters.components }}
 
-      - ${{ if or( eq(parameters.isReleaseBuild, 'true'), eq(parameters.isPreviewBuild, 'true') ) }}:
+      - ${{ if or( eq(variables['isReleaseBuild'], 'true'), eq(variables['isPreviewBuild'], 'true') ) }}:
         - template: steps/upm-package-info.yml
-          parameters:
-            bumpVersionNumber: ${{ parameters.isReleaseBuild }}
-            isPreviewBuild: ${{ parameters.isPreviewBuild }}
 
       - ${{ each item in parameters.targets }}:
         - template: steps/run-unity-tests.yml
@@ -45,7 +42,7 @@ stages:
           parameters:
             target: ${{ item }}
 
-        - ${{ if and( eq(parameters.isReleaseBuild, 'true'), eq(parameters.platform, 'windows'), eq(variables['package.name'], 'com.xrtk.core') ) }}:
+        - ${{ if and( eq(variables['isReleaseBuild'], 'true'), eq(parameters.platform, 'windows'), eq(variables['package.name'], 'com.xrtk.core') ) }}:
           - template: steps/export-package-seed.yml
             # TODO better doc builds for each individual package
           - template: steps/build-docfx.yml

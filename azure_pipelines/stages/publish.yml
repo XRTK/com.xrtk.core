@@ -16,9 +16,6 @@ stages:
       - checkout: self
 
       - template: steps/upm-package-info.yml
-        parameters:
-          bumpVersionNumber: false
-          isPreviewBuild: ${{ parameters.isPreviewBuild }}
 
       - powershell: |
           Write-Host upm split tree for $(package.name)@$(package.version)
@@ -33,7 +30,7 @@ stages:
           git tag $(package.version) upm
           git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git upm $(package.version) --force
         displayName: 'UPM Mirror'
-        condition: eq('${{ parameters.isReleaseBuild }}', true)
+        condition: $[ eq('variables['isReleaseBuild'], 'true') ]
 
       - task: DownloadPipelineArtifact@2
         displayName: 'Download Pipeline Artifact'
@@ -49,7 +46,7 @@ stages:
 
       - task: GitHubRelease@1
         displayName: 'GitHub release (create)'
-        condition: eq('${{ parameters.isReleaseBuild }}', true)
+        condition: $[ eq('variables['isReleaseBuild'], 'true') ]
         inputs:
           gitHubConnection: 'XRTK Build Bot Connection'
           target: '$(project.upmSha)'
@@ -102,7 +99,7 @@ stages:
 
       - task: robmburke.ado-discord-webhook.custom-build-release-task.ado-discord-webhook@1
         displayName: 'Discord Release Webhook'
-        condition: eq('${{ parameters.isReleaseBuild }}', true)
+        condition: $[ eq('variables['isReleaseBuild'], 'true') ]
         inputs:
           channelId: '$(Discord.WebhookChannelId)'
           webhookKey: '$(Discord.WebhookKey)'

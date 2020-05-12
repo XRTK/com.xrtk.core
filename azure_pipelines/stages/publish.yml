@@ -19,7 +19,7 @@ stages:
       - template: steps/upm-package-info.yml
 
       - powershell: |
-          $buildNumber = $env:Build_BuildNumber
+          $buildNumber = $(Build.BuildNumber)
           Write-Host "Build Number: $buildNumber"
           Write-Host Package Version Found: $(package.version)
           Write-Host "isReleaseBuild? $(isReleaseBuild)"

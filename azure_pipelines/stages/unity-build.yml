@@ -18,7 +18,7 @@ stages:
         submodules: recursive
 
       - powershell: |
-          $buildNumber = $env:Build_BuildNumber
+          $buildNumber = $(Build.BuildNumber)
           $split = $buildNumber.Split('.')
           $revision = $split[$split.Count - 1]
           Write-Host "Build Number: $buildNumber"

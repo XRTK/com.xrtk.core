@@ -31,7 +31,7 @@ stages:
         parameters:
           components: ${{ parameters.components }}
 
-      - ${{ if or( eq(variables['isReleaseBuild'], 'true'), eq(variables['isPreviewBuild'], 'true') ) }}:
+      - $[ if or( eq(variables['isReleaseBuild'], 'true'), eq(variables['isPreviewBuild'], 'true') ) ]:
         - template: steps/upm-package-info.yml
 
       - ${{ each item in parameters.targets }}:

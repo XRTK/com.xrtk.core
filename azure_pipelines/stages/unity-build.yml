@@ -24,7 +24,7 @@ stages:
           Write-Host "Build Number: $buildNumber"
           Write-Host "Build Revision Number: $revision"
           Write-Host "isReleaseBuild? $(isReleaseBuild)"
-          Write-Host "isPreviewBuild? $(parameters.isPreviewBuild)"
+          Write-Host "isPreviewBuild? $(isPreviewBuild)"
         displayName: 'Debug parameters'
 
       - template: steps/install-unity.yml

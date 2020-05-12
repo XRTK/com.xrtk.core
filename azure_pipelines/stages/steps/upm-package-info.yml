@@ -45,7 +45,7 @@ steps:
       if ( $(parameters.isPreviewBuild) ) {
         # 0.2.0-preview.1
 
-        $buildNumber = $(Build.BuildNumber)
+        $buildNumber = $env:Build_BuildNumber
         $split = $buildNumber.Split('.')
         $revision = $split[$split.Count - 1]
         $packageInfo.version = ([string] $version) + "-preview.$revision"

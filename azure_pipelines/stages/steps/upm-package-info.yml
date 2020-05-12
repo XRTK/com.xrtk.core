@@ -45,7 +45,10 @@ steps:
       if ( $(parameters.isPreviewBuild) ) {
         # 0.2.0-preview.1
 
-        $packageInfo.version = ([string] $version) + "-preview$(Rev:.r)"
+        $buildNumber = $(Build.BuildNumber)
+        $split = $buildNumber.Split('.')
+        $revision = $split[$split.Count - 1]
+        $packageInfo.version = ([string] $version) + "-preview.$revision"
         Write-Host $oldVersionString -> $packageInfo.version
       }
       else {

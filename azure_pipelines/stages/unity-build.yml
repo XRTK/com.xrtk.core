@@ -18,13 +18,13 @@ stages:
         submodules: recursive
 
       - powershell: |
-          $buildNumber = $env:Build_BuildNumber
+          $buildNumber = $(Build.BuildNumber)
           $split = $buildNumber.Split('.')
           $revision = $split[$split.Count - 1]
           Write-Host "Build Number: $buildNumber"
           Write-Host "Build Revision Number: $revision"
-          Write-Host "isReleaseBuild? $(parameters.isReleaseBuild)"
-          Write-Host "isPreviewBuild? $(parameters.isPreviewBuild)"
+          Write-Host "isReleaseBuild? ${{ parameters.isReleaseBuild }}"
+          Write-Host "isPreviewBuild? ${{ parameters.isPreviewBuild }}"
         displayName: 'Debug parameters'
 
       - template: steps/install-unity.yml

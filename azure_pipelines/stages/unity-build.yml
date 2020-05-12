@@ -30,28 +30,28 @@ stages:
           Write-Host "isPreviewBuild? $(isPreviewBuild)"
         displayName: 'Build Variables'
 
-      # - template: steps/install-unity.yml
-      #   parameters:
-      #     components: ${{ parameters.components }}
+      - template: steps/install-unity.yml
+        parameters:
+          components: ${{ parameters.components }}
 
-      # - ${{ each item in parameters.targets }}:
-      #   - template: steps/run-unity-tests.yml
-      #     parameters:
-      #       target: ${{ item }}
-      #   - template: steps/build-unity-player.yml
-      #     parameters:
-      #       target: ${{ item }}
+      - ${{ each item in parameters.targets }}:
+        - template: steps/run-unity-tests.yml
+          parameters:
+            target: ${{ item }}
+        - template: steps/build-unity-player.yml
+          parameters:
+            target: ${{ item }}
 
-      #   - ${{ if eq(parameters.platform, 'windows') }}:
-      #     - template: steps/export-package-seed.yml
-      #       # TODO better doc builds for each individual package
-      #     - template: steps/build-docfx.yml
+        - ${{ if eq(parameters.platform, 'windows') }}:
+          - template: steps/export-package-seed.yml
+            # TODO better doc builds for each individual package
+          - template: steps/build-docfx.yml
 
-      # - task: PublishPipelineArtifact@1
-      #   displayName: 'Publish Pipeline Artifacts'
-      #   inputs:
-      #     targetPath: '$(System.DefaultWorkingDirectory)\$(project.name)\Builds'
-      #     artifact: ${{ format('{0}.{1}', '$(Build.BuildNumber)', '$(Build.BuildId)') }}
-      #   condition: always()
+      - task: PublishPipelineArtifact@1
+        displayName: 'Publish Pipeline Artifacts'
+        inputs:
+          targetPath: '$(System.DefaultWorkingDirectory)\$(project.name)\Builds'
+          artifact: ${{ format('{0}.{1}', '$(Build.BuildNumber)', '$(Build.BuildId)') }}
+        condition: always()
 
-      # - template: steps/return-unity-license.yml
+      - template: steps/return-unity-license.yml

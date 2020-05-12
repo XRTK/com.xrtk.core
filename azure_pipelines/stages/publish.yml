@@ -28,107 +28,107 @@ stages:
           Write-Host "isPreviewBuild? $(isPreviewBuild)"
         displayName: 'Publish Variables'
 
-      # - powershell: |
-      #     Write-Host upm split tree for $(package.name)@$(package.version)
+      - powershell: |
+          Write-Host upm split tree for $(package.name)@$(package.version)
 
-      #     $env:GIT_REDIRECT_STDERR = '2>&1'
+          $env:GIT_REDIRECT_STDERR = '2>&1'
 
-      #     git config user.email "XRTK-Build-Bot@users.noreply.github.com"
-      #     git config user.name "XRTK-Build-Bot"
-      #     git status
-      #     git fetch origin master
-      #     git pull origin master
-      #     git subtree split --prefix="$(project.name)/Packages/$(package.name)" --branch upm
+          git config user.email "XRTK-Build-Bot@users.noreply.github.com"
+          git config user.name "XRTK-Build-Bot"
+          git status
+          git fetch origin master
+          git pull origin master
+          git subtree split --prefix="$(project.name)/Packages/$(package.name)" --branch upm
 
-      #     if( '$(isReleaseBuild)' -eq 'True' ) {
-      #       $upmSha = git rev-parse upm
-      #       Write-Host "##vso[task.setvariable variable=project.upmSha]$($upmSha)"
-      #       git tag $(package.version) upm
-      #       git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git upm $(package.version) --force
-      #     }
-      #   displayName: 'UPM Mirror'
+          if( '$(isReleaseBuild)' -eq 'True' ) {
+            $upmSha = git rev-parse upm
+            Write-Host "##vso[task.setvariable variable=project.upmSha]$($upmSha)"
+            git tag $(package.version) upm
+            git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git upm $(package.version) --force
+          }
+        displayName: 'UPM Mirror'
 
-      # - task: Npm@1
-      #   displayName: 'upm publish'
-      #   inputs:
-      #     command: publish
-      #     verbose: false
-      #     publishEndpoint: 'XRTK UPM Server'
+      - task: Npm@1
+        displayName: 'upm publish'
+        inputs:
+          command: publish
+          verbose: false
+          publishEndpoint: 'XRTK UPM Server'
 
-      # - task: DownloadPipelineArtifact@2
-      #   displayName: 'Download Pipeline Artifact'
-      #   condition: eq(variables['isReleaseBuild'], 'True')
-      #   inputs:
-      #     artifact: ${{ format('{0}.{1}', '$(Build.BuildNumber)', '$(Build.BuildId)') }}
+      - task: DownloadPipelineArtifact@2
+        displayName: 'Download Pipeline Artifact'
+        condition: eq(variables['isReleaseBuild'], 'True')
+        inputs:
+          artifact: ${{ format('{0}.{1}', '$(Build.BuildNumber)', '$(Build.BuildId)') }}
 
-      # - task: GitHubRelease@1
-      #   displayName: 'GitHub release (create)'
-      #   condition: eq(variables['isReleaseBuild'], 'True')
-      #   inputs:
-      #     gitHubConnection: 'XRTK Build Bot Connection'
-      #     target: '$(project.upmSha)'
-      #     tagSource: userSpecifiedTag
-      #     tag: '$(package.version)'
-      #     title: '$(project.name) $(package.version)'
-      #     releaseNotesSource: inline
-      #     releaseNotesInline: |
-      #       # Release Notes
+      - task: GitHubRelease@1
+        displayName: 'GitHub release (create)'
+        condition: eq(variables['isReleaseBuild'], 'True')
+        inputs:
+          gitHubConnection: 'XRTK Build Bot Connection'
+          target: '$(project.upmSha)'
+          tagSource: userSpecifiedTag
+          tag: '$(package.version)'
+          title: '$(project.name) $(package.version)'
+          releaseNotesSource: inline
+          releaseNotesInline: |
+            # Release Notes
 
-      #       ## Requirements
+            ## Requirements
 
-      #       - [Unity $(UnityVersion)](https://unity3d.com/unity/whats-new/$(UnityVersion)) or later
-      #       - Microsoft Visual Studio $(VisualStudioVersion)
-      #       - Windows 10 $(WindowsBuildVersion) or later
-      #       - Windows SDK $(WindowsSdkVersion) or later
+            - [Unity $(UnityVersion)](https://unity3d.com/unity/whats-new/$(UnityVersion)) or later
+            - Microsoft Visual Studio $(VisualStudioVersion)
+            - Windows 10 $(WindowsBuildVersion) or later
+            - Windows SDK $(WindowsSdkVersion) or later
 
-      #       ## Import via Unity Package Manager (upm)
+            ## Import via Unity Package Manager (upm)
 
-      #       Find `Packages/manifest.json` in your project and edit the dependencies to include:
+            Find `Packages/manifest.json` in your project and edit the dependencies to include:
 
-      #       ```json
-      #       {
-      #         "scopedRegistries": [
-      #           {
-      #             "name": "XRTK",
-      #             "url": "http://upm.xrtk.io:4873/",
-      #             "scopes": [
-      #               "com.xrtk"
-      #             ]
-      #           }
-      #         ],
-      #         "dependencies": {
-      #           "$(package.name)": "$(package.version)",
-      #           ...
-      #         },
-      #       }
-      #       ```
+            ```json
+            {
+              "scopedRegistries": [
+                {
+                  "name": "XRTK",
+                  "url": "http://upm.xrtk.io:4873/",
+                  "scopes": [
+                    "com.xrtk"
+                  ]
+                }
+              ],
+              "dependencies": {
+                "$(package.name)": "$(package.version)",
+                ...
+              },
+            }
+            ```
 
-      #       Once the registry has been added, you can search for each platform in the UPM Package Manager window.
+            Once the registry has been added, you can search for each platform in the UPM Package Manager window.
 
-      #       > Note: For pre-releases you'll need to enable `show preview packages` under the Advanced dropdown in Unity's Package Manager.
+            > Note: For pre-releases you'll need to enable `show preview packages` under the Advanced dropdown in Unity's Package Manager.
 
-      #       ## Importing the asset directly into your project
+            ## Importing the asset directly into your project
 
-      #       1. Download the release asset unity package
-      #       2. Import unity package directly into your project by dragging and dropping the file into your project window
-      #     assets: '$(Pipeline.Workspace)/**/*.unitypackage'
-      #     isPreRelease: true
+            1. Download the release asset unity package
+            2. Import unity package directly into your project by dragging and dropping the file into your project window
+          assets: '$(Pipeline.Workspace)/**/*.unitypackage'
+          isPreRelease: true
 
-      # - task: robmburke.ado-discord-webhook.custom-build-release-task.ado-discord-webhook@1
-      #   displayName: 'Discord Release Webhook'
-      #   condition: eq(variables['isReleaseBuild'], 'True')
-      #   inputs:
-      #     channelId: '$(Discord.WebhookChannelId)'
-      #     webhookKey: '$(Discord.WebhookKey)'
-      #     name: '$(Discord.WebhookAuthor)'
-      #     avatar: '$(Discord.WebhookAvatarUrl)'
-      #     messageType: embeds
-      #     embeds: |
-      #       [{
-      #           "title": "TEST - (project.name) has a new release!",
-      #           "description": "Release $(package.version) is now available.",
-      #           "author": {
-      #               "name": "$(Discord.WebhookAuthor)"
-      #           },
-      #           "url": "https://github.com/XRTK/$(project.name)/releases"
-      #       }]
+      - task: robmburke.ado-discord-webhook.custom-build-release-task.ado-discord-webhook@1
+        displayName: 'Discord Release Webhook'
+        condition: eq(variables['isReleaseBuild'], 'True')
+        inputs:
+          channelId: '$(Discord.WebhookChannelId)'
+          webhookKey: '$(Discord.WebhookKey)'
+          name: '$(Discord.WebhookAuthor)'
+          avatar: '$(Discord.WebhookAvatarUrl)'
+          messageType: embeds
+          embeds: |
+            [{
+                "title": "TEST - (project.name) has a new release!",
+                "description": "Release $(package.version) is now available.",
+                "author": {
+                    "name": "$(Discord.WebhookAuthor)"
+                },
+                "url": "https://github.com/XRTK/$(project.name)/releases"
+            }]

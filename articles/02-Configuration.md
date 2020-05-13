@@ -16,48 +16,35 @@ When profiles are created by the XRTK, they are then placed in the following fol
 
 This path can be customized by updating your preference in the preferences window.
 
-## Master Configuration Profile
+## Root Configuration Profile
 
-The Mixed Reality Toolkit has a single "master" configuration profile which is referenced on the `MixedRealityToolkit` GameObject in your configured scene.
-
-![Active Profile](../images/Configuation/MixedRealityActiveProfile.png)
-
-Double clicking on this profile will select and show the main configuration screen for the Mixed Reality Toolkit:
+The Mixed Reality Toolkit will only ever have a single active configuration profile running at any time, which is referenced on the `MixedRealityToolkit` GameObject in your configured scene.
 
 ![Main Congiguration Profile](../images/Configuation/MixedRealityProfileView.png)
 
-> The "Default" profiles provided by the Mixed Reality Toolkit are locked by default, so when you view these in the inspector they will appear greyed out.  This is to ensure you always have a common default for any project.  We recommend you create your own profiles (see below) when you need to customize the configuration for your project.
-
 From here you can configure all the core Systems and their individual profile settings:
 
-- [Camera System Settings]()
-- [Input System Settings]()
-- [Boundary System Settings]()
-- [Teleporting System Settings]()
-- [Spatial Awareness System Settings]()
-- [Diagnostics System Settings]()
-- [Additional Service Providers]()
+* [Camera System]()
+* [Input System]()
+* [Boundary System]()
+* [Teleporting System]()
+* [Spatial Awareness System]()
+* [Diagnostics System]()
+* [Additional Service Providers]()
 
 ## Customizing your project
 
-When you start a new project, we provide a default configuration with every system and service pre-configured and turned on, for a fully cross-platform project. Developers may choose to further customize this default configuration or approach the project from the opposite end and choose to opt out of everything:
+When you start a new project, we provide a copy each package's profiles with every system and service pre-configured and turned on, for a fully platform agnostic project. Each profile can be individually customized to your project's needs:
 
-![Profile Options](../images/Configuation/MixedRealityProfileClone.png)
-
-- **Clone & Customize:** Copies all of the default profile settings for you and enables them to be editable.
-  > **Note:** This is great for tweaking existing options to fit your edge case needs.
-- **Create new profiles:** Start with a blank profile with everything turned off by default.
-  > **Note:** This is great for slowly integrating the Mixed Reality Toolkit into an existing project.
-
-Each profile can be individually cloned and customized to your project's needs:
-
+> **Note:** If you'd like to make a copy of a profile to test out a specific configuration you can easily clone and assign the profile using the `clone` button that appears to the right of each profile field.
 ![Clone Profile Button](../images/Configuation/MixedRealityProfileCloneButton.png)
 
 ---
 
 ### Related Articles
 
-* [Building and running your mixed reality application](https://github.com/XRTK/XRTK-Core/blob/development/articles/00-GettingStarted.md#build-and-play)
+* [Getting Started](00-GettingStarted.md#getting-started-with-the-mixed-reality-toolkit)
+* [Building and running your mixed reality application](00-GettingStarted.md#build-and-play)
 
 ---
 

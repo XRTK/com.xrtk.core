@@ -71,7 +71,7 @@ Advanced developers and those wishing to contribute to the Mixed Reality Toolkit
 
 > **Note:** The XRTK-Core repository is setup to utilize submodules and is a great example of how to utilize this workflow.
 
-### Prerequesites
+### Prerequisites
 
 * Each contributor to the project will need to have [git installed](https://git-scm.com/) on their machines with the proper envionment variable set so the symbolic linker can find and execute git commands via the terminal.
 * You'll need to install the core pacakge via one of the [traditional installation](#automatic-upm-installation) paths before you can create symbolic links in your project using the editor context menu in later setup steps.

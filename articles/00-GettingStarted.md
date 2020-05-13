@@ -96,6 +96,13 @@ Once the build completes, you can install and run it on the device.
 
 ---
 
+### Related Articles
+
+* [Downloading the XRTK](01-DownloadingTheXRTK.md)
+* [Configuring your project](02-Configuration.md)
+
+---
+
 ### [**Raise an Information Request**](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=)
 
 If there is anything not mentioned in this document or you simply want to know more, raise an [RFI (Request for Information) request here](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=).

@@ -43,7 +43,7 @@ stages:
           }
           else {
             git checkout -b temp
-            git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\package.json"
+            git add $(project.name)/Packages/$(package.name)/package.json
             git commit -m "$(package.version)@$(Build.SourceVersion)"
           }
 

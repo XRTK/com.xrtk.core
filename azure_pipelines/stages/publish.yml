@@ -43,11 +43,12 @@ stages:
           }
           else {
             git checkout -b temp
-            git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\package.json"
+            git add "$(project.name)\Packages\$(package.name)\package.json"
             git commit -m "$(package.version)@$(Build.SourceVersion)"
           }
 
           git subtree split --prefix="$(project.name)/Packages/$(package.name)" --branch upm
+          git checkout upm
           git status
 
           if( '$(isReleaseBuild)' -eq 'True' ) {

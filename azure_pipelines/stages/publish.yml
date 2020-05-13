@@ -140,10 +140,10 @@ stages:
           messageType: embeds
           embeds: |
             [{
-                "title": "TEST - (project.name) has a new release!",
+                "title": "(package.name) has a new release!",
                 "description": "Release $(package.version) is now available.",
                 "author": {
                     "name": "$(Discord.WebhookAuthor)"
                 },
-                "url": "https://github.com/XRTK/$(project.name)/releases"
+                "url": "https://github.com/$(Build.Repository.Name)/releases"
             }]

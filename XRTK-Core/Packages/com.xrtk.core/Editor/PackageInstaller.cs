@@ -41,6 +41,7 @@ namespace XRTK.Editor
         public static bool TryInstallAssets(Dictionary<string, string> installationPaths, bool regenerateGuids = true)
         {
             var anyFail = false;
+            var newInstall = true;
             var installedAssets = new List<string>();
             var installedDirectories = new List<string>();
 
@@ -50,10 +51,9 @@ namespace XRTK.Editor
                 var destinationPath = installationPath.Value;
                 installedDirectories.Add(destinationPath);
 
-                Debug.Log($"{sourcePath} -> {destinationPath}");
-
                 if (Directory.Exists(destinationPath))
                 {
+                    newInstall = false;
                     EditorUtility.DisplayProgressBar("Verifying assets...", $"{sourcePath} -> {destinationPath}", 0);
 
                     installedAssets.AddRange(UnityFileHelper.GetUnityAssetsAtPath(destinationPath));
@@ -113,7 +113,7 @@ namespace XRTK.Editor
                 }
             }
 
-            if (regenerateGuids)
+            if (newInstall && regenerateGuids)
             {
                 GuidRegenerator.RegenerateGuids(installedDirectories);
             }

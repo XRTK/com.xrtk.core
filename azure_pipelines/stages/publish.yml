@@ -58,7 +58,7 @@ stages:
             git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git upm $(package.version) --force
           }
           else {
-            git branch -d temp
+            git branch -D temp
           }
         displayName: 'UPM Mirror'
         failOnStderr: true

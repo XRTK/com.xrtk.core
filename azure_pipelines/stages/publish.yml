@@ -5,7 +5,7 @@ stages:
   dependsOn: Build
   pool:
     name: 'Azure Pipelines'
-    vmImage: 'ubuntu-latest'
+    vmImage: 'windows-latest'
     demands:
       - unity -equals false
 
@@ -44,6 +44,7 @@ stages:
           else {
             git checkout -b temp
             git add $(project.name)/Packages/$(package.name)/package.json
+            git status
             git commit -m "$(package.version)@$(Build.SourceVersion)"
           }
 
@@ -57,7 +58,7 @@ stages:
             git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git upm $(package.version) --force
           }
           else {
-            git branch -D temp
+            git branch -d temp
           }
         displayName: 'UPM Mirror'
         failOnStderr: true

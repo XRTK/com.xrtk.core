@@ -7,7 +7,7 @@ steps:
       Write-Host "Detected Project Version:" $packageInfo.version
 
       Write-Host "Determining latest release version from GitHub..."
-      $releases = "https://api.github.com/repos/XRTK/$(project.name)/releases"
+      $releases = "https://api.github.com/repos/$(Build.Repository.Name)/releases"
       [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
       $oldVersionString = [string](Invoke-WebRequest -Uri $releases -UseBasicParsing | ConvertFrom-Json)[0].tag_name
 

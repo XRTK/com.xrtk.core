@@ -26,7 +26,7 @@ steps:
       git fetch origin master
       git checkout master
       git merge docs
-      git branch -d docs
+      git branch -D docs
       git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git master
     displayName: 'Build Docs'
     condition: and(succeeded(), eq(variables['isReleaseBuild'], 'True') )

@@ -23,12 +23,14 @@ stages:
           $buildNumber = '$(Build.BuildNumber)'
           $split = $buildNumber.Split('.')
           $revision = $split[$split.Count - 1]
+          Write-Host "Build Repo Name: $(Build.Repository.Name)"
           Write-Host "Build Number: $buildNumber"
           Write-Host "Build Revision Number: $revision"
           Write-Host "Package Version: $(package.version)"
           Write-Host "isReleaseBuild? $(isReleaseBuild)"
           Write-Host "isPreviewBuild? $(isPreviewBuild)"
         displayName: 'Build Variables'
+        condition: always()
 
       - template: steps/install-unity.yml
         parameters:

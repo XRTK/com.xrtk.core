@@ -17,16 +17,16 @@ steps:
       git config user.name "XRTK-Build-Bot"
       git status
       git add ./docs
-      git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\package.json"
-      git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\README.md"
-      git add "$(System.DefaultWorkingDirectory)\$(project.name)\Packages\$(package.name)\LICENSE.md"
+      git add $(project.name)/Packages/$(package.name)/package.json"
+      git add $(project.name)/Packages/$(package.name)/README.md"
+      git add $(project.name)/Packages/$(package.name)/LICENSE.md"
       git status
       git commit -m "docs $(package.version)@$(Build.SourceVersion)"
       git checkout -b docs
       git fetch origin master
       git checkout master
       git merge docs
-      git branch -D docs
+      git branch -d docs
       git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git master
     displayName: 'Build Docs'
     condition: and(succeeded(), eq(variables['isReleaseBuild'], 'True') )

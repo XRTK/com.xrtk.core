@@ -5,7 +5,7 @@ stages:
   dependsOn: Build
   pool:
     name: 'Azure Pipelines'
-    vmImage: 'ubuntu-latest'
+    vmImage: 'windows-latest'
     demands:
       - unity -equals false
 
@@ -36,9 +36,20 @@ stages:
           git config user.email "XRTK-Build-Bot@users.noreply.github.com"
           git config user.name "XRTK-Build-Bot"
           git status
-          git fetch origin master
-          git pull origin master
+
+          if( '$(isReleaseBuild)' -eq 'True' ) {
+            git fetch origin master
+            git pull origin master
+          }
+          else {
+            git checkout -b temp
+            git add $(project.name)/Packages/$(package.name)/package.json
+            git status
+            git commit -m "$(package.version)@$(Build.SourceVersion)"
+          }
+
           git subtree split --prefix="$(project.name)/Packages/$(package.name)" --branch upm
+          git checkout upm
 
           if( '$(isReleaseBuild)' -eq 'True' ) {
             $upmSha = git rev-parse upm
@@ -46,7 +57,11 @@ stages:
             git tag $(package.version) upm
             git push https://XRTK-Build-Bot:$(GitHubPat)@github.com/$(Build.Repository.Name).git upm $(package.version) --force
           }
+          else {
+            git branch -d temp
+          }
         displayName: 'UPM Mirror'
+        failOnStderr: true
 
       - task: Npm@1
         displayName: 'upm publish'

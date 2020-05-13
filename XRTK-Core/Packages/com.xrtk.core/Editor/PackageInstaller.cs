@@ -118,7 +118,11 @@ namespace XRTK.Editor
                 GuidRegenerator.RegenerateGuids(installedDirectories);
             }
 
-            EditorApplication.delayCall += () => AddConfigurations(installedAssets);
+            if (!Application.isBatchMode)
+            {
+                EditorApplication.delayCall += () => AddConfigurations(installedAssets);
+            }
+
             return true;
         }
 

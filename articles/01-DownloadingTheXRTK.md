@@ -16,7 +16,7 @@ In this article, we will walk through each approach to get you up and running, s
 
 Our preferred deployment approach is to fully utilize [Unity's native package manager](https://docs.unity3d.com/Manual/upm-ui.html) to incorporate the Mixed Reality Toolkit in your solution, akin to the other modules Unity provides out of the box.  This is the quickest and safest way to get Mixed Reality Toolkit in your solution and is automatically updated as new releases are published.
 
-Download the [XRTK-Core.unitypackage](https://github.com/XRTK/XRTK-Core/releases) asset, then drag and drop it into your project window.  This adds an Mixed Reality Toolkit seed, that will automatically registers the Mixed Reality Toolkit's upm server with the Unity package manager and starts the download and installation of the Core and SDK packages.
+Download the [XRTK-Core.unitypackage](https://github.com/XRTK/XRTK-Core/releases) asset, then drag and drop it into your project window.  This adds an Mixed Reality Toolkit seed, that will automatically register the Mixed Reality Toolkit's scoped registry with the Unity package manager, then starts searching for the latest release packaegs on the upm server.
 
 ![Seed Package](../images/DownloadingTheXRTK/XRTKAutoInstallAsset.png)
 

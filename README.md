@@ -1,6 +1,6 @@
 # Welcome to the Mixed Reality Toolkit
 
-![](/images/Branding/XRTK_Logo_1200x250.png)
+![The Mixed Reality Toolkit](/images/Branding/XRTK_Logo_1200x250.png)
 
 The Mixed Reality Toolkit's primary focus is to make it extremely easy to get started creating Mixed Reality applications and to accelerate deployment to multiple platforms from the same Unity project.
 
@@ -9,10 +9,10 @@ The Mixed Reality Toolkit's primary focus is to make it extremely easy to get st
 | Modules | Azure Pipelines | OpenUpm |
 |---|---|---|
 |XRTK-Core|[![Build Status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/com.xrtk.core?branchName=master)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=44&branchName=master)|[![openupm](https://img.shields.io/npm/v/com.xrtk.core?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.xrtk.core/)|
-|[SDK](https://github.com/XRTK/SDK)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.SDK%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=23)|[![openupm](https://img.shields.io/npm/v/com.xrtk.sdk?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.xrtk.sdk/)|
-|[WMR](https://github.com/XRTK/WindowsMixedReality)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.WMR%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=21)|[![openupm](https://img.shields.io/npm/v/com.xrtk.wmr?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.xrtk.wmr/)|
-|[Lumin](https://github.com/XRTK/Lumin)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.Lumin%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=29)|[![openupm](https://img.shields.io/npm/v/com.xrtk.lumin?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.xrtk.lumin/)|
-|[Oculus](https://github.com/XRTK/Oculus)|[![Build status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.Oculus%20Master%20Build)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=30)|[![openupm](https://img.shields.io/npm/v/com.xrtk.oculus?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.xrtk.oculus/)|
+|[SDK](https://github.com/XRTK/SDK)|[![Build Status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/com.xrtk.sdk?branchName=master)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=50&branchName=master)|[![openupm](https://img.shields.io/npm/v/com.xrtk.sdk?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.xrtk.sdk/)|
+|[WMR](https://github.com/XRTK/WindowsMixedReality)|[![Build Status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/com.xrtk.wmr?branchName=master)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=49&branchName=master)|[![openupm](https://img.shields.io/npm/v/com.xrtk.wmr?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.xrtk.wmr/)|
+|[Lumin](https://github.com/XRTK/Lumin)|[![Build Status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/com.xrtk.lumin?branchName=master)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=47&branchName=master)|[![openupm](https://img.shields.io/npm/v/com.xrtk.lumin?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.xrtk.lumin/)|
+|[Oculus](https://github.com/XRTK/Oculus)|[![Build Status](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/com.xrtk.oculus?branchName=master)](https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=48&branchName=master)|[![openupm](https://img.shields.io/npm/v/com.xrtk.oculus?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.xrtk.oculus/)|
 
 ## [Getting Started](articles/00-GettingStarted.md)
 
@@ -52,24 +52,28 @@ By default, we support OpenVR on all platforms that support the standard, as wel
 - [x] Windows Standalone
 - [x] Linux
 - [x] OSX Standalone
-- [x] Open VR
-- [ ] Open XR
+- [x] OpenVR via Unity Legacy VR
 - [x] [Windows Mixed Reality](https://github.com/XRTK/WindowsMixedReality)
-    - [x] HoloLens
-    - [x] Windows Mixed Reality HMDs
-    - [-] HoloLens 2 (platform supported, hands / eyes pending)
+  - [x] Windows Mixed Reality HMDs
+  - [x] HoloLens 1 & 2
 - [x] [Lumin (aka Magic Leap)](https://github.com/XRTK/Lumin)
 - [x] [Native Oculus API](https://github.com/XRTK/Oculus)
-    - [x] Rift
-    - [x] Quest
-    - [ ] Go
-- [ ] Native Steam VR
-    - [ ] HTC Vive
-    - [ ] Vive Index
+  - [x] Rift
+  - [x] Quest
+  - [ ] Go
+- [x] Android
+  - [ ] ARCore
 - [ ] iOS
-    - [ ] ARKit
-- [ ] Android
-    - [ ] ARCore
-- [ ] WebAssembly
-    - [ ] WebVR
-    - [ ] WebXR
+  - [ ] ARKit
+- [ ] Etee
+- [ ] UltraLeap
+- [ ] North Star
+- [ ] Varjo
+- [ ] Lenovo A6
+- [ ] Native Nreal
+- [ ] Native SteamVR (OpenVR)
+  - [ ] Index
+  - [ ] HTC Vive
+- [ ] Native OpenXR
+- [ ] WebAssembly (requires threading support)
+  - [ ] WebXR

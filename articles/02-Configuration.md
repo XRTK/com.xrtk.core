@@ -10,9 +10,9 @@ The Mixed Reality Toolkit really focused a lot of the [architecure](https://unit
 
 > **Note:** All of the Mixed Reality Toolkit's Systems and Services require a profile to run. Data Providers and additional custom services defined by developers may optionally include a profile.
 
-When profiles are created by the Toolkit, they are then placed in the following folder:
+When profiles are created by the XRTK, they are then placed in the following folder:
 
-> `Assets\XRTK.Generated\CustomProfiles`
+> `Assets\XRTK.Generated`
 
 This path can be customized by updating your preference in the preferences window.
 

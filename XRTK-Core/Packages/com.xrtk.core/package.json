@@ -11,14 +11,12 @@
     "DI"
   ],
   "version": "0.2.0",
-  "unity": "2019.1",
+  "unity": "2019.3",
   "license": "MIT",
   "author": "XRTK Team (https://github.com/XRTK)",
   "dependencies": {
     "com.unity.ugui": "1.0.0",
-    "com.unity.modules.vr": "1.0.0",
-    "com.unity.modules.unitywebrequest": "1.0.0",
-    "com.unity.textmeshpro": "1.0.0",
-    "com.unity.xr.legacyinputhelpers": "2.0.8"
+    "com.unity.textmeshpro": "2.0.1",
+    "com.unity.xr.legacyinputhelpers": "2.1.4"
   }
 }

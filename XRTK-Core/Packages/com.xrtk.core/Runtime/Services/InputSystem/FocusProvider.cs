@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -55,7 +55,7 @@ namespace XRTK.Services.InputSystem
         private LayerMask[] focusLayerMasks = null;
 
         /// <inheritdoc />
-        public LayerMask[] FocusLayerMasks
+        public LayerMask[] GlobalPointerRaycastLayerMasks
         {
             get
             {
@@ -64,7 +64,7 @@ namespace XRTK.Services.InputSystem
                     if (MixedRealityToolkit.HasActiveProfile &&
                         MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
                     {
-                        return focusLayerMasks = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointingRaycastLayerMasks;
+                        return focusLayerMasks = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerRaycastLayerMasks;
                     }
 
                     return focusLayerMasks = new LayerMask[] { Physics.DefaultRaycastLayers };
@@ -133,7 +133,7 @@ namespace XRTK.Services.InputSystem
         [Serializable]
         private class PointerData : IPointerResult, IEquatable<PointerData>
         {
-            private const int IgnoreRaycastLayer = 2;
+            private const int IGNORE_RAYCAST_LAYER = 2;
 
             public readonly IMixedRealityPointer Pointer;
 
@@ -268,8 +268,8 @@ namespace XRTK.Services.InputSystem
                         syncedPointerTarget = CurrentPointerTarget;
 
                         prevPhysicsLayer = CurrentPointerTarget.layer;
-                        Debug.Assert(prevPhysicsLayer != IgnoreRaycastLayer, $"Failed to get a valid raycast layer for {syncedPointerTarget.name}: {LayerMask.LayerToName(prevPhysicsLayer)}");
-                        CurrentPointerTarget.SetLayerRecursively(IgnoreRaycastLayer);
+                        Debug.Assert(prevPhysicsLayer != IGNORE_RAYCAST_LAYER, $"Failed to get a valid raycast layer for {syncedPointerTarget.name}: {LayerMask.LayerToName(prevPhysicsLayer)}");
+                        CurrentPointerTarget.SetLayerRecursively(IGNORE_RAYCAST_LAYER);
 
                         var grabPoint = Pointer.OverrideGrabPoint ?? focusDetails.EndPoint;
 
@@ -376,7 +376,7 @@ namespace XRTK.Services.InputSystem
             }
 
             /// <summary>
-            /// Rest the currently focused object data.
+            /// Reset the currently focused object data.
             /// </summary>
             /// <param name="clearPreviousObject">Optional flag to choose not to clear the previous object.</param>
             public void ResetFocusedObjects(bool clearPreviousObject = true)
@@ -636,7 +636,7 @@ namespace XRTK.Services.InputSystem
 
             // The raycast camera is used to raycast into the UI scene,
             // it doesn't need to render anything so is disabled
-            // The default settings are all that is necessary 
+            // The default settings are all that is necessary
             uiRaycastCamera = cameraObject.EnsureComponent<Camera>();
             uiRaycastCamera.enabled = false;
         }
@@ -817,7 +817,7 @@ namespace XRTK.Services.InputSystem
                 else
                 {
                     // Otherwise, continue
-                    var prioritizedLayerMasks = (pointer.Pointer.PrioritizedLayerMasksOverride ?? FocusLayerMasks);
+                    var prioritizedLayerMasks = (pointer.Pointer.PointerRaycastLayerMasksOverride ?? GlobalPointerRaycastLayerMasks);
 
                     physicsHitResult.Clear();
 
@@ -906,7 +906,8 @@ namespace XRTK.Services.InputSystem
                 switch (pointer.RaycastMode)
                 {
                     case RaycastMode.Simple:
-                        if (MixedRealityRaycaster.RaycastSimplePhysicsStep(pointerRays[i], prioritizedLayerMasks, out var simplePhysicsHit))
+                        if (MixedRealityRaycaster.RaycastSimplePhysicsStep(pointerRays[i], prioritizedLayerMasks, out var simplePhysicsHit) &&
+                            simplePhysicsHit.collider != pointer.NearInteractionCollider)
                         {
                             // Set the pointer source's origin ray to this step
                             UpdatePointerRayOnHit(pointerRays, simplePhysicsHit, i, rayStartDistance, hitResult);
@@ -914,17 +915,19 @@ namespace XRTK.Services.InputSystem
                         }
                         break;
                     case RaycastMode.Box:
+                        // TODO box raycast mode
                         Debug.LogWarning("Box Raycasting Mode not supported for pointers.");
                         break;
                     case RaycastMode.Sphere:
-                        if (MixedRealityRaycaster.RaycastSpherePhysicsStep(pointerRays[i], pointer.SphereCastRadius, prioritizedLayerMasks, out var spherePhysicsHit))
+                        if (MixedRealityRaycaster.RaycastSpherePhysicsStep(pointerRays[i], pointer.SphereCastRadius, prioritizedLayerMasks, out var spherePhysicsHit) &&
+                            spherePhysicsHit.collider != pointer.NearInteractionCollider)
                         {
                             // Set the pointer source's origin ray to this step
                             UpdatePointerRayOnHit(pointerRays, spherePhysicsHit, i, rayStartDistance, hitResult);
                             return;
                         }
                         break;
-                    // TODO SphereOverlap
+                    // TODO Sphere Overlap
                     default:
                         Debug.LogError($"Invalid raycast mode {pointer.RaycastMode} for {pointer.PointerName} pointer.");
                         break;

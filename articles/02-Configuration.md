@@ -44,7 +44,7 @@ When you start a new project, we provide a copy each package's profiles with eve
 ### Related Articles
 
 * [Getting Started](00-GettingStarted.md#getting-started-with-the-mixed-reality-toolkit)
-* [Building and running your mixed reality application](00-GettingStarted.md#build-and-play)
+  * [Building and running your mixed reality application](00-GettingStarted.md#build-and-play)
 
 ---
 

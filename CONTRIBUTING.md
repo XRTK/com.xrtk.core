@@ -39,3 +39,9 @@ The master, development, and any feature branches are all protected by branch po
 
 * All merges to the feature and development branches are squashed and merged into a single commit to keep the history clean and focused on specific pull request changes.
 * All merges from the master and development branches are just traditionally merged together to ensure they stay in sync and share the same histories.
+
+---
+
+### [**Raise an Information Request**](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=)
+
+If there is anything not mentioned in this document or you simply want to know more, raise an [RFI (Request for Information) request here](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=).

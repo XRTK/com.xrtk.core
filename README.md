@@ -33,7 +33,7 @@ To improve this situation, the Mixed Reality Toolkit's vision is simple, to prov
 
 - **Advanced** Extensible: The framework is easy to extend and modify to add additional custom services to meet specific criteria and needs.
 
-Our philosophy is to enable developers to focus on building content and structure and not have to worry about the underlying complexities for supporting multiple platforms in order to build it everywhere and on each device as required.  In Short, built it once and ship it everywhere with as little effort as possible.
+Our philosophy is to enable developers to focus on building content and structure and not have to worry about the underlying complexities for supporting multiple platforms in order to build it everywhere and on each device as required.  In short, built it once and ship it everywhere with as little effort as possible.
 
 We’d like to invite all the major hardware vendors to help guide their platform-specific implementations, from Microsoft’s Windows Mixed Reality and Magic Leap’s Lumin OS to Google’s ARCore and Apple’s ARKit.  Including any upcoming Mixed Reality capable devices that would like to be included for adoption.
 
@@ -45,12 +45,14 @@ We recently moved our main conversations regarding Mixed Reality Toolkit over to
 
 ### [Come join us on Discord!](https://t.co/UeUSVjnoIZ?amp=1)
 
-## Supported Platforms
+## Supported Platforms and Roadmap
 
-By default, we support OpenVR on all platforms that support the standard, as well as Native SDK implementations for various vendors.
+By default, we support OpenVR on all platforms that support the standard, as well as Native SDK implementations for various vendors. This list is in no particular order.
+
+> Want to add a platform? Check out our new [Template Generator](articles/03-template-generator.md)!
 
 - [x] Windows Standalone
-- [x] Linux
+- [x] Linux Standalone
 - [x] OSX Standalone
 - [x] OpenVR via Unity Legacy VR
 - [x] [Windows Mixed Reality](https://github.com/XRTK/WindowsMixedReality)

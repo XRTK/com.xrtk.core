@@ -24,13 +24,13 @@ The Mixed Reality Toolkit will only ever have a single active configuration prof
 
 From here you can configure all the core Systems and their individual profile settings:
 
-* [Camera System]()
-* [Input System]()
-* [Boundary System]()
-* [Teleporting System]()
-* [Spatial Awareness System]()
-* [Diagnostics System]()
-* [Additional Service Providers]()
+* [Camera System](systems/01-camera-system.md)
+* [Input System](systems/02-input-system.md)
+* [Boundary System](systems/03-boundary-system.md)
+* [Teleporting System](systems/04-teleporting-system.md)
+* [Spatial Awareness System](systems/05-spatial-awareness-system.md)
+* [Diagnostics System](systems/06-diagnostics-system.md)
+* [Additional Service Providers](systems/07-additional-serivce-providers.md)
 
 ## Customizing your project
 

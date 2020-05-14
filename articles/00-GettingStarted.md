@@ -21,8 +21,7 @@ To get started with the Mixed Reality Toolkit you will need:
 
 If you're using a Windows OS for development, then you'll need to enable Developer Mode in the operating system settings.
 
-> **Tip:** You can quickly find the Developer Settings by pressing `win + S`
-and type “Developer Settings”.
+> **Tip:** You can quickly find the Developer Settings by pressing `win + S` and type “Developer Settings”.
 
 ## Starting a new Mixed Reality project
 

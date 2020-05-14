@@ -6,6 +6,7 @@ using XRTK.EventDatum.Input;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Services;
 using XRTK.Services.InputSystem.Pointers;
 using XRTK.Services.InputSystem.Sources;
 using XRTK.Utilities;
@@ -29,7 +30,7 @@ namespace XRTK.Services.InputSystem
         private float maxGazeCollisionDistance = 10.0f;
 
         /// <summary>
-        /// The LayerMasks, in prioritized order, that are used to determine the GazeTarget when raycasting.
+        /// The Physics layers, in prioritized order, that are used to determine the GazeTarget when raycasting.
         /// <example>
         /// <para>Allow the cursor to hit SR, but first prioritize any DefaultRaycastLayers (potentially behind SR)</para>
         /// <code language="csharp"><![CDATA[
@@ -40,7 +41,7 @@ namespace XRTK.Services.InputSystem
         /// </example>
         /// </summary>
         [SerializeField]
-        [Tooltip("The LayerMasks, in prioritized order, that are used to determine the GazeTarget when raycasting.")]
+        [Tooltip("The Physics layers, in prioritized order, that are used to determine the GazeTarget when raycasting.")]
         private LayerMask[] raycastLayerMasks = { Physics.DefaultRaycastLayers };
 
         /// <summary>
@@ -158,7 +159,7 @@ namespace XRTK.Services.InputSystem
                     : base(pointerName, inputSourceParent)
             {
                 this.gazeProvider = gazeProvider;
-                PrioritizedLayerMasksOverride = raycastLayerMasks;
+                PointerRaycastLayerMasksOverride = raycastLayerMasks;
                 this.pointerExtent = pointerExtent;
                 this.gazeTransform = gazeTransform;
                 this.stabilizer = stabilizer;

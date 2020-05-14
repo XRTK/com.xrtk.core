@@ -1,8 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections;
 using UnityEngine;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Physics;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Physics;
@@ -52,7 +53,12 @@ namespace XRTK.Interfaces.InputSystem
         IMixedRealityTeleportHotSpot TeleportHotSpot { get; set; }
 
         /// <summary>
-        /// Has the conditions for the interaction been satisfied to enable the interaction?
+        /// The <see cref="Collider"/> used for determining and raising near interactions.
+        /// </summary>
+        Collider NearInteractionCollider { get; }
+
+        /// <summary>
+        /// Has the conditions been satisfied to enable the interaction of this pointer?
         /// </summary>
         bool IsInteractionEnabled { get; }
 
@@ -67,23 +73,25 @@ namespace XRTK.Interfaces.InputSystem
         float DefaultPointerExtent { get; }
 
         /// <summary>
-        /// The raycast rays.
+        /// The pointers raycast collection.
         /// </summary>
         RayStep[] Rays { get; }
 
         /// <summary>
-        /// The physics layers to use when raycasting.
+        /// The Physics Layers, in prioritized order, that are used to determine the <see cref="IPointerResult.CurrentPointerTarget"/> when raycasting.
         /// </summary>
-        /// <remarks>If set, will override the <see cref="IMixedRealityInputSystem"/>'s default raycasting layer mask array.</remarks>
+        /// <remarks>
+        /// If set, will override the <see cref="MixedRealityInputSystemProfile.PointerRaycastLayerMasks"/>'s default raycasting layer mask array.
+        /// </remarks>
         /// <example>
-        /// Allow the pointer to hit SR, but first prioritize any DefaultRaycastLayers (potentially behind SR)
+        /// Allow the pointer to hit SR, but first prioritize any <see cref="Physics.DefaultRaycastLayers"/> (potentially behind SR)
         /// <code language="csharp"><![CDATA[
         /// int sr = LayerMask.GetMask("SR");
         /// int nonSR = Physics.DefaultRaycastLayers &amp; ~sr;
-        /// IMixedRealityPointer.PrioritizedLayerMasksOverride = new LayerMask[] { nonSR, sr };
+        /// IMixedRealityPointer.PointerRaycastLayerMasksOverride = new LayerMask[] { nonSR, sr };
         /// ]]></code>
         /// </example>
-        LayerMask[] PrioritizedLayerMasksOverride { get; set; }
+        LayerMask[] PointerRaycastLayerMasksOverride { get; set; }
 
         /// <summary>
         /// The currently targeted focus handler.

@@ -18,9 +18,9 @@ namespace XRTK.Interfaces.InputSystem
         float GlobalPointingExtent { get; }
 
         /// <summary>
-        /// The layer masks for the focus pointers to raycast against.
+        /// The Physics Layers, in prioritized order, that are used to determine the <see cref="IPointerResult.CurrentPointerTarget"/> when raycasting.
         /// </summary>
-        LayerMask[] FocusLayerMasks { get; }
+        LayerMask[] GlobalPointerRaycastLayerMasks { get; }
 
         /// <summary>
         /// The Camera the <see cref="UnityEngine.EventSystems.EventSystem"/> uses to raycast against.

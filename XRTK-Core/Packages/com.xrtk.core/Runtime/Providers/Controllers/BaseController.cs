@@ -103,6 +103,9 @@ namespace XRTK.Providers.Controllers
         public string Name { get; }
 
         /// <inheritdoc />
+        public string Name { get; }
+
+        /// <inheritdoc />
         public bool Enabled { get; set; }
 
         /// <inheritdoc />

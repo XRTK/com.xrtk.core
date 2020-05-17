@@ -403,7 +403,7 @@ PlayerSettings:
     m_Automatic: 1
   m_BuildTargetVRSettings:
   - m_BuildTarget: Standalone
-    m_Enabled: 1
+    m_Enabled: 0
     m_Devices:
     - OpenVR
     - Oculus
@@ -416,7 +416,7 @@ PlayerSettings:
     m_Devices:
     - Oculus
   - m_BuildTarget: Lumin
-    m_Enabled: 1
+    m_Enabled: 0
     m_Devices:
     - Lumin
   - m_BuildTarget: WebGL

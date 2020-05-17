@@ -1075,5 +1075,5 @@ Shader "Mixed Reality Toolkit/Standard"
     }
     
     FallBack "VertexLit"
-    CustomEditor "XRTK.Inspectors.MixedRealityStandardShaderGUI"
+    CustomEditor "XRTK.Editor.MixedRealityStandardShaderGUI"
 }

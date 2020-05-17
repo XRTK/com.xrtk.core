@@ -25,7 +25,6 @@ namespace XRTK.Definitions.Platforms
         {
             var isBuildTargetActive = false;
             var isEditorPlatformActive = false;
-            var isEditorPlatformPresent = false;
 
             foreach (var platform in platforms)
             {
@@ -34,7 +33,6 @@ namespace XRTK.Definitions.Platforms
                     case AllPlatforms _:
                         return true;
                     case CurrentBuildTargetPlatform _:
-                        isEditorPlatformPresent = true;
                         isEditorPlatformActive = platform.IsAvailable;
                         break;
                     default:
@@ -43,7 +41,7 @@ namespace XRTK.Definitions.Platforms
                 }
             }
 
-            return !isEditorPlatformPresent || isBuildTargetActive && isEditorPlatformActive;
+            return isBuildTargetActive && isEditorPlatformActive;
         }
     }
 }

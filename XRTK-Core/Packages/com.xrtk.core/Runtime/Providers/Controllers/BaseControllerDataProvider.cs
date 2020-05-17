@@ -27,6 +27,12 @@ namespace XRTK.Providers.Controllers
             }
 
             controllerMappingProfiles = profile.ControllerMappingProfiles;
+
+            if (controllerMappingProfiles == null ||
+                controllerMappingProfiles.Length == 0)
+            {
+                throw new UnassignedReferenceException($"{nameof(controllerMappingProfiles)} has no defined controller mappings for {name}");
+            }
         }
 
         private readonly MixedRealityControllerMappingProfile[] controllerMappingProfiles;
@@ -62,6 +68,7 @@ namespace XRTK.Providers.Controllers
                 }
             }
 
+            Debug.LogError($"Failed to find a controller mapping for {controllerType.Name} with with handedness: {handedness}");
             return null;
         }
 

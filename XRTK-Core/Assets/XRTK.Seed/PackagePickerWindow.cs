@@ -14,7 +14,7 @@ namespace XRTK.Seed
     public class PackagePickerWindow : EditorWindow
     {
         private const float ITEM_HEIGHT = 24f;
-        private const float MIN_VERTICAL_SIZE = 128f;
+        private const float MIN_VERTICAL_SIZE = 152f;
         private const float MIN_HORIZONTAL_SIZE = 272f;
 
         private static readonly List<Tuple<PackageInfo, bool>> Packages = new List<Tuple<PackageInfo, bool>>();
@@ -23,6 +23,8 @@ namespace XRTK.Seed
         private static PackagePickerWindow window;
 
         private static Texture2D logo;
+        private bool preview = false;
+
         private static Texture2D Logo => logo != null ? logo : logo = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/XRTK.Seed/XRTK_Logo.png", typeof(Texture2D));
 
         internal static void ShowPackageWindow(List<PackageInfo> xrtkPackages)
@@ -93,7 +95,15 @@ namespace XRTK.Seed
                 fontStyle = FontStyle.Bold
             }, GUILayout.Height(16f));
             EditorGUILayout.Space();
-            GUILayout.Label("Available Packages:", GUILayout.Height(16f));
+            GUILayout.Label("Available Packages:", new GUIStyle
+            {
+                normal = new GUIStyleState { textColor = EditorGUIUtility.isProSkin ? Color.white : Color.black },
+                fontSize = 12,
+                alignment = TextAnchor.MiddleCenter,
+                fontStyle = FontStyle.Bold
+            }, GUILayout.Height(16f));
+            preview = GUILayout.Toggle(preview, "  Show preview packages", GUILayout.Height(16f));
+            GUILayout.Space(4f);
 
             for (var i = 0; i < Packages.Count; i++)
             {
@@ -105,7 +115,7 @@ namespace XRTK.Seed
                 GUILayout.Space(2f);
                 GUILayout.BeginHorizontal();
                 GUILayout.Space(12f);
-                enabled = GUILayout.Toggle(enabled, new GUIContent($"  {package.displayName.Replace("XRTK.", string.Empty)}", package.description));
+                enabled = GUILayout.Toggle(enabled, new GUIContent($"  {package.displayName.Replace("XRTK.", string.Empty)} @ {(preview ? package.versions.latest : package.version)}", package.description));
                 GUILayout.EndHorizontal();
                 GUILayout.Space(2f);
 
@@ -117,7 +127,7 @@ namespace XRTK.Seed
 
             GUILayout.FlexibleSpace();
 
-            GUI.enabled = !EditorPrefs.HasKey("XRTK"); // Don't enable in XRTK-Core project
+            GUI.enabled = !EditorPrefs.HasKey($"{Application.productName}_XRTK"); // Check if the XRTK is already installed in project
 
             if (GUILayout.Button("Add selected packages", EditorStyles.miniButton, GUILayout.Height(16f)))
             {
@@ -129,7 +139,7 @@ namespace XRTK.Seed
 
                     if (enabled && !manifest.Dependencies.ContainsKey(package.name))
                     {
-                        manifest.Dependencies.Add(package.name, package.version);
+                        manifest.Dependencies.Add(package.name, preview ? package.versions.latest : package.version);
                     }
                 }
 

@@ -10,3 +10,12 @@
 [submodule "Submodules/Oculus"]
 	path = Submodules/Oculus
 	url = https://github.com/XRTK/Oculus.git
+[submodule "Submodules/Nreal"]
+	path = Submodules/Nreal
+	url = https://github.com/XRTK/Nreal.git
+[submodule "Submodules/Ultraleap"]
+	path = Submodules/Ultraleap
+	url = https://github.com/XRTK/Ultraleap.git
+[submodule "Submodules/Examples"]
+	path = Submodules/Examples
+	url = https://github.com/XRTK/Examples.git

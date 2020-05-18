@@ -112,6 +112,7 @@ namespace XRTK.Editor.Profiles
                     else
                     {
                         Debug.LogWarning("No Mixed Reality Toolkit in your scene.");
+                        Selection.activeObject = null;
                     }
                 }
             }

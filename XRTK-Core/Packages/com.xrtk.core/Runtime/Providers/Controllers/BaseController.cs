@@ -39,11 +39,6 @@ namespace XRTK.Providers.Controllers
         /// <param name="controllerMappingProfile"></param>
         protected BaseController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
         {
-            if (controllerMappingProfile == null)
-            {
-                throw new Exception($"{nameof(controllerMappingProfile)} cannot be null");
-            }
-
             ControllerDataProvider = controllerDataProvider;
             TrackingState = trackingState;
             ControllerHandedness = controllerHandedness;
@@ -56,6 +51,13 @@ namespace XRTK.Providers.Controllers
                 handednessPrefix = $"{controllerHandedness} ";
             }
 
+            Name = $"{handednessPrefix}{GetType().Name}";
+
+            if (controllerMappingProfile == null)
+            {
+                throw new Exception($"{nameof(controllerMappingProfile)} cannot be null for {Name}");
+            }
+
             visualizationProfile = controllerMappingProfile.VisualizationProfile;
             var pointers = AssignControllerMappings(controllerMappingProfile.InteractionMappingProfiles);
 
@@ -65,7 +67,7 @@ namespace XRTK.Providers.Controllers
                 throw new Exception($"No Controller interaction mappings found for {controllerMappingProfile.name}!");
             }
 
-            InputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource($"{handednessPrefix}{GetType().Name}", pointers);
+            InputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource(Name, pointers);
 
             for (int i = 0; i < InputSource?.Pointers?.Length; i++)
             {
@@ -97,6 +99,9 @@ namespace XRTK.Providers.Controllers
         public virtual MixedRealityInteractionMapping[] DefaultRightHandedInteractions { get; } = new MixedRealityInteractionMapping[0];
 
         #region IMixedRealityController Implementation
+
+        /// <inheritdoc />
+        public string Name { get; }
 
         /// <inheritdoc />
         public bool Enabled { get; set; }

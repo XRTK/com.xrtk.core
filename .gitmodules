@@ -19,3 +19,6 @@
 [submodule "Submodules/Examples"]
 	path = Submodules/Examples
 	url = https://github.com/XRTK/Examples.git
+[submodule "Submodules/Lenovo"]
+	path = Submodules/Lenovo
+	url = https://github.com/XRTK/Lenovo.git

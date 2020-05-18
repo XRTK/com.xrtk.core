@@ -78,7 +78,7 @@ namespace XRTK.Utilities.Editor
         /// </summary>
         public static void CheckSettings()
         {
-            EditorPrefs.SetBool("XRTK", true);
+            EditorPrefs.SetBool($"{Application.productName}_XRTK", true);
 
             if (Application.isPlaying ||
                 EditorPrefs.GetBool(IgnoreKey, false) ||

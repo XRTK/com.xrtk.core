@@ -11,12 +11,12 @@ namespace XRTK.Definitions.Utilities
     /// "Other" defines potential controllers that will offer a "third" hand, e.g. a full body tracking suit.
     /// </summary>
     [Flags]
-    public enum Handedness : byte
+    public enum Handedness
     {
         /// <summary>
         /// No hand specified by the SDK for the controller
         /// </summary>
-        None = 0 << 0,
+        None = 0,
         /// <summary>
         /// The controller is identified as being provided in a Left hand
         /// </summary>

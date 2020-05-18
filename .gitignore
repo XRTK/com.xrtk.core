@@ -76,12 +76,15 @@ XRTK-Core/Assets/StreamingAssets.meta
 # ====================== #
 # Project Symbolic Links #
 # ====================== #
+XRTK-Core/Packages/com.xrtk.lenovo
 XRTK-Core/Packages/com.xrtk.lumin
 XRTK-Core/Packages/com.xrtk.nreal
 XRTK-Core/Packages/com.xrtk.oculus
 XRTK-Core/Packages/com.xrtk.sdk
 XRTK-Core/Packages/com.xrtk.ultraleap
 XRTK-Core/Packages/com.xrtk.wmr
+XRTK-Core/Assets/XRTK.Generated/Lenovo/Profiles
+XRTK-Core/Assets/XRTK.Generated/Lenovo/Profiles.meta
 XRTK-Core/Assets/XRTK.Generated/Lumin
 XRTK-Core/Assets/XRTK.Generated/Lumin.meta
 XRTK-Core/Assets/XRTK.Generated/Nreal/Profiles
@@ -94,4 +97,3 @@ XRTK-Core/Assets/XRTK.Generated/Ultraleap/Profiles
 XRTK-Core/Assets/XRTK.Generated/Ultraleap/Profiles.meta
 XRTK-Core/Assets/XRTK.Generated/WindowsMixedReality
 XRTK-Core/Assets/XRTK.Generated/WindowsMixedReality.meta
-XRTK-Core/Assets/XRTK.Generated/Lenovo/Profiles

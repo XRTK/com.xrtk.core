@@ -73,3 +73,9 @@ MonoBehaviour:
   - sourceRelativePath: /Submodules/Etee/XRTK.Etee/Packages/com.xrtk.etee
     targetRelativePath: /XRTK-Core/Packages/com.xrtk.etee
     isActive: 1
+  - sourceRelativePath: /Submodules/SteamVR/XRTK.SteamVR/Packages/com.xrtk.steamvr
+    targetRelativePath: /XRTK-Core/Packages/com.xrtk.steamvr
+    isActive: 1
+  - sourceRelativePath: /Submodules/SteamVR/XRTK.SteamVR/Packages/com.xrtk.steamvr/Profiles~
+    targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/SteamVR/Profiles
+    isActive: 1

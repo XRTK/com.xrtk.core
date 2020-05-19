@@ -63,6 +63,8 @@ namespace XRTK.Editor
                         EditorUtility.DisplayProgressBar("Verifying assets...", Path.GetFileNameWithoutExtension(installedAssets[i]), i / (float)installedAssets.Count);
                         installedAssets[i] = installedAssets[i].Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty).ToForwardSlashes();
                     }
+
+                    EditorUtility.ClearProgressBar();
                 }
                 else
                 {
@@ -123,6 +125,7 @@ namespace XRTK.Editor
                 EditorApplication.delayCall += () => AddConfigurations(installedAssets);
             }
 
+            EditorUtility.ClearProgressBar();
             return true;
         }
 

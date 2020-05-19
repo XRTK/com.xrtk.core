@@ -70,7 +70,17 @@ namespace XRTK.Seed
                         manifest.ScopedRegistries = new List<ScopedRegistry>();
                     }
 
-                    if (!manifest.ScopedRegistries.Contains(XRTKRegistry))
+                    bool install = true;
+
+                    foreach (var scopedRegistry in manifest.ScopedRegistries)
+                    {
+                        if (scopedRegistry.Name == "XRTK")
+                        {
+                            install = false;
+                        }
+                    }
+
+                    if (install)
                     {
                         manifest.ScopedRegistries.Add(XRTKRegistry);
                         File.WriteAllText(PackageManifest.ManifestFilePath, JsonConvert.SerializeObject(manifest, Formatting.Indented));

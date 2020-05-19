@@ -49,7 +49,7 @@ We recently moved our main conversations regarding Mixed Reality Toolkit over to
 
 By default, we support OpenVR on all platforms that support the standard, as well as Native SDK implementations for various vendors. This list is in no particular order.
 
-> Want to add a platform? Check out our new [Template Generator](articles/03-template-generator.md)!
+> Want to add a platform? Check out our new [Template Generator](articles/03-Template-Generator.md)!
 
 - [x] Windows Standalone
 - [x] Linux Standalone

@@ -61,3 +61,9 @@ MonoBehaviour:
   - sourceRelativePath: /Submodules/Lenovo/XRTK.Lenovo/Packages/com.xrtk.lenovo
     targetRelativePath: /XRTK-Core/Packages/com.xrtk.lenovo
     isActive: 1
+  - sourceRelativePath: /Submodules/ARCore/XRTK.ARCore/Packages/com.xrtk.arcore
+    targetRelativePath: /XRTK-Core/Packages/com.xrtk.arcore
+    isActive: 1
+  - sourceRelativePath: /Submodules/ARCore/XRTK.ARCore/Packages/com.xrtk.arcore/Profiles~
+    targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/ARCore/Profiles
+    isActive: 1

@@ -76,6 +76,7 @@ XRTK-Core/Assets/StreamingAssets.meta
 # ====================== #
 # Project Symbolic Links #
 # ====================== #
+XRTK-Core/Packages/com.xrtk.arcore
 XRTK-Core/Packages/com.xrtk.lenovo
 XRTK-Core/Packages/com.xrtk.lumin
 XRTK-Core/Packages/com.xrtk.nreal
@@ -85,6 +86,8 @@ XRTK-Core/Packages/com.xrtk.ultraleap
 XRTK-Core/Packages/com.xrtk.wmr
 XRTK-Core/Assets/XRTK.Examples
 XRTK-Core/Assets/XRTK.Examples.meta
+XRTK-Core/Assets/XRTK.Generated/ARCore/Profiles
+XRTK-Core/Assets/XRTK.Generated/ARCore/Profiles.meta
 XRTK-Core/Assets/XRTK.Generated/Lenovo/Profiles
 XRTK-Core/Assets/XRTK.Generated/Lenovo/Profiles.meta
 XRTK-Core/Assets/XRTK.Generated/Lumin

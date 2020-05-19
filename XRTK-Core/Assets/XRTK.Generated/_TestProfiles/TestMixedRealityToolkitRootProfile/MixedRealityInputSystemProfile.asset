@@ -145,7 +145,7 @@ MonoBehaviour:
   gazeCursorPrefab: {fileID: 1000012072213228, guid: 79f96834fcc44889b558cc13518979a0,
     type: 3}
   pointingExtent: 10
-  pointingRaycastLayerMasks:
+  pointerRaycastLayerMasks:
   - serializedVersion: 2
     m_Bits: 4294967291
   drawDebugPointingRays: 1

@@ -48,7 +48,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
         {
-            new MixedRealityInteractionMapping("Spatial Pointer", AxisType.SixDof, DeviceInputType.SpatialPointer),
+            new MixedRealityInteractionMapping("Spatial Pointer Pose", AxisType.SixDof, DeviceInputType.SpatialPointer),
             new MixedRealityInteractionMapping("Select", AxisType.Digital, DeviceInputType.Select),
             new MixedRealityInteractionMapping("Point", AxisType.Digital, DeviceInputType.ButtonPress),
             new MixedRealityInteractionMapping("Grab", AxisType.SingleAxis, DeviceInputType.TriggerPress),

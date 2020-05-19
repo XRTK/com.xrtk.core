@@ -32,6 +32,8 @@ namespace XRTK.Definitions.Platforms
                 {
                     case AllPlatforms _:
                         return true;
+                    case EditorPlatform _:
+                        return true;
                     case CurrentBuildTargetPlatform _:
                         isEditorPlatformActive = platform.IsAvailable;
                         break;

@@ -1204,22 +1204,32 @@ PrefabInstance:
       propertyPath: m_text
       value: Change how hands are visualized. By default joints are visualized, none
         will not visualize hands at all and mesh will render a hand mesh if the platform
-        supports it.
+        supports it or fallback to joints if not.
+      objectReference: {fileID: 0}
+    - target: {fileID: 3917820510407092929, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_firstOverflowCharacterIndex
+      value: 168
       objectReference: {fileID: 0}
     - target: {fileID: 3917820510407092929, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
       propertyPath: m_textInfo.characterCount
-      value: 165
+      value: 194
       objectReference: {fileID: 0}
     - target: {fileID: 3917820510407092929, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
       propertyPath: m_textInfo.spaceCount
-      value: 28
+      value: 34
       objectReference: {fileID: 0}
     - target: {fileID: 3917820510407092929, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
       propertyPath: m_textInfo.wordCount
-      value: 29
+      value: 35
+      objectReference: {fileID: 0}
+    - target: {fileID: 3917820510407092929, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
@@ -1241,20 +1251,10 @@ PrefabInstance:
       propertyPath: m_textInfo.wordCount
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 6339228401341687518, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+    - target: {fileID: 4718025797545353732, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336437836207700531, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 4921078653626617464, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
+      propertyPath: m_AnchoredPosition.y
+      value: -0.074
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ab67fec43eb02c48ad8eccc70bbd61b, type: 3}

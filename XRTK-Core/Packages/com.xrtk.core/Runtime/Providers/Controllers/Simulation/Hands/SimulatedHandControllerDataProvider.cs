@@ -79,7 +79,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public float HandPoseAnimationSpeed { get; }
 
         /// <inheritdoc />
-        public bool HandPhysicsEnabled { get; }
+        public bool HandPhysicsEnabled { get; set; }
 
         /// <inheritdoc />
         public bool UseTriggers { get; }

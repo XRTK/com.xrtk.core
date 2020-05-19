@@ -16,7 +16,7 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         /// <summary>
         /// Are hand physics enabled?
         /// </summary>
-        bool HandPhysicsEnabled { get; }
+        bool HandPhysicsEnabled { get; set; }
 
         /// <summary>
         /// Shall hand colliders be triggers?

@@ -55,10 +55,10 @@ namespace XRTK.Providers.Controllers.Hands
         public bool HandPhysicsEnabled { get; set; }
 
         /// <inheritdoc />
-        public bool UseTriggers { get; }
+        public bool UseTriggers { get; set; }
 
         /// <inheritdoc />
-        public HandBoundsMode BoundsMode { get; }
+        public HandBoundsMode BoundsMode { get; set; }
 
         /// <inheritdoc />
         public IReadOnlyList<HandControllerPoseDefinition> TrackedPoses { get; }

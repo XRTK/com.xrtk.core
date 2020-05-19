@@ -21,12 +21,12 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         /// <summary>
         /// Shall hand colliders be triggers?
         /// </summary>
-        bool UseTriggers { get; }
+        bool UseTriggers { get; set; }
 
         /// <summary>
         /// Gets the configured hand bounds mode to be used with hand physics.
         /// </summary>
-        HandBoundsMode BoundsMode { get; }
+        HandBoundsMode BoundsMode { get; set; }
 
         /// <summary>
         /// Gets the list of poses tracked by the data provider.

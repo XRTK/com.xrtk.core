@@ -12,7 +12,7 @@ namespace XRTK.Definitions.Controllers.Hands
         /// Hand bounds mode will only calculate a single bounding
         /// box encapsulating the whole hand.
         /// </summary>
-        Hand,
+        Hand = 0,
         /// <summary>
         /// Fingers bounds mode will create precise bounds for each finger
         /// and the palm to allow for more precise interactions.

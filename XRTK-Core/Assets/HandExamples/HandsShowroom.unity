@@ -568,6 +568,106 @@ PrefabInstance:
       propertyPath: m_LocalRotation.y
       value: 0.00000009362675
       objectReference: {fileID: 0}
+    - target: {fileID: 3629783407106529697, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3629783407106529697, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3629783407106529697, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3629783407106529697, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3629783407106529697, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145103959346132914, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145103959346132914, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145103959346132914, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145103959346132914, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6145103959346132914, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028227931754215846, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028227931754215846, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028227931754215846, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028227931754215846, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1028227931754215846, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937200074456480515, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937200074456480515, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937200074456480515, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937200074456480515, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7937200074456480515, guid: 73791a9450e587a4c852e956e1d928d4,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73791a9450e587a4c852e956e1d928d4, type: 3}
 --- !u!1001 &5647362915480535144

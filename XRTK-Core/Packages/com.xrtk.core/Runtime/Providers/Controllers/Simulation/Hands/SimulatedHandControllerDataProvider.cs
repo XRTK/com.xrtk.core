@@ -82,10 +82,10 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public bool HandPhysicsEnabled { get; set; }
 
         /// <inheritdoc />
-        public bool UseTriggers { get; }
+        public bool UseTriggers { get; set; }
 
         /// <inheritdoc />
-        public HandBoundsMode BoundsMode { get; }
+        public HandBoundsMode BoundsMode { get; set; }
 
         /// <inheritdoc />
         public HandRenderingMode RenderingMode { get; set; }

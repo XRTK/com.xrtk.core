@@ -22,3 +22,7 @@
 [submodule "Submodules/Lenovo"]
 	path = Submodules/Lenovo
 	url = https://github.com/XRTK/Lenovo.git
+[submodule "Submodules/Etee"]
+	path = Submodules/Etee
+	url = https://github.com/XRTK/Etee.git
+	

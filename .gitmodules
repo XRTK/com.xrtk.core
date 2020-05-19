@@ -21,6 +21,9 @@
 	url = https://github.com/XRTK/Oculus.git
 [submodule "Submodules/SDK"]
 	path = Submodules/SDK
+[submodule "Submodules/SteamVR"]
+	path = Submodules/SteamVR
+	url = https://github.com/XRTK/SteamVR.git
 	url = https://github.com/XRTK/SDK.git
 [submodule "Submodules/Ultraleap"]
 	path = Submodules/Ultraleap
@@ -28,7 +31,3 @@
 [submodule "Submodules/WindowsMixedReality"]
 	path = Submodules/WindowsMixedReality
 	url = https://github.com/XRTK/WindowsMixedReality.git
-
-[submodule "Submodules/SteamVR"]
-	path = Submodules/SteamVR
-	url = https://github.com/XRTK/SteamVR.git

@@ -56,6 +56,7 @@ namespace XRTK.Editor.Profiles
         private SerializedProperty registeredServiceProvidersProfile;
 
         private MixedRealityToolkitRootProfile rootProfile;
+        private bool didPromptToConfigure = false;
 
         private readonly GUIContent typeLabel = new GUIContent("Instanced Type", "The class type to instantiate at runtime for this system.");
         private readonly GUIContent profileLabel = new GUIContent("Profile");
@@ -93,7 +94,7 @@ namespace XRTK.Editor.Profiles
             var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
 
             // Create The MR Manager if none exists.
-            if (!MixedRealityToolkit.IsInitialized && prefabStage == null)
+            if (!MixedRealityToolkit.IsInitialized && prefabStage == null && !didPromptToConfigure)
             {
                 // Search for all instances, in case we've just hot reloaded the assembly.
                 var managerSearch = FindObjectsOfType<MixedRealityToolkit>();
@@ -117,6 +118,7 @@ namespace XRTK.Editor.Profiles
                     else
                     {
                         Debug.LogWarning("No Mixed Reality Toolkit in your scene.");
+                        didPromptToConfigure = true;
                     }
                 }
             }

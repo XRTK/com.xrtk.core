@@ -21,10 +21,10 @@
 	url = https://github.com/XRTK/Oculus.git
 [submodule "Submodules/SDK"]
 	path = Submodules/SDK
+	url = https://github.com/XRTK/SDK.git
 [submodule "Submodules/SteamVR"]
 	path = Submodules/SteamVR
 	url = https://github.com/XRTK/SteamVR.git
-	url = https://github.com/XRTK/SDK.git
 [submodule "Submodules/Ultraleap"]
 	path = Submodules/Ultraleap
 	url = https://github.com/XRTK/Ultraleap.git

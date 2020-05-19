@@ -29,3 +29,6 @@
 	path = Submodules/WindowsMixedReality
 	url = https://github.com/XRTK/WindowsMixedReality.git
 
+[submodule "Submodules/SteamVR"]
+	path = Submodules/SteamVR
+	url = https://github.com/XRTK/SteamVR.git

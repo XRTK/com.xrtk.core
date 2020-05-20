@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6941123960815935590}
   - component: {fileID: 7597231247153494096}
   - component: {fileID: 4441203640927970604}
+  - component: {fileID: 3679834742401528576}
   m_Layer: 0
   m_Name: Cube (2)
   m_TagString: Untagged
@@ -91,6 +92,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3679834742401528576
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 21718042783218847}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &137508105120376904
 GameObject:
   m_ObjectHideFlags: 0
@@ -103,6 +120,7 @@ GameObject:
   - component: {fileID: 1521507931262090277}
   - component: {fileID: 8338871319241682851}
   - component: {fileID: 7291171580555335864}
+  - component: {fileID: 1567021131743911759}
   m_Layer: 0
   m_Name: Cube (8)
   m_TagString: Untagged
@@ -182,6 +200,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &1567021131743911759
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 137508105120376904}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &283131969239712085
 GameObject:
   m_ObjectHideFlags: 0
@@ -1349,6 +1383,7 @@ GameObject:
   - component: {fileID: 5930183265878195936}
   - component: {fileID: 304767688667434453}
   - component: {fileID: 3280765096074178710}
+  - component: {fileID: 5557598556697783943}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1428,6 +1463,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5557598556697783943
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2862726673725595930}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3273089881676877114
 GameObject:
   m_ObjectHideFlags: 0
@@ -1440,6 +1491,7 @@ GameObject:
   - component: {fileID: 4699262304646023274}
   - component: {fileID: 8779954236593616720}
   - component: {fileID: 5766698838121771128}
+  - component: {fileID: 2127701756531653637}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -1519,6 +1571,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2127701756531653637
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3273089881676877114}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3346786559609440710
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,6 +1599,7 @@ GameObject:
   - component: {fileID: 9011955502355091221}
   - component: {fileID: 8853515867369130359}
   - component: {fileID: 366706782453305968}
+  - component: {fileID: 3754030440507100113}
   m_Layer: 0
   m_Name: Cube (6)
   m_TagString: Untagged
@@ -1610,6 +1679,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &3754030440507100113
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3346786559609440710}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4215911893886669393
 GameObject:
   m_ObjectHideFlags: 0
@@ -1622,6 +1707,7 @@ GameObject:
   - component: {fileID: 4127482221325662549}
   - component: {fileID: 6853852120276682726}
   - component: {fileID: 3134363671975029388}
+  - component: {fileID: 2185495044446910931}
   m_Layer: 0
   m_Name: Cube (7)
   m_TagString: Untagged
@@ -1701,6 +1787,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2185495044446910931
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4215911893886669393}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4246230096400687839
 GameObject:
   m_ObjectHideFlags: 0
@@ -1870,6 +1972,7 @@ GameObject:
   - component: {fileID: 8084542125907662268}
   - component: {fileID: 9206130380094999516}
   - component: {fileID: 1526129327072646181}
+  - component: {fileID: 4121454685028262148}
   m_Layer: 0
   m_Name: Cube (3)
   m_TagString: Untagged
@@ -1949,6 +2052,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &4121454685028262148
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734081685807508275}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5837772261563726575
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,6 +2212,7 @@ GameObject:
   - component: {fileID: 7523562226572537706}
   - component: {fileID: 7786393856687371914}
   - component: {fileID: 5013837903314927781}
+  - component: {fileID: 5337573645880370228}
   m_Layer: 0
   m_Name: Cube (5)
   m_TagString: Untagged
@@ -2172,6 +2292,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &5337573645880370228
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6723192454976269199}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &7654718502410491254
 GameObject:
   m_ObjectHideFlags: 0
@@ -2223,6 +2359,7 @@ GameObject:
   - component: {fileID: 698774756687920036}
   - component: {fileID: 7953699988964791022}
   - component: {fileID: 4699136351041521028}
+  - component: {fileID: 2477679732473395241}
   m_Layer: 0
   m_Name: Cube (4)
   m_TagString: Untagged
@@ -2302,6 +2439,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!54 &2477679732473395241
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8045230559154610386}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &6069570637499802781
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2404,6 +2557,51 @@ PrefabInstance:
       propertyPath: m_text
       value: 'Physics: Off / Hand'
       objectReference: {fileID: 0}
+    - target: {fileID: 6339228401341687518, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6336437836207700531, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_textInfo.wordCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_textInfo.lineCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_textInfo.pageCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_text
+      value: Physics
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_textInfo.spaceCount
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4921078653626617464, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3917820510407092929, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
       propertyPath: m_textInfo.characterCount
@@ -2440,54 +2638,15 @@ PrefabInstance:
       propertyPath: m_firstOverflowCharacterIndex
       value: -1
       objectReference: {fileID: 0}
-    - target: {fileID: 4921078653626617464, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_text
-      value: Physics
-      objectReference: {fileID: 0}
-    - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_textInfo.spaceCount
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6336437836207700531, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6339228401341687518, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 981350913143898612, guid: 2ab67fec43eb02c48ad8eccc70bbd61b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2ab67fec43eb02c48ad8eccc70bbd61b, type: 3}
+--- !u!4 &937673688847914444 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6428953436839194961, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+    type: 3}
+  m_PrefabInstance: {fileID: 6069570637499802781}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &7074191166715687904 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
@@ -2500,9 +2659,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &937673688847914444 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6428953436839194961, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-    type: 3}
-  m_PrefabInstance: {fileID: 6069570637499802781}
-  m_PrefabAsset: {fileID: 0}

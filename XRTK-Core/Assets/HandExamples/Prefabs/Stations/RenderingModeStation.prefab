@@ -1189,15 +1189,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+    - target: {fileID: 4718025797545353732, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
-      propertyPath: m_text
-      value: 'You selected: Joints'
-      objectReference: {fileID: 0}
-    - target: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 20
+      propertyPath: m_AnchoredPosition.y
+      value: -0.074
       objectReference: {fileID: 0}
     - target: {fileID: 3917820510407092929, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
@@ -1231,6 +1226,16 @@ PrefabInstance:
       propertyPath: m_textInfo.lineCount
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_text
+      value: 'You selected: Joints'
+      objectReference: {fileID: 0}
+    - target: {fileID: 3897831618485311357, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
+        type: 3}
+      propertyPath: m_textInfo.characterCount
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 6877980557381900191, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
         type: 3}
       propertyPath: m_text
@@ -1250,11 +1255,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_textInfo.wordCount
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4718025797545353732, guid: 2ab67fec43eb02c48ad8eccc70bbd61b,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -0.074
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ab67fec43eb02c48ad8eccc70bbd61b, type: 3}

@@ -11,13 +11,13 @@ namespace XRTK.Editor.Utilities
 {
     /// <summary>
     /// <para>
-    /// Used to regenerate guids for profiles and prefabs copied from upm packages.
+    /// Used to regenerate guids for Unity assets.
     /// </para>
     /// <para>
     /// Based on https://gist.github.com/ZimM-LostPolygon/7e2f8a3e5a1be183ac19
     /// </para>
     /// </summary>
-    internal static class GuidRegenerator
+    public static class GuidRegenerator
     {
         /// <summary>
         /// Regenerate the guids for assets located in the <see cref="assetsRootPath"/>.

@@ -79,15 +79,15 @@ Advanced developers and those wishing to contribute to the Mixed Reality Toolkit
 ### Setup Steps
 
 1. Initialize your project's repository with the XRTK-Core submodule.
-    > **Note:** Don't recursively checkout submodules, as each additional xrtk package will need to be added as its own submodule.
+    > <font color="red">**Warning!**</font> Don't recursively checkout submodules! Each package will need to be added as a submodule and replaced using the same steps listed below.
 2. Checkout the `development` branch of the XRTK-Core submodule and make sure it's up to date and synced with any upstream changes.
-    > ***Warning!*** We strongly recommend you use do not use the **upm** branch to avoid breaking the symbolic links when switching between branches.
+    > <font color="red">**Warning!**</font> We strongly recommend you use do not use the **upm** branch to avoid breaking the symbolic links when switching between branches.
 3. Create Symbolic links for each package you wish to directly modify in your project by using the project window context menu: `Symbolic Links/Create Link`
   ![Symbolic Link Context Menu](../images/DownloadingTheXRTK/SymbolicLinks.png)
 4. Using the symbolic link wizard, choose the source folder for the package you wish you replace with the editable version, and the target path for your project, then import the package.
   ![Symbolic Link Wizard](../images/DownloadingTheXRTK/SymbolicLinkWizard.png)
-    > **Note:** it's strongly advised to use the `Packages` fodler as your target path for all symbolically linked packages.
-5. Repeat step 4 for each package you'd like to directly modify.
+    > <font color="yellow">**Important:**</font> It's strongly advised to use the `Packages` fodler as your target path for all symbolically linked packages.
+5. Repeat step 4 for each additoinal package you'd like to directly modify.
 
 This workflow works with any project using GIT and the symbolically linked folders can be customized to utilize any path availible under source control.
 

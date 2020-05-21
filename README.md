@@ -46,7 +46,7 @@ We’d like to invite all the major hardware vendors to help guide their platfor
 
 We recently moved our main conversations regarding Mixed Reality Toolkit over to Discord, which allows us to do a lot more (and the chat/streaming there is awesome), but we keep a Mixed Reality Toolkit presence on Slack too, in order to retain links to our friends on there.
 
-[![Discord](https://cdn0.iconfinder.com/data/icons/free-social-media-set/24/discord-128.png)](https://discord.com/invite/zYyFKfX)
+[![Discord](https://cdn0.iconfinder.com/data/icons/free-social-media-set/24/discord-128.png)](https://discord.gg/rJMSc8Z)
 
 ### [Come join us on Discord!](https://discord.com/invite/zYyFKfX)
 

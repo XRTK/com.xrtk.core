@@ -48,7 +48,7 @@ We recently moved our main conversations regarding Mixed Reality Toolkit over to
 
 [![Discord](https://cdn0.iconfinder.com/data/icons/free-social-media-set/24/discord-128.png)](https://discord.gg/rJMSc8Z)
 
-### [Come join us on Discord!](https://discord.com/invite/zYyFKfX)
+### [Come join us on Discord!](https://discord.gg/rJMSc8Z)
 
 ## Supported Platforms
 

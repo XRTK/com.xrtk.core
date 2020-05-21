@@ -47,7 +47,7 @@ PlayerSettings:
   defaultScreenHeight: 768
   defaultScreenWidthWeb: 960
   defaultScreenHeightWeb: 600
-  m_StereoRenderingPath: 2
+  m_StereoRenderingPath: 1
   m_ActiveColorSpace: 1
   m_MTRendering: 1
   m_StackTraceTypes: 010000000100000001000000010000000100000001000000
@@ -691,11 +691,11 @@ PlayerSettings:
   m_MobileRenderingPath: 1
   metroPackageName: XRTK-Core
   metroPackageVersion: 2019.3.11.0
-  metroCertificatePath: D:\Projects\XRTK.Development\Submodules\XRTK-Core\XRTK-Core\Assets\WSATestCertificate.pfx
+  metroCertificatePath: 
   metroCertificatePassword: 
-  metroCertificateSubject: XRTK
-  metroCertificateIssuer: XRTK
-  metroCertificateNotAfter: 801ab8224940d701
+  metroCertificateSubject: 
+  metroCertificateIssuer: 
+  metroCertificateNotAfter: 0000000000000000
   metroApplicationDescription: XRTK-Core
   wsaImages: {}
   metroTileShortName: XRTK-Core

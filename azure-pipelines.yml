@@ -26,6 +26,7 @@ pr:
     - azure-pipelines.yml
     - azure_pipelines/*
     - XRTK-Core/*
+    - Submodules/*
     exclude:
       - '*'
       - XRTK-Core/Packages/com.xrtk.core/README.md
@@ -42,6 +43,7 @@ trigger:
       - azure-pipelines.yml
       - azure_pipelines/*
       - XRTK-Core/*
+      - Submodules/*
     exclude:
       - '*'
       - XRTK-Core/Packages/com.xrtk.core/README.md

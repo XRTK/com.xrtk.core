@@ -39,7 +39,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                 return new[]
                 {
                     new MixedRealityInteractionMapping("Spatial Mouse Position", AxisType.SixDof, DeviceInputType.SpatialPointer),
-                    new MixedRealityInteractionMapping("Mouse Delta Position", AxisType.DualAxis, DeviceInputType.PointerPosition, ControllerMappingLibrary.MouseY, ControllerMappingLibrary.MouseX, new List<InputProcessor>{ singleAxisProcessor }),
+                    new MixedRealityInteractionMapping("Mouse Position", AxisType.DualAxis, DeviceInputType.PointerPosition, ControllerMappingLibrary.MouseY, ControllerMappingLibrary.MouseX, new List<InputProcessor>{ singleAxisProcessor }),
                     new MixedRealityInteractionMapping("Mouse Scroll Position", AxisType.DualAxis, DeviceInputType.Scroll, ControllerMappingLibrary.MouseScroll, ControllerMappingLibrary.MouseScroll, new List<InputProcessor>{ dualAxisProcessor }),
                     new MixedRealityInteractionMapping("Left Mouse Button", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse0),
                     new MixedRealityInteractionMapping("Right Mouse Button", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Mouse1),
@@ -52,23 +52,24 @@ namespace XRTK.Providers.Controllers.UnityInput
             }
         }
 
+        public static bool IsInGameWindow => Input.mousePresent &&
+                                             (Input.mousePosition.x > 0 ||
+                                              Input.mousePosition.y > 0 ||
+                                              Input.mousePosition.x < Screen.width ||
+                                              Input.mousePosition.y < Screen.height);
+
         private MixedRealityPose controllerPose = MixedRealityPose.ZeroIdentity;
-        private Vector2 mouseDelta;
+        private Vector2 mousePosition;
 
         /// <summary>
         /// Update controller.
         /// </summary>
         public void Update()
         {
-            if (!Input.mousePresent) { return; }
-
             base.UpdateController();
 
             // Bail early if our mouse isn't in our game window.
-            if (Input.mousePosition.x < 0 ||
-                Input.mousePosition.y < 0 ||
-                Input.mousePosition.x > Screen.width ||
-                Input.mousePosition.y > Screen.height)
+            if (!IsInGameWindow)
             {
                 return;
             }
@@ -79,10 +80,10 @@ namespace XRTK.Providers.Controllers.UnityInput
                 controllerPose.Rotation = InputSource.Pointers[0].BaseCursor.Rotation;
             }
 
-            mouseDelta.x = Input.GetAxis(Interactions[1].AxisCodeX);
-            mouseDelta.y = Input.GetAxis(Interactions[1].AxisCodeY);
+            mousePosition.x = Input.GetAxis(Interactions[1].AxisCodeX);
+            mousePosition.y = Input.GetAxis(Interactions[1].AxisCodeY);
 
-            MixedRealityToolkit.InputSystem?.RaiseSourcePositionChanged(InputSource, this, mouseDelta);
+            MixedRealityToolkit.InputSystem?.RaiseSourcePositionChanged(InputSource, this, mousePosition);
             MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, controllerPose);
 
             for (int i = 0; i < Interactions.Length; i++)
@@ -100,7 +101,7 @@ namespace XRTK.Providers.Controllers.UnityInput
 
                 if (Interactions[i].InputType == DeviceInputType.PointerPosition)
                 {
-                    Interactions[i].Vector2Data = mouseDelta;
+                    Interactions[i].Vector2Data = mousePosition;
 
                     // If our value was updated, raise it.
                     if (Interactions[i].Updated)

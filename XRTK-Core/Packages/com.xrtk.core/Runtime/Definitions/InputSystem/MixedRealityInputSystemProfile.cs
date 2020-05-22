@@ -137,12 +137,12 @@ namespace XRTK.Definitions.InputSystem
 
         [SerializeField]
         [Tooltip("Hand controller poses tracked.")]
-        private List<HandControllerPoseDefinition> trackedPoses = null;
+        private HandControllerPoseDefinition[] trackedPoses = null;
 
         /// <summary>
         /// Hand controller poses tracked.
         /// </summary>
-        public List<HandControllerPoseDefinition> TrackedPoses => trackedPoses;
+        public IReadOnlyList<HandControllerPoseDefinition> TrackedPoses => trackedPoses;
 
         #endregion Global Hand Options
 

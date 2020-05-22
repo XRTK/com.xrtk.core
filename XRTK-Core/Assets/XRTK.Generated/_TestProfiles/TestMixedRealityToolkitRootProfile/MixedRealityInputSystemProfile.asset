@@ -151,7 +151,7 @@ MonoBehaviour:
   drawDebugPointingRays: 1
   debugPointingRayColors:
   - {r: 0, g: 1, b: 0, a: 1}
-  handMeshingEnabled: 0
+  renderingMode: 1
   handPhysicsEnabled: 0
   useTriggers: 0
   boundsMode: 0

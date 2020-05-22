@@ -75,6 +75,9 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public bool IsPinching { get; private set; }
 
+        /// <inheritdoc />
+        public float PinchStrength { get; private set; }
+
         /// <summary>
         /// Is pointing state from the previous update frame.
         /// </summary>
@@ -127,6 +130,7 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateVelocity();
             PointerPose = handData.PointerPose;
             Pose = handData.TrackedPose;
+            PinchStrength = handData.PinchStrength;
 
             // We assume hand controller position and roation to be available
             // if we can successfully retrieve the wrist pose.

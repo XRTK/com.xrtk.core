@@ -19,6 +19,11 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         bool IsPinching { get; }
 
         /// <summary>
+        /// Gets the current pinch strength (index and thumb) of the hand.
+        /// </summary>
+        float PinchStrength { get; }
+
+        /// <summary>
         /// Gets whether the hand is currently in a pointing pose.
         /// </summary>
         bool IsPointing { get; }

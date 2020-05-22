@@ -33,6 +33,11 @@ namespace XRTK.Definitions.Controllers.Hands
         public bool IsPinching { get; set; } = false;
 
         /// <summary>
+        /// What's the pinch strength for index and thumb?
+        /// </summary>
+        public float PinchStrength { get; set; } = 0;
+
+        /// <summary>
         /// Is the hand currently in a pointing pose?
         /// </summary>
         public bool IsPointing { get; set; } = false;

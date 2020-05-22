@@ -48,6 +48,8 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         private const float TWO_CENTIMETER_SQUARE_MAGNITUDE = 0.0004f;
+        private const float FIVE_CENTIMETER_SQUARE_MAGNITUDE = 0.0025f;
+        private const float PINCH_STRENGTH_DISTANCE = FIVE_CENTIMETER_SQUARE_MAGNITUDE - TWO_CENTIMETER_SQUARE_MAGNITUDE;
 
         private readonly Dictionary<string, HandControllerPoseDefinition> trackedPoses;
         private readonly HandPoseFrame[] poseCompareFrames;
@@ -58,16 +60,61 @@ namespace XRTK.Providers.Controllers.Hands
         protected Handedness Handedness { get; }
 
         /// <summary>
-        /// Applies post conversion steps to the generated hand data.
+        /// Is the <see cref="HandData.PointerPose"/> data provided by the
+        /// implementing platform converter?
         /// </summary>
-        /// <param name="handData">The hand data retrieved from conversion.</param>
-        protected void PostProcess(HandData handData)
+        protected abstract bool PlatformProvidesPointerPose { get; }
+
+        /// <summary>
+        /// Is the <see cref="HandData.IsPinching"/> data provided by the
+        /// implementing platform converter?
+        /// </summary>
+        protected abstract bool PlatformProvidesIsPinching { get; }
+
+        /// <summary>
+        /// Is the <see cref="HandData.PinchStrength"/> data provided by the
+        /// implementing platform converter?
+        /// </summary>
+        protected abstract bool PlatformProvidesPinchStrength { get; }
+
+        /// <summary>
+        /// Is the <see cref="HandData.IsPointing"/> data provided by the
+        /// implementing platform converter?
+        /// </summary>
+        protected abstract bool PlatformProvidesIsPointing { get; }
+
+        /// <summary>
+        /// Finalizes the hand data retrieved from platform APIs by adding
+        /// any information the platform could not provide.
+        /// </summary>
+        /// <param name="handData">The hand data retrieved from platform conversion.</param>
+        protected void Finalize(HandData handData)
         {
-            UpdateIsPinching(handData);
-            UpdateIsPointing(handData);
-            EnsurePointerPose(handData);
+            if (!PlatformProvidesIsPinching)
+            {
+                UpdateIsPinching(handData);
+            }
+
+            if (!PlatformProvidesPinchStrength)
+            {
+                UpdatePinchStrength(handData);
+            }
+
+            if (!PlatformProvidesIsPointing)
+            {
+                UpdateIsPointing(handData);
+            }
+
+            if (!PlatformProvidesPointerPose)
+            {
+                UpdatePointerPose(handData);
+            }
         }
 
+        /// <summary>
+        /// Fallback to compute whether the hand is pinching for the hand controller.
+        /// </summary>
+        /// <param name="handData">The hand data to update is pinching state for.</param>
         private void UpdateIsPinching(HandData handData)
         {
             if (handData.IsTracked)
@@ -82,6 +129,29 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
+        /// <summary>
+        /// Fallback to compute the current pinch strength for the hand controller.
+        /// </summary>
+        /// <param name="handData">The hand data to update pinch strength for.</param>
+        private void UpdatePinchStrength(HandData handData)
+        {
+            if (handData.IsTracked)
+            {
+                var thumbTipPose = handData.Joints[(int)TrackedHandJoint.ThumbTip];
+                var indexTipPose = handData.Joints[(int)TrackedHandJoint.IndexTip];
+                var distanceSquareMagnitude = (thumbTipPose.Position - indexTipPose.Position).sqrMagnitude - TWO_CENTIMETER_SQUARE_MAGNITUDE;
+                handData.PinchStrength = 1 - Mathf.Clamp(distanceSquareMagnitude / PINCH_STRENGTH_DISTANCE, 0f, 1f);
+            }
+            else
+            {
+                handData.PinchStrength = 0f;
+            }
+        }
+
+        /// <summary>
+        /// Fallback to compute whether the hand is pointing for the hand controller.
+        /// </summary>
+        /// <param name="handData">The hand data to update is pointing state for.</param>
         private void UpdateIsPointing(HandData handData)
         {
             if (handData.IsTracked && !handData.IsPinching)
@@ -107,7 +177,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="jointPoses">Local joint poses retrieved from initial conversion.</param>
         /// <param name="recognizedPose">The recognized pose ID, if any.</param>
         /// <returns>True, if a pose was recognized.</returns>
-        protected bool TryRecognizePose(MixedRealityPose[] jointPoses, out HandControllerPoseDefinition recognizedPose)
+        private bool TryRecognizePose(MixedRealityPose[] jointPoses, out HandControllerPoseDefinition recognizedPose)
         {
             var wristPose = jointPoses[(int)TrackedHandJoint.Wrist];
             var localJointPoses = ParseFromJointPoses(jointPoses, Handedness, wristPose.Rotation, wristPose.Position);
@@ -131,7 +201,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Takes world space joint poses from any hand and converts them into right-hand, camera-space poses.
         /// </summary>
-        protected MixedRealityPose[] ParseFromJointPoses(MixedRealityPose[] joints, Handedness handedness, Quaternion rotation, Vector3 position)
+        private MixedRealityPose[] ParseFromJointPoses(MixedRealityPose[] joints, Handedness handedness, Quaternion rotation, Vector3 position)
         {
             var localJointPoses = new MixedRealityPose[joints.Length];
             var invRotation = Quaternion.Inverse(rotation);
@@ -167,40 +237,30 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <summary>
-        /// Ensures a pointer pose is set for the hand in case the platform didn't provide one.
-        /// </summary>
-        /// <param name="handData"></param>
-        private void EnsurePointerPose(HandData handData)
-        {
-            if (handData.IsTracked && handData.PointerPose == MixedRealityPose.ZeroIdentity)
-            {
-                handData.PointerPose = ComputeFallbackPointerPose(handData);
-            }
-        }
-
-        /// <summary>
-        /// Naive fallback to compute a pointer pose for the hand controller.
+        /// Fallback to compute a pointer pose for the hand controller.
         /// </summary>
         /// <param name="handData">The hand data to update pointer pose for.</param>
-        /// <returns>Pointer pose.</returns>
-        private MixedRealityPose ComputeFallbackPointerPose(HandData handData)
+        private void UpdatePointerPose(HandData handData)
         {
-            var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
-            palmPose.Rotation = Quaternion.Inverse(palmPose.Rotation) * palmPose.Rotation;
+            if (handData.IsTracked)
+            {
+                var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
+                palmPose.Rotation = Quaternion.Inverse(palmPose.Rotation) * palmPose.Rotation;
 
-            var thumbProximalPose = handData.Joints[(int)TrackedHandJoint.ThumbProximalJoint];
-            var indexDistalPose = handData.Joints[(int)TrackedHandJoint.IndexDistalJoint];
-            var pointerPosition = Vector3.Lerp(thumbProximalPose.Position, indexDistalPose.Position, .5f);
-            var pointerEndPosition = pointerPosition + palmPose.Forward * 10f;
+                var thumbProximalPose = handData.Joints[(int)TrackedHandJoint.ThumbProximalJoint];
+                var indexDistalPose = handData.Joints[(int)TrackedHandJoint.IndexDistalJoint];
+                var pointerPosition = Vector3.Lerp(thumbProximalPose.Position, indexDistalPose.Position, .5f);
+                var pointerEndPosition = pointerPosition + palmPose.Forward * 10f;
 
-            var camera = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera
-                : CameraCache.Main;
+                var camera = MixedRealityToolkit.CameraSystem != null
+                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera
+                    : CameraCache.Main;
 
-            var pointerDirection = pointerEndPosition - pointerPosition;
-            var pointerRotation = Quaternion.LookRotation(pointerDirection, camera.transform.up);
+                var pointerDirection = pointerEndPosition - pointerPosition;
+                var pointerRotation = Quaternion.LookRotation(pointerDirection, camera.transform.up);
 
-            return new MixedRealityPose(pointerPosition, pointerRotation);
+                handData.PointerPose = new MixedRealityPose(pointerPosition, pointerRotation);
+            }
         }
     }
 }

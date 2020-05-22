@@ -65,6 +65,18 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         private SimulatedHandControllerPose previousPose;
         private SimulatedHandControllerPose targetPose;
 
+        /// <inheritdoc />
+        protected override bool PlatformProvidesPointerPose => false;
+
+        /// <inheritdoc />
+        protected override bool PlatformProvidesIsPinching => false;
+
+        /// <inheritdoc />
+        protected override bool PlatformProvidesPinchStrength => false;
+
+        /// <inheritdoc />
+        protected override bool PlatformProvidesIsPointing => false;
+
         /// <summary>
         /// Gets the hands position in screen space.
         /// </summary>
@@ -165,7 +177,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             if (handDataChanged)
             {
-                PostProcess(HandData);
+                Finalize(HandData);
             }
 
             return HandData;

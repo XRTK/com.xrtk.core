@@ -36,7 +36,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             // Simulation cannot work without a default pose.
             if (SimulatedHandControllerPose.DefaultHandPose == null)
             {
-                Debug.LogError($"There is no default simulated hand pose defined. Check the {GetType().Name}!");
+                Debug.LogError("There is no default simulated hand pose defined!");
+                return;
             }
 
             initialPose = SimulatedHandControllerPose.GetPoseByName(SimulatedHandControllerPose.DefaultHandPose.Id);
@@ -229,17 +230,23 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 : CameraCache.Main;
 
             var position = camera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
-            ComputeJointPoses(Pose, Handedness, rotation, position, HandData.Joints);
+
+            // At this point we know the hand's root pose. All joint poses
+            // will be relative to this root pose.
+            HandData.RootPose = new MixedRealityPose(position, rotation);
+
+            // Compute joint poses relative to root pose.
+            ComputeJointPoses(Pose, Handedness, HandData.Joints);
         }
 
         /// <summary>
         /// Computes world space poses from camera-space joint data.
         /// </summary>
-        private void ComputeJointPoses(SimulatedHandControllerPose pose, Handedness handedness, Quaternion rotation, Vector3 position, MixedRealityPose[] jointsOut)
+        private void ComputeJointPoses(SimulatedHandControllerPose pose, Handedness handedness, MixedRealityPose[] jointsOut)
         {
-            Quaternion cameraRotation = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation
-                : CameraCache.Main.transform.rotation;
+            Quaternion playspaceRotation = MixedRealityToolkit.CameraSystem != null
+                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.rotation
+                : Quaternion.identity;
 
             for (int i = 0; i < HandData.JointCount; i++)
             {
@@ -255,13 +262,13 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                     localRotation.z = -localRotation.z;
                 }
 
-                // Apply camera transform
-                localPosition = cameraRotation * localPosition;
-                localRotation = cameraRotation * localRotation;
+                // Apply playspace transform
+                localPosition = playspaceRotation * localPosition;
+                localRotation = playspaceRotation * localRotation;
 
-                // Apply external transform
-                localPosition = position + rotation * localPosition;
-                localRotation = rotation * localRotation;
+                //// Apply external transform
+                //localPosition = position + rotation * localPosition;
+                //localRotation = rotation * localRotation;
 
                 jointsOut[i] = new MixedRealityPose(localPosition, localRotation);
             }

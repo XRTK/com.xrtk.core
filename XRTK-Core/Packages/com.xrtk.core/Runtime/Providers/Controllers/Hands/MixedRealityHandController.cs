@@ -103,9 +103,14 @@ namespace XRTK.Providers.Controllers.Hands
         public HandControllerPoseDefinition Pose { get; private set; }
 
         /// <summary>
-        /// The hand's pointer pose.
+        /// The hand's pointer pose in playspace.
         /// </summary>
-        private MixedRealityPose PointerPose { get; set; }
+        private MixedRealityPose SpatialPointerPose { get; set; }
+
+        /// <summary>
+        /// The hands's index finger tip pose in playspace.
+        /// </summary>
+        private MixedRealityPose IndexFingerTipPose { get; set; }
 
         /// <summary>
         /// Updates the hand controller with new hand data input.
@@ -126,20 +131,19 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateIsPinching(handData);
             UpdateIsIsPointing(handData);
             UpdateIsIsGrabbing(handData);
+            UpdateSpatialPointerPose(handData);
+            UpdateIndexFingerTipPose(handData);
             UpdateBounds();
             UpdateVelocity();
-            PointerPose = handData.PointerPose;
             Pose = handData.TrackedPose;
             PinchStrength = handData.PinchStrength;
 
-            // We assume hand controller position and roation to be available
-            // if we can successfully retrieve the wrist pose.
-            if (TryGetJointPose(TrackedHandJoint.Wrist, out var wristPose))
+            TrackingState = handData.IsTracked ? TrackingState.Tracked : TrackingState.NotTracked;
+            if (TrackingState == TrackingState.Tracked)
             {
                 IsPositionAvailable = true;
                 IsPositionApproximate = false;
                 IsRotationAvailable = true;
-                TrackingState = handData.IsTracked ? TrackingState.Tracked : TrackingState.NotTracked;
             }
 
             // Update controller tracking state.
@@ -151,7 +155,7 @@ namespace XRTK.Providers.Controllers.Hands
             // Update controller pose.
             if (TrackingState == TrackingState.Tracked)
             {
-                MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, wristPose);
+                MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, handData.RootPose);
             }
 
             // Update hand controller interaction mappings.
@@ -159,27 +163,6 @@ namespace XRTK.Providers.Controllers.Hands
 
             // Raise general hand data update for visualizers.
             MixedRealityToolkit.InputSystem?.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);
-        }
-
-        /// <summary>
-        /// Updates the controller's joint poses using provided hand data.
-        /// </summary>
-        /// <param name="handData">The updated hand data for this controller.</param>
-        private void UpdateJoints(HandData handData)
-        {
-            for (int i = 0; i < HandData.JointCount; i++)
-            {
-                var handJoint = (TrackedHandJoint)i;
-
-                if (TryGetJointPose(handJoint, out _))
-                {
-                    jointPoses[handJoint] = handData.Joints[i];
-                }
-                else
-                {
-                    jointPoses.Add(handJoint, handData.Joints[i]);
-                }
-            }
         }
 
         #region Hand Bounds Implementation
@@ -493,7 +476,7 @@ namespace XRTK.Providers.Controllers.Hands
         private void UpdateSpatialPointerMapping(MixedRealityInteractionMapping interactionMapping)
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
-            interactionMapping.PoseData = PointerPose;
+            interactionMapping.PoseData = SpatialPointerPose;
         }
 
         private void UpdateSelectMapping(MixedRealityInteractionMapping interactionMapping)
@@ -535,10 +518,7 @@ namespace XRTK.Providers.Controllers.Hands
         private void UpdateIndexFingerMapping(MixedRealityInteractionMapping interactionMapping)
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
-            if (TryGetJointPose(TrackedHandJoint.IndexTip, out var indexTipPose))
-            {
-                interactionMapping.PoseData = indexTipPose;
-            }
+            interactionMapping.PoseData = IndexFingerTipPose;
         }
 
         private void UpdateHandPoseMapping(MixedRealityInteractionMapping interactionMapping)
@@ -584,6 +564,49 @@ namespace XRTK.Providers.Controllers.Hands
 
             velocityUpdateFrame++;
             velocityUpdateFrame = velocityUpdateFrame > velocityUpdateFrameInterval ? 0 : velocityUpdateFrame;
+        }
+
+        /// <summary>
+        /// Updates the controller's joint poses using provided hand data.
+        /// </summary>
+        /// <param name="handData">The updated hand data for this controller.</param>
+        private void UpdateJoints(HandData handData)
+        {
+            for (int i = 0; i < HandData.JointCount; i++)
+            {
+                var handJoint = (TrackedHandJoint)i;
+
+                if (TryGetJointPose(handJoint, out _))
+                {
+                    jointPoses[handJoint] = handData.Joints[i];
+                }
+                else
+                {
+                    jointPoses.Add(handJoint, handData.Joints[i]);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Updates the spatial pointer pose value for the hand controller.
+        /// </summary>
+        /// <param name="handData">Updated hand data.</param>
+        private void UpdateSpatialPointerPose(HandData handData)
+        {
+            var localPointerPose = handData.PointerPose;
+            SpatialPointerPose = handData.RootPose + localPointerPose;
+        }
+
+        /// <summary>
+        /// Updates the index finger tip pose value for the hand controller.
+        /// </summary>
+        /// <param name="handData">Updated hand data.</param>
+        private void UpdateIndexFingerTipPose(HandData handData)
+        {
+            if (TryGetJointPose(TrackedHandJoint.IndexTip, out var indexTipPose))
+            {
+                IndexFingerTipPose = handData.RootPose + indexTipPose;
+            }
         }
 
         /// <summary>

@@ -15,7 +15,7 @@ namespace XRTK.Providers.Controllers.Hands
     /// A recognizer manages a list of recorded hand poses and
     /// may be used to recognize any of those poses during runtime.
     /// </summary>
-    public class HandPoseRecognizer
+    public sealed class HandPoseRecognizer
     {
         /// <summary>
         /// Creates a new recognizer instance to work on the provided list of poses.
@@ -43,65 +43,64 @@ namespace XRTK.Providers.Controllers.Hands
         /// Attempts to recognize a hand pose.
         /// </summary>
         /// <param name="handData">The hand data to use for recognition.</param>
-        public void Recognize(HandData handData)
+        public void Recognize(HandData handData, Handedness handedness)
         {
-            //var wristPose = handData.Joints[(int)TrackedHandJoint.Wrist];
-            //var localJointPoses = ParseFromJointPoses(handData.Joints, Handedness, wristPose.Rotation, wristPose.Position);
-
-            var lowestSumOfJointPairDistances = Mathf.Infinity;
+            var localJointPoses = ParseFromJointPoses(handData.Joints, handedness, handData.RootPose);
+            var currentHighestProbability = 0f;
             HandControllerPoseDefinition recognizedPose = null;
 
             for (int i = 0; i < poseHandDatas.Length; i++)
             {
                 var recordedData = poseHandDatas[i];
-                var sumOfJointPairDistances = Compare(recordedData, handData, 1f);
+                var probability = Compare(recordedData.Joints, localJointPoses, .1f);
 
-                if (sumOfJointPairDistances < lowestSumOfJointPairDistances)
+                if (probability > currentHighestProbability)
                 {
+                    currentHighestProbability = probability;
                     recognizedPose = poseDefinitions[i];
                 }
             }
 
             handData.TrackedPose = recognizedPose;
-            Debug.Log(handData.TrackedPose?.Id);
+
+            if (handData.TrackedPose != null)
+            {
+                Debug.Log(handData.TrackedPose.Id);
+            }
         }
 
-        private float Compare(HandData recordedData, HandData runtimeData, float tolerance)
+        private float Compare(MixedRealityPose[] recordedJointPoses, MixedRealityPose[] runtimeJointPoses, float threshold)
         {
-            var sumOfJointPairDistances = Mathf.Infinity;
-
-            Debug.Log(runtimeData.Joints[0].Position);
+            // Variable keeps count of how many joint poses have passed
+            // the test for equality.
+            var passed = 0;
 
             for (int i = 0; i < HandData.JointCount; i++)
             {
-                var recordedJointPosition = recordedData.Joints[i].Position;
-                var runtimeJointPosition = runtimeData.Joints[i].Position;
+                var recordedJointPosition = recordedJointPoses[i].Position;
+                var runtimeJointPosition = runtimeJointPoses[i].Position;
                 var delta = Vector3.Distance(recordedJointPosition, runtimeJointPosition);
 
-                // If the distance for any pair of joints exceeds the tolerance
-                // we consider the poses to definitely not be equal.
-                if (delta > tolerance)
+                // If the delta is below threshold we consider the joint
+                // test passed.
+                if (delta < threshold)
                 {
-                    sumOfJointPairDistances = Mathf.Infinity;
-                    break;
+                    passed++;
                 }
-
-                // Otherwise we add the delta to the sum of distances.
-                sumOfJointPairDistances += delta;
             }
 
-            // The higher the sum of distances the more unlikely
-            // it is that a and b are the same pose.
-            return sumOfJointPairDistances;
+            // The more joints have passed the test, the more likely it is
+            // the poses are the same.
+            return passed / HandData.JointCount;
         }
 
         /// <summary>
         /// Takes world space joint poses from any hand and converts them into right-hand, camera-space poses.
         /// </summary>
-        private MixedRealityPose[] ParseFromJointPoses(MixedRealityPose[] joints, Handedness handedness, Quaternion rotation, Vector3 position)
+        private MixedRealityPose[] ParseFromJointPoses(MixedRealityPose[] joints, Handedness handedness, MixedRealityPose rootPose)
         {
             var localJointPoses = new MixedRealityPose[joints.Length];
-            var invRotation = Quaternion.Inverse(rotation);
+            var invRotation = Quaternion.Inverse(rootPose.Rotation);
             var invCameraRotation = Quaternion.Inverse(MixedRealityToolkit.CameraSystem != null
                 ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation
                 : CameraCache.Main.transform.rotation);
@@ -112,7 +111,7 @@ namespace XRTK.Providers.Controllers.Hands
                 Quaternion r = joints[i].Rotation;
 
                 // Apply inverse external transform
-                p = invRotation * (p - position);
+                p = invRotation * (p - rootPose.Position);
                 r = invRotation * r;
 
                 // To camera space

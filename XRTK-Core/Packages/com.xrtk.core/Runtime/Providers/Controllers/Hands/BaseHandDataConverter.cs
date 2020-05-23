@@ -163,7 +163,7 @@ namespace XRTK.Providers.Controllers.Hands
         {
             if (handData.IsTracked)
             {
-                Recognizer.Recognize(handData);
+                Recognizer.Recognize(handData, Handedness);
             }
             else
             {

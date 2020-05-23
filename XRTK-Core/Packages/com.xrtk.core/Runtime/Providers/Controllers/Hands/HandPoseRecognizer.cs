@@ -53,8 +53,8 @@ namespace XRTK.Providers.Controllers.Hands
 
             for (int i = 0; i < poseHandDatas.Length; i++)
             {
-                var compareFrame = poseHandDatas[i];
-                var sumOfJointPairDistances = Compare(compareFrame, handData, 1f);
+                var recordedData = poseHandDatas[i];
+                var sumOfJointPairDistances = Compare(recordedData, handData, 1f);
 
                 if (sumOfJointPairDistances < lowestSumOfJointPairDistances)
                 {
@@ -66,26 +66,28 @@ namespace XRTK.Providers.Controllers.Hands
             Debug.Log(handData.TrackedPose?.Id);
         }
 
-        private float Compare(HandData a, HandData b, float tolerance)
+        private float Compare(HandData recordedData, HandData runtimeData, float tolerance)
         {
             var sumOfJointPairDistances = Mathf.Infinity;
 
+            Debug.Log(runtimeData.Joints[0].Position);
+
             for (int i = 0; i < HandData.JointCount; i++)
             {
-                var jointPositionA = a.Joints[i].Position;
-                var jointPositionB = b.Joints[i].Position;
-                var distanceAtoB = Vector3.Distance(jointPositionA, jointPositionB);
+                var recordedJointPosition = recordedData.Joints[i].Position;
+                var runtimeJointPosition = runtimeData.Joints[i].Position;
+                var delta = Vector3.Distance(recordedJointPosition, runtimeJointPosition);
 
                 // If the distance for any pair of joints exceeds the tolerance
                 // we consider the poses to definitely not be equal.
-                if (distanceAtoB > tolerance)
+                if (delta > tolerance)
                 {
                     sumOfJointPairDistances = Mathf.Infinity;
                     break;
                 }
 
                 // Otherwise we add the delta to the sum of distances.
-                sumOfJointPairDistances += distanceAtoB;
+                sumOfJointPairDistances += delta;
             }
 
             // The higher the sum of distances the more unlikely

@@ -24,35 +24,17 @@ namespace XRTK.Providers.Controllers.Hands
         protected BaseHandDataConverter(Handedness handedness, IReadOnlyList<HandControllerPoseDefinition> trackedPoses)
         {
             Handedness = handedness;
-            poseCompareFrames = new HandPoseFrame[trackedPoses.Count];
-            this.trackedPoses = new Dictionary<string, HandControllerPoseDefinition>();
-
-            int i = 0;
-
-            foreach (var item in trackedPoses)
-            {
-                var recordedHandData = JsonUtility.FromJson<RecordedHandJoints>(item.Data.text);
-                var recordedLocalJointPoses = new MixedRealityPose[HandData.JointCount];
-
-                for (int j = 0; j < recordedHandData.items.Length; j++)
-                {
-                    var jointRecord = recordedHandData.items[j];
-                    recordedLocalJointPoses[(int)jointRecord.JointIndex] = jointRecord.pose;
-                }
-
-                poseCompareFrames[i] = new HandPoseFrame(item.Id, recordedLocalJointPoses);
-                this.trackedPoses.Add(item.Id, item);
-
-                i++;
-            }
+            Recognizer = new HandPoseRecognizer(trackedPoses);
         }
 
         private const float TWO_CENTIMETER_SQUARE_MAGNITUDE = 0.0004f;
         private const float FIVE_CENTIMETER_SQUARE_MAGNITUDE = 0.0025f;
         private const float PINCH_STRENGTH_DISTANCE = FIVE_CENTIMETER_SQUARE_MAGNITUDE - TWO_CENTIMETER_SQUARE_MAGNITUDE;
 
-        private readonly Dictionary<string, HandControllerPoseDefinition> trackedPoses;
-        private readonly HandPoseFrame[] poseCompareFrames;
+        /// <summary>
+        /// Recognizer instance used by the converter for pose recognition.
+        /// </summary>
+        private HandPoseRecognizer Recognizer { get; }
 
         /// <summary>
         /// The handedness this converter is converting to.
@@ -109,6 +91,8 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 UpdatePointerPose(handData);
             }
+
+            UpdateTrackedPose(handData);
         }
 
         /// <summary>
@@ -172,68 +156,19 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <summary>
-        /// Tries to reconize the current tracked hand pose.
+        /// Updates the tracked pose for the hand.
         /// </summary>
-        /// <param name="jointPoses">Local joint poses retrieved from initial conversion.</param>
-        /// <param name="recognizedPose">The recognized pose ID, if any.</param>
-        /// <returns>True, if a pose was recognized.</returns>
-        private bool TryRecognizePose(MixedRealityPose[] jointPoses, out HandControllerPoseDefinition recognizedPose)
+        /// <param name="handData">The hand data to update tracked pose for.</param>
+        private void UpdateTrackedPose(HandData handData)
         {
-            var wristPose = jointPoses[(int)TrackedHandJoint.Wrist];
-            var localJointPoses = ParseFromJointPoses(jointPoses, Handedness, wristPose.Rotation, wristPose.Position);
-            var currentFrame = new HandPoseFrame(localJointPoses);
-
-            for (int i = 0; i < poseCompareFrames.Length; i++)
+            if (handData.IsTracked)
             {
-                var compareFrame = poseCompareFrames[i];
-
-                if (compareFrame.Compare(currentFrame, .01f))
-                {
-                    recognizedPose = trackedPoses[compareFrame.Id];
-                    return true;
-                }
+                Recognizer.Recognize(handData);
             }
-
-            recognizedPose = null;
-            return false;
-        }
-
-        /// <summary>
-        /// Takes world space joint poses from any hand and converts them into right-hand, camera-space poses.
-        /// </summary>
-        private MixedRealityPose[] ParseFromJointPoses(MixedRealityPose[] joints, Handedness handedness, Quaternion rotation, Vector3 position)
-        {
-            var localJointPoses = new MixedRealityPose[joints.Length];
-            var invRotation = Quaternion.Inverse(rotation);
-            var invCameraRotation = Quaternion.Inverse(MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation
-                : CameraCache.Main.transform.rotation);
-
-            for (int i = 0; i < HandData.JointCount; i++)
+            else
             {
-                Vector3 p = joints[i].Position;
-                Quaternion r = joints[i].Rotation;
-
-                // Apply inverse external transform
-                p = invRotation * (p - position);
-                r = invRotation * r;
-
-                // To camera space
-                p = invCameraRotation * p;
-                r = invCameraRotation * r;
-
-                // Pose offset are for right hand, mirror on X axis if left hand is given
-                if (handedness == Handedness.Left)
-                {
-                    p.x = -p.x;
-                    r.y = -r.y;
-                    r.z = -r.z;
-                }
-
-                localJointPoses[i] = new MixedRealityPose(p, r);
+                handData.TrackedPose = null;
             }
-
-            return localJointPoses;
         }
 
         /// <summary>

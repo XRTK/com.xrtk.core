@@ -59,6 +59,11 @@ namespace XRTK.Definitions.Controllers.Hands
         public HandControllerPoseDefinition TrackedPose { get; set; } = null;
 
         /// <summary>
+        /// The hands root pose. <see cref="Joints"/> poses are relative to the root pose.
+        /// </summary>
+        public MixedRealityPose RootPose { get; set; } = MixedRealityPose.ZeroIdentity;
+
+        /// <summary>
         /// Pose information for each hand joint.
         /// </summary>
         public MixedRealityPose[] Joints { get; } = new MixedRealityPose[JointCount];

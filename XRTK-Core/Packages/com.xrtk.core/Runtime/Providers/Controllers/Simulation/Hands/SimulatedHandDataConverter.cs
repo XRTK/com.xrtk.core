@@ -236,13 +236,13 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             HandData.RootPose = new MixedRealityPose(position, rotation);
 
             // Compute joint poses relative to root pose.
-            ComputeJointPoses(Pose, Handedness, HandData.Joints);
+            ComputeJointPoses(Pose, Handedness, HandData.RootPose);
         }
 
         /// <summary>
         /// Computes world space poses from camera-space joint data.
         /// </summary>
-        private void ComputeJointPoses(SimulatedHandControllerPose pose, Handedness handedness, MixedRealityPose[] jointsOut)
+        private void ComputeJointPoses(SimulatedHandControllerPose pose, Handedness handedness, MixedRealityPose rootPose)
         {
             Quaternion playspaceRotation = MixedRealityToolkit.CameraSystem != null
                 ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.rotation
@@ -266,11 +266,10 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 localPosition = playspaceRotation * localPosition;
                 localRotation = playspaceRotation * localRotation;
 
-                //// Apply external transform
-                //localPosition = position + rotation * localPosition;
-                //localRotation = rotation * localRotation;
+                // Apply root pose rotation transform
+                localRotation = rootPose.Rotation * localRotation;
 
-                jointsOut[i] = new MixedRealityPose(localPosition, localRotation);
+                HandData.Joints[i] = new MixedRealityPose(localPosition, localRotation);
             }
         }
 

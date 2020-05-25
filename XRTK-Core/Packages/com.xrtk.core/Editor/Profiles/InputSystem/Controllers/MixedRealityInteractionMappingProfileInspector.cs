@@ -192,7 +192,9 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
 
                 while (iterator.NextVisible(false))
                 {
+                    processorEditor.serializedObject.Update();
                     EditorGUILayout.PropertyField(iterator, true);
+                    processorEditor.serializedObject.ApplyModifiedProperties();
                 }
 
                 EditorGUI.indentLevel--;

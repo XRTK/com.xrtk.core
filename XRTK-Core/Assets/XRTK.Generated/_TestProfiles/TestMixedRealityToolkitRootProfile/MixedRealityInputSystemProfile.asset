@@ -138,6 +138,19 @@ MonoBehaviour:
       - reference: 7dc72b4e-34f6-4b26-afd7-cde0c51f83a3
       - reference: 7dc72b4e-34f6-4b26-afd7-cde0c51f83a3
     profile: {fileID: 11400000, guid: 11ef7a331fa0a164bb9ac3e5cae510ff, type: 2}
+  - instancedType:
+      reference: 067ce7d4-8277-4e18-834e-3dc712074b72
+    name: Mouse Data Provider
+    priority: 12
+    platformEntries:
+      runtimePlatforms:
+      - reference: c838c4f5-a87e-48c7-8742-09a4d85fc3bc
+      - reference: 58de2d2a-db5f-4090-a949-4028b8ea3afd
+      - reference: 958d8798-314b-41c5-96d3-86338860bdaf
+      - reference: 7dc72b4e-34f6-4b26-afd7-cde0c51f83a3
+      - reference: a2ffb628-3ce7-4759-9c66-8f2ba8d16fc2
+      - reference: 97344133-03b4-4314-9581-e42d1aac91ba
+    profile: {fileID: 11400000, guid: a2a4350cf0bc6a84cb524749c3c95eae, type: 2}
   focusProviderType:
     reference: 249d4d78-cadd-45ba-9438-db9fc2509213
   gazeProviderType:

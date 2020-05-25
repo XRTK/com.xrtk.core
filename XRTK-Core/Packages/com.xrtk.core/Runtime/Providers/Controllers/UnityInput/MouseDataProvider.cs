@@ -15,6 +15,7 @@ namespace XRTK.Providers.Controllers.UnityInput
     /// <summary>
     /// The mouse data provider.
     /// </summary>
+    [System.Runtime.InteropServices.Guid("067CE7D4-8277-4E18-834E-3DC712074B72")]
     public class MouseDataProvider : BaseControllerDataProvider
     {
         /// <inheritdoc />
@@ -31,12 +32,30 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// <inheritdoc />
         public override void Enable()
         {
-            if (!Input.mousePresent)
+            if (MouseController.IsInGameWindow && Controller == null)
             {
-                Disable();
-                return;
+                CreateController();
             }
+        }
 
+        /// <inheritdoc />
+        public override void Update()
+        {
+            base.Update();
+            Controller?.Update();
+        }
+
+        /// <inheritdoc />
+        public override void Disable()
+        {
+            if (Controller != null)
+            {
+                DestroyController();
+            }
+        }
+
+        private void CreateController()
+        {
 #if UNITY_EDITOR
             if (UnityEditor.EditorWindow.focusedWindow != null)
             {
@@ -45,8 +64,6 @@ namespace XRTK.Providers.Controllers.UnityInput
 #endif
 
             Cursor.visible = false;
-            Cursor.lockState = CursorLockMode.Locked; ;
-
             MixedRealityRaycaster.DebugEnabled = true;
 
             try
@@ -63,24 +80,10 @@ namespace XRTK.Providers.Controllers.UnityInput
             AddController(Controller);
         }
 
-        /// <inheritdoc />
-        public override void Update()
+        private void DestroyController()
         {
-            base.Update();
-
-            if (Input.mousePresent && Controller == null) { Enable(); }
-
-            Controller?.Update();
-        }
-
-        /// <inheritdoc />
-        public override void Disable()
-        {
-            if (Controller != null)
-            {
-                MixedRealityToolkit.InputSystem?.RaiseSourceLost(Controller.InputSource, Controller);
-                RemoveController(Controller);
-            }
+            MixedRealityToolkit.InputSystem?.RaiseSourceLost(Controller.InputSource, Controller);
+            RemoveController(Controller);
         }
     }
 }

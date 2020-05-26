@@ -11,22 +11,21 @@ using XRTK.Utilities;
 namespace XRTK.Providers.Controllers.Hands
 {
     /// <summary>
-    /// Base implementation for platform converters mapping platform
-    /// hand data to the toolkit's agnostic hand data.
+    /// The hand data post processor updates <see cref="HandData"/> provided
+    /// by a platform and enriches it with potentially missing information.
     /// </summary>
-    public abstract class BaseHandDataConverter
+    public sealed class HandDataPostProcessor
     {
         /// <summary>
-        /// Creates a new instance of the hand data converter.
+        /// Creates a new instance of the hand data post processor.
         /// </summary>
-        /// <param name="handedness">Handedness this converter is converting to.</param>
         /// <param name="trackedPoses">Pose recognizer instance to use for pose recognition.</param>
-        protected BaseHandDataConverter(Handedness handedness, IReadOnlyList<HandControllerPoseDefinition> trackedPoses)
+        public HandDataPostProcessor(IReadOnlyList<HandControllerPoseDefinition> trackedPoses)
         {
-            Handedness = handedness;
             Recognizer = new HandPoseRecognizer(trackedPoses);
         }
 
+        private const float ONE_CENTIMETER_SQUARE_MAGNITUDE = 0.0001f;
         private const float TWO_CENTIMETER_SQUARE_MAGNITUDE = 0.0004f;
         private const float FIVE_CENTIMETER_SQUARE_MAGNITUDE = 0.0025f;
         private const float PINCH_STRENGTH_DISTANCE = FIVE_CENTIMETER_SQUARE_MAGNITUDE - TWO_CENTIMETER_SQUARE_MAGNITUDE;
@@ -37,40 +36,47 @@ namespace XRTK.Providers.Controllers.Hands
         private HandPoseRecognizer Recognizer { get; }
 
         /// <summary>
-        /// The handedness this converter is converting to.
-        /// </summary>
-        protected Handedness Handedness { get; }
-
-        /// <summary>
         /// Is the <see cref="HandData.PointerPose"/> data provided by the
         /// implementing platform converter?
         /// </summary>
-        protected abstract bool PlatformProvidesPointerPose { get; }
+        public bool PlatformProvidesPointerPose { get; }
 
         /// <summary>
         /// Is the <see cref="HandData.IsPinching"/> data provided by the
         /// implementing platform converter?
         /// </summary>
-        protected abstract bool PlatformProvidesIsPinching { get; }
+        public bool PlatformProvidesIsPinching { get; }
 
         /// <summary>
         /// Is the <see cref="HandData.PinchStrength"/> data provided by the
         /// implementing platform converter?
         /// </summary>
-        protected abstract bool PlatformProvidesPinchStrength { get; }
+        public bool PlatformProvidesPinchStrength { get; }
 
         /// <summary>
         /// Is the <see cref="HandData.IsPointing"/> data provided by the
         /// implementing platform converter?
         /// </summary>
-        protected abstract bool PlatformProvidesIsPointing { get; }
+        public bool PlatformProvidesIsPointing { get; }
+
+        /// <summary>
+        /// Is the <see cref="HandData.IsGripping"/> data provided by the
+        /// implementing platform converter?
+        /// </summary>
+        public bool PlatformProvidesIsGripping { get; }
+
+        /// <summary>
+        /// Is the <see cref="HandData.GripStrength"/> data provided by the
+        /// implementing platform converter?
+        /// </summary>
+        public bool PlatformProvidesGripStrength { get; }
 
         /// <summary>
         /// Finalizes the hand data retrieved from platform APIs by adding
         /// any information the platform could not provide.
         /// </summary>
         /// <param name="handData">The hand data retrieved from platform conversion.</param>
-        protected void Finalize(HandData handData)
+        public void PostProcess(HandData handData)
         {
             if (!PlatformProvidesIsPinching)
             {
@@ -87,12 +93,59 @@ namespace XRTK.Providers.Controllers.Hands
                 UpdateIsPointing(handData);
             }
 
+            if (!PlatformProvidesIsGripping)
+            {
+                UpdateIsGripping(handData);
+            }
+
+            if (!PlatformProvidesGripStrength)
+            {
+                UpdateGripStrength(handData);
+            }
+
             if (!PlatformProvidesPointerPose)
             {
                 UpdatePointerPose(handData);
             }
 
             UpdateTrackedPose(handData);
+        }
+
+        /// <summary>
+        /// Fallback to compute whether the hand is gripping for the hand controller.
+        /// </summary>
+        /// <param name="handData">The hand data to update is gripping state for.</param>
+        private void UpdateIsGripping(HandData handData)
+        {
+            if (handData.IsTracked)
+            {
+                var thumbTipPose = handData.Joints[(int)TrackedHandJoint.ThumbTip];
+                var indexTipPose = handData.Joints[(int)TrackedHandJoint.IndexTip];
+                handData.IsPinching = (thumbTipPose.Position - indexTipPose.Position).sqrMagnitude < TWO_CENTIMETER_SQUARE_MAGNITUDE;
+            }
+            else
+            {
+                handData.IsGripping = false;
+            }
+        }
+
+        /// <summary>
+        /// Fallback to compute the current grip strength for the hand controller.
+        /// </summary>
+        /// <param name="handData">The hand data to update grip strength for.</param>
+        private void UpdateGripStrength(HandData handData)
+        {
+            if (handData.IsTracked)
+            {
+                var thumbTipPose = handData.Joints[(int)TrackedHandJoint.ThumbTip];
+                var indexTipPose = handData.Joints[(int)TrackedHandJoint.IndexTip];
+                var distanceSquareMagnitude = (thumbTipPose.Position - indexTipPose.Position).sqrMagnitude - TWO_CENTIMETER_SQUARE_MAGNITUDE;
+                handData.PinchStrength = 1 - Mathf.Clamp(distanceSquareMagnitude / PINCH_STRENGTH_DISTANCE, 0f, 1f);
+            }
+            else
+            {
+                handData.GripStrength = 0f;
+            }
         }
 
         /// <summary>
@@ -163,7 +216,7 @@ namespace XRTK.Providers.Controllers.Hands
         {
             if (handData.IsTracked)
             {
-                Recognizer.Recognize(handData, Handedness);
+                Recognizer.Recognize(handData);
             }
             else
             {

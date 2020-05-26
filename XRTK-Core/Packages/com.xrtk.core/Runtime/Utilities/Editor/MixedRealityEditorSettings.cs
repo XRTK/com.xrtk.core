@@ -1,12 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
-using System.IO;
 using UnityEditor;
 using UnityEditor.Build;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace XRTK.Utilities.Editor
 {
@@ -16,51 +13,8 @@ namespace XRTK.Utilities.Editor
     [InitializeOnLoad]
     public class MixedRealityEditorSettings : IActiveBuildTargetChanged
     {
-        private const string IgnoreKey = "_MixedRealityToolkit_Editor_IgnoreSettingsPrompts";
-        private const string SessionKey = "_MixedRealityToolkit_Editor_ShownSettingsPrompts";
-        private const string CorePathFinder = "/Utilities/Editor/CorePathFinder.cs";
-
-        /// <summary>
-        /// The absolute folder path to the Mixed Reality Toolkit in your project.
-        /// </summary>
-        [Obsolete("Use PathFinderUtility.XRTK_Core_AbsoluteFolderPath instead.")]
-        public static string MixedRealityToolkit_AbsoluteFolderPath
-        {
-            get
-            {
-                if (string.IsNullOrWhiteSpace(mixedRealityToolkit_AbsoluteFolderPath))
-                {
-                    mixedRealityToolkit_AbsoluteFolderPath = Path.GetFullPath(MixedRealityToolkit_RelativeFolderPath).Replace('\\', '/');
-                }
-
-                return mixedRealityToolkit_AbsoluteFolderPath;
-            }
-        }
-
-        private static string mixedRealityToolkit_AbsoluteFolderPath = string.Empty;
-
-        /// <summary>
-        /// The relative folder path to the Mixed Reality Toolkit in relation to the "Assets" or "Packages" folders.
-        /// </summary>
-        [Obsolete("Use PathFinderUtility.XRTK_Core_RelativeFolderPath instead.")]
-        public static string MixedRealityToolkit_RelativeFolderPath
-        {
-            get
-            {
-                if (string.IsNullOrEmpty(mixedRealityToolkit_RelativeFolderPath))
-                {
-                    mixedRealityToolkit_RelativeFolderPath =
-                        AssetDatabase.GetAssetPath(
-                            MonoScript.FromScriptableObject(
-                                ScriptableObject.CreateInstance<CorePathFinder>()))
-                                    .Replace(CorePathFinder, string.Empty);
-                }
-
-                return mixedRealityToolkit_RelativeFolderPath;
-            }
-        }
-
-        private static string mixedRealityToolkit_RelativeFolderPath = string.Empty;
+        private static readonly string IgnoreKey = $"{Application.productName}_XRTK_Editor_IgnoreSettingsPrompts";
+        private static readonly string SessionKey = $"{Application.productName}_XRTK_Editor_ShownSettingsPrompts";
 
         /// <summary>
         /// Constructor.
@@ -89,9 +43,6 @@ namespace XRTK.Utilities.Editor
 
             SessionState.SetBool(SessionKey, false);
 
-            bool refresh = false;
-            bool restart = false;
-
             var message = "The Mixed Reality Toolkit needs to apply the following settings to your project:\n\n";
 
             var forceTextSerialization = EditorSettings.serializationMode == SerializationMode.ForceText;
@@ -108,18 +59,6 @@ namespace XRTK.Utilities.Editor
                 message += "- Visible meta files\n";
             }
 
-            var il2Cpp = PlayerSettings.GetScriptingBackend(EditorUserBuildSettings.selectedBuildTargetGroup) == ScriptingImplementation.IL2CPP;
-
-            if (!il2Cpp)
-            {
-                message += "- Change the Scripting Backend to use IL2CPP\n";
-            }
-
-            if (!PlayerSettings.virtualRealitySupported)
-            {
-                message += "- Enable XR Settings for your current platform\n";
-            }
-
             if (EditorUserBuildSettings.selectedBuildTargetGroup == BuildTargetGroup.WSA)
             {
                 message += "- Enable Shared Depth Buffer in the XR SDK Settings\n";
@@ -127,7 +66,7 @@ namespace XRTK.Utilities.Editor
 
             message += "\nWould you like to make these changes?\n\n";
 
-            if (!forceTextSerialization || !il2Cpp || !visibleMetaFiles || !PlayerSettings.virtualRealitySupported)
+            if (!forceTextSerialization || !visibleMetaFiles)
             {
                 var choice = EditorUtility.DisplayDialogComplex("Apply Mixed Reality Toolkit Default Settings?", message, "Apply", "Ignore", "Later");
 
@@ -136,26 +75,12 @@ namespace XRTK.Utilities.Editor
                     case 0:
                         EditorSettings.serializationMode = SerializationMode.ForceText;
                         EditorSettings.externalVersionControl = "Visible Meta Files";
-                        PlayerSettings.SetScriptingBackend(EditorUserBuildSettings.selectedBuildTargetGroup, ScriptingImplementation.IL2CPP);
-                        PlayerSettings.virtualRealitySupported = true;
+                        AssetDatabase.SaveAssets();
 
-                        var projectSettingsObject = AssetDatabase.LoadAssetAtPath<Object>("ProjectSettings/ProjectSettings.asset");
-                        Debug.Assert(projectSettingsObject != null);
-                        var projectSettings = new SerializedObject(projectSettingsObject);
-                        var vrSettingsProperty = projectSettings.FindProperty("vrSettings");
-                        Debug.Assert(vrSettingsProperty != null);
-
-                        if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.WSAPlayer)
+                        if (!EditorApplication.isUpdating)
                         {
-                            var holoLensProperty = vrSettingsProperty.FindPropertyRelative("hololens");
-                            Debug.Assert(holoLensProperty != null);
-                            var depthBufferSettingsProperty = holoLensProperty.FindPropertyRelative("depthBufferSharingEnabled");
-                            Debug.Assert(depthBufferSettingsProperty != null);
-                            depthBufferSettingsProperty.boolValue = true;
-                            depthBufferSettingsProperty.serializedObject.ApplyModifiedProperties();
+                            AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
                         }
-
-                        refresh = true;
                         break;
                     case 1:
                         EditorPrefs.SetBool(IgnoreKey, true);
@@ -163,27 +88,6 @@ namespace XRTK.Utilities.Editor
                     case 2:
                         break;
                 }
-            }
-
-            if (PlayerSettings.scriptingRuntimeVersion != ScriptingRuntimeVersion.Latest)
-            {
-                PlayerSettings.scriptingRuntimeVersion = ScriptingRuntimeVersion.Latest;
-                restart = true;
-            }
-
-            if (refresh || restart)
-            {
-                AssetDatabase.SaveAssets();
-
-                if (!EditorApplication.isUpdating)
-                {
-                    AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
-                }
-            }
-
-            if (restart)
-            {
-                EditorApplication.OpenProject(Directory.GetParent(Application.dataPath).ToString());
             }
         }
 

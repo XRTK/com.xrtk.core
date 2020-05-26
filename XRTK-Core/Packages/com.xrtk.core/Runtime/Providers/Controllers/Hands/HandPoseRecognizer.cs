@@ -6,17 +6,20 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
-using XRTK.Services;
-using XRTK.Utilities;
 
 namespace XRTK.Providers.Controllers.Hands
 {
     /// <summary>
-    /// A recognizer manages a list of recorded hand poses and
-    /// may be used to recognize any of those poses during runtime.
+    /// The hand pose recongizer uses the recorded hand pose definitions
+    /// configured in <see cref="Definitions.InputSystem.MixedRealityInputSystemProfile.TrackedPoses"/>
+    /// or the platform's <see cref="BaseHandControllerDataProviderProfile.TrackedPoses"/>
+    /// and attempts to recognize them during runtime.
     /// </summary>
     public sealed class HandPoseRecognizer
     {
+        private const float POSITION_DELTA_SQR_MAGNITUDE_THRESHOLD = .01f;
+        private const float ROTATION_DELTA_ANGLE_THRESHOLD = 2f;
+
         /// <summary>
         /// Creates a new recognizer instance to work on the provided list of poses.
         /// </summary>
@@ -43,17 +46,17 @@ namespace XRTK.Providers.Controllers.Hands
         /// Attempts to recognize a hand pose.
         /// </summary>
         /// <param name="handData">The hand data to use for recognition.</param>
-        public void Recognize(HandData handData, Handedness handedness)
+        public void Recognize(HandData handData)
         {
-            var localJointPoses = ParseFromJointPoses(handData.Joints, handedness, handData.RootPose);
             var currentHighestProbability = 0f;
             HandControllerPoseDefinition recognizedPose = null;
 
             for (int i = 0; i < poseHandDatas.Length; i++)
             {
                 var recordedData = poseHandDatas[i];
-                var probability = Compare(recordedData.Joints, localJointPoses, .1f);
+                var probability = Compare(handData.Handedness, recordedData.Joints, handData.Joints);
 
+                //Debug.Log($"{poseDefinitions[i].Id} | {probability}");
                 if (probability > currentHighestProbability)
                 {
                     currentHighestProbability = probability;
@@ -69,7 +72,7 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        private float Compare(MixedRealityPose[] recordedJointPoses, MixedRealityPose[] runtimeJointPoses, float threshold)
+        private float Compare(Handedness handedness, MixedRealityPose[] recordedJointPoses, MixedRealityPose[] runtimeJointPoses)
         {
             // Variable keeps count of how many joint poses have passed
             // the test for equality.
@@ -77,13 +80,27 @@ namespace XRTK.Providers.Controllers.Hands
 
             for (int i = 0; i < HandData.JointCount; i++)
             {
-                var recordedJointPosition = recordedJointPoses[i].Position;
-                var runtimeJointPosition = runtimeJointPoses[i].Position;
-                var delta = Vector3.Distance(recordedJointPosition, runtimeJointPosition);
+                var recordedJointPose = recordedJointPoses[i];
+                var recordedJointPosition = recordedJointPose.Position;
+                var recordedJointRotation = recordedJointPose.Rotation;
+
+                // Recorded poses are for right hand, mirror on X axis if left hand is given.
+                if (handedness == Handedness.Left)
+                {
+                    recordedJointPosition.x = -recordedJointPosition.x;
+                    recordedJointRotation.y = -recordedJointRotation.y;
+                    recordedJointRotation.z = -recordedJointRotation.z;
+                }
+
+                var runtimeJointPose = runtimeJointPoses[i];
+                var runtimeJointPosition = runtimeJointPose.Position;
+                var runtimeJointRotation = runtimeJointPose.Rotation;
+                var deltaPosition = (runtimeJointPosition - recordedJointPosition).sqrMagnitude;
 
                 // If the delta is below threshold we consider the joint
                 // test passed.
-                if (delta < threshold)
+                if (deltaPosition < POSITION_DELTA_SQR_MAGNITUDE_THRESHOLD &&
+                    runtimeJointRotation.Approximately(recordedJointRotation, ROTATION_DELTA_ANGLE_THRESHOLD))
                 {
                     passed++;
                 }
@@ -92,44 +109,6 @@ namespace XRTK.Providers.Controllers.Hands
             // The more joints have passed the test, the more likely it is
             // the poses are the same.
             return passed / HandData.JointCount;
-        }
-
-        /// <summary>
-        /// Takes world space joint poses from any hand and converts them into right-hand, camera-space poses.
-        /// </summary>
-        private MixedRealityPose[] ParseFromJointPoses(MixedRealityPose[] joints, Handedness handedness, MixedRealityPose rootPose)
-        {
-            var localJointPoses = new MixedRealityPose[joints.Length];
-            var invRotation = Quaternion.Inverse(rootPose.Rotation);
-            var invCameraRotation = Quaternion.Inverse(MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation
-                : CameraCache.Main.transform.rotation);
-
-            for (int i = 0; i < HandData.JointCount; i++)
-            {
-                Vector3 p = joints[i].Position;
-                Quaternion r = joints[i].Rotation;
-
-                // Apply inverse external transform
-                p = invRotation * (p - rootPose.Position);
-                r = invRotation * r;
-
-                // To camera space
-                p = invCameraRotation * p;
-                r = invCameraRotation * r;
-
-                // Pose offset are for right hand, mirror on X axis if left hand is given
-                if (handedness == Handedness.Left)
-                {
-                    p.x = -p.x;
-                    r.y = -r.y;
-                    r.z = -r.z;
-                }
-
-                localJointPoses[i] = new MixedRealityPose(p, r);
-            }
-
-            return localJointPoses;
         }
     }
 }

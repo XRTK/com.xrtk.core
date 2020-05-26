@@ -25,10 +25,12 @@ namespace XRTK.Providers.Controllers.Hands
             Recognizer = new HandPoseRecognizer(trackedPoses);
         }
 
-        private const float ONE_CENTIMETER_SQUARE_MAGNITUDE = 0.0001f;
         private const float TWO_CENTIMETER_SQUARE_MAGNITUDE = 0.0004f;
         private const float FIVE_CENTIMETER_SQUARE_MAGNITUDE = 0.0025f;
+        private const float TEN_CENTIMETER_SQUARE_MAGNITUDE = 0.01f;
+        private const float FIFTEEN_CENTIMETER_SQUARE_MAGNITUDE = 0.0025f;
         private const float PINCH_STRENGTH_DISTANCE = FIVE_CENTIMETER_SQUARE_MAGNITUDE - TWO_CENTIMETER_SQUARE_MAGNITUDE;
+        private const float GRIP_STRENGTH_DISTANCE = FIFTEEN_CENTIMETER_SQUARE_MAGNITUDE - TEN_CENTIMETER_SQUARE_MAGNITUDE;
 
         /// <summary>
         /// Recognizer instance used by the converter for pose recognition.
@@ -78,129 +80,103 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The hand data retrieved from platform conversion.</param>
         public void PostProcess(HandData handData)
         {
-            if (!PlatformProvidesIsPinching)
-            {
-                UpdateIsPinching(handData);
-            }
-
-            if (!PlatformProvidesPinchStrength)
-            {
-                UpdatePinchStrength(handData);
-            }
-
-            if (!PlatformProvidesIsPointing)
-            {
-                UpdateIsPointing(handData);
-            }
-
-            if (!PlatformProvidesIsGripping)
-            {
-                UpdateIsGripping(handData);
-            }
-
-            if (!PlatformProvidesGripStrength)
-            {
-                UpdateGripStrength(handData);
-            }
-
-            if (!PlatformProvidesPointerPose)
-            {
-                UpdatePointerPose(handData);
-            }
-
+            UpdateIsPinchingAndStrength(handData);
+            UpdateIsPointing(handData);
+            UpdateIsGrippingAndStrength(handData);
+            UpdatePointerPose(handData);
             UpdateTrackedPose(handData);
         }
 
         /// <summary>
-        /// Fallback to compute whether the hand is gripping for the hand controller.
+        /// Updates <see cref="HandData.IsGripping"/> and <see cref="HandData.GripStrength"/>
+        /// if the platform did not provide it.
         /// </summary>
-        /// <param name="handData">The hand data to update is gripping state for.</param>
-        private void UpdateIsGripping(HandData handData)
+        /// <param name="handData">The hand data to update <see cref="HandData.IsGripping"/> and <see cref="HandData.GripStrength"/> for.</param>
+        private void UpdateIsGrippingAndStrength(HandData handData)
         {
             if (handData.IsTracked)
             {
-                var thumbTipPose = handData.Joints[(int)TrackedHandJoint.ThumbTip];
+                var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
+                var pinkyTipPose = handData.Joints[(int)TrackedHandJoint.PinkyTip];
+                var ringTipPose = handData.Joints[(int)TrackedHandJoint.RingTip];
+                var middleTipPose = handData.Joints[(int)TrackedHandJoint.MiddleTip];
                 var indexTipPose = handData.Joints[(int)TrackedHandJoint.IndexTip];
-                handData.IsPinching = (thumbTipPose.Position - indexTipPose.Position).sqrMagnitude < TWO_CENTIMETER_SQUARE_MAGNITUDE;
+
+                if (!PlatformProvidesIsGripping)
+                {
+                    handData.IsGripping = (palmPose.Position - pinkyTipPose.Position).sqrMagnitude <= TEN_CENTIMETER_SQUARE_MAGNITUDE &&
+                    (palmPose.Position - ringTipPose.Position).sqrMagnitude <= TEN_CENTIMETER_SQUARE_MAGNITUDE &&
+                    (palmPose.Position - middleTipPose.Position).sqrMagnitude <= TEN_CENTIMETER_SQUARE_MAGNITUDE &&
+                    (palmPose.Position - indexTipPose.Position).sqrMagnitude <= TEN_CENTIMETER_SQUARE_MAGNITUDE;
+                }
+
+                if (!PlatformProvidesGripStrength)
+                {
+                    var averageDistanceSquareMagnitude = ((palmPose.Position - pinkyTipPose.Position).sqrMagnitude - TEN_CENTIMETER_SQUARE_MAGNITUDE +
+                        (palmPose.Position - ringTipPose.Position).sqrMagnitude - TEN_CENTIMETER_SQUARE_MAGNITUDE +
+                        (palmPose.Position - middleTipPose.Position).sqrMagnitude - TEN_CENTIMETER_SQUARE_MAGNITUDE +
+                        (palmPose.Position - indexTipPose.Position).sqrMagnitude - TEN_CENTIMETER_SQUARE_MAGNITUDE) / 4f;
+                    handData.GripStrength = 1 - Mathf.Clamp(averageDistanceSquareMagnitude / GRIP_STRENGTH_DISTANCE, 0f, 1f);
+
+                    Debug.Log(handData.GripStrength);
+                }
             }
             else
             {
                 handData.IsGripping = false;
-            }
-        }
-
-        /// <summary>
-        /// Fallback to compute the current grip strength for the hand controller.
-        /// </summary>
-        /// <param name="handData">The hand data to update grip strength for.</param>
-        private void UpdateGripStrength(HandData handData)
-        {
-            if (handData.IsTracked)
-            {
-                var thumbTipPose = handData.Joints[(int)TrackedHandJoint.ThumbTip];
-                var indexTipPose = handData.Joints[(int)TrackedHandJoint.IndexTip];
-                var distanceSquareMagnitude = (thumbTipPose.Position - indexTipPose.Position).sqrMagnitude - TWO_CENTIMETER_SQUARE_MAGNITUDE;
-                handData.PinchStrength = 1 - Mathf.Clamp(distanceSquareMagnitude / PINCH_STRENGTH_DISTANCE, 0f, 1f);
-            }
-            else
-            {
                 handData.GripStrength = 0f;
             }
         }
 
         /// <summary>
-        /// Fallback to compute whether the hand is pinching for the hand controller.
+        /// Updates <see cref="HandData.IsPinching"/> and <see cref="HandData.PinchStrength"/>
+        /// if the platform did not provide it.
         /// </summary>
-        /// <param name="handData">The hand data to update is pinching state for.</param>
-        private void UpdateIsPinching(HandData handData)
+        /// <param name="handData">The hand data to update <see cref="HandData.IsPinching"/> and <see cref="HandData.PinchStrength"/> for.</param>
+        private void UpdateIsPinchingAndStrength(HandData handData)
         {
             if (handData.IsTracked)
             {
                 var thumbTipPose = handData.Joints[(int)TrackedHandJoint.ThumbTip];
                 var indexTipPose = handData.Joints[(int)TrackedHandJoint.IndexTip];
-                handData.IsPinching = (thumbTipPose.Position - indexTipPose.Position).sqrMagnitude < TWO_CENTIMETER_SQUARE_MAGNITUDE;
+
+                if (!PlatformProvidesIsPinching)
+                {
+                    handData.IsPinching = (thumbTipPose.Position - indexTipPose.Position).sqrMagnitude < TWO_CENTIMETER_SQUARE_MAGNITUDE;
+                }
+
+                if (!PlatformProvidesPinchStrength)
+                {
+                    var distanceSquareMagnitude = (thumbTipPose.Position - indexTipPose.Position).sqrMagnitude - TWO_CENTIMETER_SQUARE_MAGNITUDE;
+                    handData.PinchStrength = 1 - Mathf.Clamp(distanceSquareMagnitude / PINCH_STRENGTH_DISTANCE, 0f, 1f);
+                }
             }
             else
             {
                 handData.IsPinching = false;
-            }
-        }
-
-        /// <summary>
-        /// Fallback to compute the current pinch strength for the hand controller.
-        /// </summary>
-        /// <param name="handData">The hand data to update pinch strength for.</param>
-        private void UpdatePinchStrength(HandData handData)
-        {
-            if (handData.IsTracked)
-            {
-                var thumbTipPose = handData.Joints[(int)TrackedHandJoint.ThumbTip];
-                var indexTipPose = handData.Joints[(int)TrackedHandJoint.IndexTip];
-                var distanceSquareMagnitude = (thumbTipPose.Position - indexTipPose.Position).sqrMagnitude - TWO_CENTIMETER_SQUARE_MAGNITUDE;
-                handData.PinchStrength = 1 - Mathf.Clamp(distanceSquareMagnitude / PINCH_STRENGTH_DISTANCE, 0f, 1f);
-            }
-            else
-            {
                 handData.PinchStrength = 0f;
             }
         }
 
         /// <summary>
-        /// Fallback to compute whether the hand is pointing for the hand controller.
+        /// Updates <see cref="HandData.IsPointing"/> if the platform did not provide it.
         /// </summary>
-        /// <param name="handData">The hand data to update is pointing state for.</param>
+        /// <param name="handData">The hand data to update <see cref="HandData.IsPointing"/> for.</param>
         private void UpdateIsPointing(HandData handData)
         {
             if (handData.IsTracked && !handData.IsPinching)
             {
-                var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
-                var cameraTransform = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform
-                : CameraCache.Main.transform;
+                if (!PlatformProvidesIsPointing)
+                {
+                    var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
+                    var cameraTransform = MixedRealityToolkit.CameraSystem != null
+                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform
+                    : CameraCache.Main.transform;
 
-                // We check if the palm forward is roughly in line with the camera lookAt.
-                var projectedPalmUp = Vector3.ProjectOnPlane(-palmPose.Up, cameraTransform.up);
-                handData.IsPointing = Vector3.Dot(cameraTransform.forward, projectedPalmUp) > 0.3f;
+                    // We check if the palm forward is roughly in line with the camera lookAt.
+                    var projectedPalmUp = Vector3.ProjectOnPlane(-palmPose.Up, cameraTransform.up);
+                    handData.IsPointing = Vector3.Dot(cameraTransform.forward, projectedPalmUp) > 0.3f;
+                }
             }
             else
             {
@@ -209,9 +185,9 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <summary>
-        /// Updates the tracked pose for the hand.
+        /// Updates <see cref="HandData.TrackedPose"/> if the platform did not provide it.
         /// </summary>
-        /// <param name="handData">The hand data to update tracked pose for.</param>
+        /// <param name="handData">The hand data to update <see cref="HandData.TrackedPose"/> for.</param>
         private void UpdateTrackedPose(HandData handData)
         {
             if (handData.IsTracked)
@@ -225,12 +201,12 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <summary>
-        /// Fallback to compute a pointer pose for the hand controller.
+        /// Updates <see cref="HandData.PointerPose"/> if the platform did not provide it.
         /// </summary>
-        /// <param name="handData">The hand data to update pointer pose for.</param>
+        /// <param name="handData">The hand data to update <see cref="HandData.PointerPose"/> for.</param>
         private void UpdatePointerPose(HandData handData)
         {
-            if (handData.IsTracked)
+            if (handData.IsTracked && !PlatformProvidesPointerPose)
             {
                 var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
                 palmPose.Rotation = Quaternion.Inverse(palmPose.Rotation) * palmPose.Rotation;

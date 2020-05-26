@@ -68,7 +68,7 @@ namespace XRTK.Providers.Controllers.Hands
 
             if (handData.TrackedPose != null)
             {
-                Debug.Log(handData.TrackedPose.Id);
+                //Debug.Log(handData.TrackedPose.Id);
             }
         }
 

@@ -47,7 +47,7 @@ PlayerSettings:
   defaultScreenHeight: 768
   defaultScreenWidthWeb: 960
   defaultScreenHeightWeb: 600
-  m_StereoRenderingPath: 2
+  m_StereoRenderingPath: 0
   m_ActiveColorSpace: 1
   m_MTRendering: 1
   m_StackTraceTypes: 010000000100000001000000010000000100000001000000
@@ -414,15 +414,13 @@ PlayerSettings:
     m_Enabled: 0
     m_Devices:
     - OpenVR
-    - Oculus
   - m_BuildTarget: Windows Store Apps
     m_Enabled: 1
     m_Devices:
     - WindowsMR
   - m_BuildTarget: Android
     m_Enabled: 1
-    m_Devices:
-    - Oculus
+    m_Devices: []
   - m_BuildTarget: Lumin
     m_Enabled: 0
     m_Devices:
@@ -690,7 +688,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: XRTK-Core
-  metroPackageVersion: 2019.3.11.0
+  metroPackageVersion: 0.2.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 

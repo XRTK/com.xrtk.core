@@ -39,37 +39,37 @@ namespace XRTK.Providers.Controllers.Hands
         /// Is the <see cref="HandData.PointerPose"/> data provided by the
         /// implementing platform converter?
         /// </summary>
-        public bool PlatformProvidesPointerPose { get; }
+        public bool PlatformProvidesPointerPose { get; set; }
 
         /// <summary>
         /// Is the <see cref="HandData.IsPinching"/> data provided by the
         /// implementing platform converter?
         /// </summary>
-        public bool PlatformProvidesIsPinching { get; }
+        public bool PlatformProvidesIsPinching { get; set; }
 
         /// <summary>
         /// Is the <see cref="HandData.PinchStrength"/> data provided by the
         /// implementing platform converter?
         /// </summary>
-        public bool PlatformProvidesPinchStrength { get; }
+        public bool PlatformProvidesPinchStrength { get; set; }
 
         /// <summary>
         /// Is the <see cref="HandData.IsPointing"/> data provided by the
         /// implementing platform converter?
         /// </summary>
-        public bool PlatformProvidesIsPointing { get; }
+        public bool PlatformProvidesIsPointing { get; set; }
 
         /// <summary>
         /// Is the <see cref="HandData.IsGripping"/> data provided by the
         /// implementing platform converter?
         /// </summary>
-        public bool PlatformProvidesIsGripping { get; }
+        public bool PlatformProvidesIsGripping { get; set; }
 
         /// <summary>
         /// Is the <see cref="HandData.GripStrength"/> data provided by the
         /// implementing platform converter?
         /// </summary>
-        public bool PlatformProvidesGripStrength { get; }
+        public bool PlatformProvidesGripStrength { get; set; }
 
         /// <summary>
         /// Finalizes the hand data retrieved from platform APIs by adding

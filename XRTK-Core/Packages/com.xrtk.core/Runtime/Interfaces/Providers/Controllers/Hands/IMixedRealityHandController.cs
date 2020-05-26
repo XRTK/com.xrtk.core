@@ -29,9 +29,14 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         bool IsPointing { get; }
 
         /// <summary>
-        /// Gets whether the hand is currently in grabbing pose.
+        /// Gets whether the hand is currently in gripping pose.
         /// </summary>
-        bool IsGrabbing { get; }
+        bool IsGripping { get; }
+
+        /// <summary>
+        /// Gets the current grip strength (fist) of the hand.
+        /// </summary>
+        float GripStrength { get; }
 
         /// <summary>
         /// Gets the hands current pose.

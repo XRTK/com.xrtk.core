@@ -36,7 +36,7 @@ namespace XRTK.Providers.Controllers.Hands
         private readonly Dictionary<TrackedHandBounds, Bounds[]> bounds = new Dictionary<TrackedHandBounds, Bounds[]>();
         private readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
         private readonly Queue<bool> isPinchingBuffer = new Queue<bool>(POSE_FRAME_BUFFER_SIZE);
-        private readonly Queue<bool> isGrabbingBuffer = new Queue<bool>(POSE_FRAME_BUFFER_SIZE);
+        private readonly Queue<bool> isGrippingBuffer = new Queue<bool>(POSE_FRAME_BUFFER_SIZE);
         private readonly Queue<bool> isPointingBuffer = new Queue<bool>(POSE_FRAME_BUFFER_SIZE);
 
         private int velocityUpdateFrame = 0;
@@ -51,7 +51,7 @@ namespace XRTK.Providers.Controllers.Hands
             new MixedRealityInteractionMapping("Spatial Pointer Pose", AxisType.SixDof, DeviceInputType.SpatialPointer),
             new MixedRealityInteractionMapping("Select", AxisType.Digital, DeviceInputType.Select),
             new MixedRealityInteractionMapping("Point", AxisType.Digital, DeviceInputType.ButtonPress),
-            new MixedRealityInteractionMapping("Grab", AxisType.SingleAxis, DeviceInputType.TriggerPress),
+            new MixedRealityInteractionMapping("Grip", AxisType.SingleAxis, DeviceInputType.TriggerPress),
             new MixedRealityInteractionMapping("Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger),
             new MixedRealityInteractionMapping("Tracked Pose", AxisType.Raw, DeviceInputType.Hand)
         };
@@ -86,13 +86,16 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public bool IsPointing { get; private set; }
 
-        /// <summary>
-        /// Is grabbing state from the previous update frame.
-        /// </summary>
-        private bool LastIsGrabbing { get; set; }
+        /// <inheritdoc />
+        public bool IsGripping { get; private set; }
 
         /// <inheritdoc />
-        public bool IsGrabbing { get; private set; }
+        public float GripStrength { get; private set; }
+
+        /// <summary>
+        /// Is gripping state from the previous update frame.
+        /// </summary>
+        private bool LastIsGripping { get; set; }
 
         /// <summary>
         /// The last pose recognized for this hand controller.
@@ -122,7 +125,7 @@ namespace XRTK.Providers.Controllers.Hands
 
             var lastTrackingState = TrackingState;
             LastIsPinching = IsPinching;
-            LastIsGrabbing = IsGrabbing;
+            LastIsGripping = IsGripping;
             LastIsPointing = IsPointing;
             LastPose = Pose;
 
@@ -130,7 +133,7 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateJoints(handData);
             UpdateIsPinching(handData);
             UpdateIsIsPointing(handData);
-            UpdateIsIsGrabbing(handData);
+            UpdateIsIsGripping(handData);
             UpdateSpatialPointerPose(handData);
             UpdateIndexFingerTipPose(handData);
             UpdateBounds();
@@ -497,6 +500,24 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
+        private void UpdateGripMapping(MixedRealityInteractionMapping interactionMapping)
+        {
+            Debug.Assert(interactionMapping.AxisType == AxisType.Digital);
+
+            if (!LastIsGripping && IsGripping)
+            {
+                interactionMapping.BoolData = true;
+            }
+            else if (LastIsGripping && !IsGripping)
+            {
+                interactionMapping.BoolData = false;
+            }
+            else if (IsGripping)
+            {
+                interactionMapping.BoolData = LastIsGripping;
+            }
+        }
+
         private void UpdatePointingMapping(MixedRealityInteractionMapping interactionMapping)
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.Digital);
@@ -698,46 +719,46 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <summary>
-        /// Updates the hand controller's internal is grabbing state.
-        /// Instead of updating the value for each frame, is grabbing state
+        /// Updates the hand controller's internal is gripping state.
+        /// Instead of updating the value for each frame, is gripping state
         /// is buffered for a few frames to stabilize and avoid false positives.
         /// </summary>
         /// <param name="handData">The hand data received for the current hand update frame.</param>
-        private void UpdateIsIsGrabbing(HandData handData)
+        private void UpdateIsIsGripping(HandData handData)
         {
             if (handData.IsTracked)
             {
-                var isGrabbingThisFrame = handData.IsGrabbing;
-                if (isGrabbingBuffer.Count < POSE_FRAME_BUFFER_SIZE)
+                var isGrippingThisFrame = handData.IsGripping;
+                if (isGrippingBuffer.Count < POSE_FRAME_BUFFER_SIZE)
                 {
-                    isGrabbingBuffer.Enqueue(isGrabbingThisFrame);
-                    IsGrabbing = false;
+                    isGrippingBuffer.Enqueue(isGrippingThisFrame);
+                    IsGripping = false;
                 }
                 else
                 {
-                    isGrabbingBuffer.Dequeue();
-                    isGrabbingBuffer.Enqueue(isGrabbingThisFrame);
+                    isGrippingBuffer.Dequeue();
+                    isGrippingBuffer.Enqueue(isGrippingThisFrame);
 
-                    isGrabbingThisFrame = true;
-                    for (int i = 0; i < isGrabbingBuffer.Count; i++)
+                    isGrippingThisFrame = true;
+                    for (int i = 0; i < isGrippingBuffer.Count; i++)
                     {
-                        var value = isGrabbingBuffer.Dequeue();
+                        var value = isGrippingBuffer.Dequeue();
 
                         if (!value)
                         {
-                            isGrabbingThisFrame = false;
+                            isGrippingThisFrame = false;
                         }
 
-                        isGrabbingBuffer.Enqueue(value);
+                        isGrippingBuffer.Enqueue(value);
                     }
 
-                    IsGrabbing = isGrabbingThisFrame;
+                    IsGripping = isGrippingThisFrame;
                 }
             }
             else
             {
-                isGrabbingBuffer.Clear();
-                IsGrabbing = false;
+                isGrippingBuffer.Clear();
+                IsGripping = false;
             }
         }
 

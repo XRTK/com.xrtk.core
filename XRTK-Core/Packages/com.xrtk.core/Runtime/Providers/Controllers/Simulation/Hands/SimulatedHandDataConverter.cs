@@ -16,19 +16,19 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     /// <summary>
     /// Hand controller type for simulated hand controllers.
     /// </summary>
-    public sealed class SimulatedHandDataConverter : BaseHandDataConverter
+    public sealed class SimulatedHandDataConverter
     {
         public SimulatedHandDataConverter(Handedness handedness,
             IReadOnlyList<HandControllerPoseDefinition> trackedPoses,
             float handPoseAnimationSpeed,
             float jitterAmount,
             float defaultDistance)
-            : base(handedness, trackedPoses)
         {
             this.handPoseAnimationSpeed = handPoseAnimationSpeed;
             this.jitterAmount = jitterAmount;
             this.defaultDistance = defaultDistance;
-            this.poseDefinitions = trackedPoses;
+            this.handedness = handedness;
+            poseDefinitions = trackedPoses;
 
             // Initialize available simulated hand poses and find the configured default pose.
             SimulatedHandControllerPose.Initialize(trackedPoses);
@@ -52,6 +52,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             ResetConverter();
         }
 
+        private readonly Handedness handedness;
         private readonly float handPoseAnimationSpeed;
         private readonly float jitterAmount;
         private readonly float defaultDistance;
@@ -65,18 +66,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         private readonly SimulatedHandControllerPose initialPose;
         private SimulatedHandControllerPose previousPose;
         private SimulatedHandControllerPose targetPose;
-
-        /// <inheritdoc />
-        protected override bool PlatformProvidesPointerPose => false;
-
-        /// <inheritdoc />
-        protected override bool PlatformProvidesIsPinching => false;
-
-        /// <inheritdoc />
-        protected override bool PlatformProvidesPinchStrength => false;
-
-        /// <inheritdoc />
-        protected override bool PlatformProvidesIsPointing => false;
 
         /// <summary>
         /// Gets the hands position in screen space.
@@ -140,8 +129,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <returns>Updated simulated hand data.</returns>
         public HandData GetSimulatedHandData(Vector3 position, Vector3 deltaRotation)
         {
-            // Reset the cached pointer pose.
             HandData.PointerPose = MixedRealityPose.ZeroIdentity;
+            HandData.Handedness = handedness;
 
             // Read keyboard / mouse input to determine the root pose delta since last frame.
             var rootPoseDelta = new MixedRealityPose(position, Quaternion.Euler(deltaRotation));
@@ -152,7 +141,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             // Update simulated hand states using collected data.
             var newTargetPose = GetTargetHandPose();
-            var isTrackedOld = HandData.IsTracked;
 
             HandleSimulationInput(rootPoseDelta);
 
@@ -164,21 +152,13 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             TargetPoseBlending += poseAnimationDelta;
 
-            bool handDataChanged = isTrackedOld != HandData.IsTracked;
-
-            if (HandData.TimeStamp != timeStamp)
+            if (HandData.UpdatedAt != timeStamp)
             {
-                HandData.TimeStamp = timeStamp;
+                HandData.UpdatedAt = timeStamp;
                 if (HandData.IsTracked)
                 {
                     UpdatePoseFrame();
-                    handDataChanged = true;
                 }
-            }
-
-            if (handDataChanged)
-            {
-                Finalize(HandData);
             }
 
             return HandData;
@@ -236,11 +216,11 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             HandData.RootPose = new MixedRealityPose(position, rotation);
 
             // Compute joint poses relative to root pose.
-            ComputeJointPoses(Pose, Handedness, HandData.RootPose);
+            ComputeJointPoses(Pose, handedness, HandData.RootPose);
         }
 
         /// <summary>
-        /// Computes world space poses from camera-space joint data.
+        /// Computes local poses from camera-space joint data.
         /// </summary>
         private void ComputeJointPoses(SimulatedHandControllerPose pose, Handedness handedness, MixedRealityPose rootPose)
         {
@@ -297,7 +277,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             screenPosition = Vector3.zero;
             HandRotateEulerAngles = Vector3.zero;
             JitterOffset = Vector3.zero;
-            HandData.TimeStamp = 0;
+            HandData.UpdatedAt = 0;
             HandData.IsTracked = false;
 
             // reset to the initial pose.

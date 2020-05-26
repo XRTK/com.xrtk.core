@@ -70,10 +70,13 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 HandPoseAnimationSpeed,
                 JitterAmount,
                 DefaultDistance);
+
+            postProcessor = new HandDataPostProcessor(TrackedPoses);
         }
 
         private readonly SimulatedHandDataConverter leftHandConverter;
         private readonly SimulatedHandDataConverter rightHandConverter;
+        private readonly HandDataPostProcessor postProcessor;
 
         /// <inheritdoc />
         public float HandPoseAnimationSpeed { get; }
@@ -111,9 +114,12 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 ? leftHandConverter
                 : rightHandConverter;
 
-            simulatedHandController.UpdateController(converter.GetSimulatedHandData(
+            var simulatedHandData = converter.GetSimulatedHandData(
                 simulatedController.GetPosition(DepthMultiplier),
-                simulatedController.GetDeltaRotation(RotationSpeed)));
+                simulatedController.GetDeltaRotation(RotationSpeed));
+
+            postProcessor.PostProcess(simulatedHandData);
+            simulatedHandController.UpdateController(simulatedHandData);
         }
 
         /// <inheritdoc />

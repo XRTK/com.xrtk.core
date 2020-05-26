@@ -46,6 +46,17 @@ namespace XRTK.Providers.Controllers.UnityInput
         }
 
         /// <inheritdoc />
+        public override void OnApplicationFocus(bool isFocused)
+        {
+            base.OnApplicationFocus(isFocused);
+
+            if (Controller != null)
+            {
+                Cursor.visible = !isFocused;
+            }
+        }
+
+        /// <inheritdoc />
         public override void Disable()
         {
             if (Controller != null)

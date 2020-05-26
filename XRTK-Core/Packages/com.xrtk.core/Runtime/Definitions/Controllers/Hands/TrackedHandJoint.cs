@@ -9,7 +9,6 @@ namespace XRTK.Definitions.Controllers.Hands
     /// <remarks>See https://en.wikipedia.org/wiki/Interphalangeal_joints_of_the_hand#/media/File:Scheme_human_hand_bones-en.svg for joint name definitions.</remarks>
     public enum TrackedHandJoint
     {
-        None = 0,
         /// <summary>
         /// The wrist.
         /// </summary>

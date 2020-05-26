@@ -44,11 +44,9 @@ namespace XRTK.Definitions.Controllers.Hands
             get
             {
                 int nameIndex = Array.FindIndex(JointNames, IsJointName);
-
                 if (nameIndex < 0)
                 {
                     Debug.LogError($"Joint name {joint} not in {nameof(TrackedHandJoint)} enum");
-                    return TrackedHandJoint.None;
                 }
 
                 return (TrackedHandJoint)nameIndex;

@@ -257,8 +257,7 @@ namespace XRTK.Providers.Controllers.Hands
 
                 foreach (var kvp in jointPoses)
                 {
-                    if (kvp.Key == TrackedHandJoint.None ||
-                        kvp.Key == TrackedHandJoint.Palm)
+                    if (kvp.Key == TrackedHandJoint.Palm)
                     {
                         continue;
                     }

@@ -46,7 +46,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 ? profile.BoundsMode
                 : globalSettingsProfile.BoundsMode;
 
-            if (profile.TrackedPoses.Count > 0)
+            if (profile.TrackedPoses != null && profile.TrackedPoses.Count > 0)
             {
                 TrackedPoses = profile.TrackedPoses.Count != globalSettingsProfile.TrackedPoses.Count
                     ? profile.TrackedPoses
@@ -55,6 +55,11 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             else
             {
                 TrackedPoses = globalSettingsProfile.TrackedPoses;
+            }
+
+            if (TrackedPoses == null || TrackedPoses.Count == 0)
+            {
+                throw new ArgumentException($"Failed to start {name}! {nameof(TrackedPoses)} not set");
             }
 
             leftHandConverter = new SimulatedHandDataConverter(

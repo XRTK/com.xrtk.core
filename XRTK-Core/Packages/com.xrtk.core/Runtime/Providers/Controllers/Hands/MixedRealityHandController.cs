@@ -559,13 +559,15 @@ namespace XRTK.Providers.Controllers.Hands
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.Raw);
 
-            if (string.Equals(LastPose?.Id, Pose?.Id))
+            if (LastPose == null || Pose == null) { return; }
+
+            if (string.Equals(LastPose.Id, Pose.Id))
             {
-                interactionMapping.RawData = LastPose?.Id;
+                interactionMapping.RawData = LastPose.Id;
             }
-            else if (!string.Equals(LastPose?.Id, Pose?.Id))
+            else if (!string.Equals(LastPose.Id, Pose.Id))
             {
-                interactionMapping.RawData = Pose?.Id;
+                interactionMapping.RawData = Pose.Id;
             }
         }
 

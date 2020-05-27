@@ -28,11 +28,19 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
         {
-            new MixedRealityInteractionMapping("Spatial Pointer", AxisType.SixDof, DeviceInputType.SpatialPointer),
+            // 6 DoF pose of the spatial pointer ("far interaction pointer").
+            new MixedRealityInteractionMapping("Spatial Pointer Pose", AxisType.SixDof, DeviceInputType.SpatialPointer),
+            // Select / pinch button press / release.
             new MixedRealityInteractionMapping("Select", AxisType.Digital, DeviceInputType.Select),
+            // Hand in pointing pose yes/no?
             new MixedRealityInteractionMapping("Point", AxisType.Digital, DeviceInputType.ButtonPress),
-            new MixedRealityInteractionMapping("Grab", AxisType.SingleAxis, DeviceInputType.TriggerPress),
+            // Grip / grab button press / release.
+            new MixedRealityInteractionMapping("Grip", AxisType.SingleAxis, DeviceInputType.TriggerPress),
+            // 6 DoF grip pose ("Where to put things when grabbing something?")
+            new MixedRealityInteractionMapping("Grip Pose", AxisType.SixDof, DeviceInputType.SpatialGrip),
+            // 6 DoF index finger tip pose (mainly for "near interaction pointer").
             new MixedRealityInteractionMapping("Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger),
+            // Currently reconigzed tracked pose.
             new MixedRealityInteractionMapping("Tracked Pose", AxisType.Raw, DeviceInputType.Hand),
             new MixedRealityInteractionMapping("Yaw Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.E),
             new MixedRealityInteractionMapping("Yaw Counter Clockwise", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.Q),
@@ -52,32 +60,32 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             float rotationDelta = rotationSpeed * Time.deltaTime;
             Vector3 rotationDeltaEulerAngles = Vector3.zero;
 
-            if (Interactions[6].BoolData)
+            if (Interactions[7].BoolData)
             {
                 rotationDeltaEulerAngles.y = rotationDelta;
             }
 
-            if (Interactions[7].BoolData)
+            if (Interactions[8].BoolData)
             {
                 rotationDeltaEulerAngles.y = -rotationDelta;
             }
 
-            if (Interactions[8].BoolData)
+            if (Interactions[9].BoolData)
             {
                 rotationDeltaEulerAngles.x = -rotationDelta;
             }
 
-            if (Interactions[9].BoolData)
+            if (Interactions[10].BoolData)
             {
                 rotationDeltaEulerAngles.x = rotationDelta;
             }
 
-            if (Interactions[10].BoolData)
+            if (Interactions[11].BoolData)
             {
                 rotationDeltaEulerAngles.z = -rotationDelta;
             }
 
-            if (Interactions[11].BoolData)
+            if (Interactions[12].BoolData)
             {
                 rotationDeltaEulerAngles.z = rotationDelta;
             }
@@ -92,12 +100,12 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             Vector3 mousePosition = Input.mousePosition;
 
-            if (Interactions[12].BoolData)
+            if (Interactions[13].BoolData)
             {
                 mousePosition.z += Time.deltaTime * depthMultiplier;
             }
 
-            if (Interactions[13].BoolData)
+            if (Interactions[14].BoolData)
             {
                 mousePosition.z -= Time.deltaTime * depthMultiplier;
             }

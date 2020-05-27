@@ -48,11 +48,19 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
         {
+            // 6 DoF pose of the spatial pointer ("far interaction pointer").
             new MixedRealityInteractionMapping("Spatial Pointer Pose", AxisType.SixDof, DeviceInputType.SpatialPointer),
+            // Select / pinch button press / release.
             new MixedRealityInteractionMapping("Select", AxisType.Digital, DeviceInputType.Select),
+            // Hand in pointing pose yes/no?
             new MixedRealityInteractionMapping("Point", AxisType.Digital, DeviceInputType.ButtonPress),
+            // Grip / grab button press / release.
             new MixedRealityInteractionMapping("Grip", AxisType.SingleAxis, DeviceInputType.TriggerPress),
+            // 6 DoF grip pose ("Where to put things when grabbing something?")
+            new MixedRealityInteractionMapping("Grip Pose", AxisType.SixDof, DeviceInputType.SpatialGrip),
+            // 6 DoF index finger tip pose (mainly for "near interaction pointer").
             new MixedRealityInteractionMapping("Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger),
+            // Currently reconigzed tracked pose.
             new MixedRealityInteractionMapping("Tracked Pose", AxisType.Raw, DeviceInputType.Hand)
         };
 
@@ -450,6 +458,9 @@ namespace XRTK.Providers.Controllers.Hands
                         break;
                     case DeviceInputType.ButtonPress:
                         UpdatePointingMapping(interactionMapping);
+                        break;
+                    case DeviceInputType.TriggerPress:
+                        UpdateGripMapping(interactionMapping);
                         break;
                     case DeviceInputType.SpatialGrip:
                         UpdateSpatialGripMapping(interactionMapping);

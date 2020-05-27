@@ -20,43 +20,24 @@ namespace XRTK.Definitions.Controllers.Hands
         /// <param name="pose"></param>
         public RecordedHandJoint(TrackedHandJoint joint, MixedRealityPose pose)
         {
-            this.joint = JointNames[(int)joint];
+            this.joint = joint;
             this.pose = pose;
         }
 
-        private static readonly string[] JointNames = Enum.GetNames(typeof(TrackedHandJoint));
+        [SerializeField]
+        private TrackedHandJoint joint;
 
         /// <summary>
-        /// Name of the joint recorded. Rather use <see cref="JointIndex"/> below for convenience.
+        /// Joint this pose represents.
         /// </summary>
-        public string joint;
+        public TrackedHandJoint Joint => joint;
+
+        [SerializeField]
+        private MixedRealityPose pose;
 
         /// <summary>
         /// The recorded pose.
         /// </summary>
-        public MixedRealityPose pose;
-
-        /// <summary>
-        /// Gets the <see cref="TrackedHandJoint"/> this record represents.
-        /// </summary>
-        public TrackedHandJoint JointIndex
-        {
-            get
-            {
-                int nameIndex = Array.FindIndex(JointNames, IsJointName);
-                if (nameIndex < 0)
-                {
-                    Debug.LogError($"Joint name {joint} not in {nameof(TrackedHandJoint)} enum");
-                }
-
-                return (TrackedHandJoint)nameIndex;
-            }
-            set => joint = JointNames[(int)value];
-        }
-
-        private bool IsJointName(string s)
-        {
-            return string.Equals(s, joint);
-        }
+        public MixedRealityPose Pose => pose;
     }
 }

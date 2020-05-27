@@ -68,7 +68,7 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// <inheritdoc />
         public override string ToString()
         {
-            return $"{ToJson()}";
+            return ToJson();
         }
 
         /// <summary>
@@ -212,14 +212,17 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// </summary>
         public string ToJson()
         {
-            var recordings = new List<RecordedHandJoint>();
+            var record = new RecordedHandJoints
+            {
+                Joints = new RecordedHandJoint[LocalJointPoses.Length]
+            };
 
             for (int i = 0; i < LocalJointPoses.Length; i++)
             {
-                recordings.Add(new RecordedHandJoint((TrackedHandJoint)i, LocalJointPoses[i]));
+                record.Joints[i] = new RecordedHandJoint((TrackedHandJoint)i, LocalJointPoses[i]);
             }
 
-            return JsonUtility.ToJson(recordings);
+            return JsonUtility.ToJson(record);
         }
 
         /// <summary>
@@ -229,10 +232,10 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         {
             var record = JsonUtility.FromJson<RecordedHandJoints>(json);
 
-            for (int i = 0; i < record.items.Length; i++)
+            for (int i = 0; i < record.Joints.Length; i++)
             {
-                var jointRecord = record.items[i];
-                LocalJointPoses[(int)jointRecord.JointIndex] = jointRecord.pose;
+                var jointRecord = record.Joints[i];
+                LocalJointPoses[(int)jointRecord.Joint] = jointRecord.Pose;
             }
         }
 
@@ -245,7 +248,9 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
             if (!(left is SimulatedHandControllerPose) || !(right is SimulatedHandControllerPose)) { return false; }
             return ((SimulatedHandControllerPose)left).Equals((SimulatedHandControllerPose)right);
         }
-
+        /// <summary>Determines whether the specified object is equal to this instance.</summary>
+        /// <param name="other">The specified object.</param>
+        /// <returns>True, if the specified object is equal to this instance, otherwise false.</returns>
         public bool Equals(SimulatedHandControllerPose other)
         {
             return Id == other.Id;

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 namespace XRTK.Definitions.Controllers.Hands
@@ -6,29 +6,28 @@ namespace XRTK.Definitions.Controllers.Hands
     /// <summary>
     /// The supported tracked hand joints.
     /// </summary>
-    /// <remarks>See https://en.wikipedia.org/wiki/Interphalangeal_joints_of_the_hand#/media/File:Scheme_human_hand_bones-en.svg for joint name definitions.</remarks>
     public enum TrackedHandJoint
     {
         /// <summary>
-        /// The wrist.
+        /// The hand wrist.
         /// </summary>
         Wrist,
         /// <summary>
-        /// The palm.
+        /// The hand palm.
         /// </summary>
         Palm,
         /// <summary>
         /// The lowest joint in the thumb (down in your palm).
         /// </summary>
-        ThumbMetacarpalJoint,
+        ThumbMetacarpal,
         /// <summary>
         /// The thumb's second (middle-ish) joint.
         /// </summary>
-        ThumbProximalJoint,
+        ThumbProximal,
         /// <summary>
         /// The thumb's first (furthest) joint.
         /// </summary>
-        ThumbDistalJoint,
+        ThumbDistal,
         /// <summary>
         /// The tip of the thumb.
         /// </summary>
@@ -40,15 +39,15 @@ namespace XRTK.Definitions.Controllers.Hands
         /// <summary>
         /// The knuckle joint of the index finger.
         /// </summary>
-        IndexKnuckle,
+        IndexProximal,
         /// <summary>
         /// The middle joint of the index finger.
         /// </summary>
-        IndexMiddleJoint,
+        IndexIntermediate,
         /// <summary>
         /// The joint nearest the tip of the index finger.
         /// </summary>
-        IndexDistalJoint,
+        IndexDistal,
         /// <summary>
         /// The tip of the index finger.
         /// </summary>
@@ -58,17 +57,17 @@ namespace XRTK.Definitions.Controllers.Hands
         /// </summary>
         MiddleMetacarpal,
         /// <summary>
-        /// The knuckle joint of the middle finger. 
+        /// The knuckle joint of the middle finger.
         /// </summary>
-        MiddleKnuckle,
+        MiddleProximal,
         /// <summary>
         /// The middle joint of the middle finger.
         /// </summary>
-        MiddleMiddleJoint,
+        MiddleIntermediate,
         /// <summary>
         /// The joint nearest the tip of the finger.
         /// </summary>
-        MiddleDistalJoint,
+        MiddleDistal,
         /// <summary>
         /// The tip of the middle finger.
         /// </summary>
@@ -80,15 +79,15 @@ namespace XRTK.Definitions.Controllers.Hands
         /// <summary>
         /// The knuckle of the ring finger.
         /// </summary>
-        RingKnuckle,
+        RingProximal,
         /// <summary>
         /// The middle joint of the ring finger.
         /// </summary>
-        RingMiddleJoint,
+        RingIntermediate,
         /// <summary>
         /// The joint nearest the tip of the ring finger.
         /// </summary>
-        RingDistalJoint,
+        RingDistal,
         /// <summary>
         /// The tip of the ring finger.
         /// </summary>
@@ -96,22 +95,22 @@ namespace XRTK.Definitions.Controllers.Hands
         /// <summary>
         /// The lowest joint of the pinky finger.
         /// </summary>
-        PinkyMetacarpal,
+        LittleMetacarpal,
         /// <summary>
         /// The knuckle joint of the pinky finger.
         /// </summary>
-        PinkyKnuckle,
+        LittleProximal,
         /// <summary>
         /// The middle joint of the pinky finger.
         /// </summary>
-        PinkyMiddleJoint,
+        LittleIntermediate,
         /// <summary>
         /// The joint nearest the tip of the pink finger.
         /// </summary>
-        PinkyDistalJoint,
+        LittleDistal,
         /// <summary>
         /// The tip of the pinky.
         /// </summary>
-        PinkyTip
+        LittleTip
     }
 }

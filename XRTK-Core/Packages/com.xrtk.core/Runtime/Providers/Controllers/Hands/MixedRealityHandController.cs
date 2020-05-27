@@ -204,14 +204,14 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdatePalmBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.PinkyMetacarpal, out var pinkyMetacarpalPose) &&
-                TryGetJointPose(TrackedHandJoint.PinkyKnuckle, out var pinkyKnucklePose) &&
+            if (TryGetJointPose(TrackedHandJoint.LittleMetacarpal, out var pinkyMetacarpalPose) &&
+                TryGetJointPose(TrackedHandJoint.LittleProximal, out var pinkyKnucklePose) &&
                 TryGetJointPose(TrackedHandJoint.RingMetacarpal, out var ringMetacarpalPose) &&
-                TryGetJointPose(TrackedHandJoint.RingKnuckle, out var ringKnucklePose) &&
+                TryGetJointPose(TrackedHandJoint.RingProximal, out var ringKnucklePose) &&
                 TryGetJointPose(TrackedHandJoint.MiddleMetacarpal, out var middleMetacarpalPose) &&
-                TryGetJointPose(TrackedHandJoint.MiddleKnuckle, out var middleKnucklePose) &&
+                TryGetJointPose(TrackedHandJoint.MiddleProximal, out var middleKnucklePose) &&
                 TryGetJointPose(TrackedHandJoint.IndexMetacarpal, out var indexMetacarpalPose) &&
-                TryGetJointPose(TrackedHandJoint.IndexKnuckle, out var indexKnucklePose))
+                TryGetJointPose(TrackedHandJoint.IndexProximal, out var indexKnucklePose))
             {
                 // Palm bounds are a composite of each finger's metacarpal -> knuckle joint bounds.
                 // Excluding the thumb here.
@@ -278,8 +278,8 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateThumbBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.ThumbMetacarpalJoint, out var knucklePose) &&
-                TryGetJointPose(TrackedHandJoint.ThumbProximalJoint, out var middlePose) &&
+            if (TryGetJointPose(TrackedHandJoint.ThumbMetacarpal, out var knucklePose) &&
+                TryGetJointPose(TrackedHandJoint.ThumbProximal, out var middlePose) &&
                 TryGetJointPose(TrackedHandJoint.ThumbTip, out var tipPose))
             {
                 // Thumb bounds include metacarpal -> proximal and proximal -> tip bounds.
@@ -309,8 +309,8 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateIndexFingerBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.IndexKnuckle, out var knucklePose) &&
-                TryGetJointPose(TrackedHandJoint.IndexMiddleJoint, out var middlePose) &&
+            if (TryGetJointPose(TrackedHandJoint.IndexProximal, out var knucklePose) &&
+                TryGetJointPose(TrackedHandJoint.IndexIntermediate, out var middlePose) &&
                 TryGetJointPose(TrackedHandJoint.IndexTip, out var tipPose))
             {
                 // Index finger bounds include knuckle -> middle and middle -> tip bounds.
@@ -340,8 +340,8 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateMiddleFingerBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.MiddleKnuckle, out var knucklePose) &&
-                TryGetJointPose(TrackedHandJoint.MiddleMiddleJoint, out var middlePose) &&
+            if (TryGetJointPose(TrackedHandJoint.MiddleProximal, out var knucklePose) &&
+                TryGetJointPose(TrackedHandJoint.MiddleIntermediate, out var middlePose) &&
                 TryGetJointPose(TrackedHandJoint.MiddleTip, out var tipPose))
             {
                 // Middle finger bounds include knuckle -> middle and middle -> tip bounds.
@@ -371,8 +371,8 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateRingFingerBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.RingKnuckle, out var knucklePose) &&
-                TryGetJointPose(TrackedHandJoint.RingMiddleJoint, out var middlePose) &&
+            if (TryGetJointPose(TrackedHandJoint.RingProximal, out var knucklePose) &&
+                TryGetJointPose(TrackedHandJoint.RingIntermediate, out var middlePose) &&
                 TryGetJointPose(TrackedHandJoint.RingTip, out var tipPose))
             {
                 // Ring finger bounds include knuckle -> middle and middle -> tip bounds.
@@ -402,9 +402,9 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdatePinkyFingerBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.PinkyKnuckle, out var knucklePose) &&
-                TryGetJointPose(TrackedHandJoint.PinkyMiddleJoint, out var middlePose) &&
-                TryGetJointPose(TrackedHandJoint.PinkyTip, out var tipPose))
+            if (TryGetJointPose(TrackedHandJoint.LittleProximal, out var knucklePose) &&
+                TryGetJointPose(TrackedHandJoint.LittleIntermediate, out var middlePose) &&
+                TryGetJointPose(TrackedHandJoint.LittleTip, out var tipPose))
             {
                 // Pinky finger bounds include knuckle -> middle and middle -> tip bounds.
                 var pinkyBounds = new Bounds[2];

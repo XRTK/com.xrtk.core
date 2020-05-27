@@ -97,7 +97,7 @@ namespace XRTK.Providers.Controllers.Hands
             if (handData.IsTracked)
             {
                 var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
-                var pinkyTipPose = handData.Joints[(int)TrackedHandJoint.PinkyTip];
+                var pinkyTipPose = handData.Joints[(int)TrackedHandJoint.LittleTip];
                 var ringTipPose = handData.Joints[(int)TrackedHandJoint.RingTip];
                 var middleTipPose = handData.Joints[(int)TrackedHandJoint.MiddleTip];
                 var indexTipPose = handData.Joints[(int)TrackedHandJoint.IndexTip];
@@ -211,8 +211,8 @@ namespace XRTK.Providers.Controllers.Hands
                 var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
                 palmPose.Rotation = Quaternion.Inverse(palmPose.Rotation) * palmPose.Rotation;
 
-                var thumbProximalPose = handData.Joints[(int)TrackedHandJoint.ThumbProximalJoint];
-                var indexDistalPose = handData.Joints[(int)TrackedHandJoint.IndexDistalJoint];
+                var thumbProximalPose = handData.Joints[(int)TrackedHandJoint.ThumbProximal];
+                var indexDistalPose = handData.Joints[(int)TrackedHandJoint.IndexDistal];
                 var pointerPosition = Vector3.Lerp(thumbProximalPose.Position, indexDistalPose.Position, .5f);
                 var pointerEndPosition = pointerPosition + palmPose.Forward * 10f;
 

@@ -22,10 +22,10 @@ namespace XRTK.Extensions
             var handData = new HandData();
             var recordedHandData = JsonUtility.FromJson<RecordedHandJoints>(pose.Data.text);
 
-            for (int j = 0; j < recordedHandData.items.Length; j++)
+            for (int j = 0; j < recordedHandData.Joints.Length; j++)
             {
-                var jointRecord = recordedHandData.items[j];
-                handData.Joints[(int)jointRecord.JointIndex] = jointRecord.pose;
+                var jointRecord = recordedHandData.Joints[j];
+                handData.Joints[(int)jointRecord.Joint] = jointRecord.Pose;
             }
 
             return handData;

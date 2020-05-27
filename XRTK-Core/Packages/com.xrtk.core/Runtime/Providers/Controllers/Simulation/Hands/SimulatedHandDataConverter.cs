@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
@@ -28,16 +29,14 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             this.jitterAmount = jitterAmount;
             this.defaultDistance = defaultDistance;
             this.handedness = handedness;
-            poseDefinitions = trackedPoses;
+            poseDefinitions = trackedPoses ?? throw new ArgumentException($"{nameof(trackedPoses)} must be provided");
 
             // Initialize available simulated hand poses and find the configured default pose.
             SimulatedHandControllerPose.Initialize(trackedPoses);
 
-            // Simulation cannot work without a default pose.
             if (SimulatedHandControllerPose.DefaultHandPose == null)
             {
-                Debug.LogError("There is no default simulated hand pose defined!");
-                return;
+                throw new ArgumentException("There is no default simulated hand pose defined!");
             }
 
             initialPose = SimulatedHandControllerPose.GetPoseByName(SimulatedHandControllerPose.DefaultHandPose.Id);

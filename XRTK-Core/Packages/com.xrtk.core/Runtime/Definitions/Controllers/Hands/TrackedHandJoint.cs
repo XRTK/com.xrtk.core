@@ -11,7 +11,7 @@ namespace XRTK.Definitions.Controllers.Hands
         /// <summary>
         /// The hand wrist.
         /// </summary>
-        Wrist,
+        Wrist = 0,
         /// <summary>
         /// The hand palm.
         /// </summary>

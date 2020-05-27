@@ -124,6 +124,11 @@ namespace XRTK.Providers.Controllers.Hands
         private MixedRealityPose IndexFingerTipPose { get; set; }
 
         /// <summary>
+        /// The hands's grip pose in playspace.
+        /// </summary>
+        private MixedRealityPose GripPose { get; set; }
+
+        /// <summary>
         /// Updates the hand controller with new hand data input.
         /// </summary>
         /// <param name="handData">Updated hand data.</param>
@@ -144,6 +149,7 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateIsIsGripping(handData);
             UpdateSpatialPointerPose(handData);
             UpdateIndexFingerTipPose(handData);
+            UpdateGripPose(handData);
             UpdateBounds();
             UpdateVelocity();
             Pose = handData.TrackedPose;
@@ -463,7 +469,7 @@ namespace XRTK.Providers.Controllers.Hands
                         UpdateGripMapping(interactionMapping);
                         break;
                     case DeviceInputType.SpatialGrip:
-                        UpdateSpatialGripMapping(interactionMapping);
+                        UpdateGripPoseMapping(interactionMapping);
                         break;
                     case DeviceInputType.IndexFinger:
                         UpdateIndexFingerMapping(interactionMapping);
@@ -477,13 +483,10 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        private void UpdateSpatialGripMapping(MixedRealityInteractionMapping interactionMapping)
+        private void UpdateGripPoseMapping(MixedRealityInteractionMapping interactionMapping)
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
-            if (TryGetJointPose(TrackedHandJoint.Palm, out var palmPose))
-            {
-                interactionMapping.PoseData = palmPose;
-            }
+            interactionMapping.PoseData = GripPose;
         }
 
         private void UpdateSpatialPointerMapping(MixedRealityInteractionMapping interactionMapping)
@@ -637,6 +640,18 @@ namespace XRTK.Providers.Controllers.Hands
             if (TryGetJointPose(TrackedHandJoint.IndexTip, out var indexTipPose))
             {
                 IndexFingerTipPose = handData.RootPose + indexTipPose;
+            }
+        }
+
+        /// <summary>
+        /// Updates the grip pose value for the hand controller.
+        /// </summary>
+        /// <param name="handData">Updated hand data.</param>
+        private void UpdateGripPose(HandData handData)
+        {
+            if (TryGetJointPose(TrackedHandJoint.Palm, out var palmPose))
+            {
+                GripPose = handData.RootPose + palmPose;
             }
         }
 

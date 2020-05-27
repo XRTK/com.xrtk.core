@@ -97,28 +97,41 @@ namespace XRTK.Providers.Controllers.Hands
             if (handData.IsTracked)
             {
                 var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
-                var pinkyTipPose = handData.Joints[(int)TrackedHandJoint.LittleTip];
+                var littleTipPose = handData.Joints[(int)TrackedHandJoint.LittleTip];
                 var ringTipPose = handData.Joints[(int)TrackedHandJoint.RingTip];
                 var middleTipPose = handData.Joints[(int)TrackedHandJoint.MiddleTip];
                 var indexTipPose = handData.Joints[(int)TrackedHandJoint.IndexTip];
 
                 if (!PlatformProvidesIsGripping)
                 {
-                    handData.IsGripping = (palmPose.Position - pinkyTipPose.Position).sqrMagnitude <= TEN_CENTIMETER_SQUARE_MAGNITUDE &&
+                    handData.IsGripping = (palmPose.Position - littleTipPose.Position).sqrMagnitude <= TEN_CENTIMETER_SQUARE_MAGNITUDE &&
                     (palmPose.Position - ringTipPose.Position).sqrMagnitude <= TEN_CENTIMETER_SQUARE_MAGNITUDE &&
                     (palmPose.Position - middleTipPose.Position).sqrMagnitude <= TEN_CENTIMETER_SQUARE_MAGNITUDE &&
                     (palmPose.Position - indexTipPose.Position).sqrMagnitude <= TEN_CENTIMETER_SQUARE_MAGNITUDE;
+
+                    Debug.Log(handData.IsGripping);
                 }
 
                 if (!PlatformProvidesGripStrength)
                 {
-                    var averageDistanceSquareMagnitude = ((palmPose.Position - pinkyTipPose.Position).sqrMagnitude - TEN_CENTIMETER_SQUARE_MAGNITUDE +
-                        (palmPose.Position - ringTipPose.Position).sqrMagnitude - TEN_CENTIMETER_SQUARE_MAGNITUDE +
-                        (palmPose.Position - middleTipPose.Position).sqrMagnitude - TEN_CENTIMETER_SQUARE_MAGNITUDE +
-                        (palmPose.Position - indexTipPose.Position).sqrMagnitude - TEN_CENTIMETER_SQUARE_MAGNITUDE) / 4f;
+                    var averageDistanceSquareMagnitude = ((palmPose.Position - littleTipPose.Position).sqrMagnitude +
+                        (palmPose.Position - ringTipPose.Position).sqrMagnitude +
+                        (palmPose.Position - middleTipPose.Position).sqrMagnitude +
+                        (palmPose.Position - indexTipPose.Position).sqrMagnitude) / 4f;
+
                     handData.GripStrength = 1 - Mathf.Clamp(averageDistanceSquareMagnitude / GRIP_STRENGTH_DISTANCE, 0f, 1f);
 
-                    Debug.Log(handData.GripStrength);
+                    //if (handData.GripStrength == 0f)
+                    //{
+                    //    Debug.LogWarning(handData.GripStrength);
+                    //}
+
+                    //Debug.Log(handData.GripStrength);
+
+                    //if (handData.GripStrength == 1f)
+                    //{
+                    //    Debug.LogWarning(handData.GripStrength);
+                    //}
                 }
             }
             else

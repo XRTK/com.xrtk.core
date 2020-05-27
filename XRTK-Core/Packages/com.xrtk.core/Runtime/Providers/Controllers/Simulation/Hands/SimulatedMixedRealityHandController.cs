@@ -35,7 +35,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             // Hand in pointing pose yes/no?
             new MixedRealityInteractionMapping("Point", AxisType.Digital, DeviceInputType.ButtonPress),
             // Grip / grab button press / release.
-            new MixedRealityInteractionMapping("Grip", AxisType.SingleAxis, DeviceInputType.TriggerPress),
+            new MixedRealityInteractionMapping("Grip", AxisType.Digital, DeviceInputType.TriggerPress),
             // 6 DoF grip pose ("Where to put things when grabbing something?")
             new MixedRealityInteractionMapping("Grip Pose", AxisType.SixDof, DeviceInputType.SpatialGrip),
             // 6 DoF index finger tip pose (mainly for "near interaction pointer").

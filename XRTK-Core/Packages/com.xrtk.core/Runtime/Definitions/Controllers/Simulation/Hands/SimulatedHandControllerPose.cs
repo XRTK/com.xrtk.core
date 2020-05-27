@@ -248,6 +248,7 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
             if (!(left is SimulatedHandControllerPose) || !(right is SimulatedHandControllerPose)) { return false; }
             return ((SimulatedHandControllerPose)left).Equals((SimulatedHandControllerPose)right);
         }
+
         /// <summary>Determines whether the specified object is equal to this instance.</summary>
         /// <param name="other">The specified object.</param>
         /// <returns>True, if the specified object is equal to this instance, otherwise false.</returns>

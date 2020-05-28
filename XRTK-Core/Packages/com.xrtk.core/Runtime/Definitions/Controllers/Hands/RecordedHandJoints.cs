@@ -7,8 +7,8 @@ using UnityEngine;
 namespace XRTK.Definitions.Controllers.Hands
 {
     /// <summary>
-    /// Unity's <see cref="JsonUtility"/> "currently" (stated in 2011) does not support top-level arrays.
-    /// But hey, it's on their "future" road-map. That's why we need a wrapper definition around or items.
+    /// Wrapper definition around <see cref="RecordedHandJoint"/> for storing an array of <see cref="RecordedHandJoint"/>s,
+    /// since Unity's <see cref="JsonUtility"/> does not support top-level arrays in JSON.
     /// </summary>
     [Serializable]
     public class RecordedHandJoints

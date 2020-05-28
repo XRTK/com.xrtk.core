@@ -8,7 +8,7 @@ using XRTK.Definitions.Utilities;
 namespace XRTK.Definitions.Controllers.Hands
 {
     /// <summary>
-    /// A single recorded hand joint's information that may be used to restore the joint pose for simulation.
+    /// A single recorded hand joint's information that may be used to restore the joint pose.
     /// </summary>
     [Serializable]
     public struct RecordedHandJoint
@@ -16,8 +16,8 @@ namespace XRTK.Definitions.Controllers.Hands
         /// <summary>
         /// Constructs a new joint record.
         /// </summary>
-        /// <param name="joint"></param>
-        /// <param name="pose"></param>
+        /// <param name="joint">The joint that was recorded.</param>
+        /// <param name="pose">The joint pose that was recorded.</param>
         public RecordedHandJoint(TrackedHandJoint joint, MixedRealityPose pose)
         {
             this.joint = joint;

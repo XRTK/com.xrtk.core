@@ -35,7 +35,8 @@ namespace XRTK.Providers.Controllers.Hands
 
         private const float CURL_TOTAL_DISTANCE = CURL_LITTLE_DISTANCE + CURL_RING_DISTANCE + CURL_MIDDLE_DISTANCE + CURL_INDEX_DISTANCE;
         private const float IS_GRIPPING_CURL_THRESHOLD = .9f;
-        private const bool DEBUG_LOG_VALUES_TO_CONSOLE = true;
+
+        private const bool DEBUG_LOG_VALUES_TO_CONSOLE = false;
 
         /// <summary>
         /// Processes the hand data and updates its <see cref="HandData.IsGripping"/>,
@@ -81,7 +82,7 @@ namespace XRTK.Providers.Controllers.Hands
                     Mathf.Clamp((littleCurl - CURL_LITTLE_LOW_END_ANGLE) / CURL_LITTLE_DISTANCE, 0f, 1f),
                 };
 
-                if (DEBUG_LOG_VALUES_TO_CONSOLE)
+                if (Debug.isDebugBuild && DEBUG_LOG_VALUES_TO_CONSOLE)
                 {
                     Debug.Log($"Grip Strength: {handData.GripStrength} " +
                         $"| Thumb: {handData.FingerCurlStrengths[(int)HandFinger.Thumb]} " +

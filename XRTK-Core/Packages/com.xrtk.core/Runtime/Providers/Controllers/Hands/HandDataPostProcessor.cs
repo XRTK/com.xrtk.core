@@ -73,9 +73,11 @@ namespace XRTK.Providers.Controllers.Hands
         {
             UpdateIsPinchingAndStrength(handData);
             UpdateIsPointing(handData);
-            GripPostProcessor.Process(handData);
             UpdatePointerPose(handData);
-            TrackedPoseProcessor.Process(handData);
+            GripPostProcessor.Process(handData);
+
+            // TODO: Enable once performance is optimized and reliability.
+            //TrackedPoseProcessor.Process(handData);
         }
 
         /// <summary>

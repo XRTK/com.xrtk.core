@@ -35,6 +35,7 @@ namespace XRTK.Providers.Controllers.Hands
 
         private const float CURL_TOTAL_DISTANCE = CURL_LITTLE_DISTANCE + CURL_RING_DISTANCE + CURL_MIDDLE_DISTANCE + CURL_INDEX_DISTANCE;
         private const float IS_GRIPPING_CURL_THRESHOLD = .9f;
+        private const float IS_GRIPPING_INDEX_CURL_THRESHOLD = .8f;
 
         private const bool DEBUG_LOG_VALUES_TO_CONSOLE = false;
 
@@ -62,7 +63,7 @@ namespace XRTK.Providers.Controllers.Hands
                 var middleCurl = Quaternion.Angle(palmLookRotation, middleIntermediatePose.Rotation);
                 var ringCurl = Quaternion.Angle(palmLookRotation, ringIntermediatePose.Rotation);
                 var littleCurl = Quaternion.Angle(palmLookRotation, littleIntermediatePose.Rotation);
-                // 70 - 100
+
                 // Grip strength is defined as the total traveled curl distance
                 // compared to the total travel curl distance for the whole hand.
                 var totalCurlDistance =
@@ -72,15 +73,26 @@ namespace XRTK.Providers.Controllers.Hands
                     (indexCurl - CURL_INDEX_LOW_END_ANGLE);
 
                 handData.GripStrength = Mathf.Clamp(totalCurlDistance / CURL_TOTAL_DISTANCE, 0f, 1f);
-                handData.IsGripping = handData.GripStrength >= IS_GRIPPING_CURL_THRESHOLD;
+
+                var thumbCurlStrength = Mathf.Clamp((thumbCurl - CURL_THUMB_LOW_END_ANGLE) / CURL_THUMB_DISTANCE, 0f, 1f);
+                var indexCurlStrength = Mathf.Clamp((indexCurl - CURL_INDEX_LOW_END_ANGLE) / CURL_INDEX_DISTANCE, 0f, 1f);
+                var middleCurlStrength = Mathf.Clamp((middleCurl - CURL_MIDDLE_LOW_END_ANGLE) / CURL_MIDDLE_DISTANCE, 0f, 1f);
+                var ringCurlStrength = Mathf.Clamp((ringCurl - CURL_RING_LOW_END_ANGLE) / CURL_RING_DISTANCE, 0f, 1f);
+                var littleCurlStrength = Mathf.Clamp((littleCurl - CURL_LITTLE_LOW_END_ANGLE) / CURL_LITTLE_DISTANCE, 0f, 1f);
+
                 handData.FingerCurlStrengths = new float[]
                 {
-                    Mathf.Clamp((thumbCurl - CURL_THUMB_LOW_END_ANGLE) / CURL_THUMB_DISTANCE, 0f, 1f),
-                    Mathf.Clamp((indexCurl - CURL_INDEX_LOW_END_ANGLE) / CURL_INDEX_DISTANCE, 0f, 1f),
-                    Mathf.Clamp((middleCurl - CURL_MIDDLE_LOW_END_ANGLE) / CURL_MIDDLE_DISTANCE, 0f, 1f),
-                    Mathf.Clamp((ringCurl - CURL_RING_LOW_END_ANGLE) / CURL_RING_DISTANCE, 0f, 1f),
-                    Mathf.Clamp((littleCurl - CURL_LITTLE_LOW_END_ANGLE) / CURL_LITTLE_DISTANCE, 0f, 1f),
+                    thumbCurlStrength,
+                    indexCurlStrength,
+                    middleCurlStrength,
+                    ringCurlStrength,
+                    littleCurlStrength,
                 };
+
+                // Hand is gripping if the grip strength passed the threshold. But we are also taking
+                // the index curl into account explicitly, this helps avoiding the pinch gesture being
+                // considered gripping as well.
+                handData.IsGripping = handData.GripStrength >= IS_GRIPPING_CURL_THRESHOLD && indexCurlStrength >= IS_GRIPPING_INDEX_CURL_THRESHOLD;
 
                 if (Debug.isDebugBuild && DEBUG_LOG_VALUES_TO_CONSOLE)
                 {

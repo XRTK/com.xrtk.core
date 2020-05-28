@@ -181,6 +181,7 @@ namespace XRTK.Editor.Profiles
                 serializedObject.ApplyModifiedProperties();
 
                 if (MixedRealityToolkit.IsInitialized &&
+                    platformEntriesProperty.arraySize > 0 &&
                     !string.IsNullOrEmpty(instanceTypeProperty.FindPropertyRelative("reference").stringValue))
                 {
                     MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);

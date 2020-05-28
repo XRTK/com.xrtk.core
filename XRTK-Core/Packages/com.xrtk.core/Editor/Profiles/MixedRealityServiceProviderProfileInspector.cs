@@ -157,6 +157,7 @@ namespace XRTK.Editor.Profiles
             }
 
             EditorGUI.PropertyField(runtimeRect, platformEntriesProperty);
+            var runtimePlatformProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
 
             if (profileType != null)
             {
@@ -181,7 +182,7 @@ namespace XRTK.Editor.Profiles
                 serializedObject.ApplyModifiedProperties();
 
                 if (MixedRealityToolkit.IsInitialized &&
-                    platformEntriesProperty.arraySize > 0 &&
+                    runtimePlatformProperty.arraySize > 0 &&
                     !string.IsNullOrEmpty(instanceTypeProperty.FindPropertyRelative("reference").stringValue))
                 {
                     MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);

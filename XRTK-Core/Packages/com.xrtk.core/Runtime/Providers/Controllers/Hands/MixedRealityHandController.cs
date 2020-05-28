@@ -26,11 +26,12 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public MixedRealityHandController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
             : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
-        { }
+        {
+        }
 
+        private const int POSE_FRAME_BUFFER_SIZE = 5;
         private const float NEW_VELOCITY_WEIGHT = .2f;
         private const float CURRENT_VELOCITY_WEIGHT = .8f;
-        private const int POSE_FRAME_BUFFER_SIZE = 5;
 
         private readonly int velocityUpdateFrameInterval = 9;
         private readonly Dictionary<TrackedHandBounds, Bounds[]> bounds = new Dictionary<TrackedHandBounds, Bounds[]>();
@@ -60,7 +61,7 @@ namespace XRTK.Providers.Controllers.Hands
             new MixedRealityInteractionMapping("Grip Pose", AxisType.SixDof, DeviceInputType.SpatialGrip),
             // 6 DoF index finger tip pose (mainly for "near interaction pointer").
             new MixedRealityInteractionMapping("Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger),
-            // Currently reconigzed tracked pose.
+            // Currently recognized tracked pose.
             new MixedRealityInteractionMapping("Tracked Pose", AxisType.Raw, DeviceInputType.Hand)
         };
 
@@ -119,12 +120,12 @@ namespace XRTK.Providers.Controllers.Hands
         private MixedRealityPose SpatialPointerPose { get; set; }
 
         /// <summary>
-        /// The hands's index finger tip pose in playspace.
+        /// The hand's index finger tip pose in playspace.
         /// </summary>
         private MixedRealityPose IndexFingerTipPose { get; set; }
 
         /// <summary>
-        /// The hands's grip pose in playspace.
+        /// The hand's grip pose in playspace.
         /// </summary>
         private MixedRealityPose GripPose { get; set; }
 
@@ -445,7 +446,7 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        #endregion
+        #endregion Hand Bounds Implementation
 
         #region Interaction Mappings
 
@@ -571,7 +572,7 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        #endregion
+        #endregion Interaction Mappings
 
         /// <summary>
         /// Updates the controller's velocity / angular velocity.

@@ -92,7 +92,7 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        private float Compare(Handedness handedness, MixedRealityPose[] recordedJointPoses, MixedRealityPose[] runtimeJointPoses)
+        private static float Compare(Handedness handedness, MixedRealityPose[] recordedJointPoses, MixedRealityPose[] runtimeJointPoses)
         {
             // Variable keeps count of how many joint poses have passed
             // the test for equality.
@@ -128,7 +128,7 @@ namespace XRTK.Providers.Controllers.Hands
 
             // The more joints have passed the test, the more likely it is
             // the poses are the same.
-            return passed / HandData.JointCount;
+            return passed / (float)HandData.JointCount;
         }
     }
 }

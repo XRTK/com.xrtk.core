@@ -2,7 +2,6 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Collections.Generic;
-using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
@@ -10,21 +9,19 @@ using XRTK.Extensions;
 namespace XRTK.Providers.Controllers.Hands
 {
     /// <summary>
-    /// The hand pose recongizer uses the recorded hand pose definitions
+    /// The hand pose processor uses the recorded hand pose definitions
     /// configured in <see cref="Definitions.InputSystem.MixedRealityInputSystemProfile.TrackedPoses"/>
     /// or the platform's <see cref="BaseHandControllerDataProviderProfile.TrackedPoses"/>
-    /// and attempts to recognize them during runtime.
+    /// and attempts to recognize a hand's current pose during runtime to provide for
+    /// <see cref="HandData.TrackedPose"/>.
     /// </summary>
-    public sealed class HandPoseRecognizer
+    public sealed class HandTrackedPoseProcessor
     {
-        private const float POSITION_DELTA_SQR_MAGNITUDE_THRESHOLD = .01f;
-        private const float ROTATION_DELTA_ANGLE_THRESHOLD = 2f;
-
         /// <summary>
         /// Creates a new recognizer instance to work on the provided list of poses.
         /// </summary>
         /// <param name="recognizablePoses">Recognizable poses by this recognizer.</param>
-        public HandPoseRecognizer(IReadOnlyList<HandControllerPoseDefinition> recognizablePoses)
+        public HandTrackedPoseProcessor(IReadOnlyList<HandControllerPoseDefinition> recognizablePoses)
         {
             poseHandDatas = new HandData[recognizablePoses.Count];
             poseDefinitions = new Dictionary<int, HandControllerPoseDefinition>();
@@ -39,36 +36,59 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
+        private const int RECOGNITION_FRAME_DELIMITER = 10;
+        private const float POSITION_DELTA_SQR_MAGNITUDE_THRESHOLD = .01f;
+        private const float ROTATION_DELTA_ANGLE_THRESHOLD = 2f;
+
         private readonly HandData[] poseHandDatas;
         private readonly Dictionary<int, HandControllerPoseDefinition> poseDefinitions;
+        private int passedFramesSinceRecognition = 0;
 
         /// <summary>
         /// Attempts to recognize a hand pose.
         /// </summary>
         /// <param name="handData">The hand data to use for recognition.</param>
-        public void Recognize(HandData handData)
+        public void Process(HandData handData)
         {
-            var currentHighestProbability = 0f;
-            HandControllerPoseDefinition recognizedPose = null;
-
-            for (int i = 0; i < poseHandDatas.Length; i++)
+            if (handData.IsTracked)
             {
-                var recordedData = poseHandDatas[i];
-                var probability = Compare(handData.Handedness, recordedData.Joints, handData.Joints);
-
-                //Debug.Log($"{poseDefinitions[i].Id} | {probability}");
-                if (probability > currentHighestProbability)
+                // Recognition is pretty expensive so we don't want to
+                // do it every frame.
+                if (passedFramesSinceRecognition < RECOGNITION_FRAME_DELIMITER)
                 {
-                    currentHighestProbability = probability;
-                    recognizedPose = poseDefinitions[i];
+                    passedFramesSinceRecognition++;
+                    return;
+                }
+
+                passedFramesSinceRecognition = 0;
+                var currentHighestProbability = 0f;
+                HandControllerPoseDefinition recognizedPose = null;
+
+                for (int i = 0; i < poseHandDatas.Length; i++)
+                {
+                    var recordedData = poseHandDatas[i];
+                    var probability = Compare(handData.Handedness, recordedData.Joints, handData.Joints);
+
+                    //Debug.Log($"{poseDefinitions[i].Id} | {probability}");
+                    if (probability > currentHighestProbability)
+                    {
+                        currentHighestProbability = probability;
+                        recognizedPose = poseDefinitions[i];
+                    }
+                }
+
+                handData.TrackedPose = recognizedPose;
+
+                if (handData.TrackedPose != null)
+                {
+                    //Debug.Log(handData.TrackedPose.Id);
                 }
             }
-
-            handData.TrackedPose = recognizedPose;
-
-            if (handData.TrackedPose != null)
+            else
             {
-                //Debug.Log(handData.TrackedPose.Id);
+                // Easy game when hand is not tracked, there is no pose.
+                handData.TrackedPose = null;
+                passedFramesSinceRecognition = 0;
             }
         }
 

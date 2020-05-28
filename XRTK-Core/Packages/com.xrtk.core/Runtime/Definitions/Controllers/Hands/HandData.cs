@@ -53,6 +53,11 @@ namespace XRTK.Definitions.Controllers.Hands
         public bool IsGripping { get; set; } = false;
 
         /// <summary>
+        /// Finger curling values per hand finger.
+        /// </summary>
+        public float[] FingerCurlStrengths { get; set; } = new float[] { };
+
+        /// <summary>
         /// What's the grip strength of the hand?
         /// </summary>
         public float GripStrength { get; set; } = 0;

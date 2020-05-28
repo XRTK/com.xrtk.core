@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
@@ -100,6 +101,9 @@ namespace XRTK.Providers.Controllers.Hands
         /// <inheritdoc />
         public float GripStrength { get; private set; }
 
+        /// <inheritdoc />
+        public float[] FingerCurlStrengths { get; set; } = new float[] { };
+
         /// <summary>
         /// Is gripping state from the previous update frame.
         /// </summary>
@@ -150,6 +154,7 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateSpatialPointerPose(handData);
             UpdateIndexFingerTipPose(handData);
             UpdateGripPose(handData);
+            UpdateFingerCurlStrength(handData);
             UpdateBounds();
             UpdateVelocity();
             Pose = handData.TrackedPose;
@@ -658,6 +663,20 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <summary>
+        /// Updates the finger curl values for the controller.
+        /// </summary>
+        /// <param name="handData">Updated hand data.</param>
+        private void UpdateFingerCurlStrength(HandData handData)
+        {
+            if (FingerCurlStrengths == null)
+            {
+                FingerCurlStrengths = new float[handData.FingerCurlStrengths.Length];
+            }
+
+            Array.Copy(handData.FingerCurlStrengths, FingerCurlStrengths, FingerCurlStrengths.Length);
+        }
+
+        /// <summary>
         /// Updates the hand controller's internal is pinching state.
         /// Instead of updating the value for each frame, is pinching state
         /// is buffered for a few frames to stabilize and avoid false positives.
@@ -791,6 +810,20 @@ namespace XRTK.Providers.Controllers.Hands
 
         /// <inheritdoc />
         public virtual bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose) => jointPoses.TryGetValue(joint, out pose);
+
+        /// <inheritdoc />
+        public bool TryGetFingerCurlStrength(HandFinger handFinger, out float curlStrength)
+        {
+            var index = (int)handFinger;
+            if (FingerCurlStrengths != null && FingerCurlStrengths.Length >= index)
+            {
+                curlStrength = FingerCurlStrengths[index];
+                return true;
+            }
+
+            curlStrength = 0f;
+            return false;
+        }
 
         private Vector3 GetJointPosition(TrackedHandJoint joint) => TryGetJointPose(joint, out var pose) ? pose.Position : Vector3.zero;
     }

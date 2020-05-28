@@ -39,6 +39,11 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         float GripStrength { get; }
 
         /// <summary>
+        /// Gets the curl strength per finger.
+        /// </summary>
+        float[] FingerCurlStrengths { get; }
+
+        /// <summary>
         /// Gets the hands current pose.
         /// </summary>
         HandControllerPoseDefinition Pose { get; }
@@ -59,5 +64,13 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         /// i.e. joints rotate primarily around the X-axis.
         /// </remarks>
         bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose);
+
+        /// <summary>
+        /// Gets the curl strength for a finger, if available.
+        /// </summary>
+        /// <param name="handFinger">The <see cref="HandFinger"/> to lookup strength for.</param>
+        /// <param name="curlStrength">The finger's curl strength is a value from 0 to 1.</param>
+        /// <returns>True, if success.</returns>
+        bool TryGetFingerCurlStrength(HandFinger handFinger, out float curlStrength);
     }
 }

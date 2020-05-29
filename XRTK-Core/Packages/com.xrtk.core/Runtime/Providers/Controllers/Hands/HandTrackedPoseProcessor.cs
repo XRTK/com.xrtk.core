@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
+using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 
 namespace XRTK.Providers.Controllers.Hands
@@ -45,30 +46,48 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         private const int RECOGNITION_FRAME_DELIMITER = 10;
-        private const float CURL_STRENGTH_DELTA_THRESHOLD = .01f;
-        private const float GRIP_STRENGTH_DELTA_THRESHOLD = .02f;
+        private const float CURL_STRENGTH_DELTA_THRESHOLD = .3f;
+        private const float GRIP_STRENGTH_DELTA_THRESHOLD = .3f;
 
         private readonly HandData[] bakedHandDatas;
         private readonly Dictionary<int, HandControllerPoseDefinition> definitions;
-        private int passedFramesSinceRecognition = 0;
+        private int passedFramesSinceRecognitionLeftHand = 0;
+        private int passedFramesSinceRecognitionRightHand = 0;
+
+        /// <summary>
+        /// The last recognized pose of the left hand.
+        /// </summary>
+        private HandControllerPoseDefinition LastTrackedPoseLeftHand { get; set; }
+
+        /// <summary>
+        /// The last recognized pose of the right hand.
+        /// </summary>
+        private HandControllerPoseDefinition LastTrackedPoseRightHand { get; set; }
 
         /// <summary>
         /// Attempts to recognize a hand pose.
         /// </summary>
+        /// <param name="handedness">The handedness of the data.</param>
         /// <param name="handData">The hand data to compare against.</param>
-        public void Process(HandData handData)
+        public void Process(Handedness handedness, HandData handData)
         {
             if (handData.IsTracked)
             {
                 // Recognition is pretty expensive so we don't want to
                 // do it every frame.
-                if (passedFramesSinceRecognition < RECOGNITION_FRAME_DELIMITER)
+                if (handedness == Handedness.Right && passedFramesSinceRecognitionRightHand < RECOGNITION_FRAME_DELIMITER)
                 {
-                    passedFramesSinceRecognition++;
+                    passedFramesSinceRecognitionRightHand++;
+                    handData.TrackedPose = LastTrackedPoseRightHand;
+                    return;
+                }
+                else if (passedFramesSinceRecognitionLeftHand < RECOGNITION_FRAME_DELIMITER)
+                {
+                    passedFramesSinceRecognitionLeftHand++;
+                    handData.TrackedPose = LastTrackedPoseLeftHand;
                     return;
                 }
 
-                passedFramesSinceRecognition = 0;
                 var currentHighestProbability = 0f;
                 HandControllerPoseDefinition recognizedPose = null;
 
@@ -85,6 +104,16 @@ namespace XRTK.Providers.Controllers.Hands
                 }
 
                 handData.TrackedPose = recognizedPose;
+                if (handedness == Handedness.Right)
+                {
+                    LastTrackedPoseRightHand = handData.TrackedPose;
+                    passedFramesSinceRecognitionRightHand = 0;
+                }
+                else
+                {
+                    LastTrackedPoseLeftHand = handData.TrackedPose;
+                    passedFramesSinceRecognitionLeftHand = 0;
+                }
 
                 if (handData.TrackedPose != null)
                 {
@@ -95,7 +124,17 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 // Easy game when hand is not tracked, there is no pose.
                 handData.TrackedPose = null;
-                passedFramesSinceRecognition = 0;
+
+                if (handedness == Handedness.Right)
+                {
+                    LastTrackedPoseRightHand = null;
+                    passedFramesSinceRecognitionRightHand = 0;
+                }
+                else
+                {
+                    LastTrackedPoseLeftHand = null;
+                    passedFramesSinceRecognitionLeftHand = 0;
+                }
             }
         }
 

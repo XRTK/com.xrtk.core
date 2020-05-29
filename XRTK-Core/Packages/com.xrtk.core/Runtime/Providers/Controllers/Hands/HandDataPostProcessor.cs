@@ -68,16 +68,15 @@ namespace XRTK.Providers.Controllers.Hands
         /// Finalizes the hand data retrieved from platform APIs by adding
         /// any information the platform could not provide.
         /// </summary>
+        /// <param name="handedness">The handedness of the data provided.</param>
         /// <param name="handData">The hand data retrieved from platform conversion.</param>
-        public void PostProcess(HandData handData)
+        public void PostProcess(Handedness handedness, HandData handData)
         {
             UpdateIsPinchingAndStrength(handData);
             UpdateIsPointing(handData);
             UpdatePointerPose(handData);
             GripPostProcessor.Process(handData);
-
-            // TODO: Enable once performance is optimized and reliability.
-            //TrackedPoseProcessor.Process(handData);
+            TrackedPoseProcessor.Process(handedness, handData);
         }
 
         /// <summary>

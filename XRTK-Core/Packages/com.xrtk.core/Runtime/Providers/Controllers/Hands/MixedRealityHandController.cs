@@ -481,7 +481,7 @@ namespace XRTK.Providers.Controllers.Hands
                         UpdateIndexFingerMapping(interactionMapping);
                         break;
                     case DeviceInputType.Hand:
-                        UpdateHandPoseMapping(interactionMapping);
+                        UpdateTrackedPoseMapping(interactionMapping);
                         break;
                 }
 
@@ -561,7 +561,7 @@ namespace XRTK.Providers.Controllers.Hands
             interactionMapping.PoseData = IndexFingerTipPose;
         }
 
-        private void UpdateHandPoseMapping(MixedRealityInteractionMapping interactionMapping)
+        private void UpdateTrackedPoseMapping(MixedRealityInteractionMapping interactionMapping)
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.Raw);
 

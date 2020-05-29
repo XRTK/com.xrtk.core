@@ -41,15 +41,6 @@ namespace XRTK.Definitions.Controllers.Hands
         public bool IsDefault => isDefault;
 
         [SerializeField]
-        [Tooltip("Is this a selection pose used to select things?")]
-        private bool isSelectionPose = false;
-
-        /// <summary>
-        /// Is this a selection pose used to select things?
-        /// </summary>
-        public bool IsSelectionPose => isSelectionPose;
-
-        [SerializeField]
         [Tooltip("Key used to trigger the gesture simulation.")]
         private KeyCode keyCode = KeyCode.None;
 
@@ -66,5 +57,18 @@ namespace XRTK.Definitions.Controllers.Hands
         /// Gets the gesture definition's joint information used to simulate the gesture.
         /// </summary>
         public TextAsset Data => data;
+
+        [SerializeField]
+        [Tooltip("The precomputed / baked hand data of the pose.")]
+        private HandData bakedHandData = null;
+
+        /// <summary>
+        /// Gets or sets the precomputed / baked hand data of the pose.
+        /// </summary>
+        public HandData BakedHandData
+        {
+            get => bakedHandData;
+            set => bakedHandData = value;
+        }
     }
 }

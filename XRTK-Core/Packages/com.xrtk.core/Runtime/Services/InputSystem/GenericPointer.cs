@@ -3,6 +3,7 @@
 
 using System.Collections;
 using UnityEngine;
+using XRTK.Definitions;
 using XRTK.Definitions.Physics;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
@@ -22,11 +23,13 @@ namespace XRTK.Services.InputSystem.Pointers
         /// </summary>
         /// <param name="pointerName"></param>
         /// <param name="inputSourceParent"></param>
-        public GenericPointer(string pointerName, IMixedRealityInputSource inputSourceParent)
+        /// <param name="interactionMode"></param>
+        public GenericPointer(string pointerName, IMixedRealityInputSource inputSourceParent, InteractionMode interactionMode)
         {
             PointerId = MixedRealityToolkit.InputSystem.FocusProvider.GenerateNewPointerId();
             PointerName = pointerName;
             this.inputSourceParent = inputSourceParent;
+            InteractionMode = interactionMode;
         }
 
         /// <inheritdoc />
@@ -81,6 +84,9 @@ namespace XRTK.Services.InputSystem.Pointers
 
         /// <inheritdoc />
         public IMixedRealityTeleportHotSpot TeleportHotSpot { get; set; }
+
+        /// <inheritdoc />
+        public InteractionMode InteractionMode { get; }
 
         /// <inheritdoc />
         public Collider NearInteractionCollider { get; } = null;

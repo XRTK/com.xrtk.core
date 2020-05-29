@@ -2,11 +2,11 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Definitions;
 using XRTK.EventDatum.Input;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Services;
 using XRTK.Services.InputSystem.Pointers;
 using XRTK.Services.InputSystem.Sources;
 using XRTK.Utilities;
@@ -156,7 +156,7 @@ namespace XRTK.Services.InputSystem
             private readonly GazeProvider gazeProvider;
 
             public InternalGazePointer(GazeProvider gazeProvider, string pointerName, IMixedRealityInputSource inputSourceParent, LayerMask[] raycastLayerMasks, float pointerExtent, Transform gazeTransform, BaseRayStabilizer stabilizer)
-                    : base(pointerName, inputSourceParent)
+                    : base(pointerName, inputSourceParent, InteractionMode.Far)
             {
                 this.gazeProvider = gazeProvider;
                 PointerRaycastLayerMasksOverride = raycastLayerMasks;

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
+using UnityEngine;
 
 namespace XRTK.Editor.Utilities
 {
@@ -58,7 +59,7 @@ namespace XRTK.Editor.Utilities
             // Get list of working files
             var filesPaths = new List<string>();
 
-            for (int i = 0; i < assetsRootPath?.Count; i++)
+            for (int i = 0; i < assetsRootPath.Count; i++)
             {
                 filesPaths.AddRange(UnityFileHelper.GetUnityAssetsAtPath(assetsRootPath[i]));
             }
@@ -136,7 +137,22 @@ namespace XRTK.Editor.Utilities
                     contents = contents.Replace($"guid: {oldGuid}", $"guid: {newGuid}");
                 }
 
-                File.WriteAllText(filePath, contents);
+                try
+                {
+                    var attributes = File.GetAttributes(filePath);
+
+                    if ((attributes & FileAttributes.ReadOnly) == FileAttributes.ReadOnly)
+                    {
+                        attributes ^= FileAttributes.ReadOnly;
+                    }
+
+                    File.SetAttributes(filePath, attributes);
+                    File.WriteAllText(filePath, contents);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
+                }
             }
 
             EditorUtility.ClearProgressBar();

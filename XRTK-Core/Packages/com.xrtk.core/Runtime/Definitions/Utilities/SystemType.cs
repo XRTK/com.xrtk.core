@@ -54,10 +54,6 @@ namespace XRTK.Definitions.Utilities
 
         void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
-            if (type != null && type.GUID != Guid.Empty)
-            {
-                reference = type.GUID.ToString();
-            }
         }
 
         #endregion ISerializationCallbackReceiver Members
@@ -83,13 +79,23 @@ namespace XRTK.Definitions.Utilities
                 }
 
                 type = value;
-                reference = type?.GUID.ToString();
+
+                if (type != null)
+                {
+                    guid = type.GUID;
+                    reference = guid.ToString();
+                }
+                else
+                {
+                    guid = Guid.Empty;
+                    reference = string.Empty;
+                }
             }
         }
 
         public static implicit operator Guid(SystemType type)
         {
-            return type.type == null ? Guid.Empty : type.type.GUID;
+            return type.type == null ? Guid.Empty : type.Guid;
         }
 
         public static implicit operator string(SystemType type)
@@ -112,10 +118,23 @@ namespace XRTK.Definitions.Utilities
             return new SystemType(guid);
         }
 
+        private Guid guid = Guid.Empty;
+
         /// <summary>
         /// Gets the <see cref="T:System.Guid"/> associated with the <see cref="T:System.Type" />.
         /// </summary>
-        public Guid Guid => type.GUID;
+        public Guid Guid
+        {
+            get
+            {
+                if (guid == Guid.Empty)
+                {
+                    guid = type.GUID;
+                }
+
+                return guid;
+            }
+        }
 
         /// <inheritdoc />
         public override string ToString()

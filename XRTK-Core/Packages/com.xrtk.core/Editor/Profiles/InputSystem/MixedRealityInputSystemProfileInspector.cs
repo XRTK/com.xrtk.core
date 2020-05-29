@@ -168,7 +168,7 @@ namespace XRTK.Editor.Profiles.InputSystem
 
             EditorGUILayout.Space();
 
-            showAggregatedSimpleControllerMappingProfiles = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showAggregatedSimpleControllerMappingProfiles, ShowControllerMappingsContent, true);
+            showAggregatedSimpleControllerMappingProfiles = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showAggregatedSimpleControllerMappingProfiles, ShowControllerMappingsContent);
 
             if (showAggregatedSimpleControllerMappingProfiles)
             {
@@ -186,13 +186,13 @@ namespace XRTK.Editor.Profiles.InputSystem
 
             serializedObject.ApplyModifiedProperties();
 
-            base.OnInspectorGUI();
-
             if (EditorGUI.EndChangeCheck() &&
                 MixedRealityToolkit.IsInitialized)
             {
                 EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
             }
+
+            base.OnInspectorGUI();
         }
     }
 }

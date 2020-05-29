@@ -3,7 +3,6 @@
 
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
@@ -46,8 +45,8 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         private const int RECOGNITION_FRAME_DELIMITER = 10;
-        private const float CURL_STRENGTH_DELTA_THRESHOLD = .3f;
-        private const float GRIP_STRENGTH_DELTA_THRESHOLD = .3f;
+        private const float CURL_STRENGTH_DELTA_THRESHOLD = .25f;
+        private const float GRIP_STRENGTH_DELTA_THRESHOLD = .2f;
 
         private readonly HandData[] bakedHandDatas;
         private readonly Dictionary<int, HandControllerPoseDefinition> definitions;
@@ -113,11 +112,6 @@ namespace XRTK.Providers.Controllers.Hands
                 {
                     LastTrackedPoseLeftHand = handData.TrackedPose;
                     passedFramesSinceRecognitionLeftHand = 0;
-                }
-
-                if (handData.TrackedPose != null)
-                {
-                    Debug.Log(handData.TrackedPose.Id);
                 }
             }
             else

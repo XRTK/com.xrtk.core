@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditorInternal;
@@ -27,6 +28,7 @@ namespace XRTK.Editor.Profiles
         private SerializedProperty platformEntries;
 
         private Type[] platforms = new Type[0];
+        private List<Tuple<bool, bool>> configListHeightFlags;
 
         protected override void OnEnable()
         {
@@ -37,14 +39,18 @@ namespace XRTK.Editor.Profiles
             UpdatePlatformList();
             Debug.Assert(configurations != null);
 
-            configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true)
+            configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true);
+            configListHeightFlags = new List<Tuple<bool, bool>>(configurations.arraySize);
+
+            for (int i = 0; i < configurations.arraySize; i++)
             {
-                elementHeight = EditorGUIUtility.singleLineHeight * 5.5f
-            };
+                configListHeightFlags.Add(new Tuple<bool, bool>(true, false));
+            }
 
             configurationList.drawElementCallback += DrawConfigurationOptionElement;
             configurationList.onAddCallback += OnConfigurationOptionAdded;
             configurationList.onRemoveCallback += OnConfigurationOptionRemoved;
+            configurationList.elementHeightCallback += ElementHeightCallback;
         }
 
         private void UpdatePlatformList()
@@ -110,6 +116,22 @@ namespace XRTK.Editor.Profiles
             serializedObject.ApplyModifiedProperties();
         }
 
+        private float ElementHeightCallback(int index)
+        {
+            if (configListHeightFlags.Count == 0)
+            {
+                return EditorGUIUtility.singleLineHeight;
+            }
+
+            var (isExpanded, hasProfile) = configListHeightFlags[index];
+            var modifier = isExpanded
+                ? hasProfile
+                    ? 5.5f
+                    : 4f
+                : 1.5f;
+            return EditorGUIUtility.singleLineHeight * modifier;
+        }
+
         private void DrawConfigurationOptionElement(Rect rect, int index, bool isActive, bool isFocused)
         {
             if (isFocused)
@@ -117,18 +139,7 @@ namespace XRTK.Editor.Profiles
                 currentlySelectedConfigurationOption = index;
             }
 
-            var lastMode = EditorGUIUtility.wideMode;
-            var prevLabelWidth = EditorGUIUtility.labelWidth;
-
-            EditorGUIUtility.labelWidth = prevLabelWidth - 18f;
-            EditorGUIUtility.wideMode = true;
-
-            var halfFieldHeight = EditorGUIUtility.singleLineHeight * 0.25f;
-
-            var nameRect = new Rect(rect.x, rect.y + halfFieldHeight, rect.width, EditorGUIUtility.singleLineHeight);
-            var typeRect = new Rect(rect.x, rect.y + halfFieldHeight * 6, rect.width, EditorGUIUtility.singleLineHeight);
-            var runtimeRect = new Rect(rect.x, rect.y + halfFieldHeight * 11, rect.width, EditorGUIUtility.singleLineHeight);
-            var profileRect = new Rect(rect.x, rect.y + halfFieldHeight * 16, rect.width, EditorGUIUtility.singleLineHeight);
+            serializedObject.Update();
 
             var configurationProperty = configurations.GetArrayElementAtIndex(index);
 
@@ -136,16 +147,34 @@ namespace XRTK.Editor.Profiles
             var priorityProperty = configurationProperty.FindPropertyRelative("priority");
             var instanceTypeProperty = configurationProperty.FindPropertyRelative("instancedType");
             var platformEntriesProperty = configurationProperty.FindPropertyRelative("platformEntries");
+            var globalRuntimePlatformProperty = platformEntries.FindPropertyRelative("runtimePlatforms");
+            var runtimePlatformProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
             var configurationProfileProperty = configurationProperty.FindPropertyRelative("profile");
-
-            priorityProperty.intValue = index;
-
-            EditorGUI.BeginChangeCheck();
-            EditorGUI.PropertyField(nameRect, nameProperty);
-            TypeReferencePropertyDrawer.FilterConstraintOverride = IsConstraintSatisfied;
-            TypeReferencePropertyDrawer.GroupingOverride = TypeGrouping.NoneByNameNoNamespace;
-            EditorGUI.PropertyField(typeRect, instanceTypeProperty);
             var systemTypeReference = new SystemType(instanceTypeProperty.FindPropertyRelative("reference").stringValue);
+
+            bool addPlatforms = false;
+
+            if (runtimePlatformProperty.arraySize != globalRuntimePlatformProperty.arraySize)
+            {
+                addPlatforms = true;
+                runtimePlatformProperty.ClearArray();
+            }
+
+            if (globalRuntimePlatformProperty.arraySize > 0)
+            {
+                for (int i = 0; i < globalRuntimePlatformProperty.arraySize; i++)
+                {
+                    if (addPlatforms)
+                    {
+                        runtimePlatformProperty.InsertArrayElementAtIndex(i);
+                    }
+
+                    var globalPlatform = globalRuntimePlatformProperty.GetArrayElementAtIndex(i).FindPropertyRelative("reference").stringValue;
+                    runtimePlatformProperty.GetArrayElementAtIndex(i).FindPropertyRelative("reference").stringValue = globalPlatform;
+                }
+            }
+
+            var hasProfile = false;
 
             Type profileType = null;
 
@@ -175,43 +204,63 @@ namespace XRTK.Editor.Profiles
 
                     if (profileType != null)
                     {
+                        hasProfile = true;
                         break;
                     }
                 }
             }
 
-            GUI.enabled = false;
-            var runtimePlatformProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
-            var globalRuntimePlatformProperty = platformEntries.FindPropertyRelative("runtimePlatforms");
-            bool addPlatforms = false;
+            priorityProperty.intValue = index;
 
-            if (runtimePlatformProperty.arraySize != globalRuntimePlatformProperty.arraySize)
-            {
-                addPlatforms = true;
-                runtimePlatformProperty.ClearArray();
-            }
+            var lastMode = EditorGUIUtility.wideMode;
+            var prevLabelWidth = EditorGUIUtility.labelWidth;
 
-            if (globalRuntimePlatformProperty.arraySize > 0)
+            EditorGUIUtility.labelWidth = prevLabelWidth - 18f;
+            EditorGUIUtility.wideMode = true;
+
+            var halfFieldHeight = EditorGUIUtility.singleLineHeight * 0.25f;
+
+            var rectX = rect.x + 12;
+            var rectWidth = rect.width - 12;
+            var nameRect = new Rect(rectX, rect.y + halfFieldHeight, rectWidth, EditorGUIUtility.singleLineHeight);
+            var typeRect = new Rect(rectX, rect.y + halfFieldHeight * 6, rectWidth, EditorGUIUtility.singleLineHeight);
+            var profileRect = new Rect(rectX, rect.y + halfFieldHeight * 11, rectWidth, EditorGUIUtility.singleLineHeight);
+            var runtimeRect = new Rect(rectX, rect.y + halfFieldHeight * (hasProfile ? 16 : 11), rectWidth, EditorGUIUtility.singleLineHeight);
+
+            EditorGUI.BeginChangeCheck();
+
+            if (configurationProperty.isExpanded)
             {
-                for (int i = 0; i < globalRuntimePlatformProperty.arraySize; i++)
+                EditorGUI.PropertyField(nameRect, nameProperty);
+                configurationProperty.isExpanded = EditorGUI.Foldout(nameRect, configurationProperty.isExpanded, GUIContent.none, true);
+
+                if (!configurationProperty.isExpanded)
                 {
-                    if (addPlatforms)
-                    {
-                        runtimePlatformProperty.InsertArrayElementAtIndex(i);
-                    }
-
-                    var globalPlatform = globalRuntimePlatformProperty.GetArrayElementAtIndex(i).FindPropertyRelative("reference").stringValue;
-                    runtimePlatformProperty.GetArrayElementAtIndex(i).FindPropertyRelative("reference").stringValue = globalPlatform;
+                    GUI.FocusControl(null);
                 }
             }
-
-            EditorGUI.PropertyField(runtimeRect, platformEntriesProperty);
-            GUI.enabled = true;
-
-            if (profileType != null)
+            else
             {
-                MixedRealityProfilePropertyDrawer.ProfileTypeOverride = profileType;
-                EditorGUI.PropertyField(profileRect, configurationProfileProperty, profileContent);
+                configurationProperty.isExpanded = EditorGUI.Foldout(nameRect, configurationProperty.isExpanded, nameProperty.stringValue, true);
+            }
+
+            if (configurationProperty.isExpanded)
+            {
+                TypeReferencePropertyDrawer.FilterConstraintOverride = IsConstraintSatisfied;
+                TypeReferencePropertyDrawer.GroupingOverride = TypeGrouping.NoneByNameNoNamespace;
+                EditorGUI.PropertyField(typeRect, instanceTypeProperty);
+                systemTypeReference = new SystemType(instanceTypeProperty.FindPropertyRelative("reference").stringValue);
+
+                GUI.enabled = false;
+
+                EditorGUI.PropertyField(runtimeRect, platformEntriesProperty);
+                GUI.enabled = true;
+
+                if (hasProfile)
+                {
+                    MixedRealityProfilePropertyDrawer.ProfileTypeOverride = profileType;
+                    EditorGUI.PropertyField(profileRect, configurationProfileProperty, profileContent);
+                }
             }
 
             if (configurationProfileProperty.objectReferenceValue != null)
@@ -231,7 +280,8 @@ namespace XRTK.Editor.Profiles
                 serializedObject.ApplyModifiedProperties();
 
                 if (MixedRealityToolkit.IsInitialized &&
-                    !string.IsNullOrEmpty(instanceTypeProperty.FindPropertyRelative("reference").stringValue))
+                    runtimePlatformProperty.arraySize > 0 &&
+                    systemTypeReference.Type != null)
                 {
                     MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
                 }
@@ -239,6 +289,7 @@ namespace XRTK.Editor.Profiles
 
             EditorGUIUtility.wideMode = lastMode;
             EditorGUIUtility.labelWidth = prevLabelWidth;
+            configListHeightFlags[index] = new Tuple<bool, bool>(configurationProperty.isExpanded, hasProfile);
         }
 
         private bool IsConstraintSatisfied(Type type)
@@ -263,7 +314,7 @@ namespace XRTK.Editor.Profiles
             var index = configurations.arraySize - 1;
 
             var configuration = configurations.GetArrayElementAtIndex(index);
-
+            configuration.isExpanded = true;
             var nameProperty = configuration.FindPropertyRelative("name");
             var priorityProperty = configuration.FindPropertyRelative("priority");
             var instancedTypeProperty = configuration.FindPropertyRelative("instancedType");
@@ -276,7 +327,7 @@ namespace XRTK.Editor.Profiles
             priorityProperty.intValue = index;
             runtimePlatformsProperty.ClearArray();
             configurationProfileProperty.objectReferenceValue = null;
-
+            configListHeightFlags.Add(new Tuple<bool, bool>(true, false));
             serializedObject.ApplyModifiedProperties();
         }
 

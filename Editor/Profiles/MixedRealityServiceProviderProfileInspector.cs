@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditorInternal;
@@ -10,7 +11,6 @@ using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.PropertyDrawers;
-using XRTK.Editor.Utilities;
 using XRTK.Extensions;
 using XRTK.Services;
 
@@ -35,6 +35,8 @@ namespace XRTK.Editor.Profiles
         /// </summary>
         protected Type ServiceConstraint { get; set; } = null;
 
+        private List<Tuple<bool, bool>> configListHeightFlags;
+
         protected override void OnEnable()
         {
             base.OnEnable();
@@ -49,14 +51,18 @@ namespace XRTK.Editor.Profiles
             ServiceConstraint = genericTypeArgs[0];
             Debug.Assert(ServiceConstraint != null);
 
-            configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true)
+            configurationList = new ReorderableList(serializedObject, configurations, true, false, true, true);
+            configListHeightFlags = new List<Tuple<bool, bool>>(configurations.arraySize);
+
+            for (int i = 0; i < configurations.arraySize; i++)
             {
-                elementHeight = EditorGUIUtility.singleLineHeight * 5.5f
-            };
+                configListHeightFlags.Add(new Tuple<bool, bool>(true, false));
+            }
 
             configurationList.drawElementCallback += DrawConfigurationOptionElement;
             configurationList.onAddCallback += OnConfigurationOptionAdded;
             configurationList.onRemoveCallback += OnConfigurationOptionRemoved;
+            configurationList.elementHeightCallback += ElementHeightCallback;
         }
 
         public override void OnInspectorGUI()
@@ -82,6 +88,22 @@ namespace XRTK.Editor.Profiles
             TypeReferencePropertyDrawer.CreateNewTypeOverride = null;
         }
 
+        private float ElementHeightCallback(int index)
+        {
+            if (configListHeightFlags.Count == 0)
+            {
+                return EditorGUIUtility.singleLineHeight;
+            }
+
+            var (isExpanded, hasProfile) = configListHeightFlags[index];
+            var modifier = isExpanded
+                ? hasProfile
+                    ? 5.5f
+                    : 4f
+                : 1.5f;
+            return EditorGUIUtility.singleLineHeight * modifier;
+        }
+
         private void DrawConfigurationOptionElement(Rect rect, int index, bool isActive, bool isFocused)
         {
             if (isFocused)
@@ -89,40 +111,19 @@ namespace XRTK.Editor.Profiles
                 currentlySelectedConfigurationOption = index;
             }
 
-            var lastMode = EditorGUIUtility.wideMode;
-            var prevLabelWidth = EditorGUIUtility.labelWidth;
-
-            EditorGUIUtility.labelWidth = prevLabelWidth - 18f;
-            EditorGUIUtility.wideMode = true;
-
-            var halfFieldHeight = EditorGUIUtility.singleLineHeight * 0.25f;
-
-            var nameRect = new Rect(rect.x, rect.y + halfFieldHeight, rect.width, EditorGUIUtility.singleLineHeight);
-            var typeRect = new Rect(rect.x, rect.y + halfFieldHeight * 6, rect.width, EditorGUIUtility.singleLineHeight);
-            var runtimeRect = new Rect(rect.x, rect.y + halfFieldHeight * 11, rect.width, EditorGUIUtility.singleLineHeight);
-            var profileRect = new Rect(rect.x, rect.y + halfFieldHeight * 16, rect.width, EditorGUIUtility.singleLineHeight);
+            serializedObject.Update();
 
             var configurationProperty = configurations.GetArrayElementAtIndex(index);
 
             var nameProperty = configurationProperty.FindPropertyRelative("name");
             var priorityProperty = configurationProperty.FindPropertyRelative("priority");
             var instanceTypeProperty = configurationProperty.FindPropertyRelative("instancedType");
+            var systemTypeReference = new SystemType(instanceTypeProperty.FindPropertyRelative("reference").stringValue);
             var platformEntriesProperty = configurationProperty.FindPropertyRelative("platformEntries");
+            var runtimePlatformProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
             var configurationProfileProperty = configurationProperty.FindPropertyRelative("profile");
 
-            priorityProperty.intValue = index;
-
-            EditorGUI.BeginChangeCheck();
-            EditorGUI.PropertyField(nameRect, nameProperty);
-
-            TypeReferencePropertyDrawer.FilterConstraintOverride = type =>
-            {
-                return !type.IsAbstract &&
-                       type.GetInterfaces().Any(interfaceType => interfaceType == ServiceConstraint);
-            };
-            TypeReferencePropertyDrawer.CreateNewTypeOverride = ServiceConstraint;
-            EditorGUI.PropertyField(typeRect, instanceTypeProperty);
-            var systemTypeReference = new SystemType(instanceTypeProperty.FindPropertyRelative("reference").stringValue);
+            var hasProfile = false;
 
             Type profileType = null;
 
@@ -152,28 +153,76 @@ namespace XRTK.Editor.Profiles
 
                     if (profileType != null)
                     {
+                        hasProfile = true;
                         break;
                     }
                 }
             }
 
-            EditorGUI.PropertyField(runtimeRect, platformEntriesProperty);
+            priorityProperty.intValue = index;
 
-            if (profileType != null)
+            var lastMode = EditorGUIUtility.wideMode;
+            var prevLabelWidth = EditorGUIUtility.labelWidth;
+
+            EditorGUIUtility.labelWidth = prevLabelWidth - 18f;
+            EditorGUIUtility.wideMode = true;
+
+            var halfFieldHeight = EditorGUIUtility.singleLineHeight * 0.25f;
+
+            var rectX = rect.x + 12;
+            var rectWidth = rect.width - 12;
+            var nameRect = new Rect(rectX, rect.y + halfFieldHeight, rectWidth, EditorGUIUtility.singleLineHeight);
+            var typeRect = new Rect(rectX, rect.y + halfFieldHeight * 6, rectWidth, EditorGUIUtility.singleLineHeight);
+            var profileRect = new Rect(rectX, rect.y + halfFieldHeight * 11, rectWidth, EditorGUIUtility.singleLineHeight);
+            var runtimeRect = new Rect(rectX, rect.y + halfFieldHeight * (hasProfile ? 16 : 11), rectWidth, EditorGUIUtility.singleLineHeight);
+
+            EditorGUI.BeginChangeCheck();
+
+            if (configurationProperty.isExpanded)
             {
-                MixedRealityProfilePropertyDrawer.ProfileTypeOverride = profileType;
-                EditorGUI.PropertyField(profileRect, configurationProfileProperty, profileContent);
+                EditorGUI.PropertyField(nameRect, nameProperty);
+                configurationProperty.isExpanded = EditorGUI.Foldout(nameRect, configurationProperty.isExpanded, GUIContent.none, true);
+
+                if (!configurationProperty.isExpanded)
+                {
+                    GUI.FocusControl(null);
+                }
+            }
+            else
+            {
+                configurationProperty.isExpanded = EditorGUI.Foldout(nameRect, configurationProperty.isExpanded, nameProperty.stringValue, true);
             }
 
-            if (configurationProfileProperty.objectReferenceValue != null)
+            if (configurationProperty.isExpanded)
             {
-                var renderedProfile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
-                Debug.Assert(renderedProfile != null);
-
-                if (renderedProfile.ParentProfile == null ||
-                    renderedProfile.ParentProfile != ThisProfile)
+                TypeReferencePropertyDrawer.FilterConstraintOverride = type =>
                 {
-                    renderedProfile.ParentProfile = ThisProfile;
+                    return !type.IsAbstract &&
+                           type.GetInterfaces().Any(interfaceType => interfaceType == ServiceConstraint);
+                };
+                TypeReferencePropertyDrawer.CreateNewTypeOverride = ServiceConstraint;
+                EditorGUI.PropertyField(typeRect, instanceTypeProperty);
+                systemTypeReference = new SystemType(instanceTypeProperty.FindPropertyRelative("reference").stringValue);
+
+                EditorGUI.PropertyField(runtimeRect, platformEntriesProperty);
+                runtimePlatformProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
+
+                if (hasProfile)
+                {
+                    MixedRealityProfilePropertyDrawer.ProfileTypeOverride = profileType;
+                    EditorGUI.PropertyField(profileRect, configurationProfileProperty, profileContent);
+                }
+
+                if (configurationProfileProperty.objectReferenceValue != null)
+                {
+                    var renderedProfile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
+                    Debug.Assert(renderedProfile != null);
+
+                    if (renderedProfile.ParentProfile == null ||
+                        renderedProfile.ParentProfile != ThisProfile)
+                    {
+                        renderedProfile.ParentProfile = ThisProfile;
+                    }
                 }
             }
 
@@ -182,7 +231,8 @@ namespace XRTK.Editor.Profiles
                 serializedObject.ApplyModifiedProperties();
 
                 if (MixedRealityToolkit.IsInitialized &&
-                    !string.IsNullOrEmpty(instanceTypeProperty.FindPropertyRelative("reference").stringValue))
+                    runtimePlatformProperty.arraySize > 0 &&
+                    systemTypeReference?.Type != null)
                 {
                     MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
                 }
@@ -190,6 +240,7 @@ namespace XRTK.Editor.Profiles
 
             EditorGUIUtility.wideMode = lastMode;
             EditorGUIUtility.labelWidth = prevLabelWidth;
+            configListHeightFlags[index] = new Tuple<bool, bool>(configurationProperty.isExpanded, hasProfile);
         }
 
         private void OnConfigurationOptionAdded(ReorderableList list)
@@ -198,7 +249,7 @@ namespace XRTK.Editor.Profiles
             var index = configurations.arraySize - 1;
 
             var configuration = configurations.GetArrayElementAtIndex(index);
-
+            configuration.isExpanded = true;
             var nameProperty = configuration.FindPropertyRelative("name");
             var priorityProperty = configuration.FindPropertyRelative("priority");
             var instancedTypeProperty = configuration.FindPropertyRelative("instancedType");
@@ -211,7 +262,7 @@ namespace XRTK.Editor.Profiles
             priorityProperty.intValue = index;
             runtimePlatformsProperty.ClearArray();
             configurationProfileProperty.objectReferenceValue = null;
-
+            configListHeightFlags.Add(new Tuple<bool, bool>(true, false));
             serializedObject.ApplyModifiedProperties();
         }
 
@@ -221,6 +272,8 @@ namespace XRTK.Editor.Profiles
             {
                 configurations.DeleteArrayElementAtIndex(currentlySelectedConfigurationOption);
             }
+
+            configListHeightFlags.RemoveAt(0);
 
             serializedObject.ApplyModifiedProperties();
 

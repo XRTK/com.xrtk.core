@@ -86,7 +86,7 @@ Advanced developers and those wishing to contribute to the Mixed Reality Toolkit
   ![Symbolic Link Context Menu](../images/DownloadingTheXRTK/SymbolicLinks.png)
 4. Using the symbolic link wizard, choose the source folder for the package you wish you replace with the editable version, and the target path for your project, then import the package.
   ![Symbolic Link Wizard](../images/DownloadingTheXRTK/SymbolicLinkWizard.png)
-    > <font color="yellow">**Important:**</font> It's strongly advised to use the `Packages` fodler as your target path for all symbolically linked packages.
+    > <font color="yellow">**Important:**</font> It's strongly advised to use the `Packages` folder as your target path for all symbolically linked packages.
 5. Repeat step 4 for each additoinal package you'd like to directly modify.
 
 This workflow works with any project using GIT and the symbolically linked folders can be customized to utilize any path availible under source control.

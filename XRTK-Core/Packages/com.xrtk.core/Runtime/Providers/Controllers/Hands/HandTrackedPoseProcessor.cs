@@ -30,10 +30,17 @@ namespace XRTK.Providers.Controllers.Hands
             var i = 0;
             foreach (var item in recognizablePoses)
             {
-                bakedHandDatas[i] = item.ToHandData();
-                definitions.Add(i, item);
+                if (item.DidBake)
+                {
+                    bakedHandDatas[i] = item.ToHandData();
+                    definitions.Add(i, item);
 
-                i++;
+                    i++;
+                }
+                else
+                {
+                    throw new ArgumentException($"Pose definition {item.Id} was not baked. Only baked poses are supported for recognition.");
+                }
             }
         }
 

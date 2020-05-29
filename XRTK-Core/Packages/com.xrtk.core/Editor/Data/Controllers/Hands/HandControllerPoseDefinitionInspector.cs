@@ -19,14 +19,19 @@ namespace XRTK.Editor.Data.Controllers.Hands
         private SerializedProperty isDefault;
         private SerializedProperty keyCode;
         private SerializedProperty data;
-        private SerializedProperty bakedHandData;
+
+        // Baked data.
+        private SerializedProperty didBake;
+        private SerializedProperty isGripping;
+        private SerializedProperty fingerCurlStrengths;
+        private SerializedProperty gripStrength;
 
         private static readonly GUIContent generalSettingsHeader = new GUIContent("General Settings");
         private static readonly GUIContent simulationSettingsHeader = new GUIContent("Simulation Settings");
         private static readonly GUIContent bakeSettingsHeader = new GUIContent("Bake Settings");
         private static readonly GUIContent debugHeader = new GUIContent("Debug");
-        private static readonly GUIContent bakeButtonContent = new GUIContent("Bake");
-        private bool bakeSettingsExpanded = true;
+        private static readonly GUIContent bakeButtonContent = new GUIContent("Generate Baked Data");
+        private static readonly GUIContent updateBakeButtonContent = new GUIContent("Update Baked Data");
         private bool debugExpanded = false;
 
         protected override void OnEnable()
@@ -38,7 +43,12 @@ namespace XRTK.Editor.Data.Controllers.Hands
             isDefault = serializedObject.FindProperty(nameof(isDefault));
             keyCode = serializedObject.FindProperty(nameof(keyCode));
             data = serializedObject.FindProperty(nameof(data));
-            bakedHandData = serializedObject.FindProperty(nameof(bakedHandData));
+
+            // Baked data.
+            didBake = serializedObject.FindProperty(nameof(didBake));
+            isGripping = serializedObject.FindProperty(nameof(isGripping));
+            fingerCurlStrengths = serializedObject.FindProperty(nameof(fingerCurlStrengths));
+            gripStrength = serializedObject.FindProperty(nameof(gripStrength));
         }
 
         public override void OnInspectorGUI()
@@ -72,25 +82,21 @@ namespace XRTK.Editor.Data.Controllers.Hands
                 EditorGUI.indentLevel--;
             }
 
-            serializedObject.ApplyModifiedProperties();
-
             EditorGUILayout.Space();
 
-            bakeSettingsExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(bakeSettingsExpanded, bakeSettingsHeader);
-            if (bakeSettingsExpanded)
+            didBake.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(didBake.isExpanded, bakeSettingsHeader);
+            if (didBake.isExpanded)
             {
-                var poseDefinition = target as HandControllerPoseDefinition;
-
-                EditorGUILayout.HelpBox($"In order for the pose to be recognized when running your application you need to bake it," +
-                    $" which will precompute important data and save performance.", MessageType.Info);
-                if (GUILayout.Button(bakeButtonContent))
+                if (!didBake.boolValue)
                 {
-                    BakePoseData(poseDefinition);
+                    EditorGUILayout.HelpBox($"This hand pose hasn't been baked yet. In order for the pose to be recognized when running your application you need to bake it," +
+                    $" which will precompute important data and save performance.", MessageType.Warning);
                 }
 
-                var empty = poseDefinition.BakedHandData.IsEmpty;
-                var status = poseDefinition.BakedHandData != null && !empty ? "Complete" : "Not baked";
-                EditorGUILayout.LabelField($"Bake Status: {status}");
+                if (GUILayout.Button(didBake.boolValue ? updateBakeButtonContent : bakeButtonContent))
+                {
+                    BakePoseData();
+                }
             }
 
             EditorGUILayout.Space();
@@ -100,15 +106,15 @@ namespace XRTK.Editor.Data.Controllers.Hands
             {
                 EditorGUI.indentLevel++;
 
-                if (target is HandControllerPoseDefinition poseDefinition && poseDefinition.BakedHandData != null && !poseDefinition.BakedHandData.IsEmpty)
+                if (didBake.boolValue)
                 {
-                    EditorGUILayout.LabelField($"Baked Grip Strength:\t\t{poseDefinition.BakedHandData.GripStrength}");
-                    EditorGUILayout.LabelField($"Baked Thumb Curl:\t\t{poseDefinition.BakedHandData.FingerCurlStrengths[(int)HandFinger.Thumb]}");
-                    EditorGUILayout.LabelField($"Baked Index Curl:\t\t{poseDefinition.BakedHandData.FingerCurlStrengths[(int)HandFinger.Index]}");
-                    EditorGUILayout.LabelField($"Baked Middle Curl:\t\t{poseDefinition.BakedHandData.FingerCurlStrengths[(int)HandFinger.Middle]}");
-                    EditorGUILayout.LabelField($"Baked Ring Curl:\t\t{poseDefinition.BakedHandData.FingerCurlStrengths[(int)HandFinger.Ring]}");
-                    EditorGUILayout.LabelField($"Baked Little Curl:\t\t{poseDefinition.BakedHandData.FingerCurlStrengths[(int)HandFinger.Little]}");
-                    EditorGUILayout.LabelField($"Baked Is Gripping:\t\t{poseDefinition.BakedHandData.IsGripping}");
+                    EditorGUILayout.LabelField($"Baked Is Gripping:\t\t{isGripping.boolValue}");
+                    EditorGUILayout.LabelField($"Baked Grip Strength:\t\t{gripStrength.floatValue}");
+                    EditorGUILayout.LabelField($"Baked Thumb Curl:\t\t{fingerCurlStrengths.GetArrayElementAtIndex((int)HandFinger.Thumb).floatValue}");
+                    EditorGUILayout.LabelField($"Baked Index Curl:\t\t{fingerCurlStrengths.GetArrayElementAtIndex((int)HandFinger.Index).floatValue}");
+                    EditorGUILayout.LabelField($"Baked Middle Curl:\t\t{fingerCurlStrengths.GetArrayElementAtIndex((int)HandFinger.Middle).floatValue}");
+                    EditorGUILayout.LabelField($"Baked Ring Curl:\t\t{fingerCurlStrengths.GetArrayElementAtIndex((int)HandFinger.Ring).floatValue}");
+                    EditorGUILayout.LabelField($"Baked Little Curl:\t\t{fingerCurlStrengths.GetArrayElementAtIndex((int)HandFinger.Little).floatValue}");
                 }
                 else
                 {
@@ -117,25 +123,36 @@ namespace XRTK.Editor.Data.Controllers.Hands
 
                 EditorGUI.indentLevel--;
             }
+
+            serializedObject.ApplyModifiedProperties();
         }
 
-        private void BakePoseData(HandControllerPoseDefinition poseDefinition)
+        private void BakePoseData()
         {
             // Initialize the hand data using the joint information from the recorded pose.
+            var poseDefinition = target as HandControllerPoseDefinition;
             var handData = poseDefinition.ToHandData();
 
             // Intialize processors needed.
             var gripPostProcessor = new HandGripPostProcessor();
 
-            // Process the hand data.
+            // Process the hand data, most hand data processors
+            // will ignore the hand data if it is not tracked, so we
+            // have to temporarily fake it's tracking state and then reset it.
             handData.IsTracked = true;
             gripPostProcessor.Process(handData);
             handData.IsTracked = false;
 
-            // Save the baked hand data to the asset.
-            serializedObject.Update();
-            poseDefinition.BakedHandData = handData;
-            serializedObject.ApplyModifiedProperties();
+            isGripping.boolValue = handData.IsGripping;
+            gripStrength.floatValue = handData.GripStrength;
+            fingerCurlStrengths.ClearArray();
+            fingerCurlStrengths.arraySize = handData.FingerCurlStrengths.Length;
+            for (int i = 0; i < handData.FingerCurlStrengths.Length; i++)
+            {
+                fingerCurlStrengths.GetArrayElementAtIndex(i).floatValue = handData.FingerCurlStrengths[i];
+            }
+
+            didBake.boolValue = true;
         }
     }
 }

@@ -58,17 +58,44 @@ namespace XRTK.Definitions.Controllers.Hands
         /// </summary>
         public TextAsset Data => data;
 
+        #region Baked Hand Data
+
         [SerializeField]
-        [Tooltip("The precomputed / baked hand data of the pose.")]
-        private HandData bakedHandData = null;
+        [Tooltip("Was the data for this pose definition baked?")]
+        private bool didBake = false;
 
         /// <summary>
-        /// Gets or sets the precomputed / baked hand data of the pose.
+        /// Was the data for this pose definition baked?
         /// </summary>
-        public HandData BakedHandData
-        {
-            get => bakedHandData;
-            set => bakedHandData = value;
-        }
+        public bool DidBake => didBake;
+
+        [SerializeField]
+        [Tooltip("Is the hand currently in a gripping pose?")]
+        private bool isGripping = false;
+
+        /// <summary>
+        /// Is the hand currently in a gripping pose?
+        /// </summary>
+        public bool IsGripping => isGripping;
+
+        [SerializeField]
+        [Tooltip("Finger curling values per hand finger.")]
+        private float[] fingerCurlStrengths = new float[] { 0, 0, 0, 0, 0 };
+
+        /// <summary>
+        /// Finger curling values per hand finger.
+        /// </summary>
+        public float[] FingerCurlStrengths => fingerCurlStrengths;
+
+        [SerializeField]
+        [Tooltip("What's the grip strength of the hand?")]
+        private float gripStrength = 0f;
+
+        /// <summary>
+        /// What's the grip strength of the hand?
+        /// </summary>
+        public float GripStrength => gripStrength;
+
+        #endregion Baked Hand Data
     }
 }

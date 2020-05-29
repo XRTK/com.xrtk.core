@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 
@@ -27,6 +28,11 @@ namespace XRTK.Extensions
                 var jointRecord = recordedHandData.Joints[j];
                 handData.Joints[(int)jointRecord.Joint] = jointRecord.Pose;
             }
+
+            handData.IsGripping = pose.IsGripping;
+            handData.GripStrength = pose.GripStrength;
+            handData.FingerCurlStrengths = new float[pose.FingerCurlStrengths.Length];
+            Array.Copy(pose.FingerCurlStrengths, handData.FingerCurlStrengths, pose.FingerCurlStrengths.Length);
 
             return handData;
         }

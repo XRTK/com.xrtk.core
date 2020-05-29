@@ -3,6 +3,7 @@
 
 using System.Collections;
 using UnityEngine;
+using XRTK.Definitions;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Physics;
 using XRTK.Interfaces.InputSystem.Handlers;
@@ -51,6 +52,11 @@ namespace XRTK.Interfaces.InputSystem
         /// The currently active teleport hotspot.
         /// </summary>
         IMixedRealityTeleportHotSpot TeleportHotSpot { get; set; }
+
+        /// <summary>
+        /// The <see cref="InteractionMode"/> for this pointer.
+        /// </summary>
+        InteractionMode InteractionMode { get; }
 
         /// <summary>
         /// The <see cref="Collider"/> used for determining and raising near interactions.

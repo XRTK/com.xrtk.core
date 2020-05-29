@@ -1,9 +1,10 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections.Generic;
+using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
-using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 
 namespace XRTK.Providers.Controllers.Hands
@@ -23,31 +24,31 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="recognizablePoses">Recognizable poses by this recognizer.</param>
         public HandTrackedPoseProcessor(IReadOnlyList<HandControllerPoseDefinition> recognizablePoses)
         {
-            poseHandDatas = new HandData[recognizablePoses.Count];
-            poseDefinitions = new Dictionary<int, HandControllerPoseDefinition>();
+            bakedHandDatas = new HandData[recognizablePoses.Count];
+            definitions = new Dictionary<int, HandControllerPoseDefinition>();
 
             var i = 0;
             foreach (var item in recognizablePoses)
             {
-                poseHandDatas[i] = item.ToHandData();
-                poseDefinitions.Add(i, item);
+                bakedHandDatas[i] = item.ToHandData();
+                definitions.Add(i, item);
 
                 i++;
             }
         }
 
         private const int RECOGNITION_FRAME_DELIMITER = 10;
-        private const float POSITION_DELTA_SQR_MAGNITUDE_THRESHOLD = .01f;
-        private const float ROTATION_DELTA_ANGLE_THRESHOLD = 2f;
+        private const float CURL_STRENGTH_DELTA_THRESHOLD = .01f;
+        private const float GRIP_STRENGTH_DELTA_THRESHOLD = .02f;
 
-        private readonly HandData[] poseHandDatas;
-        private readonly Dictionary<int, HandControllerPoseDefinition> poseDefinitions;
+        private readonly HandData[] bakedHandDatas;
+        private readonly Dictionary<int, HandControllerPoseDefinition> definitions;
         private int passedFramesSinceRecognition = 0;
 
         /// <summary>
         /// Attempts to recognize a hand pose.
         /// </summary>
-        /// <param name="handData">The hand data to use for recognition.</param>
+        /// <param name="handData">The hand data to compare against.</param>
         public void Process(HandData handData)
         {
             if (handData.IsTracked)
@@ -64,16 +65,15 @@ namespace XRTK.Providers.Controllers.Hands
                 var currentHighestProbability = 0f;
                 HandControllerPoseDefinition recognizedPose = null;
 
-                for (int i = 0; i < poseHandDatas.Length; i++)
+                for (int i = 0; i < bakedHandDatas.Length; i++)
                 {
-                    var recordedData = poseHandDatas[i];
-                    var probability = Compare(handData.Handedness, recordedData.Joints, handData.Joints);
+                    var bakedHandData = bakedHandDatas[i];
+                    var probability = Compare(handData, bakedHandData);
 
-                    //Debug.Log($"{poseDefinitions[i].Id} | {probability}");
                     if (probability > currentHighestProbability)
                     {
                         currentHighestProbability = probability;
-                        recognizedPose = poseDefinitions[i];
+                        recognizedPose = definitions[i];
                     }
                 }
 
@@ -81,7 +81,7 @@ namespace XRTK.Providers.Controllers.Hands
 
                 if (handData.TrackedPose != null)
                 {
-                    //Debug.Log(handData.TrackedPose.Id);
+                    Debug.Log(handData.TrackedPose.Id);
                 }
             }
             else
@@ -92,43 +92,61 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        private static float Compare(Handedness handedness, MixedRealityPose[] recordedJointPoses, MixedRealityPose[] runtimeJointPoses)
+        private static float Compare(HandData runtimeHandData, HandData bakedHandData)
         {
-            // Variable keeps count of how many joint poses have passed
-            // the test for equality.
-            var passed = 0;
+            const int totalTests = 6;
+            var passedTests = 0;
 
-            for (int i = 0; i < HandData.JointCount; i++)
+            // If the gripping states are not the same it is very unlikely
+            // poses are the same so we can quit right away.
+            if (runtimeHandData.IsGripping == bakedHandData.IsGripping)
             {
-                var recordedJointPose = recordedJointPoses[i];
-                var recordedJointPosition = recordedJointPose.Position;
-                var recordedJointRotation = recordedJointPose.Rotation;
-
-                // Recorded poses are for right hand, mirror on X axis if left hand is given.
-                if (handedness == Handedness.Left)
+                var runtimeGripStrength = runtimeHandData.GripStrength;
+                var bakedGripStrength = bakedHandData.GripStrength;
+                if (Math.Abs(runtimeGripStrength - bakedGripStrength) <= GRIP_STRENGTH_DELTA_THRESHOLD)
                 {
-                    recordedJointPosition.x = -recordedJointPosition.x;
-                    recordedJointRotation.y = -recordedJointRotation.y;
-                    recordedJointRotation.z = -recordedJointRotation.z;
+                    passedTests++;
                 }
 
-                var runtimeJointPose = runtimeJointPoses[i];
-                var runtimeJointPosition = runtimeJointPose.Position;
-                var runtimeJointRotation = runtimeJointPose.Rotation;
-                var deltaPosition = (runtimeJointPosition - recordedJointPosition).sqrMagnitude;
-
-                // If the delta is below threshold we consider the joint
-                // test passed.
-                if (deltaPosition < POSITION_DELTA_SQR_MAGNITUDE_THRESHOLD &&
-                    runtimeJointRotation.Approximately(recordedJointRotation, ROTATION_DELTA_ANGLE_THRESHOLD))
+                var runtimeThumbCurl = runtimeHandData.FingerCurlStrengths[(int)HandFinger.Thumb];
+                var bakedThumbCurl = bakedHandData.FingerCurlStrengths[(int)HandFinger.Thumb];
+                if (Math.Abs(runtimeThumbCurl - bakedThumbCurl) <= CURL_STRENGTH_DELTA_THRESHOLD)
                 {
-                    passed++;
+                    passedTests++;
+                }
+
+                var runtimeIndexCurl = runtimeHandData.FingerCurlStrengths[(int)HandFinger.Index];
+                var bakedIndexCurl = bakedHandData.FingerCurlStrengths[(int)HandFinger.Index];
+                if (Math.Abs(runtimeIndexCurl - bakedIndexCurl) <= CURL_STRENGTH_DELTA_THRESHOLD)
+                {
+                    passedTests++;
+                }
+
+                var runtimeMiddleCurl = runtimeHandData.FingerCurlStrengths[(int)HandFinger.Middle];
+                var bakedMiddleCurl = bakedHandData.FingerCurlStrengths[(int)HandFinger.Middle];
+                if (Math.Abs(runtimeMiddleCurl - bakedMiddleCurl) <= CURL_STRENGTH_DELTA_THRESHOLD)
+                {
+                    passedTests++;
+                }
+
+                var runtimeRingCurl = runtimeHandData.FingerCurlStrengths[(int)HandFinger.Ring];
+                var bakedRingCurl = bakedHandData.FingerCurlStrengths[(int)HandFinger.Ring];
+                if (Math.Abs(runtimeRingCurl - bakedRingCurl) <= CURL_STRENGTH_DELTA_THRESHOLD)
+                {
+                    passedTests++;
+                }
+
+                var runtimeLittleCurl = runtimeHandData.FingerCurlStrengths[(int)HandFinger.Little];
+                var bakedLittleCurl = bakedHandData.FingerCurlStrengths[(int)HandFinger.Little];
+                if (Math.Abs(runtimeLittleCurl - bakedLittleCurl) <= CURL_STRENGTH_DELTA_THRESHOLD)
+                {
+                    passedTests++;
                 }
             }
 
-            // The more joints have passed the test, the more likely it is
+            // The more tests have passed, the more likely it is
             // the poses are the same.
-            return passed / (float)HandData.JointCount;
+            return passedTests / totalTests;
         }
     }
 }

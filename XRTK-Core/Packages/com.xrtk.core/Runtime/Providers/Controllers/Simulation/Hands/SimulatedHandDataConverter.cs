@@ -129,7 +129,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public HandData GetSimulatedHandData(Vector3 position, Vector3 deltaRotation)
         {
             HandData.PointerPose = MixedRealityPose.ZeroIdentity;
-            HandData.Handedness = handedness;
 
             // Read keyboard / mouse input to determine the root pose delta since last frame.
             var rootPoseDelta = new MixedRealityPose(position, Quaternion.Euler(deltaRotation));

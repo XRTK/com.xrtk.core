@@ -18,7 +18,6 @@ namespace XRTK.Definitions.Controllers.Hands
         {
             UpdatedAt = long.MinValue;
             IsTracked = false;
-            Handedness = Handedness.None;
             PinchStrength = 0;
             GripStrength = 0;
             PointerPose = MixedRealityPose.ZeroIdentity;
@@ -52,11 +51,6 @@ namespace XRTK.Definitions.Controllers.Hands
         /// Is the hand currently being tracked by the system?
         /// </summary>
         public bool IsTracked { get; set; }
-
-        /// <summary>
-        /// The handedness of the hand the data belongs to.
-        /// </summary>
-        public Handedness Handedness { get; set; }
 
         /// <summary>
         /// Is the hand currently in a pinch pose?

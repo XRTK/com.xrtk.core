@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Extensions;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Services;
@@ -19,12 +20,12 @@ namespace XRTK.Providers.SpatialObservers
         protected BaseMixedRealitySpatialSurfaceObserver(string name, uint priority, BaseMixedRealitySurfaceObserverProfile profile, IMixedRealitySpatialAwarenessSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            if (profile == null)
+            if (profile.IsNull())
             {
                 profile = MixedRealityToolkit.Instance.ActiveProfile.SpatialAwarenessProfile.GlobalSurfaceObserverProfile;
             }
 
-            if (profile == null)
+            if (profile.IsNull())
             {
                 throw new ArgumentNullException($"Missing a {profile.GetType().Name} profile for {name}");
             }

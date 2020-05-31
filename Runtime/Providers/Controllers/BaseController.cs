@@ -9,6 +9,7 @@ using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
@@ -53,7 +54,7 @@ namespace XRTK.Providers.Controllers
 
             Name = $"{handednessPrefix}{GetType().Name}";
 
-            if (controllerMappingProfile == null)
+            if (controllerMappingProfile.IsNull())
             {
                 throw new Exception($"{nameof(controllerMappingProfile)} cannot be null for {Name}");
             }
@@ -195,7 +196,7 @@ namespace XRTK.Providers.Controllers
         /// <param name="useAlternatePoseAction">Should the visualizer be assigned the alternate pose actions?</param>
         public async Task TryRenderControllerModelAsync(byte[] glbData = null, bool useAlternatePoseAction = false)
         {
-            if (visualizationProfile == null)
+            if (visualizationProfile.IsNull())
             {
                 Debug.LogWarning($"Missing {nameof(visualizationProfile)} for {GetType().Name}");
                 return;
@@ -214,21 +215,21 @@ namespace XRTK.Providers.Controllers
 
             // If we didn't get an override model, and we didn't load the driver model,
             // then get the global controller model for each hand.
-            if (controllerModel == null)
+            if (controllerModel.IsNull())
             {
                 switch (ControllerHandedness)
                 {
-                    case Handedness.Left when visualizationProfile.LeftHandModel != null:
+                    case Handedness.Left when !visualizationProfile.LeftHandModel.IsNull():
                         controllerModel = visualizationProfile.LeftHandModel;
                         break;
-                    case Handedness.Right when visualizationProfile.LeftHandModel != null:
+                    case Handedness.Right when !visualizationProfile.LeftHandModel.IsNull():
                         controllerModel = visualizationProfile.LeftHandModel;
                         break;
                 }
             }
 
             // If we've got a controller model, then place it in the scene and get/attach the visualizer.
-            if (controllerModel != null)
+            if (!controllerModel.IsNull())
             {
                 var playspaceTransform = MixedRealityToolkit.CameraSystem != null
                     ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform

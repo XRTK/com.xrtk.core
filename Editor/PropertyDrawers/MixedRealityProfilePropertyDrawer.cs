@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Editor.Utilities;
+using XRTK.Extensions;
 using XRTK.Services;
 
 namespace XRTK.Editor.PropertyDrawers
@@ -30,11 +31,11 @@ namespace XRTK.Editor.PropertyDrawers
         {
             BaseMixedRealityProfile profile = null;
 
-            if (parent == null)
+            if (parent.IsNull())
             {
                 parent = ParentProfileOverride;
 
-                if (parent == null)
+                if (parent.IsNull())
                 {
                     if (Selection.activeObject.name.Equals(nameof(MixedRealityToolkit)))
                     {
@@ -49,14 +50,15 @@ namespace XRTK.Editor.PropertyDrawers
                 ParentProfileOverride = null;
             }
 
-            if (property.objectReferenceValue != null)
+            if (!property.objectReferenceValue.IsNull())
             {
                 profile = property.objectReferenceValue as BaseMixedRealityProfile;
             }
 
-            if (profile != null)
+            if (!profile.IsNull())
             {
-                if (profile is MixedRealityToolkitRootProfile && parent != null)
+                if (profile is MixedRealityToolkitRootProfile &&
+                    !parent.IsNull())
                 {
                     profile.ParentProfile = null;
                 }
@@ -85,14 +87,14 @@ namespace XRTK.Editor.PropertyDrawers
                 if (!(selectedProfile is null) &&
                     !(selectedProfile is MixedRealityToolkitRootProfile))
                 {
-                    Debug.Assert(parent != null, $"Failed to find a valid parent profile for {selectedProfile.name}");
+                    Debug.Assert(!parent.IsNull(), $"Failed to find a valid parent profile for {selectedProfile.name}");
                     selectedProfile.ParentProfile = parent;
                 }
             }
 
             if (DrawCloneButtons)
             {
-                hasSelection = selectedProfile != null;
+                hasSelection = !selectedProfile.IsNull();
                 var buttonContent = hasSelection ? CloneProfileContent : NewProfileContent;
                 var buttonRect = new Rect(objectRect.xMax + BUTTON_PADDING, position.y, buttonWidth, position.height);
 
@@ -105,7 +107,7 @@ namespace XRTK.Editor.PropertyDrawers
             if (!(selectedProfile is null) &&
                 !(selectedProfile is MixedRealityToolkitRootProfile))
             {
-                if (selectedProfile.ParentProfile == null ||
+                if (selectedProfile.ParentProfile.IsNull() ||
                     selectedProfile.ParentProfile != parent)
                 {
                     if (parent != null &&
@@ -115,7 +117,7 @@ namespace XRTK.Editor.PropertyDrawers
                     }
                 }
 
-                Debug.Assert(selectedProfile.ParentProfile != null);
+                Debug.Assert(!selectedProfile.ParentProfile.IsNull());
                 Debug.Assert(selectedProfile.ParentProfile != selectedProfile);
             }
 

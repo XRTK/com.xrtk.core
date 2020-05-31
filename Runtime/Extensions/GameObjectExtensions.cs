@@ -33,11 +33,6 @@ namespace XRTK.Extensions
         /// <param name="layer">The layer to apply</param>
         public static void SetLayerRecursively(this GameObject root, int layer)
         {
-            if (root == null)
-            {
-                throw new ArgumentNullException(nameof(root), "Root transform can't be null.");
-            }
-
             foreach (var child in root.transform.EnumerateHierarchy())
             {
                 child.gameObject.layer = layer;
@@ -53,8 +48,6 @@ namespace XRTK.Extensions
         /// <exception cref="T:System.ArgumentNullException"><paramref name="root"/> is <see langword="null"/></exception>
         public static void SetLayerRecursively(this GameObject root, int layer, out Dictionary<GameObject, int> cache)
         {
-            if (root == null) { throw new ArgumentNullException(nameof(root)); }
-
             cache = new Dictionary<GameObject, int>();
 
             foreach (var child in root.transform.EnumerateHierarchy())
@@ -241,7 +234,7 @@ namespace XRTK.Extensions
         public static T GetOrAddComponent<T>(this GameObject gameObject) where T : Component
         {
             T component = gameObject.GetComponent<T>();
-            return component != null ? component : gameObject.AddComponent<T>();
+            return component.IsNull() ? gameObject.AddComponent<T>() : component;
         }
     }
 }

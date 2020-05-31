@@ -531,18 +531,7 @@ namespace XRTK.Services.InputSystem
         public override void Destroy()
         {
             base.Destroy();
-
-            if (uiRaycastCamera != null)
-            {
-                if (Application.isEditor)
-                {
-                    UnityEngine.Object.DestroyImmediate(uiRaycastCamera.gameObject);
-                }
-                else
-                {
-                    UnityEngine.Object.Destroy(uiRaycastCamera.gameObject);
-                }
-            }
+            uiRaycastCamera.Destroy();
         }
 
         #endregion IMixedRealityService Implementation

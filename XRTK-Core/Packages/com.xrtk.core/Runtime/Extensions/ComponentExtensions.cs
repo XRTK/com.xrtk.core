@@ -49,7 +49,7 @@ namespace XRTK.Extensions
         public static T EnsureComponent<T>(this GameObject gameObject) where T : Component
         {
             T foundComponent = gameObject.GetComponent<T>();
-            return foundComponent == null ? gameObject.AddComponent<T>() : foundComponent;
+            return foundComponent.IsNull() ? gameObject.AddComponent<T>() : foundComponent;
         }
 
         /// <summary>
@@ -62,7 +62,7 @@ namespace XRTK.Extensions
         public static Component EnsureComponent(this GameObject gameObject, Type component)
         {
             var foundComponent = gameObject.GetComponent(component);
-            return foundComponent == null ? gameObject.AddComponent(component) : foundComponent;
+            return foundComponent.IsNull() ? gameObject.AddComponent(component) : foundComponent;
         }
     }
 }

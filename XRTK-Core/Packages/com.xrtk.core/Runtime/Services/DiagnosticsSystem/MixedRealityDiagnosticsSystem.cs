@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 using XRTK.Definitions.DiagnosticsSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.DiagnosticsSystem;
+using XRTK.Extensions;
 using XRTK.Interfaces.DiagnosticsSystem;
 using XRTK.Interfaces.DiagnosticsSystem.Handlers;
 using XRTK.Utilities;
@@ -74,24 +75,13 @@ namespace XRTK.Services.DiagnosticsSystem
         {
             base.Disable();
 
-            if (!Application.isPlaying)
-            {
-                return;
-            }
+            if (!Application.isPlaying) { return; }
 
             if (diagnosticsWindow != null)
             {
                 Unregister(diagnosticsWindow);
-
-                if (Application.isEditor)
-                {
-                    Object.DestroyImmediate(diagnosticsWindow);
-                }
-                else
-                {
-                    Object.Destroy(diagnosticsWindow);
-                }
             }
+
         }
 
         /// <inheritdoc />
@@ -99,16 +89,12 @@ namespace XRTK.Services.DiagnosticsSystem
         {
             base.Destroy();
 
-            if (diagnosticsRoot != null)
+            diagnosticsWindow.Destroy();
+
+            if (!diagnosticsRoot.IsNull() &&
+                !diagnosticsRoot.gameObject.IsNull())
             {
-                if (Application.isEditor)
-                {
-                    Object.DestroyImmediate(diagnosticsRoot.gameObject);
-                }
-                else
-                {
-                    Object.Destroy(diagnosticsRoot.gameObject);
-                }
+                diagnosticsRoot.gameObject.Destroy();
             }
         }
 
@@ -123,7 +109,7 @@ namespace XRTK.Services.DiagnosticsSystem
         {
             get
             {
-                if (diagnosticsRoot == null)
+                if (diagnosticsRoot.IsNull())
                 {
                     diagnosticsRoot = new GameObject("Diagnostics").transform;
                     var playspaceTransform = MixedRealityToolkit.CameraSystem != null
@@ -143,7 +129,7 @@ namespace XRTK.Services.DiagnosticsSystem
         {
             get
             {
-                if (diagnosticsWindow == null)
+                if (diagnosticsWindow.IsNull())
                 {
                     diagnosticsWindow = Object.Instantiate(profile.DiagnosticsWindowPrefab, DiagnosticsRoot);
                     Register(diagnosticsWindow);

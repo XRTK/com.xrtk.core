@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEditor.Compilation;
 using UnityEditorInternal;
 using UnityEngine;
+using XRTK.Extensions;
 
 namespace XRTK.Editor.Utilities
 {
@@ -63,7 +64,7 @@ namespace XRTK.Editor.Utilities
         [MenuItem("CONTEXT/AssemblyDefinitionImporter/Replace Source with Assembly", true, 99)]
         public static bool ReplaceWithAssemblyValidation()
         {
-            if (Selection.activeObject == null) { return false; }
+            if (Selection.activeObject.IsNull()) { return false; }
             return !AssetDatabase.GetAssetPath(Selection.activeObject).GetAssetPathSiblings().Any(path => path.Contains(DLL));
         }
 
@@ -204,7 +205,7 @@ namespace XRTK.Editor.Utilities
         [MenuItem("CONTEXT/AssemblyDefinitionImporter/Replace Assembly with Source", true, 99)]
         public static bool ReplaceWithSourceValidation()
         {
-            if (Selection.activeObject == null) { return false; }
+            if (Selection.activeObject.IsNull()) { return false; }
 
             string assetPath = AssetDatabase.GetAssetPath(Selection.activeObject);
             return assetPath.GetAssetPathSiblings().Any(path => assetPath.Contains(DLL) && path.Contains(ASMDEF) || assetPath.Contains(ASMDEF) && path.Contains(DLL));

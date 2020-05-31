@@ -4,6 +4,7 @@
 using System;
 using UnityEngine.EventSystems;
 using XRTK.Definitions.InputSystem;
+using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 
 namespace XRTK.EventDatum.Input
@@ -42,7 +43,7 @@ namespace XRTK.EventDatum.Input
         /// <param name="eventSystem">Typically will be <see cref="EventSystem.current"/></param>
         protected BaseInputEventData(EventSystem eventSystem) : base(eventSystem)
         {
-            if (eventSystem == null)
+            if (eventSystem.IsNull())
             {
                 throw new Exception($"{nameof(EventSystem)} cannot be null!");
             }

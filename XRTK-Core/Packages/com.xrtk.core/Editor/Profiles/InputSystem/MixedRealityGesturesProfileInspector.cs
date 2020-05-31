@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
+using XRTK.Extensions;
 
 namespace XRTK.Editor.Profiles.InputSystem
 {
@@ -80,13 +81,13 @@ namespace XRTK.Editor.Profiles.InputSystem
         {
             RenderHeader("This gesture map is any and all movements of part the user's body, especially a hand or the head, that raise actions through the input system.\n\nNote: Defined controllers can look up the list of gestures and raise the events based on specific criteria.");
 
-            if (inputSystemProfile == null)
+            if (inputSystemProfile.IsNull())
             {
                 EditorGUILayout.HelpBox("No input system profile found, please specify a input system profile in the main configuration.", MessageType.Error);
                 return;
             }
 
-            if (inputSystemProfile.InputActionsProfile == null)
+            if (inputSystemProfile.InputActionsProfile.IsNull())
             {
                 EditorGUILayout.HelpBox("No input actions found, please specify a input action profile in the main configuration.", MessageType.Error);
                 return;

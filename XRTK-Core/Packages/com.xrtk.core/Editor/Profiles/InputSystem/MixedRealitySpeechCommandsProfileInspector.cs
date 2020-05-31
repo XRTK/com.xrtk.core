@@ -5,6 +5,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.InputSystem;
+using XRTK.Extensions;
 
 namespace XRTK.Editor.Profiles.InputSystem
 {
@@ -30,7 +31,7 @@ namespace XRTK.Editor.Profiles.InputSystem
 
             inputSystemProfile = ThisProfile.ParentProfile as MixedRealityInputSystemProfile;
 
-            if (inputSystemProfile == null ||
+            if (inputSystemProfile.IsNull() ||
                 inputSystemProfile.InputActionsProfile == null)
             {
                 return;
@@ -47,13 +48,13 @@ namespace XRTK.Editor.Profiles.InputSystem
         {
             RenderHeader("Speech Commands are any/all spoken keywords your users will be able say to raise an Input Action in your application.");
 
-            if (inputSystemProfile == null)
+            if (inputSystemProfile.IsNull())
             {
                 EditorGUILayout.HelpBox("No input system profile found, please specify an input system profile in the main configuration profile.", MessageType.Error);
                 return;
             }
 
-            if (inputSystemProfile.InputActionsProfile == null)
+            if (inputSystemProfile.InputActionsProfile.IsNull())
             {
                 EditorGUILayout.HelpBox("No input actions found, please specify a input action profile in the input system profile.", MessageType.Error);
                 return;

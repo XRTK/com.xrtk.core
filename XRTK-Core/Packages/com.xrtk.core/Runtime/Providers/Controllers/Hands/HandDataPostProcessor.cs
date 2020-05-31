@@ -115,19 +115,16 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The hand data to update <see cref="HandData.IsPointing"/> for.</param>
         private void UpdateIsPointing(HandData handData)
         {
-            if (handData.IsTracked && !handData.IsPinching)
+            if (handData.IsTracked && !PlatformProvidesIsPointing)
             {
-                if (!PlatformProvidesIsPointing)
-                {
-                    var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
-                    var cameraTransform = MixedRealityToolkit.CameraSystem != null
-                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform
-                    : CameraCache.Main.transform;
+                var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
+                var cameraTransform = MixedRealityToolkit.CameraSystem != null
+                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform
+                : CameraCache.Main.transform;
 
-                    // We check if the palm forward is roughly in line with the camera lookAt.
-                    var projectedPalmUp = Vector3.ProjectOnPlane(-palmPose.Up, cameraTransform.up);
-                    handData.IsPointing = Vector3.Dot(cameraTransform.forward, projectedPalmUp) > 0.3f;
-                }
+                // We check if the palm forward is roughly in line with the camera lookAt.
+                var projectedPalmUp = Vector3.ProjectOnPlane(-palmPose.Up, cameraTransform.up);
+                handData.IsPointing = Vector3.Dot(cameraTransform.forward, projectedPalmUp) > 0.3f;
             }
             else
             {

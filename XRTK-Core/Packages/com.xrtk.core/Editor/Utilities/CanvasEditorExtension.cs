@@ -124,7 +124,7 @@ namespace XRTK.Editor.Utilities
                 if (utility != null)
                 {
                     canvas.worldCamera = null;
-                    EditorApplication.delayCall += () => DestroyImmediate(utility);
+                    utility.Destroy();
                 }
 
                 hasUtility = false;

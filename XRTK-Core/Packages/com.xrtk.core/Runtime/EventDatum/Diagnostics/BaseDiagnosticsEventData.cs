@@ -1,5 +1,9 @@
-﻿using System;
+﻿// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
+using System;
 using UnityEngine.EventSystems;
+using XRTK.Extensions;
 
 namespace XRTK.EventDatum.DiagnosticsSystem
 {
@@ -22,7 +26,7 @@ namespace XRTK.EventDatum.DiagnosticsSystem
         /// <param name="eventSystem"></param>
         protected BaseDiagnosticsEventData(EventSystem eventSystem) : base(eventSystem)
         {
-            if (eventSystem == null)
+            if (eventSystem.IsNull())
             {
                 throw new Exception($"{nameof(EventSystem)} cannot be null!");
             }

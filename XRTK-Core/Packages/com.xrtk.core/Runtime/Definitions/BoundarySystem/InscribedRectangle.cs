@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -18,23 +18,23 @@ namespace XRTK.Definitions.BoundarySystem
         /// <summary>
         /// Total number of starting points randomly generated within the boundary.
         /// </summary>
-        private const int randomPointCount = 30;
+        private const int RANDOM_POINT_COUNT = 30;
 
         /// <summary>
         /// The total amount of height, in meters,  we want to gain with each binary search
         /// change before we decide that it's good enough.
         /// </summary>
-        private const float minimumHeightGain = 0.01f;
+        private const float MINIMUM_HEIGHT_GAIN = 0.01f;
 
         /// <summary>
         /// Angles to use for fitting the rectangle within the boundary.
         /// </summary>
-        private static readonly float[] fitAngles = { 0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165 };
+        private static readonly float[] FitAngles = { 0, 15, 30, 45, 60, 75, 90, 105, 120, 135, 150, 165 };
 
         /// <summary>
         /// Aspect ratios used when fitting rectangles within the boundary.
         /// </summary>
-        private static readonly float[] aspectRatios =
+        private static readonly float[] AspectRatios =
         {
             1.0f, 1.5f, 2.0f, 2.5f, 3.0f, 3.5f, 4.0f, 4.5f,
             5.0f, 5.5f, 6, 6.5f, 7, 7.5f, 8.0f, 8.5f, 9.0f,
@@ -71,6 +71,11 @@ namespace XRTK.Definitions.BoundarySystem
         public bool IsValid => EdgeUtilities.IsValidPoint(Center);
 
         /// <summary>
+        /// The defined edges of the described rectangle.
+        /// </summary>
+        public Edge[] Edges { get; }
+
+        /// <summary>
         /// Finds a large inscribed rectangle. Tries to be maximal but this is
         /// best effort. The algorithm used was inspired by the blog post
         /// https://d3plus.org/blog/behind-the-scenes/2014/07/08/largest-rect/
@@ -95,16 +100,18 @@ namespace XRTK.Definitions.BoundarySystem
                 return;
             }
 
+            Edges = geometryEdges;
+
             // Clear previous rectangle
             Center = EdgeUtilities.InvalidPoint;
             Width = 0;
             Height = 0;
             Angle = 0;
 
-            float minX = EdgeUtilities.maxWidth;
-            float minY = EdgeUtilities.maxWidth;
-            float maxX = -EdgeUtilities.maxWidth;
-            float maxY = -EdgeUtilities.maxWidth;
+            float minX = EdgeUtilities.MaxWidth;
+            float minY = EdgeUtilities.MaxWidth;
+            float maxX = -EdgeUtilities.MaxWidth;
+            float maxY = -EdgeUtilities.MaxWidth;
 
             // Find min x, min y, max x, max y 
             for (int i = 0; i < geometryEdges.Length; i++)
@@ -134,7 +141,7 @@ namespace XRTK.Definitions.BoundarySystem
             }
 
             // Generate random points until we have randomPointCount starting points
-            var startingPoints = new Vector2[randomPointCount];
+            var startingPoints = new Vector2[RANDOM_POINT_COUNT];
             var random = new Random(randomSeed);
 
             for (int i = 0; i < startingPoints.Length; i++)
@@ -151,11 +158,11 @@ namespace XRTK.Definitions.BoundarySystem
                 startingPoints[i] = candidatePoint;
             }
 
-            for (int angleIndex = 0; angleIndex < fitAngles.Length; angleIndex++)
+            for (int angleIndex = 0; angleIndex < FitAngles.Length; angleIndex++)
             {
                 for (int pointIndex = 0; pointIndex < startingPoints.Length; pointIndex++)
                 {
-                    float angleRadians = MathUtilities.DegreesToRadians(fitAngles[angleIndex]);
+                    float angleRadians = MathUtilities.DegreesToRadians(FitAngles[angleIndex]);
 
                     // Find the collision point of a cross through the given point at the given angle.
                     // Note, we are ignoring the return value as we are checking each point's validity
@@ -190,7 +197,7 @@ namespace XRTK.Definitions.BoundarySystem
                             out newHeight))
                         {
                             Center = verticalMidpoint;
-                            Angle = fitAngles[angleIndex];
+                            Angle = FitAngles[angleIndex];
                             Width = newWidth;
                             Height = newHeight;
                         }
@@ -215,7 +222,7 @@ namespace XRTK.Definitions.BoundarySystem
                             out newHeight))
                         {
                             Center = horizontalMidpoint;
-                            Angle = fitAngles[angleIndex];
+                            Angle = FitAngles[angleIndex];
                             Width = newWidth;
                             Height = newHeight;
                         }
@@ -238,7 +245,7 @@ namespace XRTK.Definitions.BoundarySystem
         /// True if all of the required collision points are located, false otherwise. 
         /// If a point is unable to be found, the appropriate out parameter will be set to <see cref="EdgeUtilities.InvalidPoint"/>.
         /// </returns>
-        private bool FindSurroundingCollisionPoints(
+        private static bool FindSurroundingCollisionPoints(
             Edge[] geometryEdges,
             Vector2 point,
             float angleRadians,
@@ -260,7 +267,7 @@ namespace XRTK.Definitions.BoundarySystem
             }
 
             // Define values that are outside of the maximum boundary size.
-            float largeValue = EdgeUtilities.maxWidth;
+            float largeValue = EdgeUtilities.MaxWidth;
             float smallValue = -largeValue;
 
             // Find the top and bottom collision points by creating a large line segment that goes through the point to MAX and MIN values on Y
@@ -353,17 +360,11 @@ namespace XRTK.Definitions.BoundarySystem
                 throw new InvalidOperationException("A point cannot be within an invalid rectangle.");
             }
 
-            point -= Center;
-            point = point.RotatePoint(MathUtilities.DegreesToRadians(-Angle));
-
-            var inWidth = Mathf.Abs(point.x) <= (Width * 0.5f);
-            var inHeight = Mathf.Abs(point.y) <= (Height * 0.5f);
-
-            return (inWidth && inHeight);
+            return EdgeUtilities.IsInsideBoundary(Edges, point);
         }
 
         /// <summary>
-        /// Check to see if a rectangle centered at the specified point and oriented at 
+        /// Check to see if a rectangle centered at the specified point and oriented at
         /// the specified angle will fit within the geometry.
         /// </summary>
         /// <param name="geometryEdges">The boundary geometry.</param>
@@ -372,7 +373,7 @@ namespace XRTK.Definitions.BoundarySystem
         /// <param name="width">The width of the rectangle.</param>
         /// <param name="height">The height of the rectangle.</param>
         /// <returns></returns>
-        private bool CheckRectangleFit(Edge[] geometryEdges, Vector2 centerPoint, float angleRadians, float width, float height)
+        private static bool CheckRectangleFit(Edge[] geometryEdges, Vector2 centerPoint, float angleRadians, float width, float height)
         {
             float halfWidth = width * 0.5f;
             float halfHeight = height * 0.5f;
@@ -425,7 +426,7 @@ namespace XRTK.Definitions.BoundarySystem
         /// True if a rectangle with an area greater than or equal to minArea was able to be fit
         /// within the geometry at centerPoint.
         /// </returns>
-        private bool TryFixMaximumRectangle(
+        private static bool TryFixMaximumRectangle(
             Edge[] geometryEdges,
             Vector2 centerPoint,
             float angleRadians,
@@ -467,19 +468,19 @@ namespace XRTK.Definitions.BoundarySystem
 
             // For each aspect ratio we do a binary search to find the maximum rectangle that fits, 
             // though once we start increasing our area by minimumHeightGain we call it good enough.
-            for (int i = 0; i < aspectRatios.Length; i++)
+            for (int i = 0; i < AspectRatios.Length; i++)
             {
                 // The height is limited by the width. If a height would make our width exceed maxWidth, it can't be used
-                float searchHeightUpperBound = Mathf.Max(maxHeight, maxWidth / aspectRatios[i]);
+                float searchHeightUpperBound = Mathf.Max(maxHeight, maxWidth / AspectRatios[i]);
 
                 // Set to the min height that will out perform our previous area at the given aspect ratio. This is 0 the first time.
                 // Derived from biggestAreaSoFar=height*(height*aspectRatio)
-                float searchHeightLowerBound = Mathf.Sqrt(Mathf.Max((width * height), minArea) / aspectRatios[i]);
+                float searchHeightLowerBound = Mathf.Sqrt(Mathf.Max((width * height), minArea) / AspectRatios[i]);
 
                 // If the lowest value needed to outperform the previous best is greater than our max, 
                 // this aspect ratio can't outperform what we've already calculated.
                 if (searchHeightLowerBound > searchHeightUpperBound ||
-                    searchHeightLowerBound * aspectRatios[i] > maxWidth)
+                    searchHeightLowerBound * AspectRatios[i] > maxWidth)
                 {
                     continue;
                 }
@@ -492,16 +493,16 @@ namespace XRTK.Definitions.BoundarySystem
                     if (CheckRectangleFit(geometryEdges,
                         centerPoint,
                         angleRadians,
-                        aspectRatios[i] * currentTestingHeight,
+                        AspectRatios[i] * currentTestingHeight,
                         currentTestingHeight))
                     {
                         // Binary search up-ward
                         // If the rectangle will fit, increase the lower bounds of our binary search
                         searchHeightLowerBound = currentTestingHeight;
 
-                        width = currentTestingHeight * aspectRatios[i];
+                        width = currentTestingHeight * AspectRatios[i];
                         height = currentTestingHeight;
-                        aspectRatio = aspectRatios[i];
+                        aspectRatio = AspectRatios[i];
                         currentTestingHeight = (searchHeightUpperBound + currentTestingHeight) * 0.5f;
                     }
                     else
@@ -511,7 +512,7 @@ namespace XRTK.Definitions.BoundarySystem
                         currentTestingHeight = (currentTestingHeight + searchHeightLowerBound) * 0.5f;
                     }
                 }
-                while ((searchHeightUpperBound - searchHeightLowerBound) > minimumHeightGain);
+                while ((searchHeightUpperBound - searchHeightLowerBound) > MINIMUM_HEIGHT_GAIN);
             }
 
             return (aspectRatio > 0.0f);

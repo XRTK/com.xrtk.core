@@ -1,19 +1,58 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.XR;
 using XRTK.Definitions.BoundarySystem;
-using XRTK.Interfaces.Events;
 
 namespace XRTK.Interfaces.BoundarySystem
 {
     /// <summary>
-    /// Manager interface for a Boundary system in the Mixed Reality Toolkit
-    /// All replacement systems for providing Boundary functionality should derive from this interface
+    /// The interface for a Boundary system in the Mixed Reality Toolkit
+    /// All systems for providing Boundary functionality should derive from this interface
     /// </summary>
-    public interface IMixedRealityBoundarySystem : IMixedRealityEventSystem, IMixedRealityEventSource
+    public interface IMixedRealityBoundarySystem : IMixedRealitySystem
     {
+        /// <summary>
+        /// Event raised when a tracked object nears, or crosses the boundary.
+        /// </summary>
+        event Action<GameObject, ProximityAlert> BoundaryProximityAlert;
+
+        /// <summary>
+        /// The list of currently tracked objects that will raise <see cref="BoundaryProximityAlert"/>s.
+        /// </summary>
+        IReadOnlyList<GameObject> TrackedObjects { get; }
+
+        /// <summary>
+        /// The <see cref="IMixedRealityBoundaryDataProvider"/> assigned to this system.
+        /// </summary>
+        /// <remarks>
+        /// Typically with systems, there can be multiple data providers, but in this case there should only ever be one.
+        /// </remarks>
+        IMixedRealityBoundaryDataProvider BoundaryDataProvider { get; }
+
+        /// <summary>
+        /// Is the platform or the boundary system's rendered boundary geometry visible?
+        /// </summary>
+        /// <remarks>
+        /// This can enables or disables both the platform's and boundary systems rendered geometry, but the platform can always override their rendering state.
+        /// </remarks>
+        bool IsVisible { get; set; }
+
+        /// <summary>
+        /// Has the boundary been properly configured by the user?
+        /// </summary>
+        bool IsConfigured { get; }
+
+        /// <summary>
+        /// Enable or disable the generated boundary geometry.
+        /// </summary>
+        /// <remarks>
+        /// This cannot or ever will disable or override the platform's built-in boundary systems.
+        /// </remarks>
+        bool ShowBoundary { get; set; }
+
         /// <summary>
         /// The height of the play space, in meters.
         /// </summary>
@@ -23,118 +62,38 @@ namespace XRTK.Interfaces.BoundarySystem
         float BoundaryHeight { get; set; }
 
         /// <summary>
-        /// Enable / disable floor rendering.
+        /// Enable or disable floor geometry.
         /// </summary>
         bool ShowFloor { get; set; }
 
         /// <summary>
-        /// The size at which to display the rectangular floor plane <see cref="GameObject"/>.
-        /// </summary>
-        Vector2 FloorScale { get; }
-
-        /// <summary>
-        /// The material to use for the floor <see cref="GameObject"/> when created by the boundary system.
-        /// </summary>
-        Material FloorMaterial { get; }
-
-        /// <summary>
-        /// The physics layer that the generated floor is assigned to.
-        /// </summary>
-        int FloorPhysicsLayer { get; set; }
-
-        /// <summary>
-        /// Enable / disable play area rendering.
-        /// </summary>
-        bool ShowPlayArea { get; set; }
-
-        /// <summary>
-        /// The material to use for the rectangular play area <see cref="GameObject"/>.
-        /// </summary>
-        Material PlayAreaMaterial { get; }
-
-        /// <summary>
-        /// The physics layer that the generated play area is assigned to.
-        /// </summary>
-        int PlayAreaPhysicsLayer { get; set; }
-
-        /// <summary>
-        /// Enable / disable tracked area rendering.
-        /// </summary>
-        bool ShowTrackedArea { get; set; }
-
-        /// <summary>
-        /// The material to use for the boundary geometry <see cref="GameObject"/>.
-        /// </summary>
-        Material TrackedAreaMaterial { get; }
-
-        /// <summary>
-        /// The physics layer that the generated tracked area is assigned to.
-        /// </summary>
-        int TrackedAreaPhysicsLayer { get; set; }
-
-        /// <summary>
-        /// Enable / disable boundary wall rendering.
-        /// </summary>
-        bool ShowBoundaryWalls { get; set; }
-
-        /// <summary>
-        /// The material to use for displaying the boundary geometry walls.
-        /// </summary>
-        Material BoundaryWallMaterial { get; }
-
-        /// <summary>
-        /// The physics layer that the generated boundary walls are assigned to.
-        /// </summary>
-        int BoundaryWallsPhysicsLayer { get; set; }
-
-        /// <summary>
-        /// Enable / disable ceiling rendering.
+        /// Enable or disable boundary ceiling geometry.
         /// </summary>
         /// <remarks>
         /// The ceiling is defined as a <see cref="GameObject"/> positioned <see cref="BoundaryHeight"/> above the floor.
         /// </remarks>
-        bool ShowBoundaryCeiling { get; set; }
+        bool ShowCeiling { get; set; }
 
         /// <summary>
-        /// The material to use for displaying the boundary ceiling.
+        /// Enable or disable boundary wall geometry.
         /// </summary>
-        Material BoundaryCeilingMaterial { get; }
+        bool ShowWalls { get; set; }
 
         /// <summary>
-        /// The physics layer that the generated boundary ceiling is assigned to.
-        /// </summary>
-        int CeilingPhysicsLayer { get; set; }
-
-        /// <summary>
-        /// Two dimensional representation of the geometry of the boundary, as provided
-        /// by the platform.
+        /// Two dimensional representation of the geometry of the boundary, as provided by the platform.
         /// </summary>
         /// <remarks>
-        /// BoundaryGeometry should be treated as the outline of the player's space, placed
-        /// on the floor.
+        /// BoundaryGeometry should be treated as the outline of the player's space, placed on the floor.
         /// </remarks>
-        Edge[] Bounds { get; }
+        Edge[] BoundaryBounds { get; }
 
         /// <summary>
-        /// Indicates the height of the floor, in relation to the coordinate system origin.
+        /// Determines if a <see cref="position"/> is within the area of the boundary space.
         /// </summary>
-        /// <remarks>
-        /// If a floor has been located, FloorHeight.HasValue will be true, otherwise it will be false.
-        /// </remarks>
-        float? FloorHeight { get; }
-
-        /// <summary>
-        /// Determines if a location is within the specified area of the boundary space.
-        /// </summary>
-        /// <param name="location">The location to be checked.</param>
-        /// <param name="boundaryType">The type of boundary space being checked.</param>
-        /// <returns>True if the location is within the specified area of the boundary space.</returns>
-        /// <remarks>
-        /// Use:
-        /// Boundary.Type.PlayArea for the inscribed volume
-        /// Boundary.Type.TrackedArea for the area defined by the boundary edges.
-        /// </remarks>
-        bool Contains(Vector3 location, Boundary.Type boundaryType = Boundary.Type.TrackedArea);
+        /// <param name="position">The <see cref="Vector3"/> position to be checked.</param>
+        /// <param name="referenceSpace">Is this position using local or worldspace coordinate space?</param>
+        /// <returns>True if the location is within the area of the boundary space, otherwise false.</returns>
+        bool IsInsideBoundary(Vector3 position, Space referenceSpace = Space.World);
 
         /// <summary>
         /// Returns the description of the inscribed rectangular bounds.
@@ -147,33 +106,13 @@ namespace XRTK.Interfaces.BoundarySystem
         bool TryGetRectangularBoundsParams(out Vector2 center, out float angle, out float width, out float height);
 
         /// <summary>
-        /// Gets the <see cref="GameObject"/> that represents the user's floor.
+        /// Registers the <see cref="Transform"/> of a <see cref="GameObject"/> to be tracked for <see cref="BoundaryProximityAlert"/>s.
         /// </summary>
-        /// <returns>The floor visualization object or null if one does not exist.</returns>
-        GameObject GetFloorVisualization();
+        void RegisterTrackedObject(GameObject gameObject);
 
         /// <summary>
-        /// Gets the <see cref="GameObject"/> that represents the user's play area.
+        /// Unregisters the <see cref="Transform"/> of a <see cref="GameObject"/> from <see cref="BoundaryProximityAlert"/>s.
         /// </summary>
-        /// <returns>The play area visualization object or null if one does not exist.</returns>
-        GameObject GetPlayAreaVisualization();
-
-        /// <summary>
-        /// Gets the <see cref="GameObject"/> that represents the user's tracked area.
-        /// </summary>
-        /// <returns>The tracked area visualization object or null if one does not exist.</returns>
-        GameObject GetTrackedAreaVisualization();
-
-        /// <summary>
-        /// Gets the <see cref="GameObject"/> that represents the user's boundary walls.
-        /// </summary>
-        /// <returns>The boundary wall visualization object or null if one does not exist.</returns>
-        GameObject GetBoundaryWallVisualization();
-
-        /// <summary>
-        /// Gets the <see cref="GameObject"/> that represents the upper surface of the user's boundary.
-        /// </summary>
-        /// <returns>The boundary ceiling visualization object or null if one does not exist.</returns>
-        GameObject GetBoundaryCeilingVisualization();
+        void UnregisterTrackedObject(GameObject gameObject);
     }
 }

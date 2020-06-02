@@ -1,14 +1,12 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Collections;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Runtime.InteropServices;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Experimental.XR;
-using UnityEngine.XR;
 using XRTK.Definitions.BoundarySystem;
-using XRTK.EventDatum.Boundary;
 using XRTK.Extensions;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Utilities;
@@ -18,8 +16,8 @@ namespace XRTK.Services.BoundarySystem
     /// <summary>
     /// The Boundary system controls the presentation and display of the users boundary in a scene.
     /// </summary>
-    [System.Runtime.InteropServices.Guid("FE458876-CC0F-4B6F-9459-544DDF6A9263")]
-    public class MixedRealityBoundarySystem : BaseEventSystem, IMixedRealityBoundarySystem
+    [Guid("FE458876-CC0F-4B6F-9459-544DDF6A9263")]
+    public class MixedRealityBoundarySystem : BaseSystem, IMixedRealityBoundarySystem
     {
         /// <summary>
         /// Constructor.
@@ -28,194 +26,36 @@ namespace XRTK.Services.BoundarySystem
         public MixedRealityBoundarySystem(MixedRealityBoundaryVisualizationProfile profile)
             : base(profile)
         {
-            showFloor = profile.ShowFloor;
-            floorPhysicsLayer = profile.FloorPhysicsLayer;
-            FloorScale = profile.FloorScale;
-            FloorMaterial = profile.FloorMaterial;
-            showPlayArea = profile.ShowPlayArea;
-            PlayAreaMaterial = profile.PlayAreaMaterial;
-            playAreaPhysicsLayer = profile.PlayAreaPhysicsLayer;
+            showBoundary = profile.ShowBoundary;
             BoundaryHeight = profile.BoundaryHeight;
-            showTrackedArea = profile.ShowTrackedArea;
-            TrackedAreaMaterial = profile.TrackedAreaMaterial;
-            trackedAreaPhysicsLayer = profile.TrackedAreaPhysicsLayer;
-            showBoundaryWalls = profile.ShowBoundaryWalls;
-            BoundaryWallMaterial = profile.BoundaryWallMaterial;
-            boundaryWallsPhysicsLayer = profile.BoundaryWallsPhysicsLayer;
-            showCeiling = profile.ShowBoundaryCeiling;
-            BoundaryCeilingMaterial = profile.BoundaryCeilingMaterial;
-            ceilingPhysicsLayer = profile.CeilingPhysicsLayer;
+            BoundaryMaterial = profile.BoundaryMaterial;
+            boundaryPhysicsLayer = profile.PhysicsLayer;
+
+            showFloor = profile.ShowFloor;
+            FloorMaterial = profile.FloorMaterial.IsNull()
+                ? profile.BoundaryMaterial
+                : profile.FloorMaterial;
+
+            showWalls = profile.ShowWalls;
+            WallMaterial = profile.WallMaterial.IsNull()
+                ? profile.BoundaryMaterial
+                : profile.WallMaterial;
+
+            showCeiling = profile.ShowCeiling;
+            CeilingMaterial = profile.CeilingMaterial.IsNull()
+                ? profile.BoundaryMaterial
+                : profile.CeilingMaterial;
         }
-
-        #region IMixedRealityService Implementation
-
-        private BoundaryEventData boundaryEventData = null;
-
-        /// <inheritdoc/>
-        public override void Initialize()
-        {
-            base.Initialize();
-
-            if (!Application.isPlaying)
-            {
-                return;
-            }
-
-            boundaryEventData = new BoundaryEventData(EventSystem.current);
-        }
-
-        /// <inheritdoc/>
-        public override void Enable()
-        {
-            base.Enable();
-
-            if (!Application.isPlaying)
-            {
-                return;
-            }
-
-            CalculateBoundaryBounds();
-            Boundary.visible = true;
-
-            if (ShowFloor)
-            {
-                GetFloorVisualization();
-            }
-
-            if (ShowPlayArea)
-            {
-                GetPlayAreaVisualization();
-            }
-
-            if (ShowTrackedArea)
-            {
-                GetTrackedAreaVisualization();
-            }
-
-            if (ShowBoundaryWalls)
-            {
-                GetBoundaryWallVisualization();
-            }
-
-            if (ShowBoundaryWalls)
-            {
-                GetBoundaryCeilingVisualization();
-            }
-
-            RaiseBoundaryVisualizationChanged();
-        }
-
-        /// <inheritdoc/>
-        public override void Disable()
-        {
-            base.Disable();
-
-            if (!Application.isPlaying)
-            {
-                return;
-            }
-
-            showFloor = false;
-            showPlayArea = false;
-            showTrackedArea = false;
-            showBoundaryWalls = false;
-            showCeiling = false;
-            Boundary.visible = false;
-        }
-
-        /// <inheritdoc/>
-        public override void Destroy()
-        {
-            base.Destroy();
-            // Destroys the parent and all the child objects
-            boundaryVisualizationParent.Destroy();
-            RaiseBoundaryVisualizationChanged();
-        }
-
-        /// <summary>
-        /// Raises an event to indicate that the visualization of the boundary has been changed by the boundary system.
-        /// </summary>
-        private void RaiseBoundaryVisualizationChanged()
-        {
-            if (!Application.isPlaying) { return; }
-            boundaryEventData.Initialize(this, ShowFloor, ShowPlayArea, ShowTrackedArea, ShowBoundaryWalls, ShowBoundaryCeiling);
-            HandleEvent(boundaryEventData, OnVisualizationChanged);
-        }
-
-        /// <summary>
-        /// Event sent whenever the boundary visualization changes.
-        /// </summary>
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityBoundaryHandler> OnVisualizationChanged =
-            delegate (IMixedRealityBoundaryHandler handler, BaseEventData eventData)
-        {
-            var boundaryEventData = ExecuteEvents.ValidateEventData<BoundaryEventData>(eventData);
-            handler.OnBoundaryVisualizationChanged(boundaryEventData);
-        };
-
-        #endregion IMixedRealityService Implementation
-
-        #region IMixedRealtyEventSystem Implementation
-
-        /// <inheritdoc />
-        public override void HandleEvent<T>(BaseEventData eventData, ExecuteEvents.EventFunction<T> eventHandler)
-        {
-            base.HandleEvent(eventData, eventHandler);
-        }
-
-        /// <summary>
-        /// Registers the <see cref="GameObject"/> to listen for boundary events.
-        /// </summary>
-        /// <param name="listener"></param>
-        public override void Register(GameObject listener)
-        {
-            base.Register(listener);
-        }
-
-        /// <summary>
-        /// UnRegisters the <see cref="GameObject"/> to listen for boundary events.
-        /// /// </summary>
-        /// <param name="listener"></param>
-        public override void Unregister(GameObject listener)
-        {
-            base.Unregister(listener);
-        }
-
-        #endregion
-
-        #region IMixedRealityEventSource Implementation
-
-        /// <inheritdoc />
-        bool IEqualityComparer.Equals(object x, object y)
-        {
-            // There shouldn't be other Boundary Managers to compare to.
-            return false;
-        }
-
-        /// <inheritdoc />
-        public int GetHashCode(object obj)
-        {
-            return Mathf.Abs(SourceName.GetHashCode());
-        }
-
-        /// <inheritdoc />
-        public uint SourceId { get; } = 0;
-
-        /// <inheritdoc />
-        public string SourceName { get; } = "Mixed Reality Boundary System";
-
-        #endregion IMixedRealityEventSource Implementation
-
-        #region IMixedRealityBoundarySystem Implementation
 
         /// <summary>
         /// Layer used to tell the (non-floor) boundary objects to not accept raycasts
         /// </summary>
-        private const int DefaultIgnoreRaycastLayer = 2;
+        private const int DEFAULT_IGNORE_RAYCAST_LAYER = 2;
 
         /// <summary>
         /// The thickness of three dimensional generated boundary objects.
         /// </summary>
-        private const float BoundaryObjectThickness = 0.005f;
+        private const float BOUNDARY_OBJECT_THICKNESS = 0.005f;
 
         /// <summary>
         /// A small offset to avoid render conflicts, primarily with the floor.
@@ -223,324 +63,434 @@ namespace XRTK.Services.BoundarySystem
         /// <remarks>
         /// This offset is used to avoid consuming multiple physics layers.
         /// </remarks>
-        private const float BoundaryObjectRenderOffset = 0.001f;
+        private const float BOUNDARY_OBJECT_RENDER_OFFSET = 0.001f;
 
-        private GameObject boundaryVisualizationParent;
+        private readonly Dictionary<GameObject, ProximityAlert> trackedObjects = new Dictionary<GameObject, ProximityAlert>(3);
 
-        /// <summary>
-        /// Parent <see cref="GameObject"/> which will encapsulate all of the teleportable boundary visualizations.
-        /// </summary>
-        private GameObject BoundaryVisualizationParent
+        private InscribedRectangle rectangularBounds;
+
+        private GameObject boundaryVisualizationRoot = null;
+
+        private GameObject BoundarySystemVisualizationRoot
         {
             get
             {
-                if (!boundaryVisualizationParent.IsNull())
+                if (!boundaryVisualizationRoot.IsNull())
                 {
-                    return boundaryVisualizationParent;
+                    return boundaryVisualizationRoot;
                 }
 
-                var visualizationParent = new GameObject("Boundary System Visualizations");
+                boundaryVisualizationRoot = new GameObject(nameof(BoundarySystemVisualizationRoot));
                 var playspaceTransform = MixedRealityToolkit.CameraSystem != null
                     ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
                     : CameraCache.Main.transform.parent;
-                visualizationParent.transform.SetParent(playspaceTransform, false);
-                return boundaryVisualizationParent = visualizationParent;
+                boundaryVisualizationRoot.transform.SetParent(playspaceTransform, false);
+
+                return boundaryVisualizationRoot;
+            }
+        }
+
+        private GameObject boundaryVisualization = null;
+
+        private GameObject BoundaryVisualization
+        {
+            get
+            {
+                if (!boundaryVisualization.IsNull())
+                {
+                    return boundaryVisualization;
+                }
+
+                // If we do not have boundary edges, we cannot render them.
+                if (BoundaryBounds.Length == 0)
+                {
+                    return null;
+                }
+
+                // Get the rectangular bounds.
+                if (!TryGetRectangularBoundsParams(out var center, out var angle, out var width, out var height))
+                {
+                    // No rectangular bounds, therefore cannot create the play area.
+                    return null;
+                }
+
+                // Render the rectangular bounds.
+                if (!EdgeUtilities.IsValidPoint(center))
+                {
+                    // Invalid rectangle / play area not found
+                    return null;
+                }
+
+                boundaryVisualization = GameObject.CreatePrimitive(PrimitiveType.Quad);
+                boundaryVisualization.name = nameof(BoundaryVisualization);
+                boundaryVisualization.layer = boundaryPhysicsLayer;
+                boundaryVisualization.transform.Translate(new Vector3(center.x, BOUNDARY_OBJECT_RENDER_OFFSET, center.y));
+                boundaryVisualization.transform.Rotate(new Vector3(90f, -angle, 0.0f));
+                boundaryVisualization.transform.localScale = new Vector3(width, height, 1.0f);
+                boundaryVisualization.GetComponent<Renderer>().sharedMaterial = BoundaryMaterial;
+                boundaryVisualization.transform.SetParent(BoundarySystemVisualizationRoot.transform, false);
+
+                boundaryVisualization.AddComponent<LineRenderer>();
+
+                // Get the line vertices
+                var lineVertices = new List<Vector3>();
+
+                for (int i = 0; i < BoundaryBounds.Length; i++)
+                {
+                    lineVertices.Add(new Vector3(BoundaryBounds[i].PointA.x, 0f, BoundaryBounds[i].PointA.y));
+                }
+
+                // Add the first vertex again to ensure the loop closes.
+                lineVertices.Add(lineVertices[0]);
+
+                // Configure the renderer properties.
+                const float lineWidth = 0.01f;
+                var lineRenderer = boundaryVisualization.GetComponent<LineRenderer>();
+                lineRenderer.sharedMaterial = BoundaryMaterial;
+                lineRenderer.useWorldSpace = false;
+                lineRenderer.startWidth = lineWidth;
+                lineRenderer.endWidth = lineWidth;
+                lineRenderer.positionCount = lineVertices.Count;
+                lineRenderer.SetPositions(lineVertices.ToArray());
+
+                boundaryVisualization.SetActive(showBoundary);
+
+                return boundaryVisualization;
+            }
+        }
+
+        private GameObject floorVisualization = null;
+
+        private GameObject FloorVisualization
+        {
+            get
+            {
+                if (!floorVisualization.IsNull())
+                {
+                    return floorVisualization;
+                }
+
+                var position = MixedRealityToolkit.CameraSystem != null
+                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.position
+                    : CameraCache.Main.transform.parent.position;
+
+                // Render the floor.
+                floorVisualization = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                floorVisualization.name = nameof(FloorVisualization);
+                floorVisualization.transform.Translate(new Vector3(
+                    position.x,
+                    position.y - (floorVisualization.transform.localScale.y * 0.5f),
+                    position.z));
+                floorVisualization.layer = boundaryPhysicsLayer;
+                floorVisualization.GetComponent<Renderer>().sharedMaterial = FloorMaterial;
+                floorVisualization.transform.SetParent(BoundarySystemVisualizationRoot.transform, false);
+                floorVisualization.SetActive(showFloor);
+
+                return floorVisualization;
+            }
+        }
+
+        private GameObject wallVisualization = null;
+
+        private GameObject WallVisualization
+        {
+            get
+            {
+                if (!wallVisualization.IsNull())
+                {
+                    return wallVisualization;
+                }
+
+                if (BoundaryBounds.Length == 0)
+                {
+                    // If we do not have boundary edges, we cannot render walls.
+                    return null;
+                }
+
+                wallVisualization = new GameObject(nameof(WallVisualization))
+                {
+                    layer = boundaryPhysicsLayer
+                };
+
+                for (int i = 0; i < BoundaryBounds.Length; i++)
+                {
+                    var wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                    wall.name = $"Wall_{i}";
+                    wall.GetComponent<Renderer>().sharedMaterial = WallMaterial;
+                    wall.transform.localScale = new Vector3((BoundaryBounds[i].PointB - BoundaryBounds[i].PointA).magnitude, BoundaryHeight, BOUNDARY_OBJECT_THICKNESS);
+                    wall.layer = boundaryPhysicsLayer;
+
+                    // Position and rotate the wall.
+                    var midpoint = Vector2.Lerp(BoundaryBounds[i].PointA, BoundaryBounds[i].PointB, 0.5f);
+                    wall.transform.SetParent(wallVisualization.transform, false);
+                    wall.transform.position = new Vector3(midpoint.x, (BoundaryHeight * 0.5f), midpoint.y);
+                    var rotationAngle = MathUtilities.GetAngleBetween(BoundaryBounds[i].PointB, BoundaryBounds[i].PointA);
+                    wall.transform.rotation = Quaternion.Euler(0.0f, -rotationAngle, 0.0f);
+                }
+
+                wallVisualization.transform.SetParent(BoundarySystemVisualizationRoot.transform, false);
+
+                return wallVisualization;
+            }
+        }
+
+        private GameObject ceilingVisualization = null;
+
+        private GameObject CeilingVisualization
+        {
+            get
+            {
+                if (!ceilingVisualization.IsNull())
+                {
+                    return ceilingVisualization;
+                }
+
+                if (BoundaryBounds.Length == 0)
+                {
+                    // If we do not have boundary edges, we cannot render a ceiling.
+                    return null;
+                }
+
+                // Get the smallest rectangle that contains the entire boundary.
+                var boundaryBoundingBox = new Bounds();
+
+                for (int i = 0; i < BoundaryBounds.Length; i++)
+                {
+                    // The boundary geometry is a closed loop. As such, we can encapsulate only PointA of each Edge.
+                    boundaryBoundingBox.Encapsulate(new Vector3(BoundaryBounds[i].PointA.x, BoundaryHeight * 0.5f, BoundaryBounds[i].PointA.y));
+                }
+
+                ceilingVisualization = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                ceilingVisualization.name = nameof(CeilingVisualization);
+                ceilingVisualization.layer = DEFAULT_IGNORE_RAYCAST_LAYER;
+                ceilingVisualization.transform.localScale = new Vector3(boundaryBoundingBox.size.x, BOUNDARY_OBJECT_THICKNESS, boundaryBoundingBox.size.z);
+                ceilingVisualization.transform.Translate(new Vector3(
+                    boundaryBoundingBox.center.x,
+                    BoundaryHeight + (ceilingVisualization.transform.localScale.y * 0.5f),
+                    boundaryBoundingBox.center.z));
+                ceilingVisualization.GetComponent<Renderer>().sharedMaterial = CeilingMaterial;
+                ceilingVisualization.layer = boundaryPhysicsLayer;
+                ceilingVisualization.transform.SetParent(BoundarySystemVisualizationRoot.transform, false);
+
+                return ceilingVisualization;
+            }
+        }
+
+        #region IMixedRealityService Implementation
+
+        /// <inheritdoc/>
+        public override void Enable()
+        {
+            base.Enable();
+
+            BoundaryDataProvider = MixedRealityToolkit.GetService<IMixedRealityBoundaryDataProvider>();
+
+            if (!Application.isPlaying || BoundaryDataProvider == null) { return; }
+
+            // Reset the bounds
+            BoundaryBounds = new Edge[0];
+            rectangularBounds = null;
+
+            // Get the boundary geometry.
+            var boundaryGeometry = new List<Vector3>(0);
+            var boundaryEdges = new List<Edge>(0);
+
+            if (BoundaryDataProvider.TryGetBoundaryGeometry(ref boundaryGeometry) && boundaryGeometry.Count > 0)
+            {
+                for (int i = 0; i < boundaryGeometry.Count; i++)
+                {
+                    var pointA = boundaryGeometry[i];
+                    var pointB = boundaryGeometry[(i + 1) % boundaryGeometry.Count];
+                    boundaryEdges.Add(new Edge(pointA, pointB));
+                }
+
+                BoundaryBounds = boundaryEdges.ToArray();
+                // We always use the same seed so that from run to run, the inscribed bounds are consistent.
+                rectangularBounds = new InscribedRectangle(BoundaryBounds, Mathf.Abs("Mixed Reality Toolkit".GetHashCode()));
+            }
+
+            BoundarySystemVisualizationRoot.SetActive(true);
+        }
+
+        /// <inheritdoc/>
+        public override void Update()
+        {
+            base.Update();
+
+            if (!Application.isPlaying || BoundaryDataProvider == null) { return; }
+
+            foreach (var trackedObjectStatus in trackedObjects)
+            {
+                switch (trackedObjectStatus.Value)
+                {
+                    case ProximityAlert.Clear:
+                        if (!IsInsideBoundary(trackedObjectStatus.Key.transform.position))
+                        {
+                            BoundaryProximityAlert?.Invoke(trackedObjectStatus.Key, ProximityAlert.Touch);
+                        }
+                        break;
+                    case ProximityAlert.Touch:
+                        break;
+                    case ProximityAlert.Exit:
+                        break;
+                    case ProximityAlert.Enter:
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
             }
         }
 
         /// <inheritdoc/>
+        public override void Disable()
+        {
+            base.Disable();
+
+            if (!Application.isPlaying || BoundaryDataProvider == null) { return; }
+
+            if (!boundaryVisualizationRoot.IsNull())
+            {
+                boundaryVisualizationRoot.SetActive(false);
+            }
+        }
+
+        /// <inheritdoc/>
+        public override void Destroy()
+        {
+            base.Destroy();
+
+            if (!Application.isPlaying || BoundaryDataProvider == null) { return; }
+
+            // Destroys the parent and all the child objects
+            boundaryVisualizationRoot.Destroy();
+        }
+
+        #endregion IMixedRealityService Implementation
+
+        #region Implementation of IMixedRealityBoundarySystem
+
+        /// <inheritdoc />
+        public event Action<GameObject, ProximityAlert> BoundaryProximityAlert;
+
+        /// <inheritdoc />
+        public IReadOnlyList<GameObject> TrackedObjects => trackedObjects.Keys.ToList();
+
+        /// <inheritdoc />
+        public IMixedRealityBoundaryDataProvider BoundaryDataProvider { get; private set; }
+
+        /// <inheritdoc />
+        public bool IsVisible
+        {
+            get => BoundaryDataProvider != null && BoundaryDataProvider.IsPlatformBoundaryVisible ||
+                   BoundarySystemVisualizationRoot.activeInHierarchy &&
+                   (ShowBoundary ||
+                    ShowFloor ||
+                    ShowWalls ||
+                    ShowCeiling);
+            set
+            {
+                if (BoundaryDataProvider != null)
+                {
+                    BoundaryDataProvider.IsPlatformBoundaryVisible = value;
+                }
+
+                BoundarySystemVisualizationRoot.SetActive(value);
+            }
+        }
+
+        private bool showBoundary;
+
+        /// <inheritdoc />
+        public bool ShowBoundary
+        {
+            get => showBoundary;
+            set
+            {
+                showBoundary = value;
+
+                if (!BoundaryVisualization.IsNull())
+                {
+                    BoundaryVisualization.SetActive(value);
+                }
+            }
+        }
+
+        /// <inheritdoc />
+        public bool IsConfigured => BoundaryDataProvider?.IsPlatformConfigured ?? false;
+
+        /// <inheritdoc />
         public float BoundaryHeight { get; set; }
+
+        private readonly int boundaryPhysicsLayer;
 
         private bool showFloor;
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public bool ShowFloor
         {
             get => showFloor;
             set
             {
-                if (showFloor == value) { return; }
-
                 showFloor = value;
 
-                if (value && (currentFloorObject.IsNull()))
+                if (!FloorVisualization.IsNull())
                 {
-                    GetFloorVisualization();
+                    FloorVisualization.SetActive(value);
                 }
-
-                if (!currentFloorObject.IsNull())
-                {
-                    currentFloorObject.SetActive(value);
-                }
-
-                RaiseBoundaryVisualizationChanged();
             }
         }
 
-        /// <inheritdoc/>
-        public Vector2 FloorScale { get; }
+        private Material FloorMaterial { get; }
 
-        /// <inheritdoc/>
-        public Material FloorMaterial { get; }
+        private Material BoundaryMaterial { get; }
 
-        private bool showPlayArea;
+        private bool showWalls = false;
 
-        private int floorPhysicsLayer;
-
-        /// <inheritdoc/>
-        public int FloorPhysicsLayer
+        /// <inheritdoc />
+        public bool ShowWalls
         {
-            get
-            {
-                if (!currentFloorObject.IsNull())
-                {
-                    floorPhysicsLayer = currentFloorObject.layer;
-                }
-
-                return floorPhysicsLayer;
-            }
+            get => showWalls;
             set
             {
-                floorPhysicsLayer = value;
+                showWalls = value;
 
-                if (!currentFloorObject.IsNull())
+                if (!WallVisualization.IsNull())
                 {
-                    currentFloorObject.layer = floorPhysicsLayer;
+                    WallVisualization.SetActive(value);
                 }
             }
         }
 
-        /// <inheritdoc/>
-        public bool ShowPlayArea
-        {
-            get => showPlayArea;
-            set
-            {
-                if (showPlayArea == value) { return; }
-
-                showPlayArea = value;
-
-                if (value && currentPlayAreaObject.IsNull())
-                {
-                    GetPlayAreaVisualization();
-                }
-
-                if (!currentPlayAreaObject.IsNull())
-                {
-                    currentPlayAreaObject.SetActive(value);
-                }
-
-                RaiseBoundaryVisualizationChanged();
-            }
-        }
-
-        private bool showTrackedArea;
-
-        /// <inheritdoc/>
-        public int PlayAreaPhysicsLayer
-        {
-            get
-            {
-                if (!currentPlayAreaObject.IsNull())
-                {
-                    playAreaPhysicsLayer = currentPlayAreaObject.layer;
-                }
-
-                return playAreaPhysicsLayer;
-            }
-            set
-            {
-                playAreaPhysicsLayer = value;
-
-                if (!currentPlayAreaObject.IsNull())
-                {
-                    currentPlayAreaObject.layer = playAreaPhysicsLayer;
-                }
-            }
-        }
-
-        private int playAreaPhysicsLayer;
-
-        /// <inheritdoc/>
-        public Material PlayAreaMaterial { get; }
-
-        /// <inheritdoc/>
-        public bool ShowTrackedArea
-        {
-            get => showTrackedArea;
-            set
-            {
-                if (showTrackedArea == value) { return; }
-                showTrackedArea = value;
-
-                if (value && currentTrackedAreaObject.IsNull())
-                {
-                    GetTrackedAreaVisualization();
-                }
-
-                if (!currentTrackedAreaObject.IsNull())
-                {
-                    currentTrackedAreaObject.SetActive(value);
-                }
-
-                RaiseBoundaryVisualizationChanged();
-            }
-        }
-
-        private bool showBoundaryWalls = false;
-
-        private int trackedAreaPhysicsLayer;
-
-        /// <inheritdoc/>
-        public int TrackedAreaPhysicsLayer
-        {
-            get
-            {
-                if (!currentTrackedAreaObject.IsNull())
-                {
-                    trackedAreaPhysicsLayer = currentTrackedAreaObject.layer;
-                }
-
-                return trackedAreaPhysicsLayer;
-            }
-            set
-            {
-                trackedAreaPhysicsLayer = value;
-
-                if (!currentTrackedAreaObject.IsNull())
-                {
-                    currentTrackedAreaObject.layer = trackedAreaPhysicsLayer;
-                }
-            }
-        }
-
-        /// <inheritdoc/>
-        public Material TrackedAreaMaterial { get; }
-
-        /// <inheritdoc/>
-        public bool ShowBoundaryWalls
-        {
-            get => showBoundaryWalls;
-            set
-            {
-                if (showBoundaryWalls == value) { return; }
-
-                showBoundaryWalls = value;
-
-                if (value && currentBoundaryWallObject.IsNull())
-                {
-                    GetBoundaryWallVisualization();
-                }
-
-                if (!currentBoundaryWallObject.IsNull())
-                {
-                    currentBoundaryWallObject.SetActive(value);
-                }
-
-                RaiseBoundaryVisualizationChanged();
-            }
-        }
+        private Material WallMaterial { get; }
 
         private bool showCeiling = false;
 
-        private int boundaryWallsPhysicsLayer;
-
-        /// <inheritdoc/>
-        public int BoundaryWallsPhysicsLayer
-        {
-            get
-            {
-                if (!currentBoundaryWallObject.IsNull())
-                {
-                    boundaryWallsPhysicsLayer = currentBoundaryWallObject.layer;
-                }
-
-                return boundaryWallsPhysicsLayer;
-            }
-            set
-            {
-                boundaryWallsPhysicsLayer = value;
-
-                if (!currentBoundaryWallObject.IsNull())
-                {
-                    currentBoundaryWallObject.layer = boundaryWallsPhysicsLayer;
-                }
-            }
-        }
-
-        /// <inheritdoc/>
-        public Material BoundaryWallMaterial { get; }
-
-        /// <inheritdoc/>
-        public bool ShowBoundaryCeiling
+        /// <inheritdoc />
+        public bool ShowCeiling
         {
             get => showCeiling;
             set
             {
-                if (showCeiling == value) { return; }
-
                 showCeiling = value;
 
-                if (value && currentCeilingObject.IsNull())
+                if (!CeilingVisualization.IsNull())
                 {
-                    GetBoundaryCeilingVisualization();
-                }
-
-                if (!currentCeilingObject.IsNull())
-                {
-                    currentCeilingObject.SetActive(value);
-                }
-
-                RaiseBoundaryVisualizationChanged();
-            }
-        }
-
-        private int ceilingPhysicsLayer;
-
-        /// <inheritdoc/>
-        public int CeilingPhysicsLayer
-        {
-            get
-            {
-                if (!currentCeilingObject.IsNull())
-                {
-                    ceilingPhysicsLayer = currentCeilingObject.layer;
-                }
-
-                return ceilingPhysicsLayer;
-            }
-            set
-            {
-                ceilingPhysicsLayer = value;
-
-                if (!currentCeilingObject.IsNull())
-                {
-                    currentFloorObject.layer = ceilingPhysicsLayer;
+                    CeilingVisualization.SetActive(value);
                 }
             }
         }
 
-        /// <inheritdoc/>
-        public Material BoundaryCeilingMaterial { get; }
+        private Material CeilingMaterial { get; }
 
-        /// <inheritdoc/>
-        public Edge[] Bounds { get; private set; } = new Edge[0];
+        /// <inheritdoc />
+        public Edge[] BoundaryBounds { get; private set; } = new Edge[0];
 
-        /// <inheritdoc/>
-        public float? FloorHeight { get; private set; }
-
-        /// <inheritdoc/>
-        public bool Contains(Vector3 location, Boundary.Type boundaryType = Boundary.Type.TrackedArea)
+        /// <inheritdoc />
+        public bool IsInsideBoundary(Vector3 position, Space referenceSpace = Space.World)
         {
-            if (!EdgeUtilities.IsValidPoint(location))
+            if (!EdgeUtilities.IsValidPoint(position))
             {
                 // Invalid location.
-                return false;
-            }
-
-            if (!FloorHeight.HasValue)
-            {
-                // No floor.
                 return false;
             }
 
@@ -548,33 +498,25 @@ namespace XRTK.Services.BoundarySystem
             var playspaceTransform = MixedRealityToolkit.CameraSystem != null
                 ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
                 : CameraCache.Main.transform.parent;
-            location = playspaceTransform.InverseTransformPoint(location);
 
-            if (FloorHeight.Value > location.y ||
-                BoundaryHeight < location.y)
+            if (referenceSpace == Space.World)
+            {
+                position = playspaceTransform.InverseTransformPoint(position);
+            }
+
+            if (position.y < 0 ||
+                position.y > BoundaryHeight)
             {
                 // Location below the floor or above the boundary height.
                 return false;
             }
 
             // Boundary coordinates are always "on the floor"
-            var point = new Vector2(location.x, location.z);
-
-            switch (boundaryType)
-            {
-                case Boundary.Type.PlayArea when rectangularBounds != null:
-                    // Check the inscribed rectangle.
-                    return rectangularBounds.IsInsideBoundary(point);
-                case Boundary.Type.TrackedArea:
-                    // Check the geometry
-                    return EdgeUtilities.IsInsideBoundary(Bounds, point);
-                default:
-                    // Not in either boundary type.
-                    return false;
-            }
+            var point = new Vector2(position.x, position.z);
+            return EdgeUtilities.IsInsideBoundary(BoundaryBounds, point);
         }
 
-        /// <inheritdoc/>
+        /// <inheritdoc />
         public bool TryGetRectangularBoundsParams(out Vector2 center, out float angle, out float width, out float height)
         {
             if (rectangularBounds == null || !rectangularBounds.IsValid)
@@ -600,298 +542,24 @@ namespace XRTK.Services.BoundarySystem
             return true;
         }
 
-        /// <inheritdoc/>
-        public GameObject GetFloorVisualization()
+        /// <inheritdoc />
+        public void RegisterTrackedObject(GameObject gameObject)
         {
-            if (!Application.isPlaying) { return null; }
-
-            if (!currentFloorObject.IsNull())
+            if (!trackedObjects.TryGetValue(gameObject, out _))
             {
-                return currentFloorObject;
-            }
-
-            if (!FloorHeight.HasValue)
-            {
-                // We were unable to locate the floor.
-                return null;
-            }
-
-            var floorScale = FloorScale;
-            var position = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.position
-                : CameraCache.Main.transform.parent.position;
-
-            // Render the floor.
-            currentFloorObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            currentFloorObject.name = "Boundary System Floor";
-            currentFloorObject.transform.localScale = new Vector3(floorScale.x, BoundaryObjectThickness, floorScale.y);
-            currentFloorObject.transform.Translate(new Vector3(
-                position.x,
-                FloorHeight.Value - (currentFloorObject.transform.localScale.y * 0.5f),
-                position.z));
-            currentFloorObject.layer = FloorPhysicsLayer;
-            currentFloorObject.GetComponent<Renderer>().sharedMaterial = FloorMaterial;
-
-            currentFloorObject.transform.parent = BoundaryVisualizationParent.transform;
-
-            return currentFloorObject;
-        }
-
-        /// <inheritdoc/>
-        public GameObject GetPlayAreaVisualization()
-        {
-            if (!Application.isPlaying) { return null; }
-
-            if (!currentPlayAreaObject.IsNull())
-            {
-                return currentPlayAreaObject;
-            }
-
-            // Get the rectangular bounds.
-
-            if (!TryGetRectangularBoundsParams(out var center, out var angle, out var width, out var height))
-            {
-                // No rectangular bounds, therefore cannot create the play area.
-                return null;
-            }
-
-            // Render the rectangular bounds.
-            if (!EdgeUtilities.IsValidPoint(center))
-            {
-                // Invalid rectangle / play area not found
-                return null;
-            }
-
-            currentPlayAreaObject = GameObject.CreatePrimitive(PrimitiveType.Quad);
-            currentPlayAreaObject.name = "Play Area";
-            currentPlayAreaObject.layer = PlayAreaPhysicsLayer;
-            currentPlayAreaObject.transform.Translate(new Vector3(center.x, BoundaryObjectRenderOffset, center.y));
-            currentPlayAreaObject.transform.Rotate(new Vector3(90f, -angle, 0.0f));
-            currentPlayAreaObject.transform.localScale = new Vector3(width, height, 1.0f);
-            currentPlayAreaObject.GetComponent<Renderer>().sharedMaterial = PlayAreaMaterial;
-
-            currentPlayAreaObject.transform.parent = BoundaryVisualizationParent.transform;
-
-            return currentPlayAreaObject;
-        }
-
-        /// <inheritdoc/>
-        public GameObject GetTrackedAreaVisualization()
-        {
-            if (!Application.isPlaying) { return null; }
-
-            if (!currentTrackedAreaObject.IsNull())
-            {
-                return currentTrackedAreaObject;
-            }
-
-            if (Bounds.Length == 0)
-            {
-                // If we do not have boundary edges, we cannot render them.
-                return null;
-            }
-
-            // Get the line vertices
-            var lineVertices = new List<Vector3>();
-
-            for (int i = 0; i < Bounds.Length; i++)
-            {
-                lineVertices.Add(new Vector3(Bounds[i].PointA.x, 0f, Bounds[i].PointA.y));
-            }
-
-            // Add the first vertex again to ensure the loop closes.
-            lineVertices.Add(lineVertices[0]);
-
-            // We use an empty object and attach a line renderer.
-            currentTrackedAreaObject = new GameObject("Tracked Area")
-            {
-                layer = DefaultIgnoreRaycastLayer
-            };
-
-            var position = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.position
-                : CameraCache.Main.transform.parent.position;
-
-            currentTrackedAreaObject.AddComponent<LineRenderer>();
-            currentTrackedAreaObject.transform.Translate(
-                new Vector3(position.x, BoundaryObjectRenderOffset, position.z));
-            currentPlayAreaObject.layer = TrackedAreaPhysicsLayer;
-
-            // Configure the renderer properties.
-            const float lineWidth = 0.01f;
-            var lineRenderer = currentTrackedAreaObject.GetComponent<LineRenderer>();
-            lineRenderer.sharedMaterial = TrackedAreaMaterial;
-            lineRenderer.useWorldSpace = false;
-            lineRenderer.startWidth = lineWidth;
-            lineRenderer.endWidth = lineWidth;
-            lineRenderer.positionCount = lineVertices.Count;
-            lineRenderer.SetPositions(lineVertices.ToArray());
-
-            currentTrackedAreaObject.transform.parent = BoundaryVisualizationParent.transform;
-
-            return currentTrackedAreaObject;
-        }
-
-        /// <inheritdoc/>
-        public GameObject GetBoundaryWallVisualization()
-        {
-            if (!Application.isPlaying) { return null; }
-
-            if (!currentBoundaryWallObject.IsNull())
-            {
-                return currentBoundaryWallObject;
-            }
-
-            if (!FloorHeight.HasValue)
-            {
-                // We need a floor on which to place the walls.
-                return null;
-            }
-
-            if (Bounds.Length == 0)
-            {
-                // If we do not have boundary edges, we cannot render walls.
-                return null;
-            }
-
-            currentBoundaryWallObject = new GameObject("Tracked Area Walls")
-            {
-                layer = BoundaryWallsPhysicsLayer
-            };
-
-            // Create and parent the child objects
-            const float wallDepth = BoundaryObjectThickness;
-
-            for (int i = 0; i < Bounds.Length; i++)
-            {
-                var wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                wall.name = $"Wall_{i}";
-                wall.GetComponent<Renderer>().sharedMaterial = BoundaryWallMaterial;
-                wall.transform.localScale = new Vector3((Bounds[i].PointB - Bounds[i].PointA).magnitude, BoundaryHeight, wallDepth);
-                wall.layer = DefaultIgnoreRaycastLayer;
-
-                // Position and rotate the wall.
-                var mid = Vector2.Lerp(Bounds[i].PointA, Bounds[i].PointB, 0.5f);
-                wall.transform.position = new Vector3(mid.x, (BoundaryHeight * 0.5f), mid.y);
-                var rotationAngle = MathUtilities.GetAngleBetween(Bounds[i].PointB, Bounds[i].PointA);
-                wall.transform.rotation = Quaternion.Euler(0.0f, -rotationAngle, 0.0f);
-
-                wall.transform.parent = currentBoundaryWallObject.transform;
-            }
-
-            currentBoundaryWallObject.transform.parent = BoundaryVisualizationParent.transform;
-
-            return currentBoundaryWallObject;
-        }
-
-        /// <inheritdoc/>
-        public GameObject GetBoundaryCeilingVisualization()
-        {
-            if (!Application.isPlaying) { return null; }
-
-            if (!currentCeilingObject.IsNull())
-            {
-                return currentCeilingObject;
-            }
-
-            if (Bounds.Length == 0)
-            {
-                // If we do not have boundary edges, we cannot render a ceiling.
-                return null;
-            }
-
-            // Get the smallest rectangle that contains the entire boundary.
-            var boundaryBoundingBox = new Bounds();
-
-            for (int i = 0; i < Bounds.Length; i++)
-            {
-                // The boundary geometry is a closed loop. As such, we can encapsulate only PointA of each Edge.
-                boundaryBoundingBox.Encapsulate(new Vector3(Bounds[i].PointA.x, BoundaryHeight * 0.5f, Bounds[i].PointA.y));
-            }
-
-            // Render the ceiling.
-            const float ceilingDepth = BoundaryObjectThickness;
-            currentCeilingObject = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            currentCeilingObject.name = "Ceiling";
-            currentCeilingObject.layer = DefaultIgnoreRaycastLayer;
-            currentCeilingObject.transform.localScale = new Vector3(boundaryBoundingBox.size.x, ceilingDepth, boundaryBoundingBox.size.z);
-            currentCeilingObject.transform.Translate(new Vector3(
-                boundaryBoundingBox.center.x,
-                BoundaryHeight + (currentCeilingObject.transform.localScale.y * 0.5f),
-                boundaryBoundingBox.center.z));
-            currentCeilingObject.GetComponent<Renderer>().sharedMaterial = BoundaryCeilingMaterial;
-            currentCeilingObject.layer = CeilingPhysicsLayer;
-            currentCeilingObject.transform.parent = BoundaryVisualizationParent.transform;
-
-            return currentCeilingObject;
-        }
-
-        #endregion IMixedRealityBoundarySystem Implementation
-
-        /// <summary>
-        /// The largest rectangle that is contained withing the play space geometry.
-        /// </summary>
-        private InscribedRectangle rectangularBounds;
-
-        private GameObject currentFloorObject;
-        private GameObject currentPlayAreaObject;
-        private GameObject currentTrackedAreaObject;
-        private GameObject currentBoundaryWallObject;
-        private GameObject currentCeilingObject;
-
-        /// <summary>
-        /// Retrieves the boundary geometry and creates the boundary and inscribed play space volumes.
-        /// </summary>
-        private void CalculateBoundaryBounds()
-        {
-            // Reset the bounds
-            Bounds = new Edge[0];
-            FloorHeight = null;
-            rectangularBounds = null;
-
-            // Boundaries are supported for Room Scale experiences only.
-            if (XRDevice.GetTrackingSpaceType() != TrackingSpaceType.RoomScale)
-            {
-                return;
-            }
-
-            // Get the boundary geometry.
-            var boundaryGeometry = new List<Vector3>(0);
-            var boundaryEdges = new List<Edge>(0);
-
-            if (Boundary.TryGetGeometry(boundaryGeometry, Boundary.Type.TrackedArea) && boundaryGeometry.Count > 0)
-            {
-                // FloorHeight starts out as null. Use a suitably high value for the floor to ensure
-                // that we do not accidentally set it too low.
-                var floorHeight = float.MaxValue;
-
-                for (int i = 0; i < boundaryGeometry.Count; i++)
-                {
-                    var pointA = boundaryGeometry[i];
-                    var pointB = boundaryGeometry[(i + 1) % boundaryGeometry.Count];
-                    boundaryEdges.Add(new Edge(pointA, pointB));
-
-                    floorHeight = Mathf.Min(floorHeight, boundaryGeometry[i].y);
-                }
-
-                FloorHeight = floorHeight;
-                Bounds = boundaryEdges.ToArray();
-                CreateInscribedBounds();
-            }
-            else if (XRSettings.enabled && Boundary.configured)
-            {
-                Debug.LogWarning("Failed to calculate boundary bounds.");
+                trackedObjects.Add(gameObject, ProximityAlert.Clear);
             }
         }
 
-        /// <summary>
-        /// Creates the two dimensional volume described by the largest rectangle that
-        /// is contained withing the play space geometry and the configured height.
-        /// </summary>
-        private void CreateInscribedBounds()
+        /// <inheritdoc />
+        public void UnregisterTrackedObject(GameObject gameObject)
         {
-            // We always use the same seed so that from run to run, the inscribed bounds are consistent.
-            rectangularBounds = new InscribedRectangle(Bounds, Mathf.Abs("Mixed Reality Toolkit".GetHashCode()));
+            if (trackedObjects.TryGetValue(gameObject, out _))
+            {
+                trackedObjects.Remove(gameObject);
+            }
         }
+
+        #endregion Implementation of IMixedRealityBoundarySystem
     }
 }

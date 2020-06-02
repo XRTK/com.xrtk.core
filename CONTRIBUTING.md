@@ -15,12 +15,13 @@ Mixed Reality Toolkit is under the [MIT license](https://github.com/nunit/nunit/
 * Familiarization with projects with Git Source conrol versioning. Atlassian has a wonderful guide for [getting started with Git](https://www.atlassian.com/git).
 * Install Git on your local machine and have git assigned as an envionment variable.
 * Install a Git client like [Fork](https://git-fork.com/) or [GitHub for Desktop](https://desktop.github.com/) for staging and committing code to source control
-* Follow any [Getting Started Guidelines](articles\00-GettingStarted.md#prerequisites) for setting up your development envrionment not covered here.
+* Follow any [Getting Started Guidelines](articles/00-GettingStarted.md#prerequisites) for setting up your development envrionment not covered here.
 
 ### Steps
 
 1. Fork the repository you'd like to open a pull request for.
-2. Sync any changes from the source repository to your fork.
+2. Clone or sync any changes from the source repository to your local disk.
+    > **Note:** When initially cloinging the repository be sure to recursively check out all submodules!
 3. Create a new branch based on the last source development commit.
 4. Make the changes you'd like to contribute.
 5. Stage and commit your changes with thoughtful messages detailing the work.

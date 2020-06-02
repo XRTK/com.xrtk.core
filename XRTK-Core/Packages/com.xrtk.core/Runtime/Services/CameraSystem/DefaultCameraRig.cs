@@ -57,7 +57,7 @@ namespace XRTK.Services.CameraSystem
 
                 var playspaceTransformLookup = GameObject.Find(playspaceName);
 
-                playspaceTransform = playspaceTransformLookup == null
+                playspaceTransform = playspaceTransformLookup.IsNull()
                     ? new GameObject(playspaceName).transform
                     : playspaceTransformLookup.transform;
 

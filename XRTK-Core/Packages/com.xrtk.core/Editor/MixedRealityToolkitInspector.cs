@@ -11,6 +11,7 @@ using XRTK.Definitions;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.Profiles;
 using XRTK.Editor.Utilities;
+using XRTK.Extensions;
 using XRTK.Services;
 
 namespace XRTK.Editor
@@ -34,7 +35,7 @@ namespace XRTK.Editor
         {
             activeProfile = serializedObject.FindProperty(nameof(activeProfile));
             currentPickerWindow = -1;
-            checkChange = activeProfile.objectReferenceValue == null;
+            checkChange = activeProfile.objectReferenceValue.IsNull();
         }
 
         public override void OnInspectorGUI()
@@ -62,7 +63,7 @@ namespace XRTK.Editor
             var commandName = Event.current.commandName;
             var rootProfiles = ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitRootProfile>();
 
-            if (activeProfile.objectReferenceValue == null &&
+            if (activeProfile.objectReferenceValue.IsNull() &&
                 currentPickerWindow == -1 && checkChange)
             {
                 switch (rootProfiles.Length)

@@ -72,7 +72,7 @@ namespace XRTK.Services
             {
 #if UNITY_EDITOR
                 if (!Application.isPlaying &&
-                    activeProfile == null &&
+                    activeProfile.IsNull() &&
                     UnityEditor.Selection.activeObject != Instance)
                 {
                     UnityEditor.Selection.activeObject = Instance;
@@ -106,7 +106,7 @@ namespace XRTK.Services
 
             isResetting = true;
 
-            if (activeProfile != null)
+            if (!activeProfile.IsNull())
             {
                 DisableAllServices();
                 DestroyAllServices();
@@ -114,7 +114,7 @@ namespace XRTK.Services
 
             activeProfile = profile;
 
-            if (profile != null)
+            if (!profile.IsNull())
             {
                 DisableAllServices();
                 DestroyAllServices();
@@ -523,7 +523,18 @@ namespace XRTK.Services
                 TryRegisterServiceInternal(interfaceType, mixedRealityService);
             }
 
+#if UNITY_EDITOR
+            if (Application.isPlaying)
+            {
+                InitializeAllServices();
+            }
+            else
+            {
+                UnityEditor.EditorApplication.delayCall += InitializeAllServices;
+            }
+#else
             InitializeAllServices();
+#endif
 
             #endregion Services Initialization
 
@@ -659,7 +670,7 @@ namespace XRTK.Services
                     Destroy(gameObject);
                 }
 
-                Debug.LogWarning("Trying to instantiate a second instance of the Mixed Reality Toolkit. Additional Instance was destroyed");
+                Debug.LogWarning($"Trying to instantiate a second instance of the {nameof(MixedRealityToolkit)}. Additional Instance was destroyed");
             }
             else if (!IsInitialized)
             {
@@ -1905,8 +1916,8 @@ namespace XRTK.Services
             {
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
-                    instance.activeProfile == null ||
-                    instance.activeProfile != null && !instance.activeProfile.IsCameraSystemEnabled)
+                    instance.activeProfile.IsNull() ||
+                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsCameraSystemEnabled)
                 {
                     return null;
                 }
@@ -1961,8 +1972,8 @@ namespace XRTK.Services
             {
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
-                    instance.activeProfile == null ||
-                    instance.activeProfile != null && !instance.activeProfile.IsInputSystemEnabled)
+                    instance.activeProfile.IsNull() ||
+                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsInputSystemEnabled)
                 {
                     return null;
                 }
@@ -2017,8 +2028,8 @@ namespace XRTK.Services
             {
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
-                    instance.activeProfile == null ||
-                    instance.activeProfile != null && !instance.activeProfile.IsBoundarySystemEnabled)
+                    instance.activeProfile.IsNull() ||
+                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsBoundarySystemEnabled)
                 {
                     return null;
                 }
@@ -2073,8 +2084,8 @@ namespace XRTK.Services
             {
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
-                    instance.activeProfile == null ||
-                    instance.activeProfile != null && !instance.activeProfile.IsSpatialAwarenessSystemEnabled)
+                    instance.activeProfile.IsNull() ||
+                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsSpatialAwarenessSystemEnabled)
                 {
                     return null;
                 }
@@ -2129,8 +2140,8 @@ namespace XRTK.Services
             {
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
-                    instance.activeProfile == null ||
-                    instance.activeProfile != null && !instance.activeProfile.IsTeleportSystemEnabled)
+                    instance.activeProfile.IsNull() ||
+                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsTeleportSystemEnabled)
                 {
                     return null;
                 }
@@ -2185,8 +2196,8 @@ namespace XRTK.Services
             {
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
-                    instance.activeProfile == null ||
-                    instance.activeProfile != null && !instance.activeProfile.IsNetworkingSystemEnabled)
+                    instance.activeProfile.IsNull() ||
+                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsNetworkingSystemEnabled)
                 {
                     return null;
                 }
@@ -2241,8 +2252,8 @@ namespace XRTK.Services
             {
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
-                    instance.activeProfile == null ||
-                    instance.activeProfile != null && !instance.activeProfile.IsDiagnosticsSystemEnabled)
+                    instance.activeProfile.IsNull() ||
+                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsDiagnosticsSystemEnabled)
                 {
                     return null;
                 }

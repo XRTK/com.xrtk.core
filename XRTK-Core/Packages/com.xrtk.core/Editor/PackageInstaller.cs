@@ -137,7 +137,7 @@ namespace XRTK.Editor
             {
                 var platformConfigurationProfile = AssetDatabase.LoadAssetAtPath<MixedRealityPlatformServiceConfigurationProfile>(profile);
 
-                if (platformConfigurationProfile == null) { continue; }
+                if (platformConfigurationProfile.IsNull()) { continue; }
 
                 var rootProfile = MixedRealityToolkit.IsInitialized
                     ? MixedRealityToolkit.Instance.ActiveProfile

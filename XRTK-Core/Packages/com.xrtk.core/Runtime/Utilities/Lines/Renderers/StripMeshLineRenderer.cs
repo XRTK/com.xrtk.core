@@ -107,30 +107,8 @@ namespace XRTK.Utilities.Lines.Renderers
 
         private void OnDisable()
         {
-            if (lineMatInstance != null)
-            {
-                if (Application.isEditor)
-                {
-                    DestroyImmediate(lineMatInstance);
-                }
-                else
-                {
-                    Destroy(lineMatInstance);
-                }
-            }
-
-            if (meshRendererGameObject != null)
-            {
-                if (Application.isEditor)
-                {
-                    DestroyImmediate(meshRendererGameObject);
-                }
-                else
-                {
-                    Destroy(meshRendererGameObject);
-                }
-                stripMeshRenderer = null;
-            }
+            lineMatInstance.Destroy();
+            meshRendererGameObject.Destroy();
         }
 
         public static void GenerateStripMesh(List<Vector3> positionList, List<Color> colorList, List<float> thicknessList, float uvOffsetLocal, List<Vector3> forwardList, Mesh mesh, Vector3 up)

@@ -6,6 +6,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Editor.Extensions;
+using XRTK.Extensions;
 
 namespace XRTK.Editor.Utilities
 {
@@ -40,14 +41,14 @@ namespace XRTK.Editor.Utilities
                 instance = ScriptableObject.CreateInstance(profileType);
             }
 
-            Debug.Assert(instance != null);
+            Debug.Assert(!instance.IsNull());
 
-            var assetPath = parentProfile != null ? AssetDatabase.GetAssetPath(parentProfile) : string.Empty;
+            var assetPath = !parentProfile.IsNull() ? AssetDatabase.GetAssetPath(parentProfile) : string.Empty;
             var newProfile = instance.CreateAsset(assetPath) as BaseMixedRealityProfile;
-            Debug.Assert(newProfile != null);
+            Debug.Assert(!newProfile.IsNull());
 
             if (clone &&
-                property.objectReferenceValue != null)
+                !property.objectReferenceValue.IsNull())
             {
                 var oldProfile = property.objectReferenceValue as BaseMixedRealityProfile;
                 newProfile.CopySerializedValues(oldProfile);
@@ -60,7 +61,7 @@ namespace XRTK.Editor.Utilities
 
         public static void CopySerializedValues(this BaseMixedRealityProfile target, BaseMixedRealityProfile source)
         {
-            Debug.Assert(target != null);
+            Debug.Assert(!target.IsNull());
             var serializedObject = new SerializedObject(target);
             Undo.RecordObject(target, "Paste Profile Values");
             var originalName = serializedObject.targetObject.name;

@@ -40,7 +40,7 @@ namespace XRTK.Editor.Profiles
         {
             targetProfile = serializedObject;
             currentlySelectedProfile = target as BaseMixedRealityProfile;
-            Debug.Assert(currentlySelectedProfile != null);
+            Debug.Assert(!currentlySelectedProfile.IsNull());
             ThisProfile = currentlySelectedProfile;
             AssetDatabase.TryGetGUIDAndLocalFileIdentifier(ThisProfile, out var guidHex, out long _);
             ThisProfileGuidString = guidHex;
@@ -54,7 +54,7 @@ namespace XRTK.Editor.Profiles
 
         protected void RenderHeader(string infoBoxText = "", Texture2D image = null)
         {
-            if (image != null ||
+            if (!image.IsNull() ||
                 !string.IsNullOrWhiteSpace(infoBoxText))
             {
                 isOverrideHeader = true;
@@ -64,7 +64,7 @@ namespace XRTK.Editor.Profiles
                 if (isOverrideHeader) { return; }
             }
 
-            if (image == null)
+            if (image.IsNull())
             {
                 MixedRealityInspectorUtility.RenderMixedRealityToolkitLogo();
             }
@@ -73,7 +73,7 @@ namespace XRTK.Editor.Profiles
                 MixedRealityInspectorUtility.RenderInspectorHeader(image);
             }
 
-            if (ThisProfile.ParentProfile != null &&
+            if (!ThisProfile.ParentProfile.IsNull() &&
                 GUILayout.Button("Back to parent profile"))
             {
                 Selection.activeObject = ThisProfile.ParentProfile;
@@ -96,7 +96,7 @@ namespace XRTK.Editor.Profiles
             profileSource = currentlySelectedProfile;
             var newProfile = CreateInstance(currentlySelectedProfile.GetType().ToString());
             currentlySelectedProfile = newProfile.CreateAsset() as BaseMixedRealityProfile;
-            Debug.Assert(currentlySelectedProfile != null);
+            Debug.Assert(!currentlySelectedProfile.IsNull());
 
             await new WaitUntil(() => profileSource != currentlySelectedProfile);
 
@@ -115,9 +115,9 @@ namespace XRTK.Editor.Profiles
         [MenuItem("CONTEXT/BaseMixedRealityProfile/Paste Profile Values", true)]
         private static bool PasteProfileValuesValidation()
         {
-            return currentlySelectedProfile != null &&
+            return !currentlySelectedProfile.IsNull() &&
                    targetProfile != null &&
-                   profileSource != null &&
+                   !profileSource.IsNull() &&
                    currentlySelectedProfile.GetType() == profileSource.GetType();
         }
 

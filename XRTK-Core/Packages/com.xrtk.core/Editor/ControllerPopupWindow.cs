@@ -101,7 +101,7 @@ namespace XRTK.Editor
 
         private void OnFocus()
         {
-            if (window == null)
+            if (window.IsNull())
             {
                 Close();
             }
@@ -142,7 +142,7 @@ namespace XRTK.Editor
 
             var asset = AssetDatabase.LoadAssetAtPath<TextAsset>(EditorWindowOptionsPath);
 
-            if (asset == null)
+            if (asset.IsNull())
             {
                 var empty = new ControllerInputActionOptions
                 {
@@ -323,7 +323,7 @@ namespace XRTK.Editor
                 var interactionProfileProperty = interactionProfilesList.GetArrayElementAtIndex(i);
                 var mappingProfile = interactionProfileProperty.objectReferenceValue as MixedRealityInteractionMappingProfile;
 
-                if (mappingProfile == null)
+                if (mappingProfile.IsNull())
                 {
                     EditorGUILayout.BeginHorizontal();
                     EditorGUILayout.PropertyField(interactionProfileProperty, GUIContent.none, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
@@ -342,7 +342,7 @@ namespace XRTK.Editor
                 EditorGUILayout.BeginHorizontal();
 
                 if (useCustomInteractionMapping ||
-                    currentControllerTexture == null)
+                    currentControllerTexture.IsNull())
                 {
                     bool skip = false;
 

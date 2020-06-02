@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
@@ -21,7 +22,7 @@ namespace XRTK.Providers.Controllers
         protected BaseControllerDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            if (profile == null)
+            if (profile.IsNull())
             {
                 throw new UnassignedReferenceException($"A {nameof(profile)} is required for {name}");
             }

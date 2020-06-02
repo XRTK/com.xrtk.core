@@ -217,7 +217,7 @@ namespace XRTK.Editor
             {
                 EditorPreferences.Set("_AutoLoadSymbolicLinks", autoLoadSymbolicLinks = value);
 
-                if (autoLoadSymbolicLinks && SymbolicLinker.Settings == null)
+                if (autoLoadSymbolicLinks && SymbolicLinker.Settings.IsNull())
                 {
                     ScriptableObject.CreateInstance(nameof(SymbolicLinkSettings)).CreateAsset();
                 }
@@ -402,7 +402,7 @@ namespace XRTK.Editor
 
             if (EditorBuildSettings.scenes.Length < 1)
             {
-                if (asset == null)
+                if (asset.IsNull())
                 {
                     Debug.Log($"{sceneName} scene not found in build settings!");
                     return null;
@@ -435,7 +435,7 @@ namespace XRTK.Editor
                 asset = AssetDatabase.LoadAssetAtPath(editorScene.path, typeof(SceneAsset)) as SceneAsset;
             }
 
-            if (asset == null)
+            if (asset.IsNull())
             {
                 return null;
             }

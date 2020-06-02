@@ -268,7 +268,7 @@ namespace XRTK.Editor.Profiles
                 var renderedProfile = configurationProfileProperty.objectReferenceValue as BaseMixedRealityProfile;
                 Debug.Assert(renderedProfile != null);
 
-                if (renderedProfile.ParentProfile == null ||
+                if (renderedProfile.ParentProfile.IsNull() ||
                     renderedProfile.ParentProfile != ThisProfile)
                 {
                     renderedProfile.ParentProfile = ThisProfile;

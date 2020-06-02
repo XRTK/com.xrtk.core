@@ -9,6 +9,7 @@
     }
   ],
   "dependencies": {
+    "com.unity.mobile.android-logcat": "1.1.1",
     "com.unity.package-manager-ui": "2.1.2",
     "com.unity.textmeshpro": "2.0.1",
     "com.unity.xr.legacyinputhelpers": "2.1.4",

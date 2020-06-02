@@ -242,7 +242,6 @@ namespace XRTK.Extensions
 
             if (updateApplication)
             {
-                UnityEngine.Debug.Log($"{application}:{args}");
 #if UNITY_EDITOR_WIN
                 application = "cmd.exe";
                 args = $"/c {args}";

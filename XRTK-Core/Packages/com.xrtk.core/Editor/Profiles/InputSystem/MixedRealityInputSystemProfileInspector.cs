@@ -9,6 +9,7 @@ using XRTK.Definitions.Controllers;
 using XRTK.Definitions.InputSystem;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.Profiles.InputSystem.Controllers;
+using XRTK.Extensions;
 using XRTK.Services;
 
 namespace XRTK.Editor.Profiles.InputSystem
@@ -78,7 +79,7 @@ namespace XRTK.Editor.Profiles.InputSystem
                 {
                     var controllerDataProviderProfile = (BaseMixedRealityControllerDataProviderProfile)configurationProfileProperty.objectReferenceValue;
 
-                    if (controllerDataProviderProfile == null ||
+                    if (controllerDataProviderProfile.IsNull() ||
                         controllerDataProviderProfile.ControllerMappingProfiles == null)
                     {
                         continue;
@@ -86,7 +87,7 @@ namespace XRTK.Editor.Profiles.InputSystem
 
                     foreach (var mappingProfile in controllerDataProviderProfile.ControllerMappingProfiles)
                     {
-                        if (mappingProfile == null) { continue; }
+                        if (mappingProfile.IsNull()) { continue; }
 
                         AssetDatabase.TryGetGUIDAndLocalFileIdentifier(mappingProfile, out var guid, out long _);
 

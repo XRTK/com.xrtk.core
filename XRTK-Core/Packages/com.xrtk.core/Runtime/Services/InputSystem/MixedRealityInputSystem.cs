@@ -194,14 +194,14 @@ namespace XRTK.Services.InputSystem
                 // ReSharper disable once SuspiciousTypeConversion.Global
                 var component = CameraCache.Main.GetComponent<IMixedRealityGazeProvider>() as Component;
 
-                if (component != null)
+                if (!component.IsNull())
                 {
                     UnityEngine.Object.DestroyImmediate(component);
                 }
 
                 var inputModule = CameraCache.Main.GetComponent<StandaloneInputModule>();
 
-                if (inputModule != null)
+                if (!inputModule.IsNull())
                 {
                     UnityEngine.Object.DestroyImmediate(inputModule);
                 }

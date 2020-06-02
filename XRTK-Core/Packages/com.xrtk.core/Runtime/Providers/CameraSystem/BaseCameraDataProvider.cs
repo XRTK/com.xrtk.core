@@ -23,7 +23,7 @@ namespace XRTK.Providers.CameraSystem
         {
             cameraSystem = MixedRealityToolkit.CameraSystem;
 
-            if (profile == null)
+            if (profile.IsNull())
             {
                 profile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile.GlobalCameraProfile;
             }
@@ -194,16 +194,16 @@ namespace XRTK.Providers.CameraSystem
         {
             base.Disable();
 
-            if (CameraRig == null ||
-                CameraRig.GameObject == null)
+            if (CameraRig.GameObject.IsNull() ||
+                CameraRig == null)
             {
                 return;
             }
 
             ResetRigTransforms();
 
-            if (CameraRig.PlayerCamera != null &&
-                CameraRig.PlayerCamera.transform != null)
+            if (!CameraRig.PlayerCamera.IsNull() &&
+                !CameraRig.PlayerCamera.transform.IsNull())
             {
                 var cameraTransform = CameraRig.PlayerCamera.transform;
                 cameraTransform.SetParent(null);
@@ -213,27 +213,13 @@ namespace XRTK.Providers.CameraSystem
 
             if (CameraRig.PlayspaceTransform != null)
             {
-                if (Application.isPlaying)
-                {
-                    UnityEngine.Object.Destroy(CameraRig.PlayspaceTransform.gameObject);
-                }
-                else
-                {
-                    UnityEngine.Object.DestroyImmediate(CameraRig.PlayspaceTransform.gameObject);
-                }
+                CameraRig.PlayspaceTransform.gameObject.Destroy();
             }
 
             if (CameraRig is Component component &&
                 component is IMixedRealityCameraRig)
             {
-                if (Application.isPlaying)
-                {
-                    UnityEngine.Object.Destroy(component);
-                }
-                else
-                {
-                    UnityEngine.Object.DestroyImmediate(component);
-                }
+                component.Destroy();
             }
         }
 

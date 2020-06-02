@@ -9,6 +9,7 @@ using UnityEngine.Experimental.XR;
 using UnityEngine.XR;
 using XRTK.Definitions.BoundarySystem;
 using XRTK.EventDatum.Boundary;
+using XRTK.Extensions;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Utilities;
 
@@ -125,94 +126,9 @@ namespace XRTK.Services.BoundarySystem
         /// <inheritdoc/>
         public override void Destroy()
         {
-            // First, detach the child objects (we are tracking them separately)
-            // and clean up the parent.
-            if (boundaryVisualizationParent != null)
-            {
-                if (Application.isEditor)
-                {
-                    Object.DestroyImmediate(boundaryVisualizationParent);
-                }
-                else
-                {
-                    boundaryVisualizationParent.transform.DetachChildren();
-                    Object.Destroy(boundaryVisualizationParent);
-                }
-
-                boundaryVisualizationParent = null;
-            }
-
-            // Next, clean up the detached children.
-            if (currentFloorObject != null)
-            {
-                if (Application.isEditor)
-                {
-                    Object.DestroyImmediate(currentFloorObject);
-                }
-                else
-                {
-                    Object.Destroy(currentFloorObject);
-                }
-
-                currentFloorObject = null;
-            }
-
-            if (currentPlayAreaObject != null)
-            {
-                if (Application.isEditor)
-                {
-                    Object.DestroyImmediate(currentPlayAreaObject);
-                }
-                else
-                {
-                    Object.Destroy(currentPlayAreaObject);
-                }
-
-                currentPlayAreaObject = null;
-            }
-
-            if (currentTrackedAreaObject != null)
-            {
-                if (Application.isEditor)
-                {
-                    Object.DestroyImmediate(currentTrackedAreaObject);
-                }
-                else
-                {
-                    Object.Destroy(currentTrackedAreaObject);
-                }
-
-                currentTrackedAreaObject = null;
-            }
-
-            if (currentBoundaryWallObject != null)
-            {
-                if (Application.isEditor)
-                {
-                    Object.DestroyImmediate(currentBoundaryWallObject);
-                }
-                else
-                {
-                    Object.Destroy(currentBoundaryWallObject);
-                }
-
-                currentBoundaryWallObject = null;
-            }
-
-            if (currentCeilingObject != null)
-            {
-                if (Application.isEditor)
-                {
-                    Object.DestroyImmediate(currentCeilingObject);
-                }
-                else
-                {
-                    Object.Destroy(currentCeilingObject);
-                }
-
-                currentCeilingObject = null;
-            }
-
+            base.Destroy();
+            // Destroys the parent and all the child objects
+            boundaryVisualizationParent.Destroy();
             RaiseBoundaryVisualizationChanged();
         }
 
@@ -318,7 +234,7 @@ namespace XRTK.Services.BoundarySystem
         {
             get
             {
-                if (boundaryVisualizationParent != null)
+                if (!boundaryVisualizationParent.IsNull())
                 {
                     return boundaryVisualizationParent;
                 }
@@ -347,12 +263,12 @@ namespace XRTK.Services.BoundarySystem
 
                 showFloor = value;
 
-                if (value && (currentFloorObject == null))
+                if (value && (currentFloorObject.IsNull()))
                 {
                     GetFloorVisualization();
                 }
 
-                if (currentFloorObject != null)
+                if (!currentFloorObject.IsNull())
                 {
                     currentFloorObject.SetActive(value);
                 }
@@ -376,7 +292,7 @@ namespace XRTK.Services.BoundarySystem
         {
             get
             {
-                if (currentFloorObject != null)
+                if (!currentFloorObject.IsNull())
                 {
                     floorPhysicsLayer = currentFloorObject.layer;
                 }
@@ -386,7 +302,8 @@ namespace XRTK.Services.BoundarySystem
             set
             {
                 floorPhysicsLayer = value;
-                if (currentFloorObject != null)
+
+                if (!currentFloorObject.IsNull())
                 {
                     currentFloorObject.layer = floorPhysicsLayer;
                 }
@@ -403,12 +320,12 @@ namespace XRTK.Services.BoundarySystem
 
                 showPlayArea = value;
 
-                if (value && (currentPlayAreaObject == null))
+                if (value && currentPlayAreaObject.IsNull())
                 {
                     GetPlayAreaVisualization();
                 }
 
-                if (currentPlayAreaObject != null)
+                if (!currentPlayAreaObject.IsNull())
                 {
                     currentPlayAreaObject.SetActive(value);
                 }
@@ -424,7 +341,7 @@ namespace XRTK.Services.BoundarySystem
         {
             get
             {
-                if (currentPlayAreaObject != null)
+                if (!currentPlayAreaObject.IsNull())
                 {
                     playAreaPhysicsLayer = currentPlayAreaObject.layer;
                 }
@@ -435,7 +352,7 @@ namespace XRTK.Services.BoundarySystem
             {
                 playAreaPhysicsLayer = value;
 
-                if (currentPlayAreaObject != null)
+                if (!currentPlayAreaObject.IsNull())
                 {
                     currentPlayAreaObject.layer = playAreaPhysicsLayer;
                 }
@@ -456,12 +373,12 @@ namespace XRTK.Services.BoundarySystem
                 if (showTrackedArea == value) { return; }
                 showTrackedArea = value;
 
-                if (value && (currentTrackedAreaObject == null))
+                if (value && currentTrackedAreaObject.IsNull())
                 {
                     GetTrackedAreaVisualization();
                 }
 
-                if (currentTrackedAreaObject != null)
+                if (!currentTrackedAreaObject.IsNull())
                 {
                     currentTrackedAreaObject.SetActive(value);
                 }
@@ -479,7 +396,7 @@ namespace XRTK.Services.BoundarySystem
         {
             get
             {
-                if (currentTrackedAreaObject != null)
+                if (!currentTrackedAreaObject.IsNull())
                 {
                     trackedAreaPhysicsLayer = currentTrackedAreaObject.layer;
                 }
@@ -490,7 +407,7 @@ namespace XRTK.Services.BoundarySystem
             {
                 trackedAreaPhysicsLayer = value;
 
-                if (currentTrackedAreaObject != null)
+                if (!currentTrackedAreaObject.IsNull())
                 {
                     currentTrackedAreaObject.layer = trackedAreaPhysicsLayer;
                 }
@@ -510,12 +427,12 @@ namespace XRTK.Services.BoundarySystem
 
                 showBoundaryWalls = value;
 
-                if (value && (currentBoundaryWallObject == null))
+                if (value && currentBoundaryWallObject.IsNull())
                 {
                     GetBoundaryWallVisualization();
                 }
 
-                if (currentBoundaryWallObject != null)
+                if (!currentBoundaryWallObject.IsNull())
                 {
                     currentBoundaryWallObject.SetActive(value);
                 }
@@ -533,7 +450,7 @@ namespace XRTK.Services.BoundarySystem
         {
             get
             {
-                if (currentBoundaryWallObject != null)
+                if (!currentBoundaryWallObject.IsNull())
                 {
                     boundaryWallsPhysicsLayer = currentBoundaryWallObject.layer;
                 }
@@ -544,7 +461,7 @@ namespace XRTK.Services.BoundarySystem
             {
                 boundaryWallsPhysicsLayer = value;
 
-                if (currentBoundaryWallObject != null)
+                if (!currentBoundaryWallObject.IsNull())
                 {
                     currentBoundaryWallObject.layer = boundaryWallsPhysicsLayer;
                 }
@@ -564,12 +481,12 @@ namespace XRTK.Services.BoundarySystem
 
                 showCeiling = value;
 
-                if (value && (currentCeilingObject == null))
+                if (value && currentCeilingObject.IsNull())
                 {
                     GetBoundaryCeilingVisualization();
                 }
 
-                if (currentCeilingObject != null)
+                if (!currentCeilingObject.IsNull())
                 {
                     currentCeilingObject.SetActive(value);
                 }
@@ -585,7 +502,7 @@ namespace XRTK.Services.BoundarySystem
         {
             get
             {
-                if (currentCeilingObject != null)
+                if (!currentCeilingObject.IsNull())
                 {
                     ceilingPhysicsLayer = currentCeilingObject.layer;
                 }
@@ -596,7 +513,7 @@ namespace XRTK.Services.BoundarySystem
             {
                 ceilingPhysicsLayer = value;
 
-                if (currentCeilingObject != null)
+                if (!currentCeilingObject.IsNull())
                 {
                     currentFloorObject.layer = ceilingPhysicsLayer;
                 }
@@ -688,7 +605,7 @@ namespace XRTK.Services.BoundarySystem
         {
             if (!Application.isPlaying) { return null; }
 
-            if (currentFloorObject != null)
+            if (!currentFloorObject.IsNull())
             {
                 return currentFloorObject;
             }
@@ -725,7 +642,7 @@ namespace XRTK.Services.BoundarySystem
         {
             if (!Application.isPlaying) { return null; }
 
-            if (currentPlayAreaObject != null)
+            if (!currentPlayAreaObject.IsNull())
             {
                 return currentPlayAreaObject;
             }
@@ -763,7 +680,7 @@ namespace XRTK.Services.BoundarySystem
         {
             if (!Application.isPlaying) { return null; }
 
-            if (currentTrackedAreaObject != null)
+            if (!currentTrackedAreaObject.IsNull())
             {
                 return currentTrackedAreaObject;
             }
@@ -820,7 +737,7 @@ namespace XRTK.Services.BoundarySystem
         {
             if (!Application.isPlaying) { return null; }
 
-            if (currentBoundaryWallObject != null)
+            if (!currentBoundaryWallObject.IsNull())
             {
                 return currentBoundaryWallObject;
             }
@@ -872,7 +789,7 @@ namespace XRTK.Services.BoundarySystem
         {
             if (!Application.isPlaying) { return null; }
 
-            if (currentCeilingObject != null)
+            if (!currentCeilingObject.IsNull())
             {
                 return currentCeilingObject;
             }

@@ -23,12 +23,12 @@ namespace XRTK.Providers.SpatialObservers
         protected BaseMixedRealitySpatialMeshObserver(string name, uint priority, BaseMixedRealitySpatialMeshObserverProfile profile, IMixedRealitySpatialAwarenessSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            if (profile == null)
+            if (profile.IsNull())
             {
                 profile = MixedRealityToolkit.Instance.ActiveProfile.SpatialAwarenessProfile.GlobalMeshObserverProfile;
             }
 
-            if (profile == null)
+            if (profile.IsNull())
             {
                 throw new ArgumentNullException($"Missing a {profile.GetType().Name} profile for {name}");
             }
@@ -146,38 +146,21 @@ namespace XRTK.Providers.SpatialObservers
         {
             base.Destroy();
 
-            if (!Application.isPlaying) { return; }
-
             // Cleanup the spatial meshes that are being managed by this observer.
             foreach (var meshObject in spatialMeshObjects.Values)
             {
-                if (Application.isEditor)
-                {
-                    UnityEngine.Object.DestroyImmediate(meshObject.GameObject);
-                }
-                else
-                {
-                    UnityEngine.Object.Destroy(meshObject.GameObject);
-                }
+                meshObject.GameObject.Destroy();
             }
 
             spatialMeshObjects.Clear();
 
             lock (spatialMeshObjectPool)
             {
-                foreach (var meshObject in spatialMeshObjectPool)
+                while (spatialMeshObjectPool.Count > 0)
                 {
-                    if (Application.isEditor)
-                    {
-                        UnityEngine.Object.DestroyImmediate(meshObject.GameObject);
-                    }
-                    else
-                    {
-                        UnityEngine.Object.Destroy(meshObject.GameObject);
-                    }
+                    var meshObject = spatialMeshObjectPool.Pop();
+                    meshObject.GameObject.Destroy();
                 }
-
-                spatialMeshObjectPool.Clear();
             }
         }
 
@@ -349,7 +332,7 @@ namespace XRTK.Providers.SpatialObservers
         {
             GameObject newGameObject;
 
-            if (meshObjectPrefab == null)
+            if (meshObjectPrefab.IsNull())
             {
                 newGameObject = new GameObject("Blank Spatial Mesh GameObject", requiredMeshComponents)
                 {

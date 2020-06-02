@@ -3,6 +3,7 @@
 
 using System;
 using XRTK.Definitions;
+using XRTK.Extensions;
 using XRTK.Interfaces;
 
 namespace XRTK.Services
@@ -18,7 +19,7 @@ namespace XRTK.Services
         /// <param name="profile"></param>
         protected BaseSystem(BaseMixedRealityProfile profile)
         {
-            if (profile == null)
+            if (profile.IsNull())
             {
                 throw new ArgumentException($"Missing the profile for {base.Name} system!");
             }

@@ -527,7 +527,18 @@ namespace XRTK.Services
                 TryRegisterServiceInternal(interfaceType, mixedRealityService);
             }
 
+#if UNITY_EDITOR
+            if (Application.isPlaying)
+            {
+                InitializeAllServices();
+            }
+            else
+            {
+                UnityEditor.EditorApplication.delayCall += InitializeAllServices;
+            }
+#else
             InitializeAllServices();
+#endif
 
             #endregion Services Initialization
 

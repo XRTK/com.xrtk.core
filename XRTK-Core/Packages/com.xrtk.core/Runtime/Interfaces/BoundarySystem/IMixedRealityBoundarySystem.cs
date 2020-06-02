@@ -67,17 +67,17 @@ namespace XRTK.Interfaces.BoundarySystem
         bool ShowFloor { get; set; }
 
         /// <summary>
+        /// Enable or disable boundary wall geometry.
+        /// </summary>
+        bool ShowWalls { get; set; }
+
+        /// <summary>
         /// Enable or disable boundary ceiling geometry.
         /// </summary>
         /// <remarks>
         /// The ceiling is defined as a <see cref="GameObject"/> positioned <see cref="BoundaryHeight"/> above the floor.
         /// </remarks>
         bool ShowCeiling { get; set; }
-
-        /// <summary>
-        /// Enable or disable boundary wall geometry.
-        /// </summary>
-        bool ShowWalls { get; set; }
 
         /// <summary>
         /// Two dimensional representation of the geometry of the boundary, as provided by the platform.

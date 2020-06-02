@@ -156,12 +156,11 @@ namespace XRTK.Providers.SpatialObservers
 
             lock (spatialMeshObjectPool)
             {
-                foreach (var meshObject in spatialMeshObjectPool)
+                while (spatialMeshObjectPool.Count > 0)
                 {
+                    var meshObject = spatialMeshObjectPool.Pop();
                     meshObject.GameObject.Destroy();
                 }
-
-                spatialMeshObjectPool.Clear();
             }
         }
 

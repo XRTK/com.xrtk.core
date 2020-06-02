@@ -33,6 +33,7 @@ namespace XRTK.Editor.Utilities
         private const string BASE = "#BASE#";
         private const string GUID = "#GUID#";
         private const string USING = "#USING#";
+        private const string PROFILE = "#PROFILE#";
         private const string NAMESPACE = "#NAMESPACE#";
         private const string INTERFACE = "#INTERFACE#";
         private const string IMPLEMENTS = "#IMPLEMENTS#";
@@ -281,30 +282,8 @@ namespace XRTK.Editor.Utilities
                         implements = properties.Aggregate(implements, (current, propertyInfo) => $"{current}{FormatMemberInfo(propertyInfo, ref usingList)}");
                         implements = methods.Aggregate(implements, (current, methodInfo) => $"{current}{FormatMemberInfo(methodInfo, ref usingList)}");
 
-                        usingList.Sort();
-
-                        var @using = usingList.Aggregate(string.Empty, (current, item) => $"{current}{Environment.NewLine}using {item};");
-
-                        usingList.Clear();
-
-                        var instanceTemplate = File.ReadAllText(instanceTemplatePath ?? throw new InvalidOperationException());
-                        instanceTemplate = instanceTemplate.Replace(USING, @using);
-                        instanceTemplate = instanceTemplate.Replace(NAMESPACE, @namespace);
-                        instanceTemplate = instanceTemplate.Replace(GUID, Guid.NewGuid().ToString());
-                        instanceTemplate = instanceTemplate.Replace(NAME, instanceName);
-                        instanceTemplate = instanceTemplate.Replace(BASE, instanceBaseType.Name);
-                        instanceTemplate = instanceTemplate.Replace(INTERFACE, interfaceType.Name);
-                        instanceTemplate = instanceTemplate.Replace(PARENT_INTERFACE, parentInterfaceType?.Name);
-                        instanceTemplate = instanceTemplate.Replace(IMPLEMENTS, implements);
-
-                        File.WriteAllText($"{outputPath}/{instanceName}.cs", instanceTemplate);
-
+                        Type profileType = null;
                         var profileBaseTypeName = profileBaseType.Name;
-
-                        if (!usingList.Contains(profileBaseType.Namespace))
-                        {
-                            usingList.Add(profileBaseType.Namespace);
-                        }
 
                         if (profileBaseTypeName.Contains("`1"))
                         {
@@ -320,6 +299,31 @@ namespace XRTK.Editor.Utilities
                                 {
                                     usingList.Add(dataProviderType.Namespace);
                                 }
+
+                                var constructors = dataProviderType.GetConstructors();
+
+                                foreach (var constructorInfo in constructors)
+                                {
+                                    var parameters = constructorInfo.GetParameters();
+
+                                    foreach (var parameterInfo in parameters)
+                                    {
+                                        if (parameterInfo.ParameterType.IsAbstract) { continue; }
+
+                                        if (parameterInfo.ParameterType.IsSubclassOf(typeof(BaseMixedRealityProfile)))
+                                        {
+                                            profileType = parameterInfo.ParameterType;
+                                            break;
+                                        }
+                                    }
+
+                                    if (profileType != null)
+                                    {
+                                        profileBaseTypeName = profileType.Name;
+                                        break;
+                                    }
+                                }
+
                             }
                             else
                             {
@@ -337,17 +341,49 @@ namespace XRTK.Editor.Utilities
                             profileBaseTypeName = profileBaseTypeName.Replace("`1", $"<{dataProviderInterfaceTypeName}>");
                         }
 
+                        if (!usingList.Contains(profileBaseType.Namespace))
+                        {
+                            usingList.Add(profileBaseType.Namespace);
+                        }
+
                         usingList.Sort();
 
-                        @using = usingList.Aggregate(string.Empty, (current, item) => $"{current}{Environment.NewLine}using {item};");
+                        var @using = usingList.Aggregate(string.Empty, (current, item) => $"{current}{Environment.NewLine}using {item};");
 
-                        var profileTemplate = File.ReadAllText(profileTemplatePath ?? throw new InvalidOperationException());
-                        profileTemplate = profileTemplate.Replace(USING, @using);
-                        profileTemplate = profileTemplate.Replace(NAMESPACE, @namespace);
-                        profileTemplate = profileTemplate.Replace(NAME, instanceName);
-                        profileTemplate = profileTemplate.Replace(BASE, profileBaseTypeName);
+                        var instanceTemplate = File.ReadAllText(instanceTemplatePath ?? throw new InvalidOperationException());
+                        instanceTemplate = instanceTemplate.Replace(USING, @using);
+                        instanceTemplate = instanceTemplate.Replace(NAMESPACE, @namespace);
+                        instanceTemplate = instanceTemplate.Replace(GUID, Guid.NewGuid().ToString());
+                        instanceTemplate = instanceTemplate.Replace(NAME, instanceName);
+                        instanceTemplate = instanceTemplate.Replace(BASE, instanceBaseType.Name);
+                        instanceTemplate = instanceTemplate.Replace(INTERFACE, interfaceType.Name);
+                        instanceTemplate = instanceTemplate.Replace(PARENT_INTERFACE, parentInterfaceType?.Name);
+                        instanceTemplate = instanceTemplate.Replace(IMPLEMENTS, implements);
+                        instanceTemplate = instanceTemplate.Replace(PROFILE, profileBaseTypeName);
 
-                        File.WriteAllText($"{outputPath}/{instanceName}Profile.cs", profileTemplate);
+                        File.WriteAllText($"{outputPath}/{instanceName}.cs", instanceTemplate);
+
+                        if (profileBaseTypeName != nameof(BaseMixedRealityProfile))
+                        {
+                            usingList.Clear();
+
+                            if (!usingList.Contains(profileBaseType.Namespace))
+                            {
+                                usingList.Add(profileBaseType.Namespace);
+                            }
+
+                            usingList.Sort();
+
+                            @using = usingList.Aggregate(string.Empty, (current, item) => $"{current}{Environment.NewLine}using {item};");
+
+                            var profileTemplate = File.ReadAllText(profileTemplatePath ?? throw new InvalidOperationException());
+                            profileTemplate = profileTemplate.Replace(USING, @using);
+                            profileTemplate = profileTemplate.Replace(NAMESPACE, @namespace);
+                            profileTemplate = profileTemplate.Replace(NAME, instanceName);
+                            profileTemplate = profileTemplate.Replace(BASE, profileBaseTypeName);
+
+                            File.WriteAllText($"{outputPath}/{instanceName}Profile.cs", profileTemplate);
+                        }
                     }
                     catch (Exception e)
                     {
@@ -462,6 +498,11 @@ namespace XRTK.Editor.Utilities
                 }
             }
 
+            if (!type.IsGenericType)
+            {
+                return typeName;
+            }
+
             var genericArguments = type.GetGenericArguments();
 
             if (genericArguments.Length == 0)
@@ -473,20 +514,23 @@ namespace XRTK.Editor.Utilities
             {
                 return $"{PrettyPrintTypeName(Nullable.GetUnderlyingType(type), ref usingList)}?";
             }
-            else
+
+            var genericTypeNames = new List<string>();
+
+            foreach (var genericType in genericArguments)
             {
-                var genericTypeNames = new List<string>();
+                var name = PrettyPrintTypeName(genericType, ref usingList);
 
-                foreach (var genericType in genericArguments)
+                if (!genericTypeNames.Contains(name))
                 {
-                    genericTypeNames.Add(PrettyPrintTypeName(genericType, ref usingList));
+                    genericTypeNames.Add(name);
                 }
-
-                var mangledName = typeName.Contains("`")
-                    ? typeName.Substring(0, typeName.IndexOf("`", StringComparison.Ordinal))
-                    : typeName;
-                return $"{mangledName}<{string.Join(",", genericTypeNames)}>";
             }
+
+            var mangledName = typeName.Contains("`")
+                ? typeName.Substring(0, typeName.IndexOf("`", StringComparison.Ordinal))
+                : typeName;
+            return $"{mangledName}<{string.Join(",", genericTypeNames)}>";
         }
 
         private static Type GetType(string name) => GetTypes().FirstOrDefault(type => type.Name == name);

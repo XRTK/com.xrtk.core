@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
-using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace XRTK.Extensions
 {
@@ -14,13 +14,21 @@ namespace XRTK.Extensions
     /// </summary>
     public static class TypeExtensions
     {
+        private static void BuildTypeCache()
+        {
+            foreach (var (type, guid) in
+                from type in AppDomain.CurrentDomain.GetAssemblies()
+                    .SelectMany(assembly => assembly.GetTypes())
+                    .Where(type => type.IsClass && !type.IsAbstract)
+                let guid = type.GUID
+                where !TypeCache.ContainsKey(guid)
+                select (type, guid))
+            {
+                TypeCache.Add(guid, type);
+            }
+        }
+
         private static readonly Dictionary<Guid, Type> TypeCache = new Dictionary<Guid, Type>();
-
-        private static IEnumerable<Type> allTypes = null;
-
-        private static IEnumerable<Type> AllTypes => allTypes ?? (allTypes = AppDomain.CurrentDomain.GetAssemblies()
-            .SelectMany(assembly => assembly.GetTypes())
-            .Where(type => type.IsClass && !type.IsAbstract));
 
         /// <summary>
         /// Attempts to resolve the type using the class <see cref="Guid"/>.
@@ -32,14 +40,15 @@ namespace XRTK.Extensions
         {
             resolvedType = null;
 
-            if (guid == Guid.Empty)
+            if (TypeCache.Count == 0)
             {
-                return false;
+                BuildTypeCache();
             }
 
-            if (!TypeCache.TryGetValue(guid, out resolvedType))
+            if (guid == Guid.Empty ||
+                !TypeCache.TryGetValue(guid, out resolvedType))
             {
-                resolvedType = AllTypes.FirstOrDefault(type => type.GUID == guid);
+                return false;
             }
 
             if (resolvedType != null && !resolvedType.IsAbstract)
@@ -71,22 +80,20 @@ namespace XRTK.Extensions
             {
                 return TryResolveType(guid, out resolvedType);
             }
-            else
+
+            resolvedType = Type.GetType(typeRef);
+
+            if (resolvedType != null)
             {
-                resolvedType = Type.GetType(typeRef);
-
-                if (resolvedType != null)
+                if (resolvedType.GUID != Guid.Empty)
                 {
-                    if (resolvedType.GUID != Guid.Empty)
-                    {
-                        return TryResolveType(guid, out resolvedType);
-                    }
+                    return TryResolveType(guid, out resolvedType);
+                }
 
-                    if (!resolvedType.IsAbstract)
-                    {
-                        Debug.LogWarning($"{resolvedType.Name} is missing a {nameof(GuidAttribute)}. This extension has been upgraded to use System.Type.GUID instead of System.Type.AssemblyQualifiedName");
-                        return true;
-                    }
+                if (!resolvedType.IsAbstract)
+                {
+                    Debug.LogWarning($"{resolvedType.Name} is missing a {nameof(GuidAttribute)}. This extension has been upgraded to use System.Type.GUID instead of System.Type.AssemblyQualifiedName");
+                    return true;
                 }
             }
 

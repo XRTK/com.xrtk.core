@@ -21,7 +21,7 @@ Mixed Reality Toolkit is under the [MIT license](https://github.com/nunit/nunit/
 
 1. Fork the repository you'd like to open a pull request for.
 2. Clone or sync any changes from the source repository to your local disk.
-    > **Note:** When initially cloinging the repository be sure to recursively check out all submodules!
+    > **Note:** When initially cloning the repository be sure to recursively check out all submodules!
 3. Create a new branch based on the last source development commit.
 4. Make the changes you'd like to contribute.
 5. Stage and commit your changes with thoughtful messages detailing the work.

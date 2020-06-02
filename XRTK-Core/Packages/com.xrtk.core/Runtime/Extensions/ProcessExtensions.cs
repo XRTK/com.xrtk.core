@@ -240,21 +240,17 @@ namespace XRTK.Extensions
         {
             var updateApplication = string.IsNullOrWhiteSpace(application);
 
+            if (updateApplication)
+            {
+                UnityEngine.Debug.Log($"{application}:{args}");
 #if UNITY_EDITOR_WIN
-            if (updateApplication)
-            {
                 application = "cmd.exe";
-            }
-
-            args = $"/c {args}";
+                args = $"/c {args}";
 #else
-            if (updateApplication)
-            {
                 application = "/bin/bash";
-            }
-
-            args = $"-c \"{args}\"";
+                args = $"-c \"{args}\"";
 #endif
+            }
         }
     }
 }

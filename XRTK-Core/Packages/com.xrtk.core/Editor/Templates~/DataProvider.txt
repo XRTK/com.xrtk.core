@@ -5,7 +5,7 @@ namespace #NAMESPACE#
     [System.Runtime.InteropServices.Guid("#GUID#")]
     public class #NAME# : #BASE#, #INTERFACE#
     {
-        public #NAME#(string name, uint priority, #NAME#Profile profile, #PARENT_INTERFACE# parentService)
+        public #NAME#(string name, uint priority, #PROFILE# profile, #PARENT_INTERFACE# parentService)
             : base(name, priority, profile, parentService)
         {
         }#IMPLEMENTS#

@@ -113,10 +113,10 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// The last pose recognized for this hand controller.
         /// </summary>
-        private HandControllerPoseDefinition LastPose { get; set; }
+        private string LastTrackedPoseId { get; set; }
 
         /// <inheritdoc />
-        public HandControllerPoseDefinition Pose { get; private set; }
+        public string TrackedPoseId { get; private set; }
 
         /// <summary>
         /// The hand's pointer pose in playspace.
@@ -145,7 +145,7 @@ namespace XRTK.Providers.Controllers.Hands
             LastIsPinching = IsPinching;
             LastIsGripping = IsGripping;
             LastIsPointing = IsPointing;
-            LastPose = Pose;
+            LastTrackedPoseId = TrackedPoseId;
 
             // Update internals.
             UpdateJoints(handData);
@@ -158,7 +158,7 @@ namespace XRTK.Providers.Controllers.Hands
             UpdateFingerCurlStrength(handData);
             UpdateBounds();
             UpdateVelocity();
-            Pose = handData.TrackedPose;
+            TrackedPoseId = handData.TrackedPoseId;
             PinchStrength = handData.PinchStrength;
 
             TrackingState = handData.IsTracked ? TrackingState.Tracked : TrackingState.NotTracked;
@@ -565,15 +565,15 @@ namespace XRTK.Providers.Controllers.Hands
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.Raw);
 
-            if (LastPose == null || Pose == null) { return; }
+            if (LastTrackedPoseId == null || TrackedPoseId == null) { return; }
 
-            if (string.Equals(LastPose.Id, Pose.Id))
+            if (string.Equals(LastTrackedPoseId, TrackedPoseId))
             {
-                interactionMapping.RawData = LastPose.Id;
+                interactionMapping.RawData = LastTrackedPoseId;
             }
-            else if (!string.Equals(LastPose.Id, Pose.Id))
+            else if (!string.Equals(LastTrackedPoseId, TrackedPoseId))
             {
-                interactionMapping.RawData = Pose.Id;
+                interactionMapping.RawData = TrackedPoseId;
             }
         }
 

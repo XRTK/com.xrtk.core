@@ -46,7 +46,7 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         /// <summary>
         /// Gets the hands current pose.
         /// </summary>
-        HandControllerPoseDefinition Pose { get; }
+        string TrackedPoseId { get; }
 
         /// <summary>
         /// Get the hands bounds of a given type, if they are available.

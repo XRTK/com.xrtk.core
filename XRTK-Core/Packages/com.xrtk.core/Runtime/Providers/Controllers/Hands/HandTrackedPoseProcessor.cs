@@ -14,7 +14,7 @@ namespace XRTK.Providers.Controllers.Hands
     /// configured in <see cref="Definitions.InputSystem.MixedRealityInputSystemProfile.TrackedPoses"/>
     /// or the platform's <see cref="BaseHandControllerDataProviderProfile.TrackedPoses"/>
     /// and attempts to recognize a hand's current pose during runtime to provide for
-    /// <see cref="HandData.TrackedPose"/>.
+    /// <see cref="HandData.TrackedPoseId"/>.
     /// </summary>
     public sealed class HandTrackedPoseProcessor
     {
@@ -56,12 +56,12 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// The last recognized pose of the left hand.
         /// </summary>
-        private HandControllerPoseDefinition LastTrackedPoseLeftHand { get; set; }
+        private string LastTrackedPoseIdLeftHand { get; set; }
 
         /// <summary>
         /// The last recognized pose of the right hand.
         /// </summary>
-        private HandControllerPoseDefinition LastTrackedPoseRightHand { get; set; }
+        private string LastTrackedPoseIdRightHand { get; set; }
 
         /// <summary>
         /// Attempts to recognize a hand pose.
@@ -77,13 +77,13 @@ namespace XRTK.Providers.Controllers.Hands
                 if (handedness == Handedness.Right && passedFramesSinceRecognitionRightHand < RECOGNITION_FRAME_DELIMITER)
                 {
                     passedFramesSinceRecognitionRightHand++;
-                    handData.TrackedPose = LastTrackedPoseRightHand;
+                    handData.TrackedPoseId = LastTrackedPoseIdRightHand;
                     return;
                 }
                 else if (passedFramesSinceRecognitionLeftHand < RECOGNITION_FRAME_DELIMITER)
                 {
                     passedFramesSinceRecognitionLeftHand++;
-                    handData.TrackedPose = LastTrackedPoseLeftHand;
+                    handData.TrackedPoseId = LastTrackedPoseIdLeftHand;
                     return;
                 }
 
@@ -102,31 +102,31 @@ namespace XRTK.Providers.Controllers.Hands
                     }
                 }
 
-                handData.TrackedPose = recognizedPose;
+                handData.TrackedPoseId = recognizedPose.IsNull() ? null : recognizedPose.Id;
                 if (handedness == Handedness.Right)
                 {
-                    LastTrackedPoseRightHand = handData.TrackedPose;
+                    LastTrackedPoseIdRightHand = handData.TrackedPoseId;
                     passedFramesSinceRecognitionRightHand = 0;
                 }
                 else
                 {
-                    LastTrackedPoseLeftHand = handData.TrackedPose;
+                    LastTrackedPoseIdLeftHand = handData.TrackedPoseId;
                     passedFramesSinceRecognitionLeftHand = 0;
                 }
             }
             else
             {
                 // Easy game when hand is not tracked, there is no pose.
-                handData.TrackedPose = null;
+                handData.TrackedPoseId = null;
 
                 if (handedness == Handedness.Right)
                 {
-                    LastTrackedPoseRightHand = null;
+                    LastTrackedPoseIdRightHand = null;
                     passedFramesSinceRecognitionRightHand = 0;
                 }
                 else
                 {
-                    LastTrackedPoseLeftHand = null;
+                    LastTrackedPoseIdLeftHand = null;
                     passedFramesSinceRecognitionLeftHand = 0;
                 }
             }

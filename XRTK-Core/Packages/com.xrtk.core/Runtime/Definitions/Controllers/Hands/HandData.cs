@@ -25,7 +25,7 @@ namespace XRTK.Definitions.Controllers.Hands
             IsPointing = false;
             IsGripping = false;
             RootPose = MixedRealityPose.ZeroIdentity;
-            TrackedPose = null;
+            TrackedPoseId = null;
             Mesh = new HandMeshData();
 
             Joints = new MixedRealityPose[JointCount];
@@ -92,7 +92,7 @@ namespace XRTK.Definitions.Controllers.Hands
         /// Recognizable hand poses are defined in <see cref="BaseHandControllerDataProviderProfile.TrackedPoses"/>
         /// or <see cref="InputSystem.MixedRealityInputSystemProfile.TrackedPoses"/>.
         /// </summary>
-        public HandControllerPoseDefinition TrackedPose { get; set; }
+        public string TrackedPoseId { get; set; }
 
         /// <summary>
         /// The hands root pose. <see cref="Joints"/> poses are relative to the root pose.

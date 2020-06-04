@@ -5,12 +5,11 @@ parameters:
       windows:
         image: windows-latest
         # TODO: Only use XRTK defined platforms for build and install the correct components and switch to the correct targets as needed
-        components: '"Windows", "Windows_IL2CPP", "UWP_IL2CPP", "Android"'
+        components: '"Windows", "Windows_IL2CPP", "Android"'
         # https://github.com/microsoft/unitysetup.powershell installer component options
         # Windows, Windows_IL2CPP, UWP_IL2CPP, Lumin, Android, iOS, Mac, Mac_IL2CPP , WebGL
         targets:
         - StandaloneWindows64
-        - WSAPlayer
         - Android
         # Unity -buildTarget command line args https://docs.unity3d.com/Manual/CommandLineArguments.html
         # 'StandaloneOSX', 'StandaloneWindows', 'iOS', 'Android', 'StandaloneLinux', 'StandaloneWindows64', 'WebGL',

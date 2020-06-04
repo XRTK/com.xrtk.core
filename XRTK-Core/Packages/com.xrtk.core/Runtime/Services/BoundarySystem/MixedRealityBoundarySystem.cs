@@ -308,6 +308,10 @@ namespace XRTK.Services.BoundarySystem
                 // We always use the same seed so that from run to run, the inscribed bounds are consistent.
                 rectangularBounds = new InscribedRectangle(BoundaryBounds, Mathf.Abs("Mixed Reality Toolkit".GetHashCode()));
             }
+            else
+            {
+                Debug.LogWarning("No Boundary Geometry found");
+            }
 
             BoundarySystemVisualizationRoot.SetActive(true);
         }

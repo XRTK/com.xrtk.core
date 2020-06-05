@@ -36,7 +36,8 @@ namespace XRTK.Extensions
             var qEuler = quaternion.eulerAngles;
             var otherEuler = other.eulerAngles;
 
-            return Math.Abs(qEuler.x - otherEuler.x) <= threshold &&
+            return
+                Math.Abs(qEuler.x - otherEuler.x) <= threshold &&
                 Math.Abs(qEuler.y - otherEuler.y) <= threshold &&
                 Math.Abs(qEuler.z - otherEuler.z) <= threshold;
         }

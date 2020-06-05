@@ -4,8 +4,10 @@
 using System;
 using System.Collections.Generic;
 using UnityEditor;
+using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
+using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.InputSystem;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.Profiles.InputSystem.Controllers;
@@ -45,6 +47,8 @@ namespace XRTK.Editor.Profiles.InputSystem
         private bool showGlobalPointerOptions;
         private bool showGlobalHandOptions;
         private bool showAggregatedSimpleControllerMappingProfiles;
+        private ReorderableList poseProfilesList;
+        private int currentlySelectedPoseElement;
 
         private Dictionary<string, Tuple<BaseMixedRealityControllerDataProviderProfile, MixedRealityControllerMappingProfile>> controllerMappingProfiles;
 
@@ -100,6 +104,15 @@ namespace XRTK.Editor.Profiles.InputSystem
                     }
                 }
             }
+
+            poseProfilesList = new ReorderableList(serializedObject, trackedPoses, true, false, true, true)
+            {
+                elementHeight = EditorGUIUtility.singleLineHeight * 1.5f
+            };
+            poseProfilesList.drawHeaderCallback += PoseProfilesList_DrawHeaderCallback;
+            poseProfilesList.drawElementCallback += PoseProfilesList_DrawConfigurationOptionElement;
+            poseProfilesList.onAddCallback += PoseProfilesList_OnConfigurationOptionAdded;
+            poseProfilesList.onRemoveCallback += PoseProfilesList_OnConfigurationOptionRemoved;
         }
 
         public override void OnInspectorGUI()
@@ -157,7 +170,7 @@ namespace XRTK.Editor.Profiles.InputSystem
                 EditorGUILayout.PropertyField(handPhysicsEnabled);
                 EditorGUILayout.PropertyField(useTriggers);
                 EditorGUILayout.PropertyField(boundsMode);
-                EditorGUILayout.PropertyField(trackedPoses, true);
+                poseProfilesList.DoLayoutList();
                 EditorGUI.indentLevel--;
             }
 
@@ -194,6 +207,51 @@ namespace XRTK.Editor.Profiles.InputSystem
             }
 
             base.OnInspectorGUI();
+        }
+
+        private void PoseProfilesList_DrawHeaderCallback(Rect rect)
+        {
+            EditorGUI.LabelField(rect, "Tracked Hand Poses");
+        }
+
+        private void PoseProfilesList_DrawConfigurationOptionElement(Rect rect, int index, bool isActive, bool isFocused)
+        {
+            if (isFocused)
+            {
+                currentlySelectedPoseElement = index;
+            }
+
+            rect.height = EditorGUIUtility.singleLineHeight;
+            rect.y += 3;
+            var poseDataProperty = trackedPoses.GetArrayElementAtIndex(index);
+            var selectedPoseData = EditorGUI.ObjectField(rect, poseDataProperty.objectReferenceValue, typeof(HandControllerPoseProfile), false) as HandControllerPoseProfile;
+
+            if (selectedPoseData != null)
+            {
+                selectedPoseData.ParentProfile = ThisProfile;
+            }
+
+            poseDataProperty.objectReferenceValue = selectedPoseData;
+        }
+
+        private void PoseProfilesList_OnConfigurationOptionAdded(ReorderableList list)
+        {
+            trackedPoses.arraySize += 1;
+            var index = trackedPoses.arraySize - 1;
+
+            var mappingProfileProperty = trackedPoses.GetArrayElementAtIndex(index);
+            mappingProfileProperty.objectReferenceValue = null;
+            serializedObject.ApplyModifiedProperties();
+        }
+
+        private void PoseProfilesList_OnConfigurationOptionRemoved(ReorderableList list)
+        {
+            if (currentlySelectedPoseElement >= 0)
+            {
+                trackedPoses.DeleteArrayElementAtIndex(currentlySelectedPoseElement);
+            }
+
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

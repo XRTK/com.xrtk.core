@@ -186,7 +186,7 @@ namespace XRTK.Providers.Controllers.Hands
 
             // The more tests have passed, the more likely it is
             // the poses are the same.
-            return passedTests / totalTests;
+            return passedTests / (float)totalTests;
         }
     }
 }

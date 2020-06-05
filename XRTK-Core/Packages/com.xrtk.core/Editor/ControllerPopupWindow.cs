@@ -130,7 +130,7 @@ namespace XRTK.Editor
             }
 
             window = (ControllerPopupWindow)CreateInstance(typeof(ControllerPopupWindow));
-            window.currentControllerName = profile.ControllerType.Type.Name;
+            window.currentControllerName = profile.ControllerType?.Type?.Name;
 
             window.currentControllerName = profile.ControllerType.Type.Name;
             window.titleContent = new GUIContent($"{window.currentControllerName} {handednessTitleText}Input Action Assignment");

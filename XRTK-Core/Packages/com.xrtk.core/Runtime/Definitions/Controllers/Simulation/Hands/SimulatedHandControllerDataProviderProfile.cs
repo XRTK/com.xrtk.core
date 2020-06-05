@@ -58,12 +58,12 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
 
         [SerializeField]
         [Tooltip("Tracked hand poses for pose detection.")]
-        private List<HandControllerPoseDefinition> trackedPoses = new List<HandControllerPoseDefinition>();
+        private List<HandControllerPoseProfile> trackedPoses = new List<HandControllerPoseProfile>();
 
         /// <summary>
         /// Tracked hand poses for pose detection.
         /// </summary>
-        public IReadOnlyList<HandControllerPoseDefinition> TrackedPoses => trackedPoses;
+        public IReadOnlyList<HandControllerPoseProfile> TrackedPoses => trackedPoses;
 
         public override ControllerDefinition[] GetDefaultControllerOptions()
         {

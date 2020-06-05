@@ -61,6 +61,6 @@ namespace XRTK.Providers.Controllers.Hands
         public HandBoundsMode BoundsMode { get; set; }
 
         /// <inheritdoc />
-        public IReadOnlyList<HandControllerPoseDefinition> TrackedPoses { get; }
+        public IReadOnlyList<HandControllerPoseProfile> TrackedPoses { get; }
     }
 }

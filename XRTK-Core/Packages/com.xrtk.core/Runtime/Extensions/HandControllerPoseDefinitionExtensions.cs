@@ -8,7 +8,7 @@ using XRTK.Definitions.Controllers.Hands;
 namespace XRTK.Extensions
 {
     /// <summary>
-    /// Extension methods for <see cref="HandControllerPoseDefinition"/>
+    /// Extension methods for <see cref="HandControllerPoseProfile"/>
     /// </summary>
     public static class HandControllerPoseDefinitionExtensions
     {
@@ -18,7 +18,7 @@ namespace XRTK.Extensions
         /// </summary>
         /// <param name="pose">The pose to convert.</param>
         /// <returns><see cref="HandData"/> object for the pose.</returns>
-        public static HandData ToHandData(this HandControllerPoseDefinition pose)
+        public static HandData ToHandData(this HandControllerPoseProfile pose)
         {
             var handData = new HandData();
             var recordedHandData = JsonUtility.FromJson<RecordedHandJoints>(pose.Data.text);

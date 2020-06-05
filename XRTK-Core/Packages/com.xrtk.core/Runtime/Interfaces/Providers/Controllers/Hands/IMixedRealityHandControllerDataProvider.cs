@@ -31,6 +31,6 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         /// <summary>
         /// Gets the list of poses tracked by the data provider.
         /// </summary>
-        IReadOnlyList<HandControllerPoseDefinition> TrackedPoses { get; }
+        IReadOnlyList<HandControllerPoseProfile> TrackedPoses { get; }
     }
 }

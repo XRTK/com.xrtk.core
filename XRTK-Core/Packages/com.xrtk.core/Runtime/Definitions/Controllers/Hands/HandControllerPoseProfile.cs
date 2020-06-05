@@ -10,8 +10,8 @@ namespace XRTK.Definitions.Controllers.Hands
     /// A hand controller pose definition with recorded hand joint data.
     /// Defined hand poses can be recognized and trigger input actions.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Hand Controller Pose Definition", fileName = "HandControllerPoseDefinition", order = (int)CreateProfileMenuItemIndices.Input)]
-    public class HandControllerPoseDefinition : BaseMixedRealityProfile
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Input System/Hand Controller Pose", fileName = "HandControllerPose", order = (int)CreateProfileMenuItemIndices.Input)]
+    public class HandControllerPoseProfile : BaseMixedRealityProfile
     {
         [SerializeField]
         [Tooltip("A unique ID to the pose. Can be a descriptive name, but must be unique!")]

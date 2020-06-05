@@ -22,10 +22,10 @@ namespace XRTK.Providers.Controllers.Hands
         /// Creates a new recognizer instance to work on the provided list of poses.
         /// </summary>
         /// <param name="recognizablePoses">Recognizable poses by this recognizer.</param>
-        public HandTrackedPoseProcessor(IReadOnlyList<HandControllerPoseDefinition> recognizablePoses)
+        public HandTrackedPoseProcessor(IReadOnlyList<HandControllerPoseProfile> recognizablePoses)
         {
             bakedHandDatas = new HandData[recognizablePoses.Count];
-            definitions = new Dictionary<int, HandControllerPoseDefinition>();
+            definitions = new Dictionary<int, HandControllerPoseProfile>();
 
             for (int i = 0; i < recognizablePoses.Count; i++)
             {
@@ -47,7 +47,7 @@ namespace XRTK.Providers.Controllers.Hands
         private const float GRIP_STRENGTH_DELTA_THRESHOLD = .2f;
 
         private readonly HandData[] bakedHandDatas;
-        private readonly Dictionary<int, HandControllerPoseDefinition> definitions;
+        private readonly Dictionary<int, HandControllerPoseProfile> definitions;
         private int passedFramesSinceRecognitionLeftHand = 0;
         private int passedFramesSinceRecognitionRightHand = 0;
 
@@ -86,7 +86,7 @@ namespace XRTK.Providers.Controllers.Hands
                 }
 
                 var currentHighestProbability = 0f;
-                HandControllerPoseDefinition recognizedPose = null;
+                HandControllerPoseProfile recognizedPose = null;
 
                 for (int i = 0; i < bakedHandDatas.Length; i++)
                 {

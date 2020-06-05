@@ -99,7 +99,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public HandRenderingMode RenderingMode { get; set; }
 
         /// <inheritdoc />
-        public IReadOnlyList<HandControllerPoseDefinition> TrackedPoses { get; }
+        public IReadOnlyList<HandControllerPoseProfile> TrackedPoses { get; }
 
         /// <inheritdoc />
         protected override void UpdateSimulatedController(IMixedRealitySimulatedController simulatedController)

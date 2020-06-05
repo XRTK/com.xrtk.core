@@ -20,7 +20,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// Creates a new instance of the hand data post processor.
         /// </summary>
         /// <param name="trackedPoses">Pose recognizer instance to use for pose recognition.</param>
-        public HandDataPostProcessor(IReadOnlyList<HandControllerPoseDefinition> trackedPoses)
+        public HandDataPostProcessor(IReadOnlyList<HandControllerPoseProfile> trackedPoses)
         {
             TrackedPoseProcessor = new HandTrackedPoseProcessor(trackedPoses);
             GripPostProcessor = new HandGripPostProcessor();

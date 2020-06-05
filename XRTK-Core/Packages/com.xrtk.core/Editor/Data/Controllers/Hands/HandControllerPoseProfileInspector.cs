@@ -11,8 +11,8 @@ using XRTK.Providers.Controllers.Hands;
 
 namespace XRTK.Editor.Data.Controllers.Hands
 {
-    [CustomEditor(typeof(HandControllerPoseDefinition))]
-    public class HandControllerPoseDefinitionInspector : BaseMixedRealityProfileInspector
+    [CustomEditor(typeof(HandControllerPoseProfile))]
+    public class HandControllerPoseProfileInspector : BaseMixedRealityProfileInspector
     {
         private SerializedProperty id;
         private SerializedProperty description;
@@ -29,10 +29,10 @@ namespace XRTK.Editor.Data.Controllers.Hands
         private static readonly GUIContent generalSettingsHeader = new GUIContent("General Settings");
         private static readonly GUIContent simulationSettingsHeader = new GUIContent("Simulation Settings");
         private static readonly GUIContent bakeSettingsHeader = new GUIContent("Bake Settings");
-        private static readonly GUIContent debugHeader = new GUIContent("Debug");
+        private static readonly GUIContent infoHeader = new GUIContent("Info");
         private static readonly GUIContent bakeButtonContent = new GUIContent("Generate Baked Data");
         private static readonly GUIContent updateBakeButtonContent = new GUIContent("Update Baked Data");
-        private bool debugExpanded = false;
+        private bool infoExpanded = false;
 
         protected override void OnEnable()
         {
@@ -101,8 +101,8 @@ namespace XRTK.Editor.Data.Controllers.Hands
 
             EditorGUILayout.Space();
 
-            debugExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(debugExpanded, debugHeader);
-            if (debugExpanded)
+            infoExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(infoExpanded, infoHeader);
+            if (infoExpanded)
             {
                 EditorGUI.indentLevel++;
 
@@ -118,7 +118,7 @@ namespace XRTK.Editor.Data.Controllers.Hands
                 }
                 else
                 {
-                    EditorGUILayout.HelpBox("Bake the hand pose to see debug information here.", MessageType.Info);
+                    EditorGUILayout.HelpBox("Bake the hand pose to see baked information here.", MessageType.Info);
                 }
 
                 EditorGUI.indentLevel--;
@@ -130,7 +130,7 @@ namespace XRTK.Editor.Data.Controllers.Hands
         private void BakePoseData()
         {
             // Initialize the hand data using the joint information from the recorded pose.
-            var poseDefinition = target as HandControllerPoseDefinition;
+            var poseDefinition = target as HandControllerPoseProfile;
             var handData = poseDefinition.ToHandData();
 
             // Intialize processors needed.

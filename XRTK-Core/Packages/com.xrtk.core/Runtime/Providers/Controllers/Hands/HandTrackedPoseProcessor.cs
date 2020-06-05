@@ -27,15 +27,13 @@ namespace XRTK.Providers.Controllers.Hands
             bakedHandDatas = new HandData[recognizablePoses.Count];
             definitions = new Dictionary<int, HandControllerPoseDefinition>();
 
-            var i = 0;
-            foreach (var item in recognizablePoses)
+            for (int i = 0; i < recognizablePoses.Count; i++)
             {
+                var item = recognizablePoses[i];
                 if (item.DidBake)
                 {
                     bakedHandDatas[i] = item.ToHandData();
                     definitions.Add(i, item);
-
-                    i++;
                 }
                 else
                 {

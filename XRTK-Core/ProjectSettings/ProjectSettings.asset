@@ -690,7 +690,7 @@ PlayerSettings:
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
   metroPackageName: XRTK-Core
-  metroPackageVersion: 2019.3.11.0
+  metroPackageVersion: 0.2.0.0
   metroCertificatePath: 
   metroCertificatePassword: 
   metroCertificateSubject: 

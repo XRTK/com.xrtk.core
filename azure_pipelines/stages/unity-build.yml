@@ -29,6 +29,9 @@ stages:
           Write-Host "Package Version: $(package.version)"
           Write-Host "isReleaseBuild? $(isReleaseBuild)"
           Write-Host "isPreviewBuild? $(isPreviewBuild)"
+          Write-Host "Android SDK: $(ANDROID_HOME)"
+          Write-Host "Android SDK: $(ANDROID_SDK_PATH)"
+          Write-Host "Android NDK: $(ANDROID_NDK_PATH)"
         displayName: 'Build Variables'
         condition: always()
 

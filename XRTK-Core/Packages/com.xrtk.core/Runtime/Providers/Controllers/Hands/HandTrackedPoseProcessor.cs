@@ -66,7 +66,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         /// <param name="handedness">The handedness of the data.</param>
         /// <param name="handData">The hand data to compare against.</param>
-        public void Process(Handedness handedness, HandData handData)
+        public HandData Process(Handedness handedness, HandData handData)
         {
             if (handData.IsTracked)
             {
@@ -76,13 +76,13 @@ namespace XRTK.Providers.Controllers.Hands
                 {
                     passedFramesSinceRecognitionRightHand++;
                     handData.TrackedPoseId = LastTrackedPoseIdRightHand;
-                    return;
+                    return handData;
                 }
                 else if (passedFramesSinceRecognitionLeftHand < RECOGNITION_FRAME_DELIMITER)
                 {
                     passedFramesSinceRecognitionLeftHand++;
                     handData.TrackedPoseId = LastTrackedPoseIdLeftHand;
-                    return;
+                    return handData;
                 }
 
                 var currentHighestProbability = 0f;
@@ -128,6 +128,8 @@ namespace XRTK.Providers.Controllers.Hands
                     passedFramesSinceRecognitionLeftHand = 0;
                 }
             }
+
+            return handData;
         }
 
         private static float Compare(HandData runtimeHandData, HandData bakedHandData)

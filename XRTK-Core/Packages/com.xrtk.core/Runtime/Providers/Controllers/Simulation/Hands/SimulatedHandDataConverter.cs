@@ -106,11 +106,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         }
 
         /// <summary>
-        /// The current hand data produced by the current simulation state.
-        /// </summary>
-        public HandData HandData { get; } = new HandData();
-
-        /// <summary>
         /// Current rotation of the hand.
         /// </summary>
         public Vector3 HandRotateEulerAngles { get; private set; } = Vector3.zero;
@@ -128,8 +123,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <returns>Updated simulated hand data.</returns>
         public HandData GetSimulatedHandData(Vector3 position, Vector3 deltaRotation)
         {
-            HandData.PointerPose = MixedRealityPose.ZeroIdentity;
-
             // Read keyboard / mouse input to determine the root pose delta since last frame.
             var rootPoseDelta = new MixedRealityPose(position, Quaternion.Euler(deltaRotation));
 
@@ -142,7 +135,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             HandleSimulationInput(rootPoseDelta);
 
-            if (!string.Equals(newTargetPose.Id, Pose.Id) && HandData.IsTracked)
+            if (!string.Equals(newTargetPose.Id, Pose.Id))
             {
                 previousPose = Pose;
                 TargetPose = newTargetPose;
@@ -150,27 +143,22 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             TargetPoseBlending += poseAnimationDelta;
 
-            if (HandData.UpdatedAt != timeStamp)
-            {
-                HandData.UpdatedAt = timeStamp;
-                if (HandData.IsTracked)
-                {
-                    UpdatePoseFrame();
-                }
-            }
+            var handData = UpdatePoseFrame();
+            handData.UpdatedAt = timeStamp;
+            handData.IsTracked = true;
 
-            return HandData;
+            return handData;
         }
 
         private void HandleSimulationInput(MixedRealityPose handRootPose)
         {
             // If the hands state is changing from "not tracked" to being tracked, reset its position
             // to the current mouse position and default distance from the camera.
-            if (!HandData.IsTracked)
-            {
+            //if (!HandData.IsTracked)
+            //{
                 Vector3 mousePos = Input.mousePosition;
                 screenPosition = new Vector3(mousePos.x, mousePos.y, defaultDistance);
-            }
+            //}
 
             // Apply position delta x / y in screen space, but depth (z) offset in world space
             screenPosition.x = handRootPose.Position.x;
@@ -188,11 +176,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             // previous frame, so we need to determine the final rotation still.
             HandRotateEulerAngles += handRootPose.Rotation.eulerAngles;
             JitterOffset = Random.insideUnitSphere * jitterAmount;
-
-            HandData.IsTracked = true;
         }
 
-        private void UpdatePoseFrame()
+        private HandData UpdatePoseFrame()
         {
             if (TargetPoseBlending > currentPoseBlending)
             {
@@ -211,21 +197,24 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             // At this point we know the hand's root pose. All joint poses
             // will be relative to this root pose.
-            HandData.RootPose = new MixedRealityPose(position, rotation);
+            var rootPose = new MixedRealityPose(position, rotation);
 
             // Compute joint poses relative to root pose.
-            ComputeJointPoses(Pose, handedness, HandData.RootPose);
+            var jointPoses = ComputeJointPoses(Pose, handedness, rootPose);
+
+            return new HandData(rootPose, jointPoses);
         }
 
         /// <summary>
         /// Computes local poses from camera-space joint data.
         /// </summary>
-        private void ComputeJointPoses(SimulatedHandControllerPose pose, Handedness handedness, MixedRealityPose rootPose)
+        private MixedRealityPose[] ComputeJointPoses(SimulatedHandControllerPose pose, Handedness handedness, MixedRealityPose rootPose)
         {
             Quaternion playspaceRotation = MixedRealityToolkit.CameraSystem != null
                 ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.rotation
                 : Quaternion.identity;
 
+            var jointPoses = new MixedRealityPose[HandData.JointCount];
             for (int i = 0; i < HandData.JointCount; i++)
             {
                 // Initialize from local offsets
@@ -247,8 +236,10 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 // Apply root pose rotation transform
                 localRotation = rootPose.Rotation * localRotation;
 
-                HandData.Joints[i] = new MixedRealityPose(localPosition, localRotation);
+                jointPoses[i] = new MixedRealityPose(localPosition, localRotation);
             }
+
+            return jointPoses;
         }
 
         /// <summary>
@@ -275,8 +266,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             screenPosition = Vector3.zero;
             HandRotateEulerAngles = Vector3.zero;
             JitterOffset = Vector3.zero;
-            HandData.UpdatedAt = 0;
-            HandData.IsTracked = false;
 
             // reset to the initial pose.
             TargetPoseBlending = 1.0f;

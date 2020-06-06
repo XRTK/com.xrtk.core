@@ -4,13 +4,14 @@
 using System;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
+using XRTK.Definitions.Utilities;
 
 namespace XRTK.Extensions
 {
     /// <summary>
     /// Extension methods for <see cref="HandControllerPoseProfile"/>
     /// </summary>
-    public static class HandControllerPoseDefinitionExtensions
+    public static class HandControllerPoseProfileExtensions
     {
         /// <summary>
         /// Converts a pose definition into <see cref="HandData"/> representing
@@ -20,15 +21,17 @@ namespace XRTK.Extensions
         /// <returns><see cref="HandData"/> object for the pose.</returns>
         public static HandData ToHandData(this HandControllerPoseProfile pose)
         {
-            var handData = new HandData();
-            var recordedHandData = JsonUtility.FromJson<RecordedHandJoints>(pose.Data.text);
+            var rootPose = new MixedRealityPose(Vector3.zero, Quaternion.identity);
+            var recordedHandJoints = JsonUtility.FromJson<RecordedHandJoints>(pose.Data.text);
+            var jointPoses = new MixedRealityPose[HandData.JointCount];
 
-            for (int j = 0; j < recordedHandData.Joints.Length; j++)
+            for (int j = 0; j < recordedHandJoints.Joints.Length; j++)
             {
-                var jointRecord = recordedHandData.Joints[j];
-                handData.Joints[(int)jointRecord.Joint] = jointRecord.Pose;
+                var jointRecord = recordedHandJoints.Joints[j];
+                jointPoses[(int)jointRecord.Joint] = jointRecord.Pose;
             }
 
+            var handData = new HandData(rootPose, jointPoses);
             handData.IsGripping = pose.IsGripping;
             handData.GripStrength = pose.GripStrength;
             handData.FingerCurlStrengths = new float[pose.FingerCurlStrengths.Length];

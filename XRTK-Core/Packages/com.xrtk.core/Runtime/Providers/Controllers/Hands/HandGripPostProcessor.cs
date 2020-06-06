@@ -60,7 +60,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <see cref="HandData.GripStrength"/> and <see cref="HandData.FingerCurlStrengths"/> values.
         /// </summary>
         /// <param name="handData">The input hand data retrieved from platform conversion.</param>
-        public void Process(HandData handData)
+        public HandData Process(HandData handData)
         {
             if (handData.IsTracked)
             {
@@ -160,6 +160,8 @@ namespace XRTK.Providers.Controllers.Hands
                     0f
                  };
             }
+
+            return handData;
         }
     }
 }

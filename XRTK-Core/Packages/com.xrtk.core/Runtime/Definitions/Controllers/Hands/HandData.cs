@@ -12,10 +12,24 @@ namespace XRTK.Definitions.Controllers.Hands
     /// in a single frame.
     /// </summary>
     [Serializable]
-    public class HandData
+    public struct HandData
     {
-        public HandData()
+        /// <summary>
+        /// Creates a new hand data from joint poses.
+        /// </summary>
+        /// <param name="rootPose">The hands root pose.</param>
+        /// <param name="jointPoses">Joint pose values.</param>
+        public HandData(MixedRealityPose rootPose, MixedRealityPose[] jointPoses)
         {
+            if (jointPoses.Length != JointCount)
+            {
+                throw new ArgumentException($"{nameof(HandData)} expects {JointCount} joint poses.");
+            }
+
+            RootPose = rootPose;
+            Joints = new MixedRealityPose[JointCount];
+            Array.Copy(jointPoses, Joints, JointCount);
+
             UpdatedAt = long.MinValue;
             IsTracked = false;
             PinchStrength = 0;
@@ -24,16 +38,8 @@ namespace XRTK.Definitions.Controllers.Hands
             IsPinching = false;
             IsPointing = false;
             IsGripping = false;
-            RootPose = MixedRealityPose.ZeroIdentity;
             TrackedPoseId = null;
             Mesh = new HandMeshData();
-
-            Joints = new MixedRealityPose[JointCount];
-            for (int i = 0; i < JointCount; i++)
-            {
-                Joints[i] = MixedRealityPose.ZeroIdentity;
-            }
-
             FingerCurlStrengths = new float[] { 0, 0, 0, 0, 0 };
         }
 
@@ -41,6 +47,11 @@ namespace XRTK.Definitions.Controllers.Hands
         /// Gets the total count of joints the XRTK hand controller supports.
         /// </summary>
         public static readonly int JointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
+
+        /// <summary>
+        /// Is the hand data empty?
+        /// </summary>
+        public bool Empty => Mesh.Empty && Joints.All(jp => jp == MixedRealityPose.ZeroIdentity);
 
         /// <summary>
         /// Timestamp of hand data, as FileTime, e.g. <see cref="DateTime.UtcNow"/>
@@ -103,16 +114,11 @@ namespace XRTK.Definitions.Controllers.Hands
         /// <summary>
         /// Pose information for each hand joint, relative to <see cref="RootPose"/>.
         /// </summary>
-        public MixedRealityPose[] Joints { get; }
+        public MixedRealityPose[] Joints { get; set; }
 
         /// <summary>
         /// Mesh information of the hand.
         /// </summary>
         public HandMeshData Mesh { get; set; }
-
-        /// <summary>
-        /// Is the hand data empty?
-        /// </summary>
-        public bool IsEmpty => Mesh.Empty && Joints.All(jp => jp == MixedRealityPose.ZeroIdentity);
     }
 }

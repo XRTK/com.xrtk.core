@@ -123,7 +123,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 simulatedController.GetPosition(DepthMultiplier),
                 simulatedController.GetDeltaRotation(RotationSpeed));
 
-            postProcessor.PostProcess(simulatedHandController.ControllerHandedness, simulatedHandData);
+            simulatedHandData = postProcessor.PostProcess(simulatedHandController.ControllerHandedness, simulatedHandData);
             simulatedHandController.UpdateController(simulatedHandData);
         }
 

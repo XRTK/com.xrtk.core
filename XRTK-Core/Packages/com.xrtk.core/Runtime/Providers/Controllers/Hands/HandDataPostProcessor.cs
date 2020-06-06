@@ -70,13 +70,15 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         /// <param name="handedness">The handedness of the data provided.</param>
         /// <param name="handData">The hand data retrieved from platform conversion.</param>
-        public void PostProcess(Handedness handedness, HandData handData)
+        public HandData PostProcess(Handedness handedness, HandData handData)
         {
-            UpdateIsPinchingAndStrength(handData);
-            UpdateIsPointing(handData);
-            UpdatePointerPose(handData);
-            GripPostProcessor.Process(handData);
-            TrackedPoseProcessor.Process(handedness, handData);
+            handData = UpdateIsPinchingAndStrength(handData);
+            handData = UpdateIsPointing(handData);
+            handData = UpdatePointerPose(handData);
+            handData = GripPostProcessor.Process(handData);
+            handData = TrackedPoseProcessor.Process(handedness, handData);
+
+            return handData;
         }
 
         /// <summary>
@@ -84,7 +86,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// if the platform did not provide it.
         /// </summary>
         /// <param name="handData">The hand data to update <see cref="HandData.IsPinching"/> and <see cref="HandData.PinchStrength"/> for.</param>
-        private void UpdateIsPinchingAndStrength(HandData handData)
+        private HandData UpdateIsPinchingAndStrength(HandData handData)
         {
             if (handData.IsTracked)
             {
@@ -107,13 +109,15 @@ namespace XRTK.Providers.Controllers.Hands
                 handData.IsPinching = false;
                 handData.PinchStrength = 0f;
             }
+
+            return handData;
         }
 
         /// <summary>
         /// Updates <see cref="HandData.IsPointing"/> if the platform did not provide it.
         /// </summary>
         /// <param name="handData">The hand data to update <see cref="HandData.IsPointing"/> for.</param>
-        private void UpdateIsPointing(HandData handData)
+        private HandData UpdateIsPointing(HandData handData)
         {
             if (handData.IsTracked && !PlatformProvidesIsPointing)
             {
@@ -130,13 +134,15 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 handData.IsPointing = false;
             }
+
+            return handData;
         }
 
         /// <summary>
         /// Updates <see cref="HandData.PointerPose"/> if the platform did not provide it.
         /// </summary>
         /// <param name="handData">The hand data to update <see cref="HandData.PointerPose"/> for.</param>
-        private void UpdatePointerPose(HandData handData)
+        private HandData UpdatePointerPose(HandData handData)
         {
             if (handData.IsTracked && !PlatformProvidesPointerPose)
             {
@@ -157,6 +163,8 @@ namespace XRTK.Providers.Controllers.Hands
 
                 handData.PointerPose = new MixedRealityPose(pointerPosition, pointerRotation);
             }
+
+            return handData;
         }
     }
 }

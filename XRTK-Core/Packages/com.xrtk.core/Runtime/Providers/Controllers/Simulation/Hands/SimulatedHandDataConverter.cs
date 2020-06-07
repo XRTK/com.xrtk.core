@@ -156,8 +156,8 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             // to the current mouse position and default distance from the camera.
             //if (!HandData.IsTracked)
             //{
-                Vector3 mousePos = Input.mousePosition;
-                screenPosition = new Vector3(mousePos.x, mousePos.y, defaultDistance);
+            Vector3 mousePos = Input.mousePosition;
+            screenPosition = new Vector3(mousePos.x, mousePos.y, defaultDistance);
             //}
 
             // Apply position delta x / y in screen space, but depth (z) offset in world space
@@ -210,9 +210,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         private MixedRealityPose[] ComputeJointPoses(SimulatedHandControllerPose pose, Handedness handedness, MixedRealityPose rootPose)
         {
-            Quaternion playspaceRotation = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.rotation
-                : Quaternion.identity;
+            var cameraRotation = MixedRealityToolkit.CameraSystem != null
+                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation
+                : CameraCache.Main.transform.rotation;
 
             var jointPoses = new MixedRealityPose[HandData.JointCount];
             for (int i = 0; i < HandData.JointCount; i++)
@@ -229,9 +229,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                     localRotation.z = -localRotation.z;
                 }
 
-                // Apply playspace transform
-                localPosition = playspaceRotation * localPosition;
-                localRotation = playspaceRotation * localRotation;
+                // Apply camera transform
+                localPosition = cameraRotation * localPosition;
+                localRotation = cameraRotation * localRotation;
 
                 // Apply root pose rotation transform
                 localRotation = rootPose.Rotation * localRotation;

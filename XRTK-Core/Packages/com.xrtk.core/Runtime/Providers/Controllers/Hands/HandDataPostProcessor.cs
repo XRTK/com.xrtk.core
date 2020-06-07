@@ -161,6 +161,8 @@ namespace XRTK.Providers.Controllers.Hands
                 var pointerDirection = pointerEndPosition - pointerPosition;
                 var pointerRotation = Quaternion.LookRotation(pointerDirection, camera.transform.up);
 
+                pointerRotation = camera.transform.rotation * pointerRotation;
+
                 handData.PointerPose = new MixedRealityPose(pointerPosition, pointerRotation);
             }
 

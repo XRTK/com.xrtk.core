@@ -104,14 +104,14 @@ steps:
         exit 1
       }
 
-      if ( Test-Path $modulesPath ) {
+      if ( Test-Path -Path $modulesPath ) {
         $modulesPath = '{0}{1}modules.json' -f $modulesPath,[IO.Path]::DirectorySeparatorChar
 
-        if ( Test-Path $modulesPath ) {
+        if ( Test-Path -Path $modulesPath ) {
           Write-Host "Modules Manifest: "$modulesPath
           $modules = @('--','--headless','im',"--version $UnityVersion")
 
-          foreach ($module in (Get-Content -Raw -Path $modulesPath | ConvertFrom-Json)) {
+          foreach ( $module in (Get-Content -Raw -Path $modulesPath | ConvertFrom-Json) ) {
             if ( ($module.category -eq 'Platforms') -and ($module.visible -eq $true) ) {
               Write-Host ">> platform module" $module.id
 

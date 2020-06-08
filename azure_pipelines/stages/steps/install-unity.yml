@@ -83,35 +83,35 @@ steps:
       Write-Host "Install Hub Complete: $hubPath"
       Write-Host ""
       Write-Host "Unity HUB CLI Options:"
-      $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','help')
+      $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath `"$hubPath`" -ArgumentList @('--','--headless','help')
       Write-Host ""
       Write-Host "Success? " ($p.ExitCode -eq 0)
 
       Write-Host ""
-      $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','install',"--version $UnityVersion","--changeset $UnityVersionChangeSet")
+      $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath `"$hubPath`" -ArgumentList @('--','--headless','install',"--version $UnityVersion","--changeset $UnityVersionChangeSet")
       Write-Host ""
       Write-Host "Success? " ($p.ExitCode -eq 0)
       Write-Host ""
-      $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','editors','-i')
+      $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath `"$hubPath`" -ArgumentList @('--','--headless','editors','-i')
       Write-Host ""
       Write-Host "Success? " ($p.ExitCode -eq 0)
 
       $modulesPath = "$editorPath$UnityVersion"
-      $editorPath = '{0}{1}{2}' -f $modulesPath,[IO.Path]::DirectorySeparatorChar,$editorFileEx
+      $editorPath = '{0}{1}{2}' -f `"$modulesPath`",[IO.Path]::DirectorySeparatorChar,$editorFileEx
 
-      if ( -not (Test-Path -Path "$editorPath") ) {
-        Write-Error "Failed to validate installed editor path at $editorPath"
+      if ( -not (Test-Path -Path `"$editorPath`") ) {
+        Write-Error "Failed to validate installed editor path at `"$editorPath`""
         exit 1
       }
 
-      if ( Test-Path -Path "$modulesPath" ) {
-        $modulesPath = '{0}{1}modules.json' -f $modulesPath,[IO.Path]::DirectorySeparatorChar
+      if ( Test-Path -Path `"$modulesPath`" ) {
+        $modulesPath = '{0}{1}modules.json' -f `"$modulesPath`",[IO.Path]::DirectorySeparatorChar
 
-        if ( Test-Path -Path "$modulesPath" ) {
-          Write-Host "Modules Manifest: "$modulesPath
+        if ( Test-Path -Path `"$modulesPath`" ) {
+          Write-Host "Modules Manifest: `"$modulesPath`""
           $modules = @('--','--headless','im',"--version $UnityVersion")
 
-          foreach ( $module in (Get-Content -Raw -Path $modulesPath | ConvertFrom-Json) ) {
+          foreach ( $module in (Get-Content -Raw -Path `"$modulesPath`" | ConvertFrom-Json) ) {
             if ( ($module.category -eq 'Platforms') -and ($module.visible -eq $true) ) {
               Write-Host ">> platform module" $module.id
 
@@ -123,7 +123,7 @@ steps:
             }
           }
 
-          $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList $modules
+          $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath `"$hubPath`" -ArgumentList $modules
           Write-Host ""
           Write-Host "Success? " ($p.ExitCode -eq 0)
         } else {

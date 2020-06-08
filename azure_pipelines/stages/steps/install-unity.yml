@@ -6,7 +6,7 @@ steps:
       $outPath = $PSScriptRoot
       $editorPath = ""
       $editorFileEx = ""
-      $version = Select-String -Path "$(System.DefaultWorkingDirectory)\$(project.name)\ProjectSettings\ProjectVersion.txt"
+      $version = Get-Content -Path "$(System.DefaultWorkingDirectory)\$(project.name)\ProjectSettings\ProjectVersion.txt"
       $pattern = '(?<version>(?:(?<major>\d+)\.)?(?:(?<minor>\d+)\.)?(?:(?<patch>\d+[fab]\d+)\b))|((?:\((?<revision>\w+))\))'
       $matches = $matches = [regex]::Matches($version, $pattern)
       $UnityVersion = $matches[0].Groups['version'].Value.Trim()

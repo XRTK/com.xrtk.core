@@ -111,7 +111,7 @@ steps:
           Write-Host "Modules Manifest: "$modulesPath
           $modules = @('--','--headless','im',"--version $UnityVersion")
 
-          Get-Content -Raw -Path $modulesPath | ConvertFrom-Json | foreach {
+          Get-Content -Raw -Path $modulesPath | ConvertFrom-Json | ForEach-Object {
             if( ($_.category -eq 'Platforms') -and ($_.visible -eq $true) ) {
               Write-Host "found platform module" $_.id
               $modules += '-m'

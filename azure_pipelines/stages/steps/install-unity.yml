@@ -99,7 +99,7 @@ steps:
       $modulesPath = "$editorPath$UnityVersion"
       $editorPath = '{0}{1}{2}' -f $modulesPath,[IO.Path]::DirectorySeparatorChar,$editorFileEx
 
-      if ( (Test-Path $editorPath -PathType Leaf) -eq $false ) {
+      if ( -not (Test-Path -Path $editorPath) ) {
         Write-Error "Failed to validate installed editor path at "$editorPath
         exit 1
       }

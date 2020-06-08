@@ -99,15 +99,15 @@ steps:
       $modulesPath = "$editorPath$UnityVersion"
       $editorPath = '{0}{1}{2}' -f $modulesPath,[IO.Path]::DirectorySeparatorChar,$editorFileEx
 
-      if ( -not (Test-Path -Path $editorPath) ) {
-        Write-Error "Failed to validate installed editor path at "$editorPath
+      if ( -not (Test-Path -Path "$editorPath") ) {
+        Write-Error "Failed to validate installed editor path at $editorPath"
         exit 1
       }
 
-      if ( Test-Path -Path $modulesPath ) {
+      if ( Test-Path -Path "$modulesPath" ) {
         $modulesPath = '{0}{1}modules.json' -f $modulesPath,[IO.Path]::DirectorySeparatorChar
 
-        if ( Test-Path -Path $modulesPath ) {
+        if ( Test-Path -Path "$modulesPath" ) {
           Write-Host "Modules Manifest: "$modulesPath
           $modules = @('--','--headless','im',"--version $UnityVersion")
 

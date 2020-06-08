@@ -104,10 +104,10 @@ steps:
         exit 1
       }
 
-      if ( Test-Path -Path `"$modulesPath`" ) {
+      if ( Test-Path -Path "$modulesPath" ) {
         $modulesPath = '{0}{1}modules.json' -f "$modulesPath",[IO.Path]::DirectorySeparatorChar
 
-        if ( Test-Path -Path `"$modulesPath`" ) {
+        if ( Test-Path -Path "$modulesPath" ) {
           Write-Host "Modules Manifest: "$modulesPath""
           $modules = @('--','--headless','im',"--version $UnityVersion")
 
@@ -131,7 +131,7 @@ steps:
           exit 1
         }
       } else {
-        Write-Error "Failed to resolve editor installation path at" $modulesPath
+        Write-Error "Failed to resolve editor installation path at $modulesPath"
         exit 1
       }
 

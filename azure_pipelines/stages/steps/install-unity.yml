@@ -33,14 +33,11 @@ steps:
           exit 1
         }
 
-        if( Test-Path "C:\Program Files\Unity Hub\Unity Hub.exe" )
-        {
+        if( Test-Path "C:\Program Files\Unity Hub\Unity Hub.exe" ) {
           #"Unity Hub.exe" -- --headless help
           $hubPath = "C:\Program Files\Unity Hub\Unity Hub.exe"
           #. 'C:\Program Files\Unity Hub\Unity Hub.exe' -- --headless help
-        }
-        else
-        {
+        } else {
           Write-Error "Unity Hub.exe path not found!"
           exit 1
         }
@@ -102,25 +99,21 @@ steps:
       $modulesPath = "$editorPath$UnityVersion"
       $editorPath = '{0}{1}{2}' -f $modulesPath,[IO.Path]::DirectorySeparatorChar,$editorFileEx
 
-      if ( (Test-Path $editorPath -PathType Leaf) -eq $false )
-      {
+      if ( (Test-Path $editorPath -PathType Leaf) -eq $false ) {
         Write-Error "Failed to validate installed editor path at "$editorPath
         exit 1
       }
 
-      if ( Test-Path $modulesPath )
-      {
+      if ( Test-Path $modulesPath ) {
         $modulesPath = '{0}{1}modules.json' -f $modulesPath,[IO.Path]::DirectorySeparatorChar
 
-        if ( Test-Path $modulesPath )
-        {
+        if ( Test-Path $modulesPath ) {
           Write-Host "Modules Manifest: "$modulesPath
           $modules = @('--','--headless','im',"--version $UnityVersion")
 
           Get-Content -Raw -Path $modulesPath | ConvertFrom-Json | foreach {
-            if( ($_.category -eq 'Platforms') -and ($_.visible -eq $true) )
-            {
-              Write-Host found platform module $_.id
+            if( ($_.category -eq 'Platforms') -and ($_.visible -eq $true) ) {
+              Write-Host "found platform module" $_.id
               $modules += '-m'
               $modules += $_.id
             }
@@ -129,13 +122,11 @@ steps:
           $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath $hubPath -ArgumentList $modules
           Write-Host ""
           Write-Host "Success? " ($p.ExitCode -eq 0)
-        } else
-        {
+        } else {
           Write-Error "Failed to resolve modules path at $modulesPath"
           exit 1
         }
-      } else
-      {
+      } else {
         Write-Error "Failed to resolve editor installation path at" $modulesPath
         exit 1
       }

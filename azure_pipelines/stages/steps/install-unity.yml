@@ -80,14 +80,14 @@ steps:
         ./UnityHub.AppImage
       }
 
-      Write-Host "Install Hub Complete: $hubPath"
+      Write-Host "Install Hub Complete: "$hubPath""
       Write-Host ""
       Write-Host "Unity HUB CLI Options:"
       $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','help')
       Write-Host ""
       Write-Host "Success? " ($p.ExitCode -eq 0)
 
-      Write-Host ""
+      Write-Host "Install $UnityVersion $UnityVersionChangeSet"
       $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','install',"--version $UnityVersion","--changeset $UnityVersionChangeSet")
       Write-Host ""
       Write-Host "Success? " ($p.ExitCode -eq 0)
@@ -104,10 +104,10 @@ steps:
         exit 1
       }
 
-      if ( Test-Path -Path "$modulesPath" ) {
+      if ( Test-Path -Path `"$modulesPath`" ) {
         $modulesPath = '{0}{1}modules.json' -f "$modulesPath",[IO.Path]::DirectorySeparatorChar
 
-        if ( Test-Path -Path "$modulesPath" ) {
+        if ( Test-Path -Path `"$modulesPath`" ) {
           Write-Host "Modules Manifest: "$modulesPath""
           $modules = @('--','--headless','im',"--version $UnityVersion")
 

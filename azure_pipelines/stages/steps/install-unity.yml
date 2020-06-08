@@ -112,14 +112,15 @@ steps:
       {
         $modulesPath = '{0}{1}modules.json' -f $modulesPath,[IO.Path]::DirectorySeparatorChar
 
-        if( Test-Path $modulesPath )
+        if ( Test-Path $modulesPath )
         {
-          Write-Host "Modules Manifest: " $modulesPath
+          Write-Host "Modules Manifest: "$modulesPath
           $modules = @('--','--headless','im',"--version $UnityVersion")
 
           Get-Content -Raw -Path $modulesPath | ConvertFrom-Json | foreach {
             if( ($_.category -eq 'Platforms') -and ($_.visible -eq $true) )
             {
+              Write-Host found platform module $_.id
               $modules += '-m'
               $modules += $_.id
             }
@@ -135,7 +136,7 @@ steps:
         }
       } else
       {
-        Write-Error "Failed to resolve editor installation path at $editorPath$UnityVersion"
+        Write-Error "Failed to resolve editor installation path at" $modulesPath
         exit 1
       }
 

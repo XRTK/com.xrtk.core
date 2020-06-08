@@ -34,7 +34,7 @@ stages:
 
       - template: steps/install-unity.yml
         parameters:
-          components: ${{ parameters.components }}
+          modules: ${{ parameters.modules }}
 
       - ${{ each item in parameters.targets }}:
         - template: steps/run-unity-tests.yml
@@ -52,7 +52,7 @@ stages:
         displayName: 'Publish Pipeline Artifacts'
         inputs:
           targetPath: '$(System.DefaultWorkingDirectory)\$(project.name)\Builds'
-          artifact: ${{ format('{0}.{1}', '$(Build.BuildNumber)', '$(Build.BuildId)') }}
+          artifact: ${{ format('{0}.{1}.{2}', '$(Build.BuildNumber)', '$(Build.BuildId)', '$(System.JobAttempt)') }}
         condition: always()
 
       - template: steps/return-unity-license.yml

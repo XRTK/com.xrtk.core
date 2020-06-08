@@ -185,6 +185,12 @@ namespace XRTK.Utilities.Build
             {
                 SyncSolution();
 
+                if (EditorUserBuildSettings.activeBuildTarget == BuildTarget.Android)
+                {
+                    var androidSdkPath = EditorPrefs.GetString("AndroidSdkRoot", "C:\\Program Files (x86)\\Android\\android-sdk");
+                    Debug.Log($"AndroidSdkRoot: {androidSdkPath}");
+                }
+
                 switch (EditorUserBuildSettings.activeBuildTarget)
                 {
                     case BuildTarget.WSAPlayer:

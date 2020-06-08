@@ -116,7 +116,7 @@ steps:
               Write-Host ">> platform module" $module.id
 
               if ( ${{ parameters.modules }} -contains $module.id ) {
-                Write-Host "+ module" $module.id
+                Write-Host "++      add module" $module.id
                 $modules += '-m'
                 $modules += $module.id
               }

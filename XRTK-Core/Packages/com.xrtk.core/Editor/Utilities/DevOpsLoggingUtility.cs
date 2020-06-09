@@ -8,16 +8,18 @@ using UnityEngine;
 namespace XRTK.Editor.Utilities
 {
     [InitializeOnLoad]
-    public static class LoggingUtility
+    public static class DevOpsLoggingUtility
     {
+        public static bool LoggingEnabled { get; set; } = Application.isBatchMode;
+
         private static readonly string[] IgnoredLogs =
         {
             "Using symlinks in Unity projects may cause your project to become corrupted",
         };
 
-        static LoggingUtility()
+        static DevOpsLoggingUtility()
         {
-            if (Application.isBatchMode)
+            if (LoggingEnabled)
             {
                 Application.logMessageReceived += OnLogMessageReceived;
             }
@@ -25,7 +27,8 @@ namespace XRTK.Editor.Utilities
 
         private static void OnLogMessageReceived(string condition, string stacktrace, LogType type)
         {
-            if (IgnoredLogs.Any(condition.Contains))
+            if (!LoggingEnabled ||
+                IgnoredLogs.Any(condition.Contains))
             {
                 return;
             }
@@ -33,16 +36,16 @@ namespace XRTK.Editor.Utilities
             switch (type)
             {
                 case LogType.Error:
-                    Debug.Log($"##vso[task.logissue type=error;]{condition}\n{stacktrace}");
+                    Debug.Log($"##[task.logissue type=error;]{condition}\n{stacktrace}");
                     break;
                 case LogType.Assert:
-                    Debug.Log($"##vso[task.logissue type=error;]{condition}\n{stacktrace}");
+                    Debug.Log($"##[task.logissue type=error;]{condition}\n{stacktrace}");
                     break;
                 case LogType.Warning:
-                    Debug.Log($"##vso[task.logissue type=warning;]{condition}\n{stacktrace}");
+                    Debug.Log($"##[task.logissue type=warning;]{condition}\n{stacktrace}");
                     break;
                 case LogType.Exception:
-                    Debug.Log($"##vso[task.logissue type=error;]{condition}\n{stacktrace}");
+                    Debug.Log($"##[task.logissue type=error;]{condition}\n{stacktrace}");
                     break;
             }
         }

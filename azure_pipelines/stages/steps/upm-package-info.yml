@@ -15,6 +15,11 @@ steps:
 
       # Strip SemVer since version type is not compatible. We do a hard replace on the preview tag anyway.
       $version = [version] ($packageInfo.version -replace "-preview.\d*", "")
+
+      if( [string]::IsNullOrEmpty($oldVersionString) ) {
+        $oldVersionString = $packageInfo.version
+      }
+
       $oldVersion = [version] ($oldVersionString -replace "-preview.\d*", "")
 
       if( '$(isPreviewBuild)' -eq 'True' ) {

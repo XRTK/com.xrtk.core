@@ -28,7 +28,7 @@ steps:
         # Run Installer
         $process = Start-Process @startProcessArgs
 
-        if ( $process.ExitCode -ne 0) {
+        if ( $process.ExitCode -ne 0 ) {
           Write-Error "$(Get-Date): Failed with exit code: $($process.ExitCode)"
           exit 1
         }

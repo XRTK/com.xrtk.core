@@ -34,4 +34,8 @@ stages:
     parameters:
       platform: windows
       ${{ insert }}: ${{ parameters.os.windows }}
+  - template: stages/unity-build.yml
+    parameters:
+      platform: macOS
+      ${{ insert }}: ${{ parameters.os.macOS }}
   - template: stages/publish.yml

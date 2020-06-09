@@ -1,5 +1,5 @@
 stages:
-- stage: Build
+- stage:
   displayName: ${{ format('{0} build agent', parameters.platform) }}
 
   jobs:

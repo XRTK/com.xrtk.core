@@ -12,6 +12,7 @@ steps:
       $UnityVersion = $matches[1].Groups['version'].Value.Trim()
       $UnityVersionChangeSet = $matches[2].Groups['revision'].Value.Trim()
 
+      [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
       $wc = New-Object System.Net.WebClient
 
       Write-Host "$(Get-Date): Download Complete, Starting installation..."

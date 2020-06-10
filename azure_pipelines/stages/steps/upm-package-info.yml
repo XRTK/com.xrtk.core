@@ -8,13 +8,21 @@ steps:
 
       Write-Host "Determining latest release version from GitHub..."
       $releases = "https://api.github.com/repos/$(Build.Repository.Name)/releases"
+      $secpasswd = ConvertTo-SecureString $(GitHubPat) -AsPlainText -Force
+      $credential = New-Object System.Management.Automation.PSCredential("XRTK-Build-Bot", $secpasswd)
+
       [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
-      $oldVersionString = [string](Invoke-WebRequest -Uri $releases -UseBasicParsing | ConvertFrom-Json)[0].tag_name
+      $oldVersionString = [string](Invoke-WebRequest -Uri $releases -Credential $credential -UseBasicParsing | ConvertFrom-Json)[0].tag_name
 
       Write-Host "Detected last GitHub release: $oldVersionString"
 
       # Strip SemVer since version type is not compatible. We do a hard replace on the preview tag anyway.
       $version = [version] ($packageInfo.version -replace "-preview.\d*", "")
+
+      if( [string]::IsNullOrEmpty($oldVersionString) ) {
+        $oldVersionString = $packageInfo.version
+      }
+
       $oldVersion = [version] ($oldVersionString -replace "-preview.\d*", "")
 
       if( '$(isPreviewBuild)' -eq 'True' ) {

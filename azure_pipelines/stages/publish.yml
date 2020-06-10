@@ -2,7 +2,6 @@ stages:
 - stage:
   displayName: 'publish'
   condition: and(succeeded(), or( eq(variables['isReleaseBuild'], 'True'), eq(variables['isPreviewBuild'], 'True') ) )
-  dependsOn: Build
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-latest'

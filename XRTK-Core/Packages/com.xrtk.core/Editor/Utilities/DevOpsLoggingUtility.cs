@@ -36,16 +36,12 @@ namespace XRTK.Editor.Utilities
             switch (type)
             {
                 case LogType.Error:
-                    Debug.Log($"##vso[task.logissue type=error;]{condition}\n{stacktrace}");
-                    break;
                 case LogType.Assert:
+                case LogType.Exception:
                     Debug.Log($"##vso[task.logissue type=error;]{condition}\n{stacktrace}");
                     break;
                 case LogType.Warning:
-                    Debug.Log($"##[task.logissue type=warning;]{condition}\n{stacktrace}");
-                    break;
-                case LogType.Exception:
-                    Debug.Log($"##vso[task.logissue type=error;]{condition}\n{stacktrace}");
+                    Debug.Log($"##vso[task.logissue type=warning;]{condition}\n{stacktrace}");
                     break;
             }
         }

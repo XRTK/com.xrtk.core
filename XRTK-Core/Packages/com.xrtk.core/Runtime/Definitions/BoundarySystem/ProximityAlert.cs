@@ -10,15 +10,15 @@ namespace XRTK.Definitions.BoundarySystem
         /// </summary>
         Clear = 0,
         /// <summary>
-        /// The tracked object's bounds have touched the boundary.
+        /// The tracked object's bounds have touching the boundary.
         /// </summary>
         Touch,
         /// <summary>
-        /// The tracked object's center pivot point has crossed outside the boundary.
+        /// The tracked object has crossed outside the boundary.
         /// </summary>
         Exit,
         /// <summary>
-        /// The tracked object's center pivot point has crossed inside the boundary.
+        /// The tracked object has crossed inside the boundary.
         /// </summary>
         Enter,
     }

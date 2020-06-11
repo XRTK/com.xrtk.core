@@ -65,7 +65,7 @@ namespace XRTK.Services.BoundarySystem
         /// </remarks>
         private const float BOUNDARY_OBJECT_RENDER_OFFSET = 0.001f;
 
-        private readonly Dictionary<GameObject, ProximityAlert> trackedObjects = new Dictionary<GameObject, ProximityAlert>(3);
+        private readonly Dictionary<BoundsCache, ProximityAlert> trackedObjects = new Dictionary<BoundsCache, ProximityAlert>(3);
 
         private InscribedRectangle rectangularBounds;
 
@@ -325,22 +325,73 @@ namespace XRTK.Services.BoundarySystem
 
             foreach (var trackedObjectStatus in trackedObjects)
             {
-                switch (trackedObjectStatus.Value)
+                var trackedBounds = trackedObjectStatus.Key;
+                var status = trackedObjectStatus.Value;
+                var isAnyCornerInsideBoundary = false;
+                var isCornersFullyInsideBoundary = true;
+
+                for (int i = 0; i < trackedBounds.BoundsCornerPoints.Length; i++)
+                {
+                    var result = IsInsideBoundary(trackedBounds.BoundsCornerPoints[i]);
+                    isAnyCornerInsideBoundary |= result;
+                    isCornersFullyInsideBoundary &= result;
+                }
+
+                switch (status)
                 {
                     case ProximityAlert.Clear:
-                        if (!IsInsideBoundary(trackedObjectStatus.Key.transform.position))
+                        if (isAnyCornerInsideBoundary && !isCornersFullyInsideBoundary)
                         {
-                            BoundaryProximityAlert?.Invoke(trackedObjectStatus.Key, ProximityAlert.Touch);
+                            status = ProximityAlert.Touch;
                         }
+
+                        // In case object moves faster than updates can track it's ejection or
+                        // if the object was already outside of the boundary.
+                        if (!isCornersFullyInsideBoundary)
+                        {
+                            status = ProximityAlert.Exit;
+                        }
+
                         break;
                     case ProximityAlert.Touch:
+                        if (isCornersFullyInsideBoundary)
+                        {
+                            status = ProximityAlert.Clear;
+                        }
+
+                        if (!isAnyCornerInsideBoundary)
+                        {
+                            status = ProximityAlert.Exit;
+                        }
+
                         break;
                     case ProximityAlert.Exit:
+                        // Left and re-entered the boundary
+                        if (isAnyCornerInsideBoundary)
+                        {
+                            status = ProximityAlert.Enter;
+                        }
+
                         break;
                     case ProximityAlert.Enter:
+                        if (isAnyCornerInsideBoundary)
+                        {
+                            status = isCornersFullyInsideBoundary
+                                ? ProximityAlert.Clear
+                                : ProximityAlert.Touch;
+                        }
+                        else
+                        {
+                            status = ProximityAlert.Exit;
+                        }
+
                         break;
-                    default:
-                        throw new ArgumentOutOfRangeException();
+                }
+
+                if (status != trackedObjectStatus.Value)
+                {
+                    trackedObjects[trackedBounds] = status;
+                    BoundaryProximityAlert?.Invoke(trackedBounds.gameObject, status);
                 }
             }
         }
@@ -377,7 +428,7 @@ namespace XRTK.Services.BoundarySystem
         public event Action<GameObject, ProximityAlert> BoundaryProximityAlert;
 
         /// <inheritdoc />
-        public IReadOnlyList<GameObject> TrackedObjects => trackedObjects.Keys.ToList();
+        public IReadOnlyList<GameObject> TrackedObjects => trackedObjects.Keys.Select(cache => cache.gameObject).ToList();
 
         /// <inheritdoc />
         public IMixedRealityBoundaryDataProvider BoundaryDataProvider { get; private set; }
@@ -549,18 +600,23 @@ namespace XRTK.Services.BoundarySystem
         /// <inheritdoc />
         public void RegisterTrackedObject(GameObject gameObject)
         {
-            if (!trackedObjects.TryGetValue(gameObject, out _))
+            var boundsCached = gameObject.EnsureComponent<BoundsCache>();
+
+            if (!trackedObjects.TryGetValue(boundsCached, out _))
             {
-                trackedObjects.Add(gameObject, ProximityAlert.Clear);
+                trackedObjects.Add(boundsCached, ProximityAlert.Clear);
             }
         }
 
         /// <inheritdoc />
         public void UnregisterTrackedObject(GameObject gameObject)
         {
-            if (trackedObjects.TryGetValue(gameObject, out _))
+            var boundsCache = gameObject.GetComponent<BoundsCache>();
+            if (boundsCache == null) { return; }
+
+            if (trackedObjects.TryGetValue(boundsCache, out _))
             {
-                trackedObjects.Remove(gameObject);
+                trackedObjects.Remove(boundsCache);
             }
         }
 

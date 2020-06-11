@@ -142,46 +142,40 @@ namespace XRTK.Providers.Controllers.Hands
             if (!Enabled) { return; }
 
             var lastTrackingState = TrackingState;
-            LastIsPinching = IsPinching;
-            LastIsGripping = IsGripping;
-            LastIsPointing = IsPointing;
-            LastTrackedPoseId = TrackedPoseId;
-
-            // Update internals.
-            UpdateJoints(handData);
-            UpdateIsPinching(handData);
-            UpdateIsIsPointing(handData);
-            UpdateIsIsGripping(handData);
-            UpdateSpatialPointerPose(handData);
-            UpdateIndexFingerTipPose(handData);
-            UpdateGripPose(handData);
-            UpdateFingerCurlStrength(handData);
-            UpdateBounds();
-            UpdateVelocity();
-            TrackedPoseId = handData.TrackedPoseId;
-            PinchStrength = handData.PinchStrength;
-
             TrackingState = handData.IsTracked ? TrackingState.Tracked : TrackingState.NotTracked;
-            if (TrackingState == TrackingState.Tracked)
-            {
-                IsPositionAvailable = true;
-                IsPositionApproximate = false;
-                IsRotationAvailable = true;
-            }
 
-            // Update controller tracking state.
             if (lastTrackingState != TrackingState)
             {
                 MixedRealityToolkit.InputSystem?.RaiseSourceTrackingStateChanged(InputSource, this, TrackingState);
             }
 
-            // Update controller pose.
             if (TrackingState == TrackingState.Tracked)
             {
+                IsPositionAvailable = true;
+                IsPositionApproximate = false;
+                IsRotationAvailable = true;
+
+                LastIsPinching = IsPinching;
+                LastIsGripping = IsGripping;
+                LastIsPointing = IsPointing;
+                LastTrackedPoseId = TrackedPoseId;
+
+                UpdateJoints(handData);
+                UpdateIsPinching(handData);
+                UpdateIsIsPointing(handData);
+                UpdateIsIsGripping(handData);
+                UpdateSpatialPointerPose(handData);
+                UpdateIndexFingerTipPose(handData);
+                UpdateGripPose(handData);
+                UpdateFingerCurlStrength(handData);
+                UpdateBounds();
+                UpdateVelocity();
+                TrackedPoseId = handData.TrackedPoseId;
+                PinchStrength = handData.PinchStrength;
+
                 MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, handData.RootPose);
             }
 
-            // Update hand controller interaction mappings.
             UpdateInteractionMappings();
 
             // Raise general hand data update for visualizers.

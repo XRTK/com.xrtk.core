@@ -4,8 +4,13 @@
 namespace XRTK.Definitions.Controllers.Hands
 {
     /// <summary>
-    /// The supported tracked hand joints.
+    /// The supported tracked hand joints for hand tracking.
     /// </summary>
+    /// <remarks>
+    /// It is absolutely important to not change the order of these
+    /// joints in the enum! The hand tracking system relies on the current order
+    /// and changing it will cause issues with joint mappings.
+    /// </remarks>
     public enum TrackedHandJoint
     {
         /// <summary>

@@ -30,6 +30,11 @@ namespace XRTK.Definitions.Controllers.Hands
         }
 
         /// <summary>
+        /// The default value for hand mesh data.
+        /// </summary>
+        public static HandMeshData Empty { get; } = new HandMeshData(null, null, null, null);
+
+        /// <summary>
         /// The vertices of the hand mesh in the initial coordinate system.
         /// </summary>
         public Vector3[] Vertices { get; }
@@ -52,6 +57,6 @@ namespace XRTK.Definitions.Controllers.Hands
         /// <summary>
         /// Returns true, if the mesh data is empty.
         /// </summary>
-        public bool Empty => Vertices == null || Vertices.Length == 0;
+        public bool IsEmpty => Vertices == null || Vertices.Length == 0;
     }
 }

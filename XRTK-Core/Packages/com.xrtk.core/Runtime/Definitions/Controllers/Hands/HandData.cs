@@ -51,7 +51,7 @@ namespace XRTK.Definitions.Controllers.Hands
         /// <summary>
         /// Is the hand data empty?
         /// </summary>
-        public bool Empty => Mesh.Empty && Joints.All(jp => jp == MixedRealityPose.ZeroIdentity);
+        public bool Empty => Mesh.IsEmpty && Joints.All(jp => jp == MixedRealityPose.ZeroIdentity);
 
         /// <summary>
         /// Timestamp of hand data, as FileTime, e.g. <see cref="DateTime.UtcNow"/>

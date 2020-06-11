@@ -72,5 +72,12 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         /// <param name="curlStrength">The finger's curl strength is a value from 0 to 1.</param>
         /// <returns>True, if success.</returns>
         bool TryGetFingerCurlStrength(HandFinger handFinger, out float curlStrength);
+
+        /// <summary>
+        /// Get the hand controllers current <see cref="HandMeshData"/>, if available.
+        /// </summary>
+        /// <param name="handMeshData">Hand mesh data for rendering the hand as a mesh.</param>
+        /// <returns>True, if mesh data available and not <see cref="HandMeshData.Empty"/>.</returns>
+        bool TryGetHandMeshData(out HandMeshData handMeshData);
     }
 }

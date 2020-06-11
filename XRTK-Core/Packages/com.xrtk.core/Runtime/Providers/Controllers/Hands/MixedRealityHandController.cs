@@ -44,6 +44,7 @@ namespace XRTK.Providers.Controllers.Hands
         private int velocityUpdateFrame = 0;
         private float deltaTimeStart = 0;
 
+        private HandMeshData lastHandMeshData = HandMeshData.Empty;
         private Vector3 lastPalmNormal = Vector3.zero;
         private Vector3 lastPalmPosition = Vector3.zero;
 
@@ -155,6 +156,7 @@ namespace XRTK.Providers.Controllers.Hands
                 IsPositionApproximate = false;
                 IsRotationAvailable = true;
 
+                lastHandMeshData = handData.Mesh;
                 LastIsPinching = IsPinching;
                 LastIsGripping = IsGripping;
                 LastIsPointing = IsPointing;
@@ -817,6 +819,19 @@ namespace XRTK.Providers.Controllers.Hands
             }
 
             curlStrength = 0f;
+            return false;
+        }
+
+        /// <inheritdoc />
+        public bool TryGetHandMeshData(out HandMeshData handMeshData)
+        {
+            if (!lastHandMeshData.IsEmpty)
+            {
+                handMeshData = lastHandMeshData;
+                return true;
+            }
+
+            handMeshData = HandMeshData.Empty;
             return false;
         }
 

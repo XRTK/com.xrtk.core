@@ -40,6 +40,7 @@ namespace XRTK.Definitions.BoundarySystem
         public Edge(Vector3 pointA, Vector3 pointB) :
             // Use the X and Z parameters as our edges are height agnostic.
             this(new Vector2(pointA.x, pointA.z), new Vector2(pointB.x, pointB.z))
-        { }
+        {
+        }
     }
 }

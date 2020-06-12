@@ -179,9 +179,6 @@ namespace XRTK.Providers.Controllers.Hands
             }
 
             UpdateInteractionMappings();
-
-            // Raise general hand data update for visualizers.
-            MixedRealityToolkit.InputSystem?.RaiseHandDataInputChanged(InputSource, ControllerHandedness, handData);
         }
 
         #region Hand Bounds Implementation

@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
@@ -88,7 +87,6 @@ namespace XRTK.Services.InputSystem
         private InputEventData<Vector3> positionInputEventData;
         private InputEventData<Quaternion> rotationInputEventData;
         private InputEventData<MixedRealityPose> poseInputEventData;
-        private InputEventData<HandData> handDataInputEventData;
 
         private SpeechEventData speechEventData;
         private DictationEventData dictationEventData;
@@ -163,7 +161,6 @@ namespace XRTK.Services.InputSystem
                 positionInputEventData = new InputEventData<Vector3>(eventSystem);
                 rotationInputEventData = new InputEventData<Quaternion>(eventSystem);
                 poseInputEventData = new InputEventData<MixedRealityPose>(eventSystem);
-                handDataInputEventData = new InputEventData<HandData>(eventSystem);
 
                 speechEventData = new SpeechEventData(eventSystem);
                 dictationEventData = new DictationEventData(eventSystem);
@@ -1223,23 +1220,6 @@ namespace XRTK.Services.InputSystem
         }
 
         #endregion Input Pose Changed
-
-        #region Hand Data Input Changed
-
-        private static readonly ExecuteEvents.EventFunction<IMixedRealityInputHandler<HandData>> OnHandDataInputChanged =
-            delegate (IMixedRealityInputHandler<HandData> handler, BaseEventData eventData)
-            {
-                var casted = ExecuteEvents.ValidateEventData<InputEventData<HandData>>(eventData);
-                handler.OnInputChanged(casted);
-            };
-
-        public void RaiseHandDataInputChanged(IMixedRealityInputSource source, Handedness handedness, HandData handData)
-        {
-            handDataInputEventData.Initialize(source, handedness, MixedRealityInputAction.None, handData);
-            HandleEvent(handDataInputEventData, OnHandDataInputChanged);
-        }
-
-        #endregion
 
         #endregion Generic Input Events
 

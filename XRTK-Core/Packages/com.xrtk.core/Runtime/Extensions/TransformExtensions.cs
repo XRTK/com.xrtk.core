@@ -148,12 +148,12 @@ namespace XRTK.Extensions
         /// Transform of root GameObject the renderers are attached to.
         /// </param>
         /// <param name="syncTransform">
-        /// True, by default, this will sync the <see cref="transform"/> rotation to calculate the axis aligned orientation.
+        /// True, by default, this will sync the <see cref="Transform"/> rotation to calculate the axis aligned orientation.
         /// </param>
         /// <param name="renderers">Optional cached renderer collection.</param>
         /// <returns>The total bounds of all renderers attached to this GameObject.
         /// If no renderers attached, returns a bounds of center and extents 0</returns>
-        public static Bounds GetRenderBounds(this Transform transform, bool syncTransform = true, Renderer[] renderers = null)
+        public static Bounds GetRenderBounds(this Transform transform, ref Renderer[] renderers, bool syncTransform = true)
         {
             // Store current rotation then zero out the rotation so that the bounds
             // are computed when the object is in its 'axis aligned orientation'.

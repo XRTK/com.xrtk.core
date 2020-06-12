@@ -432,7 +432,11 @@ namespace XRTK.Services
 
             if (ActiveProfile.IsBoundarySystemEnabled)
             {
-                if (!TryCreateAndRegisterService<IMixedRealityBoundarySystem>(ActiveProfile.BoundarySystemSystemType, out _, ActiveProfile.BoundaryVisualizationProfile) || BoundarySystem == null)
+                if (TryCreateAndRegisterService<IMixedRealityBoundarySystem>(ActiveProfile.BoundarySystemSystemType, out var service, ActiveProfile.BoundaryVisualizationProfile) && BoundarySystem != null)
+                {
+                    TryRegisterDataProviderConfigurations(ActiveProfile.BoundaryVisualizationProfile.RegisteredServiceConfigurations, service);
+                }
+                else
                 {
                     Debug.LogError("Failed to start the Boundary System!");
                 }

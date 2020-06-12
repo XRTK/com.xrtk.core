@@ -15,10 +15,10 @@ namespace XRTK.Utilities
         /// A value that should be larger than the maximum boundary width.
         /// </summary>
         /// <remarks>
-        /// This value is used to ensure that line segments are created 
+        /// This value is used to ensure that line segments are created
         /// that will intersect with a piece of the room boundary.
         /// </remarks>
-        internal static readonly float maxWidth = 10000f;
+        internal static readonly float MaxWidth = 10000f;
 
         /// <summary>
         /// A value representing an invalid point.
@@ -26,12 +26,12 @@ namespace XRTK.Utilities
         public static readonly Vector2 InvalidPoint = new Vector2(float.NegativeInfinity, float.NegativeInfinity);
 
         /// <summary>
-        /// Determines if the specified point is within the provided geometry.
+        /// Determines if the specified point is within the provided <see cref="geometryEdges"/>.
         /// </summary>
         /// <param name="geometryEdges">The geometry for which we are checking the point.</param>
         /// <param name="point">The point being checked.</param>
         /// <returns>
-        /// True if the point falls within the geometry, false otherwise.
+        /// True if the point falls within the geometry, otherwise false.
         /// </returns>
         public static bool IsInsideBoundary(Edge[] geometryEdges, Vector2 point)
         {
@@ -40,9 +40,9 @@ namespace XRTK.Utilities
                 return false;
             }
 
-            // Check if a ray to the right (X+) intersects with an 
+            // Check if a ray to the right (X+) intersects with an
             // odd number of edges (inside) or an even number of edges (outside)
-            var rightEdge = new Edge(point, new Vector2(maxWidth, point.y));
+            var rightEdge = new Edge(point, new Vector2(MaxWidth, point.y));
 
             int intersections = 0;
             for (int i = 0; i < geometryEdges.Length; i++)

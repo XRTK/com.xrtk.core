@@ -1,9 +1,10 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.BoundarySystem;
 
 namespace XRTK.Definitions.BoundarySystem
 {
@@ -11,10 +12,22 @@ namespace XRTK.Definitions.BoundarySystem
     /// Configuration profile settings for setting up boundary visualizations.
     /// </summary>
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Boundary Visualization Profile", fileName = "MixedRealityBoundaryVisualizationProfile", order = (int)CreateProfileMenuItemIndices.BoundaryVisualization)]
-    public class MixedRealityBoundaryVisualizationProfile : BaseMixedRealityProfile
+    public class MixedRealityBoundaryVisualizationProfile : BaseMixedRealityServiceProfile<IMixedRealityBoundaryDataProvider>
     {
+        #region General Settings
+
         [SerializeField]
-        [Tooltip("The approximate height of the play space, in meters.")]
+        [Tooltip("Force the boundary to always be displayed in the scene?")]
+        private bool showBoundary = false;
+
+        /// <summary>
+        /// Should the boundary system display the play area?
+        /// </summary>
+        public bool ShowBoundary => showBoundary;
+
+        [Min(1f)]
+        [SerializeField]
+        [Tooltip("The height of the boundary, in meters.")]
         private float boundaryHeight = 3.0f;
 
         /// <summary>
@@ -25,21 +38,40 @@ namespace XRTK.Definitions.BoundarySystem
         /// </remarks>
         public float BoundaryHeight => boundaryHeight;
 
+        [SerializeField]
+        [Tooltip("The material to use when displaying the boundary.")]
+        private Material boundaryMaterial = null;
+
+        /// <summary>
+        /// The material to use for the rectangular play area <see cref="GameObject"/>.
+        /// </summary>
+        public Material BoundaryMaterial => boundaryMaterial;
+
+        [PhysicsLayer]
+        [SerializeField]
+        [Tooltip("The physics layer to assign to all the generated boundary GameObjects.")]
+        private int physicsLayer = 2;
+
+        /// <summary>
+        /// The physics layer to assign to all the generated boundary <see cref="GameObject"/>s.
+        /// </summary>
+        public int PhysicsLayer => physicsLayer;
+
+        #endregion General Settings
+
         #region Floor settings
 
         [SerializeField]
-        [Tooltip("Should the floor be displayed in the scene?")]
+        [Tooltip("Force the boundary system display the floor?")]
         private bool showFloor = true;
 
         /// <summary>
-        /// Should the boundary system display the floor?
+        /// Force the boundary system display the floor?
         /// </summary>
         public bool ShowFloor => showFloor;
 
-        // todo: consider allowing optional custom prefab
-
         [SerializeField]
-        [Tooltip("The material to use when displaying the floor.")]
+        [Tooltip("The material to use when displaying the floor.\n\nNote: if none is set, boundary material is used.")]
         private Material floorMaterial = null;
 
         /// <summary>
@@ -47,152 +79,49 @@ namespace XRTK.Definitions.BoundarySystem
         /// </summary>
         public Material FloorMaterial => floorMaterial;
 
-        [PhysicsLayer]
-        [SerializeField]
-        [Tooltip("The physics layer to assign to the generated floor.")]
-        private int floorPhysicsLayer = 0;
-
-        /// <summary>
-        /// The physics layer to assign to the generated floor.
-        /// </summary>
-        public int FloorPhysicsLayer => floorPhysicsLayer;
-
-        [SerializeField]
-        [Tooltip("The dimensions of the floor, in meters.")]
-        private Vector2 floorScale = new Vector2(10f, 10f);
-
-        /// <summary>
-        /// The size at which to display the rectangular floor plane <see cref="GameObject"/>.
-        /// </summary>
-        public Vector2 FloorScale => floorScale;
-
         #endregion Floor settings
-
-        #region Play area settings
-
-        [SerializeField]
-        [Tooltip("Should the play area be displayed in the scene?")]
-        private bool showPlayArea = true;
-
-        /// <summary>
-        /// Should the boundary system display the play area?
-        /// </summary>
-        public bool ShowPlayArea => showPlayArea;
-
-        [SerializeField]
-        [Tooltip("The material to use when displaying the play area.")]
-        private Material playAreaMaterial = null;
-
-        /// <summary>
-        /// The material to use for the rectangular play area <see cref="GameObject"/>.
-        /// </summary>
-        public Material PlayAreaMaterial => playAreaMaterial;
-
-        [PhysicsLayer]
-        [SerializeField]
-        [Tooltip("The physics layer to assign to the generated play area.")]
-        private int playAreaPhysicsLayer = 2;
-
-        /// <summary>
-        /// The physics layer to assign to the generated play area.
-        /// </summary>
-        public int PlayAreaPhysicsLayer => playAreaPhysicsLayer;
-
-        #endregion Play area settings
-
-        #region Tracked area settings
-
-        [SerializeField]
-        [Tooltip("Should the tracked area be displayed in the scene?")]
-        private bool showTrackedArea = true;
-
-        /// <summary>
-        /// Should the boundary system display the tracked area?
-        /// </summary>
-        public bool ShowTrackedArea => showTrackedArea;
-
-        [SerializeField]
-        [Tooltip("The material to use when displaying the tracked area.")]
-        private Material trackedAreaMaterial = null;
-
-        /// <summary>
-        /// The material to use for the boundary geometry <see cref="GameObject"/>.
-        /// </summary>
-        public Material TrackedAreaMaterial => trackedAreaMaterial;
-
-        [PhysicsLayer]
-        [SerializeField]
-        [Tooltip("The physics layer to assign to the generated tracked area.")]
-        private int trackedAreaPhysicsLayer = 2;
-
-        /// <summary>
-        /// The physics layer to assign to the generated tracked area.
-        /// </summary>
-        public int TrackedAreaPhysicsLayer => trackedAreaPhysicsLayer;
-
-        #endregion Tracked area settings
 
         #region Boundary wall settings
 
         [SerializeField]
-        [Tooltip("Should the boundary walls be displayed in the scene?")]
-        private bool showBoundaryWalls = false;
+        [Tooltip("Force the boundary walls be displayed?")]
+        private bool showWalls = false;
 
         /// <summary>
-        /// Should the boundary system display the boundary geometry walls?
+        /// Force the boundary walls be displayed?
         /// </summary>
-        public bool ShowBoundaryWalls => showBoundaryWalls;
+        public bool ShowWalls => showWalls;
 
         [SerializeField]
-        [Tooltip("The material to use when displaying the boundary walls.")]
-        private Material boundaryWallMaterial = null;
+        [Tooltip("The material to use when displaying the boundary walls.\n\nNote: if none is set, boundary material is used.")]
+        private Material wallMaterial = null;
 
         /// <summary>
         /// The material to use for displaying the boundary geometry walls.
         /// </summary>
-        public Material BoundaryWallMaterial => boundaryWallMaterial;
-
-        [PhysicsLayer]
-        [SerializeField]
-        [Tooltip("The physics layer to assign to the generated boundary walls.")]
-        private int boundaryWallsPhysicsLayer = 2;
-
-        /// <summary>
-        /// The physics layer to assign to the generated boundary walls.
-        /// </summary>
-        public int BoundaryWallsPhysicsLayer => boundaryWallsPhysicsLayer;
+        public Material WallMaterial => wallMaterial;
 
         #endregion Boundary wall settings
 
         #region Boundary ceiling settings
 
         [SerializeField]
-        [Tooltip("Should the boundary ceiling be displayed in the scene?")]
-        private bool showBoundaryCeiling = false;
+        [Tooltip("Force the boundary ceiling be displayed?")]
+        private bool showCeiling = false;
 
         /// <summary>
-        /// Should the boundary system display the boundary ceiling?
+        /// Force the boundary ceiling be displayed?
         /// </summary>
-        public bool ShowBoundaryCeiling => showBoundaryCeiling;
+        public bool ShowCeiling => showCeiling;
 
         [SerializeField]
-        [Tooltip("The material to use when displaying the boundary ceiling.")]
-        private Material boundaryCeilingMaterial = null;
+        [Tooltip("The material to use when displaying the boundary ceiling.\n\nNote: if none is set, boundary material is used.")]
+        private Material ceilingMaterial = null;
 
         /// <summary>
         /// The material to use for displaying the boundary ceiling.
         /// </summary>
-        public Material BoundaryCeilingMaterial => boundaryCeilingMaterial;
-
-        [PhysicsLayer]
-        [SerializeField]
-        [Tooltip("The physics layer to assign to the generated boundary ceiling.")]
-        private int ceilingPhysicsLayer = 2;
-
-        /// <summary>
-        /// The physics layer to assign to the generated boundary ceiling.
-        /// </summary>
-        public int CeilingPhysicsLayer => ceilingPhysicsLayer;
+        public Material CeilingMaterial => ceilingMaterial;
 
         #endregion Boundary ceiling settings
     }

@@ -66,22 +66,12 @@ namespace XRTK.Extensions
         /// Is the <see cref="Transform"/> inside the <see cref="Camera"/>s frustum?
         /// </summary>
         /// <param name="camera"></param>
-        /// <param name="transform"></param>
+        /// <param name="bounds"></param>
         /// <returns></returns>
-        public static bool IsInFrustum(this Camera camera, Transform transform)
+        public static bool IsInFrustum(this Camera camera, Bounds bounds)
         {
             var planes = GeometryUtility.CalculateFrustumPlanes(camera);
-            return GeometryUtility.TestPlanesAABB(planes, transform.GetRenderBounds());
-        }
-
-        /// <summary>
-        /// Is the <see cref="GameObject"/> inside the <see cref="Camera"/>s frustum?
-        /// </summary>
-        /// <param name="camera"></param>
-        /// <param name="gameObject"></param>
-        public static bool IsInFrustum(this Camera camera, GameObject gameObject)
-        {
-            return IsInFrustum(camera, gameObject.transform);
+            return GeometryUtility.TestPlanesAABB(planes, bounds);
         }
     }
 }

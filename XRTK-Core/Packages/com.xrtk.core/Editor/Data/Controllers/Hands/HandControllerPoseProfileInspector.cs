@@ -139,9 +139,9 @@ namespace XRTK.Editor.Data.Controllers.Hands
             // Process the hand data, most hand data processors
             // will ignore the hand data if it is not tracked, so we
             // have to temporarily fake it's tracking state and then reset it.
-            handData.IsTracked = true;
+            handData.TrackingState = Definitions.Devices.TrackingState.Tracked;
             gripPostProcessor.Process(handData);
-            handData.IsTracked = false;
+            handData.TrackingState = Definitions.Devices.TrackingState.NotTracked;
 
             isGripping.boolValue = handData.IsGripping;
             gripStrength.floatValue = handData.GripStrength;

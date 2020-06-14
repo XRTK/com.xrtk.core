@@ -168,14 +168,15 @@ namespace XRTK.Providers.Controllers.Hands
                 UpdateIsPinching(handData);
                 UpdateIsIsPointing(handData);
                 UpdateIsIsGripping(handData);
-                UpdateSpatialPointerPose(handData);
                 UpdateIndexFingerTipPose(handData);
                 UpdateGripPose(handData);
                 UpdateFingerCurlStrength(handData);
                 UpdateBounds();
                 UpdateVelocity();
+
                 TrackedPoseId = handData.TrackedPoseId;
                 PinchStrength = handData.PinchStrength;
+                SpatialPointerPose = handData.PointerPose;
 
                 MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, handData.RootPose);
             }
@@ -622,22 +623,6 @@ namespace XRTK.Providers.Controllers.Hands
                     jointPoses.Add(handJoint, handData.Joints[i]);
                 }
             }
-        }
-
-        /// <summary>
-        /// Updates the spatial pointer pose value for the hand controller.
-        /// </summary>
-        /// <param name="handData">Updated hand data.</param>
-        private void UpdateSpatialPointerPose(HandData handData)
-        {
-            var pointerPose = handData.PointerPose;
-
-            // For the pointer pose we only need want the position
-            // component of the hand root pose. The hand's own rotation
-            // should not affect the pointer pose.
-            pointerPose.Position += handData.RootPose.Position;
-
-            SpatialPointerPose = pointerPose;
         }
 
         /// <summary>

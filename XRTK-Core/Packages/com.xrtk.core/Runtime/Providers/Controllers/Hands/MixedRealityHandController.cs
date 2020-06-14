@@ -45,6 +45,7 @@ namespace XRTK.Providers.Controllers.Hands
         private float deltaTimeStart = 0;
 
         private HandMeshData lastHandMeshData = HandMeshData.Empty;
+        private MixedRealityPose lastHandRootPose;
         private Vector3 lastPalmNormal = Vector3.zero;
         private Vector3 lastPalmPosition = Vector3.zero;
 
@@ -156,6 +157,7 @@ namespace XRTK.Providers.Controllers.Hands
                 IsPositionApproximate = false;
                 IsRotationAvailable = true;
 
+                lastHandRootPose = handData.RootPose;
                 lastHandMeshData = handData.Mesh;
                 LastIsPinching = IsPinching;
                 LastIsGripping = IsGripping;
@@ -803,7 +805,21 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <inheritdoc />
-        public virtual bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose) => jointPoses.TryGetValue(joint, out pose);
+        public virtual bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose, Space relativeTo = Space.Self)
+        {
+            if (relativeTo == Space.Self)
+            {
+                return jointPoses.TryGetValue(joint, out pose);
+            }
+            else if (jointPoses.TryGetValue(joint, out var localPose))
+            {
+                pose = lastHandRootPose + localPose;
+                return lastHandRootPose != MixedRealityPose.ZeroIdentity;
+            }
+
+            pose = MixedRealityPose.ZeroIdentity;
+            return false;
+        }
 
         /// <inheritdoc />
         public bool TryGetFingerCurlStrength(HandFinger handFinger, out float curlStrength)

@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using XRTK.Definitions.Controllers.Hands;
+using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 
@@ -68,7 +69,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The hand data to compare against.</param>
         public HandData Process(Handedness handedness, HandData handData)
         {
-            if (handData.IsTracked)
+            if (handData.TrackingState == TrackingState.Tracked)
             {
                 // Recognition is pretty expensive so we don't want to
                 // do it every frame.

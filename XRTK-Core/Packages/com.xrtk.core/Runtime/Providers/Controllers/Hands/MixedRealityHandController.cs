@@ -144,7 +144,7 @@ namespace XRTK.Providers.Controllers.Hands
             if (!Enabled) { return; }
 
             var lastTrackingState = TrackingState;
-            TrackingState = handData.IsTracked ? TrackingState.Tracked : TrackingState.NotTracked;
+            TrackingState = handData.TrackingState;
 
             if (lastTrackingState != TrackingState)
             {
@@ -630,8 +630,14 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">Updated hand data.</param>
         private void UpdateSpatialPointerPose(HandData handData)
         {
-            var localPointerPose = handData.PointerPose;
-            SpatialPointerPose = handData.RootPose + localPointerPose;
+            var pointerPose = handData.PointerPose;
+
+            // For the pointer pose we only need want the position
+            // component of the hand root pose. The hand's own rotation
+            // should not affect the pointer pose.
+            pointerPose.Position += handData.RootPose.Position;
+
+            SpatialPointerPose = pointerPose;
         }
 
         /// <summary>
@@ -680,7 +686,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The hand data received for the current hand update frame.</param>
         private void UpdateIsPinching(HandData handData)
         {
-            if (handData.IsTracked)
+            if (handData.TrackingState == TrackingState.Tracked)
             {
                 var isPinchingThisFrame = handData.IsPinching;
                 if (isPinchingBuffer.Count < POSE_FRAME_BUFFER_SIZE)
@@ -724,7 +730,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The hand data received for the current hand update frame.</param>
         private void UpdateIsIsPointing(HandData handData)
         {
-            if (handData.IsTracked)
+            if (handData.TrackingState == TrackingState.Tracked)
             {
                 var isPointingThisFrame = handData.IsPointing;
                 if (isPointingBuffer.Count < POSE_FRAME_BUFFER_SIZE)
@@ -768,7 +774,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The hand data received for the current hand update frame.</param>
         private void UpdateIsIsGripping(HandData handData)
         {
-            if (handData.IsTracked)
+            if (handData.TrackingState == TrackingState.Tracked)
             {
                 var isGrippingThisFrame = handData.IsGripping;
                 if (isGrippingBuffer.Count < POSE_FRAME_BUFFER_SIZE)

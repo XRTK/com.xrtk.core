@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
+using XRTK.Definitions.Devices;
 
 namespace XRTK.Providers.Controllers.Hands
 {
@@ -62,7 +63,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The input hand data retrieved from platform conversion.</param>
         public HandData Process(HandData handData)
         {
-            if (handData.IsTracked)
+            if (handData.TrackingState == TrackingState.Tracked)
             {
                 // Gather needed data for calculations.
                 var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];

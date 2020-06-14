@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.Linq;
+using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 
 namespace XRTK.Definitions.Controllers.Hands
@@ -31,7 +31,7 @@ namespace XRTK.Definitions.Controllers.Hands
             Array.Copy(jointPoses, Joints, JointCount);
 
             UpdatedAt = long.MinValue;
-            IsTracked = false;
+            TrackingState = TrackingState.NotTracked;
             PinchStrength = 0;
             GripStrength = 0;
             PointerPose = MixedRealityPose.ZeroIdentity;
@@ -49,19 +49,14 @@ namespace XRTK.Definitions.Controllers.Hands
         public static readonly int JointCount = Enum.GetNames(typeof(TrackedHandJoint)).Length;
 
         /// <summary>
-        /// Is the hand data empty?
-        /// </summary>
-        public bool Empty => Mesh.IsEmpty && Joints.All(jp => jp == MixedRealityPose.ZeroIdentity);
-
-        /// <summary>
         /// Timestamp of hand data, as FileTime, e.g. <see cref="DateTime.UtcNow"/>
         /// </summary>
         public long UpdatedAt { get; set; }
 
         /// <summary>
-        /// Is the hand currently being tracked by the system?
+        /// The hand controller's tracking state.
         /// </summary>
-        public bool IsTracked { get; set; }
+        public TrackingState TrackingState { get; set; }
 
         /// <summary>
         /// Is the hand currently in a pinch pose?

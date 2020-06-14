@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
+using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Services;
 using XRTK.Utilities;
@@ -84,7 +85,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The hand data to update <see cref="HandData.IsPinching"/> and <see cref="HandData.PinchStrength"/> for.</param>
         private HandData UpdateIsPinchingAndStrength(HandData handData)
         {
-            if (handData.IsTracked)
+            if (handData.TrackingState == TrackingState.Tracked)
             {
                 var thumbTipPose = handData.Joints[(int)TrackedHandJoint.ThumbTip];
                 var indexTipPose = handData.Joints[(int)TrackedHandJoint.IndexTip];
@@ -115,7 +116,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The hand data to update <see cref="HandData.IsPointing"/> for.</param>
         private HandData UpdateIsPointing(HandData handData)
         {
-            if (handData.IsTracked && !PlatformProvidesIsPointing)
+            if (handData.TrackingState == TrackingState.Tracked && !PlatformProvidesIsPointing)
             {
                 var palmPose = handData.RootPose + handData.Joints[(int)TrackedHandJoint.Palm];
                 var cameraTransform = MixedRealityToolkit.CameraSystem != null
@@ -140,7 +141,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="handData">The hand data to update <see cref="HandData.PointerPose"/> for.</param>
         private HandData UpdatePointerPose(HandData handData)
         {
-            if (handData.IsTracked && !PlatformProvidesPointerPose)
+            if (handData.TrackingState == TrackingState.Tracked && !PlatformProvidesPointerPose)
             {
                 var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
                 palmPose.Rotation = Quaternion.Inverse(palmPose.Rotation) * palmPose.Rotation;

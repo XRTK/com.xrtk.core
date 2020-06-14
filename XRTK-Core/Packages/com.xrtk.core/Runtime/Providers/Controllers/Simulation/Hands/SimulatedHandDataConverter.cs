@@ -145,7 +145,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             var handData = UpdatePoseFrame();
             handData.UpdatedAt = timeStamp;
-            handData.IsTracked = true;
+            handData.TrackingState = Definitions.Devices.TrackingState.Tracked;
 
             return handData;
         }

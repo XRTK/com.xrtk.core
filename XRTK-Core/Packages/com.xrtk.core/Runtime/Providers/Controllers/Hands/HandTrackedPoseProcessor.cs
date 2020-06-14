@@ -79,7 +79,7 @@ namespace XRTK.Providers.Controllers.Hands
                     handData.TrackedPoseId = LastTrackedPoseIdRightHand;
                     return handData;
                 }
-                else if (passedFramesSinceRecognitionLeftHand < RECOGNITION_FRAME_DELIMITER)
+                else if (handedness == Handedness.Left && passedFramesSinceRecognitionLeftHand < RECOGNITION_FRAME_DELIMITER)
                 {
                     passedFramesSinceRecognitionLeftHand++;
                     handData.TrackedPoseId = LastTrackedPoseIdLeftHand;

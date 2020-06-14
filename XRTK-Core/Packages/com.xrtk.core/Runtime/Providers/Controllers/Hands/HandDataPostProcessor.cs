@@ -148,7 +148,7 @@ namespace XRTK.Providers.Controllers.Hands
 
                 var thumbProximalPose = handData.Joints[(int)TrackedHandJoint.ThumbProximal];
                 var indexDistalPose = handData.Joints[(int)TrackedHandJoint.IndexDistal];
-                var pointerPosition = Vector3.Lerp(thumbProximalPose.Position, indexDistalPose.Position, .5f);
+                var pointerPosition = handData.RootPose.Position + Vector3.Lerp(thumbProximalPose.Position, indexDistalPose.Position, .5f);
                 var pointerEndPosition = pointerPosition + palmPose.Forward * 10f;
 
                 var camera = MixedRealityToolkit.CameraSystem != null
@@ -156,7 +156,7 @@ namespace XRTK.Providers.Controllers.Hands
                     : CameraCache.Main;
 
                 var pointerDirection = pointerEndPosition - pointerPosition;
-                var pointerRotation = Quaternion.LookRotation(pointerDirection, camera.transform.up);
+                var pointerRotation = Quaternion.LookRotation(pointerDirection, camera.transform.up) * handData.RootPose.Rotation;
 
                 pointerRotation = camera.transform.rotation * pointerRotation;
 

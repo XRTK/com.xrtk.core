@@ -41,26 +41,22 @@ namespace XRTK.Providers.Controllers.Hands
         private HandGripPostProcessor GripPostProcessor { get; }
 
         /// <summary>
-        /// Is the <see cref="HandData.PointerPose"/> data provided by the
-        /// implementing platform converter?
+        /// Is <see cref="HandData.PointerPose"/> provided by the platform?
         /// </summary>
         public bool PlatformProvidesPointerPose { get; set; }
 
         /// <summary>
-        /// Is the <see cref="HandData.IsPinching"/> data provided by the
-        /// implementing platform converter?
+        /// Is <see cref="HandData.IsPinching"/> provided by the platform?
         /// </summary>
         public bool PlatformProvidesIsPinching { get; set; }
 
         /// <summary>
-        /// Is the <see cref="HandData.PinchStrength"/> data provided by the
-        /// implementing platform converter?
+        /// Is <see cref="HandData.PinchStrength"/> provided by the platform?
         /// </summary>
         public bool PlatformProvidesPinchStrength { get; set; }
 
         /// <summary>
-        /// Is the <see cref="HandData.IsPointing"/> data provided by the
-        /// implementing platform converter?
+        /// Is <see cref="HandData.IsPointing"/> provided by the platform?
         /// </summary>
         public bool PlatformProvidesIsPointing { get; set; }
 
@@ -121,7 +117,7 @@ namespace XRTK.Providers.Controllers.Hands
         {
             if (handData.IsTracked && !PlatformProvidesIsPointing)
             {
-                var palmPose = handData.Joints[(int)TrackedHandJoint.Palm];
+                var palmPose = handData.RootPose + handData.Joints[(int)TrackedHandJoint.Palm];
                 var cameraTransform = MixedRealityToolkit.CameraSystem != null
                 ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform
                 : CameraCache.Main.transform;

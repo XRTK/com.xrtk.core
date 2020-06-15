@@ -773,7 +773,7 @@ namespace XRTK.Providers.Controllers.Hands
         }
 
         /// <inheritdoc />
-        public virtual bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose, Space relativeTo = Space.Self)
+        public bool TryGetJointPose(TrackedHandJoint joint, out MixedRealityPose pose, Space relativeTo = Space.Self)
         {
             if (relativeTo == Space.Self)
             {
@@ -782,8 +782,14 @@ namespace XRTK.Providers.Controllers.Hands
             }
             else if (jointPoses.TryGetValue(joint, out var localPose))
             {
-                // Return joint pose in world space.
-                pose = lastHandRootPose + localPose;
+                pose = new MixedRealityPose
+                {
+                    // Combine root pose with local joint pose.
+                    Position = lastHandRootPose.Position + lastHandRootPose.Rotation * localPose.Position,
+                    Rotation = lastHandRootPose.Rotation * localPose.Rotation
+                };
+
+                // Translate to world space.
                 pose.Position = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.TransformPoint(pose.Position);
                 pose.Rotation = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.rotation * pose.Rotation;
 

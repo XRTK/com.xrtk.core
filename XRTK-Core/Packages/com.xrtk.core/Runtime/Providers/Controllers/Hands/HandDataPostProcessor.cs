@@ -118,13 +118,20 @@ namespace XRTK.Providers.Controllers.Hands
         {
             if (handData.TrackingState == TrackingState.Tracked && !PlatformProvidesIsPointing)
             {
-                var palmPose = handData.RootPose + handData.Joints[(int)TrackedHandJoint.Palm];
+                var playspaceTransform = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform;
+                var localPalmPose = handData.Joints[(int)TrackedHandJoint.Palm];
+                var worldPalmPose = new MixedRealityPose()
+                {
+                    Position = handData.RootPose.Position + handData.RootPose.Rotation * localPalmPose.Position,
+                    Rotation = playspaceTransform.rotation * handData.RootPose.Rotation * localPalmPose.Rotation
+                };
+
                 var cameraTransform = MixedRealityToolkit.CameraSystem != null
                 ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform
                 : CameraCache.Main.transform;
 
                 // We check if the palm forward is roughly in line with the camera lookAt.
-                var projectedPalmUp = Vector3.ProjectOnPlane(-palmPose.Up, cameraTransform.up);
+                var projectedPalmUp = Vector3.ProjectOnPlane(-worldPalmPose.Up, cameraTransform.up);
                 handData.IsPointing = Vector3.Dot(cameraTransform.forward, projectedPalmUp) > 0.3f;
             }
             else

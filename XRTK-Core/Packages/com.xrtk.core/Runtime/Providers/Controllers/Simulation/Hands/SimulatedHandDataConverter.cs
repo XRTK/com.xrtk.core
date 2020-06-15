@@ -152,23 +152,19 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
         private void HandleSimulationInput(MixedRealityPose handRootPose)
         {
-            // If the hands state is changing from "not tracked" to being tracked, reset its position
-            // to the current mouse position and default distance from the camera.
-            //if (!HandData.IsTracked)
-            //{
-            Vector3 mousePos = Input.mousePosition;
-            screenPosition = new Vector3(mousePos.x, mousePos.y, defaultDistance);
-            //}
-
-            // Apply position delta x / y in screen space, but depth (z) offset in world space
-            screenPosition.x = handRootPose.Position.x;
-            screenPosition.y = handRootPose.Position.y;
+            var mousePos = Input.mousePosition;
+            screenPosition = new Vector3(mousePos.x, mousePos.y, defaultDistance)
+            {
+                // Apply position delta x / y in screen space, but depth (z) offset in world space
+                x = handRootPose.Position.x,
+                y = handRootPose.Position.y
+            };
 
             var camera = MixedRealityToolkit.CameraSystem != null
                 ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera
                 : CameraCache.Main;
 
-            Vector3 newWorldPoint = camera.ScreenToWorldPoint(ScreenPosition);
+            var newWorldPoint = camera.ScreenToWorldPoint(ScreenPosition);
             newWorldPoint += camera.transform.forward * handRootPose.Position.z;
             screenPosition = camera.WorldToScreenPoint(newWorldPoint);
 
@@ -195,12 +191,15 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             var position = camera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
 
-            // At this point we know the hand's root pose. All joint poses
-            // will be relative to this root pose.
+            // At this point we know the hand's root pose in world space and
+            // need to translat to playspace.
             var rootPose = new MixedRealityPose(position, rotation);
+            var playspaceTransform = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform;
+            rootPose.Position = playspaceTransform.InverseTransformPoint(rootPose.Position);
+            rootPose.Rotation = Quaternion.Inverse(playspaceTransform.rotation) * playspaceTransform.rotation * rootPose.Rotation;
 
             // Compute joint poses relative to root pose.
-            var jointPoses = ComputeJointPoses(Pose, handedness, rootPose);
+            var jointPoses = ComputeJointPoses(Pose, handedness);
 
             return new HandData(rootPose, jointPoses);
         }
@@ -208,7 +207,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// <summary>
         /// Computes local poses from camera-space joint data.
         /// </summary>
-        private MixedRealityPose[] ComputeJointPoses(SimulatedHandControllerPose pose, Handedness handedness, MixedRealityPose rootPose)
+        private MixedRealityPose[] ComputeJointPoses(SimulatedHandControllerPose pose, Handedness handedness)
         {
             var cameraRotation = MixedRealityToolkit.CameraSystem != null
                 ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation
@@ -232,9 +231,6 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 // Apply camera transform
                 localPosition = cameraRotation * localPosition;
                 localRotation = cameraRotation * localRotation;
-
-                // Apply root pose rotation transform
-                localRotation = rootPose.Rotation * localRotation;
 
                 jointPoses[i] = new MixedRealityPose(localPosition, localRotation);
             }

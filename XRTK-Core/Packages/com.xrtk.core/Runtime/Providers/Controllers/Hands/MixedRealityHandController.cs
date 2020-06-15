@@ -63,9 +63,7 @@ namespace XRTK.Providers.Controllers.Hands
             // 6 DoF grip pose ("Where to put things when grabbing something?")
             new MixedRealityInteractionMapping("Grip Pose", AxisType.SixDof, DeviceInputType.SpatialGrip),
             // 6 DoF index finger tip pose (mainly for "near interaction pointer").
-            new MixedRealityInteractionMapping("Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger),
-            // Currently recognized tracked pose.
-            new MixedRealityInteractionMapping("Tracked Pose", AxisType.Raw, DeviceInputType.Hand)
+            new MixedRealityInteractionMapping("Index Finger Pose", AxisType.SixDof, DeviceInputType.IndexFinger)
         };
 
         /// <inheritdoc />
@@ -112,11 +110,6 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         private bool LastIsGripping { get; set; }
 
-        /// <summary>
-        /// The last pose recognized for this hand controller.
-        /// </summary>
-        private string LastTrackedPoseId { get; set; }
-
         /// <inheritdoc />
         public string TrackedPoseId { get; private set; }
 
@@ -162,14 +155,13 @@ namespace XRTK.Providers.Controllers.Hands
                 LastIsPinching = IsPinching;
                 LastIsGripping = IsGripping;
                 LastIsPointing = IsPointing;
-                LastTrackedPoseId = TrackedPoseId;
 
                 UpdateJoints(handData);
                 UpdateIsPinching(handData);
                 UpdateIsIsPointing(handData);
                 UpdateIsIsGripping(handData);
-                UpdateIndexFingerTipPose(handData);
-                UpdateGripPose(handData);
+                UpdateIndexFingerTipPose();
+                UpdateGripPose();
                 UpdateFingerCurlStrength(handData);
                 UpdateBounds();
                 UpdateVelocity();
@@ -214,20 +206,20 @@ namespace XRTK.Providers.Controllers.Hands
                 UpdateIndexFingerBounds();
                 UpdateMiddleFingerBounds();
                 UpdateRingFingerBounds();
-                UpdatePinkyFingerBounds();
+                UpdateLittleFingerBounds();
             }
         }
 
         private void UpdatePalmBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.LittleMetacarpal, out var pinkyMetacarpalPose) &&
-                TryGetJointPose(TrackedHandJoint.LittleProximal, out var pinkyKnucklePose) &&
-                TryGetJointPose(TrackedHandJoint.RingMetacarpal, out var ringMetacarpalPose) &&
-                TryGetJointPose(TrackedHandJoint.RingProximal, out var ringKnucklePose) &&
-                TryGetJointPose(TrackedHandJoint.MiddleMetacarpal, out var middleMetacarpalPose) &&
-                TryGetJointPose(TrackedHandJoint.MiddleProximal, out var middleKnucklePose) &&
-                TryGetJointPose(TrackedHandJoint.IndexMetacarpal, out var indexMetacarpalPose) &&
-                TryGetJointPose(TrackedHandJoint.IndexProximal, out var indexKnucklePose))
+            if (TryGetJointPose(TrackedHandJoint.LittleMetacarpal, out var pinkyMetacarpalPose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.LittleProximal, out var pinkyKnucklePose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.RingMetacarpal, out var ringMetacarpalPose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.RingProximal, out var ringKnucklePose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.MiddleMetacarpal, out var middleMetacarpalPose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.MiddleProximal, out var middleKnucklePose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.IndexMetacarpal, out var indexMetacarpalPose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.IndexProximal, out var indexKnucklePose, Space.World))
             {
                 // Palm bounds are a composite of each finger's metacarpal -> knuckle joint bounds.
                 // Excluding the thumb here.
@@ -294,9 +286,9 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateThumbBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.ThumbMetacarpal, out var knucklePose) &&
-                TryGetJointPose(TrackedHandJoint.ThumbProximal, out var middlePose) &&
-                TryGetJointPose(TrackedHandJoint.ThumbTip, out var tipPose))
+            if (TryGetJointPose(TrackedHandJoint.ThumbMetacarpal, out var knucklePose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.ThumbProximal, out var middlePose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.ThumbTip, out var tipPose, Space.World))
             {
                 // Thumb bounds include metacarpal -> proximal and proximal -> tip bounds.
                 var thumbBounds = new Bounds[2];
@@ -325,9 +317,9 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateIndexFingerBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.IndexProximal, out var knucklePose) &&
-                TryGetJointPose(TrackedHandJoint.IndexIntermediate, out var middlePose) &&
-                TryGetJointPose(TrackedHandJoint.IndexTip, out var tipPose))
+            if (TryGetJointPose(TrackedHandJoint.IndexProximal, out var knucklePose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.IndexIntermediate, out var middlePose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.IndexTip, out var tipPose, Space.World))
             {
                 // Index finger bounds include knuckle -> middle and middle -> tip bounds.
                 var indexFingerBounds = new Bounds[2];
@@ -356,9 +348,9 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateMiddleFingerBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.MiddleProximal, out var knucklePose) &&
-                TryGetJointPose(TrackedHandJoint.MiddleIntermediate, out var middlePose) &&
-                TryGetJointPose(TrackedHandJoint.MiddleTip, out var tipPose))
+            if (TryGetJointPose(TrackedHandJoint.MiddleProximal, out var knucklePose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.MiddleIntermediate, out var middlePose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.MiddleTip, out var tipPose, Space.World))
             {
                 // Middle finger bounds include knuckle -> middle and middle -> tip bounds.
                 var middleFingerBounds = new Bounds[2];
@@ -387,9 +379,9 @@ namespace XRTK.Providers.Controllers.Hands
 
         private void UpdateRingFingerBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.RingProximal, out var knucklePose) &&
-                TryGetJointPose(TrackedHandJoint.RingIntermediate, out var middlePose) &&
-                TryGetJointPose(TrackedHandJoint.RingTip, out var tipPose))
+            if (TryGetJointPose(TrackedHandJoint.RingProximal, out var knucklePose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.RingIntermediate, out var middlePose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.RingTip, out var tipPose, Space.World))
             {
                 // Ring finger bounds include knuckle -> middle and middle -> tip bounds.
                 var ringFingerBounds = new Bounds[2];
@@ -416,11 +408,11 @@ namespace XRTK.Providers.Controllers.Hands
             }
         }
 
-        private void UpdatePinkyFingerBounds()
+        private void UpdateLittleFingerBounds()
         {
-            if (TryGetJointPose(TrackedHandJoint.LittleProximal, out var knucklePose) &&
-                TryGetJointPose(TrackedHandJoint.LittleIntermediate, out var middlePose) &&
-                TryGetJointPose(TrackedHandJoint.LittleTip, out var tipPose))
+            if (TryGetJointPose(TrackedHandJoint.LittleProximal, out var knucklePose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.LittleIntermediate, out var middlePose, Space.World) &&
+                TryGetJointPose(TrackedHandJoint.LittleTip, out var tipPose, Space.World))
             {
                 // Pinky finger bounds include knuckle -> middle and middle -> tip bounds.
                 var pinkyBounds = new Bounds[2];
@@ -475,9 +467,6 @@ namespace XRTK.Providers.Controllers.Hands
                         break;
                     case DeviceInputType.IndexFinger:
                         UpdateIndexFingerMapping(interactionMapping);
-                        break;
-                    case DeviceInputType.Hand:
-                        UpdateTrackedPoseMapping(interactionMapping);
                         break;
                 }
 
@@ -557,22 +546,6 @@ namespace XRTK.Providers.Controllers.Hands
             interactionMapping.PoseData = IndexFingerTipPose;
         }
 
-        private void UpdateTrackedPoseMapping(MixedRealityInteractionMapping interactionMapping)
-        {
-            Debug.Assert(interactionMapping.AxisType == AxisType.Raw);
-
-            if (LastTrackedPoseId == null || TrackedPoseId == null) { return; }
-
-            if (string.Equals(LastTrackedPoseId, TrackedPoseId))
-            {
-                interactionMapping.RawData = LastTrackedPoseId;
-            }
-            else if (!string.Equals(LastTrackedPoseId, TrackedPoseId))
-            {
-                interactionMapping.RawData = TrackedPoseId;
-            }
-        }
-
         #endregion Interaction Mappings
 
         /// <summary>
@@ -628,24 +601,22 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Updates the index finger tip pose value for the hand controller.
         /// </summary>
-        /// <param name="handData">Updated hand data.</param>
-        private void UpdateIndexFingerTipPose(HandData handData)
+        private void UpdateIndexFingerTipPose()
         {
-            if (TryGetJointPose(TrackedHandJoint.IndexTip, out var indexTipPose))
+            if (TryGetJointPose(TrackedHandJoint.IndexTip, out var indexTipPose, Space.World))
             {
-                IndexFingerTipPose = handData.RootPose + indexTipPose;
+                IndexFingerTipPose = indexTipPose;
             }
         }
 
         /// <summary>
         /// Updates the grip pose value for the hand controller.
         /// </summary>
-        /// <param name="handData">Updated hand data.</param>
-        private void UpdateGripPose(HandData handData)
+        private void UpdateGripPose()
         {
-            if (TryGetJointPose(TrackedHandJoint.Palm, out var palmPose))
+            if (TryGetJointPose(TrackedHandJoint.Palm, out var palmPose, Space.World))
             {
-                GripPose = handData.RootPose + palmPose;
+                GripPose = palmPose;
             }
         }
 
@@ -800,10 +771,12 @@ namespace XRTK.Providers.Controllers.Hands
         {
             if (relativeTo == Space.Self)
             {
+                // Return joint pose relative to hand root.
                 return jointPoses.TryGetValue(joint, out pose);
             }
             else if (jointPoses.TryGetValue(joint, out var localPose))
             {
+                // Return joint pose in world space.
                 pose = lastHandRootPose + localPose;
                 return lastHandRootPose != MixedRealityPose.ZeroIdentity;
             }

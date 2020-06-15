@@ -553,17 +553,23 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         private void UpdateVelocity()
         {
+            Vector3 palmPosition = Vector3.zero;
+            if (TryGetJointPose(TrackedHandJoint.Palm, out var palmPose, Space.World))
+            {
+                palmPosition = palmPose.Position;
+            }
+
             if (velocityUpdateFrame == 0)
             {
                 deltaTimeStart = Time.unscaledTime;
-                lastPalmPosition = GetJointPosition(TrackedHandJoint.Palm);
+                lastPalmPosition = palmPosition;
                 lastPalmNormal = PalmNormal;
             }
             else if (velocityUpdateFrame == velocityUpdateFrameInterval)
             {
                 // Update linear velocity.
                 var deltaTime = Time.unscaledTime - deltaTimeStart;
-                var newVelocity = (GetJointPosition(TrackedHandJoint.Palm) - lastPalmPosition) / deltaTime;
+                var newVelocity = (palmPosition - lastPalmPosition) / deltaTime;
                 Velocity = (Velocity * CURRENT_VELOCITY_WEIGHT) + (newVelocity * NEW_VELOCITY_WEIGHT);
 
                 // Update angular velocity.
@@ -778,6 +784,9 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 // Return joint pose in world space.
                 pose = lastHandRootPose + localPose;
+                pose.Position = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.TransformPoint(pose.Position);
+                pose.Rotation = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.rotation * pose.Rotation;
+
                 return lastHandRootPose != MixedRealityPose.ZeroIdentity;
             }
 
@@ -811,7 +820,5 @@ namespace XRTK.Providers.Controllers.Hands
             handMeshData = HandMeshData.Empty;
             return false;
         }
-
-        private Vector3 GetJointPosition(TrackedHandJoint joint) => TryGetJointPose(joint, out var pose) ? pose.Position : Vector3.zero;
     }
 }

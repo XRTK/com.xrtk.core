@@ -70,22 +70,22 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 rotationDeltaEulerAngles.y = -rotationDelta;
             }
 
-            if (Interactions[6].BoolData)
+            if (Interactions[8].BoolData)
             {
                 rotationDeltaEulerAngles.x = -rotationDelta;
             }
 
-            if (Interactions[5].BoolData)
+            if (Interactions[9].BoolData)
             {
                 rotationDeltaEulerAngles.x = rotationDelta;
             }
 
-            if (Interactions[4].BoolData)
+            if (Interactions[10].BoolData)
             {
                 rotationDeltaEulerAngles.z = -rotationDelta;
             }
 
-            if (Interactions[3].BoolData)
+            if (Interactions[11].BoolData)
             {
                 rotationDeltaEulerAngles.z = rotationDelta;
             }

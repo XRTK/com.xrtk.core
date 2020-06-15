@@ -148,5 +148,19 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
             AddController(controller);
             return controller;
         }
+
+        protected override void RemoveController(Handedness handedness)
+        {
+            if (handedness == Handedness.Left)
+            {
+                leftHandConverter.ResetConverter();
+            }
+            else if (handedness == Handedness.Right)
+            {
+                rightHandConverter.ResetConverter();
+            }
+
+            base.RemoveController(handedness);
+        }
     }
 }

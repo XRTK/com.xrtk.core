@@ -193,7 +193,7 @@ namespace XRTK.Providers.Controllers.Simulation
         /// Removes the simulated controller and unregisters it for a given hand, if it exists.
         /// </summary>
         /// <param name="handedness">Handedness of the controller to remove.</param>
-        protected void RemoveController(Handedness handedness)
+        protected virtual void RemoveController(Handedness handedness)
         {
             if (TryGetController(handedness, out var controller))
             {

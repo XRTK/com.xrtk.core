@@ -18,7 +18,7 @@ namespace XRTK.Utilities
         /// <see cref="TrackedHandJoint.LittleMetacarpal"/> poses.
         /// </summary>
         /// <param name="jointPoses">Known joint poses.</param>
-        /// <returns>Esimated <see cref="TrackedHandJoint.IndexMetacarpal"/> pose.</returns>
+        /// <returns>Estimated <see cref="TrackedHandJoint.IndexMetacarpal"/> pose.</returns>
         public static MixedRealityPose GetEstimatedIndexMetacarpalPose(MixedRealityPose[] jointPoses)
         {
             MixedRealityPose thumbMetacarpalPose = jointPoses[(int)TrackedHandJoint.ThumbMetacarpal];
@@ -36,7 +36,7 @@ namespace XRTK.Utilities
         /// <see cref="TrackedHandJoint.LittleMetacarpal"/> poses.
         /// </summary>
         /// <param name="jointPoses">Known joint poses.</param>
-        /// <returns>Esimated <see cref="TrackedHandJoint.RingMetacarpal"/> pose.</returns>
+        /// <returns>Estimated <see cref="TrackedHandJoint.RingMetacarpal"/> pose.</returns>
         public static MixedRealityPose GetEstimatedRingMetacarpalPose(MixedRealityPose[] jointPoses)
         {
             MixedRealityPose thumbMetacarpalPose = jointPoses[(int)TrackedHandJoint.ThumbMetacarpal];
@@ -54,7 +54,7 @@ namespace XRTK.Utilities
         /// <see cref="TrackedHandJoint.LittleMetacarpal"/> poses.
         /// </summary>
         /// <param name="jointPoses">Known joint poses.</param>
-        /// <returns>Esimated <see cref="TrackedHandJoint.MiddleMetacarpal"/> pose.</returns>
+        /// <returns>Estimated <see cref="TrackedHandJoint.MiddleMetacarpal"/> pose.</returns>
         public static MixedRealityPose GetEstimatedMiddleMetacarpalPose(MixedRealityPose[] jointPoses)
         {
             MixedRealityPose thumbMetacarpalPose = jointPoses[(int)TrackedHandJoint.ThumbMetacarpal];
@@ -72,7 +72,7 @@ namespace XRTK.Utilities
         /// <see cref="TrackedHandJoint.MiddleProximal"/> poses.
         /// </summary>
         /// <param name="jointPoses">Known joint poses.</param>
-        /// <returns>Esimated <see cref="TrackedHandJoint.Palm"/> pose.</returns>
+        /// <returns>Estimated <see cref="TrackedHandJoint.Palm"/> pose.</returns>
         public static MixedRealityPose GetEstimatedPalmPose(MixedRealityPose[] jointPoses)
         {
             MixedRealityPose middleMetacarpalPose = GetEstimatedMiddleMetacarpalPose(jointPoses);

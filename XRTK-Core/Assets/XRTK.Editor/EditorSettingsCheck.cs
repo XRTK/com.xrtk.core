@@ -27,7 +27,8 @@ namespace XRTK.Editor
 
         static EditorSettingsCheck()
         {
-            if (!EditorPrefs.HasKey("unity_project_generation_flag"))
+            if (Application.isBatchMode ||
+                !EditorPrefs.HasKey("unity_project_generation_flag"))
             {
                 return;
             }

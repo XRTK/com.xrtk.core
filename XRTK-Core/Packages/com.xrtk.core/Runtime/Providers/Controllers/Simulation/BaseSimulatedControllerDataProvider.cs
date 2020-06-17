@@ -5,6 +5,7 @@ using System;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Simulation;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
@@ -21,7 +22,7 @@ namespace XRTK.Providers.Controllers.Simulation
         protected BaseSimulatedControllerDataProvider(string name, uint priority, SimulatedControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            if (profile == null)
+            if (profile.IsNull())
             {
                 throw new NullReferenceException($"A {nameof(SimulatedControllerDataProviderProfile)} is required for {name}");
             }

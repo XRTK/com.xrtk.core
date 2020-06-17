@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.EventDatum.SpatialAwarenessSystem;
+using XRTK.Extensions;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem.Handlers;
@@ -196,60 +197,30 @@ namespace XRTK.Services.SpatialAwarenessSystem
         {
             base.Destroy();
 
-            // Cleanup game objects created during execution.
-            if (Application.isPlaying)
+            if (!Application.isPlaying) { return; }
+
+            if (spatialAwarenessParent != null)
             {
-                // Detach the child objects and clean up the parent.
-                if (spatialAwarenessParent != null)
-                {
-
-                    if (Application.isEditor)
-                    {
-                        Object.DestroyImmediate(spatialAwarenessParent);
-                    }
-                    else
-                    {
-                        spatialAwarenessParent.transform.DetachChildren();
-                        Object.Destroy(spatialAwarenessParent);
-                    }
-
-                    spatialAwarenessParent = null;
-                }
-
-                // Detach the mesh objects (they are to be cleaned up by the observer) and cleanup the parent
-                if (meshParent != null)
-                {
-
-                    if (Application.isEditor)
-                    {
-                        Object.DestroyImmediate(meshParent);
-                    }
-                    else
-                    {
-                        meshParent.transform.DetachChildren();
-                        Object.Destroy(meshParent);
-                    }
-
-                    meshParent = null;
-                }
-
-                // Detach the surface objects (they are to be cleaned up by the observer) and cleanup the parent
-                if (surfaceParent != null)
-                {
-
-                    if (Application.isEditor)
-                    {
-                        Object.DestroyImmediate(surfaceParent);
-                    }
-                    else
-                    {
-                        surfaceParent.transform.DetachChildren();
-                        Object.Destroy(surfaceParent);
-                    }
-
-                    surfaceParent = null;
-                }
+                spatialAwarenessParent.transform.DetachChildren();
             }
+
+            spatialAwarenessParent.Destroy();
+
+            // Detach the mesh objects (they are to be cleaned up by the observer) and cleanup the parent
+            if (meshParent != null)
+            {
+                meshParent.transform.DetachChildren();
+            }
+
+            meshParent.Destroy();
+
+            // Detach the surface objects (they are to be cleaned up by the observer) and cleanup the parent
+            if (surfaceParent != null)
+            {
+                surfaceParent.transform.DetachChildren();
+            }
+
+            surfaceParent.Destroy();
         }
 
         #region Mesh Events

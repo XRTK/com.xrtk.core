@@ -65,6 +65,7 @@ namespace XRTK.Extensions
         private static readonly Vector3[] rectTransformCorners = new Vector3[4];
 
         #region Public Static Functions
+
         /// <summary>
         /// Returns an instance of the 'Bounds' class which is invalid. An invalid 'Bounds' instance 
         /// is one which has its size vector set to 'float.MaxValue' for all 3 components. The center
@@ -208,7 +209,7 @@ namespace XRTK.Extensions
         }
 
         /// <summary>
-        /// Gets all the corner points and mid points from Renderer's Bounds
+        /// Gets all the corner points and mid points from Bounds
         /// </summary>
         /// <param name="bounds"></param>
         /// <param name="transform"></param>
@@ -259,7 +260,7 @@ namespace XRTK.Extensions
         }
 
         /// <summary>
-        /// Gets all the corner points and mid points from Renderer's Bounds, ignoring the z axis
+        /// Gets all the corner points and mid points from Bounds, ignoring the z axis
         /// </summary>
         /// <param name="bounds"></param>
         /// <param name="transform"></param>
@@ -335,7 +336,7 @@ namespace XRTK.Extensions
         /// <param name="target">gameObject that boundingBox bounds.</param>
         /// <param name="boundsPoints">array reference that gets filled with points</param>
         /// <param name="ignoreLayers">layerMask to simplify search</param>
-        /// <param name="colliders">The colliders for this gameObject and it's children</param>
+        /// <param name="colliders">The colliders to use for calculating the bounds of this gameObject</param>
         public static void GetColliderBoundsPoints(GameObject target, ref List<Vector3> boundsPoints, LayerMask ignoreLayers, Collider[] colliders = null)
         {
             if (colliders == null)
@@ -402,7 +403,7 @@ namespace XRTK.Extensions
         /// <param name="target">gameObject that bounding box bounds</param>
         /// <param name="boundsPoints">array reference that gets filled with points</param>
         /// <param name="ignoreLayers">layerMask to simplify search</param>
-        /// <param name="renderers">The renderers for this gameObject and it's children</param>
+        /// <param name="renderers">The renderers to use for calculating the bounds of this gameObject</param>
         public static void GetRenderBoundsPoints(GameObject target, ref List<Vector3> boundsPoints, LayerMask ignoreLayers, Renderer[] renderers = null)
         {
             if (renderers == null)
@@ -419,7 +420,7 @@ namespace XRTK.Extensions
                     continue;
                 }
 
-                var bounds = rendererObj.transform.GetRenderBounds();
+                var bounds = rendererObj.transform.GetRenderBounds(ref renderers);
 
                 bounds.GetCornerPositions(ref corners);
                 boundsPoints.AddRange(corners);
@@ -432,9 +433,13 @@ namespace XRTK.Extensions
         /// <param name="target">gameObject that bounding box bounds</param>
         /// <param name="boundsPoints">array reference that gets filled with points</param>
         /// <param name="ignoreLayers">layerMask to simplify search</param>
-        public static void GetMeshFilterBoundsPoints(GameObject target, ref List<Vector3> boundsPoints, LayerMask ignoreLayers)
+        /// <param name="meshFilters">The mesh filters to use for calculating the bounds of this gameObject</param>
+        public static void GetMeshFilterBoundsPoints(GameObject target, ref List<Vector3> boundsPoints, LayerMask ignoreLayers, MeshFilter[] meshFilters = null)
         {
-            var meshFilters = target.GetComponentsInChildren<MeshFilter>();
+            if (meshFilters == null)
+            {
+                meshFilters = target.GetComponentsInChildren<MeshFilter>();
+            }
 
             for (int i = 0; i < meshFilters.Length; i++)
             {
@@ -501,9 +506,11 @@ namespace XRTK.Extensions
             var newSizeZ = (Mathf.Abs(rotatedExtentsRight.z) + Mathf.Abs(rotatedExtentsUp.z) + Mathf.Abs(rotatedExtentsLook.z)) * 2.0f;
 
             // Construct the transformed 'Bounds' instance
-            var transformedBounds = new Bounds();
-            transformedBounds.center = transformMatrix.MultiplyPoint(bounds.center);
-            transformedBounds.size = new Vector3(newSizeX, newSizeY, newSizeZ);
+            var transformedBounds = new Bounds
+            {
+                center = transformMatrix.MultiplyPoint(bounds.center),
+                size = new Vector3(newSizeX, newSizeY, newSizeZ)
+            };
 
             // Return the instance to the caller
             return transformedBounds;

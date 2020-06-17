@@ -5,6 +5,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
+using XRTK.Extensions;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Services;
@@ -20,12 +21,12 @@ namespace XRTK.Providers.SpatialObservers
         protected BaseMixedRealitySpatialObserverDataProvider(string name, uint priority, BaseMixedRealitySpatialObserverProfile profile, IMixedRealitySpatialAwarenessSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            if (profile == null)
+            if (profile.IsNull())
             {
                 profile = MixedRealityToolkit.Instance.ActiveProfile.SpatialAwarenessProfile.GlobalMeshObserverProfile;
             }
 
-            if (profile == null)
+            if (profile.IsNull())
             {
                 throw new ArgumentNullException($"Missing a {profile.GetType().Name} profile for {name}");
             }
@@ -125,7 +126,7 @@ namespace XRTK.Providers.SpatialObservers
         /// <inheritdoc />
         public override bool Equals(object obj)
         {
-            if (ReferenceEquals(null, obj)) { return false; }
+            if (obj is null) { return false; }
             if (ReferenceEquals(this, obj)) { return true; }
             if (obj.GetType() != GetType()) { return false; }
 

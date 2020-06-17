@@ -10,7 +10,7 @@ using XRTK.Utilities.Physics;
 namespace XRTK.Extensions
 {
     /// <summary>
-    /// Extension methods for Unity's EventSystem 
+    /// Extension methods for Unity's EventSystem
     /// </summary>
     public static class EventSystemExtensions
     {
@@ -39,14 +39,14 @@ namespace XRTK.Extensions
 
             for (var i = 0; i < RaycastResults.Count; i++)
             {
-                if (RaycastResults[i].gameObject == null) { continue; }
+                if (RaycastResults[i].gameObject.IsNull()) { continue; }
 
                 var layerMaskIndex = RaycastResults[i].gameObject.layer.FindLayerListIndex(priority);
                 if (layerMaskIndex == -1) { continue; }
 
                 var result = new ComparableRaycastResult(RaycastResults[i], layerMaskIndex);
 
-                if (maxResult.RaycastResult.module == null || RaycastResultComparer.Compare(maxResult, result) < 0)
+                if (maxResult.RaycastResult.module.IsNull() || RaycastResultComparer.Compare(maxResult, result) < 0)
                 {
                     maxResult = result;
                 }

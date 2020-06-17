@@ -4,6 +4,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using XRTK.Extensions;
 
 namespace XRTK.EventDatum.Input
 {
@@ -15,7 +16,7 @@ namespace XRTK.EventDatum.Input
         /// <inheritdoc />
         public GraphicInputEventData(EventSystem eventSystem) : base(eventSystem)
         {
-            if (eventSystem == null)
+            if (eventSystem.IsNull())
             {
                 throw new Exception("Event system cannot be null!");
             }

@@ -1,10 +1,11 @@
 stages:
-- stage: Build
+- stage:
   displayName: ${{ format('{0} build agent', parameters.platform) }}
 
   jobs:
     - job:
       displayName: ${{ format('{0}', parameters.image) }}
+      timeoutInMinutes: 120
       variables:
       - group: Global Pipeline Settings
       pool:
@@ -34,7 +35,7 @@ stages:
 
       - template: steps/install-unity.yml
         parameters:
-          components: ${{ parameters.components }}
+          modules: ${{ parameters.modules }}
 
       - ${{ each item in parameters.targets }}:
         - template: steps/run-unity-tests.yml
@@ -52,7 +53,8 @@ stages:
         displayName: 'Publish Pipeline Artifacts'
         inputs:
           targetPath: '$(System.DefaultWorkingDirectory)\$(project.name)\Builds'
-          artifact: ${{ format('{0}.{1}', '$(Build.BuildNumber)', '$(Build.BuildId)') }}
+          artifact: ${{ format('{0}.{1}.{2}', '$(Build.BuildNumber)', '$(Build.BuildId)', '$(System.JobAttempt)') }}
         condition: always()
+        continueOnError: true
 
       - template: steps/return-unity-license.yml

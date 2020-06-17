@@ -3,6 +3,7 @@
 
 using System;
 using UnityEngine.EventSystems;
+using XRTK.Extensions;
 using XRTK.Interfaces.Events;
 
 namespace XRTK.EventDatum
@@ -31,7 +32,7 @@ namespace XRTK.EventDatum
         /// <param name="eventSystem">Usually <see cref="EventSystem.current"/></param>
         public GenericBaseEventData(EventSystem eventSystem) : base(eventSystem)
         {
-            if (eventSystem == null)
+            if (eventSystem.IsNull())
             {
                 throw new Exception("Event system cannot be null!");
             }

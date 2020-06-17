@@ -178,7 +178,7 @@ namespace XRTK.Extensions
             {
                 rectTransform = rectTransformParent.GetChild(i).GetComponent<RectTransform>();
                 Graphic graphic = rectTransform.GetComponent<Graphic>();
-                shouldRaycast = ((shouldReturnRaycastable && graphic != null && graphic.raycastTarget) || graphic == null || !shouldReturnRaycastable);
+                shouldRaycast = ((shouldReturnRaycastable && !graphic.IsNull() && graphic.raycastTarget) || graphic.IsNull() || !shouldReturnRaycastable);
 
                 if (((shouldReturnActive && rectTransform.gameObject.activeSelf) || !shouldReturnActive))
                 {

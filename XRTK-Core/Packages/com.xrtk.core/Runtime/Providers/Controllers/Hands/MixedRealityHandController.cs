@@ -35,6 +35,12 @@ namespace XRTK.Providers.Controllers.Hands
         private const float CURRENT_VELOCITY_WEIGHT = .8f;
 
         private readonly int velocityUpdateFrameInterval = 9;
+        private readonly Bounds[] cachedPalmBounds = new Bounds[4];
+        private readonly Bounds[] cachedThumbBounds = new Bounds[2];
+        private readonly Bounds[] cachedIndexFingerBounds = new Bounds[2];
+        private readonly Bounds[] cachedMiddleFingerBounds = new Bounds[2];
+        private readonly Bounds[] cachedRingFingerBounds = new Bounds[2];
+        private readonly Bounds[] cachedLittleFingerBounds = new Bounds[2];
         private readonly Dictionary<TrackedHandBounds, Bounds[]> bounds = new Dictionary<TrackedHandBounds, Bounds[]>();
         private readonly Dictionary<TrackedHandJoint, MixedRealityPose> jointPoses = new Dictionary<TrackedHandJoint, MixedRealityPose>();
         private readonly Queue<bool> isPinchingBuffer = new Queue<bool>(POSE_FRAME_BUFFER_SIZE);
@@ -223,36 +229,35 @@ namespace XRTK.Providers.Controllers.Hands
             {
                 // Palm bounds are a composite of each finger's metacarpal -> knuckle joint bounds.
                 // Excluding the thumb here.
-                var palmBounds = new Bounds[4];
 
                 // Index
                 var indexPalmBounds = new Bounds(indexMetacarpalPose.Position, Vector3.zero);
                 indexPalmBounds.Encapsulate(indexKnucklePose.Position);
-                palmBounds[0] = indexPalmBounds;
+                cachedPalmBounds[0] = indexPalmBounds;
 
                 // Middle
                 var middlePalmBounds = new Bounds(middleMetacarpalPose.Position, Vector3.zero);
                 middlePalmBounds.Encapsulate(middleKnucklePose.Position);
-                palmBounds[1] = middlePalmBounds;
+                cachedPalmBounds[1] = middlePalmBounds;
 
                 // Ring
                 var ringPalmBounds = new Bounds(ringMetacarpalPose.Position, Vector3.zero);
                 ringPalmBounds.Encapsulate(ringKnucklePose.Position);
-                palmBounds[2] = ringPalmBounds;
+                cachedPalmBounds[2] = ringPalmBounds;
 
                 // Pinky
                 var pinkyPalmBounds = new Bounds(pinkyMetacarpalPose.Position, Vector3.zero);
                 pinkyPalmBounds.Encapsulate(pinkyKnucklePose.Position);
-                palmBounds[3] = pinkyPalmBounds;
+                cachedPalmBounds[3] = pinkyPalmBounds;
 
                 // Update cached bounds entry.
                 if (bounds.ContainsKey(TrackedHandBounds.Palm))
                 {
-                    bounds[TrackedHandBounds.Palm] = palmBounds;
+                    bounds[TrackedHandBounds.Palm] = cachedPalmBounds;
                 }
                 else
                 {
-                    bounds.Add(TrackedHandBounds.Palm, palmBounds);
+                    bounds.Add(TrackedHandBounds.Palm, cachedPalmBounds);
                 }
             }
         }
@@ -291,26 +296,25 @@ namespace XRTK.Providers.Controllers.Hands
                 TryGetJointPose(TrackedHandJoint.ThumbTip, out var tipPose, Space.World))
             {
                 // Thumb bounds include metacarpal -> proximal and proximal -> tip bounds.
-                var thumbBounds = new Bounds[2];
 
                 // Knuckle to middle joint bounds.
                 var knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
                 knuckleToMiddleBounds.Encapsulate(middlePose.Position);
-                thumbBounds[0] = knuckleToMiddleBounds;
+                cachedThumbBounds[0] = knuckleToMiddleBounds;
 
                 // Middle to tip joint bounds.
                 var middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
                 middleToTipBounds.Encapsulate(tipPose.Position);
-                thumbBounds[1] = middleToTipBounds;
+                cachedThumbBounds[1] = middleToTipBounds;
 
                 // Update cached bounds entry.
                 if (bounds.ContainsKey(TrackedHandBounds.Thumb))
                 {
-                    bounds[TrackedHandBounds.Thumb] = thumbBounds;
+                    bounds[TrackedHandBounds.Thumb] = cachedThumbBounds;
                 }
                 else
                 {
-                    bounds.Add(TrackedHandBounds.Thumb, thumbBounds);
+                    bounds.Add(TrackedHandBounds.Thumb, cachedThumbBounds);
                 }
             }
         }
@@ -322,26 +326,25 @@ namespace XRTK.Providers.Controllers.Hands
                 TryGetJointPose(TrackedHandJoint.IndexTip, out var tipPose, Space.World))
             {
                 // Index finger bounds include knuckle -> middle and middle -> tip bounds.
-                var indexFingerBounds = new Bounds[2];
 
                 // Knuckle to middle joint bounds.
                 var knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
                 knuckleToMiddleBounds.Encapsulate(middlePose.Position);
-                indexFingerBounds[0] = knuckleToMiddleBounds;
+                cachedIndexFingerBounds[0] = knuckleToMiddleBounds;
 
                 // Middle to tip joint bounds.
                 var middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
                 middleToTipBounds.Encapsulate(tipPose.Position);
-                indexFingerBounds[1] = middleToTipBounds;
+                cachedIndexFingerBounds[1] = middleToTipBounds;
 
                 // Update cached bounds entry.
                 if (bounds.ContainsKey(TrackedHandBounds.IndexFinger))
                 {
-                    bounds[TrackedHandBounds.IndexFinger] = indexFingerBounds;
+                    bounds[TrackedHandBounds.IndexFinger] = cachedIndexFingerBounds;
                 }
                 else
                 {
-                    bounds.Add(TrackedHandBounds.IndexFinger, indexFingerBounds);
+                    bounds.Add(TrackedHandBounds.IndexFinger, cachedIndexFingerBounds);
                 }
             }
         }
@@ -353,26 +356,25 @@ namespace XRTK.Providers.Controllers.Hands
                 TryGetJointPose(TrackedHandJoint.MiddleTip, out var tipPose, Space.World))
             {
                 // Middle finger bounds include knuckle -> middle and middle -> tip bounds.
-                var middleFingerBounds = new Bounds[2];
 
                 // Knuckle to middle joint bounds.
                 var knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
                 knuckleToMiddleBounds.Encapsulate(middlePose.Position);
-                middleFingerBounds[0] = knuckleToMiddleBounds;
+                cachedMiddleFingerBounds[0] = knuckleToMiddleBounds;
 
                 // Middle to tip joint bounds.
                 var middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
                 middleToTipBounds.Encapsulate(tipPose.Position);
-                middleFingerBounds[1] = middleToTipBounds;
+                cachedMiddleFingerBounds[1] = middleToTipBounds;
 
                 // Update cached bounds entry.
                 if (bounds.ContainsKey(TrackedHandBounds.MiddleFinger))
                 {
-                    bounds[TrackedHandBounds.MiddleFinger] = middleFingerBounds;
+                    bounds[TrackedHandBounds.MiddleFinger] = cachedMiddleFingerBounds;
                 }
                 else
                 {
-                    bounds.Add(TrackedHandBounds.MiddleFinger, middleFingerBounds);
+                    bounds.Add(TrackedHandBounds.MiddleFinger, cachedMiddleFingerBounds);
                 }
             }
         }
@@ -384,26 +386,25 @@ namespace XRTK.Providers.Controllers.Hands
                 TryGetJointPose(TrackedHandJoint.RingTip, out var tipPose, Space.World))
             {
                 // Ring finger bounds include knuckle -> middle and middle -> tip bounds.
-                var ringFingerBounds = new Bounds[2];
 
                 // Knuckle to middle joint bounds.
                 var knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
                 knuckleToMiddleBounds.Encapsulate(middlePose.Position);
-                ringFingerBounds[0] = knuckleToMiddleBounds;
+                cachedRingFingerBounds[0] = knuckleToMiddleBounds;
 
                 // Middle to tip joint bounds.
                 var middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
                 middleToTipBounds.Encapsulate(tipPose.Position);
-                ringFingerBounds[1] = middleToTipBounds;
+                cachedRingFingerBounds[1] = middleToTipBounds;
 
                 // Update cached bounds entry.
                 if (bounds.ContainsKey(TrackedHandBounds.RingFinger))
                 {
-                    bounds[TrackedHandBounds.RingFinger] = ringFingerBounds;
+                    bounds[TrackedHandBounds.RingFinger] = cachedRingFingerBounds;
                 }
                 else
                 {
-                    bounds.Add(TrackedHandBounds.RingFinger, ringFingerBounds);
+                    bounds.Add(TrackedHandBounds.RingFinger, cachedRingFingerBounds);
                 }
             }
         }
@@ -415,26 +416,25 @@ namespace XRTK.Providers.Controllers.Hands
                 TryGetJointPose(TrackedHandJoint.LittleTip, out var tipPose, Space.World))
             {
                 // Pinky finger bounds include knuckle -> middle and middle -> tip bounds.
-                var pinkyBounds = new Bounds[2];
 
                 // Knuckle to middle joint bounds.
                 var knuckleToMiddleBounds = new Bounds(knucklePose.Position, Vector3.zero);
                 knuckleToMiddleBounds.Encapsulate(middlePose.Position);
-                pinkyBounds[0] = knuckleToMiddleBounds;
+                cachedLittleFingerBounds[0] = knuckleToMiddleBounds;
 
                 // Middle to tip joint bounds.
                 var middleToTipBounds = new Bounds(middlePose.Position, Vector3.zero);
                 middleToTipBounds.Encapsulate(tipPose.Position);
-                pinkyBounds[1] = middleToTipBounds;
+                cachedLittleFingerBounds[1] = middleToTipBounds;
 
                 // Update cached bounds entry.
                 if (bounds.ContainsKey(TrackedHandBounds.Pinky))
                 {
-                    bounds[TrackedHandBounds.Pinky] = pinkyBounds;
+                    bounds[TrackedHandBounds.Pinky] = cachedLittleFingerBounds;
                 }
                 else
                 {
-                    bounds.Add(TrackedHandBounds.Pinky, pinkyBounds);
+                    bounds.Add(TrackedHandBounds.Pinky, cachedLittleFingerBounds);
                 }
             }
         }

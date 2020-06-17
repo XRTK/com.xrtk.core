@@ -7,7 +7,7 @@ steps:
       $ljob = Start-Job -ScriptBlock {
         param($log)
 
-        while ( (Test-Path $$log -Type Leaf) ) {
+        while ( -not (Test-Path $log -Type Leaf) ) {
             Start-Sleep -Seconds 1
         }
 

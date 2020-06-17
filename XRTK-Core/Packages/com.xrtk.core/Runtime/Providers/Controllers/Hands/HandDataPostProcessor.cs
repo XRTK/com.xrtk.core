@@ -27,6 +27,7 @@ namespace XRTK.Providers.Controllers.Hands
             GripPostProcessor = new HandGripPostProcessor();
         }
 
+        private const float IS_POINTING_DOTP_THRESHOLD = .1f;
         private const float TWO_CENTIMETER_SQUARE_MAGNITUDE = 0.0004f;
         private const float FIVE_CENTIMETER_SQUARE_MAGNITUDE = 0.0025f;
         private const float PINCH_STRENGTH_DISTANCE = FIVE_CENTIMETER_SQUARE_MAGNITUDE - TWO_CENTIMETER_SQUARE_MAGNITUDE;
@@ -132,7 +133,7 @@ namespace XRTK.Providers.Controllers.Hands
 
                 // We check if the palm forward is roughly in line with the camera lookAt.
                 var projectedPalmUp = Vector3.ProjectOnPlane(-worldPalmPose.Up, cameraTransform.up);
-                handData.IsPointing = Vector3.Dot(cameraTransform.forward, projectedPalmUp) > 0.3f;
+                handData.IsPointing = Vector3.Dot(cameraTransform.forward, projectedPalmUp) > IS_POINTING_DOTP_THRESHOLD;
             }
             else
             {

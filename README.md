@@ -56,7 +56,7 @@ The XRTK is an MIT-licensed open source project with its ongoing development mad
 
 |Sponsor|Tagline|
 |---|---|
-|VIM|VIM provides a universal format for fast BIM access for large and complex projects in the AEC industry.|
+|[VIM](https://www.vimaec.com/)|VIM provides a universal format for fast BIM access for large and complex projects in the AEC industry.|
 
 We use the donations for continuous active development by core team members, web hosting, and licensing costs for build tools and infrastructure.
 

@@ -52,11 +52,11 @@ We recently moved our main conversations regarding Mixed Reality Toolkit over to
 
 ## Sponsors
 
-The XRTK is an MIT-licensed open source project with its ongoing development made possible entirely by the support of these awesome sponsors and backers. 
+The XRTK is an MIT-licensed open source project with its ongoing development made possible entirely by the support of these awesome sponsors and backers.
 
-|Sponsor|Tagline|
+|Sponsors||
 |---|---|
-|[VIM](https://www.vimaec.com/)|VIM provides a universal format for fast BIM access for large and complex projects in the AEC industry.|
+|<a href="https://www.vimaec.com/">![[VIM](https://www.vimaec.com/](images/sponsors/vim_logo.jpg)</a>|VIM provides a universal format for fast BIM access for large and complex projects in the AEC industry.|
 
 We use the donations for continuous active development by core team members, web hosting, and licensing costs for build tools and infrastructure.
 

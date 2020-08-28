@@ -3,6 +3,7 @@
 
 using System;
 using UnityEngine;
+using UnityEngine.XR;
 using XRTK.Definitions.CameraSystem;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
@@ -84,6 +85,9 @@ namespace XRTK.Providers.CameraSystem
 
         /// <inheritdoc />
         public virtual bool IsStereoscopic => CameraRig.PlayerCamera.stereoEnabled;
+
+        /// <inheritdoc />
+        public virtual bool HeadHeightIsManagedByDevice => XRDevice.isPresent;
 
         /// <inheritdoc />
         public IMixedRealityCameraRig CameraRig { get; private set; }
@@ -194,8 +198,8 @@ namespace XRTK.Providers.CameraSystem
         {
             base.Disable();
 
-            if (CameraRig.GameObject.IsNull() ||
-                CameraRig == null)
+            if (CameraRig == null ||
+                CameraRig.GameObject.IsNull())
             {
                 return;
             }
@@ -239,7 +243,11 @@ namespace XRTK.Providers.CameraSystem
         /// </summary>
         protected virtual void ApplySettingsForDefaultHeadHeight()
         {
-            HeadHeight = DefaultHeadHeight;
+            if (!HeadHeightIsManagedByDevice)
+            {
+                HeadHeight = DefaultHeadHeight;
+            }
+
             ResetRigTransforms();
             SyncRigTransforms();
         }
@@ -274,8 +282,10 @@ namespace XRTK.Providers.CameraSystem
         {
             CameraRig.PlayspaceTransform.position = Vector3.zero;
             CameraRig.PlayspaceTransform.rotation = Quaternion.identity;
-            // If the camera is a 2d camera when we can adjust the camera's height to match the head height.
+
+            // If the camera is a 2d camera then we can adjust the camera's height to match the head height.
             CameraRig.CameraTransform.position = IsStereoscopic ? Vector3.zero : new Vector3(0f, HeadHeight, 0f);
+
             CameraRig.CameraTransform.rotation = Quaternion.identity;
             CameraRig.BodyTransform.position = Vector3.zero;
             CameraRig.BodyTransform.rotation = Quaternion.identity;

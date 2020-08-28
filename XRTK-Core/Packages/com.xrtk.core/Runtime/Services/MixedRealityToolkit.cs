@@ -92,6 +92,14 @@ namespace XRTK.Services
         /// <param name="profile"></param>
         public void ResetProfile(MixedRealityToolkitRootProfile profile)
         {
+            if (Application.isEditor && Application.isPlaying)
+            {
+                // The application is running in editor play mode, can't
+                // reset profiles in this state as it will cause destruction
+                // and reinitialization of services in use.
+                return;
+            }
+
             if (isResetting)
             {
                 Debug.LogWarning("Already attempting to reset the root profile!");

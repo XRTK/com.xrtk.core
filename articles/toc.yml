@@ -6,6 +6,8 @@
       href: 01-DownloadingTheXRTK.md
     - name: Configuring your project
       href: 02-Configuration.md
+    - name: Platform Template Generator
+      href: 03-Template-Generator.md
 - name: Appendices
   items:
     - name: Coding Guidelines

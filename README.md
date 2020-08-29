@@ -51,7 +51,17 @@ We recently moved our main conversations regarding Mixed Reality Toolkit over to
 
 ### [Come join us on Discord!](https://discord.gg/rJMSc8Z)
 
-## Supported Platforms and Roadmap
+## Sponsors
+
+The XRTK is an MIT-licensed open source project with its ongoing development made possible entirely by the support of these awesome sponsors and backers.
+
+|Sponsors||
+|---|---|
+|<a href="https://www.vimaec.com/">![[VIM](https://www.vimaec.com/)](/images/Sponsors/vim_logo.jpg)</a>|VIM provides a universal format for fast BIM access for large and complex projects in the AEC industry.|
+
+We use the donations for continuous active development by core team members, web hosting, and licensing costs for build tools and infrastructure.
+
+## Supported Platforms
 
 By default, we support OpenVR on all platforms that support the standard, as well as Native SDK implementations for various vendors. This list is in no particular order.
 

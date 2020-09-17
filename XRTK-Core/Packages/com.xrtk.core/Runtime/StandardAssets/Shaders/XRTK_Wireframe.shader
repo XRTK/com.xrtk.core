@@ -44,11 +44,7 @@ Shader "Mixed Reality Toolkit/Wireframe"
             {
                 float4 projectionSpaceVertex : SV_POSITION;
                 float4 worldSpacePosition : TEXCOORD1;
-#if UNITY_LIGHT_PROBE_PROXY_VOLUME
-                UNITY_VERTEX_OUTPUT_STEREO
-#else
                 UNITY_VERTEX_OUTPUT_STEREO_EYE_INDEX
-#endif
             };
 
             // worldSpacePosition is to counteract the effect of perspective-correct interpolation so that the lines
@@ -65,11 +61,7 @@ Shader "Mixed Reality Toolkit/Wireframe"
             {
                 v2g o;
                 UNITY_SETUP_INSTANCE_ID(v);
-#if UNITY_LIGHT_PROBE_PROXY_VOLUME
-                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
-#else
                 UNITY_INITIALIZE_OUTPUT_STEREO_EYE_INDEX(o);
-#endif
 
                 o.projectionSpaceVertex = UnityObjectToClipPos(v.vertex);
                 o.worldSpacePosition = mul(unity_ObjectToWorld, v.vertex);
@@ -110,9 +102,6 @@ Shader "Mixed Reality Toolkit/Wireframe"
                    o.projectionSpaceVertex = i[idx].projectionSpaceVertex;
                    o.worldSpacePosition = 1.0 / o.projectionSpaceVertex.w;
                    o.dist = distScale[idx] * o.projectionSpaceVertex.w * wireScale;
-#if UNITY_LIGHT_PROBE_PROXY_VOLUME
-                   UNITY_TRANSFER_VERTEX_OUTPUT_STEREO(i[idx], o);
-#endif
                    triStream.Append(o);
                 }
             }

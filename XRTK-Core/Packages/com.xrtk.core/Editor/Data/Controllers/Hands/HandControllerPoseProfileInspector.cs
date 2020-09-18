@@ -4,6 +4,7 @@
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
+using XRTK.Definitions.Utilities;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.Profiles;
 using XRTK.Extensions;
@@ -140,7 +141,7 @@ namespace XRTK.Editor.Data.Controllers.Hands
             // will ignore the hand data if it is not tracked, so we
             // have to temporarily fake it's tracking state and then reset it.
             handData.TrackingState = Definitions.Devices.TrackingState.Tracked;
-            gripPostProcessor.Process(handData);
+            gripPostProcessor.PostProcess(Handedness.Right, handData);
             handData.TrackingState = Definitions.Devices.TrackingState.NotTracked;
 
             isGripping.boolValue = handData.IsGripping;

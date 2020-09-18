@@ -7,6 +7,7 @@ using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
+using XRTK.Interfaces.Providers.Controllers.Hands;
 
 namespace XRTK.Providers.Controllers.Hands
 {
@@ -17,13 +18,13 @@ namespace XRTK.Providers.Controllers.Hands
     /// and attempts to recognize a hand's current pose during runtime to provide for
     /// <see cref="HandData.TrackedPoseId"/>.
     /// </summary>
-    public sealed class HandTrackedPoseProcessor
+    public sealed class HandTrackedPosePostProcessor : IHandDataPostProcessor
     {
         /// <summary>
         /// Creates a new recognizer instance to work on the provided list of poses.
         /// </summary>
         /// <param name="recognizablePoses">Recognizable poses by this recognizer.</param>
-        public HandTrackedPoseProcessor(IReadOnlyList<HandControllerPoseProfile> recognizablePoses)
+        public HandTrackedPosePostProcessor(IReadOnlyList<HandControllerPoseProfile> recognizablePoses)
         {
             bakedHandDatas = new HandData[recognizablePoses.Count];
             definitions = new Dictionary<int, HandControllerPoseProfile>();
@@ -62,12 +63,8 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         private string LastTrackedPoseIdRightHand { get; set; }
 
-        /// <summary>
-        /// Attempts to recognize a hand pose.
-        /// </summary>
-        /// <param name="handedness">The handedness of the data.</param>
-        /// <param name="handData">The hand data to compare against.</param>
-        public HandData Process(Handedness handedness, HandData handData)
+        /// <inheritdoc />
+        public HandData PostProcess(Handedness handedness, HandData handData)
         {
             if (handData.TrackingState == TrackingState.Tracked)
             {

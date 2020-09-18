@@ -6,6 +6,7 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;
 using XRTK.Utilities;
 
@@ -15,7 +16,7 @@ namespace XRTK.Providers.Controllers.Hands
     /// The hand data post processor updates <see cref="HandData"/> provided
     /// by a platform and enriches it with potentially missing information.
     /// </summary>
-    public sealed class HandDataPostProcessor
+    public sealed class HandDataPostProcessor : IHandDataPostProcessor
     {
         /// <summary>
         /// Creates a new instance of the hand data post processor.
@@ -23,7 +24,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <param name="trackedPoses">Pose recognizer instance to use for pose recognition.</param>
         public HandDataPostProcessor(IReadOnlyList<HandControllerPoseProfile> trackedPoses)
         {
-            TrackedPoseProcessor = new HandTrackedPoseProcessor(trackedPoses);
+            TrackedPoseProcessor = new HandTrackedPosePostProcessor(trackedPoses);
             GripPostProcessor = new HandGripPostProcessor();
         }
 
@@ -35,7 +36,7 @@ namespace XRTK.Providers.Controllers.Hands
         /// <summary>
         /// Processor instance used for pose recognition.
         /// </summary>
-        private HandTrackedPoseProcessor TrackedPoseProcessor { get; }
+        private HandTrackedPosePostProcessor TrackedPoseProcessor { get; }
 
         /// <summary>
         /// Grip post processor instance used for grip estimation.
@@ -62,19 +63,14 @@ namespace XRTK.Providers.Controllers.Hands
         /// </summary>
         public bool PlatformProvidesIsPointing { get; set; }
 
-        /// <summary>
-        /// Finalizes the hand data retrieved from platform APIs by adding
-        /// any information the platform could not provide.
-        /// </summary>
-        /// <param name="handedness">The handedness of the data provided.</param>
-        /// <param name="handData">The hand data retrieved from platform conversion.</param>
+        /// <inheritdoc />
         public HandData PostProcess(Handedness handedness, HandData handData)
         {
             handData = UpdateIsPinchingAndStrength(handData);
             handData = UpdateIsPointing(handData);
             handData = UpdatePointerPose(handData);
-            handData = GripPostProcessor.Process(handData);
-            handData = TrackedPoseProcessor.Process(handedness, handData);
+            handData = GripPostProcessor.PostProcess(handedness, handData);
+            handData = TrackedPoseProcessor.PostProcess(handedness, handData);
 
             return handData;
         }

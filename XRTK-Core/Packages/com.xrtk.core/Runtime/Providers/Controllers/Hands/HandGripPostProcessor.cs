@@ -4,6 +4,8 @@
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
+using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.Providers.Controllers.Hands;
 
 namespace XRTK.Providers.Controllers.Hands
 {
@@ -12,7 +14,7 @@ namespace XRTK.Providers.Controllers.Hands
     /// retrieved from platform APIs and calculates needed information for <see cref="HandData.GripStrength"/>
     /// and <see cref="HandData.IsGripping"/> as well as <see cref="HandData.FingerCurlStrengths"/>.
     /// </summary>
-    public sealed class HandGripPostProcessor
+    public sealed class HandGripPostProcessor : IHandDataPostProcessor
     {
         private const float CURL_THUMB_METACARPAL_LOW_END_ANGLE = 70f;
         private const float CURL_THUMB_METACARPAL_HIGH_END_ANGLE = 100f;
@@ -56,12 +58,8 @@ namespace XRTK.Providers.Controllers.Hands
 
         private const bool DEBUG_LOG_VALUES_TO_CONSOLE = false;
 
-        /// <summary>
-        /// Processes the hand data and updates its <see cref="HandData.IsGripping"/>,
-        /// <see cref="HandData.GripStrength"/> and <see cref="HandData.FingerCurlStrengths"/> values.
-        /// </summary>
-        /// <param name="handData">The input hand data retrieved from platform conversion.</param>
-        public HandData Process(HandData handData)
+        /// <inheritdoc />
+        public HandData PostProcess(Handedness handedness, HandData handData)
         {
             if (handData.TrackingState == TrackingState.Tracked)
             {

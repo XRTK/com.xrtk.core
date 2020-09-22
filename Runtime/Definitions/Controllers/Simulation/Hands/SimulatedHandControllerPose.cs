@@ -7,8 +7,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Utilities;
-using XRTK.Services;
-using XRTK.Utilities;
 
 namespace XRTK.Definitions.Controllers.Simulation.Hands
 {
@@ -44,7 +42,7 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// <summary>
         /// Gets the configured default pose for simulation hands.
         /// </summary>
-        public static SimulatedHandControllerPoseData DefaultHandPose { get; private set; }
+        public static HandControllerPoseProfile DefaultHandPose { get; private set; }
 
         /// <summary>
         /// Gets the unique identifier for the simulated pose.
@@ -70,14 +68,14 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// <inheritdoc />
         public override string ToString()
         {
-            return $"{ToJson()}";
+            return ToJson();
         }
 
         /// <summary>
         /// Initialize pose data for use in editor from files.
         /// </summary>
         /// <param name="poses">List of pose data assets with pose information.</param>
-        public static void Initialize(IReadOnlyList<SimulatedHandControllerPoseData> poses)
+        public static void Initialize(IReadOnlyList<HandControllerPoseProfile> poses)
         {
             if (isInitialized)
             {
@@ -148,76 +146,6 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         }
 
         /// <summary>
-        /// Computes world space poses from camera-space joint data.
-        /// </summary>
-        public void ComputeJointPoses(Handedness handedness, Quaternion rotation, Vector3 position, MixedRealityPose[] jointsOut)
-        {
-            Quaternion cameraRotation = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation
-                : CameraCache.Main.transform.rotation;
-
-            for (int i = 0; i < HandData.JointCount; i++)
-            {
-                // Initialize from local offsets
-                var localPosition = LocalJointPoses[i].Position;
-                var localRotation = LocalJointPoses[i].Rotation;
-
-                // Pose offset are for right hand, mirror on X axis if left hand is needed
-                if (handedness == Handedness.Left)
-                {
-                    localPosition.x = -localPosition.x;
-                    localRotation.y = -localRotation.y;
-                    localRotation.z = -localRotation.z;
-                }
-
-                // Apply camera transform
-                localPosition = cameraRotation * localPosition;
-                localRotation = cameraRotation * localRotation;
-
-                // Apply external transform
-                localPosition = position + rotation * localPosition;
-                localRotation = rotation * localRotation;
-
-                jointsOut[i] = new MixedRealityPose(localPosition, localRotation);
-            }
-        }
-
-        /// <summary>
-        /// Takes world space joint poses from any hand and convert into right-hand, camera-space poses.
-        /// </summary>
-        public void ParseFromJointPoses(MixedRealityPose[] joints, Handedness handedness, Quaternion rotation, Vector3 position)
-        {
-            var invRotation = Quaternion.Inverse(rotation);
-            var invCameraRotation = Quaternion.Inverse(MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation
-                : CameraCache.Main.transform.rotation);
-
-            for (int i = 0; i < HandData.JointCount; i++)
-            {
-                Vector3 p = joints[i].Position;
-                Quaternion r = joints[i].Rotation;
-
-                // Apply inverse external transform
-                p = invRotation * (p - position);
-                r = invRotation * r;
-
-                // To camera space
-                p = invCameraRotation * p;
-                r = invCameraRotation * r;
-
-                // Pose offset are for right hand, mirror on X axis if left hand is given
-                if (handedness == Handedness.Left)
-                {
-                    p.x = -p.x;
-                    r.y = -r.y;
-                    r.z = -r.z;
-                }
-
-                LocalJointPoses[i] = new MixedRealityPose(p, r);
-            }
-        }
-
-        /// <summary>
         /// Set all poses to zero.
         /// </summary>
         public void SetZero()
@@ -284,14 +212,17 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// </summary>
         public string ToJson()
         {
-            var recordings = new List<RecordedHandJoint>();
+            var record = new RecordedHandJoints
+            {
+                Joints = new RecordedHandJoint[LocalJointPoses.Length]
+            };
 
             for (int i = 0; i < LocalJointPoses.Length; i++)
             {
-                recordings.Add(new RecordedHandJoint((TrackedHandJoint)i, LocalJointPoses[i]));
+                record.Joints[i] = new RecordedHandJoint((TrackedHandJoint)i, LocalJointPoses[i]);
             }
 
-            return JsonUtility.ToJson(recordings);
+            return JsonUtility.ToJson(record);
         }
 
         /// <summary>
@@ -301,10 +232,10 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         {
             var record = JsonUtility.FromJson<RecordedHandJoints>(json);
 
-            for (int i = 0; i < record.items.Length; i++)
+            for (int i = 0; i < record.Joints.Length; i++)
             {
-                var jointRecord = record.items[i];
-                LocalJointPoses[(int)jointRecord.JointIndex] = jointRecord.pose;
+                var jointRecord = record.Joints[i];
+                LocalJointPoses[(int)jointRecord.Joint] = jointRecord.Pose;
             }
         }
 
@@ -318,6 +249,9 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
             return ((SimulatedHandControllerPose)left).Equals((SimulatedHandControllerPose)right);
         }
 
+        /// <summary>Determines whether the specified object is equal to this instance.</summary>
+        /// <param name="other">The specified object.</param>
+        /// <returns>True, if the specified object is equal to this instance, otherwise false.</returns>
         public bool Equals(SimulatedHandControllerPose other)
         {
             return Id == other.Id;

@@ -12,15 +12,6 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
     public class SimulatedHandControllerDataProviderProfile : SimulatedControllerDataProviderProfile
     {
         [SerializeField]
-        [Tooltip("Hand pose definitions.")]
-        private List<SimulatedHandControllerPoseData> poseDefinitions = new List<SimulatedHandControllerPoseData>();
-
-        /// <summary>
-        /// Hand pose definitions.
-        /// </summary>
-        public IReadOnlyList<SimulatedHandControllerPoseData> PoseDefinitions => poseDefinitions;
-
-        [SerializeField]
         [Tooltip("Gesture interpolation per second")]
         private float handPoseAnimationSpeed = 8.0f;
 
@@ -30,13 +21,13 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         public float HandPoseAnimationSpeed => handPoseAnimationSpeed;
 
         [SerializeField]
-        [Tooltip("If set, hand mesh data will be read and available for visualization. Disable for optimized performance.")]
-        private bool handMeshingEnabled = false;
+        [Tooltip("Defines what kind of data should be aggregated for the hands rendering.")]
+        private HandRenderingMode renderingMode = HandRenderingMode.Joints;
 
         /// <summary>
-        /// If set, hand mesh data will be read and available for visualization. Disable for optimized performance.
+        /// Defines what kind of data should be aggregated for the hands rendering.
         /// </summary>
-        public bool HandMeshingEnabled => handMeshingEnabled;
+        public HandRenderingMode RenderingMode => renderingMode;
 
         [SerializeField]
         [Tooltip("If set, hands will be setup with colliders and a rigidbody to work with Unity's physics system.")]
@@ -64,6 +55,15 @@ namespace XRTK.Definitions.Controllers.Simulation.Hands
         /// Set the bounds mode to use for calculating hand bounds.
         /// </summary>
         public HandBoundsMode BoundsMode => boundsMode;
+
+        [SerializeField]
+        [Tooltip("Tracked hand poses for pose detection.")]
+        private List<HandControllerPoseProfile> trackedPoses = new List<HandControllerPoseProfile>();
+
+        /// <summary>
+        /// Tracked hand poses for pose detection.
+        /// </summary>
+        public IReadOnlyList<HandControllerPoseProfile> TrackedPoses => trackedPoses;
 
         public override ControllerDefinition[] GetDefaultControllerOptions()
         {

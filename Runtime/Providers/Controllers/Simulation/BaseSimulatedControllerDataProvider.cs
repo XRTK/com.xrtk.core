@@ -113,7 +113,7 @@ namespace XRTK.Providers.Controllers.Simulation
             // Update all active simulated controllers.
             for (int i = 0; i < ActiveControllers.Count; i++)
             {
-                ActiveControllers[i].UpdateController();
+                UpdateSimulatedController((IMixedRealitySimulatedController)ActiveControllers[i]);
             }
         }
 
@@ -193,7 +193,7 @@ namespace XRTK.Providers.Controllers.Simulation
         /// Removes the simulated controller and unregisters it for a given hand, if it exists.
         /// </summary>
         /// <param name="handedness">Handedness of the controller to remove.</param>
-        protected void RemoveController(Handedness handedness)
+        protected virtual void RemoveController(Handedness handedness)
         {
             if (TryGetController(handedness, out var controller))
             {
@@ -235,6 +235,15 @@ namespace XRTK.Providers.Controllers.Simulation
 
             controller = default;
             return false;
+        }
+
+        /// <summary>
+        /// Updates the provided simulated controller instance.
+        /// </summary>
+        /// <param name="simulatedController">Controller to update.</param>
+        protected virtual void UpdateSimulatedController(IMixedRealitySimulatedController simulatedController)
+        {
+            simulatedController.UpdateController();
         }
 
         /// <summary>

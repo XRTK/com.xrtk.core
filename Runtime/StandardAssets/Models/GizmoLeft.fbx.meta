@@ -1,89 +1,245 @@
 fileFormatVersion: 2
 guid: a481711e38d94bbeaa22998e03d9e773
 ModelImporter:
-  serializedVersion: 22
-  fileIDToRecycleName:
-    100000: //RootNode
-    100002: pCone1
-    100004: pCone2
-    100006: pCone3
-    100008: pCone4
-    100010: pCone5
-    100012: pCone6
-    100014: pCylinder1
-    100016: pCylinder2
-    100018: pCylinder3
-    100020: pCylinder4
-    100022: polySurface1
-    100024: polySurface2
-    100026: polySurface3
-    100028: polySurface4
-    100030: polySurface4 1
-    100032: polySurface5
-    100034: polySurface6
-    100036: polySurface7
-    100038: transform1
-    100040: transform10
-    100042: transform11
-    100044: transform12
-    100046: transform13
-    100048: transform14
-    100050: transform15
-    100052: transform16
-    100054: transform17
-    100056: transform2
-    100058: transform3
-    100060: transform4
-    100062: transform5
-    100064: transform6
-    100066: transform7
-    100068: transform8
-    100070: transform9
-    400000: //RootNode
-    400002: pCone1
-    400004: pCone2
-    400006: pCone3
-    400008: pCone4
-    400010: pCone5
-    400012: pCone6
-    400014: pCylinder1
-    400016: pCylinder2
-    400018: pCylinder3
-    400020: pCylinder4
-    400022: polySurface1
-    400024: polySurface2
-    400026: polySurface3
-    400028: polySurface4
-    400030: polySurface4 1
-    400032: polySurface5
-    400034: polySurface6
-    400036: polySurface7
-    400038: transform1
-    400040: transform10
-    400042: transform11
-    400044: transform12
-    400046: transform13
-    400048: transform14
-    400050: transform15
-    400052: transform16
-    400054: transform17
-    400056: transform2
-    400058: transform3
-    400060: transform4
-    400062: transform5
-    400064: transform6
-    400066: transform7
-    400068: transform8
-    400070: transform9
-    2100000: phong4
-    2100002: phong3
-    2100004: phong2
-    2300000: polySurface7
-    3300000: polySurface7
-    4300000: polySurface7
+  serializedVersion: 25
+  internalIDToNameTable:
+  - first:
+      1: 100000
+    second: //RootNode
+  - first:
+      1: 100002
+    second: pCone1
+  - first:
+      1: 100004
+    second: pCone2
+  - first:
+      1: 100006
+    second: pCone3
+  - first:
+      1: 100008
+    second: pCone4
+  - first:
+      1: 100010
+    second: pCone5
+  - first:
+      1: 100012
+    second: pCone6
+  - first:
+      1: 100014
+    second: pCylinder1
+  - first:
+      1: 100016
+    second: pCylinder2
+  - first:
+      1: 100018
+    second: pCylinder3
+  - first:
+      1: 100020
+    second: pCylinder4
+  - first:
+      1: 100022
+    second: polySurface1
+  - first:
+      1: 100024
+    second: polySurface2
+  - first:
+      1: 100026
+    second: polySurface3
+  - first:
+      1: 100028
+    second: polySurface4
+  - first:
+      1: 100030
+    second: polySurface4 1
+  - first:
+      1: 100032
+    second: polySurface5
+  - first:
+      1: 100034
+    second: polySurface6
+  - first:
+      1: 100036
+    second: polySurface7
+  - first:
+      1: 100038
+    second: transform1
+  - first:
+      1: 100040
+    second: transform10
+  - first:
+      1: 100042
+    second: transform11
+  - first:
+      1: 100044
+    second: transform12
+  - first:
+      1: 100046
+    second: transform13
+  - first:
+      1: 100048
+    second: transform14
+  - first:
+      1: 100050
+    second: transform15
+  - first:
+      1: 100052
+    second: transform16
+  - first:
+      1: 100054
+    second: transform17
+  - first:
+      1: 100056
+    second: transform2
+  - first:
+      1: 100058
+    second: transform3
+  - first:
+      1: 100060
+    second: transform4
+  - first:
+      1: 100062
+    second: transform5
+  - first:
+      1: 100064
+    second: transform6
+  - first:
+      1: 100066
+    second: transform7
+  - first:
+      1: 100068
+    second: transform8
+  - first:
+      1: 100070
+    second: transform9
+  - first:
+      4: 400000
+    second: //RootNode
+  - first:
+      4: 400002
+    second: pCone1
+  - first:
+      4: 400004
+    second: pCone2
+  - first:
+      4: 400006
+    second: pCone3
+  - first:
+      4: 400008
+    second: pCone4
+  - first:
+      4: 400010
+    second: pCone5
+  - first:
+      4: 400012
+    second: pCone6
+  - first:
+      4: 400014
+    second: pCylinder1
+  - first:
+      4: 400016
+    second: pCylinder2
+  - first:
+      4: 400018
+    second: pCylinder3
+  - first:
+      4: 400020
+    second: pCylinder4
+  - first:
+      4: 400022
+    second: polySurface1
+  - first:
+      4: 400024
+    second: polySurface2
+  - first:
+      4: 400026
+    second: polySurface3
+  - first:
+      4: 400028
+    second: polySurface4
+  - first:
+      4: 400030
+    second: polySurface4 1
+  - first:
+      4: 400032
+    second: polySurface5
+  - first:
+      4: 400034
+    second: polySurface6
+  - first:
+      4: 400036
+    second: polySurface7
+  - first:
+      4: 400038
+    second: transform1
+  - first:
+      4: 400040
+    second: transform10
+  - first:
+      4: 400042
+    second: transform11
+  - first:
+      4: 400044
+    second: transform12
+  - first:
+      4: 400046
+    second: transform13
+  - first:
+      4: 400048
+    second: transform14
+  - first:
+      4: 400050
+    second: transform15
+  - first:
+      4: 400052
+    second: transform16
+  - first:
+      4: 400054
+    second: transform17
+  - first:
+      4: 400056
+    second: transform2
+  - first:
+      4: 400058
+    second: transform3
+  - first:
+      4: 400060
+    second: transform4
+  - first:
+      4: 400062
+    second: transform5
+  - first:
+      4: 400064
+    second: transform6
+  - first:
+      4: 400066
+    second: transform7
+  - first:
+      4: 400068
+    second: transform8
+  - first:
+      4: 400070
+    second: transform9
+  - first:
+      21: 2100000
+    second: phong4
+  - first:
+      21: 2100002
+    second: phong3
+  - first:
+      21: 2100004
+    second: phong2
+  - first:
+      23: 2300000
+    second: polySurface7
+  - first:
+      33: 3300000
+    second: polySurface7
+  - first:
+      43: 4300000
+    second: polySurface7
   externalObjects: {}
   materials:
-    importMaterials: 0
+    importMaterials: 1
     materialName: 0
     materialSearch: 1
     materialLocation: 1
@@ -115,6 +271,7 @@ ModelImporter:
     globalScale: 1
     meshCompression: 0
     addColliders: 0
+    useSRGBMaterialColor: 1
     importVisibility: 1
     importBlendShapes: 0
     importCameras: 0
@@ -122,10 +279,13 @@ ModelImporter:
     swapUVChannels: 0
     generateSecondaryUV: 0
     useFileUnits: 1
-    optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
     preserveHierarchy: 0
+    skinWeightsMode: 0
+    maxBonesPerVertex: 4
+    minBoneWeight: 0.001
+    meshOptimizationFlags: -1
     indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
@@ -137,10 +297,14 @@ ModelImporter:
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4
-  importAnimation: 1
+    legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
+    blendShapeNormalImportMode: 1
+    normalSmoothingSource: 0
+  referencedClips: []
+  importAnimation: 0
   copyAvatar: 0
   humanDescription:
-    serializedVersion: 2
+    serializedVersion: 3
     human: []
     skeleton: []
     armTwist: 0.5
@@ -150,8 +314,8 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
+    globalScale: 1
     rootMotionBoneName: 
-    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
     hasTranslationDoF: 0
     hasExtraRoot: 0
     skeletonHasParents: 1

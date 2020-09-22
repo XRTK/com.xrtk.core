@@ -202,25 +202,22 @@ namespace XRTK.Services.SpatialAwarenessSystem
             if (spatialAwarenessParent != null)
             {
                 spatialAwarenessParent.transform.DetachChildren();
+                spatialAwarenessParent.Destroy();
             }
-
-            spatialAwarenessParent.Destroy();
 
             // Detach the mesh objects (they are to be cleaned up by the observer) and cleanup the parent
             if (meshParent != null)
             {
                 meshParent.transform.DetachChildren();
+                meshParent.Destroy();
             }
-
-            meshParent.Destroy();
 
             // Detach the surface objects (they are to be cleaned up by the observer) and cleanup the parent
             if (surfaceParent != null)
             {
                 surfaceParent.transform.DetachChildren();
+                surfaceParent.Destroy();
             }
-
-            surfaceParent.Destroy();
         }
 
         #region Mesh Events

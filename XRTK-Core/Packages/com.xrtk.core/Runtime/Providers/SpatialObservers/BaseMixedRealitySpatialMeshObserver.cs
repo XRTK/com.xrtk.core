@@ -134,10 +134,8 @@ namespace XRTK.Providers.SpatialObservers
             // Disable any spatial meshes we might have.
             foreach (var meshObject in spatialMeshObjects.Values)
             {
-                if (meshObject.GameObject != null)
-                {
-                    meshObject.GameObject.SetActive(false);
-                }
+                Debug.Assert(meshObject.GameObject != null);
+                meshObject.GameObject.SetActive(false);
             }
         }
 
@@ -152,7 +150,7 @@ namespace XRTK.Providers.SpatialObservers
                 meshObject.GameObject.Destroy();
             }
 
-            spatialMeshObjects.Clear();
+            Debug.Assert(spatialMeshObjects.Count == 0);
 
             lock (spatialMeshObjectPool)
             {
@@ -161,6 +159,8 @@ namespace XRTK.Providers.SpatialObservers
                     var meshObject = spatialMeshObjectPool.Pop();
                     meshObject.GameObject.Destroy();
                 }
+
+                Debug.Assert(spatialMeshObjectPool.Count == 0);
             }
         }
 

@@ -673,15 +673,7 @@ namespace XRTK.Services
 
             if (IsInitialized && instance != this)
             {
-                if (Application.isEditor)
-                {
-                    DestroyImmediate(gameObject);
-                }
-                else
-                {
-                    Destroy(gameObject);
-                }
-
+                gameObject.Destroy();
                 Debug.LogWarning($"Trying to instantiate a second instance of the {nameof(MixedRealityToolkit)}. Additional Instance was destroyed");
             }
             else if (!IsInitialized)

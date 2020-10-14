@@ -89,7 +89,14 @@ steps:
       Write-Host "Success? " ($p.ExitCode -eq 0)
 
       Write-Host "Install $UnityVersion $UnityVersionChangeSet"
-      $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','install',"--version $UnityVersion","--changeset $UnityVersionChangeSet")
+      $installArgs = @('--','--headless','install',"--version $UnityVersion","--changeset $UnityVersionChangeSet", '--cm');
+
+      foreach ( $module in ${{ parameters.modules }} ) {
+        $installArgs += '-m'
+        $installArgs += $module
+      }
+
+      $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList $installArgs
       Write-Host ""
       Write-Host "Success? " ($p.ExitCode -eq 0)
       Write-Host ""
@@ -105,36 +112,36 @@ steps:
         exit 1
       }
 
-      if ( Test-Path -Path "$modulesPath" ) {
-        $modulesPath = '{0}{1}modules.json' -f "$modulesPath",[IO.Path]::DirectorySeparatorChar
+      #if ( Test-Path -Path "$modulesPath" ) {
+      #  $modulesPath = '{0}{1}modules.json' -f "$modulesPath",[IO.Path]::DirectorySeparatorChar
 
-        if ( Test-Path -Path "$modulesPath" ) {
-          Write-Host "Modules Manifest: "$modulesPath""
-          $modules = @('--','--headless','im',"--version $UnityVersion")
+      #  if ( Test-Path -Path "$modulesPath" ) {
+      #    Write-Host "Modules Manifest: "$modulesPath""
+      #    $modules = @('--','--headless','im',"--version $UnityVersion")
 
-          foreach ( $module in (Get-Content -Raw -Path "$modulesPath" | ConvertFrom-Json) ) {
-            if ( ($module.category -eq 'Platforms') -and ($module.visible -eq $true) ) {
-              Write-Host ">> platform module" $module.id
+      #    foreach ( $module in (Get-Content -Raw -Path "$modulesPath" | ConvertFrom-Json) ) {
+      #      if ( ($module.category -eq 'Platforms') -and ($module.visible -eq $true) ) {
+      #        Write-Host ">> platform module" $module.id
 
-              if ( ${{ parameters.modules }} -contains $module.id ) {
-                Write-Host "++      add module" $module.id
-                $modules += '-m'
-                $modules += $module.id
-              }
-            }
-          }
+      #        if ( ${{ parameters.modules }} -contains $module.id ) {
+      #          Write-Host "++      add module" $module.id
+      #          $modules += '-m'
+      #          $modules += $module.id
+      #        }
+      #      }
+      #    }
 
-          $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList $modules
-          Write-Host ""
-          Write-Host "Success? " ($p.ExitCode -eq 0)
-        } else {
-          Write-Error "Failed to resolve modules path at $modulesPath"
-          exit 1
-        }
-      } else {
-        Write-Error "Failed to resolve editor installation path at $modulesPath"
-        exit 1
-      }
+      #    $p = Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList $modules
+      #    Write-Host ""
+      #    Write-Host "Success? " ($p.ExitCode -eq 0)
+      #  } else {
+      #    Write-Error "Failed to resolve modules path at $modulesPath"
+      #    exit 1
+      #  }
+      #} else {
+      #  Write-Error "Failed to resolve editor installation path at $modulesPath"
+      #  exit 1
+      #}
 
       Write-Host "Install Complete!"
       Write-Host "UnityEditor path set to: $editorPath"

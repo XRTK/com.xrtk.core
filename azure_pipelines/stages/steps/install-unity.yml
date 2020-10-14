@@ -89,7 +89,7 @@ steps:
       Write-Host "Success? " ($p.ExitCode -eq 0)
 
       Write-Host "Install $UnityVersion $UnityVersionChangeSet"
-      $installArgs = @('--','--headless','install',"--version $UnityVersion","--changeset $UnityVersionChangeSet", --cm);
+      $installArgs = @('--','--headless','install',"--version $UnityVersion","--changeset $UnityVersionChangeSet", '--cm');
 
       foreach ( $module in ${{ parameters.modules }} ) {
         $installArgs += '-m'

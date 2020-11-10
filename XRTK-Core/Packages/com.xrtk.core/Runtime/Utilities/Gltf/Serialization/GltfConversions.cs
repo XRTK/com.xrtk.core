@@ -146,7 +146,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 
             var array = new int[accessor.count];
 
-            GetTypeDetails(accessor.componentType, out int componentSize, out float _);
+            GetTypeDetails(accessor.ComponentType, out int componentSize, out float _);
             var stride = accessor.BufferView.byteStride > 0 ? accessor.BufferView.byteStride : componentSize;
             var byteOffset = accessor.BufferView.byteOffset;
             var bufferData = accessor.BufferView.Buffer.BufferData;
@@ -158,13 +158,13 @@ namespace XRTK.Utilities.Gltf.Serialization
 
             for (int i = 0; i < accessor.count; i++)
             {
-                if (accessor.componentType == GltfComponentType.Float)
+                if (accessor.ComponentType == GltfComponentType.Float)
                 {
                     array[i] = (int)Mathf.Floor(BitConverter.ToSingle(bufferData, byteOffset + i * stride));
                 }
                 else
                 {
-                    array[i] = (int)GetDiscreteUnsignedElement(bufferData, byteOffset + i * stride, accessor.componentType);
+                    array[i] = (int)GetDiscreteUnsignedElement(bufferData, byteOffset + i * stride, accessor.ComponentType);
                 }
             }
 
@@ -183,14 +183,14 @@ namespace XRTK.Utilities.Gltf.Serialization
 
         internal static Vector2[] GetVector2Array(this GltfAccessor accessor, bool flip = true)
         {
-            if (accessor.type != "VEC2" || accessor.componentType == GltfComponentType.UnsignedInt)
+            if (accessor.type != "VEC2" || accessor.ComponentType == GltfComponentType.UnsignedInt)
             {
                 return null;
             }
 
             var array = new Vector2[accessor.count];
 
-            GetTypeDetails(accessor.componentType, out int componentSize, out float maxValue);
+            GetTypeDetails(accessor.ComponentType, out int componentSize, out float maxValue);
             var stride = accessor.BufferView.byteStride > 0 ? accessor.BufferView.byteStride : componentSize * 2;
             var byteOffset = accessor.BufferView.byteOffset;
             var bufferData = accessor.BufferView.Buffer.BufferData;
@@ -204,15 +204,15 @@ namespace XRTK.Utilities.Gltf.Serialization
 
             for (int i = 0; i < accessor.count; i++)
             {
-                if (accessor.componentType == GltfComponentType.Float)
+                if (accessor.ComponentType == GltfComponentType.Float)
                 {
                     array[i].x = BitConverter.ToSingle(bufferData, byteOffset + i * stride + componentSize * 0);
                     array[i].y = BitConverter.ToSingle(bufferData, byteOffset + i * stride + componentSize * 1);
                 }
                 else
                 {
-                    array[i].x = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 0, accessor.componentType) / maxValue;
-                    array[i].y = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 1, accessor.componentType) / maxValue;
+                    array[i].x = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 0, accessor.ComponentType) / maxValue;
+                    array[i].y = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 1, accessor.ComponentType) / maxValue;
                 }
 
                 if (flip)
@@ -226,14 +226,14 @@ namespace XRTK.Utilities.Gltf.Serialization
 
         internal static Vector3[] GetVector3Array(this GltfAccessor accessor, bool convert = true)
         {
-            if (accessor.type != "VEC3" || accessor.componentType == GltfComponentType.UnsignedInt)
+            if (accessor.type != "VEC3" || accessor.ComponentType == GltfComponentType.UnsignedInt)
             {
                 return null;
             }
 
             var array = new Vector3[accessor.count];
 
-            GetTypeDetails(accessor.componentType, out int componentSize, out float maxValue);
+            GetTypeDetails(accessor.ComponentType, out int componentSize, out float maxValue);
             var stride = accessor.BufferView.byteStride > 0 ? accessor.BufferView.byteStride : componentSize * 3;
             var byteOffset = accessor.BufferView.byteOffset;
             var bufferData = accessor.BufferView.Buffer.BufferData;
@@ -247,7 +247,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 
             for (int i = 0; i < accessor.count; i++)
             {
-                if (accessor.componentType == GltfComponentType.Float)
+                if (accessor.ComponentType == GltfComponentType.Float)
                 {
                     array[i].x = BitConverter.ToSingle(bufferData, byteOffset + i * stride + componentSize * 0);
                     array[i].y = BitConverter.ToSingle(bufferData, byteOffset + i * stride + componentSize * 1);
@@ -255,9 +255,9 @@ namespace XRTK.Utilities.Gltf.Serialization
                 }
                 else
                 {
-                    array[i].x = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 0, accessor.componentType) / maxValue;
-                    array[i].y = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 1, accessor.componentType) / maxValue;
-                    array[i].z = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 2, accessor.componentType) / maxValue;
+                    array[i].x = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 0, accessor.ComponentType) / maxValue;
+                    array[i].y = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 1, accessor.ComponentType) / maxValue;
+                    array[i].z = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 2, accessor.ComponentType) / maxValue;
                 }
 
                 if (convert)
@@ -273,14 +273,14 @@ namespace XRTK.Utilities.Gltf.Serialization
 
         internal static Vector4[] GetVector4Array(this GltfAccessor accessor, bool convert = true)
         {
-            if (accessor.type != "VEC4" || accessor.componentType == GltfComponentType.UnsignedInt)
+            if (accessor.type != "VEC4" || accessor.ComponentType == GltfComponentType.UnsignedInt)
             {
                 return null;
             }
 
             var array = new Vector4[accessor.count];
 
-            GetTypeDetails(accessor.componentType, out int componentSize, out float maxValue);
+            GetTypeDetails(accessor.ComponentType, out int componentSize, out float maxValue);
             var stride = accessor.BufferView.byteStride > 0 ? accessor.BufferView.byteStride : componentSize * 4;
             var byteOffset = accessor.BufferView.byteOffset;
             var bufferData = accessor.BufferView.Buffer.BufferData;
@@ -294,7 +294,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 
             for (int i = 0; i < accessor.count; i++)
             {
-                if (accessor.componentType == GltfComponentType.Float)
+                if (accessor.ComponentType == GltfComponentType.Float)
                 {
                     array[i].x = BitConverter.ToSingle(bufferData, byteOffset + i * stride + componentSize * 0);
                     array[i].y = BitConverter.ToSingle(bufferData, byteOffset + i * stride + componentSize * 1);
@@ -303,10 +303,10 @@ namespace XRTK.Utilities.Gltf.Serialization
                 }
                 else
                 {
-                    array[i].x = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 0, accessor.componentType) / maxValue;
-                    array[i].y = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 1, accessor.componentType) / maxValue;
-                    array[i].z = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 2, accessor.componentType) / maxValue;
-                    array[i].w = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 3, accessor.componentType) / maxValue;
+                    array[i].x = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 0, accessor.ComponentType) / maxValue;
+                    array[i].y = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 1, accessor.ComponentType) / maxValue;
+                    array[i].z = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 2, accessor.ComponentType) / maxValue;
+                    array[i].w = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 3, accessor.ComponentType) / maxValue;
                 }
 
                 if (convert)
@@ -323,14 +323,14 @@ namespace XRTK.Utilities.Gltf.Serialization
 
         internal static Color[] GetColorArray(this GltfAccessor accessor)
         {
-            if (accessor.type != "VEC3" && accessor.type != "VEC4" || accessor.componentType == GltfComponentType.UnsignedInt)
+            if (accessor.type != "VEC3" && accessor.type != "VEC4" || accessor.ComponentType == GltfComponentType.UnsignedInt)
             {
                 return null;
             }
 
             var array = new Color[accessor.count];
 
-            GetTypeDetails(accessor.componentType, out int componentSize, out float maxValue);
+            GetTypeDetails(accessor.ComponentType, out int componentSize, out float maxValue);
             bool hasAlpha = accessor.type == "VEC4";
 
             var stride = accessor.BufferView.byteStride > 0 ? accessor.BufferView.byteStride : componentSize * (hasAlpha ? 4 : 3);
@@ -344,7 +344,7 @@ namespace XRTK.Utilities.Gltf.Serialization
 
             for (int i = 0; i < accessor.count; i++)
             {
-                if (accessor.componentType == GltfComponentType.Float)
+                if (accessor.ComponentType == GltfComponentType.Float)
                 {
                     array[i].r = BitConverter.ToSingle(bufferData, byteOffset + i * stride + componentSize * 0);
                     array[i].g = BitConverter.ToSingle(bufferData, byteOffset + i * stride + componentSize * 1);
@@ -353,10 +353,10 @@ namespace XRTK.Utilities.Gltf.Serialization
                 }
                 else
                 {
-                    array[i].r = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 0, accessor.componentType) / maxValue;
-                    array[i].g = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 1, accessor.componentType) / maxValue;
-                    array[i].b = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 2, accessor.componentType) / maxValue;
-                    array[i].a = hasAlpha ? GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 3, accessor.componentType) / maxValue : 1f;
+                    array[i].r = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 0, accessor.ComponentType) / maxValue;
+                    array[i].g = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 1, accessor.ComponentType) / maxValue;
+                    array[i].b = GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 2, accessor.ComponentType) / maxValue;
+                    array[i].a = hasAlpha ? GetDiscreteElement(bufferData, byteOffset + i * stride + componentSize * 3, accessor.ComponentType) / maxValue : 1f;
                 }
             }
 

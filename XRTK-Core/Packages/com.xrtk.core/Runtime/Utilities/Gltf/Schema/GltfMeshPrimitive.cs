@@ -12,7 +12,7 @@ namespace XRTK.Utilities.Gltf.Schema
     /// https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/schema/mesh.primitive.schema.json
     /// </summary>
     [Serializable]
-    public class GltfMeshPrimitive : GltfProperty
+    public class GltfMeshPrimitive : GltfProperty, ISerializationCallbackReceiver
     {
         #region Serialized Fields
 
@@ -37,7 +37,10 @@ namespace XRTK.Utilities.Gltf.Schema
         /// <summary>
         /// The type of primitives to render. All valid values correspond to WebGL enums.
         /// </summary>
-        public GltfDrawMode mode = GltfDrawMode.Triangles;
+        public GltfDrawMode Mode { get; set; } = GltfDrawMode.Triangles;
+
+        [SerializeField]
+        private string mode = GltfDrawMode.Triangles.ToString();
 
         #endregion Serialized Fields
 
@@ -59,5 +62,26 @@ namespace XRTK.Utilities.Gltf.Schema
         /// Unity Mesh wrapper for the GltfMeshPrimitive SubMesh
         /// </summary>
         public Mesh SubMesh { get; internal set; }
+
+#region ISerializationCallbackReceiver
+
+        void ISerializationCallbackReceiver.OnAfterDeserialize()
+        {
+            if (Enum.TryParse(mode, out GltfDrawMode result))
+            {
+                Mode = result;
+            }
+            else
+            {
+                Mode = GltfDrawMode.Triangles;
+            }
+        }
+
+        void ISerializationCallbackReceiver.OnBeforeSerialize()
+        {
+            mode = Mode.ToString();
+        }        
+
+#endregion ISerializationCallbackReceiver
     }
 }

@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
+using UnityEngine;
 
 namespace XRTK.Utilities.Gltf.Schema
 {
@@ -10,7 +11,7 @@ namespace XRTK.Utilities.Gltf.Schema
     /// https://github.com/KhronosGroup/glTF/blob/master/specification/2.0/schema/animation.sampler.schema.json
     /// </summary>
     [Serializable]
-    public class GltfAnimationSampler : GltfProperty
+    public class GltfAnimationSampler : GltfProperty, ISerializationCallbackReceiver
     {
         /// <summary>
         /// The index of an accessor containing keyframe input values, e.G., time.
@@ -27,7 +28,10 @@ namespace XRTK.Utilities.Gltf.Schema
         /// interpolation is `\"STEP\"`, animated value remains constant to the value
         /// of the first point of the timeframe, until the next timeframe.
         /// </summary>
-        public GltfInterpolationType interpolation = GltfInterpolationType.LINEAR;
+        public GltfInterpolationType Interpolation { get; set; } = GltfInterpolationType.LINEAR;
+
+        [SerializeField]
+        private string interpolation = GltfInterpolationType.LINEAR.ToString();
 
         /// <summary>
         /// The index of an accessor, containing keyframe output values. Output and input
@@ -35,5 +39,26 @@ namespace XRTK.Utilities.Gltf.Schema
         /// output accessors componentType must be `FLOAT`.
         /// </summary>
         public int output;
+
+#region ISerializationCallbackReceiver
+
+        void ISerializationCallbackReceiver.OnAfterDeserialize()
+        {
+            if (Enum.TryParse(interpolation, out GltfInterpolationType result))
+            {
+                Interpolation = result;
+            }
+            else
+            {
+                Interpolation = GltfInterpolationType.LINEAR;
+            }
+        }
+
+        void ISerializationCallbackReceiver.OnBeforeSerialize()
+        {
+            interpolation = Interpolation.ToString();
+        }
+
+#endregion ISerializationCallbackReceiver
     }
 }

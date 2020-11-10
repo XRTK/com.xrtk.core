@@ -17,7 +17,7 @@ namespace XRTK.Utilities.Gltf.Schema
         /// Magnification filter.
         /// Valid values correspond to WebGL enums: `9728` (NEAREST) and `9729` (LINEAR).
         /// </summary>
-        public GltfMagnificationFilterMode MagFilter { get; set; };
+        public GltfMagnificationFilterMode MagFilter { get; set; }
 
         [SerializeField]
         private string magFilter = string.Empty;
@@ -25,7 +25,7 @@ namespace XRTK.Utilities.Gltf.Schema
         /// <summary>
         /// Minification filter. All valid values correspond to WebGL enums.
         /// </summary>
-        public GltfMinFilterMode MinFilter { get; set; };
+        public GltfMinFilterMode MinFilter { get; set; }
 
         [SerializeField]
         private string minFilter = string.Empty;
@@ -33,7 +33,7 @@ namespace XRTK.Utilities.Gltf.Schema
         /// <summary>
         /// s wrapping mode.  All valid values correspond to WebGL enums.
         /// </summary>
-        public GltfWrapMode WrapS { get; set; };
+        public GltfWrapMode WrapS { get; set; }
 
         [SerializeField]
         private string wrapS = string.Empty;
@@ -41,7 +41,7 @@ namespace XRTK.Utilities.Gltf.Schema
         /// <summary>
         /// t wrapping mode.  All valid values correspond to WebGL enums.
         /// </summary>
-        public GltfWrapMode WrapT { get; set; };
+        public GltfWrapMode WrapT { get; set; }
 
         [SerializeField]
         private string wrapT = string.Empty;

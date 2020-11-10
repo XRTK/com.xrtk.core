@@ -43,7 +43,7 @@ namespace XRTK.Utilities.Gltf.Schema
         /// All valid values correspond to WebGL enums.
         /// When this is not provided, the bufferView contains animation or skin data.
         /// </summary>
-        public GltfBufferViewTarget Target { get; set; };
+        public GltfBufferViewTarget Target { get; set; }
 
         [SerializeField]
         private string target = string.Empty;

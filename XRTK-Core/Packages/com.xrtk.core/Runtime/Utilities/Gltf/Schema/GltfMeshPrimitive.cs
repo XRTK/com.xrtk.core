@@ -37,10 +37,10 @@ namespace XRTK.Utilities.Gltf.Schema
         /// <summary>
         /// The type of primitives to render. All valid values correspond to WebGL enums.
         /// </summary>
-        public GltfDrawMode Mode { get; set; } = GltfDrawMode.Triangles;
+        public GltfDrawMode Mode { get; set; };
 
         [SerializeField]
-        private string mode = GltfDrawMode.Triangles.ToString();
+        private string mode = string.Empty;
 
         #endregion Serialized Fields
 

@@ -24,7 +24,7 @@ namespace XRTK.Utilities.Gltf.Schema
         public GltfAnimationChannelPath Path { get; set; }
 
         [SerializeField]
-        private string path = null;
+        private string path = string.Empty;
 
 #region ISerializationCallbackReceiver
 

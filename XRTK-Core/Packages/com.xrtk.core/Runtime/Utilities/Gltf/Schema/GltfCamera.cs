@@ -34,7 +34,7 @@ namespace XRTK.Utilities.Gltf.Schema
         public GltfCameraType Type { get; set; }
 
         [SerializeField]
-        private string type = null;
+        private string type = string.Empty;
 
 #region ISerializationCallbackReceiver
 

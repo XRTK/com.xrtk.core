@@ -34,7 +34,7 @@ namespace XRTK.Utilities.Gltf.Schema
         public GltfComponentType ComponentType { get; set; }
 
         [SerializeField]
-        private string componentType;
+        private string componentType = string.Empty;
 
 #region ISerializationCallbackReceiver
 

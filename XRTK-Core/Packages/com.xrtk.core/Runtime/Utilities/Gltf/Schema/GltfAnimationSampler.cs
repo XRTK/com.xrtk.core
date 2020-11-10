@@ -28,10 +28,10 @@ namespace XRTK.Utilities.Gltf.Schema
         /// interpolation is `\"STEP\"`, animated value remains constant to the value
         /// of the first point of the timeframe, until the next timeframe.
         /// </summary>
-        public GltfInterpolationType Interpolation { get; set; } = GltfInterpolationType.LINEAR;
+        public GltfInterpolationType Interpolation { get; set; };
 
         [SerializeField]
-        private string interpolation = GltfInterpolationType.LINEAR.ToString();
+        private string interpolation = string.Empty;
 
         /// <summary>
         /// The index of an accessor, containing keyframe output values. Output and input

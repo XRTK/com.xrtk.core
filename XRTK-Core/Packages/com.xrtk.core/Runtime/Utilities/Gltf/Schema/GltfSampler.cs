@@ -17,34 +17,34 @@ namespace XRTK.Utilities.Gltf.Schema
         /// Magnification filter.
         /// Valid values correspond to WebGL enums: `9728` (NEAREST) and `9729` (LINEAR).
         /// </summary>
-        public GltfMagnificationFilterMode MagFilter { get; set; } = GltfMagnificationFilterMode.Linear;
+        public GltfMagnificationFilterMode MagFilter { get; set; };
 
         [SerializeField]
-        private string magFilter = GltfMagnificationFilterMode.Linear.ToString();
+        private string magFilter = string.Empty;
 
         /// <summary>
         /// Minification filter. All valid values correspond to WebGL enums.
         /// </summary>
-        public GltfMinFilterMode MinFilter { get; set; } = GltfMinFilterMode.NearestMipmapLinear;
+        public GltfMinFilterMode MinFilter { get; set; };
 
         [SerializeField]
-        private string minFilter = GltfMinFilterMode.NearestMipmapLinear.ToString();
+        private string minFilter = string.Empty;
 
         /// <summary>
         /// s wrapping mode.  All valid values correspond to WebGL enums.
         /// </summary>
-        public GltfWrapMode WrapS { get; set; } = GltfWrapMode.Repeat;
+        public GltfWrapMode WrapS { get; set; };
 
         [SerializeField]
-        private string wrapS = null;
+        private string wrapS = string.Empty;
 
         /// <summary>
         /// t wrapping mode.  All valid values correspond to WebGL enums.
         /// </summary>
-        public GltfWrapMode WrapT { get; set; } = GltfWrapMode.Repeat;
+        public GltfWrapMode WrapT { get; set; };
 
         [SerializeField]
-        private string wrapT = GltfWrapMode.Repeat.ToString();
+        private string wrapT = string.Empty;
 
 #region ISerializationCallbackReceiver
 

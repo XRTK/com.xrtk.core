@@ -201,11 +201,11 @@ namespace XRTK.Providers.Controllers.Hands
         {
             var handControllerDataProvider = (IMixedRealityHandControllerDataProvider)ControllerDataProvider;
 
-            if (handControllerDataProvider.HandPhysicsEnabled && handControllerDataProvider.BoundsMode == HandBoundsMode.Hand)
+            if (handControllerDataProvider.HandPhysicsEnabled && handControllerDataProvider.BoundsMode == HandBoundsLOD.Low)
             {
                 UpdateHandBounds();
             }
-            else if (handControllerDataProvider.HandPhysicsEnabled && handControllerDataProvider.BoundsMode == HandBoundsMode.Fingers)
+            else if (handControllerDataProvider.HandPhysicsEnabled && handControllerDataProvider.BoundsMode == HandBoundsLOD.High)
             {
                 UpdatePalmBounds();
                 UpdateThumbBounds();

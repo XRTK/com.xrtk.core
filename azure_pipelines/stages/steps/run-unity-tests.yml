@@ -1,8 +1,12 @@
 steps:
   - powershell: |
       Write-Host "Starting ${{ parameters.target }} Unit Tests..."
-      $logPath = "$(LogDirectory)\${{ parameters.target }}-tests.log"
-      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -logfile `"$logPath`" -editorTestsResultFile `"$(LogDirectory)\${{ parameters.target }}-tests.xml`" -runEditorTests" -PassThru
+
+      $date = Get-Date -Format "yyyyMMddTHHmmss"
+      $logPrefix = "$(LogDirectory)\Tests-${{ parameters.target }}-$date"
+      $logPath = "$logPrefix.log"
+      $testPath = "$logprefix.xml"
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -logfile `"$logPath`" -editorTestsResultFile `"$testPath`" -runEditorTests" -PassThru
 
       $ljob = Start-Job -ScriptBlock {
         param($log)
@@ -35,7 +39,7 @@ steps:
     displayName: 'Publish ${{ parameters.target }} Test Results'
     inputs:
       testResultsFormat: NUnit
-      testResultsFiles: '*test?.xml'
+      testResultsFiles: 'Tests-*?.xml'
       searchFolder: '$(LogDirectory)'
       mergeTestResults: true
       failTaskOnFailedTests: true

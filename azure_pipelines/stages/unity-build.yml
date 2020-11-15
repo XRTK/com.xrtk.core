@@ -6,6 +6,8 @@ stages:
     - job:
       displayName: ${{ format('{0}', parameters.agent) }}
       timeoutInMinutes: 120
+      workspace:
+        clean: all
       variables:
       - group: Global Pipeline Settings
       pool:

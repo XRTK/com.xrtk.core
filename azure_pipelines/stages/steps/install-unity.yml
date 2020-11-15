@@ -6,10 +6,10 @@ steps:
       $version = Get-Content -Path "$(System.DefaultWorkingDirectory)\$(project.name)\ProjectSettings\ProjectVersion.txt"
       $pattern = '(?<version>(?:(?<major>\d+)\.)?(?:(?<minor>\d+)\.)?(?:(?<patch>\d+[fab]\d+)\b))|((?:\((?<revision>\w+))\))'
       $matches = $matches = [regex]::Matches($version, $pattern)
-      $UnityVersion = $matches[1].Groups['version'].Value.Trim()
-      $UnityVersionChangeSet = $matches[2].Groups['revision'].Value.Trim()
+      $unityVersion = $matches[1].Groups['version'].Value.Trim()
+      $unityVersionChangeSet = $matches[2].Groups['revision'].Value.Trim()
 
-      if ((-not $global:PSVersionTable.Platform) -or ($global:PSVersionTable.Platform -eq "Win32NT")) {
+      if ( (-not $global:PSVersionTable.Platform) -or ($global:PSVersionTable.Platform -eq "Win32NT") ) {
         $hubPath = "C:\Program Files\Unity Hub\Unity Hub.exe"
         $editorRootPath = "C:\Program Files\Unity\Hub\Editor\"
         $editorFileEx = "Editor\Unity.exe"
@@ -25,7 +25,7 @@ steps:
         $editorFileEx = "Unity"
       }
 
-      if ( Test-Path -Path $hubPath ) {
+      if ( Test-Path -Path "$hubPath" ) {
         Write-Host "Unity Hub found at "$hubPath""
         Write-Host ""
       } else {
@@ -37,11 +37,11 @@ steps:
       Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','help')
       Write-Host ""
 
-      $editorPath = '{0}{1}{2}{3}' -f $editorRootPath,$UnityVersion,[IO.Path]::DirectorySeparatorChar,$editorFileEx
+      $editorPath = '{0}{1}{2}{3}' -f $editorRootPath,$unityVersion,[IO.Path]::DirectorySeparatorChar,$editorFileEx
 
-      if( -not (Test-Path -Path $editorPath") ){
-        Write-Host "Installing $UnityVersion $UnityVersionChangeSet ..."
-        $installArgs = @('--','--headless','install',"--version $UnityVersion","--changeset $UnityVersionChangeSet", '--cm');
+      if ( -not (Test-Path -Path "$editorPath") ){
+        Write-Host "Installing $unityVersion ($unityVersionChangeSet) ..."
+        $installArgs = @('--','--headless','install',"--version $unityVersion","--changeset $unityVersionChangeSet", '--cm');
 
         foreach ( $module in ${{ parameters.modules }} ) {
           $installArgs += '-m'
@@ -50,8 +50,11 @@ steps:
 
         Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList $installArgs
         Write-Host ""
+        Write-Host "Install Complete!"
+        Write-Host ""
       }
 
+      Write-Host "Getting installed editors..."
       Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','editors','-i')
       Write-Host ""
 
@@ -60,8 +63,7 @@ steps:
         exit 1
       }
 
-      Write-Host "Install Complete!"
-      Write-Host "UnityEditor path set to: $editorPath"
+      Write-Host "Unity Editor path: $editorPath"
       echo "##vso[task.setvariable variable=EditorPath]$editorPath"
       exit 0
     failOnStderr: true

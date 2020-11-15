@@ -34,14 +34,14 @@ steps:
       }
 
       Write-Host "Unity HUB CLI Options:"
-      Start-Process -Verbose -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','help')
+      $p = Start-Process -NoNewWindow -Verbose -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','help')
       Write-Host ""
 
       $editorPath = "{0}{1}{2}{3}" -f $editorRootPath,$unityVersion,[IO.Path]::DirectorySeparatorChar,$editorFileEx
       Write-Host "Validating Editor Installation at `"$editorPath`""
 
       if ( -not (Test-Path -Path $editorPath) ) {
-        Write-Host "Installing $unityVersion ($unityVersionChangeSet) ..."
+        Write-Host "Installing $unityVersion ($unityVersionChangeSet)..."
         $installArgs = @('--','--headless','install',"--version $unityVersion","--changeset $unityVersionChangeSet", '--cm');
 
         foreach ( $module in ${{ parameters.modules }} ) {
@@ -49,14 +49,14 @@ steps:
           $installArgs += $module
         }
 
-        Start-Process -Verbose -PassThru -Wait -FilePath "$hubPath" -ArgumentList $installArgs
+        $p = Start-Process -NoNewWindow -Verbose -PassThru -Wait -FilePath "$hubPath" -ArgumentList $installArgs
         Write-Host ""
         Write-Host "Install Complete!"
         Write-Host ""
       }
 
       Write-Host "Getting installed editors..."
-      Start-Process -Verbose -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','editors','-i')
+      $p = Start-Process -NoNewWindow -Verbose -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','editors','-i')
       Write-Host ""
 
       if ( -not (Test-Path -Path $editorPath) ) {

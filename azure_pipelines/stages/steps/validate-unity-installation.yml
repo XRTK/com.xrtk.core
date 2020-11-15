@@ -12,17 +12,17 @@ steps:
       if ( (-not $global:PSVersionTable.Platform) -or ($global:PSVersionTable.Platform -eq "Win32NT") ) {
         $hubPath = "C:\Program Files\Unity Hub\Unity Hub.exe"
         $editorRootPath = "C:\Program Files\Unity\Hub\Editor\"
-        $editorFileEx = "Editor\Unity.exe"
+        $editorFileEx = "\Editor\Unity.exe"
       }
       elseif ( $global:PSVersionTable.OS.Contains("Darwin") ) {
         $hubPath = "/Applications/Unity Hub.app/Contents/MacOS/Unity Hub"
         $editorRootPath = "/Applications/Unity/Hub/Editor/"
-        $editorFileEx = "Unity.app"
+        $editorFileEx = "/Unity.app"
       }
       elseif ( $global:PSVersionTable.OS.Contains("Linux") ) {
         $hubPath = "./UnityHub.AppImage"
         $editorRootPath = "~/Unity/Hub/Editor/"
-        $editorFileEx = "Unity"
+        $editorFileEx = "/Unity"
       }
 
       if ( Test-Path -Path $hubPath ) {
@@ -34,33 +34,36 @@ steps:
       }
 
       Write-Host "Unity HUB CLI Options:"
-      $p = Start-Process -NoNewWindow -Verbose -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','help')
+      $p = Start-Process -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','help')
       Write-Host ""
 
-      $editorPath = "{0}{1}{2}{3}" -f $editorRootPath,$unityVersion,[IO.Path]::DirectorySeparatorChar,$editorFileEx
-      Write-Host "Validating Editor Installation at `"$editorPath`""
+      $editorPath = "{0}{1}{2}" -f $editorRootPath,$unityVersion,$editorFileEx
 
       if ( -not (Test-Path -Path $editorPath) ) {
         Write-Host "Installing $unityVersion ($unityVersionChangeSet)..."
-        $installArgs = @('--','--headless','install',"--version $unityVersion","--changeset $unityVersionChangeSet", '--cm');
+        $installArgs = @('--','--headless','install',"--version $unityVersion","--changeset $unityVersionChangeSet");
 
         foreach ( $module in ${{ parameters.modules }} ) {
           $installArgs += '-m'
           $installArgs += $module
         }
 
-        $p = Start-Process -NoNewWindow -Verbose -PassThru -Wait -FilePath "$hubPath" -ArgumentList $installArgs
+        $installArgs += '--cm'
+
+        Write-Host "`"$hubPath`" $installArgs"
+
+        $p = Start-Process -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList $installArgs
         Write-Host ""
         Write-Host "Install Complete!"
         Write-Host ""
       }
 
       Write-Host "Getting installed editors..."
-      $p = Start-Process -NoNewWindow -Verbose -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','editors','-i')
+      $p = Start-Process -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','editors','-i')
       Write-Host ""
 
       if ( -not (Test-Path -Path $editorPath) ) {
-        Write-Error "Failed to validate installed editor path at `"$editorPath`""
+        Write-Error "Failed to find a valid editor installation at `"$editorPath`""
         exit 1
       }
 

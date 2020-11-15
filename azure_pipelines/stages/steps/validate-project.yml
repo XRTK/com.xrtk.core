@@ -29,5 +29,4 @@ steps:
 
       exit $process.ExitCode
     failOnStderr: false
-    displayName: 'Return Unity License'
-    condition: always()
+    displayName: 'Validating Unity Project...'

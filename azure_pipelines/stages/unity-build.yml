@@ -8,8 +8,6 @@ stages:
       timeoutInMinutes: 120
       workspace:
         clean: all
-      strategy:
-        parallel: 5
       variables:
       - group: Global Pipeline Settings
       pool:

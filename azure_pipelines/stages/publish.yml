@@ -5,8 +5,6 @@ stages:
   pool:
     name: 'Azure Pipelines'
     vmImage: 'windows-latest'
-    demands:
-      - unity -equals false
 
   jobs:
     - job:

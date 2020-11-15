@@ -46,9 +46,9 @@ stages:
           parameters:
             target: ${{ item }}
 
-        - ${{ if eq(parameters.platform, 'windows') }}:
-          - template: steps/build-docs.yml
-          - template: steps/export-package-seed.yml
+      - ${{ if eq(parameters.platform, 'windows') }}:
+        - template: steps/build-docs.yml
+        - template: steps/export-package-seed.yml
 
       - task: PublishPipelineArtifact@1
         displayName: 'Publish Pipeline Artifacts'

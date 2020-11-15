@@ -38,8 +38,9 @@ steps:
       Write-Host ""
 
       $editorPath = "{0}{1}{2}{3}" -f $editorRootPath,$unityVersion,[IO.Path]::DirectorySeparatorChar,$editorFileEx
+      Write-Host "Validating Editor Installation at "$editorPath""
 
-      if ( -not (Test-Path -Path $editorPath) ) {
+      if ( -not (Test-Path -Path "$editorPath") ) {
         Write-Host "Installing $unityVersion ($unityVersionChangeSet) ..."
         $installArgs = @('--','--headless','install',"--version $unityVersion","--changeset $unityVersionChangeSet", '--cm');
 
@@ -58,7 +59,7 @@ steps:
       Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','editors','-i')
       Write-Host ""
 
-      if ( -not (Test-Path -Path $editorPath) ) {
+      if ( -not (Test-Path -Path "$editorPath") ) {
         Write-Error "Failed to validate installed editor path at "$editorPath""
         exit 1
       }

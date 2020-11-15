@@ -25,6 +25,6 @@ namespace XRTK.Interfaces.Providers.Controllers.Hands
         /// <summary>
         /// Gets the configured hand bounds mode to be used with hand physics.
         /// </summary>
-        HandBoundsMode BoundsMode { get; set; }
+        HandBoundsLOD BoundsMode { get; set; }
     }
 }

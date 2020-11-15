@@ -1,18 +1,16 @@
 stages:
 - stage:
-  displayName: ${{ format('{0} build agent', parameters.platform) }}
+  displayName: ${{ format('{0} build task', parameters.agent) }}
 
   jobs:
     - job:
-      displayName: ${{ format('{0}', parameters.image) }}
+      displayName: ${{ format('{0}', parameters.agent) }}
       timeoutInMinutes: 120
       variables:
       - group: Global Pipeline Settings
       pool:
-        name: 'Azure Pipelines'
-        vmImage: ${{ parameters.image }}
-        demands:
-          - unity -equals true
+        name: 'xrtk-self-hosted'
+        agent: ${{ parameters.agent }}
 
       steps:
       - checkout: self
@@ -44,9 +42,9 @@ stages:
         - template: steps/build-unity-player.yml
           parameters:
             target: ${{ item }}
-        - template: steps/build-docs.yml
 
         - ${{ if eq(parameters.platform, 'windows') }}:
+          - template: steps/build-docs.yml
           - template: steps/export-package-seed.yml
 
       - task: PublishPipelineArtifact@1

@@ -25,22 +25,22 @@ steps:
         $editorFileEx = "Unity"
       }
 
-      if ( Test-Path -Path "$hubPath" ) {
-        Write-Host "Unity Hub found at "$hubPath""
+      if ( Test-Path -Path $hubPath ) {
+        Write-Host "Unity Hub found at `"$hubPath`""
         Write-Host ""
       } else {
-        Write-Error "Failed to validate Unity Hub path at "$hubPath""
+        Write-Error "Failed to validate Unity Hub path at `"$hubPath`""
         exit 1
       }
 
       Write-Host "Unity HUB CLI Options:"
-      Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','help')
+      Start-Process -Verbose -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','help')
       Write-Host ""
 
       $editorPath = "{0}{1}{2}{3}" -f $editorRootPath,$unityVersion,[IO.Path]::DirectorySeparatorChar,$editorFileEx
-      Write-Host "Validating Editor Installation at "$editorPath""
+      Write-Host "Validating Editor Installation at `"$editorPath`""
 
-      if ( -not (Test-Path -Path "$editorPath") ) {
+      if ( -not (Test-Path -Path $editorPath) ) {
         Write-Host "Installing $unityVersion ($unityVersionChangeSet) ..."
         $installArgs = @('--','--headless','install',"--version $unityVersion","--changeset $unityVersionChangeSet", '--cm');
 
@@ -49,22 +49,22 @@ steps:
           $installArgs += $module
         }
 
-        Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList $installArgs
+        Start-Process -Verbose -PassThru -Wait -FilePath "$hubPath" -ArgumentList $installArgs
         Write-Host ""
         Write-Host "Install Complete!"
         Write-Host ""
       }
 
       Write-Host "Getting installed editors..."
-      Start-Process -Verbose -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','editors','-i')
+      Start-Process -Verbose -PassThru -Wait -FilePath "$hubPath" -ArgumentList @('--','--headless','editors','-i')
       Write-Host ""
 
-      if ( -not (Test-Path -Path "$editorPath") ) {
-        Write-Error "Failed to validate installed editor path at "$editorPath""
+      if ( -not (Test-Path -Path $editorPath) ) {
+        Write-Error "Failed to validate installed editor path at `"$editorPath`""
         exit 1
       }
 
-      Write-Host "Unity Editor path: $editorPath"
+      Write-Host "Unity Editor path: `"$editorPath`""
       echo "##vso[task.setvariable variable=EditorPath]$editorPath"
       exit 0
     failOnStderr: true

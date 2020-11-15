@@ -9,7 +9,7 @@ stages:
       workspace:
         clean: all
       strategy:
-        maxParallel: 2
+        parallel: 5
       variables:
       - group: Global Pipeline Settings
       pool:

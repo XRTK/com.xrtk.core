@@ -33,9 +33,10 @@ stages:
         displayName: 'Build Variables'
         condition: always()
 
-      - template: steps/install-unity.yml
+      - template: steps/validate-unity-installation.yml
         parameters:
           modules: ${{ parameters.modules }}
+      - template: steps/validate-project.yml
 
       - ${{ each item in parameters.targets }}:
         - template: steps/run-unity-tests.yml
@@ -56,5 +57,3 @@ stages:
           artifact: ${{ format('{0}.{1}.{2}', '$(Build.BuildNumber)', '$(Build.BuildId)', '$(System.JobAttempt)') }}
         condition: always()
         continueOnError: true
-
-      - template: steps/return-unity-license.yml

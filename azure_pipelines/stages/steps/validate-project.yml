@@ -1,8 +1,8 @@
 steps:
   - powershell: |
       Write-Host "Validating Project..."
-      $logPath = "$(LogDirectory)\validate-${{ parameters.target }}.log"
-      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -logfile `"$logPath`"" -PassThru
+      $logPath = "$(LogDirectory)\ValidateProject.log"
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList " -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -executeMethod XRTK. -logfile `"$logPath`"" -PassThru
 
       $ljob = Start-Job -ScriptBlock {
         param($log)

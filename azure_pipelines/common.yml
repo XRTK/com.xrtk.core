@@ -35,10 +35,10 @@ stages:
   - template: stages/unity-build.yml
     parameters:
       ${{ insert }}: ${{ parameters.os.windows }}
-  - template: stages/unity-build.yml
-    parameters:
-      ${{ insert }}: ${{ parameters.os.macOS }}
-  - template: stages/unity-build.yml
-    parameters:
-      ${{ insert }}: ${{ parameters.os.linux }}
+  # - template: stages/unity-build.yml
+  #   parameters:
+  #     ${{ insert }}: ${{ parameters.os.macOS }}
+  # - template: stages/unity-build.yml
+  #   parameters:
+  #     ${{ insert }}: ${{ parameters.os.linux }}
   - template: stages/publish.yml

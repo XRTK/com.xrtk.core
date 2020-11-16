@@ -1,6 +1,6 @@
 stages:
 - stage:
-  displayName: 'publish'
+  displayName: 'Publish'
   condition: and(succeeded(), or( eq(variables['isReleaseBuild'], 'True'), eq(variables['isPreviewBuild'], 'True') ) )
   pool:
     name: 'Azure Pipelines'

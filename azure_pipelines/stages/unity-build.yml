@@ -1,6 +1,6 @@
 stages:
 - stage:
-  displayName: ${{ format('{0} build task', parameters.agent) }}
+  displayName: 'Build'
 
   jobs:
     - job:
@@ -30,6 +30,10 @@ stages:
           Write-Host "Package Version: $(package.version)"
           Write-Host "isReleaseBuild? $(isReleaseBuild)"
           Write-Host "isPreviewBuild? $(isPreviewBuild)"
+          $logDirectory = '$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Logs'
+          New-Item -ItemType Directory -Force -Path $logDirectory
+          echo "##vso[task.setvariable variable=LogDirectory]$logDirectory"
+          Write-Host "Log Directory: `"$logDirectory`""
         displayName: 'Build Variables'
         condition: always()
 

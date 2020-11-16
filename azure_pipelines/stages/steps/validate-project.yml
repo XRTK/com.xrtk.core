@@ -1,8 +1,8 @@
 steps:
   - powershell: |
       Write-Host "Validating Project..."
-      $logPath = "$(LogDirectory)\validate.log"
-      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -logfile `"$logPath`"" -PassThru
+      $logPath = "$(LogDirectory)\validate-${{ parameters.target }}.log"
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -logfile `"$logPath`"" -PassThru
 
       $ljob = Start-Job -ScriptBlock {
         param($log)
@@ -29,4 +29,4 @@ steps:
 
       exit $process.ExitCode
     failOnStderr: false
-    displayName: 'Validating Unity Project...'
+    displayName: 'Validate Unity Project'

@@ -36,9 +36,11 @@ stages:
       - template: steps/validate-unity-installation.yml
         parameters:
           modules: ${{ parameters.modules }}
-      - template: steps/validate-project.yml
 
       - ${{ each item in parameters.targets }}:
+        - template: steps/validate-project.yml
+          parameters:
+            target: ${{ item }}
         - template: steps/run-unity-tests.yml
           parameters:
             target: ${{ item }}

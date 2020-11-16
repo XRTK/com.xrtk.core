@@ -41,20 +41,14 @@ steps:
 
       if ( -not (Test-Path -Path $editorPath) ) {
         Write-Host "Installing $unityVersion ($unityVersionChangeSet)..."
-        $installArgs = @('--','--headless','install',"--version $unityVersion","--changeset $unityVersionChangeSet");
+        $installArgs = @('--','--headless','install',"--version $unityVersion","--changeset $unityVersionChangeSet",'--cm');
 
         foreach ( $module in ${{ parameters.modules }} ) {
           $installArgs += '-m'
           $installArgs += $module
         }
 
-        $installArgs += '--cm'
-
-        Write-Host "`"$hubPath`" $installArgs"
-
         $p = Start-Process -NoNewWindow -PassThru -Wait -FilePath "$hubPath" -ArgumentList $installArgs
-        Write-Host ""
-        Write-Host "Install Complete!"
         Write-Host ""
       }
 

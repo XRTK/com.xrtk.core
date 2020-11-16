@@ -6,7 +6,7 @@ steps:
       $logPrefix = "$(LogDirectory)\Tests-${{ parameters.target }}-$date"
       $logPath = "$logPrefix.log"
       $testPath = "$logprefix.xml"
-      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -logfile `"$logPath`" -editorTestsResultFile `"$testPath`" -runEditorTests" -PassThru
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -force-free -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -logfile `"$logPath`" -editorTestsResultFile `"$testPath`" -runEditorTests" -PassThru
 
       $ljob = Start-Job -ScriptBlock {
         param($log)

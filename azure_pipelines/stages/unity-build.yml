@@ -6,8 +6,6 @@ stages:
     - job:
       displayName: ${{ format('{0}', parameters.image) }}
       timeoutInMinutes: 120
-      workspace:
-        clean: all
       variables:
       - group: Global Pipeline Settings
       pool:
@@ -53,7 +51,7 @@ stages:
           parameters:
             target: ${{ item }}
 
-      - ${{ if eq(parameters.platform, 'windows') }}:
+      - ${{ if eq(parameters.image, 'windows-latest') }}:
         - template: steps/build-docs.yml
         - template: steps/export-package-seed.yml
 

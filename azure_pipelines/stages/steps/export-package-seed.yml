@@ -2,7 +2,7 @@ steps:
   - powershell: |
       New-Item -ItemType Directory -Force -Path "$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Packages"
       $logPath = "$(LogDirectory)\export.log"
-      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -logFile $logPath -exportPackage `"Assets\XRTK.Seed`" `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Packages\$(project.name).unitypackage`"" -PassThru
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -force-free -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -logFile $logPath -exportPackage `"Assets\XRTK.Seed`" `"$(System.DefaultWorkingDirectory)\$(project.name)\Builds\Packages\$(project.name).unitypackage`"" -PassThru
 
       $ljob = Start-Job -ScriptBlock {
         param($log)

@@ -19,7 +19,7 @@ parameters:
         image: macOS-latest
         #agent: xrtk-macos-agent
         # Unity Hub Modules for MacOS Editor: android, ios, appletv, linux, mac-il2cpp, vuforia-ar, webgl, windows-mono, facebook-games, lumin, android-sdk-ndk-tools
-        modules: '"mac-il2cpp", "ios", "android"'
+        modules: '"mac-il2cpp", "ios"'
         targets:
         - StandaloneOSX
         - iOS
@@ -34,6 +34,11 @@ parameters:
 stages:
   - template: stages/unity-build.yml
     parameters:
-      platform: windows
       ${{ insert }}: ${{ parameters.os.windows }}
+  - template: stages/unity-build.yml
+    parameters:
+      ${{ insert }}: ${{ parameters.os.macOS }}
+  - template: stages/unity-build.yml
+    parameters:
+      ${{ insert }}: ${{ parameters.os.linux }}
   - template: stages/publish.yml

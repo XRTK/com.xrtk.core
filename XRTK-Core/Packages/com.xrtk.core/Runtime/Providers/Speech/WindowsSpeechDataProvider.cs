@@ -87,7 +87,7 @@ namespace XRTK.Providers.Speech
         {
             base.Enable();
 
-            if (!Application.isPlaying || Commands.Length == 0) { return; }
+            if (!Application.isPlaying || Commands.Length == 0 || keywordRecognizer == null) { return; }
 
             InputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource("Windows Speech Input Source");
 
@@ -104,7 +104,7 @@ namespace XRTK.Providers.Speech
         {
             base.Update();
 
-            if (!keywordRecognizer.IsRunning) { return; }
+            if (keywordRecognizer == null || !keywordRecognizer.IsRunning) { return; }
 
             for (int i = 0; i < Commands.Length; i++)
             {
@@ -120,7 +120,7 @@ namespace XRTK.Providers.Speech
         {
             base.Disable();
 
-            if (!Application.isPlaying || Commands.Length == 0) { return; }
+            if (!Application.isPlaying || Commands.Length == 0 || keywordRecognizer == null) { return; }
 
             StopRecognition();
 
@@ -131,7 +131,8 @@ namespace XRTK.Providers.Speech
         {
             if (finalizing)
             {
-                keywordRecognizer.Dispose();
+                keywordRecognizer?.Dispose();
+                keywordRecognizer = null;
             }
 
             base.OnDispose(finalizing);
@@ -154,7 +155,7 @@ namespace XRTK.Providers.Speech
         private static KeywordRecognizer keywordRecognizer;
 
         /// <inheritdoc />
-        public override bool IsRecognitionActive => keywordRecognizer.IsRunning;
+        public override bool IsRecognitionActive => keywordRecognizer != null && keywordRecognizer.IsRunning;
 
         /// <summary>
         /// The <see cref="RecognitionConfidenceLevel"/> that the <see cref="KeywordRecognizer"/> is using.
@@ -164,7 +165,7 @@ namespace XRTK.Providers.Speech
         /// <inheritdoc />
         public override void StartRecognition()
         {
-            if (!keywordRecognizer.IsRunning)
+            if (keywordRecognizer != null && !keywordRecognizer.IsRunning)
             {
                 keywordRecognizer.Start();
             }
@@ -173,7 +174,7 @@ namespace XRTK.Providers.Speech
         /// <inheritdoc />
         public override void StopRecognition()
         {
-            if (keywordRecognizer.IsRunning)
+            if (keywordRecognizer != null && keywordRecognizer.IsRunning)
             {
                 keywordRecognizer.Stop();
             }

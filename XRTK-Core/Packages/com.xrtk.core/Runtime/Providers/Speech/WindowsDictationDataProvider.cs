@@ -54,7 +54,7 @@ namespace XRTK.Providers.Speech
         /// <inheritdoc />
         public override void Enable()
         {
-            if (!Application.isPlaying) { return; }
+            if (!Application.isPlaying || dictationRecognizer == null) { return; }
 
             inputSource = MixedRealityToolkit.InputSystem.RequestNewGenericInputSource(Name);
             dictationResult = string.Empty;
@@ -70,7 +70,7 @@ namespace XRTK.Providers.Speech
         {
             base.Update();
 
-            if (!Application.isPlaying) { return; }
+            if (!Application.isPlaying || dictationRecognizer == null) { return; }
 
             if (!isTransitioning && IsListening && !Microphone.IsRecording(deviceName) && dictationRecognizer.Status == SpeechSystemStatus.Running)
             {
@@ -90,7 +90,7 @@ namespace XRTK.Providers.Speech
         {
             base.Disable();
 
-            if (!Application.isPlaying) { return; }
+            if (!Application.isPlaying || dictationRecognizer == null) { return; }
 
             if (!isTransitioning && IsListening) { await StopRecordingAsync(); }
 
@@ -104,7 +104,8 @@ namespace XRTK.Providers.Speech
         {
             if (finalizing)
             {
-                dictationRecognizer.Dispose();
+                dictationRecognizer?.Dispose();
+                dictationRecognizer = null;
             }
 
             base.OnDispose(finalizing);
@@ -163,7 +164,11 @@ namespace XRTK.Providers.Speech
         /// <inheritdoc />
         public override async Task StartRecordingAsync(GameObject listener = null, float initialSilenceTimeout = 5f, float autoSilenceTimeout = 20f, int recordingTime = 10, string micDeviceName = "")
         {
-            if (IsListening || isTransitioning || MixedRealityToolkit.InputSystem == null || !Application.isPlaying)
+            if (IsListening ||
+                isTransitioning ||
+                !Application.isPlaying ||
+                dictationRecognizer == null ||
+                MixedRealityToolkit.InputSystem == null)
             {
                 Debug.LogWarning("Unable to start recording");
                 return;
@@ -219,7 +224,10 @@ namespace XRTK.Providers.Speech
         /// <inheritdoc />
         public override async Task<AudioClip> StopRecordingAsync()
         {
-            if (!IsListening || isTransitioning || !Application.isPlaying)
+            if (!IsListening ||
+                isTransitioning ||
+                !Application.isPlaying ||
+                dictationRecognizer == null)
             {
                 Debug.LogWarning("Unable to stop recording");
                 return null;

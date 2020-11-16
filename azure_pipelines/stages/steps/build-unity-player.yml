@@ -4,7 +4,7 @@ steps:
 
       $date = Get-Date -Format "yyyyMMddTHHmmss"
       $logPath = "$(LogDirectory)\Build-${{ parameters.target }}-$date.log"
-      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -force-free -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$logPath`"" -PassThru
+      $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$logPath`"" -PassThru
 
       $ljob = Start-Job -ScriptBlock {
         param($log)

@@ -67,7 +67,7 @@ namespace XRTK.Providers.Speech
                 {
                     switch (e.Message)
                     {
-                        case "Speech recognition is not supported on this machine":
+                        case string message when message.Contains("Speech recognition is not supported on this machine."):
                             Debug.LogWarning($"Skipping {nameof(WindowsSpeechDataProvider)} registration.\n{e.Message}");
                             break;
                         default:

@@ -55,6 +55,8 @@ stages:
         - template: steps/build-docs.yml
         - template: steps/export-package-seed.yml
 
+      - template: steps/return-unity-license.yml
+
       - task: PublishPipelineArtifact@1
         displayName: 'Publish Pipeline Artifacts'
         inputs:

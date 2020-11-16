@@ -28,7 +28,21 @@ namespace XRTK.Providers.Speech
 #if UNITY_STANDALONE_WIN || UNITY_WSA || UNITY_EDITOR_WIN
             if (dictationRecognizer == null)
             {
-                dictationRecognizer = new DictationRecognizer();
+                try
+                {
+                    dictationRecognizer = new DictationRecognizer();
+                }
+                catch (UnityException e)
+                {
+                    switch (e.Message)
+                    {
+                        case "Speech recognition is not supported on this machine":
+                            Debug.LogWarning($"Skipping {nameof(WindowsDictationDataProvider)} registration.\n{e.Message}");
+                            break;
+                        default:
+                            throw;
+                    }
+                }
             }
 #endif // UNITY_STANDALONE_WIN || UNITY_WSA || UNITY_EDITOR_WIN
         }

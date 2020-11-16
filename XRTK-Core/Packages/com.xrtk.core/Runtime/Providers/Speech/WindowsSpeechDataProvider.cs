@@ -59,7 +59,21 @@ namespace XRTK.Providers.Speech
 
             if (keywordRecognizer == null)
             {
-                keywordRecognizer = new KeywordRecognizer(newKeywords, (ConfidenceLevel)RecognitionConfidenceLevel);
+                try
+                {
+                    keywordRecognizer = new KeywordRecognizer(newKeywords, (ConfidenceLevel)RecognitionConfidenceLevel);
+                }
+                catch (UnityException e)
+                {
+                    switch (e.Message)
+                    {
+                        case "Speech recognition is not supported on this machine":
+                            Debug.LogWarning($"Skipping {nameof(WindowsSpeechDataProvider)} registration.\n{e.Message}");
+                            break;
+                        default:
+                            throw;
+                    }
+                }
             }
 #endif // UNITY_STANDALONE_WIN || UNITY_WSA || UNITY_EDITOR_WIN
         }

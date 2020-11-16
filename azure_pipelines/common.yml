@@ -4,9 +4,10 @@ parameters:
     default:
       # TODO: Only use XRTK defined platforms for build and install the correct modules and switch to the correct targets as needed
       windows:
-        agent: xrtk-windows-agent
+        image: windows-latest
+        #agent: xrtk-windows-agent
         # Unity Hub Modules for Windows Editor: android, ios, appletv, linux, mac-mono, universal-windows-platform, vuforia-ar, webgl, windows-il2cpp, facebook-games, lumin, android-sdk-ndk-tools
-        modules: '"windows-il2cpp", "universal-windows-platform", "lumin", "webgl", "android"'
+        modules: '"windows-il2cpp", "universal-windows-platform", "android"'
         targets:
           # Unity -buildTarget command line args https://docs.unity3d.com/Manual/CommandLineArguments.html
           # 'StandaloneOSX', 'StandaloneWindows', 'iOS', 'Android', 'StandaloneLinux', 'StandaloneWindows64', 'WebGL',
@@ -15,15 +16,16 @@ parameters:
         - WSAPlayer
         - Android
       macOS:
-        agent: xrtk-macos-agent
+        image: macOS-latest
+        #agent: xrtk-macos-agent
         # Unity Hub Modules for MacOS Editor: android, ios, appletv, linux, mac-il2cpp, vuforia-ar, webgl, windows-mono, facebook-games, lumin, android-sdk-ndk-tools
         modules: '"mac-il2cpp", "ios", "android"'
         targets:
         - StandaloneOSX
         - iOS
-        - Android
       linux:
-        agent: xrtk-linux-agent
+        image: ubuntu-latest
+        #agent: xrtk-linux-agent
         # Unity Hub Modules for MacOS Editor: linux
         modules: '"linux"'
         targets:

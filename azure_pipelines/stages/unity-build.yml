@@ -4,15 +4,17 @@ stages:
 
   jobs:
     - job:
-      displayName: ${{ format('{0}', parameters.agent) }}
+      displayName: ${{ format('{0}', parameters.image) }}
       timeoutInMinutes: 120
       workspace:
         clean: all
       variables:
       - group: Global Pipeline Settings
       pool:
-        name: 'xrtk-self-hosted'
-        agent: ${{ parameters.agent }}
+        name: 'Azure Pipelines'
+        vmImage: ${{ parameters.image }}
+        demands:
+          - unity -equals true
 
       steps:
       - checkout: self

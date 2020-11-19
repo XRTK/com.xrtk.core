@@ -41,7 +41,7 @@ stages:
         parameters:
           modules: ${{ parameters.modules }}
 
-      #- template: steps/validate-project.yml
+      - template: steps/validate-project.yml
 
       - ${{ each item in parameters.targets }}:
         - template: steps/run-unity-tests.yml

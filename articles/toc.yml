@@ -19,6 +19,6 @@
 - name: Appendices
   items:
     - name: Coding Guidelines
-      href: A01-CodingGuidelines.md
+      href: appendices/A01-CodingGuidelines.md
     - name: XRTK vs MRTK
-      href: A02-ChoosingXRTKvsMRTK.md
+      href: appendices/A02-ChoosingXRTKvsMRTK.md

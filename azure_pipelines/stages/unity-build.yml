@@ -11,7 +11,7 @@ stages:
       variables:
       - group: Global Pipeline Settings
       pool:
-        name: 'xrtk-self-hosted'
+        name: ${{ parameters.pool }}
 
       steps:
       - checkout: self

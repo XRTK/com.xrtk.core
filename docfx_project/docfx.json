@@ -47,8 +47,7 @@
         "src":"../",
         "files": [
           "articles/**.yml",
-          "articles/**.md",
-          "**/Testplans/**.md"
+          "articles/**.md"
         ]
       },
       {

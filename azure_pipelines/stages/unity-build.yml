@@ -1,10 +1,10 @@
 stages:
 - stage:
-  displayName: 'Build'
+  displayName: ${{ format('{0} build agent', parameters.platform) }}
 
   jobs:
     - job:
-      displayName: ${{ format('{0}', parameters.agent) }}
+      displayName: 'Build'
       timeoutInMinutes: 120
       workspace:
         clean: all
@@ -12,7 +12,6 @@ stages:
       - group: Global Pipeline Settings
       pool:
         name: 'xrtk-self-hosted'
-        agent: ${{ parameters.agent }}
 
       steps:
       - checkout: self

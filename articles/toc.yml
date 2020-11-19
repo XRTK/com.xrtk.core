@@ -14,3 +14,5 @@
       href: A01-CodingGuidelines.md
     - name: XRTK vs MRTK
       href: A02-ChoosingXRTKvsMRTK.md
+    - name: Test Plans
+      href: A03-TestPlans.md

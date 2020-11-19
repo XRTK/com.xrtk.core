@@ -14,14 +14,15 @@ parameters:
         - StandaloneWindows64
         - WSAPlayer
         - Android
+        - Lumin
+        - WebGL
       macOS:
         pool: self-hosted-mac
         # Unity Hub Modules for MacOS Editor: android, ios, appletv, linux, mac-il2cpp, vuforia-ar, webgl, windows-mono, facebook-games, lumin, android-sdk-ndk-tools
-        modules: '"mac-il2cpp", "ios", "android"'
+        modules: '"mac-il2cpp", "ios"'
         targets:
         - StandaloneOSX
         - iOS
-        - Android
       linux:
         pool: self-hosted-linux
         # Unity Hub Modules for MacOS Editor: linux

@@ -1,7 +1,7 @@
-# XRTK Testplan: Import XRTK.SDK into a project and configure
+# XRTK Testplan: Import XRTK.Oculus into a project without XRTK.SDK
 
-This testplan tests the XRTK import path via UPM where the user installs the `XRTK.SDK`
-package first.
+This testplan tests the XRTK import path via UPM where the user installs the `XRTK.Oculus`
+package without having the `XRTK.SDK` package installed.
 
 ## Test Preparations
 
@@ -40,12 +40,12 @@ package first.
   - XRTK.SDK
   - ...
 
-### 2. Import XRTK.SDK
+### 2. Import XRTK.Oculus
 
 #### Instructions
 
 - Open the `Package Manager` window in the editor
-- Select the `XRTK.SDK` package
+- Select the `XRTK.Oculus` package
 - Select `Install` to import the package into the project
 - Wait for the import process to complete
 
@@ -54,28 +54,3 @@ package first.
 - The project compiles without errors
 - The project compiles without XRTK specific warnings
 - A menu item `Mixed Reality Toolkit` is now available at the top menu bar
-
-### 3. Install XRTK.SDK Package Assets
-
-#### Instructions
-
-- Select `Mixed Reality Toolkit/Packages/Install XRTK.SDK Package Assets....` in the menu bar
-- Wait for the import process to complete
-
-#### Expected Result
-
-- A folder `XRTK.Generated/SDK` was created in the project's `Assets` folder
-- The project compiles without errors
-- The project compiles without XRTK specific warnings
-
-### 4. Configure XRTK in scene
-
-#### Instructions
-
-- Select `Mixed Reality Toolkit/Configure...` in the menu bar
-
-#### Expected Result
-
-- A GameObject `MixedRealityToolkit` was added to the scene
-- A GameObject `MixedRealityPlayspace` was added to the scene
-- Selecting the `MixedRealityToolkit` game object shows the toolkit is using the `MixedRealityToolkitRootProfile`

@@ -5,7 +5,7 @@ steps:
       $date = Get-Date -Format "yyyyMMddTHHmmss"
       $logPrefix = "$(LogDirectory)\${{ parameters.target }}-Tests-$date"
       $logPath = "$logPrefix.log"
-      $testPath = "$logprefix.xml"
+      $testPath = "$logPrefix.xml"
       $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -logfile `"$logPath`" -editorTestsResultFile `"$testPath`" -runEditorTests" -PassThru
 
       $ljob = Start-Job -ScriptBlock {

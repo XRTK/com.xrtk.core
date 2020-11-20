@@ -799,7 +799,7 @@ PlayerSettings:
     m_PortalFolderPath: 
   luminCert:
     m_CertPath: 
-    m_SignPackage: 1
+    m_SignPackage: 0
   luminIsChannelApp: 0
   luminVersion:
     m_VersionCode: 1

@@ -3,7 +3,7 @@ steps:
       Write-Host "Starting ${{ parameters.target }} Unit Tests..."
 
       $date = Get-Date -Format "yyyyMMddTHHmmss"
-      $logPrefix = "$(LogDirectory)\Tests-${{ parameters.target }}-$date"
+      $logPrefix = "$(LogDirectory)\${{ parameters.target }}-Tests-$date"
       $logPath = "$logPrefix.log"
       $testPath = "$logprefix.xml"
       $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -logfile `"$logPath`" -editorTestsResultFile `"$testPath`" -runEditorTests" -PassThru

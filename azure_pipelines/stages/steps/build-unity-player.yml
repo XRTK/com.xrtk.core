@@ -3,7 +3,7 @@ steps:
       Write-Host "Starting ${{ parameters.target }} Build..."
 
       $date = Get-Date -Format "yyyyMMddTHHmmss"
-      $logPath = "$(LogDirectory)\Build-${{ parameters.target }}-$date.log"
+      $logPath = "$(LogDirectory)\${{ parameters.target }}-Build-$date.log"
       $process = Start-Process -FilePath "$(EditorPath)" -ArgumentList "-quit -batchmode -projectPath `"$(System.DefaultWorkingDirectory)\$(project.name)`" -buildTarget ${{ parameters.target }} -executeMethod XRTK.Utilities.Build.UnityPlayerBuildTools.StartCommandLineBuild -logfile `"$logPath`"" -PassThru
 
       $ljob = Start-Job -ScriptBlock {

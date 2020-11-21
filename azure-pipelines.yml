@@ -14,15 +14,6 @@ variables:
   package.version: ''
   EditorPath: ''
   LogDirectory: ''
-  # Unity -buildTarget command line args https://docs.unity3d.com/Manual/CommandLineArguments.html
-  # 'StandaloneWindows', 'StandaloneWindows64', 'WSAPlayer', 'XBoxOne'
-  # 'StandaloneOSX', 'iOS', 'tvOS'
-  # 'StandaloneLinux64'
-  # 'PSP2', 'PS4'
-  # 'N3DS', 'WiiU', 'Switch'
-  # 'Android', 'WebGL', 'Lumin'
-  # TODO: Only use XRTK defined platform targets for build
-  unity.build.targets: '"StandaloneWindows64", "WSAPlayer", "Android", "Lumin", "WebGL"'
   ${{ if eq( variables['build.reason'], 'PullRequest' ) }}:
     date: ''
   ${{ if ne( variables['build.reason'], 'PullRequest' ) }}:
@@ -70,3 +61,18 @@ trigger:
 
 extends:
   template: common.yml@pipeline_repo
+  parameters:
+    # Unity -buildTarget command line args https://docs.unity3d.com/Manual/CommandLineArguments.html
+    # 'StandaloneWindows', 'StandaloneWindows64', 'WSAPlayer', 'XBoxOne'
+    # 'StandaloneOSX', 'iOS', 'tvOS'
+    # 'StandaloneLinux64'
+    # 'PSP2', 'PS4'
+    # 'N3DS', 'WiiU', 'Switch'
+    # 'Android', 'WebGL', 'Lumin'
+    # TODO: Only use XRTK defined platform targets for build
+    targets:
+      - StandaloneWindows64
+      - WSAPlayer
+      - Android
+      - Lumin
+      - WebGL

@@ -63,14 +63,12 @@ extends:
   template: common.yml@pipeline_repo
   parameters:
     # Unity -buildTarget command line args https://docs.unity3d.com/Manual/CommandLineArguments.html
-    # Standalone, Win, Win64, OSXUniversal, Linux64, iOS, Android, WebGL, XboxOne, PS4, WindowsStoreApps, Switch, tvOS, Lumin
+    # StandaloneWindows64, WSAPlayer, StandaloneOSX, iOS, StandaloneLinux64, Android, WebGL, Lumin
     # TODO: Only use XRTK defined platform targets for build
     targets:
-      - Win64
-      - WindowsStoreApps
-      - OSXUniversal
-      - iOS
-      - Linux64
+      - StandaloneWindows64
+      - WSAPlayer
+      - StandaloneOSX
+      - StandaloneLinux64
       - Android
-      - Lumin
       - WebGL

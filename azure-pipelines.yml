@@ -63,7 +63,7 @@ extends:
   template: common.yml@pipeline_repo
   parameters:
     # Unity -buildTarget command line args https://docs.unity3d.com/Manual/CommandLineArguments.html
-    # 'StandaloneWindows', 'StandaloneWindows64', 'WSAPlayer', 'XBoxOne'
+    # 'StandaloneWindows64', 'WSAPlayer', 'XBoxOne'
     # 'StandaloneOSX', 'iOS', 'tvOS'
     # 'StandaloneLinux64'
     # 'PSP2', 'PS4'

@@ -22,7 +22,7 @@ variables:
   # 'N3DS', 'WiiU', 'Switch'
   # 'Android', 'WebGL', 'Lumin'
   # TODO: Only use XRTK defined platform targets for build
-  build-targets: '"StandaloneWindows64", "WSAPlayer", "Android", "Lumin", "WebGL"'
+  unity.build.targets: '"StandaloneWindows64", "WSAPlayer", "Android", "Lumin", "WebGL"'
   ${{ if eq( variables['build.reason'], 'PullRequest' ) }}:
     date: ''
   ${{ if ne( variables['build.reason'], 'PullRequest' ) }}:

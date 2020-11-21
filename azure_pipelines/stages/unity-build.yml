@@ -6,8 +6,6 @@ stages:
     - job:
       displayName: 'Build'
       timeoutInMinutes: 120
-      workspace:
-        clean: all
       variables:
       - group: Global Pipeline Settings
       pool:

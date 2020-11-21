@@ -5,6 +5,7 @@ resources:
     - repository: pipeline_repo
       type: github
       name: XRTK/AzurePipelines
+      endpoint: XRTK
 
 variables:
   project.name: 'XRTK-Core'

@@ -69,6 +69,8 @@ extends:
       - StandaloneWindows64
       - WSAPlayer
       - StandaloneOSX
+      - iOS
       - StandaloneLinux64
       - Android
+      - Lumin
       - WebGL

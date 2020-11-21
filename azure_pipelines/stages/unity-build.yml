@@ -10,6 +10,9 @@ stages:
       - group: Global Pipeline Settings
       pool:
         name: ${{ parameters.pool }}
+      ${{ if or( eq(variables['isReleaseBuild'], 'True'), eq(variables['isPreviewBuild'], 'True') ) }}:
+        workspace:
+          clean: all
 
       steps:
       - checkout: self

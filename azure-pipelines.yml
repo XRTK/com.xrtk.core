@@ -1,3 +1,12 @@
+# XRTK Azure Pipelines build configuration
+
+resources:
+  repositories:
+    - repository: pipeline_repo
+      type: github
+      name: XRTK/AzurePipelines
+      endpoint: XRTK
+
 variables:
   project.name: 'XRTK-Core'
   project.upmSha: ''
@@ -51,5 +60,17 @@ trigger:
       - XRTK-Core/Packages/com.xrtk.core/.github/*
 
 extends:
-  template: azure_pipelines/common.yml
-
+  template: common.yml@pipeline_repo
+  parameters:
+    # Unity -buildTarget command line args https://docs.unity3d.com/Manual/CommandLineArguments.html
+    # StandaloneWindows64, WSAPlayer, StandaloneOSX, iOS, StandaloneLinux64, Android, WebGL, Lumin
+    # TODO: Only use XRTK defined platform targets for build
+    targets:
+      - StandaloneWindows64
+      - WSAPlayer
+      - StandaloneOSX
+      - iOS
+      - StandaloneLinux64
+      - Android
+      - Lumin
+      - WebGL

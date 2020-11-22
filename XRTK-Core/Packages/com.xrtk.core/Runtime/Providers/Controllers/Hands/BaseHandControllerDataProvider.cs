@@ -58,7 +58,7 @@ namespace XRTK.Providers.Controllers.Hands
         public bool UseTriggers { get; set; }
 
         /// <inheritdoc />
-        public HandBoundsMode BoundsMode { get; set; }
+        public HandBoundsLOD BoundsMode { get; set; }
 
         /// <summary>
         /// Configured <see cref="HandControllerPoseProfile"/>s for pose recognition.

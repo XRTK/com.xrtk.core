@@ -42,12 +42,12 @@ namespace XRTK.Definitions.Controllers.Hands
 
         [SerializeField]
         [Tooltip("Set the bounds mode to use for calculating hand bounds.")]
-        private HandBoundsMode boundsMode = HandBoundsMode.Hand;
+        private HandBoundsLOD boundsMode = HandBoundsLOD.Low;
 
         /// <summary>
         /// Set the bounds mode to use for calculating hand bounds.
         /// </summary>
-        public HandBoundsMode BoundsMode => boundsMode;
+        public HandBoundsLOD BoundsMode => boundsMode;
 
         [SerializeField]
         [Tooltip("Tracked hand poses for pose detection.")]

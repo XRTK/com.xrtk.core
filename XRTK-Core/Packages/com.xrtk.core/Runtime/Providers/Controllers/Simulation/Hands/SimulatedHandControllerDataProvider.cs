@@ -93,13 +93,12 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public bool UseTriggers { get; set; }
 
         /// <inheritdoc />
-        public HandBoundsMode BoundsMode { get; set; }
+        public HandBoundsLOD BoundsMode { get; set; }
 
         /// <inheritdoc />
         public HandRenderingMode RenderingMode { get; set; }
 
-        /// <inheritdoc />
-        public IReadOnlyList<HandControllerPoseProfile> TrackedPoses { get; }
+        private IReadOnlyList<HandControllerPoseProfile> TrackedPoses { get; }
 
         /// <inheritdoc />
         protected override void UpdateSimulatedController(IMixedRealitySimulatedController simulatedController)

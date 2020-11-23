@@ -184,7 +184,7 @@ namespace XRTK.Editor
                     string.IsNullOrEmpty(symbolicLinkSettingsPath))
                 {
                     symbolicLinkSettingsPath = AssetDatabase
-                        .FindAssets($"t:{typeof(SymbolicLinkSettings).Name}")
+                        .FindAssets($"t:{nameof(SymbolicLinkSettings)}")
                         .Select(AssetDatabase.GUIDToAssetPath)
                         .OrderBy(x => x)
                         .FirstOrDefault();

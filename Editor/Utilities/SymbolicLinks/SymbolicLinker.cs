@@ -15,7 +15,7 @@ using Debug = UnityEngine.Debug;
 namespace XRTK.Editor.Utilities.SymbolicLinks
 {
     [InitializeOnLoad]
-    internal static class SymbolicLinker
+    public static class SymbolicLinker
     {
         /// <summary>
         /// Constructor.
@@ -48,7 +48,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
         /// <summary>
         /// Debug the symbolic linker utility.
         /// </summary>
-        public static bool DebugEnabled
+        private static bool DebugEnabled
         {
             get => MixedRealityPreferences.DebugSymbolicInfo;
             set => MixedRealityPreferences.DebugSymbolicInfo = value;
@@ -128,16 +128,10 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
             {
                 if (string.IsNullOrEmpty(link.SourceRelativePath)) { continue; }
 
-                bool isValid = false;
                 var targetAbsolutePath = $"{ProjectRoot}{link.TargetRelativePath}";
                 var sourceAbsolutePath = $"{ProjectRoot}{link.SourceRelativePath}";
 
-                if (link.IsActive)
-                {
-                    isValid = VerifySymbolicLink(targetAbsolutePath);
-                }
-
-                if (isValid)
+                if (VerifySymbolicLink(targetAbsolutePath))
                 {
                     // If we already have the directory in our project, then skip.
                     if (link.IsActive) { continue; }
@@ -202,7 +196,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
         /// </summary>
         /// <param name="sourceAbsolutePath"></param>
         /// <param name="targetAbsolutePath"></param>
-        public static bool AddLink(string sourceAbsolutePath, string targetAbsolutePath)
+        internal static bool AddLink(string sourceAbsolutePath, string targetAbsolutePath)
         {
             if (string.IsNullOrEmpty(sourceAbsolutePath) || string.IsNullOrEmpty(targetAbsolutePath))
             {
@@ -256,7 +250,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
         /// Disables a symbolic link in the settings.
         /// </summary>
         /// <param name="targetRelativePath"></param>
-        public static bool DisableLink(string targetRelativePath)
+        internal static bool DisableLink(string targetRelativePath)
         {
             var symbolicLink = Settings.SymbolicLinks.Find(link => link.TargetRelativePath == targetRelativePath);
 
@@ -282,7 +276,7 @@ namespace XRTK.Editor.Utilities.SymbolicLinks
         /// </summary>
         /// <param name="sourceRelativePath"></param>
         /// <param name="targetRelativePath"></param>
-        public static bool RemoveLink(string sourceRelativePath, string targetRelativePath)
+        internal static bool RemoveLink(string sourceRelativePath, string targetRelativePath)
         {
             if (!DisableLink(targetRelativePath))
             {

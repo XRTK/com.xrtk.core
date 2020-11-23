@@ -12,6 +12,8 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
     [CustomEditor(typeof(BaseHandControllerDataProviderProfile), true, isFallback = true)]
     public class BaseMixedRealityHandControllerDataProviderProfileInspector : BaseMixedRealityControllerDataProviderProfileInspector
     {
+        private static readonly GUIContent handTrackingSettingsFoldoutHeader = new GUIContent("Hand Tracking Settings");
+
         private SerializedProperty renderingMode;
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
@@ -19,7 +21,6 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
         private SerializedProperty trackedPoses;
 
         private bool showHandTrackingSettings = true;
-        private static readonly GUIContent handTrackingSettingsFoldoutHeader = new GUIContent("Hand Tracking Settings");
 
         private ReorderableList poseProfilesList;
         private int currentlySelectedPoseElement;
@@ -50,7 +51,10 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
 
             serializedObject.Update();
 
-            showHandTrackingSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showHandTrackingSettings, handTrackingSettingsFoldoutHeader, true);
+            EditorGUILayout.Space();
+
+            showHandTrackingSettings = EditorGUILayoutExtensions.FoldoutWithBoldLabel(showHandTrackingSettings, handTrackingSettingsFoldoutHeader);
+
             if (showHandTrackingSettings)
             {
                 EditorGUI.indentLevel++;

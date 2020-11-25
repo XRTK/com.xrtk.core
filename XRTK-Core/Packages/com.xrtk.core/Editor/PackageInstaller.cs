@@ -153,7 +153,7 @@ namespace XRTK.Editor
                 // Only if a root profile is available at all it makes sense to display the
                 // platform configuration import dialog. If the user does not have a root profile yet,
                 // for whatever reason, there is nothing we can do here.
-                if (rootProfile.IsNull())
+                if (!rootProfile.IsNull())
                 {
                     if (EditorUtility.DisplayDialog("We found a new Platform Configuration",
                         $"We found the {platformConfigurationProfile.name.ToProperCase()}. Would you like to add this platform configuration to your {rootProfile.name}?",

@@ -15,6 +15,8 @@ namespace XRTK.Editor.Utilities
         private static readonly string[] IgnoredLogs =
         {
             "Using symlinks in Unity projects may cause your project to become corrupted",
+            "Assembly 'Newtonsoft.Json' has non matching file name:",
+            "Skipping WindowsSpeechDataProvider registration"
         };
 
         static DevOpsLoggingUtility()

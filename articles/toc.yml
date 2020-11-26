@@ -6,9 +6,19 @@
       href: 01-DownloadingTheXRTK.md
     - name: Configuring your project
       href: 02-Configuration.md
+    - name: Platform Template Generator
+      href: 03-Template-Generator.md
+- name: Test Plans
+- items:
+    - name: Overview
+    - href: testplans/TP_Overview.md
+    - name: TP-00 Import SDK And Configure
+    - href: testplans/TP-00_Import-XRTK.SDK-And_Configure.md
+    - name: TP-01 Import Oculus Without SDK
+    - href: testplans/TP-01_Import-XRTK.Oculus-Without-XRTK.SDK.md
 - name: Appendices
   items:
     - name: Coding Guidelines
-      href: A01-CodingGuidelines.md
+      href: appendices/A01-CodingGuidelines.md
     - name: XRTK vs MRTK
-      href: A02-ChoosingXRTKvsMRTK.md
+      href: appendices/A02-ChoosingXRTKvsMRTK.md

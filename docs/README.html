@@ -8,7 +8,7 @@
     <title>Welcome to the Mixed Reality Toolkit | XRTK-Core </title>
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Welcome to the Mixed Reality Toolkit | XRTK-Core ">
-    <meta name="generator" content="docfx 2.48.0.0">
+    <meta name="generator" content="docfx 2.52.0.0">
     
     <link rel="shortcut icon" href="favicon.png">
     <link rel="stylesheet" href="styles/docfx.vendor.css">
@@ -62,6 +62,7 @@
             <article class="content wrap" id="_content" data-uid="">
 <h1 id="welcome-to-the-mixed-reality-toolkit">Welcome to the Mixed Reality Toolkit</h1>
 
+<p><img src="/images/Branding/XRTK_Logo_1200x250.png" alt=""></p>
 <p>The Mixed Reality Toolkit's primary focus is to make it extremely easy to get started creating Mixed Reality applications and to accelerate deployment to multiple platforms from the same Unity project.</p>
 <h2 id="build-status">Build Status</h2>
 <table>
@@ -69,28 +70,34 @@
 <tr>
 <th>Modules</th>
 <th>Build Agent</th>
+<th>OpenUpm</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>XRTK-Core</td>
 <td><a href="https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=2"><img src="https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/Mixed%20Reality%20Toolkit-CI" alt="Build status"></a></td>
+<td><a href="https://openupm.com/packages/com.xrtk.core/"><img src="https://img.shields.io/npm/v/com.xrtk.core?label=openupm&amp;registry_uri=https://package.openupm.com" alt="openupm"></a></td>
 </tr>
 <tr>
 <td><a href="https://github.com/XRTK/SDK">SDK</a></td>
 <td><a href="https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=23"><img src="https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.SDK%20Master%20Build" alt="Build status"></a></td>
+<td><a href="https://openupm.com/packages/com.xrtk.sdk/"><img src="https://img.shields.io/npm/v/com.xrtk.sdk?label=openupm&amp;registry_uri=https://package.openupm.com" alt="openupm"></a></td>
 </tr>
 <tr>
 <td><a href="https://github.com/XRTK/WindowsMixedReality">WMR</a></td>
 <td><a href="https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=21"><img src="https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.WMR%20Master%20Build" alt="Build status"></a></td>
+<td><a href="https://openupm.com/packages/com.xrtk.wmr/"><img src="https://img.shields.io/npm/v/com.xrtk.wmr?label=openupm&amp;registry_uri=https://package.openupm.com" alt="openupm"></a></td>
 </tr>
 <tr>
 <td><a href="https://github.com/XRTK/Lumin">Lumin</a></td>
 <td><a href="https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=29"><img src="https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.Lumin%20Master%20Build" alt="Build status"></a></td>
+<td><a href="https://openupm.com/packages/com.xrtk.lumin/"><img src="https://img.shields.io/npm/v/com.xrtk.lumin?label=openupm&amp;registry_uri=https://package.openupm.com" alt="openupm"></a></td>
 </tr>
 <tr>
 <td><a href="https://github.com/XRTK/Oculus">Oculus</a></td>
 <td><a href="https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_build/latest?definitionId=30"><img src="https://dev.azure.com/xrtk/Mixed%20Reality%20Toolkit/_apis/build/status/XRTK.Oculus%20Master%20Build" alt="Build status"></a></td>
+<td><a href="https://openupm.com/packages/com.xrtk.oculus/"><img src="https://img.shields.io/npm/v/com.xrtk.oculus?label=openupm&amp;registry_uri=https://package.openupm.com" alt="openupm"></a></td>
 </tr>
 </tbody>
 </table>
@@ -102,7 +109,7 @@
 <li><a href="CONTRIBUTING.html">Contributing</a></li>
 </ul>
 <h2 id="overview">Overview</h2>
-<p>Developing Mixed Reality Applications in Unity is hard, and we know there are many <a href="CONTRIBUTORS.html">developers</a> who are frustrated with the current state of both game and general application development within the Mixed Reality ecosystem: a quickly developing market that encompasses the whole spectrum from Mobile Augmented Reality to high end Virtual Reality.</p>
+<p>Developing Mixed Reality Applications in Unity is hard, and we know there are many <a href="CONTRIBUTORS.html">developers</a> who are frustrated with the current state of both game and general application development within the Mixed Reality ecosystem: a quickly developing market that encompasses the whole spectrum from Mobile Augmented Reality to high-end Virtual Reality.</p>
 <p>To improve this situation, the Mixed Reality Toolkit's vision is simple, to provide a complete cross-platform solution for AR/XR/VR development that supports three different developer skill levels:</p>
 <ul>
 <li><p><strong>Beginner</strong> No Coding Required: Perfect for artists, Hackathons, and Quick Prototyping.</p>
@@ -113,9 +120,9 @@
 </li>
 </ul>
 <p>Our philosophy is to enable developers to focus on building content and structure and not have to worry about the underlying complexities for supporting multiple platforms in order to build it everywhere and on each device as required.  In Short, built it once and ship it everywhere with as little effort as possible.</p>
-<p>We’d like to invite all the major hardware vendors to help guide their platform specific implementations, from Microsoft’s Windows Mixed Reality and Magic Leap’s Lumin OS to Google’s ARCore and Apple’s ARKit.  Including any upcoming Mixed Reality capable devices that would like to be included for adoption.</p>
+<p>We’d like to invite all the major hardware vendors to help guide their platform-specific implementations, from Microsoft’s Windows Mixed Reality and Magic Leap’s Lumin OS to Google’s ARCore and Apple’s ARKit.  Including any upcoming Mixed Reality capable devices that would like to be included for adoption.</p>
 <h2 id="chat-with-the-community">Chat with the community</h2>
-<p>We recently moved our main converastions regarding Mixed Reality Toolkit over to Discord, which allows us to do a lot more (and the chat / streaming there is awesome), but we keep an Mixed Reality Toolkit presence on Slack too, in order to retain links to our friends on there.</p>
+<p>We recently moved our main conversations regarding Mixed Reality Toolkit over to Discord, which allows us to do a lot more (and the chat/streaming there is awesome), but we keep a Mixed Reality Toolkit presence on Slack too, in order to retain links to our friends on there.</p>
 <p><a href="https://t.co/UeUSVjnoIZ?amp=1"><img src="https://cdn0.iconfinder.com/data/icons/free-social-media-set/24/discord-128.png" alt="Discord"></a></p>
 <h3 id="come-join-us-on-discord"><a href="https://t.co/UeUSVjnoIZ?amp=1">Come join us on Discord!</a></h3>
 <h2 id="supported-platforms">Supported Platforms</h2>
@@ -124,6 +131,29 @@
 <li>[x] Windows Standalone</li>
 <li>[x] Linux</li>
 <li>[x] OSX Standalone</li>
+<li>[x] Open VR</li>
+<li>[ ] Open XR</li>
+<li>[x] <a href="https://github.com/XRTK/WindowsMixedReality">Windows Mixed Reality</a>
+<ul>
+<li>[x] HoloLens</li>
+<li>[x] Windows Mixed Reality HMDs</li>
+<li>[-] HoloLens 2 (platform supported, hands / eyes pending)</li>
+</ul>
+</li>
+<li>[x] <a href="https://github.com/XRTK/Lumin">Lumin (aka Magic Leap)</a></li>
+<li>[x] <a href="https://github.com/XRTK/Oculus">Native Oculus API</a>
+<ul>
+<li>[x] Rift</li>
+<li>[x] Quest</li>
+<li>[ ] Go</li>
+</ul>
+</li>
+<li>[ ] Native Steam VR
+<ul>
+<li>[ ] HTC Vive</li>
+<li>[ ] Vive Index</li>
+</ul>
+</li>
 <li>[ ] iOS
 <ul>
 <li>[ ] ARKit</li>
@@ -138,28 +168,6 @@
 <ul>
 <li>[ ] WebVR</li>
 <li>[ ] WebXR</li>
-</ul>
-</li>
-<li>[x] Open VR</li>
-<li>[ ] Open XR</li>
-<li>[x] <a href="https://github.com/XRTK/WindowsMixedReality">Windows Mixed Reality</a>
-<ul>
-<li>[x] HoloLens</li>
-<li>[x] Windows Mixed Reality HMDs</li>
-<li>[ ] HoloLens 2</li>
-</ul>
-</li>
-<li>[x] <a href="https://github.com/XRTK/Lumin">Lumin (aka Magic Leap)</a></li>
-<li>[x] <a href="https://github.com/XRTK/Oculus">Native Oculus API</a>
-<ul>
-<li>[x] Rift</li>
-<li>[x] Quest</li>
-</ul>
-</li>
-<li>[ ] Native Steam VR
-<ul>
-<li>[ ] HTC Vive</li>
-<li>[ ] Vive Index</li>
 </ul>
 </li>
 </ul>

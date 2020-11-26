@@ -2,18 +2,18 @@
 
 The Mixed Reality Toolkit's primary focus is to make it extremely easy to get started creating Mixed Reality applications and to accelerate deployment to multiple platforms from the same Unity project.
 
-![[More information about the architecture and design of the Mixed Reality Toolkit](https://medium.com/@stephen_hodgson/the-mixed-reality-framework-6fdb5c11feb2)](https://miro.medium.com/max/11666/1*JSU5Me8i2GUHcmbiUTsrlw.jpeg)
-[More information about the architecture and design of the Mixed Reality Toolkit](https://medium.com/@stephen_hodgson/the-mixed-reality-framework-6fdb5c11feb2)
+<a href="https://medium.com/@stephen_hodgson/the-mixed-reality-framework-6fdb5c11feb2">![[More information about the architecture and design of the Mixed Reality Toolkit](https://medium.com/@stephen_hodgson/the-mixed-reality-framework-6fdb5c11feb2)](https://miro.medium.com/max/11666/1*JSU5Me8i2GUHcmbiUTsrlw.jpeg)</a>
+> [More information about the architecture and design of the Mixed Reality Toolkit](https://medium.com/@stephen_hodgson/the-mixed-reality-framework-6fdb5c11feb2)
 
 ## Prerequisites
 
 To get started with the Mixed Reality Toolkit you will need:
 
-* [Visual Studio 2017+ (Community or full)](https://visualstudio.microsoft.com/downloads/)
-* [Unity 2019.1+](https://unity3d.com/get-unity/download/archive)
+* [Visual Studio 2019+ (Community or full)](https://visualstudio.microsoft.com/downloads/)
+* [Unity 2019.3+](https://unity3d.com/get-unity/download/archive)
 * [Latest XRTK release](https://github.com/XRTK/XRTK-Core/releases)
 
-> **Note:** Specific platforms may have additional platform requirements. Check that platform's readme for information.
+> **Note:** Specific platforms may have additional platform requirements. It's best to check that platform's readme for more information.
 
 > **Note:** Currently, the Scriptable Render Pipeline is not yet supported, so the LWSRP, HDSRP and VRSRP workflows not compatible.  Please stay tuned to the GitHub site for future announcements on SRP support.
 
@@ -21,8 +21,7 @@ To get started with the Mixed Reality Toolkit you will need:
 
 If you're using a Windows OS for development, then you'll need to enable Developer Mode in the operating system settings.
 
-> **Tip:** You can quickly find the Developer Settings by pressing `win + S`
-and type “Developer Settings”.
+> **Tip:** You can quickly find the Developer Settings by pressing `win + S` and type “Developer Settings”.
 
 ## Starting a new Mixed Reality project
 
@@ -38,9 +37,9 @@ Our preferred deployment approach is to fully utilize [Unity's native package ma
 
 > **Note:** Some prefabs and assets require TextMesh Pro, meaning you have to have the TextMesh Pro package installed and the assets in your project `Window -> TextMeshPro -> Import TMP Essential Resources`.
 
-Download the [XRTK-Core.unitypackage](https://github.com/XRTK/XRTK-Core/releases) asset, then drag and drop it into your project window.  This adds the Mixed Reality Toolkit seed, that will automatically register the Mixed Reality Toolkit's upm server with the Unity package manager and starts the download and installation of the Core and SDK packages.
+Download the [XRTK-Core.unitypackage](https://github.com/XRTK/XRTK-Core/releases) asset, then drag and drop it into your project window.  This adds the Mixed Reality Toolkit seed, that will automatically register the Mixed Reality Toolkit's upm server with the Unity package manager and starts the download and installation of the Core and selected packages.
 
-> **Note:** Specific platform support isn't automatically downloaded for you. Developers are expected to to back to the Unity package Manager and install each platform as needed.
+> **Note:** Specific Unity Editor platform support isn't automatically downloaded for you. Developers are expected to to back to the Unity Hub and install each module as needed.
 
 ---
 
@@ -48,7 +47,7 @@ Download the [XRTK-Core.unitypackage](https://github.com/XRTK/XRTK-Core/releases
 
 The Mixed Reality Toolkit has been designed so that there is a base scene with all of the required GameObjects.  This base scene provides support for the core configuration and runtime.
 
-> **Note:** As more scenes are required in your project you'll need to addatively load and unload them at runtime.
+> **Note:** As more scenes are required in your project you'll need to [addatively load](https://docs.unity3d.com/ScriptReference/SceneManagement.LoadSceneMode.Additive.html) and unload each individually at runtime while keeping the configured base scene loaded at all times.
 
 Configuring your scene is extremely simple by simply selecting the following from the Editor menu:
 
@@ -56,7 +55,7 @@ Configuring your scene is extremely simple by simply selecting the following fro
 
 ![Configure](../images/GettingStarted/MixedRealityConfigure.png)
 
-Once this completes, you will see the following in your Scene hierarchy:
+Configuring the toolkit will set up the camera rig, creates the `MixedRealityToolkit`, and adds additional components to the `Main Camera`. Once this completes, you will see the following in your project's scene hierarchy:
 
 ![Scene Hiearchy](../images/GettingStarted/MixedRealityScene.png)
 
@@ -67,7 +66,7 @@ Which contains the following:
   * The `Main Camera` is moved to be a child to the `MixedRealityPlayspace`, Which allows the playspace to move the whole camera rig without interfering with any camera driven movement from the native SDKs.
   * The `PlayerBody` is positioned at the same x/z position as the `Main Camera`, but placed at the player's feet. Rotation of the body doesn't always match the `Main Camera`'s rotation, but is an approximation of the player's body rotation.
 
-> **Warning!** While working on your scene in the editor, **DON'T** move the Main Camera or the Playspace from the scene origin (0,0,0).  This is controlled by the Mixed Reality Toolkit and the active SDK, and most platforms expect the camera to start in this location.
+> **Warning!** While working on your scene in the editor, **DON'T** move the Main Camera or the Playspace from the scene origin (0,0,0).  This is controlled by the Mixed Reality Toolkit and the active platform's `Camera Data Provider`, and most platforms expect the camera to start at this location.
 >
 > If you need to move the player's start point, then either:
 >
@@ -80,19 +79,26 @@ From here your project should be ready to build and play on the platform you're 
 
 ### Build and Play
 
-You are now ready to start building your Mixed Reality Solution, just start adding content and get building.
+You are now ready to start building your Mixed Reality Solution, just start adding content and get building!
 
-Switch to the target platform you wish to build on, ensure the legacy XR settings are enabled in the player settings.
+Open the Unity Build settings, and switch to the target platform you wish to build on.
 
-> **Note:** The Mixed Reality Toolkit does not support the new XR SDK Manager and projects will need to use the legacy XR settings.
-
-Depending on the platform Simulation support, you should be able to run in the editor by pressing play.
+> **Note:** Depending on the platform's simulation support, you should be able to run in the editor by pressing play.
 
 Once satasfied, you can build your project by using the Mixed Reality Toolkit's Build window:
 
 ![Build Window](../images/GettingStarted/MixedRealityBuildWindow.png)
 
-After building the project, depending on the platform you'll need to follow the platform specific installation steps to get it running on your device.
+Once the build completes, you can install and run it on the device.
+
+> **Note:** The build window automatically installs some platforms for you, but depending on the platform, you'll need to follow the platform specific installation steps to get it manually installed on your device.
+
+---
+
+### Related Articles
+
+* [Downloading the XRTK](01-DownloadingTheXRTK.md)
+* [Configuring your project](02-Configuration.md)
 
 ---
 

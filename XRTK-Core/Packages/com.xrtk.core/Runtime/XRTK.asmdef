@@ -1,0 +1,16 @@
+{
+    "name": "XRTK",
+    "references": [
+        "GUID:395bd8dd25074437ba735310022f8f0a",
+        "GUID:ba171b3dd2a51234ab864770f99741a5"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}

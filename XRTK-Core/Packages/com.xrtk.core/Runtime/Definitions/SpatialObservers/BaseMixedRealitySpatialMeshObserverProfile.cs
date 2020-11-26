@@ -12,7 +12,7 @@ namespace XRTK.Providers.SpatialObservers
     {
         [SerializeField]
         [Tooltip("Level of detail for the mesh")]
-        private SpatialAwarenessMeshLevelOfDetail meshLevelOfDetail = SpatialAwarenessMeshLevelOfDetail.Coarse;
+        private SpatialAwarenessMeshLevelOfDetail meshLevelOfDetail = SpatialAwarenessMeshLevelOfDetail.Low;
 
         /// <summary>
         /// The desired Unity Physics Layer on which to set the spatial mesh.
@@ -26,7 +26,7 @@ namespace XRTK.Providers.SpatialObservers
         /// <summary>
         /// The level of detail, in triangles per cubic meter, for the returned spatial mesh.
         /// </summary>
-        /// <remarks>This value is ignored, unless <see cref="MeshLevelOfDetail"/> is set to Coarse.</remarks>
+        /// <remarks>This value is ignored, unless <see cref="MeshLevelOfDetail"/> is set to Low.</remarks>
         public uint MeshTrianglesPerCubicMeter => meshTrianglesPerCubicMeter;
 
         [SerializeField]

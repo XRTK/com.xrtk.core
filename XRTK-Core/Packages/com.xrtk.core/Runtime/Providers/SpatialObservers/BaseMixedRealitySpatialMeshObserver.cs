@@ -34,7 +34,6 @@ namespace XRTK.Providers.SpatialObservers
             }
 
             MeshLevelOfDetail = profile.MeshLevelOfDetail;
-            MeshTrianglesPerCubicMeter = profile.MeshTrianglesPerCubicMeter;
             MeshRecalculateNormals = profile.MeshRecalculateNormals;
             meshDisplayOption = MixedRealityToolkit.SpatialAwarenessSystem.SpatialMeshVisibility;
             MeshVisibleMaterial = profile.MeshVisibleMaterial;
@@ -168,29 +167,8 @@ namespace XRTK.Providers.SpatialObservers
 
         #region IMixedRealitySpatialMeshObserver Implementation
 
-        private SpatialAwarenessMeshLevelOfDetail meshLevelOfDetail = SpatialAwarenessMeshLevelOfDetail.Coarse;
-
         /// <inheritdoc />
-        public SpatialAwarenessMeshLevelOfDetail MeshLevelOfDetail
-        {
-            get => meshLevelOfDetail;
-            set
-            {
-                if (meshLevelOfDetail != value)
-                {
-                    // Non-custom values automatically modify MeshTrianglesPerCubicMeter
-                    if (value != SpatialAwarenessMeshLevelOfDetail.Custom)
-                    {
-                        MeshTrianglesPerCubicMeter = (uint)value;
-                    }
-
-                    meshLevelOfDetail = value;
-                }
-            }
-        }
-
-        /// <inheritdoc />
-        public uint MeshTrianglesPerCubicMeter { get; private set; }
+        public SpatialAwarenessMeshLevelOfDetail MeshLevelOfDetail { get; set; }
 
         /// <inheritdoc />
         public bool MeshRecalculateNormals { get; }

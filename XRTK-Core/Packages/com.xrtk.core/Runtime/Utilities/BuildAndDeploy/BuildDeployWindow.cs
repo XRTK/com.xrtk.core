@@ -42,6 +42,7 @@ namespace XRTK.Utilities.Build
             x86 = 0,
             x64 = 1,
             ARM = 2,
+            ARM64 = 3,
         }
 
         #endregion Internal Types
@@ -505,6 +506,10 @@ namespace XRTK.Utilities.Build
             else if (currentArchitectureString.ToLower().Equals("arm"))
             {
                 buildArchitecture = Architecture.ARM;
+            }
+            else if (currentArchitectureString.ToLower().Equals("arm64"))
+            {
+                buildArchitecture = Architecture.ARM64;
             }
 
             buildArchitecture = (Architecture)EditorGUILayout.EnumPopup("Build Platform", buildArchitecture, GUILayout.Width(HALF_WIDTH));

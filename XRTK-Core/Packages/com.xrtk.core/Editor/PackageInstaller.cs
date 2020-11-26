@@ -139,20 +139,33 @@ namespace XRTK.Editor
 
                 if (platformConfigurationProfile.IsNull()) { continue; }
 
-                var rootProfile = MixedRealityToolkit.IsInitialized
-                    ? MixedRealityToolkit.Instance.ActiveProfile
-                    : ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitRootProfile>()[0];
-
-                if (EditorUtility.DisplayDialog("We found a new Platform Configuration",
-                    $"We found the {platformConfigurationProfile.name.ToProperCase()}. Would you like to add this platform configuration to your {rootProfile.name}?",
-                    "Yes, Absolutely!",
-                    "later"))
+                MixedRealityToolkitRootProfile rootProfile;
+                if (MixedRealityToolkit.IsInitialized)
                 {
-                    InstallConfiguration(platformConfigurationProfile, rootProfile);
+                    rootProfile = MixedRealityToolkit.Instance.ActiveProfile;
                 }
                 else
                 {
-                    EditorUtility.DisplayDialog("Attention!", "Each data provider will need to be manually registered in each service configuration.", "OK");
+                    var availableRootProfiles = ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitRootProfile>();
+                    rootProfile = availableRootProfiles.Length > 0 ? availableRootProfiles[0] : null;
+                }
+
+                // Only if a root profile is available at all it makes sense to display the
+                // platform configuration import dialog. If the user does not have a root profile yet,
+                // for whatever reason, there is nothing we can do here.
+                if (!rootProfile.IsNull())
+                {
+                    if (EditorUtility.DisplayDialog("We found a new Platform Configuration",
+                        $"We found the {platformConfigurationProfile.name.ToProperCase()}. Would you like to add this platform configuration to your {rootProfile.name}?",
+                        "Yes, Absolutely!",
+                        "later"))
+                    {
+                        InstallConfiguration(platformConfigurationProfile, rootProfile);
+                    }
+                    else
+                    {
+                        EditorUtility.DisplayDialog("Attention!", "Each data provider will need to be manually registered in each service configuration.", "OK");
+                    }
                 }
             }
         }

@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
@@ -23,6 +24,7 @@ namespace XRTK.Definitions.CameraSystem
         /// </summary>
         public bool IsCameraPersistent => isCameraPersistent;
 
+        [Min(0.0001f)]
         [SerializeField]
         [Tooltip("The near clipping plane distance for an opaque display.")]
         private float nearClipPlaneOpaqueDisplay = 0.1f;
@@ -33,7 +35,15 @@ namespace XRTK.Definitions.CameraSystem
         public float NearClipPlaneOpaqueDisplay
         {
             get => nearClipPlaneOpaqueDisplay;
-            internal set => nearClipPlaneOpaqueDisplay = value;
+            internal set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("Value must be greater than zero!");
+                }
+
+                nearClipPlaneOpaqueDisplay = value;
+            }
         }
 
         [SerializeField]
@@ -63,6 +73,7 @@ namespace XRTK.Definitions.CameraSystem
         /// </summary>
         public int OpaqueQualityLevel => opaqueQualityLevel;
 
+        [Min(0.0001f)]
         [SerializeField]
         [Tooltip("The near clipping plane distance for a transparent display.")]
         private float nearClipPlaneTransparentDisplay = 0.85f;
@@ -70,7 +81,19 @@ namespace XRTK.Definitions.CameraSystem
         /// <summary>
         /// The near clipping plane distance for a transparent display.
         /// </summary>
-        public float NearClipPlaneTransparentDisplay => nearClipPlaneTransparentDisplay;
+        public float NearClipPlaneTransparentDisplay
+        {
+            get => nearClipPlaneTransparentDisplay;
+            internal set
+            {
+                if (value <= 0)
+                {
+                    throw new ArgumentException("Value must be greater than zero!");
+                }
+
+                nearClipPlaneTransparentDisplay = value;
+            }
+        }
 
         [SerializeField]
         [Tooltip("Values for Camera.clearFlags, determining what to clear when rendering a Camera for an opaque display.")]

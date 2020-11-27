@@ -274,7 +274,12 @@ namespace XRTK.Services
                     DontDestroyOnLoad(instance.transform.root);
                 }
 
-                Application.quitting += () => IsApplicationQuitting = true;
+                Application.quitting += () =>
+                {
+                    DisableAllServices();
+                    DestroyAllServices();
+                    IsApplicationQuitting = true;
+                };
 
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.hierarchyChanged += OnHierarchyChanged;
@@ -291,20 +296,28 @@ namespace XRTK.Services
 
                 void OnPlayModeStateChanged(UnityEditor.PlayModeStateChange playModeState)
                 {
-                    if (playModeState == UnityEditor.PlayModeStateChange.ExitingEditMode ||
-                        playModeState == UnityEditor.PlayModeStateChange.EnteredEditMode)
+                    switch (playModeState)
                     {
-                        IsApplicationQuitting = false;
+                        case UnityEditor.PlayModeStateChange.EnteredEditMode:
+                            IsApplicationQuitting = false;
+                            break;
+                        case UnityEditor.PlayModeStateChange.ExitingEditMode:
+                            if (activeProfile == null)
+                            {
+                                UnityEditor.EditorApplication.isPlaying = false;
+                                UnityEditor.Selection.activeObject = Instance;
+                                UnityEditor.EditorApplication.delayCall += () =>
+                                    UnityEditor.EditorGUIUtility.PingObject(Instance);
+                            }
+                            break;
+                        case UnityEditor.PlayModeStateChange.EnteredPlayMode:
+                        case UnityEditor.PlayModeStateChange.ExitingPlayMode:
+                            // Nothing for now.
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(playModeState), playModeState, null);
                     }
 
-                    if (activeProfile == null &&
-                        playModeState == UnityEditor.PlayModeStateChange.ExitingEditMode)
-                    {
-                        UnityEditor.EditorApplication.isPlaying = false;
-                        UnityEditor.Selection.activeObject = Instance;
-                        UnityEditor.EditorApplication.delayCall += () =>
-                            UnityEditor.EditorGUIUtility.PingObject(Instance);
-                    }
                 }
 #endif // UNITY_EDITOR
 

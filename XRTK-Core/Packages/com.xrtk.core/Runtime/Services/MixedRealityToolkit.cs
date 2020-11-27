@@ -348,7 +348,7 @@ namespace XRTK.Services
         /// </summary>
         public static void AssertIsInitialized()
         {
-            Debug.Assert(IsInitialized, "The MixedRealityToolkit has not been initialized.");
+            Debug.Assert(IsInitialized, $"The {nameof(MixedRealityToolkit)} has not been initialized.");
         }
 
         /// <summary>
@@ -374,16 +374,16 @@ namespace XRTK.Services
         {
             if (isInitializing)
             {
-                Debug.LogWarning("Already attempting to initialize the service locator!");
+                Debug.LogWarning($"Already attempting to initialize the {nameof(MixedRealityToolkit)}!");
                 return;
             }
 
             isInitializing = true;
 
-            //If the Mixed Reality Toolkit is not configured, stop.
+            // If the Mixed Reality Toolkit is not configured, stop.
             if (ActiveProfile == null)
             {
-                Debug.LogError("No Mixed Reality Root Profile found, cannot initialize the Mixed Reality Toolkit");
+                Debug.LogError($"No {nameof(MixedRealityToolkitRootProfile)} found, cannot initialize the {nameof(MixedRealityToolkit)}");
                 isInitializing = false;
                 return;
             }
@@ -649,7 +649,7 @@ namespace XRTK.Services
 
                     if (raiseWarning)
                     {
-                        Debug.LogWarning("Found an existing event system in your scene. The Mixed Reality Toolkit requires only one, and must be found on the main camera.");
+                        Debug.LogWarning($"Found an existing event system in your scene. The {nameof(MixedRealityToolkit)} requires only one, and must be found on the main camera.");
                     }
                 }
             }
@@ -1907,7 +1907,7 @@ namespace XRTK.Services
 
             if (!typeof(IMixedRealityService).IsAssignableFrom(interfaceType))
             {
-                Debug.LogError($"{interfaceType.Name} does not implement {typeof(IMixedRealityService).Name}.");
+                Debug.LogError($"{interfaceType.Name} does not implement {nameof(IMixedRealityService)}.");
                 return false;
             }
 

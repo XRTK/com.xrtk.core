@@ -127,10 +127,10 @@ namespace XRTK.Tests.Core
 
             // Unregister
             var successService = MixedRealityToolkit.TryUnregisterServicesOfType<ITestService>();
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestService).Name} service.");
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestService)} service.");
 
             var successDataProvider = MixedRealityToolkit.TryUnregisterServicesOfType<ITestDataProvider1>();
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestDataProvider1).Name} service.");
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestDataProvider1)} service.");
 
             // Validate non-existent service
             var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestService>();
@@ -175,9 +175,9 @@ namespace XRTK.Tests.Core
 
             // Unregister
             var successService = MixedRealityToolkit.TryUnregisterService<ITestService>(testService1.Name);
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestService).Name} service.");
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestService)} service.");
             var successDataProvider = MixedRealityToolkit.TryUnregisterService<ITestDataProvider1>(dataProvider1.Name);
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestDataProvider1).Name} service.");
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestDataProvider1)} service.");
 
             // Validate non-existent service
             var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestService>();
@@ -268,11 +268,11 @@ namespace XRTK.Tests.Core
 
             // Validate non-existent service
             var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestService>();
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestService).Name} service.");
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestService)} service.");
             var isService1Registered = MixedRealityToolkit.IsServiceRegistered<ITestDataProvider1>();
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestDataProvider1).Name} service.");
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestDataProvider1)} service.");
             var isService2Registered = MixedRealityToolkit.IsServiceRegistered<ITestDataProvider2>();
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestDataProvider2).Name} service.");
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestDataProvider2)} service.");
 
             // Tests
             Assert.IsFalse(isServiceRegistered);
@@ -299,7 +299,7 @@ namespace XRTK.Tests.Core
             var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestDataProvider2>();
 
             // Tests
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestDataProvider2).Name} service.");
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestDataProvider2)} service.");
             Assert.IsFalse(isServiceRegistered);
         }
 
@@ -362,7 +362,7 @@ namespace XRTK.Tests.Core
 
             // Add test data provider 2
             MixedRealityToolkit.TryRegisterService<ITestDataProvider2>(failService);
-            LogAssert.Expect(LogType.Error, $"{failService.Name} does not implement {typeof(ITestDataProvider2).Name}");
+            LogAssert.Expect(LogType.Error, $"{failService.Name} does not implement {nameof(ITestDataProvider2)}");
 
             MixedRealityToolkit.TryRegisterService<ITestDataProvider2>(new TestDataProvider2(testService1, "Test04-08-2.2"));
 
@@ -418,7 +418,7 @@ namespace XRTK.Tests.Core
 
             // Validate non-existent service
             var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestExtensionService1>();
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestExtensionService1).Name} service.");
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestExtensionService1)} service.");
 
             // Tests
             Assert.IsTrue(success);
@@ -449,7 +449,7 @@ namespace XRTK.Tests.Core
 
             // Validate non-existent service
             var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestExtensionService1>();
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestExtensionService1).Name} service.");
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestExtensionService1)} service.");
 
             // Tests
             Assert.IsTrue(success);
@@ -509,9 +509,9 @@ namespace XRTK.Tests.Core
 
             // Validate non-existent service
             var isService1Registered = MixedRealityToolkit.IsServiceRegistered<ITestExtensionService1>();
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestExtensionService1).Name} service.");
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestExtensionService1)} service.");
             var isService2Registered = MixedRealityToolkit.IsServiceRegistered<ITestExtensionService2>();
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestExtensionService2).Name} service.");
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestExtensionService2)} service.");
 
             // Tests
             Assert.IsTrue(success);
@@ -533,7 +533,7 @@ namespace XRTK.Tests.Core
             var isServiceRegistered = MixedRealityToolkit.IsServiceRegistered<ITestExtensionService2>();
 
             // Tests
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(ITestExtensionService2).Name} service.");
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(ITestExtensionService2)} service.");
             Assert.IsFalse(isServiceRegistered);
         }
 

@@ -143,13 +143,9 @@ namespace XRTK.Providers.SpatialObservers
         {
             base.Destroy();
 
-            // Cleanup the spatial meshes that are being managed by this observer.
-            foreach (var meshObject in spatialMeshObjects.Values)
-            {
-                meshObject.GameObject.Destroy();
-            }
+            if (!Application.isPlaying) { return; }
 
-            Debug.Assert(spatialMeshObjects.Count == 0);
+            spatialMeshObjects.Clear();
 
             lock (spatialMeshObjectPool)
             {

@@ -9,7 +9,6 @@ namespace XRTK.Utilities.Build
     {
         public UwpBuildInfo(bool isCommandLine = false) : base(isCommandLine)
         {
-            BuildAppx = isCommandLine;
         }
 
         /// <inheritdoc />

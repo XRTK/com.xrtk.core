@@ -268,6 +268,8 @@ namespace XRTK.Utilities.Build
                         break;
                     case "-x86":
                     case "-x64":
+                    case "-ARM":
+                    case "-ARM64":
                         buildInfo.BuildPlatform = arguments[i].Substring(1);
                         break;
                     case "-debug":

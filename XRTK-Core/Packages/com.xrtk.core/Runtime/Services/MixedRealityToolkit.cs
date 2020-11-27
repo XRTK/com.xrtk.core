@@ -289,8 +289,8 @@ namespace XRTK.Services
                 {
                     if (instance != null)
                     {
-                        Debug.Assert(instance.transform.parent == null, "The MixedRealityToolkit should not be parented under any other GameObject!");
-                        Debug.Assert(instance.transform.childCount == 0, "The MixedRealityToolkit should not have GameObject children!");
+                        Debug.Assert(instance.transform.parent == null, $"The {nameof(MixedRealityToolkit)} should not be parented under any other GameObject!");
+                        Debug.Assert(instance.transform.childCount == 0, $"The {nameof(MixedRealityToolkit)} should not have GameObject children!");
                     }
                 }
 

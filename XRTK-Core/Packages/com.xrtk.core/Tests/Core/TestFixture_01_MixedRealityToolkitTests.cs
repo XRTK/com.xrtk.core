@@ -5,6 +5,7 @@ using NUnit.Framework;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.TestTools;
+using XRTK.Definitions;
 using XRTK.Editor.Utilities;
 using XRTK.Interfaces;
 using XRTK.Services;
@@ -52,7 +53,7 @@ namespace XRTK.Tests.Core
             Assert.IsFalse(MixedRealityToolkit.HasActiveProfile);
             Assert.IsNull(MixedRealityToolkit.Instance.ActiveProfile);
             Assert.IsFalse(MixedRealityToolkit.HasActiveProfile);
-            LogAssert.Expect(LogType.Error, "No Mixed Reality Root Profile found, cannot initialize the Mixed Reality Toolkit");
+            LogAssert.Expect(LogType.Error, $"No {nameof(MixedRealityToolkitRootProfile)} found, cannot initialize the {nameof(MixedRealityToolkit)}");
         }
 
         [Test]

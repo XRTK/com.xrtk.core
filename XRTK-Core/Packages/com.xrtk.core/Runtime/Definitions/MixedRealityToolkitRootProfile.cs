@@ -128,7 +128,7 @@ namespace XRTK.Definitions
         /// </summary>
         public bool IsBoundarySystemEnabled
         {
-            get => boundarySystemType != null && boundarySystemType.Type != null && enableBoundarySystem && boundaryProfile != null;
+            get => boundarySystemType != null && boundarySystemType.Type != null && enableBoundarySystem && BoundarySystemProfile != null;
             internal set => enableBoundarySystem = value;
         }
 
@@ -145,18 +145,18 @@ namespace XRTK.Definitions
             internal set => boundarySystemType = value;
         }
 
-        [FormerlySerializedAs("boundaryVisualizationProfile")]
         [SerializeField]
         [Tooltip("Profile for wiring up boundary visualization assets.")]
-        private MixedRealityBoundaryProfile boundaryProfile;
+        [FormerlySerializedAs("boundaryVisualizationProfile")]
+        private MixedRealityBoundaryProfile boundarySystemProfile;
 
         /// <summary>
         /// Active profile for controller mapping configuration
         /// </summary>
-        public MixedRealityBoundaryProfile BoundaryProfile
+        public MixedRealityBoundaryProfile BoundarySystemProfile
         {
-            get => boundaryProfile;
-            internal set => boundaryProfile = value;
+            get => boundarySystemProfile;
+            internal set => boundarySystemProfile = value;
         }
 
         #endregion Boundary System Properties

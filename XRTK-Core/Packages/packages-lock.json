@@ -98,7 +98,7 @@
     },
     "com.unity.xr.legacyinputhelpers": {
       "version": "2.1.6",
-      "depth": 0,
+      "depth": 1,
       "source": "registry",
       "dependencies": {},
       "url": "https://packages.unity.com"

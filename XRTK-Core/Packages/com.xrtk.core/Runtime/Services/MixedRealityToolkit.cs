@@ -274,7 +274,12 @@ namespace XRTK.Services
                     DontDestroyOnLoad(instance.transform.root);
                 }
 
-                Application.quitting += () => IsApplicationQuitting = true;
+                Application.quitting += () =>
+                {
+                    DisableAllServices();
+                    DestroyAllServices();
+                    IsApplicationQuitting = true;
+                };
 
 #if UNITY_EDITOR
                 UnityEditor.EditorApplication.hierarchyChanged += OnHierarchyChanged;
@@ -284,27 +289,35 @@ namespace XRTK.Services
                 {
                     if (instance != null)
                     {
-                        Debug.Assert(instance.transform.parent == null, "The MixedRealityToolkit should not be parented under any other GameObject!");
-                        Debug.Assert(instance.transform.childCount == 0, "The MixedRealityToolkit should not have GameObject children!");
+                        Debug.Assert(instance.transform.parent == null, $"The {nameof(MixedRealityToolkit)} should not be parented under any other GameObject!");
+                        Debug.Assert(instance.transform.childCount == 0, $"The {nameof(MixedRealityToolkit)} should not have GameObject children!");
                     }
                 }
 
                 void OnPlayModeStateChanged(UnityEditor.PlayModeStateChange playModeState)
                 {
-                    if (playModeState == UnityEditor.PlayModeStateChange.ExitingEditMode ||
-                        playModeState == UnityEditor.PlayModeStateChange.EnteredEditMode)
+                    switch (playModeState)
                     {
-                        IsApplicationQuitting = false;
+                        case UnityEditor.PlayModeStateChange.EnteredEditMode:
+                            IsApplicationQuitting = false;
+                            break;
+                        case UnityEditor.PlayModeStateChange.ExitingEditMode:
+                            if (activeProfile == null)
+                            {
+                                UnityEditor.EditorApplication.isPlaying = false;
+                                UnityEditor.Selection.activeObject = Instance;
+                                UnityEditor.EditorApplication.delayCall += () =>
+                                    UnityEditor.EditorGUIUtility.PingObject(Instance);
+                            }
+                            break;
+                        case UnityEditor.PlayModeStateChange.EnteredPlayMode:
+                        case UnityEditor.PlayModeStateChange.ExitingPlayMode:
+                            // Nothing for now.
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException(nameof(playModeState), playModeState, null);
                     }
 
-                    if (activeProfile == null &&
-                        playModeState == UnityEditor.PlayModeStateChange.ExitingEditMode)
-                    {
-                        UnityEditor.EditorApplication.isPlaying = false;
-                        UnityEditor.Selection.activeObject = Instance;
-                        UnityEditor.EditorApplication.delayCall += () =>
-                            UnityEditor.EditorGUIUtility.PingObject(Instance);
-                    }
                 }
 #endif // UNITY_EDITOR
 
@@ -335,7 +348,7 @@ namespace XRTK.Services
         /// </summary>
         public static void AssertIsInitialized()
         {
-            Debug.Assert(IsInitialized, "The MixedRealityToolkit has not been initialized.");
+            Debug.Assert(IsInitialized, $"The {nameof(MixedRealityToolkit)} has not been initialized.");
         }
 
         /// <summary>
@@ -361,16 +374,16 @@ namespace XRTK.Services
         {
             if (isInitializing)
             {
-                Debug.LogWarning("Already attempting to initialize the service locator!");
+                Debug.LogWarning($"Already attempting to initialize the {nameof(MixedRealityToolkit)}!");
                 return;
             }
 
             isInitializing = true;
 
-            //If the Mixed Reality Toolkit is not configured, stop.
+            // If the Mixed Reality Toolkit is not configured, stop.
             if (ActiveProfile == null)
             {
-                Debug.LogError("No Mixed Reality Root Profile found, cannot initialize the Mixed Reality Toolkit");
+                Debug.LogError($"No {nameof(MixedRealityToolkitRootProfile)} found, cannot initialize the {nameof(MixedRealityToolkit)}");
                 isInitializing = false;
                 return;
             }
@@ -636,7 +649,7 @@ namespace XRTK.Services
 
                     if (raiseWarning)
                     {
-                        Debug.LogWarning("Found an existing event system in your scene. The Mixed Reality Toolkit requires only one, and must be found on the main camera.");
+                        Debug.LogWarning($"Found an existing event system in your scene. The {nameof(MixedRealityToolkit)} requires only one, and must be found on the main camera.");
                     }
                 }
             }
@@ -1894,7 +1907,7 @@ namespace XRTK.Services
 
             if (!typeof(IMixedRealityService).IsAssignableFrom(interfaceType))
             {
-                Debug.LogError($"{interfaceType.Name} does not implement {typeof(IMixedRealityService).Name}.");
+                Debug.LogError($"{interfaceType.Name} does not implement {nameof(IMixedRealityService)}.");
                 return false;
             }
 

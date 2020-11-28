@@ -56,7 +56,7 @@ namespace XRTK.Tests.InputSystem
 
             // Tests
             Assert.IsFalse(inputSystemExists);
-            LogAssert.Expect(LogType.Error, $"Unable to find {typeof(IMixedRealityInputSystem).Name} service.");
+            LogAssert.Expect(LogType.Error, $"Unable to find {nameof(IMixedRealityInputSystem)} service.");
         }
 
         [Test]

@@ -23,7 +23,7 @@ namespace XRTK.Services.BoundarySystem
         /// Constructor.
         /// </summary>
         /// <param name="profile"></param>
-        public MixedRealityBoundarySystem(MixedRealityBoundaryVisualizationProfile profile)
+        public MixedRealityBoundarySystem(MixedRealityBoundaryProfile profile)
             : base(profile)
         {
             showBoundary = profile.ShowBoundary;
@@ -279,49 +279,11 @@ namespace XRTK.Services.BoundarySystem
         #region IMixedRealityService Implementation
 
         /// <inheritdoc/>
-        public override void Enable()
-        {
-            base.Enable();
-
-            BoundaryDataProvider = MixedRealityToolkit.GetService<IMixedRealityBoundaryDataProvider>();
-
-            if (!Application.isPlaying || BoundaryDataProvider == null) { return; }
-
-            // Reset the bounds
-            BoundaryBounds = new Edge[0];
-            rectangularBounds = null;
-
-            // Get the boundary geometry.
-            var boundaryGeometry = new List<Vector3>(0);
-            var boundaryEdges = new List<Edge>(0);
-
-            if (BoundaryDataProvider.TryGetBoundaryGeometry(ref boundaryGeometry) && boundaryGeometry.Count > 0)
-            {
-                for (int i = 0; i < boundaryGeometry.Count; i++)
-                {
-                    var pointA = boundaryGeometry[i];
-                    var pointB = boundaryGeometry[(i + 1) % boundaryGeometry.Count];
-                    boundaryEdges.Add(new Edge(pointA, pointB));
-                }
-
-                BoundaryBounds = boundaryEdges.ToArray();
-                // We always use the same seed so that from run to run, the inscribed bounds are consistent.
-                rectangularBounds = new InscribedRectangle(BoundaryBounds, Mathf.Abs("Mixed Reality Toolkit".GetHashCode()));
-            }
-            else
-            {
-                Debug.LogWarning("No Boundary Geometry found");
-            }
-
-            BoundarySystemVisualizationRoot.SetActive(true);
-        }
-
-        /// <inheritdoc/>
         public override void Update()
         {
             base.Update();
 
-            if (!Application.isPlaying || BoundaryDataProvider == null) { return; }
+            if (!Application.isPlaying || boundaryDataProvider == null) { return; }
 
             foreach (var trackedObjectStatus in trackedObjects)
             {
@@ -401,7 +363,7 @@ namespace XRTK.Services.BoundarySystem
         {
             base.Disable();
 
-            if (!Application.isPlaying || BoundaryDataProvider == null) { return; }
+            if (!Application.isPlaying) { return; }
 
             if (!boundaryVisualizationRoot.IsNull())
             {
@@ -414,7 +376,7 @@ namespace XRTK.Services.BoundarySystem
         {
             base.Destroy();
 
-            if (!Application.isPlaying || BoundaryDataProvider == null) { return; }
+            if (!Application.isPlaying) { return; }
 
             // Destroys the parent and all the child objects
             boundaryVisualizationRoot.Destroy();
@@ -430,26 +392,30 @@ namespace XRTK.Services.BoundarySystem
         /// <inheritdoc />
         public IReadOnlyList<GameObject> TrackedObjects => trackedObjects.Keys.Select(cache => cache.gameObject).ToList();
 
+        private IMixedRealityBoundaryDataProvider boundaryDataProvider = null;
+
         /// <inheritdoc />
-        public IMixedRealityBoundaryDataProvider BoundaryDataProvider { get; private set; }
+        public IMixedRealityBoundaryDataProvider BoundaryDataProvider
+        {
+            get => boundaryDataProvider ?? (boundaryDataProvider = MixedRealityToolkit.GetService<IMixedRealityBoundaryDataProvider>());
+            private set => boundaryDataProvider = value;
+        }
 
         /// <inheritdoc />
         public bool IsVisible
         {
-            get => BoundaryDataProvider != null && BoundaryDataProvider.IsPlatformBoundaryVisible ||
-                   BoundarySystemVisualizationRoot.activeInHierarchy &&
+            get => (BoundaryDataProvider != null && BoundaryDataProvider.IsPlatformBoundaryVisible) ||
+                   !BoundarySystemVisualizationRoot.IsNull() && BoundarySystemVisualizationRoot.activeInHierarchy &&
                    (ShowBoundary ||
                     ShowFloor ||
                     ShowWalls ||
                     ShowCeiling);
             set
             {
-                if (BoundaryDataProvider != null)
+                if (!BoundarySystemVisualizationRoot.IsNull())
                 {
-                    BoundaryDataProvider.IsPlatformBoundaryVisible = value;
+                    BoundarySystemVisualizationRoot.SetActive(value);
                 }
-
-                BoundarySystemVisualizationRoot.SetActive(value);
             }
         }
 
@@ -539,6 +505,53 @@ namespace XRTK.Services.BoundarySystem
 
         /// <inheritdoc />
         public Edge[] BoundaryBounds { get; private set; } = new Edge[0];
+
+        /// <inheritdoc />
+        public void SetupBoundary(IMixedRealityBoundaryDataProvider dataProvider)
+        {
+            BoundaryDataProvider = dataProvider;
+
+            if (!BoundaryDataProvider.IsPlatformConfigured) { return; }
+
+            // Reset the bounds
+            BoundaryBounds = new Edge[0];
+            rectangularBounds = null;
+
+            // Get the boundary geometry.
+            var boundaryGeometry = new List<Vector3>(0);
+            var boundaryEdges = new List<Edge>(0);
+
+            if (BoundaryDataProvider.TryGetBoundaryGeometry(ref boundaryGeometry) && boundaryGeometry.Count > 0)
+            {
+                for (int i = 0; i < boundaryGeometry.Count; i++)
+                {
+                    var pointA = boundaryGeometry[i];
+                    var pointB = boundaryGeometry[(i + 1) % boundaryGeometry.Count];
+                    boundaryEdges.Add(new Edge(pointA, pointB));
+                }
+
+                BoundaryBounds = boundaryEdges.ToArray();
+                // We always use the same seed so that from run to run, the inscribed bounds are consistent.
+                rectangularBounds = new InscribedRectangle(BoundaryBounds, Mathf.Abs("Mixed Reality Toolkit".GetHashCode()));
+            }
+            else
+            {
+                Debug.LogWarning("No Boundary Geometry found");
+            }
+
+            // Clear the prev visualization objects.
+            if (!BoundarySystemVisualizationRoot.IsNull())
+            {
+                boundaryVisualizationRoot.Destroy();
+            }
+
+            // Initialize the visualization objects.
+            ShowBoundary = showBoundary;
+            ShowCeiling = showCeiling;
+            ShowFloor = showFloor;
+            ShowWalls = showWalls;
+            IsVisible = ShowBoundary || ShowCeiling || ShowFloor || ShowWalls;
+        }
 
         /// <inheritdoc />
         public bool IsInsideBoundary(Vector3 position, Space referenceSpace = Space.World)

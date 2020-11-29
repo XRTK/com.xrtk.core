@@ -453,9 +453,9 @@ namespace XRTK.Services
 
             if (ActiveProfile.IsBoundarySystemEnabled)
             {
-                if (TryCreateAndRegisterService<IMixedRealityBoundarySystem>(ActiveProfile.BoundarySystemSystemType, out var service, ActiveProfile.BoundaryVisualizationProfile) && BoundarySystem != null)
+                if (TryCreateAndRegisterService<IMixedRealityBoundarySystem>(ActiveProfile.BoundarySystemSystemType, out var service, ActiveProfile.BoundarySystemProfile) && BoundarySystem != null)
                 {
-                    TryRegisterDataProviderConfigurations(ActiveProfile.BoundaryVisualizationProfile.RegisteredServiceConfigurations, service);
+                    TryRegisterDataProviderConfigurations(ActiveProfile.BoundarySystemProfile.RegisteredServiceConfigurations, service);
                 }
                 else
                 {

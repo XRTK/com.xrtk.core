@@ -8,7 +8,7 @@ using XRTK.Editor.Extensions;
 
 namespace XRTK.Editor.Profiles
 {
-    [CustomEditor(typeof(MixedRealityBoundaryVisualizationProfile))]
+    [CustomEditor(typeof(MixedRealityBoundaryProfile))]
     public class MixedRealityBoundaryVisualizationProfileInspector : MixedRealityServiceProfileInspector
     {
         private SerializedProperty showBoundary;

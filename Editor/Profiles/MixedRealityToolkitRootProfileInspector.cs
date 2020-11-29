@@ -26,7 +26,7 @@ namespace XRTK.Editor.Profiles
         // Boundary system properties
         private SerializedProperty enableBoundarySystem;
         private SerializedProperty boundarySystemType;
-        private SerializedProperty boundaryVisualizationProfile;
+        private SerializedProperty boundarySystemProfile;
 
         // Teleport system properties
         private SerializedProperty enableTeleportSystem;
@@ -131,7 +131,7 @@ namespace XRTK.Editor.Profiles
             // Boundary system configuration
             enableBoundarySystem = serializedObject.FindProperty(nameof(enableBoundarySystem));
             boundarySystemType = serializedObject.FindProperty(nameof(boundarySystemType));
-            boundaryVisualizationProfile = serializedObject.FindProperty(nameof(boundaryVisualizationProfile));
+            boundarySystemProfile = serializedObject.FindProperty(nameof(boundarySystemProfile));
 
             // Teleport system configuration
             enableTeleportSystem = serializedObject.FindProperty(nameof(enableTeleportSystem));
@@ -196,8 +196,8 @@ namespace XRTK.Editor.Profiles
             EditorGUI.indentLevel++;
             typeLabel.tooltip = boundarySystemType.tooltip;
             EditorGUILayout.PropertyField(boundarySystemType, typeLabel);
-            profileLabel.tooltip = boundaryVisualizationProfile.tooltip;
-            EditorGUILayout.PropertyField(boundaryVisualizationProfile, profileLabel);
+            profileLabel.tooltip = boundarySystemProfile.tooltip;
+            EditorGUILayout.PropertyField(boundarySystemProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Teleport System configuration

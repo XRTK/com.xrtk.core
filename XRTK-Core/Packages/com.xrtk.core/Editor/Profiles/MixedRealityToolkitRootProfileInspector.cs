@@ -1,11 +1,22 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.SceneManagement;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Editor.Utilities;
+using XRTK.Extensions;
+using XRTK.Interfaces;
+using XRTK.Interfaces.BoundarySystem;
+using XRTK.Interfaces.CameraSystem;
+using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.Providers;
+using XRTK.Interfaces.Providers.Controllers;
+using XRTK.Interfaces.TeleportSystem;
 using XRTK.Services;
 
 namespace XRTK.Editor.Profiles
@@ -88,7 +99,7 @@ namespace XRTK.Editor.Profiles
 
             var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
 
-            // Create The MR Manager if none exists.
+            // Create the MixedRealityToolkit object if none exists.
             if (!MixedRealityToolkit.IsInitialized && prefabStage == null && !didPromptToConfigure)
             {
                 // Search for all instances, in case we've just hot reloaded the assembly.
@@ -96,11 +107,33 @@ namespace XRTK.Editor.Profiles
 
                 if (managerSearch.Length == 0)
                 {
+                    if (!ValidateImplementationsExists())
+                    {
+                        if (EditorUtility.DisplayDialog(
+                            "Attention!",
+                            $"We were unable to find any services or data providers to configure. Would you like to install the {nameof(MixedRealityToolkit)} SDK?",
+                            "Yes",
+                            "Later",
+                            DialogOptOutDecisionType.ForThisSession,
+                            "XRTK_Prompt_Install_SDK"))
+                        {
+                            EditorApplication.delayCall += () =>
+                            {
+                                Client.Add("com.xrtk.sdk");
+                            };
+                        }
+
+                        Selection.activeObject = null;
+                        return;
+                    }
+
                     if (EditorUtility.DisplayDialog(
                         "Attention!",
                         "There is no active Mixed Reality Toolkit in your scene!\n\nWould you like to create one now?",
                         "Yes",
-                        "Later"))
+                        "Later",
+                        DialogOptOutDecisionType.ForThisSession,
+                        "XRTK_Prompt_Configure_Scene"))
                     {
                         if (MixedRealityToolkit.CameraSystem != null)
                         {
@@ -253,6 +286,14 @@ namespace XRTK.Editor.Profiles
             {
                 EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(rootProfile);
             }
+        }
+
+        private static bool ValidateImplementationsExists()
+        {
+            return TypeExtensions.HasValidImplementations<IMixedRealitySystem>() &&
+                   TypeExtensions.HasValidImplementations<IMixedRealityService>() &&
+                   TypeExtensions.HasValidImplementations<IMixedRealityDataProvider>();
+
         }
     }
 }

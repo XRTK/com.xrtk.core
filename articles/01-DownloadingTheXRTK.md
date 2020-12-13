@@ -2,33 +2,56 @@
 
 The Mixed Reality Toolkit provides many ways for users and developers to get access to the Mixed Reality Toolkit and the various extensions/platforms it supports.  These methods are tuned to use the common patterns most familiar to Unity developers, these include:
 
-* [Automatic UPM installation](#automatic-upm-installation) - Automatically register the Mixed Reality Toolkit's upm server and install selected packages using the package seed found in the [release assets dropdown](https://github.com/XRTK/XRTK-Core/releases).
+* [Register UPM Server in Project Settings](#register-upm-server-in-project-settings) - Register the Mixed Reality Toolkit in the Unity Editor in the project settings.
+* [Package Seed Installation](#package-seed-installation) - Automatically register the Mixed Reality Toolkit's upm server and install selected packages using the package seed found in the [release assets dropdown](https://github.com/XRTK/XRTK-Core/releases).
 * [Manual UPM installation](#manual-upm-installation) - Register the Mixed Reality Toolkit upm server in your manifest and manually download modules al la carte.
 * [UPM via GitHub](https://docs.unity3d.com/Manual/upm-ui-giturl.html) - The Unity Package Manager can load a package from GitHub using the git url.
   > **Note:** To utilize this method, use the `upm` branch for each respective project. For Example:
   >
   > `https://github.com/XRTK/XRTK-Core.git#upm`
-* [GIT Submodules](#git-submodules) - For advanced developers who want to use the Mixed Reality Toolkit in their live project and contribute direcly back to the project in real time.
+* [GIT Submodules](#git-submodules) - For advanced developers who want to use the Mixed Reality Toolkit in their live project and contribute directly back to the project in real time.
 
 In this article, we will walk through each approach to get you up and running, starting with the simplest first.
 
-## Automatic UPM Installation
-
 Our preferred deployment approach is to fully utilize [Unity's native package manager](https://docs.unity3d.com/Manual/upm-ui.html) to incorporate the Mixed Reality Toolkit in your solution, akin to the other modules Unity provides out of the box.  This is the quickest and safest way to get Mixed Reality Toolkit in your solution and is automatically updated as new releases are published.
 
-Download the [XRTK-Core.unitypackage](https://github.com/XRTK/XRTK-Core/releases) asset, then drag and drop it into your project window.  This adds an Mixed Reality Toolkit seed, that will automatically register the Mixed Reality Toolkit's scoped registry with the Unity package manager, then starts searching for the latest release packaegs on the upm server.
+## Register UPM Server in Project Settings
+
+Open your project settings and navigate to the package manager item, and add the XRTK in the scoped registries.
+
+```
+Name: XRTK
+URL: http://upm.xrtk.io:4873
+Scopes: com.xrtk
+```
+
+![Project Settings](../images/DownloadingTheXRTK/ScopedRegistry.png)
+
+Once the scoped registry has been added, you can begin to [install platform packages](#install-platform-packages).
+
+## Package Seed Installation
+
+Download the [XRTK-Core.unitypackage](https://github.com/XRTK/XRTK-Core/releases) asset, then drag and drop it into your project window.  This adds an Mixed Reality Toolkit seed, that will automatically register the Mixed Reality Toolkit's scoped registry with the Unity package manager, then starts searching for the latest release packages on the upm server.
 
 ![Seed Package](../images/DownloadingTheXRTK/XRTKAutoInstallAsset.png)
 
-### Install platform packages
-
-The Mixed Reality Toolkit will pull all of the known packages under `com.xrtk.*` and will dispaly them for you to easily install using the package picker window. The latest release pacakges are installed for you by default.
+The Mixed Reality Toolkit will pull all of the known packages under `com.xrtk.*` and will display them for you to easily install using the package picker window. The latest release packages are installed for you by default.
 
 ![Package List](../images/DownloadingTheXRTK/XRTKPackageList.png)
 
-> **Note:** If you choose not to install a specific package, but choose to do so later, you can use the Unity Package Manager's search box to filter packages by typing in `XRTK` to filter out all of the pacakges availible in scope.
+> **Note:** If you choose not to install a specific package, but choose to do so [later](#install-platform-packages).
+
+### Install platform packages
+
+To install specific platform packages you'll need to do so using the Unity Package Manager. It can be found in the editor's main menu bar:
+
+```
+Window/Package Manager...
+```
 
 ![Search Package Manager](../images/DownloadingTheXRTK/PackageManager.png)
+
+> **Note** You can use the Unity Package Manager's search box to filter packages by typing in `XRTK` to filter out all of the packages available in scope.
 
 ## Manual UPM Installation
 
@@ -73,8 +96,8 @@ Advanced developers and those wishing to contribute to the Mixed Reality Toolkit
 
 ### Prerequisites
 
-* Each contributor to the project will need to have [git installed](https://git-scm.com/) on their machines with the proper envionment variable set so the symbolic linker can find and execute git commands via the terminal.
-* You'll need to install the core pacakge via one of the [traditional installation](#automatic-upm-installation) paths before you can create symbolic links in your project using the editor context menu in later setup steps.
+* Each contributor to the project will need to have [git installed](https://git-scm.com/) on their machines with the proper environment variable set so the symbolic linker can find and execute git commands via the terminal.
+* You'll need to install the core package via one of the [traditional installation](#register-upm-server-in-project-settings) paths before you can create symbolic links in your project using the editor context menu in later setup steps.
 
 ### Setup Steps
 
@@ -86,10 +109,10 @@ Advanced developers and those wishing to contribute to the Mixed Reality Toolkit
   ![Symbolic Link Context Menu](../images/DownloadingTheXRTK/SymbolicLinks.png)
 4. Using the symbolic link wizard, choose the source folder for the package you wish you replace with the editable version, and the target path for your project, then import the package.
   ![Symbolic Link Wizard](../images/DownloadingTheXRTK/SymbolicLinkWizard.png)
-    > <font color="yellow">**Important:**</font> It's strongly advised to use the `Packages` folder as your target path for all symbolically linked packages.
-5. Repeat step 4 for each additoinal package you'd like to directly modify.
+    > <font color="orange">**Important:**</font> It's strongly advised to use the `Packages` folder as your target path for all symbolically linked packages.
+5. Repeat step 4 for each additional package you'd like to directly modify.
 
-This workflow works with any project using GIT and the symbolically linked folders can be customized to utilize any path availible under source control.
+This workflow works with any project using GIT and the symbolically linked folders can be customized to utilize any path available under source control.
 
 ---
 

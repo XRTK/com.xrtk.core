@@ -23,8 +23,8 @@ namespace XRTK.Editor.Utilities
         [Serializable]
         private struct GuidPair
         {
-            public string Original;
-            public string Generated;
+            public string Key;
+            public string Value;
         }
 
         [Serializable]
@@ -36,9 +36,9 @@ namespace XRTK.Editor.Utilities
             {
                 for (int i = 0; i < Map.Count; i++)
                 {
-                    if (Map[i].Generated == inGuid)
+                    if (Map[i].Value == inGuid)
                     {
-                        outGuid = Map[i].Original;
+                        outGuid = Map[i].Key;
                         return true;
                     }
                 }
@@ -51,9 +51,9 @@ namespace XRTK.Editor.Utilities
             {
                 for (int i = 0; i < Map.Count; i++)
                 {
-                    if (Map[i].Original == inGuid)
+                    if (Map[i].Key == inGuid)
                     {
-                        outGuid = Map[i].Generated;
+                        outGuid = Map[i].Value;
                         return true;
                     }
                 }
@@ -156,8 +156,8 @@ namespace XRTK.Editor.Utilities
                             newGuid = Guid.NewGuid().ToString("N");
                             guidMap.Map.Add(new GuidPair
                             {
-                                Original = guid,
-                                Generated = newGuid
+                                Key = guid,
+                                Value = newGuid
                             });
                         }
 

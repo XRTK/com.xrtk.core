@@ -302,7 +302,7 @@ namespace XRTK.Services
                             IsApplicationQuitting = false;
                             break;
                         case UnityEditor.PlayModeStateChange.ExitingEditMode:
-                            if (activeProfile == null)
+                            if (activeProfile.IsNull())
                             {
                                 Debug.LogError($"{nameof(MixedRealityToolkit)} has no active profile! Exiting playmode...");
                                 UnityEditor.EditorApplication.isPlaying = false;

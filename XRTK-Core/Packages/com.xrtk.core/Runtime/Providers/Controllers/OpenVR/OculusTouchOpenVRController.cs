@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Extensions;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
@@ -67,5 +68,31 @@ namespace XRTK.Providers.Controllers.OpenVR
             new MixedRealityInteractionMapping("Touch.SecondaryThumbRest Near Touch", AxisType.Digital, DeviceInputType.ThumbNearTouch, ControllerMappingLibrary.AXIS_18),
             new MixedRealityInteractionMapping("Grip Pose", AxisType.SixDof, DeviceInputType.SpatialGrip)
         };
+
+        public override void UpdateController()
+        {
+            base.UpdateController();
+
+            if (TrackingState == TrackingState.Tracked)
+            {
+                for (int i = 0; i < Interactions?.Length; i++)
+                {
+                    var interactionMapping = Interactions[i];
+                    switch (interactionMapping.InputType)
+                    {
+                        case DeviceInputType.SpatialGrip:
+                            UpdateSpatialGripData(interactionMapping);
+                            interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void UpdateSpatialGripData(MixedRealityInteractionMapping interactionMapping)
+        {
+            Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
+            interactionMapping.PoseData = CurrentControllerPose;
+        }
     }
 }

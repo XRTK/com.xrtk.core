@@ -1,8 +1,6 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
-using System;
-using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.SceneManagement;
 using UnityEditor.PackageManager;
@@ -11,12 +9,6 @@ using XRTK.Definitions;
 using XRTK.Editor.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces;
-using XRTK.Interfaces.BoundarySystem;
-using XRTK.Interfaces.CameraSystem;
-using XRTK.Interfaces.InputSystem;
-using XRTK.Interfaces.Providers;
-using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Interfaces.TeleportSystem;
 using XRTK.Services;
 
 namespace XRTK.Editor.Profiles

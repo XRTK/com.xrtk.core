@@ -3,7 +3,7 @@
 
 using UnityEngine;
 
-namespace XRTK.Extensions.XRTK.Extensions
+namespace XRTK.Extensions
 {
     public static class CollisionExtensions
     {

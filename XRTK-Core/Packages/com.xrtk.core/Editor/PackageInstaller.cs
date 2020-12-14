@@ -207,7 +207,7 @@ namespace XRTK.Editor
                 {
                     case Type _ when typeof(IMixedRealityCameraDataProvider).IsAssignableFrom(configurationType):
                         var cameraSystemProfile = rootProfile.CameraSystemProfile;
-                        var cameraDataProviderConfiguration = new MixedRealityServiceConfiguration<IMixedRealityCameraDataProvider>(configuration.InstancedType, configuration.Name, configuration.Priority, configuration.RuntimePlatforms, configuration.Profile);
+                        var cameraDataProviderConfiguration = new MixedRealityServiceConfiguration<IMixedRealityCameraDataProvider>(configuration);
 
                         if (cameraSystemProfile.RegisteredServiceConfigurations.All(serviceConfiguration => serviceConfiguration.InstancedType.Type != cameraDataProviderConfiguration.InstancedType.Type))
                         {
@@ -219,7 +219,7 @@ namespace XRTK.Editor
 
                     case Type _ when typeof(IMixedRealityInputDataProvider).IsAssignableFrom(configurationType):
                         var inputSystemProfile = rootProfile.InputSystemProfile;
-                        var inputDataProviderConfiguration = new MixedRealityServiceConfiguration<IMixedRealityInputDataProvider>(configuration.InstancedType, configuration.Name, configuration.Priority, configuration.RuntimePlatforms, configuration.Profile);
+                        var inputDataProviderConfiguration = new MixedRealityServiceConfiguration<IMixedRealityInputDataProvider>(configuration);
 
                         if (inputSystemProfile.RegisteredServiceConfigurations.All(serviceConfiguration => serviceConfiguration.InstancedType.Type != inputDataProviderConfiguration.InstancedType.Type))
                         {
@@ -231,7 +231,7 @@ namespace XRTK.Editor
 
                     case Type _ when typeof(IMixedRealitySpatialAwarenessDataProvider).IsAssignableFrom(configurationType):
                         var spatialAwarenessSystemProfile = rootProfile.SpatialAwarenessProfile;
-                        var spatialObserverConfiguration = new MixedRealityServiceConfiguration<IMixedRealitySpatialAwarenessDataProvider>(configuration.InstancedType, configuration.Name, configuration.Priority, configuration.RuntimePlatforms, configuration.Profile);
+                        var spatialObserverConfiguration = new MixedRealityServiceConfiguration<IMixedRealitySpatialAwarenessDataProvider>(configuration);
 
                         if (spatialAwarenessSystemProfile.RegisteredServiceConfigurations.All(serviceConfiguration => serviceConfiguration.InstancedType.Type != spatialObserverConfiguration.InstancedType.Type))
                         {

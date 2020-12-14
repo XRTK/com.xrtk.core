@@ -304,6 +304,7 @@ namespace XRTK.Services
                         case UnityEditor.PlayModeStateChange.ExitingEditMode:
                             if (activeProfile == null)
                             {
+                                Debug.LogError($"{nameof(MixedRealityToolkit)} has no active profile! Exiting playmode...");
                                 UnityEditor.EditorApplication.isPlaying = false;
                                 UnityEditor.Selection.activeObject = Instance;
                                 UnityEditor.EditorApplication.delayCall += () =>

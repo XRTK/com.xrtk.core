@@ -302,8 +302,9 @@ namespace XRTK.Services
                             IsApplicationQuitting = false;
                             break;
                         case UnityEditor.PlayModeStateChange.ExitingEditMode:
-                            if (activeProfile == null)
+                            if (activeProfile.IsNull())
                             {
+                                Debug.LogError($"{nameof(MixedRealityToolkit)} has no active profile! Exiting playmode...");
                                 UnityEditor.EditorApplication.isPlaying = false;
                                 UnityEditor.Selection.activeObject = Instance;
                                 UnityEditor.EditorApplication.delayCall += () =>
@@ -453,9 +454,9 @@ namespace XRTK.Services
 
             if (ActiveProfile.IsBoundarySystemEnabled)
             {
-                if (TryCreateAndRegisterService<IMixedRealityBoundarySystem>(ActiveProfile.BoundarySystemSystemType, out var service, ActiveProfile.BoundaryVisualizationProfile) && BoundarySystem != null)
+                if (TryCreateAndRegisterService<IMixedRealityBoundarySystem>(ActiveProfile.BoundarySystemSystemType, out var service, ActiveProfile.BoundarySystemProfile) && BoundarySystem != null)
                 {
-                    TryRegisterDataProviderConfigurations(ActiveProfile.BoundaryVisualizationProfile.RegisteredServiceConfigurations, service);
+                    TryRegisterDataProviderConfigurations(ActiveProfile.BoundarySystemProfile.RegisteredServiceConfigurations, service);
                 }
                 else
                 {

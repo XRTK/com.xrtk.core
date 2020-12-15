@@ -18,9 +18,14 @@ namespace XRTK.Providers.Controllers.OpenVR
 
         /// <inheritdoc />
         public OculusTouchOpenVRController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
-            : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
-        {
-        }
+            : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile) { }
+
+        /// <summary>
+        /// Local offset from the controller position defining where the grip pose is.
+        /// The grip pose may be used to attach things to the controller when grabbing objects.
+        /// </summary>
+        private readonly MixedRealityPose gripPoseOffset = new
+            MixedRealityPose(new Vector3(0f, 0f, .03f), Quaternion.Euler(0f, 90f, 0f));
 
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultLeftHandedInteractions => new[]
@@ -92,7 +97,9 @@ namespace XRTK.Providers.Controllers.OpenVR
         private void UpdateSpatialGripData(MixedRealityInteractionMapping interactionMapping)
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
-            interactionMapping.PoseData = CurrentControllerPose;
+            interactionMapping.PoseData = new MixedRealityPose(
+                CurrentControllerPose.Position + gripPoseOffset.Position,
+                Quaternion.Euler(CurrentControllerPose.Rotation.eulerAngles + gripPoseOffset.Rotation.eulerAngles));
         }
     }
 }

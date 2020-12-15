@@ -16,7 +16,31 @@ In this article, we will walk through each approach to get you up and running, s
 
 Unity has now enabled the ability to register scoped registries through the Unity Editor and is now the recommended way to add custom solutions to your project, giving you visibility of the assets you have registered in your solution and where they come from.
 
+To start, you will need to register the XRTK Scoped registry in the Unity Package Manager, which you will find in the Package Manager Window (Window -> Package Manager) Advanced dropdown, as shown below:
 
+![Unity Package Manager Advanced options](../images/DownloadingTheXRTK/UnityPackageManager-Advanced.jpg)
+
+Once opened, you will see the Scoped Registry configuration (which is also available via the Project Settings window), from here, you can add the XRTK scoped registry using the details below:
+
+![Unity Package Manager Scoped Registries](../images/DownloadingTheXRTK/UnityPackageManager-ScopedRegistries.jpg)
+
+```text
+Name: XRTK
+URL: http://upm.xrtk.io:4873
+Scope(s): com.xrtk
+```
+
+Once entered, simply click "Save" and close the window. Upon returning to the Unity Package Manager, you can now select "My Registries" in the package filter on the left hand side drop down, as shown here:
+
+![Unity Package Manager My Registries](../images/DownloadingTheXRTK/UnityPackageManager-MyRegistries.jpg)
+
+Which will list all the current XRTK packages available for install.  If you also wish to check out the latest "Preview packages", then simply check the "Show Preview Packages" option in the "Advanced" dropdown to display them, as shown here:
+
+![Unity Package Manager My Registries](../images/DownloadingTheXRTK/UnityPackageManager-XRTKRegistries.jpg)
+
+Once you are ready, simply install the XRTK and any platforms you wish to use in your project to get started.
+
+> We recommend starting with the **XRTK.SDK** package to begin with, which will also install the Core XRTK package, for the simplest path to begin with.
 
 ## Automatic UPM Installation
 

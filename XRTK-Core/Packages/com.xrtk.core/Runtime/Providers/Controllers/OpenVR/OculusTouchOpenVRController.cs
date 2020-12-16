@@ -67,6 +67,9 @@ namespace XRTK.Providers.Controllers.OpenVR
             new MixedRealityInteractionMapping("Grip Pose", AxisType.SixDof, DeviceInputType.SpatialGrip)
         };
 
+        /// <inheritdoc />
+        protected override MixedRealityPose GripPoseOffset => new MixedRealityPose(Vector3.zero, Quaternion.Euler(0f, 0f, -90f));
+
         public override void UpdateController()
         {
             base.UpdateController();
@@ -91,8 +94,8 @@ namespace XRTK.Providers.Controllers.OpenVR
         {
             Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
             interactionMapping.PoseData = new MixedRealityPose(
-                CurrentControllerPose.Position + GripPoseOffset.Position,
-                Quaternion.Euler(CurrentControllerPose.Rotation.eulerAngles + GripPoseOffset.Rotation.eulerAngles));
+                CurrentControllerPose.Position + CurrentControllerPose.Rotation * GripPoseOffset.Position,
+                CurrentControllerPose.Rotation * GripPoseOffset.Rotation);
         }
     }
 }

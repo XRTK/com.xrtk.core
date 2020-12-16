@@ -99,6 +99,7 @@ Once the build completes, you can install and run it on the device.
 
 * [Downloading the XRTK](01-DownloadingTheXRTK.md)
 * [Configuring your project](02-Configuration.md)
+* [Known Issues](04-KnownIssues.md)
 
 ---
 

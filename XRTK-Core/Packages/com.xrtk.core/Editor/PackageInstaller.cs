@@ -27,7 +27,7 @@ namespace XRTK.Editor
         /// <param name="destinationPath">The destination path, typically inside the projects "Assets" directory.</param>
         /// <param name="regenerateGuids">Should the guids for the copied assets be regenerated?</param>
         /// <returns>Returns true if the profiles were successfully copies, installed, and added to the <see cref="MixedRealityToolkitRootProfile"/>.</returns>
-        public static bool TryInstallAssets(string sourcePath, string destinationPath, bool regenerateGuids = true)
+        public static bool TryInstallAssets(string sourcePath, string destinationPath, bool regenerateGuids = false)
         {
             return TryInstallAssets(new Dictionary<string, string> { { sourcePath, destinationPath } }, regenerateGuids);
         }
@@ -38,7 +38,7 @@ namespace XRTK.Editor
         /// <param name="installationPaths">The assets paths to be installed. Key is the source path of the assets to be installed. This should typically be from a hidden upm package folder marked with a "~". Value is the destination.</param>
         /// <param name="regenerateGuids">Should the guids for the copied assets be regenerated?</param>
         /// <returns>Returns true if the profiles were successfully copies, installed, and added to the <see cref="MixedRealityToolkitRootProfile"/>.</returns>
-        public static bool TryInstallAssets(Dictionary<string, string> installationPaths, bool regenerateGuids = true)
+        public static bool TryInstallAssets(Dictionary<string, string> installationPaths, bool regenerateGuids = false)
         {
             var anyFail = false;
             var newInstall = true;

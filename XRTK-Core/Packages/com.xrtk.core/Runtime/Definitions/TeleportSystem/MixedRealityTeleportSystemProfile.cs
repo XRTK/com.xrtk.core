@@ -2,8 +2,10 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Attributes;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.TeleportSystem;
+using XRTK.Interfaces.TeleportSystem.Handlers;
 
 namespace XRTK.Definitions.TeleportSystem
 {
@@ -14,12 +16,13 @@ namespace XRTK.Definitions.TeleportSystem
     public class MixedRealityTeleportSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityTeleportDataProvider>
     {
         [SerializeField]
-        [Tooltip("The duration of the teleport in seconds.")]
-        private float teleportDuration = .25f;
+        [Implements(typeof(IMixedRealityTeleportComponentHandler), TypeGrouping.ByNamespaceFlat)]
+        [Tooltip("The concrete teleport handler component to use for teleportation.")]
+        private SystemType teleportHandlerComponent = null;
 
         /// <summary>
-        /// The duration of the teleport in seconds.
+        /// The concrete teleport handler component to use for teleportation.
         /// </summary>
-        public float TeleportDuration => teleportDuration;
+        public SystemType TeleportHandlerComponent => teleportHandlerComponent;
     }
 }

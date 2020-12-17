@@ -7,6 +7,7 @@ using XRTK.Definitions.TeleportSystem;
 using XRTK.EventDatum.Teleport;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.TeleportSystem;
+using XRTK.Interfaces.TeleportSystem.Handlers;
 using XRTK.Utilities;
 
 namespace XRTK.Services.Teleportation
@@ -22,14 +23,15 @@ namespace XRTK.Services.Teleportation
         /// </summary>
         /// <param name="profile">The active <see cref="MixedRealityTeleportSystemProfile"/>.</param>
         public MixedRealityTeleportSystem(MixedRealityTeleportSystemProfile profile)
-            : base(profile)
-        {
-            TeleportDuration = profile.TeleportDuration;
-        }
+            : base(profile) { }
 
         private TeleportEventData teleportEventData;
+        private TeleportEventData currentTeleportEventData;
         private bool isTeleporting = false;
         private bool isProcessingTeleportRequest = false;
+        private Vector3 targetPosition;
+        private Vector3 targetRotation;
+        private float teleportationDelay;
 
         #region IMixedRealityService Implementation
 
@@ -41,6 +43,21 @@ namespace XRTK.Services.Teleportation
             if (!Application.isPlaying) { return; }
 
             teleportEventData = new TeleportEventData(EventSystem.current);
+        }
+
+        /// <inheritdoc />
+        public override void Update()
+        {
+            base.Update();
+
+            if (isProcessingTeleportRequest && teleportationDelay > 0f)
+            {
+                teleportationDelay -= Time.deltaTime;
+                if (teleportationDelay <= 0f)
+                {
+                    CompleteTeleportation();
+                }
+            }
         }
 
         #endregion IMixedRealityService Implementation
@@ -80,23 +97,6 @@ namespace XRTK.Services.Teleportation
         #endregion IEventSystemManager Implementation
 
         #region IMixedRealityTeleportSystem Implementation
-
-        private float teleportDuration;
-        /// <inheritdoc />
-        public float TeleportDuration
-        {
-            get => teleportDuration;
-            set
-            {
-                if (isProcessingTeleportRequest)
-                {
-                    Debug.LogWarning("Couldn't change teleport duration. Teleport in progress.");
-                    return;
-                }
-
-                teleportDuration = value;
-            }
-        }
 
         private static readonly ExecuteEvents.EventFunction<IMixedRealityTeleportHandler> OnTeleportRequestHandler =
             delegate (IMixedRealityTeleportHandler handler, BaseEventData eventData)
@@ -192,10 +192,18 @@ namespace XRTK.Services.Teleportation
 
         private void ProcessTeleportationRequest(TeleportEventData eventData)
         {
+            if (eventData.used)
+            {
+                return;
+            }
+
+            eventData.Use();
+            currentTeleportEventData = eventData;
+
             isProcessingTeleportRequest = true;
 
-            var targetRotation = Vector3.zero;
-            var targetPosition = eventData.Pointer.Result.EndPoint;
+            targetRotation = Vector3.zero;
+            targetPosition = eventData.Pointer.Result.EndPoint;
             targetRotation.y = eventData.Pointer.PointerOrientation;
 
             if (eventData.HotSpot != null)
@@ -217,13 +225,35 @@ namespace XRTK.Services.Teleportation
             targetPosition -= cameraTransform.position - cameraParent.position;
             targetPosition.y = height;
 
-            cameraParent.position = targetPosition;
-            cameraParent.RotateAround(cameraTransform.position, Vector3.up, targetRotation.y - cameraTransform.eulerAngles.y);
+            // If we don't have a teleporation delay, we can complete right away.
+            //if (!(TeleportDuration > 0f))
+            //{
+            //    CompleteTeleportation();
+            //}
+            //else
+            //{
+            //    teleportationDelay = teleportDuration;
+            //}
+        }
 
-            isProcessingTeleportRequest = false;
+        private void CompleteTeleportation()
+        {
+            if (isProcessingTeleportRequest)
+            {
+                var cameraTransform = MixedRealityToolkit.CameraSystem == null
+                ? CameraCache.Main.transform
+                : MixedRealityToolkit.CameraSystem.MainCameraRig.CameraTransform;
+                var cameraParent = cameraTransform.parent;
+                Debug.Assert(cameraParent != null, "The Teleport System requires that the camera be parented under another object.");
 
-            // Raise complete event using the pointer and hot spot provided.
-            RaiseTeleportComplete(eventData.Pointer, eventData.HotSpot);
+                cameraParent.position = targetPosition;
+                cameraParent.RotateAround(cameraTransform.position, Vector3.up, targetRotation.y - cameraTransform.eulerAngles.y);
+
+                isProcessingTeleportRequest = false;
+
+                // Raise complete event using the pointer and hot spot provided.
+                RaiseTeleportComplete(currentTeleportEventData.Pointer, currentTeleportEventData.HotSpot);
+            }
         }
     }
 }

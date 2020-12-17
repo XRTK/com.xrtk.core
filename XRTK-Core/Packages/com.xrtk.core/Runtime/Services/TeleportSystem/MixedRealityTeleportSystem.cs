@@ -1,9 +1,9 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
 using UnityEngine.EventSystems;
-using XRTK.Definitions;
+using XRTK.Definitions.TeleportSystem;
 using XRTK.EventDatum.Teleport;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.TeleportSystem;
@@ -20,17 +20,16 @@ namespace XRTK.Services.Teleportation
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="profile"></param>
-        public MixedRealityTeleportSystem(BaseMixedRealityProfile profile)
+        /// <param name="profile">The active <see cref="MixedRealityTeleportSystemProfile"/>.</param>
+        public MixedRealityTeleportSystem(MixedRealityTeleportSystemProfile profile)
             : base(profile)
         {
+            TeleportDuration = profile.TeleportDuration;
         }
 
         private TeleportEventData teleportEventData;
-
         private bool isTeleporting = false;
         private bool isProcessingTeleportRequest = false;
-
         private Vector3 targetPosition = Vector3.zero;
         private Vector3 targetRotation = Vector3.zero;
 
@@ -84,8 +83,7 @@ namespace XRTK.Services.Teleportation
 
         #region IMixedRealityTeleportSystem Implementation
 
-        private float teleportDuration = 0.25f;
-
+        private float teleportDuration;
         /// <inheritdoc />
         public float TeleportDuration
         {

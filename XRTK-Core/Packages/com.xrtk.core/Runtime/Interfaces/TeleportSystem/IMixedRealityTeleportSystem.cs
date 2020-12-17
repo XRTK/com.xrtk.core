@@ -8,7 +8,7 @@ namespace XRTK.Interfaces.TeleportSystem
 {
     /// <summary>
     /// Manager interface for a Teleport system in the Mixed Reality Toolkit
-    /// All replacement systems for providing Teleportation functionality should derive from this interface
+    /// All replacement systems for providing Teleportation functionality should derive from this interface.
     /// </summary>
     public interface IMixedRealityTeleportSystem : IMixedRealityEventSystem
     {

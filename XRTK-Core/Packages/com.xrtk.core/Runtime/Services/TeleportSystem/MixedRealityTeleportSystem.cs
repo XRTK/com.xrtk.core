@@ -30,8 +30,6 @@ namespace XRTK.Services.Teleportation
         private TeleportEventData teleportEventData;
         private bool isTeleporting = false;
         private bool isProcessingTeleportRequest = false;
-        private Vector3 targetPosition = Vector3.zero;
-        private Vector3 targetRotation = Vector3.zero;
 
         #region IMixedRealityService Implementation
 
@@ -196,14 +194,13 @@ namespace XRTK.Services.Teleportation
         {
             isProcessingTeleportRequest = true;
 
-            targetRotation = Vector3.zero;
-            targetPosition = eventData.Pointer.Result.EndPoint;
+            var targetRotation = Vector3.zero;
+            var targetPosition = eventData.Pointer.Result.EndPoint;
             targetRotation.y = eventData.Pointer.PointerOrientation;
 
             if (eventData.HotSpot != null)
             {
                 targetPosition = eventData.HotSpot.Position;
-
                 if (eventData.HotSpot.OverrideTargetOrientation)
                 {
                     targetRotation.y = eventData.HotSpot.TargetOrientation;
@@ -213,15 +210,15 @@ namespace XRTK.Services.Teleportation
             var cameraTransform = MixedRealityToolkit.CameraSystem == null
                 ? CameraCache.Main.transform
                 : MixedRealityToolkit.CameraSystem.MainCameraRig.CameraTransform;
-            var cameraPosition = cameraTransform.position;
             var cameraParent = cameraTransform.parent;
-            var parentPosition = cameraParent.position;
             Debug.Assert(cameraParent != null, "The Teleport System requires that the camera be parented under another object.");
-            var height = targetPosition.y + parentPosition.y;
-            targetPosition -= cameraPosition - parentPosition;
+
+            var height = targetPosition.y;
+            targetPosition -= cameraTransform.position - cameraParent.position;
             targetPosition.y = height;
+
             cameraParent.position = targetPosition;
-            cameraParent.RotateAround(cameraPosition, Vector3.up, targetRotation.y - cameraTransform.eulerAngles.y);
+            cameraParent.RotateAround(cameraTransform.position, Vector3.up, targetRotation.y - cameraTransform.eulerAngles.y);
 
             isProcessingTeleportRequest = false;
 

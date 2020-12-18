@@ -10,13 +10,13 @@ namespace XRTK.Editor.Profiles
     [CustomEditor(typeof(MixedRealityTeleportSystemProfile))]
     public class MixedRealityTeleportSystemProfileInspector : MixedRealityServiceProfileInspector
     {
-        private SerializedProperty teleportHandlerComponent;
+        private SerializedProperty teleportProvider;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            teleportHandlerComponent = serializedObject.FindProperty(nameof(teleportHandlerComponent));
+            teleportProvider = serializedObject.FindProperty(nameof(teleportProvider));
         }
 
         public override void OnInspectorGUI()
@@ -26,7 +26,7 @@ namespace XRTK.Editor.Profiles
             serializedObject.Update();
             EditorGUI.BeginChangeCheck();
 
-            EditorGUILayout.PropertyField(teleportHandlerComponent);
+            EditorGUILayout.PropertyField(teleportProvider);
 
             serializedObject.ApplyModifiedProperties();
 

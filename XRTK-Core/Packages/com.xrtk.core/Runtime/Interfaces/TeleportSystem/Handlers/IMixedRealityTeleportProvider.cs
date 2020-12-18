@@ -7,5 +7,5 @@ namespace XRTK.Interfaces.TeleportSystem.Handlers
     /// Interface to implement for handling teleport events by the <see cref="IMixedRealityTeleportSystem"/>
     /// in <see cref="UnityEngine.MonoBehaviour"/> components.
     /// </summary>
-    public interface IMixedRealityTeleportComponentHandler : IMixedRealityTeleportHandler { }
+    public interface IMixedRealityTeleportProvider : IMixedRealityTeleportHandler { }
 }

@@ -29,15 +29,15 @@ namespace XRTK.Services.Teleportation
         public MixedRealityTeleportSystem(MixedRealityTeleportSystemProfile profile)
             : base(profile)
         {
-            if (profile.TeleportHandlerComponent?.Type == null)
+            if (profile.TeleportProvider?.Type == null)
             {
-                throw new Exception($"The {nameof(MixedRealityTeleportSystemProfile)} is missing the required {teleportHandlerComponent}!");
+                throw new Exception($"The {nameof(MixedRealityTeleportSystemProfile)} is missing the required {teleportProvider}!");
             }
 
-            teleportHandlerComponent = profile.TeleportHandlerComponent;
+            teleportProvider = profile.TeleportProvider;
         }
 
-        private readonly SystemType teleportHandlerComponent;
+        private readonly SystemType teleportProvider;
 
         private TeleportEventData teleportEventData;
         private bool isTeleporting = false;
@@ -54,7 +54,7 @@ namespace XRTK.Services.Teleportation
                 teleportEventData = new TeleportEventData(EventSystem.current);
             }
 
-            CameraCache.Main.gameObject.EnsureComponent(teleportHandlerComponent.Type);
+            CameraCache.Main.gameObject.EnsureComponent(teleportProvider.Type);
         }
 
         /// <inheritdoc />
@@ -64,7 +64,7 @@ namespace XRTK.Services.Teleportation
 
             if (!Application.isPlaying)
             {
-                var component = CameraCache.Main.GetComponent<IMixedRealityTeleportComponentHandler>() as Component;
+                var component = CameraCache.Main.GetComponent<IMixedRealityTeleportProvider>() as Component;
 
                 if (!component.IsNull())
                 {

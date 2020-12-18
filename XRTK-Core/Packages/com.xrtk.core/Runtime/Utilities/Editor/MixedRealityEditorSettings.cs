@@ -13,8 +13,9 @@ namespace XRTK.Utilities.Editor
     [InitializeOnLoad]
     public class MixedRealityEditorSettings : IActiveBuildTargetChanged
     {
-        private static readonly string IgnoreKey = $"{Application.productName}_XRTK_Editor_IgnoreSettingsPrompts";
-        private static readonly string SessionKey = $"{Application.productName}_XRTK_Editor_ShownSettingsPrompts";
+        private static readonly string ignoreKey = $"{Application.productName}_XRTK_Editor_IgnoreSettingsPrompts";
+        private static readonly string sessionKey = $"{Application.productName}_XRTK_Editor_ShownSettingsPrompts";
+        private static readonly string visibleMetaVersionControlMode = "Visible Meta Files";
 
         /// <summary>
         /// Constructor.
@@ -35,13 +36,13 @@ namespace XRTK.Utilities.Editor
             EditorPrefs.SetBool($"{Application.productName}_XRTK", true);
 
             if (Application.isPlaying ||
-                EditorPrefs.GetBool(IgnoreKey, false) ||
-                !SessionState.GetBool(SessionKey, true))
+                EditorPrefs.GetBool(ignoreKey, false) ||
+                !SessionState.GetBool(sessionKey, true))
             {
                 return;
             }
 
-            SessionState.SetBool(SessionKey, false);
+            SessionState.SetBool(sessionKey, false);
 
             var message = "The Mixed Reality Toolkit needs to apply the following settings to your project:\n\n";
 
@@ -52,7 +53,11 @@ namespace XRTK.Utilities.Editor
                 message += "- Force Text Serialization\n";
             }
 
-            var visibleMetaFiles = EditorSettings.externalVersionControl.Equals("Visible Meta Files");
+#if UNITY_2020_1_OR_NEWER
+            var visibleMetaFiles = VersionControlSettings.mode.Equals(visibleMetaVersionControlMode);
+#else
+            var visibleMetaFiles = EditorSettings.externalVersionControl.Equals(visibleMetaVersionControlMode);
+#endif
 
             if (!visibleMetaFiles)
             {
@@ -74,7 +79,11 @@ namespace XRTK.Utilities.Editor
                 {
                     case 0:
                         EditorSettings.serializationMode = SerializationMode.ForceText;
-                        EditorSettings.externalVersionControl = "Visible Meta Files";
+#if UNITY_2020_1_OR_NEWER
+                        VersionControlSettings.mode = visibleMetaVersionControlMode;
+#else
+                        EditorSettings.externalVersionControl = visibleMetaVersionControlMode;
+#endif
                         AssetDatabase.SaveAssets();
 
                         if (!EditorApplication.isUpdating)
@@ -83,7 +92,7 @@ namespace XRTK.Utilities.Editor
                         }
                         break;
                     case 1:
-                        EditorPrefs.SetBool(IgnoreKey, true);
+                        EditorPrefs.SetBool(ignoreKey, true);
                         break;
                     case 2:
                         break;
@@ -99,7 +108,7 @@ namespace XRTK.Utilities.Editor
         /// <inheritdoc />
         void IActiveBuildTargetChanged.OnActiveBuildTargetChanged(BuildTarget previousTarget, BuildTarget newTarget)
         {
-            SessionState.SetBool(SessionKey, true);
+            SessionState.SetBool(sessionKey, true);
             CheckSettings();
         }
 

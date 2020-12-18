@@ -37,9 +37,9 @@ Our preferred deployment approach is to fully utilize [Unity's native package ma
 
 > **Note:** Some prefabs and assets require TextMesh Pro, meaning you have to have the TextMesh Pro package installed and the assets in your project `Window -> TextMeshPro -> Import TMP Essential Resources`.
 
-Download the [XRTK-Core.unitypackage](https://github.com/XRTK/XRTK-Core/releases) asset, then drag and drop it into your project window.  This adds the Mixed Reality Toolkit seed, that will automatically register the Mixed Reality Toolkit's upm server with the Unity package manager and starts the download and installation of the Core and selected packages.
+Simply follow along with the UPM Installation instructions detailed in the [Downloading the XRTK](01-DownloadingTheXRTK.md#register_upm_server_in_project_settings) guide to add the XRTK scoped registry and install the relevant packages.
 
-> **Note:** Specific Unity Editor platform support isn't automatically downloaded for you. Developers are expected to to back to the Unity Hub and install each module as needed.
+> We recommend installing the **SDK** first to ensure you have the smoothest setup with the XRTK and give you access to the Quickstart configurations.
 
 ---
 
@@ -99,6 +99,7 @@ Once the build completes, you can install and run it on the device.
 
 * [Downloading the XRTK](01-DownloadingTheXRTK.md)
 * [Configuring your project](02-Configuration.md)
+* [Known Issues](04-KnownIssues.md)
 
 ---
 

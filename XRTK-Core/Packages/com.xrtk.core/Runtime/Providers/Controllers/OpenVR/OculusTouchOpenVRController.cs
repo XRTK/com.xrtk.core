@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Extensions;
 using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
@@ -17,9 +18,7 @@ namespace XRTK.Providers.Controllers.OpenVR
 
         /// <inheritdoc />
         public OculusTouchOpenVRController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)
-            : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile)
-        {
-        }
+            : base(controllerDataProvider, trackingState, controllerHandedness, controllerMappingProfile) { }
 
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultLeftHandedInteractions => new[]
@@ -41,7 +40,8 @@ namespace XRTK.Providers.Controllers.OpenVR
             new MixedRealityInteractionMapping("Button.Three Touch", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.JoystickButton12),
             new MixedRealityInteractionMapping("Button.Four Touch", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.JoystickButton13),
             new MixedRealityInteractionMapping("Touch.PrimaryThumbRest Touch", AxisType.Digital, DeviceInputType.ThumbTouch, KeyCode.JoystickButton18),
-            new MixedRealityInteractionMapping("Touch.PrimaryThumbRest Near Touch", AxisType.Digital, DeviceInputType.ThumbNearTouch, ControllerMappingLibrary.AXIS_17)
+            new MixedRealityInteractionMapping("Touch.PrimaryThumbRest Near Touch", AxisType.Digital, DeviceInputType.ThumbNearTouch, ControllerMappingLibrary.AXIS_17),
+            new MixedRealityInteractionMapping("Grip Pose", AxisType.SixDof, DeviceInputType.SpatialGrip)
         };
 
         /// <inheritdoc />
@@ -63,7 +63,39 @@ namespace XRTK.Providers.Controllers.OpenVR
             new MixedRealityInteractionMapping("Button.One Touch", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.JoystickButton10),
             new MixedRealityInteractionMapping("Button.Two Touch", AxisType.Digital, DeviceInputType.ButtonPress, KeyCode.JoystickButton11),
             new MixedRealityInteractionMapping("Touch.SecondaryThumbRest Touch", AxisType.Digital, DeviceInputType.ThumbTouch, KeyCode.JoystickButton19),
-            new MixedRealityInteractionMapping("Touch.SecondaryThumbRest Near Touch", AxisType.Digital, DeviceInputType.ThumbNearTouch, ControllerMappingLibrary.AXIS_18)
+            new MixedRealityInteractionMapping("Touch.SecondaryThumbRest Near Touch", AxisType.Digital, DeviceInputType.ThumbNearTouch, ControllerMappingLibrary.AXIS_18),
+            new MixedRealityInteractionMapping("Grip Pose", AxisType.SixDof, DeviceInputType.SpatialGrip)
         };
+
+        /// <inheritdoc />
+        protected override MixedRealityPose GripPoseOffset => new MixedRealityPose(Vector3.zero, Quaternion.Euler(0f, 0f, -90f));
+
+        public override void UpdateController()
+        {
+            base.UpdateController();
+
+            if (TrackingState == TrackingState.Tracked)
+            {
+                for (int i = 0; i < Interactions?.Length; i++)
+                {
+                    var interactionMapping = Interactions[i];
+                    switch (interactionMapping.InputType)
+                    {
+                        case DeviceInputType.SpatialGrip:
+                            UpdateSpatialGripData(interactionMapping);
+                            interactionMapping.RaiseInputAction(InputSource, ControllerHandedness);
+                            break;
+                    }
+                }
+            }
+        }
+
+        private void UpdateSpatialGripData(MixedRealityInteractionMapping interactionMapping)
+        {
+            Debug.Assert(interactionMapping.AxisType == AxisType.SixDof);
+            interactionMapping.PoseData = new MixedRealityPose(
+                CurrentControllerPose.Position + CurrentControllerPose.Rotation * GripPoseOffset.Position,
+                CurrentControllerPose.Rotation * GripPoseOffset.Rotation);
+        }
     }
 }

@@ -3,9 +3,12 @@
 
 using UnityEditor;
 using UnityEditor.Experimental.SceneManagement;
+using UnityEditor.PackageManager;
 using UnityEngine;
 using XRTK.Definitions;
 using XRTK.Editor.Utilities;
+using XRTK.Extensions;
+using XRTK.Interfaces;
 using XRTK.Services;
 
 namespace XRTK.Editor.Profiles
@@ -26,11 +29,12 @@ namespace XRTK.Editor.Profiles
         // Boundary system properties
         private SerializedProperty enableBoundarySystem;
         private SerializedProperty boundarySystemType;
-        private SerializedProperty boundaryVisualizationProfile;
+        private SerializedProperty boundarySystemProfile;
 
         // Teleport system properties
         private SerializedProperty enableTeleportSystem;
         private SerializedProperty teleportSystemType;
+        private SerializedProperty teleportSystemProfile;
 
         // Spatial Awareness system properties
         private SerializedProperty enableSpatialAwarenessSystem;
@@ -88,7 +92,7 @@ namespace XRTK.Editor.Profiles
 
             var prefabStage = PrefabStageUtility.GetCurrentPrefabStage();
 
-            // Create The MR Manager if none exists.
+            // Create the MixedRealityToolkit object if none exists.
             if (!MixedRealityToolkit.IsInitialized && prefabStage == null && !didPromptToConfigure)
             {
                 // Search for all instances, in case we've just hot reloaded the assembly.
@@ -96,11 +100,33 @@ namespace XRTK.Editor.Profiles
 
                 if (managerSearch.Length == 0)
                 {
+                    if (!ValidateImplementationsExists())
+                    {
+                        if (EditorUtility.DisplayDialog(
+                            "Attention!",
+                            $"We were unable to find any services or data providers to configure. Would you like to install the {nameof(MixedRealityToolkit)} SDK?",
+                            "Yes",
+                            "Later",
+                            DialogOptOutDecisionType.ForThisSession,
+                            "XRTK_Prompt_Install_SDK"))
+                        {
+                            EditorApplication.delayCall += () =>
+                            {
+                                Client.Add("com.xrtk.sdk");
+                            };
+                        }
+
+                        Selection.activeObject = null;
+                        return;
+                    }
+
                     if (EditorUtility.DisplayDialog(
                         "Attention!",
                         "There is no active Mixed Reality Toolkit in your scene!\n\nWould you like to create one now?",
                         "Yes",
-                        "Later"))
+                        "Later",
+                        DialogOptOutDecisionType.ForThisSession,
+                        "XRTK_Prompt_Configure_Scene"))
                     {
                         if (MixedRealityToolkit.CameraSystem != null)
                         {
@@ -131,11 +157,12 @@ namespace XRTK.Editor.Profiles
             // Boundary system configuration
             enableBoundarySystem = serializedObject.FindProperty(nameof(enableBoundarySystem));
             boundarySystemType = serializedObject.FindProperty(nameof(boundarySystemType));
-            boundaryVisualizationProfile = serializedObject.FindProperty(nameof(boundaryVisualizationProfile));
+            boundarySystemProfile = serializedObject.FindProperty(nameof(boundarySystemProfile));
 
             // Teleport system configuration
             enableTeleportSystem = serializedObject.FindProperty(nameof(enableTeleportSystem));
             teleportSystemType = serializedObject.FindProperty(nameof(teleportSystemType));
+            teleportSystemProfile = serializedObject.FindProperty(nameof(teleportSystemProfile));
 
             // Spatial Awareness system configuration
             enableSpatialAwarenessSystem = serializedObject.FindProperty(nameof(enableSpatialAwarenessSystem));
@@ -196,8 +223,8 @@ namespace XRTK.Editor.Profiles
             EditorGUI.indentLevel++;
             typeLabel.tooltip = boundarySystemType.tooltip;
             EditorGUILayout.PropertyField(boundarySystemType, typeLabel);
-            profileLabel.tooltip = boundaryVisualizationProfile.tooltip;
-            EditorGUILayout.PropertyField(boundaryVisualizationProfile, profileLabel);
+            profileLabel.tooltip = boundarySystemProfile.tooltip;
+            EditorGUILayout.PropertyField(boundarySystemProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Teleport System configuration
@@ -206,6 +233,8 @@ namespace XRTK.Editor.Profiles
             EditorGUI.indentLevel++;
             typeLabel.tooltip = teleportSystemType.tooltip;
             EditorGUILayout.PropertyField(teleportSystemType, typeLabel);
+            profileLabel.tooltip = teleportSystemProfile.tooltip;
+            EditorGUILayout.PropertyField(teleportSystemProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Spatial Awareness System configuration
@@ -253,6 +282,14 @@ namespace XRTK.Editor.Profiles
             {
                 EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(rootProfile);
             }
+        }
+
+        private static bool ValidateImplementationsExists()
+        {
+            return TypeExtensions.HasValidImplementations<IMixedRealitySystem>() &&
+                   TypeExtensions.HasValidImplementations<IMixedRealityService>() &&
+                   TypeExtensions.HasValidImplementations<IMixedRealityDataProvider>();
+
         }
     }
 }

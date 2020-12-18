@@ -16,6 +16,12 @@ namespace XRTK.Definitions
         where T : IMixedRealityService
     {
         /// <inheritdoc />
+        public MixedRealityServiceConfiguration(IMixedRealityServiceConfiguration configuration)
+            : base(configuration.InstancedType, configuration.Name, configuration.Priority, configuration.RuntimePlatforms, configuration.Profile)
+        {
+        }
+
+        /// <inheritdoc />
         public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, BaseMixedRealityProfile profile)
             : base(instancedType, name, priority, runtimePlatforms, profile)
         {

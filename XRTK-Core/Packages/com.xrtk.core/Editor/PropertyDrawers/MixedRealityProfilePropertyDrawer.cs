@@ -117,8 +117,7 @@ namespace XRTK.Editor.PropertyDrawers
                     }
                 }
 
-                Debug.Assert(!selectedProfile.ParentProfile.IsNull());
-                Debug.Assert(selectedProfile.ParentProfile != selectedProfile);
+                Debug.Assert(selectedProfile.ParentProfile != selectedProfile, $"{selectedProfile} cannot be a parent of itself!");
             }
 
             DrawCloneButtons = true;

@@ -47,7 +47,7 @@ namespace XRTK.Services
         public virtual void OnApplicationFocus(bool isFocused) { }
 
         /// <inheritdoc />
-        public void OnApplicationPause(bool isPaused) { }
+        public virtual void OnApplicationPause(bool isPaused) { }
 
         #endregion IMixedRealityService Implementation
 

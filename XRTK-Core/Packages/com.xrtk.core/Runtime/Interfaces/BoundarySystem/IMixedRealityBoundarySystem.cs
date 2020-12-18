@@ -88,6 +88,15 @@ namespace XRTK.Interfaces.BoundarySystem
         Edge[] BoundaryBounds { get; }
 
         /// <summary>
+        /// Sets up the boundary using the <see cref="IMixedRealityBoundaryDataProvider"/> specified.
+        /// </summary>
+        /// <param name="dataProvider"></param>
+        /// <remarks>
+        /// This method should usually be called from the <see cref="IMixedRealityService.Enable"/> method of the data provider itself.
+        /// </remarks>
+        void SetupBoundary(IMixedRealityBoundaryDataProvider dataProvider);
+
+        /// <summary>
         /// Determines if a <see cref="position"/> is within the area of the boundary space.
         /// </summary>
         /// <param name="position">The <see cref="Vector3"/> position to be checked.</param>

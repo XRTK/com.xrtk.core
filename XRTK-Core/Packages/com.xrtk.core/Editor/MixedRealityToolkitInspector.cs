@@ -78,8 +78,7 @@ namespace XRTK.Editor
                         EditorApplication.delayCall += () =>
                         {
                             changed = true;
-                            var rootProfile =
-                                AssetDatabase.LoadAssetAtPath<MixedRealityToolkitRootProfile>(rootProfilePath);
+                            var rootProfile = AssetDatabase.LoadAssetAtPath<MixedRealityToolkitRootProfile>(rootProfilePath);
                             Debug.Assert(rootProfile != null);
                             activeProfile.objectReferenceValue = rootProfile;
                             EditorGUIUtility.PingObject(rootProfile);

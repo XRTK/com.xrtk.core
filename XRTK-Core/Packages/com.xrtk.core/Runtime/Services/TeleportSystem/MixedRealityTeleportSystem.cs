@@ -1,13 +1,18 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using XRTK.Definitions;
+using XRTK.Definitions.TeleportSystem;
+using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Teleport;
+using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.TeleportSystem;
+using XRTK.Interfaces.TeleportSystem.Handlers;
 using XRTK.Utilities;
+using Object = UnityEngine.Object;
 
 namespace XRTK.Services.Teleportation
 {
@@ -20,19 +25,22 @@ namespace XRTK.Services.Teleportation
         /// <summary>
         /// Constructor.
         /// </summary>
-        /// <param name="profile"></param>
-        public MixedRealityTeleportSystem(BaseMixedRealityProfile profile)
+        /// <param name="profile">The active <see cref="MixedRealityTeleportSystemProfile"/>.</param>
+        public MixedRealityTeleportSystem(MixedRealityTeleportSystemProfile profile)
             : base(profile)
         {
+            if (profile.TeleportProvider?.Type == null)
+            {
+                throw new Exception($"The {nameof(MixedRealityTeleportSystemProfile)} is missing the required {teleportProvider}!");
+            }
+
+            teleportProvider = profile.TeleportProvider;
         }
 
+        private readonly SystemType teleportProvider;
+
         private TeleportEventData teleportEventData;
-
         private bool isTeleporting = false;
-        private bool isProcessingTeleportRequest = false;
-
-        private Vector3 targetPosition = Vector3.zero;
-        private Vector3 targetRotation = Vector3.zero;
 
         #region IMixedRealityService Implementation
 
@@ -41,9 +49,28 @@ namespace XRTK.Services.Teleportation
         {
             base.Initialize();
 
-            if (!Application.isPlaying) { return; }
+            if (Application.isPlaying)
+            {
+                teleportEventData = new TeleportEventData(EventSystem.current);
+            }
 
-            teleportEventData = new TeleportEventData(EventSystem.current);
+            CameraCache.Main.gameObject.EnsureComponent(teleportProvider.Type);
+        }
+
+        /// <inheritdoc />
+        public override void Disable()
+        {
+            base.Disable();
+
+            if (!Application.isPlaying)
+            {
+                var component = CameraCache.Main.GetComponent<IMixedRealityTeleportProvider>() as Component;
+
+                if (!component.IsNull())
+                {
+                    Object.DestroyImmediate(component);
+                }
+            }
         }
 
         #endregion IMixedRealityService Implementation
@@ -83,24 +110,6 @@ namespace XRTK.Services.Teleportation
         #endregion IEventSystemManager Implementation
 
         #region IMixedRealityTeleportSystem Implementation
-
-        private float teleportDuration = 0.25f;
-
-        /// <inheritdoc />
-        public float TeleportDuration
-        {
-            get => teleportDuration;
-            set
-            {
-                if (isProcessingTeleportRequest)
-                {
-                    Debug.LogWarning("Couldn't change teleport duration. Teleport in progress.");
-                    return;
-                }
-
-                teleportDuration = value;
-            }
-        }
 
         private static readonly ExecuteEvents.EventFunction<IMixedRealityTeleportHandler> OnTeleportRequestHandler =
             delegate (IMixedRealityTeleportHandler handler, BaseEventData eventData)
@@ -142,8 +151,6 @@ namespace XRTK.Services.Teleportation
 
             // Pass handler
             HandleEvent(teleportEventData, OnTeleportStartedHandler);
-
-            ProcessTeleportationRequest(teleportEventData);
         }
 
         private static readonly ExecuteEvents.EventFunction<IMixedRealityTeleportHandler> OnTeleportCompletedHandler =
@@ -153,12 +160,8 @@ namespace XRTK.Services.Teleportation
                 handler.OnTeleportCompleted(casted);
             };
 
-        /// <summary>
-        /// Raise a teleportation completed event.
-        /// </summary>
-        /// <param name="pointer">The pointer that raised the event.</param>
-        /// <param name="hotSpot">The teleport target</param>
-        private void RaiseTeleportComplete(IMixedRealityPointer pointer, IMixedRealityTeleportHotSpot hotSpot)
+        /// <inheritdoc />
+        public void RaiseTeleportComplete(IMixedRealityPointer pointer, IMixedRealityTeleportHotSpot hotSpot)
         {
             if (!isTeleporting)
             {
@@ -190,45 +193,10 @@ namespace XRTK.Services.Teleportation
 
             // Pass handler
             HandleEvent(teleportEventData, OnTeleportCanceledHandler);
+
+            isTeleporting = false;
         }
 
         #endregion IMixedRealityTeleportSystem Implementation
-
-        private void ProcessTeleportationRequest(TeleportEventData eventData)
-        {
-            isProcessingTeleportRequest = true;
-
-            targetRotation = Vector3.zero;
-            targetPosition = eventData.Pointer.Result.EndPoint;
-            targetRotation.y = eventData.Pointer.PointerOrientation;
-
-            if (eventData.HotSpot != null)
-            {
-                targetPosition = eventData.HotSpot.Position;
-
-                if (eventData.HotSpot.OverrideTargetOrientation)
-                {
-                    targetRotation.y = eventData.HotSpot.TargetOrientation;
-                }
-            }
-
-            var cameraTransform = MixedRealityToolkit.CameraSystem == null
-                ? CameraCache.Main.transform
-                : MixedRealityToolkit.CameraSystem.MainCameraRig.CameraTransform;
-            var cameraPosition = cameraTransform.position;
-            var cameraParent = cameraTransform.parent;
-            var parentPosition = cameraParent.position;
-            Debug.Assert(cameraParent != null, "The Teleport System requires that the camera be parented under another object.");
-            var height = targetPosition.y + parentPosition.y;
-            targetPosition -= cameraPosition - parentPosition;
-            targetPosition.y = height;
-            cameraParent.position = targetPosition;
-            cameraParent.RotateAround(cameraPosition, Vector3.up, targetRotation.y - cameraTransform.eulerAngles.y);
-
-            isProcessingTeleportRequest = false;
-
-            // Raise complete event using the pointer and hot spot provided.
-            RaiseTeleportComplete(eventData.Pointer, eventData.HotSpot);
-        }
     }
 }

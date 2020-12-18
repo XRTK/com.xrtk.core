@@ -9,10 +9,10 @@ using XRTK.Interfaces.BoundarySystem;
 namespace XRTK.Definitions.BoundarySystem
 {
     /// <summary>
-    /// Configuration profile settings for setting up boundary visualizations.
+    /// Configuration profile settings for setting up the <see cref="IMixedRealityBoundarySystem"/>.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Boundary Visualization Profile", fileName = "MixedRealityBoundaryVisualizationProfile", order = (int)CreateProfileMenuItemIndices.BoundaryVisualization)]
-    public class MixedRealityBoundaryVisualizationProfile : BaseMixedRealityServiceProfile<IMixedRealityBoundaryDataProvider>
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Boundary Profile", fileName = "MixedRealityBoundaryProfile", order = (int)CreateProfileMenuItemIndices.Boundary)]
+    public class MixedRealityBoundaryProfile : BaseMixedRealityServiceProfile<IMixedRealityBoundaryDataProvider>
     {
         #region General Settings
 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using XRTK.Interfaces;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Extensions
@@ -21,14 +22,27 @@ namespace XRTK.Extensions
                     .SelectMany(assembly => assembly.GetTypes())
                     .Where(type => type.IsClass && !type.IsAbstract)
                 let guid = type.GUID
-                where !TypeCache.ContainsKey(guid)
+                where !typeCache.ContainsKey(guid)
                 select (type, guid))
             {
-                TypeCache.Add(guid, type);
+                typeCache.Add(guid, type);
             }
         }
 
-        private static readonly Dictionary<Guid, Type> TypeCache = new Dictionary<Guid, Type>();
+        private static readonly Dictionary<Guid, Type> typeCache = new Dictionary<Guid, Type>();
+
+        private static Dictionary<Guid, Type> TypeCache
+        {
+            get
+            {
+                if (typeCache.Count == 0)
+                {
+                    BuildTypeCache();
+                }
+
+                return typeCache;
+            }
+        }
 
         /// <summary>
         /// Attempts to resolve the type using the class <see cref="Guid"/>.
@@ -39,11 +53,6 @@ namespace XRTK.Extensions
         public static bool TryResolveType(Guid guid, out Type resolvedType)
         {
             resolvedType = null;
-
-            if (TypeCache.Count == 0)
-            {
-                BuildTypeCache();
-            }
 
             if (guid == Guid.Empty ||
                 !TypeCache.TryGetValue(guid, out resolvedType))
@@ -124,6 +133,27 @@ namespace XRTK.Extensions
 
             Debug.LogError($"{nameof(FindTopmostGenericTypeArguments)} - Maximum recursion depth reached without finding generic type arguments.");
             return null;
+        }
+
+        /// <summary>
+        /// Checks if the <see cref="IMixedRealityService"/> has any valid implementations.
+        /// </summary>
+        /// <typeparam name="T">The specific <see cref="IMixedRealityService"/> interface to check.</typeparam>
+        /// <returns>True, if the project contains valid implementations of <see cref="T"/>.</returns>
+        public static bool HasValidImplementations<T>() where T : IMixedRealityService
+        {
+            var concreteTypes = TypeCache
+                .Select(pair => pair.Value)
+                .Where(type => typeof(T).IsAssignableFrom(type) && type.IsClass && !type.IsAbstract);
+
+            var isValid = concreteTypes.Any();
+
+            if (!isValid)
+            {
+                Debug.LogError($"Failed to find valid implementations of {typeof(T).Name}");
+            }
+
+            return isValid;
         }
     }
 }

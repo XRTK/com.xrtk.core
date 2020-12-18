@@ -201,12 +201,12 @@ namespace XRTK.Providers.Controllers.OpenVR
                 IsRotationAvailable = state.TryGetRotation(out CurrentControllerRotation);
 
                 // Devices are considered tracked if we receive position OR rotation data from the sensors.
-                TrackingState = (IsPositionAvailable || IsRotationAvailable) ? Definitions.Devices.TrackingState.Tracked : Definitions.Devices.TrackingState.NotTracked;
+                TrackingState = (IsPositionAvailable || IsRotationAvailable) ? TrackingState.Tracked : TrackingState.NotTracked;
             }
             else
             {
                 // The input source does not support tracking.
-                TrackingState = Definitions.Devices.TrackingState.NotApplicable;
+                TrackingState = TrackingState.NotApplicable;
             }
 
             CurrentControllerPose.Position = CurrentControllerPosition;
@@ -218,7 +218,7 @@ namespace XRTK.Providers.Controllers.OpenVR
                 MixedRealityToolkit.InputSystem?.RaiseSourceTrackingStateChanged(InputSource, this, TrackingState);
             }
 
-            if (TrackingState == Definitions.Devices.TrackingState.Tracked && LastControllerPose != CurrentControllerPose)
+            if (TrackingState == TrackingState.Tracked && LastControllerPose != CurrentControllerPose)
             {
                 if (IsPositionAvailable && IsRotationAvailable)
                 {

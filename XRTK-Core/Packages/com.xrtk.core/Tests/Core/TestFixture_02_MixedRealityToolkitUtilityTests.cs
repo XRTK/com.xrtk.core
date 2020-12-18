@@ -34,7 +34,7 @@ namespace XRTK.Tests.Core
             SetupServiceLocator();
             var profile = MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceProvidersProfile;
             var dataProviderTypes = new[] { typeof(TestExtensionService1) };
-            var newConfigs = new[]
+            IMixedRealityServiceConfiguration<IMixedRealityExtensionService>[] newConfigs =
             {
                 new MixedRealityServiceConfiguration<IMixedRealityExtensionService>(typeof(TestExtensionService1), "Test Extension Service 1", 2, testPlatforms, null)
             };

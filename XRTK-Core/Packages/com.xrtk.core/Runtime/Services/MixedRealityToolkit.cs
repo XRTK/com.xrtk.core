@@ -302,8 +302,9 @@ namespace XRTK.Services
                             IsApplicationQuitting = false;
                             break;
                         case UnityEditor.PlayModeStateChange.ExitingEditMode:
-                            if (activeProfile == null)
+                            if (activeProfile.IsNull())
                             {
+                                Debug.LogError($"{nameof(MixedRealityToolkit)} has no active profile! Exiting playmode...");
                                 UnityEditor.EditorApplication.isPlaying = false;
                                 UnityEditor.Selection.activeObject = Instance;
                                 UnityEditor.EditorApplication.delayCall += () =>
@@ -453,9 +454,9 @@ namespace XRTK.Services
 
             if (ActiveProfile.IsBoundarySystemEnabled)
             {
-                if (TryCreateAndRegisterService<IMixedRealityBoundarySystem>(ActiveProfile.BoundarySystemSystemType, out var service, ActiveProfile.BoundaryVisualizationProfile) && BoundarySystem != null)
+                if (TryCreateAndRegisterService<IMixedRealityBoundarySystem>(ActiveProfile.BoundarySystemSystemType, out var service, ActiveProfile.BoundarySystemProfile) && BoundarySystem != null)
                 {
-                    TryRegisterDataProviderConfigurations(ActiveProfile.BoundaryVisualizationProfile.RegisteredServiceConfigurations, service);
+                    TryRegisterDataProviderConfigurations(ActiveProfile.BoundarySystemProfile.RegisteredServiceConfigurations, service);
                 }
                 else
                 {
@@ -489,10 +490,7 @@ namespace XRTK.Services
 
             if (ActiveProfile.IsTeleportSystemEnabled)
             {
-                // Note: The Teleport system doesn't have a profile, but might in the future.
-                var dummyProfile = ScriptableObject.CreateInstance<MixedRealityToolkitRootProfile>();
-
-                if (!TryCreateAndRegisterService<IMixedRealityTeleportSystem>(ActiveProfile.TeleportSystemSystemType, out _, dummyProfile) || TeleportSystem == null)
+                if (!TryCreateAndRegisterService<IMixedRealityTeleportSystem>(ActiveProfile.TeleportSystemSystemType, out _, ActiveProfile.TeleportSystemProfile) || TeleportSystem == null)
                 {
                     Debug.LogError("Failed to start the Teleport System!");
                 }

@@ -99,6 +99,12 @@ namespace XRTK.Providers.Controllers
         /// </summary>
         public virtual MixedRealityInteractionMapping[] DefaultRightHandedInteractions { get; } = new MixedRealityInteractionMapping[0];
 
+        /// <summary>
+        /// Local offset from the controller position defining where the grip pose is.
+        /// The grip pose may be used to attach things to the controller when grabbing objects.
+        /// </summary>
+        protected virtual MixedRealityPose GripPoseOffset => MixedRealityPose.ZeroIdentity;
+
         #region IMixedRealityController Implementation
 
         /// <inheritdoc />

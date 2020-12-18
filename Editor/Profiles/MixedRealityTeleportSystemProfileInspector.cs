@@ -3,19 +3,20 @@
 
 using UnityEditor;
 using XRTK.Definitions.TeleportSystem;
+using XRTK.Services;
 
 namespace XRTK.Editor.Profiles
 {
     [CustomEditor(typeof(MixedRealityTeleportSystemProfile))]
     public class MixedRealityTeleportSystemProfileInspector : MixedRealityServiceProfileInspector
     {
-        private SerializedProperty teleportHandlerComponent;
+        private SerializedProperty teleportProvider;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
-            teleportHandlerComponent = serializedObject.FindProperty(nameof(teleportHandlerComponent));
+            teleportProvider = serializedObject.FindProperty(nameof(teleportProvider));
         }
 
         public override void OnInspectorGUI()
@@ -23,13 +24,19 @@ namespace XRTK.Editor.Profiles
             RenderHeader("The teleport system profile defines default behaviour for the teleport system.");
 
             serializedObject.Update();
+            EditorGUI.BeginChangeCheck();
 
-            EditorGUILayout.PropertyField(teleportHandlerComponent);
-
-            EditorGUILayout.Space();
-            base.OnInspectorGUI();
+            EditorGUILayout.PropertyField(teleportProvider);
 
             serializedObject.ApplyModifiedProperties();
+
+            if (EditorGUI.EndChangeCheck() &&
+                MixedRealityToolkit.IsInitialized)
+            {
+                EditorApplication.delayCall += () => MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
+            }
+
+            base.OnInspectorGUI();
         }
     }
 }

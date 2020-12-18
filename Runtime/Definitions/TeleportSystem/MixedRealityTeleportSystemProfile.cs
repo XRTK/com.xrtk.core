@@ -16,13 +16,17 @@ namespace XRTK.Definitions.TeleportSystem
     public class MixedRealityTeleportSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityTeleportDataProvider>
     {
         [SerializeField]
-        [Implements(typeof(IMixedRealityTeleportComponentHandler), TypeGrouping.ByNamespaceFlat)]
-        [Tooltip("The concrete teleport handler component to use for teleportation.")]
-        private SystemType teleportHandlerComponent = null;
+        [Tooltip("The concrete teleport provider to use for teleportation.")]
+        [Implements(typeof(IMixedRealityTeleportProvider), TypeGrouping.ByNamespaceFlat)]
+        private SystemType teleportProvider;
 
         /// <summary>
-        /// The concrete teleport handler component to use for teleportation.
+        /// The concrete teleport provider to use for teleportation.
         /// </summary>
-        public SystemType TeleportHandlerComponent => teleportHandlerComponent;
+        public SystemType TeleportProvider
+        {
+            get => teleportProvider;
+            internal set => teleportProvider = value;
+        }
     }
 }

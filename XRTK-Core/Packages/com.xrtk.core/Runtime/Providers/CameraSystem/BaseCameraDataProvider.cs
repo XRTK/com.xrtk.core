@@ -87,7 +87,7 @@ namespace XRTK.Providers.CameraSystem
         public virtual bool IsStereoscopic => CameraRig.PlayerCamera.stereoEnabled;
 
         /// <inheritdoc />
-        public virtual bool HeadHeightIsManagedByDevice => XRDevice.isPresent;
+        public virtual bool HeadHeightIsManagedByDevice => XRRuntimeUtilities.XRDevicePresent;
 
         /// <inheritdoc />
         public IMixedRealityCameraRig CameraRig { get; private set; }

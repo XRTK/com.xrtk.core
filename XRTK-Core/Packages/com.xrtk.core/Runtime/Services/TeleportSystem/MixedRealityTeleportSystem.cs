@@ -1,6 +1,7 @@
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using XRTK.Definitions.TeleportSystem;
@@ -11,6 +12,7 @@ using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.TeleportSystem;
 using XRTK.Interfaces.TeleportSystem.Handlers;
 using XRTK.Utilities;
+using Object = UnityEngine.Object;
 
 namespace XRTK.Services.Teleportation
 {
@@ -27,12 +29,18 @@ namespace XRTK.Services.Teleportation
         public MixedRealityTeleportSystem(MixedRealityTeleportSystemProfile profile)
             : base(profile)
         {
-            teleportHandlerComponent = profile.TeleportHandlerComponent;
+            if (profile.TeleportProvider?.Type == null)
+            {
+                throw new Exception($"The {nameof(MixedRealityTeleportSystemProfile)} is missing the required {teleportProvider}!");
+            }
+
+            teleportProvider = profile.TeleportProvider;
         }
+
+        private readonly SystemType teleportProvider;
 
         private TeleportEventData teleportEventData;
         private bool isTeleporting = false;
-        private readonly SystemType teleportHandlerComponent;
 
         #region IMixedRealityService Implementation
 
@@ -41,38 +49,27 @@ namespace XRTK.Services.Teleportation
         {
             base.Initialize();
 
-            var checkedHandlerComponent = false;
-            if (!Application.isPlaying)
-            {
-                VerifyHandlerComponent();
-                checkedHandlerComponent = true;
-            }
-            else
+            if (Application.isPlaying)
             {
                 teleportEventData = new TeleportEventData(EventSystem.current);
             }
 
-            if (!checkedHandlerComponent)
-            {
-                VerifyHandlerComponent();
-            }
+            CameraCache.Main.gameObject.EnsureComponent(teleportProvider.Type);
         }
 
-        private void VerifyHandlerComponent()
+        /// <inheritdoc />
+        public override void Disable()
         {
-            var activeHandler = (Object)CameraCache.Main.GetComponent<IMixedRealityTeleportComponentHandler>();
-            if (activeHandler.IsNull())
+            base.Disable();
+
+            if (!Application.isPlaying)
             {
-                // No teleport handler attached to the camera yet, we can safely
-                // add the configured handler.
-                CameraCache.Main.gameObject.EnsureComponent(teleportHandlerComponent.Type);
-            }
-            else if (activeHandler.GetType() != teleportHandlerComponent.Type)
-            {
-                // There is handler attached to the camera but it's not the one configured
-                // in the profile.
-                Debug.LogWarning($"There is a {activeHandler.GetType().Name} attached to the camera but the active teleport system configuration requests a {teleportHandlerComponent.Type.Name}. " +
-                    $"Likely you want to check your teleport system configuration.");
+                var component = CameraCache.Main.GetComponent<IMixedRealityTeleportProvider>() as Component;
+
+                if (!component.IsNull())
+                {
+                    Object.DestroyImmediate(component);
+                }
             }
         }
 

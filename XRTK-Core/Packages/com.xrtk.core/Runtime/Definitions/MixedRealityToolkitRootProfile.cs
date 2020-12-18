@@ -10,6 +10,7 @@ using XRTK.Definitions.DiagnosticsSystem;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.NetworkingSystem;
 using XRTK.Definitions.SpatialAwarenessSystem;
+using XRTK.Definitions.TeleportSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.CameraSystem;
@@ -187,6 +188,19 @@ namespace XRTK.Definitions
         {
             get => teleportSystemType;
             internal set => teleportSystemType = value;
+        }
+
+        [SerializeField]
+        [Tooltip("Profile for configuring the teleport system.")]
+        private MixedRealityTeleportSystemProfile teleportSystemProfile;
+
+        /// <summary>
+        /// Active profile for teleport configuration.
+        /// </summary>
+        public MixedRealityTeleportSystemProfile TeleportSystemProfile
+        {
+            get => teleportSystemProfile;
+            internal set => teleportSystemProfile = value;
         }
 
         #endregion Teleportation System Properties

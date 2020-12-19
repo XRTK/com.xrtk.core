@@ -28,10 +28,14 @@ namespace XRTK.Editor.Profiles.TeleportSystem
         {
             RenderHeader("This profile defines the set of rules to validate against when deciding whether a teleport target location is valid or not.");
 
+            serializedObject.Update();
+
             EditorGUILayout.PropertyField(validLayers);
             EditorGUILayout.PropertyField(invalidLayers);
             EditorGUILayout.PropertyField(upDirectionThreshold);
             EditorGUILayout.PropertyField(maxDistance);
+
+            serializedObject.ApplyModifiedProperties();
         }
     }
 }

@@ -60,9 +60,25 @@ namespace XRTK.Services.Teleportation
                 teleportEventData = new TeleportEventData(EventSystem.current);
             }
 
-            if (teleportMode == TeleportMode.Provider)
+            switch (teleportMode)
             {
-                CameraCache.Main.gameObject.EnsureComponent(teleportProvider.Type);
+                case TeleportMode.Default:
+                    var component = CameraCache.Main.GetComponent<IMixedRealityTeleportProvider>() as Component;
+                    if (!component.IsNull())
+                    {
+                        if (Application.isPlaying)
+                        {
+                            Object.Destroy(component);
+                        }
+                        else
+                        {
+                            Object.DestroyImmediate(component);
+                        }
+                    }
+                    break;
+                case TeleportMode.Provider:
+                    CameraCache.Main.gameObject.EnsureComponent(teleportProvider.Type);
+                    break;
             }
         }
 

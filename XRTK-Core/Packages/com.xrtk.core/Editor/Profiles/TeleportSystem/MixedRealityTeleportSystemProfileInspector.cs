@@ -6,7 +6,7 @@ using XRTK.Definitions.TeleportSystem;
 using XRTK.Services;
 using XRTK.Services.Teleportation;
 
-namespace XRTK.Editor.Profiles
+namespace XRTK.Editor.Profiles.TeleportSystem
 {
     [CustomEditor(typeof(MixedRealityTeleportSystemProfile))]
     public class MixedRealityTeleportSystemProfileInspector : MixedRealityServiceProfileInspector

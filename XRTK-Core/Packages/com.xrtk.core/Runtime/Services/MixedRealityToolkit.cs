@@ -490,7 +490,12 @@ namespace XRTK.Services
 
             if (ActiveProfile.IsTeleportSystemEnabled)
             {
-                if (!TryCreateAndRegisterService<IMixedRealityTeleportSystem>(ActiveProfile.TeleportSystemSystemType, out _, ActiveProfile.TeleportSystemProfile) || TeleportSystem == null)
+                if (TryCreateAndRegisterService<IMixedRealityTeleportSystem>(ActiveProfile.TeleportSystemSystemType, out var service, ActiveProfile.TeleportSystemProfile) || TeleportSystem == null)
+                {
+                    TryRegisterDataProviderConfigurations(ActiveProfile.TeleportSystemProfile.RegisteredServiceConfigurations, service);
+
+                }
+                else
                 {
                     Debug.LogError("Failed to start the Teleport System!");
                 }

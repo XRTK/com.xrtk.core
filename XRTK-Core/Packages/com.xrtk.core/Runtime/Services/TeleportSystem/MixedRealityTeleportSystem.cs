@@ -29,22 +29,10 @@ namespace XRTK.Services.Teleportation
         public MixedRealityTeleportSystem(MixedRealityTeleportSystemProfile profile)
             : base(profile)
         {
-            teleportMode = profile.TeleportMode;
-            if (teleportMode == TeleportMode.Provider)
-            {
-                if (profile.TeleportProvider?.Type == null)
-                {
-                    throw new Exception($"The {nameof(MixedRealityTeleportSystemProfile)} is configured for " +
-                        $"{TeleportMode.Provider} but is missing the required {teleportProvider}!");
-                }
-
-                teleportProvider = profile.TeleportProvider;
-            }
+            teleportProvider = profile.TeleportProvider?.Type == null ? null : teleportProvider = profile.TeleportProvider;
         }
 
         private readonly SystemType teleportProvider;
-        private readonly TeleportMode teleportMode;
-
         private TeleportEventData teleportEventData;
         private bool isTeleporting = false;
 
@@ -60,25 +48,27 @@ namespace XRTK.Services.Teleportation
                 teleportEventData = new TeleportEventData(EventSystem.current);
             }
 
-            switch (teleportMode)
+            if (teleportProvider == null)
             {
-                case TeleportMode.Default:
-                    var component = CameraCache.Main.GetComponent<IMixedRealityTeleportProvider>() as Component;
-                    if (!component.IsNull())
+                // No provier selected, we'll be using default teleport.
+                // Make sure to remove any leftover provider attached to the camera.
+                var component = CameraCache.Main.GetComponent<IMixedRealityTeleportProvider>() as Component;
+                if (!component.IsNull())
+                {
+                    if (Application.isPlaying)
                     {
-                        if (Application.isPlaying)
-                        {
-                            Object.Destroy(component);
-                        }
-                        else
-                        {
-                            Object.DestroyImmediate(component);
-                        }
+                        Object.Destroy(component);
                     }
-                    break;
-                case TeleportMode.Provider:
-                    CameraCache.Main.gameObject.EnsureComponent(teleportProvider.Type);
-                    break;
+                    else
+                    {
+                        Object.DestroyImmediate(component);
+                    }
+                }
+            }
+            else
+            {
+                // A provider is set, make sure it's attached to the camera.
+                CameraCache.Main.gameObject.EnsureComponent(teleportProvider.Type);
             }
         }
 
@@ -178,7 +168,7 @@ namespace XRTK.Services.Teleportation
 
             // In default teleportation mode we do not expect any provider
             // to handle teleportation, instead we simply perform an instant teleport.
-            if (teleportMode == TeleportMode.Default)
+            if (teleportProvider == null)
             {
                 PerformDefaultTeleport(teleportEventData);
             }
@@ -237,7 +227,7 @@ namespace XRTK.Services.Teleportation
                 CameraCache.Main.transform;
             var teleportTransform = cameraTransform.parent;
             Debug.Assert(teleportTransform != null,
-                $"{nameof(TeleportMode.Default)} requires that the camera be parented under another object!");
+                $"{nameof(MixedRealityTeleportSystem)} without a provider set requires that the camera be parented under another object! Assign a teleport provider in the system profile or fix the camera setup.");
 
             var targetRotation = Vector3.zero;
             var targetPosition = eventData.Pointer.Result.EndPoint;

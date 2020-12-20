@@ -14,7 +14,6 @@ namespace XRTK.Editor.Profiles.SpatialAwareness
     public class BaseMixedRealitySpatialMeshObserverProfileInspector : BaseMixedRealitySpatialObserverProfileInspector
     {
         private SerializedProperty meshLevelOfDetail;
-        private SerializedProperty meshTrianglesPerCubicMeter;
         private SerializedProperty meshRecalculateNormals;
         private SerializedProperty meshVisibleMaterial;
         private SerializedProperty meshOcclusionMaterial;
@@ -32,7 +31,6 @@ namespace XRTK.Editor.Profiles.SpatialAwareness
             base.OnEnable();
 
             meshLevelOfDetail = serializedObject.FindProperty(nameof(meshLevelOfDetail));
-            meshTrianglesPerCubicMeter = serializedObject.FindProperty(nameof(meshTrianglesPerCubicMeter));
             meshRecalculateNormals = serializedObject.FindProperty(nameof(meshRecalculateNormals));
             meshVisibleMaterial = serializedObject.FindProperty(nameof(meshVisibleMaterial));
             meshOcclusionMaterial = serializedObject.FindProperty(nameof(meshOcclusionMaterial));
@@ -91,7 +89,6 @@ namespace XRTK.Editor.Profiles.SpatialAwareness
             if (meshLevelOfDetail.FoldoutWithBoldLabelPropertyField(spatialMeshSettingsFoldoutHeader))
             {
                 EditorGUI.indentLevel++;
-                EditorGUILayout.PropertyField(meshTrianglesPerCubicMeter);
                 EditorGUILayout.PropertyField(meshRecalculateNormals);
                 EditorGUILayout.PropertyField(meshVisibleMaterial);
                 EditorGUILayout.PropertyField(meshOcclusionMaterial);

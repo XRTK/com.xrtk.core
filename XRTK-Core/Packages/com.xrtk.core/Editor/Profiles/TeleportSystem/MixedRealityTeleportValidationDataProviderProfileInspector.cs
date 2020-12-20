@@ -13,6 +13,7 @@ namespace XRTK.Editor.Profiles.TeleportSystem
         private SerializedProperty invalidLayers;
         private SerializedProperty upDirectionThreshold;
         private SerializedProperty maxDistance;
+        private SerializedProperty maxHeightDistance;
 
         protected override void OnEnable()
         {
@@ -22,6 +23,7 @@ namespace XRTK.Editor.Profiles.TeleportSystem
             invalidLayers = serializedObject.FindProperty(nameof(invalidLayers));
             upDirectionThreshold = serializedObject.FindProperty(nameof(upDirectionThreshold));
             maxDistance = serializedObject.FindProperty(nameof(maxDistance));
+            maxHeightDistance = serializedObject.FindProperty(nameof(maxHeightDistance));
         }
 
         public override void OnInspectorGUI()
@@ -34,6 +36,7 @@ namespace XRTK.Editor.Profiles.TeleportSystem
             EditorGUILayout.PropertyField(invalidLayers);
             EditorGUILayout.PropertyField(upDirectionThreshold);
             EditorGUILayout.PropertyField(maxDistance);
+            EditorGUILayout.PropertyField(maxHeightDistance);
 
             serializedObject.ApplyModifiedProperties();
         }

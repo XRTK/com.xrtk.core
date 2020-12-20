@@ -17,19 +17,6 @@ namespace XRTK.Definitions.TeleportSystem
     public class MixedRealityTeleportSystemProfile : BaseMixedRealityServiceProfile<IMixedRealityTeleportDataProvider>
     {
         [SerializeField]
-        [Tooltip("The teleportation mode to use.")]
-        private TeleportMode teleportMode = TeleportMode.Default;
-
-        /// <summary>
-        /// The teleportation mode to use.
-        /// </summary>
-        public TeleportMode TeleportMode
-        {
-            get => teleportMode;
-            internal set => teleportMode = value;
-        }
-
-        [SerializeField]
         [Tooltip("The concrete teleport provider to use for teleportation.")]
         [Implements(typeof(IMixedRealityTeleportProvider), TypeGrouping.ByNamespaceFlat)]
         private SystemType teleportProvider;

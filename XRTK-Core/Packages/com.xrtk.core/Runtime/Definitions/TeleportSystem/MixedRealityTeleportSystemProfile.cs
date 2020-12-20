@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Attributes;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.TeleportSystem;
 using XRTK.Interfaces.TeleportSystem.Handlers;
@@ -28,6 +29,19 @@ namespace XRTK.Definitions.TeleportSystem
         {
             get => teleportProvider;
             internal set => teleportProvider = value;
+        }
+
+        [SerializeField]
+        [Tooltip("Input action to trigger a teleport request.")]
+        private MixedRealityInputAction teleportAction = MixedRealityInputAction.None;
+
+        /// <summary>
+        /// Input action to trigger a teleport request.
+        /// </summary>
+        public MixedRealityInputAction TeleportAction
+        {
+            get => teleportAction;
+            internal set => teleportAction = value;
         }
     }
 }

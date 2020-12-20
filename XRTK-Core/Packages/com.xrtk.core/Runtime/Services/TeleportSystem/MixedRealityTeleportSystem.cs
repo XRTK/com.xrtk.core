@@ -1,9 +1,9 @@
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.TeleportSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Teleport;
@@ -30,6 +30,7 @@ namespace XRTK.Services.Teleportation
             : base(profile)
         {
             teleportProvider = profile.TeleportProvider?.Type == null ? null : teleportProvider = profile.TeleportProvider;
+            TeleportAction = profile.TeleportAction;
         }
 
         private readonly SystemType teleportProvider;
@@ -124,6 +125,9 @@ namespace XRTK.Services.Teleportation
         #endregion IEventSystemManager Implementation
 
         #region IMixedRealityTeleportSystem Implementation
+
+        /// <inheritdoc />
+        public MixedRealityInputAction TeleportAction { get; private set; }
 
         private static readonly ExecuteEvents.EventFunction<IMixedRealityTeleportHandler> OnTeleportRequestHandler =
             delegate (IMixedRealityTeleportHandler handler, BaseEventData eventData)

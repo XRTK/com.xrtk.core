@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using XRTK.Definitions.InputSystem;
 using XRTK.Interfaces.Events;
 using XRTK.Interfaces.InputSystem;
 
@@ -12,6 +13,12 @@ namespace XRTK.Interfaces.TeleportSystem
     /// </summary>
     public interface IMixedRealityTeleportSystem : IMixedRealityEventSystem
     {
+        /// <summary>
+        /// Gets the <see cref="MixedRealityInputAction"/> used to trigger a teleport
+        /// request.
+        /// </summary>
+        MixedRealityInputAction TeleportAction { get; }
+
         /// <summary>
         /// Raise a teleportation request event.
         /// </summary>

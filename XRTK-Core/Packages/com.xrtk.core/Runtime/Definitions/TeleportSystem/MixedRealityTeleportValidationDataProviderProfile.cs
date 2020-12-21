@@ -66,5 +66,19 @@ namespace XRTK.Definitions.TeleportSystem
             get => maxDistance;
             internal set => maxDistance = value;
         }
+
+        [SerializeField]
+        [Min(.1f)]
+        [Tooltip("The maximum height distance from the player a teleport location can be away.")]
+        private float maxHeightDistance = 10f;
+
+        /// <summary>
+        /// The maximum height distance from the player a teleport location can be away.
+        /// </summary>
+        public float MaxHeightDistance
+        {
+            get => maxHeightDistance;
+            internal set => maxHeightDistance = value;
+        }
     }
 }

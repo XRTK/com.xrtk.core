@@ -23,12 +23,14 @@ namespace XRTK.Services.Teleportation
             invalidLayers = profile.InvalidLayers;
             upDirectionThreshold = profile.UpDirectionThreshold;
             maxDistanceSquare = profile.MaxDistance * profile.MaxDistance;
+            maxHeightDistance = profile.MaxHeightDistance;
         }
 
         private readonly LayerMask validLayers;
         private readonly LayerMask invalidLayers;
         private readonly float upDirectionThreshold;
         private readonly float maxDistanceSquare;
+        private readonly float maxHeightDistance;
 
         /// <inheritdoc />
         public TeleportValidationResult IsValid(IPointerResult pointerResult, IMixedRealityTeleportHotSpot teleportHotSpot = null)
@@ -36,7 +38,8 @@ namespace XRTK.Services.Teleportation
             TeleportValidationResult teleportValidationResult;
 
             // Check distance.
-            if ((pointerResult.EndPoint - CameraCache.Main.transform.position).sqrMagnitude > maxDistanceSquare)
+            if ((pointerResult.EndPoint - CameraCache.Main.transform.position).sqrMagnitude > maxDistanceSquare ||
+                Mathf.Abs(pointerResult.EndPoint.y - CameraCache.Main.transform.position.y) > maxHeightDistance)
             {
                 teleportValidationResult = TeleportValidationResult.Invalid;
             }

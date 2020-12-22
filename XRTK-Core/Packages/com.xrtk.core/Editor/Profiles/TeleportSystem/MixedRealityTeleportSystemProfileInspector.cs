@@ -5,28 +5,31 @@ using UnityEditor;
 using XRTK.Definitions.TeleportSystem;
 using XRTK.Services;
 
-namespace XRTK.Editor.Profiles
+namespace XRTK.Editor.Profiles.TeleportSystem
 {
     [CustomEditor(typeof(MixedRealityTeleportSystemProfile))]
     public class MixedRealityTeleportSystemProfileInspector : MixedRealityServiceProfileInspector
     {
         private SerializedProperty teleportProvider;
+        private SerializedProperty teleportAction;
 
         protected override void OnEnable()
         {
             base.OnEnable();
 
             teleportProvider = serializedObject.FindProperty(nameof(teleportProvider));
+            teleportAction = serializedObject.FindProperty(nameof(teleportAction));
         }
 
         public override void OnInspectorGUI()
         {
-            RenderHeader("The teleport system profile defines default behaviour for the teleport system.");
+            RenderHeader("The teleport system profile defines behaviour for the teleport system.");
 
             serializedObject.Update();
             EditorGUI.BeginChangeCheck();
 
             EditorGUILayout.PropertyField(teleportProvider);
+            EditorGUILayout.PropertyField(teleportAction);
 
             serializedObject.ApplyModifiedProperties();
 

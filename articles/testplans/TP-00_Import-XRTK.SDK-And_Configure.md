@@ -5,9 +5,7 @@ package first.
 
 ## Test Preparations
 
-- Create a new Unity 2019.4.15f1 project using the 3D template using the Unity Hub
-
----
+- Create a new Unity 2019.4 project using the 3D template using the Unity Hub
 
 ## Test 1 - Add XRTK Scoped Registry
 
@@ -33,8 +31,6 @@ package first.
   - XRTK.SDK
   - ...
 
----
-
 ## Test 2 - Import XRTK.SDK
 
 ### Instructions
@@ -52,8 +48,6 @@ package first.
 - The project compiles without XRTK specific warnings
 - A menu item `Mixed Reality Toolkit` is now available at the top menu bar
 
----
-
 ## Test 3 - Install XRTK.SDK Package Assets
 
 ### Instructions
@@ -68,8 +62,6 @@ package first.
 - The project compiles without errors
 - The project compiles without XRTK specific warnings
 
----
-
 ## 4. Configure XRTK in scene
 
 ### Instructions
@@ -82,8 +74,6 @@ package first.
 - A GameObject `MixedRealityPlayspace` was added to the scene
 - Selecting the `MixedRealityToolkit` game object shows the toolkit is using the `MixedRealityToolkitRootProfile`
 - Running the project produces no errors
-
----
 
 ## Test 4 - Add an SDK component to a scene object
 

@@ -4,9 +4,7 @@ This testplan tests the XRTK import path via UPM where the user installs the `XR
 
 ## Test Preparations
 
-- Create a new Unity 2019.4.15f1 project using the 3D template using the Unity Hub
-
----
+- Create a new Unity 2019.4 project using the 3D template using the Unity Hub
 
 ## Test 1 - Add XRTK Scoped Registry
 
@@ -32,9 +30,7 @@ This testplan tests the XRTK import path via UPM where the user installs the `XR
   - XRTK.SDK
   - ...
 
----
-
-## Test 2 - Import XRTK.Oculus
+## Test 2 - Import XRTK.SDK and configure
 
 ### Instructions
 
@@ -42,6 +38,23 @@ This testplan tests the XRTK import path via UPM where the user installs the `XR
 - Change the Registry drop down from "Unity Registry" to "My Registries"
 - Select the `XRTK.SDK` package
 - Select `Install` to import the package into the project
+- Wait for the import process to complete
+- Return to the scene and Select `Mixed Reality Toolkit/Configure...` in the menu bar
+
+### Expected Result
+
+- The SDK and Core projects show as "Installed" with the latest versions
+- A GameObject `MixedRealityToolkit` was added to the scene
+- A GameObject `MixedRealityPlayspace` was added to the scene
+- Selecting the `MixedRealityToolkit` game object shows the toolkit is using the `MixedRealityToolkitRootProfile`
+- Running the project produces no errors
+
+## Test 3 - Import XRTK.Oculus
+
+### Instructions
+
+- Open the `Package Manager` window in the editor
+- Change the Registry drop down from "Unity Registry" to "My Registries"
 - Select the `XRTK.Oculus` package
 - Select `Install` to import the package into the project
 - Wait for the import process to complete
@@ -54,9 +67,7 @@ This testplan tests the XRTK import path via UPM where the user installs the `XR
 - A menu item `Mixed Reality Toolkit` is now available at the top menu bar
 - A folder `XRTK.Generated/Oculus` was NOT created in the project's `Assets` folder
 
----
-
-## Test 3 - Install XRTK.Oculus Package Assets
+## Test 4 - Install XRTK.Oculus Package Assets
 
 ### Instructions
 
@@ -76,9 +87,7 @@ This testplan tests the XRTK import path via UPM where the user installs the `XR
 - Opening the 'Input System Profile' in the `MixedRealityToolkitRootProfile`, there is a 'Oculus Controller Data Provider' registered in the 'IMixedRealityInputDataProvider' configuration
 - Opening the 'Input System Profile' in the `MixedRealityToolkitRootProfile`, there is a 'Oculus Hand Controller Data Provider' registered in the 'IMixedRealityInputDataProvider' configuration
 
----
-
-## Test 4 - Run Oculus platform via Oculus Link in Windows Standalone (or alternatively, using an Oculus Rift)
+## Test 5 - Run Oculus platform via Oculus Link in Windows Standalone (or alternatively, using an Oculus Rift)
 
 ### Instructions
 
@@ -101,9 +110,7 @@ This testplan tests the XRTK import path via UPM where the user installs the `XR
 - Clicking on the Cube enables the cube to be dragged relative to the controllers position
 - Putting controllers down and raising hands replaces the controller models with hands that move relative to the users hands
 
----
-
-## Test 5 - Run Oculus platform native on device
+## Test 6 - Run Oculus platform native on device
 
 ### Instructions
 
@@ -129,5 +136,3 @@ This testplan tests the XRTK import path via UPM where the user installs the `XR
 - Using the Thumbsticks enables teleportation and the user can move around the floor
 - Clicking on the Cube enables the cube to be dragged relative to the controllers position
 - Putting controllers down and raising hands replaces the controller models with hands that move relative to the users hands
-
----

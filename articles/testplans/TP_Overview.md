@@ -19,6 +19,14 @@ These test plans can serve as a reference when reporting bugs and help developer
 
 - [TP-01 Test Windows Mixed Reality Platform](./TP-02_Import-XRTK.UWP.md)
 
+## XR subsystem notices
+
+> For VR settings in XRTK 0.2, we restrict to using the Legaxy XR settings available in
+>
+> `Edit -> Project Settings -> Player -> Other -> XR Settings`
+>
+> The new XR Subsystem is out of scope for this release.
+
 ---
 
 ### [**Raise an Information Request**](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=)

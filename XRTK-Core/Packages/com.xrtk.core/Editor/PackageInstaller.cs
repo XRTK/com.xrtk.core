@@ -133,6 +133,12 @@ namespace XRTK.Editor
         {
             AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
 
+            try
+            {
+                Selection.activeGameObject = null;
+            }
+            catch { }
+
             foreach (var profile in profiles.Where(x => x.EndsWith(".asset")))
             {
                 var platformConfigurationProfile = AssetDatabase.LoadAssetAtPath<MixedRealityPlatformServiceConfigurationProfile>(profile);
@@ -193,6 +199,12 @@ namespace XRTK.Editor
         /// <param name="rootProfile">The root profile to install the </param>
         public static void InstallConfiguration(MixedRealityPlatformServiceConfigurationProfile platformConfigurationProfile, MixedRealityToolkitRootProfile rootProfile)
         {
+            try
+            {
+                Selection.activeGameObject = null;
+            }
+            catch { }
+
             foreach (var configuration in platformConfigurationProfile.Configurations)
             {
                 var configurationType = configuration.InstancedType.Type;

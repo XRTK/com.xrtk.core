@@ -53,6 +53,7 @@ obj/
 *.log
 *.idb
 *.opendb
+.vsconfig
 
 # ============================ #
 # Visual Studio Code Generated #

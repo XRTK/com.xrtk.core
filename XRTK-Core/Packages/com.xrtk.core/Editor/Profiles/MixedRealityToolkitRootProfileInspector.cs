@@ -34,6 +34,7 @@ namespace XRTK.Editor.Profiles
         // Teleport system properties
         private SerializedProperty enableTeleportSystem;
         private SerializedProperty teleportSystemType;
+        private SerializedProperty teleportSystemProfile;
 
         // Spatial Awareness system properties
         private SerializedProperty enableSpatialAwarenessSystem;
@@ -161,6 +162,7 @@ namespace XRTK.Editor.Profiles
             // Teleport system configuration
             enableTeleportSystem = serializedObject.FindProperty(nameof(enableTeleportSystem));
             teleportSystemType = serializedObject.FindProperty(nameof(teleportSystemType));
+            teleportSystemProfile = serializedObject.FindProperty(nameof(teleportSystemProfile));
 
             // Spatial Awareness system configuration
             enableSpatialAwarenessSystem = serializedObject.FindProperty(nameof(enableSpatialAwarenessSystem));
@@ -231,6 +233,8 @@ namespace XRTK.Editor.Profiles
             EditorGUI.indentLevel++;
             typeLabel.tooltip = teleportSystemType.tooltip;
             EditorGUILayout.PropertyField(teleportSystemType, typeLabel);
+            profileLabel.tooltip = teleportSystemProfile.tooltip;
+            EditorGUILayout.PropertyField(teleportSystemProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Spatial Awareness System configuration

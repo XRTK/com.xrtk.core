@@ -20,51 +20,6 @@ namespace XRTK.Editor.Utilities
     /// </summary>
     public static class GuidRegenerator
     {
-        [Serializable]
-        private struct GuidPair
-        {
-            public string Key;
-            public string Value;
-        }
-
-        [Serializable]
-        private struct GuidMap
-        {
-            public List<GuidPair> Map;
-
-            public bool TryGetKey(string inGuid, out string outGuid)
-            {
-                for (int i = 0; i < Map.Count; i++)
-                {
-                    if (Map[i].Value == inGuid)
-                    {
-                        outGuid = Map[i].Key;
-                        return true;
-                    }
-                }
-
-                outGuid = string.Empty;
-                return false;
-            }
-
-            public bool TryGetValue(string inGuid, out string outGuid)
-            {
-                for (int i = 0; i < Map.Count; i++)
-                {
-                    if (Map[i].Key == inGuid)
-                    {
-                        outGuid = Map[i].Value;
-                        return true;
-                    }
-                }
-
-                outGuid = string.Empty;
-                return false;
-            }
-        }
-
-        private static readonly string GuidMapFilePath = $"{Application.dataPath}/{MixedRealityPreferences.ProfileGenerationPath}xrtk.guid.map.json";
-
         /// <summary>
         /// Regenerate the guids for assets located in the <see cref="assetsRootPath"/>.
         /// </summary>
@@ -109,17 +64,13 @@ namespace XRTK.Editor.Utilities
                 filesPaths.AddRange(UnityFileHelper.GetUnityAssetsAtPath(assetsRootPath[i]));
             }
 
-            var guidMap = File.Exists(GuidMapFilePath)
-                ? JsonUtility.FromJson<GuidMap>(File.ReadAllText(GuidMapFilePath))
-                : new GuidMap { Map = new List<GuidPair>(0) };
-
             // Create dictionary to hold old-to-new GUID map
             var guidOldToNewMap = new Dictionary<string, string>();
             var guidsInFileMap = new Dictionary<string, List<string>>();
 
             // We must only replace GUIDs for Resources present in the path.
             // Otherwise built-in resources (shader, meshes etc) get overwritten.
-            var guidsToReplace = new HashSet<string>();
+            var ownGuids = new HashSet<string>();
 
             // Traverse all files, remember which GUIDs are in which files and generate new GUIDs
             var counter = 0;
@@ -129,39 +80,22 @@ namespace XRTK.Editor.Utilities
                 EditorUtility.DisplayProgressBar("Gathering asset info...", filePath, counter / (float)filesPaths.Count);
 
                 var isFirstGuid = true;
-                var oldGuids = GetGuids(File.ReadAllText(filePath));
+                var guids = GetGuids(File.ReadAllText(filePath));
 
-                foreach (var oldGuid in oldGuids)
+                foreach (var oldGuid in guids)
                 {
-                    // If we've previously regenerated the guids for this asset
-                    // then replace the original guid key
-                    var guid = guidMap.TryGetKey(oldGuid, out var originalGuid)
-                        ? originalGuid
-                        : oldGuid;
-
                     // First GUID in .meta file is always the GUID of the asset itself
                     if (isFirstGuid && Path.GetExtension(filePath) == ".meta")
                     {
-                        guidsToReplace.Add(guid);
+                        ownGuids.Add(oldGuid);
                         isFirstGuid = false;
                     }
 
                     // Generate and save new GUID if we haven't added it before
-                    if (!guidOldToNewMap.ContainsKey(guid))
+                    if (!guidOldToNewMap.ContainsKey(oldGuid))
                     {
-                        // If we've previously replaced this guid then
-                        // use the generated guid from before
-                        if (!guidMap.TryGetValue(guid, out var newGuid))
-                        {
-                            newGuid = Guid.NewGuid().ToString("N");
-                            guidMap.Map.Add(new GuidPair
-                            {
-                                Key = guid,
-                                Value = newGuid
-                            });
-                        }
-
-                        guidOldToNewMap.Add(guid, newGuid);
+                        var newGuid = Guid.NewGuid().ToString("N");
+                        guidOldToNewMap.Add(oldGuid, newGuid);
                     }
 
                     if (!guidsInFileMap.ContainsKey(filePath))
@@ -169,9 +103,9 @@ namespace XRTK.Editor.Utilities
                         guidsInFileMap[filePath] = new List<string>();
                     }
 
-                    if (!guidsInFileMap[filePath].Contains(guid))
+                    if (!guidsInFileMap[filePath].Contains(oldGuid))
                     {
-                        guidsInFileMap[filePath].Add(guid);
+                        guidsInFileMap[filePath].Add(oldGuid);
                     }
                 }
 
@@ -191,7 +125,7 @@ namespace XRTK.Editor.Utilities
 
                 foreach (var oldGuid in guidsInFileMap[filePath])
                 {
-                    if (!guidsToReplace.Contains(oldGuid)) { continue; }
+                    if (!ownGuids.Contains(oldGuid)) { continue; }
 
                     var newGuid = guidOldToNewMap[oldGuid];
 
@@ -219,16 +153,6 @@ namespace XRTK.Editor.Utilities
                 {
                     Debug.LogError(e);
                 }
-            }
-
-            // Write guid map to file.
-            try
-            {
-                File.WriteAllText(GuidMapFilePath, JsonUtility.ToJson(guidMap));
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
             }
 
             EditorUtility.ClearProgressBar();

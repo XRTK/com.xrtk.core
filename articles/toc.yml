@@ -8,6 +8,8 @@
       href: 02-Configuration.md
     - name: Platform Template Generator
       href: 03-Template-Generator.md
+    - name: Known Issues
+      href: 04-KnownIssues.md
 - name: Test Plans
   items:
     - name: Overview

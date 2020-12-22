@@ -37,9 +37,17 @@ namespace XRTK.Tests
             Assert.IsNotNull(MixedRealityToolkit.Instance);
             Assert.IsFalse(MixedRealityToolkit.HasActiveProfile);
 
-            var configuration = useDefaultProfile
-                ? GetDefaultMixedRealityProfile<MixedRealityToolkitRootProfile>()
-                : ScriptableObject.CreateInstance<MixedRealityToolkitRootProfile>();
+            MixedRealityToolkitRootProfile configuration;
+            if (useDefaultProfile)
+            {
+                configuration = GetDefaultMixedRealityProfile<MixedRealityToolkitRootProfile>();
+                Debug.Assert(configuration.TeleportSystemProfile != null);
+                configuration.TeleportSystemProfile.TeleportProvider = typeof(TestTeleportProvider);
+            }
+            else
+            {
+                configuration = ScriptableObject.CreateInstance<MixedRealityToolkitRootProfile>();
+            }
 
             Assert.IsTrue(configuration != null, "Failed to find the Default Mixed Reality Root Profile");
             MixedRealityToolkit.Instance.ResetProfile(configuration);

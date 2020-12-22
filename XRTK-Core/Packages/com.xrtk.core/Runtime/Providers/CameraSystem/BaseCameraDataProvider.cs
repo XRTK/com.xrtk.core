@@ -125,7 +125,7 @@ namespace XRTK.Providers.CameraSystem
 
             if (CameraRig == null)
             {
-                // TODO Currently we get always get the main camera. Should we provide a tag to search for alts?
+                // TODO Currently we always get the main camera. Should we provide a tag to search for alts?
                 CameraRig = CameraCache.Main.gameObject.EnsureComponent(cameraRigType) as IMixedRealityCameraRig;
                 Debug.Assert(CameraRig != null);
             }
@@ -243,9 +243,21 @@ namespace XRTK.Providers.CameraSystem
         /// </summary>
         protected virtual void ApplySettingsForDefaultHeadHeight()
         {
-            if (!HeadHeightIsManagedByDevice)
+            // We need to check whether the application is playing or not here.
+            // Since this code is executed even when not in play mode, we want
+            // to definitely apply the head height configured in the editor, when
+            // not in play mode. It helps with working in the editor and visualizing
+            // the user's perspective. When running though, we need to make sure we do
+            // not interfere with any platform provided head pose tracking.
+            if (!Application.isPlaying || !HeadHeightIsManagedByDevice)
             {
                 HeadHeight = DefaultHeadHeight;
+            }
+            // If we are running and the device/platform provides the head pose,
+            // we need to make sure to reset any applied head height while in edit mode.
+            else if (Application.isPlaying && HeadHeightIsManagedByDevice)
+            {
+                HeadHeight = 0f;
             }
 
             ResetRigTransforms();

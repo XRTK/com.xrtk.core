@@ -12,6 +12,7 @@ namespace XRTK.Editor.Profiles.TeleportSystem
     {
         private SerializedProperty teleportProvider;
         private SerializedProperty teleportAction;
+        private string NoSelectedTeleportSystemMessage = $"When no Teleport Provider is selected, the Teleport system will perform an Instant teleport by default\nTo stop teleporting, you will need to disable the Teleport system.";
 
         protected override void OnEnable()
         {
@@ -24,6 +25,13 @@ namespace XRTK.Editor.Profiles.TeleportSystem
         public override void OnInspectorGUI()
         {
             RenderHeader("The teleport system profile defines behaviour for the teleport system.");
+
+            var referenceProperty = teleportProvider.FindPropertyRelative("reference");
+            if (!XRTK.Extensions.TypeExtensions.TryResolveType(referenceProperty.stringValue, out var referenceType))
+            {
+                EditorGUILayout.HelpBox(NoSelectedTeleportSystemMessage, MessageType.None);
+                EditorGUILayout.Space();
+            }
 
             serializedObject.Update();
             EditorGUI.BeginChangeCheck();

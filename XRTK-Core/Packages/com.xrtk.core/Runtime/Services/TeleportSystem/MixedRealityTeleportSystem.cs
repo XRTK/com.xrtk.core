@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using UnityEngine.EventSystems;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.TeleportSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Teleport;
@@ -11,6 +12,7 @@ using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.TeleportSystem;
 using XRTK.Interfaces.TeleportSystem.Handlers;
 using XRTK.Utilities;
+using Object = UnityEngine.Object;
 
 namespace XRTK.Services.Teleportation
 {
@@ -27,12 +29,13 @@ namespace XRTK.Services.Teleportation
         public MixedRealityTeleportSystem(MixedRealityTeleportSystemProfile profile)
             : base(profile)
         {
-            teleportHandlerComponent = profile.TeleportHandlerComponent;
+            teleportProvider = profile.TeleportProvider?.Type == null ? null : teleportProvider = profile.TeleportProvider;
+            TeleportAction = profile.TeleportAction;
         }
 
+        private readonly SystemType teleportProvider;
         private TeleportEventData teleportEventData;
         private bool isTeleporting = false;
-        private readonly SystemType teleportHandlerComponent;
 
         #region IMixedRealityService Implementation
 
@@ -41,38 +44,47 @@ namespace XRTK.Services.Teleportation
         {
             base.Initialize();
 
-            var checkedHandlerComponent = false;
-            if (!Application.isPlaying)
-            {
-                VerifyHandlerComponent();
-                checkedHandlerComponent = true;
-            }
-            else
+            if (Application.isPlaying)
             {
                 teleportEventData = new TeleportEventData(EventSystem.current);
             }
 
-            if (!checkedHandlerComponent)
+            if (teleportProvider == null)
             {
-                VerifyHandlerComponent();
+                // No provier selected, we'll be using default teleport.
+                // Make sure to remove any leftover provider attached to the camera.
+                var component = CameraCache.Main.GetComponent<IMixedRealityTeleportProvider>() as Component;
+                if (!component.IsNull())
+                {
+                    if (Application.isPlaying)
+                    {
+                        Object.Destroy(component);
+                    }
+                    else
+                    {
+                        Object.DestroyImmediate(component);
+                    }
+                }
+            }
+            else
+            {
+                // A provider is set, make sure it's attached to the camera.
+                CameraCache.Main.gameObject.EnsureComponent(teleportProvider.Type);
             }
         }
 
-        private void VerifyHandlerComponent()
+        /// <inheritdoc />
+        public override void Disable()
         {
-            var activeHandler = (Object)CameraCache.Main.GetComponent<IMixedRealityTeleportComponentHandler>();
-            if (activeHandler.IsNull())
+            base.Disable();
+
+            if (!Application.isPlaying)
             {
-                // No teleport handler attached to the camera yet, we can safely
-                // add the configured handler.
-                CameraCache.Main.gameObject.EnsureComponent(teleportHandlerComponent.Type);
-            }
-            else if (activeHandler.GetType() != teleportHandlerComponent.Type)
-            {
-                // There is handler attached to the camera but it's not the one configured
-                // in the profile.
-                Debug.LogWarning($"There is a {activeHandler.GetType().Name} attached to the camera but the active teleport system configuration requests a {teleportHandlerComponent.Type.Name}. " +
-                    $"Likely you want to check your teleport system configuration.");
+                var component = CameraCache.Main.GetComponent<IMixedRealityTeleportProvider>() as Component;
+                if (!component.IsNull())
+                {
+                    Object.DestroyImmediate(component);
+                }
             }
         }
 
@@ -114,6 +126,9 @@ namespace XRTK.Services.Teleportation
 
         #region IMixedRealityTeleportSystem Implementation
 
+        /// <inheritdoc />
+        public MixedRealityInputAction TeleportAction { get; private set; }
+
         private static readonly ExecuteEvents.EventFunction<IMixedRealityTeleportHandler> OnTeleportRequestHandler =
             delegate (IMixedRealityTeleportHandler handler, BaseEventData eventData)
             {
@@ -154,6 +169,13 @@ namespace XRTK.Services.Teleportation
 
             // Pass handler
             HandleEvent(teleportEventData, OnTeleportStartedHandler);
+
+            // In default teleportation mode we do not expect any provider
+            // to handle teleportation, instead we simply perform an instant teleport.
+            if (teleportProvider == null)
+            {
+                PerformDefaultTeleport(teleportEventData);
+            }
         }
 
         private static readonly ExecuteEvents.EventFunction<IMixedRealityTeleportHandler> OnTeleportCompletedHandler =
@@ -201,5 +223,36 @@ namespace XRTK.Services.Teleportation
         }
 
         #endregion IMixedRealityTeleportSystem Implementation
+
+        private void PerformDefaultTeleport(TeleportEventData eventData)
+        {
+            var cameraTransform = MixedRealityToolkit.CameraSystem != null ?
+                MixedRealityToolkit.CameraSystem.MainCameraRig.CameraTransform :
+                CameraCache.Main.transform;
+            var teleportTransform = cameraTransform.parent;
+            Debug.Assert(teleportTransform != null,
+                $"{nameof(MixedRealityTeleportSystem)} without a provider set requires that the camera be parented under another object! Assign a teleport provider in the system profile or fix the camera setup.");
+
+            var targetRotation = Vector3.zero;
+            var targetPosition = eventData.Pointer.Result.EndPoint;
+            targetRotation.y = eventData.Pointer.PointerOrientation;
+
+            if (eventData.HotSpot != null)
+            {
+                targetPosition = eventData.HotSpot.Position;
+                if (eventData.HotSpot.OverrideTargetOrientation)
+                {
+                    targetRotation.y = eventData.HotSpot.TargetOrientation;
+                }
+            }
+
+            var height = targetPosition.y;
+            targetPosition -= cameraTransform.position - teleportTransform.position;
+            targetPosition.y = height;
+            teleportTransform.position = targetPosition;
+            teleportTransform.RotateAround(cameraTransform.position, Vector3.up, targetRotation.y - cameraTransform.eulerAngles.y);
+
+            RaiseTeleportComplete(eventData.Pointer, eventData.HotSpot);
+        }
     }
 }

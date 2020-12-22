@@ -133,9 +133,10 @@ namespace XRTK.Editor
         {
             AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
 
+            //Clear the selection to ensure the inspector does not cause errors, Empty try catch to avoid Unity crashing when Selection is null
             try
             {
-                Selection.activeGameObject = null;
+                Selection.activeObject = null;
             }
             catch { }
 
@@ -199,9 +200,10 @@ namespace XRTK.Editor
         /// <param name="rootProfile">The root profile to install the </param>
         public static void InstallConfiguration(MixedRealityPlatformServiceConfigurationProfile platformConfigurationProfile, MixedRealityToolkitRootProfile rootProfile)
         {
+            //Clear the selection to ensure the inspector does not cause errors, Empty try catch to avoid Unity crashing when Selection is null
             try
             {
-                Selection.activeGameObject = null;
+                Selection.activeObject = null;
             }
             catch { }
 

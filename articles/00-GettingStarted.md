@@ -37,7 +37,7 @@ If you're using a Windows OS for development, then you'll need to enable Develop
 
 ### Setting up a MAC Environment
 
-When developing for XRTk on a Mac, you simply need the default requirements needed for building any Unity project on a Mac, including (but not limited to):
+When developing for XRTK on a Mac, you simply need the default requirements needed for building any Unity project on a Mac, including (but not limited to):
 
 * Unity
 * XCode - For Mac/iOS builds
@@ -99,9 +99,9 @@ From here, you can install any additional platforms you need to deploy to other 
 
 ## Adding additional Platforms
 
-Once you have your initial scene setup with the Unity Standalone platform, you are ready to install additional platforms to build and deploy to.  We recommend building out your initial project just using the SDK and testing locally.
+Once you have your initial scene setup with the Unity Standalone platform, you are ready to install additional platforms to build and deploy to.  **We recommend building out your initial project just using the SDK and testing locally**.
 
-> **Installing additional platforms before your initial scene is setup may introduce issues in your project, mainly to do with the default configutation. SO we recommend setting up your initial scene BEFORE installing additional platforms**
+> **Installing additional platforms before your initial scene is setup may introduce issues in your project, mainly to do with the default configuration. SO we recommend setting up your initial scene BEFORE installing additional platforms**
 
 To add a new platform, simply return to the Unity Package Manager (`Window -> Package Manager`) and selecting `My Registries` from the source drop down, select the package to install (for example XRTK.WindowsMixedReality) and click Install as shown below:
 
@@ -121,7 +121,7 @@ You are now ready to start building your Mixed Reality Solution, just start addi
 
 You will need to enable the Unity Legacy XR system for each platform (`Edit -> Project Settings -> XR Settings`) as appropriate:
 
-!(Unity XR Settings)[../images/GettingStarted/UnityLegacyXRSettings.png]
+![Unity XR Settings](../images/GettingStarted/UnityLegacyXRSettings.png)
 
 > At this time, while the new Unity XR Management system does work for some platforms, there could be unforseen issues.  the XRTK talks natively with each platform to improve performance and reduce overhead.
 > Will will be updating to support enabling XR through the new system in a future release.
@@ -134,17 +134,17 @@ For specific builds, please check the quickstart sections below:
 
 > Please check the FAQ for any difficulties.
 
-### Building for Windows Stanalone (OpenVR/Oculus Rift-Link)
+### Building for Windows Standalone (OpenVR/Oculus Rift-Link)
 
-When targetting Windows Standalone there should be no special setup and the Mixed Reality Toolkit will work as configured. Builds should be able to target OpenVR and Oculus Quest (via Oculus Link).
+When targeting Windows Standalone there should be no special setup and the Mixed Reality Toolkit will work as configured. Builds should be able to target OpenVR and Oculus Quest (via Oculus Link).
 
 Please ensure either the OpenVR or Oculus Camera and Controller providers are configured.
 
 ### Building for Windows Mixed Reality (UWP)
 
-Unity allows running of UWP projects directly from the editor for simple testing.  Builds that are exported will require Visual Studio with the latest UWP API's installed to produce a build to ship and run on other WIndows 10 machines or the HoloLens.  Visual Studio also provides an independant method to publish to the Windows Store for distribution.
+Unity allows running of UWP projects directly from the editor for simple testing.  Builds that are exported will require Visual Studio with the latest UWP API's installed to produce a build to ship and run on other WIndows 10 machines or the HoloLens.  Visual Studio also provides an independent method to publish to the Windows Store for distribution.
 
-Please ensure the `Windows Mixed Reality` XRTK package is installed and that the Windows Mixed Realiy Camera and controller providers are configured.
+Please ensure the `Windows Mixed Reality` XRTK package is installed and that the Windows Mixed Reality Camera and controller providers are configured.
 
 ### Building for Oculus Quest / Android
 

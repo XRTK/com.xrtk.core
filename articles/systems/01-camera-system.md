@@ -21,6 +21,8 @@ The configuration holds:
 * The default configuration - a Camera profile to be used where none is specified, a fallback default
 * Additional Camera Profile variants, which specifies the Name, Type, Camera Profile and platforms this variant is meant to run on.
 
+> For more detail on the [Platforms](08-platform-system.md) that are available to configure, see the [XRTK Platform System](08-platform-system.md) documentation.
+
 ## Camera Profile
 
 Each specific camera profile (as shown below) holds the configuration options to control the camera settings for the XRTK environment.  Please note, that some platforms may provide additional options specific to that platform as required.

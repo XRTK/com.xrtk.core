@@ -117,6 +117,12 @@ There is a lot of configuration available in the Input System, most of which wil
 
 ---
 
+### Related Articles
+
+* [XRTK Platform System](08-platform-framework.md)
+
+---
+
 ### [**Raise an Information Request**](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=)
 
 If there is anything not mentioned in this document or you simply want to know more, raise an [RFI (Request for Information) request here](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=).

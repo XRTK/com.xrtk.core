@@ -38,7 +38,7 @@ For the most part, you should not need to alter the camera system configuration 
 
 ### Related Articles
 
-* [XRTK Platform System](08-platform-system.md)
+* [XRTK Platform System](08-platform-framework.md)
 
 ---
 

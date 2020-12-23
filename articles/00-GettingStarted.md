@@ -10,7 +10,7 @@ The Mixed Reality Toolkit's primary focus is to make it extremely easy to get st
 * [Prerequisites](#prerequisites)
 * [Adding XRTK to your project](#adding-the-mixed-reality-toolkit-to-your-project)
 * [Creating your first Mixed Reality Scene](#configure-your-base-scene)
-* [Adding additional Platforms]()
+* [Adding additional Platforms](#adding-additional-platforms)
 * [Build and Play](#build-and-play)
 
 One of the Mixed Reality Toolkit's primary goals was to ensure new projects can get up and running as fast as possible. To this end, the default configuration supplied in the XRTK's SDK ensures you can simply import, play and run a new project right out of the box.
@@ -92,6 +92,24 @@ Which contains the following:
 From here your project should be ready to build and play on the platform you are targeting, or you can take an [in depth look on configuring your project](02-Configuration.md#configuring-your-project) for any specific requirements.
 
 From here, you can install any additional platforms you need to deploy to other platforms.
+
+---
+
+## Adding additional Platforms
+
+Once you have your initial scene setup with the Unity Standalone platform, you are ready to install additional platforms to build and deploy to.  We recommend building out your initial project just using the SDK and testing locally.
+
+> **Installing additional platforms before your initial scene is setup may introduce issues in your project, mainly to do with the default configutation. SO we recommend setting up your initial scene BEFORE installing additional platforms**
+
+To add a new platform, simply return to the Unity Package Manager (`Window -> Package Manager`) and selecting `My Registries` from the source drop down, select the package to install (for example XRTK.WindowsMixedReality) and click Install as shown below:
+
+![Unity Package Manager](../images/GettingStarted/UnityPackageManager-XRTK.png)
+
+Once installed, the default for that platform will be copied into the `XRTK.Generated` folder in your project assets and a prompt will appear to automatically register the platforms configuration with your scene, as shown below:
+
+![New Platform Prompt](../images/GettingStarted/NewPlatformPrompt.png)
+
+If you click `Later`, please refer to the [Configuration Guide](02-Configuration.md) for how to manually add the configuration
 
 ---
 

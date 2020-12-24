@@ -1,23 +1,40 @@
-# Headline
+# The Diagnostics System
 
-A brief overview of the tutorial.
+The Diagnostics system a very useful tool for showing critical diagnostics information in a running scene, it comes in very handy while debugging and sourcing scene based performance issues.
 
-## What you'll need
+## Mixed Reality Root configuration system
 
-List previous steps if needed and a short list of required materials or skills.
+In the Root configuration, the specific implementation for the Diagnostics system is selected, which defaults to the XRTK implementation for the Diagnostics system.  In most cases this does not need to be touched, however, advanced users can replace it with their own system if they wish.
 
-## Getting Started
+![](../images/Configuration/Diagnostics/DiagnosticsSystemProfile.png)
 
-1. Step 1
-2. Step 2
+## Diagnostics System platform configuration
+
+The Diagnostics system for the XRTK allows for different instruments to be called to display information in the diagnostics prefab. 
+
+![](../images/Configuration/Diagnostics/DiagnosticsSystemSettings.png)
+
+The basic configuration simply identifies the prefab to be displayed in the scene when activated and whether the window is active on startup or called programmatically later.
+
+## Diagnostics Providers
+
+The diagnostic framework is very dynamic allowing different instruments to be added to collect data and customized so that they are run either for all platforms or just specific ones.  New instruments can be added, so long as they derive to the Diagnostics Providers `BaseMixedRealityDiagnosticsDataProvider` implementation.  Simply view the existing implementations for reference.
+
+Additionally, the prefab used will need to provide the capability to display the data, review the default DiagnosticsPrefab for detail.
+
+![](../images/Configuration/Diagnostics/DiagnosticsDataProviders.png)
+
+> For more detail on the [Platforms](08-platform-system.md) that are available to configure, see the [XRTK Platform System](08-platform-system.md) documentation.
+
+## Further notes
+
+For the most part, you should not need to alter the Diagnostics system configuration unless required, or you wish to manually add a new Diagnostics System instrument manually.
 
 ---
 
 ### Related Articles
 
-* [Article 1]()
-* [Article 2]()
-* [Article 3]()
+* [XRTK Platform System](08-platform-framework.md)
 
 ---
 

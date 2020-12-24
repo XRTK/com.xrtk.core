@@ -146,6 +146,8 @@ Unity allows running of UWP projects directly from the editor for simple testing
 
 Please ensure the `Windows Mixed Reality` XRTK package is installed and that the Windows Mixed Reality Camera and controller providers are configured.
 
+> See the [Windows Mixed Reality Platform](platforms/windowsmixedreality.md) documentation for more details on the platform.
+
 ### Building for Oculus Quest / Android
 
 Building for Oculus Quest is rather unique, if you have your Oculus Quest connected to your machine via a high speed USB3 cable and have the Oculus Client running, you can run Quest project in Windows Standalone mode directly on the Quest via Oculus Link, [please see Oculus Support for further details](https://support.oculus.com/444256562873335/).  This will enable both controller and hands support for quick development.
@@ -153,6 +155,8 @@ Building for Oculus Quest is rather unique, if you have your Oculus Quest connec
 When building for Android, there is an additional requirement to install an `AndroidManaifest` for the quest to operate correctly, the XRTK provides a fast an easy way to do this by simply clicking `Mixed Reality Toolkit -> Tools -> Oculus -> Create Oculus Quest Compatible AndroidManaifest.xml` in the Unity editor menu. (**without this, your project may not start or appear in 2D**)
 
 Please ensure the `Oculus` XRTK package is installed and that the Oculus Camera and controller providers are configured.
+
+> See the [Oculus Platform](platforms/oculus.md) documentation for more details on the platform.
 
 ### Building for Magic Leap
 
@@ -171,7 +175,7 @@ To get started, ensure that the following components are installed:
 
 Please ensure the `Lumin` XRTK package is installed and that the Lumin Camera and controller providers are configured.
 
-**A more detailed guide for building for Magic leap will follow soon**
+> See the [Magic Leap Platform](platforms/magicleap.md) documentation for more details on the platform.
 
 ---
 
@@ -181,6 +185,9 @@ Please ensure the `Lumin` XRTK package is installed and that the Lumin Camera an
 * [Configuring your project](02-Configuration.md)
 * [Known Issues](04-KnownIssues.md)
 * [Frequently Asked Questions](05-faq.md)
+* [Windows Mixed Reality Platform](platforms/windowsmixedreality.md)
+* [Oculus Platform](platforms/oculus.md)
+* [Magic Leap Platform](platforms/magicleap.md) 
 
 ---
 

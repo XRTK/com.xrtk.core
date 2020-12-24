@@ -23,7 +23,7 @@ From the Additional Service Providers profile, you can register all the services
 
 ![](/images/Configuration/AdditionalServices/AdditionalServiceProvidersList.png.png)
 
-> For more detail on the [Platforms](08-platform-system.md) that are available to configure, see the [XRTK Platform System](08-platform-system.md) documentation.
+> For more detail on the [Platforms](08-platform-framework.md) that are available to configure, see the [XRTK Platform Framework](08-platform-framework.md) documentation.
 
 ## Further notes
 
@@ -50,7 +50,7 @@ This is available anywhere and at anytime within your project, but should be avo
 ### Related Articles
 
 * [A Practical Deep Dive into the Mixed Reality Framework](https://stephen-hodgson.medium.com/a-practical-deep-dive-into-the-mixed-reality-framework-a26401edb2aa)
-* [XRTK Platform System](08-platform-framework.md)
+* [XRTK Platform Framework](08-platform-framework.md)
 
 ---
 

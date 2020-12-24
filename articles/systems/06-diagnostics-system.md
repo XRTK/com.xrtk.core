@@ -24,7 +24,7 @@ Additionally, the prefab used will need to provide the capability to display the
 
 ![](/images/Configuration/Diagnostics/DiagnosticsDataProviders.png)
 
-> For more detail on the [Platforms](08-platform-system.md) that are available to configure, see the [XRTK Platform System](08-platform-system.md) documentation.
+> For more detail on the [Platforms](08-platform-framework.md) that are available to configure, see the [XRTK Platform Framework](08-platform-framework.md) documentation.
 
 ## Further notes
 
@@ -34,7 +34,7 @@ For the most part, you should not need to alter the Diagnostics system configura
 
 ### Related Articles
 
-* [XRTK Platform System](08-platform-framework.md)
+* [XRTK Platform Framework](08-platform-framework.md)
 
 ---
 

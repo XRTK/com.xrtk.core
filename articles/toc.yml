@@ -47,3 +47,5 @@
       href: appendices/A01-CodingGuidelines.md
     - name: XRTK vs MRTK
       href: appendices/A02-ChoosingXRTKvsMRTK.md
+    - name: XRTK Public Roadmap
+      href: appendices/A03-Roadmap.md      

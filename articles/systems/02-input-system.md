@@ -79,7 +79,7 @@ Expanding a profile shows the details for each provider, including:
 
 ![](/images/Configuration/InputSystem/ControllerDataProvider.png)
 
-> For more detail on the [Platforms](08-platform-system.md) that are available to configure, see the [XRTK Platform System](08-platform-system.md) documentation.
+> For more detail on the [Platforms](08-platform-framework.md) that are available to configure, see the [XRTK Platform Framework](08-platform-framework.md) documentation.
 
 From here you can either remove a controller profile completely, or change which platforms it is active for.
 
@@ -119,7 +119,7 @@ There is a lot of configuration available in the Input System, most of which wil
 
 ### Related Articles
 
-* [XRTK Platform System](08-platform-framework.md)
+* [XRTK Platform Framework](08-platform-framework.md)
 
 ---
 

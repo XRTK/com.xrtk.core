@@ -1,6 +1,6 @@
 # Mixed Reality Toolkit (XRTK) Frequently Asked Questions
 
-![The Mixed Reality Toolkit](/images/Branding/XRTK_Logo_1200x250.png)
+![The Mixed Reality Toolkit](../images/Branding/XRTK_Logo_1200x250.png)
 
 ## 1. Can I use the new Unity XR Management System?
 
@@ -19,9 +19,13 @@ However, here is the TL;DR short version:
 1. Create a new Unity Project
 2. Setup the Legacy XR settings in "Edit -> Project Settings -> Player -> XR Settings" for your current and any other platforms you want to run on
 3. Add the XRTK UPM registry to Unity by Opening the Unity Package Manager (`Window -> Package manager`), selecting the `Advanced` drop down and clicking on `Advanced Project Settings`, then Adding the following details:
-> Name: XRTK
-> URL: http://upm.xrtk.io:4873
-> Scope(s): com.xrtk
+
+    > Name: XRTK
+    >
+    > URL: http://upm.xrtk.io:4873
+    >
+    > Scope(s): com.xrtk
+
 4. Return to the Unity Package manager and select `My Registries` in the Sources) dropdown (next to the `+` symbol)
 5. Select the XRTK.SDK and click Install
 6. Close the Unity Package Manager and return to your scene
@@ -48,7 +52,7 @@ The Playspace is dynamically updated during edit/run time to meet the needs of t
 
 The Default Camera system installed with the SDK should cover Windows Standalone and most other platforms, however check that its `Runtime Platforms` is configured correctly (and is present)
 
-![Default Camera Settings](/images/faq/DefaultCameraSettings.png)
+![Default Camera Settings](../images/faq/DefaultCameraSettings.png)
 
 Other platforms will install their own Camera Systems as required.
 

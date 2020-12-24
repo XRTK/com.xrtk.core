@@ -6,14 +6,14 @@ The boundary system provides a solution specific boundary implementation for use
 
 In the Root configuration, the specific implementation for the boundary system is selected, which defaults to the XRTK implementation for the boundary system.  In most cases this does not need to be touched, however, advanced users can replace it with their own system if they wish.
 
-![](/images/Configuration/BoundarySystem/BoundarySystemProfile.png)
+![](../../images/Configuration/BoundarySystem/BoundarySystemProfile.png)
 
 ## Boundary System platform configuration
 
 The Boundary system for the XRTK allows for different implementations to be utilized for different runtime or build platforms. Where an interface in to the Vendor implementation for a boundary exists, the XRTK will provide an adapter/provider, however, not all platforms do.
 Where a boundary provider is available, you can customize how the XRTK manages the boundary area as you wish:
 
-![](/images/Configuration/BoundarySystem/BoundarySystemSettings.png)
+![](../../images/Configuration/BoundarySystem/BoundarySystemSettings.png)
 
 The configuration holds:
 

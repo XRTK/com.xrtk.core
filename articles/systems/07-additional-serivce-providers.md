@@ -11,7 +11,7 @@ For more information on creating services that can be hosted within the Mixed Re
 
 In the Root configuration, the Additional Service Providers profile provides an entry point to register any and all additional services with the Mixed Reality Toolkit.
 
-![](/images/Configuration/AdditionalServices/AdditionalServiceProvidersProfile.png)
+![](../../images/Configuration/AdditionalServices/AdditionalServiceProvidersProfile.png)
 
 ## Additional Service Providers
 
@@ -21,7 +21,7 @@ From the Additional Service Providers profile, you can register all the services
 * Profile - If your service requires a profile to configure, this will automatically display below the `Instanced Type` and allow you to provide or create a new profile for the service.  This is optional if your service does not require additional configuration.
 * Runtime Platforms - Select which platforms your service should run on.
 
-![](/images/Configuration/AdditionalServices/AdditionalServiceProvidersList.png.png)
+![](../../images/Configuration/AdditionalServices/AdditionalServiceProvidersList.png.png)
 
 > For more detail on the [Platforms](08-platform-framework.md) that are available to configure, see the [XRTK Platform Framework](08-platform-framework.md) documentation.
 

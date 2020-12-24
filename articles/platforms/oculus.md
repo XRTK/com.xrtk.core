@@ -36,9 +36,13 @@ The following capabilities are not currently available or are in development
 1. Create a new Unity Project
 2. Setup the Legacy XR settings in "Edit -> Project Settings -> Player -> XR Settings" for `Oculus` to the Windows Standalone and Android platforms
 3. Add the XRTK UPM registry to Unity by Opening the Unity Package Manager (`Window -> Package manager`), selecting the `Advanced` drop down and clicking on `Advanced Project Settings`, then Adding the following details:
+
     > Name: XRTK
+    >
     > URL: http://upm.xrtk.io:4873
+    >
     > Scope(s): com.xrtk
+
 4. Return to the Unity Package manager and select `My Registries` in the Sources) dropdown (next to the `+` symbol)
 5. Select the `XRTK.SDK` and click `Install`
 6. Close the Unity Package Manager and return to your scene

@@ -71,11 +71,11 @@ Configuring your scene is extremely simple by simply selecting the following fro
 
 > `Mixed Reality Toolkit -> Configure...`
 
-![Configure](/images/GettingStarted/MixedRealityConfigure.png)
+![Configure](../images/GettingStarted/MixedRealityConfigure.png)
 
 Configuring the toolkit will set up the camera rig, creates the `MixedRealityToolkit`, and adds additional components to the `Main Camera`. Once this completes, you will see the following in your project's scene hierarchy:
 
-![Scene Hiearchy](/images/GettingStarted/MixedRealityScene.png)
+![Scene Hiearchy](../images/GettingStarted/MixedRealityScene.png)
 
 Which contains the following:
 
@@ -105,11 +105,11 @@ Once you have your initial scene setup with the Unity Standalone platform, you a
 
 To add a new platform, simply return to the Unity Package Manager (`Window -> Package Manager`) and selecting `My Registries` from the source drop down, select the package to install (for example XRTK.WindowsMixedReality) and click Install as shown below:
 
-![Unity Package Manager](/images/GettingStarted/UnityPackageManager-XRTK.png)
+![Unity Package Manager](../images/GettingStarted/UnityPackageManager-XRTK.png)
 
 Once installed, the default for that platform will be copied into the `XRTK.Generated` folder in your project assets and a prompt will appear to automatically register the platforms configuration with your scene, as shown below:
 
-![New Platform Prompt](/images/GettingStarted/NewPlatformPrompt.png)
+![New Platform Prompt](../images/GettingStarted/NewPlatformPrompt.png)
 
 If you click `Later`, please refer to the [Configuration Guide](02-Configuration.md) for how to manually add the configuration
 
@@ -121,7 +121,7 @@ You are now ready to start building your Mixed Reality Solution, just start addi
 
 You will need to enable the Unity Legacy XR system for each platform (`Edit -> Project Settings -> XR Settings`) as appropriate:
 
-![Unity XR Settings](/images/GettingStarted/UnityLegacyXRSettings.png)
+![Unity XR Settings](../images/GettingStarted/UnityLegacyXRSettings.png)
 
 > At this time, while the new Unity XR Management system does work for some platforms, there could be unforseen issues.  the XRTK talks natively with each platform to improve performance and reduce overhead.
 > Will will be updating to support enabling XR through the new system in a future release.

@@ -16,7 +16,7 @@
   href: platforms/platforms.md
   items:
     - name: Windows Mixed Reality
-      href: platforms/platforms.md
+      href: platforms/windowsmixedreality.md
     - name: Oculus
       href: platforms/oculus.md
     - name: Magic Leap

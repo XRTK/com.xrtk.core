@@ -2,7 +2,7 @@
 
 One of the goals of the Mixed Reality Toolkit was to greatly simplify how a project is configured, removing the need to hunt and search for specific objects and tweak configuration to change how a scene works, by consolidating the majority of the projects configuration in to a few top-level screens:
 
-![Mixed Reality Toolkit Configuration](/images/Configuration/MixedRealityToolkitConfiguration.png)
+![Mixed Reality Toolkit Configuration](../images/Configuration/MixedRealityToolkitConfiguration.png)
 
 While initially this may look a little complex, once a basic understanding is known, it is fairly easy to navigate.
 
@@ -18,7 +18,7 @@ This path can be customized by updating your preference in the preferences windo
 
 The Mixed Reality Toolkit will only ever have a single active configuration profile running at any time, which is referenced on the `MixedRealityToolkit` GameObject in your configured scene.
 
-![Main Configuration Profile](/images/Configuration/MixedRealityProfileView.png)
+![Main Configuration Profile](../images/Configuration/MixedRealityProfileView.png)
 
 From here you can configure all the core Systems and their individual profile settings:
 
@@ -35,7 +35,7 @@ From here you can configure all the core Systems and their individual profile se
 When you start a new project, we provide a copy each packages profiles with every system and service pre-configured and turned on, for a fully platform agnostic project. Each profile can be individually customized to your project's needs.
 
 > **Note:** If you'd like to make a copy of a profile to test out a specific configuration you can easily clone and assign the profile using the `clone` button that appears to the right of each profile field.
-![Clone Profile Button](/images/Configuration/MixedRealityProfileCloneButton.png)
+![Clone Profile Button](../images/Configuration/MixedRealityProfileCloneButton.png)
 
 ---
 

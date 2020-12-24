@@ -1,6 +1,6 @@
 # Mixed Reality Toolkit Examples library
 
-![The Mixed Reality Toolkit](/images/Branding/XRTK_Logo_1200x250.png)
+![The Mixed Reality Toolkit](../../images/Branding/XRTK_Logo_1200x250.png)
 
 The XRTK currently provides several demonstration scenes for the major components of the framework. These are not meant to be exhaustive, just walk-throughs of the capabilities of each area.
 

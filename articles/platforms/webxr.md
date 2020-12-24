@@ -1,26 +1,31 @@
-# Headline
+# WebXR platform
 
-A brief overview of the tutorial.
+The WebXR platform is currently in development and targeting the XRTK 0.3 release.
 
-## What you'll need
+## Requirements
 
-List previous steps if needed and a short list of required materials or skills.
+As WebXR is purely web based, the requirements will be very minimal. This will be updated as development continues.
 
-## Getting Started
+## Platform considerations
 
-1. Step 1
-2. Step 2
+The Platform considerations will be updated once the platform is released.
 
----
+## Capabilities
 
-### Related Articles
+The following capabilities are in development and likely to be available for the WebXR platform
 
-* [Article 1]()
-* [Article 2]()
-* [Article 3]()
+1. Headset Tracking
+2. WebXR controllers
+3. WebXR Hands tracking
+
+
+## Quickstart (preview, subject to change)
+
+The quickstart guide will be updated once the platform is released.
 
 ---
 
 ### [**Raise an Information Request**](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=)
 
 If there is anything not mentioned in this document or you simply want to know more, raise an [RFI (Request for Information) request here](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=).
+

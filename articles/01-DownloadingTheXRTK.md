@@ -19,11 +19,11 @@ Unity has now enabled the ability to register scoped registries through the Unit
 
 To start, you will need to register the XRTK Scoped registry in the Unity Package Manager, which you will find in the Package Manager Window (Window -> Package Manager) Advanced dropdown, as shown below:
 
-![Unity Package Manager Advanced options](/images/DownloadingTheXRTK/UnityPackageManager-Advanced.jpg)
+![Unity Package Manager Advanced options](../images/DownloadingTheXRTK/UnityPackageManager-Advanced.jpg)
 
 Once opened, you will see the Scoped Registry configuration (which is also available via the Project Settings window), from here, you can add the XRTK scoped registry using the details below:
 
-![Unity Package Manager Scoped Registries](/images/DownloadingTheXRTK/UnityPackageManager-ScopedRegistries.jpg)
+![Unity Package Manager Scoped Registries](../images/DownloadingTheXRTK/UnityPackageManager-ScopedRegistries.jpg)
 
 ```text
 Name: XRTK
@@ -33,11 +33,11 @@ Scope(s): com.xrtk
 
 Once entered, simply click "Save" and close the window. Upon returning to the Unity Package Manager, you can now select "My Registries" in the package filter on the left hand side drop down, as shown here:
 
-![Unity Package Manager My Registries](/images/DownloadingTheXRTK/UnityPackageManager-MyRegistries.jpg)
+![Unity Package Manager My Registries](../images/DownloadingTheXRTK/UnityPackageManager-MyRegistries.jpg)
 
 Which will list all the current XRTK packages available for install.  If you also wish to check out the latest "Preview packages", then simply check the "Show Preview Packages" option in the "Advanced" dropdown to display them, as shown here:
 
-![Unity Package Manager My Registries](/images/DownloadingTheXRTK/UnityPackageManager-XRTKRegistries.jpg)
+![Unity Package Manager My Registries](../images/DownloadingTheXRTK/UnityPackageManager-XRTKRegistries.jpg)
 
 Once you are ready, simply install the XRTK and any platforms you wish to use in your project to get started.
 
@@ -49,13 +49,13 @@ Our preferred deployment approach is to fully utilize [Unity's native package ma
 
 Download the [XRTK-Core.unitypackage](https://github.com/XRTK/XRTK-Core/releases) asset, then drag and drop it into your project window.  This adds an Mixed Reality Toolkit seed, that will automatically register the Mixed Reality Toolkit's scoped registry with the Unity package manager, then starts searching for the latest release packages on the upm server.
 
-![Seed Package](/images/DownloadingTheXRTK/XRTKAutoInstallAsset.png)
+![Seed Package](../images/DownloadingTheXRTK/XRTKAutoInstallAsset.png)
 
 ### Install platform packages
 
 The Mixed Reality Toolkit will pull all of the known packages under `com.xrtk.*` and will dispaly them for you to easily install using the package picker window. The latest release pacakges are installed for you by default.
 
-![Package List](/images/DownloadingTheXRTK/XRTKPackageList.png)
+![Package List](../images/DownloadingTheXRTK/XRTKPackageList.png)
 
 ## Manual UPM Installation
 
@@ -63,7 +63,7 @@ If you prefer to do things yourself, you can simply edit the ***manifest.json***
 
 To locate the folder the manifest is in, simply right-click in your Unity project folder on the "Packages" folder as shown below, then select the "Show in Explorer" option:
 
-![Context Menu](/images/DownloadingTheXRTK/LocatePackagesFolder.png)
+![Context Menu](../images/DownloadingTheXRTK/LocatePackagesFolder.png)
 
 In the packages folder, you will see the specific Manifest.json file which you will need to open for editing using your favorite tool ([We prefer VSCode as it's awesome](https://code.visualstudio.com/))
 
@@ -110,9 +110,9 @@ Advanced developers and those wishing to contribute to the Mixed Reality Toolkit
 2. Checkout the `development` branch of the XRTK-Core submodule and make sure it's up to date and synced with any upstream changes.
     > <font color="red">**Warning!**</font> We strongly recommend you use do not use the **upm** branch to avoid breaking the symbolic links when switching between branches.
 3. Create Symbolic links for each package you wish to directly modify in your project by using the project window context menu: `Symbolic Links/Create Link`
-  ![Symbolic Link Context Menu](/images/DownloadingTheXRTK/SymbolicLinks.png)
+  ![Symbolic Link Context Menu](../images/DownloadingTheXRTK/SymbolicLinks.png)
 4. Using the symbolic link wizard, choose the source folder for the package you wish you replace with the editable version, and the target path for your project, then import the package.
-  ![Symbolic Link Wizard](/images/DownloadingTheXRTK/SymbolicLinkWizard.png)
+  ![Symbolic Link Wizard](../images/DownloadingTheXRTK/SymbolicLinkWizard.png)
     > <font color="orange">**Important:**</font> It's strongly advised to use the `Packages` folder as your target path for all symbolically linked packages.
 5. Repeat step 4 for each additoinal package you'd like to directly modify.
 

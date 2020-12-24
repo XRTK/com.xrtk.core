@@ -9,13 +9,13 @@ The Teleport system is an optional system used to transport users through your M
 
 In the Root configuration, the specific implementation for the Teleport system is selected, which defaults to the XRTK implementation for the Teleport system.  In most cases this does not need to be touched, however, advanced users can replace it with their own system if they wish.
 
-![](/images/Configuration/TeleportSystem/TeleportSystemProfile.png)
+![](../../images/Configuration/TeleportSystem/TeleportSystemProfile.png)
 
 ## Teleport System platform configuration
 
 The Teleport system for the XRTK allows for different implementations to be utilized for different runtime or build platforms. Each platform provided by the XRTK includes a default Teleport system configuration for that platform which can be customized if you wish:
 
-![](/images/Configuration/TeleportSystem/TeleportSystemSettings.png)
+![](../../images/Configuration/TeleportSystem/TeleportSystemSettings.png)
 
 The configuration holds:
 
@@ -29,13 +29,13 @@ The configuration holds:
 
 The Teleport system allows for different validation methods to be used based on the capabilities of the target platform, these validation profiles are defined in this data providers list, indicating the teleport validation for the platform and the specific platform the system is applicable for.
 
-![](/images/Configuration/TeleportSystem/TeleportSystemDataProviders.png)
+![](../../images/Configuration/TeleportSystem/TeleportSystemDataProviders.png)
 
 ## Teleport Validation Profile
 
 The Teleport Validation profile allows you to configure the requirements for a successful teleport, checking the user has selected a valid target by the physics properties or the selection such as physics layers, exclusion layers, max angle and the distance from the origin.  These are used by the teleport system to ensure a teleport event is safe (within the bounds of the project) to perform.
 
-![](/images/Configuration/TeleportSystem/TeleportValidationOptions.png)
+![](../../images/Configuration/TeleportSystem/TeleportValidationOptions.png)
 
 ## Further notes
 

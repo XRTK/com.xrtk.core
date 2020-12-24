@@ -4,7 +4,7 @@ This document outlines the current Roadmap for the Mixed Reality Toolkit.
 
 > Dates mentioned are only an outline and subject to change.
 
-![Public Roadmap](/images/branding/Roadmap.png)
+![Public Roadmap](../../images/branding/Roadmap.png)
 
 ## Release 0.2 - Q4 2020
 

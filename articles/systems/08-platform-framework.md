@@ -36,7 +36,7 @@ Included with each platform, a default platform configuration asset is provided 
 
 ![](/images/Configuration/Platforms/PlatformConfigurationDefaults.png)
 
-Once selected, the default configuration will appear in the inspector and a `` button is available to install the configuration in to your current scene.
+Once selected, the default configuration will appear in the inspector and a `Install Platform Service Configuration` button is available to install the configuration in to your current scene.
 
 ![](/images/Configuration/Platforms/PlatformServiceConfigurationProfile.png)
 

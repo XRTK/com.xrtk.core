@@ -10,6 +10,29 @@
       href: 03-Template-Generator.md
     - name: Known Issues
       href: 04-KnownIssues.md
+    - name: Frequently Asked Questions
+      href: 05-faq.md
+- name: Platforms
+  href: platforms/platforms.md
+  items:
+    - name: Windows Mixed Reality
+      href: platforms/platforms.md
+    - name: Oculus
+      href: platforms/oculus.md
+    - name: Magic Leap
+      href: platforms/magicleap.md
+    - name: SteamVR
+      href: platforms/steamvr.md
+    - name: UltraLeap
+      href: platforms/ultraleap.md
+    - name: etee
+      href: platforms/etee.md
+    - name: WebXR
+      href: platforms/webxr.md                                    
+- name: Examples
+  items:
+    - name: Overview
+      href: examples/examples.md
 - name: Test Plans
   items:
     - name: Overview

@@ -49,7 +49,7 @@ When developing for XRTK on a Mac, you simply need the default requirements need
 
 First download the Mixed Reality Toolkit via one of the [delivery mechanisms](01-DownloadingTheXRTK.md) into your Unity project.
 
-Our preferred deployment approach is to use the [Unity Package Manager system](01-DownloadingTheXRTK.md#register-upm-server-in-project-settings).  This is the quickest and safest way to get Mixed Reality Toolkit in your solution and provides new releases as soon as they are published. Using UPM, there are also no asset conflicts in your Unity project.
+Our preferred deployment approach is to use the [Unity Package Manager](01-DownloadingTheXRTK.md#register-upm-server-in-project-settings).  This is the quickest and safest way to get Mixed Reality Toolkit in your solution and provides new releases as soon as they are published. Using UPM, there are also no asset conflicts in your Unity project.
 
 > **Note:** Some prefabs and assets require TextMesh Pro, meaning you have to have the TextMesh Pro package installed and the assets in your project `Window -> TextMeshPro -> Import TMP Essential Resources`.
 

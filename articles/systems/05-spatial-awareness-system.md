@@ -8,13 +8,13 @@ The Spatial Awareness system is primarily used by Augmented Reality devices such
 
 In the Root configuration, the specific implementation for the Spatial Awareness system is selected, which defaults to the XRTK implementation for the Spatial Awareness system.  In most cases this does not need to be touched, however, advanced users can replace it with their own system if they wish.
 
-![](/images/Configuration/CameraSystem/SpatialAwarenessSystemProfile.png)
+![](/images/Configuration/SpatialAwareness/SpatialAwarenessSystemProfile.png)
 
 ## Spatial Awareness System platform configuration
 
 The Spatial Awareness system for the XRTK allows for different implementations to be utilized for different runtime or build platforms. Each platform provided by the XRTK includes a default Spatial Awareness system configuration for that platform which can be customized if you wish:
 
-![](/images/Configuration/CameraSystem/SpatialAwarenessSystemSettings.png)
+![](/images/Configuration/SpatialAwareness/SpatialAwarenessSystemSettings.png)
 
 The configuration holds:
 
@@ -29,13 +29,13 @@ The configuration holds:
 
 The mesh Observer profile defines how often the spatial mesh should be updated in the current view and what materials to use to display/update the detected mesh.  It also allows the mesh generation to begin on startup or on command.
 
-![](/images/Configuration/CameraSystem/SpatialMeshObserverOptions.png)
+![](/images/Configuration/SpatialAwareness/SpatialMeshObserverOptions.png)
 
 ## Surface Mesh observer Profile
 
 The surface observer, much like the Mesh observer, allows configuration for the frequency for how often surfaces should be queries from the vendor platform and allows the application of different materials per type of surface detected, from Walls, to floors, ceilings and platforms (tables). Like the mesh observer, this can run on startup or on command.
 
-![](/images/Configuration/CameraSystem/SpatialSurfaceObserverOptions.png)
+![](/images/Configuration/SpatialAwareness/SpatialSurfaceObserverOptions.png)
 
 ## Mixed Reality Spatial Awareness data providers
 
@@ -43,7 +43,7 @@ Each platform that provides data to the Spatial Awareness system is defined in t
 
 You can also provide override configuration for the above options should you wish to, to have the solution behave differently for different platforms.
 
-![](/images/Configuration/CameraSystem/SpatialAwarenessDataProviders.png)
+![](/images/Configuration/SpatialAwareness/SpatialAwarenessDataProviders.png)
 
 > For more detail on the [Platforms](08-platform-system.md) that are available to configure, see the [XRTK Platform System](08-platform-system.md) documentation.
 

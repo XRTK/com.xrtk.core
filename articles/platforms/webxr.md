@@ -1,4 +1,4 @@
-# WebXR platform
+# WebXR platform (Advance information)
 
 The WebXR platform is currently in development and targeting the XRTK 0.3 release.
 

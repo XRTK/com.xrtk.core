@@ -4,7 +4,7 @@ A major component of the Mixed Reality Toolkit is the Platform Framework that wa
 
 ## Platform Selection
 
-![](../images/Configuration/Platforms/PlatformSelector.png)
+![](/images/Configuration/Platforms/PlatformSelector.png)
 
 Wherever configuration can have a variant for platforms, to make the configuration only active when selected platforms are available, the Platform selector is employed.
 
@@ -34,11 +34,11 @@ It also includes a set of `PlatformOverrides` which help to specify which target
 
 Included with each platform, a default platform configuration asset is provided to help automatically deploy the necessary configuration to operate a platform, usually including the Camera System and COntroller configuration, but can include others as required.  This is located within the `Profiles` folder of the `XRTK.Generated` folder for the specific platform, for example:
 
-![](../images/Configuration/Platforms/PlatformConfigurationDefaults.png)
+![](/images/Configuration/Platforms/PlatformConfigurationDefaults.png)
 
 Once selected, the default configuration will appear in the inspector and a `` button is available to install the configuration in to your current scene.
 
-![](../images/Configuration/Platforms/PlatformServiceConfigurationProfile.png)
+![](/images/Configuration/Platforms/PlatformServiceConfigurationProfile.png)
 
 > **There must be an existing `MixedRealityToolkit` GameObject in the scene for the configuration installation to be successful.**
 

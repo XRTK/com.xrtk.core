@@ -157,6 +157,8 @@ namespace XRTK.Editor
                 return;
             }
 
+            Selection.activeObject = null;
+
             foreach (var profile in profiles.Where(x => x.EndsWith(".asset")))
             {
                 var platformConfigurationProfile = AssetDatabase.LoadAssetAtPath<MixedRealityPlatformServiceConfigurationProfile>(profile);

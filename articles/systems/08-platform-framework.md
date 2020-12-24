@@ -1,4 +1,4 @@
-# Mixed Reality Toolkit Platform Framework
+# Mixed Reality Toolkit Platforms
 
 A major component of the Mixed Reality Toolkit is the Platform definitions that was employed to both accurately determine what platforms have been added to the scope of the project and also to determine when a platform is active/running.
 

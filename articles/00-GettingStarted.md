@@ -57,7 +57,7 @@ Simply follow along with the UPM Installation instructions detailed in the [Down
 
 ### It all starts with the SDK
 
-We recommend installing the **XRTK.SDK** first to ensure you have the smoothest setup with the XRTK, which also gives you access to the Quickstart configurations.  **DO NOT install any additional platforms until the SDK is installed and your starting scene is configured**
+We recommend installing the **XRTK.SDK** first to ensure you have the smoothest setup with the XRTK, which also gives you access to the Quickstart configurations.  **DO NOT install any additional platforms until the SDK is installed**
 
 ---
 

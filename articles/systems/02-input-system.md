@@ -14,7 +14,7 @@ In short, the only thing your project needs to handle are:
 
 In the Root configuration, the specific implementation for the camera system is selected, which defaults to the XRTK implementation for the Input System.  In most cases this does not need to be touched, however, advanced users can replace it with their own system if they wish.
 
-![](../images/Configuation/InputSystem/InputSystemProfile.png)
+![](../images/Configuration/InputSystem/InputSystemProfile.png)
 
 ## Input System platform configuration
 
@@ -30,19 +30,19 @@ The core settings for the Input System allow the configuration of various elemen
 
 These are all grouped together under a singe Input System profile for easy reuse between projects.
 
-![](../images/Configuation/InputSystem/InputSystemSettings.png)
+![](../images/Configuration/InputSystem/InputSystemSettings.png)
 
 ## Global Pointer Settings
 
 Pointers provide an invisible line between your controller (or head) in to a scene to interact with other objects. These default settings provide the global defaults for the Distance, Physics layer masks and colours users by the pointers, as well as whether they are drawn in the scene or not. 
 
-![](../images/Configuation/InputSystem/GlobalPointerSettings.png)
+![](../images/Configuration/InputSystem/GlobalPointerSettings.png)
 
 ## Global Hands Settings
 
 Providing default settings that control both the rendering and physical nature of hands. This also holds the default pose configuration available to hands while in use in the environment.
 
-![](../images/Configuation/InputSystem/GlobalHandSettings.png)
+![](../images/Configuration/InputSystem/GlobalHandSettings.png)
 
 ## Input Actions
 
@@ -54,7 +54,7 @@ The list here simply defines what actions are available in your solution and the
 
 > See [Controller Actions](#controller-actions) for how these Actions are then mapped to the various controllers you wish to support.
 
-![](../images/Configuation/InputSystem/InputActions.png)
+![](../images/Configuration/InputSystem/InputActions.png)
 
 ## Controller Actions
 
@@ -62,13 +62,13 @@ With your actions defined for your project, the next logical step is to decide w
 
 You can also see the individual controllers view in the [Controller Profile](#controller-profile) section below.
 
-![](../images/Configuation/InputSystem/ShortcutControllerActionMappings.png)
+![](../images/Configuration/InputSystem/ShortcutControllerActionMappings.png)
 
 ## Controller Definitions
 
 For a more detailed look at what controllers and inputs are configured, and to also add or remove controllers from your current configuration, the IMixedRealityInputDataProvider Configuration Options list out in detail what is currently available and for which platform they are available on.
 
-![](../images/Configuation/InputSystem/ConfiguredControllerDataProviders.png)
+![](../images/Configuration/InputSystem/ConfiguredControllerDataProviders.png)
 
 Expanding a profile shows the details for each provider, including:
 
@@ -77,7 +77,7 @@ Expanding a profile shows the details for each provider, including:
 * The configuration profile for the controller provider
 * The platforms the provider is registered for.
 
-![](../images/Configuation/InputSystem/ControllerDataProvider.png)
+![](../images/Configuration/InputSystem/ControllerDataProvider.png)
 
 > For more detail on the [Platforms](08-platform-system.md) that are available to configure, see the [XRTK Platform System](08-platform-system.md) documentation.
 
@@ -92,7 +92,7 @@ Looking at the configuration for an individual Controller Profile will show you 
 * Basic (default) - the same simple controller button view as [Controller Actions](#controller-actions) showing only those specific to this provider.
 * Advanced - More detailed views of the configuration behind the controllers.
 
-![](../images/Configuation/InputSystem/ControllerDataProviderProfile.png)
+![](../images/Configuration/InputSystem/ControllerDataProviderProfile.png)
 
 ## Controller Profile
 
@@ -105,7 +105,7 @@ When you open a Controller Profile, you will get a nice graphical view of the co
 
 You may also see a mix of other options where the vendor provides more capabilities, such as Near and Touched events that will show up on those controllers, e.g. Oculus.  Some inputs also have dual options, such as thumbsticks, which can also be pressed, allowing for an alternate action to be assigned.
 
-![](../images/Configuation/InputSystem/ControllerProfile.png)
+![](../images/Configuration/InputSystem/ControllerProfile.png)
 
 ## Conclusion
 

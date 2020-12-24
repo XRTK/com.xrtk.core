@@ -8,13 +8,13 @@ This is broken up in to THREE distinct components:
 
 In the Root configuration, the specific implementation for the camera system is selected, which defaults to the XRTK implementation for the camera system.  In most cases this does not need to be touched, however, advanced users can replace it with their own system if they wish.
 
-![](../images/Configuation/CameraSystem/CameraSystemProfile.png)
+![](../images/Configuration/CameraSystem/CameraSystemProfile.png)
 
 ## Camera System platform configuration
 
 The Camera system for the XRTK allows for different implementations to be utilized for different runtime or build platforms. Each platform provided by the XRTK includes a default camera system configuration for that platform which can be customized if you wish:
 
-![](../images/Configuation/CameraSystem/CameraSystemSettings.png)
+![](../images/Configuration/CameraSystem/CameraSystemSettings.png)
 
 The configuration holds:
 
@@ -27,7 +27,7 @@ The configuration holds:
 
 Each specific camera profile (as shown below) holds the configuration options to control the camera settings for the XRTK environment.  Please note, that some platforms may provide additional options specific to that platform as required.
 
-![](../images/Configuation/CameraSystem/CameraSystemOptions.png)
+![](../images/Configuration/CameraSystem/CameraSystemOptions.png)
 
 
 ## Further notes

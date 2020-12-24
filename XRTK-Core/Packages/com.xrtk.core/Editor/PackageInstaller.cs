@@ -122,7 +122,12 @@ namespace XRTK.Editor
 
             if (!Application.isBatchMode)
             {
-                EditorApplication.delayCall += () => AddConfigurations(installedAssets);
+                EditorApplication.delayCall += () =>
+                {
+                    AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+                    EditorApplication.delayCall += () =>
+                        AddConfigurations(installedAssets);
+                };
             }
 
             EditorUtility.ClearProgressBar();
@@ -131,14 +136,28 @@ namespace XRTK.Editor
 
         private static void AddConfigurations(List<string> profiles)
         {
-            AssetDatabase.Refresh(ImportAssetOptions.ForceUpdate);
+            MixedRealityToolkitRootProfile rootProfile;
 
-            //Clear the selection to ensure the inspector does not cause errors, Empty try catch to avoid Unity crashing when Selection is null
-            try
+            if (MixedRealityToolkit.IsInitialized)
             {
-                Selection.activeObject = null;
+                rootProfile = MixedRealityToolkit.Instance.ActiveProfile;
             }
-            catch { }
+            else
+            {
+                var availableRootProfiles = ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitRootProfile>();
+                rootProfile = availableRootProfiles.Length > 0 ? availableRootProfiles[0] : null;
+            }
+
+            // Only if a root profile is available at all it makes sense to display the
+            // platform configuration import dialog. If the user does not have a root profile yet,
+            // for whatever reason, there is nothing we can do here.
+            if (rootProfile.IsNull())
+            {
+                EditorUtility.DisplayDialog("Attention!", "Each data provider will need to be manually registered in each service configuration.", "OK");
+                return;
+            }
+
+            Selection.activeObject = null;
 
             foreach (var profile in profiles.Where(x => x.EndsWith(".asset")))
             {
@@ -146,33 +165,12 @@ namespace XRTK.Editor
 
                 if (platformConfigurationProfile.IsNull()) { continue; }
 
-                MixedRealityToolkitRootProfile rootProfile;
-                if (MixedRealityToolkit.IsInitialized)
+                if (EditorUtility.DisplayDialog("We found a new Platform Configuration",
+                    $"We found the {platformConfigurationProfile.name.ToProperCase()}. Would you like to add this platform configuration to your {nameof(MixedRealityToolkitRootProfile)}?",
+                    "Yes, Absolutely!",
+                    "later"))
                 {
-                    rootProfile = MixedRealityToolkit.Instance.ActiveProfile;
-                }
-                else
-                {
-                    var availableRootProfiles = ScriptableObjectExtensions.GetAllInstances<MixedRealityToolkitRootProfile>();
-                    rootProfile = availableRootProfiles.Length > 0 ? availableRootProfiles[0] : null;
-                }
-
-                // Only if a root profile is available at all it makes sense to display the
-                // platform configuration import dialog. If the user does not have a root profile yet,
-                // for whatever reason, there is nothing we can do here.
-                if (!rootProfile.IsNull())
-                {
-                    if (EditorUtility.DisplayDialog("We found a new Platform Configuration",
-                        $"We found the {platformConfigurationProfile.name.ToProperCase()}. Would you like to add this platform configuration to your {rootProfile.name}?",
-                        "Yes, Absolutely!",
-                        "later"))
-                    {
-                        InstallConfiguration(platformConfigurationProfile, rootProfile);
-                    }
-                    else
-                    {
-                        EditorUtility.DisplayDialog("Attention!", "Each data provider will need to be manually registered in each service configuration.", "OK");
-                    }
+                    InstallConfiguration(platformConfigurationProfile, rootProfile);
                 }
             }
         }
@@ -200,13 +198,6 @@ namespace XRTK.Editor
         /// <param name="rootProfile">The root profile to install the </param>
         public static void InstallConfiguration(MixedRealityPlatformServiceConfigurationProfile platformConfigurationProfile, MixedRealityToolkitRootProfile rootProfile)
         {
-            //Clear the selection to ensure the inspector does not cause errors, Empty try catch to avoid Unity crashing when Selection is null
-            try
-            {
-                Selection.activeObject = null;
-            }
-            catch { }
-
             foreach (var configuration in platformConfigurationProfile.Configurations)
             {
                 var configurationType = configuration.InstancedType.Type;

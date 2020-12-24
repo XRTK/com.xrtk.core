@@ -2,7 +2,15 @@
 
 ![The Mixed Reality Toolkit](/images/Branding/XRTK_Logo_1200x250.png)
 
-## 1. How do I create a new Mixed Reality Toolkit Project?
+## 1. Can I use the new Unity XR Management System?
+
+While we don't fully support the new XR Plugin Management system today, many of the platforms we deliver will support it, with the only exception being the Windows Mixed Reality platform.
+
+Unity unfortunately have removed all the functionality we initially depended on for WMR under the new XR Plugin Management system and isn't working.
+
+However, if you just want to target Magic Leap and Oculus, we have tested everything with the new XR System enabled and it all works as expected.
+
+## 2. How do I create a new Mixed Reality Toolkit Project?
 
 We recommend walking through the [Getting Started guide](00-GettingStarted.md) for a detailed understanding to get up and running.
 
@@ -23,18 +31,18 @@ However, here is the TL;DR short version:
 10. If you wish, you can install additional platforms, such as Oculus or Windows Mixed Reality from the Package Manager. once installed they will prompt to install their platform configuration in to your project (ENSURE that you have your Mixed Reality Scene open)
 11. Provided you have configured the Legacy XR settings for each platform correctly, the project will run
 
-## 2. What do I need to configure to make my Mixed Reality Project run?
+## 3. What do I need to configure to make my Mixed Reality Project run?
 
 In short NONE, Once you import the default configuration, then the project will be available to run on any of the supported platforms, the only exceptions are:
 
 * For Quest on Android, you will also need to install an Android Manifest in to your project using `Mixed Reality Toolkit -> Tools -> Oculus -> Create Oculus Quest compatible AndroidManifest.xml` in the Editor menu to ensure the Android build properly targets the Quest.
 * For Magic Leap, you will need to install the ML assets/XR package and follow Magic Leaps instructions for setting up the device.  You will also need an AndroidManifest.xml file for the Magic Leap.
 
-## 3. Do I need to have all systems enabled in my Mixed Reality Toolkit configuration to run?
+## 4. Do I need to have all systems enabled in my Mixed Reality Toolkit configuration to run?
 
 The only systems which are Mandatory are the `Camera System` and the `Input System`.  All other systems can be safely disabled if you wish and only enabled when you need them.
 
-## 4. I Configured my Mixed Reality Scene, but I do not have a `MixedRealityPlayspace` object.
+## 5. I Configured my Mixed Reality Scene, but I do not have a `MixedRealityPlayspace` object.
 
 The Playspace is dynamically updated during edit/run time to meet the needs of the platform it is running on by the Camera system.  If it is not being updated, check your `Camera Settings` are configured for your current platform.  There must be a Camera System configured for the current Runtime platform and/Or the editor.
 
@@ -44,7 +52,7 @@ The Default Camera system installed with the SDK should cover Windows Standalone
 
 Other platforms will install their own Camera Systems as required.
 
-## 5. I cannot click on my object in the scene.
+## 6. I cannot click on my object in the scene.
 
 For any object to he `Interactable` in a Mixed Reality scene, it must:
 
@@ -56,7 +64,7 @@ For any object to he `Interactable` in a Mixed Reality scene, it must:
 * Have a collider component added and configured relative to the objects dimensions.
     If you are using `Physics Layers`, then ensure the layers used for your objects match those in the Input System configuration
 
-## 6. WHen I interact with an object all my scripts are firing, but I only want one to.
+## 7. WHen I interact with an object all my scripts are firing, but I only want one to.
 
 The Input System events have a concept called `Used`, this allows for scenarios where you want multiple scripts to receive an event and control when the chain of events to end. If you want any object to stop and event from propagating then you simply need to handle the `Used` property.
 

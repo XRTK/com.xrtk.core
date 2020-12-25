@@ -63,38 +63,20 @@ We use the donations for continuous active development by core team members, web
 
 ## Supported Platforms
 
-By default, we support OpenVR on all platforms that support the standard, as well as Native SDK implementations for various vendors. This list is in no particular order.
+A major component of the Mixed Reality Toolkit is the Platform definitions that was employed to both accurately determine what platforms have been added to the scope of the project and also to determine when a platform is active/running.
 
-All platforms are supported using their native plugins.
+## Current Platforms
+
+* OpenVR - Default runtime platform for Windows Standalone, no special consideration.
+* [Oculus](oculus.md)
+* [Windows Mixed Reality (UWP)](windowsmixedreality.md)
+* [Magic Leap (Lumin)](magicleap.md)
+
+## In development
+
+* [SteamVR](steamvr.md)
+* [etee](etee.md)
+* [Ultraleap](ultraleap.md)
+* [WebXR](webxr.md)
 
 > Want to add a platform? Check out our new [Template Generator](articles/03-template-generator.md#platform-template-generation)!
-
-- [x] Windows Standalone
-- [x] Linux Standalone
-- [x] OSX Standalone
-- [x] [Windows Mixed Reality](https://github.com/XRTK/WindowsMixedReality)
-  - [x] Windows Mixed Reality HMDs
-  - [x] HoloLens 1 & 2
-- [x] [Lumin](https://github.com/XRTK/Lumin)
-  - [x] Magic Leap One
-- [x] [Oculus](https://github.com/XRTK/Oculus)
-  - [x] Rift
-  - [x] Quest
-  - [ ] Go
-- [x] Android
-  - [ ] [ARCore](https://github.com/XRTK/ARCore)
-- [ ] iOS
-  - [ ] ARKit
-- [ ] [Etee](https://github.com/XRTK/Etee)
-- [ ] [Ultraleap](https://github.com/XRTK/Ultraleap)
-- [ ] North Star
-- [ ] Varjo
-- [ ] [Lenovo](https://github.com/XRTK/Lenovo)
-  - [ ] A6
-- [ ] [Nreal](https://github.com/XRTK/Nreal)
-- [ ] [SteamVR (OpenVR)](https://github.com/XRTK/SteamVR)
-  - [ ] Index
-  - [ ] HTC Vive
-- [ ] OpenXR
-- [ ] WebAssembly (requires threading support)
-  - [ ] WebXR

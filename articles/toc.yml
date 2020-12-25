@@ -10,6 +10,27 @@
       href: 03-Template-Generator.md
     - name: Known Issues
       href: 04-KnownIssues.md
+- name: Platforms
+  href: platforms/platforms.md
+  items:
+    - name: Windows Mixed Reality
+      href: platforms/windowsmixedreality.md
+    - name: Oculus
+      href: platforms/oculus.md
+    - name: Magic Leap
+      href: platforms/magicleap.md
+    - name: SteamVR
+      href: platforms/steamvr.md
+    - name: UltraLeap
+      href: platforms/ultraleap.md
+    - name: etee
+      href: platforms/etee.md
+    - name: WebXR
+      href: platforms/webxr.md
+- name: Examples
+  items:
+    - name: Overview
+      href: examples/examples.md
 - name: Test Plans
   items:
     - name: Overview
@@ -24,3 +45,7 @@
       href: appendices/A01-CodingGuidelines.md
     - name: XRTK vs MRTK
       href: appendices/A02-ChoosingXRTKvsMRTK.md
+    - name: XRTK Public Roadmap
+      href: appendices/A03-Roadmap.md
+    - name: Frequently Asked Questions
+      href: appendices/A04-faq.md

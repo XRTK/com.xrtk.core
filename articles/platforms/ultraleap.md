@@ -34,13 +34,12 @@ The following capabilities are in development and likely to be available for the
 
 3. Return to the Unity Package manager and select `My Registries` in the Sources) dropdown (next to the `+` symbol)
 4. Select the `XRTK.SDK` and click `Install`
-5. Close the Unity Package Manager and return to your scene
-6. Select or create the scene you want to create Mixed Reality Content in
-7. Select `Mixed Reality Toolkit -> Configure` in the Unity Menu. THis will update your scene and add the MixedRealityToolkit instance.
-8. Save your scene and return to the Unity Package Manager
-9. Install the `XRTK.UltraLeap` platform
-10. When prompted, install the SteamVR platform configuration in to your current project
-11. Setup the Unity XR settings in "Edit -> Project Settings -> XR Plugin Management" for `UltraLeap`
+5. Install the `XRTK.UltraLeap` platform
+6. When prompted, install the SteamVR platform configuration in to your current project
+7. Close the Unity Package Manager and return to your scene
+8. Select or create the scene you want to create Mixed Reality Content in
+9. Select `Mixed Reality Toolkit -> Configure` in the Unity Menu. THis will update your scene and add the MixedRealityToolkit instance.
+10. Setup the Unity XR settings in "Edit -> Project Settings -> XR Plugin Management" for `UltraLeap`
 
 Provided you have configured the XR Plugin Management correctly, the project will run.
 

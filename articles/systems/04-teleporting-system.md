@@ -23,7 +23,7 @@ The configuration holds:
 * Teleport Action - The Input Action that the teleport system will used to enact a Teleportation event.  **Please Note** that some action provide additional data and capabilities, such as a Dual-Axis action will enable Teleportation with rotation and the ability to force rotate the view.
 * Teleport Data Provider configuration - The data provider list available to the Teleport system, primarily to validate whether a teleport location is valid or not.
 
-> For more detail on the [Platforms](08-platform-framework.md) that are available to configure, see the [XRTK Platform Framework](08-platform-framework.md) documentation.
+> Check out all the [Platforms that are available to configure](../platforms/platforms.md).
 
 ## Mixed Reality Teleport data providers
 
@@ -47,7 +47,9 @@ For the most part, you should not need to alter the Teleport system configuratio
 
 ### Related Articles
 
-* [XRTK Platform Framework](08-platform-framework.md)
+* [Getting Started](../00-GettingStarted.md#getting-started-with-the-mixed-reality-toolkit)
+* [Configuration](../02-Configuration.md#getting-started-with-the-mixed-reality-toolkit)
+* [XRTK Platforms](../platforms/platforms.md)
 
 ---
 

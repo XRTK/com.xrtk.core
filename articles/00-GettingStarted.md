@@ -15,7 +15,7 @@ The goal of the Mixed Reality Toolkit is to enable developers to build a single 
 * [Adding additional Platforms](#adding-additional-platforms)
 * [Build and Play](#build-and-play)
 
-One of the Mixed Reality Toolkit's primary goals was to ensure new projects can get up and running as fast as possible. To this end, the default configuration supplied in the XRTK's SDK ensures you can simply import, play and run a new project right out of the box.
+One of the Mixed Reality Toolkit's primary goals was to ensure new projects can get up and running as fast as possible. To this end, the default configuration supplied in the toolkit SDK ensures you can simply import, play and run a new project right out of the box.
 
 ## Prerequisites
 
@@ -57,7 +57,7 @@ Simply follow along with the UPM Installation instructions detailed in the [Down
 
 ### It all starts with the SDK
 
-We recommend installing the **XRTK.SDK** first to ensure you have the smoothest setup with the XRTK, which also gives you access to the Quickstart configurations.  **DO NOT install any additional platforms until the SDK is installed**
+We recommend installing the **XRTK.SDK** first to ensure you have the smoothest setup with the XRTK, which also gives you access to the Quickstart configurations.
 
 ---
 
@@ -65,7 +65,7 @@ We recommend installing the **XRTK.SDK** first to ensure you have the smoothest 
 
 The Mixed Reality Toolkit has been designed so that there is a base scene with all of the required GameObjects.  This base scene provides support for the core configuration and runtime.
 
-> **Note:** As more scenes are required in your project you'll need to [addatively load](https://docs.unity3d.com/ScriptReference/SceneManagement.LoadSceneMode.Additive.html) and unload each individually at runtime while keeping the configured base scene loaded at all times.
+> **Note:** As more scenes are required in your project you'll need to [additively load](https://docs.unity3d.com/ScriptReference/SceneManagement.LoadSceneMode.Additive.html) and unload each individually at runtime while keeping the configured base scene loaded at all times.
 
 Configuring your scene is extremely simple by simply selecting the following from the Editor menu:
 
@@ -99,9 +99,7 @@ From here, you can install any additional platforms you need to deploy to other 
 
 ## Adding additional Platforms
 
-Once you have your initial scene setup with the Unity Standalone platform, you are ready to install additional platforms to build and deploy to.  **We recommend building out your initial project just using the SDK and testing locally**.
-
-> **Installing additional platforms before your initial scene is setup may introduce issues in your project, mainly to do with the default configuration. SO we recommend setting up your initial scene BEFORE installing additional platforms**
+Once you have your initial scene setup with the Unity Standalone platform, you are ready to install additional platforms to build and deploy to.
 
 To add a new platform, simply return to the Unity Package Manager (`Window -> Package Manager`) and selecting `My Registries` from the source drop down, select the package to install (for example XRTK.WindowsMixedReality) and click Install as shown below:
 
@@ -123,16 +121,13 @@ You will need to enable the Unity Legacy XR system for each platform (`Edit -> P
 
 ![Unity XR Settings](../images/GettingStarted/UnityLegacyXRSettings.png)
 
-> At this time, while the new Unity XR Management system does work for some platforms, there could be unforseen issues.  the XRTK talks natively with each platform to improve performance and reduce overhead.
-> Will will be updating to support enabling XR through the new system in a future release.
+> The new Unity XR Management system does work with the XRTK, and there could be unforseen issues if both are in the project at the same time.  the XRTK talks natively with each platform to improve performance and reduce overhead.
 
-Once you are ready to build, open the Unity Build settings, and switch to the target platform you wish to build on.
+Once you are ready to build, open the Unity Build settings, and switch to the target platform you wish to build on, then open the Mixed Reality Toolkit's build window and build from there.
 
 > **Note:** Depending on the platform's simulation support, you should be able to run in the editor by pressing play.
 
-For specific builds, please check the quickstart sections below:
-
-> Please check the FAQ for any difficulties.
+> Please check the [FAQ](appendices/A04-faq.md) for any difficulties.
 
 ### Building for Windows Standalone (OpenVR/Oculus Rift-Link)
 
@@ -142,38 +137,13 @@ Please ensure either the OpenVR or Oculus Camera and Controller providers are co
 
 ### Building for Windows Mixed Reality (UWP)
 
-Unity allows running of UWP projects directly from the editor for simple testing.  Builds that are exported will require Visual Studio with the latest UWP API's installed to produce a build to ship and run on other WIndows 10 machines or the HoloLens.  Visual Studio also provides an independent method to publish to the Windows Store for distribution.
-
-Please ensure the `Windows Mixed Reality` XRTK package is installed and that the Windows Mixed Reality Camera and controller providers are configured.
-
 > See the [Windows Mixed Reality Platform](platforms/windowsmixedreality.md) documentation for more details on the platform.
 
 ### Building for Oculus Quest / Android
 
-Building for Oculus Quest is rather unique, if you have your Oculus Quest connected to your machine via a high speed USB3 cable and have the Oculus Client running, you can run Quest project in Windows Standalone mode directly on the Quest via Oculus Link, [please see Oculus Support for further details](https://support.oculus.com/444256562873335/).  This will enable both controller and hands support for quick development.
-
-When building for Android, there is an additional requirement to install an `AndroidManaifest` for the quest to operate correctly, the XRTK provides a fast an easy way to do this by simply clicking `Mixed Reality Toolkit -> Tools -> Oculus -> Create Oculus Quest Compatible AndroidManaifest.xml` in the Unity editor menu. (**without this, your project may not start or appear in 2D**)
-
-Please ensure the `Oculus` XRTK package is installed and that the Oculus Camera and controller providers are configured.
-
 > See the [Oculus Platform](platforms/oculus.md) documentation for more details on the platform.
 
 ### Building for Magic Leap
-
-Magic Leap is the one exception that does require the new Unity XR Management system and will require a separate Unity project at this time, primarily due the way the Magic leap platform is evolving.  We recommend building your project for one of the other platforms and then simply copying the asset folder to a new Unity project for Magic Leap to build and run.
-
-XRTK handles all the complexities underneath, so there will be no difference between your Magic Leap project and other platforms.
-
-> As soon as the new Unity XR Management system is fully supported by the XRTK, this separate project will not be required.
-
-To get started, ensure that the following components are installed:
-
-* Unity Magic Leap XR package installed
-* Magic Leap Unity asset installed (from Magic Leap hub)
-* Magic Leap Developer Hub
-* Visual Studio 2019
-
-Please ensure the `Lumin` XRTK package is installed and that the Lumin Camera and controller providers are configured.
 
 > See the [Magic Leap Platform](platforms/magicleap.md) documentation for more details on the platform.
 
@@ -184,10 +154,7 @@ Please ensure the `Lumin` XRTK package is installed and that the Lumin Camera an
 * [Downloading the XRTK](01-DownloadingTheXRTK.md)
 * [Configuring your project](02-Configuration.md)
 * [Known Issues](04-KnownIssues.md)
-* [Frequently Asked Questions](05-faq.md)
-* [Windows Mixed Reality Platform](platforms/windowsmixedreality.md)
-* [Oculus Platform](platforms/oculus.md)
-* [Magic Leap Platform](platforms/magicleap.md) 
+* [Frequently Asked Questions](appendices/A04-faq.md)
 
 ---
 

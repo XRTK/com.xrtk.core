@@ -28,6 +28,14 @@ For the most part, you should not need to alter the boundary system configuratio
 
 ---
 
+### Related Articles
+
+* [Getting Started](../00-GettingStarted.md#getting-started-with-the-mixed-reality-toolkit)
+* [Configuration](../02-Configuration.md#getting-started-with-the-mixed-reality-toolkit)
+* [XRTK Platforms](../platforms/platforms.md)
+
+---
+
 ### [**Raise an Information Request**](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=)
 
 If there is anything not mentioned in this document or you simply want to know more, raise an [RFI (Request for Information) request here](https://github.com/XRTK/XRTK-Core/issues/new?assignees=&labels=question&template=request_for_information.md&title=).

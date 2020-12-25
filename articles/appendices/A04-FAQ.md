@@ -4,11 +4,9 @@
 
 ## 1. Can I use the new Unity XR Management System?
 
-While we don't fully support the new XR Plugin Management system today, many of the platforms we deliver will support it, with the only exception being the Windows Mixed Reality platform.
+The XRTK is meant to be a replacement to the Unity XR Management system, and it is advised not to mix and match the two.
 
-Unity unfortunately have removed all the functionality we initially depended on for WMR under the new XR Plugin Management system and isn't working.
-
-However, if you just want to target Magic Leap and Oculus, we have tested everything with the new XR System enabled and it all works as expected.
+Currently the Magic Leap platform requires the Magic Leap XR Plugin to actually make builds for the platform, the intention is to be fully independent of the Unity XR Management System in the future.
 
 ## 2. How do I create a new Mixed Reality Toolkit Project?
 
@@ -60,8 +58,8 @@ Other platforms will install their own Camera Systems as required.
 
 For any object to he `Interactable` in a Mixed Reality scene, it must:
 
-* Have been registered with the `InputSystem` as a tracked object using 
-    ```csharp 
+* Have been registered with the `InputSystem` as a tracked object using
+    ```csharp
         MixedRealityToolkit.InputSystem.Register(gameObject);
     ```
     The XRTK provides a handy base class called `BaseInputHandler` for tracked scene objects
@@ -105,4 +103,4 @@ In this script we use the `BaseInputHandler` to register the object in the scene
 * If the action we were expecting happens and the event hasn't been used already, we perform something and then update the `Used` property of the event to `True` to stop other scripts using.
 
 This patten is very useful if you have multiple scripts attached to an object which perform different things based on the status of the object but only want ONE to work at a time.
-The inverse is also true, if you skip checking for `Used` you can have things run regardless. 
+The inverse is also true, if you skip checking for `Used` you can have things run regardless.

@@ -23,7 +23,7 @@ The configuration holds:
 * A Surface Mesh observer Profile
 * A list of data providers / adapters for each implemented platform
 
-> For more detail on the [Platforms](08-platform-framework.md) that are available to configure, see the [XRTK Platform Framework](08-platform-framework.md) documentation.
+> Check out all the [Platforms that are available to configure](../platforms/platforms.md).
 
 ## Global Mesh Observer Profile
 
@@ -45,7 +45,7 @@ You can also provide override configuration for the above options should you wis
 
 ![](../../images/Configuration/SpatialAwareness/SpatialAwarenessDataProviders.png)
 
-> For more detail on the [Platforms](08-platform-framework.md) that are available to configure, see the [XRTK Platform Framework](08-platform-framework.md) documentation.
+> Check out all the [Platforms that are available to configure](../platforms/platforms.md).
 
 ## Further notes
 
@@ -57,7 +57,9 @@ For the most part, you should not need to alter the Spatial Awareness system con
 
 ### Related Articles
 
-* [XRTK Platform Framework](08-platform-framework.md)
+* [Getting Started](../00-GettingStarted.md#getting-started-with-the-mixed-reality-toolkit)
+* [Configuration](../02-Configuration.md#getting-started-with-the-mixed-reality-toolkit)
+* [XRTK Platforms](../platforms/platforms.md)
 
 ---
 

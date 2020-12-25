@@ -24,7 +24,7 @@ The core settings for the Input System allow the configuration of various elemen
 * [Global Hand Settings](#global-hand-settings)
 * [Input Actions](#input-actions)
 * Speech Commands
-* Gestures 
+* Gestures
 * [Controller Actions](#controller-actions)
 * [Controller Definitions](#controller-definitions)
 
@@ -34,7 +34,7 @@ These are all grouped together under a singe Input System profile for easy reuse
 
 ## Global Pointer Settings
 
-Pointers provide an invisible line between your controller (or head) in to a scene to interact with other objects. These default settings provide the global defaults for the Distance, Physics layer masks and colours users by the pointers, as well as whether they are drawn in the scene or not. 
+Pointers provide an invisible line between your controller (or head) in to a scene to interact with other objects. These default settings provide the global defaults for the Distance, Physics layer masks and colours users by the pointers, as well as whether they are drawn in the scene or not.
 
 ![](../../images/Configuration/InputSystem/GlobalPointerSettings.png)
 
@@ -79,7 +79,7 @@ Expanding a profile shows the details for each provider, including:
 
 ![](../../images/Configuration/InputSystem/ControllerDataProvider.png)
 
-> For more detail on the [Platforms](08-platform-framework.md) that are available to configure, see the [XRTK Platform Framework](08-platform-framework.md) documentation.
+> Check out all the [Platforms that are available to configure](../platforms/platforms.md).
 
 From here you can either remove a controller profile completely, or change which platforms it is active for.
 
@@ -98,7 +98,7 @@ Looking at the configuration for an individual Controller Profile will show you 
 
 When you open a Controller Profile, you will get a nice graphical view of the controller and the inputs available for the device based on its hardware and the SDK of the vendor.  Here you can chose from the list of [Input Actions](#input-actions) you have configured for the project, with each input filtering those Actions by what the Input on the controller can support, for example:
 
-* Buttons can support only `Digitial` actions (boolean), button down and button up. 
+* Buttons can support only `Digitial` actions (boolean), button down and button up.
 * Triggers support `Single Axis` or `float` data, giving a range, usually between 0 and 1 for how uch the input is pressed.
 * Touch pads and ThumbSticks support `Dual Axis` or `Vector2` data, giving two coordinates in the X and Y planes based on how the input is manipulated
 * We also allow assigning an action to the pose (6dof, position and rotation) of the controller, which relates to the controllers position and rotation in relation to the headset.  An alternate pose is also available for grip, or offset position provided by the vendor for where the user grips the controller.
@@ -119,7 +119,9 @@ There is a lot of configuration available in the Input System, most of which wil
 
 ### Related Articles
 
-* [XRTK Platform Framework](08-platform-framework.md)
+* [Getting Started](../00-GettingStarted.md#getting-started-with-the-mixed-reality-toolkit)
+* [Configuration](../02-Configuration.md#getting-started-with-the-mixed-reality-toolkit)
+* [XRTK Platforms](../platforms/platforms.md)
 
 ---
 

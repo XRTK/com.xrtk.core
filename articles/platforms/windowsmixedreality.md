@@ -40,8 +40,8 @@ The following capabilities are currently available for the Windows Mixed Reality
 
 1. Create a new Unity Project
 2. Switch to the `UWP` platform in `Build Settings`
-2. Setup the Legacy XR settings in "Edit -> Project Settings -> Player -> XR Settings" for `Windows Mixed Reality` to the `UWP` platform
-3. Add the XRTK UPM registry to Unity by Opening the Unity Package Manager (`Window -> Package manager`), selecting the `Advanced` drop down and clicking on `Advanced Project Settings`, then Adding the following details:
+3. Setup the Legacy XR settings in "Edit -> Project Settings -> Player -> XR Settings" for `Windows Mixed Reality` to the `UWP` platform
+4. Add the XRTK UPM registry to Unity by Opening the Unity Package Manager (`Window -> Package manager`), selecting the `Advanced` drop down and clicking on `Advanced Project Settings`, then Adding the following details:
 
     > Name: XRTK
     >
@@ -49,15 +49,13 @@ The following capabilities are currently available for the Windows Mixed Reality
     >
     > Scope(s): com.xrtk
 
-4. Return to the Unity Package manager and select `My Registries` in the Sources) dropdown (next to the `+` symbol)
-5. Select the `XRTK.SDK` and click `Install`
-6. Close the Unity Package Manager and return to your scene
-7. Select or create the scene you want to create Mixed Reality Content in
-8. Select `Mixed Reality Toolkit -> Configure` in the Unity Menu. THis will update your scene and add the MixedRealityToolkit instance.
-9. Save your scene and return to the Unity Package Manager
-10. Install the `XRTK.WindowsMixedReality` platform
-11. When prompted, install the Windows Mixed Reality platform configuration in to your current project
-
+5. Return to the Unity Package manager and select `My Registries` in the Sources) dropdown (next to the `+` symbol)
+6. Select the `XRTK.SDK` and click `Install`
+7. Install the `XRTK.WindowsMixedReality` platform
+8. When prompted, install the Windows Mixed Reality platform configuration in to your current project
+9. Close the Unity Package Manager and return to your scene
+10. Select or create the scene you want to create Mixed Reality Content in
+12. Select `Mixed Reality Toolkit -> Configure` in the Unity Menu. THis will update your scene and add the MixedRealityToolkit instance.
 
 Provided you have configured the Legacy XR settings for each platform correctly, the project will run.
 

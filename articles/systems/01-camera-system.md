@@ -21,7 +21,7 @@ The configuration holds:
 * The default configuration - a Camera profile to be used where none is specified, a fallback default
 * Additional Camera Profile variants, which specifies the Name, Type, Camera Profile and platforms this variant is meant to run on.
 
-> For more detail on the [Platforms](08-platform-framework.md) that are available to configure, see the [XRTK Platform Framework](08-platform-framework.md) documentation.
+> Check out all the [Platforms that are available to configure](../platforms/platforms.md).
 
 ## Camera Profile
 
@@ -38,7 +38,9 @@ For the most part, you should not need to alter the camera system configuration 
 
 ### Related Articles
 
-* [XRTK Platform Framework](08-platform-framework.md)
+* [Getting Started](../00-GettingStarted.md#getting-started-with-the-mixed-reality-toolkit)
+* [Configuration](../02-Configuration.md#getting-started-with-the-mixed-reality-toolkit)
+* [XRTK Platforms](../platforms/platforms.md)
 
 ---
 

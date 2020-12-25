@@ -10,7 +10,7 @@ In the Root configuration, the specific implementation for the Diagnostics syste
 
 ## Diagnostics System platform configuration
 
-The Diagnostics system for the XRTK allows for different instruments to be called to display information in the diagnostics prefab. 
+The Diagnostics system for the XRTK allows for different instruments to be called to display information in the diagnostics prefab.
 
 ![](../../images/Configuration/Diagnostics/DiagnosticsSystemSettings.png)
 
@@ -24,7 +24,7 @@ Additionally, the prefab used will need to provide the capability to display the
 
 ![](../../images/Configuration/Diagnostics/DiagnosticsDataProviders.png)
 
-> For more detail on the [Platforms](08-platform-framework.md) that are available to configure, see the [XRTK Platform Framework](08-platform-framework.md) documentation.
+> Check out all the [Platforms that are available to configure](../platforms/platforms.md).
 
 ## Further notes
 
@@ -34,7 +34,9 @@ For the most part, you should not need to alter the Diagnostics system configura
 
 ### Related Articles
 
-* [XRTK Platform Framework](08-platform-framework.md)
+* [Getting Started](../00-GettingStarted.md#getting-started-with-the-mixed-reality-toolkit)
+* [Configuration](../02-Configuration.md#getting-started-with-the-mixed-reality-toolkit)
+* [XRTK Platforms](../platforms/platforms.md)
 
 ---
 

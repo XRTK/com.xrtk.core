@@ -50,7 +50,7 @@ The Playspace is dynamically updated during edit/run time to meet the needs of t
 
 The Default Camera system installed with the SDK should cover Windows Standalone and most other platforms, however check that its `Runtime Platforms` is configured correctly (and is present)
 
-![Default Camera Settings](../../images/faq/DefaultCameraSettings.png)
+![Default Camera Settings](../../images/FAQ/DefaultCameraSettings.png)
 
 Other platforms will install their own Camera Systems as required.
 

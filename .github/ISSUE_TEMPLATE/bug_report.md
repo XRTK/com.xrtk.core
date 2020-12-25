@@ -33,17 +33,14 @@ assignees: ''
 
 <!-- If applicable, add screenshots to help explain your problem. -->
 
-## Your Setup (please complete the following information)
+## Your Setup
 
-- Unity Version [e.g. 2019.1.0f2]
-- XRTK Version [e.g. 0.1.8]
+<!-- please complete any/all the following information. -->
 
-## Target Platform (please complete the following information)
-
-- WMR immersive
-- OpenVR
-- HoloLens
-- Lumin (Magic Leap)
+- Operation system [e.g. windows, macos, linux]
+- Unity Version [e.g. 2019.3.11f0]
+- XRTK Version [e.g. 0.2.0]
+- XRTK Commit SHA [e.g. 0b40524df4b67fd3bdf305185d5426213040b43f]
 
 ## Additional context
 

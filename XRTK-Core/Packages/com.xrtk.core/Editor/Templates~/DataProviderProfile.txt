@@ -1,0 +1,8 @@
+#USING#
+
+namespace #NAMESPACE#
+{
+    public class #NAME#Profile : #BASE#
+    {
+    }
+}

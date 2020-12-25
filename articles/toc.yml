@@ -6,9 +6,46 @@
       href: 01-DownloadingTheXRTK.md
     - name: Configuring your project
       href: 02-Configuration.md
+    - name: Platform Template Generator
+      href: 03-Template-Generator.md
+    - name: Known Issues
+      href: 04-KnownIssues.md
+- name: Platforms
+  href: platforms/platforms.md
+  items:
+    - name: Windows Mixed Reality
+      href: platforms/windowsmixedreality.md
+    - name: Oculus
+      href: platforms/oculus.md
+    - name: Magic Leap
+      href: platforms/magicleap.md
+    - name: SteamVR
+      href: platforms/steamvr.md
+    - name: UltraLeap
+      href: platforms/ultraleap.md
+    - name: etee
+      href: platforms/etee.md
+    - name: WebXR
+      href: platforms/webxr.md
+- name: Examples
+  items:
+    - name: Overview
+      href: examples/examples.md
+- name: Test Plans
+  items:
+    - name: Overview
+      href: testplans/TP_Overview.md
+    - name: TP-00 Import SDK And Configure
+      href: testplans/TP-00_Import-XRTK.SDK-And_Configure.md
+    - name: TP-01 Import Oculus Without SDK
+      href: testplans/TP-01_Import-XRTK.Oculus-Without-XRTK.SDK.md
 - name: Appendices
   items:
     - name: Coding Guidelines
-      href: A01-CodingGuidelines.md
+      href: appendices/A01-CodingGuidelines.md
     - name: XRTK vs MRTK
-      href: A02-ChoosingXRTKvsMRTK.md
+      href: appendices/A02-ChoosingXRTKvsMRTK.md
+    - name: XRTK Public Roadmap
+      href: appendices/A03-Roadmap.md
+    - name: Frequently Asked Questions
+      href: appendices/A04-FAQ.md

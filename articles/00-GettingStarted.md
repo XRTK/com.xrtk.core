@@ -127,7 +127,7 @@ Once you are ready to build, open the Unity Build settings, and switch to the ta
 
 > **Note:** Depending on the platform's simulation support, you should be able to run in the editor by pressing play.
 
-> Please check the [FAQ](appendices/A04-faq.md) for any difficulties.
+> Please check the [FAQ](appendices/A04-FAQ.md) for any difficulties.
 
 ### Building for Windows Standalone (OpenVR/Oculus Rift-Link)
 
@@ -154,7 +154,7 @@ Please ensure either the OpenVR or Oculus Camera and Controller providers are co
 * [Downloading the XRTK](01-DownloadingTheXRTK.md)
 * [Configuring your project](02-Configuration.md)
 * [Known Issues](04-KnownIssues.md)
-* [Frequently Asked Questions](appendices/A04-faq.md)
+* [Frequently Asked Questions](appendices/A04-FAQ.md)
 
 ---
 

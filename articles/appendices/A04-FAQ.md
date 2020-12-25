@@ -1,6 +1,6 @@
 # Mixed Reality Toolkit (XRTK) Frequently Asked Questions
 
-![The Mixed Reality Toolkit](../images/Branding/XRTK_Logo_1200x250.png)
+![The Mixed Reality Toolkit](../../images/Branding/XRTK_Logo_1200x250.png)
 
 ## 1. Can I use the new Unity XR Management System?
 
@@ -50,7 +50,7 @@ The Playspace is dynamically updated during edit/run time to meet the needs of t
 
 The Default Camera system installed with the SDK should cover Windows Standalone and most other platforms, however check that its `Runtime Platforms` is configured correctly (and is present)
 
-![Default Camera Settings](../images/faq/DefaultCameraSettings.png)
+![Default Camera Settings](../../images/FAQ/DefaultCameraSettings.png)
 
 Other platforms will install their own Camera Systems as required.
 

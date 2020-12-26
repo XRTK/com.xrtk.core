@@ -12,7 +12,7 @@
           "hash": "Zh7riv6tjFTfZ9IIzlBbbg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -24,7 +24,7 @@
           "hash": "ScZE5cPiF0goONo+pGHwPg=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -36,7 +36,7 @@
           "hash": "DngB5brI/O6P5LcKNIcvXw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -48,7 +48,7 @@
           "hash": "sbWkI6eA+MkCouOgj/RA0w=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
@@ -60,19 +60,16 @@
           "hash": "ex7f/zAv70l9gEkYs0xdZw=="
         }
       },
-      "is_incremental": false,
+      "is_incremental": true,
       "version": ""
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
       "source_relative_path": "../README.md",
       "output": {
         ".html": {
           "relative_path": "README.html",
-          "hash": "LYt5r3Em6dFqa+UpI3BvxQ=="
+          "hash": "4MYcap8uPzZta43tFBRk5g=="
         }
       },
       "is_incremental": false,
@@ -19296,7 +19293,7 @@
           "can_incremental": true,
           "incrementalPhase": "build",
           "total_file_count": 37,
-          "skipped_file_count": 37
+          "skipped_file_count": 36
         },
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": true,

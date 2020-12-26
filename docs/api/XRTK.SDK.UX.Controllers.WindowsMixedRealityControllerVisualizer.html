@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class WindowsMixedRealityControllerVisualizer
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -89,8 +89,8 @@
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerVisualizer.html">IMixedRealityControllerVisualizer</a></div>
-    <div><a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityControllerVisualizer.html">IMixedRealityControllerVisualizer</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourcePoseHandler.html">IMixedRealitySourcePoseHandler</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourceStateHandler.html">IMixedRealitySourceStateHandler</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler.html">IMixedRealityInputHandler</a></div>
@@ -104,7 +104,7 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="XRTK.SDK.UX.Controllers.DefaultMixedRealityControllerVisualizer.html#XRTK_SDK_UX_Controllers_DefaultMixedRealityControllerVisualizer_GameObjectProxy">DefaultMixedRealityControllerVisualizer.GameObjectProxy</a>
+      <a class="xref" href="XRTK.SDK.UX.Controllers.DefaultMixedRealityControllerVisualizer.html#XRTK_SDK_UX_Controllers_DefaultMixedRealityControllerVisualizer_GameObject">DefaultMixedRealityControllerVisualizer.GameObject</a>
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_PoseDriver">ControllerPoseSynchronizer.PoseDriver</a>
@@ -159,9 +159,6 @@
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_OnDestroy">InputSystemGlobalListener.OnDestroy()</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_ValidateInputSystemAsync">InputSystemGlobalListener.ValidateInputSystemAsync()</a>
     </div>
     <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_IsInvoking">MonoBehaviour.IsInvoking()</a>
@@ -225,6 +222,12 @@
     </div>
     <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent__1">Component.GetComponent&lt;T&gt;()</a>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.TryGetComponent(System.Type, UnityEngine.Component)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.TryGetComponent&lt;T&gt;(T)</span>
     </div>
     <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent_System_String_">Component.GetComponent(String)</a>
@@ -447,7 +450,8 @@
   <h6><strong>Assembly</strong>: XRTK.SDK.dll</h6>
   <h5 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class WindowsMixedRealityControllerVisualizer : DefaultMixedRealityControllerVisualizer, IMixedRealityControllerVisualizer, IMixedRealityControllerPoseSynchronizer, IMixedRealitySourcePoseHandler, IMixedRealitySourceStateHandler, IMixedRealityInputHandler, IMixedRealityInputHandler&lt;float&gt;, IMixedRealityInputHandler&lt;Vector2&gt;, IMixedRealityInputHandler&lt;Vector3&gt;, IMixedRealityInputHandler&lt;Quaternion&gt;, IMixedRealityInputHandler&lt;MixedRealityPose&gt;, IEventSystemHandler</code></pre>
+    <pre><code class="lang-csharp hljs">[Guid(&quot;66444029-7951-40BC-B488-429E178B193A&quot;)]
+public class WindowsMixedRealityControllerVisualizer : DefaultMixedRealityControllerVisualizer, IMixedRealityControllerVisualizer, IMixedRealityControllerPoseSynchronizer, IMixedRealitySourcePoseHandler, IMixedRealitySourceStateHandler, IMixedRealityInputHandler, IMixedRealityInputHandler&lt;float&gt;, IMixedRealityInputHandler&lt;Vector2&gt;, IMixedRealityInputHandler&lt;Vector3&gt;, IMixedRealityInputHandler&lt;Quaternion&gt;, IMixedRealityInputHandler&lt;MixedRealityPose&gt;, IEventSystemHandler</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -456,11 +460,12 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_Controller.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.Controller%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L70">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L72">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_Controller_" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.Controller*"></a>
   <h4 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_Controller" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.Controller">Controller</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The current controller reference.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -488,7 +493,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_TouchpadTouchVisualizer.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.TouchpadTouchVisualizer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L19">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L20">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_TouchpadTouchVisualizer_" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.TouchpadTouchVisualizer*"></a>
   <h4 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_TouchpadTouchVisualizer" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.TouchpadTouchVisualizer">TouchpadTouchVisualizer</h4>
@@ -520,11 +525,12 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_System_Single__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged(XRTK.EventDatum.Input.InputEventData%7BSystem.Single%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L236">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L241">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged*"></a>
   <h4 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_System_Single__" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged(XRTK.EventDatum.Input.InputEventData{System.Single})">OnInputChanged(InputEventData&lt;Single&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Raised input event updates from the type of input specified in the interface handler implementation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -549,16 +555,20 @@
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_System_Single__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;Single&gt;)</a></div>
+  <h5 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_System_Single___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <a class="xref" href="XRTK.EventDatum.Input.InputEventData-1.html#XRTK_EventDatum_Input_InputEventData_1_InputData">InputData</a> is the current input data.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Quaternion__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged(XRTK.EventDatum.Input.InputEventData%7BUnityEngine.Quaternion%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L251">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L259">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged*"></a>
   <h4 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Quaternion__" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged(XRTK.EventDatum.Input.InputEventData{UnityEngine.Quaternion})">OnInputChanged(InputEventData&lt;Quaternion&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Raised input event updates from the type of input specified in the interface handler implementation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -583,16 +593,20 @@
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Quaternion__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;Quaternion&gt;)</a></div>
+  <h5 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Quaternion___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <a class="xref" href="XRTK.EventDatum.Input.InputEventData-1.html#XRTK_EventDatum_Input_InputEventData_1_InputData">InputData</a> is the current input data.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged(XRTK.EventDatum.Input.InputEventData%7BUnityEngine.Vector2%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L241">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L247">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged*"></a>
   <h4 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged(XRTK.EventDatum.Input.InputEventData{UnityEngine.Vector2})">OnInputChanged(InputEventData&lt;Vector2&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Raised input event updates from the type of input specified in the interface handler implementation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -617,16 +631,20 @@
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;Vector2&gt;)</a></div>
+  <h5 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <a class="xref" href="XRTK.EventDatum.Input.InputEventData-1.html#XRTK_EventDatum_Input_InputEventData_1_InputData">InputData</a> is the current input data.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector3__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged(XRTK.EventDatum.Input.InputEventData%7BUnityEngine.Vector3%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L246">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L253">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged*"></a>
   <h4 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector3__" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged(XRTK.EventDatum.Input.InputEventData{UnityEngine.Vector3})">OnInputChanged(InputEventData&lt;Vector3&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Raised input event updates from the type of input specified in the interface handler implementation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -651,16 +669,20 @@
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector3__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;Vector3&gt;)</a></div>
+  <h5 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector3___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <a class="xref" href="XRTK.EventDatum.Input.InputEventData-1.html#XRTK_EventDatum_Input_InputEventData_1_InputData">InputData</a> is the current input data.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_XRTK_Definitions_Utilities_MixedRealityPose__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged(XRTK.EventDatum.Input.InputEventData%7BXRTK.Definitions.Utilities.MixedRealityPose%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L256">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L265">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged*"></a>
   <h4 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_XRTK_Definitions_Utilities_MixedRealityPose__" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputChanged(XRTK.EventDatum.Input.InputEventData{XRTK.Definitions.Utilities.MixedRealityPose})">OnInputChanged(InputEventData&lt;MixedRealityPose&gt;)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Raised input event updates from the type of input specified in the interface handler implementation.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -685,16 +707,20 @@
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_XRTK_Definitions_Utilities_MixedRealityPose__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;MixedRealityPose&gt;)</a></div>
+  <h5 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_XRTK_Definitions_Utilities_MixedRealityPose___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <a class="xref" href="XRTK.EventDatum.Input.InputEventData-1.html#XRTK_EventDatum_Input_InputEventData_1_InputData">InputData</a> is the current input data.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputDown_XRTK_EventDatum_Input_InputEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputDown(XRTK.EventDatum.Input.InputEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L226">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L229">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputDown_" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputDown*"></a>
   <h4 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputDown_XRTK_EventDatum_Input_InputEventData_" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputDown(XRTK.EventDatum.Input.InputEventData)">OnInputDown(InputEventData)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Input Down updates from Interactions, Keys, or any other simple input.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -724,11 +750,12 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputUp_XRTK_EventDatum_Input_InputEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputUp(XRTK.EventDatum.Input.InputEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L231">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L235">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputUp_" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputUp*"></a>
   <h4 id="XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer_OnInputUp_XRTK_EventDatum_Input_InputEventData_" data-uid="XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer.OnInputUp(XRTK.EventDatum.Input.InputEventData)">OnInputUp(InputEventData)</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Input Up updates from Interactions, Keys, or any other simple input.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -755,10 +782,10 @@
   <div><a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputUp_XRTK_EventDatum_Input_InputEventData_">ControllerPoseSynchronizer.OnInputUp(InputEventData)</a></div>
   <h3 id="implements">Implements</h3>
   <div>
-      <a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerVisualizer.html">IMixedRealityControllerVisualizer</a>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityControllerVisualizer.html">IMixedRealityControllerVisualizer</a>
   </div>
   <div>
-      <a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourcePoseHandler.html">IMixedRealitySourcePoseHandler</a>
@@ -789,6 +816,9 @@
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
+  <div>
       <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_EnsureComponent__1_UnityEngine_Component_">ComponentExtensions.EnsureComponent&lt;T&gt;(Component)</a>
   </div>
   <div>
@@ -799,6 +829,12 @@
   </div>
   <div>
       <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_">UnityObjectExtensions.Destroy(Object, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_">UnityObjectExtensions.IsNull(Object)</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
@@ -814,12 +850,13 @@
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Controllers_WindowsMixedRealityControllerVisualizer.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Controllers.WindowsMixedRealityControllerVisualizer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L10" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Controllers/WindowsMixedRealityControllerVisualizer.cs/#L13" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

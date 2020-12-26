@@ -1,0 +1,2040 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class Controller
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class Controller
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Leap.Controller">
+  
+  
+  <h1 id="Leap_Controller" data-uid="Leap.Controller" class="text-break">Class Controller
+  </h1>
+  <div class="markdown level0 summary"><p>The Controller class is your main interface to the Leap Motion Controller.</p>
+<p>Create an instance of this Controller class to access frames of tracking
+data and configuration information.Frame data can be polled at any time
+using the Controller.Frame() function.Call frame() or frame(0) to get the
+most recent frame.Set the history parameter to a positive integer to access
+previous frames.A controller stores up to 60 frames in its frame history.</p>
+<p>Polling is an appropriate strategy for applications which already have an
+intrinsic update loop, such as a game. You can also subscribe to the FrameReady
+event to get tracking frames through an event delegate.</p>
+<p>If the current thread implements a SynchronizationContext that contains a message
+loop, events are posted to that threads message loop. Otherwise, events are called
+on an independent thread and applications must perform any needed synchronization
+or marshalling of data between threads. Note that Unity3D does not create an
+appropriate SynchronizationContext object. Typically, event handlers cannot access
+any Unity objects.</p>
+<p>@since 1.0</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><span class="xref">Controller</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="Leap.IController.html">IController</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gethashcode#System_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Leap.html">Leap</a></h6>
+  <h6><strong>Assembly</strong>: LeapMotion.LeapCSharp.dll</h6>
+  <h5 id="Leap_Controller_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class Controller : IController, IDisposable</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller__ctor.md&amp;value=---%0Auid%3A%20Leap.Controller.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L364">View Source</a>
+  </span>
+  <a id="Leap_Controller__ctor_" data-uid="Leap.Controller.#ctor*"></a>
+  <h4 id="Leap_Controller__ctor" data-uid="Leap.Controller.#ctor">Controller()</h4>
+  <div class="markdown level1 summary"><p>Constructs a Controller object.</p>
+<p>The default constructor uses a connection key of 0.</p>
+<p>@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Controller()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller__ctor_System_Int32_.md&amp;value=---%0Auid%3A%20Leap.Controller.%23ctor(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L378">View Source</a>
+  </span>
+  <a id="Leap_Controller__ctor_" data-uid="Leap.Controller.#ctor*"></a>
+  <h4 id="Leap_Controller__ctor_System_Int32_" data-uid="Leap.Controller.#ctor(System.Int32)">Controller(Int32)</h4>
+  <div class="markdown level1 summary"><p>Constructs a Controller object using the specified connection key.</p>
+<p>All controller instances using the same key will use the same connection
+to the service. In general, an application should not use more than one connection
+for all its controllers. Each connection keeps its own cache of frames and images.</p>
+<p>@param connectionKey An identifier specifying the connection to use. If a
+connection with the specified key already exists, that connection is used.
+Otherwise, a new connection is created.
+@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Controller(int connectionKey)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">connectionKey</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_Config.md&amp;value=---%0Auid%3A%20Leap.Controller.Config%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L624">View Source</a>
+  </span>
+  <a id="Leap_Controller_Config_" data-uid="Leap.Controller.Config*"></a>
+  <h4 id="Leap_Controller_Config" data-uid="Leap.Controller.Config">Config</h4>
+  <div class="markdown level1 summary"><p>Returns a Config object, which you can use to query the Leap Motion system for
+configuration information.</p>
+<p>@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Config Config { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Config.html">Config</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_Devices.md&amp;value=---%0Auid%3A%20Leap.Controller.Devices%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L644">View Source</a>
+  </span>
+  <a id="Leap_Controller_Devices_" data-uid="Leap.Controller.Devices*"></a>
+  <h4 id="Leap_Controller_Devices" data-uid="Leap.Controller.Devices">Devices</h4>
+  <div class="markdown level1 summary"><p>The list of currently attached and recognized Leap Motion controller devices.</p>
+<p>The Device objects in the list describe information such as the range and
+tracking volume.</p>
+<p>Currently, the Leap Motion Controller only allows a single active device at a time,
+however there may be multiple devices physically attached and listed here.  Any active
+device(s) are guaranteed to be listed first, however order is not determined beyond that.</p>
+<p>@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public DeviceList Devices { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.DeviceList.html">DeviceList</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_EventContext.md&amp;value=---%0Auid%3A%20Leap.Controller.EventContext%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L51">View Source</a>
+  </span>
+  <a id="Leap_Controller_EventContext_" data-uid="Leap.Controller.EventContext*"></a>
+  <h4 id="Leap_Controller_EventContext" data-uid="Leap.Controller.EventContext">EventContext</h4>
+  <div class="markdown level1 summary"><p>The SynchronizationContext used for dispatching events.</p>
+<p>By default the synchronization context of the thread creating the controller
+instance is used. You can change the context if desired.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public SynchronizationContext EventContext { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.synchronizationcontext">SynchronizationContext</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_IsConnected.md&amp;value=---%0Auid%3A%20Leap.Controller.IsConnected%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L612">View Source</a>
+  </span>
+  <a id="Leap_Controller_IsConnected_" data-uid="Leap.Controller.IsConnected*"></a>
+  <h4 id="Leap_Controller_IsConnected" data-uid="Leap.Controller.IsConnected">IsConnected</h4>
+  <div class="markdown level1 summary"><p>Reports whether this Controller is connected to the Leap Motion service and
+the Leap Motion hardware is plugged in.</p>
+<p>When you first create a Controller object, isConnected() returns false.
+After the controller finishes initializing and connects to the Leap Motion
+software and if the Leap Motion hardware is plugged in, isConnected() returns true.</p>
+<p>You can either handle the onConnect event using a Listener instance or
+poll the isConnected() function if you need to wait for your
+application to be connected to the Leap Motion software before performing some other
+operation.</p>
+<p>@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsConnected { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_IsServiceConnected.md&amp;value=---%0Auid%3A%20Leap.Controller.IsServiceConnected%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L418">View Source</a>
+  </span>
+  <a id="Leap_Controller_IsServiceConnected_" data-uid="Leap.Controller.IsServiceConnected*"></a>
+  <h4 id="Leap_Controller_IsServiceConnected" data-uid="Leap.Controller.IsServiceConnected">IsServiceConnected</h4>
+  <div class="markdown level1 summary"><p>Reports whether your application has a connection to the Leap Motion
+daemon/service. Can be true even if the Leap Motion hardware is not available.
+@since 1.2</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsServiceConnected { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_ClearPolicy_Leap_Controller_PolicyFlag_.md&amp;value=---%0Auid%3A%20Leap.Controller.ClearPolicy(Leap.Controller.PolicyFlag)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L450">View Source</a>
+  </span>
+  <a id="Leap_Controller_ClearPolicy_" data-uid="Leap.Controller.ClearPolicy*"></a>
+  <h4 id="Leap_Controller_ClearPolicy_Leap_Controller_PolicyFlag_" data-uid="Leap.Controller.ClearPolicy(Leap.Controller.PolicyFlag)">ClearPolicy(Controller.PolicyFlag)</h4>
+  <div class="markdown level1 summary"><p>Requests clearing a policy.</p>
+<p>Policy changes are completed asynchronously and, because they are subject
+to user approval or system compatibility checks, may not complete successfully. Call
+Controller.IsPolicySet() after a suitable interval to test whether
+the change was accepted.
+@since 2.1.6</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ClearPolicy(Controller.PolicyFlag policy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Controller.PolicyFlag.html">Controller.PolicyFlag</a></td>
+        <td><span class="parametername">policy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_Dispose.md&amp;value=---%0Auid%3A%20Leap.Controller.Dispose%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L343">View Source</a>
+  </span>
+  <a id="Leap_Controller_Dispose_" data-uid="Leap.Controller.Dispose*"></a>
+  <h4 id="Leap_Controller_Dispose" data-uid="Leap.Controller.Dispose">Dispose()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Dispose()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_Dispose_System_Boolean_.md&amp;value=---%0Auid%3A%20Leap.Controller.Dispose(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L349">View Source</a>
+  </span>
+  <a id="Leap_Controller_Dispose_" data-uid="Leap.Controller.Dispose*"></a>
+  <h4 id="Leap_Controller_Dispose_System_Boolean_" data-uid="Leap.Controller.Dispose(System.Boolean)">Dispose(Boolean)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void Dispose(bool disposing)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">disposing</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_FailedDevices.md&amp;value=---%0Auid%3A%20Leap.Controller.FailedDevices%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L658">View Source</a>
+  </span>
+  <a id="Leap_Controller_FailedDevices_" data-uid="Leap.Controller.FailedDevices*"></a>
+  <h4 id="Leap_Controller_FailedDevices" data-uid="Leap.Controller.FailedDevices">FailedDevices()</h4>
+  <div class="markdown level1 summary"><p>A list of any Leap Motion hardware devices that are physically connected to
+the client computer, but are not functioning correctly. The list contains
+FailedDevice objects containing the pnpID and the reason for failure. No
+other device information is available.</p>
+<p>@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FailedDeviceList FailedDevices()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.FailedDeviceList.html">FailedDeviceList</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_Frame_Leap_Frame_System_Int32_.md&amp;value=---%0Auid%3A%20Leap.Controller.Frame(Leap.Frame%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L501">View Source</a>
+  </span>
+  <a id="Leap_Controller_Frame_" data-uid="Leap.Controller.Frame*"></a>
+  <h4 id="Leap_Controller_Frame_Leap_Frame_System_Int32_" data-uid="Leap.Controller.Frame(Leap.Frame,System.Int32)">Frame(Frame, Int32)</h4>
+  <div class="markdown level1 summary"><p>Identical to Frame(history) but instead of constructing a new frame and returning
+it, the user provides a frame object to be filled with data instead.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Frame(Frame toFill, int history = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Frame.html">Frame</a></td>
+        <td><span class="parametername">toFill</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">history</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_Frame_System_Int32_.md&amp;value=---%0Auid%3A%20Leap.Controller.Frame(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L491">View Source</a>
+  </span>
+  <a id="Leap_Controller_Frame_" data-uid="Leap.Controller.Frame*"></a>
+  <h4 id="Leap_Controller_Frame_System_Int32_" data-uid="Leap.Controller.Frame(System.Int32)">Frame(Int32)</h4>
+  <div class="markdown level1 summary"><p>In most cases you should get Frame objects using the LeapProvider.CurrentFrame
+property. The data in Frame objects taken directly from a Leap.Controller instance
+is still in the Leap Motion frame of reference and will not match the hands
+displayed in a Unity scene.</p>
+<p>Returns a frame of tracking data from the Leap Motion software. Use the optional
+history parameter to specify which frame to retrieve. Call frame() or
+frame(0) to access the most recent frame; call frame(1) to access the
+previous frame, and so on. If you use a history value greater than the
+number of stored frames, then the controller returns an empty frame.</p>
+<p>@param history The age of the frame to return, counting backwards from
+the most recent frame (0) into the past and up to the maximum age (59).
+@returns The specified frame; or, if no history parameter is specified,
+the newest frame. If a frame is not available at the specified history
+position, an invalid Frame is returned.
+@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Frame Frame(int history = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">history</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Frame.html">Frame</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_FrameTimestamp_System_Int32_.md&amp;value=---%0Auid%3A%20Leap.Controller.FrameTimestamp(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L514">View Source</a>
+  </span>
+  <a id="Leap_Controller_FrameTimestamp_" data-uid="Leap.Controller.FrameTimestamp*"></a>
+  <h4 id="Leap_Controller_FrameTimestamp_System_Int32_" data-uid="Leap.Controller.FrameTimestamp(System.Int32)">FrameTimestamp(Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns the timestamp of a recent tracking frame.  Use the
+optional history parameter to specify how many frames in the past
+to retrieve the timestamp.  Leave the history parameter as
+it's default value to return the timestamp of the most recent
+tracked frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long FrameTimestamp(int history = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">history</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_GetInterpolatedFrame_Leap_Frame_System_Int64_.md&amp;value=---%0Auid%3A%20Leap.Controller.GetInterpolatedFrame(Leap.Frame%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L538">View Source</a>
+  </span>
+  <a id="Leap_Controller_GetInterpolatedFrame_" data-uid="Leap.Controller.GetInterpolatedFrame*"></a>
+  <h4 id="Leap_Controller_GetInterpolatedFrame_Leap_Frame_System_Int64_" data-uid="Leap.Controller.GetInterpolatedFrame(Leap.Frame,System.Int64)">GetInterpolatedFrame(Frame, Int64)</h4>
+  <div class="markdown level1 summary"><p>Fills the Frame with data taken at the specified time, interpolating the data between existing frames, if necessary.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetInterpolatedFrame(Frame toFill, long time)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Frame.html">Frame</a></td>
+        <td><span class="parametername">toFill</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td><span class="parametername">time</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_GetInterpolatedFrame_System_Int64_.md&amp;value=---%0Auid%3A%20Leap.Controller.GetInterpolatedFrame(System.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L531">View Source</a>
+  </span>
+  <a id="Leap_Controller_GetInterpolatedFrame_" data-uid="Leap.Controller.GetInterpolatedFrame*"></a>
+  <h4 id="Leap_Controller_GetInterpolatedFrame_System_Int64_" data-uid="Leap.Controller.GetInterpolatedFrame(System.Int64)">GetInterpolatedFrame(Int64)</h4>
+  <div class="markdown level1 summary"><p>Returns the Frame at the specified time, interpolating the data between existing frames, if necessary.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Frame GetInterpolatedFrame(long time)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td><span class="parametername">time</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Frame.html">Frame</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_GetInterpolatedFrameFromTime_Leap_Frame_System_Int64_System_Int64_.md&amp;value=---%0Auid%3A%20Leap.Controller.GetInterpolatedFrameFromTime(Leap.Frame%2CSystem.Int64%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L583">View Source</a>
+  </span>
+  <a id="Leap_Controller_GetInterpolatedFrameFromTime_" data-uid="Leap.Controller.GetInterpolatedFrameFromTime*"></a>
+  <h4 id="Leap_Controller_GetInterpolatedFrameFromTime_Leap_Frame_System_Int64_System_Int64_" data-uid="Leap.Controller.GetInterpolatedFrameFromTime(Leap.Frame,System.Int64,System.Int64)">GetInterpolatedFrameFromTime(Frame, Int64, Int64)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetInterpolatedFrameFromTime(Frame toFill, long time, long sourceTime)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Frame.html">Frame</a></td>
+        <td><span class="parametername">toFill</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td><span class="parametername">time</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td><span class="parametername">sourceTime</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_GetInterpolatedHeadPose_LeapInternal_LEAP_HEAD_POSE_EVENT__System_Int64_.md&amp;value=---%0Auid%3A%20Leap.Controller.GetInterpolatedHeadPose(LeapInternal.LEAP_HEAD_POSE_EVENT%40%2CSystem.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L549">View Source</a>
+  </span>
+  <a id="Leap_Controller_GetInterpolatedHeadPose_" data-uid="Leap.Controller.GetInterpolatedHeadPose*"></a>
+  <h4 id="Leap_Controller_GetInterpolatedHeadPose_LeapInternal_LEAP_HEAD_POSE_EVENT__System_Int64_" data-uid="Leap.Controller.GetInterpolatedHeadPose(LeapInternal.LEAP_HEAD_POSE_EVENT@,System.Int64)">GetInterpolatedHeadPose(ref LEAP_HEAD_POSE_EVENT, Int64)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetInterpolatedHeadPose(ref LEAP_HEAD_POSE_EVENT toFill, long time)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="LeapInternal.LEAP_HEAD_POSE_EVENT.html">LEAP_HEAD_POSE_EVENT</a></td>
+        <td><span class="parametername">toFill</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td><span class="parametername">time</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_GetInterpolatedHeadPose_System_Int64_.md&amp;value=---%0Auid%3A%20Leap.Controller.GetInterpolatedHeadPose(System.Int64)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L545">View Source</a>
+  </span>
+  <a id="Leap_Controller_GetInterpolatedHeadPose_" data-uid="Leap.Controller.GetInterpolatedHeadPose*"></a>
+  <h4 id="Leap_Controller_GetInterpolatedHeadPose_System_Int64_" data-uid="Leap.Controller.GetInterpolatedHeadPose(System.Int64)">GetInterpolatedHeadPose(Int64)</h4>
+  <div class="markdown level1 summary"><p>Returns the Head pose at the specified time, interpolating the data between existing frames, if necessary.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LEAP_HEAD_POSE_EVENT GetInterpolatedHeadPose(long time)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td><span class="parametername">time</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="LeapInternal.LEAP_HEAD_POSE_EVENT.html">LEAP_HEAD_POSE_EVENT</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_GetInterpolatedLeftRightTransform_System_Int64_System_Int64_System_Int32_System_Int32_Leap_LeapTransform__Leap_LeapTransform__.md&amp;value=---%0Auid%3A%20Leap.Controller.GetInterpolatedLeftRightTransform(System.Int64%2CSystem.Int64%2CSystem.Int32%2CSystem.Int32%2CLeap.LeapTransform%40%2CLeap.LeapTransform%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L574">View Source</a>
+  </span>
+  <a id="Leap_Controller_GetInterpolatedLeftRightTransform_" data-uid="Leap.Controller.GetInterpolatedLeftRightTransform*"></a>
+  <h4 id="Leap_Controller_GetInterpolatedLeftRightTransform_System_Int64_System_Int64_System_Int32_System_Int32_Leap_LeapTransform__Leap_LeapTransform__" data-uid="Leap.Controller.GetInterpolatedLeftRightTransform(System.Int64,System.Int64,System.Int32,System.Int32,Leap.LeapTransform@,Leap.LeapTransform@)">GetInterpolatedLeftRightTransform(Int64, Int64, Int32, Int32, out LeapTransform, out LeapTransform)</h4>
+  <div class="markdown level1 summary"><p>This is a special variant of GetInterpolatedFrameFromTime, for use with special
+features that only require the position and orientation of the palm positions, and do
+not care about pose data or any other data.</p>
+<p>You must specify the id of the hand that you wish to get a transform for.  If you specify
+an id that is not present in the interpolated frame, the output transform will be the
+identity transform.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetInterpolatedLeftRightTransform(long time, long sourceTime, int leftId, int rightId, out LeapTransform leftTransform, out LeapTransform rightTransform)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td><span class="parametername">time</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td><span class="parametername">sourceTime</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">leftId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">rightId</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Leap.LeapTransform.html">LeapTransform</a></td>
+        <td><span class="parametername">leftTransform</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Leap.LeapTransform.html">LeapTransform</a></td>
+        <td><span class="parametername">rightTransform</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_GetPointMapping_Leap_PointMapping__.md&amp;value=---%0Auid%3A%20Leap.Controller.GetPointMapping(Leap.PointMapping%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L561">View Source</a>
+  </span>
+  <a id="Leap_Controller_GetPointMapping_" data-uid="Leap.Controller.GetPointMapping*"></a>
+  <h4 id="Leap_Controller_GetPointMapping_Leap_PointMapping__" data-uid="Leap.Controller.GetPointMapping(Leap.PointMapping@)">GetPointMapping(ref PointMapping)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void GetPointMapping(ref PointMapping pointMapping)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.PointMapping.html">PointMapping</a></td>
+        <td><span class="parametername">pointMapping</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_GetTransformedFrame_Leap_LeapTransform_System_Int32_.md&amp;value=---%0Auid%3A%20Leap.Controller.GetTransformedFrame(Leap.LeapTransform%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L524">View Source</a>
+  </span>
+  <a id="Leap_Controller_GetTransformedFrame_" data-uid="Leap.Controller.GetTransformedFrame*"></a>
+  <h4 id="Leap_Controller_GetTransformedFrame_Leap_LeapTransform_System_Int32_" data-uid="Leap.Controller.GetTransformedFrame(Leap.LeapTransform,System.Int32)">GetTransformedFrame(LeapTransform, Int32)</h4>
+  <div class="markdown level1 summary"><p>Returns the frame object with all hands transformed by the specified
+transform matrix.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Frame GetTransformedFrame(LeapTransform trs, int history = 0)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.LeapTransform.html">LeapTransform</a></td>
+        <td><span class="parametername">trs</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td><span class="parametername">history</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Frame.html">Frame</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_IsPolicySet_Leap_Controller_PolicyFlag_.md&amp;value=---%0Auid%3A%20Leap.Controller.IsPolicySet(Leap.Controller.PolicyFlag)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L468">View Source</a>
+  </span>
+  <a id="Leap_Controller_IsPolicySet_" data-uid="Leap.Controller.IsPolicySet*"></a>
+  <h4 id="Leap_Controller_IsPolicySet_Leap_Controller_PolicyFlag_" data-uid="Leap.Controller.IsPolicySet(Leap.Controller.PolicyFlag)">IsPolicySet(Controller.PolicyFlag)</h4>
+  <div class="markdown level1 summary"><p>Gets the active setting for a specific policy.</p>
+<p>Keep in mind that setting a policy flag is asynchronous, so changes are
+not effective immediately after calling setPolicyFlag(). In addition, a
+policy request can be declined by the user. You should always set the
+policy flags required by your application at startup and check that the
+policy change request was successful after an appropriate interval.</p>
+<p>If the controller object is not connected to the Leap Motion software, then the default
+state for the selected policy is returned.</p>
+<p>@since 2.1.6</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsPolicySet(Controller.PolicyFlag policy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Controller.PolicyFlag.html">Controller.PolicyFlag</a></td>
+        <td><span class="parametername">policy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_Now.md&amp;value=---%0Auid%3A%20Leap.Controller.Now%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L593">View Source</a>
+  </span>
+  <a id="Leap_Controller_Now_" data-uid="Leap.Controller.Now*"></a>
+  <h4 id="Leap_Controller_Now" data-uid="Leap.Controller.Now">Now()</h4>
+  <div class="markdown level1 summary"><p>Returns a timestamp value as close as possible to the current time.
+Values are in microseconds, as with all the other timestamp values.</p>
+<p>@since 2.2.7</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public long Now()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int64">Int64</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_OnConnect_System_Object_Leap_ConnectionEventArgs_.md&amp;value=---%0Auid%3A%20Leap.Controller.OnConnect(System.Object%2CLeap.ConnectionEventArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L721">View Source</a>
+  </span>
+  <a id="Leap_Controller_OnConnect_" data-uid="Leap.Controller.OnConnect*"></a>
+  <h4 id="Leap_Controller_OnConnect_System_Object_Leap_ConnectionEventArgs_" data-uid="Leap.Controller.OnConnect(System.Object,Leap.ConnectionEventArgs)">OnConnect(Object, ConnectionEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnConnect(object sender, ConnectionEventArgs eventArgs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">sender</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Leap.ConnectionEventArgs.html">ConnectionEventArgs</a></td>
+        <td><span class="parametername">eventArgs</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_OnDisconnect_System_Object_Leap_ConnectionLostEventArgs_.md&amp;value=---%0Auid%3A%20Leap.Controller.OnDisconnect(System.Object%2CLeap.ConnectionLostEventArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L725">View Source</a>
+  </span>
+  <a id="Leap_Controller_OnDisconnect_" data-uid="Leap.Controller.OnDisconnect*"></a>
+  <h4 id="Leap_Controller_OnDisconnect_System_Object_Leap_ConnectionLostEventArgs_" data-uid="Leap.Controller.OnDisconnect(System.Object,Leap.ConnectionLostEventArgs)">OnDisconnect(Object, ConnectionLostEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnDisconnect(object sender, ConnectionLostEventArgs eventArgs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">sender</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Leap.ConnectionLostEventArgs.html">ConnectionLostEventArgs</a></td>
+        <td><span class="parametername">eventArgs</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_OnInit_System_Object_Leap_LeapEventArgs_.md&amp;value=---%0Auid%3A%20Leap.Controller.OnInit(System.Object%2CLeap.LeapEventArgs)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L717">View Source</a>
+  </span>
+  <a id="Leap_Controller_OnInit_" data-uid="Leap.Controller.OnInit*"></a>
+  <h4 id="Leap_Controller_OnInit_System_Object_Leap_LeapEventArgs_" data-uid="Leap.Controller.OnInit(System.Object,Leap.LeapEventArgs)">OnInit(Object, LeapEventArgs)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected virtual void OnInit(object sender, LeapEventArgs eventArgs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">sender</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Leap.LeapEventArgs.html">LeapEventArgs</a></td>
+        <td><span class="parametername">eventArgs</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_SetPolicy_Leap_Controller_PolicyFlag_.md&amp;value=---%0Auid%3A%20Leap.Controller.SetPolicy(Leap.Controller.PolicyFlag)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L437">View Source</a>
+  </span>
+  <a id="Leap_Controller_SetPolicy_" data-uid="Leap.Controller.SetPolicy*"></a>
+  <h4 id="Leap_Controller_SetPolicy_Leap_Controller_PolicyFlag_" data-uid="Leap.Controller.SetPolicy(Leap.Controller.PolicyFlag)">SetPolicy(Controller.PolicyFlag)</h4>
+  <div class="markdown level1 summary"><p>Requests setting a policy.</p>
+<p>A request to change a policy is subject to user approval and a policy
+can be changed by the user at any time (using the Leap Motion settings dialog).
+The desired policy flags must be set every time an application runs.</p>
+<p>Policy changes are completed asynchronously and, because they are subject
+to user approval or system compatibility checks, may not complete successfully. Call
+Controller.IsPolicySet() after a suitable interval to test whether
+the change was accepted.
+@since 2.1.6</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetPolicy(Controller.PolicyFlag policy)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Controller.PolicyFlag.html">Controller.PolicyFlag</a></td>
+        <td><span class="parametername">policy</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_StartConnection.md&amp;value=---%0Auid%3A%20Leap.Controller.StartConnection%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L397">View Source</a>
+  </span>
+  <a id="Leap_Controller_StartConnection_" data-uid="Leap.Controller.StartConnection*"></a>
+  <h4 id="Leap_Controller_StartConnection" data-uid="Leap.Controller.StartConnection">StartConnection()</h4>
+  <div class="markdown level1 summary"><p>Starts the connection.</p>
+<p>A connection starts automatically when created, but you can
+use this function to restart the connection after stopping it.</p>
+<p>@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StartConnection()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_StopConnection.md&amp;value=---%0Auid%3A%20Leap.Controller.StopConnection%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L409">View Source</a>
+  </span>
+  <a id="Leap_Controller_StopConnection_" data-uid="Leap.Controller.StopConnection*"></a>
+  <h4 id="Leap_Controller_StopConnection" data-uid="Leap.Controller.StopConnection">StopConnection()</h4>
+  <div class="markdown level1 summary"><p>Stops the connection.</p>
+<p>No more frames or other events are received from a stopped connection. You can
+restart with StartConnection().</p>
+<p>@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void StopConnection()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_TelemetryGetNow.md&amp;value=---%0Auid%3A%20Leap.Controller.TelemetryGetNow%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L557">View Source</a>
+  </span>
+  <a id="Leap_Controller_TelemetryGetNow_" data-uid="Leap.Controller.TelemetryGetNow*"></a>
+  <h4 id="Leap_Controller_TelemetryGetNow" data-uid="Leap.Controller.TelemetryGetNow">TelemetryGetNow()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ulong TelemetryGetNow()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.uint64">UInt64</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_TelemetryProfiling_LeapInternal_LEAP_TELEMETRY_DATA__.md&amp;value=---%0Auid%3A%20Leap.Controller.TelemetryProfiling(LeapInternal.LEAP_TELEMETRY_DATA%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L553">View Source</a>
+  </span>
+  <a id="Leap_Controller_TelemetryProfiling_" data-uid="Leap.Controller.TelemetryProfiling*"></a>
+  <h4 id="Leap_Controller_TelemetryProfiling_LeapInternal_LEAP_TELEMETRY_DATA__" data-uid="Leap.Controller.TelemetryProfiling(LeapInternal.LEAP_TELEMETRY_DATA@)">TelemetryProfiling(ref LEAP_TELEMETRY_DATA)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void TelemetryProfiling(ref LEAP_TELEMETRY_DATA telemetryData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="LeapInternal.LEAP_TELEMETRY_DATA.html">LEAP_TELEMETRY_DATA</a></td>
+        <td><span class="parametername">telemetryData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="events">Events
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_BeginProfilingBlock.md&amp;value=---%0Auid%3A%20Leap.Controller.BeginProfilingBlock%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L292">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_BeginProfilingBlock" data-uid="Leap.Controller.BeginProfilingBlock">BeginProfilingBlock</h4>
+  <div class="markdown level1 summary"><p>Dispatched whenever a thread enters a profiling block.  The event is always
+dispatched from the thread itself.</p>
+<p>The event data will contain the name of the profiling block.</p>
+<p>@since 4.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action&lt;BeginProfilingBlockArgs&gt; BeginProfilingBlock</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Leap.BeginProfilingBlockArgs.html">BeginProfilingBlockArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_BeginProfilingForThread.md&amp;value=---%0Auid%3A%20Leap.Controller.BeginProfilingForThread%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L260">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_BeginProfilingForThread" data-uid="Leap.Controller.BeginProfilingForThread">BeginProfilingForThread</h4>
+  <div class="markdown level1 summary"><p>Dispatched whenever a thread wants to start profiling for a custom thread.
+The event is always dispatched from the thread itself.</p>
+<p>The event data will contain the name of the thread, as well as an array of
+all possible profiling blocks that could be entered on that thread.</p>
+<p>@since 4.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action&lt;BeginProfilingForThreadArgs&gt; BeginProfilingForThread</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Leap.BeginProfilingForThreadArgs.html">BeginProfilingForThreadArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_ConfigChange.md&amp;value=---%0Auid%3A%20Leap.Controller.ConfigChange%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L202">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_ConfigChange" data-uid="Leap.Controller.ConfigChange">ConfigChange</h4>
+  <div class="markdown level1 summary"><p>Dispatched when a configuration setting changes.
+@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;ConfigChangeEventArgs&gt; ConfigChange</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.ConfigChangeEventArgs.html">ConfigChangeEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_Connect.md&amp;value=---%0Auid%3A%20Leap.Controller.Connect%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L82">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_Connect" data-uid="Leap.Controller.Connect">Connect</h4>
+  <div class="markdown level1 summary"><p>Dispatched when the connection to the service is established.
+@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;ConnectionEventArgs&gt; Connect</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.ConnectionEventArgs.html">ConnectionEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_Device.md&amp;value=---%0Auid%3A%20Leap.Controller.Device%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L137">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_Device" data-uid="Leap.Controller.Device">Device</h4>
+  <div class="markdown level1 summary"><p>Dispatched when a Leap Motion device is connected.
+@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;DeviceEventArgs&gt; Device</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.DeviceEventArgs.html">DeviceEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_DeviceFailure.md&amp;value=---%0Auid%3A%20Leap.Controller.DeviceFailure%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L163">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_DeviceFailure" data-uid="Leap.Controller.DeviceFailure">DeviceFailure</h4>
+  <div class="markdown level1 summary"><p>Dispatched when a Leap device fails to initialize.
+@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;DeviceFailureEventArgs&gt; DeviceFailure</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.DeviceFailureEventArgs.html">DeviceFailureEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_DeviceLost.md&amp;value=---%0Auid%3A%20Leap.Controller.DeviceLost%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L150">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_DeviceLost" data-uid="Leap.Controller.DeviceLost">DeviceLost</h4>
+  <div class="markdown level1 summary"><p>Dispatched when a Leap Motion device is disconnected.
+@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;DeviceEventArgs&gt; DeviceLost</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.DeviceEventArgs.html">DeviceEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_Disconnect.md&amp;value=---%0Auid%3A%20Leap.Controller.Disconnect%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L98">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_Disconnect" data-uid="Leap.Controller.Disconnect">Disconnect</h4>
+  <div class="markdown level1 summary"><p>Dispatched if the connection to the service is lost.
+@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;ConnectionLostEventArgs&gt; Disconnect</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.ConnectionLostEventArgs.html">ConnectionLostEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_DistortionChange.md&amp;value=---%0Auid%3A%20Leap.Controller.DistortionChange%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L217">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_DistortionChange" data-uid="Leap.Controller.DistortionChange">DistortionChange</h4>
+  <div class="markdown level1 summary"><p>Dispatched when the image distortion map changes.
+The distortion map can change when the Leap device switches orientation,
+or a new device becomes active.
+@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;DistortionEventArgs&gt; DistortionChange</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.DistortionEventArgs.html">DistortionEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_DroppedFrame.md&amp;value=---%0Auid%3A%20Leap.Controller.DroppedFrame%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L229">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_DroppedFrame" data-uid="Leap.Controller.DroppedFrame">DroppedFrame</h4>
+  <div class="markdown level1 summary"><p>Dispatched when the service drops a tracking frame.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;DroppedFrameEventArgs&gt; DroppedFrame</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.DroppedFrameEventArgs.html">DroppedFrameEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_EndProfilingBlock.md&amp;value=---%0Auid%3A%20Leap.Controller.EndProfilingBlock%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L309">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_EndProfilingBlock" data-uid="Leap.Controller.EndProfilingBlock">EndProfilingBlock</h4>
+  <div class="markdown level1 summary"><p>Dispatched whenever a thread ends a profiling block.  The event is always
+dispatched from the thread itself.</p>
+<p>The event data will contain the name of the profiling block.</p>
+<p>@since 4.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action&lt;EndProfilingBlockArgs&gt; EndProfilingBlock</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Leap.EndProfilingBlockArgs.html">EndProfilingBlockArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_EndProfilingForThread.md&amp;value=---%0Auid%3A%20Leap.Controller.EndProfilingForThread%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L275">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_EndProfilingForThread" data-uid="Leap.Controller.EndProfilingForThread">EndProfilingForThread</h4>
+  <div class="markdown level1 summary"><p>Dispatched whenever a thread is finished profiling.  The event is always
+dispatched from the thread itself.</p>
+<p>@since 4.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event Action&lt;EndProfilingForThreadArgs&gt; EndProfilingForThread</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.action-1">Action</a>&lt;<a class="xref" href="Leap.EndProfilingForThreadArgs.html">EndProfilingForThreadArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_FrameReady.md&amp;value=---%0Auid%3A%20Leap.Controller.FrameReady%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L111">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_FrameReady" data-uid="Leap.Controller.FrameReady">FrameReady</h4>
+  <div class="markdown level1 summary"><p>Dispatched when a tracking frame is ready.
+@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;FrameEventArgs&gt; FrameReady</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.FrameEventArgs.html">FrameEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_HeadPoseChange.md&amp;value=---%0Auid%3A%20Leap.Controller.HeadPoseChange%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L334">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_HeadPoseChange" data-uid="Leap.Controller.HeadPoseChange">HeadPoseChange</h4>
+  <div class="markdown level1 summary"><p>Dispatched when a new HeadPose is available.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;HeadPoseEventArgs&gt; HeadPoseChange</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.HeadPoseEventArgs.html">HeadPoseEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_ImageReady.md&amp;value=---%0Auid%3A%20Leap.Controller.ImageReady%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L242">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_ImageReady" data-uid="Leap.Controller.ImageReady">ImageReady</h4>
+  <div class="markdown level1 summary"><p>Dispatched when an unrequested image is ready.
+@since 4.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;ImageEventArgs&gt; ImageReady</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.ImageEventArgs.html">ImageEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_Init.md&amp;value=---%0Auid%3A%20Leap.Controller.Init%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L66">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_Init" data-uid="Leap.Controller.Init">Init</h4>
+  <div class="markdown level1 summary"><p>Dispatched when the connection is initialized (but not necessarily connected).</p>
+<p>Can be dispatched more than once, if connection is restarted.
+@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;LeapEventArgs&gt; Init</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.LeapEventArgs.html">LeapEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_InternalFrameReady.md&amp;value=---%0Auid%3A%20Leap.Controller.InternalFrameReady%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L124">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_InternalFrameReady" data-uid="Leap.Controller.InternalFrameReady">InternalFrameReady</h4>
+  <div class="markdown level1 summary"><p>Dispatched when an internal tracking frame is ready.
+@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;InternalFrameEventArgs&gt; InternalFrameReady</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.InternalFrameEventArgs.html">InternalFrameEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_LogMessage.md&amp;value=---%0Auid%3A%20Leap.Controller.LogMessage%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L176">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_LogMessage" data-uid="Leap.Controller.LogMessage">LogMessage</h4>
+  <div class="markdown level1 summary"><p>Dispatched when the system generates a loggable event.
+@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;LogEventArgs&gt; LogMessage</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.LogEventArgs.html">LogEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_PointMappingChange.md&amp;value=---%0Auid%3A%20Leap.Controller.PointMappingChange%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L322">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_PointMappingChange" data-uid="Leap.Controller.PointMappingChange">PointMappingChange</h4>
+  <div class="markdown level1 summary"><p>Dispatched when point mapping change events are generated by the service.
+@since 4.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;PointMappingChangeEventArgs&gt; PointMappingChange</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.PointMappingChangeEventArgs.html">PointMappingChangeEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller_PolicyChange.md&amp;value=---%0Auid%3A%20Leap.Controller.PolicyChange%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L189">View Source</a>
+  </span>
+  <h4 id="Leap_Controller_PolicyChange" data-uid="Leap.Controller.PolicyChange">PolicyChange</h4>
+  <div class="markdown level1 summary"><p>Dispatched when a policy changes.
+@since 3.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public event EventHandler&lt;PolicyEventArgs&gt; PolicyChange</code></pre>
+  </div>
+  <h5 class="eventType">Event Type</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.eventhandler-1">EventHandler</a>&lt;<a class="xref" href="Leap.PolicyEventArgs.html">PolicyEventArgs</a>&gt;</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="Leap.IController.html">IController</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Controller.md&amp;value=---%0Auid%3A%20Leap.Controller%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Controller.cs/#L39" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

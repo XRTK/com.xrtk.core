@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class TypeExtensions
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -118,7 +118,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_TypeExtensions_FindTopmostGenericTypeArguments_System_Type_System_Int32_.md&amp;value=---%0Auid%3A%20XRTK.Extensions.TypeExtensions.FindTopmostGenericTypeArguments(System.Type%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Extensions/TypeExtensions.cs/#L41">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Extensions/TypeExtensions.cs/#L120">View Source</a>
   </span>
   <a id="XRTK_Extensions_TypeExtensions_FindTopmostGenericTypeArguments_" data-uid="XRTK.Extensions.TypeExtensions.FindTopmostGenericTypeArguments*"></a>
   <h4 id="XRTK_Extensions_TypeExtensions_FindTopmostGenericTypeArguments_System_Type_System_Int32_" data-uid="XRTK.Extensions.TypeExtensions.FindTopmostGenericTypeArguments(System.Type,System.Int32)">FindTopmostGenericTypeArguments(Type, Int32)</h4>
@@ -173,19 +173,68 @@ type is checked.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_TypeExtensions_ResolveType_System_String_.md&amp;value=---%0Auid%3A%20XRTK.Extensions.TypeExtensions.ResolveType(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_TypeExtensions_HasValidImplementations__1.md&amp;value=---%0Auid%3A%20XRTK.Extensions.TypeExtensions.HasValidImplementations%60%601%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Extensions/TypeExtensions.cs/#L22">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Extensions/TypeExtensions.cs/#L143">View Source</a>
   </span>
-  <a id="XRTK_Extensions_TypeExtensions_ResolveType_" data-uid="XRTK.Extensions.TypeExtensions.ResolveType*"></a>
-  <h4 id="XRTK_Extensions_TypeExtensions_ResolveType_System_String_" data-uid="XRTK.Extensions.TypeExtensions.ResolveType(System.String)">ResolveType(String)</h4>
-  <div class="markdown level1 summary"><p>Attempts to resolve the class reference by the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type.assemblyqualifiedname#System_Type_AssemblyQualifiedName">AssemblyQualifiedName</a>.</p>
+  <a id="XRTK_Extensions_TypeExtensions_HasValidImplementations_" data-uid="XRTK.Extensions.TypeExtensions.HasValidImplementations*"></a>
+  <h4 id="XRTK_Extensions_TypeExtensions_HasValidImplementations__1" data-uid="XRTK.Extensions.TypeExtensions.HasValidImplementations``1">HasValidImplementations&lt;T&gt;()</h4>
+  <div class="markdown level1 summary"><p>Checks if the <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a> has any valid implementations.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Type ResolveType(string classRef)</code></pre>
+    <pre><code class="lang-csharp hljs">public static bool HasValidImplementations&lt;T&gt;()
+    where T : IMixedRealityService</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>True, if the project contains valid implementations of <see cref="!:T"></see>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="typeParameters">Type Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="parametername">T</span></td>
+        <td><p>The specific <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a> interface to check.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_TypeExtensions_TryResolveType_System_Guid_System_Type__.md&amp;value=---%0Auid%3A%20XRTK.Extensions.TypeExtensions.TryResolveType(System.Guid%2CSystem.Type%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Extensions/TypeExtensions.cs/#L53">View Source</a>
+  </span>
+  <a id="XRTK_Extensions_TypeExtensions_TryResolveType_" data-uid="XRTK.Extensions.TypeExtensions.TryResolveType*"></a>
+  <h4 id="XRTK_Extensions_TypeExtensions_TryResolveType_System_Guid_System_Type__" data-uid="XRTK.Extensions.TypeExtensions.TryResolveType(System.Guid,System.Type@)">TryResolveType(Guid, out Type)</h4>
+  <div class="markdown level1 summary"><p>Attempts to resolve the type using the class <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryResolveType(Guid guid, out Type resolvedType)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -198,9 +247,15 @@ type is checked.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
-        <td><span class="parametername">classRef</span></td>
-        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type.assemblyqualifiedname#System_Type_AssemblyQualifiedName">AssemblyQualifiedName</a> of the type to get.</p>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a></td>
+        <td><span class="parametername">guid</span></td>
+        <td><p>Class <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.guid">Guid</a> reference.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
+        <td><span class="parametername">resolvedType</span></td>
+        <td><p>The resolved <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a>.</p>
 </td>
       </tr>
     </tbody>
@@ -215,8 +270,64 @@ type is checked.</p>
     </thead>
     <tbody>
       <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>True if the <see cref="!:resolvedType"></see> was successfully obtained from or added to the <span class="xref">XRTK.Extensions.TypeExtensions.TypeCache</span>, otherwise false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_TypeExtensions_TryResolveType_System_String_System_Type__.md&amp;value=---%0Auid%3A%20XRTK.Extensions.TypeExtensions.TryResolveType(System.String%2CSystem.Type%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Extensions/TypeExtensions.cs/#L82">View Source</a>
+  </span>
+  <a id="XRTK_Extensions_TypeExtensions_TryResolveType_" data-uid="XRTK.Extensions.TypeExtensions.TryResolveType*"></a>
+  <h4 id="XRTK_Extensions_TypeExtensions_TryResolveType_System_String_System_Type__" data-uid="XRTK.Extensions.TypeExtensions.TryResolveType(System.String,System.Type@)">TryResolveType(String, out Type)</h4>
+  <div class="markdown level1 summary"><p>Attempts to resolve the type using a the <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type.assemblyqualifiedname#System_Type_AssemblyQualifiedName">AssemblyQualifiedName</a> or <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type.guid#System_Type_GUID">GUID</a> as <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool TryResolveType(string typeRef, out Type resolvedType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td><span class="parametername">typeRef</span></td>
+        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type.guid#System_Type_GUID">GUID</a> or <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type.assemblyqualifiedname#System_Type_AssemblyQualifiedName">AssemblyQualifiedName</a> as <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a>.</p>
+</td>
+      </tr>
+      <tr>
         <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
-        <td><p>The <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a> from <see cref="!:classRef"></see></p>
+        <td><span class="parametername">resolvedType</span></td>
+        <td><p>The resolved <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>True if the <see cref="!:resolvedType"></see> was successfully obtained from or added to the <span class="xref">XRTK.Extensions.TypeExtensions.TypeCache</span>, otherwise false.</p>
 </td>
       </tr>
     </tbody>
@@ -232,12 +343,13 @@ type is checked.</p>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_TypeExtensions.md&amp;value=---%0Auid%3A%20XRTK.Extensions.TypeExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Extensions/TypeExtensions.cs/#L13" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Extensions/TypeExtensions.cs/#L16" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

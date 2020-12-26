@@ -1,0 +1,154 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>The Additional Service Providers extension | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="The Additional Service Providers extension | XRTK-Core ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../../favicon.png">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="the-additional-service-providers-extension">The Additional Service Providers extension</h1>
+
+<p>With the built in services and systems the XRTK provides, it also provides the capability to implement custom services within its framework, this enables developers to take advantage of the performance improvements for operating runtime services or integrations from within the XRTK.</p>
+<p>For more information on creating services that can be hosted within the Mixed Reality Framework, check out this awesome article by Stephen Hodgson.</p>
+<p><a href="https://stephen-hodgson.medium.com/a-practical-deep-dive-into-the-mixed-reality-framework-a26401edb2aa"><img src="https://miro.medium.com/max/1250/1*ebPN0spgicLY4ODa6vB9pg.jpeg" alt="A Practical Deep Dive into the Mixed Reality Framework"></a></p>
+<blockquote>
+<p><a href="https://stephen-hodgson.medium.com/a-practical-deep-dive-into-the-mixed-reality-framework-a26401edb2aa">A Practical Deep Dive into the Mixed Reality Framework</a></p>
+</blockquote>
+<h2 id="mixed-reality-root-configuration-system">Mixed Reality Root configuration system</h2>
+<p>In the Root configuration, the Additional Service Providers profile provides an entry point to register any and all additional services with the Mixed Reality Toolkit.</p>
+<p><img src="../../images/Configuration/AdditionalServices/AdditionalServiceProvidersProfile.png" alt=""></p>
+<h2 id="additional-service-providers">Additional Service Providers</h2>
+<p>From the Additional Service Providers profile, you can register all the services you have created or obtained for use in the Mixed Reality Toolkit.  Once your service is available in your project, it will automatically be identified through its use of the <code>IMixedRealityExtensionService</code> interface and be available to add below.  To register a service in your project, simply add a new entry to the list and configure the following:</p>
+<ul>
+<li>Instanced Type - use the dropdown to select your service implementation, this will automatically pull the name from the service and display in the <code>Name</code> field.</li>
+<li>Profile - If your service requires a profile to configure, this will automatically display below the <code>Instanced Type</code> and allow you to provide or create a new profile for the service.  This is optional if your service does not require additional configuration.</li>
+<li>Runtime Platforms - Select which platforms your service should run on.</li>
+</ul>
+<p><img src="../../images/Configuration/AdditionalServices/AdditionalServiceProvidersList.png.png" alt=""></p>
+<blockquote>
+<p>Check out all the <a href="../platforms/platforms.html">Platforms that are available to configure</a>.</p>
+</blockquote>
+<h2 id="further-notes">Further notes</h2>
+<p>Services registered with the XRTK can be accessed like any other service through the MixedRealityToolkit.Instance using a similar call to the following:</p>
+<pre><code class="lang-csharp">    var MyService = MixedRealityToolkit.Instance.GetService&lt;MyService&gt;();
+</code></pre>
+<p>or</p>
+<pre><code class="lang-csharp">
+    MyService myServiceInstance = null
+    if(!MixedRealityToolkit.Instance.TryGetService&lt;MyService&gt;(out myServiceInstance))
+    {
+        //Do something because the service was not found
+    }
+</code></pre>
+<h2 id="this-is-available-anywhere-and-at-anytime-within-your-project-but-should-be-avoided-in-update-calls-better-to-get-a-reference-on-startup-and-store-that-reference">This is available anywhere and at anytime within your project, but should be avoided in Update calls, better to get a reference on startup and store that reference.</h2>
+<h3 id="related-articles">Related Articles</h3>
+<ul>
+<li><a href="../00-GettingStarted.html#getting-started-with-the-mixed-reality-toolkit">Getting Started</a></li>
+<li><a href="../02-Configuration.html#getting-started-with-the-mixed-reality-toolkit">Configuration</a></li>
+<li><a href="../platforms/platforms.html">XRTK Platforms</a></li>
+<li><a href="https://stephen-hodgson.medium.com/a-practical-deep-dive-into-the-mixed-reality-framework-a26401edb2aa">A Practical Deep Dive into the Mixed Reality Framework</a></li>
+</ul>
+<hr>
+<h3 id="raise-an-information-request"><a href="https://github.com/XRTK/XRTK-Core/issues/new?assignees=&amp;labels=question&amp;template=request_for_information.md&amp;title="><strong>Raise an Information Request</strong></a></h3>
+<p>If there is anything not mentioned in this document or you simply want to know more, raise an <a href="https://github.com/XRTK/XRTK-Core/issues/new?assignees=&amp;labels=question&amp;template=request_for_information.md&amp;title=">RFI (Request for Information) request here</a>.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/articles/systems/07-additional-serivce-providers.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MeshCursor
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -203,9 +203,6 @@
       <a class="xref" href="XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_Start">InputSystemGlobalListener.Start()</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_ValidateInputSystemAsync">InputSystemGlobalListener.ValidateInputSystemAsync()</a>
-    </div>
-    <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_IsInvoking">MonoBehaviour.IsInvoking()</a>
     </div>
     <div>
@@ -267,6 +264,12 @@
     </div>
     <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent__1">Component.GetComponent&lt;T&gt;()</a>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.TryGetComponent(System.Type, UnityEngine.Component)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.TryGetComponent&lt;T&gt;(T)</span>
     </div>
     <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent_System_String_">Component.GetComponent(String)</a>
@@ -498,7 +501,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Cursors_MeshCursor_CursorStateData.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Cursors.MeshCursor.CursorStateData%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Cursors/MeshCursor.cs/#L26">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Cursors/MeshCursor.cs/#L28">View Source</a>
   </span>
   <h4 id="XRTK_SDK_UX_Cursors_MeshCursor_CursorStateData" data-uid="XRTK.SDK.UX.Cursors.MeshCursor.CursorStateData">CursorStateData</h4>
   <div class="markdown level1 summary"></div>
@@ -523,36 +526,6 @@ public MeshCursor.MeshCursorDatum[] CursorStateData</code></pre>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Cursors_MeshCursor_TargetRenderer.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Cursors.MeshCursor.TargetRenderer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Cursors/MeshCursor.cs/#L31">View Source</a>
-  </span>
-  <h4 id="XRTK_SDK_UX_Cursors_MeshCursor_TargetRenderer" data-uid="XRTK.SDK.UX.Cursors.MeshCursor.TargetRenderer">TargetRenderer</h4>
-  <div class="markdown level1 summary"><p>Sprite renderer to change.  If null find one in children</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MeshRenderer TargetRenderer</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MeshRenderer.html">MeshRenderer</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
@@ -560,7 +533,7 @@ public MeshCursor.MeshCursorDatum[] CursorStateData</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Cursors_MeshCursor_OnCursorStateChange_XRTK_Definitions_InputSystem_CursorStateEnum_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Cursors.MeshCursor.OnCursorStateChange(XRTK.Definitions.InputSystem.CursorStateEnum)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Cursors/MeshCursor.cs/#L56">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Cursors/MeshCursor.cs/#L79">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Cursors_MeshCursor_OnCursorStateChange_" data-uid="XRTK.SDK.UX.Cursors.MeshCursor.OnCursorStateChange*"></a>
   <h4 id="XRTK_SDK_UX_Cursors_MeshCursor_OnCursorStateChange_XRTK_Definitions_InputSystem_CursorStateEnum_" data-uid="XRTK.SDK.UX.Cursors.MeshCursor.OnCursorStateChange(XRTK.Definitions.InputSystem.CursorStateEnum)">OnCursorStateChange(CursorStateEnum)</h4>
@@ -596,7 +569,7 @@ state for the cursor</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Cursors_MeshCursor_OnEnable.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Cursors.MeshCursor.OnEnable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Cursors/MeshCursor.cs/#L36">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Cursors/MeshCursor.cs/#L46">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Cursors_MeshCursor_OnEnable_" data-uid="XRTK.SDK.UX.Cursors.MeshCursor.OnEnable*"></a>
   <h4 id="XRTK_SDK_UX_Cursors_MeshCursor_OnEnable" data-uid="XRTK.SDK.UX.Cursors.MeshCursor.OnEnable">OnEnable()</h4>
@@ -627,6 +600,9 @@ state for the cursor</p>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
+  <div>
       <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_EnsureComponent__1_UnityEngine_Component_">ComponentExtensions.EnsureComponent&lt;T&gt;(Component)</a>
   </div>
   <div>
@@ -637,6 +613,12 @@ state for the cursor</p>
   </div>
   <div>
       <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_">UnityObjectExtensions.Destroy(Object, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_">UnityObjectExtensions.IsNull(Object)</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
@@ -652,12 +634,13 @@ state for the cursor</p>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Cursors_MeshCursor.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Cursors.MeshCursor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Cursors/MeshCursor.cs/#L13" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Cursors/MeshCursor.cs/#L15" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

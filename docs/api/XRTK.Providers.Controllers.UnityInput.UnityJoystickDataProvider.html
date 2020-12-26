@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class UnityJoystickDataProvider
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -84,11 +84,12 @@
     <div class="level3"><a class="xref" href="XRTK.Services.BaseDataProvider.html">BaseDataProvider</a></div>
     <div class="level4"><a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html">BaseControllerDataProvider</a></div>
     <div class="level5"><span class="xref">UnityJoystickDataProvider</span></div>
-      <div class="level6"><a class="xref" href="XRTK.Providers.Controllers.OpenVR.OpenVRDataProvider.html">OpenVRDataProvider</a></div>
+      <div class="level6"><a class="xref" href="XRTK.Providers.Controllers.OpenVR.OpenVRControllerDataProvider.html">OpenVRControllerDataProvider</a></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerDataProvider.html">IMixedRealityControllerDataProvider</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.Providers.IMixedRealityInputDataProvider.html">IMixedRealityInputDataProvider</a></div>
     <div><a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a></div>
     <div><a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
@@ -96,10 +97,10 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_RequestPointers_XRTK_Definitions_Utilities_SystemType_XRTK_Definitions_Utilities_Handedness_System_Boolean_">BaseControllerDataProvider.RequestPointers(SystemType, Handedness, Boolean)</a>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_ActiveControllers">BaseControllerDataProvider.ActiveControllers</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_ActiveControllers">BaseControllerDataProvider.ActiveControllers</a>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_GetControllerMappingProfile_System_Type_XRTK_Definitions_Utilities_Handedness_">BaseControllerDataProvider.GetControllerMappingProfile(Type, Handedness)</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_AddController_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_">BaseControllerDataProvider.AddController(IMixedRealityController)</a>
@@ -108,10 +109,13 @@
       <a class="xref" href="XRTK.Providers.Controllers.BaseControllerDataProvider.html#XRTK_Providers_Controllers_BaseControllerDataProvider_RemoveController_XRTK_Interfaces_Providers_Controllers_IMixedRealityController_">BaseControllerDataProvider.RemoveController(IMixedRealityController)</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
+      <a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_ParentService">BaseDataProvider.ParentService</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Priority">BaseServiceWithConstructor.Priority</a>
+      <a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_Priority">BaseDataProvider.Priority</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Initialize">BaseService.Initialize()</a>
@@ -169,25 +173,25 @@
   <h6><strong>Assembly</strong>: XRTK.dll</h6>
   <h5 id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class UnityJoystickDataProvider : BaseControllerDataProvider, IMixedRealityControllerDataProvider, IMixedRealityDataProvider, IMixedRealityService, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">[Guid(&quot;A4D8D13B-253C-469A-A3A2-ECFE16DD969F&quot;)]
+public class UnityJoystickDataProvider : BaseControllerDataProvider, IMixedRealityControllerDataProvider, IMixedRealityInputDataProvider, IMixedRealityDataProvider, IMixedRealityService, IDisposable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.%23ctor(System.String%2CSystem.UInt32%2CXRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_UnityInput_Profiles_UnityInputControllerDataProfile_XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.%23ctor(System.String%2CSystem.UInt32%2CXRTK.Definitions.Controllers.UnityInput.Profiles.UnityInputControllerDataProfile%2CXRTK.Interfaces.InputSystem.IMixedRealityInputSystem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L25">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L22">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider__ctor_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.#ctor*"></a>
-  <h4 id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_BaseMixedRealityControllerDataProviderProfile_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile)">UnityJoystickDataProvider(String, UInt32, BaseMixedRealityControllerDataProviderProfile)</h4>
-  <div class="markdown level1 summary"><p>Constructor.</p>
-</div>
+  <h4 id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_Controllers_UnityInput_Profiles_UnityInputControllerDataProfile_XRTK_Interfaces_InputSystem_IMixedRealityInputSystem_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.Controllers.UnityInput.Profiles.UnityInputControllerDataProfile,XRTK.Interfaces.InputSystem.IMixedRealityInputSystem)">UnityJoystickDataProvider(String, UInt32, UnityInputControllerDataProfile, IMixedRealityInputSystem)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public UnityJoystickDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile)</code></pre>
+    <pre><code class="lang-csharp hljs">public UnityJoystickDataProvider(string name, uint priority, UnityInputControllerDataProfile profile, IMixedRealityInputSystem parentService)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -210,8 +214,13 @@
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile.html">BaseMixedRealityControllerDataProviderProfile</a></td>
+        <td><a class="xref" href="XRTK.Definitions.Controllers.UnityInput.Profiles.UnityInputControllerDataProfile.html">UnityInputControllerDataProfile</a></td>
         <td><span class="parametername">profile</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityInputSystem.html">IMixedRealityInputSystem</a></td>
+        <td><span class="parametername">parentService</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -223,7 +232,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_ActiveGenericControllers.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.ActiveGenericControllers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L32">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L29">View Source</a>
   </span>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_ActiveGenericControllers" data-uid="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.ActiveGenericControllers">ActiveGenericControllers</h4>
   <div class="markdown level1 summary"></div>
@@ -254,7 +263,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_Disable.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.Disable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L57">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L54">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_Disable_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.Disable*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_Disable" data-uid="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.Disable">Disable()</h4>
@@ -272,7 +281,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_GetCurrentControllerType_System_String_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.GetCurrentControllerType(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L182">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L173">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_GetCurrentControllerType_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.GetCurrentControllerType*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_GetCurrentControllerType_System_String_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.GetCurrentControllerType(System.String)">GetCurrentControllerType(String)</h4>
@@ -281,7 +290,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected virtual SupportedControllerType GetCurrentControllerType(string joystickName)</code></pre>
+    <pre><code class="lang-csharp hljs">protected virtual Type GetCurrentControllerType(string joystickName)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -311,7 +320,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Definitions.Devices.SupportedControllerType.html">SupportedControllerType</a></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
         <td><p>The supported controller type</p>
 </td>
       </tr>
@@ -322,7 +331,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_GetOrAddController_System_String_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.GetOrAddController(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L116">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L113">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_GetOrAddController_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.GetOrAddController*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_GetOrAddController_System_String_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.GetOrAddController(System.String)">GetOrAddController(String)</h4>
@@ -372,7 +381,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_RemoveController_System_String_System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.RemoveController(System.String%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L161">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L152">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_RemoveController_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.RemoveController*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_RemoveController_System_String_System_Boolean_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.RemoveController(System.String,System.Boolean)">RemoveController(String, Boolean)</h4>
@@ -409,7 +418,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_Update.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L38">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L35">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_Update_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.Update*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider_Update" data-uid="XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider.Update">Update()</h4>
@@ -427,6 +436,9 @@
       <a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerDataProvider.html">IMixedRealityControllerDataProvider</a>
   </div>
   <div>
+      <a class="xref" href="XRTK.Interfaces.Providers.IMixedRealityInputDataProvider.html">IMixedRealityInputDataProvider</a>
+  </div>
+  <div>
       <a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a>
   </div>
   <div>
@@ -436,6 +448,9 @@
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
@@ -453,12 +468,13 @@
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityJoystickDataProvider.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityJoystickDataProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L17" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityJoystickDataProvider.cs/#L18" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

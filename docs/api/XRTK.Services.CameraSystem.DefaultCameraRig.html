@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class DefaultCameraRig
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -73,7 +73,7 @@
   
   <h1 id="XRTK_Services_CameraSystem_DefaultCameraRig" data-uid="XRTK.Services.CameraSystem.DefaultCameraRig" class="text-break">Class DefaultCameraRig
   </h1>
-  <div class="markdown level0 summary"><p>The default <a class="xref" href="XRTK.Interfaces.IMixedRealityCameraRig.html">IMixedRealityCameraRig</a> for the XRTK.</p>
+  <div class="markdown level0 summary"><p>The default <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraRig.html">IMixedRealityCameraRig</a> for the XRTK.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -87,7 +87,7 @@
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="XRTK.Interfaces.IMixedRealityCameraRig.html">IMixedRealityCameraRig</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraRig.html">IMixedRealityCameraRig</a></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -153,6 +153,12 @@
     </div>
     <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent__1">Component.GetComponent&lt;T&gt;()</a>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.TryGetComponent(System.Type, UnityEngine.Component)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.TryGetComponent&lt;T&gt;(T)</span>
     </div>
     <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent_System_String_">Component.GetComponent(String)</a>
@@ -376,6 +382,7 @@
   <h5 id="XRTK_Services_CameraSystem_DefaultCameraRig_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[ExecuteAlways]
+[Guid(&quot;8E0EE4FC-C8A5-4B10-9FCA-EE55B6D421FF&quot;)]
 public class DefaultCameraRig : MonoBehaviour, IMixedRealityCameraRig</code></pre>
   </div>
   <h3 id="properties">Properties
@@ -385,11 +392,11 @@ public class DefaultCameraRig : MonoBehaviour, IMixedRealityCameraRig</code></pr
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_CameraSystem_DefaultCameraRig_BodyTransform.md&amp;value=---%0Auid%3A%20XRTK.Services.CameraSystem.DefaultCameraRig.BodyTransform%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/CameraSystem/DefaultCameraRig.cs/#L153">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/CameraSystem/DefaultCameraRig.cs/#L170">View Source</a>
   </span>
   <a id="XRTK_Services_CameraSystem_DefaultCameraRig_BodyTransform_" data-uid="XRTK.Services.CameraSystem.DefaultCameraRig.BodyTransform*"></a>
   <h4 id="XRTK_Services_CameraSystem_DefaultCameraRig_BodyTransform" data-uid="XRTK.Services.CameraSystem.DefaultCameraRig.BodyTransform">BodyTransform</h4>
-  <div class="markdown level1 summary"><p>The player's body transform.</p>
+  <div class="markdown level1 summary"><p>The player's body transform, located at the player's feet.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -412,19 +419,19 @@ public class DefaultCameraRig : MonoBehaviour, IMixedRealityCameraRig</code></pr
     </tbody>
   </table>
   <h5 id="XRTK_Services_CameraSystem_DefaultCameraRig_BodyTransform_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Transform.html">Transform</a> is synced to the player's head camera X &amp; Z values
-and the <a class="xref" href="XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_Interfaces_IMixedRealityCameraRig_PlayspaceTransform">PlayspaceTransform</a>'s Y value.</p>
+  <div class="markdown level1 remarks"><p>This <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Transform.html">Transform</a> is synced to the player's head camera X &amp; Z values.
+Y value is set using current <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraDataProvider.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraDataProvider_HeadHeight">HeadHeight</a>.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_CameraSystem_DefaultCameraRig_CameraPoseDriver.md&amp;value=---%0Auid%3A%20XRTK.Services.CameraSystem.DefaultCameraRig.CameraPoseDriver%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/CameraSystem/DefaultCameraRig.cs/#L126">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/CameraSystem/DefaultCameraRig.cs/#L143">View Source</a>
   </span>
   <a id="XRTK_Services_CameraSystem_DefaultCameraRig_CameraPoseDriver_" data-uid="XRTK.Services.CameraSystem.DefaultCameraRig.CameraPoseDriver*"></a>
   <h4 id="XRTK_Services_CameraSystem_DefaultCameraRig_CameraPoseDriver" data-uid="XRTK.Services.CameraSystem.DefaultCameraRig.CameraPoseDriver">CameraPoseDriver</h4>
-  <div class="markdown level1 summary"><p>The <span class="xref">UnityEngine.SpatialTracking.TrackedPoseDriver</span> attached to the <a class="xref" href="XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_Interfaces_IMixedRealityCameraRig_CameraTransform">CameraTransform</a>.</p>
+  <div class="markdown level1 summary"><p>The <span class="xref">UnityEngine.SpatialTracking.TrackedPoseDriver</span> attached to the <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraRig.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraRig_CameraTransform">CameraTransform</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -451,7 +458,7 @@ and the <a class="xref" href="XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_I
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_CameraSystem_DefaultCameraRig_CameraTransform.md&amp;value=---%0Auid%3A%20XRTK.Services.CameraSystem.DefaultCameraRig.CameraTransform%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/CameraSystem/DefaultCameraRig.cs/#L68">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/CameraSystem/DefaultCameraRig.cs/#L85">View Source</a>
   </span>
   <a id="XRTK_Services_CameraSystem_DefaultCameraRig_CameraTransform_" data-uid="XRTK.Services.CameraSystem.DefaultCameraRig.CameraTransform*"></a>
   <h4 id="XRTK_Services_CameraSystem_DefaultCameraRig_CameraTransform" data-uid="XRTK.Services.CameraSystem.DefaultCameraRig.CameraTransform">CameraTransform</h4>
@@ -479,14 +486,45 @@ and the <a class="xref" href="XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_I
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_CameraSystem_DefaultCameraRig_GameObject.md&amp;value=---%0Auid%3A%20XRTK.Services.CameraSystem.DefaultCameraRig.GameObject%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/CameraSystem/DefaultCameraRig.cs/#L28">View Source</a>
+  </span>
+  <a id="XRTK_Services_CameraSystem_DefaultCameraRig_GameObject_" data-uid="XRTK.Services.CameraSystem.DefaultCameraRig.GameObject*"></a>
+  <h4 id="XRTK_Services_CameraSystem_DefaultCameraRig_GameObject" data-uid="XRTK.Services.CameraSystem.DefaultCameraRig.GameObject">GameObject</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraRig.html#XRTK_Interfaces_CameraSystem_IMixedRealityCameraRig_GameObject">GameObject</a> reference for this camera rig.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GameObject GameObject { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.GameObject.html">GameObject</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_CameraSystem_DefaultCameraRig_PlayerCamera.md&amp;value=---%0Auid%3A%20XRTK.Services.CameraSystem.DefaultCameraRig.PlayerCamera%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/CameraSystem/DefaultCameraRig.cs/#L74">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/CameraSystem/DefaultCameraRig.cs/#L91">View Source</a>
   </span>
   <a id="XRTK_Services_CameraSystem_DefaultCameraRig_PlayerCamera_" data-uid="XRTK.Services.CameraSystem.DefaultCameraRig.PlayerCamera*"></a>
   <h4 id="XRTK_Services_CameraSystem_DefaultCameraRig_PlayerCamera" data-uid="XRTK.Services.CameraSystem.DefaultCameraRig.PlayerCamera">PlayerCamera</h4>
-  <div class="markdown level1 summary"><p>The player's <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Camera.html">Camera</a> reference.</p>
+  <div class="markdown level1 summary"><p>The player's <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Camera.html">Camera</a> reference, located at their tracked head position.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -513,11 +551,13 @@ and the <a class="xref" href="XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_I
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_CameraSystem_DefaultCameraRig_PlayspaceTransform.md&amp;value=---%0Auid%3A%20XRTK.Services.CameraSystem.DefaultCameraRig.PlayspaceTransform%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/CameraSystem/DefaultCameraRig.cs/#L27">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/CameraSystem/DefaultCameraRig.cs/#L44">View Source</a>
   </span>
   <a id="XRTK_Services_CameraSystem_DefaultCameraRig_PlayspaceTransform_" data-uid="XRTK.Services.CameraSystem.DefaultCameraRig.PlayspaceTransform*"></a>
   <h4 id="XRTK_Services_CameraSystem_DefaultCameraRig_PlayspaceTransform" data-uid="XRTK.Services.CameraSystem.DefaultCameraRig.PlayspaceTransform">PlayspaceTransform</h4>
-  <div class="markdown level1 summary"><p>The root playspace transform that serves as the root of the camera rig.</p>
+  <div class="markdown level1 summary"><p>The root playspace transform that serves as the root of the camera rig.<p>
+This transform serves as a virtual representation of the physical space.<p>
+All physical objects that have digital twins will use this frame of reference to synchronize their transform data.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -539,15 +579,14 @@ and the <a class="xref" href="XRTK.Interfaces.IMixedRealityCameraRig.html#XRTK_I
       </tr>
     </tbody>
   </table>
-  <h5 id="XRTK_Services_CameraSystem_DefaultCameraRig_PlayspaceTransform_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This transform serves as a virtual representation of the physical space.
-All physical objects that have digital twins will use this frame of reference to synchronize their transform data.</p>
-</div>
   <h3 id="implements">Implements</h3>
   <div>
-      <a class="xref" href="XRTK.Interfaces.IMixedRealityCameraRig.html">IMixedRealityCameraRig</a>
+      <a class="xref" href="XRTK.Interfaces.CameraSystem.IMixedRealityCameraRig.html">IMixedRealityCameraRig</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_EnsureComponent__1_UnityEngine_Component_">ComponentExtensions.EnsureComponent&lt;T&gt;(Component)</a>
   </div>
@@ -559,6 +598,12 @@ All physical objects that have digital twins will use this frame of reference to
   </div>
   <div>
       <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_">UnityObjectExtensions.Destroy(Object, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_">UnityObjectExtensions.IsNull(Object)</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
@@ -574,12 +619,13 @@ All physical objects that have digital twins will use this frame of reference to
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_CameraSystem_DefaultCameraRig.md&amp;value=---%0Auid%3A%20XRTK.Services.CameraSystem.DefaultCameraRig%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/CameraSystem/DefaultCameraRig.cs/#L15" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/CameraSystem/DefaultCameraRig.cs/#L15" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

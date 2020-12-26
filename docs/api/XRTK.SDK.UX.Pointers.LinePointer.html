@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class LinePointer
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -87,11 +87,12 @@
     <div class="level6"><a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html">ControllerPoseSynchronizer</a></div>
     <div class="level7"><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html">BaseControllerPointer</a></div>
     <div class="level8"><span class="xref">LinePointer</span></div>
+      <div class="level9"><a class="xref" href="XRTK.SDK.UX.Pointers.HandSpatialPointer.html">HandSpatialPointer</a></div>
       <div class="level9"><a class="xref" href="XRTK.SDK.UX.Pointers.TeleportPointer.html">TeleportPointer</a></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourcePoseHandler.html">IMixedRealitySourcePoseHandler</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourceStateHandler.html">IMixedRealitySourceStateHandler</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler.html">IMixedRealityInputHandler</a></div>
@@ -102,13 +103,16 @@
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler</a>&lt;<a class="xref" href="XRTK.Definitions.Utilities.MixedRealityPose.html">MixedRealityPose</a>&gt;</div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityPointer.html">IMixedRealityPointer</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.iequalitycomparer">IEqualityComparer</a></div>
-    <div><a class="xref" href="XRTK.Interfaces.TeleportSystem.IMixedRealityTeleportHandler.html">IMixedRealityTeleportHandler</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.TeleportSystem.Handlers.IMixedRealityTeleportHandler.html">IMixedRealityTeleportHandler</a></div>
     <div><span class="xref">UnityEngine.EventSystems.IEventSystemHandler</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_DisableCursorOnStart">BaseControllerPointer.DisableCursorOnStart</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_RaycastOrigin">BaseControllerPointer.RaycastOrigin</a>
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsSelectPressed">BaseControllerPointer.IsSelectPressed</a>
@@ -123,6 +127,9 @@
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsTeleportRequestActive">BaseControllerPointer.IsTeleportRequestActive</a>
     </div>
     <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_CapturedNearInteractionObject">BaseControllerPointer.CapturedNearInteractionObject</a>
+    </div>
+    <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerDirection">BaseControllerPointer.PointerDirection</a>
     </div>
     <div>
@@ -130,6 +137,15 @@
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_Start">BaseControllerPointer.Start()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTriggerEnter_UnityEngine_Collider_">BaseControllerPointer.OnTriggerEnter(Collider)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTriggerStay_UnityEngine_Collider_">BaseControllerPointer.OnTriggerStay(Collider)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTriggerExit_UnityEngine_Collider_">BaseControllerPointer.OnTriggerExit(Collider)</a>
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnDisable">BaseControllerPointer.OnDisable()</a>
@@ -156,6 +172,12 @@
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_TeleportHotSpot">BaseControllerPointer.TeleportHotSpot</a>
     </div>
     <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_InteractionMode">BaseControllerPointer.InteractionMode</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_NearInteractionCollider">BaseControllerPointer.NearInteractionCollider</a>
+    </div>
+    <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsInteractionEnabled">BaseControllerPointer.IsInteractionEnabled</a>
     </div>
     <div>
@@ -177,7 +199,7 @@
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_Rays">BaseControllerPointer.Rays</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PrioritizedLayerMasksOverride">BaseControllerPointer.PrioritizedLayerMasksOverride</a>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerRaycastLayerMasksOverride">BaseControllerPointer.PointerRaycastLayerMasksOverride</a>
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_FocusHandler">BaseControllerPointer.FocusHandler</a>
@@ -300,9 +322,6 @@
       <a class="xref" href="XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_OnDestroy">InputSystemGlobalListener.OnDestroy()</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_ValidateInputSystemAsync">InputSystemGlobalListener.ValidateInputSystemAsync()</a>
-    </div>
-    <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_IsInvoking">MonoBehaviour.IsInvoking()</a>
     </div>
     <div>
@@ -364,6 +383,12 @@
     </div>
     <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent__1">Component.GetComponent&lt;T&gt;()</a>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.TryGetComponent(System.Type, UnityEngine.Component)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.TryGetComponent&lt;T&gt;(T)</span>
     </div>
     <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent_System_String_">Component.GetComponent(String)</a>
@@ -582,190 +607,6 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class LinePointer : BaseControllerPointer, IMixedRealityControllerPoseSynchronizer, IMixedRealitySourcePoseHandler, IMixedRealitySourceStateHandler, IMixedRealityInputHandler, IMixedRealityInputHandler&lt;float&gt;, IMixedRealityInputHandler&lt;Vector2&gt;, IMixedRealityInputHandler&lt;Vector3&gt;, IMixedRealityInputHandler&lt;Quaternion&gt;, IMixedRealityInputHandler&lt;MixedRealityPose&gt;, IMixedRealityPointer, IEqualityComparer, IMixedRealityTeleportHandler, IEventSystemHandler</code></pre>
   </div>
-  <h3 id="fields">Fields
-  </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_LineCastResolution.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.LineCastResolution%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/LinePointer.cs/#L34">View Source</a>
-  </span>
-  <h4 id="XRTK_SDK_UX_Pointers_LinePointer_LineCastResolution" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineCastResolution">LineCastResolution</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[Range(2F, 50F)]
-[SerializeField]
-[Tooltip(&quot;This setting has a high performance cost. Values above 20 are not recommended.&quot;)]
-protected int LineCastResolution</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_LineColorInvalid.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.LineColorInvalid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/LinePointer.cs/#L23">View Source</a>
-  </span>
-  <h4 id="XRTK_SDK_UX_Pointers_LinePointer_LineColorInvalid" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorInvalid">LineColorInvalid</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[SerializeField]
-protected Gradient LineColorInvalid</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Gradient.html">Gradient</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_LineColorLockFocus.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.LineColorLockFocus%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/LinePointer.cs/#L29">View Source</a>
-  </span>
-  <h4 id="XRTK_SDK_UX_Pointers_LinePointer_LineColorLockFocus" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorLockFocus">LineColorLockFocus</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[SerializeField]
-protected Gradient LineColorLockFocus</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Gradient.html">Gradient</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_LineColorNoTarget.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.LineColorNoTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/LinePointer.cs/#L26">View Source</a>
-  </span>
-  <h4 id="XRTK_SDK_UX_Pointers_LinePointer_LineColorNoTarget" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorNoTarget">LineColorNoTarget</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[SerializeField]
-protected Gradient LineColorNoTarget</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Gradient.html">Gradient</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_LineColorSelected.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.LineColorSelected%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/LinePointer.cs/#L17">View Source</a>
-  </span>
-  <h4 id="XRTK_SDK_UX_Pointers_LinePointer_LineColorSelected" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorSelected">LineColorSelected</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[SerializeField]
-protected Gradient LineColorSelected</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Gradient.html">Gradient</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_LineColorValid.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.LineColorValid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/LinePointer.cs/#L20">View Source</a>
-  </span>
-  <h4 id="XRTK_SDK_UX_Pointers_LinePointer_LineColorValid" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorValid">LineColorValid</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[SerializeField]
-protected Gradient LineColorValid</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Gradient.html">Gradient</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
@@ -773,7 +614,7 @@ protected Gradient LineColorValid</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_LineBase.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.LineBase%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/LinePointer.cs/#L42">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/LinePointer.cs/#L85">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_LinePointer_LineBase_" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineBase*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_LinePointer_LineBase" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineBase">LineBase</h4>
@@ -801,10 +642,190 @@ protected Gradient LineColorValid</code></pre>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_LineCastResolution.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.LineCastResolution%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/LinePointer.cs/#L73">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_LinePointer_LineCastResolution_" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineCastResolution*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_LinePointer_LineCastResolution" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineCastResolution">LineCastResolution</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected int LineCastResolution { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_LineColorInvalid.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.LineColorInvalid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/LinePointer.cs/#L41">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_LinePointer_LineColorInvalid_" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorInvalid*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_LinePointer_LineColorInvalid" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorInvalid">LineColorInvalid</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Gradient LineColorInvalid { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Gradient.html">Gradient</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_LineColorLockFocus.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.LineColorLockFocus%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/LinePointer.cs/#L61">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_LinePointer_LineColorLockFocus_" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorLockFocus*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_LinePointer_LineColorLockFocus" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorLockFocus">LineColorLockFocus</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Gradient LineColorLockFocus { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Gradient.html">Gradient</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_LineColorNoTarget.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.LineColorNoTarget%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/LinePointer.cs/#L51">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_LinePointer_LineColorNoTarget_" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorNoTarget*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_LinePointer_LineColorNoTarget" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorNoTarget">LineColorNoTarget</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Gradient LineColorNoTarget { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Gradient.html">Gradient</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_LineColorSelected.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.LineColorSelected%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/LinePointer.cs/#L21">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_LinePointer_LineColorSelected_" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorSelected*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_LinePointer_LineColorSelected" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorSelected">LineColorSelected</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Gradient LineColorSelected { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Gradient.html">Gradient</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_LineColorValid.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.LineColorValid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/LinePointer.cs/#L31">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_LinePointer_LineColorValid_" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorValid*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_LinePointer_LineColorValid" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineColorValid">LineColorValid</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Gradient LineColorValid { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Gradient.html">Gradient</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_LineRenderers.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.LineRenderers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/LinePointer.cs/#L54">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/LinePointer.cs/#L97">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_LinePointer_LineRenderers_" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineRenderers*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_LinePointer_LineRenderers" data-uid="XRTK.SDK.UX.Pointers.LinePointer.LineRenderers">LineRenderers</h4>
@@ -840,7 +861,7 @@ protected Gradient LineColorValid</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_OnEnable.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.OnEnable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/LinePointer.cs/#L92">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/LinePointer.cs/#L133">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_LinePointer_OnEnable_" data-uid="XRTK.SDK.UX.Pointers.LinePointer.OnEnable*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_LinePointer_OnEnable" data-uid="XRTK.SDK.UX.Pointers.LinePointer.OnEnable">OnEnable()</h4>
@@ -857,7 +878,7 @@ protected Gradient LineColorValid</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_OnPostRaycast.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.OnPostRaycast%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/LinePointer.cs/#L157">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/LinePointer.cs/#L198">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_LinePointer_OnPostRaycast_" data-uid="XRTK.SDK.UX.Pointers.LinePointer.OnPostRaycast*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_LinePointer_OnPostRaycast" data-uid="XRTK.SDK.UX.Pointers.LinePointer.OnPostRaycast">OnPostRaycast()</h4>
@@ -875,7 +896,7 @@ protected Gradient LineColorValid</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_OnPreRaycast.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.OnPreRaycast%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/LinePointer.cs/#L103">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/LinePointer.cs/#L144">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_LinePointer_OnPreRaycast_" data-uid="XRTK.SDK.UX.Pointers.LinePointer.OnPreRaycast*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_LinePointer_OnPreRaycast" data-uid="XRTK.SDK.UX.Pointers.LinePointer.OnPreRaycast">OnPreRaycast()</h4>
@@ -893,7 +914,7 @@ protected Gradient LineColorValid</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer_OnValidate.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer.OnValidate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/LinePointer.cs/#L87">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/LinePointer.cs/#L128">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_LinePointer_OnValidate_" data-uid="XRTK.SDK.UX.Pointers.LinePointer.OnValidate*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_LinePointer_OnValidate" data-uid="XRTK.SDK.UX.Pointers.LinePointer.OnValidate">OnValidate()</h4>
@@ -905,7 +926,7 @@ protected Gradient LineColorValid</code></pre>
   </div>
   <h3 id="implements">Implements</h3>
   <div>
-      <a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourcePoseHandler.html">IMixedRealitySourcePoseHandler</a>
@@ -938,12 +959,15 @@ protected Gradient LineColorValid</code></pre>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.iequalitycomparer">System.Collections.IEqualityComparer</a>
   </div>
   <div>
-      <a class="xref" href="XRTK.Interfaces.TeleportSystem.IMixedRealityTeleportHandler.html">IMixedRealityTeleportHandler</a>
+      <a class="xref" href="XRTK.Interfaces.TeleportSystem.Handlers.IMixedRealityTeleportHandler.html">IMixedRealityTeleportHandler</a>
   </div>
   <div>
       <span class="xref">UnityEngine.EventSystems.IEventSystemHandler</span>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_EnsureComponent__1_UnityEngine_Component_">ComponentExtensions.EnsureComponent&lt;T&gt;(Component)</a>
   </div>
@@ -955,6 +979,12 @@ protected Gradient LineColorValid</code></pre>
   </div>
   <div>
       <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_">UnityObjectExtensions.Destroy(Object, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_">UnityObjectExtensions.IsNull(Object)</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
@@ -970,12 +1000,13 @@ protected Gradient LineColorValid</code></pre>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_LinePointer.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.LinePointer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/LinePointer.cs/#L14" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/LinePointer.cs/#L15" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Interface IMixedRealityController
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -73,7 +73,7 @@
   
   <h1 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController" class="text-break">Interface IMixedRealityController
   </h1>
-  <div class="markdown level0 summary"><p>Mixed Reality Toolkit controller definition, used to manage a specific controller type</p>
+  <div class="markdown level0 summary"><p>Mixed Reality Toolkit controller definition, used to manage a specific controller type.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.Interfaces.Providers.Controllers.html">XRTK.Interfaces.Providers.Controllers</a></h6>
@@ -86,10 +86,73 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_AngularVelocity.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.AngularVelocity%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L85">View Source</a>
+  </span>
+  <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_AngularVelocity_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.AngularVelocity*"></a>
+  <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_AngularVelocity" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.AngularVelocity">AngularVelocity</h4>
+  <div class="markdown level1 summary"><p>Gets how fast the controller rotates or revolves relative to its
+pivot point.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Vector3 AngularVelocity { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_ControllerDataProvider.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.ControllerDataProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L31">View Source</a>
+  </span>
+  <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_ControllerDataProvider_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.ControllerDataProvider*"></a>
+  <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_ControllerDataProvider" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.ControllerDataProvider">ControllerDataProvider</h4>
+  <div class="markdown level1 summary"><p>The data provider service this controller belongs to.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">IMixedRealityControllerDataProvider ControllerDataProvider { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerDataProvider.html">IMixedRealityControllerDataProvider</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_ControllerHandedness.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.ControllerHandedness%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L29">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L41">View Source</a>
   </span>
   <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_ControllerHandedness_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.ControllerHandedness*"></a>
   <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_ControllerHandedness" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.ControllerHandedness">ControllerHandedness</h4>
@@ -120,7 +183,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Enabled.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Enabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L19">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L26">View Source</a>
   </span>
   <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Enabled_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Enabled*"></a>
   <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Enabled" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Enabled">Enabled</h4>
@@ -151,7 +214,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_InputSource.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.InputSource%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L34">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L46">View Source</a>
   </span>
   <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_InputSource_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.InputSource*"></a>
   <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_InputSource" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.InputSource">InputSource</h4>
@@ -182,7 +245,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Interactions.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Interactions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L67">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L79">View Source</a>
   </span>
   <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Interactions_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Interactions*"></a>
   <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Interactions" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Interactions">Interactions</h4>
@@ -213,7 +276,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_IsPositionApproximate.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.IsPositionApproximate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L53">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L65">View Source</a>
   </span>
   <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_IsPositionApproximate_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.IsPositionApproximate*"></a>
   <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_IsPositionApproximate" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.IsPositionApproximate">IsPositionApproximate</h4>
@@ -244,7 +307,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_IsPositionAvailable.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.IsPositionAvailable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L48">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L60">View Source</a>
   </span>
   <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_IsPositionAvailable_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.IsPositionAvailable*"></a>
   <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_IsPositionAvailable" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.IsPositionAvailable">IsPositionAvailable</h4>
@@ -279,7 +342,7 @@ be sure to check this value before using position data.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_IsRotationAvailable.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.IsRotationAvailable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L62">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L74">View Source</a>
   </span>
   <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_IsRotationAvailable_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.IsRotationAvailable*"></a>
   <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_IsRotationAvailable" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.IsRotationAvailable">IsRotationAvailable</h4>
@@ -311,10 +374,41 @@ be sure to check this value before using rotation data.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Name.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Name%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L21">View Source</a>
+  </span>
+  <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Name_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Name*"></a>
+  <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Name" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Name">Name</h4>
+  <div class="markdown level1 summary"><p>The name of the controller.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">string Name { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TrackingState.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TrackingState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L24">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L36">View Source</a>
   </span>
   <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TrackingState_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TrackingState*"></a>
   <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TrackingState" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TrackingState">TrackingState</h4>
@@ -342,10 +436,41 @@ be sure to check this value before using rotation data.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Velocity.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Velocity%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L90">View Source</a>
+  </span>
+  <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Velocity_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Velocity*"></a>
+  <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Velocity" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Velocity">Velocity</h4>
+  <div class="markdown level1 summary"><p>Gets the controller's current movement speed.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Vector3 Velocity { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Visualizer.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Visualizer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L39">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L51">View Source</a>
   </span>
   <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Visualizer_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Visualizer*"></a>
   <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_Visualizer" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.Visualizer">Visualizer</h4>
@@ -366,7 +491,7 @@ be sure to check this value before using rotation data.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerVisualizer.html">IMixedRealityControllerVisualizer</a></td>
+        <td><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityControllerVisualizer.html">IMixedRealityControllerVisualizer</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -375,19 +500,20 @@ be sure to check this value before using rotation data.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_SetupConfiguration_System_Type_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.SetupConfiguration(System.Type)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TryRenderControllerModel_System_Byte___System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModel(System.Byte%5B%5D%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L73">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L99">View Source</a>
   </span>
-  <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_SetupConfiguration_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.SetupConfiguration*"></a>
-  <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_SetupConfiguration_System_Type_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.SetupConfiguration(System.Type)">SetupConfiguration(Type)</h4>
-  <div class="markdown level1 summary"><p>Setups up the configuration based on the Mixed Reality Controller Mapping Profile.</p>
+  <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TryRenderControllerModel_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModel*"></a>
+  <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TryRenderControllerModel_System_Byte___System_Boolean_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModel(System.Byte[],System.Boolean)">TryRenderControllerModel(Byte[], Boolean)</h4>
+  <div class="markdown level1 summary"><p>Attempts to load the controller model render settings from the <a class="xref" href="XRTK.Definitions.Controllers.MixedRealityControllerVisualizationProfile.html">MixedRealityControllerVisualizationProfile</a>
+to render the controllers in the scene.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool SetupConfiguration(Type controllerType)</code></pre>
+    <pre><code class="lang-csharp hljs">void TryRenderControllerModel(byte[] glbData = null, bool useAlternatePoseAction = false)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -400,9 +526,56 @@ be sure to check this value before using rotation data.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
-        <td><span class="parametername">controllerType</span></td>
-        <td><p>The type of the controller.</p>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">Byte</a>[]</td>
+        <td><span class="parametername">glbData</span></td>
+        <td><p>The raw binary glb data of the controller model, typically loaded from the driver.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">useAlternatePoseAction</span></td>
+        <td><p>Should the rendered controller use the alternate pose action?</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TryRenderControllerModelAsync_System_Byte___System_Boolean_.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModelAsync(System.Byte%5B%5D%2CSystem.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L108">View Source</a>
+  </span>
+  <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TryRenderControllerModelAsync_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModelAsync*"></a>
+  <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TryRenderControllerModelAsync_System_Byte___System_Boolean_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModelAsync(System.Byte[],System.Boolean)">TryRenderControllerModelAsync(Byte[], Boolean)</h4>
+  <div class="markdown level1 summary"><p>Attempts to load the controller model render settings from the <a class="xref" href="XRTK.Definitions.Controllers.MixedRealityControllerVisualizationProfile.html">MixedRealityControllerVisualizationProfile</a>
+to render the controllers in the scene.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">Task TryRenderControllerModelAsync(byte[] glbData = null, bool useAlternatePoseAction = false)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">Byte</a>[]</td>
+        <td><span class="parametername">glbData</span></td>
+        <td><p>The raw binary glb data of the controller model, typically loaded from the driver.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><span class="parametername">useAlternatePoseAction</span></td>
+        <td><p>Should the rendered controller use the alternate pose action?</p>
 </td>
       </tr>
     </tbody>
@@ -417,53 +590,32 @@ be sure to check this value before using rotation data.</p>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
-        <td></td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.threading.tasks.task">Task</a></td>
+        <td><p>True, if controller model is being properly rendered.</p>
+</td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TryRenderControllerModel_System_Type_System_Byte___.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModel(System.Type%2CSystem.Byte%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController_UpdateController.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController.UpdateController%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L82">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L113">View Source</a>
   </span>
-  <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TryRenderControllerModel_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModel*"></a>
-  <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_TryRenderControllerModel_System_Type_System_Byte___" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.TryRenderControllerModel(System.Type,System.Byte[])">TryRenderControllerModel(Type, Byte[])</h4>
-  <div class="markdown level1 summary"><p>Attempts to load the controller model render settings from the <a class="xref" href="XRTK.Definitions.Controllers.MixedRealityControllerVisualizationProfile.html">MixedRealityControllerVisualizationProfile</a>
-to render the controllers in the scene.</p>
+  <a id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_UpdateController_" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.UpdateController*"></a>
+  <h4 id="XRTK_Interfaces_Providers_Controllers_IMixedRealityController_UpdateController" data-uid="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.UpdateController">UpdateController()</h4>
+  <div class="markdown level1 summary"><p>Updates the controller's state.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">void TryRenderControllerModel(Type controllerType, byte[] glbData = null)</code></pre>
+    <pre><code class="lang-csharp hljs">void UpdateController()</code></pre>
   </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.type">Type</a></td>
-        <td><span class="parametername">controllerType</span></td>
-        <td><p>The controller type.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.byte">Byte</a>[]</td>
-        <td><span class="parametername">glbData</span></td>
-        <td><p>The raw binary glb data of the controller model, typically loaded from the driver.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
@@ -481,12 +633,13 @@ to render the controllers in the scene.</p>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Interfaces_Providers_Controllers_IMixedRealityController.md&amp;value=---%0Auid%3A%20XRTK.Interfaces.Providers.Controllers.IMixedRealityController%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L14" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Interfaces/Providers/Controllers/IMixedRealityController.cs/#L16" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

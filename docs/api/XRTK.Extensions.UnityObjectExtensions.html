@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class UnityObjectExtensions
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -115,19 +115,19 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_.md&amp;value=---%0Auid%3A%20XRTK.Extensions.UnityObjectExtensions.DontDestroyOnLoad(UnityEngine.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_.md&amp;value=---%0Auid%3A%20XRTK.Extensions.UnityObjectExtensions.Destroy(UnityEngine.Object%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Extensions/UnityObjectExtensions.cs/#L17">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Extensions/UnityObjectExtensions.cs/#L31">View Source</a>
   </span>
-  <a id="XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_" data-uid="XRTK.Extensions.UnityObjectExtensions.DontDestroyOnLoad*"></a>
-  <h4 id="XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_" data-uid="XRTK.Extensions.UnityObjectExtensions.DontDestroyOnLoad(UnityEngine.Object)">DontDestroyOnLoad(Object)</h4>
-  <div class="markdown level1 summary"><p>Enable Unity objects to skip <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DontDestroyOnLoad_UnityEngine_Object_">DontDestroyOnLoad(Object)</a> when editor isn't playing so test runner passes.</p>
+  <a id="XRTK_Extensions_UnityObjectExtensions_Destroy_" data-uid="XRTK.Extensions.UnityObjectExtensions.Destroy*"></a>
+  <h4 id="XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_" data-uid="XRTK.Extensions.UnityObjectExtensions.Destroy(UnityEngine.Object,System.Single)">Destroy(Object, Single)</h4>
+  <div class="markdown level1 summary"><p>Destroys a Unity  <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a> appropriately depending if running in in edit or play mode.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static void DontDestroyOnLoad(this Object target)</code></pre>
+    <pre><code class="lang-csharp hljs">public static void Destroy(this Object object, float t = 0F)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -141,11 +141,103 @@
     <tbody>
       <tr>
         <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a></td>
-        <td><span class="parametername">target</span></td>
+        <td><span class="parametername">object</span></td>
+        <td><p>Unity  <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a> to destroy</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">t</span></td>
+        <td><p>Time in seconds at which to destroy the object, if applicable.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_.md&amp;value=---%0Auid%3A%20XRTK.Extensions.UnityObjectExtensions.DontDestroyOnLoad(UnityEngine.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Extensions/UnityObjectExtensions.cs/#L18">View Source</a>
+  </span>
+  <a id="XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_" data-uid="XRTK.Extensions.UnityObjectExtensions.DontDestroyOnLoad*"></a>
+  <h4 id="XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_" data-uid="XRTK.Extensions.UnityObjectExtensions.DontDestroyOnLoad(UnityEngine.Object)">DontDestroyOnLoad(Object)</h4>
+  <div class="markdown level1 summary"><p>Enable Unity objects to skip <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DontDestroyOnLoad_UnityEngine_Object_">DontDestroyOnLoad(Object)</a> when editor isn't playing so test runner passes.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static void DontDestroyOnLoad(this Object object)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a></td>
+        <td><span class="parametername">object</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_.md&amp;value=---%0Auid%3A%20XRTK.Extensions.UnityObjectExtensions.IsNull(UnityEngine.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Extensions/UnityObjectExtensions.cs/#L58">View Source</a>
+  </span>
+  <a id="XRTK_Extensions_UnityObjectExtensions_IsNull_" data-uid="XRTK.Extensions.UnityObjectExtensions.IsNull*"></a>
+  <h4 id="XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_" data-uid="XRTK.Extensions.UnityObjectExtensions.IsNull(UnityEngine.Object)">IsNull(Object)</h4>
+  <div class="markdown level1 summary"><p>Checks if a Unity <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a> is null.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static bool IsNull(this Object object)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a></td>
+        <td><span class="parametername">object</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td><p>True if null, otherwise false.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Checks both the managed object and the underling Unity-managed native object.</p>
+</div>
 </article>
           </div>
           
@@ -157,12 +249,13 @@
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Extensions_UnityObjectExtensions.md&amp;value=---%0Auid%3A%20XRTK.Extensions.UnityObjectExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Extensions/UnityObjectExtensions.cs/#L11" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Extensions/UnityObjectExtensions.cs/#L12" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

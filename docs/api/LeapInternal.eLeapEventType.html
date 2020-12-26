@@ -1,0 +1,275 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Enum eLeapEventType
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Enum eLeapEventType
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="LeapInternal.eLeapEventType">
+  
+  
+  <h1 id="LeapInternal_eLeapEventType" data-uid="LeapInternal.eLeapEventType" class="text-break">Enum eLeapEventType
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="LeapInternal.html">LeapInternal</a></h6>
+  <h6><strong>Assembly</strong>: LeapMotion.LeapCSharp.dll</h6>
+  <h5 id="LeapInternal_eLeapEventType_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public enum eLeapEventType</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    <thead>
+    <tbody>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_ConfigChange">eLeapEventType_ConfigChange</td>
+        <td><p>The asynchronous response to a call to LeapSaveConfigValue().
+Reports whether the change succeeded or failed.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_ConfigResponse">eLeapEventType_ConfigResponse</td>
+        <td><p>The asynchronous response to a call to LeapRequestConfigValue().
+Contains the value of requested configuration item.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_Connection">eLeapEventType_Connection</td>
+        <td><p>A connection to the Leap Motion service has been established.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_ConnectionLost">eLeapEventType_ConnectionLost</td>
+        <td><p>The connection to the Leap Motion service has been lost.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_Device">eLeapEventType_Device</td>
+        <td><p>A device has been detected or plugged-in.
+A device event is dispatched after a connection is established for any
+devices already plugged in. (The system currently only supports one
+streaming device at a time.)</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_DeviceFailure">eLeapEventType_DeviceFailure</td>
+        <td><p>Note that unplugging a device generates an eLeapEventType_DeviceLost event
+message, not a failure message.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_DeviceLost">eLeapEventType_DeviceLost</td>
+        <td><p>The device connection has been lost.</p>
+<p>This event is generally asserted when the device has been detached from the system, when the
+connection to the service has been lost, or if the device is closed while streaming. Generally,
+any event where the system can conclude no further frames will be received will result in this
+message. The DeviceEvent field will be filled with the id of the formerly attached device.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_DeviceStatusChange">eLeapEventType_DeviceStatusChange</td>
+        <td><p>Notification that a status change has been detected on an attached device.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_DroppedFrame">eLeapEventType_DroppedFrame</td>
+        <td><p>A tracking frame has been dropped by the service.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_HeadPose">eLeapEventType_HeadPose</td>
+        <td><p>A new head pose is available.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_Image">eLeapEventType_Image</td>
+        <td><p>Notification that an unrequested stereo image pair is available.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_ImageComplete">eLeapEventType_ImageComplete</td>
+        <td><p>The request for an image is complete.
+The image data has been completely written to the application-provided
+buffer.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_ImageRequestError">eLeapEventType_ImageRequestError</td>
+        <td><p>The request for an image has failed.
+The message contains information about the failure. The client application
+will not receive the requested image set.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_LogEvent">eLeapEventType_LogEvent</td>
+        <td><p>A system message.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_LogEvents">eLeapEventType_LogEvents</td>
+        <td><p>An array of system messages.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_None">eLeapEventType_None</td>
+        <td><p>No event has occurred within the timeout period specified when calling LeapPollConnection().</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_PointMappingChange">eLeapEventType_PointMappingChange</td>
+        <td><p>Notification that point mapping has changed.</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_Policy">eLeapEventType_Policy</td>
+        <td><p>A policy change has occurred.
+This can be due to setting a policy with LeapSetPolicyFlags() or due to changing
+or policy-related config settings, including images_mode.
+(A user can also change these policies using the Leap Motion Control Panel.)</p>
+</td>
+      </tr>
+      <tr>
+        <td id="LeapInternal_eLeapEventType_eLeapEventType_Tracking">eLeapEventType_Tracking</td>
+        <td><p>A tracking frame. The message contains the tracking data for the frame.</p>
+</td>
+      </tr>
+    </tbody>
+  </thead></thead></table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(String)</a>
+  </div>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_indexOf_System_Enum_">CSharpExtensions.indexOf()</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;eLeapEventType&gt;()</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.EnumExtensions.html#XRTK_Extensions_EnumExtensions_HasFlags__1___0___0_">EnumExtensions.HasFlags&lt;eLeapEventType&gt;(eLeapEventType)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.EnumExtensions.html#XRTK_Extensions_EnumExtensions_SetFlags__1___0___0_">EnumExtensions.SetFlags&lt;eLeapEventType&gt;(eLeapEventType)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.EnumExtensions.html#XRTK_Extensions_EnumExtensions_UnsetFlags__1___0___0_">EnumExtensions.UnsetFlags&lt;eLeapEventType&gt;(eLeapEventType)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.EnumExtensions.html#XRTK_Extensions_EnumExtensions_ToggleFlags__1___0___0_">EnumExtensions.ToggleFlags&lt;eLeapEventType&gt;(eLeapEventType)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;eLeapEventType&gt;(Func&lt;eLeapEventType, Boolean&gt;, Int32)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=LeapInternal_eLeapEventType.md&amp;value=---%0Auid%3A%20LeapInternal.eLeapEventType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapC.cs/#L343" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

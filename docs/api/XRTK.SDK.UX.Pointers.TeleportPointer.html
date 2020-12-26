@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class TeleportPointer
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -91,7 +91,7 @@
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourcePoseHandler.html">IMixedRealitySourcePoseHandler</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourceStateHandler.html">IMixedRealitySourceStateHandler</a></div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler.html">IMixedRealityInputHandler</a></div>
@@ -102,7 +102,7 @@
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler</a>&lt;<a class="xref" href="XRTK.Definitions.Utilities.MixedRealityPose.html">MixedRealityPose</a>&gt;</div>
     <div><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityPointer.html">IMixedRealityPointer</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.iequalitycomparer">IEqualityComparer</a></div>
-    <div><a class="xref" href="XRTK.Interfaces.TeleportSystem.IMixedRealityTeleportHandler.html">IMixedRealityTeleportHandler</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.TeleportSystem.Handlers.IMixedRealityTeleportHandler.html">IMixedRealityTeleportHandler</a></div>
     <div><span class="xref">UnityEngine.EventSystems.IEventSystemHandler</span></div>
   </div>
   <div class="inheritedMembers">
@@ -141,6 +141,9 @@
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_DisableCursorOnStart">BaseControllerPointer.DisableCursorOnStart</a>
     </div>
     <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_RaycastOrigin">BaseControllerPointer.RaycastOrigin</a>
+    </div>
+    <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsSelectPressed">BaseControllerPointer.IsSelectPressed</a>
     </div>
     <div>
@@ -153,6 +156,9 @@
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsTeleportRequestActive">BaseControllerPointer.IsTeleportRequestActive</a>
     </div>
     <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_CapturedNearInteractionObject">BaseControllerPointer.CapturedNearInteractionObject</a>
+    </div>
+    <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerDirection">BaseControllerPointer.PointerDirection</a>
     </div>
     <div>
@@ -160,6 +166,15 @@
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_Start">BaseControllerPointer.Start()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTriggerEnter_UnityEngine_Collider_">BaseControllerPointer.OnTriggerEnter(Collider)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTriggerStay_UnityEngine_Collider_">BaseControllerPointer.OnTriggerStay(Collider)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTriggerExit_UnityEngine_Collider_">BaseControllerPointer.OnTriggerExit(Collider)</a>
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnDisable">BaseControllerPointer.OnDisable()</a>
@@ -186,6 +201,12 @@
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_TeleportHotSpot">BaseControllerPointer.TeleportHotSpot</a>
     </div>
     <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_InteractionMode">BaseControllerPointer.InteractionMode</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_NearInteractionCollider">BaseControllerPointer.NearInteractionCollider</a>
+    </div>
+    <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsFocusLocked">BaseControllerPointer.IsFocusLocked</a>
     </div>
     <div>
@@ -204,7 +225,7 @@
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_Rays">BaseControllerPointer.Rays</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PrioritizedLayerMasksOverride">BaseControllerPointer.PrioritizedLayerMasksOverride</a>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerRaycastLayerMasksOverride">BaseControllerPointer.PointerRaycastLayerMasksOverride</a>
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_FocusHandler">BaseControllerPointer.FocusHandler</a>
@@ -249,12 +270,6 @@
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnSourceLost_XRTK_EventDatum_Input_SourceStateEventData_">BaseControllerPointer.OnSourceLost(SourceStateEventData)</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnInputUp_XRTK_EventDatum_Input_InputEventData_">BaseControllerPointer.OnInputUp(InputEventData)</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnInputDown_XRTK_EventDatum_Input_InputEventData_">BaseControllerPointer.OnInputDown(InputEventData)</a>
-    </div>
-    <div>
       <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTeleportStarted_XRTK_EventDatum_Teleport_TeleportEventData_">BaseControllerPointer.OnTeleportStarted(TeleportEventData)</a>
     </div>
     <div>
@@ -297,9 +312,6 @@
       <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnSourcePoseChanged_XRTK_EventDatum_Input_SourcePoseEventData_XRTK_Definitions_Utilities_MixedRealityPose__">ControllerPoseSynchronizer.OnSourcePoseChanged(SourcePoseEventData&lt;MixedRealityPose&gt;)</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_System_Single__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;Single&gt;)</a>
-    </div>
-    <div>
       <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector3__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;Vector3&gt;)</a>
     </div>
     <div>
@@ -310,9 +322,6 @@
     </div>
     <div>
       <a class="xref" href="XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_OnDestroy">InputSystemGlobalListener.OnDestroy()</a>
-    </div>
-    <div>
-      <a class="xref" href="XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_ValidateInputSystemAsync">InputSystemGlobalListener.ValidateInputSystemAsync()</a>
     </div>
     <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_IsInvoking">MonoBehaviour.IsInvoking()</a>
@@ -376,6 +385,12 @@
     </div>
     <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent__1">Component.GetComponent&lt;T&gt;()</a>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.TryGetComponent(System.Type, UnityEngine.Component)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.TryGetComponent&lt;T&gt;(T)</span>
     </div>
     <div>
       <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent_System_String_">Component.GetComponent(String)</a>
@@ -594,100 +609,6 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public class TeleportPointer : LinePointer, IMixedRealityControllerPoseSynchronizer, IMixedRealitySourcePoseHandler, IMixedRealitySourceStateHandler, IMixedRealityInputHandler, IMixedRealityInputHandler&lt;float&gt;, IMixedRealityInputHandler&lt;Vector2&gt;, IMixedRealityInputHandler&lt;Vector3&gt;, IMixedRealityInputHandler&lt;Quaternion&gt;, IMixedRealityInputHandler&lt;MixedRealityPose&gt;, IMixedRealityPointer, IEqualityComparer, IMixedRealityTeleportHandler, IEventSystemHandler</code></pre>
   </div>
-  <h3 id="fields">Fields
-  </h3>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_InvalidLayers.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.InvalidLayers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L68">View Source</a>
-  </span>
-  <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_InvalidLayers" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.InvalidLayers">InvalidLayers</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[SerializeField]
-[Tooltip(&quot;Layers that are considered 'invalid' for navigation&quot;)]
-protected LayerMask InvalidLayers</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.LayerMask.html">LayerMask</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_LineColorHotSpot.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.LineColorHotSpot%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L60">View Source</a>
-  </span>
-  <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_LineColorHotSpot" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.LineColorHotSpot">LineColorHotSpot</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[SerializeField]
-protected Gradient LineColorHotSpot</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Gradient.html">Gradient</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_ValidLayers.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.ValidLayers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L64">View Source</a>
-  </span>
-  <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_ValidLayers" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.ValidLayers">ValidLayers</h4>
-  <div class="markdown level1 summary"></div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">[SerializeField]
-[Tooltip(&quot;Layers that are considered 'valid' for navigation&quot;)]
-protected LayerMask ValidLayers</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.LayerMask.html">LayerMask</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
@@ -695,11 +616,11 @@ protected LayerMask ValidLayers</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_IsInteractionEnabled.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.IsInteractionEnabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L107">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L103">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_TeleportPointer_IsInteractionEnabled_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.IsInteractionEnabled*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_IsInteractionEnabled" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.IsInteractionEnabled">IsInteractionEnabled</h4>
-  <div class="markdown level1 summary"><p>Has the conditions for the interaction been satisfied to enable the interaction?</p>
+  <div class="markdown level1 summary"><p>Has the conditions been satisfied to enable the interaction of this pointer?</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -725,10 +646,40 @@ protected LayerMask ValidLayers</code></pre>
   <div><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsInteractionEnabled">BaseControllerPointer.IsInteractionEnabled</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_LineColorHotSpot.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.LineColorHotSpot%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L57">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_TeleportPointer_LineColorHotSpot_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.LineColorHotSpot*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_LineColorHotSpot" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.LineColorHotSpot">LineColorHotSpot</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected Gradient LineColorHotSpot { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Gradient.html">Gradient</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_PointerOrientation.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.PointerOrientation%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L110">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L106">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_TeleportPointer_PointerOrientation_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.PointerOrientation*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_PointerOrientation" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.PointerOrientation">PointerOrientation</h4>
@@ -758,19 +709,19 @@ protected LayerMask ValidLayers</code></pre>
   <div><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerOrientation">BaseControllerPointer.PointerOrientation</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_TeleportSurfaceResult.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.TeleportSurfaceResult%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_TeleportValidationResult.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.TeleportValidationResult%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L85">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L81">View Source</a>
   </span>
-  <a id="XRTK_SDK_UX_Pointers_TeleportPointer_TeleportSurfaceResult_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.TeleportSurfaceResult*"></a>
-  <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_TeleportSurfaceResult" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.TeleportSurfaceResult">TeleportSurfaceResult</h4>
+  <a id="XRTK_SDK_UX_Pointers_TeleportPointer_TeleportValidationResult_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.TeleportValidationResult*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_TeleportValidationResult" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.TeleportValidationResult">TeleportValidationResult</h4>
   <div class="markdown level1 summary"><p>The result from the last raycast.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TeleportSurfaceResult TeleportSurfaceResult { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public TeleportValidationResult TeleportValidationResult { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -782,7 +733,7 @@ protected LayerMask ValidLayers</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Definitions.Physics.TeleportSurfaceResult.html">TeleportSurfaceResult</a></td>
+        <td><a class="xref" href="XRTK.Services.Teleportation.TeleportValidationResult.html">TeleportValidationResult</a></td>
         <td></td>
       </tr>
     </tbody>
@@ -791,18 +742,18 @@ protected LayerMask ValidLayers</code></pre>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_GetLineGradient_XRTK_Definitions_Physics_TeleportSurfaceResult_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.GetLineGradient(XRTK.Definitions.Physics.TeleportSurfaceResult)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_GetLineGradient_XRTK_Services_Teleportation_TeleportValidationResult_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.GetLineGradient(XRTK.Services.Teleportation.TeleportValidationResult)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L87">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L83">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_TeleportPointer_GetLineGradient_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.GetLineGradient*"></a>
-  <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_GetLineGradient_XRTK_Definitions_Physics_TeleportSurfaceResult_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.GetLineGradient(XRTK.Definitions.Physics.TeleportSurfaceResult)">GetLineGradient(TeleportSurfaceResult)</h4>
+  <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_GetLineGradient_XRTK_Services_Teleportation_TeleportValidationResult_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.GetLineGradient(XRTK.Services.Teleportation.TeleportValidationResult)">GetLineGradient(TeleportValidationResult)</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected Gradient GetLineGradient(TeleportSurfaceResult targetResult)</code></pre>
+    <pre><code class="lang-csharp hljs">protected Gradient GetLineGradient(TeleportValidationResult targetResult)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -815,7 +766,7 @@ protected LayerMask ValidLayers</code></pre>
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Definitions.Physics.TeleportSurfaceResult.html">TeleportSurfaceResult</a></td>
+        <td><a class="xref" href="XRTK.Services.Teleportation.TeleportValidationResult.html">TeleportValidationResult</a></td>
         <td><span class="parametername">targetResult</span></td>
         <td></td>
       </tr>
@@ -838,10 +789,48 @@ protected LayerMask ValidLayers</code></pre>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_System_Single__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.OnInputChanged(XRTK.EventDatum.Input.InputEventData%7BSystem.Single%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L242">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_TeleportPointer_OnInputChanged_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnInputChanged*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_System_Single__" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnInputChanged(XRTK.EventDatum.Input.InputEventData{System.Single})">OnInputChanged(InputEventData&lt;Single&gt;)</h4>
+  <div class="markdown level1 summary"><p>Raised input event updates from the type of input specified in the interface handler implementation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void OnInputChanged(InputEventData&lt;float&gt; eventData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.EventDatum.Input.InputEventData-1.html">InputEventData</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a>&gt;</td>
+        <td><span class="parametername">eventData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_System_Single__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;Single&gt;)</a></div>
+  <h5 id="XRTK_SDK_UX_Pointers_TeleportPointer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_System_Single___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <a class="xref" href="XRTK.EventDatum.Input.InputEventData-1.html#XRTK_EventDatum_Input_InputEventData_1_InputData">InputData</a> is the current input data.</p>
+</div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.OnInputChanged(XRTK.EventDatum.Input.InputEventData%7BUnityEngine.Vector2%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L240">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L260">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_TeleportPointer_OnInputChanged_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnInputChanged*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnInputChanged(XRTK.EventDatum.Input.InputEventData{UnityEngine.Vector2})">OnInputChanged(InputEventData&lt;Vector2&gt;)</h4>
@@ -876,10 +865,80 @@ protected LayerMask ValidLayers</code></pre>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_OnInputDown_XRTK_EventDatum_Input_InputEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.OnInputDown(XRTK.EventDatum.Input.InputEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L212">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_TeleportPointer_OnInputDown_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnInputDown*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_OnInputDown_XRTK_EventDatum_Input_InputEventData_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnInputDown(XRTK.EventDatum.Input.InputEventData)">OnInputDown(InputEventData)</h4>
+  <div class="markdown level1 summary"><p>Input Down updates from Interactions, Keys, or any other simple input.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void OnInputDown(InputEventData eventData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.EventDatum.Input.InputEventData.html">InputEventData</a></td>
+        <td><span class="parametername">eventData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnInputDown_XRTK_EventDatum_Input_InputEventData_">BaseControllerPointer.OnInputDown(InputEventData)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_OnInputUp_XRTK_EventDatum_Input_InputEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.OnInputUp(XRTK.EventDatum.Input.InputEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L230">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_TeleportPointer_OnInputUp_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnInputUp*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_OnInputUp_XRTK_EventDatum_Input_InputEventData_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnInputUp(XRTK.EventDatum.Input.InputEventData)">OnInputUp(InputEventData)</h4>
+  <div class="markdown level1 summary"><p>Input Up updates from Interactions, Keys, or any other simple input.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void OnInputUp(InputEventData eventData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.EventDatum.Input.InputEventData.html">InputEventData</a></td>
+        <td><span class="parametername">eventData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnInputUp_XRTK_EventDatum_Input_InputEventData_">BaseControllerPointer.OnInputUp(InputEventData)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_OnPostRaycast.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.OnPostRaycast%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L150">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L146">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_TeleportPointer_OnPostRaycast_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnPostRaycast*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_OnPostRaycast" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnPostRaycast">OnPostRaycast()</h4>
@@ -896,7 +955,7 @@ protected LayerMask ValidLayers</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_OnPreRaycast.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.OnPreRaycast%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L126">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L122">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_TeleportPointer_OnPreRaycast_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnPreRaycast*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_OnPreRaycast" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnPreRaycast">OnPreRaycast()</h4>
@@ -913,7 +972,7 @@ protected LayerMask ValidLayers</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_OnTeleportCanceled_XRTK_EventDatum_Teleport_TeleportEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.OnTeleportCanceled(XRTK.EventDatum.Teleport.TeleportEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L388">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L304">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_TeleportPointer_OnTeleportCanceled_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnTeleportCanceled*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_OnTeleportCanceled_XRTK_EventDatum_Teleport_TeleportEventData_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnTeleportCanceled(XRTK.EventDatum.Teleport.TeleportEventData)">OnTeleportCanceled(TeleportEventData)</h4>
@@ -937,7 +996,8 @@ protected LayerMask ValidLayers</code></pre>
       <tr>
         <td><a class="xref" href="XRTK.EventDatum.Teleport.TeleportEventData.html">TeleportEventData</a></td>
         <td><span class="parametername">eventData</span></td>
-        <td></td>
+        <td><p>Teleport event data.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -948,7 +1008,7 @@ protected LayerMask ValidLayers</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_OnTeleportCompleted_XRTK_EventDatum_Teleport_TeleportEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.OnTeleportCompleted(XRTK.EventDatum.Teleport.TeleportEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L381">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L297">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_TeleportPointer_OnTeleportCompleted_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnTeleportCompleted*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_OnTeleportCompleted_XRTK_EventDatum_Teleport_TeleportEventData_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnTeleportCompleted(XRTK.EventDatum.Teleport.TeleportEventData)">OnTeleportCompleted(TeleportEventData)</h4>
@@ -972,7 +1032,8 @@ protected LayerMask ValidLayers</code></pre>
       <tr>
         <td><a class="xref" href="XRTK.EventDatum.Teleport.TeleportEventData.html">TeleportEventData</a></td>
         <td><span class="parametername">eventData</span></td>
-        <td></td>
+        <td><p>Teleport event data.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -983,7 +1044,7 @@ protected LayerMask ValidLayers</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer_OnTeleportRequest_XRTK_EventDatum_Teleport_TeleportEventData_.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer.OnTeleportRequest(XRTK.EventDatum.Teleport.TeleportEventData)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L366">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L282">View Source</a>
   </span>
   <a id="XRTK_SDK_UX_Pointers_TeleportPointer_OnTeleportRequest_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnTeleportRequest*"></a>
   <h4 id="XRTK_SDK_UX_Pointers_TeleportPointer_OnTeleportRequest_XRTK_EventDatum_Teleport_TeleportEventData_" data-uid="XRTK.SDK.UX.Pointers.TeleportPointer.OnTeleportRequest(XRTK.EventDatum.Teleport.TeleportEventData)">OnTeleportRequest(TeleportEventData)</h4>
@@ -1007,7 +1068,8 @@ protected LayerMask ValidLayers</code></pre>
       <tr>
         <td><a class="xref" href="XRTK.EventDatum.Teleport.TeleportEventData.html">TeleportEventData</a></td>
         <td><span class="parametername">eventData</span></td>
-        <td></td>
+        <td><p>Teleport event data.</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1015,7 +1077,7 @@ protected LayerMask ValidLayers</code></pre>
   <div><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTeleportRequest_XRTK_EventDatum_Teleport_TeleportEventData_">BaseControllerPointer.OnTeleportRequest(TeleportEventData)</a></div>
   <h3 id="implements">Implements</h3>
   <div>
-      <a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourcePoseHandler.html">IMixedRealitySourcePoseHandler</a>
@@ -1048,12 +1110,15 @@ protected LayerMask ValidLayers</code></pre>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.iequalitycomparer">System.Collections.IEqualityComparer</a>
   </div>
   <div>
-      <a class="xref" href="XRTK.Interfaces.TeleportSystem.IMixedRealityTeleportHandler.html">IMixedRealityTeleportHandler</a>
+      <a class="xref" href="XRTK.Interfaces.TeleportSystem.Handlers.IMixedRealityTeleportHandler.html">IMixedRealityTeleportHandler</a>
   </div>
   <div>
       <span class="xref">UnityEngine.EventSystems.IEventSystemHandler</span>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_EnsureComponent__1_UnityEngine_Component_">ComponentExtensions.EnsureComponent&lt;T&gt;(Component)</a>
   </div>
@@ -1065,6 +1130,12 @@ protected LayerMask ValidLayers</code></pre>
   </div>
   <div>
       <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_">UnityObjectExtensions.Destroy(Object, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_">UnityObjectExtensions.IsNull(Object)</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
@@ -1080,12 +1151,13 @@ protected LayerMask ValidLayers</code></pre>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_TeleportPointer.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.TeleportPointer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.sdk/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L15" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/TeleportPointer.cs/#L17" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

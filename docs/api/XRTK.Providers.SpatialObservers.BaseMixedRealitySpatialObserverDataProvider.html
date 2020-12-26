@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class BaseMixedRealitySpatialObserverDataProvider
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -73,7 +73,7 @@
   
   <h1 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider" class="text-break">Class BaseMixedRealitySpatialObserverDataProvider
   </h1>
-  <div class="markdown level0 summary"><p>Base <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.html">IMixedRealitySpatialObserverDataProvider</a> implementation</p>
+  <div class="markdown level0 summary"><p>Base <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider.html">IMixedRealitySpatialAwarenessDataProvider</a> implementation</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -84,11 +84,11 @@
     <div class="level3"><a class="xref" href="XRTK.Services.BaseDataProvider.html">BaseDataProvider</a></div>
     <div class="level4"><span class="xref">BaseMixedRealitySpatialObserverDataProvider</span></div>
       <div class="level5"><a class="xref" href="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialMeshObserver.html">BaseMixedRealitySpatialMeshObserver</a></div>
-      <div class="level5"><a class="xref" href="XRTK.Providers.SpatialObservers.BaseMixedRealitySurfaceObserver.html">BaseMixedRealitySurfaceObserver</a></div>
+      <div class="level5"><a class="xref" href="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialSurfaceObserver.html">BaseMixedRealitySpatialSurfaceObserver</a></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.html">IMixedRealitySpatialObserverDataProvider</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider.html">IMixedRealitySpatialAwarenessDataProvider</a></div>
     <div><a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a></div>
     <div><a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
@@ -98,10 +98,13 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
+      <a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_ParentService">BaseDataProvider.ParentService</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Priority">BaseServiceWithConstructor.Priority</a>
+      <a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_Priority">BaseDataProvider.Priority</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Initialize">BaseService.Initialize()</a>
@@ -153,25 +156,24 @@
   <h6><strong>Assembly</strong>: XRTK.dll</h6>
   <h5 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public abstract class BaseMixedRealitySpatialObserverDataProvider : BaseDataProvider, IMixedRealitySpatialObserverDataProvider, IMixedRealityDataProvider, IMixedRealityService, IDisposable, IMixedRealityEventSource, IEqualityComparer</code></pre>
+    <pre><code class="lang-csharp hljs">public abstract class BaseMixedRealitySpatialObserverDataProvider : BaseDataProvider, IMixedRealitySpatialAwarenessDataProvider, IMixedRealityDataProvider, IMixedRealityService, IDisposable, IMixedRealityEventSource, IEqualityComparer</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider__ctor_System_String_System_UInt32_XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverProfile_.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.%23ctor(System.String%2CSystem.UInt32%2CXRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverProfile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider__ctor_System_String_System_UInt32_XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverProfile_XRTK_Interfaces_SpatialAwarenessSystem_IMixedRealitySpatialAwarenessSystem_.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.%23ctor(System.String%2CSystem.UInt32%2CXRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverProfile%2CXRTK.Interfaces.SpatialAwarenessSystem.IMixedRealitySpatialAwarenessSystem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L24">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L21">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider__ctor_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.#ctor*"></a>
-  <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider__ctor_System_String_System_UInt32_XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverProfile_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.#ctor(System.String,System.UInt32,XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverProfile)">BaseMixedRealitySpatialObserverDataProvider(String, UInt32, BaseMixedRealitySpatialObserverProfile)</h4>
-  <div class="markdown level1 summary"><p>Constructor.</p>
-</div>
+  <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider__ctor_System_String_System_UInt32_XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverProfile_XRTK_Interfaces_SpatialAwarenessSystem_IMixedRealitySpatialAwarenessSystem_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.#ctor(System.String,System.UInt32,XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverProfile,XRTK.Interfaces.SpatialAwarenessSystem.IMixedRealitySpatialAwarenessSystem)">BaseMixedRealitySpatialObserverDataProvider(String, UInt32, BaseMixedRealitySpatialObserverProfile, IMixedRealitySpatialAwarenessSystem)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">protected BaseMixedRealitySpatialObserverDataProvider(string name, uint priority, BaseMixedRealitySpatialObserverProfile profile)</code></pre>
+    <pre><code class="lang-csharp hljs">protected BaseMixedRealitySpatialObserverDataProvider(string name, uint priority, BaseMixedRealitySpatialObserverProfile profile, IMixedRealitySpatialAwarenessSystem parentService)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -198,6 +200,11 @@
         <td><span class="parametername">profile</span></td>
         <td></td>
       </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.SpatialAwarenessSystem.IMixedRealitySpatialAwarenessSystem.html">IMixedRealitySpatialAwarenessSystem</a></td>
+        <td><span class="parametername">parentService</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <h3 id="properties">Properties
@@ -207,7 +214,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_IsRunning.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.IsRunning%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L77">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L79">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_IsRunning_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.IsRunning*"></a>
   <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_IsRunning" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.IsRunning">IsRunning</h4>
@@ -238,7 +245,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_PhysicsLayer.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.PhysicsLayer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L74">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L76">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_PhysicsLayer_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.PhysicsLayer*"></a>
   <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_PhysicsLayer" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.PhysicsLayer">PhysicsLayer</h4>
@@ -247,7 +254,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public virtual int PhysicsLayer { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public virtual int PhysicsLayer { get; set; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -272,7 +279,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_SourceId.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.SourceId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L101">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L103">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_SourceId_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.SourceId*"></a>
   <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_SourceId" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.SourceId">SourceId</h4>
@@ -303,7 +310,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_SourceName.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.SourceName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L98">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L100">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_SourceName_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.SourceName*"></a>
   <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_SourceName" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.SourceName">SourceName</h4>
@@ -334,7 +341,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_StartupBehavior.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.StartupBehavior%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L68">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L70">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_StartupBehavior_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.StartupBehavior*"></a>
   <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_StartupBehavior" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.StartupBehavior">StartupBehavior</h4>
@@ -365,7 +372,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_UpdateInterval.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.UpdateInterval%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L71">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L73">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_UpdateInterval_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.UpdateInterval*"></a>
   <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_UpdateInterval" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.UpdateInterval">UpdateInterval</h4>
@@ -398,7 +405,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_Disable.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.Disable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L54">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L56">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_Disable_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.Disable*"></a>
   <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_Disable" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.Disable">Disable()</h4>
@@ -416,7 +423,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_Enable.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.Enable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L41">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L43">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_Enable_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.Enable*"></a>
   <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_Enable" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.Enable">Enable()</h4>
@@ -434,7 +441,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_Equals_System_Object_.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L125">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L127">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_Equals_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.Equals*"></a>
   <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_Equals_System_Object_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.Equals(System.Object)">Equals(Object)</h4>
@@ -480,19 +487,19 @@
   <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_Equals_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.Equals(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider%2CXRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_Equals_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.Equals(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider%2CXRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L113">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L115">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_Equals_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.Equals*"></a>
-  <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_Equals_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.Equals(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider,XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider)">Equals(IMixedRealitySpatialObserverDataProvider, IMixedRealitySpatialObserverDataProvider)</h4>
+  <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_Equals_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.Equals(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider,XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider)">Equals(IMixedRealitySpatialAwarenessDataProvider, IMixedRealitySpatialAwarenessDataProvider)</h4>
   <div class="markdown level1 summary"><p>Determines if the specified objects are equal.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static bool Equals(IMixedRealitySpatialObserverDataProvider left, IMixedRealitySpatialObserverDataProvider right)</code></pre>
+    <pre><code class="lang-csharp hljs">public static bool Equals(IMixedRealitySpatialAwarenessDataProvider left, IMixedRealitySpatialAwarenessDataProvider right)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -505,12 +512,12 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.html">IMixedRealitySpatialObserverDataProvider</a></td>
+        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider.html">IMixedRealitySpatialAwarenessDataProvider</a></td>
         <td><span class="parametername">left</span></td>
         <td></td>
       </tr>
       <tr>
-        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.html">IMixedRealitySpatialObserverDataProvider</a></td>
+        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider.html">IMixedRealitySpatialAwarenessDataProvider</a></td>
         <td><span class="parametername">right</span></td>
         <td></td>
       </tr>
@@ -536,7 +543,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_GetHashCode.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L146">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L148">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_GetHashCode_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.GetHashCode*"></a>
   <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_GetHashCode" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.GetHashCode">GetHashCode()</h4>
@@ -568,7 +575,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_StartObserving.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.StartObserving%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L80">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L82">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_StartObserving_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.StartObserving*"></a>
   <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_StartObserving" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.StartObserving">StartObserving()</h4>
@@ -584,7 +591,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_StopObserving.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.StopObserving%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L87">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L89">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_StopObserving_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.StopObserving*"></a>
   <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_StopObserving" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.StopObserving">StopObserving()</h4>
@@ -602,7 +609,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_System_Collections_IEqualityComparer_Equals_System_Object_System_Object_.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.System%23Collections%23IEqualityComparer%23Equals(System.Object%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L119">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L121">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_System_Collections_IEqualityComparer_Equals_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.System#Collections#IEqualityComparer#Equals*"></a>
   <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_System_Collections_IEqualityComparer_Equals_System_Object_System_Object_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.System#Collections#IEqualityComparer#Equals(System.Object,System.Object)">IEqualityComparer.Equals(Object, Object)</h4>
@@ -654,7 +661,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_System_Collections_IEqualityComparer_GetHashCode_System_Object_.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.System%23Collections%23IEqualityComparer%23GetHashCode(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L140">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L142">View Source</a>
   </span>
   <a id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_System_Collections_IEqualityComparer_GetHashCode_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.System#Collections#IEqualityComparer#GetHashCode*"></a>
   <h4 id="XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider_System_Collections_IEqualityComparer_GetHashCode_System_Object_" data-uid="XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider.System#Collections#IEqualityComparer#GetHashCode(System.Object)">IEqualityComparer.GetHashCode(Object)</h4>
@@ -698,7 +705,7 @@
   </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.html">IMixedRealitySpatialObserverDataProvider</a>
+      <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider.html">IMixedRealitySpatialAwarenessDataProvider</a>
   </div>
   <div>
       <a class="xref" href="XRTK.Interfaces.IMixedRealityDataProvider.html">IMixedRealityDataProvider</a>
@@ -717,6 +724,9 @@
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
+  <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
   <div>
@@ -733,12 +743,13 @@
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_SpatialObservers_BaseMixedRealitySpatialObserverDataProvider.md&amp;value=---%0Auid%3A%20XRTK.Providers.SpatialObservers.BaseMixedRealitySpatialObserverDataProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L16" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/SpatialObservers/BaseMixedRealitySpatialObserverDataProvider.cs/#L18" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

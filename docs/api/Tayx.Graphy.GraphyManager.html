@@ -1,0 +1,1841 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class GraphyManager
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class GraphyManager
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Tayx.Graphy.GraphyManager">
+  
+  
+  <h1 id="Tayx_Graphy_GraphyManager" data-uid="Tayx.Graphy.GraphyManager" class="text-break">Class GraphyManager
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a></div>
+    <div class="level2"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html">Component</a></div>
+    <div class="level3"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Behaviour.html">Behaviour</a></div>
+    <div class="level4"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html">MonoBehaviour</a></div>
+    <div class="level5"><a class="xref" href="Tayx.Graphy.Utils.G_Singleton-1.html">G_Singleton</a>&lt;<a class="xref" href="Tayx.Graphy.GraphyManager.html">GraphyManager</a>&gt;</div>
+    <div class="level6"><span class="xref">GraphyManager</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="Tayx.Graphy.Utils.G_Singleton-1.html#Tayx_Graphy_Utils_G_Singleton_1_Instance">G_Singleton&lt;GraphyManager&gt;.Instance</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_IsInvoking">MonoBehaviour.IsInvoking()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_CancelInvoke">MonoBehaviour.CancelInvoke()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_Invoke_System_String_System_Single_">MonoBehaviour.Invoke(String, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_InvokeRepeating_System_String_System_Single_System_Single_">MonoBehaviour.InvokeRepeating(String, Single, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_CancelInvoke_System_String_">MonoBehaviour.CancelInvoke(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_IsInvoking_System_String_">MonoBehaviour.IsInvoking(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StartCoroutine_System_String_">MonoBehaviour.StartCoroutine(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StartCoroutine_System_String_System_Object_">MonoBehaviour.StartCoroutine(String, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StartCoroutine_System_Collections_IEnumerator_">MonoBehaviour.StartCoroutine(IEnumerator)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StartCoroutine_Auto_System_Collections_IEnumerator_">MonoBehaviour.StartCoroutine_Auto(IEnumerator)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StopCoroutine_System_Collections_IEnumerator_">MonoBehaviour.StopCoroutine(IEnumerator)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StopCoroutine_UnityEngine_Coroutine_">MonoBehaviour.StopCoroutine(Coroutine)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StopCoroutine_System_String_">MonoBehaviour.StopCoroutine(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StopAllCoroutines">MonoBehaviour.StopAllCoroutines()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_print_System_Object_">MonoBehaviour.print(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_useGUILayout">MonoBehaviour.useGUILayout</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_runInEditMode">MonoBehaviour.runInEditMode</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Behaviour.html#UnityEngine_Behaviour_enabled">Behaviour.enabled</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Behaviour.html#UnityEngine_Behaviour_isActiveAndEnabled">Behaviour.isActiveAndEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent_System_Type_">Component.GetComponent(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent__1">Component.GetComponent&lt;T&gt;()</a>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.TryGetComponent(System.Type, UnityEngine.Component)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.TryGetComponent&lt;T&gt;(T)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent_System_String_">Component.GetComponent(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInChildren_System_Type_System_Boolean_">Component.GetComponentInChildren(Type, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInChildren_System_Type_">Component.GetComponentInChildren(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInChildren__1_System_Boolean_">Component.GetComponentInChildren&lt;T&gt;(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInChildren__1">Component.GetComponentInChildren&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren_System_Type_System_Boolean_">Component.GetComponentsInChildren(Type, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren_System_Type_">Component.GetComponentsInChildren(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren__1_System_Boolean_">Component.GetComponentsInChildren&lt;T&gt;(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren__1_System_Boolean_System_Collections_Generic_List___0__">Component.GetComponentsInChildren&lt;T&gt;(Boolean, List&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren__1">Component.GetComponentsInChildren&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren__1_System_Collections_Generic_List___0__">Component.GetComponentsInChildren&lt;T&gt;(List&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInParent_System_Type_">Component.GetComponentInParent(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInParent__1">Component.GetComponentInParent&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent_System_Type_System_Boolean_">Component.GetComponentsInParent(Type, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent_System_Type_">Component.GetComponentsInParent(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent__1_System_Boolean_">Component.GetComponentsInParent&lt;T&gt;(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent__1_System_Boolean_System_Collections_Generic_List___0__">Component.GetComponentsInParent&lt;T&gt;(Boolean, List&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent__1">Component.GetComponentsInParent&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponents_System_Type_">Component.GetComponents(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponents_System_Type_System_Collections_Generic_List_UnityEngine_Component__">Component.GetComponents(Type, List&lt;Component&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponents__1_System_Collections_Generic_List___0__">Component.GetComponents&lt;T&gt;(List&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponents__1">Component.GetComponents&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_CompareTag_System_String_">Component.CompareTag(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessageUpwards_System_String_System_Object_UnityEngine_SendMessageOptions_">Component.SendMessageUpwards(String, Object, SendMessageOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessageUpwards_System_String_System_Object_">Component.SendMessageUpwards(String, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessageUpwards_System_String_">Component.SendMessageUpwards(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessageUpwards_System_String_UnityEngine_SendMessageOptions_">Component.SendMessageUpwards(String, SendMessageOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessage_System_String_System_Object_">Component.SendMessage(String, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessage_System_String_">Component.SendMessage(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessage_System_String_System_Object_UnityEngine_SendMessageOptions_">Component.SendMessage(String, Object, SendMessageOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessage_System_String_UnityEngine_SendMessageOptions_">Component.SendMessage(String, SendMessageOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_BroadcastMessage_System_String_System_Object_UnityEngine_SendMessageOptions_">Component.BroadcastMessage(String, Object, SendMessageOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_BroadcastMessage_System_String_System_Object_">Component.BroadcastMessage(String, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_BroadcastMessage_System_String_">Component.BroadcastMessage(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_BroadcastMessage_System_String_UnityEngine_SendMessageOptions_">Component.BroadcastMessage(String, SendMessageOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_transform">Component.transform</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_gameObject">Component.gameObject</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_tag">Component.tag</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_GetInstanceID">Object.GetInstanceID()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_UnityEngine_Vector3_UnityEngine_Quaternion_">Object.Instantiate(Object, Vector3, Quaternion)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_UnityEngine_Vector3_UnityEngine_Quaternion_UnityEngine_Transform_">Object.Instantiate(Object, Vector3, Quaternion, Transform)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_">Object.Instantiate(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_UnityEngine_Transform_">Object.Instantiate(Object, Transform)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_UnityEngine_Transform_System_Boolean_">Object.Instantiate(Object, Transform, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_">Object.Instantiate&lt;T&gt;(T)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_UnityEngine_Vector3_UnityEngine_Quaternion_">Object.Instantiate&lt;T&gt;(T, Vector3, Quaternion)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_UnityEngine_Vector3_UnityEngine_Quaternion_UnityEngine_Transform_">Object.Instantiate&lt;T&gt;(T, Vector3, Quaternion, Transform)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_UnityEngine_Transform_">Object.Instantiate&lt;T&gt;(T, Transform)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_UnityEngine_Transform_System_Boolean_">Object.Instantiate&lt;T&gt;(T, Transform, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Destroy_UnityEngine_Object_System_Single_">Object.Destroy(Object, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Destroy_UnityEngine_Object_">Object.Destroy(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DestroyImmediate_UnityEngine_Object_System_Boolean_">Object.DestroyImmediate(Object, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DestroyImmediate_UnityEngine_Object_">Object.DestroyImmediate(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectsOfType_System_Type_">Object.FindObjectsOfType(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DontDestroyOnLoad_UnityEngine_Object_">Object.DontDestroyOnLoad(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DestroyObject_UnityEngine_Object_System_Single_">Object.DestroyObject(Object, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DestroyObject_UnityEngine_Object_">Object.DestroyObject(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindSceneObjectsOfType_System_Type_">Object.FindSceneObjectsOfType(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectsOfTypeIncludingAssets_System_Type_">Object.FindObjectsOfTypeIncludingAssets(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectsOfType__1">Object.FindObjectsOfType&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectOfType__1">Object.FindObjectOfType&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectsOfTypeAll_System_Type_">Object.FindObjectsOfTypeAll(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectOfType_System_Type_">Object.FindObjectOfType(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_ToString">Object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_name">Object.name</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_hideFlags">Object.hideFlags</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Tayx.Graphy.html">Tayx.Graphy</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="Tayx_Graphy_GraphyManager_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class GraphyManager : G_Singleton&lt;GraphyManager&gt;</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager__ctor.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L30">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager__ctor_" data-uid="Tayx.Graphy.GraphyManager.#ctor*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager__ctor" data-uid="Tayx.Graphy.GraphyManager.#ctor">GraphyManager()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">protected GraphyManager()</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_AdvancedModulePosition.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.AdvancedModulePosition%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L341">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_AdvancedModulePosition_" data-uid="Tayx.Graphy.GraphyManager.AdvancedModulePosition*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_AdvancedModulePosition" data-uid="Tayx.Graphy.GraphyManager.AdvancedModulePosition">AdvancedModulePosition</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphyManager.ModulePosition AdvancedModulePosition { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Tayx.Graphy.GraphyManager.ModulePosition.html">GraphyManager.ModulePosition</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_AdvancedModuleState.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.AdvancedModuleState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L338">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_AdvancedModuleState_" data-uid="Tayx.Graphy.GraphyManager.AdvancedModuleState*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_AdvancedModuleState" data-uid="Tayx.Graphy.GraphyManager.AdvancedModuleState">AdvancedModuleState</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphyManager.ModuleState AdvancedModuleState { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Tayx.Graphy.GraphyManager.ModuleState.html">GraphyManager.ModuleState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_AllocatedRam.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.AllocatedRam%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L289">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_AllocatedRam_" data-uid="Tayx.Graphy.GraphyManager.AllocatedRam*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_AllocatedRam" data-uid="Tayx.Graphy.GraphyManager.AllocatedRam">AllocatedRam</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float AllocatedRam { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_AllocatedRamColor.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.AllocatedRamColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L274">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_AllocatedRamColor_" data-uid="Tayx.Graphy.GraphyManager.AllocatedRamColor*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_AllocatedRamColor" data-uid="Tayx.Graphy.GraphyManager.AllocatedRamColor">AllocatedRamColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color AllocatedRamColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_AudioGraphColor.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.AudioGraphColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L307">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_AudioGraphColor_" data-uid="Tayx.Graphy.GraphyManager.AudioGraphColor*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_AudioGraphColor" data-uid="Tayx.Graphy.GraphyManager.AudioGraphColor">AudioGraphColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color AudioGraphColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_AudioGraphResolution.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.AudioGraphResolution%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L310">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_AudioGraphResolution_" data-uid="Tayx.Graphy.GraphyManager.AudioGraphResolution*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_AudioGraphResolution" data-uid="Tayx.Graphy.GraphyManager.AudioGraphResolution">AudioGraphResolution</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int AudioGraphResolution { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_AudioListener.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.AudioListener%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L300">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_AudioListener_" data-uid="Tayx.Graphy.GraphyManager.AudioListener*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_AudioListener" data-uid="Tayx.Graphy.GraphyManager.AudioListener">AudioListener</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public AudioListener AudioListener { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.AudioListener.html">AudioListener</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_AudioModuleState.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.AudioModuleState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L297">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_AudioModuleState_" data-uid="Tayx.Graphy.GraphyManager.AudioModuleState*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_AudioModuleState" data-uid="Tayx.Graphy.GraphyManager.AudioModuleState">AudioModuleState</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphyManager.ModuleState AudioModuleState { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Tayx.Graphy.GraphyManager.ModuleState.html">GraphyManager.ModuleState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_AudioTextUpdateRate.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.AudioTextUpdateRate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L313">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_AudioTextUpdateRate_" data-uid="Tayx.Graphy.GraphyManager.AudioTextUpdateRate*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_AudioTextUpdateRate" data-uid="Tayx.Graphy.GraphyManager.AudioTextUpdateRate">AudioTextUpdateRate</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int AudioTextUpdateRate { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_AverageFPS.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.AverageFPS%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L262">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_AverageFPS_" data-uid="Tayx.Graphy.GraphyManager.AverageFPS*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_AverageFPS" data-uid="Tayx.Graphy.GraphyManager.AverageFPS">AverageFPS</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float AverageFPS { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_Background.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.Background%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L213">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_Background_" data-uid="Tayx.Graphy.GraphyManager.Background*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_Background" data-uid="Tayx.Graphy.GraphyManager.Background">Background</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Background { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_BackgroundColor.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.BackgroundColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L216">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_BackgroundColor_" data-uid="Tayx.Graphy.GraphyManager.BackgroundColor*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_BackgroundColor" data-uid="Tayx.Graphy.GraphyManager.BackgroundColor">BackgroundColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color BackgroundColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_CautionFPSColor.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.CautionFPSColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L243">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_CautionFPSColor_" data-uid="Tayx.Graphy.GraphyManager.CautionFPSColor*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_CautionFPSColor" data-uid="Tayx.Graphy.GraphyManager.CautionFPSColor">CautionFPSColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color CautionFPSColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_CautionFPSThreshold.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.CautionFPSThreshold%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L250">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_CautionFPSThreshold_" data-uid="Tayx.Graphy.GraphyManager.CautionFPSThreshold*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_CautionFPSThreshold" data-uid="Tayx.Graphy.GraphyManager.CautionFPSThreshold">CautionFPSThreshold</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int CautionFPSThreshold { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_CriticalFPSColor.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.CriticalFPSColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L245">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_CriticalFPSColor_" data-uid="Tayx.Graphy.GraphyManager.CriticalFPSColor*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_CriticalFPSColor" data-uid="Tayx.Graphy.GraphyManager.CriticalFPSColor">CriticalFPSColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color CriticalFPSColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_CurrentFPS.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.CurrentFPS%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L261">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_CurrentFPS_" data-uid="Tayx.Graphy.GraphyManager.CurrentFPS*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_CurrentFPS" data-uid="Tayx.Graphy.GraphyManager.CurrentFPS">CurrentFPS</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float CurrentFPS { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_EnableOnStartup.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.EnableOnStartup%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L209">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_EnableOnStartup_" data-uid="Tayx.Graphy.GraphyManager.EnableOnStartup*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_EnableOnStartup" data-uid="Tayx.Graphy.GraphyManager.EnableOnStartup">EnableOnStartup</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool EnableOnStartup { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_FftWindow.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.FftWindow%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L316">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_FftWindow_" data-uid="Tayx.Graphy.GraphyManager.FftWindow*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_FftWindow" data-uid="Tayx.Graphy.GraphyManager.FftWindow">FftWindow</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public FFTWindow FftWindow { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.FFTWindow.html">FFTWindow</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_FindAudioListenerInCameraIfNull.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.FindAudioListenerInCameraIfNull%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L303">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_FindAudioListenerInCameraIfNull_" data-uid="Tayx.Graphy.GraphyManager.FindAudioListenerInCameraIfNull*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_FindAudioListenerInCameraIfNull" data-uid="Tayx.Graphy.GraphyManager.FindAudioListenerInCameraIfNull">FindAudioListenerInCameraIfNull</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphyManager.LookForAudioListener FindAudioListenerInCameraIfNull { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Tayx.Graphy.GraphyManager.LookForAudioListener.html">GraphyManager.LookForAudioListener</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_FpsGraphResolution.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.FpsGraphResolution%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L253">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_FpsGraphResolution_" data-uid="Tayx.Graphy.GraphyManager.FpsGraphResolution*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_FpsGraphResolution" data-uid="Tayx.Graphy.GraphyManager.FpsGraphResolution">FpsGraphResolution</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int FpsGraphResolution { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_FpsModuleState.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.FpsModuleState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L235">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_FpsModuleState_" data-uid="Tayx.Graphy.GraphyManager.FpsModuleState*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_FpsModuleState" data-uid="Tayx.Graphy.GraphyManager.FpsModuleState">FpsModuleState</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphyManager.ModuleState FpsModuleState { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Tayx.Graphy.GraphyManager.ModuleState.html">GraphyManager.ModuleState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_FpsTextUpdateRate.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.FpsTextUpdateRate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L256">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_FpsTextUpdateRate_" data-uid="Tayx.Graphy.GraphyManager.FpsTextUpdateRate*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_FpsTextUpdateRate" data-uid="Tayx.Graphy.GraphyManager.FpsTextUpdateRate">FpsTextUpdateRate</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int FpsTextUpdateRate { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_GoodFPSColor.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.GoodFPSColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L241">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_GoodFPSColor_" data-uid="Tayx.Graphy.GraphyManager.GoodFPSColor*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_GoodFPSColor" data-uid="Tayx.Graphy.GraphyManager.GoodFPSColor">GoodFPSColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color GoodFPSColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_GoodFPSThreshold.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.GoodFPSThreshold%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L248">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_GoodFPSThreshold_" data-uid="Tayx.Graphy.GraphyManager.GoodFPSThreshold*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_GoodFPSThreshold" data-uid="Tayx.Graphy.GraphyManager.GoodFPSThreshold">GoodFPSThreshold</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int GoodFPSThreshold { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_GraphModulePosition.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.GraphModulePosition%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L219">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_GraphModulePosition_" data-uid="Tayx.Graphy.GraphyManager.GraphModulePosition*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_GraphModulePosition" data-uid="Tayx.Graphy.GraphyManager.GraphModulePosition">GraphModulePosition</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphyManager.ModulePosition GraphModulePosition { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Tayx.Graphy.GraphyManager.ModulePosition.html">GraphyManager.ModulePosition</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_GraphyMode.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.GraphyMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L206">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_GraphyMode_" data-uid="Tayx.Graphy.GraphyManager.GraphyMode*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_GraphyMode" data-uid="Tayx.Graphy.GraphyManager.GraphyMode">GraphyMode</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphyManager.Mode GraphyMode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Tayx.Graphy.GraphyManager.Mode.html">GraphyManager.Mode</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_KeepAlive.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.KeepAlive%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L211">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_KeepAlive_" data-uid="Tayx.Graphy.GraphyManager.KeepAlive*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_KeepAlive" data-uid="Tayx.Graphy.GraphyManager.KeepAlive">KeepAlive</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool KeepAlive { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_MaxDB.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.MaxDB%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L332">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_MaxDB_" data-uid="Tayx.Graphy.GraphyManager.MaxDB*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_MaxDB" data-uid="Tayx.Graphy.GraphyManager.MaxDB">MaxDB</h4>
+  <div class="markdown level1 summary"><p>Maximum DB registered in the current spectrum.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MaxDB { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_MaxFPS.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.MaxFPS%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L264">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_MaxFPS_" data-uid="Tayx.Graphy.GraphyManager.MaxFPS*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_MaxFPS" data-uid="Tayx.Graphy.GraphyManager.MaxFPS">MaxFPS</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MaxFPS { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_MinFPS.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.MinFPS%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L263">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_MinFPS_" data-uid="Tayx.Graphy.GraphyManager.MinFPS*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_MinFPS" data-uid="Tayx.Graphy.GraphyManager.MinFPS">MinFPS</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MinFPS { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_MonoRam.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.MonoRam%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L291">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_MonoRam_" data-uid="Tayx.Graphy.GraphyManager.MonoRam*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_MonoRam" data-uid="Tayx.Graphy.GraphyManager.MonoRam">MonoRam</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MonoRam { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_MonoRamColor.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.MonoRamColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L278">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_MonoRamColor_" data-uid="Tayx.Graphy.GraphyManager.MonoRamColor*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_MonoRamColor" data-uid="Tayx.Graphy.GraphyManager.MonoRamColor">MonoRamColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color MonoRamColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_RamGraphResolution.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.RamGraphResolution%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L281">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_RamGraphResolution_" data-uid="Tayx.Graphy.GraphyManager.RamGraphResolution*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_RamGraphResolution" data-uid="Tayx.Graphy.GraphyManager.RamGraphResolution">RamGraphResolution</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int RamGraphResolution { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_RamModuleState.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.RamModuleState%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L270">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_RamModuleState_" data-uid="Tayx.Graphy.GraphyManager.RamModuleState*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_RamModuleState" data-uid="Tayx.Graphy.GraphyManager.RamModuleState">RamModuleState</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GraphyManager.ModuleState RamModuleState { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Tayx.Graphy.GraphyManager.ModuleState.html">GraphyManager.ModuleState</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_RamTextUpdateRate.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.RamTextUpdateRate%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L284">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_RamTextUpdateRate_" data-uid="Tayx.Graphy.GraphyManager.RamTextUpdateRate*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_RamTextUpdateRate" data-uid="Tayx.Graphy.GraphyManager.RamTextUpdateRate">RamTextUpdateRate</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int RamTextUpdateRate { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_ReservedRam.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.ReservedRam%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L290">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_ReservedRam_" data-uid="Tayx.Graphy.GraphyManager.ReservedRam*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_ReservedRam" data-uid="Tayx.Graphy.GraphyManager.ReservedRam">ReservedRam</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float ReservedRam { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_ReservedRamColor.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.ReservedRamColor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L276">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_ReservedRamColor_" data-uid="Tayx.Graphy.GraphyManager.ReservedRamColor*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_ReservedRamColor" data-uid="Tayx.Graphy.GraphyManager.ReservedRamColor">ReservedRamColor</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Color ReservedRamColor { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Color.html">Color</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_Spectrum.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.Spectrum%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L327">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_Spectrum_" data-uid="Tayx.Graphy.GraphyManager.Spectrum*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_Spectrum" data-uid="Tayx.Graphy.GraphyManager.Spectrum">Spectrum</h4>
+  <div class="markdown level1 summary"><p>Current audio spectrum from the specified AudioListener.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float[] Spectrum { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_SpectrumSize.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.SpectrumSize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L319">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_SpectrumSize_" data-uid="Tayx.Graphy.GraphyManager.SpectrumSize*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_SpectrumSize" data-uid="Tayx.Graphy.GraphyManager.SpectrumSize">SpectrumSize</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int SpectrumSize { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_TimeToResetMinMaxFps.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.TimeToResetMinMaxFps%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L238">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_TimeToResetMinMaxFps_" data-uid="Tayx.Graphy.GraphyManager.TimeToResetMinMaxFps*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_TimeToResetMinMaxFps" data-uid="Tayx.Graphy.GraphyManager.TimeToResetMinMaxFps">TimeToResetMinMaxFps</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public int TimeToResetMinMaxFps { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_Disable.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.Disable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L549">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_Disable_" data-uid="Tayx.Graphy.GraphyManager.Disable*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_Disable" data-uid="Tayx.Graphy.GraphyManager.Disable">Disable()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Disable()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_Enable.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.Enable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L539">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_Enable_" data-uid="Tayx.Graphy.GraphyManager.Enable*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_Enable" data-uid="Tayx.Graphy.GraphyManager.Enable">Enable()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Enable()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_SetModuleMode_Tayx_Graphy_GraphyManager_ModuleType_Tayx_Graphy_GraphyManager_ModuleState_.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.SetModuleMode(Tayx.Graphy.GraphyManager.ModuleType%2CTayx.Graphy.GraphyManager.ModuleState)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L395">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_SetModuleMode_" data-uid="Tayx.Graphy.GraphyManager.SetModuleMode*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_SetModuleMode_Tayx_Graphy_GraphyManager_ModuleType_Tayx_Graphy_GraphyManager_ModuleState_" data-uid="Tayx.Graphy.GraphyManager.SetModuleMode(Tayx.Graphy.GraphyManager.ModuleType,Tayx.Graphy.GraphyManager.ModuleState)">SetModuleMode(GraphyManager.ModuleType, GraphyManager.ModuleState)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetModuleMode(GraphyManager.ModuleType moduleType, GraphyManager.ModuleState moduleState)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Tayx.Graphy.GraphyManager.ModuleType.html">GraphyManager.ModuleType</a></td>
+        <td><span class="parametername">moduleType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Tayx.Graphy.GraphyManager.ModuleState.html">GraphyManager.ModuleState</a></td>
+        <td><span class="parametername">moduleState</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_SetModulePosition_Tayx_Graphy_GraphyManager_ModuleType_Tayx_Graphy_GraphyManager_ModulePosition_.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.SetModulePosition(Tayx.Graphy.GraphyManager.ModuleType%2CTayx.Graphy.GraphyManager.ModulePosition)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L375">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_SetModulePosition_" data-uid="Tayx.Graphy.GraphyManager.SetModulePosition*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_SetModulePosition_Tayx_Graphy_GraphyManager_ModuleType_Tayx_Graphy_GraphyManager_ModulePosition_" data-uid="Tayx.Graphy.GraphyManager.SetModulePosition(Tayx.Graphy.GraphyManager.ModuleType,Tayx.Graphy.GraphyManager.ModulePosition)">SetModulePosition(GraphyManager.ModuleType, GraphyManager.ModulePosition)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetModulePosition(GraphyManager.ModuleType moduleType, GraphyManager.ModulePosition modulePosition)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Tayx.Graphy.GraphyManager.ModuleType.html">GraphyManager.ModuleType</a></td>
+        <td><span class="parametername">moduleType</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Tayx.Graphy.GraphyManager.ModulePosition.html">GraphyManager.ModulePosition</a></td>
+        <td><span class="parametername">modulePosition</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_SetPreset_Tayx_Graphy_GraphyManager_ModulePreset_.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.SetPreset(Tayx.Graphy.GraphyManager.ModulePreset)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L431">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_SetPreset_" data-uid="Tayx.Graphy.GraphyManager.SetPreset*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_SetPreset_Tayx_Graphy_GraphyManager_ModulePreset_" data-uid="Tayx.Graphy.GraphyManager.SetPreset(Tayx.Graphy.GraphyManager.ModulePreset)">SetPreset(GraphyManager.ModulePreset)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetPreset(GraphyManager.ModulePreset modulePreset)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Tayx.Graphy.GraphyManager.ModulePreset.html">GraphyManager.ModulePreset</a></td>
+        <td><span class="parametername">modulePreset</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_ToggleActive.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.ToggleActive%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L527">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_ToggleActive_" data-uid="Tayx.Graphy.GraphyManager.ToggleActive*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_ToggleActive" data-uid="Tayx.Graphy.GraphyManager.ToggleActive">ToggleActive()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ToggleActive()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager_ToggleModes.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager.ToggleModes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L417">View Source</a>
+  </span>
+  <a id="Tayx_Graphy_GraphyManager_ToggleModes_" data-uid="Tayx.Graphy.GraphyManager.ToggleModes*"></a>
+  <h4 id="Tayx_Graphy_GraphyManager_ToggleModes" data-uid="Tayx.Graphy.GraphyManager.ToggleModes">ToggleModes()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void ToggleModes()</code></pre>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_EnsureComponent__1_UnityEngine_Component_">ComponentExtensions.EnsureComponent&lt;T&gt;(Component)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_FindAncestorComponent__1_UnityEngine_Component_System_Boolean_">ComponentExtensions.FindAncestorComponent&lt;T&gt;(Component, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_">UnityObjectExtensions.Destroy(Object, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_">UnityObjectExtensions.IsNull(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Tayx_Graphy_GraphyManager.md&amp;value=---%0Auid%3A%20Tayx.Graphy.GraphyManager%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Graphy - Ultimate Stats Monitor/Scripts/GraphyManager.cs/#L23" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

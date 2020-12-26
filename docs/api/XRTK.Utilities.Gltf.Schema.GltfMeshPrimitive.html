@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class GltfMeshPrimitive
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -83,6 +83,10 @@
     <div class="level1"><a class="xref" href="XRTK.Utilities.Gltf.Schema.GltfProperty.html">GltfProperty</a></div>
     <div class="level2"><span class="xref">GltfMeshPrimitive</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.ISerializationCallbackReceiver.html">ISerializationCallbackReceiver</a></div>
+  </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
@@ -118,7 +122,7 @@
   <h5 id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Serializable]
-public class GltfMeshPrimitive : GltfProperty</code></pre>
+public class GltfMeshPrimitive : GltfProperty, ISerializationCallbackReceiver</code></pre>
   </div>
   <h3 id="fields">Fields
   </h3>
@@ -127,7 +131,7 @@ public class GltfMeshPrimitive : GltfProperty</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_indices.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.indices%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L30">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L30">View Source</a>
   </span>
   <h4 id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_indices" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.indices">indices</h4>
   <div class="markdown level1 summary"><p>The index of the accessor that contains mesh indices.
@@ -165,7 +169,7 @@ when <code>OES_element_index_uint</code> extension is used; <code>type</code> mu
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_material.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.material%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L35">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L35">View Source</a>
   </span>
   <h4 id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_material" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.material">material</h4>
   <div class="markdown level1 summary"><p>The index of the material to apply to this primitive when rendering.</p>
@@ -190,36 +194,6 @@ when <code>OES_element_index_uint</code> extension is used; <code>type</code> mu
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_mode.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.mode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L40">View Source</a>
-  </span>
-  <h4 id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_mode" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.mode">mode</h4>
-  <div class="markdown level1 summary"><p>The type of primitives to render. All valid values correspond to WebGL enums.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GltfDrawMode mode</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="XRTK.Utilities.Gltf.Schema.GltfDrawMode.html">GltfDrawMode</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
@@ -227,7 +201,7 @@ when <code>OES_element_index_uint</code> extension is used; <code>type</code> mu
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_Attributes.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.Attributes%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L56">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L59">View Source</a>
   </span>
   <a id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_Attributes_" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.Attributes*"></a>
   <h4 id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_Attributes" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.Attributes">Attributes</h4>
@@ -256,10 +230,41 @@ and each value is the index of the accessor containing attribute's data.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_Mode.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.Mode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L40">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_Mode_" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.Mode*"></a>
+  <h4 id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_Mode" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.Mode">Mode</h4>
+  <div class="markdown level1 summary"><p>The type of primitives to render. All valid values correspond to WebGL enums.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GltfDrawMode Mode { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Gltf.Schema.GltfDrawMode.html">GltfDrawMode</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_SubMesh.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.SubMesh%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L61">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L64">View Source</a>
   </span>
   <a id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_SubMesh_" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.SubMesh*"></a>
   <h4 id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_SubMesh" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.SubMesh">SubMesh</h4>
@@ -290,7 +295,7 @@ and each value is the index of the accessor containing attribute's data.</p>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_Targets.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.Targets%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L50">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L53">View Source</a>
   </span>
   <a id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_Targets_" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.Targets*"></a>
   <h4 id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_Targets" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.Targets">Targets</h4>
@@ -319,7 +324,46 @@ displacements' data).</p>
       </tr>
     </tbody>
   </table>
+  <h3 id="eii">Explicit Interface Implementations
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_UnityEngine_ISerializationCallbackReceiver_OnAfterDeserialize.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.UnityEngine%23ISerializationCallbackReceiver%23OnAfterDeserialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L68">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_UnityEngine_ISerializationCallbackReceiver_OnAfterDeserialize_" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.UnityEngine#ISerializationCallbackReceiver#OnAfterDeserialize*"></a>
+  <h4 id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_UnityEngine_ISerializationCallbackReceiver_OnAfterDeserialize" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.UnityEngine#ISerializationCallbackReceiver#OnAfterDeserialize">ISerializationCallbackReceiver.OnAfterDeserialize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void ISerializationCallbackReceiver.OnAfterDeserialize()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_UnityEngine_ISerializationCallbackReceiver_OnBeforeSerialize.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.UnityEngine%23ISerializationCallbackReceiver%23OnBeforeSerialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L80">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_UnityEngine_ISerializationCallbackReceiver_OnBeforeSerialize_" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.UnityEngine#ISerializationCallbackReceiver#OnBeforeSerialize*"></a>
+  <h4 id="XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive_UnityEngine_ISerializationCallbackReceiver_OnBeforeSerialize" data-uid="XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive.UnityEngine#ISerializationCallbackReceiver#OnBeforeSerialize">ISerializationCallbackReceiver.OnBeforeSerialize()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">void ISerializationCallbackReceiver.OnBeforeSerialize()</code></pre>
+  </div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.ISerializationCallbackReceiver.html">ISerializationCallbackReceiver</a>
+  </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
@@ -337,12 +381,13 @@ displacements' data).</p>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfMeshPrimitive.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfMeshPrimitive%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L14" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Gltf/Schema/GltfMeshPrimitive.cs/#L14" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

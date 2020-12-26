@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Namespace XRTK.Definitions.InputSystem
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -77,11 +77,12 @@
   <div class="markdown level0 remarks"></div>
     <h3 id="classes">Classes
   </h3>
+      <h4><a class="xref" href="XRTK.Definitions.InputSystem.InputActionEventPair.html">InputActionEventPair</a></h4>
+      <section><p>Data class that maps <a class="xref" href="XRTK.Definitions.InputSystem.MixedRealityInputAction.html">MixedRealityInputAction</a>s to <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Events.UnityEvent.html">UnityEvent</a>s wired up in the inspector.</p>
+</section>
       <h4><a class="xref" href="XRTK.Definitions.InputSystem.MixedRealityGesturesProfile.html">MixedRealityGesturesProfile</a></h4>
       <section><p>Configuration profile settings for setting up and consuming gesture based input actions.</p>
 </section>
-      <h4><a class="xref" href="XRTK.Definitions.InputSystem.MixedRealityInputActionRulesProfile.html">MixedRealityInputActionRulesProfile</a></h4>
-      <section></section>
       <h4><a class="xref" href="XRTK.Definitions.InputSystem.MixedRealityInputActionsProfile.html">MixedRealityInputActionsProfile</a></h4>
       <section><p>Configuration profile settings for setting up and consuming Input Actions.</p>
 </section>
@@ -100,27 +101,6 @@
       <section><p>Data struct for cursor state information for the Animated Cursor, which leverages the Unity animation system.
 This defines a modification to an Unity animation parameter, based on cursor state.</p>
 </section>
-      <h4><a class="xref" href="XRTK.Definitions.InputSystem.InputActionEventPair.html">InputActionEventPair</a></h4>
-      <section><p>Data class that maps <a class="xref" href="XRTK.Definitions.InputSystem.MixedRealityInputAction.html">MixedRealityInputAction</a>s to <a class="xref" href="XRTK.Definitions.InputSystem.InputActionEventPair.html#XRTK_Definitions_InputSystem_InputActionEventPair_UnityEvent">UnityEvent</a>s wired up in the inspector.</p>
-</section>
-      <h4><a class="xref" href="XRTK.Definitions.InputSystem.InputActionRuleDigital.html">InputActionRuleDigital</a></h4>
-      <section><p>Generic Input Action Rule for raising actions based on specific criteria.</p>
-</section>
-      <h4><a class="xref" href="XRTK.Definitions.InputSystem.InputActionRuleDualAxis.html">InputActionRuleDualAxis</a></h4>
-      <section><p>Generic Input Action Rule for raising actions based on specific criteria.</p>
-</section>
-      <h4><a class="xref" href="XRTK.Definitions.InputSystem.InputActionRulePoseAxis.html">InputActionRulePoseAxis</a></h4>
-      <section><p>Generic Input Action Rule for raising actions based on specific criteria.</p>
-</section>
-      <h4><a class="xref" href="XRTK.Definitions.InputSystem.InputActionRuleQuaternionAxis.html">InputActionRuleQuaternionAxis</a></h4>
-      <section><p>Generic Input Action Rule for raising actions based on specific criteria.</p>
-</section>
-      <h4><a class="xref" href="XRTK.Definitions.InputSystem.InputActionRuleSingleAxis.html">InputActionRuleSingleAxis</a></h4>
-      <section><p>Generic Input Action Rule for raising actions based on specific criteria.</p>
-</section>
-      <h4><a class="xref" href="XRTK.Definitions.InputSystem.InputActionRuleVectorAxis.html">InputActionRuleVectorAxis</a></h4>
-      <section><p>Generic Input Action Rule for raising actions based on specific criteria.</p>
-</section>
       <h4><a class="xref" href="XRTK.Definitions.InputSystem.KeywordAndResponse.html">KeywordAndResponse</a></h4>
       <section><p>Keyword/UnityEvent pair that ties voice input to UnityEvents wired up in the inspector.</p>
 </section>
@@ -128,10 +108,7 @@ This defines a modification to an Unity animation parameter, based on cursor sta
       <section><p>Data structure for mapping gestures to <a class="xref" href="XRTK.Definitions.InputSystem.MixedRealityInputAction.html">MixedRealityInputAction</a>s that can be raised by the Input System.</p>
 </section>
       <h4><a class="xref" href="XRTK.Definitions.InputSystem.MixedRealityInputAction.html">MixedRealityInputAction</a></h4>
-      <section><p>An Input Action for mapping an action to an Input Sources Button, Joystick, Sensor, etc.</p>
-</section>
-      <h4><a class="xref" href="XRTK.Definitions.InputSystem.PointerOption.html">PointerOption</a></h4>
-      <section><p>Defines a pointer option to assign to a controller.</p>
+      <section><p>An Input Action for mapping an action to an Input Control like a Button, Joystick, Sensor, etc.</p>
 </section>
       <h4><a class="xref" href="XRTK.Definitions.InputSystem.SpeechCommands.html">SpeechCommands</a></h4>
       <section><p>Data structure for mapping Voice and Keyboard input to <a class="xref" href="XRTK.Definitions.InputSystem.MixedRealityInputAction.html">MixedRealityInputAction</a>s that can be raised by the Input System.</p>
@@ -154,7 +131,8 @@ This defines a modification to an Unity animation parameter, based on cursor sta
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

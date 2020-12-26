@@ -1,0 +1,805 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class MonitorAudioSource
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class MonitorAudioSource
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="MonitorComponents.MonitorAudioSource">
+  
+  
+  <h1 id="MonitorComponents_MonitorAudioSource" data-uid="MonitorComponents.MonitorAudioSource" class="text-break">Class MonitorAudioSource
+  </h1>
+  <div class="markdown level0 summary"></div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a></div>
+    <div class="level2"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html">Component</a></div>
+    <div class="level3"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Behaviour.html">Behaviour</a></div>
+    <div class="level4"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html">MonoBehaviour</a></div>
+    <div class="level5"><span class="xref">MonitorAudioSource</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_IsInvoking">MonoBehaviour.IsInvoking()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_CancelInvoke">MonoBehaviour.CancelInvoke()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_Invoke_System_String_System_Single_">MonoBehaviour.Invoke(String, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_InvokeRepeating_System_String_System_Single_System_Single_">MonoBehaviour.InvokeRepeating(String, Single, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_CancelInvoke_System_String_">MonoBehaviour.CancelInvoke(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_IsInvoking_System_String_">MonoBehaviour.IsInvoking(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StartCoroutine_System_String_">MonoBehaviour.StartCoroutine(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StartCoroutine_System_String_System_Object_">MonoBehaviour.StartCoroutine(String, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StartCoroutine_System_Collections_IEnumerator_">MonoBehaviour.StartCoroutine(IEnumerator)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StartCoroutine_Auto_System_Collections_IEnumerator_">MonoBehaviour.StartCoroutine_Auto(IEnumerator)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StopCoroutine_System_Collections_IEnumerator_">MonoBehaviour.StopCoroutine(IEnumerator)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StopCoroutine_UnityEngine_Coroutine_">MonoBehaviour.StopCoroutine(Coroutine)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StopCoroutine_System_String_">MonoBehaviour.StopCoroutine(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_StopAllCoroutines">MonoBehaviour.StopAllCoroutines()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_print_System_Object_">MonoBehaviour.print(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_useGUILayout">MonoBehaviour.useGUILayout</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html#UnityEngine_MonoBehaviour_runInEditMode">MonoBehaviour.runInEditMode</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Behaviour.html#UnityEngine_Behaviour_enabled">Behaviour.enabled</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Behaviour.html#UnityEngine_Behaviour_isActiveAndEnabled">Behaviour.isActiveAndEnabled</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent_System_Type_">Component.GetComponent(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent__1">Component.GetComponent&lt;T&gt;()</a>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.TryGetComponent(System.Type, UnityEngine.Component)</span>
+    </div>
+    <div>
+      <span class="xref">UnityEngine.Component.TryGetComponent&lt;T&gt;(T)</span>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponent_System_String_">Component.GetComponent(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInChildren_System_Type_System_Boolean_">Component.GetComponentInChildren(Type, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInChildren_System_Type_">Component.GetComponentInChildren(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInChildren__1_System_Boolean_">Component.GetComponentInChildren&lt;T&gt;(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInChildren__1">Component.GetComponentInChildren&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren_System_Type_System_Boolean_">Component.GetComponentsInChildren(Type, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren_System_Type_">Component.GetComponentsInChildren(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren__1_System_Boolean_">Component.GetComponentsInChildren&lt;T&gt;(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren__1_System_Boolean_System_Collections_Generic_List___0__">Component.GetComponentsInChildren&lt;T&gt;(Boolean, List&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren__1">Component.GetComponentsInChildren&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInChildren__1_System_Collections_Generic_List___0__">Component.GetComponentsInChildren&lt;T&gt;(List&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInParent_System_Type_">Component.GetComponentInParent(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentInParent__1">Component.GetComponentInParent&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent_System_Type_System_Boolean_">Component.GetComponentsInParent(Type, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent_System_Type_">Component.GetComponentsInParent(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent__1_System_Boolean_">Component.GetComponentsInParent&lt;T&gt;(Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent__1_System_Boolean_System_Collections_Generic_List___0__">Component.GetComponentsInParent&lt;T&gt;(Boolean, List&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponentsInParent__1">Component.GetComponentsInParent&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponents_System_Type_">Component.GetComponents(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponents_System_Type_System_Collections_Generic_List_UnityEngine_Component__">Component.GetComponents(Type, List&lt;Component&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponents__1_System_Collections_Generic_List___0__">Component.GetComponents&lt;T&gt;(List&lt;T&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_GetComponents__1">Component.GetComponents&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_CompareTag_System_String_">Component.CompareTag(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessageUpwards_System_String_System_Object_UnityEngine_SendMessageOptions_">Component.SendMessageUpwards(String, Object, SendMessageOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessageUpwards_System_String_System_Object_">Component.SendMessageUpwards(String, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessageUpwards_System_String_">Component.SendMessageUpwards(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessageUpwards_System_String_UnityEngine_SendMessageOptions_">Component.SendMessageUpwards(String, SendMessageOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessage_System_String_System_Object_">Component.SendMessage(String, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessage_System_String_">Component.SendMessage(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessage_System_String_System_Object_UnityEngine_SendMessageOptions_">Component.SendMessage(String, Object, SendMessageOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_SendMessage_System_String_UnityEngine_SendMessageOptions_">Component.SendMessage(String, SendMessageOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_BroadcastMessage_System_String_System_Object_UnityEngine_SendMessageOptions_">Component.BroadcastMessage(String, Object, SendMessageOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_BroadcastMessage_System_String_System_Object_">Component.BroadcastMessage(String, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_BroadcastMessage_System_String_">Component.BroadcastMessage(String)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_BroadcastMessage_System_String_UnityEngine_SendMessageOptions_">Component.BroadcastMessage(String, SendMessageOptions)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_transform">Component.transform</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_gameObject">Component.gameObject</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html#UnityEngine_Component_tag">Component.tag</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_GetInstanceID">Object.GetInstanceID()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_GetHashCode">Object.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Equals_System_Object_">Object.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_UnityEngine_Vector3_UnityEngine_Quaternion_">Object.Instantiate(Object, Vector3, Quaternion)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_UnityEngine_Vector3_UnityEngine_Quaternion_UnityEngine_Transform_">Object.Instantiate(Object, Vector3, Quaternion, Transform)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_">Object.Instantiate(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_UnityEngine_Transform_">Object.Instantiate(Object, Transform)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate_UnityEngine_Object_UnityEngine_Transform_System_Boolean_">Object.Instantiate(Object, Transform, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_">Object.Instantiate&lt;T&gt;(T)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_UnityEngine_Vector3_UnityEngine_Quaternion_">Object.Instantiate&lt;T&gt;(T, Vector3, Quaternion)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_UnityEngine_Vector3_UnityEngine_Quaternion_UnityEngine_Transform_">Object.Instantiate&lt;T&gt;(T, Vector3, Quaternion, Transform)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_UnityEngine_Transform_">Object.Instantiate&lt;T&gt;(T, Transform)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Instantiate__1___0_UnityEngine_Transform_System_Boolean_">Object.Instantiate&lt;T&gt;(T, Transform, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Destroy_UnityEngine_Object_System_Single_">Object.Destroy(Object, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_Destroy_UnityEngine_Object_">Object.Destroy(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DestroyImmediate_UnityEngine_Object_System_Boolean_">Object.DestroyImmediate(Object, Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DestroyImmediate_UnityEngine_Object_">Object.DestroyImmediate(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectsOfType_System_Type_">Object.FindObjectsOfType(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DontDestroyOnLoad_UnityEngine_Object_">Object.DontDestroyOnLoad(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DestroyObject_UnityEngine_Object_System_Single_">Object.DestroyObject(Object, Single)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_DestroyObject_UnityEngine_Object_">Object.DestroyObject(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindSceneObjectsOfType_System_Type_">Object.FindSceneObjectsOfType(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectsOfTypeIncludingAssets_System_Type_">Object.FindObjectsOfTypeIncludingAssets(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectsOfType__1">Object.FindObjectsOfType&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectOfType__1">Object.FindObjectOfType&lt;T&gt;()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectsOfTypeAll_System_Type_">Object.FindObjectsOfTypeAll(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_FindObjectOfType_System_Type_">Object.FindObjectOfType(Type)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_ToString">Object.ToString()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_name">Object.name</a>
+    </div>
+    <div>
+      <a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html#UnityEngine_Object_hideFlags">Object.hideFlags</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="MonitorComponents.html">MonitorComponents</a></h6>
+  <h6><strong>Assembly</strong>: Assembly-CSharp.dll</h6>
+  <h5 id="MonitorComponents_MonitorAudioSource_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[AddComponentMenu(&quot;Monitor Components/Monitor AudioSource&quot;)]
+[ExecuteInEditMode]
+public class MonitorAudioSource : MonoBehaviour</code></pre>
+  </div>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_monitor_isPlaying.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.monitor_isPlaying%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L33">View Source</a>
+  </span>
+  <h4 id="MonitorComponents_MonitorAudioSource_monitor_isPlaying" data-uid="MonitorComponents.MonitorAudioSource.monitor_isPlaying">monitor_isPlaying</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Monitor monitor_isPlaying</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MonitorComponents.Monitor.html">Monitor</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_monitor_pitch.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.monitor_pitch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L27">View Source</a>
+  </span>
+  <h4 id="MonitorComponents_MonitorAudioSource_monitor_pitch" data-uid="MonitorComponents.MonitorAudioSource.monitor_pitch">monitor_pitch</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Monitor monitor_pitch</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MonitorComponents.Monitor.html">Monitor</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_monitor_volume.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.monitor_volume%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L17">View Source</a>
+  </span>
+  <h4 id="MonitorComponents_MonitorAudioSource_monitor_volume" data-uid="MonitorComponents.MonitorAudioSource.monitor_volume">monitor_volume</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Monitor monitor_volume</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MonitorComponents.Monitor.html">Monitor</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_pitchMax.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.pitchMax%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L25">View Source</a>
+  </span>
+  <h4 id="MonitorComponents_MonitorAudioSource_pitchMax" data-uid="MonitorComponents.MonitorAudioSource.pitchMax">pitchMax</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float pitchMax</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_pitchMin.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.pitchMin%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L24">View Source</a>
+  </span>
+  <h4 id="MonitorComponents_MonitorAudioSource_pitchMin" data-uid="MonitorComponents.MonitorAudioSource.pitchMin">pitchMin</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float pitchMin</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_pitchMode.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.pitchMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L23">View Source</a>
+  </span>
+  <h4 id="MonitorComponents_MonitorAudioSource_pitchMode" data-uid="MonitorComponents.MonitorAudioSource.pitchMode">pitchMode</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public ValueAxisMode pitchMode</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="MonitorComponents.ValueAxisMode.html">ValueAxisMode</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_showIsPlaying.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.showIsPlaying%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L31">View Source</a>
+  </span>
+  <h4 id="MonitorComponents_MonitorAudioSource_showIsPlaying" data-uid="MonitorComponents.MonitorAudioSource.showIsPlaying">showIsPlaying</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool showIsPlaying</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_showPitch.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.showPitch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L21">View Source</a>
+  </span>
+  <h4 id="MonitorComponents_MonitorAudioSource_showPitch" data-uid="MonitorComponents.MonitorAudioSource.showPitch">showPitch</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool showPitch</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_showVolume.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.showVolume%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L15">View Source</a>
+  </span>
+  <h4 id="MonitorComponents_MonitorAudioSource_showVolume" data-uid="MonitorComponents.MonitorAudioSource.showVolume">showVolume</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool showVolume</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_OnDestroy.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.OnDestroy%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L208">View Source</a>
+  </span>
+  <a id="MonitorComponents_MonitorAudioSource_OnDestroy_" data-uid="MonitorComponents.MonitorAudioSource.OnDestroy*"></a>
+  <h4 id="MonitorComponents_MonitorAudioSource_OnDestroy" data-uid="MonitorComponents.MonitorAudioSource.OnDestroy">OnDestroy()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnDestroy()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_OnDisable.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.OnDisable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L203">View Source</a>
+  </span>
+  <a id="MonitorComponents_MonitorAudioSource_OnDisable_" data-uid="MonitorComponents.MonitorAudioSource.OnDisable*"></a>
+  <h4 id="MonitorComponents_MonitorAudioSource_OnDisable" data-uid="MonitorComponents.MonitorAudioSource.OnDisable">OnDisable()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnDisable()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_OnEnable.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.OnEnable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L198">View Source</a>
+  </span>
+  <a id="MonitorComponents_MonitorAudioSource_OnEnable_" data-uid="MonitorComponents.MonitorAudioSource.OnEnable*"></a>
+  <h4 id="MonitorComponents_MonitorAudioSource_OnEnable" data-uid="MonitorComponents.MonitorAudioSource.OnEnable">OnEnable()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void OnEnable()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_RemoveMonitors.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.RemoveMonitors%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L213">View Source</a>
+  </span>
+  <a id="MonitorComponents_MonitorAudioSource_RemoveMonitors_" data-uid="MonitorComponents.MonitorAudioSource.RemoveMonitors*"></a>
+  <h4 id="MonitorComponents_MonitorAudioSource_RemoveMonitors" data-uid="MonitorComponents.MonitorAudioSource.RemoveMonitors">RemoveMonitors()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void RemoveMonitors()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_Update.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L174">View Source</a>
+  </span>
+  <a id="MonitorComponents_MonitorAudioSource_Update_" data-uid="MonitorComponents.MonitorAudioSource.Update*"></a>
+  <h4 id="MonitorComponents_MonitorAudioSource_Update" data-uid="MonitorComponents.MonitorAudioSource.Update">Update()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Update()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource_UpdateMonitors.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource.UpdateMonitors%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L62">View Source</a>
+  </span>
+  <a id="MonitorComponents_MonitorAudioSource_UpdateMonitors_" data-uid="MonitorComponents.MonitorAudioSource.UpdateMonitors*"></a>
+  <h4 id="MonitorComponents_MonitorAudioSource_UpdateMonitors" data-uid="MonitorComponents.MonitorAudioSource.UpdateMonitors">UpdateMonitors()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void UpdateMonitors()</code></pre>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_EnsureComponent__1_UnityEngine_Component_">ComponentExtensions.EnsureComponent&lt;T&gt;(Component)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_FindAncestorComponent__1_UnityEngine_Component_System_Boolean_">ComponentExtensions.FindAncestorComponent&lt;T&gt;(Component, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_">UnityObjectExtensions.Destroy(Object, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_">UnityObjectExtensions.IsNull(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=MonitorComponents_MonitorAudioSource.md&amp;value=---%0Auid%3A%20MonitorComponents.MonitorAudioSource%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Assets/ThirdParty/Monitor Components/Scripts/MonitorAudioSource.cs/#L10" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

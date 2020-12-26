@@ -1,0 +1,774 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Struct LeapQuaternion
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Struct LeapQuaternion
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Leap.LeapQuaternion">
+  
+  
+  <h1 id="Leap_LeapQuaternion" data-uid="Leap.LeapQuaternion" class="text-break">Struct LeapQuaternion
+  </h1>
+  <div class="markdown level0 summary"><p>The LeapQuaternion struct represents a rotation in three-dimensional space.
+@since 3.1.2</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.iequatable-1">IEquatable</a>&lt;<a class="xref" href="Leap.LeapQuaternion.html">LeapQuaternion</a>&gt;</div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Leap.html">Leap</a></h6>
+  <h6><strong>Assembly</strong>: LeapMotion.LeapCSharp.dll</h6>
+  <h5 id="Leap_LeapQuaternion_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">[Serializable]
+public struct LeapQuaternion : IEquatable&lt;LeapQuaternion&gt;</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion__ctor_Leap_LeapQuaternion_.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.%23ctor(Leap.LeapQuaternion)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L37">View Source</a>
+  </span>
+  <a id="Leap_LeapQuaternion__ctor_" data-uid="Leap.LeapQuaternion.#ctor*"></a>
+  <h4 id="Leap_LeapQuaternion__ctor_Leap_LeapQuaternion_" data-uid="Leap.LeapQuaternion.#ctor(Leap.LeapQuaternion)">LeapQuaternion(LeapQuaternion)</h4>
+  <div class="markdown level1 summary"><p>Copies the specified LeapQuaternion.
+@since 3.1.2</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LeapQuaternion(LeapQuaternion quaternion)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.LeapQuaternion.html">LeapQuaternion</a></td>
+        <td><span class="parametername">quaternion</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion__ctor_LeapInternal_LEAP_QUATERNION_.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.%23ctor(LeapInternal.LEAP_QUATERNION)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L49">View Source</a>
+  </span>
+  <a id="Leap_LeapQuaternion__ctor_" data-uid="Leap.LeapQuaternion.#ctor*"></a>
+  <h4 id="Leap_LeapQuaternion__ctor_LeapInternal_LEAP_QUATERNION_" data-uid="Leap.LeapQuaternion.#ctor(LeapInternal.LEAP_QUATERNION)">LeapQuaternion(LEAP_QUATERNION)</h4>
+  <div class="markdown level1 summary"><p>Copies the specified LEAP_QUATERNION.
+@since 3.1.2</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LeapQuaternion(LEAP_QUATERNION quaternion)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="LeapInternal.LEAP_QUATERNION.html">LEAP_QUATERNION</a></td>
+        <td><span class="parametername">quaternion</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion__ctor_System_Single_System_Single_System_Single_System_Single_.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.%23ctor(System.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L25">View Source</a>
+  </span>
+  <a id="Leap_LeapQuaternion__ctor_" data-uid="Leap.LeapQuaternion.#ctor*"></a>
+  <h4 id="Leap_LeapQuaternion__ctor_System_Single_System_Single_System_Single_System_Single_" data-uid="Leap.LeapQuaternion.#ctor(System.Single,System.Single,System.Single,System.Single)">LeapQuaternion(Single, Single, Single, Single)</h4>
+  <div class="markdown level1 summary"><p>Creates a new LeapQuaternion with the specified component values.
+@since 3.1.2</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LeapQuaternion(float x, float y, float z, float w)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">x</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">y</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">z</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">w</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion_Identity.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.Identity%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L141">View Source</a>
+  </span>
+  <h4 id="Leap_LeapQuaternion_Identity" data-uid="Leap.LeapQuaternion.Identity">Identity</h4>
+  <div class="markdown level1 summary"><p>The identity quaternion.
+@since 3.1.2</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly LeapQuaternion Identity</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.LeapQuaternion.html">LeapQuaternion</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion_w.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.w%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L91">View Source</a>
+  </span>
+  <h4 id="Leap_LeapQuaternion_w" data-uid="Leap.LeapQuaternion.w">w</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float w</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion_x.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.x%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L88">View Source</a>
+  </span>
+  <h4 id="Leap_LeapQuaternion_x" data-uid="Leap.LeapQuaternion.x">x</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float x</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion_y.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.y%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L89">View Source</a>
+  </span>
+  <h4 id="Leap_LeapQuaternion_y" data-uid="Leap.LeapQuaternion.y">y</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float y</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion_z.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.z%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L90">View Source</a>
+  </span>
+  <h4 id="Leap_LeapQuaternion_z" data-uid="Leap.LeapQuaternion.z">z</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float z</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion_Magnitude.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.Magnitude%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L97">View Source</a>
+  </span>
+  <a id="Leap_LeapQuaternion_Magnitude_" data-uid="Leap.LeapQuaternion.Magnitude*"></a>
+  <h4 id="Leap_LeapQuaternion_Magnitude" data-uid="Leap.LeapQuaternion.Magnitude">Magnitude</h4>
+  <div class="markdown level1 summary"><p>The magnitude, or length, of this quaternion.
+@since 3.1.2</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float Magnitude { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion_MagnitudeSquared.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.MagnitudeSquared%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L105">View Source</a>
+  </span>
+  <a id="Leap_LeapQuaternion_MagnitudeSquared_" data-uid="Leap.LeapQuaternion.MagnitudeSquared*"></a>
+  <h4 id="Leap_LeapQuaternion_MagnitudeSquared" data-uid="Leap.LeapQuaternion.MagnitudeSquared">MagnitudeSquared</h4>
+  <div class="markdown level1 summary"><p>The square of the magnitude, or length, of this quaternion.
+@since 3.1.2</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float MagnitudeSquared { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion_Normalized.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.Normalized%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L113">View Source</a>
+  </span>
+  <a id="Leap_LeapQuaternion_Normalized_" data-uid="Leap.LeapQuaternion.Normalized*"></a>
+  <h4 id="Leap_LeapQuaternion_Normalized" data-uid="Leap.LeapQuaternion.Normalized">Normalized</h4>
+  <div class="markdown level1 summary"><p>A normalized copy of this quaternion.
+@since 3.1.2</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LeapQuaternion Normalized { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.LeapQuaternion.html">LeapQuaternion</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion_Equals_Leap_LeapQuaternion_.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.Equals(Leap.LeapQuaternion)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L69">View Source</a>
+  </span>
+  <a id="Leap_LeapQuaternion_Equals_" data-uid="Leap.LeapQuaternion.Equals*"></a>
+  <h4 id="Leap_LeapQuaternion_Equals_Leap_LeapQuaternion_" data-uid="Leap.LeapQuaternion.Equals(Leap.LeapQuaternion)">Equals(LeapQuaternion)</h4>
+  <div class="markdown level1 summary"><p>Compare LeapQuaternion equality component-wise.
+@since 3.1.2</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(LeapQuaternion v)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.LeapQuaternion.html">LeapQuaternion</a></td>
+        <td><span class="parametername">v</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L72">View Source</a>
+  </span>
+  <a id="Leap_LeapQuaternion_Equals_" data-uid="Leap.LeapQuaternion.Equals*"></a>
+  <h4 id="Leap_LeapQuaternion_Equals_System_Object_" data-uid="Leap.LeapQuaternion.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></td>
+        <td><span class="parametername">obj</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.valuetype.equals#System_ValueType_Equals_System_Object_">ValueType.Equals(Object)</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion_GetHashCode.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L143">View Source</a>
+  </span>
+  <a id="Leap_LeapQuaternion_GetHashCode_" data-uid="Leap.LeapQuaternion.GetHashCode*"></a>
+  <h4 id="Leap_LeapQuaternion_GetHashCode" data-uid="Leap.LeapQuaternion.GetHashCode">GetHashCode()</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override int GetHashCode()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.int32">Int32</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.valuetype.gethashcode#System_ValueType_GetHashCode">ValueType.GetHashCode()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion_IsValid.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.IsValid%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L81">View Source</a>
+  </span>
+  <a id="Leap_LeapQuaternion_IsValid_" data-uid="Leap.LeapQuaternion.IsValid*"></a>
+  <h4 id="Leap_LeapQuaternion_IsValid" data-uid="Leap.LeapQuaternion.IsValid">IsValid()</h4>
+  <div class="markdown level1 summary"><p>Returns true if all of the quaternion's components are finite.  If any
+component is NaN or infinite, then this returns false.
+@since 3.1.2</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool IsValid()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion_Multiply_Leap_LeapQuaternion_.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.Multiply(Leap.LeapQuaternion)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L129">View Source</a>
+  </span>
+  <a id="Leap_LeapQuaternion_Multiply_" data-uid="Leap.LeapQuaternion.Multiply*"></a>
+  <h4 id="Leap_LeapQuaternion_Multiply_Leap_LeapQuaternion_" data-uid="Leap.LeapQuaternion.Multiply(Leap.LeapQuaternion)">Multiply(LeapQuaternion)</h4>
+  <div class="markdown level1 summary"><p>Concatenates the rotation described by this quaternion with the one provided
+and returns the result.
+@since 3.1.2</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public LeapQuaternion Multiply(LeapQuaternion rhs)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.LeapQuaternion.html">LeapQuaternion</a></td>
+        <td><span class="parametername">rhs</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.LeapQuaternion.html">LeapQuaternion</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion_ToString.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L61">View Source</a>
+  </span>
+  <a id="Leap_LeapQuaternion_ToString_" data-uid="Leap.LeapQuaternion.ToString*"></a>
+  <h4 id="Leap_LeapQuaternion_ToString" data-uid="Leap.LeapQuaternion.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Returns a string containing this quaternion in a human readable format: (x, y, z).
+@since 3.1.2</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.valuetype.tostring#System_ValueType_ToString">ValueType.ToString()</a></div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.iequatable-1">System.IEquatable&lt;T&gt;</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_LeapQuaternion.md&amp;value=---%0Auid%3A%20Leap.LeapQuaternion%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/LeapQuaternion.cs/#L17" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

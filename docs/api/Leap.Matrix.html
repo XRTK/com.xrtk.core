@@ -1,0 +1,1266 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Struct Matrix
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Struct Matrix
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="Leap.Matrix">
+  
+  
+  <h1 id="Leap_Matrix" data-uid="Leap.Matrix" class="text-break">Struct Matrix
+  </h1>
+  <div class="markdown level0 summary"><p>The Matrix struct represents a transformation matrix.</p>
+<p>To use this struct to transform a Vector, construct a matrix containing the
+desired transformation and then use the Matrix::transformPoint() or
+Matrix.TransformDirection() functions to apply the transform.</p>
+<p>Transforms can be combined by multiplying two or more transform matrices using
+the * operator.
+@since 1.0</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.valuetype.equals#System_ValueType_Equals_System_Object_">ValueType.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.valuetype.gethashcode#System_ValueType_GetHashCode">ValueType.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="Leap.html">Leap</a></h6>
+  <h6><strong>Assembly</strong>: LeapMotion.LeapCSharp.dll</h6>
+  <h5 id="Leap_Matrix_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public struct Matrix</code></pre>
+  </div>
+  <h3 id="constructors">Constructors
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix__ctor_Leap_Matrix_.md&amp;value=---%0Auid%3A%20Leap.Matrix.%23ctor(Leap.Matrix)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L129">View Source</a>
+  </span>
+  <a id="Leap_Matrix__ctor_" data-uid="Leap.Matrix.#ctor*"></a>
+  <h4 id="Leap_Matrix__ctor_Leap_Matrix_" data-uid="Leap.Matrix.#ctor(Leap.Matrix)">Matrix(Matrix)</h4>
+  <div class="markdown level1 summary"><p>Constructs a copy of the specified Matrix object.
+@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Matrix(Matrix other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Matrix.html">Matrix</a></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix__ctor_Leap_Vector_Leap_Vector_Leap_Vector_.md&amp;value=---%0Auid%3A%20Leap.Matrix.%23ctor(Leap.Vector%2CLeap.Vector%2CLeap.Vector)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L141">View Source</a>
+  </span>
+  <a id="Leap_Matrix__ctor_" data-uid="Leap.Matrix.#ctor*"></a>
+  <h4 id="Leap_Matrix__ctor_Leap_Vector_Leap_Vector_Leap_Vector_" data-uid="Leap.Matrix.#ctor(Leap.Vector,Leap.Vector,Leap.Vector)">Matrix(Vector, Vector, Vector)</h4>
+  <div class="markdown level1 summary"><p>Constructs a transformation matrix from the specified basis vectors.
+@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Matrix(Vector xBasis, Vector yBasis, Vector zBasis)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td><span class="parametername">xBasis</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td><span class="parametername">yBasis</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td><span class="parametername">zBasis</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix__ctor_Leap_Vector_Leap_Vector_Leap_Vector_Leap_Vector_.md&amp;value=---%0Auid%3A%20Leap.Matrix.%23ctor(Leap.Vector%2CLeap.Vector%2CLeap.Vector%2CLeap.Vector)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L153">View Source</a>
+  </span>
+  <a id="Leap_Matrix__ctor_" data-uid="Leap.Matrix.#ctor*"></a>
+  <h4 id="Leap_Matrix__ctor_Leap_Vector_Leap_Vector_Leap_Vector_Leap_Vector_" data-uid="Leap.Matrix.#ctor(Leap.Vector,Leap.Vector,Leap.Vector,Leap.Vector)">Matrix(Vector, Vector, Vector, Vector)</h4>
+  <div class="markdown level1 summary"><p>Constructs a transformation matrix from the specified basis and translation vectors.
+@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Matrix(Vector xBasis, Vector yBasis, Vector zBasis, Vector origin)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td><span class="parametername">xBasis</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td><span class="parametername">yBasis</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td><span class="parametername">zBasis</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td><span class="parametername">origin</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix__ctor_Leap_Vector_System_Single_.md&amp;value=---%0Auid%3A%20Leap.Matrix.%23ctor(Leap.Vector%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L165">View Source</a>
+  </span>
+  <a id="Leap_Matrix__ctor_" data-uid="Leap.Matrix.#ctor*"></a>
+  <h4 id="Leap_Matrix__ctor_Leap_Vector_System_Single_" data-uid="Leap.Matrix.#ctor(Leap.Vector,System.Single)">Matrix(Vector, Single)</h4>
+  <div class="markdown level1 summary"><p>Constructs a transformation matrix specifying a rotation around the specified vector.
+@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Matrix(Vector axis, float angleRadians)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td><span class="parametername">axis</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">angleRadians</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix__ctor_Leap_Vector_System_Single_Leap_Vector_.md&amp;value=---%0Auid%3A%20Leap.Matrix.%23ctor(Leap.Vector%2CSystem.Single%2CLeap.Vector)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L179">View Source</a>
+  </span>
+  <a id="Leap_Matrix__ctor_" data-uid="Leap.Matrix.#ctor*"></a>
+  <h4 id="Leap_Matrix__ctor_Leap_Vector_System_Single_Leap_Vector_" data-uid="Leap.Matrix.#ctor(Leap.Vector,System.Single,Leap.Vector)">Matrix(Vector, Single, Vector)</h4>
+  <div class="markdown level1 summary"><p>Constructs a transformation matrix specifying a rotation around the specified vector
+and a translation by the specified vector.
+@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Matrix(Vector axis, float angleRadians, Vector translation)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td><span class="parametername">axis</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">angleRadians</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td><span class="parametername">translation</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix__ctor_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_.md&amp;value=---%0Auid%3A%20Leap.Matrix.%23ctor(System.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L188">View Source</a>
+  </span>
+  <a id="Leap_Matrix__ctor_" data-uid="Leap.Matrix.#ctor*"></a>
+  <h4 id="Leap_Matrix__ctor_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_" data-uid="Leap.Matrix.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">Matrix(Single, Single, Single, Single, Single, Single, Single, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Matrix(float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m00</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m01</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m02</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m11</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m12</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m20</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m21</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m22</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix__ctor_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_.md&amp;value=---%0Auid%3A%20Leap.Matrix.%23ctor(System.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L204">View Source</a>
+  </span>
+  <a id="Leap_Matrix__ctor_" data-uid="Leap.Matrix.#ctor*"></a>
+  <h4 id="Leap_Matrix__ctor_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_System_Single_" data-uid="Leap.Matrix.#ctor(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">Matrix(Single, Single, Single, Single, Single, Single, Single, Single, Single, Single, Single, Single)</h4>
+  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Matrix(float m00, float m01, float m02, float m10, float m11, float m12, float m20, float m21, float m22, float m30, float m31, float m32)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m00</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m01</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m02</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m10</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m11</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m12</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m20</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m21</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m22</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m30</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m31</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">m32</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="fields">Fields
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_Identity.md&amp;value=---%0Auid%3A%20Leap.Matrix.Identity%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L338">View Source</a>
+  </span>
+  <h4 id="Leap_Matrix_Identity" data-uid="Leap.Matrix.Identity">Identity</h4>
+  <div class="markdown level1 summary"><p>Returns the identity matrix specifying no translation, rotation, and scale.
+@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static readonly Matrix Identity</code></pre>
+  </div>
+  <h5 class="fieldValue">Field Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Matrix.html">Matrix</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_origin.md&amp;value=---%0Auid%3A%20Leap.Matrix.origin%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L332">View Source</a>
+  </span>
+  <a id="Leap_Matrix_origin_" data-uid="Leap.Matrix.origin*"></a>
+  <h4 id="Leap_Matrix_origin" data-uid="Leap.Matrix.origin">origin</h4>
+  <div class="markdown level1 summary"><p>The translation factors for all three axes.
+@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector origin { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_xBasis.md&amp;value=---%0Auid%3A%20Leap.Matrix.xBasis%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L314">View Source</a>
+  </span>
+  <a id="Leap_Matrix_xBasis_" data-uid="Leap.Matrix.xBasis*"></a>
+  <h4 id="Leap_Matrix_xBasis" data-uid="Leap.Matrix.xBasis">xBasis</h4>
+  <div class="markdown level1 summary"><p>The basis vector for the x-axis.
+@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector xBasis { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_yBasis.md&amp;value=---%0Auid%3A%20Leap.Matrix.yBasis%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L320">View Source</a>
+  </span>
+  <a id="Leap_Matrix_yBasis_" data-uid="Leap.Matrix.yBasis*"></a>
+  <h4 id="Leap_Matrix_yBasis" data-uid="Leap.Matrix.yBasis">yBasis</h4>
+  <div class="markdown level1 summary"><p>The basis vector for the y-axis.
+@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector yBasis { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_zBasis.md&amp;value=---%0Auid%3A%20Leap.Matrix.zBasis%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L326">View Source</a>
+  </span>
+  <a id="Leap_Matrix_zBasis_" data-uid="Leap.Matrix.zBasis*"></a>
+  <h4 id="Leap_Matrix_zBasis" data-uid="Leap.Matrix.zBasis">zBasis</h4>
+  <div class="markdown level1 summary"><p>The basis vector for the z-axis.
+@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector zBasis { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_Equals_Leap_Matrix_.md&amp;value=---%0Auid%3A%20Leap.Matrix.Equals(Leap.Matrix)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L296">View Source</a>
+  </span>
+  <a id="Leap_Matrix_Equals_" data-uid="Leap.Matrix.Equals*"></a>
+  <h4 id="Leap_Matrix_Equals_Leap_Matrix_" data-uid="Leap.Matrix.Equals(Leap.Matrix)">Equals(Matrix)</h4>
+  <div class="markdown level1 summary"><p>Compare Matrix equality component-wise.
+@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public bool Equals(Matrix other)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Matrix.html">Matrix</a></td>
+        <td><span class="parametername">other</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_RigidInverse.md&amp;value=---%0Auid%3A%20Leap.Matrix.RigidInverse%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L272">View Source</a>
+  </span>
+  <a id="Leap_Matrix_RigidInverse_" data-uid="Leap.Matrix.RigidInverse*"></a>
+  <h4 id="Leap_Matrix_RigidInverse" data-uid="Leap.Matrix.RigidInverse">RigidInverse()</h4>
+  <div class="markdown level1 summary"><p>Performs a matrix inverse if the matrix consists entirely of rigid
+transformations (translations and rotations).  If the matrix is not rigid,
+this operation will not represent an inverse.</p>
+<p>Note that all matrices that are directly returned by the API are rigid.</p>
+<p>@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Matrix RigidInverse()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Matrix.html">Matrix</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_SetRotation_Leap_Vector_System_Single_.md&amp;value=---%0Auid%3A%20Leap.Matrix.SetRotation(Leap.Vector%2CSystem.Single)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L231">View Source</a>
+  </span>
+  <a id="Leap_Matrix_SetRotation_" data-uid="Leap.Matrix.SetRotation*"></a>
+  <h4 id="Leap_Matrix_SetRotation_Leap_Vector_System_Single_" data-uid="Leap.Matrix.SetRotation(Leap.Vector,System.Single)">SetRotation(Vector, Single)</h4>
+  <div class="markdown level1 summary"><p>Sets this transformation matrix to represent a rotation around the specified vector.</p>
+<p>This function erases any previous rotation and scale transforms applied
+to this matrix, but does not affect translation.</p>
+<p>@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void SetRotation(Vector axis, float angleRadians)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td><span class="parametername">axis</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a></td>
+        <td><span class="parametername">angleRadians</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_ToArray3x3.md&amp;value=---%0Auid%3A%20Leap.Matrix.ToArray3x3%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L68">View Source</a>
+  </span>
+  <a id="Leap_Matrix_ToArray3x3_" data-uid="Leap.Matrix.ToArray3x3*"></a>
+  <h4 id="Leap_Matrix_ToArray3x3" data-uid="Leap.Matrix.ToArray3x3">ToArray3x3()</h4>
+  <div class="markdown level1 summary"><p>Convert this matrix to an array containing 9 float values in row-major order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float[] ToArray3x3()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_ToArray3x3_System_Double___.md&amp;value=---%0Auid%3A%20Leap.Matrix.ToArray3x3(System.Double%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L52">View Source</a>
+  </span>
+  <a id="Leap_Matrix_ToArray3x3_" data-uid="Leap.Matrix.ToArray3x3*"></a>
+  <h4 id="Leap_Matrix_ToArray3x3_System_Double___" data-uid="Leap.Matrix.ToArray3x3(System.Double[])">ToArray3x3(Double[])</h4>
+  <div class="markdown level1 summary"><p>Copy this matrix to the specified array containing 9 double values in row-major order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double[] ToArray3x3(double[] output)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a>[]</td>
+        <td><span class="parametername">output</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_ToArray3x3_System_Single___.md&amp;value=---%0Auid%3A%20Leap.Matrix.ToArray3x3(System.Single%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L36">View Source</a>
+  </span>
+  <a id="Leap_Matrix_ToArray3x3_" data-uid="Leap.Matrix.ToArray3x3*"></a>
+  <h4 id="Leap_Matrix_ToArray3x3_System_Single___" data-uid="Leap.Matrix.ToArray3x3(System.Single[])">ToArray3x3(Single[])</h4>
+  <div class="markdown level1 summary"><p>Copy this matrix to the specified array of 9 float values in row-major order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float[] ToArray3x3(float[] output)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a>[]</td>
+        <td><span class="parametername">output</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_ToArray4x4.md&amp;value=---%0Auid%3A%20Leap.Matrix.ToArray4x4%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L121">View Source</a>
+  </span>
+  <a id="Leap_Matrix_ToArray4x4_" data-uid="Leap.Matrix.ToArray4x4*"></a>
+  <h4 id="Leap_Matrix_ToArray4x4" data-uid="Leap.Matrix.ToArray4x4">ToArray4x4()</h4>
+  <div class="markdown level1 summary"><p>Convert this matrix to an array containing 16 float values in row-major order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float[] ToArray4x4()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_ToArray4x4_System_Double___.md&amp;value=---%0Auid%3A%20Leap.Matrix.ToArray4x4(System.Double%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L98">View Source</a>
+  </span>
+  <a id="Leap_Matrix_ToArray4x4_" data-uid="Leap.Matrix.ToArray4x4*"></a>
+  <h4 id="Leap_Matrix_ToArray4x4_System_Double___" data-uid="Leap.Matrix.ToArray4x4(System.Double[])">ToArray4x4(Double[])</h4>
+  <div class="markdown level1 summary"><p>Copy this matrix to the specified array of 16 double values in row-major order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public double[] ToArray4x4(double[] output)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a>[]</td>
+        <td><span class="parametername">output</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.double">Double</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_ToArray4x4_System_Single___.md&amp;value=---%0Auid%3A%20Leap.Matrix.ToArray4x4(System.Single%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L75">View Source</a>
+  </span>
+  <a id="Leap_Matrix_ToArray4x4_" data-uid="Leap.Matrix.ToArray4x4*"></a>
+  <h4 id="Leap_Matrix_ToArray4x4_System_Single___" data-uid="Leap.Matrix.ToArray4x4(System.Single[])">ToArray4x4(Single[])</h4>
+  <div class="markdown level1 summary"><p>Copy this matrix to the specified array of 16 float values in row-major order.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public float[] ToArray4x4(float[] output)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a>[]</td>
+        <td><span class="parametername">output</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a>[]</td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_ToString.md&amp;value=---%0Auid%3A%20Leap.Matrix.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L306">View Source</a>
+  </span>
+  <a id="Leap_Matrix_ToString_" data-uid="Leap.Matrix.ToString*"></a>
+  <h4 id="Leap_Matrix_ToString" data-uid="Leap.Matrix.ToString">ToString()</h4>
+  <div class="markdown level1 summary"><p>Write the matrix to a string in a human readable format.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override string ToString()</code></pre>
+  </div>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.string">String</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.valuetype.tostring#System_ValueType_ToString">ValueType.ToString()</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_TransformDirection_Leap_Vector_.md&amp;value=---%0Auid%3A%20Leap.Matrix.TransformDirection(Leap.Vector)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L259">View Source</a>
+  </span>
+  <a id="Leap_Matrix_TransformDirection_" data-uid="Leap.Matrix.TransformDirection*"></a>
+  <h4 id="Leap_Matrix_TransformDirection_Leap_Vector_" data-uid="Leap.Matrix.TransformDirection(Leap.Vector)">TransformDirection(Vector)</h4>
+  <div class="markdown level1 summary"><p>Transforms a vector with this matrix by transforming its rotation and
+scale only.
+@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector TransformDirection(Vector direction)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td><span class="parametername">direction</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_TransformPoint_Leap_Vector_.md&amp;value=---%0Auid%3A%20Leap.Matrix.TransformPoint(Leap.Vector)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L250">View Source</a>
+  </span>
+  <a id="Leap_Matrix_TransformPoint_" data-uid="Leap.Matrix.TransformPoint*"></a>
+  <h4 id="Leap_Matrix_TransformPoint_Leap_Vector_" data-uid="Leap.Matrix.TransformPoint(Leap.Vector)">TransformPoint(Vector)</h4>
+  <div class="markdown level1 summary"><p>Transforms a vector with this matrix by transforming its rotation,
+scale, and translation.</p>
+<p>Translation is applied after rotation and scale.</p>
+<p>@since 1.0</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public Vector TransformPoint(Vector point)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td><span class="parametername">point</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Vector.html">Vector</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="operators">Operators
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix_op_Multiply_Leap_Matrix_Leap_Matrix_.md&amp;value=---%0Auid%3A%20Leap.Matrix.op_Multiply(Leap.Matrix%2CLeap.Matrix)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L29">View Source</a>
+  </span>
+  <a id="Leap_Matrix_op_Multiply_" data-uid="Leap.Matrix.op_Multiply*"></a>
+  <h4 id="Leap_Matrix_op_Multiply_Leap_Matrix_Leap_Matrix_" data-uid="Leap.Matrix.op_Multiply(Leap.Matrix,Leap.Matrix)">Multiply(Matrix, Matrix)</h4>
+  <div class="markdown level1 summary"><p>Multiply two matrices.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Matrix operator *(Matrix m1, Matrix m2)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Matrix.html">Matrix</a></td>
+        <td><span class="parametername">m1</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Leap.Matrix.html">Matrix</a></td>
+        <td><span class="parametername">m2</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="Leap.Matrix.html">Matrix</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=Leap_Matrix.md&amp;value=---%0Auid%3A%20Leap.Matrix%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/update/docs/XRTK-Core/Packages/com.xrtk.ultraleap/Runtime/Plugins/LeapCSharp/Matrix.cs/#L24" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

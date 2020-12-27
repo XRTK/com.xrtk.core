@@ -38,7 +38,7 @@ Pointers provide an invisible line between your controller (or head) in to a sce
 
 ![](../../images/Configuration/InputSystem/GlobalPointerSettings.png)
 
-## Global Hands Settings
+## Global Hand Settings
 
 Providing default settings that control both the rendering and physical nature of hands. This also holds the default pose configuration available to hands while in use in the environment.
 
@@ -120,7 +120,7 @@ There is a lot of configuration available in the Input System, most of which wil
 ### Related Articles
 
 * [Getting Started](../00-GettingStarted.md#getting-started-with-the-mixed-reality-toolkit)
-* [Configuration](../02-Configuration.md#getting-started-with-the-mixed-reality-toolkit)
+* [Configuration](../02-Configuration.md)
 * [XRTK Platforms](../platforms/platforms.md)
 
 ---

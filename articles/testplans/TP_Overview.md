@@ -9,15 +9,15 @@ These test plans can serve as a reference when reporting bugs and help developer
 
 ### XRTK.SDK
 
-- [TP-00 Import SDK And Configure](./TP-00_Import-XRTK.SDK-And_Configure.md)
+- [TP-00 Import SDK And Configure](TP-00_Import-XRTK.SDK-And_Configure.md)
 
 ### XRTK.Oculus
 
-- [TP-01 Test Oculus Platform](./TP-01_Import-XRTK.Oculus.md)
+- [TP-01 Test Oculus Platform](TP-01_Import-XRTK.Oculus.md)
 
 ### XRTK.WindowsMixedReality
 
-- [TP-01 Test Windows Mixed Reality Platform](./TP-02_Import-XRTK.UWP.md)
+- [TP-01 Test Windows Mixed Reality Platform](TP-02_Import-XRTK.WMR.md)
 
 ## XR subsystem notices
 

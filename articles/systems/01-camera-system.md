@@ -29,7 +29,6 @@ Each specific camera profile (as shown below) holds the configuration options to
 
 ![](../../images/Configuration/CameraSystem/CameraSystemOptions.png)
 
-
 ## Further notes
 
 For the most part, you should not need to alter the camera system configuration unless required, or you wish to manually add a new Camera System platform manually (Each platform should automatically install the required Camera System for each platform)
@@ -39,7 +38,7 @@ For the most part, you should not need to alter the camera system configuration 
 ### Related Articles
 
 * [Getting Started](../00-GettingStarted.md#getting-started-with-the-mixed-reality-toolkit)
-* [Configuration](../02-Configuration.md#getting-started-with-the-mixed-reality-toolkit)
+* [Configuration](../02-Configuration.md)
 * [XRTK Platforms](../platforms/platforms.md)
 
 ---

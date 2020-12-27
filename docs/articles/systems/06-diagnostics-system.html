@@ -72,15 +72,15 @@
 <p>The Diagnostics system a very useful tool for showing critical diagnostics information in a running scene, it comes in very handy while debugging and sourcing scene based performance issues.</p>
 <h2 id="mixed-reality-root-configuration-system">Mixed Reality Root configuration system</h2>
 <p>In the Root configuration, the specific implementation for the Diagnostics system is selected, which defaults to the XRTK implementation for the Diagnostics system.  In most cases this does not need to be touched, however, advanced users can replace it with their own system if they wish.</p>
-<p><img src="../../images/Configuration/Diagnostics/DiagnosticsSystemProfile.png" alt=""></p>
+<p><img src="../../images/Configuration/Diagnostics/DiagnosticsSystemProfile.png" alt="Diagnostics System Profile"></p>
 <h2 id="diagnostics-system-platform-configuration">Diagnostics System platform configuration</h2>
 <p>The Diagnostics system for the XRTK allows for different instruments to be called to display information in the diagnostics prefab.</p>
-<p><img src="../../images/Configuration/Diagnostics/DiagnosticsSystemSettings.png" alt=""></p>
+<p><img src="../../images/Configuration/Diagnostics/DiagnosticsSystemSettings.png" alt="Diagnostics System Settings"></p>
 <p>The basic configuration simply identifies the prefab to be displayed in the scene when activated and whether the window is active on startup or called programmatically later.</p>
 <h2 id="diagnostics-providers">Diagnostics Providers</h2>
 <p>The diagnostic framework is very dynamic allowing different instruments to be added to collect data and customized so that they are run either for all platforms or just specific ones.  New instruments can be added, so long as they derive to the Diagnostics Providers <code>BaseMixedRealityDiagnosticsDataProvider</code> implementation.  Simply view the existing implementations for reference.</p>
 <p>Additionally, the prefab used will need to provide the capability to display the data, review the default DiagnosticsPrefab for detail.</p>
-<p><img src="../../images/Configuration/Diagnostics/DiagnosticsDataProviders.png" alt=""></p>
+<p><img src="../../images/Configuration/Diagnostics/DiagnosticsDataProviders.png" alt="Diagnostics Data Providers"></p>
 <blockquote>
 <p>Check out all the <a href="../platforms/platforms.html">Platforms that are available to configure</a>.</p>
 </blockquote>
@@ -90,7 +90,7 @@
 <h3 id="related-articles">Related Articles</h3>
 <ul>
 <li><a href="../00-GettingStarted.html#getting-started-with-the-mixed-reality-toolkit">Getting Started</a></li>
-<li><a href="../02-Configuration.html#getting-started-with-the-mixed-reality-toolkit">Configuration</a></li>
+<li><a href="../02-Configuration.html">Configuration</a></li>
 <li><a href="../platforms/platforms.html">XRTK Platforms</a></li>
 </ul>
 <hr>

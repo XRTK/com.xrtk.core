@@ -6,13 +6,13 @@ The Diagnostics system a very useful tool for showing critical diagnostics infor
 
 In the Root configuration, the specific implementation for the Diagnostics system is selected, which defaults to the XRTK implementation for the Diagnostics system.  In most cases this does not need to be touched, however, advanced users can replace it with their own system if they wish.
 
-![](../../images/Configuration/Diagnostics/DiagnosticsSystemProfile.png)
+![Diagnostics System Profile](../../images/Configuration/Diagnostics/DiagnosticsSystemProfile.png)
 
 ## Diagnostics System platform configuration
 
 The Diagnostics system for the XRTK allows for different instruments to be called to display information in the diagnostics prefab.
 
-![](../../images/Configuration/Diagnostics/DiagnosticsSystemSettings.png)
+![Diagnostics System Settings](../../images/Configuration/Diagnostics/DiagnosticsSystemSettings.png)
 
 The basic configuration simply identifies the prefab to be displayed in the scene when activated and whether the window is active on startup or called programmatically later.
 
@@ -22,7 +22,7 @@ The diagnostic framework is very dynamic allowing different instruments to be ad
 
 Additionally, the prefab used will need to provide the capability to display the data, review the default DiagnosticsPrefab for detail.
 
-![](../../images/Configuration/Diagnostics/DiagnosticsDataProviders.png)
+![Diagnostics Data Providers](../../images/Configuration/Diagnostics/DiagnosticsDataProviders.png)
 
 > Check out all the [Platforms that are available to configure](../platforms/platforms.md).
 
@@ -35,7 +35,7 @@ For the most part, you should not need to alter the Diagnostics system configura
 ### Related Articles
 
 * [Getting Started](../00-GettingStarted.md#getting-started-with-the-mixed-reality-toolkit)
-* [Configuration](../02-Configuration.md#getting-started-with-the-mixed-reality-toolkit)
+* [Configuration](../02-Configuration.md)
 * [XRTK Platforms](../platforms/platforms.md)
 
 ---

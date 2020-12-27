@@ -5,17 +5,18 @@
         {
           "src": "../",
           "exclude": [
+            "**/.github/**",
+            "**/.vs/**",
             "**/Builds/**",
+            "**/docs/**",
+            "**/docfx_project/**",
             "**/Library/**",
             "**/Logs/**",
             "**/Packages/**",
             "**/ProjectSettings/**",
             "**/Temp/**",
             "**/ThirdParty/**",
-            "**/.vs/**",
-            "**/.github/**",
-            "**/docs/**",
-            "**/docfx_project/**"
+            "**/Submodules/**"
           ],
           "files": [
             "**.sln",
@@ -24,6 +25,7 @@
         }
       ],
       "dest": "../api",
+      "filter": "filterConfig.yml",
       "disableGitFeatures": false,
       "disableDefaultFilter": false
     }

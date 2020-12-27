@@ -10,7 +10,7 @@ Currently the Magic Leap platform requires the Magic Leap XR Plugin to actually 
 
 ## 2. How do I create a new Mixed Reality Toolkit Project?
 
-We recommend walking through the [Getting Started guide](00-GettingStarted.md) for a detailed understanding to get up and running.
+We recommend walking through the [Getting Started Guide](../00-GettingStarted.md) for a detailed understanding to get up and running.
 
 However, here is the TL;DR short version:
 

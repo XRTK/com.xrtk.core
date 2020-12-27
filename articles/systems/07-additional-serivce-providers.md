@@ -11,7 +11,7 @@ For more information on creating services that can be hosted within the Mixed Re
 
 In the Root configuration, the Additional Service Providers profile provides an entry point to register any and all additional services with the Mixed Reality Toolkit.
 
-![](../../images/Configuration/AdditionalServices/AdditionalServiceProvidersProfile.png)
+![Additional Service Providers Profile](../../images/Configuration/AdditionalServices/AdditionalServiceProvidersProfile.png)
 
 ## Additional Service Providers
 
@@ -21,7 +21,7 @@ From the Additional Service Providers profile, you can register all the services
 * Profile - If your service requires a profile to configure, this will automatically display below the `Instanced Type` and allow you to provide or create a new profile for the service.  This is optional if your service does not require additional configuration.
 * Runtime Platforms - Select which platforms your service should run on.
 
-![](../../images/Configuration/AdditionalServices/AdditionalServiceProvidersList.png.png)
+![Additional Service Providers List](../../images/Configuration/AdditionalServices/AdditionalServiceProvidersList.png)
 
 > Check out all the [Platforms that are available to configure](../platforms/platforms.md).
 
@@ -45,12 +45,13 @@ or
 ```
 
 This is available anywhere and at anytime within your project, but should be avoided in Update calls, better to get a reference on startup and store that reference.
+
 ---
 
 ### Related Articles
 
 * [Getting Started](../00-GettingStarted.md#getting-started-with-the-mixed-reality-toolkit)
-* [Configuration](../02-Configuration.md#getting-started-with-the-mixed-reality-toolkit)
+* [Configuration](../02-Configuration.md)
 * [XRTK Platforms](../platforms/platforms.md)
 * [A Practical Deep Dive into the Mixed Reality Framework](https://stephen-hodgson.medium.com/a-practical-deep-dive-into-the-mixed-reality-framework-a26401edb2aa)
 

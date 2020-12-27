@@ -77,7 +77,7 @@
 </blockquote>
 <h2 id="mixed-reality-root-configuration-system">Mixed Reality Root configuration system</h2>
 <p>In the Root configuration, the Additional Service Providers profile provides an entry point to register any and all additional services with the Mixed Reality Toolkit.</p>
-<p><img src="../../images/Configuration/AdditionalServices/AdditionalServiceProvidersProfile.png" alt=""></p>
+<p><img src="../../images/Configuration/AdditionalServices/AdditionalServiceProvidersProfile.png" alt="Additional Service Providers Profile"></p>
 <h2 id="additional-service-providers">Additional Service Providers</h2>
 <p>From the Additional Service Providers profile, you can register all the services you have created or obtained for use in the Mixed Reality Toolkit.  Once your service is available in your project, it will automatically be identified through its use of the <code>IMixedRealityExtensionService</code> interface and be available to add below.  To register a service in your project, simply add a new entry to the list and configure the following:</p>
 <ul>
@@ -85,7 +85,7 @@
 <li>Profile - If your service requires a profile to configure, this will automatically display below the <code>Instanced Type</code> and allow you to provide or create a new profile for the service.  This is optional if your service does not require additional configuration.</li>
 <li>Runtime Platforms - Select which platforms your service should run on.</li>
 </ul>
-<p><img src="../../images/Configuration/AdditionalServices/AdditionalServiceProvidersList.png.png" alt=""></p>
+<p><img src="../../images/Configuration/AdditionalServices/AdditionalServiceProvidersList.png" alt="Additional Service Providers List"></p>
 <blockquote>
 <p>Check out all the <a href="../platforms/platforms.html">Platforms that are available to configure</a>.</p>
 </blockquote>
@@ -101,11 +101,12 @@
         //Do something because the service was not found
     }
 </code></pre>
-<h2 id="this-is-available-anywhere-and-at-anytime-within-your-project-but-should-be-avoided-in-update-calls-better-to-get-a-reference-on-startup-and-store-that-reference">This is available anywhere and at anytime within your project, but should be avoided in Update calls, better to get a reference on startup and store that reference.</h2>
+<p>This is available anywhere and at anytime within your project, but should be avoided in Update calls, better to get a reference on startup and store that reference.</p>
+<hr>
 <h3 id="related-articles">Related Articles</h3>
 <ul>
 <li><a href="../00-GettingStarted.html#getting-started-with-the-mixed-reality-toolkit">Getting Started</a></li>
-<li><a href="../02-Configuration.html#getting-started-with-the-mixed-reality-toolkit">Configuration</a></li>
+<li><a href="../02-Configuration.html">Configuration</a></li>
 <li><a href="../platforms/platforms.html">XRTK Platforms</a></li>
 <li><a href="https://stephen-hodgson.medium.com/a-practical-deep-dive-into-the-mixed-reality-framework-a26401edb2aa">A Practical Deep Dive into the Mixed Reality Framework</a></li>
 </ul>

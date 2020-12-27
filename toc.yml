@@ -1,9 +1,9 @@
 - name: Articles
   href: articles/
-  homepage: articles/00-GettingStarted.md
+  topicHref: articles/00-GettingStarted.md
 - name: API Reference
   href: api/
-  homepage: api/index.md
+  topicHref: api/index.md
 - name: Source Code
   href: https://github.com/XRTK/XRTK-Core
 - name: Releases

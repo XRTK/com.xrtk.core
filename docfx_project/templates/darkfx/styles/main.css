@@ -153,6 +153,7 @@ article h4 {
 }
 
 .alert>p {
+    color: #ccd5dc;
     margin-bottom: 0;
     padding: 5px 10px;
     border-bottom: 1px solid;
@@ -199,6 +200,7 @@ pre {
 }
 
 code{
+    color: #ccd5dc;
     background: #1e1e1e !important;
     border-radius: 2px;
 }
@@ -296,11 +298,12 @@ input#search-query:focus {
 }
 
 blockquote {
+    color: #ccd5dc;
     padding: 10px 20px;
     margin: 0 0 10px;
     font-size: 110%;
+    font-style: italic;
     border-left: 5px solid #69696e;
-    color: #69696e;
 }
 
 .pagination>.disabled>a, .pagination>.disabled>a:focus, .pagination>.disabled>a:hover, .pagination>.disabled>span, .pagination>.disabled>span:focus, .pagination>.disabled>span:hover {

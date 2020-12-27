@@ -31,7 +31,7 @@ For the most part, you should not need to alter the boundary system configuratio
 ### Related Articles
 
 * [Getting Started](../00-GettingStarted.md#getting-started-with-the-mixed-reality-toolkit)
-* [Configuration](../02-Configuration.md#getting-started-with-the-mixed-reality-toolkit)
+* [Configuration](../02-Configuration.md)
 * [XRTK Platforms](../platforms/platforms.md)
 
 ---

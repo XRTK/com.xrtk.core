@@ -53,7 +53,7 @@ Our preferred deployment approach is to use the [Unity Package Manager](01-Downl
 
 > **Note:** Some prefabs and assets require TextMesh Pro, meaning you have to have the TextMesh Pro package installed and the assets in your project `Window -> TextMeshPro -> Import TMP Essential Resources`.
 
-Simply follow along with the UPM Installation instructions detailed in the [Downloading the XRTK](01-DownloadingTheXRTK.md#register_upm_server_in_project_settings) guide to add the XRTK scoped registry and install the relevant packages.
+Simply follow along with the UPM Installation instructions detailed in the [Downloading the XRTK](01-DownloadingTheXRTK.md) guide to add the XRTK scoped registry and install the relevant packages.
 
 ### It all starts with the SDK
 

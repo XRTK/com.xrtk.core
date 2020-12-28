@@ -14,14 +14,13 @@ namespace XRTK.Interfaces.Providers.SpatialObservers
     {
         /// <summary>
         /// Gets or sets the level of detail, as a MixedRealitySpatialAwarenessMeshLevelOfDetail value, for the returned spatial mesh.
-        /// Setting this value to Custom, implies that the developer is specifying a custom value for MeshTrianglesPerCubicMeter. 
+        /// Setting this value to Custom, implies that the developer is specifying a custom value for MeshTrianglesPerCubicMeter.
         /// </summary>
-        /// <remarks>Specifying any other value will cause <see cref="MeshTrianglesPerCubicMeter"/> to be overwritten.</remarks>
         SpatialAwarenessMeshLevelOfDetail MeshLevelOfDetail { get; }
 
         /// <summary>
         /// Gets or sets a value indicating if the spatial awareness system to generate normal for the returned meshes
-        /// as some platforms may not support returning normal along with the spatial mesh. 
+        /// as some platforms may not support returning normal along with the spatial mesh.
         /// </summary>
         bool MeshRecalculateNormals { get; }
 

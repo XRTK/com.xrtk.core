@@ -38,9 +38,9 @@ pr:
     - Submodules/*
     exclude:
       - '*'
+      - XRTK-Core/Packages/com.xrtk.core/package.json
       - XRTK-Core/Packages/com.xrtk.core/README.md
       - XRTK-Core/Packages/com.xrtk.core/LICENSE.md
-      - XRTK-Core/Packages/com.xrtk.core/.github/*
 
 trigger:
   batch: true
@@ -55,9 +55,9 @@ trigger:
       - Submodules/*
     exclude:
       - '*'
+      - XRTK-Core/Packages/com.xrtk.core/package.json
       - XRTK-Core/Packages/com.xrtk.core/README.md
       - XRTK-Core/Packages/com.xrtk.core/LICENSE.md
-      - XRTK-Core/Packages/com.xrtk.core/.github/*
 
 extends:
   template: common.yml@pipeline_repo

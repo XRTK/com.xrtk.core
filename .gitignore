@@ -91,6 +91,7 @@ XRTK-Core/Packages/com.xrtk.oculus
 XRTK-Core/Packages/com.xrtk.sdk
 XRTK-Core/Packages/com.xrtk.steamvr
 XRTK-Core/Packages/com.xrtk.ultraleap
+XRTK-Core/Packages/com.xrtk.webxr
 XRTK-Core/Packages/com.xrtk.wmr
 XRTK-Core/Assets/XRTK.Examples
 XRTK-Core/Assets/XRTK.Examples.meta
@@ -112,5 +113,7 @@ XRTK-Core/Assets/XRTK.Generated/SteamVR
 XRTK-Core/Assets/XRTK.Generated/SteamVR.meta
 XRTK-Core/Assets/XRTK.Generated/Ultraleap
 XRTK-Core/Assets/XRTK.Generated/Ultraleap.meta
+XRTK-Core/Assets/XRTK.Generated/WebXR
+XRTK-Core/Assets/XRTK.Generated/WebXR.meta
 XRTK-Core/Assets/XRTK.Generated/WindowsMixedReality
 XRTK-Core/Assets/XRTK.Generated/WindowsMixedReality.meta

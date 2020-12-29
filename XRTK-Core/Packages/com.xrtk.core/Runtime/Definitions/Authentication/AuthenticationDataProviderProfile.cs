@@ -3,9 +3,13 @@
 
 using UnityEngine;
 using XRTK.Attributes;
+using XRTK.Interfaces.Authentication;
 
 namespace XRTK.Definitions.Authentication
 {
+    /// <summary>
+    /// The configuration profile for <see cref="IMixedRealityAuthenticationDataProvider"/>.
+    /// </summary>
     public class AuthenticationDataProviderProfile : BaseMixedRealityProfile
     {
         [SerializeField]
@@ -44,8 +48,8 @@ namespace XRTK.Definitions.Authentication
         /// </summary>
         public string RedirectUrl => redirectUrl;
 
-        [Prefab]
         [SerializeField]
+        [Prefab(typeof(IAuthenticationHandler))]
         [Tooltip("The login prefab to display when the user is logging in.")]
         private GameObject loginPrefab = null;
 

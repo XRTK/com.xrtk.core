@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System.Threading.Tasks;
+using XRTK.Definitions.Authentication;
 
 namespace XRTK.Interfaces.Authentication
 {
@@ -11,6 +12,11 @@ namespace XRTK.Interfaces.Authentication
     public interface IMixedRealityAuthenticationDataProvider : IMixedRealityDataProvider
     {
         /// <summary>
+        /// The <see cref="IAuthenticatedAccount"/>. Null if no user is logged in.
+        /// </summary>
+        IAuthenticatedAccount AuthenticatedAccount { get; }
+
+        /// <summary>
         /// Is there currently a valid user logged in with a valid token?
         /// </summary>
         bool IsUserLoggedIn { get; }
@@ -18,13 +24,21 @@ namespace XRTK.Interfaces.Authentication
         /// <summary>
         /// Start Login task.
         /// </summary>
+        /// <remarks>
+        /// This may prompt the user to authenticate with the <see cref="AuthenticationDataProviderProfile.LoginPrefab"/>
+        /// </remarks>
         /// <returns>Completed <see cref="Task"/>.</returns>
-        Task LoginAsync();
+        Task<IAuthenticatedAccount> LoginAsync();
 
         /// <summary>
         /// Log the user out.
         /// </summary>
         /// <param name="reAuthenticate"></param>
         void Logout(bool reAuthenticate = true);
+
+        /// <summary>
+        /// Removes all account tokens from the cache.
+        /// </summary>
+        void ClearTokenCache();
     }
 }

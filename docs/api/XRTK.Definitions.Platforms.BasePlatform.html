@@ -139,11 +139,12 @@ public abstract class BasePlatform : IMixedRealityPlatform</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Platforms_BasePlatform_IsAvailable.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Platforms.BasePlatform.IsAvailable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/dev/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Platforms/BasePlatform.cs/#L16">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Platforms/BasePlatform.cs/#L16">View Source</a>
   </span>
   <a id="XRTK_Definitions_Platforms_BasePlatform_IsAvailable_" data-uid="XRTK.Definitions.Platforms.BasePlatform.IsAvailable*"></a>
   <h4 id="XRTK_Definitions_Platforms_BasePlatform_IsAvailable" data-uid="XRTK.Definitions.Platforms.BasePlatform.IsAvailable">IsAvailable</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>Is this platform currently available?</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -169,11 +170,12 @@ public abstract class BasePlatform : IMixedRealityPlatform</code></pre>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Platforms_BasePlatform_IsBuildTargetAvailable.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Platforms.BasePlatform.IsBuildTargetAvailable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/dev/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Platforms/BasePlatform.cs/#L19">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Platforms/BasePlatform.cs/#L19">View Source</a>
   </span>
   <a id="XRTK_Definitions_Platforms_BasePlatform_IsBuildTargetAvailable_" data-uid="XRTK.Definitions.Platforms.BasePlatform.IsBuildTargetAvailable*"></a>
   <h4 id="XRTK_Definitions_Platforms_BasePlatform_IsBuildTargetAvailable" data-uid="XRTK.Definitions.Platforms.BasePlatform.IsBuildTargetAvailable">IsBuildTargetAvailable</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The this platform build target available?</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -194,16 +196,20 @@ public abstract class BasePlatform : IMixedRealityPlatform</code></pre>
       </tr>
     </tbody>
   </table>
+  <h5 id="XRTK_Definitions_Platforms_BasePlatform_IsBuildTargetAvailable_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Only returns true in editor.</p>
+</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Platforms_BasePlatform_PlatformOverrides.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Platforms.BasePlatform.PlatformOverrides%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/dev/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Platforms/BasePlatform.cs/#L22">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Platforms/BasePlatform.cs/#L22">View Source</a>
   </span>
   <a id="XRTK_Definitions_Platforms_BasePlatform_PlatformOverrides_" data-uid="XRTK.Definitions.Platforms.BasePlatform.PlatformOverrides*"></a>
   <h4 id="XRTK_Definitions_Platforms_BasePlatform_PlatformOverrides" data-uid="XRTK.Definitions.Platforms.BasePlatform.PlatformOverrides">PlatformOverrides</h4>
-  <div class="markdown level1 summary"></div>
+  <div class="markdown level1 summary"><p>The list of platforms that this specific platform will override and make the others return not available.</p>
+</div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
@@ -230,6 +236,9 @@ public abstract class BasePlatform : IMixedRealityPlatform</code></pre>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
+  <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
   <div>
@@ -246,7 +255,7 @@ public abstract class BasePlatform : IMixedRealityPlatform</code></pre>
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Platforms_BasePlatform.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Platforms.BasePlatform%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/dev/docs/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Platforms/BasePlatform.cs/#L12" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Platforms/BasePlatform.cs/#L12" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>

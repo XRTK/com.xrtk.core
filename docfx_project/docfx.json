@@ -48,13 +48,8 @@
       {
         "src":"../",
         "files": [
-          "articles/**.yml",
-          "articles/**.md"
-        ]
-      },
-      {
-        "src":"../",
-        "files": [
+          "articles/**.md",
+          "articles/**/toc.yml",
           "toc.yml",
           "*.md"
         ]

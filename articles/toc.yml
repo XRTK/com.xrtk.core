@@ -1,5 +1,7 @@
 - name: Getting Started
   items:
+    - name: Welcome
+      href: ../Readme.md
     - name: Getting started with the XRTK
       href: 00-GettingStarted.md
     - name: Downloading the XRTK

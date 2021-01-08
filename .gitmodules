@@ -28,6 +28,9 @@
 [submodule "Submodules/Ultraleap"]
 	path = Submodules/Ultraleap
 	url = https://github.com/XRTK/Ultraleap.git
+[submodule "Submodules/WebXR"]
+	path = Submodules/WebXR
+	url = https://github.com/XRTK/WebXR.git
 [submodule "Submodules/WindowsMixedReality"]
 	path = Submodules/WindowsMixedReality
 	url = https://github.com/XRTK/WindowsMixedReality.git

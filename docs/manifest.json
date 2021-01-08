@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "C:/azp1/w/1/s/docfx_project",
+  "source_base_path": "C:/azp2/w/1/s/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -3873,7 +3873,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Controllers.BaseMixedRealityControllerDataProviderProfile.html",
-          "hash": "ieOuf/yq8t8LTf8NB67xOg=="
+          "hash": "yXxpgSapMT5BOOSfCz2Jmg=="
         }
       },
       "is_incremental": false,
@@ -4905,7 +4905,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Platforms.BasePlatform.html",
-          "hash": "MNW8WtsJy4em2M6ZT12AAA=="
+          "hash": "hpC+DgGpvvUEbMM7DyF25A=="
         }
       },
       "is_incremental": false,
@@ -5033,6 +5033,18 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.Definitions.Platforms.WebXRPlatform.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.Definitions.Platforms.WebXRPlatform.html",
+          "hash": "CRtcXPMCczFARGPOo1v5Zg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "../api/XRTK.Definitions.Platforms.WindowsStandalonePlatform.yml",
       "output": {
         ".html": {
@@ -5049,7 +5061,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Definitions.Platforms.html",
-          "hash": "FVgHD4E4EI+wVRJg2hvCKg=="
+          "hash": "xuLolfABCxM7Ksce1KNnaQ=="
         }
       },
       "is_incremental": false,
@@ -10617,7 +10629,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.CameraSystem.BaseCameraDataProvider.html",
-          "hash": "45Sq/h3h73XZc+ht6gtcmw=="
+          "hash": "Tk3UPS90Cjgg1vr4zGzM+A=="
         }
       },
       "is_incremental": false,
@@ -10641,7 +10653,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.BaseController.html",
-          "hash": "7+Dyo63rLOh2R1G6Dmh4nw=="
+          "hash": "uqmUafXenwJlUwIdAL89+w=="
         }
       },
       "is_incremental": false,
@@ -10653,7 +10665,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Providers.Controllers.BaseControllerDataProvider.html",
-          "hash": "4LyM0iZoekfFMLqXGPAhhA=="
+          "hash": "CfXTtpAy73lQHVpNnArGyw=="
         }
       },
       "is_incremental": false,
@@ -13701,7 +13713,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Build.BuildInfo.html",
-          "hash": "w8GLhaiVBI1cNBPXRlM0Ew=="
+          "hash": "ld6B4dwIdcioHgOsmJuogw=="
         }
       },
       "is_incremental": false,
@@ -13725,7 +13737,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Build.IBuildInfo.html",
-          "hash": "hipNC4jZhX9UiHG+QJLqcA=="
+          "hash": "dHn2dL0OjJkvUnGRCPR1Uw=="
         }
       },
       "is_incremental": false,
@@ -13785,7 +13797,7 @@
       "output": {
         ".html": {
           "relative_path": "api/XRTK.Utilities.Build.UwpBuildInfo.html",
-          "hash": "ZHa82sbao4iTTTKLkkASmA=="
+          "hash": "5SrSo66qzH6oX/k8wkOi6A=="
         }
       },
       "is_incremental": false,
@@ -15749,6 +15761,114 @@
     },
     {
       "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.WebXR.Editor.WebXRPathFinder.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.WebXR.Editor.WebXRPathFinder.html",
+          "hash": "BuhEpnlmjbF8sDEBj3PXFQ=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.WebXR.Editor.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.WebXR.Editor.html",
+          "hash": "IOwcEPR5OzpTWB9CzVN+/Q=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.WebXR.Profiles.WebXRControllerDataProviderProfile.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.WebXR.Profiles.WebXRControllerDataProviderProfile.html",
+          "hash": "DN9PveTbdxz52WlSvqFaBA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.WebXR.Profiles.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.WebXR.Profiles.html",
+          "hash": "Y87fu0JyoREq6adIAyPkMg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.WebXR.Providers.CameraSystem.WebXRCameraDataProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.WebXR.Providers.CameraSystem.WebXRCameraDataProvider.html",
+          "hash": "PiXrSKtF5cBQwpLLuCGxzg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.WebXR.Providers.CameraSystem.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.WebXR.Providers.CameraSystem.html",
+          "hash": "q/DRl8kDJMwYyMkW+BeLlA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.WebXR.Providers.Controllers.WebXRController.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.WebXR.Providers.Controllers.WebXRController.html",
+          "hash": "nxdoniO2jKvqwCX4ECRf4w=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.WebXR.Providers.Controllers.WebXRControllerDataProvider.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.WebXR.Providers.Controllers.WebXRControllerDataProvider.html",
+          "hash": "8//0cYeqeoDy44ge/z0XWg=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
+      "source_relative_path": "../api/XRTK.WebXR.Providers.Controllers.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/XRTK.WebXR.Providers.Controllers.html",
+          "hash": "uvkEn3sq/jmjvEYkQogmEA=="
+        }
+      },
+      "is_incremental": false,
+      "version": ""
+    },
+    {
+      "type": "ManagedReference",
       "source_relative_path": "../api/XRTK.WindowsMixedReality.Editor.Providers.SpatialAwarenessSystem.SpatialObservers.WindowsMixedRealityControllerDataProviderProfileInspector.yml",
       "output": {
         ".html": {
@@ -16041,7 +16161,7 @@
       "output": {
         ".html": {
           "relative_path": "api/toc.html",
-          "hash": "Z/5NuKvm5KJEcmbSclg0yw=="
+          "hash": "cNA9OSvzpq4a6ueIJ+tvgw=="
         }
       },
       "is_incremental": false,
@@ -17475,7 +17595,7 @@
         "ManagedReferenceDocumentProcessor": {
           "can_incremental": false,
           "incrementalPhase": "build",
-          "total_file_count": 1329,
+          "total_file_count": 1339,
           "skipped_file_count": 0
         },
         "ResourceDocumentProcessor": {

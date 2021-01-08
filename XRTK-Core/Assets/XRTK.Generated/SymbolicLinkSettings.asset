@@ -79,3 +79,9 @@ MonoBehaviour:
   - sourceRelativePath: /Submodules/SteamVR/XRTK.SteamVR/Packages/com.xrtk.steamvr/Profiles~
     targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/SteamVR/Profiles
     isActive: 1
+  - sourceRelativePath: /Submodules/WebXR/XRTK.WebXR/Packages/com.xrtk.webxr
+    targetRelativePath: /XRTK-Core/Packages/com.xrtk.webxr
+    isActive: 1
+  - sourceRelativePath: /Submodules/WebXR/XRTK.WebXR/Packages/com.xrtk.webxr/Profiles~
+    targetRelativePath: /XRTK-Core/Assets/XRTK.Generated/WebXR/Profiles
+    isActive: 1

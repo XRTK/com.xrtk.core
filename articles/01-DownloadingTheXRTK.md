@@ -2,7 +2,7 @@
 
 The Mixed Reality Toolkit provides many ways for users and developers to get access to the Mixed Reality Toolkit and the various extensions/platforms it supports.  These methods are tuned to use the common patterns most familiar to Unity developers, these include:
 
-* [Unity Package Manager interface](#register_upm_server_in_project_settings) - Use the Unity Package Manager interface to register and install the XRTK.
+* [Unity Package Manager](#register-upm-server-in-project-settings) - Use the Unity Package Manager interface to register and install the XRTK.
 * [Automatic UPM installation](#automatic-upm-installation) - Automatically register the Mixed Reality Toolkit's upm server and install selected packages using the package seed found in the [release assets dropdown](https://github.com/XRTK/XRTK-Core/releases).
 * [Manual UPM installation](#manual-upm-installation) - Register the Mixed Reality Toolkit upm server in your manifest and manually download modules al la carte.
 * [UPM via GitHub](https://docs.unity3d.com/Manual/upm-ui-giturl.html) - The Unity Package Manager can load a package from GitHub using the git url.

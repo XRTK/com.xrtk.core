@@ -111,25 +111,28 @@ namespace XRTK.Definitions
                 {
                     runtimePlatforms = new List<IMixedRealityPlatform>();
 
-                    for (int i = 0; i < MixedRealityToolkit.AvailablePlatforms.Count; i++)
+                    for (int i = 0; i < platformEntries?.RuntimePlatforms?.Length; i++)
                     {
-                        var availablePlatform = MixedRealityToolkit.AvailablePlatforms[i];
-                        var availablePlatformType = availablePlatform.GetType();
+                        var platformType = platformEntries.RuntimePlatforms[i]?.Type;
 
-                        for (int j = 0; j < platformEntries?.RuntimePlatforms?.Length; j++)
+                        if (platformType == null)
                         {
-                            var platformType = platformEntries.RuntimePlatforms[j]?.Type;
-
-                            if (platformType == null)
-                            {
-                                continue;
-                            }
-
-                            if (availablePlatformType == platformType)
-                            {
-                                runtimePlatforms.Add(availablePlatform);
-                            }
+                            continue;
                         }
+
+                        IMixedRealityPlatform platformInstance;
+
+                        try
+                        {
+                            platformInstance = Activator.CreateInstance(platformType) as IMixedRealityPlatform;
+                        }
+                        catch (Exception e)
+                        {
+                            Debug.LogError(e);
+                            continue;
+                        }
+
+                        runtimePlatforms.Add(platformInstance);
                     }
                 }
 

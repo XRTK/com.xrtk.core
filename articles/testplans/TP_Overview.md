@@ -5,15 +5,27 @@ These test plans can serve as a reference when reporting bugs and help developer
 
 ---
 
-### Test Plans
+## Test Plans
 
-#### XRTK.SDK
+### XRTK.SDK
 
-- [TP-00 Import SDK And Configure](./TP-00_Import-XRTK.SDK-And_Configure.md)
+- [TP-00 Import SDK And Configure](TP-00_Import-XRTK.SDK-And_Configure.md)
 
-#### XRTK.Oculus
+### XRTK.Oculus
 
-- [TP-01 Import Oculus Without SDK](./TP-01_Import-XRTK.Oculus-Without-XRTK.SDK.md)
+- [TP-01 Test Oculus Platform](TP-01_Import-XRTK.Oculus.md)
+
+### XRTK.WindowsMixedReality
+
+- [TP-01 Test Windows Mixed Reality Platform](TP-02_Import-XRTK.WMR.md)
+
+## XR subsystem notices
+
+> For VR settings in XRTK 0.2, we restrict to using the Legaxy XR settings available in
+>
+> `Edit -> Project Settings -> Player -> Other -> XR Settings`
+>
+> The new XR Subsystem is out of scope for this release.
 
 ---
 

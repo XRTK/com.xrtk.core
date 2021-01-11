@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class AllPlatforms
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -89,6 +89,9 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
+      <a class="xref" href="XRTK.Definitions.Platforms.BasePlatform.html#XRTK_Definitions_Platforms_BasePlatform_PlatformOverrides">BasePlatform.PlatformOverrides</a>
+    </div>
+    <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
     </div>
     <div>
@@ -114,7 +117,8 @@
   <h6><strong>Assembly</strong>: XRTK.dll</h6>
   <h5 id="XRTK_Definitions_Platforms_AllPlatforms_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class AllPlatforms : BasePlatform, IMixedRealityPlatform</code></pre>
+    <pre><code class="lang-csharp hljs">[Guid(&quot;C6BF6315-2E9C-4602-827D-2D4871D29422&quot;)]
+public sealed class AllPlatforms : BasePlatform, IMixedRealityPlatform</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -123,7 +127,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Platforms_AllPlatforms_IsAvailable.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Platforms.AllPlatforms.IsAvailable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/Platforms/AllPlatforms.cs/#L12">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Platforms/AllPlatforms.cs/#L13">View Source</a>
   </span>
   <a id="XRTK_Definitions_Platforms_AllPlatforms_IsAvailable_" data-uid="XRTK.Definitions.Platforms.AllPlatforms.IsAvailable*"></a>
   <h4 id="XRTK_Definitions_Platforms_AllPlatforms_IsAvailable" data-uid="XRTK.Definitions.Platforms.AllPlatforms.IsAvailable">IsAvailable</h4>
@@ -151,11 +155,50 @@
   </table>
   <h5 class="overrides">Overrides</h5>
   <div><a class="xref" href="XRTK.Definitions.Platforms.BasePlatform.html#XRTK_Definitions_Platforms_BasePlatform_IsAvailable">BasePlatform.IsAvailable</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Platforms_AllPlatforms_IsBuildTargetAvailable.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Platforms.AllPlatforms.IsBuildTargetAvailable%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Platforms/AllPlatforms.cs/#L16">View Source</a>
+  </span>
+  <a id="XRTK_Definitions_Platforms_AllPlatforms_IsBuildTargetAvailable_" data-uid="XRTK.Definitions.Platforms.AllPlatforms.IsBuildTargetAvailable*"></a>
+  <h4 id="XRTK_Definitions_Platforms_AllPlatforms_IsBuildTargetAvailable" data-uid="XRTK.Definitions.Platforms.AllPlatforms.IsBuildTargetAvailable">IsBuildTargetAvailable</h4>
+  <div class="markdown level1 summary"><p>The this platform build target available?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool IsBuildTargetAvailable { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.Definitions.Platforms.BasePlatform.html#XRTK_Definitions_Platforms_BasePlatform_IsBuildTargetAvailable">BasePlatform.IsBuildTargetAvailable</a></div>
+  <h5 id="XRTK_Definitions_Platforms_AllPlatforms_IsBuildTargetAvailable_remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>Only returns true in editor.</p>
+</div>
   <h3 id="implements">Implements</h3>
   <div>
       <a class="xref" href="XRTK.Interfaces.IMixedRealityPlatform.html">IMixedRealityPlatform</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
@@ -173,12 +216,13 @@
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Definitions_Platforms_AllPlatforms.md&amp;value=---%0Auid%3A%20XRTK.Definitions.Platforms.AllPlatforms%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Definitions/Platforms/AllPlatforms.cs/#L9" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Definitions/Platforms/AllPlatforms.cs/#L9" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

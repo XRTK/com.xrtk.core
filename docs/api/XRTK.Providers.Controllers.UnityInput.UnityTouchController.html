@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class UnityTouchController
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -94,7 +94,16 @@
       <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_DefaultRightHandedInteractions">BaseController.DefaultRightHandedInteractions</a>
     </div>
     <div>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_GripPoseOffset">BaseController.GripPoseOffset</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_Name">BaseController.Name</a>
+    </div>
+    <div>
       <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_Enabled">BaseController.Enabled</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_ControllerDataProvider">BaseController.ControllerDataProvider</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_TrackingState">BaseController.TrackingState</a>
@@ -121,16 +130,22 @@
       <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_Interactions">BaseController.Interactions</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_UpdateController">BaseController.UpdateController()</a>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_AngularVelocity">BaseController.AngularVelocity</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_SetupConfiguration_System_Type_">BaseController.SetupConfiguration(Type)</a>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_Velocity">BaseController.Velocity</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_UpdateController">BaseController.UpdateController()</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_AssignControllerMappings_XRTK_Definitions_Devices_MixedRealityInteractionMapping___">BaseController.AssignControllerMappings(MixedRealityInteractionMapping[])</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_TryRenderControllerModel_System_Type_System_Byte___">BaseController.TryRenderControllerModel(Type, Byte[])</a>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_TryRenderControllerModel_System_Byte___System_Boolean_">BaseController.TryRenderControllerModel(Byte[], Boolean)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_TryRenderControllerModelAsync_System_Byte___System_Boolean_">BaseController.TryRenderControllerModelAsync(Byte[], Boolean)</a>
     </div>
     <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_">Object.Equals(Object)</a>
@@ -158,24 +173,41 @@
   <h6><strong>Assembly</strong>: XRTK.dll</h6>
   <h5 id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class UnityTouchController : BaseController, IMixedRealityController</code></pre>
+    <pre><code class="lang-csharp hljs">[Guid(&quot;98F97EDA-4418-4B4B-88E9-E4F1F0734E4E&quot;)]
+public class UnityTouchController : BaseController, IMixedRealityController</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityTouchController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityTouchController.%23ctor(XRTK.Definitions.Devices.TrackingState%2CXRTK.Definitions.Utilities.Handedness%2CXRTK.Interfaces.InputSystem.IMixedRealityInputSource%2CXRTK.Definitions.Devices.MixedRealityInteractionMapping%5B%5D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityTouchController__ctor.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityTouchController.%23ctor%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityTouchController.cs/#L15">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityTouchController.cs/#L17">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityTouchController__ctor_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.#ctor*"></a>
-  <h4 id="XRTK_Providers_Controllers_UnityInput_UnityTouchController__ctor_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Interfaces_InputSystem_IMixedRealityInputSource_XRTK_Definitions_Devices_MixedRealityInteractionMapping___" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.#ctor(XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Interfaces.InputSystem.IMixedRealityInputSource,XRTK.Definitions.Devices.MixedRealityInteractionMapping[])">UnityTouchController(TrackingState, Handedness, IMixedRealityInputSource, MixedRealityInteractionMapping[])</h4>
+  <h4 id="XRTK_Providers_Controllers_UnityInput_UnityTouchController__ctor" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.#ctor">UnityTouchController()</h4>
   <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public UnityTouchController(TrackingState trackingState, Handedness controllerHandedness, IMixedRealityInputSource inputSource = null, MixedRealityInteractionMapping[] interactions = null)</code></pre>
+    <pre><code class="lang-csharp hljs">public UnityTouchController()</code></pre>
+  </div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityTouchController__ctor_XRTK_Interfaces_Providers_Controllers_IMixedRealityControllerDataProvider_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_Controllers_MixedRealityControllerMappingProfile_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityTouchController.%23ctor(XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerDataProvider%2CXRTK.Definitions.Devices.TrackingState%2CXRTK.Definitions.Utilities.Handedness%2CXRTK.Definitions.Controllers.MixedRealityControllerMappingProfile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityTouchController.cs/#L20">View Source</a>
+  </span>
+  <a id="XRTK_Providers_Controllers_UnityInput_UnityTouchController__ctor_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.#ctor*"></a>
+  <h4 id="XRTK_Providers_Controllers_UnityInput_UnityTouchController__ctor_XRTK_Interfaces_Providers_Controllers_IMixedRealityControllerDataProvider_XRTK_Definitions_Devices_TrackingState_XRTK_Definitions_Utilities_Handedness_XRTK_Definitions_Controllers_MixedRealityControllerMappingProfile_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.#ctor(XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerDataProvider,XRTK.Definitions.Devices.TrackingState,XRTK.Definitions.Utilities.Handedness,XRTK.Definitions.Controllers.MixedRealityControllerMappingProfile)">UnityTouchController(IMixedRealityControllerDataProvider, TrackingState, Handedness, MixedRealityControllerMappingProfile)</h4>
+  <div class="markdown level1 summary"><p>Creates a new instance of a controller.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public UnityTouchController(IMixedRealityControllerDataProvider controllerDataProvider, TrackingState trackingState, Handedness controllerHandedness, MixedRealityControllerMappingProfile controllerMappingProfile)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -188,23 +220,26 @@
     </thead>
     <tbody>
       <tr>
+        <td><a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerDataProvider.html">IMixedRealityControllerDataProvider</a></td>
+        <td><span class="parametername">controllerDataProvider</span></td>
+        <td><p>The <a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityControllerDataProvider.html">IMixedRealityControllerDataProvider</a> this controller belongs to.</p>
+</td>
+      </tr>
+      <tr>
         <td><a class="xref" href="XRTK.Definitions.Devices.TrackingState.html">TrackingState</a></td>
         <td><span class="parametername">trackingState</span></td>
-        <td></td>
+        <td><p>The initial tracking state of this controller.</p>
+</td>
       </tr>
       <tr>
         <td><a class="xref" href="XRTK.Definitions.Utilities.Handedness.html">Handedness</a></td>
         <td><span class="parametername">controllerHandedness</span></td>
-        <td></td>
+        <td><p>The controller's handedness.</p>
+</td>
       </tr>
       <tr>
-        <td><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityInputSource.html">IMixedRealityInputSource</a></td>
-        <td><span class="parametername">inputSource</span></td>
-        <td></td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="XRTK.Definitions.Devices.MixedRealityInteractionMapping.html">MixedRealityInteractionMapping</a>[]</td>
-        <td><span class="parametername">interactions</span></td>
+        <td><a class="xref" href="XRTK.Definitions.Controllers.MixedRealityControllerMappingProfile.html">MixedRealityControllerMappingProfile</a></td>
+        <td><span class="parametername">controllerMappingProfile</span></td>
         <td></td>
       </tr>
     </tbody>
@@ -216,7 +251,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityTouchController_DefaultInteractions.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityTouchController.DefaultInteractions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityTouchController.cs/#L48">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityTouchController.cs/#L53">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_DefaultInteractions_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.DefaultInteractions*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_DefaultInteractions" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.DefaultInteractions">DefaultInteractions</h4>
@@ -249,7 +284,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityTouchController_Lifetime.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityTouchController.Lifetime%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityTouchController.cs/#L45">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityTouchController.cs/#L50">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_Lifetime_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.Lifetime*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_Lifetime" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.Lifetime">Lifetime</h4>
@@ -280,7 +315,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityTouchController_ManipulationThreshold.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityTouchController.ManipulationThreshold%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityTouchController.cs/#L30">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityTouchController.cs/#L35">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_ManipulationThreshold_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.ManipulationThreshold*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_ManipulationThreshold" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.ManipulationThreshold">ManipulationThreshold</h4>
@@ -311,7 +346,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityTouchController_MaxTapContactTime.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityTouchController.MaxTapContactTime%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityTouchController.cs/#L25">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityTouchController.cs/#L30">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_MaxTapContactTime_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.MaxTapContactTime*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_MaxTapContactTime" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.MaxTapContactTime">MaxTapContactTime</h4>
@@ -342,7 +377,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityTouchController_ScreenPointRay.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityTouchController.ScreenPointRay%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityTouchController.cs/#L40">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityTouchController.cs/#L45">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_ScreenPointRay_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.ScreenPointRay*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_ScreenPointRay" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.ScreenPointRay">ScreenPointRay</h4>
@@ -373,7 +408,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityTouchController_TouchData.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityTouchController.TouchData%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityTouchController.cs/#L35">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityTouchController.cs/#L40">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_TouchData_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.TouchData*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_TouchData" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.TouchData">TouchData</h4>
@@ -406,7 +441,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityTouchController_EndTouch.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityTouchController.EndTouch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityTouchController.cs/#L157">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityTouchController.cs/#L137">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_EndTouch_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.EndTouch*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_EndTouch" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.EndTouch">EndTouch()</h4>
@@ -419,45 +454,10 @@
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityTouchController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityTouchController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityTouchController.cs/#L63">View Source</a>
-  </span>
-  <a id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_SetupDefaultInteractions_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.SetupDefaultInteractions*"></a>
-  <h4 id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.SetupDefaultInteractions(XRTK.Definitions.Utilities.Handedness)">SetupDefaultInteractions(Handedness)</h4>
-  <div class="markdown level1 summary"><p>Assign the default interactions based on controller handedness if necessary.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override void SetupDefaultInteractions(Handedness controllerHandedness)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="XRTK.Definitions.Utilities.Handedness.html">Handedness</a></td>
-        <td><span class="parametername">controllerHandedness</span></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="XRTK.Providers.Controllers.BaseController.html#XRTK_Providers_Controllers_BaseController_SetupDefaultInteractions_XRTK_Definitions_Utilities_Handedness_">BaseController.SetupDefaultInteractions(Handedness)</a></div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityTouchController_StartTouch.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityTouchController.StartTouch%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityTouchController.cs/#L90">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityTouchController.cs/#L70">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_StartTouch_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.StartTouch*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_StartTouch" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.StartTouch">StartTouch()</h4>
@@ -473,7 +473,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityTouchController_Update.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityTouchController.Update%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityTouchController.cs/#L101">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityTouchController.cs/#L81">View Source</a>
   </span>
   <a id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_Update_" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.Update*"></a>
   <h4 id="XRTK_Providers_Controllers_UnityInput_UnityTouchController_Update" data-uid="XRTK.Providers.Controllers.UnityInput.UnityTouchController.Update">Update()</h4>
@@ -489,6 +489,9 @@
       <a class="xref" href="XRTK.Interfaces.Providers.Controllers.IMixedRealityController.html">IMixedRealityController</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
@@ -506,12 +509,13 @@
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Controllers_UnityInput_UnityTouchController.md&amp;value=---%0Auid%3A%20XRTK.Providers.Controllers.UnityInput.UnityTouchController%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Controllers/UnityInput/UnityTouchController.cs/#L13" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Controllers/UnityInput/UnityTouchController.cs/#L13" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

@@ -15,7 +15,7 @@ using XRTK.Extensions;
 using XRTK.Utilities.Editor;
 using Debug = UnityEngine.Debug;
 
-namespace XRTK.Utilities.Build
+namespace XRTK.Editor.BuildAndDeploy
 {
     public static class UwpAppxBuildTools
     {

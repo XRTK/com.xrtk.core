@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-namespace XRTK.Utilities.Build
+namespace XRTK.Editor.BuildAndDeploy
 {
     public class BuildInfo : IBuildInfo
     {

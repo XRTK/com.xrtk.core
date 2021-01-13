@@ -3,7 +3,7 @@
 
 using UnityEditor;
 
-namespace XRTK.Utilities.Build
+namespace XRTK.Editor.BuildAndDeploy
 {
     public class UwpBuildInfo : BuildInfo
     {

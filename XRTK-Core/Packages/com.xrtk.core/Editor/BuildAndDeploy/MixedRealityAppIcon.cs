@@ -1,6 +1,6 @@
 using System;
 
-namespace XRTK.Utilities.Build
+namespace XRTK.Editor.BuildAndDeploy
 {
     /// <summary>
     /// Build profile for saving 3d app icon's path in the build settings.

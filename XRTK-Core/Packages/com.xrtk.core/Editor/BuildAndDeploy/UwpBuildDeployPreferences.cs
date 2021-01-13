@@ -4,7 +4,7 @@ using UnityEngine;
 using XRTK.Utilities.Editor;
 using XRTK.Utilities.WindowsDevicePortal.DataStructures;
 
-namespace XRTK.Utilities.Build
+namespace XRTK.Editor.BuildAndDeploy
 {
     public static class UwpBuildDeployPreferences
     {

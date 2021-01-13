@@ -7,9 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
-using XRTK.Utilities.Editor;
 
-namespace XRTK.Utilities.Build
+namespace XRTK.Editor.BuildAndDeploy
 {
     /// <summary>
     /// Class containing various utility methods to build a WSA solution from a Unity project.

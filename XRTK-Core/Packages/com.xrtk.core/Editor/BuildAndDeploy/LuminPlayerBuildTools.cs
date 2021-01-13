@@ -8,7 +8,7 @@ using UnityEngine;
 using XRTK.Extensions;
 using Debug = UnityEngine.Debug;
 
-namespace XRTK.Utilities.Build
+namespace XRTK.Editor.BuildAndDeploy
 {
     /// <summary>
     /// Class containing various utility methods to build a lumin mpk installer from a Unity project.

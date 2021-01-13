@@ -20,7 +20,7 @@ using XRTK.Utilities.WindowsDevicePortal.DataStructures;
 using Debug = UnityEngine.Debug;
 using FileInfo = System.IO.FileInfo;
 
-namespace XRTK.Utilities.Build
+namespace XRTK.Editor.BuildAndDeploy
 {
     /// <summary>
     /// Build window - supports SLN creation, APPX from SLN, Deploy on device, and misc helper utilities associated with the build/deploy/test iteration loop

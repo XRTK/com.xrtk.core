@@ -17,7 +17,6 @@ using XRTK.Editor.Utilities;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Providers.Controllers.OpenVR;
 using XRTK.Providers.Controllers.UnityInput;
-using XRTK.Utilities.Editor;
 
 namespace XRTK.Editor
 {

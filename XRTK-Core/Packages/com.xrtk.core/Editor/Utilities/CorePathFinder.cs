@@ -3,7 +3,7 @@
 
 using UnityEngine;
 
-namespace XRTK.Utilities.Editor
+namespace XRTK.Editor.Utilities
 {
     /// <summary>
     /// Dummy scriptable object used to find the relative path to com.xrtk.core.

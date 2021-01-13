@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-namespace XRTK.Utilities.Editor
+namespace XRTK.Editor.Utilities
 {
     /// <summary>
     /// Used to define an entire InputManagerAxis, with each variable defined by the same term the Inspector shows.

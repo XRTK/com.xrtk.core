@@ -4,7 +4,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace XRTK.Utilities.Editor
+namespace XRTK.Editor.Utilities
 {
     public class SceneHelpers
     {

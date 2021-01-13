@@ -4,7 +4,7 @@
 using System.Collections.Generic;
 using UnityEditor;
 
-namespace XRTK.Utilities.Editor
+namespace XRTK.Editor.Utilities
 {
     /// <summary>
     /// Utility class for Unity's Input Manager Mappings.

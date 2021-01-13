@@ -5,7 +5,7 @@ using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace XRTK.Utilities.Editor
+namespace XRTK.Editor.Utilities
 {
     [CanEditMultipleObjects]
     [CustomEditor(typeof(DefaultAsset))]

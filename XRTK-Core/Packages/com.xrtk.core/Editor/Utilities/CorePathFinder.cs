@@ -12,6 +12,6 @@ namespace XRTK.Editor.Utilities
     public class CorePathFinder : ScriptableObject, IPathFinder
     {
         /// <inheritdoc />
-        public string Location => $"/Runtime/Utilities/Editor/{nameof(CorePathFinder)}.cs";
+        public string Location => $"/Editor/Utilities/{nameof(CorePathFinder)}.cs";
     }
 }

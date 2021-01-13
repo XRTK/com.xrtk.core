@@ -26,7 +26,7 @@ namespace XRTK.Editor.Utilities
 
     public static class PathFinderUtility
     {
-        private const string CORE_PATH_FINDER = "/Runtime/Utilities/Editor/CorePathFinder.cs";
+        private const string CORE_PATH_FINDER = "/Editor/Utilities/CorePathFinder.cs";
         private const string SDK_PATH_FINDER = "/Editor/SdkPathFinder.cs";
 
         private static readonly Dictionary<Type, string> PathFinderCache = new Dictionary<Type, string>();

@@ -18,19 +18,17 @@ namespace XRTK.Editor
 
         private static void EditorApplication_hierarchyChanged()
         {
-            Debug.Log("CHANGED");
             if (!MixedRealityToolkit.Instance.IsNull())
             {
-                if (MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
+                if (MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
+                    Utilities.InputMappingAxisUtility.CheckUnityInputManagerMappings(Utilities.ControllerMappingUtilities.UnityInputManagerAxes))
                 {
-                    Debug.Log("INPUT SYSTEM ENABLED");
-                    // Make sure unity axis mappings are set.
-                    Utilities.InputMappingAxisUtility.CheckUnityInputManagerMappings(Utilities.ControllerMappingUtilities.UnityInputManagerAxes);
+                    Debug.Log("XRTK Input System was enabled, updated input axis mappings.");
                 }
-                else
+                else if (!MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
+                    Utilities.InputMappingAxisUtility.RemoveMappings(Utilities.ControllerMappingUtilities.UnityInputManagerAxes))
                 {
-                    Debug.Log("INPUT SYSTEM DISABLED");
-                    Utilities.InputMappingAxisUtility.RemoveMappings(Utilities.ControllerMappingUtilities.UnityInputManagerAxes);
+                    Debug.Log("XRTK Input System was disabled, removed input axis mappings.");
                 }
             }
         }

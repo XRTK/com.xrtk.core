@@ -37,8 +37,11 @@ namespace XRTK.Editor.Utilities
         /// This only exists as the Unity input manager CANNOT map Axis to an id, it has to be through a mapping
         /// </remarks>
         /// <param name="axisMappings">Optional array of Axis Mappings, to configure your own custom set</param>
-        public static void CheckUnityInputManagerMappings(InputManagerAxis[] axisMappings)
+        /// <returns>True, if input axis mappings were added.</returns>
+        public static bool CheckUnityInputManagerMappings(InputManagerAxis[] axisMappings)
         {
+            var addedMappings = false;
+
             AssureInputManagerReference();
 
             if (axisMappings != null)
@@ -48,11 +51,14 @@ namespace XRTK.Editor.Utilities
                     if (!DoesAxisNameExist(axis.Name))
                     {
                         AddAxis(axis);
+                        addedMappings = true;
                     }
                 }
 
                 inputManagerAsset.ApplyModifiedProperties();
             }
+
+            return addedMappings;
         }
 
         /// <summary>
@@ -62,8 +68,11 @@ namespace XRTK.Editor.Utilities
         /// This only exists as the Unity input manager CANNOT map Axis to an id, it has to be through a mapping
         /// </remarks>
         /// <param name="axisMappings">Optional array of Axis Mappings, to configure your own custom set</param>
-        public static void RemoveMappings(InputManagerAxis[] axisMappings)
+        /// <returns>True, if input axis mappings were removed.</returns>
+        public static bool RemoveMappings(InputManagerAxis[] axisMappings)
         {
+            var removedMappings = false;
+
             AssureInputManagerReference();
 
             if (axisMappings != null)
@@ -73,11 +82,14 @@ namespace XRTK.Editor.Utilities
                     if (DoesAxisNameExist(axis.Name))
                     {
                         RemoveAxis(axis.Name);
+                        removedMappings = true;
                     }
                 }
             }
 
             inputManagerAsset.ApplyModifiedProperties();
+
+            return removedMappings;
         }
 
         private static void AddAxis(InputManagerAxis axis)

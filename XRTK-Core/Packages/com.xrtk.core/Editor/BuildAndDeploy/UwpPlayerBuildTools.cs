@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
+using XRTK.Editor.Utilities;
 
 namespace XRTK.Editor.BuildAndDeploy
 {

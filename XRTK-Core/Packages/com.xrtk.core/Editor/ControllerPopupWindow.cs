@@ -105,7 +105,7 @@ namespace XRTK.Editor
                 Close();
             }
 
-            currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(controllerDataProviderProfile);
+            currentControllerTexture = ControllerMappingUtilities.GetControllerTexture(controllerDataProviderProfile);
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace XRTK.Editor
             window.titleContent = new GUIContent($"{window.currentControllerName} {handednessTitleText}Input Action Assignment");
             window.controllerDataProviderProfile = profile;
             window.currentInteractionProfiles = interactionMappingProfiles;
-            window.currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(profile);
+            window.currentControllerTexture = ControllerMappingUtilities.GetControllerTexture(profile);
 
             isMouseInRects = new bool[interactionMappingProfiles.arraySize];
 

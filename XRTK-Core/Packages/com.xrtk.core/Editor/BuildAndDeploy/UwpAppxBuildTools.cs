@@ -12,7 +12,7 @@ using System.Xml.Linq;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Extensions;
-using XRTK.Utilities.Editor;
+using XRTK.Editor.Utilities;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Editor.BuildAndDeploy

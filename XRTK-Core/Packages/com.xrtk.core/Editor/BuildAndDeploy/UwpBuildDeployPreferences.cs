@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using UnityEngine;
-using XRTK.Utilities.Editor;
+using XRTK.Editor.Utilities;
 using XRTK.Utilities.WindowsDevicePortal.DataStructures;
 
 namespace XRTK.Editor.BuildAndDeploy

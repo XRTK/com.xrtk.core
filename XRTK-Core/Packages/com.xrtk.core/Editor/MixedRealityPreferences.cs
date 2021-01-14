@@ -10,7 +10,7 @@ using UnityEngine;
 using XRTK.Editor.Utilities.SymbolicLinks;
 using XRTK.Editor.Extensions;
 using XRTK.Extensions;
-using XRTK.Utilities.Editor;
+using XRTK.Editor.Utilities;
 
 namespace XRTK.Editor
 {

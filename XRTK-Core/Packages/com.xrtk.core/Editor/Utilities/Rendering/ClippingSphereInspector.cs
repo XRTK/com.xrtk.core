@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Utilities.Rendering;
 
-namespace XRTK.Editor
+namespace XRTK.Editor.Rendering
 {
     [CustomEditor(typeof(ClippingSphere))]
     public class ClippingSphereEditor : UnityEditor.Editor

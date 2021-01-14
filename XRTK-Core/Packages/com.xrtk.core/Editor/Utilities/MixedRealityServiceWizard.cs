@@ -18,7 +18,6 @@ using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.Events;
 using XRTK.Interfaces.TeleportSystem;
 using XRTK.Services;
-using XRTK.Utilities.Editor;
 using Assembly = System.Reflection.Assembly;
 
 namespace XRTK.Editor.Utilities

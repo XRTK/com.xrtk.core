@@ -8,6 +8,7 @@ using XRTK.Definitions.BoundarySystem;
 using XRTK.Definitions.CameraSystem;
 using XRTK.Definitions.DiagnosticsSystem;
 using XRTK.Definitions.InputSystem;
+using XRTK.Definitions.LocomotionSystem;
 using XRTK.Definitions.NetworkingSystem;
 using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Definitions.TeleportSystem;
@@ -16,6 +17,7 @@ using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.DiagnosticsSystem;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Interfaces.NetworkingSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.TeleportSystem;
@@ -204,6 +206,50 @@ namespace XRTK.Definitions
         }
 
         #endregion Teleportation System Properties
+
+        #region Locomotion System Properties
+
+        [SerializeField]
+        [Tooltip("Enable the Locomotion System on startup.")]
+        private bool enableLocomotionSystem = false;
+
+        /// <summary>
+        /// Enable and configure the locomotion system.
+        /// </summary>
+        public bool IsLocomotionSystemEnabled
+        {
+            get => locomotionSystemType != null && locomotionSystemType.Type != null && enableLocomotionSystem;
+            internal set => enableTeleportSystem = value;
+        }
+
+        [SerializeField]
+        [Tooltip("Locomotion System implementation to instantiate at runtime.")]
+        [Implements(typeof(IMixedRealityLocomotionSystem), TypeGrouping.ByNamespaceFlat)]
+        private SystemType locomotionSystemType;
+
+        /// <summary>
+        /// Locomotion System implementation to instantiate at runtime.
+        /// </summary>
+        public SystemType LocomotionSystemType
+        {
+            get => locomotionSystemType;
+            internal set => locomotionSystemType = value;
+        }
+
+        [SerializeField]
+        [Tooltip("Profile for configuring the locomotion system.")]
+        private MixedRealityLocomotionSystemProfile locomotionSystemProfile;
+
+        /// <summary>
+        /// Active profile for configuring the locomotion system.
+        /// </summary>
+        public MixedRealityLocomotionSystemProfile LocomotionSystemProfile
+        {
+            get => locomotionSystemProfile;
+            internal set => locomotionSystemProfile = value;
+        }
+
+        #endregion
 
         #region Spatial Awareness System Properties
 

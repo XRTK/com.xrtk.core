@@ -36,6 +36,11 @@ namespace XRTK.Editor.Profiles
         private SerializedProperty teleportSystemType;
         private SerializedProperty teleportSystemProfile;
 
+        // Locomotion system properties
+        private SerializedProperty enableLocomotionSystem;
+        private SerializedProperty locomotionSystemType;
+        private SerializedProperty locomotionSystemProfile;
+
         // Spatial Awareness system properties
         private SerializedProperty enableSpatialAwarenessSystem;
         private SerializedProperty spatialAwarenessSystemType;
@@ -164,6 +169,11 @@ namespace XRTK.Editor.Profiles
             teleportSystemType = serializedObject.FindProperty(nameof(teleportSystemType));
             teleportSystemProfile = serializedObject.FindProperty(nameof(teleportSystemProfile));
 
+            // Locomotion system configuration
+            enableLocomotionSystem = serializedObject.FindProperty(nameof(enableLocomotionSystem));
+            locomotionSystemType = serializedObject.FindProperty(nameof(locomotionSystemType));
+            locomotionSystemProfile = serializedObject.FindProperty(nameof(locomotionSystemProfile));
+
             // Spatial Awareness system configuration
             enableSpatialAwarenessSystem = serializedObject.FindProperty(nameof(enableSpatialAwarenessSystem));
             spatialAwarenessSystemType = serializedObject.FindProperty(nameof(spatialAwarenessSystemType));
@@ -235,6 +245,16 @@ namespace XRTK.Editor.Profiles
             EditorGUILayout.PropertyField(teleportSystemType, typeLabel);
             profileLabel.tooltip = teleportSystemProfile.tooltip;
             EditorGUILayout.PropertyField(teleportSystemProfile, profileLabel);
+            EditorGUI.indentLevel--;
+
+            // Locomotion System configuration
+            EditorGUILayout.Space();
+            enableLocomotionSystem.boolValue = EditorGUILayout.ToggleLeft("Locomotion System", enableLocomotionSystem.boolValue, EditorStyles.boldLabel);
+            EditorGUI.indentLevel++;
+            typeLabel.tooltip = locomotionSystemType.tooltip;
+            EditorGUILayout.PropertyField(locomotionSystemType, typeLabel);
+            profileLabel.tooltip = locomotionSystemProfile.tooltip;
+            EditorGUILayout.PropertyField(locomotionSystemProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Spatial Awareness System configuration

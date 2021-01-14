@@ -15,6 +15,7 @@ using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.DiagnosticsSystem;
 using XRTK.Interfaces.InputSystem;
+using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Interfaces.NetworkingSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem;
 using XRTK.Interfaces.TeleportSystem;
@@ -477,12 +478,29 @@ namespace XRTK.Services
 #endif
             }
 
-            if (ActiveProfile.IsTeleportSystemEnabled)
+            if (ActiveProfile.IsLocomotionSystemEnabled && ActiveProfile.IsTeleportSystemEnabled)
             {
+                Debug.LogWarning("Can't use teleport system and locomotion system together. Since the teleport system is deprecated, XRTK will use the locomotion system.");
+            }
+
+            if (ActiveProfile.IsLocomotionSystemEnabled)
+            {
+                if (TryCreateAndRegisterService<IMixedRealityLocomotionSystem>(ActiveProfile.LocomotionSystemType, out var service, ActiveProfile.LocomotionSystemProfile) || LocomotionSystem == null)
+                {
+                    TryRegisterDataProviderConfigurations(ActiveProfile.LocomotionSystemProfile.RegisteredServiceConfigurations, service);
+                }
+                else
+                {
+                    Debug.LogError("Failed to start the Locomotion System!");
+                }
+            }
+            else if (ActiveProfile.IsTeleportSystemEnabled)
+            {
+                Debug.LogWarning("The teleport system has been deprecated. Please use the new locomotion system instead.");
+
                 if (TryCreateAndRegisterService<IMixedRealityTeleportSystem>(ActiveProfile.TeleportSystemSystemType, out var service, ActiveProfile.TeleportSystemProfile) || TeleportSystem == null)
                 {
                     TryRegisterDataProviderConfigurations(ActiveProfile.TeleportSystemProfile.RegisteredServiceConfigurations, service);
-
                 }
                 else
                 {
@@ -2191,6 +2209,63 @@ namespace XRTK.Services
         }
 
         #endregion Teleport System
+
+        #region Locomotion System
+
+        private static IMixedRealityLocomotionSystem locomotionSystem = null;
+
+        /// <summary>
+        /// The current <see cref="IMixedRealityLocomotionSystem"/> registered with the Mixed Reality Toolkit.
+        /// </summary>
+        public static IMixedRealityLocomotionSystem LocomotionSystem
+        {
+            get
+            {
+                if (!IsInitialized ||
+                    IsApplicationQuitting ||
+                    instance.activeProfile.IsNull() ||
+                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsLocomotionSystemEnabled)
+                {
+                    return null;
+                }
+
+                if (locomotionSystem != null)
+                {
+                    return locomotionSystem;
+                }
+
+                locomotionSystem = GetService<IMixedRealityLocomotionSystem>(showLogs: logLocomotionSystem);
+                // If we found a valid system, then we turn logging back on for the next time we need to search.
+                // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
+                logLocomotionSystem = locomotionSystem != null;
+
+                return locomotionSystem;
+            }
+        }
+
+        private static bool logLocomotionSystem = true;
+
+        /// <summary>
+        /// Waits for the <see cref="IMixedRealityLocomotionSystem"/> to be valid.
+        /// </summary>
+        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
+        /// <returns>True, when the input system is valid, otherwise false.</returns>
+        public static async Task<bool> ValidateLocomotionSystemAsync(int timeout = 10)
+        {
+            try
+            {
+                await LocomotionSystem.WaitUntil(system => system != null, timeout);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return false;
+            }
+
+            return true;
+        }
+
+        #endregion Locomotion System
 
         #region Networking System
 

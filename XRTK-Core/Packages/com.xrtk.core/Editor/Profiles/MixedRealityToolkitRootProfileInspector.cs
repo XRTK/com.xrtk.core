@@ -239,7 +239,7 @@ namespace XRTK.Editor.Profiles
 
             // Teleport System configuration
             EditorGUILayout.Space();
-            enableTeleportSystem.boolValue = EditorGUILayout.ToggleLeft("Teleport System", enableTeleportSystem.boolValue, EditorStyles.boldLabel);
+            enableTeleportSystem.boolValue = EditorGUILayout.ToggleLeft("Teleport System (deprecated)", enableTeleportSystem.boolValue, EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
             typeLabel.tooltip = teleportSystemType.tooltip;
             EditorGUILayout.PropertyField(teleportSystemType, typeLabel);

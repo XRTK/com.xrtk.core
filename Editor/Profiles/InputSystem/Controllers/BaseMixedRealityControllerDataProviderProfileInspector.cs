@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.PropertyDrawers;
+using XRTK.Editor.Utilities;
 
 namespace XRTK.Editor.Profiles.InputSystem.Controllers
 {
@@ -283,7 +284,7 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
                 typeName = "HoloLens 1";
             }
 
-            var buttonContent = new GUIContent($"Edit {typeName} Action Mapping", ControllerMappingLibrary.GetControllerTextureScaled(controllerMappingProfile));
+            var buttonContent = new GUIContent($"Edit {typeName} Action Mapping", ControllerMappingUtilities.GetControllerTextureScaled(controllerMappingProfile));
             if (GUILayout.Button(buttonContent, ControllerButtonStyle, GUILayout.Height(128f), GUILayout.MinWidth(32f), GUILayout.ExpandWidth(true)))
             {
                 EditorApplication.delayCall += () => ControllerPopupWindow.Show(controllerMappingProfile, new SerializedObject(controllerMappingProfile).FindProperty("interactionMappingProfiles"));

@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Utilities.Rendering;
 
-namespace XRTK.Editor
+namespace XRTK.Editor.Rendering
 {
     [CustomEditor(typeof(ClippingBox))]
     public class ClippingBoxEditor : UnityEditor.Editor

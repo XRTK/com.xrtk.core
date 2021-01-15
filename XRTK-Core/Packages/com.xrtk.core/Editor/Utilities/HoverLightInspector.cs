@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Utilities;
 
-namespace XRTK.Editor
+namespace XRTK.Editor.Utilities
 {
     [CustomEditor(typeof(HoverLight))]
     public class HoverLightInspector : UnityEditor.Editor

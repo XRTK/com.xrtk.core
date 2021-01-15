@@ -11,6 +11,9 @@ namespace XRTK.Definitions.Authentication
         [SerializeField]
         private bool cacheUserTokens = true;
 
-        private bool CacheUserTokens => cacheUserTokens;
+        /// <summary>
+        /// Remember previously obtained user tokens.
+        /// </summary>
+        public bool CacheUserTokens => cacheUserTokens;
     }
 }

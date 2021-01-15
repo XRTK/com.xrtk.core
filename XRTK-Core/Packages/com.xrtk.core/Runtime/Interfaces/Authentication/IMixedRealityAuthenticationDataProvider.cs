@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Threading.Tasks;
 using XRTK.Definitions.Authentication;
 
@@ -11,6 +12,16 @@ namespace XRTK.Interfaces.Authentication
     /// </summary>
     public interface IMixedRealityAuthenticationDataProvider : IMixedRealityDataProvider
     {
+        /// <summary>
+        /// Event called when a user has successfully logged in.
+        /// </summary>
+        event Action<IAuthenticatedAccount> OnLoggedIn;
+
+        /// <summary>
+        /// Event called when a user has logged out.
+        /// </summary>
+        event Action<IAuthenticatedAccount> OnLoggedOut;
+
         /// <summary>
         /// The <see cref="IAuthenticatedAccount"/>. Null if no user is logged in.
         /// </summary>

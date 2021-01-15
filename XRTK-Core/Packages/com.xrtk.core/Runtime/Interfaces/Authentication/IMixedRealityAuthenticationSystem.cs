@@ -21,7 +21,12 @@ namespace XRTK.Interfaces.Authentication
         /// <summary>
         /// Signals when the user has been logged out.
         /// </summary>
-        event Action<IMixedRealityAuthenticationDataProvider> OnLoggedOut;
+        event Action<IMixedRealityAuthenticationDataProvider, IAuthenticatedAccount> OnLoggedOut;
+
+        /// <summary>
+        /// Should the login tokens be cached?
+        /// </summary>
+        bool CacheUserTokens { get; set; }
 
         /// <summary>
         /// Gets the currently logged in <see cref="IAuthenticatedAccount"/>s.
@@ -34,14 +39,18 @@ namespace XRTK.Interfaces.Authentication
         IReadOnlyCollection<IMixedRealityAuthenticationDataProvider> ActiveAuthenticationProviders { get; }
 
         /// <summary>
-        /// Start Login task.
+        /// Register a <see cref="IMixedRealityAuthenticationDataProvider"/> with the system.
         /// </summary>
-        /// <param name="provider">The <see cref="IMixedRealityAuthenticationDataProvider"/> to login with.</param>
-        /// <remarks>
-        /// This may prompt the user to authenticate with the <see cref="AuthenticationDataProviderProfile.LoginPrefab"/>
-        /// </remarks>
-        /// <returns>Completed <see cref="Task"/>.</returns>
-        Task LoginAsync(IMixedRealityAuthenticationDataProvider provider);
+        /// <param name="provider">The <see cref="IMixedRealityAuthenticationDataProvider"/> to register.</param>
+        /// <returns>True, if the <see cref="IMixedRealityAuthenticationDataProvider"/> was successfully registered, otherwise false.</returns>
+        bool RegisterAuthenticationDataProvider(IMixedRealityAuthenticationDataProvider provider);
+
+        /// <summary>
+        /// Unregister a <see cref="IMixedRealityAuthenticationDataProvider"/> with the system.
+        /// </summary>
+        /// <param name="provider">The <see cref="IMixedRealityAuthenticationDataProvider"/> to unregister.</param>
+        /// <returns>True, if the <see cref="IMixedRealityAuthenticationDataProvider"/> was successfully unregistered, otherwise false.</returns>
+        bool UnregisterAuthenticationDataProvider(IMixedRealityAuthenticationDataProvider provider);
 
         /// <summary>
         /// Logs out of all active sessions in all active <see cref="IMixedRealityAuthenticationDataProvider"/>s.

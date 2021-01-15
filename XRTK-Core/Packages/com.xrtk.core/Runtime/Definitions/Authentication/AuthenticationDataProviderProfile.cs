@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Attributes;
+using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Authentication;
 
 namespace XRTK.Definitions.Authentication
@@ -10,6 +11,7 @@ namespace XRTK.Definitions.Authentication
     /// <summary>
     /// The configuration profile for <see cref="IMixedRealityAuthenticationDataProvider"/>.
     /// </summary>
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Authentication System/Generic Authentication Data Provider", fileName = "AuthenticationDataProviderProfile", order = (int)CreateProfileMenuItemIndices.AuthenticationSystem)]
     public class AuthenticationDataProviderProfile : BaseMixedRealityProfile
     {
         [SerializeField]

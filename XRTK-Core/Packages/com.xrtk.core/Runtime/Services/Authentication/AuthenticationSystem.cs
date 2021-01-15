@@ -3,21 +3,22 @@
 
 using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
-using XRTK.Definitions;
+using UnityEngine;
+using XRTK.Definitions.Authentication;
 using XRTK.Interfaces.Authentication;
-using XRTK.Utilities.Async;
 
 namespace XRTK.Services.Authentication
 {
     /// <summary>
     /// Concrete implementation of the <see cref="IMixedRealityAuthenticationSystem"/>
     /// </summary>
+    [System.Runtime.InteropServices.Guid("B9AA44EA-23C9-4B4A-8DE6-D598E6F638FB")]
     public class AuthenticationSystem : BaseSystem, IMixedRealityAuthenticationSystem
     {
         /// <inheritdoc />
-        public AuthenticationSystem(BaseMixedRealityProfile profile) : base(profile)
+        public AuthenticationSystem(AuthenticationSystemProfile profile) : base(profile)
         {
+            CacheUserTokens = profile.CacheUserTokens;
         }
 
         #region IMixedRealityAuthenticationSystem Implementation
@@ -26,40 +27,108 @@ namespace XRTK.Services.Authentication
         public event Action<IMixedRealityAuthenticationDataProvider, IAuthenticatedAccount> OnLoggedIn;
 
         /// <inheritdoc />
-        public event Action<IMixedRealityAuthenticationDataProvider> OnLoggedOut;
+        public event Action<IMixedRealityAuthenticationDataProvider, IAuthenticatedAccount> OnLoggedOut;
 
-        private List<IAuthenticatedAccount> activeAccounts = new List<IAuthenticatedAccount>();
+        /// <inheritdoc />
+        public bool CacheUserTokens { get; set; }
+
+        private readonly HashSet<IAuthenticatedAccount> activeAccounts = new HashSet<IAuthenticatedAccount>();
 
         /// <inheritdoc />
         public IReadOnlyCollection<IAuthenticatedAccount> ActiveAccounts => activeAccounts;
 
-        /// <inheritdoc />
-        public IReadOnlyCollection<IMixedRealityAuthenticationDataProvider> ActiveAuthenticationProviders { get; }
+        private readonly HashSet<IMixedRealityAuthenticationDataProvider> activeDataProviders = new HashSet<IMixedRealityAuthenticationDataProvider>();
 
         /// <inheritdoc />
-        public async Task LoginAsync(IMixedRealityAuthenticationDataProvider provider)
+        public IReadOnlyCollection<IMixedRealityAuthenticationDataProvider> ActiveAuthenticationProviders => activeDataProviders;
+
+        /// <inheritdoc />
+        public bool RegisterAuthenticationDataProvider(IMixedRealityAuthenticationDataProvider provider)
         {
-            await provider.LoginAsync();
-            await Awaiters.UnityMainThread;
-            activeAccounts.Add(null);
-            OnLoggedIn?.Invoke(null, null);
-            throw new NotImplementedException();
+            if (activeDataProviders.Contains(provider))
+            {
+                return false;
+            }
+
+            activeDataProviders.Add(provider);
+            LoginEvents(provider, true);
+            return true;
+        }
+
+        /// <inheritdoc />
+        public bool UnregisterAuthenticationDataProvider(IMixedRealityAuthenticationDataProvider provider)
+        {
+            if (!activeDataProviders.Contains(provider))
+            {
+                return false;
+            }
+
+            LoginEvents(provider, false);
+            activeDataProviders.Remove(provider);
+            return true;
         }
 
         /// <inheritdoc />
         public void LogOutAllSessions()
         {
-            activeAccounts.Remove(null);
-            OnLoggedOut?.Invoke(null);
-            throw new NotImplementedException();
+            foreach (var provider in activeDataProviders)
+            {
+                provider.Logout(false);
+            }
         }
 
         /// <inheritdoc />
         public void ClearAllTokenCaches()
         {
-            throw new NotImplementedException();
+            foreach (var provider in activeDataProviders)
+            {
+                provider.ClearTokenCache();
+            }
         }
 
         #endregion IMixedRealityAuthenticationSystem Implementation
+
+        private void LoginEvents(IMixedRealityAuthenticationDataProvider provider, bool isRegistered)
+        {
+            if (activeDataProviders.Contains(provider))
+            {
+                if (isRegistered)
+                {
+                    provider.OnLoggedIn += OnProviderLoggedIn;
+                    provider.OnLoggedOut += OnProviderLogout;
+                }
+                else
+                {
+                    provider.OnLoggedIn -= OnProviderLoggedIn;
+                    provider.OnLoggedOut -= OnProviderLogout;
+                }
+            }
+
+            void OnProviderLoggedIn(IAuthenticatedAccount account)
+            {
+                if (!activeAccounts.Contains(account))
+                {
+                    activeAccounts.Add(account);
+                    OnLoggedIn?.Invoke(provider, account);
+                }
+                else
+                {
+                    Debug.LogError($"{Name}:{nameof(OnLoggedOut)}: Account already logged in!");
+                }
+            }
+
+            void OnProviderLogout(IAuthenticatedAccount account)
+            {
+                if (activeAccounts.Contains(account))
+                {
+                    activeAccounts.Remove(account);
+                    OnLoggedOut?.Invoke(provider, account);
+                }
+                else
+                {
+                    Debug.LogError($"{Name}:{nameof(OnLoggedOut)}: Account already logged out!");
+                }
+            }
+        }
     }
 }

@@ -1,0 +1,584 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Class HandSpatialPointer
+   | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Class HandSpatialPointer
+   | XRTK-Core ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="XRTK.SDK.UX.Pointers.HandSpatialPointer">
+  
+  
+  <h1 id="XRTK_SDK_UX_Pointers_HandSpatialPointer" data-uid="XRTK.SDK.UX.Pointers.HandSpatialPointer" class="text-break">Class HandSpatialPointer
+  </h1>
+  <div class="markdown level0 summary"><p>Extends the simple line pointer for drawing lines from the input source origin to the current pointer position,
+by adding visual state</p>
+</div>
+  <div class="markdown level0 conceptual"></div>
+  <div class="inheritance">
+    <h5>Inheritance</h5>
+    <div class="level0"><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object">Object</a></div>
+    <div class="level1"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Object.html">Object</a></div>
+    <div class="level2"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Component.html">Component</a></div>
+    <div class="level3"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Behaviour.html">Behaviour</a></div>
+    <div class="level4"><a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.MonoBehaviour.html">MonoBehaviour</a></div>
+    <div class="level5"><a class="xref" href="XRTK.SDK.Input.InputSystemGlobalListener.html">InputSystemGlobalListener</a></div>
+    <div class="level6"><a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html">ControllerPoseSynchronizer</a></div>
+    <div class="level7"><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html">BaseControllerPointer</a></div>
+    <div class="level8"><a class="xref" href="XRTK.SDK.UX.Pointers.LinePointer.html">LinePointer</a></div>
+    <div class="level9"><span class="xref">HandSpatialPointer</span></div>
+  </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourcePoseHandler.html">IMixedRealitySourcePoseHandler</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourceStateHandler.html">IMixedRealitySourceStateHandler</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler.html">IMixedRealityInputHandler</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler</a>&lt;<a class="xref" href="https://docs.microsoft.com/dotnet/api/system.single">Single</a>&gt;</div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler</a>&lt;<a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector2.html">Vector2</a>&gt;</div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler</a>&lt;<a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Vector3.html">Vector3</a>&gt;</div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler</a>&lt;<a class="xref" href="https://stephenhodgson.github.io/UnityCsReference/api/UnityEngine.Quaternion.html">Quaternion</a>&gt;</div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler</a>&lt;<a class="xref" href="XRTK.Definitions.Utilities.MixedRealityPose.html">MixedRealityPose</a>&gt;</div>
+    <div><a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityPointer.html">IMixedRealityPointer</a></div>
+    <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.iequalitycomparer">IEqualityComparer</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.TeleportSystem.Handlers.IMixedRealityTeleportHandler.html">IMixedRealityTeleportHandler</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_LineColorSelected">LinePointer.LineColorSelected</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_LineColorValid">LinePointer.LineColorValid</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_LineColorInvalid">LinePointer.LineColorInvalid</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_LineColorNoTarget">LinePointer.LineColorNoTarget</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_LineColorLockFocus">LinePointer.LineColorLockFocus</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_LineCastResolution">LinePointer.LineCastResolution</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_LineBase">LinePointer.LineBase</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_LineRenderers">LinePointer.LineRenderers</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_OnValidate">LinePointer.OnValidate()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_OnEnable">LinePointer.OnEnable()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_OnPreRaycast">LinePointer.OnPreRaycast()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.LinePointer.html#XRTK_SDK_UX_Pointers_LinePointer_OnPostRaycast">LinePointer.OnPostRaycast()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_DisableCursorOnStart">BaseControllerPointer.DisableCursorOnStart</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_RaycastOrigin">BaseControllerPointer.RaycastOrigin</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsSelectPressed">BaseControllerPointer.IsSelectPressed</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_HasSelectPressedOnce">BaseControllerPointer.HasSelectPressedOnce</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsHoldPressed">BaseControllerPointer.IsHoldPressed</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsTeleportRequestActive">BaseControllerPointer.IsTeleportRequestActive</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_CapturedNearInteractionObject">BaseControllerPointer.CapturedNearInteractionObject</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerDirection">BaseControllerPointer.PointerDirection</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_SetCursor_UnityEngine_GameObject_">BaseControllerPointer.SetCursor(GameObject)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_Start">BaseControllerPointer.Start()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTriggerEnter_UnityEngine_Collider_">BaseControllerPointer.OnTriggerEnter(Collider)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTriggerStay_UnityEngine_Collider_">BaseControllerPointer.OnTriggerStay(Collider)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTriggerExit_UnityEngine_Collider_">BaseControllerPointer.OnTriggerExit(Collider)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnDisable">BaseControllerPointer.OnDisable()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_Controller">BaseControllerPointer.Controller</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerId">BaseControllerPointer.PointerId</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerName">BaseControllerPointer.PointerName</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_InputSourceParent">BaseControllerPointer.InputSourceParent</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_BaseCursor">BaseControllerPointer.BaseCursor</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_CursorModifier">BaseControllerPointer.CursorModifier</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_TeleportHotSpot">BaseControllerPointer.TeleportHotSpot</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_NearInteractionCollider">BaseControllerPointer.NearInteractionCollider</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsFocusLocked">BaseControllerPointer.IsFocusLocked</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_SyncedTarget">BaseControllerPointer.SyncedTarget</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OverrideGrabPoint">BaseControllerPointer.OverrideGrabPoint</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerExtent">BaseControllerPointer.PointerExtent</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_DefaultPointerExtent">BaseControllerPointer.DefaultPointerExtent</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_Rays">BaseControllerPointer.Rays</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerRaycastLayerMasksOverride">BaseControllerPointer.PointerRaycastLayerMasksOverride</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_FocusHandler">BaseControllerPointer.FocusHandler</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_InputHandler">BaseControllerPointer.InputHandler</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_Result">BaseControllerPointer.Result</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_RayStabilizer">BaseControllerPointer.RayStabilizer</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_RaycastMode">BaseControllerPointer.RaycastMode</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_SphereCastRadius">BaseControllerPointer.SphereCastRadius</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_PointerOrientation">BaseControllerPointer.PointerOrientation</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_TryGetPointerPosition_UnityEngine_Vector3__">BaseControllerPointer.TryGetPointerPosition(Vector3)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_TryGetPointingRay_UnityEngine_Ray__">BaseControllerPointer.TryGetPointingRay(Ray)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_TryGetPointerRotation_UnityEngine_Quaternion__">BaseControllerPointer.TryGetPointerRotation(Quaternion)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_System_Collections_IEqualityComparer_Equals_System_Object_System_Object_">BaseControllerPointer.IEqualityComparer.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_Equals_System_Object_">BaseControllerPointer.Equals(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_System_Collections_IEqualityComparer_GetHashCode_System_Object_">BaseControllerPointer.IEqualityComparer.GetHashCode(Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_GetHashCode">BaseControllerPointer.GetHashCode()</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnSourceLost_XRTK_EventDatum_Input_SourceStateEventData_">BaseControllerPointer.OnSourceLost(SourceStateEventData)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnInputUp_XRTK_EventDatum_Input_InputEventData_">BaseControllerPointer.OnInputUp(InputEventData)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnInputDown_XRTK_EventDatum_Input_InputEventData_">BaseControllerPointer.OnInputDown(InputEventData)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTeleportRequest_XRTK_EventDatum_Teleport_TeleportEventData_">BaseControllerPointer.OnTeleportRequest(TeleportEventData)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTeleportStarted_XRTK_EventDatum_Teleport_TeleportEventData_">BaseControllerPointer.OnTeleportStarted(TeleportEventData)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTeleportCompleted_XRTK_EventDatum_Teleport_TeleportEventData_">BaseControllerPointer.OnTeleportCompleted(TeleportEventData)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_OnTeleportCanceled_XRTK_EventDatum_Teleport_TeleportEventData_">BaseControllerPointer.OnTeleportCanceled(TeleportEventData)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_PoseDriver">ControllerPoseSynchronizer.PoseDriver</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_Handedness">ControllerPoseSynchronizer.Handedness</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_DestroyOnSourceLost">ControllerPoseSynchronizer.DestroyOnSourceLost</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_IsTracked">ControllerPoseSynchronizer.IsTracked</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_TrackingState">ControllerPoseSynchronizer.TrackingState</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_UseSourcePoseData">ControllerPoseSynchronizer.UseSourcePoseData</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_PoseAction">ControllerPoseSynchronizer.PoseAction</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnSourceDetected_XRTK_EventDatum_Input_SourceStateEventData_">ControllerPoseSynchronizer.OnSourceDetected(SourceStateEventData)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnSourcePoseChanged_XRTK_EventDatum_Input_SourcePoseEventData_XRTK_Definitions_Devices_TrackingState__">ControllerPoseSynchronizer.OnSourcePoseChanged(SourcePoseEventData&lt;TrackingState&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnSourcePoseChanged_XRTK_EventDatum_Input_SourcePoseEventData_UnityEngine_Vector2__">ControllerPoseSynchronizer.OnSourcePoseChanged(SourcePoseEventData&lt;Vector2&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnSourcePoseChanged_XRTK_EventDatum_Input_SourcePoseEventData_UnityEngine_Vector3__">ControllerPoseSynchronizer.OnSourcePoseChanged(SourcePoseEventData&lt;Vector3&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnSourcePoseChanged_XRTK_EventDatum_Input_SourcePoseEventData_UnityEngine_Quaternion__">ControllerPoseSynchronizer.OnSourcePoseChanged(SourcePoseEventData&lt;Quaternion&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnSourcePoseChanged_XRTK_EventDatum_Input_SourcePoseEventData_XRTK_Definitions_Utilities_MixedRealityPose__">ControllerPoseSynchronizer.OnSourcePoseChanged(SourcePoseEventData&lt;MixedRealityPose&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_System_Single__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;Single&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector2__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;Vector2&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Vector3__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;Vector3&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_UnityEngine_Quaternion__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;Quaternion&gt;)</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.SDK.Input.InputSystemGlobalListener.html#XRTK_SDK_Input_InputSystemGlobalListener_OnDestroy">InputSystemGlobalListener.OnDestroy()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.equals#System_Object_Equals_System_Object_System_Object_">Object.Equals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.gettype#System_Object_GetType">Object.GetType()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.memberwiseclone#System_Object_MemberwiseClone">Object.MemberwiseClone()</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.referenceequals#System_Object_ReferenceEquals_System_Object_System_Object_">Object.ReferenceEquals(Object, Object)</a>
+    </div>
+    <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.object.tostring#System_Object_ToString">Object.ToString()</a>
+    </div>
+  </div>
+  <h6><strong>Namespace</strong>: <a class="xref" href="XRTK.SDK.UX.Pointers.html">XRTK.SDK.UX.Pointers</a></h6>
+  <h6><strong>Assembly</strong>: XRTK.SDK.dll</h6>
+  <h5 id="XRTK_SDK_UX_Pointers_HandSpatialPointer_syntax">Syntax</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public class HandSpatialPointer : LinePointer, IMixedRealityControllerPoseSynchronizer, IMixedRealitySourcePoseHandler, IMixedRealitySourceStateHandler, IMixedRealityInputHandler, IMixedRealityInputHandler&lt;float&gt;, IMixedRealityInputHandler&lt;Vector2&gt;, IMixedRealityInputHandler&lt;Vector3&gt;, IMixedRealityInputHandler&lt;Quaternion&gt;, IMixedRealityInputHandler&lt;MixedRealityPose&gt;, IMixedRealityPointer, IEqualityComparer, IMixedRealityTeleportHandler, IEventSystemHandler</code></pre>
+  </div>
+  <h3 id="properties">Properties
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_HandSpatialPointer_InteractionMode.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.HandSpatialPointer.InteractionMode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/HandSpatialPointer.cs/#L85">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_HandSpatialPointer_InteractionMode_" data-uid="XRTK.SDK.UX.Pointers.HandSpatialPointer.InteractionMode*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_HandSpatialPointer_InteractionMode" data-uid="XRTK.SDK.UX.Pointers.HandSpatialPointer.InteractionMode">InteractionMode</h4>
+  <div class="markdown level1 summary"><p>The <a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityPointer.html#XRTK_Interfaces_InputSystem_IMixedRealityPointer_InteractionMode">InteractionMode</a> for this pointer.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override InteractionMode InteractionMode { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.InteractionMode.html">InteractionMode</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_InteractionMode">BaseControllerPointer.InteractionMode</a></div>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_HandSpatialPointer_IsInteractionEnabled.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.HandSpatialPointer.IsInteractionEnabled%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/HandSpatialPointer.cs/#L34">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_HandSpatialPointer_IsInteractionEnabled_" data-uid="XRTK.SDK.UX.Pointers.HandSpatialPointer.IsInteractionEnabled*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_HandSpatialPointer_IsInteractionEnabled" data-uid="XRTK.SDK.UX.Pointers.HandSpatialPointer.IsInteractionEnabled">IsInteractionEnabled</h4>
+  <div class="markdown level1 summary"><p>Has the conditions been satisfied to enable the interaction of this pointer?</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool IsInteractionEnabled { get; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.boolean">Boolean</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.SDK.UX.Pointers.BaseControllerPointer.html#XRTK_SDK_UX_Pointers_BaseControllerPointer_IsInteractionEnabled">BaseControllerPointer.IsInteractionEnabled</a></div>
+  <h3 id="methods">Methods
+  </h3>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_HandSpatialPointer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_XRTK_Definitions_Utilities_MixedRealityPose__.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.HandSpatialPointer.OnInputChanged(XRTK.EventDatum.Input.InputEventData%7BXRTK.Definitions.Utilities.MixedRealityPose%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/HandSpatialPointer.cs/#L88">View Source</a>
+  </span>
+  <a id="XRTK_SDK_UX_Pointers_HandSpatialPointer_OnInputChanged_" data-uid="XRTK.SDK.UX.Pointers.HandSpatialPointer.OnInputChanged*"></a>
+  <h4 id="XRTK_SDK_UX_Pointers_HandSpatialPointer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_XRTK_Definitions_Utilities_MixedRealityPose__" data-uid="XRTK.SDK.UX.Pointers.HandSpatialPointer.OnInputChanged(XRTK.EventDatum.Input.InputEventData{XRTK.Definitions.Utilities.MixedRealityPose})">OnInputChanged(InputEventData&lt;MixedRealityPose&gt;)</h4>
+  <div class="markdown level1 summary"><p>Raised input event updates from the type of input specified in the interface handler implementation.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override void OnInputChanged(InputEventData&lt;MixedRealityPose&gt; eventData)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.EventDatum.Input.InputEventData-1.html">InputEventData</a>&lt;<a class="xref" href="XRTK.Definitions.Utilities.MixedRealityPose.html">MixedRealityPose</a>&gt;</td>
+        <td><span class="parametername">eventData</span></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="XRTK.SDK.Input.Handlers.ControllerPoseSynchronizer.html#XRTK_SDK_Input_Handlers_ControllerPoseSynchronizer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_XRTK_Definitions_Utilities_MixedRealityPose__">ControllerPoseSynchronizer.OnInputChanged(InputEventData&lt;MixedRealityPose&gt;)</a></div>
+  <h5 id="XRTK_SDK_UX_Pointers_HandSpatialPointer_OnInputChanged_XRTK_EventDatum_Input_InputEventData_XRTK_Definitions_Utilities_MixedRealityPose___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <a class="xref" href="XRTK.EventDatum.Input.InputEventData-1.html#XRTK_EventDatum_Input_InputEventData_1_InputData">InputData</a> is the current input data.</p>
+</div>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityControllerPoseSynchronizer.html">IMixedRealityControllerPoseSynchronizer</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourcePoseHandler.html">IMixedRealitySourcePoseHandler</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealitySourceStateHandler.html">IMixedRealitySourceStateHandler</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler.html">IMixedRealityInputHandler</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.Handlers.IMixedRealityInputHandler-1.html">IMixedRealityInputHandler&lt;T&gt;</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.InputSystem.IMixedRealityPointer.html">IMixedRealityPointer</a>
+  </div>
+  <div>
+      <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.iequalitycomparer">System.Collections.IEqualityComparer</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Interfaces.TeleportSystem.Handlers.IMixedRealityTeleportHandler.html">IMixedRealityTeleportHandler</a>
+  </div>
+  <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_EnsureComponent__1_UnityEngine_Component_">ComponentExtensions.EnsureComponent&lt;T&gt;(Component)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ComponentExtensions.html#XRTK_Extensions_ComponentExtensions_FindAncestorComponent__1_UnityEngine_Component_System_Boolean_">ComponentExtensions.FindAncestorComponent&lt;T&gt;(Component, Boolean)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_DontDestroyOnLoad_UnityEngine_Object_">UnityObjectExtensions.DontDestroyOnLoad(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_Destroy_UnityEngine_Object_System_Single_">UnityObjectExtensions.Destroy(Object, Single)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Extensions.UnityObjectExtensions.html#XRTK_Extensions_UnityObjectExtensions_IsNull_UnityEngine_Object_">UnityObjectExtensions.IsNull(Object)</a>
+  </div>
+  <div>
+      <a class="xref" href="XRTK.Utilities.Async.Awaiters.html#XRTK_Utilities_Async_Awaiters_WaitUntil__1___0_System_Func___0_System_Boolean__System_Int32_">Awaiters.WaitUntil&lt;T&gt;(T, Func&lt;T, Boolean&gt;, Int32)</a>
+  </div>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_SDK_UX_Pointers_HandSpatialPointer.md&amp;value=---%0Auid%3A%20XRTK.SDK.UX.Pointers.HandSpatialPointer%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
+                  </li>
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.sdk/Runtime/Features/UX/Scripts/Pointers/HandSpatialPointer.cs/#L17" class="contribution-link">View Source</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

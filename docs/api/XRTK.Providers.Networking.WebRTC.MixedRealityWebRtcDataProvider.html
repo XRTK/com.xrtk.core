@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MixedRealityWebRtcDataProvider
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -97,10 +97,13 @@
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
     <div>
-      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
+      <a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_ParentService">BaseDataProvider.ParentService</a>
     </div>
     <div>
-      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Priority">BaseServiceWithConstructor.Priority</a>
+      <a class="xref" href="XRTK.Services.BaseDataProvider.html#XRTK_Services_BaseDataProvider_Priority">BaseDataProvider.Priority</a>
+    </div>
+    <div>
+      <a class="xref" href="XRTK.Services.BaseServiceWithConstructor.html#XRTK_Services_BaseServiceWithConstructor_Name">BaseServiceWithConstructor.Name</a>
     </div>
     <div>
       <a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Initialize">BaseService.Initialize()</a>
@@ -164,19 +167,18 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider__ctor_System_String_System_UInt32_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.%23ctor(System.String%2CSystem.UInt32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_BaseMixedRealityProfile_XRTK_Interfaces_NetworkingSystem_IMixedRealityNetworkingSystem_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.%23ctor(System.String%2CSystem.UInt32%2CXRTK.Definitions.BaseMixedRealityProfile%2CXRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkingSystem)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L37">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L38">View Source</a>
   </span>
   <a id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider__ctor_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.#ctor*"></a>
-  <h4 id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider__ctor_System_String_System_UInt32_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.#ctor(System.String,System.UInt32)">MixedRealityWebRtcDataProvider(String, UInt32)</h4>
-  <div class="markdown level1 summary"><p>Constructor.</p>
-</div>
+  <h4 id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider__ctor_System_String_System_UInt32_XRTK_Definitions_BaseMixedRealityProfile_XRTK_Interfaces_NetworkingSystem_IMixedRealityNetworkingSystem_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.#ctor(System.String,System.UInt32,XRTK.Definitions.BaseMixedRealityProfile,XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkingSystem)">MixedRealityWebRtcDataProvider(String, UInt32, BaseMixedRealityProfile, IMixedRealityNetworkingSystem)</h4>
+  <div class="markdown level1 summary"></div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public MixedRealityWebRtcDataProvider(string name, uint priority)</code></pre>
+    <pre><code class="lang-csharp hljs">public MixedRealityWebRtcDataProvider(string name, uint priority, BaseMixedRealityProfile profile, IMixedRealityNetworkingSystem parentService)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -198,6 +200,16 @@
         <td><span class="parametername">priority</span></td>
         <td></td>
       </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Definitions.BaseMixedRealityProfile.html">BaseMixedRealityProfile</a></td>
+        <td><span class="parametername">profile</span></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkingSystem.html">IMixedRealityNetworkingSystem</a></td>
+        <td><span class="parametername">parentService</span></td>
+        <td></td>
+      </tr>
     </tbody>
   </table>
   <h3 id="properties">Properties
@@ -207,7 +219,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_Connections.md&amp;value=---%0Auid%3A%20XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.Connections%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L111">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L112">View Source</a>
   </span>
   <a id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_Connections_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.Connections*"></a>
   <h4 id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_Connections" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.Connections">Connections</h4>
@@ -238,7 +250,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_SourceId.md&amp;value=---%0Auid%3A%20XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.SourceId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L45">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L46">View Source</a>
   </span>
   <a id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_SourceId_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.SourceId*"></a>
   <h4 id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_SourceId" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.SourceId">SourceId</h4>
@@ -269,7 +281,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_SourceName.md&amp;value=---%0Auid%3A%20XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.SourceName%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L48">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L49">View Source</a>
   </span>
   <a id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_SourceName_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.SourceName*"></a>
   <h4 id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_SourceName" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.SourceName">SourceName</h4>
@@ -302,7 +314,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_Equals_System_Object_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L70">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L71">View Source</a>
   </span>
   <a id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_Equals_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.Equals*"></a>
   <h4 id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_Equals_System_Object_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.Equals(System.Object)">Equals(Object)</h4>
@@ -351,7 +363,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_Equals_XRTK_Interfaces_NetworkingSystem_IMixedRealityNetworkDataProvider_XRTK_Interfaces_NetworkingSystem_IMixedRealityNetworkDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.Equals(XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkDataProvider%2CXRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L58">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L59">View Source</a>
   </span>
   <a id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_Equals_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.Equals*"></a>
   <h4 id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_Equals_XRTK_Interfaces_NetworkingSystem_IMixedRealityNetworkDataProvider_XRTK_Interfaces_NetworkingSystem_IMixedRealityNetworkDataProvider_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.Equals(XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkDataProvider,XRTK.Interfaces.NetworkingSystem.IMixedRealityNetworkDataProvider)">Equals(IMixedRealityNetworkDataProvider, IMixedRealityNetworkDataProvider)</h4>
@@ -405,7 +417,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_GetHashCode.md&amp;value=---%0Auid%3A%20XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L91">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L92">View Source</a>
   </span>
   <a id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_GetHashCode_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.GetHashCode*"></a>
   <h4 id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_GetHashCode" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.GetHashCode">GetHashCode()</h4>
@@ -437,7 +449,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_SendData__1___0_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.SendData%60%601(%60%600)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L114">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L115">View Source</a>
   </span>
   <a id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_SendData_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.SendData*"></a>
   <h4 id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_SendData__1___0_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.SendData``1(``0)">SendData&lt;T&gt;(T)</h4>
@@ -487,7 +499,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_System_Collections_IEqualityComparer_Equals_System_Object_System_Object_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.System%23Collections%23IEqualityComparer%23Equals(System.Object%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L64">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L65">View Source</a>
   </span>
   <a id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_System_Collections_IEqualityComparer_Equals_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.System#Collections#IEqualityComparer#Equals*"></a>
   <h4 id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_System_Collections_IEqualityComparer_Equals_System_Object_System_Object_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.System#Collections#IEqualityComparer#Equals(System.Object,System.Object)">IEqualityComparer.Equals(Object, Object)</h4>
@@ -539,7 +551,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_System_Collections_IEqualityComparer_GetHashCode_System_Object_.md&amp;value=---%0Auid%3A%20XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.System%23Collections%23IEqualityComparer%23GetHashCode(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L85">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L86">View Source</a>
   </span>
   <a id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_System_Collections_IEqualityComparer_GetHashCode_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.System#Collections#IEqualityComparer#GetHashCode*"></a>
   <h4 id="XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider_System_Collections_IEqualityComparer_GetHashCode_System_Object_" data-uid="XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider.System#Collections#IEqualityComparer#GetHashCode(System.Object)">IEqualityComparer.GetHashCode(Object)</h4>
@@ -605,6 +617,9 @@
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
   <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
+  <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
   <div>
@@ -621,12 +636,13 @@
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Providers_Networking_WebRTC_MixedRealityWebRtcDataProvider.md&amp;value=---%0Auid%3A%20XRTK.Providers.Networking.WebRTC.MixedRealityWebRtcDataProvider%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L18" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Providers/Networking/WebRTC/MixedRealityWebRtcDataProvider.cs/#L19" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

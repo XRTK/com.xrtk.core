@@ -423,11 +423,6 @@ namespace XRTK.Services
 
             if (ActiveProfile.IsInputSystemEnabled)
             {
-#if UNITY_EDITOR
-                // Make sure unity axis mappings are set.
-                Utilities.Editor.InputMappingAxisUtility.CheckUnityInputManagerMappings(Definitions.Devices.ControllerMappingLibrary.UnityInputManagerAxes);
-#endif
-
                 if (TryCreateAndRegisterService<IMixedRealityInputSystem>(ActiveProfile.InputSystemType, out var service, ActiveProfile.InputSystemProfile) && InputSystem != null)
                 {
                     if (TryCreateAndRegisterService<IMixedRealityFocusProvider>(ActiveProfile.InputSystemProfile.FocusProviderType, out _))
@@ -444,12 +439,6 @@ namespace XRTK.Services
                 {
                     Debug.LogError("Failed to start the Input System!");
                 }
-            }
-            else
-            {
-#if UNITY_EDITOR
-                Utilities.Editor.InputMappingAxisUtility.RemoveMappings(Definitions.Devices.ControllerMappingLibrary.UnityInputManagerAxes);
-#endif
             }
 
             if (ActiveProfile.IsBoundarySystemEnabled)

@@ -1,0 +1,180 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Platform Template Generation | XRTK-Core </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Platform Template Generation | XRTK-Core ">
+    <meta name="generator" content="docfx 2.56.6.0">
+    
+    <link rel="shortcut icon" href="../favicon.png">
+    <link rel="stylesheet" href="../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../styles/docfx.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <meta property="docfx:navrel" content="../toc.html">
+    <meta property="docfx:tocrel" content="toc.html">
+    
+    
+    
+  </head>  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../index.html">
+                <img id="logo" class="svg" src="../logo.png" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="platform-template-generation">Platform Template Generation</h1>
+
+<p>New platforms are always welcomed with open arms! If you'd like to add your platform's support, this article will guide you through the process.</p>
+<h2 id="what-youll-need">What you'll need</h2>
+<p>The XRTK uses a <a href="https://github.com/XRTK/PlatformTemplate">template repository</a> to quickly add new platform support. You'll need to either clone this or, if you're a contributor to the XRTK team directly, you can create a new repository using this as a template.</p>
+<h2 id="getting-started">Getting Started</h2>
+<ol>
+<li><p>Create a new repository on Github using the template repository: <img src="../images/TemplateGeneration/NewRepoButton.png" alt="Create New Repository">
+<img src="../images/TemplateGeneration/NewRepoSettings.png" alt="New Repository Settings"></p>
+</li>
+<li><p>Clone the new Repository <img src="../images/TemplateGeneration/CloneRepo.png" alt="Clone New Repository"><img src="../images/TemplateGeneration/CloneLocalRepo.png" alt="Clone Local Repository"></p>
+</li>
+<li><p>Navigate to the root of the new repository and run <code>InitializeTempalte.ps1</code> using the command line <img src="../images/TemplateGeneration/ProjectRootExplorer.png" alt="Root Project Folder"></p>
+</li>
+<li><p>Type the name of your new project and press <code>Enter</code> <img src="../images/TemplateGeneration/RunPowershell.png" alt="Run InitiazeTempalte"></p>
+</li>
+<li><p>Stage, Commit, and Push the updated files directly to the new master branch origin <img src="../images/TemplateGeneration/CommitToMaster.png" alt="Commit Files"></p>
+</li>
+<li><p>Create the development branch and push it to the origin <img src="../images/TemplateGeneration/DevelopmentBranch.png" alt="Development Branch"></p>
+<blockquote>
+<p>This branch should be at the same checkout as your master branch
+<img src="../images/TemplateGeneration/DevelopmentCommit.png" alt="Development Checkout"></p>
+</blockquote>
+</li>
+<li><p>Open the new project in Unity and verify the project is setup correctly <img src="../images/TemplateGeneration/LaunchUnity.png" alt=""></p>
+</li>
+<li><p>Create a new branch and push the updated changes to the meta files and generated links <img src="../images/TemplateGeneration/BranchMetaFiles.png" alt=""> <img src="../images/TemplateGeneration/CommitToMetaFiles.png" alt="Meta File Branch Commit"></p>
+</li>
+<li><p>Back in GitHub, navigate to the project's settings</p>
+<ul>
+<li>Update the following features:<img src="../images/TemplateGeneration/DisableFeatures.png" alt="Disabled Features">
+<img src="../images/TemplateGeneration/MergeButtonFeatures.png" alt="Merge Button"></li>
+</ul>
+</li>
+<li><p>Update the default branch to <code>development</code> <img src="../images/TemplateGeneration/DefaultBranch.png" alt="Default Branch"></p>
+</li>
+<li><p>Add branch protection rules to <code>master</code>, <code>development</code>, and <code>features/*</code> <img src="../images/TemplateGeneration/BranchProtections-01.png" alt="Branch Protection Rules"></p>
+<blockquote>
+<p><strong>Note:</strong> The required status checks will not show until the pipeline has ran at least once. You'll need to come back and enable this once the pipeline is setup and the initial PR is opened.</p>
+</blockquote>
+<blockquote>
+<p><strong>Note:</strong> The <code>features/*</code> rule will have have an additional setting <code>Allow deletions</code> so that they can be removed after the PR is compelted.</p>
+</blockquote>
+</li>
+<li><p>Create a new Pipeline in Azure Devops <img src="../images/TemplateGeneration/NewPipeline-01.png" alt="Create new pipeline"></p>
+<blockquote>
+<p><strong>Note:</strong> This step requires an admin to the XRTK to complete. If you're using the project template in your own devops envirionment then the steps are the same.</p>
+</blockquote>
+</li>
+<li><p>Select the GitHub repository in the pipeline wizard <img src="../images/TemplateGeneration/NewPipeline-02.png" alt=""> <img src="../images/TemplateGeneration/NewPipeline-03.png" alt=""></p>
+</li>
+<li><p>Save the pipeline <img src="../images/TemplateGeneration/NewPipeline-04.png" alt=""></p>
+</li>
+<li><p>Edit the pipeline and update the name and triggers <img src="../images/TemplateGeneration/NewPipeline-05.png" alt=""> <img src="../images/TemplateGeneration/NewPipeline-06.png" alt=""> <img src="../images/TemplateGeneration/NewPipeline-07.png" alt=""></p>
+</li>
+<li><p>Save the pipeline, but <strong>DO NOT RUN!</strong> <img src="../images/TemplateGeneration/NewPipeline-08.png" alt=""></p>
+</li>
+<li><p>Open a pull request in your new GitHub repository for the meta file changes <img src="../images/TemplateGeneration/PullRequest-01.png" alt=""> <img src="../images/TemplateGeneration/PullRequest-02.png" alt=""></p>
+<blockquote>
+<p><strong>Note:</strong> You should see status checks start once Pull Request is opened</p>
+</blockquote>
+<p><img src="../images/TemplateGeneration/PullRequest-03.png" alt=""></p>
+<blockquote>
+<p><strong>Note:</strong> Once the status checks have ran at least once, you can go back to your branch protection rules and add the check</p>
+</blockquote>
+<p><img src="../images/TemplateGeneration/BranchProtections-02.png" alt=""></p>
+</li>
+</ol>
+<hr>
+<h3 id="raise-an-information-request"><a href="https://github.com/XRTK/XRTK-Core/issues/new?assignees=&amp;labels=question&amp;template=request_for_information.md&amp;title="><strong>Raise an Information Request</strong></a></h3>
+<p>If there is anything not mentioned in this document or you simply want to know more, raise an <a href="https://github.com/XRTK/XRTK-Core/issues/new?assignees=&amp;labels=question&amp;template=request_for_information.md&amp;title=">RFI (Request for Information) request here</a>.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/development/articles/03-template-generator.md/#L1" class="contribution-link">Improve this Doc</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In This Article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            (c) XRTK
+            
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../styles/docfx.js"></script>
+    <script type="text/javascript" src="../styles/main.js"></script>
+  </body>
+</html>

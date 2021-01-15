@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class GltfSampler
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -122,57 +122,28 @@
   <h5 id="XRTK_Utilities_Gltf_Schema_GltfSampler_syntax">Syntax</h5>
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">[Serializable]
-public class GltfSampler : GltfChildOfRootProperty</code></pre>
+public class GltfSampler : GltfChildOfRootProperty, ISerializationCallbackReceiver</code></pre>
   </div>
-  <h3 id="fields">Fields
+  <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfSampler_GltfMinFilter.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfSampler.GltfMinFilter%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfSampler_MagFilter.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfSampler.MagFilter%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Gltf/Schema/GltfSampler.cs/#L24">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Gltf/Schema/GltfSampler.cs/#L20">View Source</a>
   </span>
-  <h4 id="XRTK_Utilities_Gltf_Schema_GltfSampler_GltfMinFilter" data-uid="XRTK.Utilities.Gltf.Schema.GltfSampler.GltfMinFilter">GltfMinFilter</h4>
-  <div class="markdown level1 summary"><p>Minification filter. All valid values correspond to WebGL enums.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GltfMinFilterMode GltfMinFilter</code></pre>
-  </div>
-  <h5 class="fieldValue">Field Value</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><a class="xref" href="XRTK.Utilities.Gltf.Schema.GltfMinFilterMode.html">GltfMinFilterMode</a></td>
-        <td></td>
-      </tr>
-    </tbody>
-  </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfSampler_magFilter.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfSampler.magFilter%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Gltf/Schema/GltfSampler.cs/#L19">View Source</a>
-  </span>
-  <h4 id="XRTK_Utilities_Gltf_Schema_GltfSampler_magFilter" data-uid="XRTK.Utilities.Gltf.Schema.GltfSampler.magFilter">magFilter</h4>
+  <a id="XRTK_Utilities_Gltf_Schema_GltfSampler_MagFilter_" data-uid="XRTK.Utilities.Gltf.Schema.GltfSampler.MagFilter*"></a>
+  <h4 id="XRTK_Utilities_Gltf_Schema_GltfSampler_MagFilter" data-uid="XRTK.Utilities.Gltf.Schema.GltfSampler.MagFilter">MagFilter</h4>
   <div class="markdown level1 summary"><p>Magnification filter.
 Valid values correspond to WebGL enums: <code>9728</code> (NEAREST) and <code>9729</code> (LINEAR).</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GltfMagnificationFilterMode magFilter</code></pre>
+    <pre><code class="lang-csharp hljs">public GltfMagnificationFilterMode MagFilter { get; set; }</code></pre>
   </div>
-  <h5 class="fieldValue">Field Value</h5>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
@@ -189,20 +160,52 @@ Valid values correspond to WebGL enums: <code>9728</code> (NEAREST) and <code>97
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfSampler_wrapS.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfSampler.wrapS%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfSampler_MinFilter.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfSampler.MinFilter%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Gltf/Schema/GltfSampler.cs/#L29">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Gltf/Schema/GltfSampler.cs/#L28">View Source</a>
   </span>
-  <h4 id="XRTK_Utilities_Gltf_Schema_GltfSampler_wrapS" data-uid="XRTK.Utilities.Gltf.Schema.GltfSampler.wrapS">wrapS</h4>
+  <a id="XRTK_Utilities_Gltf_Schema_GltfSampler_MinFilter_" data-uid="XRTK.Utilities.Gltf.Schema.GltfSampler.MinFilter*"></a>
+  <h4 id="XRTK_Utilities_Gltf_Schema_GltfSampler_MinFilter" data-uid="XRTK.Utilities.Gltf.Schema.GltfSampler.MinFilter">MinFilter</h4>
+  <div class="markdown level1 summary"><p>Minification filter. All valid values correspond to WebGL enums.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public GltfMinFilterMode MinFilter { get; set; }</code></pre>
+  </div>
+  <h5 class="propertyValue">Property Value</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><a class="xref" href="XRTK.Utilities.Gltf.Schema.GltfMinFilterMode.html">GltfMinFilterMode</a></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfSampler_WrapS.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfSampler.WrapS%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Gltf/Schema/GltfSampler.cs/#L36">View Source</a>
+  </span>
+  <a id="XRTK_Utilities_Gltf_Schema_GltfSampler_WrapS_" data-uid="XRTK.Utilities.Gltf.Schema.GltfSampler.WrapS*"></a>
+  <h4 id="XRTK_Utilities_Gltf_Schema_GltfSampler_WrapS" data-uid="XRTK.Utilities.Gltf.Schema.GltfSampler.WrapS">WrapS</h4>
   <div class="markdown level1 summary"><p>s wrapping mode.  All valid values correspond to WebGL enums.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GltfWrapMode wrapS</code></pre>
+    <pre><code class="lang-csharp hljs">public GltfWrapMode WrapS { get; set; }</code></pre>
   </div>
-  <h5 class="fieldValue">Field Value</h5>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
@@ -219,20 +222,21 @@ Valid values correspond to WebGL enums: <code>9728</code> (NEAREST) and <code>97
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfSampler_wrapT.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfSampler.wrapT%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfSampler_WrapT.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfSampler.WrapT%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Gltf/Schema/GltfSampler.cs/#L34">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Gltf/Schema/GltfSampler.cs/#L44">View Source</a>
   </span>
-  <h4 id="XRTK_Utilities_Gltf_Schema_GltfSampler_wrapT" data-uid="XRTK.Utilities.Gltf.Schema.GltfSampler.wrapT">wrapT</h4>
+  <a id="XRTK_Utilities_Gltf_Schema_GltfSampler_WrapT_" data-uid="XRTK.Utilities.Gltf.Schema.GltfSampler.WrapT*"></a>
+  <h4 id="XRTK_Utilities_Gltf_Schema_GltfSampler_WrapT" data-uid="XRTK.Utilities.Gltf.Schema.GltfSampler.WrapT">WrapT</h4>
   <div class="markdown level1 summary"><p>t wrapping mode.  All valid values correspond to WebGL enums.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public GltfWrapMode wrapT</code></pre>
+    <pre><code class="lang-csharp hljs">public GltfWrapMode WrapT { get; set; }</code></pre>
   </div>
-  <h5 class="fieldValue">Field Value</h5>
+  <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
@@ -248,6 +252,9 @@ Valid values correspond to WebGL enums: <code>9728</code> (NEAREST) and <code>97
     </tbody>
   </table>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
@@ -265,12 +272,13 @@ Valid values correspond to WebGL enums: <code>9728</code> (NEAREST) and <code>97
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Utilities_Gltf_Schema_GltfSampler.md&amp;value=---%0Auid%3A%20XRTK.Utilities.Gltf.Schema.GltfSampler%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Utilities/Gltf/Schema/GltfSampler.cs/#L12" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Utilities/Gltf/Schema/GltfSampler.cs/#L13" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

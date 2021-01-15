@@ -10,13 +10,13 @@
     <meta name="viewport" content="width=device-width">
     <meta name="title" content="Class MixedRealitySpatialAwarenessSystem
    | XRTK-Core ">
-    <meta name="generator" content="docfx 2.52.0.0">
+    <meta name="generator" content="docfx 2.56.6.0">
     
     <link rel="shortcut icon" href="../favicon.png">
     <link rel="stylesheet" href="../styles/docfx.vendor.css">
     <link rel="stylesheet" href="../styles/docfx.css">
     <link rel="stylesheet" href="../styles/main.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <meta property="docfx:navrel" content="../toc.html">
     <meta property="docfx:tocrel" content="toc.html">
     
@@ -89,6 +89,7 @@
     <h5>Implements</h5>
     <div><a class="xref" href="XRTK.Interfaces.SpatialAwarenessSystem.IMixedRealitySpatialAwarenessSystem.html">IMixedRealitySpatialAwarenessSystem</a></div>
     <div><a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSystem.html">IMixedRealityEventSystem</a></div>
+    <div><a class="xref" href="XRTK.Interfaces.IMixedRealitySystem.html">IMixedRealitySystem</a></div>
     <div><a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a></div>
     <div><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">IDisposable</a></div>
   </div>
@@ -168,7 +169,8 @@
   <h6><strong>Assembly</strong>: XRTK.dll</h6>
   <h5 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class MixedRealitySpatialAwarenessSystem : BaseEventSystem, IMixedRealitySpatialAwarenessSystem, IMixedRealityEventSystem, IMixedRealityService, IDisposable</code></pre>
+    <pre><code class="lang-csharp hljs">[Guid(&quot;05EF9DDC-13C2-47D4-84C5-1C9CB6CC5C1C&quot;)]
+public class MixedRealitySpatialAwarenessSystem : BaseEventSystem, IMixedRealitySpatialAwarenessSystem, IMixedRealityEventSystem, IMixedRealitySystem, IMixedRealityService, IDisposable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -177,7 +179,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem__ctor_XRTK_Definitions_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystemProfile_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.%23ctor(XRTK.Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L25">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L28">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem__ctor_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.#ctor*"></a>
   <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem__ctor_XRTK_Definitions_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystemProfile_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.#ctor(XRTK.Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile)">MixedRealitySpatialAwarenessSystem(MixedRealitySpatialAwarenessSystemProfile)</h4>
@@ -212,7 +214,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_DetectedSpatialObservers.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.DetectedSpatialObservers%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L99">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L105">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_DetectedSpatialObservers_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.DetectedSpatialObservers*"></a>
   <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_DetectedSpatialObservers" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.DetectedSpatialObservers">DetectedSpatialObservers</h4>
@@ -221,7 +223,7 @@
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public HashSet&lt;IMixedRealitySpatialObserverDataProvider&gt; DetectedSpatialObservers { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public HashSet&lt;IMixedRealitySpatialAwarenessDataProvider&gt; DetectedSpatialObservers { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -233,7 +235,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;<a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.html">IMixedRealitySpatialObserverDataProvider</a>&gt;</td>
+        <td><a class="xref" href="https://docs.microsoft.com/dotnet/api/system.collections.generic.hashset-1">HashSet</a>&lt;<a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider.html">IMixedRealitySpatialAwarenessDataProvider</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
@@ -243,7 +245,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SpatialAwarenessRootParent.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SpatialAwarenessRootParent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L35">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L38">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SpatialAwarenessRootParent_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SpatialAwarenessRootParent*"></a>
   <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SpatialAwarenessRootParent" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SpatialAwarenessRootParent">SpatialAwarenessRootParent</h4>
@@ -274,7 +276,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SpatialMeshesParent.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SpatialMeshesParent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L56">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L62">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SpatialMeshesParent_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SpatialMeshesParent*"></a>
   <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SpatialMeshesParent" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SpatialMeshesParent">SpatialMeshesParent</h4>
@@ -305,7 +307,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SpatialMeshVisibility.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SpatialMeshVisibility%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L64">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L70">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SpatialMeshVisibility_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SpatialMeshVisibility*"></a>
   <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SpatialMeshVisibility" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SpatialMeshVisibility">SpatialMeshVisibility</h4>
@@ -339,7 +341,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SurfacesParent.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SurfacesParent%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L61">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L67">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SurfacesParent_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SurfacesParent*"></a>
   <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SurfacesParent" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SurfacesParent">SurfacesParent</h4>
@@ -372,7 +374,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_Destroy.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.Destroy%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L190">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L196">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_Destroy_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.Destroy*"></a>
   <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_Destroy" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.Destroy">Destroy()</h4>
@@ -390,7 +392,7 @@
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_GenerateNewObserverId.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.GenerateNewObserverId%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L116">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L122">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_GenerateNewObserverId_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.GenerateNewObserverId*"></a>
   <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_GenerateNewObserverId" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.GenerateNewObserverId">GenerateNewObserverId()</h4>
@@ -418,14 +420,14 @@
     </tbody>
   </table>
   <h5 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_GenerateNewObserverId_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>All <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.html">IMixedRealitySpatialObserverDataProvider</a>s are required to call this method in their initialization.</p>
+  <div class="markdown level1 remarks"><p>All <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider.html">IMixedRealitySpatialAwarenessDataProvider</a>s are required to call this method in their initialization.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_Initialize.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.Initialize%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L177">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L183">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_Initialize_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.Initialize*"></a>
   <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_Initialize" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.Initialize">Initialize()</h4>
@@ -441,19 +443,19 @@ This method is called once all services have been registered in the Mixed Realit
   <div><a class="xref" href="XRTK.Services.BaseService.html#XRTK_Services_BaseService_Initialize">BaseService.Initialize()</a></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_IsObserverRunning_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.IsObserverRunning(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_IsObserverRunning_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.IsObserverRunning(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L102">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L108">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_IsObserverRunning_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.IsObserverRunning*"></a>
-  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_IsObserverRunning_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.IsObserverRunning(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider)">IsObserverRunning(IMixedRealitySpatialObserverDataProvider)</h4>
+  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_IsObserverRunning_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.IsObserverRunning(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider)">IsObserverRunning(IMixedRealitySpatialAwarenessDataProvider)</h4>
   <div class="markdown level1 summary"><p>Indicates the current running state of the spatial awareness observer.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public bool IsObserverRunning(IMixedRealitySpatialObserverDataProvider observer)</code></pre>
+    <pre><code class="lang-csharp hljs">public bool IsObserverRunning(IMixedRealitySpatialAwarenessDataProvider observer)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -466,7 +468,7 @@ This method is called once all services have been registered in the Mixed Realit
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.html">IMixedRealitySpatialObserverDataProvider</a></td>
+        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider.html">IMixedRealitySpatialAwarenessDataProvider</a></td>
         <td><span class="parametername">observer</span></td>
         <td></td>
       </tr>
@@ -492,7 +494,7 @@ This method is called once all services have been registered in the Mixed Realit
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseMeshAdded_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialMeshObserver_XRTK_Definitions_SpatialAwarenessSystem_SpatialMeshObject_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseMeshAdded(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialMeshObserver%2CXRTK.Definitions.SpatialAwarenessSystem.SpatialMeshObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L253">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L226">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseMeshAdded_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseMeshAdded*"></a>
   <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseMeshAdded_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialMeshObserver_XRTK_Definitions_SpatialAwarenessSystem_SpatialMeshObject_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseMeshAdded(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialMeshObserver,XRTK.Definitions.SpatialAwarenessSystem.SpatialMeshObject)">RaiseMeshAdded(IMixedRealitySpatialMeshObserver, SpatialMeshObject)</h4>
@@ -533,7 +535,7 @@ This method is called once all services have been registered in the Mixed Realit
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseMeshRemoved_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialMeshObserver_XRTK_Definitions_SpatialAwarenessSystem_SpatialMeshObject_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseMeshRemoved(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialMeshObserver%2CXRTK.Definitions.SpatialAwarenessSystem.SpatialMeshObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L293">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L266">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseMeshRemoved_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseMeshRemoved*"></a>
   <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseMeshRemoved_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialMeshObserver_XRTK_Definitions_SpatialAwarenessSystem_SpatialMeshObject_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseMeshRemoved(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialMeshObserver,XRTK.Definitions.SpatialAwarenessSystem.SpatialMeshObject)">RaiseMeshRemoved(IMixedRealitySpatialMeshObserver, SpatialMeshObject)</h4>
@@ -574,7 +576,7 @@ This method is called once all services have been registered in the Mixed Realit
     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseMeshUpdated_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialMeshObserver_XRTK_Definitions_SpatialAwarenessSystem_SpatialMeshObject_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseMeshUpdated(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialMeshObserver%2CXRTK.Definitions.SpatialAwarenessSystem.SpatialMeshObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L273">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L246">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseMeshUpdated_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseMeshUpdated*"></a>
   <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseMeshUpdated_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialMeshObserver_XRTK_Definitions_SpatialAwarenessSystem_SpatialMeshObject_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseMeshUpdated(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialMeshObserver,XRTK.Definitions.SpatialAwarenessSystem.SpatialMeshObject)">RaiseMeshUpdated(IMixedRealitySpatialMeshObserver, SpatialMeshObject)</h4>
@@ -612,19 +614,19 @@ This method is called once all services have been registered in the Mixed Realit
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSpatialAwarenessObserverDetected_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSpatialAwarenessObserverDetected(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSpatialAwarenessObserverDetected_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSpatialAwarenessObserverDetected(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L158">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L164">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSpatialAwarenessObserverDetected_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSpatialAwarenessObserverDetected*"></a>
-  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSpatialAwarenessObserverDetected_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSpatialAwarenessObserverDetected(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider)">RaiseSpatialAwarenessObserverDetected(IMixedRealitySpatialObserverDataProvider)</h4>
-  <div class="markdown level1 summary"><p>Raise the event that a <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.html">IMixedRealitySpatialObserverDataProvider</a> has been detected.</p>
+  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSpatialAwarenessObserverDetected_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSpatialAwarenessObserverDetected(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider)">RaiseSpatialAwarenessObserverDetected(IMixedRealitySpatialAwarenessDataProvider)</h4>
+  <div class="markdown level1 summary"><p>Raise the event that a <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider.html">IMixedRealitySpatialAwarenessDataProvider</a> has been detected.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RaiseSpatialAwarenessObserverDetected(IMixedRealitySpatialObserverDataProvider observer)</code></pre>
+    <pre><code class="lang-csharp hljs">public void RaiseSpatialAwarenessObserverDetected(IMixedRealitySpatialAwarenessDataProvider observer)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -637,7 +639,7 @@ This method is called once all services have been registered in the Mixed Realit
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.html">IMixedRealitySpatialObserverDataProvider</a></td>
+        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider.html">IMixedRealitySpatialAwarenessDataProvider</a></td>
         <td><span class="parametername">observer</span></td>
         <td></td>
       </tr>
@@ -645,19 +647,19 @@ This method is called once all services have been registered in the Mixed Realit
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSpatialAwarenessObserverLost_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSpatialAwarenessObserverLost(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSpatialAwarenessObserverLost_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSpatialAwarenessObserverLost(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L164">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L170">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSpatialAwarenessObserverLost_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSpatialAwarenessObserverLost*"></a>
-  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSpatialAwarenessObserverLost_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSpatialAwarenessObserverLost(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider)">RaiseSpatialAwarenessObserverLost(IMixedRealitySpatialObserverDataProvider)</h4>
-  <div class="markdown level1 summary"><p>Raise the event that a <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.html">IMixedRealitySpatialObserverDataProvider</a> has been lost.</p>
+  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSpatialAwarenessObserverLost_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSpatialAwarenessObserverLost(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider)">RaiseSpatialAwarenessObserverLost(IMixedRealitySpatialAwarenessDataProvider)</h4>
+  <div class="markdown level1 summary"><p>Raise the event that a <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider.html">IMixedRealitySpatialAwarenessDataProvider</a> has been lost.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RaiseSpatialAwarenessObserverLost(IMixedRealitySpatialObserverDataProvider observer)</code></pre>
+    <pre><code class="lang-csharp hljs">public void RaiseSpatialAwarenessObserverLost(IMixedRealitySpatialAwarenessDataProvider observer)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -670,7 +672,7 @@ This method is called once all services have been registered in the Mixed Realit
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.html">IMixedRealitySpatialObserverDataProvider</a></td>
+        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider.html">IMixedRealitySpatialAwarenessDataProvider</a></td>
         <td><span class="parametername">observer</span></td>
         <td></td>
       </tr>
@@ -678,19 +680,19 @@ This method is called once all services have been registered in the Mixed Realit
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceAdded_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySurfaceObserver_System_Int32_UnityEngine_GameObject_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceAdded(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySurfaceObserver%2CSystem.Int32%2CUnityEngine.GameObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceAdded_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialSurfaceObserver_System_Int32_UnityEngine_GameObject_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceAdded(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialSurfaceObserver%2CSystem.Int32%2CUnityEngine.GameObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L314">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L287">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceAdded_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceAdded*"></a>
-  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceAdded_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySurfaceObserver_System_Int32_UnityEngine_GameObject_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceAdded(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySurfaceObserver,System.Int32,UnityEngine.GameObject)">RaiseSurfaceAdded(IMixedRealitySurfaceObserver, Int32, GameObject)</h4>
+  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceAdded_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialSurfaceObserver_System_Int32_UnityEngine_GameObject_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceAdded(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialSurfaceObserver,System.Int32,UnityEngine.GameObject)">RaiseSurfaceAdded(IMixedRealitySpatialSurfaceObserver, Int32, GameObject)</h4>
   <div class="markdown level1 summary"><p>The spatial awareness system will call the <a class="xref" href="XRTK.Interfaces.SpatialAwarenessSystem.Handlers.IMixedRealitySpatialAwarenessSurfaceFindingHandler-1.html#XRTK_Interfaces_SpatialAwarenessSystem_Handlers_IMixedRealitySpatialAwarenessSurfaceFindingHandler_1_OnSurfaceAdded_XRTK_EventDatum_SpatialAwarenessSystem_MixedRealitySpatialAwarenessEventData__0__">OnSurfaceAdded(MixedRealitySpatialAwarenessEventData&lt;T&gt;)</a> method to indicate a planar surface has been added.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RaiseSurfaceAdded(IMixedRealitySurfaceObserver observer, int surfaceId, GameObject surfaceObject)</code></pre>
+    <pre><code class="lang-csharp hljs">public void RaiseSurfaceAdded(IMixedRealitySpatialSurfaceObserver observer, int surfaceId, GameObject surfaceObject)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -703,7 +705,7 @@ This method is called once all services have been registered in the Mixed Realit
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySurfaceObserver.html">IMixedRealitySurfaceObserver</a></td>
+        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialSurfaceObserver.html">IMixedRealitySpatialSurfaceObserver</a></td>
         <td><span class="parametername">observer</span></td>
         <td></td>
       </tr>
@@ -721,24 +723,24 @@ This method is called once all services have been registered in the Mixed Realit
       </tr>
     </tbody>
   </table>
-  <h5 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceAdded_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySurfaceObserver_System_Int32_UnityEngine_GameObject__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method is to be called by implementations of the <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySurfaceObserver.html">IMixedRealitySurfaceObserver</a> interface, and not by application code.</p>
+  <h5 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceAdded_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialSurfaceObserver_System_Int32_UnityEngine_GameObject__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method is to be called by implementations of the <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialSurfaceObserver.html">IMixedRealitySpatialSurfaceObserver</a> interface, and not by application code.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceRemoved_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySurfaceObserver_System_Int32_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceRemoved(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySurfaceObserver%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceRemoved_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialSurfaceObserver_System_Int32_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceRemoved(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialSurfaceObserver%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L348">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L321">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceRemoved_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceRemoved*"></a>
-  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceRemoved_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySurfaceObserver_System_Int32_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceRemoved(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySurfaceObserver,System.Int32)">RaiseSurfaceRemoved(IMixedRealitySurfaceObserver, Int32)</h4>
+  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceRemoved_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialSurfaceObserver_System_Int32_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceRemoved(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialSurfaceObserver,System.Int32)">RaiseSurfaceRemoved(IMixedRealitySpatialSurfaceObserver, Int32)</h4>
   <div class="markdown level1 summary"><p>The spatial awareness system will call the <a class="xref" href="XRTK.Interfaces.SpatialAwarenessSystem.Handlers.IMixedRealitySpatialAwarenessSurfaceFindingHandler-1.html#XRTK_Interfaces_SpatialAwarenessSystem_Handlers_IMixedRealitySpatialAwarenessSurfaceFindingHandler_1_OnSurfaceUpdated_XRTK_EventDatum_SpatialAwarenessSystem_MixedRealitySpatialAwarenessEventData__0__">OnSurfaceUpdated(MixedRealitySpatialAwarenessEventData&lt;T&gt;)</a> method to indicate an existing planar surface has been removed.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RaiseSurfaceRemoved(IMixedRealitySurfaceObserver observer, int surfaceId)</code></pre>
+    <pre><code class="lang-csharp hljs">public void RaiseSurfaceRemoved(IMixedRealitySpatialSurfaceObserver observer, int surfaceId)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -751,7 +753,7 @@ This method is called once all services have been registered in the Mixed Realit
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySurfaceObserver.html">IMixedRealitySurfaceObserver</a></td>
+        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialSurfaceObserver.html">IMixedRealitySpatialSurfaceObserver</a></td>
         <td><span class="parametername">observer</span></td>
         <td></td>
       </tr>
@@ -763,24 +765,24 @@ This method is called once all services have been registered in the Mixed Realit
       </tr>
     </tbody>
   </table>
-  <h5 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceRemoved_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySurfaceObserver_System_Int32__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method is to be called by implementations of the <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySurfaceObserver.html">IMixedRealitySurfaceObserver</a> interface, and not by application code.</p>
+  <h5 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceRemoved_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialSurfaceObserver_System_Int32__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method is to be called by implementations of the <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialSurfaceObserver.html">IMixedRealitySpatialSurfaceObserver</a> interface, and not by application code.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceUpdated_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySurfaceObserver_System_Int32_UnityEngine_GameObject_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceUpdated(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySurfaceObserver%2CSystem.Int32%2CUnityEngine.GameObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceUpdated_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialSurfaceObserver_System_Int32_UnityEngine_GameObject_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceUpdated(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialSurfaceObserver%2CSystem.Int32%2CUnityEngine.GameObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L331">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L304">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceUpdated_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceUpdated*"></a>
-  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceUpdated_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySurfaceObserver_System_Int32_UnityEngine_GameObject_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceUpdated(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySurfaceObserver,System.Int32,UnityEngine.GameObject)">RaiseSurfaceUpdated(IMixedRealitySurfaceObserver, Int32, GameObject)</h4>
+  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceUpdated_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialSurfaceObserver_System_Int32_UnityEngine_GameObject_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.RaiseSurfaceUpdated(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialSurfaceObserver,System.Int32,UnityEngine.GameObject)">RaiseSurfaceUpdated(IMixedRealitySpatialSurfaceObserver, Int32, GameObject)</h4>
   <div class="markdown level1 summary"><p>The spatial awareness system will call the <a class="xref" href="XRTK.Interfaces.SpatialAwarenessSystem.Handlers.IMixedRealitySpatialAwarenessSurfaceFindingHandler-1.html#XRTK_Interfaces_SpatialAwarenessSystem_Handlers_IMixedRealitySpatialAwarenessSurfaceFindingHandler_1_OnSurfaceUpdated_XRTK_EventDatum_SpatialAwarenessSystem_MixedRealitySpatialAwarenessEventData__0__">OnSurfaceUpdated(MixedRealitySpatialAwarenessEventData&lt;T&gt;)</a> method to indicate an existing planar surface has been updated.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void RaiseSurfaceUpdated(IMixedRealitySurfaceObserver observer, int surfaceId, GameObject surfaceObject)</code></pre>
+    <pre><code class="lang-csharp hljs">public void RaiseSurfaceUpdated(IMixedRealitySpatialSurfaceObserver observer, int surfaceId, GameObject surfaceObject)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -793,7 +795,7 @@ This method is called once all services have been registered in the Mixed Realit
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySurfaceObserver.html">IMixedRealitySurfaceObserver</a></td>
+        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialSurfaceObserver.html">IMixedRealitySpatialSurfaceObserver</a></td>
         <td><span class="parametername">observer</span></td>
         <td></td>
       </tr>
@@ -811,24 +813,24 @@ This method is called once all services have been registered in the Mixed Realit
       </tr>
     </tbody>
   </table>
-  <h5 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceUpdated_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySurfaceObserver_System_Int32_UnityEngine_GameObject__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method is to be called by implementations of the <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySurfaceObserver.html">IMixedRealitySurfaceObserver</a> interface, and not by application code.</p>
+  <h5 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_RaiseSurfaceUpdated_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialSurfaceObserver_System_Int32_UnityEngine_GameObject__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method is to be called by implementations of the <a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialSurfaceObserver.html">IMixedRealitySpatialSurfaceObserver</a> interface, and not by application code.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_StartObserver_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.StartObserver(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_StartObserver_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.StartObserver(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L132">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L138">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_StartObserver_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.StartObserver*"></a>
-  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_StartObserver_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.StartObserver(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider)">StartObserver(IMixedRealitySpatialObserverDataProvider)</h4>
+  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_StartObserver_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.StartObserver(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider)">StartObserver(IMixedRealitySpatialAwarenessDataProvider)</h4>
   <div class="markdown level1 summary"><p>Starts / restarts the spatial observer.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void StartObserver(IMixedRealitySpatialObserverDataProvider observer)</code></pre>
+    <pre><code class="lang-csharp hljs">public void StartObserver(IMixedRealitySpatialAwarenessDataProvider observer)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -841,30 +843,30 @@ This method is called once all services have been registered in the Mixed Realit
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.html">IMixedRealitySpatialObserverDataProvider</a></td>
+        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider.html">IMixedRealitySpatialAwarenessDataProvider</a></td>
         <td><span class="parametername">observer</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_StartObserver_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider__remarks">Remarks</h5>
+  <h5 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_StartObserver_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This will cause spatial awareness events to resume.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SuspendObserver_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SuspendObserver(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SuspendObserver_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider_.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SuspendObserver(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L145">View Source</a>
+    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L151">View Source</a>
   </span>
   <a id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SuspendObserver_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SuspendObserver*"></a>
-  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SuspendObserver_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SuspendObserver(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider)">SuspendObserver(IMixedRealitySpatialObserverDataProvider)</h4>
+  <h4 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SuspendObserver_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider_" data-uid="XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem.SuspendObserver(XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider)">SuspendObserver(IMixedRealitySpatialAwarenessDataProvider)</h4>
   <div class="markdown level1 summary"><p>Stops / pauses the spatial observer.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SuspendObserver(IMixedRealitySpatialObserverDataProvider observer)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SuspendObserver(IMixedRealitySpatialAwarenessDataProvider observer)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -877,13 +879,13 @@ This method is called once all services have been registered in the Mixed Realit
     </thead>
     <tbody>
       <tr>
-        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialObserverDataProvider.html">IMixedRealitySpatialObserverDataProvider</a></td>
+        <td><a class="xref" href="XRTK.Interfaces.Providers.SpatialObservers.IMixedRealitySpatialAwarenessDataProvider.html">IMixedRealitySpatialAwarenessDataProvider</a></td>
         <td><span class="parametername">observer</span></td>
         <td></td>
       </tr>
     </tbody>
   </table>
-  <h5 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SuspendObserver_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialObserverDataProvider__remarks">Remarks</h5>
+  <h5 id="XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem_SuspendObserver_XRTK_Interfaces_Providers_SpatialObservers_IMixedRealitySpatialAwarenessDataProvider__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This will cause spatial awareness events to be suspended until ResumeObserver is called.</p>
 </div>
   <h3 id="implements">Implements</h3>
@@ -894,12 +896,18 @@ This method is called once all services have been registered in the Mixed Realit
       <a class="xref" href="XRTK.Interfaces.Events.IMixedRealityEventSystem.html">IMixedRealityEventSystem</a>
   </div>
   <div>
+      <a class="xref" href="XRTK.Interfaces.IMixedRealitySystem.html">IMixedRealitySystem</a>
+  </div>
+  <div>
       <a class="xref" href="XRTK.Interfaces.IMixedRealityService.html">IMixedRealityService</a>
   </div>
   <div>
       <a class="xref" href="https://docs.microsoft.com/dotnet/api/system.idisposable">System.IDisposable</a>
   </div>
   <h3 id="extensionmethods">Extension Methods</h3>
+  <div>
+      <a class="xref" href="Leap.CSharpExtensions.html#Leap_CSharpExtensions_HasMethod_System_Object_System_String_">CSharpExtensions.HasMethod(Object, String)</a>
+  </div>
   <div>
       <a class="xref" href="XRTK.Extensions.ConverterExtensions.html#XRTK_Extensions_ConverterExtensions_GetBuiltInTypeBytes__1___0_">ConverterExtensions.GetBuiltInTypeBytes&lt;T&gt;(T)</a>
   </div>
@@ -917,12 +925,13 @@ This method is called once all services have been registered in the Mixed Realit
                     <a href="https://github.com/XRTK/XRTK-Core/new/development/docs-ref-overwrite/new?filename=XRTK_Services_SpatialAwarenessSystem_MixedRealitySpatialAwarenessSystem.md&amp;value=---%0Auid%3A%20XRTK.Services.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystem%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A" class="contribution-link">Improve this Doc</a>
                   </li>
                   <li>
-                    <a href="https://github.com/XRTK/XRTK-Core/blob/master/XRTK-Core/Packages/com.xrtk.core/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L19" class="contribution-link">View Source</a>
+                    <a href="https://github.com/XRTK/XRTK-Core/blob/merge/XRTK-Core/Packages/com.xrtk.core/Runtime/Services/SpatialAwarenessSystem/MixedRealitySpatialAwarenessSystem.cs/#L21" class="contribution-link">View Source</a>
                   </li>
                 </ul>
               </div>
               <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
-              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+                <h5>In This Article</h5>
+                <div></div>
               </nav>
             </div>
           </div>

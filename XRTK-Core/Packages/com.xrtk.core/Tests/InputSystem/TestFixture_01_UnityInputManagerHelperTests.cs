@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using XRTK.Definitions.Devices;
-using XRTK.Utilities.Editor;
+using XRTK.Editor.Utilities;
 using NUnit.Framework;
 
 namespace XRTK.Tests.InputSystem
@@ -12,7 +12,7 @@ namespace XRTK.Tests.InputSystem
         [Test]
         public void Test01_TestAddCustomMappings()
         {
-            InputMappingAxisUtility.CheckUnityInputManagerMappings(ControllerMappingLibrary.UnityInputManagerAxes);
+            InputMappingAxisUtility.CheckUnityInputManagerMappings(ControllerMappingUtilities.UnityInputManagerAxes);
 
             Assert.IsTrue(InputMappingAxisUtility.DoesAxisNameExist(ControllerMappingLibrary.AXIS_1));
             Assert.IsTrue(InputMappingAxisUtility.DoesAxisNameExist(ControllerMappingLibrary.AXIS_2));
@@ -42,7 +42,7 @@ namespace XRTK.Tests.InputSystem
         [Test]
         public void Test02_TestRemoveCustomMappings()
         {
-            InputMappingAxisUtility.RemoveMappings(ControllerMappingLibrary.UnityInputManagerAxes);
+            InputMappingAxisUtility.RemoveMappings(ControllerMappingUtilities.UnityInputManagerAxes);
 
             Assert.IsFalse(InputMappingAxisUtility.DoesAxisNameExist(ControllerMappingLibrary.AXIS_1));
             Assert.IsFalse(InputMappingAxisUtility.DoesAxisNameExist(ControllerMappingLibrary.AXIS_2));
@@ -73,7 +73,7 @@ namespace XRTK.Tests.InputSystem
         public void TearDown()
         {
             // Put the mappings back.
-            InputMappingAxisUtility.CheckUnityInputManagerMappings(ControllerMappingLibrary.UnityInputManagerAxes);
+            InputMappingAxisUtility.CheckUnityInputManagerMappings(ControllerMappingUtilities.UnityInputManagerAxes);
         }
     }
 }

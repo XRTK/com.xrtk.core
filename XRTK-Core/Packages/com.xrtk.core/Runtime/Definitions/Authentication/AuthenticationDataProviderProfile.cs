@@ -30,7 +30,7 @@ namespace XRTK.Definitions.Authentication
         /// <summary>
         /// The identity provider url to request OAuth tokens from.
         /// </summary>
-        public string IdentifyProviderUrl => identityProviderUrl;
+        public string IdentityProviderUrl => identityProviderUrl;
 
         [SerializeField]
         [Tooltip("Scopes or Permissions to request access to.")]

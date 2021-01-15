@@ -9,6 +9,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
     [CustomEditor(typeof(MixedRealityTeleportValidationDataProviderProfile))]
     public class MixedRealityTeleportValidationDataProviderProfileInspector : BaseMixedRealityProfileInspector
     {
+        private SerializedProperty hotSpotsOnly;
         private SerializedProperty validLayers;
         private SerializedProperty invalidLayers;
         private SerializedProperty upDirectionThreshold;
@@ -19,6 +20,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
         {
             base.OnEnable();
 
+            hotSpotsOnly = serializedObject.FindProperty(nameof(hotSpotsOnly));
             validLayers = serializedObject.FindProperty(nameof(validLayers));
             invalidLayers = serializedObject.FindProperty(nameof(invalidLayers));
             upDirectionThreshold = serializedObject.FindProperty(nameof(upDirectionThreshold));
@@ -32,6 +34,7 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
 
             serializedObject.Update();
 
+            EditorGUILayout.PropertyField(hotSpotsOnly);
             EditorGUILayout.PropertyField(validLayers);
             EditorGUILayout.PropertyField(invalidLayers);
             EditorGUILayout.PropertyField(upDirectionThreshold);

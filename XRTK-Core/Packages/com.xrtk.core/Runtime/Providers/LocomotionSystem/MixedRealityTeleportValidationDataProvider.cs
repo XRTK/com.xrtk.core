@@ -20,6 +20,7 @@ namespace XRTK.Providers.LocomotionSystem
         public MixedRealityTeleportValidationDataProvider(string name, uint priority, MixedRealityTeleportValidationDataProviderProfile profile, IMixedRealityLocomotionSystem parentService)
             : base(name, priority, profile, parentService)
         {
+            hotSpotsOnly = profile.HotSpotsOnly;
             validLayers = profile.ValidLayers;
             invalidLayers = profile.InvalidLayers;
             upDirectionThreshold = profile.UpDirectionThreshold;
@@ -27,6 +28,7 @@ namespace XRTK.Providers.LocomotionSystem
             maxHeightDistance = profile.MaxHeightDistance;
         }
 
+        private readonly bool hotSpotsOnly;
         private readonly LayerMask validLayers;
         private readonly LayerMask invalidLayers;
         private readonly float upDirectionThreshold;
@@ -39,7 +41,7 @@ namespace XRTK.Providers.LocomotionSystem
             TeleportValidationResult teleportValidationResult;
 
             // Check hotspots only
-            if (((IMixedRealityLocomotionSystem)ParentService).AllowHotSpotsOnly && (teleportHotSpot == null || !teleportHotSpot.IsActive))
+            if (hotSpotsOnly && (teleportHotSpot == null || !teleportHotSpot.IsActive))
             {
                 teleportValidationResult = TeleportValidationResult.Invalid;
             }

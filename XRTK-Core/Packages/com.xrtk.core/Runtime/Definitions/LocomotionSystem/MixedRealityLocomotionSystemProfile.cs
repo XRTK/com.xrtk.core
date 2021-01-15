@@ -18,19 +18,6 @@ namespace XRTK.Definitions.LocomotionSystem
         #region Teleporting
 
         [SerializeField]
-        [Tooltip("Should teleportation only be allowed if the target is a hotspot?")]
-        private bool hotSpotsOnly = false;
-
-        /// <summary>
-        /// Should teleportation only be allowed if the target is a hotspot?
-        /// </summary>
-        public bool HotSpotsOnly
-        {
-            get => hotSpotsOnly;
-            internal set => hotSpotsOnly = value;
-        }
-
-        [SerializeField]
         [Tooltip("The concrete teleport provider to use for teleportation.")]
         [Implements(typeof(IMixedRealityTeleportProvider), TypeGrouping.ByNamespaceFlat)]
         private SystemType teleportProvider;

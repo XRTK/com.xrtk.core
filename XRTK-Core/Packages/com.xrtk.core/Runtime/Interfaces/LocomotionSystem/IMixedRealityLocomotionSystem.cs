@@ -25,12 +25,6 @@ namespace XRTK.Interfaces.LocomotionSystem
         bool CanTeleport { get; set; }
 
         /// <summary>
-        /// Gets or sets whether the <see cref="IMixedRealityLocomotionSystem"/> should only allow teleportation
-        /// to <see cref="IMixedRealityTeleportHotSpot"/>s.
-        /// </summary>
-        bool AllowHotSpotsOnly { get; set; }
-
-        /// <summary>
         /// Gets the <see cref="MixedRealityInputAction"/> used to trigger a teleport request.
         /// </summary>
         MixedRealityInputAction TeleportAction { get; }

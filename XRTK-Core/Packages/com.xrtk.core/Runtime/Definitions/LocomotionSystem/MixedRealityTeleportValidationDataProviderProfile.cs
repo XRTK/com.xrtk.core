@@ -9,9 +9,22 @@ namespace XRTK.Definitions.LocomotionSystem
     /// <summary>
     /// Configuration profile for the <see cref="MixedRealityTeleportValidationDataProvider"/>.
     /// </summary>
-    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Teleport System/Teleport Validation Data Provider Profile", fileName = "MixedRealityTeleportValidationDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
+    [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Locomotion System/Teleport Validation Data Provider Profile", fileName = "MixedRealityTeleportValidationDataProviderProfile", order = (int)CreateProfileMenuItemIndices.Input)]
     public class MixedRealityTeleportValidationDataProviderProfile : BaseMixedRealityProfile
     {
+        [SerializeField]
+        [Tooltip("Should teleportation only be allowed if the target is a hotspot?")]
+        private bool hotSpotsOnly = false;
+
+        /// <summary>
+        /// Should teleportation only be allowed if the target is a hotspot?
+        /// </summary>
+        public bool HotSpotsOnly
+        {
+            get => hotSpotsOnly;
+            internal set => hotSpotsOnly = value;
+        }
+
         [SerializeField]
         [Tooltip("Layers that are considered 'valid' for teleportation.")]
         private LayerMask validLayers = UnityEngine.Physics.DefaultRaycastLayers;

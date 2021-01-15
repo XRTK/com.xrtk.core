@@ -11,7 +11,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
     public class MixedRealityLocomotionSystemProfileInspector : MixedRealityServiceProfileInspector
     {
         // Teleporting
-        private SerializedProperty hotSpotsOnly;
         private SerializedProperty teleportProvider;
         private SerializedProperty teleportAction;
         private SerializedProperty cancelTeleportAction;
@@ -26,7 +25,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             base.OnEnable();
 
             // Teleporting
-            hotSpotsOnly = serializedObject.FindProperty(nameof(hotSpotsOnly));
             teleportProvider = serializedObject.FindProperty(nameof(teleportProvider));
             teleportAction = serializedObject.FindProperty(nameof(teleportAction));
             cancelTeleportAction = serializedObject.FindProperty(nameof(cancelTeleportAction));
@@ -47,7 +45,6 @@ namespace XRTK.Editor.Profiles.LocomotionSystem
             // Teleporting
             EditorGUILayout.LabelField("Teleportation", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
-            EditorGUILayout.PropertyField(hotSpotsOnly);
             EditorGUILayout.PropertyField(teleportProvider);
             var referenceProperty = teleportProvider.FindPropertyRelative("reference");
             if (!XRTK.Extensions.TypeExtensions.TryResolveType(referenceProperty.stringValue, out var referenceType))

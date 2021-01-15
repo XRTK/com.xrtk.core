@@ -28,7 +28,6 @@ namespace XRTK.Services.LocomotionSystem
             : base(profile)
         {
             teleportProvider = profile.TeleportProvider?.Type == null ? null : teleportProvider = profile.TeleportProvider;
-            AllowHotSpotsOnly = profile.HotSpotsOnly;
             TeleportAction = profile.TeleportAction;
             CancelTeleportAction = profile.CancelTeleportAction;
 
@@ -49,9 +48,6 @@ namespace XRTK.Services.LocomotionSystem
 
         /// <inheritdoc />
         public bool CanTeleport { get; set; } = true;
-
-        /// <inheritdoc />
-        public bool AllowHotSpotsOnly { get; set; } = false;
 
         /// <inheritdoc />
         public MixedRealityInputAction TeleportAction { get; private set; }
@@ -130,8 +126,6 @@ namespace XRTK.Services.LocomotionSystem
         }
 
         #endregion IEventSystemManager Implementation
-
-        #region IMixedRealityTeleportSystem Implementation
 
         private static readonly ExecuteEvents.EventFunction<IMixedRealityTeleportHandler> OnTeleportRequestHandler =
             delegate (IMixedRealityTeleportHandler handler, BaseEventData eventData)
@@ -225,8 +219,6 @@ namespace XRTK.Services.LocomotionSystem
 
             isTeleporting = false;
         }
-
-        #endregion IMixedRealityTeleportSystem Implementation
 
         private void PerformDefaultTeleport(TeleportEventData eventData)
         {

@@ -17,7 +17,6 @@ using XRTK.Editor.Utilities;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Providers.Controllers.OpenVR;
 using XRTK.Providers.Controllers.UnityInput;
-using XRTK.Utilities.Editor;
 
 namespace XRTK.Editor
 {
@@ -106,7 +105,7 @@ namespace XRTK.Editor
                 Close();
             }
 
-            currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(controllerDataProviderProfile);
+            currentControllerTexture = ControllerMappingUtilities.GetControllerTexture(controllerDataProviderProfile);
         }
 
         /// <summary>
@@ -136,7 +135,7 @@ namespace XRTK.Editor
             window.titleContent = new GUIContent($"{window.currentControllerName} {handednessTitleText}Input Action Assignment");
             window.controllerDataProviderProfile = profile;
             window.currentInteractionProfiles = interactionMappingProfiles;
-            window.currentControllerTexture = ControllerMappingLibrary.GetControllerTexture(profile);
+            window.currentControllerTexture = ControllerMappingUtilities.GetControllerTexture(profile);
 
             isMouseInRects = new bool[interactionMappingProfiles.arraySize];
 

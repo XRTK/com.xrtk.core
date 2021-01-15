@@ -10,7 +10,6 @@ using XRTK.Editor.Utilities;
 using XRTK.Interfaces;
 using XRTK.Services;
 using XRTK.Tests.Services;
-using XRTK.Utilities.Editor;
 
 namespace XRTK.Tests.Core
 {

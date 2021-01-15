@@ -195,7 +195,7 @@ namespace XRTK.Editor
                 void SetStartScene()
                 {
                     var activeScene = SceneManager.GetActiveScene();
-                    Debug.Assert(!string.IsNullOrEmpty(activeScene.path), "Configured Scene must be saved in order to set it as the Start Scene!\n" + "Please save your scene and set it as the Start Scene in the XRTK preferences.");
+                    Debug.Assert(!string.IsNullOrWhiteSpace(activeScene.path), "Configured Scene must be saved in order to set it as the Start Scene!\n" + "Please save your scene and set it as the Start Scene in the XRTK preferences.");
                     MixedRealityPreferences.StartSceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(activeScene.path);
                 }
             }

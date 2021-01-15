@@ -18,7 +18,7 @@ namespace XRTK.Editor
 
         private static void EditorApplication_hierarchyChanged()
         {
-            if (!MixedRealityToolkit.Instance.IsNull())
+            if (!(MixedRealityToolkit.Instance.IsNull() || MixedRealityToolkit.Instance.ActiveProfile.IsNull()))
             {
                 if (MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
                     Utilities.InputMappingAxisUtility.CheckUnityInputManagerMappings(Utilities.ControllerMappingUtilities.UnityInputManagerAxes))

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using XRTK.Definitions.DiagnosticsSystem;
 using XRTK.Definitions.Utilities;
-using XRTK.EventDatum.DiagnosticsSystem;
+using XRTK.EventDatum.Diagnostics;
 using XRTK.Extensions;
 using XRTK.Interfaces.DiagnosticsSystem;
 using XRTK.Interfaces.DiagnosticsSystem.Handlers;

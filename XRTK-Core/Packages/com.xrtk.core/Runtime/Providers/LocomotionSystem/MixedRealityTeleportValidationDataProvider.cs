@@ -2,12 +2,13 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
-using XRTK.Definitions.TeleportSystem;
+using XRTK.Definitions.LocomotionSystem;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Interfaces.TeleportSystem;
+using XRTK.Interfaces.LocomotionSystem;
+using XRTK.Services;
 using XRTK.Utilities;
 
-namespace XRTK.Services.Teleportation
+namespace XRTK.Providers.LocomotionSystem
 {
     /// <summary>
     /// The Mixed Reality Toolkit's specific implementation of the <see cref="IMixedRealityTeleportValidationDataProvider"/>.
@@ -16,7 +17,7 @@ namespace XRTK.Services.Teleportation
     public class MixedRealityTeleportValidationDataProvider : BaseDataProvider, IMixedRealityTeleportValidationDataProvider
     {
         /// <inheritdoc />
-        public MixedRealityTeleportValidationDataProvider(string name, uint priority, MixedRealityTeleportValidationDataProviderProfile profile, IMixedRealityTeleportSystem parentService)
+        public MixedRealityTeleportValidationDataProvider(string name, uint priority, MixedRealityTeleportValidationDataProviderProfile profile, IMixedRealityLocomotionSystem parentService)
             : base(name, priority, profile, parentService)
         {
             validLayers = profile.ValidLayers;
@@ -37,8 +38,13 @@ namespace XRTK.Services.Teleportation
         {
             TeleportValidationResult teleportValidationResult;
 
+            // Check hotspots only
+            if (((IMixedRealityLocomotionSystem)ParentService).AllowHotSpotsOnly && (teleportHotSpot == null || !teleportHotSpot.IsActive))
+            {
+                teleportValidationResult = TeleportValidationResult.Invalid;
+            }
             // Check distance.
-            if ((pointerResult.EndPoint - CameraCache.Main.transform.position).sqrMagnitude > maxDistanceSquare ||
+            else if ((pointerResult.EndPoint - CameraCache.Main.transform.position).sqrMagnitude > maxDistanceSquare ||
                 Mathf.Abs(pointerResult.EndPoint.y - CameraCache.Main.transform.position.y) > maxHeightDistance)
             {
                 teleportValidationResult = TeleportValidationResult.Invalid;

@@ -3,9 +3,8 @@
 
 using UnityEngine;
 using XRTK.Definitions.Utilities;
-using XRTK.Services.Teleportation;
 
-namespace XRTK.Definitions.TeleportSystem
+namespace XRTK.Definitions.LocomotionSystem
 {
     /// <summary>
     /// Configuration profile for the <see cref="MixedRealityTeleportValidationDataProvider"/>.

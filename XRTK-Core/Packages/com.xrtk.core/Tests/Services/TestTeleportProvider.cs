@@ -3,7 +3,7 @@
 
 using UnityEngine;
 using XRTK.EventDatum.Teleport;
-using XRTK.Interfaces.TeleportSystem.Handlers;
+using XRTK.Interfaces.LocomotionSystem;
 
 public class TestTeleportProvider : MonoBehaviour, IMixedRealityTeleportProvider
 {

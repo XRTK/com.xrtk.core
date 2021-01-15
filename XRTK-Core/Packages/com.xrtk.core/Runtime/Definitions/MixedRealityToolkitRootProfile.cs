@@ -11,7 +11,6 @@ using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.LocomotionSystem;
 using XRTK.Definitions.NetworkingSystem;
 using XRTK.Definitions.SpatialAwarenessSystem;
-using XRTK.Definitions.TeleportSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.CameraSystem;
@@ -20,7 +19,6 @@ using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Interfaces.NetworkingSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem;
-using XRTK.Interfaces.TeleportSystem;
 
 namespace XRTK.Definitions
 {
@@ -164,49 +162,6 @@ namespace XRTK.Definitions
 
         #endregion Boundary System Properties
 
-        #region Teleportation System Properties
-
-        [SerializeField]
-        [Tooltip("Enable the Teleport System on Startup.")]
-        private bool enableTeleportSystem = false;
-
-        /// <summary>
-        /// Enable and configure the boundary system.
-        /// </summary>
-        public bool IsTeleportSystemEnabled
-        {
-            get => teleportSystemType != null && teleportSystemType.Type != null && enableTeleportSystem;
-            internal set => enableTeleportSystem = value;
-        }
-
-        [SerializeField]
-        [Implements(typeof(IMixedRealityTeleportSystem), TypeGrouping.ByNamespaceFlat)]
-        private SystemType teleportSystemType;
-
-        /// <summary>
-        /// Teleport System Script File to instantiate at runtime.
-        /// </summary>
-        public SystemType TeleportSystemSystemType
-        {
-            get => teleportSystemType;
-            internal set => teleportSystemType = value;
-        }
-
-        [SerializeField]
-        [Tooltip("Profile for configuring the teleport system.")]
-        private MixedRealityTeleportSystemProfile teleportSystemProfile;
-
-        /// <summary>
-        /// Active profile for teleport configuration.
-        /// </summary>
-        public MixedRealityTeleportSystemProfile TeleportSystemProfile
-        {
-            get => teleportSystemProfile;
-            internal set => teleportSystemProfile = value;
-        }
-
-        #endregion Teleportation System Properties
-
         #region Locomotion System Properties
 
         [SerializeField]
@@ -219,7 +174,7 @@ namespace XRTK.Definitions
         public bool IsLocomotionSystemEnabled
         {
             get => locomotionSystemType != null && locomotionSystemType.Type != null && enableLocomotionSystem;
-            internal set => enableTeleportSystem = value;
+            internal set => enableLocomotionSystem = value;
         }
 
         [SerializeField]

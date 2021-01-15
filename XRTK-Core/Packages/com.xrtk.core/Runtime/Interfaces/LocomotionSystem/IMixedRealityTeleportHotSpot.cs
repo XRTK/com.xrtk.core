@@ -1,10 +1,13 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
 
-namespace XRTK.Interfaces.TeleportSystem
+namespace XRTK.Interfaces.LocomotionSystem
 {
+    /// <summary>
+    /// Base interface to implement for teleportation hotspots to work with the <see cref="IMixedRealityLocomotionSystem"/>.
+    /// </summary>
     public interface IMixedRealityTeleportHotSpot
     {
         /// <summary>
@@ -18,7 +21,8 @@ namespace XRTK.Interfaces.TeleportSystem
         Vector3 Normal { get; }
 
         /// <summary>
-        /// Is the teleport target active?
+        /// Gets whether this hotspot is active. An inactive hotspot cannot be
+        /// teleported to.
         /// </summary>
         bool IsActive { get; }
 
@@ -35,10 +39,5 @@ namespace XRTK.Interfaces.TeleportSystem
         /// Override orientation is the transform forward of the GameObject this component is attached to.
         /// </remarks>
         float TargetOrientation { get; }
-
-        /// <summary>
-        /// Returns the <see cref="GameObject"/> reference for this teleport target.
-        /// </summary>
-        GameObject GameObjectReference { get; }
     }
 }

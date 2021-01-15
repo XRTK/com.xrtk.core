@@ -31,11 +31,6 @@ namespace XRTK.Editor.Profiles
         private SerializedProperty boundarySystemType;
         private SerializedProperty boundarySystemProfile;
 
-        // Teleport system properties
-        private SerializedProperty enableTeleportSystem;
-        private SerializedProperty teleportSystemType;
-        private SerializedProperty teleportSystemProfile;
-
         // Locomotion system properties
         private SerializedProperty enableLocomotionSystem;
         private SerializedProperty locomotionSystemType;
@@ -164,11 +159,6 @@ namespace XRTK.Editor.Profiles
             boundarySystemType = serializedObject.FindProperty(nameof(boundarySystemType));
             boundarySystemProfile = serializedObject.FindProperty(nameof(boundarySystemProfile));
 
-            // Teleport system configuration
-            enableTeleportSystem = serializedObject.FindProperty(nameof(enableTeleportSystem));
-            teleportSystemType = serializedObject.FindProperty(nameof(teleportSystemType));
-            teleportSystemProfile = serializedObject.FindProperty(nameof(teleportSystemProfile));
-
             // Locomotion system configuration
             enableLocomotionSystem = serializedObject.FindProperty(nameof(enableLocomotionSystem));
             locomotionSystemType = serializedObject.FindProperty(nameof(locomotionSystemType));
@@ -235,16 +225,6 @@ namespace XRTK.Editor.Profiles
             EditorGUILayout.PropertyField(boundarySystemType, typeLabel);
             profileLabel.tooltip = boundarySystemProfile.tooltip;
             EditorGUILayout.PropertyField(boundarySystemProfile, profileLabel);
-            EditorGUI.indentLevel--;
-
-            // Teleport System configuration
-            EditorGUILayout.Space();
-            enableTeleportSystem.boolValue = EditorGUILayout.ToggleLeft("Teleport System (deprecated)", enableTeleportSystem.boolValue, EditorStyles.boldLabel);
-            EditorGUI.indentLevel++;
-            typeLabel.tooltip = teleportSystemType.tooltip;
-            EditorGUILayout.PropertyField(teleportSystemType, typeLabel);
-            profileLabel.tooltip = teleportSystemProfile.tooltip;
-            EditorGUILayout.PropertyField(teleportSystemProfile, profileLabel);
             EditorGUI.indentLevel--;
 
             // Locomotion System configuration

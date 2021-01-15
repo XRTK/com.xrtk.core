@@ -1,9 +1,9 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine.EventSystems;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Interfaces.TeleportSystem;
+using XRTK.Interfaces.LocomotionSystem;
 
 namespace XRTK.EventDatum.Teleport
 {

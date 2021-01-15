@@ -18,7 +18,6 @@ using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Interfaces.NetworkingSystem;
 using XRTK.Interfaces.SpatialAwarenessSystem;
-using XRTK.Interfaces.TeleportSystem;
 using XRTK.Utilities;
 using XRTK.Utilities.Async;
 
@@ -478,11 +477,6 @@ namespace XRTK.Services
 #endif
             }
 
-            if (ActiveProfile.IsLocomotionSystemEnabled && ActiveProfile.IsTeleportSystemEnabled)
-            {
-                Debug.LogWarning("Can't use teleport system and locomotion system together. Since the teleport system is deprecated, XRTK will use the locomotion system.");
-            }
-
             if (ActiveProfile.IsLocomotionSystemEnabled)
             {
                 if (TryCreateAndRegisterService<IMixedRealityLocomotionSystem>(ActiveProfile.LocomotionSystemType, out var service, ActiveProfile.LocomotionSystemProfile) || LocomotionSystem == null)
@@ -492,19 +486,6 @@ namespace XRTK.Services
                 else
                 {
                     Debug.LogError("Failed to start the Locomotion System!");
-                }
-            }
-            else if (ActiveProfile.IsTeleportSystemEnabled)
-            {
-                Debug.LogWarning("The teleport system has been deprecated. Please use the new locomotion system instead.");
-
-                if (TryCreateAndRegisterService<IMixedRealityTeleportSystem>(ActiveProfile.TeleportSystemSystemType, out var service, ActiveProfile.TeleportSystemProfile) || TeleportSystem == null)
-                {
-                    TryRegisterDataProviderConfigurations(ActiveProfile.TeleportSystemProfile.RegisteredServiceConfigurations, service);
-                }
-                else
-                {
-                    Debug.LogError("Failed to start the Teleport System!");
                 }
             }
 
@@ -1717,7 +1698,7 @@ namespace XRTK.Services
         {
             cameraSystem = null;
             inputSystem = null;
-            teleportSystem = null;
+            locomotionSystem = null;
             boundarySystem = null;
             spatialAwarenessSystem = null;
             diagnosticsSystem = null;
@@ -2153,62 +2134,6 @@ namespace XRTK.Services
         }
 
         #endregion Spatial Awareness System
-
-        #region Teleport System
-
-        private static IMixedRealityTeleportSystem teleportSystem = null;
-
-        /// <summary>
-        /// The current <see cref="IMixedRealityTeleportSystem"/> registered with the Mixed Reality Toolkit.
-        /// </summary>
-        public static IMixedRealityTeleportSystem TeleportSystem
-        {
-            get
-            {
-                if (!IsInitialized ||
-                    IsApplicationQuitting ||
-                    instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsTeleportSystemEnabled)
-                {
-                    return null;
-                }
-
-                if (teleportSystem != null)
-                {
-                    return teleportSystem;
-                }
-
-                teleportSystem = GetService<IMixedRealityTeleportSystem>(showLogs: logTeleportSystem);
-                // If we found a valid system, then we turn logging back on for the next time we need to search.
-                // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
-                logTeleportSystem = teleportSystem != null;
-                return teleportSystem;
-            }
-        }
-
-        private static bool logTeleportSystem = true;
-
-        /// <summary>
-        /// Waits for the <see cref="IMixedRealityTeleportSystem"/> to be valid.
-        /// </summary>
-        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
-        /// <returns>True, when the input system is valid, otherwise false.</returns>
-        public static async Task<bool> ValidateTeleportSystemAsync(int timeout = 10)
-        {
-            try
-            {
-                await TeleportSystem.WaitUntil(system => system != null, timeout);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-                return false;
-            }
-
-            return true;
-        }
-
-        #endregion Teleport System
 
         #region Locomotion System
 

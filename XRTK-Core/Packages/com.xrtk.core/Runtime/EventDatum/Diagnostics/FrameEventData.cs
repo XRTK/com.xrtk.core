@@ -3,7 +3,7 @@
 
 using UnityEngine.EventSystems;
 
-namespace XRTK.EventDatum.DiagnosticsSystem
+namespace XRTK.EventDatum.Diagnostics
 {
     /// <summary>
     /// The event data associated with frame events.

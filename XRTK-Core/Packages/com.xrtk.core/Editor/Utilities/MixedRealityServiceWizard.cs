@@ -16,7 +16,7 @@ using XRTK.Extensions;
 using XRTK.Interfaces;
 using XRTK.Interfaces.BoundarySystem;
 using XRTK.Interfaces.Events;
-using XRTK.Interfaces.TeleportSystem;
+using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Services;
 using Assembly = System.Reflection.Assembly;
 
@@ -327,7 +327,7 @@ namespace XRTK.Editor.Utilities
                             else
                             {
                                 if (interfaceType == typeof(IMixedRealityBoundarySystem) ||
-                                    interfaceType == typeof(IMixedRealityTeleportSystem))
+                                    interfaceType == typeof(IMixedRealityLocomotionSystem))
                                 {
                                     profileBaseTypeName = nameof(BaseMixedRealityProfile);
                                 }

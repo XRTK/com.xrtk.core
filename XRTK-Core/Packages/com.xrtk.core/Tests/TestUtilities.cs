@@ -41,8 +41,8 @@ namespace XRTK.Tests
             if (useDefaultProfile)
             {
                 configuration = GetDefaultMixedRealityProfile<MixedRealityToolkitRootProfile>();
-                Debug.Assert(configuration.TeleportSystemProfile != null);
-                configuration.TeleportSystemProfile.TeleportProvider = typeof(TestTeleportProvider);
+                Debug.Assert(configuration.LocomotionSystemProfile != null);
+                configuration.LocomotionSystemProfile.TeleportProvider = typeof(TestTeleportProvider);
             }
             else
             {

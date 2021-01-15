@@ -3,10 +3,10 @@
 
 using System;
 
-namespace XRTK.Services.Teleportation
+namespace XRTK.Definitions.LocomotionSystem
 {
     /// <summary>
-    /// Possible validation outcomes by the <see cref="Interfaces.TeleportSystem.IMixedRealityTeleportValidationDataProvider"/>.
+    /// Possible validation outcomes by the <see cref="Interfaces.LocomotionSystem.IMixedRealityTeleportValidationDataProvider"/>.
     /// </summary>
     [Serializable]
     public enum TeleportValidationResult

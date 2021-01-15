@@ -7,9 +7,9 @@ using XRTK.Definitions;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Physics;
 using XRTK.Interfaces.InputSystem.Handlers;
+using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Interfaces.Physics;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Interfaces.TeleportSystem;
 
 namespace XRTK.Interfaces.InputSystem
 {

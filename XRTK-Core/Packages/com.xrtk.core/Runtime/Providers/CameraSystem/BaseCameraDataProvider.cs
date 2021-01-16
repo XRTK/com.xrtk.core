@@ -3,7 +3,6 @@
 
 using System;
 using UnityEngine;
-using UnityEngine.XR;
 using XRTK.Definitions.CameraSystem;
 using XRTK.Extensions;
 using XRTK.Interfaces.CameraSystem;
@@ -87,7 +86,7 @@ namespace XRTK.Providers.CameraSystem
         public virtual bool IsStereoscopic => CameraRig.PlayerCamera.stereoEnabled;
 
         /// <inheritdoc />
-        public virtual bool HeadHeightIsManagedByDevice => XRRuntimeUtilities.XRDevicePresent;
+        public virtual bool HeadHeightIsManagedByDevice => XRDeviceUtilities.IsXRDisplayDevicePresent;
 
         /// <inheritdoc />
         public IMixedRealityCameraRig CameraRig { get; private set; }

@@ -11,12 +11,14 @@ using System.Collections.Generic;
 namespace XRTK.Utilities
 {
     /// <summary>
-    /// Helper utility to read the currenlty in use XR SDK management pipeline
-    /// and device state.
+    /// Helper utilities to determine connected device capabilities and state.
     /// </summary>
-    public static class XRRuntimeUtilities
+    public static class XRDeviceUtilities
     {
-        public static bool XRDevicePresent
+        /// <summary>
+        /// Gets whether an XR display device is currently connected to the machine.
+        /// </summary>
+        public static bool IsXRDisplayDevicePresent
         {
             get
             {

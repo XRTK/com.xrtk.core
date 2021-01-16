@@ -1,9 +1,8 @@
-﻿// Copyright (c) XRTK. All rights reserved.
+// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
 using UnityEditor;
 using UnityEngine;
-using XRTK.Extensions;
 using XRTK.Services;
 
 namespace XRTK.Editor
@@ -18,7 +17,7 @@ namespace XRTK.Editor
 
         private static void EditorApplication_hierarchyChanged()
         {
-            if (!(MixedRealityToolkit.Instance.IsNull() || MixedRealityToolkit.Instance.ActiveProfile.IsNull()))
+            if (MixedRealityToolkit.HasActiveProfile)
             {
                 if (MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
                     Utilities.InputMappingAxisUtility.CheckUnityInputManagerMappings(Utilities.ControllerMappingUtilities.UnityInputManagerAxes))

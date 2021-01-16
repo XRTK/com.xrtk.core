@@ -152,7 +152,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.0"
+        "com.xrtk.core": "0.2.1"
       }
     },
     "com.xrtk.core": {
@@ -172,7 +172,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.0"
+        "com.xrtk.core": "0.2.1"
       }
     },
     "com.xrtk.lenovo": {
@@ -180,7 +180,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.0"
+        "com.xrtk.core": "0.2.1"
       }
     },
     "com.xrtk.lumin": {
@@ -188,7 +188,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.0"
+        "com.xrtk.core": "0.2.1"
       }
     },
     "com.xrtk.nreal": {
@@ -196,7 +196,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.0"
+        "com.xrtk.core": "0.2.1"
       }
     },
     "com.xrtk.oculus": {
@@ -204,7 +204,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.0"
+        "com.xrtk.core": "0.2.1"
       }
     },
     "com.xrtk.sdk": {
@@ -212,7 +212,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.0",
+        "com.xrtk.core": "0.2.1",
         "com.unity.textmeshpro": "2.1.3"
       }
     },
@@ -221,7 +221,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.0"
+        "com.xrtk.core": "0.2.1"
       }
     },
     "com.xrtk.ultraleap": {
@@ -229,7 +229,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.0"
+        "com.xrtk.core": "0.2.1"
       }
     },
     "com.xrtk.wmr": {
@@ -237,7 +237,7 @@
       "depth": 0,
       "source": "embedded",
       "dependencies": {
-        "com.xrtk.core": "0.2.0",
+        "com.xrtk.core": "0.2.1",
         "com.unity.xr.windowsmr.metro": "4.2.3"
       }
     },

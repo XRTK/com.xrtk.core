@@ -69,6 +69,11 @@ namespace XRTK.Editor.Profiles
         {
             RenderHeader();
             EditorGUILayout.Space();
+            RenderConfigurationOptions();
+        }
+
+        protected void RenderConfigurationOptions()
+        {
             configurations.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(configurations.isExpanded, new GUIContent($"{ServiceConstraint.Name} Configuration Options"));
 
             if (configurations.isExpanded)
@@ -116,6 +121,7 @@ namespace XRTK.Editor.Profiles
             var configurationProperty = configurations.GetArrayElementAtIndex(index);
 
             var nameProperty = configurationProperty.FindPropertyRelative("name");
+            var enabledProperty = configurationProperty.FindPropertyRelative("enabled");
             var priorityProperty = configurationProperty.FindPropertyRelative("priority");
             var instanceTypeProperty = configurationProperty.FindPropertyRelative("instancedType");
             var systemTypeReference = new SystemType(instanceTypeProperty.FindPropertyRelative("reference").stringValue);
@@ -251,6 +257,7 @@ namespace XRTK.Editor.Profiles
             var configuration = configurations.GetArrayElementAtIndex(index);
             configuration.isExpanded = true;
             var nameProperty = configuration.FindPropertyRelative("name");
+            var enabledProperty = configuration.FindPropertyRelative("enabled");
             var priorityProperty = configuration.FindPropertyRelative("priority");
             var instancedTypeProperty = configuration.FindPropertyRelative("instancedType");
             var platformEntriesProperty = configuration.FindPropertyRelative("platformEntries");

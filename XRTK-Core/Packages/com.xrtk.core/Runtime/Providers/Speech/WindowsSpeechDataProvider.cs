@@ -3,7 +3,6 @@
 
 using System;
 using UnityEngine;
-using XRTK.Definitions.Controllers;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
@@ -22,24 +21,9 @@ namespace XRTK.Providers.Speech
     public class WindowsSpeechDataProvider : BaseSpeechDataProvider
     {
         /// <inheritdoc />
-        public WindowsSpeechDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
+        public WindowsSpeechDataProvider(string name, uint priority, MixedRealitySpeechCommandsProfile profile, IMixedRealityInputSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile == null)
-            {
-                throw new Exception("Missing required input system profile!");
-            }
-
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.SpeechCommandsProfile == null)
-            {
-                throw new Exception("Missing required speech commands profile!");
-            }
-
-            if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.SpeechCommandsProfile.SpeechCommands == null)
-            {
-                throw new Exception("Null speech commands in the speech commands profile!");
-            }
-
 #if UNITY_WSA && UNITY_EDITOR
             if (!UnityEditor.PlayerSettings.WSA.GetCapability(UnityEditor.PlayerSettings.WSACapability.Microphone))
             {

@@ -26,6 +26,9 @@ namespace XRTK.Definitions
             : base(instancedType, name, priority, runtimePlatforms, profile)
         {
         }
+
+        /// <inheritdoc />
+        public override Type InterfaceType => typeof(T);
     }
 
     /// <summary>
@@ -44,6 +47,7 @@ namespace XRTK.Definitions
         /// <param name="profile">The <see cref="BaseMixedRealityProfile"/> for <see cref="IMixedRealityService"/>.</param>
         public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, BaseMixedRealityProfile profile)
         {
+            this.enabled = false;
             this.instancedType = instancedType;
             this.name = name;
             this.priority = priority;
@@ -61,6 +65,17 @@ namespace XRTK.Definitions
             }
 
             this.profile = profile;
+        }
+
+        [SerializeField]
+        private bool enabled;
+
+        public bool Enabled
+        {
+            get => typeof(IMixedRealitySystem).IsAssignableFrom(InterfaceType)
+                ? profile != null && instancedType.Type != null && enabled // IMixedRealitySystem requires a profile
+                : instancedType.Type != null && enabled;
+            internal set => enabled = value;
         }
 
         [SerializeField]
@@ -149,5 +164,7 @@ namespace XRTK.Definitions
             get => profile;
             internal set => profile = value;
         }
+
+        public virtual Type InterfaceType => typeof(IMixedRealityService);
     }
 }

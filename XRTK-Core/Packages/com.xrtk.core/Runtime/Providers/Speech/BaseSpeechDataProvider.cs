@@ -1,7 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using XRTK.Definitions.Controllers;
+using XRTK.Definitions.InputSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Speech;
 using XRTK.Services;
@@ -14,7 +14,7 @@ namespace XRTK.Providers.Speech
     public abstract class BaseSpeechDataProvider : BaseDataProvider, IMixedRealitySpeechDataProvider
     {
         /// <inheritdoc />
-        protected BaseSpeechDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
+        protected BaseSpeechDataProvider(string name, uint priority, MixedRealitySpeechCommandsProfile profile, IMixedRealityInputSystem parentService)
             : base(name, priority, profile, parentService)
         {
         }

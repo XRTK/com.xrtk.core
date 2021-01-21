@@ -22,7 +22,7 @@ namespace XRTK.Providers.CameraSystem
         public BaseCameraDataProvider(string name, uint priority, BaseMixedRealityCameraDataProviderProfile profile, IMixedRealityCameraSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            cameraSystem = MixedRealityToolkit.CameraSystem;
+            cameraSystem = parentService;
 
             if (profile.IsNull())
             {

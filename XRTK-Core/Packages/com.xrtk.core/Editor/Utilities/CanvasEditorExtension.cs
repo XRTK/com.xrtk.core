@@ -27,7 +27,6 @@ namespace XRTK.Editor.Utilities
         private static bool IsUtilityValid =>
             MixedRealityToolkit.Instance != null &&
             MixedRealityToolkit.HasActiveProfile &&
-            MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
             MixedRealityToolkit.GetService<IMixedRealityInputSystem>(false) != null;
 
         private bool CanUpdateSettings

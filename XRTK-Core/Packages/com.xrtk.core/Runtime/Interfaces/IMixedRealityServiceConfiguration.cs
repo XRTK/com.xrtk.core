@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.﻿
 
+using System;
 using System.Collections.Generic;
 using XRTK.Definitions;
 using XRTK.Definitions.Utilities;
@@ -22,6 +23,11 @@ namespace XRTK.Interfaces
     /// </summary>
     public interface IMixedRealityServiceConfiguration
     {
+        /// <summary>
+        /// Is the service configuration enabled?
+        /// </summary>
+        bool Enabled { get; }
+
         /// <summary>
         /// The concrete type for the <see cref="IMixedRealityService"/> that will be instantiated and ran by the service locator.
         /// </summary>
@@ -52,5 +58,7 @@ namespace XRTK.Interfaces
         /// The <see cref="BaseMixedRealityProfile"/> for <see cref="IMixedRealityService"/>.
         /// </summary>
         BaseMixedRealityProfile Profile { get; }
+
+        Type InterfaceType { get; }
     }
 }

@@ -14,43 +14,8 @@ using XRTK.Services;
 namespace XRTK.Editor.Profiles
 {
     [CustomEditor(typeof(MixedRealityToolkitRootProfile))]
-    public class MixedRealityToolkitRootProfileInspector : BaseMixedRealityProfileInspector
+    public class MixedRealityToolkitRootProfileInspector : MixedRealityServiceProfileInspector
     {
-        // Camera system properties
-        private SerializedProperty enableCameraSystem;
-        private SerializedProperty cameraSystemType;
-        private SerializedProperty cameraSystemProfile;
-
-        // Input system properties
-        private SerializedProperty enableInputSystem;
-        private SerializedProperty inputSystemType;
-        private SerializedProperty inputSystemProfile;
-
-        // Boundary system properties
-        private SerializedProperty enableBoundarySystem;
-        private SerializedProperty boundarySystemType;
-        private SerializedProperty boundarySystemProfile;
-
-        // Teleport system properties
-        private SerializedProperty enableTeleportSystem;
-        private SerializedProperty teleportSystemType;
-        private SerializedProperty teleportSystemProfile;
-
-        // Spatial Awareness system properties
-        private SerializedProperty enableSpatialAwarenessSystem;
-        private SerializedProperty spatialAwarenessSystemType;
-        private SerializedProperty spatialAwarenessProfile;
-
-        // Networking system properties
-        private SerializedProperty enableNetworkingSystem;
-        private SerializedProperty networkingSystemType;
-        private SerializedProperty networkingSystemProfile;
-
-        // Diagnostic system properties
-        private SerializedProperty enableDiagnosticsSystem;
-        private SerializedProperty diagnosticsSystemType;
-        private SerializedProperty diagnosticsSystemProfile;
-
         // Additional registered components profile
         private SerializedProperty registeredServiceProvidersProfile;
 
@@ -144,41 +109,6 @@ namespace XRTK.Editor.Profiles
                 }
             }
 
-            // Camera system configuration
-            enableCameraSystem = serializedObject.FindProperty(nameof(enableCameraSystem));
-            cameraSystemType = serializedObject.FindProperty(nameof(cameraSystemType));
-            cameraSystemProfile = serializedObject.FindProperty(nameof(cameraSystemProfile));
-
-            // Input system configuration
-            enableInputSystem = serializedObject.FindProperty(nameof(enableInputSystem));
-            inputSystemType = serializedObject.FindProperty(nameof(inputSystemType));
-            inputSystemProfile = serializedObject.FindProperty(nameof(inputSystemProfile));
-
-            // Boundary system configuration
-            enableBoundarySystem = serializedObject.FindProperty(nameof(enableBoundarySystem));
-            boundarySystemType = serializedObject.FindProperty(nameof(boundarySystemType));
-            boundarySystemProfile = serializedObject.FindProperty(nameof(boundarySystemProfile));
-
-            // Teleport system configuration
-            enableTeleportSystem = serializedObject.FindProperty(nameof(enableTeleportSystem));
-            teleportSystemType = serializedObject.FindProperty(nameof(teleportSystemType));
-            teleportSystemProfile = serializedObject.FindProperty(nameof(teleportSystemProfile));
-
-            // Spatial Awareness system configuration
-            enableSpatialAwarenessSystem = serializedObject.FindProperty(nameof(enableSpatialAwarenessSystem));
-            spatialAwarenessSystemType = serializedObject.FindProperty(nameof(spatialAwarenessSystemType));
-            spatialAwarenessProfile = serializedObject.FindProperty(nameof(spatialAwarenessProfile));
-
-            // Networking system configuration
-            enableNetworkingSystem = serializedObject.FindProperty(nameof(enableNetworkingSystem));
-            networkingSystemType = serializedObject.FindProperty(nameof(networkingSystemType));
-            networkingSystemProfile = serializedObject.FindProperty(nameof(networkingSystemProfile));
-
-            // Diagnostics system configuration
-            enableDiagnosticsSystem = serializedObject.FindProperty(nameof(enableDiagnosticsSystem));
-            diagnosticsSystemType = serializedObject.FindProperty(nameof(diagnosticsSystemType));
-            diagnosticsSystemProfile = serializedObject.FindProperty(nameof(diagnosticsSystemProfile));
-
             // Additional registered components configuration
             registeredServiceProvidersProfile = serializedObject.FindProperty(nameof(registeredServiceProvidersProfile));
         }
@@ -194,78 +124,11 @@ namespace XRTK.Editor.Profiles
 
         internal void RenderSystemFields()
         {
+            RenderConfigurationOptions();
+
             serializedObject.Update();
 
             EditorGUI.BeginChangeCheck();
-
-            // Camera System configuration
-            enableCameraSystem.boolValue = EditorGUILayout.ToggleLeft("Camera System", enableCameraSystem.boolValue, EditorStyles.boldLabel);
-            EditorGUI.indentLevel++;
-            typeLabel.tooltip = cameraSystemType.tooltip;
-            EditorGUILayout.PropertyField(cameraSystemType, typeLabel);
-            profileLabel.tooltip = cameraSystemProfile.tooltip;
-            EditorGUILayout.PropertyField(cameraSystemProfile, profileLabel);
-            EditorGUI.indentLevel--;
-
-            // Input System configuration
-            EditorGUILayout.Space();
-            enableInputSystem.boolValue = EditorGUILayout.ToggleLeft("Input System", enableInputSystem.boolValue, EditorStyles.boldLabel);
-            EditorGUI.indentLevel++;
-            typeLabel.tooltip = inputSystemType.tooltip;
-            EditorGUILayout.PropertyField(inputSystemType, typeLabel);
-            profileLabel.tooltip = inputSystemProfile.tooltip;
-            EditorGUILayout.PropertyField(inputSystemProfile, profileLabel);
-            EditorGUI.indentLevel--;
-
-            // Boundary System configuration
-            EditorGUILayout.Space();
-            enableBoundarySystem.boolValue = EditorGUILayout.ToggleLeft("Boundary System", enableBoundarySystem.boolValue, EditorStyles.boldLabel);
-            EditorGUI.indentLevel++;
-            typeLabel.tooltip = boundarySystemType.tooltip;
-            EditorGUILayout.PropertyField(boundarySystemType, typeLabel);
-            profileLabel.tooltip = boundarySystemProfile.tooltip;
-            EditorGUILayout.PropertyField(boundarySystemProfile, profileLabel);
-            EditorGUI.indentLevel--;
-
-            // Teleport System configuration
-            EditorGUILayout.Space();
-            enableTeleportSystem.boolValue = EditorGUILayout.ToggleLeft("Teleport System", enableTeleportSystem.boolValue, EditorStyles.boldLabel);
-            EditorGUI.indentLevel++;
-            typeLabel.tooltip = teleportSystemType.tooltip;
-            EditorGUILayout.PropertyField(teleportSystemType, typeLabel);
-            profileLabel.tooltip = teleportSystemProfile.tooltip;
-            EditorGUILayout.PropertyField(teleportSystemProfile, profileLabel);
-            EditorGUI.indentLevel--;
-
-            // Spatial Awareness System configuration
-            EditorGUILayout.Space();
-            enableSpatialAwarenessSystem.boolValue = EditorGUILayout.ToggleLeft("Spatial Awareness System", enableSpatialAwarenessSystem.boolValue, EditorStyles.boldLabel);
-            EditorGUI.indentLevel++;
-            typeLabel.tooltip = spatialAwarenessSystemType.tooltip;
-            EditorGUILayout.PropertyField(spatialAwarenessSystemType, typeLabel);
-            profileLabel.tooltip = spatialAwarenessProfile.tooltip;
-            EditorGUILayout.PropertyField(spatialAwarenessProfile, profileLabel);
-            EditorGUI.indentLevel--;
-
-            // Networking System configuration
-            EditorGUILayout.Space();
-            enableNetworkingSystem.boolValue = EditorGUILayout.ToggleLeft("Networking System", enableNetworkingSystem.boolValue, EditorStyles.boldLabel);
-            EditorGUI.indentLevel++;
-            typeLabel.tooltip = networkingSystemType.tooltip;
-            EditorGUILayout.PropertyField(networkingSystemType, typeLabel);
-            profileLabel.tooltip = networkingSystemProfile.tooltip;
-            EditorGUILayout.PropertyField(networkingSystemProfile, profileLabel);
-            EditorGUI.indentLevel--;
-
-            // Diagnostics System configuration
-            EditorGUILayout.Space();
-            enableDiagnosticsSystem.boolValue = EditorGUILayout.ToggleLeft("Diagnostics System", enableDiagnosticsSystem.boolValue, EditorStyles.boldLabel);
-            EditorGUI.indentLevel++;
-            typeLabel.tooltip = diagnosticsSystemType.tooltip;
-            EditorGUILayout.PropertyField(diagnosticsSystemType, typeLabel);
-            profileLabel.tooltip = diagnosticsSystemProfile.tooltip;
-            EditorGUILayout.PropertyField(diagnosticsSystemProfile, profileLabel);
-            EditorGUI.indentLevel--;
 
             EditorGUILayout.Space();
             EditorGUILayout.LabelField("Additional Service Providers", EditorStyles.boldLabel);
@@ -289,7 +152,6 @@ namespace XRTK.Editor.Profiles
             return TypeExtensions.HasValidImplementations<IMixedRealitySystem>() &&
                    TypeExtensions.HasValidImplementations<IMixedRealityService>() &&
                    TypeExtensions.HasValidImplementations<IMixedRealityDataProvider>();
-
         }
     }
 }

@@ -13,9 +13,9 @@ namespace XRTK.Utilities
         private const string hdrpAssetTypeName = "HDRenderPipelineAsset";
 
         /// <summary>
-        /// Gets the <see cref="RenderPipeline"/> currently in use and active.
+        /// Gets the <see cref="RenderPipeline"/> used by the project.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The <see cref="RenderPipeline"/> used by the project.</returns>
         public static RenderPipeline GetActiveRenderingPipeline()
         {
             var renderPipelineAsset = GraphicsSettings.renderPipelineAsset;

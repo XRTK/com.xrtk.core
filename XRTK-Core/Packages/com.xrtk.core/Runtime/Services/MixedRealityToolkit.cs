@@ -917,7 +917,7 @@ namespace XRTK.Services
 
             try
             {
-                if (IsSystem(typeof(T)))
+                if (IsSystem(interfaceType))
                 {
                     var profile = args[2];
                     serviceInstance = Activator.CreateInstance(concreteType, profile) as IMixedRealityService;

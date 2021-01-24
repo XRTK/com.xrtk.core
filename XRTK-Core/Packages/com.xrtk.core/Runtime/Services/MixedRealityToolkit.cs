@@ -425,8 +425,7 @@ namespace XRTK.Services
                 }
             }
 
-            if (ActiveProfile.RegisteredServiceProvidersProfile != null &&
-                ActiveProfile.RegisteredServiceProvidersProfile.RegisteredServiceConfigurations != null)
+            if (!ActiveProfile.RegisteredServiceProvidersProfile.IsNull())
             {
                 TryRegisterServiceConfigurations(ActiveProfile.RegisteredServiceProvidersProfile.RegisteredServiceConfigurations);
             }

@@ -7,7 +7,6 @@ using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.UnityInput
 {
@@ -83,8 +82,8 @@ namespace XRTK.Providers.Controllers.UnityInput
             mousePosition.x = Input.GetAxis(Interactions[1].AxisCodeX);
             mousePosition.y = Input.GetAxis(Interactions[1].AxisCodeY);
 
-            MixedRealityToolkit.InputSystem?.RaiseSourcePositionChanged(InputSource, this, mousePosition);
-            MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, controllerPose);
+            InputSystem?.RaiseSourcePositionChanged(InputSource, this, mousePosition);
+            InputSystem?.RaiseSourcePoseChanged(InputSource, this, controllerPose);
 
             for (int i = 0; i < Interactions.Length; i++)
             {
@@ -95,7 +94,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                     // If our value was updated, raise it.
                     if (Interactions[i].Updated)
                     {
-                        MixedRealityToolkit.InputSystem?.RaisePoseInputChanged(InputSource, Interactions[i].MixedRealityInputAction, Interactions[i].PoseData);
+                        InputSystem?.RaisePoseInputChanged(InputSource, Interactions[i].MixedRealityInputAction, Interactions[i].PoseData);
                     }
                 }
 
@@ -106,7 +105,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                     // If our value was updated, raise it.
                     if (Interactions[i].Updated)
                     {
-                        MixedRealityToolkit.InputSystem?.RaisePositionInputChanged(InputSource, Interactions[i].MixedRealityInputAction, Interactions[i].Vector2Data);
+                        InputSystem?.RaisePositionInputChanged(InputSource, Interactions[i].MixedRealityInputAction, Interactions[i].Vector2Data);
                     }
                 }
 
@@ -117,7 +116,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                     // If our value was updated, raise it.
                     if (Interactions[i].Updated)
                     {
-                        MixedRealityToolkit.InputSystem?.RaisePositionInputChanged(InputSource, Interactions[i].MixedRealityInputAction, Interactions[i].Vector2Data);
+                        InputSystem?.RaisePositionInputChanged(InputSource, Interactions[i].MixedRealityInputAction, Interactions[i].Vector2Data);
                     }
                 }
 
@@ -134,18 +133,18 @@ namespace XRTK.Providers.Controllers.UnityInput
                         // Raise input system Event if it enabled
                         if (Interactions[i].BoolData)
                         {
-                            MixedRealityToolkit.InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+                            InputSystem?.RaiseOnInputDown(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
                         }
                         else
                         {
-                            MixedRealityToolkit.InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+                            InputSystem?.RaiseOnInputUp(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
                         }
                     }
 
                     // If our value was updated, raise it.
                     if (Interactions[i].Updated)
                     {
-                        MixedRealityToolkit.InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
+                        InputSystem?.RaiseOnInputPressed(InputSource, ControllerHandedness, Interactions[i].MixedRealityInputAction);
                     }
                 }
             }

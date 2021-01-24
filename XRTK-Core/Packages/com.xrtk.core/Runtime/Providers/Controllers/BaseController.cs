@@ -10,6 +10,7 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
@@ -68,11 +69,16 @@ namespace XRTK.Providers.Controllers
                 throw new Exception($"No Controller interaction mappings found for {controllerMappingProfile.name}!");
             }
 
-            InputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource(Name, pointers);
-
-            for (int i = 0; i < InputSource?.Pointers?.Length; i++)
+            if (MixedRealityToolkit.TryGetSystem<IMixedRealityInputSystem>(out var inputSystem))
             {
-                InputSource.Pointers[i].Controller = this;
+                Debug.Assert(ReferenceEquals(inputSystem, controllerDataProvider.ParentService));
+                InputSystem = inputSystem;
+                InputSource = InputSystem.RequestNewGenericInputSource(Name, pointers);
+
+                for (int i = 0; i < InputSource?.Pointers?.Length; i++)
+                {
+                    InputSource.Pointers[i].Controller = this;
+                }
             }
 
             IsPositionAvailable = false;
@@ -81,6 +87,8 @@ namespace XRTK.Providers.Controllers
 
             Enabled = true;
         }
+
+        protected readonly IMixedRealityInputSystem InputSystem;
 
         private readonly MixedRealityControllerVisualizationProfile visualizationProfile;
 
@@ -170,7 +178,10 @@ namespace XRTK.Providers.Controllers
                 for (int j = 0; j < interactionProfile.PointerProfiles.Length; j++)
                 {
                     var pointerProfile = interactionProfile.PointerProfiles[j];
-                    var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, MixedRealityToolkit.CameraSystem?.MainCameraRig.PlayspaceTransform);
+                    var playspaceTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                        ? cameraSystem.MainCameraRig.PlayspaceTransform
+                        : CameraCache.Main.transform.parent;
+                    var pointerObject = Object.Instantiate(pointerProfile.PointerPrefab, playspaceTransform);
                     var pointer = pointerObject.GetComponent<IMixedRealityPointer>();
 
                     if (pointer != null)
@@ -237,8 +248,8 @@ namespace XRTK.Providers.Controllers
             // If we've got a controller model, then place it in the scene and get/attach the visualizer.
             if (!controllerModel.IsNull())
             {
-                var playspaceTransform = MixedRealityToolkit.CameraSystem != null
-                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
+                var playspaceTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                    ? cameraSystem.MainCameraRig.PlayspaceTransform
                     : CameraCache.Main.transform.parent;
 
                 // If the model was loaded from a system template
@@ -253,7 +264,7 @@ namespace XRTK.Providers.Controllers
                 // If the model was a prefab
                 else
                 {
-                    var controllerObject = Object.Instantiate(controllerModel, playspaceTransform) as GameObject;
+                    var controllerObject = Object.Instantiate(controllerModel, playspaceTransform);
                     Debug.Assert(controllerObject != null);
                     controllerObject.name = $"{GetType().Name}_Visualization";
                     Visualizer = controllerObject.GetComponent<IMixedRealityControllerVisualizer>();

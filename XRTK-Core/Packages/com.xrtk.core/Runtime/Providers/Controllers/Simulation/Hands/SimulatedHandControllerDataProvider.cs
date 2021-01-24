@@ -147,7 +147,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             controller.TryRenderControllerModel();
 
-            MixedRealityToolkit.InputSystem?.RaiseSourceDetected(controller.InputSource, controller);
+            InputSystem?.RaiseSourceDetected(controller.InputSource, controller);
             AddController(controller);
             return controller;
         }

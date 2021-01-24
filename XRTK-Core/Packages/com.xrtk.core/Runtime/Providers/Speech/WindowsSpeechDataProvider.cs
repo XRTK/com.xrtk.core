@@ -88,7 +88,7 @@ namespace XRTK.Providers.Speech
 
             if (!Application.isPlaying || commands.Length == 0 || keywordRecognizer == null) { return; }
 
-            inputSource = MixedRealityToolkit.InputSystem?.RequestNewGenericInputSource("Windows Speech Input Source");
+            inputSource = InputSystem?.RequestNewGenericInputSource("Windows Speech Input Source");
 
             keywordRecognizer.OnPhraseRecognized += KeywordRecognizer_OnPhraseRecognized;
 
@@ -178,7 +178,7 @@ namespace XRTK.Providers.Speech
             {
                 if (commands[i].Keyword == text)
                 {
-                    MixedRealityToolkit.InputSystem.RaiseSpeechCommandRecognized(inputSource, commands[i].Action, (RecognitionConfidenceLevel)confidence, phraseDuration, phraseStartTime, text);
+                    InputSystem.RaiseSpeechCommandRecognized(inputSource, commands[i].Action, (RecognitionConfidenceLevel)confidence, phraseDuration, phraseStartTime, text);
                     break;
                 }
             }

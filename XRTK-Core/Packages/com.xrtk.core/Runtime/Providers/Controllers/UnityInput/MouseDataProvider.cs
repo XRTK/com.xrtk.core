@@ -7,7 +7,6 @@ using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Services;
 using XRTK.Utilities.Physics;
 
 namespace XRTK.Providers.Controllers.UnityInput
@@ -87,13 +86,13 @@ namespace XRTK.Providers.Controllers.UnityInput
                 return;
             }
 
-            MixedRealityToolkit.InputSystem?.RaiseSourceDetected(Controller.InputSource, Controller);
+            InputSystem?.RaiseSourceDetected(Controller.InputSource, Controller);
             AddController(Controller);
         }
 
         private void DestroyController()
         {
-            MixedRealityToolkit.InputSystem?.RaiseSourceLost(Controller.InputSource, Controller);
+            InputSystem?.RaiseSourceLost(Controller.InputSource, Controller);
             RemoveController(Controller);
         }
     }

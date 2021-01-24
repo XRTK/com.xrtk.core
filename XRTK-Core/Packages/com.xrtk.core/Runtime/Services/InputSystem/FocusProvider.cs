@@ -32,6 +32,11 @@ namespace XRTK.Services.InputSystem
 
         private Color[] debugPointingRayColors = { Color.green };
 
+        private IMixedRealityInputSystem inputSystem = null;
+
+        protected IMixedRealityInputSystem InputSystem
+            => inputSystem ?? (inputSystem = MixedRealityToolkit.GetSystem<IMixedRealityInputSystem>());
+
         #region IFocusProvider Properties
 
         /// <inheritdoc />
@@ -77,15 +82,15 @@ namespace XRTK.Services.InputSystem
             {
                 if (!MixedRealityToolkit.IsSystemEnabled<IMixedRealityInputSystem>()) { return false; }
 
-                if (MixedRealityToolkit.InputSystem == null)
+                if (MixedRealityToolkit.TryGetSystem(out inputSystem))
                 {
-                    Debug.LogError($"Unable to start {Name}. An Input System is required for this feature.");
+                    Debug.LogError($"Unable to start {Name}! A valid {nameof(IMixedRealityInputSystem)} is required for this feature.");
                     return false;
                 }
 
                 if (!MixedRealityToolkit.TryGetSystemProfile<IMixedRealityInputSystem, MixedRealityInputSystemProfile>(out var inputSystemProfile))
                 {
-                    Debug.LogError($"Unable to start {Name}. An Input System Profile is required for this feature.");
+                    Debug.LogError($"Unable to start {Name}! An {nameof(MixedRealityInputSystemProfile)} is required for this feature.");
                     return false;
                 }
 
@@ -486,7 +491,7 @@ namespace XRTK.Services.InputSystem
 
             if (!IsSetupValid) { return; }
 
-            foreach (var inputSource in MixedRealityToolkit.InputSystem.DetectedInputSources)
+            foreach (var inputSource in InputSystem.DetectedInputSources)
             {
                 RegisterPointers(inputSource);
             }
@@ -663,7 +668,7 @@ namespace XRTK.Services.InputSystem
                 RegisterPointer(inputSource.Pointers[i]);
 
                 // Special Registration for Gaze
-                if (inputSource.SourceId == MixedRealityToolkit.InputSystem.GazeProvider.GazeInputSource.SourceId && gazeProviderPointingData == null)
+                if (inputSource.SourceId == InputSystem.GazeProvider.GazeInputSource.SourceId && gazeProviderPointingData == null)
                 {
                     gazeProviderPointingData = new PointerData(inputSource.Pointers[i]);
                 }
@@ -696,10 +701,10 @@ namespace XRTK.Services.InputSystem
                 if (!objectIsStillFocusedByOtherPointer)
                 {
                     // Policy: only raise focus exit if no other pointers are still focusing the object
-                    MixedRealityToolkit.InputSystem.RaiseFocusExit(pointer, unfocusedObject);
+                    InputSystem.RaiseFocusExit(pointer, unfocusedObject);
                 }
 
-                MixedRealityToolkit.InputSystem.RaisePreFocusChanged(pointer, unfocusedObject, null);
+                InputSystem.RaisePreFocusChanged(pointer, unfocusedObject, null);
             }
 
             pointers.Remove(pointerData);
@@ -1069,21 +1074,21 @@ namespace XRTK.Services.InputSystem
                 var pendingUnfocusedObject = change.PreviousPointerTarget;
                 var pendingFocusObject = change.CurrentPointerTarget;
 
-                MixedRealityToolkit.InputSystem.RaisePreFocusChanged(change.Pointer, pendingUnfocusedObject, pendingFocusObject);
+                InputSystem.RaisePreFocusChanged(change.Pointer, pendingUnfocusedObject, pendingFocusObject);
 
                 if (pendingOverallFocusExitSet.Contains(pendingUnfocusedObject))
                 {
-                    MixedRealityToolkit.InputSystem.RaiseFocusExit(change.Pointer, pendingUnfocusedObject);
+                    InputSystem.RaiseFocusExit(change.Pointer, pendingUnfocusedObject);
                     pendingOverallFocusExitSet.Remove(pendingUnfocusedObject);
                 }
 
                 if (pendingOverallFocusEnterSet.Contains(pendingFocusObject))
                 {
-                    MixedRealityToolkit.InputSystem.RaiseFocusEnter(change.Pointer, pendingFocusObject);
+                    InputSystem.RaiseFocusEnter(change.Pointer, pendingFocusObject);
                     pendingOverallFocusEnterSet.Remove(pendingFocusObject);
                 }
 
-                MixedRealityToolkit.InputSystem.RaiseFocusChanged(change.Pointer, pendingUnfocusedObject, pendingFocusObject);
+                InputSystem.RaiseFocusChanged(change.Pointer, pendingUnfocusedObject, pendingFocusObject);
             }
 
             Debug.Assert(pendingOverallFocusExitSet.Count == 0);
@@ -1113,7 +1118,7 @@ namespace XRTK.Services.InputSystem
                 if (gazeProviderPointingData != null && eventData.InputSource.Pointers[i].PointerId == gazeProviderPointingData.Pointer.PointerId)
                 {
                     // If the source lost is the gaze input source, then reset it.
-                    if (eventData.InputSource.SourceId == MixedRealityToolkit.InputSystem.GazeProvider.GazeInputSource.SourceId)
+                    if (eventData.InputSource.SourceId == InputSystem.GazeProvider.GazeInputSource.SourceId)
                     {
                         gazeProviderPointingData.ResetFocusedObjects();
                         gazeProviderPointingData = null;
@@ -1132,6 +1137,6 @@ namespace XRTK.Services.InputSystem
         #endregion ISourceState Implementation
 
         /// <inheritdoc />
-        public IMixedRealityService ParentService => MixedRealityToolkit.InputSystem;
+        public IMixedRealityService ParentService => InputSystem;
     }
 }

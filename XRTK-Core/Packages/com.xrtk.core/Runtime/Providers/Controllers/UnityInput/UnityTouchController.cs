@@ -6,7 +6,6 @@ using XRTK.Definitions.Controllers;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.UnityInput
 {
@@ -69,9 +68,9 @@ namespace XRTK.Providers.Controllers.UnityInput
         /// </summary>
         public void StartTouch()
         {
-            MixedRealityToolkit.InputSystem?.RaisePointerDown(InputSource.Pointers[0], Interactions[2].MixedRealityInputAction);
+            InputSystem?.RaisePointerDown(InputSource.Pointers[0], Interactions[2].MixedRealityInputAction);
             isTouched = true;
-            MixedRealityToolkit.InputSystem?.RaiseGestureStarted(this, Interactions[4].MixedRealityInputAction);
+            InputSystem?.RaiseGestureStarted(this, Interactions[4].MixedRealityInputAction);
             isHolding = true;
         }
 
@@ -93,7 +92,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                 // If our value was updated, raise it.
                 if (Interactions[0].Updated)
                 {
-                    MixedRealityToolkit.InputSystem?.RaisePositionInputChanged(InputSource, Interactions[0].MixedRealityInputAction, TouchData.deltaPosition);
+                    InputSystem?.RaisePositionInputChanged(InputSource, Interactions[0].MixedRealityInputAction, TouchData.deltaPosition);
                 }
 
                 if (InputSource.Pointers[0].BaseCursor != null)
@@ -102,14 +101,14 @@ namespace XRTK.Providers.Controllers.UnityInput
                     lastPose.Rotation = InputSource.Pointers[0].BaseCursor.Rotation;
                 }
 
-                MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, lastPose);
+                InputSystem?.RaiseSourcePoseChanged(InputSource, this, lastPose);
 
                 Interactions[1].PoseData = lastPose;
 
                 // If our value was updated, raise it.
                 if (Interactions[1].Updated)
                 {
-                    MixedRealityToolkit.InputSystem?.RaisePoseInputChanged(InputSource, Interactions[1].MixedRealityInputAction, lastPose);
+                    InputSystem?.RaisePoseInputChanged(InputSource, Interactions[1].MixedRealityInputAction, lastPose);
                 }
 
                 if (!isManipulating)
@@ -117,16 +116,16 @@ namespace XRTK.Providers.Controllers.UnityInput
                     if (Mathf.Abs(TouchData.deltaPosition.x) > ManipulationThreshold ||
                         Mathf.Abs(TouchData.deltaPosition.y) > ManipulationThreshold)
                     {
-                        MixedRealityToolkit.InputSystem?.RaiseGestureCanceled(this, Interactions[4].MixedRealityInputAction);
+                        InputSystem?.RaiseGestureCanceled(this, Interactions[4].MixedRealityInputAction);
                         isHolding = false;
 
-                        MixedRealityToolkit.InputSystem?.RaiseGestureStarted(this, Interactions[5].MixedRealityInputAction);
+                        InputSystem?.RaiseGestureStarted(this, Interactions[5].MixedRealityInputAction);
                         isManipulating = true;
                     }
                 }
                 else
                 {
-                    MixedRealityToolkit.InputSystem?.RaiseGestureUpdated(this, Interactions[5].MixedRealityInputAction, TouchData.deltaPosition);
+                    InputSystem?.RaiseGestureUpdated(this, Interactions[5].MixedRealityInputAction, TouchData.deltaPosition);
                 }
             }
         }
@@ -142,13 +141,13 @@ namespace XRTK.Providers.Controllers.UnityInput
                 {
                     if (isHolding)
                     {
-                        MixedRealityToolkit.InputSystem?.RaiseGestureCanceled(this, Interactions[4].MixedRealityInputAction);
+                        InputSystem?.RaiseGestureCanceled(this, Interactions[4].MixedRealityInputAction);
                         isHolding = false;
                     }
 
                     if (isManipulating)
                     {
-                        MixedRealityToolkit.InputSystem?.RaiseGestureCanceled(this, Interactions[5].MixedRealityInputAction);
+                        InputSystem?.RaiseGestureCanceled(this, Interactions[5].MixedRealityInputAction);
                         isManipulating = false;
                     }
                 }
@@ -156,35 +155,35 @@ namespace XRTK.Providers.Controllers.UnityInput
                 {
                     if (isHolding)
                     {
-                        MixedRealityToolkit.InputSystem?.RaiseGestureCanceled(this, Interactions[4].MixedRealityInputAction);
+                        InputSystem?.RaiseGestureCanceled(this, Interactions[4].MixedRealityInputAction);
                         isHolding = false;
                     }
 
                     if (isManipulating)
                     {
-                        MixedRealityToolkit.InputSystem?.RaiseGestureCanceled(this, Interactions[5].MixedRealityInputAction);
+                        InputSystem?.RaiseGestureCanceled(this, Interactions[5].MixedRealityInputAction);
                         isManipulating = false;
                     }
 
-                    MixedRealityToolkit.InputSystem?.RaisePointerClicked(InputSource.Pointers[0], Interactions[2].MixedRealityInputAction);
+                    InputSystem?.RaisePointerClicked(InputSource.Pointers[0], Interactions[2].MixedRealityInputAction);
                 }
 
                 if (isHolding)
                 {
-                    MixedRealityToolkit.InputSystem?.RaiseGestureCompleted(this, Interactions[4].MixedRealityInputAction);
+                    InputSystem?.RaiseGestureCompleted(this, Interactions[4].MixedRealityInputAction);
                     isHolding = false;
                 }
 
                 if (isManipulating)
                 {
-                    MixedRealityToolkit.InputSystem?.RaiseGestureCompleted(this, Interactions[5].MixedRealityInputAction, TouchData.deltaPosition);
+                    InputSystem?.RaiseGestureCompleted(this, Interactions[5].MixedRealityInputAction, TouchData.deltaPosition);
                     isManipulating = false;
                 }
             }
 
             if (isHolding)
             {
-                MixedRealityToolkit.InputSystem?.RaiseGestureCompleted(this, Interactions[4].MixedRealityInputAction);
+                InputSystem?.RaiseGestureCompleted(this, Interactions[4].MixedRealityInputAction);
                 isHolding = false;
             }
 
@@ -192,13 +191,13 @@ namespace XRTK.Providers.Controllers.UnityInput
 
             if (isManipulating)
             {
-                MixedRealityToolkit.InputSystem?.RaiseGestureCompleted(this, Interactions[5].MixedRealityInputAction, TouchData.deltaPosition);
+                InputSystem?.RaiseGestureCompleted(this, Interactions[5].MixedRealityInputAction, TouchData.deltaPosition);
                 isManipulating = false;
             }
 
             Debug.Assert(!isManipulating);
 
-            MixedRealityToolkit.InputSystem?.RaisePointerUp(InputSource.Pointers[0], Interactions[2].MixedRealityInputAction);
+            InputSystem?.RaisePointerUp(InputSource.Pointers[0], Interactions[2].MixedRealityInputAction);
 
             Lifetime = 0.0f;
             isTouched = false;

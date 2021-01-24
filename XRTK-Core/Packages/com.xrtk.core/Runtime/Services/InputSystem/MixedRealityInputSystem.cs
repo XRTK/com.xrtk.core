@@ -36,6 +36,11 @@ namespace XRTK.Services.InputSystem
             }
 
             gazeProviderType = profile.GazeProviderType.Type;
+
+            if (!MixedRealityToolkit.TryCreateAndRegisterService<IMixedRealityFocusProvider>(profile.FocusProviderType?.Type, out focusProvider))
+            {
+                throw new Exception($"The {nameof(IMixedRealityInputSystem)} failed to start the {nameof(IMixedRealityFocusProvider)}!");
+            }
         }
 
         /// <inheritdoc />
@@ -54,10 +59,10 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public IReadOnlyCollection<IMixedRealityController> DetectedControllers => detectedControllers;
 
-        private IMixedRealityFocusProvider focusProvider = null;
+        private readonly IMixedRealityFocusProvider focusProvider = null;
 
         /// <inheritdoc />
-        public IMixedRealityFocusProvider FocusProvider => focusProvider ?? (focusProvider = MixedRealityToolkit.GetService<IMixedRealityFocusProvider>());
+        public IMixedRealityFocusProvider FocusProvider => focusProvider;
 
         /// <inheritdoc />
         public IMixedRealityGazeProvider GazeProvider { get; private set; }

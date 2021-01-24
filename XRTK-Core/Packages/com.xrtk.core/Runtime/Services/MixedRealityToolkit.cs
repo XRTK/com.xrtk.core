@@ -420,7 +420,7 @@ namespace XRTK.Services
                     }
                     else
                     {
-                        Debug.LogError($"Failed to start {configuration.InterfaceType.Name}!");
+                        Debug.LogError($"Failed to start {configuration.Name}!");
                     }
                 }
             }
@@ -772,7 +772,6 @@ namespace XRTK.Services
         public static bool TryCreateAndRegisterService<T>(IMixedRealityServiceConfiguration<T> configuration, out T service) where T : IMixedRealityService
         {
             return TryCreateAndRegisterServiceInternal(
-                configuration.InterfaceType,
                 configuration.InstancedType,
                 configuration.RuntimePlatforms,
                 out service,
@@ -791,7 +790,6 @@ namespace XRTK.Services
         public static bool TryCreateAndRegisterDataProvider<T>(IMixedRealityServiceConfiguration<T> configuration, IMixedRealityService serviceParent) where T : IMixedRealityDataProvider
         {
             return TryCreateAndRegisterServiceInternal<T>(
-                configuration.InterfaceType,
                 configuration.InstancedType,
                 configuration.RuntimePlatforms,
                 out _,
@@ -811,7 +809,7 @@ namespace XRTK.Services
         /// <returns>True, if the service was successfully created and registered.</returns>
         public static bool TryCreateAndRegisterService<T>(Type concreteType, out T service, params object[] args) where T : IMixedRealityService
         {
-            return TryCreateAndRegisterServiceInternal(typeof(T), concreteType, AllPlatforms, out service, args);
+            return TryCreateAndRegisterServiceInternal(concreteType, AllPlatforms, out service, args);
         }
 
         private static readonly IMixedRealityPlatform[] AllPlatforms = { new AllPlatforms() };
@@ -827,7 +825,7 @@ namespace XRTK.Services
         /// <returns>True, if the service was successfully created and registered.</returns>
         public static bool TryCreateAndRegisterService<T>(Type concreteType, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, out T service, params object[] args) where T : IMixedRealityService
         {
-            return TryCreateAndRegisterServiceInternal(typeof(T), concreteType, runtimePlatforms, out service, args);
+            return TryCreateAndRegisterServiceInternal(concreteType, runtimePlatforms, out service, args);
         }
 
         /// <summary>
@@ -840,18 +838,12 @@ namespace XRTK.Services
         /// <param name="service">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
         /// <param name="args">Optional arguments used when instantiating the concrete type.</param>
         /// <returns>True, if the service was successfully created and registered.</returns>
-        private static bool TryCreateAndRegisterServiceInternal<T>(Type interfaceType, Type concreteType, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, out T service, params object[] args) where T : IMixedRealityService
+        private static bool TryCreateAndRegisterServiceInternal<T>(Type concreteType, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, out T service, params object[] args) where T : IMixedRealityService
         {
             service = default;
 
             if (IsApplicationQuitting)
             {
-                return false;
-            }
-
-            if (!typeof(IMixedRealityService).IsAssignableFrom(interfaceType))
-            {
-                Debug.LogError($"{nameof(interfaceType)} does not implement {nameof(IMixedRealityService)}.");
                 return false;
             }
 
@@ -892,7 +884,7 @@ namespace XRTK.Services
 
             if (concreteType == null)
             {
-                Debug.LogError($"Unable to register a service with a null concrete {interfaceType.Name} type.");
+                Debug.LogError($"Unable to register a service with a null concrete {typeof(T).Name} type.");
                 return false;
             }
 
@@ -916,7 +908,7 @@ namespace XRTK.Services
 
             try
             {
-                if (IsSystem(interfaceType))
+                if (IsSystem(typeof(T)))
                 {
                     var profile = args[2];
                     serviceInstance = Activator.CreateInstance(concreteType, profile) as IMixedRealityService;
@@ -939,13 +931,39 @@ namespace XRTK.Services
 
             service = (T)serviceInstance;
 
-            if (service == null)
+            if (service == null ||
+                serviceInstance == null)
             {
                 Debug.LogError($"Failed to create a valid instance of {concreteType.Name}!");
                 return false;
             }
 
-            return TryRegisterServiceInternal(interfaceType, serviceInstance);
+            return TryRegisterServiceInternal(typeof(T), serviceInstance);
+        }
+
+        private static Type GetServiceInterfaceType(Type interfaceType, IMixedRealityService serviceInstance)
+        {
+            var returnValue = typeof(IMixedRealityService);
+
+            if (IsSystem(interfaceType))
+            {
+                var types = serviceInstance.GetType().GetInterfaces();
+
+                for (int i = 0; i < types.Length; i++)
+                {
+                    if (!typeof(IMixedRealityService).IsAssignableFrom(types[i]))
+                    {
+                        continue;
+                    }
+
+                    if (types[i] != typeof(IMixedRealityService) && types[i] != typeof(IMixedRealitySystem))
+                    {
+                        returnValue = types[i];
+                    }
+                }
+            }
+
+            return returnValue;
         }
 
         /// <summary>
@@ -961,6 +979,8 @@ namespace XRTK.Services
                 Debug.LogWarning($"Unable to add a {interfaceType.Name} service with a null instance.");
                 return false;
             }
+
+            interfaceType = serviceInstance.GetType().FindMixedRealityServiceInterfaceType();
 
             if (!interfaceType.IsInstanceOfType(serviceInstance))
             {
@@ -1634,7 +1654,7 @@ namespace XRTK.Services
             {
                 foreach (var configuration in instance.activeProfile.RegisteredServiceConfigurations)
                 {
-                    if (configuration.InterfaceType == typeof(T) &&
+                    if (typeof(T).IsAssignableFrom(configuration.InstancedType.Type.FindMixedRealityServiceInterfaceType()) &&
                         configuration.Enabled)
                     {
                         return true;
@@ -1660,7 +1680,7 @@ namespace XRTK.Services
             {
                 foreach (var configuration in instance.activeProfile.RegisteredServiceConfigurations)
                 {
-                    if (configuration.InterfaceType == typeof(TSystem))
+                    if (typeof(TSystem).IsAssignableFrom(configuration.InstancedType.Type.FindMixedRealityServiceInterfaceType()))
                     {
                         profile = (TProfile)configuration.Profile;
                         return profile != null;

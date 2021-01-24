@@ -157,7 +157,7 @@ namespace XRTK.Services
         public static IReadOnlyList<IMixedRealityPlatform> ActivePlatforms => activePlatforms;
 
         // ReSharper disable once InconsistentNaming
-        private static readonly Dictionary<Type, IMixedRealityService> activeSystems = new Dictionary<Type, IMixedRealityService>();
+        private static readonly Dictionary<Type, IMixedRealitySystem> activeSystems = new Dictionary<Type, IMixedRealitySystem>();
 
         /// <summary>
         /// Current active systems registered with the MixedRealityToolkit.
@@ -165,7 +165,7 @@ namespace XRTK.Services
         /// <remarks>
         /// Systems can only be registered once by <see cref="Type"/> and are executed in a specific priority order.
         /// </remarks>
-        public static IReadOnlyDictionary<Type, IMixedRealityService> ActiveSystems => activeSystems;
+        public static IReadOnlyDictionary<Type, IMixedRealitySystem> ActiveSystems => activeSystems;
 
         // ReSharper disable once InconsistentNaming
         private static readonly List<Tuple<Type, IMixedRealityService>> registeredMixedRealityServices = new List<Tuple<Type, IMixedRealityService>>();
@@ -360,7 +360,7 @@ namespace XRTK.Services
         /// <summary>
         /// Static function to determine if the <see cref="MixedRealityToolkit"/> class has been initialized or not.
         /// </summary>
-        public static bool ConfirmInitialized()
+        internal static bool ConfirmInitialized()
         {
             var access = Instance;
             Debug.Assert(IsInitialized.Equals(access != null));
@@ -417,6 +417,10 @@ namespace XRTK.Services
                         {
                             TryRegisterDataProviderConfigurations(profile.RegisteredServiceConfigurations, service);
                         }
+                    }
+                    else
+                    {
+                        Debug.LogError($"Failed to start {configuration.InterfaceType.Name}!");
                     }
                 }
             }
@@ -766,9 +770,9 @@ namespace XRTK.Services
         /// <param name="configuration">The <see cref="IMixedRealityServiceConfiguration{T}"/> to use to create and register the service.</param>
         /// <param name="service">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
         /// <returns>True, if the service was successfully created and registered.</returns>
-        public static bool TryCreateAndRegisterService<T>(IMixedRealityServiceConfiguration<T> configuration, out IMixedRealityService service) where T : IMixedRealityService
+        public static bool TryCreateAndRegisterService<T>(IMixedRealityServiceConfiguration<T> configuration, out T service) where T : IMixedRealityService
         {
-            return TryCreateAndRegisterService(
+            return TryCreateAndRegisterServiceInternal(
                 configuration.InterfaceType,
                 configuration.InstancedType,
                 configuration.RuntimePlatforms,
@@ -787,7 +791,7 @@ namespace XRTK.Services
         /// <returns>True, if the service was successfully created and registered.</returns>
         public static bool TryCreateAndRegisterDataProvider<T>(IMixedRealityServiceConfiguration<T> configuration, IMixedRealityService serviceParent) where T : IMixedRealityDataProvider
         {
-            return TryCreateAndRegisterService(
+            return TryCreateAndRegisterServiceInternal<T>(
                 configuration.InterfaceType,
                 configuration.InstancedType,
                 configuration.RuntimePlatforms,
@@ -806,22 +810,9 @@ namespace XRTK.Services
         /// <param name="service">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
         /// <param name="args">Optional arguments used when instantiating the concrete type.</param>
         /// <returns>True, if the service was successfully created and registered.</returns>
-        public static bool TryCreateAndRegisterService<T>(Type concreteType, out IMixedRealityService service, params object[] args) where T : IMixedRealityService
+        public static bool TryCreateAndRegisterService<T>(Type concreteType, out T service, params object[] args) where T : IMixedRealityService
         {
-            return TryCreateAndRegisterService(typeof(T), concreteType, AllPlatforms, out service, args);
-        }
-
-        /// <summary>
-        /// Creates a new instance of a service and registers it to the Mixed Reality Toolkit service registry for the specified platform.
-        /// </summary>
-        ///<param name="interfaceType">The interface type for the <see cref="IMixedRealityService"/> to be registered.</param>
-        /// <param name="concreteType">The concrete class type to instantiate.</param>
-        /// <param name="service">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
-        /// <param name="args">Optional arguments used when instantiating the concrete type.</param>
-        /// <returns>True, if the service was successfully created and registered.</returns>
-        public static bool TryCreateAndRegisterService(Type interfaceType, Type concreteType, out IMixedRealityService service, params object[] args)
-        {
-            return TryCreateAndRegisterService(interfaceType, concreteType, AllPlatforms, out service, args);
+            return TryCreateAndRegisterServiceInternal(typeof(T), concreteType, AllPlatforms, out service, args);
         }
 
         private static readonly IMixedRealityPlatform[] AllPlatforms = { new AllPlatforms() };
@@ -832,35 +823,30 @@ namespace XRTK.Services
         /// <typeparam name="T">The interface type for the <see cref="IMixedRealityService"/> to be registered.</typeparam>
         /// <param name="concreteType">The concrete class type to instantiate.</param>
         /// <param name="runtimePlatforms">The runtime platform to check against when registering.</param>
-        /// <param name="serviceInstance">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
+        /// <param name="service">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
         /// <param name="args">Optional arguments used when instantiating the concrete type.</param>
         /// <returns>True, if the service was successfully created and registered.</returns>
-        public static bool TryCreateAndRegisterService<T>(Type concreteType, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, out IMixedRealityService serviceInstance, params object[] args) where T : IMixedRealityService
+        public static bool TryCreateAndRegisterService<T>(Type concreteType, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, out T service, params object[] args) where T : IMixedRealityService
         {
-            return TryCreateAndRegisterService(typeof(T), concreteType, runtimePlatforms, out serviceInstance, args);
+            return TryCreateAndRegisterServiceInternal(typeof(T), concreteType, runtimePlatforms, out service, args);
         }
 
         /// <summary>
         /// Creates a new instance of a service and registers it to the Mixed Reality Toolkit service registry for the specified platform.
         /// </summary>
-        /// <param name="interfaceType">The interface type for the <see cref="IMixedRealityService"/> to be registered.</param>
+        /// <typeparam name="T">The interface type for the <see cref="IMixedRealityService"/> to be registered.</typeparam>
+        /// <param name="interfaceType"></param>
         /// <param name="concreteType">The concrete class type to instantiate.</param>
         /// <param name="runtimePlatforms">The runtime platform to check against when registering.</param>
-        /// <param name="serviceInstance">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
+        /// <param name="service">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
         /// <param name="args">Optional arguments used when instantiating the concrete type.</param>
         /// <returns>True, if the service was successfully created and registered.</returns>
-        public static bool TryCreateAndRegisterService(Type interfaceType, Type concreteType, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, out IMixedRealityService serviceInstance, params object[] args)
+        private static bool TryCreateAndRegisterServiceInternal<T>(Type interfaceType, Type concreteType, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, out T service, params object[] args) where T : IMixedRealityService
         {
-            serviceInstance = null;
+            service = default;
 
             if (IsApplicationQuitting)
             {
-                return false;
-            }
-
-            if (interfaceType == null)
-            {
-                Debug.LogError($"Unable to register a service with a null {nameof(interfaceType)}.");
                 return false;
             }
 
@@ -927,9 +913,19 @@ namespace XRTK.Services
                 return false;
             }
 
+            IMixedRealityService serviceInstance;
+
             try
             {
-                serviceInstance = Activator.CreateInstance(concreteType, args) as IMixedRealityService;
+                if (IsSystem(typeof(T)))
+                {
+                    var profile = args[2];
+                    serviceInstance = Activator.CreateInstance(concreteType, profile) as IMixedRealityService;
+                }
+                else
+                {
+                    serviceInstance = Activator.CreateInstance(concreteType, args) as IMixedRealityService;
+                }
             }
             catch (System.Reflection.TargetInvocationException e)
             {
@@ -942,7 +938,9 @@ namespace XRTK.Services
                 return false;
             }
 
-            if (serviceInstance == null)
+            service = (T)serviceInstance;
+
+            if (service == null)
             {
                 Debug.LogError($"Failed to create a valid instance of {concreteType.Name}!");
                 return false;
@@ -987,7 +985,7 @@ namespace XRTK.Services
 
             if (IsSystem(interfaceType))
             {
-                activeSystems.Add(interfaceType, serviceInstance);
+                activeSystems.Add(interfaceType, serviceInstance as IMixedRealitySystem);
             }
             else if (typeof(IMixedRealityService).IsAssignableFrom(interfaceType))
             {
@@ -1626,6 +1624,55 @@ namespace XRTK.Services
             }
         }
 
+        /// <summary>
+        /// Is the <see cref="IMixedRealitySystem"/> enabled in the <see cref="ActiveProfile"/>?
+        /// </summary>
+        /// <typeparam name="T"><see cref="IMixedRealitySystem"/> to check.</typeparam>
+        /// <returns>True, if the system is enabled in the <see cref="ActiveProfile"/>, otherwise false.</returns>
+        public static bool IsSystemEnabled<T>() where T : IMixedRealitySystem
+        {
+            if (HasActiveProfile)
+            {
+                foreach (var configuration in instance.activeProfile.RegisteredServiceConfigurations)
+                {
+                    if (configuration.InterfaceType == typeof(T) &&
+                        configuration.Enabled)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Try to get the <see cref="TProfile"/> of the <see cref="TSystem"/>
+        /// </summary>
+        /// <typeparam name="TSystem">The <see cref="IMixedRealitySystem"/> type to get the <see cref="TProfile"/> for.</typeparam>
+        /// <typeparam name="TProfile">The <see cref="BaseMixedRealityProfile"/> type to get for the <see cref="TSystem"/>.</typeparam>
+        /// <param name="profile">The profile instance.</param>
+        /// <returns>True if a <see cref="TSystem"/> type is matched and a valid <see cref="TProfile"/> is found, otherwise false.</returns>
+        public static bool TryGetSystemProfile<TSystem, TProfile>(out TProfile profile)
+            where TSystem : IMixedRealitySystem
+            where TProfile : BaseMixedRealityProfile
+        {
+            if (HasActiveProfile)
+            {
+                foreach (var configuration in instance.activeProfile.RegisteredServiceConfigurations)
+                {
+                    if (configuration.InterfaceType == typeof(TSystem))
+                    {
+                        profile = (TProfile)configuration.Profile;
+                        return profile != null;
+                    }
+                }
+            }
+
+            profile = null;
+            return false;
+        }
+
         private static bool IsSystem(Type concreteType)
         {
             if (concreteType == null)
@@ -1741,8 +1788,10 @@ namespace XRTK.Services
 
             if (IsSystem(interfaceType))
             {
-                if (activeSystems.TryGetValue(interfaceType, out serviceInstance))
+                if (activeSystems.TryGetValue(interfaceType, out var systemInstance))
                 {
+                    serviceInstance = systemInstance;
+
                     if (CheckServiceMatch(interfaceType, serviceName, interfaceType, serviceInstance))
                     {
                         return true;
@@ -1868,7 +1917,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
                     instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsCameraSystemEnabled)
+                   !instance.activeProfile.IsNull() && !IsSystemEnabled<IMixedRealityCameraSystem>())
                 {
                     return null;
                 }
@@ -1924,7 +1973,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
                     instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsInputSystemEnabled)
+                   !instance.activeProfile.IsNull() && !IsSystemEnabled<IMixedRealityInputSystem>())
                 {
                     return null;
                 }
@@ -1980,7 +2029,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
                     instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsBoundarySystemEnabled)
+                   !instance.activeProfile.IsNull() && !IsSystemEnabled<IMixedRealityBoundarySystem>())
                 {
                     return null;
                 }
@@ -2036,7 +2085,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
                     instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsSpatialAwarenessSystemEnabled)
+                   !instance.activeProfile.IsNull() && !IsSystemEnabled<IMixedRealitySpatialAwarenessSystem>())
                 {
                     return null;
                 }
@@ -2092,7 +2141,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
                     instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsTeleportSystemEnabled)
+                   !instance.activeProfile.IsNull() && !IsSystemEnabled<IMixedRealityTeleportSystem>())
                 {
                     return null;
                 }
@@ -2148,7 +2197,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
                     instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsNetworkingSystemEnabled)
+                   !instance.activeProfile.IsNull() && !IsSystemEnabled<IMixedRealityNetworkingSystem>())
                 {
                     return null;
                 }
@@ -2204,7 +2253,7 @@ namespace XRTK.Services
                 if (!IsInitialized ||
                     IsApplicationQuitting ||
                     instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsDiagnosticsSystemEnabled)
+                   !instance.activeProfile.IsNull() && !IsSystemEnabled<IMixedRealityDiagnosticsSystem>())
                 {
                     return null;
                 }

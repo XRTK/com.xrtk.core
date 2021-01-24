@@ -8,7 +8,6 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
-using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Editor.Data;
 using XRTK.Editor.PropertyDrawers;

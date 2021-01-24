@@ -2,6 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 
 namespace XRTK.Utilities
@@ -38,7 +39,7 @@ namespace XRTK.Utilities
             Debug.Assert(Canvas != null);
 
             if (MixedRealityToolkit.IsInitialized &&
-                MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
+                MixedRealityToolkit.IsSystemEnabled<IMixedRealityInputSystem>() &&
                 Canvas.isRootCanvas && Canvas.renderMode == RenderMode.WorldSpace)
             {
                 Canvas.worldCamera = MixedRealityToolkit.InputSystem.FocusProvider.UIRaycastCamera;

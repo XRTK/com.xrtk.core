@@ -47,7 +47,7 @@ namespace XRTK.Definitions
         /// <param name="profile">The <see cref="BaseMixedRealityProfile"/> for <see cref="IMixedRealityService"/>.</param>
         public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, BaseMixedRealityProfile profile)
         {
-            this.enabled = false;
+            this.enabled = true;
             this.instancedType = instancedType;
             this.name = name;
             this.priority = priority;

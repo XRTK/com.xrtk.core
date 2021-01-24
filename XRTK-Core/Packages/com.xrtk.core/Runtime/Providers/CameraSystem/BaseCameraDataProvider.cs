@@ -26,7 +26,9 @@ namespace XRTK.Providers.CameraSystem
 
             if (profile.IsNull())
             {
-                profile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile.GlobalCameraProfile;
+                profile = MixedRealityToolkit.TryGetSystemProfile<IMixedRealityCameraSystem, MixedRealityCameraSystemProfile>(out var cameraSystemProfile)
+                    ? cameraSystemProfile.GlobalCameraProfile
+                    : throw new ArgumentException($"Unable to get a valid {nameof(MixedRealityCameraSystemProfile)}!");
             }
 
             if (profile.CameraRigType?.Type == null)

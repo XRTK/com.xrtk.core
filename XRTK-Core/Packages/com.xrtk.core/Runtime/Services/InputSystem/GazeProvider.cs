@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Definitions.InputSystem;
 using XRTK.EventDatum.Input;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
@@ -425,10 +426,10 @@ namespace XRTK.Services.InputSystem
             gazePointer = new InternalGazePointer(this, "Gaze Pointer", null, raycastLayerMasks, maxGazeCollisionDistance, gazeTransform, stabilizer);
 
             if (GazeCursor == null &&
-                MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile != null &&
-                MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.GazeCursorPrefab != null)
+                MixedRealityToolkit.TryGetSystemProfile<IMixedRealityInputSystem, MixedRealityInputSystemProfile>(out var inputSystemProfile) &&
+                inputSystemProfile.GazeCursorPrefab != null)
             {
-                var cursor = Instantiate(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.GazeCursorPrefab, gazeTransform.parent);
+                var cursor = Instantiate(inputSystemProfile.GazeCursorPrefab, gazeTransform.parent);
                 SetGazeCursor(cursor);
             }
 

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Physics;
 using XRTK.EventDatum.Input;
 using XRTK.Extensions;
@@ -29,6 +30,8 @@ namespace XRTK.Services.InputSystem
         private readonly PointerHitResult physicsHitResult = new PointerHitResult();
         private readonly PointerHitResult graphicsHitResult = new PointerHitResult();
 
+        private Color[] debugPointingRayColors = { Color.green };
+
         #region IFocusProvider Properties
 
         /// <inheritdoc />
@@ -37,42 +40,15 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public override uint Priority => 2;
 
-        /// <inheritdoc />
-        float IMixedRealityFocusProvider.GlobalPointingExtent
-        {
-            get
-            {
-                if (MixedRealityToolkit.HasActiveProfile &&
-                    MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
-                {
-                    return MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointingExtent;
-                }
-
-                return 10f;
-            }
-        }
-
-        private LayerMask[] focusLayerMasks = null;
+        private float globalPointingExtent = 10f;
 
         /// <inheritdoc />
-        public LayerMask[] GlobalPointerRaycastLayerMasks
-        {
-            get
-            {
-                if (focusLayerMasks == null)
-                {
-                    if (MixedRealityToolkit.HasActiveProfile &&
-                        MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled)
-                    {
-                        return focusLayerMasks = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.PointerRaycastLayerMasks;
-                    }
+        float IMixedRealityFocusProvider.GlobalPointingExtent => globalPointingExtent;
 
-                    return focusLayerMasks = new LayerMask[] { Physics.DefaultRaycastLayers };
-                }
+        private LayerMask[] focusLayerMasks = { Physics.DefaultRaycastLayers };
 
-                return focusLayerMasks;
-            }
-        }
+        /// <inheritdoc />
+        public LayerMask[] GlobalPointerRaycastLayerMasks => focusLayerMasks;
 
         private Camera uiRaycastCamera = null;
 
@@ -99,7 +75,7 @@ namespace XRTK.Services.InputSystem
         {
             get
             {
-                if (!MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled) { return false; }
+                if (!MixedRealityToolkit.IsSystemEnabled<IMixedRealityInputSystem>()) { return false; }
 
                 if (MixedRealityToolkit.InputSystem == null)
                 {
@@ -107,11 +83,16 @@ namespace XRTK.Services.InputSystem
                     return false;
                 }
 
-                if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile == null)
+                if (!MixedRealityToolkit.TryGetSystemProfile<IMixedRealityInputSystem, MixedRealityInputSystemProfile>(out var inputSystemProfile))
                 {
                     Debug.LogError($"Unable to start {Name}. An Input System Profile is required for this feature.");
                     return false;
                 }
+
+                focusLayerMasks = inputSystemProfile.PointerRaycastLayerMasks;
+                globalPointingExtent = inputSystemProfile.PointingExtent;
+                debugPointingRayColors = inputSystemProfile.DebugPointingRayColors;
+                MixedRealityRaycaster.DebugEnabled = inputSystemProfile.DrawDebugPointingRays;
 
                 return true;
             }
@@ -754,22 +735,19 @@ namespace XRTK.Services.InputSystem
             {
                 UpdatePointer(pointer);
 
-                // TODO Let's only set this once on start.This will overwrite the property each update.
-                MixedRealityRaycaster.DebugEnabled = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.DrawDebugPointingRays;
+                Color debugPointingRayColor;
 
-                Color rayColor;
-
-                if (MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.DebugPointingRayColors != null &&
-                    MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.DebugPointingRayColors.Length > 0)
+                if (debugPointingRayColors != null &&
+                    debugPointingRayColors.Length > 0)
                 {
-                    rayColor = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.DebugPointingRayColors[pointerCount++ % MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.DebugPointingRayColors.Length];
+                    debugPointingRayColor = debugPointingRayColors[pointerCount++ % debugPointingRayColors.Length];
                 }
                 else
                 {
-                    rayColor = Color.green;
+                    debugPointingRayColor = Color.green;
                 }
 
-                Debug.DrawRay(pointer.StartPoint, (pointer.EndPoint - pointer.StartPoint), rayColor);
+                Debug.DrawRay(pointer.StartPoint, (pointer.EndPoint - pointer.StartPoint), debugPointingRayColor);
             }
         }
 

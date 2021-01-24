@@ -25,7 +25,9 @@ namespace XRTK.Providers.SpatialObservers
         {
             if (profile.IsNull())
             {
-                profile = MixedRealityToolkit.Instance.ActiveProfile.SpatialAwarenessProfile.GlobalMeshObserverProfile;
+                profile = MixedRealityToolkit.TryGetSystemProfile<IMixedRealitySpatialAwarenessSystem, MixedRealitySpatialAwarenessSystemProfile>(out var spatialAwarenessSystemProfile)
+                    ? spatialAwarenessSystemProfile.GlobalMeshObserverProfile
+                    : throw new ArgumentException($"Unable to get a valid {nameof(MixedRealitySpatialAwarenessSystemProfile)}!");
             }
 
             if (profile.IsNull())

@@ -3,6 +3,7 @@
 
 using UnityEditor;
 using UnityEngine;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 
 namespace XRTK.Editor
@@ -19,12 +20,12 @@ namespace XRTK.Editor
         {
             if (MixedRealityToolkit.HasActiveProfile)
             {
-                if (MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
+                if (MixedRealityToolkit.IsSystemEnabled<IMixedRealityInputSystem>() &&
                     Utilities.InputMappingAxisUtility.CheckUnityInputManagerMappings(Utilities.ControllerMappingUtilities.UnityInputManagerAxes))
                 {
                     Debug.Log("XRTK Input System was enabled, updated input axis mappings.");
                 }
-                else if (!MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
+                else if (!MixedRealityToolkit.IsSystemEnabled<IMixedRealityInputSystem>() &&
                     Utilities.InputMappingAxisUtility.RemoveMappings(Utilities.ControllerMappingUtilities.UnityInputManagerAxes))
                 {
                     Debug.Log("XRTK Input System was disabled, removed input axis mappings.");

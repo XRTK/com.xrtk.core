@@ -16,6 +16,7 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers.Simulation
         private static readonly GUIContent SimulatedHandSettingsFoldoutHeader = new GUIContent("Simulated Hand Tracking Settings");
         private static readonly GUIContent handPoseAnimationSpeedLabel = new GUIContent("Hand Pose Animation Speed");
 
+        private SerializedProperty gripThreshold;
         private SerializedProperty renderingMode;
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
@@ -31,6 +32,7 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers.Simulation
         {
             base.OnEnable();
 
+            gripThreshold = serializedObject.FindProperty(nameof(gripThreshold));
             renderingMode = serializedObject.FindProperty(nameof(renderingMode));
             handPhysicsEnabled = serializedObject.FindProperty(nameof(handPhysicsEnabled));
             useTriggers = serializedObject.FindProperty(nameof(useTriggers));
@@ -64,13 +66,17 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers.Simulation
             {
                 EditorGUI.indentLevel++;
 
-                EditorGUILayout.LabelField("Hand Rendering Settings");
+                EditorGUILayout.LabelField("General Hand Settings", EditorStyles.boldLabel);
+                EditorGUILayout.PropertyField(gripThreshold);
+                EditorGUILayout.Space();
+
+                EditorGUILayout.LabelField("Hand Rendering Settings", EditorStyles.boldLabel);
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(renderingMode);
                 EditorGUILayout.Space();
                 EditorGUI.indentLevel--;
 
-                EditorGUILayout.LabelField("Hand Physics Settings");
+                EditorGUILayout.LabelField("Hand Physics Settings", EditorStyles.boldLabel);
                 EditorGUI.indentLevel++;
                 EditorGUILayout.PropertyField(handPhysicsEnabled);
                 EditorGUILayout.PropertyField(useTriggers);
@@ -83,7 +89,7 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers.Simulation
                 EditorGUILayout.Space();
                 EditorGUI.indentLevel--;
 
-                EditorGUILayout.LabelField("Simulated Poses");
+                EditorGUILayout.LabelField("Simulated Poses", EditorStyles.boldLabel);
                 EditorGUI.indentLevel++;
                 handPoseAnimationSpeed.floatValue = EditorGUILayout.Slider(handPoseAnimationSpeedLabel, handPoseAnimationSpeed.floatValue, 1, 10);
                 EditorGUILayout.Space();

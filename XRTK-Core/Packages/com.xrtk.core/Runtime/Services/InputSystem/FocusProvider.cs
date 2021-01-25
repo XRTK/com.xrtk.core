@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using XRTK.Definitions;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Physics;
 using XRTK.EventDatum.Input;
 using XRTK.Extensions;
-using XRTK.Interfaces;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Utilities;
 using XRTK.Utilities.Physics;
@@ -21,16 +21,31 @@ namespace XRTK.Services.InputSystem
     /// </summary>
     /// <remarks>There are convenience properties for getting only Gaze Pointer if needed.</remarks>
     [System.Runtime.InteropServices.Guid("249D4D78-CADD-45BA-9438-DB9FC2509213")]
-    public class FocusProvider : BaseService, IMixedRealityFocusProvider
+    public class FocusProvider : BaseDataProvider, IMixedRealityFocusProvider
     {
+        /// <inheritdoc />
+        public FocusProvider(string name, uint priority, BaseMixedRealityProfile profile, IMixedRealityInputSystem parentService) : base(name, priority, profile, parentService)
+        {
+            inputSystem = parentService;
+
+            if (!MixedRealityToolkit.TryGetSystemProfile<IMixedRealityInputSystem, MixedRealityInputSystemProfile>(out var inputSystemProfile))
+            {
+                throw new Exception($"Unable to start {name}! An {nameof(MixedRealityInputSystemProfile)} is required for this feature.");
+            }
+
+            focusLayerMasks = inputSystemProfile.PointerRaycastLayerMasks;
+            globalPointingExtent = inputSystemProfile.PointingExtent;
+            debugPointingRayColors = inputSystemProfile.DebugPointingRayColors;
+            MixedRealityRaycaster.DebugEnabled = inputSystemProfile.DrawDebugPointingRays;
+        }
+
         private readonly HashSet<PointerData> pointers = new HashSet<PointerData>();
         private readonly HashSet<GameObject> pendingOverallFocusEnterSet = new HashSet<GameObject>();
         private readonly HashSet<GameObject> pendingOverallFocusExitSet = new HashSet<GameObject>();
         private readonly List<PointerData> pendingPointerSpecificFocusChange = new List<PointerData>();
         private readonly PointerHitResult physicsHitResult = new PointerHitResult();
         private readonly PointerHitResult graphicsHitResult = new PointerHitResult();
-
-        private Color[] debugPointingRayColors = { Color.green };
+        private readonly Color[] debugPointingRayColors;
 
         private IMixedRealityInputSystem inputSystem = null;
 
@@ -45,12 +60,12 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public override uint Priority => 2;
 
-        private float globalPointingExtent = 10f;
+        private readonly float globalPointingExtent;
 
         /// <inheritdoc />
         float IMixedRealityFocusProvider.GlobalPointingExtent => globalPointingExtent;
 
-        private LayerMask[] focusLayerMasks = { Physics.DefaultRaycastLayers };
+        private readonly LayerMask[] focusLayerMasks;
 
         /// <inheritdoc />
         public LayerMask[] GlobalPointerRaycastLayerMasks => focusLayerMasks;
@@ -72,36 +87,6 @@ namespace XRTK.Services.InputSystem
         }
 
         #endregion IFocusProvider Properties
-
-        /// <summary>
-        /// Checks if the <see cref="MixedRealityToolkit"/> is setup correctly to start this service.
-        /// </summary>
-        private bool IsSetupValid
-        {
-            get
-            {
-                if (!MixedRealityToolkit.IsSystemEnabled<IMixedRealityInputSystem>()) { return false; }
-
-                if (MixedRealityToolkit.TryGetSystem(out inputSystem))
-                {
-                    Debug.LogError($"Unable to start {Name}! A valid {nameof(IMixedRealityInputSystem)} is required for this feature.");
-                    return false;
-                }
-
-                if (!MixedRealityToolkit.TryGetSystemProfile<IMixedRealityInputSystem, MixedRealityInputSystemProfile>(out var inputSystemProfile))
-                {
-                    Debug.LogError($"Unable to start {Name}! An {nameof(MixedRealityInputSystemProfile)} is required for this feature.");
-                    return false;
-                }
-
-                focusLayerMasks = inputSystemProfile.PointerRaycastLayerMasks;
-                globalPointingExtent = inputSystemProfile.PointingExtent;
-                debugPointingRayColors = inputSystemProfile.DebugPointingRayColors;
-                MixedRealityRaycaster.DebugEnabled = inputSystemProfile.DrawDebugPointingRays;
-
-                return true;
-            }
-        }
 
         /// <summary>
         /// GazeProvider is a little special, so we keep track of it even if it's not a registered pointer. For the sake
@@ -489,8 +474,6 @@ namespace XRTK.Services.InputSystem
         {
             base.Initialize();
 
-            if (!IsSetupValid) { return; }
-
             foreach (var inputSource in InputSystem.DetectedInputSources)
             {
                 RegisterPointers(inputSource);
@@ -506,8 +489,6 @@ namespace XRTK.Services.InputSystem
         public override void Update()
         {
             base.Update();
-
-            if (!IsSetupValid) { return; }
 
             UpdatePointers();
             UpdateFocusedObjects();
@@ -1135,8 +1116,5 @@ namespace XRTK.Services.InputSystem
         }
 
         #endregion ISourceState Implementation
-
-        /// <inheritdoc />
-        public IMixedRealityService ParentService => InputSystem;
     }
 }

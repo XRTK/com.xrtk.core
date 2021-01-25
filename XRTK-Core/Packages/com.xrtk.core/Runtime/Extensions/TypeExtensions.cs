@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using XRTK.Interfaces;
+using XRTK.Interfaces.Events;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Extensions
@@ -134,6 +135,52 @@ namespace XRTK.Extensions
             Debug.LogError($"{nameof(FindTopmostGenericTypeArguments)} - Maximum recursion depth reached without finding generic type arguments.");
             return null;
         }
+
+        internal static Type FindMixedRealityServiceInterfaceType(this Type serviceType)
+        {
+            Type systemType = null;
+            var isSystemType = false;
+
+            if (!ServiceInterfaceCache.TryGetValue(serviceType, out var interfaceType))
+            {
+                interfaceType = typeof(IMixedRealityService);
+
+                var types = serviceType.GetInterfaces();
+
+                for (int i = 0; i < types.Length; i++)
+                {
+                    if (!typeof(IMixedRealityService).IsAssignableFrom(types[i]))
+                    {
+                        continue;
+                    }
+
+                    if (types[i] == typeof(IMixedRealitySystem))
+                    {
+                        isSystemType = true;
+                    }
+
+                    if (types[i] == typeof(IMixedRealityDataProvider))
+                    {
+                        interfaceType = types[i];
+                        break;
+                    }
+
+                    if (types[i] != typeof(IMixedRealityService) &&
+                        types[i] != typeof(IMixedRealityEventSystem) &&
+                        types[i] != typeof(IMixedRealitySystem))
+                    {
+                        systemType = types[i];
+                        break;
+                    }
+                }
+
+                ServiceInterfaceCache.Add(serviceType, isSystemType ? systemType : interfaceType);
+            }
+
+            return isSystemType ? systemType : interfaceType;
+        }
+
+        private static readonly Dictionary<Type, Type> ServiceInterfaceCache = new Dictionary<Type, Type>();
 
         /// <summary>
         /// Checks if the <see cref="IMixedRealityService"/> has any valid implementations.

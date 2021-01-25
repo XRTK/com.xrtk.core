@@ -36,6 +36,11 @@ namespace XRTK.Services.InputSystem
             }
 
             gazeProviderType = profile.GazeProviderType.Type;
+
+            if (!MixedRealityToolkit.TryCreateAndRegisterService(profile.FocusProviderType?.Type, out focusProvider, profile.FocusProviderType?.Type.Name, 2u, profile, this))
+            {
+                throw new Exception($"The {nameof(IMixedRealityInputSystem)} failed to start the {nameof(IMixedRealityFocusProvider)}!");
+            }
         }
 
         /// <inheritdoc />
@@ -54,10 +59,10 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public IReadOnlyCollection<IMixedRealityController> DetectedControllers => detectedControllers;
 
-        private IMixedRealityFocusProvider focusProvider = null;
+        private readonly IMixedRealityFocusProvider focusProvider = null;
 
         /// <inheritdoc />
-        public IMixedRealityFocusProvider FocusProvider => focusProvider ?? (focusProvider = MixedRealityToolkit.GetService<IMixedRealityFocusProvider>());
+        public IMixedRealityFocusProvider FocusProvider => focusProvider;
 
         /// <inheritdoc />
         public IMixedRealityGazeProvider GazeProvider { get; private set; }
@@ -180,13 +185,23 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public override void Enable()
         {
+            base.Enable();
+
             InputEnabled?.Invoke();
         }
 
         /// <inheritdoc />
         public override void Disable()
         {
-            GazeProvider = null;
+            base.Disable();
+
+            InputDisabled?.Invoke();
+        }
+
+        /// <inheritdoc />
+        public override void Destroy()
+        {
+            base.Destroy();
 
             if (!Application.isPlaying)
             {
@@ -205,8 +220,6 @@ namespace XRTK.Services.InputSystem
                     UnityEngine.Object.DestroyImmediate(inputModule);
                 }
             }
-
-            InputDisabled?.Invoke();
         }
 
         #endregion IMixedRealityManager Implementation

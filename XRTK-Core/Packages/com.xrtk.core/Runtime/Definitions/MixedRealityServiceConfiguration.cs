@@ -28,7 +28,10 @@ namespace XRTK.Definitions
         }
 
         /// <inheritdoc />
-        public override Type InterfaceType => typeof(T);
+        public override bool Enabled
+            => typeof(IMixedRealitySystem).IsAssignableFrom(typeof(T))
+                ? Profile != null && base.Enabled // All IMixedRealitySystems require a profile
+                : base.Enabled;
     }
 
     /// <summary>
@@ -70,11 +73,9 @@ namespace XRTK.Definitions
         [SerializeField]
         private bool enabled;
 
-        public bool Enabled
+        public virtual bool Enabled
         {
-            get => typeof(IMixedRealitySystem).IsAssignableFrom(InterfaceType)
-                ? profile != null && instancedType.Type != null && enabled // IMixedRealitySystem requires a profile
-                : instancedType.Type != null && enabled;
+            get => instancedType.Type != null && enabled;
             internal set => enabled = value;
         }
 
@@ -164,7 +165,5 @@ namespace XRTK.Definitions
             get => profile;
             internal set => profile = value;
         }
-
-        public virtual Type InterfaceType => typeof(IMixedRealityService);
     }
 }

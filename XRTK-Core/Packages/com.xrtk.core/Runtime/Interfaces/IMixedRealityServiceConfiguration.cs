@@ -23,7 +23,7 @@ namespace XRTK.Interfaces
     public interface IMixedRealityServiceConfiguration
     {
         /// <summary>
-        /// Is the service configuration enabled?
+        /// Is this service enabled?
         /// </summary>
         bool Enabled { get; }
 

@@ -832,7 +832,6 @@ namespace XRTK.Services
         /// Creates a new instance of a service and registers it to the Mixed Reality Toolkit service registry for the specified platform.
         /// </summary>
         /// <typeparam name="T">The interface type for the <see cref="IMixedRealityService"/> to be registered.</typeparam>
-        /// <param name="interfaceType"></param>
         /// <param name="concreteType">The concrete class type to instantiate.</param>
         /// <param name="runtimePlatforms">The runtime platform to check against when registering.</param>
         /// <param name="service">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>

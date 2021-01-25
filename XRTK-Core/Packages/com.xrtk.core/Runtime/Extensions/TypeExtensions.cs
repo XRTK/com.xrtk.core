@@ -138,6 +138,11 @@ namespace XRTK.Extensions
 
         internal static Type FindMixedRealityServiceInterfaceType(this Type serviceType)
         {
+            if (serviceType == null)
+            {
+                return null;
+            }
+
             Type systemType = null;
             var isSystemType = false;
 

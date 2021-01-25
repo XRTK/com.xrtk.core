@@ -22,7 +22,6 @@ namespace XRTK.Editor.Profiles
         private MixedRealityToolkitRootProfile rootProfile;
         private bool didPromptToConfigure = false;
 
-        private readonly GUIContent typeLabel = new GUIContent("Instanced Type", "The class type to instantiate at runtime for this system.");
         private readonly GUIContent profileLabel = new GUIContent("Profile");
         private GUIStyle headerStyle;
 

@@ -100,8 +100,8 @@ namespace XRTK.Definitions.InputSystem
         #region Global Hand Options
 
         [SerializeField]
-        [Range(.1f, 1f)]
-        [Tooltip("Threshold in range [0, 1] that defines when a hand is considered to be grabing.")]
+        [Range(.5f, 1f)]
+        [Tooltip("Threshold in range [0.5, 1] that defines when a hand is considered to be grabing.")]
         private float gripThreshold = .8f;
 
         /// <summary>

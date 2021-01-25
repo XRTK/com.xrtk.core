@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -34,11 +34,14 @@ namespace XRTK.Providers.SpatialObservers
                 throw new ArgumentNullException($"Missing a {profile.GetType().Name} profile for {name}");
             }
 
-            SourceId = MixedRealityToolkit.SpatialAwarenessSystem.GenerateNewObserverId();
+            SpatialAwarenessSystem = parentService;
+            SourceId = parentService.GenerateNewObserverId();
             StartupBehavior = profile.StartupBehavior;
             UpdateInterval = profile.UpdateInterval;
             PhysicsLayer = profile.PhysicsLayer;
         }
+
+        protected readonly IMixedRealitySpatialAwarenessSystem SpatialAwarenessSystem;
 
         #region IMixedRealityService Implementation
 
@@ -47,7 +50,7 @@ namespace XRTK.Providers.SpatialObservers
         {
             base.Enable();
 
-            MixedRealityToolkit.SpatialAwarenessSystem?.RaiseSpatialAwarenessObserverDetected(this);
+            SpatialAwarenessSystem.RaiseSpatialAwarenessObserverDetected(this);
 
             if (StartupBehavior == AutoStartBehavior.AutoStart)
             {
@@ -62,7 +65,7 @@ namespace XRTK.Providers.SpatialObservers
 
             StopObserving();
 
-            MixedRealityToolkit.SpatialAwarenessSystem?.RaiseSpatialAwarenessObserverLost(this);
+            SpatialAwarenessSystem.RaiseSpatialAwarenessObserverLost(this);
         }
 
         #endregion IMixedRealityService Implementation

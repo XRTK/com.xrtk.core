@@ -17,7 +17,10 @@ namespace XRTK.Providers.Speech
         protected BaseSpeechDataProvider(string name, uint priority, MixedRealitySpeechCommandsProfile profile, IMixedRealityInputSystem parentService)
             : base(name, priority, profile, parentService)
         {
+            InputSystem = parentService;
         }
+
+        protected readonly IMixedRealityInputSystem InputSystem;
 
         /// <inheritdoc />
         public virtual bool IsRecognitionActive { get; protected set; } = false;

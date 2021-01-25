@@ -37,7 +37,7 @@ namespace XRTK.Services.InputSystem
 
             gazeProviderType = profile.GazeProviderType.Type;
 
-            if (!MixedRealityToolkit.TryCreateAndRegisterService<IMixedRealityFocusProvider>(profile.FocusProviderType?.Type, out focusProvider))
+            if (!MixedRealityToolkit.TryCreateAndRegisterService(profile.FocusProviderType?.Type, out focusProvider, profile.FocusProviderType?.Type.Name, 2u, profile, this))
             {
                 throw new Exception($"The {nameof(IMixedRealityInputSystem)} failed to start the {nameof(IMixedRealityFocusProvider)}!");
             }
@@ -185,13 +185,23 @@ namespace XRTK.Services.InputSystem
         /// <inheritdoc />
         public override void Enable()
         {
+            base.Enable();
+
             InputEnabled?.Invoke();
         }
 
         /// <inheritdoc />
         public override void Disable()
         {
-            GazeProvider = null;
+            base.Disable();
+
+            InputDisabled?.Invoke();
+        }
+
+        /// <inheritdoc />
+        public override void Destroy()
+        {
+            base.Destroy();
 
             if (!Application.isPlaying)
             {
@@ -210,8 +220,6 @@ namespace XRTK.Services.InputSystem
                     UnityEngine.Object.DestroyImmediate(inputModule);
                 }
             }
-
-            InputDisabled?.Invoke();
         }
 
         #endregion IMixedRealityManager Implementation

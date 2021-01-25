@@ -8,7 +8,6 @@ using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.UnityInput
 {
@@ -97,7 +96,7 @@ namespace XRTK.Providers.Controllers.UnityInput
 
                     if (controller != null)
                     {
-                        MixedRealityToolkit.InputSystem?.RaiseSourceDetected(controller.InputSource, controller);
+                        InputSystem?.RaiseSourceDetected(controller.InputSource, controller);
                     }
                 }
             }
@@ -155,7 +154,7 @@ namespace XRTK.Providers.Controllers.UnityInput
 
             if (controller != null)
             {
-                MixedRealityToolkit.InputSystem?.RaiseSourceLost(controller.InputSource, controller);
+                InputSystem?.RaiseSourceLost(controller.InputSource, controller);
             }
 
             if (clearFromRegistry)

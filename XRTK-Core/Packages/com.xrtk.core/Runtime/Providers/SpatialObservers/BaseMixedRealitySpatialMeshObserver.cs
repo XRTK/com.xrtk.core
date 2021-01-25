@@ -37,7 +37,7 @@ namespace XRTK.Providers.SpatialObservers
 
             MeshLevelOfDetail = profile.MeshLevelOfDetail;
             MeshRecalculateNormals = profile.MeshRecalculateNormals;
-            meshDisplayOption = MixedRealityToolkit.SpatialAwarenessSystem.SpatialMeshVisibility;
+            meshDisplayOption = parentService.SpatialMeshVisibility;
             MeshVisibleMaterial = profile.MeshVisibleMaterial;
             MeshOcclusionMaterial = profile.MeshOcclusionMaterial;
             ObservationExtents = profile.ObservationExtents;
@@ -236,13 +236,13 @@ namespace XRTK.Providers.SpatialObservers
         /// <inheritdoc />
         public virtual void RaiseMeshAdded(SpatialMeshObject spatialMeshObject)
         {
-            MixedRealityToolkit.SpatialAwarenessSystem.RaiseMeshAdded(this, spatialMeshObject);
+            SpatialAwarenessSystem.RaiseMeshAdded(this, spatialMeshObject);
         }
 
         /// <inheritdoc />
         public virtual void RaiseMeshUpdated(SpatialMeshObject spatialMeshObject)
         {
-            MixedRealityToolkit.SpatialAwarenessSystem.RaiseMeshUpdated(this, spatialMeshObject);
+            SpatialAwarenessSystem.RaiseMeshUpdated(this, spatialMeshObject);
         }
 
         /// <inheritdoc />
@@ -257,7 +257,7 @@ namespace XRTK.Providers.SpatialObservers
                 // If it's disabled then likely the mesh was removed before cooking completed.
                 if (spatialMesh.GameObject.activeInHierarchy)
                 {
-                    MixedRealityToolkit.SpatialAwarenessSystem.RaiseMeshRemoved(this, spatialMeshObject);
+                    SpatialAwarenessSystem.RaiseMeshRemoved(this, spatialMeshObject);
                 }
 
                 spatialMesh.GameObject.SetActive(false);
@@ -327,7 +327,7 @@ namespace XRTK.Providers.SpatialObservers
                 newGameObject.layer = PhysicsLayer;
             }
 
-            newGameObject.transform.SetParent(MixedRealityToolkit.SpatialAwarenessSystem.SpatialMeshesParent.transform, false);
+            newGameObject.transform.SetParent(SpatialAwarenessSystem.SpatialMeshesParent.transform, false);
             newGameObject.SetActive(false);
             return newGameObject;
         }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Services;
 
 namespace XRTK.SDK.Utilities.Solvers
@@ -212,10 +213,16 @@ namespace XRTK.SDK.Utilities.Solvers
         {
             Handedness = Handedness.None;
 
+            if (!MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem))
+            {
+                Debug.LogError($"Failed to find the {nameof(IMixedRealityCameraSystem)}!");
+                return;
+            }
+
             switch (TrackedObjectToReference)
             {
                 case TrackedObjectType.Head:
-                    TrackTransform(MixedRealityToolkit.CameraSystem.MainCameraRig.CameraTransform);
+                    TrackTransform(cameraSystem.MainCameraRig.CameraTransform);
                     break;
                 case TrackedObjectType.LeftHandOrController:
                     Handedness = Handedness.Left;
@@ -224,10 +231,10 @@ namespace XRTK.SDK.Utilities.Solvers
                     Handedness = Handedness.Right;
                     break;
                 case TrackedObjectType.Body:
-                    TrackTransform(MixedRealityToolkit.CameraSystem.MainCameraRig.BodyTransform);
+                    TrackTransform(cameraSystem.MainCameraRig.BodyTransform);
                     break;
                 case TrackedObjectType.Playspace:
-                    TrackTransform(MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform);
+                    TrackTransform(cameraSystem.MainCameraRig.PlayspaceTransform);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

@@ -2,12 +2,9 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
-using System.Linq;
 using NUnit.Framework;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
-using XRTK.Interfaces.InputSystem;
-using XRTK.Services;
 
 namespace XRTK.Tests.InputSystem
 {

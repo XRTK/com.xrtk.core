@@ -9,6 +9,7 @@ using XRTK.Definitions;
 using XRTK.Editor.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Services;
 
 namespace XRTK.Editor.Profiles
@@ -92,9 +93,9 @@ namespace XRTK.Editor.Profiles
                         DialogOptOutDecisionType.ForThisSession,
                         "XRTK_Prompt_Configure_Scene"))
                     {
-                        if (MixedRealityToolkit.CameraSystem != null)
+                        if (MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem))
                         {
-                            var playspace = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform;
+                            var playspace = cameraSystem.MainCameraRig.PlayspaceTransform;
                             Debug.Assert(playspace != null);
                         }
 

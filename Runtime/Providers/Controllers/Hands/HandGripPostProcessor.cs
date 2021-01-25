@@ -16,6 +16,15 @@ namespace XRTK.Providers.Controllers.Hands
     /// </summary>
     public sealed class HandGripPostProcessor : IHandDataPostProcessor
     {
+        /// <summary>
+        /// Constructor.
+        /// </summary>
+        /// <param name="isGrippingThreshold">Threshold in range [0, 1] that defines when a hand is considered to be grabing.</param>
+        public HandGripPostProcessor(float isGrippingThreshold)
+        {
+            this.isGrippingThreshold = isGrippingThreshold;
+        }
+
         private const float CURL_THUMB_METACARPAL_LOW_END_ANGLE = 70f;
         private const float CURL_THUMB_METACARPAL_HIGH_END_ANGLE = 100f;
         private const float CURL_THUMB_METACARPAL_DISTANCE = CURL_THUMB_METACARPAL_HIGH_END_ANGLE - CURL_THUMB_METACARPAL_LOW_END_ANGLE;
@@ -53,10 +62,9 @@ namespace XRTK.Providers.Controllers.Hands
 
         private const float CURL_TOTAL_INTERMEDIATE_DISTANCE = CURL_LITTLE_INTERMEDIATE_DISTANCE + CURL_RING_INTERMEDIATE_DISTANCE + CURL_MIDDLE_INTERMEDIATE_DISTANCE + CURL_INDEX_INTERMEDIATE_DISTANCE;
 
-        private const float IS_GRIPPING_CURL_THRESHOLD = .9f;
-        private const float IS_GRIPPING_INDEX_CURL_THRESHOLD = .8f;
-
         private const bool DEBUG_LOG_VALUES_TO_CONSOLE = false;
+
+        private readonly float isGrippingThreshold;
 
         /// <inheritdoc />
         public HandData PostProcess(Handedness handedness, HandData handData)
@@ -133,7 +141,7 @@ namespace XRTK.Providers.Controllers.Hands
                 // Hand is gripping if the grip strength passed the threshold. But we are also taking
                 // the index curl into account explicitly, this helps avoiding the pinch gesture being
                 // considered gripping as well.
-                handData.IsGripping = handData.GripStrength >= IS_GRIPPING_CURL_THRESHOLD && indexCurlStrength >= IS_GRIPPING_INDEX_CURL_THRESHOLD;
+                handData.IsGripping = handData.GripStrength >= isGrippingThreshold && indexCurlStrength >= isGrippingThreshold * .9f;
 
                 if (Debug.isDebugBuild && DEBUG_LOG_VALUES_TO_CONSOLE)
                 {

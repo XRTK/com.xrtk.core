@@ -14,6 +14,7 @@ using UnityEditor.Build.Reporting;
 using UnityEngine;
 using XRTK.Extensions;
 using XRTK.Editor.Utilities;
+using XRTK.Editor.Utilities.SymbolicLinks;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Editor.BuildAndDeploy
@@ -144,6 +145,26 @@ namespace XRTK.Editor.BuildAndDeploy
             buildInfo.PostBuildAction?.Invoke(buildInfo, buildReport);
 
             return buildReport;
+        }
+
+        /// <summary>
+        /// Validates the Unity Project assets by forcing a symbolic link sync and creates solution files.
+        /// </summary>
+        [UsedImplicitly]
+        public static void ValidateProject()
+        {
+            try
+            {
+                SymbolicLinker.RunSync(true);
+                SyncSolution();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                EditorApplication.Exit(1);
+            }
+
+            EditorApplication.Exit(0);
         }
 
         /// <summary>

@@ -50,7 +50,6 @@ namespace XRTK.Definitions
         /// <param name="profile">The <see cref="BaseMixedRealityProfile"/> for <see cref="IMixedRealityService"/>.</param>
         public MixedRealityServiceConfiguration(SystemType instancedType, string name, uint priority, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, BaseMixedRealityProfile profile)
         {
-            this.enabled = true;
             this.instancedType = instancedType;
             this.name = name;
             this.priority = priority;
@@ -70,14 +69,8 @@ namespace XRTK.Definitions
             this.profile = profile;
         }
 
-        [SerializeField]
-        private bool enabled;
-
-        public virtual bool Enabled
-        {
-            get => instancedType.Type != null && enabled;
-            internal set => enabled = value;
-        }
+        /// <inheritdoc />
+        public virtual bool Enabled => instancedType.Type != null;
 
         [SerializeField]
         [Implements(typeof(IMixedRealityService), TypeGrouping.ByNamespaceFlat)]

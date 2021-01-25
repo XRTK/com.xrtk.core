@@ -22,6 +22,7 @@ namespace XRTK.Editor
         private SerializedProperty activeProfile;
         private int currentPickerWindow = -1;
         private bool checkChange;
+        private UnityEditor.Editor profileInspector;
 
         private void Awake()
         {
@@ -36,6 +37,7 @@ namespace XRTK.Editor
             activeProfile = serializedObject.FindProperty(nameof(activeProfile));
             currentPickerWindow = -1;
             checkChange = activeProfile.objectReferenceValue.IsNull();
+            profileInspector = null;
         }
 
         public override void OnInspectorGUI()
@@ -120,7 +122,11 @@ namespace XRTK.Editor
             if (activeProfile.objectReferenceValue != null)
             {
                 var rootProfile = activeProfile.objectReferenceValue as MixedRealityToolkitRootProfile;
-                var profileInspector = CreateEditor(rootProfile);
+
+                if (profileInspector == null)
+                {
+                    profileInspector = CreateEditor(rootProfile);
+                }
 
                 if (profileInspector is MixedRealityToolkitRootProfileInspector rootProfileInspector)
                 {

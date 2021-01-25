@@ -136,53 +136,43 @@ namespace XRTK.Extensions
             return null;
         }
 
-        internal static Type FindMixedRealityServiceInterfaceType(this Type serviceType)
+        internal static Type FindMixedRealityServiceInterfaceType(this Type serviceType, Type interfaceType)
         {
             if (serviceType == null)
             {
                 return null;
             }
 
-            Type systemType = null;
-            var isSystemType = false;
+            var returnType = interfaceType;
 
-            if (!ServiceInterfaceCache.TryGetValue(serviceType, out var interfaceType))
+            if (typeof(IMixedRealitySystem).IsAssignableFrom(serviceType))
             {
-                interfaceType = typeof(IMixedRealityService);
-
-                var types = serviceType.GetInterfaces();
-
-                for (int i = 0; i < types.Length; i++)
+                if (!ServiceInterfaceCache.TryGetValue(serviceType, out returnType))
                 {
-                    if (!typeof(IMixedRealityService).IsAssignableFrom(types[i]))
+                    var types = serviceType.GetInterfaces();
+
+                    for (int i = 0; i < types.Length; i++)
                     {
-                        continue;
+                        if (!typeof(IMixedRealityService).IsAssignableFrom(types[i]))
+                        {
+                            continue;
+                        }
+
+                        if (types[i] != typeof(IMixedRealityService) &&
+                            types[i] != typeof(IMixedRealityDataProvider) &&
+                            types[i] != typeof(IMixedRealityEventSystem) &&
+                            types[i] != typeof(IMixedRealitySystem))
+                        {
+                            returnType = types[i];
+                            break;
+                        }
                     }
 
-                    if (types[i] == typeof(IMixedRealitySystem))
-                    {
-                        isSystemType = true;
-                    }
-
-                    if (types[i] == typeof(IMixedRealityDataProvider))
-                    {
-                        interfaceType = types[i];
-                        break;
-                    }
-
-                    if (types[i] != typeof(IMixedRealityService) &&
-                        types[i] != typeof(IMixedRealityEventSystem) &&
-                        types[i] != typeof(IMixedRealitySystem))
-                    {
-                        systemType = types[i];
-                        break;
-                    }
+                    ServiceInterfaceCache.Add(serviceType, returnType);
                 }
-
-                ServiceInterfaceCache.Add(serviceType, isSystemType ? systemType : interfaceType);
             }
 
-            return isSystemType ? systemType : interfaceType;
+            return returnType;
         }
 
         private static readonly Dictionary<Type, Type> ServiceInterfaceCache = new Dictionary<Type, Type>();

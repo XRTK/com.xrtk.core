@@ -26,7 +26,7 @@ namespace XRTK.Tests.InputSystem
             Assert.IsNotEmpty(MixedRealityToolkit.ActiveSystems);
             Assert.IsNotNull(inputSystem);
             Assert.AreEqual(activeSystemCount + 1, MixedRealityToolkit.ActiveSystems.Count);
-            Assert.AreEqual(activeServiceCount, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
+            Assert.AreEqual(activeServiceCount + 1, MixedRealityToolkit.RegisteredMixedRealityServices.Count);
         }
 
         [Test]

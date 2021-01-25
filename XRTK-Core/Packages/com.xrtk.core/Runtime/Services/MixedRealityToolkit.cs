@@ -946,7 +946,7 @@ namespace XRTK.Services
 
         private static Type GetServiceInterfaceType(Type interfaceType, IMixedRealityService serviceInstance)
         {
-            var returnValue = typeof(IMixedRealityService);
+            var returnValue = interfaceType;
 
             if (IsSystem(interfaceType))
             {
@@ -959,7 +959,8 @@ namespace XRTK.Services
                         continue;
                     }
 
-                    if (types[i] != typeof(IMixedRealityService) && types[i] != typeof(IMixedRealitySystem))
+                    if (types[i] != typeof(IMixedRealityService) &&
+                        types[i] != typeof(IMixedRealitySystem))
                     {
                         returnValue = types[i];
                     }
@@ -983,7 +984,7 @@ namespace XRTK.Services
                 return false;
             }
 
-            interfaceType = serviceInstance.GetType().FindMixedRealityServiceInterfaceType();
+            interfaceType = serviceInstance.GetType().FindMixedRealityServiceInterfaceType(interfaceType);
 
             if (!interfaceType.IsInstanceOfType(serviceInstance))
             {
@@ -1864,7 +1865,7 @@ namespace XRTK.Services
             {
                 foreach (var configuration in instance.activeProfile.RegisteredServiceConfigurations)
                 {
-                    if (typeof(T).IsAssignableFrom(configuration.InstancedType.Type.FindMixedRealityServiceInterfaceType()) &&
+                    if (typeof(T).IsAssignableFrom(configuration.InstancedType.Type.FindMixedRealityServiceInterfaceType(typeof(T))) &&
                         configuration.Enabled)
                     {
                         return true;
@@ -1890,7 +1891,7 @@ namespace XRTK.Services
             {
                 foreach (var configuration in instance.activeProfile.RegisteredServiceConfigurations)
                 {
-                    if (typeof(TSystem).IsAssignableFrom(configuration.InstancedType.Type.FindMixedRealityServiceInterfaceType()))
+                    if (typeof(TSystem).IsAssignableFrom(configuration.InstancedType.Type.FindMixedRealityServiceInterfaceType(typeof(TSystem))))
                     {
                         profile = (TProfile)configuration.Profile;
                         return profile != null;

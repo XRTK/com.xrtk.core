@@ -135,13 +135,13 @@ namespace XRTK.Editor.Data.Controllers.Hands
             var handData = poseDefinition.ToHandData();
 
             // Intialize processors needed.
-            var gripPostProcessor = new HandGripPostProcessor();
+            var gripPostProcessor = new HandGripPostProcessor(.8f);
 
             // Process the hand data, most hand data processors
             // will ignore the hand data if it is not tracked, so we
             // have to temporarily fake it's tracking state and then reset it.
             handData.TrackingState = Definitions.Devices.TrackingState.Tracked;
-            gripPostProcessor.PostProcess(Handedness.Right, handData);
+            handData = gripPostProcessor.PostProcess(Handedness.Right, handData);
             handData.TrackingState = Definitions.Devices.TrackingState.NotTracked;
 
             isGripping.boolValue = handData.IsGripping;

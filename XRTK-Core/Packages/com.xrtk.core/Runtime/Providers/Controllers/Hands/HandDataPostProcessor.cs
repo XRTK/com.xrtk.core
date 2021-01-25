@@ -22,10 +22,11 @@ namespace XRTK.Providers.Controllers.Hands
         /// Creates a new instance of the hand data post processor.
         /// </summary>
         /// <param name="trackedPoses">Pose recognizer instance to use for pose recognition.</param>
-        public HandDataPostProcessor(IReadOnlyList<HandControllerPoseProfile> trackedPoses)
+        /// <param name="isGrippingThreshold">Threshold in range [0, 1] that defines when a hand is considered to be grabing.</param>
+        public HandDataPostProcessor(IReadOnlyList<HandControllerPoseProfile> trackedPoses, float isGrippingThreshold)
         {
             TrackedPoseProcessor = new HandTrackedPosePostProcessor(trackedPoses);
-            GripPostProcessor = new HandGripPostProcessor();
+            GripPostProcessor = new HandGripPostProcessor(isGrippingThreshold);
         }
 
         private const float IS_POINTING_DOTP_THRESHOLD = .1f;

@@ -150,10 +150,21 @@ namespace XRTK.Editor.BuildAndDeploy
         /// <summary>
         /// Validates the Unity Project assets by forcing a symbolic link sync and creates solution files.
         /// </summary>
+        [UsedImplicitly]
         public static void ValidateProject()
         {
-            SymbolicLinker.RunSync(true);
-            SyncSolution();
+            try
+            {
+                SymbolicLinker.RunSync(true);
+                SyncSolution();
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                EditorApplication.Exit(1);
+            }
+
+            EditorApplication.Exit(0);
         }
 
         /// <summary>

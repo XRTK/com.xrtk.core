@@ -154,8 +154,28 @@ namespace XRTK.Editor
             }
             set
             {
-                sceneAsset = value != null ? GetSceneObject(value) : null;
-                var scenePath = value != null ? AssetDatabase.GetAssetOrScenePath(value) : string.Empty;
+                string scenePath;
+
+                if (value == null)
+                {
+                    scenePath = EditorPreferences.Get(START_SCENE_KEY, string.Empty);
+
+                    if (!string.IsNullOrWhiteSpace(scenePath))
+                    {
+                        var oldScenePath = AssetDatabase.GetAssetOrScenePath(GetSceneObject(scenePath));
+                        var buildScenes = EditorBuildSettings.scenes.ToList();
+                        buildScenes.Remove(buildScenes.FirstOrDefault(buildScene => buildScene.path.Equals(oldScenePath)));
+                        EditorBuildSettings.scenes = buildScenes.ToArray();
+                    }
+
+                    sceneAsset = null;
+                }
+                else
+                {
+                    sceneAsset = GetSceneObject(value);
+                    scenePath = AssetDatabase.GetAssetOrScenePath(value);
+                }
+
                 EditorPreferences.Set(START_SCENE_KEY, scenePath);
             }
         }
@@ -411,6 +431,7 @@ namespace XRTK.Editor
                 editorScene = new EditorBuildSettingsScene
                 {
                     path = AssetDatabase.GetAssetOrScenePath(asset),
+                    enabled = true
                 };
 
                 editorScene.guid = new GUID(AssetDatabase.AssetPathToGUID(editorScene.path));

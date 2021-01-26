@@ -168,6 +168,7 @@ namespace XRTK.Editor
                         EditorBuildSettings.scenes = buildScenes.ToArray();
                     }
 
+                    scenePath = string.Empty;
                     sceneAsset = null;
                 }
                 else

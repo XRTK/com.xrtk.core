@@ -5,15 +5,14 @@ using UnityEditor;
 using UnityEditor.Experimental.SceneManagement;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
-using XRTK.Services;
-using XRTK.Extensions;
 using XRTK.Editor.Utilities.SymbolicLinks;
+using XRTK.Services;
 
 namespace XRTK.Editor.Utilities
 {
     /// <summary>
     /// Ensures that the <see cref="MixedRealityPreferences.StartSceneAsset"/> is always loaded
-    /// so that the <see cref="XRTK.Services.MixedRealityToolkit"/> runs correctly in the editor.
+    /// so that the <see cref="MixedRealityToolkit"/> runs correctly in the editor.
     /// </summary>
     [InitializeOnLoad]
     public static class AutoSceneSwitcher
@@ -21,16 +20,6 @@ namespace XRTK.Editor.Utilities
         static AutoSceneSwitcher()
         {
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
-
-            // If a start scene hasn't been configured yet for XRTK but the project
-            // has build scenes configured, we assume the scene at index 0 of the build scenes
-            // is our start scene and save it to preferences, unless it's the Unity default sample scene.
-            if (MixedRealityPreferences.StartSceneAsset == null &&
-                EditorBuildSettings.scenes.Length > 0 &&
-                !EditorBuildSettings.scenes[0].path.Contains("SampleScene"))
-            {
-                MixedRealityPreferences.StartSceneAsset = AssetDatabase.LoadAssetAtPath<SceneAsset>(EditorBuildSettings.scenes[0].path);
-            }
         }
 
         private static void OnPlayModeStateChanged(PlayModeStateChange playModeState)
@@ -79,6 +68,7 @@ namespace XRTK.Editor.Utilities
             // If the start scene was successfully loaded, we're good and can continue playing.
             if (startSceneLoaded)
             {
+                EditorPreferences.Set($"{nameof(AutoSceneSwitcher)}", true);
                 return;
             }
 
@@ -86,7 +76,7 @@ namespace XRTK.Editor.Utilities
             // loaded scene(s) may not contain a proper XRTK service locator game object configuration.
             // Least we can do now is offer the user to auto configure the current scene, if none of the
             // loaded scenes already contains a XRTK configuration.
-            if (MixedRealityToolkit.Instance.IsNull())
+            if (!MixedRealityToolkit.IsInitialized && EditorPreferences.Get($"{nameof(AutoSceneSwitcher)}", true))
             {
                 var dialogResult = EditorUtility.DisplayDialogComplex(
                         title: "Missing the MixedRealityToolkit",
@@ -97,6 +87,9 @@ namespace XRTK.Editor.Utilities
 
                 switch (dialogResult)
                 {
+                    case 0:
+                        EditorPreferences.Set($"{nameof(AutoSceneSwitcher)}", false);
+                        break;
                     case 1:
                         MixedRealityToolkitInspector.CreateMixedRealityToolkitGameObject();
                         break;

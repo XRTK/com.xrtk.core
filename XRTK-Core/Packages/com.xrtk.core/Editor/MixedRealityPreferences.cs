@@ -413,7 +413,7 @@ namespace XRTK.Editor
 
         private static SceneAsset GetSceneObject(string sceneName, SceneAsset asset = null)
         {
-            if (string.IsNullOrEmpty(sceneName) ||
+            if (string.IsNullOrWhiteSpace(sceneName) ||
                 EditorBuildSettings.scenes == null)
             {
                 return null;

@@ -52,9 +52,10 @@ namespace XRTK.Services.Teleportation
 
             if (teleportProvider == null)
             {
-                // No provier selected, we'll be using default teleport.
+                // No provider selected, we'll be using default teleport.
                 // Make sure to remove any leftover provider attached to the camera.
-                var component = CameraCache.Main.GetComponent<IMixedRealityTeleportProvider>() as Component;
+                var component = CameraCache.Main.GetComponent(typeof(IMixedRealityTeleportProvider));
+
                 if (!component.IsNull())
                 {
                     if (Application.isPlaying)
@@ -81,7 +82,8 @@ namespace XRTK.Services.Teleportation
 
             if (!Application.isPlaying)
             {
-                var component = CameraCache.Main.GetComponent<IMixedRealityTeleportProvider>() as Component;
+                var component = CameraCache.Main.GetComponent(typeof(IMixedRealityTeleportProvider));
+
                 if (!component.IsNull())
                 {
                     Object.DestroyImmediate(component);

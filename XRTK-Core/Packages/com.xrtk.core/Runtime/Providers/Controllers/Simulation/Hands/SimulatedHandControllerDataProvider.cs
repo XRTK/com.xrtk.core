@@ -50,9 +50,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 ? profile.BoundsMode
                 : inputSystemProfile.BoundsMode;
 
-            var isGrippingThreshold = profile.GripThreshold != globalSettingsProfile.GripThreshold
+            var isGrippingThreshold = profile.GripThreshold != inputSystemProfile.GripThreshold
                 ? profile.GripThreshold
-                : globalSettingsProfile.GripThreshold;
+                : inputSystemProfile.GripThreshold;
 
             if (profile.TrackedPoses != null && profile.TrackedPoses.Count > 0)
             {

@@ -121,6 +121,8 @@ namespace XRTK.Editor.BuildAndDeploy
                 }
             }
 
+            PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"${Directory.GetParent(Application.dataPath)}\\IL2CPP_Cache\\{buildInfo.BuildTarget}\"");
+
             try
             {
                 buildReport = BuildPipeline.BuildPlayer(

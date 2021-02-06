@@ -8,7 +8,6 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Definitions.Controllers;
-using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Editor.Data;
 using XRTK.Editor.PropertyDrawers;
@@ -343,35 +342,9 @@ namespace XRTK.Editor
                 if (useCustomInteractionMapping ||
                     currentControllerTexture.IsNull())
                 {
-                    bool skip = false;
-
-                    if (ControllerType.Name == "WindowsMixedRealityMotionController" && Handedness == Handedness.None)
-                    {
-                        switch (description)
-                        {
-                            case "Grip Press":
-                            case "Trigger Position":
-                            case "Trigger Touched":
-                            case "Touchpad Position":
-                            case "Touchpad Touch":
-                            case "Touchpad Press":
-                            case "Menu Press":
-                            case "Thumbstick Position":
-                            case "Thumbstick Press":
-                                skip = true;
-                                break;
-                            case "Trigger Press (Select)":
-                                description = "Air Tap (Select)";
-                                break;
-                        }
-                    }
-
-                    if (!skip)
-                    {
-                        inputActionDropdown.OnGui(GUIContent.none, action, axisConstraint, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
-                        EditorGUILayout.LabelField(description, GUILayout.ExpandWidth(true));
-                        GUILayout.FlexibleSpace();
-                    }
+                    inputActionDropdown.OnGui(GUIContent.none, action, axisConstraint, GUILayout.Width(INPUT_ACTION_LABEL_WIDTH));
+                    EditorGUILayout.LabelField(description, GUILayout.ExpandWidth(true));
+                    GUILayout.FlexibleSpace();
                 }
                 else
                 {

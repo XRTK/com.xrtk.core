@@ -97,6 +97,8 @@ namespace XRTK.Editor.BuildAndDeploy
 
             buildInfo.OutputDirectory = $"{buildInfo.OutputDirectory}/{PlayerSettings.productName}";
 
+            bool setIl2cppCache = true;
+
             switch (buildInfo.BuildTarget)
             {
                 case BuildTarget.Lumin:
@@ -104,11 +106,18 @@ namespace XRTK.Editor.BuildAndDeploy
                     break;
                 case BuildTarget.Android:
                     buildInfo.OutputDirectory += ".apk";
+                    setIl2cppCache = false;
                     break;
                 case BuildTarget.StandaloneWindows:
                 case BuildTarget.StandaloneWindows64:
                     buildInfo.OutputDirectory += ".exe";
                     break;
+            }
+
+            if (setIl2cppCache)
+            {
+                var targetArch = PlayerSettings.GetArchitecture(buildTargetGroup);
+                PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}_{targetArch}\"");
             }
 
             BuildReport buildReport = default;
@@ -120,8 +129,6 @@ namespace XRTK.Editor.BuildAndDeploy
                     Debug.Log($"BuildScene->{scene.path}");
                 }
             }
-
-            PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}\"");
 
             try
             {

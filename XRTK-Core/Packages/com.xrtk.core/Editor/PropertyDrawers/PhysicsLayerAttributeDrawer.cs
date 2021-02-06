@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using XRTK.Attributes;
-using XRTK.Extensions;
+using XRTK.Editor.Utilities;
 
 namespace XRTK.Editor.PropertyDrawers
 {
@@ -23,9 +23,9 @@ namespace XRTK.Editor.PropertyDrawers
             guiContents.Add(new GUIContent("(None)"));
             layerIds.Add(-1);
 
-            for (int i = 0; i < LayerExtensions.TagManagerLayers.arraySize; i++)
+            for (int i = 0; i < LayerUtilities.TagManagerLayerProperties.arraySize; i++)
             {
-                var layer = LayerExtensions.TagManagerLayers.GetArrayElementAtIndex(i);
+                var layer = LayerUtilities.TagManagerLayerProperties.GetArrayElementAtIndex(i);
 
                 if (!string.IsNullOrWhiteSpace(layer.stringValue))
                 {

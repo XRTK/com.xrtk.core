@@ -944,32 +944,6 @@ namespace XRTK.Services
             return TryRegisterServiceInternal(typeof(T), serviceInstance);
         }
 
-        private static Type GetServiceInterfaceType(Type interfaceType, IMixedRealityService serviceInstance)
-        {
-            var returnValue = interfaceType;
-
-            if (IsSystem(interfaceType))
-            {
-                var types = serviceInstance.GetType().GetInterfaces();
-
-                for (int i = 0; i < types.Length; i++)
-                {
-                    if (!typeof(IMixedRealityService).IsAssignableFrom(types[i]))
-                    {
-                        continue;
-                    }
-
-                    if (types[i] != typeof(IMixedRealityService) &&
-                        types[i] != typeof(IMixedRealitySystem))
-                    {
-                        returnValue = types[i];
-                    }
-                }
-            }
-
-            return returnValue;
-        }
-
         /// <summary>
         /// Internal service registration.
         /// </summary>
@@ -1008,7 +982,16 @@ namespace XRTK.Services
 
             if (IsSystem(interfaceType))
             {
-                activeSystems.Add(interfaceType, serviceInstance as IMixedRealitySystem);
+                try
+                {
+                    activeSystems.Add(interfaceType, serviceInstance as IMixedRealitySystem);
+                }
+                catch (ArgumentException)
+                {
+                    preExistingService = GetService(interfaceType, false);
+                    Debug.LogError($"There's already a {interfaceType.Name}.{preExistingService.Name} registered!");
+                    return false;
+                }
             }
             else if (typeof(IMixedRealityService).IsAssignableFrom(interfaceType))
             {
@@ -1930,7 +1913,7 @@ namespace XRTK.Services
 
             if (!SystemCache.TryGetValue(typeof(T), out var cachedSystem))
             {
-                if (IsSystemEnabled<T>())
+                if (IsSystemRegistered<T>())
                 {
                     var hasSearched = SearchedSystemTypes.Contains(typeof(T));
 

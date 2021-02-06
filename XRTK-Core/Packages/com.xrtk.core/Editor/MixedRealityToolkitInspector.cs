@@ -37,7 +37,11 @@ namespace XRTK.Editor
             activeProfile = serializedObject.FindProperty(nameof(activeProfile));
             currentPickerWindow = -1;
             checkChange = activeProfile.objectReferenceValue.IsNull();
-            profileInspector = null;
+        }
+
+        private void OnDestroy()
+        {
+            profileInspector.Destroy();
         }
 
         public override void OnInspectorGUI()
@@ -123,7 +127,7 @@ namespace XRTK.Editor
             {
                 var rootProfile = activeProfile.objectReferenceValue as MixedRealityToolkitRootProfile;
 
-                if (profileInspector == null)
+                if (profileInspector.IsNull())
                 {
                     profileInspector = CreateEditor(rootProfile);
                 }

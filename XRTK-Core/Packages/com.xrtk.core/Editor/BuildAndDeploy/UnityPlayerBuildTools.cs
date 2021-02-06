@@ -117,7 +117,7 @@ namespace XRTK.Editor.BuildAndDeploy
             if (setIl2cppCache)
             {
                 var targetArch = PlayerSettings.GetArchitecture(buildTargetGroup);
-                PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}_{targetArch}\"");
+                PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}\\{targetArch}\"");
             }
 
             BuildReport buildReport = default;

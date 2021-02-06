@@ -199,25 +199,24 @@ namespace XRTK.Services.InputSystem
         }
 
         /// <inheritdoc />
-        public override void Destroy()
+        protected override void OnDispose(bool finalizing)
         {
-            base.Destroy();
+            base.OnDispose(finalizing);
 
-            if (!Application.isPlaying)
+            if (finalizing)
             {
-                // ReSharper disable once SuspiciousTypeConversion.Global
                 var component = CameraCache.Main.GetComponent<IMixedRealityGazeProvider>() as Component;
 
                 if (!component.IsNull())
                 {
-                    UnityEngine.Object.DestroyImmediate(component);
+                    component.Destroy();
                 }
 
                 var inputModule = CameraCache.Main.GetComponent<StandaloneInputModule>();
 
                 if (!inputModule.IsNull())
                 {
-                    UnityEngine.Object.DestroyImmediate(inputModule);
+                    inputModule.Destroy();
                 }
             }
         }

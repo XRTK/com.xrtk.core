@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
-using XRTK.Extensions;
 using XRTK.Editor.Utilities;
 using XRTK.Editor.Utilities.SymbolicLinks;
+using XRTK.Extensions;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Editor.BuildAndDeploy
@@ -97,8 +97,6 @@ namespace XRTK.Editor.BuildAndDeploy
 
             buildInfo.OutputDirectory = $"{buildInfo.OutputDirectory}/{PlayerSettings.productName}";
 
-            bool setIl2cppCache = true;
-
             switch (buildInfo.BuildTarget)
             {
                 case BuildTarget.Lumin:
@@ -106,7 +104,6 @@ namespace XRTK.Editor.BuildAndDeploy
                     break;
                 case BuildTarget.Android:
                     buildInfo.OutputDirectory += ".apk";
-                    setIl2cppCache = false;
                     break;
                 case BuildTarget.StandaloneWindows:
                 case BuildTarget.StandaloneWindows64:
@@ -114,11 +111,9 @@ namespace XRTK.Editor.BuildAndDeploy
                     break;
             }
 
-            if (setIl2cppCache)
-            {
-                var targetArch = PlayerSettings.GetArchitecture(buildTargetGroup);
-                PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}\\{targetArch}\"");
-            }
+            var prevIl2CppArgs = PlayerSettings.GetAdditionalIl2CppArgs();
+
+            PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}\"");
 
             BuildReport buildReport = default;
 
@@ -143,6 +138,7 @@ namespace XRTK.Editor.BuildAndDeploy
                 Debug.LogError($"{e.Message}\n{e.StackTrace}");
             }
 
+            PlayerSettings.SetAdditionalIl2CppArgs(prevIl2CppArgs);
             PlayerSettings.colorSpace = oldColorSpace;
 
             if (EditorUserBuildSettings.activeBuildTarget != oldBuildTarget)
@@ -152,6 +148,8 @@ namespace XRTK.Editor.BuildAndDeploy
 
             // Call the post-build action, if any
             buildInfo.PostBuildAction?.Invoke(buildInfo, buildReport);
+
+            Debug.Log($"Build time: {buildReport.summary.totalTime:g}");
 
             return buildReport;
         }

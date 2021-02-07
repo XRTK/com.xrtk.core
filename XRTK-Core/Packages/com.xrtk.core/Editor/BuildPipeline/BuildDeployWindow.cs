@@ -20,7 +20,7 @@ using XRTK.Utilities.WindowsDevicePortal.DataStructures;
 using Debug = UnityEngine.Debug;
 using FileInfo = System.IO.FileInfo;
 
-namespace XRTK.Editor.BuildAndDeploy
+namespace XRTK.Editor.BuildPipeline
 {
     /// <summary>
     /// Build window - supports SLN creation, APPX from SLN, Deploy on device, and misc helper utilities associated with the build/deploy/test iteration loop
@@ -109,7 +109,7 @@ namespace XRTK.Editor.BuildAndDeploy
 
         private static bool ShouldBuildSLNBeEnabled => !isBuilding &&
                                                        !UwpAppxBuildTools.IsBuilding &&
-                                                       !BuildPipeline.isBuildingPlayer &&
+                                                       !UnityEditor.BuildPipeline.isBuildingPlayer &&
                                                        !string.IsNullOrEmpty(BuildDeployPreferences.BuildDirectory);
 
         private static bool ShouldBuildAppxBeEnabled => ShouldBuildSLNBeEnabled && !string.IsNullOrEmpty(BuildDeployPreferences.BuildDirectory);
@@ -1029,7 +1029,7 @@ namespace XRTK.Editor.BuildAndDeploy
                     await UwpPlayerBuildTools.BuildPlayer(BuildDeployPreferences.BuildDirectory, cancellationToken: buildCancellationTokenSource.Token);
                     break;
                 case BuildTarget.Lumin:
-                    LuminPlayerBuildTools.BuildPlayer(new BuildInfo());
+                    UnityPlayerBuildTools.BuildUnityPlayer(new LuminBuildInfo());
                     break;
                 default:
                     UnityPlayerBuildTools.BuildUnityPlayer(new BuildInfo());
@@ -1093,11 +1093,11 @@ namespace XRTK.Editor.BuildAndDeploy
                     UnityPlayerBuildTools.BuildUnityPlayer(new BuildInfo());
                     break;
                 case BuildTarget.Lumin:
-                    LuminPlayerBuildTools.BuildPlayer(new BuildInfo());
+                    UnityPlayerBuildTools.BuildUnityPlayer(new LuminBuildInfo());
                     break;
                 case BuildTarget.WSAPlayer:
                     // First build SLN
-                    if (await UwpPlayerBuildTools.BuildPlayer(BuildDeployPreferences.BuildDirectory, false, buildCancellationTokenSource.Token))
+                    if (await UwpPlayerBuildTools.BuildPlayer(BuildDeployPreferences.BuildDirectory, buildCancellationTokenSource.Token, false))
                     {
                         if (install)
                         {

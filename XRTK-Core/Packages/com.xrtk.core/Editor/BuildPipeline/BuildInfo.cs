@@ -1,13 +1,16 @@
-using System;
+// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.Build;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-namespace XRTK.Editor.BuildAndDeploy
+namespace XRTK.Editor.BuildPipeline
 {
-    public class BuildInfo : IBuildInfo
+    public class BuildInfo : IBuildInfo, IPreprocessBuildWithReport, IPostprocessBuildWithReport
     {
         public BuildInfo(bool isCommandLine = false)
         {
@@ -34,12 +37,6 @@ namespace XRTK.Editor.BuildAndDeploy
 
         /// <inheritdoc />
         public IEnumerable<EditorBuildSettingsScene> Scenes { get; set; }
-
-        /// <inheritdoc />
-        public Action<IBuildInfo> PreBuildAction { get; set; }
-
-        /// <inheritdoc />
-        public Action<IBuildInfo, BuildReport> PostBuildAction { get; set; }
 
         /// <inheritdoc />
         public BuildOptions BuildOptions { get; set; }
@@ -87,5 +84,22 @@ namespace XRTK.Editor.BuildAndDeploy
                 this.AppendSymbols(value);
             }
         }
+
+        #region IOrderedCallback
+
+        /// <inheritdoc />
+        public int callbackOrder => 0;
+
+        /// <inheritdoc />
+        public virtual void OnPostprocessBuild(BuildReport report)
+        {
+        }
+
+        /// <inheritdoc />
+        public virtual void OnPreprocessBuild(BuildReport report)
+        {
+        }
+
+        #endregion IOrderedCallback
     }
 }

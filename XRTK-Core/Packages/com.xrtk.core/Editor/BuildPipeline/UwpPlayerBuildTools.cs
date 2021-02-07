@@ -7,9 +7,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
-using XRTK.Editor.Utilities;
 
-namespace XRTK.Editor.BuildAndDeploy
+namespace XRTK.Editor.BuildPipeline
 {
     /// <summary>
     /// Class containing various utility methods to build a WSA solution from a Unity project.
@@ -44,7 +43,7 @@ namespace XRTK.Editor.BuildAndDeploy
         /// <param name="showDialog">Should the user be prompted to build the appx as well?</param>
         /// <param name="cancellationToken"></param>
         /// <returns>True, if build was successful.</returns>
-        public static async Task<bool> BuildPlayer(string buildDirectory, bool showDialog = true, CancellationToken cancellationToken = default)
+        public static async Task<bool> BuildPlayer(string buildDirectory, CancellationToken cancellationToken, bool showDialog = true)
         {
             if (UnityPlayerBuildTools.CheckBuildScenes() == false)
             {
@@ -55,29 +54,9 @@ namespace XRTK.Editor.BuildAndDeploy
             {
                 OutputDirectory = buildDirectory,
                 Scenes = EditorBuildSettings.scenes.Where(scene => !string.IsNullOrWhiteSpace(scene.path)).Where(scene => scene.enabled),
-                BuildAppx = !showDialog,
-
-                // Configure a post build action that will compile the generated solution
-                PostBuildAction = PostBuildAction
+                CancellationToken = cancellationToken,
+                BuildAppx = !showDialog
             };
-
-            async void PostBuildAction(IBuildInfo innerBuildInfo, BuildReport buildReport)
-            {
-                if (buildReport.summary.result != BuildResult.Succeeded)
-                {
-                    EditorUtility.DisplayDialog($"{PlayerSettings.productName} WindowsStoreApp Build {buildReport.summary.result}!", "See console for details", "OK");
-                }
-                else
-                {
-                    if (showDialog &&
-                        !EditorUtility.DisplayDialog(PlayerSettings.productName, "Build Complete", "OK", "Build AppX"))
-                    {
-                        EditorAssemblyReloadManager.LockReloadAssemblies = true;
-                        await UwpAppxBuildTools.BuildAppxAsync(innerBuildInfo as UwpBuildInfo, cancellationToken);
-                        EditorAssemblyReloadManager.LockReloadAssemblies = false;
-                    }
-                }
-            }
 
             return await BuildPlayer(buildInfo, cancellationToken);
         }

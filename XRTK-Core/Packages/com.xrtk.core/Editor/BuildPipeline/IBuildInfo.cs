@@ -1,10 +1,11 @@
-using System;
+// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.Build.Reporting;
 using UnityEngine;
 
-namespace XRTK.Editor.BuildAndDeploy
+namespace XRTK.Editor.BuildPipeline
 {
     /// <summary>
     /// The Build Info defines common properties for a build.
@@ -28,16 +29,6 @@ namespace XRTK.Editor.BuildAndDeploy
         /// The list of scenes to include in the build.
         /// </summary>
         IEnumerable<EditorBuildSettingsScene> Scenes { get; set; }
-
-        /// <summary>
-        /// A pre-build action to raise before building the Unity player.
-        /// </summary>
-        Action<IBuildInfo> PreBuildAction { get; set; }
-
-        /// <summary>
-        /// A post-build action to raise after building the Unity player.
-        /// </summary>
-        Action<IBuildInfo, BuildReport> PostBuildAction { get; set; }
 
         /// <summary>
         /// Build options to include in the Unity player build pipeline.

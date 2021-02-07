@@ -7,7 +7,7 @@ using UnityEditor;
 using UnityEngine;
 using XRTK.Editor.Utilities;
 
-namespace XRTK.Editor.BuildAndDeploy
+namespace XRTK.Editor.BuildPipeline
 {
     /// <summary>
     /// Build and Deploy Specific Editor Preferences for the Build and Deploy Window.

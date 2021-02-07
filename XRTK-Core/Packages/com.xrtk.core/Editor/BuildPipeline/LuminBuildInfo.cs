@@ -1,6 +1,9 @@
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+// Copyright (c) XRTK. All rights reserved.
+// Licensed under the MIT License. See LICENSE in the project root for license information.
+
 using System;
 using System.Diagnostics;
 using UnityEditor.Build.Reporting;
@@ -8,29 +11,18 @@ using UnityEngine;
 using XRTK.Extensions;
 using Debug = UnityEngine.Debug;
 
-namespace XRTK.Editor.BuildAndDeploy
+namespace XRTK.Editor.BuildPipeline
 {
-    /// <summary>
-    /// Class containing various utility methods to build a lumin mpk installer from a Unity project.
-    /// </summary>
-    public static class LuminPlayerBuildTools
+    public class LuminBuildInfo : BuildInfo
     {
-        /// <summary>
-        /// Build the Lumin Player.
-        /// </summary>
-        /// <param name="buildInfo"></param>
-        public static BuildReport BuildPlayer(BuildInfo buildInfo)
+        public override async void OnPostprocessBuild(BuildReport buildReport)
         {
-            if (!Application.isBatchMode)
+            if (!Application.isBatchMode ||
+                buildReport.summary.result != BuildResult.Succeeded)
             {
-                buildInfo.PostBuildAction += PostBuildAction;
+                return;
             }
 
-            return UnityPlayerBuildTools.BuildUnityPlayer(buildInfo);
-        }
-
-        private static async void PostBuildAction(IBuildInfo buildInfo, BuildReport buildReport)
-        {
             // TODO Check if installation flag is set in build window
 
             Debug.Log("Starting installation...");
@@ -70,7 +62,7 @@ namespace XRTK.Editor.BuildAndDeploy
 
             try
             {
-                await new Process().RunAsync($"mldb install -u \"{buildInfo.OutputDirectory}\"", true);
+                await new Process().RunAsync($"mldb install -u \"{OutputDirectory}\"", true);
             }
             catch (Exception e)
             {

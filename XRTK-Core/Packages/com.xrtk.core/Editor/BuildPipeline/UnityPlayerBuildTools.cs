@@ -17,7 +17,7 @@ using XRTK.Editor.Utilities;
 using XRTK.Editor.Utilities.SymbolicLinks;
 using Debug = UnityEngine.Debug;
 
-namespace XRTK.Editor.BuildAndDeploy
+namespace XRTK.Editor.BuildPipeline
 {
     /// <summary>
     /// Cross platform player build tools
@@ -37,9 +37,6 @@ namespace XRTK.Editor.BuildAndDeploy
         public static BuildReport BuildUnityPlayer(IBuildInfo buildInfo)
         {
             EditorUtility.DisplayProgressBar("Build Pipeline", "Gathering Build Data...", 0.25f);
-
-            // Call the pre-build action, if any
-            buildInfo.PreBuildAction?.Invoke(buildInfo);
 
             var buildTargetGroup = buildInfo.BuildTarget.GetGroup();
             var playerBuildSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
@@ -123,7 +120,7 @@ namespace XRTK.Editor.BuildAndDeploy
 
             try
             {
-                buildReport = BuildPipeline.BuildPlayer(
+                buildReport = UnityEditor.BuildPipeline.BuildPlayer(
                     buildInfo.Scenes.ToArray(),
                     buildInfo.OutputDirectory,
                     buildInfo.BuildTarget,
@@ -140,9 +137,6 @@ namespace XRTK.Editor.BuildAndDeploy
             {
                 EditorUserBuildSettings.SwitchActiveBuildTarget(oldBuildTargetGroup, oldBuildTarget);
             }
-
-            // Call the post-build action, if any
-            buildInfo.PostBuildAction?.Invoke(buildInfo, buildReport);
 
             return buildReport;
         }

@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEditor;
 
-namespace XRTK.Editor.BuildAndDeploy
+namespace XRTK.Editor.BuildPipeline
 {
     public static class BuildInfoExtensions
     {

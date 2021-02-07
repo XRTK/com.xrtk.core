@@ -15,7 +15,7 @@ using XRTK.Extensions;
 using XRTK.Editor.Utilities;
 using Debug = UnityEngine.Debug;
 
-namespace XRTK.Editor.BuildAndDeploy
+namespace XRTK.Editor.BuildPipeline
 {
     public static class UwpAppxBuildTools
     {
@@ -28,7 +28,7 @@ namespace XRTK.Editor.BuildAndDeploy
         public static bool IsBuilding { get; private set; } = false;
 
         /// <summary>
-        /// Build the UWP appx bundle for this project.  Requires that <see cref="UwpPlayerBuildTools.BuildPlayer(string,bool,CancellationToken)"/> has already be run or a user has
+        /// Build the UWP appx bundle for this project.  Requires that <see cref="UwpPlayerBuildTools.BuildPlayer(string,CancellationToken,bool)"/> has already be run or a user has
         /// previously built the Unity Player with the WSA Player as the Build Target.
         /// </summary>
         /// <param name="buildInfo"></param>

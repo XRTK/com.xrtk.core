@@ -157,8 +157,6 @@ namespace XRTK.Editor.BuildAndDeploy
             // Call the post-build action, if any
             buildInfo.PostBuildAction?.Invoke(buildInfo, buildReport);
 
-            Debug.Log($"Build time: {buildReport.summary.totalTime:g}");
-
             return buildReport;
         }
 
@@ -216,7 +214,8 @@ namespace XRTK.Editor.BuildAndDeploy
             Debug.Log($"Starting command line build for {EditorUserBuildSettings.activeBuildTarget}...");
             EditorAssemblyReloadManager.LockReloadAssemblies = true;
 
-            bool success;
+            BuildReport buildReport = default;
+
             try
             {
                 SyncSolution();
@@ -230,24 +229,30 @@ namespace XRTK.Editor.BuildAndDeploy
                 switch (EditorUserBuildSettings.activeBuildTarget)
                 {
                     case BuildTarget.WSAPlayer:
-                        success = await UwpPlayerBuildTools.BuildPlayer(new UwpBuildInfo(true));
+                        buildReport = await UwpPlayerBuildTools.BuildPlayer(new UwpBuildInfo(true));
                         break;
                     default:
                         var buildInfo = new BuildInfo(true) as IBuildInfo;
                         ParseBuildCommandLine(ref buildInfo);
-                        var buildResult = BuildUnityPlayer(buildInfo);
-                        success = buildResult.summary.result == BuildResult.Succeeded;
+                        buildReport = BuildUnityPlayer(buildInfo);
                         break;
                 }
             }
             catch (Exception e)
             {
                 Debug.LogError($"Build Failed!\n{e.Message}\n{e.StackTrace}");
-                success = false;
             }
 
-            Debug.Log($"Exiting command line build... Build success? {success}");
-            EditorApplication.Exit(success ? 0 : 1);
+            if (buildReport == null)
+            {
+                Debug.LogError("Failed to find a valid build report!");
+                EditorApplication.Exit(1);
+            }
+            else
+            {
+                Debug.Log($"Exiting command line build...\nBuild success? {buildReport.summary.result}\nBuild time: {buildReport.summary.totalTime:g}");
+                EditorApplication.Exit(buildReport.summary.result == BuildResult.Succeeded ? 0 : 1);
+            }
         }
 
         internal static bool CheckBuildScenes()

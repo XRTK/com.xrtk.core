@@ -113,7 +113,15 @@ namespace XRTK.Editor.BuildAndDeploy
 
             var prevIl2CppArgs = PlayerSettings.GetAdditionalIl2CppArgs();
 
-            PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}\"");
+            var il2cppCache = $"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}";
+
+            if (!Directory.Exists(il2cppCache))
+            {
+                Directory.CreateDirectory(il2cppCache);
+            }
+
+            File.WriteAllText($"{il2cppCache}\\xrtk.lock", string.Empty);
+            PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{il2cppCache}\"");
 
             BuildReport buildReport = default;
 

@@ -97,13 +97,21 @@ namespace XRTK.Editor.BuildAndDeploy
 
             buildInfo.OutputDirectory = $"{buildInfo.OutputDirectory}/{PlayerSettings.productName}";
 
+            var cacheIl2Cpp = true;
+
             switch (buildInfo.BuildTarget)
             {
                 case BuildTarget.Lumin:
                     buildInfo.OutputDirectory += ".mpk";
+
+                    if (Directory.Exists($"{Directory.GetParent(Application.dataPath)}\\Library\\Mabu"))
+                    {
+                        Directory.Delete($"{Directory.GetParent(Application.dataPath)}\\Library\\Mabu", true);
+                    }
                     break;
                 case BuildTarget.Android:
                     buildInfo.OutputDirectory += ".apk";
+                    cacheIl2Cpp = false;
                     break;
                 case BuildTarget.StandaloneWindows:
                 case BuildTarget.StandaloneWindows64:
@@ -113,15 +121,18 @@ namespace XRTK.Editor.BuildAndDeploy
 
             var prevIl2CppArgs = PlayerSettings.GetAdditionalIl2CppArgs();
 
-            var il2cppCache = $"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}";
-
-            if (!Directory.Exists(il2cppCache))
+            if (cacheIl2Cpp)
             {
-                Directory.CreateDirectory(il2cppCache);
-            }
+                var il2cppCache = $"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}";
 
-            File.WriteAllText($"{il2cppCache}\\xrtk.lock", string.Empty);
-            PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{il2cppCache}\"");
+                if (!Directory.Exists(il2cppCache))
+                {
+                    Directory.CreateDirectory(il2cppCache);
+                }
+
+                File.WriteAllText($"{il2cppCache}\\xrtk.lock", string.Empty);
+                PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{il2cppCache}\"");
+            }
 
             BuildReport buildReport = default;
 

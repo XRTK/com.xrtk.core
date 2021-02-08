@@ -12,9 +12,9 @@ using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
-using XRTK.Extensions;
 using XRTK.Editor.Utilities;
 using XRTK.Editor.Utilities.SymbolicLinks;
+using XRTK.Extensions;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Editor.BuildAndDeploy
@@ -97,18 +97,41 @@ namespace XRTK.Editor.BuildAndDeploy
 
             buildInfo.OutputDirectory = $"{buildInfo.OutputDirectory}/{PlayerSettings.productName}";
 
+            var cacheIl2Cpp = true;
+
             switch (buildInfo.BuildTarget)
             {
                 case BuildTarget.Lumin:
                     buildInfo.OutputDirectory += ".mpk";
+
+                    if (Directory.Exists($"{Directory.GetParent(Application.dataPath)}\\Library\\Mabu"))
+                    {
+                        Directory.Delete($"{Directory.GetParent(Application.dataPath)}\\Library\\Mabu", true);
+                    }
                     break;
                 case BuildTarget.Android:
                     buildInfo.OutputDirectory += ".apk";
+                    cacheIl2Cpp = false;
                     break;
                 case BuildTarget.StandaloneWindows:
                 case BuildTarget.StandaloneWindows64:
                     buildInfo.OutputDirectory += ".exe";
                     break;
+            }
+
+            var prevIl2CppArgs = PlayerSettings.GetAdditionalIl2CppArgs();
+
+            if (cacheIl2Cpp)
+            {
+                var il2cppCache = $"{Directory.GetParent(Application.dataPath)}\\Library\\il2cpp_cache\\{buildInfo.BuildTarget}";
+
+                if (!Directory.Exists(il2cppCache))
+                {
+                    Directory.CreateDirectory(il2cppCache);
+                }
+
+                File.WriteAllText($"{il2cppCache}\\xrtk.lock", string.Empty);
+                PlayerSettings.SetAdditionalIl2CppArgs($"--cachedirectory=\"{il2cppCache}\"");
             }
 
             BuildReport buildReport = default;
@@ -134,6 +157,7 @@ namespace XRTK.Editor.BuildAndDeploy
                 Debug.LogError($"{e.Message}\n{e.StackTrace}");
             }
 
+            PlayerSettings.SetAdditionalIl2CppArgs(prevIl2CppArgs);
             PlayerSettings.colorSpace = oldColorSpace;
 
             if (EditorUserBuildSettings.activeBuildTarget != oldBuildTarget)
@@ -201,7 +225,8 @@ namespace XRTK.Editor.BuildAndDeploy
             Debug.Log($"Starting command line build for {EditorUserBuildSettings.activeBuildTarget}...");
             EditorAssemblyReloadManager.LockReloadAssemblies = true;
 
-            bool success;
+            BuildReport buildReport = default;
+
             try
             {
                 SyncSolution();
@@ -215,24 +240,30 @@ namespace XRTK.Editor.BuildAndDeploy
                 switch (EditorUserBuildSettings.activeBuildTarget)
                 {
                     case BuildTarget.WSAPlayer:
-                        success = await UwpPlayerBuildTools.BuildPlayer(new UwpBuildInfo(true));
+                        buildReport = await UwpPlayerBuildTools.BuildPlayer(new UwpBuildInfo(true));
                         break;
                     default:
                         var buildInfo = new BuildInfo(true) as IBuildInfo;
                         ParseBuildCommandLine(ref buildInfo);
-                        var buildResult = BuildUnityPlayer(buildInfo);
-                        success = buildResult.summary.result == BuildResult.Succeeded;
+                        buildReport = BuildUnityPlayer(buildInfo);
                         break;
                 }
             }
             catch (Exception e)
             {
                 Debug.LogError($"Build Failed!\n{e.Message}\n{e.StackTrace}");
-                success = false;
             }
 
-            Debug.Log($"Exiting command line build... Build success? {success}");
-            EditorApplication.Exit(success ? 0 : 1);
+            if (buildReport == null)
+            {
+                Debug.LogError("Failed to find a valid build report!");
+                EditorApplication.Exit(1);
+            }
+            else
+            {
+                Debug.Log($"Exiting command line build...\nBuild success? {buildReport.summary.result}\nBuild time: {buildReport.summary.totalTime:g}");
+                EditorApplication.Exit(buildReport.summary.result == BuildResult.Succeeded ? 0 : 1);
+            }
         }
 
         internal static bool CheckBuildScenes()

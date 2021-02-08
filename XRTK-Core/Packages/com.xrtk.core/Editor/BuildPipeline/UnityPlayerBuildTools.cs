@@ -38,6 +38,8 @@ namespace XRTK.Editor.BuildPipeline
         {
             EditorUtility.DisplayProgressBar("Build Pipeline", "Gathering Build Data...", 0.25f);
 
+            buildInfo.ParseCommandLineArgs();
+
             var buildTargetGroup = buildInfo.BuildTarget.GetGroup();
             var playerBuildSymbols = PlayerSettings.GetScriptingDefineSymbolsForGroup(buildTargetGroup);
 
@@ -138,6 +140,8 @@ namespace XRTK.Editor.BuildPipeline
                 EditorUserBuildSettings.SwitchActiveBuildTarget(oldBuildTargetGroup, oldBuildTarget);
             }
 
+            EditorUtility.ClearProgressBar();
+
             return buildReport;
         }
 
@@ -188,7 +192,7 @@ namespace XRTK.Editor.BuildPipeline
         /// -rebuildAppx : Rebuild the appx bundle.<para/>
         /// </summary>
         [UsedImplicitly]
-        public static async void StartCommandLineBuild()
+        public static void StartCommandLineBuild()
         {
             // We don't need stack traces on all our logs. Makes things a lot easier to read.
             Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.None);
@@ -208,12 +212,8 @@ namespace XRTK.Editor.BuildPipeline
 
                 switch (EditorUserBuildSettings.activeBuildTarget)
                 {
-                    case BuildTarget.WSAPlayer:
-                        success = await UwpPlayerBuildTools.BuildPlayer(new UwpBuildInfo(true));
-                        break;
                     default:
                         var buildInfo = new BuildInfo(true) as IBuildInfo;
-                        ParseBuildCommandLine(ref buildInfo);
                         var buildResult = BuildUnityPlayer(buildInfo);
                         success = buildResult.summary.result == BuildResult.Succeeded;
                         break;
@@ -245,58 +245,7 @@ namespace XRTK.Editor.BuildPipeline
             return true;
         }
 
-        /// <summary>
-        /// Get the Unity Project Root Path.
-        /// </summary>
-        /// <returns>The full path to the project's root.</returns>
-        public static string GetProjectPath()
-        {
-            return Path.GetDirectoryName(Path.GetFullPath(Application.dataPath));
-        }
-
-        /// <summary>
-        /// Parses the command like arguments.
-        /// </summary>
-        /// <param name="buildInfo"></param>
-        public static void ParseBuildCommandLine(ref IBuildInfo buildInfo)
-        {
-            var arguments = Environment.GetCommandLineArgs();
-
-            for (int i = 0; i < arguments.Length; ++i)
-            {
-                switch (arguments[i])
-                {
-                    case "-autoIncrement":
-                        buildInfo.AutoIncrement = true;
-                        break;
-                    case "-sceneList":
-                        buildInfo.Scenes = buildInfo.Scenes.Union(SplitSceneList(arguments[++i]));
-                        break;
-                    case "-sceneListFile":
-                        buildInfo.Scenes = buildInfo.Scenes.Union(SplitSceneList(File.ReadAllText(arguments[++i])));
-                        break;
-                    case "-buildOutput":
-                        buildInfo.OutputDirectory = arguments[++i];
-                        break;
-                    case "-colorSpace":
-                        buildInfo.ColorSpace = (ColorSpace)Enum.Parse(typeof(ColorSpace), arguments[++i]);
-                        break;
-                    case "-x86":
-                    case "-x64":
-                    case "-ARM":
-                    case "-ARM64":
-                        buildInfo.BuildPlatform = arguments[i].Substring(1);
-                        break;
-                    case "-debug":
-                    case "-master":
-                    case "-release":
-                        buildInfo.Configuration = arguments[i].Substring(1).ToLower();
-                        break;
-                }
-            }
-        }
-
-        private static IEnumerable<EditorBuildSettingsScene> SplitSceneList(string sceneList)
+        public static IEnumerable<EditorBuildSettingsScene> SplitSceneList(string sceneList)
         {
             var sceneListArray = sceneList.Split(new[] { ',' }, StringSplitOptions.RemoveEmptyEntries);
             return sceneListArray

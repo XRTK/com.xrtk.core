@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -22,56 +22,108 @@ namespace XRTK.Editor.BuildPipeline
         private static readonly XNamespace UapNameSpace = "http://schemas.microsoft.com/appx/manifest/uap/windows10";
         private static readonly XNamespace Uap5NameSpace = "http://schemas.microsoft.com/appx/manifest/uap/windows10/5";
 
+        private static float progress;
+        private static string dialogMessage;
+        private static CancellationTokenSource cancellationTokenSource;
+
         /// <summary>
         /// Query the build process to see if we're already building.
         /// </summary>
         public static bool IsBuilding { get; private set; } = false;
 
         /// <summary>
-        /// Build the UWP appx bundle for this project.  Requires that <see cref="UwpPlayerBuildTools.BuildPlayer(string,CancellationToken,bool)"/> has already be run or a user has
-        /// previously built the Unity Player with the WSA Player as the Build Target.
+        /// Build the UWP appx bundle for this project. 
         /// </summary>
         /// <param name="buildInfo"></param>
-        /// <param name="cancellationToken"></param>
         /// <returns>True, if the appx build was successful.</returns>
-        public static async Task<bool> BuildAppxAsync(UwpBuildInfo buildInfo, CancellationToken cancellationToken = default)
+        public static async void BuildAppx(UwpBuildInfo buildInfo)
         {
-            if (!EditorAssemblyReloadManager.LockReloadAssemblies)
-            {
-                Debug.LogError("Lock Reload assemblies before attempting to build appx!");
-                return false;
-            }
-
             if (IsBuilding)
             {
-                Debug.LogWarning("Build already in progress!");
-                return false;
+                Debug.LogError("Build already in progress!");
+                return;
             }
 
-            if (Application.isBatchMode)
+            IsBuilding = true;
+            EditorAssemblyReloadManager.LockReloadAssemblies = true;
+
+            cancellationTokenSource = new CancellationTokenSource();
+
+            if (buildInfo.IsCommandLine)
             {
                 // We don't need stack traces on all our logs. Makes things a lot easier to read.
                 Application.SetStackTraceLogType(LogType.Log, StackTraceLogType.None);
             }
 
-            Debug.Log("Starting Unity Appx Build...");
+            dialogMessage = "...";
+            progress = 0f;
 
-            IsBuilding = true;
-            string slnFilename = Path.Combine(buildInfo.OutputDirectory, $"{PlayerSettings.productName}\\{PlayerSettings.productName}.sln");
+            EditorApplication.update += ShowProgressBar;
 
-            if (!File.Exists(slnFilename))
+            try
+            {
+                await BuildAppxAsync(buildInfo);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+            }
+            finally
+            {
+                EditorApplication.update -= ShowProgressBar;
+                IsBuilding = false;
+            }
+
+            cancellationTokenSource.Dispose();
+            cancellationTokenSource = null;
+            EditorApplication.delayCall += EditorUtility.ClearProgressBar;
+            EditorAssemblyReloadManager.LockReloadAssemblies = false;
+            AssetDatabase.SaveAssets();
+
+            if (!buildInfo.IsCommandLine && buildInfo.Install)
+            {
+                string fullBuildLocation = BuildDeployWindow.CalcMostRecentBuild();
+
+                if (UwpBuildDeployPreferences.TargetAllConnections)
+                {
+                    await BuildDeployWindow.InstallAppOnDevicesListAsync(fullBuildLocation, BuildDeployWindow.DevicePortalConnections);
+                }
+                else
+                {
+                    await BuildDeployWindow.InstallOnTargetDeviceAsync(fullBuildLocation, BuildDeployWindow.CurrentConnection);
+                }
+            }
+        }
+
+        private static void ShowProgressBar()
+        {
+            if (EditorUtility.DisplayCancelableProgressBar("XRTK Appx Build", dialogMessage, progress))
+            {
+                cancellationTokenSource.Cancel();
+                IsBuilding = false;
+            }
+        }
+
+        private static async Task BuildAppxAsync(UwpBuildInfo buildInfo)
+        {
+            dialogMessage = "Gathering build data...";
+            progress = 0.1f;
+
+            string slnOutputPath = Path.Combine(buildInfo.OutputDirectory, buildInfo.SolutionName);
+
+            if (!File.Exists(slnOutputPath))
             {
                 Debug.LogError("Unable to find Solution to build from!");
-                return IsBuilding = false;
+                return;
             }
 
             // Get and validate the msBuild path...
-            var msBuildPath = await FindMsBuildPathAsync(cancellationToken);
+            var msBuildPath = await FindMsBuildPathAsync();
 
             if (!File.Exists(msBuildPath))
             {
                 Debug.LogError($"MSBuild.exe is missing or invalid!\n{msBuildPath}");
-                return IsBuilding = false;
+                return;
             }
 
             // Ensure that the generated .appx version increments by modifying Package.appxmanifest
@@ -84,21 +136,21 @@ namespace XRTK.Editor.BuildPipeline
             }
             catch (Exception e)
             {
-                Debug.LogError($"Failed to update appxmanifest!\n{e.Message}");
-                return IsBuilding = false;
+                Debug.LogError($"Failed to update appxmanifest!\n{e.Message}{e.StackTrace}");
+                return;
             }
 
-            var storagePath = Path.GetFullPath(Path.Combine(Path.Combine(Application.dataPath, ".."), buildInfo.OutputDirectory));
-            var solutionProjectPath = Path.GetFullPath(Path.Combine(storagePath, $"{PlayerSettings.productName}/{PlayerSettings.productName}.sln"));
-            var appxBuildArgs = $"\"{solutionProjectPath}\" /t:{(buildInfo.RebuildAppx ? "Rebuild" : "Build")} /p:Configuration={buildInfo.Configuration} /p:Platform={buildInfo.BuildPlatform} /verbosity:m";
-            var processResult = await new Process().RunAsync(appxBuildArgs, msBuildPath, !Application.isBatchMode, cancellationToken, false);
+            var storagePath = Path.GetFullPath(Path.Combine(Path.Combine(BuildDeployPreferences.ApplicationDataPath, ".."), buildInfo.OutputDirectory));
+            var solutionProjectPath = Path.GetFullPath(Path.Combine(storagePath, buildInfo.SolutionName));
+            dialogMessage = $"Building Appx for {solutionProjectPath}";
+            progress = 0.75f;
+            var appxBuildArgs = $"\"{solutionProjectPath}\" /t:{(buildInfo.RebuildAppx ? "Rebuild" : "Build")} /p:Configuration={buildInfo.Configuration} /p:Platform={buildInfo.Architecture} /verbosity:m";
+            var processResult = await new Process().RunAsync(appxBuildArgs, msBuildPath, !buildInfo.IsCommandLine, cancellationTokenSource.Token, false);
 
             switch (processResult.ExitCode)
             {
                 case 0:
-                    Debug.Log("Appx Build Successful!");
-
-                    if (Application.isBatchMode)
+                    if (buildInfo.IsCommandLine)
                     {
                         Debug.Log(string.Join("\n", processResult.Output));
                     }
@@ -110,11 +162,12 @@ namespace XRTK.Editor.BuildPipeline
                     {
                         if (processResult.ExitCode != 0)
                         {
-                            Debug.LogError($"{PlayerSettings.productName} appx build Failed! (ErrorCode: {processResult.ExitCode})");
+                            Debug.LogError($"{buildInfo.Name} appx build Failed! ErrorCode:{processResult.ExitCode}:{string.Join("\n", processResult.Errors)}");
 
-                            if (Application.isBatchMode)
+                            if (buildInfo.IsCommandLine)
                             {
                                 var buildOutput = new StringBuilder();
+
                                 if (processResult.Output?.Length > 0)
                                 {
                                     buildOutput.Append("Appx Build Output:");
@@ -142,16 +195,14 @@ namespace XRTK.Editor.BuildPipeline
                         break;
                     }
             }
-
-            AssetDatabase.SaveAssets();
-
-            IsBuilding = false;
-            return processResult.ExitCode == 0;
         }
 
-        private static async Task<string> FindMsBuildPathAsync(CancellationToken cancellationToken)
+        private static async Task<string> FindMsBuildPathAsync()
         {
-            var result = await new Process().RunAsync(
+            dialogMessage = "Searching for MS Build Path...";
+            progress = 0.25f;
+
+            var processResult = await new Process().RunAsync(
                 new ProcessStartInfo
                 {
                     FileName = "cmd.exe",
@@ -161,9 +212,9 @@ namespace XRTK.Editor.BuildPipeline
                     RedirectStandardError = true,
                     WorkingDirectory = @"C:\Program Files (x86)\Microsoft Visual Studio\Installer",
                     Arguments = "/c vswhere -all -products * -requires Microsoft.Component.MSBuild -property installationPath"
-                }, true, cancellationToken);
+                }, false, cancellationTokenSource.Token);
 
-            foreach (var path in result.Output)
+            foreach (var path in processResult.Output)
             {
                 if (string.IsNullOrEmpty(path)) { continue; }
 
@@ -186,14 +237,17 @@ namespace XRTK.Editor.BuildPipeline
             return string.Empty;
         }
 
-        private static bool UpdateAppxManifest(IBuildInfo buildInfo)
+        private static bool UpdateAppxManifest(UwpBuildInfo buildInfo)
         {
+            dialogMessage = "Updating Appx Manifest...";
+            progress = 0.5f;
+
             // Find the manifest, assume the one we want is the first one
-            string[] manifests = Directory.GetFiles(BuildDeployPreferences.AbsoluteBuildDirectory, "Package.appxmanifest", SearchOption.AllDirectories);
+            string[] manifests = Directory.GetFiles(buildInfo.AbsoluteOutputDirectory, "Package.appxmanifest", SearchOption.AllDirectories);
 
             if (manifests.Length == 0)
             {
-                Debug.LogError($"Unable to find Package.appxmanifest file for build (in path - {BuildDeployPreferences.AbsoluteBuildDirectory})");
+                Debug.LogError($"Unable to find Package.appxmanifest file for build (in path - {buildInfo.AbsoluteOutputDirectory})");
                 return false;
             }
 
@@ -209,7 +263,7 @@ namespace XRTK.Editor.BuildPipeline
 
             if (identityNode == null)
             {
-                Debug.LogError($"Package.appxmanifest for build (in path - {BuildDeployPreferences.AbsoluteBuildDirectory}) is missing an <Identity /> node");
+                Debug.LogError($"Package.appxmanifest for build (in path - {buildInfo.AbsoluteOutputDirectory}) is missing an <Identity /> node");
                 return false;
             }
 
@@ -217,11 +271,11 @@ namespace XRTK.Editor.BuildPipeline
 
             if (dependencies == null)
             {
-                Debug.LogError($"Package.appxmanifest for build (in path - {BuildDeployPreferences.AbsoluteBuildDirectory}) is missing <Dependencies /> node.");
+                Debug.LogError($"Package.appxmanifest for build (in path - {buildInfo.AbsoluteOutputDirectory}) is missing <Dependencies /> node.");
                 return false;
             }
 
-            UpdateDependenciesElement(dependencies, rootNode.GetDefaultNamespace());
+            UpdateDependenciesElement(buildInfo, dependencies, rootNode.GetDefaultNamespace());
 
             // Setup the 3d app icon.
             if (!string.IsNullOrWhiteSpace(UwpBuildDeployPreferences.MixedRealityAppIconPath))
@@ -254,7 +308,7 @@ namespace XRTK.Editor.BuildPipeline
                         var modelFullPath = Path.GetFullPath(UwpBuildDeployPreferences.MixedRealityAppIconPath);
                         var absoluteBuildDirectory = Path.GetFullPath(BuildDeployPreferences.BuildDirectory);
 
-                        modelPath = $"{absoluteBuildDirectory}/{PlayerSettings.productName}/Assets/{Path.GetFileName(modelFullPath)}";
+                        modelPath = $"{absoluteBuildDirectory}/{buildInfo.Name}/Assets/{Path.GetFileName(modelFullPath)}";
 
                         if (File.Exists(modelPath))
                         {
@@ -262,7 +316,7 @@ namespace XRTK.Editor.BuildPipeline
                         }
 
                         File.Copy(modelFullPath, modelPath);
-                        modelPath = modelPath.Replace($"{absoluteBuildDirectory}/{PlayerSettings.productName}/", string.Empty).Replace("/", "\\");
+                        modelPath = modelPath.Replace($"{absoluteBuildDirectory}/{buildInfo.Name}/", string.Empty).Replace("/", "\\");
                     }
                     catch (Exception e)
                     {
@@ -301,28 +355,18 @@ namespace XRTK.Editor.BuildPipeline
 
             if (versionAttr == null)
             {
-                Debug.LogError($"Package.appxmanifest for build (in path - {BuildDeployPreferences.AbsoluteBuildDirectory}) is missing a Version attribute in the <Identity /> node.");
+                Debug.LogError($"Package.appxmanifest for build (in path - {buildInfo.AbsoluteOutputDirectory}) is missing a Version attribute in the <Identity /> node.");
                 return false;
             }
 
-            // Assume package version always has a '.' between each number.
-            // According to https://msdn.microsoft.com/en-us/library/windows/apps/br211441.aspx
-            // Package versions are always of the form Major.Minor.Build.Revision.
-            // Note: Revision number reserved for Windows Store, and a value other than 0 will fail WACK.
-            var version = PlayerSettings.WSA.packageVersion;
-            var newVersion = new Version(version.Major, version.Minor, buildInfo.AutoIncrement ? version.Build + 1 : version.Build, version.Revision);
-
-            PlayerSettings.WSA.packageVersion = newVersion;
-            versionAttr.Value = newVersion.ToString();
+            versionAttr.Value = buildInfo.Version.ToString();
             rootNode.Save(manifests[0]);
             return true;
         }
 
-        private static void UpdateDependenciesElement(XElement dependencies, XNamespace defaultNamespace)
+        private static void UpdateDependenciesElement(UwpBuildInfo buildInfo, XElement dependencies, XNamespace defaultNamespace)
         {
-            var values = (PlayerSettings.WSATargetFamily[])Enum.GetValues(typeof(PlayerSettings.WSATargetFamily));
-
-            if (string.IsNullOrWhiteSpace(EditorUserBuildSettings.wsaUWPSDK))
+            if (string.IsNullOrWhiteSpace(buildInfo.UwpSdk))
             {
                 var windowsSdkPaths = Directory.GetDirectories(@"C:\Program Files (x86)\Windows Kits\10\Lib");
 
@@ -334,28 +378,24 @@ namespace XRTK.Editor.BuildPipeline
                 EditorUserBuildSettings.wsaUWPSDK = windowsSdkPaths[windowsSdkPaths.Length - 1];
             }
 
-            string maxVersionTested = EditorUserBuildSettings.wsaUWPSDK;
+            string maxVersionTested = buildInfo.UwpSdk;
+            string minVersion = buildInfo.MinSdk;
 
-            if (string.IsNullOrWhiteSpace(EditorUserBuildSettings.wsaMinUWPSDK))
+            if (string.IsNullOrWhiteSpace(buildInfo.MinSdk))
             {
-                EditorUserBuildSettings.wsaMinUWPSDK = UwpBuildDeployPreferences.MIN_SDK_VERSION.ToString();
+                minVersion = UwpBuildDeployPreferences.MIN_SDK_VERSION.ToString();
             }
-
-            string minVersion = EditorUserBuildSettings.wsaMinUWPSDK;
 
             // Clear any we had before.
             dependencies.RemoveAll();
 
-            foreach (PlayerSettings.WSATargetFamily family in values)
+            foreach (var family in buildInfo.BuildTargetFamilies)
             {
-                if (PlayerSettings.WSA.GetTargetDeviceFamily(family))
-                {
-                    dependencies.Add(
-                        new XElement(defaultNamespace + "TargetDeviceFamily",
-                        new XAttribute("Name", $"Windows.{family}"),
-                        new XAttribute("MinVersion", minVersion),
-                        new XAttribute("MaxVersionTested", maxVersionTested)));
-                }
+                dependencies.Add(
+                    new XElement(defaultNamespace + "TargetDeviceFamily",
+                    new XAttribute("Name", $"Windows.{family}"),
+                    new XAttribute("MinVersion", minVersion),
+                    new XAttribute("MaxVersionTested", maxVersionTested)));
             }
 
             if (!dependencies.HasElements)

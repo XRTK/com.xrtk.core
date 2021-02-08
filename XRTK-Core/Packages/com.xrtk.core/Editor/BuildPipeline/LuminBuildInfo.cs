@@ -1,11 +1,9 @@
 // Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-// Copyright (c) XRTK. All rights reserved.
-// Licensed under the MIT License. See LICENSE in the project root for license information.
-
 using System;
 using System.Diagnostics;
+using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 using XRTK.Extensions;
@@ -15,18 +13,25 @@ namespace XRTK.Editor.BuildPipeline
 {
     public class LuminBuildInfo : BuildInfo
     {
-        public override async void OnPostprocessBuild(BuildReport buildReport)
+        public override bool Install => true;
+
+        public override void OnPostprocessBuild(BuildReport buildReport)
         {
-            if (!Application.isBatchMode ||
-                buildReport.summary.result != BuildResult.Succeeded)
+            if (EditorUserBuildSettings.activeBuildTarget != BuildTarget ||
+                buildReport.summary.result == BuildResult.Failed ||
+                Application.isBatchMode)
             {
                 return;
             }
 
-            // TODO Check if installation flag is set in build window
+            if (Install)
+            {
+                InstallOnDevice();
+            }
+        }
 
-            Debug.Log("Starting installation...");
-
+        private async void InstallOnDevice()
+        {
             var canInstall = false;
 
             try

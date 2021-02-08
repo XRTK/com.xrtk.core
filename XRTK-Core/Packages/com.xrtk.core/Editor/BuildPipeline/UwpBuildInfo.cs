@@ -1,23 +1,26 @@
-// Copyright (c) Microsoft Corporation. All rights reserved.
+// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Threading;
+using System;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
-using XRTK.Editor.Utilities;
+using UnityEngine;
 
 namespace XRTK.Editor.BuildPipeline
 {
     public class UwpBuildInfo : BuildInfo
     {
-        public UwpBuildInfo(bool isCommandLine = false) : base(isCommandLine)
-        {
-        }
-
-        internal CancellationToken CancellationToken { get; set; } = CancellationToken.None;
-
         /// <inheritdoc />
         public override BuildTarget BuildTarget => BuildTarget.WSAPlayer;
+
+        /// <inheritdoc />
+        public override Version Version { get; set; } = PlayerSettings.WSA.packageVersion;
+
+        /// <summary>
+        /// The name of the Visual Studio .sln file generated.
+        /// </summary>
+        public string SolutionName { get; } = $"{PlayerSettings.productName}\\{PlayerSettings.productName}.sln";
 
         /// <summary>
         /// Build the appx bundle after building Unity Player?
@@ -29,26 +32,60 @@ namespace XRTK.Editor.BuildPipeline
         /// </summary>
         public bool RebuildAppx { get; set; } = false;
 
-        #region Overrides of BuildInfo
+        public string UwpSdk { get; } = EditorUserBuildSettings.wsaUWPSDK;
+
+        public string MinSdk { get; } = EditorUserBuildSettings.wsaMinUWPSDK;
+
+        public PlayerSettings.WSATargetFamily[] BuildTargetFamilies { get; } = GetFamilies();
+
+        private static PlayerSettings.WSATargetFamily[] GetFamilies()
+        {
+            var values = (PlayerSettings.WSATargetFamily[])Enum.GetValues(typeof(PlayerSettings.WSATargetFamily));
+            return values.Where(PlayerSettings.WSA.GetTargetDeviceFamily).ToArray();
+        }
 
         /// <inheritdoc />
-        public override async void OnPostprocessBuild(BuildReport buildReport)
+        public override void OnPostprocessBuild(BuildReport buildReport)
         {
-            if (buildReport.summary.result != BuildResult.Succeeded)
+            if (EditorUserBuildSettings.activeBuildTarget != BuildTarget) { return; }
+
+            if (buildReport.summary.result == BuildResult.Failed)
             {
-                EditorUtility.DisplayDialog($"{PlayerSettings.productName} WindowsStoreApp Build {buildReport.summary.result}!", "See console for details", "OK");
+                if (!Application.isBatchMode)
+                {
+                    EditorUtility.DisplayDialog($"{PlayerSettings.productName} Build {buildReport.summary.result}!", "See console for details", "OK");
+                }
             }
             else
             {
-                if (!EditorUtility.DisplayDialog(PlayerSettings.productName, "Build Complete", "OK", "Build AppX"))
+                if (BuildAppx ||
+                    !Application.isBatchMode &&
+                    !EditorUtility.DisplayDialog(PlayerSettings.productName, "Build Complete", "OK", "Build AppX"))
                 {
-                    EditorAssemblyReloadManager.LockReloadAssemblies = true;
-                    await UwpAppxBuildTools.BuildAppxAsync(this, CancellationToken);
-                    EditorAssemblyReloadManager.LockReloadAssemblies = false;
+                    UwpAppxBuildTools.BuildAppx(this);
                 }
             }
         }
 
-        #endregion
+        /// <inheritdoc />
+        public override void ParseCommandLineArgs()
+        {
+            base.ParseCommandLineArgs();
+
+            string[] arguments = Environment.GetCommandLineArgs();
+
+            for (int i = 0; i < arguments.Length; ++i)
+            {
+                switch (arguments[i])
+                {
+                    case "-buildAppx":
+                        BuildAppx = true;
+                        break;
+                    case "-rebuildAppx":
+                        RebuildAppx = true;
+                        break;
+                }
+            }
+        }
     }
 }

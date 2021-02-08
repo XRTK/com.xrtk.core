@@ -14,9 +14,12 @@ namespace XRTK.Editor.BuildPipeline
     /// </summary>
     public static class BuildDeployPreferences
     {
+        private static string appDataPath = null;
+
+        public static string ApplicationDataPath => appDataPath ?? (appDataPath = Application.dataPath);
+
         // Constants
         private const string EDITOR_PREF_BUILD_DIR = "BuildDeployWindow_BuildDir";
-        private const string EDITOR_PREF_INCREMENT_BUILD_VERSION = "BuildDeployWindow_IncrementBuildVersion";
 
         /// <summary>
         /// The Build Directory that the Mixed Reality Toolkit will build to.
@@ -45,17 +48,8 @@ namespace XRTK.Editor.BuildPipeline
                     rootBuildDirectory = rootBuildDirectory.Substring(0, dirCharIndex);
                 }
 
-                return Path.GetFullPath(Path.Combine(Path.Combine(Application.dataPath, ".."), rootBuildDirectory));
+                return Path.GetFullPath(Path.Combine(Path.Combine(ApplicationDataPath, ".."), rootBuildDirectory));
             }
-        }
-
-        /// <summary>
-        /// Current setting to increment build visioning.
-        /// </summary>
-        public static bool IncrementBuildVersion
-        {
-            get => EditorPreferences.Get(EDITOR_PREF_INCREMENT_BUILD_VERSION, true);
-            set => EditorPreferences.Set(EDITOR_PREF_INCREMENT_BUILD_VERSION, value);
         }
     }
 }

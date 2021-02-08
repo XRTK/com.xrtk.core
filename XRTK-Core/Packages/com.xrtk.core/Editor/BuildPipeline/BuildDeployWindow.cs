@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -76,10 +76,6 @@ namespace XRTK.Editor.BuildPipeline
         private readonly GUIContent buildAllLabel = new GUIContent("Build all", "Builds the Unity Project and APPX");
 
         private readonly GUIContent buildDirectoryLabel = new GUIContent("Build Directory", "It's recommended to use 'UWP'");
-
-        private readonly GUIContent useCSharpProjectsLabel = new GUIContent("Generate C# Debug", "Generate C# Project References for debugging.\nOnly available in .NET Scripting runtime.");
-
-        private readonly GUIContent autoIncrementLabel = new GUIContent("Auto Increment", "Increases Version Build Number");
 
         private readonly GUIContent versionNumberLabel = new GUIContent("Version Number", "Major.Minor.Build.Revision\nNote: Revision should always be zero because it's reserved by Windows Store.");
 
@@ -179,8 +175,12 @@ namespace XRTK.Editor.BuildPipeline
         [SerializeField]
         private int lastSessionConnectionInfoIndex;
         private static int currentConnectionInfoIndex = 0;
+
+        public static DeviceInfo CurrentConnection => portalConnections?.Connections[currentConnectionInfoIndex];
+
         private static DevicePortalConnections portalConnections = null;
-        private static CancellationTokenSource buildCancellationTokenSource = null;
+
+        public static DevicePortalConnections DevicePortalConnections => portalConnections;
 
         #endregion Fields
 
@@ -543,19 +543,6 @@ namespace XRTK.Editor.BuildPipeline
 
             var previousLabelWidth = EditorGUIUtility.labelWidth;
 
-            // Auto Increment version
-            EditorGUIUtility.labelWidth = 96;
-            bool curIncrementVersion = BuildDeployPreferences.IncrementBuildVersion;
-            bool newIncrementVersion = EditorGUILayout.Toggle(autoIncrementLabel, curIncrementVersion);
-
-            // Restore previous label width
-            EditorGUIUtility.labelWidth = previousLabelWidth;
-
-            if (newIncrementVersion != curIncrementVersion)
-            {
-                BuildDeployPreferences.IncrementBuildVersion = newIncrementVersion;
-            }
-
             EditorGUILayout.LabelField(versionNumberLabel, GUILayout.Width(96));
             Vector3 newVersion = Vector3.zero;
 
@@ -608,34 +595,24 @@ namespace XRTK.Editor.BuildPipeline
             // Restore previous label width
             EditorGUIUtility.labelWidth = previousLabelWidth;
 
-            if (buildCancellationTokenSource == null)
+            // Build APPX
+            GUI.enabled = ShouldBuildAppxBeEnabled;
+
+            if (GUILayout.Button("Build APPX", GUILayout.Width(HALF_WIDTH)))
             {
-                // Build APPX
-                GUI.enabled = ShouldBuildAppxBeEnabled;
+                // Check if solution exists
+                string slnFilename = Path.Combine(BuildDeployPreferences.BuildDirectory, $"{PlayerSettings.productName}\\{PlayerSettings.productName}.sln");
 
-                if (GUILayout.Button("Build APPX", GUILayout.Width(HALF_WIDTH)))
+                if (File.Exists(slnFilename))
                 {
-                    // Check if solution exists
-                    string slnFilename = Path.Combine(BuildDeployPreferences.BuildDirectory, $"{PlayerSettings.productName}\\{PlayerSettings.productName}.sln");
-
-                    if (File.Exists(slnFilename))
-                    {
-                        EditorApplication.delayCall += BuildAppx;
-                    }
-                    else if (EditorUtility.DisplayDialog("Solution Not Found", "We couldn't find the solution. Would you like to Build it?", "Yes, Build", "No"))
-                    {
-                        EditorApplication.delayCall += () => BuildAll(install: false);
-                    }
-
-                    GUI.enabled = true;
+                    EditorApplication.delayCall += BuildAppx;
                 }
-            }
-            else
-            {
-                if (GUILayout.Button("Cancel Build", GUILayout.Width(HALF_WIDTH)))
+                else if (EditorUtility.DisplayDialog("Solution Not Found", "We couldn't find the solution. Would you like to Build it?", "Yes, Build", "No"))
                 {
-                    buildCancellationTokenSource.Cancel();
+                    EditorApplication.delayCall += () => BuildAll(install: false);
                 }
+
+                GUI.enabled = true;
             }
 
             GUILayout.EndHorizontal();
@@ -1016,17 +993,20 @@ namespace XRTK.Editor.BuildPipeline
         /// <summary>
         /// Builds the Unity Project for the <see cref="EditorUserBuildSettings.activeBuildTarget"/>
         /// </summary>
-        public static async void BuildUnityProject()
+        public static void BuildUnityProject()
         {
+            if (UnityPlayerBuildTools.CheckBuildScenes() == false)
+            {
+                return;
+            }
+
             Debug.Assert(!isBuilding);
             isBuilding = true;
-
-            buildCancellationTokenSource = new CancellationTokenSource();
 
             switch (EditorUserBuildSettings.activeBuildTarget)
             {
                 case BuildTarget.WSAPlayer:
-                    await UwpPlayerBuildTools.BuildPlayer(BuildDeployPreferences.BuildDirectory, cancellationToken: buildCancellationTokenSource.Token);
+                    UnityPlayerBuildTools.BuildUnityPlayer(new UwpBuildInfo());
                     break;
                 case BuildTarget.Lumin:
                     UnityPlayerBuildTools.BuildUnityPlayer(new LuminBuildInfo());
@@ -1036,16 +1016,13 @@ namespace XRTK.Editor.BuildPipeline
                     break;
             }
 
-            buildCancellationTokenSource.Dispose();
-            buildCancellationTokenSource = null;
-
             isBuilding = false;
         }
 
         /// <summary>
         /// Builds the appx for the <see cref="BuildTarget.WSAPlayer"/> build target
         /// </summary>
-        public static async void BuildAppx()
+        public static void BuildAppx()
         {
             if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.WSAPlayer)
             {
@@ -1055,22 +1032,16 @@ namespace XRTK.Editor.BuildPipeline
             Debug.Assert(!isBuilding);
             isBuilding = true;
 
-            buildCancellationTokenSource = new CancellationTokenSource();
-
             var buildInfo = new UwpBuildInfo
             {
+                BuildAppx = true,
                 RebuildAppx = UwpBuildDeployPreferences.ForceRebuild,
                 Configuration = UwpBuildDeployPreferences.BuildConfig,
-                BuildPlatform = EditorUserBuildSettings.wsaArchitecture,
+                Architecture = EditorUserBuildSettings.wsaArchitecture,
                 OutputDirectory = BuildDeployPreferences.BuildDirectory,
-                AutoIncrement = BuildDeployPreferences.IncrementBuildVersion,
             };
 
-            EditorAssemblyReloadManager.LockReloadAssemblies = true;
-            await UwpAppxBuildTools.BuildAppxAsync(buildInfo, buildCancellationTokenSource.Token);
-            EditorAssemblyReloadManager.LockReloadAssemblies = false;
-            buildCancellationTokenSource.Dispose();
-            buildCancellationTokenSource = null;
+            UwpAppxBuildTools.BuildAppx(buildInfo);
 
             isBuilding = false;
         }
@@ -1079,13 +1050,11 @@ namespace XRTK.Editor.BuildPipeline
         /// Builds all dependencies for the project
         /// </summary>
         /// <param name="install">Should this build also be installed on any detected devices?</param>
-        public static async void BuildAll(bool install = true)
+        public static void BuildAll(bool install = true)
         {
             Debug.Assert(!isBuilding);
             isBuilding = true;
             EditorAssemblyReloadManager.LockReloadAssemblies = true;
-
-            buildCancellationTokenSource = new CancellationTokenSource();
 
             switch (EditorUserBuildSettings.activeBuildTarget)
             {
@@ -1096,29 +1065,14 @@ namespace XRTK.Editor.BuildPipeline
                     UnityPlayerBuildTools.BuildUnityPlayer(new LuminBuildInfo());
                     break;
                 case BuildTarget.WSAPlayer:
-                    // First build SLN
-                    if (await UwpPlayerBuildTools.BuildPlayer(BuildDeployPreferences.BuildDirectory, buildCancellationTokenSource.Token, false))
+                    var buildInfo = new UwpBuildInfo
                     {
-                        if (install)
-                        {
-                            string fullBuildLocation = CalcMostRecentBuild();
-
-                            if (UwpBuildDeployPreferences.TargetAllConnections)
-                            {
-                                await InstallAppOnDevicesListAsync(fullBuildLocation, portalConnections);
-                            }
-                            else
-                            {
-                                await InstallOnTargetDeviceAsync(fullBuildLocation, portalConnections.Connections[currentConnectionInfoIndex]);
-                            }
-                        }
-                    }
-
+                        Install = install
+                    };
+                    UnityPlayerBuildTools.BuildUnityPlayer(buildInfo);
                     break;
             }
 
-            buildCancellationTokenSource.Dispose();
-            buildCancellationTokenSource = null;
             EditorAssemblyReloadManager.LockReloadAssemblies = false;
             isBuilding = false;
         }
@@ -1157,7 +1111,7 @@ namespace XRTK.Editor.BuildPipeline
             timeLastUpdatedBuilds = Time.realtimeSinceStartup;
         }
 
-        private static string CalcMostRecentBuild()
+        public static string CalcMostRecentBuild()
         {
             UpdateBuilds();
             var mostRecent = DateTime.MinValue;
@@ -1361,7 +1315,7 @@ namespace XRTK.Editor.BuildPipeline
             await InstallOnTargetDeviceAsync(buildPath, targetDevice);
         }
 
-        private static async Task InstallOnTargetDeviceAsync(string buildPath, DeviceInfo targetDevice)
+        public static async Task InstallOnTargetDeviceAsync(string buildPath, DeviceInfo targetDevice)
         {
             isAppRunning = false;
 
@@ -1419,7 +1373,7 @@ namespace XRTK.Editor.BuildPipeline
             await InstallAppOnDevicesListAsync(buildPath, targetList);
         }
 
-        private static async Task InstallAppOnDevicesListAsync(string buildPath, DevicePortalConnections targetList)
+        public static async Task InstallAppOnDevicesListAsync(string buildPath, DevicePortalConnections targetList)
         {
             if (string.IsNullOrEmpty(PackageName))
             {

@@ -103,7 +103,8 @@ namespace XRTK.Editor.BuildPipeline
                 case BuildTarget.Lumin:
                     buildInfo.OutputDirectory += ".mpk";
 
-                    if (Directory.Exists($"{Directory.GetParent(Application.dataPath)}\\Library\\Mabu"))
+                    if (Application.isBatchMode &&
+                        Directory.Exists($"{Directory.GetParent(Application.dataPath)}\\Library\\Mabu"))
                     {
                         Directory.Delete($"{Directory.GetParent(Application.dataPath)}\\Library\\Mabu", true);
                     }

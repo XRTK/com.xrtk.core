@@ -3,21 +3,34 @@
 
 using System;
 using System.Diagnostics;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
 using XRTK.Extensions;
+using XRTK.Services;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Editor.BuildPipeline
 {
     public class LuminBuildInfo : BuildInfo
     {
+        /// <inheritdoc />
+        public override BuildTarget BuildTarget => BuildTarget.Lumin;
+
+        /// <inheritdoc />
         public override bool Install => true;
 
+        /// <inheritdoc />
         public override void OnPostprocessBuild(BuildReport buildReport)
         {
-            if (EditorUserBuildSettings.activeBuildTarget != BuildTarget ||
+            if (MixedRealityToolkit.ActivePlatforms.Contains(BuildPlatform))
+            {
+                Debug.Log("LuminBuildInfo.OnPostprocessBuild");
+            }
+
+            if (!MixedRealityToolkit.ActivePlatforms.Contains(BuildPlatform) ||
+                EditorUserBuildSettings.activeBuildTarget != BuildTarget ||
                 buildReport.summary.result == BuildResult.Failed ||
                 Application.isBatchMode)
             {

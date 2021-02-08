@@ -6,6 +6,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
 using UnityEngine;
+using XRTK.Services;
 
 namespace XRTK.Editor.BuildPipeline
 {
@@ -47,7 +48,11 @@ namespace XRTK.Editor.BuildPipeline
         /// <inheritdoc />
         public override void OnPostprocessBuild(BuildReport buildReport)
         {
-            if (EditorUserBuildSettings.activeBuildTarget != BuildTarget) { return; }
+            if (!MixedRealityToolkit.ActivePlatforms.Contains(BuildPlatform) ||
+                EditorUserBuildSettings.activeBuildTarget != BuildTarget)
+            {
+                return;
+            }
 
             if (buildReport.summary.result == BuildResult.Failed)
             {

@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using UnityEditor;
 using UnityEditor.Build.Reporting;
+using UnityEngine;
 using XRTK.Editor.Utilities;
 
 namespace XRTK.Editor.BuildAndDeploy
@@ -87,7 +88,7 @@ namespace XRTK.Editor.BuildAndDeploy
         /// </summary>
         /// <param name="buildInfo"></param>
         /// <param name="cancellationToken"></param>
-        public static async Task<bool> BuildPlayer(UwpBuildInfo buildInfo, CancellationToken cancellationToken = default)
+        public static async Task<BuildReport> BuildPlayer(UwpBuildInfo buildInfo, CancellationToken cancellationToken = default)
         {
             if (buildInfo.IsCommandLine)
             {
@@ -99,10 +100,15 @@ namespace XRTK.Editor.BuildAndDeploy
 
             if (success && buildInfo.BuildAppx)
             {
-                success &= await UwpAppxBuildTools.BuildAppxAsync(buildInfo, cancellationToken);
+                success = await UwpAppxBuildTools.BuildAppxAsync(buildInfo, cancellationToken);
+
+                if (!success)
+                {
+                    Debug.LogError("Failed to build Appx!");
+                }
             }
 
-            return success;
+            return buildReport;
         }
     }
 }

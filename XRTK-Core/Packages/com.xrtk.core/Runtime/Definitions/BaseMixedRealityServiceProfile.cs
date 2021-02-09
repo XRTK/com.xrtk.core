@@ -78,5 +78,24 @@ namespace XRTK.Definitions
                 }
             }
         }
+
+        internal void AddConfiguration(IMixedRealityServiceConfiguration<TService> configuration)
+        {
+            var newConfigs = new IMixedRealityServiceConfiguration<TService>[RegisteredServiceConfigurations.Length + 1];
+
+            for (int i = 0; i < newConfigs.Length; i++)
+            {
+                if (i != newConfigs.Length - 1)
+                {
+                    newConfigs[i] = RegisteredServiceConfigurations[i];
+                }
+                else
+                {
+                    newConfigs[i] = configuration;
+                }
+            }
+
+            RegisteredServiceConfigurations = newConfigs;
+        }
     }
 }

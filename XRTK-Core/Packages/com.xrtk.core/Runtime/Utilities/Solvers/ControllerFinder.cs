@@ -4,6 +4,7 @@
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Input;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Services;
@@ -78,13 +79,13 @@ namespace XRTK.SDK.Utilities.Solvers
         {
             // Look if the controller was already loaded. This could happen if the
             // GameObject was instantiated at runtime and the model loaded event has already fired.
-            if (MixedRealityToolkit.InputSystem == null)
+            if (!MixedRealityToolkit.TryGetSystem<IMixedRealityInputSystem>(out var inputSystem))
             {
                 // The InputSystem could not be found.
                 return;
             }
 
-            foreach (IMixedRealityController controller in MixedRealityToolkit.InputSystem.DetectedControllers)
+            foreach (var controller in inputSystem.DetectedControllers)
             {
                 if (controller.ControllerHandedness == handedness)
                 {

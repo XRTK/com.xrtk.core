@@ -19,7 +19,10 @@ namespace XRTK.Providers.Speech
         protected BaseDictationDataProvider(string name, uint priority, BaseMixedRealityControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
             : base(name, priority, profile, parentService)
         {
+            InputSystem = parentService;
         }
+
+        protected readonly IMixedRealityInputSystem InputSystem;
 
         #region IMixedRealityDictationDataProvider Implementation
 

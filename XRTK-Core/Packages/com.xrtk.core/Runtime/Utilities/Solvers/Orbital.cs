@@ -3,6 +3,7 @@
 
 using UnityEngine;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Services;
 using XRTK.Utilities;
 
@@ -127,9 +128,9 @@ namespace XRTK.SDK.Utilities.Solvers
         private Quaternion CalculateDesiredRotation(Vector3 desiredPos)
         {
             var desiredRot = Quaternion.identity;
-            var cameraTransform = MixedRealityToolkit.CameraSystem == null
-                ? CameraCache.Main.transform
-                : MixedRealityToolkit.CameraSystem.MainCameraRig.CameraTransform;
+            var cameraTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                ? cameraSystem.MainCameraRig.CameraTransform
+                : CameraCache.Main.transform;
 
             switch (orientationType)
             {

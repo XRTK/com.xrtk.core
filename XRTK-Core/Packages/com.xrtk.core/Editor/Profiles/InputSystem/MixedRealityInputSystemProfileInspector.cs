@@ -200,6 +200,8 @@ namespace XRTK.Editor.Profiles.InputSystem
                     {
                         inspector.RenderControllerMappingButton(mappingProfile);
                     }
+
+                    profileEditor.Destroy();
                 }
             }
 

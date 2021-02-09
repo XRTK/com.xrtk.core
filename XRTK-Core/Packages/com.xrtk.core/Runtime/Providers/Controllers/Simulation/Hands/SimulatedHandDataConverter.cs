@@ -7,6 +7,7 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Providers.Controllers.Hands;
 using XRTK.Utilities;
 using XRTK.Services;
@@ -19,6 +20,26 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
     /// </summary>
     public sealed class SimulatedHandDataConverter
     {
+        private static IMixedRealityCameraSystem cameraSystem = null;
+
+        private static IMixedRealityCameraSystem CameraSystem
+            => cameraSystem ?? (cameraSystem = MixedRealityToolkit.GetSystem<IMixedRealityCameraSystem>());
+
+        private static Camera playerCamera = null;
+
+        private static Camera PlayerCamera
+        {
+            get
+            {
+                if (playerCamera == null)
+                {
+                    playerCamera = CameraSystem != null ? CameraSystem.MainCameraRig.PlayerCamera : CameraCache.Main;
+                }
+
+                return playerCamera;
+            }
+        }
+
         public SimulatedHandDataConverter(Handedness handedness,
             IReadOnlyList<HandControllerPoseProfile> trackedPoses,
             float handPoseAnimationSpeed,
@@ -160,13 +181,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 y = handRootPose.Position.y
             };
 
-            var camera = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera
-                : CameraCache.Main;
-
-            var newWorldPoint = camera.ScreenToWorldPoint(ScreenPosition);
-            newWorldPoint += camera.transform.forward * handRootPose.Position.z;
-            screenPosition = camera.WorldToScreenPoint(newWorldPoint);
+            var newWorldPoint = PlayerCamera.ScreenToWorldPoint(ScreenPosition);
+            newWorldPoint += PlayerCamera.transform.forward * handRootPose.Position.z;
+            screenPosition = PlayerCamera.WorldToScreenPoint(newWorldPoint);
 
             // The provided hand root pose rotation is just a delta from the
             // previous frame, so we need to determine the final rotation still.
@@ -185,16 +202,14 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             currentPoseBlending = TargetPoseBlending;
             var rotation = Quaternion.Euler(HandRotateEulerAngles);
-            var camera = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera
-                : CameraCache.Main;
-
-            var position = camera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
+            var position = PlayerCamera.ScreenToWorldPoint(ScreenPosition + JitterOffset);
 
             // At this point we know the hand's root pose in world space and
-            // need to translat to playspace.
+            // need to translate to playspace.
             var rootPose = new MixedRealityPose(position, rotation);
-            var playspaceTransform = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform;
+            var playspaceTransform = CameraSystem != null
+                ? CameraSystem.MainCameraRig.PlayspaceTransform
+                : CameraCache.Main.transform.parent;
             rootPose.Position = playspaceTransform.InverseTransformPoint(rootPose.Position);
             rootPose.Rotation = Quaternion.Inverse(playspaceTransform.rotation) * playspaceTransform.rotation * rootPose.Rotation;
 
@@ -209,11 +224,9 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         /// </summary>
         private MixedRealityPose[] ComputeJointPoses(SimulatedHandControllerPose pose, Handedness handedness)
         {
-            var cameraRotation = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform.rotation
-                : CameraCache.Main.transform.rotation;
-
+            var cameraRotation = PlayerCamera.transform.rotation;
             var jointPoses = new MixedRealityPose[HandData.JointCount];
+
             for (int i = 0; i < HandData.JointCount; i++)
             {
                 // Initialize from local offsets

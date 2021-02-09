@@ -8,7 +8,6 @@ using XRTK.Definitions.Controllers.UnityInput.Profiles;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
-using XRTK.Services;
 using XRTK.Utilities;
 
 namespace XRTK.Providers.Controllers.UnityInput
@@ -101,7 +100,7 @@ namespace XRTK.Providers.Controllers.UnityInput
                 AddController(controller);
             }
 
-            MixedRealityToolkit.InputSystem?.RaiseSourceDetected(controller.InputSource, controller);
+            InputSystem?.RaiseSourceDetected(controller.InputSource, controller);
 
             controller.StartTouch();
             UpdateTouchData(touch, ray);
@@ -128,7 +127,7 @@ namespace XRTK.Providers.Controllers.UnityInput
             }
 
             controller.EndTouch();
-            MixedRealityToolkit.InputSystem?.RaiseSourceLost(controller.InputSource, controller);
+            InputSystem?.RaiseSourceLost(controller.InputSource, controller);
             RemoveController(controller);
         }
     }

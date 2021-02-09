@@ -9,7 +9,6 @@ using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Providers.Controllers.UnityInput;
-using XRTK.Services;
 
 namespace XRTK.Providers.Controllers.OpenVR
 {
@@ -215,22 +214,22 @@ namespace XRTK.Providers.Controllers.OpenVR
             // Raise input system events if it is enabled.
             if (lastState != TrackingState)
             {
-                MixedRealityToolkit.InputSystem?.RaiseSourceTrackingStateChanged(InputSource, this, TrackingState);
+                InputSystem?.RaiseSourceTrackingStateChanged(InputSource, this, TrackingState);
             }
 
             if (TrackingState == TrackingState.Tracked && LastControllerPose != CurrentControllerPose)
             {
                 if (IsPositionAvailable && IsRotationAvailable)
                 {
-                    MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, CurrentControllerPose);
+                    InputSystem?.RaiseSourcePoseChanged(InputSource, this, CurrentControllerPose);
                 }
                 else if (IsPositionAvailable && !IsRotationAvailable)
                 {
-                    MixedRealityToolkit.InputSystem?.RaiseSourcePositionChanged(InputSource, this, CurrentControllerPosition);
+                    InputSystem?.RaiseSourcePositionChanged(InputSource, this, CurrentControllerPosition);
                 }
                 else if (!IsPositionAvailable && IsRotationAvailable)
                 {
-                    MixedRealityToolkit.InputSystem?.RaiseSourceRotationChanged(InputSource, this, CurrentControllerRotation);
+                    InputSystem?.RaiseSourceRotationChanged(InputSource, this, CurrentControllerRotation);
                 }
             }
         }

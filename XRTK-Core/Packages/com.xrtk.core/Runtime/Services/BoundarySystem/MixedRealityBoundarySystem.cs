@@ -9,6 +9,7 @@ using UnityEngine;
 using XRTK.Definitions.BoundarySystem;
 using XRTK.Extensions;
 using XRTK.Interfaces.BoundarySystem;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Utilities;
 
 namespace XRTK.Services.BoundarySystem
@@ -67,6 +68,22 @@ namespace XRTK.Services.BoundarySystem
 
         private readonly Dictionary<BoundsCache, ProximityAlert> trackedObjects = new Dictionary<BoundsCache, ProximityAlert>(3);
 
+        private Transform playspaceTransform = null;
+
+        private Transform PlayspaceTransform
+        {
+            get
+            {
+                if (playspaceTransform == null)
+                {
+                    playspaceTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                       ? cameraSystem.MainCameraRig.PlayspaceTransform
+                       : CameraCache.Main.transform.parent;
+                }
+                return playspaceTransform;
+            }
+        }
+
         private InscribedRectangle rectangularBounds;
 
         private GameObject boundaryVisualizationRoot = null;
@@ -81,10 +98,7 @@ namespace XRTK.Services.BoundarySystem
                 }
 
                 boundaryVisualizationRoot = new GameObject(nameof(BoundarySystemVisualizationRoot));
-                var playspaceTransform = MixedRealityToolkit.CameraSystem != null
-                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
-                    : CameraCache.Main.transform.parent;
-                boundaryVisualizationRoot.transform.SetParent(playspaceTransform, false);
+                boundaryVisualizationRoot.transform.SetParent(PlayspaceTransform, false);
 
                 return boundaryVisualizationRoot;
             }
@@ -170,9 +184,7 @@ namespace XRTK.Services.BoundarySystem
                     return floorVisualization;
                 }
 
-                var position = MixedRealityToolkit.CameraSystem != null
-                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.position
-                    : CameraCache.Main.transform.parent.position;
+                var position = PlayspaceTransform.position;
 
                 // Render the floor.
                 floorVisualization = GameObject.CreatePrimitive(PrimitiveType.Cube);
@@ -563,13 +575,9 @@ namespace XRTK.Services.BoundarySystem
             }
 
             // Handle the user teleporting (boundary moves with them).
-            var playspaceTransform = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
-                : CameraCache.Main.transform.parent;
-
             if (referenceSpace == Space.World)
             {
-                position = playspaceTransform.InverseTransformPoint(position);
+                position = PlayspaceTransform.InverseTransformPoint(position);
             }
 
             if (position.y < 0 ||
@@ -597,16 +605,13 @@ namespace XRTK.Services.BoundarySystem
             }
 
             // Handle the user teleporting (boundary moves with them).
-            var playspaceTransform = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
-                : CameraCache.Main.transform.parent;
-            var transformedCenter = playspaceTransform.TransformPoint(
-                new Vector3(rectangularBounds.Center.x, 0f, rectangularBounds.Center.y));
+            var transformedCenter = PlayspaceTransform.TransformPoint(new Vector3(rectangularBounds.Center.x, 0f, rectangularBounds.Center.y));
 
             center = new Vector2(transformedCenter.x, transformedCenter.z);
             angle = rectangularBounds.Angle;
             width = rectangularBounds.Width;
             height = rectangularBounds.Height;
+
             return true;
         }
 

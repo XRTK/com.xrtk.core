@@ -26,7 +26,11 @@ namespace XRTK.Services.DiagnosticsSystem
         public override void Enable()
         {
             base.Enable();
-            Application.logMessageReceived += MixedRealityToolkit.DiagnosticsSystem.RaiseLogReceived;
+
+            if (DiagnosticsSystem != null)
+            {
+                Application.logMessageReceived += DiagnosticsSystem.RaiseLogReceived;
+            }
         }
 
         /// <inheritdoc />
@@ -34,9 +38,9 @@ namespace XRTK.Services.DiagnosticsSystem
         {
             base.Disable();
 
-            if (MixedRealityToolkit.DiagnosticsSystem != null)
+            if (DiagnosticsSystem != null)
             {
-                Application.logMessageReceived -= MixedRealityToolkit.DiagnosticsSystem.RaiseLogReceived;
+                Application.logMessageReceived -= DiagnosticsSystem.RaiseLogReceived;
             }
         }
 

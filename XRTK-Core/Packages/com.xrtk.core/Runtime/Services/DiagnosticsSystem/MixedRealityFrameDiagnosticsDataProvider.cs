@@ -121,13 +121,13 @@ namespace XRTK.Services.DiagnosticsSystem
 
                 if (CPUFrameRate != newCPUFrameRate)
                 {
-                    MixedRealityToolkit.DiagnosticsSystem.RaiseFrameRateChanged(newCPUFrameRate, false);
+                    DiagnosticsSystem.RaiseFrameRateChanged(newCPUFrameRate, false);
                     CPUFrameRate = newCPUFrameRate;
                 }
 
                 if (newGPUFrameRate != 0 && GPUFrameRate != newGPUFrameRate)
                 {
-                    MixedRealityToolkit.DiagnosticsSystem.RaiseFrameRateChanged(newGPUFrameRate, true);
+                    DiagnosticsSystem.RaiseFrameRateChanged(newGPUFrameRate, true);
                     GPUFrameRate = newGPUFrameRate;
                 }
 
@@ -141,7 +141,7 @@ namespace XRTK.Services.DiagnosticsSystem
                 // But, many of these APIs are inaccessible in Unity. Currently missed frames are assumed when the average cpuFrameRate 
                 // is under the target frame rate.
                 missedFrames[0] = newCPUFrameRate < DeviceTargetRefreshRate - 1;
-                MixedRealityToolkit.DiagnosticsSystem.RaiseMissedFramesChanged(missedFrames);
+                DiagnosticsSystem.RaiseMissedFramesChanged(missedFrames);
 
                 // Reset timers.
                 framesPassedSinceLastCalculation = 0;

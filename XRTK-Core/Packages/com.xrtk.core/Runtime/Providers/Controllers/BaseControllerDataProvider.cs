@@ -34,7 +34,11 @@ namespace XRTK.Providers.Controllers
             {
                 throw new UnassignedReferenceException($"{nameof(controllerMappingProfiles)} has no defined controller mappings for {name}");
             }
+
+            InputSystem = parentService;
         }
+
+        protected readonly IMixedRealityInputSystem InputSystem;
 
         private readonly MixedRealityControllerMappingProfile[] controllerMappingProfiles;
 

@@ -22,11 +22,13 @@ namespace XRTK.Providers.CameraSystem
         public BaseCameraDataProvider(string name, uint priority, BaseMixedRealityCameraDataProviderProfile profile, IMixedRealityCameraSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            cameraSystem = MixedRealityToolkit.CameraSystem;
+            cameraSystem = parentService;
 
             if (profile.IsNull())
             {
-                profile = MixedRealityToolkit.Instance.ActiveProfile.CameraSystemProfile.GlobalCameraProfile;
+                profile = MixedRealityToolkit.TryGetSystemProfile<IMixedRealityCameraSystem, MixedRealityCameraSystemProfile>(out var cameraSystemProfile)
+                    ? cameraSystemProfile.GlobalCameraProfile
+                    : throw new ArgumentException($"Unable to get a valid {nameof(MixedRealityCameraSystemProfile)}!");
             }
 
             if (profile.CameraRigType?.Type == null)

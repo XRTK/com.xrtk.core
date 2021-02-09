@@ -39,6 +39,7 @@ namespace XRTK.Editor.Profiles
         protected virtual void OnEnable()
         {
             targetProfile = serializedObject;
+
             currentlySelectedProfile = target as BaseMixedRealityProfile;
             Debug.Assert(!currentlySelectedProfile.IsNull());
             ThisProfile = currentlySelectedProfile;

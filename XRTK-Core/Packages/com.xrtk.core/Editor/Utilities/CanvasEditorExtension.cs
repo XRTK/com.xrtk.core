@@ -27,7 +27,6 @@ namespace XRTK.Editor.Utilities
         private static bool IsUtilityValid =>
             MixedRealityToolkit.Instance != null &&
             MixedRealityToolkit.HasActiveProfile &&
-            MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
             MixedRealityToolkit.GetService<IMixedRealityInputSystem>(false) != null;
 
         private bool CanUpdateSettings
@@ -74,17 +73,22 @@ namespace XRTK.Editor.Utilities
         {
             bool removeUtility = false;
 
+            if (!MixedRealityToolkit.TryGetSystem<IMixedRealityInputSystem>(out var inputSystem))
+            {
+                return;
+            }
+
             // Update the world camera if we need to.
             if (IsUtilityValid &&
                 canvas.isRootCanvas &&
                 canvas.renderMode == RenderMode.WorldSpace &&
-                canvas.worldCamera != MixedRealityToolkit.InputSystem.FocusProvider.UIRaycastCamera)
+                canvas.worldCamera != inputSystem.FocusProvider.UIRaycastCamera)
             {
                 var selection = EditorUtility.DisplayDialogComplex("Attention!", DialogText, "OK", "Cancel", "Dismiss Forever");
                 switch (selection)
                 {
                     case 0:
-                        canvas.worldCamera = MixedRealityToolkit.InputSystem.FocusProvider.UIRaycastCamera;
+                        canvas.worldCamera = inputSystem.FocusProvider.UIRaycastCamera;
                         break;
                     case 1:
                         removeUtility = true;
@@ -100,7 +104,7 @@ namespace XRTK.Editor.Utilities
             if (IsUtilityValid &&
                 canvas.isRootCanvas &&
                 canvas.renderMode == RenderMode.WorldSpace &&
-                canvas.worldCamera == MixedRealityToolkit.InputSystem.FocusProvider.UIRaycastCamera)
+                canvas.worldCamera == inputSystem.FocusProvider.UIRaycastCamera)
             {
                 var helper = canvas.gameObject.EnsureComponent<CanvasUtility>();
                 helper.Canvas = canvas;
@@ -110,7 +114,7 @@ namespace XRTK.Editor.Utilities
             if (IsUtilityValid &&
                 canvas.isRootCanvas &&
                 canvas.renderMode != RenderMode.WorldSpace &&
-                canvas.worldCamera == MixedRealityToolkit.InputSystem.FocusProvider.UIRaycastCamera)
+                canvas.worldCamera == inputSystem.FocusProvider.UIRaycastCamera)
             {
                 // Sets it back to MainCamera default.
                 canvas.worldCamera = null;

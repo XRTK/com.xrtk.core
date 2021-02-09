@@ -23,6 +23,11 @@ namespace XRTK.Interfaces
     public interface IMixedRealityServiceConfiguration
     {
         /// <summary>
+        /// Is this service enabled?
+        /// </summary>
+        bool Enabled { get; }
+
+        /// <summary>
         /// The concrete type for the <see cref="IMixedRealityService"/> that will be instantiated and ran by the service locator.
         /// </summary>
         SystemType InstancedType { get; }

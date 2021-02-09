@@ -26,6 +26,12 @@ namespace XRTK.Definitions
             : base(instancedType, name, priority, runtimePlatforms, profile)
         {
         }
+
+        /// <inheritdoc />
+        public override bool Enabled
+            => typeof(IMixedRealitySystem).IsAssignableFrom(typeof(T))
+                ? Profile != null && base.Enabled // All IMixedRealitySystems require a profile
+                : base.Enabled;
     }
 
     /// <summary>
@@ -62,6 +68,9 @@ namespace XRTK.Definitions
 
             this.profile = profile;
         }
+
+        /// <inheritdoc />
+        public virtual bool Enabled => instancedType.Type != null;
 
         [SerializeField]
         [Implements(typeof(IMixedRealityService), TypeGrouping.ByNamespaceFlat)]

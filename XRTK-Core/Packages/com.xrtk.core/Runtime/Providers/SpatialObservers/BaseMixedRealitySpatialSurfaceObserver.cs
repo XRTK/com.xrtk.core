@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using XRTK.Definitions.SpatialAwarenessSystem;
 using XRTK.Extensions;
 using XRTK.Interfaces.Providers.SpatialObservers;
 using XRTK.Interfaces.SpatialAwarenessSystem;
@@ -22,7 +23,9 @@ namespace XRTK.Providers.SpatialObservers
         {
             if (profile.IsNull())
             {
-                profile = MixedRealityToolkit.Instance.ActiveProfile.SpatialAwarenessProfile.GlobalSurfaceObserverProfile;
+                profile = MixedRealityToolkit.TryGetSystemProfile<IMixedRealitySpatialAwarenessSystem, MixedRealitySpatialAwarenessSystemProfile>(out var spatialAwarenessSystemProfile)
+                    ? spatialAwarenessSystemProfile.GlobalSurfaceObserverProfile
+                    : throw new ArgumentException($"Unable to get a valid {nameof(MixedRealitySpatialAwarenessSystemProfile)}!");
             }
 
             if (profile.IsNull())

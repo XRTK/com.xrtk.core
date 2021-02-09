@@ -37,7 +37,7 @@ namespace XRTK.Services.DiagnosticsSystem
             {
                 if (systemMemorySize > lastMemoryLimit)
                 {
-                    MixedRealityToolkit.DiagnosticsSystem.RaiseMemoryLimitChanged(new MemoryLimit(systemMemorySize));
+                    DiagnosticsSystem.RaiseMemoryLimitChanged(new MemoryLimit(systemMemorySize));
                     lastMemoryLimit = systemMemorySize;
                 }
             }
@@ -46,13 +46,13 @@ namespace XRTK.Services.DiagnosticsSystem
 
             if (currentMemoryUsage != lastMemoryUsage)
             {
-                MixedRealityToolkit.DiagnosticsSystem.RaiseMemoryUsageChanged(new MemoryUsage(currentMemoryUsage));
+                DiagnosticsSystem.RaiseMemoryUsageChanged(new MemoryUsage(currentMemoryUsage));
                 lastMemoryUsage = currentMemoryUsage;
             }
 
             if (lastMemoryUsage > peakMemoryUsage)
             {
-                MixedRealityToolkit.DiagnosticsSystem.RaiseMemoryPeakChanged(new MemoryPeak(peakMemoryUsage));
+                DiagnosticsSystem.RaiseMemoryPeakChanged(new MemoryPeak(peakMemoryUsage));
                 peakMemoryUsage = lastMemoryUsage;
             }
         }

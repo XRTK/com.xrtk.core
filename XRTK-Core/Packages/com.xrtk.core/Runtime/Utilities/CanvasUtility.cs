@@ -1,7 +1,8 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using UnityEngine;
+using XRTK.Interfaces.InputSystem;
 using XRTK.Services;
 
 namespace XRTK.Utilities
@@ -37,11 +38,10 @@ namespace XRTK.Utilities
         {
             Debug.Assert(Canvas != null);
 
-            if (MixedRealityToolkit.IsInitialized &&
-                MixedRealityToolkit.Instance.ActiveProfile.IsInputSystemEnabled &&
+            if (MixedRealityToolkit.TryGetSystem<IMixedRealityInputSystem>(out var inputSystem) &&
                 Canvas.isRootCanvas && Canvas.renderMode == RenderMode.WorldSpace)
             {
-                Canvas.worldCamera = MixedRealityToolkit.InputSystem.FocusProvider.UIRaycastCamera;
+                Canvas.worldCamera = inputSystem.FocusProvider.UIRaycastCamera;
             }
         }
     }

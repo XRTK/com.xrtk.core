@@ -35,8 +35,8 @@ TagManager:
   - 
   - 
   - 
-  - Spatial Awareness Surfaces
   - Spatial Awareness Meshes
+  - Spatial Awareness Surfaces
   m_SortingLayers:
   - name: Default
     uniqueID: 0

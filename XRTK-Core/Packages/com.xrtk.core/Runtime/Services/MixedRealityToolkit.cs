@@ -11,13 +11,6 @@ using XRTK.Definitions;
 using XRTK.Definitions.Platforms;
 using XRTK.Extensions;
 using XRTK.Interfaces;
-using XRTK.Interfaces.BoundarySystem;
-using XRTK.Interfaces.CameraSystem;
-using XRTK.Interfaces.DiagnosticsSystem;
-using XRTK.Interfaces.InputSystem;
-using XRTK.Interfaces.NetworkingSystem;
-using XRTK.Interfaces.SpatialAwarenessSystem;
-using XRTK.Interfaces.TeleportSystem;
 using XRTK.Utilities;
 using XRTK.Utilities.Async;
 
@@ -157,7 +150,7 @@ namespace XRTK.Services
         public static IReadOnlyList<IMixedRealityPlatform> ActivePlatforms => activePlatforms;
 
         // ReSharper disable once InconsistentNaming
-        private static readonly Dictionary<Type, IMixedRealityService> activeSystems = new Dictionary<Type, IMixedRealityService>();
+        private static readonly Dictionary<Type, IMixedRealitySystem> activeSystems = new Dictionary<Type, IMixedRealitySystem>();
 
         /// <summary>
         /// Current active systems registered with the MixedRealityToolkit.
@@ -165,7 +158,7 @@ namespace XRTK.Services
         /// <remarks>
         /// Systems can only be registered once by <see cref="Type"/> and are executed in a specific priority order.
         /// </remarks>
-        public static IReadOnlyDictionary<Type, IMixedRealityService> ActiveSystems => activeSystems;
+        public static IReadOnlyDictionary<Type, IMixedRealitySystem> ActiveSystems => activeSystems;
 
         // ReSharper disable once InconsistentNaming
         private static readonly List<Tuple<Type, IMixedRealityService>> registeredMixedRealityServices = new List<Tuple<Type, IMixedRealityService>>();
@@ -360,7 +353,7 @@ namespace XRTK.Services
         /// <summary>
         /// Static function to determine if the <see cref="MixedRealityToolkit"/> class has been initialized or not.
         /// </summary>
-        public static bool ConfirmInitialized()
+        internal static bool ConfirmInitialized()
         {
             var access = Instance;
             Debug.Assert(IsInitialized.Equals(access != null));
@@ -405,124 +398,30 @@ namespace XRTK.Services
             Debug.Assert(RegisteredMixedRealityServices.Count == 0);
             Debug.Assert(ActivePlatforms.Count > 0, "No Active Platforms found!");
 
-            ClearCoreSystemCache();
+            ClearSystemCache();
 
-            #region Services Registration
-
-            if (ActiveProfile.IsCameraSystemEnabled)
+            foreach (var configuration in ActiveProfile.RegisteredServiceConfigurations)
             {
-                if (TryCreateAndRegisterService<IMixedRealityCameraSystem>(ActiveProfile.CameraSystemType, out var service, ActiveProfile.CameraSystemProfile) && CameraSystem != null)
+                if (configuration.Enabled)
                 {
-                    TryRegisterDataProviderConfigurations(ActiveProfile.CameraSystemProfile.RegisteredServiceConfigurations, service);
-                }
-                else
-                {
-                    Debug.LogError("Failed to start the Camera System!");
-                }
-            }
-
-            if (ActiveProfile.IsInputSystemEnabled)
-            {
-                if (TryCreateAndRegisterService<IMixedRealityInputSystem>(ActiveProfile.InputSystemType, out var service, ActiveProfile.InputSystemProfile) && InputSystem != null)
-                {
-                    if (TryCreateAndRegisterService<IMixedRealityFocusProvider>(ActiveProfile.InputSystemProfile.FocusProviderType, out _))
+                    if (TryCreateAndRegisterService(configuration, out var service) && service != null)
                     {
-                        TryRegisterDataProviderConfigurations(ActiveProfile.InputSystemProfile.RegisteredServiceConfigurations, service);
+                        if (configuration.Profile is BaseMixedRealityServiceProfile<IMixedRealityDataProvider> profile)
+                        {
+                            TryRegisterDataProviderConfigurations(profile.RegisteredServiceConfigurations, service);
+                        }
                     }
                     else
                     {
-                        inputSystem = null;
-                        Debug.LogError("Failed to register the focus provider! The input system will not function without it.");
+                        Debug.LogError($"Failed to start {configuration.Name}!");
                     }
                 }
-                else
-                {
-                    Debug.LogError("Failed to start the Input System!");
-                }
             }
 
-            if (ActiveProfile.IsBoundarySystemEnabled)
-            {
-                if (TryCreateAndRegisterService<IMixedRealityBoundarySystem>(ActiveProfile.BoundarySystemSystemType, out var service, ActiveProfile.BoundarySystemProfile) && BoundarySystem != null)
-                {
-                    TryRegisterDataProviderConfigurations(ActiveProfile.BoundarySystemProfile.RegisteredServiceConfigurations, service);
-                }
-                else
-                {
-                    Debug.LogError("Failed to start the Boundary System!");
-                }
-            }
-
-            if (ActiveProfile.IsSpatialAwarenessSystemEnabled)
-            {
-#if UNITY_EDITOR
-                // Setup the default spatial awareness layers in the project settings.
-                LayerExtensions.SetupLayer(31, Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.SpatialAwarenessMeshesLayerName);
-                LayerExtensions.SetupLayer(30, Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.SpatialAwarenessSurfacesLayerName);
-#endif
-                if (TryCreateAndRegisterService<IMixedRealitySpatialAwarenessSystem>(ActiveProfile.SpatialAwarenessSystemSystemType, out var service, ActiveProfile.SpatialAwarenessProfile) && SpatialAwarenessSystem != null)
-                {
-                    TryRegisterDataProviderConfigurations(ActiveProfile.SpatialAwarenessProfile.RegisteredServiceConfigurations, service);
-                }
-                else
-                {
-                    Debug.LogError("Failed to start the Spatial Awareness System!");
-                }
-            }
-            else
-            {
-#if UNITY_EDITOR
-                LayerExtensions.RemoveLayer(Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.SpatialAwarenessMeshesLayerName);
-                LayerExtensions.RemoveLayer(Definitions.SpatialAwarenessSystem.MixedRealitySpatialAwarenessSystemProfile.SpatialAwarenessSurfacesLayerName);
-#endif
-            }
-
-            if (ActiveProfile.IsTeleportSystemEnabled)
-            {
-                if (TryCreateAndRegisterService<IMixedRealityTeleportSystem>(ActiveProfile.TeleportSystemSystemType, out var service, ActiveProfile.TeleportSystemProfile) || TeleportSystem == null)
-                {
-                    TryRegisterDataProviderConfigurations(ActiveProfile.TeleportSystemProfile.RegisteredServiceConfigurations, service);
-
-                }
-                else
-                {
-                    Debug.LogError("Failed to start the Teleport System!");
-                }
-            }
-
-            if (ActiveProfile.IsNetworkingSystemEnabled)
-            {
-                if (TryCreateAndRegisterService<IMixedRealityNetworkingSystem>(ActiveProfile.NetworkingSystemSystemType, out var service, ActiveProfile.NetworkingSystemProfile) && NetworkingSystem != null)
-                {
-                    TryRegisterDataProviderConfigurations(ActiveProfile.NetworkingSystemProfile.RegisteredServiceConfigurations, service);
-                }
-                else
-                {
-                    Debug.LogError("Failed to start the Networking System!");
-                }
-            }
-
-            if (ActiveProfile.IsDiagnosticsSystemEnabled)
-            {
-                if (TryCreateAndRegisterService<IMixedRealityDiagnosticsSystem>(ActiveProfile.DiagnosticsSystemSystemType, out var service, ActiveProfile.DiagnosticsSystemProfile) && DiagnosticsSystem != null)
-                {
-                    TryRegisterDataProviderConfigurations(ActiveProfile.DiagnosticsSystemProfile.RegisteredServiceConfigurations, service);
-                }
-                else
-                {
-                    Debug.LogError("Failed to start the Diagnostics System!");
-                }
-            }
-
-            if (ActiveProfile.RegisteredServiceProvidersProfile != null &&
-                ActiveProfile.RegisteredServiceProvidersProfile.RegisteredServiceConfigurations != null)
+            if (!ActiveProfile.RegisteredServiceProvidersProfile.IsNull())
             {
                 TryRegisterServiceConfigurations(ActiveProfile.RegisteredServiceProvidersProfile.RegisteredServiceConfigurations);
             }
-
-            #endregion Service Registration
-
-            #region Services Initialization
 
             var orderedCoreSystems = activeSystems.OrderBy(m => m.Value.Priority).ToArray();
             activeSystems.Clear();
@@ -552,8 +451,6 @@ namespace XRTK.Services
 #else
             InitializeAllServices();
 #endif
-
-            #endregion Services Initialization
 
             isInitializing = false;
         }
@@ -730,7 +627,7 @@ namespace XRTK.Services
         private void OnDestroy()
         {
             DestroyAllServices();
-            ClearCoreSystemCache();
+            ClearSystemCache();
             Dispose();
         }
 
@@ -865,9 +762,9 @@ namespace XRTK.Services
         /// <param name="configuration">The <see cref="IMixedRealityServiceConfiguration{T}"/> to use to create and register the service.</param>
         /// <param name="service">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
         /// <returns>True, if the service was successfully created and registered.</returns>
-        public static bool TryCreateAndRegisterService<T>(IMixedRealityServiceConfiguration<T> configuration, out IMixedRealityService service) where T : IMixedRealityService
+        public static bool TryCreateAndRegisterService<T>(IMixedRealityServiceConfiguration<T> configuration, out T service) where T : IMixedRealityService
         {
-            return TryCreateAndRegisterService<T>(
+            return TryCreateAndRegisterServiceInternal(
                 configuration.InstancedType,
                 configuration.RuntimePlatforms,
                 out service,
@@ -885,14 +782,14 @@ namespace XRTK.Services
         /// <returns>True, if the service was successfully created and registered.</returns>
         public static bool TryCreateAndRegisterDataProvider<T>(IMixedRealityServiceConfiguration<T> configuration, IMixedRealityService serviceParent) where T : IMixedRealityDataProvider
         {
-            return TryCreateAndRegisterService<T>(
-                    configuration.InstancedType,
-                    configuration.RuntimePlatforms,
-                    out _,
-                    configuration.Name,
-                    configuration.Priority,
-                    configuration.Profile,
-                    serviceParent);
+            return TryCreateAndRegisterServiceInternal<T>(
+                configuration.InstancedType,
+                configuration.RuntimePlatforms,
+                out _,
+                configuration.Name,
+                configuration.Priority,
+                configuration.Profile,
+                serviceParent);
         }
 
         /// <summary>
@@ -903,9 +800,9 @@ namespace XRTK.Services
         /// <param name="service">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
         /// <param name="args">Optional arguments used when instantiating the concrete type.</param>
         /// <returns>True, if the service was successfully created and registered.</returns>
-        public static bool TryCreateAndRegisterService<T>(Type concreteType, out IMixedRealityService service, params object[] args) where T : IMixedRealityService
+        public static bool TryCreateAndRegisterService<T>(Type concreteType, out T service, params object[] args) where T : IMixedRealityService
         {
-            return TryCreateAndRegisterService<T>(concreteType, AllPlatforms, out service, args);
+            return TryCreateAndRegisterServiceInternal(concreteType, AllPlatforms, out service, args);
         }
 
         private static readonly IMixedRealityPlatform[] AllPlatforms = { new AllPlatforms() };
@@ -916,67 +813,92 @@ namespace XRTK.Services
         /// <typeparam name="T">The interface type for the <see cref="IMixedRealityService"/> to be registered.</typeparam>
         /// <param name="concreteType">The concrete class type to instantiate.</param>
         /// <param name="runtimePlatforms">The runtime platform to check against when registering.</param>
-        /// <param name="serviceInstance">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
+        /// <param name="service">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
         /// <param name="args">Optional arguments used when instantiating the concrete type.</param>
         /// <returns>True, if the service was successfully created and registered.</returns>
-        public static bool TryCreateAndRegisterService<T>(Type concreteType, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, out IMixedRealityService serviceInstance, params object[] args) where T : IMixedRealityService
+        public static bool TryCreateAndRegisterService<T>(Type concreteType, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, out T service, params object[] args) where T : IMixedRealityService
         {
-            serviceInstance = null;
+            return TryCreateAndRegisterServiceInternal(concreteType, runtimePlatforms, out service, args);
+        }
+
+        /// <summary>
+        /// Creates a new instance of a service and registers it to the Mixed Reality Toolkit service registry for the specified platform.
+        /// </summary>
+        /// <typeparam name="T">The interface type for the <see cref="IMixedRealityService"/> to be registered.</typeparam>
+        /// <param name="concreteType">The concrete class type to instantiate.</param>
+        /// <param name="runtimePlatforms">The runtime platform to check against when registering.</param>
+        /// <param name="service">If successful, then the new <see cref="IMixedRealityService"/> instance will be passed back out.</param>
+        /// <param name="args">Optional arguments used when instantiating the concrete type.</param>
+        /// <returns>True, if the service was successfully created and registered.</returns>
+        private static bool TryCreateAndRegisterServiceInternal<T>(Type concreteType, IReadOnlyList<IMixedRealityPlatform> runtimePlatforms, out T service, params object[] args) where T : IMixedRealityService
+        {
+            service = default;
 
             if (IsApplicationQuitting)
             {
                 return false;
             }
 
-            var platforms = new List<IMixedRealityPlatform>();
-
-            Debug.Assert(ActivePlatforms.Count > 0);
-
-            for (var i = 0; i < ActivePlatforms.Count; i++)
+            if (!IsSystem(typeof(T)))
             {
-                var activePlatform = ActivePlatforms[i].GetType();
+                var platforms = new List<IMixedRealityPlatform>();
 
-                for (var j = 0; j < runtimePlatforms?.Count; j++)
+                Debug.Assert(ActivePlatforms.Count > 0);
+
+                for (var i = 0; i < ActivePlatforms.Count; i++)
                 {
-                    var runtimePlatform = runtimePlatforms[j].GetType();
+                    var activePlatform = ActivePlatforms[i].GetType();
 
-                    if (activePlatform == runtimePlatform)
+                    for (var j = 0; j < runtimePlatforms?.Count; j++)
                     {
-                        platforms.Add(runtimePlatforms[j]);
-                        break;
+                        var runtimePlatform = runtimePlatforms[j].GetType();
+
+                        if (activePlatform == runtimePlatform)
+                        {
+                            platforms.Add(runtimePlatforms[j]);
+                            break;
+                        }
                     }
                 }
-            }
 
-            if (platforms.Count == 0)
-            {
-                if (runtimePlatforms == null ||
-                    runtimePlatforms.Count == 0)
+                if (platforms.Count == 0)
                 {
-                    Debug.LogWarning($"No runtime platforms defined for the {concreteType?.Name} service.");
+                    if (runtimePlatforms == null ||
+                        runtimePlatforms.Count == 0)
+                    {
+                        Debug.LogWarning($"No runtime platforms defined for the {concreteType?.Name} service.");
+                    }
+
+                    // We return true so we don't raise en error.
+                    // Even though we did not register the service,
+                    // it's expected that this is the intended behavior
+                    // when there isn't a valid platform to run the service on.
+                    return true;
                 }
 
-                // We return true so we don't raise en error.
-                // Even though we did not register the service,
-                // it's expected that this is the intended behavior
-                // when there isn't a valid platform to run the service on.
-                return true;
-            }
+                if (concreteType == null)
+                {
+                    Debug.LogError($"Unable to register a service with a null concrete {typeof(T).Name} type.");
+                    return false;
+                }
 
-            if (concreteType == null)
-            {
-                Debug.LogError($"Unable to register a service with a null concrete {typeof(T).Name} type.");
-                return false;
+                if (Application.isEditor &&
+                    !CurrentBuildTargetPlatform.IsBuildTargetActive(platforms))
+                {
+                    // We return true so we don't raise en error.
+                    // Even though we did not register the service,
+                    // it's expected that this is the intended behavior
+                    // when there isn't a valid build target active to run the service on.
+                    return true;
+                }
             }
-
-            if (Application.isEditor &&
-                !CurrentBuildTargetPlatform.IsBuildTargetActive(platforms))
+            else
             {
-                // We return true so we don't raise en error.
-                // Even though we did not register the service,
-                // it's expected that this is the intended behavior
-                // when there isn't a valid build target active to run the service on.
-                return true;
+                if (concreteType == null)
+                {
+                    Debug.LogError($"Unable to register a service with a null concrete {typeof(T).Name} type.");
+                    return false;
+                }
             }
 
             if (!typeof(IMixedRealityService).IsAssignableFrom(concreteType))
@@ -985,9 +907,19 @@ namespace XRTK.Services
                 return false;
             }
 
+            IMixedRealityService serviceInstance;
+
             try
             {
-                serviceInstance = Activator.CreateInstance(concreteType, args) as IMixedRealityService;
+                if (IsSystem(typeof(T)))
+                {
+                    var profile = args[2];
+                    serviceInstance = Activator.CreateInstance(concreteType, profile) as IMixedRealityService;
+                }
+                else
+                {
+                    serviceInstance = Activator.CreateInstance(concreteType, args) as IMixedRealityService;
+                }
             }
             catch (System.Reflection.TargetInvocationException e)
             {
@@ -1000,7 +932,10 @@ namespace XRTK.Services
                 return false;
             }
 
-            if (serviceInstance == null)
+            service = (T)serviceInstance;
+
+            if (service == null ||
+                serviceInstance == null)
             {
                 Debug.LogError($"Failed to create a valid instance of {concreteType.Name}!");
                 return false;
@@ -1022,6 +957,8 @@ namespace XRTK.Services
                 Debug.LogWarning($"Unable to add a {interfaceType.Name} service with a null instance.");
                 return false;
             }
+
+            interfaceType = serviceInstance.GetType().FindMixedRealityServiceInterfaceType(interfaceType);
 
             if (!interfaceType.IsInstanceOfType(serviceInstance))
             {
@@ -1045,7 +982,16 @@ namespace XRTK.Services
 
             if (IsSystem(interfaceType))
             {
-                activeSystems.Add(interfaceType, serviceInstance);
+                try
+                {
+                    activeSystems.Add(interfaceType, serviceInstance as IMixedRealitySystem);
+                }
+                catch (ArgumentException)
+                {
+                    preExistingService = GetService(interfaceType, false);
+                    Debug.LogError($"There's already a {interfaceType.Name}.{preExistingService.Name} registered!");
+                    return false;
+                }
             }
             else if (typeof(IMixedRealityService).IsAssignableFrom(interfaceType))
             {
@@ -1665,47 +1611,6 @@ namespace XRTK.Services
         }
 
         /// <summary>
-        /// Generic function used to interrogate the Mixed Reality Toolkit active system registry for the existence of a core system.
-        /// </summary>
-        /// <typeparam name="T">The interface type for the system to be retrieved.  E.G. InputSystem, BoundarySystem.</typeparam>
-        /// <remarks>
-        /// Note: type should be the Interface of the system to be retrieved and not the concrete class itself.
-        /// </remarks>
-        /// <returns>True, there is a system registered with the selected interface, False, no system found for that interface.</returns>
-        public static bool IsSystemRegistered<T>() where T : IMixedRealityService
-        {
-            try
-            {
-                return activeSystems.TryGetValue(typeof(T), out _);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        private static bool IsSystem(Type concreteType)
-        {
-            if (concreteType == null)
-            {
-                Debug.LogError($"{nameof(concreteType)} is null.");
-                return false;
-            }
-
-            return typeof(IMixedRealitySystem).IsAssignableFrom(concreteType);
-        }
-
-        private static void ClearCoreSystemCache()
-        {
-            cameraSystem = null;
-            inputSystem = null;
-            teleportSystem = null;
-            boundarySystem = null;
-            spatialAwarenessSystem = null;
-            diagnosticsSystem = null;
-        }
-
-        /// <summary>
         /// Generic function used to retrieve a service from the Mixed Reality Toolkit active service registry
         /// </summary>
         /// <param name="showLogs">Should the logs show when services cannot be found?</param>
@@ -1799,8 +1704,10 @@ namespace XRTK.Services
 
             if (IsSystem(interfaceType))
             {
-                if (activeSystems.TryGetValue(interfaceType, out serviceInstance))
+                if (activeSystems.TryGetValue(interfaceType, out var systemInstance))
                 {
+                    serviceInstance = systemInstance;
+
                     if (CheckServiceMatch(interfaceType, serviceName, interfaceType, serviceInstance))
                     {
                         return true;
@@ -1908,403 +1815,147 @@ namespace XRTK.Services
 
         #endregion Service Utilities
 
+        #region System Utilities
+
+        /// <summary>
+        /// Generic function used to interrogate the Mixed Reality Toolkit active system registry for the existence of a core system.
+        /// </summary>
+        /// <typeparam name="T">The interface type for the system to be retrieved.  E.G. InputSystem, BoundarySystem.</typeparam>
+        /// <remarks>
+        /// Note: type should be the Interface of the system to be retrieved and not the concrete class itself.
+        /// </remarks>
+        /// <returns>True, there is a system registered with the selected interface, False, no system found for that interface.</returns>
+        public static bool IsSystemRegistered<T>() where T : IMixedRealitySystem
+        {
+            try
+            {
+                return activeSystems.TryGetValue(typeof(T), out _);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Is the <see cref="IMixedRealitySystem"/> enabled in the <see cref="ActiveProfile"/>?
+        /// </summary>
+        /// <typeparam name="T"><see cref="IMixedRealitySystem"/> to check.</typeparam>
+        /// <returns>True, if the system is enabled in the <see cref="ActiveProfile"/>, otherwise false.</returns>
+        public static bool IsSystemEnabled<T>() where T : IMixedRealitySystem
+        {
+            if (HasActiveProfile)
+            {
+                foreach (var configuration in instance.activeProfile.RegisteredServiceConfigurations)
+                {
+                    if (typeof(T).IsAssignableFrom(configuration.InstancedType.Type.FindMixedRealityServiceInterfaceType(typeof(T))) &&
+                        configuration.Enabled)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Try to get the <see cref="TProfile"/> of the <see cref="TSystem"/>
+        /// </summary>
+        /// <typeparam name="TSystem">The <see cref="IMixedRealitySystem"/> type to get the <see cref="TProfile"/> for.</typeparam>
+        /// <typeparam name="TProfile">The <see cref="BaseMixedRealityProfile"/> type to get for the <see cref="TSystem"/>.</typeparam>
+        /// <param name="profile">The profile instance.</param>
+        /// <returns>True if a <see cref="TSystem"/> type is matched and a valid <see cref="TProfile"/> is found, otherwise false.</returns>
+        public static bool TryGetSystemProfile<TSystem, TProfile>(out TProfile profile)
+            where TSystem : IMixedRealitySystem
+            where TProfile : BaseMixedRealityProfile
+        {
+            if (HasActiveProfile)
+            {
+                foreach (var configuration in instance.activeProfile.RegisteredServiceConfigurations)
+                {
+                    if (typeof(TSystem).IsAssignableFrom(configuration.InstancedType.Type.FindMixedRealityServiceInterfaceType(typeof(TSystem))))
+                    {
+                        profile = (TProfile)configuration.Profile;
+                        return profile != null;
+                    }
+                }
+            }
+
+            profile = null;
+            return false;
+        }
+
+        private static bool IsSystem(Type concreteType)
+        {
+            if (concreteType == null)
+            {
+                Debug.LogError($"{nameof(concreteType)} is null.");
+                return false;
+            }
+
+            return typeof(IMixedRealitySystem).IsAssignableFrom(concreteType);
+        }
+
+        private static readonly HashSet<Type> SearchedSystemTypes = new HashSet<Type>();
+        private static readonly Dictionary<Type, IMixedRealitySystem> SystemCache = new Dictionary<Type, IMixedRealitySystem>();
+
+        public static T GetSystem<T>() where T : IMixedRealitySystem
+        {
+            if (!IsInitialized ||
+                IsApplicationQuitting ||
+                instance.activeProfile.IsNull())
+            {
+                return default;
+            }
+
+            T system = default;
+
+            if (!SystemCache.TryGetValue(typeof(T), out var cachedSystem))
+            {
+                if (IsSystemRegistered<T>())
+                {
+                    var hasSearched = SearchedSystemTypes.Contains(typeof(T));
+
+                    if (TryGetService(out system, !hasSearched))
+                    {
+                        SystemCache.Add(typeof(T), system);
+                    }
+                    else
+                    {
+                        if (!hasSearched)
+                        {
+                            SearchedSystemTypes.Add(typeof(T));
+                        }
+                    }
+                }
+            }
+            else
+            {
+                system = (T)cachedSystem;
+            }
+
+            return system;
+        }
+
+        public static async Task<T> GetSystemAsync<T>(int timeout = 10) where T : IMixedRealitySystem
+            => await GetSystem<T>().WaitUntil(system => system != null, timeout);
+
+        public static bool TryGetSystem<T>(out T system) where T : IMixedRealitySystem
+        {
+            system = GetSystem<T>();
+            return system != null;
+        }
+
+        private static void ClearSystemCache()
+        {
+            SystemCache.Clear();
+            SearchedSystemTypes.Clear();
+        }
+
+        #endregion System Utilities
+
         #endregion Service Container Management
-
-        #region Core System Accessors
-
-        #region Camera System
-
-        private static IMixedRealityCameraSystem cameraSystem = null;
-
-        /// <summary>
-        /// The current <see cref="IMixedRealityCameraSystem"/> registered with the Mixed Reality Toolkit.
-        /// </summary>
-        public static IMixedRealityCameraSystem CameraSystem
-        {
-            get
-            {
-                if (!IsInitialized ||
-                    IsApplicationQuitting ||
-                    instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsCameraSystemEnabled)
-                {
-                    return null;
-                }
-
-                if (cameraSystem != null)
-                {
-                    return cameraSystem;
-                }
-
-                cameraSystem = GetService<IMixedRealityCameraSystem>(showLogs: logCameraSystem);
-                // If we found a valid system, then we turn logging back on for the next time we need to search.
-                // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
-                logCameraSystem = cameraSystem != null;
-                return cameraSystem;
-            }
-        }
-
-        private static bool logCameraSystem = true;
-
-        /// <summary>
-        /// Waits for the <see cref="IMixedRealityCameraSystem"/> to be valid.
-        /// </summary>
-        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
-        /// <returns>True, when the input system is valid, otherwise false.</returns>
-        public static async Task<bool> ValidateCameraSystemAsync(int timeout = 10)
-        {
-            try
-            {
-                await CameraSystem.WaitUntil(system => system != null, timeout);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-                return false;
-            }
-
-            return true;
-        }
-
-        #endregion Camera System
-
-        #region Input System
-
-        private static IMixedRealityInputSystem inputSystem = null;
-
-        /// <summary>
-        /// The current <see cref="IMixedRealityInputSystem"/> registered with the Mixed Reality Toolkit.
-        /// </summary>
-        public static IMixedRealityInputSystem InputSystem
-        {
-            get
-            {
-                if (!IsInitialized ||
-                    IsApplicationQuitting ||
-                    instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsInputSystemEnabled)
-                {
-                    return null;
-                }
-
-                if (inputSystem != null)
-                {
-                    return inputSystem;
-                }
-
-                inputSystem = GetService<IMixedRealityInputSystem>(showLogs: logInputSystem);
-                // If we found a valid system, then we turn logging back on for the next time we need to search.
-                // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
-                logInputSystem = inputSystem != null;
-                return inputSystem;
-            }
-        }
-
-        private static bool logInputSystem = true;
-
-        /// <summary>
-        /// Waits for the <see cref="IMixedRealityInputSystem"/> to be valid.
-        /// </summary>
-        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
-        /// <returns>True, when the input system is valid, otherwise false.</returns>
-        public static async Task<bool> ValidateInputSystemAsync(int timeout = 10)
-        {
-            try
-            {
-                await InputSystem.WaitUntil(system => system != null, timeout);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-                return false;
-            }
-
-            return true;
-        }
-
-        #endregion Input System
-
-        #region Boundary System
-
-        private static IMixedRealityBoundarySystem boundarySystem = null;
-
-        /// <summary>
-        /// The current <see cref="IMixedRealityBoundarySystem"/> registered with the Mixed Reality Toolkit.
-        /// </summary>
-        public static IMixedRealityBoundarySystem BoundarySystem
-        {
-            get
-            {
-                if (!IsInitialized ||
-                    IsApplicationQuitting ||
-                    instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsBoundarySystemEnabled)
-                {
-                    return null;
-                }
-
-                if (boundarySystem != null)
-                {
-                    return boundarySystem;
-                }
-
-                boundarySystem = GetService<IMixedRealityBoundarySystem>(showLogs: logBoundarySystem);
-                // If we found a valid system, then we turn logging back on for the next time we need to search.
-                // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
-                logBoundarySystem = boundarySystem != null;
-                return boundarySystem;
-            }
-        }
-
-        private static bool logBoundarySystem = true;
-
-        /// <summary>
-        /// Waits for the <see cref="IMixedRealityBoundarySystem"/> to be valid.
-        /// </summary>
-        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
-        /// <returns>True, when the input system is valid, otherwise false.</returns>
-        public static async Task<bool> ValidateBoundarySystemAsync(int timeout = 10)
-        {
-            try
-            {
-                await BoundarySystem.WaitUntil(system => system != null, timeout);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-                return false;
-            }
-
-            return true;
-        }
-
-        #endregion Boundary System
-
-        #region Spatial Awareness System
-
-        private static IMixedRealitySpatialAwarenessSystem spatialAwarenessSystem = null;
-
-        /// <summary>
-        /// The current <see cref="IMixedRealitySpatialAwarenessSystem"/> registered with the Mixed Reality Toolkit.
-        /// </summary>
-        public static IMixedRealitySpatialAwarenessSystem SpatialAwarenessSystem
-        {
-            get
-            {
-                if (!IsInitialized ||
-                    IsApplicationQuitting ||
-                    instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsSpatialAwarenessSystemEnabled)
-                {
-                    return null;
-                }
-
-                if (spatialAwarenessSystem != null)
-                {
-                    return spatialAwarenessSystem;
-                }
-
-                spatialAwarenessSystem = GetService<IMixedRealitySpatialAwarenessSystem>(showLogs: logSpatialAwarenessSystem);
-                // If we found a valid system, then we turn logging back on for the next time we need to search.
-                // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
-                logSpatialAwarenessSystem = spatialAwarenessSystem != null;
-                return spatialAwarenessSystem;
-            }
-        }
-
-        private static bool logSpatialAwarenessSystem = true;
-
-        /// <summary>
-        /// Waits for the <see cref="IMixedRealitySpatialAwarenessSystem"/> to be valid.
-        /// </summary>
-        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
-        /// <returns>True, when the input system is valid, otherwise false.</returns>
-        public static async Task<bool> ValidateSpatialAwarenessSystemAsync(int timeout = 10)
-        {
-            try
-            {
-                await SpatialAwarenessSystem.WaitUntil(system => system != null, timeout);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-                return false;
-            }
-
-            return true;
-        }
-
-        #endregion Spatial Awareness System
-
-        #region Teleport System
-
-        private static IMixedRealityTeleportSystem teleportSystem = null;
-
-        /// <summary>
-        /// The current <see cref="IMixedRealityTeleportSystem"/> registered with the Mixed Reality Toolkit.
-        /// </summary>
-        public static IMixedRealityTeleportSystem TeleportSystem
-        {
-            get
-            {
-                if (!IsInitialized ||
-                    IsApplicationQuitting ||
-                    instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsTeleportSystemEnabled)
-                {
-                    return null;
-                }
-
-                if (teleportSystem != null)
-                {
-                    return teleportSystem;
-                }
-
-                teleportSystem = GetService<IMixedRealityTeleportSystem>(showLogs: logTeleportSystem);
-                // If we found a valid system, then we turn logging back on for the next time we need to search.
-                // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
-                logTeleportSystem = teleportSystem != null;
-                return teleportSystem;
-            }
-        }
-
-        private static bool logTeleportSystem = true;
-
-        /// <summary>
-        /// Waits for the <see cref="IMixedRealityTeleportSystem"/> to be valid.
-        /// </summary>
-        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
-        /// <returns>True, when the input system is valid, otherwise false.</returns>
-        public static async Task<bool> ValidateTeleportSystemAsync(int timeout = 10)
-        {
-            try
-            {
-                await TeleportSystem.WaitUntil(system => system != null, timeout);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-                return false;
-            }
-
-            return true;
-        }
-
-        #endregion Teleport System
-
-        #region Networking System
-
-        private static IMixedRealityNetworkingSystem networkingSystem = null;
-
-        /// <summary>
-        /// The current <see cref="IMixedRealityNetworkingSystem"/> registered with the Mixed Reality Toolkit.
-        /// </summary>
-        public static IMixedRealityNetworkingSystem NetworkingSystem
-        {
-            get
-            {
-                if (!IsInitialized ||
-                    IsApplicationQuitting ||
-                    instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsNetworkingSystemEnabled)
-                {
-                    return null;
-                }
-
-                if (networkingSystem != null)
-                {
-                    return networkingSystem;
-                }
-
-                networkingSystem = GetService<IMixedRealityNetworkingSystem>(showLogs: logNetworkingSystem);
-                // If we found a valid system, then we turn logging back on for the next time we need to search.
-                // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
-                logNetworkingSystem = networkingSystem != null;
-                return networkingSystem;
-            }
-        }
-
-        private static bool logNetworkingSystem = true;
-
-        /// <summary>
-        /// Waits for the <see cref="IMixedRealityNetworkingSystem"/> to be valid.
-        /// </summary>
-        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
-        /// <returns>True, when the input system is valid, otherwise false.</returns>
-        public static async Task<bool> ValidateNetworkingSystemAsync(int timeout = 10)
-        {
-            try
-            {
-                await NetworkingSystem.WaitUntil(system => system != null, timeout);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-                return false;
-            }
-
-            return true;
-        }
-
-        #endregion Networking System
-
-        #region Diagnostics System
-
-        private static IMixedRealityDiagnosticsSystem diagnosticsSystem = null;
-
-        /// <summary>
-        /// The current <see cref="IMixedRealityDiagnosticsSystem"/> registered with the Mixed Reality Toolkit.
-        /// </summary>
-        public static IMixedRealityDiagnosticsSystem DiagnosticsSystem
-        {
-            get
-            {
-                if (!IsInitialized ||
-                    IsApplicationQuitting ||
-                    instance.activeProfile.IsNull() ||
-                   !instance.activeProfile.IsNull() && !instance.activeProfile.IsDiagnosticsSystemEnabled)
-                {
-                    return null;
-                }
-
-                if (diagnosticsSystem != null)
-                {
-                    return diagnosticsSystem;
-                }
-
-                diagnosticsSystem = GetService<IMixedRealityDiagnosticsSystem>(showLogs: logDiagnosticsSystem);
-                // If we found a valid system, then we turn logging back on for the next time we need to search.
-                // If we didn't find a valid system, then we stop logging so we don't spam the debug window.
-                logDiagnosticsSystem = diagnosticsSystem != null;
-                return diagnosticsSystem;
-            }
-        }
-
-        private static bool logDiagnosticsSystem = true;
-
-        /// <summary>
-        /// Waits for the <see cref="IMixedRealityDiagnosticsSystem"/> to be valid.
-        /// </summary>
-        /// <param name="timeout">The number of seconds to wait for validation before timing out.</param>
-        /// <returns>True, when the input system is valid, otherwise false.</returns>
-        public static async Task<bool> ValidateDiagnosticsSystemAsync(int timeout = 10)
-        {
-            try
-            {
-                await DiagnosticsSystem.WaitUntil(system => system != null, timeout);
-            }
-            catch (Exception e)
-            {
-                Debug.LogError(e);
-                return false;
-            }
-
-            return true;
-        }
-
-        #endregion Diagnostics System
-
-        #endregion Core System Accessors
 
         #region IDisposable Implementation
 

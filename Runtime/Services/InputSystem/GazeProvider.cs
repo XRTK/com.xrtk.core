@@ -1,9 +1,12 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Definitions.InputSystem;
 using XRTK.EventDatum.Input;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.InputSystem.Handlers;
 using XRTK.Interfaces.Providers.Controllers;
@@ -147,6 +150,12 @@ namespace XRTK.Services.InputSystem
 
         private Vector3 lastHeadPosition = Vector3.zero;
 
+        private IMixedRealityInputSystem inputSystem = null;
+
+        protected IMixedRealityInputSystem InputSystem
+            => inputSystem ?? (inputSystem = MixedRealityToolkit.GetSystem<IMixedRealityInputSystem>());
+
+
         #region InternalGazePointer Class
 
         private class InternalGazePointer : GenericPointer
@@ -270,10 +279,9 @@ namespace XRTK.Services.InputSystem
         protected virtual void OnEnable()
         {
             if (!lateInitialize &&
-                MixedRealityToolkit.IsInitialized &&
-                MixedRealityToolkit.InputSystem != null)
+                MixedRealityToolkit.IsInitialized)
             {
-                MixedRealityToolkit.InputSystem.Register(gameObject);
+                InputSystem?.Register(gameObject);
             }
 
             if (!delayInitialization)
@@ -285,14 +293,23 @@ namespace XRTK.Services.InputSystem
 
         protected virtual async void Start()
         {
-            if (lateInitialize &&
-                await MixedRealityToolkit.ValidateInputSystemAsync())
+            if (lateInitialize)
             {
+                try
+                {
+                    inputSystem = await MixedRealityToolkit.GetSystemAsync<IMixedRealityInputSystem>();
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError(e);
+                    return;
+                }
+
                 // We've been destroyed during the await.
                 if (this == null) { return; }
 
                 lateInitialize = false;
-                MixedRealityToolkit.InputSystem.Register(gameObject);
+                InputSystem.Register(gameObject);
 
                 GazePointer.BaseCursor?.SetVisibility(true);
 
@@ -354,14 +371,14 @@ namespace XRTK.Services.InputSystem
 
         protected virtual void OnDisable()
         {
-            MixedRealityToolkit.InputSystem?.Unregister(gameObject);
+            InputSystem?.Unregister(gameObject);
             GazePointer?.BaseCursor?.SetVisibility(false);
-            MixedRealityToolkit.InputSystem?.RaiseSourceLost(GazeInputSource);
+            InputSystem?.RaiseSourceLost(GazeInputSource);
         }
 
         protected void OnDestroy()
         {
-            MixedRealityToolkit.InputSystem?.Unregister(gameObject);
+            InputSystem?.Unregister(gameObject);
         }
 
         #endregion MonoBehaviour Implementation
@@ -375,8 +392,8 @@ namespace XRTK.Services.InputSystem
             {
                 if (eventData.InputSource.Pointers[i].PointerId == GazePointer.PointerId)
                 {
-                    MixedRealityToolkit.InputSystem.RaisePointerUp(gazePointer, eventData.MixedRealityInputAction);
-                    MixedRealityToolkit.InputSystem.RaisePointerClicked(gazePointer, eventData.MixedRealityInputAction);
+                    InputSystem.RaisePointerUp(gazePointer, eventData.MixedRealityInputAction);
+                    InputSystem.RaisePointerClicked(gazePointer, eventData.MixedRealityInputAction);
                     return;
                 }
             }
@@ -389,7 +406,7 @@ namespace XRTK.Services.InputSystem
             {
                 if (eventData.InputSource.Pointers[i].PointerId == GazePointer.PointerId)
                 {
-                    MixedRealityToolkit.InputSystem.RaisePointerDown(gazePointer, eventData.MixedRealityInputAction, eventData.InputSource);
+                    InputSystem.RaisePointerDown(gazePointer, eventData.MixedRealityInputAction, eventData.InputSource);
                     return;
                 }
             }
@@ -401,12 +418,12 @@ namespace XRTK.Services.InputSystem
 
         private IMixedRealityPointer InitializeGazePointer()
         {
-            if (MixedRealityToolkit.InputSystem == null) { return null; }
+            if (InputSystem == null) { return null; }
 
             if (gazeTransform == null)
             {
-                gazeTransform = MixedRealityToolkit.CameraSystem != null
-                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.CameraTransform
+                gazeTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                    ? cameraSystem.MainCameraRig.CameraTransform
                     : CameraCache.Main.transform;
             }
 
@@ -425,10 +442,10 @@ namespace XRTK.Services.InputSystem
             gazePointer = new InternalGazePointer(this, "Gaze Pointer", null, raycastLayerMasks, maxGazeCollisionDistance, gazeTransform, stabilizer);
 
             if (GazeCursor == null &&
-                MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile != null &&
-                MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.GazeCursorPrefab != null)
+                MixedRealityToolkit.TryGetSystemProfile<IMixedRealityInputSystem, MixedRealityInputSystemProfile>(out var inputSystemProfile) &&
+                inputSystemProfile.GazeCursorPrefab != null)
             {
-                var cursor = Instantiate(MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.GazeCursorPrefab, gazeTransform.parent);
+                var cursor = Instantiate(inputSystemProfile.GazeCursorPrefab, gazeTransform.parent);
                 SetGazeCursor(cursor);
             }
 
@@ -437,12 +454,21 @@ namespace XRTK.Services.InputSystem
 
         private async void RaiseSourceDetected()
         {
-            if (await MixedRealityToolkit.ValidateInputSystemAsync())
+            try
             {
-                if (this == null) { return; }
-                MixedRealityToolkit.InputSystem.RaiseSourceDetected(GazeInputSource);
-                GazePointer.BaseCursor?.SetVisibility(true);
+                inputSystem = await MixedRealityToolkit.GetSystemAsync<IMixedRealityInputSystem>();
             }
+            catch (Exception e)
+            {
+                Debug.LogError(e);
+                return;
+            }
+
+            // We've been destroyed during the await.
+            if (this == null) { return; }
+
+            InputSystem.RaiseSourceDetected(GazeInputSource);
+            GazePointer.BaseCursor?.SetVisibility(true);
         }
 
         /// <summary>

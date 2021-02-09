@@ -8,7 +8,6 @@ using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
-using XRTK.Services;
 using XRTK.Utilities;
 
 namespace XRTK.Providers.Controllers.Simulation
@@ -197,7 +196,7 @@ namespace XRTK.Providers.Controllers.Simulation
         {
             if (TryGetController(handedness, out var controller))
             {
-                MixedRealityToolkit.InputSystem?.RaiseSourceLost(controller.InputSource, controller);
+                InputSystem?.RaiseSourceLost(controller.InputSource, controller);
                 RemoveController(controller);
             }
         }

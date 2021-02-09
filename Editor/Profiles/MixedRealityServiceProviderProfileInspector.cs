@@ -8,10 +8,12 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Definitions.Platforms;
 using XRTK.Definitions.Utilities;
 using XRTK.Editor.Extensions;
 using XRTK.Editor.PropertyDrawers;
 using XRTK.Extensions;
+using XRTK.Interfaces;
 using XRTK.Services;
 
 namespace XRTK.Editor.Profiles
@@ -19,11 +21,12 @@ namespace XRTK.Editor.Profiles
     [CustomEditor(typeof(BaseMixedRealityServiceProfile<>), true, isFallback = true)]
     public class MixedRealityServiceProfileInspector : BaseMixedRealityProfileInspector
     {
+        private static readonly Type AllPlatformsType = typeof(AllPlatforms);
+        private static readonly Guid AllPlatformsGuid = AllPlatformsType.GUID;
         private readonly GUIContent profileContent = new GUIContent("Profile", "The settings profile for this service.");
         private ReorderableList configurationList;
         private int currentlySelectedConfigurationOption;
 
-        [SerializeField]
         private SerializedProperty configurations; // Cannot be auto property bc field is serialized.
 
         protected SerializedProperty Configurations => configurations;
@@ -34,6 +37,8 @@ namespace XRTK.Editor.Profiles
         /// <see cref="OnEnable"/> was called to override.
         /// </summary>
         protected Type ServiceConstraint { get; set; } = null;
+
+        private bool IsSystemConfiguration => typeof(IMixedRealitySystem).IsAssignableFrom(ServiceConstraint);
 
         private List<Tuple<bool, bool>> configListHeightFlags;
 
@@ -69,6 +74,11 @@ namespace XRTK.Editor.Profiles
         {
             RenderHeader();
             EditorGUILayout.Space();
+            RenderConfigurationOptions();
+        }
+
+        protected void RenderConfigurationOptions()
+        {
             configurations.isExpanded = EditorGUILayoutExtensions.FoldoutWithBoldLabel(configurations.isExpanded, new GUIContent($"{ServiceConstraint.Name} Configuration Options"));
 
             if (configurations.isExpanded)
@@ -98,7 +108,9 @@ namespace XRTK.Editor.Profiles
             var (isExpanded, hasProfile) = configListHeightFlags[index];
             var modifier = isExpanded
                 ? hasProfile
-                    ? 5.5f
+                    ? IsSystemConfiguration
+                        ? 4f
+                        : 5.5f
                     : 4f
                 : 1.5f;
             return EditorGUIUtility.singleLineHeight * modifier;
@@ -124,7 +136,6 @@ namespace XRTK.Editor.Profiles
             var configurationProfileProperty = configurationProperty.FindPropertyRelative("profile");
 
             var hasProfile = false;
-
             Type profileType = null;
 
             if (systemTypeReference.Type != null)
@@ -197,15 +208,46 @@ namespace XRTK.Editor.Profiles
             {
                 TypeReferencePropertyDrawer.FilterConstraintOverride = type =>
                 {
-                    return !type.IsAbstract &&
-                           type.GetInterfaces().Any(interfaceType => interfaceType == ServiceConstraint);
+                    var isValid = !type.IsAbstract &&
+                                  type.GetInterfaces().Any(interfaceType => interfaceType == ServiceConstraint);
+
+                    return isValid && (!IsSystemConfiguration || MixedRealityToolkit.Instance.ActiveProfile.RegisteredServiceConfigurations.All(configuration => configuration.InstancedType.Type != type));
                 };
                 TypeReferencePropertyDrawer.CreateNewTypeOverride = ServiceConstraint;
+
+                EditorGUI.BeginChangeCheck();
                 EditorGUI.PropertyField(typeRect, instanceTypeProperty);
                 systemTypeReference = new SystemType(instanceTypeProperty.FindPropertyRelative("reference").stringValue);
 
-                EditorGUI.PropertyField(runtimeRect, platformEntriesProperty);
-                runtimePlatformProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
+                if (EditorGUI.EndChangeCheck())
+                {
+                    if (systemTypeReference.Type == null)
+                    {
+                        nameProperty.stringValue = string.Empty;
+                        configurationProfileProperty.objectReferenceValue = null;
+                    }
+                    else
+                    {
+                        nameProperty.stringValue = systemTypeReference.Type.Name.ToProperCase();
+
+                        if (IsSystemConfiguration)
+                        {
+                            configurationProfileProperty.objectReferenceValue = null;
+                        }
+                    }
+                }
+
+                if (!IsSystemConfiguration)
+                {
+                    EditorGUI.PropertyField(runtimeRect, platformEntriesProperty);
+                    runtimePlatformProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
+                }
+                else
+                {
+                    runtimePlatformProperty = platformEntriesProperty.FindPropertyRelative("runtimePlatforms");
+                    runtimePlatformProperty.arraySize = 1;
+                    runtimePlatformProperty.GetArrayElementAtIndex(0).FindPropertyRelative("reference").stringValue = AllPlatformsGuid.ToString();
+                }
 
                 if (hasProfile)
                 {
@@ -232,7 +274,7 @@ namespace XRTK.Editor.Profiles
 
                 if (MixedRealityToolkit.IsInitialized &&
                     runtimePlatformProperty.arraySize > 0 &&
-                    systemTypeReference?.Type != null)
+                    systemTypeReference.Type != null)
                 {
                     MixedRealityToolkit.Instance.ResetProfile(MixedRealityToolkit.Instance.ActiveProfile);
                 }

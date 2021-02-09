@@ -7,6 +7,7 @@ using XRTK.Definitions.DiagnosticsSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.DiagnosticsSystem;
 using XRTK.Extensions;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.DiagnosticsSystem;
 using XRTK.Interfaces.DiagnosticsSystem.Handlers;
 using XRTK.Utilities;
@@ -35,6 +36,22 @@ namespace XRTK.Services.DiagnosticsSystem
         private FrameEventData frameEventData;
         private MemoryEventData memoryEventData;
         private ConsoleEventData consoleEventData;
+
+        private Transform playspaceTransform = null;
+
+        private Transform PlayspaceTransform
+        {
+            get
+            {
+                if (playspaceTransform == null)
+                {
+                    playspaceTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                        ? cameraSystem.MainCameraRig.PlayspaceTransform
+                        : CameraCache.Main.transform.parent;
+                }
+                return playspaceTransform;
+            }
+        }
 
         #region IMixedRealityService Implementation
 
@@ -112,10 +129,7 @@ namespace XRTK.Services.DiagnosticsSystem
                 if (diagnosticsRoot.IsNull())
                 {
                     diagnosticsRoot = new GameObject("Diagnostics").transform;
-                    var playspaceTransform = MixedRealityToolkit.CameraSystem != null
-                        ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform
-                        : CameraCache.Main.transform.parent;
-                    diagnosticsRoot.transform.SetParent(playspaceTransform, false);
+                    diagnosticsRoot.transform.SetParent(PlayspaceTransform, false);
                 }
 
                 return diagnosticsRoot;

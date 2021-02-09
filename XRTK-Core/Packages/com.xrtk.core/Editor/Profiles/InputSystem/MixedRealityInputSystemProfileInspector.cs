@@ -34,6 +34,7 @@ namespace XRTK.Editor.Profiles.InputSystem
         private SerializedProperty drawDebugPointingRays;
         private SerializedProperty debugPointingRayColors;
 
+        private SerializedProperty gripThreshold;
         private SerializedProperty renderingMode;
         private SerializedProperty handPhysicsEnabled;
         private SerializedProperty useTriggers;
@@ -65,6 +66,7 @@ namespace XRTK.Editor.Profiles.InputSystem
             drawDebugPointingRays = serializedObject.FindProperty(nameof(drawDebugPointingRays));
             debugPointingRayColors = serializedObject.FindProperty(nameof(debugPointingRayColors));
 
+            gripThreshold = serializedObject.FindProperty(nameof(gripThreshold));
             renderingMode = serializedObject.FindProperty(nameof(renderingMode));
             handPhysicsEnabled = serializedObject.FindProperty(nameof(handPhysicsEnabled));
             useTriggers = serializedObject.FindProperty(nameof(useTriggers));
@@ -163,6 +165,9 @@ namespace XRTK.Editor.Profiles.InputSystem
                 EditorGUILayout.HelpBox("Global hand tracking options applied to all platforms that support hand tracking. You may override these globals per platform in the platform's hand controller data provider profile.", MessageType.Info);
                 EditorGUI.indentLevel++;
                 EditorGUILayout.Space();
+                EditorGUILayout.LabelField("General Hand Settings", EditorStyles.boldLabel);
+                EditorGUILayout.PropertyField(gripThreshold);
+                EditorGUILayout.Space();
                 EditorGUILayout.LabelField("Hand Rendering Settings", EditorStyles.boldLabel);
                 EditorGUILayout.PropertyField(renderingMode);
                 EditorGUILayout.Space();
@@ -195,6 +200,8 @@ namespace XRTK.Editor.Profiles.InputSystem
                     {
                         inspector.RenderControllerMappingButton(mappingProfile);
                     }
+
+                    profileEditor.Destroy();
                 }
             }
 

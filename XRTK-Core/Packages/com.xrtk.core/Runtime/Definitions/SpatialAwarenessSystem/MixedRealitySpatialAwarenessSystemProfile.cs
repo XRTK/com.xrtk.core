@@ -1,6 +1,7 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using UnityEngine;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.Providers.SpatialObservers;
@@ -14,6 +15,12 @@ namespace XRTK.Definitions.SpatialAwarenessSystem
     [CreateAssetMenu(menuName = "Mixed Reality Toolkit/Spatial Awareness System Profile", fileName = "MixedRealitySpatialAwarenessSystemProfile", order = (int)CreateProfileMenuItemIndices.SpatialAwareness)]
     public class MixedRealitySpatialAwarenessSystemProfile : BaseMixedRealityServiceProfile<IMixedRealitySpatialAwarenessDataProvider>
     {
+        public static readonly Tuple<int, string>[] SpatialAwarenessLayers =
+        {
+            new Tuple<int, string>(30, SpatialAwarenessMeshesLayerName),
+            new Tuple<int, string>(31, SpatialAwarenessSurfacesLayerName)
+        };
+
         /// <summary>
         /// The name of the Spatial Awareness Mesh Physics Layer.
         /// </summary>

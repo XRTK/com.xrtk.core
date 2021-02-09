@@ -1,6 +1,7 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections;
 using XRTK.Interfaces.InputSystem;
 
@@ -20,9 +21,16 @@ namespace XRTK.Services.InputSystem.Sources
         /// <param name="pointers"></param>
         public BaseGenericInputSource(string name, IMixedRealityPointer[] pointers = null)
         {
-            SourceId = MixedRealityToolkit.InputSystem.GenerateNewSourceId();
-            SourceName = name;
-            Pointers = pointers ?? new[] { MixedRealityToolkit.InputSystem.GazeProvider.GazePointer };
+            if (MixedRealityToolkit.TryGetSystem<IMixedRealityInputSystem>(out var inputSystem))
+            {
+                SourceId = inputSystem.GenerateNewSourceId();
+                SourceName = name;
+                Pointers = pointers ?? new[] { inputSystem.GazeProvider.GazePointer };
+            }
+            else
+            {
+                throw new ArgumentException($"Failed to find a valid {nameof(IMixedRealityInputSystem)}!");
+            }
         }
 
         /// <inheritdoc />

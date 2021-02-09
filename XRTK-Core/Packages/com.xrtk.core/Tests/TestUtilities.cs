@@ -1,12 +1,14 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Linq;
 using NUnit.Framework;
+using System.Linq;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using XRTK.Definitions;
+using XRTK.Definitions.TeleportSystem;
 using XRTK.Editor.Extensions;
+using XRTK.Interfaces.TeleportSystem;
 using XRTK.Services;
 
 namespace XRTK.Tests
@@ -38,11 +40,13 @@ namespace XRTK.Tests
             Assert.IsFalse(MixedRealityToolkit.HasActiveProfile);
 
             MixedRealityToolkitRootProfile configuration;
+
             if (useDefaultProfile)
             {
                 configuration = GetDefaultMixedRealityProfile<MixedRealityToolkitRootProfile>();
-                Debug.Assert(configuration.LocomotionSystemProfile != null);
-                configuration.LocomotionSystemProfile.TeleportProvider = typeof(TestTeleportProvider);
+                MixedRealityToolkit.TryGetSystemProfile<IMixedRealityTeleportSystem, MixedRealityTeleportSystemProfile>(out var teleportSystemProfile);
+                Debug.Assert(teleportSystemProfile != null);
+                teleportSystemProfile.TeleportProvider = typeof(TestTeleportProvider);
             }
             else
             {
@@ -55,7 +59,7 @@ namespace XRTK.Tests
             Assert.IsTrue(MixedRealityToolkit.IsInitialized);
         }
 
-        public static T GetDefaultMixedRealityProfile<T>() where T : BaseMixedRealityProfile
+        private static T GetDefaultMixedRealityProfile<T>() where T : BaseMixedRealityProfile
         {
             return ScriptableObjectExtensions.GetAllInstances<T>().FirstOrDefault(profile => profile.name.Equals(typeof(T).Name));
         }

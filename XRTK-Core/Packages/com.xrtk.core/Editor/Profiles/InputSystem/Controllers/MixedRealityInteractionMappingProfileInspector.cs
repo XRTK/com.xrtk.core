@@ -197,6 +197,7 @@ namespace XRTK.Editor.Profiles.InputSystem.Controllers
                     processorEditor.serializedObject.ApplyModifiedProperties();
                 }
 
+                processorEditor.Destroy();
                 EditorGUI.indentLevel--;
             }
 

@@ -65,6 +65,7 @@ obj/
 # Jetbrains Rider Generated #
 # ========================= #
 .idea/
+_ReSharper.Caches
 
 # ===================== #
 # Project Specific List #

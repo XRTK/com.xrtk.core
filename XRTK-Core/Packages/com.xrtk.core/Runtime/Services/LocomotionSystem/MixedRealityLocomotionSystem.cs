@@ -8,6 +8,7 @@ using XRTK.Definitions.LocomotionSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.EventDatum.Teleport;
 using XRTK.Extensions;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.LocomotionSystem;
 using XRTK.Utilities;
@@ -72,9 +73,10 @@ namespace XRTK.Services.LocomotionSystem
 
             if (teleportProvider == null)
             {
-                // No provier selected, we'll be using default teleport.
+                // No provider selected, we'll be using default teleport.
                 // Make sure to remove any leftover provider attached to the camera.
-                var component = CameraCache.Main.GetComponent<IMixedRealityTeleportProvider>() as Component;
+                var component = CameraCache.Main.GetComponent(typeof(IMixedRealityTeleportProvider));
+
                 if (!component.IsNull())
                 {
                     if (Application.isPlaying)
@@ -101,7 +103,8 @@ namespace XRTK.Services.LocomotionSystem
 
             if (!Application.isPlaying)
             {
-                var component = CameraCache.Main.GetComponent<IMixedRealityTeleportProvider>() as Component;
+                var component = CameraCache.Main.GetComponent(typeof(IMixedRealityTeleportProvider));
+
                 if (!component.IsNull())
                 {
                     Object.DestroyImmediate(component);
@@ -222,9 +225,9 @@ namespace XRTK.Services.LocomotionSystem
 
         private void PerformDefaultTeleport(TeleportEventData eventData)
         {
-            var cameraTransform = MixedRealityToolkit.CameraSystem != null ?
-                MixedRealityToolkit.CameraSystem.MainCameraRig.CameraTransform :
-                CameraCache.Main.transform;
+            var cameraTransform = MixedRealityToolkit.TryGetSystem<IMixedRealityCameraSystem>(out var cameraSystem)
+                ? cameraSystem.MainCameraRig.CameraTransform
+                : CameraCache.Main.transform;
             var teleportTransform = cameraTransform.parent;
             Debug.Assert(teleportTransform != null,
                 $"{nameof(MixedRealityLocomotionSystem)} without a provider set requires that the camera be parented under another object! Assign a teleport provider in the system profile or fix the camera setup.");

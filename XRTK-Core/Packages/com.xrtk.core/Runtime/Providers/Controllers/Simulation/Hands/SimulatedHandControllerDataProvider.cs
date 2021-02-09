@@ -7,6 +7,7 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Controllers.Simulation.Hands;
 using XRTK.Definitions.Devices;
+using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
 using XRTK.Interfaces.InputSystem;
 using XRTK.Interfaces.Providers.Controllers;
@@ -26,35 +27,42 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
         public SimulatedHandControllerDataProvider(string name, uint priority, SimulatedHandControllerDataProviderProfile profile, IMixedRealityInputSystem parentService)
             : base(name, priority, profile, parentService)
         {
-            var globalSettingsProfile = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile;
+            if (!MixedRealityToolkit.TryGetSystemProfile<IMixedRealityInputSystem, MixedRealityInputSystemProfile>(out var inputSystemProfile))
+            {
+                throw new ArgumentException($"Unable to get a valid {nameof(MixedRealityInputSystemProfile)}!");
+            }
 
             HandPoseAnimationSpeed = profile.HandPoseAnimationSpeed;
 
-            RenderingMode = profile.RenderingMode != globalSettingsProfile.RenderingMode
+            RenderingMode = profile.RenderingMode != inputSystemProfile.RenderingMode
                 ? profile.RenderingMode
-                : globalSettingsProfile.RenderingMode;
+                : inputSystemProfile.RenderingMode;
 
-            HandPhysicsEnabled = profile.HandPhysicsEnabled != globalSettingsProfile.HandPhysicsEnabled
+            HandPhysicsEnabled = profile.HandPhysicsEnabled != inputSystemProfile.HandPhysicsEnabled
                 ? profile.HandPhysicsEnabled
-                : globalSettingsProfile.HandPhysicsEnabled;
+                : inputSystemProfile.HandPhysicsEnabled;
 
-            UseTriggers = profile.UseTriggers != globalSettingsProfile.UseTriggers
+            UseTriggers = profile.UseTriggers != inputSystemProfile.UseTriggers
                 ? profile.UseTriggers
-                : globalSettingsProfile.UseTriggers;
+                : inputSystemProfile.UseTriggers;
 
-            BoundsMode = profile.BoundsMode != globalSettingsProfile.BoundsMode
+            BoundsMode = profile.BoundsMode != inputSystemProfile.BoundsMode
                 ? profile.BoundsMode
-                : globalSettingsProfile.BoundsMode;
+                : inputSystemProfile.BoundsMode;
+
+            var isGrippingThreshold = profile.GripThreshold != inputSystemProfile.GripThreshold
+                ? profile.GripThreshold
+                : inputSystemProfile.GripThreshold;
 
             if (profile.TrackedPoses != null && profile.TrackedPoses.Count > 0)
             {
-                TrackedPoses = profile.TrackedPoses.Count != globalSettingsProfile.TrackedPoses.Count
+                TrackedPoses = profile.TrackedPoses.Count != inputSystemProfile.TrackedPoses.Count
                     ? profile.TrackedPoses
-                    : globalSettingsProfile.TrackedPoses;
+                    : inputSystemProfile.TrackedPoses;
             }
             else
             {
-                TrackedPoses = globalSettingsProfile.TrackedPoses;
+                TrackedPoses = inputSystemProfile.TrackedPoses;
             }
 
             if (TrackedPoses == null || TrackedPoses.Count == 0)
@@ -76,7 +84,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
                 JitterAmount,
                 DefaultDistance);
 
-            postProcessor = new HandDataPostProcessor(TrackedPoses);
+            postProcessor = new HandDataPostProcessor(TrackedPoses, isGrippingThreshold);
         }
 
         private readonly SimulatedHandDataConverter leftHandConverter;
@@ -143,7 +151,7 @@ namespace XRTK.Providers.Controllers.Simulation.Hands
 
             controller.TryRenderControllerModel();
 
-            MixedRealityToolkit.InputSystem?.RaiseSourceDetected(controller.InputSource, controller);
+            InputSystem?.RaiseSourceDetected(controller.InputSource, controller);
             AddController(controller);
             return controller;
         }

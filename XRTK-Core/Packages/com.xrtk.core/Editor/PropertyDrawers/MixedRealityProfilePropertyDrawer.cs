@@ -39,7 +39,10 @@ namespace XRTK.Editor.PropertyDrawers
                 {
                     if (Selection.activeObject.name.Equals(nameof(MixedRealityToolkit)))
                     {
-                        parent = MixedRealityToolkit.Instance.ActiveProfile;
+                        if (!MixedRealityToolkit.Instance.IsNull())
+                        {
+                            parent = MixedRealityToolkit.Instance.ActiveProfile;
+                        }
                     }
                     else
                     {

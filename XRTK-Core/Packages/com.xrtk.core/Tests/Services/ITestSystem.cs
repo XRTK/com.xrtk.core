@@ -5,8 +5,7 @@ using XRTK.Interfaces;
 
 namespace XRTK.Tests.Services
 {
-    internal interface ITestService : IMixedRealityService
+    internal interface ITestSystem : IMixedRealitySystem
     {
-        bool IsEnabled { get; }
     }
 }

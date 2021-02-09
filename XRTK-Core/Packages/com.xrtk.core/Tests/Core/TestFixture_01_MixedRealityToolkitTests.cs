@@ -763,6 +763,32 @@ namespace XRTK.Tests.Core
 
         #endregion Service Enable/Disable Tests
 
+        #region Mixed Reality System Tests
+
+        [Test]
+        public void Test_08_01_TestSystemsCannotBeRegisteredTwice()
+        {
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
+
+            var testProfile = ScriptableObject.CreateInstance<TestSystemProfile>();
+
+            // Register test system 1
+            var testSystem1Success = MixedRealityToolkit.TryRegisterService<ITestSystem>(new TestSystem1(testProfile));
+            var testGetSystem1Success = MixedRealityToolkit.TryGetSystem<ITestSystem>(out var testSystem1);
+
+            Assert.IsTrue(testSystem1 != null);
+            Assert.IsTrue(testSystem1Success);
+            Assert.IsTrue(testGetSystem1Success);
+
+            // Register test system 2
+            var testSystem2Success = MixedRealityToolkit.TryRegisterService<ITestSystem>(new TestSystem2(testProfile));
+
+            LogAssert.Expect(LogType.Error, $"There's already a {nameof(ITestSystem)}.{nameof(TestSystem1)} registered!");
+            Assert.IsFalse(testSystem2Success);
+        }
+
+        #endregion Mixed Reality System Tests
+
         #region TearDown
 
         [TearDown]

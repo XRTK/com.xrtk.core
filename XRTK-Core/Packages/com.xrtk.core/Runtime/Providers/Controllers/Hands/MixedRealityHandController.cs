@@ -9,6 +9,7 @@ using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
 using XRTK.Extensions;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Providers.Controllers;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;
@@ -54,6 +55,11 @@ namespace XRTK.Providers.Controllers.Hands
         private MixedRealityPose lastHandRootPose;
         private Vector3 lastPalmNormal = Vector3.zero;
         private Vector3 lastPalmPosition = Vector3.zero;
+
+        private static IMixedRealityCameraSystem cameraSystem = null;
+
+        private static IMixedRealityCameraSystem CameraSystem
+            => cameraSystem ?? (cameraSystem = MixedRealityToolkit.GetSystem<IMixedRealityCameraSystem>());
 
         /// <inheritdoc />
         public override MixedRealityInteractionMapping[] DefaultInteractions { get; } =
@@ -147,7 +153,7 @@ namespace XRTK.Providers.Controllers.Hands
 
             if (lastTrackingState != TrackingState)
             {
-                MixedRealityToolkit.InputSystem?.RaiseSourceTrackingStateChanged(InputSource, this, TrackingState);
+                InputSystem?.RaiseSourceTrackingStateChanged(InputSource, this, TrackingState);
             }
 
             if (TrackingState == TrackingState.Tracked)
@@ -176,7 +182,7 @@ namespace XRTK.Providers.Controllers.Hands
                 PinchStrength = handData.PinchStrength;
                 SpatialPointerPose = handData.PointerPose;
 
-                MixedRealityToolkit.InputSystem?.RaiseSourcePoseChanged(InputSource, this, handData.RootPose);
+                InputSystem?.RaiseSourcePoseChanged(InputSource, this, handData.RootPose);
             }
 
             UpdateInteractionMappings();
@@ -780,7 +786,8 @@ namespace XRTK.Providers.Controllers.Hands
                 // Return joint pose relative to hand root.
                 return jointPoses.TryGetValue(joint, out pose);
             }
-            else if (jointPoses.TryGetValue(joint, out var localPose))
+
+            if (jointPoses.TryGetValue(joint, out var localPose))
             {
                 pose = new MixedRealityPose
                 {
@@ -790,8 +797,11 @@ namespace XRTK.Providers.Controllers.Hands
                 };
 
                 // Translate to world space.
-                pose.Position = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.TransformPoint(pose.Position);
-                pose.Rotation = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform.rotation * pose.Rotation;
+                if (CameraSystem != null)
+                {
+                    pose.Position = CameraSystem.MainCameraRig.PlayspaceTransform.TransformPoint(pose.Position);
+                    pose.Rotation = CameraSystem.MainCameraRig.PlayspaceTransform.rotation * pose.Rotation;
+                }
 
                 return lastHandRootPose != MixedRealityPose.ZeroIdentity;
             }

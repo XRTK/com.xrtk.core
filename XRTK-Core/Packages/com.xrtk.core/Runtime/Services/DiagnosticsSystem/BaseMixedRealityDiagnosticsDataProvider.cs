@@ -16,6 +16,9 @@ namespace XRTK.Services.DiagnosticsSystem
         protected BaseMixedRealityDiagnosticsDataProvider(string name, uint priority, BaseMixedRealityProfile profile, IMixedRealityDiagnosticsSystem parentService)
             : base(name, priority, profile, parentService)
         {
+            DiagnosticsSystem = parentService;
         }
+
+        protected IMixedRealityDiagnosticsSystem DiagnosticsSystem;
     }
 }

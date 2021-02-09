@@ -55,61 +55,61 @@ namespace XRTK.Utilities.Async
         /// <param name="timeout">The number of seconds before timing out and throwing an exception. (-1 is indefinite)</param>
         /// ReSharper disable once ExceptionNotThrown
         /// <exception cref="TimeoutException">A <see cref="TimeoutException"/> can be thrown when the condition isn't satisfied after timeout.</exception>
-        public static async Task WaitUntil<T>(this T element, Func<T, bool> predicate, int timeout = 10)
+        public static async Task<T> WaitUntil<T>(this T element, Func<T, bool> predicate, int timeout = 10)
         {
             if (timeout == -1)
             {
-                await WaitUntil_Indefinite(element, predicate);
+                return await WaitUntil_Indefinite(element, predicate);
             }
-            else
+
+            using (var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(timeout)))
             {
-                using (var cancellationTokenSource = new CancellationTokenSource(TimeSpan.FromSeconds(timeout)))
+                var tcs = new TaskCompletionSource<object>();
+
+                void Exception()
                 {
-                    var tcs = new TaskCompletionSource<object>();
-
-                    void Exception()
-                    {
-                        tcs.TrySetException(new TimeoutException());
-                        tcs.TrySetCanceled();
-                    }
-
-                    cancellationTokenSource.Token.Register(Exception);
-#if UNITY_EDITOR
-                    var editorCancelled = false;
-                    UnityEditor.EditorApplication.playModeStateChanged += playModeStateChanged => editorCancelled = true;
-#endif
-
-                    while (!cancellationTokenSource.IsCancellationRequested)
-                    {
-#if UNITY_EDITOR
-                        if (editorCancelled)
-                        {
-                            tcs.TrySetCanceled(CancellationToken.None);
-                        }
-#endif
-                        try
-                        {
-                            if (!predicate(element))
-                            {
-                                await Task.Delay(1, cancellationTokenSource.Token);
-                                continue;
-                            }
-                        }
-                        catch (Exception e)
-                        {
-                            tcs.TrySetException(e);
-                        }
-
-                        tcs.TrySetResult(Task.CompletedTask);
-                        break;
-                    }
-
-                    await tcs.Task;
+                    tcs.TrySetException(new TimeoutException());
+                    tcs.TrySetCanceled();
                 }
+
+                cancellationTokenSource.Token.Register(Exception);
+#if UNITY_EDITOR
+                var editorCancelled = false;
+                UnityEditor.EditorApplication.playModeStateChanged += playModeStateChanged => editorCancelled = true;
+#endif
+
+                while (!cancellationTokenSource.IsCancellationRequested)
+                {
+#if UNITY_EDITOR
+                    if (editorCancelled)
+                    {
+                        tcs.TrySetCanceled(CancellationToken.None);
+                    }
+#endif
+                    try
+                    {
+                        if (!predicate(element))
+                        {
+                            await Task.Delay(1, cancellationTokenSource.Token);
+                            continue;
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        tcs.TrySetException(e);
+                    }
+
+                    tcs.TrySetResult(Task.CompletedTask);
+                    break;
+                }
+
+                await tcs.Task;
             }
+
+            return element;
         }
 
-        private static async Task WaitUntil_Indefinite<T>(T element, Func<T, bool> predicate)
+        private static async Task<T> WaitUntil_Indefinite<T>(T element, Func<T, bool> predicate)
         {
             var tcs = new TaskCompletionSource<object>();
 
@@ -143,6 +143,7 @@ namespace XRTK.Utilities.Async
             }
 
             await tcs.Task;
+            return element;
         }
     }
 }

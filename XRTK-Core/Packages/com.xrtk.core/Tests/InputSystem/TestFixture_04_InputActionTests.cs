@@ -1,11 +1,10 @@
 ﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
-using System.Linq;
+using System;
 using NUnit.Framework;
 using XRTK.Definitions.InputSystem;
 using XRTK.Definitions.Utilities;
-using XRTK.Services;
 
 namespace XRTK.Tests.InputSystem
 {
@@ -14,7 +13,7 @@ namespace XRTK.Tests.InputSystem
         [SetUp]
         public void SetupTests()
         {
-            TestUtilities.InitializeMixedRealityToolkitScene(true);
+            TestUtilities.InitializeMixedRealityToolkitScene(false);
         }
 
         [Test]
@@ -32,9 +31,9 @@ namespace XRTK.Tests.InputSystem
         public void Test_02_TestBackwardsCompatibility()
         {
             var oldActionWithNoGuid = new MixedRealityInputAction(default, 1, "Select", AxisType.Digital);
-            var profileAction = MixedRealityToolkit.Instance.ActiveProfile.InputSystemProfile.InputActionsProfile.InputActions.FirstOrDefault(action => action.Id == 1);
-            Assert.IsTrue(profileAction.ProfileGuid != default);
-            Assert.IsTrue(oldActionWithNoGuid == profileAction);
+            var profileWithGuid = new MixedRealityInputAction(Guid.NewGuid(), 1, "Select", AxisType.Digital);
+            Assert.IsTrue(profileWithGuid.ProfileGuid != default);
+            Assert.IsTrue(oldActionWithNoGuid == profileWithGuid);
         }
 
         [TearDown]

@@ -1,4 +1,4 @@
-﻿// Copyright (c) Microsoft Corporation. All rights reserved.
+﻿// Copyright (c) XRTK. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 using System;
@@ -13,9 +13,9 @@ namespace XRTK.Extensions
     {
         public const string WhiteSpace = " ";
 
-        public const string Backslash = "\\";
+        public const string ForwardSlash = "\\";
 
-        public const string ForwardSlash = "/";
+        public const string BackSlash = "/";
 
         /// <summary>
         /// Encodes the string to base 64 ASCII.
@@ -77,22 +77,22 @@ namespace XRTK.Extensions
         }
 
         /// <summary>
-        /// Replaces all back slashes in the string with forward slashes.
+        /// Replaces all forward slashes in the string with back slashes.
         /// </summary>
         /// <param name="value"></param>
         /// <returns></returns>
         public static string ToBackSlashes(this string value)
         {
-            return value.Replace(Backslash, ForwardSlash);
+            return value.Replace(ForwardSlash, BackSlash);
         }
 
         /// <summary>
-        /// Replaces all backslashes in the string with forward slashes.
+        /// Replaces all back slashes in the string with forward slashes.
         /// </summary>
         /// <param name="value"></param>
         public static string ToForwardSlashes(this string value)
         {
-            return value.Replace(ForwardSlash, Backslash);
+            return value.Replace(BackSlash, ForwardSlash);
         }
     }
 }

@@ -184,7 +184,7 @@ namespace XRTK.Editor
         {
             sourceAssetPath = sourceAssetPath.ToForwardSlashes();
             destinationPath = $"{destinationPath}{sourceAssetPath.Replace(Path.GetFullPath(rootPath), string.Empty)}".ToForwardSlashes();
-            destinationPath = Path.Combine(Directory.GetParent(Application.dataPath).FullName, destinationPath);
+            destinationPath = Path.Combine(Directory.GetParent(Application.dataPath).FullName, destinationPath).ToForwardSlashes();
 
             if (!File.Exists(destinationPath))
             {

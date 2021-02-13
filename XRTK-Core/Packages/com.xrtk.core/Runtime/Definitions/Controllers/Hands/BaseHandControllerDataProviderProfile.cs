@@ -14,6 +14,16 @@ namespace XRTK.Definitions.Controllers.Hands
     public abstract class BaseHandControllerDataProviderProfile : BaseMixedRealityControllerDataProviderProfile
     {
         [SerializeField]
+        [Range(.5f, 1f)]
+        [Tooltip("Threshold in range [0.5, 1] that defines when a hand is considered to be grabing.")]
+        private float gripThreshold = .8f;
+
+        /// <summary>
+        /// Threshold in range [0, 1] that defines when a hand is considered to be grabing.
+        /// </summary>
+        public float GripThreshold => gripThreshold;
+
+        [SerializeField]
         [Tooltip("Defines what kind of data should be aggregated for the hands rendering.")]
         private HandRenderingMode renderingMode = HandRenderingMode.Joints;
 

@@ -6,6 +6,7 @@ using UnityEngine;
 using XRTK.Definitions.Controllers.Hands;
 using XRTK.Definitions.Devices;
 using XRTK.Definitions.Utilities;
+using XRTK.Interfaces.CameraSystem;
 using XRTK.Interfaces.Providers.Controllers.Hands;
 using XRTK.Services;
 using XRTK.Utilities;
@@ -22,16 +23,37 @@ namespace XRTK.Providers.Controllers.Hands
         /// Creates a new instance of the hand data post processor.
         /// </summary>
         /// <param name="trackedPoses">Pose recognizer instance to use for pose recognition.</param>
-        public HandDataPostProcessor(IReadOnlyList<HandControllerPoseProfile> trackedPoses)
+        /// <param name="isGrippingThreshold">Threshold in range [0, 1] that defines when a hand is considered to be grabing.</param>
+        public HandDataPostProcessor(IReadOnlyList<HandControllerPoseProfile> trackedPoses, float isGrippingThreshold)
         {
             TrackedPoseProcessor = new HandTrackedPosePostProcessor(trackedPoses);
-            GripPostProcessor = new HandGripPostProcessor();
+            GripPostProcessor = new HandGripPostProcessor(isGrippingThreshold);
         }
 
         private const float IS_POINTING_DOTP_THRESHOLD = .1f;
         private const float TWO_CENTIMETER_SQUARE_MAGNITUDE = 0.0004f;
         private const float FIVE_CENTIMETER_SQUARE_MAGNITUDE = 0.0025f;
         private const float PINCH_STRENGTH_DISTANCE = FIVE_CENTIMETER_SQUARE_MAGNITUDE - TWO_CENTIMETER_SQUARE_MAGNITUDE;
+
+        private static IMixedRealityCameraSystem cameraSystem = null;
+
+        private static IMixedRealityCameraSystem CameraSystem
+            => cameraSystem ?? (cameraSystem = MixedRealityToolkit.GetSystem<IMixedRealityCameraSystem>());
+
+        private static Camera playerCamera = null;
+
+        private static Camera PlayerCamera
+        {
+            get
+            {
+                if (playerCamera == null)
+                {
+                    playerCamera = CameraSystem != null ? CameraSystem.MainCameraRig.PlayerCamera : CameraCache.Main;
+                }
+
+                return playerCamera;
+            }
+        }
 
         /// <summary>
         /// Processor instance used for pose recognition.
@@ -115,21 +137,19 @@ namespace XRTK.Providers.Controllers.Hands
         {
             if (handData.TrackingState == TrackingState.Tracked && !PlatformProvidesIsPointing)
             {
-                var playspaceTransform = MixedRealityToolkit.CameraSystem.MainCameraRig.PlayspaceTransform;
+                var playspaceTransform = CameraSystem != null
+                    ? CameraSystem.MainCameraRig.PlayspaceTransform
+                    : CameraCache.Main.transform.parent;
                 var localPalmPose = handData.Joints[(int)TrackedHandJoint.Palm];
-                var worldPalmPose = new MixedRealityPose()
+                var worldPalmPose = new MixedRealityPose
                 {
                     Position = handData.RootPose.Position + handData.RootPose.Rotation * localPalmPose.Position,
                     Rotation = playspaceTransform.rotation * handData.RootPose.Rotation * localPalmPose.Rotation
                 };
 
-                var cameraTransform = MixedRealityToolkit.CameraSystem != null
-                ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera.transform
-                : CameraCache.Main.transform;
-
                 // We check if the palm forward is roughly in line with the camera lookAt.
-                var projectedPalmUp = Vector3.ProjectOnPlane(-worldPalmPose.Up, cameraTransform.up);
-                handData.IsPointing = Vector3.Dot(cameraTransform.forward, projectedPalmUp) > IS_POINTING_DOTP_THRESHOLD;
+                var projectedPalmUp = Vector3.ProjectOnPlane(-worldPalmPose.Up, PlayerCamera.transform.up);
+                handData.IsPointing = Vector3.Dot(PlayerCamera.transform.forward, projectedPalmUp) > IS_POINTING_DOTP_THRESHOLD;
             }
             else
             {
@@ -154,16 +174,10 @@ namespace XRTK.Providers.Controllers.Hands
                 var indexDistalPose = handData.Joints[(int)TrackedHandJoint.IndexDistal];
                 var pointerPosition = handData.RootPose.Position + Vector3.Lerp(thumbProximalPose.Position, indexDistalPose.Position, .5f);
                 var pointerEndPosition = pointerPosition + palmPose.Forward * 10f;
-
-                var camera = MixedRealityToolkit.CameraSystem != null
-                    ? MixedRealityToolkit.CameraSystem.MainCameraRig.PlayerCamera
-                    : CameraCache.Main;
-
                 var pointerDirection = pointerEndPosition - pointerPosition;
-                var pointerRotation = Quaternion.LookRotation(pointerDirection, camera.transform.up) * handData.RootPose.Rotation;
+                var pointerRotation = Quaternion.LookRotation(pointerDirection, PlayerCamera.transform.up) * handData.RootPose.Rotation;
 
-                pointerRotation = camera.transform.rotation * pointerRotation;
-
+                pointerRotation = PlayerCamera.transform.rotation * pointerRotation;
                 handData.PointerPose = new MixedRealityPose(pointerPosition, pointerRotation);
             }
 

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using XRTK.Interfaces;
+using XRTK.Interfaces.Events;
 using Debug = UnityEngine.Debug;
 
 namespace XRTK.Extensions
@@ -134,6 +135,47 @@ namespace XRTK.Extensions
             Debug.LogError($"{nameof(FindTopmostGenericTypeArguments)} - Maximum recursion depth reached without finding generic type arguments.");
             return null;
         }
+
+        internal static Type FindMixedRealityServiceInterfaceType(this Type serviceType, Type interfaceType)
+        {
+            if (serviceType == null)
+            {
+                return null;
+            }
+
+            var returnType = interfaceType;
+
+            if (typeof(IMixedRealitySystem).IsAssignableFrom(serviceType))
+            {
+                if (!ServiceInterfaceCache.TryGetValue(serviceType, out returnType))
+                {
+                    var types = serviceType.GetInterfaces();
+
+                    for (int i = 0; i < types.Length; i++)
+                    {
+                        if (!typeof(IMixedRealityService).IsAssignableFrom(types[i]))
+                        {
+                            continue;
+                        }
+
+                        if (types[i] != typeof(IMixedRealityService) &&
+                            types[i] != typeof(IMixedRealityDataProvider) &&
+                            types[i] != typeof(IMixedRealityEventSystem) &&
+                            types[i] != typeof(IMixedRealitySystem))
+                        {
+                            returnType = types[i];
+                            break;
+                        }
+                    }
+
+                    ServiceInterfaceCache.Add(serviceType, returnType);
+                }
+            }
+
+            return returnType;
+        }
+
+        private static readonly Dictionary<Type, Type> ServiceInterfaceCache = new Dictionary<Type, Type>();
 
         /// <summary>
         /// Checks if the <see cref="IMixedRealityService"/> has any valid implementations.

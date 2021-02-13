@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
+using System;
 using System.Collections;
 using UnityEngine;
 using XRTK.Definitions;
@@ -26,10 +27,17 @@ namespace XRTK.Services.InputSystem.Pointers
         /// <param name="interactionMode"></param>
         public GenericPointer(string pointerName, IMixedRealityInputSource inputSourceParent, InteractionMode interactionMode)
         {
-            PointerId = MixedRealityToolkit.InputSystem.FocusProvider.GenerateNewPointerId();
-            PointerName = pointerName;
-            this.inputSourceParent = inputSourceParent;
-            InteractionMode = interactionMode;
+            if (MixedRealityToolkit.TryGetSystem<IMixedRealityInputSystem>(out var inputSystem))
+            {
+                PointerId = inputSystem.FocusProvider.GenerateNewPointerId();
+                PointerName = pointerName;
+                this.inputSourceParent = inputSourceParent;
+                InteractionMode = interactionMode;
+            }
+            else
+            {
+                throw new ArgumentException($"Couldn't find a valid {nameof(IMixedRealityInputSystem)}!");
+            }
         }
 
         /// <inheritdoc />

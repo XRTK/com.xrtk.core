@@ -25,6 +25,8 @@ namespace XRTK.Editor
 {
     public static class PackageInstaller
     {
+        private static string ProjectRootPath => Directory.GetParent(Application.dataPath).FullName.ToForwardSlashes();
+
         /// <summary>
         /// Attempt to copy any assets found in the source path into the project.
         /// </summary>
@@ -52,8 +54,8 @@ namespace XRTK.Editor
 
             foreach (var installationPath in installationPaths)
             {
-                var sourcePath = installationPath.Key;
-                var destinationPath = installationPath.Value;
+                var sourcePath = installationPath.Key.ToForwardSlashes();
+                var destinationPath = installationPath.Value.ToForwardSlashes();
                 installedDirectories.Add(destinationPath);
 
                 if (Directory.Exists(destinationPath))
@@ -66,7 +68,7 @@ namespace XRTK.Editor
                     for (int i = 0; i < installedAssets.Count; i++)
                     {
                         EditorUtility.DisplayProgressBar("Verifying assets...", Path.GetFileNameWithoutExtension(installedAssets[i]), i / (float)installedAssets.Count);
-                        installedAssets[i] = installedAssets[i].Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty).ToForwardSlashes();
+                        installedAssets[i] = installedAssets[i].Replace($"{ProjectRootPath}\\", string.Empty).ToForwardSlashes();
                     }
 
                     EditorUtility.ClearProgressBar();
@@ -184,16 +186,27 @@ namespace XRTK.Editor
         {
             sourceAssetPath = sourceAssetPath.ToForwardSlashes();
             destinationPath = $"{destinationPath}{sourceAssetPath.Replace(Path.GetFullPath(rootPath), string.Empty)}".ToForwardSlashes();
-            destinationPath = Path.Combine(Directory.GetParent(Application.dataPath).FullName, destinationPath).ToForwardSlashes();
+            destinationPath = Path.Combine(ProjectRootPath, destinationPath).ToForwardSlashes();
 
             if (!File.Exists(destinationPath))
             {
-                Directory.CreateDirectory(Directory.GetParent(destinationPath).FullName);
+                if (!Directory.Exists(Directory.GetParent(destinationPath).FullName))
+                {
+                    Directory.CreateDirectory(Directory.GetParent(destinationPath).FullName);
+                }
 
-                File.Copy(sourceAssetPath, destinationPath);
+                try
+                {
+                    File.Copy(sourceAssetPath, destinationPath);
+                }
+                catch
+                {
+                    Debug.LogError($"$Failed to copy asset!\n{sourceAssetPath}\n{destinationPath}");
+                    throw;
+                }
             }
 
-            return destinationPath.Replace($"{Directory.GetParent(Application.dataPath).FullName}\\", string.Empty);
+            return destinationPath.Replace($"{ProjectRootPath}\\", string.Empty);
         }
 
         /// <summary>

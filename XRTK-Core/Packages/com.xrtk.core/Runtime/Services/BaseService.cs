@@ -17,7 +17,7 @@ namespace XRTK.Services
         public virtual string Name { get; protected set; }
 
         /// <inheritdoc />
-        public virtual uint Priority { get; protected set; } = 5;
+        public virtual uint Priority { get; protected set; }
 
         /// <inheritdoc />
         public virtual void Initialize() { }
